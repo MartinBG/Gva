@@ -34,18 +34,7 @@ namespace R_0009_000075
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Element),ElementName="Element",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ElementCollection __ElementCollection;
-		
-		[XmlIgnore]
-		public ElementCollection ElementCollection
-		{
-			get
-			{
-				if (__ElementCollection == null) __ElementCollection = new ElementCollection();
-				return __ElementCollection;
-			}
-			set {__ElementCollection = value;}
-		}
+		public ElementCollection ElementCollection { get; set; }
 
 		public AISCaseSection()
 		{
@@ -60,86 +49,37 @@ namespace R_0009_000075
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SequenceNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SequenceNumber;
-		
-		[XmlIgnore]
-		public string SequenceNumber
-		{ 
-			get { return __SequenceNumber; }
-			set { __SequenceNumber = value; }
-		}
+		public string SequenceNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000044.RegisteredDocumentURI),ElementName="RegisteredDocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000044.RegisteredDocumentURI __RegisteredDocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000044.RegisteredDocumentURI RegisteredDocumentURI
-		{
-			get {return __RegisteredDocumentURI;}
-			set {__RegisteredDocumentURI = value;}
-		}
+		public R_0009_000044.RegisteredDocumentURI RegisteredDocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentID;
-		
-		[XmlIgnore]
-		public string DocumentID
-		{ 
-			get { return __DocumentID; }
-			set { __DocumentID = value; }
-		}
+		public string DocumentID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000073.AISCaseURI),ElementName="CaseURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000073.AISCaseURI __CaseURI;
-		
-		[XmlIgnore]
-		public R_0009_000073.AISCaseURI CaseURI
-		{
-			get {return __CaseURI;}
-			set {__CaseURI = value;}
-		}
+		public R_0009_000073.AISCaseURI CaseURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CaseID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CaseID;
-		
-		[XmlIgnore]
-		public string CaseID
-		{ 
-			get { return __CaseID; }
-			set { __CaseID = value; }
-		}
+		public string CaseID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TaskID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TaskID;
-		
-		[XmlIgnore]
-		public string TaskID
-		{ 
-			get { return __TaskID; }
-			set { __TaskID = value; }
-		}
+		public string TaskID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000074.CaseSectionInclusionData),ElementName="InclusionData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000074.CaseSectionInclusionData __InclusionData;
-		
-		[XmlIgnore]
-		public R_0009_000074.CaseSectionInclusionData InclusionData
-		{
-			get {return __InclusionData;}
-			set {__InclusionData = value;}
-		}
+		public R_0009_000074.CaseSectionInclusionData InclusionData { get; set; }
 
 		public Element()
 		{

@@ -33,62 +33,27 @@ namespace R_0009_000127
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000152.ElectronicAdministrativeServiceHeader),ElementName="ElectronicAdministrativeServiceHeader",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader __ElectronicAdministrativeServiceHeader;
-		
-		[XmlIgnore]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader
-		{
-			get {return __ElectronicAdministrativeServiceHeader;}
-			set {__ElectronicAdministrativeServiceHeader = value;}
-		}
+		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000141.ServiceApplicantReceiptData),ElementName="ServiceApplicantReceiptData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000141.ServiceApplicantReceiptData __ServiceApplicantReceiptData;
-		
-		[XmlIgnore]
-		public R_0009_000141.ServiceApplicantReceiptData ServiceApplicantReceiptData
-		{
-			get {return __ServiceApplicantReceiptData;}
-			set {__ServiceApplicantReceiptData = value;}
-		}
+		public R_0009_000141.ServiceApplicantReceiptData ServiceApplicantReceiptData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000126.DeceasedPersonData),ElementName="DeceasedPersonData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000126.DeceasedPersonData __DeceasedPersonData;
-		
-		[XmlIgnore]
-		public R_0009_000126.DeceasedPersonData DeceasedPersonData
-		{
-			get {return __DeceasedPersonData;}
-			set {__DeceasedPersonData = value;}
-		}
+		public R_0009_000126.DeceasedPersonData DeceasedPersonData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(FirstDeathCertificateTranscriptApplicationAttachedDocuments),ElementName="AttachedDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public FirstDeathCertificateTranscriptApplicationAttachedDocuments __AttachedDocuments;
-		
-		[XmlIgnore]
-		public FirstDeathCertificateTranscriptApplicationAttachedDocuments AttachedDocuments
-		{
-			get {return __AttachedDocuments;}
-			set {__AttachedDocuments = value;}
-		}
+		public FirstDeathCertificateTranscriptApplicationAttachedDocuments AttachedDocuments { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000153.ElectronicAdministrativeServiceFooter),ElementName="ElectronicAdministrativeServiceFooter",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter __ElectronicAdministrativeServiceFooter;
-		
-		[XmlIgnore]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter
-		{
-			get {return __ElectronicAdministrativeServiceFooter;}
-			set {__ElectronicAdministrativeServiceFooter = value;}
-		}
+		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter { get; set; }
 
 		public FirstDeathCertificateTranscriptApplication()
 		{
@@ -104,18 +69,7 @@ namespace R_0009_000127
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000139.AttachedDocument),ElementName="AttachedDocument",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AttachedDocumentCollection __AttachedDocumentCollection;
-		
-		[XmlIgnore]
-		public AttachedDocumentCollection AttachedDocumentCollection
-		{
-			get
-			{
-				if (__AttachedDocumentCollection == null) __AttachedDocumentCollection = new AttachedDocumentCollection();
-				return __AttachedDocumentCollection;
-			}
-			set {__AttachedDocumentCollection = value;}
-		}
+		public AttachedDocumentCollection AttachedDocumentCollection { get; set; }
 
 		public FirstDeathCertificateTranscriptApplicationAttachedDocuments()
 		{

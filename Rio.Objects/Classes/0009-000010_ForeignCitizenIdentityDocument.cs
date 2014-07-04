@@ -27,26 +27,12 @@ namespace R_0009_000010
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentNumber;
-		
-		[XmlIgnore]
-		public string DocumentNumber
-		{ 
-			get { return __DocumentNumber; }
-			set { __DocumentNumber = value; }
-		}
+		public string DocumentNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentType;
-		
-		[XmlIgnore]
-		public string DocumentType
-		{ 
-			get { return __DocumentType; }
-			set { __DocumentType = value; }
-		}
+		public string DocumentType { get; set; }
 
 		public ForeignCitizenIdentityDocument()
 		{

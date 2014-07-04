@@ -33,26 +33,12 @@ namespace R_0009_000113
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(SpouseDataRegisteredUnderBulgarianLaw),ElementName="RegisteredUnderBulgarianLaw",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SpouseDataRegisteredUnderBulgarianLaw __RegisteredUnderBulgarianLaw;
-		
-		[XmlIgnore]
-		public SpouseDataRegisteredUnderBulgarianLaw RegisteredUnderBulgarianLaw
-		{
-			get {return __RegisteredUnderBulgarianLaw;}
-			set {__RegisteredUnderBulgarianLaw = value;}
-		}
+		public SpouseDataRegisteredUnderBulgarianLaw RegisteredUnderBulgarianLaw { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(SpouseDataNotRegisteredUnderBulgarianLaw),ElementName="NotRegisteredUnderBulgarianLaw",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SpouseDataNotRegisteredUnderBulgarianLaw __NotRegisteredUnderBulgarianLaw;
-		
-		[XmlIgnore]
-		public SpouseDataNotRegisteredUnderBulgarianLaw NotRegisteredUnderBulgarianLaw
-		{
-			get {return __NotRegisteredUnderBulgarianLaw;}
-			set {__NotRegisteredUnderBulgarianLaw = value;}
-		}
+		public SpouseDataNotRegisteredUnderBulgarianLaw NotRegisteredUnderBulgarianLaw { get; set; }
 
 		public SpouseData()
 		{
@@ -67,81 +53,32 @@ namespace R_0009_000113
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000116.CitizenNamesBeforeMarriage),ElementName="CitizenNamesBeforeMarriage",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000116.CitizenNamesBeforeMarriage __CitizenNamesBeforeMarriage;
-		
-		[XmlIgnore]
-		public R_0009_000116.CitizenNamesBeforeMarriage CitizenNamesBeforeMarriage
-		{
-			get {return __CitizenNamesBeforeMarriage;}
-			set {__CitizenNamesBeforeMarriage = value;}
-		}
+		public R_0009_000116.CitizenNamesBeforeMarriage CitizenNamesBeforeMarriage { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000006.PersonIdentifier),ElementName="PersonIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000006.PersonIdentifier __PersonIdentifier;
-		
-		[XmlIgnore]
-		public R_0009_000006.PersonIdentifier PersonIdentifier
-		{
-			get {return __PersonIdentifier;}
-			set {__PersonIdentifier = value;}
-		}
+		public R_0009_000006.PersonIdentifier PersonIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000095.PlaceOfBirth),ElementName="PlaceOfBirth",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000095.PlaceOfBirth __PlaceOfBirth;
-		
-		[XmlIgnore]
-		public R_0009_000095.PlaceOfBirth PlaceOfBirth
-		{
-			get {return __PlaceOfBirth;}
-			set {__PlaceOfBirth = value;}
-		}
+		public R_0009_000095.PlaceOfBirth PlaceOfBirth { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000096.PlaceOfBirthAbroad),ElementName="PlaceOfBirthAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000096.PlaceOfBirthAbroad __PlaceOfBirthAbroad;
-		
-		[XmlIgnore]
-		public R_0009_000096.PlaceOfBirthAbroad PlaceOfBirthAbroad
-		{
-			get {return __PlaceOfBirthAbroad;}
-			set {__PlaceOfBirthAbroad = value;}
-		}
+		public R_0009_000096.PlaceOfBirthAbroad PlaceOfBirthAbroad { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(SpouseDataRegisteredUnderBulgarianLawCitizenships),ElementName="Citizenships",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SpouseDataRegisteredUnderBulgarianLawCitizenships __Citizenships;
-		
-		[XmlIgnore]
-		public SpouseDataRegisteredUnderBulgarianLawCitizenships Citizenships
-		{
-			get {return __Citizenships;}
-			set {__Citizenships = value;}
-		}
+		public SpouseDataRegisteredUnderBulgarianLawCitizenships Citizenships { get; set; }
 
 		public SpouseDataRegisteredUnderBulgarianLaw()
 		{
@@ -157,18 +94,7 @@ namespace R_0009_000113
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CitizenshipCollection __CitizenshipCollection;
-		
-		[XmlIgnore]
-		public CitizenshipCollection CitizenshipCollection
-		{
-			get
-			{
-				if (__CitizenshipCollection == null) __CitizenshipCollection = new CitizenshipCollection();
-				return __CitizenshipCollection;
-			}
-			set {__CitizenshipCollection = value;}
-		}
+		public CitizenshipCollection CitizenshipCollection { get; set; }
 
 		public SpouseDataRegisteredUnderBulgarianLawCitizenships()
 		{
@@ -183,69 +109,27 @@ namespace R_0009_000113
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000117.ForeignCitizenNamesBeforeMarriage),ElementName="ForeignCitizenNamesBeforeMarriage",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000117.ForeignCitizenNamesBeforeMarriage __ForeignCitizenNamesBeforeMarriage;
-		
-		[XmlIgnore]
-		public R_0009_000117.ForeignCitizenNamesBeforeMarriage ForeignCitizenNamesBeforeMarriage
-		{
-			get {return __ForeignCitizenNamesBeforeMarriage;}
-			set {__ForeignCitizenNamesBeforeMarriage = value;}
-		}
+		public R_0009_000117.ForeignCitizenNamesBeforeMarriage ForeignCitizenNamesBeforeMarriage { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000095.PlaceOfBirth),ElementName="PlaceOfBirth",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000095.PlaceOfBirth __PlaceOfBirth;
-		
-		[XmlIgnore]
-		public R_0009_000095.PlaceOfBirth PlaceOfBirth
-		{
-			get {return __PlaceOfBirth;}
-			set {__PlaceOfBirth = value;}
-		}
+		public R_0009_000095.PlaceOfBirth PlaceOfBirth { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000096.PlaceOfBirthAbroad),ElementName="PlaceOfBirthAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000096.PlaceOfBirthAbroad __PlaceOfBirthAbroad;
-		
-		[XmlIgnore]
-		public R_0009_000096.PlaceOfBirthAbroad PlaceOfBirthAbroad
-		{
-			get {return __PlaceOfBirthAbroad;}
-			set {__PlaceOfBirthAbroad = value;}
-		}
+		public R_0009_000096.PlaceOfBirthAbroad PlaceOfBirthAbroad { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(SpouseDataNotRegisteredUnderBulgarianLawCitizenships),ElementName="Citizenships",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SpouseDataNotRegisteredUnderBulgarianLawCitizenships __Citizenships;
-		
-		[XmlIgnore]
-		public SpouseDataNotRegisteredUnderBulgarianLawCitizenships Citizenships
-		{
-			get {return __Citizenships;}
-			set {__Citizenships = value;}
-		}
+		public SpouseDataNotRegisteredUnderBulgarianLawCitizenships Citizenships { get; set; }
 
 		public SpouseDataNotRegisteredUnderBulgarianLaw()
 		{
@@ -261,18 +145,7 @@ namespace R_0009_000113
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CitizenshipCollection __CitizenshipCollection;
-		
-		[XmlIgnore]
-		public CitizenshipCollection CitizenshipCollection
-		{
-			get
-			{
-				if (__CitizenshipCollection == null) __CitizenshipCollection = new CitizenshipCollection();
-				return __CitizenshipCollection;
-			}
-			set {__CitizenshipCollection = value;}
-		}
+		public CitizenshipCollection CitizenshipCollection { get; set; }
 
 		public SpouseDataNotRegisteredUnderBulgarianLawCitizenships()
 		{

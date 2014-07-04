@@ -27,38 +27,17 @@ namespace R_4858
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PremisesLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PremisesLocation;
-		
-		[XmlIgnore]
-		public string PremisesLocation
-		{ 
-			get { return __PremisesLocation; }
-			set { __PremisesLocation = value; }
-		}
+		public string PremisesLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PremisesRoomCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PremisesRoomCount;
-		
-		[XmlIgnore]
-		public string PremisesRoomCount
-		{ 
-			get { return __PremisesRoomCount; }
-			set { __PremisesRoomCount = value; }
-		}
+		public string PremisesRoomCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PremisesRoomSize",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PremisesRoomSize;
-		
-		[XmlIgnore]
-		public string PremisesRoomSize
-		{ 
-			get { return __PremisesRoomSize; }
-			set { __PremisesRoomSize = value; }
-		}
+		public string PremisesRoomSize { get; set; }
 
 		public Premises()
 		{

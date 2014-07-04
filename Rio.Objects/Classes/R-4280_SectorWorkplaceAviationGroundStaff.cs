@@ -27,26 +27,12 @@ namespace R_4280
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SectorWorkplaceAviationGroundStaffCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SectorWorkplaceAviationGroundStaffCode;
-		
-		[XmlIgnore]
-		public string SectorWorkplaceAviationGroundStaffCode
-		{ 
-			get { return __SectorWorkplaceAviationGroundStaffCode; }
-			set { __SectorWorkplaceAviationGroundStaffCode = value; }
-		}
+		public string SectorWorkplaceAviationGroundStaffCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SectorWorkplaceAviationGroundStaffName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SectorWorkplaceAviationGroundStaffName;
-		
-		[XmlIgnore]
-		public string SectorWorkplaceAviationGroundStaffName
-		{ 
-			get { return __SectorWorkplaceAviationGroundStaffName; }
-			set { __SectorWorkplaceAviationGroundStaffName = value; }
-		}
+		public string SectorWorkplaceAviationGroundStaffName { get; set; }
 
 		public SectorWorkplaceAviationGroundStaff()
 		{

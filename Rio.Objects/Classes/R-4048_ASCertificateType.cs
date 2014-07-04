@@ -27,50 +27,22 @@ namespace R_4048
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ASCertificateTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ASCertificateTypeCode;
-		
-		[XmlIgnore]
-		public string ASCertificateTypeCode
-		{ 
-			get { return __ASCertificateTypeCode; }
-			set { __ASCertificateTypeCode = value; }
-		}
+		public string ASCertificateTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ASCertificateTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ASCertificateTypeName;
-		
-		[XmlIgnore]
-		public string ASCertificateTypeName
-		{ 
-			get { return __ASCertificateTypeName; }
-			set { __ASCertificateTypeName = value; }
-		}
+		public string ASCertificateTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ASCertificateTypeNameAlt",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ASCertificateTypeNameAlt;
-		
-		[XmlIgnore]
-		public string ASCertificateTypeNameAlt
-		{ 
-			get { return __ASCertificateTypeNameAlt; }
-			set { __ASCertificateTypeNameAlt = value; }
-		}
+		public string ASCertificateTypeNameAlt { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4000.GroupLicenseDependingRequirementsFiling),ElementName="GroupLicenseDependingRequirementsFiling",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4000.GroupLicenseDependingRequirementsFiling __GroupLicenseDependingRequirementsFiling;
-		
-		[XmlIgnore]
-		public R_4000.GroupLicenseDependingRequirementsFiling GroupLicenseDependingRequirementsFiling
-		{
-			get {return __GroupLicenseDependingRequirementsFiling;}
-			set {__GroupLicenseDependingRequirementsFiling = value;}
-		}
+		public R_4000.GroupLicenseDependingRequirementsFiling GroupLicenseDependingRequirementsFiling { get; set; }
 
 		public ASCertificateType()
 		{

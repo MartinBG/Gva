@@ -27,26 +27,12 @@ namespace R_0009_000030
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000029.PositionInAdministration),ElementName="PositionInAdministration",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000029.PositionInAdministration __PositionInAdministration;
-		
-		[XmlIgnore]
-		public R_0009_000029.PositionInAdministration PositionInAdministration
-		{
-			get {return __PositionInAdministration;}
-			set {__PositionInAdministration = value;}
-		}
+		public R_0009_000029.PositionInAdministration PositionInAdministration { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000027.AISUserBasicData),ElementName="AISUserBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000027.AISUserBasicData __AISUserBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000027.AISUserBasicData AISUserBasicData
-		{
-			get {return __AISUserBasicData;}
-			set {__AISUserBasicData = value;}
-		}
+		public R_0009_000027.AISUserBasicData AISUserBasicData { get; set; }
 
 		public PositionInAdministrationOrAISUser()
 		{

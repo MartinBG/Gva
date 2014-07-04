@@ -27,122 +27,52 @@ namespace R_5034
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4322.AircraftManufacturerCountry),ElementName="AircraftManufacturerCountry",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4322.AircraftManufacturerCountry __AircraftManufacturerCountry;
-		
-		[XmlIgnore]
-		public R_4322.AircraftManufacturerCountry AircraftManufacturerCountry
-		{
-			get {return __AircraftManufacturerCountry;}
-			set {__AircraftManufacturerCountry = value;}
-		}
+		public R_4322.AircraftManufacturerCountry AircraftManufacturerCountry { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftRegistrationMark",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftRegistrationMark;
-		
-		[XmlIgnore]
-		public string AircraftRegistrationMark
-		{ 
-			get { return __AircraftRegistrationMark; }
-			set { __AircraftRegistrationMark = value; }
-		}
+		public string AircraftRegistrationMark { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4158.AircraftType __AircraftType;
-		
-		[XmlIgnore]
-		public R_4158.AircraftType AircraftType
-		{
-			get {return __AircraftType;}
-			set {__AircraftType = value;}
-		}
+		public R_4158.AircraftType AircraftType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftSeries",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftSeries;
-		
-		[XmlIgnore]
-		public string AircraftSeries
-		{ 
-			get { return __AircraftSeries; }
-			set { __AircraftSeries = value; }
-		}
+		public string AircraftSeries { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ManufacturerName;
-		
-		[XmlIgnore]
-		public string ManufacturerName
-		{ 
-			get { return __ManufacturerName; }
-			set { __ManufacturerName = value; }
-		}
+		public string ManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5030.AircraftModel),ElementName="AircraftModel",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_5030.AircraftModel __AircraftModel;
-		
-		[XmlIgnore]
-		public R_5030.AircraftModel AircraftModel
-		{
-			get {return __AircraftModel;}
-			set {__AircraftModel = value;}
-		}
+		public R_5030.AircraftModel AircraftModel { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftSerialNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftSerialNumber;
-		
-		[XmlIgnore]
-		public string AircraftSerialNumber
-		{ 
-			get { return __AircraftSerialNumber; }
-			set { __AircraftSerialNumber = value; }
-		}
+		public string AircraftSerialNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SeatsCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SeatsCount;
-		
-		[XmlIgnore]
-		public string SeatsCount
-		{ 
-			get { return __SeatsCount; }
-			set { __SeatsCount = value; }
-		}
+		public string SeatsCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftMaximumTakeOffWeight",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftMaximumTakeOffWeight;
-		
-		[XmlIgnore]
-		public string AircraftMaximumTakeOffWeight
-		{ 
-			get { return __AircraftMaximumTakeOffWeight; }
-			set { __AircraftMaximumTakeOffWeight = value; }
-		}
+		public string AircraftMaximumTakeOffWeight { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BaseAircraft",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __BaseAircraft;
-		
-		[XmlIgnore]
-		public string BaseAircraft
-		{ 
-			get { return __BaseAircraft; }
-			set { __BaseAircraft = value; }
-		}
+		public string BaseAircraft { get; set; }
 
 		public DataCommercialTransportAircraft()
 		{

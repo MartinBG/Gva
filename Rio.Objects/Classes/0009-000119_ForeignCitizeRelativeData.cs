@@ -33,57 +33,22 @@ namespace R_0009_000119
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Relationship",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Relationship;
-		
-		[XmlIgnore]
-		public string Relationship
-		{ 
-			get { return __Relationship; }
-			set { __Relationship = value; }
-		}
+		public string Relationship { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ForeignCitizeRelativeDataCitizenships),ElementName="Citizenships",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ForeignCitizeRelativeDataCitizenships __Citizenships;
-		
-		[XmlIgnore]
-		public ForeignCitizeRelativeDataCitizenships Citizenships
-		{
-			get {return __Citizenships;}
-			set {__Citizenships = value;}
-		}
+		public ForeignCitizeRelativeDataCitizenships Citizenships { get; set; }
 
 		public ForeignCitizeRelativeData()
 		{
@@ -99,18 +64,7 @@ namespace R_0009_000119
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CitizenshipCollection __CitizenshipCollection;
-		
-		[XmlIgnore]
-		public CitizenshipCollection CitizenshipCollection
-		{
-			get
-			{
-				if (__CitizenshipCollection == null) __CitizenshipCollection = new CitizenshipCollection();
-				return __CitizenshipCollection;
-			}
-			set {__CitizenshipCollection = value;}
-		}
+		public CitizenshipCollection CitizenshipCollection { get; set; }
 
 		public ForeignCitizeRelativeDataCitizenships()
 		{

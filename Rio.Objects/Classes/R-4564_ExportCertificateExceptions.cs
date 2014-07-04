@@ -27,26 +27,12 @@ namespace R_4564
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ExportCertificateAirworthinessExceptions",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ExportCertificateAirworthinessExceptions;
-		
-		[XmlIgnore]
-		public string ExportCertificateAirworthinessExceptions
-		{ 
-			get { return __ExportCertificateAirworthinessExceptions; }
-			set { __ExportCertificateAirworthinessExceptions = value; }
-		}
+		public string ExportCertificateAirworthinessExceptions { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4040.AttachedDocumentData),ElementName="AttachedDocumentData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4040.AttachedDocumentData __AttachedDocumentData;
-		
-		[XmlIgnore]
-		public R_4040.AttachedDocumentData AttachedDocumentData
-		{
-			get {return __AttachedDocumentData;}
-			set {__AttachedDocumentData = value;}
-		}
+		public R_4040.AttachedDocumentData AttachedDocumentData { get; set; }
 
 		public ExportCertificateExceptions()
 		{

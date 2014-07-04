@@ -27,93 +27,37 @@ namespace R_4522
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftRegistrationMark",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftRegistrationMark;
-		
-		[XmlIgnore]
-		public string AircraftRegistrationMark
-		{ 
-			get { return __AircraftRegistrationMark; }
-			set { __AircraftRegistrationMark = value; }
-		}
+		public string AircraftRegistrationMark { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AirworthinessCertificateValidity",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __AirworthinessCertificateValidity;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __AirworthinessCertificateValiditySpecified { get { return __AirworthinessCertificateValidity.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? AirworthinessCertificateValidity
-		{ 
-			get { return __AirworthinessCertificateValidity; }
-			set { __AirworthinessCertificateValidity = value; }
-		}
-		
-
+		public DateTime? AirworthinessCertificateValidity { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftManufacturerName;
-		
-		[XmlIgnore]
-		public string AircraftManufacturerName
-		{ 
-			get { return __AircraftManufacturerName; }
-			set { __AircraftManufacturerName = value; }
-		}
+		public string AircraftManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4370.ModelAircraftAccordingTypeCertificate),ElementName="ModelAircraftAccordingTypeCertificate",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4370.ModelAircraftAccordingTypeCertificate __ModelAircraftAccordingTypeCertificate;
-		
-		[XmlIgnore]
-		public R_4370.ModelAircraftAccordingTypeCertificate ModelAircraftAccordingTypeCertificate
-		{
-			get {return __ModelAircraftAccordingTypeCertificate;}
-			set {__ModelAircraftAccordingTypeCertificate = value;}
-		}
+		public R_4370.ModelAircraftAccordingTypeCertificate ModelAircraftAccordingTypeCertificate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftSerialNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftSerialNumber;
-		
-		[XmlIgnore]
-		public string AircraftSerialNumber
-		{ 
-			get { return __AircraftSerialNumber; }
-			set { __AircraftSerialNumber = value; }
-		}
+		public string AircraftSerialNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4504.EnginesTTSN),ElementName="ExploitationStartEnginesTTSN",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4504.EnginesTTSN __ExploitationStartEnginesTTSN;
-		
-		[XmlIgnore]
-		public R_4504.EnginesTTSN ExploitationStartEnginesTTSN
-		{
-			get {return __ExploitationStartEnginesTTSN;}
-			set {__ExploitationStartEnginesTTSN = value;}
-		}
+		public R_4504.EnginesTTSN ExploitationStartEnginesTTSN { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4504.EnginesTTSN),ElementName="LastRepairEnginesTTSN",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4504.EnginesTTSN __LastRepairEnginesTTSN;
-		
-		[XmlIgnore]
-		public R_4504.EnginesTTSN LastRepairEnginesTTSN
-		{
-			get {return __LastRepairEnginesTTSN;}
-			set {__LastRepairEnginesTTSN = value;}
-		}
+		public R_4504.EnginesTTSN LastRepairEnginesTTSN { get; set; }
 
 		public AircraftAirworthinessReviewCertificationData()
 		{

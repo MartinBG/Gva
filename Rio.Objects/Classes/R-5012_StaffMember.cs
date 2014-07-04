@@ -27,50 +27,22 @@ namespace R_5012
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5008.DirectionFunction),ElementName="DirectionFunction",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_5008.DirectionFunction __DirectionFunction;
-		
-		[XmlIgnore]
-		public R_5008.DirectionFunction DirectionFunction
-		{
-			get {return __DirectionFunction;}
-			set {__DirectionFunction = value;}
-		}
+		public R_5008.DirectionFunction DirectionFunction { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ManagerialPositionNames",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ManagerialPositionNames;
-		
-		[XmlIgnore]
-		public string ManagerialPositionNames
-		{ 
-			get { return __ManagerialPositionNames; }
-			set { __ManagerialPositionNames = value; }
-		}
+		public string ManagerialPositionNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PhoneNumbersDesc",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PhoneNumbersDesc;
-		
-		[XmlIgnore]
-		public string PhoneNumbersDesc
-		{ 
-			get { return __PhoneNumbersDesc; }
-			set { __PhoneNumbersDesc = value; }
-		}
+		public string PhoneNumbersDesc { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EmailAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EmailAddress;
-		
-		[XmlIgnore]
-		public string EmailAddress
-		{ 
-			get { return __EmailAddress; }
-			set { __EmailAddress = value; }
-		}
+		public string EmailAddress { get; set; }
 
 		public StaffMember()
 		{

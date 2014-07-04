@@ -27,62 +27,27 @@ namespace R_4368
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftManufacturerName;
-		
-		[XmlIgnore]
-		public string AircraftManufacturerName
-		{ 
-			get { return __AircraftManufacturerName; }
-			set { __AircraftManufacturerName = value; }
-		}
+		public string AircraftManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryGRAOCode;
-		
-		[XmlIgnore]
-		public string CountryGRAOCode
-		{ 
-			get { return __CountryGRAOCode; }
-			set { __CountryGRAOCode = value; }
-		}
+		public string CountryGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryName;
-		
-		[XmlIgnore]
-		public string CountryName
-		{ 
-			get { return __CountryName; }
-			set { __CountryName = value; }
-		}
+		public string CountryName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Website",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Website;
-		
-		[XmlIgnore]
-		public string Website
-		{ 
-			get { return __Website; }
-			set { __Website = value; }
-		}
+		public string Website { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EmailAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EmailAddress;
-		
-		[XmlIgnore]
-		public string EmailAddress
-		{ 
-			get { return __EmailAddress; }
-			set { __EmailAddress = value; }
-		}
+		public string EmailAddress { get; set; }
 
 		public AircraftManufacturerData()
 		{

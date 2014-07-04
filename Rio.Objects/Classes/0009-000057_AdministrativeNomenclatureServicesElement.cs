@@ -33,110 +33,47 @@ namespace R_0009_000057
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000054.AdministrativeNomenclatureServiceURI),ElementName="URI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000054.AdministrativeNomenclatureServiceURI __URI;
-		
-		[XmlIgnore]
-		public R_0009_000054.AdministrativeNomenclatureServiceURI URI
-		{
-			get {return __URI;}
-			set {__URI = value;}
-		}
+		public R_0009_000054.AdministrativeNomenclatureServiceURI URI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Description",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Description;
-		
-		[XmlIgnore]
-		public string Description
-		{ 
-			get { return __Description; }
-			set { __Description = value; }
-		}
+		public string Description { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(InitiatingDocument),ElementName="InitiatingDocument",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public InitiatingDocument __InitiatingDocument;
-		
-		[XmlIgnore]
-		public InitiatingDocument InitiatingDocument
-		{
-			get {return __InitiatingDocument;}
-			set {__InitiatingDocument = value;}
-		}
+		public InitiatingDocument InitiatingDocument { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000055.ServiceResponsible),ElementName="Responsible",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000055.ServiceResponsible __Responsible;
-		
-		[XmlIgnore]
-		public R_0009_000055.ServiceResponsible Responsible
-		{
-			get {return __Responsible;}
-			set {__Responsible = value;}
-		}
+		public R_0009_000055.ServiceResponsible Responsible { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Term",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="duration",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Term;
-		
-		[XmlIgnore]
-		public string Term
-		{ 
-			get { return __Term; }
-			set { __Term = value; }
-		}
+		public string Term { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Stages),ElementName="Stages",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Stages __Stages;
-		
-		[XmlIgnore]
-		public Stages Stages
-		{
-			get {return __Stages;}
-			set {__Stages = value;}
-		}
+		public Stages Stages { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Instructions",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Instructions;
-		
-		[XmlIgnore]
-		public string Instructions
-		{ 
-			get { return __Instructions; }
-			set { __Instructions = value; }
-		}
+		public string Instructions { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000032.AISObjectCreationData),ElementName="ObjectCreationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000032.AISObjectCreationData __ObjectCreationData;
-		
-		[XmlIgnore]
-		public R_0009_000032.AISObjectCreationData ObjectCreationData
-		{
-			get {return __ObjectCreationData;}
-			set {__ObjectCreationData = value;}
-		}
+		public R_0009_000032.AISObjectCreationData ObjectCreationData { get; set; }
 
 		public AdministrativeNomenclatureServicesElement()
 		{
@@ -151,26 +88,12 @@ namespace R_0009_000057
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000042.AdministrativeNomenclatureDocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000042.AdministrativeNomenclatureDocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000042.AdministrativeNomenclatureDocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000042.AdministrativeNomenclatureDocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(InitiatingDocumentAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public InitiatingDocumentAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public InitiatingDocumentAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public InitiatingDocumentAdditionalData AdditionalData { get; set; }
 
 		public InitiatingDocument()
 		{
@@ -200,18 +123,7 @@ namespace R_0009_000057
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Stage),ElementName="Stage",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public StageCollection __StageCollection;
-		
-		[XmlIgnore]
-		public StageCollection StageCollection
-		{
-			get
-			{
-				if (__StageCollection == null) __StageCollection = new StageCollection();
-				return __StageCollection;
-			}
-			set {__StageCollection = value;}
-		}
+		public StageCollection StageCollection { get; set; }
 
 		public Stages()
 		{
@@ -226,26 +138,12 @@ namespace R_0009_000057
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000040.ServiceStageURI),ElementName="StageURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000040.ServiceStageURI __StageURI;
-		
-		[XmlIgnore]
-		public R_0009_000040.ServiceStageURI StageURI
-		{
-			get {return __StageURI;}
-			set {__StageURI = value;}
-		}
+		public R_0009_000040.ServiceStageURI StageURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="StageName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __StageName;
-		
-		[XmlIgnore]
-		public string StageName
-		{ 
-			get { return __StageName; }
-			set { __StageName = value; }
-		}
+		public string StageName { get; set; }
 
 		public Stage()
 		{

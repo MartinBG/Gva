@@ -27,69 +27,27 @@ namespace R_0009_000118
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000006.PersonIdentifier),ElementName="PersonIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000006.PersonIdentifier __PersonIdentifier;
-		
-		[XmlIgnore]
-		public R_0009_000006.PersonIdentifier PersonIdentifier
-		{
-			get {return __PersonIdentifier;}
-			set {__PersonIdentifier = value;}
-		}
+		public R_0009_000006.PersonIdentifier PersonIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Relationship",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Relationship;
-		
-		[XmlIgnore]
-		public string Relationship
-		{ 
-			get { return __Relationship; }
-			set { __Relationship = value; }
-		}
+		public string Relationship { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000094.PersonAddress),ElementName="PersonAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000094.PersonAddress __PersonAddress;
-		
-		[XmlIgnore]
-		public R_0009_000094.PersonAddress PersonAddress
-		{
-			get {return __PersonAddress;}
-			set {__PersonAddress = value;}
-		}
+		public R_0009_000094.PersonAddress PersonAddress { get; set; }
 
 		public RelativeData()
 		{

@@ -45,62 +45,27 @@ namespace R_0009_000067
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000046.InitiatingDocumentURI),ElementName="InitiatingDocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000046.InitiatingDocumentURI __InitiatingDocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000046.InitiatingDocumentURI InitiatingDocumentURI
-		{
-			get {return __InitiatingDocumentURI;}
-			set {__InitiatingDocumentURI = value;}
-		}
+		public R_0009_000046.InitiatingDocumentURI InitiatingDocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000054.AdministrativeNomenclatureServiceURI),ElementName="ServiceURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000054.AdministrativeNomenclatureServiceURI __ServiceURI;
-		
-		[XmlIgnore]
-		public R_0009_000054.AdministrativeNomenclatureServiceURI ServiceURI
-		{
-			get {return __ServiceURI;}
-			set {__ServiceURI = value;}
-		}
+		public R_0009_000054.AdministrativeNomenclatureServiceURI ServiceURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ExecutedTasks),ElementName="ExecutedTasks",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ExecutedTasks __ExecutedTasks;
-		
-		[XmlIgnore]
-		public ExecutedTasks ExecutedTasks
-		{
-			get {return __ExecutedTasks;}
-			set {__ExecutedTasks = value;}
-		}
+		public ExecutedTasks ExecutedTasks { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(UnexecutedTasks),ElementName="UnexecutedTasks",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public UnexecutedTasks __UnexecutedTasks;
-		
-		[XmlIgnore]
-		public UnexecutedTasks UnexecutedTasks
-		{
-			get {return __UnexecutedTasks;}
-			set {__UnexecutedTasks = value;}
-		}
+		public UnexecutedTasks UnexecutedTasks { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(CancelledTasks),ElementName="CancelledTasks",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CancelledTasks __CancelledTasks;
-		
-		[XmlIgnore]
-		public CancelledTasks CancelledTasks
-		{
-			get {return __CancelledTasks;}
-			set {__CancelledTasks = value;}
-		}
+		public CancelledTasks CancelledTasks { get; set; }
 
 		public ServiceStatus()
 		{
@@ -116,18 +81,7 @@ namespace R_0009_000067
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Task),ElementName="Task",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TaskCollection __TaskCollection;
-		
-		[XmlIgnore]
-		public TaskCollection TaskCollection
-		{
-			get
-			{
-				if (__TaskCollection == null) __TaskCollection = new TaskCollection();
-				return __TaskCollection;
-			}
-			set {__TaskCollection = value;}
-		}
+		public TaskCollection TaskCollection { get; set; }
 
 		public ExecutedTasks()
 		{
@@ -142,26 +96,12 @@ namespace R_0009_000067
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000068.AISTask),ElementName="TaskData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000068.AISTask __TaskData;
-		
-		[XmlIgnore]
-		public R_0009_000068.AISTask TaskData
-		{
-			get {return __TaskData;}
-			set {__TaskData = value;}
-		}
+		public R_0009_000068.AISTask TaskData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000066.AISTaskServiceStatusInclusionData),ElementName="InclusionData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000066.AISTaskServiceStatusInclusionData __InclusionData;
-		
-		[XmlIgnore]
-		public R_0009_000066.AISTaskServiceStatusInclusionData InclusionData
-		{
-			get {return __InclusionData;}
-			set {__InclusionData = value;}
-		}
+		public R_0009_000066.AISTaskServiceStatusInclusionData InclusionData { get; set; }
 
 		public Task()
 		{
@@ -177,18 +117,7 @@ namespace R_0009_000067
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(TaskOrServiceStage),ElementName="TaskOrServiceStage",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TaskOrServiceStageCollection __TaskOrServiceStageCollection;
-		
-		[XmlIgnore]
-		public TaskOrServiceStageCollection TaskOrServiceStageCollection
-		{
-			get
-			{
-				if (__TaskOrServiceStageCollection == null) __TaskOrServiceStageCollection = new TaskOrServiceStageCollection();
-				return __TaskOrServiceStageCollection;
-			}
-			set {__TaskOrServiceStageCollection = value;}
-		}
+		public TaskOrServiceStageCollection TaskOrServiceStageCollection { get; set; }
 
 		public UnexecutedTasks()
 		{
@@ -203,26 +132,12 @@ namespace R_0009_000067
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(TaskOrServiceStageTask),ElementName="Task",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TaskOrServiceStageTask __Task;
-		
-		[XmlIgnore]
-		public TaskOrServiceStageTask Task
-		{
-			get {return __Task;}
-			set {__Task = value;}
-		}
+		public TaskOrServiceStageTask Task { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ServiceStage),ElementName="ServiceStage",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ServiceStage __ServiceStage;
-		
-		[XmlIgnore]
-		public ServiceStage ServiceStage
-		{
-			get {return __ServiceStage;}
-			set {__ServiceStage = value;}
-		}
+		public ServiceStage ServiceStage { get; set; }
 
 		public TaskOrServiceStage()
 		{
@@ -237,26 +152,12 @@ namespace R_0009_000067
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000068.AISTask),ElementName="TaskData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000068.AISTask __TaskData;
-		
-		[XmlIgnore]
-		public R_0009_000068.AISTask TaskData
-		{
-			get {return __TaskData;}
-			set {__TaskData = value;}
-		}
+		public R_0009_000068.AISTask TaskData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000066.AISTaskServiceStatusInclusionData),ElementName="InclusionData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000066.AISTaskServiceStatusInclusionData __InclusionData;
-		
-		[XmlIgnore]
-		public R_0009_000066.AISTaskServiceStatusInclusionData InclusionData
-		{
-			get {return __InclusionData;}
-			set {__InclusionData = value;}
-		}
+		public R_0009_000066.AISTaskServiceStatusInclusionData InclusionData { get; set; }
 
 		public TaskOrServiceStageTask()
 		{
@@ -271,52 +172,17 @@ namespace R_0009_000067
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000048.AdministrativeNomenclatureServiceStagesElement),ElementName="ServiceStageData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000048.AdministrativeNomenclatureServiceStagesElement __ServiceStageData;
-		
-		[XmlIgnore]
-		public R_0009_000048.AdministrativeNomenclatureServiceStagesElement ServiceStageData
-		{
-			get {return __ServiceStageData;}
-			set {__ServiceStageData = value;}
-		}
+		public R_0009_000048.AdministrativeNomenclatureServiceStagesElement ServiceStageData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ScheduledStartDate",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ScheduledStartDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ScheduledStartDateSpecified { get { return __ScheduledStartDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ScheduledStartDate
-		{ 
-			get { return __ScheduledStartDate; }
-			set { __ScheduledStartDate = value; }
-		}
-		
-
+		public DateTime? ScheduledStartDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ScheduledCompletionDate",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ScheduledCompletionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ScheduledCompletionDateSpecified { get { return __ScheduledCompletionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ScheduledCompletionDate
-		{ 
-			get { return __ScheduledCompletionDate; }
-			set { __ScheduledCompletionDate = value; }
-		}
-		
-
+		public DateTime? ScheduledCompletionDate { get; set; }
 
 		public ServiceStage()
 		{
@@ -332,18 +198,7 @@ namespace R_0009_000067
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(CancelledTasksTask),ElementName="Task",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CancelledTasksTaskCollection __TaskCollection;
-		
-		[XmlIgnore]
-		public CancelledTasksTaskCollection TaskCollection
-		{
-			get
-			{
-				if (__TaskCollection == null) __TaskCollection = new CancelledTasksTaskCollection();
-				return __TaskCollection;
-			}
-			set {__TaskCollection = value;}
-		}
+		public CancelledTasksTaskCollection TaskCollection { get; set; }
 
 		public CancelledTasks()
 		{
@@ -358,26 +213,12 @@ namespace R_0009_000067
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000068.AISTask),ElementName="TaskData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000068.AISTask __TaskData;
-		
-		[XmlIgnore]
-		public R_0009_000068.AISTask TaskData
-		{
-			get {return __TaskData;}
-			set {__TaskData = value;}
-		}
+		public R_0009_000068.AISTask TaskData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000066.AISTaskServiceStatusInclusionData),ElementName="InclusionData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000066.AISTaskServiceStatusInclusionData __InclusionData;
-		
-		[XmlIgnore]
-		public R_0009_000066.AISTaskServiceStatusInclusionData InclusionData
-		{
-			get {return __InclusionData;}
-			set {__InclusionData = value;}
-		}
+		public R_0009_000066.AISTaskServiceStatusInclusionData InclusionData { get; set; }
 
 		public CancelledTasksTask()
 		{

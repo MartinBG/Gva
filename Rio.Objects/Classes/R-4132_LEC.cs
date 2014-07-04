@@ -27,26 +27,12 @@ namespace R_4132
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LECCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __LECCode;
-		
-		[XmlIgnore]
-		public string LECCode
-		{ 
-			get { return __LECCode; }
-			set { __LECCode = value; }
-		}
+		public string LECCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LECName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __LECName;
-		
-		[XmlIgnore]
-		public string LECName
-		{ 
-			get { return __LECName; }
-			set { __LECName = value; }
-		}
+		public string LECName { get; set; }
 
 		public LEC()
 		{

@@ -27,26 +27,12 @@ namespace R_4776
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="GroupTypeCheckingCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __GroupTypeCheckingCode;
-		
-		[XmlIgnore]
-		public string GroupTypeCheckingCode
-		{ 
-			get { return __GroupTypeCheckingCode; }
-			set { __GroupTypeCheckingCode = value; }
-		}
+		public string GroupTypeCheckingCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="GroupTypeCheckingName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __GroupTypeCheckingName;
-		
-		[XmlIgnore]
-		public string GroupTypeCheckingName
-		{ 
-			get { return __GroupTypeCheckingName; }
-			set { __GroupTypeCheckingName = value; }
-		}
+		public string GroupTypeCheckingName { get; set; }
 
 		public GroupTypeChecking()
 		{

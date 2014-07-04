@@ -27,26 +27,12 @@ namespace R_4158
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftTypeCode;
-		
-		[XmlIgnore]
-		public string AircraftTypeCode
-		{ 
-			get { return __AircraftTypeCode; }
-			set { __AircraftTypeCode = value; }
-		}
+		public string AircraftTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftTypeName;
-		
-		[XmlIgnore]
-		public string AircraftTypeName
-		{ 
-			get { return __AircraftTypeName; }
-			set { __AircraftTypeName = value; }
-		}
+		public string AircraftTypeName { get; set; }
 
 		public AircraftType()
 		{

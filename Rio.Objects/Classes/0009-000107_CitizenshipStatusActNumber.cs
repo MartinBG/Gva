@@ -27,43 +27,17 @@ namespace R_0009_000107
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RegisterIndex",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RegisterIndex;
-		
-		[XmlIgnore]
-		public string RegisterIndex
-		{ 
-			get { return __RegisterIndex; }
-			set { __RegisterIndex = value; }
-		}
+		public string RegisterIndex { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ActSequenceNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="int",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public int __ActSequenceNumber;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ActSequenceNumberSpecified;
-		
-		[XmlIgnore]
-		public int ActSequenceNumber
-		{ 
-			get { return __ActSequenceNumber; }
-			set { __ActSequenceNumber = value; __ActSequenceNumberSpecified = true; }
-		}
+		public int ActSequenceNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SubNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SubNumber;
-		
-		[XmlIgnore]
-		public string SubNumber
-		{ 
-			get { return __SubNumber; }
-			set { __SubNumber = value; }
-		}
+		public string SubNumber { get; set; }
 
 		public CitizenshipStatusActNumber()
 		{

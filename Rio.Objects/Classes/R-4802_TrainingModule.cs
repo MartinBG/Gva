@@ -27,26 +27,12 @@ namespace R_4802
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TrainingModuleCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TrainingModuleCode;
-		
-		[XmlIgnore]
-		public string TrainingModuleCode
-		{ 
-			get { return __TrainingModuleCode; }
-			set { __TrainingModuleCode = value; }
-		}
+		public string TrainingModuleCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TrainingModuleName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TrainingModuleName;
-		
-		[XmlIgnore]
-		public string TrainingModuleName
-		{ 
-			get { return __TrainingModuleName; }
-			set { __TrainingModuleName = value; }
-		}
+		public string TrainingModuleName { get; set; }
 
 		public TrainingModule()
 		{

@@ -51,203 +51,77 @@ namespace R_5088
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5034.DataCommercialTransportAircraft),ElementName="DataCommercialTransportAircraft",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_5034.DataCommercialTransportAircraft __DataCommercialTransportAircraft;
-		
-		[XmlIgnore]
-		public R_5034.DataCommercialTransportAircraft DataCommercialTransportAircraft
-		{
-			get {return __DataCommercialTransportAircraft;}
-			set {__DataCommercialTransportAircraft = value;}
-		}
+		public R_5034.DataCommercialTransportAircraft DataCommercialTransportAircraft { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5046.DryLeaseData),ElementName="DryLeaseData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_5046.DryLeaseData __DryLeaseData;
-		
-		[XmlIgnore]
-		public R_5046.DryLeaseData DryLeaseData
-		{
-			get {return __DryLeaseData;}
-			set {__DryLeaseData = value;}
-		}
+		public R_5046.DryLeaseData DryLeaseData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ApplicantNotAircraftOwner",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ApplicantNotAircraftOwner;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ApplicantNotAircraftOwnerSpecified;
-		
-		[XmlIgnore]
-		public bool ApplicantNotAircraftOwner
-		{ 
-			get { return __ApplicantNotAircraftOwner; }
-			set { __ApplicantNotAircraftOwner = value; __ApplicantNotAircraftOwnerSpecified = true; }
-		}
+		public bool ApplicantNotAircraftOwner { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4310.AircraftHiringData),ElementName="AircraftHiringData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4310.AircraftHiringData __AircraftHiringData;
-		
-		[XmlIgnore]
-		public R_4310.AircraftHiringData AircraftHiringData
-		{
-			get {return __AircraftHiringData;}
-			set {__AircraftHiringData = value;}
-		}
+		public R_4310.AircraftHiringData AircraftHiringData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LeaseType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __LeaseType;
-		
-		[XmlIgnore]
-		public string LeaseType
-		{ 
-			get { return __LeaseType; }
-			set { __LeaseType = value; }
-		}
+		public string LeaseType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4696.EAURecipientsAttachedDocumentDatasCollection),ElementName="LeaseEAURecipientsAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4696.EAURecipientsAttachedDocumentDatasCollection __LeaseEAURecipientsAttachedDocumentDatasCollection;
-		
-		[XmlIgnore]
-		public R_4696.EAURecipientsAttachedDocumentDatasCollection LeaseEAURecipientsAttachedDocumentDatasCollection
-		{
-			get {return __LeaseEAURecipientsAttachedDocumentDatasCollection;}
-			set {__LeaseEAURecipientsAttachedDocumentDatasCollection = value;}
-		}
+		public R_4696.EAURecipientsAttachedDocumentDatasCollection LeaseEAURecipientsAttachedDocumentDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5050.ActivityKindDetails),ElementName="ActivityKindDetails",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ActivityKindDetailsCollection __ActivityKindDetailsCollection;
-		
-		[XmlIgnore]
-		public ActivityKindDetailsCollection ActivityKindDetailsCollection
-		{
-			get
-			{
-				if (__ActivityKindDetailsCollection == null) __ActivityKindDetailsCollection = new ActivityKindDetailsCollection();
-				return __ActivityKindDetailsCollection;
-			}
-			set {__ActivityKindDetailsCollection = value;}
-		}
+		public ActivityKindDetailsCollection ActivityKindDetailsCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5056.OperationRegion),ElementName="OperationRegion",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public OperationRegionCollection __OperationRegionCollection;
-		
-		[XmlIgnore]
-		public OperationRegionCollection OperationRegionCollection
-		{
-			get
-			{
-				if (__OperationRegionCollection == null) __OperationRegionCollection = new OperationRegionCollection();
-				return __OperationRegionCollection;
-			}
-			set {__OperationRegionCollection = value;}
-		}
+		public OperationRegionCollection OperationRegionCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperationRegionDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OperationRegionDescription;
-		
-		[XmlIgnore]
-		public string OperationRegionDescription
-		{ 
-			get { return __OperationRegionDescription; }
-			set { __OperationRegionDescription = value; }
-		}
+		public string OperationRegionDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5064.SpecialRestriction),ElementName="SpecialRestriction",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SpecialRestrictionCollection __SpecialRestrictionCollection;
-		
-		[XmlIgnore]
-		public SpecialRestrictionCollection SpecialRestrictionCollection
-		{
-			get
-			{
-				if (__SpecialRestrictionCollection == null) __SpecialRestrictionCollection = new SpecialRestrictionCollection();
-				return __SpecialRestrictionCollection;
-			}
-			set {__SpecialRestrictionCollection = value;}
-		}
+		public SpecialRestrictionCollection SpecialRestrictionCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SpecialRestrictionDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SpecialRestrictionDescription;
-		
-		[XmlIgnore]
-		public string SpecialRestrictionDescription
-		{ 
-			get { return __SpecialRestrictionDescription; }
-			set { __SpecialRestrictionDescription = value; }
-		}
+		public string SpecialRestrictionDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5082.SpecialPermissionDetails),ElementName="SpecialPermissionDetails",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SpecialPermissionDetailsCollection __SpecialPermissionDetailsCollection;
-		
-		[XmlIgnore]
-		public SpecialPermissionDetailsCollection SpecialPermissionDetailsCollection
-		{
-			get
-			{
-				if (__SpecialPermissionDetailsCollection == null) __SpecialPermissionDetailsCollection = new SpecialPermissionDetailsCollection();
-				return __SpecialPermissionDetailsCollection;
-			}
-			set {__SpecialPermissionDetailsCollection = value;}
-		}
+		public SpecialPermissionDetailsCollection SpecialPermissionDetailsCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OrganizationKind",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OrganizationKind;
-		
-		[XmlIgnore]
-		public string OrganizationKind
-		{ 
-			get { return __OrganizationKind; }
-			set { __OrganizationKind = value; }
-		}
+		public string OrganizationKind { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="HiredOrganizationName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __HiredOrganizationName;
-		
-		[XmlIgnore]
-		public string HiredOrganizationName
-		{ 
-			get { return __HiredOrganizationName; }
-			set { __HiredOrganizationName = value; }
-		}
+		public string HiredOrganizationName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4696.EAURecipientsAttachedDocumentDatasCollection),ElementName="TechnicalEAURecipientsAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4696.EAURecipientsAttachedDocumentDatasCollection __TechnicalEAURecipientsAttachedDocumentDatasCollection;
-		
-		[XmlIgnore]
-		public R_4696.EAURecipientsAttachedDocumentDatasCollection TechnicalEAURecipientsAttachedDocumentDatasCollection
-		{
-			get {return __TechnicalEAURecipientsAttachedDocumentDatasCollection;}
-			set {__TechnicalEAURecipientsAttachedDocumentDatasCollection = value;}
-		}
+		public R_4696.EAURecipientsAttachedDocumentDatasCollection TechnicalEAURecipientsAttachedDocumentDatasCollection { get; set; }
 
 		public AircraftDataPartB()
 		{

@@ -27,26 +27,12 @@ namespace R_4988
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperationAreaCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OperationAreaCode;
-		
-		[XmlIgnore]
-		public string OperationAreaCode
-		{ 
-			get { return __OperationAreaCode; }
-			set { __OperationAreaCode = value; }
-		}
+		public string OperationAreaCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperationAreaName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OperationAreaName;
-		
-		[XmlIgnore]
-		public string OperationAreaName
-		{ 
-			get { return __OperationAreaName; }
-			set { __OperationAreaName = value; }
-		}
+		public string OperationAreaName { get; set; }
 
 		public OperationArea()
 		{

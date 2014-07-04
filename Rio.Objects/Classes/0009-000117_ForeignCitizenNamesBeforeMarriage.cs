@@ -27,50 +27,22 @@ namespace R_0009_000117
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignCitizenFirstNameCyrillic",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignCitizenFirstNameCyrillic;
-		
-		[XmlIgnore]
-		public string ForeignCitizenFirstNameCyrillic
-		{ 
-			get { return __ForeignCitizenFirstNameCyrillic; }
-			set { __ForeignCitizenFirstNameCyrillic = value; }
-		}
+		public string ForeignCitizenFirstNameCyrillic { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignCitizenOtherNameCyrillic",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignCitizenOtherNameCyrillic;
-		
-		[XmlIgnore]
-		public string ForeignCitizenOtherNameCyrillic
-		{ 
-			get { return __ForeignCitizenOtherNameCyrillic; }
-			set { __ForeignCitizenOtherNameCyrillic = value; }
-		}
+		public string ForeignCitizenOtherNameCyrillic { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignCitizenFamilyNameBeforeMarriage",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignCitizenFamilyNameBeforeMarriage;
-		
-		[XmlIgnore]
-		public string ForeignCitizenFamilyNameBeforeMarriage
-		{ 
-			get { return __ForeignCitizenFamilyNameBeforeMarriage; }
-			set { __ForeignCitizenFamilyNameBeforeMarriage = value; }
-		}
+		public string ForeignCitizenFamilyNameBeforeMarriage { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignCitizenPseudonimCyrillic",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignCitizenPseudonimCyrillic;
-		
-		[XmlIgnore]
-		public string ForeignCitizenPseudonimCyrillic
-		{ 
-			get { return __ForeignCitizenPseudonimCyrillic; }
-			set { __ForeignCitizenPseudonimCyrillic = value; }
-		}
+		public string ForeignCitizenPseudonimCyrillic { get; set; }
 
 		public ForeignCitizenNamesBeforeMarriage()
 		{

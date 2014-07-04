@@ -27,26 +27,12 @@ namespace R_4656
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonRepresentingTradingCompanyRoleCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonRepresentingTradingCompanyRoleCode;
-		
-		[XmlIgnore]
-		public string PersonRepresentingTradingCompanyRoleCode
-		{ 
-			get { return __PersonRepresentingTradingCompanyRoleCode; }
-			set { __PersonRepresentingTradingCompanyRoleCode = value; }
-		}
+		public string PersonRepresentingTradingCompanyRoleCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonRepresentingTradingCompanyRoleName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonRepresentingTradingCompanyRoleName;
-		
-		[XmlIgnore]
-		public string PersonRepresentingTradingCompanyRoleName
-		{ 
-			get { return __PersonRepresentingTradingCompanyRoleName; }
-			set { __PersonRepresentingTradingCompanyRoleName = value; }
-		}
+		public string PersonRepresentingTradingCompanyRoleName { get; set; }
 
 		public PersonRepresentingTradingCompanyRole()
 		{

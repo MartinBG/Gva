@@ -27,26 +27,12 @@ namespace R_5072
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SpecialPermissionCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SpecialPermissionCode;
-		
-		[XmlIgnore]
-		public string SpecialPermissionCode
-		{ 
-			get { return __SpecialPermissionCode; }
-			set { __SpecialPermissionCode = value; }
-		}
+		public string SpecialPermissionCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SpecialPermissionName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SpecialPermissionName;
-		
-		[XmlIgnore]
-		public string SpecialPermissionName
-		{ 
-			get { return __SpecialPermissionName; }
-			set { __SpecialPermissionName = value; }
-		}
+		public string SpecialPermissionName { get; set; }
 
 		public SpecialPermission()
 		{

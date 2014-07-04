@@ -33,42 +33,17 @@ namespace R_4454
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4448.OperationType),ElementName="OperationType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public OperationTypeCollection __OperationTypeCollection;
-		
-		[XmlIgnore]
-		public OperationTypeCollection OperationTypeCollection
-		{
-			get
-			{
-				if (__OperationTypeCollection == null) __OperationTypeCollection = new OperationTypeCollection();
-				return __OperationTypeCollection;
-			}
-			set {__OperationTypeCollection = value;}
-		}
+		public OperationTypeCollection OperationTypeCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AviationalActivityTypes",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AviationalActivityTypes;
-		
-		[XmlIgnore]
-		public string AviationalActivityTypes
-		{ 
-			get { return __AviationalActivityTypes; }
-			set { __AviationalActivityTypes = value; }
-		}
+		public string AviationalActivityTypes { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SpecializedTransportationTypes",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SpecializedTransportationTypes;
-		
-		[XmlIgnore]
-		public string SpecializedTransportationTypes
-		{ 
-			get { return __SpecializedTransportationTypes; }
-			set { __SpecializedTransportationTypes = value; }
-		}
+		public string SpecializedTransportationTypes { get; set; }
 
 		public ProvidedOperationTypes()
 		{

@@ -34,18 +34,7 @@ namespace R_4488
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4486.MonitoredRadioequipmentData),ElementName="MonitoredRadioequipmentData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MonitoredRadioequipmentDataCollection __MonitoredRadioequipmentDataCollection;
-		
-		[XmlIgnore]
-		public MonitoredRadioequipmentDataCollection MonitoredRadioequipmentDataCollection
-		{
-			get
-			{
-				if (__MonitoredRadioequipmentDataCollection == null) __MonitoredRadioequipmentDataCollection = new MonitoredRadioequipmentDataCollection();
-				return __MonitoredRadioequipmentDataCollection;
-			}
-			set {__MonitoredRadioequipmentDataCollection = value;}
-		}
+		public MonitoredRadioequipmentDataCollection MonitoredRadioequipmentDataCollection { get; set; }
 
 		public MonitoredRadioequipmentDatasCollection()
 		{

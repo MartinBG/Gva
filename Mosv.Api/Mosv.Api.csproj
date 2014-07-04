@@ -116,6 +116,10 @@
       <Project>{398e3599-55c9-4740-9b97-759d1b6a7ed4}</Project>
       <Name>Regs.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Rio.Objects\Rio.Objects.csproj">
+      <Project>{41c9ed19-5e9c-4e89-8a4b-d73506d9fb6f}</Project>
+      <Name>Rio.Objects</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

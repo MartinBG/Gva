@@ -27,38 +27,17 @@ namespace R_4072
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AviationAdministrationCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AviationAdministrationCode;
-		
-		[XmlIgnore]
-		public string AviationAdministrationCode
-		{ 
-			get { return __AviationAdministrationCode; }
-			set { __AviationAdministrationCode = value; }
-		}
+		public string AviationAdministrationCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AviationAdministrationName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AviationAdministrationName;
-		
-		[XmlIgnore]
-		public string AviationAdministrationName
-		{ 
-			get { return __AviationAdministrationName; }
-			set { __AviationAdministrationName = value; }
-		}
+		public string AviationAdministrationName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AviationAdministrationNameAlt",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AviationAdministrationNameAlt;
-		
-		[XmlIgnore]
-		public string AviationAdministrationNameAlt
-		{ 
-			get { return __AviationAdministrationNameAlt; }
-			set { __AviationAdministrationNameAlt = value; }
-		}
+		public string AviationAdministrationNameAlt { get; set; }
 
 		public AviationAdministration()
 		{

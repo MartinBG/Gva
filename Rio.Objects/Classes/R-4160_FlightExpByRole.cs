@@ -33,42 +33,17 @@ namespace R_4160
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4140.FlightExpRole),ElementName="FlightExpRole",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4140.FlightExpRole __FlightExpRole;
-		
-		[XmlIgnore]
-		public R_4140.FlightExpRole FlightExpRole
-		{
-			get {return __FlightExpRole;}
-			set {__FlightExpRole = value;}
-		}
+		public R_4140.FlightExpRole FlightExpRole { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(HoursForType),ElementName="HoursForType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public HoursForTypeCollection __HoursForTypeCollection;
-		
-		[XmlIgnore]
-		public HoursForTypeCollection HoursForTypeCollection
-		{
-			get
-			{
-				if (__HoursForTypeCollection == null) __HoursForTypeCollection = new HoursForTypeCollection();
-				return __HoursForTypeCollection;
-			}
-			set {__HoursForTypeCollection = value;}
-		}
+		public HoursForTypeCollection HoursForTypeCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightExpHoursByRoleTotal",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightExpHoursByRoleTotal;
-		
-		[XmlIgnore]
-		public string FlightExpHoursByRoleTotal
-		{ 
-			get { return __FlightExpHoursByRoleTotal; }
-			set { __FlightExpHoursByRoleTotal = value; }
-		}
+		public string FlightExpHoursByRoleTotal { get; set; }
 
 		public FlightExpByRole()
 		{
@@ -83,26 +58,12 @@ namespace R_4160
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4158.AircraftType __AircraftType;
-		
-		[XmlIgnore]
-		public R_4158.AircraftType AircraftType
-		{
-			get {return __AircraftType;}
-			set {__AircraftType = value;}
-		}
+		public R_4158.AircraftType AircraftType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightExpHoursByRole",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightExpHoursByRole;
-		
-		[XmlIgnore]
-		public string FlightExpHoursByRole
-		{ 
-			get { return __FlightExpHoursByRole; }
-			set { __FlightExpHoursByRole = value; }
-		}
+		public string FlightExpHoursByRole { get; set; }
 
 		public HoursForType()
 		{

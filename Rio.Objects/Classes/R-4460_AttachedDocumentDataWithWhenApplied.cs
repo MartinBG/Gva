@@ -27,43 +27,17 @@ namespace R_4460
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentAppliedFlag",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DocumentAppliedFlag;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DocumentAppliedFlagSpecified;
-		
-		[XmlIgnore]
-		public bool DocumentAppliedFlag
-		{ 
-			get { return __DocumentAppliedFlag; }
-			set { __DocumentAppliedFlag = value; __DocumentAppliedFlagSpecified = true; }
-		}
+		public bool DocumentAppliedFlag { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlagIdentification",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlagIdentification;
-		
-		[XmlIgnore]
-		public string FlagIdentification
-		{ 
-			get { return __FlagIdentification; }
-			set { __FlagIdentification = value; }
-		}
+		public string FlagIdentification { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4040.AttachedDocumentData),ElementName="AttachedDocumentData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4040.AttachedDocumentData __AttachedDocumentData;
-		
-		[XmlIgnore]
-		public R_4040.AttachedDocumentData AttachedDocumentData
-		{
-			get {return __AttachedDocumentData;}
-			set {__AttachedDocumentData = value;}
-		}
+		public R_4040.AttachedDocumentData AttachedDocumentData { get; set; }
 
 		public AttachedDocumentDataWithWhenApplied()
 		{

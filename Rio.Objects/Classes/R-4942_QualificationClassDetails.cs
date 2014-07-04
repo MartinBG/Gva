@@ -33,42 +33,17 @@ namespace R_4942
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4932.QualificationClass),ElementName="QualificationClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4932.QualificationClass __QualificationClass;
-		
-		[XmlIgnore]
-		public R_4932.QualificationClass QualificationClass
-		{
-			get {return __QualificationClass;}
-			set {__QualificationClass = value;}
-		}
+		public R_4932.QualificationClass QualificationClass { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="QualificationSubclassDegree",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __QualificationSubclassDegree;
-		
-		[XmlIgnore]
-		public string QualificationSubclassDegree
-		{ 
-			get { return __QualificationSubclassDegree; }
-			set { __QualificationSubclassDegree = value; }
-		}
+		public string QualificationSubclassDegree { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4938.QualificationSubclass),ElementName="QualificationSubclass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public QualificationSubclassCollection __QualificationSubclassCollection;
-		
-		[XmlIgnore]
-		public QualificationSubclassCollection QualificationSubclassCollection
-		{
-			get
-			{
-				if (__QualificationSubclassCollection == null) __QualificationSubclassCollection = new QualificationSubclassCollection();
-				return __QualificationSubclassCollection;
-			}
-			set {__QualificationSubclassCollection = value;}
-		}
+		public QualificationSubclassCollection QualificationSubclassCollection { get; set; }
 
 		public QualificationClassDetails()
 		{

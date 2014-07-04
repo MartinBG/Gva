@@ -59,6 +59,15 @@
     <Content Include="js\common\root\views\rootCtrl.js" />
     <Content Include="js\ems\docs\views\docsCase.html" />
     <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
+    <Content Include="js\ems\docs\forms\decision\decision.html" />
+    <Content Include="js\ems\docs\forms\decision\decisionCtrl.js" />
+    <Content Include="js\ems\docs\forms\docView\docIncoming.html" />
+    <Content Include="js\ems\docs\forms\docView\docInternal.html" />
+    <Content Include="js\ems\docs\forms\docView\docInternalOutgoing.html" />
+    <Content Include="js\ems\docs\forms\docView\docOutgoing.html" />
+    <Content Include="js\ems\docs\forms\docView\remark.html" />
+    <Content Include="js\ems\docs\forms\docView\resolution.html" />
+    <Content Include="js\ems\docs\forms\docView\task.html" />
     <Content Include="js\mosv\forms\admission.html" />
     <Content Include="js\mosv\forms\signal.html" />
     <Content Include="js\mosv\forms\suggestion.html" />

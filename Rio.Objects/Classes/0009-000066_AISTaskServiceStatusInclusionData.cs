@@ -27,33 +27,12 @@ namespace R_0009_000066
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000028.AISUserOrAISURI),ElementName="IncludedBy",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000028.AISUserOrAISURI __IncludedBy;
-		
-		[XmlIgnore]
-		public R_0009_000028.AISUserOrAISURI IncludedBy
-		{
-			get {return __IncludedBy;}
-			set {__IncludedBy = value;}
-		}
+		public R_0009_000028.AISUserOrAISURI IncludedBy { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="InclusionTime",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __InclusionTime;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __InclusionTimeSpecified { get { return __InclusionTime.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? InclusionTime
-		{ 
-			get { return __InclusionTime; }
-			set { __InclusionTime = value; }
-		}
-		
-
+		public DateTime? InclusionTime { get; set; }
 
 		public AISTaskServiceStatusInclusionData()
 		{

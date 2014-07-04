@@ -27,26 +27,12 @@ namespace R_4146
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightExpTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightExpTypeCode;
-		
-		[XmlIgnore]
-		public string FlightExpTypeCode
-		{ 
-			get { return __FlightExpTypeCode; }
-			set { __FlightExpTypeCode = value; }
-		}
+		public string FlightExpTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightExpTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightExpTypeName;
-		
-		[XmlIgnore]
-		public string FlightExpTypeName
-		{ 
-			get { return __FlightExpTypeName; }
-			set { __FlightExpTypeName = value; }
-		}
+		public string FlightExpTypeName { get; set; }
 
 		public FlightExpType()
 		{

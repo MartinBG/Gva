@@ -27,57 +27,22 @@ namespace R_5022
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4158.AircraftType __AircraftType;
-		
-		[XmlIgnore]
-		public R_4158.AircraftType AircraftType
-		{
-			get {return __AircraftType;}
-			set {__AircraftType = value;}
-		}
+		public R_4158.AircraftType AircraftType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="NameTechnicalOrganization",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __NameTechnicalOrganization;
-		
-		[XmlIgnore]
-		public string NameTechnicalOrganization
-		{ 
-			get { return __NameTechnicalOrganization; }
-			set { __NameTechnicalOrganization = value; }
-		}
+		public string NameTechnicalOrganization { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="NumberTechnicalContract",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __NumberTechnicalContract;
-		
-		[XmlIgnore]
-		public string NumberTechnicalContract
-		{ 
-			get { return __NumberTechnicalContract; }
-			set { __NumberTechnicalContract = value; }
-		}
+		public string NumberTechnicalContract { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DateTechnicalContract",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DateTechnicalContract;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DateTechnicalContractSpecified { get { return __DateTechnicalContract.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DateTechnicalContract
-		{ 
-			get { return __DateTechnicalContract; }
-			set { __DateTechnicalContract = value; }
-		}
-		
-
+		public DateTime? DateTechnicalContract { get; set; }
 
 		public TechnicalContract()
 		{

@@ -45,30 +45,12 @@ namespace R_0009_000016
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(RecipientGroup),ElementName="RecipientGroup",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public RecipientGroupCollection __RecipientGroupCollection;
-		
-		[XmlIgnore]
-		public RecipientGroupCollection RecipientGroupCollection
-		{
-			get
-			{
-				if (__RecipientGroupCollection == null) __RecipientGroupCollection = new RecipientGroupCollection();
-				return __RecipientGroupCollection;
-			}
-			set {__RecipientGroupCollection = value;}
-		}
+		public RecipientGroupCollection RecipientGroupCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EmailAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EmailAddress;
-		
-		[XmlIgnore]
-		public string EmailAddress
-		{ 
-			get { return __EmailAddress; }
-			set { __EmailAddress = value; }
-		}
+		public string EmailAddress { get; set; }
 
 		public ElectronicServiceApplicant()
 		{
@@ -83,46 +65,17 @@ namespace R_0009_000016
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000012.ElectronicStatementAuthor),ElementName="Author",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ElectronicStatementAuthorCollection __AuthorCollection;
-		
-		[XmlIgnore]
-		public ElectronicStatementAuthorCollection AuthorCollection
-		{
-			get
-			{
-				if (__AuthorCollection == null) __AuthorCollection = new ElectronicStatementAuthorCollection();
-				return __AuthorCollection;
-			}
-			set {__AuthorCollection = value;}
-		}
+		public ElectronicStatementAuthorCollection AuthorCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AuthorQuality",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AuthorQuality;
-		
-		[XmlIgnore]
-		public string AuthorQuality
-		{ 
-			get { return __AuthorQuality; }
-			set { __AuthorQuality = value; }
-		}
+		public string AuthorQuality { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000015.ElectronicServiceRecipient),ElementName="Recipient",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ElectronicServiceRecipientCollection __RecipientCollection;
-		
-		[XmlIgnore]
-		public ElectronicServiceRecipientCollection RecipientCollection
-		{
-			get
-			{
-				if (__RecipientCollection == null) __RecipientCollection = new ElectronicServiceRecipientCollection();
-				return __RecipientCollection;
-			}
-			set {__RecipientCollection = value;}
-		}
+		public ElectronicServiceRecipientCollection RecipientCollection { get; set; }
 
 		public RecipientGroup()
 		{

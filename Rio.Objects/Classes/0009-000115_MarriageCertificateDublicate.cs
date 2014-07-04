@@ -27,196 +27,77 @@ namespace R_0009_000115
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentReceiptOrSigningDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DocumentReceiptOrSigningDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DocumentReceiptOrSigningDateSpecified { get { return __DocumentReceiptOrSigningDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DocumentReceiptOrSigningDate
-		{ 
-			get { return __DocumentReceiptOrSigningDate; }
-			set { __DocumentReceiptOrSigningDate = value; }
-		}
-		
-
+		public DateTime? DocumentReceiptOrSigningDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProviderBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProviderBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData
-		{
-			get {return __ElectronicServiceProviderBasicData;}
-			set {__ElectronicServiceProviderBasicData = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000143.MunicipalityAdministrationLocation),ElementName="MunicipalityAdministrationLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000143.MunicipalityAdministrationLocation __MunicipalityAdministrationLocation;
-		
-		[XmlIgnore]
-		public R_0009_000143.MunicipalityAdministrationLocation MunicipalityAdministrationLocation
-		{
-			get {return __MunicipalityAdministrationLocation;}
-			set {__MunicipalityAdministrationLocation = value;}
-		}
+		public R_0009_000143.MunicipalityAdministrationLocation MunicipalityAdministrationLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MarriageCertificateIssueDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __MarriageCertificateIssueDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __MarriageCertificateIssueDateSpecified { get { return __MarriageCertificateIssueDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? MarriageCertificateIssueDate
-		{ 
-			get { return __MarriageCertificateIssueDate; }
-			set { __MarriageCertificateIssueDate = value; }
-		}
-		
-
+		public DateTime? MarriageCertificateIssueDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000113.SpouseData),ElementName="WifeData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000113.SpouseData __WifeData;
-		
-		[XmlIgnore]
-		public R_0009_000113.SpouseData WifeData
-		{
-			get {return __WifeData;}
-			set {__WifeData = value;}
-		}
+		public R_0009_000113.SpouseData WifeData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000113.SpouseData),ElementName="HusbandData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000113.SpouseData __HusbandData;
-		
-		[XmlIgnore]
-		public R_0009_000113.SpouseData HusbandData
-		{
-			get {return __HusbandData;}
-			set {__HusbandData = value;}
-		}
+		public R_0009_000113.SpouseData HusbandData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000114.MarriageLocation),ElementName="MarriageLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000114.MarriageLocation __MarriageLocation;
-		
-		[XmlIgnore]
-		public R_0009_000114.MarriageLocation MarriageLocation
-		{
-			get {return __MarriageLocation;}
-			set {__MarriageLocation = value;}
-		}
+		public R_0009_000114.MarriageLocation MarriageLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000164.CitizenshipStatusActBasicData),ElementName="ActData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000164.CitizenshipStatusActBasicData __ActData;
-		
-		[XmlIgnore]
-		public R_0009_000164.CitizenshipStatusActBasicData ActData
-		{
-			get {return __ActData;}
-			set {__ActData = value;}
-		}
+		public R_0009_000164.CitizenshipStatusActBasicData ActData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(HusbandNameAfterMarriage),ElementName="HusbandNameAfterMarriage",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public HusbandNameAfterMarriage __HusbandNameAfterMarriage;
-		
-		[XmlIgnore]
-		public HusbandNameAfterMarriage HusbandNameAfterMarriage
-		{
-			get {return __HusbandNameAfterMarriage;}
-			set {__HusbandNameAfterMarriage = value;}
-		}
+		public HusbandNameAfterMarriage HusbandNameAfterMarriage { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(WifeNameAfterMarriage),ElementName="WifeNameAfterMarriage",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public WifeNameAfterMarriage __WifeNameAfterMarriage;
-		
-		[XmlIgnore]
-		public WifeNameAfterMarriage WifeNameAfterMarriage
-		{
-			get {return __WifeNameAfterMarriage;}
-			set {__WifeNameAfterMarriage = value;}
-		}
+		public WifeNameAfterMarriage WifeNameAfterMarriage { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(MarriageCertificateDublicateOfficial),ElementName="Official",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MarriageCertificateDublicateOfficial __Official;
-		
-		[XmlIgnore]
-		public MarriageCertificateDublicateOfficial Official
-		{
-			get {return __Official;}
-			set {__Official = value;}
-		}
+		public MarriageCertificateDublicateOfficial Official { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="XMLDigitalSignature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __XMLDigitalSignature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature
-		{
-			get {return __XMLDigitalSignature;}
-			set {__XMLDigitalSignature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature { get; set; }
 
 		public MarriageCertificateDublicate()
 		{
@@ -231,26 +112,12 @@ namespace R_0009_000115
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonLastName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonLastName;
-		
-		[XmlIgnore]
-		public string PersonLastName
-		{ 
-			get { return __PersonLastName; }
-			set { __PersonLastName = value; }
-		}
+		public string PersonLastName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignCitizenLastNameCyrillic",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignCitizenLastNameCyrillic;
-		
-		[XmlIgnore]
-		public string ForeignCitizenLastNameCyrillic
-		{ 
-			get { return __ForeignCitizenLastNameCyrillic; }
-			set { __ForeignCitizenLastNameCyrillic = value; }
-		}
+		public string ForeignCitizenLastNameCyrillic { get; set; }
 
 		public HusbandNameAfterMarriage()
 		{
@@ -265,26 +132,12 @@ namespace R_0009_000115
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonLastName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonLastName;
-		
-		[XmlIgnore]
-		public string PersonLastName
-		{ 
-			get { return __PersonLastName; }
-			set { __PersonLastName = value; }
-		}
+		public string PersonLastName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignCitizenLastNameCyrillic",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignCitizenLastNameCyrillic;
-		
-		[XmlIgnore]
-		public string ForeignCitizenLastNameCyrillic
-		{ 
-			get { return __ForeignCitizenLastNameCyrillic; }
-			set { __ForeignCitizenLastNameCyrillic = value; }
-		}
+		public string ForeignCitizenLastNameCyrillic { get; set; }
 
 		public WifeNameAfterMarriage()
 		{
@@ -299,26 +152,12 @@ namespace R_0009_000115
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(MarriageCertificateDublicateOfficialNotRegisteredUnderBulgarianLaw),ElementName="NotRegisteredUnderBulgarianLaw",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MarriageCertificateDublicateOfficialNotRegisteredUnderBulgarianLaw __NotRegisteredUnderBulgarianLaw;
-		
-		[XmlIgnore]
-		public MarriageCertificateDublicateOfficialNotRegisteredUnderBulgarianLaw NotRegisteredUnderBulgarianLaw
-		{
-			get {return __NotRegisteredUnderBulgarianLaw;}
-			set {__NotRegisteredUnderBulgarianLaw = value;}
-		}
+		public MarriageCertificateDublicateOfficialNotRegisteredUnderBulgarianLaw NotRegisteredUnderBulgarianLaw { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(MarriageCertificateDublicateOfficialRegisteredUnderBulgarianLaw),ElementName="RegisteredUnderBulgarianLaw",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MarriageCertificateDublicateOfficialRegisteredUnderBulgarianLaw __RegisteredUnderBulgarianLaw;
-		
-		[XmlIgnore]
-		public MarriageCertificateDublicateOfficialRegisteredUnderBulgarianLaw RegisteredUnderBulgarianLaw
-		{
-			get {return __RegisteredUnderBulgarianLaw;}
-			set {__RegisteredUnderBulgarianLaw = value;}
-		}
+		public MarriageCertificateDublicateOfficialRegisteredUnderBulgarianLaw RegisteredUnderBulgarianLaw { get; set; }
 
 		public MarriageCertificateDublicateOfficial()
 		{
@@ -333,33 +172,12 @@ namespace R_0009_000115
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		public MarriageCertificateDublicateOfficialNotRegisteredUnderBulgarianLaw()
 		{
@@ -374,26 +192,12 @@ namespace R_0009_000115
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000006.PersonIdentifier),ElementName="PersonIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000006.PersonIdentifier __PersonIdentifier;
-		
-		[XmlIgnore]
-		public R_0009_000006.PersonIdentifier PersonIdentifier
-		{
-			get {return __PersonIdentifier;}
-			set {__PersonIdentifier = value;}
-		}
+		public R_0009_000006.PersonIdentifier PersonIdentifier { get; set; }
 
 		public MarriageCertificateDublicateOfficialRegisteredUnderBulgarianLaw()
 		{

@@ -27,86 +27,37 @@ namespace R_0009_000172
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidentialComplex",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResidentialComplex;
-		
-		[XmlIgnore]
-		public string ResidentialComplex
-		{ 
-			get { return __ResidentialComplex; }
-			set { __ResidentialComplex = value; }
-		}
+		public string ResidentialComplex { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="StreetBoulevardSquare",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __StreetBoulevardSquare;
-		
-		[XmlIgnore]
-		public string StreetBoulevardSquare
-		{ 
-			get { return __StreetBoulevardSquare; }
-			set { __StreetBoulevardSquare = value; }
-		}
+		public string StreetBoulevardSquare { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="StreetBoulevardSquareNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __StreetBoulevardSquareNumber;
-		
-		[XmlIgnore]
-		public string StreetBoulevardSquareNumber
-		{ 
-			get { return __StreetBoulevardSquareNumber; }
-			set { __StreetBoulevardSquareNumber = value; }
-		}
+		public string StreetBoulevardSquareNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ApartmentBuildingNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ApartmentBuildingNumber;
-		
-		[XmlIgnore]
-		public string ApartmentBuildingNumber
-		{ 
-			get { return __ApartmentBuildingNumber; }
-			set { __ApartmentBuildingNumber = value; }
-		}
+		public string ApartmentBuildingNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Entrance",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Entrance;
-		
-		[XmlIgnore]
-		public string Entrance
-		{ 
-			get { return __Entrance; }
-			set { __Entrance = value; }
-		}
+		public string Entrance { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Floor",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Floor;
-		
-		[XmlIgnore]
-		public string Floor
-		{ 
-			get { return __Floor; }
-			set { __Floor = value; }
-		}
+		public string Floor { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Apartment",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Apartment;
-		
-		[XmlIgnore]
-		public string Apartment
-		{ 
-			get { return __Apartment; }
-			set { __Apartment = value; }
-		}
+		public string Apartment { get; set; }
 
 		public EntityManagementAddress()
 		{

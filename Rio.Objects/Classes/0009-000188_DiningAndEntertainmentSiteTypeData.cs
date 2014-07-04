@@ -33,33 +33,12 @@ namespace R_0009_000188
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="versionDate",DataType="date")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __versionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __versionDateSpecified { get { return __versionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? versionDate
-		{ 
-		get { return __versionDate; }
-		set { __versionDate = value; }
-		}
-		
-
+		public DateTime? versionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DiningAndEntertainmentSiteTypes),ElementName="DiningAndEntertainmentSiteTypes",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DiningAndEntertainmentSiteTypes __DiningAndEntertainmentSiteTypes;
-		
-		[XmlIgnore]
-		public DiningAndEntertainmentSiteTypes DiningAndEntertainmentSiteTypes
-		{
-			get {return __DiningAndEntertainmentSiteTypes;}
-			set {__DiningAndEntertainmentSiteTypes = value;}
-		}
+		public DiningAndEntertainmentSiteTypes DiningAndEntertainmentSiteTypes { get; set; }
 
 		public DiningAndEntertainmentSiteTypeData()
 		{
@@ -75,18 +54,7 @@ namespace R_0009_000188
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DiningAndEntertainmentSiteType),ElementName="DiningAndEntertainmentSiteType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DiningAndEntertainmentSiteTypeCollection __DiningAndEntertainmentSiteTypeCollection;
-		
-		[XmlIgnore]
-		public DiningAndEntertainmentSiteTypeCollection DiningAndEntertainmentSiteTypeCollection
-		{
-			get
-			{
-				if (__DiningAndEntertainmentSiteTypeCollection == null) __DiningAndEntertainmentSiteTypeCollection = new DiningAndEntertainmentSiteTypeCollection();
-				return __DiningAndEntertainmentSiteTypeCollection;
-			}
-			set {__DiningAndEntertainmentSiteTypeCollection = value;}
-		}
+		public DiningAndEntertainmentSiteTypeCollection DiningAndEntertainmentSiteTypeCollection { get; set; }
 
 		public DiningAndEntertainmentSiteTypes()
 		{
@@ -101,26 +69,12 @@ namespace R_0009_000188
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		public DiningAndEntertainmentSiteType()
 		{

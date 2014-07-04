@@ -34,18 +34,7 @@ namespace R_4548
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4546.AircraftSerialNumberTTSN),ElementName="AircraftSerialNumberTTSN",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AircraftSerialNumberTTSNCollection __AircraftSerialNumberTTSNCollection;
-		
-		[XmlIgnore]
-		public AircraftSerialNumberTTSNCollection AircraftSerialNumberTTSNCollection
-		{
-			get
-			{
-				if (__AircraftSerialNumberTTSNCollection == null) __AircraftSerialNumberTTSNCollection = new AircraftSerialNumberTTSNCollection();
-				return __AircraftSerialNumberTTSNCollection;
-			}
-			set {__AircraftSerialNumberTTSNCollection = value;}
-		}
+		public AircraftSerialNumberTTSNCollection AircraftSerialNumberTTSNCollection { get; set; }
 
 		public AircraftsSerialNumbersTTSNCollection()
 		{

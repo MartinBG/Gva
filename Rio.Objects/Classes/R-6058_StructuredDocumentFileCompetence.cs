@@ -27,26 +27,12 @@ namespace R_6058
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000092.ElectronicDocumentXml),ElementName="ElectronicDocumentXml",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000092.ElectronicDocumentXml __ElectronicDocumentXml;
-		
-		[XmlIgnore]
-		public R_0009_000092.ElectronicDocumentXml ElectronicDocumentXml
-		{
-			get {return __ElectronicDocumentXml;}
-			set {__ElectronicDocumentXml = value;}
-		}
+		public R_0009_000092.ElectronicDocumentXml ElectronicDocumentXml { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		public StructuredDocumentFileCompetence()
 		{

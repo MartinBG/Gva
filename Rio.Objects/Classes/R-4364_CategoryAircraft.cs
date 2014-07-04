@@ -27,26 +27,12 @@ namespace R_4364
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CategoryAircraftCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CategoryAircraftCode;
-		
-		[XmlIgnore]
-		public string CategoryAircraftCode
-		{ 
-			get { return __CategoryAircraftCode; }
-			set { __CategoryAircraftCode = value; }
-		}
+		public string CategoryAircraftCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CategoryAircraftName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CategoryAircraftName;
-		
-		[XmlIgnore]
-		public string CategoryAircraftName
-		{ 
-			get { return __CategoryAircraftName; }
-			set { __CategoryAircraftName = value; }
-		}
+		public string CategoryAircraftName { get; set; }
 
 		public CategoryAircraft()
 		{

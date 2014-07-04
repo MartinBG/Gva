@@ -27,45 +27,17 @@ namespace R_0009_000001
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RegisterIndex",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RegisterIndex;
-		
-		[XmlIgnore]
-		public string RegisterIndex
-		{ 
-			get { return __RegisterIndex; }
-			set { __RegisterIndex = value; }
-		}
+		public string RegisterIndex { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SequenceNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SequenceNumber;
-		
-		[XmlIgnore]
-		public string SequenceNumber
-		{ 
-			get { return __SequenceNumber; }
-			set { __SequenceNumber = value; }
-		}
+		public string SequenceNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ReceiptOrSigningDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ReceiptOrSigningDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ReceiptOrSigningDateSpecified { get { return __ReceiptOrSigningDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ReceiptOrSigningDate
-		{ 
-			get { return __ReceiptOrSigningDate; }
-			set { __ReceiptOrSigningDate = value; }
-		}
-		
-
+		public DateTime? ReceiptOrSigningDate { get; set; }
 
 		public DocumentURI()
 		{

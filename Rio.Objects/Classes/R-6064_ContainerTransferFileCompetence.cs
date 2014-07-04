@@ -27,62 +27,27 @@ namespace R_6064
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="SenderProvider",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __SenderProvider;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData SenderProvider
-		{
-			get {return __SenderProvider;}
-			set {__SenderProvider = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData SenderProvider { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ReceiverProvider",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ReceiverProvider;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ReceiverProvider
-		{
-			get {return __ReceiverProvider;}
-			set {__ReceiverProvider = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ReceiverProvider { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_6062.FileTransferredJurisdiction),ElementName="FileTransferredJurisdiction",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_6062.FileTransferredJurisdiction __FileTransferredJurisdiction;
-		
-		[XmlIgnore]
-		public R_6062.FileTransferredJurisdiction FileTransferredJurisdiction
-		{
-			get {return __FileTransferredJurisdiction;}
-			set {__FileTransferredJurisdiction = value;}
-		}
+		public R_6062.FileTransferredJurisdiction FileTransferredJurisdiction { get; set; }
 
 		public ContainerTransferFileCompetence()
 		{

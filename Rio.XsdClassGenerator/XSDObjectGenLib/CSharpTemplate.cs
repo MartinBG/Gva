@@ -24,52 +24,19 @@
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName=""{2}""{3}{4}{6})]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? {7}{0};
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool {7}{0}Specified {{ get {{ return {7}{0}.HasValue; }} }}
-		
-		[XmlIgnore]
-		public DateTime? {5}
-		{{ 
-		get {{ return {7}{0}; }}
-		set {{ {7}{0} = value; }}
-		}}
-		
-";
+		public DateTime? {0} {{ get; set; }}";
 
-        private static string sAttributeObjectTemplate = 
+        private static string sAttributeObjectTemplate =
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName=""{2}""{3}{4}{6})]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public {1} {7}{0};
-		
-		[XmlIgnore]
-		public {1} {5}
-		{{ 
-			get {{ return {7}{0}; }}
-			set {{ {7}{0} = value; }}
-		}}";
+		public {1} {0} {{ get; set; }}";
 
-        private static string sAttributeValueTypeTemplate = 
+        private static string sAttributeValueTypeTemplate =
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName=""{2}""{3}{4}{6})]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public {1} {7}{0};
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool {7}{0}Specified;
-		
-		[XmlIgnore]
-		public {1} {5}
-		{{ 
-			get {{ return {7}{0}; }}
-			set {{ {7}{0} = value; {7}{0}Specified = true; }}
-		}}";
+		public {1} {0} {{ get; set; }}";
 
         private static string sClassEnumerabilityTemplate = "";
 
@@ -101,145 +68,55 @@
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName=""{2}""{3}{4}{6})]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? {7}{0};
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool {7}{0}Specified {{ get {{ return {7}{0}.HasValue; }} }}
-		
-		[XmlIgnore]
-		public DateTime? {5}
-		{{ 
-			get {{ return {7}{0}; }}
-			set {{ {7}{0} = value; }}
-		}}
-		
-";
+		public DateTime? {0} {{ get; set; }}";
+
         private static string sElementObjectTemplate = 
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName=""{2}"",IsNullable={8}{3}{4}{6})]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public {1} {7}{0};
-		
-		[XmlIgnore]
-		public {1} {5}
-		{{ 
-			get {{ return {7}{0}; }}
-			set {{ {7}{0} = value; }}
-		}}";
+		public {1} {0} {{ get; set; }}";
 
-        private static string sElementValueTypeTemplate = 
+        private static string sElementValueTypeTemplate =
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName=""{2}"",IsNullable=false{3}{4}{6})]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public {1} {7}{0};
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool {7}{0}Specified;
-		
-		[XmlIgnore]
-		public {1} {5}
-		{{ 
-			get {{ return {7}{0}; }}
-			set {{ {7}{0} = value; {7}{0}Specified = true; }}
-		}}";
+		public {1} {0} {{ get; set; }}";
 
         private static string sFieldAbstractClassTemplate = 
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof({1}),ElementName=""{2}"",IsNullable={7}{3}{5})]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public {1} {6}{0};
-		
-		[XmlIgnore]
-		public {1} {4}
-		{{
-			get {{ return {6}{0}; }}
-			set {{{6}{0} = value;}}
-		}}";
+		public {1} {0} {{ get; set; }}";
 
         private static string sFieldClassTemplate = 
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof({1}),ElementName=""{2}"",IsNullable={7}{3}{5})]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public {1} {6}{0};
-		
-		[XmlIgnore]
-		public {1} {4}
-		{{
-			get {{return {6}{0};}}
-			set {{{6}{0} = value;}}
-		}}";
+		public {1} {0} {{ get; set; }}";
 
         private static string sFieldCollectionTemplate = 
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof({10}),ElementName=""{2}"",IsNullable={9}{3}{5}{6})]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public {0}{8} {7}{4}{8};
-		
-		[XmlIgnore]
-		public {0}{8} {4}{8}
-		{{
-			get
-			{{
-				if ({7}{4}{8} == null) {7}{4}{8} = new {0}{8}();
-				return {7}{4}{8};
-			}}
-			set {{{7}{4}{8} = value;}}
-		}}";
+		public {0}{8} {4}{8} {{ get; set; }}";
 
         private static string sMixedDateTimeTemplate =
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType=""{1}"")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? {2}{3};
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool {2}{3}Specified {{ get {{ return {2}{3}.HasValue; }} }}
-		
-		[XmlIgnore]
-		public DateTime? {3}
-		{{ 
-			get {{ return {2}{3}; }}
-			set {{ {2}{3} = value; }}
-		}}
-		
-";
+		public DateTime? {3} {{ get; set; }}";
 
         private static string sMixedObjectTemplate = 
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType=""{1}"")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public {0} {2}{3};
-		
-		[XmlIgnore]
-		public {0} {3}
-		{{ 
-			get {{ return {2}{3}; }}
-			set {{ {2}{3} = value; }}
-		}}";
+		public {0} {3} {{ get; set; }}";
 
-        private static string sMixedValueTypeTemplate = 
+        private static string sMixedValueTypeTemplate =
 @"		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType=""{1}"")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public {0} {2}{3};
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool {2}{3}Specified;
-		
-		[XmlIgnore]
-		public {0} {3}
-		{{ 
-			get {{ return {2}{3}; }}
-			set {{ {2}{3} = value; {2}{3}Specified = true; }}
-		}}";
+		public {0} {3} {{ get; set; }}";
 
         public CSharpTemplate()
         {

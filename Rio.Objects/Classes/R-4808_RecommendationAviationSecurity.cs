@@ -27,26 +27,12 @@ namespace R_4808
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RecommendingNames",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RecommendingNames;
-		
-		[XmlIgnore]
-		public string RecommendingNames
-		{ 
-			get { return __RecommendingNames; }
-			set { __RecommendingNames = value; }
-		}
+		public string RecommendingNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RecommendingPosition",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RecommendingPosition;
-		
-		[XmlIgnore]
-		public string RecommendingPosition
-		{ 
-			get { return __RecommendingPosition; }
-			set { __RecommendingPosition = value; }
-		}
+		public string RecommendingPosition { get; set; }
 
 		public RecommendationAviationSecurity()
 		{

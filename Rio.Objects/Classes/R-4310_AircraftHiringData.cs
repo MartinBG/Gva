@@ -27,81 +27,32 @@ namespace R_4310
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftOwnerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftOwnerName;
-		
-		[XmlIgnore]
-		public string AircraftOwnerName
-		{ 
-			get { return __AircraftOwnerName; }
-			set { __AircraftOwnerName = value; }
-		}
+		public string AircraftOwnerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftHiringTransferContractNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftHiringTransferContractNumber;
-		
-		[XmlIgnore]
-		public string AircraftHiringTransferContractNumber
-		{ 
-			get { return __AircraftHiringTransferContractNumber; }
-			set { __AircraftHiringTransferContractNumber = value; }
-		}
+		public string AircraftHiringTransferContractNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftHiringTransferContractDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __AircraftHiringTransferContractDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __AircraftHiringTransferContractDateSpecified { get { return __AircraftHiringTransferContractDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? AircraftHiringTransferContractDate
-		{ 
-			get { return __AircraftHiringTransferContractDate; }
-			set { __AircraftHiringTransferContractDate = value; }
-		}
-		
-
+		public DateTime? AircraftHiringTransferContractDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftHiringTransferContractConclusionPlace",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftHiringTransferContractConclusionPlace;
-		
-		[XmlIgnore]
-		public string AircraftHiringTransferContractConclusionPlace
-		{ 
-			get { return __AircraftHiringTransferContractConclusionPlace; }
-			set { __AircraftHiringTransferContractConclusionPlace = value; }
-		}
+		public string AircraftHiringTransferContractConclusionPlace { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4286.CorrespondenceAddress),ElementName="CorrespondenceAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4286.CorrespondenceAddress __CorrespondenceAddress;
-		
-		[XmlIgnore]
-		public R_4286.CorrespondenceAddress CorrespondenceAddress
-		{
-			get {return __CorrespondenceAddress;}
-			set {__CorrespondenceAddress = value;}
-		}
+		public R_4286.CorrespondenceAddress CorrespondenceAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4288.CorrespondenceAddressAbroad),ElementName="CorrespondenceAddressAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4288.CorrespondenceAddressAbroad __CorrespondenceAddressAbroad;
-		
-		[XmlIgnore]
-		public R_4288.CorrespondenceAddressAbroad CorrespondenceAddressAbroad
-		{
-			get {return __CorrespondenceAddressAbroad;}
-			set {__CorrespondenceAddressAbroad = value;}
-		}
+		public R_4288.CorrespondenceAddressAbroad CorrespondenceAddressAbroad { get; set; }
 
 		public AircraftHiringData()
 		{

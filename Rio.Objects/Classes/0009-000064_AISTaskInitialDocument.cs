@@ -27,14 +27,7 @@ namespace R_0009_000064
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AISTaskInitialDocumentAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISTaskInitialDocumentAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public AISTaskInitialDocumentAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public AISTaskInitialDocumentAdditionalData AdditionalData { get; set; }
 
 		public AISTaskInitialDocument() : base()
 		{

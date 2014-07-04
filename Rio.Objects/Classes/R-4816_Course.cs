@@ -27,26 +27,12 @@ namespace R_4816
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CourseCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CourseCode;
-		
-		[XmlIgnore]
-		public string CourseCode
-		{ 
-			get { return __CourseCode; }
-			set { __CourseCode = value; }
-		}
+		public string CourseCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CourseName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CourseName;
-		
-		[XmlIgnore]
-		public string CourseName
-		{ 
-			get { return __CourseName; }
-			set { __CourseName = value; }
-		}
+		public string CourseName { get; set; }
 
 		public Course()
 		{

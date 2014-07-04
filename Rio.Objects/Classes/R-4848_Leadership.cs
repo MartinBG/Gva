@@ -27,38 +27,17 @@ namespace R_4848
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ManagerNames",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ManagerNames;
-		
-		[XmlIgnore]
-		public string ManagerNames
-		{ 
-			get { return __ManagerNames; }
-			set { __ManagerNames = value; }
-		}
+		public string ManagerNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SafetyManagerNames",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SafetyManagerNames;
-		
-		[XmlIgnore]
-		public string SafetyManagerNames
-		{ 
-			get { return __SafetyManagerNames; }
-			set { __SafetyManagerNames = value; }
-		}
+		public string SafetyManagerNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LeadershipContactNames",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __LeadershipContactNames;
-		
-		[XmlIgnore]
-		public string LeadershipContactNames
-		{ 
-			get { return __LeadershipContactNames; }
-			set { __LeadershipContactNames = value; }
-		}
+		public string LeadershipContactNames { get; set; }
 
 		public Leadership()
 		{

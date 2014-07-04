@@ -15,8 +15,9 @@ namespace Rio.XsdClassGenerator
     {
         static void Main(string[] args)
         {
-            //string inputFolder = "C:/Users/iliyaz.iliyaz/Desktop/Portal/Common/RioObjects/Schemas/";
-            //string outputFolder = "C:/Users/iliyaz.iliyaz/Desktop/Portal/Common/RioObjects/Classes/";
+            ////string inputFolder = @"G:\Projects\Portal\Common\RioObjects\Schemas";
+            //string inputFolder = @"C:\Users\miroslav.georgiev\Desktop\Schemas\Schemas";
+            //string outputFolder = @"C:\Users\miroslav.georgiev\Desktop\TestClasses";
             //GenerateClasses(inputFolder, outputFolder);
 
             GenerateClasses(args[0], args[1]);

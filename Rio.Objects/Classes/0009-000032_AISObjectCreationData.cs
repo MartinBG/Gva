@@ -27,33 +27,12 @@ namespace R_0009_000032
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000028.AISUserOrAISURI),ElementName="CreatedBy",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000028.AISUserOrAISURI __CreatedBy;
-		
-		[XmlIgnore]
-		public R_0009_000028.AISUserOrAISURI CreatedBy
-		{
-			get {return __CreatedBy;}
-			set {__CreatedBy = value;}
-		}
+		public R_0009_000028.AISUserOrAISURI CreatedBy { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CreationTime",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __CreationTime;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __CreationTimeSpecified { get { return __CreationTime.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? CreationTime
-		{ 
-			get { return __CreationTime; }
-			set { __CreationTime = value; }
-		}
-		
-
+		public DateTime? CreationTime { get; set; }
 
 		public AISObjectCreationData()
 		{

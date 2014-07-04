@@ -27,165 +27,62 @@ namespace R_4762
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FacilityName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FacilityName;
-		
-		[XmlIgnore]
-		public string FacilityName
-		{ 
-			get { return __FacilityName; }
-			set { __FacilityName = value; }
-		}
+		public string FacilityName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4746.FacilityKind),ElementName="FacilityKind",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4746.FacilityKind __FacilityKind;
-		
-		[XmlIgnore]
-		public R_4746.FacilityKind FacilityKind
-		{
-			get {return __FacilityKind;}
-			set {__FacilityKind = value;}
-		}
+		public R_4746.FacilityKind FacilityKind { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ApplicantNotAircraftOwner",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ApplicantNotAircraftOwner;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ApplicantNotAircraftOwnerSpecified;
-		
-		[XmlIgnore]
-		public bool ApplicantNotAircraftOwner
-		{ 
-			get { return __ApplicantNotAircraftOwner; }
-			set { __ApplicantNotAircraftOwner = value; __ApplicantNotAircraftOwnerSpecified = true; }
-		}
+		public bool ApplicantNotAircraftOwner { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4310.AircraftHiringData),ElementName="AircraftHiringData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4310.AircraftHiringData __AircraftHiringData;
-		
-		[XmlIgnore]
-		public R_4310.AircraftHiringData AircraftHiringData
-		{
-			get {return __AircraftHiringData;}
-			set {__AircraftHiringData = value;}
-		}
+		public R_4310.AircraftHiringData AircraftHiringData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4692.UnnumberedAttachedDocumentDatasCollection),ElementName="UnnumberedAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4692.UnnumberedAttachedDocumentDatasCollection __UnnumberedAttachedDocumentDatasCollection;
-		
-		[XmlIgnore]
-		public R_4692.UnnumberedAttachedDocumentDatasCollection UnnumberedAttachedDocumentDatasCollection
-		{
-			get {return __UnnumberedAttachedDocumentDatasCollection;}
-			set {__UnnumberedAttachedDocumentDatasCollection = value;}
-		}
+		public R_4692.UnnumberedAttachedDocumentDatasCollection UnnumberedAttachedDocumentDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4752.FacilityLocation),ElementName="FacilityLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4752.FacilityLocation __FacilityLocation;
-		
-		[XmlIgnore]
-		public R_4752.FacilityLocation FacilityLocation
-		{
-			get {return __FacilityLocation;}
-			set {__FacilityLocation = value;}
-		}
+		public R_4752.FacilityLocation FacilityLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperatingMode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OperatingMode;
-		
-		[XmlIgnore]
-		public string OperatingMode
-		{ 
-			get { return __OperatingMode; }
-			set { __OperatingMode = value; }
-		}
+		public string OperatingMode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FacilityManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FacilityManufacturerName;
-		
-		[XmlIgnore]
-		public string FacilityManufacturerName
-		{ 
-			get { return __FacilityManufacturerName; }
-			set { __FacilityManufacturerName = value; }
-		}
+		public string FacilityManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryGRAOCode;
-		
-		[XmlIgnore]
-		public string CountryGRAOCode
-		{ 
-			get { return __CountryGRAOCode; }
-			set { __CountryGRAOCode = value; }
-		}
+		public string CountryGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryName;
-		
-		[XmlIgnore]
-		public string CountryName
-		{ 
-			get { return __CountryName; }
-			set { __CountryName = value; }
-		}
+		public string CountryName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FacilityManufactureDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __FacilityManufactureDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FacilityManufactureDateSpecified { get { return __FacilityManufactureDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? FacilityManufactureDate
-		{ 
-			get { return __FacilityManufactureDate; }
-			set { __FacilityManufactureDate = value; }
-		}
-		
-
+		public DateTime? FacilityManufactureDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FacilityPlaceAcceptanceDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __FacilityPlaceAcceptanceDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FacilityPlaceAcceptanceDateSpecified { get { return __FacilityPlaceAcceptanceDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? FacilityPlaceAcceptanceDate
-		{ 
-			get { return __FacilityPlaceAcceptanceDate; }
-			set { __FacilityPlaceAcceptanceDate = value; }
-		}
-		
-
+		public DateTime? FacilityPlaceAcceptanceDate { get; set; }
 
 		public FacilityData()
 		{

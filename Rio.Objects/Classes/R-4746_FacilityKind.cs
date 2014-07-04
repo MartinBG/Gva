@@ -27,26 +27,12 @@ namespace R_4746
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FacilityKindCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FacilityKindCode;
-		
-		[XmlIgnore]
-		public string FacilityKindCode
-		{ 
-			get { return __FacilityKindCode; }
-			set { __FacilityKindCode = value; }
-		}
+		public string FacilityKindCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FacilityKindName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FacilityKindName;
-		
-		[XmlIgnore]
-		public string FacilityKindName
-		{ 
-			get { return __FacilityKindName; }
-			set { __FacilityKindName = value; }
-		}
+		public string FacilityKindName { get; set; }
 
 		public FacilityKind()
 		{

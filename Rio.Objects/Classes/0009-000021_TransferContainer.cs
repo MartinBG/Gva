@@ -33,62 +33,27 @@ namespace R_0009_000021
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ShortTransferDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ShortTransferDescription;
-		
-		[XmlIgnore]
-		public string ShortTransferDescription
-		{ 
-			get { return __ShortTransferDescription; }
-			set { __ShortTransferDescription = value; }
-		}
+		public string ShortTransferDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ExpandedTransferDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ExpandedTransferDescription;
-		
-		[XmlIgnore]
-		public string ExpandedTransferDescription
-		{ 
-			get { return __ExpandedTransferDescription; }
-			set { __ExpandedTransferDescription = value; }
-		}
+		public string ExpandedTransferDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(TransferredDocuments),ElementName="TransferredDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TransferredDocuments __TransferredDocuments;
-		
-		[XmlIgnore]
-		public TransferredDocuments TransferredDocuments
-		{
-			get {return __TransferredDocuments;}
-			set {__TransferredDocuments = value;}
-		}
+		public TransferredDocuments TransferredDocuments { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="Signature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __Signature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature Signature
-		{
-			get {return __Signature;}
-			set {__Signature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature Signature { get; set; }
 
 		public TransferContainer()
 		{
@@ -104,18 +69,7 @@ namespace R_0009_000021
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000020.TransferredDocument),ElementName="Document",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TransferredDocumentCollection __DocumentCollection;
-		
-		[XmlIgnore]
-		public TransferredDocumentCollection DocumentCollection
-		{
-			get
-			{
-				if (__DocumentCollection == null) __DocumentCollection = new TransferredDocumentCollection();
-				return __DocumentCollection;
-			}
-			set {__DocumentCollection = value;}
-		}
+		public TransferredDocumentCollection DocumentCollection { get; set; }
 
 		public TransferredDocuments()
 		{

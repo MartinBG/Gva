@@ -34,18 +34,7 @@ namespace AopAttachedDocuments
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AopAttachedDocument.AopAttachedDocumentData),ElementName="AopAttachedDocumentData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AopAttachedDocumentDataCollection __AopAttachedDocumentDataCollection;
-		
-		[XmlIgnore]
-		public AopAttachedDocumentDataCollection AopAttachedDocumentDataCollection
-		{
-			get
-			{
-				if (__AopAttachedDocumentDataCollection == null) __AopAttachedDocumentDataCollection = new AopAttachedDocumentDataCollection();
-				return __AopAttachedDocumentDataCollection;
-			}
-			set {__AopAttachedDocumentDataCollection = value;}
-		}
+		public AopAttachedDocumentDataCollection AopAttachedDocumentDataCollection { get; set; }
 
 		public AopAttachedDocumentDatasCollection()
 		{

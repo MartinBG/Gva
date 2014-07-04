@@ -34,18 +34,7 @@ namespace R_0009_000061
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ClassificationSchemeAccessGrantDataAccessGrant),ElementName="AccessGrant",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ClassificationSchemeAccessGrantDataAccessGrantCollection __AccessGrantCollection;
-		
-		[XmlIgnore]
-		public ClassificationSchemeAccessGrantDataAccessGrantCollection AccessGrantCollection
-		{
-			get
-			{
-				if (__AccessGrantCollection == null) __AccessGrantCollection = new ClassificationSchemeAccessGrantDataAccessGrantCollection();
-				return __AccessGrantCollection;
-			}
-			set {__AccessGrantCollection = value;}
-		}
+		public ClassificationSchemeAccessGrantDataAccessGrantCollection AccessGrantCollection { get; set; }
 
 		public ClassificationSchemeAccessGrantData()
 		{
@@ -60,62 +49,27 @@ namespace R_0009_000061
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SchemeID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SchemeID;
-		
-		[XmlIgnore]
-		public string SchemeID
-		{ 
-			get { return __SchemeID; }
-			set { __SchemeID = value; }
-		}
+		public string SchemeID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SectionID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SectionID;
-		
-		[XmlIgnore]
-		public string SectionID
-		{ 
-			get { return __SectionID; }
-			set { __SectionID = value; }
-		}
+		public string SectionID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000030.PositionInAdministrationOrAISUser),ElementName="UserGrantee",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000030.PositionInAdministrationOrAISUser __UserGrantee;
-		
-		[XmlIgnore]
-		public R_0009_000030.PositionInAdministrationOrAISUser UserGrantee
-		{
-			get {return __UserGrantee;}
-			set {__UserGrantee = value;}
-		}
+		public R_0009_000030.PositionInAdministrationOrAISUser UserGrantee { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ClassificationSchemeAccessGrantDataAccessGrantSpecificParameters),ElementName="SpecificParameters",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ClassificationSchemeAccessGrantDataAccessGrantSpecificParameters __SpecificParameters;
-		
-		[XmlIgnore]
-		public ClassificationSchemeAccessGrantDataAccessGrantSpecificParameters SpecificParameters
-		{
-			get {return __SpecificParameters;}
-			set {__SpecificParameters = value;}
-		}
+		public ClassificationSchemeAccessGrantDataAccessGrantSpecificParameters SpecificParameters { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000032.AISObjectCreationData),ElementName="ObjectCreationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000032.AISObjectCreationData __ObjectCreationData;
-		
-		[XmlIgnore]
-		public R_0009_000032.AISObjectCreationData ObjectCreationData
-		{
-			get {return __ObjectCreationData;}
-			set {__ObjectCreationData = value;}
-		}
+		public R_0009_000032.AISObjectCreationData ObjectCreationData { get; set; }
 
 		public ClassificationSchemeAccessGrantDataAccessGrant()
 		{

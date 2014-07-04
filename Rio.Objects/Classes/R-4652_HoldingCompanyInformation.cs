@@ -27,31 +27,12 @@ namespace R_4652
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="HoldingCompanyFlag",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __HoldingCompanyFlag;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __HoldingCompanyFlagSpecified;
-		
-		[XmlIgnore]
-		public bool HoldingCompanyFlag
-		{ 
-			get { return __HoldingCompanyFlag; }
-			set { __HoldingCompanyFlag = value; __HoldingCompanyFlagSpecified = true; }
-		}
+		public bool HoldingCompanyFlag { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4648.TradingCompanyInformation),ElementName="TradingCompanyInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4648.TradingCompanyInformation __TradingCompanyInformation;
-		
-		[XmlIgnore]
-		public R_4648.TradingCompanyInformation TradingCompanyInformation
-		{
-			get {return __TradingCompanyInformation;}
-			set {__TradingCompanyInformation = value;}
-		}
+		public R_4648.TradingCompanyInformation TradingCompanyInformation { get; set; }
 
 		public HoldingCompanyInformation()
 		{

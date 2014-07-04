@@ -33,38 +33,17 @@ namespace R_0009_000050
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000030.PositionInAdministrationOrAISUser),ElementName="PositionInAdministrationOrAISUser",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000030.PositionInAdministrationOrAISUser __PositionInAdministrationOrAISUser;
-		
-		[XmlIgnore]
-		public R_0009_000030.PositionInAdministrationOrAISUser PositionInAdministrationOrAISUser
-		{
-			get {return __PositionInAdministrationOrAISUser;}
-			set {__PositionInAdministrationOrAISUser = value;}
-		}
+		public R_0009_000030.PositionInAdministrationOrAISUser PositionInAdministrationOrAISUser { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Description",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Description;
-		
-		[XmlIgnore]
-		public string Description
-		{ 
-			get { return __Description; }
-			set { __Description = value; }
-		}
+		public string Description { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(EmpoweringDocuments),ElementName="EmpoweringDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public EmpoweringDocuments __EmpoweringDocuments;
-		
-		[XmlIgnore]
-		public EmpoweringDocuments EmpoweringDocuments
-		{
-			get {return __EmpoweringDocuments;}
-			set {__EmpoweringDocuments = value;}
-		}
+		public EmpoweringDocuments EmpoweringDocuments { get; set; }
 
 		public EmpoweredPerson()
 		{
@@ -80,18 +59,7 @@ namespace R_0009_000050
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DocumentURICollection __DocumentURICollection;
-		
-		[XmlIgnore]
-		public DocumentURICollection DocumentURICollection
-		{
-			get
-			{
-				if (__DocumentURICollection == null) __DocumentURICollection = new DocumentURICollection();
-				return __DocumentURICollection;
-			}
-			set {__DocumentURICollection = value;}
-		}
+		public DocumentURICollection DocumentURICollection { get; set; }
 
 		public EmpoweringDocuments()
 		{

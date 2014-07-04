@@ -34,18 +34,7 @@ namespace R_5024
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5022.TechnicalContract),ElementName="TechnicalContract",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TechnicalContractCollection __TechnicalContractCollection;
-		
-		[XmlIgnore]
-		public TechnicalContractCollection TechnicalContractCollection
-		{
-			get
-			{
-				if (__TechnicalContractCollection == null) __TechnicalContractCollection = new TechnicalContractCollection();
-				return __TechnicalContractCollection;
-			}
-			set {__TechnicalContractCollection = value;}
-		}
+		public TechnicalContractCollection TechnicalContractCollection { get; set; }
 
 		public TechnicalContracts()
 		{

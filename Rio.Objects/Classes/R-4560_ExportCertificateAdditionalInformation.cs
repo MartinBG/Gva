@@ -27,69 +27,27 @@ namespace R_4560
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryGRAOCode;
-		
-		[XmlIgnore]
-		public string CountryGRAOCode
-		{ 
-			get { return __CountryGRAOCode; }
-			set { __CountryGRAOCode = value; }
-		}
+		public string CountryGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryName;
-		
-		[XmlIgnore]
-		public string CountryName
-		{ 
-			get { return __CountryName; }
-			set { __CountryName = value; }
-		}
+		public string CountryName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ExpectedRightsTransferDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ExpectedRightsTransferDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ExpectedRightsTransferDateSpecified { get { return __ExpectedRightsTransferDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ExpectedRightsTransferDate
-		{ 
-			get { return __ExpectedRightsTransferDate; }
-			set { __ExpectedRightsTransferDate = value; }
-		}
-		
-
+		public DateTime? ExpectedRightsTransferDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ImportCountryAdditionalRequirements",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ImportCountryAdditionalRequirements;
-		
-		[XmlIgnore]
-		public string ImportCountryAdditionalRequirements
-		{ 
-			get { return __ImportCountryAdditionalRequirements; }
-			set { __ImportCountryAdditionalRequirements = value; }
-		}
+		public string ImportCountryAdditionalRequirements { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4040.AttachedDocumentData),ElementName="AttachedDocumentData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4040.AttachedDocumentData __AttachedDocumentData;
-		
-		[XmlIgnore]
-		public R_4040.AttachedDocumentData AttachedDocumentData
-		{
-			get {return __AttachedDocumentData;}
-			set {__AttachedDocumentData = value;}
-		}
+		public R_4040.AttachedDocumentData AttachedDocumentData { get; set; }
 
 		public ExportCertificateAdditionalInformation()
 		{

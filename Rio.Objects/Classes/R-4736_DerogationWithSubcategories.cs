@@ -33,30 +33,12 @@ namespace R_4736
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4734.Derogation),ElementName="Derogation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4734.Derogation __Derogation;
-		
-		[XmlIgnore]
-		public R_4734.Derogation Derogation
-		{
-			get {return __Derogation;}
-			set {__Derogation = value;}
-		}
+		public R_4734.Derogation Derogation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4734.Derogation),ElementName="DerogationCategories",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DerogationCollection __DerogationCategoriesCollection;
-		
-		[XmlIgnore]
-		public DerogationCollection DerogationCategoriesCollection
-		{
-			get
-			{
-				if (__DerogationCategoriesCollection == null) __DerogationCategoriesCollection = new DerogationCollection();
-				return __DerogationCategoriesCollection;
-			}
-			set {__DerogationCategoriesCollection = value;}
-		}
+		public DerogationCollection DerogationCategoriesCollection { get; set; }
 
 		public DerogationWithSubcategories()
 		{

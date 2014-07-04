@@ -27,26 +27,12 @@ namespace R_4604
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ServiceCategoryCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ServiceCategoryCode;
-		
-		[XmlIgnore]
-		public string ServiceCategoryCode
-		{ 
-			get { return __ServiceCategoryCode; }
-			set { __ServiceCategoryCode = value; }
-		}
+		public string ServiceCategoryCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ServiceCategoryName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ServiceCategoryName;
-		
-		[XmlIgnore]
-		public string ServiceCategoryName
-		{ 
-			get { return __ServiceCategoryName; }
-			set { __ServiceCategoryName = value; }
-		}
+		public string ServiceCategoryName { get; set; }
 
 		public ServiceCategory()
 		{

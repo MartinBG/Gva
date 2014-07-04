@@ -33,33 +33,12 @@ namespace R_0009_000161
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="versionDate",DataType="date")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __versionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __versionDateSpecified { get { return __versionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? versionDate
-		{ 
-		get { return __versionDate; }
-		set { __versionDate = value; }
-		}
-		
-
+		public DateTime? versionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ResidencePurposes),ElementName="ResidencePurposes",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ResidencePurposes __ResidencePurposes;
-		
-		[XmlIgnore]
-		public ResidencePurposes ResidencePurposes
-		{
-			get {return __ResidencePurposes;}
-			set {__ResidencePurposes = value;}
-		}
+		public ResidencePurposes ResidencePurposes { get; set; }
 
 		public ResidencePurposeData()
 		{
@@ -75,18 +54,7 @@ namespace R_0009_000161
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ResidencePurpose),ElementName="ResidencePurpose",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ResidencePurposeCollection __ResidencePurposeCollection;
-		
-		[XmlIgnore]
-		public ResidencePurposeCollection ResidencePurposeCollection
-		{
-			get
-			{
-				if (__ResidencePurposeCollection == null) __ResidencePurposeCollection = new ResidencePurposeCollection();
-				return __ResidencePurposeCollection;
-			}
-			set {__ResidencePurposeCollection = value;}
-		}
+		public ResidencePurposeCollection ResidencePurposeCollection { get; set; }
 
 		public ResidencePurposes()
 		{
@@ -101,26 +69,12 @@ namespace R_0009_000161
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		public ResidencePurpose()
 		{

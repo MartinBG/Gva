@@ -34,18 +34,7 @@ namespace R_4978
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4976.CertificationScope),ElementName="CertificationScope",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CertificationScopeCollection __CertificationScopeCollection;
-		
-		[XmlIgnore]
-		public CertificationScopeCollection CertificationScopeCollection
-		{
-			get
-			{
-				if (__CertificationScopeCollection == null) __CertificationScopeCollection = new CertificationScopeCollection();
-				return __CertificationScopeCollection;
-			}
-			set {__CertificationScopeCollection = value;}
-		}
+		public CertificationScopeCollection CertificationScopeCollection { get; set; }
 
 		public CertificationScopes()
 		{

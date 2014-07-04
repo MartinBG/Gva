@@ -33,117 +33,47 @@ namespace R_0009_000017
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="MessageURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __MessageURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI MessageURI
-		{
-			get {return __MessageURI;}
-			set {__MessageURI = value;}
-		}
+		public R_0009_000001.DocumentURI MessageURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProvider",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProvider;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProvider
-		{
-			get {return __ElectronicServiceProvider;}
-			set {__ElectronicServiceProvider = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProvider { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TransportType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TransportType;
-		
-		[XmlIgnore]
-		public string TransportType
-		{ 
-			get { return __TransportType; }
-			set { __TransportType = value; }
-		}
+		public string TransportType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Discrepancies),ElementName="Discrepancies",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Discrepancies __Discrepancies;
-		
-		[XmlIgnore]
-		public Discrepancies Discrepancies
-		{
-			get {return __Discrepancies;}
-			set {__Discrepancies = value;}
-		}
+		public Discrepancies Discrepancies { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000016.ElectronicServiceApplicant),ElementName="Applicant",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000016.ElectronicServiceApplicant __Applicant;
-		
-		[XmlIgnore]
-		public R_0009_000016.ElectronicServiceApplicant Applicant
-		{
-			get {return __Applicant;}
-			set {__Applicant = value;}
-		}
+		public R_0009_000016.ElectronicServiceApplicant Applicant { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MessageCreationTime",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __MessageCreationTime;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __MessageCreationTimeSpecified { get { return __MessageCreationTime.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? MessageCreationTime
-		{ 
-			get { return __MessageCreationTime; }
-			set { __MessageCreationTime = value; }
-		}
-		
-
+		public DateTime? MessageCreationTime { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="Signature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __Signature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature Signature
-		{
-			get {return __Signature;}
-			set {__Signature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature Signature { get; set; }
 
 		public ReceiptNotAcknowledgedMessage()
 		{
@@ -159,18 +89,7 @@ namespace R_0009_000017
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="Discrepancy",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DiscrepancyCollection __DiscrepancyCollection;
-		
-		[XmlIgnore]
-		public DiscrepancyCollection DiscrepancyCollection
-		{
-			get
-			{
-				if (__DiscrepancyCollection == null) __DiscrepancyCollection = new DiscrepancyCollection();
-				return __DiscrepancyCollection;
-			}
-			set {__DiscrepancyCollection = value;}
-		}
+		public DiscrepancyCollection DiscrepancyCollection { get; set; }
 
 		public Discrepancies()
 		{

@@ -27,79 +27,32 @@ namespace R_4728
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ServiceAreaName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ServiceAreaName;
-		
-		[XmlIgnore]
-		public string ServiceAreaName
-		{ 
-			get { return __ServiceAreaName; }
-			set { __ServiceAreaName = value; }
-		}
+		public string ServiceAreaName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ServiceAreaSelectedFlag",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ServiceAreaSelectedFlag;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ServiceAreaSelectedFlagSpecified;
-		
-		[XmlIgnore]
-		public bool ServiceAreaSelectedFlag
-		{ 
-			get { return __ServiceAreaSelectedFlag; }
-			set { __ServiceAreaSelectedFlag = value; __ServiceAreaSelectedFlagSpecified = true; }
-		}
+		public bool ServiceAreaSelectedFlag { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4712.ProvidingServiceKind),ElementName="ProvidingServiceKind",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4712.ProvidingServiceKind __ProvidingServiceKind;
-		
-		[XmlIgnore]
-		public R_4712.ProvidingServiceKind ProvidingServiceKind
-		{
-			get {return __ProvidingServiceKind;}
-			set {__ProvidingServiceKind = value;}
-		}
+		public R_4712.ProvidingServiceKind ProvidingServiceKind { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4718.ProvidingServicePart),ElementName="ProvidingServicePart",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4718.ProvidingServicePart __ProvidingServicePart;
-		
-		[XmlIgnore]
-		public R_4718.ProvidingServicePart ProvidingServicePart
-		{
-			get {return __ProvidingServicePart;}
-			set {__ProvidingServicePart = value;}
-		}
+		public R_4718.ProvidingServicePart ProvidingServicePart { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4724.ProvidingServiceSubpart),ElementName="ProvidingServiceSubpart",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4724.ProvidingServiceSubpart __ProvidingServiceSubpart;
-		
-		[XmlIgnore]
-		public R_4724.ProvidingServiceSubpart ProvidingServiceSubpart
-		{
-			get {return __ProvidingServiceSubpart;}
-			set {__ProvidingServiceSubpart = value;}
-		}
+		public R_4724.ProvidingServiceSubpart ProvidingServiceSubpart { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ConditionsApplicantProposed",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ConditionsApplicantProposed;
-		
-		[XmlIgnore]
-		public string ConditionsApplicantProposed
-		{ 
-			get { return __ConditionsApplicantProposed; }
-			set { __ConditionsApplicantProposed = value; }
-		}
+		public string ConditionsApplicantProposed { get; set; }
 
 		public ScopeServiceConditions()
 		{

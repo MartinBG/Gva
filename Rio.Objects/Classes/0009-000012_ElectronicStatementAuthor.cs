@@ -27,26 +27,12 @@ namespace R_0009_000012
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000008.PersonBasicData),ElementName="Person",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000008.PersonBasicData __Person;
-		
-		[XmlIgnore]
-		public R_0009_000008.PersonBasicData Person
-		{
-			get {return __Person;}
-			set {__Person = value;}
-		}
+		public R_0009_000008.PersonBasicData Person { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000011.ForeignCitizenBasicData),ElementName="ForeignCitizen",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000011.ForeignCitizenBasicData __ForeignCitizen;
-		
-		[XmlIgnore]
-		public R_0009_000011.ForeignCitizenBasicData ForeignCitizen
-		{
-			get {return __ForeignCitizen;}
-			set {__ForeignCitizen = value;}
-		}
+		public R_0009_000011.ForeignCitizenBasicData ForeignCitizen { get; set; }
 
 		public ElectronicStatementAuthor()
 		{

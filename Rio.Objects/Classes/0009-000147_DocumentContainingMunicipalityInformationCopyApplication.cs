@@ -33,86 +33,37 @@ namespace R_0009_000147
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000152.ElectronicAdministrativeServiceHeader),ElementName="ElectronicAdministrativeServiceHeader",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader __ElectronicAdministrativeServiceHeader;
-		
-		[XmlIgnore]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader
-		{
-			get {return __ElectronicAdministrativeServiceHeader;}
-			set {__ElectronicAdministrativeServiceHeader = value;}
-		}
+		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000141.ServiceApplicantReceiptData),ElementName="ServiceApplicantReceiptData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000141.ServiceApplicantReceiptData __ServiceApplicantReceiptData;
-		
-		[XmlIgnore]
-		public R_0009_000141.ServiceApplicantReceiptData ServiceApplicantReceiptData
-		{
-			get {return __ServiceApplicantReceiptData;}
-			set {__ServiceApplicantReceiptData = value;}
-		}
+		public R_0009_000141.ServiceApplicantReceiptData ServiceApplicantReceiptData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000145.MunicipalityInformationAccessRightSubject),ElementName="MunicipalityInformationAccessRightSubject",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000145.MunicipalityInformationAccessRightSubject __MunicipalityInformationAccessRightSubject;
-		
-		[XmlIgnore]
-		public R_0009_000145.MunicipalityInformationAccessRightSubject MunicipalityInformationAccessRightSubject
-		{
-			get {return __MunicipalityInformationAccessRightSubject;}
-			set {__MunicipalityInformationAccessRightSubject = value;}
-		}
+		public R_0009_000145.MunicipalityInformationAccessRightSubject MunicipalityInformationAccessRightSubject { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="NeededMunicipalityInformationDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __NeededMunicipalityInformationDescription;
-		
-		[XmlIgnore]
-		public string NeededMunicipalityInformationDescription
-		{ 
-			get { return __NeededMunicipalityInformationDescription; }
-			set { __NeededMunicipalityInformationDescription = value; }
-		}
+		public string NeededMunicipalityInformationDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(MunicipalityInformationAccessTypes),ElementName="MunicipalityInformationAccessTypes",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MunicipalityInformationAccessTypes __MunicipalityInformationAccessTypes;
-		
-		[XmlIgnore]
-		public MunicipalityInformationAccessTypes MunicipalityInformationAccessTypes
-		{
-			get {return __MunicipalityInformationAccessTypes;}
-			set {__MunicipalityInformationAccessTypes = value;}
-		}
+		public MunicipalityInformationAccessTypes MunicipalityInformationAccessTypes { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="InformationRecordingTechnicalParameters",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __InformationRecordingTechnicalParameters;
-		
-		[XmlIgnore]
-		public string InformationRecordingTechnicalParameters
-		{ 
-			get { return __InformationRecordingTechnicalParameters; }
-			set { __InformationRecordingTechnicalParameters = value; }
-		}
+		public string InformationRecordingTechnicalParameters { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000153.ElectronicAdministrativeServiceFooter),ElementName="ElectronicAdministrativeServiceFooter",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter __ElectronicAdministrativeServiceFooter;
-		
-		[XmlIgnore]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter
-		{
-			get {return __ElectronicAdministrativeServiceFooter;}
-			set {__ElectronicAdministrativeServiceFooter = value;}
-		}
+		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter { get; set; }
 
 		public DocumentContainingMunicipalityInformationCopyApplication()
 		{
@@ -128,18 +79,7 @@ namespace R_0009_000147
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="MunicipalityInformationAccessType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MunicipalityInformationAccessTypeCollection __MunicipalityInformationAccessTypeCollection;
-		
-		[XmlIgnore]
-		public MunicipalityInformationAccessTypeCollection MunicipalityInformationAccessTypeCollection
-		{
-			get
-			{
-				if (__MunicipalityInformationAccessTypeCollection == null) __MunicipalityInformationAccessTypeCollection = new MunicipalityInformationAccessTypeCollection();
-				return __MunicipalityInformationAccessTypeCollection;
-			}
-			set {__MunicipalityInformationAccessTypeCollection = value;}
-		}
+		public MunicipalityInformationAccessTypeCollection MunicipalityInformationAccessTypeCollection { get; set; }
 
 		public MunicipalityInformationAccessTypes()
 		{

@@ -34,18 +34,7 @@ namespace R_0009_000060
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AccessGrant),ElementName="AccessGrant",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AccessGrantCollection __AccessGrantCollection;
-		
-		[XmlIgnore]
-		public AccessGrantCollection AccessGrantCollection
-		{
-			get
-			{
-				if (__AccessGrantCollection == null) __AccessGrantCollection = new AccessGrantCollection();
-				return __AccessGrantCollection;
-			}
-			set {__AccessGrantCollection = value;}
-		}
+		public AccessGrantCollection AccessGrantCollection { get; set; }
 
 		public ObjectAccessGrantData()
 		{
@@ -60,62 +49,27 @@ namespace R_0009_000060
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ObjectID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ObjectID;
-		
-		[XmlIgnore]
-		public string ObjectID
-		{ 
-			get { return __ObjectID; }
-			set { __ObjectID = value; }
-		}
+		public string ObjectID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ObjectType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ObjectType;
-		
-		[XmlIgnore]
-		public string ObjectType
-		{ 
-			get { return __ObjectType; }
-			set { __ObjectType = value; }
-		}
+		public string ObjectType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000027.AISUserBasicData),ElementName="Grantee",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000027.AISUserBasicData __Grantee;
-		
-		[XmlIgnore]
-		public R_0009_000027.AISUserBasicData Grantee
-		{
-			get {return __Grantee;}
-			set {__Grantee = value;}
-		}
+		public R_0009_000027.AISUserBasicData Grantee { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(SpecificParameters),ElementName="SpecificParameters",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SpecificParameters __SpecificParameters;
-		
-		[XmlIgnore]
-		public SpecificParameters SpecificParameters
-		{
-			get {return __SpecificParameters;}
-			set {__SpecificParameters = value;}
-		}
+		public SpecificParameters SpecificParameters { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000032.AISObjectCreationData),ElementName="ObjectCreationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000032.AISObjectCreationData __ObjectCreationData;
-		
-		[XmlIgnore]
-		public R_0009_000032.AISObjectCreationData ObjectCreationData
-		{
-			get {return __ObjectCreationData;}
-			set {__ObjectCreationData = value;}
-		}
+		public R_0009_000032.AISObjectCreationData ObjectCreationData { get; set; }
 
 		public AccessGrant()
 		{

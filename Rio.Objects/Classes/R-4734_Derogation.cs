@@ -27,31 +27,12 @@ namespace R_4734
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DerogationName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DerogationName;
-		
-		[XmlIgnore]
-		public string DerogationName
-		{ 
-			get { return __DerogationName; }
-			set { __DerogationName = value; }
-		}
+		public string DerogationName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DerogationChosenFlag",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DerogationChosenFlag;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DerogationChosenFlagSpecified;
-		
-		[XmlIgnore]
-		public bool DerogationChosenFlag
-		{ 
-			get { return __DerogationChosenFlag; }
-			set { __DerogationChosenFlag = value; __DerogationChosenFlagSpecified = true; }
-		}
+		public bool DerogationChosenFlag { get; set; }
 
 		public Derogation()
 		{

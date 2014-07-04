@@ -27,14 +27,7 @@ namespace R_0009_000045
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(CreatedDocumentFromServiceStageAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CreatedDocumentFromServiceStageAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public CreatedDocumentFromServiceStageAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public CreatedDocumentFromServiceStageAdditionalData AdditionalData { get; set; }
 
 		public CreatedDocumentFromServiceStage() : base()
 		{

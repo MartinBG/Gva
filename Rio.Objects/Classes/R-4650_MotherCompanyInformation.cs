@@ -27,43 +27,17 @@ namespace R_4650
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MotherCompanyFlag",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __MotherCompanyFlag;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __MotherCompanyFlagSpecified;
-		
-		[XmlIgnore]
-		public bool MotherCompanyFlag
-		{ 
-			get { return __MotherCompanyFlag; }
-			set { __MotherCompanyFlag = value; __MotherCompanyFlagSpecified = true; }
-		}
+		public bool MotherCompanyFlag { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4648.TradingCompanyInformation),ElementName="TradingCompanyInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4648.TradingCompanyInformation __TradingCompanyInformation;
-		
-		[XmlIgnore]
-		public R_4648.TradingCompanyInformation TradingCompanyInformation
-		{
-			get {return __TradingCompanyInformation;}
-			set {__TradingCompanyInformation = value;}
-		}
+		public R_4648.TradingCompanyInformation TradingCompanyInformation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4638.ShareholdersOwnersCollection),ElementName="ShareholdersOwnersCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4638.ShareholdersOwnersCollection __ShareholdersOwnersCollection;
-		
-		[XmlIgnore]
-		public R_4638.ShareholdersOwnersCollection ShareholdersOwnersCollection
-		{
-			get {return __ShareholdersOwnersCollection;}
-			set {__ShareholdersOwnersCollection = value;}
-		}
+		public R_4638.ShareholdersOwnersCollection ShareholdersOwnersCollection { get; set; }
 
 		public MotherCompanyInformation()
 		{

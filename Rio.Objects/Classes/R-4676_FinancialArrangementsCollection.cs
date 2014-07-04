@@ -34,18 +34,7 @@ namespace R_4676
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4674.FinancialArrangement),ElementName="FinancialArrangement",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public FinancialArrangementCollection __FinancialArrangementCollection;
-		
-		[XmlIgnore]
-		public FinancialArrangementCollection FinancialArrangementCollection
-		{
-			get
-			{
-				if (__FinancialArrangementCollection == null) __FinancialArrangementCollection = new FinancialArrangementCollection();
-				return __FinancialArrangementCollection;
-			}
-			set {__FinancialArrangementCollection = value;}
-		}
+		public FinancialArrangementCollection FinancialArrangementCollection { get; set; }
 
 		public FinancialArrangementsCollection()
 		{

@@ -27,117 +27,47 @@ namespace R_4294
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000013.EntityBasicData),ElementName="EntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000013.EntityBasicData __EntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000013.EntityBasicData EntityBasicData
-		{
-			get {return __EntityBasicData;}
-			set {__EntityBasicData = value;}
-		}
+		public R_0009_000013.EntityBasicData EntityBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4286.CorrespondenceAddress),ElementName="CorrespondenceAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4286.CorrespondenceAddress __CorrespondenceAddress;
-		
-		[XmlIgnore]
-		public R_4286.CorrespondenceAddress CorrespondenceAddress
-		{
-			get {return __CorrespondenceAddress;}
-			set {__CorrespondenceAddress = value;}
-		}
+		public R_4286.CorrespondenceAddress CorrespondenceAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000014.ForeignEntityBasicData),ElementName="ForeignEntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000014.ForeignEntityBasicData __ForeignEntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000014.ForeignEntityBasicData ForeignEntityBasicData
-		{
-			get {return __ForeignEntityBasicData;}
-			set {__ForeignEntityBasicData = value;}
-		}
+		public R_0009_000014.ForeignEntityBasicData ForeignEntityBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4288.CorrespondenceAddressAbroad),ElementName="CorrespondenceAddressAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4288.CorrespondenceAddressAbroad __CorrespondenceAddressAbroad;
-		
-		[XmlIgnore]
-		public R_4288.CorrespondenceAddressAbroad CorrespondenceAddressAbroad
-		{
-			get {return __CorrespondenceAddressAbroad;}
-			set {__CorrespondenceAddressAbroad = value;}
-		}
+		public R_4288.CorrespondenceAddressAbroad CorrespondenceAddressAbroad { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PhoneNumbersDesc",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PhoneNumbersDesc;
-		
-		[XmlIgnore]
-		public string PhoneNumbersDesc
-		{ 
-			get { return __PhoneNumbersDesc; }
-			set { __PhoneNumbersDesc = value; }
-		}
+		public string PhoneNumbersDesc { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FaxNumbersDesc",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FaxNumbersDesc;
-		
-		[XmlIgnore]
-		public string FaxNumbersDesc
-		{ 
-			get { return __FaxNumbersDesc; }
-			set { __FaxNumbersDesc = value; }
-		}
+		public string FaxNumbersDesc { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EmailAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EmailAddress;
-		
-		[XmlIgnore]
-		public string EmailAddress
-		{ 
-			get { return __EmailAddress; }
-			set { __EmailAddress = value; }
-		}
+		public string EmailAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AviationalOperatorCertificateNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AviationalOperatorCertificateNumber;
-		
-		[XmlIgnore]
-		public string AviationalOperatorCertificateNumber
-		{ 
-			get { return __AviationalOperatorCertificateNumber; }
-			set { __AviationalOperatorCertificateNumber = value; }
-		}
+		public string AviationalOperatorCertificateNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AviationalOperatorCertificateIssueDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __AviationalOperatorCertificateIssueDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __AviationalOperatorCertificateIssueDateSpecified { get { return __AviationalOperatorCertificateIssueDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? AviationalOperatorCertificateIssueDate
-		{ 
-			get { return __AviationalOperatorCertificateIssueDate; }
-			set { __AviationalOperatorCertificateIssueDate = value; }
-		}
-		
-
+		public DateTime? AviationalOperatorCertificateIssueDate { get; set; }
 
 		public AviationalOperatorBasicData()
 		{

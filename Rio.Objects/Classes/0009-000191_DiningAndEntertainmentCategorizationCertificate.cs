@@ -27,251 +27,97 @@ namespace R_0009_000191
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentReceiptOrSigningDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DocumentReceiptOrSigningDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DocumentReceiptOrSigningDateSpecified { get { return __DocumentReceiptOrSigningDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DocumentReceiptOrSigningDate
-		{ 
-			get { return __DocumentReceiptOrSigningDate; }
-			set { __DocumentReceiptOrSigningDate = value; }
-		}
-		
-
+		public DateTime? DocumentReceiptOrSigningDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000143.MunicipalityAdministrationLocation),ElementName="MunicipalityAdministrationLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000143.MunicipalityAdministrationLocation __MunicipalityAdministrationLocation;
-		
-		[XmlIgnore]
-		public R_0009_000143.MunicipalityAdministrationLocation MunicipalityAdministrationLocation
-		{
-			get {return __MunicipalityAdministrationLocation;}
-			set {__MunicipalityAdministrationLocation = value;}
-		}
+		public R_0009_000143.MunicipalityAdministrationLocation MunicipalityAdministrationLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProviderBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProviderBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData
-		{
-			get {return __ElectronicServiceProviderBasicData;}
-			set {__ElectronicServiceProviderBasicData = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteCategoryCertificateNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TouristSiteCategoryCertificateNumber;
-		
-		[XmlIgnore]
-		public string TouristSiteCategoryCertificateNumber
-		{ 
-			get { return __TouristSiteCategoryCertificateNumber; }
-			set { __TouristSiteCategoryCertificateNumber = value; }
-		}
+		public string TouristSiteCategoryCertificateNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteCategoryCertificateIssueDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __TouristSiteCategoryCertificateIssueDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __TouristSiteCategoryCertificateIssueDateSpecified { get { return __TouristSiteCategoryCertificateIssueDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? TouristSiteCategoryCertificateIssueDate
-		{ 
-			get { return __TouristSiteCategoryCertificateIssueDate; }
-			set { __TouristSiteCategoryCertificateIssueDate = value; }
-		}
-		
-
+		public DateTime? TouristSiteCategoryCertificateIssueDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000180.TouristSiteAddress),ElementName="TouristSiteAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000180.TouristSiteAddress __TouristSiteAddress;
-		
-		[XmlIgnore]
-		public R_0009_000180.TouristSiteAddress TouristSiteAddress
-		{
-			get {return __TouristSiteAddress;}
-			set {__TouristSiteAddress = value;}
-		}
+		public R_0009_000180.TouristSiteAddress TouristSiteAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TouristSiteName;
-		
-		[XmlIgnore]
-		public string TouristSiteName
-		{ 
-			get { return __TouristSiteName; }
-			set { __TouristSiteName = value; }
-		}
+		public string TouristSiteName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteCategoryCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TouristSiteCategoryCode;
-		
-		[XmlIgnore]
-		public string TouristSiteCategoryCode
-		{ 
-			get { return __TouristSiteCategoryCode; }
-			set { __TouristSiteCategoryCode = value; }
-		}
+		public string TouristSiteCategoryCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteCategory",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TouristSiteCategory;
-		
-		[XmlIgnore]
-		public string TouristSiteCategory
-		{ 
-			get { return __TouristSiteCategory; }
-			set { __TouristSiteCategory = value; }
-		}
+		public string TouristSiteCategory { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TotalSeatsCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TotalSeatsCount;
-		
-		[XmlIgnore]
-		public string TotalSeatsCount
-		{ 
-			get { return __TotalSeatsCount; }
-			set { __TotalSeatsCount = value; }
-		}
+		public string TotalSeatsCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DiningAndEntertainmentCategorizationCertificateOwner),ElementName="Owner",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DiningAndEntertainmentCategorizationCertificateOwner __Owner;
-		
-		[XmlIgnore]
-		public DiningAndEntertainmentCategorizationCertificateOwner Owner
-		{
-			get {return __Owner;}
-			set {__Owner = value;}
-		}
+		public DiningAndEntertainmentCategorizationCertificateOwner Owner { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DiningAndEntertainmentCategorizationCertificateTenant),ElementName="Tenant",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DiningAndEntertainmentCategorizationCertificateTenant __Tenant;
-		
-		[XmlIgnore]
-		public DiningAndEntertainmentCategorizationCertificateTenant Tenant
-		{
-			get {return __Tenant;}
-			set {__Tenant = value;}
-		}
+		public DiningAndEntertainmentCategorizationCertificateTenant Tenant { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000184.TouristSiteCategoryAllocationOrderNumber),ElementName="TouristSiteCategoryAllocationOrderNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000184.TouristSiteCategoryAllocationOrderNumber __TouristSiteCategoryAllocationOrderNumber;
-		
-		[XmlIgnore]
-		public R_0009_000184.TouristSiteCategoryAllocationOrderNumber TouristSiteCategoryAllocationOrderNumber
-		{
-			get {return __TouristSiteCategoryAllocationOrderNumber;}
-			set {__TouristSiteCategoryAllocationOrderNumber = value;}
-		}
+		public R_0009_000184.TouristSiteCategoryAllocationOrderNumber TouristSiteCategoryAllocationOrderNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteCategoryAllocationOrderDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __TouristSiteCategoryAllocationOrderDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __TouristSiteCategoryAllocationOrderDateSpecified { get { return __TouristSiteCategoryAllocationOrderDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? TouristSiteCategoryAllocationOrderDate
-		{ 
-			get { return __TouristSiteCategoryAllocationOrderDate; }
-			set { __TouristSiteCategoryAllocationOrderDate = value; }
-		}
-		
-
+		public DateTime? TouristSiteCategoryAllocationOrderDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DiningAndEntertainmentCategorizationCertificateOfficial),ElementName="Official",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DiningAndEntertainmentCategorizationCertificateOfficial __Official;
-		
-		[XmlIgnore]
-		public DiningAndEntertainmentCategorizationCertificateOfficial Official
-		{
-			get {return __Official;}
-			set {__Official = value;}
-		}
+		public DiningAndEntertainmentCategorizationCertificateOfficial Official { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="XMLDigitalSignature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __XMLDigitalSignature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature
-		{
-			get {return __XMLDigitalSignature;}
-			set {__XMLDigitalSignature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature { get; set; }
 
 		public DiningAndEntertainmentCategorizationCertificate()
 		{
@@ -286,26 +132,12 @@ namespace R_0009_000191
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000014.ForeignEntityBasicData),ElementName="ForeignEntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000014.ForeignEntityBasicData __ForeignEntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000014.ForeignEntityBasicData ForeignEntityBasicData
-		{
-			get {return __ForeignEntityBasicData;}
-			set {__ForeignEntityBasicData = value;}
-		}
+		public R_0009_000014.ForeignEntityBasicData ForeignEntityBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DiningAndEntertainmentCategorizationCertificateOwnerBulgarianEntity),ElementName="BulgarianEntity",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DiningAndEntertainmentCategorizationCertificateOwnerBulgarianEntity __BulgarianEntity;
-		
-		[XmlIgnore]
-		public DiningAndEntertainmentCategorizationCertificateOwnerBulgarianEntity BulgarianEntity
-		{
-			get {return __BulgarianEntity;}
-			set {__BulgarianEntity = value;}
-		}
+		public DiningAndEntertainmentCategorizationCertificateOwnerBulgarianEntity BulgarianEntity { get; set; }
 
 		public DiningAndEntertainmentCategorizationCertificateOwner()
 		{
@@ -320,38 +152,17 @@ namespace R_0009_000191
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000013.EntityBasicData),ElementName="EntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000013.EntityBasicData __EntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000013.EntityBasicData EntityBasicData
-		{
-			get {return __EntityBasicData;}
-			set {__EntityBasicData = value;}
-		}
+		public R_0009_000013.EntityBasicData EntityBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000142.Residence),ElementName="Residence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000142.Residence __Residence;
-		
-		[XmlIgnore]
-		public R_0009_000142.Residence Residence
-		{
-			get {return __Residence;}
-			set {__Residence = value;}
-		}
+		public R_0009_000142.Residence Residence { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000172.EntityManagementAddress),ElementName="EntityManagementAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000172.EntityManagementAddress __EntityManagementAddress;
-		
-		[XmlIgnore]
-		public R_0009_000172.EntityManagementAddress EntityManagementAddress
-		{
-			get {return __EntityManagementAddress;}
-			set {__EntityManagementAddress = value;}
-		}
+		public R_0009_000172.EntityManagementAddress EntityManagementAddress { get; set; }
 
 		public DiningAndEntertainmentCategorizationCertificateOwnerBulgarianEntity()
 		{
@@ -366,26 +177,12 @@ namespace R_0009_000191
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000014.ForeignEntityBasicData),ElementName="ForeignEntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000014.ForeignEntityBasicData __ForeignEntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000014.ForeignEntityBasicData ForeignEntityBasicData
-		{
-			get {return __ForeignEntityBasicData;}
-			set {__ForeignEntityBasicData = value;}
-		}
+		public R_0009_000014.ForeignEntityBasicData ForeignEntityBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DiningAndEntertainmentCategorizationCertificateTenantBulgarianEntity),ElementName="BulgarianEntity",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DiningAndEntertainmentCategorizationCertificateTenantBulgarianEntity __BulgarianEntity;
-		
-		[XmlIgnore]
-		public DiningAndEntertainmentCategorizationCertificateTenantBulgarianEntity BulgarianEntity
-		{
-			get {return __BulgarianEntity;}
-			set {__BulgarianEntity = value;}
-		}
+		public DiningAndEntertainmentCategorizationCertificateTenantBulgarianEntity BulgarianEntity { get; set; }
 
 		public DiningAndEntertainmentCategorizationCertificateTenant()
 		{
@@ -400,38 +197,17 @@ namespace R_0009_000191
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000013.EntityBasicData),ElementName="EntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000013.EntityBasicData __EntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000013.EntityBasicData EntityBasicData
-		{
-			get {return __EntityBasicData;}
-			set {__EntityBasicData = value;}
-		}
+		public R_0009_000013.EntityBasicData EntityBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000142.Residence),ElementName="Residence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000142.Residence __Residence;
-		
-		[XmlIgnore]
-		public R_0009_000142.Residence Residence
-		{
-			get {return __Residence;}
-			set {__Residence = value;}
-		}
+		public R_0009_000142.Residence Residence { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000172.EntityManagementAddress),ElementName="EntityManagementAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000172.EntityManagementAddress __EntityManagementAddress;
-		
-		[XmlIgnore]
-		public R_0009_000172.EntityManagementAddress EntityManagementAddress
-		{
-			get {return __EntityManagementAddress;}
-			set {__EntityManagementAddress = value;}
-		}
+		public R_0009_000172.EntityManagementAddress EntityManagementAddress { get; set; }
 
 		public DiningAndEntertainmentCategorizationCertificateTenantBulgarianEntity()
 		{
@@ -446,26 +222,12 @@ namespace R_0009_000191
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		public DiningAndEntertainmentCategorizationCertificateOfficial()
 		{

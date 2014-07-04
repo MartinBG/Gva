@@ -27,38 +27,17 @@ namespace R_4260
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OVDQualificationClassPermissionCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OVDQualificationClassPermissionCode;
-		
-		[XmlIgnore]
-		public string OVDQualificationClassPermissionCode
-		{ 
-			get { return __OVDQualificationClassPermissionCode; }
-			set { __OVDQualificationClassPermissionCode = value; }
-		}
+		public string OVDQualificationClassPermissionCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OVDQualificationClassPermissionName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OVDQualificationClassPermissionName;
-		
-		[XmlIgnore]
-		public string OVDQualificationClassPermissionName
-		{ 
-			get { return __OVDQualificationClassPermissionName; }
-			set { __OVDQualificationClassPermissionName = value; }
-		}
+		public string OVDQualificationClassPermissionName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OVDQualificationClassPermissionNameEnglish",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OVDQualificationClassPermissionNameEnglish;
-		
-		[XmlIgnore]
-		public string OVDQualificationClassPermissionNameEnglish
-		{ 
-			get { return __OVDQualificationClassPermissionNameEnglish; }
-			set { __OVDQualificationClassPermissionNameEnglish = value; }
-		}
+		public string OVDQualificationClassPermissionNameEnglish { get; set; }
 
 		public OVDQualificationClassPermission()
 		{

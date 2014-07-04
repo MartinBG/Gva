@@ -27,26 +27,12 @@ namespace R_0009_000047
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000044.RegisteredDocumentURI),ElementName="RegisteredDocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000044.RegisteredDocumentURI __RegisteredDocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000044.RegisteredDocumentURI RegisteredDocumentURI
-		{
-			get {return __RegisteredDocumentURI;}
-			set {__RegisteredDocumentURI = value;}
-		}
+		public R_0009_000044.RegisteredDocumentURI RegisteredDocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000043.AdministrativeNomenclatureDocumentTypeBasicData),ElementName="DocumentType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000043.AdministrativeNomenclatureDocumentTypeBasicData __DocumentType;
-		
-		[XmlIgnore]
-		public R_0009_000043.AdministrativeNomenclatureDocumentTypeBasicData DocumentType
-		{
-			get {return __DocumentType;}
-			set {__DocumentType = value;}
-		}
+		public R_0009_000043.AdministrativeNomenclatureDocumentTypeBasicData DocumentType { get; set; }
 
 		public RegisteredDocumentOrDocumentType()
 		{

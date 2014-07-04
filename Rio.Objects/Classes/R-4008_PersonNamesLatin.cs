@@ -27,38 +27,17 @@ namespace R_4008
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonFirstNameLatin",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonFirstNameLatin;
-		
-		[XmlIgnore]
-		public string PersonFirstNameLatin
-		{ 
-			get { return __PersonFirstNameLatin; }
-			set { __PersonFirstNameLatin = value; }
-		}
+		public string PersonFirstNameLatin { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonMiddleNameLatin",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonMiddleNameLatin;
-		
-		[XmlIgnore]
-		public string PersonMiddleNameLatin
-		{ 
-			get { return __PersonMiddleNameLatin; }
-			set { __PersonMiddleNameLatin = value; }
-		}
+		public string PersonMiddleNameLatin { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonLastNameLatin",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonLastNameLatin;
-		
-		[XmlIgnore]
-		public string PersonLastNameLatin
-		{ 
-			get { return __PersonLastNameLatin; }
-			set { __PersonLastNameLatin = value; }
-		}
+		public string PersonLastNameLatin { get; set; }
 
 		public PersonNamesLatin()
 		{

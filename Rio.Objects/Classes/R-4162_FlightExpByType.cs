@@ -27,38 +27,17 @@ namespace R_4162
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4160.FlightExpByRole),ElementName="FlightExpByRole",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4160.FlightExpByRole __FlightExpByRole;
-		
-		[XmlIgnore]
-		public R_4160.FlightExpByRole FlightExpByRole
-		{
-			get {return __FlightExpByRole;}
-			set {__FlightExpByRole = value;}
-		}
+		public R_4160.FlightExpByRole FlightExpByRole { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4146.FlightExpType),ElementName="FlightExpType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4146.FlightExpType __FlightExpType;
-		
-		[XmlIgnore]
-		public R_4146.FlightExpType FlightExpType
-		{
-			get {return __FlightExpType;}
-			set {__FlightExpType = value;}
-		}
+		public R_4146.FlightExpType FlightExpType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightExpHoursByTypeTotal",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightExpHoursByTypeTotal;
-		
-		[XmlIgnore]
-		public string FlightExpHoursByTypeTotal
-		{ 
-			get { return __FlightExpHoursByTypeTotal; }
-			set { __FlightExpHoursByTypeTotal = value; }
-		}
+		public string FlightExpHoursByTypeTotal { get; set; }
 
 		public FlightExpByType()
 		{

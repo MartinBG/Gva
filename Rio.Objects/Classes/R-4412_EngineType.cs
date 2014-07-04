@@ -27,26 +27,12 @@ namespace R_4412
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EngineTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EngineTypeCode;
-		
-		[XmlIgnore]
-		public string EngineTypeCode
-		{ 
-			get { return __EngineTypeCode; }
-			set { __EngineTypeCode = value; }
-		}
+		public string EngineTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EngineTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EngineTypeName;
-		
-		[XmlIgnore]
-		public string EngineTypeName
-		{ 
-			get { return __EngineTypeName; }
-			set { __EngineTypeName = value; }
-		}
+		public string EngineTypeName { get; set; }
 
 		public EngineType()
 		{

@@ -27,74 +27,32 @@ namespace R_0009_000014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignEntityName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignEntityName;
-		
-		[XmlIgnore]
-		public string ForeignEntityName
-		{ 
-			get { return __ForeignEntityName; }
-			set { __ForeignEntityName = value; }
-		}
+		public string ForeignEntityName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryISO3166TwoLetterCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryISO3166TwoLetterCode;
-		
-		[XmlIgnore]
-		public string CountryISO3166TwoLetterCode
-		{ 
-			get { return __CountryISO3166TwoLetterCode; }
-			set { __CountryISO3166TwoLetterCode = value; }
-		}
+		public string CountryISO3166TwoLetterCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryNameCyrillic",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryNameCyrillic;
-		
-		[XmlIgnore]
-		public string CountryNameCyrillic
-		{ 
-			get { return __CountryNameCyrillic; }
-			set { __CountryNameCyrillic = value; }
-		}
+		public string CountryNameCyrillic { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignEntityRegister",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignEntityRegister;
-		
-		[XmlIgnore]
-		public string ForeignEntityRegister
-		{ 
-			get { return __ForeignEntityRegister; }
-			set { __ForeignEntityRegister = value; }
-		}
+		public string ForeignEntityRegister { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignEntityIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignEntityIdentifier;
-		
-		[XmlIgnore]
-		public string ForeignEntityIdentifier
-		{ 
-			get { return __ForeignEntityIdentifier; }
-			set { __ForeignEntityIdentifier = value; }
-		}
+		public string ForeignEntityIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignEntityOtherData",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignEntityOtherData;
-		
-		[XmlIgnore]
-		public string ForeignEntityOtherData
-		{ 
-			get { return __ForeignEntityOtherData; }
-			set { __ForeignEntityOtherData = value; }
-		}
+		public string ForeignEntityOtherData { get; set; }
 
 		public ForeignEntityBasicData()
 		{

@@ -27,26 +27,12 @@ namespace R_4168
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightSkillTestCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightSkillTestCode;
-		
-		[XmlIgnore]
-		public string FlightSkillTestCode
-		{ 
-			get { return __FlightSkillTestCode; }
-			set { __FlightSkillTestCode = value; }
-		}
+		public string FlightSkillTestCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightSkillTestName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightSkillTestName;
-		
-		[XmlIgnore]
-		public string FlightSkillTestName
-		{ 
-			get { return __FlightSkillTestName; }
-			set { __FlightSkillTestName = value; }
-		}
+		public string FlightSkillTestName { get; set; }
 
 		public FlightSkillTest()
 		{

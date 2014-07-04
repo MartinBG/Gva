@@ -39,110 +39,47 @@ namespace R_0009_000052
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000042.AdministrativeNomenclatureDocumentTypeURI),ElementName="URI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000042.AdministrativeNomenclatureDocumentTypeURI __URI;
-		
-		[XmlIgnore]
-		public R_0009_000042.AdministrativeNomenclatureDocumentTypeURI URI
-		{
-			get {return __URI;}
-			set {__URI = value;}
-		}
+		public R_0009_000042.AdministrativeNomenclatureDocumentTypeURI URI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Description",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Description;
-		
-		[XmlIgnore]
-		public string Description
-		{ 
-			get { return __Description; }
-			set { __Description = value; }
-		}
+		public string Description { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ProcessingType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ProcessingType;
-		
-		[XmlIgnore]
-		public string ProcessingType
-		{ 
-			get { return __ProcessingType; }
-			set { __ProcessingType = value; }
-		}
+		public string ProcessingType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(EmpoweredPersons),ElementName="EmpoweredPersons",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public EmpoweredPersons __EmpoweredPersons;
-		
-		[XmlIgnore]
-		public EmpoweredPersons EmpoweredPersons
-		{
-			get {return __EmpoweredPersons;}
-			set {__EmpoweredPersons = value;}
-		}
+		public EmpoweredPersons EmpoweredPersons { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ArchivalType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ArchivalType;
-		
-		[XmlIgnore]
-		public string ArchivalType
-		{ 
-			get { return __ArchivalType; }
-			set { __ArchivalType = value; }
-		}
+		public string ArchivalType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Applications),ElementName="Applications",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Applications __Applications;
-		
-		[XmlIgnore]
-		public Applications Applications
-		{
-			get {return __Applications;}
-			set {__Applications = value;}
-		}
+		public Applications Applications { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Template",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __Template;
-		
-		[XmlIgnore]
-		public byte[] Template
-		{ 
-			get { return __Template; }
-			set { __Template = value; }
-		}
+		public byte[] Template { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000032.AISObjectCreationData),ElementName="ObjectCreationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000032.AISObjectCreationData __ObjectCreationData;
-		
-		[XmlIgnore]
-		public R_0009_000032.AISObjectCreationData ObjectCreationData
-		{
-			get {return __ObjectCreationData;}
-			set {__ObjectCreationData = value;}
-		}
+		public R_0009_000032.AISObjectCreationData ObjectCreationData { get; set; }
 
 		public AdministrativeNomenclatureDocumentTypeElement()
 		{
@@ -158,18 +95,7 @@ namespace R_0009_000052
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000050.EmpoweredPerson),ElementName="EmpoweredPerson",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public EmpoweredPersonCollection __EmpoweredPersonCollection;
-		
-		[XmlIgnore]
-		public EmpoweredPersonCollection EmpoweredPersonCollection
-		{
-			get
-			{
-				if (__EmpoweredPersonCollection == null) __EmpoweredPersonCollection = new EmpoweredPersonCollection();
-				return __EmpoweredPersonCollection;
-			}
-			set {__EmpoweredPersonCollection = value;}
-		}
+		public EmpoweredPersonCollection EmpoweredPersonCollection { get; set; }
 
 		public EmpoweredPersons()
 		{
@@ -184,34 +110,12 @@ namespace R_0009_000052
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000051.EditorOrVisualizerApplicationURI),ElementName="EditingApplicationURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public EditorOrVisualizerApplicationURICollection __EditingApplicationURICollection;
-		
-		[XmlIgnore]
-		public EditorOrVisualizerApplicationURICollection EditingApplicationURICollection
-		{
-			get
-			{
-				if (__EditingApplicationURICollection == null) __EditingApplicationURICollection = new EditorOrVisualizerApplicationURICollection();
-				return __EditingApplicationURICollection;
-			}
-			set {__EditingApplicationURICollection = value;}
-		}
+		public EditorOrVisualizerApplicationURICollection EditingApplicationURICollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000051.EditorOrVisualizerApplicationURI),ElementName="VisualizingApplicationURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public EditorOrVisualizerApplicationURICollection __VisualizingApplicationURICollection;
-		
-		[XmlIgnore]
-		public EditorOrVisualizerApplicationURICollection VisualizingApplicationURICollection
-		{
-			get
-			{
-				if (__VisualizingApplicationURICollection == null) __VisualizingApplicationURICollection = new EditorOrVisualizerApplicationURICollection();
-				return __VisualizingApplicationURICollection;
-			}
-			set {__VisualizingApplicationURICollection = value;}
-		}
+		public EditorOrVisualizerApplicationURICollection VisualizingApplicationURICollection { get; set; }
 
 		public Applications()
 		{

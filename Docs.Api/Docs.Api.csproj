@@ -181,9 +181,9 @@
       <Project>{9a57d379-56e1-4aa7-952c-fdbdba167457}</Project>
       <Name>Common %28Common\Common%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Rio.Objects\Rio.Objects.csproj">
-      <Project>{41c9ed19-5e9c-4e89-8a4b-d73506d9fb6f}</Project>
-      <Name>Rio.Objects</Name>
+    <ProjectReference Include="..\Rio.Data\Rio.Data.csproj">
+      <Project>{ce03cc29-d823-4e37-8c22-608fbed01848}</Project>
+      <Name>Rio.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

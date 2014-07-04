@@ -27,26 +27,12 @@ namespace R_5064
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SpecialRestrictionCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SpecialRestrictionCode;
-		
-		[XmlIgnore]
-		public string SpecialRestrictionCode
-		{ 
-			get { return __SpecialRestrictionCode; }
-			set { __SpecialRestrictionCode = value; }
-		}
+		public string SpecialRestrictionCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SpecialRestrictionName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SpecialRestrictionName;
-		
-		[XmlIgnore]
-		public string SpecialRestrictionName
-		{ 
-			get { return __SpecialRestrictionName; }
-			set { __SpecialRestrictionName = value; }
-		}
+		public string SpecialRestrictionName { get; set; }
 
 		public SpecialRestriction()
 		{

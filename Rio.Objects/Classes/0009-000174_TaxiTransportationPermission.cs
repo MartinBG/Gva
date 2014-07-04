@@ -27,196 +27,77 @@ namespace R_0009_000174
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentReceiptOrSigningDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DocumentReceiptOrSigningDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DocumentReceiptOrSigningDateSpecified { get { return __DocumentReceiptOrSigningDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DocumentReceiptOrSigningDate
-		{ 
-			get { return __DocumentReceiptOrSigningDate; }
-			set { __DocumentReceiptOrSigningDate = value; }
-		}
-		
-
+		public DateTime? DocumentReceiptOrSigningDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProviderBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProviderBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData
-		{
-			get {return __ElectronicServiceProviderBasicData;}
-			set {__ElectronicServiceProviderBasicData = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TaxiTransportRegistrationCertificateNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TaxiTransportRegistrationCertificateNumber;
-		
-		[XmlIgnore]
-		public string TaxiTransportRegistrationCertificateNumber
-		{ 
-			get { return __TaxiTransportRegistrationCertificateNumber; }
-			set { __TaxiTransportRegistrationCertificateNumber = value; }
-		}
+		public string TaxiTransportRegistrationCertificateNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000013.EntityBasicData),ElementName="EntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000013.EntityBasicData __EntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000013.EntityBasicData EntityBasicData
-		{
-			get {return __EntityBasicData;}
-			set {__EntityBasicData = value;}
-		}
+		public R_0009_000013.EntityBasicData EntityBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000142.Residence),ElementName="Residence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000142.Residence __Residence;
-		
-		[XmlIgnore]
-		public R_0009_000142.Residence Residence
-		{
-			get {return __Residence;}
-			set {__Residence = value;}
-		}
+		public R_0009_000142.Residence Residence { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TaxisInTaxiTransportersCertificateCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TaxisInTaxiTransportersCertificateCount;
-		
-		[XmlIgnore]
-		public string TaxisInTaxiTransportersCertificateCount
-		{ 
-			get { return __TaxisInTaxiTransportersCertificateCount; }
-			set { __TaxisInTaxiTransportersCertificateCount = value; }
-		}
+		public string TaxisInTaxiTransportersCertificateCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000172.EntityManagementAddress),ElementName="EntityManagementAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000172.EntityManagementAddress __EntityManagementAddress;
-		
-		[XmlIgnore]
-		public R_0009_000172.EntityManagementAddress EntityManagementAddress
-		{
-			get {return __EntityManagementAddress;}
-			set {__EntityManagementAddress = value;}
-		}
+		public R_0009_000172.EntityManagementAddress EntityManagementAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TaxisInTaxiTransportersRegisterCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TaxisInTaxiTransportersRegisterCount;
-		
-		[XmlIgnore]
-		public string TaxisInTaxiTransportersRegisterCount
-		{ 
-			get { return __TaxisInTaxiTransportersRegisterCount; }
-			set { __TaxisInTaxiTransportersRegisterCount = value; }
-		}
+		public string TaxisInTaxiTransportersRegisterCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TaxiTransportationPermissionValidity",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __TaxiTransportationPermissionValidity;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __TaxiTransportationPermissionValiditySpecified { get { return __TaxiTransportationPermissionValidity.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? TaxiTransportationPermissionValidity
-		{ 
-			get { return __TaxiTransportationPermissionValidity; }
-			set { __TaxiTransportationPermissionValidity = value; }
-		}
-		
-
+		public DateTime? TaxiTransportationPermissionValidity { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CarRegistrationNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CarRegistrationNumber;
-		
-		[XmlIgnore]
-		public string CarRegistrationNumber
-		{ 
-			get { return __CarRegistrationNumber; }
-			set { __CarRegistrationNumber = value; }
-		}
+		public string CarRegistrationNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(TaxiTransportationPermissionOfficial),ElementName="Official",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TaxiTransportationPermissionOfficial __Official;
-		
-		[XmlIgnore]
-		public TaxiTransportationPermissionOfficial Official
-		{
-			get {return __Official;}
-			set {__Official = value;}
-		}
+		public TaxiTransportationPermissionOfficial Official { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="XMLDigitalSignature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __XMLDigitalSignature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature
-		{
-			get {return __XMLDigitalSignature;}
-			set {__XMLDigitalSignature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature { get; set; }
 
 		public TaxiTransportationPermission()
 		{
@@ -231,26 +112,12 @@ namespace R_0009_000174
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		public TaxiTransportationPermissionOfficial()
 		{

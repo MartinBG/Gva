@@ -127,6 +127,52 @@
           cancel: 'Отказ'
         }
       },
+      decision: {
+        legalBasisIssuanceAdministrativeAct:
+          'На основание',
+        legalBasisIssuanceAdministrativeActDescription:
+          '(Правно основание за издаване на индивидуален административен акт)',
+        explanation:
+          'след разглеждане на заявление за достъп до обществена информация с № , намирам, '+
+          'че са налице основания за предоставяне на исканата обществена информация и поради това',
+        degreeAccessRequestedPublicInformation:
+          'Предоставям',
+        degreeAccessRequestedPublicInformationDescription:
+          '(Степен на осигурения достъп до исканата обществена информация)',
+        descriptionProvidedPublicInformation:
+          'Исканата информация от посоченото заявление',
+        descriptionProvidedPublicInformationDescription:
+          '(Описание на предоставяната обществена информация)',
+        formProvidingAccessPublicInformation:
+          'Да се предостави в пълен обем, според искането на заявителя посредством',
+        formProvidingAccessPublicInformationDescription:
+          '(Форма за предоставяне на достъп до обществена информация)',
+        placePublicInformationAccessGiven:
+          'Разрешената информация може да бъде получена (в/от/изпратена)',
+        placePublicInformationAccessGivenDescription:
+          '(Място, където ще бъде предоставен достъп до исканата обществена информация)',
+        periodAccessPublicInformation:
+          'Информацията да се предостави за срок',
+        periodAccessPublicInformationDescription:
+          '(Срок, в който е осигурен достъп до исканата обществена информация)',
+        informationPaymentCostsProvidingAccess:
+          'Информация за заплащане на разходи по предоставянето на достъп до обществена информация',
+        otherBodiesOrganizations:
+          'Други органи, организации или лица, които разполагат с по-пълна '+
+          'информация относно естеството на поисканата обществена информация',
+        personType:
+          'Длъжностно лице',
+        firstName:
+          'Собствено име',
+        middleName:
+          'Бащино име',
+        lastName:
+          'Фамилно име',
+        otherName:
+          'Други имена',
+        electronicDocumentAuthorQuality:
+          'Качество, в което лицето представлява административния орган'
+      },
       states: {
         'root.signals': 'Сигнали',
         'root.signals.new': 'Нов сигнал',

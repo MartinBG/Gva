@@ -27,33 +27,12 @@ namespace R_4916
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __FlightDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FlightDateSpecified { get { return __FlightDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? FlightDate
-		{ 
-			get { return __FlightDate; }
-			set { __FlightDate = value; }
-		}
-		
-
+		public DateTime? FlightDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightDuration",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightDuration;
-		
-		[XmlIgnore]
-		public string FlightDuration
-		{ 
-			get { return __FlightDuration; }
-			set { __FlightDuration = value; }
-		}
+		public string FlightDuration { get; set; }
 
 		public FlightDateDuration()
 		{

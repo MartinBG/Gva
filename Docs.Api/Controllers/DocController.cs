@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Http;
 using Common.Api.StaticNomenclatures;
+using Rio.Data.Utils;
 
 namespace Docs.Api.Controllers
 {
@@ -729,7 +730,7 @@ namespace Docs.Api.Controllers
                     {
                         DocType docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId);
 
-                        byte[] eDocFileContent = this.docRepository.CreateElectornicDocumentFile(docType.ElectronicServiceFileTypeUri);
+                        byte[] eDocFileContent = RioObjectUtils.GetEmptyRioObjectBytes(docType.ElectronicServiceFileTypeUri);
 
                         if (eDocFileContent != null)
                         {
@@ -1144,6 +1145,7 @@ namespace Docs.Api.Controllers
                 var oldDoc = this.docRepository.Find(id,
                         e => e.DocCorrespondents,
                         e => e.DocFiles.Select(df => df.DocFileOriginType),
+                        e => e.DocFiles.Select(df => df.DocFileType),
                         e => e.DocUnits);
 
                 oldDoc.EnsureForProperVersion(doc.Version);
@@ -1337,8 +1339,17 @@ namespace Docs.Api.Controllers
 
                 if (editable != null)
                 {
-                    string contentStr = JsonConvert.SerializeObject(doc.JObject);
-                    byte[] content = System.Text.Encoding.UTF8.GetBytes(contentStr);
+                    byte[] content = null;
+
+                    if (editable.DocFileType.DocTypeUri == "Checklist")
+                    {
+                        string contentStr = JsonConvert.SerializeObject(doc.JObject);
+                        content = System.Text.Encoding.UTF8.GetBytes(contentStr);
+                    }
+                    else //doc is rio object
+                    {
+                        content = RioObjectUtils.GetBytesFromJObject(editable.DocFileType.DocTypeUri, doc.JObject);
+                    }
 
                     using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
                     {
@@ -1975,6 +1986,42 @@ namespace Docs.Api.Controllers
 
             //    return Ok();
             //}
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetRioObjectEditableFile(int id)
+        {
+            var doc = this.docRepository.Find(id,
+               e => e.DocFiles.Select(df => df.DocFileOriginType),
+               e => e.DocFiles.Select(df => df.DocFileType));
+
+            if (doc == null)
+            {
+                return NotFound();
+            }
+
+            DocFile editable = doc.DocFiles.FirstOrDefault(e => e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
+
+            byte[] content;
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+            {
+                connection.Open();
+
+                using (MemoryStream m1 = new MemoryStream())
+                using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", editable.DocFileContentId))
+                {
+                    blobStream.CopyTo(m1);
+                    content = m1.ToArray();
+                }
+            }
+
+            var jObject = RioObjectUtils.GetJObjectFromBytes(editable.DocFileType.DocTypeUri, content);
+
+            return Ok(new
+            {
+                content = jObject
+            });
         }
     }
 }

@@ -33,200 +33,77 @@ namespace R_3010
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProviderBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProviderBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData
-		{
-			get {return __ElectronicServiceProviderBasicData;}
-			set {__ElectronicServiceProviderBasicData = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000016.ElectronicServiceApplicant),ElementName="ElectronicServiceApplicant",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000016.ElectronicServiceApplicant __ElectronicServiceApplicant;
-		
-		[XmlIgnore]
-		public R_0009_000016.ElectronicServiceApplicant ElectronicServiceApplicant
-		{
-			get {return __ElectronicServiceApplicant;}
-			set {__ElectronicServiceApplicant = value;}
-		}
+		public R_0009_000016.ElectronicServiceApplicant ElectronicServiceApplicant { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="IrregularityDocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __IrregularityDocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI IrregularityDocumentURI
-		{
-			get {return __IrregularityDocumentURI;}
-			set {__IrregularityDocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI IrregularityDocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="IrregularityDocumentReceiptOrSigningDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __IrregularityDocumentReceiptOrSigningDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __IrregularityDocumentReceiptOrSigningDateSpecified { get { return __IrregularityDocumentReceiptOrSigningDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? IrregularityDocumentReceiptOrSigningDate
-		{ 
-			get { return __IrregularityDocumentReceiptOrSigningDate; }
-			set { __IrregularityDocumentReceiptOrSigningDate = value; }
-		}
-		
-
+		public DateTime? IrregularityDocumentReceiptOrSigningDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RemovingIrregularitiesInstructionsHeader",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RemovingIrregularitiesInstructionsHeader;
-		
-		[XmlIgnore]
-		public string RemovingIrregularitiesInstructionsHeader
-		{ 
-			get { return __RemovingIrregularitiesInstructionsHeader; }
-			set { __RemovingIrregularitiesInstructionsHeader = value; }
-		}
+		public string RemovingIrregularitiesInstructionsHeader { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="ApplicationDocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __ApplicationDocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI ApplicationDocumentURI
-		{
-			get {return __ApplicationDocumentURI;}
-			set {__ApplicationDocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI ApplicationDocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ApplicationDocumentReceiptOrSigningDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ApplicationDocumentReceiptOrSigningDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ApplicationDocumentReceiptOrSigningDateSpecified { get { return __ApplicationDocumentReceiptOrSigningDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ApplicationDocumentReceiptOrSigningDate
-		{ 
-			get { return __ApplicationDocumentReceiptOrSigningDate; }
-			set { __ApplicationDocumentReceiptOrSigningDate = value; }
-		}
-		
-
+		public DateTime? ApplicationDocumentReceiptOrSigningDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000073.AISCaseURI),ElementName="AISCaseURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000073.AISCaseURI __AISCaseURI;
-		
-		[XmlIgnore]
-		public R_0009_000073.AISCaseURI AISCaseURI
-		{
-			get {return __AISCaseURI;}
-			set {__AISCaseURI = value;}
-		}
+		public R_0009_000073.AISCaseURI AISCaseURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Irregularities),ElementName="Irregularities",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public IrregularitiesCollection __IrregularitiesCollection;
-		
-		[XmlIgnore]
-		public IrregularitiesCollection IrregularitiesCollection
-		{
-			get
-			{
-				if (__IrregularitiesCollection == null) __IrregularitiesCollection = new IrregularitiesCollection();
-				return __IrregularitiesCollection;
-			}
-			set {__IrregularitiesCollection = value;}
-		}
+		public IrregularitiesCollection IrregularitiesCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DeadlineCorrectionIrregularities",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="duration",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DeadlineCorrectionIrregularities;
-		
-		[XmlIgnore]
-		public string DeadlineCorrectionIrregularities
-		{ 
-			get { return __DeadlineCorrectionIrregularities; }
-			set { __DeadlineCorrectionIrregularities = value; }
-		}
+		public string DeadlineCorrectionIrregularities { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AdministrativeBodyName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AdministrativeBodyName;
-		
-		[XmlIgnore]
-		public string AdministrativeBodyName
-		{ 
-			get { return __AdministrativeBodyName; }
-			set { __AdministrativeBodyName = value; }
-		}
+		public string AdministrativeBodyName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(RemovingIrregularitiesInstructionsOfficial),ElementName="Official",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public RemovingIrregularitiesInstructionsOfficial __Official;
-		
-		[XmlIgnore]
-		public RemovingIrregularitiesInstructionsOfficial Official
-		{
-			get {return __Official;}
-			set {__Official = value;}
-		}
+		public RemovingIrregularitiesInstructionsOfficial Official { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="XMLDigitalSignature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __XMLDigitalSignature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature
-		{
-			get {return __XMLDigitalSignature;}
-			set {__XMLDigitalSignature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature { get; set; }
 
 		public RemovingIrregularitiesInstructions()
 		{
@@ -241,26 +118,12 @@ namespace R_3010
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="IrregularityType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __IrregularityType;
-		
-		[XmlIgnore]
-		public string IrregularityType
-		{ 
-			get { return __IrregularityType; }
-			set { __IrregularityType = value; }
-		}
+		public string IrregularityType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AdditionalInformationSpecifyingIrregularity",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AdditionalInformationSpecifyingIrregularity;
-		
-		[XmlIgnore]
-		public string AdditionalInformationSpecifyingIrregularity
-		{ 
-			get { return __AdditionalInformationSpecifyingIrregularity; }
-			set { __AdditionalInformationSpecifyingIrregularity = value; }
-		}
+		public string AdditionalInformationSpecifyingIrregularity { get; set; }
 
 		public Irregularities()
 		{
@@ -275,26 +138,12 @@ namespace R_3010
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		public RemovingIrregularitiesInstructionsOfficial()
 		{

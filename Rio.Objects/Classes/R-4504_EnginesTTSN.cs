@@ -34,18 +34,7 @@ namespace R_4504
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(EngineTTSN),ElementName="EngineTTSN",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public EngineTTSNCollection __EngineTTSNCollection;
-		
-		[XmlIgnore]
-		public EngineTTSNCollection EngineTTSNCollection
-		{
-			get
-			{
-				if (__EngineTTSNCollection == null) __EngineTTSNCollection = new EngineTTSNCollection();
-				return __EngineTTSNCollection;
-			}
-			set {__EngineTTSNCollection = value;}
-		}
+		public EngineTTSNCollection EngineTTSNCollection { get; set; }
 
 		public EnginesTTSN()
 		{
@@ -60,26 +49,12 @@ namespace R_4504
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EngineTTSNHours",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EngineTTSNHours;
-		
-		[XmlIgnore]
-		public string EngineTTSNHours
-		{ 
-			get { return __EngineTTSNHours; }
-			set { __EngineTTSNHours = value; }
-		}
+		public string EngineTTSNHours { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EngineTTSNLandingsCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EngineTTSNLandingsCount;
-		
-		[XmlIgnore]
-		public string EngineTTSNLandingsCount
-		{ 
-			get { return __EngineTTSNLandingsCount; }
-			set { __EngineTTSNLandingsCount = value; }
-		}
+		public string EngineTTSNLandingsCount { get; set; }
 
 		public EngineTTSN()
 		{

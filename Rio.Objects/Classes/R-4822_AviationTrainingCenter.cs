@@ -27,26 +27,12 @@ namespace R_4822
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AviationTrainingCenterCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AviationTrainingCenterCode;
-		
-		[XmlIgnore]
-		public string AviationTrainingCenterCode
-		{ 
-			get { return __AviationTrainingCenterCode; }
-			set { __AviationTrainingCenterCode = value; }
-		}
+		public string AviationTrainingCenterCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AviationTrainingCenterName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AviationTrainingCenterName;
-		
-		[XmlIgnore]
-		public string AviationTrainingCenterName
-		{ 
-			get { return __AviationTrainingCenterName; }
-			set { __AviationTrainingCenterName = value; }
-		}
+		public string AviationTrainingCenterName { get; set; }
 
 		public AviationTrainingCenter()
 		{

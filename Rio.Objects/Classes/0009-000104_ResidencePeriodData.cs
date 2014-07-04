@@ -33,33 +33,12 @@ namespace R_0009_000104
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="versionDate",DataType="date")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __versionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __versionDateSpecified { get { return __versionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? versionDate
-		{ 
-		get { return __versionDate; }
-		set { __versionDate = value; }
-		}
-		
-
+		public DateTime? versionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ResidencePeriods),ElementName="ResidencePeriods",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ResidencePeriods __ResidencePeriods;
-		
-		[XmlIgnore]
-		public ResidencePeriods ResidencePeriods
-		{
-			get {return __ResidencePeriods;}
-			set {__ResidencePeriods = value;}
-		}
+		public ResidencePeriods ResidencePeriods { get; set; }
 
 		public ResidencePeriodData()
 		{
@@ -75,18 +54,7 @@ namespace R_0009_000104
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ResidencePeriod),ElementName="ResidencePeriod",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ResidencePeriodCollection __ResidencePeriodCollection;
-		
-		[XmlIgnore]
-		public ResidencePeriodCollection ResidencePeriodCollection
-		{
-			get
-			{
-				if (__ResidencePeriodCollection == null) __ResidencePeriodCollection = new ResidencePeriodCollection();
-				return __ResidencePeriodCollection;
-			}
-			set {__ResidencePeriodCollection = value;}
-		}
+		public ResidencePeriodCollection ResidencePeriodCollection { get; set; }
 
 		public ResidencePeriods()
 		{
@@ -101,26 +69,12 @@ namespace R_0009_000104
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		public ResidencePeriod()
 		{

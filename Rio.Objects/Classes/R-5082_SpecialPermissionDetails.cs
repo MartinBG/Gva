@@ -27,62 +27,27 @@ namespace R_5082
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5072.SpecialPermission),ElementName="SpecialPermission",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_5072.SpecialPermission __SpecialPermission;
-		
-		[XmlIgnore]
-		public R_5072.SpecialPermission SpecialPermission
-		{
-			get {return __SpecialPermission;}
-			set {__SpecialPermission = value;}
-		}
+		public R_5072.SpecialPermission SpecialPermission { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RVRSpecialPermission",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RVRSpecialPermission;
-		
-		[XmlIgnore]
-		public string RVRSpecialPermission
-		{ 
-			get { return __RVRSpecialPermission; }
-			set { __RVRSpecialPermission = value; }
-		}
+		public string RVRSpecialPermission { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DHSpecialPermission",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DHSpecialPermission;
-		
-		[XmlIgnore]
-		public string DHSpecialPermission
-		{ 
-			get { return __DHSpecialPermission; }
-			set { __DHSpecialPermission = value; }
-		}
+		public string DHSpecialPermission { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MinutesSpecialPermission",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MinutesSpecialPermission;
-		
-		[XmlIgnore]
-		public string MinutesSpecialPermission
-		{ 
-			get { return __MinutesSpecialPermission; }
-			set { __MinutesSpecialPermission = value; }
-		}
+		public string MinutesSpecialPermission { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="NMSpecialPermission",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __NMSpecialPermission;
-		
-		[XmlIgnore]
-		public string NMSpecialPermission
-		{ 
-			get { return __NMSpecialPermission; }
-			set { __NMSpecialPermission = value; }
-		}
+		public string NMSpecialPermission { get; set; }
 
 		public SpecialPermissionDetails()
 		{

@@ -27,26 +27,12 @@ namespace R_5050
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4596.ActivityKind),ElementName="ActivityKind",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4596.ActivityKind __ActivityKind;
-		
-		[XmlIgnore]
-		public R_4596.ActivityKind ActivityKind
-		{
-			get {return __ActivityKind;}
-			set {__ActivityKind = value;}
-		}
+		public R_4596.ActivityKind ActivityKind { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ActivitySchedule",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ActivitySchedule;
-		
-		[XmlIgnore]
-		public string ActivitySchedule
-		{ 
-			get { return __ActivitySchedule; }
-			set { __ActivitySchedule = value; }
-		}
+		public string ActivitySchedule { get; set; }
 
 		public ActivityKindDetails()
 		{

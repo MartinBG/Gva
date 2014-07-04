@@ -27,26 +27,12 @@ namespace R_4448
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperationTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OperationTypeCode;
-		
-		[XmlIgnore]
-		public string OperationTypeCode
-		{ 
-			get { return __OperationTypeCode; }
-			set { __OperationTypeCode = value; }
-		}
+		public string OperationTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperationTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OperationTypeName;
-		
-		[XmlIgnore]
-		public string OperationTypeName
-		{ 
-			get { return __OperationTypeName; }
-			set { __OperationTypeName = value; }
-		}
+		public string OperationTypeName { get; set; }
 
 		public OperationType()
 		{

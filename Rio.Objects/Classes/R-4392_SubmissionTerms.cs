@@ -33,30 +33,12 @@ namespace R_4392
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ProvidingDocumentName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ProvidingDocumentName;
-		
-		[XmlIgnore]
-		public string ProvidingDocumentName
-		{ 
-			get { return __ProvidingDocumentName; }
-			set { __ProvidingDocumentName = value; }
-		}
+		public string ProvidingDocumentName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4388.ProvidingDocument),ElementName="ProvidingDocument",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ProvidingDocumentCollection __ProvidingDocumentCollection;
-		
-		[XmlIgnore]
-		public ProvidingDocumentCollection ProvidingDocumentCollection
-		{
-			get
-			{
-				if (__ProvidingDocumentCollection == null) __ProvidingDocumentCollection = new ProvidingDocumentCollection();
-				return __ProvidingDocumentCollection;
-			}
-			set {__ProvidingDocumentCollection = value;}
-		}
+		public ProvidingDocumentCollection ProvidingDocumentCollection { get; set; }
 
 		public SubmissionTerms()
 		{

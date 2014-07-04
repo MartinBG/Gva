@@ -27,26 +27,12 @@ namespace R_4434
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PropellerTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PropellerTypeCode;
-		
-		[XmlIgnore]
-		public string PropellerTypeCode
-		{ 
-			get { return __PropellerTypeCode; }
-			set { __PropellerTypeCode = value; }
-		}
+		public string PropellerTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PropellerTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PropellerTypeName;
-		
-		[XmlIgnore]
-		public string PropellerTypeName
-		{ 
-			get { return __PropellerTypeName; }
-			set { __PropellerTypeName = value; }
-		}
+		public string PropellerTypeName { get; set; }
 
 		public PropellerType()
 		{

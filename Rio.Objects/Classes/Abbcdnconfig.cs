@@ -27,74 +27,32 @@ namespace Abbcdn
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentDownloadUrl",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentDownloadUrl;
-		
-		[XmlIgnore]
-		public string AttachedDocumentDownloadUrl
-		{ 
-			get { return __AttachedDocumentDownloadUrl; }
-			set { __AttachedDocumentDownloadUrl = value; }
-		}
+		public string AttachedDocumentDownloadUrl { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentUniqueIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentUniqueIdentifier;
-		
-		[XmlIgnore]
-		public string AttachedDocumentUniqueIdentifier
-		{ 
-			get { return __AttachedDocumentUniqueIdentifier; }
-			set { __AttachedDocumentUniqueIdentifier = value; }
-		}
+		public string AttachedDocumentUniqueIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentHash",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentHash;
-		
-		[XmlIgnore]
-		public string AttachedDocumentHash
-		{ 
-			get { return __AttachedDocumentHash; }
-			set { __AttachedDocumentHash = value; }
-		}
+		public string AttachedDocumentHash { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentSize",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentSize;
-		
-		[XmlIgnore]
-		public string AttachedDocumentSize
-		{ 
-			get { return __AttachedDocumentSize; }
-			set { __AttachedDocumentSize = value; }
-		}
+		public string AttachedDocumentSize { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentFileName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentFileName;
-		
-		[XmlIgnore]
-		public string AttachedDocumentFileName
-		{ 
-			get { return __AttachedDocumentFileName; }
-			set { __AttachedDocumentFileName = value; }
-		}
+		public string AttachedDocumentFileName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentFileType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentFileType;
-		
-		[XmlIgnore]
-		public string AttachedDocumentFileType
-		{ 
-			get { return __AttachedDocumentFileType; }
-			set { __AttachedDocumentFileType = value; }
-		}
+		public string AttachedDocumentFileType { get; set; }
 
 		public Abbcdnconfig()
 		{

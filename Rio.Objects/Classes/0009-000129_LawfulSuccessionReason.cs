@@ -27,26 +27,12 @@ namespace R_0009_000129
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Relationship",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Relationship;
-		
-		[XmlIgnore]
-		public string Relationship
-		{ 
-			get { return __Relationship; }
-			set { __Relationship = value; }
-		}
+		public string Relationship { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Spouse",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Spouse;
-		
-		[XmlIgnore]
-		public string Spouse
-		{ 
-			get { return __Spouse; }
-			set { __Spouse = value; }
-		}
+		public string Spouse { get; set; }
 
 		public LawfulSuccessionReason()
 		{

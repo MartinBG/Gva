@@ -27,125 +27,47 @@ namespace R_4536
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftMaximumTakeOffWeight",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftMaximumTakeOffWeight;
-		
-		[XmlIgnore]
-		public string AircraftMaximumTakeOffWeight
-		{ 
-			get { return __AircraftMaximumTakeOffWeight; }
-			set { __AircraftMaximumTakeOffWeight = value; }
-		}
+		public string AircraftMaximumTakeOffWeight { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftMaintenanceProgram",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftMaintenanceProgram;
-		
-		[XmlIgnore]
-		public string AircraftMaintenanceProgram
-		{ 
-			get { return __AircraftMaintenanceProgram; }
-			set { __AircraftMaintenanceProgram = value; }
-		}
+		public string AircraftMaintenanceProgram { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftInspectionRepresentatives",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftInspectionRepresentatives;
-		
-		[XmlIgnore]
-		public string AircraftInspectionRepresentatives
-		{ 
-			get { return __AircraftInspectionRepresentatives; }
-			set { __AircraftInspectionRepresentatives = value; }
-		}
+		public string AircraftInspectionRepresentatives { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftModificationsEquipment",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftModificationsEquipment;
-		
-		[XmlIgnore]
-		public string AircraftModificationsEquipment
-		{ 
-			get { return __AircraftModificationsEquipment; }
-			set { __AircraftModificationsEquipment = value; }
-		}
+		public string AircraftModificationsEquipment { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ChangesModificationsResult",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ChangesModificationsResult;
-		
-		[XmlIgnore]
-		public string ChangesModificationsResult
-		{ 
-			get { return __ChangesModificationsResult; }
-			set { __ChangesModificationsResult = value; }
-		}
+		public string ChangesModificationsResult { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlagSpaceFlightsBrnav",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FlagSpaceFlightsBrnav;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FlagSpaceFlightsBrnavSpecified;
-		
-		[XmlIgnore]
-		public bool FlagSpaceFlightsBrnav
-		{ 
-			get { return __FlagSpaceFlightsBrnav; }
-			set { __FlagSpaceFlightsBrnav = value; __FlagSpaceFlightsBrnavSpecified = true; }
-		}
+		public bool FlagSpaceFlightsBrnav { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlagSpaceFlightsRvsm",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FlagSpaceFlightsRvsm;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FlagSpaceFlightsRvsmSpecified;
-		
-		[XmlIgnore]
-		public bool FlagSpaceFlightsRvsm
-		{ 
-			get { return __FlagSpaceFlightsRvsm; }
-			set { __FlagSpaceFlightsRvsm = value; __FlagSpaceFlightsRvsmSpecified = true; }
-		}
+		public bool FlagSpaceFlightsRvsm { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlagSpaceFlightsOther",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FlagSpaceFlightsOther;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FlagSpaceFlightsOtherSpecified;
-		
-		[XmlIgnore]
-		public bool FlagSpaceFlightsOther
-		{ 
-			get { return __FlagSpaceFlightsOther; }
-			set { __FlagSpaceFlightsOther = value; __FlagSpaceFlightsOtherSpecified = true; }
-		}
+		public bool FlagSpaceFlightsOther { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SpaceName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SpaceName;
-		
-		[XmlIgnore]
-		public string SpaceName
-		{ 
-			get { return __SpaceName; }
-			set { __SpaceName = value; }
-		}
+		public string SpaceName { get; set; }
 
 		public AirworthinessAdditionalInformation()
 		{

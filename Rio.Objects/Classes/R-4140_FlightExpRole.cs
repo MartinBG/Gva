@@ -27,26 +27,12 @@ namespace R_4140
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightExpRoleCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightExpRoleCode;
-		
-		[XmlIgnore]
-		public string FlightExpRoleCode
-		{ 
-			get { return __FlightExpRoleCode; }
-			set { __FlightExpRoleCode = value; }
-		}
+		public string FlightExpRoleCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightExpRoleName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightExpRoleName;
-		
-		[XmlIgnore]
-		public string FlightExpRoleName
-		{ 
-			get { return __FlightExpRoleName; }
-			set { __FlightExpRoleName = value; }
-		}
+		public string FlightExpRoleName { get; set; }
 
 		public FlightExpRole()
 		{

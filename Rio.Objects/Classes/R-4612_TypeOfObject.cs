@@ -27,26 +27,12 @@ namespace R_4612
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TypeOfObjectCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TypeOfObjectCode;
-		
-		[XmlIgnore]
-		public string TypeOfObjectCode
-		{ 
-			get { return __TypeOfObjectCode; }
-			set { __TypeOfObjectCode = value; }
-		}
+		public string TypeOfObjectCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TypeOfObjectName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TypeOfObjectName;
-		
-		[XmlIgnore]
-		public string TypeOfObjectName
-		{ 
-			get { return __TypeOfObjectName; }
-			set { __TypeOfObjectName = value; }
-		}
+		public string TypeOfObjectName { get; set; }
 
 		public TypeOfObject()
 		{

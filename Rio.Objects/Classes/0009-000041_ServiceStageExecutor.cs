@@ -27,26 +27,12 @@ namespace R_0009_000041
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000030.PositionInAdministrationOrAISUser),ElementName="PositionInAdministrationOrAISUser",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000030.PositionInAdministrationOrAISUser __PositionInAdministrationOrAISUser;
-		
-		[XmlIgnore]
-		public R_0009_000030.PositionInAdministrationOrAISUser PositionInAdministrationOrAISUser
-		{
-			get {return __PositionInAdministrationOrAISUser;}
-			set {__PositionInAdministrationOrAISUser = value;}
-		}
+		public R_0009_000030.PositionInAdministrationOrAISUser PositionInAdministrationOrAISUser { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ServiceStageExecutorAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ServiceStageExecutorAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public ServiceStageExecutorAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public ServiceStageExecutorAdditionalData AdditionalData { get; set; }
 
 		public ServiceStageExecutor()
 		{

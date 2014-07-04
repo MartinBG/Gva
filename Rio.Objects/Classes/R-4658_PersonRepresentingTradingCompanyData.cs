@@ -27,38 +27,17 @@ namespace R_4658
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonRepresentingOLVPCandidateNames",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonRepresentingOLVPCandidateNames;
-		
-		[XmlIgnore]
-		public string PersonRepresentingOLVPCandidateNames
-		{ 
-			get { return __PersonRepresentingOLVPCandidateNames; }
-			set { __PersonRepresentingOLVPCandidateNames = value; }
-		}
+		public string PersonRepresentingOLVPCandidateNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000133.Citizenship __Citizenship;
-		
-		[XmlIgnore]
-		public R_0009_000133.Citizenship Citizenship
-		{
-			get {return __Citizenship;}
-			set {__Citizenship = value;}
-		}
+		public R_0009_000133.Citizenship Citizenship { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4656.PersonRepresentingTradingCompanyRole),ElementName="PersonRepresentingTradingCompanyRole",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4656.PersonRepresentingTradingCompanyRole __PersonRepresentingTradingCompanyRole;
-		
-		[XmlIgnore]
-		public R_4656.PersonRepresentingTradingCompanyRole PersonRepresentingTradingCompanyRole
-		{
-			get {return __PersonRepresentingTradingCompanyRole;}
-			set {__PersonRepresentingTradingCompanyRole = value;}
-		}
+		public R_4656.PersonRepresentingTradingCompanyRole PersonRepresentingTradingCompanyRole { get; set; }
 
 		public PersonRepresentingTradingCompanyData()
 		{

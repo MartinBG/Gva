@@ -27,26 +27,12 @@ namespace R_0009_000008
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="Names",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __Names;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames Names
-		{
-			get {return __Names;}
-			set {__Names = value;}
-		}
+		public R_0009_000005.PersonNames Names { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000006.PersonIdentifier),ElementName="Identifier",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000006.PersonIdentifier __Identifier;
-		
-		[XmlIgnore]
-		public R_0009_000006.PersonIdentifier Identifier
-		{
-			get {return __Identifier;}
-			set {__Identifier = value;}
-		}
+		public R_0009_000006.PersonIdentifier Identifier { get; set; }
 
 		public PersonBasicData()
 		{

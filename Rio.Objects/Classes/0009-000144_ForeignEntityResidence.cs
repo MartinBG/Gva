@@ -27,38 +27,17 @@ namespace R_0009_000144
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryISO3166TwoLetterCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryISO3166TwoLetterCode;
-		
-		[XmlIgnore]
-		public string CountryISO3166TwoLetterCode
-		{ 
-			get { return __CountryISO3166TwoLetterCode; }
-			set { __CountryISO3166TwoLetterCode = value; }
-		}
+		public string CountryISO3166TwoLetterCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryNameCyrillic",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryNameCyrillic;
-		
-		[XmlIgnore]
-		public string CountryNameCyrillic
-		{ 
-			get { return __CountryNameCyrillic; }
-			set { __CountryNameCyrillic = value; }
-		}
+		public string CountryNameCyrillic { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementAbroadName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementAbroadName;
-		
-		[XmlIgnore]
-		public string SettlementAbroadName
-		{ 
-			get { return __SettlementAbroadName; }
-			set { __SettlementAbroadName = value; }
-		}
+		public string SettlementAbroadName { get; set; }
 
 		public ForeignEntityResidence()
 		{

@@ -27,38 +27,17 @@ namespace R_4554
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ManufacturerName;
-		
-		[XmlIgnore]
-		public string ManufacturerName
-		{ 
-			get { return __ManufacturerName; }
-			set { __ManufacturerName = value; }
-		}
+		public string ManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4434.PropellerType),ElementName="PropellerType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4434.PropellerType __PropellerType;
-		
-		[XmlIgnore]
-		public R_4434.PropellerType PropellerType
-		{
-			get {return __PropellerType;}
-			set {__PropellerType = value;}
-		}
+		public R_4434.PropellerType PropellerType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4548.AircraftsSerialNumbersTTSNCollection),ElementName="AircraftsSerialNumbersTTSNCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4548.AircraftsSerialNumbersTTSNCollection __AircraftsSerialNumbersTTSNCollection;
-		
-		[XmlIgnore]
-		public R_4548.AircraftsSerialNumbersTTSNCollection AircraftsSerialNumbersTTSNCollection
-		{
-			get {return __AircraftsSerialNumbersTTSNCollection;}
-			set {__AircraftsSerialNumbersTTSNCollection = value;}
-		}
+		public R_4548.AircraftsSerialNumbersTTSNCollection AircraftsSerialNumbersTTSNCollection { get; set; }
 
 		public PropellerDescriptionExportCertificate()
 		{

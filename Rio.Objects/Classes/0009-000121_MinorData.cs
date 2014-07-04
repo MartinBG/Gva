@@ -27,26 +27,12 @@ namespace R_0009_000121
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000118.RelativeData),ElementName="RelativeData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000118.RelativeData __RelativeData;
-		
-		[XmlIgnore]
-		public R_0009_000118.RelativeData RelativeData
-		{
-			get {return __RelativeData;}
-			set {__RelativeData = value;}
-		}
+		public R_0009_000118.RelativeData RelativeData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000119.ForeignCitizeRelativeData),ElementName="ForeignCitizeRelativeData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000119.ForeignCitizeRelativeData __ForeignCitizeRelativeData;
-		
-		[XmlIgnore]
-		public R_0009_000119.ForeignCitizeRelativeData ForeignCitizeRelativeData
-		{
-			get {return __ForeignCitizeRelativeData;}
-			set {__ForeignCitizeRelativeData = value;}
-		}
+		public R_0009_000119.ForeignCitizeRelativeData ForeignCitizeRelativeData { get; set; }
 
 		public MinorData()
 		{

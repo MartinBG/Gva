@@ -27,62 +27,27 @@ namespace R_0009_000139
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentFileContent",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __AttachedDocumentFileContent;
-		
-		[XmlIgnore]
-		public byte[] AttachedDocumentFileContent
-		{ 
-			get { return __AttachedDocumentFileContent; }
-			set { __AttachedDocumentFileContent = value; }
-		}
+		public byte[] AttachedDocumentFileContent { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentDescription;
-		
-		[XmlIgnore]
-		public string AttachedDocumentDescription
-		{ 
-			get { return __AttachedDocumentDescription; }
-			set { __AttachedDocumentDescription = value; }
-		}
+		public string AttachedDocumentDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentUniqueIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentUniqueIdentifier;
-		
-		[XmlIgnore]
-		public string AttachedDocumentUniqueIdentifier
-		{ 
-			get { return __AttachedDocumentUniqueIdentifier; }
-			set { __AttachedDocumentUniqueIdentifier = value; }
-		}
+		public string AttachedDocumentUniqueIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FileType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FileType;
-		
-		[XmlIgnore]
-		public string FileType
-		{ 
-			get { return __FileType; }
-			set { __FileType = value; }
-		}
+		public string FileType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentFileName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentFileName;
-		
-		[XmlIgnore]
-		public string AttachedDocumentFileName
-		{ 
-			get { return __AttachedDocumentFileName; }
-			set { __AttachedDocumentFileName = value; }
-		}
+		public string AttachedDocumentFileName { get; set; }
 
 		public AttachedDocument()
 		{

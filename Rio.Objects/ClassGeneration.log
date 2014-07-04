@@ -3,13 +3,6 @@
 
 ============== STDERR ==============
 
-Unhandled Exception: XsdClassGenerator.XSDObjectGenLib.XSDObjectGenException: .NET Framework XSD Schema compile error.
-Error occurred : Schema Validation Error: Type 'http://ereg.egov.bg/value/R-6018:ServiceInstructionsName' is not declared.
-   at XsdClassGenerator.XSDObjectGenLib.XSDSchemaParser.Execute(String xsdFile, Language language, String genNamespace, String fileName, String outputLocation, Boolean constructRequiredSchema, Boolean depthFirstTraversalHooks, Boolean defaultInitialization, Hashtable& namespaceTable, Hashtable filenameTable, Boolean partialKeyword) in g:\Projects\Gva\XsdClassGenerator\XSDObjectGenLib\XSDSchemaParser.cs:line 556
-   at XsdClassGenerator.Program.GenerateClasses(String outputFolder) in g:\Projects\Gva\XsdClassGenerator\Program.cs:line 75
-   at XsdClassGenerator.Program.GenerateClasses(String inputFolder, String outputFolder) in g:\Projects\Gva\XsdClassGenerator\Program.cs:line 34
-   at XsdClassGenerator.Program.Main(String[] args) in g:\Projects\Gva\XsdClassGenerator\Program.cs:line 22
-
 
 ============== EXITCODE ==============
--532462766
+0

@@ -27,57 +27,22 @@ namespace R_0009_000011
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="Names",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __Names;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames Names
-		{
-			get {return __Names;}
-			set {__Names = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames Names { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000009.ForeignCitizenPlaceOfBirth),ElementName="PlaceOfBirth",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000009.ForeignCitizenPlaceOfBirth __PlaceOfBirth;
-		
-		[XmlIgnore]
-		public R_0009_000009.ForeignCitizenPlaceOfBirth PlaceOfBirth
-		{
-			get {return __PlaceOfBirth;}
-			set {__PlaceOfBirth = value;}
-		}
+		public R_0009_000009.ForeignCitizenPlaceOfBirth PlaceOfBirth { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000010.ForeignCitizenIdentityDocument),ElementName="IdentityDocument",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000010.ForeignCitizenIdentityDocument __IdentityDocument;
-		
-		[XmlIgnore]
-		public R_0009_000010.ForeignCitizenIdentityDocument IdentityDocument
-		{
-			get {return __IdentityDocument;}
-			set {__IdentityDocument = value;}
-		}
+		public R_0009_000010.ForeignCitizenIdentityDocument IdentityDocument { get; set; }
 
 		public ForeignCitizenBasicData()
 		{

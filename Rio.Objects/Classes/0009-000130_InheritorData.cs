@@ -27,112 +27,42 @@ namespace R_0009_000130
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000006.PersonIdentifier),ElementName="PersonIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000006.PersonIdentifier __PersonIdentifier;
-		
-		[XmlIgnore]
-		public R_0009_000006.PersonIdentifier PersonIdentifier
-		{
-			get {return __PersonIdentifier;}
-			set {__PersonIdentifier = value;}
-		}
+		public R_0009_000006.PersonIdentifier PersonIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DateOfDeath",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DateOfDeath;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DateOfDeathSpecified { get { return __DateOfDeath.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DateOfDeath
-		{ 
-			get { return __DateOfDeath; }
-			set { __DateOfDeath = value; }
-		}
-		
-
+		public DateTime? DateOfDeath { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000129.LawfulSuccessionReason),ElementName="LawfulSuccessionReason",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000129.LawfulSuccessionReason __LawfulSuccessionReason;
-		
-		[XmlIgnore]
-		public R_0009_000129.LawfulSuccessionReason LawfulSuccessionReason
-		{
-			get {return __LawfulSuccessionReason;}
-			set {__LawfulSuccessionReason = value;}
-		}
+		public R_0009_000129.LawfulSuccessionReason LawfulSuccessionReason { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000094.PersonAddress),ElementName="PermanentAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000094.PersonAddress __PermanentAddress;
-		
-		[XmlIgnore]
-		public R_0009_000094.PersonAddress PermanentAddress
-		{
-			get {return __PermanentAddress;}
-			set {__PermanentAddress = value;}
-		}
+		public R_0009_000094.PersonAddress PermanentAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="InheritorDataNote",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __InheritorDataNote;
-		
-		[XmlIgnore]
-		public string InheritorDataNote
-		{ 
-			get { return __InheritorDataNote; }
-			set { __InheritorDataNote = value; }
-		}
+		public string InheritorDataNote { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="InheritorUID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __InheritorUID;
-		
-		[XmlIgnore]
-		public string InheritorUID
-		{ 
-			get { return __InheritorUID; }
-			set { __InheritorUID = value; }
-		}
+		public string InheritorUID { get; set; }
 
 		public InheritorData()
 		{

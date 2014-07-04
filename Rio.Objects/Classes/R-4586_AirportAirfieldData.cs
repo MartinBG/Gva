@@ -27,86 +27,37 @@ namespace R_4586
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AirportAirfieldName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AirportAirfieldName;
-		
-		[XmlIgnore]
-		public string AirportAirfieldName
-		{ 
-			get { return __AirportAirfieldName; }
-			set { __AirportAirfieldName = value; }
-		}
+		public string AirportAirfieldName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictCode;
-		
-		[XmlIgnore]
-		public string DistrictCode
-		{ 
-			get { return __DistrictCode; }
-			set { __DistrictCode = value; }
-		}
+		public string DistrictCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictName;
-		
-		[XmlIgnore]
-		public string DistrictName
-		{ 
-			get { return __DistrictName; }
-			set { __DistrictName = value; }
-		}
+		public string DistrictName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MunicipalityCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MunicipalityCode;
-		
-		[XmlIgnore]
-		public string MunicipalityCode
-		{ 
-			get { return __MunicipalityCode; }
-			set { __MunicipalityCode = value; }
-		}
+		public string MunicipalityCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MunicipalityName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MunicipalityName;
-		
-		[XmlIgnore]
-		public string MunicipalityName
-		{ 
-			get { return __MunicipalityName; }
-			set { __MunicipalityName = value; }
-		}
+		public string MunicipalityName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementCode;
-		
-		[XmlIgnore]
-		public string SettlementCode
-		{ 
-			get { return __SettlementCode; }
-			set { __SettlementCode = value; }
-		}
+		public string SettlementCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementName;
-		
-		[XmlIgnore]
-		public string SettlementName
-		{ 
-			get { return __SettlementName; }
-			set { __SettlementName = value; }
-		}
+		public string SettlementName { get; set; }
 
 		public AirportAirfieldData()
 		{

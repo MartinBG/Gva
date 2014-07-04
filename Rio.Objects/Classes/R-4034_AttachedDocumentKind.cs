@@ -27,26 +27,12 @@ namespace R_4034
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentKindCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentKindCode;
-		
-		[XmlIgnore]
-		public string AttachedDocumentKindCode
-		{ 
-			get { return __AttachedDocumentKindCode; }
-			set { __AttachedDocumentKindCode = value; }
-		}
+		public string AttachedDocumentKindCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentKindName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentKindName;
-		
-		[XmlIgnore]
-		public string AttachedDocumentKindName
-		{ 
-			get { return __AttachedDocumentKindName; }
-			set { __AttachedDocumentKindName = value; }
-		}
+		public string AttachedDocumentKindName { get; set; }
 
 		public AttachedDocumentKind()
 		{

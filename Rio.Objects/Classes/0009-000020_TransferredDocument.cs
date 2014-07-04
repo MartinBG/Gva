@@ -27,62 +27,27 @@ namespace R_0009_000020
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ShortTransferDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ShortTransferDescription;
-		
-		[XmlIgnore]
-		public string ShortTransferDescription
-		{ 
-			get { return __ShortTransferDescription; }
-			set { __ShortTransferDescription = value; }
-		}
+		public string ShortTransferDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ExpandedTransferDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ExpandedTransferDescription;
-		
-		[XmlIgnore]
-		public string ExpandedTransferDescription
-		{ 
-			get { return __ExpandedTransferDescription; }
-			set { __ExpandedTransferDescription = value; }
-		}
+		public string ExpandedTransferDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FileType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FileType;
-		
-		[XmlIgnore]
-		public string FileType
-		{ 
-			get { return __FileType; }
-			set { __FileType = value; }
-		}
+		public string FileType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FileContent",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __FileContent;
-		
-		[XmlIgnore]
-		public byte[] FileContent
-		{ 
-			get { return __FileContent; }
-			set { __FileContent = value; }
-		}
+		public byte[] FileContent { get; set; }
 
 		public TransferredDocument()
 		{

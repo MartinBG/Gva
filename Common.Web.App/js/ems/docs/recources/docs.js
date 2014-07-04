@@ -93,6 +93,10 @@
             'postDocSendEmail': {
               method: 'POST',
               url: '/api/docs/:id/postDocSendEmail'
+            },
+            'getRioEditableFile': {
+              method: 'GET',
+              url: '/api/docs/:id/getRioEditableFile'
             }
           });
       }]);

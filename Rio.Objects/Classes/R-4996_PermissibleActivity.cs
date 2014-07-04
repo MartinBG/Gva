@@ -27,26 +27,12 @@ namespace R_4996
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PermissibleActivityCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PermissibleActivityCode;
-		
-		[XmlIgnore]
-		public string PermissibleActivityCode
-		{ 
-			get { return __PermissibleActivityCode; }
-			set { __PermissibleActivityCode = value; }
-		}
+		public string PermissibleActivityCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PermissibleActivityName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PermissibleActivityName;
-		
-		[XmlIgnore]
-		public string PermissibleActivityName
-		{ 
-			get { return __PermissibleActivityName; }
-			set { __PermissibleActivityName = value; }
-		}
+		public string PermissibleActivityName { get; set; }
 
 		public PermissibleActivity()
 		{

@@ -33,85 +33,32 @@ namespace R_0009_000081
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000013.EntityBasicData),ElementName="ConcernedEntity",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000013.EntityBasicData __ConcernedEntity;
-		
-		[XmlIgnore]
-		public R_0009_000013.EntityBasicData ConcernedEntity
-		{
-			get {return __ConcernedEntity;}
-			set {__ConcernedEntity = value;}
-		}
+		public R_0009_000013.EntityBasicData ConcernedEntity { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000013.EntityBasicData),ElementName="AccreditedEntity",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000013.EntityBasicData __AccreditedEntity;
-		
-		[XmlIgnore]
-		public R_0009_000013.EntityBasicData AccreditedEntity
-		{
-			get {return __AccreditedEntity;}
-			set {__AccreditedEntity = value;}
-		}
+		public R_0009_000013.EntityBasicData AccreditedEntity { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AISOrApplicationName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AISOrApplicationName;
-		
-		[XmlIgnore]
-		public string AISOrApplicationName
-		{ 
-			get { return __AISOrApplicationName; }
-			set { __AISOrApplicationName = value; }
-		}
+		public string AISOrApplicationName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Check),ElementName="Check",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CheckCollection __CheckCollection;
-		
-		[XmlIgnore]
-		public CheckCollection CheckCollection
-		{
-			get
-			{
-				if (__CheckCollection == null) __CheckCollection = new CheckCollection();
-				return __CheckCollection;
-			}
-			set {__CheckCollection = value;}
-		}
+		public CheckCollection CheckCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CheckDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __CheckDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __CheckDateSpecified { get { return __CheckDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? CheckDate
-		{ 
-			get { return __CheckDate; }
-			set { __CheckDate = value; }
-		}
-		
-
+		public DateTime? CheckDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="Signature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __Signature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature Signature
-		{
-			get {return __Signature;}
-			set {__Signature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature Signature { get; set; }
 
 		public AISCertificationCheckResult()
 		{
@@ -126,74 +73,32 @@ namespace R_0009_000081
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SequenceNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SequenceNumber;
-		
-		[XmlIgnore]
-		public string SequenceNumber
-		{ 
-			get { return __SequenceNumber; }
-			set { __SequenceNumber = value; }
-		}
+		public string SequenceNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResultType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResultType;
-		
-		[XmlIgnore]
-		public string ResultType
-		{ 
-			get { return __ResultType; }
-			set { __ResultType = value; }
-		}
+		public string ResultType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PreparationActions",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PreparationActions;
-		
-		[XmlIgnore]
-		public string PreparationActions
-		{ 
-			get { return __PreparationActions; }
-			set { __PreparationActions = value; }
-		}
+		public string PreparationActions { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ActualOutcome",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ActualOutcome;
-		
-		[XmlIgnore]
-		public string ActualOutcome
-		{ 
-			get { return __ActualOutcome; }
-			set { __ActualOutcome = value; }
-		}
+		public string ActualOutcome { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Recommendations",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Recommendations;
-		
-		[XmlIgnore]
-		public string Recommendations
-		{ 
-			get { return __Recommendations; }
-			set { __Recommendations = value; }
-		}
+		public string Recommendations { get; set; }
 
 		public Check()
 		{

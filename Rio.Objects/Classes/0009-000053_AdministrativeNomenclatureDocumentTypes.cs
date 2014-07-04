@@ -33,54 +33,22 @@ namespace R_0009_000053
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ID;
-		
-		[XmlIgnore]
-		public string ID
-		{ 
-			get { return __ID; }
-			set { __ID = value; }
-		}
+		public string ID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000052.AdministrativeNomenclatureDocumentTypeElement),ElementName="DocumentType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AdministrativeNomenclatureDocumentTypeElementCollection __DocumentTypeCollection;
-		
-		[XmlIgnore]
-		public AdministrativeNomenclatureDocumentTypeElementCollection DocumentTypeCollection
-		{
-			get
-			{
-				if (__DocumentTypeCollection == null) __DocumentTypeCollection = new AdministrativeNomenclatureDocumentTypeElementCollection();
-				return __DocumentTypeCollection;
-			}
-			set {__DocumentTypeCollection = value;}
-		}
+		public AdministrativeNomenclatureDocumentTypeElementCollection DocumentTypeCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000032.AISObjectCreationData),ElementName="ObjectCreationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000032.AISObjectCreationData __ObjectCreationData;
-		
-		[XmlIgnore]
-		public R_0009_000032.AISObjectCreationData ObjectCreationData
-		{
-			get {return __ObjectCreationData;}
-			set {__ObjectCreationData = value;}
-		}
+		public R_0009_000032.AISObjectCreationData ObjectCreationData { get; set; }
 
 		public AdministrativeNomenclatureDocumentTypes()
 		{

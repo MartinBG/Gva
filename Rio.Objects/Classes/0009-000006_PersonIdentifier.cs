@@ -27,26 +27,12 @@ namespace R_0009_000006
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EGN",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EGN;
-		
-		[XmlIgnore]
-		public string EGN
-		{ 
-			get { return __EGN; }
-			set { __EGN = value; }
-		}
+		public string EGN { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LNCh",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __LNCh;
-		
-		[XmlIgnore]
-		public string LNCh
-		{ 
-			get { return __LNCh; }
-			set { __LNCh = value; }
-		}
+		public string LNCh { get; set; }
 
 		public PersonIdentifier()
 		{

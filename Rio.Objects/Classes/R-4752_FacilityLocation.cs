@@ -27,26 +27,12 @@ namespace R_4752
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FacilityLocationCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FacilityLocationCode;
-		
-		[XmlIgnore]
-		public string FacilityLocationCode
-		{ 
-			get { return __FacilityLocationCode; }
-			set { __FacilityLocationCode = value; }
-		}
+		public string FacilityLocationCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FacilityLocationName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FacilityLocationName;
-		
-		[XmlIgnore]
-		public string FacilityLocationName
-		{ 
-			get { return __FacilityLocationName; }
-			set { __FacilityLocationName = value; }
-		}
+		public string FacilityLocationName { get; set; }
 
 		public FacilityLocation()
 		{

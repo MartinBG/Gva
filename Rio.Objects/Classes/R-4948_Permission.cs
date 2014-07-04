@@ -27,26 +27,12 @@ namespace R_4948
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PermissionType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PermissionType;
-		
-		[XmlIgnore]
-		public string PermissionType
-		{ 
-			get { return __PermissionType; }
-			set { __PermissionType = value; }
-		}
+		public string PermissionType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PermissionModel",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PermissionModel;
-		
-		[XmlIgnore]
-		public string PermissionModel
-		{ 
-			get { return __PermissionModel; }
-			set { __PermissionModel = value; }
-		}
+		public string PermissionModel { get; set; }
 
 		public Permission()
 		{

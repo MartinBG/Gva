@@ -39,194 +39,82 @@ namespace R_0009_000105
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000152.ElectronicAdministrativeServiceHeader),ElementName="ElectronicAdministrativeServiceHeader",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader __ElectronicAdministrativeServiceHeader;
-		
-		[XmlIgnore]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader
-		{
-			get {return __ElectronicAdministrativeServiceHeader;}
-			set {__ElectronicAdministrativeServiceHeader = value;}
-		}
+		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ServiceTermType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ServiceTermType;
-		
-		[XmlIgnore]
-		public string ServiceTermType
-		{ 
-			get { return __ServiceTermType; }
-			set { __ServiceTermType = value; }
-		}
+		public string ServiceTermType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000141.ServiceApplicantReceiptData),ElementName="ServiceApplicantReceiptData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000141.ServiceApplicantReceiptData __ServiceApplicantReceiptData;
-		
-		[XmlIgnore]
-		public R_0009_000141.ServiceApplicantReceiptData ServiceApplicantReceiptData
-		{
-			get {return __ServiceApplicantReceiptData;}
-			set {__ServiceApplicantReceiptData = value;}
-		}
+		public R_0009_000141.ServiceApplicantReceiptData ServiceApplicantReceiptData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonResidenceStatusCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonResidenceStatusCode;
-		
-		[XmlIgnore]
-		public string PersonResidenceStatusCode
-		{ 
-			get { return __PersonResidenceStatusCode; }
-			set { __PersonResidenceStatusCode = value; }
-		}
+		public string PersonResidenceStatusCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonResidenceStatus",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonResidenceStatus;
-		
-		[XmlIgnore]
-		public string PersonResidenceStatus
-		{ 
-			get { return __PersonResidenceStatus; }
-			set { __PersonResidenceStatus = value; }
-		}
+		public string PersonResidenceStatus { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000094.PersonAddress),ElementName="NewCurrentAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000094.PersonAddress __NewCurrentAddress;
-		
-		[XmlIgnore]
-		public R_0009_000094.PersonAddress NewCurrentAddress
-		{
-			get {return __NewCurrentAddress;}
-			set {__NewCurrentAddress = value;}
-		}
+		public R_0009_000094.PersonAddress NewCurrentAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EducationLevelCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EducationLevelCode;
-		
-		[XmlIgnore]
-		public string EducationLevelCode
-		{ 
-			get { return __EducationLevelCode; }
-			set { __EducationLevelCode = value; }
-		}
+		public string EducationLevelCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EducationLevel",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EducationLevel;
-		
-		[XmlIgnore]
-		public string EducationLevel
-		{ 
-			get { return __EducationLevel; }
-			set { __EducationLevel = value; }
-		}
+		public string EducationLevel { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidencePeriodCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResidencePeriodCode;
-		
-		[XmlIgnore]
-		public string ResidencePeriodCode
-		{ 
-			get { return __ResidencePeriodCode; }
-			set { __ResidencePeriodCode = value; }
-		}
+		public string ResidencePeriodCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidencePeriod",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResidencePeriod;
-		
-		[XmlIgnore]
-		public string ResidencePeriod
-		{ 
-			get { return __ResidencePeriod; }
-			set { __ResidencePeriod = value; }
-		}
+		public string ResidencePeriod { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidencePurposeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResidencePurposeCode;
-		
-		[XmlIgnore]
-		public string ResidencePurposeCode
-		{ 
-			get { return __ResidencePurposeCode; }
-			set { __ResidencePurposeCode = value; }
-		}
+		public string ResidencePurposeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidencePurpose",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResidencePurpose;
-		
-		[XmlIgnore]
-		public string ResidencePurpose
-		{ 
-			get { return __ResidencePurpose; }
-			set { __ResidencePurpose = value; }
-		}
+		public string ResidencePurpose { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000008.PersonBasicData),ElementName="ApplicationSubject",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000008.PersonBasicData __ApplicationSubject;
-		
-		[XmlIgnore]
-		public R_0009_000008.PersonBasicData ApplicationSubject
-		{
-			get {return __ApplicationSubject;}
-			set {__ApplicationSubject = value;}
-		}
+		public R_0009_000008.PersonBasicData ApplicationSubject { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(MinorChildren),ElementName="MinorChildren",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MinorChildren __MinorChildren;
-		
-		[XmlIgnore]
-		public MinorChildren MinorChildren
-		{
-			get {return __MinorChildren;}
-			set {__MinorChildren = value;}
-		}
+		public MinorChildren MinorChildren { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ChangeCurrentAddressApplicationAttachedDocuments),ElementName="AttachedDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ChangeCurrentAddressApplicationAttachedDocuments __AttachedDocuments;
-		
-		[XmlIgnore]
-		public ChangeCurrentAddressApplicationAttachedDocuments AttachedDocuments
-		{
-			get {return __AttachedDocuments;}
-			set {__AttachedDocuments = value;}
-		}
+		public ChangeCurrentAddressApplicationAttachedDocuments AttachedDocuments { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000153.ElectronicAdministrativeServiceFooter),ElementName="ElectronicAdministrativeServiceFooter",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter __ElectronicAdministrativeServiceFooter;
-		
-		[XmlIgnore]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter
-		{
-			get {return __ElectronicAdministrativeServiceFooter;}
-			set {__ElectronicAdministrativeServiceFooter = value;}
-		}
+		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter { get; set; }
 
 		public ChangeCurrentAddressApplication()
 		{
@@ -242,18 +130,7 @@ namespace R_0009_000105
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000162.MinorChild),ElementName="MinorChild",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MinorChildCollection __MinorChildCollection;
-		
-		[XmlIgnore]
-		public MinorChildCollection MinorChildCollection
-		{
-			get
-			{
-				if (__MinorChildCollection == null) __MinorChildCollection = new MinorChildCollection();
-				return __MinorChildCollection;
-			}
-			set {__MinorChildCollection = value;}
-		}
+		public MinorChildCollection MinorChildCollection { get; set; }
 
 		public MinorChildren()
 		{
@@ -269,18 +146,7 @@ namespace R_0009_000105
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000139.AttachedDocument),ElementName="AttachedDocument",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AttachedDocumentCollection __AttachedDocumentCollection;
-		
-		[XmlIgnore]
-		public AttachedDocumentCollection AttachedDocumentCollection
-		{
-			get
-			{
-				if (__AttachedDocumentCollection == null) __AttachedDocumentCollection = new AttachedDocumentCollection();
-				return __AttachedDocumentCollection;
-			}
-			set {__AttachedDocumentCollection = value;}
-		}
+		public AttachedDocumentCollection AttachedDocumentCollection { get; set; }
 
 		public ChangeCurrentAddressApplicationAttachedDocuments()
 		{

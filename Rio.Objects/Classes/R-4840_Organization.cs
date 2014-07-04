@@ -27,26 +27,12 @@ namespace R_4840
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OrganizationCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OrganizationCode;
-		
-		[XmlIgnore]
-		public string OrganizationCode
-		{ 
-			get { return __OrganizationCode; }
-			set { __OrganizationCode = value; }
-		}
+		public string OrganizationCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OrganizationName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OrganizationName;
-		
-		[XmlIgnore]
-		public string OrganizationName
-		{ 
-			get { return __OrganizationName; }
-			set { __OrganizationName = value; }
-		}
+		public string OrganizationName { get; set; }
 
 		public Organization()
 		{

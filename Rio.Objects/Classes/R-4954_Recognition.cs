@@ -27,26 +27,12 @@ namespace R_4954
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RecognitionCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RecognitionCode;
-		
-		[XmlIgnore]
-		public string RecognitionCode
-		{ 
-			get { return __RecognitionCode; }
-			set { __RecognitionCode = value; }
-		}
+		public string RecognitionCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RecognitionName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RecognitionName;
-		
-		[XmlIgnore]
-		public string RecognitionName
-		{ 
-			get { return __RecognitionName; }
-			set { __RecognitionName = value; }
-		}
+		public string RecognitionName { get; set; }
 
 		public Recognition()
 		{

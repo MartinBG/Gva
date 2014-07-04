@@ -27,26 +27,12 @@ namespace R_4370
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4158.AircraftType __AircraftType;
-		
-		[XmlIgnore]
-		public R_4158.AircraftType AircraftType
-		{
-			get {return __AircraftType;}
-			set {__AircraftType = value;}
-		}
+		public R_4158.AircraftType AircraftType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftSeries",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftSeries;
-		
-		[XmlIgnore]
-		public string AircraftSeries
-		{ 
-			get { return __AircraftSeries; }
-			set { __AircraftSeries = value; }
-		}
+		public string AircraftSeries { get; set; }
 
 		public ModelAircraftAccordingTypeCertificate()
 		{

@@ -27,86 +27,37 @@ namespace R_4376
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftRegistrationMark",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftRegistrationMark;
-		
-		[XmlIgnore]
-		public string AircraftRegistrationMark
-		{ 
-			get { return __AircraftRegistrationMark; }
-			set { __AircraftRegistrationMark = value; }
-		}
+		public string AircraftRegistrationMark { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4364.CategoryAircraft),ElementName="CategoryAircraft",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4364.CategoryAircraft __CategoryAircraft;
-		
-		[XmlIgnore]
-		public R_4364.CategoryAircraft CategoryAircraft
-		{
-			get {return __CategoryAircraft;}
-			set {__CategoryAircraft = value;}
-		}
+		public R_4364.CategoryAircraft CategoryAircraft { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightCertificateCertificationTableNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightCertificateCertificationTableNumber;
-		
-		[XmlIgnore]
-		public string FlightCertificateCertificationTableNumber
-		{ 
-			get { return __FlightCertificateCertificationTableNumber; }
-			set { __FlightCertificateCertificationTableNumber = value; }
-		}
+		public string FlightCertificateCertificationTableNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4368.AircraftManufacturerData),ElementName="AircraftManufacturerData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4368.AircraftManufacturerData __AircraftManufacturerData;
-		
-		[XmlIgnore]
-		public R_4368.AircraftManufacturerData AircraftManufacturerData
-		{
-			get {return __AircraftManufacturerData;}
-			set {__AircraftManufacturerData = value;}
-		}
+		public R_4368.AircraftManufacturerData AircraftManufacturerData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4370.ModelAircraftAccordingTypeCertificate),ElementName="ModelAircraftAccordingTypeCertificate",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4370.ModelAircraftAccordingTypeCertificate __ModelAircraftAccordingTypeCertificate;
-		
-		[XmlIgnore]
-		public R_4370.ModelAircraftAccordingTypeCertificate ModelAircraftAccordingTypeCertificate
-		{
-			get {return __ModelAircraftAccordingTypeCertificate;}
-			set {__ModelAircraftAccordingTypeCertificate = value;}
-		}
+		public R_4370.ModelAircraftAccordingTypeCertificate ModelAircraftAccordingTypeCertificate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ManufacturerTransponderName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ManufacturerTransponderName;
-		
-		[XmlIgnore]
-		public string ManufacturerTransponderName
-		{ 
-			get { return __ManufacturerTransponderName; }
-			set { __ManufacturerTransponderName = value; }
-		}
+		public string ManufacturerTransponderName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TransponderModel",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TransponderModel;
-		
-		[XmlIgnore]
-		public string TransponderModel
-		{ 
-			get { return __TransponderModel; }
-			set { __TransponderModel = value; }
-		}
+		public string TransponderModel { get; set; }
 
 		public SmodeCodeAppointmentData()
 		{

@@ -27,26 +27,12 @@ namespace R_0009_000022
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RegisterIndex",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RegisterIndex;
-		
-		[XmlIgnore]
-		public string RegisterIndex
-		{ 
-			get { return __RegisterIndex; }
-			set { __RegisterIndex = value; }
-		}
+		public string RegisterIndex { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BatchNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __BatchNumber;
-		
-		[XmlIgnore]
-		public string BatchNumber
-		{ 
-			get { return __BatchNumber; }
-			set { __BatchNumber = value; }
-		}
+		public string BatchNumber { get; set; }
 
 		public RegisterObjectURI()
 		{

@@ -105,66 +105,27 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Id",DataType="ID")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Id;
-		
-		[XmlIgnore]
-		public string Id
-		{ 
-			get { return __Id; }
-			set { __Id = value; }
-		}
+		public string Id { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.SignedInfo),ElementName="SignedInfo",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.SignedInfo __SignedInfo;
-		
-		[XmlIgnore]
-		public xmldsig.SignedInfo SignedInfo
-		{
-			get {return __SignedInfo;}
-			set {__SignedInfo = value;}
-		}
+		public xmldsig.SignedInfo SignedInfo { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.SignatureValue),ElementName="SignatureValue",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.SignatureValue __SignatureValue;
-		
-		[XmlIgnore]
-		public xmldsig.SignatureValue SignatureValue
-		{
-			get {return __SignatureValue;}
-			set {__SignatureValue = value;}
-		}
+		public xmldsig.SignatureValue SignatureValue { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.KeyInfo),ElementName="KeyInfo",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.KeyInfo __KeyInfo;
-		
-		[XmlIgnore]
-		public xmldsig.KeyInfo KeyInfo
-		{
-			get {return __KeyInfo;}
-			set {__KeyInfo = value;}
-		}
+		public xmldsig.KeyInfo KeyInfo { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.@Object),ElementName="Object",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ObjectCollection __ObjectCollection;
-		
-		[XmlIgnore]
-		public ObjectCollection ObjectCollection
-		{
-			get
-			{
-				if (__ObjectCollection == null) __ObjectCollection = new ObjectCollection();
-				return __ObjectCollection;
-			}
-			set {__ObjectCollection = value;}
-		}
+		public ObjectCollection ObjectCollection { get; set; }
 
 		public SignatureType()
 		{
@@ -180,26 +141,12 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Id",DataType="ID")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Id;
-		
-		[XmlIgnore]
-		public string Id
-		{ 
-			get { return __Id; }
-			set { __Id = value; }
-		}
+		public string Id { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType="base64Binary")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __MixedValue;
-		
-		[XmlIgnore]
-		public byte[] MixedValue
-		{ 
-			get { return __MixedValue; }
-			set { __MixedValue = value; }
-		}
+		public byte[] MixedValue { get; set; }
 
 		public SignatureValueType()
 		{
@@ -215,54 +162,22 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Id",DataType="ID")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Id;
-		
-		[XmlIgnore]
-		public string Id
-		{ 
-			get { return __Id; }
-			set { __Id = value; }
-		}
+		public string Id { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.CanonicalizationMethod),ElementName="CanonicalizationMethod",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.CanonicalizationMethod __CanonicalizationMethod;
-		
-		[XmlIgnore]
-		public xmldsig.CanonicalizationMethod CanonicalizationMethod
-		{
-			get {return __CanonicalizationMethod;}
-			set {__CanonicalizationMethod = value;}
-		}
+		public xmldsig.CanonicalizationMethod CanonicalizationMethod { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.SignatureMethod),ElementName="SignatureMethod",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.SignatureMethod __SignatureMethod;
-		
-		[XmlIgnore]
-		public xmldsig.SignatureMethod SignatureMethod
-		{
-			get {return __SignatureMethod;}
-			set {__SignatureMethod = value;}
-		}
+		public xmldsig.SignatureMethod SignatureMethod { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.Reference),ElementName="Reference",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ReferenceCollection __ReferenceCollection;
-		
-		[XmlIgnore]
-		public ReferenceCollection ReferenceCollection
-		{
-			get
-			{
-				if (__ReferenceCollection == null) __ReferenceCollection = new ReferenceCollection();
-				return __ReferenceCollection;
-			}
-			set {__ReferenceCollection = value;}
-		}
+		public ReferenceCollection ReferenceCollection { get; set; }
 
 		public SignedInfoType()
 		{
@@ -278,14 +193,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Algorithm",DataType="anyURI")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Algorithm;
-		
-		[XmlIgnore]
-		public string Algorithm
-		{ 
-			get { return __Algorithm; }
-			set { __Algorithm = value; }
-		}
+		public string Algorithm { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -294,14 +202,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType="string")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MixedValue;
-		
-		[XmlIgnore]
-		public string MixedValue
-		{ 
-			get { return __MixedValue; }
-			set { __MixedValue = value; }
-		}
+		public string MixedValue { get; set; }
 
 		public CanonicalizationMethodType()
 		{
@@ -317,26 +218,12 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Algorithm",DataType="anyURI")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Algorithm;
-		
-		[XmlIgnore]
-		public string Algorithm
-		{ 
-			get { return __Algorithm; }
-			set { __Algorithm = value; }
-		}
+		public string Algorithm { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="HMACOutputLength",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __HMACOutputLength;
-		
-		[XmlIgnore]
-		public string HMACOutputLength
-		{ 
-			get { return __HMACOutputLength; }
-			set { __HMACOutputLength = value; }
-		}
+		public string HMACOutputLength { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -345,14 +232,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType="string")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MixedValue;
-		
-		[XmlIgnore]
-		public string MixedValue
-		{ 
-			get { return __MixedValue; }
-			set { __MixedValue = value; }
-		}
+		public string MixedValue { get; set; }
 
 		public SignatureMethodType()
 		{
@@ -368,74 +248,32 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Id",DataType="ID")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Id;
-		
-		[XmlIgnore]
-		public string Id
-		{ 
-			get { return __Id; }
-			set { __Id = value; }
-		}
+		public string Id { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="URI",DataType="anyURI")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __URI;
-		
-		[XmlIgnore]
-		public string URI
-		{ 
-			get { return __URI; }
-			set { __URI = value; }
-		}
+		public string URI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Type",DataType="anyURI")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Type;
-		
-		[XmlIgnore]
-		public string Type
-		{ 
-			get { return __Type; }
-			set { __Type = value; }
-		}
+		public string Type { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.Transforms),ElementName="Transforms",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.Transforms __Transforms;
-		
-		[XmlIgnore]
-		public xmldsig.Transforms Transforms
-		{
-			get {return __Transforms;}
-			set {__Transforms = value;}
-		}
+		public xmldsig.Transforms Transforms { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.DigestMethod),ElementName="DigestMethod",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.DigestMethod __DigestMethod;
-		
-		[XmlIgnore]
-		public xmldsig.DigestMethod DigestMethod
-		{
-			get {return __DigestMethod;}
-			set {__DigestMethod = value;}
-		}
+		public xmldsig.DigestMethod DigestMethod { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DigestValue",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __DigestValue;
-		
-		[XmlIgnore]
-		public byte[] DigestValue
-		{ 
-			get { return __DigestValue; }
-			set { __DigestValue = value; }
-		}
+		public byte[] DigestValue { get; set; }
 
 		public ReferenceType()
 		{
@@ -452,18 +290,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.Transform),ElementName="Transform",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TransformCollection __TransformCollection;
-		
-		[XmlIgnore]
-		public TransformCollection TransformCollection
-		{
-			get
-			{
-				if (__TransformCollection == null) __TransformCollection = new TransformCollection();
-				return __TransformCollection;
-			}
-			set {__TransformCollection = value;}
-		}
+		public TransformCollection TransformCollection { get; set; }
 
 		public TransformsType()
 		{
@@ -479,14 +306,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Algorithm",DataType="anyURI")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Algorithm;
-		
-		[XmlIgnore]
-		public string Algorithm
-		{ 
-			get { return __Algorithm; }
-			set { __Algorithm = value; }
-		}
+		public string Algorithm { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -495,30 +315,12 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="XPath",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public XPathCollection __XPathCollection;
-		
-		[XmlIgnore]
-		public XPathCollection XPathCollection
-		{
-			get
-			{
-				if (__XPathCollection == null) __XPathCollection = new XPathCollection();
-				return __XPathCollection;
-			}
-			set {__XPathCollection = value;}
-		}
+		public XPathCollection XPathCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType="string")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MixedValue;
-		
-		[XmlIgnore]
-		public string MixedValue
-		{ 
-			get { return __MixedValue; }
-			set { __MixedValue = value; }
-		}
+		public string MixedValue { get; set; }
 
 		public TransformType()
 		{
@@ -534,14 +336,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Algorithm",DataType="anyURI")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Algorithm;
-		
-		[XmlIgnore]
-		public string Algorithm
-		{ 
-			get { return __Algorithm; }
-			set { __Algorithm = value; }
-		}
+		public string Algorithm { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -550,14 +345,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType="string")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MixedValue;
-		
-		[XmlIgnore]
-		public string MixedValue
-		{ 
-			get { return __MixedValue; }
-			set { __MixedValue = value; }
-		}
+		public string MixedValue { get; set; }
 
 		public DigestMethodType()
 		{
@@ -573,126 +361,42 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Id",DataType="ID")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Id;
-		
-		[XmlIgnore]
-		public string Id
-		{ 
-			get { return __Id; }
-			set { __Id = value; }
-		}
+		public string Id { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="KeyName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public KeyNameCollection __KeyNameCollection;
-		
-		[XmlIgnore]
-		public KeyNameCollection KeyNameCollection
-		{
-			get
-			{
-				if (__KeyNameCollection == null) __KeyNameCollection = new KeyNameCollection();
-				return __KeyNameCollection;
-			}
-			set {__KeyNameCollection = value;}
-		}
+		public KeyNameCollection KeyNameCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.KeyValue),ElementName="KeyValue",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public KeyValueCollection __KeyValueCollection;
-		
-		[XmlIgnore]
-		public KeyValueCollection KeyValueCollection
-		{
-			get
-			{
-				if (__KeyValueCollection == null) __KeyValueCollection = new KeyValueCollection();
-				return __KeyValueCollection;
-			}
-			set {__KeyValueCollection = value;}
-		}
+		public KeyValueCollection KeyValueCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.RetrievalMethod),ElementName="RetrievalMethod",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public RetrievalMethodCollection __RetrievalMethodCollection;
-		
-		[XmlIgnore]
-		public RetrievalMethodCollection RetrievalMethodCollection
-		{
-			get
-			{
-				if (__RetrievalMethodCollection == null) __RetrievalMethodCollection = new RetrievalMethodCollection();
-				return __RetrievalMethodCollection;
-			}
-			set {__RetrievalMethodCollection = value;}
-		}
+		public RetrievalMethodCollection RetrievalMethodCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.X509Data),ElementName="X509Data",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public X509DataCollection __X509DataCollection;
-		
-		[XmlIgnore]
-		public X509DataCollection X509DataCollection
-		{
-			get
-			{
-				if (__X509DataCollection == null) __X509DataCollection = new X509DataCollection();
-				return __X509DataCollection;
-			}
-			set {__X509DataCollection = value;}
-		}
+		public X509DataCollection X509DataCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.PGPData),ElementName="PGPData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PGPDataCollection __PGPDataCollection;
-		
-		[XmlIgnore]
-		public PGPDataCollection PGPDataCollection
-		{
-			get
-			{
-				if (__PGPDataCollection == null) __PGPDataCollection = new PGPDataCollection();
-				return __PGPDataCollection;
-			}
-			set {__PGPDataCollection = value;}
-		}
+		public PGPDataCollection PGPDataCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.SPKIData),ElementName="SPKIData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SPKIDataCollection __SPKIDataCollection;
-		
-		[XmlIgnore]
-		public SPKIDataCollection SPKIDataCollection
-		{
-			get
-			{
-				if (__SPKIDataCollection == null) __SPKIDataCollection = new SPKIDataCollection();
-				return __SPKIDataCollection;
-			}
-			set {__SPKIDataCollection = value;}
-		}
+		public SPKIDataCollection SPKIDataCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="MgmtData",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MgmtDataCollection __MgmtDataCollection;
-		
-		[XmlIgnore]
-		public MgmtDataCollection MgmtDataCollection
-		{
-			get
-			{
-				if (__MgmtDataCollection == null) __MgmtDataCollection = new MgmtDataCollection();
-				return __MgmtDataCollection;
-			}
-			set {__MgmtDataCollection = value;}
-		}
+		public MgmtDataCollection MgmtDataCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -701,14 +405,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType="string")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MixedValue;
-		
-		[XmlIgnore]
-		public string MixedValue
-		{ 
-			get { return __MixedValue; }
-			set { __MixedValue = value; }
-		}
+		public string MixedValue { get; set; }
 
 		public KeyInfoType()
 		{
@@ -724,26 +421,12 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.DSAKeyValue),ElementName="DSAKeyValue",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.DSAKeyValue __DSAKeyValue;
-		
-		[XmlIgnore]
-		public xmldsig.DSAKeyValue DSAKeyValue
-		{
-			get {return __DSAKeyValue;}
-			set {__DSAKeyValue = value;}
-		}
+		public xmldsig.DSAKeyValue DSAKeyValue { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.RSAKeyValue),ElementName="RSAKeyValue",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.RSAKeyValue __RSAKeyValue;
-		
-		[XmlIgnore]
-		public xmldsig.RSAKeyValue RSAKeyValue
-		{
-			get {return __RSAKeyValue;}
-			set {__RSAKeyValue = value;}
-		}
+		public xmldsig.RSAKeyValue RSAKeyValue { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -752,14 +435,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType="string")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MixedValue;
-		
-		[XmlIgnore]
-		public string MixedValue
-		{ 
-			get { return __MixedValue; }
-			set { __MixedValue = value; }
-		}
+		public string MixedValue { get; set; }
 
 		public KeyValueType()
 		{
@@ -775,38 +451,17 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="URI",DataType="anyURI")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __URI;
-		
-		[XmlIgnore]
-		public string URI
-		{ 
-			get { return __URI; }
-			set { __URI = value; }
-		}
+		public string URI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Type",DataType="anyURI")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Type;
-		
-		[XmlIgnore]
-		public string Type
-		{ 
-			get { return __Type; }
-			set { __Type = value; }
-		}
+		public string Type { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.Transforms),ElementName="Transforms",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.Transforms __Transforms;
-		
-		[XmlIgnore]
-		public xmldsig.Transforms Transforms
-		{
-			get {return __Transforms;}
-			set {__Transforms = value;}
-		}
+		public xmldsig.Transforms Transforms { get; set; }
 
 		public RetrievalMethodType()
 		{
@@ -822,62 +477,27 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.X509IssuerSerialType),ElementName="X509IssuerSerial",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.X509IssuerSerialType __X509IssuerSerial;
-		
-		[XmlIgnore]
-		public xmldsig.X509IssuerSerialType X509IssuerSerial
-		{
-			get {return __X509IssuerSerial;}
-			set {__X509IssuerSerial = value;}
-		}
+		public xmldsig.X509IssuerSerialType X509IssuerSerial { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="X509SKI",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __X509SKI;
-		
-		[XmlIgnore]
-		public byte[] X509SKI
-		{ 
-			get { return __X509SKI; }
-			set { __X509SKI = value; }
-		}
+		public byte[] X509SKI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="X509SubjectName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __X509SubjectName;
-		
-		[XmlIgnore]
-		public string X509SubjectName
-		{ 
-			get { return __X509SubjectName; }
-			set { __X509SubjectName = value; }
-		}
+		public string X509SubjectName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="X509Certificate",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __X509Certificate;
-		
-		[XmlIgnore]
-		public byte[] X509Certificate
-		{ 
-			get { return __X509Certificate; }
-			set { __X509Certificate = value; }
-		}
+		public byte[] X509Certificate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="X509CRL",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __X509CRL;
-		
-		[XmlIgnore]
-		public byte[] X509CRL
-		{ 
-			get { return __X509CRL; }
-			set { __X509CRL = value; }
-		}
+		public byte[] X509CRL { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -897,26 +517,12 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="X509IssuerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __X509IssuerName;
-		
-		[XmlIgnore]
-		public string X509IssuerName
-		{ 
-			get { return __X509IssuerName; }
-			set { __X509IssuerName = value; }
-		}
+		public string X509IssuerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="X509SerialNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __X509SerialNumber;
-		
-		[XmlIgnore]
-		public string X509SerialNumber
-		{ 
-			get { return __X509SerialNumber; }
-			set { __X509SerialNumber = value; }
-		}
+		public string X509SerialNumber { get; set; }
 
 		public X509IssuerSerialType()
 		{
@@ -932,26 +538,12 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PGPKeyID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __PGPKeyID;
-		
-		[XmlIgnore]
-		public byte[] PGPKeyID
-		{ 
-			get { return __PGPKeyID; }
-			set { __PGPKeyID = value; }
-		}
+		public byte[] PGPKeyID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PGPKeyPacket",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __PGPKeyPacket;
-		
-		[XmlIgnore]
-		public byte[] PGPKeyPacket
-		{ 
-			get { return __PGPKeyPacket; }
-			set { __PGPKeyPacket = value; }
-		}
+		public byte[] PGPKeyPacket { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -971,18 +563,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(byte[]),ElementName="SPKISexp",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SPKISexpCollection __SPKISexpCollection;
-		
-		[XmlIgnore]
-		public SPKISexpCollection SPKISexpCollection
-		{
-			get
-			{
-				if (__SPKISexpCollection == null) __SPKISexpCollection = new SPKISexpCollection();
-				return __SPKISexpCollection;
-			}
-			set {__SPKISexpCollection = value;}
-		}
+		public SPKISexpCollection SPKISexpCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -1002,38 +583,17 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Id",DataType="ID")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Id;
-		
-		[XmlIgnore]
-		public string Id
-		{ 
-			get { return __Id; }
-			set { __Id = value; }
-		}
+		public string Id { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="MimeType",DataType="string")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MimeType;
-		
-		[XmlIgnore]
-		public string MimeType
-		{ 
-			get { return __MimeType; }
-			set { __MimeType = value; }
-		}
+		public string MimeType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Encoding",DataType="anyURI")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Encoding;
-		
-		[XmlIgnore]
-		public string Encoding
-		{ 
-			get { return __Encoding; }
-			set { __Encoding = value; }
-		}
+		public string Encoding { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -1042,14 +602,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType="string")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MixedValue;
-		
-		[XmlIgnore]
-		public string MixedValue
-		{ 
-			get { return __MixedValue; }
-			set { __MixedValue = value; }
-		}
+		public string MixedValue { get; set; }
 
 		public ObjectType()
 		{
@@ -1066,30 +619,12 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Id",DataType="ID")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Id;
-		
-		[XmlIgnore]
-		public string Id
-		{ 
-			get { return __Id; }
-			set { __Id = value; }
-		}
+		public string Id { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.Reference),ElementName="Reference",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ReferenceCollection __ReferenceCollection;
-		
-		[XmlIgnore]
-		public ReferenceCollection ReferenceCollection
-		{
-			get
-			{
-				if (__ReferenceCollection == null) __ReferenceCollection = new ReferenceCollection();
-				return __ReferenceCollection;
-			}
-			set {__ReferenceCollection = value;}
-		}
+		public ReferenceCollection ReferenceCollection { get; set; }
 
 		public ManifestType()
 		{
@@ -1106,30 +641,12 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Id",DataType="ID")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Id;
-		
-		[XmlIgnore]
-		public string Id
-		{ 
-			get { return __Id; }
-			set { __Id = value; }
-		}
+		public string Id { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.SignatureProperty),ElementName="SignatureProperty",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SignaturePropertyCollection __SignaturePropertyCollection;
-		
-		[XmlIgnore]
-		public SignaturePropertyCollection SignaturePropertyCollection
-		{
-			get
-			{
-				if (__SignaturePropertyCollection == null) __SignaturePropertyCollection = new SignaturePropertyCollection();
-				return __SignaturePropertyCollection;
-			}
-			set {__SignaturePropertyCollection = value;}
-		}
+		public SignaturePropertyCollection SignaturePropertyCollection { get; set; }
 
 		public SignaturePropertiesType()
 		{
@@ -1145,26 +662,12 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Target",DataType="anyURI")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Target;
-		
-		[XmlIgnore]
-		public string Target
-		{ 
-			get { return __Target; }
-			set { __Target = value; }
-		}
+		public string Target { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="Id",DataType="ID")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Id;
-		
-		[XmlIgnore]
-		public string Id
-		{ 
-			get { return __Id; }
-			set { __Id = value; }
-		}
+		public string Id { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAnyElement()]
@@ -1173,14 +676,7 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlText(DataType="string")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MixedValue;
-		
-		[XmlIgnore]
-		public string MixedValue
-		{ 
-			get { return __MixedValue; }
-			set { __MixedValue = value; }
-		}
+		public string MixedValue { get; set; }
 
 		public SignaturePropertyType()
 		{
@@ -1196,86 +692,37 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="P",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __P;
-		
-		[XmlIgnore]
-		public byte[] P
-		{ 
-			get { return __P; }
-			set { __P = value; }
-		}
+		public byte[] P { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Q",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __Q;
-		
-		[XmlIgnore]
-		public byte[] Q
-		{ 
-			get { return __Q; }
-			set { __Q = value; }
-		}
+		public byte[] Q { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="G",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __G;
-		
-		[XmlIgnore]
-		public byte[] G
-		{ 
-			get { return __G; }
-			set { __G = value; }
-		}
+		public byte[] G { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Y",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __Y;
-		
-		[XmlIgnore]
-		public byte[] Y
-		{ 
-			get { return __Y; }
-			set { __Y = value; }
-		}
+		public byte[] Y { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="J",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __J;
-		
-		[XmlIgnore]
-		public byte[] J
-		{ 
-			get { return __J; }
-			set { __J = value; }
-		}
+		public byte[] J { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Seed",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __Seed;
-		
-		[XmlIgnore]
-		public byte[] Seed
-		{ 
-			get { return __Seed; }
-			set { __Seed = value; }
-		}
+		public byte[] Seed { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PgenCounter",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __PgenCounter;
-		
-		[XmlIgnore]
-		public byte[] PgenCounter
-		{ 
-			get { return __PgenCounter; }
-			set { __PgenCounter = value; }
-		}
+		public byte[] PgenCounter { get; set; }
 
 		public DSAKeyValueType()
 		{
@@ -1291,26 +738,12 @@ namespace xmldsig
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Modulus",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __Modulus;
-		
-		[XmlIgnore]
-		public byte[] Modulus
-		{ 
-			get { return __Modulus; }
-			set { __Modulus = value; }
-		}
+		public byte[] Modulus { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Exponent",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="base64Binary",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public byte[] __Exponent;
-		
-		[XmlIgnore]
-		public byte[] Exponent
-		{ 
-			get { return __Exponent; }
-			set { __Exponent = value; }
-		}
+		public byte[] Exponent { get; set; }
 
 		public RSAKeyValueType()
 		{

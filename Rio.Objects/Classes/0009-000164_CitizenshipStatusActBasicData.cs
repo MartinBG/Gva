@@ -27,45 +27,17 @@ namespace R_0009_000164
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000107.CitizenshipStatusActNumber),ElementName="CitizenshipStatusActNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000107.CitizenshipStatusActNumber __CitizenshipStatusActNumber;
-		
-		[XmlIgnore]
-		public R_0009_000107.CitizenshipStatusActNumber CitizenshipStatusActNumber
-		{
-			get {return __CitizenshipStatusActNumber;}
-			set {__CitizenshipStatusActNumber = value;}
-		}
+		public R_0009_000107.CitizenshipStatusActNumber CitizenshipStatusActNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CitizenshipStatusActComposeDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __CitizenshipStatusActComposeDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __CitizenshipStatusActComposeDateSpecified { get { return __CitizenshipStatusActComposeDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? CitizenshipStatusActComposeDate
-		{ 
-			get { return __CitizenshipStatusActComposeDate; }
-			set { __CitizenshipStatusActComposeDate = value; }
-		}
-		
-
+		public DateTime? CitizenshipStatusActComposeDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000108.CitizenshipStatusActComposeLocation),ElementName="CitizenshipStatusActComposeLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000108.CitizenshipStatusActComposeLocation __CitizenshipStatusActComposeLocation;
-		
-		[XmlIgnore]
-		public R_0009_000108.CitizenshipStatusActComposeLocation CitizenshipStatusActComposeLocation
-		{
-			get {return __CitizenshipStatusActComposeLocation;}
-			set {__CitizenshipStatusActComposeLocation = value;}
-		}
+		public R_0009_000108.CitizenshipStatusActComposeLocation CitizenshipStatusActComposeLocation { get; set; }
 
 		public CitizenshipStatusActBasicData()
 		{

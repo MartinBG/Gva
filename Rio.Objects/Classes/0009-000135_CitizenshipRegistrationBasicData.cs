@@ -33,93 +33,37 @@ namespace R_0009_000135
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000008.PersonBasicData),ElementName="PersonBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000008.PersonBasicData __PersonBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000008.PersonBasicData PersonBasicData
-		{
-			get {return __PersonBasicData;}
-			set {__PersonBasicData = value;}
-		}
+		public R_0009_000008.PersonBasicData PersonBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="GenderCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __GenderCode;
-		
-		[XmlIgnore]
-		public string GenderCode
-		{ 
-			get { return __GenderCode; }
-			set { __GenderCode = value; }
-		}
+		public string GenderCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="GenderName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __GenderName;
-		
-		[XmlIgnore]
-		public string GenderName
-		{ 
-			get { return __GenderName; }
-			set { __GenderName = value; }
-		}
+		public string GenderName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000095.PlaceOfBirth),ElementName="PlaceOfBirth",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000095.PlaceOfBirth __PlaceOfBirth;
-		
-		[XmlIgnore]
-		public R_0009_000095.PlaceOfBirth PlaceOfBirth
-		{
-			get {return __PlaceOfBirth;}
-			set {__PlaceOfBirth = value;}
-		}
+		public R_0009_000095.PlaceOfBirth PlaceOfBirth { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000096.PlaceOfBirthAbroad),ElementName="PlaceOfBirthAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000096.PlaceOfBirthAbroad __PlaceOfBirthAbroad;
-		
-		[XmlIgnore]
-		public R_0009_000096.PlaceOfBirthAbroad PlaceOfBirthAbroad
-		{
-			get {return __PlaceOfBirthAbroad;}
-			set {__PlaceOfBirthAbroad = value;}
-		}
+		public R_0009_000096.PlaceOfBirthAbroad PlaceOfBirthAbroad { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Citizenships),ElementName="Citizenships",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Citizenships __Citizenships;
-		
-		[XmlIgnore]
-		public Citizenships Citizenships
-		{
-			get {return __Citizenships;}
-			set {__Citizenships = value;}
-		}
+		public Citizenships Citizenships { get; set; }
 
 		public CitizenshipRegistrationBasicData()
 		{
@@ -135,18 +79,7 @@ namespace R_0009_000135
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CitizenshipCollection __CitizenshipCollection;
-		
-		[XmlIgnore]
-		public CitizenshipCollection CitizenshipCollection
-		{
-			get
-			{
-				if (__CitizenshipCollection == null) __CitizenshipCollection = new CitizenshipCollection();
-				return __CitizenshipCollection;
-			}
-			set {__CitizenshipCollection = value;}
-		}
+		public CitizenshipCollection CitizenshipCollection { get; set; }
 
 		public Citizenships()
 		{

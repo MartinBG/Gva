@@ -27,38 +27,17 @@ namespace R_4224
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftMaintenanceCategoryLicenseCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftMaintenanceCategoryLicenseCode;
-		
-		[XmlIgnore]
-		public string AircraftMaintenanceCategoryLicenseCode
-		{ 
-			get { return __AircraftMaintenanceCategoryLicenseCode; }
-			set { __AircraftMaintenanceCategoryLicenseCode = value; }
-		}
+		public string AircraftMaintenanceCategoryLicenseCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftMaintenanceCategoryLicenseName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftMaintenanceCategoryLicenseName;
-		
-		[XmlIgnore]
-		public string AircraftMaintenanceCategoryLicenseName
-		{ 
-			get { return __AircraftMaintenanceCategoryLicenseName; }
-			set { __AircraftMaintenanceCategoryLicenseName = value; }
-		}
+		public string AircraftMaintenanceCategoryLicenseName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftMaintenanceCategoryLicenseNameAlt",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftMaintenanceCategoryLicenseNameAlt;
-		
-		[XmlIgnore]
-		public string AircraftMaintenanceCategoryLicenseNameAlt
-		{ 
-			get { return __AircraftMaintenanceCategoryLicenseNameAlt; }
-			set { __AircraftMaintenanceCategoryLicenseNameAlt = value; }
-		}
+		public string AircraftMaintenanceCategoryLicenseNameAlt { get; set; }
 
 		public AircraftMaintenanceCategoryLicense()
 		{

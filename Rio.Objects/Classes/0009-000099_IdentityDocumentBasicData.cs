@@ -27,57 +27,22 @@ namespace R_0009_000099
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="IdentityNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __IdentityNumber;
-		
-		[XmlIgnore]
-		public string IdentityNumber
-		{ 
-			get { return __IdentityNumber; }
-			set { __IdentityNumber = value; }
-		}
+		public string IdentityNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="IdentitityIssueDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __IdentitityIssueDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __IdentitityIssueDateSpecified { get { return __IdentitityIssueDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? IdentitityIssueDate
-		{ 
-			get { return __IdentitityIssueDate; }
-			set { __IdentitityIssueDate = value; }
-		}
-		
-
+		public DateTime? IdentitityIssueDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="IdentityIssuer",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __IdentityIssuer;
-		
-		[XmlIgnore]
-		public string IdentityIssuer
-		{ 
-			get { return __IdentityIssuer; }
-			set { __IdentityIssuer = value; }
-		}
+		public string IdentityIssuer { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="IdentityDocumentType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __IdentityDocumentType;
-		
-		[XmlIgnore]
-		public string IdentityDocumentType
-		{ 
-			get { return __IdentityDocumentType; }
-			set { __IdentityDocumentType = value; }
-		}
+		public string IdentityDocumentType { get; set; }
 
 		public IdentityDocumentBasicData()
 		{

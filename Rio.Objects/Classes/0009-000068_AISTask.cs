@@ -45,198 +45,72 @@ namespace R_0009_000068
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ID;
-		
-		[XmlIgnore]
-		public string ID
-		{ 
-			get { return __ID; }
-			set { __ID = value; }
-		}
+		public string ID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="NameAndShortDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __NameAndShortDescription;
-		
-		[XmlIgnore]
-		public string NameAndShortDescription
-		{ 
-			get { return __NameAndShortDescription; }
-			set { __NameAndShortDescription = value; }
-		}
+		public string NameAndShortDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ExpandedDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ExpandedDescription;
-		
-		[XmlIgnore]
-		public string ExpandedDescription
-		{ 
-			get { return __ExpandedDescription; }
-			set { __ExpandedDescription = value; }
-		}
+		public string ExpandedDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000040.ServiceStageURI),ElementName="StageURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000040.ServiceStageURI __StageURI;
-		
-		[XmlIgnore]
-		public R_0009_000040.ServiceStageURI StageURI
-		{
-			get {return __StageURI;}
-			set {__StageURI = value;}
-		}
+		public R_0009_000040.ServiceStageURI StageURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000062.AISTaskExecutor),ElementName="ExecutedBy",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000062.AISTaskExecutor __ExecutedBy;
-		
-		[XmlIgnore]
-		public R_0009_000062.AISTaskExecutor ExecutedBy
-		{
-			get {return __ExecutedBy;}
-			set {__ExecutedBy = value;}
-		}
+		public R_0009_000062.AISTaskExecutor ExecutedBy { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ScheduledStartDate",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ScheduledStartDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ScheduledStartDateSpecified { get { return __ScheduledStartDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ScheduledStartDate
-		{ 
-			get { return __ScheduledStartDate; }
-			set { __ScheduledStartDate = value; }
-		}
-		
-
+		public DateTime? ScheduledStartDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ScheduledCompletionDate",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ScheduledCompletionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ScheduledCompletionDateSpecified { get { return __ScheduledCompletionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ScheduledCompletionDate
-		{ 
-			get { return __ScheduledCompletionDate; }
-			set { __ScheduledCompletionDate = value; }
-		}
-		
-
+		public DateTime? ScheduledCompletionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ActualStartDate",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ActualStartDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ActualStartDateSpecified { get { return __ActualStartDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ActualStartDate
-		{ 
-			get { return __ActualStartDate; }
-			set { __ActualStartDate = value; }
-		}
-		
-
+		public DateTime? ActualStartDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ActualCompletionDate",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ActualCompletionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ActualCompletionDateSpecified { get { return __ActualCompletionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ActualCompletionDate
-		{ 
-			get { return __ActualCompletionDate; }
-			set { __ActualCompletionDate = value; }
-		}
-		
-
+		public DateTime? ActualCompletionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ResponsibleTeam),ElementName="ResponsibleTeam",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ResponsibleTeam __ResponsibleTeam;
-		
-		[XmlIgnore]
-		public ResponsibleTeam ResponsibleTeam
-		{
-			get {return __ResponsibleTeam;}
-			set {__ResponsibleTeam = value;}
-		}
+		public ResponsibleTeam ResponsibleTeam { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(InitialDocuments),ElementName="InitialDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public InitialDocuments __InitialDocuments;
-		
-		[XmlIgnore]
-		public InitialDocuments InitialDocuments
-		{
-			get {return __InitialDocuments;}
-			set {__InitialDocuments = value;}
-		}
+		public InitialDocuments InitialDocuments { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AISTaskCreatedDocuments),ElementName="CreatedDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISTaskCreatedDocuments __CreatedDocuments;
-		
-		[XmlIgnore]
-		public AISTaskCreatedDocuments CreatedDocuments
-		{
-			get {return __CreatedDocuments;}
-			set {__CreatedDocuments = value;}
-		}
+		public AISTaskCreatedDocuments CreatedDocuments { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AISTaskAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISTaskAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public AISTaskAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public AISTaskAdditionalData AdditionalData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000032.AISObjectCreationData),ElementName="ObjectCreationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000032.AISObjectCreationData __ObjectCreationData;
-		
-		[XmlIgnore]
-		public R_0009_000032.AISObjectCreationData ObjectCreationData
-		{
-			get {return __ObjectCreationData;}
-			set {__ObjectCreationData = value;}
-		}
+		public R_0009_000032.AISObjectCreationData ObjectCreationData { get; set; }
 
 		public AISTask()
 		{
@@ -252,18 +126,7 @@ namespace R_0009_000068
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000063.AISTaskResponsibleTeamMember),ElementName="TeamMember",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISTaskResponsibleTeamMemberCollection __TeamMemberCollection;
-		
-		[XmlIgnore]
-		public AISTaskResponsibleTeamMemberCollection TeamMemberCollection
-		{
-			get
-			{
-				if (__TeamMemberCollection == null) __TeamMemberCollection = new AISTaskResponsibleTeamMemberCollection();
-				return __TeamMemberCollection;
-			}
-			set {__TeamMemberCollection = value;}
-		}
+		public AISTaskResponsibleTeamMemberCollection TeamMemberCollection { get; set; }
 
 		public ResponsibleTeam()
 		{
@@ -279,18 +142,7 @@ namespace R_0009_000068
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000064.AISTaskInitialDocument),ElementName="Document",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISTaskInitialDocumentCollection __DocumentCollection;
-		
-		[XmlIgnore]
-		public AISTaskInitialDocumentCollection DocumentCollection
-		{
-			get
-			{
-				if (__DocumentCollection == null) __DocumentCollection = new AISTaskInitialDocumentCollection();
-				return __DocumentCollection;
-			}
-			set {__DocumentCollection = value;}
-		}
+		public AISTaskInitialDocumentCollection DocumentCollection { get; set; }
 
 		public InitialDocuments()
 		{
@@ -306,18 +158,7 @@ namespace R_0009_000068
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000065.AISTaskCreatedDocument),ElementName="Document",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISTaskCreatedDocumentCollection __DocumentCollection;
-		
-		[XmlIgnore]
-		public AISTaskCreatedDocumentCollection DocumentCollection
-		{
-			get
-			{
-				if (__DocumentCollection == null) __DocumentCollection = new AISTaskCreatedDocumentCollection();
-				return __DocumentCollection;
-			}
-			set {__DocumentCollection = value;}
-		}
+		public AISTaskCreatedDocumentCollection DocumentCollection { get; set; }
 
 		public AISTaskCreatedDocuments()
 		{

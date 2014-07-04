@@ -27,50 +27,22 @@ namespace R_0009_000005
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="First",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __First;
-		
-		[XmlIgnore]
-		public string First
-		{ 
-			get { return __First; }
-			set { __First = value; }
-		}
+		public string First { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Middle",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Middle;
-		
-		[XmlIgnore]
-		public string Middle
-		{ 
-			get { return __Middle; }
-			set { __Middle = value; }
-		}
+		public string Middle { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Last",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Last;
-		
-		[XmlIgnore]
-		public string Last
-		{ 
-			get { return __Last; }
-			set { __Last = value; }
-		}
+		public string Last { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Pseudonim",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Pseudonim;
-		
-		[XmlIgnore]
-		public string Pseudonim
-		{ 
-			get { return __Pseudonim; }
-			set { __Pseudonim = value; }
-		}
+		public string Pseudonim { get; set; }
 
 		public PersonNames()
 		{

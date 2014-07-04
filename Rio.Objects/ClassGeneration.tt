@@ -10,7 +10,7 @@
 	p.StartInfo.CreateNoWindow = true;
 	p.StartInfo.RedirectStandardOutput = true;
 	p.StartInfo.RedirectStandardError = true;
-	p.StartInfo.FileName = Path.Combine(templateDir, "../XsdClassGenerator/bin/Release/XsdClassGenerator.exe");
+	p.StartInfo.FileName = Path.Combine(templateDir, "../Rio.XsdClassGenerator/bin/Debug/Rio.XsdClassGenerator.exe");
 	p.StartInfo.WorkingDirectory = templateDir;
 	p.StartInfo.Arguments = 
 		string.Format("\"{0}\" \"{1}\"",Path.Combine(templateDir, "Schemas/"), Path.Combine(templateDir, "Classes/"));

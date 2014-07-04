@@ -33,38 +33,17 @@ namespace R_0009_000077
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Assessments),ElementName="Assessments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Assessments __Assessments;
-		
-		[XmlIgnore]
-		public Assessments Assessments
-		{
-			get {return __Assessments;}
-			set {__Assessments = value;}
-		}
+		public Assessments Assessments { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000032.AISObjectCreationData),ElementName="ObjectCreationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000032.AISObjectCreationData __ObjectCreationData;
-		
-		[XmlIgnore]
-		public R_0009_000032.AISObjectCreationData ObjectCreationData
-		{
-			get {return __ObjectCreationData;}
-			set {__ObjectCreationData = value;}
-		}
+		public R_0009_000032.AISObjectCreationData ObjectCreationData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AISTaskAssessmentProtocolAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISTaskAssessmentProtocolAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public AISTaskAssessmentProtocolAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public AISTaskAssessmentProtocolAdditionalData AdditionalData { get; set; }
 
 		public AISTaskAssessmentProtocol()
 		{
@@ -80,18 +59,7 @@ namespace R_0009_000077
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000076.AISTaskAssessment),ElementName="AssessmentData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISTaskAssessmentCollection __AssessmentDataCollection;
-		
-		[XmlIgnore]
-		public AISTaskAssessmentCollection AssessmentDataCollection
-		{
-			get
-			{
-				if (__AssessmentDataCollection == null) __AssessmentDataCollection = new AISTaskAssessmentCollection();
-				return __AssessmentDataCollection;
-			}
-			set {__AssessmentDataCollection = value;}
-		}
+		public AISTaskAssessmentCollection AssessmentDataCollection { get; set; }
 
 		public Assessments()
 		{

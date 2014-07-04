@@ -27,26 +27,12 @@ namespace R_4976
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CertificationScopeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CertificationScopeCode;
-		
-		[XmlIgnore]
-		public string CertificationScopeCode
-		{ 
-			get { return __CertificationScopeCode; }
-			set { __CertificationScopeCode = value; }
-		}
+		public string CertificationScopeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CertificationScopeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CertificationScopeName;
-		
-		[XmlIgnore]
-		public string CertificationScopeName
-		{ 
-			get { return __CertificationScopeName; }
-			set { __CertificationScopeName = value; }
-		}
+		public string CertificationScopeName { get; set; }
 
 		public CertificationScope()
 		{

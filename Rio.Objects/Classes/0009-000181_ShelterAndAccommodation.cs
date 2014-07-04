@@ -33,98 +33,42 @@ namespace R_0009_000181
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteCategoryCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TouristSiteCategoryCode;
-		
-		[XmlIgnore]
-		public string TouristSiteCategoryCode
-		{ 
-			get { return __TouristSiteCategoryCode; }
-			set { __TouristSiteCategoryCode = value; }
-		}
+		public string TouristSiteCategoryCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteCategory",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TouristSiteCategory;
-		
-		[XmlIgnore]
-		public string TouristSiteCategory
-		{ 
-			get { return __TouristSiteCategory; }
-			set { __TouristSiteCategory = value; }
-		}
+		public string TouristSiteCategory { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ShelterAndAccommodationTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ShelterAndAccommodationTypeCode;
-		
-		[XmlIgnore]
-		public string ShelterAndAccommodationTypeCode
-		{ 
-			get { return __ShelterAndAccommodationTypeCode; }
-			set { __ShelterAndAccommodationTypeCode = value; }
-		}
+		public string ShelterAndAccommodationTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ShelterAndAccommodationType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ShelterAndAccommodationType;
-		
-		[XmlIgnore]
-		public string ShelterAndAccommodationType
-		{ 
-			get { return __ShelterAndAccommodationType; }
-			set { __ShelterAndAccommodationType = value; }
-		}
+		public string ShelterAndAccommodationType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TouristSiteName;
-		
-		[XmlIgnore]
-		public string TouristSiteName
-		{ 
-			get { return __TouristSiteName; }
-			set { __TouristSiteName = value; }
-		}
+		public string TouristSiteName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000180.TouristSiteAddress),ElementName="TouristSiteAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000180.TouristSiteAddress __TouristSiteAddress;
-		
-		[XmlIgnore]
-		public R_0009_000180.TouristSiteAddress TouristSiteAddress
-		{
-			get {return __TouristSiteAddress;}
-			set {__TouristSiteAddress = value;}
-		}
+		public R_0009_000180.TouristSiteAddress TouristSiteAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(TouristSitePhoneNumbers),ElementName="TouristSitePhoneNumbers",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TouristSitePhoneNumbers __TouristSitePhoneNumbers;
-		
-		[XmlIgnore]
-		public TouristSitePhoneNumbers TouristSitePhoneNumbers
-		{
-			get {return __TouristSitePhoneNumbers;}
-			set {__TouristSitePhoneNumbers = value;}
-		}
+		public TouristSitePhoneNumbers TouristSitePhoneNumbers { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteRoomCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TouristSiteRoomCount;
-		
-		[XmlIgnore]
-		public string TouristSiteRoomCount
-		{ 
-			get { return __TouristSiteRoomCount; }
-			set { __TouristSiteRoomCount = value; }
-		}
+		public string TouristSiteRoomCount { get; set; }
 
 		public ShelterAndAccommodation()
 		{
@@ -140,18 +84,7 @@ namespace R_0009_000181
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="TouristSitePhoneNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TouristSitePhoneNumberCollection __TouristSitePhoneNumberCollection;
-		
-		[XmlIgnore]
-		public TouristSitePhoneNumberCollection TouristSitePhoneNumberCollection
-		{
-			get
-			{
-				if (__TouristSitePhoneNumberCollection == null) __TouristSitePhoneNumberCollection = new TouristSitePhoneNumberCollection();
-				return __TouristSitePhoneNumberCollection;
-			}
-			set {__TouristSitePhoneNumberCollection = value;}
-		}
+		public TouristSitePhoneNumberCollection TouristSitePhoneNumberCollection { get; set; }
 
 		public TouristSitePhoneNumbers()
 		{

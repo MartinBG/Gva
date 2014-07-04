@@ -27,72 +27,27 @@ namespace R_4238
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DescriptionClaimedCreditRecognitionMaintenanceTrainingAircraft",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DescriptionClaimedCreditRecognitionMaintenanceTrainingAircraft;
-		
-		[XmlIgnore]
-		public string DescriptionClaimedCreditRecognitionMaintenanceTrainingAircraft
-		{ 
-			get { return __DescriptionClaimedCreditRecognitionMaintenanceTrainingAircraft; }
-			set { __DescriptionClaimedCreditRecognitionMaintenanceTrainingAircraft = value; }
-		}
+		public string DescriptionClaimedCreditRecognitionMaintenanceTrainingAircraft { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DescriptionClaimedCreditExperienceTrainingMaintenanceAircraft",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DescriptionClaimedCreditExperienceTrainingMaintenanceAircraft;
-		
-		[XmlIgnore]
-		public string DescriptionClaimedCreditExperienceTrainingMaintenanceAircraft
-		{ 
-			get { return __DescriptionClaimedCreditExperienceTrainingMaintenanceAircraft; }
-			set { __DescriptionClaimedCreditExperienceTrainingMaintenanceAircraft = value; }
-		}
+		public string DescriptionClaimedCreditExperienceTrainingMaintenanceAircraft { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DescriptionClaimedCreditEquivalentExamsGraduationMaintenanceAircraft",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DescriptionClaimedCreditEquivalentExamsGraduationMaintenanceAircraft;
-		
-		[XmlIgnore]
-		public string DescriptionClaimedCreditEquivalentExamsGraduationMaintenanceAircraft
-		{ 
-			get { return __DescriptionClaimedCreditEquivalentExamsGraduationMaintenanceAircraft; }
-			set { __DescriptionClaimedCreditEquivalentExamsGraduationMaintenanceAircraft = value; }
-		}
+		public string DescriptionClaimedCreditEquivalentExamsGraduationMaintenanceAircraft { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CreditingPracticalExperienceGainedTrainingSection",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __CreditingPracticalExperienceGainedTrainingSection;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __CreditingPracticalExperienceGainedTrainingSectionSpecified;
-		
-		[XmlIgnore]
-		public bool CreditingPracticalExperienceGainedTrainingSection
-		{ 
-			get { return __CreditingPracticalExperienceGainedTrainingSection; }
-			set { __CreditingPracticalExperienceGainedTrainingSection = value; __CreditingPracticalExperienceGainedTrainingSectionSpecified = true; }
-		}
+		public bool CreditingPracticalExperienceGainedTrainingSection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CreditEquivalentExamsGraduation",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __CreditEquivalentExamsGraduation;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __CreditEquivalentExamsGraduationSpecified;
-		
-		[XmlIgnore]
-		public bool CreditEquivalentExamsGraduation
-		{ 
-			get { return __CreditEquivalentExamsGraduation; }
-			set { __CreditEquivalentExamsGraduation = value; __CreditEquivalentExamsGraduationSpecified = true; }
-		}
+		public bool CreditEquivalentExamsGraduation { get; set; }
 
 		public RecognitionCreditsMaintenanceTrainingAircraft()
 		{

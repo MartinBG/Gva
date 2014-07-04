@@ -27,26 +27,12 @@ namespace R_4000
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="GroupLicenseDependingRequirementsFilingCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __GroupLicenseDependingRequirementsFilingCode;
-		
-		[XmlIgnore]
-		public string GroupLicenseDependingRequirementsFilingCode
-		{ 
-			get { return __GroupLicenseDependingRequirementsFilingCode; }
-			set { __GroupLicenseDependingRequirementsFilingCode = value; }
-		}
+		public string GroupLicenseDependingRequirementsFilingCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="GroupLicenseDependingRequirementsFilingName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __GroupLicenseDependingRequirementsFilingName;
-		
-		[XmlIgnore]
-		public string GroupLicenseDependingRequirementsFilingName
-		{ 
-			get { return __GroupLicenseDependingRequirementsFilingName; }
-			set { __GroupLicenseDependingRequirementsFilingName = value; }
-		}
+		public string GroupLicenseDependingRequirementsFilingName { get; set; }
 
 		public GroupLicenseDependingRequirementsFiling()
 		{

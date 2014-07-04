@@ -27,26 +27,12 @@ namespace R_4982
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4970.SpecializedPermission),ElementName="SpecializedPermission",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4970.SpecializedPermission __SpecializedPermission;
-		
-		[XmlIgnore]
-		public R_4970.SpecializedPermission SpecializedPermission
-		{
-			get {return __SpecializedPermission;}
-			set {__SpecializedPermission = value;}
-		}
+		public R_4970.SpecializedPermission SpecializedPermission { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4978.CertificationScopes),ElementName="CertificationScopes",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4978.CertificationScopes __CertificationScopes;
-		
-		[XmlIgnore]
-		public R_4978.CertificationScopes CertificationScopes
-		{
-			get {return __CertificationScopes;}
-			set {__CertificationScopes = value;}
-		}
+		public R_4978.CertificationScopes CertificationScopes { get; set; }
 
 		public GeneralAuthorizations()
 		{

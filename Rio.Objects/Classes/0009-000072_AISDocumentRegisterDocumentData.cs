@@ -27,105 +27,42 @@ namespace R_0009_000072
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RegistrationTime",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __RegistrationTime;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __RegistrationTimeSpecified { get { return __RegistrationTime.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? RegistrationTime
-		{ 
-			get { return __RegistrationTime; }
-			set { __RegistrationTime = value; }
-		}
-		
-
+		public DateTime? RegistrationTime { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000070.RegistrationInDocumentRegisterRegistrar),ElementName="RegisteredBy",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000070.RegistrationInDocumentRegisterRegistrar __RegisteredBy;
-		
-		[XmlIgnore]
-		public R_0009_000070.RegistrationInDocumentRegisterRegistrar RegisteredBy
-		{
-			get {return __RegisteredBy;}
-			set {__RegisteredBy = value;}
-		}
+		public R_0009_000070.RegistrationInDocumentRegisterRegistrar RegisteredBy { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RegisteredDocumentID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RegisteredDocumentID;
-		
-		[XmlIgnore]
-		public string RegisteredDocumentID
-		{ 
-			get { return __RegisteredDocumentID; }
-			set { __RegisteredDocumentID = value; }
-		}
+		public string RegisteredDocumentID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000044.RegisteredDocumentURI),ElementName="RegisteredDocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000044.RegisteredDocumentURI __RegisteredDocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000044.RegisteredDocumentURI RegisteredDocumentURI
-		{
-			get {return __RegisteredDocumentURI;}
-			set {__RegisteredDocumentURI = value;}
-		}
+		public R_0009_000044.RegisteredDocumentURI RegisteredDocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000043.AdministrativeNomenclatureDocumentTypeBasicData),ElementName="DocumentType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000043.AdministrativeNomenclatureDocumentTypeBasicData __DocumentType;
-		
-		[XmlIgnore]
-		public R_0009_000043.AdministrativeNomenclatureDocumentTypeBasicData DocumentType
-		{
-			get {return __DocumentType;}
-			set {__DocumentType = value;}
-		}
+		public R_0009_000043.AdministrativeNomenclatureDocumentTypeBasicData DocumentType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="InternalRegisterIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __InternalRegisterIdentifier;
-		
-		[XmlIgnore]
-		public string InternalRegisterIdentifier
-		{ 
-			get { return __InternalRegisterIdentifier; }
-			set { __InternalRegisterIdentifier = value; }
-		}
+		public string InternalRegisterIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentElectronicTransportType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentElectronicTransportType;
-		
-		[XmlIgnore]
-		public string DocumentElectronicTransportType
-		{ 
-			get { return __DocumentElectronicTransportType; }
-			set { __DocumentElectronicTransportType = value; }
-		}
+		public string DocumentElectronicTransportType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AISDocumentRegisterDocumentDataAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISDocumentRegisterDocumentDataAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public AISDocumentRegisterDocumentDataAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public AISDocumentRegisterDocumentDataAdditionalData AdditionalData { get; set; }
 
 		public AISDocumentRegisterDocumentData()
 		{

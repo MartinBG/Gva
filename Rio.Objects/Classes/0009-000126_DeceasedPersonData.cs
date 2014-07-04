@@ -27,26 +27,12 @@ namespace R_0009_000126
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000008.PersonBasicData),ElementName="PersonBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000008.PersonBasicData __PersonBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000008.PersonBasicData PersonBasicData
-		{
-			get {return __PersonBasicData;}
-			set {__PersonBasicData = value;}
-		}
+		public R_0009_000008.PersonBasicData PersonBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000109.ForeignCitizenData),ElementName="ForeignCitizenData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000109.ForeignCitizenData __ForeignCitizenData;
-		
-		[XmlIgnore]
-		public R_0009_000109.ForeignCitizenData ForeignCitizenData
-		{
-			get {return __ForeignCitizenData;}
-			set {__ForeignCitizenData = value;}
-		}
+		public R_0009_000109.ForeignCitizenData ForeignCitizenData { get; set; }
 
 		public DeceasedPersonData()
 		{

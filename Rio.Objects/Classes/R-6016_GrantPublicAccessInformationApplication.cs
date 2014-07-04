@@ -33,95 +33,37 @@ namespace R_6016
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ServiceInstructions",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ServiceInstructions;
-		
-		[XmlIgnore]
-		public string ServiceInstructions
-		{ 
-			get { return __ServiceInstructions; }
-			set { __ServiceInstructions = value; }
-		}
+		public string ServiceInstructions { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ServiceInstructionsName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ServiceInstructionsName;
-		
-		[XmlIgnore]
-		public string ServiceInstructionsName
-		{ 
-			get { return __ServiceInstructionsName; }
-			set { __ServiceInstructionsName = value; }
-		}
+		public string ServiceInstructionsName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_6006.HeaderNoIdentification),ElementName="HeaderNoIdentification",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_6006.HeaderNoIdentification __HeaderNoIdentification;
-		
-		[XmlIgnore]
-		public R_6006.HeaderNoIdentification HeaderNoIdentification
-		{
-			get {return __HeaderNoIdentification;}
-			set {__HeaderNoIdentification = value;}
-		}
+		public R_6006.HeaderNoIdentification HeaderNoIdentification { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RequestedPublicInformationDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RequestedPublicInformationDescription;
-		
-		[XmlIgnore]
-		public string RequestedPublicInformationDescription
-		{ 
-			get { return __RequestedPublicInformationDescription; }
-			set { __RequestedPublicInformationDescription = value; }
-		}
+		public string RequestedPublicInformationDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="AccessFormPublicInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AccessFormPublicInformationCollection __AccessFormPublicInformationCollection;
-		
-		[XmlIgnore]
-		public AccessFormPublicInformationCollection AccessFormPublicInformationCollection
-		{
-			get
-			{
-				if (__AccessFormPublicInformationCollection == null) __AccessFormPublicInformationCollection = new AccessFormPublicInformationCollection();
-				return __AccessFormPublicInformationCollection;
-			}
-			set {__AccessFormPublicInformationCollection = value;}
-		}
+		public AccessFormPublicInformationCollection AccessFormPublicInformationCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SpecificationPreferredFormAccessPublicInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SpecificationPreferredFormAccessPublicInformation;
-		
-		[XmlIgnore]
-		public string SpecificationPreferredFormAccessPublicInformation
-		{ 
-			get { return __SpecificationPreferredFormAccessPublicInformation; }
-			set { __SpecificationPreferredFormAccessPublicInformation = value; }
-		}
+		public string SpecificationPreferredFormAccessPublicInformation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ConsentReceivingElectronicStatements",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ConsentReceivingElectronicStatements;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ConsentReceivingElectronicStatementsSpecified;
-		
-		[XmlIgnore]
-		public bool ConsentReceivingElectronicStatements
-		{ 
-			get { return __ConsentReceivingElectronicStatements; }
-			set { __ConsentReceivingElectronicStatements = value; __ConsentReceivingElectronicStatementsSpecified = true; }
-		}
+		public bool ConsentReceivingElectronicStatements { get; set; }
 
 		public GrantPublicAccessInformation()
 		{

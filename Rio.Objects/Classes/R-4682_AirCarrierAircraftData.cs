@@ -27,50 +27,22 @@ namespace R_4682
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftRegistrationMark",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftRegistrationMark;
-		
-		[XmlIgnore]
-		public string AircraftRegistrationMark
-		{ 
-			get { return __AircraftRegistrationMark; }
-			set { __AircraftRegistrationMark = value; }
-		}
+		public string AircraftRegistrationMark { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4158.AircraftType __AircraftType;
-		
-		[XmlIgnore]
-		public R_4158.AircraftType AircraftType
-		{
-			get {return __AircraftType;}
-			set {__AircraftType = value;}
-		}
+		public R_4158.AircraftType AircraftType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftMaximumTakeOffWeight",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftMaximumTakeOffWeight;
-		
-		[XmlIgnore]
-		public string AircraftMaximumTakeOffWeight
-		{ 
-			get { return __AircraftMaximumTakeOffWeight; }
-			set { __AircraftMaximumTakeOffWeight = value; }
-		}
+		public string AircraftMaximumTakeOffWeight { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftPassengerSeatsCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftPassengerSeatsCount;
-		
-		[XmlIgnore]
-		public string AircraftPassengerSeatsCount
-		{ 
-			get { return __AircraftPassengerSeatsCount; }
-			set { __AircraftPassengerSeatsCount = value; }
-		}
+		public string AircraftPassengerSeatsCount { get; set; }
 
 		public AirCarrierAircraftData()
 		{

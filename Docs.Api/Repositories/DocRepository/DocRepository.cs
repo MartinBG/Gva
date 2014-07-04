@@ -16,7 +16,6 @@ using Common.Api.Repositories;
 using Common.Utils;
 using System.Linq.Expressions;
 using System.Data.Entity.Core;
-using Rio.Objects;
 
 namespace Docs.Api.Repositories.DocRepository
 {
@@ -1523,18 +1522,6 @@ namespace Docs.Api.Repositories.DocRepository
             }
 
             return returnValue;
-        }
-
-        public byte[] CreateElectornicDocumentFile(string electronicServiceFileTypeUri)
-        {
-            if (electronicServiceFileTypeUri == RioDocumentMetadata.DecisionGrantAccessPublicInformationMetadata.DocumentTypeURIValue)
-            {
-                return XmlSerializerUtils.XmlSerializeObjectToBytes(new R_6090.DecisionGrantAccessPublicInformation());
-            }
-            else
-            {
-                return null;
-            }
         }
     }
 }

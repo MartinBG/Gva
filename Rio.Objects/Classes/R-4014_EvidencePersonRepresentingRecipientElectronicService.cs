@@ -27,38 +27,17 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPerson),ElementName="PhysicalPerson",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPerson __PhysicalPerson;
-		
-		[XmlIgnore]
-		public PhysicalPerson PhysicalPerson
-		{
-			get {return __PhysicalPerson;}
-			set {__PhysicalPerson = value;}
-		}
+		public PhysicalPerson PhysicalPerson { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000013.EntityBasicData),ElementName="EntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000013.EntityBasicData __EntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000013.EntityBasicData EntityBasicData
-		{
-			get {return __EntityBasicData;}
-			set {__EntityBasicData = value;}
-		}
+		public R_0009_000013.EntityBasicData EntityBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000014.ForeignEntityBasicData),ElementName="ForeignEntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000014.ForeignEntityBasicData __ForeignEntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000014.ForeignEntityBasicData ForeignEntityBasicData
-		{
-			get {return __ForeignEntityBasicData;}
-			set {__ForeignEntityBasicData = value;}
-		}
+		public R_0009_000014.ForeignEntityBasicData ForeignEntityBasicData { get; set; }
 
 		public EvidencePersonRepresentingRecipientElectronicService()
 		{
@@ -73,98 +52,42 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000133.Citizenship __Citizenship;
-		
-		[XmlIgnore]
-		public R_0009_000133.Citizenship Citizenship
-		{
-			get {return __Citizenship;}
-			set {__Citizenship = value;}
-		}
+		public R_0009_000133.Citizenship Citizenship { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Nationality",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000133.Citizenship __Nationality;
-		
-		[XmlIgnore]
-		public R_0009_000133.Citizenship Nationality
-		{
-			get {return __Nationality;}
-			set {__Nationality = value;}
-		}
+		public R_0009_000133.Citizenship Nationality { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPersonBulgarianCitizen),ElementName="BulgarianCitizen",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPersonBulgarianCitizen __BulgarianCitizen;
-		
-		[XmlIgnore]
-		public PhysicalPersonBulgarianCitizen BulgarianCitizen
-		{
-			get {return __BulgarianCitizen;}
-			set {__BulgarianCitizen = value;}
-		}
+		public PhysicalPersonBulgarianCitizen BulgarianCitizen { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPersonForeignCitizen),ElementName="ForeignCitizen",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPersonForeignCitizen __ForeignCitizen;
-		
-		[XmlIgnore]
-		public PhysicalPersonForeignCitizen ForeignCitizen
-		{
-			get {return __ForeignCitizen;}
-			set {__ForeignCitizen = value;}
-		}
+		public PhysicalPersonForeignCitizen ForeignCitizen { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPersonBirthPlace),ElementName="BirthPlace",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPersonBirthPlace __BirthPlace;
-		
-		[XmlIgnore]
-		public PhysicalPersonBirthPlace BirthPlace
-		{
-			get {return __BirthPlace;}
-			set {__BirthPlace = value;}
-		}
+		public PhysicalPersonBirthPlace BirthPlace { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPersonPermanentAddress),ElementName="PermanentAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPersonPermanentAddress __PermanentAddress;
-		
-		[XmlIgnore]
-		public PhysicalPersonPermanentAddress PermanentAddress
-		{
-			get {return __PermanentAddress;}
-			set {__PermanentAddress = value;}
-		}
+		public PhysicalPersonPermanentAddress PermanentAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPersonCorrespondenceAddress),ElementName="CorrespondenceAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPersonCorrespondenceAddress __CorrespondenceAddress;
-		
-		[XmlIgnore]
-		public PhysicalPersonCorrespondenceAddress CorrespondenceAddress
-		{
-			get {return __CorrespondenceAddress;}
-			set {__CorrespondenceAddress = value;}
-		}
+		public PhysicalPersonCorrespondenceAddress CorrespondenceAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPersonContactData),ElementName="ContactData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPersonContactData __ContactData;
-		
-		[XmlIgnore]
-		public PhysicalPersonContactData ContactData
-		{
-			get {return __ContactData;}
-			set {__ContactData = value;}
-		}
+		public PhysicalPersonContactData ContactData { get; set; }
 
 		public PhysicalPerson()
 		{
@@ -179,45 +102,17 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000006.PersonIdentifier),ElementName="PersonIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000006.PersonIdentifier __PersonIdentifier;
-		
-		[XmlIgnore]
-		public R_0009_000006.PersonIdentifier PersonIdentifier
-		{
-			get {return __PersonIdentifier;}
-			set {__PersonIdentifier = value;}
-		}
+		public R_0009_000006.PersonIdentifier PersonIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		public PhysicalPersonBulgarianCitizen()
 		{
@@ -232,33 +127,12 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		public PhysicalPersonForeignCitizen()
 		{
@@ -273,26 +147,12 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000095.PlaceOfBirth),ElementName="PlaceOfBirth",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000095.PlaceOfBirth __PlaceOfBirth;
-		
-		[XmlIgnore]
-		public R_0009_000095.PlaceOfBirth PlaceOfBirth
-		{
-			get {return __PlaceOfBirth;}
-			set {__PlaceOfBirth = value;}
-		}
+		public R_0009_000095.PlaceOfBirth PlaceOfBirth { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000096.PlaceOfBirthAbroad),ElementName="PlaceOfBirthAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000096.PlaceOfBirthAbroad __PlaceOfBirthAbroad;
-		
-		[XmlIgnore]
-		public R_0009_000096.PlaceOfBirthAbroad PlaceOfBirthAbroad
-		{
-			get {return __PlaceOfBirthAbroad;}
-			set {__PlaceOfBirthAbroad = value;}
-		}
+		public R_0009_000096.PlaceOfBirthAbroad PlaceOfBirthAbroad { get; set; }
 
 		public PhysicalPersonBirthPlace()
 		{
@@ -307,26 +167,12 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPersonPermanentAddressBulgarianPermanentAddress),ElementName="BulgarianPermanentAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPersonPermanentAddressBulgarianPermanentAddress __BulgarianPermanentAddress;
-		
-		[XmlIgnore]
-		public PhysicalPersonPermanentAddressBulgarianPermanentAddress BulgarianPermanentAddress
-		{
-			get {return __BulgarianPermanentAddress;}
-			set {__BulgarianPermanentAddress = value;}
-		}
+		public PhysicalPersonPermanentAddressBulgarianPermanentAddress BulgarianPermanentAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPersonPermanentAddressForeignPermanentAddress),ElementName="ForeignPermanentAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPersonPermanentAddressForeignPermanentAddress __ForeignPermanentAddress;
-		
-		[XmlIgnore]
-		public PhysicalPersonPermanentAddressForeignPermanentAddress ForeignPermanentAddress
-		{
-			get {return __ForeignPermanentAddress;}
-			set {__ForeignPermanentAddress = value;}
-		}
+		public PhysicalPersonPermanentAddressForeignPermanentAddress ForeignPermanentAddress { get; set; }
 
 		public PhysicalPersonPermanentAddress()
 		{
@@ -341,26 +187,12 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000094.PersonAddress),ElementName="PersonAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000094.PersonAddress __PersonAddress;
-		
-		[XmlIgnore]
-		public R_0009_000094.PersonAddress PersonAddress
-		{
-			get {return __PersonAddress;}
-			set {__PersonAddress = value;}
-		}
+		public R_0009_000094.PersonAddress PersonAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PostCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PostCode;
-		
-		[XmlIgnore]
-		public string PostCode
-		{ 
-			get { return __PostCode; }
-			set { __PostCode = value; }
-		}
+		public string PostCode { get; set; }
 
 		public PhysicalPersonPermanentAddressBulgarianPermanentAddress()
 		{
@@ -375,50 +207,22 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000133.Citizenship __Citizenship;
-		
-		[XmlIgnore]
-		public R_0009_000133.Citizenship Citizenship
-		{
-			get {return __Citizenship;}
-			set {__Citizenship = value;}
-		}
+		public R_0009_000133.Citizenship Citizenship { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementAbroadName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementAbroadName;
-		
-		[XmlIgnore]
-		public string SettlementAbroadName
-		{ 
-			get { return __SettlementAbroadName; }
-			set { __SettlementAbroadName = value; }
-		}
+		public string SettlementAbroadName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AddressDescriptionAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AddressDescriptionAbroad;
-		
-		[XmlIgnore]
-		public string AddressDescriptionAbroad
-		{ 
-			get { return __AddressDescriptionAbroad; }
-			set { __AddressDescriptionAbroad = value; }
-		}
+		public string AddressDescriptionAbroad { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PostCodeAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PostCodeAbroad;
-		
-		[XmlIgnore]
-		public string PostCodeAbroad
-		{ 
-			get { return __PostCodeAbroad; }
-			set { __PostCodeAbroad = value; }
-		}
+		public string PostCodeAbroad { get; set; }
 
 		public PhysicalPersonPermanentAddressForeignPermanentAddress()
 		{
@@ -433,26 +237,12 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPersonCorrespondenceAddressBulgarianCorrespondenceAddress),ElementName="BulgarianCorrespondenceAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPersonCorrespondenceAddressBulgarianCorrespondenceAddress __BulgarianCorrespondenceAddress;
-		
-		[XmlIgnore]
-		public PhysicalPersonCorrespondenceAddressBulgarianCorrespondenceAddress BulgarianCorrespondenceAddress
-		{
-			get {return __BulgarianCorrespondenceAddress;}
-			set {__BulgarianCorrespondenceAddress = value;}
-		}
+		public PhysicalPersonCorrespondenceAddressBulgarianCorrespondenceAddress BulgarianCorrespondenceAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PhysicalPersonCorrespondenceAddressForeignCorrespondenceAddress),ElementName="ForeignCorrespondenceAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PhysicalPersonCorrespondenceAddressForeignCorrespondenceAddress __ForeignCorrespondenceAddress;
-		
-		[XmlIgnore]
-		public PhysicalPersonCorrespondenceAddressForeignCorrespondenceAddress ForeignCorrespondenceAddress
-		{
-			get {return __ForeignCorrespondenceAddress;}
-			set {__ForeignCorrespondenceAddress = value;}
-		}
+		public PhysicalPersonCorrespondenceAddressForeignCorrespondenceAddress ForeignCorrespondenceAddress { get; set; }
 
 		public PhysicalPersonCorrespondenceAddress()
 		{
@@ -467,110 +257,47 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictGRAOCode;
-		
-		[XmlIgnore]
-		public string DistrictGRAOCode
-		{ 
-			get { return __DistrictGRAOCode; }
-			set { __DistrictGRAOCode = value; }
-		}
+		public string DistrictGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictGRAOName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictGRAOName;
-		
-		[XmlIgnore]
-		public string DistrictGRAOName
-		{ 
-			get { return __DistrictGRAOName; }
-			set { __DistrictGRAOName = value; }
-		}
+		public string DistrictGRAOName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MunicipalityGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MunicipalityGRAOCode;
-		
-		[XmlIgnore]
-		public string MunicipalityGRAOCode
-		{ 
-			get { return __MunicipalityGRAOCode; }
-			set { __MunicipalityGRAOCode = value; }
-		}
+		public string MunicipalityGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MunicipalityGRAOName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MunicipalityGRAOName;
-		
-		[XmlIgnore]
-		public string MunicipalityGRAOName
-		{ 
-			get { return __MunicipalityGRAOName; }
-			set { __MunicipalityGRAOName = value; }
-		}
+		public string MunicipalityGRAOName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementGRAOCode;
-		
-		[XmlIgnore]
-		public string SettlementGRAOCode
-		{ 
-			get { return __SettlementGRAOCode; }
-			set { __SettlementGRAOCode = value; }
-		}
+		public string SettlementGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementGRAOName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementGRAOName;
-		
-		[XmlIgnore]
-		public string SettlementGRAOName
-		{ 
-			get { return __SettlementGRAOName; }
-			set { __SettlementGRAOName = value; }
-		}
+		public string SettlementGRAOName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AddressDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AddressDescription;
-		
-		[XmlIgnore]
-		public string AddressDescription
-		{ 
-			get { return __AddressDescription; }
-			set { __AddressDescription = value; }
-		}
+		public string AddressDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PostCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PostCode;
-		
-		[XmlIgnore]
-		public string PostCode
-		{ 
-			get { return __PostCode; }
-			set { __PostCode = value; }
-		}
+		public string PostCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PostOfficeBox",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PostOfficeBox;
-		
-		[XmlIgnore]
-		public string PostOfficeBox
-		{ 
-			get { return __PostOfficeBox; }
-			set { __PostOfficeBox = value; }
-		}
+		public string PostOfficeBox { get; set; }
 
 		public PhysicalPersonCorrespondenceAddressBulgarianCorrespondenceAddress()
 		{
@@ -585,50 +312,22 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000133.Citizenship __Citizenship;
-		
-		[XmlIgnore]
-		public R_0009_000133.Citizenship Citizenship
-		{
-			get {return __Citizenship;}
-			set {__Citizenship = value;}
-		}
+		public R_0009_000133.Citizenship Citizenship { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementAbroadName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementAbroadName;
-		
-		[XmlIgnore]
-		public string SettlementAbroadName
-		{ 
-			get { return __SettlementAbroadName; }
-			set { __SettlementAbroadName = value; }
-		}
+		public string SettlementAbroadName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AddressDescriptionAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AddressDescriptionAbroad;
-		
-		[XmlIgnore]
-		public string AddressDescriptionAbroad
-		{ 
-			get { return __AddressDescriptionAbroad; }
-			set { __AddressDescriptionAbroad = value; }
-		}
+		public string AddressDescriptionAbroad { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PostCodeAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PostCodeAbroad;
-		
-		[XmlIgnore]
-		public string PostCodeAbroad
-		{ 
-			get { return __PostCodeAbroad; }
-			set { __PostCodeAbroad = value; }
-		}
+		public string PostCodeAbroad { get; set; }
 
 		public PhysicalPersonCorrespondenceAddressForeignCorrespondenceAddress()
 		{
@@ -643,38 +342,17 @@ namespace R_4014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ElectronicServiceApplicantFaxNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ElectronicServiceApplicantFaxNumber;
-		
-		[XmlIgnore]
-		public string ElectronicServiceApplicantFaxNumber
-		{ 
-			get { return __ElectronicServiceApplicantFaxNumber; }
-			set { __ElectronicServiceApplicantFaxNumber = value; }
-		}
+		public string ElectronicServiceApplicantFaxNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ElectronicServiceApplicantPhoneNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ElectronicServiceApplicantPhoneNumber;
-		
-		[XmlIgnore]
-		public string ElectronicServiceApplicantPhoneNumber
-		{ 
-			get { return __ElectronicServiceApplicantPhoneNumber; }
-			set { __ElectronicServiceApplicantPhoneNumber = value; }
-		}
+		public string ElectronicServiceApplicantPhoneNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EmailAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EmailAddress;
-		
-		[XmlIgnore]
-		public string EmailAddress
-		{ 
-			get { return __EmailAddress; }
-			set { __EmailAddress = value; }
-		}
+		public string EmailAddress { get; set; }
 
 		public PhysicalPersonContactData()
 		{

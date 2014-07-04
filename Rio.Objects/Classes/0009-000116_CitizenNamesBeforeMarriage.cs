@@ -27,50 +27,22 @@ namespace R_0009_000116
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonFirstName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonFirstName;
-		
-		[XmlIgnore]
-		public string PersonFirstName
-		{ 
-			get { return __PersonFirstName; }
-			set { __PersonFirstName = value; }
-		}
+		public string PersonFirstName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonMiddleName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonMiddleName;
-		
-		[XmlIgnore]
-		public string PersonMiddleName
-		{ 
-			get { return __PersonMiddleName; }
-			set { __PersonMiddleName = value; }
-		}
+		public string PersonMiddleName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FamilyNameBeforeMarriage",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FamilyNameBeforeMarriage;
-		
-		[XmlIgnore]
-		public string FamilyNameBeforeMarriage
-		{ 
-			get { return __FamilyNameBeforeMarriage; }
-			set { __FamilyNameBeforeMarriage = value; }
-		}
+		public string FamilyNameBeforeMarriage { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonPseudonim",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonPseudonim;
-		
-		[XmlIgnore]
-		public string PersonPseudonim
-		{ 
-			get { return __PersonPseudonim; }
-			set { __PersonPseudonim = value; }
-		}
+		public string PersonPseudonim { get; set; }
 
 		public CitizenNamesBeforeMarriage()
 		{

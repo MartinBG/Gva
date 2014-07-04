@@ -27,26 +27,12 @@ namespace R_4572
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CategoryELVSCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CategoryELVSCode;
-		
-		[XmlIgnore]
-		public string CategoryELVSCode
-		{ 
-			get { return __CategoryELVSCode; }
-			set { __CategoryELVSCode = value; }
-		}
+		public string CategoryELVSCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CategoryELVSName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CategoryELVSName;
-		
-		[XmlIgnore]
-		public string CategoryELVSName
-		{ 
-			get { return __CategoryELVSName; }
-			set { __CategoryELVSName = value; }
-		}
+		public string CategoryELVSName { get; set; }
 
 		public CategoryELVS()
 		{

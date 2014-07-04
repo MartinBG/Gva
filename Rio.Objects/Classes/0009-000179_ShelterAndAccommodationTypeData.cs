@@ -33,33 +33,12 @@ namespace R_0009_000179
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="versionDate",DataType="date")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __versionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __versionDateSpecified { get { return __versionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? versionDate
-		{ 
-		get { return __versionDate; }
-		set { __versionDate = value; }
-		}
-		
-
+		public DateTime? versionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ShelterAndAccommodationTypes),ElementName="ShelterAndAccommodationTypes",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ShelterAndAccommodationTypes __ShelterAndAccommodationTypes;
-		
-		[XmlIgnore]
-		public ShelterAndAccommodationTypes ShelterAndAccommodationTypes
-		{
-			get {return __ShelterAndAccommodationTypes;}
-			set {__ShelterAndAccommodationTypes = value;}
-		}
+		public ShelterAndAccommodationTypes ShelterAndAccommodationTypes { get; set; }
 
 		public ShelterAndAccommodationTypeData()
 		{
@@ -75,18 +54,7 @@ namespace R_0009_000179
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ShelterAndAccommodationType),ElementName="ShelterAndAccommodationType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ShelterAndAccommodationTypeCollection __ShelterAndAccommodationTypeCollection;
-		
-		[XmlIgnore]
-		public ShelterAndAccommodationTypeCollection ShelterAndAccommodationTypeCollection
-		{
-			get
-			{
-				if (__ShelterAndAccommodationTypeCollection == null) __ShelterAndAccommodationTypeCollection = new ShelterAndAccommodationTypeCollection();
-				return __ShelterAndAccommodationTypeCollection;
-			}
-			set {__ShelterAndAccommodationTypeCollection = value;}
-		}
+		public ShelterAndAccommodationTypeCollection ShelterAndAccommodationTypeCollection { get; set; }
 
 		public ShelterAndAccommodationTypes()
 		{
@@ -101,26 +69,12 @@ namespace R_0009_000179
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		public ShelterAndAccommodationType()
 		{

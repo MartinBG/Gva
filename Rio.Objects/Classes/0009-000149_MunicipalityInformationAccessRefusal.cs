@@ -33,213 +33,87 @@ namespace R_0009_000149
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentReceiptOrSigningDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DocumentReceiptOrSigningDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DocumentReceiptOrSigningDateSpecified { get { return __DocumentReceiptOrSigningDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DocumentReceiptOrSigningDate
-		{ 
-			get { return __DocumentReceiptOrSigningDate; }
-			set { __DocumentReceiptOrSigningDate = value; }
-		}
-		
-
+		public DateTime? DocumentReceiptOrSigningDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProviderBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProviderBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData
-		{
-			get {return __ElectronicServiceProviderBasicData;}
-			set {__ElectronicServiceProviderBasicData = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000143.MunicipalityAdministrationLocation),ElementName="MunicipalityAdministrationLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000143.MunicipalityAdministrationLocation __MunicipalityAdministrationLocation;
-		
-		[XmlIgnore]
-		public R_0009_000143.MunicipalityAdministrationLocation MunicipalityAdministrationLocation
-		{
-			get {return __MunicipalityAdministrationLocation;}
-			set {__MunicipalityAdministrationLocation = value;}
-		}
+		public R_0009_000143.MunicipalityAdministrationLocation MunicipalityAdministrationLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000145.MunicipalityInformationAccessRightSubject),ElementName="MunicipalityInformationAccessRightSubject",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000145.MunicipalityInformationAccessRightSubject __MunicipalityInformationAccessRightSubject;
-		
-		[XmlIgnore]
-		public R_0009_000145.MunicipalityInformationAccessRightSubject MunicipalityInformationAccessRightSubject
-		{
-			get {return __MunicipalityInformationAccessRightSubject;}
-			set {__MunicipalityInformationAccessRightSubject = value;}
-		}
+		public R_0009_000145.MunicipalityInformationAccessRightSubject MunicipalityInformationAccessRightSubject { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="NeededMunicipalityInformationDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __NeededMunicipalityInformationDescription;
-		
-		[XmlIgnore]
-		public string NeededMunicipalityInformationDescription
-		{ 
-			get { return __NeededMunicipalityInformationDescription; }
-			set { __NeededMunicipalityInformationDescription = value; }
-		}
+		public string NeededMunicipalityInformationDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="InformationRecordingTechnicalParameters",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __InformationRecordingTechnicalParameters;
-		
-		[XmlIgnore]
-		public string InformationRecordingTechnicalParameters
-		{ 
-			get { return __InformationRecordingTechnicalParameters; }
-			set { __InformationRecordingTechnicalParameters = value; }
-		}
+		public string InformationRecordingTechnicalParameters { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(MunicipalityInformationAccessRefusalMunicipalityInformationAccessTypes),ElementName="MunicipalityInformationAccessTypes",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MunicipalityInformationAccessRefusalMunicipalityInformationAccessTypes __MunicipalityInformationAccessTypes;
-		
-		[XmlIgnore]
-		public MunicipalityInformationAccessRefusalMunicipalityInformationAccessTypes MunicipalityInformationAccessTypes
-		{
-			get {return __MunicipalityInformationAccessTypes;}
-			set {__MunicipalityInformationAccessTypes = value;}
-		}
+		public MunicipalityInformationAccessRefusalMunicipalityInformationAccessTypes MunicipalityInformationAccessTypes { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000073.AISCaseURI),ElementName="AISCaseURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000073.AISCaseURI __AISCaseURI;
-		
-		[XmlIgnore]
-		public R_0009_000073.AISCaseURI AISCaseURI
-		{
-			get {return __AISCaseURI;}
-			set {__AISCaseURI = value;}
-		}
+		public R_0009_000073.AISCaseURI AISCaseURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="IndividualAdministrativeActRefusalLegalGround",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __IndividualAdministrativeActRefusalLegalGround;
-		
-		[XmlIgnore]
-		public string IndividualAdministrativeActRefusalLegalGround
-		{ 
-			get { return __IndividualAdministrativeActRefusalLegalGround; }
-			set { __IndividualAdministrativeActRefusalLegalGround = value; }
-		}
+		public string IndividualAdministrativeActRefusalLegalGround { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="IndividualAdministrativeActRefusalFactualGround",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __IndividualAdministrativeActRefusalFactualGround;
-		
-		[XmlIgnore]
-		public string IndividualAdministrativeActRefusalFactualGround
-		{ 
-			get { return __IndividualAdministrativeActRefusalFactualGround; }
-			set { __IndividualAdministrativeActRefusalFactualGround = value; }
-		}
+		public string IndividualAdministrativeActRefusalFactualGround { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="IndividualAdministrativeActRefusalAppealTerm",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="duration",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __IndividualAdministrativeActRefusalAppealTerm;
-		
-		[XmlIgnore]
-		public string IndividualAdministrativeActRefusalAppealTerm
-		{ 
-			get { return __IndividualAdministrativeActRefusalAppealTerm; }
-			set { __IndividualAdministrativeActRefusalAppealTerm = value; }
-		}
+		public string IndividualAdministrativeActRefusalAppealTerm { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="IndividualAdministrativeActRefusalAppealAuthority",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __IndividualAdministrativeActRefusalAppealAuthority;
-		
-		[XmlIgnore]
-		public string IndividualAdministrativeActRefusalAppealAuthority
-		{ 
-			get { return __IndividualAdministrativeActRefusalAppealAuthority; }
-			set { __IndividualAdministrativeActRefusalAppealAuthority = value; }
-		}
+		public string IndividualAdministrativeActRefusalAppealAuthority { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(MunicipalityInformationAccessRefusalOfficial),ElementName="Official",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MunicipalityInformationAccessRefusalOfficial __Official;
-		
-		[XmlIgnore]
-		public MunicipalityInformationAccessRefusalOfficial Official
-		{
-			get {return __Official;}
-			set {__Official = value;}
-		}
+		public MunicipalityInformationAccessRefusalOfficial Official { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="XMLDigitalSignature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __XMLDigitalSignature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature
-		{
-			get {return __XMLDigitalSignature;}
-			set {__XMLDigitalSignature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature { get; set; }
 
 		public MunicipalityInformationAccessRefusal()
 		{
@@ -255,18 +129,7 @@ namespace R_0009_000149
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="MunicipalityInformationAccessType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MunicipalityInformationAccessTypeCollection __MunicipalityInformationAccessTypeCollection;
-		
-		[XmlIgnore]
-		public MunicipalityInformationAccessTypeCollection MunicipalityInformationAccessTypeCollection
-		{
-			get
-			{
-				if (__MunicipalityInformationAccessTypeCollection == null) __MunicipalityInformationAccessTypeCollection = new MunicipalityInformationAccessTypeCollection();
-				return __MunicipalityInformationAccessTypeCollection;
-			}
-			set {__MunicipalityInformationAccessTypeCollection = value;}
-		}
+		public MunicipalityInformationAccessTypeCollection MunicipalityInformationAccessTypeCollection { get; set; }
 
 		public MunicipalityInformationAccessRefusalMunicipalityInformationAccessTypes()
 		{
@@ -281,26 +144,12 @@ namespace R_0009_000149
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		public MunicipalityInformationAccessRefusalOfficial()
 		{

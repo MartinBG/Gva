@@ -34,18 +34,7 @@ namespace R_4832
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4830.TeacherInstructor),ElementName="TeacherInstructor",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TeacherInstructorCollection __TeacherInstructorCollection;
-		
-		[XmlIgnore]
-		public TeacherInstructorCollection TeacherInstructorCollection
-		{
-			get
-			{
-				if (__TeacherInstructorCollection == null) __TeacherInstructorCollection = new TeacherInstructorCollection();
-				return __TeacherInstructorCollection;
-			}
-			set {__TeacherInstructorCollection = value;}
-		}
+		public TeacherInstructorCollection TeacherInstructorCollection { get; set; }
 
 		public TeachersInstructors()
 		{

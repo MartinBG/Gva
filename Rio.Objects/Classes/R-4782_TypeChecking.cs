@@ -27,38 +27,17 @@ namespace R_4782
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="GroupTypeCheckingCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __GroupTypeCheckingCode;
-		
-		[XmlIgnore]
-		public string GroupTypeCheckingCode
-		{ 
-			get { return __GroupTypeCheckingCode; }
-			set { __GroupTypeCheckingCode = value; }
-		}
+		public string GroupTypeCheckingCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TypeCheckingCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TypeCheckingCode;
-		
-		[XmlIgnore]
-		public string TypeCheckingCode
-		{ 
-			get { return __TypeCheckingCode; }
-			set { __TypeCheckingCode = value; }
-		}
+		public string TypeCheckingCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TypeCheckingName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TypeCheckingName;
-		
-		[XmlIgnore]
-		public string TypeCheckingName
-		{ 
-			get { return __TypeCheckingName; }
-			set { __TypeCheckingName = value; }
-		}
+		public string TypeCheckingName { get; set; }
 
 		public TypeChecking()
 		{

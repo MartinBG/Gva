@@ -27,14 +27,7 @@ namespace R_0009_000004
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(xmldsig.Signature),ElementName="Signature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace="http://www.w3.org/2000/09/xmldsig#")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public xmldsig.Signature __Signature;
-		
-		[XmlIgnore]
-		public xmldsig.Signature Signature
-		{
-			get {return __Signature;}
-			set {__Signature = value;}
-		}
+		public xmldsig.Signature Signature { get; set; }
 
 		public XMLDigitalSignature()
 		{

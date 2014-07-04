@@ -27,38 +27,17 @@ namespace R_4268
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CoordinationActivitiesInteractionAirTrafficManagementPermissionCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CoordinationActivitiesInteractionAirTrafficManagementPermissionCode;
-		
-		[XmlIgnore]
-		public string CoordinationActivitiesInteractionAirTrafficManagementPermissionCode
-		{ 
-			get { return __CoordinationActivitiesInteractionAirTrafficManagementPermissionCode; }
-			set { __CoordinationActivitiesInteractionAirTrafficManagementPermissionCode = value; }
-		}
+		public string CoordinationActivitiesInteractionAirTrafficManagementPermissionCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CoordinationActivitiesInteractionAirTrafficManagementPermissionName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CoordinationActivitiesInteractionAirTrafficManagementPermissionName;
-		
-		[XmlIgnore]
-		public string CoordinationActivitiesInteractionAirTrafficManagementPermissionName
-		{ 
-			get { return __CoordinationActivitiesInteractionAirTrafficManagementPermissionName; }
-			set { __CoordinationActivitiesInteractionAirTrafficManagementPermissionName = value; }
-		}
+		public string CoordinationActivitiesInteractionAirTrafficManagementPermissionName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CoordinationActivitiesInteractionAirTrafficManagementPermissionNameEnglish",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CoordinationActivitiesInteractionAirTrafficManagementPermissionNameEnglish;
-		
-		[XmlIgnore]
-		public string CoordinationActivitiesInteractionAirTrafficManagementPermissionNameEnglish
-		{ 
-			get { return __CoordinationActivitiesInteractionAirTrafficManagementPermissionNameEnglish; }
-			set { __CoordinationActivitiesInteractionAirTrafficManagementPermissionNameEnglish = value; }
-		}
+		public string CoordinationActivitiesInteractionAirTrafficManagementPermissionNameEnglish { get; set; }
 
 		public CoordinationActivitiesInteractionAirTrafficManagementPermission()
 		{

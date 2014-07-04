@@ -1,0 +1,52 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <div class="row" style="margin-bottom: 5px;">
+    <sc-field-group class="col-md-6" text="docs.edit.view.importedBy">
+      <sc-nomenclature ng-model="model.docUnitsImportedBy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+      <sc-button btn-click="$raise('scOnSelectUnit', { type: 'importedBy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+    </sc-field-group>
+
+    <sc-field-group class="col-md-6" text="docs.edit.view.cCopy">
+      <sc-nomenclature ng-model="model.docUnitsCCopy" alias="'employeeUnit'" multiple="multiple" ng-readonly="readonly"></sc-nomenclature>
+      <sc-button btn-click="$raise('scOnSelectUnit', { type: 'cCopy' })" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="readonly"></sc-button>
+    </sc-field-group>
+  </div>
+
+  <accordion close-others="false">
+    <accordion-group is-open="model.openAccordion || !!model.docBody" ng-if="!readonly || !!model.docBody">
+      <accordion-heading>
+          <a l10n-text="docs.edit.view.text" style="font-size: 12px;"></a>
+      </accordion-heading>
+      <div class="row">
+        <div class="col-md-12" style="margin-bottom: 5px;">
+          <sc-textarea rows="2" ng-model="model.docBody" ng-readonly="readonly"></sc-textarea>
+        </div>
+      </div>
+    </accordion-group>
+
+    <accordion-group is-open="true" ng-if="model.jObjectForm">
+      <accordion-heading>
+          <a l10n-text="docs.edit.view.editableFile" style="font-size: 12px;"></a>
+      </accordion-heading>
+
+      <ems-decision name="docFileDecision" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === '0010-006090'"></ems-decision>
+    </accordion-group>
+
+    <accordion-group is-open="model.openAccordion || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0" ng-if="!readonly || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0">
+      <accordion-heading>
+          <a l10n-text="docs.edit.view.content" style="font-size: 12px;"></a>
+      </accordion-heading>
+
+      <ems-doc-files-view name="docFilesViewForm" ng-model="model" ng-if="readonly"></ems-doc-files-view>
+      <ems-doc-files-edit name="docFilesForm" ng-model="model" readonly="readonly" ng-if="!readonly"></ems-doc-files-edit>
+    </accordion-group>
+
+    <accordion-group is-open="model.openAccordion || model.docClassifications.length > 0" ng-if="!readonly || model.docClassifications.length > 0">
+      <accordion-heading>
+          <a l10n-text="docs.edit.classifications.name" style="font-size: 12px;"></a>
+      </accordion-heading>
+
+      <ems-doc-view-doc-classification name="docClassificationForm" ng-model="model" readonly="readonly"></ems-doc-view-doc-classification>
+    </accordion-group>
+
+  </accordion>
+</ng-form>

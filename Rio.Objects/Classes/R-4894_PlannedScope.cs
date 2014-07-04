@@ -27,26 +27,12 @@ namespace R_4894
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PlannedScopeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PlannedScopeCode;
-		
-		[XmlIgnore]
-		public string PlannedScopeCode
-		{ 
-			get { return __PlannedScopeCode; }
-			set { __PlannedScopeCode = value; }
-		}
+		public string PlannedScopeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PlannedScopeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PlannedScopeName;
-		
-		[XmlIgnore]
-		public string PlannedScopeName
-		{ 
-			get { return __PlannedScopeName; }
-			set { __PlannedScopeName = value; }
-		}
+		public string PlannedScopeName { get; set; }
 
 		public PlannedScope()
 		{

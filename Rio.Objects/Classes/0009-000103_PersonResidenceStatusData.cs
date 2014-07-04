@@ -33,33 +33,12 @@ namespace R_0009_000103
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="versionDate",DataType="date")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __versionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __versionDateSpecified { get { return __versionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? versionDate
-		{ 
-		get { return __versionDate; }
-		set { __versionDate = value; }
-		}
-		
-
+		public DateTime? versionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PersonResidenceStatuses),ElementName="PersonResidenceStatuses",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PersonResidenceStatuses __PersonResidenceStatuses;
-		
-		[XmlIgnore]
-		public PersonResidenceStatuses PersonResidenceStatuses
-		{
-			get {return __PersonResidenceStatuses;}
-			set {__PersonResidenceStatuses = value;}
-		}
+		public PersonResidenceStatuses PersonResidenceStatuses { get; set; }
 
 		public PersonResidenceStatusData()
 		{
@@ -75,18 +54,7 @@ namespace R_0009_000103
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PersonResidenceStatus),ElementName="PersonResidenceStatus",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PersonResidenceStatusCollection __PersonResidenceStatusCollection;
-		
-		[XmlIgnore]
-		public PersonResidenceStatusCollection PersonResidenceStatusCollection
-		{
-			get
-			{
-				if (__PersonResidenceStatusCollection == null) __PersonResidenceStatusCollection = new PersonResidenceStatusCollection();
-				return __PersonResidenceStatusCollection;
-			}
-			set {__PersonResidenceStatusCollection = value;}
-		}
+		public PersonResidenceStatusCollection PersonResidenceStatusCollection { get; set; }
 
 		public PersonResidenceStatuses()
 		{
@@ -101,26 +69,12 @@ namespace R_0009_000103
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		public PersonResidenceStatus()
 		{

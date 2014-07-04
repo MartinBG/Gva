@@ -34,18 +34,7 @@ namespace R_6052
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_6050.AttachedDocumentDescriptionIdentifier),ElementName="AttachedDocumentDescriptionIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AttachedDocumentDescriptionIdentifierCollection __AttachedDocumentDescriptionIdentifierCollection;
-		
-		[XmlIgnore]
-		public AttachedDocumentDescriptionIdentifierCollection AttachedDocumentDescriptionIdentifierCollection
-		{
-			get
-			{
-				if (__AttachedDocumentDescriptionIdentifierCollection == null) __AttachedDocumentDescriptionIdentifierCollection = new AttachedDocumentDescriptionIdentifierCollection();
-				return __AttachedDocumentDescriptionIdentifierCollection;
-			}
-			set {__AttachedDocumentDescriptionIdentifierCollection = value;}
-		}
+		public AttachedDocumentDescriptionIdentifierCollection AttachedDocumentDescriptionIdentifierCollection { get; set; }
 
 		public AttachedDocumentDescriptionIdentifiersCollection()
 		{

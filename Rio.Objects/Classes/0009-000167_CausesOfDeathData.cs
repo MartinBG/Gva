@@ -33,33 +33,12 @@ namespace R_0009_000167
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="versionDate",DataType="date")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __versionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __versionDateSpecified { get { return __versionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? versionDate
-		{ 
-		get { return __versionDate; }
-		set { __versionDate = value; }
-		}
-		
-
+		public DateTime? versionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(CauseOfDeath),ElementName="CauseOfDeath",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CauseOfDeath __CauseOfDeath;
-		
-		[XmlIgnore]
-		public CauseOfDeath CauseOfDeath
-		{
-			get {return __CauseOfDeath;}
-			set {__CauseOfDeath = value;}
-		}
+		public CauseOfDeath CauseOfDeath { get; set; }
 
 		public CausesOfDeathData()
 		{
@@ -75,18 +54,7 @@ namespace R_0009_000167
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(CD),ElementName="CD",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CDCollection __CDCollection;
-		
-		[XmlIgnore]
-		public CDCollection CDCollection
-		{
-			get
-			{
-				if (__CDCollection == null) __CDCollection = new CDCollection();
-				return __CDCollection;
-			}
-			set {__CDCollection = value;}
-		}
+		public CDCollection CDCollection { get; set; }
 
 		public CauseOfDeath()
 		{
@@ -101,26 +69,12 @@ namespace R_0009_000167
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		public CD()
 		{

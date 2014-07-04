@@ -39,34 +39,12 @@ namespace R_4226
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4224.AircraftMaintenanceCategoryLicense),ElementName="AircraftMaintenanceCategoryLicense",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AircraftMaintenanceCategoryLicenseCollection __AircraftMaintenanceCategoryLicenseCollection;
-		
-		[XmlIgnore]
-		public AircraftMaintenanceCategoryLicenseCollection AircraftMaintenanceCategoryLicenseCollection
-		{
-			get
-			{
-				if (__AircraftMaintenanceCategoryLicenseCollection == null) __AircraftMaintenanceCategoryLicenseCollection = new AircraftMaintenanceCategoryLicenseCollection();
-				return __AircraftMaintenanceCategoryLicenseCollection;
-			}
-			set {__AircraftMaintenanceCategoryLicenseCollection = value;}
-		}
+		public AircraftMaintenanceCategoryLicenseCollection AircraftMaintenanceCategoryLicenseCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AircraftDescription),ElementName="AircraftDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AircraftDescriptionCollection __AircraftDescriptionCollection;
-		
-		[XmlIgnore]
-		public AircraftDescriptionCollection AircraftDescriptionCollection
-		{
-			get
-			{
-				if (__AircraftDescriptionCollection == null) __AircraftDescriptionCollection = new AircraftDescriptionCollection();
-				return __AircraftDescriptionCollection;
-			}
-			set {__AircraftDescriptionCollection = value;}
-		}
+		public AircraftDescriptionCollection AircraftDescriptionCollection { get; set; }
 
 		public AircraftMaintenanceCategoryLicenseCandidatesApplicant()
 		{
@@ -81,38 +59,17 @@ namespace R_4226
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4224.AircraftMaintenanceCategoryLicense),ElementName="AircraftMaintenanceCategoryLicense",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4224.AircraftMaintenanceCategoryLicense __AircraftMaintenanceCategoryLicense;
-		
-		[XmlIgnore]
-		public R_4224.AircraftMaintenanceCategoryLicense AircraftMaintenanceCategoryLicense
-		{
-			get {return __AircraftMaintenanceCategoryLicense;}
-			set {__AircraftMaintenanceCategoryLicense = value;}
-		}
+		public R_4224.AircraftMaintenanceCategoryLicense AircraftMaintenanceCategoryLicense { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4152.AircraftClass),ElementName="AircraftClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4152.AircraftClass __AircraftClass;
-		
-		[XmlIgnore]
-		public R_4152.AircraftClass AircraftClass
-		{
-			get {return __AircraftClass;}
-			set {__AircraftClass = value;}
-		}
+		public R_4152.AircraftClass AircraftClass { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4158.AircraftType __AircraftType;
-		
-		[XmlIgnore]
-		public R_4158.AircraftType AircraftType
-		{
-			get {return __AircraftType;}
-			set {__AircraftType = value;}
-		}
+		public R_4158.AircraftType AircraftType { get; set; }
 
 		public AircraftDescription()
 		{

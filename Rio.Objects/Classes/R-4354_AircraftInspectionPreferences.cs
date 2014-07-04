@@ -27,26 +27,12 @@ namespace R_4354
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftInspectionPlace",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftInspectionPlace;
-		
-		[XmlIgnore]
-		public string AircraftInspectionPlace
-		{ 
-			get { return __AircraftInspectionPlace; }
-			set { __AircraftInspectionPlace = value; }
-		}
+		public string AircraftInspectionPlace { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4352.AircraftInspectionDesiredPeriod),ElementName="AircraftInspectionDesiredPeriod",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4352.AircraftInspectionDesiredPeriod __AircraftInspectionDesiredPeriod;
-		
-		[XmlIgnore]
-		public R_4352.AircraftInspectionDesiredPeriod AircraftInspectionDesiredPeriod
-		{
-			get {return __AircraftInspectionDesiredPeriod;}
-			set {__AircraftInspectionDesiredPeriod = value;}
-		}
+		public R_4352.AircraftInspectionDesiredPeriod AircraftInspectionDesiredPeriod { get; set; }
 
 		public AircraftInspectionPreferences()
 		{

@@ -876,6 +876,11 @@ namespace Rio.Objects
             return Values.Where(m => m.SegmentTypeURI.RegisterIndex == registerIndex && m.SegmentTypeURI.BatchNumber == batchNumber).Single();
         }
 
+        public static RioDocumentMetadata GetMetadataByDocumentTypeURI(string documentTypeURI)
+        {
+            return Values.Where(m => m.DocumentTypeURIValue == documentTypeURI).Single();
+        }
+
         #endregion
 
         #region Public

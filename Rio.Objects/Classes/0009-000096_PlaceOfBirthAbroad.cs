@@ -27,38 +27,17 @@ namespace R_0009_000096
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryGRAOCode;
-		
-		[XmlIgnore]
-		public string CountryGRAOCode
-		{ 
-			get { return __CountryGRAOCode; }
-			set { __CountryGRAOCode = value; }
-		}
+		public string CountryGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryName;
-		
-		[XmlIgnore]
-		public string CountryName
-		{ 
-			get { return __CountryName; }
-			set { __CountryName = value; }
-		}
+		public string CountryName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementAbroadName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementAbroadName;
-		
-		[XmlIgnore]
-		public string SettlementAbroadName
-		{ 
-			get { return __SettlementAbroadName; }
-			set { __SettlementAbroadName = value; }
-		}
+		public string SettlementAbroadName { get; set; }
 
 		public PlaceOfBirthAbroad()
 		{

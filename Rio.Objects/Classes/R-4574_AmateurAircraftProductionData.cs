@@ -27,50 +27,22 @@ namespace R_4574
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_3988.ManufacturerContactData),ElementName="ManufacturerContactData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_3988.ManufacturerContactData __ManufacturerContactData;
-		
-		[XmlIgnore]
-		public R_3988.ManufacturerContactData ManufacturerContactData
-		{
-			get {return __ManufacturerContactData;}
-			set {__ManufacturerContactData = value;}
-		}
+		public R_3988.ManufacturerContactData ManufacturerContactData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4572.CategoryELVS),ElementName="CategoryELVS",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4572.CategoryELVS __CategoryELVS;
-		
-		[XmlIgnore]
-		public R_4572.CategoryELVS CategoryELVS
-		{
-			get {return __CategoryELVS;}
-			set {__CategoryELVS = value;}
-		}
+		public R_4572.CategoryELVS CategoryELVS { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftMaximumTakeOffWeight",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftMaximumTakeOffWeight;
-		
-		[XmlIgnore]
-		public string AircraftMaximumTakeOffWeight
-		{ 
-			get { return __AircraftMaximumTakeOffWeight; }
-			set { __AircraftMaximumTakeOffWeight = value; }
-		}
+		public string AircraftMaximumTakeOffWeight { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftRegistrationMark",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftRegistrationMark;
-		
-		[XmlIgnore]
-		public string AircraftRegistrationMark
-		{ 
-			get { return __AircraftRegistrationMark; }
-			set { __AircraftRegistrationMark = value; }
-		}
+		public string AircraftRegistrationMark { get; set; }
 
 		public AmateurAircraftProductionData()
 		{

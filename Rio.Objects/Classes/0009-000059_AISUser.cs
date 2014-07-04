@@ -27,67 +27,27 @@ namespace R_0009_000059
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000027.AISUserBasicData),ElementName="BasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000027.AISUserBasicData __BasicData;
-		
-		[XmlIgnore]
-		public R_0009_000027.AISUserBasicData BasicData
-		{
-			get {return __BasicData;}
-			set {__BasicData = value;}
-		}
+		public R_0009_000027.AISUserBasicData BasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Username",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Username;
-		
-		[XmlIgnore]
-		public string Username
-		{ 
-			get { return __Username; }
-			set { __Username = value; }
-		}
+		public string Username { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AISAccessInformation),ElementName="AISAccessInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISAccessInformation __AISAccessInformation;
-		
-		[XmlIgnore]
-		public AISAccessInformation AISAccessInformation
-		{
-			get {return __AISAccessInformation;}
-			set {__AISAccessInformation = value;}
-		}
+		public AISAccessInformation AISAccessInformation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Active",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __Active;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ActiveSpecified;
-		
-		[XmlIgnore]
-		public bool Active
-		{ 
-			get { return __Active; }
-			set { __Active = value; __ActiveSpecified = true; }
-		}
+		public bool Active { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AISUserAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AISUserAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public AISUserAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public AISUserAdditionalData AdditionalData { get; set; }
 
 		public AISUser()
 		{
@@ -102,38 +62,17 @@ namespace R_0009_000059
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AISAccessManagementType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AISAccessManagementType;
-		
-		[XmlIgnore]
-		public string AISAccessManagementType
-		{ 
-			get { return __AISAccessManagementType; }
-			set { __AISAccessManagementType = value; }
-		}
+		public string AISAccessManagementType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AISAccessManagementTypeOther",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AISAccessManagementTypeOther;
-		
-		[XmlIgnore]
-		public string AISAccessManagementTypeOther
-		{ 
-			get { return __AISAccessManagementTypeOther; }
-			set { __AISAccessManagementTypeOther = value; }
-		}
+		public string AISAccessManagementTypeOther { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AdditionalAccessData),ElementName="AdditionalAccessData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AdditionalAccessData __AdditionalAccessData;
-		
-		[XmlIgnore]
-		public AdditionalAccessData AdditionalAccessData
-		{
-			get {return __AdditionalAccessData;}
-			set {__AdditionalAccessData = value;}
-		}
+		public AdditionalAccessData AdditionalAccessData { get; set; }
 
 		public AISAccessInformation()
 		{

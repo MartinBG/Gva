@@ -27,122 +27,52 @@ namespace R_0009_000180
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictCode;
-		
-		[XmlIgnore]
-		public string DistrictCode
-		{ 
-			get { return __DistrictCode; }
-			set { __DistrictCode = value; }
-		}
+		public string DistrictCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictName;
-		
-		[XmlIgnore]
-		public string DistrictName
-		{ 
-			get { return __DistrictName; }
-			set { __DistrictName = value; }
-		}
+		public string DistrictName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MunicipalityCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MunicipalityCode;
-		
-		[XmlIgnore]
-		public string MunicipalityCode
-		{ 
-			get { return __MunicipalityCode; }
-			set { __MunicipalityCode = value; }
-		}
+		public string MunicipalityCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MunicipalityName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MunicipalityName;
-		
-		[XmlIgnore]
-		public string MunicipalityName
-		{ 
-			get { return __MunicipalityName; }
-			set { __MunicipalityName = value; }
-		}
+		public string MunicipalityName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementCode;
-		
-		[XmlIgnore]
-		public string SettlementCode
-		{ 
-			get { return __SettlementCode; }
-			set { __SettlementCode = value; }
-		}
+		public string SettlementCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementName;
-		
-		[XmlIgnore]
-		public string SettlementName
-		{ 
-			get { return __SettlementName; }
-			set { __SettlementName = value; }
-		}
+		public string SettlementName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AreaCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AreaCode;
-		
-		[XmlIgnore]
-		public string AreaCode
-		{ 
-			get { return __AreaCode; }
-			set { __AreaCode = value; }
-		}
+		public string AreaCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AreaName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AreaName;
-		
-		[XmlIgnore]
-		public string AreaName
-		{ 
-			get { return __AreaName; }
-			set { __AreaName = value; }
-		}
+		public string AreaName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(TouristSiteUrbanLocation),ElementName="TouristSiteUrbanLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public TouristSiteUrbanLocation __TouristSiteUrbanLocation;
-		
-		[XmlIgnore]
-		public TouristSiteUrbanLocation TouristSiteUrbanLocation
-		{
-			get {return __TouristSiteUrbanLocation;}
-			set {__TouristSiteUrbanLocation = value;}
-		}
+		public TouristSiteUrbanLocation TouristSiteUrbanLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TouristSiteLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TouristSiteLocation;
-		
-		[XmlIgnore]
-		public string TouristSiteLocation
-		{ 
-			get { return __TouristSiteLocation; }
-			set { __TouristSiteLocation = value; }
-		}
+		public string TouristSiteLocation { get; set; }
 
 		public TouristSiteAddress()
 		{
@@ -157,86 +87,37 @@ namespace R_0009_000180
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidentialComplex",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResidentialComplex;
-		
-		[XmlIgnore]
-		public string ResidentialComplex
-		{ 
-			get { return __ResidentialComplex; }
-			set { __ResidentialComplex = value; }
-		}
+		public string ResidentialComplex { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="StreetBoulevardSquare",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __StreetBoulevardSquare;
-		
-		[XmlIgnore]
-		public string StreetBoulevardSquare
-		{ 
-			get { return __StreetBoulevardSquare; }
-			set { __StreetBoulevardSquare = value; }
-		}
+		public string StreetBoulevardSquare { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="StreetBoulevardSquareNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __StreetBoulevardSquareNumber;
-		
-		[XmlIgnore]
-		public string StreetBoulevardSquareNumber
-		{ 
-			get { return __StreetBoulevardSquareNumber; }
-			set { __StreetBoulevardSquareNumber = value; }
-		}
+		public string StreetBoulevardSquareNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ApartmentBuildingNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ApartmentBuildingNumber;
-		
-		[XmlIgnore]
-		public string ApartmentBuildingNumber
-		{ 
-			get { return __ApartmentBuildingNumber; }
-			set { __ApartmentBuildingNumber = value; }
-		}
+		public string ApartmentBuildingNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Entrance",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Entrance;
-		
-		[XmlIgnore]
-		public string Entrance
-		{ 
-			get { return __Entrance; }
-			set { __Entrance = value; }
-		}
+		public string Entrance { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Floor",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Floor;
-		
-		[XmlIgnore]
-		public string Floor
-		{ 
-			get { return __Floor; }
-			set { __Floor = value; }
-		}
+		public string Floor { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Apartment",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Apartment;
-		
-		[XmlIgnore]
-		public string Apartment
-		{ 
-			get { return __Apartment; }
-			set { __Apartment = value; }
-		}
+		public string Apartment { get; set; }
 
 		public TouristSiteUrbanLocation()
 		{

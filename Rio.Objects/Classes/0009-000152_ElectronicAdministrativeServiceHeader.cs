@@ -27,127 +27,52 @@ namespace R_0009_000152
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SUNAUServiceURI",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SUNAUServiceURI;
-		
-		[XmlIgnore]
-		public string SUNAUServiceURI
-		{ 
-			get { return __SUNAUServiceURI; }
-			set { __SUNAUServiceURI = value; }
-		}
+		public string SUNAUServiceURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProviderBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProviderBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData
-		{
-			get {return __ElectronicServiceProviderBasicData;}
-			set {__ElectronicServiceProviderBasicData = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000016.ElectronicServiceApplicant),ElementName="ElectronicServiceApplicant",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000016.ElectronicServiceApplicant __ElectronicServiceApplicant;
-		
-		[XmlIgnore]
-		public R_0009_000016.ElectronicServiceApplicant ElectronicServiceApplicant
-		{
-			get {return __ElectronicServiceApplicant;}
-			set {__ElectronicServiceApplicant = value;}
-		}
+		public R_0009_000016.ElectronicServiceApplicant ElectronicServiceApplicant { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000137.ElectronicServiceApplicantContactData),ElementName="ElectronicServiceApplicantContactData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000137.ElectronicServiceApplicantContactData __ElectronicServiceApplicantContactData;
-		
-		[XmlIgnore]
-		public R_0009_000137.ElectronicServiceApplicantContactData ElectronicServiceApplicantContactData
-		{
-			get {return __ElectronicServiceApplicantContactData;}
-			set {__ElectronicServiceApplicantContactData = value;}
-		}
+		public R_0009_000137.ElectronicServiceApplicantContactData ElectronicServiceApplicantContactData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ApplicationType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ApplicationType;
-		
-		[XmlIgnore]
-		public string ApplicationType
-		{ 
-			get { return __ApplicationType; }
-			set { __ApplicationType = value; }
-		}
+		public string ApplicationType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SUNAUServiceName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SUNAUServiceName;
-		
-		[XmlIgnore]
-		public string SUNAUServiceName
-		{ 
-			get { return __SUNAUServiceName; }
-			set { __SUNAUServiceName = value; }
-		}
+		public string SUNAUServiceName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SendApplicationWithReceiptAcknowledgedMessage",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __SendApplicationWithReceiptAcknowledgedMessage;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __SendApplicationWithReceiptAcknowledgedMessageSpecified;
-		
-		[XmlIgnore]
-		public bool SendApplicationWithReceiptAcknowledgedMessage
-		{ 
-			get { return __SendApplicationWithReceiptAcknowledgedMessage; }
-			set { __SendApplicationWithReceiptAcknowledgedMessage = value; __SendApplicationWithReceiptAcknowledgedMessageSpecified = true; }
-		}
+		public bool SendApplicationWithReceiptAcknowledgedMessage { get; set; }
 
 		public ElectronicAdministrativeServiceHeader()
 		{

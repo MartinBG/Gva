@@ -34,18 +34,7 @@ namespace R_0009_000086
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DocumentDeliveryFromDocumentStorageDataRecord),ElementName="Record",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DocumentDeliveryFromDocumentStorageDataRecordCollection __RecordCollection;
-		
-		[XmlIgnore]
-		public DocumentDeliveryFromDocumentStorageDataRecordCollection RecordCollection
-		{
-			get
-			{
-				if (__RecordCollection == null) __RecordCollection = new DocumentDeliveryFromDocumentStorageDataRecordCollection();
-				return __RecordCollection;
-			}
-			set {__RecordCollection = value;}
-		}
+		public DocumentDeliveryFromDocumentStorageDataRecordCollection RecordCollection { get; set; }
 
 		public DocumentDeliveryFromDocumentStorageData()
 		{
@@ -60,57 +49,22 @@ namespace R_0009_000086
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000192.OfficerInDocumentStorage2),ElementName="DeliveredBy",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000192.OfficerInDocumentStorage2 __DeliveredBy;
-		
-		[XmlIgnore]
-		public R_0009_000192.OfficerInDocumentStorage2 DeliveredBy
-		{
-			get {return __DeliveredBy;}
-			set {__DeliveredBy = value;}
-		}
+		public R_0009_000192.OfficerInDocumentStorage2 DeliveredBy { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DeliveryTime",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DeliveryTime;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DeliveryTimeSpecified { get { return __DeliveryTime.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DeliveryTime
-		{ 
-			get { return __DeliveryTime; }
-			set { __DeliveryTime = value; }
-		}
-		
-
+		public DateTime? DeliveryTime { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000044.RegisteredDocumentURI),ElementName="RegisteredDocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000044.RegisteredDocumentURI __RegisteredDocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000044.RegisteredDocumentURI RegisteredDocumentURI
-		{
-			get {return __RegisteredDocumentURI;}
-			set {__RegisteredDocumentURI = value;}
-		}
+		public R_0009_000044.RegisteredDocumentURI RegisteredDocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DocumentDeliveryFromDocumentStorageDataRecordAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DocumentDeliveryFromDocumentStorageDataRecordAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public DocumentDeliveryFromDocumentStorageDataRecordAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public DocumentDeliveryFromDocumentStorageDataRecordAdditionalData AdditionalData { get; set; }
 
 		public DocumentDeliveryFromDocumentStorageDataRecord()
 		{

@@ -27,26 +27,12 @@ namespace R_4092
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AeromedicalCenterCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AeromedicalCenterCode;
-		
-		[XmlIgnore]
-		public string AeromedicalCenterCode
-		{ 
-			get { return __AeromedicalCenterCode; }
-			set { __AeromedicalCenterCode = value; }
-		}
+		public string AeromedicalCenterCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AeromedicalCenterName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AeromedicalCenterName;
-		
-		[XmlIgnore]
-		public string AeromedicalCenterName
-		{ 
-			get { return __AeromedicalCenterName; }
-			set { __AeromedicalCenterName = value; }
-		}
+		public string AeromedicalCenterName { get; set; }
 
 		public AeromedicalCenter()
 		{

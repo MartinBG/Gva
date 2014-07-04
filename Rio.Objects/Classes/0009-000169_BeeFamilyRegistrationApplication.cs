@@ -33,110 +33,47 @@ namespace R_0009_000169
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000152.ElectronicAdministrativeServiceHeader),ElementName="ElectronicAdministrativeServiceHeader",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader __ElectronicAdministrativeServiceHeader;
-		
-		[XmlIgnore]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader
-		{
-			get {return __ElectronicAdministrativeServiceHeader;}
-			set {__ElectronicAdministrativeServiceHeader = value;}
-		}
+		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000140.ApiaryAddress),ElementName="ApiaryAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000140.ApiaryAddress __ApiaryAddress;
-		
-		[XmlIgnore]
-		public R_0009_000140.ApiaryAddress ApiaryAddress
-		{
-			get {return __ApiaryAddress;}
-			set {__ApiaryAddress = value;}
-		}
+		public R_0009_000140.ApiaryAddress ApiaryAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CultivatedBeeFamiliesCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CultivatedBeeFamiliesCount;
-		
-		[XmlIgnore]
-		public string CultivatedBeeFamiliesCount
-		{ 
-			get { return __CultivatedBeeFamiliesCount; }
-			set { __CultivatedBeeFamiliesCount = value; }
-		}
+		public string CultivatedBeeFamiliesCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="NewlyBoughtBeeFamiliesCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __NewlyBoughtBeeFamiliesCount;
-		
-		[XmlIgnore]
-		public string NewlyBoughtBeeFamiliesCount
-		{ 
-			get { return __NewlyBoughtBeeFamiliesCount; }
-			set { __NewlyBoughtBeeFamiliesCount = value; }
-		}
+		public string NewlyBoughtBeeFamiliesCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SoldBeeFamiliesCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SoldBeeFamiliesCount;
-		
-		[XmlIgnore]
-		public string SoldBeeFamiliesCount
-		{ 
-			get { return __SoldBeeFamiliesCount; }
-			set { __SoldBeeFamiliesCount = value; }
-		}
+		public string SoldBeeFamiliesCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="WinteredBeeFamiliesCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __WinteredBeeFamiliesCount;
-		
-		[XmlIgnore]
-		public string WinteredBeeFamiliesCount
-		{ 
-			get { return __WinteredBeeFamiliesCount; }
-			set { __WinteredBeeFamiliesCount = value; }
-		}
+		public string WinteredBeeFamiliesCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="NewlyCreatedBeeFamiliesCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __NewlyCreatedBeeFamiliesCount;
-		
-		[XmlIgnore]
-		public string NewlyCreatedBeeFamiliesCount
-		{ 
-			get { return __NewlyCreatedBeeFamiliesCount; }
-			set { __NewlyCreatedBeeFamiliesCount = value; }
-		}
+		public string NewlyCreatedBeeFamiliesCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(BeeFamilyRegistrationApplicationAttachedDocuments),ElementName="AttachedDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public BeeFamilyRegistrationApplicationAttachedDocuments __AttachedDocuments;
-		
-		[XmlIgnore]
-		public BeeFamilyRegistrationApplicationAttachedDocuments AttachedDocuments
-		{
-			get {return __AttachedDocuments;}
-			set {__AttachedDocuments = value;}
-		}
+		public BeeFamilyRegistrationApplicationAttachedDocuments AttachedDocuments { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000153.ElectronicAdministrativeServiceFooter),ElementName="ElectronicAdministrativeServiceFooter",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter __ElectronicAdministrativeServiceFooter;
-		
-		[XmlIgnore]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter
-		{
-			get {return __ElectronicAdministrativeServiceFooter;}
-			set {__ElectronicAdministrativeServiceFooter = value;}
-		}
+		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter { get; set; }
 
 		public BeeFamilyRegistrationApplication()
 		{
@@ -152,18 +89,7 @@ namespace R_0009_000169
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000139.AttachedDocument),ElementName="AttachedDocument",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AttachedDocumentCollection __AttachedDocumentCollection;
-		
-		[XmlIgnore]
-		public AttachedDocumentCollection AttachedDocumentCollection
-		{
-			get
-			{
-				if (__AttachedDocumentCollection == null) __AttachedDocumentCollection = new AttachedDocumentCollection();
-				return __AttachedDocumentCollection;
-			}
-			set {__AttachedDocumentCollection = value;}
-		}
+		public AttachedDocumentCollection AttachedDocumentCollection { get; set; }
 
 		public BeeFamilyRegistrationApplicationAttachedDocuments()
 		{

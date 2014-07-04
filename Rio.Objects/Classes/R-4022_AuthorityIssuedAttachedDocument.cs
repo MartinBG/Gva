@@ -27,26 +27,12 @@ namespace R_4022
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AuthorityIssuedAttachedDocumentCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AuthorityIssuedAttachedDocumentCode;
-		
-		[XmlIgnore]
-		public string AuthorityIssuedAttachedDocumentCode
-		{ 
-			get { return __AuthorityIssuedAttachedDocumentCode; }
-			set { __AuthorityIssuedAttachedDocumentCode = value; }
-		}
+		public string AuthorityIssuedAttachedDocumentCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AuthorityIssuedAttachedDocumentName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AuthorityIssuedAttachedDocumentName;
-		
-		[XmlIgnore]
-		public string AuthorityIssuedAttachedDocumentName
-		{ 
-			get { return __AuthorityIssuedAttachedDocumentName; }
-			set { __AuthorityIssuedAttachedDocumentName = value; }
-		}
+		public string AuthorityIssuedAttachedDocumentName { get; set; }
 
 		public AuthorityIssuedAttachedDocument()
 		{

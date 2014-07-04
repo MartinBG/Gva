@@ -27,38 +27,17 @@ namespace R_4664
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonRepresentingOLVPCandidateNames",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonRepresentingOLVPCandidateNames;
-		
-		[XmlIgnore]
-		public string PersonRepresentingOLVPCandidateNames
-		{ 
-			get { return __PersonRepresentingOLVPCandidateNames; }
-			set { __PersonRepresentingOLVPCandidateNames = value; }
-		}
+		public string PersonRepresentingOLVPCandidateNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000133.Citizenship __Citizenship;
-		
-		[XmlIgnore]
-		public R_0009_000133.Citizenship Citizenship
-		{
-			get {return __Citizenship;}
-			set {__Citizenship = value;}
-		}
+		public R_0009_000133.Citizenship Citizenship { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PositionPersonManagementOLVPCandidate",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PositionPersonManagementOLVPCandidate;
-		
-		[XmlIgnore]
-		public string PositionPersonManagementOLVPCandidate
-		{ 
-			get { return __PositionPersonManagementOLVPCandidate; }
-			set { __PositionPersonManagementOLVPCandidate = value; }
-		}
+		public string PositionPersonManagementOLVPCandidate { get; set; }
 
 		public PersonManagementOLVPCandidateData()
 		{

@@ -27,38 +27,17 @@ namespace R_0009_000024
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000023.TermURI),ElementName="TermURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000023.TermURI __TermURI;
-		
-		[XmlIgnore]
-		public R_0009_000023.TermURI TermURI
-		{
-			get {return __TermURI;}
-			set {__TermURI = value;}
-		}
+		public R_0009_000023.TermURI TermURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ErrorDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ErrorDescription;
-		
-		[XmlIgnore]
-		public string ErrorDescription
-		{ 
-			get { return __ErrorDescription; }
-			set { __ErrorDescription = value; }
-		}
+		public string ErrorDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentElementReference",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentElementReference;
-		
-		[XmlIgnore]
-		public string DocumentElementReference
-		{ 
-			get { return __DocumentElementReference; }
-			set { __DocumentElementReference = value; }
-		}
+		public string DocumentElementReference { get; set; }
 
 		public RegisteredErrorInDocumentContent()
 		{

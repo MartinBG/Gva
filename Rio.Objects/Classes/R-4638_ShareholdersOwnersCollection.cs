@@ -34,18 +34,7 @@ namespace R_4638
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4636.ShareholderOwner),ElementName="ShareholderOwner",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ShareholderOwnerCollection __ShareholderOwnerCollection;
-		
-		[XmlIgnore]
-		public ShareholderOwnerCollection ShareholderOwnerCollection
-		{
-			get
-			{
-				if (__ShareholderOwnerCollection == null) __ShareholderOwnerCollection = new ShareholderOwnerCollection();
-				return __ShareholderOwnerCollection;
-			}
-			set {__ShareholderOwnerCollection = value;}
-		}
+		public ShareholderOwnerCollection ShareholderOwnerCollection { get; set; }
 
 		public ShareholdersOwnersCollection()
 		{

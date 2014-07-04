@@ -27,62 +27,27 @@ namespace R_4546
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftSerialNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftSerialNumber;
-		
-		[XmlIgnore]
-		public string AircraftSerialNumber
-		{ 
-			get { return __AircraftSerialNumber; }
-			set { __AircraftSerialNumber = value; }
-		}
+		public string AircraftSerialNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ExploitationStartEngineTTSNHours",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ExploitationStartEngineTTSNHours;
-		
-		[XmlIgnore]
-		public string ExploitationStartEngineTTSNHours
-		{ 
-			get { return __ExploitationStartEngineTTSNHours; }
-			set { __ExploitationStartEngineTTSNHours = value; }
-		}
+		public string ExploitationStartEngineTTSNHours { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ExploitationStartEngineTTSNLandingsCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ExploitationStartEngineTTSNLandingsCount;
-		
-		[XmlIgnore]
-		public string ExploitationStartEngineTTSNLandingsCount
-		{ 
-			get { return __ExploitationStartEngineTTSNLandingsCount; }
-			set { __ExploitationStartEngineTTSNLandingsCount = value; }
-		}
+		public string ExploitationStartEngineTTSNLandingsCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LastRepairEngineTTSNHours",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __LastRepairEngineTTSNHours;
-		
-		[XmlIgnore]
-		public string LastRepairEngineTTSNHours
-		{ 
-			get { return __LastRepairEngineTTSNHours; }
-			set { __LastRepairEngineTTSNHours = value; }
-		}
+		public string LastRepairEngineTTSNHours { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LastRepairEngineTTSNLandingsCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __LastRepairEngineTTSNLandingsCount;
-		
-		[XmlIgnore]
-		public string LastRepairEngineTTSNLandingsCount
-		{ 
-			get { return __LastRepairEngineTTSNLandingsCount; }
-			set { __LastRepairEngineTTSNLandingsCount = value; }
-		}
+		public string LastRepairEngineTTSNLandingsCount { get; set; }
 
 		public AircraftSerialNumberTTSN()
 		{

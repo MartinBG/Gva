@@ -34,18 +34,7 @@ namespace R_4660
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4658.PersonRepresentingTradingCompanyData),ElementName="PersonRepresentingTradingCompanyData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PersonRepresentingTradingCompanyDataCollection __PersonRepresentingTradingCompanyDataCollection;
-		
-		[XmlIgnore]
-		public PersonRepresentingTradingCompanyDataCollection PersonRepresentingTradingCompanyDataCollection
-		{
-			get
-			{
-				if (__PersonRepresentingTradingCompanyDataCollection == null) __PersonRepresentingTradingCompanyDataCollection = new PersonRepresentingTradingCompanyDataCollection();
-				return __PersonRepresentingTradingCompanyDataCollection;
-			}
-			set {__PersonRepresentingTradingCompanyDataCollection = value;}
-		}
+		public PersonRepresentingTradingCompanyDataCollection PersonRepresentingTradingCompanyDataCollection { get; set; }
 
 		public PersonsRepresentingTradingCompaniesDatasCollection()
 		{

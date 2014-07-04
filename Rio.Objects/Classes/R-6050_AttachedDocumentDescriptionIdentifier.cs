@@ -27,26 +27,12 @@ namespace R_6050
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentUniqueIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentUniqueIdentifier;
-		
-		[XmlIgnore]
-		public string AttachedDocumentUniqueIdentifier
-		{ 
-			get { return __AttachedDocumentUniqueIdentifier; }
-			set { __AttachedDocumentUniqueIdentifier = value; }
-		}
+		public string AttachedDocumentUniqueIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AttachedDocumentDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AttachedDocumentDescription;
-		
-		[XmlIgnore]
-		public string AttachedDocumentDescription
-		{ 
-			get { return __AttachedDocumentDescription; }
-			set { __AttachedDocumentDescription = value; }
-		}
+		public string AttachedDocumentDescription { get; set; }
 
 		public AttachedDocumentDescriptionIdentifier()
 		{

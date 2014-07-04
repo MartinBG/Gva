@@ -34,18 +34,7 @@ namespace R_4466
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4460.AttachedDocumentDataWithWhenApplied),ElementName="AttachedDocumentDataWithWhenApplied",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AttachedDocumentDataWithWhenAppliedCollection __AttachedDocumentDataWithWhenAppliedCollection;
-		
-		[XmlIgnore]
-		public AttachedDocumentDataWithWhenAppliedCollection AttachedDocumentDataWithWhenAppliedCollection
-		{
-			get
-			{
-				if (__AttachedDocumentDataWithWhenAppliedCollection == null) __AttachedDocumentDataWithWhenAppliedCollection = new AttachedDocumentDataWithWhenAppliedCollection();
-				return __AttachedDocumentDataWithWhenAppliedCollection;
-			}
-			set {__AttachedDocumentDataWithWhenAppliedCollection = value;}
-		}
+		public AttachedDocumentDataWithWhenAppliedCollection AttachedDocumentDataWithWhenAppliedCollection { get; set; }
 
 		public AttachedDocumentDatasWithWhenAppliedCollection()
 		{

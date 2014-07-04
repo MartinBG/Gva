@@ -34,18 +34,7 @@ namespace R_4468
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4462.AttachedDocumentDataGVAWithWhenApplied),ElementName="AttachedDocumentDataGVAWithWhenApplied",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AttachedDocumentDataGVAWithWhenAppliedCollection __AttachedDocumentDataGVAWithWhenAppliedCollection;
-		
-		[XmlIgnore]
-		public AttachedDocumentDataGVAWithWhenAppliedCollection AttachedDocumentDataGVAWithWhenAppliedCollection
-		{
-			get
-			{
-				if (__AttachedDocumentDataGVAWithWhenAppliedCollection == null) __AttachedDocumentDataGVAWithWhenAppliedCollection = new AttachedDocumentDataGVAWithWhenAppliedCollection();
-				return __AttachedDocumentDataGVAWithWhenAppliedCollection;
-			}
-			set {__AttachedDocumentDataGVAWithWhenAppliedCollection = value;}
-		}
+		public AttachedDocumentDataGVAWithWhenAppliedCollection AttachedDocumentDataGVAWithWhenAppliedCollection { get; set; }
 
 		public AttachedDocumentDatasGVAWithWhenAppliedCollection()
 		{

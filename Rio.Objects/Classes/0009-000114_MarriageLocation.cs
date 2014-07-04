@@ -27,98 +27,42 @@ namespace R_0009_000114
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryGRAOCode;
-		
-		[XmlIgnore]
-		public string CountryGRAOCode
-		{ 
-			get { return __CountryGRAOCode; }
-			set { __CountryGRAOCode = value; }
-		}
+		public string CountryGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryName;
-		
-		[XmlIgnore]
-		public string CountryName
-		{ 
-			get { return __CountryName; }
-			set { __CountryName = value; }
-		}
+		public string CountryName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictGRAOCode;
-		
-		[XmlIgnore]
-		public string DistrictGRAOCode
-		{ 
-			get { return __DistrictGRAOCode; }
-			set { __DistrictGRAOCode = value; }
-		}
+		public string DistrictGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictGRAOName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictGRAOName;
-		
-		[XmlIgnore]
-		public string DistrictGRAOName
-		{ 
-			get { return __DistrictGRAOName; }
-			set { __DistrictGRAOName = value; }
-		}
+		public string DistrictGRAOName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MunicipalityGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MunicipalityGRAOCode;
-		
-		[XmlIgnore]
-		public string MunicipalityGRAOCode
-		{ 
-			get { return __MunicipalityGRAOCode; }
-			set { __MunicipalityGRAOCode = value; }
-		}
+		public string MunicipalityGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MunicipalityGRAOName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MunicipalityGRAOName;
-		
-		[XmlIgnore]
-		public string MunicipalityGRAOName
-		{ 
-			get { return __MunicipalityGRAOName; }
-			set { __MunicipalityGRAOName = value; }
-		}
+		public string MunicipalityGRAOName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementGRAOCode;
-		
-		[XmlIgnore]
-		public string SettlementGRAOCode
-		{ 
-			get { return __SettlementGRAOCode; }
-			set { __SettlementGRAOCode = value; }
-		}
+		public string SettlementGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementGRAOName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementGRAOName;
-		
-		[XmlIgnore]
-		public string SettlementGRAOName
-		{ 
-			get { return __SettlementGRAOName; }
-			set { __SettlementGRAOName = value; }
-		}
+		public string SettlementGRAOName { get; set; }
 
 		public MarriageLocation()
 		{

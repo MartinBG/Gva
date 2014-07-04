@@ -39,227 +39,87 @@ namespace R_0009_000128
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentReceiptOrSigningDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DocumentReceiptOrSigningDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DocumentReceiptOrSigningDateSpecified { get { return __DocumentReceiptOrSigningDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DocumentReceiptOrSigningDate
-		{ 
-			get { return __DocumentReceiptOrSigningDate; }
-			set { __DocumentReceiptOrSigningDate = value; }
-		}
-		
-
+		public DateTime? DocumentReceiptOrSigningDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProviderBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProviderBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData
-		{
-			get {return __ElectronicServiceProviderBasicData;}
-			set {__ElectronicServiceProviderBasicData = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000143.MunicipalityAdministrationLocation),ElementName="MunicipalityAdministrationLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000143.MunicipalityAdministrationLocation __MunicipalityAdministrationLocation;
-		
-		[XmlIgnore]
-		public R_0009_000143.MunicipalityAdministrationLocation MunicipalityAdministrationLocation
-		{
-			get {return __MunicipalityAdministrationLocation;}
-			set {__MunicipalityAdministrationLocation = value;}
-		}
+		public R_0009_000143.MunicipalityAdministrationLocation MunicipalityAdministrationLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000164.CitizenshipStatusActBasicData),ElementName="CitizenshipStatusActBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000164.CitizenshipStatusActBasicData __CitizenshipStatusActBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000164.CitizenshipStatusActBasicData CitizenshipStatusActBasicData
-		{
-			get {return __CitizenshipStatusActBasicData;}
-			set {__CitizenshipStatusActBasicData = value;}
-		}
+		public R_0009_000164.CitizenshipStatusActBasicData CitizenshipStatusActBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000126.DeceasedPersonData),ElementName="DeceasedPersonData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000126.DeceasedPersonData __DeceasedPersonData;
-		
-		[XmlIgnore]
-		public R_0009_000126.DeceasedPersonData DeceasedPersonData
-		{
-			get {return __DeceasedPersonData;}
-			set {__DeceasedPersonData = value;}
-		}
+		public R_0009_000126.DeceasedPersonData DeceasedPersonData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000094.PersonAddress),ElementName="PersonAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000094.PersonAddress __PersonAddress;
-		
-		[XmlIgnore]
-		public R_0009_000094.PersonAddress PersonAddress
-		{
-			get {return __PersonAddress;}
-			set {__PersonAddress = value;}
-		}
+		public R_0009_000094.PersonAddress PersonAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MaritalStatusCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MaritalStatusCode;
-		
-		[XmlIgnore]
-		public string MaritalStatusCode
-		{ 
-			get { return __MaritalStatusCode; }
-			set { __MaritalStatusCode = value; }
-		}
+		public string MaritalStatusCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MaritalStatus",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MaritalStatus;
-		
-		[XmlIgnore]
-		public string MaritalStatus
-		{ 
-			get { return __MaritalStatus; }
-			set { __MaritalStatus = value; }
-		}
+		public string MaritalStatus { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DateOfDeath",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DateOfDeath;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DateOfDeathSpecified { get { return __DateOfDeath.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DateOfDeath
-		{ 
-			get { return __DateOfDeath; }
-			set { __DateOfDeath = value; }
-		}
-		
-
+		public DateTime? DateOfDeath { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TimeOfDeath",Form=XmlSchemaForm.Qualified,DataType="time",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __TimeOfDeath;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __TimeOfDeathSpecified { get { return __TimeOfDeath.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? TimeOfDeath
-		{ 
-			get { return __TimeOfDeath; }
-			set { __TimeOfDeath = value; }
-		}
-		
-
+		public DateTime? TimeOfDeath { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000125.DeathLocation),ElementName="DeathLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000125.DeathLocation __DeathLocation;
-		
-		[XmlIgnore]
-		public R_0009_000125.DeathLocation DeathLocation
-		{
-			get {return __DeathLocation;}
-			set {__DeathLocation = value;}
-		}
+		public R_0009_000125.DeathLocation DeathLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(CausesOfDeath),ElementName="CausesOfDeath",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CausesOfDeath __CausesOfDeath;
-		
-		[XmlIgnore]
-		public CausesOfDeath CausesOfDeath
-		{
-			get {return __CausesOfDeath;}
-			set {__CausesOfDeath = value;}
-		}
+		public CausesOfDeath CausesOfDeath { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DeathCertificateTranscriptOfficial),ElementName="Official",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DeathCertificateTranscriptOfficial __Official;
-		
-		[XmlIgnore]
-		public DeathCertificateTranscriptOfficial Official
-		{
-			get {return __Official;}
-			set {__Official = value;}
-		}
+		public DeathCertificateTranscriptOfficial Official { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="XMLDigitalSignature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __XMLDigitalSignature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature
-		{
-			get {return __XMLDigitalSignature;}
-			set {__XMLDigitalSignature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature { get; set; }
 
 		public DeathCertificateTranscript()
 		{
@@ -274,34 +134,12 @@ namespace R_0009_000128
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="CauseOfDeathDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CauseOfDeathDescriptionCollection __CauseOfDeathDescriptionCollection;
-		
-		[XmlIgnore]
-		public CauseOfDeathDescriptionCollection CauseOfDeathDescriptionCollection
-		{
-			get
-			{
-				if (__CauseOfDeathDescriptionCollection == null) __CauseOfDeathDescriptionCollection = new CauseOfDeathDescriptionCollection();
-				return __CauseOfDeathDescriptionCollection;
-			}
-			set {__CauseOfDeathDescriptionCollection = value;}
-		}
+		public CauseOfDeathDescriptionCollection CauseOfDeathDescriptionCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(CauseofDeath),ElementName="CauseofDeath",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CauseofDeathCollection __CauseofDeathCollection;
-		
-		[XmlIgnore]
-		public CauseofDeathCollection CauseofDeathCollection
-		{
-			get
-			{
-				if (__CauseofDeathCollection == null) __CauseofDeathCollection = new CauseofDeathCollection();
-				return __CauseofDeathCollection;
-			}
-			set {__CauseofDeathCollection = value;}
-		}
+		public CauseofDeathCollection CauseofDeathCollection { get; set; }
 
 		public CausesOfDeath()
 		{
@@ -316,26 +154,12 @@ namespace R_0009_000128
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CauseOfDeathCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CauseOfDeathCode;
-		
-		[XmlIgnore]
-		public string CauseOfDeathCode
-		{ 
-			get { return __CauseOfDeathCode; }
-			set { __CauseOfDeathCode = value; }
-		}
+		public string CauseOfDeathCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CauseOfDeath",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CauseOfDeath;
-		
-		[XmlIgnore]
-		public string CauseOfDeath
-		{ 
-			get { return __CauseOfDeath; }
-			set { __CauseOfDeath = value; }
-		}
+		public string CauseOfDeath { get; set; }
 
 		public CauseofDeath()
 		{
@@ -350,26 +174,12 @@ namespace R_0009_000128
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DeathCertificateTranscriptOfficialNotRegisteredUnderBulgarianLaw),ElementName="NotRegisteredUnderBulgarianLaw",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DeathCertificateTranscriptOfficialNotRegisteredUnderBulgarianLaw __NotRegisteredUnderBulgarianLaw;
-		
-		[XmlIgnore]
-		public DeathCertificateTranscriptOfficialNotRegisteredUnderBulgarianLaw NotRegisteredUnderBulgarianLaw
-		{
-			get {return __NotRegisteredUnderBulgarianLaw;}
-			set {__NotRegisteredUnderBulgarianLaw = value;}
-		}
+		public DeathCertificateTranscriptOfficialNotRegisteredUnderBulgarianLaw NotRegisteredUnderBulgarianLaw { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DeathCertificateTranscriptOfficialRegisteredUnderBulgarianLaw),ElementName="RegisteredUnderBulgarianLaw",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DeathCertificateTranscriptOfficialRegisteredUnderBulgarianLaw __RegisteredUnderBulgarianLaw;
-		
-		[XmlIgnore]
-		public DeathCertificateTranscriptOfficialRegisteredUnderBulgarianLaw RegisteredUnderBulgarianLaw
-		{
-			get {return __RegisteredUnderBulgarianLaw;}
-			set {__RegisteredUnderBulgarianLaw = value;}
-		}
+		public DeathCertificateTranscriptOfficialRegisteredUnderBulgarianLaw RegisteredUnderBulgarianLaw { get; set; }
 
 		public DeathCertificateTranscriptOfficial()
 		{
@@ -384,33 +194,12 @@ namespace R_0009_000128
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		public DeathCertificateTranscriptOfficialNotRegisteredUnderBulgarianLaw()
 		{
@@ -425,26 +214,12 @@ namespace R_0009_000128
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000006.PersonIdentifier),ElementName="PersonIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000006.PersonIdentifier __PersonIdentifier;
-		
-		[XmlIgnore]
-		public R_0009_000006.PersonIdentifier PersonIdentifier
-		{
-			get {return __PersonIdentifier;}
-			set {__PersonIdentifier = value;}
-		}
+		public R_0009_000006.PersonIdentifier PersonIdentifier { get; set; }
 
 		public DeathCertificateTranscriptOfficialRegisteredUnderBulgarianLaw()
 		{

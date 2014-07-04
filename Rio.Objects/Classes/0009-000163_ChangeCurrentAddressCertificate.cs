@@ -33,316 +33,127 @@ namespace R_0009_000163
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentReceiptOrSigningDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DocumentReceiptOrSigningDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DocumentReceiptOrSigningDateSpecified { get { return __DocumentReceiptOrSigningDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DocumentReceiptOrSigningDate
-		{ 
-			get { return __DocumentReceiptOrSigningDate; }
-			set { __DocumentReceiptOrSigningDate = value; }
-		}
-		
-
+		public DateTime? DocumentReceiptOrSigningDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProviderBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProviderBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData
-		{
-			get {return __ElectronicServiceProviderBasicData;}
-			set {__ElectronicServiceProviderBasicData = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000143.MunicipalityAdministrationLocation),ElementName="MunicipalityAdministrationLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000143.MunicipalityAdministrationLocation __MunicipalityAdministrationLocation;
-		
-		[XmlIgnore]
-		public R_0009_000143.MunicipalityAdministrationLocation MunicipalityAdministrationLocation
-		{
-			get {return __MunicipalityAdministrationLocation;}
-			set {__MunicipalityAdministrationLocation = value;}
-		}
+		public R_0009_000143.MunicipalityAdministrationLocation MunicipalityAdministrationLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000135.CitizenshipRegistrationBasicData),ElementName="CitizenshipRegistrationBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000135.CitizenshipRegistrationBasicData __CitizenshipRegistrationBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000135.CitizenshipRegistrationBasicData CitizenshipRegistrationBasicData
-		{
-			get {return __CitizenshipRegistrationBasicData;}
-			set {__CitizenshipRegistrationBasicData = value;}
-		}
+		public R_0009_000135.CitizenshipRegistrationBasicData CitizenshipRegistrationBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000099.IdentityDocumentBasicData),ElementName="IdentityDocumentBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000099.IdentityDocumentBasicData __IdentityDocumentBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000099.IdentityDocumentBasicData IdentityDocumentBasicData
-		{
-			get {return __IdentityDocumentBasicData;}
-			set {__IdentityDocumentBasicData = value;}
-		}
+		public R_0009_000099.IdentityDocumentBasicData IdentityDocumentBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MaritalStatusCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MaritalStatusCode;
-		
-		[XmlIgnore]
-		public string MaritalStatusCode
-		{ 
-			get { return __MaritalStatusCode; }
-			set { __MaritalStatusCode = value; }
-		}
+		public string MaritalStatusCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MaritalStatus",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MaritalStatus;
-		
-		[XmlIgnore]
-		public string MaritalStatus
-		{ 
-			get { return __MaritalStatus; }
-			set { __MaritalStatus = value; }
-		}
+		public string MaritalStatus { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000094.PersonAddress),ElementName="NewCurrentAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000094.PersonAddress __NewCurrentAddress;
-		
-		[XmlIgnore]
-		public R_0009_000094.PersonAddress NewCurrentAddress
-		{
-			get {return __NewCurrentAddress;}
-			set {__NewCurrentAddress = value;}
-		}
+		public R_0009_000094.PersonAddress NewCurrentAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PopulationRegisterCircumstanceDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __PopulationRegisterCircumstanceDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __PopulationRegisterCircumstanceDateSpecified { get { return __PopulationRegisterCircumstanceDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? PopulationRegisterCircumstanceDate
-		{ 
-			get { return __PopulationRegisterCircumstanceDate; }
-			set { __PopulationRegisterCircumstanceDate = value; }
-		}
-		
-
+		public DateTime? PopulationRegisterCircumstanceDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonResidenceStatusCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonResidenceStatusCode;
-		
-		[XmlIgnore]
-		public string PersonResidenceStatusCode
-		{ 
-			get { return __PersonResidenceStatusCode; }
-			set { __PersonResidenceStatusCode = value; }
-		}
+		public string PersonResidenceStatusCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PersonResidenceStatus",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PersonResidenceStatus;
-		
-		[XmlIgnore]
-		public string PersonResidenceStatus
-		{ 
-			get { return __PersonResidenceStatus; }
-			set { __PersonResidenceStatus = value; }
-		}
+		public string PersonResidenceStatus { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000094.PersonAddress),ElementName="PreviousCurrentAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000094.PersonAddress __PreviousCurrentAddress;
-		
-		[XmlIgnore]
-		public R_0009_000094.PersonAddress PreviousCurrentAddress
-		{
-			get {return __PreviousCurrentAddress;}
-			set {__PreviousCurrentAddress = value;}
-		}
+		public R_0009_000094.PersonAddress PreviousCurrentAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000094.PersonAddress),ElementName="PermanentAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000094.PersonAddress __PermanentAddress;
-		
-		[XmlIgnore]
-		public R_0009_000094.PersonAddress PermanentAddress
-		{
-			get {return __PermanentAddress;}
-			set {__PermanentAddress = value;}
-		}
+		public R_0009_000094.PersonAddress PermanentAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EducationLevelCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EducationLevelCode;
-		
-		[XmlIgnore]
-		public string EducationLevelCode
-		{ 
-			get { return __EducationLevelCode; }
-			set { __EducationLevelCode = value; }
-		}
+		public string EducationLevelCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EducationLevel",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EducationLevel;
-		
-		[XmlIgnore]
-		public string EducationLevel
-		{ 
-			get { return __EducationLevel; }
-			set { __EducationLevel = value; }
-		}
+		public string EducationLevel { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidencePurposeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResidencePurposeCode;
-		
-		[XmlIgnore]
-		public string ResidencePurposeCode
-		{ 
-			get { return __ResidencePurposeCode; }
-			set { __ResidencePurposeCode = value; }
-		}
+		public string ResidencePurposeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidencePurpose",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResidencePurpose;
-		
-		[XmlIgnore]
-		public string ResidencePurpose
-		{ 
-			get { return __ResidencePurpose; }
-			set { __ResidencePurpose = value; }
-		}
+		public string ResidencePurpose { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidencePeriodCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResidencePeriodCode;
-		
-		[XmlIgnore]
-		public string ResidencePeriodCode
-		{ 
-			get { return __ResidencePeriodCode; }
-			set { __ResidencePeriodCode = value; }
-		}
+		public string ResidencePeriodCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidencePeriod",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ResidencePeriod;
-		
-		[XmlIgnore]
-		public string ResidencePeriod
-		{ 
-			get { return __ResidencePeriod; }
-			set { __ResidencePeriod = value; }
-		}
+		public string ResidencePeriod { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ChangeCurrentAddressCertificateMinorChildren),ElementName="MinorChildren",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ChangeCurrentAddressCertificateMinorChildren __MinorChildren;
-		
-		[XmlIgnore]
-		public ChangeCurrentAddressCertificateMinorChildren MinorChildren
-		{
-			get {return __MinorChildren;}
-			set {__MinorChildren = value;}
-		}
+		public ChangeCurrentAddressCertificateMinorChildren MinorChildren { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ChangeCurrentAddressCertificateOfficial),ElementName="Official",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ChangeCurrentAddressCertificateOfficial __Official;
-		
-		[XmlIgnore]
-		public ChangeCurrentAddressCertificateOfficial Official
-		{
-			get {return __Official;}
-			set {__Official = value;}
-		}
+		public ChangeCurrentAddressCertificateOfficial Official { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="XMLDigitalSignature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __XMLDigitalSignature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature
-		{
-			get {return __XMLDigitalSignature;}
-			set {__XMLDigitalSignature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature { get; set; }
 
 		public ChangeCurrentAddressCertificate()
 		{
@@ -358,18 +169,7 @@ namespace R_0009_000163
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000162.MinorChild),ElementName="MinorChild",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MinorChildCollection __MinorChildCollection;
-		
-		[XmlIgnore]
-		public MinorChildCollection MinorChildCollection
-		{
-			get
-			{
-				if (__MinorChildCollection == null) __MinorChildCollection = new MinorChildCollection();
-				return __MinorChildCollection;
-			}
-			set {__MinorChildCollection = value;}
-		}
+		public MinorChildCollection MinorChildCollection { get; set; }
 
 		public ChangeCurrentAddressCertificateMinorChildren()
 		{
@@ -384,26 +184,12 @@ namespace R_0009_000163
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		public ChangeCurrentAddressCertificateOfficial()
 		{

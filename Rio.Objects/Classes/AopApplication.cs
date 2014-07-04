@@ -39,246 +39,102 @@ namespace Aop
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000152.ElectronicAdministrativeServiceHeader),ElementName="ElectronicAdministrativeServiceHeader",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader __ElectronicAdministrativeServiceHeader;
-		
-		[XmlIgnore]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader
-		{
-			get {return __ElectronicAdministrativeServiceHeader;}
-			set {__ElectronicAdministrativeServiceHeader = value;}
-		}
+		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentNumber;
-		
-		[XmlIgnore]
-		public string DocumentNumber
-		{ 
-			get { return __DocumentNumber; }
-			set { __DocumentNumber = value; }
-		}
+		public string DocumentNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperationalProgramCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OperationalProgramCode;
-		
-		[XmlIgnore]
-		public string OperationalProgramCode
-		{ 
-			get { return __OperationalProgramCode; }
-			set { __OperationalProgramCode = value; }
-		}
+		public string OperationalProgramCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperationalProgramName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OperationalProgramName;
-		
-		[XmlIgnore]
-		public string OperationalProgramName
-		{ 
-			get { return __OperationalProgramName; }
-			set { __OperationalProgramName = value; }
-		}
+		public string OperationalProgramName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AgencyId",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AgencyId;
-		
-		[XmlIgnore]
-		public string AgencyId
-		{ 
-			get { return __AgencyId; }
-			set { __AgencyId = value; }
-		}
+		public string AgencyId { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AgencyName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AgencyName;
-		
-		[XmlIgnore]
-		public string AgencyName
-		{ 
-			get { return __AgencyName; }
-			set { __AgencyName = value; }
-		}
+		public string AgencyName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SenderName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SenderName;
-		
-		[XmlIgnore]
-		public string SenderName
-		{ 
-			get { return __SenderName; }
-			set { __SenderName = value; }
-		}
+		public string SenderName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SenderLastName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SenderLastName;
-		
-		[XmlIgnore]
-		public string SenderLastName
-		{ 
-			get { return __SenderLastName; }
-			set { __SenderLastName = value; }
-		}
+		public string SenderLastName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SenderPosition",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SenderPosition;
-		
-		[XmlIgnore]
-		public string SenderPosition
-		{ 
-			get { return __SenderPosition; }
-			set { __SenderPosition = value; }
-		}
+		public string SenderPosition { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SenderPhone",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SenderPhone;
-		
-		[XmlIgnore]
-		public string SenderPhone
-		{ 
-			get { return __SenderPhone; }
-			set { __SenderPhone = value; }
-		}
+		public string SenderPhone { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Description",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Description;
-		
-		[XmlIgnore]
-		public string Description
-		{ 
-			get { return __Description; }
-			set { __Description = value; }
-		}
+		public string Description { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AssignorName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AssignorName;
-		
-		[XmlIgnore]
-		public string AssignorName
-		{ 
-			get { return __AssignorName; }
-			set { __AssignorName = value; }
-		}
+		public string AssignorName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Subject",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Subject;
-		
-		[XmlIgnore]
-		public string Subject
-		{ 
-			get { return __Subject; }
-			set { __Subject = value; }
-		}
+		public string Subject { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ProcedureKind",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ProcedureKind;
-		
-		[XmlIgnore]
-		public string ProcedureKind
-		{ 
-			get { return __ProcedureKind; }
-			set { __ProcedureKind = value; }
-		}
+		public string ProcedureKind { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EstimatedValue",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EstimatedValue;
-		
-		[XmlIgnore]
-		public string EstimatedValue
-		{ 
-			get { return __EstimatedValue; }
-			set { __EstimatedValue = value; }
-		}
+		public string EstimatedValue { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EvaluationCriterion",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EvaluationCriterion;
-		
-		[XmlIgnore]
-		public string EvaluationCriterion
-		{ 
-			get { return __EvaluationCriterion; }
-			set { __EvaluationCriterion = value; }
-		}
+		public string EvaluationCriterion { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="Applications",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ApplicationsCollection __ApplicationsCollection;
-		
-		[XmlIgnore]
-		public ApplicationsCollection ApplicationsCollection
-		{
-			get
-			{
-				if (__ApplicationsCollection == null) __ApplicationsCollection = new ApplicationsCollection();
-				return __ApplicationsCollection;
-			}
-			set {__ApplicationsCollection = value;}
-		}
+		public ApplicationsCollection ApplicationsCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AopAttachedDocuments.AopAttachedDocumentDatasCollection),ElementName="AopAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AopAttachedDocuments.AopAttachedDocumentDatasCollection __AopAttachedDocumentDatasCollection;
-		
-		[XmlIgnore]
-		public AopAttachedDocuments.AopAttachedDocumentDatasCollection AopAttachedDocumentDatasCollection
-		{
-			get {return __AopAttachedDocumentDatasCollection;}
-			set {__AopAttachedDocumentDatasCollection = value;}
-		}
+		public AopAttachedDocuments.AopAttachedDocumentDatasCollection AopAttachedDocumentDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AopApplicationAttachedDocuments),ElementName="AttachedDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AopApplicationAttachedDocuments __AttachedDocuments;
-		
-		[XmlIgnore]
-		public AopApplicationAttachedDocuments AttachedDocuments
-		{
-			get {return __AttachedDocuments;}
-			set {__AttachedDocuments = value;}
-		}
+		public AopApplicationAttachedDocuments AttachedDocuments { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000153.ElectronicAdministrativeServiceFooter),ElementName="ElectronicAdministrativeServiceFooter",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter __ElectronicAdministrativeServiceFooter;
-		
-		[XmlIgnore]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter
-		{
-			get {return __ElectronicAdministrativeServiceFooter;}
-			set {__ElectronicAdministrativeServiceFooter = value;}
-		}
+		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter { get; set; }
 
 		public AopApplication()
 		{
@@ -294,18 +150,7 @@ namespace Aop
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000139.AttachedDocument),ElementName="AttachedDocument",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AttachedDocumentCollection __AttachedDocumentCollection;
-		
-		[XmlIgnore]
-		public AttachedDocumentCollection AttachedDocumentCollection
-		{
-			get
-			{
-				if (__AttachedDocumentCollection == null) __AttachedDocumentCollection = new AttachedDocumentCollection();
-				return __AttachedDocumentCollection;
-			}
-			set {__AttachedDocumentCollection = value;}
-		}
+		public AttachedDocumentCollection AttachedDocumentCollection { get; set; }
 
 		public AopApplicationAttachedDocuments()
 		{

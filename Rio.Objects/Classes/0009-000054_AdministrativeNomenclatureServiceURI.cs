@@ -27,26 +27,12 @@ namespace R_0009_000054
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SUNAUServiceURI",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SUNAUServiceURI;
-		
-		[XmlIgnore]
-		public string SUNAUServiceURI
-		{ 
-			get { return __SUNAUServiceURI; }
-			set { __SUNAUServiceURI = value; }
-		}
+		public string SUNAUServiceURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="ProcedureDocumentRegisterURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __ProcedureDocumentRegisterURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI ProcedureDocumentRegisterURI
-		{
-			get {return __ProcedureDocumentRegisterURI;}
-			set {__ProcedureDocumentRegisterURI = value;}
-		}
+		public R_0009_000001.DocumentURI ProcedureDocumentRegisterURI { get; set; }
 
 		public AdministrativeNomenclatureServiceURI()
 		{

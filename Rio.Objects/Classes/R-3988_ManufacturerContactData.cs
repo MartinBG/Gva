@@ -27,38 +27,17 @@ namespace R_3988
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ManufacturerName;
-		
-		[XmlIgnore]
-		public string ManufacturerName
-		{ 
-			get { return __ManufacturerName; }
-			set { __ManufacturerName = value; }
-		}
+		public string ManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4286.CorrespondenceAddress),ElementName="CorrespondenceAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4286.CorrespondenceAddress __CorrespondenceAddress;
-		
-		[XmlIgnore]
-		public R_4286.CorrespondenceAddress CorrespondenceAddress
-		{
-			get {return __CorrespondenceAddress;}
-			set {__CorrespondenceAddress = value;}
-		}
+		public R_4286.CorrespondenceAddress CorrespondenceAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4288.CorrespondenceAddressAbroad),ElementName="CorrespondenceAddressAbroad",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4288.CorrespondenceAddressAbroad __CorrespondenceAddressAbroad;
-		
-		[XmlIgnore]
-		public R_4288.CorrespondenceAddressAbroad CorrespondenceAddressAbroad
-		{
-			get {return __CorrespondenceAddressAbroad;}
-			set {__CorrespondenceAddressAbroad = value;}
-		}
+		public R_4288.CorrespondenceAddressAbroad CorrespondenceAddressAbroad { get; set; }
 
 		public ManufacturerContactData()
 		{

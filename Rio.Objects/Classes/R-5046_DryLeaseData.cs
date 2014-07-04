@@ -27,109 +27,32 @@ namespace R_5046
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LeaseStartDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __LeaseStartDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __LeaseStartDateSpecified { get { return __LeaseStartDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? LeaseStartDate
-		{ 
-			get { return __LeaseStartDate; }
-			set { __LeaseStartDate = value; }
-		}
-		
-
+		public DateTime? LeaseStartDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LeaseEndDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __LeaseEndDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __LeaseEndDateSpecified { get { return __LeaseEndDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? LeaseEndDate
-		{ 
-			get { return __LeaseEndDate; }
-			set { __LeaseEndDate = value; }
-		}
-		
-
+		public DateTime? LeaseEndDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LeaseReleaseDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __LeaseReleaseDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __LeaseReleaseDateSpecified { get { return __LeaseReleaseDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? LeaseReleaseDate
-		{ 
-			get { return __LeaseReleaseDate; }
-			set { __LeaseReleaseDate = value; }
-		}
-		
-
+		public DateTime? LeaseReleaseDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="LeaseDeletionDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __LeaseDeletionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __LeaseDeletionDateSpecified { get { return __LeaseDeletionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? LeaseDeletionDate
-		{ 
-			get { return __LeaseDeletionDate; }
-			set { __LeaseDeletionDate = value; }
-		}
-		
-
+		public DateTime? LeaseDeletionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CommerialOperationDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __CommerialOperationDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __CommerialOperationDateSpecified { get { return __CommerialOperationDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? CommerialOperationDate
-		{ 
-			get { return __CommerialOperationDate; }
-			set { __CommerialOperationDate = value; }
-		}
-		
-
+		public DateTime? CommerialOperationDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AirportAirfieldName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AirportAirfieldName;
-		
-		[XmlIgnore]
-		public string AirportAirfieldName
-		{ 
-			get { return __AirportAirfieldName; }
-			set { __AirportAirfieldName = value; }
-		}
+		public string AirportAirfieldName { get; set; }
 
 		public DryLeaseData()
 		{

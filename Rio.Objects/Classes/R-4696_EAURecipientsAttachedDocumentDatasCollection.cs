@@ -34,18 +34,7 @@ namespace R_4696
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4694.EAURecipientAttachedDocumentData),ElementName="EAURecipientAttachedDocumentData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public EAURecipientAttachedDocumentDataCollection __EAURecipientAttachedDocumentDataCollection;
-		
-		[XmlIgnore]
-		public EAURecipientAttachedDocumentDataCollection EAURecipientAttachedDocumentDataCollection
-		{
-			get
-			{
-				if (__EAURecipientAttachedDocumentDataCollection == null) __EAURecipientAttachedDocumentDataCollection = new EAURecipientAttachedDocumentDataCollection();
-				return __EAURecipientAttachedDocumentDataCollection;
-			}
-			set {__EAURecipientAttachedDocumentDataCollection = value;}
-		}
+		public EAURecipientAttachedDocumentDataCollection EAURecipientAttachedDocumentDataCollection { get; set; }
 
 		public EAURecipientsAttachedDocumentDatasCollection()
 		{

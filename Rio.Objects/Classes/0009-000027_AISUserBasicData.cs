@@ -27,38 +27,17 @@ namespace R_0009_000027
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000018.AISUserNames),ElementName="Names",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000018.AISUserNames __Names;
-		
-		[XmlIgnore]
-		public R_0009_000018.AISUserNames Names
-		{
-			get {return __Names;}
-			set {__Names = value;}
-		}
+		public R_0009_000018.AISUserNames Names { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AISIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AISIdentifier;
-		
-		[XmlIgnore]
-		public string AISIdentifier
-		{ 
-			get { return __AISIdentifier; }
-			set { __AISIdentifier = value; }
-		}
+		public string AISIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000026.AISUserPositionInAdministration),ElementName="Position",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000026.AISUserPositionInAdministration __Position;
-		
-		[XmlIgnore]
-		public R_0009_000026.AISUserPositionInAdministration Position
-		{
-			get {return __Position;}
-			set {__Position = value;}
-		}
+		public R_0009_000026.AISUserPositionInAdministration Position { get; set; }
 
 		public AISUserBasicData()
 		{

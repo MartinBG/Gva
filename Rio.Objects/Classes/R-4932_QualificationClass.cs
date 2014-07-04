@@ -27,26 +27,12 @@ namespace R_4932
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="QualificationClassCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __QualificationClassCode;
-		
-		[XmlIgnore]
-		public string QualificationClassCode
-		{ 
-			get { return __QualificationClassCode; }
-			set { __QualificationClassCode = value; }
-		}
+		public string QualificationClassCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="QualificationClassName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __QualificationClassName;
-		
-		[XmlIgnore]
-		public string QualificationClassName
-		{ 
-			get { return __QualificationClassName; }
-			set { __QualificationClassName = value; }
-		}
+		public string QualificationClassName { get; set; }
 
 		public QualificationClass()
 		{

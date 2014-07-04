@@ -27,50 +27,22 @@ namespace R_0009_000145
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000005.PersonNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000005.PersonNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000005.PersonNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000005.PersonNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(BulgarianEntity),ElementName="BulgarianEntity",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public BulgarianEntity __BulgarianEntity;
-		
-		[XmlIgnore]
-		public BulgarianEntity BulgarianEntity
-		{
-			get {return __BulgarianEntity;}
-			set {__BulgarianEntity = value;}
-		}
+		public BulgarianEntity BulgarianEntity { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ForeignEntity),ElementName="ForeignEntity",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ForeignEntity __ForeignEntity;
-		
-		[XmlIgnore]
-		public ForeignEntity ForeignEntity
-		{
-			get {return __ForeignEntity;}
-			set {__ForeignEntity = value;}
-		}
+		public ForeignEntity ForeignEntity { get; set; }
 
 		public MunicipalityInformationAccessRightSubject()
 		{
@@ -85,26 +57,12 @@ namespace R_0009_000145
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EntityName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EntityName;
-		
-		[XmlIgnore]
-		public string EntityName
-		{ 
-			get { return __EntityName; }
-			set { __EntityName = value; }
-		}
+		public string EntityName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000142.Residence),ElementName="Residence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000142.Residence __Residence;
-		
-		[XmlIgnore]
-		public R_0009_000142.Residence Residence
-		{
-			get {return __Residence;}
-			set {__Residence = value;}
-		}
+		public R_0009_000142.Residence Residence { get; set; }
 
 		public BulgarianEntity()
 		{
@@ -119,26 +77,12 @@ namespace R_0009_000145
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ForeignEntityName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ForeignEntityName;
-		
-		[XmlIgnore]
-		public string ForeignEntityName
-		{ 
-			get { return __ForeignEntityName; }
-			set { __ForeignEntityName = value; }
-		}
+		public string ForeignEntityName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000144.ForeignEntityResidence),ElementName="ForeignEntityResidence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000144.ForeignEntityResidence __ForeignEntityResidence;
-		
-		[XmlIgnore]
-		public R_0009_000144.ForeignEntityResidence ForeignEntityResidence
-		{
-			get {return __ForeignEntityResidence;}
-			set {__ForeignEntityResidence = value;}
-		}
+		public R_0009_000144.ForeignEntityResidence ForeignEntityResidence { get; set; }
 
 		public ForeignEntity()
 		{

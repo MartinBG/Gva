@@ -27,26 +27,12 @@ namespace R_4620
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AirServicesTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AirServicesTypeCode;
-		
-		[XmlIgnore]
-		public string AirServicesTypeCode
-		{ 
-			get { return __AirServicesTypeCode; }
-			set { __AirServicesTypeCode = value; }
-		}
+		public string AirServicesTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AirServicesTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AirServicesTypeName;
-		
-		[XmlIgnore]
-		public string AirServicesTypeName
-		{ 
-			get { return __AirServicesTypeName; }
-			set { __AirServicesTypeName = value; }
-		}
+		public string AirServicesTypeName { get; set; }
 
 		public AirServicesType()
 		{

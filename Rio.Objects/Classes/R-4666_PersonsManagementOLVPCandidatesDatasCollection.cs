@@ -34,18 +34,7 @@ namespace R_4666
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4664.PersonManagementOLVPCandidateData),ElementName="PersonManagementOLVPCandidateData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PersonManagementOLVPCandidateDataCollection __PersonManagementOLVPCandidateDataCollection;
-		
-		[XmlIgnore]
-		public PersonManagementOLVPCandidateDataCollection PersonManagementOLVPCandidateDataCollection
-		{
-			get
-			{
-				if (__PersonManagementOLVPCandidateDataCollection == null) __PersonManagementOLVPCandidateDataCollection = new PersonManagementOLVPCandidateDataCollection();
-				return __PersonManagementOLVPCandidateDataCollection;
-			}
-			set {__PersonManagementOLVPCandidateDataCollection = value;}
-		}
+		public PersonManagementOLVPCandidateDataCollection PersonManagementOLVPCandidateDataCollection { get; set; }
 
 		public PersonsManagementOLVPCandidatesDatasCollection()
 		{

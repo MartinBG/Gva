@@ -27,62 +27,27 @@ namespace R_4636
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PartnerShareholderName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PartnerShareholderName;
-		
-		[XmlIgnore]
-		public string PartnerShareholderName
-		{ 
-			get { return __PartnerShareholderName; }
-			set { __PartnerShareholderName = value; }
-		}
+		public string PartnerShareholderName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000133.Citizenship __Citizenship;
-		
-		[XmlIgnore]
-		public R_0009_000133.Citizenship Citizenship
-		{
-			get {return __Citizenship;}
-			set {__Citizenship = value;}
-		}
+		public R_0009_000133.Citizenship Citizenship { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SharesUnitsCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SharesUnitsCount;
-		
-		[XmlIgnore]
-		public string SharesUnitsCount
-		{ 
-			get { return __SharesUnitsCount; }
-			set { __SharesUnitsCount = value; }
-		}
+		public string SharesUnitsCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SharesClass",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SharesClass;
-		
-		[XmlIgnore]
-		public string SharesClass
-		{ 
-			get { return __SharesClass; }
-			set { __SharesClass = value; }
-		}
+		public string SharesClass { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ReleasedSharesUnitsPercentage",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ReleasedSharesUnitsPercentage;
-		
-		[XmlIgnore]
-		public string ReleasedSharesUnitsPercentage
-		{ 
-			get { return __ReleasedSharesUnitsPercentage; }
-			set { __ReleasedSharesUnitsPercentage = value; }
-		}
+		public string ReleasedSharesUnitsPercentage { get; set; }
 
 		public ShareholderOwner()
 		{

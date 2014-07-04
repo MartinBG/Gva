@@ -27,31 +27,12 @@ namespace R_4388
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SubmissionTime",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SubmissionTime;
-		
-		[XmlIgnore]
-		public string SubmissionTime
-		{ 
-			get { return __SubmissionTime; }
-			set { __SubmissionTime = value; }
-		}
+		public string SubmissionTime { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlagIndicatingDocumentGiven",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FlagIndicatingDocumentGiven;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FlagIndicatingDocumentGivenSpecified;
-		
-		[XmlIgnore]
-		public bool FlagIndicatingDocumentGiven
-		{ 
-			get { return __FlagIndicatingDocumentGiven; }
-			set { __FlagIndicatingDocumentGiven = value; __FlagIndicatingDocumentGivenSpecified = true; }
-		}
+		public bool FlagIndicatingDocumentGiven { get; set; }
 
 		public ProvidingDocument()
 		{

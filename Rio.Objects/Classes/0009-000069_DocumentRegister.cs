@@ -27,38 +27,17 @@ namespace R_0009_000069
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="RegisterIndex",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __RegisterIndex;
-		
-		[XmlIgnore]
-		public string RegisterIndex
-		{ 
-			get { return __RegisterIndex; }
-			set { __RegisterIndex = value; }
-		}
+		public string RegisterIndex { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="InternalRegisterIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __InternalRegisterIdentifier;
-		
-		[XmlIgnore]
-		public string InternalRegisterIdentifier
-		{ 
-			get { return __InternalRegisterIdentifier; }
-			set { __InternalRegisterIdentifier = value; }
-		}
+		public string InternalRegisterIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		public DocumentRegister()
 		{

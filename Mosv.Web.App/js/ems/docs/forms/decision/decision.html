@@ -1,0 +1,121 @@
+﻿<ng-form class="form-inline" name="decisionForm" sc-validate="{}">
+  <div ng-if="isLoaded">
+
+      <!--<div sc-has-error="legalBasisIssuanceAdministrativeAct">
+        <label class="control-label" l10n-text="decision.legalBasisIssuanceAdministrativeAct"></label>
+        <sc-validation-error field-name="legalBasisIssuanceAdministrativeAct" validations="{required: 'default'}"></sc-validation-error>
+        <sc-textarea rows="1" class="form-control" name="legalBasisIssuanceAdministrativeAct" ng-model="model.jObject.LegalBasisIssuanceAdministrativeAct" required></sc-textarea>
+      </div>-->
+
+      <div>
+        <label class="control-label" l10n-text="decision.legalBasisIssuanceAdministrativeAct"></label><br />
+        <label style="font-weight: normal;" l10n-text="decision.legalBasisIssuanceAdministrativeActDescription"></label>
+        <sc-textarea rows="1" class="form-control" ng-model="model.jObject.LegalBasisIssuanceAdministrativeAct" ng-readonly="readonly"></sc-textarea>
+      </div>
+
+      <div style="padding-top: 10px">
+        <label class="control-label" l10n-text="decision.explanation"></label><br />
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-5" style="padding-top: 10px">
+
+          <label class="control-label" l10n-text="decision.degreeAccessRequestedPublicInformation"></label><br />
+          <label style="font-weight: normal;" l10n-text="decision.degreeAccessRequestedPublicInformationDescription"></label>
+          <sc-select ng-change="degreeAccessValueChanged()" sc-select="{ allowClear: true, placeholder: ' ', data: [{ id: 'R-6072', text: 'Пълен достъп' }, { id: 'R-6074', text: 'Частичен достъп'}]}"
+            ng-model="model.jObject.DegreeAccessRequestedPublicInformation" ng-readonly="readonly">
+          </sc-select>
+          
+        </div>
+      </div>
+
+      <div style="padding-top: 10px">
+        <label class="control-label" l10n-text="decision.descriptionProvidedPublicInformation"></label><br />
+        <label style="font-weight: normal;" l10n-text="decision.descriptionProvidedPublicInformationDescription"></label>
+        <sc-textarea rows="1" class="form-control" ng-model="model.jObject.DescriptionProvidedPublicInformation" ng-readonly="readonly"></sc-textarea>
+      </div>
+
+      <div style="padding-top: 10px">
+        <label class="control-label" l10n-text="decision.formProvidingAccessPublicInformation"></label><br />
+        <label style="font-weight: normal;" l10n-text="decision.formProvidingAccessPublicInformationDescription"></label>
+        <sc-textarea rows="1" class="form-control" ng-model="model.jObject.FormProvidingAccessPublicInformation" ng-readonly="readonly"></sc-textarea>
+      </div>
+
+      <div style="padding-top: 10px">
+        <label class="control-label" l10n-text="decision.placePublicInformationAccessGiven"></label><br />
+        <label style="font-weight: normal;" l10n-text="decision.placePublicInformationAccessGivenDescription"></label>
+        <sc-textarea rows="1" class="form-control" ng-model="model.jObject.PlacePublicInformationAccessGiven" ng-readonly="readonly"></sc-textarea>
+      </div>
+
+      <div style="padding-top: 10px">
+        <label class="control-label" l10n-text="decision.periodAccessPublicInformation"></label><br />
+        <label style="font-weight: normal;" l10n-text="decision.periodAccessPublicInformationDescription"></label>
+        <sc-textarea rows="1" class="form-control" ng-model="model.jObject.PeriodAccessPublicInformation" ng-readonly="readonly"></sc-textarea>
+      </div>
+
+      <div style="padding-top: 10px">
+        <label class="control-label" l10n-text="decision.informationPaymentCostsProvidingAccess"></label>
+        <sc-textarea rows="1" class="form-control" ng-model="model.jObject.InformationPaymentCostsProvidingAccess" ng-readonly="readonly"></sc-textarea>
+      </div>
+
+      <div style="padding-top: 10px">
+        <label class="control-label" l10n-text="decision.otherBodiesOrganizations"></label>
+        <sc-textarea rows="1" class="form-control" ng-model="model.jObject.OtherBodiesOrganizations" ng-readonly="readonly"></sc-textarea>
+      </div>
+
+
+
+      <div class="row">
+        <div class="form-group col-md-5" style="padding-top: 10px">
+
+          <label class="control-label" l10n-text="decision.personType"></label><br />
+          <sc-select ng-change="personTypeValueChanged()" sc-select="{ allowClear: true, placeholder: ' ', data: [{ id: 'bgCitizen', text: 'Българсрски гражданин' }, { id: 'foreignCitizen', text: 'Чужд гражданин'}]}"
+            ng-model="model.jObject.PersonType" ng-readonly="readonly">
+          </sc-select>
+          
+        </div>
+      </div>
+
+      <div class="row" ng-show="model.jObject.PersonType.id === 'bgCitizen'">
+        <div class="form-group col-md-3" style="padding-top: 10px">
+          <label class="control-label" l10n-text="decision.firstName"></label><br />
+          <sc-text ng-model="model.jObject.OfficialCollection[0].PersonNames.First" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-md-3" style="padding-top: 10px">
+          <label class="control-label" l10n-text="decision.middleName"></label><br />
+          <sc-text ng-model="model.jObject.OfficialCollection[0].PersonNames.Middle" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-md-3" style="padding-top: 10px">
+          <label class="control-label" l10n-text="decision.lastName"></label><br />
+          <sc-text ng-model="model.jObject.OfficialCollection[0].PersonNames.Last" ng-readonly="readonly"></sc-text>
+        </div>
+      </div>
+
+      <div class="row" ng-show="model.jObject.PersonType.id === 'foreignCitizen'">
+        <div class="form-group col-md-3" style="padding-top: 10px">
+          <label class="control-label" l10n-text="decision.firstName"></label><br />
+          <sc-text ng-model="model.jObject.OfficialCollection[0].ForeignCitizenNames.FirstCyrillic" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-md-3" style="padding-top: 10px">
+          <label class="control-label" l10n-text="decision.lastName"></label><br />
+          <sc-text ng-model="model.jObject.OfficialCollection[0].ForeignCitizenNames.LastCyrillic" ng-readonly="readonly"></sc-text>
+        </div>
+        <div class="form-group col-md-3" style="padding-top: 10px">
+          <label class="control-label" l10n-text="decision.otherName"></label><br />
+          <sc-text ng-model="model.jObject.OfficialCollection[0].ForeignCitizenNames.OtherCyrillic" ng-readonly="readonly"></sc-text>
+        </div>
+      </div>
+
+      <div class="row" ng-show="!!model.jObject.PersonType.id">
+        <div class="form-group col-md-3" style="padding-top: 10px">
+          <label class="control-label" l10n-text="decision.electronicDocumentAuthorQuality"></label><br />
+          <sc-text ng-model="model.jObject.OfficialCollection[0].ElectronicDocumentAuthorQuality" ng-readonly="readonly"></sc-text>
+        </div>
+      </div>
+
+
+
+
+
+  </div>
+</ng-form>

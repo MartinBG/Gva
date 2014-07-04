@@ -27,26 +27,12 @@ namespace R_0009_000042
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000031.UnifiedDataURI),ElementName="SegmentUnifiedDataURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000031.UnifiedDataURI __SegmentUnifiedDataURI;
-		
-		[XmlIgnore]
-		public R_0009_000031.UnifiedDataURI SegmentUnifiedDataURI
-		{
-			get {return __SegmentUnifiedDataURI;}
-			set {__SegmentUnifiedDataURI = value;}
-		}
+		public R_0009_000031.UnifiedDataURI SegmentUnifiedDataURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="OfficialDocumentRegisterURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __OfficialDocumentRegisterURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI OfficialDocumentRegisterURI
-		{
-			get {return __OfficialDocumentRegisterURI;}
-			set {__OfficialDocumentRegisterURI = value;}
-		}
+		public R_0009_000001.DocumentURI OfficialDocumentRegisterURI { get; set; }
 
 		public AdministrativeNomenclatureDocumentTypeURI()
 		{

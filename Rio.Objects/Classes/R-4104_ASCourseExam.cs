@@ -27,26 +27,12 @@ namespace R_4104
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ASCourseCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ASCourseCode;
-		
-		[XmlIgnore]
-		public string ASCourseCode
-		{ 
-			get { return __ASCourseCode; }
-			set { __ASCourseCode = value; }
-		}
+		public string ASCourseCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ASCourseName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ASCourseName;
-		
-		[XmlIgnore]
-		public string ASCourseName
-		{ 
-			get { return __ASCourseName; }
-			set { __ASCourseName = value; }
-		}
+		public string ASCourseName { get; set; }
 
 		public ASCourseExam()
 		{

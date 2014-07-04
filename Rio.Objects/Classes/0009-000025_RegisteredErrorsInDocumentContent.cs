@@ -33,38 +33,17 @@ namespace R_0009_000025
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(RegisteredErrors),ElementName="RegisteredErrors",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public RegisteredErrors __RegisteredErrors;
-		
-		[XmlIgnore]
-		public RegisteredErrors RegisteredErrors
-		{
-			get {return __RegisteredErrors;}
-			set {__RegisteredErrors = value;}
-		}
+		public RegisteredErrors RegisteredErrors { get; set; }
 
 		public RegisteredErrorsInDocumentContent()
 		{
@@ -80,18 +59,7 @@ namespace R_0009_000025
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000024.RegisteredErrorInDocumentContent),ElementName="Error",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public RegisteredErrorInDocumentContentCollection __ErrorCollection;
-		
-		[XmlIgnore]
-		public RegisteredErrorInDocumentContentCollection ErrorCollection
-		{
-			get
-			{
-				if (__ErrorCollection == null) __ErrorCollection = new RegisteredErrorInDocumentContentCollection();
-				return __ErrorCollection;
-			}
-			set {__ErrorCollection = value;}
-		}
+		public RegisteredErrorInDocumentContentCollection ErrorCollection { get; set; }
 
 		public RegisteredErrors()
 		{

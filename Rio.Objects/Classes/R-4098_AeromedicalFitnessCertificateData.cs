@@ -27,64 +27,22 @@ namespace R_4098
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4086.AeromedicalFitnessClass),ElementName="AeromedicalFitnessClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4086.AeromedicalFitnessClass __AeromedicalFitnessClass;
-		
-		[XmlIgnore]
-		public R_4086.AeromedicalFitnessClass AeromedicalFitnessClass
-		{
-			get {return __AeromedicalFitnessClass;}
-			set {__AeromedicalFitnessClass = value;}
-		}
+		public R_4086.AeromedicalFitnessClass AeromedicalFitnessClass { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MedicalExaminationLastDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __MedicalExaminationLastDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __MedicalExaminationLastDateSpecified { get { return __MedicalExaminationLastDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? MedicalExaminationLastDate
-		{ 
-			get { return __MedicalExaminationLastDate; }
-			set { __MedicalExaminationLastDate = value; }
-		}
-		
-
+		public DateTime? MedicalExaminationLastDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MedicalExaminationValidity",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __MedicalExaminationValidity;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __MedicalExaminationValiditySpecified { get { return __MedicalExaminationValidity.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? MedicalExaminationValidity
-		{ 
-			get { return __MedicalExaminationValidity; }
-			set { __MedicalExaminationValidity = value; }
-		}
-		
-
+		public DateTime? MedicalExaminationValidity { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4092.AeromedicalCenter),ElementName="AeromedicalCenter",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4092.AeromedicalCenter __AeromedicalCenter;
-		
-		[XmlIgnore]
-		public R_4092.AeromedicalCenter AeromedicalCenter
-		{
-			get {return __AeromedicalCenter;}
-			set {__AeromedicalCenter = value;}
-		}
+		public R_4092.AeromedicalCenter AeromedicalCenter { get; set; }
 
 		public AeromedicalFitnessCertificateData()
 		{

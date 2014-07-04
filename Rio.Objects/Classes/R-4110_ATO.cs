@@ -27,26 +27,12 @@ namespace R_4110
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ATOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ATOCode;
-		
-		[XmlIgnore]
-		public string ATOCode
-		{ 
-			get { return __ATOCode; }
-			set { __ATOCode = value; }
-		}
+		public string ATOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ATOName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ATOName;
-		
-		[XmlIgnore]
-		public string ATOName
-		{ 
-			get { return __ATOName; }
-			set { __ATOName = value; }
-		}
+		public string ATOName { get; set; }
 
 		public ATO()
 		{

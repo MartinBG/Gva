@@ -27,26 +27,12 @@ namespace R_4174
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightSimulatorTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightSimulatorTypeCode;
-		
-		[XmlIgnore]
-		public string FlightSimulatorTypeCode
-		{ 
-			get { return __FlightSimulatorTypeCode; }
-			set { __FlightSimulatorTypeCode = value; }
-		}
+		public string FlightSimulatorTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FlightSimulatorTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FlightSimulatorTypeName;
-		
-		[XmlIgnore]
-		public string FlightSimulatorTypeName
-		{ 
-			get { return __FlightSimulatorTypeName; }
-			set { __FlightSimulatorTypeName = value; }
-		}
+		public string FlightSimulatorTypeName { get; set; }
 
 		public FlightSimulatorType()
 		{

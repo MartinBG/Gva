@@ -27,26 +27,12 @@ namespace R_5008
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DirectionFunctionCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DirectionFunctionCode;
-		
-		[XmlIgnore]
-		public string DirectionFunctionCode
-		{ 
-			get { return __DirectionFunctionCode; }
-			set { __DirectionFunctionCode = value; }
-		}
+		public string DirectionFunctionCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DirectionFunctionName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DirectionFunctionName;
-		
-		[XmlIgnore]
-		public string DirectionFunctionName
-		{ 
-			get { return __DirectionFunctionName; }
-			set { __DirectionFunctionName = value; }
-		}
+		public string DirectionFunctionName { get; set; }
 
 		public DirectionFunction()
 		{

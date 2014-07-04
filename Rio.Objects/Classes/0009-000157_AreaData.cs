@@ -33,33 +33,12 @@ namespace R_0009_000157
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="versionDate",DataType="date")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __versionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __versionDateSpecified { get { return __versionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? versionDate
-		{ 
-		get { return __versionDate; }
-		set { __versionDate = value; }
-		}
-		
-
+		public DateTime? versionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Areas),ElementName="Areas",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Areas __Areas;
-		
-		[XmlIgnore]
-		public Areas Areas
-		{
-			get {return __Areas;}
-			set {__Areas = value;}
-		}
+		public Areas Areas { get; set; }
 
 		public AreaData()
 		{
@@ -75,18 +54,7 @@ namespace R_0009_000157
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Area),ElementName="Area",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AreaCollection __AreaCollection;
-		
-		[XmlIgnore]
-		public AreaCollection AreaCollection
-		{
-			get
-			{
-				if (__AreaCollection == null) __AreaCollection = new AreaCollection();
-				return __AreaCollection;
-			}
-			set {__AreaCollection = value;}
-		}
+		public AreaCollection AreaCollection { get; set; }
 
 		public Areas()
 		{
@@ -101,26 +69,12 @@ namespace R_0009_000157
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		public Area()
 		{

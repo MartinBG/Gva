@@ -27,38 +27,17 @@ namespace R_4904
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4158.AircraftType __AircraftType;
-		
-		[XmlIgnore]
-		public R_4158.AircraftType AircraftType
-		{
-			get {return __AircraftType;}
-			set {__AircraftType = value;}
-		}
+		public R_4158.AircraftType AircraftType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftSerialNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftSerialNumber;
-		
-		[XmlIgnore]
-		public string AircraftSerialNumber
-		{ 
-			get { return __AircraftSerialNumber; }
-			set { __AircraftSerialNumber = value; }
-		}
+		public string AircraftSerialNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftManufacturerName;
-		
-		[XmlIgnore]
-		public string AircraftManufacturerName
-		{ 
-			get { return __AircraftManufacturerName; }
-			set { __AircraftManufacturerName = value; }
-		}
+		public string AircraftManufacturerName { get; set; }
 
 		public AircraftDataFlightPermit()
 		{

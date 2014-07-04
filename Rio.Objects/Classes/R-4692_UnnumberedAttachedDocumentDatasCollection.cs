@@ -34,18 +34,7 @@ namespace R_4692
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4690.UnnumberedAttachedDocumentData),ElementName="UnnumberedAttachedDocumentData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public UnnumberedAttachedDocumentDataCollection __UnnumberedAttachedDocumentDataCollection;
-		
-		[XmlIgnore]
-		public UnnumberedAttachedDocumentDataCollection UnnumberedAttachedDocumentDataCollection
-		{
-			get
-			{
-				if (__UnnumberedAttachedDocumentDataCollection == null) __UnnumberedAttachedDocumentDataCollection = new UnnumberedAttachedDocumentDataCollection();
-				return __UnnumberedAttachedDocumentDataCollection;
-			}
-			set {__UnnumberedAttachedDocumentDataCollection = value;}
-		}
+		public UnnumberedAttachedDocumentDataCollection UnnumberedAttachedDocumentDataCollection { get; set; }
 
 		public UnnumberedAttachedDocumentDatasCollection()
 		{

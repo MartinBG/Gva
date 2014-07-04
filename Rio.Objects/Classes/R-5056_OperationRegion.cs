@@ -27,26 +27,12 @@ namespace R_5056
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperationRegionCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OperationRegionCode;
-		
-		[XmlIgnore]
-		public string OperationRegionCode
-		{ 
-			get { return __OperationRegionCode; }
-			set { __OperationRegionCode = value; }
-		}
+		public string OperationRegionCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperationRegionName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OperationRegionName;
-		
-		[XmlIgnore]
-		public string OperationRegionName
-		{ 
-			get { return __OperationRegionName; }
-			set { __OperationRegionName = value; }
-		}
+		public string OperationRegionName { get; set; }
 
 		public OperationRegion()
 		{

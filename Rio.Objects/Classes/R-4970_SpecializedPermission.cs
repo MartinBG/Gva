@@ -27,26 +27,12 @@ namespace R_4970
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SpecializedPermissionCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SpecializedPermissionCode;
-		
-		[XmlIgnore]
-		public string SpecializedPermissionCode
-		{ 
-			get { return __SpecializedPermissionCode; }
-			set { __SpecializedPermissionCode = value; }
-		}
+		public string SpecializedPermissionCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SpecializedPermissionName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SpecializedPermissionName;
-		
-		[XmlIgnore]
-		public string SpecializedPermissionName
-		{ 
-			get { return __SpecializedPermissionName; }
-			set { __SpecializedPermissionName = value; }
-		}
+		public string SpecializedPermissionName { get; set; }
 
 		public SpecializedPermission()
 		{

@@ -27,189 +27,77 @@ namespace R_4888
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4158.AircraftType __AircraftType;
-		
-		[XmlIgnore]
-		public R_4158.AircraftType AircraftType
-		{
-			get {return __AircraftType;}
-			set {__AircraftType = value;}
-		}
+		public R_4158.AircraftType AircraftType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4872.FSTDType),ElementName="FSTDType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4872.FSTDType __FSTDType;
-		
-		[XmlIgnore]
-		public R_4872.FSTDType FSTDType
-		{
-			get {return __FSTDType;}
-			set {__FSTDType = value;}
-		}
+		public R_4872.FSTDType FSTDType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FSTDLocation",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FSTDLocation;
-		
-		[XmlIgnore]
-		public string FSTDLocation
-		{ 
-			get { return __FSTDLocation; }
-			set { __FSTDLocation = value; }
-		}
+		public string FSTDLocation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FSTDQualificationLevel",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FSTDQualificationLevel;
-		
-		[XmlIgnore]
-		public string FSTDQualificationLevel
-		{ 
-			get { return __FSTDQualificationLevel; }
-			set { __FSTDQualificationLevel = value; }
-		}
+		public string FSTDQualificationLevel { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FSTDIdCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FSTDIdCode;
-		
-		[XmlIgnore]
-		public string FSTDIdCode
-		{ 
-			get { return __FSTDIdCode; }
-			set { __FSTDIdCode = value; }
-		}
+		public string FSTDIdCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FSTDSerialNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FSTDSerialNumber;
-		
-		[XmlIgnore]
-		public string FSTDSerialNumber
-		{ 
-			get { return __FSTDSerialNumber; }
-			set { __FSTDSerialNumber = value; }
-		}
+		public string FSTDSerialNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ManufacturerName;
-		
-		[XmlIgnore]
-		public string ManufacturerName
-		{ 
-			get { return __ManufacturerName; }
-			set { __ManufacturerName = value; }
-		}
+		public string ManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryGRAOCode;
-		
-		[XmlIgnore]
-		public string CountryGRAOCode
-		{ 
-			get { return __CountryGRAOCode; }
-			set { __CountryGRAOCode = value; }
-		}
+		public string CountryGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryName;
-		
-		[XmlIgnore]
-		public string CountryName
-		{ 
-			get { return __CountryName; }
-			set { __CountryName = value; }
-		}
+		public string CountryName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ManufacturingDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ManufacturingDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ManufacturingDateSpecified { get { return __ManufacturingDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ManufacturingDate
-		{ 
-			get { return __ManufacturingDate; }
-			set { __ManufacturingDate = value; }
-		}
-		
-
+		public DateTime? ManufacturingDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4412.EngineType),ElementName="EngineTypeA",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4412.EngineType __EngineTypeA;
-		
-		[XmlIgnore]
-		public R_4412.EngineType EngineTypeA
-		{
-			get {return __EngineTypeA;}
-			set {__EngineTypeA = value;}
-		}
+		public R_4412.EngineType EngineTypeA { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4412.EngineType),ElementName="EngineTypeB",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4412.EngineType __EngineTypeB;
-		
-		[XmlIgnore]
-		public R_4412.EngineType EngineTypeB
-		{
-			get {return __EngineTypeB;}
-			set {__EngineTypeB = value;}
-		}
+		public R_4412.EngineType EngineTypeB { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FSTDVisualSystem",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FSTDVisualSystem;
-		
-		[XmlIgnore]
-		public string FSTDVisualSystem
-		{ 
-			get { return __FSTDVisualSystem; }
-			set { __FSTDVisualSystem = value; }
-		}
+		public string FSTDVisualSystem { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FSTDMotionSystem",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FSTDMotionSystem;
-		
-		[XmlIgnore]
-		public string FSTDMotionSystem
-		{ 
-			get { return __FSTDMotionSystem; }
-			set { __FSTDMotionSystem = value; }
-		}
+		public string FSTDMotionSystem { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Location",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Location;
-		
-		[XmlIgnore]
-		public string Location
-		{ 
-			get { return __Location; }
-			set { __Location = value; }
-		}
+		public string Location { get; set; }
 
 		public FSTDDetails()
 		{

@@ -34,18 +34,7 @@ namespace R_0009_000079
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DocumentAcceptanceInDocumentStorageDataRecord),ElementName="Record",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DocumentAcceptanceInDocumentStorageDataRecordCollection __RecordCollection;
-		
-		[XmlIgnore]
-		public DocumentAcceptanceInDocumentStorageDataRecordCollection RecordCollection
-		{
-			get
-			{
-				if (__RecordCollection == null) __RecordCollection = new DocumentAcceptanceInDocumentStorageDataRecordCollection();
-				return __RecordCollection;
-			}
-			set {__RecordCollection = value;}
-		}
+		public DocumentAcceptanceInDocumentStorageDataRecordCollection RecordCollection { get; set; }
 
 		public DocumentAcceptanceInDocumentStorageData()
 		{
@@ -60,57 +49,22 @@ namespace R_0009_000079
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000192.OfficerInDocumentStorage2),ElementName="AcceptedBy",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000192.OfficerInDocumentStorage2 __AcceptedBy;
-		
-		[XmlIgnore]
-		public R_0009_000192.OfficerInDocumentStorage2 AcceptedBy
-		{
-			get {return __AcceptedBy;}
-			set {__AcceptedBy = value;}
-		}
+		public R_0009_000192.OfficerInDocumentStorage2 AcceptedBy { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AcceptanceTime",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __AcceptanceTime;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __AcceptanceTimeSpecified { get { return __AcceptanceTime.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? AcceptanceTime
-		{ 
-			get { return __AcceptanceTime; }
-			set { __AcceptanceTime = value; }
-		}
-		
-
+		public DateTime? AcceptanceTime { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000044.RegisteredDocumentURI),ElementName="RegisteredDocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000044.RegisteredDocumentURI __RegisteredDocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000044.RegisteredDocumentURI RegisteredDocumentURI
-		{
-			get {return __RegisteredDocumentURI;}
-			set {__RegisteredDocumentURI = value;}
-		}
+		public R_0009_000044.RegisteredDocumentURI RegisteredDocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DocumentAcceptanceInDocumentStorageDataRecordAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DocumentAcceptanceInDocumentStorageDataRecordAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public DocumentAcceptanceInDocumentStorageDataRecordAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public DocumentAcceptanceInDocumentStorageDataRecordAdditionalData AdditionalData { get; set; }
 
 		public DocumentAcceptanceInDocumentStorageDataRecord()
 		{

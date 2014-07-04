@@ -33,54 +33,22 @@ namespace R_4282
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4252.OVDQualificationClass),ElementName="OVDQualificationClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4252.OVDQualificationClass __OVDQualificationClass;
-		
-		[XmlIgnore]
-		public R_4252.OVDQualificationClass OVDQualificationClass
-		{
-			get {return __OVDQualificationClass;}
-			set {__OVDQualificationClass = value;}
-		}
+		public R_4252.OVDQualificationClass OVDQualificationClass { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4274.OVDBodyLocationIndicator),ElementName="OVDBodyLocationIndicator",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4274.OVDBodyLocationIndicator __OVDBodyLocationIndicator;
-		
-		[XmlIgnore]
-		public R_4274.OVDBodyLocationIndicator OVDBodyLocationIndicator
-		{
-			get {return __OVDBodyLocationIndicator;}
-			set {__OVDBodyLocationIndicator = value;}
-		}
+		public R_4274.OVDBodyLocationIndicator OVDBodyLocationIndicator { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4280.SectorWorkplaceAviationGroundStaff),ElementName="SectorWorkplaceAviationGroundStaff",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4280.SectorWorkplaceAviationGroundStaff __SectorWorkplaceAviationGroundStaff;
-		
-		[XmlIgnore]
-		public R_4280.SectorWorkplaceAviationGroundStaff SectorWorkplaceAviationGroundStaff
-		{
-			get {return __SectorWorkplaceAviationGroundStaff;}
-			set {__SectorWorkplaceAviationGroundStaff = value;}
-		}
+		public R_4280.SectorWorkplaceAviationGroundStaff SectorWorkplaceAviationGroundStaff { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4260.OVDQualificationClassPermission),ElementName="OVDQualificationClassPermission",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public OVDQualificationClassPermissionCollection __OVDQualificationClassPermissionCollection;
-		
-		[XmlIgnore]
-		public OVDQualificationClassPermissionCollection OVDQualificationClassPermissionCollection
-		{
-			get
-			{
-				if (__OVDQualificationClassPermissionCollection == null) __OVDQualificationClassPermissionCollection = new OVDQualificationClassPermissionCollection();
-				return __OVDQualificationClassPermissionCollection;
-			}
-			set {__OVDQualificationClassPermissionCollection = value;}
-		}
+		public OVDQualificationClassPermissionCollection OVDQualificationClassPermissionCollection { get; set; }
 
 		public OVDQualificationClassData()
 		{

@@ -39,462 +39,177 @@ namespace R_4686
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000152.ElectronicAdministrativeServiceHeader),ElementName="ElectronicAdministrativeServiceHeader",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader __ElectronicAdministrativeServiceHeader;
-		
-		[XmlIgnore]
-		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader
-		{
-			get {return __ElectronicAdministrativeServiceHeader;}
-			set {__ElectronicAdministrativeServiceHeader = value;}
-		}
+		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ApplicantType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ApplicantType;
-		
-		[XmlIgnore]
-		public string ApplicantType
-		{ 
-			get { return __ApplicantType; }
-			set { __ApplicantType = value; }
-		}
+		public string ApplicantType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000013.EntityBasicData),ElementName="EntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000013.EntityBasicData __EntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000013.EntityBasicData EntityBasicData
-		{
-			get {return __EntityBasicData;}
-			set {__EntityBasicData = value;}
-		}
+		public R_0009_000013.EntityBasicData EntityBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000142.Residence),ElementName="Residence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000142.Residence __Residence;
-		
-		[XmlIgnore]
-		public R_0009_000142.Residence Residence
-		{
-			get {return __Residence;}
-			set {__Residence = value;}
-		}
+		public R_0009_000142.Residence Residence { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000172.EntityManagementAddress),ElementName="EntityManagementAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000172.EntityManagementAddress __EntityManagementAddress;
-		
-		[XmlIgnore]
-		public R_0009_000172.EntityManagementAddress EntityManagementAddress
-		{
-			get {return __EntityManagementAddress;}
-			set {__EntityManagementAddress = value;}
-		}
+		public R_0009_000172.EntityManagementAddress EntityManagementAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000014.ForeignEntityBasicData),ElementName="ForeignEntityBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000014.ForeignEntityBasicData __ForeignEntityBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000014.ForeignEntityBasicData ForeignEntityBasicData
-		{
-			get {return __ForeignEntityBasicData;}
-			set {__ForeignEntityBasicData = value;}
-		}
+		public R_0009_000014.ForeignEntityBasicData ForeignEntityBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000144.ForeignEntityResidence),ElementName="ForeignEntityResidence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000144.ForeignEntityResidence __ForeignEntityResidence;
-		
-		[XmlIgnore]
-		public R_0009_000144.ForeignEntityResidence ForeignEntityResidence
-		{
-			get {return __ForeignEntityResidence;}
-			set {__ForeignEntityResidence = value;}
-		}
+		public R_0009_000144.ForeignEntityResidence ForeignEntityResidence { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ApplicantAviationalOperatorIndication",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ApplicantAviationalOperatorIndication;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ApplicantAviationalOperatorIndicationSpecified;
-		
-		[XmlIgnore]
-		public bool ApplicantAviationalOperatorIndication
-		{ 
-			get { return __ApplicantAviationalOperatorIndication; }
-			set { __ApplicantAviationalOperatorIndication = value; __ApplicantAviationalOperatorIndicationSpecified = true; }
-		}
+		public bool ApplicantAviationalOperatorIndication { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AviationalOperatorCertificateNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AviationalOperatorCertificateNumber;
-		
-		[XmlIgnore]
-		public string AviationalOperatorCertificateNumber
-		{ 
-			get { return __AviationalOperatorCertificateNumber; }
-			set { __AviationalOperatorCertificateNumber = value; }
-		}
+		public string AviationalOperatorCertificateNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AviationalOperatorCertificateIssueDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __AviationalOperatorCertificateIssueDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __AviationalOperatorCertificateIssueDateSpecified { get { return __AviationalOperatorCertificateIssueDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? AviationalOperatorCertificateIssueDate
-		{ 
-			get { return __AviationalOperatorCertificateIssueDate; }
-			set { __AviationalOperatorCertificateIssueDate = value; }
-		}
-		
-
+		public DateTime? AviationalOperatorCertificateIssueDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CertificateValidity",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __CertificateValidity;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __CertificateValiditySpecified { get { return __CertificateValidity.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? CertificateValidity
-		{ 
-			get { return __CertificateValidity; }
-			set { __CertificateValidity = value; }
-		}
-		
-
+		public DateTime? CertificateValidity { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4584.ContactInformation),ElementName="ContactInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4584.ContactInformation __ContactInformation;
-		
-		[XmlIgnore]
-		public R_4584.ContactInformation ContactInformation
-		{
-			get {return __ContactInformation;}
-			set {__ContactInformation = value;}
-		}
+		public R_4584.ContactInformation ContactInformation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4014.EvidencePersonRepresentingRecipientElectronicService),ElementName="EvidencePersonRepresentingRecipientElectronicService",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4014.EvidencePersonRepresentingRecipientElectronicService __EvidencePersonRepresentingRecipientElectronicService;
-		
-		[XmlIgnore]
-		public R_4014.EvidencePersonRepresentingRecipientElectronicService EvidencePersonRepresentingRecipientElectronicService
-		{
-			get {return __EvidencePersonRepresentingRecipientElectronicService;}
-			set {__EvidencePersonRepresentingRecipientElectronicService = value;}
-		}
+		public R_4014.EvidencePersonRepresentingRecipientElectronicService EvidencePersonRepresentingRecipientElectronicService { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AuthorQuality",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AuthorQuality;
-		
-		[XmlIgnore]
-		public string AuthorQuality
-		{ 
-			get { return __AuthorQuality; }
-			set { __AuthorQuality = value; }
-		}
+		public string AuthorQuality { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4620.AirServicesType),ElementName="AirServicesType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AirServicesTypeCollection __AirServicesTypeCollection;
-		
-		[XmlIgnore]
-		public AirServicesTypeCollection AirServicesTypeCollection
-		{
-			get
-			{
-				if (__AirServicesTypeCollection == null) __AirServicesTypeCollection = new AirServicesTypeCollection();
-				return __AirServicesTypeCollection;
-			}
-			set {__AirServicesTypeCollection = value;}
-		}
+		public AirServicesTypeCollection AirServicesTypeCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftServicesPerform",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftServicesPerform;
-		
-		[XmlIgnore]
-		public string AircraftServicesPerform
-		{ 
-			get { return __AircraftServicesPerform; }
-			set { __AircraftServicesPerform = value; }
-		}
+		public string AircraftServicesPerform { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OperatingLicenseStartDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __OperatingLicenseStartDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __OperatingLicenseStartDateSpecified { get { return __OperatingLicenseStartDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? OperatingLicenseStartDate
-		{ 
-			get { return __OperatingLicenseStartDate; }
-			set { __OperatingLicenseStartDate = value; }
-		}
-		
-
+		public DateTime? OperatingLicenseStartDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4534.Options),ElementName="Options",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4534.Options __Options;
-		
-		[XmlIgnore]
-		public R_4534.Options Options
-		{
-			get {return __Options;}
-			set {__Options = value;}
-		}
+		public R_4534.Options Options { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4638.ShareholdersOwnersCollection),ElementName="ShareholdersOwnersCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4638.ShareholdersOwnersCollection __ShareholdersOwnersCollection;
-		
-		[XmlIgnore]
-		public R_4638.ShareholdersOwnersCollection ShareholdersOwnersCollection
-		{
-			get {return __ShareholdersOwnersCollection;}
-			set {__ShareholdersOwnersCollection = value;}
-		}
+		public R_4638.ShareholdersOwnersCollection ShareholdersOwnersCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4650.MotherCompanyInformation),ElementName="MotherCompanyInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4650.MotherCompanyInformation __MotherCompanyInformation;
-		
-		[XmlIgnore]
-		public R_4650.MotherCompanyInformation MotherCompanyInformation
-		{
-			get {return __MotherCompanyInformation;}
-			set {__MotherCompanyInformation = value;}
-		}
+		public R_4650.MotherCompanyInformation MotherCompanyInformation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4652.HoldingCompanyInformation),ElementName="HoldingCompanyInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4652.HoldingCompanyInformation __HoldingCompanyInformation;
-		
-		[XmlIgnore]
-		public R_4652.HoldingCompanyInformation HoldingCompanyInformation
-		{
-			get {return __HoldingCompanyInformation;}
-			set {__HoldingCompanyInformation = value;}
-		}
+		public R_4652.HoldingCompanyInformation HoldingCompanyInformation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4660.PersonsRepresentingTradingCompaniesDatasCollection),ElementName="CandidateRepresentativesPersonRepresentingTradingCompanyData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4660.PersonsRepresentingTradingCompaniesDatasCollection __CandidateRepresentativesPersonRepresentingTradingCompanyData;
-		
-		[XmlIgnore]
-		public R_4660.PersonsRepresentingTradingCompaniesDatasCollection CandidateRepresentativesPersonRepresentingTradingCompanyData
-		{
-			get {return __CandidateRepresentativesPersonRepresentingTradingCompanyData;}
-			set {__CandidateRepresentativesPersonRepresentingTradingCompanyData = value;}
-		}
+		public R_4660.PersonsRepresentingTradingCompaniesDatasCollection CandidateRepresentativesPersonRepresentingTradingCompanyData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4660.PersonsRepresentingTradingCompaniesDatasCollection),ElementName="MotherCompanyRepresentativesPersonRepresentingTradingCompanyData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4660.PersonsRepresentingTradingCompaniesDatasCollection __MotherCompanyRepresentativesPersonRepresentingTradingCompanyData;
-		
-		[XmlIgnore]
-		public R_4660.PersonsRepresentingTradingCompaniesDatasCollection MotherCompanyRepresentativesPersonRepresentingTradingCompanyData
-		{
-			get {return __MotherCompanyRepresentativesPersonRepresentingTradingCompanyData;}
-			set {__MotherCompanyRepresentativesPersonRepresentingTradingCompanyData = value;}
-		}
+		public R_4660.PersonsRepresentingTradingCompaniesDatasCollection MotherCompanyRepresentativesPersonRepresentingTradingCompanyData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4666.PersonsManagementOLVPCandidatesDatasCollection),ElementName="PersonsManagementOLVPCandidatesDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4666.PersonsManagementOLVPCandidatesDatasCollection __PersonsManagementOLVPCandidatesDatasCollection;
-		
-		[XmlIgnore]
-		public R_4666.PersonsManagementOLVPCandidatesDatasCollection PersonsManagementOLVPCandidatesDatasCollection
-		{
-			get {return __PersonsManagementOLVPCandidatesDatasCollection;}
-			set {__PersonsManagementOLVPCandidatesDatasCollection = value;}
-		}
+		public R_4666.PersonsManagementOLVPCandidatesDatasCollection PersonsManagementOLVPCandidatesDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FinancialArrangementsFlag",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FinancialArrangementsFlag;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FinancialArrangementsFlagSpecified;
-		
-		[XmlIgnore]
-		public bool FinancialArrangementsFlag
-		{ 
-			get { return __FinancialArrangementsFlag; }
-			set { __FinancialArrangementsFlag = value; __FinancialArrangementsFlagSpecified = true; }
-		}
+		public bool FinancialArrangementsFlag { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4676.FinancialArrangementsCollection),ElementName="FinancialArrangementsCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4676.FinancialArrangementsCollection __FinancialArrangementsCollection;
-		
-		[XmlIgnore]
-		public R_4676.FinancialArrangementsCollection FinancialArrangementsCollection
-		{
-			get {return __FinancialArrangementsCollection;}
-			set {__FinancialArrangementsCollection = value;}
-		}
+		public R_4676.FinancialArrangementsCollection FinancialArrangementsCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OtherIssuesCandidateControlled",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OtherIssuesCandidateControlled;
-		
-		[XmlIgnore]
-		public string OtherIssuesCandidateControlled
-		{ 
-			get { return __OtherIssuesCandidateControlled; }
-			set { __OtherIssuesCandidateControlled = value; }
-		}
+		public string OtherIssuesCandidateControlled { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4684.AirCarriersAircraftDatasCollection),ElementName="AirCarriersAircraftDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4684.AirCarriersAircraftDatasCollection __AirCarriersAircraftDatasCollection;
-		
-		[XmlIgnore]
-		public R_4684.AirCarriersAircraftDatasCollection AirCarriersAircraftDatasCollection
-		{
-			get {return __AirCarriersAircraftDatasCollection;}
-			set {__AirCarriersAircraftDatasCollection = value;}
-		}
+		public R_4684.AirCarriersAircraftDatasCollection AirCarriersAircraftDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ConsentReceivingElectronicStatements",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ConsentReceivingElectronicStatements;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ConsentReceivingElectronicStatementsSpecified;
-		
-		[XmlIgnore]
-		public bool ConsentReceivingElectronicStatements
-		{ 
-			get { return __ConsentReceivingElectronicStatements; }
-			set { __ConsentReceivingElectronicStatements = value; __ConsentReceivingElectronicStatementsSpecified = true; }
-		}
+		public bool ConsentReceivingElectronicStatements { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="TwentyOrMorePlacesAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_3994.AttachedDocumentDatasCollection __TwentyOrMorePlacesAttachedDocumentDatasCollection;
-		
-		[XmlIgnore]
-		public R_3994.AttachedDocumentDatasCollection TwentyOrMorePlacesAttachedDocumentDatasCollection
-		{
-			get {return __TwentyOrMorePlacesAttachedDocumentDatasCollection;}
-			set {__TwentyOrMorePlacesAttachedDocumentDatasCollection = value;}
-		}
+		public R_3994.AttachedDocumentDatasCollection TwentyOrMorePlacesAttachedDocumentDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="TwentyOrMorePlacesAdditionalAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_3994.AttachedDocumentDatasCollection __TwentyOrMorePlacesAdditionalAttachedDocumentDatasCollection;
-		
-		[XmlIgnore]
-		public R_3994.AttachedDocumentDatasCollection TwentyOrMorePlacesAdditionalAttachedDocumentDatasCollection
-		{
-			get {return __TwentyOrMorePlacesAdditionalAttachedDocumentDatasCollection;}
-			set {__TwentyOrMorePlacesAdditionalAttachedDocumentDatasCollection = value;}
-		}
+		public R_3994.AttachedDocumentDatasCollection TwentyOrMorePlacesAdditionalAttachedDocumentDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="NineteenOrLessPlacesAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_3994.AttachedDocumentDatasCollection __NineteenOrLessPlacesAttachedDocumentDatasCollection;
-		
-		[XmlIgnore]
-		public R_3994.AttachedDocumentDatasCollection NineteenOrLessPlacesAttachedDocumentDatasCollection
-		{
-			get {return __NineteenOrLessPlacesAttachedDocumentDatasCollection;}
-			set {__NineteenOrLessPlacesAttachedDocumentDatasCollection = value;}
-		}
+		public R_3994.AttachedDocumentDatasCollection NineteenOrLessPlacesAttachedDocumentDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="NineteenOrLessPlacesAdditionalAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_3994.AttachedDocumentDatasCollection __NineteenOrLessPlacesAdditionalAttachedDocumentDatasCollection;
-		
-		[XmlIgnore]
-		public R_3994.AttachedDocumentDatasCollection NineteenOrLessPlacesAdditionalAttachedDocumentDatasCollection
-		{
-			get {return __NineteenOrLessPlacesAdditionalAttachedDocumentDatasCollection;}
-			set {__NineteenOrLessPlacesAdditionalAttachedDocumentDatasCollection = value;}
-		}
+		public R_3994.AttachedDocumentDatasCollection NineteenOrLessPlacesAdditionalAttachedDocumentDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(AirCarrierOperationLicenseApplicationAttachedDocuments),ElementName="AttachedDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AirCarrierOperationLicenseApplicationAttachedDocuments __AttachedDocuments;
-		
-		[XmlIgnore]
-		public AirCarrierOperationLicenseApplicationAttachedDocuments AttachedDocuments
-		{
-			get {return __AttachedDocuments;}
-			set {__AttachedDocuments = value;}
-		}
+		public AirCarrierOperationLicenseApplicationAttachedDocuments AttachedDocuments { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000153.ElectronicAdministrativeServiceFooter),ElementName="ElectronicAdministrativeServiceFooter",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter __ElectronicAdministrativeServiceFooter;
-		
-		[XmlIgnore]
-		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter
-		{
-			get {return __ElectronicAdministrativeServiceFooter;}
-			set {__ElectronicAdministrativeServiceFooter = value;}
-		}
+		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter { get; set; }
 
 		public AirCarrierOperationLicenseApplication()
 		{
@@ -510,18 +225,7 @@ namespace R_4686
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000139.AttachedDocument),ElementName="AttachedDocument",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AttachedDocumentCollection __AttachedDocumentCollection;
-		
-		[XmlIgnore]
-		public AttachedDocumentCollection AttachedDocumentCollection
-		{
-			get
-			{
-				if (__AttachedDocumentCollection == null) __AttachedDocumentCollection = new AttachedDocumentCollection();
-				return __AttachedDocumentCollection;
-			}
-			set {__AttachedDocumentCollection = value;}
-		}
+		public AttachedDocumentCollection AttachedDocumentCollection { get; set; }
 
 		public AirCarrierOperationLicenseApplicationAttachedDocuments()
 		{

@@ -27,26 +27,12 @@ namespace R_0009_000043
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000042.AdministrativeNomenclatureDocumentTypeURI),ElementName="URI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000042.AdministrativeNomenclatureDocumentTypeURI __URI;
-		
-		[XmlIgnore]
-		public R_0009_000042.AdministrativeNomenclatureDocumentTypeURI URI
-		{
-			get {return __URI;}
-			set {__URI = value;}
-		}
+		public R_0009_000042.AdministrativeNomenclatureDocumentTypeURI URI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		public AdministrativeNomenclatureDocumentTypeBasicData()
 		{

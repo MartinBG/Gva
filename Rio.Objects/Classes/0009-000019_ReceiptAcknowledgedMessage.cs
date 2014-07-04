@@ -27,129 +27,52 @@ namespace R_0009_000019
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProvider",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProvider;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProvider
-		{
-			get {return __ElectronicServiceProvider;}
-			set {__ElectronicServiceProvider = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProvider { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TransportType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TransportType;
-		
-		[XmlIgnore]
-		public string TransportType
-		{ 
-			get { return __TransportType; }
-			set { __TransportType = value; }
-		}
+		public string TransportType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ReceiptTime",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ReceiptTime;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ReceiptTimeSpecified { get { return __ReceiptTime.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ReceiptTime
-		{ 
-			get { return __ReceiptTime; }
-			set { __ReceiptTime = value; }
-		}
-		
-
+		public DateTime? ReceiptTime { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(RegisteredBy),ElementName="RegisteredBy",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public RegisteredBy __RegisteredBy;
-		
-		[XmlIgnore]
-		public RegisteredBy RegisteredBy
-		{
-			get {return __RegisteredBy;}
-			set {__RegisteredBy = value;}
-		}
+		public RegisteredBy RegisteredBy { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CaseAccessIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CaseAccessIdentifier;
-		
-		[XmlIgnore]
-		public string CaseAccessIdentifier
-		{ 
-			get { return __CaseAccessIdentifier; }
-			set { __CaseAccessIdentifier = value; }
-		}
+		public string CaseAccessIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000016.ElectronicServiceApplicant),ElementName="Applicant",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000016.ElectronicServiceApplicant __Applicant;
-		
-		[XmlIgnore]
-		public R_0009_000016.ElectronicServiceApplicant Applicant
-		{
-			get {return __Applicant;}
-			set {__Applicant = value;}
-		}
+		public R_0009_000016.ElectronicServiceApplicant Applicant { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000003.DocumentTypeURI),ElementName="DocumentTypeURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000003.DocumentTypeURI __DocumentTypeURI;
-		
-		[XmlIgnore]
-		public R_0009_000003.DocumentTypeURI DocumentTypeURI
-		{
-			get {return __DocumentTypeURI;}
-			set {__DocumentTypeURI = value;}
-		}
+		public R_0009_000003.DocumentTypeURI DocumentTypeURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentTypeName;
-		
-		[XmlIgnore]
-		public string DocumentTypeName
-		{ 
-			get { return __DocumentTypeName; }
-			set { __DocumentTypeName = value; }
-		}
+		public string DocumentTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="Signature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __Signature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature Signature
-		{
-			get {return __Signature;}
-			set {__Signature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature Signature { get; set; }
 
 		public ReceiptAcknowledgedMessage()
 		{
@@ -164,26 +87,12 @@ namespace R_0009_000019
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Officer),ElementName="Officer",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Officer __Officer;
-		
-		[XmlIgnore]
-		public Officer Officer
-		{
-			get {return __Officer;}
-			set {__Officer = value;}
-		}
+		public Officer Officer { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AISURI",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AISURI;
-		
-		[XmlIgnore]
-		public string AISURI
-		{ 
-			get { return __AISURI; }
-			set { __AISURI = value; }
-		}
+		public string AISURI { get; set; }
 
 		public RegisteredBy()
 		{
@@ -198,26 +107,12 @@ namespace R_0009_000019
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000018.AISUserNames),ElementName="PersonNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000018.AISUserNames __PersonNames;
-		
-		[XmlIgnore]
-		public R_0009_000018.AISUserNames PersonNames
-		{
-			get {return __PersonNames;}
-			set {__PersonNames = value;}
-		}
+		public R_0009_000018.AISUserNames PersonNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AISUserIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AISUserIdentifier;
-		
-		[XmlIgnore]
-		public string AISUserIdentifier
-		{ 
-			get { return __AISUserIdentifier; }
-			set { __AISUserIdentifier = value; }
-		}
+		public string AISUserIdentifier { get; set; }
 
 		public Officer()
 		{

@@ -27,50 +27,22 @@ namespace R_3312
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000008.PersonBasicData),ElementName="Person",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000008.PersonBasicData __Person;
-		
-		[XmlIgnore]
-		public R_0009_000008.PersonBasicData Person
-		{
-			get {return __Person;}
-			set {__Person = value;}
-		}
+		public R_0009_000008.PersonBasicData Person { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000013.EntityBasicData),ElementName="Entity",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000013.EntityBasicData __Entity;
-		
-		[XmlIgnore]
-		public R_0009_000013.EntityBasicData Entity
-		{
-			get {return __Entity;}
-			set {__Entity = value;}
-		}
+		public R_0009_000013.EntityBasicData Entity { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000011.ForeignCitizenBasicData),ElementName="ForeignPerson",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000011.ForeignCitizenBasicData __ForeignPerson;
-		
-		[XmlIgnore]
-		public R_0009_000011.ForeignCitizenBasicData ForeignPerson
-		{
-			get {return __ForeignPerson;}
-			set {__ForeignPerson = value;}
-		}
+		public R_0009_000011.ForeignCitizenBasicData ForeignPerson { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000014.ForeignEntityBasicData),ElementName="ForeignEntity",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000014.ForeignEntityBasicData __ForeignEntity;
-		
-		[XmlIgnore]
-		public R_0009_000014.ForeignEntityBasicData ForeignEntity
-		{
-			get {return __ForeignEntity;}
-			set {__ForeignEntity = value;}
-		}
+		public R_0009_000014.ForeignEntityBasicData ForeignEntity { get; set; }
 
 		public OwnerOfTouristSite()
 		{

@@ -33,100 +33,37 @@ namespace R_0009_000131
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000007.ForeignCitizenNames),ElementName="ForeignCitizenNames",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000007.ForeignCitizenNames __ForeignCitizenNames;
-		
-		[XmlIgnore]
-		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames
-		{
-			get {return __ForeignCitizenNames;}
-			set {__ForeignCitizenNames = value;}
-		}
+		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="BirthDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __BirthDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __BirthDateSpecified { get { return __BirthDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? BirthDate
-		{ 
-			get { return __BirthDate; }
-			set { __BirthDate = value; }
-		}
-		
-
+		public DateTime? BirthDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000129.LawfulSuccessionReason),ElementName="LawfulSuccessionReason",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000129.LawfulSuccessionReason __LawfulSuccessionReason;
-		
-		[XmlIgnore]
-		public R_0009_000129.LawfulSuccessionReason LawfulSuccessionReason
-		{
-			get {return __LawfulSuccessionReason;}
-			set {__LawfulSuccessionReason = value;}
-		}
+		public R_0009_000129.LawfulSuccessionReason LawfulSuccessionReason { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DateOfDeath",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DateOfDeath;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DateOfDeathSpecified { get { return __DateOfDeath.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DateOfDeath
-		{ 
-			get { return __DateOfDeath; }
-			set { __DateOfDeath = value; }
-		}
-		
-
+		public DateTime? DateOfDeath { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ForeignInheritorDataCitizenships),ElementName="Citizenships",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ForeignInheritorDataCitizenships __Citizenships;
-		
-		[XmlIgnore]
-		public ForeignInheritorDataCitizenships Citizenships
-		{
-			get {return __Citizenships;}
-			set {__Citizenships = value;}
-		}
+		public ForeignInheritorDataCitizenships Citizenships { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="InheritorDataNote",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __InheritorDataNote;
-		
-		[XmlIgnore]
-		public string InheritorDataNote
-		{ 
-			get { return __InheritorDataNote; }
-			set { __InheritorDataNote = value; }
-		}
+		public string InheritorDataNote { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="InheritorUID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __InheritorUID;
-		
-		[XmlIgnore]
-		public string InheritorUID
-		{ 
-			get { return __InheritorUID; }
-			set { __InheritorUID = value; }
-		}
+		public string InheritorUID { get; set; }
 
 		public ForeignInheritorData()
 		{
@@ -142,18 +79,7 @@ namespace R_0009_000131
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Citizenship",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CitizenshipCollection __CitizenshipCollection;
-		
-		[XmlIgnore]
-		public CitizenshipCollection CitizenshipCollection
-		{
-			get
-			{
-				if (__CitizenshipCollection == null) __CitizenshipCollection = new CitizenshipCollection();
-				return __CitizenshipCollection;
-			}
-			set {__CitizenshipCollection = value;}
-		}
+		public CitizenshipCollection CitizenshipCollection { get; set; }
 
 		public ForeignInheritorDataCitizenships()
 		{

@@ -27,26 +27,12 @@ namespace R_4872
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FSTDTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FSTDTypeCode;
-		
-		[XmlIgnore]
-		public string FSTDTypeCode
-		{ 
-			get { return __FSTDTypeCode; }
-			set { __FSTDTypeCode = value; }
-		}
+		public string FSTDTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FSTDTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FSTDTypeName;
-		
-		[XmlIgnore]
-		public string FSTDTypeName
-		{ 
-			get { return __FSTDTypeName; }
-			set { __FSTDTypeName = value; }
-		}
+		public string FSTDTypeName { get; set; }
 
 		public FSTDType()
 		{

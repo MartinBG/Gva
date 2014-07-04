@@ -27,38 +27,17 @@ namespace R_4064
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftTypeQualificationClassCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftTypeQualificationClassCode;
-		
-		[XmlIgnore]
-		public string AircraftTypeQualificationClassCode
-		{ 
-			get { return __AircraftTypeQualificationClassCode; }
-			set { __AircraftTypeQualificationClassCode = value; }
-		}
+		public string AircraftTypeQualificationClassCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftTypeQualificationClassName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftTypeQualificationClassName;
-		
-		[XmlIgnore]
-		public string AircraftTypeQualificationClassName
-		{ 
-			get { return __AircraftTypeQualificationClassName; }
-			set { __AircraftTypeQualificationClassName = value; }
-		}
+		public string AircraftTypeQualificationClassName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftTypeQualificationClassAlt",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftTypeQualificationClassAlt;
-		
-		[XmlIgnore]
-		public string AircraftTypeQualificationClassAlt
-		{ 
-			get { return __AircraftTypeQualificationClassAlt; }
-			set { __AircraftTypeQualificationClassAlt = value; }
-		}
+		public string AircraftTypeQualificationClassAlt { get; set; }
 
 		public AircraftTypeQualificationClass()
 		{

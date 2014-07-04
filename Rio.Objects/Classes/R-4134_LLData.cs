@@ -27,38 +27,17 @@ namespace R_4134
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4112.ASCoursePeriod),ElementName="ASCoursePeriod",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4112.ASCoursePeriod __ASCoursePeriod;
-		
-		[XmlIgnore]
-		public R_4112.ASCoursePeriod ASCoursePeriod
-		{
-			get {return __ASCoursePeriod;}
-			set {__ASCoursePeriod = value;}
-		}
+		public R_4112.ASCoursePeriod ASCoursePeriod { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4126.ASLLData),ElementName="ASLLData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4126.ASLLData __ASLLData;
-		
-		[XmlIgnore]
-		public R_4126.ASLLData ASLLData
-		{
-			get {return __ASLLData;}
-			set {__ASLLData = value;}
-		}
+		public R_4126.ASLLData ASLLData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4132.LEC),ElementName="LEC",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4132.LEC __LEC;
-		
-		[XmlIgnore]
-		public R_4132.LEC LEC
-		{
-			get {return __LEC;}
-			set {__LEC = value;}
-		}
+		public R_4132.LEC LEC { get; set; }
 
 		public LLData()
 		{

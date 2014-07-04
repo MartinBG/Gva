@@ -1083,6 +1083,7 @@
     <Compile Include="Classes\R-6012_AccessFormPublicInformation.cs" />
     <Compile Include="Classes\R-6014_SpecificationPreferredFormAccessPublicInformation.cs" />
     <Compile Include="Classes\R-6016_GrantPublicAccessInformationApplication.cs" />
+    <Compile Include="Classes\R-6018_ServiceInstructionsName.cs" />
     <Compile Include="Classes\R-6050_AttachedDocumentDescriptionIdentifier.cs" />
     <Compile Include="Classes\R-6052_AttachedDocumentDescriptionIdentifiersCollection.cs" />
     <Compile Include="Classes\R-6054_Proposal.cs" />

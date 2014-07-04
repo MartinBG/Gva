@@ -27,105 +27,42 @@ namespace R_4420
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryGRAOCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryGRAOCode;
-		
-		[XmlIgnore]
-		public string CountryGRAOCode
-		{ 
-			get { return __CountryGRAOCode; }
-			set { __CountryGRAOCode = value; }
-		}
+		public string CountryGRAOCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CountryName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __CountryName;
-		
-		[XmlIgnore]
-		public string CountryName
-		{ 
-			get { return __CountryName; }
-			set { __CountryName = value; }
-		}
+		public string CountryName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EngineManufacturePlace",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EngineManufacturePlace;
-		
-		[XmlIgnore]
-		public string EngineManufacturePlace
-		{ 
-			get { return __EngineManufacturePlace; }
-			set { __EngineManufacturePlace = value; }
-		}
+		public string EngineManufacturePlace { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EngineManufactureDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __EngineManufactureDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __EngineManufactureDateSpecified { get { return __EngineManufactureDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? EngineManufactureDate
-		{ 
-			get { return __EngineManufactureDate; }
-			set { __EngineManufactureDate = value; }
-		}
-		
-
+		public DateTime? EngineManufactureDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4412.EngineType),ElementName="EngineType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4412.EngineType __EngineType;
-		
-		[XmlIgnore]
-		public R_4412.EngineType EngineType
-		{
-			get {return __EngineType;}
-			set {__EngineType = value;}
-		}
+		public R_4412.EngineType EngineType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EngineSerialNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EngineSerialNumber;
-		
-		[XmlIgnore]
-		public string EngineSerialNumber
-		{ 
-			get { return __EngineSerialNumber; }
-			set { __EngineSerialNumber = value; }
-		}
+		public string EngineSerialNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EngineMaximumPowerThrust",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EngineMaximumPowerThrust;
-		
-		[XmlIgnore]
-		public string EngineMaximumPowerThrust
-		{ 
-			get { return __EngineMaximumPowerThrust; }
-			set { __EngineMaximumPowerThrust = value; }
-		}
+		public string EngineMaximumPowerThrust { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EngineUsage",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EngineUsage;
-		
-		[XmlIgnore]
-		public string EngineUsage
-		{ 
-			get { return __EngineUsage; }
-			set { __EngineUsage = value; }
-		}
+		public string EngineUsage { get; set; }
 
 		public EngineData()
 		{

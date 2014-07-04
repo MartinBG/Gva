@@ -34,18 +34,7 @@ namespace R_3994
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4040.AttachedDocumentData),ElementName="AttachedDocumentData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AttachedDocumentDataCollection __AttachedDocumentDataCollection;
-		
-		[XmlIgnore]
-		public AttachedDocumentDataCollection AttachedDocumentDataCollection
-		{
-			get
-			{
-				if (__AttachedDocumentDataCollection == null) __AttachedDocumentDataCollection = new AttachedDocumentDataCollection();
-				return __AttachedDocumentDataCollection;
-			}
-			set {__AttachedDocumentDataCollection = value;}
-		}
+		public AttachedDocumentDataCollection AttachedDocumentDataCollection { get; set; }
 
 		public AttachedDocumentDatasCollection()
 		{

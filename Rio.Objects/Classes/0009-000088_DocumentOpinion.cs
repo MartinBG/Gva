@@ -33,107 +33,42 @@ namespace R_0009_000088
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DocumentID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DocumentID;
-		
-		[XmlIgnore]
-		public string DocumentID
-		{ 
-			get { return __DocumentID; }
-			set { __DocumentID = value; }
-		}
+		public string DocumentID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Type",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Type;
-		
-		[XmlIgnore]
-		public string Type
-		{ 
-			get { return __Type; }
-			set { __Type = value; }
-		}
+		public string Type { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000087.DocumentOpinionCreationData),ElementName="OpinionCreationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000087.DocumentOpinionCreationData __OpinionCreationData;
-		
-		[XmlIgnore]
-		public R_0009_000087.DocumentOpinionCreationData OpinionCreationData
-		{
-			get {return __OpinionCreationData;}
-			set {__OpinionCreationData = value;}
-		}
+		public R_0009_000087.DocumentOpinionCreationData OpinionCreationData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000032.AISObjectCreationData),ElementName="ObjectCreationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000032.AISObjectCreationData __ObjectCreationData;
-		
-		[XmlIgnore]
-		public R_0009_000032.AISObjectCreationData ObjectCreationData
-		{
-			get {return __ObjectCreationData;}
-			set {__ObjectCreationData = value;}
-		}
+		public R_0009_000032.AISObjectCreationData ObjectCreationData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AgreementByDigitalSignature",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __AgreementByDigitalSignature;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __AgreementByDigitalSignatureSpecified;
-		
-		[XmlIgnore]
-		public bool AgreementByDigitalSignature
-		{ 
-			get { return __AgreementByDigitalSignature; }
-			set { __AgreementByDigitalSignature = value; __AgreementByDigitalSignatureSpecified = true; }
-		}
+		public bool AgreementByDigitalSignature { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Content",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Content;
-		
-		[XmlIgnore]
-		public string Content
-		{ 
-			get { return __Content; }
-			set { __Content = value; }
-		}
+		public string Content { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(string),ElementName="ReferenceDocumentID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ReferenceDocumentIDCollection __ReferenceDocumentIDCollection;
-		
-		[XmlIgnore]
-		public ReferenceDocumentIDCollection ReferenceDocumentIDCollection
-		{
-			get
-			{
-				if (__ReferenceDocumentIDCollection == null) __ReferenceDocumentIDCollection = new ReferenceDocumentIDCollection();
-				return __ReferenceDocumentIDCollection;
-			}
-			set {__ReferenceDocumentIDCollection = value;}
-		}
+		public ReferenceDocumentIDCollection ReferenceDocumentIDCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(DocumentOpinionAdditionalData),ElementName="AdditionalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DocumentOpinionAdditionalData __AdditionalData;
-		
-		[XmlIgnore]
-		public DocumentOpinionAdditionalData AdditionalData
-		{
-			get {return __AdditionalData;}
-			set {__AdditionalData = value;}
-		}
+		public DocumentOpinionAdditionalData AdditionalData { get; set; }
 
 		public DocumentOpinion()
 		{

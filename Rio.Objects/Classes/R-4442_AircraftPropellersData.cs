@@ -33,42 +33,17 @@ namespace R_4442
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_3988.ManufacturerContactData),ElementName="ManufacturerContactData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_3988.ManufacturerContactData __ManufacturerContactData;
-		
-		[XmlIgnore]
-		public R_3988.ManufacturerContactData ManufacturerContactData
-		{
-			get {return __ManufacturerContactData;}
-			set {__ManufacturerContactData = value;}
-		}
+		public R_3988.ManufacturerContactData ManufacturerContactData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PropellersCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PropellersCount;
-		
-		[XmlIgnore]
-		public string PropellersCount
-		{ 
-			get { return __PropellersCount; }
-			set { __PropellersCount = value; }
-		}
+		public string PropellersCount { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4440.PropellerData),ElementName="PropellerData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PropellerDataCollection __PropellerDataCollection;
-		
-		[XmlIgnore]
-		public PropellerDataCollection PropellerDataCollection
-		{
-			get
-			{
-				if (__PropellerDataCollection == null) __PropellerDataCollection = new PropellerDataCollection();
-				return __PropellerDataCollection;
-			}
-			set {__PropellerDataCollection = value;}
-		}
+		public PropellerDataCollection PropellerDataCollection { get; set; }
 
 		public AircraftPropellersData()
 		{

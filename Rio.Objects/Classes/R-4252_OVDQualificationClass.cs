@@ -27,38 +27,17 @@ namespace R_4252
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OVDQualificationClassCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OVDQualificationClassCode;
-		
-		[XmlIgnore]
-		public string OVDQualificationClassCode
-		{ 
-			get { return __OVDQualificationClassCode; }
-			set { __OVDQualificationClassCode = value; }
-		}
+		public string OVDQualificationClassCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OVDQualificationClassName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OVDQualificationClassName;
-		
-		[XmlIgnore]
-		public string OVDQualificationClassName
-		{ 
-			get { return __OVDQualificationClassName; }
-			set { __OVDQualificationClassName = value; }
-		}
+		public string OVDQualificationClassName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OVDQualificationClassNameEnglish",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OVDQualificationClassNameEnglish;
-		
-		[XmlIgnore]
-		public string OVDQualificationClassNameEnglish
-		{ 
-			get { return __OVDQualificationClassNameEnglish; }
-			set { __OVDQualificationClassNameEnglish = value; }
-		}
+		public string OVDQualificationClassNameEnglish { get; set; }
 
 		public OVDQualificationClass()
 		{

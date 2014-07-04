@@ -27,26 +27,12 @@ namespace R_6060
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000020.TransferredDocument),ElementName="TransferredDocument",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000020.TransferredDocument __TransferredDocument;
-		
-		[XmlIgnore]
-		public R_0009_000020.TransferredDocument TransferredDocument
-		{
-			get {return __TransferredDocument;}
-			set {__TransferredDocument = value;}
-		}
+		public R_0009_000020.TransferredDocument TransferredDocument { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_6058.StructuredDocumentFileCompetence),ElementName="StructuredDocumentFileCompetence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_6058.StructuredDocumentFileCompetence __StructuredDocumentFileCompetence;
-		
-		[XmlIgnore]
-		public R_6058.StructuredDocumentFileCompetence StructuredDocumentFileCompetence
-		{
-			get {return __StructuredDocumentFileCompetence;}
-			set {__StructuredDocumentFileCompetence = value;}
-		}
+		public R_6058.StructuredDocumentFileCompetence StructuredDocumentFileCompetence { get; set; }
 
 		public DocumentFileCompetence()
 		{

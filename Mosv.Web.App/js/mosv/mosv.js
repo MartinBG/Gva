@@ -16,6 +16,11 @@
     'scrollto'
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
     scaffoldingProvider.form({
+      name: 'emsDecision',
+      templateUrl: 'js/ems/docs/forms/decision/decision.html',
+      controller: 'DecisionCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'mosvSignal',
       templateUrl: 'js/mosv/forms/signal.html'
     });

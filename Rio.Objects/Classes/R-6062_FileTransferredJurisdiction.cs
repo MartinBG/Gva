@@ -33,66 +33,27 @@ namespace R_6062
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000073.AISCaseURI),ElementName="AISCaseURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000073.AISCaseURI __AISCaseURI;
-		
-		[XmlIgnore]
-		public R_0009_000073.AISCaseURI AISCaseURI
-		{
-			get {return __AISCaseURI;}
-			set {__AISCaseURI = value;}
-		}
+		public R_0009_000073.AISCaseURI AISCaseURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SUNAUServiceName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SUNAUServiceName;
-		
-		[XmlIgnore]
-		public string SUNAUServiceName
-		{ 
-			get { return __SUNAUServiceName; }
-			set { __SUNAUServiceName = value; }
-		}
+		public string SUNAUServiceName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SUNAUServiceURI",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SUNAUServiceURI;
-		
-		[XmlIgnore]
-		public string SUNAUServiceURI
-		{ 
-			get { return __SUNAUServiceURI; }
-			set { __SUNAUServiceURI = value; }
-		}
+		public string SUNAUServiceURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000015.ElectronicServiceRecipient),ElementName="ElectronicServiceRecipient",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000015.ElectronicServiceRecipient __ElectronicServiceRecipient;
-		
-		[XmlIgnore]
-		public R_0009_000015.ElectronicServiceRecipient ElectronicServiceRecipient
-		{
-			get {return __ElectronicServiceRecipient;}
-			set {__ElectronicServiceRecipient = value;}
-		}
+		public R_0009_000015.ElectronicServiceRecipient ElectronicServiceRecipient { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_6060.DocumentFileCompetence),ElementName="DocumentFileCompetence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DocumentFileCompetenceCollection __DocumentFileCompetenceCollection;
-		
-		[XmlIgnore]
-		public DocumentFileCompetenceCollection DocumentFileCompetenceCollection
-		{
-			get
-			{
-				if (__DocumentFileCompetenceCollection == null) __DocumentFileCompetenceCollection = new DocumentFileCompetenceCollection();
-				return __DocumentFileCompetenceCollection;
-			}
-			set {__DocumentFileCompetenceCollection = value;}
-		}
+		public DocumentFileCompetenceCollection DocumentFileCompetenceCollection { get; set; }
 
 		public FileTransferredJurisdiction()
 		{

@@ -34,18 +34,7 @@ namespace R_0009_000038
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Classification),ElementName="Classification",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ClassificationCollection __ClassificationCollection;
-		
-		[XmlIgnore]
-		public ClassificationCollection ClassificationCollection
-		{
-			get
-			{
-				if (__ClassificationCollection == null) __ClassificationCollection = new ClassificationCollection();
-				return __ClassificationCollection;
-			}
-			set {__ClassificationCollection = value;}
-		}
+		public ClassificationCollection ClassificationCollection { get; set; }
 
 		public ClassificationData()
 		{
@@ -60,50 +49,22 @@ namespace R_0009_000038
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ObjectID",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ObjectID;
-		
-		[XmlIgnore]
-		public string ObjectID
-		{ 
-			get { return __ObjectID; }
-			set { __ObjectID = value; }
-		}
+		public string ObjectID { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ObjectType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ObjectType;
-		
-		[XmlIgnore]
-		public string ObjectType
-		{ 
-			get { return __ObjectType; }
-			set { __ObjectType = value; }
-		}
+		public string ObjectType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SectionId",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SectionId;
-		
-		[XmlIgnore]
-		public string SectionId
-		{ 
-			get { return __SectionId; }
-			set { __SectionId = value; }
-		}
+		public string SectionId { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000037.AISObjectClassificationData),ElementName="ObjectClassificationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000037.AISObjectClassificationData __ObjectClassificationData;
-		
-		[XmlIgnore]
-		public R_0009_000037.AISObjectClassificationData ObjectClassificationData
-		{
-			get {return __ObjectClassificationData;}
-			set {__ObjectClassificationData = value;}
-		}
+		public R_0009_000037.AISObjectClassificationData ObjectClassificationData { get; set; }
 
 		public Classification()
 		{

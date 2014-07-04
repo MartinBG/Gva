@@ -27,129 +27,52 @@ namespace R_0009_000093
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000091.ElectronicAdministrativeServiceURI),ElementName="ElectronicAdministrativeServiceURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000091.ElectronicAdministrativeServiceURI __ElectronicAdministrativeServiceURI;
-		
-		[XmlIgnore]
-		public R_0009_000091.ElectronicAdministrativeServiceURI ElectronicAdministrativeServiceURI
-		{
-			get {return __ElectronicAdministrativeServiceURI;}
-			set {__ElectronicAdministrativeServiceURI = value;}
-		}
+		public R_0009_000091.ElectronicAdministrativeServiceURI ElectronicAdministrativeServiceURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000002.ElectronicServiceProviderBasicData),ElementName="ElectronicServiceProviderBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000002.ElectronicServiceProviderBasicData __ElectronicServiceProviderBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData
-		{
-			get {return __ElectronicServiceProviderBasicData;}
-			set {__ElectronicServiceProviderBasicData = value;}
-		}
+		public R_0009_000002.ElectronicServiceProviderBasicData ElectronicServiceProviderBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000001.DocumentURI),ElementName="DocumentURI",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000001.DocumentURI __DocumentURI;
-		
-		[XmlIgnore]
-		public R_0009_000001.DocumentURI DocumentURI
-		{
-			get {return __DocumentURI;}
-			set {__DocumentURI = value;}
-		}
+		public R_0009_000001.DocumentURI DocumentURI { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AISCorrespondenceAccessIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AISCorrespondenceAccessIdentifier;
-		
-		[XmlIgnore]
-		public string AISCorrespondenceAccessIdentifier
-		{ 
-			get { return __AISCorrespondenceAccessIdentifier; }
-			set { __AISCorrespondenceAccessIdentifier = value; }
-		}
+		public string AISCorrespondenceAccessIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AISCaseAccessIdentifier",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AISCaseAccessIdentifier;
-		
-		[XmlIgnore]
-		public string AISCaseAccessIdentifier
-		{ 
-			get { return __AISCaseAccessIdentifier; }
-			set { __AISCaseAccessIdentifier = value; }
-		}
+		public string AISCaseAccessIdentifier { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000092.ElectronicDocumentXml),ElementName="ElectronicAdministrativeServiceApplicationXml",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000092.ElectronicDocumentXml __ElectronicAdministrativeServiceApplicationXml;
-		
-		[XmlIgnore]
-		public R_0009_000092.ElectronicDocumentXml ElectronicAdministrativeServiceApplicationXml
-		{
-			get {return __ElectronicAdministrativeServiceApplicationXml;}
-			set {__ElectronicAdministrativeServiceApplicationXml = value;}
-		}
+		public R_0009_000092.ElectronicDocumentXml ElectronicAdministrativeServiceApplicationXml { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000092.ElectronicDocumentXml),ElementName="ReceiptAcknowledgedMessageXml",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000092.ElectronicDocumentXml __ReceiptAcknowledgedMessageXml;
-		
-		[XmlIgnore]
-		public R_0009_000092.ElectronicDocumentXml ReceiptAcknowledgedMessageXml
-		{
-			get {return __ReceiptAcknowledgedMessageXml;}
-			set {__ReceiptAcknowledgedMessageXml = value;}
-		}
+		public R_0009_000092.ElectronicDocumentXml ReceiptAcknowledgedMessageXml { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000092.ElectronicDocumentXml),ElementName="PaymentRequestXml",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000092.ElectronicDocumentXml __PaymentRequestXml;
-		
-		[XmlIgnore]
-		public R_0009_000092.ElectronicDocumentXml PaymentRequestXml
-		{
-			get {return __PaymentRequestXml;}
-			set {__PaymentRequestXml = value;}
-		}
+		public R_0009_000092.ElectronicDocumentXml PaymentRequestXml { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MessageCreationTime",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __MessageCreationTime;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __MessageCreationTimeSpecified { get { return __MessageCreationTime.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? MessageCreationTime
-		{ 
-			get { return __MessageCreationTime; }
-			set { __MessageCreationTime = value; }
-		}
-		
-
+		public DateTime? MessageCreationTime { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000004.XMLDigitalSignature),ElementName="XMLDigitalSignature",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000004.XMLDigitalSignature __XMLDigitalSignature;
-		
-		[XmlIgnore]
-		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature
-		{
-			get {return __XMLDigitalSignature;}
-			set {__XMLDigitalSignature = value;}
-		}
+		public R_0009_000004.XMLDigitalSignature XMLDigitalSignature { get; set; }
 
 		public AdministrativeServiceDeliveryLetter()
 		{

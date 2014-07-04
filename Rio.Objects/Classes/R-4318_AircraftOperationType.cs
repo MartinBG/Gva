@@ -27,38 +27,17 @@ namespace R_4318
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftOperationTypeCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftOperationTypeCode;
-		
-		[XmlIgnore]
-		public string AircraftOperationTypeCode
-		{ 
-			get { return __AircraftOperationTypeCode; }
-			set { __AircraftOperationTypeCode = value; }
-		}
+		public string AircraftOperationTypeCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftOperationTypeName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftOperationTypeName;
-		
-		[XmlIgnore]
-		public string AircraftOperationTypeName
-		{ 
-			get { return __AircraftOperationTypeName; }
-			set { __AircraftOperationTypeName = value; }
-		}
+		public string AircraftOperationTypeName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftOperationTypeNameEnglish",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftOperationTypeNameEnglish;
-		
-		[XmlIgnore]
-		public string AircraftOperationTypeNameEnglish
-		{ 
-			get { return __AircraftOperationTypeNameEnglish; }
-			set { __AircraftOperationTypeNameEnglish = value; }
-		}
+		public string AircraftOperationTypeNameEnglish { get; set; }
 
 		public AircraftOperationType()
 		{

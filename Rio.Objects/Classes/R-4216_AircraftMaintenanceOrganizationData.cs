@@ -27,86 +27,37 @@ namespace R_4216
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftMaintenanceOrganizationApprovalNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftMaintenanceOrganizationApprovalNumber;
-		
-		[XmlIgnore]
-		public string AircraftMaintenanceOrganizationApprovalNumber
-		{ 
-			get { return __AircraftMaintenanceOrganizationApprovalNumber; }
-			set { __AircraftMaintenanceOrganizationApprovalNumber = value; }
-		}
+		public string AircraftMaintenanceOrganizationApprovalNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EntityName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EntityName;
-		
-		[XmlIgnore]
-		public string EntityName
-		{ 
-			get { return __EntityName; }
-			set { __EntityName = value; }
-		}
+		public string EntityName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000142.Residence),ElementName="Residence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000142.Residence __Residence;
-		
-		[XmlIgnore]
-		public R_0009_000142.Residence Residence
-		{
-			get {return __Residence;}
-			set {__Residence = value;}
-		}
+		public R_0009_000142.Residence Residence { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000172.EntityManagementAddress),ElementName="EntityManagementAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000172.EntityManagementAddress __EntityManagementAddress;
-		
-		[XmlIgnore]
-		public R_0009_000172.EntityManagementAddress EntityManagementAddress
-		{
-			get {return __EntityManagementAddress;}
-			set {__EntityManagementAddress = value;}
-		}
+		public R_0009_000172.EntityManagementAddress EntityManagementAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PhoneNumbersDesc",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PhoneNumbersDesc;
-		
-		[XmlIgnore]
-		public string PhoneNumbersDesc
-		{ 
-			get { return __PhoneNumbersDesc; }
-			set { __PhoneNumbersDesc = value; }
-		}
+		public string PhoneNumbersDesc { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FaxNumbersDesc",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FaxNumbersDesc;
-		
-		[XmlIgnore]
-		public string FaxNumbersDesc
-		{ 
-			get { return __FaxNumbersDesc; }
-			set { __FaxNumbersDesc = value; }
-		}
+		public string FaxNumbersDesc { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EmailAddress",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EmailAddress;
-		
-		[XmlIgnore]
-		public string EmailAddress
-		{ 
-			get { return __EmailAddress; }
-			set { __EmailAddress = value; }
-		}
+		public string EmailAddress { get; set; }
 
 		public AircraftMaintenanceOrganizationData()
 		{

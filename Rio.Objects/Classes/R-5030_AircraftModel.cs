@@ -27,26 +27,12 @@ namespace R_5030
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftModelCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftModelCode;
-		
-		[XmlIgnore]
-		public string AircraftModelCode
-		{ 
-			get { return __AircraftModelCode; }
-			set { __AircraftModelCode = value; }
-		}
+		public string AircraftModelCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftModelName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftModelName;
-		
-		[XmlIgnore]
-		public string AircraftModelName
-		{ 
-			get { return __AircraftModelName; }
-			set { __AircraftModelName = value; }
-		}
+		public string AircraftModelName { get; set; }
 
 		public AircraftModel()
 		{

@@ -64,57 +64,22 @@ namespace R_0009_000155
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="versionDate",DataType="date")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __versionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __versionDateSpecified { get { return __versionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? versionDate
-		{ 
-		get { return __versionDate; }
-		set { __versionDate = value; }
-		}
-		
-
+		public DateTime? versionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Districts),ElementName="Districts",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Districts __Districts;
-		
-		[XmlIgnore]
-		public Districts Districts
-		{
-			get {return __Districts;}
-			set {__Districts = value;}
-		}
+		public Districts Districts { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Municipalities),ElementName="Municipalities",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Municipalities __Municipalities;
-		
-		[XmlIgnore]
-		public Municipalities Municipalities
-		{
-			get {return __Municipalities;}
-			set {__Municipalities = value;}
-		}
+		public Municipalities Municipalities { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Settlements),ElementName="Settlements",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Settlements __Settlements;
-		
-		[XmlIgnore]
-		public Settlements Settlements
-		{
-			get {return __Settlements;}
-			set {__Settlements = value;}
-		}
+		public Settlements Settlements { get; set; }
 
 		public AdministrativeTerritorialUnitDataGRAO()
 		{
@@ -130,18 +95,7 @@ namespace R_0009_000155
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(District),ElementName="District",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DistrictCollection __DistrictCollection;
-		
-		[XmlIgnore]
-		public DistrictCollection DistrictCollection
-		{
-			get
-			{
-				if (__DistrictCollection == null) __DistrictCollection = new DistrictCollection();
-				return __DistrictCollection;
-			}
-			set {__DistrictCollection = value;}
-		}
+		public DistrictCollection DistrictCollection { get; set; }
 
 		public Districts()
 		{
@@ -156,62 +110,27 @@ namespace R_0009_000155
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TLLCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TLLCode;
-		
-		[XmlIgnore]
-		public string TLLCode
-		{ 
-			get { return __TLLCode; }
-			set { __TLLCode = value; }
-		}
+		public string TLLCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TLCCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TLCCode;
-		
-		[XmlIgnore]
-		public string TLCCode
-		{ 
-			get { return __TLCCode; }
-			set { __TLCCode = value; }
-		}
+		public string TLCCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="NSICode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __NSICode;
-		
-		[XmlIgnore]
-		public string NSICode
-		{ 
-			get { return __NSICode; }
-			set { __NSICode = value; }
-		}
+		public string NSICode { get; set; }
 
 		public District()
 		{
@@ -227,18 +146,7 @@ namespace R_0009_000155
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Municipality),ElementName="Municipality",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MunicipalityCollection __MunicipalityCollection;
-		
-		[XmlIgnore]
-		public MunicipalityCollection MunicipalityCollection
-		{
-			get
-			{
-				if (__MunicipalityCollection == null) __MunicipalityCollection = new MunicipalityCollection();
-				return __MunicipalityCollection;
-			}
-			set {__MunicipalityCollection = value;}
-		}
+		public MunicipalityCollection MunicipalityCollection { get; set; }
 
 		public Municipalities()
 		{
@@ -253,62 +161,27 @@ namespace R_0009_000155
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictCode;
-		
-		[XmlIgnore]
-		public string DistrictCode
-		{ 
-			get { return __DistrictCode; }
-			set { __DistrictCode = value; }
-		}
+		public string DistrictCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TLLCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TLLCode;
-		
-		[XmlIgnore]
-		public string TLLCode
-		{ 
-			get { return __TLLCode; }
-			set { __TLLCode = value; }
-		}
+		public string TLLCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TLCCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TLCCode;
-		
-		[XmlIgnore]
-		public string TLCCode
-		{ 
-			get { return __TLCCode; }
-			set { __TLCCode = value; }
-		}
+		public string TLCCode { get; set; }
 
 		public Municipality()
 		{
@@ -324,18 +197,7 @@ namespace R_0009_000155
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Settlement),ElementName="Settlement",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SettlementCollection __SettlementCollection;
-		
-		[XmlIgnore]
-		public SettlementCollection SettlementCollection
-		{
-			get
-			{
-				if (__SettlementCollection == null) __SettlementCollection = new SettlementCollection();
-				return __SettlementCollection;
-			}
-			set {__SettlementCollection = value;}
-		}
+		public SettlementCollection SettlementCollection { get; set; }
 
 		public Settlements()
 		{
@@ -350,127 +212,47 @@ namespace R_0009_000155
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictCode;
-		
-		[XmlIgnore]
-		public string DistrictCode
-		{ 
-			get { return __DistrictCode; }
-			set { __DistrictCode = value; }
-		}
+		public string DistrictCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MunicipalityCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MunicipalityCode;
-		
-		[XmlIgnore]
-		public string MunicipalityCode
-		{ 
-			get { return __MunicipalityCode; }
-			set { __MunicipalityCode = value; }
-		}
+		public string MunicipalityCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AreaCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AreaCode;
-		
-		[XmlIgnore]
-		public string AreaCode
-		{ 
-			get { return __AreaCode; }
-			set { __AreaCode = value; }
-		}
+		public string AreaCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Type",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public Type __Type;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __TypeSpecified;
-		
-		[XmlIgnore]
-		public Type Type
-		{ 
-			get { return __Type; }
-			set { __Type = value; __TypeSpecified = true; }
-		}
+		public Type Type { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="PostCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __PostCode;
-		
-		[XmlIgnore]
-		public string PostCode
-		{ 
-			get { return __PostCode; }
-			set { __PostCode = value; }
-		}
+		public string PostCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ModificationDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __ModificationDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __ModificationDateSpecified { get { return __ModificationDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? ModificationDate
-		{ 
-			get { return __ModificationDate; }
-			set { __ModificationDate = value; }
-		}
-		
-
+		public DateTime? ModificationDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="StatusCode",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public StatusCode __StatusCode;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __StatusCodeSpecified;
-		
-		[XmlIgnore]
-		public StatusCode StatusCode
-		{ 
-			get { return __StatusCode; }
-			set { __StatusCode = value; __StatusCodeSpecified = true; }
-		}
+		public StatusCode StatusCode { get; set; }
 
 		public Settlement()
 		{

@@ -27,33 +27,12 @@ namespace R_0009_000087
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000027.AISUserBasicData),ElementName="Author",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000027.AISUserBasicData __Author;
-		
-		[XmlIgnore]
-		public R_0009_000027.AISUserBasicData Author
-		{
-			get {return __Author;}
-			set {__Author = value;}
-		}
+		public R_0009_000027.AISUserBasicData Author { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="CreationTime",Form=XmlSchemaForm.Qualified,DataType="dateTime",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __CreationTime;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __CreationTimeSpecified { get { return __CreationTime.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? CreationTime
-		{ 
-			get { return __CreationTime; }
-			set { __CreationTime = value; }
-		}
-		
-
+		public DateTime? CreationTime { get; set; }
 
 		public DocumentOpinionCreationData()
 		{

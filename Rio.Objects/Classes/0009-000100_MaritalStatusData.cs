@@ -33,33 +33,12 @@ namespace R_0009_000100
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlAttribute(AttributeName="versionDate",DataType="date")]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __versionDate;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __versionDateSpecified { get { return __versionDate.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? versionDate
-		{ 
-		get { return __versionDate; }
-		set { __versionDate = value; }
-		}
-		
-
+		public DateTime? versionDate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(MaritalStatuses),ElementName="MaritalStatuses",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MaritalStatuses __MaritalStatuses;
-		
-		[XmlIgnore]
-		public MaritalStatuses MaritalStatuses
-		{
-			get {return __MaritalStatuses;}
-			set {__MaritalStatuses = value;}
-		}
+		public MaritalStatuses MaritalStatuses { get; set; }
 
 		public MaritalStatusData()
 		{
@@ -75,18 +54,7 @@ namespace R_0009_000100
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(MS),ElementName="MS",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public MSCollection __MSCollection;
-		
-		[XmlIgnore]
-		public MSCollection MSCollection
-		{
-			get
-			{
-				if (__MSCollection == null) __MSCollection = new MSCollection();
-				return __MSCollection;
-			}
-			set {__MSCollection = value;}
-		}
+		public MSCollection MSCollection { get; set; }
 
 		public MaritalStatuses()
 		{
@@ -101,26 +69,12 @@ namespace R_0009_000100
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Code",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Code;
-		
-		[XmlIgnore]
-		public string Code
-		{ 
-			get { return __Code; }
-			set { __Code = value; }
-		}
+		public string Code { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Name",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Name;
-		
-		[XmlIgnore]
-		public string Name
-		{ 
-			get { return __Name; }
-			set { __Name = value; }
-		}
+		public string Name { get; set; }
 
 		public MS()
 		{

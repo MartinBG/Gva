@@ -27,38 +27,17 @@ namespace R_4126
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ASLLCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ASLLCode;
-		
-		[XmlIgnore]
-		public string ASLLCode
-		{ 
-			get { return __ASLLCode; }
-			set { __ASLLCode = value; }
-		}
+		public string ASLLCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ASLLName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ASLLName;
-		
-		[XmlIgnore]
-		public string ASLLName
-		{ 
-			get { return __ASLLName; }
-			set { __ASLLName = value; }
-		}
+		public string ASLLName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ASLLNameCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ASLLNameCode;
-		
-		[XmlIgnore]
-		public string ASLLNameCode
-		{ 
-			get { return __ASLLNameCode; }
-			set { __ASLLNameCode = value; }
-		}
+		public string ASLLNameCode { get; set; }
 
 		public ASLLData()
 		{

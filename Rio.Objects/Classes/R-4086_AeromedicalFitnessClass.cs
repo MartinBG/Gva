@@ -27,26 +27,12 @@ namespace R_4086
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AeromedicalFitnessClassCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AeromedicalFitnessClassCode;
-		
-		[XmlIgnore]
-		public string AeromedicalFitnessClassCode
-		{ 
-			get { return __AeromedicalFitnessClassCode; }
-			set { __AeromedicalFitnessClassCode = value; }
-		}
+		public string AeromedicalFitnessClassCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AeromedicalFitnessName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AeromedicalFitnessName;
-		
-		[XmlIgnore]
-		public string AeromedicalFitnessName
-		{ 
-			get { return __AeromedicalFitnessName; }
-			set { __AeromedicalFitnessName = value; }
-		}
+		public string AeromedicalFitnessName { get; set; }
 
 		public AeromedicalFitnessClass()
 		{

@@ -27,26 +27,12 @@ namespace R_4712
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ProvidingServiceKindCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ProvidingServiceKindCode;
-		
-		[XmlIgnore]
-		public string ProvidingServiceKindCode
-		{ 
-			get { return __ProvidingServiceKindCode; }
-			set { __ProvidingServiceKindCode = value; }
-		}
+		public string ProvidingServiceKindCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ProvidingServiceKindName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ProvidingServiceKindName;
-		
-		[XmlIgnore]
-		public string ProvidingServiceKindName
-		{ 
-			get { return __ProvidingServiceKindName; }
-			set { __ProvidingServiceKindName = value; }
-		}
+		public string ProvidingServiceKindName { get; set; }
 
 		public ProvidingServiceKind()
 		{

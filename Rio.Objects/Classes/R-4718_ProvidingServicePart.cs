@@ -27,26 +27,12 @@ namespace R_4718
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ProvidingServicePartCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ProvidingServicePartCode;
-		
-		[XmlIgnore]
-		public string ProvidingServicePartCode
-		{ 
-			get { return __ProvidingServicePartCode; }
-			set { __ProvidingServicePartCode = value; }
-		}
+		public string ProvidingServicePartCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ProvidingServicePartName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ProvidingServicePartName;
-		
-		[XmlIgnore]
-		public string ProvidingServicePartName
-		{ 
-			get { return __ProvidingServicePartName; }
-			set { __ProvidingServicePartName = value; }
-		}
+		public string ProvidingServicePartName { get; set; }
 
 		public ProvidingServicePart()
 		{

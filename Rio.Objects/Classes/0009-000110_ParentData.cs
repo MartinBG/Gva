@@ -27,26 +27,12 @@ namespace R_0009_000110
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000135.CitizenshipRegistrationBasicData),ElementName="CitizenshipRegistrationBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000135.CitizenshipRegistrationBasicData __CitizenshipRegistrationBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000135.CitizenshipRegistrationBasicData CitizenshipRegistrationBasicData
-		{
-			get {return __CitizenshipRegistrationBasicData;}
-			set {__CitizenshipRegistrationBasicData = value;}
-		}
+		public R_0009_000135.CitizenshipRegistrationBasicData CitizenshipRegistrationBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000109.ForeignCitizenData),ElementName="ForeignCitizenData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000109.ForeignCitizenData __ForeignCitizenData;
-		
-		[XmlIgnore]
-		public R_0009_000109.ForeignCitizenData ForeignCitizenData
-		{
-			get {return __ForeignCitizenData;}
-			set {__ForeignCitizenData = value;}
-		}
+		public R_0009_000109.ForeignCitizenData ForeignCitizenData { get; set; }
 
 		public ParentData()
 		{

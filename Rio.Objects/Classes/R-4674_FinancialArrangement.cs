@@ -27,43 +27,17 @@ namespace R_4674
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FinancialArrangementsInForceFlag",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FinancialArrangementsInForceFlag;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __FinancialArrangementsInForceFlagSpecified;
-		
-		[XmlIgnore]
-		public bool FinancialArrangementsInForceFlag
-		{ 
-			get { return __FinancialArrangementsInForceFlag; }
-			set { __FinancialArrangementsInForceFlag = value; __FinancialArrangementsInForceFlagSpecified = true; }
-		}
+		public bool FinancialArrangementsInForceFlag { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FinancialArrangementsText",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FinancialArrangementsText;
-		
-		[XmlIgnore]
-		public string FinancialArrangementsText
-		{ 
-			get { return __FinancialArrangementsText; }
-			set { __FinancialArrangementsText = value; }
-		}
+		public string FinancialArrangementsText { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="FinancialArrangementsDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __FinancialArrangementsDescription;
-		
-		[XmlIgnore]
-		public string FinancialArrangementsDescription
-		{ 
-			get { return __FinancialArrangementsDescription; }
-			set { __FinancialArrangementsDescription = value; }
-		}
+		public string FinancialArrangementsDescription { get; set; }
 
 		public FinancialArrangement()
 		{

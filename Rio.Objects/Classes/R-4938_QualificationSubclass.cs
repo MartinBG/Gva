@@ -27,26 +27,12 @@ namespace R_4938
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="QualificationSubclassCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __QualificationSubclassCode;
-		
-		[XmlIgnore]
-		public string QualificationSubclassCode
-		{ 
-			get { return __QualificationSubclassCode; }
-			set { __QualificationSubclassCode = value; }
-		}
+		public string QualificationSubclassCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="QualificationSubclassName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __QualificationSubclassName;
-		
-		[XmlIgnore]
-		public string QualificationSubclassName
-		{ 
-			get { return __QualificationSubclassName; }
-			set { __QualificationSubclassName = value; }
-		}
+		public string QualificationSubclassName { get; set; }
 
 		public QualificationSubclass()
 		{

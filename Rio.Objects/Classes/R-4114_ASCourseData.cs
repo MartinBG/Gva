@@ -27,62 +27,27 @@ namespace R_4114
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4104.ASCourseExam),ElementName="ASCourseExam",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4104.ASCourseExam __ASCourseExam;
-		
-		[XmlIgnore]
-		public R_4104.ASCourseExam ASCourseExam
-		{
-			get {return __ASCourseExam;}
-			set {__ASCourseExam = value;}
-		}
+		public R_4104.ASCourseExam ASCourseExam { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4112.ASCoursePeriod),ElementName="ASCoursePeriod",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4112.ASCoursePeriod __ASCoursePeriod;
-		
-		[XmlIgnore]
-		public R_4112.ASCoursePeriod ASCoursePeriod
-		{
-			get {return __ASCoursePeriod;}
-			set {__ASCoursePeriod = value;}
-		}
+		public R_4112.ASCoursePeriod ASCoursePeriod { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ASTeoreticalCourseHours",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ASTeoreticalCourseHours;
-		
-		[XmlIgnore]
-		public string ASTeoreticalCourseHours
-		{ 
-			get { return __ASTeoreticalCourseHours; }
-			set { __ASTeoreticalCourseHours = value; }
-		}
+		public string ASTeoreticalCourseHours { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ASFlightCourseHours",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ASFlightCourseHours;
-		
-		[XmlIgnore]
-		public string ASFlightCourseHours
-		{ 
-			get { return __ASFlightCourseHours; }
-			set { __ASFlightCourseHours = value; }
-		}
+		public string ASFlightCourseHours { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4110.ATO),ElementName="ATO",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4110.ATO __ATO;
-		
-		[XmlIgnore]
-		public R_4110.ATO ATO
-		{
-			get {return __ATO;}
-			set {__ATO = value;}
-		}
+		public R_4110.ATO ATO { get; set; }
 
 		public ASCourseData()
 		{

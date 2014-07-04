@@ -27,98 +27,42 @@ namespace R_0009_000143
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DistrictCode;
-		
-		[XmlIgnore]
-		public string DistrictCode
-		{ 
-			get { return __DistrictCode; }
-			set { __DistrictCode = value; }
-		}
+		public string DistrictCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="District",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __District;
-		
-		[XmlIgnore]
-		public string District
-		{ 
-			get { return __District; }
-			set { __District = value; }
-		}
+		public string District { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="MunicipalityCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __MunicipalityCode;
-		
-		[XmlIgnore]
-		public string MunicipalityCode
-		{ 
-			get { return __MunicipalityCode; }
-			set { __MunicipalityCode = value; }
-		}
+		public string MunicipalityCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Municipality",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Municipality;
-		
-		[XmlIgnore]
-		public string Municipality
-		{ 
-			get { return __Municipality; }
-			set { __Municipality = value; }
-		}
+		public string Municipality { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SettlementCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __SettlementCode;
-		
-		[XmlIgnore]
-		public string SettlementCode
-		{ 
-			get { return __SettlementCode; }
-			set { __SettlementCode = value; }
-		}
+		public string SettlementCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="Settlement",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __Settlement;
-		
-		[XmlIgnore]
-		public string Settlement
-		{ 
-			get { return __Settlement; }
-			set { __Settlement = value; }
-		}
+		public string Settlement { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AreaCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AreaCode;
-		
-		[XmlIgnore]
-		public string AreaCode
-		{ 
-			get { return __AreaCode; }
-			set { __AreaCode = value; }
-		}
+		public string AreaCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AreaName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AreaName;
-		
-		[XmlIgnore]
-		public string AreaName
-		{ 
-			get { return __AreaName; }
-			set { __AreaName = value; }
-		}
+		public string AreaName { get; set; }
 
 		public MunicipalityAdministrationLocation()
 		{

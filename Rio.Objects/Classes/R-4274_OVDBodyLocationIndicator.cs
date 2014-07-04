@@ -27,26 +27,12 @@ namespace R_4274
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OVDBodyLocationIndicatorCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OVDBodyLocationIndicatorCode;
-		
-		[XmlIgnore]
-		public string OVDBodyLocationIndicatorCode
-		{ 
-			get { return __OVDBodyLocationIndicatorCode; }
-			set { __OVDBodyLocationIndicatorCode = value; }
-		}
+		public string OVDBodyLocationIndicatorCode { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OVDBodyLocationIndicatorName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OVDBodyLocationIndicatorName;
-		
-		[XmlIgnore]
-		public string OVDBodyLocationIndicatorName
-		{ 
-			get { return __OVDBodyLocationIndicatorName; }
-			set { __OVDBodyLocationIndicatorName = value; }
-		}
+		public string OVDBodyLocationIndicatorName { get; set; }
 
 		public OVDBodyLocationIndicator()
 		{

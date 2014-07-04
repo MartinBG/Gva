@@ -34,18 +34,7 @@ namespace R_4684
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4682.AirCarrierAircraftData),ElementName="AirCarrierAircraftData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AirCarrierAircraftDataCollection __AirCarrierAircraftDataCollection;
-		
-		[XmlIgnore]
-		public AirCarrierAircraftDataCollection AirCarrierAircraftDataCollection
-		{
-			get
-			{
-				if (__AirCarrierAircraftDataCollection == null) __AirCarrierAircraftDataCollection = new AirCarrierAircraftDataCollection();
-				return __AirCarrierAircraftDataCollection;
-			}
-			set {__AirCarrierAircraftDataCollection = value;}
-		}
+		public AirCarrierAircraftDataCollection AirCarrierAircraftDataCollection { get; set; }
 
 		public AirCarriersAircraftDatasCollection()
 		{

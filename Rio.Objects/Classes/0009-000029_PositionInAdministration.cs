@@ -27,43 +27,17 @@ namespace R_0009_000029
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AdministrativeBodyName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AdministrativeBodyName;
-		
-		[XmlIgnore]
-		public string AdministrativeBodyName
-		{ 
-			get { return __AdministrativeBodyName; }
-			set { __AdministrativeBodyName = value; }
-		}
+		public string AdministrativeBodyName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(PositionInAdministrationPosition),ElementName="Position",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public PositionInAdministrationPosition __Position;
-		
-		[XmlIgnore]
-		public PositionInAdministrationPosition Position
-		{
-			get {return __Position;}
-			set {__Position = value;}
-		}
+		public PositionInAdministrationPosition Position { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OnCivilContract",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __OnCivilContract;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __OnCivilContractSpecified;
-		
-		[XmlIgnore]
-		public bool OnCivilContract
-		{ 
-			get { return __OnCivilContract; }
-			set { __OnCivilContract = value; __OnCivilContractSpecified = true; }
-		}
+		public bool OnCivilContract { get; set; }
 
 		public PositionInAdministration()
 		{
@@ -78,26 +52,12 @@ namespace R_0009_000029
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="EKDAPositonName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __EKDAPositonName;
-		
-		[XmlIgnore]
-		public string EKDAPositonName
-		{ 
-			get { return __EKDAPositonName; }
-			set { __EKDAPositonName = value; }
-		}
+		public string EKDAPositonName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DepartmentName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __DepartmentName;
-		
-		[XmlIgnore]
-		public string DepartmentName
-		{ 
-			get { return __DepartmentName; }
-			set { __DepartmentName = value; }
-		}
+		public string DepartmentName { get; set; }
 
 		public PositionInAdministrationPosition()
 		{

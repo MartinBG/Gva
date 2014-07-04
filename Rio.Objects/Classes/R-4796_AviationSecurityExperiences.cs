@@ -34,18 +34,7 @@ namespace R_4796
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4794.AviationSecurityExperience),ElementName="AviationSecurityExperience",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AviationSecurityExperienceCollection __AviationSecurityExperienceCollection;
-		
-		[XmlIgnore]
-		public AviationSecurityExperienceCollection AviationSecurityExperienceCollection
-		{
-			get
-			{
-				if (__AviationSecurityExperienceCollection == null) __AviationSecurityExperienceCollection = new AviationSecurityExperienceCollection();
-				return __AviationSecurityExperienceCollection;
-			}
-			set {__AviationSecurityExperienceCollection = value;}
-		}
+		public AviationSecurityExperienceCollection AviationSecurityExperienceCollection { get; set; }
 
 		public AviationSecurityExperiences()
 		{

@@ -33,42 +33,17 @@ namespace R_4830
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TeachersInstructorsNames",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TeachersInstructorsNames;
-		
-		[XmlIgnore]
-		public string TeachersInstructorsNames
-		{ 
-			get { return __TeachersInstructorsNames; }
-			set { __TeachersInstructorsNames = value; }
-		}
+		public string TeachersInstructorsNames { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="TeachersInstructorsCertificateNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __TeachersInstructorsCertificateNumber;
-		
-		[XmlIgnore]
-		public string TeachersInstructorsCertificateNumber
-		{ 
-			get { return __TeachersInstructorsCertificateNumber; }
-			set { __TeachersInstructorsCertificateNumber = value; }
-		}
+		public string TeachersInstructorsCertificateNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4816.Course),ElementName="Course",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CourseCollection __CourseCollection;
-		
-		[XmlIgnore]
-		public CourseCollection CourseCollection
-		{
-			get
-			{
-				if (__CourseCollection == null) __CourseCollection = new CourseCollection();
-				return __CourseCollection;
-			}
-			set {__CourseCollection = value;}
-		}
+		public CourseCollection CourseCollection { get; set; }
 
 		public TeacherInstructor()
 		{

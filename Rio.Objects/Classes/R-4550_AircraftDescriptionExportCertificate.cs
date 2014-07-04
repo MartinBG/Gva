@@ -27,50 +27,22 @@ namespace R_4550
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftRegistrationMark",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftRegistrationMark;
-		
-		[XmlIgnore]
-		public string AircraftRegistrationMark
-		{ 
-			get { return __AircraftRegistrationMark; }
-			set { __AircraftRegistrationMark = value; }
-		}
+		public string AircraftRegistrationMark { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __ManufacturerName;
-		
-		[XmlIgnore]
-		public string ManufacturerName
-		{ 
-			get { return __ManufacturerName; }
-			set { __ManufacturerName = value; }
-		}
+		public string ManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4370.ModelAircraftAccordingTypeCertificate),ElementName="ModelAircraftAccordingTypeCertificate",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4370.ModelAircraftAccordingTypeCertificate __ModelAircraftAccordingTypeCertificate;
-		
-		[XmlIgnore]
-		public R_4370.ModelAircraftAccordingTypeCertificate ModelAircraftAccordingTypeCertificate
-		{
-			get {return __ModelAircraftAccordingTypeCertificate;}
-			set {__ModelAircraftAccordingTypeCertificate = value;}
-		}
+		public R_4370.ModelAircraftAccordingTypeCertificate ModelAircraftAccordingTypeCertificate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4546.AircraftSerialNumberTTSN),ElementName="AircraftSerialNumberTTSN",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4546.AircraftSerialNumberTTSN __AircraftSerialNumberTTSN;
-		
-		[XmlIgnore]
-		public R_4546.AircraftSerialNumberTTSN AircraftSerialNumberTTSN
-		{
-			get {return __AircraftSerialNumberTTSN;}
-			set {__AircraftSerialNumberTTSN = value;}
-		}
+		public R_4546.AircraftSerialNumberTTSN AircraftSerialNumberTTSN { get; set; }
 
 		public AircraftDescriptionExportCertificate()
 		{

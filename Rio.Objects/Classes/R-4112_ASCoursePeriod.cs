@@ -27,40 +27,12 @@ namespace R_4112
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="StartDateTimePeriod",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __StartDateTimePeriod;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __StartDateTimePeriodSpecified { get { return __StartDateTimePeriod.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? StartDateTimePeriod
-		{ 
-			get { return __StartDateTimePeriod; }
-			set { __StartDateTimePeriod = value; }
-		}
-		
-
+		public DateTime? StartDateTimePeriod { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DeadlineTimePeriod",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? __DeadlineTimePeriod;
-		
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlIgnore]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool __DeadlineTimePeriodSpecified { get { return __DeadlineTimePeriod.HasValue; } }
-		
-		[XmlIgnore]
-		public DateTime? DeadlineTimePeriod
-		{ 
-			get { return __DeadlineTimePeriod; }
-			set { __DeadlineTimePeriod = value; }
-		}
-		
-
+		public DateTime? DeadlineTimePeriod { get; set; }
 
 		public ASCoursePeriod()
 		{

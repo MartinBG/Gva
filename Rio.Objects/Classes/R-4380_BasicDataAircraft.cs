@@ -27,62 +27,27 @@ namespace R_4380
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftRegistrationMark",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftRegistrationMark;
-		
-		[XmlIgnore]
-		public string AircraftRegistrationMark
-		{ 
-			get { return __AircraftRegistrationMark; }
-			set { __AircraftRegistrationMark = value; }
-		}
+		public string AircraftRegistrationMark { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4364.CategoryAircraft),ElementName="CategoryAircraft",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4364.CategoryAircraft __CategoryAircraft;
-		
-		[XmlIgnore]
-		public R_4364.CategoryAircraft CategoryAircraft
-		{
-			get {return __CategoryAircraft;}
-			set {__CategoryAircraft = value;}
-		}
+		public R_4364.CategoryAircraft CategoryAircraft { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftManufacturerName;
-		
-		[XmlIgnore]
-		public string AircraftManufacturerName
-		{ 
-			get { return __AircraftManufacturerName; }
-			set { __AircraftManufacturerName = value; }
-		}
+		public string AircraftManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4370.ModelAircraftAccordingTypeCertificate),ElementName="ModelAircraftAccordingTypeCertificate",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4370.ModelAircraftAccordingTypeCertificate __ModelAircraftAccordingTypeCertificate;
-		
-		[XmlIgnore]
-		public R_4370.ModelAircraftAccordingTypeCertificate ModelAircraftAccordingTypeCertificate
-		{
-			get {return __ModelAircraftAccordingTypeCertificate;}
-			set {__ModelAircraftAccordingTypeCertificate = value;}
-		}
+		public R_4370.ModelAircraftAccordingTypeCertificate ModelAircraftAccordingTypeCertificate { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftSerialNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AircraftSerialNumber;
-		
-		[XmlIgnore]
-		public string AircraftSerialNumber
-		{ 
-			get { return __AircraftSerialNumber; }
-			set { __AircraftSerialNumber = value; }
-		}
+		public string AircraftSerialNumber { get; set; }
 
 		public BasicDataAircraft()
 		{

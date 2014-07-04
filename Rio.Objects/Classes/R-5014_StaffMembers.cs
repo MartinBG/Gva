@@ -34,18 +34,7 @@ namespace R_5014
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_5012.StaffMember),ElementName="StaffMember",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public StaffMemberCollection __StaffMemberCollection;
-		
-		[XmlIgnore]
-		public StaffMemberCollection StaffMemberCollection
-		{
-			get
-			{
-				if (__StaffMemberCollection == null) __StaffMemberCollection = new StaffMemberCollection();
-				return __StaffMemberCollection;
-			}
-			set {__StaffMemberCollection = value;}
-		}
+		public StaffMemberCollection StaffMemberCollection { get; set; }
 
 		public StaffMembers()
 		{

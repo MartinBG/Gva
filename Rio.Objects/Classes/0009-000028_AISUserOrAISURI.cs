@@ -27,26 +27,12 @@ namespace R_0009_000028
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_0009_000027.AISUserBasicData),ElementName="AISUserBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000027.AISUserBasicData __AISUserBasicData;
-		
-		[XmlIgnore]
-		public R_0009_000027.AISUserBasicData AISUserBasicData
-		{
-			get {return __AISUserBasicData;}
-			set {__AISUserBasicData = value;}
-		}
+		public R_0009_000027.AISUserBasicData AISUserBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AISURI",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __AISURI;
-		
-		[XmlIgnore]
-		public string AISURI
-		{ 
-			get { return __AISURI; }
-			set { __AISURI = value; }
-		}
+		public string AISURI { get; set; }
 
 		public AISUserOrAISURI()
 		{

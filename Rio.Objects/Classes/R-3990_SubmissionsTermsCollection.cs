@@ -34,18 +34,7 @@ namespace R_3990
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4392.SubmissionTerms),ElementName="SubmissionTerms",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public SubmissionTermsCollection __SubmissionTermsCollection;
-		
-		[XmlIgnore]
-		public SubmissionTermsCollection SubmissionTermsCollection
-		{
-			get
-			{
-				if (__SubmissionTermsCollection == null) __SubmissionTermsCollection = new SubmissionTermsCollection();
-				return __SubmissionTermsCollection;
-			}
-			set {__SubmissionTermsCollection = value;}
-		}
+		public SubmissionTermsCollection SubmissionTermsCollection { get; set; }
 
 		public SubmissionsTermsCollection()
 		{

@@ -34,18 +34,7 @@ namespace R_4534
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(Option),ElementName="Option",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public OptionCollection __OptionCollection;
-		
-		[XmlIgnore]
-		public OptionCollection OptionCollection
-		{
-			get
-			{
-				if (__OptionCollection == null) __OptionCollection = new OptionCollection();
-				return __OptionCollection;
-			}
-			set {__OptionCollection = value;}
-		}
+		public OptionCollection OptionCollection { get; set; }
 
 		public Options()
 		{
@@ -60,26 +49,12 @@ namespace R_4534
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OptionName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OptionName;
-		
-		[XmlIgnore]
-		public string OptionName
-		{ 
-			get { return __OptionName; }
-			set { __OptionName = value; }
-		}
+		public string OptionName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="OptionChoice",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string __OptionChoice;
-		
-		[XmlIgnore]
-		public string OptionChoice
-		{ 
-			get { return __OptionChoice; }
-			set { __OptionChoice = value; }
-		}
+		public string OptionChoice { get; set; }
 
 		public Option()
 		{
