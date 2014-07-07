@@ -112,6 +112,7 @@ namespace Regs.Api.Models
 
             // Local-only properties
             this.Ignore(t => t.IsLoaded);
+            this.Ignore(t => t.Parts);
         }
     }
 }
