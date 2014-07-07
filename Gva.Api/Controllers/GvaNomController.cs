@@ -114,6 +114,38 @@ namespace Gva.Api.Controllers
             return Ok(returnValue);
         }
 
+        [Route("commonQuestions")]
+        public IHttpActionResult GetCommonQuestions(string term = null, int offset = 0, int? limit = null)
+        {
+            var aSExamQuestionType = this.nomRepository.GetNomValue("asExamQuestionTypes", "commonQuestions");
+
+            var returnValue =
+                this.personRepository.GetQuestions(aSExamQuestionType.NomValueId, name: term, exact: false, offset: offset, limit: limit)
+                .Select(e => new
+                {
+                    nomValueId = e.ASExamVariantId,
+                    name = e.Name
+                });
+
+            return Ok(returnValue);
+        }
+
+        [Route("specializedQuestions")]
+        public IHttpActionResult GetSpecializedQuestions(string term = null, int offset = 0, int? limit = null)
+        {
+            var aSExamQuestionType = this.nomRepository.GetNomValue("asExamQuestionTypes", "specializedQuestions");
+
+            var returnValue =
+                this.personRepository.GetQuestions(aSExamQuestionType.NomValueId, name: term, exact: false, offset: offset, limit: limit)
+                .Select(e => new
+                {
+                    nomValueId = e.ASExamVariantId,
+                    name = e.Name
+                });
+
+            return Ok(returnValue);
+        }
+
         [Route("inspectors")]
         public IHttpActionResult GetInspectors(string term = null, int offset = 0, int? limit = null)
         {

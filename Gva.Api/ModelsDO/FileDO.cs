@@ -9,6 +9,7 @@ namespace Gva.Api.ModelsDO
     {
         public FileDO()
         {
+            this.Applications = new List<ApplicationNomDO>();
         }
 
         public FileDO(GvaLotFile lotFile)

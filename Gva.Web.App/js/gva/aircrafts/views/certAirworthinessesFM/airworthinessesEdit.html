@@ -16,7 +16,7 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw" sc-form-readonly="editMode !== 'edit'"></gva-aircraft-cert-airworthiness-fm>
+      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw" readonly="editMode !== 'edit'"></gva-aircraft-cert-airworthiness-fm>
     </div>
   </div>
 
@@ -97,14 +97,14 @@
     </div>
 
     <div class="well-sm panel-body" ng-show="currentReview">
-      <gva-airworthiness-review name="airworthinessReviewForm" ng-model="currentReview" sc-form-readonly="editMode !== 'editReview'"></gva-airworthiness-review>
+      <gva-airworthiness-review name="airworthinessReviewForm" ng-model="currentReview" readonly="editMode !== 'editReview'"></gva-airworthiness-review>
 
       <div ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'">
         <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.amendment1" style="margin-top:10px;"></h5>
         <button class="btn btn-xs btn-default pull-right" ng-click="currentReview.amendment1 = {}" style="position:relative; top:-25px" ng-disabled="!editMode" ng-show="!currentReview.amendment1">
           <span class="glyphicon glyphicon-plus"></span>
         </button>
-        <gva-airworthiness-amendment name="airworthinessAmendment1Form" ng-model="currentReview.amendment1" ng-show="currentReview.amendment1" sc-form-readonly="editMode !== 'editReview'"></gva-airworthiness-amendment>
+        <gva-airworthiness-amendment name="airworthinessAmendment1Form" ng-model="currentReview.amendment1" ng-show="currentReview.amendment1" readonly="editMode !== 'editReview'"></gva-airworthiness-amendment>
       </div>
 
       <div ng-if="(aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR') && currentReview.amendment1">
@@ -112,7 +112,7 @@
         <button class="btn btn-xs btn-default pull-right" ng-click="currentReview.amendment2 = {}" style="position:relative; top:-25px" ng-disabled="!editMode" ng-show="!currentReview.amendment2">
           <span class="glyphicon glyphicon-plus"></span>
         </button>
-        <gva-airworthiness-amendment name="airworthinessAmendment2Form" ng-model="currentReview.amendment2" ng-show="currentReview.amendment2" sc-form-readonly="editMode !== 'editReview'"></gva-airworthiness-amendment>
+        <gva-airworthiness-amendment name="airworthinessAmendment2Form" ng-model="currentReview.amendment2" ng-show="currentReview.amendment2" readonly="editMode !== 'editReview'"></gva-airworthiness-amendment>
       </div>
     </div>
   </div>

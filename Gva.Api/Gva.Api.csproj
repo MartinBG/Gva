@@ -80,6 +80,7 @@
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
     <Compile Include="Controllers\GvaPartsController.cs" />
+    <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\EquipmentsController.cs" />
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\GvaPublisherController.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="ModelsDO\AirportDO.cs" />
     <Compile Include="ModelsDO\ApplicationLotObjectDO.cs" />
     <Compile Include="ModelsDO\PartSelectDO.cs" />
+    <Compile Include="ModelsDO\ASExamDO.cs" />
     <Compile Include="ModelsDO\PublisherDO.cs" />
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\EquipmentDO.cs" />
@@ -149,6 +151,9 @@
     <Compile Include="ModelsDO\RegistrationsDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegMark.cs" />
+    <Compile Include="Models\ASExamQuestion.cs" />
+    <Compile Include="Models\ASExamVariantQuestion.cs" />
+    <Compile Include="Models\ASExamVariant.cs" />
     <Compile Include="Models\GvaViewPersonInspector.cs" />
     <Compile Include="Models\GvaViewOrganizationExaminer.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegistration.cs" />

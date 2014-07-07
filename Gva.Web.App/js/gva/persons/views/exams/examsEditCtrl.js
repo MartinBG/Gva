@@ -7,17 +7,14 @@
     $state,
     $stateParams,
     l10n,
-    PersonExamAnswers,
     PersonExams,
+    SecurityExam,
     exam
   ) {
     var originalExam = _.cloneDeep(exam);
     $scope.exam = exam;
     $scope.editMode = null;
-    $scope.messages = {
-      good: undefined,
-      bad: undefined
-    };
+    $scope.messages = {};
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -27,8 +24,7 @@
       return $scope.editExamForm.$validate()
         .then(function () {
           if ($scope.editExamForm.$valid) {
-            return PersonExams
-              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.exam)
+            return PersonExams.save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.exam)
               .$promise.then(function () {
                 return $state.go('root.persons.view.examASs.search');
               });
@@ -46,21 +42,25 @@
           $scope.messages.success = undefined;
         }
         else {
-          return PersonExamAnswers.get({
-            id: $stateParams.id,
+          return SecurityExam.getAnswers({
             fileKey: $scope.exam.files[0].file.key,
             name: $scope.exam.files[0].file.name
-          }).$promise
+          }, {}).$promise
           .then(function (data) {
             if (data.err) {
               $scope.messages.error = data.err;
               $scope.messages.success = undefined;
             }
             else {
-              $scope.exam.part.commonQuestions1 = data.answ.commonQuestions1;
-              $scope.exam.part.commonQuestions2 = data.answ.commonQuestions2;
-              $scope.exam.part.specializedQuestions1 = data.answ.specializedQuestions1;
-              $scope.exam.part.specializedQuestions2 = data.answ.specializedQuestions2;
+              $scope.exam.part.commonQuestions = data.answ.commonQuestions1;
+              data.answ.commonQuestions2.forEach(function (qs) {
+                $scope.exam.part.commonQuestions.push(qs);
+              });
+
+              $scope.exam.part.specializedQuestions = data.answ.specializedQuestions1;
+              data.answ.specializedQuestions2.forEach(function (qs) {
+                $scope.exam.part.specializedQuestions.push(qs);
+              });
 
               $scope.exam.part.file = 'data:image/jpg;base64,' + data.file;
               $scope.messages.success = l10n.get('successTexts.successExtract');
@@ -76,8 +76,7 @@
     };
 
     $scope.deleteExam = function () {
-      return PersonExams
-        .remove({ id: $stateParams.id, ind: $stateParams.ind })
+      return PersonExams.remove({ id: $stateParams.id, ind: $stateParams.ind })
         .$promise.then(function () {
           return $state.go('root.persons.view.examASs.search');
         });
@@ -94,8 +93,8 @@
     '$state',
     '$stateParams',
     'l10n',
-    'PersonExamAnswers',
     'PersonExams',
+    'SecurityExam',
     'exam'
   ];
 

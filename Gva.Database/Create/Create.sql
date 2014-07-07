@@ -27,6 +27,9 @@ GO
 :r $(rootPath)\"Tables\GvaViewAircraftRegistrations.sql"
 :r $(rootPath)\"Tables\GvaViewAircraftRegMarks.sql"
 :r $(rootPath)\"Tables\GvaWordTemplates.sql"
+:r $(rootPath)\"Tables\ASExamQuestions.sql"
+:r $(rootPath)\"Tables\ASExamVariants.sql"
+:r $(rootPath)\"Tables\ASExamVariantQuestions.sql"
 
 ---------------------------------------------------------------
 -- Diagram
@@ -97,9 +100,9 @@ GO
 ---------------------------------------------------------------
 
 :r $(rootPath)\"..\Insert\Noms\Persons\_personsMigrationNoms.sql"
-:r $(rootPath)\"..\Insert\Noms\Persons\commonQuestions.sql"
 :r $(rootPath)\"..\Insert\Noms\Persons\linTypes.sql"
-:r $(rootPath)\"..\Insert\Noms\Persons\specializedQuestions.sql"
+:r $(rootPath)\"..\Insert\Noms\Persons\asExamQuestionTypes.sql"
+:r $(rootPath)\"..\Insert\asExams.sql"
 
 ---------------------------------------------------------------
 --Insert GVA EXCEL CONFIG

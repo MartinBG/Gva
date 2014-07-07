@@ -1,0 +1,45 @@
+﻿<ng-form name="newExamPartForm" sc-validate="{}">
+  <div class="row">
+    <div class="form-group col-sm-8">
+      <gva-common-select-person name="personForm" ng-model="personExam" sc-on-select-person="selectPerson()" sc-on-new-person="newPerson()" sc-data-new-class="'col-sm-12'" readonly="personExam.formReadonly"></gva-common-select-person>
+    </div>
+  </div>
+
+  <div ng-show="!!exams">
+    <sc-datatable items="exams" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+      <sc-column data="part.examDate" title="persons.searchExamAS.examDate" type="date">
+      </sc-column>
+      <sc-column data="part.commonQuestion.name" type="date" title="persons.searchExamAS.commonQuestion">
+      </sc-column>
+      <sc-column data="part.specializedQuestion.name" title="persons.searchExamAS.specializedQuestion">
+      </sc-column>
+      <sc-column data="part.inspectors[0].name" title="persons.searchExamAS.inspector">
+      </sc-column>
+    </sc-datatable>
+  </div>
+
+  <div class="clear"></div>
+
+  <h5 class="form-header" l10n-text="persons.examBatchNew.title2"></h5>
+  <gva-person-exam name="examForm" ng-model="personExam.part" sc-on-extract-answers="extractAnswers()" sc-data-msg="messages" readonly="personExam.formReadonly"></gva-person-exam>
+
+  <h5 class="form-header" l10n-text="persons.searchExamAS.title" style="margin-top:10px;"></h5>
+  <div class="row" ng-if="!!personExam">
+    <sc-field type="nomenclature" ng-model="personExam.files[0].caseType" alias="'personCaseTypes'" ng-required="true" l10n-text="persons.searchExamAS.caseType" class="col-sm-2" ng-readonly="personExam.formReadonly"></sc-field>
+
+    <sc-field type="text" ng-model="personExam.files[0].bookPageNumber" ng-required="true" l10n-text="persons.searchExamAS.bookPageNumber" class="col-sm-3 col-md-2" ng-readonly="personExam.formReadonly"></sc-field>
+    <sc-field type="int" ng-model="personExam.files[0].pageCount" min="0" l10n-text="persons.searchExamAS.pageCount" validations="{min: 'default'}" class="col-sm-3 col-md-2" ng-readonly="personExam.formReadonly"></sc-field>
+
+    <div class="form-group col-sm-3">
+      <label class="control-label" l10n-text="persons.searchExamAS.fileName"></label>
+      <sc-files ng-model="personExam.files[0].file" name="file" ng-readonly="true"></sc-files>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-5">
+      <sc-button name="saveBtn" btn-click="save()" text="persons.examBatchNew.save" class="btn btn-primary" icon="glyphicon-floppy-disk" ng-show="!personExam.formReadonly"></sc-button>
+      <sc-button name="editBtn" btn-click="edit()" text="persons.examBatchNew.edit" class="btn btn-primary" icon="glyphicon-pencil" ng-show="personExam.formReadonly"></sc-button>
+    </div>
+  </div>
+</ng-form>
