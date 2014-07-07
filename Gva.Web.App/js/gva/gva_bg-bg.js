@@ -1714,7 +1714,7 @@
           successThreshold: 'Праг'
         },
         newExamAS: {
-          title: 'Нов на теоретичен изпит АС',
+          title: 'Нов теоретичен изпит АС',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -1723,7 +1723,12 @@
           commonQuestion: 'Основни знания',
           specializedQuestion: 'Специализирани знания',
           inspector: 'Инспектор',
-          newExam: 'Нов теоретичен изпит АС'
+          newExam: 'Нов теоретичен изпит АС',
+          title: 'Електронен (сканиран) документ',
+          fileName: 'Име на файл',
+          bookPageNumber: '№ стр. в дело',
+          pageCount: 'Брой стр.',
+          caseType: 'Тип дело'
         },
         editExamAS: {
           title: 'Преглед на теоретичен изпит АС',
@@ -1731,6 +1736,15 @@
           save: 'Запис',
           cancel: 'Отказ',
           deleteExam: 'Изтрий'
+        },
+        examBatchNew: {
+          title: 'Нов теоретичен изпит АС',
+          title2: 'Теоретичен изпит АС',
+          fileSource: 'Файл източник',
+          fileName: 'Име на файл',
+          extractPage: 'Раздели на страници',
+          save: 'Запис и продължаване',
+          edit: 'Редакция'
         },
         personDataDirective: {
           lin: 'ЛИН',
@@ -3591,6 +3605,9 @@
         'root.applications.edit.case.linkPart': 'Свързване',
         'root.persons': 'Физически лица',
         'root.persons.new': 'Ново физическо лице',
+        'root.persons.securityExam': 'Нов теоретичен изпит АС',
+        'root.persons.securityExam.personSelect': 'Избор на заявител',
+        'root.persons.securityExam.personNew': 'Нов заявител',
         'root.persons.view': 'Лично досие',
         'root.persons.view.edit': 'Преглед',
         'root.persons.view.addresses': 'Адреси',

@@ -633,6 +633,7 @@
     <Content Include="js\gva\persons\resources\personDocumentOthers.js" />
     <Content Include="js\gva\persons\resources\personDocumentTrainings.js" />
     <Content Include="js\gva\persons\resources\exam.js" />
+    <Content Include="js\gva\persons\resources\securityExam.js" />
     <Content Include="js\gva\persons\resources\person.js" />
     <Content Include="js\gva\persons\resources\personAddress.js" />
     <Content Include="js\gva\persons\resources\personApplication.js" />
@@ -659,6 +660,14 @@
     <Content Include="js\gva\persons\resources\personsLastLicenceNumber.js" />
     <Content Include="js\gva\persons\resources\personStatuses.js" />
     <Content Include="js\gva\persons\resources\publishers.js" />
+    <Content Include="js\gva\persons\resources\personFlyingExperience.js" />
+    <Content Include="js\gva\persons\resources\personInventory.js" />
+    <Content Include="js\gva\persons\resources\personLastLicenceNumber.js" />
+    <Content Include="js\gva\persons\resources\personLicence.js" />
+    <Content Include="js\gva\persons\resources\personLicenceEdition.js" />
+    <Content Include="js\gva\persons\resources\personRating.js" />
+    <Content Include="js\gva\persons\resources\personsStatus.js" />
+    <Content Include="js\gva\persons\resources\publisher.js" />
     <Content Include="js\gva\persons\views\addresses\addrEdit.html" />
     <Content Include="js\gva\persons\views\addresses\addrEditCtrl.js" />
     <Content Include="js\gva\persons\views\addresses\addrNew.html" />
@@ -728,6 +737,10 @@
     <Content Include="js\gva\persons\views\documentTrainings\trainingsNewCtrl.js" />
     <Content Include="js\gva\persons\views\documentTrainings\trainingsSearch.html" />
     <Content Include="js\gva\persons\views\documentTrainings\trainingsSearchCtrl.js" />
+    <Content Include="js\gva\persons\views\exams\securityExamBatchPart.html" />
+    <Content Include="js\gva\persons\views\exams\securityExamBatchPartCtrl.js" />
+    <Content Include="js\gva\persons\views\exams\securityExamBatch.html" />
+    <Content Include="js\gva\persons\views\exams\securityExamBatchCtrl.js" />
     <Content Include="js\gva\persons\views\exams\examsEdit.html" />
     <Content Include="js\gva\persons\views\exams\examsEditCtrl.js" />
     <Content Include="js\gva\persons\views\exams\examsNew.html" />

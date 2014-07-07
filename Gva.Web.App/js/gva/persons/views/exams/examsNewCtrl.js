@@ -7,27 +7,21 @@
     $state,
     $stateParams,
     l10n,
-    PersonExam,
-    Exam,
+    PersonExams,
+    SecurityExam,
     exam
   ) {
     $scope.exam = exam;
-    $scope.messages = {
-      success: undefined,
-      error: undefined
-    };
+    $scope.messages = {};
 
     $scope.save = function () {
-      return $scope.newExamForm.$validate()
-        .then(function () {
-          if ($scope.newExamForm.$valid) {
-            return PersonExams
-              .save({ id: $stateParams.id }, $scope.exam).$promise
-              .then(function () {
-                return $state.go('root.persons.view.examASs.search');
-              });
-          }
-        });
+      return $scope.newExamForm.$validate().then(function () {
+        if ($scope.newExamForm.$valid) {
+          return PersonExams.save({ id: $stateParams.id }, $scope.exam).$promise.then(function () {
+            return $state.go('root.persons.view.examASs.search');
+          });
+        }
+      });
     };
 
     $scope.extractAnswers = function () {
@@ -40,8 +34,7 @@
           $scope.messages.success = undefined;
         }
         else {
-          return Exam.getAnswers({
-            id: $stateParams.id,
+          return SecurityExam.getAnswers({
             fileKey: $scope.exam.files[0].file.key,
             name: $scope.exam.files[0].file.name
           }, {}).$promise
@@ -84,8 +77,8 @@
     '$state',
     '$stateParams',
     'l10n',
-    'PersonExam',
-    'Exam',
+    'PersonExams',
+    'SecurityExam',
     'exam'
   ];
 

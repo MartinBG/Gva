@@ -22,7 +22,7 @@ using Docs.Api.DataObjects;
 
 namespace Gva.Api.Controllers
 {
-    [RoutePrefix("api/exam")]
+    [RoutePrefix("api/securityExam")]
     public class ExamsController : ApiController
     {
         private IUnitOfWork unitOfWork;
@@ -36,9 +36,116 @@ namespace Gva.Api.Controllers
             this.nomRepository = nomRepository;
         }
 
+        [Route("extractPages")]
+        [HttpPost]
+        public IHttpActionResult PostExtractPages(string fileKey, string name)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                GhostscriptVersionInfo lastInstalledVersion = GhostscriptVersionInfo.GetLastInstalledVersion(GhostscriptLicense.GPL | GhostscriptLicense.AFPL, GhostscriptLicense.GPL);
+                List<GvaFile> gvaFiles = new List<GvaFile>();
+                int pageCount;
+
+                using (MemoryStream m1 = new MemoryStream())
+                {
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                    {
+                        connection.Open();
+
+                        using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", fileKey))
+                        {
+                            blobStream.CopyTo(m1);
+                        }
+                    }
+
+                    using (GhostscriptRasterizer rasterizer = new GhostscriptRasterizer())
+                    {
+                        rasterizer.Open(m1, lastInstalledVersion, false);
+                        pageCount = rasterizer.PageCount;
+
+                        for (int i = 1; i <= pageCount; i++)
+                        {
+                            using (var ms = new MemoryStream())
+                            {
+                                GvaFile file = null;
+
+                                Image img = rasterizer.GetPage(300, 300, i);
+                                img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                                {
+                                    connection.Open();
+                                    using (var blobWriter = new BlobWriter(connection))
+                                    using (var stream = blobWriter.OpenStream())
+                                    {
+                                        stream.Write(ms.ToArray(), 0, (int)ms.Length);
+
+                                        file = new GvaFile()
+                                        {
+                                            Filename = Path.Combine(Path.GetFileNameWithoutExtension(name) + "-" + i.ToString() + ".jpg"),
+                                            MimeType = "image/jpeg",
+                                            FileContentId = blobWriter.GetBlobKey()
+                                        };
+
+                                        this.unitOfWork.DbContext.Set<GvaFile>().Add(file);
+                                        gvaFiles.Add(file);
+                                    }
+                                }
+
+
+                            }
+                        }
+                    }
+                }
+
+                this.unitOfWork.Save();
+                transaction.Commit();
+
+                List<int> gvaFileIds = gvaFiles.Select(e => e.GvaFileId).ToList();
+
+                return Ok(new { pageCount = pageCount, gvaFileIds = gvaFileIds });
+            }
+        }
+
+        [Route("getPreview")]
+        [HttpGet]
+        public IHttpActionResult GetPreview(int gvaFileId)
+        {
+            GvaFile gvaFile = this.unitOfWork.DbContext.Set<GvaFile>().FirstOrDefault(e => e.GvaFileId == gvaFileId);
+            byte[] file;
+
+            using (MemoryStream m1 = new MemoryStream())
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", gvaFile.FileContentId))
+                    {
+                        blobStream.CopyTo(m1);
+                    }
+                }
+
+                Bitmap bitmapImg = new Bitmap(m1);
+
+                using (bitmapImg)
+                using (Bitmap bitmapImgResized = OMRReader.ResizeImage(bitmapImg, 580, 800))
+                {
+                    using (MemoryStream m2 = new MemoryStream())
+                    {
+                        bitmapImgResized.Save(m2, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        file = m2.ToArray();
+                    }
+                }
+
+                return Ok(new { file = file, gvaFile = new FileDataDO(gvaFile) });
+            }
+        }
+
+
         [Route("getAnswers")]
         [HttpGet]
-        public IHttpActionResult GetAnswers(string fileKey, int id, string name)
+        public IHttpActionResult GetAnswers(string fileKey, string name)
         {
             GhostscriptVersionInfo lastInstalledVersion = GhostscriptVersionInfo.GetLastInstalledVersion(GhostscriptLicense.GPL | GhostscriptLicense.AFPL, GhostscriptLicense.GPL);
             Dictionary<string, List<List<bool>>> answers = new Dictionary<string, List<List<bool>>>();
@@ -95,7 +202,7 @@ namespace Gva.Api.Controllers
                 {
                     answers = omr.Read(bitmapImg);
 
-                    using (Bitmap bitmapImgResized = omr.ResizeImage(bitmapImg, 580, 800))
+                    using (Bitmap bitmapImgResized = OMRReader.ResizeImage(bitmapImg, 580, 800))
                     {
                         using (MemoryStream m2 = new MemoryStream())
                         {

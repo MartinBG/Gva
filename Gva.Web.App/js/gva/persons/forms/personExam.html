@@ -113,17 +113,25 @@
     <sc-field type="int" ng-model="model.score" l10n-text="persons.examDirective.score" class="col-md-2 col-sm-4"></sc-field>
 
     <sc-field-group class="col-md-1 col-sm-1" text="persons.examDirective.successThreshold" validations="{required: 'default'}" field-name="successThreshold">
-      <sc-int ng-model="model.successThreshold" name="successThreshold" class="col-md-2 col-sm-4" min="1" max="100" required></sc-int>
+      <sc-int ng-model="model.successThreshold" name="successThreshold" class="col-md-2 col-sm-4" min="1" max="100" required ng-disabled="form.$readonly"></sc-int>
       <span>%</span>
     </sc-field-group>
 
     <sc-field type="nomenclature" ng-model="model.passed" alias="'boolean'" l10n-text="persons.examDirective.passed" class="col-md-2 col-sm-4"></sc-field>
+
     <div class="form-group">
-      <sc-button name="extract" btn-click="$raise('scOnExtractAnswers')" text="persons.examDirective.extract" class="btn btn-default" ng-disabled="form.$readonly" style="margin-top:10px;"></sc-button>
+      <label class="control-label"></label>
+      <div class="input-group input-group-sm">
+        <sc-button btn-click="$raise('scOnExtractAnswers')" text="persons.examDirective.extract" class="btn btn-primary btn-sm" ng-disabled="form.$readonly"></sc-button>
+      </div>
     </div>
     <div class="form-group">
-      <sc-button name="grade" btn-click="gradeExam()" text="persons.examDirective.grade" class="btn btn-default" ng-disabled="form.$readonly" style="margin-top:10px;"></sc-button>
+      <label class="control-label"></label>
+      <div class="input-group input-group-sm">
+        <sc-button btn-click="gradeExam()" text="persons.examDirective.grade" class="btn btn-primary btn-sm" ng-disabled="form.$readonly"></sc-button>
+      </div>
     </div>
+
     <div class="form-group has-success" ng-if="msg.success">
       <label class="control-label"></label>
       <span class="help-block">

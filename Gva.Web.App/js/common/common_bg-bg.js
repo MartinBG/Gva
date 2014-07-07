@@ -31,7 +31,8 @@
             medicals: 'Медицински',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
-            appsLink: 'Свържи заявление'
+            appsLink: 'Свържи заявление',
+            exam: 'Нов теор.изпит АС'
           },
           aircrafts: {
             title: 'ВС',

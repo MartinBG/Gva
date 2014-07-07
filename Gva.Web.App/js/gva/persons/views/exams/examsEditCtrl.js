@@ -7,17 +7,14 @@
     $state,
     $stateParams,
     l10n,
-    PersonExam,
-    Exam,
+    PersonExams,
+    SecurityExam,
     exam
   ) {
     var originalExam = _.cloneDeep(exam);
     $scope.exam = exam;
     $scope.editMode = null;
-    $scope.messages = {
-      success: undefined,
-      error: undefined
-    };
+    $scope.messages = {};
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -27,8 +24,7 @@
       return $scope.editExamForm.$validate()
         .then(function () {
           if ($scope.editExamForm.$valid) {
-            return PersonExams
-              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.exam)
+            return PersonExams.save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.exam)
               .$promise.then(function () {
                 return $state.go('root.persons.view.examASs.search');
               });
@@ -46,8 +42,7 @@
           $scope.messages.success = undefined;
         }
         else {
-          return Exam.getAnswers({
-            id: $stateParams.id,
+          return SecurityExam.getAnswers({
             fileKey: $scope.exam.files[0].file.key,
             name: $scope.exam.files[0].file.name
           }, {}).$promise
@@ -81,8 +76,7 @@
     };
 
     $scope.deleteExam = function () {
-      return PersonExams
-        .remove({ id: $stateParams.id, ind: $stateParams.ind })
+      return PersonExams.remove({ id: $stateParams.id, ind: $stateParams.ind })
         .$promise.then(function () {
           return $state.go('root.persons.view.examASs.search');
         });
@@ -99,8 +93,8 @@
     '$state',
     '$stateParams',
     'l10n',
-    'PersonExam',
-    'Exam',
+    'PersonExams',
+    'SecurityExam',
     'exam'
   ];
 

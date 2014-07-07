@@ -1,0 +1,37 @@
+﻿<ng-form name="newExamBatchForm" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="persons.examBatchNew.title"></strong>
+    </div>
+
+    <div class="well-sm panel-body">
+      <h5 class="form-header" l10n-text="persons.examBatchNew.fileSource"></h5>
+      <div class="row">
+        <ng-form name="fileForm" sc-validate="{}">
+          <div class="form-group col-sm-5" sc-has-error="file">
+            <sc-files name="file" ng-model="file" required></sc-files>
+          </div>
+          <div class="form-group col-sm-2">
+            <sc-button btn-click="extractPages()" text="persons.examBatchNew.extractPage" class="btn btn-sm btn-primary"></sc-button>
+          </div>
+        </ng-form>
+      </div>
+
+      <div class="row" ng-show="pageModel.pageable">
+        <div class="col-md-offset-4">
+          <ul class="pagination" style="margin: 2px;">
+            <li ng-class="{'disabled' : pageModel.pagingContents.length === 0 || pageModel.currentPage === 1}"><a href="" ng-click="setCurrentPage(pageModel.currentPage-1)">{{pageModel.pageTexts.previousPage}}</a></li>
+            <li ng-class="{'disabled' : !pagingContent, 'active' : pagingContent === pageModel.currentPage}" ng-repeat="pagingContent in pageModel.pagingContents">
+              <a href="" ng-click="setCurrentPage(pagingContent)">
+                <span ng-show="!(btnClicked && pageModel.currentPage === pagingContent)">{{pagingContent || '...'}}</span>
+                <span ng-show="btnClicked && pageModel.currentPage === pagingContent" class="glyphicon" ng-class="{'glyphicon-loading': btnClicked}"></span>
+              </a>
+            </li>
+            <li ng-class="{'disabled' : pageModel.pagingContents.length === 0 || pageModel.currentPage === pageModel.pageCount}"><a href="" ng-click="setCurrentPage(pageModel.currentPage+1)">{{pageModel.pageTexts.nextPage}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div ui-view></div>
+    </div>
+  </div>
+</ng-form>
