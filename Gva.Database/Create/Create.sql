@@ -100,9 +100,9 @@ GO
 ---------------------------------------------------------------
 
 :r $(rootPath)\"..\Insert\Noms\Persons\_personsMigrationNoms.sql"
-:r $(rootPath)\"..\Insert\Noms\Persons\commonQuestions.sql"
 :r $(rootPath)\"..\Insert\Noms\Persons\linTypes.sql"
-:r $(rootPath)\"..\Insert\Noms\Persons\specializedQuestions.sql"
+:r $(rootPath)\"..\Insert\Noms\Persons\asExamQuestionTypes.sql"
+:r $(rootPath)\"..\Insert\asExams.sql"
 
 ---------------------------------------------------------------
 --Insert GVA EXCEL CONFIG
