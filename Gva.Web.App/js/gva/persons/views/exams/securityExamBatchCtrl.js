@@ -6,7 +6,7 @@
     $scope,
     $state,
     SecurityExam,
-    PersonExam,
+    PersonExams,
     personExam,
     pageModel
   ) {
@@ -23,7 +23,7 @@
       $scope.pageModel.currentPage = parseInt(page, 10);
 
       if ($scope.personExams[page - 1].formReadonly) {
-        return PersonExam.get({
+        return PersonExams.get({
           id: $scope.personExams[page - 1].lot.id,
           ind: $scope.personExams[page - 1].partIndex
         }).$promise.then(function (data) {
@@ -49,6 +49,8 @@
     };
 
     $scope.setPaging = function (page) {
+      $scope.pageModel.pageable = true;
+
       var i, l, pageCount = $scope.pageModel.pageCount;
       if (pageCount <= $scope.pageModel.numOfPageButtons) {
         $scope.pageModel.pagingContents = _.range(1, pageCount + 1);
@@ -97,9 +99,8 @@
 
               $scope.gvaFileIds = data.gvaFileIds;
               $scope.pageModel.pageCount = data.pageCount;
-              $scope.pageModel.pageable = true;
 
-              return $scope.setPaging(1);
+              return $scope.setCurrentPage(1);
             }
           });
         }
@@ -111,7 +112,7 @@
     '$scope',
     '$state',
     'SecurityExam',
-    'PersonExam',
+    'PersonExams',
     'personExam',
     'pageModel'
   ];

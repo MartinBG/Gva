@@ -7,7 +7,7 @@
     $state,
     l10n,
     SecurityExam,
-    PersonExam,
+    PersonExams,
     pageModel,
     selectedPerson
   ) {
@@ -23,7 +23,7 @@
       $scope.personExam.part.examDate = $scope.commonData.examDate;
       $scope.personExam.part.commonQuestion = $scope.commonData.commonQuestion;
       $scope.personExam.part.specializedQuestion = $scope.commonData.specializedQuestion;
-      $scope.personExam.part.inspector = $scope.commonData.inspector;
+      $scope.personExam.part.inspectors = $scope.commonData.inspectors;
       $scope.personExam.files[0].caseType = $scope.commonData.caseType;
     }
 
@@ -34,7 +34,7 @@
     $scope.$watch('personExam.lot.id', function (newValue, oldValue) {
       if ((newValue !== oldValue) || (newValue === oldValue)) {
         if (!!newValue) {
-          return PersonExam.query({ id: $scope.personExam.lot.id }).$promise
+          return PersonExams.query({ id: $scope.personExam.lot.id }).$promise
             .then(function (data) {
               $scope.exams = _.first(_.sortBy(data, 'partIndex').reverse(), 2);
             });
@@ -60,9 +60,9 @@
         $scope.commonData.specializedQuestion = newValue;
       }
     });
-    $scope.$watch('personExam.part.inspector', function (newValue, oldValue) {
+    $scope.$watch('personExam.part.inspectors', function (newValue, oldValue) {
       if (((newValue !== oldValue) || (newValue === oldValue)) && !!newValue) {
-        $scope.commonData.inspector = newValue;
+        $scope.commonData.inspectors = newValue;
       }
     });
     $scope.$watch('personExam.files[0].caseType', function (newValue, oldValue) {
@@ -121,19 +121,21 @@
             files: $scope.personExam.files
           };
 
-          return PersonExam.save({
+          return PersonExams.save({
             id: $scope.personExam.lot.id,
             ind: $scope.personExam.partIndex
           }, exam).$promise.then(function (data) {
+            if (data.partIndex !== null || data.partIndex !== undefined) {
+              $scope.personExam.partIndex = data.partIndex;
+            }
+
             if ($scope.pageModel.currentPage + 1 > $scope.pageModel.pageCount) {
-              return $state.go('root.persons.search');
+              $scope.personExam.formReadonly = true;
+              return;
             }
 
             return $scope.setCurrentPage($scope.pageModel.currentPage + 1).then(function () {
               $scope.personExam.formReadonly = true;
-              if (!!data.partIndex) {
-                $scope.personExam.partIndex = data.partIndex;
-              }
             });
           });
         }
@@ -158,7 +160,7 @@
     '$state',
     'l10n',
     'SecurityExam',
-    'PersonExam',
+    'PersonExams',
     'pageModel',
     'selectedPerson'
   ];
