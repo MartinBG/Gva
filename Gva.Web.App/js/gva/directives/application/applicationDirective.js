@@ -36,7 +36,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
     }
 
     function postLink(scope, iElement, iAttrs) {
-      var setPart = $parse(iAttrs.setPart)(scope),
+      var setPart = $parse(iAttrs.setPart)(scope) || iAttrs.setPart,
           stateName;
       if (setPart === 'person') {
         stateName = 'root.persons.view.documentApplications.edit';

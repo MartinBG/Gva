@@ -1,43 +1,46 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="text" ng-model="model.issuePlace" ng-required="true" l10n-text="aircrafts.permitDirective.issuePlace" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.permitDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="date" ng-model="model.validToDate" ng-required="true" l10n-text="aircrafts.permitDirective.validToDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.issuePlace" ng-required="true" l10n-text="aircrafts.permitDirective.issuePlace" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="date" ng-model="model.part.issueDate" ng-required="true" l10n-text="aircrafts.permitDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.part.validToDate" ng-required="true" l10n-text="aircrafts.permitDirective.validToDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.purpose" l10n-text="aircrafts.permitDirective.purpose" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.purpose" l10n-text="aircrafts.permitDirective.purpose" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.purposeAlt" l10n-text="aircrafts.permitDirective.purposeAlt" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.purposeAlt" l10n-text="aircrafts.permitDirective.purposeAlt" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.pointFrom" l10n-text="aircrafts.permitDirective.pointFrom" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.pointFrom" l10n-text="aircrafts.permitDirective.pointFrom" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.pointFromAlt" l10n-text="aircrafts.permitDirective.pointFromAlt" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.pointFromAlt" l10n-text="aircrafts.permitDirective.pointFromAlt" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.pointTo" l10n-text="aircrafts.permitDirective.pointTo" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.pointTo" l10n-text="aircrafts.permitDirective.pointTo" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.pointToAlt" l10n-text="aircrafts.permitDirective.pointToAlt" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.pointToAlt" l10n-text="aircrafts.permitDirective.pointToAlt" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.planStops" l10n-text="aircrafts.permitDirective.planStops" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.planStops" l10n-text="aircrafts.permitDirective.planStops" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.planStopsAlt" l10n-text="aircrafts.permitDirective.planStopsAlt" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.planStopsAlt" l10n-text="aircrafts.permitDirective.planStopsAlt" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.notes" l10n-text="aircrafts.permitDirective.notes" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.notes" l10n-text="aircrafts.permitDirective.notes" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.notesAlt" l10n-text="aircrafts.permitDirective.notesAlt" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.notesAlt" l10n-text="aircrafts.permitDirective.notesAlt" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.crew" l10n-text="aircrafts.permitDirective.crew" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.crew" l10n-text="aircrafts.permitDirective.crew" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="2" ng-model="model.crewAlt" l10n-text="aircrafts.permitDirective.crewAlt" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" rows="2" ng-model="model.part.crewAlt" l10n-text="aircrafts.permitDirective.crewAlt" class="col-md-8 col-sm-12"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field custom-type="gva-applications" ng-model="model.applications" set-part="aircraft" l10n-text="aircrafts.permitDirective.applications" class="col-md-8"></sc-field>
   </div>
 </ng-form>

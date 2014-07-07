@@ -42,7 +42,7 @@
     aircraftCertNoise: function () {
       return {
         part: {},
-        files: []
+        applications: []
       };
     }
   };

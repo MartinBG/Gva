@@ -42,7 +42,7 @@
     aircraftCertMark: function () {
       return {
         part: {},
-        files: []
+        applications: []
       };
     }
   };

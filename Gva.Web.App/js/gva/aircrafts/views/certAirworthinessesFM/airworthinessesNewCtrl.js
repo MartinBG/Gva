@@ -77,7 +77,7 @@
               amendment2: null
             }]
           },
-          files: []
+          applications: []
         };
       }
     ]

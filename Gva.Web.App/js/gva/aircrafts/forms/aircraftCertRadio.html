@@ -1,21 +1,24 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="text" ng-model="model.certNumber" ng-required="true" l10n-text="aircrafts.radioDirective.certNumber" class="col-md-2 col-sm-6"></sc-field>
-    <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.radioDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="date" ng-model="model.validToDate" ng-required="true" l10n-text="aircrafts.radioDirective.validToDate" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="aircrafts.radioDirective.valid" class="col-sm-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.certNumber" ng-required="true" l10n-text="aircrafts.radioDirective.certNumber" class="col-md-2 col-sm-6"></sc-field>
+    <sc-field type="date" ng-model="model.part.issueDate" ng-required="true" l10n-text="aircrafts.radioDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.part.validToDate" ng-required="true" l10n-text="aircrafts.radioDirective.validToDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="aircrafts.radioDirective.valid" class="col-sm-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.radios.aircraftRadioType" alias="'aircraftRadioTypes'" l10n-text="aircrafts.radioDirective.aircraftRadioType" class="col-mid-4 col-sm-6"></sc-field>
-    <sc-field type="text" ng-model="model.radios.count" l10n-text="aircrafts.radioDirective.count" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.radios.aircraftRadioType" alias="'aircraftRadioTypes'" l10n-text="aircrafts.radioDirective.aircraftRadioType" class="col-mid-4 col-sm-6"></sc-field>
+    <sc-field type="text" ng-model="model.part.radios.count" l10n-text="aircrafts.radioDirective.count" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.radios.producer" l10n-text="aircrafts.radioDirective.producer" class="col-md-3 col-sm-5"></sc-field>
-    <sc-field type="text" ng-model="model.radios.model" l10n-text="aircrafts.radioDirective.model" class="col-md-3 col-sm-5"></sc-field>
+    <sc-field type="text" ng-model="model.part.radios.producer" l10n-text="aircrafts.radioDirective.producer" class="col-md-3 col-sm-5"></sc-field>
+    <sc-field type="text" ng-model="model.part.radios.model" l10n-text="aircrafts.radioDirective.model" class="col-md-3 col-sm-5"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.radios.power" l10n-text="aircrafts.radioDirective.power" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="text" ng-model="model.radios.class" l10n-text="aircrafts.radioDirective.class" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="text" ng-model="model.radios.bandwidth" l10n-text="aircrafts.radioDirective.bandwidth" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.radios.power" l10n-text="aircrafts.radioDirective.power" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.radios.class" l10n-text="aircrafts.radioDirective.class" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.radios.bandwidth" l10n-text="aircrafts.radioDirective.bandwidth" class="col-md-2 col-sm-4"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field custom-type="gva-applications" ng-model="model.applications" set-part="aircraft" l10n-text="aircrafts.radioDirective.applications" class="col-md-6"></sc-field>
   </div>
 </ng-form>

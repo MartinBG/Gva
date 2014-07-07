@@ -42,7 +42,7 @@
     aircraftCertPermitToFly: function () {
       return {
         part: {},
-        files: []
+        applications: []
       };
     }
   };

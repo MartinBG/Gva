@@ -1,22 +1,25 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="text" ng-model="model.ltrInNumber" ng-required="true" l10n-text="aircrafts.smodDirective.ltrInNumber" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="date" ng-model="model.ltrInDate" ng-required="true" l10n-text="aircrafts.smodDirective.ltrInDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.ltrInNumber" ng-required="true" l10n-text="aircrafts.smodDirective.ltrInNumber" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="date" ng-model="model.part.ltrInDate" ng-required="true" l10n-text="aircrafts.smodDirective.ltrInDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.ltrCaaNumber" ng-required="true" l10n-text="aircrafts.smodDirective.ltrCaaNumber" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="date" ng-model="model.ltrCaaDate" ng-required="true" l10n-text="aircrafts.smodDirective.ltrCaaDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.ltrCaaNumber" ng-required="true" l10n-text="aircrafts.smodDirective.ltrCaaNumber" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="date" ng-model="model.part.ltrCaaDate" ng-required="true" l10n-text="aircrafts.smodDirective.ltrCaaDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.caaTo" l10n-text="aircrafts.smodDirective.caaTo" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="text" ng-model="model.caaJob" l10n-text="aircrafts.smodDirective.caaJob" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="text" ng-model="model.caaToAddress" l10n-text="aircrafts.smodDirective.caaToAddress" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="text" ng-model="model.part.caaTo" l10n-text="aircrafts.smodDirective.caaTo" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="text" ng-model="model.part.caaJob" l10n-text="aircrafts.smodDirective.caaJob" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="text" ng-model="model.part.caaToAddress" l10n-text="aircrafts.smodDirective.caaToAddress" class="col-md-4 col-sm-6"></sc-field>
   </div>
   <div class="row">
     <sc-field-group class="col-sm-6 col-md-4" text="aircrafts.smodDirective.scode" validations="{required: 'default'}" field-name="scode">
-      <sc-text ng-model="model.scode" name="scode" required disabled ng-readonly="form.$readonly"></sc-text>
+      <sc-text ng-model="model.part.scode" name="scode" required disabled ng-readonly="form.$readonly"></sc-text>
       <button class="btn btn-default" type="button" ng-click="generateScode()" l10n-text="aircrafts.smodDirective.getScode" ng-disabled="form.$readonly"></button>
     </sc-field-group>
-    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="aircrafts.smodDirective.valid" class="col-sm-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="aircrafts.smodDirective.valid" class="col-sm-2"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field custom-type="gva-applications" ng-model="model.applications" set-part="aircraft" l10n-text="aircrafts.smodDirective.applications" class="col-sm-8 col-md-6"></sc-field>
   </div>
 </ng-form>

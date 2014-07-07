@@ -208,7 +208,7 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^aircraftData$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftParts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^maintenances/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
         {
             return base.GetPart(lotId, path);
@@ -319,19 +319,19 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^documentOccurrences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertMarks/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertSmods/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertNoises/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRadios/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFilePart(lotId, path, caseTypeId);
         }
 
-        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
+        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertSmods/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertMarks/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertNoises/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertRadios/\d+$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM/\d+$)}")]
         public override IHttpActionResult GetApplicationPart(int lotId, string path)
         {
             return base.GetApplicationPart(lotId, path);
@@ -347,8 +347,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftParts$)}"),
-         Route(@"{lotId}/{*path:regex(^maintenances$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM$)}")]
+         Route(@"{lotId}/{*path:regex(^maintenances$)}")]
         public override IHttpActionResult GetParts(int lotId, string path)
         {
             return base.GetParts(lotId, path);
@@ -369,18 +368,19 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftDocumentOthers$)}"),
          Route(@"{lotId}/{*path:regex(^documentOccurrences$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertMarks$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertSmods$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertNoises$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRadios$)}")]
+         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFileParts(lotId, path, caseTypeId);
         }
 
-        [Route(@"{lotId}/{*path:regex(^inspections$)}")]
+        [Route(@"{lotId}/{*path:regex(^inspections$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertSmods$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertMarks$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertPermitsToFly$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertNoises$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertRadios$)}"),
+         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM$)}")]
         public override IHttpActionResult GetApplicationParts(int lotId, string path)
         {
             return base.GetApplicationParts(lotId, path);

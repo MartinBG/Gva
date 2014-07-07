@@ -850,10 +850,7 @@
           removalDocumentNumber: 'Номер на документ за отписване',
           removalDocumentDate: 'Дата на документ за отписване',
           removalInspector: 'Инспектор, отписал ВС',
-          newReg: 'Нова регистрация',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
+          newReg: 'Нова регистрация'
         },
         newReg: {
           title: 'Нова регистрация',
@@ -908,10 +905,7 @@
           ltrInDate: 'Тяхна дата',
           ltrCaaNumber: 'ГВА писмо №',
           ltrCaaDate: 'ГВА дата',
-          newSmod: 'Нов S-code',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
+          newSmod: 'Нов S-code'
         },
         newSmod: {
           title: 'Нов mode S код',
@@ -932,10 +926,7 @@
           ltrInDate: 'Тяхна дата',
           ltrCaaNumber: 'ГВА писмо №',
           ltrCaaDate: 'ГВА дата',
-          newMark: 'Нов знак',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
+          newMark: 'Нов знак'
         },
         newMark: {
           title: 'Нов регистрационен знак',
@@ -973,10 +964,7 @@
           EASA15IssueDate: 'Form 15 Issue',
           EASA15IssueValidToDate: 'Form 15 Valid',
           EASA15IssueRefNo: 'EASA Form 15a',
-          newAirworthiness: 'Нова годност',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
+          newAirworthiness: 'Нова годност'
         },
         newAirworthiness: {
           title: 'Нова летателна годност',
@@ -1014,10 +1002,7 @@
           pointTo: 'Краен пункт',
           planStops: 'Планирани спирания',
           crew: 'Екипаж',
-          newPermit: 'Ново разрешение',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
+          newPermit: 'Ново разрешение'
         },
         newPermit: {
           title: 'Ново разрешение за полет',
@@ -1040,10 +1025,7 @@
           lateral: 'Странично',
           overflight: 'Полет над',
           takeoff: 'Излитане',
-          newNoise: 'Ново удостоверение',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
+          newNoise: 'Ново удостоверение'
         },
         newNoise: {
           title: 'Ново удостоверение за съответствие с нормите за авиационен шум',
@@ -1066,10 +1048,7 @@
           count: 'Брой',
           producer: 'Производител',
           model: 'Модел',
-          newRadio: 'Ново разрешително',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
+          newRadio: 'Ново разрешително'
         },
         newRadio: {
           title: 'Ново разрешително за използване на радиостанция',
@@ -1229,7 +1208,8 @@
           caaTo: 'ГВА писмо до',
           caaJob: 'ГВА писмо длъжност',
           caaToAddress: 'ГВА писмо адрес',
-          getScode: 'Генерирай S-код'
+          getScode: 'Генерирай S-код',
+          applications: 'Заявления'
         },
         markDirective: {
           valid: 'Валиден',
@@ -1237,7 +1217,8 @@
           ltrInNumber: 'Тяхно писмо №',
           ltrInDate: 'Тяхна дата',
           ltrCaaNumber: 'ГВА писмо №',
-          ltrCaaDate: 'ГВА дата'
+          ltrCaaDate: 'ГВА дата',
+          applications: 'Заявления'
         },
         airworthinessDirective: {
           aircraftCertificateType: 'Тип',
@@ -1291,7 +1272,8 @@
           pointFromAlt: 'Начален пункт (англ.)',
           pointToAlt: 'Краен пункт (англ.)',
           planStopsAlt: 'Планирани спирания (англ.)',
-          crewAlt: 'Екипаж (англ.)'
+          crewAlt: 'Екипаж (англ.)',
+          applications: 'Заявления'
         },
         noiseDirective: {
           issueNumber: '№',
@@ -1309,7 +1291,8 @@
           tcdsn: 'TCDSN',
           tcds: 'TCDS',
           chapter: 'Chapter',
-          additionalModification: 'Допълнителна модификация'
+          additionalModification: 'Допълнителна модификация',
+          applications: 'Заявления'
         },
         radioDirective: {
           certNumber: '№',
@@ -1322,7 +1305,8 @@
           model: 'Модел',
           power: 'Мощност',
           'class': 'Клас на излъчване',
-          bandwidth: 'Честотна лента'
+          bandwidth: 'Честотна лента',
+          applications: 'Заявления'
         },
         regDirective: {
           typeCertTitle: 'Типов сертификат',
@@ -1556,8 +1540,6 @@
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
           inspectionPlace: 'Адрес на одитирания обект',
-          bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.',
           application: 'Преписка (Заявление)'
         },
         newInspection: {

@@ -1,14 +1,17 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="text" ng-model="model.ltrInNumber" ng-required="true" l10n-text="aircrafts.markDirective.ltrInNumber" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="date" ng-model="model.ltrInDate" ng-required="true" l10n-text="aircrafts.markDirective.ltrInDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.ltrInNumber" ng-required="true" l10n-text="aircrafts.markDirective.ltrInNumber" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="date" ng-model="model.part.ltrInDate" ng-required="true" l10n-text="aircrafts.markDirective.ltrInDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.ltrCaaNumber" ng-required="true" l10n-text="aircrafts.markDirective.ltrCaaNumber" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="date" ng-model="model.ltrCaaDate" ng-required="true" l10n-text="aircrafts.markDirective.ltrCaaDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.ltrCaaNumber" ng-required="true" l10n-text="aircrafts.markDirective.ltrCaaNumber" class="col-md-4 col-sm-6"></sc-field>
+    <sc-field type="date" ng-model="model.part.ltrCaaDate" ng-required="true" l10n-text="aircrafts.markDirective.ltrCaaDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.mark" ng-required="true" l10n-text="aircrafts.markDirective.mark" class="col-sm-4 col-md-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="aircrafts.markDirective.valid" class="col-sm-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.mark" ng-required="true" l10n-text="aircrafts.markDirective.mark" class="col-sm-4 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="aircrafts.markDirective.valid" class="col-sm-2"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field custom-type="gva-applications" ng-model="model.applications" set-part="aircraft" l10n-text="aircrafts.markDirective.applications" class="col-sm-6"></sc-field>
   </div>
 </ng-form>

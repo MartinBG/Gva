@@ -42,7 +42,7 @@
     aircraftCertRadio: function () {
       return {
         part: {},
-        files: []
+        applications: []
       };
     }
   };

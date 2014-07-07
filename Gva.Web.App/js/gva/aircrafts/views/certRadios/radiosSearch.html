@@ -19,13 +19,4 @@
   </sc-column>
   <sc-column data="part.radios.model" title="aircrafts.radioSearch.model">
   </sc-column>
-  <sc-column data="files[0].bookPageNumber" title="aircrafts.radioSearch.bookPageNumber" width="50px">
-  </sc-column>
-  <sc-column data="files[0].pageCount" title="aircrafts.radioSearch.pageCount" width="50px">
-  </sc-column>
-  <sc-column sortable="false" title="aircrafts.radioSearch.file" width="30px" has-content="true">
-    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files[0].file" title="{{item.files[0].file.name}}">
-      <span class="glyphicon glyphicon-file"></span>
-    </a>
-  </sc-column>
 </sc-datatable>

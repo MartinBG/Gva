@@ -15,13 +15,4 @@
   </sc-column>
   <sc-column data="part.ltrCaaDate" title="aircrafts.markSearch.ltrCaaDate" type="date">
   </sc-column>
-  <sc-column data="files[0].bookPageNumber" title="aircrafts.markSearch.bookPageNumber" width="50px">
-  </sc-column>
-  <sc-column data="files[0].pageCount" title="aircrafts.markSearch.pageCount" width="50px">
-  </sc-column>
-  <sc-column sortable="false" title="aircrafts.markSearch.file" width="30px" has-content="true">
-    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files[0].file" title="{{item.files[0].file.name}}">
-      <span class="glyphicon glyphicon-file"></span>
-    </a>
-  </sc-column>
 </sc-datatable>

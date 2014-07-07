@@ -6,7 +6,7 @@
 
 
     $scope.generateScode = function () {
-      $scope.model.scode = '010001010100110000001001';
+      $scope.model.part.scode = '010001010100110000001001';
     };
   }
 

@@ -42,7 +42,7 @@
     aircraftCertSmod: function () {
       return {
         part: {},
-        files: []
+        applications: []
       };
     }
   };
