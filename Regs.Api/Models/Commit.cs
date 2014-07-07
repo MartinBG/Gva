@@ -50,29 +50,26 @@ namespace Regs.Api.Models
             }
         }
 
-        public IEnumerable<PartVersion> Parts
+        public PartCollection Parts
         {
             get
             {
-                return this.CommitVersions
+                var parts = this.CommitVersions
                     .Select(cv => cv.PartVersion)
                     .Where(pv => pv.PartOperation != PartOperation.Delete);
+
+                return new PartCollection(parts);
             }
         }
 
         public PartVersion GetPart(string path)
         {
-            return this.Parts
-                .Where(pv => pv.Part.Path == path)
-                .SingleOrDefault();
+            return this.Parts.Get(path);
         }
 
         public PartVersion[] GetParts(string pathSpec)
         {
-            return this.Parts
-                .Where(pv => pv.Part.Matches(pathSpec))
-                .OrderBy(pv => pv.Part.Path)
-                .ToArray();
+            return this.Parts.GetAll(pathSpec);
         }
     }
 
