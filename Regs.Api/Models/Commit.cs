@@ -62,6 +62,18 @@ namespace Regs.Api.Models
             }
         }
 
+        public PartCollection OldParts
+        {
+            get
+            {
+                var parts = this.CommitVersions
+                    .Select(cv => cv.PartVersion.OriginalCommit == this ? cv.OldPartVersion : cv.PartVersion)
+                    .Where(pv => pv != null);
+
+                return new PartCollection(parts);
+            }
+        }
+
         public PartVersion GetPart(string path)
         {
             return this.Parts.Get(path);
@@ -110,6 +122,7 @@ namespace Regs.Api.Models
             // Local-only properties
             this.Ignore(t => t.IsLoaded);
             this.Ignore(t => t.Parts);
+            this.Ignore(t => t.OldParts);
         }
     }
 }
