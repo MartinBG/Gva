@@ -2,17 +2,16 @@
 GO 
 
 CREATE TABLE [dbo].[GvaViewAircraftRegMarks] (
-    [LotPartId]              INT           NOT NULL,
     [LotId]                  INT           NOT NULL,
+    [PartIndex]              INT           NOT NULL,
     [RegMark]                NVARCHAR(50)  NOT NULL,
-    CONSTRAINT [PK_GvaViewAircraftRegMarks]                   PRIMARY KEY ([LotPartId]),
-    CONSTRAINT [FK_GvaViewAircraftRegMarks_LotParts]          FOREIGN KEY ([LotPartId]) REFERENCES [dbo].[LotParts] ([LotPartId]),
-    CONSTRAINT [FK_GvaViewAircraftRegMarks_GvaViewAircrafts]  FOREIGN KEY ([LotId])     REFERENCES [dbo].[Lots]     ([LotId])
+    CONSTRAINT [PK_GvaViewAircraftRegMarks]                   PRIMARY KEY ([LotId], [PartIndex]),
+    CONSTRAINT [FK_GvaViewAircraftRegMarks_GvaViewAircrafts]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[GvaViewAircrafts] ([LotId])
 )
 GO
 
 exec spDescTable  N'GvaViewAircraftRegMarks', N'Регистрационни знаци на ВС'
-exec spDescColumn N'GvaViewAircraftRegMarks', N'LotPartId'             , N'Идентификатор на регистрация на ВС.'
 exec spDescColumn N'GvaViewAircraftRegMarks', N'LotId'                 , N'Идентификатор на партида на ВС.'
+exec spDescColumn N'GvaViewAircraftRegMarks', N'PartIndex'             , N'Идентификатор на регистрация на ВС.'
 exec spDescColumn N'GvaViewAircraftRegMarks', N'RegMark'               , N'Рег. знак.'
 GO

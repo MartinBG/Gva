@@ -38,11 +38,9 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationsViewEquipmentHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
             //AircraftView
-            moduleBuilder.RegisterType<AircraftViewDataHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftRegistrationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftRegistrationNumberHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftRegistrationAwHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftRegMarkHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftRegistrationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftRegMarkProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
             //InventaryView
             moduleBuilder.RegisterType<AircraftApplicationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
@@ -90,7 +88,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AirportRepository>().As<IAirportRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegistrationRepository>().As<IAircraftRegistrationRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegMarkRepository>().As<IAircraftRegMarkRepository>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftRegistrationAwRepository>().As<IAircraftRegistrationAwRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ApplicationRepository>().As<IApplicationRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<InventoryRepository>().As<IInventoryRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<FileRepository>().As<IFileRepository>().InstancePerLifetimeScope();

@@ -21,12 +21,11 @@ GO
 :r $(rootPath)\"Tables\GvaViewApplications.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizations.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizationExaminers.sql"
-:r $(rootPath)\"Tables\GvaViewAircrafts.sql"
 :r $(rootPath)\"Tables\GvaViewAirports.sql"
 :r $(rootPath)\"Tables\GvaViewEquipments.sql"
+:r $(rootPath)\"Tables\GvaViewAircrafts.sql"
 :r $(rootPath)\"Tables\GvaViewAircraftRegistrations.sql"
 :r $(rootPath)\"Tables\GvaViewAircraftRegMarks.sql"
-:r $(rootPath)\"Tables\GvaViewAircraftAws.sql"
 :r $(rootPath)\"Tables\GvaWordTemplates.sql"
 
 ---------------------------------------------------------------

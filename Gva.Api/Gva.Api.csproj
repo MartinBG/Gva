@@ -87,11 +87,9 @@
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
-    <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationHandler.cs" />
-    <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationNumberHandler.cs" />
-    <Compile Include="LotEventHandlers\AircraftView\AircraftViewDataHandler.cs" />
-    <Compile Include="LotEventHandlers\AircraftView\AircraftRegistrationAwHandler.cs" />
-    <Compile Include="LotEventHandlers\AircraftView\AircraftRegMarkHandler.cs" />
+    <Compile Include="LotEventHandlers\Aircraft\AircraftProjection.cs" />
+    <Compile Include="LotEventHandlers\Aircraft\AircraftRegistrationProjection.cs" />
+    <Compile Include="LotEventHandlers\Aircraft\AircraftRegMarkProjection.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewOrganizationHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAircraftHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewPersonHandler.cs" />
@@ -150,16 +148,13 @@
     <Compile Include="ModelsDO\PersonInfoDO.cs" />
     <Compile Include="ModelsDO\RegistrationsDO.cs" />
     <Compile Include="ModelsDO\PersonDO.cs" />
+    <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegMark.cs" />
     <Compile Include="Models\GvaViewPersonInspector.cs" />
     <Compile Include="Models\GvaViewOrganizationExaminer.cs" />
-    <Compile Include="Models\GvaViewAircraftRegMark.cs" />
-    <Compile Include="Models\GvaViewAircraftAw.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Models\GvaViewAircraftRegistration.cs" />
+    <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegistration.cs" />
     <Compile Include="Models\GvaViewEquipment.cs" />
     <Compile Include="Models\GvaViewAirport.cs" />
-    <Compile Include="Models\GvaViewAircraft.cs" />
+    <Compile Include="Models\Views\Aircraft\GvaViewAircraft.cs" />
     <Compile Include="Models\GvaCorrespondent.cs" />
     <Compile Include="Models\GvaViewApplication.cs" />
     <Compile Include="Models\GvaViewOrganization.cs" />
@@ -179,10 +174,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GvaApiModule.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegistrationRepository.cs" />
-    <Compile Include="Repositories\AircraftRepository\AircraftRegistrationAwRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegMarkRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\IAircraftRegMarkRepository.cs" />
-    <Compile Include="Repositories\AircraftRepository\IAircraftRegistrationAwRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\IAircraftRegistrationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\IApplicationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\ApplicationRepository.cs" />

@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="LotEvents\CommitEventHandler`1.cs" />
     <Compile Include="LotEvents\CommitEventHandler.cs" />
+    <Compile Include="LotEvents\Projection.cs" />
     <Compile Include="LotEvents\ILotEvent.cs" />
     <Compile Include="LotEvents\ILotEventDispatcher.cs" />
     <Compile Include="LotEvents\LotEventDispatcher.cs" />
