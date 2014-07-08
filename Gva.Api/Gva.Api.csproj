@@ -116,8 +116,8 @@
     <Compile Include="LotEventHandlers\InventoryView\Persons\PersonOtherHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Persons\PersonApplicationHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Persons\PersonTrainingHandler.cs" />
-    <Compile Include="LotEventHandlers\OrganizationView\OrganizationViewDataHandler.cs" />
-    <Compile Include="LotEventHandlers\OrganizationView\OrganizationViewExaminersHandler.cs" />
+    <Compile Include="LotEventHandlers\Organization\OrganizationProjection.cs" />
+    <Compile Include="LotEventHandlers\Organization\OrganizationExaminerProjection.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonViewInspectorHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonViewDataHandler.cs" />
     <Compile Include="LotEventHandlers\PersonView\PersonViewEmploymentHandler.cs" />
@@ -155,14 +155,14 @@
     <Compile Include="Models\ASExamVariantQuestion.cs" />
     <Compile Include="Models\ASExamVariant.cs" />
     <Compile Include="Models\GvaViewPersonInspector.cs" />
-    <Compile Include="Models\GvaViewOrganizationExaminer.cs" />
+    <Compile Include="Models\Views\Organization\GvaViewOrganizationExaminer.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegistration.cs" />
     <Compile Include="Models\Views\Equipment\GvaViewEquipment.cs" />
     <Compile Include="Models\Views\Airport\GvaViewAirport.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraft.cs" />
     <Compile Include="Models\GvaCorrespondent.cs" />
     <Compile Include="Models\GvaViewApplication.cs" />
-    <Compile Include="Models\GvaViewOrganization.cs" />
+    <Compile Include="Models\Views\Organization\GvaViewOrganization.cs" />
     <Compile Include="Models\GvaCaseType.cs" />
     <Compile Include="Models\GvaDbConfiguration.cs" />
     <Compile Include="Models\GvaApplication.cs" />

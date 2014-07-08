@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Common.Api.Models;
 using Common.Data;
 using Common.Linq;
 using Gva.Api.Models;
-using System.Data.Entity;
+using Gva.Api.Models.Views.Organization;
 using Gva.Api.ModelsDO;
-using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.PublisherRepository
 {
@@ -41,7 +41,7 @@ namespace Gva.Api.Repositories.PublisherRepository
             {
                 publishers = this.Concat(publishers,
                     from p in this.unitOfWork.DbContext.Set<GvaViewPerson>()
-                    join i in this.unitOfWork.DbContext.Set<GvaViewOrganizationExaminer>() on p.LotId equals i.PersonLotId
+                    join i in this.unitOfWork.DbContext.Set<GvaViewOrganizationExaminer>() on p.LotId equals i.PersonId
                     where i.Valid && i.PermitedCheck
                     select new PublisherDO
                     {
@@ -67,12 +67,12 @@ namespace Gva.Api.Repositories.PublisherRepository
             if (publisherType == PublisherType.Undefined || publisherType == PublisherType.Organization)
             {
                 publishers = this.Concat(publishers,
-                    from o in this.unitOfWork.DbContext.Set<GvaViewOrganization>()
+                    from o in this.unitOfWork.DbContext.Set<GvaViewOrganization>().Include(o => o.OrganizationType)
                     where o.Valid
                     select new PublisherDO
                     {
                         Name = o.Name,
-                        Code = o.OrganizationType,
+                        Code = o.OrganizationType.Name,
                         PublisherType = PublisherType.Organization
                     });
             }

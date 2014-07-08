@@ -6,7 +6,7 @@ using Gva.Api.LotEventHandlers.Airport;
 using Gva.Api.LotEventHandlers.ApplicationView;
 using Gva.Api.LotEventHandlers.Equipment;
 using Gva.Api.LotEventHandlers.InventoryView;
-using Gva.Api.LotEventHandlers.OrganizationView;
+using Gva.Api.LotEventHandlers.Organization;
 using Gva.Api.LotEventHandlers.PersonView;
 using Gva.Api.Models;
 using Gva.Api.Repositories.AircraftRepository;
@@ -61,8 +61,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonTrainingHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
             //OrganizationView
-            moduleBuilder.RegisterType<OrganizationViewDataHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<OrganizationViewExaminersHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationExaminerProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             
             //PersonView
             moduleBuilder.RegisterType<PersonViewDataHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();

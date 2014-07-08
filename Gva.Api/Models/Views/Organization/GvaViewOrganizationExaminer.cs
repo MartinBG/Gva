@@ -1,16 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using Gva.Api.Models.Views.Organization;
 using Regs.Api.Models;
 
-namespace Gva.Api.Models
+namespace Gva.Api.Models.Views.Organization
 {
     public partial class GvaViewOrganizationExaminer
     {
-        public int PartId { get; set; }
+        public int LotId { get; set; }
 
-        public int? LotId { get; set; }
+        public int PartIndex { get; set; }
 
-        public int? PersonLotId { get; set; }
+        public int PersonId { get; set; }
 
         public string ExaminerCode { get; set; }
 
@@ -22,10 +23,6 @@ namespace Gva.Api.Models
 
         public bool Valid { get; set; }
 
-        public virtual Lot Lot { get; set; }
-
-        public virtual Part Part { get; set; }
-
         public virtual GvaViewOrganization Organization { get; set; }
 
         public virtual GvaViewPerson Person { get; set; }
@@ -36,12 +33,9 @@ namespace Gva.Api.Models
         public GvaViewOrganizationExaminerMap()
         {
             // Primary Key
-            this.HasKey(t => t.PartId);
+            this.HasKey(t => new { t.LotId, t.PartIndex });
 
             // Properties
-            this.Property(t => t.PartId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
             this.Property(t => t.ExaminerCode)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -53,8 +47,8 @@ namespace Gva.Api.Models
             // Table & Column Mappings
             this.ToTable("GvaViewOrganizationExaminers");
             this.Property(t => t.LotId).HasColumnName("LotId");
-            this.Property(t => t.PartId).HasColumnName("LotPartId");
-            this.Property(t => t.PersonLotId).HasColumnName("PersonLotId");
+            this.Property(t => t.PartIndex).HasColumnName("PartIndex");
+            this.Property(t => t.PersonId).HasColumnName("PersonId");
             this.Property(t => t.ExaminerCode).HasColumnName("ExaminerCode");
             this.Property(t => t.StampNum).HasColumnName("StampNum");
             this.Property(t => t.PermitedAW).HasColumnName("PermitedAW");
@@ -62,21 +56,13 @@ namespace Gva.Api.Models
             this.Property(t => t.Valid).HasColumnName("Valid");
 
             // Relationships
-            this.HasRequired(t => t.Lot)
-                .WithMany()
-                .HasForeignKey(t => t.LotId);
-
-            this.HasRequired(t => t.Part)
-                .WithOptional();
-
-            this.HasRequired(t => t.Person)
-                .WithMany(t => t.OrganizationExaminers)
-                .HasForeignKey(t => t.PersonLotId);
-
-            // Hack mapping to workaround joins
             this.HasRequired(t => t.Organization)
                 .WithMany(t => t.Examiners)
                 .HasForeignKey(t => t.LotId);
+
+            this.HasRequired(t => t.Person)
+                .WithMany(t => t.OrganizationExaminers)
+                .HasForeignKey(t => t.PersonId);
         }
     }
 }

@@ -62,8 +62,8 @@ namespace Gva.Api.Controllers
             string ratings = null,
             string organization = null,
             string caseTypeAlias = null,
-            bool? isInspector = null,
-            bool? isExaminer = null,
+            bool isInspector = false,
+            bool isExaminer = false,
             bool exact = false)
         {
             var persons = this.personRepository.GetPersons(lin, linType, uin, names, licences, ratings, organization, caseTypeAlias, isInspector, isExaminer, exact, 0, 1000);

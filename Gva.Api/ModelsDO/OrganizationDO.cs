@@ -1,6 +1,7 @@
 ﻿using Gva.Api.Models;
 using System;
 using System.Collections.Generic;
+using Gva.Api.Models.Views.Organization;
 namespace Gva.Api.ModelsDO
 {
     public class OrganizationDO
@@ -12,7 +13,7 @@ namespace Gva.Api.ModelsDO
             this.CAO = o.CAO;
             this.Uin = o.Uin;
             this.Valid = o.Valid;
-            this.OrganizationType = o.OrganizationType;
+            this.OrganizationType = o.OrganizationType.Name;
             this.DateValidTo = o.DateValidTo;
             this.DateCAOValidTo = o.DateCAOValidTo;
         }

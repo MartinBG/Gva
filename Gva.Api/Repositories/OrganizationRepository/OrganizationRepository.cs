@@ -5,6 +5,7 @@ using Gva.Api.Models;
 using System;
 using Common.Linq;
 using System.Data.Entity;
+using Gva.Api.Models.Views.Organization;
 
 namespace Gva.Api.Repositories.OrganizationRepository
 {
@@ -52,6 +53,7 @@ namespace Gva.Api.Repositories.OrganizationRepository
 
             return this.unitOfWork.DbContext.Set<GvaViewOrganization>()
                 .Include(o => o.GvaLotCases)
+                .Include(o => o.OrganizationType)
                 .Where(predicate)
                 .OrderBy(o => o.Name)
                 .WithOffsetAndLimit(offset, limit)
@@ -61,6 +63,7 @@ namespace Gva.Api.Repositories.OrganizationRepository
         public GvaViewOrganization GetOrganization(int organizationId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewOrganization>()
+                .Include(o => o.OrganizationType)
                 .SingleOrDefault(p => p.LotId == organizationId);
         }
     }

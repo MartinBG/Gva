@@ -3,6 +3,7 @@ using Common.Data;
 using Gva.Api.Models.Views.Aircraft;
 using Gva.Api.Models.Views.Airport;
 using Gva.Api.Models.Views.Equipment;
+using Gva.Api.Models.Views.Organization;
 
 namespace Gva.Api.Models
 {

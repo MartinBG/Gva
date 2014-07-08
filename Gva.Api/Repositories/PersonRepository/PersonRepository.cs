@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Common.Data;
 using Common.Linq;
 using Gva.Api.Models;
-using System.Data.Entity;
-using Gva.Api.ModelsDO;
-using Regs.Api.Models;
+using Gva.Api.Models.Views.Organization;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -27,8 +26,8 @@ namespace Gva.Api.Repositories.PersonRepository
             string ratings = null,
             string organization = null,
             string caseTypeAlias = null,
-            bool? isInspector = null,
-            bool? isExaminer = null,
+            bool isInspector = false,
+            bool isExaminer = false,
             bool exact = false,
             int offset = 0,
             int? limit = null)
@@ -44,7 +43,13 @@ namespace Gva.Api.Repositories.PersonRepository
                 .AndStringCollectionContains(p => p.Ratings.Select(r => r.RatingType), ratings)
                 .AndStringMatches(p => p.Organization, organization, exact);
 
+            if (isExaminer)
+            {
+                predicate = predicate.And(p => p.OrganizationExaminers.Count != 0);
+            }
+
             var persons = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                .Include(p => p.OrganizationExaminers)
                 .Include(p => p.Licences)
                 .Include(p => p.Ratings)
                 .Where(predicate);
@@ -58,17 +63,10 @@ namespace Gva.Api.Repositories.PersonRepository
                           select p;
             }
 
-            if (isInspector != null)
+            if (isInspector)
             {
                 persons = from p in persons
                           join i in this.unitOfWork.DbContext.Set<GvaViewPersonInspector>() on p.LotId equals i.LotId
-                          select p;
-            }
-
-            if (isExaminer != null)
-            {
-                persons = from p in persons
-                          join i in this.unitOfWork.DbContext.Set<GvaViewOrganizationExaminer>() on p.LotId equals i.PersonLotId
                           select p;
             }
 

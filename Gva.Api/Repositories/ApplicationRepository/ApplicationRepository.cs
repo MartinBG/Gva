@@ -10,6 +10,7 @@ using Gva.Api.Models;
 using Gva.Api.Models.Views.Aircraft;
 using Gva.Api.Models.Views.Airport;
 using Gva.Api.Models.Views.Equipment;
+using Gva.Api.Models.Views.Organization;
 using Gva.Api.ModelsDO;
 using Regs.Api.Models;
 
@@ -43,7 +44,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 from va2 in va1.DefaultIfEmpty()
                 join p in this.unitOfWork.DbContext.Set<GvaViewPerson>() on va2.LotId equals p.LotId into p1
                 from p2 in p1.DefaultIfEmpty()
-                join o in this.unitOfWork.DbContext.Set<GvaViewOrganization>() on va2.LotId equals o.LotId into o1
+                join o in this.unitOfWork.DbContext.Set<GvaViewOrganization>().Include(o => o.OrganizationType) on va2.LotId equals o.LotId into o1
                 from o2 in o1.DefaultIfEmpty()
                 join ac in this.unitOfWork.DbContext.Set<GvaViewAircraft>().Include(a => a.AirCategory).Include(a => a.AircraftProducer) on va2.LotId equals ac.LotId into ac1
                 from ac2 in ac1.DefaultIfEmpty()

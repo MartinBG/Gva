@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Gva.Api.Models;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using Gva.Api.Models.Views.Organization;
 
 namespace Gva.Api.Repositories.OrganizationRepository
 {

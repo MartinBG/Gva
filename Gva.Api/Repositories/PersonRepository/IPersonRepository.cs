@@ -15,8 +15,8 @@ namespace Gva.Api.Repositories.PersonRepository
             string ratings = null,
             string organization = null,
             string caseTypeAlias = null,
-            bool? isInspector = null,
-            bool? isExaminer = null,
+            bool isInspector = false,
+            bool isExaminer = false,
             bool exact = false,
             int offset = 0,
             int? limit = null);

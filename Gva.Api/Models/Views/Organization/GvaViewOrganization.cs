@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using Common.Api.Models;
 using Regs.Api.Models;
 
-namespace Gva.Api.Models
+namespace Gva.Api.Models.Views.Organization
 {
     public partial class GvaViewOrganization
     {
@@ -20,13 +21,15 @@ namespace Gva.Api.Models
 
         public bool Valid { get; set; }
 
-        public string OrganizationType { get; set; }
+        public int OrganizationTypeId { get; set; }
 
         public DateTime? DateValidTo { get; set; }
 
         public DateTime? DateCAOValidTo { get; set; }
 
         public virtual Lot Lot { get; set; }
+
+        public virtual NomValue OrganizationType { get; set; }
 
         public virtual ICollection<GvaViewOrganizationExaminer> Examiners { get; set; }
 
@@ -58,7 +61,7 @@ namespace Gva.Api.Models
             this.Property(t => t.Uin)
             .HasMaxLength(50);
 
-            this.Property(t => t.OrganizationType)
+            this.Property(t => t.OrganizationTypeId)
                 .IsRequired();
 
             // Table & Column Mappings
@@ -69,13 +72,16 @@ namespace Gva.Api.Models
             this.Property(t => t.Uin).HasColumnName("Uin");
             this.Property(t => t.CAO).HasColumnName("CAO");
             this.Property(t => t.Valid).HasColumnName("Valid");
-            this.Property(t => t.OrganizationType).HasColumnName("OrganizationType");
+            this.Property(t => t.OrganizationTypeId).HasColumnName("OrganizationTypeId");
             this.Property(t => t.DateValidTo).HasColumnName("DateValidTo");
             this.Property(t => t.DateCAOValidTo).HasColumnName("DateCAOValidTo");
 
             // Relationships
             this.HasRequired(t => t.Lot)
                 .WithOptional();
+            this.HasRequired(t => t.OrganizationType)
+                .WithMany()
+                .HasForeignKey(t => t.OrganizationTypeId);
         }
     }
 }
