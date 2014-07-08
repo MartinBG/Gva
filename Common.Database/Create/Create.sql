@@ -35,6 +35,19 @@ GO
 :r $(rootPath)\"Tables\Noms\Noms.sql"
 :r $(rootPath)\"Tables\Noms\NomValues.sql"
 
+
+-- Classifications
+:r $(rootPath)"\Tables\Classifications\Classifications.sql"
+:r $(rootPath)"\Tables\Classifications\ClassificationRelations.sql"
+:r $(rootPath)"\Tables\Classifications\ClassificationPermissions.sql"
+
+-- Units
+:r $(rootPath)"\Tables\Units\UnitTypes.sql"
+:r $(rootPath)"\Tables\Units\Units.sql"
+:r $(rootPath)"\Tables\Units\UnitRelations.sql"
+:r $(rootPath)"\Tables\Units\UnitClassifications.sql"
+:r $(rootPath)"\Tables\Units\UnitUsers.sql"
+
 ---------------------------------------------------------------
 --Functions
 ---------------------------------------------------------------
@@ -49,3 +62,5 @@ GO
 :r $(rootPath)\"..\Insert\Noms\boolean.sql"
 :r $(rootPath)\"..\Insert\TestBlobs.sql"
 :r $(rootPath)\"..\Insert\TestUsers.sql"
+
+:r $(rootPath)\"..\Insert\Classifications\ClassificationPermissions.sql"

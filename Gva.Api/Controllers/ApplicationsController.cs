@@ -27,6 +27,7 @@ using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.AirportRepository;
 using System.IO;
+using Common.Api.Models;
 
 namespace Gva.Api.Controllers
 {
@@ -569,7 +570,7 @@ namespace Gva.Api.Controllers
             UserContext userContext = this.Request.GetUserContext();
 
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == userContext.UserId);
-            DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
+            ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocCasePartType docCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>().SingleOrDefault(e => e.Alias == "Control");
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.IsActive).ToList();
 
@@ -591,7 +592,7 @@ namespace Gva.Api.Controllers
                 offset,
                 docCasePartType,
                 docStatuses,
-                docUnitPermissionRead,
+                readPermission,
                 unitUser,
                 out totalCount);
 

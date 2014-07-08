@@ -28,7 +28,7 @@ DECLARE @UnitTokens TABLE (
       UnitId int,
 	  Token nvarchar(200), 
 	  CreateToken nvarchar(200),
-	  DocUnitPermissionId int
+	  ClassificationPermissionId int
 	);
 
 --@Docs инициализиране на таблицата с документите
@@ -65,8 +65,8 @@ insert into @CaseTokens(RootDocId, DocId, Token)
 		)
 
 --определяне на token за четене на документ, за листата на звената по документа
-insert into @UnitTokens(UnitId, Token, CreateToken, DocUnitPermissionId)
-	select UnitId, Token, CreateToken, DocUnitPermissionId
+insert into @UnitTokens(UnitId, Token, CreateToken, ClassificationPermissionId)
+	select s1.UnitId, s1.Token, s1.CreateToken, s2.ClassificationPermissionId
 	from (
 		select distinct u.UnitId, d.Token, 'doc' as CreateToken
 		from @DocTokens d
@@ -74,25 +74,19 @@ insert into @UnitTokens(UnitId, Token, CreateToken, DocUnitPermissionId)
 			CROSS APPLY dbo.fnGetSubordinateUnits(du.UnitId) dusu
 			inner join Units u on dusu.UnitId  = u.UnitId 
 			inner join UnitTypes ut  on u.UnitTypeId  = ut.UnitTypeId
-			--CROSS APPLY dbo.fnGetParentUnits(u.UnitId) pu
-			--inner join UnitClassifications uc on uc.UnitId = pu.UnitId 
-			--CROSS APPLY dbo.fnGetParentClassifications(uc.ClassificationId) ucpc
-			--inner join DocClassifications dc on dc.DocID = d.DocID
-			--CROSS APPLY dbo.fnGetParentClassifications(dc.ClassificationId) dcpc
 		where d.DocCasePartTypeId in (select DocCasePartTypeId from DocCasePartTypes where Alias in ('Public', 'Internal'))
 			and u.IsActive = 1 
 			and ut.Alias = 'Employee'
-			--and ucpc.ClassificationId = dcpc.ClassificationId
 		) s1, 
 	(
-		select DocUnitPermissionId 
-		from DocUnitPermissions 
+		select ClassificationPermissionId 
+		from ClassificationPermissions 
 		where 
 		Alias = 'Read'
 		) s2
 	union 
 	--определяне на token за редакция на документ, за листата на звената създали документа
-	select UnitId, Token, CreateToken, DocUnitPermissionId
+	select s1.UnitId, s1.Token, s1.CreateToken, s2.ClassificationPermissionId
 	from (
 		select distinct u.UnitId, d.Token, 'doc' as CreateToken
 		from @DocTokens d
@@ -101,27 +95,21 @@ insert into @UnitTokens(UnitId, Token, CreateToken, DocUnitPermissionId)
 			CROSS APPLY dbo.fnGetSubordinateUnits(du.UnitId) dusu
 			inner join Units u on dusu.UnitId  = u.UnitId 
 			inner join UnitTypes ut  on u.UnitTypeId  = ut.UnitTypeId
-			--CROSS APPLY dbo.fnGetParentUnits(u.UnitId) pu
-			--inner join UnitClassifications uc on uc.UnitId = pu.UnitId 
-			--CROSS APPLY dbo.fnGetParentClassifications(uc.ClassificationId) ucpc
-			--inner join DocClassifications dc on dc.DocID = d.DocID
-			--CROSS APPLY dbo.fnGetParentClassifications(dc.ClassificationId) dcpc
 		where 
 			dur.Alias in ('ImportedBy', 'MadeBy', 'Editors')
 			and u.IsActive = 1 
 			and ut.Alias = 'Employee'
-			--and ucpc.ClassificationId = dcpc.ClassificationId
 		) s1, 
 	(
-		select DocUnitPermissionId 
-		from DocUnitPermissions 
+		select ClassificationPermissionId 
+		from ClassificationPermissions 
 		where 
 		Alias in ('Read', 'Edit')
 		) s2
 
 --определяне на token за четене на преписката, за листата на звената по документите резолюция и задача
-insert into @UnitTokens(UnitId, Token, CreateToken, DocUnitPermissionId)
-	select UnitId, Token, CreateToken, DocUnitPermissionId
+insert into @UnitTokens(UnitId, Token, CreateToken, ClassificationPermissionId)
+	select s1.UnitId, s1.Token, s1.CreateToken, s2.ClassificationPermissionId
 	from (
 		select distinct u.UnitId, 'doc#' + CONVERT(varchar(10), dr2.DocId) as Token, 'case' as CreateToken
 		from @CaseTokens c
@@ -146,30 +134,30 @@ insert into @UnitTokens(UnitId, Token, CreateToken, DocUnitPermissionId)
 			--and ucpc.ClassificationId = dcpc.ClassificationId
 		) s1, 
 	(
-		select DocUnitPermissionId 
-		from DocUnitPermissions 
+		select ClassificationPermissionId 
+		from ClassificationPermissions 
 		where 
 		Alias = 'Read'
 		) s2
 
 --merge Token
-insert into UnitTokens (UnitId, Token, CreateToken, DocUnitPermissionId) 
-	select UnitId, Token, CreateToken, DocUnitPermissionId 
+insert into UnitTokens (UnitId, Token, CreateToken, ClassificationPermissionId) 
+	select UnitId, Token, CreateToken, ClassificationPermissionId 
 	from @UnitTokens s
 	where not exists (select null from UnitTokens t 
-		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.DocUnitPermissionId = s.DocUnitPermissionId)
+		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId)
 
 delete from t
 	from UnitTokens t
 	where not exists (select null from @UnitTokens s
-		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.DocUnitPermissionId = s.DocUnitPermissionId)
+		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId)
 	and t.CreateToken = 'doc'
 	and t.Token in (select token from @DocTokens )
 
 delete from t
 	from UnitTokens t
 	where not exists (select null from @UnitTokens s
-		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.DocUnitPermissionId = s.DocUnitPermissionId)
+		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId)
 	and t.CreateToken = 'case'
 	and t.Token in (select token from @CaseTokens )
 

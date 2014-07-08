@@ -18,31 +18,31 @@ where Username in ('admin', 'system')
 GO
 
 print 'Set system to all Classifications'
-insert into UnitClassifications (UnitId, ClassificationId, ClassificationRoleId)
-	select UnitId, ClassificationId, ClassificationRoleId
+insert into UnitClassifications (UnitId, ClassificationId, ClassificationPermissionId)
+	select UnitId, ClassificationId, ClassificationPermissionId
 	from (
-		select (select uu.UnitId from Users u inner join UnitUsers uu on u.UserId=uu.UserId where u.Username = 'system') as UnitId, c.ClassificationId, r.ClassificationRoleId   
+		select (select uu.UnitId from Users u inner join UnitUsers uu on u.UserId=uu.UserId where u.Username = 'system') as UnitId, c.ClassificationId, r.ClassificationPermissionId   
 		from Classifications c cross join 
-			ClassificationRoles r) a
-	where not (ClassificationId=1 and ClassificationRoleId=2)
+			ClassificationPermissions r) a
+	where not (ClassificationId=1 and ClassificationPermissionId=2)
 		and not exists (select null from UnitClassifications uc1 
 			where uc1.UnitId = a.UnitId 
 			and uc1.ClassificationId = a.ClassificationId 
-			and  uc1.ClassificationRoleId = a.ClassificationRoleId)
+			and  uc1.ClassificationPermissionId = a.ClassificationPermissionId)
 
 GO
 print 'Set admin to all Classifications'
-insert into UnitClassifications (UnitId, ClassificationId, ClassificationRoleId)
-	select UnitId, ClassificationId, ClassificationRoleId
+insert into UnitClassifications (UnitId, ClassificationId, ClassificationPermissionId)
+	select UnitId, ClassificationId, ClassificationPermissionId
 	from (
-		select (select uu.UnitId from Users u inner join UnitUsers uu on u.UserId=uu.UserId where u.Username = 'admin') as UnitId, c.ClassificationId, r.ClassificationRoleId   
+		select (select uu.UnitId from Users u inner join UnitUsers uu on u.UserId=uu.UserId where u.Username = 'admin') as UnitId, c.ClassificationId, r.ClassificationPermissionId   
 		from Classifications c cross join 
-			ClassificationRoles r) a
-	where not (ClassificationId=1 and ClassificationRoleId=2)
+			ClassificationPermissions r) a
+	where not (ClassificationId=1 and ClassificationPermissionId=2)
 		and not exists (select null from UnitClassifications uc1 
 			where uc1.UnitId = a.UnitId 
 			and uc1.ClassificationId = a.ClassificationId 
-			and  uc1.ClassificationRoleId = a.ClassificationRoleId)
+			and  uc1.ClassificationPermissionId = a.ClassificationPermissionId)
 	
 GO
 

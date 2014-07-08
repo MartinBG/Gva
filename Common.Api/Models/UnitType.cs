@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Docs.Api.Models
+namespace Common.Api.Models
 {
-    public partial class DocUnitPermission
+    public partial class UnitType
     {
-        public int DocUnitPermissionId { get; set; }
+        public UnitType()
+        {
+            this.Units = new List<Unit>();
+        }
+
+        public int UnitTypeId { get; set; }
 
         public string Name { get; set; }
 
@@ -14,14 +19,16 @@ namespace Docs.Api.Models
         public bool IsActive { get; set; }
 
         public byte[] Version { get; set; }
+
+        public virtual ICollection<Unit> Units { get; set; }
     }
 
-    public class DocUnitPermissionMap : EntityTypeConfiguration<DocUnitPermission>
+    public class UnitTypeMap : EntityTypeConfiguration<UnitType>
     {
-        public DocUnitPermissionMap()
+        public UnitTypeMap()
         {
             // Primary Key
-            this.HasKey(t => t.DocUnitPermissionId);
+            this.HasKey(t => t.UnitTypeId);
 
             // Properties
             this.Property(t => t.Name)
@@ -39,8 +46,8 @@ namespace Docs.Api.Models
                 .IsRowVersion();
 
             // Table & Column Mappings
-            this.ToTable("DocUnitPermissions");
-            this.Property(t => t.DocUnitPermissionId).HasColumnName("DocUnitPermissionId");
+            this.ToTable("UnitTypes");
+            this.Property(t => t.UnitTypeId).HasColumnName("UnitTypeId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.IsActive).HasColumnName("IsActive");

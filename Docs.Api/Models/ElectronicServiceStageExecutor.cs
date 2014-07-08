@@ -16,7 +16,7 @@ namespace Docs.Api.Models
 
         public virtual ElectronicServiceStage ElectronicServiceStage { get; set; }
 
-        public virtual Unit Unit { get; set; }
+        public virtual Common.Api.Models.Unit Unit { get; set; }
     }
 
     public class ElectronicServiceStageExecutorMap : EntityTypeConfiguration<ElectronicServiceStageExecutor>
@@ -46,7 +46,7 @@ namespace Docs.Api.Models
                 .WithMany(t => t.ElectronicServiceStageExecutors)
                 .HasForeignKey(d => d.ElectronicServiceStageId);
             this.HasRequired(t => t.Unit)
-                .WithMany(t => t.ElectronicServiceStageExecutors)
+                .WithMany()
                 .HasForeignKey(d => d.UnitId);
         }
     }

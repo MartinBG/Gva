@@ -1,6 +1,6 @@
 using System.Data.Entity.ModelConfiguration;
 
-namespace Docs.Api.Models
+namespace Common.Api.Models
 {
     public partial class UnitClassification
     {
@@ -10,11 +10,11 @@ namespace Docs.Api.Models
 
         public int ClassificationId { get; set; }
 
-        public int ClassificationRoleId { get; set; }
+        public int ClassificationPermissionId { get; set; }
 
         public byte[] Version { get; set; }
 
-        public virtual ClassificationRole ClassificationRole { get; set; }
+        public virtual ClassificationPermission ClassificationPermission { get; set; }
 
         public virtual Classification Classification { get; set; }
 
@@ -40,13 +40,13 @@ namespace Docs.Api.Models
             this.Property(t => t.UnitClassificationId).HasColumnName("UnitClassificationId");
             this.Property(t => t.UnitId).HasColumnName("UnitId");
             this.Property(t => t.ClassificationId).HasColumnName("ClassificationId");
-            this.Property(t => t.ClassificationRoleId).HasColumnName("ClassificationRoleId");
+            this.Property(t => t.ClassificationPermissionId).HasColumnName("ClassificationPermissionId");
             this.Property(t => t.Version).HasColumnName("Version");
 
             // Relationships
-            this.HasRequired(t => t.ClassificationRole)
-                .WithMany(t => t.UnitClassifications)
-                .HasForeignKey(d => d.ClassificationRoleId);
+            this.HasRequired(t => t.ClassificationPermission)
+                .WithMany()
+                .HasForeignKey(d => d.ClassificationPermissionId);
             this.HasRequired(t => t.Classification)
                 .WithMany(t => t.UnitClassifications)
                 .HasForeignKey(d => d.ClassificationId);

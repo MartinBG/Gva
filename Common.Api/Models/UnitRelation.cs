@@ -1,6 +1,6 @@
 using System.Data.Entity.ModelConfiguration;
 
-namespace Docs.Api.Models
+namespace Common.Api.Models
 {
     public partial class UnitRelation
     {

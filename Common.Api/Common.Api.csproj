@@ -118,7 +118,16 @@
     <Compile Include="Blob\MultipartBlobStreamProvider.cs" />
     <Compile Include="Blob\MultipartBlobData.cs" />
     <Compile Include="Models\Blob.cs" />
+    <Compile Include="Models\Classification.cs" />
+    <Compile Include="Models\ClassificationRelation.cs" />
     <Compile Include="Models\DbContextExtensions.cs" />
+    <Compile Include="Models\ClassificationPermission.cs" />
+    <Compile Include="Models\Unit.cs" />
+    <Compile Include="Models\UnitClassification.cs" />
+    <Compile Include="Models\UnitRelation.cs" />
+    <Compile Include="Models\UnitToken.cs" />
+    <Compile Include="Models\UnitType.cs" />
+    <Compile Include="Models\UnitUser.cs" />
     <Compile Include="OAuth\ApplicationOAuthProvider.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\IRepository.cs" />

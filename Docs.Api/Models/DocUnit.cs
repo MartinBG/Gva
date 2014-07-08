@@ -23,7 +23,7 @@ namespace Docs.Api.Models
 
         public virtual DocUnitRole DocUnitRole { get; set; }
 
-        public virtual Unit Unit { get; set; }
+        public virtual Common.Api.Models.Unit Unit { get; set; }
 
         public virtual Common.Api.Models.User User { get; set; }
     }
@@ -61,7 +61,7 @@ namespace Docs.Api.Models
                 .WithMany(t => t.DocUnits)
                 .HasForeignKey(d => d.DocUnitRoleId);
             this.HasRequired(t => t.Unit)
-                .WithMany(t => t.DocUnits)
+                .WithMany()
                 .HasForeignKey(d => d.UnitId);
             this.HasRequired(t => t.User)
                 .WithMany()

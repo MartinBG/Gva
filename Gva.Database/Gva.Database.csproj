@@ -71,19 +71,6 @@
     <Content Include="Create\Tables\GvaViewPersons.sql" />
     <Content Include="Insert\asExams.sql" />
     <Content Include="Insert\GvaCorrespondents.sql" />
-    <Content Include="Insert\gvaWordTemplates.sql" />
-    <Content Include="Insert\Lots\aircraft.sql" />
-    <Content Include="Insert\Lots\airport.sql" />
-    <Content Include="Insert\Lots\equipment.sql" />
-    <Content Include="Insert\Lots\organization.sql" />
-    <Content Include="Insert\Lots\person.sql" />
-    <Content Include="Insert\Noms\Aircrafts\inspectorTypes.sql" />
-    <Content Include="Insert\Noms\Aircrafts\_aircraftsMigrationNoms.sql" />
-    <Content Include="Insert\Noms\Airports\_airportsMigrationNoms.sql" />
-    <Content Include="Insert\Noms\Common\_commonMigrationNoms.sql" />
-    <Content Include="Insert\Noms\Organizations\_organizationsMigrationNoms.sql" />
-    <Content Include="Insert\Noms\Organizations\testScores.sql" />
-    <Content Include="Create\Tables\GvaWordTemplates.sql" />
     <Content Include="Insert\GvaExcelConfig\ClassificationRelations.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
@@ -129,6 +116,19 @@
     <Content Include="Insert\GvaExcelConfig\Users.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
+    <Content Include="Insert\gvaWordTemplates.sql" />
+    <Content Include="Insert\Lots\aircraft.sql" />
+    <Content Include="Insert\Lots\airport.sql" />
+    <Content Include="Insert\Lots\equipment.sql" />
+    <Content Include="Insert\Lots\organization.sql" />
+    <Content Include="Insert\Lots\person.sql" />
+    <Content Include="Insert\Noms\Aircrafts\inspectorTypes.sql" />
+    <Content Include="Insert\Noms\Aircrafts\_aircraftsMigrationNoms.sql" />
+    <Content Include="Insert\Noms\Airports\_airportsMigrationNoms.sql" />
+    <Content Include="Insert\Noms\Common\_commonMigrationNoms.sql" />
+    <Content Include="Insert\Noms\Organizations\_organizationsMigrationNoms.sql" />
+    <Content Include="Insert\Noms\Organizations\testScores.sql" />
+    <Content Include="Create\Tables\GvaWordTemplates.sql" />
     <Content Include="Insert\Noms\Aircrafts\aircraftRemovalReasonsFm.sql" />
     <Content Include="Create\Tables\GvaWordTemplates.sql" />
     <Content Include="Insert\GvaExcelConfig\ConfigFinalize.sql" />

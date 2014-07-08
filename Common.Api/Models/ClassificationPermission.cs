@@ -1,16 +1,11 @@
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Docs.Api.Models
+namespace Common.Api.Models
 {
-    public partial class ClassificationRole
+    public partial class ClassificationPermission
     {
-        public ClassificationRole()
-        {
-            this.UnitClassifications = new List<UnitClassification>();
-        }
-
-        public int ClassificationRoleId { get; set; }
+        public int ClassificationPermissionId { get; set; }
 
         public string Name { get; set; }
 
@@ -19,16 +14,14 @@ namespace Docs.Api.Models
         public bool IsActive { get; set; }
 
         public byte[] Version { get; set; }
-
-        public virtual ICollection<UnitClassification> UnitClassifications { get; set; }
     }
 
-    public class ClassificationRoleMap : EntityTypeConfiguration<ClassificationRole>
+    public class ClassificationPermissionMap : EntityTypeConfiguration<ClassificationPermission>
     {
-        public ClassificationRoleMap()
+        public ClassificationPermissionMap()
         {
             // Primary Key
-            this.HasKey(t => t.ClassificationRoleId);
+            this.HasKey(t => t.ClassificationPermissionId);
 
             // Properties
             this.Property(t => t.Name)
@@ -46,8 +39,8 @@ namespace Docs.Api.Models
                 .IsRowVersion();
 
             // Table & Column Mappings
-            this.ToTable("ClassificationRoles");
-            this.Property(t => t.ClassificationRoleId).HasColumnName("ClassificationRoleId");
+            this.ToTable("ClassificationPermissions");
+            this.Property(t => t.ClassificationPermissionId).HasColumnName("ClassificationPermissionId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.IsActive).HasColumnName("IsActive");

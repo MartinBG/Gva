@@ -68,9 +68,6 @@
     <Content Include="Create\Tables\AdministrativeEmails\AdministrativeEmailStatuses.sql" />
     <Content Include="Create\Tables\AdministrativeEmails\AdministrativeEmailTypes.sql" />
     <Content Include="Create\Tables\Assignments\AssignmentTypes.sql" />
-    <Content Include="Create\Tables\Classifications\ClassificationRelations.sql" />
-    <Content Include="Create\Tables\Classifications\ClassificationRoles.sql" />
-    <Content Include="Create\Tables\Classifications\Classifications.sql" />
     <Content Include="Create\Tables\Correspondents\CorrespondentContacts.sql" />
     <Content Include="Create\Tables\Correspondents\CorrespondentGroups.sql" />
     <Content Include="Create\Tables\Correspondents\Correspondents.sql" />
@@ -101,7 +98,6 @@
     <Content Include="Create\Tables\Documents\DocTypeGroups.sql" />
     <Content Include="Create\Tables\Documents\DocTypes.sql" />
     <Content Include="Create\Tables\Documents\DocTypeUnitRoles.sql" />
-    <Content Include="Create\Tables\Documents\DocUnitPermissions.sql" />
     <Content Include="Create\Tables\Documents\DocUnitRoles.sql" />
     <Content Include="Create\Tables\Documents\DocUnits.sql" />
     <Content Include="Create\Tables\Documents\DocWorkflowActions.sql" />
@@ -116,11 +112,6 @@
     <Content Include="Create\Tables\Registers\RegisterIndexes.sql" />
     <Content Include="Create\Tables\Tokens\DocTokens.sql" />
     <Content Include="Create\Tables\Tokens\UnitTokens.sql" />
-    <Content Include="Create\Tables\Units\UnitClassifications.sql" />
-    <Content Include="Create\Tables\Units\UnitRelations.sql" />
-    <Content Include="Create\Tables\Units\Units.sql" />
-    <Content Include="Create\Tables\Units\UnitTypes.sql" />
-    <Content Include="Create\Tables\Units\UnitUsers.sql" />
     <Content Include="Create\Views\vwDocUsers.sql" />
     <Content Include="Insert\AdministrativeEmails\AdministrativeEmailStatuses.sql" />
     <Content Include="Insert\AdministrativeEmails\AdministrativeEmailTypes.sql" />
@@ -143,74 +134,15 @@
     <Content Include="Insert\Docs\DocTypeClassifications.sql" />
     <Content Include="Insert\Docs\DocTypeGroups.sql" />
     <Content Include="Insert\Docs\DocTypes.sql" />
-    <Content Include="Insert\Docs\DocUnitPermissions.sql" />
     <Content Include="Insert\Docs\DocUnitRoles.sql" />
     <Content Include="Insert\Docs\DocWorkflowActions.sql" />
     <Content Include="Insert\Docs\RegisterIndexes.sql" />
     <Content Include="Insert\ElectronicServiceStages\ElectronicServiceStageExecutors.sql" />
     <Content Include="Insert\ElectronicServiceStages\ElectronicServiceStages.sql" />
-    <Content Include="Insert\GvaExcelConfig\ClassificationRelations.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\Classifications.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\ConfigFinalize.sql" />
-    <Content Include="Insert\GvaExcelConfig\DocFileTypes.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\DocTypeClassifications.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\DocTypeGroups.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\DocTypes.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\DocTypeUnitRoles.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\ElectronicServiceStageExecutors.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\ElectronicServiceStages.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\ExcelConfig.xml" />
-    <Content Include="Insert\GvaExcelConfig\IrregularityTypes.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\RegisterIndexes.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\UnitClassifications.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\UnitRelations.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\Units.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
-    <Content Include="Insert\GvaExcelConfig\Users.sql">
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </Content>
     <Content Include="Insert\IncomingDocs\IncomingDocStatuses.sql" />
     <Content Include="Insert\Units\UnitClassifications.sql" />
     <Content Include="Insert\Units\UnitRelations.sql" />
     <Content Include="Insert\Units\UnitTypes.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Insert\GvaExcelConfig\ExcelConfig.log">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ExcelConfig.tt</DependentUpon>
-    </None>
-    <None Include="Insert\GvaExcelConfig\ExcelConfig.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ExcelConfig.log</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

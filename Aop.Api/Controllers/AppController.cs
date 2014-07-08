@@ -3,6 +3,7 @@ using Aop.Api.Models;
 using Aop.Api.Repositories.Aop;
 using Aop.Api.Utils;
 using Aop.Api.WordTemplates;
+using Common.Api.Models;
 using Common.Api.Repositories.UserRepository;
 using Common.Api.UserContext;
 using Common.Blob;
@@ -330,7 +331,7 @@ namespace Aop.Api.Controllers
             offset = 0;
 
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
-            DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
+            ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
             DocCasePartType docCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>().SingleOrDefault(e => e.Alias == "Control");
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.IsActive).ToList();
@@ -356,7 +357,7 @@ namespace Aop.Api.Controllers
                       limit,
                       offset,
                       docCasePartType,
-                      docUnitPermissionRead,
+                      readPermission,
                       unitUser,
                       out totalCount);
 

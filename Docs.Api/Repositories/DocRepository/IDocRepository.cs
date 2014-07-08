@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Api.Repositories;
 using System.Linq.Expressions;
+using Common.Api.Models;
 
 namespace Docs.Api.Repositories.DocRepository
 {
@@ -118,7 +119,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount);
 
@@ -138,7 +139,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount);
 
@@ -158,7 +159,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount);
 
@@ -178,7 +179,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             List<DocUnitRole> docUnitRoles,
             UnitUser unitUser,
             out int totalCount);
@@ -199,7 +200,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount);
 
@@ -219,7 +220,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount);
 
@@ -239,7 +240,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             DocSourceType docSourceType,
             UnitUser unitUser,
             out int totalCount);
@@ -259,7 +260,7 @@ namespace Docs.Api.Repositories.DocRepository
             int limit,
             int offset,
             DocCasePartType docCasePartType,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount);
 
@@ -275,7 +276,7 @@ namespace Docs.Api.Repositories.DocRepository
             List<int> docRelations,
             int limit,
             int offset,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount);
 
@@ -294,7 +295,7 @@ namespace Docs.Api.Repositories.DocRepository
             int limit,
             int offset,
             DocCasePartType docCasePartType,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount);
 

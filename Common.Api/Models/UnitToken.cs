@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Docs.Api.Models
+namespace Common.Api.Models
 {
     public partial class UnitToken
     {
         public int UnitId { get; set; }
         public string Token { get; set; }
         public string CreateToken { get; set; }
-        public int DocUnitPermissionId { get; set; }
-        public virtual DocUnitPermission DocUnitPermission { get; set; }
+        public int ClassificationPermissionId { get; set; }
+        public virtual ClassificationPermission ClassificationPermission { get; set; }
     }
 
     public class UnitTokenMap : EntityTypeConfiguration<UnitToken>
@@ -19,7 +19,7 @@ namespace Docs.Api.Models
         public UnitTokenMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.UnitId, t.Token, t.CreateToken, t.DocUnitPermissionId });
+            this.HasKey(t => new { t.UnitId, t.Token, t.CreateToken, t.ClassificationPermissionId });
 
             // Properties
             this.Property(t => t.UnitId)
@@ -33,7 +33,7 @@ namespace Docs.Api.Models
                 .IsRequired()
                 .HasMaxLength(200);
 
-            this.Property(t => t.DocUnitPermissionId)
+            this.Property(t => t.ClassificationPermissionId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Table & Column Mappings
@@ -41,11 +41,11 @@ namespace Docs.Api.Models
             this.Property(t => t.UnitId).HasColumnName("UnitId");
             this.Property(t => t.Token).HasColumnName("Token");
             this.Property(t => t.CreateToken).HasColumnName("CreateToken");
-            this.Property(t => t.DocUnitPermissionId).HasColumnName("DocUnitPermissionId");
+            this.Property(t => t.ClassificationPermissionId).HasColumnName("ClassificationPermissionId");
 
-            this.HasRequired(t => t.DocUnitPermission)
+            this.HasRequired(t => t.ClassificationPermission)
                 .WithMany()
-                .HasForeignKey(d => d.DocUnitPermissionId);
+                .HasForeignKey(d => d.ClassificationPermissionId);
         }
     }
 }

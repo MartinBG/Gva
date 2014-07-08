@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{292CF59D-FE6C-44C9-8642-82C2136121C8}</ProjectGuid>
+    <ProjectGuid>{A87F6BA2-AAEE-488E-8D6C-1B06B2719E34}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Database</RootNamespace>
-    <AssemblyName>Common.Database</AssemblyName>
+    <RootNamespace>Docs.SqlConfig</RootNamespace>
+    <AssemblyName>Docs.SqlConfig</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,43 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SqlConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Create\Create.sql" />
-    <Content Include="Create\CreateDB.sql" />
-    <Content Include="Create\Tables\Addresses\Countries.sql" />
-    <Content Include="Create\Tables\Addresses\Districts.sql" />
-    <Content Include="Create\Tables\Addresses\Municipalities.sql" />
-    <Content Include="Create\Tables\Addresses\Settlements.sql" />
-    <Content Include="Create\Tables\Classifications\ClassificationRelations.sql" />
-    <Content Include="Create\Tables\Classifications\Classifications.sql" />
-    <Content Include="Create\Tables\Files\Blobs.sql" />
-    <Content Include="Create\Tables\Noms\Noms.sql" />
-    <Content Include="Create\Tables\Noms\NomValues.sql" />
-    <Content Include="Create\Tables\System\Logs.sql" />
-    <Content Include="Create\Tables\System\GParams.sql" />
-    <Content Include="Create\Tables\Classifications\ClassificationPermissions.sql" />
-    <Content Include="Create\Tables\Units\UnitClassifications.sql" />
-    <Content Include="Create\Tables\Units\UnitRelations.sql" />
-    <Content Include="Create\Tables\Units\Units.sql" />
-    <Content Include="Create\Tables\Units\UnitTypes.sql" />
-    <Content Include="Create\Tables\Units\UnitUsers.sql" />
-    <Content Include="Create\Tables\Users\Roles.sql" />
-    <Content Include="Create\Tables\Users\UserRoles.sql" />
-    <Content Include="Create\Tables\Users\Users.sql" />
-    <Content Include="Create\Functions\ufnParseJSON.sql" />
-    <Content Include="Create\Tools\DocumentationScript.sql" />
-    <Content Include="Create\Tools\spDesc.sql" />
-    <Content Include="Create\Tools\sp_generate_inserts.sql" />
-    <Content Include="Create\Tools\Tool_ScriptDiagram2008.sql" />
-    <Content Include="Insert\Noms\boolean.sql" />
-    <Content Include="Insert\TestBlobs.sql" />
-    <Content Include="Insert\TestUsers.sql" />
-    <Content Include="Create\Functions\ufnGetNomValuesByTextContentProperty.sql" />
-    <Content Include="Insert\Classifications\ClassificationPermissions.sql" />
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

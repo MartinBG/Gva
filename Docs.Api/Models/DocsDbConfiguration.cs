@@ -10,9 +10,6 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new AdministrativeEmailMap());
             modelBuilder.Configurations.Add(new AdministrativeEmailStatusMap());
             modelBuilder.Configurations.Add(new AdministrativeEmailTypeMap());
-            modelBuilder.Configurations.Add(new ClassificationRelationMap());
-            modelBuilder.Configurations.Add(new ClassificationRoleMap());
-            modelBuilder.Configurations.Add(new ClassificationMap());
             modelBuilder.Configurations.Add(new CorrespondentContactMap());
             modelBuilder.Configurations.Add(new CorrespondentGroupMap());
             modelBuilder.Configurations.Add(new CorrespondentMap());
@@ -44,7 +41,6 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new DocTypeGroupMap());
             modelBuilder.Configurations.Add(new DocTypeMap());
             modelBuilder.Configurations.Add(new DocTypeUnitRoleMap());
-            modelBuilder.Configurations.Add(new DocUnitPermissionMap());
             modelBuilder.Configurations.Add(new DocUnitRoleMap());
             modelBuilder.Configurations.Add(new DocUnitMap());
             modelBuilder.Configurations.Add(new DocWorkflowActionMap());
@@ -57,12 +53,6 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new IrregularityTypeMap());
             modelBuilder.Configurations.Add(new RegisterIndexMap());
             modelBuilder.Configurations.Add(new TicketMap());
-            modelBuilder.Configurations.Add(new UnitClassificationMap());
-            modelBuilder.Configurations.Add(new UnitRelationMap());
-            modelBuilder.Configurations.Add(new UnitMap());
-            modelBuilder.Configurations.Add(new UnitTokenMap());
-            modelBuilder.Configurations.Add(new UnitTypeMap());
-            modelBuilder.Configurations.Add(new UnitUserMap());
             modelBuilder.Configurations.Add(new vwDocUserMap());
         }
     }

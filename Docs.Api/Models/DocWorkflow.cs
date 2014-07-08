@@ -29,11 +29,11 @@ namespace Docs.Api.Models
 
         public virtual DocWorkflowAction DocWorkflowAction { get; set; }
 
-        public virtual Unit ToUnit { get; set; }
+        public virtual Common.Api.Models.Unit ToUnit { get; set; }
 
-        public virtual Unit PrincipalUnit { get; set; }
+        public virtual Common.Api.Models.Unit PrincipalUnit { get; set; }
 
-        public virtual UnitUser UnitUser { get; set; }
+        public virtual Common.Api.Models.UnitUser UnitUser { get; set; }
     }
 
     public class DocWorkflowMap : EntityTypeConfiguration<DocWorkflow>
@@ -72,10 +72,10 @@ namespace Docs.Api.Models
                 .WithMany(t => t.DocWorkflows)
                 .HasForeignKey(d => d.DocWorkflowActionId);
             this.HasOptional(t => t.ToUnit)
-                .WithMany(t => t.DocWorkflows)
+                .WithMany()
                 .HasForeignKey(d => d.ToUnitId);
             this.HasOptional(t => t.PrincipalUnit)
-                .WithMany(t => t.DocWorkflows1)
+                .WithMany()
                 .HasForeignKey(d => d.PrincipalUnitId);
             this.HasRequired(t => t.UnitUser)
                 .WithMany()

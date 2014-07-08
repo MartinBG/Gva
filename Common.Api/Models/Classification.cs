@@ -1,17 +1,13 @@
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Docs.Api.Models
+namespace Common.Api.Models
 {
     public partial class Classification
     {
         public Classification()
         {
             this.ClassificationRelations = new List<ClassificationRelation>();
-            this.ClassificationRelations1 = new List<ClassificationRelation>();
-            this.ClassificationRelations2 = new List<ClassificationRelation>();
-            this.DocClassifications = new List<DocClassification>();
-            this.DocTypeClassifications = new List<DocTypeClassification>();
             this.UnitClassifications = new List<UnitClassification>();
         }
 
@@ -26,14 +22,6 @@ namespace Docs.Api.Models
         public byte[] Version { get; set; }
 
         public virtual ICollection<ClassificationRelation> ClassificationRelations { get; set; }
-
-        public virtual ICollection<ClassificationRelation> ClassificationRelations1 { get; set; }
-
-        public virtual ICollection<ClassificationRelation> ClassificationRelations2 { get; set; }
-
-        public virtual ICollection<DocClassification> DocClassifications { get; set; }
-
-        public virtual ICollection<DocTypeClassification> DocTypeClassifications { get; set; }
 
         public virtual ICollection<UnitClassification> UnitClassifications { get; set; }
     }

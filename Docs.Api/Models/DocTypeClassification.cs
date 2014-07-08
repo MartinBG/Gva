@@ -18,7 +18,7 @@ namespace Docs.Api.Models
 
         public byte[] Version { get; set; }
 
-        public virtual Classification Classification { get; set; }
+        public virtual Common.Api.Models.Classification Classification { get; set; }
 
         public virtual DocDirection DocDirection { get; set; }
 
@@ -51,7 +51,7 @@ namespace Docs.Api.Models
 
             // Relationships
             this.HasRequired(t => t.Classification)
-                .WithMany(t => t.DocTypeClassifications)
+                .WithMany()
                 .HasForeignKey(d => d.ClassificationId);
             this.HasRequired(t => t.DocDirection)
                 .WithMany(t => t.DocTypeClassifications)

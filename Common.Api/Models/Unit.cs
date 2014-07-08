@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Docs.Api.Models
+namespace Common.Api.Models
 {
     public partial class Unit
     {
         public Unit()
         {
-            this.DocHasReads = new List<DocHasRead>();
-            this.DocTypeUnitRoles = new List<DocTypeUnitRole>();
-            this.DocUnits = new List<DocUnit>();
-            this.DocWorkflows = new List<DocWorkflow>();
-            this.DocWorkflows1 = new List<DocWorkflow>();
-            this.ElectronicServiceStageExecutors = new List<ElectronicServiceStageExecutor>();
+            //this.DocHasReads = new List<DocHasRead>();
+            //this.DocTypeUnitRoles = new List<DocTypeUnitRole>();
+            //this.DocUnits = new List<DocUnit>();
+            //this.DocWorkflows = new List<DocWorkflow>();
+            //this.DocWorkflows1 = new List<DocWorkflow>();
+            //this.ElectronicServiceStageExecutors = new List<ElectronicServiceStageExecutor>();
             this.UnitClassifications = new List<UnitClassification>();
             this.UnitRelations = new List<UnitRelation>();
             this.UnitUsers = new List<UnitUser>();
@@ -30,17 +30,17 @@ namespace Docs.Api.Models
 
         public byte[] Version { get; set; }
 
-        public virtual ICollection<DocHasRead> DocHasReads { get; set; }
-
-        public virtual ICollection<DocTypeUnitRole> DocTypeUnitRoles { get; set; }
-
-        public virtual ICollection<DocUnit> DocUnits { get; set; }
-
-        public virtual ICollection<DocWorkflow> DocWorkflows { get; set; }
-
-        public virtual ICollection<DocWorkflow> DocWorkflows1 { get; set; }
-
-        public virtual ICollection<ElectronicServiceStageExecutor> ElectronicServiceStageExecutors { get; set; }
+        //public virtual ICollection<DocHasRead> DocHasReads { get; set; }
+        //
+        //public virtual ICollection<DocTypeUnitRole> DocTypeUnitRoles { get; set; }
+        //
+        //public virtual ICollection<DocUnit> DocUnits { get; set; }
+        //
+        //public virtual ICollection<DocWorkflow> DocWorkflows { get; set; }
+        //
+        //public virtual ICollection<DocWorkflow> DocWorkflows1 { get; set; }
+        //
+        //public virtual ICollection<ElectronicServiceStageExecutor> ElectronicServiceStageExecutors { get; set; }
 
         public virtual ICollection<UnitClassification> UnitClassifications { get; set; }
 

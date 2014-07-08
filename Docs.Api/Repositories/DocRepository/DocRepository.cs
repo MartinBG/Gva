@@ -549,7 +549,7 @@ namespace Docs.Api.Repositories.DocRepository
         public List<vwDocUser> GetvwDocUsersForDocByUnitId(int docId, UnitUser unitUser)
         {
             return this.unitOfWork.DbContext.Set<vwDocUser>()
-                .Include(e => e.DocUnitPermission)
+                .Include(e => e.ClassificationPermission)
                 .Where(e => e.UnitId == unitUser.UnitId && e.DocId == docId)
                 .ToList();
         }
@@ -825,7 +825,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             System.Linq.Expressions.Expression<Func<Doc, bool>> predicate,
             UnitUser unitUser,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             bool? hideRead,
             bool? isCase,
             out int totalCount
@@ -849,7 +849,7 @@ namespace Docs.Api.Repositories.DocRepository
                 predicate = predicate.And(e => !e.DocHasReads.Any(d => d.UnitId == unitUser.UnitId && d.HasRead));
             }
 
-            predicate = predicate.And(e => e.vwDocUsers.Any(v => v.DocUnitPermissionId == docUnitPermissionRead.DocUnitPermissionId && v.UnitId == unitUser.UnitId));
+            predicate = predicate.And(e => e.vwDocUsers.Any(v => v.ClassificationPermissionId == readPermission.ClassificationPermissionId && v.UnitId == unitUser.UnitId));
 
             var query = this.unitOfWork.DbContext.Set<Doc>()
                 .Where(predicate)
@@ -886,7 +886,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount)
         {
@@ -914,7 +914,7 @@ namespace Docs.Api.Repositories.DocRepository
                 offset,
                 predicate,
                 unitUser,
-                docUnitPermissionRead,
+                readPermission,
                 hideRead,
                 isCase,
                 out totalCount);
@@ -936,7 +936,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount)
         {
@@ -963,7 +963,7 @@ namespace Docs.Api.Repositories.DocRepository
                 offset,
                 predicate,
                 unitUser,
-                docUnitPermissionRead,
+                readPermission,
                 hideRead,
                 isCase,
                 out totalCount);
@@ -985,7 +985,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount)
         {
@@ -1013,7 +1013,7 @@ namespace Docs.Api.Repositories.DocRepository
                 offset,
                 predicate,
                 unitUser,
-                docUnitPermissionRead,
+                readPermission,
                 hideRead,
                 isCase,
                 out totalCount);
@@ -1035,7 +1035,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             List<DocUnitRole> docUnitRoles,
             UnitUser unitUser,
             out int totalCount)
@@ -1066,7 +1066,7 @@ namespace Docs.Api.Repositories.DocRepository
                 offset,
                 predicate,
                 unitUser,
-                docUnitPermissionRead,
+                readPermission,
                 hideRead,
                 isCase,
                 out totalCount);
@@ -1088,7 +1088,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount)
         {
@@ -1113,7 +1113,7 @@ namespace Docs.Api.Repositories.DocRepository
                 offset,
                 predicate,
                 unitUser,
-                docUnitPermissionRead,
+                readPermission,
                 hideRead,
                 isCase,
                 out totalCount);
@@ -1135,7 +1135,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount)
         {
@@ -1162,7 +1162,7 @@ namespace Docs.Api.Repositories.DocRepository
                 offset,
                 predicate,
                 unitUser,
-                docUnitPermissionRead,
+                readPermission,
                 hideRead,
                 isCase,
                 out totalCount);
@@ -1184,7 +1184,7 @@ namespace Docs.Api.Repositories.DocRepository
             int offset,
             DocCasePartType docCasePartType,
             List<DocStatus> docStatuses,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             DocSourceType docSourceType,
             UnitUser unitUser,
             out int totalCount)
@@ -1208,7 +1208,7 @@ namespace Docs.Api.Repositories.DocRepository
                 offset,
                 predicate,
                 unitUser,
-                docUnitPermissionRead,
+                readPermission,
                 hideRead,
                 isCase,
                 out totalCount);
@@ -1229,7 +1229,7 @@ namespace Docs.Api.Repositories.DocRepository
             int limit,
             int offset,
             DocCasePartType docCasePartType,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount)
         {
@@ -1255,7 +1255,7 @@ namespace Docs.Api.Repositories.DocRepository
                 offset,
                 predicate,
                 unitUser,
-                docUnitPermissionRead,
+                readPermission,
                 hideRead,
                 isCase,
                 out totalCount);
@@ -1273,7 +1273,7 @@ namespace Docs.Api.Repositories.DocRepository
             List<int> docRelations,
             int limit,
             int offset,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount)
         {
@@ -1299,7 +1299,7 @@ namespace Docs.Api.Repositories.DocRepository
                 offset,
                 predicate,
                 unitUser,
-                docUnitPermissionRead,
+                readPermission,
                 null,
                 null,
                 out totalCount);
@@ -1320,7 +1320,7 @@ namespace Docs.Api.Repositories.DocRepository
             int limit,
             int offset,
             DocCasePartType docCasePartType,
-            DocUnitPermission docUnitPermissionRead,
+            ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount)
         {
@@ -1346,7 +1346,7 @@ namespace Docs.Api.Repositories.DocRepository
                 offset,
                 predicate,
                 unitUser,
-                docUnitPermissionRead,
+                readPermission,
                 hideRead,
                 isCase,
                 out totalCount);

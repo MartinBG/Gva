@@ -15,7 +15,7 @@ DECLARE @UnitTokens TABLE (
       UnitId int,
 	  Token nvarchar(200), 
 	  CreateToken nvarchar(200),
-	  DocUnitPermissionId int
+	  ClassificationPermissionId int
 	);
 
 --@Units инициализиране на таблицата с звената
@@ -32,39 +32,29 @@ DECLARE @UnitTokens TABLE (
 	end
 
 --определяне на token на звеното без специалната роля Execution, само за листата 
-insert into @UnitTokens(UnitId, Token, CreateToken, DocUnitPermissionId)
-	select distinct u.UnitId, 'classification#' + CONVERT(varchar(10), ucpc.ClassificationId), 'classification'
-	, (select p.DocUnitPermissionId from DocUnitPermissions p where p.Alias = cr.Alias)
---	, case when cr.Alias = 'Read' then (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Read') 
---			when cr.Alias = 'Register' then (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Register') 
---			when cr.Alias = 'Management' then (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Management') 
---			when cr.Alias = 'ESign' then (select DocUnitPermissionId from DocUnitPermissions where Alias = 'ESign') 
---			when cr.Alias = 'Finish' then (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Finish') 
---			when cr.Alias = 'Reverse' then (select DocUnitPermissionId from DocUnitPermissions where Alias = 'Reverse') 
---			else null end
+insert into @UnitTokens(UnitId, Token, CreateToken, ClassificationPermissionId)
+	select distinct u.UnitId, 'classification#' + CONVERT(varchar(10), ucpc.ClassificationId), 'classification', uc.ClassificationPermissionId
 		from Units u 
 			inner join UnitTypes ut  on u.UnitTypeId  = ut.UnitTypeId
 		    CROSS APPLY dbo.fnGetParentUnits(u.UnitId) pu
 			inner join UnitClassifications uc on uc.UnitId = pu.UnitId 
-			inner join ClassificationRoles cr on cr.ClassificationRoleId = uc.ClassificationRoleId 
 			CROSS APPLY dbo.fnGetParentClassifications(uc.ClassificationId) ucpc
 		where u.IsActive = 1 
 		and ut.Alias = 'Employee'
 		and u.UnitId in (select UnitId from @Units)
-		and cr.Alias <> 'Execution'
 
 --merge Token
 
-insert into UnitTokens (UnitId, Token, CreateToken, DocUnitPermissionId) 
-	select UnitId, Token, CreateToken, DocUnitPermissionId 
+insert into UnitTokens (UnitId, Token, CreateToken, ClassificationPermissionId) 
+	select UnitId, Token, CreateToken, ClassificationPermissionId 
 	from @UnitTokens s
 	where not exists (select null from UnitTokens t 
-		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.DocUnitPermissionId = s.DocUnitPermissionId)
+		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId)
 
 delete from t
 	from UnitTokens t
 	where not exists (select null from @UnitTokens s
-		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.DocUnitPermissionId = s.DocUnitPermissionId)
+		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId)
 	and t.UnitId in (select UnitId from @Units)
 	and t.CreateToken in ('classification')
 END

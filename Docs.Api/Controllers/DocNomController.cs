@@ -1,4 +1,5 @@
-﻿using Common.Extensions;
+﻿using Common.Api.Models;
+using Common.Extensions;
 using Common.Linq;
 using Docs.Api.Models;
 using System;

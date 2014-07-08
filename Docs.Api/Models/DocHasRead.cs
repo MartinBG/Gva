@@ -22,7 +22,7 @@ namespace Docs.Api.Models
 
         public virtual Doc Doc { get; set; }
 
-        public virtual Unit Unit { get; set; }
+        public virtual Common.Api.Models.Unit Unit { get; set; }
 
         public virtual Common.Api.Models.User User { get; set; }
     }
@@ -57,7 +57,7 @@ namespace Docs.Api.Models
                 .HasForeignKey(d => d.DocId)
                 .WillCascadeOnDelete();
             this.HasRequired(t => t.Unit)
-                .WithMany(t => t.DocHasReads)
+                .WithMany()
                 .HasForeignKey(d => d.UnitId)
                 .WillCascadeOnDelete();
             this.HasRequired(t => t.User)

@@ -1,6 +1,6 @@
 using System.Data.Entity.ModelConfiguration;
 
-namespace Docs.Api.Models
+namespace Common.Api.Models
 {
     public partial class ClassificationRelation
     {
@@ -16,9 +16,9 @@ namespace Docs.Api.Models
 
         public virtual Classification Classification { get; set; }
 
-        public virtual Classification Classification1 { get; set; }
+        public virtual Classification ParentClassification { get; set; }
 
-        public virtual Classification Classification2 { get; set; }
+        public virtual Classification RootClassification { get; set; }
     }
 
     public class ClassificationRelationMap : EntityTypeConfiguration<ClassificationRelation>
@@ -47,11 +47,11 @@ namespace Docs.Api.Models
             this.HasRequired(t => t.Classification)
                 .WithMany(t => t.ClassificationRelations)
                 .HasForeignKey(d => d.ClassificationId);
-            this.HasOptional(t => t.Classification1)
-                .WithMany(t => t.ClassificationRelations1)
+            this.HasOptional(t => t.ParentClassification)
+                .WithMany()
                 .HasForeignKey(d => d.ParentClassificationId);
-            this.HasOptional(t => t.Classification2)
-                .WithMany(t => t.ClassificationRelations2)
+            this.HasOptional(t => t.RootClassification)
+                .WithMany()
                 .HasForeignKey(d => d.RootClassificationId);
         }
     }

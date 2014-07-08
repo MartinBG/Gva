@@ -24,7 +24,7 @@ namespace Docs.Api.Models
 
         public virtual DocUnitRole DocUnitRole { get; set; }
 
-        public virtual Unit Unit { get; set; }
+        public virtual Common.Api.Models.Unit Unit { get; set; }
     }
 
     public class DocTypeUnitRoleMap : EntityTypeConfiguration<DocTypeUnitRole>
@@ -62,7 +62,7 @@ namespace Docs.Api.Models
                 .WithMany(t => t.DocTypeUnitRoles)
                 .HasForeignKey(d => d.DocUnitRoleId);
             this.HasRequired(t => t.Unit)
-                .WithMany(t => t.DocTypeUnitRoles)
+                .WithMany()
                 .HasForeignKey(d => d.UnitId);
         }
     }

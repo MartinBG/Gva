@@ -7,18 +7,6 @@ GO
 --Registers
 :r $(rootPath)"\Tables\Registers\RegisterIndexes.sql"
 
--- Classifications
-:r $(rootPath)"\Tables\Classifications\Classifications.sql"
-:r $(rootPath)"\Tables\Classifications\ClassificationRelations.sql"
-:r $(rootPath)"\Tables\Classifications\ClassificationRoles.sql"
-
--- Units
-:r $(rootPath)"\Tables\Units\UnitTypes.sql"
-:r $(rootPath)"\Tables\Units\Units.sql"
-:r $(rootPath)"\Tables\Units\UnitRelations.sql"
-:r $(rootPath)"\Tables\Units\UnitClassifications.sql"
-:r $(rootPath)"\Tables\Units\UnitUsers.sql"
-
 --Assignments
 :r $(rootPath)"\Tables\Assignments\AssignmentTypes.sql"
 
@@ -65,8 +53,6 @@ GO
 
 :r $(rootPath)"\Tables\Documents\DocTypeUnitRoles.sql"
 :r $(rootPath)"\Tables\Documents\DocTypeClassifications.sql"
-:r $(rootPath)"\Tables\Documents\DocUnitPermissions.sql"
---:r $(rootPath)"\Tables\Documents\DocUsers.sql"
 :r $(rootPath)"\Tables\Documents\DocHasReads.sql"
 
 :r $(rootPath)"\Tables\Documents\DocCasePartMovements.sql"
@@ -143,23 +129,13 @@ GO
 ---------------------------------------------------------------
 -- Insert
 ---------------------------------------------------------------
---classifications
---:r $(rootPath)\"..\Insert\Classifications\Classifications.sql"
---:r $(rootPath)\"..\Insert\Classifications\ClassificationRelations.sql"
-:r $(rootPath)\"..\Insert\Classifications\ClassificationRoles.sql"
-
-
 --assignments
 :r $(rootPath)\"..\Insert\Assignments\AssignmentTypes.sql"
 
 --units
 :r $(rootPath)\"..\Insert\Units\UnitTypes.sql"
---:r $(rootPath)\"..\Insert\Units\Units.sql"
---:r $(rootPath)\"..\Insert\Units\UnitRelations.sql"
---:r $(rootPath)\"..\Insert\Units\UnitClassifications.sql"
 
 --docs
---:r $(rootPath)\"..\Insert\Docs\RegisterIndexes.sql"
 :r $(rootPath)\"..\Insert\Docs\DocCasePartTypes.sql"
 :r $(rootPath)\"..\Insert\Docs\DocDestinationTypes.sql"
 :r $(rootPath)\"..\Insert\Docs\DocDirections.sql"
@@ -167,10 +143,6 @@ GO
 :r $(rootPath)\"..\Insert\Docs\DocFormatTypes.sql"
 :r $(rootPath)\"..\Insert\Docs\DocStatuses.sql"
 :r $(rootPath)\"..\Insert\Docs\DocSourceTypes.sql"
---:r $(rootPath)\"..\Insert\Docs\DocTypeGroups.sql"
---:r $(rootPath)\"..\Insert\Docs\DocTypes.sql"
---:r $(rootPath)\"..\Insert\Docs\DocTypeClassifications.sql"
-:r $(rootPath)\"..\Insert\Docs\DocUnitPermissions.sql"
 :r $(rootPath)\"..\Insert\Docs\DocUnitRoles.sql"
 :r $(rootPath)\"..\Insert\Docs\DocWorkflowActions.sql"
 :r $(rootPath)\"..\Insert\Docs\DocFileKinds.sql"
@@ -188,7 +160,4 @@ GO
 :r $(rootPath)\"..\Insert\AdministrativeEmails\AdministrativeEmailStatuses.sql"
 :r $(rootPath)\"..\Insert\AdministrativeEmails\AdministrativeEmailTypes.sql"
 
---electronic service stages
---:r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStages.sql"
---:r $(rootPath)\"..\Insert\ElectronicServiceStages\ElectronicServiceStageExecutors.sql"
 

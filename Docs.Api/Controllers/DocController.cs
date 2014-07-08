@@ -17,6 +17,7 @@ using System.Text;
 using System.Web.Http;
 using Common.Api.StaticNomenclatures;
 using Rio.Data.Utils;
+using Common.Api.Models;
 
 namespace Docs.Api.Controllers
 {
@@ -70,7 +71,7 @@ namespace Docs.Api.Controllers
             offset = 0;
 
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
-            DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
+            ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
             DocCasePartType docCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>().SingleOrDefault(e => e.Alias == "Control");
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.IsActive).ToList();
@@ -96,7 +97,7 @@ namespace Docs.Api.Controllers
                       limit,
                       offset,
                       docCasePartType,
-                      docUnitPermissionRead,
+                      readPermission,
                       unitUser,
                       out totalCount);
 
@@ -201,7 +202,7 @@ namespace Docs.Api.Controllers
             offset = 0;
 
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
-            DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
+            ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
             DocCasePartType docCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>().SingleOrDefault(e => e.Alias == "Control");
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.IsActive).ToList();
@@ -234,7 +235,7 @@ namespace Docs.Api.Controllers
                         offset,
                         docCasePartType,
                         docStatuses,
-                        docUnitPermissionRead,
+                        readPermission,
                         unitUser,
                         out totalCount);
                     break;
@@ -256,7 +257,7 @@ namespace Docs.Api.Controllers
                         offset,
                         docCasePartType,
                         docStatuses,
-                        docUnitPermissionRead,
+                        readPermission,
                         unitUser,
                         out totalCount);
                     break;
@@ -278,7 +279,7 @@ namespace Docs.Api.Controllers
                        offset,
                        docCasePartType,
                        docStatuses,
-                       docUnitPermissionRead,
+                       readPermission,
                        unitUser,
                        out totalCount);
 
@@ -302,7 +303,7 @@ namespace Docs.Api.Controllers
                       offset,
                       docCasePartType,
                       docStatuses,
-                      docUnitPermissionRead,
+                      readPermission,
                       docUnitRoles,
                       unitUser,
                       out totalCount);
@@ -327,7 +328,7 @@ namespace Docs.Api.Controllers
                       offset,
                       docCasePartType,
                       docStatuses,
-                      docUnitPermissionRead,
+                      readPermission,
                       unitUser,
                       out totalCount);
                     break;
@@ -349,7 +350,7 @@ namespace Docs.Api.Controllers
                       offset,
                       docCasePartType,
                       docStatuses,
-                      docUnitPermissionRead,
+                      readPermission,
                       unitUser,
                       out totalCount);
                     break;
@@ -371,7 +372,7 @@ namespace Docs.Api.Controllers
                       offset,
                       docCasePartType,
                       docStatuses,
-                      docUnitPermissionRead,
+                      readPermission,
                       docSourceType,
                       unitUser,
                       out totalCount);
@@ -395,7 +396,7 @@ namespace Docs.Api.Controllers
                       limit,
                       offset,
                       docCasePartType,
-                      docUnitPermissionRead,
+                      readPermission,
                       unitUser,
                       out totalCount);
                     break;
@@ -417,7 +418,7 @@ namespace Docs.Api.Controllers
                       limit,
                       offset,
                       docCasePartType,
-                      docUnitPermissionRead,
+                      readPermission,
                       unitUser,
                       out totalCount);
                     break;
@@ -527,7 +528,7 @@ namespace Docs.Api.Controllers
 
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
-            DocUnitPermission docUnitPermissionRead = this.unitOfWork.DbContext.Set<DocUnitPermission>().SingleOrDefault(e => e.Alias == "Read");
+            ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
 
             int totalCount = 0;
 
@@ -546,7 +547,7 @@ namespace Docs.Api.Controllers
                       docRelations,
                       limit,
                       offset,
-                      docUnitPermissionRead,
+                      readPermission,
                       unitUser,
                       out totalCount);
 
@@ -926,10 +927,10 @@ namespace Docs.Api.Controllers
 
             List<vwDocUser> vwDocUsers = this.docRepository.GetvwDocUsersForDocByUnitId(id, unitUser);
 
-            DocUnitPermission readPermission = this.unitOfWork.DbContext.Set<DocUnitPermission>()
+            ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>()
                 .SingleOrDefault(e => e.Alias == "Read");
 
-            if (!vwDocUsers.Any(e => e.DocUnitPermissionId == readPermission.DocUnitPermissionId))
+            if (!vwDocUsers.Any(e => e.ClassificationPermissionId == readPermission.ClassificationPermissionId))
             {
                 return BadRequest();
             }
@@ -1109,19 +1110,19 @@ namespace Docs.Api.Controllers
 
             #region Set permissions
 
-            returnValue.CanRead = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Read");
-            returnValue.CanEdit = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Edit");
-            returnValue.CanRegister = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Register");
-            returnValue.CanManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Management");
-            returnValue.CanESign = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "ESign");
-            returnValue.CanFinish = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Finish");
-            returnValue.CanReverse = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "Reverse");
+            returnValue.CanRead = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Read");
+            returnValue.CanEdit = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Edit");
+            returnValue.CanRegister = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Register");
+            returnValue.CanManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Management");
+            returnValue.CanESign = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "ESign");
+            returnValue.CanFinish = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Finish");
+            returnValue.CanReverse = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Reverse");
 
-            returnValue.CanSubstituteManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "SubstituteManagement");
-            returnValue.CanDeleteManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "DeleteManagement");
-            returnValue.CanEditTechElectronicServiceStage = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "EditTech");
-            returnValue.CanEditTech = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "EditTechElectronicServiceStage");
-            returnValue.CanChangeDocCasePart = vwDocUsers.Any(e => e.DocId == doc.DocId && e.DocUnitPermission.Alias == "DocCasePartManagement");
+            returnValue.CanSubstituteManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "SubstituteManagement");
+            returnValue.CanDeleteManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "DeleteManagement");
+            returnValue.CanEditTechElectronicServiceStage = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "EditTech");
+            returnValue.CanEditTech = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "EditTechElectronicServiceStage");
+            returnValue.CanChangeDocCasePart = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "DocCasePartManagement");
 
             #endregion
 
