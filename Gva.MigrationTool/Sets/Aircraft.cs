@@ -400,9 +400,7 @@ namespace Gva.MigrationTool.Sets
                     foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                     {
                         var pv = lot.CreatePart("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM, context);
-                        lot.Commit(context, lotEventDispatcher);
-                        unitOfWork.Save();
-                        
+
                         var regPart = Utils.ToJObject(
                             new
                             {
