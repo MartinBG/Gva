@@ -403,7 +403,7 @@ namespace Gva.MigrationTool.Sets
                         lot.Commit(context, lotEventDispatcher);
                         unitOfWork.Save();
                         
-                        var regNom = Utils.ToJObject(
+                        var regPart = Utils.ToJObject(
                             new
                             {
                                 partIndex = pv.Part.Index,
@@ -412,13 +412,13 @@ namespace Gva.MigrationTool.Sets
 
                         int certId = aircraftCertRegistrationFM["__oldId"].Value<int>();
 
-                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessesFM(certId, regNom, getInspector);
+                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessesFM(certId, regPart, getInspector);
                         foreach (var aircraftCertAirworthinessFM in aircraftCertAirworthinessesFM)
                         {
                             lot.CreatePart("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM, context);
                         }
 
-                        var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regNom, noms, getInspector);
+                        var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regPart, noms, getInspector);
                         foreach (var aircraftDocumentDebtFM in aircraftDocumentDebtsFM)
                         {
                             try
@@ -551,7 +551,7 @@ namespace Gva.MigrationTool.Sets
                 .Single();
         }
 
-        private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regNom, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
+        private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regPart, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
         {
             return this.sqlConn.CreateStoreCommand(
                 @"select * from Morts where {0} {1}",
@@ -563,7 +563,7 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = r.Field<string>("nRecNo"),
                         __migrTable = "Morts",
-                        registration = regNom,
+                        registration = regPart,
                         certId = toNum(r.Field<string>("RegNo")),
                         regDate = toDate(r.Field<string>("Date")),
                         aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action").Trim()),
@@ -753,7 +753,7 @@ namespace Gva.MigrationTool.Sets
             return registrations;
         }
 
-        private IList<JObject> getAircraftCertAirworthinessesFM(int certId, JObject regNom, Func<string, JObject> getInspector)
+        private IList<JObject> getAircraftCertAirworthinessesFM(int certId, JObject regPart, Func<string, JObject> getInspector)
         {
             return this.sqlConn.CreateStoreCommand(
                 @"select * from 
@@ -773,7 +773,7 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = r.Field<string>("nRegNum"),
                         __migrTable = "CofA1, CofA2",
-                        registration = regNom,
+                        registration = regPart,
                         certId = toNum(r.Field<string>("nRegNum")),
                         issueNumber = r.Field<string>("NumberIssue"),
                         issueDate = toDate(r.Field<string>("dIssue")),
