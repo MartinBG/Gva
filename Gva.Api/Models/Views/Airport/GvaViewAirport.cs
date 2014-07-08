@@ -1,10 +1,9 @@
-﻿using Regs.Api.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using Common.Api.Models;
+using Regs.Api.Models;
 
-namespace Gva.Api.Models
+namespace Gva.Api.Models.Views.Airport
 {
     public partial class GvaViewAirport
     {
@@ -16,7 +15,7 @@ namespace Gva.Api.Models
 
         public string Place { get; set; }
 
-        public string AirportType { get; set; }
+        public int AirportTypeId { get; set; }
 
         public string ICAO { get; set; }
 
@@ -29,6 +28,8 @@ namespace Gva.Api.Models
         public string Concrete { get; set; }
 
         public virtual Lot Lot { get; set; }
+
+        public NomValue AirportType { get; set; }
     }
 
     public class GvaViewAirportMap : EntityTypeConfiguration<GvaViewAirport>
@@ -50,16 +51,13 @@ namespace Gva.Api.Models
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.AirportType)
-                .IsRequired();
-
             // Table & Column Mappings
             this.ToTable("GvaViewAirports");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.NameAlt).HasColumnName("NameAlt");
             this.Property(t => t.Place).HasColumnName("Place");
-            this.Property(t => t.AirportType).HasColumnName("AirportType");
+            this.Property(t => t.AirportTypeId).HasColumnName("AirportTypeId");
             this.Property(t => t.ICAO).HasColumnName("ICAO");
             this.Property(t => t.Runway).HasColumnName("Runway");
             this.Property(t => t.Course).HasColumnName("Course");
@@ -69,6 +67,9 @@ namespace Gva.Api.Models
             // Relationships
             this.HasRequired(t => t.Lot)
                 .WithOptional();
+            this.HasRequired(t => t.AirportType)
+                .WithMany()
+                .HasForeignKey(t => t.AirportTypeId);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System.Data.Entity;
 using Common.Data;
+using Gva.Api.Models.Views.Aircraft;
+using Gva.Api.Models.Views.Airport;
 
 namespace Gva.Api.Models
 {

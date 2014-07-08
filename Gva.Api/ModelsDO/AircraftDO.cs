@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Gva.Api.Models;
+using Gva.Api.Models.Views.Aircraft;
+
 namespace Gva.Api.ModelsDO
 {
     public class AircraftDO

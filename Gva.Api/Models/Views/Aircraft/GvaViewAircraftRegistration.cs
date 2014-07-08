@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-using Regs.Api.Models;
+﻿using System.Data.Entity.ModelConfiguration;
 
-namespace Gva.Api.Models
+namespace Gva.Api.Models.Views.Aircraft
 {
     public partial class GvaViewAircraftRegistration
     {

@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Common.Data;
 using Common.Linq;
-using Gva.Api.Models;
-using System.Data.Entity;
-using Gva.Api.ModelsDO;
-using Regs.Api.Models;
+using Gva.Api.Models.Views.Aircraft;
 
 namespace Gva.Api.Repositories.AircraftRepository
 {

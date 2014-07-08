@@ -1,26 +1,26 @@
 ﻿using Autofac;
 using Common.Data;
 using Gva.Api.Controllers;
+using Gva.Api.LotEventHandlers.Aircraft;
+using Gva.Api.LotEventHandlers.Airport;
 using Gva.Api.LotEventHandlers.ApplicationView;
+using Gva.Api.LotEventHandlers.EquipmentView;
 using Gva.Api.LotEventHandlers.InventoryView;
 using Gva.Api.LotEventHandlers.OrganizationView;
 using Gva.Api.LotEventHandlers.PersonView;
 using Gva.Api.Models;
+using Gva.Api.Repositories.AircraftRepository;
+using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
-using Gva.Api.Repositories.AircraftRepository;
-using Regs.Api.LotEvents;
-using Gva.Api.LotEventHandlers.AircraftView;
-using Gva.Api.Repositories.EquipmentRepository;
-using Gva.Api.LotEventHandlers.EquipmentView;
-using Gva.Api.LotEventHandlers.AirportView;
-using Gva.Api.Repositories.AirportRepository;
-using Gva.Api.WordTemplates;
 using Gva.Api.Repositories.PublisherRepository;
+using Gva.Api.WordTemplates;
+using Regs.Api.LotEvents;
 
 namespace Gva.Api
 {
@@ -71,7 +71,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonViewLicenceHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonViewRatingHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
-            moduleBuilder.RegisterType<AirportDataHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AirportProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AirportOtherHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AirportOwnerHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AirportApplicationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();

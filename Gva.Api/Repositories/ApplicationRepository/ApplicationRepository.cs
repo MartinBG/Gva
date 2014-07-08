@@ -7,6 +7,8 @@ using Common.Api.Repositories;
 using Common.Data;
 using Common.Linq;
 using Gva.Api.Models;
+using Gva.Api.Models.Views.Aircraft;
+using Gva.Api.Models.Views.Airport;
 using Gva.Api.ModelsDO;
 using Regs.Api.Models;
 
@@ -120,7 +122,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GvaAircraftProducer = e.GViewAircraftProd != null ? e.GViewAircraftProd.Name : null,
                     GvaAircraftICAO = e.GViewAircraft != null ? e.GViewAircraft.ICAO : null,
                     GvaAirportId = e.GViewAirport != null ? (int?)e.GViewAirport.LotId : null,
-                    GvaAirportType = e.GViewAirport != null ? e.GViewAirport.AirportType : null,
+                    GvaAirportType = e.GViewAirport != null ? e.GViewAirport.AirportType.Name : null,
                     GvaAirportName = e.GViewAirport != null ? e.GViewAirport.Name : null,
                     GvaEquipmentId = e.GViewEquipment != null ? (int?)e.GViewEquipment.LotId : null,
                     GvaEquipmentName = e.GViewEquipment != null ? e.GViewEquipment.Name : null,

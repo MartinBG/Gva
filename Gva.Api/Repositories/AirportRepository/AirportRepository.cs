@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-
+using System.Data.Entity;
 using System.Linq;
 using Common.Data;
 using Common.Linq;
-using Gva.Api.Models;
-using System.Data.Entity;
-using Gva.Api.ModelsDO;
-using Regs.Api.Models;
+using Gva.Api.Models.Views.Airport;
 
 namespace Gva.Api.Repositories.AirportRepository
 {
@@ -24,7 +21,8 @@ namespace Gva.Api.Repositories.AirportRepository
             int offset = 0,
             int? limit = null)
         {
-            var gvaAirports = this.unitOfWork.DbContext.Set<GvaViewAirport>();
+            var gvaAirports = this.unitOfWork.DbContext.Set<GvaViewAirport>()
+                .Include(a => a.AirportType);
 
             var predicate = PredicateBuilder.True<GvaViewAirport>();
 
@@ -41,6 +39,7 @@ namespace Gva.Api.Repositories.AirportRepository
         public GvaViewAirport GetAirport(int airportId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewAirport>()
+                .Include(a => a.AirportType)
                 .SingleOrDefault(p => p.LotId == airportId);
         }
     }

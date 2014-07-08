@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Data;
 using Common.Json;
-using Gva.Api.Models;
+using Gva.Api.Models.Views.Aircraft;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
-namespace Gva.Api.LotEventHandlers.AircraftView
+namespace Gva.Api.LotEventHandlers.Aircraft
 {
     public class AircraftProjection : Projection<GvaViewAircraft>
     {
@@ -29,7 +29,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
                 .Where(pv => pv.Content.Get<bool>("isActive"))
                 .SingleOrDefault();
 
-            return new[] { Create(aircraftData, activeRegistration) };
+            return new[] { this.Create(aircraftData, activeRegistration) };
         }
 
         private GvaViewAircraft Create(PartVersion aircraftData, PartVersion activeRegistration)

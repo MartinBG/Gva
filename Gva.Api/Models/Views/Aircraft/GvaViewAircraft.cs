@@ -1,11 +1,10 @@
-﻿using Common.Api.Models;
-using Regs.Api.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using Common.Api.Models;
+using Regs.Api.Models;
 
-namespace Gva.Api.Models
+namespace Gva.Api.Models.Views.Aircraft
 {
     public partial class GvaViewAircraft
     {

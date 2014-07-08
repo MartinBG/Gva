@@ -1,14 +1,12 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Data;
 using Common.Json;
-using Gva.Api.Models;
+using Gva.Api.Models.Views.Aircraft;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
-using Gva.Api.Repositories.AircraftRepository;
-using System.Collections.Generic;
 
-namespace Gva.Api.LotEventHandlers.AircraftView
+namespace Gva.Api.LotEventHandlers.Aircraft
 {
     public class AircraftRegMarkProjection : Projection<GvaViewAircraftRegMark>
     {
@@ -21,7 +19,7 @@ namespace Gva.Api.LotEventHandlers.AircraftView
         {
             var registrations = parts.GetAll("aircraftCertRegistrationsFM");
 
-            return registrations.Select(reg => Create(reg));
+            return registrations.Select(reg => this.Create(reg));
         }
 
         private GvaViewAircraftRegMark Create(PartVersion registration)

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Gva.Api.Models;
+﻿using Gva.Api.Models.Views.Airport;
+
 namespace Gva.Api.ModelsDO
 {
     public class AirportDO
     {
-        public AirportDO(
-            GvaViewAirport airportData)
+        public AirportDO(GvaViewAirport airportData)
         {
             this.Id = airportData.LotId;
             this.Name = airportData.Name;
             this.NameAlt = airportData.NameAlt;
-            this.AirportType = airportData.AirportType;
+            this.AirportType = airportData.AirportType.Name;
             this.Place = airportData.Place;
             this.ICAO = airportData.ICAO;
             this.Runway = airportData.Runway;
