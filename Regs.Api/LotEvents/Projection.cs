@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -51,6 +52,15 @@ namespace Regs.Api.LotEvents
                 .Select(view => unitOfWork.DbContext.Entry(view))
                 .ToDictionary(viewEntry => CreateEntityKey(viewEntry));
 
+            // replace oldViews entries with the entries already in the context (if any)
+            oldViews = oldViews.ToDictionary(
+                kvp => kvp.Key,
+                kvp =>
+                {
+                    var existingEntry = FindInContext(kvp.Key);
+                    return existingEntry != null ? existingEntry : kvp.Value;
+                });
+
             var newViews = this
                 .Execute(commit.Parts)
                 .Select(view => unitOfWork.DbContext.Entry(view))
@@ -60,7 +70,10 @@ namespace Regs.Api.LotEvents
             var updatedOldViews = oldViews.Where(oldView => newViews.ContainsKey(oldView.Key));
             foreach (var oldView in updatedOldViews)
             {
-                oldView.Value.State = EntityState.Unchanged;
+                if (oldView.Value.State == EntityState.Detached)
+                {
+                    oldView.Value.State = EntityState.Unchanged;
+                }
 
                 oldView.Value.CurrentValues.SetValues(newViews[oldView.Key].Entity);
             }
@@ -78,6 +91,18 @@ namespace Regs.Api.LotEvents
             {
                 newView.Value.State = EntityState.Added;
             }
+        }
+
+        private DbEntityEntry<TView> FindInContext(EntityKey entityKey)
+        {
+            ObjectStateEntry entry;
+            if (((System.Data.Entity.Infrastructure.IObjectContextAdapter)unitOfWork.DbContext)
+                    .ObjectContext.ObjectStateManager.TryGetObjectStateEntry(entityKey, out entry))
+            {
+                return unitOfWork.DbContext.Entry<TView>((TView)entry.Entity);
+            }
+
+            return null;
         }
 
         private EntityKey CreateEntityKey(DbEntityEntry<TView> viewEntry)
