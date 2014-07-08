@@ -1,10 +1,10 @@
-﻿using Regs.Api.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using Common.Api.Models;
+using Regs.Api.Models;
 
-namespace Gva.Api.Models
+namespace Gva.Api.Models.Views.Equipment
 {
     public partial class GvaViewEquipment
     {
@@ -12,9 +12,9 @@ namespace Gva.Api.Models
 
         public string Name { get; set; }
 
-        public string EquipmentType { get; set; }
+        public int EquipmentTypeId { get; set; }
 
-        public string EquipmentProducer { get; set; }
+        public int EquipmentProducerId { get; set; }
 
         public string ManPlace { get; set; }
 
@@ -27,6 +27,10 @@ namespace Gva.Api.Models
         public string Note { get; set; }
 
         public virtual Lot Lot { get; set; }
+
+        public virtual NomValue EquipmentType { get; set; }
+
+        public virtual NomValue EquipmentProducer { get; set; }
     }
 
     public class GvaViewEquipmentMap : EntityTypeConfiguration<GvaViewEquipment>
@@ -44,10 +48,10 @@ namespace Gva.Api.Models
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.EquipmentType)
+            this.Property(t => t.EquipmentTypeId)
                 .IsRequired();
 
-            this.Property(t => t.EquipmentProducer)
+            this.Property(t => t.EquipmentProducerId)
                 .IsRequired();
 
             this.Property(t => t.ManPlace)
@@ -60,8 +64,8 @@ namespace Gva.Api.Models
             this.ToTable("GvaViewEquipments");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.EquipmentType).HasColumnName("EquipmentType");
-            this.Property(t => t.EquipmentProducer).HasColumnName("EquipmentProducer");
+            this.Property(t => t.EquipmentTypeId).HasColumnName("EquipmentTypeId");
+            this.Property(t => t.EquipmentProducerId).HasColumnName("EquipmentProducerId");
             this.Property(t => t.ManPlace).HasColumnName("ManPlace");
             this.Property(t => t.Place).HasColumnName("Place");
             this.Property(t => t.OperationalDate).HasColumnName("OperationalDate");
@@ -70,6 +74,12 @@ namespace Gva.Api.Models
             // Relationships
             this.HasRequired(t => t.Lot)
                 .WithOptional();
+            this.HasRequired(t => t.EquipmentType)
+                .WithMany()
+                .HasForeignKey(t => t.EquipmentTypeId);
+            this.HasRequired(t => t.EquipmentProducer)
+                .WithMany()
+                .HasForeignKey(t => t.EquipmentProducerId);
         }
     }
 }

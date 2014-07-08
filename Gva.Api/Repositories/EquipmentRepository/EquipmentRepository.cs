@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-
+using System.Data.Entity;
 using System.Linq;
 using Common.Data;
 using Common.Linq;
-using Gva.Api.Models;
-using System.Data.Entity;
-using Gva.Api.ModelsDO;
-using Regs.Api.Models;
+using Gva.Api.Models.Views.Equipment;
 
 namespace Gva.Api.Repositories.EquipmentRepository
 {
@@ -23,7 +20,9 @@ namespace Gva.Api.Repositories.EquipmentRepository
             int offset = 0,
             int? limit = null)
         {
-            var gvaEquipments = this.unitOfWork.DbContext.Set<GvaViewEquipment>();
+            var gvaEquipments = this.unitOfWork.DbContext.Set<GvaViewEquipment>()
+                .Include(e => e.EquipmentProducer)
+                .Include(e => e.EquipmentType);
 
             var predicate = PredicateBuilder.True<GvaViewEquipment>();
 
@@ -39,6 +38,8 @@ namespace Gva.Api.Repositories.EquipmentRepository
         public GvaViewEquipment GetEquipment(int equipmentId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewEquipment>()
+                .Include(e => e.EquipmentProducer)
+                .Include(e => e.EquipmentType)
                 .SingleOrDefault(p => p.LotId == equipmentId);
         }
     }

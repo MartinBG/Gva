@@ -9,9 +9,9 @@ using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Aircraft;
 using Gva.Api.Models.Views.Airport;
+using Gva.Api.Models.Views.Equipment;
 using Gva.Api.ModelsDO;
 using Regs.Api.Models;
-
 
 namespace Gva.Api.Repositories.ApplicationRepository
 {
@@ -45,15 +45,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 from p2 in p1.DefaultIfEmpty()
                 join o in this.unitOfWork.DbContext.Set<GvaViewOrganization>() on va2.LotId equals o.LotId into o1
                 from o2 in o1.DefaultIfEmpty()
-                join ac in this.unitOfWork.DbContext.Set<GvaViewAircraft>() on va2.LotId equals ac.LotId into ac1
+                join ac in this.unitOfWork.DbContext.Set<GvaViewAircraft>().Include(a => a.AirCategory).Include(a => a.AircraftProducer) on va2.LotId equals ac.LotId into ac1
                 from ac2 in ac1.DefaultIfEmpty()
                 join nv1 in this.unitOfWork.DbContext.Set<NomValue>() on ac2.AirCategoryId equals nv1.NomValueId into nv2
                 from nv3 in nv2.DefaultIfEmpty()
                 join nv4 in this.unitOfWork.DbContext.Set<NomValue>() on ac2.AircraftProducerId equals nv4.NomValueId into nv5
                 from nv6 in nv5.DefaultIfEmpty()
-                join ap in this.unitOfWork.DbContext.Set<GvaViewAirport>() on va2.LotId equals ap.LotId into ap1
+                join ap in this.unitOfWork.DbContext.Set<GvaViewAirport>().Include(a => a.AirportType) on va2.LotId equals ap.LotId into ap1
                 from ap2 in ap1.DefaultIfEmpty()
-                join eq in this.unitOfWork.DbContext.Set<GvaViewEquipment>() on va2.LotId equals eq.LotId into eq1
+                join eq in this.unitOfWork.DbContext.Set<GvaViewEquipment>().Include(e => e.EquipmentType).Include(e => e.EquipmentProducer) on va2.LotId equals eq.LotId into eq1
                 from eq2 in eq1.DefaultIfEmpty()
                 select new
                 {
@@ -126,8 +126,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GvaAirportName = e.GViewAirport != null ? e.GViewAirport.Name : null,
                     GvaEquipmentId = e.GViewEquipment != null ? (int?)e.GViewEquipment.LotId : null,
                     GvaEquipmentName = e.GViewEquipment != null ? e.GViewEquipment.Name : null,
-                    GvaEquipmentType = e.GViewEquipment != null ? e.GViewEquipment.EquipmentType : null,
-                    GvaEquipmentProducer = e.GViewEquipment != null ? e.GViewEquipment.EquipmentProducer : null
+                    GvaEquipmentType = e.GViewEquipment != null ? e.GViewEquipment.EquipmentType.Name : null,
+                    GvaEquipmentProducer = e.GViewEquipment != null ? e.GViewEquipment.EquipmentProducer.Name : null
                 })
                 .ToList();
         }

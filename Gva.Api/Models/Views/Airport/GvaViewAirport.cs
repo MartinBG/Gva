@@ -29,7 +29,7 @@ namespace Gva.Api.Models.Views.Airport
 
         public virtual Lot Lot { get; set; }
 
-        public NomValue AirportType { get; set; }
+        public virtual NomValue AirportType { get; set; }
     }
 
     public class GvaViewAirportMap : EntityTypeConfiguration<GvaViewAirport>

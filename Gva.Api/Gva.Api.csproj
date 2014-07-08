@@ -97,7 +97,7 @@
     <Compile Include="LotEventHandlers\Airport\AirportProjection.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAirportHandler.cs" />
     <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewEquipmentHandler.cs" />
-    <Compile Include="LotEventHandlers\EquipmentView\EquipmentDataHandler.cs" />
+    <Compile Include="LotEventHandlers\Equipment\EquipmentProjection.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftApplicationHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftDebtHandler.cs" />
     <Compile Include="LotEventHandlers\InventoryView\Aircrafts\AircraftOccurrenceHandler.cs" />
@@ -157,7 +157,7 @@
     <Compile Include="Models\GvaViewPersonInspector.cs" />
     <Compile Include="Models\GvaViewOrganizationExaminer.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegistration.cs" />
-    <Compile Include="Models\GvaViewEquipment.cs" />
+    <Compile Include="Models\Views\Equipment\GvaViewEquipment.cs" />
     <Compile Include="Models\Views\Airport\GvaViewAirport.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraft.cs" />
     <Compile Include="Models\GvaCorrespondent.cs" />

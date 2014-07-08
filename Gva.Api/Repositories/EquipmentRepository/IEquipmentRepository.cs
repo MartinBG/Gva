@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Gva.Api.Models;
+using Gva.Api.Models.Views.Equipment;
 
 namespace Gva.Api.Repositories.EquipmentRepository
 {
