@@ -121,15 +121,20 @@ namespace Docs.SqlConfig
             { "1", "Read" },
             { "2", "Edit" },
             { "3", "Register" },
-            { "4", "Management" },
-            { "5", "ESign" },
-            { "6", "Finish" },
-            { "7", "Reverse" },
+            { "4", "PublicFileManagement" },
+            { "5", "Management" },
+            { "6", "DocWorkflowSign" },
+            { "7", "DocWorkflowDiscuss" },
             { "8", "SubstituteManagement" },
-            { "9", "DeleteManagement" },
-            { "10", "EditTech" },
-            { "11", "EditTechElectronicServiceStage" },
-            { "12", "DocCasePartManagement" }
+            { "9", "DocWorkflowManagement" },
+            { "10", "ESign" },
+            { "11", "Finish" },
+            { "12", "Reverse" },
+            { "13", "EditTech" },
+            { "14", "EditTechElectronicServiceStage" },
+            { "15", "DocCasePartManagement" },
+            { "16", "DocMovement" },
+            { "17", "SendMail" }
         };
 
         private Dictionary<string, Tuple<int, int>> CodeClassificationIdRelations = null;

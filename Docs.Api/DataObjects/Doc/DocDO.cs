@@ -225,8 +225,6 @@ namespace Docs.Api.DataObjects
             }
         }
 
-        //public List<DocLinkDO> DocLinks { get; set; }
-
         public bool IsRead { get; set; }
 
         public string ErrorString { get; set; }
@@ -238,16 +236,20 @@ namespace Docs.Api.DataObjects
         public bool CanRead { get; set; }
         public bool CanEdit { get; set; }
         public bool CanRegister { get; set; }
+        public bool CanPublicFileManagement { get; set; }
         public bool CanManagement { get; set; }
+        public bool CanDocWorkflowSign { get; set; }
+        public bool CanDocWorkflowDiscuss { get; set; }
+        public bool CanSubstituteManagement { get; set; }
+        public bool CanDocWorkflowManagement { get; set; }
         public bool CanESign { get; set; }
         public bool CanFinish { get; set; }
         public bool CanReverse { get; set; }
-
-        public bool CanSubstituteManagement { get; set; }
-        public bool CanDeleteManagement { get; set; }
-        public bool CanEditTechElectronicServiceStage { get; set; }
         public bool CanEditTech { get; set; }
-        public bool CanChangeDocCasePart { get; set; }
+        public bool CanEditTechElectronicServiceStage { get; set; }
+        public bool CanDocCasePartManagement { get; set; }
+        public bool CanDocMovement { get; set; }
+        public bool CanSendMail { get; set; }
 
         #endregion
 

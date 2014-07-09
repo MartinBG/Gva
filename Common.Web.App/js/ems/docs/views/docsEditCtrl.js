@@ -20,8 +20,8 @@
     $scope.doc.flags = {};
 
     $scope.doc.flags.isVisibleCreateChildDoc = true;
-    $scope.doc.flags.isVisibleCreateChildResolution = true;
-    $scope.doc.flags.isVisibleCreateChildTask = true;
+    $scope.doc.flags.isVisibleCreateChildResolution = $scope.doc.canManagement;
+    $scope.doc.flags.isVisibleCreateChildTask = $scope.doc.canManagement;
     $scope.doc.flags.isVisibleCreateChildRemark = true;
 
     $scope.doc.flags.isVisibleEditCmd = $scope.doc.docStatusAlias === 'Draft' && $scope.doc.canEdit;
@@ -119,19 +119,19 @@
       !$scope.doc.isDocIncoming;
 
     $scope.doc.flags.isVisibleSignCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canManagement &&
+      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canDocWorkflowSign &&
       !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
       !$scope.doc.isDocIncoming;
     $scope.doc.flags.isVisibleDiscussCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canManagement &&
+      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canDocWorkflowDiscuss &&
       !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
       !$scope.doc.isDocIncoming;
     $scope.doc.flags.isVisibleApprovalCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canManagement &&
+      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canDocWorkflowDiscuss &&
       !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
       !$scope.doc.isDocIncoming;
     $scope.doc.flags.canSubstituteWorkflow = $scope.doc.canSubstituteManagement;
-    $scope.doc.flags.canDeleteWorkflow = $scope.doc.canDeleteManagement;
+    $scope.doc.flags.canDocWorkflowManagement = $scope.doc.canDocWorkflowManagement;
 
     //? depends on caseDoc on current doc
     $scope.doc.flags.isVisibleNextStageCmd = true;
@@ -143,6 +143,7 @@
       $scope.doc.canEditTechElectronicServiceStage;
 
     $scope.doc.flags.isVisibleSendMailCmd =
+      $scope.doc.canSendMail &&
       ($scope.doc.isDocOutgoing || $scope.doc.isDocInternalOutgoing) &&
       ($scope.doc.docStatusAlias === 'Processed' || $scope.doc.docStatusAlias === 'Finished');
 
@@ -152,6 +153,7 @@
       ($scope.doc.docStatusAlias === 'Draft' && $scope.doc.canEdit));
     $scope.doc.flags.isVisibleEditTechCmd = !$scope.doc.isResolution && !$scope.doc.isTask &&
       !$scope.doc.isRemark && $scope.doc.canEditTech;
+    $scope.doc.flags.isVisibleDocMoveCmd = $scope.doc.canDocMovement;
 
     $scope.doc.flags.isVisbleDivider1 = doc.flags.isVisibleRegisterCmd;
     $scope.doc.flags.isVisbleDivider2 = doc.flags.isVisibleEsignCmd ||

@@ -1120,19 +1120,39 @@ namespace Docs.Api.Controllers
 
             #region Set permissions
 
-            returnValue.CanRead = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Read");
+            returnValue.CanRead = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Read");   
+
             returnValue.CanEdit = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Edit");
+
             returnValue.CanRegister = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Register");
+
+            returnValue.CanPublicFileManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "PublicFileManagement");
+
             returnValue.CanManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Management");
-            returnValue.CanESign = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "ESign");
-            returnValue.CanFinish = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Finish");
-            returnValue.CanReverse = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Reverse");
+
+            returnValue.CanDocWorkflowSign = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "DocWorkflowSign");
+
+            returnValue.CanDocWorkflowDiscuss = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "DocWorkflowDiscuss");
 
             returnValue.CanSubstituteManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "SubstituteManagement");
-            returnValue.CanDeleteManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "DeleteManagement");
-            returnValue.CanEditTechElectronicServiceStage = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "EditTech");
+
+            returnValue.CanDocWorkflowManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "DocWorkflowManagement");
+
+            returnValue.CanESign = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "ESign");
+
+            returnValue.CanFinish = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Finish");
+
+            returnValue.CanReverse = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Reverse");
+            
             returnValue.CanEditTech = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "EditTechElectronicServiceStage");
-            returnValue.CanChangeDocCasePart = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "DocCasePartManagement");
+
+            returnValue.CanEditTechElectronicServiceStage = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "EditTech");
+
+            returnValue.CanDocCasePartManagement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "DocCasePartManagement");
+
+            returnValue.CanDocMovement = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "DocMovement");
+
+            returnValue.CanSendMail = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "SendMail");
 
             #endregion
 

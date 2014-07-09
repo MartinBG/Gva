@@ -170,11 +170,11 @@
                 },{
                   text: 'docs.edit.case.changeDocParent.title',
                   action: changeDocParent,
-                  visible: true
+                  visible: doc.flags.isVisibleDocMoveCmd
                 },{
                   text: 'docs.edit.case.changeDocParent.newCase',
                   action: createNewCase,
-                  visible: true
+                  visible: doc.flags.isVisibleDocMoveCmd
                 }
             ]">
           </sc-dropdown-button>
