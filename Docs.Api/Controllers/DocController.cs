@@ -1827,7 +1827,7 @@ namespace Docs.Api.Controllers
 
             doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
 
-            return Ok(doc.GetCurrentDocElectronicServiceStage());
+            return Ok(doc.GetCurrentDocElectronicServiceStage() ?? doc.GetLatestDocElectronicServiceStage());
         }
 
         [HttpPost]
@@ -1879,7 +1879,7 @@ namespace Docs.Api.Controllers
 
             doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
 
-            doc.ReverseDocElectronicServiceStage(doc.GetCurrentDocElectronicServiceStage(), this.userContext);
+            doc.ReverseDocElectronicServiceStage(doc.GetCurrentDocElectronicServiceStage() ?? doc.GetLatestDocElectronicServiceStage(), this.userContext);
 
             this.unitOfWork.Save();
 

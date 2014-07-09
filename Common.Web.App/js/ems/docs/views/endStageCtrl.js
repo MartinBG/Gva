@@ -36,7 +36,11 @@
         return true;
       }
       else {
-        return moment($scope.stageModel.endingDate) > moment($scope.stageModel.startingDate);
+        var momentED = moment($scope.stageModel.endingDate).startOf('day'),
+          momentSD = moment($scope.stageModel.startingDate).startOf('day'),
+          today = moment().startOf('day');
+
+        return !momentSD.isAfter(momentED) && !today.isAfter(momentED);
       }
     };
   }

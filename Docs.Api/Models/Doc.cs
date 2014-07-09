@@ -687,6 +687,11 @@ namespace Docs.Api.Models
                 .SingleOrDefault(e => e.IsCurrentStage);
         }
 
+        public DocElectronicServiceStage GetLatestDocElectronicServiceStage()
+        {
+            return this.DocElectronicServiceStages.OrderByDescending(e => e.DocElectronicServiceStageId).FirstOrDefault();
+        }
+
         public DocElectronicServiceStage UpdateCurrentDocElectronicServiceStage(
             int electronicServiceStageId,
             DateTime startingDate,
@@ -697,8 +702,12 @@ namespace Docs.Api.Models
             this.ModifyDate = DateTime.Now;
             this.ModifyUserId = userContext.UserId;
 
-            DocElectronicServiceStage current = this.DocElectronicServiceStages
-                .SingleOrDefault(e => e.IsCurrentStage);
+            DocElectronicServiceStage current = this.GetCurrentDocElectronicServiceStage();
+
+            if (current == null)
+            {
+                current = this.GetLatestDocElectronicServiceStage();
+            }
 
             if (current != null)
             {
@@ -1105,7 +1114,7 @@ namespace Docs.Api.Models
 
         public void ManualRegister(int? docRegisterId, string regIndex, string regUri, DateTime regDate, UserContext userContext)
         {
-            this.ModifyDate =  DateTime.Now;
+            this.ModifyDate = DateTime.Now;
             this.ModifyUserId = userContext.UserId;
 
             this.DocRegisterId = docRegisterId;
