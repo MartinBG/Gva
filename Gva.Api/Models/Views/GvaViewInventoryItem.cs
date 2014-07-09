@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Data.Entity.ModelConfiguration;
+using Common.Api.Models;
 using Regs.Api.Models;
 
-namespace Gva.Api.Models
+namespace Gva.Api.Models.Views
 {
     public partial class GvaViewInventoryItem
     {
-        public int InventoryItemId { get; set; }
-
         public int LotId { get; set; }
 
         public int PartId { get; set; }
@@ -16,7 +15,7 @@ namespace Gva.Api.Models
 
         public string Name { get; set; }
 
-        public string Type { get; set; }
+        public int? TypeId { get; set; }
 
         public string Number { get; set; }
 
@@ -38,6 +37,8 @@ namespace Gva.Api.Models
 
         public DateTime? EditedDate { get; set; }
 
+        public virtual NomValue Type { get; set; }
+
         public virtual Lot Lot { get; set; }
 
         public virtual Part Part { get; set; }
@@ -48,11 +49,11 @@ namespace Gva.Api.Models
         public GvaViewInventoryItemMap()
         {
             // Primary Key
-            this.HasKey(t => t.InventoryItemId);
+            this.HasKey(t => new { t.LotId, t.PartId });
 
             this.Property(t => t.SetPartAlias)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             this.Property(t => t.Name)
                 .IsRequired();
@@ -72,12 +73,11 @@ namespace Gva.Api.Models
 
             // Table & Column Mappings
             this.ToTable("GvaViewInventoryItems");
-            this.Property(t => t.InventoryItemId).HasColumnName("GvaViewInvItemId");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartId).HasColumnName("LotPartId");
             this.Property(t => t.SetPartAlias).HasColumnName("SetPartAlias");
             this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.Type).HasColumnName("Type");
+            this.Property(t => t.TypeId).HasColumnName("TypeId");
             this.Property(t => t.Number).HasColumnName("Number");
             this.Property(t => t.Date).HasColumnName("Date");
             this.Property(t => t.Publisher).HasColumnName("Publisher");
@@ -97,6 +97,10 @@ namespace Gva.Api.Models
             this.HasRequired(t => t.Part)
                 .WithMany()
                 .HasForeignKey(t => t.PartId);
+
+            this.HasOptional(t => t.Type)
+                .WithMany()
+                .HasForeignKey(t => t.TypeId);
         }
     }
 }

@@ -6,6 +6,7 @@ using Common.Data;
 using Common.Linq;
 using Docs.Api.Models;
 using Gva.Api.Models;
+using Gva.Api.Models.Views;
 using Gva.Api.ModelsDO;
 
 namespace Gva.Api.Repositories.InventoryRepository
@@ -22,7 +23,7 @@ namespace Gva.Api.Repositories.InventoryRepository
         public IEnumerable<InventoryItemDO> GetInventoryItemsForLot(int lotId, int? caseTypeId)
         {
             var query =
-                from i in this.unitOfWork.DbContext.Set<GvaViewInventoryItem>()
+                from i in this.unitOfWork.DbContext.Set<GvaViewInventoryItem>().Include(i => i.Type)
                 join f in this.unitOfWork.DbContext.Set<GvaLotFile>() on i.PartId equals f.LotPartId into fg
                 from f in fg.DefaultIfEmpty()
                 join df in this.unitOfWork.DbContext.Set<DocFile>() on f.DocFileId equals df.DocFileId into dfg
@@ -77,7 +78,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                     SetPartAlias = i.SetPartAlias,
                     PartIndex = i.PartIndex,
                     Name = i.Name,
-                    Type = i.Type,
+                    Type = i.Type == null ? null : i.Type.Name,
                     Number = i.Number,
                     Date = i.Date,
                     Publisher = i.Publisher,

@@ -5,7 +5,11 @@ using Gva.Api.LotEventHandlers.Aircraft;
 using Gva.Api.LotEventHandlers.Airport;
 using Gva.Api.LotEventHandlers.ApplicationView;
 using Gva.Api.LotEventHandlers.Equipment;
-using Gva.Api.LotEventHandlers.InventoryView;
+using Gva.Api.LotEventHandlers.Inventory.Aircrafts;
+using Gva.Api.LotEventHandlers.Inventory.Airports;
+using Gva.Api.LotEventHandlers.Inventory.Equipments;
+using Gva.Api.LotEventHandlers.Inventory.Organizations;
+using Gva.Api.LotEventHandlers.Inventory.Persons;
 using Gva.Api.LotEventHandlers.Organization;
 using Gva.Api.LotEventHandlers.Person;
 using Gva.Api.Models;
@@ -42,44 +46,50 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftRegistrationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegMarkProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
-            //InventaryView
-            moduleBuilder.RegisterType<AircraftApplicationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftDebtHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftOccurrenceHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftOtherHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftOwnerHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            //AirportView
+            moduleBuilder.RegisterType<AirportProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
-            moduleBuilder.RegisterType<OrganizationApplicationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<OrganizationOtherHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonApplicationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonCheckHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonDocumentIdHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonEducationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonEmploymentHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonMedicalHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonOtherHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonTrainingHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            //EquipmentView
+            moduleBuilder.RegisterType<EquipmentProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
             //OrganizationView
             moduleBuilder.RegisterType<OrganizationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationExaminerProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            
+
             //PersonView
             moduleBuilder.RegisterType<PersonProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonInspectorProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonLicenceProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonRatingProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
-            moduleBuilder.RegisterType<AirportProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AirportOtherHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AirportOwnerHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AirportApplicationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            //InventoryView
+            moduleBuilder.RegisterType<AircraftApplicationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftDebtProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftOccurrenceProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftOtherProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftOwnerProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
-            moduleBuilder.RegisterType<EquipmentProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<EquipmentOtherHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<EquipmentOwnerHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<EquipmentApplicationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AirportApplicationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AirportOtherProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AirportOwnerProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
+            moduleBuilder.RegisterType<EquipmentApplicationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<EquipmentOtherProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<EquipmentOwnerProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+
+            moduleBuilder.RegisterType<OrganizationApplicationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationOtherProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+
+            moduleBuilder.RegisterType<PersonApplicationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonCheckProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonDocumentIdProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonEducationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonEmploymentProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonMedicalProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonOtherProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonTrainingProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+
+            //Repositories
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRepository>().As<IAircraftRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>().InstancePerLifetimeScope();

@@ -8,10 +8,10 @@ INSERT INTO [LotSetParts]
 VALUES
     (@setId    , 'Данни за ВС'                 , 'aircraftData'           , N'^aircraftData$'                     , NULL        ),
     (@setId    , 'Данни за ВС'                 , 'aircraftDataApex'       , N'^aircraftDataApex$'                 , NULL        ),
-    (@setId    , 'Свързано лице'               , 'aircraftOwner'          , N'^aircraftDocumentOwners/\d+$'       , NULL        ),
+    (@setId    , 'Право на собственост'        , 'aircraftOwner'          , N'^aircraftDocumentOwners/\d+$'       , NULL        ),
     (@setId    , 'Оборудване'                  , 'aircraftPart'           , N'^aircraftParts/\d+$'                , NULL        ),
-    (@setId    , 'Залог/запор'                 , 'aircraftDebtFM'         , N'^aircraftDocumentDebtsFM/\d+$'      , NULL        ),
-    (@setId    , 'Залог/запор'                 , 'aircraftDebt'           , N'^aircraftDocumentDebts/\d+$'        , NULL        ),
+    (@setId    , 'Задължение'                  , 'aircraftDebtFM'         , N'^aircraftDocumentDebtsFM/\d+$'      , NULL        ),
+    (@setId    , 'Задължение'                  , 'aircraftDebt'           , N'^aircraftDocumentDebts/\d+$'        , NULL        ),
     (@setId    , 'Подръжка'                    , 'aircraftMaintenance'    , N'^maintenances/\d+$'                 , NULL        ),
     (@setId    , 'Инцидент'                    , 'aircraftOccurrence'     , N'^documentOccurrences/\d+$'          , NULL        ),
     (@setId    , 'Инспекция'                   , 'aircraftInspection'     , N'^inspections/\d+$'                  , NULL        ),

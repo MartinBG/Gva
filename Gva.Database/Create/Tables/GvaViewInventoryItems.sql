@@ -2,13 +2,12 @@
 GO 
 
 CREATE TABLE [dbo].[GvaViewInventoryItems] (
-    [GvaViewInvItemId] INT              NOT NULL IDENTITY,
     [LotId]            INT              NOT NULL,
     [LotPartId]        INT              NOT NULL,
-    [SetPartAlias]     NVARCHAR(50)     NOT NULL,
+    [SetPartAlias]     NVARCHAR(100)    NOT NULL,
     [Name]             NVARCHAR(MAX)    NOT NULL,
-    [Type]             NVARCHAR(MAX)    NULL,
-    [Number]           NVARCHAR(100)     NULL,
+    [TypeId]           INT              NULL,
+    [Number]           NVARCHAR(100)    NULL,
     [Date]             DATETIME2(7)     NULL,
     [Publisher]        NVARCHAR(150)    NULL,
     [Valid]            BIT              NULL,
@@ -18,19 +17,19 @@ CREATE TABLE [dbo].[GvaViewInventoryItems] (
     [CreationDate]     DATETIME2(7)     NOT NULL,
     [EditedBy]         NVARCHAR(50)     NULL,
     [EditedDate]       DATETIME2(7)     NULL,
-    CONSTRAINT [PK_GvaViewInventoryItems]              PRIMARY KEY ([GvaViewInvItemId]),
+    CONSTRAINT [PK_GvaViewInventoryItems]              PRIMARY KEY ([LotId], [LotPartId]),
     CONSTRAINT [FK_GvaViewInventoryItems_Lots]         FOREIGN KEY ([LotId])         REFERENCES [dbo].[Lots] ([LotId]),
-    CONSTRAINT [FK_GvaViewInventoryItems_LotParts]     FOREIGN KEY ([LotPartId])     REFERENCES [dbo].[LotParts] ([LotPartId])
+    CONSTRAINT [FK_GvaViewInventoryItems_LotParts]     FOREIGN KEY ([LotPartId])     REFERENCES [dbo].[LotParts] ([LotPartId]),
+    CONSTRAINT [FK_GvaViewInventoryItems_NomValues]    FOREIGN KEY ([TypeId])        REFERENCES [dbo].[NomValues] ([NomValueId])
 )
 GO
 
 exec spDescTable  N'GvaViewInventoryItems', N'Опис.'
-exec spDescColumn N'GvaViewInventoryItems', N'GvaViewInvItemId', N'Уникален системно генериран идентификатор.'
 exec spDescColumn N'GvaViewInventoryItems', N'LotId'           , N'Идентификатор на партидата.'
 exec spDescColumn N'GvaViewInventoryItems', N'LotPartId'       , N'Идентификатор на част от партидата.'
 exec spDescColumn N'GvaViewInventoryItems', N'SetPartAlias'    , N'Вид документ.'
 exec spDescColumn N'GvaViewInventoryItems', N'Name'            , N'Единен граждански номер.'
-exec spDescColumn N'GvaViewInventoryItems', N'Type'            , N'Тип документ.'
+exec spDescColumn N'GvaViewInventoryItems', N'TypeId'          , N'Тип документ.'
 exec spDescColumn N'GvaViewInventoryItems', N'Number'          , N'Номер на документ.'
 exec spDescColumn N'GvaViewInventoryItems', N'Date'            , N'Дата.'
 exec spDescColumn N'GvaViewInventoryItems', N'Publisher'       , N'Издател.'
