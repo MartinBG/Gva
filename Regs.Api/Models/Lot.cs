@@ -60,7 +60,8 @@ namespace Regs.Api.Models
         public PartVersion CreatePart(string path, JObject json, UserContext userContext)
         {
             Commit index = this.Index;
-            this.ModifyDate = DateTime.Now;
+            var currentDate = DateTime.Now;
+            this.ModifyDate = currentDate;
 
             string expandedPath;
             int partIndex;
@@ -89,7 +90,9 @@ namespace Regs.Api.Models
                     SetPart = this.GetSetPart(expandedPath),
                     Lot = this,
                     Path = expandedPath,
-                    Index = partIndex
+                    Index = partIndex,
+                    CreatorId = userContext.UserId,
+                    CreateDate = currentDate
                 };
                 this.Parts.Add(part);
             }
@@ -100,7 +103,7 @@ namespace Regs.Api.Models
                 OriginalCommit = index,
                 PartOperation = PartOperation.Add,
                 CreatorId = userContext.UserId,
-                CreateDate = DateTime.Now,
+                CreateDate = currentDate,
                 Part = part,
                 Content = json
             };

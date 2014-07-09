@@ -33,7 +33,7 @@ namespace Regs.Api.Models
 
         public virtual Part Part { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual User Creator { get; set; }
 
         public JObject Content
         {
@@ -103,7 +103,7 @@ namespace Regs.Api.Models
                 .HasForeignKey(d => d.PartId)
                 .WillCascadeOnDelete();
 
-            this.HasRequired(t => t.User)
+            this.HasRequired(t => t.Creator)
                 .WithMany()
                 .HasForeignKey(d => d.CreatorId);
 

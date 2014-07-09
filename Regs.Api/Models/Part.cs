@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using Common.Api.Models;
 using Common.Sequence;
 
 namespace Regs.Api.Models
@@ -23,6 +25,12 @@ namespace Regs.Api.Models
         public string Path { get; set; }
 
         public int Index { get; set; }
+
+        public int CreatorId { get; set; }
+
+        public DateTime CreateDate { get; set; }
+
+        public virtual User Creator { get; set; }
 
         public virtual Lot Lot { get; set; }
 
@@ -58,6 +66,8 @@ namespace Regs.Api.Models
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.Path).HasColumnName("Path");
             this.Property(t => t.Index).HasColumnName("Index");
+            this.Property(t => t.CreatorId).HasColumnName("CreatorId");
+            this.Property(t => t.CreateDate).HasColumnName("CreateDate");
 
             // Relationships
             this.HasRequired(t => t.Lot)
@@ -68,6 +78,10 @@ namespace Regs.Api.Models
             this.HasRequired(t => t.SetPart)
                 .WithMany()
                 .HasForeignKey(d => d.SetPartId);
+
+            this.HasRequired(t => t.Creator)
+                .WithMany()
+                .HasForeignKey(d => d.CreatorId);
         }
     }
 }
