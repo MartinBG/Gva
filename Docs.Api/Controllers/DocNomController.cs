@@ -824,5 +824,114 @@ namespace Docs.Api.Controllers
 
             return Ok(results);
         }
+
+        [Route("electronicServiceProvider/{id:int}")]
+        public IHttpActionResult GetElectronicServiceProvider(int id)
+        {
+            var result = this.unitOfWork.DbContext.Set<ElectronicServiceProvider>()
+                .Where(e => e.ElectronicServiceProviderId == id)
+                .Select(e => new
+                {
+                    e.ElectronicServiceProviderId,
+                    e.Code,
+                    e.Name,
+                    e.Bulstat,
+                    e.Alias,
+                    e.IsActive
+                })
+                .SingleOrDefault();
+
+            return Ok(new
+            {
+                nomValueId = result.ElectronicServiceProviderId,
+                code = result.Code,
+                name = result.Name,
+                bulstat = result.Bulstat,
+                alias = result.Alias,
+                isActive = result.IsActive
+            });
+        }
+
+        [Route("electronicServiceProvider")]
+        public IHttpActionResult GetElectronicServiceProviders(string term = null, int offset = 0, int? limit = null)
+        {
+            var predicate =
+                PredicateBuilder.True<ElectronicServiceProvider>()
+                .AndStringContains(e => e.Name, term)
+                .And(e => e.IsActive);
+
+            var results =
+                this.unitOfWork.DbContext.Set<ElectronicServiceProvider>()
+                .Where(predicate)
+                .OrderBy(e => e.Code)
+                .WithOffsetAndLimit(offset, limit)
+                .Select(e => new
+                {
+                    nomValueId = e.ElectronicServiceProviderId,
+                    code = e.Code,
+                    name = e.Name,
+                    bulstat = e.Bulstat,
+                    alias = e.Alias,
+                    isActive = e.IsActive
+                })
+                .ToList();
+
+            return Ok(results);
+        }
+
+        [Route("irregularityType/{id:int}")]
+        public IHttpActionResult GetIrregularityType(int id)
+        {
+            var result = this.unitOfWork.DbContext.Set<IrregularityType>()
+                .Where(e => e.IrregularityTypeId == id)
+                .Select(e => new
+                {
+                    e.IrregularityTypeId,
+                    e.Name,
+                    e.Alias,
+                    e.Description,
+                })
+                .SingleOrDefault();
+
+            return Ok(new
+            {
+                nomValueId = result.IrregularityTypeId,
+                name = result.Name,
+                alias = result.Alias,
+                description = result.Description
+            });
+        }
+
+        [Route("irregularityType")]
+        public IHttpActionResult GetIrregularityTypes(string term = null, int? docTypeId = null, int offset = 0, int? limit = null)
+        {
+            var predicate =
+                PredicateBuilder.True<IrregularityType>()
+                .AndStringContains(e => e.Name, term)
+                .AndEquals(e => e.DocTypeId, docTypeId);
+
+            var results =
+                this.unitOfWork.DbContext.Set<IrregularityType>()
+                .Where(predicate)
+                .OrderBy(e => e.IrregularityTypeId)
+                .WithOffsetAndLimit(offset, limit)
+                .Select(e => new
+                {
+                    e.IrregularityTypeId,
+                    e.Name,
+                    e.Alias,
+                    e.Description
+                })
+                .ToList()
+                .Select(e => new
+                {
+                    nomValueId = e.IrregularityTypeId,
+                    name = e.Name,
+                    alias = e.Alias,
+                    description = e.Description
+                });
+
+            return Ok(results);
+        }
     }
 }

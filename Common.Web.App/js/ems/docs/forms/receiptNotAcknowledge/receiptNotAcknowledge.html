@@ -1,0 +1,93 @@
+﻿<ng-form class="form-inline" name="receiptNotAcknowledgeForm" sc-validate="{}">
+  <div ng-if="isLoaded">
+
+    <div class="row">
+      <div class="form-group col-sm-4">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.serviceProviderName"></label><br />
+        <sc-nomenclature ng-model="serviceProvider.id" nom-obj="serviceProvider.obj" mode="id" alias="'electronicServiceProvider'" ng-change="serviceProviderChange()" ng-readonly="readonly"></sc-nomenclature>
+      </div>
+    </div>
+
+    <div class="row"> 
+      <div class="form-group col-sm-12">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.applicant"></label>
+      </div>
+    </div>
+
+    <div class="row"> 
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.firstName"></label>
+        <sc-text class="form-control" ng-model="model.jObject.Applicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names.First" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.secondName"></label>
+        <sc-text class="form-control" ng-model="model.jObject.Applicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names.Middle" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.lastName"></label>
+        <sc-text class="form-control" ng-model="model.jObject.Applicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names.Last" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.egn"></label>
+        <sc-text class="form-control" ng-model="model.jObject.Applicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Identifier.EGN" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-4">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.email "></label>
+        <sc-text class="form-control" ng-model="model.jObject.Applicant.EmailAddress" ng-readonly="readonly"></sc-text>
+      </div>
+    </div>
+
+    <div class="row"> 
+      <div class="form-group col-sm-12">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.documentUri"></label>
+      </div>
+    </div>
+
+    <div class="row"> 
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.registerIndex"></label><br />
+        <sc-text class="form-control" ng-model="model.jObject.MessageURI.RegisterIndex" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.sequenceNumber"></label><br />
+        <sc-text class="form-control" ng-model="model.jObject.MessageURI.SequenceNumber" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.date"></label><br />
+        <sc-date ng-model="model.jObject.MessageURI.ReceiptOrSigningDate" ng-readonly="readonly"></sc-date>
+      </div>
+    </div>
+
+    <div class="row"> 
+      <div class="form-group col-sm-6">
+        <label class="control-label" l10n-text="receiptNotAcknowledge.discrepancies"></label>
+        <table class="table table-bordered table-condensed">
+          <thead>
+              <tr>
+                <th l10n-text="receiptNotAcknowledge.discrepancyType"></th>
+                <th style="width: 40px;"></th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="d in discrepancies" ng-form sc-validate="{}">
+              <td sc-has-error="discrepancyType">
+                  <sc-text name="discrepancyType" ng-change="editDiscrepancy($index)" ng-model="d.text" ng-readonly="readonly"></sc-text>
+              </td>
+              <td style="text-align: center; width: 1px;">
+                <span>
+                  <sc-button btn-click="removeDiscrepancy($index)" class="btn btn-xs btn-default" icon="glyphicon-remove" ng-disabled="readonly"></sc-button>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="5" style="text-align: right; width: 1px;">
+                <sc-button btn-click="addDiscrepancy()" class="btn btn-xs btn-primary" icon="glyphicon-plus" ng-disabled="readonly"></sc-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</ng-form>

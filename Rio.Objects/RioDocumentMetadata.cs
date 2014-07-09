@@ -915,23 +915,28 @@ namespace Rio.Objects
 
         public string DocumentTypeName
         {
+            //get
+            //{
+            //    var currentCulture = String.Empty;
+            //    if (System.Threading.Thread.CurrentThread.CurrentUICulture != null)
+            //    {
+            //        currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower().Substring(0, 2);
+            //    }
+
+            //    switch (currentCulture)
+            //    {
+            //        case "bg":
+            //            return _documentTypeName;
+            //        case "en":
+            //            return _documentTypeNameEnglish;
+            //        default:
+            //            return _documentTypeName;
+            //    }
+            //}
+
             get
             {
-                var currentCulture = String.Empty;
-                if (System.Threading.Thread.CurrentThread.CurrentUICulture != null)
-                {
-                    currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower().Substring(0, 2);
-                }
-
-                switch (currentCulture)
-                {
-                    case "bg":
-                        return _documentTypeName;
-                    case "en":
-                        return _documentTypeNameEnglish;
-                    default:
-                        return _documentTypeName;
-                }
+                return _documentTypeName;
             }
         }
 

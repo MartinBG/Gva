@@ -90,6 +90,19 @@
       </div>
     </accordion-group>
 
+    <accordion-group is-open="true" ng-if="model.jObjectForm">
+      <accordion-heading>
+          <a l10n-text="docs.edit.view.editableFile" style="font-size: 12px;"></a>
+      </accordion-heading>
+
+      <ems-removing-irregularity name="docFileRemovingIrregularity" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === '0010-003010'"></ems-removing-irregularity>
+
+      <ems-receipt-not-acknowledge name="docFileReceiptNotAcknowledge" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === '0010-000001'"></ems-receipt-not-acknowledge>
+
+      <ems-receipt-acknowledge name="docFileReceiptAcknowledge" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === '0010-000002'"></ems-receipt-acknowledge>
+
+    </accordion-group>
+
     <accordion-group is-open="model.openAccordion || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0" ng-if="!readonly || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0">
       <accordion-heading>
           <a l10n-text="docs.edit.view.content" style="font-size: 12px;"></a>

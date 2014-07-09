@@ -77,6 +77,21 @@
       templateUrl: 'js/ems/docs/forms/docView/docClassification.html',
       controller: 'DocClassificationCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'emsRemovingIrregularity',
+      templateUrl: 'js/ems/docs/forms/removingIrregularity/removingIrregularity.html',
+      controller: 'RemovingIrregularityCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'emsReceiptNotAcknowledge',
+      templateUrl: 'js/ems/docs/forms/receiptNotAcknowledge/receiptNotAcknowledge.html',
+      controller: 'ReceiptNotAcknowledgeCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'emsReceiptAcknowledge',
+      templateUrl: 'js/ems/docs/forms/receiptAcknowledge/receiptAcknowledge.html',
+      controller: 'ReceiptAcknowledgeCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.docs'                                     , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot'                                                                                                         ])

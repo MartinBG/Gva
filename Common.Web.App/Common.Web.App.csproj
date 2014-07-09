@@ -64,6 +64,10 @@
     <Content Include="js\ems\corrs\views\corrNewCtrl.js" />
     <Content Include="js\ems\corrs\views\corrSearch.html" />
     <Content Include="js\ems\corrs\views\corrSearchCtrl.js" />
+    <Content Include="js\ems\docs\forms\receiptNotAcknowledge\receiptNotAcknowledge.html" />
+    <Content Include="js\ems\docs\forms\receiptNotAcknowledge\receiptNotAcknowledge.js" />
+    <Content Include="js\ems\docs\forms\receiptAcknowledge\receiptAcknowledge.html" />
+    <Content Include="js\ems\docs\forms\receiptAcknowledge\receiptAcknowledge.js" />
     <Content Include="js\ems\docs\forms\docInfo.html" />
     <Content Include="js\ems\docs\forms\docNew\docNewCommon.html" />
     <Content Include="js\ems\docs\forms\docNew\docNewCommonCtrl.js" />
@@ -86,6 +90,8 @@
     <Content Include="js\ems\docs\forms\docView\resolutionCtrl.js" />
     <Content Include="js\ems\docs\forms\docView\task.html" />
     <Content Include="js\ems\docs\forms\docView\taskCtrl.js" />
+    <Content Include="js\ems\docs\forms\removingIrregularity\removingIrregularity.html" />
+    <Content Include="js\ems\docs\forms\removingIrregularity\removingIrregularityCtrl.js" />
     <Content Include="js\ems\docs\recources\docs.js" />
     <Content Include="js\ems\docs\recources\docStages.js" />
     <Content Include="js\ems\docs\recources\docStatuses.js" />
@@ -216,6 +222,7 @@
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

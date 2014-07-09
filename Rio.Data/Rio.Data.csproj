@@ -161,7 +161,7 @@
     <Compile Include="ServiceContracts\AppCommunicator\DocumentRegistrationStatus.cs" />
     <Compile Include="ServiceContracts\AppCommunicator\DocumentRequest.cs" />
     <Compile Include="ServiceContracts\AppCommunicator\IDocumentService.cs" />
-    <Compile Include="Utils\RioJObjectUtils.cs" />
+    <Compile Include="Utils\RioObjectUtils.cs" />
     <Compile Include="Utils\RioValidator\IRioValidator.cs" />
     <Compile Include="Utils\RioValidator\RioValidator.cs" />
     <Compile Include="Utils\RioDocumentParser\RioDocumentParser.cs" />

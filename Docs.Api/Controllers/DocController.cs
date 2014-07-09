@@ -18,6 +18,7 @@ using System.Web.Http;
 using Common.Api.StaticNomenclatures;
 using Rio.Data.Utils;
 using Common.Api.Models;
+using Rio.Objects;
 
 namespace Docs.Api.Controllers
 {
@@ -731,7 +732,7 @@ namespace Docs.Api.Controllers
                     {
                         DocType docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId);
 
-                        byte[] eDocFileContent = RioObjectUtils.GetEmptyRioObjectBytes(docType.ElectronicServiceFileTypeUri);
+                        byte[] eDocFileContent = CreateRioObject(docType.ElectronicServiceFileTypeUri);
 
                         if (eDocFileContent != null)
                         {
@@ -2023,6 +2024,47 @@ namespace Docs.Api.Controllers
             {
                 content = jObject
             });
+        }
+
+        private byte[] CreateRioObject(string docTypeUri)
+        {
+            byte[] content = null;
+
+            try
+            {
+                if (docTypeUri == RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeURIValue)
+                {
+                    content = RioObjectUtils.CreateR0090ReceiptNotAcknowledgedMessage(
+                        RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeName,
+                        RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeURI.RegisterIndex,
+                        RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeURI.BatchNumber);
+                }
+                else if (docTypeUri == RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeURIValue)
+                {
+                    content = RioObjectUtils.CreateR0101ReceiptAcknowledgedMessage(
+                        RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeName,
+                        RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeURI.RegisterIndex,
+                        RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeURI.BatchNumber);
+                }
+                else if (docTypeUri == RioDocumentMetadata.RemovingIrregularitiesInstructionsMetadata.DocumentTypeURIValue)
+                {
+                    content = RioObjectUtils.CreateR3010RemovingIrregularitiesInstructions();
+                }
+                else if (docTypeUri == RioDocumentMetadata.DecisionGrantAccessPublicInformationMetadata.DocumentTypeURIValue)
+                {
+                    content = RioObjectUtils.CreateR6090DecisionGrantAccessPublicInformation();
+                }
+                else
+                {
+                    content = RioObjectUtils.CreateEmptyRioObject(docTypeUri);
+                }
+
+                return content;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
