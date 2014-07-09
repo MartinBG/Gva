@@ -97,6 +97,9 @@
     <Content Include="Insert\AopExcelConfig\DocTypeUnitRoles.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
+    <Content Include="Insert\AopExcelConfig\ElectronicServiceProviders.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
     <Content Include="Insert\AopExcelConfig\ElectronicServiceStageExecutors.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>

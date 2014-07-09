@@ -44,6 +44,7 @@
   <ItemGroup>
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
+    <Content Include="Create\Tables\MosvElectronicServiceProviders.sql" />
     <Content Include="Create\Tables\MosvViewAdmissions.sql" />
     <Content Include="Create\Tables\MosvViewSignals.sql" />
     <Content Include="Create\Tables\MosvViewSuggestions.sql" />
@@ -68,6 +69,9 @@
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
     <Content Include="Insert\MosvExcelConfig\DocTypeUnitRoles.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="Insert\MosvExcelConfig\ElectronicServiceProviders.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
     <Content Include="Insert\MosvExcelConfig\ElectronicServiceStageExecutors.sql">

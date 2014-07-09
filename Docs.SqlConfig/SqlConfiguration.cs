@@ -17,6 +17,7 @@ namespace Docs.SqlConfig
         public string SQLFormat { get; set; }
         public bool HasIdentityInsert { get; set; }
         public bool HasIdValues { get; set; }
+        public bool SetEmptyStringWhenValueMissing { get; set; }
     }
 
     public class ElectronicServiceStageRow
@@ -79,6 +80,17 @@ namespace Docs.SqlConfig
                 HasIdentityInsert = true,
                 HasIdValues = true
             },
+            new TableInfo
+            {
+                TableName = "ElectronicServiceProviders",
+                IdColumn = "ElectronicServiceProviderId",
+                AllColumns = new string[] { "ElectronicServiceProviderId", "Code", "Name", "Bulstat", "Alias", "IsActive"},
+                StringColumns = new string[] { "Code", "Name", "Bulstat", "Alias" },
+                SQLFormat = "INSERT INTO [ElectronicServiceProviders]([ElectronicServiceProviderId], [Code], [Name], [Bulstat], [Alias], [IsActive]) VALUES({0},{1},{2},{3},{4},{5});",
+                HasIdentityInsert = true,
+                HasIdValues = true,
+                SetEmptyStringWhenValueMissing = true
+            }
         };
 
         private Dictionary<string, string> DocDirectionsDictionary = new Dictionary<string, string>()
@@ -316,7 +328,7 @@ namespace Docs.SqlConfig
 
                 DocTypeAndClassification2Dictionary.Add(identityValue.ToString(), new Tuple<string, string>(classificationsId2, isElectronicService));
 
-                DocTypeAndDocTypeGroupsDictionary.Add(identityValue.ToString(), new Tuple<string, string>(docTypeGroupId, docTypeGroup));
+                DocTypeAndDocTypeGroupsDictionary.Add(identityValue.ToString(), new Tuple<string, string>(docTypeGroupId, isElectronicService));
 
                 identityValue++;
             }
@@ -534,7 +546,14 @@ namespace Docs.SqlConfig
                     bool isEmpty = string.IsNullOrWhiteSpace(columnValue);
                     if (isEmpty)
                     {
-                        columnValue = "NULL";
+                        if (tableInfo.StringColumns.Contains(column) && tableInfo.SetEmptyStringWhenValueMissing)
+                        {
+                            columnValue = "''";
+                        }
+                        else
+                        {
+                            columnValue = "NULL";
+                        }
                     }
                     else if (tableInfo.StringColumns.Contains(column))
                     {
@@ -748,7 +767,7 @@ namespace Docs.SqlConfig
 
                     foreach (var item in DocTypeAndDocTypeGroupsDictionary)
                     {
-                        if (item.Value.Item2 == "Заявление")
+                        if (item.Value.Item2 == "1") //IsElectronicService
                         {
                             AddRow_ElectronicServiceStagesAndExecutors(electronicServiceStagesTableRows, electronicServiceStageExecutorsTableRows, allElectronicServiceStages, item.Key, ref electronicServiceStageExecutorsIdentity, ref identityValue);
                         }

@@ -92,6 +92,9 @@
     <Content Include="Insert\GvaExcelConfig\DocTypeUnitRoles.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
+    <Content Include="Insert\GvaExcelConfig\ElectronicServiceProviders.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
     <Content Include="Insert\GvaExcelConfig\ElectronicServiceStageExecutors.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>

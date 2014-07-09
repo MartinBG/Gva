@@ -14,12 +14,13 @@
   <RemovePersonalInformation/>
  </OfficeDocumentSettings>
  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
-  <WindowHeight>13515</WindowHeight>
-  <WindowWidth>30720</WindowWidth>
+  <WindowHeight>10365</WindowHeight>
+  <WindowWidth>21570</WindowWidth>
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
   <ActiveSheet>8</ActiveSheet>
+  <FirstVisibleSheet>6</FirstVisibleSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -985,7 +986,7 @@
     <Cell ss:StyleID="s84"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
@@ -1003,7 +1004,7 @@
     <Cell ss:StyleID="s84"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
@@ -1037,7 +1038,7 @@
     <Cell ss:StyleID="s84"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">000000001</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
     <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
@@ -1068,8 +1069,46 @@
    <Panes>
     <Pane>
      <Number>3</Number>
+     <ActiveRow>19</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="ElectronicServiceProviders">
+  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="2" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="15">
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s65"><Data ss:Type="String">ElectronicServiceProviderId</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">Code</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">Name</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">Bulstat</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">Alias</Data></Cell>
+    <Cell ss:StyleID="s65"><Data ss:Type="String">IsActive</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">АОП</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">131236380</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">aop</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">1</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Unsynced/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
      <ActiveRow>1</ActiveRow>
-     <ActiveCol>8</ActiveCol>
+     <ActiveCol>1</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -1126,7 +1165,7 @@
     <Cell><Data ss:Type="String">UnitUser</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">000000001</Data></Cell>
+    <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="s89"><Data ss:Type="String">Документ за втори етап на предварителен контрол</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
@@ -1136,7 +1175,7 @@
     <Cell ss:StyleID="s77"><Data ss:Type="String">Ръководно ниво 5А</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">000000001</Data></Cell>
+    <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">03</Data></Cell>
     <Cell ss:StyleID="s89"><Data ss:Type="String">Заявление за предварителен контрол по чл. 19, ал. 2, т. 22 от ЗОП</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
@@ -1159,11 +1198,11 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>3</ActiveRow>
-     <ActiveCol>1</ActiveCol>
+     <ActiveRow>2</ActiveRow>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -1334,7 +1373,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
@@ -1373,7 +1411,7 @@
     <Cell><Data ss:Type="String">ExecutorUser</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">000000001</Data></Cell>
+    <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -1387,7 +1425,7 @@
     <Cell ss:StyleID="s70"><Data ss:Type="String">Система</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">000000001</Data></Cell>
+    <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">2</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -1401,7 +1439,7 @@
     <Cell ss:StyleID="s81"/>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">000000001</Data></Cell>
+    <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">3</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -1415,7 +1453,7 @@
     <Cell ss:StyleID="s81"/>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">000000001</Data></Cell>
+    <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">4</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -1442,11 +1480,11 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
+   <TopRowVisible>3</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>5</ActiveRow>
-     <ActiveCol>6</ActiveCol>
+     <ActiveRow>4</ActiveRow>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
