@@ -45,7 +45,12 @@
             return $filter('date')(parsedExpression(item), scDatatableConfig.format);
           }
           else if (column.type === 'boolean') {
-            return parsedExpression(item) ? 'Да' : 'Не';
+            var value = parsedExpression(item);
+            if (value === null || value === undefined) {
+              return null;
+            }
+
+            return value ? 'Да' : 'Не';
           }
           else {
             return parsedExpression(item);
