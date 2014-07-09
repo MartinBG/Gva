@@ -84,7 +84,7 @@
       '$stateParams',
       'Nomenclatures',
       'l10n',
-      'Application',
+      'Applications',
       'application',
       function ($q, $stateParams, Nomenclatures, l10n, Applications, application) {
         var docFile, doc, docValues;
@@ -130,7 +130,6 @@
             $stateParams.setPartAlias === 'airportApplication' ||
             $stateParams.setPartAlias === 'equipmentApplication') {
             part.documentNumber = res.doc.documentNumber;
-            //todo applicationType = docType?
           }
 
           return {
