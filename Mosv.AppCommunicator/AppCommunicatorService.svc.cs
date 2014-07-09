@@ -188,7 +188,7 @@ namespace Mosv.AppCommunicator
                 var caseDoc = this.docRepository.GetByRegUriAndAccessCode(uri.RegisterIndex, int.Parse(uri.SequenceNumber), uri.ReceiptOrSigningDate.Value, publicAccessCode);
                 if (caseDoc != null)
                 {
-                    var mosvElectronicServiceProvider = this.unitOfWork.DbContext.Set<MosvElectronicServiceProvider>().Where(e => e.Code == caseDoc.DocType.ElectronicServiceProvider).FirstOrDefault();
+                    var mosvElectronicServiceProvider = this.unitOfWork.DbContext.Set<ElectronicServiceProvider>().Where(e => e.Code == caseDoc.DocType.ElectronicServiceProvider).FirstOrDefault();
 
                     CaseFileInfo caseFileInfo = new CaseFileInfo();
                     caseFileInfo.AISCaseDataInternetAccess = new AISCaseDataInternetAccess();

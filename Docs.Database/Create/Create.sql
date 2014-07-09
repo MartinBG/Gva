@@ -71,6 +71,7 @@ GO
 --ElectronicServices
 :r $(rootPath)"\Tables\ElectronicServices\ElectronicServiceStages.sql"
 :r $(rootPath)"\Tables\ElectronicServices\ElectronicServiceStageExecutors.sql"
+:r $(rootPath)"\Tables\ElectronicServices\ElectronicServiceProviders.sql"
 :r $(rootPath)"\Tables\Documents\DocElectronicServiceStages.sql"
 
 --AdministrativeEmails

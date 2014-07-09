@@ -103,6 +103,7 @@
     <Content Include="Create\Tables\Documents\DocWorkflowActions.sql" />
     <Content Include="Create\Tables\Documents\DocWorkflows.sql" />
     <Content Include="Create\Tables\Documents\Tickets.sql" />
+    <Content Include="Create\Tables\ElectronicServices\ElectronicServiceProviders.sql" />
     <Content Include="Create\Tables\ElectronicServices\ElectronicServiceStageExecutors.sql" />
     <Content Include="Create\Tables\ElectronicServices\ElectronicServiceStages.sql" />
     <Content Include="Create\Tables\IncomingDocuments\IncomingDocFiles.sql" />

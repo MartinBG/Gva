@@ -8,7 +8,6 @@ GO
 :r $(rootPath)\"Tables\MosvViewAdmissions.sql"
 :r $(rootPath)\"Tables\MosvViewSignals.sql"
 :r $(rootPath)\"Tables\MosvViewSuggestions.sql"
-:r $(rootPath)\"Tables\MosvElectronicServiceProviders.sql"
 
 ---------------------------------------------------------------
 -- Diagram
@@ -44,6 +43,7 @@ GO
 --Insert Mosv EXCEL CONFIG
 ---------------------------------------------------------------
 :r $(rootPath)\"..\Insert\MosvExcelConfig\DocTypeGroups.sql"
+:r $(rootPath)\"..\Insert\MosvExcelConfig\ElectronicServiceProviders.sql"
 :r $(rootPath)\"..\Insert\MosvExcelConfig\Units.sql"
 :r $(rootPath)\"..\Insert\MosvExcelConfig\UnitRelations.sql"
 :r $(rootPath)\"..\Insert\MosvExcelConfig\RegisterIndexes.sql"
@@ -61,5 +61,4 @@ GO
 :r $(rootPath)\"..\Insert\MosvExcelConfig\ConfigFinalize.sql"
 
 :r $(rootPath)\"..\Insert\MosvCorrespondents.sql"
-:r $(rootPath)\"..\Insert\MosvElectronicServiceProviders.sql"
 

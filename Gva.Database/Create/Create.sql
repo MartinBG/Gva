@@ -109,6 +109,7 @@ GO
 --Insert GVA EXCEL CONFIG
 ---------------------------------------------------------------
 :r $(rootPath)\"..\Insert\GvaExcelConfig\DocTypeGroups.sql"
+:r $(rootPath)\"..\Insert\GvaExcelConfig\ElectronicServiceProviders.sql"
 :r $(rootPath)\"..\Insert\GvaExcelConfig\Units.sql"
 :r $(rootPath)\"..\Insert\GvaExcelConfig\UnitRelations.sql"
 :r $(rootPath)\"..\Insert\GvaExcelConfig\RegisterIndexes.sql"

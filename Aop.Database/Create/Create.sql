@@ -24,6 +24,7 @@ GO
 --Insert AOP EXCEL CONFIG
 ---------------------------------------------------------------
 :r $(rootPath)\"..\Insert\AopExcelConfig\DocTypeGroups.sql"
+:r $(rootPath)\"..\Insert\AopExcelConfig\ElectronicServiceProviders.sql"
 :r $(rootPath)\"..\Insert\AopExcelConfig\Units.sql"
 :r $(rootPath)\"..\Insert\AopExcelConfig\UnitRelations.sql"
 :r $(rootPath)\"..\Insert\AopExcelConfig\RegisterIndexes.sql"

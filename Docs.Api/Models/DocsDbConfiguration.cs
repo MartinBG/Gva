@@ -45,6 +45,7 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new DocUnitMap());
             modelBuilder.Configurations.Add(new DocWorkflowActionMap());
             modelBuilder.Configurations.Add(new DocWorkflowMap());
+            modelBuilder.Configurations.Add(new ElectronicServiceProviderMap());
             modelBuilder.Configurations.Add(new ElectronicServiceStageExecutorMap());
             modelBuilder.Configurations.Add(new ElectronicServiceStageMap());
             modelBuilder.Configurations.Add(new IncomingDocFileMap());

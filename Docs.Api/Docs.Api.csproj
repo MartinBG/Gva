@@ -111,6 +111,7 @@
     <Compile Include="Models\DocHasRead.cs" />
     <Compile Include="Models\DocCasePartMovement.cs" />
     <Compile Include="Models\DocToken.cs" />
+    <Compile Include="Models\ElectronicServiceProvider.cs" />
     <Compile Include="Models\vwDocUser.cs" />
     <Compile Include="Models\DocsDbConfiguration.cs" />
     <Compile Include="Models\Correspondent.cs" />
@@ -174,6 +175,10 @@
     <ProjectReference Include="..\Rio.Data\Rio.Data.csproj">
       <Project>{ce03cc29-d823-4e37-8c22-608fbed01848}</Project>
       <Name>Rio.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rio.Objects\Rio.Objects.csproj">
+      <Project>{41c9ed19-5e9c-4e89-8a4b-d73506d9fb6f}</Project>
+      <Name>Rio.Objects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
