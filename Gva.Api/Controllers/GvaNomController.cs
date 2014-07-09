@@ -697,20 +697,22 @@ namespace Gva.Api.Controllers
         }
 
         [Route("ratingClasses")]
-        public IHttpActionResult GetRatingClasses(string staffTypeAlias, string term)
+        public IHttpActionResult GetRatingClasses(string staffTypeAlias, string term = null, int offset = 0, int? limit = null)
         {
             var nomValues = this.nomRepository.GetNomValues(
                 alias: "ratingClasses",
                 parentAlias: "ratingClassGroups",
                 prop: "staffTypeAlias",
                 propValue: staffTypeAlias,
-                term: term);
+                term: term,
+                offset: offset,
+                limit: limit);
 
             return Ok(nomValues);
         }
 
         [Route("authorizations")]
-        public IHttpActionResult GetAuthorizations(string staffTypeAlias, string term, int offset = 0, int? limit = null)
+        public IHttpActionResult GetAuthorizations(string staffTypeAlias, string term = null, int offset = 0, int? limit = null)
         {
             var nomValues = this.nomRepository.GetNomValues(
                 alias: "authorizations",

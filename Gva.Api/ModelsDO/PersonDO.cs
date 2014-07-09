@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using Gva.Api.Models;
+using Gva.Api.Models.Views.Person;
+
 namespace Gva.Api.ModelsDO
 {
     public class PersonDO
@@ -18,12 +19,12 @@ namespace Gva.Api.ModelsDO
         {
             this.Id = personData.LotId;
             this.Lin = personData.Lin;
-            this.LinType = personData.LinType;
+            this.LinType = personData.LinType.Code;
             this.Uin = personData.Uin;
             this.Names = personData.Names;
             this.BirtDate = personData.BirtDate;
-            this.Organization = personData.Organization;
-            this.Employment = personData.Employment;
+            this.Organization = personData.Organization == null ? null : personData.Organization.Name;
+            this.Employment = personData.Employment == null ? null : personData.Employment.Name;
             this.Licences = personLicences == null ?
                 new List<GvaViewPersonLicence>() :
                 personLicences;

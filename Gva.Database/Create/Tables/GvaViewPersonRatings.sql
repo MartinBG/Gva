@@ -3,16 +3,16 @@ GO
 
 CREATE TABLE [dbo].[GvaViewPersonRatings] (
     [LotId]          INT           NOT NULL,
-    [LotPartId]      INT           NOT NULL,
-    [RatingType]     NVARCHAR(MAX) NOT NULL,
-    CONSTRAINT [PK_GvaViewPersonRatings]          PRIMARY KEY ([LotId], [LotPartId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_Lots]     FOREIGN KEY ([LotId])          REFERENCES [dbo].[Lots] ([LotId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_LotParts] FOREIGN KEY ([LotPartId])      REFERENCES [dbo].[LotParts] ([LotPartId])
+    [PartIndex]      INT           NOT NULL,
+    [RatingTypeId]   INT           NOT NULL,
+    CONSTRAINT [PK_GvaViewPersonRatings]                 PRIMARY KEY ([LotId], [PartIndex]),
+    CONSTRAINT [FK_GvaViewPersonRatings_GvaViewPersons]  FOREIGN KEY ([LotId])            REFERENCES [dbo].[GvaViewPersons] ([LotId]),
+    CONSTRAINT [FK_GvaViewPersonRatings_NomValues]       FOREIGN KEY ([RatingTypeId])     REFERENCES [dbo].[NomValues] ([NomValueId])
 )
 GO
 
 exec spDescTable  N'GvaViewPersonRatings', N'Класове на физически лица.'
 exec spDescColumn N'GvaViewPersonRatings', N'LotId'                     , N'Идентификатор на партида.'
-exec spDescColumn N'GvaViewPersonRatings', N'LotPartId'                 , N'Идентификатор на част от партида.'
-exec spDescColumn N'GvaViewPersonRatings', N'RatingType'                , N'Тип клас.'
+exec spDescColumn N'GvaViewPersonRatings', N'PartIndex'                 , N'Индекс на част от партида.'
+exec spDescColumn N'GvaViewPersonRatings', N'RatingTypeId'              , N'Тип клас.'
 GO

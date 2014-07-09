@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gva.Api.Models;
-using Gva.Api.ModelsDO;
+using Gva.Api.Models.Views.Person;
 
 namespace Gva.Api.Repositories.PersonRepository
 {

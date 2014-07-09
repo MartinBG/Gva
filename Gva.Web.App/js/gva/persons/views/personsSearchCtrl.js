@@ -58,8 +58,12 @@
             /*jshint -W052*/
             person.age = ~~((Date.now() - new Date(person.birtDate)) / 31557600000);
             /*jshint +W052*/
-            person.licences = _.pluck(person.licences, 'licenceType').join(' , ');
-            person.ratings = _.pluck(person.ratings, 'ratingType').join(' , ');
+            person.licences = _.map(person.licences, function (licence) {
+              return licence.licenceType.name;
+            }).join(' ,<br />');
+            person.ratings = _.map(person.ratings, function (rating) {
+              return rating.ratingType.name;
+            }).join(' ,<br />');
           }).value();
         });
       }

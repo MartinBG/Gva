@@ -4,7 +4,7 @@ using System.Linq;
 using Common.Data;
 using Common.Linq;
 using Gva.Api.Models;
-using Gva.Api.Models.Views.Organization;
+using Gva.Api.Models.Views.Person;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -36,22 +36,33 @@ namespace Gva.Api.Repositories.PersonRepository
 
             predicate = predicate
                 .AndStringMatches(p => p.Lin, lin, exact)
-                .AndStringMatches(p => p.LinType, linType, exact)
+                .AndStringMatches(p => p.LinType.Name, linType, exact)
                 .AndStringMatches(p => p.Uin, uin, exact)
                 .AndStringMatches(p => p.Names, names, exact)
-                .AndStringCollectionContains(p => p.Licences.Select(l => l.LicenceType), licences)
-                .AndStringCollectionContains(p => p.Ratings.Select(r => r.RatingType), ratings)
-                .AndStringMatches(p => p.Organization, organization, exact);
+                .AndStringCollectionContains(p => p.Licences.Select(l => l.LicenceType.Name), licences)
+                .AndStringCollectionContains(p => p.Ratings.Select(r => r.RatingType.Name), ratings)
+                .AndStringMatches(p => p.Organization == null ? null : p.Organization.Name, organization, exact);
 
             if (isExaminer)
             {
                 predicate = predicate.And(p => p.OrganizationExaminers.Count != 0);
             }
 
+            if (isInspector)
+            {
+                predicate = predicate.And(p => p.Inspector != null);
+            }
+
             var persons = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                .Include(p => p.LinType)
+                .Include(p => p.Organization)
+                .Include(p => p.Employment)
+                .Include(p => p.Inspector)
                 .Include(p => p.OrganizationExaminers)
                 .Include(p => p.Licences)
+                .Include(p => p.Licences.Select(l => l.LicenceType))
                 .Include(p => p.Ratings)
+                .Include(p => p.Ratings.Select(r => r.RatingType))
                 .Where(predicate);
 
             if (!string.IsNullOrEmpty(caseTypeAlias))
@@ -60,13 +71,6 @@ namespace Gva.Api.Repositories.PersonRepository
                           join lc in this.unitOfWork.DbContext.Set<GvaLotCase>() on p.LotId equals lc.LotId
                           join ct in this.unitOfWork.DbContext.Set<GvaCaseType>() on lc.GvaCaseTypeId equals ct.GvaCaseTypeId
                           where ct.Alias == caseTypeAlias
-                          select p;
-            }
-
-            if (isInspector)
-            {
-                persons = from p in persons
-                          join i in this.unitOfWork.DbContext.Set<GvaViewPersonInspector>() on p.LotId equals i.LotId
                           select p;
             }
 
@@ -79,8 +83,15 @@ namespace Gva.Api.Repositories.PersonRepository
         public GvaViewPerson GetPerson(int personId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                .Include(p => p.LinType)
+                .Include(p => p.Organization)
+                .Include(p => p.Employment)
+                .Include(p => p.Inspector)
+                .Include(p => p.OrganizationExaminers)
                 .Include(e => e.Licences)
+                .Include(p => p.Licences.Select(l => l.LicenceType))
                 .Include(e => e.Ratings)
+                .Include(p => p.Ratings.Select(r => r.RatingType))
                 .SingleOrDefault(p => p.LotId == personId);
         }
 

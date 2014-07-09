@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using Regs.Api.Models;
+using Common.Api.Models;
 
-namespace Gva.Api.Models
+namespace Gva.Api.Models.Views.Person
 {
     public partial class GvaViewPersonInspector
     {
@@ -10,13 +10,13 @@ namespace Gva.Api.Models
 
         public string ExaminerCode { get; set; }
 
-        public string CaaName { get; set; }
+        public int CaaId { get; set; }
 
         public string StampNum { get; set; }
 
         public bool Valid { get; set; }
 
-        public virtual Lot Lot { get; set; }
+        public virtual NomValue Caa { get; set; }
 
         public virtual GvaViewPerson Person { get; set; }
     }
@@ -36,9 +36,8 @@ namespace Gva.Api.Models
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.CaaName)
-                .IsRequired()
-                .HasMaxLength(200);
+            this.Property(t => t.CaaId)
+                .IsRequired();
 
             this.Property(t => t.StampNum)
                 .IsOptional()
@@ -48,17 +47,16 @@ namespace Gva.Api.Models
             this.ToTable("GvaViewPersonInspectors");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.ExaminerCode).HasColumnName("ExaminerCode");
-            this.Property(t => t.CaaName).HasColumnName("CaaName");
+            this.Property(t => t.CaaId).HasColumnName("CaaId");
             this.Property(t => t.StampNum).HasColumnName("StampNum");
             this.Property(t => t.Valid).HasColumnName("Valid");
 
             // Relationships
-            this.HasRequired(t => t.Lot)
-                .WithOptional();
-
-            // Hack mapping to workaround joins
             this.HasRequired(t => t.Person)
                 .WithOptional(t => t.Inspector);
+            this.HasRequired(t => t.Caa)
+                .WithMany()
+                .HasForeignKey(t => t.CaaId);
         }
     }
 }

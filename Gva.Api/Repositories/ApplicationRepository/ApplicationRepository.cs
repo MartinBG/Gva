@@ -11,6 +11,7 @@ using Gva.Api.Models.Views.Aircraft;
 using Gva.Api.Models.Views.Airport;
 using Gva.Api.Models.Views.Equipment;
 using Gva.Api.Models.Views.Organization;
+using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
 using Regs.Api.Models;
 
