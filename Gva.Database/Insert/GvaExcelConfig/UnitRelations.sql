@@ -63,6 +63,8 @@ INSERT INTO [UnitRelations]([UnitRelationId],[UnitId],[ParentUnitId],[RootUnitId
 INSERT INTO [UnitRelations]([UnitRelationId],[UnitId],[ParentUnitId],[RootUnitId])VALUES(59,59,58,55);
 INSERT INTO [UnitRelations]([UnitRelationId],[UnitId],[ParentUnitId],[RootUnitId])VALUES(60,60,55,55);
 INSERT INTO [UnitRelations]([UnitRelationId],[UnitId],[ParentUnitId],[RootUnitId])VALUES(61,61,60,55);
+INSERT INTO [UnitRelations]([UnitRelationId],[UnitId],[ParentUnitId],[RootUnitId])VALUES(62,62,55,55);
+INSERT INTO [UnitRelations]([UnitRelationId],[UnitId],[ParentUnitId],[RootUnitId])VALUES(63,63,62,55);
 SET IDENTITY_INSERT [UnitRelations] OFF
 GO
 

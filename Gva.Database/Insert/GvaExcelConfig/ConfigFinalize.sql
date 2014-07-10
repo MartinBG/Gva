@@ -11,10 +11,11 @@ inner join
 	case Name 
 		when 'Системен администратор' then 'admin' 
 		when 'Системен потребител' then 'system' 
+        when 'Тестов потребител' then 'test1' 
 		else Name 
 	end as Name
 	from Units) uu on uu.Name=u.Username
-where Username in ('admin', 'system')
+where Username in ('admin', 'system', 'test1')
 GO
 
 print 'Set system to all Classifications'
@@ -36,6 +37,20 @@ insert into UnitClassifications (UnitId, ClassificationId, ClassificationPermiss
 	select UnitId, ClassificationId, ClassificationPermissionId
 	from (
 		select (select uu.UnitId from Users u inner join UnitUsers uu on u.UserId=uu.UserId where u.Username = 'admin') as UnitId, c.ClassificationId, r.ClassificationPermissionId   
+		from Classifications c cross join 
+			ClassificationPermissions r) a
+	where not (ClassificationId=1 and ClassificationPermissionId=2)
+		and not exists (select null from UnitClassifications uc1 
+			where uc1.UnitId = a.UnitId 
+			and uc1.ClassificationId = a.ClassificationId 
+			and  uc1.ClassificationPermissionId = a.ClassificationPermissionId)
+	
+GO
+print 'Set test1 to all Classifications'
+insert into UnitClassifications (UnitId, ClassificationId, ClassificationPermissionId)
+	select UnitId, ClassificationId, ClassificationPermissionId
+	from (
+		select (select uu.UnitId from Users u inner join UnitUsers uu on u.UserId=uu.UserId where u.Username = 'test1') as UnitId, c.ClassificationId, r.ClassificationPermissionId   
 		from Classifications c cross join 
 			ClassificationPermissions r) a
 	where not (ClassificationId=1 and ClassificationPermissionId=2)

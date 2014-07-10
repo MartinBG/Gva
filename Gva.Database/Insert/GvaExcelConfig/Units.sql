@@ -63,6 +63,8 @@ INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[
 INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(59,N'Системен администратор',3,0,1);
 INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(60,N'Служител ГВА',2,0,1);
 INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(61,N'Системен служител ГВА',3,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(62,N'Тест1',2,0,1);
+INSERT INTO [Units]([UnitId],[Name],[UnitTypeId],[InheritParentClassification],[IsActive])VALUES(63,N'Тестов потребител',3,0,1);
 SET IDENTITY_INSERT [Units] OFF
 GO
 
