@@ -28,6 +28,10 @@
       });
     };
 
+    $scope.removeFile = function (target) {
+      $scope.email.publicFiles.splice($scope.email.publicFiles.indexOf(target), 1);
+    };
+
     $scope.checkEmails = function () {
       var emails = $scope.email.emailBcc.split(';'), valid = true;
 

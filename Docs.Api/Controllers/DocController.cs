@@ -1939,7 +1939,8 @@ namespace Docs.Api.Controllers
         {
             Doc doc = this.docRepository.Find(id,
                 e => e.DocCorrespondents.Select(dc => dc.Correspondent),
-                e => e.DocStatus);
+                e => e.DocStatus,
+                e => e.DocFiles.Select(k => k.DocFileKind));
 
             if (doc == null)
             {
@@ -1960,12 +1961,17 @@ namespace Docs.Api.Controllers
                 email.EmailTo.Add(corrNom);
             }
 
+            foreach (var item in doc.DocFiles.Where(e => e.DocFileKind.Alias == "PublicAttachedFile"))
+            {
+                email.PublicFiles.Add(new DocFileDO(item));
+            }
+
             AdministrativeEmailType emailType = this.unitOfWork.DbContext.Set<AdministrativeEmailType>().SingleOrDefault(e => e.Alias.ToLower() == "CorrespondentEmail".ToLower());
 
             email.EmailBcc = "";
             email.TypeId = emailType.AdministrativeEmailTypeId;
             email.Subject = emailType.Subject;
-            email.Body = emailType.Body.Replace("@@Param1", ConfigurationManager.AppSettings["PortalWebAddress"]);
+            email.Body = emailType.Body.Replace("@@Param1", ConfigurationManager.AppSettings["Docs.Api:PortalWebAddress"]);
 
             return Ok(new
             {

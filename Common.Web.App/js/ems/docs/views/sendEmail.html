@@ -32,8 +32,22 @@
           </div>
         </div>
 
+        <div class="row">
+           <div class="form-group col-md-12">
+              <label class="control-label" l10n-text="docs.edit.sendEmail.publicFiles"></label>
+              <div class="input-group input-group-sm">
+                <span ng-if="email.publicFiles.length === 0" l10n-text="docs.edit.sendEmail.noFiles" style="margin-left:5px;"></span>
+                <span ng-repeat="pf in email.publicFiles">
+                  <i ng-click="removeFile(pf)" class="glyphicon glyphicon-remove-circle" style="cursor: pointer; color:#428bca; margin-left:5px;"></i>
+                  <i style="color:#428bca;" class="fa fa-file"></i>
+                  <span>{{pf.name}} </span> (<a ng-href="{{ pf.docFileUrl }}" target="_blank"><span>{{ pf.file.name }}</span></a>) <br />
+                </span>
+              </div>
+            </div>
+        </div>
+
       </div>
-</ng-form>
+  </ng-form>
 
   <div class="col-sm-3 col-sm-offset-5">
     <sc-button name="saveBtn" btn-click="send()" text="docs.edit.sendEmail.send" class="btn btn-primary" icon="glyphicon-envelope"></sc-button>

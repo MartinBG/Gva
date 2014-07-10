@@ -206,6 +206,8 @@
           sendEmail: {
             emailTo: 'До',
             emailBcc: 'Копие до',
+            publicFiles: 'Прикачени файлове',
+            noFiles: 'Няма прикачени файлове',
             subject: 'Относно',
             body: 'Съдържание',
             send: 'Изпрати',

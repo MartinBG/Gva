@@ -11,10 +11,12 @@ namespace Docs.Api.DataObjects
         public DocSendEmailDO()
         {
             this.EmailTo = new List<NomDo>();
+            this.PublicFiles = new List<DocFileDO>();
         }
 
         public List<NomDo> EmailTo { get; set; }
         public string EmailBcc { get; set; }
+        public List<DocFileDO> PublicFiles { get; set; }
         public int? CorrespondentContactId { get; set; }
         public int? CorrespondentId { get; set; }
         public int? UserId { get; set; }

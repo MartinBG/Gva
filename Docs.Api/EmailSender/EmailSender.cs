@@ -47,7 +47,7 @@ namespace Docs.Api.EmailSender
 
                 if (administrativeEmail.UserId.HasValue)
                 {
-                    User receiver = this.unitOfWork.DbContext.Set<User>().SingleOrDefault(e => e.UserId == administrativeEmail.UserId.Value);
+                    User receiver = this.unitOfWork.DbContext.Set<User>().Find(administrativeEmail.UserId.Value);
                     if (receiver != null)
                     {
                         if (!string.IsNullOrEmpty(receiver.Email) && Regex.IsMatch(receiver.Email, emailRegex))
@@ -90,7 +90,7 @@ namespace Docs.Api.EmailSender
                     }
                     else
                     {
-                        logger.Info(String.Format("User id = {0} user missing  ", administrativeEmail.UserId));
+                        logger.Info(String.Format("Correspondent id = {0} correspondent missing  ", administrativeEmail.CorrespondentId));
                     }
                 }
                 else
