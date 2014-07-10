@@ -15,10 +15,6 @@ using Gva.MigrationTool.Nomenclatures;
 using Common.Api.Models;
 using Docs.Api.Models;
 using Gva.Api.Models;
-using Gva.Api.LotEventHandlers.PersonView;
-using Gva.Api.LotEventHandlers.OrganizationView;
-using Gva.Api.LotEventHandlers.InventoryView;
-using Gva.Api.LotEventHandlers.ApplicationView;
 using Common.Api.Repositories.UserRepository;
 using Regs.Api.LotEvents;
 using Gva.Api.Repositories.FileRepository;
@@ -75,6 +71,12 @@ namespace Gva.MigrationTool.Sets
                     }
 
                     var personData = this.getPersonData(personId, noms, personCaseTypes);
+
+                    if (string.IsNullOrEmpty(personData.Get<string>("lin")))
+                    {
+                        Console.WriteLine("NO LIN FOR PERSON WITH ID " + personId);
+                        continue;
+                    }
 
                     var lot = lotRepository.CreateLot("Person", context);
 

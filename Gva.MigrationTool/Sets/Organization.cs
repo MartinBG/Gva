@@ -15,10 +15,6 @@ using Gva.MigrationTool.Nomenclatures;
 using Common.Api.Models;
 using Docs.Api.Models;
 using Gva.Api.Models;
-using Gva.Api.LotEventHandlers.PersonView;
-using Gva.Api.LotEventHandlers.OrganizationView;
-using Gva.Api.LotEventHandlers.InventoryView;
-using Gva.Api.LotEventHandlers.ApplicationView;
 using Common.Api.Repositories.UserRepository;
 using Regs.Api.LotEvents;
 using Gva.Api.Repositories.FileRepository;
@@ -36,7 +32,6 @@ namespace Gva.MigrationTool.Sets
 {
     public class Organization
     {
-
         private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IAircraftRepository, ILotEventDispatcher, ICaseTypeRepository, UserContext>>> dependencyFactory;
         private OracleConnection oracleConn;
 
@@ -237,6 +232,12 @@ namespace Gva.MigrationTool.Sets
                     var organizationStaffExaminers = this.getOrganizationStaffExaminers(organizationId, noms, getPersonByApexId);
                     foreach (var organizationStaffExaminer in organizationStaffExaminers)
                     {
+                        if (organizationStaffExaminer.Get<int?>("person.nomValueId") == null)
+                        {
+                            Console.WriteLine("CANNOT FIND PERSON FOR organizationStaffExaminer WITH oldId " + organizationStaffExaminer.Get<int>("__oldId"));
+                            continue;
+                        }
+
                         lot.CreatePart("organizationStaffExaminers/*", organizationStaffExaminer, context);
                     }
 
