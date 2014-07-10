@@ -3,7 +3,7 @@ using Common.Data;
 using Gva.Api.Controllers;
 using Gva.Api.LotEventHandlers.Aircraft;
 using Gva.Api.LotEventHandlers.Airport;
-using Gva.Api.LotEventHandlers.ApplicationView;
+using Gva.Api.LotEventHandlers.Application;
 using Gva.Api.LotEventHandlers.Equipment;
 using Gva.Api.LotEventHandlers.Inventory.Aircrafts;
 using Gva.Api.LotEventHandlers.Inventory.Airports;
@@ -35,11 +35,11 @@ namespace Gva.Api
             moduleBuilder.RegisterType<GvaDbConfiguration>().As<IDbConfiguration>().SingleInstance();
 
             //ApplicationView
-            moduleBuilder.RegisterType<ApplicationsViewAircraftHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<ApplicationsViewPersonHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<ApplicationsViewOrganizationHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<ApplicationsViewAirportHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<ApplicationsViewEquipmentHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ApplicationAircraftProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ApplicationAirportProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ApplicationEquipmentProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ApplicationOrganizationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ApplicationPersonProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
             //AircraftView
             moduleBuilder.RegisterType<AircraftProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();

@@ -91,12 +91,12 @@
     <Compile Include="LotEventHandlers\Aircraft\AircraftProjection.cs" />
     <Compile Include="LotEventHandlers\Aircraft\AircraftRegistrationProjection.cs" />
     <Compile Include="LotEventHandlers\Aircraft\AircraftRegMarkProjection.cs" />
-    <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewOrganizationHandler.cs" />
-    <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAircraftHandler.cs" />
-    <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewPersonHandler.cs" />
+    <Compile Include="LotEventHandlers\Application\ApplicationOrganizationProjection.cs" />
+    <Compile Include="LotEventHandlers\Application\ApplicationAircraftProjection.cs" />
+    <Compile Include="LotEventHandlers\Application\ApplicationPersonProjection.cs" />
     <Compile Include="LotEventHandlers\Airport\AirportProjection.cs" />
-    <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewAirportHandler.cs" />
-    <Compile Include="LotEventHandlers\ApplicationView\ApplicationsViewEquipmentHandler.cs" />
+    <Compile Include="LotEventHandlers\Application\ApplicationAirportProjection.cs" />
+    <Compile Include="LotEventHandlers\Application\ApplicationEquipmentProjection.cs" />
     <Compile Include="LotEventHandlers\Equipment\EquipmentProjection.cs" />
     <Compile Include="LotEventHandlers\Inventory\Aircrafts\AircraftApplicationProjection.cs" />
     <Compile Include="LotEventHandlers\Inventory\Aircrafts\AircraftDebtProjection.cs" />
@@ -160,7 +160,7 @@
     <Compile Include="Models\Views\Airport\GvaViewAirport.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraft.cs" />
     <Compile Include="Models\GvaCorrespondent.cs" />
-    <Compile Include="Models\GvaViewApplication.cs" />
+    <Compile Include="Models\Views\GvaViewApplication.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganization.cs" />
     <Compile Include="Models\GvaCaseType.cs" />
     <Compile Include="Models\GvaDbConfiguration.cs" />

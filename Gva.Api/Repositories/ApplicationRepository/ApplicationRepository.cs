@@ -7,6 +7,7 @@ using Common.Api.Repositories;
 using Common.Data;
 using Common.Linq;
 using Gva.Api.Models;
+using Gva.Api.Models.Views;
 using Gva.Api.Models.Views.Aircraft;
 using Gva.Api.Models.Views.Airport;
 using Gva.Api.Models.Views.Equipment;
@@ -41,7 +42,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 join set in this.unitOfWork.DbContext.Set<Set>() on lot.SetId equals set.SetId
                 join part in this.unitOfWork.DbContext.Set<Part>() on a.GvaAppLotPartId equals part.PartId into part1
                 from part2 in part1.DefaultIfEmpty()
-                join va in this.unitOfWork.DbContext.Set<GvaViewApplication>() on a.GvaAppLotPartId equals va.PartId into va1
+                join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(a => a.ApplicationType) on a.GvaAppLotPartId equals va.PartId into va1
                 from va2 in va1.DefaultIfEmpty()
                 join p in this.unitOfWork.DbContext.Set<GvaViewPerson>() on va2.LotId equals p.LotId into p1
                 from p2 in p1.DefaultIfEmpty()
@@ -111,8 +112,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     AppPartIndex = e.GApplicationPart != null ? e.GApplicationPart.Index : (int?)null,
                     AppPartRequestDate = e.GViewApplication != null ? e.GViewApplication.RequestDate : null,
                     AppPartDocumentNumber = e.GViewApplication != null ? e.GViewApplication.DocumentNumber : null,
-                    AppPartApplicationTypeName = e.GViewApplication != null ? e.GViewApplication.ApplicationTypeName : null,
-                    AppPartStatusName = e.GViewApplication != null ? e.GViewApplication.StatusName : null,
+                    AppPartApplicationTypeName = e.GViewApplication != null ? e.GViewApplication.ApplicationType.Name : null,
                     PersonId = e.GViewPerson != null ? (int?)e.GViewPerson.LotId : null,
                     PersonLin = e.GViewPerson != null ? e.GViewPerson.Lin : null,
                     PersonNames =  e.GViewPerson != null ? e.GViewPerson.Names : null,
