@@ -3,16 +3,19 @@
   'use strict';
 
   var controllers = {},
-      states = {};
+      states = {},
+      modals = {};
 
   angular.module('boot', [
     'ng',
+    'scaffolding',
     'ui.router'
   ]).config([
     '$controllerProvider',
     '$stateProvider',
+    'namedModalProvider',
     '$provide',
-    function ($controllerProvider, $stateProvider, $provide) {
+    function ($controllerProvider, $stateProvider, namedModalProvider, $provide) {
       $controllerProvider.register =
         _.wrap($controllerProvider.register, function (original, name, constructor) {
           if (angular.isObject(name)) {
@@ -22,6 +25,18 @@
           }
 
           return original.apply($controllerProvider, [name, constructor]);
+        });
+
+      namedModalProvider.modal = _.wrap(namedModalProvider.modal,
+        function (original, name, template, controller) {
+          var modalObj = {
+            template: template,
+            controller: controller
+          };
+
+          modals[name] = modalObj;
+
+          return original.apply(namedModalProvider, [name, modalObj]);
         });
 
       $stateProvider.state = _.wrap($stateProvider.state, function (original, name, definition) {
@@ -56,7 +71,7 @@
         return state.resolve;
       });
 
-      $provide.decorator('$state', function($delegate) {
+      $provide.decorator('$state', function ($delegate) {
         $delegate.getWrapper = function (stateName) {
           return states[stateName];
         };
@@ -105,6 +120,14 @@
       $state.payload = $state.$$payload;
 
       $state.$$payload = null;
+    });
+  }]).run([function () {
+    _.forOwn(modals, function (modal) {
+      if (modal.controller &&
+          controllers[modal.controller] &&
+          controllers[modal.controller].$resolve) {
+        modal.resolve = controllers[modal.controller].$resolve;
+      }
     });
   }]);
 }(angular, _));

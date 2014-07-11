@@ -4,7 +4,6 @@ using System.Linq;
 using Common.Api.Models;
 using Common.Data;
 using Common.Linq;
-using Gva.Api.Models;
 using Gva.Api.Models.Views.Organization;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;

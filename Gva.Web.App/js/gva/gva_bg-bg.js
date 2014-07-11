@@ -4,6 +4,21 @@
   angular.module('gva').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
       common: {
+        choosePublisherModal: {
+          title: 'Избор на издател',
+          publisherType: 'Тип',
+          name: 'Наименование',
+          search: 'Търси',
+          select: 'Избор',
+          code: 'Код',
+          cancel: 'Отказ',
+          inspector: 'Инспектор',
+          examiner: 'Проверяващ',
+          school: 'Учебен център',
+          organization: 'Авио-организация',
+          caa: 'Въздушна администрация',
+          other: 'Други'
+        },
         publishers: {
           publisherType: 'Тип',
           name: 'Наименование',
@@ -2456,7 +2471,8 @@
           add: 'Добави',
           back: 'Назад'
         },
-        chooseTraining: {
+        chooseTrainingsModal: {
+          title: 'Избор на обучение',
           number: 'No',
           dateValidFrom: 'От дата',
           dateValidTo: 'Валидно до',
@@ -2465,7 +2481,12 @@
           docType: 'Тип',
           docRole: 'Роля',
           add: 'Добави',
-          back: 'Назад'
+          cancel: 'Отказ'
+        },
+        newTrainingModal: {
+          title: 'Ново обучение',
+          save: 'Запис',
+          cancel: 'Отказ'
         },
         chooseMedical: {
           number: 'Свидетелство',
@@ -3628,9 +3649,6 @@
         'root.persons.view.licences.new.newRating': 'Нова квалификация',
         'root.persons.view.licences.new.chooseMedical': 'Избор на медицинско',
         'root.persons.view.licences.new.newMedical': 'Ново медицинско',
-        'root.persons.view.licences.new.chooseTraining': 'Избор на обучение',
-        'root.persons.view.licences.new.newTraining': 'Ново обучение',
-        'root.persons.view.licences.new.newTraining.choosePublisher': 'Избор на издател',
         'root.persons.view.licences.new.chooseCheck': 'Избор на проверка',
         'root.persons.view.licences.new.newCheck': 'Нова проверка',
         'root.persons.view.licences.new.newCheck.choosePublisher': 'Избор на издател',
@@ -3639,9 +3657,6 @@
         'root.persons.view.licences.edit.newRating': 'Нова квалификация',
         'root.persons.view.licences.edit.chooseMedical': 'Избор на медицинско',
         'root.persons.view.licences.edit.newMedical': 'Ново медицинско',
-        'root.persons.view.licences.edit.chooseTraining': 'Избор на обучение',
-        'root.persons.view.licences.edit.newTraining': 'Ново обучение',
-        'root.persons.view.licences.edit.newTraining.choosePublisher': 'Избор на издател',
         'root.persons.view.licences.edit.chooseCheck': 'Избор на проверка',
         'root.persons.view.licences.edit.newCheck': 'Нова проверка',
         'root.persons.view.licences.edit.newCheck.choosePublisher': 'Избор на издател',

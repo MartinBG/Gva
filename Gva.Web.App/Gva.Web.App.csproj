@@ -621,6 +621,12 @@
     <Content Include="js\gva\persons\forms\personRating.html" />
     <Content Include="js\gva\persons\forms\personRatingEdition.html" />
     <Content Include="js\gva\persons\forms\personStatus.html" />
+    <Content Include="js\gva\common\modals\publishers\choosePublisherModal.html" />
+    <Content Include="js\gva\common\modals\publishers\choosePublisherModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\trainings\chooseTrainingsModal.html" />
+    <Content Include="js\gva\persons\modals\trainings\chooseTrainingsModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\trainings\newTrainingModal.html" />
+    <Content Include="js\gva\persons\modals\trainings\newTrainingModalCtrl.js" />
     <Content Include="js\gva\persons\resources\personAddresses.js" />
     <Content Include="js\gva\persons\resources\personApplications.js" />
     <Content Include="js\gva\persons\resources\personDocumentApplications.js" />
@@ -703,9 +709,6 @@
     <Content Include="js\gva\persons\views\documentOthers\othersNewCtrl.js" />
     <Content Include="js\gva\persons\views\documentOthers\othersSearch.html" />
     <Content Include="js\gva\persons\views\documentOthers\othersSearchCtrl.js" />
-    <Content Include="js\gva\persons\views\documentTrainings\addTrainingCtrl.js" />
-    <Content Include="js\gva\persons\views\documentTrainings\chooseTraining.html" />
-    <Content Include="js\gva\persons\views\documentTrainings\chooseTrainingCtrl.js" />
     <Content Include="js\gva\persons\views\documentTrainings\trainingsEdit.html" />
     <Content Include="js\gva\persons\views\documentTrainings\trainingsEditCtrl.js" />
     <Content Include="js\gva\persons\views\documentTrainings\trainingsNew.html" />
