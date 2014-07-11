@@ -36,7 +36,7 @@ namespace Gva.DocCommunicator
             Ticket ticket = this.unitOfWork.DbContext.Set<Ticket>().Single(e => e.TicketId == ticketIdGuid);
 
             DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>().Include(e => e.Doc).Single(e => e.DocFileId == ticket.DocFileId);
-            var fileContent = ReadFromBlob(ticket.OldKey);
+            var fileContent = ReadFromBlob(ticket.BlobOldKey.Value);
 
             string uri = this.unitOfWork.DbContext.Set<DocFileType>().Single(e => e.DocFileTypeId == docFile.DocFileTypeId).DocTypeUri;
 
@@ -63,7 +63,7 @@ namespace Gva.DocCommunicator
             Guid fileKey = WriteToBlob(Utf8Utils.GetBytes(documentXml));
 
             Ticket ticket = this.unitOfWork.DbContext.Set<Ticket>().Single(e => e.TicketId == ticketIdGuid);
-            ticket.NewKey = fileKey;
+            ticket.BlobNewKey = fileKey;
 
             this.unitOfWork.Save();
 

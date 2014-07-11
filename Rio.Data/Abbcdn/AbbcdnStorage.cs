@@ -16,7 +16,7 @@ namespace Rio.Data.Abbcdn
             this._client = _factory.CreateChannel();
         }
 
-        public Guid UploadFile(byte[] content, string fileName)
+        public UploadFileInfo UploadFile(byte[] content, string fileName)
         {
             try
             {
@@ -27,13 +27,11 @@ namespace Rio.Data.Abbcdn
                     mimeType = MimeTypeHelper.GetFileMimeTypeByExtenstion(extension);
                 }
 
-                var fileInfo = _client.Upload(content, mimeType, fileName, true);
-
-                return fileInfo.FileKey;
+                return _client.Upload(content, mimeType, fileName, true);
             }
             catch (Exception)
             {
-                return Guid.Empty;
+                return null;
             }
         }
 

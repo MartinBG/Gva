@@ -1,0 +1,101 @@
+﻿<ng-form class="form-inline" name="competenceTransferForm" sc-validate="{}">
+  <div ng-if="isLoaded">
+
+    <div class="row">
+      <div class="form-group col-sm-4">
+        <label class="control-label" l10n-text="competenceTransfer.senderServiceProviderName"></label><br />
+        <sc-nomenclature ng-model="senderServiceProvider.id" nom-obj="senderServiceProvider.obj" mode="id" alias="'electronicServiceProvider'" ng-change="senderServiceProviderChange()" ng-readonly="readonly"></sc-nomenclature>
+      </div>
+      <div class="form-group col-sm-4">
+        <label class="control-label" l10n-text="competenceTransfer.receiverServiceProviderName"></label><br />
+        <sc-nomenclature ng-model="receiverServiceProvider.id" nom-obj="receiverServiceProvider.obj" mode="id" alias="'electronicServiceProvider'" ng-change="receiverServiceProviderChange()" ng-readonly="readonly"></sc-nomenclature>
+      </div>
+    </div>
+
+    <div class="row"> 
+      <div class="form-group col-sm-12">
+        <label class="control-label" l10n-text="competenceTransfer.caseUri"></label>
+      </div>
+    </div>
+
+    <div class="row"> 
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="competenceTransfer.registerIndex"></label><br />
+        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.AISCaseURI.DocumentURI.RegisterIndex" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="competenceTransfer.sequenceNumber"></label><br />
+        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.AISCaseURI.DocumentURI.SequenceNumber" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="competenceTransfer.date"></label><br />
+        <sc-date ng-model="model.jObject.FileTransferredJurisdiction.AISCaseURI.DocumentURI.ReceiptOrSigningDate" ng-readonly="readonly"></sc-date>
+      </div>
+    </div>
+
+    <div class="row"> 
+      <div class="form-group col-sm-12">
+        <label class="control-label" l10n-text="competenceTransfer.applicant"></label>
+      </div>
+    </div>
+
+    <div class="row"> 
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="competenceTransfer.firstName"></label>
+        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Names.First" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="competenceTransfer.secondName"></label>
+        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Names.Middle" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="competenceTransfer.lastName"></label>
+        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Names.Last" ng-readonly="readonly"></sc-text>
+      </div>
+      <div class="form-group col-sm-2">
+        <label class="control-label" l10n-text="competenceTransfer.egn"></label>
+        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Identifier.EGN" ng-readonly="readonly"></sc-text>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="row"> 
+      <div class="form-group col-sm-12">
+        <label class="control-label" l10n-text="competenceTransfer.documents"></label>
+        <table class="table table-bordered table-condensed">
+          <thead>
+              <tr>
+                <th l10n-text="competenceTransfer.documentUri"></th>
+                <th l10n-text="competenceTransfer.docType"></th>
+                <th style="width: 40px;"></th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="doc in model.jObject.FileTransferredJurisdiction.DocumentFileCompetenceCollection" ng-form sc-validate="{}">
+              <td>
+                  {{doc.StructuredDocumentFileCompetence.DocumentURI.RegisterIndex}}-{{doc.StructuredDocumentFileCompetence.DocumentURI.SequenceNumber}}-{{doc.StructuredDocumentFileCompetence.DocumentURI.ReceiptOrSigningDate}}
+              </td>
+              <td>
+                  {{doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.DocumentTypeName}}
+              </td>
+              <td style="text-align: center; width: 1px;">
+                <a ng-show="!!doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.ElectronicDocumentXmlContent.Any && !!doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.DocumentTypeURI"
+                  ng-click="viewRioObject(
+                    doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.DocumentTypeURI.RegisterIndex,
+                    doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.DocumentTypeURI.BatchNumber,
+                    doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.ElectronicDocumentXmlContent.Any.AttachedDocumentUniqueIdentifier)">
+                  <span>Преглед</span>
+                </a>
+                <a ng-show="!!doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.ElectronicDocumentXmlContent.Any.AttachedDocumentUniqueIdentifier" ng-href="{{doc.downloadUri}}" target="_blank"><span>Свали</span></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</ng-form>

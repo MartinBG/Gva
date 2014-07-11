@@ -91,6 +91,11 @@
       templateUrl: 'js/ems/docs/forms/receiptAcknowledge/receiptAcknowledge.html',
       controller: 'ReceiptAcknowledgeCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'emsCompetenceTransfer',
+      templateUrl: 'js/ems/docs/forms/competenceTransfer/competenceTransfer.html',
+      controller: 'CompetenceTransferCtrl'
+    });
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.docs'                                     , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot'                                                                                                           ])

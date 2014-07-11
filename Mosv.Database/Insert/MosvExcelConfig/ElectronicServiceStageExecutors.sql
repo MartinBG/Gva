@@ -626,6 +626,12 @@ INSERT INTO [ElectronicServiceStageExecutors]([ElectronicServiceStageExecutorId]
 INSERT INTO [ElectronicServiceStageExecutors]([ElectronicServiceStageExecutorId],[ElectronicServiceStageId],[UnitId],[IsActive])VALUES(622,622,82,1);
 INSERT INTO [ElectronicServiceStageExecutors]([ElectronicServiceStageExecutorId],[ElectronicServiceStageId],[UnitId],[IsActive])VALUES(623,623,82,1);
 INSERT INTO [ElectronicServiceStageExecutors]([ElectronicServiceStageExecutorId],[ElectronicServiceStageId],[UnitId],[IsActive])VALUES(624,624,82,1);
+INSERT INTO [ElectronicServiceStageExecutors]([ElectronicServiceStageExecutorId],[ElectronicServiceStageId],[UnitId],[IsActive])VALUES(625,625,82,1);
+INSERT INTO [ElectronicServiceStageExecutors]([ElectronicServiceStageExecutorId],[ElectronicServiceStageId],[UnitId],[IsActive])VALUES(626,626,82,1);
+INSERT INTO [ElectronicServiceStageExecutors]([ElectronicServiceStageExecutorId],[ElectronicServiceStageId],[UnitId],[IsActive])VALUES(627,627,82,1);
+INSERT INTO [ElectronicServiceStageExecutors]([ElectronicServiceStageExecutorId],[ElectronicServiceStageId],[UnitId],[IsActive])VALUES(628,628,82,1);
+INSERT INTO [ElectronicServiceStageExecutors]([ElectronicServiceStageExecutorId],[ElectronicServiceStageId],[UnitId],[IsActive])VALUES(629,629,82,1);
+INSERT INTO [ElectronicServiceStageExecutors]([ElectronicServiceStageExecutorId],[ElectronicServiceStageId],[UnitId],[IsActive])VALUES(630,630,82,1);
 SET IDENTITY_INSERT [ElectronicServiceStageExecutors] OFF
 GO
 

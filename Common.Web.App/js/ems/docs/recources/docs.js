@@ -58,6 +58,14 @@
                 fileKey: '@fileKey'
               }
             },
+            'createAbbcdnTicket': {
+              method: 'POST',
+              url: '/api/docs/:id/createAbbcdnTicket',
+              params: {
+                docTypeUri: '@docTypeUri',
+                abbcdnKey: '@abbcdnKey'
+              }
+            },
             'manualRegister': {
               method: 'POST',
               url: '/api/docs/:id/manualRegister',

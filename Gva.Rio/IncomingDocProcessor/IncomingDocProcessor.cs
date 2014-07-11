@@ -884,11 +884,13 @@ namespace Gva.Rio.IncomingDocProcessor
 
         private DocFile CreateReceiptDocFile(int docFileKindId, Doc receiptDoc, Guid fileKey, bool isDocAcknowledged)
         {
+            string docFileTypeAlias = isDocAcknowledged ? "ReceiptAcknowledgedMessage" : "ReceiptNotAcknowledgedMessage";
+
             DocFile docFile = new DocFile();
             docFile.Doc = receiptDoc;
             docFile.DocContentStorage = String.Empty;
             docFile.DocFileContentId = fileKey;
-            docFile.DocFileTypeId = this.unitOfWork.DbContext.Set<DocFileType>().Single(e => e.Alias == "XML").DocFileTypeId;
+            docFile.DocFileTypeId = this.unitOfWork.DbContext.Set<DocFileType>().Single(e => e.Alias == docFileTypeAlias).DocFileTypeId;
             docFile.DocFileKindId = docFileKindId;
             docFile.Name = isDocAcknowledged ? "Съобщение, че получаването се потвърждава" : "Съобщение, че получаването не се потвърждава";
             docFile.DocFileName = isDocAcknowledged ? "ReceiptAcknowledgedMessage.xml" : "ReceiptNotAcknowledgedMessage.xml";

@@ -14,13 +14,12 @@
   <RemovePersonalInformation/>
  </OfficeDocumentSettings>
  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
-  <WindowHeight>10365</WindowHeight>
-  <WindowWidth>21570</WindowWidth>
+  <WindowHeight>13515</WindowHeight>
+  <WindowWidth>30720</WindowWidth>
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>795</TabRatio>
-  <ActiveSheet>6</ActiveSheet>
-  <FirstVisibleSheet>2</FirstVisibleSheet>
+  <ActiveSheet>5</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -3206,7 +3205,7 @@
     <Cell><Data ss:Type="Number">300</Data></Cell>
     <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
     <Cell><Data ss:Type="Number">1</Data></Cell>
-    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">400</Data></Cell>
@@ -3387,8 +3386,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>8</ActiveRow>
-     <ActiveCol>1</ActiveCol>
+     <ActiveRow>6</ActiveRow>
+     <ActiveCol>3</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -3396,7 +3395,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="DocFileTypes">
-  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="8" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="9" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
    <Column ss:AutoFitWidth="0" ss:Width="129"/>
    <Column ss:AutoFitWidth="0" ss:Width="147"/>
@@ -3441,21 +3440,28 @@
     <Cell ss:StyleID="s63"><Data ss:Type="Number">401</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0000-000001</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-000001</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s63"><Data ss:Type="Number">402</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Потвърждаване за получаване</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">ReceiptAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0000-000002</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-000002</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s63"><Data ss:Type="Number">403</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">RemovingIrregularitiesInstructions</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0000-003010</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-003010</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">404</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Контейнер за пренос на преписка по компетентност</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">ContainerTransferFileCompetence</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-006064</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
   </Table>
@@ -3469,7 +3475,7 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>5</ActiveRow>
+     <ActiveRow>9</ActiveRow>
      <ActiveCol>3</ActiveCol>
     </Pane>
    </Panes>
@@ -3478,7 +3484,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="DocTypes">
-  <Table ss:ExpandedColumnCount="17" ss:ExpandedRowCount="144" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="17" ss:ExpandedRowCount="145" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s69" ss:DefaultRowHeight="15">
    <Column ss:StyleID="s69" ss:AutoFitWidth="0" ss:Width="134.25"/>
    <Column ss:StyleID="s69" ss:AutoFitWidth="0" ss:Width="81.75"/>
@@ -3489,7 +3495,7 @@
    <Column ss:StyleID="s69" ss:AutoFitWidth="0" ss:Width="93.75"/>
    <Column ss:StyleID="s69" ss:AutoFitWidth="0" ss:Width="97.5"/>
    <Column ss:StyleID="s69" ss:AutoFitWidth="0" ss:Width="114"/>
-   <Column ss:StyleID="s69" ss:AutoFitWidth="0" ss:Width="140.25"/>
+   <Column ss:StyleID="s69" ss:AutoFitWidth="0" ss:Width="236.25"/>
    <Column ss:StyleID="s69" ss:Width="141.75"/>
    <Column ss:StyleID="s69" ss:AutoFitWidth="0" ss:Width="204.75"/>
    <Column ss:StyleID="s69" ss:AutoFitWidth="0" ss:Width="348.75" ss:Span="1"/>
@@ -3749,13 +3755,13 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s90"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s90"><Data ss:Type="String">0000-000001</Data></Cell>
+    <Cell ss:StyleID="s90"><Data ss:Type="String">0010-000001</Data></Cell>
     <Cell ss:StyleID="s90"/>
     <Cell ss:StyleID="s90"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
     <Cell ss:StyleID="s90"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s90"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s90"><Data ss:Type="String">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0" ss:StyleID="s89">
     <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
@@ -3768,13 +3774,13 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s90"><Data ss:Type="String">ReceiptAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s90"><Data ss:Type="String">0000-000002</Data></Cell>
+    <Cell ss:StyleID="s90"><Data ss:Type="String">0010-000002</Data></Cell>
     <Cell ss:StyleID="s90"/>
     <Cell ss:StyleID="s90"><Data ss:Type="String">Потвърждаване за получаване</Data></Cell>
     <Cell ss:StyleID="s90"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s90"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s90"><Data ss:Type="String">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0" ss:StyleID="s89">
     <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
@@ -3787,13 +3793,32 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s90"><Data ss:Type="String">RemovingIrregularitiesInstructions</Data></Cell>
-    <Cell ss:StyleID="s90"><Data ss:Type="String">0000-003010</Data></Cell>
+    <Cell ss:StyleID="s90"><Data ss:Type="String">0010-003010</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s90"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
     <Cell ss:StyleID="s90"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s90"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s90"><Data ss:Type="String">1</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s89">
+    <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="s90"><Data ss:Type="String">ContainerTransferFileCompetence</Data></Cell>
+    <Cell ss:StyleID="s90"><Data ss:Type="String">0010-006064</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="s90"><Data ss:Type="String">Контейнер за пренос на преписка по компетентност</Data></Cell>
+    <Cell ss:StyleID="s90"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="s90"><Data ss:Type="String">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0" ss:StyleID="s89">
     <Cell ss:Index="2" ss:StyleID="Default"/>
@@ -6237,11 +6262,13 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <TopRowVisible>13</TopRowVisible>
+   <Selected/>
+   <LeftColumnVisible>12</LeftColumnVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>21</ActiveRow>
+     <ActiveRow>12</ActiveRow>
+     <ActiveCol>19</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -6471,12 +6498,12 @@
     <Footer x:Margin="0.3"/>
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
-   <Selected/>
+   <Unsynced/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>11</ActiveRow>
-     <ActiveCol>9</ActiveCol>
+     <ActiveRow>14</ActiveRow>
+     <ActiveCol>3</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -7548,7 +7575,7 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <TopRowVisible>9</TopRowVisible>
+   <TopRowVisible>96</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
@@ -9781,6 +9808,7 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
+   <TopRowVisible>21</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>

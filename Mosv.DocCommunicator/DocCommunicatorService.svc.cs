@@ -12,6 +12,8 @@ using System.Data.SqlClient;
 using System.Configuration;
 using Rio.Data.Utils.RioDocumentParser;
 using Rio.Data.ServiceContracts.DocCommunicator;
+using Rio.Data.Abbcdn;
+using System.ServiceModel;
 
 namespace Mosv.DocCommunicator
 {
@@ -35,12 +37,28 @@ namespace Mosv.DocCommunicator
             Guid ticketIdGuid = Guid.Parse(ticketId);
             Ticket ticket = this.unitOfWork.DbContext.Set<Ticket>().Single(e => e.TicketId == ticketIdGuid);
 
-            DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>().Include(e => e.Doc).Single(e => e.DocFileId == ticket.DocFileId);
-            var fileContent = ReadFromBlob(ticket.OldKey);
+            string xmlContent = null;
+            string docTypeUri = null;
 
-            string uri = this.unitOfWork.DbContext.Set<DocFileType>().Single(e => e.DocFileTypeId == docFile.DocFileTypeId).DocTypeUri;
+            if (ticket.DocFileId.HasValue)
+            {
+                DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>().Include(e => e.Doc).Single(e => e.DocFileId == ticket.DocFileId);
+                docTypeUri = this.unitOfWork.DbContext.Set<DocFileType>().Single(e => e.DocFileTypeId == docFile.DocFileTypeId).DocTypeUri;
 
-            string xmlContent = Utf8Utils.GetString(fileContent);
+                var fileContent = ReadFromBlob(ticket.BlobOldKey.Value);
+                xmlContent = Utf8Utils.GetString(fileContent);
+            }
+            else
+            {
+                using (var channelFactory = new ChannelFactory<IAbbcdn>("AbbcdnEndpoint"))
+                using (var abbcdnStorage = new AbbcdnStorage(channelFactory))
+                {
+                    docTypeUri = ticket.DocTypeUri;
+
+                    var fileContent = abbcdnStorage.DownloadFile(ticket.AbbcdnKey.Value).ContentBytes;
+                    xmlContent = Utf8Utils.GetString(fileContent);
+                }
+            }
 
             var documentMetaData = rioDocumentParser.GetDocumentMetadataFromXml(xmlContent);
 
@@ -49,7 +67,7 @@ namespace Mosv.DocCommunicator
 
             DocumentInfo documentInfo = new DocumentInfo();
             documentInfo.DocumentXml = xmlContent;
-            documentInfo.DocumentTypeURI = uri;
+            documentInfo.DocumentTypeURI = docTypeUri;
             documentInfo.VisualizationMode = ticket.VisualizationMode.HasValue ? (VisualizationMode)ticket.VisualizationMode.Value : VisualizationMode.DisplayWithoutSignature;
             documentInfo.SignatureXPath = signatureXPath;
             documentInfo.SignatureXPathNamespaces = signatureXPathNamespaces;
@@ -63,9 +81,11 @@ namespace Mosv.DocCommunicator
             Guid fileKey = WriteToBlob(Utf8Utils.GetBytes(documentXml));
 
             Ticket ticket = this.unitOfWork.DbContext.Set<Ticket>().Single(e => e.TicketId == ticketIdGuid);
-            ticket.NewKey = fileKey;
-
-            this.unitOfWork.Save();
+            if (ticket.DocFileId.HasValue)
+            {
+                ticket.BlobNewKey = fileKey;
+                this.unitOfWork.Save();
+            }
 
             return null;
         }

@@ -1,4 +1,5 @@
-﻿using Common.Utils;
+﻿using Abbcdn;
+using Common.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Rio.Objects;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Rio.Data.Utils
 {
@@ -106,6 +108,11 @@ namespace Rio.Data.Utils
             try
             {
                 R_6090.DecisionGrantAccessPublicInformation rioObj = new R_6090.DecisionGrantAccessPublicInformation();
+
+                rioObj.DocumentTypeName = RioDocumentMetadata.DecisionGrantAccessPublicInformationMetadata.DocumentTypeName;
+                rioObj.DocumentTypeURI = new R_0009_000003.DocumentTypeURI();
+                rioObj.DocumentTypeURI.RegisterIndex = RioDocumentMetadata.DecisionGrantAccessPublicInformationMetadata.DocumentTypeURI.RegisterIndex;
+                rioObj.DocumentTypeURI.BatchNumber = RioDocumentMetadata.DecisionGrantAccessPublicInformationMetadata.DocumentTypeURI.BatchNumber;
 
                 rioObj.AISCaseURI = new R_0009_000073.AISCaseURI();
                 rioObj.AISCaseURI.DocumentURI = new R_0009_000001.DocumentURI();
@@ -216,6 +223,12 @@ namespace Rio.Data.Utils
             try
             {
                 R_3010.RemovingIrregularitiesInstructions rioObj = new R_3010.RemovingIrregularitiesInstructions();
+ 
+                rioObj.DocumentTypeName = RioDocumentMetadata.RemovingIrregularitiesInstructionsMetadata.DocumentTypeName;
+                rioObj.DocumentTypeURI = new R_0009_000003.DocumentTypeURI();
+                rioObj.DocumentTypeURI.RegisterIndex = RioDocumentMetadata.RemovingIrregularitiesInstructionsMetadata.DocumentTypeURI.RegisterIndex;
+                rioObj.DocumentTypeURI.BatchNumber = RioDocumentMetadata.RemovingIrregularitiesInstructionsMetadata.DocumentTypeURI.BatchNumber;
+
                 rioObj.AdministrativeBodyName = administrativeBodyName;
 
                 rioObj.AISCaseURI = new R_0009_000073.AISCaseURI();
@@ -294,9 +307,6 @@ namespace Rio.Data.Utils
         }
 
         public static byte[] CreateR0101ReceiptAcknowledgedMessage(
-            string documentTypeName = null,
-            string documentTypeRegisterIndex = null,
-            string documentTypeBatchNumber = null,
             string registeredByIdentifier = null,
             string registeredByFirstName = null,
             string registeredBySecondName = null,
@@ -321,10 +331,10 @@ namespace Rio.Data.Utils
 
                 rioObj.TransportType = "0006-000001";
 
-                rioObj.DocumentTypeName = documentTypeName;
+                rioObj.DocumentTypeName = RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeName;
                 rioObj.DocumentTypeURI = new R_0009_000003.DocumentTypeURI();
-                rioObj.DocumentTypeURI.RegisterIndex = documentTypeRegisterIndex;
-                rioObj.DocumentTypeURI.BatchNumber = documentTypeBatchNumber;
+                rioObj.DocumentTypeURI.RegisterIndex = RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeURI.RegisterIndex;
+                rioObj.DocumentTypeURI.BatchNumber = RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeURI.BatchNumber;
 
                 rioObj.RegisteredBy = new R_0009_000019.RegisteredBy();
                 rioObj.RegisteredBy.Officer = new R_0009_000019.Officer();
@@ -371,9 +381,7 @@ namespace Rio.Data.Utils
             }
         }
 
-        public static byte[] CreateR0090ReceiptNotAcknowledgedMessage(string documentTypeName = null,
-            string documentTypeRegisterIndex = null,
-            string documentTypeBatchNumber = null,
+        public static byte[] CreateR0090ReceiptNotAcknowledgedMessage(
             string applicantFirstName = null,
             string applicantSecondName = null,
             string applicantLastName = null,
@@ -393,10 +401,10 @@ namespace Rio.Data.Utils
 
                 rioObj.TransportType = "0006-000001";
 
-                rioObj.DocumentTypeName = documentTypeName;
+                rioObj.DocumentTypeName = RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeName;
                 rioObj.DocumentTypeURI = new R_0009_000003.DocumentTypeURI();
-                rioObj.DocumentTypeURI.RegisterIndex = documentTypeRegisterIndex;
-                rioObj.DocumentTypeURI.BatchNumber = documentTypeBatchNumber;
+                rioObj.DocumentTypeURI.RegisterIndex = RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeURI.RegisterIndex;
+                rioObj.DocumentTypeURI.BatchNumber = RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeURI.BatchNumber;
 
                 rioObj.Applicant = new R_0009_000016.ElectronicServiceApplicant();
                 rioObj.Applicant.RecipientGroupCollection = new R_0009_000016.RecipientGroupCollection();
@@ -439,6 +447,112 @@ namespace Rio.Data.Utils
             {
                 return null;
             }
+        }
+
+        public static byte[] CreateR6064ContainerTransferFileCompetence(
+            List<CompetenceContainerFile> publicCompetenceFiles = null,
+            DateTime? caseUriDate = null,
+            string caseUriRegisterIndex = null,
+            string caseUriSequenceNumber = null,
+            string applicantFirstName = null,
+            string applicantSecondName = null,
+            string applicantLastName = null,
+            string applicantEgn = null,
+            string senderElectronicServiceProviderId = null,
+            string senderElectronicServiceProviderName = null,
+            string senderElectronicServiceProviderBulstat = null,
+            string receiverElectronicServiceProviderId = null,
+            string receiverElectronicServiceProviderName = null,
+            string receiverElectronicServiceProviderBulstat = null)
+        {
+            try
+            {
+                R_6064.ContainerTransferFileCompetence rioObj = new R_6064.ContainerTransferFileCompetence();
+
+                rioObj.DocumentTypeName = RioDocumentMetadata.ContainerTransferFileCompetenceMetadata.DocumentTypeName;
+                rioObj.DocumentTypeURI = new R_0009_000003.DocumentTypeURI();
+                rioObj.DocumentTypeURI.RegisterIndex = RioDocumentMetadata.ContainerTransferFileCompetenceMetadata.DocumentTypeURI.RegisterIndex;
+                rioObj.DocumentTypeURI.BatchNumber = RioDocumentMetadata.ContainerTransferFileCompetenceMetadata.DocumentTypeURI.BatchNumber;
+
+                rioObj.SenderProvider = new R_0009_000002.ElectronicServiceProviderBasicData();
+                rioObj.SenderProvider.ElectronicServiceProviderType = senderElectronicServiceProviderId;
+                rioObj.SenderProvider.EntityBasicData = new R_0009_000013.EntityBasicData();
+                rioObj.SenderProvider.EntityBasicData.Identifier = senderElectronicServiceProviderBulstat;
+                rioObj.SenderProvider.EntityBasicData.Name = senderElectronicServiceProviderName;
+
+                rioObj.ReceiverProvider = new R_0009_000002.ElectronicServiceProviderBasicData();
+                rioObj.ReceiverProvider.ElectronicServiceProviderType = receiverElectronicServiceProviderId;
+                rioObj.ReceiverProvider.EntityBasicData = new R_0009_000013.EntityBasicData();
+                rioObj.ReceiverProvider.EntityBasicData.Identifier = receiverElectronicServiceProviderBulstat;
+                rioObj.ReceiverProvider.EntityBasicData.Name = receiverElectronicServiceProviderName;
+
+                rioObj.FileTransferredJurisdiction = new R_6062.FileTransferredJurisdiction();
+
+                rioObj.FileTransferredJurisdiction.AISCaseURI = new R_0009_000073.AISCaseURI();
+                rioObj.FileTransferredJurisdiction.AISCaseURI.DocumentURI = new R_0009_000001.DocumentURI();
+                rioObj.FileTransferredJurisdiction.AISCaseURI.DocumentURI.ReceiptOrSigningDate = caseUriDate;
+                rioObj.FileTransferredJurisdiction.AISCaseURI.DocumentURI.RegisterIndex = caseUriRegisterIndex;
+                rioObj.FileTransferredJurisdiction.AISCaseURI.DocumentURI.SequenceNumber = caseUriSequenceNumber;
+
+                rioObj.FileTransferredJurisdiction.ElectronicServiceRecipient = new R_0009_000015.ElectronicServiceRecipient();
+                rioObj.FileTransferredJurisdiction.ElectronicServiceRecipient.Person = new R_0009_000008.PersonBasicData();
+                rioObj.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Names = new R_0009_000005.PersonNames();
+                rioObj.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Names.First = applicantFirstName;
+                rioObj.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Names.Middle = applicantSecondName;
+                rioObj.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Names.Last = applicantLastName;
+                rioObj.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Identifier = new R_0009_000006.PersonIdentifier();
+                rioObj.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Identifier.EGN = applicantEgn;
+
+                rioObj.FileTransferredJurisdiction.DocumentFileCompetenceCollection = new R_6062.DocumentFileCompetenceCollection();
+
+                if (publicCompetenceFiles != null)
+                {
+                    foreach (var file in publicCompetenceFiles)
+                    {
+                        var cFile = new R_6060.DocumentFileCompetence();
+                        cFile.StructuredDocumentFileCompetence = new R_6058.StructuredDocumentFileCompetence();
+                        cFile.StructuredDocumentFileCompetence.DocumentURI = new R_0009_000001.DocumentURI();
+                        cFile.StructuredDocumentFileCompetence.DocumentURI.RegisterIndex = file.DocumentRegIndex;
+                        cFile.StructuredDocumentFileCompetence.DocumentURI.SequenceNumber = file.DocumentRegNumber;
+                        cFile.StructuredDocumentFileCompetence.DocumentURI.ReceiptOrSigningDate = file.DocumentRegDate;
+
+                        cFile.StructuredDocumentFileCompetence.ElectronicDocumentXml = new R_0009_000092.ElectronicDocumentXml();
+                        cFile.StructuredDocumentFileCompetence.ElectronicDocumentXml.ElectronicDocumentXmlContent = new R_0008_000120.ElectronicDocumentXmlContent();
+                        cFile.StructuredDocumentFileCompetence.ElectronicDocumentXml.DocumentTypeName = file.DocumentTypeName;
+                        if (!String.IsNullOrWhiteSpace(file.DocumentTypeUri))
+                        {
+                            RioDocumentMetadata metaData = RioDocumentMetadata.GetMetadataByDocumentTypeURI(file.DocumentTypeUri);
+                            cFile.StructuredDocumentFileCompetence.ElectronicDocumentXml.DocumentTypeURI = metaData.DocumentTypeURI;
+                        }
+                        if (file.Abbcdnconfig != null)
+                        {
+                            //XmlDocument xmlDoc = new XmlDocument();
+                            //xmlDoc.LoadXml(file.Abbcdnconfig);
+                            //cFile.StructuredDocumentFileCompetence.ElectronicDocumentXml.ElectronicDocumentXmlContent.Any = xmlDoc.DocumentElement;
+
+                            cFile.StructuredDocumentFileCompetence.ElectronicDocumentXml.ElectronicDocumentXmlContent.Any = file.Abbcdnconfig;
+                        }
+
+                        rioObj.FileTransferredJurisdiction.DocumentFileCompetenceCollection.Add(cFile);
+                    }
+                }
+
+                return XmlSerializerUtils.XmlSerializeObjectToBytes(rioObj);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public class CompetenceContainerFile
+        {
+            public string DocumentTypeUri { get; set; }
+            public string DocumentTypeName { get; set; }
+            public string DocumentRegIndex { get; set; }
+            public string DocumentRegNumber { get; set; }
+            public DateTime? DocumentRegDate { get; set; }
+            public Abbcdnconfig Abbcdnconfig { get; set; }
         }
     }
 }

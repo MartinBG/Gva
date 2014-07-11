@@ -404,6 +404,24 @@
         discrepancies: 'Списък с несъответствия',
         discrepancyType: 'Несъответствие'
       },
+      competenceTransfer: {
+        senderServiceProviderName: 'От',
+        receiverServiceProviderName: 'До',
+        caseUri: '№ на преписка',
+        documentUri: '№ на документ',
+        registerIndex: 'Рег. индекс',
+        sequenceNumber: 'Пореден номер',
+        date: 'Дата',
+        applicant: 'Заявител',
+        firstName: 'Име',
+        secondName: 'Презиме',
+        lastName: 'Фамилия',
+        egn: 'ЕГН',
+        documents: 'Документи',
+        docType: 'Вид на документ',
+        download: 'Свали',
+        view: 'Преглед'
+      },
       portalModal: {
         eApplication: {
           title: 'Електронно заявление',

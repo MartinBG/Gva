@@ -24,7 +24,7 @@ namespace Docs.Api
 
             //docs
             this.MapRoute(config, HttpMethod.Get   , "api/docs/forSelect"                   , "Doc", "GetDocsForSelect");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/create"                 , "Doc", "CreateChildDoc"); //?
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/create"                 , "Doc", "CreateChildDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createAcknowledge"      , "Doc", "CreateChildAcknowledgeDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createNotAcknowledge"   , "Doc", "CreateChildNotAcknowledgeDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/setCasePart"            , "Doc", "UpdateDocCasePartType");
@@ -56,6 +56,9 @@ namespace Docs.Api
             this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}/getRioEditableFile"     , "Doc", "GetRioObjectEditableFile");
             this.MapRoute(config, HttpMethod.Get   , "api/docs"                             , "Doc", "GetDocs");
             this.MapRoute(config, HttpMethod.Post  , "api/docs"                             , "Doc", "CreateDoc");
+
+            //abbcdn
+            this.MapRoute(config, HttpMethod.Get   , "api/abbcdnFile" , "Abbcdn", "Get");
         }
 
         private void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action)

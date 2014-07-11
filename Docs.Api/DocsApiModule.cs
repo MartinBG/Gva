@@ -24,6 +24,7 @@ namespace Docs.Api
             //controllers
             moduleBuilder.RegisterType<CorrespondentController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<DocController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AbbcdnController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<DocNomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<UnitController>().InstancePerLifetimeScope();
 

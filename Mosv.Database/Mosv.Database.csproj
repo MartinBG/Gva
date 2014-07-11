@@ -44,7 +44,6 @@
   <ItemGroup>
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
-    <Content Include="Create\Tables\MosvElectronicServiceProviders.sql" />
     <Content Include="Create\Tables\MosvViewAdmissions.sql" />
     <Content Include="Create\Tables\MosvViewSignals.sql" />
     <Content Include="Create\Tables\MosvViewSuggestions.sql" />

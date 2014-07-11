@@ -19,6 +19,9 @@ using Common.Api.StaticNomenclatures;
 using Rio.Data.Utils;
 using Common.Api.Models;
 using Rio.Objects;
+using Rio.Data.Abbcdn;
+using System.ServiceModel;
+using Abbcdn;
 
 namespace Docs.Api.Controllers
 {
@@ -738,7 +741,7 @@ namespace Docs.Api.Controllers
                     {
                         DocType docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId);
 
-                        byte[] eDocFileContent = CreateRioObject(docType.ElectronicServiceFileTypeUri);
+                        byte[] eDocFileContent = CreateRioObject(docType.ElectronicServiceFileTypeUri, parentDocRelation != null ? parentDocRelation.RootDocId : null, preDoc.ParentDocId);
 
                         if (eDocFileContent != null)
                         {
@@ -1928,7 +1931,25 @@ namespace Docs.Api.Controllers
             Ticket ticket = new Ticket();
             ticket.TicketId = Guid.NewGuid();
             ticket.DocFileId = docFileId;
-            ticket.OldKey = fileKey;
+            ticket.BlobOldKey = fileKey;
+            ticket.VisualizationMode = (int)VisualizationMode.DisplayWithoutSignature;
+
+            this.unitOfWork.DbContext.Set<Ticket>().Add(ticket);
+            this.unitOfWork.Save();
+
+            string portalAddress = ConfigurationManager.AppSettings["Docs.Api:PortalWebAddress"].ToString();
+            string accessUrl = String.Format("{0}/Ais/Access?ticketId={1}", portalAddress, ticket.TicketId);
+
+            return Ok(new { url = accessUrl });
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateAbbcdnTicket(string docTypeUri, Guid abbcdnKey)
+        {
+            Ticket ticket = new Ticket();
+            ticket.TicketId = Guid.NewGuid();
+            ticket.DocTypeUri = docTypeUri;
+            ticket.AbbcdnKey = abbcdnKey;
             ticket.VisualizationMode = (int)VisualizationMode.DisplayWithoutSignature;
 
             this.unitOfWork.DbContext.Set<Ticket>().Add(ticket);
@@ -2038,37 +2059,37 @@ namespace Docs.Api.Controllers
             });
         }
 
-        private byte[] CreateRioObject(string docTypeUri)
+        private byte[] CreateRioObject(string docTypeUri, int? caseDocId, int? parentDocId)
         {
             byte[] content = null;
 
             try
             {
+                //Common
                 if (docTypeUri == RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeURIValue)
                 {
-                    content = RioObjectUtils.CreateR0090ReceiptNotAcknowledgedMessage(
-                        RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeName,
-                        RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeURI.RegisterIndex,
-                        RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeURI.BatchNumber);
+                    content = RioObjectUtils.CreateR0090ReceiptNotAcknowledgedMessage();
                 }
+                //Common
                 else if (docTypeUri == RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeURIValue)
                 {
-                    content = RioObjectUtils.CreateR0101ReceiptAcknowledgedMessage(
-                        RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeName,
-                        RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeURI.RegisterIndex,
-                        RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeURI.BatchNumber);
+                    content = RioObjectUtils.CreateR0101ReceiptAcknowledgedMessage();
                 }
+                //Common
                 else if (docTypeUri == RioDocumentMetadata.RemovingIrregularitiesInstructionsMetadata.DocumentTypeURIValue)
                 {
                     content = RioObjectUtils.CreateR3010RemovingIrregularitiesInstructions();
                 }
+                //Common
+                else if (docTypeUri == RioDocumentMetadata.ContainerTransferFileCompetenceMetadata.DocumentTypeURIValue)
+                {
+                    var competenceFiles = GetCompetenceFilesByDocId(caseDocId);
+                    content = RioObjectUtils.CreateR6064ContainerTransferFileCompetence(competenceFiles);
+                }
+                //Mosv
                 else if (docTypeUri == RioDocumentMetadata.DecisionGrantAccessPublicInformationMetadata.DocumentTypeURIValue)
                 {
                     content = RioObjectUtils.CreateR6090DecisionGrantAccessPublicInformation();
-                }
-                else
-                {
-                    content = RioObjectUtils.CreateEmptyRioObject(docTypeUri);
                 }
 
                 return content;
@@ -2078,5 +2099,100 @@ namespace Docs.Api.Controllers
                 return null;
             }
         }
+
+        private List<Rio.Data.Utils.RioObjectUtils.CompetenceContainerFile> GetCompetenceFilesByDocId(int? caseDocId)
+        {
+            List<Rio.Data.Utils.RioObjectUtils.CompetenceContainerFile> competenceFiles = new List<Rio.Data.Utils.RioObjectUtils.CompetenceContainerFile>();
+
+            if (caseDocId.HasValue)
+            {
+                var publicCaseDocs = docRepository.FindPublicLeafsByDocId(caseDocId.Value);
+
+                if (publicCaseDocs.Count > 0)
+                {
+                    using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                    using (var channelFactory = new ChannelFactory<IAbbcdn>("WSHttpBinding_IAbbcdn"))
+                    using (var abbcdnStorage = new AbbcdnStorage(channelFactory))
+                    {
+                        connection.Open();
+
+                        foreach (var doc in publicCaseDocs)
+                        {
+                            DocFile primaryDocFile =
+                                this.unitOfWork.DbContext.Set<DocFile>()
+                                .Include(d => d.DocFileType)
+                                .Where(d => d.DocId == doc.DocId && d.DocFileKind.Alias == "PublicAttachedFile")
+                                .OrderByDescending(d => d.IsPrimary)
+                                .ThenBy(d => d.DocFileId)
+                                .FirstOrDefault();
+
+                            Rio.Data.Utils.RioObjectUtils.CompetenceContainerFile competenceContainerFile = new Rio.Data.Utils.RioObjectUtils.CompetenceContainerFile();
+                            if (primaryDocFile == null)
+                            {
+                                competenceContainerFile.DocumentTypeName = doc.DocType.Name;
+                                competenceContainerFile.DocumentRegIndex = doc.RegIndex;
+                                competenceContainerFile.DocumentRegNumber = doc.RegNumber.ToString();
+                                competenceContainerFile.DocumentRegDate = doc.RegDate;
+                            }
+                            else
+                            {
+                                byte[] fileContent = null;
+
+                                using (MemoryStream mStream = new MemoryStream())
+                                using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", primaryDocFile.DocFileContentId))
+                                {
+                                    blobStream.CopyTo(mStream);
+                                    fileContent = mStream.ToArray();
+                                }
+
+                                var uploadFileInfo = abbcdnStorage.UploadFile(fileContent, primaryDocFile.DocFileName);
+
+                                if (!String.IsNullOrWhiteSpace(primaryDocFile.DocFileType.DocTypeUri))
+                                {
+                                    competenceContainerFile.DocumentTypeName = RioDocumentMetadata.GetMetadataByDocumentTypeURI(primaryDocFile.DocFileType.DocTypeUri).DocumentTypeName;
+                                }
+                                else
+                                {
+                                    competenceContainerFile.DocumentTypeName = doc.DocType.Name;
+                                }
+                                competenceContainerFile.DocumentTypeUri = primaryDocFile.DocFileType.DocTypeUri;
+                                competenceContainerFile.DocumentRegIndex = doc.RegIndex;
+                                competenceContainerFile.DocumentRegNumber = doc.RegNumber.ToString();
+                                competenceContainerFile.DocumentRegDate = doc.RegDate;
+                                //competenceContainerFile.Abbcdnconfig = SerializeAbbcdn(uploadFileInfo, primaryDocFile.DocFileName, primaryDocFile.DocFileType.MimeType);
+                                competenceContainerFile.Abbcdnconfig = new Abbcdnconfig()
+                                {
+                                    AttachedDocumentUniqueIdentifier = uploadFileInfo.FileKey.ToString(),
+                                    AttachedDocumentHash = uploadFileInfo.ContentHash,
+                                    AttachedDocumentSize = uploadFileInfo.ContentSize.ToString(),
+                                    AttachedDocumentFileName = primaryDocFile.DocFileName,
+                                    AttachedDocumentFileType = primaryDocFile.DocFileType.MimeType
+                                };
+                                    
+                            }
+
+                            competenceFiles.Add(competenceContainerFile);
+                        }
+                    }
+                }
+            }
+
+            return competenceFiles;
+        }
+
+        private string SerializeAbbcdn(UploadFileInfo fileInfo, string fileName, string mimeType)
+        {
+            Abbcdnconfig cdnXml = new Abbcdnconfig()
+            {
+                AttachedDocumentUniqueIdentifier = fileInfo.FileKey.ToString(),
+                AttachedDocumentHash = fileInfo.ContentHash,
+                AttachedDocumentSize = fileInfo.ContentSize.ToString(),
+                AttachedDocumentFileName = fileName,
+                AttachedDocumentFileType = mimeType
+            };
+
+            return XmlSerializerUtils.XmlSerializeObjectToString(cdnXml);
+        }
+
     }
 }

@@ -25,8 +25,11 @@ namespace R_0008_000120
 	{
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlAnyElement()]
-		public System.Xml.XmlElement Any;
+        //[XmlAnyElement()]
+		//public System.Xml.XmlElement Any;
+
+        [XmlElement(Type = typeof(Abbcdn.Abbcdnconfig), ElementName = "Abbcdnconfig", IsNullable = true, Form = XmlSchemaForm.Qualified, Namespace = Declarations.SchemaVersion)]
+        public Abbcdn.Abbcdnconfig Any;
 
 		public ElectronicDocumentXmlContent()
 		{

@@ -64,6 +64,8 @@
     <Content Include="js\ems\corrs\views\corrNewCtrl.js" />
     <Content Include="js\ems\corrs\views\corrSearch.html" />
     <Content Include="js\ems\corrs\views\corrSearchCtrl.js" />
+    <Content Include="js\ems\docs\forms\competenceTransfer\competenceTransfer.html" />
+    <Content Include="js\ems\docs\forms\competenceTransfer\competenceTransfer.js" />
     <Content Include="js\ems\docs\forms\receiptNotAcknowledge\receiptNotAcknowledge.html" />
     <Content Include="js\ems\docs\forms\receiptNotAcknowledge\receiptNotAcknowledge.js" />
     <Content Include="js\ems\docs\forms\receiptAcknowledge\receiptAcknowledge.html" />

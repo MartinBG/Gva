@@ -103,6 +103,8 @@
 
       <ems-receipt-acknowledge name="docFileReceiptAcknowledge" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === '0010-000002'"></ems-receipt-acknowledge>
 
+      <ems-competence-transfer name="docFileCompetenceTransfer" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === '0010-006064'"></ems-competence-transfer>
+
     </accordion-group>
 
     <accordion-group is-open="model.openAccordion || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0" ng-if="!readonly || model.publicDocFiles.length > 0 || model.privateDocFiles.length > 0">
