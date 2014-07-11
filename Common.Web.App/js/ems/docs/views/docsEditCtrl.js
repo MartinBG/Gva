@@ -358,6 +358,10 @@
       return $state.go('root.docs.edit.case.docType');
     };
 
+    $scope.editDocClassification = function () {
+      return $state.go('root.docs.edit.case.docClassification');
+    };
+
     $scope.changeDocParent = function () {
       return $state.go('root.docs.edit.case.changeDocParent');
     };

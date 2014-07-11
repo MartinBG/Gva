@@ -1,0 +1,41 @@
+﻿<ng-form name="editDocClassificationForm" sc-validate="{}">
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th><span l10n-text="docs.edit.classifications.name"></span></th>
+        <th><span l10n-text="docs.edit.classifications.isInherited"></span></th>
+        <th><span l10n-text="docs.edit.classifications.isActive"></span></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat-start="dc in docClassifications" ng-class="{ indianred: !dc.isActive }">
+        <td sc-has-error="classification">
+          <sc-nomenclature ng-show="dc.isAdded" name="classification" ng-model="dc.classificationId" alias="'classification'" mode="id" ng-required="true"></sc-nomenclature>
+          <span ng-show="!dc.isAdded">{{ dc.classificationName }}</span>
+        </td>
+        <td>
+          <input type="checkbox" ng-model="dc.isInherited"/>
+        </td>
+        <td>
+          {{dc.isActive ? 'Да' : 'Не'}}
+        </td>
+        <td style="text-align: right; width: 1px;">
+          <sc-button ng-show="!dc.isActive && !dc.isAdded" btn-click="addDocClassification(dc)" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+          <sc-button ng-show="dc.isActive" btn-click="removeDocClassification(dc)" class="btn btn-xs btn-primary" icon="glyphicon-minus"></sc-button>
+        </td>
+      </tr>
+      <tr ng-repeat-end=""></tr>
+      <tr>
+        <td colspan="4" style="text-align: right; width: 1px;">
+          <sc-button btn-click="addNewDocClassification()" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="col-sm-3 col-sm-offset-5">
+    <sc-button name="saveBtn" btn-click="save()" text="docs.edit.classifications.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+    <sc-button name="cancelBtn" btn-click="cancel()" text="docs.edit.classifications.cancel" class="btn btn-default" icon="glyphicon-ban-circle"></sc-button>
+  </div>
+</ng-form>

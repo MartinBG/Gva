@@ -24,6 +24,8 @@ namespace Docs.Api.DataObjects
                 this.ClassificationByUserId = d.ClassificationByUserId;
                 this.ClassificationDate = d.ClassificationDate;
                 this.IsActive = d.IsActive;
+                this.IsInherited = d.IsInherited;
+                this.IsAdded = false;
                 this.Version = d.Version;
 
                 if (d.Classification != null)
@@ -39,6 +41,8 @@ namespace Docs.Api.DataObjects
         public Nullable<int> ClassificationByUserId { get; set; }
         public System.DateTime ClassificationDate { get; set; }
         public bool IsActive { get; set; }
+        public bool IsInherited { get; set; }
+        public bool IsAdded { get; set; }
         public byte[] Version { get; set; }
 
         //

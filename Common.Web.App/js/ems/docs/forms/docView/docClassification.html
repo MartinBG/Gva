@@ -4,23 +4,12 @@
       <tr>
         <th><span l10n-text="docs.edit.classifications.name"></span></th>
         <th><span l10n-text="docs.edit.classifications.date"></span></th>
-        <th></th>
       </tr>
     </thead>
     <tbody ng-repeat="dc in model.docClassifications">
       <tr>
         <td>{{ dc.classificationName }}</td>
         <td>{{ dc.classificationDate | date:'dd.MM.yyyy HH:mm' }}</td>
-        <td style="text-align: right;">
-          <a ng-show="!readonly" sc-click="removeDocClassification(dc)" l10n-text="docs.edit.classifications.delete"></a>
-        </td>
-      </tr>
-    </tbody>
-    <tbody>
-      <tr>
-        <td colspan="3" style="text-align: right;">
-          <a ng-show="!readonly" sc-click="addDocClassification(dc)" l10n-text="docs.edit.classifications.add"></a>
-        </td>
       </tr>
     </tbody>
   </table>

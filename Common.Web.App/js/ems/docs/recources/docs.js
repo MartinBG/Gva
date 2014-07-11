@@ -82,6 +82,10 @@
                 newDocId: '@newDocId'
               }
             },
+            'changeDocClassification': {
+              method: 'POST',
+              url: '/api/docs/:id/changeDocClassification'
+            },
             'createNewCase': {
               method: 'POST',
               url: '/api/docs/:id/createNewCase'

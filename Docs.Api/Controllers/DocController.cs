@@ -605,6 +605,12 @@ namespace Docs.Api.Controllers
         }
 
         [HttpPost]
+        public IHttpActionResult ChangeDocClassification(int id, List<DocClassificationDO> docClassifications)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
         public IHttpActionResult CreateNewCase(int id)
         {
             throw new NotImplementedException();
