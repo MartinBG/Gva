@@ -156,6 +156,8 @@
     <Compile Include="Models\RegisterIndex.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ClassificationRepository\ClassificationRepository.cs" />
+    <Compile Include="Repositories\ClassificationRepository\IClassificationRepository.cs" />
     <Compile Include="Repositories\CorrespondentRepository\CorrespondentRepository.cs" />
     <Compile Include="Repositories\CorrespondentRepository\ICorrespondentRepository.cs" />
     <Compile Include="Repositories\DocRepository\DocRepository.cs" />

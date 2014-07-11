@@ -30,13 +30,16 @@ namespace Docs.Api.Controllers
     {
         private Common.Data.IUnitOfWork unitOfWork;
         private Docs.Api.Repositories.DocRepository.IDocRepository docRepository;
+        private Docs.Api.Repositories.ClassificationRepository.IClassificationRepository classificationRepository;
         private UserContext userContext;
 
         public DocController(Common.Data.IUnitOfWork unitOfWork,
-            Docs.Api.Repositories.DocRepository.IDocRepository docRepository)
+            Docs.Api.Repositories.DocRepository.IDocRepository docRepository,
+            Docs.Api.Repositories.ClassificationRepository.IClassificationRepository classificationRepository)
         {
             this.unitOfWork = unitOfWork;
             this.docRepository = docRepository;
+            this.classificationRepository = classificationRepository;
         }
 
         protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
@@ -580,13 +583,33 @@ namespace Docs.Api.Controllers
             //todo SetDocUsers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+                ClassificationPermission docMovementPermission = this.classificationRepository.GetByAlias("DocMovement");
+                ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+                bool hasDocMovementPermission =
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, docMovementPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasDocMovementPermission)
+                {
+                    return Unauthorized();
+                }
+
                 Doc doc = this.docRepository.Find(id);
-                doc.IsCase = false;
+
+                if (doc == null)
+                {
+                    return NotFound();
+                }
 
                 List<int> docIds = this.docRepository.fnGetSubordinateDocs(id);
+
                 DocRelation newDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == newDocId);
 
                 List<DocRelation> docRelations = this.docRepository.GetCaseRelationsByDocId(id);
+
                 foreach (var docRelation in docRelations)
                 {
                     if (docIds.Contains(docRelation.DocId))
@@ -595,9 +618,12 @@ namespace Docs.Api.Controllers
                         {
                             docRelation.ParentDocId = newDocId;
                         }
+
                         docRelation.RootDocId = newDocRelation.RootDocId;
                     }
                 }
+
+                doc.IsCase = false;
 
                 this.unitOfWork.Save();
 
@@ -621,8 +647,26 @@ namespace Docs.Api.Controllers
             //todo SetDocUsers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+                ClassificationPermission docMovementPermission = this.classificationRepository.GetByAlias("DocMovement");
+                ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+                bool hasDocMovementPermission =
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, docMovementPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasDocMovementPermission)
+                {
+                    return Unauthorized();
+                }
+
                 Doc doc = this.docRepository.Find(id);
-                doc.IsCase = true;
+
+                if (doc == null)
+                {
+                    return NotFound();
+                }
 
                 List<int> docIds = this.docRepository.fnGetSubordinateDocs(id);
                 List<DocRelation> docRelations = this.docRepository.GetCaseRelationsByDocId(id);
@@ -635,9 +679,12 @@ namespace Docs.Api.Controllers
                         {
                             docRelation.ParentDocId = null;
                         }
+
                         docRelation.RootDocId = id;
                     }
                 }
+
+                doc.IsCase = true;
 
                 this.unitOfWork.Save();
 
@@ -705,7 +752,7 @@ namespace Docs.Api.Controllers
                     if (parentDocRelation == null)
                     {
                         docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
-                            .Where(e => e.DocDirectionId == newDoc.DocDirectionId && 
+                            .Where(e => e.DocDirectionId == newDoc.DocDirectionId &&
                                 e.DocTypeId == newDoc.DocTypeId &&
                                 e.IsActive)
                             .ToList();
@@ -781,6 +828,16 @@ namespace Docs.Api.Controllers
 
                     if (preDoc.Register)
                     {
+                        ClassificationPermission registerPermission = this.classificationRepository.GetByAlias("Register");
+
+                        bool hasRegisterPermission =
+                            this.classificationRepository.HasPermission(unitUser.UnitId, newDoc.DocId, registerPermission.ClassificationPermissionId);
+
+                        if (!hasRegisterPermission)
+                        {
+                            return Unauthorized();
+                        }
+
                         this.docRepository.RegisterDoc(newDoc, unitUser, this.userContext);
                     }
 
@@ -822,6 +879,14 @@ namespace Docs.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+                ClassificationPermission managementPermission = this.classificationRepository.GetByAlias("Management");
+                ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+                bool hasManagementPermission =
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, managementPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
                 DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>()
                     .SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
                 DocDirection internalDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
@@ -837,10 +902,20 @@ namespace Docs.Api.Controllers
                 switch (docEntryTypeAlias.ToLower())
                 {
                     case "resolution":
+                        if (!hasManagementPermission)
+                        {
+                            return Unauthorized();
+                        }
+
                         docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
                         docSubject = "Разпределение чрез резолюция";
                         break;
                     case "task":
+                        if (!hasManagementPermission)
+                        {
+                            return Unauthorized();
+                        }
+
                         docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
                         docSubject = "Разпределение чрез задача";
                         break;
@@ -1120,7 +1195,7 @@ namespace Docs.Api.Controllers
 
             #region Set permissions
 
-            returnValue.CanRead = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Read");   
+            returnValue.CanRead = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Read");
 
             returnValue.CanEdit = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Edit");
 
@@ -1143,7 +1218,7 @@ namespace Docs.Api.Controllers
             returnValue.CanFinish = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Finish");
 
             returnValue.CanReverse = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "Reverse");
-            
+
             returnValue.CanEditTech = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "EditTechElectronicServiceStage");
 
             returnValue.CanEditTechElectronicServiceStage = vwDocUsers.Any(e => e.DocId == doc.DocId && e.ClassificationPermission.Alias == "EditTech");
@@ -1172,12 +1247,31 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+                ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+                ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+                bool hasEditPermission =
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasEditPermission)
+                {
+                    return Unauthorized();
+                }
+
                 DateTime currentDate = DateTime.Now;
                 var oldDoc = this.docRepository.Find(id,
                         e => e.DocCorrespondents,
                         e => e.DocFiles.Select(df => df.DocFileOriginType),
                         e => e.DocFiles.Select(df => df.DocFileType),
                         e => e.DocUnits);
+
+                if (oldDoc == null)
+                {
+                    return NotFound();
+                }
 
                 oldDoc.EnsureForProperVersion(doc.Version);
 
@@ -1466,6 +1560,20 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+                ClassificationPermission docCasePartManagementPermission = this.classificationRepository.GetByAlias("DocCasePartManagement");
+                ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+                bool hasDocCasePartManagementPermission =
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, docCasePartManagementPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasDocCasePartManagementPermission)
+                {
+                    return Unauthorized();
+                }
+
                 Doc doc = this.docRepository.UpdateDocCasePartType(
                     id,
                     Helper.StringToVersion(docVersion),
@@ -1487,9 +1595,28 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+                ClassificationPermission editTechPermission = this.classificationRepository.GetByAlias("EditTech");
+                ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+                bool hasEditTechPermission =
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, editTechPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasEditTechPermission)
+                {
+                    return Unauthorized();
+                }
+
                 Doc oldDoc = this.docRepository.Find(id,
                     e => e.DocType,
                     e => e.DocUnits);
+
+                if (oldDoc == null)
+                {
+                    return NotFound();
+                }
 
                 if (doc.UnregisterDoc)
                 {
@@ -1583,6 +1710,18 @@ namespace Docs.Api.Controllers
         {
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
+            ClassificationPermission registerPermission = this.classificationRepository.GetByAlias("Register");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasRegisterPermission =
+                this.classificationRepository.HasPermission(unitUser.UnitId, id, registerPermission.ClassificationPermissionId) &&
+                this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasRegisterPermission)
+            {
+                return Unauthorized();
+            }
+
             Doc doc = this.docRepository.Find(id,
                 e => e.DocRelations);
 
@@ -1605,6 +1744,18 @@ namespace Docs.Api.Controllers
         public IHttpActionResult ManualRegisterDoc(int id, string docVersion, string regUri, DateTime regDate)
         {
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission registerPermission = this.classificationRepository.GetByAlias("Register");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasRegisterPermission =
+                this.classificationRepository.HasPermission(unitUser.UnitId, id, registerPermission.ClassificationPermissionId) &&
+                this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasRegisterPermission)
+            {
+                return Unauthorized();
+            }
 
             Doc doc = this.docRepository.Find(id,
                 e => e.DocRelations);
@@ -1669,6 +1820,8 @@ namespace Docs.Api.Controllers
             List<DocCasePartType> docCasePartTypes = this.unitOfWork.DbContext.Set<DocCasePartType>().ToList();
             List<DocRelation> docRelations;
 
+            //? permissions
+
             if (string.IsNullOrEmpty(alias))
             {
                 this.docRepository.NextDocStatus(
@@ -1721,6 +1874,8 @@ namespace Docs.Api.Controllers
             int id,
             string docVersion)
         {
+            //? permissions
+
             DocStatus cancelDocStatus = this.unitOfWork.DbContext.Set<DocStatus>()
                 .SingleOrDefault(e => e.Alias.ToLower() == "Canceled".ToLower());
 
@@ -1747,6 +1902,8 @@ namespace Docs.Api.Controllers
             string docVersion,
             string alias = null)
         {
+            //? permissions
+
             List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().ToList();
 
             if (string.IsNullOrEmpty(alias))
@@ -1775,6 +1932,8 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateDocWorkflow(int id, string docVersion, DocWorkflowDO docWorkflow)
         {
+            //? permissions
+
             Doc doc = this.docRepository.Find(id);
 
             doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
@@ -1782,7 +1941,7 @@ namespace Docs.Api.Controllers
             DocWorkflowAction docWorkflowAction = this.unitOfWork.DbContext.Set<DocWorkflowAction>()
                 .SingleOrDefault(e => e.Alias.ToLower() == docWorkflow.DocWorkflowActionAlias.ToLower());
 
-            //aop code is wrong
+            //? aop code is wrong
             bool? yesNo = BooleanNomConvert.ToBool(docWorkflow.YesNo);
 
             doc.CreateDocWorkflow(
@@ -1803,6 +1962,8 @@ namespace Docs.Api.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteDocWorkflow(int id, int itemId, string docVersion)
         {
+            //? permissions
+
             Doc doc = this.docRepository.Find(id,
                 e => e.DocWorkflows);
 
@@ -1856,6 +2017,8 @@ namespace Docs.Api.Controllers
             string docVersion,
             DocElectronicServiceStageDO docElectronicServiceStage)
         {
+            //? permissions !
+
             Doc doc = this.docRepository.Find(this.docRepository.GetCaseId(id),
                 e => e.DocElectronicServiceStages);
 
@@ -1894,6 +2057,8 @@ namespace Docs.Api.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteCurrentDocElectronicServiceStage(int id, string docVersion)
         {
+            //? permissions
+
             Doc doc = this.docRepository.Find(this.docRepository.GetCaseId(id),
                 e => e.DocElectronicServiceStages);
 
@@ -1948,6 +2113,8 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateDocFileTicket(int id, int docFileId, Guid fileKey)
         {
+            //? permissions edit
+
             Ticket ticket = new Ticket();
             ticket.TicketId = Guid.NewGuid();
             ticket.DocFileId = docFileId;
@@ -2029,6 +2196,11 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult PostDocSendEmail(int id, DocSendEmailDO email)
         {
+            //? permissions sendmail
+
+            // check for docverion
+            // update docversion
+
             throw new NotImplementedException();
 
             //using (var transaction = this.unitOfWork.BeginTransaction())

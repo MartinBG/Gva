@@ -154,6 +154,7 @@
     $scope.doc.flags.isVisibleEditTechCmd = !$scope.doc.isResolution && !$scope.doc.isTask &&
       !$scope.doc.isRemark && $scope.doc.canEditTech;
     $scope.doc.flags.isVisibleDocMoveCmd = $scope.doc.canDocMovement;
+    $scope.doc.flags.isVisibleDocMoveToNewCmd = !$scope.doc.isCase && $scope.doc.canDocMovement;
 
     $scope.doc.flags.isVisbleDivider1 = doc.flags.isVisibleRegisterCmd;
     $scope.doc.flags.isVisbleDivider2 = doc.flags.isVisibleEsignCmd ||

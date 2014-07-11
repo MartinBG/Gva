@@ -9,6 +9,7 @@ using Docs.Api.Jobs;
 using Docs.Api.Models;
 using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
+using Docs.Api.Repositories.ClassificationRepository;
 
 namespace Docs.Api
 {
@@ -20,6 +21,7 @@ namespace Docs.Api
             moduleBuilder.RegisterType<DocsDbConfiguration>().As<IDbConfiguration>().SingleInstance();
             moduleBuilder.RegisterType<CorrespondentRepository>().As<ICorrespondentRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<DocRepository>().As<IDocRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ClassificationRepository>().As<IClassificationRepository>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<CorrespondentController>().InstancePerLifetimeScope();
