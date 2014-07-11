@@ -1,25 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Gva.Api.Repositories.FileRepository;
 using Newtonsoft.Json.Linq;
-using Regs.Api.Models;
-using Common.Json;
-using Gva.Api.ModelsDO;
-using Common.Api.UserContext;
-using Common.Data;
-using Common.Api.Models;
-using Docs.Api.Models;
-using Gva.Api.Models;
-using Gva.Api.LotEventHandlers;
-using Regs.Api.LotEvents;
-using Common.Api.Repositories.UserRepository;
-using Gva.Api.Repositories.AircraftRepository;
-using Gva.Api.Repositories.PersonRepository;
-using Gva.Api.Repositories.OrganizationRepository;
-using Newtonsoft.Json;
 
 namespace Gva.MigrationTool
 {
