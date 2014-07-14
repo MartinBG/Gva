@@ -42,35 +42,56 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 join set in this.unitOfWork.DbContext.Set<Set>() on lot.SetId equals set.SetId
                 join part in this.unitOfWork.DbContext.Set<Part>() on a.GvaAppLotPartId equals part.PartId into part1
                 from part2 in part1.DefaultIfEmpty()
-                join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(a => a.ApplicationType) on a.GvaAppLotPartId equals va.PartId into va1
+
+                join va in this.unitOfWork.DbContext.Set<GvaViewApplication>() on a.GvaAppLotPartId equals va.PartId into va1
                 from va2 in va1.DefaultIfEmpty()
+                join nv7 in this.unitOfWork.DbContext.Set<NomValue>() on va2.ApplicationTypeId equals nv7.NomValueId into nv8
+                from nv9 in nv8.DefaultIfEmpty()
+
                 join p in this.unitOfWork.DbContext.Set<GvaViewPerson>() on va2.LotId equals p.LotId into p1
                 from p2 in p1.DefaultIfEmpty()
+
                 join o in this.unitOfWork.DbContext.Set<GvaViewOrganization>().Include(o => o.OrganizationType) on va2.LotId equals o.LotId into o1
                 from o2 in o1.DefaultIfEmpty()
-                join ac in this.unitOfWork.DbContext.Set<GvaViewAircraft>().Include(a => a.AirCategory).Include(a => a.AircraftProducer) on va2.LotId equals ac.LotId into ac1
+                join nv19 in this.unitOfWork.DbContext.Set<NomValue>() on o2.OrganizationTypeId equals nv19.NomValueId into nv20
+                from nv21 in nv20.DefaultIfEmpty()
+
+                join ac in this.unitOfWork.DbContext.Set<GvaViewAircraft>() on va2.LotId equals ac.LotId into ac1
                 from ac2 in ac1.DefaultIfEmpty()
                 join nv1 in this.unitOfWork.DbContext.Set<NomValue>() on ac2.AirCategoryId equals nv1.NomValueId into nv2
                 from nv3 in nv2.DefaultIfEmpty()
                 join nv4 in this.unitOfWork.DbContext.Set<NomValue>() on ac2.AircraftProducerId equals nv4.NomValueId into nv5
                 from nv6 in nv5.DefaultIfEmpty()
-                join ap in this.unitOfWork.DbContext.Set<GvaViewAirport>().Include(a => a.AirportType) on va2.LotId equals ap.LotId into ap1
+
+                join ap in this.unitOfWork.DbContext.Set<GvaViewAirport>() on va2.LotId equals ap.LotId into ap1
                 from ap2 in ap1.DefaultIfEmpty()
-                join eq in this.unitOfWork.DbContext.Set<GvaViewEquipment>().Include(e => e.EquipmentType).Include(e => e.EquipmentProducer) on va2.LotId equals eq.LotId into eq1
+                join nv16 in this.unitOfWork.DbContext.Set<NomValue>() on ap2.AirportTypeId equals nv16.NomValueId into nv17
+                from nv18 in nv17.DefaultIfEmpty()
+
+                join eq in this.unitOfWork.DbContext.Set<GvaViewEquipment>() on va2.LotId equals eq.LotId into eq1
                 from eq2 in eq1.DefaultIfEmpty()
+                join nv10 in this.unitOfWork.DbContext.Set<NomValue>() on eq2.EquipmentTypeId equals nv10.NomValueId into nv11
+                from nv12 in nv11.DefaultIfEmpty()
+                join nv13 in this.unitOfWork.DbContext.Set<NomValue>() on eq2.EquipmentProducerId equals nv13.NomValueId into nv14
+                from nv15 in nv14.DefaultIfEmpty()
                 select new
                 {
                     GApplication = a,
                     Set = set,
                     GApplicationPart = part2,
                     GViewApplication = va2,
+                    GViewApplicationType = nv9,
                     GViewPerson = p2,
                     GViewOrganization = o2,
+                    GViewOrganizationType = nv21,
                     GViewAircraft = ac2,
                     GViewAircraftCat = nv3,
                     GViewAircraftProd = nv6,
                     GViewAirport = ap2,
+                    GViewAirportType = nv18,
                     GViewEquipment = eq2,
+                    GViewEquipmentType = nv12,
+                    GViewEquipmentProducer = nv15
                 };
 
             var predicate = PredicateBuilder.True(new
@@ -79,13 +100,18 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 Set = new Set(),
                 GApplicationPart = new Part(),
                 GViewApplication = new GvaViewApplication(),
+                GViewApplicationType = new NomValue(),
                 GViewPerson = new GvaViewPerson(),
                 GViewOrganization = new GvaViewOrganization(),
+                GViewOrganizationType = new NomValue(),
                 GViewAircraft = new GvaViewAircraft(),
                 GViewAircraftCat = new NomValue(),
                 GViewAircraftProd = new NomValue(),
                 GViewAirport = new GvaViewAirport(),
-                GViewEquipment = new GvaViewEquipment()
+                GViewAirportType = new NomValue(),
+                GViewEquipment = new GvaViewEquipment(),
+                GViewEquipmentType = new NomValue(),
+                GViewEquipmentProducer = new NomValue()
             });
 
             predicate = predicate
@@ -112,7 +138,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     AppPartIndex = e.GApplicationPart != null ? e.GApplicationPart.Index : (int?)null,
                     AppPartRequestDate = e.GViewApplication != null ? e.GViewApplication.RequestDate : null,
                     AppPartDocumentNumber = e.GViewApplication != null ? e.GViewApplication.DocumentNumber : null,
-                    AppPartApplicationTypeName = e.GViewApplication != null ? e.GViewApplication.ApplicationType.Name : null,
+                    AppPartApplicationTypeName = e.GViewApplicationType != null ? e.GViewApplicationType.Name : null,
                     PersonId = e.GViewPerson != null ? (int?)e.GViewPerson.LotId : null,
                     PersonLin = e.GViewPerson != null ? e.GViewPerson.Lin : null,
                     PersonNames =  e.GViewPerson != null ? e.GViewPerson.Names : null,
@@ -124,12 +150,12 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GvaAircraftProducer = e.GViewAircraftProd != null ? e.GViewAircraftProd.Name : null,
                     GvaAircraftICAO = e.GViewAircraft != null ? e.GViewAircraft.ICAO : null,
                     GvaAirportId = e.GViewAirport != null ? (int?)e.GViewAirport.LotId : null,
-                    GvaAirportType = e.GViewAirport != null ? e.GViewAirport.AirportType.Name : null,
+                    GvaAirportType = e.GViewAirportType != null ? e.GViewAirportType.Name : null,
                     GvaAirportName = e.GViewAirport != null ? e.GViewAirport.Name : null,
                     GvaEquipmentId = e.GViewEquipment != null ? (int?)e.GViewEquipment.LotId : null,
                     GvaEquipmentName = e.GViewEquipment != null ? e.GViewEquipment.Name : null,
-                    GvaEquipmentType = e.GViewEquipment != null ? e.GViewEquipment.EquipmentType.Name : null,
-                    GvaEquipmentProducer = e.GViewEquipment != null ? e.GViewEquipment.EquipmentProducer.Name : null
+                    GvaEquipmentType = e.GViewEquipmentType != null ? e.GViewEquipmentType.Name : null,
+                    GvaEquipmentProducer = e.GViewEquipmentProducer != null ? e.GViewEquipmentProducer.Name : null
                 })
                 .ToList();
         }
