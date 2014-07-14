@@ -44,6 +44,7 @@
   <ItemGroup>
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
+    <Content Include="Create\Diagram\GvaViews.sql" />
     <Content Include="Create\Diagram\Gva.sql" />
     <Content Include="Create\Tables\ASExamVariants.sql" />
     <Content Include="Create\Tables\ASExamQuestions.sql" />
