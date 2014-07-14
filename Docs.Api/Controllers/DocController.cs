@@ -636,7 +636,82 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult ChangeDocClassification(int id, List<DocClassificationDO> docClassifications)
         {
-            throw new NotImplementedException();
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+                ClassificationPermission techEditPermission = this.classificationRepository.GetByAlias("EditTech");
+                ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+                bool hasTechEditPermission =
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, techEditPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasTechEditPermission)
+                {
+                    return Unauthorized();
+                }
+
+                var doc = this.docRepository.Find(id,
+                    e => e.DocClassifications);
+
+                if (doc == null)
+                {
+                    return NotFound();
+                }
+
+                //delete
+                foreach (var docClassification in docClassifications.Where(e => e.IsRemoved))
+                {
+                    if (docClassification.DocClassificationId.HasValue)
+                    {
+                        DocClassification dc = doc.DocClassifications.FirstOrDefault(e => e.DocClassificationId == docClassification.DocClassificationId.Value);
+
+                        if (dc != null)
+                        {
+                            this.unitOfWork.DbContext.Set<DocClassification>().Remove(dc);
+                        }
+                    }
+                }
+
+                //update
+                foreach (var docClassification in docClassifications.Where(e => !e.IsAdded && !e.IsRemoved))
+                {
+                    if (docClassification.DocClassificationId.HasValue)
+                    {
+                        DocClassification dc = doc.DocClassifications.FirstOrDefault(e => e.DocClassificationId == docClassification.DocClassificationId.Value);
+
+                        if (dc != null)
+                        {
+                            dc.IsActive = docClassification.IsActive;
+                            dc.IsInherited = docClassification.IsInherited;
+                        }
+                    }
+                }
+
+                //add
+                foreach (var docClassification in docClassifications.Where(e => e.IsAdded && !e.IsRemoved && e.IsActive))
+                {
+                    DocClassification dc = new DocClassification();
+                    dc.Doc = doc;
+                    dc.ClassificationId = docClassification.ClassificationId.Value;
+                    dc.ClassificationByUserId = unitUser.UserId;
+                    dc.ClassificationDate = docClassification.ClassificationDate;
+                    dc.IsActive = docClassification.IsActive;
+                    dc.IsInherited = docClassification.IsInherited;
+
+                    this.unitOfWork.DbContext.Set<DocClassification>().Add(dc);
+                }
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok(new
+                {
+                    id = doc.DocId
+                });
+            }
         }
 
         [HttpPost]
@@ -1362,31 +1437,6 @@ namespace Docs.Api.Controllers
 
                 #endregion
 
-                #region DocClassifications
-
-                //?
-                ////docclassifications deletion
-                //foreach (var docClassification in doc.DocClassifications.Where(e => !e.IsNew && e.IsDeleted))
-                //{
-                //    DocClassification dc = this.unitOfWork.Repo<DocClassification>().Find(docClassification.DocClassificationId.Value);
-                //    this.unitOfWork.Repo<DocClassification>().Remove(dc);
-                //}
-
-                ////docclassifications add
-                //foreach (var docClassification in doc.DocClassifications.Where(e => e.IsNew && !e.IsDeleted))
-                //{
-                //    DocClassification dc = new DocClassification();
-                //    dc.Doc = oldDoc;
-                //    dc.ClassificationId = docClassification.ClassificationId.Value;
-                //    dc.ClassificationByUserId = docClassification.ClassificationByUserId.Value;
-                //    dc.ClassificationDate = docClassification.ClassificationDate;
-                //    dc.IsActive = docClassification.IsActive;
-
-                //    this.unitOfWork.Repo<DocClassification>().Add(dc);
-                //}
-
-                #endregion
-
                 #region Emails
 
                 //    AdministrativeEmailType workflowActionRequestEmailType = this.unitOfWork.Repo<AdministrativeEmailType>().GetByAlias("WorkflowActionRequest");
@@ -1494,10 +1544,6 @@ namespace Docs.Api.Controllers
                 foreach (var file in allDocFiles.Where(e => !e.IsNew && e.IsDeleted && e.DocFileId.HasValue))
                 {
                     oldDoc.DeleteDocFile(file.DocFileId.Value, this.userContext);
-                    //? mark as deleted
-                    //DocFile df = this.unitOfWork.Repo<DocFile>().Find(file.DocFileId.Value);
-                    //df.IsActive = false;
-                    //df.Name = string.Format("{0} (изтрит от {1})", df.Name, this.userContext.FullName);
                 }
 
                 foreach (var file in allDocFiles.Where(e => !e.IsNew && !e.IsDeleted && e.IsDirty && e.DocFileId.HasValue))
@@ -1523,18 +1569,6 @@ namespace Docs.Api.Controllers
 
                     oldDoc.CreateDocFile(file.DocFileKindId, docFileType.DocFileTypeId, file.Name, file.File.Name, String.Empty, file.File.Key, userContext);
                 }
-
-                //?
-                //    //file update - ticket
-                //    foreach (var file in docFiles.Where(e => !e.IsNew && !e.IsDeleted && e.IsEdited && e.TicketId.HasValue))
-                //    {
-                //        Ticket ticket = this.unitOfWork.Repo<Ticket>().Find(file.TicketId.Value);
-                //        if (ticket.NewKey.HasValue)
-                //        {
-                //            DocFile df = this.unitOfWork.Repo<DocFile>().Find(file.DocFileId.Value);
-                //            df.DocFileContentId = ticket.NewKey.Value;
-                //        }
-                //    }
 
                 #endregion
 
@@ -1874,7 +1908,19 @@ namespace Docs.Api.Controllers
             int id,
             string docVersion)
         {
-            //? permissions
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission finishPermission = this.classificationRepository.GetByAlias("Finish");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasDocMovementPermission =
+                this.classificationRepository.HasPermission(unitUser.UnitId, id, finishPermission.ClassificationPermissionId) &&
+                this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasDocMovementPermission)
+            {
+                return Unauthorized();
+            }
 
             DocStatus cancelDocStatus = this.unitOfWork.DbContext.Set<DocStatus>()
                 .SingleOrDefault(e => e.Alias.ToLower() == "Canceled".ToLower());
@@ -1932,16 +1978,96 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateDocWorkflow(int id, string docVersion, DocWorkflowDO docWorkflow)
         {
-            //? permissions
-
             Doc doc = this.docRepository.Find(id);
+
+            if (doc == null)
+            {
+                return NotFound();
+            }
+
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            DocStatus preparedStatus = this.classificationRepository.GetDocStatusByAlias("Prepared");
+
+            bool isRequest = false;
+            string[] requests = { "signrequest", "discussrequest", "approvalrequest", "registrationrequest" };
+            string dwAlias = docWorkflow.DocWorkflowActionAlias.ToLower();
+
+            if (requests.Contains(dwAlias))
+            {
+                isRequest = true;
+
+                ClassificationPermission managementPermission = this.classificationRepository.GetByAlias("Management");
+                ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+
+                bool hasPermission = (doc.DocStatusId == preparedStatus.DocStatusId) &&
+                    (this.classificationRepository.HasPermission(unitUser.UnitId, id, managementPermission.ClassificationPermissionId) ||
+                        this.classificationRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId)) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasPermission)
+                {
+                    return Unauthorized();
+                }
+            }
+            else if (dwAlias == "Sign".ToLower())
+            {
+                isRequest = false;
+
+                ClassificationPermission docWorkflowSignPermission = this.classificationRepository.GetByAlias("DocWorkflowSign");
+
+                bool hasPermission = (doc.DocStatusId == preparedStatus.DocStatusId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, docWorkflowSignPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasPermission)
+                {
+                    return Unauthorized();
+                }
+            }
+            else if (dwAlias == "Discuss".ToLower() || dwAlias == "Approval".ToLower())
+            {
+                isRequest = false;
+
+                ClassificationPermission docWorkflowDiscussPermission = this.classificationRepository.GetByAlias("DocWorkflowDiscuss");
+
+                bool hasPermission = (doc.DocStatusId == preparedStatus.DocStatusId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, docWorkflowDiscussPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasPermission)
+                {
+                    return Unauthorized();
+                }
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+
+            var docWorkflowUnitUser = this.unitOfWork.DbContext.Set<UnitUser>().Find(docWorkflow.UnitUserId);
+
+            if (!isRequest && docWorkflow.PrincipalUnitId.HasValue && docWorkflowUnitUser.UnitId != docWorkflow.PrincipalUnitId.Value)
+            {
+                ClassificationPermission substituteManagementPermission = this.classificationRepository.GetByAlias("SubstituteManagement");
+
+                bool hasPermission = (doc.DocStatusId == preparedStatus.DocStatusId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, substituteManagementPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasPermission)
+                {
+                    return Unauthorized();
+                }
+            }
 
             doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
 
             DocWorkflowAction docWorkflowAction = this.unitOfWork.DbContext.Set<DocWorkflowAction>()
                 .SingleOrDefault(e => e.Alias.ToLower() == docWorkflow.DocWorkflowActionAlias.ToLower());
 
-            //? aop code is wrong
             bool? yesNo = BooleanNomConvert.ToBool(docWorkflow.YesNo);
 
             doc.CreateDocWorkflow(
@@ -1962,10 +2088,27 @@ namespace Docs.Api.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteDocWorkflow(int id, int itemId, string docVersion)
         {
-            //? permissions
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission docWorkflowManagementPermission = this.classificationRepository.GetByAlias("DocWorkflowManagement");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasDocWorkflowManagementPermission =
+                this.classificationRepository.HasPermission(unitUser.UnitId, id, docWorkflowManagementPermission.ClassificationPermissionId) &&
+                this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasDocWorkflowManagementPermission)
+            {
+                return Unauthorized();
+            }
 
             Doc doc = this.docRepository.Find(id,
                 e => e.DocWorkflows);
+
+            if (doc == null)
+            {
+                return NotFound();
+            }
 
             doc.EnsureForProperVersion(Helper.StringToVersion(docVersion));
 
@@ -2103,49 +2246,65 @@ namespace Docs.Api.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public IHttpActionResult ReadExternalLinks(int id)
-        {
-            //? implement connection to application
-            throw new NotImplementedException();
-        }
 
         [HttpPost]
         public IHttpActionResult CreateDocFileTicket(int id, int docFileId, Guid fileKey)
         {
-            //? permissions edit
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
-            Ticket ticket = new Ticket();
-            ticket.TicketId = Guid.NewGuid();
-            ticket.DocFileId = docFileId;
-            ticket.BlobOldKey = fileKey;
-            ticket.VisualizationMode = (int)VisualizationMode.DisplayWithoutSignature;
+                ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+                ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
 
-            this.unitOfWork.DbContext.Set<Ticket>().Add(ticket);
-            this.unitOfWork.Save();
+                bool hasEditPermission =
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
 
-            string portalAddress = ConfigurationManager.AppSettings["Docs.Api:PortalWebAddress"].ToString();
-            string accessUrl = String.Format("{0}/Ais/Access?ticketId={1}", portalAddress, ticket.TicketId);
+                if (!hasEditPermission)
+                {
+                    return Unauthorized();
+                }
 
-            return Ok(new { url = accessUrl });
+                Ticket ticket = new Ticket();
+                ticket.TicketId = Guid.NewGuid();
+                ticket.DocFileId = docFileId;
+                ticket.BlobOldKey = fileKey;
+                ticket.VisualizationMode = (int)VisualizationMode.DisplayWithoutSignature;
+
+                this.unitOfWork.DbContext.Set<Ticket>().Add(ticket);
+                this.unitOfWork.Save();
+
+                string portalAddress = ConfigurationManager.AppSettings["Docs.Api:PortalWebAddress"].ToString();
+                string accessUrl = String.Format("{0}/Ais/Access?ticketId={1}", portalAddress, ticket.TicketId);
+
+                transaction.Commit();
+
+                return Ok(new { url = accessUrl });
+            }
         }
 
         [HttpPost]
         public IHttpActionResult CreateAbbcdnTicket(string docTypeUri, Guid abbcdnKey)
         {
-            Ticket ticket = new Ticket();
-            ticket.TicketId = Guid.NewGuid();
-            ticket.DocTypeUri = docTypeUri;
-            ticket.AbbcdnKey = abbcdnKey;
-            ticket.VisualizationMode = (int)VisualizationMode.DisplayWithoutSignature;
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                Ticket ticket = new Ticket();
+                ticket.TicketId = Guid.NewGuid();
+                ticket.DocTypeUri = docTypeUri;
+                ticket.AbbcdnKey = abbcdnKey;
+                ticket.VisualizationMode = (int)VisualizationMode.DisplayWithoutSignature;
 
-            this.unitOfWork.DbContext.Set<Ticket>().Add(ticket);
-            this.unitOfWork.Save();
+                this.unitOfWork.DbContext.Set<Ticket>().Add(ticket);
+                this.unitOfWork.Save();
 
-            string portalAddress = ConfigurationManager.AppSettings["Docs.Api:PortalWebAddress"].ToString();
-            string accessUrl = String.Format("{0}/Ais/Access?ticketId={1}", portalAddress, ticket.TicketId);
+                string portalAddress = ConfigurationManager.AppSettings["Docs.Api:PortalWebAddress"].ToString();
+                string accessUrl = String.Format("{0}/Ais/Access?ticketId={1}", portalAddress, ticket.TicketId);
 
-            return Ok(new { url = accessUrl });
+                transaction.Commit();
+
+                return Ok(new { url = accessUrl });
+            }
         }
 
         [HttpGet]
@@ -2360,7 +2519,7 @@ namespace Docs.Api.Controllers
                                     AttachedDocumentFileName = primaryDocFile.DocFileName,
                                     AttachedDocumentFileType = primaryDocFile.DocFileType.MimeType
                                 };
-                                    
+
                             }
 
                             competenceFiles.Add(competenceContainerFile);

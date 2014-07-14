@@ -37,8 +37,8 @@
         if ($scope.editDocClassificationForm.$valid) {
           return Docs.changeDocClassification({
             id: $stateParams.id
-          }, $scope.docClassifications).$promise.then(function () {
-            return $state.go('^');
+          }, $scope.docClassifications).$promise.then(function (data) {
+            return $state.go('root.docs.edit.view', { id: data.id });
           });
         }
       });

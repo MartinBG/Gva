@@ -1,4 +1,4 @@
-using Common.Api.Models;
+﻿using Common.Api.Models;
 using Common.Api.UserContext;
 using System;
 using System.Collections.Generic;
@@ -675,6 +675,22 @@ namespace Docs.Api.Models
             {
                 throw new Exception(string.Format("No docFile with ID = {0} found.", docFileId));
             }
+        }
+
+        public void MarkAsDeletedDocFile(DocFile docFile, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            docFile.IsActive = false;
+            docFile.Name = string.Format("{0} (изтрит от userID={1})", docFile.Name, userContext.UserId);
+        }
+
+        public void MarkAsDeletedDocFile(int docFileId, UserContext userContext)
+        {
+            DocFile docFile = this.DocFiles.FirstOrDefault(e => e.DocFileId == docFileId);
+
+            this.MarkAsDeletedDocFile(docFile, userContext);
         }
 
         #endregion

@@ -25,8 +25,10 @@ namespace Docs.Api.DataObjects
                 this.ClassificationDate = d.ClassificationDate;
                 this.IsActive = d.IsActive;
                 this.IsInherited = d.IsInherited;
-                this.IsAdded = false;
                 this.Version = d.Version;
+
+                this.IsAdded = false;
+                this.IsRemoved = false;
 
                 if (d.Classification != null)
                 {
@@ -42,12 +44,11 @@ namespace Docs.Api.DataObjects
         public System.DateTime ClassificationDate { get; set; }
         public bool IsActive { get; set; }
         public bool IsInherited { get; set; }
-        public bool IsAdded { get; set; }
         public byte[] Version { get; set; }
 
         //
+        public bool IsAdded { get; set; }
+        public bool IsRemoved { get; set; }
         public string ClassificationName { get; set; }
-        public bool IsNew { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

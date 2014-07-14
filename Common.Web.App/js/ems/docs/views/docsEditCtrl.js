@@ -16,158 +16,6 @@
     $scope.$state = $state;
     $scope.doc = doc;
 
-    $scope.doc.openAccordion = false;
-    $scope.doc.flags = {};
-
-    $scope.doc.flags.isVisibleCreateChildDoc = true;
-    $scope.doc.flags.isVisibleCreateChildResolution = $scope.doc.canManagement;
-    $scope.doc.flags.isVisibleCreateChildTask = $scope.doc.canManagement;
-    $scope.doc.flags.isVisibleCreateChildRemark = true;
-
-    $scope.doc.flags.isVisibleEditCmd = $scope.doc.docStatusAlias === 'Draft' && $scope.doc.canEdit;
-
-    if ($scope.doc.isResolution || $scope.doc.isTask || $scope.doc.isRemark) {
-      $scope.doc.flags.isVisibleDraftStatusCmd = false;
-      $scope.doc.flags.isVisiblePreparedStatusCmd = false;
-      $scope.doc.flags.isVisibleProcessedStatusCmd = false;
-      $scope.doc.flags.isVisibleFinishedStatusCmd =
-        $scope.doc.docStatusAlias === 'Draft' && $scope.doc.canFinish;
-      $scope.doc.flags.isVisibleCanceledStatusCmd =
-        $scope.doc.docStatusAlias === 'Draft' && $scope.doc.canFinish;
-
-      $scope.doc.flags.isVisibleDraftStatusReverseCmd =
-        ($scope.doc.docStatusAlias === 'Finished' || $scope.doc.docStatusAlias === 'Canceled') &&
-        $scope.doc.canReverse;
-      $scope.doc.flags.isVisiblePreparedStatusReverseCmd = false;
-      $scope.doc.flags.isVisibleProcessedStatusReverseCmd = false;
-      $scope.doc.flags.isVisibleFinishedStatusReverseCmd = false;
-      $scope.doc.flags.isVisibleCanceledStatusReverseCmd = false;
-    } else {
-      if ($scope.doc.isDocIncoming) {
-        $scope.doc.flags.isVisibleDraftStatusCmd = false;
-        $scope.doc.flags.isVisiblePreparedStatusCmd = false;
-        $scope.doc.flags.isVisibleProcessedStatusCmd =
-          $scope.doc.docStatusAlias === 'Draft' &&
-          ($scope.doc.canEdit || $scope.doc.canManagement);
-        $scope.doc.flags.isVisibleFinishedStatusCmd =
-          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canFinish;
-        $scope.doc.flags.isVisibleCanceledStatusCmd =
-          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canFinish;
-
-        $scope.doc.flags.isVisibleDraftStatusReverseCmd =
-          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canReverse;
-        $scope.doc.flags.isVisiblePreparedStatusReverseCmd = false;
-        $scope.doc.flags.isVisibleProcessedStatusReverseCmd =
-          ($scope.doc.docStatusAlias === 'Finished' || $scope.doc.docStatusAlias === 'Canceled') &&
-          $scope.doc.canReverse;
-        $scope.doc.flags.isVisibleFinishedStatusReverseCmd = false;
-        $scope.doc.flags.isVisibleCanceledStatusReverseCmd = false;
-      } else {
-        $scope.doc.flags.isVisibleDraftStatusCmd = false;
-        $scope.doc.flags.isVisiblePreparedStatusCmd =
-          $scope.doc.docStatusAlias === 'Draft' && $scope.doc.canEdit;
-        $scope.doc.flags.isVisibleProcessedStatusCmd =
-          $scope.doc.docStatusAlias === 'Prepared' &&
-          ($scope.doc.canEdit || $scope.doc.canManagement);
-        $scope.doc.flags.isVisibleFinishedStatusCmd =
-          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canFinish;
-        $scope.doc.flags.isVisibleCanceledStatusCmd =
-          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canFinish;
-
-        $scope.doc.flags.isVisibleDraftStatusReverseCmd =
-          $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canReverse;
-        $scope.doc.flags.isVisiblePreparedStatusReverseCmd =
-          $scope.doc.docStatusAlias === 'Processed' && $scope.doc.canReverse;
-        $scope.doc.flags.isVisibleProcessedStatusReverseCmd =
-          ($scope.doc.docStatusAlias === 'Finished' || $scope.doc.docStatusAlias === 'Canceled') &&
-          $scope.doc.canReverse;
-        $scope.doc.flags.isVisibleFinishedStatusReverseCmd = false;
-        $scope.doc.flags.isVisibleCanceledStatusReverseCmd = false;
-      }
-    }
-
-    $scope.doc.flags.isVisibleRegisterCmd = !$scope.doc.isRegistered && $scope.doc.canRegister &&
-      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark;
-    $scope.doc.flags.isVisibleEsignCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canESign &&
-      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
-      !$scope.doc.isDocIncoming;
-    $scope.doc.flags.isVisibleUndoEsignCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canESign &&
-      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
-      !$scope.doc.isDocIncoming;
-
-    $scope.doc.flags.isVisibleSignRequestCmd =
-      $scope.doc.docStatusAlias === 'Prepared' &&
-      ($scope.doc.canEdit || $scope.doc.canManagement) &&
-      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
-      !$scope.doc.isDocIncoming;
-    $scope.doc.flags.isVisibleDiscussRequestCmd =
-      $scope.doc.docStatusAlias === 'Prepared' &&
-      ($scope.doc.canEdit || $scope.doc.canManagement) &&
-      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
-      !$scope.doc.isDocIncoming;
-    $scope.doc.flags.isVisibleApprovalRequestCmd =
-      $scope.doc.docStatusAlias === 'Prepared' &&
-      ($scope.doc.canEdit || $scope.doc.canManagement) &&
-      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
-      !$scope.doc.isDocIncoming;
-    $scope.doc.flags.isVisibleRegistrationRequestCmd =
-      $scope.doc.docStatusAlias === 'Prepared' &&
-      ($scope.doc.canEdit || $scope.doc.canManagement) &&
-      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
-      !$scope.doc.isDocIncoming;
-
-    $scope.doc.flags.isVisibleSignCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canDocWorkflowSign &&
-      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
-      !$scope.doc.isDocIncoming;
-    $scope.doc.flags.isVisibleDiscussCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canDocWorkflowDiscuss &&
-      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
-      !$scope.doc.isDocIncoming;
-    $scope.doc.flags.isVisibleApprovalCmd =
-      $scope.doc.docStatusAlias === 'Prepared' && $scope.doc.canDocWorkflowDiscuss &&
-      !$scope.doc.isResolution && !$scope.doc.isTask && !$scope.doc.isRemark &&
-      !$scope.doc.isDocIncoming;
-    $scope.doc.flags.canSubstituteWorkflow = $scope.doc.canSubstituteManagement;
-    $scope.doc.flags.canDocWorkflowManagement = $scope.doc.canDocWorkflowManagement;
-
-    //? depends on caseDoc on current doc
-    $scope.doc.flags.isVisibleNextStageCmd = true;
-    $scope.doc.flags.isVisibleEndStageCmd = $scope.doc.docElectronicServiceStages.length > 0 &&
-      !$scope.doc.docElectronicServiceStages[doc.docElectronicServiceStages.length - 1].endingDate;
-    $scope.doc.flags.isVisibleEditStageCmd =
-      $scope.doc.canEditTechElectronicServiceStage;
-    $scope.doc.flags.isVisibleReverseStageCmd = $scope.doc.docElectronicServiceStages.length > 1 &&
-      $scope.doc.canEditTechElectronicServiceStage;
-
-    $scope.doc.flags.isVisibleSendMailCmd =
-      $scope.doc.canSendMail &&
-      ($scope.doc.isDocOutgoing || $scope.doc.isDocInternalOutgoing) &&
-      ($scope.doc.docStatusAlias === 'Processed' || $scope.doc.docStatusAlias === 'Finished');
-
-    $scope.doc.flags.isVisibleEditCasePartCmd =
-      !$scope.doc.isCase &&
-      ($scope.doc.canChangeDocCasePart ||
-      ($scope.doc.docStatusAlias === 'Draft' && $scope.doc.canEdit));
-    $scope.doc.flags.isVisibleEditTechCmd = !$scope.doc.isResolution && !$scope.doc.isTask &&
-      !$scope.doc.isRemark && $scope.doc.canEditTech;
-    $scope.doc.flags.isVisibleDocMoveCmd = $scope.doc.canDocMovement;
-    $scope.doc.flags.isVisibleDocMoveToNewCmd = !$scope.doc.isCase && $scope.doc.canDocMovement;
-
-    $scope.doc.flags.isVisbleDivider1 = doc.flags.isVisibleRegisterCmd;
-    $scope.doc.flags.isVisbleDivider2 = doc.flags.isVisibleEsignCmd ||
-      doc.flags.isVisibleUndoEsignCmd;
-    $scope.doc.flags.isVisbleDivider3 = doc.flags.isVisibleSignCmd ||
-      doc.flags.isVisibleDiscussCmd || doc.flags.isVisibleApprovalCmd;
-    $scope.doc.flags.isVisbleDivider4 = doc.flags.isVisibleSignRequestCmd ||
-      doc.flags.isVisibleDiscussRequestCmd || doc.flags.isVisibleApprovalRequestCmd ||
-      doc.flags.isVisibleRegistrationRequestCmd;
-    $scope.doc.flags.isVisbleDivider5 = doc.flags.isVisibleDraftStatusReverseCmd ||
-      doc.flags.isVisiblePreparedStatusReverseCmd || doc.flags.isVisibleFinishedStatusReverseCmd ||
-      doc.flags.isVisibleCanceledStatusReverseCmd;
-
     $scope.inEditMode = false;
 
     $scope.markAsRead = function () {
@@ -401,7 +249,162 @@
       '$stateParams',
       'Docs',
       function resolveDoc($stateParams, Docs) {
-        return Docs.get({ id: $stateParams.id }).$promise;
+        return Docs.get({ id: $stateParams.id }).$promise.then(function (doc) {
+          doc.openAccordion = false;
+          doc.flags = {};
+
+          doc.flags.isVisibleCreateChildDoc = true;
+          doc.flags.isVisibleCreateChildResolution = doc.canManagement;
+          doc.flags.isVisibleCreateChildTask = doc.canManagement;
+          doc.flags.isVisibleCreateChildRemark = true;
+
+          doc.flags.isVisibleEditCmd = doc.docStatusAlias === 'Draft' && doc.canEdit;
+
+          if (doc.isResolution || doc.isTask || doc.isRemark) {
+            doc.flags.isVisibleDraftStatusCmd = false;
+            doc.flags.isVisiblePreparedStatusCmd = false;
+            doc.flags.isVisibleProcessedStatusCmd = false;
+            doc.flags.isVisibleFinishedStatusCmd =
+              doc.docStatusAlias === 'Draft' && doc.canFinish;
+            doc.flags.isVisibleCanceledStatusCmd =
+              doc.docStatusAlias === 'Draft' && doc.canFinish;
+
+            doc.flags.isVisibleDraftStatusReverseCmd =
+              (doc.docStatusAlias === 'Finished' || doc.docStatusAlias === 'Canceled') &&
+              doc.canReverse;
+            doc.flags.isVisiblePreparedStatusReverseCmd = false;
+            doc.flags.isVisibleProcessedStatusReverseCmd = false;
+            doc.flags.isVisibleFinishedStatusReverseCmd = false;
+            doc.flags.isVisibleCanceledStatusReverseCmd = false;
+          } else {
+            if (doc.isDocIncoming) {
+              doc.flags.isVisibleDraftStatusCmd = false;
+              doc.flags.isVisiblePreparedStatusCmd = false;
+              doc.flags.isVisibleProcessedStatusCmd =
+                doc.docStatusAlias === 'Draft' &&
+                (doc.canEdit || doc.canManagement);
+              doc.flags.isVisibleFinishedStatusCmd =
+                doc.docStatusAlias === 'Processed' && doc.canFinish;
+              doc.flags.isVisibleCanceledStatusCmd =
+                doc.docStatusAlias === 'Processed' && doc.canFinish;
+
+              doc.flags.isVisibleDraftStatusReverseCmd =
+                doc.docStatusAlias === 'Processed' && doc.canReverse;
+              doc.flags.isVisiblePreparedStatusReverseCmd = false;
+              doc.flags.isVisibleProcessedStatusReverseCmd =
+                (doc.docStatusAlias === 'Finished' || doc.docStatusAlias === 'Canceled') &&
+                doc.canReverse;
+              doc.flags.isVisibleFinishedStatusReverseCmd = false;
+              doc.flags.isVisibleCanceledStatusReverseCmd = false;
+            } else {
+              doc.flags.isVisibleDraftStatusCmd = false;
+              doc.flags.isVisiblePreparedStatusCmd =
+                doc.docStatusAlias === 'Draft' && doc.canEdit;
+              doc.flags.isVisibleProcessedStatusCmd =
+                doc.docStatusAlias === 'Prepared' &&
+                (doc.canEdit || doc.canManagement);
+              doc.flags.isVisibleFinishedStatusCmd =
+                doc.docStatusAlias === 'Processed' && doc.canFinish;
+              doc.flags.isVisibleCanceledStatusCmd =
+                doc.docStatusAlias === 'Processed' && doc.canFinish;
+
+              doc.flags.isVisibleDraftStatusReverseCmd =
+                doc.docStatusAlias === 'Prepared' && doc.canReverse;
+              doc.flags.isVisiblePreparedStatusReverseCmd =
+                doc.docStatusAlias === 'Processed' && doc.canReverse;
+              doc.flags.isVisibleProcessedStatusReverseCmd =
+                (doc.docStatusAlias === 'Finished' || doc.docStatusAlias === 'Canceled') &&
+                doc.canReverse;
+              doc.flags.isVisibleFinishedStatusReverseCmd = false;
+              doc.flags.isVisibleCanceledStatusReverseCmd = false;
+            }
+          }
+
+          doc.flags.isVisibleRegisterCmd = !doc.isRegistered && doc.canRegister &&
+            !doc.isResolution && !doc.isTask && !doc.isRemark;
+          doc.flags.isVisibleEsignCmd =
+            doc.docStatusAlias === 'Prepared' && doc.canESign &&
+            !doc.isResolution && !doc.isTask && !doc.isRemark &&
+            !doc.isDocIncoming;
+          doc.flags.isVisibleUndoEsignCmd =
+            doc.docStatusAlias === 'Prepared' && doc.canESign &&
+            !doc.isResolution && !doc.isTask && !doc.isRemark &&
+            !doc.isDocIncoming;
+
+          doc.flags.isVisibleSignRequestCmd =
+            doc.docStatusAlias === 'Prepared' &&
+            (doc.canEdit || doc.canManagement) &&
+            !doc.isResolution && !doc.isTask && !doc.isRemark &&
+            !doc.isDocIncoming;
+          doc.flags.isVisibleDiscussRequestCmd =
+            doc.docStatusAlias === 'Prepared' &&
+            (doc.canEdit || doc.canManagement) &&
+            !doc.isResolution && !doc.isTask && !doc.isRemark &&
+            !doc.isDocIncoming;
+          doc.flags.isVisibleApprovalRequestCmd =
+            doc.docStatusAlias === 'Prepared' &&
+            (doc.canEdit || doc.canManagement) &&
+            !doc.isResolution && !doc.isTask && !doc.isRemark &&
+            !doc.isDocIncoming;
+          doc.flags.isVisibleRegistrationRequestCmd =
+            doc.docStatusAlias === 'Prepared' &&
+            (doc.canEdit || doc.canManagement) &&
+            !doc.isResolution && !doc.isTask && !doc.isRemark &&
+            !doc.isDocIncoming;
+
+          doc.flags.isVisibleSignCmd =
+            doc.docStatusAlias === 'Prepared' && doc.canDocWorkflowSign &&
+            !doc.isResolution && !doc.isTask && !doc.isRemark &&
+            !doc.isDocIncoming;
+          doc.flags.isVisibleDiscussCmd =
+            doc.docStatusAlias === 'Prepared' && doc.canDocWorkflowDiscuss &&
+            !doc.isResolution && !doc.isTask && !doc.isRemark &&
+            !doc.isDocIncoming;
+          doc.flags.isVisibleApprovalCmd =
+            doc.docStatusAlias === 'Prepared' && doc.canDocWorkflowDiscuss &&
+            !doc.isResolution && !doc.isTask && !doc.isRemark &&
+            !doc.isDocIncoming;
+          doc.flags.canSubstituteWorkflow = doc.canSubstituteManagement;
+          doc.flags.canDocWorkflowManagement = doc.canDocWorkflowManagement;
+
+          //? depends on caseDoc on current doc
+          doc.flags.isVisibleNextStageCmd = true;
+          doc.flags.isVisibleEndStageCmd = doc.docElectronicServiceStages.length > 0 &&
+            !doc.docElectronicServiceStages[doc.docElectronicServiceStages.length - 1].endingDate;
+          doc.flags.isVisibleEditStageCmd =
+            doc.canEditTechElectronicServiceStage;
+          doc.flags.isVisibleReverseStageCmd = doc.docElectronicServiceStages.length > 1 &&
+            doc.canEditTechElectronicServiceStage;
+
+          doc.flags.isVisibleSendMailCmd =
+            doc.canSendMail &&
+            (doc.isDocOutgoing || doc.isDocInternalOutgoing) &&
+            (doc.docStatusAlias === 'Processed' || doc.docStatusAlias === 'Finished');
+
+          doc.flags.isVisibleEditCasePartCmd =
+            !doc.isCase &&
+            (doc.canChangeDocCasePart ||
+            (doc.docStatusAlias === 'Draft' && doc.canEdit));
+          doc.flags.isVisibleEditTechCmd = !doc.isResolution && !doc.isTask &&
+            !doc.isRemark && doc.canEditTech;
+          doc.flags.isVisibleDocMoveCmd = doc.canDocMovement;
+          doc.flags.isVisibleDocMoveToNewCmd = !doc.isCase && doc.canDocMovement;
+
+          doc.flags.isVisbleDivider1 = doc.flags.isVisibleRegisterCmd;
+          doc.flags.isVisbleDivider2 = doc.flags.isVisibleEsignCmd ||
+            doc.flags.isVisibleUndoEsignCmd;
+          doc.flags.isVisbleDivider3 = doc.flags.isVisibleSignCmd ||
+            doc.flags.isVisibleDiscussCmd || doc.flags.isVisibleApprovalCmd;
+          doc.flags.isVisbleDivider4 = doc.flags.isVisibleSignRequestCmd ||
+            doc.flags.isVisibleDiscussRequestCmd || doc.flags.isVisibleApprovalRequestCmd ||
+            doc.flags.isVisibleRegistrationRequestCmd;
+          doc.flags.isVisbleDivider5 = doc.flags.isVisibleDraftStatusReverseCmd ||
+            doc.flags.isVisiblePreparedStatusReverseCmd ||
+            doc.flags.isVisibleFinishedStatusReverseCmd ||
+            doc.flags.isVisibleCanceledStatusReverseCmd;
+
+          return doc;
+        });
       }
     ]
   };

@@ -17,6 +17,8 @@ namespace Docs.Api.Repositories.ClassificationRepository
     {
         ClassificationPermission GetByAlias(string alias);
 
+        DocStatus GetDocStatusByAlias(string alias);
+
         bool HasPermission(int unitId, int docId, int permissionId);
     }
 }

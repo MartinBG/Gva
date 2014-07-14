@@ -12,6 +12,7 @@
     workflowModel
   ) {
     $scope.workflowModel = workflowModel;
+
     switch ($state.current.url) {
     case '/signConfirm':
       $scope.workflowModel.docWorkflowActionAlias = 'Sign';
