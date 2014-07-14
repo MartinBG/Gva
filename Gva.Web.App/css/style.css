@@ -489,3 +489,29 @@ table.treetable span.indenter a {
 .case-font-weight {
     font-weight: bold;
 }
+
+@media (min-width: 768px) {
+  .xlg-modal > * {
+    width: 740px;
+  }
+}
+
+@media (min-width: 992px) {
+  .xlg-modal > * {
+    width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .xlg-modal > * {
+    width: 1160px;
+  }
+}
+
+.xlg-modal .modal-content .panel {
+    margin: 5px;
+}
+
+.modal-backdrop.in {
+    opacity: 0.8;
+}

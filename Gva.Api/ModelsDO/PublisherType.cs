@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Gva.Api.ModelsDO
+﻿namespace Gva.Api.ModelsDO
 {
     public enum PublisherType
     {

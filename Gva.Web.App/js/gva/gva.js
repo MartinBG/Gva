@@ -11,6 +11,7 @@
     'gva.templates',
     // @endif
     'common',
+    'scaffolding',
     'l10n',
     'l10n-tools',
     'scrollto'
@@ -366,6 +367,9 @@
       templateUrl: 'js/gva/aircrafts/forms/aircraftInspector.html',
       controller: 'AircraftInspectorCtrl'
     });
+  }]).config(['namedModalProvider', function (namedModalProvider) {
+    namedModalProvider
+     .modal('choosePublisher', 'js/gva/common/modals/publishers/choosePublisherModal.html', 'ChoosePublisherModalCtrl');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])
@@ -437,9 +441,6 @@
       .state(['root.persons.view.licences.new.newRating'                   , '/newRating'                                                                  , ['@root.persons.view', 'js/gva/persons/views/ratings/ratingsNew.html'                        , 'AddRatingCtrl'                 ]])
       .state(['root.persons.view.licences.new.chooseMedical'               , '/chooseMedical'                                                              , ['@root.persons.view', 'js/gva/persons/views/documentMedicals/chooseMedical.html'            , 'ChooseMedicalCtrl'             ]])
       .state(['root.persons.view.licences.new.newMedical'                  , '/newMedical'                                                                 , ['@root.persons.view', 'js/gva/persons/views/documentMedicals/medsNew.html'                  , 'AddMedicalCtrl'                ]])
-      .state(['root.persons.view.licences.new.chooseTraining'              , '/chooseTraining'                                                             , ['@root.persons.view', 'js/gva/persons/views/documentTrainings/chooseTraining.html'          , 'ChooseTrainingCtrl'            ]])
-      .state(['root.persons.view.licences.new.newTraining'                 , '/newTraining'                                                                , ['@root.persons.view', 'js/gva/persons/views/documentTrainings/trainingsNew.html'            , 'AddTrainingCtrl'               ]])
-      .state(['root.persons.view.licences.new.newTraining.choosePublisher' , '/choosepublisher?publisherName&publisherType'                                , ['@root.persons.view', 'js/gva/common/views/publishers/choosePublisher.html'                 , 'ChoosePublisherCtrl'           ]])
       .state(['root.persons.view.licences.new.chooseCheck'                 , '/chooseCheck'                                                                , ['@root.persons.view', 'js/gva/persons/views/documentChecks/chooseCheck.html'                , 'ChooseCheckCtrl'               ]])
       .state(['root.persons.view.licences.new.newCheck'                    , '/newCheck'                                                                   , ['@root.persons.view', 'js/gva/persons/views/documentChecks/checksNew.html'                  , 'AddCheckCtrl'                  ]])
       .state(['root.persons.view.licences.new.newCheck.choosePublisher'    , '/choosepublisher?publisherName&publisherType'                                , ['@root.persons.view', 'js/gva/common/views/publishers/choosePublisher.html'                 , 'ChoosePublisherCtrl'           ]])
@@ -449,9 +450,6 @@
       .state(['root.persons.view.licences.edit.newRating'                  , '/newRating'                                                                  , ['@root.persons.view', 'js/gva/persons/views/ratings/ratingsNew.html'                        , 'AddRatingCtrl'                 ]])
       .state(['root.persons.view.licences.edit.chooseMedical'              , '/chooseMedical'                                                              , ['@root.persons.view', 'js/gva/persons/views/documentMedicals/chooseMedical.html'            , 'ChooseMedicalCtrl'             ]])
       .state(['root.persons.view.licences.edit.newMedical'                 , '/newMedical'                                                                 , ['@root.persons.view', 'js/gva/persons/views/documentMedicals/medsNew.html'                  , 'AddMedicalCtrl'                ]])
-      .state(['root.persons.view.licences.edit.chooseTraining'             , '/chooseTraining'                                                             , ['@root.persons.view', 'js/gva/persons/views/documentTrainings/chooseTraining.html'          , 'ChooseTrainingCtrl'            ]])
-      .state(['root.persons.view.licences.edit.newTraining'                , '/newTraining'                                                                , ['@root.persons.view', 'js/gva/persons/views/documentTrainings/trainingsNew.html'            , 'AddTrainingCtrl'               ]])
-      .state(['root.persons.view.licences.edit.newTraining.choosePublisher', '/choosepublisher?publisherName&publisherType'                                , ['@root.persons.view', 'js/gva/common/views/publishers/choosePublisher.html'                 , 'ChoosePublisherCtrl'           ]])
       .state(['root.persons.view.licences.edit.chooseCheck'                , '/chooseCheck'                                                                , ['@root.persons.view', 'js/gva/persons/views/documentChecks/chooseCheck.html'                , 'ChooseCheckCtrl'               ]])
       .state(['root.persons.view.licences.edit.newCheck'                   , '/newCheck'                                                                   , ['@root.persons.view', 'js/gva/persons/views/documentChecks/checksNew.html'                  , 'AddCheckCtrl'                  ]])
       .state(['root.persons.view.licences.edit.newCheck.choosePublisher'   , '/choosepublisher?publisherName&publisherType'                                , ['@root.persons.view', 'js/gva/common/views/publishers/choosePublisher.html'                 , 'ChoosePublisherCtrl'           ]])
@@ -503,6 +501,10 @@
       .state(['root.persons.view.documentApplications.search'              , ''                                                                            , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsSearch.html', 'DocApplicationsSearchCtrl'     ]])
       .state(['root.persons.view.documentApplications.new'                 , '/new'                                                                        , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsNew.html'   , 'DocApplicationsNewCtrl'        ]])
       .state(['root.persons.view.documentApplications.edit'                , '/:ind'                                                                       , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsEdit.html'  , 'DocApplicationsEditCtrl'       ]]);
+  }]).config(['namedModalProvider', function (namedModalProvider) {
+    namedModalProvider
+    .modal('chooseTrainings', 'js/gva/persons/modals/trainings/chooseTrainingsModal.html' , 'ChooseTrainingsModalCtrl')
+    .modal('newTraining'    , 'js/gva/persons/modals/trainings/newTrainingModal.html'     , 'NewTrainingModalCtrl'    );
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.aircrafts'                                          , '/aircrafts?mark&manSN&model&airCategory&aircraftProducer'                                                                                                                           ])

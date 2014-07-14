@@ -2,31 +2,24 @@
 (function (angular, _, $) {
   'use strict';
 
-  function ChooseTrainingCtrl(
-    $state,
-    $stateParams,
+  function ChooseTrainingsModalCtrl(
     $scope,
-    trainings
+    $modalInstance,
+    trainings,
+    includedTrainings
   ) {
-    if (!($state.payload && $state.payload.selectedTrainings)) {
-      $state.go('^');
-      return;
-    }
-
     $scope.selectedTrainings = [];
 
     $scope.trainings = _.filter(trainings, function (training) {
-      return !_.contains($state.payload.selectedTrainings, training.partIndex);
+      return !_.contains(includedTrainings, training.partIndex);
     });
 
     $scope.addTrainings = function () {
-      return $state.go('^', {}, {}, {
-        selectedTrainings: _.pluck($scope.selectedTrainings, 'partIndex')
-      });
+      return $modalInstance.close(_.pluck($scope.selectedTrainings, 'partIndex'));
     };
 
-    $scope.goBack = function () {
-      return $state.go('^');
+    $scope.cancel = function () {
+      return $modalInstance.dismiss('cancel');
     };
 
     $scope.selectTraining = function (event, training) {
@@ -37,17 +30,16 @@
         $scope.selectedTrainings = _.without($scope.selectedTrainings, training);
       }
     };
-
   }
 
-  ChooseTrainingCtrl.$inject = [
-    '$state',
-    '$stateParams',
+  ChooseTrainingsModalCtrl.$inject = [
     '$scope',
-    'trainings'
+    '$modalInstance',
+    'trainings',
+    'includedTrainings'
   ];
 
-  ChooseTrainingCtrl.$resolve = {
+  ChooseTrainingsModalCtrl.$resolve = {
     trainings: [
       '$stateParams',
       'PersonDocumentTrainings',
@@ -57,5 +49,5 @@
     ]
   };
 
-  angular.module('gva').controller('ChooseTrainingCtrl', ChooseTrainingCtrl);
+  angular.module('gva').controller('ChooseTrainingsModalCtrl', ChooseTrainingsModalCtrl);
 }(angular, _, $));

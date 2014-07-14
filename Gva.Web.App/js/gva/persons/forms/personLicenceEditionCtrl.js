@@ -6,6 +6,7 @@
     $scope,
     $state,
     $stateParams,
+    namedModal,
     $q,
     PersonRatings,
     PersonDocumentTrainings,
@@ -22,7 +23,7 @@
       PersonLicences.query({ id: $stateParams.id }).$promise
     ]).then(function (results) {
       var ratings = results[0];
-      var trainings = results[1];
+      $scope.trainings = results[1];
       var checks = results[2];
       var medicals = results[3];
       var licences = results[4];
@@ -46,10 +47,6 @@
 
           if ($state.payload.selectedChecks) {
             [].push.apply($scope.model.includedChecks, $state.payload.selectedChecks);
-          }
-
-          if ($state.payload.selectedTrainings) {
-            [].push.apply($scope.model.includedTrainings, $state.payload.selectedTrainings);
           }
 
           if ($state.payload.selectedRatings) {
@@ -83,7 +80,7 @@
           }
 
           $scope.includedTrainings = _.map($scope.model.includedTrainings, function (ind) {
-            return _.find(trainings, { partIndex: ind });
+            return _.find($scope.trainings, { partIndex: ind });
           });
         });
 
@@ -133,7 +130,16 @@
     };
 
     $scope.addTraining = function () {
-      return $state.go('.newTraining');
+      var modalInstance = namedModal.open('newTraining');
+
+      modalInstance.result.then(function (newTrainingIndex) {
+        PersonDocumentTrainings.query({ id: $stateParams.id }).$promise.then(function (tr) {
+          $scope.trainings = tr;
+          $scope.model.includedTrainings.push(newTrainingIndex);
+        });
+      });
+
+      return modalInstance.opened;
     };
 
     $scope.addCheck = function () {
@@ -151,9 +157,15 @@
     };
 
     $scope.addExistingTraining = function () {
-      return $state.go('.chooseTraining', {}, {}, {
-        selectedTrainings: $scope.model.includedTrainings
+      var modalInstance = namedModal.open('chooseTrainings', {
+        includedTrainings: $scope.model.includedTrainings
       });
+
+      modalInstance.result.then(function (selectedTrainings) {
+        $scope.model.includedTrainings = $scope.model.includedTrainings.concat(selectedTrainings);
+      });
+
+      return modalInstance.opened;
     };
 
     $scope.addExistingCheck = function () {
@@ -210,6 +222,7 @@
     '$scope',
     '$state',
     '$stateParams',
+    'namedModal',
     '$q',
     'PersonRatings',
     'PersonDocumentTrainings',
