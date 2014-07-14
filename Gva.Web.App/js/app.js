@@ -53,7 +53,7 @@
   }]).run(['$rootScope', '$modal', function ($rootScope, $modal) {
     var authenticating;
 
-    $rootScope.$on('authRequired', function (event, authService) {
+    $rootScope.$on('authRequired', function () {
       if (authenticating) {
         return;
       }
@@ -66,7 +66,6 @@
         keyboard: false
       }).result.then(function () {
         authenticating = false;
-        authService.retryFailedRequests();
       });
     });
   }]);

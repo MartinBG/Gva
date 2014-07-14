@@ -1,5 +1,5 @@
 ﻿// Usage:
-//<sc-navigation user-fullname="" change-password-state="" logout-state="">
+//<sc-navigation user-fullname="" change-password-state="">
 //</sc-navigation>
 
 /*global angular*/
@@ -14,8 +14,7 @@
       templateUrl: 'js/scaffolding/directives/navigation/navigationDirective.html',
       scope: {
         userFullname: '@',
-        changePasswordState: '@',
-        logoutState: '@'
+        changePasswordState: '@'
       },
       controller: function NavigationCtrl($scope, $state) {
         $scope.changePassword = function changePassword() {
@@ -24,9 +23,7 @@
 
         $scope.logout = function logout() {
           return authService.signOut().then(function () {
-            return $state.go($scope.logoutState)['finally'](function () {
-              return $window.location.reload();
-            });
+            $window.location.reload();
           });
         };
       }

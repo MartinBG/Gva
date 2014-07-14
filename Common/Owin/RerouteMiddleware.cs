@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
+
 namespace Common.Owin
 {
     public class RerouteMiddleware
     {
-        private readonly Func<IDictionary<string, object>, Task> next;
+        private readonly AppFunc next;
         private string fromPath;
         private string toPath;
 
-        public RerouteMiddleware(Func<IDictionary<string, object>, Task> next, string fromPath, string toPath)
+        public RerouteMiddleware(AppFunc next, string fromPath, string toPath)
         {
             this.next = next;
             this.fromPath = fromPath;

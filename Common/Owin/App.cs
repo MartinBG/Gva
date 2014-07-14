@@ -24,6 +24,7 @@ namespace Common.Owin
         public static void Configure(IAppBuilder app, IContainer container)
         {
             app.UseAutofacMiddleware(container);
+            app.UseSession();
             ConfigureAuth(app, container);
             ConfigureWebApi(app, container);
             ConfigureStaticFiles(app);

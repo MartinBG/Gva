@@ -3,16 +3,90 @@
   'use strict';
 
   angular.module('auth', ['ng']).constant('authServiceConfig', {
-    tokenUrl: '/api/token',
-    signOutUrl: 'api/auth/signout'
-  }).factory('authService', [
+    tokenUrl: '/api/token'
+  }).factory('sessionTokenStore', ['$window', function ($window) {
+    var cookies, sessionKey;
+
+    function readCookie(name){
+      var all,
+          cookie,
+          i;
+
+      if (cookies) {
+        return cookies[name];
+      }
+
+      all = $window.document.cookie.split('; ');
+      cookies = {};
+
+      for (i = 0; i < all.length; i++) {
+        cookie = all[i].split('=');
+        cookies[cookie[0]] = cookie[1];
+      }
+
+      return cookies[name];
+    }
+
+    sessionKey = readCookie('sessionCookie');
+
+    function SessionTokenStore() {
+      if ($window.localStorage.sessionTokens) {
+        this.token = JSON.parse($window.localStorage.sessionTokens)[sessionKey];
+      }
+    }
+
+    SessionTokenStore.prototype.getToken = function () {
+      if (this.token) {
+        return this.token.token;
+      }
+
+      return null;
+    };
+
+    SessionTokenStore.prototype.setToken = function (token) {
+      var now = new Date(),
+          tokens;
+
+      if ($window.localStorage.sessionTokens) {
+        tokens = JSON.parse($window.localStorage.sessionTokens);
+      }
+
+      tokens = tokens || {};
+
+      this.token = {
+        token: token,
+        addedOn: now
+      };
+      tokens[sessionKey] = this.token;
+
+      //remove tokens older than a week
+      _.each(tokens, function (token, sessionKey) {
+        if ((now - token.addedOn) > 7 * 24 * 3600 * 1000) {
+          delete tokens[sessionKey];
+        }
+      });
+
+      $window.localStorage.sessionTokens = JSON.stringify(tokens);
+    };
+
+    SessionTokenStore.prototype.deleteToken = function () {
+      var tokens;
+
+      if ($window.localStorage.sessionTokens) {
+        tokens = JSON.parse($window.localStorage.sessionTokens);
+        delete tokens[sessionKey];
+        $window.localStorage.sessionTokens = JSON.stringify(tokens);
+      }
+    };
+
+    return new SessionTokenStore();
+  }]).factory('authService', [
     '$q',
     '$injector',
     '$rootScope',
-    '$window',
-    '$timeout',
     'authServiceConfig',
-    function ($q, $injector, $rootScope, $window, $timeout, authServiceConfig) {
+    'sessionTokenStore',
+    function ($q, $injector, $rootScope, authServiceConfig, sessionTokenStore) {
       var $http;
 
       function getHttp() {
@@ -44,9 +118,9 @@
       }
 
       AuthService.prototype.authenticate = function(username, password) {
+        var self = this;
         getHttp();
 
-        delete $window.localStorage.token;
         return $http({
           method: 'POST',
           url: authServiceConfig.tokenUrl,
@@ -57,21 +131,14 @@
             grant_type: 'password'
           })
         }).then(function (response) {
-          var expiresIn;
           if (response.data.token_type !== 'bearer' &&
               !response.data.access_token) {
             return $q.reject('Unsupported token type');
           }
 
-          expiresIn = response.data.expires_in && parseInt(response.data.expires_in, 10);
-          if (expiresIn) {
-            $timeout(function () {
-              delete $window.localStorage.token;
-              $rootScope.$broadcast('authRequired', this);
-            }, expiresIn * 1000);
-          }
+          sessionTokenStore.setToken(response.data.access_token);
+          self.retryFailedRequests();
 
-          $window.localStorage.token = response.data.access_token;
           return true;
         }, function (response) {
           if (response.data.error === 'invalid_grant') {
@@ -82,8 +149,9 @@
       };
 
       AuthService.prototype.authConfig = function (config) {
-        if ($window.localStorage.token) {
-          config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
+        var accessToken = sessionTokenStore.getToken();
+        if (accessToken) {
+          config.headers.Authorization = 'Bearer ' + accessToken;
         }
 
         return config;
@@ -109,16 +177,11 @@
       };
 
       AuthService.prototype.signOut = function() {
-        var self = this;
-        getHttp();
-        return $http({
-          method: 'POST',
-          url: authServiceConfig.signOutUrl,
-          data: ''
-        }).then(function () {
-          delete $window.localStorage.token;
-          $rootScope.$broadcast('authRequired', self);
-        });
+        sessionTokenStore.deleteToken();
+        $rootScope.$broadcast('authRequired', this);
+
+        //return a resolved promise
+        return $q.when();
       };
 
       return new AuthService();

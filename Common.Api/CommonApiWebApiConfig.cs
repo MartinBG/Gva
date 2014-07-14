@@ -26,9 +26,6 @@ namespace Common.Api
             this.MapRoute(config, HttpMethod.Post, "api/signXml", "Sign", "PostSignXml");
             this.MapRoute(config, HttpMethod.Post, "api/signOffice", "Sign", "PostSignOffice");
 
-            // auth
-            this.MapRoute(config, HttpMethod.Post, "api/auth/signout", "Auth", "PostSignOut");
-
             //user
             this.MapRoute(config, HttpMethod.Get, "api/user/currentData", "User", "GetUserData");
         }

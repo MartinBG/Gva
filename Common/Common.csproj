@@ -148,6 +148,8 @@
     <Compile Include="Owin\ContentTypeProvider.cs" />
     <Compile Include="Owin\RerouteExtensions.cs" />
     <Compile Include="Owin\RerouteMiddleware.cs" />
+    <Compile Include="Owin\SessionExtensions.cs" />
+    <Compile Include="Owin\SessionMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonModule.cs" />
     <Compile Include="Sequence\Sequence.cs" />

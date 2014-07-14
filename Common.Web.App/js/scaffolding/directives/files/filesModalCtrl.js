@@ -50,7 +50,8 @@
       function uploadNext() {
         var nextKey;
         if (!keys.length || canceled) {
-          return $q.when(undefined);
+          //return a resolved promise
+          return $q.when();
         }
 
         nextKey = keys.shift();
