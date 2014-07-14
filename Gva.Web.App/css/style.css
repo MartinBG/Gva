@@ -356,6 +356,11 @@ table.sc-data-table th.sorting span
 .table-responsive > .table > tfoot > tr > td {
   white-space: nowrap;
 }
+.table-responsive > .table > thead > tr > td.wrap,
+.table-responsive > .table > tbody > tr > td.wrap,
+.table-responsive > .table > tfoot > tr > td.wrap {
+  white-space: normal;
+}
 .table-responsive > .table-bordered {
   border: 0;
 }
