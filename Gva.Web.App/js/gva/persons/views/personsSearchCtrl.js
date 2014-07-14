@@ -52,20 +52,7 @@
       '$stateParams',
       'Persons',
       function ($stateParams, Persons) {
-        return Persons.query($stateParams).$promise.then(function (persons) {
-          return _(persons)
-          .forEach(function (person) {
-            /*jshint -W052*/
-            person.age = ~~((Date.now() - new Date(person.birtDate)) / 31557600000);
-            /*jshint +W052*/
-            person.licences = _.map(person.licences, function (licence) {
-              return licence.licenceType.name;
-            }).join(' ,<br />');
-            person.ratings = _.map(person.ratings, function (rating) {
-              return rating.ratingType.name;
-            }).join(' ,<br />');
-          }).value();
-        });
+        return Persons.query($stateParams).$promise;
       }
     ]
   };

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 
@@ -22,15 +23,13 @@ namespace Gva.Api.ModelsDO
             this.LinType = personData.LinType.Code;
             this.Uin = personData.Uin;
             this.Names = personData.Names;
-            this.BirtDate = personData.BirtDate;
+            this.Age = this.GetAge(personData.BirtDate.Date);
             this.Organization = personData.Organization == null ? null : personData.Organization.Name;
             this.Employment = personData.Employment == null ? null : personData.Employment.Name;
-            this.Licences = personLicences == null ?
-                new List<GvaViewPersonLicence>() :
-                personLicences;
-            this.Ratings = personRatings == null ?
-                new List<GvaViewPersonRating>() :
-                personRatings;
+            this.Licences = string.Join(", ",
+                (personLicences ?? new List<GvaViewPersonLicence>()).Select(l => l.LicenceType.Code).ToArray());
+            this.Ratings = string.Join(", ",
+                (personRatings ?? new List<GvaViewPersonRating>()).Select(l => l.RatingType.Name).ToArray());
         }
 
         public int Id { get; set; }
@@ -43,14 +42,26 @@ namespace Gva.Api.ModelsDO
 
         public string Names { get; set; }
 
-        public DateTime BirtDate { get; set; }
+        public int Age { get; set; }
 
-        public IEnumerable<GvaViewPersonLicence> Licences { get; set; }
+        public string Licences { get; set; }
 
-        public IEnumerable<GvaViewPersonRating> Ratings { get; set; }
+        public string Ratings { get; set; }
 
         public string Organization { get; set; }
 
         public string Employment { get; set; }
+
+        private int GetAge(DateTime birthDate)
+        {
+            DateTime today = DateTime.Today;
+            int age = today.Year - birthDate.Year;
+            if (birthDate > today.AddYears(-age))
+            {
+                age--;
+            }
+
+            return age;
+        }
     }
 }
