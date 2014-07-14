@@ -30,7 +30,7 @@ namespace Gva.Api.Models.Views.Person
 
         public virtual NomValue LinType { get; set; }
 
-        public virtual NomValue Organization { get; set; }
+        public virtual GvaViewOrganization Organization { get; set; }
 
         public virtual NomValue Employment { get; set; }
 

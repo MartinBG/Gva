@@ -10,11 +10,11 @@ CREATE TABLE [dbo].[GvaViewPersons] (
     [BirtDate]         DATETIME2 (7) NOT NULL,
     [OrganizationId]   INT           NULL,
     [EmploymentId]     INT           NULL,
-    CONSTRAINT [PK_GvaViewPersons]            PRIMARY KEY ([LotId]),
-    CONSTRAINT [FK_GvaViewPersons_Lots]       FOREIGN KEY ([LotId])          REFERENCES [dbo].[Lots] ([LotId]),
-    CONSTRAINT [FK_GvaViewPersons_NomValues]  FOREIGN KEY ([LinTypeId])      REFERENCES [dbo].[NomValues] ([NomValueId]),
-    CONSTRAINT [FK_GvaViewPersons_NomValues2] FOREIGN KEY ([OrganizationId]) REFERENCES [dbo].[NomValues] ([NomValueId]),
-    CONSTRAINT [FK_GvaViewPersons_NomValues3] FOREIGN KEY ([EmploymentId])   REFERENCES [dbo].[NomValues] ([NomValueId])
+    CONSTRAINT [PK_GvaViewPersons]                      PRIMARY KEY ([LotId]),
+    CONSTRAINT [FK_GvaViewPersons_Lots]                 FOREIGN KEY ([LotId])          REFERENCES [dbo].[Lots] ([LotId]),
+    CONSTRAINT [FK_GvaViewPersons_NomValues]            FOREIGN KEY ([LinTypeId])      REFERENCES [dbo].[NomValues] ([NomValueId]),
+    CONSTRAINT [FK_GvaViewPersons_GvaViewOrganizations] FOREIGN KEY ([OrganizationId]) REFERENCES [dbo].[GvaViewOrganizations] ([LotId]),
+    CONSTRAINT [FK_GvaViewPersons_NomValues2]           FOREIGN KEY ([EmploymentId])   REFERENCES [dbo].[NomValues] ([NomValueId])
 )
 GO
 
