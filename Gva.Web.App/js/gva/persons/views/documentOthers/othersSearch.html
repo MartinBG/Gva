@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newDocumentOther()" text="persons.otherSearch.newOther" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="documentOthers" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-click="editDocumentOther(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.documentNumber" title="persons.otherSearch.documentNumber">
@@ -15,15 +15,15 @@
   </sc-column>
   <sc-column data="part.documentType.name" title="persons.otherSearch.personOtherDocumentType">
   </sc-column>
-  <sc-column data="part.documentRole.name" title="persons.otherSearch.personOtherDocumentRole" width="50px">
+  <sc-column data="part.documentRole.name" title="persons.otherSearch.personOtherDocumentRole">
   </sc-column>
   <sc-column data="part.notes" title="persons.otherSearch.notes" visible="false">
   </sc-column>
-  <sc-column data="files[0].bookPageNumber" title="persons.otherSearch.bookPageNumber" width="50px">
+  <sc-column data="files[0].bookPageNumber" title="persons.otherSearch.bookPageNumber">
   </sc-column>
-  <sc-column data="files[0].pageCount" title="persons.otherSearch.pageCount" width="50px">
+  <sc-column data="files[0].pageCount" title="persons.otherSearch.pageCount">
   </sc-column>
-  <sc-column sortable="false" title="persons.otherSearch.file" width="30px" has-content="true">
+  <sc-column sortable="false" title="persons.otherSearch.file" has-content="true">
     <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files[0].file" title="{{item.files[0].file.name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>

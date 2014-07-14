@@ -10,15 +10,15 @@
 </sc-search>
 
 <sc-datatable items="organizations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button btn-click="selectOrganization(item)" text="applications.organizationSelect.select" class="btn btn-xs btn-primary"></sc-button>
     <sc-button btn-click="viewOrganization(item)" text="applications.organizationSelect.viewOrganization" class="btn btn-xs btn-primary"></sc-button>
   </sc-column>
-  <sc-column data="name" title="applications.organizationSelect.name" width="60px">
+  <sc-column data="name" title="applications.organizationSelect.name">
   </sc-column>
-  <sc-column data="CAO" title="applications.organizationSelect.CAO" width="60px">
+  <sc-column data="CAO" title="applications.organizationSelect.CAO">
   </sc-column>
-  <sc-column data="uin" title="applications.organizationSelect.uin" width="60px">
+  <sc-column data="uin" title="applications.organizationSelect.uin">
   </sc-column>
   <sc-column data="valid.name" title="applications.organizationSelect.valid">
   </sc-column>

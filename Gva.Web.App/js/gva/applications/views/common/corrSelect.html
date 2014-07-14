@@ -7,7 +7,7 @@
 </sc-search>
 
 <sc-datatable items="corrs" filterable="false" pageable="true" sortable="false" dynamic-columns="false">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="selectBtn" btn-click="selectCorr(item)" class="btn btn-xs btn-primary" l10n-text="applications.corrSelect.select" ng-disabled="selectedCorrs | contains:item.correspondentId"></sc-button>
   </sc-column>
   <sc-column data="displayName" title="applications.corrSelect.displayName">

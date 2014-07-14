@@ -5,7 +5,7 @@
       <div class="col-sm-5 col-md-5" style="padding-left:0px">
         <label class="control-label" l10n-text="checklist.currentChecklist"></label>
         <sc-datatable items="model.jObject.versions" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false" scrollable="false">
-          <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+          <sc-column  sortable="false" class="buttons-cell" has-content="true">
             <input type="radio" ng-checked="item.version === checklistVM.currentVersion.version" ng-disabled="!readonly" sc-click="view(item)">
           </sc-column>
           <sc-column title="checklist.author" has-content="true">
@@ -23,7 +23,7 @@
           <input type="checkbox" ng-model="enableComparing" ng-init="enableComparing = false" ng-show="readonly" ng-disabled="!readonly"/>
         </div>
         <sc-datatable  items="comparings" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false" scrollable="false">
-          <sc-column  sortable="false" class="buttons-cell" width="1px" has-content="true">
+          <sc-column  sortable="false" class="buttons-cell" has-content="true">
             <input type="radio" ng-checked="item.version === checklistVM.compareToVersion.version" ng-disabled="!enableComparing || !readonly" sc-click="compareTo(item)">
           </sc-column>
           <sc-column title="checklist.author" has-content="true">

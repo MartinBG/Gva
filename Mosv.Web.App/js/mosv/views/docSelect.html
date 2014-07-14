@@ -18,14 +18,14 @@
 </sc-search>
 
 <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
    <sc-button btn-click="selectDoc(item)" text="docs.caseSelect.select" class="btn btn-xs btn-primary"></sc-button>
   </sc-column>
-  <sc-column width="100" type="date" data="regDate" title="docs.caseSelect.regDate">
+  <sc-column type="date" data="regDate" title="docs.caseSelect.regDate">
   </sc-column>
   <sc-column data="regUri" title="docs.caseSelect.regUri">
   </sc-column>
-  <sc-column width="350" data="docTypeName + ': ' + docSubject" title="docs.caseSelect.docSubject">
+  <sc-column data="docTypeName + ': ' + docSubject" title="docs.caseSelect.docSubject">
   </sc-column>
   <sc-column data="docDirectionName" title="docs.caseSelect.docDirectionName">
   </sc-column>

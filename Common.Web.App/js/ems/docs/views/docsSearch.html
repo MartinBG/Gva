@@ -89,14 +89,14 @@
 
     <div ng-show="!(filters.filter === 'manage' || filters.filter === 'control')">
       <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-        <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+        <sc-column sortable="false" class="buttons-cell" has-content="true">
           <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
         </sc-column>
-        <sc-column width="100" type="date" data="regDate" title="docs.search.regDate">
+        <sc-column type="date" data="regDate" title="docs.search.regDate">
         </sc-column>
         <sc-column data="regUri" title="docs.search.regUri">
         </sc-column>
-        <sc-column width="350" data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+        <sc-column data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
         </sc-column>
         <sc-column data="docDirectionName" title="docs.search.docDirectionName">
         </sc-column>
@@ -109,23 +109,23 @@
 
     <div ng-show="filters.filter === 'manage' || filters.filter === 'control'">
       <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-        <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+        <sc-column sortable="false" class="buttons-cell" has-content="true">
           <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
         </sc-column>
-        <sc-column width="100" title="docs.search.kase" has-content="true">
+        <sc-column title="docs.search.kase" has-content="true">
           <span><div ng-if="!!item.caseDocRelation.docRegUri">{{ item.caseDocRelation.docRegUri }}<br/></div>
             {{item.caseDocRelation.docDocDirectionName}} | {{item.caseDocRelation.docDocCasePartTypeName}}</span>
         </sc-column>
-        <sc-column width="100" has-content="true">
+        <sc-column has-content="true">
            <span>{{ item.caseDocRelation.docDocTypeName }} : {{ item.caseDocRelation.docSubject}}</span>
         </sc-column>
         <sc-column data="correspondentNames" title="docs.search.correspondentName">
         </sc-column>
-        <sc-column width="100" type="date" data="regDate" title="docs.search.regDate">
+        <sc-column type="date" data="regDate" title="docs.search.regDate">
         </sc-column>
         <sc-column data="regUri" title="docs.search.regUri">
         </sc-column>
-        <sc-column width="350" data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+        <sc-column data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
         </sc-column>
         <sc-column data="docDirectionName" title="docs.search.docDirectionName">
         </sc-column>

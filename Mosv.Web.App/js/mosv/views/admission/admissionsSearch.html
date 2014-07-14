@@ -10,14 +10,14 @@
   </sc-search>
 
   <sc-datatable items="admissions" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-click="viewAdmission(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-    <sc-column data="incomingLot" title="admissions.search.incomingLot" width="60px">
+    <sc-column data="incomingLot" title="admissions.search.incomingLot">
     </sc-column>
-    <sc-column data="incomingNumber" title="admissions.search.incomingNumber" width="60px">
+    <sc-column data="incomingNumber" title="admissions.search.incomingNumber">
     </sc-column>
-    <sc-column data="incomingDate" title="admissions.search.incomingDate" width="60px" type="date">
+    <sc-column data="incomingDate" title="admissions.search.incomingDate" type="date">
     </sc-column>
     <sc-column data="applicantType" title="admissions.search.applicantType">
     </sc-column>

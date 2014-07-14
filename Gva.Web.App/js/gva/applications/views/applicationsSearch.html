@@ -11,17 +11,17 @@
 </sc-search>
 
 <sc-datatable items="applications" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="viewButton" btn-click="viewApplication(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="lotSetName" title="applications.search.lotSetName">
   </sc-column>
   <sc-column data="description" title="applications.search.description">
   </sc-column>
-  <sc-column data="appPartRequestDate" width="100" type="date" title="applications.search.requestDate">
+  <sc-column data="appPartRequestDate" type="date" title="applications.search.requestDate">
   </sc-column>
   <sc-column data="appPartDocumentNumber" title="applications.search.documentNumber">
   </sc-column>
-  <sc-column data="appPartApplicationTypeName" width="350" title="applications.search.applicationType">
+  <sc-column data="appPartApplicationTypeName" title="applications.search.applicationType">
   </sc-column>
 </sc-datatable>

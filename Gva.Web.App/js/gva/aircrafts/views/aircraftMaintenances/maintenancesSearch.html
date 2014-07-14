@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newMaintenance()" text="aircrafts.searchMaintenance.newMaintenance" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="aircraftMaintenances" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-click="editMaintenance(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.lim145limitation.name" title="aircrafts.searchMaintenance.lim145limitation">

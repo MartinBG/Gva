@@ -3,7 +3,7 @@
 
   <div>
     <sc-datatable items="rating.part.editions" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
-      <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <sc-column sortable="false" class="buttons-cell" has-content="true">
         <input type="radio" ng-checked="item === currentEdition" sc-click="selectEdition(item)">
       </sc-column>
       <sc-column title="persons.ratingEdit.documentDateValidFrom" has-content="true">

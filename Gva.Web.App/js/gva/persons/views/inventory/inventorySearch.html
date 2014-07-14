@@ -1,9 +1,9 @@
 ﻿<div>
   <sc-datatable items="indexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editBtn" btn-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-    <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber" width="80px">
+    <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber">
     </sc-column>
     <sc-column data="name" title="persons.inventorySearch.document">
     </sc-column>
@@ -34,10 +34,10 @@
 <div style="margin-top:40px;">
  <h5 class="form-header" l10n-text="persons.inventorySearch.notIndexed"></h5>
   <sc-datatable items="notIndexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editBtn" btn-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-    <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber" width="80px">
+    <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber">
     </sc-column>
     <sc-column data="name" title="persons.inventorySearch.document">
     </sc-column>

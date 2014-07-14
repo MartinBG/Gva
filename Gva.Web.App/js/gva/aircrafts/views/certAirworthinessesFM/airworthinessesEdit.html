@@ -24,7 +24,7 @@
 
   <div ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR' && aw.part.reviews.length">
     <sc-datatable items="aw.part.reviews" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
-      <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+      <sc-column sortable="false" class="buttons-cell" has-content="true">
         <input type="radio" ng-checked="item === currentReview" sc-click="selectReview(item)" ng-show="editMode !== 'editReview'">
       </sc-column>
       <sc-column title="aircrafts.editAirworthiness.airworthinessReviewType" has-content="true">

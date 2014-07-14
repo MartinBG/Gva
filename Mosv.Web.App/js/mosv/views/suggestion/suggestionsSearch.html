@@ -11,14 +11,14 @@
   </sc-search>
 
   <sc-datatable items="suggestions" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-click="viewSuggestion(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-      <sc-column data="incomingLot" title="suggestions.search.incomingLot" width="60px">
+      <sc-column data="incomingLot" title="suggestions.search.incomingLot">
     </sc-column>
-    <sc-column data="incomingNumber" title="suggestions.search.incomingNumber" width="60px">
+    <sc-column data="incomingNumber" title="suggestions.search.incomingNumber">
     </sc-column>
-    <sc-column data="incomingDate" title="suggestions.search.incomingDate" width="60px">
+    <sc-column data="incomingDate" title="suggestions.search.incomingDate">
     </sc-column>
     <sc-column data="applicant" title="suggestions.search.applicant">
     </sc-column>

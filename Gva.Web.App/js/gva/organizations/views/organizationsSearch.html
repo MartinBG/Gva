@@ -12,14 +12,14 @@
   </sc-search>
 
   <sc-datatable items="organizations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-click="viewOrganization(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-      <sc-column data="name" title="organizations.search.name" width="60px">
+      <sc-column data="name" title="organizations.search.name">
     </sc-column>
-    <sc-column data="cao" title="organizations.search.CAO" width="60px">
+    <sc-column data="cao" title="organizations.search.CAO">
     </sc-column>
-    <sc-column data="uin" title="organizations.search.uin" width="60px">
+    <sc-column data="uin" title="organizations.search.uin">
     </sc-column>
     <sc-column data="valid" title="organizations.search.valid" type="boolean">
     </sc-column>

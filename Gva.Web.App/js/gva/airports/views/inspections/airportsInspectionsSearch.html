@@ -1,11 +1,11 @@
 ﻿<sc-button name="createBtn" btn-click="newInspection()" text="airports.inspectionSearch.newInspection" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="airportInspections" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-click="editInspection(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.auditState.name" title="airports.inspectionSearch.auditState">
   </sc-column>
-  <sc-column data="part.documentNumber" title="airports.inspectionSearch.documentNumber" width="200px">
+  <sc-column data="part.documentNumber" title="airports.inspectionSearch.documentNumber">
   </sc-column>
   <sc-column data="part.auditReason.name" title="airports.inspectionSearch.auditReason">
   </sc-column>
@@ -21,6 +21,6 @@
   </sc-column>
   <sc-column data="part.inspectionPlace" title="airports.inspectionSearch.inspectionPlace">
   </sc-column>
-  <sc-column data="applications[0].applicationName" title="airports.inspectionSearch.application" width="500px">
+  <sc-column data="applications[0].applicationName" title="airports.inspectionSearch.application">
   </sc-column>
 </sc-datatable>

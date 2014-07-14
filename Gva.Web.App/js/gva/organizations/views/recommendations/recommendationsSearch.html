@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newRecommendation()" text="organizations.recommendationSearch.newRecommendation" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="organizationRecommendations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-click="editRecommendation(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.recommendationPart.name" title="organizations.recommendationSearch.recommendationPart">
@@ -23,6 +23,6 @@
   </sc-column>
   <sc-column data="part.recommendation" title="organizations.recommendationSearch.recommendation">
   </sc-column>
-  <sc-column data="applications[0].applicationName" title="organizations.recommendationSearch.application" width="500">
+  <sc-column data="applications[0].applicationName" title="organizations.recommendationSearch.application">
   </sc-column>
 </sc-datatable>

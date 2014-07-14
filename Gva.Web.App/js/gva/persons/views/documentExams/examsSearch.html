@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newExam()" text="persons.searchExam.newExam" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="exams" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-click="editExam(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.documentNumber" title="persons.searchExam.documentNumber">

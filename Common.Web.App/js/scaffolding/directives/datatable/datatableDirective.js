@@ -76,7 +76,6 @@ Usage <sc-datatable items="data"
 
             var headerCell = $('<th></th>')
               .html(columnDef.title + ' <span></span>')
-              .width(columnDef.width)
               .addClass(columnDef.columnClass);
 
             if (sortable) {

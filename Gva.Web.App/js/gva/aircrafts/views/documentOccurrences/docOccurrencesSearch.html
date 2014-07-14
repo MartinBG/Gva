@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newOccurrence()" text="aircrafts.occurrenceSearch.newOccurrence" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="aircraftDocumentOccurrences" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-click="editOccurrence(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.localDate" title="aircrafts.occurrenceSearch.localDate" type="date">
@@ -18,11 +18,11 @@
   </sc-column>
   <sc-column data="part.notes" title="aircrafts.occurrenceSearch.notes">
   </sc-column>
-  <sc-column data="files[0].bookPageNumber" title="aircrafts.occurrenceSearch.bookPageNumber" width="50px">
+  <sc-column data="files[0].bookPageNumber" title="aircrafts.occurrenceSearch.bookPageNumber">
   </sc-column>
-  <sc-column data="files[0].pageCount" title="aircrafts.occurrenceSearch.pageCount" width="50px">
+  <sc-column data="files[0].pageCount" title="aircrafts.occurrenceSearch.pageCount">
   </sc-column>
-  <sc-column sortable="false" title="aircrafts.occurrenceSearch.file" width="30px" has-content="true">
+  <sc-column sortable="false" title="aircrafts.occurrenceSearch.file" has-content="true">
     <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files[0].file" title="{{item.files[0].file.name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>

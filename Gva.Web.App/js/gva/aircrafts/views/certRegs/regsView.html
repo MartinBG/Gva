@@ -51,7 +51,7 @@
       <div class="panel-heading"><strong l10n-text="aircrafts.regView.debts"></strong></div>
       <div class="well-sm panel-body">
          <sc-datatable items="debts" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
-           <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+           <sc-column sortable="false" class="buttons-cell" has-content="true">
              <sc-button name="editBtn" btn-click="editDocumentDebt(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
            </sc-column>
            <sc-column data="part.certId" title="aircrafts.debtSearchFM.certId">
@@ -68,11 +68,11 @@
            </sc-column>
            <sc-column data="part.inspector.name" title="aircrafts.debtSearchFM.inspector">
            </sc-column>
-           <sc-column data="files[0].bookPageNumber" title="aircrafts.debtSearchFM.bookPageNumber" width="50px">
+           <sc-column data="files[0].bookPageNumber" title="aircrafts.debtSearchFM.bookPageNumber">
            </sc-column>
-           <sc-column data="files[0].pageCount" title="aircrafts.debtSearchFM.pageCount" width="50px">
+           <sc-column data="files[0].pageCount" title="aircrafts.debtSearchFM.pageCount">
            </sc-column>
-           <sc-column sortable="false" title="aircrafts.debtSearchFM.file" width="30px">
+           <sc-column sortable="false" title="aircrafts.debtSearchFM.file">
              <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files" title="{{item.files [0].file.name}}">
                <span class="glyphicon glyphicon-file"></span>
              </a>

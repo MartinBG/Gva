@@ -1,6 +1,6 @@
 ﻿<sc-button name="createBtn" btn-click="newDocumentOwner()" text="aircrafts.ownerSearch.newOwner" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="documentOwners" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-click="editDocumentOwner(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.aircraftRelation.name" title="aircrafts.ownerSearch.aircraftRelation">
@@ -19,11 +19,11 @@
   </sc-column>
   <sc-column data="part.notes" title="aircrafts.ownerSearch.notes" visible="false">
   </sc-column>
-  <sc-column data="files[0].bookPageNumber" title="aircrafts.ownerSearch.bookPageNumber" width="50px">
+  <sc-column data="files[0].bookPageNumber" title="aircrafts.ownerSearch.bookPageNumber">
   </sc-column>
-  <sc-column data="files[0].pageCount" title="aircrafts.ownerSearch.pageCount" width="50px">
+  <sc-column data="files[0].pageCount" title="aircrafts.ownerSearch.pageCount">
   </sc-column>
-  <sc-column sortable="false" title="aircrafts.ownerSearch.file" width="30px" has-content="true">
+  <sc-column sortable="false" title="aircrafts.ownerSearch.file" has-content="true">
     <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files[0].file" title="{{item.files[0].file.name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>
