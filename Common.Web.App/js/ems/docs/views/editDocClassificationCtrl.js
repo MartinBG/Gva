@@ -11,15 +11,19 @@
   ) {
     $scope.docClassifications = doc.docClassifications;
 
-    $scope.addDocClassification = function addDocClassification(target) {
+    $scope.makeActive = function makeActive(target) {
       target.isActive = true;
     };
 
-    $scope.removeDocClassification = function removeDocClassification(target) {
+    $scope.makeInactive = function makeInactive(target) {
       if (target.isAdded) {
         $scope.docClassifications.splice($scope.docClassifications.indexOf(target), 1);
       }
       target.isActive = false;
+    };
+
+    $scope.removeDocClassification = function removeDocClassification(target) {
+      target.isRemoved = true;
     };
 
     $scope.addNewDocClassification = function addNewDocClassification() {
@@ -28,7 +32,8 @@
         classificationId: null,
         isActive: true,
         isInherited: true,
-        isAdded: true
+        isAdded: true,
+        isRemoved: false
       });
     };
 
@@ -38,7 +43,7 @@
           return Docs.changeDocClassification({
             id: $stateParams.id
           }, $scope.docClassifications).$promise.then(function (data) {
-            return $state.go('root.docs.edit.view', { id: data.id });
+            return $state.go('root.docs.edit.view', { id: data.id }, { reload: true });
           });
         }
       });

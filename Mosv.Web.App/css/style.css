@@ -179,6 +179,10 @@ form.card input.form-control[disabled]
 
 /*  EMS  */
 
+.darkGray {
+    background-color: darkGray;
+}
+
 .tab-content
 {
   background-color: #FFFFFF;

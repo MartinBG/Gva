@@ -638,6 +638,8 @@ namespace Docs.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
+                DateTime currentDate = DateTime.Now;
+
                 UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
                 ClassificationPermission techEditPermission = this.classificationRepository.GetByAlias("EditTech");
@@ -696,7 +698,7 @@ namespace Docs.Api.Controllers
                     dc.Doc = doc;
                     dc.ClassificationId = docClassification.ClassificationId.Value;
                     dc.ClassificationByUserId = unitUser.UserId;
-                    dc.ClassificationDate = docClassification.ClassificationDate;
+                    dc.ClassificationDate = currentDate;
                     dc.IsActive = docClassification.IsActive;
                     dc.IsInherited = docClassification.IsInherited;
 
@@ -704,6 +706,8 @@ namespace Docs.Api.Controllers
                 }
 
                 this.unitOfWork.Save();
+
+                this.docRepository.ExecSpSetDocTokens(docId: doc.DocId);
 
                 transaction.Commit();
 

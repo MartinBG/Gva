@@ -4,12 +4,14 @@
       <tr>
         <th><span l10n-text="docs.edit.classifications.name"></span></th>
         <th><span l10n-text="docs.edit.classifications.date"></span></th>
+        <th><span l10n-text="docs.edit.classifications.isInherited"></span></th>
       </tr>
     </thead>
-    <tbody ng-repeat="dc in model.docClassifications">
+    <tbody ng-repeat="dc in model.docClassifications | filter: { isActive: true }">
       <tr>
         <td>{{ dc.classificationName }}</td>
         <td>{{ dc.classificationDate | date:'dd.MM.yyyy HH:mm' }}</td>
+        <td>{{ dc.isInherited ? 'Да' : 'Не' }}</td>
       </tr>
     </tbody>
   </table>

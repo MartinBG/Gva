@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat-start="dc in docClassifications" ng-class="{ indianred: !dc.isActive }">
+      <tr ng-repeat-start="dc in docClassifications | filter: { isRemoved: false } " ng-class="{ darkGray: !dc.isActive }">
         <td sc-has-error="classification">
           <sc-nomenclature ng-show="dc.isAdded" name="classification" ng-model="dc.classificationId" alias="'classification'" mode="id" ng-required="true"></sc-nomenclature>
           <span ng-show="!dc.isAdded">{{ dc.classificationName }}</span>
@@ -20,9 +20,10 @@
         <td>
           {{dc.isActive ? 'Да' : 'Не'}}
         </td>
-        <td style="text-align: right; width: 1px;">
-          <sc-button ng-show="!dc.isActive && !dc.isAdded" btn-click="addDocClassification(dc)" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
-          <sc-button ng-show="dc.isActive" btn-click="removeDocClassification(dc)" class="btn btn-xs btn-primary" icon="glyphicon-minus"></sc-button>
+        <td style="width: 65px; text-align:right;">
+          <sc-button ng-show="!dc.isActive" btn-click="makeActive(dc)" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+          <sc-button ng-show="!dc.isActive" btn-click="removeDocClassification(dc)" class="btn btn-xs btn-danger" icon="glyphicon-remove"></sc-button>
+          <sc-button ng-show="dc.isActive" btn-click="makeInactive(dc)" class="btn btn-xs btn-primary" icon="glyphicon-minus"></sc-button>
         </td>
       </tr>
       <tr ng-repeat-end=""></tr>
