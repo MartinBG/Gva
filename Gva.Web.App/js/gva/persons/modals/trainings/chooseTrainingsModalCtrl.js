@@ -15,19 +15,19 @@
     });
 
     $scope.addTrainings = function () {
-      return $modalInstance.close(_.pluck($scope.selectedTrainings, 'partIndex'));
+      return $modalInstance.close($scope.selectedTrainings);
     };
 
     $scope.cancel = function () {
       return $modalInstance.dismiss('cancel');
     };
 
-    $scope.selectTraining = function (event, training) {
+    $scope.selectTraining = function (event, trainingId) {
       if ($(event.target).is(':checked')) {
-        $scope.selectedTrainings.push(training);
+        $scope.selectedTrainings.push(trainingId);
       }
       else {
-        $scope.selectedTrainings = _.without($scope.selectedTrainings, training);
+        $scope.selectedTrainings = _.without($scope.selectedTrainings, trainingId);
       }
     };
   }

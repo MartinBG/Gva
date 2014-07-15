@@ -7,21 +7,14 @@
     $state,
     $stateParams,
     PersonDocumentOthers,
-    personDocumentOther,
-    selectedPublisher
+    personDocumentOther
   ) {
     var originalDoc = _.cloneDeep(personDocumentOther);
 
     $scope.personDocumentOther = personDocumentOther;
-    $scope.personDocumentOther.part.documentPublisher = selectedPublisher.pop() ||
-      personDocumentOther.part.documentPublisher;
     $scope.editMode = null;
 
     $scope.backFromChild = false;
-
-    if ($state.previous && $state.previous.includes[$state.current.name]) {
-      $scope.backFromChild = true;
-    }
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -46,10 +39,6 @@
         });
     };
 
-    $scope.choosePublisher = function () {
-      return $state.go('root.persons.view.documentOthers.edit.choosePublisher');
-    };
-
     $scope.deleteOther = function () {
       return PersonDocumentOthers.remove({
         id: $stateParams.id,
@@ -65,8 +54,7 @@
     '$state',
     '$stateParams',
     'PersonDocumentOthers',
-    'personDocumentOther',
-    'selectedPublisher'
+    'personDocumentOther'
   ];
 
   DocumentOthersEditCtrl.$resolve = {
@@ -76,10 +64,7 @@
       function ($stateParams, PersonDocumentOthers) {
         return PersonDocumentOthers.get($stateParams).$promise;
       }
-    ],
-    selectedPublisher: function () {
-      return [];
-    }
+    ]
   };
 
   angular.module('gva').controller('DocumentOthersEditCtrl', DocumentOthersEditCtrl);

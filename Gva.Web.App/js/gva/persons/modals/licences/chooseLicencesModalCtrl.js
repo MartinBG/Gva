@@ -1,0 +1,53 @@
+﻿/*global angular, _, $*/
+(function (angular, _, $) {
+  'use strict';
+
+  function ChooseLicencesModalCtrl(
+    $scope,
+    $modalInstance,
+    licences,
+    includedLicences
+  ) {
+    $scope.selectedLicences = [];
+
+    $scope.licences = _.filter(licences, function (licence) {
+      return !_.contains(includedLicences, licence.partIndex);
+    });
+
+    $scope.addLicences = function () {
+      return $modalInstance.close($scope.selectedLicences);
+    };
+
+    $scope.cancel = function () {
+      return $modalInstance.dismiss('cancel');
+    };
+
+    $scope.selectLicence = function (event, licenceId) {
+      if ($(event.target).is(':checked')) {
+        $scope.selectedLicences.push(licenceId);
+      }
+      else {
+        $scope.selectedLicences = _.without($scope.selectedLicences, licenceId);
+      }
+    };
+  }
+
+  ChooseLicencesModalCtrl.$inject = [
+    '$scope',
+    '$modalInstance',
+    'licences',
+    'includedLicences'
+  ];
+
+  ChooseLicencesModalCtrl.$resolve = {
+    licences: [
+      '$stateParams',
+      'PersonLicences',
+      function ($stateParams, PersonLicences) {
+        return PersonLicences.query({ id: $stateParams.id }).$promise;
+      }
+    ]
+  };
+
+  angular.module('gva').controller('ChooseLicencesModalCtrl', ChooseLicencesModalCtrl);
+}(angular, _, $));

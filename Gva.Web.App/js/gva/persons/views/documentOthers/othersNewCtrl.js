@@ -7,9 +7,10 @@
     $state,
     $stateParams,
     PersonDocumentOthers,
-    personDocumentOther,
-    selectedPublisher
+    personDocumentOther
   ) {
+    $scope.personDocumentOther = personDocumentOther;
+
     $scope.save = function () {
       return $scope.newDocumentOtherForm.$validate()
         .then(function () {
@@ -24,14 +25,6 @@
         });
     };
 
-    $scope.personDocumentOther = personDocumentOther;
-    $scope.personDocumentOther.part.documentPublisher = selectedPublisher.pop() ||
-      personDocumentOther.part.documentPublisher;
-
-    $scope.choosePublisher = function () {
-      return $state.go('root.persons.view.documentOthers.new.choosePublisher');
-    };
-
     $scope.cancel = function () {
       return $state.go('root.persons.view.documentOthers.search');
     };
@@ -42,8 +35,7 @@
     '$state',
     '$stateParams',
     'PersonDocumentOthers',
-    'personDocumentOther',
-    'selectedPublisher'
+    'personDocumentOther'
   ];
 
   DocumentOthersNewCtrl.$resolve = {
@@ -63,10 +55,7 @@
           };
         }
       }
-    ],
-    selectedPublisher: function () {
-      return [];
-    }
+    ]
   };
 
   angular.module('gva').controller('DocumentOthersNewCtrl', DocumentOthersNewCtrl);

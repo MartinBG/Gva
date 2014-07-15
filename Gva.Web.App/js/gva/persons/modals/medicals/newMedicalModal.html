@@ -1,0 +1,17 @@
+﻿<ng-form name="form.newDocumentMedicalForm" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="persons.newMedicalModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.newMedicalModal.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.newMedicalModal.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <gva-person-document-medical name="personDocumentMedicalForm" ng-model="personDocumentMedical.part"></gva-person-document-medical>
+
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentMedical.files" sc-data-set-part="'person'"></gva-common-scanned-document>
+    </div>
+  </div>
+</ng-form>

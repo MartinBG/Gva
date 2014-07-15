@@ -11,7 +11,6 @@
     PersonsInfo,
     OrganizationsData,
     appModel,
-    selectedPerson,
     selectedOrganization,
     selectedAircraft,
     selectedAirport,
@@ -22,11 +21,6 @@
       appModel.doc.docCorrespondents.push(selectedCorrs.current.pop());
     }
 
-    if (selectedPerson.length > 0) {
-      appModel.lot = {
-        id: selectedPerson.pop()
-      };
-    }
     if (selectedOrganization.length > 0) {
       appModel.lot = {
         id: selectedOrganization.pop()
@@ -60,13 +54,6 @@
     $scope.appModel = appModel;
     $scope.filter = $stateParams.filter;
     $scope.setPartAlias = '';
-
-    $scope.newPerson = function () {
-      return $state.go('root.applications.new.personNew');
-    };
-    $scope.selectPerson = function () {
-      return $state.go('root.applications.new.personSelect');
-    };
 
     $scope.newOrganization = function () {
       return $state.go('root.applications.new.organizationNew');
@@ -233,7 +220,6 @@
     'PersonsInfo',
     'OrganizationsData',
     'appModel',
-    'selectedPerson',
     'selectedOrganization',
     'selectedAircraft',
     'selectedAirport',
@@ -267,6 +253,7 @@
           };
 
           return {
+            lot: {},
             doc: doc,
             docFormatTypes: res.docFormatTypes,
             docCasePartTypes: res.docCasePartTypes,
@@ -275,9 +262,6 @@
         });
       }
     ],
-    selectedPerson: function () {
-      return [];
-    },
     selectedOrganization: function () {
       return [];
     },

@@ -8,8 +8,7 @@
     l10n,
     SecurityExam,
     PersonExams,
-    pageModel,
-    selectedPerson
+    pageModel
   ) {
     if (!$scope.file) {
       return $state.go('root.persons.securityExam');
@@ -25,10 +24,6 @@
       $scope.personExam.part.specializedQuestion = $scope.commonData.specializedQuestion;
       $scope.personExam.part.inspectors = $scope.commonData.inspectors;
       $scope.personExam.files[0].caseType = $scope.commonData.caseType;
-    }
-
-    if (selectedPerson.length > 0) {
-      $scope.personExam.lot.id = selectedPerson.pop();
     }
 
     $scope.$watch('personExam.lot.id', function (newValue, oldValue) {
@@ -145,14 +140,6 @@
     $scope.edit = function () {
       $scope.personExam.formReadonly = false;
     };
-
-    $scope.newPerson = function () {
-      return $state.go('root.persons.securityExam.part.personNew');
-    };
-
-    $scope.selectPerson = function () {
-      return $state.go('root.persons.securityExam.part.personSelect');
-    };
   }
 
   SecurityExamBatchPartCtrl.$inject = [
@@ -161,15 +148,8 @@
     'l10n',
     'SecurityExam',
     'PersonExams',
-    'pageModel',
-    'selectedPerson'
+    'pageModel'
   ];
-
-  SecurityExamBatchPartCtrl.$resolve = {
-    selectedPerson: function () {
-      return [];
-    }
-  };
 
   angular.module('gva').controller('SecurityExamBatchPartCtrl', SecurityExamBatchPartCtrl);
 }(angular, _));

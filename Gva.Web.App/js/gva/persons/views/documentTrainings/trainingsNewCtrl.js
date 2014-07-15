@@ -7,9 +7,10 @@
     $state,
     $stateParams,
     PersonDocumentTrainings,
-    personDocumentTraining,
-    selectedPublisher
+    personDocumentTraining
   ) {
+    $scope.personDocumentTraining = personDocumentTraining;
+
     $scope.save = function () {
       return $scope.newDocumentTrainingForm.$validate()
         .then(function () {
@@ -23,12 +24,6 @@
           }
         });
     };
-    $scope.personDocumentTraining = personDocumentTraining;
-    $scope.personDocumentTraining.part.documentPublisher = selectedPublisher.pop() ||
-      personDocumentTraining.part.documentPublisher;
-    $scope.choosePublisher = function () {
-      return $state.go('root.persons.view.documentTrainings.new.choosePublisher');
-    };
 
     $scope.cancel = function () {
       return $state.go('root.persons.view.documentTrainings.search');
@@ -40,8 +35,7 @@
     '$state',
     '$stateParams',
     'PersonDocumentTrainings',
-    'personDocumentTraining',
-    'selectedPublisher'
+    'personDocumentTraining'
   ];
 
   DocumentTrainingsNewCtrl.$resolve = {
@@ -61,10 +55,7 @@
           };
         }
       }
-    ],
-    selectedPublisher: function () {
-      return [];
-    }
+    ]
   };
 
   angular.module('gva').controller('DocumentTrainingsNewCtrl', DocumentTrainingsNewCtrl);

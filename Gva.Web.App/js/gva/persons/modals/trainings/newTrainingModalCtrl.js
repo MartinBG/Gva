@@ -6,22 +6,11 @@
     $scope,
     $modalInstance,
     $stateParams,
-    namedModal,
     PersonDocumentTrainings,
     personDocumentTraining
   ) {
     $scope.form = {};
     $scope.personDocumentTraining = personDocumentTraining;
-
-    $scope.choosePublisher = function () {
-      var modalInstance = namedModal.open('choosePublisher');
-
-      modalInstance.result.then(function (publisherName) {
-        $scope.personDocumentTraining.part.documentPublisher = publisherName;
-      });
-
-      return modalInstance.opened;
-    };
 
     $scope.save = function () {
       return $scope.form.newDocumentTrainingForm.$validate()
@@ -31,7 +20,7 @@
               .save({ id: $stateParams.id }, $scope.personDocumentTraining)
               .$promise
               .then(function (savedTraining) {
-                $modalInstance.close(savedTraining.partIndex);
+                return $modalInstance.close(savedTraining.partIndex);
               });
           }
         });
@@ -46,7 +35,6 @@
     '$scope',
     '$modalInstance',
     '$stateParams',
-    'namedModal',
     'PersonDocumentTrainings',
     'personDocumentTraining'
   ];

@@ -1,9 +1,0 @@
-﻿<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
-  <div class="row">
-    <sc-field-group class="{{ newClass }}" text="applications.personSelect.person" validations="{required: 'default'}" field-name="personLotId">
-      <sc-nomenclature ng-model="model.lot.id" alias="'persons'" mode="id" name="personLotId" required ng-disabled="form.$readonly"></sc-nomenclature>
-      <sc-button btn-click="$raise('scOnSelectPerson')" class="btn btn-default" icon="glyphicon glyphicon-search" ng-disabled="form.$readonly"></sc-button>
-      <sc-button btn-click="$raise('scOnNewPerson')" class="btn btn-default" text="applications.personSelect.newPerson" ng-disabled="form.$readonly"></sc-button>
-    </sc-field-group>
-  </div>
-</ng-form>

@@ -7,15 +7,9 @@
     $state,
     $stateParams,
     PersonDocumentChecks,
-    personDocumentCheck,
-    selectedPublisher
+    personDocumentCheck
   ) {
     $scope.personDocumentCheck = personDocumentCheck;
-    $scope.personDocumentCheck.part.documentPublisher = selectedPublisher.pop() ||
-      personDocumentCheck.part.documentPublisher;
-    $scope.choosePublisher = function () {
-      return $state.go('root.persons.view.checks.new.choosePublisher');
-    };
 
     $scope.save = function () {
       return $scope.newDocumentCheckForm.$validate()
@@ -41,8 +35,7 @@
     '$state',
     '$stateParams',
     'PersonDocumentChecks',
-    'personDocumentCheck',
-    'selectedPublisher'
+    'personDocumentCheck'
   ];
   DocumentChecksNewCtrl.$resolve = {
     personDocumentCheck: [
@@ -61,10 +54,7 @@
           };
         }
       }
-    ],
-    selectedPublisher: function () {
-      return [];
-    }
+    ]
   };
 
   angular.module('gva').controller('DocumentChecksNewCtrl', DocumentChecksNewCtrl);

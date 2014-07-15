@@ -10,18 +10,12 @@
     $sce,
     Applications,
     appModel,
-    selectedPerson,
     selectedOrganization,
     selectedAircraft,
     selectedAirport,
     selectedEquipment,
     selectedDoc
     ) {
-    if (selectedPerson.length > 0) {
-      appModel.lot = {
-        id: selectedPerson.pop()
-      };
-    }
     if (selectedOrganization.length > 0) {
       appModel.lot = {
         id: selectedOrganization.pop()
@@ -51,35 +45,6 @@
     $scope.appModel = appModel;
     $scope.filter = $stateParams.filter;
     $scope.setPartAlias = '';
-
-    $scope.newPerson = function () {
-      var personData = {};
-      if ($scope.appModel.doc) {
-        if ($scope.appModel.doc.docCorrespondents.length > 0) {
-          personData.uin = $scope.appModel.doc.docCorrespondents[0].bgCitizenUIN;
-          personData.firstName = $scope.appModel.doc.docCorrespondents[0].bgCitizenFirstName;
-          personData.lastName = $scope.appModel.doc.docCorrespondents[0].bgCitizenLastName;
-        }
-      }
-
-      return $state.go('root.applications.link.personNew', null, null, personData);
-    };
-    $scope.selectPerson = function () {
-      var uin, names, firstName, lastName;
-      if ($scope.appModel.doc) {
-        if ($scope.appModel.doc.docCorrespondents.length > 0) {
-          uin = $scope.appModel.doc.docCorrespondents[0].bgCitizenUIN;
-          firstName = $scope.appModel.doc.docCorrespondents[0].bgCitizenFirstName;
-          lastName = $scope.appModel.doc.docCorrespondents[0].bgCitizenLastName;
-
-          if (!!firstName && !!lastName) {
-            names = firstName + ' ' + lastName;
-          }
-        }
-      }
-
-      return $state.go('root.applications.link.personSelect', { uin: uin, names: names });
-    };
 
     $scope.newOrganization = function () {
       var organizationData = {};
@@ -193,7 +158,6 @@
     '$sce',
     'Applications',
     'appModel',
-    'selectedPerson',
     'selectedOrganization',
     'selectedAircraft',
     'selectedAirport',
@@ -203,15 +167,14 @@
 
   ApplicationsLinkCtrl.$resolve = {
     appModel: function () {
-      return {};
+      return {
+        lot: {}
+      };
     },
     selectedAircraft: function () {
       return [];
     },
     selectedOrganization: function () {
-      return [];
-    },
-    selectedPerson: function () {
       return [];
     },
     selectedAirport: function () {

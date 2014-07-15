@@ -19,6 +19,25 @@
           caa: 'Въздушна администрация',
           other: 'Други'
         },
+        newPersonModal: {
+          title: 'Нов заявител',
+          save: 'Запис',
+          cancel: 'Отказ',
+          personDataForm: 'Лични данни'
+        },
+        choosePersonModal: {
+          title: 'Избор на заявител',
+          cancel: 'Отказ',
+          select: 'Избери',
+          lin: 'ЛИН',
+          uin: 'ЕГН',
+          names: 'Име',
+          licences: 'Лицензи',
+          ratings: 'Квалификации',
+          organization: 'Организация',
+          search: 'Търси',
+          age: 'Възраст'
+        },
         publishers: {
           publisherType: 'Тип',
           name: 'Наименование',
@@ -32,6 +51,10 @@
           organization: 'Авио-организация',
           caa: 'Бъздушна администрация',
           other: 'Други'
+        },
+        selectPersonDirective: {
+          person: 'Заявител',
+          newPerson: 'Нов заявител'
         },
         docApplicationDirective: {
           documentNumber: '№ на документ',
@@ -2462,17 +2485,23 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
-        chooseRating: {
+        chooseRatingsModal: {
+          title: 'Избор на квалификации',
           ratingTypeOrRatingLevel: 'Тип ВС (раб.място)',
           classOrCategory: 'Клас (категория)',
           authorizationAndLimitations: 'Разрешение (ограничения)',
           lastEditionValidFrom: 'Издаден',
           lastEditionValidTo: 'Валиден до',
           add: 'Добави',
-          back: 'Назад'
+          cancel: 'Отказ'
+        },
+        newRatingModal: {
+          title: 'Нова квалификация',
+          save: 'Запис',
+          cancel: 'Отказ'
         },
         chooseTrainingsModal: {
-          title: 'Избор на обучение',
+          title: 'Избор на обучения',
           number: 'No',
           dateValidFrom: 'От дата',
           dateValidTo: 'Валидно до',
@@ -2488,7 +2517,30 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
-        chooseMedical: {
+        chooseChecksModal: {
+          title: 'Избор на проверки',
+          documentNumber: '№ на документа',
+          personCheckDocumentType: 'Тип документ',
+          personCheckDocumentRole: 'Роля на документ',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'До дата',
+          documentPublisher: 'Издател',
+          ratingType: 'Тип ВС (раб. място)',
+          ratingClass: 'Клас',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          valid: 'Валидност',
+          ratingValue: 'Оценка',
+          add: 'Добави',
+          cancel: 'Отказ'
+        },
+        newCheckModal: {
+          title: 'Нова проверка',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        chooseMedicalsModal: {
+          title: 'Избор на медицински',
           number: 'Свидетелство',
           dateValidFrom: 'От дата',
           dateValidTo: 'Валидно до',
@@ -2496,35 +2548,22 @@
           limitations: 'Ограничения',
           publisher: 'Издател',
           add: 'Добави',
-          back: 'Назад'
+          cancel: 'Отказ'
         },
-        chooseCheck: {
-          documentNumber: '№ на документа',
-          ratingClass: 'Клас',
-          documentDateValidFrom: 'От дата',
-          documentDateValidTo: 'До дата',
-          documentPublisher: 'Издател',
-          authorization: 'Разрешение',
-          licenceType: 'Вид правоспособност',
-          personCheckDocumentType: 'Тип документ',
-          personCheckDocumentRole: 'Роля на документ',
-          ratingType: 'Тип ВС (раб. място)',
-          valid: 'Валидност',
-          ratingValue: 'Оценка',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Бр. стр.',
-          add: 'Добави',
-          back: 'Назад'
+        newMedicalModal: {
+          title: 'Нова медицинско',
+          save: 'Запис',
+          cancel: 'Отказ'
         },
-        chooseLicence: {
+        chooseLicencesModal: {
+          title: 'Избор на лицензи',
           licenceNumber: 'Лиценз No',
           licenceType: 'Наименование',
           firstEditionValidFrom: 'Първоначално издаване',
           documentDateValidFrom: 'Издаден',
           documentDateValidTo: 'Валиден до',
           add: 'Добави',
-          back: 'Назад'
+          cancel: 'Отказ'
         },
         licencesSearch: {
           newLicence: 'Нов лиценз',
@@ -2741,32 +2780,6 @@
         },
         corrNew: {
           title: 'Нов кореспондент',
-          saveAndSelect: 'Запис и избор',
-          cancel: 'Отказ'
-        },
-        personSelect: {
-          person: 'Заявител',
-          newPerson: 'Нов заявител',
-          select: 'Избери',
-          viewPerson: 'Преглед',
-          cancel: 'Отказ',
-          names: 'Име',
-          lin: 'ЛИН',
-          uin: 'ЕГН',
-          licences: 'Лицензи',
-          ratings: 'Квалификации',
-          organization: 'Организация',
-          age: 'Възраст',
-          yes: 'Да',
-          no: 'Не',
-          'new': 'Ново лице',
-          search: 'Търси'
-        },
-        personNew: {
-          title: 'Ново лице',
-          personDataForm: 'Лични данни',
-          documentIdForm: 'Документ за самоличност',
-          addressForm: 'Адрес',
           saveAndSelect: 'Запис и избор',
           cancel: 'Отказ'
         },
@@ -3593,8 +3606,6 @@
       states: {
         'root.applications': 'Заявления',
         'root.applications.new': 'Ново заявление',
-        'root.applications.new.personSelect': 'Избор на заявител',
-        'root.applications.new.personNew': 'Нов заявител',
         'root.applications.new.organizationSelect': 'Избор на организация',
         'root.applications.new.organizationNew': 'Нова организация',
         'root.applications.new.aircraftSelect': 'Избор на ВС',
@@ -3607,8 +3618,6 @@
         'root.applications.new.corrNew': 'Нов кореспондент',
         'root.applications.link': 'Свържи заявление',
         'root.applications.link.docSelect': 'Избор на документ',
-        'root.applications.link.personSelect': 'Избор на заявител',
-        'root.applications.link.personNew': 'Нов заявител',
         'root.applications.link.organizationSelect': 'Избор на организация',
         'root.applications.link.organizationNew': 'Нова организация',
         'root.applications.link.aircraftSelect': 'Избор на ВС',
@@ -3627,8 +3636,6 @@
         'root.persons': 'Физически лица',
         'root.persons.new': 'Ново физическо лице',
         'root.persons.securityExam': 'Нов теоретичен изпит АС',
-        'root.persons.securityExam.personSelect': 'Избор на заявител',
-        'root.persons.securityExam.personNew': 'Нов заявител',
         'root.persons.view': 'Лично досие',
         'root.persons.view.edit': 'Преглед',
         'root.persons.view.addresses': 'Адреси',
@@ -3645,26 +3652,10 @@
         'root.persons.view.documentEducations.edit': 'Преглед на образование',
         'root.persons.view.licences': 'Лицензи',
         'root.persons.view.licences.new': 'Нов лиценз',
-        'root.persons.view.licences.new.chooseRating': 'Избор на квалификация',
-        'root.persons.view.licences.new.newRating': 'Нова квалификация',
-        'root.persons.view.licences.new.chooseMedical': 'Избор на медицинско',
-        'root.persons.view.licences.new.newMedical': 'Ново медицинско',
-        'root.persons.view.licences.new.chooseCheck': 'Избор на проверка',
-        'root.persons.view.licences.new.newCheck': 'Нова проверка',
-        'root.persons.view.licences.new.newCheck.choosePublisher': 'Избор на издател',
         'root.persons.view.licences.edit': 'Преглед на лиценз',
-        'root.persons.view.licences.edit.chooseRating': 'Избор на квалификация',
-        'root.persons.view.licences.edit.newRating': 'Нова квалификация',
-        'root.persons.view.licences.edit.chooseMedical': 'Избор на медицинско',
-        'root.persons.view.licences.edit.newMedical': 'Ново медицинско',
-        'root.persons.view.licences.edit.chooseCheck': 'Избор на проверка',
-        'root.persons.view.licences.edit.newCheck': 'Нова проверка',
-        'root.persons.view.licences.edit.newCheck.choosePublisher': 'Избор на издател',
         'root.persons.view.checks': 'Проверки',
         'root.persons.view.checks.new': 'Нова проверка',
-        'root.persons.view.checks.new.choosePublisher': 'Избор на издател',
         'root.persons.view.checks.edit': 'Преглед на проверка',
-        'root.persons.view.checks.edit.choosePublisher': 'Избор на издател',
         'root.persons.view.employments': 'Месторабота',
         'root.persons.view.employments.new': 'Новa месторабота',
         'root.persons.view.employments.edit': 'Преглед на месторабота',
@@ -3673,9 +3664,7 @@
         'root.persons.view.medicals.edit': 'Преглед на медицинско',
         'root.persons.view.documentTrainings': 'Обучение',
         'root.persons.view.documentTrainings.new': 'Ново обучение',
-        'root.persons.view.documentTrainings.new.choosePublisher': 'Избор на издател',
         'root.persons.view.documentTrainings.edit': 'Преглед на обучение',
-        'root.persons.view.documentTrainings.edit.choosePublisher': 'Избор на издател',
         'root.persons.view.flyingExperiences': 'Летателен / практически опит',
         'root.persons.view.flyingExperiences.new': 'Нов летателен / практически опит',
         'root.persons.view.flyingExperiences.edit': 'Преглед на летателен / практически опит',
@@ -3691,9 +3680,7 @@
         'root.persons.view.inventory': 'Опис',
         'root.persons.view.documentOthers': 'Други документи',
         'root.persons.view.documentOthers.new': 'Нов документ',
-        'root.persons.view.documentOthers.new.choosePublisher': 'Избор на издател',
         'root.persons.view.documentOthers.edit': 'Преглед на документ',
-        'root.persons.view.documentOthers.edit.choosePublisher': 'Избор на издател',
         'root.persons.view.documentApplications': 'Заявления',
         'root.persons.view.documentApplications.new': 'Новo заявление',
         'root.persons.view.documentApplications.edit': 'Преглед на заявление',

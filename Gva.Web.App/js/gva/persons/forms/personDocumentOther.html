@@ -6,7 +6,7 @@
   <div class="row">
     <sc-field-group class="col-sm-6 col-md-4" text="persons.personOtherDirective.documentPublisher" validations="{required: 'default'}" field-name="documentPublisher">
       <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="form.$readonly"></sc-text>
-      <sc-button class="btn btn-default" btn-click="$parent.choosePublisher()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
+      <sc-button class="btn btn-default" btn-click="choosePublisher()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
     </sc-field-group>
     <sc-field type="date" ng-model="model.documentDateValidFrom" l10n-text="persons.personOtherDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="date" ng-model="model.documentDateValidTo" l10n-text="persons.personOtherDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>

@@ -16,7 +16,7 @@
 
       self.modal = { };
 
-      self.modal.open = function (modalName, params) {
+      self.modal.open = function (modalName, params, resolveParams) {
         var modalObj = modals[modalName];
 
         if (!modalObj) {
@@ -30,6 +30,8 @@
             return param;
           };
         });
+
+        _.extend(resolve, resolveParams);
 
         return $modal.open({
           templateUrl: modalObj.template,

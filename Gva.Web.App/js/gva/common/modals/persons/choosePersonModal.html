@@ -1,0 +1,42 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="common.choosePersonModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="canceltn" btn-click="cancel()" text="common.choosePersonModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+      <sc-filter type="text" name="lin" class="col-sm-3" removable="false" label="common.choosePersonModal.lin"></sc-filter>
+      <sc-filter type="text" name="uin" class="col-sm-3" removable="false" label="common.choosePersonModal.uin"></sc-filter>
+      <sc-filter type="text" name="names" class="col-sm-3" removable="false" label="common.choosePersonModal.names"></sc-filter>
+      <sc-filter type="text" name="licences" class="col-sm-3" removable="true" label="common.choosePersonModal.licences"></sc-filter>
+      <sc-filter type="text" name="ratings" class="col-sm-3" removable="true" label="common.choosePersonModal.ratings"></sc-filter>
+      <sc-filter type="text" name="organization" class="col-sm-3" removable="true" label="common.choosePersonModal.organization"></sc-filter>
+      <sc-search-button action="search()" text="common.choosePersonModal.search" icon="glyphicon-search"></sc-search-button>
+      <sc-search-button action="add"></sc-search-button>
+    </sc-search>
+
+
+    <sc-datatable items="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+      <sc-column sortable="false" class="buttons-cell" has-content="true">
+        <sc-button btn-click="selectPerson(item)" text="common.choosePersonModal.select" class="btn btn-xs btn-primary"></sc-button>
+      </sc-column>
+      <sc-column data="names" title="common.choosePersonModal.names">
+      </sc-column>
+      <sc-column data="lin" title="common.choosePersonModal.lin">
+      </sc-column>
+      <sc-column data="uin" title="common.choosePersonModal.uin">
+      </sc-column>
+      <sc-column data="age" title="common.choosePersonModal.age">
+      </sc-column>
+      <sc-column data="licences" title="common.choosePersonModal.licences">
+      </sc-column>
+      <sc-column data="ratings" title="common.choosePersonModal.ratings">
+      </sc-column>
+      <sc-column data="organization" title="common.choosePersonModal.organization">
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>
