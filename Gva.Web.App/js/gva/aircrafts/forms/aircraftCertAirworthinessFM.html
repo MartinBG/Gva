@@ -8,7 +8,7 @@
     <sc-field type="date" ng-model="model.part.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessFMDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <gva-aircraft-inspector ng-model="model.part.inspector" sc-data-show-inspectors="true" sc-data-is-readonly="form.$readonly"></gva-aircraft-inspector>
+    <gva-aircraft-inspector name="inspector" ng-model="model.part.inspector" sc-data-show-inspectors="true" readonly="readonly"></gva-aircraft-inspector>
   </div>
   <div class="row" ng-hide="hideApplications">
     <div class="form-group col-sm-10 col-md-4">

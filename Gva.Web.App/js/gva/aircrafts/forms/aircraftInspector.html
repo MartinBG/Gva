@@ -1,18 +1,20 @@
-﻿<div class="col-sm-4 col-md-6">
-  <label class="control-label" l10n-text="aircrafts.inspectorDirective.inspector"></label>
-  <div class="input-group">
-    <div class="input-group-btn">
-      <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 120px" ng-disabled="isReadonly">
-        {{model.inspectorType.name}} <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li ng-repeat="item in inspectorTypes" ng-click="model.inspectorType = item">
-            {{item.name}}
-        </li>
-      </ul>
+﻿<ng-form sc-validate="{}" sc-form-readonly>
+  <div class="col-sm-4 col-md-6" ng-class="{ 'has-error': form.$validated && (form['inspectorType'].$invalid || form['inspector'].$invalid || form['examiner'].$invalid || form['other'].$invalid) }">
+    <label class="control-label" l10n-text="aircrafts.inspectorDirective.checkedBy"></label>
+    <sc-validation-error field-name="inspectorType" validations="{required: null}"></sc-validation-error>
+    <sc-validation-error ng-if="inspectorType  === 'inspector'" field-name="inspector" validations="{required: null}"></sc-validation-error>
+    <sc-validation-error ng-if="inspectorType  === 'examiner'" field-name="examiner" validations="{required: null}"></sc-validation-error>
+    <sc-validation-error ng-if="inspectorType  === 'other'" field-name="other" validations="{required: null}"></sc-validation-error>
+    <div class="input-group" style="width:100%">
+      <select name="inspectorType" class="form-control input-sm" style="width: 110px" ng-model="inspectorType" ng-readonly="readonly" ng-required="true" ui-select2="{ placeholder: ' ', allowClear: true, minimumResultsForSearch: -1 }">
+        <option></option>
+        <option value="inspector" l10n-text="aircrafts.inspectorDirective.inspector"></option>
+        <option value="examiner" l10n-text="aircrafts.inspectorDirective.examiner"></option>
+        <option value="other" l10n-text="aircrafts.inspectorDirective.other"></option>
+      </select>
+      <sc-nomenclature ng-if="inspectorType  === 'inspector'" class="form-control input-sm" ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-if="inspectorType  === 'examiner'" class="form-control input-sm" ng-model="model.examiner" name="examiner" alias="'examiners'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-text ng-if="inspectorType  === 'other'" class="form-control input-sm" ng-model="model.other" name="other" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
-    <sc-nomenclature ng-if="model.inspectorType.alias  === 'gvaInspector'" class="form-control input-sm" ng-model="model.gvaInspector" name="gvaInspector" alias="'inspectors'" ng-required="false" ng-readonly="isReadonly"></sc-nomenclature>
-    <sc-nomenclature ng-if="model.inspectorType.alias  === 'examiner'" class="form-control input-sm" ng-model="model.examiner" name="examiner" alias="'examiners'" ng-required="false" ng-readonly="isReadonly"></sc-nomenclature>
-    <sc-text ng-if="model.inspectorType.alias  === 'other'" class="form-control input-sm" ng-model="model.other" name="other" ng-required="false" ng-readonly="isReadonly"></sc-text>
   </div>
-</div>
+</ng-form>

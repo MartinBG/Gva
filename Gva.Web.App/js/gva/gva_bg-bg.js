@@ -1675,8 +1675,8 @@
           notIndexed: 'Документи извън описа'
         },
         inspectorDirective: {
-          inspector: 'Заверил',
-          gvaInspector: 'Инспектор ГВА',
+          checkedBy: 'Заверил',
+          inspector: 'Инспектор',
           examiner: 'Проверяващ',
           other: 'Друг'
         }
