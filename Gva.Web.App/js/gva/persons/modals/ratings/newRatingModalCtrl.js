@@ -20,7 +20,7 @@
               .save({ id: $stateParams.id }, $scope.rating)
               .$promise
               .then(function (savedRating) {
-                return $modalInstance.close(savedRating.partIndex);
+                return $modalInstance.close(savedRating);
               });
           }
         });

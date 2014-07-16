@@ -10,7 +10,7 @@
   <div class="well-sm panel-body">
     <sc-datatable items="medicals" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
-        <input type="checkbox" ng-checked="selectedMedicals | contains:item.partIndex" sc-click="selectMedical($event, item.partIndex)">
+        <input type="checkbox" ng-checked="selectedMedicals | contains:item" sc-click="selectMedical($event, item)">
       </sc-column>
       <sc-column title="persons.chooseMedicalsModal.number" has-content="true">
         {{item.part.documentNumberPrefix}}-{{item.part.documentNumber}}-{{person.lin}}-{{item.part.documentNumberSuffix}}

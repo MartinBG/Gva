@@ -22,12 +22,12 @@
       return $modalInstance.dismiss('cancel');
     };
 
-    $scope.selectLicence = function (event, licenceId) {
+    $scope.selectLicence = function (event, licence) {
       if ($(event.target).is(':checked')) {
-        $scope.selectedLicences.push(licenceId);
+        $scope.selectedLicences.push(licence);
       }
       else {
-        $scope.selectedLicences = _.without($scope.selectedLicences, licenceId);
+        $scope.selectedLicences = _.without($scope.selectedLicences, licence);
       }
     };
   }

@@ -20,7 +20,7 @@
               .save({ id: $stateParams.id }, $scope.personDocumentCheck)
               .$promise
               .then(function (savedCheck) {
-                return $modalInstance.close(savedCheck.partIndex);
+                return $modalInstance.close(savedCheck);
               });
           }
         });

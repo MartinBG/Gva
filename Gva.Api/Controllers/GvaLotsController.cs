@@ -121,7 +121,7 @@ namespace Gva.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return Ok(new { partIndex = partVersion.Part.Index });
+            return Ok(new PartVersionDO(partVersion));
         }
 
         public virtual IHttpActionResult PostPart(int lotId, string path, JObject content)

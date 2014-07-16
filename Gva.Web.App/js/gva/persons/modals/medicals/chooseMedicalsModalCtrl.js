@@ -24,12 +24,12 @@
       return $modalInstance.dismiss('cancel');
     };
 
-    $scope.selectMedical = function (event, medicalId) {
+    $scope.selectMedical = function (event, medical) {
       if ($(event.target).is(':checked')) {
-        $scope.selectedMedicals.push(medicalId);
+        $scope.selectedMedicals.push(medical);
       }
       else {
-        $scope.selectedMedicals = _.without($scope.selectedMedicals, medicalId);
+        $scope.selectedMedicals = _.without($scope.selectedMedicals, medical);
       }
     };
   }

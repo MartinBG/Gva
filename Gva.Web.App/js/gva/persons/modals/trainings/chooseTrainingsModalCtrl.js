@@ -22,12 +22,12 @@
       return $modalInstance.dismiss('cancel');
     };
 
-    $scope.selectTraining = function (event, trainingId) {
+    $scope.selectTraining = function (event, training) {
       if ($(event.target).is(':checked')) {
-        $scope.selectedTrainings.push(trainingId);
+        $scope.selectedTrainings.push(training);
       }
       else {
-        $scope.selectedTrainings = _.without($scope.selectedTrainings, trainingId);
+        $scope.selectedTrainings = _.without($scope.selectedTrainings, training);
       }
     };
   }

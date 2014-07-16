@@ -10,7 +10,7 @@
   <div class="well-sm panel-body">
     <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
-        <input type="checkbox" ng-checked="selectedRatings | contains:item.partIndex" sc-click="selectRating($event, item.partIndex)">
+        <input type="checkbox" ng-checked="selectedRatings | contains:item" sc-click="selectRating($event, item)">
       </sc-column>
       <sc-column data="part.personRatingLevel.name || part.ratingType.name" title="persons.chooseRatingsModal.ratingTypeOrRatingLevel">
       </sc-column>

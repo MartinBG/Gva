@@ -20,7 +20,7 @@
               .save({ id: $stateParams.id }, $scope.personDocumentTraining)
               .$promise
               .then(function (savedTraining) {
-                return $modalInstance.close(savedTraining.partIndex);
+                return $modalInstance.close(savedTraining);
               });
           }
         });

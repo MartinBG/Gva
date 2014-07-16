@@ -202,7 +202,7 @@ namespace Gva.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return Ok(new { partIndex = partVersion.Part.Index });
+            return Ok(new PartVersionDO(partVersion));
         }
 
         [Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),

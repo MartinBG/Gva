@@ -10,7 +10,7 @@
   <div class="well-sm panel-body">
     <sc-datatable items="licences" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
-        <input type="checkbox" ng-checked="selectedLicences | contains:item.partIndex" sc-click="selectLicence($event, item.partIndex)">
+        <input type="checkbox" ng-checked="selectedLicences | contains:item" sc-click="selectLicence($event, item)">
       </sc-column>
       <sc-column data="part.licenceNumber" title="persons.chooseLicencesModal.licenceNumber">
       </sc-column>

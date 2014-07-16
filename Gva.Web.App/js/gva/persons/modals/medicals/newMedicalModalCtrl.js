@@ -20,7 +20,7 @@
               .save({ id: $stateParams.id }, $scope.personDocumentMedical)
               .$promise
               .then(function (savedMedical) {
-                return $modalInstance.close(savedMedical.partIndex);
+                return $modalInstance.close(savedMedical);
               });
           }
         });
