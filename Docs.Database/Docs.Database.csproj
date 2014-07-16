@@ -64,9 +64,12 @@
     <Content Include="Create\Procedures\Tokens\spSetDocTokens.sql" />
     <Content Include="Create\Procedures\Tokens\spSetDocUnitTokens.sql" />
     <Content Include="Create\Procedures\Tokens\spSetUnitTokens.sql" />
-    <Content Include="Create\Tables\AdministrativeEmails\AdministrativeEmails.sql" />
-    <Content Include="Create\Tables\AdministrativeEmails\AdministrativeEmailStatuses.sql" />
-    <Content Include="Create\Tables\AdministrativeEmails\AdministrativeEmailTypes.sql" />
+    <Content Include="Create\Tables\Emails\Emails.sql" />
+    <Content Include="Create\Tables\Emails\EmailStatuses.sql" />
+    <Content Include="Create\Tables\Emails\EmailTypes.sql" />
+    <Content Include="Create\Tables\Emails\EmailAttachments.sql" />
+    <Content Include="Create\Tables\Emails\EmailAddresseeTypes.sql" />
+    <Content Include="Create\Tables\Emails\EmailAddressees.sql" />
     <Content Include="Create\Tables\Assignments\AssignmentTypes.sql" />
     <Content Include="Create\Tables\Correspondents\CorrespondentContacts.sql" />
     <Content Include="Create\Tables\Correspondents\CorrespondentGroups.sql" />
@@ -114,8 +117,9 @@
     <Content Include="Create\Tables\Tokens\DocTokens.sql" />
     <Content Include="Create\Tables\Tokens\UnitTokens.sql" />
     <Content Include="Create\Views\vwDocUsers.sql" />
-    <Content Include="Insert\AdministrativeEmails\AdministrativeEmailStatuses.sql" />
-    <Content Include="Insert\AdministrativeEmails\AdministrativeEmailTypes.sql" />
+    <Content Include="Insert\Emails\EmailAddresseeTypes.sql" />
+    <Content Include="Insert\Emails\EmailStatuses.sql" />
+    <Content Include="Insert\Emails\EmailTypes.sql" />
     <Content Include="Insert\Assignments\AssignmentTypes.sql" />
     <Content Include="Insert\Classifications\ClassificationRelations.sql" />
     <Content Include="Insert\Classifications\ClassificationRoles.sql" />

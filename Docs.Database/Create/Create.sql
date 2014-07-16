@@ -74,10 +74,13 @@ GO
 :r $(rootPath)"\Tables\ElectronicServices\ElectronicServiceProviders.sql"
 :r $(rootPath)"\Tables\Documents\DocElectronicServiceStages.sql"
 
---AdministrativeEmails
-:r $(rootPath)"\Tables\AdministrativeEmails\AdministrativeEmailStatuses.sql"
-:r $(rootPath)"\Tables\AdministrativeEmails\AdministrativeEmailTypes.sql"
-:r $(rootPath)"\Tables\AdministrativeEmails\AdministrativeEmails.sql"
+--Emails
+:r $(rootPath)"\Tables\Emails\EmailStatuses.sql"
+:r $(rootPath)"\Tables\Emails\EmailTypes.sql"
+:r $(rootPath)"\Tables\Emails\EmailAddresseeTypes.sql"
+:r $(rootPath)"\Tables\Emails\Emails.sql"
+:r $(rootPath)"\Tables\Emails\EmailAddressees.sql"
+:r $(rootPath)"\Tables\Emails\EmailAttachments.sql"
 
 --Tokens
 :r $(rootPath)"\Tables\Tokens\UnitTokens.sql"
@@ -157,8 +160,9 @@ GO
 --IncomingDocs
 :r $(rootPath)\"..\Insert\IncomingDocs\IncomingDocStatuses.sql"
 
---AdministrativeEmails
-:r $(rootPath)\"..\Insert\AdministrativeEmails\AdministrativeEmailStatuses.sql"
-:r $(rootPath)\"..\Insert\AdministrativeEmails\AdministrativeEmailTypes.sql"
+--Emails
+:r $(rootPath)\"..\Insert\Emails\EmailStatuses.sql"
+:r $(rootPath)\"..\Insert\Emails\EmailTypes.sql"
+:r $(rootPath)\"..\Insert\Emails\EmailAddresseeTypes.sql"
 
 

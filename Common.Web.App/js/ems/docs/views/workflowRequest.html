@@ -6,12 +6,12 @@
 
           <div class="form-group col-sm-4">
             <label class="control-label" l10n-text="docs.edit.workflows.confirm.author"></label>
-            <sc-text ng-model="workflowModel.username" name="userName" readonly="true"></sc-text>
+            <sc-text ng-model="workflowModel.username" name="userName" ng-readonly="true"></sc-text>
           </div>
 
           <div class="form-group col-sm-4">
             <label class="control-label" l10n-text="docs.edit.workflows.request.fromUser"></label>
-            <sc-nomenclature ng-model="workflowModel.principalUnitId" alias="'employeeUnit'" mode="id" readonly="workflowModel.canChoose"></sc-nomenclature>
+            <sc-nomenclature ng-model="workflowModel.principalUnitId" alias="'employeeUnit'" mode="id" ng-readonly="!workflowModel.canSubstituteWorkflow"></sc-nomenclature>
           </div>
 
           <div class="form-group col-sm-4" sc-has-error="toUnit">

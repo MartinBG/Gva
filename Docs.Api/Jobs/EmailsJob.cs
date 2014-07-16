@@ -44,20 +44,20 @@ namespace Docs.Api.Jobs
         {
             try
             {
-                List<int> pendingAdministrativeEmails = null;
+                List<int> pendingEmails = new List<int>();
 
                 int mailsToBeSentCount = Int32.Parse(ConfigurationManager.AppSettings["Docs.Api:MailsToBeSentCount"]);
 
                 using (var unitOfWork = unitOfWorkFactory())
                 {
-                    pendingAdministrativeEmails = unitOfWork.Value.DbContext.Set<AdministrativeEmail>()
-                        .Where(e => e.AdministrativeEmailStatus.Alias == "Pending")
+                    pendingEmails = unitOfWork.Value.DbContext.Set<Email>()
+                        .Where(e => e.EmailStatus.Alias == "Pending")
                         .Take(mailsToBeSentCount)
-                        .Select(d => d.AdministrativeEmailId)
+                        .Select(d => d.EmailId)
                         .ToList();
                 }
 
-                if (pendingAdministrativeEmails.Count > 0)
+                if (pendingEmails.Any())
                 {
                     string smtpNetworkCredentialHost = ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialHost"];
                     string smtpNetworkCredentialPort = ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialPort"];
@@ -66,7 +66,9 @@ namespace Docs.Api.Jobs
                     string smtpNetworkCredentialEnableSsl = ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialEnableSsl"];
 
                     SmtpClient smtpClient = new SmtpClient();
+
                     smtpClient.Host = smtpNetworkCredentialHost;
+
                     if (!String.IsNullOrEmpty(smtpNetworkCredentialPort))
                     {
                         smtpClient.Port = Convert.ToInt32(smtpNetworkCredentialPort);
@@ -80,11 +82,12 @@ namespace Docs.Api.Jobs
                         smtpClient.EnableSsl = true;
                     }
 
-                    foreach (int administrativeEmailId in pendingAdministrativeEmails)
+                    foreach (int administrativeEmailId in pendingEmails)
                     {
                         using (var emailSender = emailSenderFactory())
                         {
                             emailSender.Value.SmtpClient = smtpClient;
+
                             emailSender.Value.Send(administrativeEmailId);
                         }
                     }

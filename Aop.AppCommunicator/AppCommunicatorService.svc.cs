@@ -204,7 +204,7 @@ namespace Aop.AppCommunicator
             var doc = this.appRepository.GetDocByPortalDocId(guid);
             if (doc != null)
             {
-                string currentStageAlias = "Pending";
+                string currentStageAlias = "Pending"; //? pending?
                 if (doc.DocElectronicServiceStages.Count > 0)
                 {
                     if (doc.DocElectronicServiceStages.Any(e => e.IsCurrentStage))

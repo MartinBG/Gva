@@ -56,6 +56,7 @@ namespace Docs.Api.Repositories.DocRepository
             List<DocCasePartType> docCasePartTypes,
             int[] checkedIds,
             UserContext userContext,
+            out string targetDocStatusAlias,
             out List<DocRelation> docRelations);
 
         Doc ReverseDocStatus(int id, byte[] docVersion, string targetDocStatusAlias, List<DocStatus> docStatuses, UserContext userContext);

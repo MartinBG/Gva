@@ -98,13 +98,13 @@
               method: 'POST',
               url: '/api/docs/:id/createNewCase'
             },
-            'getDocSendEmail': {
+            'getCorrespondentEmail': {
               method: 'GET',
-              url: '/api/docs/:id/getDocSendEmail'
+              url: '/api/docs/:id/getCorrespondentEmail'
             },
-            'postDocSendEmail': {
+            'sendCorrespondentEmail': {
               method: 'POST',
-              url: '/api/docs/:id/postDocSendEmail'
+              url: '/api/docs/:id/sendCorrespondentEmail'
             },
             'getRioEditableFile': {
               method: 'GET',

@@ -26,6 +26,8 @@ using Rio.Data.Utils.RioDocumentParser;
 using Rio.Data.Utils.RioValidator;
 using Rio.Data.Abbcdn;
 using Rio.Objects;
+using System.Text.RegularExpressions;
+using Docs.Api.Repositories.EmailRepository;
 
 namespace Mosv.Rio.IncomingDocProcessor
 {
@@ -37,6 +39,7 @@ namespace Mosv.Rio.IncomingDocProcessor
 
         private IUnitOfWork unitOfWork;
         private IDocRepository docRepository;
+        private IEmailRepository emailRepository;
         private ICorrespondentRepository correspondentRepository;
         private IRioObjectExtractor rioObjectExtractor;
         private IRioDocumentParser rioDocumentParser;
@@ -46,6 +49,7 @@ namespace Mosv.Rio.IncomingDocProcessor
             Func<Owned<IUnitOfWork>> unitOfWorkFactory,
             IUnitOfWork unitOfWork,
             IDocRepository docRepository,
+            IEmailRepository emailRepository,
             ICorrespondentRepository correspondentRepository,
             IRioObjectExtractor rioObjectExtractor,
             IRioDocumentParser rioDocumentParser,
@@ -54,6 +58,7 @@ namespace Mosv.Rio.IncomingDocProcessor
             this.unitOfWorkFactory = unitOfWorkFactory;
             this.unitOfWork = unitOfWork;
             this.docRepository = docRepository;
+            this.emailRepository = emailRepository;
             this.correspondentRepository = correspondentRepository;
             this.rioObjectExtractor = rioObjectExtractor;
             this.rioDocumentParser = rioDocumentParser;
@@ -735,30 +740,48 @@ namespace Mosv.Rio.IncomingDocProcessor
 
         private void AddReceiveConfirmationEmailRecord(bool isDocAcknowledged, User systemUser, List<Correspondent> docCorrespondents)
         {
-            var emailStatus = this.unitOfWork.DbContext.Set<AdministrativeEmailStatus>().Single(e => e.Alias == "New");
+            EmailStatus pendingStatus = this.emailRepository.GetEmailStatusByAlias("Pending");
 
-            AdministrativeEmailType emailType = null;
+            EmailAddresseeType to = this.emailRepository.GetEmailAddresseeTypeByAlias("To");
+
+            EmailType emailType = null;
+
             if (isDocAcknowledged)
             {
-                emailType = this.unitOfWork.DbContext.Set<AdministrativeEmailType>().Single(e => e.Alias == "ReceiptAcknowledgedEmail");
+                emailType = this.emailRepository.GetEmailTypeByAlias("ReceiptAcknowledgedEmail");
             }
             else
             {
-                emailType = this.unitOfWork.DbContext.Set<AdministrativeEmailType>().Single(e => e.Alias == "ReceiptNotAcknowledgedEmail");
+                emailType = this.emailRepository.GetEmailTypeByAlias("ReceiptNotAcknowledgedEmail");
             }
 
-            AdministrativeEmail email = new AdministrativeEmail();
-            email.TypeId = emailType.AdministrativeEmailTypeId;
-            email.UserId = systemUser.UserId;
-            if (docCorrespondents.Count > 0)
+            Email email = this.emailRepository.CreateEmail(emailType.EmailTypeId, pendingStatus.EmailStatusId, emailType.Subject, emailType.Body);
+
+            if (!string.IsNullOrEmpty(systemUser.Email) && Regex.IsMatch(systemUser.Email, Docs.Api.EmailSender.EmailSender.emailRegex))
             {
-                email.CorrespondentId = docCorrespondents[0].CorrespondentId;
+                email.EmailAddressees.Add(new EmailAddressee()
+                {
+                    EmailAddresseeTypeId = to.EmailAddresseeTypeId,
+                    Address = systemUser.Email
+                });
             }
-            email.StatusId = emailStatus.AdministrativeEmailStatusId;
-            email.Subject = emailType.Subject;
-            email.Body = emailType.Body;
 
-            this.unitOfWork.DbContext.Set<AdministrativeEmail>().Add(email);
+            if (docCorrespondents.Any())
+            {
+                foreach (var item in docCorrespondents)
+                {
+                    if (!string.IsNullOrEmpty(item.Email) && Regex.IsMatch(item.Email, Docs.Api.EmailSender.EmailSender.emailRegex))
+                    {
+                        email.EmailAddressees.Add(new EmailAddressee()
+                        {
+                            EmailAddresseeTypeId = to.EmailAddresseeTypeId,
+                            Address = systemUser.Email
+                        });
+                    }
+                }
+            }
+
+            this.unitOfWork.DbContext.Set<Email>().Add(email);
         }
 
         private void AddCheckRegularityServiceStage(int docTypeId, Doc doc)

@@ -12,6 +12,7 @@
     workflowModel
   ) {
     $scope.workflowModel = workflowModel;
+
     switch ($state.current.url) {
     case '/signRequest':
       $scope.workflowModel.docWorkflowActionAlias = 'SignRequest';
@@ -70,7 +71,7 @@
     workflowModel: ['doc',
       function (doc) {
         return {
-          canChooseUnit: doc.canSubstituteManagement,
+          canSubstituteWorkflow: doc.canSubstituteManagement,
           docId: doc.docId,
           docVersion: doc.version,
           unitUserId: doc.unitUser.unitUserId,

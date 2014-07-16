@@ -1,36 +1,31 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
 {
-    public partial class AdministrativeEmailType
+    public partial class EmailType
     {
-        public AdministrativeEmailType()
+        public EmailType()
         {
-            this.AdministrativeEmails = new List<AdministrativeEmail>();
+            this.Emails = new List<Email>();
         }
 
-        public int AdministrativeEmailTypeId { get; set; }
-
+        public int EmailTypeId { get; set; }
         public string Name { get; set; }
-
         public string Alias { get; set; }
-
         public string Subject { get; set; }
-
         public string Body { get; set; }
-
         public byte[] Version { get; set; }
-
-        public virtual ICollection<AdministrativeEmail> AdministrativeEmails { get; set; }
+        public virtual ICollection<Email> Emails { get; set; }
     }
 
-    public class AdministrativeEmailTypeMap : EntityTypeConfiguration<AdministrativeEmailType>
+    public class EmailTypeMap : EntityTypeConfiguration<EmailType>
     {
-        public AdministrativeEmailTypeMap()
+        public EmailTypeMap()
         {
             // Primary Key
-            this.HasKey(t => t.AdministrativeEmailTypeId);
+            this.HasKey(t => t.EmailTypeId);
 
             // Properties
             this.Property(t => t.Name)
@@ -51,8 +46,8 @@ namespace Docs.Api.Models
                 .IsRowVersion();
 
             // Table & Column Mappings
-            this.ToTable("AdministrativeEmailTypes");
-            this.Property(t => t.AdministrativeEmailTypeId).HasColumnName("AdministrativeEmailTypeId");
+            this.ToTable("EmailTypes");
+            this.Property(t => t.EmailTypeId).HasColumnName("EmailTypeId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.Subject).HasColumnName("Subject");

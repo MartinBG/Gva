@@ -89,7 +89,7 @@ namespace Docs.Api.Repositories.DocRepository
 
             if (doc == null)
             {
-                throw new Exception("Doc now found");
+                throw new Exception("Doc not found");
             }
 
             doc.EnsureForProperVersion(docVersion);
@@ -105,7 +105,7 @@ namespace Docs.Api.Repositories.DocRepository
 
             if (doc == null)
             {
-                throw new Exception("Doc now found");
+                throw new Exception("Doc not found");
             }
 
             doc.EnsureForProperVersion(docVersion);
@@ -143,7 +143,7 @@ namespace Docs.Api.Repositories.DocRepository
 
             if (doc == null)
             {
-                throw new Exception("Doc now found");
+                throw new Exception("Doc not found");
             }
 
             doc.EnsureForProperVersion(docVersion);
@@ -163,49 +163,6 @@ namespace Docs.Api.Repositories.DocRepository
                 case "Processed":
                     newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Processed");
                     doc.DocStatusId = newDocStatus.DocStatusId;
-
-                    //resolution has only draft/finished status
-                    #region Sending ResolutionOrTaskAssigned mail
-                    //?
-                    //List<DocUnit> docUnits = new List<DocUnit>();
-
-                    //if (doc.DocEntryType.Alias == "Resolution" || doc.DocEntryType.Alias == "Task")
-                    //{
-                    //    DocUnitRole docUnitRoleInCharge = this.unitOfWork.Repo<DocUnitRole>().GetByAlias("InCharge");
-                    //    DocUnitRole docUnitRoleControlling = this.unitOfWork.Repo<DocUnitRole>().GetByAlias("Controlling");
-                    //    docUnits.AddRange(doc.DocUnits.Where(du => du.DocUnitRoleId == docUnitRoleInCharge.DocUnitRoleId || du.DocUnitRoleId == docUnitRoleControlling.DocUnitRoleId).ToList());
-                    //}
-                    //else if (doc.DocEntryType.Alias == "Document")
-                    //{
-                    //    DocUnitRole docUnitRoleTo = this.unitOfWork.Repo<DocUnitRole>().GetByAlias("To");
-                    //    docUnits.AddRange(doc.DocUnits.Where(du => du.DocUnitRoleId == docUnitRoleTo.DocUnitRoleId).ToList());
-                    //}
-
-                    //if (docUnits.Count > 0)
-                    //{
-                    //    AdministrativeEmailType taskAssignedEmailType = this.unitOfWork.Repo<AdministrativeEmailType>().GetByAlias("ResolutionOrTaskAssigned");
-                    //    AdministrativeEmailStatus emailStatusNew = this.unitOfWork.Repo<AdministrativeEmailStatus>().GetByAlias("New");
-
-                    //    foreach (var docUnit in docUnits)
-                    //    {
-                    //        User toUser = this.unitOfWork.Repo<User>().GetByUnitId(docUnit.UnitId);
-                    //        if (!String.IsNullOrWhiteSpace(toUser.Email))
-                    //        {
-                    //            AdministrativeEmail email = new AdministrativeEmail();
-                    //            email.TypeId = taskAssignedEmailType.AdministrativeEmailTypeId;
-                    //            email.UserId = toUser.UserId;
-                    //            email.Param1 = String.Format(Request.RequestUri.OriginalString.Replace(Request.RequestUri.PathAndQuery, "/#/docs/{0}"), doc.DocId);
-                    //            email.StatusId = emailStatusNew.AdministrativeEmailStatusId;
-                    //            email.Subject = taskAssignedEmailType.Subject;
-                    //            email.Body = taskAssignedEmailType.Body.Replace("@@Param1", email.Param1);
-
-                    //            this.unitOfWork.Repo<AdministrativeEmail>().Add(email);
-                    //        }
-                    //    }
-                    //}
-
-                    #endregion
-
                     break;
                 case "Finished":
                     newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Finished");
@@ -267,6 +224,7 @@ namespace Docs.Api.Repositories.DocRepository
             List<DocCasePartType> docCasePartTypes,
             int[] checkedIds,
             UserContext userContext,
+            out string targetDocStatusAlias,
             out List<DocRelation> docRelations)
         {
             Doc doc = this.Find(id,
@@ -275,7 +233,7 @@ namespace Docs.Api.Repositories.DocRepository
 
             if (doc == null)
             {
-                throw new Exception("Doc now found");
+                throw new Exception("Doc not found");
             }
 
             doc.EnsureForProperVersion(docVersion);
@@ -291,57 +249,17 @@ namespace Docs.Api.Repositories.DocRepository
                 case "Draft":
                     newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Prepared");
                     doc.DocStatusId = newDocStatus.DocStatusId;
+                    targetDocStatusAlias = "Prepared";
                     break;
                 case "Prepared":
                     newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Processed");
                     doc.DocStatusId = newDocStatus.DocStatusId;
-
-                    //resolution has only draft/finished status
-                    #region Sending ResolutionOrTaskAssigned mail
-                    //?
-                    //List<DocUnit> docUnits = new List<DocUnit>();
-
-                    //if (doc.DocEntryType.Alias == "Resolution" || doc.DocEntryType.Alias == "Task")
-                    //{
-                    //    DocUnitRole docUnitRoleInCharge = this.unitOfWork.Repo<DocUnitRole>().GetByAlias("InCharge");
-                    //    DocUnitRole docUnitRoleControlling = this.unitOfWork.Repo<DocUnitRole>().GetByAlias("Controlling");
-                    //    docUnits.AddRange(doc.DocUnits.Where(du => du.DocUnitRoleId == docUnitRoleInCharge.DocUnitRoleId || du.DocUnitRoleId == docUnitRoleControlling.DocUnitRoleId).ToList());
-                    //}
-                    //else if (doc.DocEntryType.Alias == "Document")
-                    //{
-                    //    DocUnitRole docUnitRoleTo = this.unitOfWork.Repo<DocUnitRole>().GetByAlias("To");
-                    //    docUnits.AddRange(doc.DocUnits.Where(du => du.DocUnitRoleId == docUnitRoleTo.DocUnitRoleId).ToList());
-                    //}
-
-                    //if (docUnits.Count > 0)
-                    //{
-                    //    AdministrativeEmailType taskAssignedEmailType = this.unitOfWork.Repo<AdministrativeEmailType>().GetByAlias("ResolutionOrTaskAssigned");
-                    //    AdministrativeEmailStatus emailStatusNew = this.unitOfWork.Repo<AdministrativeEmailStatus>().GetByAlias("New");
-
-                    //    foreach (var docUnit in docUnits)
-                    //    {
-                    //        User toUser = this.unitOfWork.Repo<User>().GetByUnitId(docUnit.UnitId);
-                    //        if (!String.IsNullOrWhiteSpace(toUser.Email))
-                    //        {
-                    //            AdministrativeEmail email = new AdministrativeEmail();
-                    //            email.TypeId = taskAssignedEmailType.AdministrativeEmailTypeId;
-                    //            email.UserId = toUser.UserId;
-                    //            email.Param1 = String.Format(Request.RequestUri.OriginalString.Replace(Request.RequestUri.PathAndQuery, "/#/docs/{0}"), doc.DocId);
-                    //            email.StatusId = emailStatusNew.AdministrativeEmailStatusId;
-                    //            email.Subject = taskAssignedEmailType.Subject;
-                    //            email.Body = taskAssignedEmailType.Body.Replace("@@Param1", email.Param1);
-
-                    //            this.unitOfWork.Repo<AdministrativeEmail>().Add(email);
-                    //        }
-                    //    }
-                    //}
-
-                    #endregion
-
+                    targetDocStatusAlias = "Processed";
                     break;
                 case "Processed":
                     newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Finished");
                     doc.DocStatusId = newDocStatus.DocStatusId;
+                    targetDocStatusAlias = "Finished";
 
                     if (doc.IsCase)
                     {
@@ -403,7 +321,7 @@ namespace Docs.Api.Repositories.DocRepository
 
             if (doc == null)
             {
-                throw new Exception("Doc now found");
+                throw new Exception("Doc not found");
             }
 
             doc.EnsureForProperVersion(docVersion);
@@ -446,7 +364,7 @@ namespace Docs.Api.Repositories.DocRepository
 
             if (doc == null)
             {
-                throw new Exception("Doc now found");
+                throw new Exception("Doc not found");
             }
 
             doc.EnsureForProperVersion(docVersion);
@@ -487,7 +405,7 @@ namespace Docs.Api.Repositories.DocRepository
 
             if (doc == null)
             {
-                throw new Exception("Doc now found");
+                throw new Exception("Doc not found");
             }
 
             doc.EnsureForProperVersion(docVersion);
@@ -505,7 +423,7 @@ namespace Docs.Api.Repositories.DocRepository
 
             if (doc == null)
             {
-                throw new Exception("Doc now found");
+                throw new Exception("Doc not found");
             }
 
             doc.EnsureForProperVersion(docVersion);

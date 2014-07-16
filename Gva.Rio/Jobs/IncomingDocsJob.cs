@@ -59,7 +59,6 @@ namespace Gva.Rio.Jobs
             {
                 List<int> pendingIncomingDocs = null;
 
-
                 using (var unitOfWork = unitOfWorkFactory())
                 {
                     pendingIncomingDocs = unitOfWork.Value.DbContext.Set<IncomingDoc>()

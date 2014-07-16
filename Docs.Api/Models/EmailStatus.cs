@@ -1,32 +1,29 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
 {
-    public partial class AdministrativeEmailStatus
+    public partial class EmailStatus
     {
-        public AdministrativeEmailStatus()
+        public EmailStatus()
         {
-            this.AdministrativeEmails = new List<AdministrativeEmail>();
+            this.Emails = new List<Email>();
         }
 
-        public int AdministrativeEmailStatusId { get; set; }
-
+        public int EmailStatusId { get; set; }
         public string Name { get; set; }
-
         public string Alias { get; set; }
-
         public byte[] Version { get; set; }
-
-        public virtual ICollection<AdministrativeEmail> AdministrativeEmails { get; set; }
+        public virtual ICollection<Email> Emails { get; set; }
     }
 
-    public class AdministrativeEmailStatusMap : EntityTypeConfiguration<AdministrativeEmailStatus>
+    public class EmailStatusMap : EntityTypeConfiguration<EmailStatus>
     {
-        public AdministrativeEmailStatusMap()
+        public EmailStatusMap()
         {
             // Primary Key
-            this.HasKey(t => t.AdministrativeEmailStatusId);
+            this.HasKey(t => t.EmailStatusId);
 
             // Properties
             this.Property(t => t.Name)
@@ -43,8 +40,8 @@ namespace Docs.Api.Models
                 .IsRowVersion();
 
             // Table & Column Mappings
-            this.ToTable("AdministrativeEmailStatuses");
-            this.Property(t => t.AdministrativeEmailStatusId).HasColumnName("AdministrativeEmailStatusId");
+            this.ToTable("EmailStatuses");
+            this.Property(t => t.EmailStatusId).HasColumnName("EmailStatusId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.Version).HasColumnName("Version");

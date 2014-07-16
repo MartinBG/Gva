@@ -7,13 +7,18 @@ namespace Docs.Api.Models
     {
         public void AddConfiguration(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new AdministrativeEmailMap());
-            modelBuilder.Configurations.Add(new AdministrativeEmailStatusMap());
-            modelBuilder.Configurations.Add(new AdministrativeEmailTypeMap());
+            modelBuilder.Configurations.Add(new EmailAddresseeMap());
+            modelBuilder.Configurations.Add(new EmailAddresseeTypeMap());
+            modelBuilder.Configurations.Add(new EmailAttachmentMap());
+            modelBuilder.Configurations.Add(new EmailMap());
+            modelBuilder.Configurations.Add(new EmailStatusMap());
+            modelBuilder.Configurations.Add(new EmailTypeMap());
+
             modelBuilder.Configurations.Add(new CorrespondentContactMap());
             modelBuilder.Configurations.Add(new CorrespondentGroupMap());
             modelBuilder.Configurations.Add(new CorrespondentMap());
             modelBuilder.Configurations.Add(new CorrespondentTypeMap());
+
             modelBuilder.Configurations.Add(new DocCasePartMovementMap());
             modelBuilder.Configurations.Add(new DocCasePartTypeMap());
             modelBuilder.Configurations.Add(new DocClassificationMap());
@@ -45,9 +50,11 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new DocUnitMap());
             modelBuilder.Configurations.Add(new DocWorkflowActionMap());
             modelBuilder.Configurations.Add(new DocWorkflowMap());
+
             modelBuilder.Configurations.Add(new ElectronicServiceProviderMap());
             modelBuilder.Configurations.Add(new ElectronicServiceStageExecutorMap());
             modelBuilder.Configurations.Add(new ElectronicServiceStageMap());
+
             modelBuilder.Configurations.Add(new IncomingDocFileMap());
             modelBuilder.Configurations.Add(new IncomingDocMap());
             modelBuilder.Configurations.Add(new IncomingDocStatusMap());
