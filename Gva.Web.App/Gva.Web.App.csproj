@@ -252,6 +252,8 @@
     <Content Include="js\gva\airports\forms\airportDataCtrl.js" />
     <Content Include="js\gva\airports\forms\airportDocumentOther.html" />
     <Content Include="js\gva\airports\forms\airportDocumentOwner.html" />
+    <Content Include="js\gva\airports\modals\documents\chooseDocumentsModal.html" />
+    <Content Include="js\gva\airports\modals\documents\chooseDocumentsModalCtrl.js" />
     <Content Include="js\gva\airports\resources\airportApplications.js" />
     <Content Include="js\gva\airports\resources\airportCertOperationals.js" />
     <Content Include="js\gva\airports\resources\airportDocumentApplications.js" />
@@ -275,8 +277,6 @@
     <Content Include="js\gva\airports\views\certOpers\opersNewCtrl.js" />
     <Content Include="js\gva\airports\views\certOpers\opersSearch.html" />
     <Content Include="js\gva\airports\views\certOpers\opersSearchCtrl.js" />
-    <Content Include="js\gva\airports\views\chooseDocuments\chooseDocuments.html" />
-    <Content Include="js\gva\airports\views\chooseDocuments\chooseDocumentsCtrl.js" />
     <Content Include="js\gva\airports\views\documentApplications\docApplicationsEdit.html" />
     <Content Include="js\gva\airports\views\documentApplications\docApplicationsEditCtrl.js" />
     <Content Include="js\gva\airports\views\documentApplications\docApplicationsNew.html" />
@@ -383,6 +383,8 @@
     <Content Include="js\gva\equipments\forms\equipmentData.html" />
     <Content Include="js\gva\equipments\forms\equipmentDocumentOther.html" />
     <Content Include="js\gva\equipments\forms\equipmentDocumentOwner.html" />
+    <Content Include="js\gva\equipments\modals\documents\chooseDocumentsModal.html" />
+    <Content Include="js\gva\equipments\modals\documents\chooseDocumentsModalCtrl.js" />
     <Content Include="js\gva\equipments\resources\equipment.js" />
     <Content Include="js\gva\equipments\resources\equipmentApplication.js" />
     <Content Include="js\gva\equipments\resources\equipmentCertOperational.js" />
@@ -398,8 +400,6 @@
     <Content Include="js\gva\equipments\views\certOpers\opersNewCtrl.js" />
     <Content Include="js\gva\equipments\views\certOpers\opersSearch.html" />
     <Content Include="js\gva\equipments\views\certOpers\opersSearchCtrl.js" />
-    <Content Include="js\gva\equipments\views\chooseDocuments\chooseDocuments.html" />
-    <Content Include="js\gva\equipments\views\chooseDocuments\chooseDocumentsCtrl.js" />
     <Content Include="js\gva\equipments\views\documentApplications\docApplicationsEdit.html" />
     <Content Include="js\gva\equipments\views\documentApplications\docApplicationsEditCtrl.js" />
     <Content Include="js\gva\equipments\views\documentApplications\docApplicationsNew.html" />

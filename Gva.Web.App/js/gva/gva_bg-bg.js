@@ -154,10 +154,11 @@
           'new': 'Ново летище',
           search: 'Търси'
         },
-        chooseDocuments: {
-          save: 'Запис',
-          back: 'Назад',
-          filter: 'Търси',
+        chooseDocumentsModal: {
+          title: 'Избор на документи',
+          add: 'Добави',
+          cancel: 'Отказ',
+          search: 'Търси',
           bookPageNumber: '№ на страница',
           document: 'Документ',
           type: 'Вид',
@@ -434,10 +435,11 @@
           'new': 'Ново съоръжение',
           search: 'Търси'
         },
-        chooseDocuments: {
-          save: 'Запис',
-          back: 'Назад',
-          filter: 'Търси',
+        chooseDocumentsModal: {
+          title: 'Избор на документи',
+          add: 'Добави',
+          cancel: 'Отказ',
+          search: 'Търси',
           bookPageNumber: '№ на страница',
           document: 'Документ',
           type: 'Вид',

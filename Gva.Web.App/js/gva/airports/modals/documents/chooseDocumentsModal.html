@@ -1,0 +1,49 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="airports.chooseDocumentsModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="addBtn" btn-click="addDocs()" text="airports.chooseDocumentsModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="airports.chooseDocumentsModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <div class="row">
+      <div class="form-group col-sm-9">
+        <sc-nomenclature ng-model="searchParams.documentParts" alias="'documentParts'" multiple="multiple" params="{set: 'airport'}"></sc-nomenclature>
+      </div>
+      <sc-button name="searchBtn" btn-click="search()" text="airports.chooseDocumentsModal.search" class="btn btn-sm btn-primary" icon="glyphicon-search"></sc-button>
+    </div>
+
+  <sc-datatable items="docs" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+      <sc-column  sortable="false" class="buttons-cell" has-content="true">
+        <input type="checkbox" ng-checked="selectedDocuments | contains:item" sc-click="selectDoc($event, item)">
+      </sc-column>
+       <sc-column data="bookPageNumber" title="airports.chooseDocumentsModal.bookPageNumber">
+      </sc-column>
+      <sc-column data="name" title="airports.chooseDocumentsModal.document">
+      </sc-column>
+      <sc-column data="type" title="airports.chooseDocumentsModal.type">
+      </sc-column>
+      <sc-column data="number" title="airports.chooseDocumentsModal.docNumber">
+      </sc-column>
+      <sc-column data="date" title="airports.chooseDocumentsModal.date" type="date">
+      </sc-column>
+      <sc-column data="publisher" title="airports.chooseDocumentsModal.publisher">
+      </sc-column>
+      <sc-column data="valid" title="airports.chooseDocumentsModal.valid" type="boolean">
+      </sc-column>
+      <sc-column data="fromDate" title="airports.chooseDocumentsModal.fromDate" type="date">
+      </sc-column>
+      <sc-column data="toDate" title="airports.chooseDocumentsModal.toDate" type="date">
+      </sc-column>
+      <sc-column data="pageCount" title="airports.chooseDocumentsModal.pageCount">
+      </sc-column>
+      <sc-column sortable="false" title="airports.chooseDocumentsModal.file" has-content="true">
+        <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" ng-show="item.file" title="{{item.file.name}}">
+          <span class="glyphicon glyphicon-file"></span>
+        </a>
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>

@@ -14,10 +14,6 @@
     $scope.equipmentCertOper = equipmentCertOper;
     $scope.editMode = null;
 
-    if ($state.previous && $state.previous.includes[$state.current.name]) {
-      $scope.backFromChild = true;
-    }
-
     $scope.edit = function () {
       $scope.editMode = 'edit';
     };

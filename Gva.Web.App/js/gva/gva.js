@@ -679,9 +679,7 @@
       .state(['root.airports.view.opers'                        , '/opers'                                                                                                                                                                         ])
       .state(['root.airports.view.opers.search'                 , ''                                         , ['@root.airports.view', 'js/gva/airports/views/certOpers/opersSearch.html'                       , 'AirportOpersSearchCtrl'        ]])
       .state(['root.airports.view.opers.new'                    , '/new'                                     , ['@root.airports.view', 'js/gva/airports/views/certOpers/opersNew.html'                          , 'AirportOpersNewCtrl'           ]])
-      .state(['root.airports.view.opers.new.chooseDocuments'    , '/chooseDocuments?documentTypes'           , ['@root.airports.view', 'js/gva/airports/views/chooseDocuments/chooseDocuments.html'             , 'AirportsChooseDocumentsCtrl'   ]])
       .state(['root.airports.view.opers.edit'                   , '/:ind'                                    , ['@root.airports.view', 'js/gva/airports/views/certOpers/opersEdit.html'                         , 'AirportOpersEditCtrl'          ]])
-      .state(['root.airports.view.opers.edit.chooseDocuments'   , '/chooseDocuments?documentTypes'           , ['@root.airports.view', 'js/gva/airports/views/chooseDocuments/chooseDocuments.html'             , 'AirportsChooseDocumentsCtrl'   ]])
       .state(['root.airports.view.applications'                 , '/applications'                                                                                                                                                                  ])
       .state(['root.airports.view.applications.search'          , ''                                         , ['@root.airports.view', 'js/gva/airports/views/documentApplications/docApplicationsSearch.html'  , 'AirportApplicationsSearchCtrl' ]])
       .state(['root.airports.view.applications.new'             , '/new'                                     , ['@root.airports.view', 'js/gva/airports/views/documentApplications/docApplicationsNew.html'     , 'AirportApplicationsNewCtrl'    ]])
@@ -691,6 +689,9 @@
       .state(['root.airports.view.inspections.new'              , '/new'                                     , ['@root.airports.view', 'js/gva/airports/views/inspections/airportsInspectionsNew.html'          , 'AirportsInspectionsNewCtrl'    ]])
       .state(['root.airports.view.inspections.edit'             , '/:ind'                                    , ['@root.airports.view', 'js/gva/airports/views/inspections/airportsInspectionsEdit.html'         , 'AirportsInspectionsEditCtrl'   ]])
       .state(['root.airports.view.inventory'                    , '/inventory'                               , ['@root.airports.view', 'js/gva/airports/views/inventory/inventorySearch.html'                   , 'AirportInventorySearchCtrl'    ]]);
+    }]).config(['namedModalProvider', function (namedModalProvider) {
+      namedModalProvider
+      .modal('chooseAirportsDocs', 'js/gva/airports/modals/documents/chooseDocumentsModal.html', 'ChooseAirportDocsModalCtrl');
     }]).config(['$stateProvider', function ($stateProvider) {
       $stateProvider
       .state(['root.equipments'                                 , '/equipments?name'                                                                                                                                                                    ])
@@ -709,9 +710,7 @@
       .state(['root.equipments.view.opers'                      , '/opers'                                                                                                                                                                              ])
       .state(['root.equipments.view.opers.search'               , ''                                         , ['@root.equipments.view', 'js/gva/equipments/views/certOpers/opersSearch.html'                       , 'EquipmentOpersSearchCtrl'       ]])
       .state(['root.equipments.view.opers.new'                  , '/new'                                     , ['@root.equipments.view', 'js/gva/equipments/views/certOpers/opersNew.html'                          , 'EquipmentOpersNewCtrl'          ]])
-      .state(['root.equipments.view.opers.new.chooseDocuments'  , '/chooseDocuments?documentTypes'           , ['@root.equipments.view', 'js/gva/equipments/views/chooseDocuments/chooseDocuments.html'             , 'EquipmentsChooseDocumentsCtrl'  ]])
       .state(['root.equipments.view.opers.edit'                 , '/:ind'                                    , ['@root.equipments.view', 'js/gva/equipments/views/certOpers/opersEdit.html'                         , 'EquipmentOpersEditCtrl'         ]])
-      .state(['root.equipments.view.opers.edit.chooseDocuments' , '/chooseDocuments?documentTypes'           , ['@root.equipments.view', 'js/gva/equipments/views/chooseDocuments/chooseDocuments.html'             , 'EquipmentsChooseDocumentsCtrl'  ]])
       .state(['root.equipments.view.applications'               , '/applications'                                                                                                                                                                       ])
       .state(['root.equipments.view.applications.search'        , ''                                         , ['@root.equipments.view', 'js/gva/equipments/views/documentApplications/docApplicationsSearch.html'  , 'EquipmentApplicationsSearchCtrl']])
       .state(['root.equipments.view.applications.new'           , '/new'                                     , ['@root.equipments.view', 'js/gva/equipments/views/documentApplications/docApplicationsNew.html'     , 'EquipmentApplicationsNewCtrl'   ]])
@@ -721,5 +720,8 @@
       .state(['root.equipments.view.inspections.new'            , '/new'                                     , ['@root.equipments.view', 'js/gva/equipments/views/inspections/equipmentsInspectionsNew.html'        , 'EquipmentsInspectionsNewCtrl'   ]])
       .state(['root.equipments.view.inspections.edit'           , '/:ind'                                    , ['@root.equipments.view', 'js/gva/equipments/views/inspections/equipmentsInspectionsEdit.html'       , 'EquipmentsInspectionsEditCtrl'  ]])
       .state(['root.equipments.view.inventory'                  , '/inventory'                               , ['@root.equipments.view', 'js/gva/equipments/views/inventory/inventorySearch.html'                   , 'EquipmentInventorySearchCtrl'   ]]);
-    }]);
+    }]).config(['namedModalProvider', function (namedModalProvider) {
+    namedModalProvider
+    .modal('chooseEquipmentsDocs', 'js/gva/equipments/modals/documents/chooseDocumentsModal.html', 'ChooseEquipmentsDocsModalCtrl');
+  }]);
 }(angular));

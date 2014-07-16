@@ -1,7 +1,7 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular,_*/
+(function (angular,_) {
   'use strict';
-  function EquipmentCertOperationalCtrl($scope, $state) {
+  function EquipmentCertOperationalCtrl($scope, $state, namedModal) {
 
     $scope.deleteDocument = function (document) {
       var index = $scope.model.includedDocuments.indexOf(document);
@@ -9,17 +9,16 @@
     };
 
     $scope.chooseDocuments = function () {
-      $state.go('.chooseDocuments', {}, {}, {
-        selectedDocuments: $scope.model.includedDocuments
+      var modalInstance = namedModal.open('chooseEquipmentsDocs', {
+        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex')
       });
-    };
 
-    // coming from a child state and carrying payload
-    if ($state.previous && $state.previous.includes[$state.current.name] && $state.payload) {
-      if ($state.payload.selectedDocuments) {
-        [].push.apply($scope.model.includedDocuments, $state.payload.selectedDocuments);
-      }
-    }
+      modalInstance.result.then(function (selectedDocs) {
+        $scope.model.includedDocuments = $scope.model.includedDocuments.concat(selectedDocs);
+      });
+
+      return modalInstance.opened;
+    };
 
     $scope.viewDocument = function (document) {
       var state;
@@ -38,7 +37,7 @@
     };
   }
 
-  EquipmentCertOperationalCtrl.$inject = ['$scope','$state'];
+  EquipmentCertOperationalCtrl.$inject = ['$scope', '$state', 'namedModal'];
 
   angular.module('gva').controller('EquipmentCertOperationalCtrl', EquipmentCertOperationalCtrl);
-}(angular));
+}(angular,_));
