@@ -1,16 +1,16 @@
-<ng-form name="certAirCarrierForm" sc-validate="{}" sc-form-readonly="!editMode && !backFromChild">
+<ng-form name="certAirCarrierForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="organizations.editCertAirCarrier.title"></strong>
 
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="organizations.editCertAirCarrier.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild">
+        <sc-button name="editBtn" btn-click="edit()" text="organizations.editCertAirCarrier.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteCertAirCarrier()" text="organizations.editCertAirCarrier.deleteCertOp" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild">
+        <sc-button name="deleteBtn" btn-click="deleteCertAirCarrier()" text="organizations.editCertAirCarrier.deleteCertOp" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="organizations.editCertAirCarrier.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.editCertAirCarrier.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editCertAirCarrier.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editCertAirCarrier.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>

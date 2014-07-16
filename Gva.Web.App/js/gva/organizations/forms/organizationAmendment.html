@@ -31,19 +31,17 @@
           </td>
           <td>
             <div class="input-group input-group-sm">
-              <sc-text ng-model="limitation.lim147limitation" ng-readonly="form.$readonly"></sc-text> <span class="input-group-btn">
-
+              <sc-text ng-model="limitation.lim147limitation" ng-readonly="form.$readonly"></sc-text>
+              <span class="input-group-btn">
                 <sc-button class="btn btn-default" btn-click="chooseLimitation({index: $index, alias: 'lim147limitations'})" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
-
               </span>
-
             </div>
           </td>
           <td>
             <sc-text ng-model="limitation.lim147limitationText" ng-readonly="form.$readonly"></sc-text>
           </td>
           <td style="text-align: right; width: 1px;">
-            <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteLimitation147(limitation)" icon="glyphicon-remove" ng-disabled="form.$readonly"></sc-button>
+            <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteLimitation147($index)" icon="glyphicon-remove" ng-disabled="form.$readonly"></sc-button>
           </td>
         </tr>
         <tr ng-repeat-end=""></tr>
@@ -77,7 +75,7 @@
             <div class="input-group input-group-sm">
               <sc-text ng-model="limitation.lim145limitation" ng-readonly="form.$readonly"></sc-text>
               <span class="input-group-btn">
-                <sc-button class="btn btn-default" btn-click="$parent.chooseLimitation({index: $index, alias: 'lim145limitations'})" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
+                <sc-button class="btn btn-default" btn-click="chooseLimitation({index: $index, alias: 'lim145limitations'})" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
               </span>
             </div>
           </td>
@@ -91,7 +89,7 @@
             <sc-nomenclature ng-model="limitation.line" alias="'boolean'" ng-readonly="form.$readonly"></sc-nomenclature>
           </td>
           <td style="text-align: right; width: 1px;">
-            <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteLimitation145(limitation)" icon="glyphicon-remove" ng-disabled="form.$readonly"></sc-button>
+            <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteLimitation145($index)" icon="glyphicon-remove" ng-disabled="form.$readonly"></sc-button>
           </td>
         </tr>
         <tr ng-repeat-end=""></tr>
@@ -122,10 +120,12 @@
       <tbody>
         <tr ng-repeat-start="limitation in model.limsMG">
           <td>
-            <sc-text ng-model="limitation.aircraftTypeGroup" ng-readonly="form.$readonly"></sc-text>
-            <span class="input-group-btn">
-              <sc-button class="btn btn-default" btn-click="$parent.chooseLimitation({index: $index, alias: 'aircraftTypeGroups'})" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
-            </span>
+            <div class="input-group input-group-sm">
+              <sc-text ng-model="limitation.aircraftTypeGroup" ng-readonly="form.$readonly"></sc-text>
+              <span class="input-group-btn">
+                <sc-button class="btn btn-default" btn-click="chooseLimitation({index: $index, alias: 'aircraftTypeGroups'})" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
+              </span>
+            </div>
           </td>
           <td>
             <sc-text ng-model="limitation.qualitySystem" ng-readonly="form.$readonly"></sc-text>
@@ -137,7 +137,7 @@
             <sc-nomenclature ng-model="limitation.pfapproval" alias="'boolean'" ng-readonly="form.$readonly"></sc-nomenclature>
           </td>
           <td style="text-align: right; width: 1px;">
-            <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteLimitationMG(limitation)" icon="glyphicon-remove" ng-disabled="form.$readonly"></sc-button>
+            <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteLimitationMG($index)" icon="glyphicon-remove" ng-disabled="form.$readonly"></sc-button>
           </td>
         </tr>
         <tr ng-repeat-end=""></tr>
@@ -174,13 +174,13 @@
         <td>
           <sc-nomenclature ng-model="document.inspector" alias="'inspectors'" ng-readonly="form.$readonly"></sc-nomenclature>
         </td>
-        <td class="col-sm-3 col-md-2">
+        <td>
           <sc-date ng-model="document.approvalDate" ng-readonly="form.$readonly"></sc-date>
         </td>
-        <td class="col-sm-5 col-md-4">
+        <td>
           <input type="hidden" ng-model="document.linkedLim" class="input-sm select2input" ui-select2="select2Options" ng-readonly="form.$readonly">
         </td>
-        <td class="col-sm-3 col-md-3">
+        <td>
           <a class="glyphicon glyphicon-file" ng-click="viewDocument(document)"></a>
         </td>
         <td style="text-align: right; width: 1px;">

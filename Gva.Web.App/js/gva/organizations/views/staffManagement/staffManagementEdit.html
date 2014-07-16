@@ -1,16 +1,16 @@
-<ng-form name="editStaffManagement" sc-validate="{}" sc-form-readonly="!editMode && !backFromChild">
+<ng-form name="editStaffManagement" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="organizations.editStaffManagement.title"></strong>
 
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="organizations.editStaffManagement.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild">
+        <sc-button name="editBtn" btn-click="edit()" text="organizations.editStaffManagement.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteStaffManagement()" text="organizations.editStaffManagement.deleteStaffMng" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild">
+        <sc-button name="deleteBtn" btn-click="deleteStaffManagement()" text="organizations.editStaffManagement.deleteStaffMng" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="organizations.editStaffManagement.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.editStaffManagement.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editStaffManagement.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editStaffManagement.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>

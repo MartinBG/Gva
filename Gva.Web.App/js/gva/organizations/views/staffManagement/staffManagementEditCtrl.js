@@ -7,25 +7,12 @@
     $state,
     $stateParams,
     OrganizationStaffManagements,
-    organizationStaffManagement,
-    selectedEmployment
+    organizationStaffManagement
   ) {
     var originalStaffManagement = _.cloneDeep(organizationStaffManagement);
 
     $scope.organizationStaffManagement = organizationStaffManagement;
-    var employment = selectedEmployment.pop();
-    if(employment) {
-      $scope.organizationStaffManagement.part.position = employment;
-    } else {
-      $scope.organizationStaffManagement.part.position = organizationStaffManagement.part ?
-        organizationStaffManagement.part.position : '';
-    }
-      
     $scope.editMode = null;
-
-    if ($state.previous && $state.previous.includes[$state.current.name]) {
-      $scope.backFromChild = true;
-    }
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -60,10 +47,6 @@
           return $state.go('root.organizations.view.staffManagement.search');
         });
     };
-
-    $scope.chooseEmployment = function () {
-      return $state.go('.chooseEmployment');
-    };
   }
 
   StaffManagementEditCtrl.$inject = [
@@ -71,8 +54,7 @@
     '$state',
     '$stateParams',
     'OrganizationStaffManagements',
-    'organizationStaffManagement',
-    'selectedEmployment'
+    'organizationStaffManagement'
   ];
 
   StaffManagementEditCtrl.$resolve = {
@@ -85,10 +67,7 @@
           ind: $stateParams.ind
         }).$promise;
       }
-    ],
-    selectedEmployment: function () {
-      return [];
-    }
+    ]
   };
 
   angular.module('gva').controller('StaffManagementEditCtrl', StaffManagementEditCtrl);

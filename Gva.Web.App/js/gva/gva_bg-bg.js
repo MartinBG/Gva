@@ -2750,22 +2750,24 @@
         },
         organizationSelect: {
           organization: 'Организация',
-          newOrganization: 'Нова организация',
-          uin: 'БУЛСТАТ',
+          newOrganization: 'Нова организация'
+        },
+        chooseOrganizationModal: {
+          title: 'Избор на организация',
+          cancel: 'Отказ',
           name: 'Наименование',
+          uin: 'БУЛСТАТ',
           CAO: 'CAO',
           dateValidTo: 'Валидност до',
           dateCAOValidTo: 'САО - дата на валидност',
-          valid: 'Валидност',
-          organizationType: 'Тип организация',
           search: 'Търси',
-          cancel: 'Отказ',
           select: 'Избери',
-          viewOrganization: 'Преглед'
+          organizationType: 'Тип организация',
+          valid: 'Валидност'
         },
-        organizationNew: {
+        newOrganizationModal: {
           title: 'Нова организация',
-          saveAndSelect: 'Запис и избор',
+          save: 'Запис',
           cancel: 'Отказ'
         },
         corrSelect: {
@@ -2906,10 +2908,11 @@
           file: 'Файл',
           notIndexed: 'Документи извън описа'
         },
-        chooseDocuments: {
-          save: 'Запис',
-          back: 'Назад',
-          filter: 'Търси',
+        chooseDocumentsModal: {
+          title: 'Избор на документи',
+          add: 'Добави',
+          cancel: 'Отказ',
+          search: 'Търси',
           bookPageNumber: '№ на страница',
           document: 'Документ',
           type: 'Вид',
@@ -2922,10 +2925,26 @@
           pageCount: 'Бр. стр.',
           file: 'Файл'
         },
-        chooseEmployment: {
+        chooseLimitationModal: {
+          title: 'Избор на ограничение',
+          cancel: 'Отказ',
+          name: 'Наименование',
+          select: 'Избери'
+        },
+        chooseEmploymentModal: {
+          title: 'Избор на длъжност',
           name: 'Наименование',
           select: 'Избери',
-          back: 'Назад'
+          cancel: 'Отказ'
+        },
+        chooseInspectionsModal: {
+          title: 'Избор на одити',
+          add: 'Добави',
+          cancel: 'Отказ',
+          documentNumber: '№ на документ',
+          subject: 'Предмет на одит',
+          inspectionFrom: 'Начална дата на изпълнение на одита',
+          inspectionTo: 'Крайна дата на изпълнение на одита'
         },
         editCertAirportOperator: {
           title: 'Преглед на лиценз на летищен оператор',
@@ -3214,18 +3233,6 @@
           documentNumberAmendment: 'Референтен № на описание на изменение',
           save: 'Запис',
           cancel: 'Отказ'
-        },
-        chooseLimitation: {
-          name: 'Наименование',
-          select: 'Избери'
-        },
-        chooseAudits: {
-          save: 'Запис',
-          back: 'Назад',
-          inspectionFrom: 'Начална дата на изпълнение на одита',
-          inspectionTo: 'Крайна дата на изпълнение на одита',
-          subject: 'Предмет на одит',
-          documentNumber: '№ на документ'
         },
         organizationOtherDirective: {
           documentNumber: 'Док No',
@@ -3606,8 +3613,6 @@
       states: {
         'root.applications': 'Заявления',
         'root.applications.new': 'Ново заявление',
-        'root.applications.new.organizationSelect': 'Избор на организация',
-        'root.applications.new.organizationNew': 'Нова организация',
         'root.applications.new.aircraftSelect': 'Избор на ВС',
         'root.applications.new.aircraftNew': 'Ново ВС',
         'root.applications.new.airportSelect': 'Избор на летище',
@@ -3618,8 +3623,6 @@
         'root.applications.new.corrNew': 'Нов кореспондент',
         'root.applications.link': 'Свържи заявление',
         'root.applications.link.docSelect': 'Избор на документ',
-        'root.applications.link.organizationSelect': 'Избор на организация',
-        'root.applications.link.organizationNew': 'Нова организация',
         'root.applications.link.aircraftSelect': 'Избор на ВС',
         'root.applications.link.aircraftNew': 'Ново ВС',
         'root.applications.link.airportSelect': 'Избор на летище',
@@ -3793,11 +3796,7 @@
           'Преглед на удостоверение',
         'root.organizations.view.recommendations': 'Доклад от препоръки',
         'root.organizations.view.recommendations.new': 'Нов доклад от препоръки',
-        'root.organizations.view.recommendations.new.chooseAudits': 'Избор на одити',
-        'root.organizations.view.recommendations.new.editDisparity': 'Преглед на несъответствие',
         'root.organizations.view.recommendations.edit': 'Преглед на доклад от препоръки',
-        'root.organizations.view.recommendations.edit.chooseAudits': 'Избор на одити',
-        'root.organizations.view.recommendations.edit.editDisparity': 'Преглед на несъответствие',
         'root.organizations.view.inspections': 'Одит',
         'root.organizations.view.inspections.new': 'Нов одит',
         'root.organizations.view.inspections.edit': 'Преглед на одит',

@@ -6,62 +6,68 @@
     $state,
     $stateParams,
     OrganizationInspections,
-    Nomenclatures) {
-
+    Nomenclatures,
+    namedModal
+    ) {
+    $scope.auditorsReview = {
+      auditDetails: [],
+      disparities: []
+    };
     $scope.watchList = [];
-    $scope.model.part.auditorsReview.auditDetails = [];
-    $scope.model.part.auditorsReview.disparities = [];
+
+    var fillAuditorsReview = function (inspections) {
+      $scope.auditorsReview.auditDetails = [];
+      $scope.auditorsReview.disparities = [];
+
+      _.each($scope.model.part.includedAudits, function (ind) {
+        var inspection = _.find(inspections, { partIndex: ind });
+
+        _.each(inspection.part.auditDetails, function (detail) {
+          detail.auditPart = inspection.part.auditPart;
+        });
+
+        _.each(inspection.part.disparities, function (disparity) {
+          disparity.partIndex = inspection.partIndex;
+          disparity.auditPart = inspection.part.auditPart;
+        });
+
+        $scope.auditorsReview.auditDetails = $scope.auditorsReview.auditDetails
+          .concat(inspection.part.auditDetails);
+        $scope.auditorsReview.disparities = $scope.auditorsReview.disparities
+          .concat(inspection.part.disparities);
+      });
+    };
+
+    OrganizationInspections.query({ id: $stateParams.id }).$promise.then(function (inspections) {
+      var unbindWatcher = $scope.$watch('model', function () {
+        if (!$scope.model) {
+          return;
+        }
+
+        fillAuditorsReview(inspections);
+        unbindWatcher();
+      });
+    });
 
     $scope.chooseAudits = function () {
-      $state.go('.chooseAudits', {}, {}, {
-        selectedAudits: $scope.model.part.includedAudits
+      var modalInstance = namedModal.open('chooseInspections', {
+        includedInspections: $scope.model.part.includedAudits
       });
+
+      modalInstance.result.then(function (selectedInspections) {
+        $scope.model.part.includedAudits = _.pluck(selectedInspections, 'partIndex');
+        fillAuditorsReview(selectedInspections);
+      });
+
+      return modalInstance.opened;
     };
-
-    // coming from a child state and carrying payload
-    if ($state.previous && $state.previous.includes[$state.current.name] && $state.payload) {
-      if ($state.payload.selectedAudits) {
-        $scope.model.part.includedAudits = [];
-        [].push.apply($scope.model.part.includedAudits, $state.payload.selectedAudits);
-      }
-    }
-
-    if ($scope.model.part.includedAudits.length > 0) {
-      $scope.model.part.auditorsReview = {
-        auditDetails: [],
-        disparities: []
-      };
-      _.each($scope.model.part.includedAudits, function (auditPartIndex) {
-        OrganizationInspections.get({
-          id: $stateParams.id,
-          ind: auditPartIndex
-        }).$promise.then(function (audit) {
-
-          _.each(audit.part.auditDetails, function (detail) {
-            detail.auditPart = audit.part.auditPart;
-          });
-
-          _.each(audit.part.disparities, function (disparity) {
-            disparity.partIndex = audit.partIndex;
-            disparity.auditPart = audit.part.auditPart;
-          });
-
-          $scope.model.part.auditorsReview.auditDetails =
-            _.union($scope.model.part.auditorsReview.auditDetails, audit.part.auditDetails);
-          $scope.model.part.auditorsReview.disparities =
-            _.union($scope.model.part.auditorsReview.disparities, audit.part.disparities);
-        });
-      });
-    }
 
     $scope.editDisparity = function (disparity) {
-      return $state.go($state.current.name + '.editDisparity', {
+      return $state.go('root.organizations.view.inspections.edit', {
         id: $stateParams.id,
-        ind: $stateParams.ind,
-        childInd: disparity.partIndex
+        ind: disparity.partIndex
       });
     };
-
 
     $scope.insertAuditDetails = function () {
       return Nomenclatures.query({
@@ -142,8 +148,14 @@
     };
   }
 
-  OrganizationRecommendationCtrl.$inject =
-    ['$scope', '$state', '$stateParams', 'OrganizationInspections', 'Nomenclatures'];
+  OrganizationRecommendationCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'OrganizationInspections',
+    'Nomenclatures',
+    'namedModal'
+  ];
 
   angular.module('gva')
     .controller('OrganizationRecommendationCtrl', OrganizationRecommendationCtrl);

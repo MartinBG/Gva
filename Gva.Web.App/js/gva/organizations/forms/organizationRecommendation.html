@@ -66,13 +66,13 @@
 
     <gva-organization-recommendation-auditor ng-model="model.part.part1" name="examinersForm1"></gva-organization-recommendation-auditor>
   </div>
-  <h5 class="form-header" style="margin-top:10px;" ng-init="auditorsReview = false">
-    <a l10n-text="organizations.recommendationDirective.auditorsReview.title" ng-click="auditorsReview = !auditorsReview" style="cursor:pointer;"></a>
+  <h5 class="form-header" style="margin-top:10px;" ng-init="showAuditorsReview = false">
+    <a l10n-text="organizations.recommendationDirective.auditorsReview.title" ng-click="showAuditorsReview = !showAuditorsReview" style="cursor:pointer;"></a>
   </h5>
 
-  <div ng-show="auditorsReview">
+  <div ng-show="showAuditorsReview">
     <sc-button name="chooseAuditsBtn" type="button" btn-click="chooseAudits()" class="btn btn-primary btn-sm" icon="glyphicon-plus" text="organizations.recommendationDirective.auditorsReview.chooseAudits" ng-disabled="form.$readonly"></sc-button>
-    <sc-datatable items="model.part.auditorsReview.auditDetails" filterable="false" pageable="true" sortable="true" dynamic-columns="false">
+    <sc-datatable items="auditorsReview.auditDetails" filterable="false" pageable="true" sortable="true" dynamic-columns="false">
       <sc-column data="auditPart.name" title="organizations.recommendationDirective.auditorsReview.auditPart"></sc-column>
       <sc-column data="subject" title="organizations.recommendationDirective.auditorsReview.subject"></sc-column>
       <sc-column data="auditResult.name" title="organizations.recommendationDirective.auditorsReview.auditResult"></sc-column>
@@ -152,11 +152,10 @@
           <th l10n-text="organizations.recommendationDirective.disparities.closureDate"></th>
           <th l10n-text="organizations.recommendationDirective.disparities.rectifyAction"></th>
           <th l10n-text="organizations.recommendationDirective.disparities.closureDocument"></th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="disparity in model.part.auditorsReview.disparities">
+        <tr ng-repeat="disparity in auditorsReview.disparities">
           <td class="col-sm-1 col-md-1">{{disparity.sortOrder}}</td>
           <td class="col-sm-3 col-md-2">{{disparity.subject}}</td>
           <td>{{disparity.refNumber}}</td>
@@ -170,7 +169,7 @@
             <sc-button name="editBtn" btn-click="editDisparity(disparity)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-disabled="form.$readonly"></sc-button>
           </td>
         </tr>
-        <tr class="sort-disabled" ng-if="!model.part.auditorsReview.disparities.length">
+        <tr class="sort-disabled" ng-if="!auditorsReview.disparities.length">
           <td colspan="8" l10n-text="organizations.recommendationDirective.disparities.noAvailableDisparities"></td>
         </tr>
       </tbody>

@@ -11,7 +11,6 @@
     PersonsInfo,
     OrganizationsData,
     appModel,
-    selectedOrganization,
     selectedAircraft,
     selectedAirport,
     selectedEquipment,
@@ -19,12 +18,6 @@
     ) {
     if (selectedCorrs.current.length > 0) {
       appModel.doc.docCorrespondents.push(selectedCorrs.current.pop());
-    }
-
-    if (selectedOrganization.length > 0) {
-      appModel.lot = {
-        id: selectedOrganization.pop()
-      };
     }
     if (selectedAircraft.length > 0) {
       appModel.lot = {
@@ -54,13 +47,6 @@
     $scope.appModel = appModel;
     $scope.filter = $stateParams.filter;
     $scope.setPartAlias = '';
-
-    $scope.newOrganization = function () {
-      return $state.go('root.applications.new.organizationNew');
-    };
-    $scope.selectOrganization = function () {
-      return $state.go('root.applications.new.organizationSelect');
-    };
 
     $scope.newAircraft = function () {
       return $state.go('root.applications.new.aircraftNew');
@@ -220,7 +206,6 @@
     'PersonsInfo',
     'OrganizationsData',
     'appModel',
-    'selectedOrganization',
     'selectedAircraft',
     'selectedAirport',
     'selectedEquipment',
@@ -262,9 +247,6 @@
         });
       }
     ],
-    selectedOrganization: function () {
-      return [];
-    },
     selectedAircraft: function () {
       return [];
     },

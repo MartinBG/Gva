@@ -1,0 +1,25 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="organizations.chooseInspectionsModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="addBtn" btn-click="addInspections()" text="organizations.chooseInspectionsModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="organizations.chooseInspectionsModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <sc-datatable items="inspections" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+     <sc-column  sortable="false" class="buttons-cell" has-content="true">
+       <input type="checkbox" ng-model="item.checked">
+     </sc-column>
+     <sc-column data="part.documentNumber" title="organizations.chooseInspectionsModal.documentNumber">
+     </sc-column>
+     <sc-column data="part.subject" title="organizations.chooseInspectionsModal.subject">
+     </sc-column>
+     <sc-column data="part.startDate" title="organizations.chooseInspectionsModal.inspectionFrom" type="date">
+     </sc-column>
+     <sc-column data="part.endDate" title="organizations.chooseInspectionsModal.inspectionTo" type="date">
+     </sc-column>
+   </sc-datatable>
+  </div>
+</div>

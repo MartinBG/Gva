@@ -13,7 +13,7 @@
             <gva-common-select-person name="personForm" ng-model="appModel" sc-data-new-class="'col-sm-10'"></gva-common-select-person>
           </div>
           <div ng-if="filter === 'Organization'">
-            <gva-application-select-organization name="organizationForm" ng-model="appModel" sc-on-select-organization="selectOrganization()" sc-on-new-organization="newOrganization()"></gva-application-select-organization>
+            <gva-application-select-organization name="organizationForm" ng-model="appModel"></gva-application-select-organization>
           </div>
           <div ng-if="filter === 'Aircraft'">
             <gva-application-select-aircraft name="aircraftForm" ng-model="appModel" sc-on-select-aircraft="selectAircraft()" sc-on-new-aircraft="newAircraft()"></gva-application-select-aircraft>

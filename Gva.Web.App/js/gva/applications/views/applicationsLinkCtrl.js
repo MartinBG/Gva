@@ -10,17 +10,11 @@
     $sce,
     Applications,
     appModel,
-    selectedOrganization,
     selectedAircraft,
     selectedAirport,
     selectedEquipment,
     selectedDoc
     ) {
-    if (selectedOrganization.length > 0) {
-      appModel.lot = {
-        id: selectedOrganization.pop()
-      };
-    }
     if (selectedAircraft.length > 0) {
       appModel.lot = {
         id: selectedAircraft.pop()
@@ -45,29 +39,6 @@
     $scope.appModel = appModel;
     $scope.filter = $stateParams.filter;
     $scope.setPartAlias = '';
-
-    $scope.newOrganization = function () {
-      var organizationData = {};
-      if ($scope.appModel.doc) {
-        if ($scope.appModel.doc.docCorrespondents.length > 0) {
-          organizationData.name = $scope.appModel.doc.docCorrespondents[0].legalEntityName;
-          organizationData.uin = $scope.appModel.doc.docCorrespondents[0].legalEntityBulstat;
-        }
-      }
-
-      return $state.go('root.applications.link.organizationNew', null, null, organizationData);
-    };
-    $scope.selectOrganization = function () {
-      var uin, name;
-      if ($scope.appModel.doc) {
-        if ($scope.appModel.doc.docCorrespondents.length > 0) {
-          uin = $scope.appModel.doc.docCorrespondents[0].legalEntityBulstat;
-          name = $scope.appModel.doc.docCorrespondents[0].legalEntityName;
-        }
-      }
-
-      return $state.go('root.applications.link.organizationSelect', { uin: uin, name: name });
-    };
 
     $scope.newAircraft = function () {
       return $state.go('root.applications.link.aircraftNew');
@@ -158,7 +129,6 @@
     '$sce',
     'Applications',
     'appModel',
-    'selectedOrganization',
     'selectedAircraft',
     'selectedAirport',
     'selectedEquipment',
@@ -172,9 +142,6 @@
       };
     },
     selectedAircraft: function () {
-      return [];
-    },
-    selectedOrganization: function () {
       return [];
     },
     selectedAirport: function () {

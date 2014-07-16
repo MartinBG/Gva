@@ -1,31 +1,64 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function OrganizationAmendmentCtrl($scope, $state) {
-
-    $scope.deleteDocument = function (document) {
-      var index = $scope.model.includedDocuments.indexOf(document);
-      $scope.model.includedDocuments.splice(index, 1);
-    };
+  function OrganizationAmendmentCtrl($scope, $state, namedModal) {
     $scope.select2Options = {
       multiple: false,
       allowClear: true,
       placeholder: ' '
     };
-    
+
     var updateSelect2Options = function (limitations) {
-      $scope.select2Options.tags = [];
+      var select2Elem = angular.element('.select2input'),
+          currSelection = select2Elem.select2('val'),
+          tags = [],
+          newSelection;
+
       angular.forEach(limitations, function(lim){
         if(lim.lim147limitation) {
-          $scope.select2Options.tags.push(lim.lim147limitation);
+          tags.push(lim.lim147limitation);
         } else if(lim.lim145limitation) {
-          $scope.select2Options.tags.push(lim.lim145limitation);
+          tags.push(lim.lim145limitation);
         } else if (lim.aircraftTypeGroup) {
-          $scope.select2Options.tags.push(lim.aircraftTypeGroup);
+          tags.push(lim.aircraftTypeGroup);
         }
       });
 
-      angular.element('.select2input').select2($scope.select2Options);
+      newSelection = _.filter(currSelection, function (value) {
+        return _.contains(tags, value);
+      });
+
+      $scope.select2Options.tags = tags;
+      select2Elem.select2($scope.select2Options);
+      select2Elem.select2('val', newSelection);
+    };
+
+    $scope.deleteDocument = function (document) {
+      var index = $scope.model.includedDocuments.indexOf(document);
+      $scope.model.includedDocuments.splice(index, 1);
+    };
+
+    $scope.chooseDocuments = function () {
+      var modalInstance = namedModal.open('chooseOrganizationDocs', {
+        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex')
+      });
+
+      modalInstance.result.then(function (selectedDocs) {
+        $scope.model.includedDocuments = $scope.model.includedDocuments.concat(selectedDocs);
+      });
+    };
+
+    $scope.viewDocument = function (document) {
+      var state;
+
+      if (document.setPartAlias === 'organizationOther') {
+        state = 'root.organizations.view.documentOthers.edit';
+      }
+      else if (document.setPartAlias === 'organizationApplication') {
+        state = 'root.organizations.view.documentApplications.edit';
+      }
+
+      return $state.go(state, { ind: document.partIndex });
     };
 
     $scope.$watch('model.lims147.length', function () {
@@ -64,31 +97,31 @@
       }
     });
 
-    $scope.chooseDocuments = function () {
-      $state.go('.chooseDocuments', {}, {}, {
-        selectedDocuments: $scope.model.includedDocuments
+    $scope.chooseLimitation = function (section) {
+      var modalInstance = namedModal.open('chooseLimitation', {}, {
+        limitations: [
+          '$stateParams',
+          'Nomenclatures',
+          function ($stateParams, Nomenclatures) {
+            return Nomenclatures.query({
+              alias: section.alias
+            }).$promise;
+          }
+        ]
+      });
+
+      modalInstance.result.then(function (limitationName) {
+        if (section.alias === 'lim147limitations') {
+          $scope.model.lims147[section.index].lim147limitation = limitationName;
+        } else if (section.alias === 'lim145limitations') {
+          $scope.model.lims145[section.index].lim145limitation = limitationName;
+        } else if (section.alias === 'aircraftTypeGroups') {
+          $scope.model.limsMG[section.index].aircraftTypeGroup = limitationName;
+        }
       });
     };
 
-    $scope.$watch('model', function(){
-      if($scope.model){
-        if ($state.previous && $state.previous.includes[$state.current.name] && $state.payload) {
-          if ($state.payload.selectedDocuments) {
-            [].push.apply($scope.model.includedDocuments, $state.payload.selectedDocuments);
-          }
-        }
-      }
-    });
-    // coming from a child state and carrying payload
-    
-
-    $scope.chooseLimitation = function (section) {
-      return $state.go('.chooseLimitation',
-        {limitationAlias: section.alias, index: section.index});
-    };
-
-    $scope.deleteLimitation147 = function (limitation) {
-      var index = $scope.model.lims147.indexOf(limitation);
+    $scope.deleteLimitation147 = function (index) {
       $scope.model.lims147.splice(index, 1);
     };
 
@@ -100,8 +133,7 @@
       });
     };
 
-    $scope.deleteLimitation145= function (limitation) {
-      var index = $scope.model.lims145.indexOf(limitation);
+    $scope.deleteLimitation145 = function (index) {
       $scope.model.lims145.splice(index, 1);
     };
 
@@ -109,30 +141,16 @@
       $scope.model.lims145.push({});
     };
 
-    $scope.deleteLimitationMG = function (limitation) {
-      var index = $scope.model.limsMG.indexOf(limitation);
+    $scope.deleteLimitationMG = function (index) {
       $scope.model.limsMG.splice(index, 1);
     };
 
     $scope.addLimitationMG = function () {
       $scope.model.limsMG.push({});
     };
-
-    $scope.viewDocument = function (document) {
-      var state;
-
-      if (document.setPartAlias === 'organizationOther') {
-        state = 'root.organizations.view.documentOthers.edit';
-      }
-      else if (document.setPartAlias === 'organizationApplication') {
-        state = 'root.organizations.view.documentApplications.edit';
-      }
-
-      return $state.go(state, { ind: document.partIndex });
-    };
   }
 
-  OrganizationAmendmentCtrl.$inject = ['$scope', '$state'];
+  OrganizationAmendmentCtrl.$inject = ['$scope', '$state', 'namedModal'];
 
   angular.module('gva').controller('OrganizationAmendmentCtrl', OrganizationAmendmentCtrl);
 }(angular, _));

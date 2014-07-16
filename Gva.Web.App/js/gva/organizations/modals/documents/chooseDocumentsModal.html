@@ -1,0 +1,49 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="organizations.chooseDocumentsModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="addBtn" btn-click="addDocs()" text="organizations.chooseDocumentsModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="organizations.chooseDocumentsModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <div class="row">
+      <div class="form-group col-sm-9">
+        <sc-nomenclature ng-model="searchParams.documentParts" alias="'documentParts'" multiple="multiple" params="{set: 'organization'}"></sc-nomenclature>
+      </div>
+      <sc-button name="searchBtn" btn-click="search()" text="organizations.chooseDocumentsModal.search" class="btn btn-sm btn-primary" icon="glyphicon-search"></sc-button>
+    </div>
+
+    <sc-datatable items="docs" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+      <sc-column  sortable="false" class="buttons-cell" has-content="true">
+        <input type="checkbox" ng-checked="selectedDocuments | contains:item" sc-click="selectDoc($event, item)">
+      </sc-column>
+       <sc-column data="bookPageNumber" title="organizations.chooseDocumentsModal.bookPageNumber">
+      </sc-column>
+      <sc-column data="name" title="organizations.chooseDocumentsModal.document">
+      </sc-column>
+      <sc-column data="type" title="organizations.chooseDocumentsModal.type">
+      </sc-column>
+      <sc-column data="number" title="organizations.chooseDocumentsModal.docNumber">
+      </sc-column>
+      <sc-column data="date" title="organizations.chooseDocumentsModal.date" type="date">
+      </sc-column>
+      <sc-column data="publisher" title="organizations.chooseDocumentsModal.publisher">
+      </sc-column>
+      <sc-column data="valid" title="organizations.chooseDocumentsModal.valid" type="boolean">
+      </sc-column>
+      <sc-column data="fromDate" title="organizations.chooseDocumentsModal.fromDate" type="date">
+      </sc-column>
+      <sc-column data="toDate" title="organizations.chooseDocumentsModal.toDate" type="date">
+      </sc-column>
+      <sc-column data="pageCount" title="organizations.chooseDocumentsModal.pageCount">
+      </sc-column>
+      <sc-column sortable="false" title="organizations.chooseDocumentsModal.file" has-content="true">
+        <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" ng-show="item.file" title="{{item.file.name}}">
+          <span class="glyphicon glyphicon-file"></span>
+        </a>
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<ng-form name="editApprovalForm" sc-validate="{}" sc-form-readonly="editMode !== 'edit' && !backFromChild">
+<ng-form name="editApprovalForm" sc-validate="{}" sc-form-readonly="editMode !== 'edit'">
   <h5 class="form-header" l10n-text="organizations.approvalEdit.amendments"></h5>
 
   <div>
@@ -37,15 +37,15 @@
       <strong l10n-text="organizations.approvalEdit.title"></strong>
 
       <div class="pull-right">
-        <sc-button name="createBtn" btn-click="newAmendment()" text="organizations.approvalEdit.newAmendment" class="btn btn-primary btn-xs" icon="glyphicon-plus" ng-show="!editMode  && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
+        <sc-button name="createBtn" btn-click="newAmendment()" text="organizations.approvalEdit.newAmendment" class="btn btn-primary btn-xs" icon="glyphicon-plus" ng-show="!editMode" ng-disabled="currentAmendment !== lastAmendment">
         </sc-button>
-        <sc-button name="editBtn" btn-click="editLastAmendment()" text="organizations.approvalEdit.editLastAmendment" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
+        <sc-button name="editBtn" btn-click="editLastAmendment()" text="organizations.approvalEdit.editLastAmendment" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode" ng-disabled="currentAmendment !== lastAmendment">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteLastAmendment()" text="organizations.approvalEdit.deleteLastAmendment" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && !backFromChild" ng-disabled="currentAmendment !== lastAmendment">
+        <sc-button name="deleteBtn" btn-click="deleteLastAmendment()" text="organizations.approvalEdit.deleteLastAmendment" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" ng-disabled="currentAmendment !== lastAmendment">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="organizations.approvalEdit.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode || backFromChild">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.approvalEdit.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.approvalEdit.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode || backFromChild">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.approvalEdit.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
         </sc-button>
       </div>
     </div>
