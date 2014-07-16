@@ -49,6 +49,8 @@
     <Content Include="Create\Tables\ASExamVariants.sql" />
     <Content Include="Create\Tables\ASExamQuestions.sql" />
     <Content Include="Create\Tables\ASExamVariantQuestions.sql" />
+    <Content Include="Create\Tables\GvaStages.sql" />
+    <Content Include="Create\Tables\GvaAppStages.sql" />
     <Content Include="Create\Tables\GvaViewOrganizationExaminers.sql" />
     <Content Include="Create\Tables\GvaViewPersonInspectors.sql" />
     <Content Include="Create\Tables\GvaViewAircraftRegistrations.sql" />

@@ -28,6 +28,8 @@ GO
 :r $(rootPath)\"Tables\ASExamQuestions.sql"
 :r $(rootPath)\"Tables\ASExamVariants.sql"
 :r $(rootPath)\"Tables\ASExamVariantQuestions.sql"
+:r $(rootPath)\"Tables\GvaStages.sql"
+:r $(rootPath)\"Tables\GvaAppStages.sql"
 
 ---------------------------------------------------------------
 -- Diagram
