@@ -2140,6 +2140,7 @@
           age: 'Възраст',
           company: 'Фирма',
           employmentCategory: 'Длъжност',
+          caseType: 'Дело',
           edit: 'Редакция',
           viewApplication: 'Обратно към заявление: '
         },
