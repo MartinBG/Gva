@@ -2592,6 +2592,9 @@
       },
       applications: {
         lotSet: 'Тип на дело',
+        tabs: {
+          'case': 'Преписка'
+        },
         edit: {
           equipmentName: 'Име',
           equipmentType: 'Тип',
