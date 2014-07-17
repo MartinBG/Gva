@@ -8,7 +8,6 @@
        application1: {
 		documentNumber: '1122',
 		documentDate: '2014-05-02T00:00',
-		requestDate: '2014-05-03T00:00',
 		notes: 'Бележки',
 		bookPageNumber: '2',
 		pageCount: '3',
@@ -20,7 +19,6 @@
        application2: {
        	documentNumber: '1122a',
        	documentDate: '2014-06-02T00:00',
-       	requestDate: '2014-06-03T00:00',
        	notes: 'Бележки',
        	bookPageNumber: 1,
        	pageCount: 2,

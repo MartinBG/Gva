@@ -29,7 +29,7 @@ namespace Gva.Api.Projections.Application
 
             application.LotId = aircraftApplication.Part.Lot.LotId;
             application.PartId = aircraftApplication.Part.PartId;
-            application.RequestDate = aircraftApplication.Content.Get<DateTime?>("requestDate");
+            application.DocumentDate = aircraftApplication.Content.Get<DateTime?>("documentDate");
             application.DocumentNumber = aircraftApplication.Content.Get<string>("documentNumber");
             application.ApplicationTypeId = aircraftApplication.Content.Get<int>("applicationType.nomValueId");
 

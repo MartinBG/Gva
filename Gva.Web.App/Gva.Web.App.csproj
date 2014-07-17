@@ -360,7 +360,6 @@
     <Content Include="js\gva\common\forms\commonDisparity.html" />
     <Content Include="js\gva\common\forms\commonDisparityCtrl.js" />
     <Content Include="js\gva\common\forms\commonDocumentApplication.html" />
-    <Content Include="js\gva\common\forms\commonDocumentApplicationCtrl.js" />
     <Content Include="js\gva\common\forms\commonInspection.html" />
     <Content Include="js\gva\common\forms\commonInspectionCtrl.js" />
     <Content Include="js\gva\common\forms\commonScannedDocument.html" />

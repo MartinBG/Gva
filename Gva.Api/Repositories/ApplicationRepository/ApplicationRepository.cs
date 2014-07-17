@@ -115,8 +115,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             });
 
             predicate = predicate
-                .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.RequestDate, fromDate)
-                .AndDateTimeLessThanOrEqual(e => e.GViewApplication.RequestDate, toDate)
+                .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
+                .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
                 .AndStringContains(e => e.GViewPerson.Lin, personLin)
                 .AndStringContains(e => e.GViewAircraft.ICAO, aircraftIcao)
                 .AndStringContains(e => e.GViewOrganization.Uin, organizationUin)
@@ -136,7 +136,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     LotSetName = e.Set.Name,
                     AppPartId = e.GApplication.GvaAppLotPartId,
                     AppPartIndex = e.GApplicationPart != null ? e.GApplicationPart.Index : (int?)null,
-                    AppPartRequestDate = e.GViewApplication != null ? e.GViewApplication.RequestDate : null,
+                    AppPartDocumentDate = e.GViewApplication != null ? e.GViewApplication.DocumentDate : null,
                     AppPartDocumentNumber = e.GViewApplication != null ? e.GViewApplication.DocumentNumber : null,
                     AppPartApplicationTypeName = e.GViewApplicationType != null ? e.GViewApplicationType.Name : null,
                     PersonId = e.GViewPerson != null ? (int?)e.GViewPerson.LotId : null,

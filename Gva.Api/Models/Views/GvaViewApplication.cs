@@ -12,7 +12,7 @@ namespace Gva.Api.Models.Views
 
         public int PartId { get; set; }
 
-        public DateTime? RequestDate { get; set; }
+        public DateTime? DocumentDate { get; set; }
 
         public string DocumentNumber { get; set; }
 
@@ -46,7 +46,7 @@ namespace Gva.Api.Models.Views
             this.ToTable("GvaViewApplications");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartId).HasColumnName("LotPartId");
-            this.Property(t => t.RequestDate).HasColumnName("RequestDate");
+            this.Property(t => t.DocumentDate).HasColumnName("DocumentDate");
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
             this.Property(t => t.ApplicationTypeId).HasColumnName("ApplicationTypeId");
 

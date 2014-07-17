@@ -349,8 +349,7 @@
     });
     scaffoldingProvider.form({
       name: 'gvaCommonDocumentApplication',
-      templateUrl: 'js/gva/common/forms/commonDocumentApplication.html',
-      controller: 'CommonDocumentApplicationCtrl'
+      templateUrl: 'js/gva/common/forms/commonDocumentApplication.html'
     });
     scaffoldingProvider.form({
       name: 'gvaEquipmentData',
