@@ -609,10 +609,10 @@ namespace Gva.MigrationTool.Sets
 
                         __BOOK_PAGE_NO = r.Field<int?>("BOOK_PAGE_NO"),
                         __PAGES_COUNT = r.Field<int?>("PAGES_COUNT"),
+                        __REQUEST_DATE = r.Field<DateTime?>("REQUEST_DATE"),
 
                         documentNumber = r.Field<string>("DOC_NO"),
                         documentDate = r.Field<DateTime?>("DOC_DATE"),
-                        requestDate = r.Field<DateTime?>("REQUEST_DATE"),
                         notes = r.Field<string>("NOTES"),
                         applicationType = noms["applicationTypes"].ByOldId(r.Field<decimal?>("REQUEST_TYPE_ID").ToString()),
                         applicationPaymentType = noms["applicationPaymentTypes"].ByOldId(r.Field<decimal?>("PAYMENT_REASON_ID").ToString()),
@@ -665,10 +665,10 @@ namespace Gva.MigrationTool.Sets
                                 {
                                     "__oldId",
                                     "__migrTable",
+                                    "__REQUEST_DATE",
 
                                     "documentNumber",
                                     "documentDate",
-                                    "requestDate",
                                     "notes",
                                     "applicationType",
                                     "applicationPaymentType",
