@@ -7,7 +7,7 @@ CREATE TABLE [dbo].[GvaViewPersons] (
     [LinTypeId]        INT           NOT NULL,
     [Uin]              NVARCHAR(50)  NULL,
     [Names]            NVARCHAR(MAX) NOT NULL,
-    [BirtDate]         DATETIME2 (7) NOT NULL,
+    [BirtDate]         DATETIME2     NOT NULL,
     [OrganizationId]   INT           NULL,
     [EmploymentId]     INT           NULL,
     CONSTRAINT [PK_GvaViewPersons]                      PRIMARY KEY ([LotId]),

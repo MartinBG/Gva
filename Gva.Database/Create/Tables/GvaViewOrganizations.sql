@@ -9,8 +9,8 @@ CREATE TABLE [dbo].[GvaViewOrganizations] (
     [Valid]                BIT           NOT NULL,
     [OrganizationTypeId]   INT           NOT NULL,
     [Uin]                  NVARCHAR(50)  NULL,
-    [DateValidTo]          DATETIME2(7)  NULL,
-    [DateCAOValidTo]       DATETIME2(7)  NULL,
+    [DateValidTo]          DATETIME2     NULL,
+    [DateCAOValidTo]       DATETIME2     NULL,
     CONSTRAINT [PK_GvaViewOrganizations]            PRIMARY KEY ([LotId]),
     CONSTRAINT [FK_GvaViewOrganizations_Lots]       FOREIGN KEY ([LotId])              REFERENCES [dbo].[Lots] ([LotId]),
     CONSTRAINT [FK_GvaViewOrganizations_NomValues]  FOREIGN KEY ([OrganizationTypeId]) REFERENCES [dbo].[NomValues] ([NomValueId])

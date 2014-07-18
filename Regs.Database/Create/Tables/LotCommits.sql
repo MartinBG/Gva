@@ -6,7 +6,7 @@ CREATE TABLE [dbo].[LotCommits] (
     [LotId]               INT           NOT NULL,
     [ParentLotCommitId]   INT           NULL,
     [CommiterId]          INT           NOT NULL,
-    [CommitDate]          DATETIME2 (7) NOT NULL,
+    [CommitDate]          DATETIME2     NOT NULL,
     [IsIndex]             BIT           NOT NULL,
     CONSTRAINT [PK_Commits]               PRIMARY KEY ([LotCommitId]),
     CONSTRAINT [FK_LotCommits_LotCommits] FOREIGN KEY ([ParentLotCommitId]) REFERENCES [dbo].[LotCommits] ([LotCommitId]),

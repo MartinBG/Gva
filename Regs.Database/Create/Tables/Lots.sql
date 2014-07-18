@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[Lots] (
     [LotId]         INT                 NOT NULL,
     [LotSetId]      INT                 NOT NULL,
     [NextIndex]     INT                 NOT NULL,
-    [ModifyDate]    DATETIME2 (7)       NOT NULL,
+    [ModifyDate]    DATETIME2           NOT NULL,
     [Version]       ROWVERSION          NOT NULL,
     CONSTRAINT [PK_Lots]          PRIMARY KEY ([LotId]),
     CONSTRAINT [FK_Lots_LotSets]  FOREIGN KEY ([LotSetId]) REFERENCES [dbo].[LotSets] ([LotSetId])

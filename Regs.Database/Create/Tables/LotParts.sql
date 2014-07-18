@@ -8,7 +8,7 @@ CREATE TABLE [dbo].[LotParts] (
     [Path]          NVARCHAR (100) NOT NULL,
     [Index]         INT            NOT NULL,
     [CreatorId]     INT            NOT NULL,
-    [CreateDate]    DATETIME2 (7)  NOT NULL,
+    [CreateDate]    DATETIME2      NOT NULL,
     CONSTRAINT [PK_LotParts]             PRIMARY KEY ([LotPartId]),
     CONSTRAINT [FK_LotParts_LotSetParts] FOREIGN KEY ([LotSetPartId]) REFERENCES [dbo].[LotSetParts] ([LotSetPartId]),
     CONSTRAINT [FK_LotParts_Lots]        FOREIGN KEY ([LotId])        REFERENCES [dbo].[Lots]        ([LotId]),

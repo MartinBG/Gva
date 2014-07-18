@@ -8,7 +8,7 @@ CREATE TABLE [dbo].[LotPartVersions] (
     [OriginalCommitId]         INT            NOT NULL,
     [LotPartOperationId]       INT            NOT NULL,
     [CreatorId]                INT            NOT NULL,
-    [CreateDate]               DATETIME2 (7)  NOT NULL,
+    [CreateDate]               DATETIME2      NOT NULL,
     CONSTRAINT [PK_LotPartVersions]                   PRIMARY KEY ([LotPartVersionId]),
     CONSTRAINT [FK_LotPartVersions_LotCommits]        FOREIGN KEY ([OriginalCommitId])    REFERENCES [dbo].[LotCommits]         ([LotCommitId]),
     CONSTRAINT [FK_LotPartVersions_LotParts]          FOREIGN KEY ([LotPartId])           REFERENCES [dbo].[LotParts]           ([LotPartId]),
