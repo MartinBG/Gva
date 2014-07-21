@@ -25,10 +25,6 @@
           persons: {
             title: 'ЛАП',
             search: 'Физически лица',
-            'new': 'Ново физическо лице',
-            licences: 'Лицензи',
-            qualifications: 'Квалификации',
-            medicals: 'Медицински',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
             appsLink: 'Свържи заявление',
@@ -37,8 +33,6 @@
           aircrafts: {
             title: 'ВС',
             search: 'Въздухоплавателни средства',
-            certifications: 'Удостоверения',
-            inspections: 'Инспекции',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
             appsLink: 'Свържи заявление'
