@@ -14,7 +14,7 @@
     }
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/aircrafts/:id/aircraftCertRegistrationsFM',
+      .when('GET', 'api/aircrafts/:id/aircraftCertRegistrationsFM',
         function ($params, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -22,7 +22,7 @@
             aircraft.aircraftCertRegistrationsFM.sort(sortByDate);
           return [200, aircraft.aircraftCertRegistrationsFM];
         })
-      .when('GET', '/api/aircrafts/:id/aircraftCertRegistrationsFM/:ind',
+      .when('GET', 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind',
         function ($params, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -63,7 +63,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/aircrafts/:id/aircraftCertRegistrationsFM',
+      .when('POST', 'api/aircrafts/:id/aircraftCertRegistrationsFM',
         function ($params, $jsonData, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -76,7 +76,7 @@
 
           return [200];
         })
-      .when('POST', '/api/aircrafts/:id/aircraftCertRegistrationsFM/:ind',
+      .when('POST', 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind',
         function ($params, $jsonData, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -88,7 +88,7 @@
 
           return [200];
         })
-      .when('DELETE', '/api/aircrafts/:id/aircraftCertRegistrationsFM/:ind',
+      .when('DELETE', 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind',
         function ($params, $jsonData, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

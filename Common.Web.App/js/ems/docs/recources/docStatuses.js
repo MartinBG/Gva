@@ -5,14 +5,14 @@
   angular.module('ems')
     .factory('DocStatuses', ['$resource',
       function ($resource) {
-        return $resource('/api/docs/:id/status', {
+        return $resource('api/docs/:id/status', {
           id: '@docId',
           docVersion: '@docVersion'
         },
           {
             'next': {
               method: 'POST',
-              url: '/api/docs/:id/next',
+              url: 'api/docs/:id/next',
               params: {
                 alias: '',
                 closure: null,
@@ -21,14 +21,14 @@
             },
             'reverse': {
               method: 'POST',
-              url: '/api/docs/:id/reverse',
+              url: 'api/docs/:id/reverse',
               params: {
                 alias: ''
               }
             },
             'cancel': {
               method: 'POST',
-              url: '/api/docs/:id/cancel'
+              url: 'api/docs/:id/cancel'
             }
           });
       }]);

@@ -47,7 +47,7 @@ function inject(stream, tag) {
   return plugins.inject(stream, {
     starttag: '<!-- inject:' + tag + ':{{ext}} -->',
     transform: function (filepath, file) {
-      var relativePath = '/' + path.relative(file.base, file.path).replace(/\\/g, '/');
+      var relativePath = path.relative(file.base, file.path).replace(/\\/g, '/');
 
       switch (path.extname(relativePath).slice(1)) {
         case 'css':

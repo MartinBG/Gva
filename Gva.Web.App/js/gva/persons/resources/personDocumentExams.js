@@ -4,6 +4,6 @@
 
   angular.module('gva').factory('PersonDocumentExams',
     ['$resource', function ($resource) {
-    return $resource('/api/persons/:id/personDocumentExams/:ind');
+    return $resource('api/persons/:id/personDocumentExams/:ind');
   }]);
 }(angular));

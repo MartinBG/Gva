@@ -4,14 +4,14 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/persons/:id/personDocumentOthers?number&typeid&publ&datef&pnumber',
+      .when('GET', 'api/persons/:id/personDocumentOthers?number&typeid&publ&datef&pnumber',
         function ($params, $filter, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
           return [200, person.personDocumentOthers];
         })
-      .when('GET', '/api/persons/:id/personDocumentOthers/:ind',
+      .when('GET', 'api/persons/:id/personDocumentOthers/:ind',
         function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -26,7 +26,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/persons/:id/personDocumentOthers',
+      .when('POST', 'api/persons/:id/personDocumentOthers',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -39,7 +39,7 @@
 
           return [200];
         })
-      .when('POST', '/api/persons/:id/personDocumentOthers/:ind',
+      .when('POST', 'api/persons/:id/personDocumentOthers/:ind',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -51,7 +51,7 @@
 
           return [200];
         })
-      .when('DELETE', '/api/persons/:id/personDocumentOthers/:ind',
+      .when('DELETE', 'api/persons/:id/personDocumentOthers/:ind',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

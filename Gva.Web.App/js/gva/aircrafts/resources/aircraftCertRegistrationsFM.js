@@ -3,10 +3,10 @@
   'use strict';
 
   angular.module('gva').factory('AircraftCertRegistrationsFM', ['$resource', function ($resource) {
-    return $resource('/api/aircrafts/:id/aircraftCertRegistrationsFM/:ind', {}, {
+    return $resource('api/aircrafts/:id/aircraftCertRegistrationsFM/:ind', {}, {
       'getView': {
         method: 'GET',
-        url: '/api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/view',
+        url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/view',
         interceptor: {
           response: function (response) {
             if (response.data) {
@@ -19,7 +19,7 @@
       },
       'getDebts': {
         method: 'GET',
-        url: '/api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/debts',
+        url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/debts',
         isArray: true
       }
     });

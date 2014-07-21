@@ -6,7 +6,7 @@
     var nomenclatures = require('./nomenclatures.sample');
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/docs/:docId/stages/current',
+      .when('GET', 'api/docs/:docId/stages/current',
         function($params, docStages) {
           var currentStage =
             _(docStages)
@@ -15,7 +15,7 @@
 
           return [200, currentStage];
         })
-      .when('POST', '/api/docs/:docId/stages/next',
+      .when('POST', 'api/docs/:docId/stages/next',
         function ($params, $jsonData, docStages) {
           var docId = parseInt($params.docId, 10);
           var currentStage = _(docStages).filter({ docId: docId, isCurrentStage: true }).first();
@@ -51,7 +51,7 @@
 
           return [200, { stages: returnValue }];
         })
-      .when('POST', '/api/docs/:docId/stages/edit',
+      .when('POST', 'api/docs/:docId/stages/edit',
         function ($params, $jsonData, docStages) {
           var docId = parseInt($params.docId, 10);
           var currentStage = _(docStages).filter({ docId: docId, isCurrentStage: true }).first();
@@ -75,7 +75,7 @@
 
           return [200, { stages: returnValue }];
         })
-      .when('POST', '/api/docs/:docId/stages/end',
+      .when('POST', 'api/docs/:docId/stages/end',
         function ($params, $jsonData, docStages) {
           var docId = parseInt($params.docId, 10);
           var currentStage = _(docStages).filter({ docId: docId, isCurrentStage: true }).first();
@@ -90,7 +90,7 @@
 
           return [200, { stages: returnValue }];
         })
-      .when('POST', '/api/docs/:docId/stages/reverse',
+      .when('POST', 'api/docs/:docId/stages/reverse',
         function ($params, docStages) {
           var docId = parseInt($params.docId, 10);
           _(docStages).remove({ docId: docId, isCurrentStage: true });

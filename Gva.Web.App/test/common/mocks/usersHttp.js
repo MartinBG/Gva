@@ -100,7 +100,7 @@
       nextUserId = 5;
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/users?username&fullname&showActive&exact',
+      .when('GET', 'api/users?username&fullname&showActive&exact',
         function ($params, $filter) {
           return [
             200,
@@ -111,7 +111,7 @@
             })
           ];
         })
-      .when('GET', '/api/users/:userId',
+      .when('GET', 'api/users/:userId',
         function ($params, $filter) {
           var userId = parseInt($params.userId, 10),
             user = $filter('filter')(users, {userId: userId})[0];
@@ -122,7 +122,7 @@
 
           return [200, user];
         })
-      .when('POST', '/api/users/:userId',
+      .when('POST', 'api/users/:userId',
         function ($params, $jsonData, $filter) {
           var userId = parseInt($params.userId, 10),
             userIndex = users.indexOf($filter('filter')(users, {userId: userId})[0]);
@@ -136,7 +136,7 @@
 
           return [200];
         })
-      .when('POST', '/api/users',
+      .when('POST', 'api/users',
         function ($params, $jsonData) {
           if (!$jsonData || $jsonData.userId) {
             return [400];
@@ -148,7 +148,7 @@
 
           return [200];
         })
-      .when('GET', '/api/roles',
+      .when('GET', 'api/roles',
         function () {
           return [200, roles];
         });

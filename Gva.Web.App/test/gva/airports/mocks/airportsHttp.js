@@ -19,7 +19,7 @@
     }
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/airports?name&icao',
+      .when('GET', 'api/airports?name&icao',
         function ($params, $filter, airportLots) {
           var airports = _(airportLots)
           .map(airportMapper)
@@ -47,7 +47,7 @@
 
           return [200, airports];
         })
-      .when('GET', '/api/airports/:id',
+      .when('GET', 'api/airports/:id',
         function ($params, $filter, airportLots) {
           var airport = _(airportLots)
             .filter({ lotId: parseInt($params.id, 10) }).map(airportMapper).first();
@@ -59,7 +59,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/airports',
+      .when('POST', 'api/airports',
         function ($params, $jsonData, airportLots) {
           var nextLotId = Math.max(_(airportLots).pluck('lotId').max().value() + 1, 1);
 

@@ -4,14 +4,14 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/persons/:id/licences',
+      .when('GET', 'api/persons/:id/licences',
         function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
           return [200, person.personLicences];
         })
-      .when('GET', '/api/persons/:id/licences/:ind',
+      .when('GET', 'api/persons/:id/licences/:ind',
         function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -21,7 +21,7 @@
 
           return [200, licence];
         })
-      .when('POST', '/api/persons/:id/licences',
+      .when('POST', 'api/persons/:id/licences',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -34,7 +34,7 @@
 
           return [200, { partIndex: licence.partIndex }];
         })
-      .when('POST', '/api/persons/:id/licences/:ind',
+      .when('POST', 'api/persons/:id/licences/:ind',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -46,7 +46,7 @@
 
           return [200];
         })
-      .when('DELETE', '/api/persons/:id/licences/:ind',
+      .when('DELETE', 'api/persons/:id/licences/:ind',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

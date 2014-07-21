@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/aircrafts/:id/aircraftDataApex',
+      .when('GET', 'api/aircrafts/:id/aircraftDataApex',
         function ($params, aircraftLots) {
           var aircraftLot = _(aircraftLots).filter({ lotId: parseInt($params.id, 10) }).first();
 
@@ -15,7 +15,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/aircrafts/:id/aircraftDataApex',
+      .when('POST', 'api/aircrafts/:id/aircraftDataApex',
         function ($params, $jsonData, aircraftLots) {
           var aircraftLot = _(aircraftLots).filter({ lotId: parseInt($params.id, 10) }).first();
 

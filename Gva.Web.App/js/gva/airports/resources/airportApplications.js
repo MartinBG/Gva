@@ -3,6 +3,6 @@
   'use strict';
 
   angular.module('gva').factory('AirportApplications', ['$resource', function ($resource) {
-    return $resource('/api/airports/:id/applications/:appId');
+    return $resource('api/airports/:id/applications/:appId');
   }]);
 }(angular));

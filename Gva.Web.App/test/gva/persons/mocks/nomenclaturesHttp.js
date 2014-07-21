@@ -5,7 +5,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/nomenclatures/units?name',
+      .when('GET', 'api/nomenclatures/units?name',
         function ($params, $filter) {
           return [
             200,
@@ -14,7 +14,7 @@
             })
           ];
         })
-      .when('GET', '/api/nomenclatures/persons?id',
+      .when('GET', 'api/nomenclatures/persons?id',
         function ($params, $filter, personLots) {
 
           var res = _(personLots).map(function (item) {
@@ -30,7 +30,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/otherDocumentRoles?term&id',
+      .when('GET', 'api/nomenclatures/otherDocumentRoles?term&id',
         function ($params, $filter) {
           var res = nomenclatures.documentRoles;
 
@@ -51,7 +51,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/otherDocumentTypes?term&id',
+      .when('GET', 'api/nomenclatures/otherDocumentTypes?term&id',
         function ($params, $filter) {
           var res = nomenclatures.documentTypes;
 
@@ -72,7 +72,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/documentRoles?term&id&categoryAlias&staffCode',
+      .when('GET', 'api/nomenclatures/documentRoles?term&id&categoryAlias&staffCode',
         function ($params, $filter) {
           var res = nomenclatures.documentRoles;
 
@@ -104,7 +104,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/documentTypes?term&id&isIdDocument&staffCode',
+      .when('GET', 'api/nomenclatures/documentTypes?term&id&isIdDocument&staffCode',
         function ($params, $filter) {
           var res = nomenclatures.documentTypes;
 
@@ -137,7 +137,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/addressTypes?term&id&type',
+      .when('GET', 'api/nomenclatures/addressTypes?term&id&type',
         function ($params, $filter) {
           var res = nomenclatures.addressTypes;
 
@@ -160,7 +160,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/electronicServiceStages?docTypeId&id',
+      .when('GET', 'api/nomenclatures/electronicServiceStages?docTypeId&id',
         function ($params, $filter) {
           var res = _(nomenclatures.electronicServiceStage).map(function (item) {
             return {
@@ -181,7 +181,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/docCasePartTypes?id',
+      .when('GET', 'api/nomenclatures/docCasePartTypes?id',
         function ($params, $filter) {
           var res = _(nomenclatures.docCasePartType).map(function (item) {
             return {
@@ -196,7 +196,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/docDirections?id',
+      .when('GET', 'api/nomenclatures/docDirections?id',
         function ($params, $filter) {
           var res = _(nomenclatures.docDirection).map(function (item) {
             return {
@@ -212,7 +212,7 @@
           return [200, res];
         })
       .when('GET',
-          '/api/nomenclatures/:alias' +
+          'api/nomenclatures/:alias' +
           '?term&id&ids&staffTypeId&parentAlias&parentValueId&va',
         function ($params, $filter) {
           var res = nomenclatures[$params.alias];

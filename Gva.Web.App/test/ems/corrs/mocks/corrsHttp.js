@@ -103,7 +103,7 @@
       nextCorrespondentContactId = 3;
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/nomenclatures/corrs?id',
+      .when('GET', 'api/nomenclatures/corrs?id',
         function ($params, $filter) {
 
           var res = _(corrs).map(function (item) {
@@ -119,7 +119,7 @@
 
           return [200, res];
         })
-      .when('GET', '/api/nomenclatures/persons?id',
+      .when('GET', 'api/nomenclatures/persons?id',
         function ($params, $filter, personLots) {
 
           var res = _(personLots).map(function (item) {
@@ -137,11 +137,11 @@
         })
 
 
-      .when('GET', '/api/corrs/new',
+      .when('GET', 'api/corrs/new',
         function () {
           return [200, {}];
         })
-      .when('GET', '/api/corrs?displayName&email&limit&offset',
+      .when('GET', 'api/corrs?displayName&email&limit&offset',
         function ($params, $filter) {
           var correspondents = $filter('filter')(corrs, {
             displayName: $params.displayName,
@@ -155,7 +155,7 @@
             }
           ];
         })
-       .when('POST', '/api/corrs',
+       .when('POST', 'api/corrs',
         function ($params, $jsonData) {
           if (!$jsonData || $jsonData.correspondentId) {
             return [400];
@@ -181,7 +181,7 @@
 
           return [200];
         })
-      .when('GET', '/api/corrs/:id',
+      .when('GET', 'api/corrs/:id',
         function ($params, $filter) {
           var correspondentId = parseInt($params.id, 10),
             corr = $filter('filter')(corrs, { correspondentId: correspondentId })[0];
@@ -196,7 +196,7 @@
 
           return [200, corr];
         })
-      .when('POST', '/api/corrs/:id',
+      .when('POST', 'api/corrs/:id',
         function ($params, $jsonData, $filter) {
           var correspondentId = parseInt($params.id, 10),
             corrIndex = corrs.indexOf($filter('filter')(

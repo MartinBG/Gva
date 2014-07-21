@@ -20,7 +20,7 @@
     }
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/apps?fromDate&toDate&lin&regUri',
+      .when('GET', 'api/apps?fromDate&toDate&lin&regUri',
         function ($params, $filter, applicationsFactory) {
           var applications = applicationsFactory.getAll();
 
@@ -55,7 +55,7 @@
 
           return [200, applications];
         })
-      .when('GET', '/api/apps/:id',
+      .when('GET', 'api/apps/:id',
         function ($params, $filter, applicationsFactory) {
           var application = applicationsFactory.getApplication(parseInt($params.id, 10));
 
@@ -71,7 +71,7 @@
           }
 
         })
-      .when('POST', '/api/apps/new',
+      .when('POST', 'api/apps/new',
         function ($jsonData,docs, docCases, personLots,
           applicationLotFiles, docsFactory, applicationsFactory) {
           if (!$jsonData || !$jsonData.doc || !$jsonData.lotId) {
@@ -141,7 +141,7 @@
 
           return [200, { applicationId: newApplication.applicationId }];
         })
-      .when('POST', '/api/apps/link',
+      .when('POST', 'api/apps/link',
         function ($jsonData, applicationsFactory, docs) {
           if (!$jsonData || !$jsonData.docId || !$jsonData.lotId) {
             return [400];
@@ -160,7 +160,7 @@
 
           return [200, { applicationId: newApplication.applicationId }];
         })
-      .when('POST', '/api/apps/:id/parts/new',
+      .when('POST', 'api/apps/:id/parts/new',
         function ($params, $jsonData, personLots, applicationsFactory, docs, applicationLotFiles) {
           var application = applicationsFactory.getApplication(parseInt($params.id, 10));
           var person = _(personLots).filter({ lotId: application.lotId }).first();
@@ -257,7 +257,7 @@
 
           return [200];
         })
-      .when('POST', '/api/apps/:id/parts/linkNew',
+      .when('POST', 'api/apps/:id/parts/linkNew',
         function ($params, $jsonData, docs, personLots, applicationsFactory, applicationLotFiles) {
           var application = applicationsFactory.getApplication(parseInt($params.id, 10));
           var person = _(personLots).filter({ lotId: application.lotId }).first();
@@ -334,7 +334,7 @@
 
           return [200];
         })
-      .when('POST', '/api/apps/:id/parts/linkExisting',
+      .when('POST', 'api/apps/:id/parts/linkExisting',
         function ($params, $jsonData, applicationsFactory, personLots, docs, applicationLotFiles) {
           var application = applicationsFactory.getApplication(parseInt($params.id, 10));
           var person = _(personLots).filter({ lotId: application.lotId }).first();

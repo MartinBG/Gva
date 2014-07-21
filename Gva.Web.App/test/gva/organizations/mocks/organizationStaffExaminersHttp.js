@@ -4,14 +4,14 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/organizations/:id/organizationStaffExaminers',
+      .when('GET', 'api/organizations/:id/organizationStaffExaminers',
         function ($params, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
           return [200, organization.staffExaminers];
         })
-      .when('GET', '/api/organizations/:id/organizationStaffExaminers/:ind',
+      .when('GET', 'api/organizations/:id/organizationStaffExaminers/:ind',
         function ($params, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -26,7 +26,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/organizations/:id/organizationStaffExaminers',
+      .when('POST', 'api/organizations/:id/organizationStaffExaminers',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -39,7 +39,7 @@
 
           return [200];
         })
-      .when('POST', '/api/organizations/:id/organizationStaffExaminers/:ind',
+      .when('POST', 'api/organizations/:id/organizationStaffExaminers/:ind',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -51,7 +51,7 @@
 
           return [200];
         })
-      .when('DELETE', '/api/organizations/:id/organizationStaffExaminers/:ind',
+      .when('DELETE', 'api/organizations/:id/organizationStaffExaminers/:ind',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

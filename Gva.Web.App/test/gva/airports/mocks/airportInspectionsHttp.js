@@ -5,13 +5,13 @@
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/airports/:id/inspections',
+      .when('GET', 'api/airports/:id/inspections',
         function ($params, airportLots) {
           var airport = _(airportLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
           return [200, airport.airportInspections];
         })
-      .when('GET', '/api/airports/:id/inspections/:ind',
+      .when('GET', 'api/airports/:id/inspections/:ind',
         function ($params, airportLots) {
           var airport = _(airportLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -25,7 +25,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/airports/:id/inspections',
+      .when('POST', 'api/airports/:id/inspections',
             function ($params, $jsonData, airportLots) {
               var airport = _(airportLots)
                 .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -38,7 +38,7 @@
 
               return [200];
             })
-      .when('POST', '/api/airports/:id/inspections/:ind',
+      .when('POST', 'api/airports/:id/inspections/:ind',
         function ($params, $jsonData, airportLots) {
           var airport = _(airportLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

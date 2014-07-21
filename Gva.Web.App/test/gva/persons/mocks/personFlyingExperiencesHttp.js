@@ -6,7 +6,7 @@
     $httpBackendConfiguratorProvider
       .when(
       'GET',
-      '/api/persons/:id/personFlyingExperiences?organization&' +
+      'api/persons/:id/personFlyingExperiences?organization&' +
       'period&aircraft&ratingType&ratingClass&authorization&' +
       'licenceType&locationIndicator&sector&experienceRole&experienceMeasure&' +
       'month&year',
@@ -16,7 +16,7 @@
 
           return [200, person.personFlyingExperiences];
         })
-      .when('GET', '/api/persons/:id/personFlyingExperiences/:ind',
+      .when('GET', 'api/persons/:id/personFlyingExperiences/:ind',
         function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -31,7 +31,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/persons/:id/personFlyingExperiences',
+      .when('POST', 'api/persons/:id/personFlyingExperiences',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -45,7 +45,7 @@
 
           return [200];
         })
-      .when('POST', '/api/persons/:id/personFlyingExperiences/:ind',
+      .when('POST', 'api/persons/:id/personFlyingExperiences/:ind',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -57,7 +57,7 @@
 
           return [200];
         })
-      .when('DELETE', '/api/persons/:id/personFlyingExperiences/:ind',
+      .when('DELETE', 'api/persons/:id/personFlyingExperiences/:ind',
         function ($params, $jsonData, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

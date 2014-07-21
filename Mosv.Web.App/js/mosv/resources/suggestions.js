@@ -3,18 +3,18 @@
   'use strict';
 
   angular.module('mosv').factory('Suggestions', ['$resource', function ($resource) {
-    return $resource('/api/suggestion/:id', {}, {
+    return $resource('api/suggestion/:id', {}, {
       'fastSave': {
         method: 'POST',
-        url: '/api/suggestion/:id/fastSave'
+        url: 'api/suggestion/:id/fastSave'
       },
       'getDocs': {
         method: 'GET',
-        url: '/api/docs/forSelect'
+        url: 'api/docs/forSelect'
       },
       'loadData': {
         method: 'POST',
-        url: '/api/suggestion/:id/loadData'
+        url: 'api/suggestion/:id/loadData'
       }
     });
   }]);

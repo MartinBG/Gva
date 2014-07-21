@@ -5,25 +5,25 @@
   angular.module('ems')
     .factory('Docs', ['$resource',
       function ($resource) {
-        return $resource('/api/docs/:id', { id: '@docId' },
+        return $resource('api/docs/:id', { id: '@docId' },
           {
             'createChild': {
               method: 'POST',
-              url: '/api/docs/:id/create',
+              url: 'api/docs/:id/create',
               params: {
                 docEntryTypeAlias: '@docEntryTypeAlias'
               }
             },
             'register': {
               method: 'POST',
-              url: '/api/docs/:id/register',
+              url: 'api/docs/:id/register',
               params: {
                 docVersion: '@docVersion'
               }
             },
             'setCasePart': {
               method: 'POST',
-              url: '/api/docs/:id/setCasePart',
+              url: 'api/docs/:id/setCasePart',
               params: {
                 docVersion: '@docVersion',
                 docCasePartTypeId: '@docCasePartTypeId'
@@ -31,28 +31,28 @@
             },
             'setDocType': {
               method: 'POST',
-              url: '/api/docs/:id/setDocType',
+              url: 'api/docs/:id/setDocType',
               params: {
                 docVersion: '@docVersion'
               }
             },
             'markAsRead': {
               method: 'POST',
-              url: '/api/docs/:id/markAsRead',
+              url: 'api/docs/:id/markAsRead',
               params: {
                 docVersion: '@docVersion'
               }
             },
             'markAsUnread': {
               method: 'POST',
-              url: '/api/docs/:id/markAsUnread',
+              url: 'api/docs/:id/markAsUnread',
               params: {
                 docVersion: '@docVersion'
               }
             },
             'createTicket': {
               method: 'POST',
-              url: '/api/docs/:id/createTicket',
+              url: 'api/docs/:id/createTicket',
               params: {
                 docFileId: '@docFileId',
                 fileKey: '@fileKey'
@@ -60,7 +60,7 @@
             },
             'createAbbcdnTicket': {
               method: 'POST',
-              url: '/api/docs/:id/createAbbcdnTicket',
+              url: 'api/docs/:id/createAbbcdnTicket',
               params: {
                 docTypeUri: '@docTypeUri',
                 abbcdnKey: '@abbcdnKey'
@@ -68,7 +68,7 @@
             },
             'manualRegister': {
               method: 'POST',
-              url: '/api/docs/:id/manualRegister',
+              url: 'api/docs/:id/manualRegister',
               params: {
                 docVersion: '@docVersion',
                 regUri: '',
@@ -77,38 +77,38 @@
             },
             'getRegisterIndex': {
               method: 'GET',
-              url: '/api/docs/:id/registerIndex'
+              url: 'api/docs/:id/registerIndex'
             },
             'getDocsForChange': {
               method: 'GET',
-              url: '/api/docs/:id/getDocsForChange'
+              url: 'api/docs/:id/getDocsForChange'
             },
             'changeDocParent': {
               method: 'POST',
-              url: '/api/docs/:id/changeDocParent',
+              url: 'api/docs/:id/changeDocParent',
               params: {
                 newDocId: '@newDocId'
               }
             },
             'changeDocClassification': {
               method: 'POST',
-              url: '/api/docs/:id/changeDocClassification'
+              url: 'api/docs/:id/changeDocClassification'
             },
             'createNewCase': {
               method: 'POST',
-              url: '/api/docs/:id/createNewCase'
+              url: 'api/docs/:id/createNewCase'
             },
             'getCorrespondentEmail': {
               method: 'GET',
-              url: '/api/docs/:id/getCorrespondentEmail'
+              url: 'api/docs/:id/getCorrespondentEmail'
             },
             'sendCorrespondentEmail': {
               method: 'POST',
-              url: '/api/docs/:id/sendCorrespondentEmail'
+              url: 'api/docs/:id/sendCorrespondentEmail'
             },
             'getRioEditableFile': {
               method: 'GET',
-              url: '/api/docs/:id/getRioEditableFile'
+              url: 'api/docs/:id/getRioEditableFile'
             }
           });
       }]);

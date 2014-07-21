@@ -3,6 +3,6 @@
   'use strict';
 
   angular.module('gva').factory('OrganizationApprovals', ['$resource', function ($resource) {
-    return $resource('/api/organizations/:id/organizationApprovals/:ind');
+    return $resource('api/organizations/:id/organizationApprovals/:ind');
   }]);
 }(angular));
