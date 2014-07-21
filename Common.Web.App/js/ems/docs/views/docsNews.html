@@ -20,10 +20,11 @@
         <ems-doc-new-common name="docNewCommonForm" ng-model="docModel"></ems-doc-new-common>
 
         <div class="row">
-          <div class="form-group col-sm-4">
-            <label class="control-label" l10n-text="docs.newDoc.docCorrespondent"></label>
+           <sc-field-group class="col-md-6" text="docs.newDoc.docCorrespondent">
             <sc-nomenclature ng-model="docModel.doc.correspondents" name="correspondents" alias="'correspondent'" mode="id" multiple></sc-nomenclature>
-          </div>
+            <sc-button btn-click="selectCorr()" class="btn btn-default" icon="glyphicon-search"></sc-button>
+            <sc-button btn-click="newCorr()" class="btn btn-default" icon="glyphicon-plus"></sc-button>
+          </sc-field-group>
         </div>
 
         <div class="row">
