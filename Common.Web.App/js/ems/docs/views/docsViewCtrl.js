@@ -7,24 +7,42 @@
     $scope,
     $stateParams,
     doc,
-    selectedCorrs,
-    selectedUnits
+    selectedUnits,
+    namedModal
   ) {
     $scope.doc = doc;
 
-    if (selectedCorrs.current.length > 0) {
-      doc.docCorrespondents.push(selectedCorrs.current.pop());
-    }
+    $scope.newCorr = function () {
+      var modalInstance = namedModal.open('newCorr');
 
-    $scope.newCorr = function NewCorr() {
-      return $state.go('root.docs.edit.view.newCorr');
+      modalInstance.result.then(function (nomItem) {
+        var newCorr = $scope.doc.docCorrespondents.slice();
+        newCorr.push(nomItem);
+        $scope.doc.docCorrespondents = newCorr;
+      });
+
+      return modalInstance.opened;
     };
 
-    $scope.selectCorr = function selectCorr() {
-      selectedCorrs.current.splice(0);
-      selectedCorrs.total = doc.docCorrespondents;
+    $scope.selectCorr = function () {
+      var modalInstance = namedModal.open('chooseCorr', {
+        selectedCorrs: $scope.doc.docCorrespondents
+      }, {
+        corrs: [
+          'Corrs',
+          function (Corrs) {
+            return Corrs.get().$promise;
+          }
+        ]
+      });
 
-      return $state.go('root.docs.edit.view.selectCorr');
+      modalInstance.result.then(function (nomItem) {
+        var newCorr = $scope.doc.docCorrespondents.slice();
+        newCorr.push(nomItem);
+        $scope.doc.docCorrespondents = newCorr;
+      });
+
+      return modalInstance.opened;
     };
 
     $scope.selectUnit = function selectUnit(message) {
@@ -111,20 +129,11 @@
     '$scope',
     '$stateParams',
     'doc',
-    'selectedCorrs',
-    'selectedUnits'
+    'selectedUnits',
+    'namedModal'
   ];
 
   DocsViewCtrl.$resolve = {
-    selectedCorrs: [
-      'doc',
-      function selectedCorrs(doc) {
-        return {
-          total: doc.docCorrespondents,
-          current: []
-        };
-      }
-    ],
     selectedUnits: [
       function resolveSelectedUnits() {
         return {

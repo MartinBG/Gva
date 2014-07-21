@@ -3,6 +3,23 @@
   'use strict';
   angular.module('ems').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
+      common: {
+        chooseCorr: {
+          title: 'Избор на кореспондент',
+          displayName: 'Наименование',
+          email: 'Имейл',
+          correspondentType: 'Тип',
+          search: 'Търси',
+          cancel: 'Отказ',
+          select: 'Избор',
+          'new': 'Нов'
+        },
+        newCorr: {
+          title: 'Нов кореспондент',
+          cancel: 'Отказ',
+          save: 'Запис'
+        }
+      },
       docs: {
         edit: {
           child: 'Подчинен',
@@ -81,15 +98,6 @@
             madeBy: 'Изготвил',
             docUnitsFrom: 'От',
             docUnitsTo: 'До',
-            selectCorr: {
-              displayName: 'Наименование',
-              email: 'Имейл',
-              correspondentType: 'Тип',
-              search: 'Търси',
-              cancel: 'Назад',
-              select: 'Избор',
-              'new': 'Нов'
-            },
             selectUnit: {
               name: 'Име',
               search: 'Търси',
@@ -433,7 +441,6 @@
         'root.docs.new': 'Нов документ',
         'root.docs.new.caseSelect': 'Избор на преписка',
         'root.docs.edit.view': 'Преглед',
-        'root.docs.edit.view.selectCorr': 'Избор на кореспондент',
         'root.docs.edit.view.selectUnit': 'Избор на служител',
         'root.docs.edit.workflows': 'Управление',
         'root.docs.edit.workflows.signRequest': 'Искане за подпис',

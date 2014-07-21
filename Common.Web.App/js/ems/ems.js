@@ -11,6 +11,7 @@
     // @ifndef DEBUG
     'ems.templates',
     // @endif
+    'scaffolding',
     'l10n',
     'l10n-tools'
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
@@ -96,6 +97,10 @@
       templateUrl: 'js/ems/docs/forms/competenceTransfer/competenceTransfer.html',
       controller: 'CompetenceTransferCtrl'
     });
+  }]).config(['namedModalProvider', function (namedModalProvider) {
+    namedModalProvider
+     .modal('chooseCorr', 'js/ems/docs/modals/chooseCorrModal.html', 'ChooseCorrModalCtrl')
+     .modal('newCorr'   , 'js/ems/docs/modals/newCorrModal.html'   , 'NewCorrModalCtrl');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.docs'                                     , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot'                                                                                                           ])
@@ -105,8 +110,6 @@
       .state(['root.docs.news'                                , '/news'                                                                                                , ['@root'           , 'js/ems/docs/views/docsNews.html'                         ,'DocsNewsCtrl'             ]])
       .state(['root.docs.edit'                                , '/:id'                                                                                                 , ['@root'           , 'js/ems/docs/views/docsEdit.html'                         ,'DocsEditCtrl'             ]])
       .state(['root.docs.edit.view'                           , '/view'                                                                                                , ['@root.docs.edit' , 'js/ems/docs/views/docsView.html'                         ,'DocsViewCtrl'             ]])
-      .state(['root.docs.edit.view.selectCorr'                , '/selectCorr?displayName&email&stamp'                                                                  , ['@root.docs.edit' , 'js/ems/docs/views/selectCorrView.html'                   ,'SelectCorrViewCtrl'       ]])
-      .state(['root.docs.edit.view.newCorr'                   , '/new'                                                                                                 , ['@root.docs.edit' , 'js/ems/corrs/views/corrNew.html'                         ,'DocsCorrNewCtrl'          ]])
       .state(['root.docs.edit.view.selectUnit'                , '/selectUnit?name&stamp'                                                                               , ['@root.docs.edit' , 'js/ems/docs/views/selectUnitView.html'                   ,'SelectUnitViewCtrl'       ]])
       .state(['root.docs.edit.workflows'                      , '/workflows'                                                                                           , ['@root.docs.edit' , 'js/ems/docs/views/docsWorkflows.html'                    ,'DocsWorkflowsCtrl'        ]])
       .state(['root.docs.edit.workflows.signRequest'          , '/signRequest'                                                                                         , ['@root.docs.edit' , 'js/ems/docs/views/workflowRequest.html'                  ,'WorkflowRequestCtrl'      ]])

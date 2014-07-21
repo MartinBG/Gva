@@ -93,6 +93,10 @@
     <Content Include="js\ems\docs\forms\docView\taskCtrl.js" />
     <Content Include="js\ems\docs\forms\removingIrregularity\removingIrregularity.html" />
     <Content Include="js\ems\docs\forms\removingIrregularity\removingIrregularityCtrl.js" />
+    <Content Include="js\ems\docs\modals\chooseCorrModal.html" />
+    <Content Include="js\ems\docs\modals\chooseCorrModalCtrl.js" />
+    <Content Include="js\ems\docs\modals\newCorrModal.html" />
+    <Content Include="js\ems\docs\modals\newCorrModalCtrl.js" />
     <Content Include="js\ems\docs\recources\docs.js" />
     <Content Include="js\ems\docs\recources\docStages.js" />
     <Content Include="js\ems\docs\recources\docStatuses.js" />
@@ -109,7 +113,6 @@
     <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
     <Content Include="js\ems\docs\views\caseFinish.html" />
     <Content Include="js\ems\docs\views\caseFinishCtrl.js" />
-    <Content Include="js\ems\docs\views\docsCorrNewCtrl.js" />
     <Content Include="js\ems\docs\views\docsEdit.html" />
     <Content Include="js\ems\docs\views\docsEditCtrl.js" />
     <Content Include="js\ems\docs\views\docsNew.html" />
@@ -138,8 +141,6 @@
     <Content Include="js\ems\docs\views\nextStageCtrl.js" />
     <Content Include="js\ems\docs\views\portalModal.html" />
     <Content Include="js\ems\docs\views\portalModalCtrl.js" />
-    <Content Include="js\ems\docs\views\selectCorrView.html" />
-    <Content Include="js\ems\docs\views\selectCorrViewCtrl.js" />
     <Content Include="js\ems\docs\views\selectUnitView.html" />
     <Content Include="js\ems\docs\views\selectUnitViewCtrl.js" />
     <Content Include="js\ems\docs\views\workflowConfirm.html" />
