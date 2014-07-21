@@ -3,6 +3,6 @@
   'use strict';
 
   angular.module('common').factory('Roles', ['$resource', function ($resource) {
-    return $resource('/api/roles');
+    return $resource('api/roles');
   }]);
 }(angular));

@@ -31,7 +31,7 @@
         {{item.pageCount}}
       </sc-column>
       <sc-column sortable="false" class="buttons-cell" has-content="true">
-        <a target="_self" ng-hide="item.index === undefined" ng-href="/api/print?lotId={{lotId}}&path=licences/{{licence.partIndex}}&index={{item.index}}">
+        <a target="_self" ng-hide="item.index === undefined" ng-href="api/print?lotId={{lotId}}&path=licences/{{licence.partIndex}}&index={{item.index}}">
           <span class="glyphicon glyphicon-print"></span>
 
         </a>

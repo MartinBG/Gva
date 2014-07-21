@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/airports/:id/airportData',
+      .when('GET', 'api/airports/:id/airportData',
         function ($params, airportLots) {
           var airportLot = _(airportLots).filter({ lotId: parseInt($params.id, 10) }).first();
 
@@ -15,7 +15,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/airports/:id/airportData',
+      .when('POST', 'api/airports/:id/airportData',
         function ($params, $jsonData, airportLots) {
           var airportLot = _(airportLots).filter({ lotId: parseInt($params.id, 10) }).first();
 

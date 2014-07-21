@@ -3,6 +3,6 @@
   'use strict';
 
   angular.module('gva').factory('AircraftDocumentOwners', ['$resource', function ($resource) {
-    return $resource('/api/aircrafts/:id/aircraftDocumentOwners/:ind');
+    return $resource('api/aircrafts/:id/aircraftDocumentOwners/:ind');
   }]);
 }(angular));

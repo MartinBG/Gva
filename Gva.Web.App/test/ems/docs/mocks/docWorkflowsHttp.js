@@ -6,7 +6,7 @@
     var nomenclatures = require('./nomenclatures.sample');
 
     $httpBackendConfiguratorProvider
-      .when('POST', '/api/docs/:docId/workflow/add',
+      .when('POST', 'api/docs/:docId/workflow/add',
       function ($params, $jsonData, docWorkflows) {
         var docId = parseInt($params.docId, 10);
 
@@ -55,7 +55,7 @@
 
         return [200, { docWorkflows: returnValue }];
       })
-      .when('POST', '/api/docs/:docId/workflow/remove',
+      .when('POST', 'api/docs/:docId/workflow/remove',
       function ($params, $jsonData, docWorkflows) {
         var docId = parseInt($params.docId, 10);
 

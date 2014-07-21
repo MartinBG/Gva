@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/aircrafts/:id/aircraftDocumentApplications?number',
+      .when('GET', 'api/aircrafts/:id/aircraftDocumentApplications?number',
         function ($params, $filter, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -23,7 +23,7 @@
             return [200, aircraft.aircraftDocumentApplications];
           }
         })
-      .when('GET', '/api/aircrafts/:id/aircraftDocumentApplications/:ind',
+      .when('GET', 'api/aircrafts/:id/aircraftDocumentApplications/:ind',
         function ($params, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -38,7 +38,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/aircrafts/:id/aircraftDocumentApplications',
+      .when('POST', 'api/aircrafts/:id/aircraftDocumentApplications',
         function ($params, $jsonData, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -51,7 +51,7 @@
 
           return [200];
         })
-      .when('POST', '/api/aircrafts/:id/aircraftDocumentApplications/:ind',
+      .when('POST', 'api/aircrafts/:id/aircraftDocumentApplications/:ind',
         function ($params, $jsonData, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -63,7 +63,7 @@
 
           return [200];
         })
-      .when('DELETE', '/api/aircrafts/:id/aircraftDocumentApplications/:ind',
+      .when('DELETE', 'api/aircrafts/:id/aircraftDocumentApplications/:ind',
         function ($params, $jsonData, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

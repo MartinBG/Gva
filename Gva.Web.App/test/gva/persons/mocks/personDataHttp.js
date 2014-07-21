@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/persons/:id/personData',
+      .when('GET', 'api/persons/:id/personData',
         function ($params, personLots) {
           var personLot = _(personLots).filter({ lotId: parseInt($params.id, 10) }).first();
 
@@ -15,7 +15,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/persons/:id/personData',
+      .when('POST', 'api/persons/:id/personData',
         function ($params, $jsonData, personLots) {
           var personLot = _(personLots).filter({ lotId: parseInt($params.id, 10) }).first();
 

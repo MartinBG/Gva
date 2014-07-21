@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/organizations/:id/organizationData',
+      .when('GET', 'api/organizations/:id/organizationData',
         function ($params, organizationLots) {
           var organizationLot = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -16,7 +16,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/organizations/:id/organizationData',
+      .when('POST', 'api/organizations/:id/organizationData',
         function ($params, $jsonData, organizationLots) {
           var organizationLot = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-        .when('GET', '/api/publishers?name&publisherType',
+        .when('GET', 'api/publishers?name&publisherType',
           function ($params, $filter, publishers) {
             var pubs = [];
 

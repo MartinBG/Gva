@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('auth', ['ng']).constant('authServiceConfig', {
-    tokenUrl: '/api/token'
+    tokenUrl: 'api/token'
   }).factory('sessionTokenStore', ['$window', function ($window) {
     var cookies, sessionKey;
 

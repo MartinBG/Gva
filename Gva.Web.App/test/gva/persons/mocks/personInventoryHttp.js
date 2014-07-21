@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/persons/:id/inventory',
+      .when('GET', 'api/persons/:id/inventory',
         function ($params, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

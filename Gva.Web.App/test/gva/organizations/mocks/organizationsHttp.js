@@ -17,7 +17,7 @@
     }
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/organizations?code',
+      .when('GET', 'api/organizations?code',
         function ($params, $filter, organizationLots) {
           var organization = _(organizationLots)
            .map(organizationMapper)
@@ -41,7 +41,7 @@
 
           return [200, organization];
         })
-      .when('GET', '/api/organizations/:id',
+      .when('GET', 'api/organizations/:id',
         function ($params, $filter, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).map(organizationMapper).first();
@@ -53,7 +53,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/organizations',
+      .when('POST', 'api/organizations',
         function ($params, $jsonData, organizationLots) {
           var nextLotId = Math.max(_(organizationLots).pluck('lotId').max().value() + 1, 1);
 

@@ -24,7 +24,7 @@
     }
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/aircrafts?manSN&model&icao',
+      .when('GET', 'api/aircrafts?manSN&model&icao',
         function ($params, $filter, aircraftLots) {
           var aircrafts = _(aircraftLots)
           .map(aircraftMapper)
@@ -52,7 +52,7 @@
 
           return [200, aircrafts];
         })
-      .when('GET', '/api/aircrafts/:id',
+      .when('GET', 'api/aircrafts/:id',
         function ($params, $filter, aircraftLots) {
           var aircraft = _(aircraftLots)
             .filter({ lotId: parseInt($params.id, 10) }).map(aircraftMapper).first();
@@ -64,7 +64,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/aircrafts',
+      .when('POST', 'api/aircrafts',
         function ($params, $jsonData, aircraftLots) {
           var nextLotId = Math.max(_(aircraftLots).pluck('lotId').max().value() + 1, 1);
 

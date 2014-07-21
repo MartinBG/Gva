@@ -4,14 +4,14 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/organizations/:id/organizationRegGroundServiceOperators',
+      .when('GET', 'api/organizations/:id/organizationRegGroundServiceOperators',
         function ($params, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
 
           return [200, organization.organizationRegGroundServiceOperators];
         })
-      .when('GET', '/api/organizations/:id/organizationRegGroundServiceOperators/:ind',
+      .when('GET', 'api/organizations/:id/organizationRegGroundServiceOperators/:ind',
         function ($params, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -27,7 +27,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/organizations/:id/organizationRegGroundServiceOperators',
+      .when('POST', 'api/organizations/:id/organizationRegGroundServiceOperators',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -41,7 +41,7 @@
 
           return [200];
         })
-      .when('POST', '/api/organizations/:id/organizationRegGroundServiceOperators/:ind',
+      .when('POST', 'api/organizations/:id/organizationRegGroundServiceOperators/:ind',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -54,7 +54,7 @@
 
           return [200];
         })
-      .when('DELETE', '/api/organizations/:id/organizationRegGroundServiceOperators/:ind',
+      .when('DELETE', 'api/organizations/:id/organizationRegGroundServiceOperators/:ind',
         function ($params, $jsonData, organizationLots) {
           var organization = _(organizationLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

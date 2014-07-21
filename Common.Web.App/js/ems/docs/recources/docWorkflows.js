@@ -5,7 +5,7 @@
   angular.module('ems')
     .factory('DocWorkflows', ['$resource',
       function ($resource) {
-        return $resource('/api/docs/:id/workflow/:itemId', {
+        return $resource('api/docs/:id/workflow/:itemId', {
           id: '@docId',
           itemId: '@itemId',
           docVersion: '@docVersion'

@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/airports/:id/airportDocumentOthers?number&typeid&publ&datef',
+      .when('GET', 'api/airports/:id/airportDocumentOthers?number&typeid&publ&datef',
         function ($params, $filter, airportLots) {
           var airport = _(airportLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -37,7 +37,7 @@
             return [200, airport.airportDocumentOthers];
           }
         })
-      .when('GET', '/api/airports/:id/airportDocumentOthers/:ind',
+      .when('GET', 'api/airports/:id/airportDocumentOthers/:ind',
         function ($params, airportLots) {
           var airport = _(airportLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -52,7 +52,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/airports/:id/airportDocumentOthers',
+      .when('POST', 'api/airports/:id/airportDocumentOthers',
         function ($params, $jsonData, airportLots) {
           var airport = _(airportLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -65,7 +65,7 @@
 
           return [200];
         })
-      .when('POST', '/api/airports/:id/airportDocumentOthers/:ind',
+      .when('POST', 'api/airports/:id/airportDocumentOthers/:ind',
         function ($params, $jsonData, airportLots) {
           var airport = _(airportLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();
@@ -77,7 +77,7 @@
 
           return [200];
         })
-      .when('DELETE', '/api/airports/:id/airportDocumentOthers/:ind',
+      .when('DELETE', 'api/airports/:id/airportDocumentOthers/:ind',
         function ($params, $jsonData, airportLots) {
           var airport = _(airportLots)
             .filter({ lotId: parseInt($params.id, 10) }).first();

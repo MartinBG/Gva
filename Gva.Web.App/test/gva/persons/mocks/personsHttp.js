@@ -25,7 +25,7 @@
     }
 
     $httpBackendConfiguratorProvider
-      .when('GET', '/api/persons?exact&lin&uin&names&licences&ratings&organization',
+      .when('GET', 'api/persons?exact&lin&uin&names&licences&ratings&organization',
         function ($params, $filter, personLots) {
           var persons = _(personLots)
             .map(personMapper)
@@ -53,7 +53,7 @@
 
           return [200, persons];
         })
-      .when('GET', '/api/persons/:id',
+      .when('GET', 'api/persons/:id',
         function ($params, $filter, personLots) {
           var person = _(personLots)
             .filter({ lotId: parseInt($params.id, 10) }).map(personMapper).first();
@@ -65,7 +65,7 @@
             return [404];
           }
         })
-      .when('POST', '/api/persons',
+      .when('POST', 'api/persons',
         function ($params, $jsonData, personLots) {
           var nextLotId = Math.max(_(personLots).pluck('lotId').max().value() + 1, 1);
 

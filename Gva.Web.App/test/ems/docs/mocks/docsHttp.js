@@ -6,7 +6,7 @@
     var nomenclatures = require('./nomenclatures.sample');
 
     $httpBackendConfiguratorProvider
-        .when('GET', '/api/docs?' +
+        .when('GET', 'api/docs?' +
           'filter&fromDate&toDate&regUri&docName&' +
           'docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot',
         function ($params, docs, applicationsFactory) {
@@ -108,7 +108,7 @@
             msg: ''
           }];
         })
-        .when('POST', '/api/docs/new/create',
+        .when('POST', 'api/docs/new/create',
         function ($jsonData, docsFactory) {
 
           if (!$jsonData) {
@@ -119,7 +119,7 @@
 
           return [200, { docId: newDoc.docId }];
         })
-        .when('POST', '/api/docs/new/register',
+        .when('POST', 'api/docs/new/register',
         function ($jsonData, docsFactory) {
           if (!$jsonData) {
             return [400];
@@ -129,7 +129,7 @@
 
           return [200, { docId: newDoc.docId, regUri: newDoc.regUri }];
         })
-        .when('GET', '/api/docs/:id',
+        .when('GET', 'api/docs/:id',
         function ($params, docs) {
           var doc = _(docs).filter({ docId: parseInt($params.id, 10) }).first();
 
@@ -139,7 +139,7 @@
 
           return [200, doc];
         })
-        .when('POST', '/api/docs/:id',
+        .when('POST', 'api/docs/:id',
         function ($params, $jsonData, $filter, docs) {
           var docId = parseInt($params.id, 10),
             docIndex = docs.indexOf($filter('filter')(docs, { docId: docId })[0]);
@@ -152,7 +152,7 @@
 
           return [200];
         })
-        .when('POST', '/api/docs/:docId/nextStatus',
+        .when('POST', 'api/docs/:docId/nextStatus',
         function ($params, docs) {
           var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
 
@@ -178,7 +178,7 @@
 
           return [200, { docId: doc.docId }];
         })
-        .when('POST', '/api/docs/:docId/reverseStatus',
+        .when('POST', 'api/docs/:docId/reverseStatus',
         function ($params, docs) {
           var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
 
@@ -214,7 +214,7 @@
 
           return [200, { docId: doc.docId }];
         })
-        .when('POST', '/api/docs/:docId/cancelStatus',
+        .when('POST', 'api/docs/:docId/cancelStatus',
         function ($params, docs) {
           var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
 
@@ -232,7 +232,7 @@
 
           return [200, { docId: doc.docId }];
         })
-        .when('POST', '/api/docs/:docId/setRegUri',
+        .when('POST', 'api/docs/:docId/setRegUri',
         function ($params, docs) {
           var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
 
@@ -246,7 +246,7 @@
 
           return [200, { docId: doc.docId }];
         })
-        .when('POST', '/api/docs/:docId/setCasePart',
+        .when('POST', 'api/docs/:docId/setCasePart',
         function ($params, $jsonData, docs, docCases) {
           var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
 
@@ -270,7 +270,7 @@
 
           return [200, { docId: doc.docId }];
         })
-        .when('POST', '/api/docs/:docId/setDocType',
+        .when('POST', 'api/docs/:docId/setDocType',
         function ($params, $jsonData, docs, docCases) {
           var doc = _(docs).filter({ docId: parseInt($params.docId, 10) }).first();
 

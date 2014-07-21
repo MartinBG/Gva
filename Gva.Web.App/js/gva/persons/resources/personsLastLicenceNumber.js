@@ -3,6 +3,6 @@
   'use strict';
 
   angular.module('gva').factory('PersonsLastLicenceNumber', ['$resource', function($resource) {
-    return $resource('/api/persons/:id/lastLicenceNumber');
+    return $resource('api/persons/:id/lastLicenceNumber');
   }]);
 }(angular));

@@ -6,7 +6,7 @@
 
   angular.module('scaffolding')
     .constant('scFilesConfig', {
-      fileUrl: '/api/file'
+      fileUrl: 'api/file'
     })
     .directive('scFiles', function () {
       return {

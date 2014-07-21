@@ -4,7 +4,7 @@
 
   angular.module('app').config(function ($httpBackendConfiguratorProvider) {
     $httpBackendConfiguratorProvider
-        .when('GET', '/api/auditDetails?type',
+        .when('GET', 'api/auditDetails?type',
           function ($params, auditPartRequirements, auditResults) {
             var auditDetails = [],
               defaultAuditResult = _.where(auditResults, { alias: 'Not executed' })[0],

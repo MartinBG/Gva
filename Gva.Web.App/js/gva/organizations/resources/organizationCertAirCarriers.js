@@ -3,6 +3,6 @@
   'use strict';
 
   angular.module('gva').factory('CertAirCarriers', ['$resource', function ($resource) {
-    return $resource('/api/organizations/:id/organizationCertAirCarriers/:ind');
+    return $resource('api/organizations/:id/organizationCertAirCarriers/:ind');
   }]);
 }(angular));
