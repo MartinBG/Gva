@@ -7,20 +7,19 @@
  xmlns:html="http://www.w3.org/TR/REC-html40">
  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
   <Created>2006-09-16T00:00:00Z</Created>
-  <LastSaved>2014-06-05T12:22:08Z</LastSaved>
+  <LastSaved>2014-07-21T07:15:01Z</LastSaved>
   <Version>15.00</Version>
  </DocumentProperties>
  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
   <RemovePersonalInformation/>
  </OfficeDocumentSettings>
  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
-  <WindowHeight>10365</WindowHeight>
-  <WindowWidth>21570</WindowWidth>
+  <WindowHeight>13515</WindowHeight>
+  <WindowWidth>30720</WindowWidth>
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
-  <TabRatio>651</TabRatio>
-  <ActiveSheet>8</ActiveSheet>
-  <FirstVisibleSheet>6</FirstVisibleSheet>
+  <TabRatio>812</TabRatio>
+  <ActiveSheet>3</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -37,7 +36,11 @@
    <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#0000FF"
     ss:Underline="Single"/>
   </Style>
-  <Style ss:ID="s63" ss:Name="Normal 2">
+  <Style ss:ID="s63" ss:Name="Hyperlink 2">
+   <Font ss:FontName="Arial" x:CharSet="204" ss:Color="#0000FF"
+    ss:Underline="Single"/>
+  </Style>
+  <Style ss:ID="s64" ss:Name="Normal 2">
    <Alignment ss:Vertical="Bottom"/>
    <Borders/>
    <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
@@ -45,20 +48,28 @@
    <NumberFormat/>
    <Protection/>
   </Style>
-  <Style ss:ID="s64">
+  <Style ss:ID="s65" ss:Name="Normal 3">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Arial" x:CharSet="204"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s66">
    <NumberFormat ss:Format="@"/>
   </Style>
-  <Style ss:ID="s65">
+  <Style ss:ID="s67">
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
     ss:Color="#000000" ss:Bold="1"/>
    <NumberFormat ss:Format="@"/>
   </Style>
-  <Style ss:ID="s66">
+  <Style ss:ID="s68">
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
     ss:Color="#000000"/>
    <NumberFormat ss:Format="@"/>
   </Style>
-  <Style ss:ID="s67">
+  <Style ss:ID="s69">
    <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
    <Borders>
     <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
@@ -69,38 +80,15 @@
    <Font ss:FontName="Times New Roman" x:CharSet="204" x:Family="Roman" ss:Bold="1"/>
    <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
   </Style>
-  <Style ss:ID="s69">
+  <Style ss:ID="s71">
    <Font ss:FontName="Arial" x:CharSet="204" x:Family="Swiss" ss:Bold="1"/>
    <NumberFormat ss:Format="@"/>
   </Style>
-  <Style ss:ID="s70">
+  <Style ss:ID="s72">
    <Font ss:FontName="Times New Roman" x:CharSet="204" x:Family="Roman"/>
    <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
   </Style>
-  <Style ss:ID="s71">
-   <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
-    ss:Color="#000000" ss:Bold="1"/>
-   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
-   <NumberFormat ss:Format="@"/>
-  </Style>
-  <Style ss:ID="s72">
-   <Borders>
-    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
-    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
-    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
-    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
-   </Borders>
-   <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
-    ss:Color="#000000" ss:Bold="1"/>
-   <NumberFormat ss:Format="@"/>
-  </Style>
   <Style ss:ID="s73">
-   <Borders>
-    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
-    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
-    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
-    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
-   </Borders>
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
     ss:Color="#000000" ss:Bold="1"/>
    <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
@@ -114,7 +102,19 @@
     <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
    </Borders>
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
-    ss:Bold="1"/>
+    ss:Color="#000000" ss:Bold="1"/>
+   <NumberFormat ss:Format="@"/>
+  </Style>
+  <Style ss:ID="s75">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000" ss:Bold="1"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
    <NumberFormat ss:Format="@"/>
   </Style>
   <Style ss:ID="s76">
@@ -124,10 +124,21 @@
     <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
     <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
    </Borders>
+   <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
+    ss:Bold="1"/>
+   <NumberFormat ss:Format="@"/>
+  </Style>
+  <Style ss:ID="s78">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
    <Font ss:FontName="Arial" x:CharSet="204" x:Family="Swiss" ss:Bold="1"/>
    <NumberFormat ss:Format="@"/>
   </Style>
-  <Style ss:ID="s77">
+  <Style ss:ID="s79">
    <Borders>
     <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
     <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
@@ -138,17 +149,19 @@
    <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
    <NumberFormat ss:Format="@"/>
   </Style>
-  <Style ss:ID="s79" ss:Parent="s62">
+  <Style ss:ID="s81" ss:Parent="s65">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
    <Borders>
     <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
     <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
     <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
     <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
    </Borders>
-   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
-   <NumberFormat ss:Format="@"/>
+   <Font ss:FontName="Times New Roman" x:CharSet="204" x:Family="Roman"
+    ss:Color="#800080" ss:Bold="1"/>
+   <Interior/>
   </Style>
-  <Style ss:ID="s80" ss:Parent="s62">
+  <Style ss:ID="s83" ss:Parent="s62">
    <Borders>
     <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
     <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
@@ -157,7 +170,53 @@
    </Borders>
    <NumberFormat ss:Format="@"/>
   </Style>
-  <Style ss:ID="s81">
+  <Style ss:ID="s84" ss:Parent="s65">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Times New Roman" x:CharSet="204" x:Family="Roman"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s86" ss:Parent="s63">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Times New Roman" x:CharSet="204" x:Family="Roman"
+    ss:Color="#0000FF"/>
+   <Interior/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s87" ss:Parent="s65">
+   <Alignment ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Times New Roman" x:CharSet="204" x:Family="Roman"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s88" ss:Parent="s63">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Times New Roman" x:CharSet="204" x:Family="Roman"
+    ss:Color="#0000FF"/>
+   <Interior/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s89">
    <Borders>
     <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
     <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
@@ -167,7 +226,7 @@
    <Font ss:FontName="Times New Roman" x:CharSet="204" x:Family="Roman"/>
    <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
   </Style>
-  <Style ss:ID="s82">
+  <Style ss:ID="s90">
    <Borders>
     <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
     <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
@@ -178,7 +237,7 @@
     ss:Bold="1"/>
    <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
   </Style>
-  <Style ss:ID="s83">
+  <Style ss:ID="s91">
    <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
    <Borders>
     <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
@@ -190,24 +249,40 @@
    <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
    <NumberFormat ss:Format="@"/>
   </Style>
-  <Style ss:ID="s84">
+  <Style ss:ID="s92" ss:Parent="s62">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+   <NumberFormat ss:Format="@"/>
+  </Style>
+  <Style ss:ID="s93">
+   <Borders/>
+   <Font ss:FontName="Times New Roman" x:CharSet="204" x:Family="Roman"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+   <NumberFormat ss:Format="@"/>
+  </Style>
+  <Style ss:ID="s94">
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
     ss:Color="#000000" ss:Bold="1"/>
   </Style>
-  <Style ss:ID="s87">
+  <Style ss:ID="s97">
    <NumberFormat/>
   </Style>
-  <Style ss:ID="s88">
+  <Style ss:ID="s98">
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
     ss:Color="#000000" ss:Bold="1"/>
    <NumberFormat/>
   </Style>
-  <Style ss:ID="s89">
+  <Style ss:ID="s99">
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
     ss:Color="#000000"/>
    <NumberFormat/>
   </Style>
-  <Style ss:ID="s90">
+  <Style ss:ID="s100">
    <Alignment ss:Vertical="Bottom"/>
    <Borders/>
    <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
@@ -216,47 +291,41 @@
    <NumberFormat/>
    <Protection/>
   </Style>
-  <Style ss:ID="s91">
-   <Borders/>
-   <Font ss:FontName="Times New Roman" x:CharSet="204" x:Family="Roman"/>
-   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
-   <NumberFormat ss:Format="@"/>
-  </Style>
  </Styles>
  <Worksheet ss:Name="RegisterIndexes">
   <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="8" x:FullColumns="1"
-   x:FullRows="1" ss:StyleID="s64" ss:DefaultRowHeight="15">
-   <Column ss:Index="4" ss:StyleID="s64" ss:Width="157.5"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="337.5"/>
+   x:FullRows="1" ss:StyleID="s66" ss:DefaultRowHeight="15">
+   <Column ss:Index="4" ss:StyleID="s66" ss:Width="157.5"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="337.5"/>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Code</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Alias</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">IsActive</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">NumberFormat</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Name</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">Code</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">Alias</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">IsActive</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">NumberFormat</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">Name</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s66">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s68">
     <Cell><Data ss:Type="String">9999</Data></Cell>
     <Cell><Data ss:Type="String">9999</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell><Data ss:Type="String">9999-{0:000000}-{1:dd.MM.yyyy}</Data></Cell>
     <Cell><Data ss:Type="String">Регистър индекс невалидни услуги</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s66">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s68">
     <Cell><Data ss:Type="String">9000</Data></Cell>
     <Cell><Data ss:Type="String">Others</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell><Data ss:Type="String">9000-{0:000000}-{1:dd.MM.yyyy}</Data></Cell>
     <Cell><Data ss:Type="String">Регистър индекс други</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s66">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s68">
     <Cell><Data ss:Type="String">0000</Data></Cell>
     <Cell><Data ss:Type="String">External</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell><Data ss:Type="String">{3}-{2:dd.MM.yyyy}</Data></Cell>
     <Cell><Data ss:Type="String">Външен номер</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s66"/>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s68"/>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000099</Data></Cell>
     <Cell><Data ss:Type="String">000099</Data></Cell>
@@ -304,22 +373,22 @@
  </Worksheet>
  <Worksheet ss:Name="Classifications">
   <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="3" x:FullColumns="1"
-   x:FullRows="1" ss:StyleID="s64" ss:DefaultRowHeight="15">
-   <Column ss:Index="2" ss:StyleID="s64" ss:Width="359.25"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="99.75"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="53.25"/>
+   x:FullRows="1" ss:StyleID="s66" ss:DefaultRowHeight="15">
+   <Column ss:Index="2" ss:StyleID="s66" ss:Width="359.25"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="99.75"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="53.25"/>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">LevelKey</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Name</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Alias</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">LevelKey</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">Name</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">Alias</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">00</Data></Cell>
-    <Cell ss:StyleID="s67"><Data ss:Type="String">Всички документи</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">00</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">Всички документи</Data></Cell>
     <Cell ss:StyleID="Default"/>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">Заявления</Data></Cell>
     <Cell ss:StyleID="Default"/>
    </Row>
@@ -349,198 +418,240 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="Units">
-  <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="31" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="37" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="18">
-   <Column ss:StyleID="s69" ss:Width="69"/>
-   <Column ss:StyleID="s70" ss:AutoFitWidth="0" ss:Width="265.5"/>
-   <Column ss:StyleID="s70" ss:AutoFitWidth="0" ss:Width="204.75"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="195"/>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s65">
-    <Cell ss:StyleID="s72"><Data ss:Type="String">LevelKey</Data></Cell>
-    <Cell ss:StyleID="s73"><Data ss:Type="String">Name</Data></Cell>
-    <Cell ss:StyleID="s73"><Data ss:Type="String">User</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">Email</Data></Cell>
+   <Column ss:StyleID="s71" ss:Width="69"/>
+   <Column ss:StyleID="s72" ss:AutoFitWidth="0" ss:Width="265.5"/>
+   <Column ss:StyleID="s72" ss:AutoFitWidth="0" ss:Width="204.75"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="195"/>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s67">
+    <Cell ss:StyleID="s74"><Data ss:Type="String">LevelKey</Data></Cell>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">Name</Data></Cell>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">User</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">Email</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s65">
-    <Cell ss:StyleID="s72"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s73"><Data ss:Type="String">РЪКОВОДСТВО</Data></Cell>
-    <Cell ss:StyleID="s73"/>
-    <Cell ss:StyleID="s74"/>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s67">
+    <Cell ss:StyleID="s74"><Data ss:Type="String">01</Data></Cell>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">РЪКОВОДСТВО</Data></Cell>
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s76"/>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">0101</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Изпълнителен директор</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на Изпълнителен директор</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test0@aop.bg"><Data ss:Type="String">test0@aop.bg</Data></Cell>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0101</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Изпълнителен директор</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Миглена Павлова</Data></Cell>
+    <Cell ss:StyleID="s81" ss:HRef="mailto:m.pavlova@aop.bg"><Data ss:Type="String">m.pavlova@aop.bg </Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">0102</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Главен секретар</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на Главен секретар</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test2@aop.bg"><Data ss:Type="String">test2@aop.bg</Data></Cell>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0102</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Главен секретар</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Иво Кацаров</Data></Cell>
+    <Cell ss:StyleID="s81" ss:HRef="mailto:i.kacarov@aop.bg"><Data ss:Type="String">i.kacarov@aop.bg</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s65">
-    <Cell ss:StyleID="s72"><Data ss:Type="String">02</Data></Cell>
-    <Cell ss:StyleID="s73"><Data ss:Type="String">Дирекция &quot;Методология, анализ и контрол на обществените поръчки&quot;</Data></Cell>
-    <Cell ss:StyleID="s73"/>
-    <Cell ss:StyleID="s80"/>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s65">
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:director@aop.bg"><Data ss:Type="String">director@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s65">
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0202</Data></Cell>
-    <Cell ss:StyleID="s73"><Data ss:Type="String">Отдел &quot;Методология, анализ и законодателство&quot;</Data></Cell>
-    <Cell ss:StyleID="s73"/>
-    <Cell ss:StyleID="s74"/>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020201</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:chief@aop.bg"><Data ss:Type="String">chief@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020202</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Главен експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на регистратор</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:registrator@aop.bg"><Data
-      ss:Type="String">registrator@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020203</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Старши експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на експерт1</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test3@aop.bg"><Data ss:Type="String">test3@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020204</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Младши експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на експерт2</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test4@aop.bg"><Data ss:Type="String">test4@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020205</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Главен специалист</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на експерт3</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test5@aop.bg"><Data ss:Type="String">test5@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s65">
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0203</Data></Cell>
-    <Cell ss:StyleID="s73"><Data ss:Type="String">Отдел &quot;Предварителен контрол&quot;</Data></Cell>
-    <Cell ss:StyleID="s73"/>
-    <Cell ss:StyleID="s74"/>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020301</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Ръководно ниво 6А</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test6@aop.bg"><Data ss:Type="String">test6@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020302</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Сектор &quot;Контрол в/у процедури на договаряне&quot;</Data></Cell>
-    <Cell ss:StyleID="s77"/>
-    <Cell ss:StyleID="s80"/>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030201</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Началник сектор</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Ръководно ниво 7А</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test7@aop.bg"><Data ss:Type="String">test7@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030202</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Главен експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Експертно ниво 3</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test8@aop.bg"><Data ss:Type="String">test8@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030203</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Старши експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Експертно ниво 5</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test9@aop.bg"><Data ss:Type="String">test9@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030204</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Младши експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Експертно ниво 7</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test10@aop.bg"><Data ss:Type="String">test10@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020303</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Сектор &quot;Предварителен контрол на процедури, финансирани с европейски средства&quot;</Data></Cell>
-    <Cell ss:StyleID="s77"/>
-    <Cell ss:StyleID="s80"/>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030301</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Началник сектор</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Ръководно ниво 7А</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test11@aop.bg"><Data ss:Type="String">test11@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030302</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Главен експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Експертно ниво 3</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test12@aop.bg"><Data ss:Type="String">test12@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030303</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Старши експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Експертно ниво 5</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test13@aop.bg"><Data ss:Type="String">test13@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030304</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Младши експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Експертно ниво 7</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test14@aop.bg"><Data ss:Type="String">test14@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030305</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Главен сътрудник по управление на европейски проекти и програми</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Експертно ниво 2</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test15@aop.bg"><Data ss:Type="String">test15@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030306</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Старши сътрудник по управление на европейски проекти и програми</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Експертно ниво 3</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test16@aop.bg"><Data ss:Type="String">test16@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s64">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">02030307</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Сътрудник по управление на европейски проекти и програми</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Експертно ниво 5</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:test17@aop.bg"><Data ss:Type="String">test17@aop.bg</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">05</Data></Cell>
-    <Cell ss:StyleID="s81"><Data ss:Type="String">Системни</Data></Cell>
-    <Cell ss:StyleID="s82"/>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s67">
+    <Cell ss:StyleID="s74"><Data ss:Type="String">02</Data></Cell>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">Дирекция &quot;Методология, анализ и контрол на обществените поръчки&quot;</Data></Cell>
+    <Cell ss:StyleID="s75"/>
     <Cell ss:StyleID="s83"/>
    </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">0501</Data></Cell>
-    <Cell ss:StyleID="s81"><Data ss:Type="String">Система</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Системен потребител</Data></Cell>
-    <Cell ss:StyleID="s79"/>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s67">
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+    <Cell ss:StyleID="s81" ss:HRef="mailto:g.manasieva@aop.bg"><Data
+      ss:Type="String">g.manasieva@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s67">
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0202</Data></Cell>
+    <Cell ss:StyleID="s75"><Data ss:Type="String">Отдел &quot;Методология, анализ и законодателство&quot;</Data></Cell>
+    <Cell ss:StyleID="s75"/>
+    <Cell ss:StyleID="s76"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020201</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Началник отдел</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Веска Христова</Data></Cell>
+    <Cell ss:StyleID="s81" ss:HRef="mailto:ve.hristova@aop.bg"><Data
+      ss:Type="String">ve.hristova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020202</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Главен експерт</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Валентин Панчев </Data></Cell>
+    <Cell ss:StyleID="s81"><Data ss:Type="String">v.panchev@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020203</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Анастасия Иванова  </Data></Cell>
+    <Cell ss:StyleID="s86" ss:HRef="mailto:a.ivanova@aop.bg"><Data ss:Type="String">a.ivanova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020204</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Антоанета Трифонова</Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">a.trifonova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020205</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s87"><Data ss:Type="String">Галина Бахчеванова </Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">g.bahchevanova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s67">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020206</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Георги Габровски</Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">g.gabrovski@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020207</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Георги Георгиев</Data></Cell>
+    <Cell ss:StyleID="s86" ss:HRef="mailto:g.georgiev@aop.bg"><Data
+      ss:Type="String">g.georgiev@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020208</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Гергана Антонова</Data></Cell>
+    <Cell ss:StyleID="s86" ss:HRef="mailto:g.antonova@aop.bg"><Data
+      ss:Type="String">g.antonova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020209</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Гергана Тончева</Data></Cell>
+    <Cell ss:StyleID="s86" ss:HRef="mailto:g.toncheva@aop.bg"><Data
+      ss:Type="String">g.toncheva@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020210</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Деница Асенова  </Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">d.asenova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020211</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Десислава Колева</Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">d.koleva@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020212</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Димитрина Иванова </Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">d.ivanova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020213</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Димитър Димитров </Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">d.dimitrov@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020214</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Елена Янева </Data></Cell>
+    <Cell ss:StyleID="s86" ss:HRef="mailto:e.yaneva@aop.bg"><Data ss:Type="String">e.yaneva@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020215</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Ива Йотова </Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">i.yotova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020216</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Ивайло Стоянов</Data></Cell>
+    <Cell ss:StyleID="s86" ss:HRef="mailto:iv.stoianov@aop.bg"><Data
+      ss:Type="String">iv.stoianov@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020217</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Красимира Цветкова </Data></Cell>
+    <Cell ss:StyleID="s86" ss:HRef="mailto:m.doleva@aop.bg"><Data ss:Type="String">k.cvetkova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020218</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Лъчезар Христов</Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">l.hristov@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020219</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Людмила Заркова</Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">l.zarkova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020220</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Мария Явашева</Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">m.yavasheva@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020221</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Милена Кирилова</Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">m.kirilova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020222</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Михаела Аспарухова/Събина Маринова </Data></Cell>
+    <Cell ss:StyleID="s86" ss:HRef="mailto:m.asparuhova@aop.bg"><Data
+      ss:Type="String">m.asparuhova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020223</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Наташа Иванова </Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">n.ivanova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+    <Cell ss:StyleID="s86" ss:HRef="mailto:p.belova@aop.bg"><Data ss:Type="String">p.belova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020225</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Димитрова</Data></Cell>
+    <Cell ss:StyleID="s88"><Data ss:Type="String">p.dimitrova@aop.bg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="15" ss:StyleID="s66">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020226</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Цветелина Тончева  </Data></Cell>
+    <Cell ss:StyleID="s88"><Data ss:Type="String">c.toncheva@aop.bg</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">0502</Data></Cell>
-    <Cell ss:StyleID="s81"><Data ss:Type="String">Администратор</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Системен администратор</Data></Cell>
-    <Cell ss:StyleID="s79"/>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">05</Data></Cell>
+    <Cell ss:StyleID="s89"><Data ss:Type="String">Системни</Data></Cell>
+    <Cell ss:StyleID="s90"/>
+    <Cell ss:StyleID="s91"/>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s76"><Data ss:Type="String">0503</Data></Cell>
-    <Cell ss:StyleID="s81"><Data ss:Type="String">Служител АОП</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Системен служител АОП</Data></Cell>
-    <Cell ss:StyleID="s79" ss:HRef="mailto:systemuseraop@aop.bg"><Data
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0501</Data></Cell>
+    <Cell ss:StyleID="s89"><Data ss:Type="String">Система</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Системен потребител</Data></Cell>
+    <Cell ss:StyleID="s92"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0502</Data></Cell>
+    <Cell ss:StyleID="s89"><Data ss:Type="String">Администратор</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Системен администратор</Data></Cell>
+    <Cell ss:StyleID="s92"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0503</Data></Cell>
+    <Cell ss:StyleID="s89"><Data ss:Type="String">Служител АОП</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Системен служител АОП</Data></Cell>
+    <Cell ss:StyleID="s92" ss:HRef="mailto:systemuseraop@aop.bg"><Data
       ss:Type="String">systemuseraop@aop.bg</Data></Cell>
    </Row>
   </Table>
@@ -560,8 +671,437 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>25</ActiveRow>
-     <ActiveCol>9</ActiveCol>
+     <ActiveRow>7</ActiveRow>
+     <RangeSelection>R8C1:R9C3</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="UnitClassifications">
+  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="52" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s66" ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="54.75"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="123"/>
+   <Column ss:StyleID="s66" ss:Width="153"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="63"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="156"/>
+   <Column ss:StyleID="s66" ss:Width="160.5"/>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s67">
+    <Cell><Data ss:Type="String">ClassificationCode</Data></Cell>
+    <Cell><Data ss:Type="String">ClassificationName</Data></Cell>
+    <Cell><Data ss:Type="String">ClassificationPermission</Data></Cell>
+    <Cell><Data ss:Type="String">UnitCode</Data></Cell>
+    <Cell><Data ss:Type="String">UnitName</Data></Cell>
+    <Cell><Data ss:Type="String">UnitUser</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Read</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0101</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Изпълнителен директор</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Миглена Павлова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Management</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0101</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Изпълнителен директор</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Миглена Павлова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocWorkflowDiscuss</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0101</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Изпълнителен директор</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Миглена Павлова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:Index="4" ss:StyleID="s78"/>
+    <Cell ss:StyleID="s79"/>
+    <Cell ss:StyleID="s79"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Read</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0102</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Главен секретар</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Иво Кацаров</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Management</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0102</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Главен секретар</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Иво Кацаров</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocWorkflowDiscuss</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0102</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Главен секретар</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Иво Кацаров</Data></Cell>
+   </Row>
+   <Row ss:Index="10" ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Read</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020201</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Началник отдел</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Веска Христова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Management</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020201</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Началник отдел</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Веска Христова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocWorkflowDiscuss</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020201</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Началник отдел</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Веска Христова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:Index="4" ss:StyleID="s78"/>
+    <Cell ss:StyleID="s79"/>
+    <Cell ss:StyleID="s79"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Read</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020202</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Главен експерт</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Валентин Панчев </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Management</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020202</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Главен експерт</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Валентин Панчев </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocWorkflowDiscuss</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020202</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Главен експерт</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Валентин Панчев </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:Index="4" ss:StyleID="s78"/>
+    <Cell ss:StyleID="s93"/>
+    <Cell ss:StyleID="s79"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Read</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Edit</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Register</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">PublicFileManagement</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Management</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocWorkflowSign</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocWorkflowDiscuss</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">SubstituteManagement</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocWorkflowManagement</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">ESign</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Finish</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Reverse</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">EditTech</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">EditTechElectronicServiceStage</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocCasePartManagement</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocMovement</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">SendMail</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
+   </Row>
+   <Row ss:Index="36" ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Read</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Edit</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Register</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">PublicFileManagement</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Management</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocWorkflowSign</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocWorkflowDiscuss</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">SubstituteManagement</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocWorkflowManagement</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">ESign</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Finish</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Reverse</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">EditTech</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">EditTechElectronicServiceStage</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocCasePartManagement</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">DocMovement</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">SendMail</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020224</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
+    <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Unsynced/>
+   <Print>
+    <ValidPrinterInfo/>
+    <PaperSizeIndex>9</PaperSizeIndex>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>600</VerticalResolution>
+   </Print>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>8</ActiveRow>
+     <ActiveCol>11</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -574,7 +1114,7 @@
    <Column ss:AutoFitWidth="0" ss:Width="101.25"/>
    <Column ss:AutoFitWidth="0" ss:Width="216.75"/>
    <Column ss:AutoFitWidth="0" ss:Width="143.25"/>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s84">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s94">
     <Cell><Data ss:Type="String">DocTypeGroupId</Data></Cell>
     <Cell><Data ss:Type="String">Name</Data></Cell>
     <Cell><Data ss:Type="String">IsElectronicService</Data></Cell>
@@ -655,45 +1195,45 @@
    <Column ss:AutoFitWidth="0" ss:Width="154.5"/>
    <Column ss:AutoFitWidth="0" ss:Width="183.75"/>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s84"><Data ss:Type="String">DocFileTypeId</Data></Cell>
-    <Cell ss:StyleID="s84"><Data ss:Type="String">Name</Data></Cell>
-    <Cell ss:StyleID="s84"><Data ss:Type="String">Alias</Data></Cell>
-    <Cell ss:StyleID="s84"><Data ss:Type="String">DocTypeUri</Data></Cell>
-    <Cell ss:StyleID="s84"><Data ss:Type="String">HasEmbeddedUri</Data></Cell>
+    <Cell ss:StyleID="s94"><Data ss:Type="String">DocFileTypeId</Data></Cell>
+    <Cell ss:StyleID="s94"><Data ss:Type="String">Name</Data></Cell>
+    <Cell ss:StyleID="s94"><Data ss:Type="String">Alias</Data></Cell>
+    <Cell ss:StyleID="s94"><Data ss:Type="String">DocTypeUri</Data></Cell>
+    <Cell ss:StyleID="s94"><Data ss:Type="String">HasEmbeddedUri</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s63"><Data ss:Type="Number">201</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">Документ УРИ 0010-004686</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">R-0001</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-aop</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">201</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Документ УРИ 0010-004686</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">R-0001</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">0010-aop</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s63"><Data ss:Type="Number">401</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-000001</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">401</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">0010-000001</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s63"><Data ss:Type="Number">402</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">Потвърждаване за получаване</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">ReceiptAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-000002</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">402</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Потвърждаване за получаване</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">ReceiptAcknowledgedMessage</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">0010-000002</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s63"><Data ss:Type="Number">403</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">RemovingIrregularitiesInstructions</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-003010</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">403</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">RemovingIrregularitiesInstructions</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">0010-003010</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s63"><Data ss:Type="Number">1001</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">Чеклист</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">Checklist</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">Checklist</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="Number">1001</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Чеклист</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Checklist</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">Checklist</Data></Cell>
     <Cell><Data ss:Type="Boolean">0</Data></Cell>
    </Row>
   </Table>
@@ -717,22 +1257,22 @@
  </Worksheet>
  <Worksheet ss:Name="DocTypes">
   <Table ss:ExpandedColumnCount="16" ss:ExpandedRowCount="18" x:FullColumns="1"
-   x:FullRows="1" ss:StyleID="s87" ss:DefaultRowHeight="15">
-   <Column ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="98.25"/>
-   <Column ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="81.75"/>
-   <Column ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="42.75"/>
-   <Column ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="96.75"/>
-   <Column ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="120"/>
-   <Column ss:StyleID="s87" ss:Width="75.75" ss:Span="1"/>
-   <Column ss:Index="8" ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="126.75"/>
-   <Column ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="159.75"/>
-   <Column ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="140.25"/>
-   <Column ss:StyleID="s87" ss:Width="141.75"/>
-   <Column ss:StyleID="s87" ss:Width="164.25"/>
-   <Column ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="277.5"/>
-   <Column ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="54"/>
-   <Column ss:StyleID="s87" ss:AutoFitWidth="0" ss:Width="69.75"/>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   x:FullRows="1" ss:StyleID="s97" ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="98.25"/>
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="81.75"/>
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="42.75"/>
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="96.75"/>
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="120"/>
+   <Column ss:StyleID="s97" ss:Width="75.75" ss:Span="1"/>
+   <Column ss:Index="8" ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="126.75"/>
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="159.75"/>
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="140.25"/>
+   <Column ss:StyleID="s97" ss:Width="141.75"/>
+   <Column ss:StyleID="s97" ss:Width="164.25"/>
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="277.5"/>
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="54"/>
+   <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="69.75"/>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">DocTypeGroup</Data></Cell>
     <Cell><Data ss:Type="String">DocDirection</Data></Cell>
     <Cell><Data ss:Type="String">IsElectronicService</Data></Cell>
@@ -750,7 +1290,7 @@
     <Cell><Data ss:Type="String">RemoveIrregularitiesDeadline</Data></Cell>
     <Cell><Data ss:Type="String">IsActive</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Системни</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -760,15 +1300,15 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Resolution</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Resolution</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Резолюция</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Резолюция</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Системни</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -778,15 +1318,15 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Task</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Task</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Задача</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Задача</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Системни</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -796,15 +1336,15 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Remark</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Remark</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Забележка</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Забележка</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Системни</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
@@ -814,87 +1354,87 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">EditableDocumentFile</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">EditableDocumentFile</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Чеклист</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Чеклист</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Общи</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Писмо</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Писмо</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Общи</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Приемно предавателен протокол</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Приемно предавателен протокол</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Общи</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s90"><Data ss:Type="String">Note</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Note</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Становище</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Становище</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Общи</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s90"><Data ss:Type="String">Report</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Report</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Доклад</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Доклад</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -904,15 +1444,15 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0010-000001</Data></Cell>
-    <Cell ss:StyleID="s89"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0010-000001</Data></Cell>
+    <Cell ss:StyleID="s99"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -922,15 +1462,15 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">ReceiptAcknowledgedMessage</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0010-000002</Data></Cell>
-    <Cell ss:StyleID="s89"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Потвърждаване за получаване</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">ReceiptAcknowledgedMessage</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0010-000002</Data></Cell>
+    <Cell ss:StyleID="s99"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Потвърждаване за получаване</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -940,117 +1480,117 @@
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">RemovingIrregularitiesInstructions</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0010-003010</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">RemovingIrregularitiesInstructions</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0010-003010</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell><Data ss:Type="String">Невалидни услуги</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">9999</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">9999</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">9999</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">9999</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">InvalidService</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">InvalidService</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Невалидна услуга</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Невалидна услуга</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell ss:Index="2" ss:StyleID="Default"/>
     <Cell ss:Index="4" ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"/>
-    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s99"/>
+    <Cell ss:StyleID="s99"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s99"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s99"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s99"/>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
-    <Cell ss:StyleID="s84"><Data ss:Type="String">Заявление</Data></Cell>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
+    <Cell ss:StyleID="s94"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
-    <Cell ss:StyleID="s65"/>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s90"><Data ss:Type="String">Request</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">01</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">00</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Request</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Документ за втори етап на предварителен контрол</Data></Cell>
-    <Cell ss:StyleID="s87"/>
-    <Cell ss:StyleID="s87"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">01</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Документ за втори етап на предварителен контрол</Data></Cell>
+    <Cell ss:StyleID="s97"/>
+    <Cell ss:StyleID="s97"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
-    <Cell ss:StyleID="s84"><Data ss:Type="String">Заявление</Data></Cell>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
+    <Cell ss:StyleID="s94"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">01</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s90"><Data ss:Type="String">Request supplement</Data></Cell>
+    <Cell ss:StyleID="s100"><Data ss:Type="String">Request supplement</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">02</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Допълване на заявление</Data></Cell>
-    <Cell ss:StyleID="s87"/>
-    <Cell ss:StyleID="s87"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">0</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">02</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Допълване на заявление</Data></Cell>
+    <Cell ss:StyleID="s97"/>
+    <Cell ss:StyleID="s97"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
     <Cell ss:Index="2" ss:StyleID="Default"/>
     <Cell ss:Index="4" ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"/>
-    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s99"/>
+    <Cell ss:StyleID="s99"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s99"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s99"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s99"/>
    </Row>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s88">
-    <Cell ss:StyleID="s84"><Data ss:Type="String">Заявление</Data></Cell>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
+    <Cell ss:StyleID="s94"><Data ss:Type="String">Заявление</Data></Cell>
     <Cell><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">0002</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">00</Data></Cell>
-    <Cell ss:StyleID="s65"/>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">R-0001</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">01</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">0002</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">00</Data></Cell>
+    <Cell ss:StyleID="s67"/>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">R-0001</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">0010-aop</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">03</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Заявление за предварителен контрол по чл. 19, ал. 2, т. 22 от ЗОП</Data></Cell>
-    <Cell ss:StyleID="s87"/>
-    <Cell ss:StyleID="s87"/>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">03</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Заявление за предварителен контрол по чл. 19, ал. 2, т. 22 от ЗОП</Data></Cell>
+    <Cell ss:StyleID="s97"/>
+    <Cell ss:StyleID="s97"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -1081,20 +1621,20 @@
   <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="2" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">ElectronicServiceProviderId</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Code</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Name</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Bulstat</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">Alias</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">IsActive</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">ElectronicServiceProviderId</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">Code</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">Name</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">Bulstat</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">Alias</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">IsActive</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s64"><Data ss:Type="Number">1</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">АОП</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">131236380</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">aop</Data></Cell>
-    <Cell ss:StyleID="s64"><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">01</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">АОП</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">131236380</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">aop</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">1</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -1118,12 +1658,12 @@
  <Worksheet ss:Name="IrregularityTypes">
   <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="1" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="155.25"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="203.25"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="155.25"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="203.25"/>
    <Column ss:Width="178.5"/>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s84">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">ElectronicServiceProvider</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">ElectronicServiceTypeApplication</Data></Cell>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s94">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">ElectronicServiceProvider</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">ElectronicServiceTypeApplication</Data></Cell>
     <Cell><Data ss:Type="String">Name</Data></Cell>
    </Row>
   </Table>
@@ -1146,15 +1686,15 @@
  </Worksheet>
  <Worksheet ss:Name="DocTypeUnitRoles">
   <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="3" x:FullColumns="1"
-   x:FullRows="1" ss:StyleID="s64" ss:DefaultRowHeight="15">
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="138.75"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="168"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="369"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="168"/>
-   <Column ss:StyleID="s64" ss:Width="63"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="87" ss:Span="1"/>
-   <Column ss:Index="8" ss:StyleID="s64" ss:Width="126.75"/>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s65">
+   x:FullRows="1" ss:StyleID="s66" ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="138.75"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="168"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="369"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="168"/>
+   <Column ss:StyleID="s66" ss:Width="63"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="87" ss:Span="1"/>
+   <Column ss:Index="8" ss:StyleID="s66" ss:Width="126.75"/>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s67">
     <Cell><Data ss:Type="String">ElectronicServiceProvider</Data></Cell>
     <Cell><Data ss:Type="String">ElectronicServiceTypeApplication</Data></Cell>
     <Cell><Data ss:Type="String">Name</Data></Cell>
@@ -1167,22 +1707,22 @@
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Документ за втори етап на предварителен контрол</Data></Cell>
-    <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Документ за втори етап на предварителен контрол</Data></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Ръководно ниво 5А</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Ръководно ниво 5А</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">03</Data></Cell>
-    <Cell ss:StyleID="s89"><Data ss:Type="String">Заявление за предварителен контрол по чл. 19, ал. 2, т. 22 от ЗОП</Data></Cell>
-    <Cell ss:StyleID="s66"><Data ss:Type="String">Входящ</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Заявление за предварителен контрол по чл. 19, ал. 2, т. 22 от ЗОП</Data></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">Входящ</Data></Cell>
     <Cell><Data ss:Type="String">To</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Ръководно ниво 5А</Data></Cell>
+    <Cell ss:StyleID="s74"><Data ss:Type="String">0201</Data></Cell>
+    <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Ръководно ниво 5А</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -1198,7 +1738,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
@@ -1209,194 +1748,19 @@
    <ProtectScenarios>False</ProtectScenarios>
   </WorksheetOptions>
  </Worksheet>
- <Worksheet ss:Name="UnitClassifications">
-  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="19" x:FullColumns="1"
-   x:FullRows="1" ss:StyleID="s64" ss:DefaultRowHeight="15">
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="54.75"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="123" ss:Span="1"/>
-   <Column ss:Index="4" ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="63"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="156"/>
-   <Column ss:StyleID="s64" ss:Width="160.5"/>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s65">
-    <Cell><Data ss:Type="String">ClassificationCode</Data></Cell>
-    <Cell><Data ss:Type="String">ClassificationName</Data></Cell>
-    <Cell><Data ss:Type="String">ClassificationPermission</Data></Cell>
-    <Cell><Data ss:Type="String">UnitCode</Data></Cell>
-    <Cell><Data ss:Type="String">UnitName</Data></Cell>
-    <Cell><Data ss:Type="String">UnitUser</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">Read</Data></Cell>
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020301</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Ръководно ниво 6А</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">Read</Data></Cell>
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020201</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на Началник отдел</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">Management</Data></Cell>
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020201</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Началник отдел</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на Началник отдел</Data></Cell>
-   </Row>
-   <Row ss:Index="6" ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">Read</Data></Cell>
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020202</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Главен експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на регистратор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">Register</Data></Cell>
-    <Cell ss:StyleID="s76"><Data ss:Type="String">020202</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Главен експерт</Data></Cell>
-    <Cell ss:StyleID="s77"><Data ss:Type="String">Име на регистратор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"/>
-    <Cell ss:Index="4" ss:StyleID="s76"/>
-    <Cell ss:StyleID="s91"/>
-    <Cell ss:StyleID="s77"/>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">Read</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">Register</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">Management</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">Finish</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">Reverse</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">SubstituteManagement</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">DeleteManagement</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">EditTech</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">EditTechElectronicServiceStage</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">EditTechElectronicServiceStage</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Заявления</Data></Cell>
-    <Cell><Data ss:Type="String">DocCasePartManagement</Data></Cell>
-    <Cell ss:StyleID="s72"><Data ss:Type="String">0201</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Директор</Data></Cell>
-    <Cell ss:StyleID="s71"><Data ss:Type="String">Име на Директор</Data></Cell>
-   </Row>
-  </Table>
-  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
-   <PageSetup>
-    <Header x:Margin="0.3"/>
-    <Footer x:Margin="0.3"/>
-    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
-   </PageSetup>
-   <Unsynced/>
-   <Print>
-    <ValidPrinterInfo/>
-    <PaperSizeIndex>9</PaperSizeIndex>
-    <HorizontalResolution>600</HorizontalResolution>
-    <VerticalResolution>600</VerticalResolution>
-   </Print>
-   <Panes>
-    <Pane>
-     <Number>3</Number>
-     <ActiveRow>1</ActiveRow>
-     <ActiveCol>2</ActiveCol>
-    </Pane>
-   </Panes>
-   <ProtectObjects>False</ProtectObjects>
-   <ProtectScenarios>False</ProtectScenarios>
-  </WorksheetOptions>
- </Worksheet>
  <Worksheet ss:Name="ElectronicServiceStages">
   <Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="5" x:FullColumns="1"
-   x:FullRows="1" ss:StyleID="s64" ss:DefaultRowHeight="15">
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="167.25"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="188.25"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="86.25" ss:Span="2"/>
-   <Column ss:Index="6" ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="484.5"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="162"/>
-   <Column ss:Index="9" ss:StyleID="s64" ss:Width="80.25"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="92.25"/>
-   <Column ss:StyleID="s64" ss:Width="87"/>
-   <Column ss:StyleID="s64" ss:Width="126.75"/>
-   <Row ss:AutoFitHeight="0" ss:StyleID="s65">
+   x:FullRows="1" ss:StyleID="s66" ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="167.25"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="188.25"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="86.25" ss:Span="2"/>
+   <Column ss:Index="6" ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="484.5"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="162"/>
+   <Column ss:Index="9" ss:StyleID="s66" ss:Width="80.25"/>
+   <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="92.25"/>
+   <Column ss:StyleID="s66" ss:Width="87"/>
+   <Column ss:StyleID="s66" ss:Width="126.75"/>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s67">
     <Cell><Data ss:Type="String">ElectronicServiceProvider</Data></Cell>
     <Cell><Data ss:Type="String">ElectronicServiceTypeApplication</Data></Cell>
     <Cell><Data ss:Type="String">No</Data></Cell>
@@ -1420,9 +1784,9 @@
     <Cell><Data ss:Type="String">Pending</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell ss:StyleID="s69"><Data ss:Type="String">05</Data></Cell>
-    <Cell ss:StyleID="s70"><Data ss:Type="String">Системни</Data></Cell>
-    <Cell ss:StyleID="s70"><Data ss:Type="String">Система</Data></Cell>
+    <Cell ss:StyleID="s71"><Data ss:Type="String">05</Data></Cell>
+    <Cell ss:StyleID="s72"><Data ss:Type="String">Системни</Data></Cell>
+    <Cell ss:StyleID="s72"><Data ss:Type="String">Система</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">01</Data></Cell>
@@ -1434,9 +1798,9 @@
     <Cell><Data ss:Type="String">Rejected</Data></Cell>
     <Cell><Data ss:Type="String">14</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
-    <Cell ss:StyleID="s69"><Data ss:Type="String">*</Data></Cell>
-    <Cell ss:StyleID="s81"/>
-    <Cell ss:StyleID="s81"/>
+    <Cell ss:StyleID="s71"><Data ss:Type="String">*</Data></Cell>
+    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s89"/>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">01</Data></Cell>
@@ -1449,8 +1813,8 @@
     <Cell><Data ss:Type="String">30</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell><Data ss:Type="String">*</Data></Cell>
-    <Cell ss:StyleID="s81"/>
-    <Cell ss:StyleID="s81"/>
+    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s89"/>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">01</Data></Cell>
@@ -1462,9 +1826,9 @@
     <Cell><Data ss:Type="String">Completed</Data></Cell>
     <Cell><Data ss:Type="String">30</Data></Cell>
     <Cell><Data ss:Type="String">0</Data></Cell>
-    <Cell ss:StyleID="s69"><Data ss:Type="String">*</Data></Cell>
-    <Cell ss:StyleID="s81"/>
-    <Cell ss:StyleID="s81"/>
+    <Cell ss:StyleID="s71"><Data ss:Type="String">*</Data></Cell>
+    <Cell ss:StyleID="s89"/>
+    <Cell ss:StyleID="s89"/>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -1480,7 +1844,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <TopRowVisible>3</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>

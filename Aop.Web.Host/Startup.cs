@@ -42,7 +42,6 @@ namespace Aop.Web.Host
             builder.RegisterModule(new CommonApiModule());
             builder.RegisterModule(new DocsApiModule());
             builder.RegisterModule(new AopApiModule());
-            builder.RegisterModule(new RegsApiModule());
             builder.RegisterModule(new RioDataModule());
             builder.RegisterModule(new AopRioModule());
             return builder.Build();
