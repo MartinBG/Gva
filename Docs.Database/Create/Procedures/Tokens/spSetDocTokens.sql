@@ -42,17 +42,14 @@ insert into @DocTokens(DocId, Token, CreateToken)
 
 
 --merge Token
-insert into DocTokens (DocId, Token, CreateToken) 
-	select DocId, Token, CreateToken
-	from @DocTokens s
-	where not exists (select null from DocTokens t 
-		where t.DocId = s.DocId and t.Token = s.Token and t.CreateToken = s.CreateToken)
-
-delete from t
-	from DocTokens t
-	where not exists (select null from @DocTokens s
-		where t.DocId = s.DocId and t.Token = s.Token and t.CreateToken = s.CreateToken)
-	and t.DocId in (select DocId from @Docs)
+MERGE DocTokens AS t
+USING @DocTokens AS s 
+	ON t.DocId = s.DocId and t.Token = s.Token and t.CreateToken = s.CreateToken
+WHEN NOT MATCHED BY TARGET THEN
+	INSERT (DocId, Token, CreateToken)
+	VALUES (s.DocId, s.Token, s.CreateToken)
+WHEN NOT MATCHED BY SOURCE AND t.DocId in (select DocId from @Docs) THEN
+    DELETE;
 
 END
 GO

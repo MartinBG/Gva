@@ -141,25 +141,17 @@ insert into @UnitTokens(UnitId, Token, CreateToken, ClassificationPermissionId)
 		) s2
 
 --merge Token
-insert into UnitTokens (UnitId, Token, CreateToken, ClassificationPermissionId) 
-	select UnitId, Token, CreateToken, ClassificationPermissionId 
-	from @UnitTokens s
-	where not exists (select null from UnitTokens t 
-		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId)
-
-delete from t
-	from UnitTokens t
-	where not exists (select null from @UnitTokens s
-		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId)
-	and t.CreateToken = 'doc'
-	and t.Token in (select token from @DocTokens )
-
-delete from t
-	from UnitTokens t
-	where not exists (select null from @UnitTokens s
-		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId)
-	and t.CreateToken = 'case'
-	and t.Token in (select token from @CaseTokens )
+MERGE UnitTokens AS t
+USING @UnitTokens AS s 
+	ON t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId
+WHEN NOT MATCHED BY TARGET THEN
+	INSERT (UnitId, Token, CreateToken, ClassificationPermissionId)
+	VALUES (s.UnitId, s.Token, s.CreateToken, s.ClassificationPermissionId)
+WHEN NOT MATCHED BY SOURCE 
+	AND ((t.CreateToken IN ('doc') AND t.Token IN (select token from @DocTokens)) OR (t.CreateToken IN ('case') AND t.Token IN (select token from @CaseTokens)))
+	THEN
+    DELETE;
 
 END
 GO
+

@@ -42,20 +42,39 @@ insert into @UnitTokens(UnitId, Token, CreateToken, ClassificationPermissionId)
 		where u.IsActive = 1 
 		and ut.Alias = 'Employee'
 		and u.UnitId in (select UnitId from @Units)
+--заместник
+--union
+--	select distinct su.SubstitutionUnitId, 'classification#' + CONVERT(varchar(10), ucpc.ClassificationId), 'classification'
+--	, (select p.DocUnitPermissionId from DocUnitPermissions p where p.Alias = cr.Alias)
+--		from Units u 
+--			inner join UnitTypes ut  on u.UnitTypeId  = ut.UnitTypeId	
+--			inner join UnitSubstitutions us on u.UnitId = us.UnitId
+--			inner join Units u2 on u2.UnitId = su.SubstitutionUnitId
+--			inner join UnitTypes ut2  on u2.UnitTypeId  = ut2.UnitTypeId	
+--		    CROSS APPLY dbo.fnGetParentUnits(u.UnitId) pu
+--			inner join UnitClassifications uc on uc.UnitId = pu.UnitId 
+--			inner join ClassificationRoles cr on cr.ClassificationRoleId = uc.ClassificationRoleId 
+--			CROSS APPLY dbo.fnGetParentClassifications(uc.ClassificationId) ucpc
+--		where u.IsActive = 1 
+--		and ut.Alias = 'Employee'
+--		and u.UnitId in (select UnitId from @Units)
+--		and cr.Alias <> 'Execution'
+--		and su.IsActive = 1
+--		and u.IsActive = 1
+--		and ut2.Alias = 'Employee'
 
 --merge Token
+MERGE UnitTokens AS t
+USING @UnitTokens AS s 
+	ON t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId
+WHEN NOT MATCHED BY TARGET THEN
+	INSERT (UnitId, Token, CreateToken, ClassificationPermissionId)
+	VALUES (s.UnitId, s.Token, s.CreateToken, s.ClassificationPermissionId)
+WHEN NOT MATCHED BY SOURCE 
+	AND t.CreateToken IN ('classification') 
+	AND t.UnitId IN (select UnitId from @Units)
+	THEN
+    DELETE;
 
-insert into UnitTokens (UnitId, Token, CreateToken, ClassificationPermissionId) 
-	select UnitId, Token, CreateToken, ClassificationPermissionId 
-	from @UnitTokens s
-	where not exists (select null from UnitTokens t 
-		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId)
-
-delete from t
-	from UnitTokens t
-	where not exists (select null from @UnitTokens s
-		where t.UnitId = s.UnitId and t.Token = s.Token and t.CreateToken = s.CreateToken and t.ClassificationPermissionId = s.ClassificationPermissionId)
-	and t.UnitId in (select UnitId from @Units)
-	and t.CreateToken in ('classification')
 END
 GO
