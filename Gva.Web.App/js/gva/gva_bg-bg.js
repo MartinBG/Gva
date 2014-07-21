@@ -1735,7 +1735,8 @@
           yes: 'Да',
           no: 'Не',
           'new': 'Ново лице',
-          search: 'Търси'
+          search: 'Търси',
+          caseType: 'Тип дело'
         },
         examDirective: {
           commonQuestions: 'Основни знания',

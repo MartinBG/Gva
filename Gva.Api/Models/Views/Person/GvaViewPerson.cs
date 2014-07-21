@@ -41,6 +41,8 @@ namespace Gva.Api.Models.Views.Person
         public virtual ICollection<GvaViewPersonLicence> Licences { get; set; }
 
         public virtual ICollection<GvaViewPersonRating> Ratings { get; set; }
+
+        public virtual ICollection<GvaLotCase> GvaLotCases { get; set; }
     }
 
     public class GvaViewPersonMap : EntityTypeConfiguration<GvaViewPerson>
@@ -90,6 +92,9 @@ namespace Gva.Api.Models.Views.Person
             this.HasOptional(t => t.Employment)
                 .WithMany()
                 .HasForeignKey(t => t.EmploymentId);
+            this.HasMany(t => t.GvaLotCases)
+                .WithOptional()
+                .HasForeignKey(t => t.LotId);
         }
     }
 }
