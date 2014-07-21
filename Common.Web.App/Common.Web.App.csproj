@@ -95,6 +95,8 @@
     <Content Include="js\ems\docs\forms\removingIrregularity\removingIrregularityCtrl.js" />
     <Content Include="js\ems\docs\modals\chooseCorrModal.html" />
     <Content Include="js\ems\docs\modals\chooseCorrModalCtrl.js" />
+    <Content Include="js\ems\docs\modals\chooseUnitModal.html" />
+    <Content Include="js\ems\docs\modals\chooseUnitModalCtrl.js" />
     <Content Include="js\ems\docs\modals\newCorrModal.html" />
     <Content Include="js\ems\docs\modals\newCorrModalCtrl.js" />
     <Content Include="js\ems\docs\recources\docs.js" />
@@ -141,8 +143,6 @@
     <Content Include="js\ems\docs\views\nextStageCtrl.js" />
     <Content Include="js\ems\docs\views\portalModal.html" />
     <Content Include="js\ems\docs\views\portalModalCtrl.js" />
-    <Content Include="js\ems\docs\views\selectUnitView.html" />
-    <Content Include="js\ems\docs\views\selectUnitViewCtrl.js" />
     <Content Include="js\ems\docs\views\workflowConfirm.html" />
     <Content Include="js\ems\docs\views\workflowConfirmCtrl.js" />
     <Content Include="js\ems\docs\views\workflowRequest.html" />

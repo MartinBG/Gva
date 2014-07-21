@@ -18,6 +18,13 @@
           title: 'Нов кореспондент',
           cancel: 'Отказ',
           save: 'Запис'
+        },
+        chooseUnit: {
+          title: 'Избор на служител',
+          name: 'Име',
+          search: 'Търси',
+          cancel: 'Отказ',
+          select: 'Избор'
         }
       },
       docs: {
@@ -97,13 +104,7 @@
             importedBy: 'Въвел',
             madeBy: 'Изготвил',
             docUnitsFrom: 'От',
-            docUnitsTo: 'До',
-            selectUnit: {
-              name: 'Име',
-              search: 'Търси',
-              cancel: 'Назад',
-              select: 'Избор'
-            }
+            docUnitsTo: 'До'
           },
           content: {
             docBody: 'Текст',
@@ -441,7 +442,6 @@
         'root.docs.new': 'Нов документ',
         'root.docs.new.caseSelect': 'Избор на преписка',
         'root.docs.edit.view': 'Преглед',
-        'root.docs.edit.view.selectUnit': 'Избор на служител',
         'root.docs.edit.workflows': 'Управление',
         'root.docs.edit.workflows.signRequest': 'Искане за подпис',
         'root.docs.edit.workflows.discussRequest': 'Искане за съгласуване',

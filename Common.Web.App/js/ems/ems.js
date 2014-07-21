@@ -99,8 +99,9 @@
     });
   }]).config(['namedModalProvider', function (namedModalProvider) {
     namedModalProvider
+     .modal('chooseUnit', 'js/ems/docs/modals/chooseUnitModal.html', 'ChooseUnitModalCtrl')
      .modal('chooseCorr', 'js/ems/docs/modals/chooseCorrModal.html', 'ChooseCorrModalCtrl')
-     .modal('newCorr'   , 'js/ems/docs/modals/newCorrModal.html'   , 'NewCorrModalCtrl');
+     .modal('newCorr'   , 'js/ems/docs/modals/newCorrModal.html'   , 'NewCorrModalCtrl'   );
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.docs'                                     , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot'                                                                                                           ])
@@ -110,7 +111,6 @@
       .state(['root.docs.news'                                , '/news'                                                                                                , ['@root'           , 'js/ems/docs/views/docsNews.html'                         ,'DocsNewsCtrl'             ]])
       .state(['root.docs.edit'                                , '/:id'                                                                                                 , ['@root'           , 'js/ems/docs/views/docsEdit.html'                         ,'DocsEditCtrl'             ]])
       .state(['root.docs.edit.view'                           , '/view'                                                                                                , ['@root.docs.edit' , 'js/ems/docs/views/docsView.html'                         ,'DocsViewCtrl'             ]])
-      .state(['root.docs.edit.view.selectUnit'                , '/selectUnit?name&stamp'                                                                               , ['@root.docs.edit' , 'js/ems/docs/views/selectUnitView.html'                   ,'SelectUnitViewCtrl'       ]])
       .state(['root.docs.edit.workflows'                      , '/workflows'                                                                                           , ['@root.docs.edit' , 'js/ems/docs/views/docsWorkflows.html'                    ,'DocsWorkflowsCtrl'        ]])
       .state(['root.docs.edit.workflows.signRequest'          , '/signRequest'                                                                                         , ['@root.docs.edit' , 'js/ems/docs/views/workflowRequest.html'                  ,'WorkflowRequestCtrl'      ]])
       .state(['root.docs.edit.workflows.discussRequest'       , '/discussRequest'                                                                                      , ['@root.docs.edit' , 'js/ems/docs/views/workflowRequest.html'                  ,'WorkflowRequestCtrl'      ]])
@@ -137,7 +137,6 @@
       .state(['root.docs.edit.case.linkApp.equipmentNew'      , '/equipmentNew'                                                                                        , ['@root'           , 'js/gva/applications/views/common/equipmentNew.html'      ,'EquipmentNewCtrl'         ]])
       .state(['root.docs.edit.case.casePart'                  , '/casePart'                                                                                            , ['@root.docs.edit' , 'js/ems/docs/views/editCasePart.html'                     ,'EditCasePartCtrl'         ]])
       .state(['root.docs.edit.case.docType'                   , '/docType'                                                                                             , ['@root.docs.edit' , 'js/ems/docs/views/editDocType.html'                      ,'EditDocTypeCtrl'          ]])
-      .state(['root.docs.edit.case.docType.selectUnit'        , '/selectUnit?name'                                                                                     , ['@root.docs.edit' , 'js/ems/docs/views/selectUnitView.html'                   ,'SelectUnitViewCtrl'       ]])
       .state(['root.docs.edit.case.manualRegister'            , '/manualRegister'                                                                                      , ['@root.docs.edit' , 'js/ems/docs/views/manualRegister.html'                   ,'ManualRegisterCtrl'       ]])
       .state(['root.docs.edit.case.caseFinish'                , '/caseFinish'                                                                                          , ['@root.docs.edit' , 'js/ems/docs/views/caseFinish.html'                       ,'CaseFinishCtrl'           ]])
       .state(['root.docs.edit.case.changeDocParent'           , '/changeDocParent'                                                                                     , ['@root.docs.edit' , 'js/ems/docs/views/changeDocParent.html'                  ,'ChangeDocParentCtrl'      ]])
