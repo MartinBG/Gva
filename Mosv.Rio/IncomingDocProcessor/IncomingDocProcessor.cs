@@ -438,7 +438,7 @@ namespace Mosv.Rio.IncomingDocProcessor
             doc.DocEntryTypeId = this.unitOfWork.DbContext.Set<DocEntryType>().Where(e => e.Alias == "Document").Single().DocEntryTypeId;
             doc.DocSubject = "Заявление подадено през портала за електронни административни услуги";
             doc.DocSourceTypeId = this.unitOfWork.DbContext.Set<DocSourceType>().Where(e => e.Alias == "Internet").Single().DocSourceTypeId;
-            doc.DocStatusId = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.Alias == "Prepared").Single().DocStatusId;
+            doc.DocStatusId = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.Alias == "Processed").Single().DocStatusId;
             doc.DocDestinationTypeId = null;
             doc.DocTypeId = docTypeId;
             doc.DocFormatTypeId = this.unitOfWork.DbContext.Set<DocFormatType>().Where(e => e.Alias == "Electronic").Single().DocFormatTypeId;
@@ -607,7 +607,7 @@ namespace Mosv.Rio.IncomingDocProcessor
 
             doc.DocBody = String.Empty;
             doc.DocSourceTypeId = null;
-            doc.DocStatusId = this.unitOfWork.DbContext.Set<DocStatus>().Single(e => e.Alias == "Prepared").DocStatusId;
+            doc.DocStatusId = this.unitOfWork.DbContext.Set<DocStatus>().Single(e => e.Alias == "Processed").DocStatusId;
             doc.DocDestinationTypeId = null;
             doc.DocFormatTypeId = this.unitOfWork.DbContext.Set<DocFormatType>().Single(e => e.Alias == "Electronic").DocFormatTypeId;
             doc.DocCasePartTypeId = this.unitOfWork.DbContext.Set<DocCasePartType>().Single(e => e.Alias == "Public").DocCasePartTypeId;
