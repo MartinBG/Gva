@@ -1,0 +1,24 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="common.chooseUnit.title"></strong>
+    <div class="pull-right">
+      <sc-button name="canceltn" btn-click="cancel()" text="common.chooseUnit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+      <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="common.chooseUnit.name"></sc-filter>
+      <sc-search-button action="search()" text="common.chooseUnit.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
+      <sc-search-button action="add"></sc-search-button>
+    </sc-search>
+
+    <sc-datatable items="units" filterable="false" pageable="true" sortable="false" dynamic-columns="false">
+      <sc-column sortable="false" class="buttons-cell" has-content="true">
+        <sc-button name="selectBtn" btn-click="selectUnit(item)" class="btn btn-xs btn-primary" text="common.chooseUnit.select" ng-disabled="selectedUnits | contains:item.nomValueId"></sc-button>
+      </sc-column>
+      <sc-column data="name" title="common.chooseUnit.name">
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>

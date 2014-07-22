@@ -3,6 +3,30 @@
   'use strict';
   angular.module('ems').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
+      common: {
+        chooseCorr: {
+          title: 'Избор на кореспондент',
+          displayName: 'Наименование',
+          email: 'Имейл',
+          correspondentType: 'Тип',
+          search: 'Търси',
+          cancel: 'Отказ',
+          select: 'Избор',
+          'new': 'Нов'
+        },
+        newCorr: {
+          title: 'Нов кореспондент',
+          cancel: 'Отказ',
+          save: 'Запис'
+        },
+        chooseUnit: {
+          title: 'Избор на служител',
+          name: 'Име',
+          search: 'Търси',
+          cancel: 'Отказ',
+          select: 'Избор'
+        }
+      },
       docs: {
         edit: {
           child: 'Подчинен',
@@ -80,22 +104,7 @@
             importedBy: 'Въвел',
             madeBy: 'Изготвил',
             docUnitsFrom: 'От',
-            docUnitsTo: 'До',
-            selectCorr: {
-              displayName: 'Наименование',
-              email: 'Имейл',
-              correspondentType: 'Тип',
-              search: 'Търси',
-              cancel: 'Назад',
-              select: 'Избор',
-              'new': 'Нов'
-            },
-            selectUnit: {
-              name: 'Име',
-              search: 'Търси',
-              cancel: 'Назад',
-              select: 'Избор'
-            }
+            docUnitsTo: 'До'
           },
           content: {
             docBody: 'Текст',
@@ -260,6 +269,7 @@
         newDoc: {
           kontinue: 'Продължи',
           registerAndShow: 'Регистрирай и продължи',
+          register: 'Регистрирай',
           caseRegUri: 'Към преписка',
           cancel: 'Отказ',
           docTypeGroupId: 'Група',
@@ -433,8 +443,6 @@
         'root.docs.new': 'Нов документ',
         'root.docs.new.caseSelect': 'Избор на преписка',
         'root.docs.edit.view': 'Преглед',
-        'root.docs.edit.view.selectCorr': 'Избор на кореспондент',
-        'root.docs.edit.view.selectUnit': 'Избор на служител',
         'root.docs.edit.workflows': 'Управление',
         'root.docs.edit.workflows.signRequest': 'Искане за подпис',
         'root.docs.edit.workflows.discussRequest': 'Искане за съгласуване',
@@ -449,16 +457,6 @@
         'root.docs.edit.stages.end': 'Приключване на етап',
         'root.docs.edit.case': 'Преписка',
         'root.docs.edit.case.linkApp': 'Свържи със заявление',
-        'root.docs.edit.case.linkApp.personSelect': 'Избор на заявител',
-        'root.docs.edit.case.linkApp.personNew': 'Нов заявител',
-        'root.docs.edit.case.linkApp.organizationSelect': 'Избор на организация',
-        'root.docs.edit.case.linkApp.organizationNew': 'Нова организация',
-        'root.docs.edit.case.linkApp.aircraftSelect': 'Избор на ВС',
-        'root.docs.edit.case.linkApp.aircraftNew': 'Ново ВС',
-        'root.docs.edit.case.linkApp.airportSelect': 'Избор на летище',
-        'root.docs.edit.case.linkApp.airportNew': 'Ново летище',
-        'root.docs.edit.case.linkApp.equipmentSelect': 'Избор на съоръжение',
-        'root.docs.edit.case.linkApp.equipmentNew': 'Ново съоръжение',
         'root.docs.edit.case.casePart': 'Смяна на част на преписка',
         'root.docs.edit.case.docType': 'Техническа редакция на документ',
         'root.docs.edit.case.caseFinish': 'Приключване на преписка',

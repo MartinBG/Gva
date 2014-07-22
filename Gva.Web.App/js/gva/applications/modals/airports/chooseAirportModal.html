@@ -1,0 +1,39 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="applications.airportSelect.title"></strong>
+    <div class="pull-right">
+      <sc-button name="canceltn" btn-click="cancel()" text="applications.airportSelect.cancel" class="btn btn-sm btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+     <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+        <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="applications.airportSelect.name"></sc-filter>
+        <sc-filter type="text" name="icao" class="col-sm-3" removable="false" label="applications.airportSelect.icao"></sc-filter>
+        <sc-search-button action="search()" text="applications.airportSelect.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
+        <sc-search-button action="add"></sc-search-button>
+      </sc-search>
+
+      <sc-datatable items="airports" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+        <sc-column sortable="false" class="buttons-cell" has-content="true">
+          <sc-button btn-click="selectAirport(item)" text="applications.airportSelect.select" class="btn btn-xs btn-primary"></sc-button>
+        </sc-column>
+        <sc-column data="airportType" title="applications.airportSelect.airportType">
+        </sc-column>
+        <sc-column data="name" title="applications.airportSelect.name">
+        </sc-column>
+        <sc-column data="icao" title="applications.airportSelect.icao">
+        </sc-column>
+        <sc-column data="place" title="applications.airportSelect.place">
+        </sc-column>
+        <sc-column data="runway" title="applications.airportSelect.runway">
+        </sc-column>
+        <sc-column data="course" title="applications.airportSelect.course">
+        </sc-column>
+        <sc-column data="excess" title="applications.airportSelect.excess">
+        </sc-column>
+        <sc-column data="concrete" title="applications.airportSelect.concrete">
+        </sc-column>
+      </sc-datatable>
+  </div>
+</div>

@@ -20,6 +20,7 @@ namespace Gva.Api.Repositories.AircraftRepository
             string mark,
             string manSN,
             string model,
+            string icao,
             string airCategory,
             string aircraftProducer,
             bool exact,
@@ -37,6 +38,7 @@ namespace Gva.Api.Repositories.AircraftRepository
                 .AndStringMatches(p => p.ManSN, manSN, exact)
                 .AndStringMatches(p => p.Model, model, exact)
                 .AndStringMatches(p => p.Mark, mark, exact)
+                .AndStringMatches(p => p.ICAO, icao, exact)
                 .AndStringMatches(p => p.AirCategory.Name, airCategory, exact)
                 .AndStringMatches(p => p.AircraftProducer.Name, aircraftProducer, exact);
 

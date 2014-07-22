@@ -11,30 +11,8 @@
     PersonsInfo,
     OrganizationsData,
     appModel,
-    selectedAircraft,
-    selectedAirport,
-    selectedEquipment,
-    selectedCorrs
+    namedModal
     ) {
-    if (selectedCorrs.current.length > 0) {
-      appModel.doc.docCorrespondents.push(selectedCorrs.current.pop());
-    }
-    if (selectedAircraft.length > 0) {
-      appModel.lot = {
-        id: selectedAircraft.pop()
-      };
-    }
-    if (selectedAirport.length > 0) {
-      appModel.lot = {
-        id: selectedAirport.pop()
-      };
-    }
-    if (selectedEquipment.length > 0) {
-      appModel.lot = {
-        id: selectedEquipment.pop()
-      };
-    }
-
     $scope.$watch('appModel.lot.id', function (newValue, oldValue) {
       if (((newValue !== oldValue) || (newValue === oldValue)) && !!newValue) {
         return Applications.getGvaCorrespodents({ lotId: appModel.lot.id }).$promise
@@ -48,33 +26,9 @@
     $scope.filter = $stateParams.filter;
     $scope.setPartAlias = '';
 
-    $scope.newAircraft = function () {
-      return $state.go('root.applications.new.aircraftNew');
-    };
-    $scope.selectAircraft = function () {
-      return $state.go('root.applications.new.aircraftSelect');
-    };
-
-    $scope.newAirport = function () {
-      return $state.go('root.applications.new.airportNew');
-    };
-    $scope.selectAirport = function () {
-      return $state.go('root.applications.new.airportSelect');
-    };
-
-    $scope.newEquipment = function () {
-      return $state.go('root.applications.new.equipmentNew');
-    };
-    $scope.selectEquipment = function () {
-      return $state.go('root.applications.new.equipmentSelect');
-    };
-
     $scope.newCorr = function () {
       var partData = {}, isPersonSelect, isOrgSelect;
       partData.$promise = $q.when(false);
-
-      selectedCorrs.current.splice(0);
-      selectedCorrs.total = $scope.appModel.doc.docCorrespondents;
 
       if ($scope.appModel.lot && $scope.appModel.lot.id) {
         if ($scope.filter === 'Person') {
@@ -88,60 +42,116 @@
       }
 
       return partData.$promise.then(function (d) {
-        var corr = {},
-            data = d.personData;
+        var modalInstance = namedModal.open('newCorr', null, {
+          corr: [
+            '$stateParams',
+            'Nomenclatures',
+            'Corrs',
+            function ($stateParams, Nomenclatures, Corrs) {
+              return $q.all({
+                corrTypes: Nomenclatures.query({ alias: 'correspondentType' }).$promise,
+                corr: Corrs.getNew().$promise
+              }).then(function (res) {
+                if (isPersonSelect) {
+                  res.corr.correspondentTypeId = _(res.corrTypes).filter({
+                    alias: 'BulgarianCitizen'
+                  }).first().nomValueId;
+                  res.corr.correspondentType = _(res.corrTypes).filter({
+                    alias: 'BulgarianCitizen'
+                  }).first();
 
-        if (isPersonSelect) {
-          corr.bgCitizenFirstName = data.part.firstName;
-          corr.bgCitizenLastName = data.part.lastName;
-          if (data.part.uin) {
-            corr.bgCitizenUIN = data.part.uin;
-          }
-          if (data.part.email) {
-            corr.email = data.part.email;
-          }
-        }
-        if (isOrgSelect) {
-          corr.legalEntityName = data.part.name;
-          if (data.part.uin) {
-            corr.legalEntityBulstat = data.part.uin;
-          }
-        }
+                  res.corr.bgCitizenFirstName = d.personData.part.firstName;
+                  res.corr.bgCitizenLastName = d.personData.part.lastName;
+                  if (d.personData.part.uin) {
+                    res.corr.bgCitizenUIN = d.personData.part.uin;
+                  }
+                  if (d.personData.part.email) {
+                    res.corr.email = d.personData.part.email;
+                  }
+                }
+                if (isOrgSelect) {
+                  res.corr.legalEntityName = d.part.name;
+                  if (d.part.uin) {
+                    res.corr.legalEntityBulstat = d.part.uin;
+                  }
+                }
 
-        return $state.go('root.applications.new.corrNew', null, null, corr);
+                return res.corr;
+              });
+            }
+          ]
+        });
+
+        modalInstance.result.then(function (nomItem) {
+          var newCorr = $scope.appModel.doc.docCorrespondents.slice();
+          newCorr.push(nomItem.nomValueId);
+          $scope.appModel.doc.docCorrespondents = newCorr;
+        });
+
+        return modalInstance.opened;
       });
-
     };
+
     $scope.selectCorr = function selectCorr() {
-      selectedCorrs.current.splice(0);
-      selectedCorrs.total = $scope.appModel.doc.docCorrespondents;
+      var partData = {}, isPersonSelect, isOrgSelect, selectedCorrs = [];
+      partData.$promise = $q.when(false);
+
+      _.forEach($scope.appModel.doc.docCorrespondents, function (corr) {
+        return selectedCorrs.push({ nomValueId: corr });
+      });
 
       if ($scope.appModel.lot && $scope.appModel.lot.id) {
         if ($scope.filter === 'Person') {
-          return PersonsInfo.get({ id: $scope.appModel.lot.id })
-            .$promise.then(function (d) {
-              var data = d.personData,
-                  displayName = data.part.firstName + ' ' + data.part.lastName;
-              if (data.part.uin) {
-                displayName = displayName + ' ' + data.part.uin;
-              }
-              return $state.go('root.applications.new.corrSelect', {
-                displayName: displayName
-              });
-          });
+          isPersonSelect = true;
+          partData = PersonsInfo.get({ id: $scope.appModel.lot.id });
         }
         else if ($scope.filter === 'Organization') {
-          return OrganizationsData.get({ id: $scope.appModel.lot.id }).$promise
-            .then(function (data) {
-              return $state.go('root.applications.new.corrSelect', {
-                displayName: data.part.name
-              });
-            });
+          isOrgSelect = true;
+          partData = OrganizationsData.get({ id: $scope.appModel.lot.id });
         }
       }
 
-      return $state.go('root.applications.new.corrSelect');
+      return partData.$promise.then(function (d) {
+        var modalInstance, corr = {};
+
+        if (isPersonSelect) {
+          corr.displayName = d.personData.part.firstName + ' ' + d.personData.part.lastName;
+          if (d.personData.part.uin) {
+            corr.displayName = corr.displayName + ' ' + d.personData.part.uin;
+          }
+          if (d.personData.part.email) {
+            corr.email = d.personData.part.email;
+          }
+        }
+        if (isOrgSelect) {
+          corr.displayName = d.part.name;
+          if (d.part.uin) {
+            corr.displayName = corr.displayName + ' ' + d.part.uin;
+          }
+        }
+
+        modalInstance = namedModal.open('chooseCorr', {
+          selectedCorrs: selectedCorrs,
+          corr: corr
+        }, {
+          corrs: [
+            'Corrs',
+            function (Corrs) {
+              return Corrs.get().$promise;
+            }
+          ]
+        });
+
+        modalInstance.result.then(function (nomItem) {
+          var newCorr = $scope.appModel.doc.docCorrespondents.slice();
+          newCorr.push(nomItem.nomValueId);
+          $scope.appModel.doc.docCorrespondents = newCorr;
+        });
+
+        return modalInstance.opened;
+      });
     };
+
     $scope.requireCorrespondents = function () {
       return $scope.appModel.doc.docCorrespondents.length > 0;
     };
@@ -206,10 +216,7 @@
     'PersonsInfo',
     'OrganizationsData',
     'appModel',
-    'selectedAircraft',
-    'selectedAirport',
-    'selectedEquipment',
-    'selectedCorrs'
+    'namedModal'
   ];
 
   ApplicationsNewCtrl.$resolve = {
@@ -246,22 +253,7 @@
           };
         });
       }
-    ],
-    selectedAircraft: function () {
-      return [];
-    },
-    selectedAirport: function () {
-      return [];
-    },
-    selectedEquipment: function () {
-      return [];
-    },
-    selectedCorrs: function selectedCorrs() {
-      return {
-        total: [],
-        current: []
-      };
-    }
+    ]
   };
 
   angular.module('gva').controller('ApplicationsNewCtrl', ApplicationsNewCtrl);

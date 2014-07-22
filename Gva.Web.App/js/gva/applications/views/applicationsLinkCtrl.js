@@ -3,69 +3,17 @@
   'use strict';
 
   function ApplicationsLinkCtrl(
-    $q,
     $scope,
     $state,
     $stateParams,
     $sce,
     Applications,
     appModel,
-    selectedAircraft,
-    selectedAirport,
-    selectedEquipment,
-    selectedDoc
+    namedModal
     ) {
-    if (selectedAircraft.length > 0) {
-      appModel.lot = {
-        id: selectedAircraft.pop()
-      };
-    }
-    if (selectedAirport.length > 0) {
-      appModel.lot = {
-        id: selectedAirport.pop()
-      };
-    }
-    if (selectedEquipment.length > 0) {
-      appModel.lot = {
-        id: selectedEquipment.pop()
-      };
-    }
-
-    if (selectedDoc.length > 0) {
-      appModel.doc = selectedDoc.pop();
-      appModel.doc.correspondentNames = $sce.trustAsHtml(appModel.doc.correspondentNames);
-    }
-
     $scope.appModel = appModel;
     $scope.filter = $stateParams.filter;
     $scope.setPartAlias = '';
-
-    $scope.newAircraft = function () {
-      return $state.go('root.applications.link.aircraftNew');
-    };
-    $scope.selectAircraft = function () {
-      return $state.go('root.applications.link.aircraftSelect');
-    };
-
-    $scope.newAirport = function () {
-      return $state.go('root.applications.link.airportNew');
-    };
-    $scope.selectAirport = function () {
-      return $state.go('root.applications.link.airportSelect');
-    };
-
-    $scope.newEquipment = function () {
-      return $state.go('root.applications.link.equipmentNew');
-    };
-    $scope.selectEquipment = function () {
-      return $state.go('root.applications.link.equipmentSelect');
-    };
-
-    $scope.selectDoc = function () {
-      var regUri = $scope.appModel.doc ? $scope.appModel.doc.regUri : null;
-
-      return $state.go('root.applications.link.docSelect', { hasLot: false, regUri: regUri });
-    };
 
     $scope.cancel = function () {
       return $state.go('root.applications.search');
@@ -75,11 +23,28 @@
       $scope.appModel.doc = null;
     };
 
-    $scope.link = function () {
-      return $scope.appForm.$validate()
-      .then(function () {
-        if ($scope.appForm.$valid && $scope.appModel.doc) {
+    $scope.selectDoc = function () {
+      var modalInstance = namedModal.open('chooseDoc', null, {
+        docs: [
+          '$stateParams',
+          'Applications',
+          function ($stateParams, Applications) {
+            return Applications.notLinkedDocs($stateParams).$promise;
+          }
+        ]
+      });
 
+      modalInstance.result.then(function (doc) {
+        $scope.appModel.doc = doc;
+        $scope.appModel.doc.correspondentNames = $sce.trustAsHtml(doc.correspondentNames);
+      });
+
+      return modalInstance.opened;
+    };
+
+    $scope.link = function () {
+      return $scope.appForm.$validate().then(function () {
+        if ($scope.appForm.$valid && $scope.appModel.doc) {
           var newApplication = {
             lotId: $scope.appModel.lot.id,
             docId: $scope.appModel.doc.docId
@@ -122,17 +87,13 @@
   }
 
   ApplicationsLinkCtrl.$inject = [
-    '$q',
     '$scope',
     '$state',
     '$stateParams',
     '$sce',
     'Applications',
     'appModel',
-    'selectedAircraft',
-    'selectedAirport',
-    'selectedEquipment',
-    'selectedDoc'
+    'namedModal'
   ];
 
   ApplicationsLinkCtrl.$resolve = {
@@ -140,18 +101,6 @@
       return {
         lot: {}
       };
-    },
-    selectedAircraft: function () {
-      return [];
-    },
-    selectedAirport: function () {
-      return [];
-    },
-    selectedEquipment: function () {
-      return [];
-    },
-    selectedDoc: function () {
-      return [];
     }
   };
 

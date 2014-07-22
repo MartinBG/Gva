@@ -8,7 +8,8 @@
     $stateParams,
     Docs,
     docModel,
-    parentDoc
+    parentDoc,
+    namedModal
   ) {
     if (parentDoc.length > 0) {
       docModel.parentDoc = parentDoc.pop();
@@ -69,6 +70,53 @@
         return $state.go('root.docs.search');
       }
     };
+
+    $scope.newCorr = function () {
+      var modalInstance = namedModal.open('newCorr', null, {
+        corr: [
+          '$stateParams',
+          'Corrs',
+          function resolveCorr($stateParams, Corrs) {
+            return Corrs.getNew().$promise;
+          }
+        ]
+      });
+
+      modalInstance.result.then(function (nomItem) {
+        var newCorr = $scope.docModel.doc.correspondents.slice();
+        newCorr.push(nomItem.nomValueId);
+        $scope.docModel.doc.correspondents = newCorr;
+      });
+
+      return modalInstance.opened;
+    };
+
+    $scope.selectCorr = function () {
+      var modalInstance, selectedCorrs = [];
+      _.forEach($scope.docModel.doc.correspondents, function (corr) {
+        return selectedCorrs.push({ nomValueId: corr });
+      });
+      
+      modalInstance = namedModal.open('chooseCorr', {
+        selectedCorrs: selectedCorrs,
+        corr: {}
+      }, {
+        corrs: [
+          'Corrs',
+          function (Corrs) {
+            return Corrs.get().$promise;
+          }
+        ]
+      });
+
+      modalInstance.result.then(function (nomItem) {
+        var newCorr = $scope.docModel.doc.correspondents.slice();
+        newCorr.push(nomItem.nomValueId);
+        $scope.docModel.doc.correspondents = newCorr;
+      });
+
+      return modalInstance.opened;
+    };
   }
 
   DocsNewCtrl.$inject = [
@@ -77,7 +125,8 @@
     '$stateParams',
     'Docs',
     'docModel',
-    'parentDoc'
+    'parentDoc',
+    'namedModal'
   ];
 
   DocsNewCtrl.$resolve = {
@@ -125,7 +174,7 @@
             docDirectionName: _(res.docDirections).first().name,
             docTypeGroupId: undefined,
             docTypeId: undefined,
-            correspondents: undefined,
+            correspondents: [],
             register: false
           };
 

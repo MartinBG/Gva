@@ -32,15 +32,18 @@
     });
     scaffoldingProvider.form({
       name: 'gvaApplicationSelectAircraft',
-      templateUrl: 'js/gva/applications/forms/selectAircraft.html'
+      templateUrl: 'js/gva/applications/forms/applicationSelectAircraft.html',
+      controller: 'AppSelectAircraftCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaApplicationSelectAirport',
-      templateUrl: 'js/gva/applications/forms/selectAirport.html'
+      templateUrl: 'js/gva/applications/forms/applicationSelectAirport.html',
+      controller: 'AppSelectAirportCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaApplicationSelectEquipment',
-      templateUrl: 'js/gva/applications/forms/selectEquipment.html'
+      templateUrl: 'js/gva/applications/forms/applicationSelectEquipment.html',
+      controller: 'AppSelectEquipmentCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonData',
@@ -383,22 +386,7 @@
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])
       .state(['root.applications.search'                           , '?fromDate&toDate&personLin&aircraftIcao&organizationUin'                                 , ['@root'                  , 'js/gva/applications/views/applicationsSearch.html'        , 'ApplicationsSearchCtrl'        ]])
       .state(['root.applications.new'                              , '/new'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsNew.html'           , 'ApplicationsNewCtrl'           ]])
-      .state(['root.applications.new.aircraftSelect'               , '/aircraftSelect?manSN&model&icao'                                                        , ['@root'                  , 'js/gva/applications/views/common/aircraftSelect.html'     , 'AircraftSelectCtrl'            ]])
-      .state(['root.applications.new.aircraftNew'                  , '/aircraftNew'                                                                            , ['@root'                  , 'js/gva/applications/views/common/aircraftNew.html'        , 'AircraftNewCtrl'               ]])
-      .state(['root.applications.new.airportSelect'                , '/airportSelect?name&icao'                                                                , ['@root'                  , 'js/gva/applications/views/common/airportSelect.html'      , 'AirportSelectCtrl'             ]])
-      .state(['root.applications.new.airportNew'                   , '/airportNew'                                                                             , ['@root'                  , 'js/gva/applications/views/common/airportNew.html'         , 'AirportNewCtrl'                ]])
-      .state(['root.applications.new.equipmentSelect'              , '/equipmentSelect?name'                                                                   , ['@root'                  , 'js/gva/applications/views/common/equipmentSelect.html'    , 'EquipmentSelectCtrl'           ]])
-      .state(['root.applications.new.equipmentNew'                 , '/equipmentNew'                                                                           , ['@root'                  , 'js/gva/applications/views/common/equipmentNew.html'       , 'EquipmentNewCtrl'              ]])
-      .state(['root.applications.new.corrSelect'                   , '/corrSelect?displayName&email&stamp'                                                     , ['@root'                  , 'js/gva/applications/views/common/corrSelect.html'         , 'CorrSelectCtrl'                ]])
-      .state(['root.applications.new.corrNew'                      , '/corrNew'                                                                                , ['@root'                  , 'js/gva/applications/views/common/corrNew.html'            , 'CorrNewCtrl'                   ]])
       .state(['root.applications.link'                             , '/link'                                                                                   , ['@root'                  , 'js/gva/applications/views/applicationsLink.html'          , 'ApplicationsLinkCtrl'          ]])
-      .state(['root.applications.link.docSelect'                   , '/docSelect?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&stamp'       , ['@root'                  , 'js/gva/applications/views/common/docSelect.html'          , 'DocSelectCtrl'                 ]])
-      .state(['root.applications.link.aircraftSelect'              , '/aircraftSelect?manSN&model&icao&stamp'                                                  , ['@root'                  , 'js/gva/applications/views/common/aircraftSelect.html'     , 'AircraftSelectCtrl'            ]])
-      .state(['root.applications.link.aircraftNew'                 , '/aircraftNew'                                                                            , ['@root'                  , 'js/gva/applications/views/common/aircraftNew.html'        , 'AircraftNewCtrl'               ]])
-      .state(['root.applications.link.airportSelect'               , '/airportSelect?name&icao&stamp'                                                          , ['@root'                  , 'js/gva/applications/views/common/airportSelect.html'      , 'AirportSelectCtrl'             ]])
-      .state(['root.applications.link.airportNew'                  , '/airportNew'                                                                             , ['@root'                  , 'js/gva/applications/views/common/airportNew.html'         , 'AirportNewCtrl'                ]])
-      .state(['root.applications.link.equipmentSelect'             , '/equipmentSelect?name&stamp'                                                             , ['@root'                  , 'js/gva/applications/views/common/equipmentSelect.html'    , 'EquipmentSelectCtrl'           ]])
-      .state(['root.applications.link.equipmentNew'                , '/equipmentNew'                                                                           , ['@root'                  , 'js/gva/applications/views/common/equipmentNew.html'       , 'EquipmentNewCtrl'              ]])
       .state(['root.applications.edit'                             , '/:id'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsEdit.html'          , 'ApplicationsEditCtrl'          ]])
       .state(['root.applications.edit.case'                        , '/case'                                                                                   , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditCase.html'      , 'ApplicationsEditCaseCtrl'      ]])
       .state(['root.applications.edit.case.newFile'                , '/newFile?docId&docFileId'                                                                , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditNewFile.html'   , 'ApplicationsEditNewFileCtrl'   ]])
@@ -410,7 +398,16 @@
   }]).config(['namedModalProvider', function (namedModalProvider) {
     namedModalProvider
      .modal('chooseOrganization', 'js/gva/applications/modals/organizations/chooseOrganizationModal.html', 'ChooseOrganizationModalCtrl')
-     .modal('newOrganization'   , 'js/gva/applications/modals/organizations/newOrganizationModal.html'   , 'NewOrganizationModalCtrl'   );
+     .modal('newOrganization'   , 'js/gva/applications/modals/organizations/newOrganizationModal.html'   , 'NewOrganizationModalCtrl'   )
+     .modal('chooseAircraft'    , 'js/gva/applications/modals/aircrafts/chooseAircraftModal.html'        , 'ChooseAircraftModalCtrl'    )
+     .modal('newAircraft'       , 'js/gva/applications/modals/aircrafts/newAircraftModal.html'           , 'NewAircraftModalCtrl'       )
+     .modal('chooseAirport'     , 'js/gva/applications/modals/airports/chooseAirportModal.html'          , 'ChooseAirportModalCtrl'     )
+     .modal('newAirport'        , 'js/gva/applications/modals/airports/newAirportModal.html'             , 'NewAirportModalCtrl'        )
+     .modal('chooseEquipment'   , 'js/gva/applications/modals/equipments/chooseEquipmentModal.html'      , 'ChooseEquipmentModalCtrl'   )
+     .modal('newEquipment'      , 'js/gva/applications/modals/equipments/newEquipmentModal.html'         , 'NewEquipmentModalCtrl'      )
+     .modal('chooseCorr'        , 'js/ems/docs/modals/chooseCorrModal.html'                              , 'ChooseCorrModalCtrl'        )
+     .modal('newCorr'           , 'js/ems/docs/modals/newCorrModal.html'                                 , 'NewCorrModalCtrl'           )
+     .modal('chooseDoc'         , 'js/gva/applications/modals/docs/chooseDocModal.html'                  , 'ChooseDocModalCtrl'         );
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.persons'                                               , '/persons?exact&lin&uin&names&licences&ratings&organization&caseType'                                                                                                                                          ])

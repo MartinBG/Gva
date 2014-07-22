@@ -7,83 +7,17 @@
     $state,
     $stateParams,
     Applications,
-    selectedPerson,
-    selectedOrganization,
-    selectedAircraft,
-    selectedAirport,
-    selectedEquipment,
     appModel,
     doc
   ) {
-    if (selectedPerson.length > 0) {
-      appModel.lot = {
-        id: selectedPerson.pop()
-      };
-    }
-    if (selectedOrganization.length > 0) {
-      appModel.lot = {
-        id: selectedOrganization.pop()
-      };
-    }
-    if (selectedAircraft.length > 0) {
-      appModel.lot = {
-        id: selectedAircraft.pop()
-      };
-    }
-    if (selectedAirport.length > 0) {
-      appModel.lot = {
-        id: selectedAirport.pop()
-      };
-    }
-    if (selectedEquipment.length > 0) {
-      appModel.lot = {
-        id: selectedEquipment.pop()
-      };
-    }
-
     $scope.$watch('appModel.lotSet', function (newValue, oldValue) {
       if (newValue !== oldValue) {
-        appModel.lot = null;
+        appModel.lot = {};
       }
     });
 
     $scope.doc = doc;
     $scope.appModel = appModel;
-
-    $scope.newPerson = function () {
-      return $state.go('root.docs.edit.case.linkApp.personNew');
-    };
-    $scope.selectPerson = function () {
-      return $state.go('root.docs.edit.case.linkApp.personSelect');
-    };
-
-    $scope.newOrganization = function () {
-      return $state.go('root.docs.edit.case.linkApp.organizationNew');
-    };
-    $scope.selectOrganization = function () {
-      return $state.go('root.docs.edit.case.linkApp.organizationSelect');
-    };
-
-    $scope.newAircraft = function () {
-      return $state.go('root.docs.edit.case.linkApp.aircraftNew');
-    };
-    $scope.selectAircraft = function () {
-      return $state.go('root.docs.edit.case.linkApp.aircraftSelect');
-    };
-
-    $scope.newAirport = function () {
-      return $state.go('root.docs.edit.case.linkApp.airportNew');
-    };
-    $scope.selectAirport = function () {
-      return $state.go('root.docs.edit.case.linkApp.airportSelect');
-    };
-
-    $scope.newEquipment = function () {
-      return $state.go('root.docs.edit.case.linkApp.equipmentNew');
-    };
-    $scope.selectEquipment = function () {
-      return $state.go('root.docs.edit.case.linkApp.equipmentSelect');
-    };
 
     $scope.cancel = function () {
       return $state.go('^');
@@ -140,11 +74,6 @@
     '$state',
     '$stateParams',
     'Applications',
-    'selectedPerson',
-    'selectedOrganization',
-    'selectedAircraft',
-    'selectedAirport',
-    'selectedEquipment',
     'appModel',
     'doc'
   ];
@@ -154,21 +83,6 @@
       return {
         lotSet: null
       };
-    },
-    selectedAircraft: function () {
-      return [];
-    },
-    selectedOrganization: function () {
-      return [];
-    },
-    selectedPerson: function () {
-      return [];
-    },
-    selectedAirport: function () {
-      return [];
-    },
-    selectedEquipment: function () {
-      return [];
     }
   };
 

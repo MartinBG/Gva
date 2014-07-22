@@ -8,8 +8,8 @@
     $stateParams,
     Docs,
     doc,
-    selectedUnits,
-    docTypeModel
+    docTypeModel,
+    namedModal
   ) {
     $scope.oldDoc = doc;
     $scope.doc = docTypeModel.doc;
@@ -60,19 +60,29 @@
     };
 
     $scope.selectUnit = function selectUnit(mode) {
-      selectedUnits.units.splice(0);
-
-      selectedUnits.units = _.assign(selectedUnits.units, $scope.doc[$scope.fullFieldName(mode)]);
-      selectedUnits.onUnitSelect = function (unit) {
-        $scope.doc[$scope.fullFieldName(mode)].push(unit);
-        selectedUnits.onUnitSelect = null;
-      };
+      var modalInstance = namedModal.open('chooseUnit', {
+        selectedUnits: $scope.doc[$scope.fullFieldName(mode)]
+      }, {
+        units: [
+          'Nomenclatures',
+          function (Nomenclatures) {
+            var params = _.assign({ alias: 'employeeUnit' });
+            return Nomenclatures.query(params).$promise;
+          }
+        ]
+      });
 
       docTypeModel.missingFields = $scope.missingFields;
       docTypeModel.allFields = $scope.allFields;
       docTypeModel.showFields = $scope.showFields;
 
-      return $state.go('root.docs.edit.case.docType.selectUnit');
+      modalInstance.result.then(function (unit) {
+        var newUnit = $scope.doc[$scope.fullFieldName(mode)].slice();
+        newUnit.push(unit);
+        $scope.doc[$scope.fullFieldName(mode)] = newUnit;
+      });
+
+      return modalInstance.opened;
     };
 
     function createFieldsObj(from, to, cCopy, importedBy, madeBy, inCharge,
@@ -219,19 +229,11 @@
     '$stateParams',
     'Docs',
     'doc',
-    'selectedUnits',
-    'docTypeModel'
+    'docTypeModel',
+    'namedModal'
   ];
 
   EditDocTypeCtrl.$resolve = {
-    selectedUnits: [
-      function resolveSelectedUnits() {
-        return {
-          units: [],
-          onUnitSelect: null
-        };
-      }
-    ],
     docTypeModel: [
       '$stateParams',
       'doc',

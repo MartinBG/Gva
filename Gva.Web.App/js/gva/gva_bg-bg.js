@@ -2685,6 +2685,7 @@
           link: 'Свържи'
         },
         equipmentSelect: {
+          title: 'Избор на съоръжение',
           equipment: 'Съоръжение',
           newEquipment: 'Ново съоръжение',
           select: 'Избери',
@@ -2705,6 +2706,7 @@
           cancel: 'Отказ'
         },
         airportSelect: {
+          title: 'Избор на летище',
           airport: 'Летище',
           newAirport: 'Ново летище',
           select: 'Избери',
@@ -2731,6 +2733,7 @@
           cancel: 'Отказ'
         },
         aircraftSelect: {
+          title: 'Избор на въздухоплавателно средство',
           aircraft: 'Въздухоплавателно средство',
           newAircraft: 'Ново ВС',
           manSN: 'Сериен номер',
@@ -2785,6 +2788,7 @@
           cancel: 'Отказ'
         },
         docSelect: {
+          title: 'Избор на документ',
           fromDate: 'От дата',
           toDate: 'До дата',
           docName: 'Относно',
@@ -3611,22 +3615,7 @@
       states: {
         'root.applications': 'Заявления',
         'root.applications.new': 'Ново заявление',
-        'root.applications.new.aircraftSelect': 'Избор на ВС',
-        'root.applications.new.aircraftNew': 'Ново ВС',
-        'root.applications.new.airportSelect': 'Избор на летище',
-        'root.applications.new.airportNew': 'Ново летище',
-        'root.applications.new.equipmentSelect': 'Избор на съоръжение',
-        'root.applications.new.equipmentNew': 'Ново съоръжение',
-        'root.applications.new.corrSelect': 'Избор на кореспондент',
-        'root.applications.new.corrNew': 'Нов кореспондент',
         'root.applications.link': 'Свържи заявление',
-        'root.applications.link.docSelect': 'Избор на документ',
-        'root.applications.link.aircraftSelect': 'Избор на ВС',
-        'root.applications.link.aircraftNew': 'Ново ВС',
-        'root.applications.link.airportSelect': 'Избор на летище',
-        'root.applications.link.airportNew': 'Ново летище',
-        'root.applications.link.equipmentSelect': 'Избор на съоръжение',
-        'root.applications.link.equipmentNew': 'Ново съоръжение',
         'root.applications.edit': 'Преглед',
         'root.applications.edit.case': 'Преписка',
         'root.applications.edit.quals': 'Квалификации',
