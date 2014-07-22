@@ -22,7 +22,7 @@
             <label class="control-label" l10n-text="docs.newDoc.caseRegUri"></label>
             <div class="input-group input-group-sm">
               <sc-text name="caseRegUri" readonly="true"
-                value="{{docModel.parentDoc ? docModel.parentDoc.regUri + ' ' + docModel.parentDoc.docTypeName + ' ' + docModel.parentDoc.docSubject : ''}}">
+                value="{{docModel.parentDoc ? (docModel.parentDoc.regUri || '') + ' ' + docModel.parentDoc.docTypeName + ' ' + docModel.parentDoc.docSubject : ''}}">
               </sc-text>
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="clearCase()">
