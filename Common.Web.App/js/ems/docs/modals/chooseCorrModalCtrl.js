@@ -7,13 +7,14 @@
     $scope,
     Corrs,
     corrs,
-    selectedCorrs
+    selectedCorrs,
+    corr
   ) {
     $scope.corrs = corrs.correspondents;
 
     $scope.filters = {
-      displayName: null,
-      email: null
+      displayName: corr.displayName,
+      email: corr.email
     };
     
     $scope.selectedCorrs = _.map(selectedCorrs, function (corr) {
@@ -48,7 +49,8 @@
     '$scope',
     'Corrs',
     'corrs',
-    'selectedCorrs'
+    'selectedCorrs',
+    'corr'
   ];
 
   angular.module('ems').controller('ChooseCorrModalCtrl', ChooseCorrModalCtrl);

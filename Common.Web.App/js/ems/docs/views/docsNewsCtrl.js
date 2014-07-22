@@ -63,7 +63,8 @@
       });
 
       modalInstance = namedModal.open('chooseCorr', {
-        selectedCorrs: selectedCorrs
+        selectedCorrs: selectedCorrs,
+        corr: {}
       }, {
         corrs: [
           'Corrs',

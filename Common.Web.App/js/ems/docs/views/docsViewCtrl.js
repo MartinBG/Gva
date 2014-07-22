@@ -25,7 +25,8 @@
 
     $scope.selectCorr = function () {
       var modalInstance = namedModal.open('chooseCorr', {
-        selectedCorrs: $scope.doc.docCorrespondents
+        selectedCorrs: $scope.doc.docCorrespondents,
+        corr: {}
       }, {
         corrs: [
           'Corrs',
