@@ -21,11 +21,11 @@ namespace Gva.Api.Repositories.PersonRepository
             string lin = null,
             string linType = null,
             string uin = null,
+            int? caseTypeId = null,
             string names = null,
             string licences = null,
             string ratings = null,
             string organization = null,
-            string caseTypeAlias = null,
             bool isInspector = false,
             bool isExaminer = false,
             bool exact = false,
@@ -43,6 +43,12 @@ namespace Gva.Api.Repositories.PersonRepository
                 .AndStringCollectionContains(p => p.Ratings.Select(r => r.RatingType.Name), ratings)
                 .AndStringMatches(p => p.Organization == null ? null : p.Organization.Name, organization, exact);
 
+
+            if (caseTypeId.HasValue)
+            {
+                predicate = predicate.AndCollectionContains(o => o.GvaLotCases.Select(c => c.GvaCaseTypeId), caseTypeId.Value);
+            }
+
             if (isExaminer)
             {
                 predicate = predicate.And(p => p.OrganizationExaminers.Count != 0);
@@ -53,7 +59,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 predicate = predicate.And(p => p.Inspector != null);
             }
 
-            var persons = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+            return this.unitOfWork.DbContext.Set<GvaViewPerson>()
                 .Include(p => p.LinType)
                 .Include(p => p.Organization)
                 .Include(p => p.Employment)
@@ -63,18 +69,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(p => p.Licences.Select(l => l.LicenceType))
                 .Include(p => p.Ratings)
                 .Include(p => p.Ratings.Select(r => r.RatingType))
-                .Where(predicate);
-
-            if (!string.IsNullOrEmpty(caseTypeAlias))
-            {
-                persons = from p in persons
-                          join lc in this.unitOfWork.DbContext.Set<GvaLotCase>() on p.LotId equals lc.LotId
-                          join ct in this.unitOfWork.DbContext.Set<GvaCaseType>() on lc.GvaCaseTypeId equals ct.GvaCaseTypeId
-                          where ct.Alias == caseTypeAlias
-                          select p;
-            }
-
-            return persons
+                .Where(predicate)
                 .OrderBy(p => p.Names)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();

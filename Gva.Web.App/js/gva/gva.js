@@ -413,7 +413,7 @@
      .modal('newOrganization'   , 'js/gva/applications/modals/organizations/newOrganizationModal.html'   , 'NewOrganizationModalCtrl'   );
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state(['root.persons'                                               , '/persons?exact&lin&uin&names&licences&ratings&organization'                                                                                                                                                    ])
+      .state(['root.persons'                                               , '/persons?exact&lin&uin&names&licences&ratings&organization&caseType'                                                                                                                                          ])
       .state(['root.persons.search'                                        , ''                                                                            , ['@root'             , 'js/gva/persons/views/personsSearch.html'                             , 'PersonsSearchCtrl'             ]])
       .state(['root.persons.new'                                           , '/new'                                                                        , ['@root'             , 'js/gva/persons/views/personsNew.html'                                , 'PersonsNewCtrl'                ]])
       .state(['root.persons.securityExam'                                  , '/securityExam'                                                               , ['@root'             , 'js/gva/persons/views/exams/securityExamBatch.html'                   , 'SecurityExamBatchCtrl'         ]])

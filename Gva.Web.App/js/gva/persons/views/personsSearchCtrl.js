@@ -9,7 +9,8 @@
     persons) {
     $scope.filters = {
       lin: null,
-      uin: null
+      uin: null,
+      caseType: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -27,7 +28,8 @@
         names: $scope.filters.names,
         licences: $scope.filters.licences,
         ratings: $scope.filters.ratings,
-        organization: $scope.filters.organization
+        organization: $scope.filters.organization,
+        caseType: $scope.filters.caseType
       });
     };
 
