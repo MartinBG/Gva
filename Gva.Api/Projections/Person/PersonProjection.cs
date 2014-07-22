@@ -29,10 +29,16 @@ namespace Gva.Api.Projections.Person
                 .Where(pv => pv.Content.Get<string>("valid.code") == "Y")
                 .FirstOrDefault();
 
-            return new[] { this.Create(personData, personEmployment) };
+            var personLicences = parts.GetAll("licences")
+                .Where(pv => pv.Content.Get<string>("valid.code") == "Y");
+
+            var personRatings = parts.GetAll("ratings")
+                .Where(pv => pv.Content.Get("ratingType") != null);
+
+            return new[] { this.Create(personData, personEmployment, personLicences, personRatings) };
         }
 
-        private GvaViewPerson Create(PartVersion personData, PartVersion personEmployment)
+        private GvaViewPerson Create(PartVersion personData, PartVersion personEmployment, IEnumerable<PartVersion> personLicences, IEnumerable<PartVersion> personRatings)
         {
             GvaViewPerson person = new GvaViewPerson();
 
@@ -51,6 +57,22 @@ namespace Gva.Api.Projections.Person
             {
                 person.EmploymentId = personEmployment.Content.Get<int>("employmentCategory.nomValueId");
                 person.OrganizationId = personEmployment.Content.Get<int?>("organization.nomValueId");
+            }
+
+            if (personLicences.Count() > 0)
+            {
+                person.Licences = string.Join(", ",
+                (personLicences
+                .Select(l => l.Content.Get<string>("licenceType.code"))
+                .ToArray()));
+            }
+
+            if (personRatings.Count() > 0)
+            {
+                person.Ratings = string.Join(", ",
+                (personRatings
+                .Select(l => l.Content.Get<string>("ratingType.name"))
+                .ToArray()));
             }
 
             return person;

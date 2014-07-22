@@ -26,6 +26,10 @@ namespace Gva.Api.Models.Views.Person
 
         public int? EmploymentId { get; set; }
 
+        public string Licences { get; set; }
+
+        public string Ratings { get; set; }
+
         public virtual Lot Lot { get; set; }
 
         public virtual NomValue LinType { get; set; }
@@ -38,11 +42,8 @@ namespace Gva.Api.Models.Views.Person
 
         public virtual ICollection<GvaViewOrganizationExaminer> OrganizationExaminers { get; set; }
 
-        public virtual ICollection<GvaViewPersonLicence> Licences { get; set; }
-
-        public virtual ICollection<GvaViewPersonRating> Ratings { get; set; }
-
         public virtual ICollection<GvaLotCase> GvaLotCases { get; set; }
+
     }
 
     public class GvaViewPersonMap : EntityTypeConfiguration<GvaViewPerson>
@@ -76,6 +77,8 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LinTypeId).HasColumnName("LinTypeId");
             this.Property(t => t.Uin).HasColumnName("Uin");
             this.Property(t => t.Names).HasColumnName("Names");
+            this.Property(t => t.Licences).HasColumnName("Licences");
+            this.Property(t => t.Ratings).HasColumnName("Ratings");
             this.Property(t => t.BirtDate).HasColumnName("BirtDate");
             this.Property(t => t.OrganizationId).HasColumnName("OrganizationId");
             this.Property(t => t.EmploymentId).HasColumnName("EmploymentId");
