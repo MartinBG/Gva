@@ -386,10 +386,7 @@
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])
       .state(['root.applications.search'                           , '?fromDate&toDate&personLin&aircraftIcao&organizationUin'                                 , ['@root'                  , 'js/gva/applications/views/applicationsSearch.html'        , 'ApplicationsSearchCtrl'        ]])
       .state(['root.applications.new'                              , '/new'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsNew.html'           , 'ApplicationsNewCtrl'           ]])
-      .state(['root.applications.new.corrSelect'                   , '/corrSelect?displayName&email&stamp'                                                     , ['@root'                  , 'js/gva/applications/views/common/corrSelect.html'         , 'CorrSelectCtrl'                ]])
-      .state(['root.applications.new.corrNew'                      , '/corrNew'                                                                                , ['@root'                  , 'js/gva/applications/views/common/corrNew.html'            , 'CorrNewCtrl'                   ]])
       .state(['root.applications.link'                             , '/link'                                                                                   , ['@root'                  , 'js/gva/applications/views/applicationsLink.html'          , 'ApplicationsLinkCtrl'          ]])
-      .state(['root.applications.link.docSelect'                   , '/docSelect?fromDate&toDate&regUri&docName&docTypeId&docStatusId&corrs&units&stamp'       , ['@root'                  , 'js/gva/applications/views/common/docSelect.html'          , 'DocSelectCtrl'                 ]])
       .state(['root.applications.edit'                             , '/:id'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsEdit.html'          , 'ApplicationsEditCtrl'          ]])
       .state(['root.applications.edit.case'                        , '/case'                                                                                   , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditCase.html'      , 'ApplicationsEditCaseCtrl'      ]])
       .state(['root.applications.edit.case.newFile'                , '/newFile?docId&docFileId'                                                                , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditNewFile.html'   , 'ApplicationsEditNewFileCtrl'   ]])
@@ -407,7 +404,10 @@
      .modal('chooseAirport'     , 'js/gva/applications/modals/airports/chooseAirportModal.html'          , 'ChooseAirportModalCtrl'     )
      .modal('newAirport'        , 'js/gva/applications/modals/airports/newAirportModal.html'             , 'NewAirportModalCtrl'        )
      .modal('chooseEquipment'   , 'js/gva/applications/modals/equipments/chooseEquipmentModal.html'      , 'ChooseEquipmentModalCtrl'   )
-     .modal('newEquipment'      , 'js/gva/applications/modals/equipments/newEquipmentModal.html'         , 'NewEquipmentModalCtrl'      );
+     .modal('newEquipment'      , 'js/gva/applications/modals/equipments/newEquipmentModal.html'         , 'NewEquipmentModalCtrl'      )
+     .modal('chooseCorr'        , 'js/ems/docs/modals/chooseCorrModal.html'                              , 'ChooseCorrModalCtrl'        )
+     .modal('newCorr'           , 'js/ems/docs/modals/newCorrModal.html'                                 , 'NewCorrModalCtrl'           )
+     .modal('chooseDoc'         , 'js/gva/applications/modals/docs/chooseDocModal.html'                  , 'ChooseDocModalCtrl'         );
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.persons'                                               , '/persons?exact&lin&uin&names&licences&ratings&organization&caseType'                                                                                                                                          ])

@@ -269,6 +269,7 @@
         newDoc: {
           kontinue: 'Продължи',
           registerAndShow: 'Регистрирай и продължи',
+          register: 'Регистрирай',
           caseRegUri: 'Към преписка',
           cancel: 'Отказ',
           docTypeGroupId: 'Група',

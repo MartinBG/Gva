@@ -9,22 +9,11 @@
     $sce,
     Applications,
     appModel,
-    selectedDoc
+    namedModal
     ) {
-    if (selectedDoc.length > 0) {
-      appModel.doc = selectedDoc.pop();
-      appModel.doc.correspondentNames = $sce.trustAsHtml(appModel.doc.correspondentNames);
-    }
-
     $scope.appModel = appModel;
     $scope.filter = $stateParams.filter;
     $scope.setPartAlias = '';
-
-    $scope.selectDoc = function () {
-      var regUri = $scope.appModel.doc ? $scope.appModel.doc.regUri : null;
-
-      return $state.go('root.applications.link.docSelect', { hasLot: false, regUri: regUri });
-    };
 
     $scope.cancel = function () {
       return $state.go('root.applications.search');
@@ -32,6 +21,25 @@
 
     $scope.clear = function () {
       $scope.appModel.doc = null;
+    };
+
+    $scope.selectDoc = function () {
+      var modalInstance = namedModal.open('chooseDoc', null, {
+        docs: [
+          '$stateParams',
+          'Applications',
+          function ($stateParams, Applications) {
+            return Applications.notLinkedDocs($stateParams).$promise;
+          }
+        ]
+      });
+
+      modalInstance.result.then(function (doc) {
+        $scope.appModel.doc = doc;
+        $scope.appModel.doc.correspondentNames = $sce.trustAsHtml(doc.correspondentNames);
+      });
+
+      return modalInstance.opened;
     };
 
     $scope.link = function () {
@@ -85,7 +93,7 @@
     '$sce',
     'Applications',
     'appModel',
-    'selectedDoc'
+    'namedModal'
   ];
 
   ApplicationsLinkCtrl.$resolve = {
@@ -93,9 +101,6 @@
       return {
         lot: {}
       };
-    },
-    selectedDoc: function () {
-      return [];
     }
   };
 

@@ -2788,6 +2788,7 @@
           cancel: 'Отказ'
         },
         docSelect: {
+          title: 'Избор на документ',
           fromDate: 'От дата',
           toDate: 'До дата',
           docName: 'Относно',
@@ -3614,10 +3615,7 @@
       states: {
         'root.applications': 'Заявления',
         'root.applications.new': 'Ново заявление',
-        'root.applications.new.corrSelect': 'Избор на кореспондент',
-        'root.applications.new.corrNew': 'Нов кореспондент',
         'root.applications.link': 'Свържи заявление',
-        'root.applications.link.docSelect': 'Избор на документ',
         'root.applications.edit': 'Преглед',
         'root.applications.edit.case': 'Преписка',
         'root.applications.edit.quals': 'Квалификации',
