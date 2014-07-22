@@ -11,28 +11,10 @@
     PersonsInfo,
     OrganizationsData,
     appModel,
-    selectedAircraft,
-    selectedAirport,
-    selectedEquipment,
     selectedCorrs
     ) {
     if (selectedCorrs.current.length > 0) {
       appModel.doc.docCorrespondents.push(selectedCorrs.current.pop());
-    }
-    if (selectedAircraft.length > 0) {
-      appModel.lot = {
-        id: selectedAircraft.pop()
-      };
-    }
-    if (selectedAirport.length > 0) {
-      appModel.lot = {
-        id: selectedAirport.pop()
-      };
-    }
-    if (selectedEquipment.length > 0) {
-      appModel.lot = {
-        id: selectedEquipment.pop()
-      };
     }
 
     $scope.$watch('appModel.lot.id', function (newValue, oldValue) {
@@ -47,27 +29,6 @@
     $scope.appModel = appModel;
     $scope.filter = $stateParams.filter;
     $scope.setPartAlias = '';
-
-    $scope.newAircraft = function () {
-      return $state.go('root.applications.new.aircraftNew');
-    };
-    $scope.selectAircraft = function () {
-      return $state.go('root.applications.new.aircraftSelect');
-    };
-
-    $scope.newAirport = function () {
-      return $state.go('root.applications.new.airportNew');
-    };
-    $scope.selectAirport = function () {
-      return $state.go('root.applications.new.airportSelect');
-    };
-
-    $scope.newEquipment = function () {
-      return $state.go('root.applications.new.equipmentNew');
-    };
-    $scope.selectEquipment = function () {
-      return $state.go('root.applications.new.equipmentSelect');
-    };
 
     $scope.newCorr = function () {
       var partData = {}, isPersonSelect, isOrgSelect;
@@ -206,9 +167,6 @@
     'PersonsInfo',
     'OrganizationsData',
     'appModel',
-    'selectedAircraft',
-    'selectedAirport',
-    'selectedEquipment',
     'selectedCorrs'
   ];
 
@@ -247,15 +205,6 @@
         });
       }
     ],
-    selectedAircraft: function () {
-      return [];
-    },
-    selectedAirport: function () {
-      return [];
-    },
-    selectedEquipment: function () {
-      return [];
-    },
     selectedCorrs: function selectedCorrs() {
       return {
         total: [],
