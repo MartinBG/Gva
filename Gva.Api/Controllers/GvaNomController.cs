@@ -223,7 +223,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetAircrafts(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.aircraftRepository.GetAircrafts(mark: null, manSN: null, model: term, airCategory: null, aircraftProducer: null, exact: false, offset: offset, limit: limit)
+                this.aircraftRepository.GetAircrafts(mark: null, manSN: null, model: term, icao: null, airCategory: null, aircraftProducer: null, exact: false, offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
