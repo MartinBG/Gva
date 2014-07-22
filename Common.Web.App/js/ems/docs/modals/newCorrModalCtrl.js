@@ -40,15 +40,5 @@
     'corr'
   ];
 
-  NewCorrModalCtrl.$resolve = {
-    corr: [
-      '$stateParams',
-      'Corrs',
-      function resolveCorr($stateParams, Corrs) {
-        return Corrs.getNew().$promise;
-      }
-    ]
-  };
-
   angular.module('ems').controller('NewCorrModalCtrl', NewCorrModalCtrl);
 }(angular));

@@ -72,7 +72,15 @@
     };
 
     $scope.newCorr = function () {
-      var modalInstance = namedModal.open('newCorr');
+      var modalInstance = namedModal.open('newCorr', null, {
+        corr: [
+          '$stateParams',
+          'Corrs',
+          function resolveCorr($stateParams, Corrs) {
+            return Corrs.getNew().$promise;
+          }
+        ]
+      });
 
       modalInstance.result.then(function (nomItem) {
         var newCorr = $scope.docModel.doc.correspondents.slice();
