@@ -1801,6 +1801,7 @@ namespace Docs.Api.Controllers
                 }
 
                 Doc doc = this.docRepository.Find(id,
+                    e => e.DocType,
                     e => e.DocRelations,
                     e => e.DocUnits.Select(d => d.Unit),
                     e => e.DocEntryType);

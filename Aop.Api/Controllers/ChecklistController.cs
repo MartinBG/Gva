@@ -80,10 +80,11 @@ namespace Aop.Api.Controllers
             string contentToString = System.Text.Encoding.UTF8.GetString(content);
 
             AopApp aopApp = this.unitOfWork.DbContext.Set<AopApp>().FirstOrDefault(e => e.STChecklistId == id || e.NDChecklistId == id);
+            int? aopApplicationId = aopApp != null ? aopApp.AopApplicationId : (int?)null;
 
             return Ok(new
             {
-                aopApplicationId = aopApp.AopApplicationId,
+                aopApplicationId = aopApplicationId,
                 content = Newtonsoft.Json.JsonConvert.DeserializeObject<JObject>(contentToString)
             });
         }
