@@ -39,8 +39,8 @@ namespace Gva.Api.Repositories.PersonRepository
                 .AndStringMatches(p => p.LinType.Name, linType, exact)
                 .AndStringMatches(p => p.Uin, uin, exact)
                 .AndStringMatches(p => p.Names, names, exact)
-                .AndStringCollectionContains(p => p.Licences.Select(l => l.LicenceType.Name), licences)
-                .AndStringCollectionContains(p => p.Ratings.Select(r => r.RatingType.Name), ratings)
+                .AndStringContains(p => p.Licences, licences)
+                .AndStringContains(p => p.Ratings, ratings)
                 .AndStringMatches(p => p.Organization == null ? null : p.Organization.Name, organization, exact);
 
 
@@ -64,11 +64,6 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(p => p.Organization)
                 .Include(p => p.Employment)
                 .Include(p => p.Inspector)
-                .Include(p => p.OrganizationExaminers)
-                .Include(p => p.Licences)
-                .Include(p => p.Licences.Select(l => l.LicenceType))
-                .Include(p => p.Ratings)
-                .Include(p => p.Ratings.Select(r => r.RatingType))
                 .Where(predicate)
                 .OrderBy(p => p.Names)
                 .WithOffsetAndLimit(offset, limit)
@@ -82,11 +77,6 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(p => p.Organization)
                 .Include(p => p.Employment)
                 .Include(p => p.Inspector)
-                .Include(p => p.OrganizationExaminers)
-                .Include(e => e.Licences)
-                .Include(p => p.Licences.Select(l => l.LicenceType))
-                .Include(e => e.Ratings)
-                .Include(p => p.Ratings.Select(r => r.RatingType))
                 .SingleOrDefault(p => p.LotId == personId);
         }
 

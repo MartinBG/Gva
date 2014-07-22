@@ -8,15 +8,7 @@ namespace Gva.Api.ModelsDO
 {
     public class PersonDO
     {
-        public PersonDO(GvaViewPerson person)
-            : this(person, person.Licences, person.Ratings)
-        {
-        }
-
-        public PersonDO(
-            GvaViewPerson personData,
-            IEnumerable<GvaViewPersonLicence> personLicences = null,
-            IEnumerable<GvaViewPersonRating> personRatings = null)
+        public PersonDO(GvaViewPerson personData)
         {
             this.Id = personData.LotId;
             this.Lin = personData.Lin;
@@ -26,10 +18,8 @@ namespace Gva.Api.ModelsDO
             this.Age = this.GetAge(personData.BirtDate.Date);
             this.Organization = personData.Organization == null ? null : personData.Organization.Name;
             this.Employment = personData.Employment == null ? null : personData.Employment.Name;
-            this.Licences = string.Join(", ",
-                (personLicences ?? new List<GvaViewPersonLicence>()).Select(l => l.LicenceType.Code).ToArray());
-            this.Ratings = string.Join(", ",
-                (personRatings ?? new List<GvaViewPersonRating>()).Select(l => l.RatingType.Name).ToArray());
+            this.Licences = personData.Licences;
+            this.Ratings = personData.Ratings;
         }
 
         public int Id { get; set; }

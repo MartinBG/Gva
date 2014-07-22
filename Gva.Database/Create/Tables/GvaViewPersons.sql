@@ -7,6 +7,8 @@ CREATE TABLE [dbo].[GvaViewPersons] (
     [LinTypeId]        INT           NOT NULL,
     [Uin]              NVARCHAR(50)  NULL,
     [Names]            NVARCHAR(MAX) NOT NULL,
+    [RatingCodes]      NVARCHAR(MAX) NULL,
+    [LicenceCodes]     NVARCHAR(MAX) NULL,
     [BirtDate]         DATETIME2     NOT NULL,
     [OrganizationId]   INT           NULL,
     [EmploymentId]     INT           NULL,
@@ -24,6 +26,8 @@ exec spDescColumn N'GvaViewPersons', N'Lin'           , N'Личен идент�
 exec spDescColumn N'GvaViewPersons', N'LinTypeId'     , N'Тип лин.'
 exec spDescColumn N'GvaViewPersons', N'Uin'           , N'Единен граждански номер.'
 exec spDescColumn N'GvaViewPersons', N'Names'         , N'Имена.'
+exec spDescColumn N'GvaViewPersons', N'RatingCodes'   , N'Квалификации.'
+exec spDescColumn N'GvaViewPersons', N'LicenceCodes'  , N'Лицензи.'
 exec spDescColumn N'GvaViewPersons', N'BirtDate'      , N'Дата на раждане.'
 exec spDescColumn N'GvaViewPersons', N'OrganizationId', N'Фирма.'
 exec spDescColumn N'GvaViewPersons', N'EmploymentId'  , N'Длъжност.'
