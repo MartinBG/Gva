@@ -55,6 +55,7 @@ GO
 :r $(rootPath)\"..\Insert\migrationUser.sql"
 :r $(rootPath)\"..\Insert\gvaCaseTypes.sql"
 :r $(rootPath)\"..\Insert\gvaWordTemplates.sql"
+:r $(rootPath)\"..\Insert\gvaStages.sql"
 
 ---------------------------------------------------------------
 -- Aircrafts Noms

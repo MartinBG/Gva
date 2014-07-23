@@ -151,6 +151,7 @@
     <Content Include="Insert\migrationUser.sql" />
     <Content Include="Insert\Noms\Aircrafts\airworthinessCertificateTypes.sql" />
     <Content Include="Insert\Noms\Aircrafts\airworthinessReviewTypes.sql" />
+    <Content Include="Insert\gvaStages.sql" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
