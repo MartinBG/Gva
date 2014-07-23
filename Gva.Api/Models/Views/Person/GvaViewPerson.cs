@@ -77,8 +77,8 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LinTypeId).HasColumnName("LinTypeId");
             this.Property(t => t.Uin).HasColumnName("Uin");
             this.Property(t => t.Names).HasColumnName("Names");
-            this.Property(t => t.Licences).HasColumnName("Licences");
-            this.Property(t => t.Ratings).HasColumnName("Ratings");
+            this.Property(t => t.Licences).HasColumnName("LicenceCodes");
+            this.Property(t => t.Ratings).HasColumnName("RatingCodes");
             this.Property(t => t.BirtDate).HasColumnName("BirtDate");
             this.Property(t => t.OrganizationId).HasColumnName("OrganizationId");
             this.Property(t => t.EmploymentId).HasColumnName("EmploymentId");
