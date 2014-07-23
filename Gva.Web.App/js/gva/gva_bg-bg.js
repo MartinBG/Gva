@@ -2665,9 +2665,19 @@
           }
         },
         newForm: {
-          newPerson: 'Нов заявител',
-          selectPerson: 'Избери заявител',
+          title: 'Ново заявление',
+          caseType: 'Тип дело',
+          applicationType: 'Тип заяление',
+          docCorrespondent: 'Кореспондент',
+          newCorr: 'Нов кореспондент',
           register: 'Регистрирай',
+          cancel: 'Отказ'
+        },
+        editAppPart: {
+          title: 'Преглед на заявление',
+          edit: 'Редакция',
+          done: 'Продължи',
+          save: 'Запис',
           cancel: 'Отказ'
         },
         link: {
@@ -2771,6 +2781,13 @@
           title: 'Нова организация',
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        chooseAppTypeModal: {
+          title: 'Избор на вид заявление',
+          cancel: 'Отказ',
+          select: 'Избери',
+          name: 'Наименование',
+          code: 'Код'
         },
         corrSelect: {
           correspondent: 'Кореспондент',
@@ -3621,6 +3638,7 @@
       states: {
         'root.applications': 'Заявления',
         'root.applications.new': 'Ново заявление',
+        'root.applications.new.editApp': 'Преглед',
         'root.applications.link': 'Свържи заявление',
         'root.applications.edit': 'Преглед',
         'root.applications.edit.case': 'Преписка',

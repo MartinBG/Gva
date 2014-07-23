@@ -394,6 +394,7 @@
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])
       .state(['root.applications.search'                           , '?fromDate&toDate&personLin&aircraftIcao&organizationUin'                                 , ['@root'                  , 'js/gva/applications/views/applicationsSearch.html'        , 'ApplicationsSearchCtrl'        ]])
       .state(['root.applications.new'                              , '/new'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsNew.html'           , 'ApplicationsNewCtrl'           ]])
+      .state(['root.applications.new.editPart'                     , '/:lotId/:setPartPath/:ind?appId'                                                         , ['@root'                  , 'js/gva/applications/views/applicationsEditPart.html'      , 'AppEditPartCtrl'               ]])
       .state(['root.applications.link'                             , '/link'                                                                                   , ['@root'                  , 'js/gva/applications/views/applicationsLink.html'          , 'ApplicationsLinkCtrl'          ]])
       .state(['root.applications.edit'                             , '/:id'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsEdit.html'          , 'ApplicationsEditCtrl'          ]])
       .state(['root.applications.edit.case'                        , '/case'                                                                                   , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditCase.html'      , 'ApplicationsEditCaseCtrl'      ]])
@@ -405,6 +406,7 @@
       .state(['root.applications.edit.case.linkPart'               , '/linkPart?docFileId'                                                                     , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditLinkPart.html'  , 'ApplicationsEditLinkPartCtrl'  ]]);
   }]).config(['namedModalProvider', function (namedModalProvider) {
     namedModalProvider
+     .modal('chooseAppType'     , 'js/gva/applications/modals/applicationTypes/chooseAppTypesModal.html' , 'ChooseAppTypesModalCtrl'    )
      .modal('chooseOrganization', 'js/gva/applications/modals/organizations/chooseOrganizationModal.html', 'ChooseOrganizationModalCtrl')
      .modal('newOrganization'   , 'js/gva/applications/modals/organizations/newOrganizationModal.html'   , 'NewOrganizationModalCtrl'   )
      .modal('chooseAircraft'    , 'js/gva/applications/modals/aircrafts/chooseAircraftModal.html'        , 'ChooseAircraftModalCtrl'    )

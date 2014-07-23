@@ -1,0 +1,20 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="applications.chooseAppTypeModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="canceltn" btn-click="cancel()" text="applications.chooseAppTypeModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <sc-datatable items="appTypes" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+      <sc-column sortable="false" class="buttons-cell" has-content="true">
+        <sc-button btn-click="chooseAppType(item)" text="applications.chooseAppTypeModal.select" class="btn btn-xs btn-primary"></sc-button>
+      </sc-column>
+      <sc-column data="code" title="applications.chooseAppTypeModal.code">
+      </sc-column>
+      <sc-column data="name" title="applications.chooseAppTypeModal.name">
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>

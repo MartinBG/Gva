@@ -15,6 +15,24 @@
               method: 'POST',
               url: 'api/apps/create'
             },
+            'getAppPart': {
+              method: 'GET',
+              url: 'api/apps/appPart/:lotId/:path/:ind',
+              params: {
+                lotId: '@lotId',
+                path: '@path',
+                ind: '@ind'
+              }
+            },
+            'editAppPart': {
+              method: 'POST',
+              url: 'api/apps/appPart/:lotId/:path/:ind',
+              params: {
+                lotId: '@lotId',
+                path: '@path',
+                ind: '@ind'
+              }
+            },
             'link': {
               method: 'POST',
               url: 'api/apps/link'

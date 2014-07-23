@@ -1,7 +1,5 @@
-﻿using Docs.Api.DataObjects;
-using Gva.Api.Models;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System.Collections.Generic;
+using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO
 {
@@ -9,12 +7,12 @@ namespace Gva.Api.ModelsDO
     {
         public int LotId { get; set; }
 
-        public string LotSetAlias { get; set; }
+        public string SetPartPath { get; set; }
 
-        public PreDocDO PreDoc { get; set; }
+        public List<int> Correspondents { get; set; }
 
-        public JObject AppPart { get; set; }
+        public NomValue ApplicationType { get; set; }
 
-        public JObject AppFile { get; set; }
+        public int CaseTypeId { get; set; }
     }
 }
