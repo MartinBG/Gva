@@ -383,7 +383,7 @@
 
           doc.flags.isVisibleEditCasePartCmd =
             !doc.isCase &&
-            (doc.canChangeDocCasePart ||
+            (doc.canDocCasePartManagement ||
             (doc.docStatusAlias === 'Draft' && doc.canEdit));
           doc.flags.isVisibleEditTechCmd = !doc.isResolution && !doc.isTask &&
             !doc.isRemark && doc.canEditTech;
