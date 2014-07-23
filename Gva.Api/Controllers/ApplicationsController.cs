@@ -29,6 +29,14 @@ using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Gva.Api.Repositories.OrganizationRepository;
+using System.Text.RegularExpressions;
+using Gva.Api.Repositories.AircraftRepository;
+using Gva.Api.Repositories.EquipmentRepository;
+using Gva.Api.Repositories.AirportRepository;
+using Gva.Api.Repositories.ApplicationStageRepository;
+using System.IO;
+using Common.Api.Models;
 
 namespace Gva.Api.Controllers
 {
@@ -47,6 +55,7 @@ namespace Gva.Api.Controllers
         private ICorrespondentRepository correspondentRepository;
         private IApplicationRepository applicationRepository;
         private INomRepository nomRepository;
+        private IApplicationStageRepository applicationStageRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
 
@@ -62,6 +71,7 @@ namespace Gva.Api.Controllers
             ICorrespondentRepository correspondentRepository,
             IApplicationRepository applicationRepository,
             INomRepository nomRepository,
+            IApplicationStageRepository applicationStageRepository,
             IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher)
             : base(applicationRepository, lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
@@ -77,6 +87,7 @@ namespace Gva.Api.Controllers
             this.correspondentRepository = correspondentRepository;
             this.applicationRepository = applicationRepository;
             this.nomRepository = nomRepository;
+            this.applicationStageRepository = applicationStageRepository;
             this.lotEventDispatcher = lotEventDispatcher;
         }
 
@@ -785,6 +796,64 @@ namespace Gva.Api.Controllers
             }
 
             return Ok(new { corrs = new int[0] });
+        }
+
+        [Route("{appId}/stages")]
+        [HttpGet]
+        public IHttpActionResult GetApplicationStages(int appId)
+        {
+            var applicationStages = this.applicationStageRepository.GetApplicationStages(appId);
+
+            return Ok(applicationStages.Select(a => new ApplicationStageDO(a)));
+        }
+
+        [Route("{appId}/stages/{stageId}")]
+        [HttpGet]
+        public IHttpActionResult GetApplicationStage(int appId, int stageId)
+        {
+            var applicationStage = this.applicationStageRepository.GetApplicationStage(appId, stageId);
+
+            return Ok(
+                new
+                {
+                    Id = applicationStage.GvaAppStageId,
+                    Stage = new
+                    {
+                        NomValueId = applicationStage.GvaStage.GvaStageId,
+                        Name = applicationStage.GvaStage.Name
+                    },
+                    Inspector = applicationStage.Inspector != null ?
+                        new
+                        {
+                            NomValueId = applicationStage.Inspector.LotId,
+                            Name = applicationStage.Inspector.Person.Names
+
+                        } :
+                        null,
+                    Date = applicationStage.StartingDate,
+                    Ordinal = applicationStage.Ordinal
+                });
+        }
+
+        [Route("{appId}/stages")]
+        [HttpPost]
+        public IHttpActionResult PostNewApplicationStage(int appId, JObject appStage)
+        {
+            return Ok(this.applicationStageRepository.AddApplicationStage(appId, appStage));
+        }
+
+        [Route("{appId}/stages/{stageId}")]
+        [HttpPost]
+        public IHttpActionResult PostApplicationStage(int appId, int stageId, JObject appStage)
+        {
+            return Ok(this.applicationStageRepository.UpdateApplicationStage(appId, stageId, appStage));
+        }
+
+        [Route("{appId}/stages/{stageId}")]
+        [HttpDelete]
+        public IHttpActionResult DeleteApplicationStage(int appId, int stageId)
+        {
+            return Ok(applicationStageRepository.DeleteApplicationStage(appId, stageId));
         }
     }
 }
