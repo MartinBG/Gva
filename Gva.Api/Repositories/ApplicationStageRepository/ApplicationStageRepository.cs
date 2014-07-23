@@ -58,9 +58,9 @@ namespace Gva.Api.Repositories.ApplicationStageRepository
             GvaApplicationStage stage = new GvaApplicationStage()
             {
                 GvaApplicationId = appId,
-                GvaStageId = appStage.Get<int>("stage.nomValueId"),
+                GvaStageId = appStage.Get<int>("stageId"),
                 StartingDate = appStage.Get<DateTime>("date"),
-                InspectorLotId = appStage.Get<int?>("inspector.nomValueId"),
+                InspectorLotId = appStage.Get<int?>("inspectorId"),
                 Ordinal = appStage.Get<int>("ordinal")
             };
 
@@ -76,9 +76,9 @@ namespace Gva.Api.Repositories.ApplicationStageRepository
             var applicationStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>().Find(stageId);
             if (applicationStage != null)
             {
-                applicationStage.GvaStageId = appStage.Get<int>("stage.nomValueId");
+                applicationStage.GvaStageId = appStage.Get<int>("stageId");
                 applicationStage.StartingDate = appStage.Get<DateTime>("date");
-                applicationStage.InspectorLotId = appStage.Get<int?>("inspector.nomValueId");
+                applicationStage.InspectorLotId = appStage.Get<int?>("inspectorId");
                 applicationStage.Ordinal = appStage.Get<int>("ordinal");
             }
 

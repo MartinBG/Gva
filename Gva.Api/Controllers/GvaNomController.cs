@@ -779,6 +779,18 @@ namespace Gva.Api.Controllers
 
             return Ok(returnValue);
         }
+
+        [Route("appStages/{id:int}")]
+        public IHttpActionResult GetAppStage(int id)
+        {
+            var stage = this.stageRepository.GetStage(id);
+
+            return Ok(new
+            {
+                nomValueId = stage.GvaStageId,
+                name = stage.Name
+            });
+        }
     }
 }
 

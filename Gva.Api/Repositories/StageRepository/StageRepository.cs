@@ -22,5 +22,12 @@ namespace Gva.Api.Repositories.StageRepository
         {
             return this.unitOfWork.DbContext.Set<GvaStage>().ToList();
         }
+
+        public GvaStage GetStage(int id)
+        {
+            return this.unitOfWork.DbContext.Set<GvaStage>()
+                .Where(s => s.GvaStageId == id)
+                .SingleOrDefault();
+        }
     }
 }

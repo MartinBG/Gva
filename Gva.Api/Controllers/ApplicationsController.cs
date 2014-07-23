@@ -811,28 +811,7 @@ namespace Gva.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetApplicationStage(int appId, int stageId)
         {
-            var applicationStage = this.applicationStageRepository.GetApplicationStage(appId, stageId);
-
-            return Ok(
-                new
-                {
-                    Id = applicationStage.GvaAppStageId,
-                    Stage = new
-                    {
-                        NomValueId = applicationStage.GvaStage.GvaStageId,
-                        Name = applicationStage.GvaStage.Name
-                    },
-                    Inspector = applicationStage.Inspector != null ?
-                        new
-                        {
-                            NomValueId = applicationStage.Inspector.LotId,
-                            Name = applicationStage.Inspector.Person.Names
-
-                        } :
-                        null,
-                    Date = applicationStage.StartingDate,
-                    Ordinal = applicationStage.Ordinal
-                });
+            return Ok(new ApplicationStageDO(this.applicationStageRepository.GetApplicationStage(appId, stageId)));
         }
 
         [Route("{appId}/stages")]
