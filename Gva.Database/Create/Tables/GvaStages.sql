@@ -9,7 +9,7 @@ CREATE TABLE [dbo].[GvaStages](
 )
 GO
 
-exec spDescTable  N'GvaStages', N'Файлове'
+exec spDescTable  N'GvaStages', N'Дейности'
 exec spDescColumn N'GvaStages', N'GvaStageId'       , N'Уникален системно генериран идентификатор'
 exec spDescColumn N'GvaStages', N'Name'             , N'Наименование'
 exec spDescColumn N'GvaStages', N'Alias'            , N'Псевдоним'
