@@ -88,6 +88,8 @@
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
+    <Compile Include="ModelsDO\ApplicationStageDO.cs" />
+    <Compile Include="Models\GvaApplicationStage.cs" />
     <Compile Include="Models\GvaStage.cs" />
     <Compile Include="Projections\Aircraft\AircraftProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegistrationProjection.cs" />
@@ -180,6 +182,8 @@
     <Compile Include="Repositories\AircraftRepository\IAircraftRegistrationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\IApplicationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\ApplicationRepository.cs" />
+    <Compile Include="Repositories\ApplicationStageRepository\ApplicationStageRepository.cs" />
+    <Compile Include="Repositories\ApplicationStageRepository\IApplicationStageRepository.cs" />
     <Compile Include="Repositories\CaseTypeRepository\CaseTypeRepository.cs" />
     <Compile Include="Repositories\CaseTypeRepository\ICaseTypeRepository.cs" />
     <Compile Include="Repositories\AirportRepository\AirportRepository.cs" />

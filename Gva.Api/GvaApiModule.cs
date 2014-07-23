@@ -24,6 +24,7 @@ using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.PublisherRepository;
 using Gva.Api.Repositories.StageRepository;
+using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.WordTemplates;
 using Regs.Api.LotEvents;
 
@@ -102,6 +103,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<CaseTypeRepository>().As<ICaseTypeRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PublisherRepository>().As<IPublisherRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<StageRepository>().As<IStageRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ApplicationStageRepository>().As<IApplicationStageRepository>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();
