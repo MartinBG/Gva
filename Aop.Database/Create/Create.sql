@@ -54,5 +54,3 @@ GO
 --Insert ADDITIONAL
 ---------------------------------------------------------------
 
-:r $(rootPath)\"..\Insert\AopEmployers.sql"
-

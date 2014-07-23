@@ -48,6 +48,23 @@ INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[Classificatio
 INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(44,56,2,15);
 INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(45,56,2,16);
 INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(46,56,2,17);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(47,16,2,1);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(48,16,2,2);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(49,16,2,3);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(50,16,2,4);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(51,16,2,5);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(52,16,2,6);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(53,16,2,7);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(54,16,2,8);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(55,16,2,9);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(56,16,2,10);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(57,16,2,11);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(58,16,2,12);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(59,16,2,13);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(60,16,2,14);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(61,16,2,15);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(62,16,2,16);
+INSERT INTO [UnitClassifications]([UnitClassificationId],[UnitId],[ClassificationId],[ClassificationPermissionId])VALUES(63,16,2,17);
 SET IDENTITY_INSERT [UnitClassifications] OFF
 GO
 

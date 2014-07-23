@@ -22,5 +22,9 @@ namespace Aop.Api.Repositories.Aop
         Doc GetDocByPortalDocId(Guid portalDocId);
 
         void DeteleAopApp(int id);
+
+        AopEmployer CreateAopEmployer(string name, string lotNum, string uic, int aopEmployerTypeId);
+
+        AopEmployerType GetAopEmployerTypeByAlias(string alias);
     }
 }

@@ -62,7 +62,7 @@ namespace Aop.Api.DataObjects
 
                 if (a.AopEmployer != null)
                 {
-                    this.AopEmployerName = string.Format("{0} ({1})", a.AopEmployer.Name, a.AopEmployer.LotNum);
+                    this.AopEmployerName = string.Format("{0} {1} ({2})", a.AopEmployer.Name, a.AopEmployer.Uic, a.AopEmployer.LotNum);
                 }
             }
         }

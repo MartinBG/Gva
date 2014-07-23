@@ -96,5 +96,27 @@ namespace Aop.Api.Repositories.Aop
 
             this.unitOfWork.DbContext.Set<AopApp>().Remove(app);
         }
+
+        public AopEmployer CreateAopEmployer(string name, string lotNum, string uic, int aopEmployerTypeId)
+        {
+            AopEmployer emp = new AopEmployer();
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new Exception("Name for Aop Employer is missing");
+            }
+
+            emp.Name = name;
+            emp.LotNum = lotNum;
+            emp.Uic = uic;
+            emp.AopEmployerTypeId = aopEmployerTypeId;
+
+            return emp;
+        }
+
+        public AopEmployerType GetAopEmployerTypeByAlias(string alias)
+        {
+            return this.unitOfWork.DbContext.Set<AopEmployerType>().FirstOrDefault(e => e.Alias.ToLower() == alias.ToLower());
+        }
     }
 }

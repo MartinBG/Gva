@@ -9,6 +9,7 @@ namespace Aop.Api.Models
         public int AopEmployerId { get; set; }
         public string Name { get; set; }
         public string LotNum { get; set; }
+        public string Uic { get; set; }
         public int AopEmployerTypeId { get; set; }
         public byte[] Version { get; set; }
         public virtual AopEmployerType AopEmployerType { get; set; }
@@ -27,7 +28,9 @@ namespace Aop.Api.Models
                 .HasMaxLength(500);
 
             this.Property(t => t.LotNum)
-                .IsRequired()
+                .HasMaxLength(50);
+
+            this.Property(t => t.Uic)
                 .HasMaxLength(50);
 
             this.Property(t => t.Version)
@@ -41,6 +44,7 @@ namespace Aop.Api.Models
             this.Property(t => t.AopEmployerId).HasColumnName("AopEmployerId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.LotNum).HasColumnName("LotNum");
+            this.Property(t => t.Uic).HasColumnName("Uic");
             this.Property(t => t.AopEmployerTypeId).HasColumnName("AopEmployerTypeId");
             this.Property(t => t.Version).HasColumnName("Version");
 

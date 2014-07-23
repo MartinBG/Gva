@@ -508,14 +508,29 @@ namespace Aop.Api.Controllers
                     app.STValue = val;
 
                     //възложител
-                    string aopEmpLotNum = FedExtractor.GetContractorBatch(fedDoc);
+                    string aopEmpUic = FedExtractor.GetEIK(fedDoc);
 
                     var aopEmp = this.unitOfWork.DbContext.Set<AopEmployer>()
-                        .FirstOrDefault(e => e.LotNum == aopEmpLotNum);
+                        .FirstOrDefault(e => e.Uic == aopEmpUic);
 
                     if (aopEmp != null)
                     {
                         app.AopEmployerId = aopEmp.AopEmployerId;
+                    }
+                    else
+                    {
+                        string aopEmpName = FedExtractor.GetContractor(fedDoc);
+                        string aopEmpLotNum = FedExtractor.GetContractorBatch(fedDoc);
+
+                        AopEmployerType unknownAopEmpType = this.appRepository.GetAopEmployerTypeByAlias("Unknown");
+
+                        AopEmployer emp = appRepository.CreateAopEmployer(aopEmpName, aopEmpLotNum, aopEmpUic, unknownAopEmpType.AopEmployerTypeId);
+
+                        this.unitOfWork.DbContext.Set<AopEmployer>().Add(emp);
+
+                        this.unitOfWork.Save();
+
+                        app.AopEmployerId = emp.AopEmployerId;
                     }
 
                     this.unitOfWork.Save();
@@ -597,14 +612,29 @@ namespace Aop.Api.Controllers
                     app.NDValue = val;
 
                     //възложител
-                    string aopEmpLotNum = FedExtractor.GetContractorBatch(fedDoc);
+                    string aopEmpUic = FedExtractor.GetEIK(fedDoc);
 
                     var aopEmp = this.unitOfWork.DbContext.Set<AopEmployer>()
-                        .FirstOrDefault(e => e.LotNum == aopEmpLotNum);
+                        .FirstOrDefault(e => e.Uic == aopEmpUic);
 
                     if (aopEmp != null && !app.AopEmployerId.HasValue)
                     {
                         app.AopEmployerId = aopEmp.AopEmployerId;
+                    }
+                    else
+                    {
+                        string aopEmpName = FedExtractor.GetContractor(fedDoc);
+                        string aopEmpLotNum = FedExtractor.GetContractorBatch(fedDoc);
+
+                        AopEmployerType unknownAopEmpType = this.appRepository.GetAopEmployerTypeByAlias("Unknown");
+
+                        AopEmployer emp = appRepository.CreateAopEmployer(aopEmpName, aopEmpLotNum, aopEmpUic, unknownAopEmpType.AopEmployerTypeId);
+
+                        this.unitOfWork.DbContext.Set<AopEmployer>().Add(emp);
+
+                        this.unitOfWork.Save();
+
+                        app.AopEmployerId = emp.AopEmployerId;
                     }
 
                     this.unitOfWork.Save();

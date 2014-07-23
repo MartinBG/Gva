@@ -33,8 +33,8 @@ namespace Aop.Api.Controllers
             return Ok(new
             {
                 nomValueId = result.AopEmployerId,
-                name = string.Format("{0} {1}", result.Name, result.LotNum),
-                alias = result.LotNum,
+                name = string.Format("{0} {1} {2}", result.Name, result.Uic, result.LotNum),
+                alias = string.Format("{0} {1}", result.Uic, result.LotNum),
                 isActive = true
             });
         }
@@ -54,8 +54,8 @@ namespace Aop.Api.Controllers
                 .Select(e => new
                 {
                     nomValueId = e.AopEmployerId,
-                    name = e.Name + " " + e.LotNum,
-                    alias = e.LotNum,
+                    name = e.Name + " " + e.Uic + " " + e.LotNum,
+                    alias = e.Uic + " " + e.LotNum,
                     isActive = true
                 })
                 .ToList();

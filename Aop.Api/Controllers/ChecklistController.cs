@@ -150,12 +150,19 @@ namespace Aop.Api.Controllers
                     {
                         copy = true;
 
-                        if (!app.NDChecklistId.HasValue)
+                        if (!app.NDChecklistId.HasValue && !app.STChecklistId.HasValue)
                         {
                             throw new Exception();
                         }
 
-                        checklistId = app.NDChecklistId.Value;
+                        if (app.NDChecklistId.HasValue)
+                        {
+                            checklistId = app.NDChecklistId.Value;
+                        }
+                        else if (app.STChecklistId.HasValue)
+                        {
+                            checklistId = app.STChecklistId.Value;
+                        }
                     }
                     else if (action == "correct")
                     {

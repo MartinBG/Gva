@@ -52,6 +52,7 @@ namespace Aop.Api.Controllers
 
             emp.Name = data.Name;
             emp.LotNum = data.LotNum;
+            emp.Uic = data.Uic;
             emp.AopEmployerTypeId = data.AopEmployerTypeId;
 
             this.unitOfWork.DbContext.Set<AopEmployer>().Add(emp);

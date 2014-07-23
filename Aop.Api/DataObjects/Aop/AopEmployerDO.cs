@@ -21,6 +21,7 @@ namespace Aop.Api.DataObjects
                 this.AopEmployerId = a.AopEmployerId;
                 this.Name = a.Name;
                 this.LotNum = a.LotNum;
+                this.Uic = a.Uic;
                 this.AopEmployerTypeId = a.AopEmployerTypeId;
                 this.Version = a.Version;
             }
@@ -29,6 +30,7 @@ namespace Aop.Api.DataObjects
         public int? AopEmployerId { get; set; }
         public string Name { get; set; }
         public string LotNum { get; set; }
+        public string Uic { get; set; }
         public int AopEmployerTypeId { get; set; }
         public byte[] Version { get; set; }
     }

@@ -131,7 +131,6 @@
     <Content Include="Insert\AopApplicationTypes.sql" />
     <Content Include="Insert\AopApplicationCriteria.sql" />
     <Content Include="Insert\AopApplicationObjects.sql" />
-    <Content Include="Insert\AopEmployers.sql" />
     <Content Include="Insert\Docs\DocEntryTypes.sql" />
   </ItemGroup>
   <ItemGroup>

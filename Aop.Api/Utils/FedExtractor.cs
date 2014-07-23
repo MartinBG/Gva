@@ -195,5 +195,19 @@ namespace Aop.Api.Utils
                 return string.Empty;
             }
         }
+
+        //EИК
+        public static string GetEIK(FEDv5.document document)
+        {
+            try
+            {
+                var section = document.documentsection.First(s => s.id.Equals("S1"))["I1"];
+                return section["Number"];
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
     }
 }
