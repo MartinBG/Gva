@@ -37,6 +37,10 @@
         },
         scTreetable: {
           noDataAvailable: 'Няма намерени резултати'
+        },
+        scMessage: {
+          okButton: 'OK',
+          cancelButton: 'Отказ'
         }
       }
     });
