@@ -1,0 +1,49 @@
+﻿<div class="tab-content">
+  <h5 class="table-header" l10n-text="applications.edit.stages.appStages" style="margin-top:10px;"></h5>
+  <sc-button name="createBtn" btn-click="newAppStage()" text="applications.edit.stages.newAppStage" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+  <sc-datatable items="appStages" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <sc-button name="viewButton" btn-click="viewAppStage(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+    <sc-column data="stage" title="applications.edit.stages.appStage">
+    </sc-column>
+    <sc-column data="date" type="date" title="applications.edit.stages.appStageDate">
+    </sc-column>
+    <sc-column data="inspector" title="applications.edit.stages.appStageInspector">
+    </sc-column>
+    <sc-column data="ordinal" title="applications.edit.stages.appStageOrdinal">
+    </sc-column>
+  </sc-datatable>
+
+  <h5 class="table-header" l10n-text="applications.edit.stages.docStages" style="margin-top:30px;"></h5>
+  <table class="table table-bordered table-condensed" style="margin-bottom:15px;">
+    <thead>
+      <tr>
+        <th><span l10n-text="applications.edit.stages.startingDate"></span></th>
+        <th><span l10n-text="applications.edit.stages.esStageName"></span></th>
+        <th><span l10n-text="applications.edit.stages.esStageExecutors"></span></th>
+        <th><span l10n-text="applications.edit.stages.expectedEndingDate"></span></th>
+        <th><span l10n-text="applications.edit.stages.endingDate"></span></th>
+        <th><span l10n-text="applications.edit.stages.isCurrentStage"></span></th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="dess in docElectronicServiceStages">
+      <tr>
+        <td>{{ dess.startingDate | date:'dd.MM.yyyy HH:mm' }}</td>
+        <td>{{ dess.electronicServiceStageName }}</td>
+        <td ng-bind-html="dess.electronicServiceStageExecutors"></td>
+        <td>{{ dess.expectedEndingDate | date:'dd.MM.yyyy' }}</td>
+        <td>{{ dess.endingDate | date:'dd.MM.yyyy' }}</td>
+        <td>{{ dess.isCurrentStage ? 'Да' : 'Не' }}</td>
+      </tr>
+    </tbody>
+  </table>
+    <sc-button name="endStageButton" btn-click="endDocStage()" text="applications.edit.stages.endElectronicStage" class="btn btn-default btn-xs" ng-show="doc.flags.isVisibleEndStageCmd">
+  </sc-button>
+    <sc-button name="nextStageButton" btn-click="nextDocStage()" text="applications.edit.stages.nextElectronicStage" class="btn btn-default btn-xs" ng-show="doc.flags.isVisibleNextStageCmd">
+  </sc-button>
+    <sc-button name="editStageButton" btn-click="editDocStage()" text="applications.edit.stages.techEditElectronicStage" class="btn btn-default btn-xs" ng-show="doc.flags.isVisibleEditStageCmd">
+  </sc-button>
+    <sc-button name="reverseStageButton" btn-click="reverseDocStage()" text="applications.edit.stages.reverseElectronicStage" class="btn btn-default btn-xs" ng-show="doc.flags.isVisibleReverseStageCmd">
+  </sc-button>
+</div>

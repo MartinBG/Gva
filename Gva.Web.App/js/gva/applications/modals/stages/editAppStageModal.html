@@ -1,0 +1,25 @@
+﻿<ng-form name="form.stageForm" sc-validate="{}" sc-form-readonly="!editMode">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="applications.editAppStageModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="applications.editAppStageModal.edit"
+          class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="deleteBtn" btn-click="deleteStage()" text="applications.editAppStageModal.deleteStage"
+          class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" >
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="applications.editAppStageModal.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="applications.editAppStageModal.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <gva-application-stage name="appStageForm" ng-model="stageModel"></gva-application-stage>
+    </div>
+  </div>
+</ng-form>
