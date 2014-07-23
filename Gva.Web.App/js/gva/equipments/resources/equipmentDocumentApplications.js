@@ -5,6 +5,6 @@
   angular.module('gva').factory(
       'EquipmentDocumentApplications',
       ['$resource', function ($resource) {
-    return $resource('/api/equipments/:id/equipmentDocumentApplications/:ind');
+    return $resource('api/equipments/:id/equipmentDocumentApplications/:ind');
   }]);
 }(angular));
