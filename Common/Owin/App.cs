@@ -47,7 +47,12 @@ namespace Common.Owin
                     OnReceive = (c) =>
                     {
                         c.DeserializeTicket(c.Token);
-                        c.OwinContext.Environment["oauth.Properties"] = c.Ticket.Properties;
+
+                        //check if invalid bearer token received
+                        if (c.Ticket != null)
+                        {
+                            c.OwinContext.Environment["oauth.Properties"] = c.Ticket.Properties;
+                        }
                     }
                 },
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(8),
