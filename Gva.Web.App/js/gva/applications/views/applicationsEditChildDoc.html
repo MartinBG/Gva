@@ -1,44 +1,38 @@
-﻿<div class="tab-content">
+﻿<ng-form name="docForm" sc-validate="{}">
   <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="applications.edit.newChildDoc.title"></strong>
+      <div class="pull-right">
+        <sc-button name="registerBtn" btn-click="register()" text="applications.edit.newChildDoc.register"
+          class="btn btn-primary btn-xs" icon="glyphicon-ok">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="applications.edit.newChildDoc.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-remove">
+        </sc-button>
+      </div>
+    </div>
 
-    <div class="panel panel-default">
-      <nav class="panel-heading">
-        <div class="collapse navbar-collapse" style="padding: 0px;">
-          <sc-button name="registerBtn" btn-click="register()" text="docs.newDoc.register"
-            class="btn btn-primary btn-sm" icon="glyphicon-ok">
-          </sc-button>
-          <sc-button name="cancelBtn" btn-click="cancel()" text="docs.newDoc.cancel"
-            class="btn btn-default btn-sm" icon="glyphicon-remove">
-          </sc-button>
-        </div>
-      </nav>
-
-      <div class="well-sm panel-body">
-        <ng-form name="docForm" sc-validate="{}">
-          <div class="well-sm panel-body ">
-            <div class="row">
-              <div class="form-group col-md-8">
-                <label class="control-label" l10n-text="docs.newDoc.caseRegUri"></label>
-                <div>
-                  <sc-text name="caseRegUri" readonly="true"
-                    value="{{docModel.parentDoc ? docModel.parentDoc.regUri + ' ' + docModel.parentDoc.docTypeName + ' ' + docModel.parentDoc.docSubject : ''}}">
-                  </sc-text>
-                </div>
-              </div>
-            </div>
-
-            <ems-doc-new-common name="docNewCommonForm" ng-model="docModel"></ems-doc-new-common>
-
-            <div class="row">
-              <sc-field-group class="col-md-6" text="docs.newDoc.docCorrespondent">
-                <sc-nomenclature ng-model="docModel.doc.correspondents" name="correspondents" alias="'correspondent'" mode="id" multiple></sc-nomenclature>
-                <sc-button btn-click="selectCorr()" class="btn btn-default" icon="glyphicon-search"></sc-button>
-                <sc-button btn-click="newCorr()" class="btn btn-default" icon="glyphicon-plus"></sc-button>
-              </sc-field-group>
-            </div>
+    <div class="well-sm panel-body">
+      <div class="row">
+        <div class="form-group col-md-8">
+          <label class="control-label" l10n-text="applications.edit.newChildDoc.caseRegUri"></label>
+          <div>
+            <sc-text name="caseRegUri" readonly="true"
+              value="{{docModel.parentDoc ? docModel.parentDoc.regUri + ' ' + docModel.parentDoc.docTypeName + ' ' + docModel.parentDoc.docSubject : ''}}">
+            </sc-text>
           </div>
-        </ng-form>
+        </div>
+      </div>
+
+      <ems-doc-new-common name="docNewCommonForm" ng-model="docModel"></ems-doc-new-common>
+
+      <div class="row">
+        <sc-field-group class="col-md-6" text="applications.edit.newChildDoc.docCorrespondent">
+          <sc-nomenclature ng-model="docModel.doc.correspondents" name="correspondents" alias="'correspondent'" mode="id" multiple></sc-nomenclature>
+          <sc-button btn-click="selectCorr()" class="btn btn-default" icon="glyphicon-search"></sc-button>
+          <sc-button btn-click="newCorr()" class="btn btn-default" icon="glyphicon-plus"></sc-button>
+        </sc-field-group>
       </div>
     </div>
   </div>
-</div>
+</ng-form>

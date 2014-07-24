@@ -1,4 +1,4 @@
-﻿<div class="tab-content">
+﻿<ng-form name="newDocFile" sc-validate="{}">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="applications.edit.newDocFile.title"></strong>
@@ -13,9 +13,7 @@
     </div>
 
     <div class="well-sm panel-body">
-      <ng-form name="newDocFile" sc-validate="{}">
-        <ems-doc-files-edit name="docFilesForm" ng-model="files" readonly="false"></ems-doc-files-edit>
-      </ng-form>
+      <ems-doc-files-edit name="docFilesForm" ng-model="files" readonly="false"></ems-doc-files-edit>
     </div>
   </div>
-</div>
+</ng-form>

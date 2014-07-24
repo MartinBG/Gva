@@ -2642,6 +2642,13 @@
             cancel: 'Отказ',
             addPart: 'Продължи'
           },
+          newChildDoc: {
+            title: 'Нов подчинен документ',
+            register: 'Регистрирай',
+            cancel: 'Отказ',
+            caseRegUri: 'Към преписка',
+            docCorrespondent: 'Кореспондент'
+          },
           newDocFile: {
             title: 'Нов файл',
             cancel: 'Отказ',
@@ -2675,6 +2682,7 @@
           cancel: 'Отказ'
         },
         link: {
+          title: 'Свързване на заявление',
           selectDoc: 'Избор на документ',
           cancel: 'Отказ',
           clear: 'Изчисти',
