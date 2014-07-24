@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonAddresses,
-    address
+    address,
+    scMessage
   ) {
     var originalAddress = _.cloneDeep(address);
 
@@ -38,9 +39,14 @@
     };
 
     $scope.deleteAddress = function () {
-      return PersonAddresses.remove({ id: $stateParams.id, ind: address.partIndex })
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonAddresses.remove({ id: $stateParams.id, ind: address.partIndex })
           .$promise.then(function () {
-        return $state.go('root.persons.view.addresses.search');
+            return $state.go('root.persons.view.addresses.search');
+          });
+        }
       });
     };
   }
@@ -50,7 +56,8 @@
     '$state',
     '$stateParams',
     'PersonAddresses',
-    'address'
+    'address',
+    'scMessage'
   ];
 
   AddressesEditCtrl.$resolve = {

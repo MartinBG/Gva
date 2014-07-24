@@ -4,6 +4,9 @@
   angular.module('gva').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
       common: {
+        messages: {
+          confirmDelete: 'Сигурни ли сте, че искате да изтриете данните?'
+        },
         choosePublisherModal: {
           title: 'Избор на издател',
           publisherType: 'Тип',
