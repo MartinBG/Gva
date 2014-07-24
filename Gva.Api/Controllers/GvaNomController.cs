@@ -394,6 +394,23 @@ namespace Gva.Api.Controllers
                 }));
         }
 
+        [Route("caseTypes")]
+        public IHttpActionResult GetCaseTypesForLot(int lotId, string term = null)
+        {
+            term = term ?? string.Empty;
+
+            var caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId)
+                .Where(ct => ct.Name.ToLower().Contains(term.ToLower()))
+                .Select(ct => new
+                {
+                    NomValueId = ct.GvaCaseTypeId,
+                    Name = ct.Name,
+                    Alias = ct.Alias
+                });
+
+            return Ok(caseTypes);
+        }
+
         [Route("schools")]
         public IHttpActionResult GetSchools(string term = null, int? graduationId = null, int offset = 0, int? limit = null)
         {
@@ -720,6 +737,28 @@ namespace Gva.Api.Controllers
                 prop: "staffTypeAlias",
                 propValue: staffTypeAlias,
                 term: term);
+
+            return Ok(nomValues);
+        }
+
+        [Route("applicationTypes")]
+        public IHttpActionResult GetApplicationTypes(string caseTypeAlias = null, string term = null, int offset = 0, int? limit = null)
+        {
+            var nomValues = this.nomRepository.GetNomValues(
+                alias: "applicationTypes",
+                term: term);
+
+            if (!string.IsNullOrWhiteSpace(caseTypeAlias))
+            {
+                nomValues = nomValues.Where(nv => nv.TextContent.GetItems<string>("caseTypes").Contains(caseTypeAlias));
+            }
+
+            nomValues = nomValues.Skip(offset);
+
+            if (limit.HasValue)
+            {
+                nomValues = nomValues.Take(limit.Value);
+            }
 
             return Ok(nomValues);
         }

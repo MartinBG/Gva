@@ -1,42 +1,49 @@
-﻿<div>
+﻿<ng-form class="form-inline" name="appForm" sc-validate="{}">
   <div class="panel panel-default">
-    <nav class="panel-heading">
-      <div class="collapse navbar-collapse" style="padding: 0px;">
-        <sc-button btn-click="save()" name="registerBtn" text="applications.newForm.register" class="btn btn-primary btn-sm" icon="glyphicon glyphicon-ok"></sc-button>
-        <sc-button btn-click="cancel()" name="cancelBtn" text="applications.newForm.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
+    <div class="panel-heading">
+      <strong l10n-text="applications.newForm.title"></strong>
+      <div class="pull-right">
+        <sc-button btn-click="save()" name="registerBtn" text="applications.newForm.register"
+          class="btn btn-primary btn-xs" icon="glyphicon glyphicon-ok"></sc-button>
+        <sc-button btn-click="cancel()" name="cancelBtn" text="applications.newForm.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
       </div>
-    </nav>
+    </div>
+
     <div class="well-sm panel-body">
-      <ng-form name="appForm" sc-validate="{}">
-        <div class="well-sm panel-body">
-          <div ng-if="filter === 'Person'">
-            <gva-common-select-person name="personForm" ng-model="appModel" sc-data-new-class="'col-sm-10'"></gva-common-select-person>
-          </div>
-          <div ng-if="filter === 'Organization'">
-            <gva-application-select-organization name="organizationForm" ng-model="appModel"></gva-application-select-organization>
-          </div>
-          <div ng-if="filter === 'Aircraft'">
-            <gva-application-select-aircraft name="aircraftForm" ng-model="appModel"></gva-application-select-aircraft>
-          </div>
-          <div ng-if="filter === 'Airport'">
-            <gva-application-select-airport name="airportForm" ng-model="appModel"></gva-application-select-airport>
-          </div>
-          <div ng-if="filter === 'Equipment'">
-            <gva-application-select-equipment name="equipmentForm" ng-model="appModel"></gva-application-select-equipment>
-          </div>
+      <gva-common-select-person ng-if="filter === 'Person'" name="personForm"
+          ng-model="application" sc-data-new-class="'col-sm-10'"></gva-common-select-person>
 
-          <ems-doc-new-common name="docNewCommonForm" ng-model="appModel"></ems-doc-new-common>
+      <gva-application-select-organization ng-if="filter === 'Organization'" name="organizationForm"
+          ng-model="application"></gva-application-select-organization>
 
-          <div class="row">
-            <sc-field-group class="col-sm-6" text="docs.newDoc.docCorrespondent" validations="{ required: 'default', requiredValue: 'Задължително поле' }" field-name="correspondents">
-              <sc-nomenclature ng-model="appModel.doc.docCorrespondents" name="correspondents" alias="'correspondent'" sc-validate="{ requiredValue: requireCorrespondents }" mode="id" multiple></sc-nomenclature>
-              <sc-button btn-click="selectCorr()" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
-              <sc-button btn-click="newCorr()" class="btn btn-default" icon="glyphicon-plus"></sc-button>
-            </sc-field-group>
-          </div>
+      <gva-application-select-aircraft ng-if="filter === 'Aircraft'" name="aircraftForm"
+          ng-model="application"></gva-application-select-aircraft>
 
+      <gva-application-select-airport ng-if="filter === 'Airport'" name="airportForm"
+          ng-model="application"></gva-application-select-airport>
+
+      <gva-application-select-equipment ng-if="filter === 'Equipment'" name="equipmentForm"
+          ng-model="application"></gva-application-select-equipment>
+
+      <div ng-if="application.lot.id">
+        <div class="row">
+          <sc-field type="nomenclature" ng-if="filter === 'Person'" ng-model="application.caseType" alias="'caseTypes'" params="{lotId: application.lot.id}" ng-required="true" l10n-text="applications.newForm.caseType" class="col-sm-3 col-md-2"></sc-field>
+
+          <sc-field-group class="col-sm-8" text="applications.newForm.applicationType" validations="{ required: 'default' }" field-name="applicationType">
+            <sc-text ng-model="application.applicationType.name" name="applicationType" alias="'correspondent'" disabled ng-required="true"></sc-text>
+            <sc-button btn-click="selectAppType()" ng-disabled="!application.caseType" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
+          </sc-field-group>
         </div>
-      </ng-form>
+
+        <div class="row">
+          <sc-field-group class="col-sm-10" text="applications.newForm.docCorrespondent" validations="{ required: 'default', requiredValue: 'Задължително поле' }" field-name="correspondents">
+            <sc-nomenclature ng-model="application.docCorrespondents" name="correspondents" alias="'correspondent'" sc-validate="{ requiredValue: requireCorrespondents }" mode="id" multiple></sc-nomenclature>
+            <sc-button btn-click="selectCorr()" class="btn btn-default" icon="glyphicon glyphicon-search"></sc-button>
+            <sc-button btn-click="newCorr()" class="btn btn-default" text="applications.newForm.newCorr" icon="glyphicon-plus"></sc-button>
+          </sc-field-group>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</ng-form>

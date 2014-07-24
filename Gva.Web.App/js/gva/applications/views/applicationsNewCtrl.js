@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular,_*/
+(function (angular,_) {
   'use strict';
 
   function ApplicationsNewCtrl(
@@ -7,37 +7,63 @@
     $scope,
     $state,
     $stateParams,
+    namedModal,
     Applications,
+    Nomenclatures,
     PersonsInfo,
     OrganizationsData,
-    appModel,
-    namedModal
+    application
     ) {
-    $scope.$watch('appModel.lot.id', function (newValue, oldValue) {
-      if (((newValue !== oldValue) || (newValue === oldValue)) && !!newValue) {
-        return Applications.getGvaCorrespodents({ lotId: appModel.lot.id }).$promise
-          .then(function (data) {
-            appModel.doc.docCorrespondents = data.corrs;
+    $scope.$watch('application.lot.id', function (newValue, oldValue) {
+      if (newValue !== oldValue) {
+        $scope.application.caseType = null;
+        $scope.application.docCorrespondents = [];
+
+        if (!!newValue) {
+          var caseTypes = [];
+
+          if ($scope.filter !== 'Person') {
+            caseTypes = Nomenclatures.query({
+              alias: 'caseTypes',
+              lotId: $scope.application.lot.id
+            }).$promise;
+          }
+
+          return $q.all({
+            caseTypes: $q.when(caseTypes),
+            corrs: Applications.getGvaCorrespodents({ lotId: application.lot.id }).$promise
+          }).then(function (results) {
+            if (results.caseTypes.length) {
+              $scope.application.caseType = results.caseTypes[0];
+            }
+
+            $scope.application.docCorrespondents = results.corrs.corrs;
           });
+        }
       }
     });
 
-    $scope.appModel = appModel;
+    $scope.$watch('application.caseType', function (newValue, oldValue) {
+      if (newValue !== oldValue) {
+        $scope.application.applicationType = null;
+      }
+    });
+
+    $scope.application = application;
     $scope.filter = $stateParams.filter;
-    $scope.setPartAlias = '';
 
     $scope.newCorr = function () {
       var partData = {}, isPersonSelect, isOrgSelect;
       partData.$promise = $q.when(false);
 
-      if ($scope.appModel.lot && $scope.appModel.lot.id) {
+      if ($scope.application.lot && $scope.application.lot.id) {
         if ($scope.filter === 'Person') {
           isPersonSelect = true;
-          partData = PersonsInfo.get({ id: $scope.appModel.lot.id });
+          partData = PersonsInfo.get({ id: $scope.application.lot.id });
         }
         else if ($scope.filter === 'Organization') {
           isOrgSelect = true;
-          partData = OrganizationsData.get({ id: $scope.appModel.lot.id });
+          partData = OrganizationsData.get({ id: $scope.application.lot.id });
         }
       }
 
@@ -83,9 +109,9 @@
         });
 
         modalInstance.result.then(function (nomItem) {
-          var newCorr = $scope.appModel.doc.docCorrespondents.slice();
+          var newCorr = $scope.application.docCorrespondents.slice();
           newCorr.push(nomItem.nomValueId);
-          $scope.appModel.doc.docCorrespondents = newCorr;
+          $scope.application.docCorrespondents = newCorr;
         });
 
         return modalInstance.opened;
@@ -96,18 +122,18 @@
       var partData = {}, isPersonSelect, isOrgSelect, selectedCorrs = [];
       partData.$promise = $q.when(false);
 
-      _.forEach($scope.appModel.doc.docCorrespondents, function (corr) {
+      _.forEach($scope.application.docCorrespondents, function (corr) {
         return selectedCorrs.push({ nomValueId: corr });
       });
 
-      if ($scope.appModel.lot && $scope.appModel.lot.id) {
+      if ($scope.application.lot && $scope.application.lot.id) {
         if ($scope.filter === 'Person') {
           isPersonSelect = true;
-          partData = PersonsInfo.get({ id: $scope.appModel.lot.id });
+          partData = PersonsInfo.get({ id: $scope.application.lot.id });
         }
         else if ($scope.filter === 'Organization') {
           isOrgSelect = true;
-          partData = OrganizationsData.get({ id: $scope.appModel.lot.id });
+          partData = OrganizationsData.get({ id: $scope.application.lot.id });
         }
       }
 
@@ -143,9 +169,9 @@
         });
 
         modalInstance.result.then(function (nomItem) {
-          var newCorr = $scope.appModel.doc.docCorrespondents.slice();
+          var newCorr = $scope.application.docCorrespondents.slice();
           newCorr.push(nomItem.nomValueId);
-          $scope.appModel.doc.docCorrespondents = newCorr;
+          $scope.application.docCorrespondents = newCorr;
         });
 
         return modalInstance.opened;
@@ -153,7 +179,30 @@
     };
 
     $scope.requireCorrespondents = function () {
-      return $scope.appModel.doc.docCorrespondents.length > 0;
+      return $scope.application.docCorrespondents.length > 0;
+    };
+
+    $scope.selectAppType = function () {
+      var modalInstance = namedModal.open(
+        'chooseAppType',
+        { },
+        {
+          appTypes: [
+            'Nomenclatures',
+            function (Nomenclatures) {
+              return Nomenclatures.query({
+                alias: 'applicationTypes',
+                caseTypeAlias: $scope.application.caseType.alias
+              }).$promise;
+            }
+          ]
+        });
+
+      modalInstance.result.then(function (appType) {
+        $scope.application.applicationType = appType;
+      });
+
+      return modalInstance.opened;
     };
 
     $scope.cancel = function () {
@@ -165,41 +214,37 @@
       .then(function () {
         if ($scope.appForm.$valid) {
           var newApplication = {
-            lotSetAlias: $scope.filter,
-            lotId: $scope.appModel.lot.id,
-            preDoc: {
-              docFormatTypeId: $scope.appModel.doc.docFormatTypeId,
-              docCasePartTypeId: $scope.appModel.doc.docCasePartTypeId,
-              docDirectionId: $scope.appModel.doc.docDirectionId,
-              docTypeGroupId: $scope.appModel.doc.docTypeGroupId,
-              docTypeId: $scope.appModel.doc.docTypeId,
-              docSubject: $scope.appModel.doc.docSubject,
-              correspondents: $scope.appModel.doc.docCorrespondents
-            }
+            setPartPath: null,
+            lotId: $scope.application.lot.id,
+            correspondents: $scope.application.docCorrespondents,
+            applicationType: $scope.application.applicationType,
+            caseTypeId: $scope.application.caseType.nomValueId
           };
 
           //todo make it better
           if ($scope.filter === 'Person') {
-            $scope.setPartAlias = 'personApplication';
+            newApplication.setPartPath = 'personDocumentApplications';
           }
           else if ($scope.filter === 'Organization') {
-            $scope.setPartAlias = 'organizationApplication';
+            newApplication.setPartPath = 'organizationDocumentApplications';
           }
           else if ($scope.filter === 'Aircraft') {
-            $scope.setPartAlias = 'aircraftApplication';
+            newApplication.setPartPath = 'aircraftDocumentApplications';
           }
           else if ($scope.filter === 'Airport') {
-            $scope.setPartAlias = 'airportApplication';
+            newApplication.setPartPath = 'airportDocumentApplications';
           }
           else if ($scope.filter === 'Equipment') {
-            $scope.setPartAlias = 'equipmentApplication';
+            newApplication.setPartPath = 'equipmentDocumentApplications';
           }
 
-          return Applications.create(newApplication).$promise.then(function (app) {
-            return $state.go('root.applications.edit.case.addPart', {
-              id: app.applicationId,
-              docId: app.docId,
-              setPartAlias: $scope.setPartAlias
+          return Applications.create(newApplication).$promise.then(function (gvaApp) {
+            return $state.go('root.applications.new.editPart', {
+              setPartPath: newApplication.setPartPath,
+              ind: gvaApp.gvaAppLotPart.index,
+              lotId: gvaApp.lotId,
+              appId: gvaApp.gvaApplicationId,
+              filter: $scope.filter
             });
           });
         }
@@ -212,49 +257,24 @@
     '$scope',
     '$state',
     '$stateParams',
+    'namedModal',
     'Applications',
+    'Nomenclatures',
     'PersonsInfo',
     'OrganizationsData',
-    'appModel',
-    'namedModal'
+    'application'
   ];
 
   ApplicationsNewCtrl.$resolve = {
-    appModel: ['$q', 'Nomenclatures',
-      function ($q, Nomenclatures) {
-        return $q.all({
-          docFormatTypes: Nomenclatures.query({ alias: 'docFormatType' }).$promise,
-          docCasePartTypes: Nomenclatures.query({ alias: 'docCasePartType' }).$promise,
-          docDirections: Nomenclatures.query({ alias: 'docDirection' }).$promise
-        }).then(function (res) {
-          res.docFormatTypes = _.filter(res.docFormatTypes, function (dft) {
-            return dft.alias === 'Paper';
-          });
-          res.docCasePartTypes = _.filter(res.docCasePartTypes, function (dcpt) {
-            return dcpt.alias === 'Public';
-          });
-
-          var doc = {
-            docFormatTypeId: _(res.docFormatTypes).first().nomValueId,
-            docFormatTypeName: _(res.docFormatTypes).first().name,
-            docCasePartTypeId: _(res.docCasePartTypes).first().nomValueId,
-            docCasePartTypeName: _(res.docCasePartTypes).first().name,
-            docDirectionId: _(res.docDirections).first().nomValueId,
-            docDirectionName: _(res.docDirections).first().name,
-            docCorrespondents: []
-          };
-
-          return {
-            lot: {},
-            doc: doc,
-            docFormatTypes: res.docFormatTypes,
-            docCasePartTypes: res.docCasePartTypes,
-            docDirections: res.docDirections
-          };
-        });
-      }
-    ]
+    application: function () {
+      return {
+        lot: {},
+        caseType: null,
+        applicationType: null,
+        docCorrespondents: []
+      };
+    }
   };
 
   angular.module('gva').controller('ApplicationsNewCtrl', ApplicationsNewCtrl);
-}(angular, _));
+}(angular,_));

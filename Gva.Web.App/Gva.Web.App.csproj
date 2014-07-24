@@ -328,12 +328,13 @@
     <Content Include="js\gva\applications\modals\equipments\chooseEquipmentModalCtrl.js" />
     <Content Include="js\gva\applications\modals\equipments\newEquipmentModal.html" />
     <Content Include="js\gva\applications\modals\equipments\newEquipmentModalCtrl.js" />
+    <Content Include="js\gva\applications\modals\applicationTypes\chooseAppTypesModal.html" />
+    <Content Include="js\gva\applications\modals\applicationTypes\chooseAppTypesModalCtrl.js" />
     <Content Include="js\gva\applications\modals\organizations\chooseOrganizationModal.html" />
     <Content Include="js\gva\applications\modals\organizations\chooseOrganizationModalCtrl.js" />
     <Content Include="js\gva\applications\modals\organizations\newOrganizationModal.html" />
     <Content Include="js\gva\applications\modals\organizations\newOrganizationModalCtrl.js" />
     <Content Include="js\gva\applications\resources\applications.js" />
-    <Content Include="js\gva\applications\resources\application.js" />
     <Content Include="js\gva\applications\views\applicationsEdit.html" />
     <Content Include="js\gva\applications\views\applicationsEditAddPart.html" />
     <Content Include="js\gva\applications\views\applicationsEditAddPartCtrl.js" />
@@ -352,8 +353,10 @@
     <Content Include="js\gva\applications\views\applicationsLinkCtrl.js" />
     <Content Include="js\gva\applications\views\applicationsNew.html" />
     <Content Include="js\gva\applications\views\applicationsNewCtrl.js" />
+    <Content Include="js\gva\applications\views\applicationsEditPart.html" />
     <Content Include="js\gva\applications\views\applicationsSearch.html" />
     <Content Include="js\gva\applications\views\applicationsSearchCtrl.js" />
+    <Content Include="js\gva\applications\views\applicationsEditPartCtrl.js" />
     <Content Include="js\gva\applications\views\docsLinkApp.html" />
     <Content Include="js\gva\applications\views\docsLinkAppCtrl.js" />
     <Content Include="js\gva\common\forms\commonAuditDetail.html" />

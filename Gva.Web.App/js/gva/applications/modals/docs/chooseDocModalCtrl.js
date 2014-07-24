@@ -43,5 +43,15 @@
     'docs'
   ];
 
+  ChooseDocModalCtrl.$resolve = {
+    docs: [
+      '$stateParams',
+      'Applications',
+      function ($stateParams, Applications) {
+        return Applications.notLinkedDocs($stateParams).$promise;
+      }
+    ]
+  };
+
   angular.module('gva').controller('ChooseDocModalCtrl', ChooseDocModalCtrl);
 }(angular));

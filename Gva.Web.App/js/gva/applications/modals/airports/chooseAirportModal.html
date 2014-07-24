@@ -1,38 +1,38 @@
 ﻿<div class="panel panel-default">
   <div class="panel-heading">
-    <strong l10n-text="applications.airportSelect.title"></strong>
+    <strong l10n-text="applications.chooseAirportModal.title"></strong>
     <div class="pull-right">
-      <sc-button name="canceltn" btn-click="cancel()" text="applications.airportSelect.cancel" class="btn btn-sm btn-default" icon="glyphicon-ban-circle"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="applications.chooseAirportModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
     </div>
   </div>
 
   <div class="well-sm panel-body">
      <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
-        <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="applications.airportSelect.name"></sc-filter>
-        <sc-filter type="text" name="icao" class="col-sm-3" removable="false" label="applications.airportSelect.icao"></sc-filter>
-        <sc-search-button action="search()" text="applications.airportSelect.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
+        <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="applications.chooseAirportModal.name"></sc-filter>
+        <sc-filter type="text" name="icao" class="col-sm-3" removable="false" label="applications.chooseAirportModal.icao"></sc-filter>
+        <sc-search-button action="search()" text="applications.chooseAirportModal.search" icon="glyphicon-search"></sc-search-button>
         <sc-search-button action="add"></sc-search-button>
       </sc-search>
 
       <sc-datatable items="airports" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
         <sc-column sortable="false" class="buttons-cell" has-content="true">
-          <sc-button btn-click="selectAirport(item)" text="applications.airportSelect.select" class="btn btn-xs btn-primary"></sc-button>
+          <sc-button btn-click="selectAirport(item)" text="applications.chooseAirportModal.select" class="btn btn-xs btn-primary"></sc-button>
         </sc-column>
-        <sc-column data="airportType" title="applications.airportSelect.airportType">
+        <sc-column data="airportType" title="applications.chooseAirportModal.airportType">
         </sc-column>
-        <sc-column data="name" title="applications.airportSelect.name">
+        <sc-column data="name" title="applications.chooseAirportModal.name">
         </sc-column>
-        <sc-column data="icao" title="applications.airportSelect.icao">
+        <sc-column data="icao" title="applications.chooseAirportModal.icao">
         </sc-column>
-        <sc-column data="place" title="applications.airportSelect.place">
+        <sc-column data="place" title="applications.chooseAirportModal.place">
         </sc-column>
-        <sc-column data="runway" title="applications.airportSelect.runway">
+        <sc-column data="runway" title="applications.chooseAirportModal.runway">
         </sc-column>
-        <sc-column data="course" title="applications.airportSelect.course">
+        <sc-column data="course" title="applications.chooseAirportModal.course">
         </sc-column>
-        <sc-column data="excess" title="applications.airportSelect.excess">
+        <sc-column data="excess" title="applications.chooseAirportModal.excess">
         </sc-column>
-        <sc-column data="concrete" title="applications.airportSelect.concrete">
+        <sc-column data="concrete" title="applications.chooseAirportModal.concrete">
         </sc-column>
       </sc-datatable>
   </div>

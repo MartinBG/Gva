@@ -5,10 +5,11 @@
   function NewAircraftModalCtrl(
     $scope,
     $modalInstance,
-    Aircrafts
+    Aircrafts,
+    aircraft
   ) {
     $scope.form = {};
-    $scope.aircraft = {};
+    $scope.aircraft = aircraft;
 
     $scope.save = function () {
       return $scope.form.newAircraftForm.$validate().then(function () {
@@ -28,8 +29,23 @@
   NewAircraftModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'Aircrafts'
+    'Aircrafts',
+    'aircraft'
   ];
+
+  NewAircraftModalCtrl.$resolve = {
+    aircraft: function () {
+      return {
+        aircraftData: {
+          caseTypes: [
+            {
+              nomValueId: 3 // TO DO Remove hardcoded caseTypes
+            }
+          ]
+        }
+      };
+    }
+  };
 
   angular.module('gva').controller('NewAircraftModalCtrl', NewAircraftModalCtrl);
 }(angular));

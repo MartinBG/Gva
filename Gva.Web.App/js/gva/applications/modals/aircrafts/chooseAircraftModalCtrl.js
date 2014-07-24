@@ -38,5 +38,14 @@
     'aircrafts'
   ];
 
+  ChooseAircraftModalCtrl.$resolve = {
+    aircrafts: [
+      'Aircrafts',
+      function (Aircrafts) {
+        return Aircrafts.query().$promise;
+      }
+    ]
+  };
+
   angular.module('gva').controller('ChooseAircraftModalCtrl', ChooseAircraftModalCtrl);
 }(angular));

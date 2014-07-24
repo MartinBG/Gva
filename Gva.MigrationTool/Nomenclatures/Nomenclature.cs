@@ -1,23 +1,16 @@
-﻿using Common.Api.Models;
-using Common.Data;
-using Docs.Api.Models;
-using Gva.Api.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Oracle.DataAccess.Client;
-using Regs.Api.Models;
-using Regs.Api.Repositories.LotRepositories;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Api.Repositories.NomRepository;
 using System.Data.SqlClient;
+using System.Linq;
 using Autofac.Features.OwnedInstances;
+using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
+using Common.Data;
 using Common.Tests;
+using Docs.Api.Models;
 using Gva.Api.Repositories.CaseTypeRepository;
+using Newtonsoft.Json;
+using Oracle.DataAccess.Client;
 
 namespace Gva.MigrationTool.Nomenclatures
 {
@@ -106,6 +99,7 @@ namespace Gva.MigrationTool.Nomenclatures
         }
 
         private Dictionary<string, Dictionary<string, NomValue>> noms;
+        private IList<DocType> docTypes;
 
         public Dictionary<string, Dictionary<string, NomValue>> migrateNomenclatures()
         {
@@ -113,6 +107,11 @@ namespace Gva.MigrationTool.Nomenclatures
             timer.Start();
 
             noms = new Dictionary<string, Dictionary<string, NomValue>>();
+
+            using (var dependencies = dependencyFactory())
+            {
+                docTypes = dependencies.Value.Item1.DbContext.Set<DocType>().ToList();
+            }
 
             using (var dependencies = dependencyFactory())
             {
@@ -1910,6 +1909,15 @@ namespace Gva.MigrationTool.Nomenclatures
         private void migrateApplicationTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("applicationTypes");
+            var caseType = new Dictionary<string, string[]>()
+            {
+                { "F", new string[] { "flightCrew" } },
+                { "T", new string[] { "ovd" } },
+                { "G", new string[] { "to_vs" } },
+                { "M", new string[] { "to_suvd" } },
+                { "C", new string[] { "aircraft" } },
+                { "O", new string[] { "approvedOrg", "airportOperator", "groundSvcOperator", "airCarrier", "airOperator", "educationOrg", "airNavSvcProvider" } },
+            };
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_REQUEST_TYPE")
                 .Materialize(r =>
                     new NomValue
@@ -1928,7 +1936,9 @@ namespace Gva.MigrationTool.Nomenclatures
                                 dateValidTo = r.Field<DateTime?>("DATE_TO"),
                                 duration = r.Field<decimal?>("TIME_LIMIT"),
                                 direction = r.Field<string>("DIRECTION_ID"),
-                                licenceTypeIds = (r.Field<string>("LICENCE_TYPES") != null) ? r.Field<string>("LICENCE_TYPES").Split(':').Select(gi => int.Parse(gi)).ToArray() : null
+                                licenceTypeIds = (r.Field<string>("LICENCE_TYPES") != null) ? r.Field<string>("LICENCE_TYPES").Split(':').Select(gi => int.Parse(gi)).ToArray() : null,
+                                caseTypes = (r.Field<string>("DIRECTION_ID") != null) ? caseType[r.Field<string>("DIRECTION_ID")] : null,
+                                documentTypeId = docTypes.FirstOrDefault(dt => dt.Alias == "Request").DocTypeId
                             })
                     })
                 .ToList();

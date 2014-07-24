@@ -2665,9 +2665,19 @@
           }
         },
         newForm: {
-          newPerson: 'Нов заявител',
-          selectPerson: 'Избери заявител',
+          title: 'Ново заявление',
+          caseType: 'Тип дело',
+          applicationType: 'Тип заяление',
+          docCorrespondent: 'Кореспондент',
+          newCorr: 'Нов кореспондент',
           register: 'Регистрирай',
+          cancel: 'Отказ'
+        },
+        editAppPart: {
+          title: 'Преглед на заявление',
+          edit: 'Редакция',
+          done: 'Продължи',
+          save: 'Запис',
           cancel: 'Отказ'
         },
         link: {
@@ -2682,70 +2692,73 @@
           link: 'Свържи'
         },
         equipmentSelect: {
-          title: 'Избор на съоръжение',
           equipment: 'Съоръжение',
-          newEquipment: 'Ново съоръжение',
-          select: 'Избери',
+          newEquipment: 'Ново съоръжение'
+        },
+        chooseEquipmentModal: {
+          title: 'Избор на съоръжение',
           cancel: 'Отказ',
           name: 'Наименование',
+          search: 'Търси',
+          select: 'Избери',
           equipmentType: 'Тип',
           equipmentProducer: 'Производител',
           manPlace: 'Място на производство',
           manDate: 'Дата на производство',
           place: 'Местоположение',
-          operationalDate: 'Дата на въвеждане в експлоатация',
-          search: 'Търси',
-          viewEquipment: 'Преглед'
+          operationalDate: 'Дата на въвеждане в експлоатация'
         },
-        equipmentNew: {
+        newEquipmentModal: {
           title: 'Ново съоръжение',
-          saveAndSelect: 'Запис и избор',
+          save: 'Запис',
           cancel: 'Отказ'
         },
         airportSelect: {
-          title: 'Избор на летище',
           airport: 'Летище',
-          newAirport: 'Ново летище',
-          select: 'Избери',
+          newAirport: 'Ново летище'
+        },
+        chooseAirportModal: {
+          title: 'Избор на летище',
           cancel: 'Отказ',
-          airportType: 'Тип',
           name: 'Наименование',
           icao: 'ICAO код',
+          search: 'Търси',
+          select: 'Избери',
+          airportType: 'Тип',
           place: 'Местоположение',
           runway: 'Полоса',
           course: 'Курс',
           excess: 'Превишение ',
-          concrete: 'Полоса-бетон',
-          search: 'Търси',
-          viewAirport: 'Преглед'
+          concrete: 'Полоса-бетон'
         },
-        airportNew: {
+        newAirportModal: {
           title: 'Ново летище',
-          saveAndSelect: 'Запис и избор',
-          cancel: 'Отказ'
-        },
-        aircraftNew: {
-          title: 'Ново въздухоплавателно средство',
-          saveAndSelect: 'Запис и избор',
+          save: 'Запис',
           cancel: 'Отказ'
         },
         aircraftSelect: {
-          title: 'Избор на въздухоплавателно средство',
           aircraft: 'Въздухоплавателно средство',
-          newAircraft: 'Ново ВС',
+          newAircraft: 'Ново ВС'
+        },
+        chooseAircraftModal: {
+          title: 'Избор на въздухоплавателно средство',
+          cancel: 'Отказ',
           manSN: 'Сериен номер',
           model: 'Модел',
           icao: 'ICAO код',
+          search: 'Търси',
+          select: 'Избери',
           outputDate: 'Дата на производство',
           aircraftCategory: 'Тип ВС',
           aircraftProducer: 'Производител',
           engine: 'Двигател',
           propeller: 'Витло',
-          modifOrWingColor: 'Модификация/Цвят на крило',
-          search: 'Търси',
-          cancel: 'Отказ',
-          select: 'Избери',
-          viewAircraft: 'Преглед'
+          modifOrWingColor: 'Модификация/Цвят на крило'
+        },
+        newAircraftModal: {
+          title: 'Ново въздухоплавателно средство',
+          save: 'Запис',
+          cancel: 'Отказ'
         },
         organizationSelect: {
           organization: 'Организация',
@@ -2769,6 +2782,13 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        chooseAppTypeModal: {
+          title: 'Избор на вид заявление',
+          cancel: 'Отказ',
+          select: 'Избери',
+          name: 'Наименование',
+          code: 'Код'
+        },
         corrSelect: {
           correspondent: 'Кореспондент',
           newCorr: 'Нов кореспондент',
@@ -2785,25 +2805,31 @@
           cancel: 'Отказ'
         },
         docSelect: {
-          title: 'Избор на документ',
-          fromDate: 'От дата',
-          toDate: 'До дата',
-          docName: 'Относно',
-          docType: 'Вид на документа',
-          docStatus: 'Статус на документа',
-          corrs: 'Кореспонденти',
-          units: 'Отнесено към',
-          newDoc: 'Нов документ',
           regDate: 'Дата',
           regUri: 'Рег.№',
           docSubject: 'Относно',
           docDirectionName: '',
           docStatusName: 'Статус',
-          correspondentName: 'Кореспондент',
-          search: 'Търси',
+          correspondentName: 'Кореспондент'
+        },
+        chooseDocsModal: {
+          title: 'Избор на документ',
           cancel: 'Отказ',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          regUri: 'Рег.№',
+          docName: 'Относно',
+          docType: 'Вид на документа',
+          docStatus: 'Статус на документа',
+          corrs: 'Кореспонденти',
+          units: 'Отнесено към',
+          search: 'Търси',
           select: 'Избери',
-          viewDoc: 'Преглед'
+          regDate: 'Дата',
+          docSubject: 'Относно',
+          docDirectionName: '',
+          docStatusName: 'Статус',
+          correspondentName: 'Кореспондент'
         },
         search: {
           fromDate: 'От дата',
@@ -3612,6 +3638,7 @@
       states: {
         'root.applications': 'Заявления',
         'root.applications.new': 'Ново заявление',
+        'root.applications.new.editApp': 'Преглед',
         'root.applications.link': 'Свържи заявление',
         'root.applications.edit': 'Преглед',
         'root.applications.edit.case': 'Преписка',

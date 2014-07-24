@@ -1,35 +1,35 @@
 ﻿<div class="panel panel-default">
   <div class="panel-heading">
-    <strong l10n-text="applications.equipmentSelect.title"></strong>
+    <strong l10n-text="applications.chooseEquipmentModal.title"></strong>
     <div class="pull-right">
-      <sc-button name="cancelBtn" btn-click="cancel()" text="applications.equipmentSelect.cancel" class="btn btn-sm btn-default" icon="glyphicon-ban-circle"></sc-button>
+      <sc-button name="cancelBtn" btn-click="cancel()" text="applications.chooseEquipmentModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
     </div>
   </div>
 
   <div class="well-sm panel-body">
     <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
-      <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="applications.equipmentSelect.name"></sc-filter>
-      <sc-search-button action="search()" text="applications.equipmentSelect.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
+      <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="applications.chooseEquipmentModal.name"></sc-filter>
+      <sc-search-button action="search()" text="applications.chooseEquipmentModal.search" icon="glyphicon-search"></sc-search-button>
       <sc-search-button action="add"></sc-search-button>
     </sc-search>
 
     <sc-datatable items="equipments" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
       <sc-column sortable="false" class="buttons-cell" has-content="true">
-        <sc-button btn-click="selectEquipment(item)" text="applications.equipmentSelect.select" class="btn btn-xs btn-primary"></sc-button>
+        <sc-button btn-click="selectEquipment(item)" text="applications.chooseEquipmentModal.select" class="btn btn-xs btn-primary"></sc-button>
       </sc-column>
-      <sc-column data="equipmentType" title="applications.equipmentSelect.equipmentType">
+      <sc-column data="equipmentType" title="applications.chooseEquipmentModal.equipmentType">
       </sc-column>
-      <sc-column data="name" title="applications.equipmentSelect.name">
+      <sc-column data="name" title="applications.chooseEquipmentModal.name">
       </sc-column>
-      <sc-column data="equipmentProducer" title="applications.equipmentSelect.equipmentProducer">
+      <sc-column data="equipmentProducer" title="applications.chooseEquipmentModal.equipmentProducer">
       </sc-column>
-      <sc-column data="manPlace" title="applications.equipmentSelect.manPlace">
+      <sc-column data="manPlace" title="applications.chooseEquipmentModal.manPlace">
       </sc-column>
-      <sc-column data="manDate" title="applications.equipmentSelect.manDate" type="date">
+      <sc-column data="manDate" title="applications.chooseEquipmentModal.manDate" type="date">
       </sc-column>
-      <sc-column data="place" title="applications.equipmentSelect.place">
+      <sc-column data="place" title="applications.chooseEquipmentModal.place">
       </sc-column>
-      <sc-column data="operationalDate" title="applications.equipmentSelect.operationalDate" type="date">
+      <sc-column data="operationalDate" title="applications.chooseEquipmentModal.operationalDate" type="date">
       </sc-column>
     </sc-datatable>
   </div>
