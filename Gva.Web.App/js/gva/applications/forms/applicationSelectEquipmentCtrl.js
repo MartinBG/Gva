@@ -3,14 +3,7 @@
   'use strict';
   function AppSelectEquipmentCtrl($scope, namedModal) {
     $scope.chooseEquipment = function () {
-      var modalInstance = namedModal.open('chooseEquipment', null, {
-        equipments: [
-          'Equipments',
-          function (Equipments) {
-            return Equipments.query().$promise;
-          }
-        ]
-      });
+      var modalInstance = namedModal.open('chooseEquipment');
 
       modalInstance.result.then(function (equipmentId) {
         $scope.model.lot.id = equipmentId;

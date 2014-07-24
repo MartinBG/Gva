@@ -36,5 +36,14 @@
     'equipments'
   ];
 
+  ChooseEquipmentModalCtrl.$resolve = {
+    equipments: [
+      'Equipments',
+      function (Equipments) {
+        return Equipments.query().$promise;
+      }
+    ]
+  };
+
   angular.module('gva').controller('ChooseEquipmentModalCtrl', ChooseEquipmentModalCtrl);
 }(angular));

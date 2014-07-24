@@ -33,5 +33,21 @@
     'airport'
   ];
 
+  NewAirportModalCtrl.$resolve = {
+    airport: function () {
+      return {
+        airportData: {
+          caseTypes: [
+            {
+              nomValueId: 4 // TO DO Remove hardcoded caseTypes
+            }
+          ],
+          frequencies: [],
+          radioNavigationAids: []
+        }
+      };
+    }
+  };
+
   angular.module('gva').controller('NewAirportModalCtrl', NewAirportModalCtrl);
 }(angular));

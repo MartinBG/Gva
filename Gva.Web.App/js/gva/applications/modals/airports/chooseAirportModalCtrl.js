@@ -37,5 +37,14 @@
     'airports'
   ];
 
+  ChooseAirportModalCtrl.$resolve = {
+    airports: [
+      'Airports',
+      function (Airports) {
+        return Airports.query().$promise;
+      }
+    ]
+  };
+
   angular.module('gva').controller('ChooseAirportModalCtrl', ChooseAirportModalCtrl);
 }(angular));
