@@ -5,7 +5,10 @@
   <div class="row">
     <sc-field custom-type="gva-part-select" ng-model="model.part.registration" ng-required="true" lot-id="model.lotId" part-path="aircraftCertRegistrationsFM" l10n-text="aircrafts.airworthinessFMDirective.registration" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="text" ng-model="model.part.documentNumber" ng-required="true" l10n-text="aircrafts.airworthinessFMDirective.documentNumber" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="date" ng-model="model.part.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessFMDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field ng-if="model.part.airworthinessCertificateType.alias !== 'special'"
+      type="date" ng-model="model.part.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessFMDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field ng-if="model.part.airworthinessCertificateType.alias === 'special'"
+      type="date" ng-model="model.part.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessFMDirective.issueDateSpecial" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row" ng-hide="hideApplications">
     <div class="form-group col-sm-10 col-md-4">

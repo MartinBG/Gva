@@ -1258,7 +1258,8 @@
           airworthinessCertificateType: 'Тип',
           registration: 'Регистрация №',
           documentNumber: 'Документ №',
-          issueDate: 'Дата на издаване'
+          issueDate: 'Дата на издаване',
+          issueDateSpecial: 'Дата изд. на екс. огр.'
         },
         airworthinessReviewF15Directive: {
           amendment1: 'Първо продължаване на срока',
