@@ -435,8 +435,8 @@ namespace Aop.Api.Controllers
                 UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
                 DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
 
-                DocDirection internalDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
-                    .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
+                DocDirection outgoingDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Outgoing".ToLower());
                 DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
                     .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
                 DocFormatType paperDocFormatType = this.unitOfWork.DbContext.Set<DocFormatType>()
@@ -448,7 +448,7 @@ namespace Aop.Api.Controllers
                 string docSubject = "Генерирано становище";
 
                 Doc newDoc = this.docRepository.CreateDoc(
-                    internalDocDirection.DocDirectionId,
+                    outgoingDocDirection.DocDirectionId,
                     documentEntryType.DocEntryTypeId,
                     draftStatus.DocStatusId,
                     docSubject,
@@ -477,7 +477,7 @@ namespace Aop.Api.Controllers
                 docTypeUnitRoles.Add(new DocTypeUnitRole
                 {
                     DocTypeId = docType.DocTypeId,
-                    DocDirectionId = internalDocDirection.DocDirectionId,
+                    DocDirectionId = outgoingDocDirection.DocDirectionId,
                     DocUnitRoleId = docUnitRoles.SingleOrDefault(e => e.Alias == "From").DocUnitRoleId,
                     UnitId = unitUser.UnitId,
                     IsActive = true
@@ -491,6 +491,11 @@ namespace Aop.Api.Controllers
                             e.IsInherited)
                         .ToList();
 
+                Doc caseDoc = this.docRepository.Find(this.docRepository.GetCaseId(docId),
+                    e => e.DocCorrespondents);
+
+                List<int> correspondentIds = caseDoc.DocCorrespondents.Select(e => e.CorrespondentId).ToList();
+
                 newDoc.CreateDocProperties(
                     parentDocRelation,
                     null,
@@ -500,7 +505,7 @@ namespace Aop.Api.Controllers
                     docTypeUnitRoles,
                     importedBy,
                     unitUser,
-                    null,
+                    correspondentIds,
                     null,
                     this.userContext);
 
@@ -621,8 +626,8 @@ namespace Aop.Api.Controllers
                 UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
                 DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>().SingleOrDefault(e => e.Alias == "Document");
 
-                DocDirection internalDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
-                    .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
+                DocDirection outgoingDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Outgoing".ToLower());
                 DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
                     .SingleOrDefault(e => e.Alias.ToLower() == "Internal".ToLower());
                 DocFormatType paperDocFormatType = this.unitOfWork.DbContext.Set<DocFormatType>()
@@ -634,7 +639,7 @@ namespace Aop.Api.Controllers
                 string docSubject = "Генериран доклад";
 
                 Doc newDoc = this.docRepository.CreateDoc(
-                    internalDocDirection.DocDirectionId,
+                    outgoingDocDirection.DocDirectionId,
                     documentEntryType.DocEntryTypeId,
                     draftStatus.DocStatusId,
                     docSubject,
@@ -663,7 +668,7 @@ namespace Aop.Api.Controllers
                 docTypeUnitRoles.Add(new DocTypeUnitRole
                 {
                     DocTypeId = docType.DocTypeId,
-                    DocDirectionId = internalDocDirection.DocDirectionId,
+                    DocDirectionId = outgoingDocDirection.DocDirectionId,
                     DocUnitRoleId = docUnitRoles.SingleOrDefault(e => e.Alias == "From").DocUnitRoleId,
                     UnitId = unitUser.UnitId,
                     IsActive = true
@@ -677,6 +682,11 @@ namespace Aop.Api.Controllers
                            e.IsInherited)
                        .ToList();
 
+                Doc caseDoc = this.docRepository.Find(this.docRepository.GetCaseId(docId),
+                    e => e.DocCorrespondents);
+
+                List<int> correspondentIds = caseDoc.DocCorrespondents.Select(e => e.CorrespondentId).ToList();
+
                 newDoc.CreateDocProperties(
                     parentDocRelation,
                     null,
@@ -686,7 +696,7 @@ namespace Aop.Api.Controllers
                     docTypeUnitRoles,
                     importedBy,
                     unitUser,
-                    null,
+                    correspondentIds,
                     null,
                     this.userContext);
 

@@ -14,8 +14,8 @@
   <RemovePersonalInformation/>
  </OfficeDocumentSettings>
  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
-  <WindowHeight>10365</WindowHeight>
-  <WindowWidth>21570</WindowWidth>
+  <WindowHeight>13515</WindowHeight>
+  <WindowWidth>30720</WindowWidth>
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>812</TabRatio>
@@ -681,7 +681,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="UnitClassifications">
-  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="70" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="74" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s66" ss:DefaultRowHeight="15">
    <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="54.75"/>
    <Column ss:StyleID="s66" ss:AutoFitWidth="0" ss:Width="123"/>
@@ -716,6 +716,14 @@
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Finish</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0101</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Изпълнителен директор</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Миглена Павлова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
     <Cell><Data ss:Type="String">DocWorkflowDiscuss</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">0101</Data></Cell>
     <Cell ss:StyleID="s79"><Data ss:Type="String">Изпълнителен директор</Data></Cell>
@@ -746,12 +754,20 @@
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Finish</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">0102</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Главен секретар</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Иво Кацаров</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
     <Cell><Data ss:Type="String">DocWorkflowDiscuss</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">0102</Data></Cell>
     <Cell ss:StyleID="s79"><Data ss:Type="String">Главен секретар</Data></Cell>
     <Cell ss:StyleID="s79"><Data ss:Type="String">Иво Кацаров</Data></Cell>
    </Row>
-   <Row ss:Index="10" ss:AutoFitHeight="0">
+   <Row ss:Index="12" ss:AutoFitHeight="0">
     <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">Заявления</Data></Cell>
     <Cell><Data ss:Type="String">Read</Data></Cell>
@@ -763,6 +779,14 @@
     <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">Заявления</Data></Cell>
     <Cell><Data ss:Type="String">Management</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020201</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Началник отдел</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Веска Христова</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Finish</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">020201</Data></Cell>
     <Cell ss:StyleID="s79"><Data ss:Type="String">Началник отдел</Data></Cell>
     <Cell ss:StyleID="s79"><Data ss:Type="String">Веска Христова</Data></Cell>
@@ -793,6 +817,14 @@
     <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">Заявления</Data></Cell>
     <Cell><Data ss:Type="String">Management</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String">020202</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Главен експерт</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">Валентин Панчев </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
+    <Cell><Data ss:Type="String">Заявления</Data></Cell>
+    <Cell><Data ss:Type="String">Finish</Data></Cell>
     <Cell ss:StyleID="s78"><Data ss:Type="String">020202</Data></Cell>
     <Cell ss:StyleID="s79"><Data ss:Type="String">Главен експерт</Data></Cell>
     <Cell ss:StyleID="s79"><Data ss:Type="String">Валентин Панчев </Data></Cell>
@@ -947,7 +979,7 @@
     <Cell ss:StyleID="s73"><Data ss:Type="String">Директор</Data></Cell>
     <Cell ss:StyleID="s73"><Data ss:Type="String">Галя Манасиева</Data></Cell>
    </Row>
-   <Row ss:Index="36" ss:AutoFitHeight="0">
+   <Row ss:Index="40" ss:AutoFitHeight="0">
     <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">Заявления</Data></Cell>
     <Cell><Data ss:Type="String">Read</Data></Cell>
@@ -1083,7 +1115,7 @@
     <Cell ss:StyleID="s79"><Data ss:Type="String">Експерт</Data></Cell>
     <Cell ss:StyleID="s84"><Data ss:Type="String">Петя Белова</Data></Cell>
    </Row>
-   <Row ss:Index="54" ss:AutoFitHeight="0">
+   <Row ss:Index="58" ss:AutoFitHeight="0">
     <Cell ss:StyleID="s67"><Data ss:Type="String">01</Data></Cell>
     <Cell><Data ss:Type="String">Заявления</Data></Cell>
     <Cell><Data ss:Type="String">Read</Data></Cell>
@@ -1234,13 +1266,11 @@
     <VerticalResolution>600</VerticalResolution>
    </Print>
    <Selected/>
-   <TopRowVisible>39</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>53</ActiveRow>
-     <ActiveCol>3</ActiveCol>
-     <RangeSelection>R54C4:R70C6</RangeSelection>
+     <ActiveRow>14</ActiveRow>
+     <ActiveCol>4</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
