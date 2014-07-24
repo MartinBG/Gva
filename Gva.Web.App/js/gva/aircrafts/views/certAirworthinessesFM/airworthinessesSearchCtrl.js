@@ -9,21 +9,34 @@
     aws
   ) {
     $scope.aws = aws.map(function (aw) {
-      if (aw.part && aw.part.reviews) {
-        var lastReview = aw.part.reviews[aw.part.reviews.length - 1];
+      var lastReview, validFrom, validTo, inspectorName;
+      if (aw.part.reviews) {
+        lastReview = aw.part.reviews[aw.part.reviews.length - 1];
 
-        aw.part.validFromDate =
-          lastReview.amendment2 ? lastReview.amendment2.issueDate :
-          lastReview.amendment1 ? lastReview.amendment1.issueDate :
-          lastReview.issueDate;
+        if (lastReview.inspector && lastReview.inspector.inspector) {
+          inspectorName = lastReview.inspector.inspector.name;
+        }
 
-        aw.part.validToDate =
-          lastReview.amendment2 ? lastReview.amendment2.validToDate :
-          lastReview.amendment1 ? lastReview.amendment1.validToDate :
-          lastReview.validToDate;
+        if (lastReview.amendment2) {
+          validFrom = lastReview.amendment2.issueDate;
+          validTo = lastReview.amendment2.validToDate;
+        } else if (lastReview.amendment1) {
+          validFrom = lastReview.amendment1.issueDate;
+          validTo = lastReview.amendment1.validToDate;
+        } else {
+          validFrom = lastReview.issueDate;
+          validTo = lastReview.validToDate;
+        }
       }
 
-      return aw;
+      return {
+        partIndex: aw.partIndex,
+        act: aw.part.airworthinessCertificateType.name,
+        issueDate: aw.part.issueDate,
+        validFrom: validFrom,
+        validTo: validTo,
+        inspectorName: inspectorName
+      };
     });
 
 
@@ -43,11 +56,11 @@
     '$scope',
     '$state',
     '$stateParams',
-    'marks'
+    'aws'
   ];
 
   CertAirworthinessesFMSearchCtrl.$resolve = {
-    marks: [
+    aws: [
       '$stateParams',
       'AircraftCertAirworthinessesFM',
       function ($stateParams, AircraftCertAirworthinessesFM) {

@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function CertAirworthinessesFMNewCtrl(
@@ -7,21 +7,52 @@
     $state,
     $stateParams,
     AircraftCertAirworthinessesFM,
-    aircraftCertAirworthiness
+    actF25,
+    art15A
   ) {
-    $scope.isEdit = false;
+    $scope.aw = {
+      part: {
+        airworthinessCertificateType: actF25
+      },
+      applications: []
+    };
 
-    $scope.aw = aircraftCertAirworthiness;
+    $scope.reviewForm15 = {
+      airworthinessReviewType: art15A,
+      inspector: {}
+    };
+
+    $scope.reviewOther = {
+      inspector: {}
+    };
 
     $scope.save = function () {
       return $scope.newCertAirworthinessForm.$validate()
         .then(function () {
+          var aw = $scope.aw,
+              actAlias;
+
           if ($scope.newCertAirworthinessForm.$valid) {
+            actAlias = aw.part.airworthinessCertificateType.alias;
+            if (actAlias !== 'special') {
+              //clone the scope object to keep it clean in case something fails
+              aw = _.cloneDeep($scope.aw);
+
+              aw.part.reviews = [];
+
+              if (actAlias === 'f24' || actAlias === 'f25') {
+                aw.part.reviews.push($scope.reviewForm15);
+              } else if (actAlias === 'directive8' || actAlias === 'vla') {
+                aw.part.reviews.push($scope.reviewOther);
+              }
+            }
+
             return AircraftCertAirworthinessesFM
-                .save({ id: $stateParams.id }, $scope.aw).$promise
-                .then(function () {
-              return $state.go('root.aircrafts.view.airworthinessesFM.search');
-            });
+              .save({ id: $stateParams.id }, aw)
+              .$promise
+              .then(function () {
+                return $state.go('root.aircrafts.view.airworthinessesFM.search');
+              });
           }
         });
     };
@@ -36,19 +67,21 @@
     '$state',
     '$stateParams',
     'AircraftCertAirworthinessesFM',
-    'aircraftCertAirworthiness'
+    'actF25',
+    'art15A'
   ];
+
   CertAirworthinessesFMNewCtrl.$resolve = {
-    inspectorType: [
+    actF25: [
       'Nomenclatures',
       function (Nomenclatures) {
         return Nomenclatures.get({
-          alias: 'inspectorTypes',
-          valueAlias: 'examiner'
+          alias: 'airworthinessCertificateTypes',
+          valueAlias: 'f25'
         }).$promise;
       }
     ],
-    airworthinessReviewType: [
+    art15A: [
       'Nomenclatures',
       function (Nomenclatures) {
         return Nomenclatures.get({
@@ -56,32 +89,8 @@
           valueAlias: '15a'
         }).$promise;
       }
-    ],
-    aircraftCertAirworthiness: [
-      '$stateParams',
-      'inspectorType',
-      'airworthinessReviewType',
-      function ($stateParams, inspectorType, airworthinessReviewType) {
-        return {
-          part: {
-            lotId: $stateParams.id,
-            inspector: {
-              inspectorType: inspectorType
-            },
-            reviews: [{
-              inspector: {
-                inspectorType: inspectorType
-              },
-              airworthinessReviewType: airworthinessReviewType,
-              amendment1: null,
-              amendment2: null
-            }]
-          },
-          applications: []
-        };
-      }
     ]
   };
 
   angular.module('gva').controller('CertAirworthinessesFMNewCtrl', CertAirworthinessesFMNewCtrl);
-}(angular));
+}(angular, _));

@@ -179,12 +179,20 @@
       templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessFM.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaAirworthinessAmendment',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessAmendment.html'
+      name: 'gvaAirworthinessReviewOther',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessReviewOther.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaAirworthinessReview',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessReview.html'
+      name: 'gvaAirworthinessReviewF15',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessReviewF15.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAirworthinessForm15Main',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessForm15Main.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAirworthinessForm15Amendment',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessForm15Amendment.html'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertPermit',

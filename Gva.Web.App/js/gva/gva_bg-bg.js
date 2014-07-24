@@ -988,48 +988,38 @@
           file: 'Файл'
         },
         airworthinessFMSearch: {
+          newAirworthiness: 'Нова годност',
+          airworthinessCertificateType: 'Тип сертификат',
           issueDate: 'От дата',
           validFromDate: 'Валидно от',
           validToDate: 'Валидно до',
-          inspector: 'Заверил инспектор',
-          incomingDocNumber: 'Вх. номер ГВА',
-          incomingDocDate: 'Дата',
-          aircraftCertificateType: 'Тип сертификат',
-          EASA25IssueDate: 'EASA Form 25',
-          EASA24IssueDate: 'EASA Form 24',
-          EASA24IssueValidToDate: 'EASA Form 24 Valid',
-          EASA15IssueDate: 'Form 15 Issue',
-          EASA15IssueValidToDate: 'Form 15 Valid',
-          EASA15IssueRefNo: 'EASA Form 15a',
-          newAirworthiness: 'Нова годност'
+          inspector: 'Заверил инспектор'
         },
         newAirworthiness: {
-          title: 'Нова летателна годност',
+          titleAw: 'Нова летателна годност',
+          titleReview: 'Преглед',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editAirworthiness: {
-          title: 'Преглед на летателна годност',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deleteLastReview: 'Изтрий',
-          deleteAirworthiness: 'Изтрий',
-          review: 'Преглед',
-          newReview: 'Нов преглед',
-          newAmendment: 'Нова заверка',
-          amendment1: 'Първо продължаване на срока',
-          amendment2: 'Второ продължаване на срока',
+          titleAw: 'Преглед на летателна годност',
+          editAw: 'Редакция',
+          deleteAw: 'Изтрий',
+          saveAw: 'Запис',
+          cancelAw: 'Отказ',
+          reviews: 'Прегледи',
+          airworthinessReviewType: 'Тип',
+          issueDate: 'Издадено на',
           from: 'Валидно от',
           to: 'Валидно до',
           inspector: 'Инспектор',
-          amendment1From: '1-во продължение от',
-          amendment1To: '1-во продължение до',
-          amendment2From: '2-ро продължение от',
-          amendment2To: '2-ро продължение до',
-          reviews: 'Прегледи',
-          airworthinessReviewType: 'Тип',
-          issueDate: 'Издадено на'
+          titleReview: 'Преглед',
+          newReview: 'Нов преглед',
+          newAmendment: 'Нова заверка',
+          editReview: 'Редакция',
+          deleteReview: 'Изтрий',
+          saveReview: 'Запис',
+          cancelReview: 'Отказ'
         },
         permitSearch: {
           issuePlace: 'Място на издаване',
@@ -1265,34 +1255,32 @@
           validToDate: 'Срок на валидност'
         },
         airworthinessFMDirective: {
-          certNumber: 'Номер',
-          issueDate: 'От дата',
-          validFromDate: 'Валидно от',
-          validToDate: 'Валидно до',
-          inspector: 'Заверил инспектор',
-          incomingDocNumber: 'Вх. номер ГВА',
-          incomingDocDate: 'Дата',
-          EASA25IssueDate: 'EASA Form 25',
-          EASA24IssueDate: 'EASA Form 24',
-          EASA24IssueValidToDate: 'EASA Form 24 Valid',
-          EASA15IssueDate: 'Form 15 Issue',
-          EASA15IssueValidToDate: 'Form 15 Valid',
-          EASA15IssueRefNo: 'EASA Form 15a',
+          airworthinessCertificateType: 'Тип',
           registration: 'Регистрация №',
-          aircraftCertificateType: 'Тип',
-          'export': 'Експортно УЛГ',
-          contry: 'Държава в която се изнася ВС',
-          exceptions: 'Изключения',
-          exceptionsAlt: 'Изключения (англ.)',
-          special: 'Специални изисквания',
-          specialAlt: 'Специални изисквания (англ.)',
-          organzation: 'Организация',
-          firstAmmendment: '1-во продължение на преглед на ЛГ',
-          secondAmmendment: '2-ро продължение на преглед на ЛГ',
-          aircraftCertificationType: 'Тип',
+          documentNumber: 'Документ №',
+          issueDate: 'Дата на издаване'
+        },
+        airworthinessReviewF15Directive: {
+          amendment1: 'Първо продължаване на срока',
+          amendment2: 'Второ продължаване на срока'
+        },
+        airworthinessReviewOtherDirective: {
+          issueDate: 'Дата на издаване',
+          validToDate: 'Валиден до',
+          approvalNumber: '№ на одобрение'
+        },
+        airworthinessForm15MainDirective: {
           airworthinessReviewType: 'Тип',
-          refNumber: 'Референтен номер',
-          approvalNumber: 'Номер на одобрение'
+          issueDate: 'Дата на издаване',
+          validToDate: 'Валиден до',
+          approvalNumber: '№ на одобрение'
+        },
+        airworthinessForm15AmendmentDirective: {
+          issueDate: 'Дата на издаване',
+          validToDate: 'Валиден до',
+          approvalNumber: '№ на одобрение',
+          organzation: 'Организация',
+          refNumber: 'Реф.№ одобрение'
         },
         permitDirective: {
           issuePlace: 'Място на издаване',
@@ -1697,7 +1685,7 @@
         },
         inspectorDirective: {
           checkedBy: 'Заверил',
-          inspector: 'Инспектор',
+          inspector: 'Инспектор ГВА',
           examiner: 'Проверяващ',
           other: 'Друг'
         }

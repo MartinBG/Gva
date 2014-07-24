@@ -1,118 +1,103 @@
-<ng-form name="editCertAirworthinessForm" sc-validate="{}" sc-form-readonly>
+<ng-form sc-validate="{}" sc-form-readonly>
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
-      <strong l10n-text="aircrafts.editAirworthiness.title"></strong>
+      <strong l10n-text="aircrafts.editAirworthiness.titleAw"></strong>
 
-      <div class="pull-right" ng-show="editMode !== 'editReview'">
-        <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editAirworthiness.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+      <div class="pull-right">
+        <sc-button ng-show="!isEditAw" 
+          btn-click="editAw()" name="editBtn" text="aircrafts.editAirworthiness.editAw" class="btn btn-primary btn-xs" icon="glyphicon-edit" >
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteAirworthiness()" text="aircrafts.editAirworthiness.deleteAirworthiness" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && (aw.part.reviews.length === 1 || aw.part.aircraftCertificateType.code === 'AS')">
+        <sc-button ng-show="!isEditAw"
+          btn-click="deleteAw()" name="deleteBtn" text="aircrafts.editAirworthiness.deleteAw" class="btn btn-danger btn-xs" icon="glyphicon-remove">
         </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editAirworthiness.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        <sc-button ng-show="isEditAw"
+          btn-click="saveAw()" name="saveBtn" text="aircrafts.editAirworthiness.saveAw" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editAirworthiness.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        <sc-button ng-show="isEditAw"
+          btn-click="cancelAw()" name="cancelBtn" text="aircrafts.editAirworthiness.cancelAw" class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
         </sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw" readonly="editMode !== 'edit'"></gva-aircraft-cert-airworthiness-fm>
+      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw" readonly="!isEditAw"></gva-aircraft-cert-airworthiness-fm>
     </div>
   </div>
 
-  <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.reviews" style="border-bottom: none" ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR' && aw.part.reviews.length"></h5>
+  <div ng-show="reviews">
+    <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.reviews" style="border-bottom: none; margin-top: 20px;"></h5>
 
-  <div ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR' && aw.part.reviews.length">
-    <sc-datatable items="aw.part.reviews" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
+    <sc-datatable items="reviews" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
       <sc-column sortable="false" class="buttons-cell" has-content="true">
-        <input type="radio" ng-checked="item === currentReview" sc-click="selectReview(item)" ng-show="editMode !== 'editReview'">
+        <input type="radio" ng-checked="item === currentReview" ng-disabled="isEditReview" sc-click="selectReview(item)">
       </sc-column>
       <sc-column title="aircrafts.editAirworthiness.airworthinessReviewType" has-content="true">
         {{item.airworthinessReviewType.name}}
       </sc-column>
       <sc-column title="aircrafts.editAirworthiness.issueDate" has-content="true">
-        {{aw.part.issueDate | date:'mediumDate'}}
+        {{item.issueDate | date:'mediumDate'}}
       </sc-column>
       <sc-column title="aircrafts.editAirworthiness.from" has-content="true">
-        <span ng-show="!item.amendment1 && !item.amendment2">
-          {{item.issueDate | date:'mediumDate'}}
-        </span>
-
-        <span ng-show="item.amendment1 && !item.amendment2">
-          {{item.amendment1.issueDate  | date:'mediumDate'}}
-        </span>
-
-        <span ng-show="item.amendment2">
-          {{item.amendment2.issueDate  | date:'mediumDate'}}
-        </span>
+        <div ng-switch="!!item.amendment1 + !!item.amendment2">
+          <span ng-switch-when="0">{{item.issueDate | date:'mediumDate'}}</span>
+          <span ng-switch-when="1">{{item.amendment1.issueDate | date:'mediumDate'}}</span>
+          <span ng-switch-when="2">{{item.amendment2.issueDate | date:'mediumDate'}}</span>
+        </div>
       </sc-column>
       <sc-column title="aircrafts.editAirworthiness.to" has-content="true">
-        <span ng-show="!item.amendment1 && !item.amendment2">
-          {{item.validToDate | date:'mediumDate'}}
-        </span>
-
-        <span ng-show="item.amendment1 && !item.amendment2">
-          {{item.amendment1.validToDate  | date:'mediumDate'}}
-        </span>
-
-        <span ng-show="item.amendment2">
-          {{item.amendment2.validToDate  | date:'mediumDate'}}
-        </span>
+        <div ng-switch="!!item.amendment1 + !!item.amendment2">
+          <span ng-switch-when="0">{{item.validToDate | date:'mediumDate'}}</span>
+          <span ng-switch-when="1">{{item.amendment1.validToDate | date:'mediumDate'}}</span>
+          <span ng-switch-when="2">{{item.amendment2.validToDate | date:'mediumDate'}}</span>
+        </div>
       </sc-column>
       <sc-column title="aircrafts.editAirworthiness.inspector" has-content="true">
-        <span ng-show="!item.amendment1 && !item.amendment2">
-          {{item.inspector.name}}
-        </span>
-
-        <span ng-show="item.amendment1 && !item.amendment2">
-          {{item.amendment1.inspector.name}}
-        </span>
-
-        <span ng-show="item.amendment2">
-          {{item.amendment2.inspector.name}}
-        </span>
+        <div ng-switch="!!item.amendment1 + !!item.amendment2">
+          <span ng-switch-when="0">{{item.inspector.inspector.name}}</span>
+          <span ng-switch-when="1">{{item.amendment1.inspector.examiner.name || item.amendment1.inspector.other}}</span>
+          <span ng-switch-when="2">{{item.amendment2.inspector.examiner.name || item.amendment2.inspector.other}}</span>
+        </div>
       </sc-column>
     </sc-datatable>
-    <div style="clear: both"></div>
-  </div>
 
-  <div class="panel panel-default" style="margin-top: 10px" ng-if="aw.part.aircraftCertificateType.code != 'AS'">
-    <div class="panel-heading">
-      <strong l10n-text="aircrafts.editAirworthiness.review"></strong>
-      <div class="pull-right" ng-show="editMode !== 'edit'">
-        <sc-button name="newReviewBtn" btn-click="newReview()" text="aircrafts.editAirworthiness.newReview" class="btn btn-primary btn-xs" icon="glyphicon-plus" ng-disabled="lastReview !== currentReview" ng-show="editMode !== 'editReview' && (aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR')">
-        </sc-button>
-        <sc-button name="newAmendmentBtn" btn-click="newAmendment()" text="aircrafts.editAirworthiness.newAmendment" class="btn btn-primary btn-xs" icon="glyphicon-plus" ng-disabled="lastReview !== currentReview" ng-show="editMode !== 'editReview' && !lastReview.amendment2 && (aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR')">
-        </sc-button>
-        <sc-button name="editBtn" btn-click="editReview()" text="aircrafts.editAirworthiness.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="editMode !== 'editReview'">
-        </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteLastReview()" text="aircrafts.editAirworthiness.deleteLastReview" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="editMode !== 'editReview' && (aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR')"
-        ng-disabled="aw.part.reviews.length <= 1">
-        </sc-button>
-        <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editAirworthiness.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode === 'editReview'">
-        </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editAirworthiness.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode === 'editReview'">
-        </sc-button>
-      </div>
-    </div>
-
-    <div class="well-sm panel-body" ng-show="currentReview">
-      <gva-airworthiness-review name="airworthinessReviewForm" ng-model="currentReview" readonly="editMode !== 'editReview'"></gva-airworthiness-review>
-
-      <div ng-if="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'">
-        <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.amendment1" style="margin-top:10px;"></h5>
-        <button class="btn btn-xs btn-default pull-right" ng-click="currentReview.amendment1 = {}" style="position:relative; top:-25px" ng-disabled="!editMode" ng-show="!currentReview.amendment1">
-          <span class="glyphicon glyphicon-plus"></span>
-        </button>
-        <gva-airworthiness-amendment name="airworthinessAmendment1Form" ng-model="currentReview.amendment1" ng-show="currentReview.amendment1" readonly="editMode !== 'editReview'"></gva-airworthiness-amendment>
+    <div class="panel panel-default" style="margin-top: 10px">
+      <div class="panel-heading">
+        <strong l10n-text="aircrafts.editAirworthiness.titleReview"></strong>
+        <div class="pull-right">
+          <sc-button ng-show="!isEditReview"
+             btn-click="newReview()" name="newReviewBtn" text="aircrafts.editAirworthiness.newReview" class="btn btn-primary btn-xs" icon="glyphicon-plus">
+          </sc-button>
+          <sc-button 
+            ng-if="reviews && reviews.length && (aw.part.airworthinessCertificateType.alias === 'f24' || aw.part.airworthinessCertificateType.alias === 'f25')"
+            ng-show="!isEditReview"
+            ng-disabled="reviews[reviews.length - 1] !== currentReview || reviews[reviews.length - 1].amendment2"
+            btn-click="newAmendment()" name="newAmendmentBtn" text="aircrafts.editAirworthiness.newAmendment" class="btn btn-primary btn-xs" icon="glyphicon-plus">
+          </sc-button>
+          <sc-button ng-if="reviews && reviews.length"
+            ng-show="!isEditReview"
+            btn-click="editReview()" name="editBtn" text="aircrafts.editAirworthiness.editReview" class="btn btn-primary btn-xs" icon="glyphicon-edit">
+          </sc-button>
+          <sc-button ng-if="reviews && reviews.length"
+            ng-show="!isEditReview"
+            ng-disabled="reviews.length <= 1 || reviews[reviews.length - 1] !== currentReview"
+            btn-click="deleteReview(currentReview)" name="deleteBtn"  text="aircrafts.editAirworthiness.deleteReview" class="btn btn-danger btn-xs" icon="glyphicon-remove">
+          </sc-button>
+          <sc-button ng-show="isEditReview"
+            btn-click="saveReview()" name="saveBtn" text="aircrafts.editAirworthiness.saveReview" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+          </sc-button>
+          <sc-button ng-show="isEditReview"
+            btn-click="cancelReview()" name="cancelBtn" text="aircrafts.editAirworthiness.cancelReview" class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+          </sc-button>
+        </div>
       </div>
 
-      <div ng-if="(aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR') && currentReview.amendment1">
-        <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.amendment2" style="margin-top:10px;"></h5>
-        <button class="btn btn-xs btn-default pull-right" ng-click="currentReview.amendment2 = {}" style="position:relative; top:-25px" ng-disabled="!editMode" ng-show="!currentReview.amendment2">
-          <span class="glyphicon glyphicon-plus"></span>
-        </button>
-        <gva-airworthiness-amendment name="airworthinessAmendment2Form" ng-model="currentReview.amendment2" ng-show="currentReview.amendment2" readonly="editMode !== 'editReview'"></gva-airworthiness-amendment>
+      <div class="well-sm panel-body" ng-show="currentReview">
+        <gva-airworthiness-review-f15 ng-show="aw.part.airworthinessCertificateType.alias === 'f24' || aw.part.airworthinessCertificateType.alias === 'f25'"
+          name="airworthinessReviewF15Form" ng-model="currentReview" readonly="!isEditReview">
+        </gva-airworthiness-review-f15>
+        <gva-airworthiness-review-other ng-show="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla'"
+          name="airworthinessReviewOtherForm" ng-model="currentReview" readonly="!isEditReview">
+        </gva-airworthiness-review-other>
       </div>
     </div>
   </div>

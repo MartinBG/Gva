@@ -3,18 +3,14 @@
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-click="editCertAirworthiness(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.aircraftCertificateType.name" title="aircrafts.airworthinessFMSearch.aircraftCertificateType">
+  <sc-column data="act" title="aircrafts.airworthinessFMSearch.airworthinessCertificateType">
   </sc-column>
-  <sc-column data="part.issueDate" title="aircrafts.airworthinessFMSearch.issueDate" type="date">
+  <sc-column data="issueDate" title="aircrafts.airworthinessFMSearch.issueDate" type="date">
   </sc-column>
-  <sc-column data="part.validFromDate" title="aircrafts.airworthinessFMSearch.validFromDate" type="date">
+  <sc-column data="validFrom" title="aircrafts.airworthinessFMSearch.validFromDate" type="date">
   </sc-column>
-  <sc-column data="part.validToDate" title="aircrafts.airworthinessFMSearch.validToDate" type="date">
+  <sc-column data="validTo" title="aircrafts.airworthinessFMSearch.validToDate" type="date">
   </sc-column>
-  <sc-column data="part.inspector.name" title="aircrafts.airworthinessFMSearch.inspector" type="date">
-  </sc-column>
-  <sc-column data="part.incomingDocNumber" title="aircrafts.airworthinessFMSearch.incomingDocNumber">
-  </sc-column>
-  <sc-column data="part.incomingDocDate" title="aircrafts.airworthinessFMSearch.incomingDocDate" type="date">
+  <sc-column data="inspectorName" title="aircrafts.airworthinessFMSearch.inspector" type="date">
   </sc-column>
 </sc-datatable>

@@ -365,7 +365,7 @@ namespace Gva.MigrationTool.Sets
 
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                    Func<string, JObject> getInspector = (tRegUser) =>
+                    Func<string, bool, JObject> getInspectorImpl = (tRegUser, showErrorIfMissing) =>
                     {
                         if (string.IsNullOrWhiteSpace(tRegUser))
                         {
@@ -374,7 +374,10 @@ namespace Gva.MigrationTool.Sets
 
                         if (!inspectorsFM.ContainsKey(tRegUser))
                         {
-                            Console.WriteLine("CANNOT FIND INSPECTOR {0}", tRegUser);//TODO
+                            if (showErrorIfMissing)
+                            {
+                                Console.WriteLine("CANNOT FIND INSPECTOR {0}", tRegUser);//TODO
+                            }
                             return null;
                         }
 
@@ -387,6 +390,10 @@ namespace Gva.MigrationTool.Sets
 
                         return getPersonByApexId(personId);
                     };
+
+                    Func<string, JObject> getInspector = (tRegUser) => getInspectorImpl(tRegUser, true);
+
+                    Func<string, JObject> getInspectorOrDefault = (tRegUser) => getInspectorImpl(tRegUser, false);
 
                     if (!aircraftFmIdtoLotId.ContainsKey(aircraftFmId))
                     {
@@ -410,11 +417,8 @@ namespace Gva.MigrationTool.Sets
 
                         int certId = aircraftCertRegistrationFM["__oldId"].Value<int>();
 
-                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessesFM(certId, regPart, getInspector);
-                        foreach (var aircraftCertAirworthinessFM in aircraftCertAirworthinessesFM)
-                        {
-                            lot.CreatePart("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM, context);
-                        }
+                        var aircraftCertAirworthinessFM = this.getAircraftCertAirworthinessFM(aircraftFmId, certId, noms, regPart, getInspector, getInspectorOrDefault);
+                        lot.CreatePart("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM, context);
 
                         var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regPart, noms, getInspector);
                         foreach (var aircraftDocumentDebtFM in aircraftDocumentDebtsFM)
@@ -751,43 +755,233 @@ namespace Gva.MigrationTool.Sets
             return registrations;
         }
 
-        private IList<JObject> getAircraftCertAirworthinessesFM(int certId, JObject regPart, Func<string, JObject> getInspector)
+        private JObject getAircraftCertAirworthinessFM(
+            string aircraftFmId,
+            int certId,
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            JObject regPart,
+            Func<string, JObject> getInspector,
+            Func<string, JObject> getInspectorOrDefault)
         {
-            return this.sqlConn.CreateStoreCommand(
-                @"select * from 
-                    (select nRegNum, NumberIssue, dIssue, dFrom, dValid, t_Reviewed_By, tDocCAA,
-                            dDocCAA, dDateEASA_25_Issue, d_24_Issue, d_24_Valid, d_ARC_Issue, d_ARC_Valid, t_ARC_RefNo
-                    from CofA1 as r1
-                        union all
-                    select nRegNum, NumberIssue, dIssue, dFrom, dValid, t_Reviewed_By, tDocCAA,
-                            dDocCAA, dDateEASA_25_Issue, d_24_Issue, d_24_Valid, d_ARC_Issue, d_ARC_Valid, t_ARC_RefNo
-                    from CofA2 as r2) s
-                where {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and nRegNum = {0}", certId)
+            Dictionary<string, string> actMap = new Dictionary<string, string>
+            {
+                { "\"BG Form\""     , "directive8" },
+                { "\"Tech Cert\""   , "vla" },
+                { "BG Form"         , "directive8" },
+                { "EASA"            , "f25" },
+                { "EASA 24"         , "f24" },
+                { "EASA 25"         , "f25" },
+                { "EXP"             , "special" },
+                { "Old BG Form"     , "directive8" },
+                { "Tech Cert"       , "vla" }
+            };
+
+            Func<string, JObject> getExaminerOrOther = (reviewedBy) =>
+            {
+                JObject examiner = null;
+                string other = null;
+
+                if (!string.IsNullOrEmpty(reviewedBy))
+                {
+                    JObject reviewedByExaminer = getInspectorOrDefault(reviewedBy);
+                    if (reviewedByExaminer == null)
+                    {
+                        other = reviewedBy;
+                    }
+                    else
+                    {
+                        examiner = reviewedByExaminer;
+                    }
+                }
+
+                return Utils.ToJObject(
+                    new
+                    {
+                        inspector = (JObject)null,
+                        examiner,
+                        other,
+                    });
+            };
+
+            var act = this.sqlConn.CreateStoreCommand(
+                @"select * from Acts where {0}",
+                    new DbClause("n_Act_ID = {0}", aircraftFmId)
                 )
-                .Materialize(r => Utils.ToJObject(
+                .Materialize(r =>
+                    new
+                    {
+                        t_CofA_Type = r.Field<string>("t_CofA_Type"),
+                        t_CofA_No = r.Field<string>("t_CofA_No")
+                    })
+                .Single();
+
+            var issues = this.sqlConn.CreateStoreCommand(
+                @"select * from 
+                    (select nRegNum, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspetor as t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA1 as r1
+                        union all
+                    select nRegNum, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA2 as r2) s
+                where {0}
+                order by NumberIssue",
+                new DbClause("nRegNum = {0}", certId)
+                )
+                .Materialize(r => 
                     new
                     {
                         __oldId = r.Field<string>("nRegNum"),
                         __migrTable = "CofA1, CofA2",
-                        registration = regPart,
-                        certId = toNum(r.Field<string>("nRegNum")),
-                        issueNumber = r.Field<string>("NumberIssue"),
-                        issueDate = toDate(r.Field<string>("dIssue")),
-                        validfromDate = toDate(r.Field<string>("dFrom")),
-                        validtoDate = toDate(r.Field<string>("dValid")),
-                        inspector = getInspector(r.Field<string>("t_Reviewed_By")),
-                        incomingDocNumber = r.Field<string>("tDocCAA"),
-                        incomingDocDate = toDate(r.Field<string>("dDocCAA")),
-                        EASA25IssueDate = toDate(r.Field<string>("dDateEASA_25_Issue")),
-                        EASA24IssueDate = toDate(r.Field<string>("d_24_Issue")),
-                        EASA24IssueValidToDate = toDate(r.Field<string>("d_24_Valid")),
-                        EASA15IssueDate = toDate(r.Field<string>("d_ARC_Issue")),
-                        EASA15IssueValidToDate = toDate(r.Field<string>("d_ARC_Valid")),
-                        EASA15IssueRefNo = r.Field<string>("t_ARC_RefNo")
-                    }))
+
+                        t_ARC_Type = r.Field<string>("t_ARC_Type"),
+
+                        dDateEASA_25_Issue = toDate(r.Field<string>("dDateEASA_25_Issue")),
+                        d_24_Issue = toDate(r.Field<string>("d_24_Issue")),
+                        
+                        dIssue = toDate(r.Field<string>("dIssue")),
+                        dFrom = toDate(r.Field<string>("dFrom")),
+                        dValid = toDate(r.Field<string>("dValid")),
+
+                        t_CAA_Inspetor = r.Field<string>("t_CAA_Inspector"),
+                        t_Reviewed_By = r.Field<string>("t_Reviewed_By"),
+                        t_ARC_RefNo = r.Field<string>("t_ARC_RefNo")
+                    })
                 .ToList();
+
+            if (issues.Count == 0)
+            {
+                return null;
+            }
+
+            var lastIssue = issues.Last();
+
+            string actAlias = null;
+            if (actMap.ContainsKey(act.t_CofA_Type))
+            {
+                actAlias = actMap[act.t_CofA_Type];
+            }
+
+            if (string.IsNullOrEmpty(actAlias))
+            {
+                if (lastIssue.d_24_Issue != null)
+                {
+                    actAlias = "f24";
+                }
+                else if (lastIssue.dDateEASA_25_Issue != null)
+                {
+                    actAlias = "f25";
+                }
+                else
+                {
+                    actAlias = "unknown";
+                }
+            }
+
+            NomValue certType;
+            DateTime? issueDate;
+            switch (actAlias)
+            {
+                case "f24":
+                    issueDate = lastIssue.d_24_Issue ?? lastIssue.dIssue ?? lastIssue.dFrom;
+                    break;
+                case "f25":
+                    issueDate = lastIssue.dDateEASA_25_Issue ?? lastIssue.dIssue ?? lastIssue.dFrom;
+                    break;
+                case "directive8":
+                case "special":
+                case "vla":
+                case "unknown":
+                    issueDate = lastIssue.dIssue ?? lastIssue.dFrom;
+                    break;
+                default:
+                    throw new Exception("Unexpected ACT alias");
+            }
+
+            certType = noms["airworthinessCertificateTypes"].ByAlias(actAlias);
+
+            var aw =
+                new JObject(
+                    new JProperty("airworthinessCertificateType", Utils.ToJObject(certType)),
+                    new JProperty("registration", regPart),
+                    new JProperty("documentNumber", act.t_CofA_No),
+                    new JProperty("issueDate", issueDate));
+
+            if (actAlias == "special")
+            {
+                if (issues.Count > 1)
+                {
+                    Console.WriteLine("Special airworthiness should not have reviews CERTID = " + certId);
+                }
+            }
+            else
+            {
+                var reviews = new JArray();
+                aw.Add("reviews", reviews);
+
+                int l = issues.Count;
+                for (int i = 0; i < l; i++)
+                {
+                    var review = new JObject(
+                        new JProperty("issueDate", issues[i].dFrom),
+                        new JProperty("validToDate", issues[i].dValid),
+                        new JProperty("approvalNumber", issues[i].t_ARC_RefNo),
+                        new JProperty("inspector", new JObject()));
+                    reviews.Add(review);
+
+                    var inspector = getInspector(issues[i].t_CAA_Inspetor);
+                    if (inspector != null)
+                    {
+                        ((JObject)review["inspector"]).Add("inspector", inspector);
+                    }
+
+                    if (actAlias == "f24" || actAlias == "f25")
+                    {
+                        NomValue airworthinessReviewType = noms["airworthinessReviewTypes"].ByAlias("unknown");
+                        Action<string> trySetType = (arcType) =>
+                        {
+                            if (arcType != null)
+                            {
+                                if (arcType.Contains("15a"))
+                                {
+                                    airworthinessReviewType = noms["airworthinessReviewTypes"].ByAlias("15a");
+                                }
+                                else if (arcType.Contains("15b"))
+                                {
+                                    airworthinessReviewType = noms["airworthinessReviewTypes"].ByAlias("15b");
+                                }
+                            }
+                        };
+
+                        trySetType(issues[i].t_ARC_Type);
+
+                        if (i < l - 1 && issues[i].dIssue == issues[i + 1].dIssue &&
+                            !(i < l - 3 && issues[i].dIssue == issues[i + 3].dIssue)) //if more than 3 consecutive treat as separate
+                        {
+                            review.Add("amendment1", new JObject(
+                                new JProperty("issueDate", issues[i + 1].dFrom),
+                                new JProperty("validToDate", issues[i + 1].dValid),
+                                new JProperty("approvalNumber", issues[i + 1].t_ARC_RefNo),
+                                new JProperty("inspector", getExaminerOrOther(issues[i + 1].t_Reviewed_By))));
+
+                            trySetType(issues[i + 1].t_ARC_Type);
+                            i++;
+
+                            if (i < l - 2 && issues[i].dIssue == issues[i + 2].dIssue)
+                            {
+                                review.Add("amendment2", new JObject(
+                                    new JProperty("issueDate", issues[i + 2].dFrom),
+                                    new JProperty("validToDate", issues[i + 2].dValid),
+                                    new JProperty("approvalNumber", issues[i + 2].t_ARC_RefNo),
+                                    new JProperty("inspector", getExaminerOrOther(issues[i + 2].t_Reviewed_By))));
+
+                                trySetType(issues[i + 2].t_ARC_Type);
+                                i++;
+                            }
+                        }
+
+                        review.Add("airworthinessReviewType", Utils.ToJObject(airworthinessReviewType));
+                    }
+                }
+            }
+
+            return aw;
         }
 
         private IList<int> getAircraftApexIds()

@@ -1,7 +1,7 @@
 ﻿<ng-form name="newCertAirworthinessForm" sc-validate="{}">
-  <div class="panel panel-default" style="margin-top: 10px">
+  <div class="panel panel-default">
     <div class="panel-heading">
-      <strong l10n-text="aircrafts.newAirworthiness.title"></strong>
+      <strong l10n-text="aircrafts.newAirworthiness.titleAw"></strong>
       <div class="pull-right">
         <sc-button name="saveBtn" btn-click="save()" text="aircrafts.newAirworthiness.save"
           class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
@@ -14,10 +14,16 @@
 
     <div class="well-sm panel-body">
       <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw"></gva-aircraft-cert-airworthiness-fm>
+
+      <div ng-if="aw.part.airworthinessCertificateType.alias !== 'special'">
+        <h5 class="form-header" l10n-text="aircrafts.newAirworthiness.titleReview" style="margin-top: 20px;"></h5>
+        <gva-airworthiness-form15-main ng-if="aw.part.airworthinessCertificateType.alias === 'f24' || aw.part.airworthinessCertificateType.alias === 'f25' || aw.part.airworthinessCertificateType.alias === 'unknown'"
+          name="airworthinessReview" ng-model="reviewForm15" readonly="readonly">
+        </gva-airworthiness-form15-main>
+        <gva-airworthiness-review-other ng-if="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla'"
+          name="airworthinessReview" ng-model="reviewOther" readonly="readonly">
+        </gva-airworthiness-review-other>
+      </div>
     </div>
-  </div>
-  <div ng-if="aw.part.aircraftCertificateType.code != 'AS'">
-    <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.review" style="margin-top:10px;"></h5>
-    <gva-airworthiness-review name="airworthinessReviewForm" ng-model="aw.part.reviews[0]" sc-data-show-amendment-type="aw.part.aircraftCertificateType.code === 'AC' || aw.part.aircraftCertificateType.code === 'AR'"></gva-airworthiness-review>
   </div>
 </ng-form>

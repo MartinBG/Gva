@@ -1,0 +1,19 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <gva-airworthiness-form15-main name="main" ng-model="model" readonly="readonly"></gva-airworthiness-form15-main>
+
+  <div ng-show="model.amendment1">
+    <h5 class="form-header" l10n-text="aircrafts.airworthinessReviewF15Directive.amendment1" style="margin-top:20px;"></h5>
+    <button ng-click="model.amendment1 = null" ng-show="!readonly && !model.amendment2" ng-show="model.amendment1" class="btn btn-xs btn-default pull-right" style="position:relative; top:-25px">
+      <span class="glyphicon glyphicon-minus"></span>
+    </button>
+    <gva-airworthiness-form15-amendment ng-if="model.amendment1" name="amendment1" ng-model="model.amendment1" readonly="readonly"></gva-airworthiness-form15-amendment>
+  </div>
+
+  <div ng-show="model.amendment2">
+    <h5 class="form-header" l10n-text="aircrafts.airworthinessReviewF15Directive.amendment2" style="margin-top:20px;"></h5>
+    <button ng-click="model.amendment2 = null" ng-show="!readonly" class="btn btn-xs btn-default pull-right" style="position:relative; top:-25px">
+      <span class="glyphicon glyphicon-minus"></span>
+    </button>
+    <gva-airworthiness-form15-amendment ng-if="model.amendment2" name="amendment2" ng-model="model.amendment2" readonly="readonly"></gva-airworthiness-form15-amendment>
+  </div>
+</ng-form>

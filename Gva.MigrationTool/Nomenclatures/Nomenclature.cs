@@ -152,6 +152,16 @@ namespace Gva.MigrationTool.Nomenclatures
 
             using (var dependencies = dependencyFactory())
             {
+                noms["airworthinessCertificateTypes"] = dependencies.Value.Item2.GetNomValues("airworthinessCertificateTypes").ToDictionary(n => Guid.NewGuid().ToString());
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
+                noms["airworthinessReviewTypes"] = dependencies.Value.Item2.GetNomValues("airworthinessReviewTypes").ToDictionary(n => Guid.NewGuid().ToString());
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
                 migrateGenders(dependencies.Value.Item2, oracleConn);
                 dependencies.Value.Item1.Save();
             }
