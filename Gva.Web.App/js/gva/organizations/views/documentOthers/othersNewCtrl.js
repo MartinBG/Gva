@@ -7,8 +7,7 @@
     $state,
     $stateParams,
     OrganizationDocumentOthers,
-    organizationDocumentOther,
-    selectedPublisher
+    organizationDocumentOther
   ) {
     $scope.save = function () {
       return $scope.newDocumentOtherForm.$validate()
@@ -24,12 +23,6 @@
     };
 
     $scope.organizationDocumentOther = organizationDocumentOther;
-    $scope.organizationDocumentOther.part.documentPublisher = selectedPublisher.pop() ||
-      organizationDocumentOther.part.documentPublisher;
-
-    $scope.choosePublisher = function () {
-      return $state.go('root.organizations.view.documentOthers.new.choosePublisher');
-    };
 
     $scope.cancel = function () {
       return $state.go('root.organizations.view.documentOthers.search');
@@ -41,8 +34,7 @@
     '$state',
     '$stateParams',
     'OrganizationDocumentOthers',
-    'organizationDocumentOther',
-    'selectedPublisher'
+    'organizationDocumentOther'
   ];
 
   OrganizationDocOthersNewCtrl.$resolve = {
@@ -62,10 +54,7 @@
           };
         }
       }
-    ],
-    selectedPublisher: function () {
-      return [];
-    }
+    ]
   };
 
   angular.module('gva').controller('OrganizationDocOthersNewCtrl', OrganizationDocOthersNewCtrl);

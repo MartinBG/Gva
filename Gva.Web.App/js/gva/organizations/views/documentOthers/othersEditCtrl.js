@@ -7,14 +7,11 @@
     $state,
     $stateParams,
     OrganizationDocumentOthers,
-    organizationDocumentOther,
-    selectedPublisher
+    organizationDocumentOther
   ) {
     var originalDocument = _.cloneDeep(organizationDocumentOther);
 
     $scope.organizationDocumentOther = organizationDocumentOther;
-    $scope.organizationDocumentOther.part.documentPublisher = selectedPublisher.pop() ||
-      organizationDocumentOther.part.documentPublisher;
     $scope.editMode = null;
 
     $scope.edit = function () {
@@ -49,10 +46,6 @@
         return $state.go('root.organizations.view.documentOthers.search');
       });
     };
-
-    $scope.choosePublisher = function () {
-      return $state.go('root.organizations.view.documentOthers.edit.choosePublisher');
-    };
   }
 
   OrganizationDocOthersEditCtrl.$inject = [
@@ -60,8 +53,7 @@
     '$state',
     '$stateParams',
     'OrganizationDocumentOthers',
-    'organizationDocumentOther',
-    'selectedPublisher'
+    'organizationDocumentOther'
   ];
 
   OrganizationDocOthersEditCtrl.$resolve = {
@@ -71,10 +63,7 @@
       function ($stateParams, OrganizationDocumentOthers) {
         return OrganizationDocumentOthers.get($stateParams).$promise;
       }
-    ],
-    selectedPublisher: function () {
-      return [];
-    }
+    ]
   };
 
   angular.module('gva').controller('OrganizationDocOthersEditCtrl', OrganizationDocOthersEditCtrl);

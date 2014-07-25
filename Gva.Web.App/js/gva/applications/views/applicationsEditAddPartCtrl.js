@@ -8,17 +8,13 @@
     $stateParams,
     Applications,
     applicationPart,
-    person,
-    selectedPublisher
+    person
     ) {
     $scope.applicationPart = applicationPart;
 
     if ($stateParams.setPartAlias === 'personMedical') {
       $scope.personLin = person.lin;
     }
-    
-    $scope.applicationPart.part.documentPublisher = selectedPublisher.pop() ||
-      $scope.applicationPart.part.documentPublisher;
 
     $scope.cancel = function () {
       return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
@@ -68,10 +64,6 @@
           }
         });
     };
-
-    $scope.choosePublisher = function () {
-      return $state.go('root.applications.edit.case.addPart.choosePublisher');
-    };
   }
 
   ApplicationsEditAddPartCtrl.$inject = [
@@ -80,8 +72,7 @@
     '$stateParams',
     'Applications',
     'applicationPart',
-    'person',
-    'selectedPublisher'
+    'person'
   ];
 
   ApplicationsEditAddPartCtrl.$resolve = {
@@ -160,10 +151,7 @@
           return null;
         }
       }
-    ],
-    selectedPublisher: function () {
-      return [];
-    }
+    ]
   };
 
   angular.module('gva').controller('ApplicationsEditAddPartCtrl', ApplicationsEditAddPartCtrl);
