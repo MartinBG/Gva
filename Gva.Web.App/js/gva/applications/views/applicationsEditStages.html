@@ -1,7 +1,6 @@
 ﻿<div class="tab-content">
   <h5 class="table-header" l10n-text="applications.edit.stages.appStages" style="margin-top:10px;"></h5>
-  <sc-button name="createBtn" btn-click="newAppStage()" text="applications.edit.stages.newAppStage" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-  <sc-datatable items="appStages" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false">
+  <sc-datatable items="appStages" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false" style="margin-bottom:15px;">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-click="viewAppStage(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
@@ -12,6 +11,7 @@
     <sc-column data="inspectorName" title="applications.edit.stages.appStageInspector">
     </sc-column>
   </sc-datatable>
+  <sc-button name="createBtn" btn-click="newAppStage()" text="applications.edit.stages.newAppStage" class="btn btn-default btn-xs"></sc-button>
 
   <h5 class="table-header" l10n-text="applications.edit.stages.docStages" style="margin-top:30px;"></h5>
   <table class="table table-bordered table-condensed" style="margin-bottom:15px;">
@@ -25,6 +25,11 @@
         <th><span l10n-text="applications.edit.stages.isCurrentStage"></span></th>
       </tr>
     </thead>
+    <tbody ng-if="!docElectronicServiceStages.length">
+      <tr>
+        <td colspan="8" style="" l10n-text="applications.edit.stages.noAvailableDocStages"></td>
+      </tr>
+    </tbody>
     <tbody ng-repeat="dess in docElectronicServiceStages">
       <tr>
         <td>{{ dess.startingDate | date:'dd.MM.yyyy HH:mm' }}</td>

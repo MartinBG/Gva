@@ -2644,6 +2644,7 @@
             expectedEndingDate: 'Очаквана дата на прикл.',
             endingDate: 'Дата на приключване',
             isCurrentStage: 'Текущ',
+            noAvailableDocStages: 'Няма намерени резултати',
             edit: 'Техническа редакция на етап',
             end: 'Приключване на етап',
             next: 'Следващ етап',
