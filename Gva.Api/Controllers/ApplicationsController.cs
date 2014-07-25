@@ -818,21 +818,54 @@ namespace Gva.Api.Controllers
         [HttpPost]
         public IHttpActionResult PostNewApplicationStage(int appId, JObject appStage)
         {
-            return Ok(this.applicationStageRepository.AddApplicationStage(appId, appStage));
+            GvaApplicationStage stage = new GvaApplicationStage()
+            {
+                GvaApplicationId = appId,
+                GvaStageId = appStage.Get<int>("stageId"),
+                StartingDate = appStage.Get<DateTime>("date"),
+                InspectorLotId = appStage.Get<int?>("inspectorId"),
+                Ordinal = appStage.Get<int>("ordinal")
+            };
+
+            var applicationStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(stage);
+
+            this.unitOfWork.Save();
+
+            return Ok(applicationStage);
         }
 
         [Route("{appId}/stages/{stageId}")]
         [HttpPost]
         public IHttpActionResult PostApplicationStage(int appId, int stageId, JObject appStage)
         {
-            return Ok(this.applicationStageRepository.UpdateApplicationStage(appId, stageId, appStage));
+            var applicationStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>().Find(stageId);
+            if (applicationStage != null)
+            {
+                applicationStage.GvaStageId = appStage.Get<int>("stageId");
+                applicationStage.StartingDate = appStage.Get<DateTime>("date");
+                applicationStage.InspectorLotId = appStage.Get<int?>("inspectorId");
+                applicationStage.Ordinal = appStage.Get<int>("ordinal");
+            }
+
+            this.unitOfWork.Save();
+
+            return Ok(applicationStage);
         }
 
         [Route("{appId}/stages/{stageId}")]
         [HttpDelete]
         public IHttpActionResult DeleteApplicationStage(int appId, int stageId)
         {
-            return Ok(applicationStageRepository.DeleteApplicationStage(appId, stageId));
+            var appStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                .Where(e => e.GvaAppStageId == stageId)
+                .SingleOrDefault();
+
+            var applicationStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                .Remove(appStage);
+
+            this.unitOfWork.Save();
+
+            return Ok(applicationStage);
         }
     }
 }

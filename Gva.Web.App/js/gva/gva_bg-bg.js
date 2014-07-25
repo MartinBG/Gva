@@ -2651,9 +2651,7 @@
             newAppStage: 'Нова дейност',
             appStage: 'Дейност',
             appStageDate: 'Дата',
-            appStageInspector: 'Инспектор',
-            appStageOrdinal: 'Пореден номер'
-
+            appStageInspector: 'Инспектор'
           },
           newFile: {
             title: 'Нова страница в описа',
@@ -2917,8 +2915,7 @@
         appStage: {
           stage: 'Дейност',
           date: 'Дата',
-          inspector: 'Инспектор',
-          ordinal: 'Пореден номер'
+          inspector: 'Инспектор'
         },
         newAppStageModal: {
           title: 'Нова дейност',

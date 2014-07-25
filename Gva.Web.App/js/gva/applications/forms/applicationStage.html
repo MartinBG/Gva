@@ -1,11 +1,10 @@
 ﻿<ng-form name="appStageForm" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" alias="'appStages'" mode="id" ng-model="model.stageId" ng-required="true" l10n-text="applications.appStage.stage" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" alias="'appStages'" mode="id" ng-model="model.stageId" ng-required="true" l10n-text="applications.appStage.stage" class="col-sm-4 col-md-3"></sc-field>
     <sc-field type="date" ng-model="model.date" ng-required="true" l10n-text="applications.appStage.date" class="col-sm-3 col-md-2"></sc-field>
   </div>
 
   <div class="row">
-    <sc-field type="nomenclature" alias="'inspectors'" mode="id" ng-model="model.inspectorId" l10n-text="applications.appStage.inspector" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="int" ng-model="model.ordinal" l10n-text="applications.appStage.ordinal" class="col-sm-3 col-md-2" ng-readonly="true"></sc-field>
+    <sc-field type="nomenclature" alias="'inspectors'" mode="id" ng-model="model.inspectorId" l10n-text="applications.appStage.inspector" class="col-sm-7 col-md-5"></sc-field>
   </div>
 </ng-form>

@@ -8,10 +8,11 @@ CREATE TABLE [dbo].[GvaAppStages] (
     [StartingDate]       DATETIME2 NOT NULL,
     [InspectorLotId]     INT       NULL,
     [Ordinal]            INT       NOT NULL,
-    CONSTRAINT [PK_GvaAppStages]                 PRIMARY KEY ([GvaAppStageId]),
-    CONSTRAINT [FK_GvaAppStages_GvaApplications] FOREIGN KEY ([GvaApplicationId]) REFERENCES [dbo].[GvaApplications] ([GvaApplicationId]),
-    CONSTRAINT [FK_GvaAppStages_GvaStages]       FOREIGN KEY ([GvaStageId])       REFERENCES [dbo].[GvaStages] ([GvaStageId]),
-    CONSTRAINT [FK_GvaAppStages_Lots]            FOREIGN KEY ([InspectorLotId])   REFERENCES [dbo].[Lots] ([LotId])
+    CONSTRAINT [PK_GvaAppStages]                  PRIMARY KEY ([GvaAppStageId]),
+    CONSTRAINT [FK_GvaAppStages_GvaApplications]  FOREIGN KEY ([GvaApplicationId]) REFERENCES [dbo].[GvaApplications] ([GvaApplicationId]),
+    CONSTRAINT [FK_GvaAppStages_GvaStages]        FOREIGN KEY ([GvaStageId])       REFERENCES [dbo].[GvaStages] ([GvaStageId]),
+    CONSTRAINT [FK_GvaAppStages_Lots]             FOREIGN KEY ([InspectorLotId])   REFERENCES [dbo].[Lots] ([LotId]),
+    CONSTRAINT [UQ_GvaAppStages_GvaApplicationId] UNIQUE NONCLUSTERED ([GvaApplicationId], [Ordinal])
 )
 GO
 

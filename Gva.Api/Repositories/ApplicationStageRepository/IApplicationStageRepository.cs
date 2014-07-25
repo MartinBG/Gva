@@ -11,10 +11,5 @@ namespace Gva.Api.Repositories.ApplicationStageRepository
 
         GvaApplicationStage GetApplicationStage(int applicationId, int stageId);
 
-        GvaApplicationStage DeleteApplicationStage(int applicationId, int stageId);
-
-        GvaApplicationStage AddApplicationStage(int appId, JObject appStage);
-
-        GvaApplicationStage UpdateApplicationStage(int appId, int stageId, JObject appStage);
     }
 }

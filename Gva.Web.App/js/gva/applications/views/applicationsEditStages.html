@@ -2,7 +2,7 @@
   <h5 class="table-header" l10n-text="applications.edit.stages.appStages" style="margin-top:10px;"></h5>
   <sc-button name="createBtn" btn-click="newAppStage()" text="applications.edit.stages.newAppStage" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
   <sc-datatable items="appStages" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false">
-    <sc-column sortable="false" class="buttons-cell" has-content="true">
+    <sc-column sortable="false" class="buttons-cell" width="20px" has-content="true">
       <sc-button name="viewButton" btn-click="viewAppStage(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column data="stageName" title="applications.edit.stages.appStage">
@@ -10,8 +10,6 @@
     <sc-column data="date" type="date" title="applications.edit.stages.appStageDate">
     </sc-column>
     <sc-column data="inspectorName" title="applications.edit.stages.appStageInspector">
-    </sc-column>
-    <sc-column data="ordinal" title="applications.edit.stages.appStageOrdinal">
     </sc-column>
   </sc-datatable>
 
