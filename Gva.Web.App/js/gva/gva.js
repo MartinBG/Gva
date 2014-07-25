@@ -96,7 +96,7 @@
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentTraining',
       templateUrl: 'js/gva/persons/forms/personDocumentTraining.html',
-      controller: 'PersonDocumentCheckCtrl'
+      controller: 'PersonDocumentTrainingCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentOther',
