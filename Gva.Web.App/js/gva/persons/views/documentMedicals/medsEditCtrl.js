@@ -7,11 +7,13 @@
     $state,
     $stateParams,
     PersonDocumentMedicals,
-    med
+    med,
+    person
   ) {
     var originalMedical = _.cloneDeep(med);
 
     $scope.personDocumentMedical = med;
+    $scope.personLin = person.lin;
     $scope.editMode = null;
 
     $scope.edit = function () {
@@ -50,7 +52,8 @@
     '$state',
     '$stateParams',
     'PersonDocumentMedicals',
-    'med'
+    'med',
+    'person'
   ];
 
   DocumentMedicalsEditCtrl.$resolve = {
@@ -59,6 +62,13 @@
       'PersonDocumentMedicals',
       function ($stateParams, PersonDocumentMedicals) {
         return PersonDocumentMedicals.get($stateParams).$promise;
+      }
+    ],
+    person: [
+      '$stateParams',
+      'Persons',
+      function ($stateParams, Persons) {
+        return Persons.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

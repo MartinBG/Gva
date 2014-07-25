@@ -5,19 +5,20 @@
   function NewMedicalModalCtrl(
     $scope,
     $modalInstance,
-    $stateParams,
     PersonDocumentMedicals,
-    personDocumentMedical
+    personDocumentMedical,
+    person
   ) {
     $scope.form = {};
     $scope.personDocumentMedical = personDocumentMedical;
+    $scope.personLin = person.lin;
 
     $scope.save = function () {
       return $scope.form.newDocumentMedicalForm.$validate()
         .then(function () {
           if ($scope.form.newDocumentMedicalForm.$valid) {
             return PersonDocumentMedicals
-              .save({ id: $stateParams.id }, $scope.personDocumentMedical)
+              .save({ id: person.id }, $scope.personDocumentMedical)
               .$promise
               .then(function (savedMedical) {
                 return $modalInstance.close(savedMedical);
@@ -34,9 +35,9 @@
   NewMedicalModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    '$stateParams',
     'PersonDocumentMedicals',
-    'personDocumentMedical'
+    'personDocumentMedical',
+    'person'
   ];
 
   NewMedicalModalCtrl.$resolve = {

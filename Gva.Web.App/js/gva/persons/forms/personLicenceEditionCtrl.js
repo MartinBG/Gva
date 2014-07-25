@@ -165,7 +165,7 @@
     };
 
     $scope.addMedical = function () {
-      var modalInstance = namedModal.open('newMedical');
+      var modalInstance = namedModal.open('newMedical', { person: $scope.person });
 
       modalInstance.result.then(function (newMedical) {
         $scope.includedMedicals.push(newMedical);

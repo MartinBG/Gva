@@ -619,7 +619,6 @@
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
-    <Content Include="js\gva\persons\forms\personDocumentMedicalCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentOtherCtrl.js" />
     <Content Include="js\gva\persons\forms\inspectorData.html" />
     <Content Include="js\gva\persons\forms\inspectorDataCtrl.js" />

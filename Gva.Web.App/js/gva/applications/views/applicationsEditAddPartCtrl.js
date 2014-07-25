@@ -8,10 +8,15 @@
     $stateParams,
     Applications,
     applicationPart,
+    person,
     selectedPublisher
     ) {
     $scope.applicationPart = applicationPart;
 
+    if ($stateParams.setPartAlias === 'personMedical') {
+      $scope.personLin = person.lin;
+    }
+    
     $scope.applicationPart.part.documentPublisher = selectedPublisher.pop() ||
       $scope.applicationPart.part.documentPublisher;
 
@@ -75,6 +80,7 @@
     '$stateParams',
     'Applications',
     'applicationPart',
+    'person',
     'selectedPublisher'
   ];
 
@@ -141,6 +147,18 @@
             docPartTypeName: l10n.applications.edit.addPart.title + ': ' + docPartTypeName
           };
         });
+      }
+    ],
+    person: [
+      '$stateParams',
+      'application',
+      'Persons',
+      function ($stateParams, application, Persons) {
+        if ($stateParams.setPartAlias === 'personMedical') {
+          return Persons.get({ id: application.lotId }).$promise;
+        } else {
+          return null;
+        }
       }
     ],
     selectedPublisher: function () {

@@ -7,9 +7,11 @@
     $state,
     $stateParams,
     PersonDocumentMedicals,
-    med
+    med,
+    person
   ) {
     $scope.personDocumentMedical = med;
+    $scope.personLin = person.lin;
 
     $scope.save = function () {
       return $scope.newDocumentMedicalForm.$validate()
@@ -35,7 +37,8 @@
     '$state',
     '$stateParams',
     'PersonDocumentMedicals',
-    'med'
+    'med',
+    'person'
   ];
 
   DocumentMedicalsNewCtrl.$resolve = {
@@ -54,6 +57,13 @@
             files: []
           };
         }
+      }
+    ],
+    person: [
+      '$stateParams',
+      'Persons',
+      function ($stateParams, Persons) {
+        return Persons.get({ id: $stateParams.id }).$promise;
       }
     ]
   };

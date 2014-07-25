@@ -82,8 +82,7 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentMedical',
-      templateUrl: 'js/gva/persons/forms/personDocumentMedical.html',
-      controller: 'PersonDocMedicalCtrl'
+      templateUrl: 'js/gva/persons/forms/personDocumentMedical.html'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentEmployment',
