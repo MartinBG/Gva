@@ -1,0 +1,9 @@
+﻿<div class="modal-body message-modal-body">
+  <h5 l10n-text="{{l10nText}}"></h5>
+</div>
+<div class="modal-footer message-modal-footer">
+  <button ng-repeat="item in buttons" type="button" name="button" class="btn btn-sm" ng-class="'{{item.type}}'" ng-click="close(item.name)">
+    <span ng-class="['glyphicon', '{{item.icon}}']"></span>
+    <span l10n-text="{{item.l10nLabel}}"></span>
+  </button>
+</div>

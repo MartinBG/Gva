@@ -515,3 +515,13 @@ table.treetable span.indenter a {
 .modal-backdrop.in {
     opacity: 0.8;
 }
+
+/*message modal*/
+.message-modal-body{
+    padding: 15px;
+}
+
+.message-modal-footer{
+    padding: 5px;
+    margin-top: 0px;
+}
