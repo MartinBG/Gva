@@ -54,7 +54,7 @@ namespace Gva.Api.Controllers
 
         [Route("")]
         public IHttpActionResult GetPersons(
-            string lin = null,
+            int? lin = null,
             string linType = null,
             string uin = null,
             int? caseType = null,
@@ -263,36 +263,11 @@ namespace Gva.Api.Controllers
 
 
         [Route("nextLin")]
-        public IHttpActionResult GetNextLin(string linType = null)
+        public IHttpActionResult GetNextLin(int linTypeId)
         {
-            var persons = this.personRepository.GetPersons(linType: linType);
-
-            int nextLin;
-            if (persons.Count() != 0)
-            {
-                int lastLin = persons.OrderBy(p => int.Parse(p.Lin)).Select(p => int.Parse(p.Lin)).Last();
-                nextLin = ++lastLin;
-            }
-            else
-            {
-                var lins = new Dictionary<string, int>()
-                {
-                    { "pilots", 10001 },
-                    { "flyingCrew", 20001 },
-                    { "crewStaff", 30001 },
-                    { "headFlights", 40001 },
-                    { "airlineEngineers", 50001 },
-                    { "dispatchers", 60001 },
-                    { "paratroopers", 70001 },
-                    { "engineersRVD", 80001 },
-                    { "deltaplaner", 90001 }
-                };
-                nextLin = lins[linType];
-            }
-
             return Ok(new
             {
-                NextLin = nextLin
+                NextLin = this.personRepository.GetNextLin(linTypeId)
             });
         }
 

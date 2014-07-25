@@ -12,12 +12,13 @@
       $scope.model.linType = item;
       $scope.model.lin = null;
 
-      Persons.getNextLin({
-        linType: item.code
-      })
-      .$promise .then(function(result){
-        $scope.model.lin = result.nextLin;
-      });
+      if ($scope.model.linType.code !== 'none') {
+        Persons.getNextLin({
+          linTypeId: item.nomValueId
+        }).$promise.then(function (result) {
+          $scope.model.lin = result.nextLin;
+        });
+      }
     };
 
     $scope.requireCaseTypes = function () {

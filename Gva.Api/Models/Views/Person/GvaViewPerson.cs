@@ -12,7 +12,7 @@ namespace Gva.Api.Models.Views.Person
     {
         public int LotId { get; set; }
 
-        public string Lin { get; set; }
+        public int Lin { get; set; }
 
         public int LinTypeId { get; set; }
 
@@ -58,8 +58,7 @@ namespace Gva.Api.Models.Views.Person
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.Lin)
-                .IsRequired()
-                .HasMaxLength(50);
+                .IsRequired();
 
             this.Property(t => t.LinTypeId)
                 .IsRequired();

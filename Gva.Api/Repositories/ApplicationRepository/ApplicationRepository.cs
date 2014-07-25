@@ -29,7 +29,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             string lotSetAlias = null,
             DateTime? fromDate = null,
             DateTime? toDate = null,
-            string personLin = null,
+            int? personLin = null,
             string aircraftIcao = null,
             string organizationUin = null,
             int offset = 0,
@@ -117,7 +117,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             predicate = predicate
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
-                .AndStringContains(e => e.GViewPerson.Lin, personLin)
+                .AndEquals(e => e.GViewPerson.Lin, personLin)
                 .AndStringContains(e => e.GViewAircraft.ICAO, aircraftIcao)
                 .AndStringContains(e => e.GViewOrganization.Uin, organizationUin)
                 .AndStringMatches(e => e.Set.Alias, lotSetAlias, true);
@@ -140,7 +140,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     AppPartDocumentNumber = e.GViewApplication != null ? e.GViewApplication.DocumentNumber : null,
                     AppPartApplicationTypeName = e.GViewApplicationType != null ? e.GViewApplicationType.Name : null,
                     PersonId = e.GViewPerson != null ? (int?)e.GViewPerson.LotId : null,
-                    PersonLin = e.GViewPerson != null ? e.GViewPerson.Lin : null,
+                    PersonLin = e.GViewPerson != null ? (int?)e.GViewPerson.Lin : null,
                     PersonNames =  e.GViewPerson != null ? e.GViewPerson.Names : null,
                     GvaOrganizationId = e.GViewOrganization != null ? (int?)e.GViewOrganization.LotId : null,
                     GvaOrganizationName = e.GViewOrganization != null ? e.GViewOrganization.Name : null,

@@ -43,7 +43,7 @@ namespace Gva.Api.Projections.Person
             GvaViewPerson person = new GvaViewPerson();
 
             person.LotId = personData.Part.Lot.LotId;
-            person.Lin = personData.Content.Get<string>("lin");
+            person.Lin = personData.Content.Get<int>("lin");
             person.LinTypeId = personData.Content.Get<int>("linType.nomValueId");
             person.Uin = personData.Content.Get<string>("uin");
             person.Names = string.Format(

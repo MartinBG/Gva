@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Common.Api.Repositories.NomRepository;
 using Common.Data;
+using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
@@ -11,14 +13,16 @@ namespace Gva.Api.Repositories.PersonRepository
     public class PersonRepository : IPersonRepository
     {
         private IUnitOfWork unitOfWork;
+        private INomRepository nomRepository;
 
-        public PersonRepository(IUnitOfWork unitOfWork)
+        public PersonRepository(IUnitOfWork unitOfWork, INomRepository nomRepository)
         {
             this.unitOfWork = unitOfWork;
+            this.nomRepository = nomRepository;
         }
 
         public IEnumerable<GvaViewPerson> GetPersons(
-            string lin = null,
+            int? lin = null,
             string linType = null,
             string uin = null,
             int? caseTypeId = null,
@@ -35,7 +39,7 @@ namespace Gva.Api.Repositories.PersonRepository
             var predicate = PredicateBuilder.True<GvaViewPerson>();
 
             predicate = predicate
-                .AndStringMatches(p => p.Lin, lin, exact)
+                .AndEquals(p => p.Lin, lin)
                 .AndStringMatches(p => p.LinType.Name, linType, exact)
                 .AndStringMatches(p => p.Uin, uin, exact)
                 .AndStringMatches(p => p.Names, names, exact)
@@ -100,6 +104,21 @@ namespace Gva.Api.Repositories.PersonRepository
                 .OrderBy(p => p.Name)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
+        }
+
+        public int GetNextLin(int linTypeId)
+        {
+            int? lastLin = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                .Include(p => p.LinType)
+                .Where(p => p.LinTypeId == linTypeId)
+                .Max(p => p.Lin);
+
+            if (!lastLin.HasValue)
+            {
+                lastLin = this.nomRepository.GetNomValue("linTypes", linTypeId).TextContent.Get<int>("initialLinVal");
+            }
+
+            return lastLin.Value + 1;
         }
     }
 }
