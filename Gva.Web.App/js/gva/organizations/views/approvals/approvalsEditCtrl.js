@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationApprovals,
-    approval
+    approval,
+    scMessage
   ) {
     var originalApproval = _.cloneDeep(approval);
     $scope.approval = approval;
@@ -41,11 +42,16 @@
       $scope.approval.part.amendments.pop();
 
       if ($scope.approval.part.amendments.length === 0) {
-        return OrganizationApprovals
-          .remove({ id: $stateParams.id, ind: $stateParams.ind })
-          .$promise.then(function () {
-            return $state.go('root.organizations.view.approvals.search');
-          });
+        return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            return OrganizationApprovals
+              .remove({ id: $stateParams.id, ind: $stateParams.ind })
+              .$promise.then(function () {
+                return $state.go('root.organizations.view.approvals.search');
+              });
+          }
+        });
       }
       else {
         return OrganizationApprovals
@@ -85,7 +91,8 @@
     '$state',
     '$stateParams',
     'OrganizationApprovals',
-    'approval'
+    'approval',
+    'scMessage'
   ];
 
   ApprovalsEditCtrl.$resolve = {

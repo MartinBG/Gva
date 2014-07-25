@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftParts,
-    aircraftPart
+    aircraftPart,
+    scMessage
   ) {
     var originalPart = _.cloneDeep(aircraftPart);
 
@@ -38,10 +39,15 @@
     };
 
     $scope.deletePart = function () {
-      return AircraftParts.remove({ id: $stateParams.id, ind: aircraftPart.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.aircrafts.view.parts.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftParts.remove({ id: $stateParams.id, ind: aircraftPart.partIndex })
+          .$promise.then(function () {
+            return $state.go('root.aircrafts.view.parts.search');
+          });
+        }
+      });
     };
   }
 
@@ -50,7 +56,8 @@
     '$state',
     '$stateParams',
     'AircraftParts',
-    'aircraftPart'
+    'aircraftPart',
+    'scMessage'
   ];
 
   PartsEditCtrl.$resolve = {

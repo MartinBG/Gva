@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationStaffManagements,
-    organizationStaffManagement
+    organizationStaffManagement,
+    scMessage
   ) {
     var originalStaffManagement = _.cloneDeep(organizationStaffManagement);
 
@@ -41,11 +42,16 @@
     };
 
     $scope.deleteStaffManagement = function () {
-      return OrganizationStaffManagements
-        .remove({ id: $stateParams.id, ind: organizationStaffManagement.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.organizations.view.staffManagement.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationStaffManagements
+            .remove({ id: $stateParams.id, ind: organizationStaffManagement.partIndex })
+            .$promise.then(function () {
+              return $state.go('root.organizations.view.staffManagement.search');
+            });
+        }
+      });
     };
   }
 
@@ -54,7 +60,8 @@
     '$state',
     '$stateParams',
     'OrganizationStaffManagements',
-    'organizationStaffManagement'
+    'organizationStaffManagement',
+    'scMessage'
   ];
 
   StaffManagementEditCtrl.$resolve = {

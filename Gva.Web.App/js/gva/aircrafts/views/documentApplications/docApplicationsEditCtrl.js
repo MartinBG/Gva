@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftDocumentApplications,
-    aircraftDocumentApplication) {
+    aircraftDocumentApplication,
+    scMessage) {
     var originalApplication = _.cloneDeep(aircraftDocumentApplication);
 
     $scope.aircraftDocumentApplication = aircraftDocumentApplication;
@@ -40,13 +41,18 @@
     };
 
     $scope.deleteApplication = function () {
-      return AircraftDocumentApplications.remove({
-        id: $stateParams.id,
-        ind: aircraftDocumentApplication.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.aircrafts.view.applications.search', {
-          appId: null
-        }, { reload: true });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftDocumentApplications.remove({
+            id: $stateParams.id,
+            ind: aircraftDocumentApplication.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.aircrafts.view.applications.search', {
+              appId: null
+            }, { reload: true });
+          });
+        }
       });
     };
   }
@@ -56,7 +62,8 @@
     '$state',
     '$stateParams',
     'AircraftDocumentApplications',
-    'aircraftDocumentApplication'
+    'aircraftDocumentApplication',
+    'scMessage'
   ];
 
   AircraftApplicationsEditCtrl.$resolve = {

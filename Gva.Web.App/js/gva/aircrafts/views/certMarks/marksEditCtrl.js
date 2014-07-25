@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftCertMarks,
-    aircraftCertMark
+    aircraftCertMark,
+    scMessage
   ) {
     var originalMark = _.cloneDeep(aircraftCertMark);
 
@@ -39,10 +40,15 @@
     };
 
     $scope.deleteMark = function () {
-      return AircraftCertMarks.remove({ id: $stateParams.id, ind: aircraftCertMark.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.aircrafts.view.marks.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftCertMarks.remove({ id: $stateParams.id, ind: aircraftCertMark.partIndex })
+          .$promise.then(function () {
+            return $state.go('root.aircrafts.view.marks.search');
+          });
+        }
+      });
     };
   }
 
@@ -51,7 +57,8 @@
     '$state',
     '$stateParams',
     'AircraftCertMarks',
-    'aircraftCertMark'
+    'aircraftCertMark',
+    'scMessage'
   ];
 
   CertMarksEditCtrl.$resolve = {

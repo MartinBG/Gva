@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftCertPermitsToFly,
-    aircraftCertPermitToFly
+    aircraftCertPermitToFly,
+    scMessage
   ) {
     var originalPermit = _.cloneDeep(aircraftCertPermitToFly);
 
@@ -39,12 +40,17 @@
     };
 
     $scope.deletePermit = function () {
-      return AircraftCertPermitsToFly.remove({
-        id: $stateParams.id,
-        ind: aircraftCertPermitToFly.partIndex
-      }).$promise.then(function () {
-          return $state.go('root.aircrafts.view.permits.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftCertPermitsToFly.remove({
+            id: $stateParams.id,
+            ind: aircraftCertPermitToFly.partIndex
+          }).$promise.then(function () {
+              return $state.go('root.aircrafts.view.permits.search');
+          });
+        }
+      });
     };
   }
 
@@ -53,7 +59,8 @@
     '$state',
     '$stateParams',
     'AircraftCertPermitsToFly',
-    'aircraftCertPermitToFly'
+    'aircraftCertPermitToFly',
+    'scMessage'
   ];
 
   CertPermitsToFlyEditCtrl.$resolve = {

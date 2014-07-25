@@ -7,7 +7,8 @@
     $stateParams,
     $state,
     PersonStatuses,
-    status
+    status,
+    scMessage
   ) {
     var originalStatus = _.cloneDeep(status);
 
@@ -38,11 +39,16 @@
     };
 
     $scope.deleteStatus = function () {
-      return PersonStatuses
-        .remove({ id: $stateParams.id, ind: status.partIndex }).$promise
-        .then(function () {
-          return $state.go('root.persons.view.statuses.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonStatuses
+            .remove({ id: $stateParams.id, ind: status.partIndex }).$promise
+            .then(function () {
+              return $state.go('root.persons.view.statuses.search');
+            });
+        }
+      });
     };
   }
 
@@ -51,7 +57,8 @@
     '$stateParams',
     '$state',
     'PersonStatuses',
-    'status'
+    'status',
+    'scMessage'
   ];
 
   StatusesEditCtrl.$resolve = {

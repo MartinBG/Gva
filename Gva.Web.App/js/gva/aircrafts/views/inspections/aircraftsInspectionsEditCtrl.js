@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftInspections,
-    aircraftInspection) {
+    aircraftInspection,
+    scMessage) {
     var originalInspection = _.cloneDeep(aircraftInspection);
 
     $scope.aircraftInspection = aircraftInspection;
@@ -37,11 +38,16 @@
     };
 
     $scope.deleteInspection = function () {
-      return AircraftInspections.remove({
-        id: $stateParams.id,
-        ind: aircraftInspection.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.aircrafts.view.inspections.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftInspections.remove({
+            id: $stateParams.id,
+            ind: aircraftInspection.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.aircrafts.view.inspections.search');
+          });
+        }
       });
     };
   }
@@ -51,7 +57,8 @@
     '$state',
     '$stateParams',
     'AircraftInspections',
-    'aircraftInspection'
+    'aircraftInspection',
+    'scMessage'
   ];
 
   AircraftsInspectionsEditCtrl.$resolve = {

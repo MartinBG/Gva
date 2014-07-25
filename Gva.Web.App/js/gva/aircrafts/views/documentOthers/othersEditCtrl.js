@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftDocumentOthers,
-    aircraftDocumentOther
+    aircraftDocumentOther,
+    scMessage
   ) {
     var originalDocument = _.cloneDeep(aircraftDocumentOther);
 
@@ -38,12 +39,17 @@
     };
 
     $scope.deleteDocumentOther = function () {
-      return AircraftDocumentOthers.remove({
-        id: $stateParams.id,
-        ind: aircraftDocumentOther.partIndex
-      }).$promise.then(function () {
-          return $state.go('root.aircrafts.view.others.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftDocumentOthers.remove({
+            id: $stateParams.id,
+            ind: aircraftDocumentOther.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.aircrafts.view.others.search');
+          });
+        }
+      });
     };
   }
 
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'AircraftDocumentOthers',
-    'aircraftDocumentOther'
+    'aircraftDocumentOther',
+    'scMessage'
   ];
 
   AircraftOthersEditCtrl.$resolve = {

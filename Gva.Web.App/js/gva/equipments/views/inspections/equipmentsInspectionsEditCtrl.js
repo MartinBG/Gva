@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     EquipmentInspections,
-    equipmentInspection) {
+    equipmentInspection,
+    scMessage) {
     var originalDoc = _.cloneDeep(equipmentInspection);
 
     $scope.equipmentInspection = equipmentInspection;
@@ -37,11 +38,16 @@
     };
     
     $scope.deleteInspection = function () {
-      return EquipmentInspections.remove({
-        id: $stateParams.id,
-        ind: equipmentInspection.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.equipments.view.inspections.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return EquipmentInspections.remove({
+            id: $stateParams.id,
+            ind: equipmentInspection.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.equipments.view.inspections.search');
+          });
+        }
       });
     };
   }
@@ -51,7 +57,8 @@
     '$state',
     '$stateParams',
     'EquipmentInspections',
-    'equipmentInspection'
+    'equipmentInspection',
+    'scMessage'
   ];
 
   EquipmentsInspectionsEditCtrl.$resolve = {

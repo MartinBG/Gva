@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonDocumentEmployments,
-    employment
+    employment,
+    scMessage
   ) {
     var originalEmpl = _.cloneDeep(employment);
 
@@ -41,10 +42,16 @@
     };
 
     $scope.deleteEmployment = function () {
-      return PersonDocumentEmployments.remove({ id: $stateParams.id, ind: employment.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.persons.view.employments.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonDocumentEmployments
+            .remove({ id: $stateParams.id, ind: employment.partIndex })
+            .$promise.then(function () {
+              return $state.go('root.persons.view.employments.search');
+            });
+        }
+      });
     };
   }
 
@@ -53,7 +60,8 @@
     '$state',
     '$stateParams',
     'PersonDocumentEmployments',
-    'employment'
+    'employment',
+    'scMessage'
   ];
 
   DocumentEmploymentsEditCtrl.$resolve = {

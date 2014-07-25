@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftCertNoises,
-    aircraftCertNoise
+    aircraftCertNoise,
+    scMessage
   ) {
     var originalNoise = _.cloneDeep(aircraftCertNoise);
 
@@ -39,10 +40,16 @@
     };
 
     $scope.deleteNoise = function () {
-      return AircraftCertNoises.remove({ id: $stateParams.id, ind: aircraftCertNoise.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.aircrafts.view.noises.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftCertNoises
+          .remove({ id: $stateParams.id, ind: aircraftCertNoise.partIndex })
+          .$promise.then(function () {
+            return $state.go('root.aircrafts.view.noises.search');
+          });
+        }
+      });
     };
   }
 
@@ -51,7 +58,8 @@
     '$state',
     '$stateParams',
     'AircraftCertNoises',
-    'aircraftCertNoise'
+    'aircraftCertNoise',
+    'scMessage'
   ];
 
   CertNoisesEditCtrl.$resolve = {

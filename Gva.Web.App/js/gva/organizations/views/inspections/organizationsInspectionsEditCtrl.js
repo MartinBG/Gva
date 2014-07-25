@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationInspections,
-    organizationInspection
+    organizationInspection,
+    scMessage
   ) {
     var originalInspection = _.cloneDeep(organizationInspection);
 
@@ -43,13 +44,18 @@
     };
 
     $scope.deleteInspection = function () {
-      return OrganizationInspections.remove({
-        id: $stateParams.id,
-        ind: organizationInspection.partIndex
-      }).$promise.then(function () {
-        return $stateParams.childInd ?
-          $state.go('^') :
-          $state.go('root.organizations.view.inspections.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationInspections.remove({
+            id: $stateParams.id,
+            ind: organizationInspection.partIndex
+          }).$promise.then(function () {
+            return $stateParams.childInd ?
+              $state.go('^') :
+              $state.go('root.organizations.view.inspections.search');
+          });
+        }
       });
     };
   }
@@ -59,7 +65,8 @@
     '$state',
     '$stateParams',
     'OrganizationInspections',
-    'organizationInspection'
+    'organizationInspection',
+    'scMessage'
   ];
 
   OrganizationsInspectionsEditCtrl.$resolve = {
