@@ -17,6 +17,8 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaCorrespondentMap());
             modelBuilder.Configurations.Add(new GvaLotCaseMap());
             modelBuilder.Configurations.Add(new GvaApplicationMap());
+            modelBuilder.Configurations.Add(new GvaApplicationStageMap());
+            modelBuilder.Configurations.Add(new GvaStageMap());
             modelBuilder.Configurations.Add(new GvaAppLotFileMap());
             modelBuilder.Configurations.Add(new GvaFileMap());
             modelBuilder.Configurations.Add(new GvaLotFileMap());

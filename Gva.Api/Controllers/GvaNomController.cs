@@ -16,6 +16,7 @@ using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Repositories.LotRepositories;
+using Gva.Api.Repositories.StageRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -31,6 +32,7 @@ namespace Gva.Api.Controllers
         private IOrganizationRepository organizationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private INomRepository nomRepository;
+        private IStageRepository stageRepository;
 
         public GvaNomController(
             ILotRepository lotRepository,
@@ -41,7 +43,8 @@ namespace Gva.Api.Controllers
             IEquipmentRepository equipmentRepository,
             IOrganizationRepository organizationRepository,
             ICaseTypeRepository caseTypeRepository,
-            INomRepository nomRepository)
+            INomRepository nomRepository,
+            IStageRepository stageRepository)
         {
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
@@ -52,6 +55,7 @@ namespace Gva.Api.Controllers
             this.organizationRepository = organizationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
+            this.stageRepository = stageRepository;
         }
 
         [Route("{lotId}/applications")]
@@ -761,6 +765,31 @@ namespace Gva.Api.Controllers
             }
 
             return Ok(nomValues);
+        }
+
+        [Route("appStages")]
+        public IHttpActionResult GetAppStages()
+        {
+            var returnValue = this.stageRepository.GetStages()
+                .Select(e => new
+                {
+                    nomValueId = e.GvaStageId,
+                    name = e.Name
+                });
+
+            return Ok(returnValue);
+        }
+
+        [Route("appStages/{id:int}")]
+        public IHttpActionResult GetAppStage(int id)
+        {
+            var stage = this.stageRepository.GetStage(id);
+
+            return Ok(new
+            {
+                nomValueId = stage.GvaStageId,
+                name = stage.Name
+            });
         }
     }
 }

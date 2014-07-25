@@ -2592,6 +2592,10 @@
       },
       applications: {
         lotSet: 'Тип на дело',
+        tabs: {
+          'case': 'Преписка',
+          stages: 'Дейности по заявление'
+        },
         edit: {
           equipmentName: 'Име',
           equipmentType: 'Тип',
@@ -2627,6 +2631,28 @@
             newFile: 'Нов файл и страница',
             newDocFile: 'Нов файл',
             viewPart: 'Преглед'
+          },
+          stages: {
+            docStages: 'Деловодни етапи',
+            endElectronicStage: 'Приключване',
+            nextElectronicStage: 'Следващ',
+            techEditElectronicStage: 'Техн. редакция',
+            reverseElectronicStage: 'Сторниране',
+            startingDate: 'Нач. дата',
+            esStageName: 'Етап',
+            esStageExecutors: 'Изпълнител',
+            expectedEndingDate: 'Очаквана дата на прикл.',
+            endingDate: 'Дата на приключване',
+            isCurrentStage: 'Текущ',
+            noAvailableDocStages: 'Няма намерени резултати',
+            edit: 'Техническа редакция на етап',
+            end: 'Приключване на етап',
+            next: 'Следващ етап',
+            appStages: 'Дейности по заявление',
+            newAppStage: 'Нова дейност',
+            appStage: 'Дейност',
+            appStageDate: 'Дата',
+            appStageInspector: 'Инспектор'
           },
           newFile: {
             title: 'Нова страница в описа',
@@ -2859,6 +2885,50 @@
           pageIndex: '№ стр. в дело',
           pageNumber: 'Брой стр.',
           attachment: 'Прикачен файл'
+        },
+        editDocStageModal: {
+          stage: 'Етап',
+          startingDate: 'Начална дата',
+          executors: 'Изпълнители',
+          expectedEndingDate: 'Очаквана дата прикл.',
+          endingDate: 'Дата на приключване',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        endDocStageModal: {
+          stage: 'Етап',
+          startingDate: 'Начална дата',
+          executors: 'Изпълнители',
+          expectedEndingDate: 'Очаквана дата прикл.',
+          endingDate: 'Дата на приключване',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        nextDocStageModal: {
+          stage: 'Етап',
+          startingDate: 'Начална дата',
+          executors: 'Изпълнители',
+          expectedEndingDate: 'Очаквана дата прикл.',
+          endingDate: 'Дата на приключване',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        appStage: {
+          stage: 'Дейност',
+          date: 'Дата',
+          inspector: 'Инспектор'
+        },
+        newAppStageModal: {
+          title: 'Нова дейност',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editAppStageModal: {
+          title: 'Преглед на дейност',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ',
+          deleteStage: 'Изтрий'
         }
       },
       organizations: {
@@ -3650,6 +3720,7 @@
         'root.applications.edit.case.newFile': 'Нов документ',
         'root.applications.edit.case.addPart': 'Добавяне',
         'root.applications.edit.case.linkPart': 'Свързване',
+        'root.applications.edit.stages': 'Дейности по заявление',
         'root.persons': 'Физически лица',
         'root.persons.new': 'Ново физическо лице',
         'root.persons.securityExam': 'Нов теоретичен изпит АС',

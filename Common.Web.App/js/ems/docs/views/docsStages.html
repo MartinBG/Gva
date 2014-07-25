@@ -18,8 +18,8 @@
       <td>{{ dess.startingDate | date:'dd.MM.yyyy HH:mm' }}</td>
       <td>{{ dess.electronicServiceStageName }}</td>
       <td ng-bind-html="dess.electronicServiceStageExecutors"></td>
-      <td>{{ dess.expectedEndingDate | date:'dd.MM.yyyy HH:mm' }}</td>
-      <td>{{ dess.endingDate | date:'dd.MM.yyyy HH:mm' }}</td>
+      <td>{{ dess.expectedEndingDate | date:'dd.MM.yyyy' }}</td>
+      <td>{{ dess.endingDate | date:'dd.MM.yyyy' }}</td>
       <td>{{ dess.isCurrentStage ? 'Да' : 'Не' }}</td>
     </tr>
   </tbody>
