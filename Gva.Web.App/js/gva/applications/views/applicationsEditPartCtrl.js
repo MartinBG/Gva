@@ -12,6 +12,7 @@
 
     $scope.application = application;
     $scope.editMode = null;
+    $scope.lotId = $stateParams.lotId;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';

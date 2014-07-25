@@ -9,8 +9,8 @@
     OrganizationDocumentApplications,
     organizationDocumentApplication
   ) {
-
     $scope.organizationDocumentApplication = organizationDocumentApplication;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       $scope.newDocumentApplicationForm.$validate()

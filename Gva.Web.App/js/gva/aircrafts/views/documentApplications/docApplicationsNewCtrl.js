@@ -9,8 +9,8 @@
     AircraftDocumentApplications,
     aircraftDocumentApplication
   ) {
-
     $scope.aircraftDocumentApplication = aircraftDocumentApplication;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newDocumentApplicationForm.$validate()
