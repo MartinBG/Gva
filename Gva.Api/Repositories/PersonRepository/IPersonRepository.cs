@@ -29,5 +29,7 @@ namespace Gva.Api.Repositories.PersonRepository
             bool exact = false,
             int offset = 0,
             int? limit = null);
+
+        int GetNextLin(int linTypeId);
     }
 }

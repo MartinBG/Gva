@@ -10,8 +10,10 @@
     <sc-field type="text" ng-model="model.lastNameAlt" ng-required="true" l10n-text="persons.personDataDirective.lastNameAlt" class="col-sm-4 col-md-3"></sc-field>
   </div>
   <div class="row">
-    <sc-field-group class="col-sm-3 col-md-2" text="persons.personDataDirective.lin" validations="{required: 'default'}" field-name="lin">
-      <button type="button" class="btn btn-sm btn-default dropdown-toggle" ng-disabled="!isNew" data-toggle="dropdown" style="width: 100px">
+    <sc-field type="text" ng-model="model.uin " ng-change="setAgeSex()" sc-validate="{ validValue: uinValid }" l10n-text="persons.personDataDirective.uin" validations="{validValue: 'errorTexts.uin'}" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.sex" alias="'gender'" ng-required="true" l10n-text="persons.personDataDirective.sex" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field-group class="col-sm-4 col-md-3" text="persons.personDataDirective.lin" validations="{required: 'default'}" field-name="lin">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" ng-disabled="!isNew" data-toggle="dropdown" style="width: 110px">
         {{model.linType.name || 'Избери'}}
         <span class="caret"></span>
       </button>
@@ -20,10 +22,8 @@
           <a ng-click="setLin(type)">{{type.name}}</a>
         </li>
       </ul>
-      <sc-text name="lin" ng-model="model.lin" ng-readonly="true" ng-required="true" style="width: 50px;"></sc-text>
+      <sc-text name="lin" ng-model="model.lin" ng-readonly="model.linType.code !== 'none'" ng-required="true"></sc-text>
     </sc-field-group>
-    <sc-field type="text" ng-model="model.uin " ng-change="setAgeSex()" sc-validate="{ validValue: uinValid }" l10n-text="persons.personDataDirective.uin" validations="{validValue: 'errorTexts.uin'}" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.sex" alias="'gender'" ng-required="true" l10n-text="persons.personDataDirective.sex" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
     <sc-field type="date" ng-model="model.dateOfBirth" ng-required="true" l10n-text="persons.personDataDirective.dateOfBirth" class="col-sm-3 col-md-2"></sc-field>

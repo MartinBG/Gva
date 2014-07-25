@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Common.Api.Repositories.NomRepository;
 using Common.Data;
+using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
@@ -11,10 +13,12 @@ namespace Gva.Api.Repositories.PersonRepository
     public class PersonRepository : IPersonRepository
     {
         private IUnitOfWork unitOfWork;
+        private INomRepository nomRepository;
 
-        public PersonRepository(IUnitOfWork unitOfWork)
+        public PersonRepository(IUnitOfWork unitOfWork, INomRepository nomRepository)
         {
             this.unitOfWork = unitOfWork;
+            this.nomRepository = nomRepository;
         }
 
         public IEnumerable<GvaViewPerson> GetPersons(
@@ -100,6 +104,21 @@ namespace Gva.Api.Repositories.PersonRepository
                 .OrderBy(p => p.Name)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
+        }
+
+        public int GetNextLin(int linTypeId)
+        {
+            var lastLin = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                .Include(p => p.LinType)
+                .Where(p => p.LinTypeId == linTypeId)
+                .Max(p => p.Lin);
+
+            if (string.IsNullOrEmpty(lastLin))
+            {
+                lastLin = this.nomRepository.GetNomValue("linTypes", linTypeId).TextContent.Get<string>("initialLinVal");
+            }
+
+            return int.Parse(lastLin) + 1;
         }
     }
 }
