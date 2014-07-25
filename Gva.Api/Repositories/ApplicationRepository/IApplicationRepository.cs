@@ -13,7 +13,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             string lotSetAlias = null,
             DateTime? fromDate = null,
             DateTime? toDate = null,
-            string personLin = null,
+            int? personLin = null,
             string aircraftIcao = null,
             string organizationUin = null,
             int offset = 0,

@@ -22,7 +22,7 @@ namespace Gva.Api.Repositories.PersonRepository
         }
 
         public IEnumerable<GvaViewPerson> GetPersons(
-            string lin = null,
+            int? lin = null,
             string linType = null,
             string uin = null,
             int? caseTypeId = null,
@@ -39,7 +39,7 @@ namespace Gva.Api.Repositories.PersonRepository
             var predicate = PredicateBuilder.True<GvaViewPerson>();
 
             predicate = predicate
-                .AndStringMatches(p => p.Lin, lin, exact)
+                .AndEquals(p => p.Lin, lin)
                 .AndStringMatches(p => p.LinType.Name, linType, exact)
                 .AndStringMatches(p => p.Uin, uin, exact)
                 .AndStringMatches(p => p.Names, names, exact)
@@ -108,17 +108,17 @@ namespace Gva.Api.Repositories.PersonRepository
 
         public int GetNextLin(int linTypeId)
         {
-            var lastLin = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+            int? lastLin = this.unitOfWork.DbContext.Set<GvaViewPerson>()
                 .Include(p => p.LinType)
                 .Where(p => p.LinTypeId == linTypeId)
                 .Max(p => p.Lin);
 
-            if (string.IsNullOrEmpty(lastLin))
+            if (!lastLin.HasValue)
             {
-                lastLin = this.nomRepository.GetNomValue("linTypes", linTypeId).TextContent.Get<string>("initialLinVal");
+                lastLin = this.nomRepository.GetNomValue("linTypes", linTypeId).TextContent.Get<int>("initialLinVal");
             }
 
-            return int.Parse(lastLin) + 1;
+            return lastLin.Value + 1;
         }
     }
 }

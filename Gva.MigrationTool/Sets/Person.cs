@@ -72,7 +72,7 @@ namespace Gva.MigrationTool.Sets
 
                     var personData = this.getPersonData(personId, noms, personCaseTypes);
 
-                    if (string.IsNullOrEmpty(personData.Get<string>("lin")))
+                    if (!personData.Get<int?>("lin").HasValue)
                     {
                         Console.WriteLine("NO LIN FOR PERSON WITH ID " + personId);
                         continue;
@@ -505,7 +505,7 @@ namespace Gva.MigrationTool.Sets
                         __oldId = r.Field<int>("ID"),
                         __migrTable = "PERSON",
                         caseTypes = caseTypes,
-                        lin = r.Field<string>("LIN"),
+                        lin = r.Field<int?>("LIN"),
                         linType = r.Field<string>("LIN") != null ?
                             noms["linTypes"].ByCode(lins[r.Field<string>("LIN").Substring(0, 1)]) :
                             noms["linTypes"].ByCode("none"),

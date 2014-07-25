@@ -7,7 +7,7 @@ namespace Gva.Api.Repositories.PersonRepository
     public interface IPersonRepository
     {
         IEnumerable<GvaViewPerson> GetPersons(
-            string lin = null,
+            int? lin = null,
             string linType = null,
             string uin = null,
             int? caseTypeId = null,

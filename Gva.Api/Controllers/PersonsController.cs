@@ -54,7 +54,7 @@ namespace Gva.Api.Controllers
 
         [Route("")]
         public IHttpActionResult GetPersons(
-            string lin = null,
+            int? lin = null,
             string linType = null,
             string uin = null,
             int? caseType = null,

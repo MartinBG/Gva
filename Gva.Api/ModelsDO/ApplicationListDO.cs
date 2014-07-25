@@ -17,7 +17,7 @@ namespace Gva.Api.ModelsDO
         public string AppPartStatusName { get; set; }
 
         public int? PersonId { get; set; }
-        public string PersonLin { get; set; }
+        public int? PersonLin { get; set; }
         public string PersonNames { get; set; }
 
         public int? GvaOrganizationId { get; set; }

@@ -24,7 +24,7 @@ namespace Gva.Api.ModelsDO
 
         public int Id { get; set; }
 
-        public string Lin { get; set; }
+        public int Lin { get; set; }
 
         public string LinType { get; set; }
 
