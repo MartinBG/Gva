@@ -39,15 +39,5 @@
     'includedChecks'
   ];
 
-  ChooseChecksModalCtrl.$resolve = {
-    checks: [
-      '$stateParams',
-      'PersonDocumentChecks',
-      function ($stateParams, PersonDocumentChecks) {
-        return PersonDocumentChecks.query({ id: $stateParams.id }).$promise;
-      }
-    ]
-  };
-
   angular.module('gva').controller('ChooseChecksModalCtrl', ChooseChecksModalCtrl);
 }(angular, _, $));

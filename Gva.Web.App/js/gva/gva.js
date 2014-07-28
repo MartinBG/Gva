@@ -76,11 +76,6 @@
       templateUrl: 'js/gva/persons/forms/personStatus.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaPersonApplication',
-      templateUrl: 'js/gva/persons/forms/personApplication.html',
-      controller: 'PersonApplicationCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaPersonDocumentMedical',
       templateUrl: 'js/gva/persons/forms/personDocumentMedical.html',
       controller: 'PersonDocumentMedicalCtrl'

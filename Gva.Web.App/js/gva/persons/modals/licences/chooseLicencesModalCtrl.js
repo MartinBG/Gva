@@ -39,15 +39,5 @@
     'includedLicences'
   ];
 
-  ChooseLicencesModalCtrl.$resolve = {
-    licences: [
-      '$stateParams',
-      'PersonLicences',
-      function ($stateParams, PersonLicences) {
-        return PersonLicences.query({ id: $stateParams.id }).$promise;
-      }
-    ]
-  };
-
   angular.module('gva').controller('ChooseLicencesModalCtrl', ChooseLicencesModalCtrl);
 }(angular, _, $));

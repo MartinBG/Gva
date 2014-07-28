@@ -13,6 +13,7 @@
 
     $scope.personInfo = personInfo;
     $scope.editMode = null;
+    $scope.personId = $stateParams.id;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';

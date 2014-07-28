@@ -5,9 +5,9 @@
   function NewTrainingModalCtrl(
     $scope,
     $modalInstance,
-    $stateParams,
     PersonDocumentTrainings,
-    personDocumentTraining
+    personDocumentTraining,
+    lotId
   ) {
     $scope.form = {};
     $scope.personDocumentTraining = personDocumentTraining;
@@ -17,7 +17,7 @@
         .then(function () {
           if ($scope.form.newDocumentTrainingForm.$valid) {
             return PersonDocumentTrainings
-              .save({ id: $stateParams.id }, $scope.personDocumentTraining)
+              .save({ id: lotId }, $scope.personDocumentTraining)
               .$promise
               .then(function (savedTraining) {
                 return $modalInstance.close(savedTraining);
@@ -34,9 +34,9 @@
   NewTrainingModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    '$stateParams',
     'PersonDocumentTrainings',
-    'personDocumentTraining'
+    'personDocumentTraining',
+    'lotId'
   ];
 
   NewTrainingModalCtrl.$resolve = {

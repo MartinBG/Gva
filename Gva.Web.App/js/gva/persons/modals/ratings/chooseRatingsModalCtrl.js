@@ -39,15 +39,5 @@
     'includedRatings'
   ];
 
-  ChooseRatingsModalCtrl.$resolve = {
-    ratings: [
-      '$stateParams',
-      'PersonRatings',
-      function ($stateParams, PersonRatings) {
-        return PersonRatings.query({ id: $stateParams.id }).$promise;
-      }
-    ]
-  };
-
   angular.module('gva').controller('ChooseRatingsModalCtrl', ChooseRatingsModalCtrl);
 }(angular, _, $));

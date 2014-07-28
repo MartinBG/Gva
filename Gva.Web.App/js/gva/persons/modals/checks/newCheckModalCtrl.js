@@ -5,9 +5,9 @@
   function NewCheckModalCtrl(
     $scope,
     $modalInstance,
-    $stateParams,
     PersonDocumentChecks,
-    personDocumentCheck
+    personDocumentCheck,
+    lotId
   ) {
     $scope.form = {};
     $scope.personDocumentCheck = personDocumentCheck;
@@ -17,7 +17,7 @@
         .then(function () {
           if ($scope.form.newDocumentCheckForm.$valid) {
             return PersonDocumentChecks
-              .save({ id: $stateParams.id }, $scope.personDocumentCheck)
+              .save({ id: lotId }, $scope.personDocumentCheck)
               .$promise
               .then(function (savedCheck) {
                 return $modalInstance.close(savedCheck);
@@ -34,9 +34,9 @@
   NewCheckModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    '$stateParams',
     'PersonDocumentChecks',
-    'personDocumentCheck'
+    'personDocumentCheck',
+    'lotId'
   ];
 
   NewCheckModalCtrl.$resolve = {

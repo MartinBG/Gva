@@ -39,15 +39,5 @@
     'includedTrainings'
   ];
 
-  ChooseTrainingsModalCtrl.$resolve = {
-    trainings: [
-      '$stateParams',
-      'PersonDocumentTrainings',
-      function ($stateParams, PersonDocumentTrainings) {
-        return PersonDocumentTrainings.query({ id: $stateParams.id }).$promise;
-      }
-    ]
-  };
-
   angular.module('gva').controller('ChooseTrainingsModalCtrl', ChooseTrainingsModalCtrl);
 }(angular, _, $));

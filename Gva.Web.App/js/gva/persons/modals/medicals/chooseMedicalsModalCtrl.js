@@ -42,22 +42,5 @@
     'includedMedicals'
   ];
 
-  ChooseMedicalsModalCtrl.$resolve = {
-    medicals: [
-      '$stateParams',
-      'PersonDocumentMedicals',
-      function ($stateParams, PersonDocumentMedicals) {
-        return PersonDocumentMedicals.query({ id: $stateParams.id }).$promise;
-      }
-    ],
-    person: [
-      '$stateParams',
-      'Persons',
-      function ($stateParams, Persons) {
-        return Persons.get({ id: $stateParams.id }).$promise;
-      }
-    ]
-  };
-
   angular.module('gva').controller('ChooseMedicalsModalCtrl', ChooseMedicalsModalCtrl);
 }(angular, _, $));
