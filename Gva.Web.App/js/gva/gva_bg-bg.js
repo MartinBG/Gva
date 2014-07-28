@@ -110,7 +110,7 @@
           auditReason: 'Причина',
           auditType: 'Вид одит',
           subject: 'Предмет на одит',
-          notification: 'Предварително уведомяване',
+          notification: 'Предв. уведомяване',
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
           inspectionPlace: 'Адрес на одитирания обект',

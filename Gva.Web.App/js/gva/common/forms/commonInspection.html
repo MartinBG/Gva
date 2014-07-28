@@ -5,34 +5,26 @@
       <label class="control-label" l10n-text="common.inspectionDirective.auditCaseType"></label>
       <input type="hidden" ng-model="model.part.auditCaseTypes" class="form-control input-sm select2input" ng-readonly="form.$readonly" ui-select2="caseTypesOptions">
     </div>
-  </div>
-  <div class="row">
     <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="common.inspectionDirective.documentNumber" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="nomenclature" ng-model="model.part.auditPart" alias="'auditParts'" l10n-text="common.inspectionDirective.auditPart" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.auditReason" alias="'auditReasons'" ng-required="true" l10n-text="common.inspectionDirective.auditReason" class="col-sm-2 col-md-2"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.auditType" alias="'auditTypes'" ng-required="true" l10n-text="common.inspectionDirective.auditType" class="col-sm-2 col-md-2"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.auditState" alias="'auditStatuses'" ng-required="true" l10n-text="common.inspectionDirective.auditState" class="col-sm-2 col-md-2"></sc-field>
-    <div class="form-group col-sm-4 col-md-3" sc-has-error="notification">
-      <label class="control-label" l10n-text="common.inspectionDirective.notification"></label>
-      <sc-validation-error field-name="notification" validations="{required: 'default'}"></sc-validation-error>
-      <div class="col-sm-5 col-md-7" style="padding:0px">
-        <sc-nomenclature ng-model="model.part.notification" name="notification" alias="'boolean'" ng-required="true" ng-readonly="form.$readonly"></sc-nomenclature>
-      </div>
-    </div>
+    <sc-field type="nomenclature" ng-model="model.part.auditReason" alias="'auditReasons'" ng-required="true" l10n-text="common.inspectionDirective.auditReason" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.auditType" alias="'auditTypes'" ng-required="true" l10n-text="common.inspectionDirective.auditType" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.auditState" alias="'auditStatuses'" ng-required="true" l10n-text="common.inspectionDirective.auditState" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.notification" alias="'auditStatuses'" ng-required="true" l10n-text="common.inspectionDirective.notification" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="3" cols="50" ng-model="model.part.subject" ng-required="true" l10n-text="common.inspectionDirective.subject" class="col-sm-6 col-md-6"></sc-field>
+    <sc-field type="textarea" rows="3" ng-model="model.part.subject" ng-required="true" l10n-text="common.inspectionDirective.subject" class="col-sm-12 col-md-8"></sc-field>
   </div>
   <div class="row">
-    <div class="form-group col-sm-6 col-md-6">
+    <div class="form-group col-sm-12 col-md-8">
       <label class="control-label" l10n-text="common.inspectionDirective.applications"></label>
       <gva-applications ng-model="model.applications" set-part="setPart" ng-readonly="form.$readonly"></gva-applications>
     </div>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.inspectionPlace" ng-required="true" l10n-text="common.inspectionDirective.inspectionPlace" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="textarea" rows="3" ng-model="model.part.inspectionPlace" ng-required="true" l10n-text="common.inspectionDirective.inspectionPlace" class="col-sm-12 col-md-8"></sc-field>
   </div>
   <div class="row">
     <sc-field type="date" ng-model="model.part.startDate" ng-required="true" l10n-text="common.inspectionDirective.startDate" class="col-sm-3 col-md-2"></sc-field>
