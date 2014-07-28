@@ -10,6 +10,7 @@
     organizationRecommendation
   ) {
     $scope.organizationRecommendation = organizationRecommendation;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newRecommendation.$validate()

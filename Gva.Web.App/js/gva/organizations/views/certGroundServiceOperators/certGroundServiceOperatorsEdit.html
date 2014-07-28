@@ -16,7 +16,9 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-organization-certificate name="certGroundServiceOperatorForm" ng-model="certificate.part"></gva-organization-certificate>
+      <gva-organization-certificate name="certGroundServiceOperatorForm" ng-model="certificate.part"
+        sc-form-params="{ lotId: lotId }">
+      </gva-organization-certificate>
     </div>
   </div>
 </ng-form>

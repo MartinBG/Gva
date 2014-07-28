@@ -52,12 +52,12 @@
 
     <div class="well-sm panel-body">
       <h5 class="form-header" l10n-text="organizations.approvalEdit.approvalForm"></h5>
-
       <gva-organization-approval name="organizationApprovalForm" ng-model="approval.part"></gva-organization-approval>
 
       <h5 class="form-header" l10n-text="organizations.approvalEdit.amendmentForm"></h5>
-
-      <gva-organization-amendment name="organizationAmendmentForm" ng-model="currentAmendment">></gva-organization-amendment>
+      <gva-organization-amendment name="organizationAmendmentForm" ng-model="currentAmendment"
+        sc-form-params="{ lotId: lotId }">
+      </gva-organization-amendment>
     </div>
 
   </div>

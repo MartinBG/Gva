@@ -13,7 +13,9 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-organization-recommendation name="organizationRecommendationsForm" ng-model="organizationRecommendation"></gva-organization-recommendation>
+      <gva-organization-recommendation name="organizationRecommendationsForm" ng-model="organizationRecommendation"
+        sc-form-params="{ lotId: lotId }">
+      </gva-organization-recommendation>
     </div>
   </div>
 </ng-form>

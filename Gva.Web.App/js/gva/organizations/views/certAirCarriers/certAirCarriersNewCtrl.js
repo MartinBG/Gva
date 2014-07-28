@@ -10,6 +10,7 @@
     certificate
   ) {
     $scope.certificate = certificate;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.certAirCarrierForm.$validate()

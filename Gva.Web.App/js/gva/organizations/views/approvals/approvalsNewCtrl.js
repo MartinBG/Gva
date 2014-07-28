@@ -10,6 +10,7 @@
     organizationApproval
   ) {
     $scope.approval = organizationApproval;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newApprovalForm.$validate()

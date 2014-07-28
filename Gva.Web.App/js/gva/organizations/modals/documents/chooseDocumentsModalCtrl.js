@@ -4,11 +4,11 @@
 
   function ChooseOrgDocsModalCtrl(
     $scope,
-    $stateParams,
     $modalInstance,
     OrganizationsInventory,
     docs,
-    includedDocs
+    includedDocs,
+    lotId
   ) {
     $scope.selectedDocs = [];
 
@@ -17,7 +17,7 @@
     });
 
     $scope.searchParams = {
-      id: $stateParams.id,
+      id: lotId,
       documentParts: []
     };
 
@@ -62,22 +62,12 @@
 
   ChooseOrgDocsModalCtrl.$inject = [
     '$scope',
-    '$stateParams',
     '$modalInstance',
     'OrganizationsInventory',
     'docs',
-    'includedDocs'
+    'includedDocs',
+    'lotId'
   ];
-
-  ChooseOrgDocsModalCtrl.$resolve = {
-    docs: [
-      '$stateParams',
-      'OrganizationsInventory',
-      function ($stateParams, OrganizationsInventory) {
-        return OrganizationsInventory.query({ id: $stateParams.id }).$promise;
-      }
-    ]
-  };
 
   angular.module('gva').controller('ChooseOrgDocsModalCtrl', ChooseOrgDocsModalCtrl);
 }(angular, _, $));
