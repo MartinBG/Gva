@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationCertGroundServiceOperatorsSnoOperationals,
-    certificate
+    certificate,
+    scMessage
   ) {
     var originalCertificate = _.cloneDeep(certificate);
 
@@ -40,11 +41,17 @@
     };
 
     $scope.deleteCert = function () {
-      return OrganizationCertGroundServiceOperatorsSnoOperationals
-        .remove({ id: $stateParams.id, ind: certificate.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.organizations.view.groundServiceOperatorsSnoOperational.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationCertGroundServiceOperatorsSnoOperationals
+            .remove({ id: $stateParams.id, ind: certificate.partIndex })
+            .$promise.then(function () {
+              return $state
+                .go('root.organizations.view.groundServiceOperatorsSnoOperational.search');
+            });
+        }
+      });
     };
   }
 
@@ -53,7 +60,8 @@
     '$state',
     '$stateParams',
     'OrganizationCertGroundServiceOperatorsSnoOperationals',
-    'certificate'
+    'certificate',
+    'scMessage'
   ];
 
   CertGroundServiceOperatorsSnoOperationalEditCtrl.$resolve = {

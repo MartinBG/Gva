@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationStaffExaminers,
-    organizationStaffExaminer
+    organizationStaffExaminer,
+    scMessage
   ) {
     var originalStaffExaminer = _.cloneDeep(organizationStaffExaminer);
 
@@ -41,12 +42,17 @@
     };
 
     $scope.deleteStaffChecker = function () {
-      return OrganizationStaffExaminers.remove({
-          id: $stateParams.id,
-          ind: organizationStaffExaminer.partIndex
-        }).$promise.then(function () {
-          return $state.go('root.organizations.view.staffExaminers.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationStaffExaminers.remove({
+              id: $stateParams.id,
+              ind: organizationStaffExaminer.partIndex
+            }).$promise.then(function () {
+              return $state.go('root.organizations.view.staffExaminers.search');
+            });
+        }
+      });
     };
   }
 
@@ -55,7 +61,8 @@
     '$state',
     '$stateParams',
     'OrganizationStaffExaminers',
-    'organizationStaffExaminer'
+    'organizationStaffExaminer',
+    'scMessage'
   ];
 
   StaffExaminersEditCtrl.$resolve = {

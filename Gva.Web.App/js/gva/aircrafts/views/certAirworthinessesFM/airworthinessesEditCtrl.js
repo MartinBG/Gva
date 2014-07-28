@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftCertAirworthinessesFM,
-    originalAw
+    originalAw,
+    scMessage
   ) {
     function resetAw() {
       $scope.aw = _.cloneDeep(originalAw);
@@ -37,11 +38,16 @@
     };
 
     $scope.deleteAw = function () {
-      return AircraftCertAirworthinessesFM
-        .remove({ id: $stateParams.id, ind: $stateParams.ind })
-        .$promise.then(function () {
-          return $state.go('root.aircrafts.view.airworthinessesFM.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftCertAirworthinessesFM
+          .remove({ id: $stateParams.id, ind: $stateParams.ind })
+          .$promise.then(function () {
+            return $state.go('root.aircrafts.view.airworthinessesFM.search');
+          });
+        }
+      });
     };
 
     $scope.saveAw = function () {
@@ -55,8 +61,6 @@
               originalAw = $scope.aw;
               $scope.isEditAw = false;
               resetAw();
-              
-              //return $state.go('root.aircrafts.view.airworthinessesFM.search');
             });
         }
       });
@@ -149,7 +153,8 @@
     '$state',
     '$stateParams',
     'AircraftCertAirworthinessesFM',
-    'aircraftCertAirworthiness'
+    'aircraftCertAirworthiness',
+    'scMessage'
   ];
 
   CertAirworthinessesFMEditCtrl.$resolve = {

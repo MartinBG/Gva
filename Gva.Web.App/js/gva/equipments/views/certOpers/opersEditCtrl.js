@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     EquipmentCertOperationals,
-    equipmentCertOper
+    equipmentCertOper,
+    scMessage
   ) {
     var originalCert = _.cloneDeep(equipmentCertOper);
 
@@ -38,11 +39,16 @@
     };
 
     $scope.deleteOper = function () {
-      return EquipmentCertOperationals.remove({
-        id: $stateParams.id,
-        ind: equipmentCertOper.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.equipments.view.opers.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return EquipmentCertOperationals.remove({
+            id: $stateParams.id,
+            ind: equipmentCertOper.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.equipments.view.opers.search');
+          });
+        }
       });
     };
   }
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'EquipmentCertOperationals',
-    'equipmentCertOper'
+    'equipmentCertOper',
+    'scMessage'
   ];
 
   EquipmentOpersEditCtrl.$resolve = {

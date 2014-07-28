@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftCertRadios,
-    aircraftCertRadio
+    aircraftCertRadio,
+    scMessage
   ) {
     var originalRadio = _.cloneDeep(aircraftCertRadio);
 
@@ -39,10 +40,16 @@
     };
 
     $scope.deleteRadio = function () {
-      return AircraftCertRadios.remove({ id: $stateParams.id, ind: aircraftCertRadio.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.aircrafts.view.radios.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftCertRadios
+          .remove({ id: $stateParams.id, ind: aircraftCertRadio.partIndex })
+          .$promise.then(function () {
+            return $state.go('root.aircrafts.view.radios.search');
+          });
+        }
+      });
     };
   }
 
@@ -51,7 +58,8 @@
     '$state',
     '$stateParams',
     'AircraftCertRadios',
-    'aircraftCertRadio'
+    'aircraftCertRadio',
+    'scMessage'
   ];
 
   CertRadiosEditCtrl.$resolve = {

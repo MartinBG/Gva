@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftCertRegistrationsFM,
-    aircraftCertRegistration
+    aircraftCertRegistration,
+    scMessage
   ) {
     var originalRegistration = _.cloneDeep(aircraftCertRegistration);
 
@@ -48,12 +49,17 @@
     };
 
     $scope.deleteReg = function () {
-      return AircraftCertRegistrationsFM.remove({
-        id: $stateParams.id,
-        ind: aircraftCertRegistration.partIndex
-      })
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftCertRegistrationsFM.remove({
+            id: $stateParams.id,
+            ind: aircraftCertRegistration.partIndex
+          })
           .$promise.then(function () {
-        return $state.go('root.aircrafts.view.regsFM.search');
+            return $state.go('root.aircrafts.view.regsFM.search');
+          });
+        }
       });
     };
 
@@ -74,7 +80,8 @@
     '$state',
     '$stateParams',
     'AircraftCertRegistrationsFM',
-    'aircraftCertRegistration'
+    'aircraftCertRegistration',
+    'scMessage'
   ];
 
   CertRegsFMEditCtrl.$resolve = {

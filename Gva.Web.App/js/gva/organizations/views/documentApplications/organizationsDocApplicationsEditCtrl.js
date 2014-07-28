@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationDocumentApplications,
-    organizationDocumentApplication
+    organizationDocumentApplication,
+    scMessage
   ) {
     var originalApplication = _.cloneDeep(organizationDocumentApplication);
 
@@ -39,13 +40,18 @@
     };
 
     $scope.deleteApplication = function () {
-      return OrganizationDocumentApplications
-        .remove({ id: $stateParams.id, ind: organizationDocumentApplication.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.organizations.view.documentApplications.search', {
-            appId: null
-          }, { reload: true });
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationDocumentApplications
+            .remove({ id: $stateParams.id, ind: organizationDocumentApplication.partIndex })
+            .$promise.then(function () {
+              return $state.go('root.organizations.view.documentApplications.search', {
+                appId: null
+              }, { reload: true });
+            });
+        }
+      });
     };
   }
 
@@ -54,7 +60,8 @@
     '$state',
     '$stateParams',
     'OrganizationDocumentApplications',
-    'organizationDocumentApplication'
+    'organizationDocumentApplication',
+    'scMessage'
   ];
 
   OrganizationsDocApplicationsEditCtrl.$resolve = {

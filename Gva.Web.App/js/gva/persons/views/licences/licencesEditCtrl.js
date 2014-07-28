@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonLicences,
-    licence
+    licence,
+    scMessage
   ) {
     var originalLicence = _.cloneDeep(licence);
     $scope.licence = licence;
@@ -43,11 +44,16 @@
       $scope.licence.part.editions.pop();
 
       if ($scope.licence.part.editions.length === 0) {
-        return PersonLicences
-          .remove({ id: $stateParams.id, ind: $stateParams.ind })
-          .$promise.then(function () {
-            return $state.go('root.persons.view.licences.search');
-          });
+        return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            return PersonLicences
+              .remove({ id: $stateParams.id, ind: $stateParams.ind })
+              .$promise.then(function () {
+                return $state.go('root.persons.view.licences.search');
+              });
+          }
+        });
       }
       else {
         return PersonLicences.save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.licence)
@@ -85,7 +91,8 @@
     '$state',
     '$stateParams',
     'PersonLicences',
-    'licence'
+    'licence',
+    'scMessage'
   ];
 
   LicencesEditCtrl.$resolve = {

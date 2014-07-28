@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationAddresses,
-    organizationAddress
+    organizationAddress,
+    scMessage
   ) {
     var originalAddress = _.cloneDeep(organizationAddress);
 
@@ -38,11 +39,16 @@
     };
 
     $scope.deleteAddress = function () {
-      return OrganizationAddresses.remove({
-        id: $stateParams.id,
-        ind: organizationAddress.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.organizations.view.addresses.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationAddresses.remove({
+            id: $stateParams.id,
+            ind: organizationAddress.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.organizations.view.addresses.search');
+          });
+        }
       });
     };
   }
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'OrganizationAddresses',
-    'organizationAddress'
+    'organizationAddress',
+    'scMessage'
   ];
 
   OrganizationAddressesEditCtrl.$resolve = {

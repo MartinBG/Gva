@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationRegAirportOperators,
-    organizationRegAirportOperator
+    organizationRegAirportOperator,
+    scMessage
   ) {
     var originalOperator = _.cloneDeep(organizationRegAirportOperator);
 
@@ -39,12 +40,17 @@
     };
 
     $scope.deleteRegAirportOperator = function () {
-      return OrganizationRegAirportOperators.remove({
-        id: $stateParams.id,
-        ind: organizationRegAirportOperator.partIndex
-      }).$promise.then(function () {
-          return $state.go('root.organizations.view.regAirportOperators.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationRegAirportOperators.remove({
+            id: $stateParams.id,
+            ind: organizationRegAirportOperator.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.organizations.view.regAirportOperators.search');
+          });
+        }
+      });
     };
   }
 
@@ -53,7 +59,8 @@
     '$state',
     '$stateParams',
     'OrganizationRegAirportOperators',
-    'organizationRegAirportOperator'
+    'organizationRegAirportOperator',
+    'scMessage'
   ];
 
   RegAirportOperatorsEditCtrl.$resolve = {

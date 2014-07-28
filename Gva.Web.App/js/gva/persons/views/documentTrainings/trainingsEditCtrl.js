@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonDocumentTrainings,
-    personDocumentTraining
+    personDocumentTraining,
+    scMessage
   ) {
     var originalTraining = _.cloneDeep(personDocumentTraining);
 
@@ -38,11 +39,16 @@
     };
 
     $scope.deleteTraining = function () {
-      return PersonDocumentTrainings.remove({
-        id: $stateParams.id,
-        ind: personDocumentTraining.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.persons.view.documentTrainings.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonDocumentTrainings.remove({
+            id: $stateParams.id,
+            ind: personDocumentTraining.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.persons.view.documentTrainings.search');
+          });
+        }
       });
     };
   }
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'PersonDocumentTrainings',
-    'personDocumentTraining'
+    'personDocumentTraining',
+    'scMessage'
   ];
 
   DocumentTrainingsEditCtrl.$resolve = {

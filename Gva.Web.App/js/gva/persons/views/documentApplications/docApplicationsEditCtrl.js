@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonDocumentApplications,
-    personDocumentApplication) {
+    personDocumentApplication,
+    scMessage) {
     var originalApplication = _.cloneDeep(personDocumentApplication);
 
     $scope.personDocumentApplication = personDocumentApplication;
@@ -40,13 +41,18 @@
     };
 
     $scope.deleteApplication = function () {
-      return PersonDocumentApplications.remove({
-        id: $stateParams.id,
-        ind: personDocumentApplication.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.persons.view.documentApplications.search', {
-          appId: null
-        }, { reload: true });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonDocumentApplications.remove({
+            id: $stateParams.id,
+            ind: personDocumentApplication.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.persons.view.documentApplications.search', {
+              appId: null
+            }, { reload: true });
+          });
+        }
       });
     };
   }
@@ -56,7 +62,8 @@
     '$state',
     '$stateParams',
     'PersonDocumentApplications',
-    'personDocumentApplication'
+    'personDocumentApplication',
+    'scMessage'
   ];
 
   DocApplicationsEditCtrl.$resolve = {

@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationRegGroundServiceOperators,
-    organizationRegGroundServiceOperator
+    organizationRegGroundServiceOperator,
+    scMessage
   ) {
     var originalOperator = _.cloneDeep(organizationRegGroundServiceOperator);
 
@@ -39,13 +40,18 @@
     };
 
     $scope.deleteRegGroundServiceOperator = function () {
-      return OrganizationRegGroundServiceOperators
-        .remove({
-          id: $stateParams.id,
-          ind: organizationRegGroundServiceOperator.partIndex
-        }).$promise.then(function () {
-          return $state.go('root.organizations.view.regGroundServiceOperators.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationRegGroundServiceOperators
+            .remove({
+              id: $stateParams.id,
+              ind: organizationRegGroundServiceOperator.partIndex
+            }).$promise.then(function () {
+              return $state.go('root.organizations.view.regGroundServiceOperators.search');
+            });
+        }
+      });
     };
   }
 
@@ -54,7 +60,8 @@
     '$state',
     '$stateParams',
     'OrganizationRegGroundServiceOperators',
-    'organizationRegGroundServiceOperator'
+    'organizationRegGroundServiceOperator',
+    'scMessage'
   ];
 
   RegGroundServiceOperatorsEditCtrl.$resolve = {

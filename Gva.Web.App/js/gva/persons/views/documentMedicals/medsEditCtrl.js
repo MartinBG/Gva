@@ -8,7 +8,8 @@
     $stateParams,
     PersonDocumentMedicals,
     med,
-    person
+    person,
+    scMessage
   ) {
     var originalMedical = _.cloneDeep(med);
 
@@ -40,10 +41,15 @@
     };
 
     $scope.deleteMedical = function () {
-      return PersonDocumentMedicals.remove({ id: $stateParams.id, ind: med.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.persons.view.medicals.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonDocumentMedicals.remove({ id: $stateParams.id, ind: med.partIndex })
+            .$promise.then(function () {
+              return $state.go('root.persons.view.medicals.search');
+            });
+        }
+      });
     };
   }
 
@@ -53,7 +59,8 @@
     '$stateParams',
     'PersonDocumentMedicals',
     'med',
-    'person'
+    'person',
+    'scMessage'
   ];
 
   DocumentMedicalsEditCtrl.$resolve = {

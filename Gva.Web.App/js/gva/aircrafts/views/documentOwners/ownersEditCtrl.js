@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftDocumentOwners,
-    aircraftDocumentOwner
+    aircraftDocumentOwner,
+    scMessage
   ) {
     var originalOwner = _.cloneDeep(aircraftDocumentOwner);
 
@@ -38,12 +39,17 @@
     };
 
     $scope.deleteOwner = function () {
-      return AircraftDocumentOwners.remove({
-        id: $stateParams.id,
-        ind: aircraftDocumentOwner.partIndex
-      }).$promise.then(function () {
-          return $state.go('root.aircrafts.view.owners.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftDocumentOwners.remove({
+            id: $stateParams.id,
+            ind: aircraftDocumentOwner.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.aircrafts.view.owners.search');
+          });
+        }
+      });
     };
   }
 
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'AircraftDocumentOwners',
-    'aircraftDocumentOwner'
+    'aircraftDocumentOwner',
+    'scMessage'
   ];
 
   DocumentOwnersEditCtrl.$resolve = {

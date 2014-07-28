@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftDocumentDebts,
-    aircraftDocumentDebt
+    aircraftDocumentDebt,
+    scMessage
   ) {
     var originalDebt = _.cloneDeep(aircraftDocumentDebt);
 
@@ -39,12 +40,17 @@
     };
 
     $scope.deleteDocumentDebt = function () {
-      return AircraftDocumentDebts.remove({
-        id: $stateParams.id,
-        ind: aircraftDocumentDebt.partIndex
-      }).$promise.then(function () {
-          return $state.go('root.aircrafts.view.debts.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftDocumentDebts.remove({
+            id: $stateParams.id,
+            ind: aircraftDocumentDebt.partIndex
+          }).$promise.then(function () {
+              return $state.go('root.aircrafts.view.debts.search');
+          });
+        }
+      });
     };
   }
 
@@ -53,7 +59,8 @@
     '$state',
     '$stateParams',
     'AircraftDocumentDebts',
-    'aircraftDocumentDebt'
+    'aircraftDocumentDebt',
+    'scMessage'
   ];
 
   DocDebtsEditCtrl.$resolve = {

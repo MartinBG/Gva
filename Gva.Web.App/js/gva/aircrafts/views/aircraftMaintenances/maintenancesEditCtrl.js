@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftMaintenances,
-    aircraftMaintenance) {
+    aircraftMaintenance,
+    scMessage) {
     var originalMaintenance = _.cloneDeep(aircraftMaintenance);
 
     $scope.aircraftMaintenance = aircraftMaintenance;
@@ -27,20 +28,25 @@
       .then(function () {
         if ($scope.editAircraftMaintenanceForm.$valid) {
           return AircraftMaintenances
-            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aircraftMaintenance)
-            .$promise
-            .then(function () {
-              return $state.go('root.aircrafts.view.maintenances.search');
-            });
+          .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aircraftMaintenance)
+          .$promise
+          .then(function () {
+            return $state.go('root.aircrafts.view.maintenances.search');
+          });
         }
       });
     };
 
     $scope.deleteMaintenance = function () {
-      return AircraftMaintenances
-        .remove({ id: $stateParams.id, ind: aircraftMaintenance.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.aircrafts.view.maintenances.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftMaintenances
+            .remove({ id: $stateParams.id, ind: aircraftMaintenance.partIndex })
+            .$promise.then(function () {
+              return $state.go('root.aircrafts.view.maintenances.search');
+            });
+          }
         });
     };
   }
@@ -50,7 +56,8 @@
     '$state',
     '$stateParams',
     'AircraftMaintenances',
-    'aircraftMaintenance'
+    'aircraftMaintenance',
+    'scMessage'
   ];
 
   MaintenancesEditCtrl.$resolve = {

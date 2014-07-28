@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonDocumentExams,
-    exam
+    exam,
+    scMessage
   ) {
     var originalExam = _.cloneDeep(exam);
     $scope.exam = exam;
@@ -31,11 +32,16 @@
     };
 
     $scope.deleteExam = function () {
-      return PersonDocumentExams
-        .remove({ id: $stateParams.id, ind: $stateParams.ind })
-        .$promise.then(function () {
-          return $state.go('root.persons.view.exams.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonDocumentExams
+            .remove({ id: $stateParams.id, ind: $stateParams.ind })
+            .$promise.then(function () {
+              return $state.go('root.persons.view.exams.search');
+            });
+        }
+      });
     };
 
     $scope.cancel = function () {
@@ -49,7 +55,8 @@
     '$state',
     '$stateParams',
     'PersonDocumentExams',
-    'exam'
+    'exam',
+    'scMessage'
   ];
 
   DocumentExamsEditCtrl.$resolve = {

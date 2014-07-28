@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonFlyingExperiences,
-    personFlyingExperience
+    personFlyingExperience,
+    scMessage
   ) {
     var originalFlyingExp = _.cloneDeep(personFlyingExperience);
 
@@ -38,11 +39,16 @@
     };
 
     $scope.deleteFlyingExp = function () {
-      return PersonFlyingExperiences.remove({
-        id: $stateParams.id,
-        ind: personFlyingExperience.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.persons.view.flyingExperiences.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonFlyingExperiences.remove({
+            id: $stateParams.id,
+            ind: personFlyingExperience.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.persons.view.flyingExperiences.search');
+          });
+        }
       });
     };
   }
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'PersonFlyingExperiences',
-    'personFlyingExperience'
+    'personFlyingExperience',
+    'scMessage'
   ];
 
   FlyingExperiencesEditCtrl.$resolve = {

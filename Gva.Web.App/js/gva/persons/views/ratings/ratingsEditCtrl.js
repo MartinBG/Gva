@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonRatings,
-    rating
+    rating,
+    scMessage
   ) {
     var originalRating = _.cloneDeep(rating);
     $scope.rating = rating;
@@ -36,11 +37,16 @@
       $scope.rating.part.editions.pop();
 
       if ($scope.rating.part.editions.length === 0) {
-        return PersonRatings
-          .remove({ id: $stateParams.id, ind: $stateParams.ind })
-          .$promise.then(function () {
-            return $state.go('root.persons.view.ratings.search');
-          });
+        return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            return PersonRatings
+              .remove({ id: $stateParams.id, ind: $stateParams.ind })
+              .$promise.then(function () {
+                return $state.go('root.persons.view.ratings.search');
+              });
+          }
+        });
       }
       else {
         return PersonRatings.save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.rating)
@@ -79,7 +85,8 @@
     '$state',
     '$stateParams',
     'PersonRatings',
-    'rating'
+    'rating',
+    'scMessage'
   ];
 
   RatingsEditCtrl.$resolve = {

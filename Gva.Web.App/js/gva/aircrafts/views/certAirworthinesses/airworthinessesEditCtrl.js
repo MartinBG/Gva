@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftCertAirworthinesses,
-    aircraftCertAirworthiness
+    aircraftCertAirworthiness,
+    scMessage
   ) {
     var originalAirworthiness = _.cloneDeep(aircraftCertAirworthiness);
 
@@ -29,22 +30,27 @@
       .then(function () {
         if ($scope.editCertAirworthinessForm.$valid) {
           return AircraftCertAirworthinesses
-            .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aw)
-            .$promise
-            .then(function () {
-              return $state.go('root.aircrafts.view.airworthinesses.search');
-            });
+          .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.aw)
+          .$promise
+          .then(function () {
+            return $state.go('root.aircrafts.view.airworthinesses.search');
+          });
         }
       });
     };
 
     $scope.deleteAirworthiness = function () {
-      return AircraftCertAirworthinesses.remove({
-        id: $stateParams.id,
-        ind: aircraftCertAirworthiness.partIndex
-      }).$promise.then(function () {
-          return $state.go('root.aircrafts.view.airworthinesses.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftCertAirworthinesses.remove({
+            id: $stateParams.id,
+            ind: aircraftCertAirworthiness.partIndex
+          }).$promise.then(function () {
+              return $state.go('root.aircrafts.view.airworthinesses.search');
+            });
+        }
+      });
     };
   }
 
@@ -53,7 +59,8 @@
     '$state',
     '$stateParams',
     'AircraftCertAirworthinesses',
-    'aircraftCertAirworthiness'
+    'aircraftCertAirworthiness',
+    'scMessage'
   ];
 
   CertAirworthinessesEditCtrl.$resolve = {

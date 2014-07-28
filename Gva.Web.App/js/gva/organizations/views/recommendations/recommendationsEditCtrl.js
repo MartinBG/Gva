@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationRecommendations,
-    organizationRecommendation
+    organizationRecommendation,
+    scMessage
   ) {
     var originalRecommendation = _.cloneDeep(organizationRecommendation);
 
@@ -46,11 +47,16 @@
     };
 
     $scope.deleteRecommendation = function () {
-      return OrganizationRecommendations
-        .remove({ id: $stateParams.id, ind: organizationRecommendation.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.organizations.view.recommendations.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationRecommendations
+            .remove({ id: $stateParams.id, ind: organizationRecommendation.partIndex })
+            .$promise.then(function () {
+              return $state.go('root.organizations.view.recommendations.search');
+            });
+        }
+      });
     };
   }
 
@@ -59,7 +65,8 @@
     '$state',
     '$stateParams',
     'OrganizationRecommendations',
-    'organizationRecommendation'
+    'organizationRecommendation',
+    'scMessage'
   ];
 
   RecommendationsEditCtrl.$resolve = {

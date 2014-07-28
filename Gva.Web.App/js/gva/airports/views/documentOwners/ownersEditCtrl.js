@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AirportDocumentOwners,
-    airportDocumentOwner
+    airportDocumentOwner,
+    scMessage
   ) {
     var originalDoc = _.cloneDeep(airportDocumentOwner);
 
@@ -38,11 +39,16 @@
     };
 
     $scope.deleteOwner = function () {
-      return AirportDocumentOwners.remove({
-        id: $stateParams.id,
-        ind: airportDocumentOwner.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.airports.view.owners.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AirportDocumentOwners.remove({
+            id: $stateParams.id,
+            ind: airportDocumentOwner.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.airports.view.owners.search');
+          });
+        }
       });
     };
   }
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'AirportDocumentOwners',
-    'airportDocumentOwner'
+    'airportDocumentOwner',
+    'scMessage'
   ];
 
   AirportOwnersEditCtrl.$resolve = {

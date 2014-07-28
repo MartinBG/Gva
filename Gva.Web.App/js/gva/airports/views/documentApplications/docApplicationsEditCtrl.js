@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AirportDocumentApplications,
-    airportDocumentApplication) {
+    airportDocumentApplication,
+    scMessage) {
     var originalApplication = _.cloneDeep(airportDocumentApplication);
 
     $scope.airportDocumentApplication = airportDocumentApplication;
@@ -40,13 +41,18 @@
     };
 
     $scope.deleteApplication = function () {
-      return AirportDocumentApplications.remove({
-        id: $stateParams.id,
-        ind: airportDocumentApplication.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.airports.view.applications.search', {
-          appId: null
-        }, { reload: true });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AirportDocumentApplications.remove({
+            id: $stateParams.id,
+            ind: airportDocumentApplication.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.airports.view.applications.search', {
+              appId: null
+            }, { reload: true });
+          });
+        }
       });
     };
   }
@@ -56,7 +62,8 @@
     '$state',
     '$stateParams',
     'AirportDocumentApplications',
-    'airportDocumentApplication'
+    'airportDocumentApplication',
+    'scMessage'
   ];
 
   AirportApplicationsEditCtrl.$resolve = {

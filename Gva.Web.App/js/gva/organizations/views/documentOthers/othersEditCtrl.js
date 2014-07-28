@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationDocumentOthers,
-    organizationDocumentOther
+    organizationDocumentOther,
+    scMessage
   ) {
     var originalDocument = _.cloneDeep(organizationDocumentOther);
 
@@ -39,11 +40,16 @@
     };
 
     $scope.deleteDocumentOther = function () {
-      return OrganizationDocumentOthers.remove({
-        id: $stateParams.id,
-        ind: organizationDocumentOther.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.organizations.view.documentOthers.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationDocumentOthers.remove({
+            id: $stateParams.id,
+            ind: organizationDocumentOther.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.organizations.view.documentOthers.search');
+          });
+        }
       });
     };
   }
@@ -53,7 +59,8 @@
     '$state',
     '$stateParams',
     'OrganizationDocumentOthers',
-    'organizationDocumentOther'
+    'organizationDocumentOther',
+    'scMessage'
   ];
 
   OrganizationDocOthersEditCtrl.$resolve = {

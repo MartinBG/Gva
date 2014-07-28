@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AirportDocumentOthers,
-    airportDocumentOther
+    airportDocumentOther,
+    scMessage
   ) {
     var originalDoc = _.cloneDeep(airportDocumentOther);
 
@@ -38,11 +39,16 @@
     };
 
     $scope.deleteOther = function () {
-      return AirportDocumentOthers.remove({
-        id: $stateParams.id,
-        ind: airportDocumentOther.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.airports.view.others.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AirportDocumentOthers.remove({
+            id: $stateParams.id,
+            ind: airportDocumentOther.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.airports.view.others.search');
+          });
+        }
       });
     };
   }
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'AirportDocumentOthers',
-    'airportDocumentOther'
+    'airportDocumentOther',
+    'scMessage'
   ];
 
   AirportOthersEditCtrl.$resolve = {

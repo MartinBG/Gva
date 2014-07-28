@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonDocumentIds,
-    docId
+    docId,
+    scMessage
   ) {
     var originalDocId = _.cloneDeep(docId);
 
@@ -38,9 +39,14 @@
     };
 
     $scope.deleteDocId = function () {
-      return PersonDocumentIds.remove({ id: $stateParams.id, ind: docId.partIndex })
-          .$promise.then(function () {
-        return $state.go('root.persons.view.documentIds.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonDocumentIds.remove({ id: $stateParams.id, ind: docId.partIndex })
+              .$promise.then(function () {
+            return $state.go('root.persons.view.documentIds.search');
+          });
+        }
       });
     };
   }
@@ -50,7 +56,8 @@
     '$state',
     '$stateParams',
     'PersonDocumentIds',
-    'docId'
+    'docId',
+    'scMessage'
   ];
 
   DocumentIdsEditCtrl.$resolve = {

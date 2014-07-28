@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonDocumentChecks,
-    personDocumentCheck
+    personDocumentCheck,
+    scMessage
   ) {
     var originalCheck = _.cloneDeep(personDocumentCheck);
 
@@ -38,11 +39,16 @@
     };
 
     $scope.deleteCheck = function () {
-      return PersonDocumentChecks.remove({
-        id: $stateParams.id,
-        ind: personDocumentCheck.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.persons.view.checks.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonDocumentChecks.remove({
+            id: $stateParams.id,
+            ind: personDocumentCheck.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.persons.view.checks.search');
+          });
+        }
       });
     };
   }
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'PersonDocumentChecks',
-    'personDocumentCheck'
+    'personDocumentCheck',
+    'scMessage'
   ];
 
   DocumentChecksEditCtrl.$resolve = {

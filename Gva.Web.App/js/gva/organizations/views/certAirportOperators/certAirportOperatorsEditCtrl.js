@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     CertAirportOperators,
-    certificate
+    certificate,
+    scMessage
   ) {
     var originalCertificate = _.cloneDeep(certificate);
 
@@ -38,10 +39,15 @@
     };
 
     $scope.deleteCertAirportOperator = function () {
-      return CertAirportOperators.remove({ id: $stateParams.id, ind: certificate.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.organizations.view.certAirportOperators.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return CertAirportOperators.remove({ id: $stateParams.id, ind: certificate.partIndex })
+            .$promise.then(function () {
+              return $state.go('root.organizations.view.certAirportOperators.search');
+            });
+        }
+      });
     };
   }
 
@@ -50,7 +56,8 @@
     '$state',
     '$stateParams',
     'CertAirportOperators',
-    'certificate'
+    'certificate',
+    'scMessage'
   ];
 
   CertAirportOperatorsEditCtrl.$resolve = {

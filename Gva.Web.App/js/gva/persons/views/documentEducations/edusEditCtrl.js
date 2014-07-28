@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     PersonDocumentEducations,
-    edu
+    edu,
+    scMessage
   ) {
     var originalEdu = _.cloneDeep(edu);
 
@@ -41,13 +42,18 @@
     };
 
     $scope.deleteEdu = function () {
-      return PersonDocumentEducations.remove({
-        id: $stateParams.id,
-        ind: edu.partIndex
-      })
-        .$promise.then(function () {
-          return $state.go('root.persons.view.documentEducations.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return PersonDocumentEducations.remove({
+            id: $stateParams.id,
+            ind: edu.partIndex
+          })
+          .$promise.then(function () {
+            return $state.go('root.persons.view.documentEducations.search');
+          });
+        }
+      });
     };
   }
 
@@ -56,7 +62,8 @@
     '$state',
     '$stateParams',
     'PersonDocumentEducations',
-    'edu'
+    'edu',
+    'scMessage'
   ];
 
   DocumentEducationsEditCtrl.$resolve = {

@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     EquipmentDocumentApplications,
-    equipmentDocumentApplication) {
+    equipmentDocumentApplication,
+    scMessage) {
     var originalApplication = _.cloneDeep(equipmentDocumentApplication);
 
     $scope.equipmentDocumentApplication = equipmentDocumentApplication;
@@ -40,13 +41,18 @@
     };
 
     $scope.deleteApplication = function () {
-      return EquipmentDocumentApplications.remove({
-        id: $stateParams.id,
-        ind: equipmentDocumentApplication.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.equipments.view.applications.search', {
-          appId: null
-        }, { reload: true });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return EquipmentDocumentApplications.remove({
+            id: $stateParams.id,
+            ind: equipmentDocumentApplication.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.equipments.view.applications.search', {
+              appId: null
+            }, { reload: true });
+          });
+        }
       });
     };
   }
@@ -56,7 +62,8 @@
     '$state',
     '$stateParams',
     'EquipmentDocumentApplications',
-    'equipmentDocumentApplication'
+    'equipmentDocumentApplication',
+    'scMessage'
   ];
 
   EquipmentApplicationsEditCtrl.$resolve = {

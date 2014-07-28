@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     EquipmentDocumentOthers,
-    equipmentDocumentOther
+    equipmentDocumentOther,
+    scMessage
   ) {
     var originalDoc = _.cloneDeep(equipmentDocumentOther);
 
@@ -38,11 +39,16 @@
     };
 
     $scope.deleteOther = function () {
-      return EquipmentDocumentOthers.remove({
-        id: $stateParams.id,
-        ind: equipmentDocumentOther.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.equipments.view.others.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return EquipmentDocumentOthers.remove({
+            id: $stateParams.id,
+            ind: equipmentDocumentOther.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.equipments.view.others.search');
+          });
+        }
       });
     };
   }
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'EquipmentDocumentOthers',
-    'equipmentDocumentOther'
+    'equipmentDocumentOther',
+    'scMessage'
   ];
 
   EquipmentOthersEditCtrl.$resolve = {

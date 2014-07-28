@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     OrganizationAuditplans,
-    organizationAuditplan
+    organizationAuditplan,
+    scMessage
   ) {
     var originalAuditplan = _.cloneDeep(organizationAuditplan);
 
@@ -38,11 +39,16 @@
     };
 
     $scope.deleteAuditplan = function () {
-      return OrganizationAuditplans.remove({
-        id: $stateParams.id,
-        ind: organizationAuditplan.partIndex
-      }).$promise.then(function () {
-        return $state.go('root.organizations.view.auditplans.search');
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return OrganizationAuditplans.remove({
+            id: $stateParams.id,
+            ind: organizationAuditplan.partIndex
+          }).$promise.then(function () {
+            return $state.go('root.organizations.view.auditplans.search');
+          });
+        }
       });
     };
   }
@@ -52,7 +58,8 @@
     '$state',
     '$stateParams',
     'OrganizationAuditplans',
-    'organizationAuditplan'
+    'organizationAuditplan',
+    'scMessage'
   ];
 
   AuditplansEditCtrl.$resolve = {

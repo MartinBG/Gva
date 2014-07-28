@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     AircraftCertSmods,
-    aircraftCertSmod
+    aircraftCertSmod,
+    scMessage
   ) {
     var originalSmod = _.cloneDeep(aircraftCertSmod);
 
@@ -39,10 +40,15 @@
     };
 
     $scope.deleteSmod = function () {
-      return AircraftCertSmods.remove({ id: $stateParams.id, ind: aircraftCertSmod.partIndex })
-        .$promise.then(function () {
-          return $state.go('root.aircrafts.view.smods.search');
-        });
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return AircraftCertSmods.remove({ id: $stateParams.id, ind: aircraftCertSmod.partIndex })
+          .$promise.then(function () {
+            return $state.go('root.aircrafts.view.smods.search');
+          });
+        }
+      });
     };
   }
 
@@ -51,7 +57,8 @@
     '$state',
     '$stateParams',
     'AircraftCertSmods',
-    'aircraftCertSmod'
+    'aircraftCertSmod',
+    'scMessage'
   ];
 
   CertSmodsEditCtrl.$resolve = {
