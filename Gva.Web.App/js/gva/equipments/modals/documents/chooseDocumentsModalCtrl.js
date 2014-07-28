@@ -4,11 +4,11 @@
 
   function ChooseEquipmentsDocsModalCtrl(
     $scope,
-    $stateParams,
     $modalInstance,
     EquipmentsInventory,
     docs,
-    includedDocs
+    includedDocs,
+    lotId
   ) {
     $scope.selectedDocs = [];
 
@@ -17,7 +17,7 @@
     });
 
     $scope.searchParams = {
-      id: $stateParams.id,
+      id: lotId,
       documentParts: []
     };
 
@@ -62,22 +62,12 @@
 
   ChooseEquipmentsDocsModalCtrl.$inject = [
     '$scope',
-    '$stateParams',
     '$modalInstance',
     'EquipmentsInventory',
     'docs',
-    'includedDocs'
+    'includedDocs',
+    'lotId'
   ];
-
-  ChooseEquipmentsDocsModalCtrl.$resolve = {
-    docs: [
-      '$stateParams',
-      'EquipmentsInventory',
-      function ($stateParams, EquipmentsInventory) {
-        return EquipmentsInventory.query({ id: $stateParams.id }).$promise;
-      }
-    ]
-  };
 
   angular.module('gva').controller('ChooseEquipmentsDocsModalCtrl', ChooseEquipmentsDocsModalCtrl);
 }(angular, _, $));
