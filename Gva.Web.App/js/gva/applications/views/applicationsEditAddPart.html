@@ -54,7 +54,7 @@
       <gva-equipment-document-other name="addForm" ng-model="applicationPart.part" ng-if="applicationPart.setPartAlias === 'equipmentOther'"></gva-equipment-document-other>
 
       <!--Applications-->
-      <gva-common-document-application name="addForm" ng-model="applicationPart.part"
+      <gva-common-document-application name="addForm" ng-model="applicationPart.part" sc-data-lot-id="applicationPart.appFile.lotId"
           ng-if="applicationPart.setPartAlias === 'personApplication' ||
                   applicationPart.setPartAlias === 'organizationApplication' ||
                   applicationPart.setPartAlias === 'aircraftApplication' ||
