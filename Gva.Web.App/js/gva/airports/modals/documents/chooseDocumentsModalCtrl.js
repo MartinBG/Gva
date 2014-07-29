@@ -4,11 +4,11 @@
 
   function ChooseAirportDocsModalCtrl(
     $scope,
-    $stateParams,
     $modalInstance,
     AirportsInventory,
     docs,
-    includedDocs
+    includedDocs,
+    lotId
   ) {
     $scope.selectedDocs = [];
 
@@ -17,7 +17,7 @@
     });
 
     $scope.searchParams = {
-      id: $stateParams.id,
+      id: lotId,
       documentParts: []
     };
 
@@ -62,22 +62,12 @@
 
   ChooseAirportDocsModalCtrl.$inject = [
     '$scope',
-    '$stateParams',
     '$modalInstance',
     'AirportsInventory',
     'docs',
-    'includedDocs'
+    'includedDocs',
+    'lotId'
   ];
-
-  ChooseAirportDocsModalCtrl.$resolve = {
-    docs: [
-      '$stateParams',
-      'AirportsInventory',
-      function ($stateParams, AirportsInventory) {
-        return AirportsInventory.query({ id: $stateParams.id }).$promise;
-      }
-    ]
-  };
 
   angular.module('gva').controller('ChooseAirportDocsModalCtrl', ChooseAirportDocsModalCtrl);
 }(angular, _, $));

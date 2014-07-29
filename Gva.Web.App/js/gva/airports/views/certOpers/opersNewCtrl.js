@@ -9,6 +9,9 @@
     AirportCertOperationals,
     airportCertOper
   ) {
+    $scope.airportCertOper = airportCertOper;
+    $scope.lotId = $stateParams.id;
+
     $scope.save = function () {
       return $scope.newCertOperForm.$validate()
         .then(function () {
@@ -21,8 +24,6 @@
           }
         });
     };
-
-    $scope.airportCertOper = airportCertOper;
 
     $scope.cancel = function () {
       return $state.go('root.airports.view.opers.search');
