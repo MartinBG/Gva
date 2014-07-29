@@ -10,6 +10,8 @@
     personDocumentTraining
   ) {
     $scope.personDocumentTraining = personDocumentTraining;
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newDocumentTrainingForm.$validate()

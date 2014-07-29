@@ -12,6 +12,8 @@
   ) {
     $scope.personDocumentMedical = med;
     $scope.personLin = person.lin;
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newDocumentMedicalForm.$validate()

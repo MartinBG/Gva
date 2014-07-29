@@ -12,6 +12,7 @@
   ) {
     $scope.licence = licence;
     $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newLicenceForm.$validate().then(function () {

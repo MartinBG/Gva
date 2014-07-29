@@ -18,7 +18,8 @@
     <div class="well-sm panel-body">
       <gva-common-document-application name="documentApplicationForm" ng-model="application.part" sc-form-params="{ lotId: lotId }"></gva-common-document-application>
 
-      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="application.files" sc-form-params="{ setPart: 'person' }"></gva-common-scanned-document>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="application.files"
+        sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

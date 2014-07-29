@@ -9,6 +9,9 @@
     EquipmentDocumentOthers,
     equipmentDocumentOther
   ) {
+    $scope.equipmentDocumentOther = equipmentDocumentOther;
+    $scope.lotId = $stateParams.id;
+
     $scope.save = function () {
       return $scope.newDocumentOtherForm.$validate()
         .then(function () {
@@ -21,8 +24,6 @@
           }
         });
     };
-
-    $scope.equipmentDocumentOther = equipmentDocumentOther;
 
     $scope.cancel = function () {
       return $state.go('root.equipments.view.others.search');

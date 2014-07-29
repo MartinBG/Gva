@@ -23,6 +23,16 @@
       }).$promise.then(function (result) {
         $scope.recommendationReports = result.reports;
       });
+
+      Nomenclatures.query({
+        alias: 'caseTypes',
+        lotId: $stateParams.id
+      }).$promise.then(function(result){
+        $scope.caseTypesOptions.tags = _.map(result, function (item) {
+          return item.name;
+        });
+        angular.element('.select2input').select2($scope.caseTypesOptions);
+      });
     }
 
     $scope.changedSortOrder = function (newValue, oldValue) {

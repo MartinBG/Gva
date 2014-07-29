@@ -10,8 +10,8 @@
     aircraftCertAirworthiness
   ) {
     $scope.isEdit = false;
-
     $scope.aw = aircraftCertAirworthiness;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newCertAirworthinessForm.$validate()

@@ -7,10 +7,13 @@
     $modalInstance,
     PersonDocumentChecks,
     personDocumentCheck,
-    lotId
+    lotId,
+    caseTypeId
   ) {
     $scope.form = {};
     $scope.personDocumentCheck = personDocumentCheck;
+    $scope.lotId = lotId;
+    $scope.caseTypeId = caseTypeId;
 
     $scope.save = function () {
       return $scope.form.newDocumentCheckForm.$validate()
@@ -36,7 +39,8 @@
     '$modalInstance',
     'PersonDocumentChecks',
     'personDocumentCheck',
-    'lotId'
+    'lotId',
+    'caseTypeId'
   ];
 
   NewCheckModalCtrl.$resolve = {

@@ -7,10 +7,13 @@
     $modalInstance,
     PersonDocumentTrainings,
     personDocumentTraining,
-    lotId
+    lotId,
+    caseTypeId
   ) {
     $scope.form = {};
     $scope.personDocumentTraining = personDocumentTraining;
+    $scope.lotId = lotId;
+    $scope.caseTypeId = caseTypeId;
 
     $scope.save = function () {
       return $scope.form.newDocumentTrainingForm.$validate()
@@ -36,7 +39,8 @@
     '$modalInstance',
     'PersonDocumentTrainings',
     'personDocumentTraining',
-    'lotId'
+    'lotId',
+    'caseTypeId'
   ];
 
   NewTrainingModalCtrl.$resolve = {

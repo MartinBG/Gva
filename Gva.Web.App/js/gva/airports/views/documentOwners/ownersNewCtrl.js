@@ -9,6 +9,9 @@
     AirportDocumentOwners,
     airportDocumentOwner
   ) {
+    $scope.airportDocumentOwner = airportDocumentOwner;
+    $scope.lotId = $stateParams.id;
+
     $scope.save = function () {
       return $scope.newDocumentOwnerForm.$validate()
         .then(function () {
@@ -21,8 +24,6 @@
           }
         });
     };
-
-    $scope.airportDocumentOwner = airportDocumentOwner;
 
     $scope.cancel = function () {
       return $state.go('root.airports.view.owners.search');

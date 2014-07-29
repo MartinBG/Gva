@@ -9,6 +9,9 @@
     EquipmentDocumentOwners,
     equipmentDocumentOwner
   ) {
+    $scope.equipmentDocumentOwner = equipmentDocumentOwner;
+    $scope.lotId = $stateParams.id;
+
     $scope.save = function () {
       return $scope.newDocumentOwnerForm.$validate()
         .then(function () {
@@ -21,8 +24,6 @@
           }
         });
     };
-
-    $scope.equipmentDocumentOwner = equipmentDocumentOwner;
 
     $scope.cancel = function () {
       return $state.go('root.equipments.view.owners.search');

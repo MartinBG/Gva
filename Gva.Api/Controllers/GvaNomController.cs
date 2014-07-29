@@ -362,32 +362,10 @@ namespace Gva.Api.Controllers
             return Ok(returnValue);
         }
 
-        [Route("personCaseTypes/{id:int}"),
-         Route("organizationCaseTypes/{id:int}")]
-        public IHttpActionResult GetCaseType(int id)
-        {
-            var caseType = this.caseTypeRepository.GetCaseType(id);
-            return Ok(new
-            {
-                NomValueId = caseType.GvaCaseTypeId,
-                Name = caseType.Name,
-                Alias = caseType.Alias
-            });
-        }
-
-
         [Route("{set:regex(^(?:person|organization)$)}CaseTypes")]
-        public IHttpActionResult GetCaseTypes(string set, string term = null, int? lotId = null)
+        public IHttpActionResult GetCaseTypes(string set, string term = null)
         {
-            IEnumerable<GvaCaseType> caseTypes;
-            if (lotId.HasValue)
-            {
-                caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId.Value);
-            }
-            else
-            {
-                caseTypes = this.caseTypeRepository.GetCaseTypesForSet(set);
-            }
+            IEnumerable<GvaCaseType> caseTypes = this.caseTypeRepository.GetCaseTypesForSet(set);
 
             if (!string.IsNullOrWhiteSpace(term))
             {
@@ -418,6 +396,18 @@ namespace Gva.Api.Controllers
                 });
 
             return Ok(caseTypes);
+        }
+
+        [Route("caseTypes/{id:int}")]
+        public IHttpActionResult GetCaseType(int id)
+        {
+            var caseType = this.caseTypeRepository.GetCaseType(id);
+            return Ok(new
+            {
+                NomValueId = caseType.GvaCaseTypeId,
+                Name = caseType.Name,
+                Alias = caseType.Alias
+            });
         }
 
         [Route("schools")]

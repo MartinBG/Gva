@@ -16,6 +16,8 @@
     $scope.personDocumentMedical = med;
     $scope.personLin = person.lin;
     $scope.editMode = null;
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';

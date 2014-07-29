@@ -9,6 +9,7 @@
     AircraftDocumentOccurrences,
     aircraftDocumentOccurrence) {
     $scope.aircraftDocumentOccurrence = aircraftDocumentOccurrence;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newAircraftDocumentOccurrenceForm.$validate()

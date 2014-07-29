@@ -151,7 +151,7 @@
       function ($stateParams, Nomenclatures) {
         if ($stateParams.caseTypeId) {
           return Nomenclatures.get({
-            alias: 'organizationCaseTypes',
+            alias: 'caseTypes',
             id: $stateParams.caseTypeId
           }).$promise.then(function (caseType) {
             return caseType;

@@ -15,6 +15,7 @@
     $scope.licence = licence;
     $scope.editMode = null;
     $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.$watch('licence.part.editions | last', function (lastEdition) {
       $scope.currentEdition = lastEdition;

@@ -18,7 +18,8 @@
     <div class="well-sm panel-body">
       <gva-aircraft-document-debt-fm name="aircraftDocumentDebtForm" ng-model="debt.part"></gva-aircraft-document-debt-fm>
 
-      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="debt.files" sc-form-params="{ setPart: 'aircraft' }"></gva-common-scanned-document>
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="debt.files"
+        sc-form-params="{ setPart: 'aircraft', lotId: lotId }"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

@@ -9,6 +9,9 @@
     AirportDocumentOthers,
     airportDocumentOther
   ) {
+    $scope.airportDocumentOther = airportDocumentOther;
+    $scope.lotId = $stateParams.id;
+
     $scope.save = function () {
       return $scope.newDocumentOtherForm.$validate()
         .then(function () {
@@ -21,8 +24,6 @@
           }
         });
     };
-
-    $scope.airportDocumentOther = airportDocumentOther;
 
     $scope.cancel = function () {
       return $state.go('root.airports.view.others.search');

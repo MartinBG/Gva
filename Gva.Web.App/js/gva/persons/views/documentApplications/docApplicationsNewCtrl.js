@@ -11,6 +11,7 @@
   ) {
     $scope.personDocumentApplication = personDocumentApplication;
     $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newDocumentApplicationForm.$validate()

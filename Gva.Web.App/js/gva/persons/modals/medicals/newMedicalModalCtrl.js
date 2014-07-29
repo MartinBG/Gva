@@ -7,11 +7,14 @@
     $modalInstance,
     PersonDocumentMedicals,
     personDocumentMedical,
-    person
+    person,
+    caseTypeId
   ) {
     $scope.form = {};
     $scope.personDocumentMedical = personDocumentMedical;
     $scope.personLin = person.lin;
+    $scope.lotId = person.id;
+    $scope.caseTypeId = caseTypeId;
 
     $scope.save = function () {
       return $scope.form.newDocumentMedicalForm.$validate()
@@ -37,7 +40,8 @@
     '$modalInstance',
     'PersonDocumentMedicals',
     'personDocumentMedical',
-    'person'
+    'person',
+    'caseTypeId'
   ];
 
   NewMedicalModalCtrl.$resolve = {
