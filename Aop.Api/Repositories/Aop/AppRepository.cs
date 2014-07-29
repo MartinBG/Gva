@@ -20,12 +20,7 @@ namespace Aop.Api.Repositories.Aop
         {
         }
 
-        public List<AopApp> GetApps(
-            //string displayName,
-            //string correspondentEmail,
-            int limit,
-            int offset,
-            out int totalCount)
+        public List<AopApp> GetApps(int limit, int offset, out int totalCount)
         {
             System.Linq.Expressions.Expression<Func<AopApp, bool>> predicate = PredicateBuilder
                 .True<AopApp>();
@@ -42,10 +37,10 @@ namespace Aop.Api.Repositories.Aop
             //    //query = query.Where(e => e.Email.Contains(correspondentEmail));
             //}
 
-            var query =
-               this.unitOfWork.DbContext.Set<AopApp>()
-               .Include(e => e.AopEmployer)
-               .Where(predicate);
+            var query = this.unitOfWork.DbContext.Set<AopApp>()
+                .Include(e => e.CreateUnit)
+                .Include(e => e.AopEmployer)
+                .Where(predicate);
 
             totalCount = query.Count();
 
@@ -56,9 +51,10 @@ namespace Aop.Api.Repositories.Aop
                 .ToList();
         }
 
-        public AopApp CreateNewAopApp(UserContext userContext)
+        public AopApp CreateNewAopApp(int unitId, UserContext userContext)
         {
             AopApp app = new AopApp();
+            app.CreateUnitId = unitId;
 
             this.unitOfWork.DbContext.Set<AopApp>().Add(app);
 

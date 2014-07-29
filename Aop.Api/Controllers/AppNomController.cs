@@ -33,7 +33,7 @@ namespace Aop.Api.Controllers
             return Ok(new
             {
                 nomValueId = result.AopEmployerId,
-                name = string.Format("{0} {1} {2}", result.Name, result.Uic, result.LotNum),
+                name = string.Format("{0} ({1}) [{2}]", result.Name, !string.IsNullOrEmpty(result.Uic) ? result.Uic : "няма", !string.IsNullOrEmpty(result.LotNum) ? result.LotNum : "няма"),
                 alias = string.Format("{0} {1}", result.Uic, result.LotNum),
                 isActive = true
             });
@@ -44,21 +44,21 @@ namespace Aop.Api.Controllers
         {
             var predicate =
                 PredicateBuilder.True<AopEmployer>()
-                .AndStringContains(e => e.Name, term);
+                .AndStringContains(e => e.Name + " " + e.Uic, term);
 
             var results =
                 this.unitOfWork.DbContext.Set<AopEmployer>()
                 .Where(predicate)
                 .OrderBy(e => e.Name)
                 .WithOffsetAndLimit(offset, limit)
+                .ToList()
                 .Select(e => new
                 {
                     nomValueId = e.AopEmployerId,
-                    name = e.Name + " " + e.Uic + " " + e.LotNum,
-                    alias = e.Uic + " " + e.LotNum,
+                    name = string.Format("{0} ({1}) [{2}]", e.Name, !string.IsNullOrEmpty(e.Uic) ? e.Uic : "няма", !string.IsNullOrEmpty(e.LotNum) ? e.LotNum : "няма"),
+                    alias = string.Format("{0} {1}", e.Uic, e.LotNum),
                     isActive = true
-                })
-                .ToList();
+                });
 
             return Ok(results);
         }

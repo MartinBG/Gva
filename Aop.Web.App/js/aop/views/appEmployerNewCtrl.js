@@ -37,18 +37,5 @@
     'app'
   ];
 
-  //AppEmployerNewCtrl.$resolve = {
-  //  app: [
-  //    '$stateParams',
-  //    'Aops',
-  //    function resolveApp($stateParams, Aops) {
-  //      return Aops.get({ id: $stateParams.id }).$promise;
-  //    }
-  //  ],
-  //  selectDoc: [function () {
-  //    return [];
-  //  }]
-  //};
-
   angular.module('aop').controller('AppEmployerNewCtrl', AppEmployerNewCtrl);
 }(angular));

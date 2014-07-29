@@ -19,10 +19,16 @@
       </div>
 
       <div class="row">
-        <div class="form-group col-sm-4 col-md-4" sc-has-error="lotNum">
+        <div class="form-group col-sm-4 col-md-4">
+          <label class="control-label" l10n-text="Булстат/ЕИК:"></label>
+          <sc-text name="uic" ng-model="emp.uic"></sc-text>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-4">
           <label class="control-label" l10n-text="Партиден номер:"></label>
-          <sc-validation-error field-name="lotNum" validations="{required: null}"></sc-validation-error>
-          <sc-text name="lotNum" ng-model="emp.lotNum" ng-required="true"></sc-text>
+          <sc-text name="lotNum" ng-model="emp.lotNum"></sc-text>
         </div>
       </div>
 

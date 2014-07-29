@@ -12,12 +12,9 @@ namespace Aop.Api.Repositories.Aop
 {
     public interface IAppRepository : IRepository<AopApp>
     {
-        List<AopApp> GetApps(
-            int limit,
-            int offset,
-            out int totalCount);
+        List<AopApp> GetApps(int limit, int offset, out int totalCount);
 
-        AopApp CreateNewAopApp(UserContext userContext);
+        AopApp CreateNewAopApp(int unitId, UserContext userContext);
 
         Doc GetDocByPortalDocId(Guid portalDocId);
 

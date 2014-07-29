@@ -20,6 +20,7 @@ namespace Aop.Api.DataObjects
             if (a != null)
             {
                 this.AopApplicationId = a.AopApplicationId;
+                this.CreateUnitId = a.CreateUnitId;
                 this.DocId = a.DocId;
                 this.AopEmployerId = a.AopEmployerId;
                 this.Email = a.Email;
@@ -60,6 +61,11 @@ namespace Aop.Api.DataObjects
                 this.NDChecklistStatusId = a.NDChecklistStatusId;
                 this.NDReportId = a.NDReportId;
 
+                if (a.CreateUnit != null)
+                {
+                    this.CreateUnitName = a.CreateUnit.Name;
+                }
+
                 if (a.AopEmployer != null)
                 {
                     this.AopEmployerName = string.Format("{0} {1} ({2})", a.AopEmployer.Name, a.AopEmployer.Uic, a.AopEmployer.LotNum);
@@ -69,6 +75,7 @@ namespace Aop.Api.DataObjects
 
         public Nullable<int> AopApplicationId { get; set; }
         public Nullable<int> DocId { get; set; }
+        public Nullable<int> CreateUnitId { get; set; }
         public Nullable<int> AopEmployerId { get; set; }
         public string Email { get; set; }
         //I
@@ -109,6 +116,7 @@ namespace Aop.Api.DataObjects
         public byte[] Version { get; set; }
 
         //
+        public string CreateUnitName { get; set; }
         public string AopEmployerName { get; set; }
 
         //

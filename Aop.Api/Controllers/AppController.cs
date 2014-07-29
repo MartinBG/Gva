@@ -65,14 +65,21 @@ namespace Aop.Api.Controllers
         [HttpPost]
         public IHttpActionResult PostNewApp()
         {
-            AopApp app = appRepository.CreateNewAopApp(this.userContext);
-
-            this.unitOfWork.Save();
-
-            return Ok(new
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                aopApplicationId = app.AopApplicationId
-            });
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+                AopApp app = appRepository.CreateNewAopApp(unitUser.UnitId, this.userContext);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok(new
+                {
+                    aopApplicationId = app.AopApplicationId
+                });
+            }
         }
 
         [Route("")]
@@ -90,13 +97,7 @@ namespace Aop.Api.Controllers
 
             int totalCount = 0;
 
-            var returnValue =
-                this.appRepository.GetApps(
-                //displayName,
-                //correspondentEmail,
-                    limit,
-                    offset,
-                    out totalCount)
+            var returnValue = this.appRepository.GetApps(limit, offset, out totalCount)
                 .Select(e => new AppListItemDO(e))
                 .ToList();
 
@@ -141,6 +142,7 @@ namespace Aop.Api.Controllers
         public IHttpActionResult GetApp(int id)
         {
             AopApp app = this.appRepository.Find(id,
+                e => e.CreateUnit,
                 e => e.AopEmployer);
 
             if (app == null)

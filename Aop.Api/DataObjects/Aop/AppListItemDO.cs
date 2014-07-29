@@ -22,11 +22,17 @@ namespace Aop.Api.DataObjects
             if (a != null)
             {
                 this.AopApplicationId = a.AopApplicationId;
+                this.CreateUnitId = a.CreateUnitId;
                 this.AopEmployerId = a.AopEmployerId;
                 this.Email = a.Email;
                 this.STDocId = a.STDocId;
                 this.NDDocId = a.NDDocId;
                 this.Version = a.Version;
+
+                if (a.CreateUnit != null)
+                {
+                    this.CreateUnitName = a.CreateUnit.Name;
+                }
 
                 if (a.AopEmployer != null)
                 {
@@ -36,6 +42,7 @@ namespace Aop.Api.DataObjects
         }
 
         public Nullable<int> AopApplicationId { get; set; }
+        public Nullable<int> CreateUnitId { get; set; }
         public Nullable<int> AopEmployerId { get; set; }
         public int? STDocId { get; set; }
         public int? NDDocId { get; set; }
@@ -44,6 +51,7 @@ namespace Aop.Api.DataObjects
 
         //
         public string AopEmployerName { get; set; }
+        public string CreateUnitName { get; set; }
         public DocRelationDO STDocRelation { get; set; }
         public DocRelationDO NDDocRelation { get; set; }
     }

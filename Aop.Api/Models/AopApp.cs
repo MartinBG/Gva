@@ -12,6 +12,7 @@ namespace Aop.Api.Models
     {
         public int AopApplicationId { get; set; }
         public Nullable<int> DocId { get; set; }
+        public int CreateUnitId { get; set; }
         public Nullable<int> AopEmployerId { get; set; }
         public string Email { get; set; }
         public Nullable<int> STAopApplicationTypeId { get; set; }
@@ -59,6 +60,7 @@ namespace Aop.Api.Models
         public virtual Doc NDDoc { get; set; }
         public virtual Doc NDChecklist { get; set; }
         public virtual Doc NDReport { get; set; }
+        public virtual Common.Api.Models.Unit CreateUnit { get; set; }
 
         public void EnsureForProperVersion(byte[] version)
         {
@@ -102,6 +104,7 @@ namespace Aop.Api.Models
             this.ToTable("AopApplications");
             this.Property(t => t.AopApplicationId).HasColumnName("AopApplicationId");
             this.Property(t => t.DocId).HasColumnName("DocId");
+            this.Property(t => t.CreateUnitId).HasColumnName("CreateUnitId");
             this.Property(t => t.AopEmployerId).HasColumnName("AopEmployerId");
             this.Property(t => t.Email).HasColumnName("Email");
             this.Property(t => t.STAopApplicationTypeId).HasColumnName("STAopApplicationTypeId");
@@ -181,6 +184,9 @@ namespace Aop.Api.Models
             this.HasOptional(t => t.NDReport)
                 .WithMany()
                 .HasForeignKey(d => d.NDReportId);
+            this.HasRequired(t => t.CreateUnit)
+                .WithMany()
+                .HasForeignKey(d => d.CreateUnitId);
 
         }
     }

@@ -8,6 +8,7 @@
     $state,
     $stateParams,
     Aops,
+    scMessage,
     app,
     selectDoc
   ) {
@@ -39,10 +40,15 @@
     };
 
     $scope.remove = function remove() {
-      return Aops.remove({ id: $scope.app.aopApplicationId })
-        .$promise
-        .then(function () {
-          return $state.go('root.apps.search');
+      return scMessage('apps.edit.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            return Aops.remove({ id: $scope.app.aopApplicationId })
+              .$promise
+              .then(function () {
+                return $state.go('root.apps.search');
+              });
+          }
         });
     };
 
@@ -178,6 +184,7 @@
     '$state',
     '$stateParams',
     'Aops',
+    'scMessage',
     'app',
     'selectDoc'
   ];
