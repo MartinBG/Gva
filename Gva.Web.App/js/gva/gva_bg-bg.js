@@ -2593,6 +2593,26 @@
           editLastEdition: 'Редакция',
           deleteLastEdition: 'Изтриване',
           save: 'Запис',
+          cancel: 'Отказ',
+          viewStatuses: 'Статус'
+        },
+        licenceStatus: {
+          valid: 'Валидност',
+          changeDate: 'Дата на промяна',
+          changeReason: 'Причина за промяна',
+          inspector: 'Инспектор',
+          notes: 'Бележки'
+        },
+        licenceStatusesModal: {
+          title: 'Статус на лиценз',
+          newStatusChange: 'Нова промяна на статуса на лиценз',
+          statusChanges: 'Промени на статуса на лиценза',
+          valid: 'Валидност',
+          changeDate: 'Дата на промяна',
+          changeReason: 'Причина за промяна',
+          inspector: 'Инспектор',
+          notes: 'Бележки',
+          save: 'Запис',
           cancel: 'Отказ'
         }
       },

@@ -646,6 +646,7 @@
     <Content Include="js\gva\persons\forms\personLicenceCtrl.js" />
     <Content Include="js\gva\persons\forms\personLicenceEdition.html" />
     <Content Include="js\gva\persons\forms\personLicenceEditionCtrl.js" />
+    <Content Include="js\gva\persons\forms\personLicenceStatus.html" />
     <Content Include="js\gva\persons\forms\personRating.html" />
     <Content Include="js\gva\persons\forms\personRatingCtrl.js" />
     <Content Include="js\gva\persons\forms\personRatingEdition.html" />
@@ -658,6 +659,8 @@
     <Content Include="js\gva\persons\modals\checks\newCheckModalCtrl.js" />
     <Content Include="js\gva\persons\modals\licences\chooseLicencesModal.html" />
     <Content Include="js\gva\persons\modals\licences\chooseLicencesModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\licences\licenceStatusesModal.html" />
+    <Content Include="js\gva\persons\modals\licences\licenceStatusesModalCtrl.js" />
     <Content Include="js\gva\persons\modals\medicals\chooseMedicalsModal.html" />
     <Content Include="js\gva\persons\modals\medicals\chooseMedicalsModalCtrl.js" />
     <Content Include="js\gva\persons\modals\medicals\newMedicalModal.html" />

@@ -9,6 +9,9 @@
     scFormParams
   ) {
     $scope.isNew = scFormParams.isNew;
+    if ($scope.isNew) {
+      $scope.model.valid = 'Да';
+    }
     $scope.$watch('model.licenceType', function(){
       if(!$scope.lastLicenceNumber && !!$scope.model.licenceType){
         PersonsLastLicenceNumber.get({

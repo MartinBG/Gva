@@ -681,6 +681,12 @@ namespace Gva.MigrationTool.Nomenclatures
                 dependencies.Value.Item1.Save();
             }
 
+            using (var dependencies = dependencyFactory())
+            {
+                migrateLicenceChangeReasons(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
+            }
+
             timer.Stop();
             Console.WriteLine("Nomenclatures migration time - {0}", timer.Elapsed.TotalMinutes);
 
@@ -3460,6 +3466,37 @@ namespace Gva.MigrationTool.Nomenclatures
                 }
 
                 noms["aircraftCatAWsFm"][Guid.NewGuid().ToString()] = row; //no old id
+                nom.NomValues.Add(row);
+            }
+        }
+
+        private void migrateLicenceChangeReasons(INomRepository repo, OracleConnection conn)
+        {
+            Nom nom = repo.GetNom("licenceChangeReasons");
+            var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_LICENCE_CHANGE_REASON")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = r.Field<object>("ID").ToString(),
+                        Code = null,
+                        Name = r.Field<string>("NAME"),
+                        NameAlt = r.Field<string>("NAME_TRANS"),
+                        Alias = null,
+                        IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
+                        ParentValueId = null,
+                        TextContentString = JsonConvert.SerializeObject(
+                            new
+                            {
+                                seqNo = r.Field<decimal?>("SEQ_NO"),
+                                reasonGroup = r.Field<string>("REASON_GROUP")
+                            })
+                    })
+                .ToList();
+
+            noms["licenceChangeReasons"] = new Dictionary<string, NomValue>();
+            foreach (var row in results)
+            {
+                noms["licenceChangeReasons"][row.OldId] = row;
                 nom.NomValues.Add(row);
             }
         }
