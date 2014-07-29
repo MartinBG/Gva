@@ -131,6 +131,13 @@
           inspectionPeriod: 'Период, в който ВС може да бъде видяно',
           disparitiesTitle: 'Несъответствия',
           applications: 'Заявления'
+        },
+        auditorDirective: {
+          addExaminer: 'Добави одитори',
+          examiner: 'Одитор',
+          sortOrder: 'Пореден №',
+          noAvailableExaminers: 'Няма намерени резултати',
+          part: 'Част'
         }
       },
       airports: {
@@ -3045,6 +3052,12 @@
           inspectionFrom: 'Начална дата на изпълнение на одита',
           inspectionTo: 'Крайна дата на изпълнение на одита'
         },
+        chooseExaminersModal: {
+          title: 'Избор на проверяващ',
+          name: 'Име',
+          cancel: 'Отказ',
+          add: 'Добави'
+        },
         editCertAirportOperator: {
           title: 'Преглед на лиценз на летищен оператор',
           edit: 'Редакция',
@@ -3666,12 +3679,6 @@
             title: '5. Препоръки',
             auditorsTitle: 'Инспектори по Част 5'
           }
-        },
-        recomendationAuditorDirective: {
-          examiner: 'Одитор',
-          sortOrder: 'Пореден №',
-          noAvailableExaminers: 'Няма намерени резултати',
-          part: 'Част'
         },
         organizationRegisterDirective: {
           certNumber: '№ на удостоверение',

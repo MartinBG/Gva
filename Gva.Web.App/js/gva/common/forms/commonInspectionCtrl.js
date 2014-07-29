@@ -5,7 +5,7 @@
   function CommonInspectionCtrl($scope, $state, $stateParams, Nomenclatures) {
     $scope.watchList = [];
 
-    $scope.model.part.examiners = $scope.model.part.examiners || [{ sortOrder: 1 }];
+    $scope.model.part.examiners = $scope.model.part.examiners || [];
     $scope.model.part.auditDetails = $scope.model.part.auditDetails || [];
     $scope.model.part.disparities = $scope.model.part.disparities || [];
     $scope.caseTypesOptions = {
@@ -37,19 +37,6 @@
 
       $scope.model.part.setPart = aliases[$scope.setPart];
     });
-
-    $scope.deleteExaminer = function (examiner) {
-      var index = $scope.model.part.examiners.indexOf(examiner);
-      $scope.model.part.examiners.splice(index, 1);
-    };
-
-    $scope.addExaminer = function () {
-      var sortOder = Math.max(0, _.max(_.pluck($scope.model.part.examiners, 'sortOrder'))) + 1;
-
-      $scope.model.part.examiners.push({
-        sortOrder: sortOder
-      });
-    };
 
     $scope.changedSortOrder = function (newValue, oldValue) {
       if (_.where($scope.model.part.disparities, { sortOrder: newValue })[0]) {
