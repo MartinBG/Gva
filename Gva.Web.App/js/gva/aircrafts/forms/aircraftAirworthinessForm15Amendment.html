@@ -9,6 +9,6 @@
     <sc-field type="text" ng-model="model.refNumber" ng-required="true" l10n-text="aircrafts.airworthinessForm15AmendmentDirective.refNumber" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <gva-aircraft-inspector name="inspector" ng-model="model.inspector" readonly="readonly" sc-data-inspector-types="['examiner','other']"></gva-aircraft-inspector>
+    <gva-aircraft-inspector name="inspector" ng-model="model.inspector" readonly="readonly" sc-form-params="{ inspectorTypes: ['examiner','other'] }"></gva-aircraft-inspector>
   </div>
 </ng-form>

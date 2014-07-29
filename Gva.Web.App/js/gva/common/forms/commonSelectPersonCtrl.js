@@ -1,7 +1,8 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function CommonSelectPersonCtrl($scope, namedModal) {
+  function CommonSelectPersonCtrl($scope, namedModal, scFormParams) {
+    $scope.newClass = scFormParams.newClass;
     $scope.choosePerson = function () {
       var params = {
         uin: null,
@@ -50,7 +51,7 @@
     };
   }
 
-  CommonSelectPersonCtrl.$inject = ['$scope', 'namedModal'];
+  CommonSelectPersonCtrl.$inject = ['$scope', 'namedModal', 'scFormParams'];
 
   angular.module('gva').controller('CommonSelectPersonCtrl', CommonSelectPersonCtrl);
 }(angular));

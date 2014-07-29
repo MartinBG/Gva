@@ -2,7 +2,13 @@
 (function (angular, _) {
   'use strict';
 
-  function CommonInspectionCtrl($scope, $state, $stateParams, Nomenclatures) {
+  function CommonInspectionCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    Nomenclatures,
+    scFormParams
+  ) {
     $scope.watchList = [];
 
     $scope.model.part.examiners = $scope.model.part.examiners || [];
@@ -27,16 +33,17 @@
       });
     }
 
-    $scope.$watch('setPart', function(){
-      var aliases = {
-        organization: 'Организация',
-        aircraft: 'ВС',
-        aiport: 'Летище',
-        equipment: 'Съоръжение'
-      };
+    $scope.setPart = scFormParams.setPart;
 
-      $scope.model.part.setPart = aliases[$scope.setPart];
-    });
+    var aliases = {
+      organization: 'Организация',
+      aircraft: 'ВС',
+      aiport: 'Летище',
+      equipment: 'Съоръжение'
+    };
+
+    $scope.model.part.setPart = aliases[$scope.setPart];
+
 
     $scope.changedSortOrder = function (newValue, oldValue) {
       if (_.where($scope.model.part.disparities, { sortOrder: newValue })[0]) {
@@ -90,7 +97,13 @@
     };
   }
 
-  CommonInspectionCtrl.$inject = ['$scope', '$state', '$stateParams', 'Nomenclatures'];
+  CommonInspectionCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Nomenclatures',
+    'scFormParams'
+  ];
 
   angular.module('gva').controller('CommonInspectionCtrl', CommonInspectionCtrl);
 }(angular, _));

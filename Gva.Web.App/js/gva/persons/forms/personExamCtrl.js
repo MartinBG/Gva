@@ -4,8 +4,10 @@
 
   function PersonExamCtrl(
     $scope,
-    SecurityExam
+    SecurityExam,
+    scFormParams
     ) {
+    $scope.msg = scFormParams.msg;
     $scope.gradeExam = function () {
       return $scope.form.$validate().then(function () {
         if ($scope.form.$valid) {
@@ -20,7 +22,8 @@
 
   PersonExamCtrl.$inject = [
     '$scope',
-    'SecurityExam'
+    'SecurityExam',
+    'scFormParams'
   ];
 
   angular.module('gva').controller('PersonExamCtrl', PersonExamCtrl);

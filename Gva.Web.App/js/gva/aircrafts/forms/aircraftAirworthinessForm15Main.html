@@ -8,8 +8,8 @@
     <sc-field type="text" ng-model="model.approvalNumber" ng-required="true" l10n-text="aircrafts.airworthinessForm15MainDirective.approvalNumber" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row" ng-switch="model.airworthinessReviewType.alias">
-    <gva-aircraft-inspector ng-switch-when="15a" name="inspector" ng-model="model.inspector" readonly="readonly" sc-data-inspector-types="['inspector']"></gva-aircraft-inspector>
-    <gva-aircraft-inspector ng-switch-when="15b" name="inspector" ng-model="model.inspector" readonly="readonly" sc-data-inspector-types="['examiner','other']"></gva-aircraft-inspector>
-    <gva-aircraft-inspector ng-switch-when="unknown" name="inspector" ng-model="model.inspector" readonly="readonly" sc-data-inspector-types="['inspector','examiner','other']"></gva-aircraft-inspector>
+    <gva-aircraft-inspector ng-switch-when="15a" name="inspector" ng-model="model.inspector" readonly="readonly" sc-form-params="{ inspectorTypes: ['inspector'] }"></gva-aircraft-inspector>
+    <gva-aircraft-inspector ng-switch-when="15b" name="inspector" ng-model="model.inspector" readonly="readonly" sc-form-params="{ inspectorTypes: ['examiner','other'] }"></gva-aircraft-inspector>
+    <gva-aircraft-inspector ng-switch-when="unknown" name="inspector" ng-model="model.inspector" readonly="readonly" sc-form-params="{ inspectorTypes: ['inspector','examiner','other'] }"></gva-aircraft-inspector>
   </div>
 </ng-form>

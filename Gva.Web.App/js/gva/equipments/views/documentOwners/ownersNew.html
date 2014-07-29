@@ -14,7 +14,7 @@
     <div class="well-sm panel-body">
       <gva-equipment-document-owner name="equipmentDocumentOwnerForm" ng-model="equipmentDocumentOwner.part"></gva-equipment-document-owner>
 
-      <gva-common-scanned-document name="equipmentScannedDocumentForm" ng-model="equipmentDocumentOwner.files" sc-data-set-part="'equipment'"></gva-common-scanned-document>
+      <gva-common-scanned-document name="equipmentScannedDocumentForm" ng-model="equipmentDocumentOwner.files" sc-form-params="{ setPart: 'equipment' }"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

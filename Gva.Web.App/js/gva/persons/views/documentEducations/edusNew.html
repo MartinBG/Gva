@@ -15,7 +15,7 @@
     <div class="well-sm panel-body">
       <gva-person-document-education name="personDocumentEducationForm" ng-model="personDocumentEducation.part"></gva-person-document-education>
 
-      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentEducation.files" sc-data-set-part="'person'"></gva-common-scanned-document>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentEducation.files" sc-form-params="{ setPart: 'person' }"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

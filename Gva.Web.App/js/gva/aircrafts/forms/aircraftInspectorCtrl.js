@@ -2,24 +2,23 @@
 (function (angular, _) {
   'use strict';
 
-  function AircraftInspectorCtrl($scope) {
+  function AircraftInspectorCtrl($scope, scFormParams) {
     $scope.inspectorTypesHash = {};
 
-    $scope.$watch('inspectorTypes', function (inspectorTypes) {
-      if (inspectorTypes) {
-        _.each(inspectorTypes, function (it) {
-          $scope.inspectorTypesHash[it] = true;
-        });
+    $scope.inspectorTypes = scFormParams.inspectorTypes;
+    if ($scope.inspectorTypes) {
+      _.each($scope.inspectorTypes, function (it) {
+        $scope.inspectorTypesHash[it] = true;
+      });
 
-        if (inspectorTypes.length === 1) {
-          $scope.inspectorType = inspectorTypes[0];
-        }
-      } else {
-        $scope.inspectorTypesHash.inspector = true;
-        $scope.inspectorTypesHash.examiner = true;
-        $scope.inspectorTypesHash.other = true;
+      if ($scope.inspectorTypes.length === 1) {
+        $scope.inspectorType = $scope.inspectorTypes[0];
       }
-    });
+    } else {
+      $scope.inspectorTypesHash.inspector = true;
+      $scope.inspectorTypesHash.examiner = true;
+      $scope.inspectorTypesHash.other = true;
+    }
 
     $scope.$watch('model', function (model) {
       if (!model) {
@@ -61,7 +60,8 @@
   }
 
   AircraftInspectorCtrl.$inject = [
-    '$scope'
+    '$scope',
+    'scFormParams'
   ];
 
   angular.module('gva').controller('AircraftInspectorCtrl', AircraftInspectorCtrl);

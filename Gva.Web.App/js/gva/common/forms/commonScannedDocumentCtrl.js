@@ -2,9 +2,10 @@
 (function (angular, Select2, _) {
   'use strict';
 
-  function CommonScannedDocCtrl($scope, $stateParams, Nomenclatures) {
+  function CommonScannedDocCtrl($scope, $stateParams, Nomenclatures, scFormParams) {
     var caseType = null;
     $scope.lotId = $stateParams.id;
+    $scope.setPart = scFormParams.setPart;
 
     var addNewFile = function () {
       $scope.model.unshift({
@@ -66,7 +67,7 @@
     };
   }
 
-  CommonScannedDocCtrl.$inject = ['$scope', '$stateParams', 'Nomenclatures'];
+  CommonScannedDocCtrl.$inject = ['$scope', '$stateParams', 'Nomenclatures', 'scFormParams'];
 
   angular.module('gva').controller('CommonScannedDocCtrl', CommonScannedDocCtrl);
 }(angular, Select2, _));

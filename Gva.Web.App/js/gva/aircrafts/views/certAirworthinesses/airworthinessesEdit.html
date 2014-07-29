@@ -18,7 +18,7 @@
     <div class="well-sm panel-body">
       <gva-aircraft-cert-airworthiness name="aircraftCertAirworthinessForm" ng-model="aw.part"></gva-aircraft-cert-airworthiness>
 
-      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aw.files" sc-data-set-part="'aircraft'"></gva-common-scanned-document>
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aw.files" sc-form-params="{ setPart: 'aircraft' }"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>
