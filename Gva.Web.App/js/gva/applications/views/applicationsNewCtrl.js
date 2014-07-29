@@ -241,7 +241,7 @@
           return Applications.create(newApplication).$promise.then(function (gvaApp) {
             return $state.go('root.applications.new.editPart', {
               setPartPath: newApplication.setPartPath,
-              ind: gvaApp.gvaAppLotPart.index,
+              ind: gvaApp.partIndex,
               lotId: gvaApp.lotId,
               appId: gvaApp.gvaApplicationId,
               filter: $scope.filter

@@ -582,7 +582,12 @@ namespace Gva.Api.Controllers
 
                 transaction.Commit();
 
-                return Ok(newGvaApplication);
+                return Ok(new
+                {
+                    LotId = lot.LotId,
+                    GvaApplicationId = newGvaApplication.GvaApplicationId,
+                    PartIndex = partVersion.Part.Index
+                });
             }
         }
 
