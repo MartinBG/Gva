@@ -106,7 +106,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaRatingEdition',
-      templateUrl: 'js/gva/persons/forms/personRatingEdition.html'
+      templateUrl: 'js/gva/persons/forms/personRatingEdition.html',
+      controller: 'PersonRatingEditionCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaRating',
@@ -181,7 +182,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertAirworthinessFm',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessFM.html'
+      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessFM.html',
+      controller: 'AircraftCertAirworthinessFmCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAirworthinessReviewOther',

@@ -11,6 +11,7 @@
   ) {
     $scope.form = {};
     $scope.rating = rating;
+    $scope.lotId = lotId;
 
     $scope.save = function () {
       return $scope.form.newRatingForm.$validate()

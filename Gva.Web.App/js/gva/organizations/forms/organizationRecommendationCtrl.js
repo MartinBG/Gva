@@ -9,6 +9,8 @@
     namedModal,
     scFormParams
     ) {
+    $scope.lotId = scFormParams.lotId;
+
     $scope.auditorsReview = {
       auditDetails: [],
       disparities: []

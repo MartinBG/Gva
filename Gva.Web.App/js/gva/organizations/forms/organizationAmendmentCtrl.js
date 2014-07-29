@@ -6,6 +6,8 @@
     $state,
     namedModal,
     scFormParams) {
+    $scope.lotId = scFormParams.lotId;
+
     $scope.select2Options = {
       multiple: false,
       allowClear: true,

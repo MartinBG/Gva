@@ -19,7 +19,7 @@
       <div class="row" ng-if="!hideApplications">
         <div class="form-group col-sm-10 col-md-7">
           <label class="control-label" l10n-text="common.scannedDocumentlDirective.applications"></label>
-          <gva-applications ng-model="file.applications" set-part="setPart" ng-readonly="form.$readonly"></gva-applications>
+          <gva-applications ng-model="file.applications" set-part="setPart" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
         </div>
       </div>
       <hr ng-hide="$last">

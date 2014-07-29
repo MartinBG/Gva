@@ -10,6 +10,7 @@
     organizationStaffManagement
   ) {
     $scope.organizationStaffManagement = organizationStaffManagement;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newStaffManagement.$validate()

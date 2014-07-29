@@ -14,6 +14,8 @@
     PersonLicences,
     scFormParams
   ) {
+    $scope.lotId = scFormParams.lotId;
+
     $q.all([
       Persons.get({ id: scFormParams.lotId }).$promise,
       PersonRatings.query({ id: scFormParams.lotId }).$promise,

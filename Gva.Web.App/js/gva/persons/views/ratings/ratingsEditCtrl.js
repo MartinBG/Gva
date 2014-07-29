@@ -13,6 +13,7 @@
     var originalRating = _.cloneDeep(rating);
     $scope.rating = rating;
     $scope.editMode = null;
+    $scope.lotId = $stateParams.id;
 
     $scope.$watch('rating.part.editions | last', function (lastEdition) {
       $scope.currentEdition = lastEdition;

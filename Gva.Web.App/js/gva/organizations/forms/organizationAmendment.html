@@ -9,7 +9,7 @@
   <div class="row">
     <div class="form-group col-sm-9 col-md-7">
       <label class="control-label" l10n-text="organizations.amendmentDirective.applications"></label>
-      <gva-applications ng-model="model.applications" set-part="'organization'" ng-readonly="form.$readonly"></gva-applications>
+      <gva-applications ng-model="model.applications" set-part="'organization'" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
     </div>
   </div>
   <div ng-if="$parent.approval.part.approvalType.code == '147'">

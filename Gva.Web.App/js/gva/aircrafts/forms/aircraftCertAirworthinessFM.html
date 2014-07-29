@@ -13,7 +13,7 @@
   <div class="row" ng-hide="hideApplications">
     <div class="form-group col-sm-10 col-md-4">
       <label class="control-label" l10n-text="common.scannedDocumentlDirective.applications"></label>
-      <gva-applications ng-model="model.applications" set-part="'aircraft'" ng-readonly="form.$readonly"></gva-applications>
+      <gva-applications ng-model="model.applications" set-part="'aircraft'" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
     </div>
   </div>
 </ng-form>

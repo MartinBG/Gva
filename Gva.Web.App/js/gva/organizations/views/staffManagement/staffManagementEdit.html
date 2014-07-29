@@ -16,7 +16,9 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-organization-staff-management name="organizationStaffManagementForm" ng-model="organizationStaffManagement"></gva-organization-staff-management>
+      <gva-organization-staff-management name="organizationStaffManagementForm" ng-model="organizationStaffManagement"
+        sc-form-params="{ lotId: lotId }">
+      </gva-organization-staff-management>
     </div>
   </div>
 </ng-form>
