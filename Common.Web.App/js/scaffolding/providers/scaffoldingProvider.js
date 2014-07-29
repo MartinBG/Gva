@@ -14,15 +14,17 @@
           templateUrl: options.templateUrl,
           link: {
             pre: function (scope, element, attrs) {
-              var locals = {
-                $scope: scope,
-                $element: element,
-                $attrs: attrs,
-                formParams: $parse(attrs.scFormParams)(scope.$parent)
-              };
+              if (options.controller) {
+                var scFormParams = $parse(attrs.scFormParams)(scope.$parent);
+                var locals = {
+                  $scope: scope,
+                  $element: element,
+                  $attrs: attrs,
+                  scFormParams: scFormParams ? scFormParams : {}
+                };
 
-              $controller(options.controller, locals);
-
+                $controller(options.controller, locals);
+              }
               var eventHandlers = {};
 
               scope.$raise = function (eventName, message) {
