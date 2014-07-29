@@ -9,9 +9,9 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-document-check name="personDocumentCheckForm" ng-model="personDocumentCheck.part" sc-data-is-new="true"></gva-person-document-check>
+      <gva-person-document-check name="personDocumentCheckForm" ng-model="personDocumentCheck.part" sc-form-params="{ isNew: true }"></gva-person-document-check>
 
-      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentCheck.files" sc-data-set-part="'person'"></gva-common-scanned-document>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentCheck.files" sc-form-params="{ setPart: 'person' }"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

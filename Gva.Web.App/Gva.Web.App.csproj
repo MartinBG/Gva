@@ -382,6 +382,7 @@
     <Content Include="js\gva\common\forms\commonDisparity.html" />
     <Content Include="js\gva\common\forms\commonDisparityCtrl.js" />
     <Content Include="js\gva\common\forms\commonDocumentApplication.html" />
+    <Content Include="js\gva\common\forms\commonDocumentApplicationCtrl.js" />
     <Content Include="js\gva\common\forms\commonInspection.html" />
     <Content Include="js\gva\common\forms\commonInspectionCtrl.js" />
     <Content Include="js\gva\common\forms\commonScannedDocument.html" />
@@ -619,6 +620,7 @@
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
+    <Content Include="js\gva\persons\forms\personDocumentMedicalCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentOtherCtrl.js" />
     <Content Include="js\gva\persons\forms\inspectorData.html" />
     <Content Include="js\gva\persons\forms\inspectorDataCtrl.js" />
@@ -640,11 +642,13 @@
     <Content Include="js\gva\persons\forms\personExam.html" />
     <Content Include="js\gva\persons\forms\personExamCtrl.js" />
     <Content Include="js\gva\persons\forms\personFlyingExperience.html" />
+    <Content Include="js\gva\persons\forms\personFlyingExperienceCtrl.js" />
     <Content Include="js\gva\persons\forms\personLicence.html" />
     <Content Include="js\gva\persons\forms\personLicenceCtrl.js" />
     <Content Include="js\gva\persons\forms\personLicenceEdition.html" />
     <Content Include="js\gva\persons\forms\personLicenceEditionCtrl.js" />
     <Content Include="js\gva\persons\forms\personRating.html" />
+    <Content Include="js\gva\persons\forms\personRatingCtrl.js" />
     <Content Include="js\gva\persons\forms\personRatingEdition.html" />
     <Content Include="js\gva\persons\forms\personStatus.html" />
     <Content Include="js\gva\common\modals\publishers\choosePublisherModal.html" />

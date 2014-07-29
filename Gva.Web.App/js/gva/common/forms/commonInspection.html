@@ -52,7 +52,7 @@
   </sc-datatable>
 
   <h5 class="table-header" l10n-text="common.auditDetailDirective.title"></h5>
-  <gva-common-audit-detail name="auditDetailsForm" ng-model="model.part" sc-data-set-part="setPart"></gva-common-audit-detail>
+  <gva-common-audit-detail name="auditDetailsForm" ng-model="model.part" sc-form-params="{ setPart: setPart }"></gva-common-audit-detail>
 
   <h5 class="table-header" l10n-text="common.inspectionDirective.disparitiesTitle"></h5>
   <gva-common-disparity name="disparitiesForm" ng-model="model.part"></gva-common-disparity>

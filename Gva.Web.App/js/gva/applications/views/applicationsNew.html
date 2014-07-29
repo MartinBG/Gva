@@ -12,7 +12,7 @@
 
     <div class="well-sm panel-body">
       <gva-common-select-person ng-if="filter === 'Person'" name="personForm"
-          ng-model="application" sc-data-new-class="'col-sm-10'"></gva-common-select-person>
+          ng-model="application" sc-form-params="{ newClass: 'col-sm-10' }"></gva-common-select-person>
 
       <gva-application-select-organization ng-if="filter === 'Organization'" name="organizationForm"
           ng-model="application"></gva-application-select-organization>

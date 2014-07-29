@@ -14,7 +14,7 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-data name="personDataForm" ng-model="personInfo.personData.part" sc-data-is-new="false"></gva-person-data>
+      <gva-person-data name="personDataForm" ng-model="personInfo.personData.part" sc-form-params="{ isNew: false }"></gva-person-data>
 
       <div ng-if="showInspData()" style="margin-top:20px;">
         <h5 class="form-header" l10n-text="persons.editPersonInfo.inspDataTitle"></h5>

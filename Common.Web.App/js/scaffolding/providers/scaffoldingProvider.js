@@ -4,7 +4,7 @@
 
   function ScaffoldingProvider($compileProvider) {
     this.form = function (options) {
-      $compileProvider.directive(options.name, function ($parse) {
+      $compileProvider.directive(options.name, function ($parse, $controller) {
         return {
           restrict: 'E',
           replace: true,
@@ -12,9 +12,19 @@
             model: '=ngModel'
           },
           templateUrl: options.templateUrl,
-          controller: options.controller,
           link: {
             pre: function (scope, element, attrs) {
+              if (options.controller) {
+                var scFormParams = $parse(attrs.scFormParams)(scope.$parent);
+                var locals = {
+                  $scope: scope,
+                  $element: element,
+                  $attrs: attrs,
+                  scFormParams: scFormParams ? scFormParams : {}
+                };
+
+                $controller(options.controller, locals);
+              }
               var eventHandlers = {};
 
               scope.$raise = function (eventName, message) {

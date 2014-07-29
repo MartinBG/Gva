@@ -2,7 +2,8 @@
 (function (angular) {
   'use strict';
 
-  function CorrsDataCtrl($scope) {
+  function CorrsDataCtrl($scope, scFormParams) {
+    $scope.isNew = scFormParams.isNew;
     $scope.editCorrContact = function editCorrContact(target) {
       target.isInEdit = true;
       target.prevValues = {
@@ -68,7 +69,7 @@
 
   }
 
-  CorrsDataCtrl.$inject = ['$scope'];
+  CorrsDataCtrl.$inject = ['$scope', 'scFormParams'];
 
   angular.module('ems').controller('CorrsDataCtrl', CorrsDataCtrl);
 }(angular));

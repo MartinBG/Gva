@@ -13,7 +13,8 @@
     PersonDocumentTrainings,
     PersonDocumentChecks,
     PersonDocumentMedicals,
-    PersonLicences
+    PersonLicences,
+    scFormParams
   ) {
     $q.all([
       Persons.get({ id: $stateParams.id }).$promise,
@@ -80,11 +81,10 @@
       });
     });
 
-    $scope.$watch('isNew', function(){
-      if($scope.isNew && $scope.model.documentDateValidFrom === undefined){
-        $scope.model.documentDateValidFrom = moment(new Date());
-      }
-    });
+    $scope.isNew = scFormParams.isNew;
+    if($scope.isNew && $scope.model.documentDateValidFrom === undefined){
+      $scope.model.documentDateValidFrom = moment(new Date());
+    }
     
     $scope.addRating = function () {
       var modalInstance = namedModal.open('newRating');
@@ -224,7 +224,8 @@
     'PersonDocumentTrainings',
     'PersonDocumentChecks',
     'PersonDocumentMedicals',
-    'PersonLicences'
+    'PersonLicences',
+    'scFormParams'
   ];
 
   angular.module('gva').controller('PersonLicenceEditionCtrl', PersonLicenceEditionCtrl);

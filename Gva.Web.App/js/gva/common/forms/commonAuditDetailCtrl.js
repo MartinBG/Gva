@@ -1,7 +1,9 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function CommonAuditDetailCtrl($scope, Nomenclatures) {
+  function CommonAuditDetailCtrl($scope, Nomenclatures, scFormParams) {
+
+    $scope.setPart = scFormParams.setPart;
 
     $scope.addDisparity = function (detail) {
       $scope.$parent.addDisparity(detail);
@@ -34,7 +36,7 @@
 
   }
 
-  CommonAuditDetailCtrl.$inject = ['$scope', 'Nomenclatures'];
+  CommonAuditDetailCtrl.$inject = ['$scope', 'Nomenclatures', 'scFormParams'];
 
   angular.module('gva').controller('CommonAuditDetailCtrl', CommonAuditDetailCtrl);
 }(angular));
