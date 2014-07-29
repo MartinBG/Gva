@@ -24,7 +24,15 @@
     };
 
     $scope.selectDoc = function () {
-      var modalInstance = namedModal.open('chooseDoc');
+      var modalInstance = namedModal.open('chooseDoc', {}, {
+        docs: [
+          '$stateParams',
+          'Applications',
+          function ($stateParams, Applications) {
+            return Applications.notLinkedDocs($stateParams).$promise;
+          }
+        ]
+      });
 
       modalInstance.result.then(function (doc) {
         $scope.appModel.doc = doc;

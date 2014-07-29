@@ -4,11 +4,11 @@
 
   function NewAppStageModalCtrl(
     $scope,
-    $stateParams,
     $modalInstance,
     AppStages,
     stageModel,
-    ordinal
+    ordinal,
+    appId
   ) {
     $scope.form = {};
     $scope.stageModel = stageModel;
@@ -19,7 +19,7 @@
         .then(function () {
           if ($scope.form.stageForm.$valid) {
             return AppStages
-              .save({ id: $stateParams.id }, $scope.stageModel)
+              .save({ id: appId }, $scope.stageModel)
               .$promise
               .then(function () {
                 return $modalInstance.close();
@@ -36,11 +36,11 @@
 
   NewAppStageModalCtrl.$inject = [
     '$scope',
-    '$stateParams',
     '$modalInstance',
     'AppStages',
     'stageModel',
-    'ordinal'
+    'ordinal',
+    'appId'
   ];
 
   NewAppStageModalCtrl.$resolve = {

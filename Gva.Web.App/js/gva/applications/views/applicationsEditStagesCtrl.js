@@ -25,7 +25,12 @@
     $scope.newAppStage = function () {
       var nextOrdinal = Math.max(0, _.max(_.pluck($scope.appStages, 'ordinal'))) + 1;
 
-      var modalInstance = namedModal.open('newAppStage', { ordinal: nextOrdinal });
+      var modalInstance = namedModal.open(
+        'newAppStage',
+        {
+          ordinal: nextOrdinal,
+          appId: $stateParams.id
+        });
 
       modalInstance.result.then(function () {
         return $state.transitionTo($state.$current, $stateParams, { reload: true });
@@ -35,14 +40,19 @@
     };
 
     $scope.viewAppStage = function (stage) {
-      var modalInstance = namedModal.open('editAppStage', {}, {
-        stageModel: [
-          'AppStages',
-          function (AppStages) {
-            return AppStages.get({ id: $stateParams.id, ind: stage.id }).$promise;
-          }
-        ]
-      });
+      var modalInstance = namedModal.open(
+        'editAppStage',
+        {
+          appId: $stateParams.id
+        },
+        {
+          stageModel: [
+            'AppStages',
+            function (AppStages) {
+              return AppStages.get({ id: $stateParams.id, ind: stage.id }).$promise;
+            }
+          ]
+        });
 
       modalInstance.result.then(function () {
         return $state.transitionTo($state.$current, $stateParams, { reload: true });
