@@ -361,9 +361,9 @@
       templateUrl: 'js/gva/common/forms/commonDocumentApplication.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaCommonAuditor',
-      templateUrl: 'js/gva/common/forms/commonAuditor.html',
-      controller: 'CommonAuditorCtrl'
+      name: 'gvaCommonExaminer',
+      templateUrl: 'js/gva/common/forms/commonExaminer.html',
+      controller: 'CommonExaminerCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaEquipmentData',

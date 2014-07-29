@@ -64,7 +64,7 @@
     </div>
     <h5 class="form-header" l10n-text="organizations.recommendationDirective.commonData.auditorsTitle"></h5>
 
-    <gva-common-auditor ng-model="model.part.part1.examiners" name="examinersForm1"></gva-common-auditor>
+    <gva-common-examiner ng-model="model.part.part1.examiners" name="examinersForm1"></gva-common-examiner>
   </div>
   <h5 class="form-header" style="margin-top:10px;" ng-init="showAuditorsReview = false">
     <a l10n-text="organizations.recommendationDirective.auditorsReview.title" ng-click="showAuditorsReview = !showAuditorsReview" style="cursor:pointer;"></a>
@@ -81,7 +81,7 @@
     </sc-datatable>
 
     <h5 class="form-header" l10n-text="organizations.recommendationDirective.auditorsReview.auditorsTitle" style="clear:both;"></h5>
-    <gva-common-auditor ng-model="model.part.part2.examiners" name="examinersForm2"></gva-common-auditor>
+    <gva-common-examiner ng-model="model.part.part2.examiners" name="examinersForm2"></gva-common-examiner>
   </div>
 
   <h5 class="form-header" style="margin-top:10px;" ng-init="accordance = false">
@@ -131,7 +131,7 @@
     </div>
 
     <h5 class="form-header" l10n-text="organizations.recommendationDirective.accordance.auditorsTitle"></h5>
-    <gva-common-auditor ng-model="model.part.part3.examiners" name="examinersForm3"></gva-common-auditor>
+    <gva-common-examiner ng-model="model.part.part3.examiners" name="examinersForm3"></gva-common-examiner>
   </div>
 
   <h5 class="form-header" style="margin-top:10px;" ng-init="disparities = false">
@@ -179,7 +179,7 @@
     <gva-common-disparity name="recomendationDisparitiesFromDescriptionForm" ng-model="model.part.descriptionReview"></gva-common-disparity>
     <h5 class="form-header" l10n-text="organizations.recommendationDirective.disparities.auditorsTitle"></h5>
 
-    <gva-common-auditor ng-model="model.part.part4.examiners" name="examinersForm4"></gva-common-auditor>
+    <gva-common-examiner ng-model="model.part.part4.examiners" name="examinersForm4"></gva-common-examiner>
   </div>
   <h5 class="form-header" style="margin-top:10px;" ng-init="recommendations = false">
     <a l10n-text="organizations.recommendationDirective.recommendations.title" ng-click="recommendations = !recommendations" style="cursor:pointer;"></a>
@@ -187,6 +187,6 @@
 
   <div ng-show="recommendations">
     <h5 class="form-header" l10n-text="organizations.recommendationDirective.recommendations.auditorsTitle"></h5>
-    <gva-common-auditor ng-model="model.part.part5.examiners" name="examinersForm5"></gva-common-auditor>
+    <gva-common-examiner ng-model="model.part.part5.examiners" name="examinersForm5"></gva-common-examiner>
   </div>
 </ng-form>

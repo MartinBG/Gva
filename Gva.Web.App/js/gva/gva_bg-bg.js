@@ -132,7 +132,7 @@
           disparitiesTitle: 'Несъответствия',
           applications: 'Заявления'
         },
-        auditorDirective: {
+        examinerDirective: {
           addExaminer: 'Добави одитори',
           examiner: 'Одитор',
           sortOrder: 'Пореден №',

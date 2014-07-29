@@ -1,7 +1,7 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function CommonAuditorCtrl($scope, namedModal) {
+  function CommonExaminerCtrl($scope, namedModal) {
     $scope.addExaminer = function () {
       var modalInstance = namedModal.open('chooseExaminers', {
         includedExaminers: $scope.model
@@ -21,8 +21,8 @@
     };
   }
 
-  CommonAuditorCtrl.$inject = ['$scope', 'namedModal'];
+  CommonExaminerCtrl.$inject = ['$scope', 'namedModal'];
 
   angular.module('gva')
-    .controller('CommonAuditorCtrl', CommonAuditorCtrl);
+    .controller('CommonExaminerCtrl', CommonExaminerCtrl);
 }(angular));

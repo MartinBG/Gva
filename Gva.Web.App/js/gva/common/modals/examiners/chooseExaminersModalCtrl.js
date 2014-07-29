@@ -26,10 +26,11 @@
       };
 
       $scope.selectExaminer = function (event, examiner) {
-        var index = $scope.selectedExaminers.indexOf(examiner);
+        var index;
         if ($(event.target).is(':checked')) {
           $scope.selectedExaminers.push(examiner);
         } else {
+          index = $scope.selectedExaminers.indexOf(examiner);
           $scope.selectedExaminers.splice.apply($scope.selectedExaminers, [index, 1]);
         }
       };

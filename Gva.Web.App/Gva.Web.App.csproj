@@ -469,8 +469,8 @@
     <Content Include="js\gva\organizations\forms\organizationEquipment.html" />
     <Content Include="js\gva\organizations\forms\organizationEquipmentCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationRecommendation.html" />
-    <Content Include="js\gva\common\forms\commonAuditor.html" />
-    <Content Include="js\gva\common\forms\commonAuditorCtrl.js" />
+    <Content Include="js\gva\common\forms\commonExaminer.html" />
+    <Content Include="js\gva\common\forms\commonExaminerCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationRecommendationCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationRegister.html" />
     <Content Include="js\gva\organizations\forms\organizationStaffExaminer.html" />
