@@ -315,11 +315,6 @@
       controller: 'OrganizationRecommendationCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaOrganizationRecommendationAuditor',
-      templateUrl: 'js/gva/organizations/forms/organizationRecommendationAuditor.html',
-      controller: 'OrganizationRecommendationAuditorCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaOrganizationRegister',
       templateUrl: 'js/gva/organizations/forms/organizationRegister.html'
     });
@@ -366,6 +361,11 @@
       templateUrl: 'js/gva/common/forms/commonDocumentApplication.html'
     });
     scaffoldingProvider.form({
+      name: 'gvaCommonAuditor',
+      templateUrl: 'js/gva/common/forms/commonAuditor.html',
+      controller: 'CommonAuditorCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaEquipmentData',
       templateUrl: 'js/gva/equipments/forms/equipmentData.html'
     });
@@ -391,7 +391,8 @@
     namedModalProvider
      .modal('choosePublisher', 'js/gva/common/modals/publishers/choosePublisherModal.html', 'ChoosePublisherModalCtrl')
      .modal('choosePerson'   , 'js/gva/common/modals/persons/choosePersonModal.html'      , 'ChoosePersonModalCtrl'   )
-     .modal('newPerson'      , 'js/gva/common/modals/persons/newPersonModal.html'         , 'NewPersonModalCtrl'      );
+     .modal('newPerson'      , 'js/gva/common/modals/persons/newPersonModal.html'         , 'NewPersonModalCtrl'      )
+     .modal('chooseExaminers', 'js/gva/common/modals/examiners/chooseExaminersModal.html' , 'ChooseExaminersModalCtrl');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])

@@ -44,7 +44,7 @@
         if (application) {
           return {
             part: {
-              examiners: [{ sortOrder: 1 }],
+              examiners: [],
               auditDetails: [],
               disparities: []
             },
@@ -54,7 +54,7 @@
         else {
           return {
             part: {
-              examiners: [{ sortOrder: 1 }],
+              examiners: [],
               auditDetails: [],
               disparities: []
             },

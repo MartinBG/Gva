@@ -469,8 +469,8 @@
     <Content Include="js\gva\organizations\forms\organizationEquipment.html" />
     <Content Include="js\gva\organizations\forms\organizationEquipmentCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationRecommendation.html" />
-    <Content Include="js\gva\organizations\forms\organizationRecommendationAuditor.html" />
-    <Content Include="js\gva\organizations\forms\organizationRecommendationAuditorCtrl.js" />
+    <Content Include="js\gva\common\forms\commonAuditor.html" />
+    <Content Include="js\gva\common\forms\commonAuditorCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationRecommendationCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationRegister.html" />
     <Content Include="js\gva\organizations\forms\organizationStaffExaminer.html" />
@@ -480,6 +480,8 @@
     <Content Include="js\gva\organizations\modals\documents\chooseDocumentsModalCtrl.js" />
     <Content Include="js\gva\organizations\modals\employments\chooseEmploymentModal.html" />
     <Content Include="js\gva\organizations\modals\employments\chooseEmploymentModalCtrl.js" />
+    <Content Include="js\gva\common\modals\examiners\chooseExaminersModal.html" />
+    <Content Include="js\gva\common\modals\examiners\chooseExaminersModalCtrl.js" />
     <Content Include="js\gva\organizations\modals\inspections\chooseInspectionsModal.html" />
     <Content Include="js\gva\organizations\modals\inspections\chooseInspectionsModalCtrl.js" />
     <Content Include="js\gva\organizations\modals\limitations\chooseLimitationModal.html" />
