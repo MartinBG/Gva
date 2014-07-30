@@ -2,12 +2,12 @@
 (function (angular) {
   'use strict';
 
-  function CommonDocumentApplicationsCtrl($scope, scFormParams) {
+  function CommonDocumentApplicationCtrl($scope, scFormParams) {
     $scope.lotId = scFormParams.lotId;
   }
 
-  CommonDocumentApplicationsCtrl.$inject = ['$scope', 'scFormParams'];
+  CommonDocumentApplicationCtrl.$inject = ['$scope', 'scFormParams'];
 
   angular.module('gva')
-    .controller('CommonDocumentApplicationsCtrl', CommonDocumentApplicationsCtrl);
+    .controller('CommonDocumentApplicationCtrl', CommonDocumentApplicationCtrl);
 }(angular));
