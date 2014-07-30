@@ -70,7 +70,7 @@ namespace Gva.MigrationTool.Sets
                     var lot = lotRepository.CreateLot("Organization", context);
 
                     var organizationData = this.getOrganizationData(organizationId, noms);
-                    caseTypeRepository.AddCaseTypes(lot, organizationData.GetItems<JObject>("caseTypes"));
+                    caseTypeRepository.AddCaseTypes(lot, organizationData.GetItems<JObject>("caseTypes").Select(ct => ct.Get<int>("nomValueId")));
 
                     lot.CreatePart("organizationData", organizationData, context);
                     lot.Commit(context, lotEventDispatcher);

@@ -36,13 +36,7 @@
   NewEquipmentModalCtrl.$resolve = {
     equipment: function () {
       return {
-        equipmentData: {
-          caseTypes: [
-            {
-              nomValueId: 4 // TO DO Remove hardcoded caseTypes
-            }
-          ]
-        }
+        equipmentData: {}
       };
     }
   };

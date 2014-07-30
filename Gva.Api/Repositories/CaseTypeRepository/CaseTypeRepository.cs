@@ -18,7 +18,7 @@ namespace Gva.Api.Repositories.CaseTypeRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddCaseTypes(Lot lot, IEnumerable<JObject> caseTypes)
+        public void AddCaseTypes(Lot lot, IEnumerable<int> caseTypeIds)
         {
             var lotCases = this.unitOfWork.DbContext.Set<GvaLotCase>()
                 .Where(lc => lc.LotId == lot.LotId)
@@ -29,12 +29,12 @@ namespace Gva.Api.Repositories.CaseTypeRepository
                 this.unitOfWork.DbContext.Set<GvaLotCase>().Remove(lotCase);
             }
 
-            foreach (var caseType in caseTypes)
+            foreach (var caseType in caseTypeIds)
             {
                 GvaLotCase lotCase = new GvaLotCase
                 {
                     LotId = lot.LotId,
-                    GvaCaseTypeId = caseType.Get<int>("nomValueId")
+                    GvaCaseTypeId = caseType
                 };
 
                 this.unitOfWork.DbContext.Set<GvaLotCase>().Add(lotCase);

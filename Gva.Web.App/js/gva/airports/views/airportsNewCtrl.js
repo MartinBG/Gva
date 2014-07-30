@@ -28,11 +28,6 @@
     airport: function () {
       return {
         airportData: {
-          caseTypes: [
-            {
-              nomValueId: 4
-            }
-          ],
           frequencies: [],
           radioNavigationAids: []
         }

@@ -77,7 +77,8 @@ namespace Gva.Api.Controllers
                 var newLot = this.lotRepository.CreateLot("Airport", userContext);
 
                 newLot.CreatePart("airportData", airport.Get<JObject>("airportData"), userContext);
-                this.caseTypeRepository.AddCaseTypes(newLot, airport.GetItems<JObject>("airportData.caseTypes"));
+                int airportCaseTypeId = this.caseTypeRepository.GetCaseTypesForSet("Airport").Single().GvaCaseTypeId;
+                this.caseTypeRepository.AddCaseTypes(newLot, new int[] { airportCaseTypeId });
 
                 newLot.Commit(userContext, lotEventDispatcher);
 
@@ -191,9 +192,6 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^airportData$)}")]
         public IHttpActionResult PostAirportData(int lotId, string path, JObject content)
         {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            //this.caseTypeRepository.AddCaseTypes(lot, (content as dynamic).part.caseTypes);
-
             return base.PostPart(lotId, path, content);
         }
 

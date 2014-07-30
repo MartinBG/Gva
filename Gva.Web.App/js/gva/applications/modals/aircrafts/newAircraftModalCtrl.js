@@ -36,13 +36,7 @@
   NewAircraftModalCtrl.$resolve = {
     aircraft: function () {
       return {
-        aircraftData: {
-          caseTypes: [
-            {
-              nomValueId: 3 // TO DO Remove hardcoded caseTypes
-            }
-          ]
-        }
+        aircraftData: {}
       };
     }
   };

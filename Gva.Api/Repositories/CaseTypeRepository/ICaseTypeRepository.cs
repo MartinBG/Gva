@@ -7,7 +7,7 @@ namespace Gva.Api.Repositories.CaseTypeRepository
 {
     public interface ICaseTypeRepository
     {
-        void AddCaseTypes(Lot lot, IEnumerable<JObject> caseTypes);
+        void AddCaseTypes(Lot lot, IEnumerable<int> caseTypeIds);
 
         GvaCaseType GetCaseType(int caseTypeId);
 

@@ -43,13 +43,7 @@
   AircraftsNewCtrl.$resolve = {
     aircraft: function () {
       return {
-        aircraftData: {
-          caseTypes: [
-            {
-              nomValueId: 3
-            }
-          ]
-        }
+        aircraftData: {}
       };
     }
   };

@@ -113,7 +113,7 @@ namespace Gva.Api.Controllers
                 var newLot = this.lotRepository.CreateLot("Organization", userContext);
 
                 newLot.CreatePart("organizationData", organization.Get<JObject>("organizationData"), userContext);
-                this.caseTypeRepository.AddCaseTypes(newLot, organization.GetItems<JObject>("organizationData.caseTypes"));
+                this.caseTypeRepository.AddCaseTypes(newLot, organization.GetItems<JObject>("organizationData.caseTypes").Select(ct => ct.Get<int>("nomValueId")));
 
                 newLot.Commit(userContext, lotEventDispatcher);
 
@@ -275,7 +275,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult PostOrganizationData(int lotId, string path, JObject content)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            this.caseTypeRepository.AddCaseTypes(lot, content.GetItems<JObject>("part.caseTypes"));
+            this.caseTypeRepository.AddCaseTypes(lot, content.GetItems<JObject>("part.caseTypes").Select(ct => ct.Get<int>("nomValueId")));
 
             return base.PostPart(lotId, path, content);
         }

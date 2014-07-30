@@ -12,6 +12,7 @@ using Common.Tests;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
@@ -26,14 +27,14 @@ namespace Gva.MigrationTool.Sets
 {
     public class Aircraft
     {
-        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IOrganizationRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
+        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IOrganizationRepository, ICaseTypeRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
         private OracleConnection oracleConn;
         private SqlConnection sqlConn;
 
         public Aircraft(
             OracleConnection oracleConn,
             SqlConnection sqlConn,
-            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IOrganizationRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
+            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IUserRepository, IFileRepository, IApplicationRepository, IPersonRepository, IOrganizationRepository, ICaseTypeRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
             this.oracleConn = oracleConn;
@@ -56,8 +57,9 @@ namespace Gva.MigrationTool.Sets
                 var applicationRepository = dependencies.Value.Item5;
                 var personRepository = dependencies.Value.Item6;
                 var organizationRepository = dependencies.Value.Item7;
-                var lotEventDispatcher = dependencies.Value.Item8;
-                var context = dependencies.Value.Item9;
+                var caseTypeRepository = dependencies.Value.Item8;
+                var lotEventDispatcher = dependencies.Value.Item9;
+                var context = dependencies.Value.Item10;
 
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
@@ -66,6 +68,8 @@ namespace Gva.MigrationTool.Sets
                     var lot = lotRepository.CreateLot("Aircraft", context);
                     var aircraftData = this.getAircraftData(aircraftApexId, noms);
                     lot.CreatePart("aircraftDataApex", aircraftData, context);
+                    int aircraftCaseTypeId = caseTypeRepository.GetCaseTypesForSet("Aircraft").Single().GvaCaseTypeId;
+                    caseTypeRepository.AddCaseTypes(lot, new int[] { aircraftCaseTypeId });
                     lot.Commit(context, lotEventDispatcher);
 
                     unitOfWork.Save();
@@ -194,8 +198,8 @@ namespace Gva.MigrationTool.Sets
                     var applicationRepository = dependencies.Value.Item5;
                     var personRepository = dependencies.Value.Item6;
                     var organizationRepository = dependencies.Value.Item7;
-                    var lotEventDispatcher = dependencies.Value.Item8;
-                    var context = dependencies.Value.Item9;
+                    var lotEventDispatcher = dependencies.Value.Item9;
+                    var context = dependencies.Value.Item10;
 
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
@@ -360,8 +364,8 @@ namespace Gva.MigrationTool.Sets
                     var applicationRepository = dependencies.Value.Item5;
                     var personRepository = dependencies.Value.Item6;
                     var organizationRepository = dependencies.Value.Item7;
-                    var lotEventDispatcher = dependencies.Value.Item8;
-                    var context = dependencies.Value.Item9;
+                    var lotEventDispatcher = dependencies.Value.Item9;
+                    var context = dependencies.Value.Item10;
 
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 

@@ -102,7 +102,7 @@ namespace Gva.Api.Controllers
                 var newLot = this.lotRepository.CreateLot("Person", userContext);
 
                 newLot.CreatePart("personData", person.Get<JObject>("personData"), userContext);
-                this.caseTypeRepository.AddCaseTypes(newLot, person.GetItems<JObject>("personData.caseTypes"));
+                this.caseTypeRepository.AddCaseTypes(newLot, person.GetItems<JObject>("personData.caseTypes").Select(ct => ct.Get<int>("nomValueId")));
 
                 var personDocumentId = person.Get<JObject>("personDocumentId");
                 if (personDocumentId != null)
@@ -328,7 +328,7 @@ namespace Gva.Api.Controllers
                 UserContext userContext = this.Request.GetUserContext();
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                this.caseTypeRepository.AddCaseTypes(lot, content.GetItems<JObject>("personData.part.caseTypes"));
+                this.caseTypeRepository.AddCaseTypes(lot, content.GetItems<JObject>("personData.part.caseTypes").Select(ct => ct.Get<int>("nomValueId")));
                 lot.UpdatePart("personData", content.Get<JObject>("personData.part"), userContext);
                 this.unitOfWork.Save();
 

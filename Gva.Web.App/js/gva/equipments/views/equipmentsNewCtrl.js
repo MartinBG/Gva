@@ -27,13 +27,7 @@
   EquipmentsNewCtrl.$resolve = {
     equipment: function () {
       return {
-        equipmentData: {
-          caseTypes: [
-            {
-              nomValueId: 4
-            }
-          ]
-        }
+        equipmentData: {}
       };
     }
   };

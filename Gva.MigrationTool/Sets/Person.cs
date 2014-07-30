@@ -80,7 +80,7 @@ namespace Gva.MigrationTool.Sets
 
                     var lot = lotRepository.CreateLot("Person", context);
 
-                    caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes"));
+                    caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes").Select(ct => ct.Get<int>("nomValueId")));
 
                     lot.CreatePart("personData", personData, context);
                     if (inspectorData != null)
