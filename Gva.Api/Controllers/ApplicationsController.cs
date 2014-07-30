@@ -21,6 +21,7 @@ using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.OrganizationRepository;
@@ -29,14 +30,6 @@ using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Gva.Api.Repositories.OrganizationRepository;
-using System.Text.RegularExpressions;
-using Gva.Api.Repositories.AircraftRepository;
-using Gva.Api.Repositories.EquipmentRepository;
-using Gva.Api.Repositories.AirportRepository;
-using Gva.Api.Repositories.ApplicationStageRepository;
-using System.IO;
-using Common.Api.Models;
 
 namespace Gva.Api.Controllers
 {
