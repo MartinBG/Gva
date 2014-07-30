@@ -2,7 +2,7 @@
   "name": "gva",
   "version": "1.0.0",
   "devDependencies": {
-    "gulp": "^3.6.2",
+    "gulp": "^3.8.6",
     "gulp-util": "^2.2.14",
     "gulp-clean": "^0.2.4",
     "gulp-jshint": "^1.5.5",
