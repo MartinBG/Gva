@@ -90,9 +90,6 @@
     <Content Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".jshintrc" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="word_templates\doklad_template.docx" />
     <None Include="word_templates\stanovishte_template.docx" />
   </ItemGroup>

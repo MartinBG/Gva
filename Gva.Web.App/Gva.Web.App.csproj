@@ -1182,9 +1182,6 @@
     <Content Include="test\scaffolding\testbeds\states.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".jshintrc" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="bower.json" />
   </ItemGroup>
   <ItemGroup>

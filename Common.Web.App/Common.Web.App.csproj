@@ -225,9 +225,6 @@
     <Content Include="js\scaffolding\scaffolding_bg-bg.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".jshintrc" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup />
