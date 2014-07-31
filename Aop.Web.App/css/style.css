@@ -462,6 +462,10 @@ ul.checkbox-list li {
   outline:2px solid red;
 }
 
+.checklist-compared-value-text {
+  border: 2px solid red;
+}
+
 .case-font-weight {
   font-weight: bold;
 }
