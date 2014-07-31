@@ -1,6 +1,5 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.setPart" class="col-sm-3 col-md-2" l10n-text="common.inspectionDirective.setPart"></sc-field>
     <div class="form-group col-sm-3 col-md-2" ng-if="setPart === 'organization'">
       <label class="control-label" l10n-text="common.inspectionDirective.auditCaseType"></label>
       <input type="hidden" ng-model="model.part.auditCaseTypes" class="form-control input-sm select2input" ng-readonly="form.$readonly" ui-select2="caseTypesOptions">

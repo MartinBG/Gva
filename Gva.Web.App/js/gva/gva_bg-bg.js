@@ -103,7 +103,6 @@
         inspectionDirective: {
           organizationTitle: 'Одит',
           auditCaseType: 'Тип на одита',
-          setPart: 'Одит за',
           title: 'Инспекция',
           documentNumber: '№ на документ',
           auditState: 'Състояние',
@@ -284,14 +283,14 @@
         newInspection: {
           save: 'Запис',
           cancel: 'Отказ',
-          title: 'Нова инспекция'
+          title: 'Нова инспекция за летище'
         },
         editInspection: {
           save: 'Запис',
           cancel: 'Отказ',
           edit: 'Редакция',
           deleteInspection: 'Изтриване',
-          title: 'Преглед на инспекция'
+          title: 'Преглед на инспекция за летище'
         },
         airportOwnerDirective: {
           title: 'Свързано лице',
@@ -560,14 +559,14 @@
         newInspection: {
           save: 'Запис',
           cancel: 'Отказ',
-          title: 'Нова инспекция'
+          title: 'Нова инспекция за съоръжения'
         },
         editInspection: {
           save: 'Запис',
           cancel: 'Отказ',
           edit: 'Редакция',
           deleteInspection: 'Изтриване',
-          title: 'Преглед на инспекция'
+          title: 'Преглед на инспекция за съоръжения'
         },
         equipmentOwnerDirective: {
           title: 'Свързано лице',
@@ -1579,12 +1578,12 @@
           application: 'Преписка (Заявление)'
         },
         newInspection: {
-          title: 'Нова инспекция',
+          title: 'Нова инспекция за въздухоплавателни средства',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editInspection: {
-          title: 'Преглед на инспекция',
+          title: 'Преглед на инспекция за въздухоплавателни средства',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
@@ -3298,12 +3297,12 @@
           application: 'Преписка (Заявление)'
         },
         newInspection: {
-          title: 'Нов одит',
+          title: 'Нов одит за организация',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editInspection: {
-          title: 'Преглед на одит',
+          title: 'Преглед на одит за организация',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',

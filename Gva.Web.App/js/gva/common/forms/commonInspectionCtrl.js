@@ -35,16 +35,6 @@
 
     $scope.setPart = scFormParams.setPart;
 
-    var aliases = {
-      organization: 'Организация',
-      aircraft: 'ВС',
-      aiport: 'Летище',
-      equipment: 'Съоръжение'
-    };
-
-    $scope.model.part.setPart = aliases[$scope.setPart];
-
-
     $scope.changedSortOrder = function (newValue, oldValue) {
       if (_.where($scope.model.part.disparities, { sortOrder: newValue })[0]) {
         var subject = _.where($scope.model.part.disparities, { sortOrder: newValue })[0].subject,
