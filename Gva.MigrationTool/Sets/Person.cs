@@ -1576,22 +1576,23 @@ namespace Gva.MigrationTool.Sets
 
             var statuses = oracleConn.CreateStoreCommand(
                 @"SELECT L.ID LICENCE_ID,
+                        E.PERSON_ID EXAMINER_ID,
                         LCS.ID LICENCE_CHANGE_STAT_ID,
                         LCS.CHANGE_DATE,
                         LCS.CHANGE_REASON_ID,
                         LCS.CHANGE_TO_VALID_YN,
                         LCS.NOTES,
-                        LCS.EXAMINER_ID,
                         LCS.INS_USER,
                         LCS.INS_DATE,
                         LCS.UPD_USER,
                         LCS.UPD_DATE
                     FROM CAA_DOC.LICENCE L
                     JOIN CAA_DOC.LICENCE_CHANGE_STAT LCS ON LCS.LICENCE_ID = L.ID
+                    LEFT OUTER JOIN CAA_DOC.EXAMINER E ON E.ID = LCS.EXAMINER_ID
                     WHERE {0}",
                 new DbClause("L.PERSON_ID = {0}", personId)
                 )
-                .Materialize(r => Utils.ToJObject(
+                .Materialize(r =>
                     new
                     {
                         __oldId = r.Field<decimal>("LICENCE_CHANGE_STAT_ID"),
@@ -1605,20 +1606,20 @@ namespace Gva.MigrationTool.Sets
                         valid = noms["boolean"].ByCode(r.Field<string>("CHANGE_TO_VALID_YN")),
                         notes = r.Field<string>("NOTES"),
                         inspector = getPersonByApexId((int?)r.Field<decimal?>("EXAMINER_ID"))
-                    }))
-                .GroupBy(r => r.Get<decimal>("LICENCE_ID"))
+                    })
+                .GroupBy(r => r.LICENCE_ID)
                 .ToDictionary(g => g.Key, g => 
-                    g.Select(r => Utils.Pluck(r,
-                        new string[] 
+                    g.Select(r => Utils.ToJObject(
+                        new
                         {
-                            "__oldId",
-                            "__migrTable",
-
-                            "changeDate",
-                            "status",
-                            "changeTo",
-                            "notes",
-                            "inspector"
+                            r.__oldId,
+                            r.__migrTable,
+                            
+                            r.changeDate,
+                            r.changeReason,
+                            r.valid,
+                            r.notes,
+                            r.inspector
                         })).ToArray());
 
             return this.oracleConn.CreateStoreCommand(
@@ -1655,7 +1656,7 @@ namespace Gva.MigrationTool.Sets
                         fcl = noms["boolean"].ByCode(r.Field<string>("LICENCE_TYPE_CODE").Contains("FCL") ? "Y" : "N"),
                         licenceNumber = r.Field<string>("LICENCE_NO"),
                         foreignLicenceNumber = r.Field<string>("FOREIGN_LICENCE_NO"),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N").Name,
+                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
                         editions = editions[r.Field<int>("ID")],
                         statuses = statuses.ContainsKey(r.Field<int>("ID")) ? statuses[r.Field<int>("ID")] : null
                     }))

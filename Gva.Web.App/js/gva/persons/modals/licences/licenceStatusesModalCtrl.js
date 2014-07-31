@@ -22,7 +22,7 @@
             $scope.licence.part.statuses = [];
           }
           $scope.licence.part.statuses.push(statusModel);
-          $scope.licence.part.valid = statusModel.valid.name;
+          $scope.licence.part.valid = statusModel.valid;
 
           return PersonLicences
             .save({ id: personId, ind: licenceInd }, $scope.licence).$promise
