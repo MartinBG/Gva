@@ -7,7 +7,7 @@ namespace Gva.Api.Repositories.StageRepository
 {
     public interface IStageRepository
     {
-        IEnumerable<GvaStage> GetStages();
+        IEnumerable<GvaStage> GetStages(string name = null);
 
         GvaStage GetStage(int id);
     }

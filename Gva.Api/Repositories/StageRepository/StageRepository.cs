@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using Common.Data;
 using Common.Json;
+using Common.Linq;
 using Gva.Api.Models;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
@@ -18,9 +19,13 @@ namespace Gva.Api.Repositories.StageRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<GvaStage> GetStages()
+        public IEnumerable<GvaStage> GetStages(string name = null)
         {
-            return this.unitOfWork.DbContext.Set<GvaStage>().ToList();
+            var predicate =
+                PredicateBuilder.True<GvaStage>()
+                .AndStringContains(s => s.Name, name);
+
+            return this.unitOfWork.DbContext.Set<GvaStage>().Where(predicate);
         }
 
         public GvaStage GetStage(int id)

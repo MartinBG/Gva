@@ -75,7 +75,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("organizationsAudits")]
-        public IHttpActionResult GetOrganizationsAudits(int lotId)
+        public IHttpActionResult GetOrganizationsAudits(int lotId, string term = null)
         {
             var audits = this.lotRepository.GetLotIndex(lotId).Index.GetParts("organizationInspections")
                 .Select(i => new
@@ -87,6 +87,11 @@ namespace Gva.Api.Controllers
                         i.Content.Get<string>("auditPart.name"),
                         i.Content.Get<string>("auditReason.name"))
                 });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                return Ok(audits.Where(a => a.name.Contains(term)));
+            }
 
             return Ok(audits);
         }
@@ -490,9 +495,9 @@ namespace Gva.Api.Controllers
         }
 
         [Route("documentParts")]
-        public IHttpActionResult GetDocumentParts(string set = null, int? parentValueId = null)
+        public IHttpActionResult GetDocumentParts(string term = null, string set = null, int? parentValueId = null)
         {
-            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("documentParts");
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("documentParts", term);
 
             if (!string.IsNullOrEmpty(set))
             {
@@ -508,9 +513,9 @@ namespace Gva.Api.Controllers
         }
 
         [Route("limitations66")]
-        public IHttpActionResult GetLimitations66(string general = null)
+        public IHttpActionResult GetLimitations66(string term = null, string general = null)
         {
-            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("limitations66");
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("limitations66", term);
             if (!string.IsNullOrEmpty(general))
             {
                 nomValues = nomValues.Where(l => l.TextContent.Get<string>("general") == general);
@@ -520,19 +525,19 @@ namespace Gva.Api.Controllers
         }
 
         [Route("licenceTypes")]
-        public IHttpActionResult GetLlcenceTypes(string staffTypeAlias = null, string fclCode = null)
+        public IHttpActionResult GetLicenceTypes(string term = null, string staffTypeAlias = null, string fclCode = null)
         {
-            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("licenceTypes");
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("licenceTypes", term);
             if (fclCode == "Y")
             {
                 nomValues = nomValues.Where(l => l.TextContent.Get<string>("licenceCode").Contains("FCL"));
-
             }
 
             if (!string.IsNullOrEmpty(staffTypeAlias))
             {
                 nomValues = nomValues.Where(l => l.TextContent.Get<string>("staffTypeAlias") == staffTypeAlias);
             }
+
             return Ok(nomValues);
         }
 
@@ -776,9 +781,9 @@ namespace Gva.Api.Controllers
         }
 
         [Route("appStages")]
-        public IHttpActionResult GetAppStages()
+        public IHttpActionResult GetAppStages(string term = null)
         {
-            var returnValue = this.stageRepository.GetStages()
+            var returnValue = this.stageRepository.GetStages(term)
                 .Select(e => new
                 {
                     nomValueId = e.GvaStageId,
