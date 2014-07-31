@@ -7,6 +7,10 @@
       'getNextLin': {
         method: 'GET',
         url: 'api/persons/nextLin'
+      },
+      'isUniqueUin': {
+        method: 'GET',
+        url: 'api/persons/isUniqueUin'
       }
     });
   }]);

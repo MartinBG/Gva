@@ -20,6 +20,11 @@ CREATE TABLE [dbo].[GvaViewPersons] (
 )
 GO
 
+CREATE UNIQUE NONCLUSTERED INDEX [UQ_IDX_GvaViewPersons_Uin]
+ON [dbo].[GvaViewPersons](Uin)
+WHERE Uin IS NOT NULL;
+GO
+
 exec spDescTable  N'GvaViewPersons', N'Физически лица.'
 exec spDescColumn N'GvaViewPersons', N'LotId'         , N'Идентификатор на партида на физическо лице.'
 exec spDescColumn N'GvaViewPersons', N'Lin'           , N'Личен идентификационен номер.'
