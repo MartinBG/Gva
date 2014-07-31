@@ -349,7 +349,6 @@
     <Content Include="js\gva\applications\modals\stages\nextDocStageModal.html" />
     <Content Include="js\gva\applications\modals\stages\nextDocStageModalCtrl.js" />
     <Content Include="js\gva\applications\resources\applications.js" />
-    <Content Include="js\gva\applications\resources\application.js" />
     <Content Include="js\gva\applications\resources\applicationStages.js" />
     <Content Include="js\gva\applications\views\applicationsEdit.html" />
     <Content Include="js\gva\applications\views\applicationsEditAddPart.html" />
