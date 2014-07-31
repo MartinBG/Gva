@@ -22,7 +22,7 @@
     $scope.persons = persons;
 
     $scope.search = function () {
-      $state.go('root.persons.search', {
+      return $state.go('root.persons.search', {
         lin: $scope.filters.lin,
         uin: $scope.filters.uin,
         names: $scope.filters.names,
