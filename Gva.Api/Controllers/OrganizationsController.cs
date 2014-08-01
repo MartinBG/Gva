@@ -193,10 +193,10 @@ namespace Gva.Api.Controllers
         }
 
         [Route("{lotId}/organizationInspections/{inspectionPartIndex}/recommendations")]
-        public IHttpActionResult GetRecommendationReports(int lotId, int inspectionPartIndex)
+        public IHttpActionResult GetInspectionRecommendations(int lotId, int inspectionPartIndex)
         {
             return Ok(new {
-                reports = this.organizationRepository.GetRecommendationReports(lotId, inspectionPartIndex) 
+                reports = this.organizationRepository.GetInspectionRecommendations(lotId, inspectionPartIndex) 
             });
         }
 

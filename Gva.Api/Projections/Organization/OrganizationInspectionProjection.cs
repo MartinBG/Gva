@@ -28,7 +28,7 @@ namespace Gva.Api.Projections.Organization
             GvaViewOrganizationInspection inspection = new GvaViewOrganizationInspection();
 
             inspection.LotId = part.Part.Lot.LotId;
-            inspection.InspectionPartIndex = part.Part.Index;
+            inspection.PartIndex = part.Part.Index;
 
             return inspection;
         }

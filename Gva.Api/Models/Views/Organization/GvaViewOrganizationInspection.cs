@@ -10,7 +10,7 @@ namespace Gva.Api.Models.Views.Organization
     {
         public int LotId { get; set; }
 
-        public int InspectionPartIndex { get; set; }
+        public int PartIndex { get; set; }
 
         public virtual GvaViewOrganization Organization { get; set; }
 
@@ -23,21 +23,21 @@ namespace Gva.Api.Models.Views.Organization
         public GvaViewOrganizationInspectionMap()
         {
             // Primary Key
-            this.HasKey(t => t.InspectionPartIndex);
+            this.HasKey(t => new { t.LotId, t.PartIndex });
 
             // Properties
-            this.Property(t => t.InspectionPartIndex)
+            this.Property(t => t.PartIndex)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 
             // Table & Column Mappings
             this.ToTable("GvaViewOrganizationInspections");
             this.Property(t => t.LotId).HasColumnName("LotId");
-            this.Property(t => t.InspectionPartIndex).HasColumnName("InspectionPartIndex");
+            this.Property(t => t.PartIndex).HasColumnName("PartIndex");
 
             this.HasRequired(t => t.Organization)
-            .WithMany(t => t.RInspections)
-            .HasForeignKey(t => t.LotId);
+                .WithMany(t => t.Inspections)
+                .HasForeignKey(t => t.LotId);
         }
     }
 }

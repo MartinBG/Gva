@@ -69,15 +69,13 @@ namespace Gva.Api.Repositories.OrganizationRepository
                 .SingleOrDefault(p => p.LotId == organizationId);
         }
 
-        public IEnumerable<GvaViewOrganizationRecommendation> GetRecommendationReports(int lotId, int inspectionPartIndex)
+        public IEnumerable<GvaViewOrganizationRecommendation> GetInspectionRecommendations(int lotId, int inspectionPartIndex)
         {
-            return this.unitOfWork.DbContext.Set<GvaViewOrganizationInspectionRecommendation>().Join(
-                this.unitOfWork.DbContext.Set<GvaViewOrganizationRecommendation>(),
-                ir => ir.RecommendationPartIndex,
-                r => r.RecommendationPartIndex,
-                (ir, r) => new {Inspections = ir, Recommendation = r})
-                .Where(p => p.Inspections.InspectionPartIndex == inspectionPartIndex)
-                .Select(p => p.Recommendation);
+            return (from r in this.unitOfWork.DbContext.Set<GvaViewOrganizationRecommendation>()
+                   join ir in this.unitOfWork.DbContext.Set<GvaViewOrganizationInspectionRecommendation>() on r.PartIndex equals ir.RecommendationPartIndex
+                   where ir.InspectionPartIndex == inspectionPartIndex
+                   select r)
+                   .ToList();
         }
     }
 }

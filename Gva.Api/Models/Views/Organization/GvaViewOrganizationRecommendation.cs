@@ -10,7 +10,7 @@ namespace Gva.Api.Models.Views.Organization
     {
         public int LotId { get; set; }
 
-        public int RecommendationPartIndex { get; set; }
+        public int PartIndex { get; set; }
 
         public string RecommendationPartName { get; set; }
 
@@ -28,10 +28,10 @@ namespace Gva.Api.Models.Views.Organization
         public GvaViewOrganizationRecommendationMap()
         {
             // Primary Key
-            this.HasKey(t => t.RecommendationPartIndex);
+            this.HasKey(t => new { t.LotId, t.PartIndex });
 
             // Properties
-            this.Property(t => t.RecommendationPartIndex)
+            this.Property(t => t.PartIndex)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.RecommendationPartName)
@@ -42,7 +42,7 @@ namespace Gva.Api.Models.Views.Organization
             // Table & Column Mappings
             this.ToTable("GvaViewOrganizationRecommendations");
             this.Property(t => t.LotId).HasColumnName("LotId");
-            this.Property(t => t.RecommendationPartIndex).HasColumnName("RecommendationPartIndex");
+            this.Property(t => t.PartIndex).HasColumnName("PartIndex");
             this.Property(t => t.RecommendationPartName).HasColumnName("RecommendationPartName");
             this.Property(t => t.FormText).HasColumnName("FormText");
             this.Property(t => t.FormDate).HasColumnName("FormDate");

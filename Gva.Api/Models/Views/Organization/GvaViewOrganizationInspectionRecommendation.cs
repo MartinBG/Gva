@@ -24,7 +24,7 @@ namespace Gva.Api.Models.Views.Organization
         public GvaViewOrganizationInspectionRecommendationMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.InspectionPartIndex, t.RecommendationPartIndex });
+            this.HasKey(t => new { t.LotId, t.InspectionPartIndex, t.RecommendationPartIndex });
 
             // Table & Column Mappings
             this.ToTable("GvaViewOrganizationInspectionsRecommendations");
@@ -34,11 +34,11 @@ namespace Gva.Api.Models.Views.Organization
 
             this.HasRequired(t => t.Recommendation)
                 .WithMany(t => t.InspectionsRecommendations)
-                .HasForeignKey(t => t.RecommendationPartIndex);
+                .HasForeignKey(t => new { t.LotId, t.RecommendationPartIndex });
 
             this.HasRequired(t => t.Inspection)
                 .WithMany(t => t.InspectionsRecommendations)
-                .HasForeignKey(t => t.InspectionPartIndex);
+                .HasForeignKey(t => new { t.LotId, t.InspectionPartIndex });
         }
     }
 }

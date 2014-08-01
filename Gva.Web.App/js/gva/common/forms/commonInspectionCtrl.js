@@ -72,7 +72,7 @@
     $scope.viewRecommendation = function (recommendation) {
       return $state.go('root.organizations.view.recommendations.edit', {
         id: $scope.lotId,
-        ind: recommendation.recommendationPartIndex
+        ind: recommendation.partIndex
       });
     };
   }

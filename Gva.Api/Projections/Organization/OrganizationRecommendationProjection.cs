@@ -28,7 +28,7 @@ namespace Gva.Api.Projections.Organization
             GvaViewOrganizationRecommendation recommendation = new GvaViewOrganizationRecommendation();
 
             recommendation.LotId = part.Part.Lot.LotId;
-            recommendation.RecommendationPartIndex = part.Part.Index;
+            recommendation.PartIndex = part.Part.Index;
             recommendation.RecommendationPartName = part.Content.Get<string>("recommendationPart.name");
             recommendation.FormText = part.Content.Get<string>("formText");
             recommendation.FormDate = part.Content.Get<DateTime?>("formDate");
