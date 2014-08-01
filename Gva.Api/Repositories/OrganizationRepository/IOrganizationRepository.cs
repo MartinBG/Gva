@@ -18,5 +18,7 @@ namespace Gva.Api.Repositories.OrganizationRepository
             int? limit = null);
 
         GvaViewOrganization GetOrganization(int organizationId);
+
+        IEnumerable<GvaViewOrganizationRecommendation> GetRecommendationReports(int lotId, int inspectionPartIndex);
     }
 }

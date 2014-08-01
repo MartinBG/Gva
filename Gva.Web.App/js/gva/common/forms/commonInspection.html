@@ -41,7 +41,7 @@
 
   <h5 class="table-header" l10n-text="common.inspectionDirective.recommendationReports" ng-if="setPart === 'organization'"></h5>
 
-  <sc-datatable items="model.part.recommendationReports" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false" ng-if="setPart === 'organization'">
+  <sc-datatable items="recommendationReports" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false" ng-if="setPart === 'organization'">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button btn-click="viewRecommendation(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-disabled="form.$readonly"></sc-button>
     </sc-column>

@@ -5,15 +5,25 @@
   function CommonInspectionCtrl(
     $scope,
     $state,
+    Organizations,
     scFormParams
   ) {
-    $scope.watchList = [];
+    $scope.setPart = scFormParams.setPart;
     $scope.lotId = scFormParams.lotId;
+
+    $scope.watchList = [];
     $scope.model.part.examiners = $scope.model.part.examiners || [];
     $scope.model.part.auditDetails = $scope.model.part.auditDetails || [];
     $scope.model.part.disparities = $scope.model.part.disparities || [];
 
-    $scope.setPart = scFormParams.setPart;
+    if($scope.setPart === 'organization' && $scope.model.partIndex) {
+      Organizations.getRecommendations({
+        id: $scope.lotId,
+        ind: $scope.model.partIndex
+      }).$promise.then(function (result) {
+        $scope.recommendationReports = result.reports;
+      });
+    }
 
     $scope.changedSortOrder = function (newValue, oldValue) {
       if (_.where($scope.model.part.disparities, { sortOrder: newValue })[0]) {
@@ -61,8 +71,8 @@
 
     $scope.viewRecommendation = function (recommendation) {
       return $state.go('root.organizations.view.recommendations.edit', {
-        id: scFormParams.lotId,
-        ind: recommendation.partIndex
+        id: $scope.lotId,
+        ind: recommendation.recommendationPartIndex
       });
     };
   }
@@ -70,6 +80,7 @@
   CommonInspectionCtrl.$inject = [
     '$scope',
     '$state',
+    'Organizations',
     'scFormParams'
   ];
 

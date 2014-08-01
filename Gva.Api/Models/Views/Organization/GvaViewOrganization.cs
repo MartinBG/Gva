@@ -33,6 +33,10 @@ namespace Gva.Api.Models.Views.Organization
 
         public virtual ICollection<GvaViewOrganizationExaminer> Examiners { get; set; }
 
+        public virtual ICollection<GvaViewOrganizationRecommendation> Recommendations { get; set; }
+
+        public virtual ICollection<GvaViewOrganizationInspection> RInspections { get; set; }
+
         public virtual ICollection<GvaLotCase> GvaLotCases { get; set; }
     }
 
