@@ -3044,7 +3044,7 @@
         },
         chooseInspectionsModal: {
           title: 'Избор на одити',
-          add: 'Добави',
+          add: 'Запиши',
           cancel: 'Отказ',
           documentNumber: '№ на документ',
           subject: 'Предмет на одит',
@@ -3367,7 +3367,8 @@
           finished4Date: 'Прикл. Част 4',
           finished5Date: 'Прикл. Част 5',
           recommendation: 'Препоръки',
-          application: 'Преписка (Заявление)'
+          application: 'Преписка (Заявление)',
+          documentDescription : 'Описание'
         },
         newRecommendation: {
           title: 'Нов доклад от препоръки',

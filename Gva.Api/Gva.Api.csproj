@@ -91,6 +91,9 @@
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="Models\GvaApplicationStage.cs" />
     <Compile Include="Models\GvaStage.cs" />
+    <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
+    <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
+    <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
     <Compile Include="Projections\Aircraft\AircraftProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegistrationProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegMarkProjection.cs" />
@@ -119,6 +122,9 @@
     <Compile Include="Projections\Inventory\Persons\PersonOtherProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonApplicationProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonTrainingProjection.cs" />
+    <Compile Include="Projections\Organization\OrganizationInspectionProjection.cs" />
+    <Compile Include="Projections\Organization\OrganizationInspectionRecommendationProjection.cs" />
+    <Compile Include="Projections\Organization\OrganizationRecommendationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationExaminerProjection.cs" />
     <Compile Include="Projections\Person\PersonInspectorProjection.cs" />

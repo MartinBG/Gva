@@ -6,6 +6,8 @@ using System;
 using Common.Linq;
 using System.Data.Entity;
 using Gva.Api.Models.Views.Organization;
+using Common.Extensions;
+using Newtonsoft.Json.Linq;
 
 namespace Gva.Api.Repositories.OrganizationRepository
 {
@@ -65,6 +67,15 @@ namespace Gva.Api.Repositories.OrganizationRepository
             return this.unitOfWork.DbContext.Set<GvaViewOrganization>()
                 .Include(o => o.OrganizationType)
                 .SingleOrDefault(p => p.LotId == organizationId);
+        }
+
+        public IEnumerable<GvaViewOrganizationRecommendation> GetInspectionRecommendations(int lotId, int inspectionPartIndex)
+        {
+            return (from r in this.unitOfWork.DbContext.Set<GvaViewOrganizationRecommendation>()
+                   join ir in this.unitOfWork.DbContext.Set<GvaViewOrganizationInspectionRecommendation>() on r.PartIndex equals ir.RecommendationPartIndex
+                   where ir.InspectionPartIndex == inspectionPartIndex
+                   select r)
+                   .ToList();
         }
     }
 }

@@ -192,6 +192,14 @@ namespace Gva.Api.Controllers
             return base.GetApplicationParts(lotId, path);
         }
 
+        [Route("{lotId}/organizationInspections/{inspectionPartIndex}/recommendations")]
+        public IHttpActionResult GetInspectionRecommendations(int lotId, int inspectionPartIndex)
+        {
+            return Ok(new {
+                reports = this.organizationRepository.GetInspectionRecommendations(lotId, inspectionPartIndex) 
+            });
+        }
+
         [Route(@"{lotId}/{*path:regex(^organizationAddresses$)}"),
          Route(@"{lotId}/{*path:regex(^organizationAuditplans$)}"),
          Route(@"{lotId}/{*path:regex(^organizationStaffManagement$)}"),
@@ -206,46 +214,11 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}")]
+         Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}"),
+         Route(@"{lotId}/{*path:regex(^organizationRecommendations$)}")]
         public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^organizationRecommendations$)}")]
-        public IHttpActionResult PostNewRecommendationPart(int lotId, string path, JObject content)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
-            this.applicationRepository.AddApplicationRefs(partVersion.Part, content.GetItems<ApplicationNomDO>("applications"));
-
-            foreach (int inspectionPartIndex in content.GetItems<int>("part.includedAudits"))
-            {
-                JObject inspection = lot.Index.GetPart("organizationInspections/" + inspectionPartIndex).Content;
-
-                JArray recommendations = inspection["recommendationReports"] as JArray;
-                if (recommendations == null)
-                {
-                    inspection["recommendationReports"] = recommendations = new JArray();
-                }
-
-                recommendations.Add(
-                    new JObject(
-                        new JProperty("partIndex", partVersion.Part.Index),
-                        new JProperty("formDate", content.Get("part.formDate")),
-                        new JProperty("formText", content.Get("part.formText")),
-                        new JProperty("recommendationPartName", content.Get<string>("part.recommendationPart.name"))));
-
-                lot.UpdatePart("organizationInspections/" + inspectionPartIndex, inspection, userContext);
-            }
-
-            lot.Commit(userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            return Ok();
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationAddresses/\d+$)}"),
@@ -264,7 +237,8 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}"),
+            Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
@@ -278,51 +252,6 @@ namespace Gva.Api.Controllers
             this.caseTypeRepository.AddCaseTypes(lot, content.GetItems<JObject>("part.caseTypes").Select(ct => ct.Get<int>("nomValueId")));
 
             return base.PostPart(lotId, path, content);
-        }
-
-
-        [Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
-        public IHttpActionResult PostRecommendationPart(int lotId, string path, JObject content)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            PartVersion partVersion = lot.UpdatePart(path, content.Get<JObject>("part"), userContext);
-            this.applicationRepository.AddApplicationRefs(partVersion.Part, content.GetItems<ApplicationNomDO>("applications"));
-
-            int recommendationPartIndex = content.Get<int>("partIndex");
-            foreach (int inspectionPartIndex in content.GetItems<int>("part.includedAudits"))
-            {
-                JObject inspection = lot.Index.GetPart("organizationInspections/" + inspectionPartIndex).Content;
-
-                JArray recommendations = inspection["recommendationReports"] as JArray;
-                if (recommendations == null)
-                {
-                    inspection["recommendationReports"] = recommendations = new JArray();
-                }
-
-                JObject recommendation =
-                    recommendations
-                    .FirstOrDefault(t => t.Get<int>("partIndex") == recommendationPartIndex) as JObject;
-
-                if (recommendation == null)
-                {
-                    recommendation = new JObject(new JProperty("partIndex", content.Get("partIndex")));
-                    recommendations.Add(recommendation);
-                }
-
-                recommendation["formDate"] = content.Get("part.formDate");
-                recommendation["formText"] = content.Get("part.formText");
-                recommendation["recommendationPartName"] = content.Get<string>("part.recommendationPart.name");
-
-                lot.UpdatePart("organizationInspections/" + inspectionPartIndex, inspection, userContext);
-            }
-
-            lot.Commit(userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            return Ok();
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationAddresses/\d+$)}"),
@@ -339,42 +268,11 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
+        Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
-        public IHttpActionResult DeleteRecommendationPart(int lotId, string path)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            PartVersion part = lot.Index.GetPart(path);
-
-            foreach (int inspectionPartIndex in part.Content.GetItems<int>("includedAudits"))
-            {
-                JObject inspection = lot.Index.GetPart("organizationInspections/" + inspectionPartIndex).Content;
-
-                JArray recommendations = inspection["recommendationReports"] as JArray;
-
-                JObject recommendation =
-                    recommendations
-                    .FirstOrDefault(t => t.Get<int>("partIndex") == part.Part.Index) as JObject;
-
-                recommendations.Remove(recommendation);
-
-                lot.UpdatePart("organizationInspections/" + inspectionPartIndex, inspection, userContext);
-            }
-
-            lot.DeletePart(path, userContext);
-
-            lot.Commit(userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            return Ok();
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationDocumentApplications$)}")]
