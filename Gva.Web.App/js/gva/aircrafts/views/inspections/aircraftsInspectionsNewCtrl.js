@@ -9,6 +9,7 @@
     AircraftInspections,
     aircraftInspection) {
     $scope.aircraftInspection = aircraftInspection;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newInspectionForm.$validate()

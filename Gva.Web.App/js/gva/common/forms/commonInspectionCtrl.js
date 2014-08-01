@@ -5,45 +5,15 @@
   function CommonInspectionCtrl(
     $scope,
     $state,
-    $stateParams,
-    Nomenclatures,
     scFormParams
   ) {
     $scope.watchList = [];
-
+    $scope.lotId = scFormParams.lotId;
     $scope.model.part.examiners = $scope.model.part.examiners || [];
     $scope.model.part.auditDetails = $scope.model.part.auditDetails || [];
     $scope.model.part.disparities = $scope.model.part.disparities || [];
-    $scope.caseTypesOptions = {
-      multiple: false,
-      allowClear: true,
-      placeholder: ' ',
-      tags: []
-    };
-
-    if($scope.$parent.organization) {
-      Nomenclatures.query({
-        alias: 'organizationCaseTypes',
-        lotId: $stateParams.id
-      }).$promise.then(function(result){
-        $scope.caseTypesOptions.tags = _.map(result, function (item) {
-          return item.name;
-        });
-        angular.element('.select2input').select2($scope.caseTypesOptions);
-      });
-    }
 
     $scope.setPart = scFormParams.setPart;
-
-    var aliases = {
-      organization: 'Организация',
-      aircraft: 'ВС',
-      aiport: 'Летище',
-      equipment: 'Съоръжение'
-    };
-
-    $scope.model.part.setPart = aliases[$scope.setPart];
-
 
     $scope.changedSortOrder = function (newValue, oldValue) {
       if (_.where($scope.model.part.disparities, { sortOrder: newValue })[0]) {
@@ -91,7 +61,7 @@
 
     $scope.viewRecommendation = function (recommendation) {
       return $state.go('root.organizations.view.recommendations.edit', {
-        id: $stateParams.id,
+        id: scFormParams.lotId,
         ind: recommendation.partIndex
       });
     };
@@ -100,8 +70,6 @@
   CommonInspectionCtrl.$inject = [
     '$scope',
     '$state',
-    '$stateParams',
-    'Nomenclatures',
     'scFormParams'
   ];
 
