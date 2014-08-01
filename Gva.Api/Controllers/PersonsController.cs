@@ -429,5 +429,15 @@ namespace Gva.Api.Controllers
 
             return result;
         }
+
+        [HttpGet]
+        [Route("isUniqueUin")]
+        public IHttpActionResult IsUniqueUin(string uin, int? personId = null)
+        {
+            return Ok(new
+            {
+                isUnique = this.personRepository.IsUniqueUin(uin, personId)
+            });
+        }
     }
 }

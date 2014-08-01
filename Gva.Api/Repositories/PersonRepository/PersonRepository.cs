@@ -120,5 +120,19 @@ namespace Gva.Api.Repositories.PersonRepository
 
             return lastLin.Value + 1;
         }
+
+        public bool IsUniqueUin(string uin, int? personId = null)
+        {
+            if (personId.HasValue)
+            {
+                return !this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                    .Where(p => p.Uin == uin && p.LotId != personId).Any();
+            }
+            else
+            {
+                return !this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                    .Where(p => p.Uin == uin).Any();
+            }
+        }
     }
 }

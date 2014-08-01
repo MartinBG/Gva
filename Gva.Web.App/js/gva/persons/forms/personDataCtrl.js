@@ -2,7 +2,13 @@
 (function (angular, moment) {
   'use strict';
 
-  function PersonDataCtrl($scope, Persons, Nomenclatures, scFormParams) {
+  function PersonDataCtrl(
+    $scope,
+    $stateParams,
+    Persons,
+    Nomenclatures,
+    scFormParams
+  ) {
     $scope.isNew = scFormParams.isNew;
     Nomenclatures.query({alias: 'linTypes'})
       .$promise.then(function(linTypes){
@@ -84,9 +90,25 @@
         }
       }
     };
+
+    $scope.isUniqueUin = function () {
+      if (!$scope.model.uin) {
+        return true;
+      }
+      return Persons.isUniqueUin({ uin: $scope.model.uin, personId: $stateParams.id }).$promise
+        .then(function (result) {
+          return result.isUnique;
+        });
+    };
   }
 
-  PersonDataCtrl.$inject = ['$scope', 'Persons', 'Nomenclatures', 'scFormParams'];
+  PersonDataCtrl.$inject = [
+    '$scope',
+    '$stateParams',
+    'Persons',
+    'Nomenclatures',
+    'scFormParams'
+  ];
 
   angular.module('gva').controller('PersonDataCtrl', PersonDataCtrl);
 }(angular, moment));

@@ -3700,7 +3700,8 @@
         lin: 'Невалиден ЛИН',
         date: 'Невалидна дата',
         noFile: 'Моля, прикачете файл',
-        noPDForIMGFile: 'Моля, прикачете PDF или IMAGE файл'
+        noPDForIMGFile: 'Моля, прикачете PDF или IMAGE файл',
+        notUniqueUin: 'Въведеното ЕГН вече съществува в системата'
       },
       defaultErrorTexts: {
         required: 'Задължително поле',

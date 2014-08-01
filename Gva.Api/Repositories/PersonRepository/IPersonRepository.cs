@@ -31,5 +31,7 @@ namespace Gva.Api.Repositories.PersonRepository
             int? limit = null);
 
         int GetNextLin(int linTypeId);
+
+        bool IsUniqueUin(string uin, int? personId = null);
     }
 }
