@@ -2,7 +2,7 @@
   <div class="row">
     <div class="form-group col-sm-3 col-md-2" ng-if="setPart === 'organization'">
       <label class="control-label" l10n-text="common.inspectionDirective.auditCaseType"></label>
-      <input type="hidden" ng-model="model.part.auditCaseTypes" class="form-control input-sm select2input" ng-readonly="form.$readonly" ui-select2="caseTypesOptions">
+      <sc-nomenclature ng-model="model.part.auditCaseTypes" alias="'organizationCaseTypes'" ng-required="false" params="{lotId: lotId}" ng-readonly="form.$readonly"></sc-nomenclature>
     </div>
     <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="common.inspectionDirective.documentNumber" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="nomenclature" ng-model="model.part.auditPart" alias="'auditParts'" l10n-text="common.inspectionDirective.auditPart" class="col-sm-3 col-md-2"></sc-field>
