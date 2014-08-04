@@ -14,7 +14,9 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-data name="aircraftDataForm" ng-model="aircraftData.part"></gva-aircraft-data>
+      <gva-aircraft-data name="aircraftDataForm" ng-model="aircraftData.part"
+        sc-form-params="{ lotId: lotId }">
+      </gva-aircraft-data>
     </div>
   </div>
 </ng-form>

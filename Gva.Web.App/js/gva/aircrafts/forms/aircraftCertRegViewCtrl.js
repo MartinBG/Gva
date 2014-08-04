@@ -2,8 +2,8 @@
 (function (angular) {
   'use strict';
 
-  function AircraftCertRegViewCtrl($scope, $state, $stateParams) {
-    $scope.aircraftId = $stateParams.id;
+  function AircraftCertRegViewCtrl($scope, $state, scFormParams) {
+    $scope.aircraftId = scFormParams.lotId;
 
     $scope.rereg = function (ind) {
       return $state.go('root.aircrafts.view.regsFM.newWizzard', { oldInd: ind });
@@ -11,17 +11,13 @@
 
     $scope.dereg = function (ind) {
       return $state.go('root.aircrafts.view.regsFM.dereg', {
-        id: $stateParams.id,
+        id: scFormParams.lotId,
         ind: ind
       });
     };
   }
 
-  AircraftCertRegViewCtrl.$inject = [
-    '$scope',
-    '$state',
-    '$stateParams'
-  ];
+  AircraftCertRegViewCtrl.$inject = ['$scope', '$state', 'scFormParams'];
 
   angular.module('gva').controller('AircraftCertRegViewCtrl', AircraftCertRegViewCtrl);
 }(angular));

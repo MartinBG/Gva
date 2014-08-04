@@ -2,8 +2,8 @@
 (function (angular) {
   'use strict';
 
-  function AircraftCertAirworthinessViewCtrl($scope, $state, $stateParams) {
-    $scope.aircraftId = $stateParams.id;
+  function AircraftCertAirworthinessViewCtrl($scope, $state, scFormParams) {
+    $scope.aircraftId = scFormParams.lotId;
 
     $scope.validFromDate = function () {
       if (!$scope.model || !$scope.model.reviews || !$scope.model.reviews.length) {
@@ -49,11 +49,7 @@
     };
   }
 
-  AircraftCertAirworthinessViewCtrl.$inject = [
-    '$scope',
-    '$state',
-    '$stateParams'
-  ];
+  AircraftCertAirworthinessViewCtrl.$inject = ['$scope', '$state', 'scFormParams'];
 
   angular.module('gva').controller(
     'AircraftCertAirworthinessViewCtrl',
