@@ -18,7 +18,8 @@
           containerElement,
           labelElement,
           validationElement,
-          dirElement;
+          dirElement,
+          reqElement;
 
       var validationsList = {
         'ng-required': 'required',
@@ -74,6 +75,12 @@
         }
       });
 
+      if(_.indexOf(currentValidations, 'ng-required') > -1)
+      {
+        reqElement = '<span class="fa fa-exclamation" ng-show="!form.$validated ' +
+          '&& !form.$readonly && form[\'' + fieldName + '\'].$error.required"></span>';
+      }
+
       containerElement = $('<div></div>').addClass('form-group ' + cssClass);
       labelElement = $('<label></label>').addClass('control-label').attr('l10n-text', text);
       containerElement.append(labelElement);
@@ -113,6 +120,7 @@
         containerElement.append(validationElement);
       }
 
+      containerElement.append(reqElement);
       containerElement.append(dirElement);
       tElement.append(containerElement);
 

@@ -7,15 +7,25 @@
   function FieldGroupDirective($parse, $compile, l10n) {
 
     function FieldGroupCompile(tElement, tAttrs) {
-      var validationElem = tElement.find('sc-validation-error');
+      var validationElem = tElement.find('sc-validation-error'),
+         reqElem = tElement.find('.required-marker');
 
       if (tAttrs.validations) {
         validationElem.attr('validations', tAttrs.validations);
         validationElem.attr('field-name', tAttrs.fieldName);
         tAttrs.$set('scHasError', tAttrs.fieldName);
+
+        if (tAttrs.validations.indexOf('required') === -1) {
+          reqElem.remove();
+        }
+        else {
+          reqElem.attr('ng-show', '!form.$validated ' +
+          '&& !form.$readonly && form[\'' + tAttrs.fieldName + '\'].$error.required');
+        }
       }
       else {
         validationElem.remove();
+        reqElem.remove();
         tElement.removeAttr('sc-has-error');
       }
 
@@ -28,7 +38,7 @@
 
         transcludeFn($scope, function (clone) {
           var modelFound = false;
-          var addons = _.map(element.find('span'), function (addon) {
+          var addons = _.map(element.find('span.input-group-addon'), function (addon) {
             return angular.element(addon);
           });
 
