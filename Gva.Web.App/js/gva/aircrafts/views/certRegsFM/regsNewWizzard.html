@@ -34,8 +34,8 @@
           </sc-field-group>
           <div class="form-group col-sm-2 col-sm-4" sc-has-error="regMark">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.regMark"></label>
-            <sc-validation-error field-name="regMark" validations="{required: 'default'}"></sc-validation-error>
-            <sc-text ng-model="model.regMark" name="regMark" ng-required="true" ng-readonly="currentStep !== steps.chooseRegMark"></sc-text>
+            <sc-validation-error field-name="regMark" validations="{required: 'default', pattern: 'default'}"></sc-validation-error>
+            <sc-text ng-model="model.regMark" name="regMark" ng-required="true" ng-readonly="currentStep !== steps.chooseRegMark" ng-pattern="regMarkPattern"></sc-text>
           </div>
 
           <sc-info class="success" icon="glyphicon glyphicon-ok" text="aircrafts.newRegWizzard.confirmRegMark" ng-if="currentStep === steps.confirmRegMark"></sc-info>

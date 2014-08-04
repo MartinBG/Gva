@@ -9,13 +9,15 @@
     Aircrafts,
     oldReg,
     actNumber,
-    register
+    register,
+    gvaConstants
   ) {
     $scope.steps = {
       chooseRegMark: {},
       confirmRegMark: {},
       regMarkInUse: {}
     };
+    $scope.regMarkPattern = gvaConstants.regMarkPattern;
 
     $scope.currentStep = $scope.steps.chooseRegMark;
 
@@ -136,7 +138,8 @@
     'Aircrafts',
     'oldReg',
     'actNumber',
-    'register'
+    'register',
+    'gvaConstants'
   ];
 
   angular.module('gva').controller('CertRegsFMNewWizzardCtrl', CertRegsFMNewWizzardCtrl);

@@ -222,7 +222,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertRegFm',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertRegFM.html'
+      templateUrl: 'js/gva/aircrafts/forms/aircraftCertRegFM.html',
+      controller: 'AircraftCertRegFMCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertRegDeregFm',
