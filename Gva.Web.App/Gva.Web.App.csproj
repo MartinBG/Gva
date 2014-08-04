@@ -318,9 +318,6 @@
     <Content Include="js\gva\applications\modals\stages\editAppStageModalCtrl.js" />
     <Content Include="js\gva\applications\modals\stages\editDocStageModal.html" />
     <Content Include="js\gva\applications\modals\stages\editDocStageModalCtrl.js" />
-    <Content Include="js\gva\applications\forms\selectAircraft.html" />
-    <Content Include="js\gva\applications\forms\selectAirport.html" />
-    <Content Include="js\gva\applications\forms\selectEquipment.html" />
     <Content Include="js\gva\applications\forms\applicationSelectOrganization.html" />
     <Content Include="js\gva\applications\forms\applicationSelectEquipmentCtrl.js" />
     <Content Include="js\gva\applications\modals\aircrafts\chooseAircraftModal.html" />
