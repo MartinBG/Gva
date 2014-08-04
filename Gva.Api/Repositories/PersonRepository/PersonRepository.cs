@@ -111,7 +111,7 @@ namespace Gva.Api.Repositories.PersonRepository
             int? lastLin = this.unitOfWork.DbContext.Set<GvaViewPerson>()
                 .Include(p => p.LinType)
                 .Where(p => p.LinTypeId == linTypeId)
-                .Max(p => p.Lin);
+                .Max(p => (int?)p.Lin);
 
             if (!lastLin.HasValue)
             {
