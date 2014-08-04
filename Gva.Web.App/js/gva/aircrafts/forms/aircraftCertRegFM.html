@@ -8,7 +8,7 @@
     </sc-field-group>
     <sc-field type="nomenclature" ng-model="model.register" alias="'registers'" l10n-text="aircrafts.regFMDirective.register" class="col-sm-2 col-sm-4"></sc-field>
     <sc-field type="int" ng-model="model.actNumber" l10n-text="aircrafts.regFMDirective.actNumber" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="text" ng-model="model.regMark" l10n-text="aircrafts.regFMDirective.regMark" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.regMark" l10n-text="aircrafts.regFMDirective.regMark" class="col-md-2 col-sm-4" ng-pattern="regMarkPattern"></sc-field>
     <sc-field type="date" ng-model="model.certDate" l10n-text="aircrafts.regFMDirective.certDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
