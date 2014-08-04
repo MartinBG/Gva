@@ -15,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Common.Api.Repositories.NomRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -30,6 +31,7 @@ namespace Gva.Api.Controllers
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
+        private INomRepository nomRepository;
 
         public PersonsController(
             IUnitOfWork unitOfWork,
@@ -39,7 +41,8 @@ namespace Gva.Api.Controllers
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
-            ILotEventDispatcher lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            INomRepository nomRepository)
             : base(applicationRepository, lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
@@ -50,6 +53,7 @@ namespace Gva.Api.Controllers
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
+            this.nomRepository = nomRepository;
         }
 
         [Route("")]
@@ -438,6 +442,23 @@ namespace Gva.Api.Controllers
             {
                 isUnique = this.personRepository.IsUniqueUin(uin, personId)
             });
+        }
+
+        [Route(@"{lotId}/licences/init")]
+        public IHttpActionResult GetInitLicence(int lotId, int? appId = null)
+        {
+
+            this.lotRepository.GetLotIndex(lotId);
+            var apps = this.applicationRepository.GetInitApplication(appId);
+
+            return Ok(new
+                {
+                    part = new
+                    {
+                        valid = this.nomRepository.GetNomValue("boolean", "yes"),
+                        editions = new [] { new { applications = apps } }
+                    }
+                });
         }
     }
 }

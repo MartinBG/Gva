@@ -49,22 +49,10 @@
 
   LicencesNewCtrl.$resolve = {
     licence: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {
-              editions: [{ applications: [application] }]
-            }
-          };
-        }
-        else {
-          return {
-            part: {
-              editions: [{}]
-            }
-          };
-        }
+      '$stateParams',
+      'PersonLicences',
+      function ($stateParams, PersonLicences) {
+        return PersonLicences.init({ id: $stateParams.id, appId: $stateParams.appId }).$promise;
       }
     ]
   };
