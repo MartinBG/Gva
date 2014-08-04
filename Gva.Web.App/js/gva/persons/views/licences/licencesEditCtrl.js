@@ -6,6 +6,7 @@
     $scope,
     $state,
     $stateParams,
+    namedModal,
     PersonLicences,
     licence,
     scMessage
@@ -14,12 +15,6 @@
     $scope.licence = licence;
     $scope.editMode = null;
     $scope.lotId = $stateParams.id;
-
-    $scope.backFromChild = false;
-
-    if ($state.previous && $state.previous.includes[$state.current.name]) {
-      $scope.backFromChild = true;
-    }
 
     $scope.$watch('licence.part.editions | last', function (lastEdition) {
       $scope.currentEdition = lastEdition;
@@ -66,12 +61,10 @@
         .then(function () {
           if ($scope.editLicenceForm.$valid) {
             $scope.editMode = 'saving';
-            $scope.backFromChild = false;
             return PersonLicences
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.licence).$promise
               .then(function () {
                 $scope.editMode = null;
-                $scope.backFromChild = false;
                 originalLicence = _.cloneDeep($scope.licence);
               }, function () {
                 $scope.editMode = 'edit';
@@ -84,12 +77,29 @@
       $scope.licence = _.cloneDeep(originalLicence);
       $scope.editMode = null;
     };
+
+    $scope.viewStatuses = function () {
+      var params = {
+        licence: $scope.licence,
+        personId: $stateParams.id,
+        licenceInd: $stateParams.ind
+      };
+
+      var modalInstance = namedModal.open('licenceStatuses', params);
+
+      modalInstance.result.then(function () {
+        $state.transitionTo($state.current, $stateParams, { reload: true });
+      });
+
+      return modalInstance.opened;
+    };
   }
 
   LicencesEditCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
+    'namedModal',
     'PersonLicences',
     'licence',
     'scMessage'

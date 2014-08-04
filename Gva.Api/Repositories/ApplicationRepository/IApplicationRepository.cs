@@ -53,5 +53,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int? limit = null);
 
         Set GetLotSet(int lotSetId);
+
+        ApplicationNomDO[] GetInitApplication(int? applicationId);
     }
 }

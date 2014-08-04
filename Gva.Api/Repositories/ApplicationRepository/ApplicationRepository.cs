@@ -299,5 +299,21 @@ namespace Gva.Api.Repositories.ApplicationRepository
             return this.unitOfWork.DbContext.Set<Set>()
                 .SingleOrDefault(p => p.SetId == lotSetId);
         }
+
+        public ApplicationNomDO[] GetInitApplication(int? applicationId)
+        {
+            if (!applicationId.HasValue)
+            {
+                return new ApplicationNomDO[] { };
+            }
+
+            GvaApplication nomApp = this.GetNomApplication((int)applicationId);
+            if (nomApp != null && nomApp.GvaAppLotPart != null)
+            {
+                return new ApplicationNomDO[] { new ApplicationNomDO(nomApp) };
+            }
+
+            return new ApplicationNomDO[] { };
+        }
     }
 }

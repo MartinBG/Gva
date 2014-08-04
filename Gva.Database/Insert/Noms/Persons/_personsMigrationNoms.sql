@@ -31,5 +31,6 @@ VALUES
     (N'Степени на образование'                           , N'graduations'            ),
     (N'Категории персонал'                               , N'employmentCategories'   ),
     (N'Типове персонал'                                  , N'staffTypes'             ),
-    (N'Полове'                                           , N'gender'                 )
+    (N'Полове'                                           , N'gender'                 ),
+    (N'Причини за промяна на статус на правоспособност'  , N'licenceChangeReasons'   )
 GO
