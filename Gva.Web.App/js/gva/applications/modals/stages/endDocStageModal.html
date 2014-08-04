@@ -2,6 +2,10 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <strong l10n-text="applications.edit.stages.end"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="applications.endDocStageModal.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="applications.endDocStageModal.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
+      </div>
     </div>
 
     <div class="well-sm panel-body ">
@@ -43,10 +47,6 @@
 
       </div>
 
-      <div class="col-sm-3 col-sm-offset-5">
-        <sc-button name="saveBtn" btn-click="save()" text="applications.endDocStageModal.save" class="btn btn-primary" icon="glyphicon-floppy-disk"></sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="applications.endDocStageModal.cancel" class="btn btn-default" icon="glyphicon-ban-circle"></sc-button>
-      </div>
     </div>
   </div>
 </ng-form>
