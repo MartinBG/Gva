@@ -54,6 +54,7 @@ var config = {
       'bower_components/jquery-ui/ui/jquery.ui.sortable.js',
       'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',
       'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
+      'bower_components/typeahead.js/dist/typeahead.jquery.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/moment/moment.js',
       'bower_components/angular-scrollto/angular-scrollto.js',

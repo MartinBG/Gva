@@ -99,5 +99,18 @@ namespace Gva.Api.Repositories.InventoryRepository
                                 null
                 });
         }
+
+        public IEnumerable<string> GetNotes(string notes)
+        {
+            var predicate = PredicateBuilder.True<GvaViewInventoryItem>()
+                .AndStringContains(p => p.Notes, notes);
+
+            return this.unitOfWork.DbContext.Set<GvaViewInventoryItem>()
+                .Where(predicate)
+                .Where(e => e.Notes != null)
+                .Select(i => i.Notes)
+                .Distinct()
+                .ToList();
+        }
     }
 }

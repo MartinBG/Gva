@@ -116,6 +116,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<EquipmentsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaNomController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<GvaSuggestionController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PrintController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaPublisherController>().InstancePerLifetimeScope();
