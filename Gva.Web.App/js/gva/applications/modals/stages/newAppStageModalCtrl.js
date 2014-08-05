@@ -6,20 +6,18 @@
     $scope,
     $modalInstance,
     AppStages,
-    stageModel,
-    ordinal,
-    appId
+    scModalParams,
+    stageModel
   ) {
     $scope.form = {};
     $scope.stageModel = stageModel;
-    $scope.stageModel.ordinal = ordinal;
 
     $scope.save = function () {
       return $scope.form.stageForm.$validate()
         .then(function () {
           if ($scope.form.stageForm.$valid) {
             return AppStages
-              .save({ id: appId }, $scope.stageModel)
+              .save({ id: scModalParams.appId }, $scope.stageModel)
               .$promise
               .then(function () {
                 return $modalInstance.close();
@@ -38,15 +36,19 @@
     '$scope',
     '$modalInstance',
     'AppStages',
-    'stageModel',
-    'ordinal',
-    'appId'
+    'scModalParams',
+    'stageModel'
   ];
 
   NewAppStageModalCtrl.$resolve = {
-    stageModel: function () {
-      return {};
-    }
+    stageModel: [
+      'scModalParams',
+      function (scModalParams) {
+        return {
+          ordinal: scModalParams.ordinal
+        };
+      }
+    ]
   };
   angular.module('gva').controller('NewAppStageModalCtrl', NewAppStageModalCtrl);
 }(angular));

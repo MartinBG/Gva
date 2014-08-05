@@ -1,9 +1,9 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function AppSelectAirportCtrl($scope, namedModal) {
+  function AppSelectAirportCtrl($scope, scModal) {
     $scope.chooseAirport = function () {
-      var modalInstance = namedModal.open('chooseAirport');
+      var modalInstance = scModal.open('chooseAirport');
 
       modalInstance.result.then(function (airportId) {
         $scope.model.lot.id = airportId;
@@ -13,7 +13,7 @@
     };
 
     $scope.newAirport = function () {
-      var modalInstance = namedModal.open('newAirport');
+      var modalInstance = scModal.open('newAirport');
 
       modalInstance.result.then(function (airportId) {
         $scope.model.lot.id = airportId;
@@ -23,7 +23,7 @@
     };
   }
 
-  AppSelectAirportCtrl.$inject = ['$scope', 'namedModal'];
+  AppSelectAirportCtrl.$inject = ['$scope', 'scModal'];
 
   angular.module('gva').controller('AppSelectAirportCtrl', AppSelectAirportCtrl);
 }(angular));

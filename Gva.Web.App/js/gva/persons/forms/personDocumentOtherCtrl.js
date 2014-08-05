@@ -2,9 +2,9 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentOtherCtrl($scope, namedModal) {
+  function PersonDocumentOtherCtrl($scope, scModal) {
     $scope.choosePublisher = function () {
-      var modalInstance = namedModal.open('choosePublisher');
+      var modalInstance = scModal.open('choosePublisher');
 
       modalInstance.result.then(function (publisherName) {
         $scope.model.documentPublisher = publisherName;
@@ -14,7 +14,7 @@
     };
   }
 
-  PersonDocumentOtherCtrl.$inject = ['$scope', 'namedModal'];
+  PersonDocumentOtherCtrl.$inject = ['$scope', 'scModal'];
 
   angular.module('gva').controller('PersonDocumentOtherCtrl', PersonDocumentOtherCtrl);
 }(angular));

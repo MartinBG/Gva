@@ -6,18 +6,17 @@
     $modalInstance,
     $scope,
     Corrs,
-    corrs,
-    selectedCorrs,
-    corr
+    scModalParams,
+    corrs
   ) {
     $scope.corrs = corrs.correspondents;
 
     $scope.filters = {
-      displayName: corr.displayName,
-      email: corr.email
+      displayName: scModalParams.corr.displayName,
+      email: scModalParams.corr.email
     };
-    
-    $scope.selectedCorrs = _.map(selectedCorrs, function (corr) {
+
+    $scope.selectedCorrs = _.map(scModalParams.selectedCorrs, function (corr) {
       return corr.nomValueId;
     });
 
@@ -48,10 +47,22 @@
     '$modalInstance',
     '$scope',
     'Corrs',
-    'corrs',
-    'selectedCorrs',
-    'corr'
+    'scModalParams',
+    'corrs'
   ];
+
+  ChooseCorrModalCtrl.$resolve = {
+    corrs: [
+      'Corrs',
+      'scModalParams',
+      function (Corrs, scModalParams) {
+        return Corrs.get({
+          displayName: scModalParams.corr.displayName,
+          email: scModalParams.corr.email
+        }).$promise;
+      }
+    ]
+  };
 
   angular.module('ems').controller('ChooseCorrModalCtrl', ChooseCorrModalCtrl);
 }(angular, _));

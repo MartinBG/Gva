@@ -5,7 +5,7 @@
   function OrganizationCertificateCtrl(
     $scope,
     $state,
-    namedModal,
+    scModal,
     scFormParams) {
     $scope.lotId = scFormParams.lotId;
 
@@ -15,20 +15,10 @@
     };
 
     $scope.chooseDocuments = function () {
-      var modalInstance = namedModal.open(
-        'chooseOrganizationDocs',
-        {
-          includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex'),
-          lotId: $scope.lotId
-        },
-        {
-          docs: [
-            'OrganizationsInventory',
-            function (OrganizationsInventory) {
-              return OrganizationsInventory.query({ id: $scope.lotId }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('chooseOrganizationDocs', {
+        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex'),
+        lotId: $scope.lotId
+      });
 
       modalInstance.result.then(function (selectedDocs) {
         $scope.model.includedDocuments = $scope.model.includedDocuments.concat(selectedDocs);
@@ -54,7 +44,7 @@
   OrganizationCertificateCtrl.$inject = [
     '$scope',
     '$state',
-    'namedModal',
+    'scModal',
     'scFormParams'
   ];
 

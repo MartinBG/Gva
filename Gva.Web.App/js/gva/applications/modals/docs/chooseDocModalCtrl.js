@@ -6,11 +6,13 @@
     $scope,
     $modalInstance,
     Applications,
+    scModalParams,
     docs
   ) {
     $scope.docs = docs.documents;
 
     $scope.filters = {
+      filter: scModalParams.filter,
       fromDate: null,
       toDate: null,
       regUri: null,
@@ -40,8 +42,19 @@
     '$scope',
     '$modalInstance',
     'Applications',
+    'scModalParams',
     'docs'
   ];
+
+  ChooseDocModalCtrl.$resolve = {
+    docs: [
+      'Applications',
+      'scModalParams',
+      function (Applications, scModalParams) {
+        return Applications.notLinkedDocs(scModalParams).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('ChooseDocModalCtrl', ChooseDocModalCtrl);
 }(angular));

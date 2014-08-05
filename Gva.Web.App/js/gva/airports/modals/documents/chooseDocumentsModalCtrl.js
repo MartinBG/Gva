@@ -6,18 +6,17 @@
     $scope,
     $modalInstance,
     AirportsInventory,
-    docs,
-    includedDocs,
-    lotId
+    scModalParams,
+    docs
   ) {
     $scope.selectedDocs = [];
 
     $scope.docs = _.filter(docs, function (doc) {
-      return !_.contains(includedDocs, doc.partIndex);
+      return !_.contains(scModalParams.includedDocs, doc.partIndex);
     });
 
     $scope.searchParams = {
-      id: lotId,
+      id: scModalParams.lotId,
       documentParts: []
     };
 
@@ -54,7 +53,7 @@
           null
       }).$promise.then(function (docs) {
         $scope.docs = _.filter(docs, function (doc) {
-          return !_.contains(includedDocs, doc.partIndex);
+          return !_.contains(scModalParams.includedDocs, doc.partIndex);
         });
       });
     };
@@ -64,10 +63,19 @@
     '$scope',
     '$modalInstance',
     'AirportsInventory',
-    'docs',
-    'includedDocs',
-    'lotId'
+    'scModalParams',
+    'docs'
   ];
+
+  ChooseAirportDocsModalCtrl.$resolve = {
+    docs: [
+      'AirportsInventory',
+      'scModalParams',
+      function (AirportsInventory, scModalParams) {
+        return AirportsInventory.query({ id: scModalParams.lotId }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('ChooseAirportDocsModalCtrl', ChooseAirportDocsModalCtrl);
 }(angular, _, $));

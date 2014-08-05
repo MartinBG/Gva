@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    namedModal,
+    scModal,
     PersonLicences,
     licence,
     scMessage
@@ -86,7 +86,7 @@
         licenceInd: $stateParams.ind
       };
 
-      var modalInstance = namedModal.open('licenceStatuses', params);
+      var modalInstance = scModal.open('licenceStatuses', params);
 
       modalInstance.result.then(function () {
         $state.transitionTo($state.current, $stateParams, { reload: true });
@@ -100,7 +100,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'namedModal',
+    'scModal',
     'PersonLicences',
     'licence',
     'scMessage'

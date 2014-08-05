@@ -4,7 +4,7 @@
 
   function PersonLicenceEditionCtrl(
     $scope,
-    namedModal,
+    scModal,
     $q,
     Persons,
     PersonRatings,
@@ -87,7 +87,7 @@
     }
     
     $scope.addRating = function () {
-      var modalInstance = namedModal.open('newRating', { lotId: scFormParams.lotId });
+      var modalInstance = scModal.open('newRating', { lotId: scFormParams.lotId });
 
       modalInstance.result.then(function (newRating) {
         $scope.includedRatings.push(newRating);
@@ -97,19 +97,10 @@
     };
 
     $scope.addExistingRating = function () {
-      var modalInstance = namedModal.open(
-        'chooseRatings',
-        {
-          includedRatings: $scope.model.includedRatings
-        },
-        {
-          ratings: [
-            'PersonRatings',
-            function (PersonRatings) {
-              return PersonRatings.query({ id: scFormParams.lotId }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('chooseRatings', {
+        includedRatings: $scope.model.includedRatings,
+        lotId: scFormParams.lotId
+      });
 
       modalInstance.result.then(function (selectedRatings) {
         $scope.includedRatings = $scope.includedRatings.concat(selectedRatings);
@@ -123,12 +114,10 @@
     };
 
     $scope.addTraining = function () {
-      var modalInstance = namedModal.open(
-        'newTraining',
-        {
-          lotId: scFormParams.lotId,
-          caseTypeId: scFormParams.caseTypeId
-        });
+      var modalInstance = scModal.open('newTraining', {
+        lotId: scFormParams.lotId,
+        caseTypeId: scFormParams.caseTypeId
+      });
 
       modalInstance.result.then(function (newTraining) {
         $scope.includedTrainings.push(newTraining);
@@ -138,19 +127,10 @@
     };
 
     $scope.addExistingTraining = function () {
-      var modalInstance = namedModal.open(
-        'chooseTrainings',
-        {
-          includedTrainings: $scope.model.includedTrainings
-        },
-        {
-          trainings: [
-            'PersonDocumentTrainings',
-            function (PersonDocumentTrainings) {
-              return PersonDocumentTrainings.query({ id: scFormParams.lotId }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('chooseTrainings', {
+        includedTrainings: $scope.model.includedTrainings,
+        lotId: scFormParams.lotId
+      });
 
       modalInstance.result.then(function (selectedTrainings) {
         $scope.includedTrainings = $scope.includedTrainings.concat(selectedTrainings);
@@ -164,12 +144,10 @@
     };
 
     $scope.addCheck = function () {
-      var modalInstance = namedModal.open(
-        'newCheck',
-        {
-          lotId: scFormParams.lotId,
-          caseTypeId: scFormParams.caseTypeId
-        });
+      var modalInstance = scModal.open('newCheck', {
+        lotId: scFormParams.lotId,
+        caseTypeId: scFormParams.caseTypeId
+      });
 
       modalInstance.result.then(function (newCheck) {
         $scope.includedChecks.push(newCheck);
@@ -179,19 +157,10 @@
     };
 
     $scope.addExistingCheck = function () {
-      var modalInstance = namedModal.open(
-        'chooseChecks',
-        {
-          includedChecks: $scope.model.includedChecks
-        },
-        {
-          checks: [
-            'PersonDocumentChecks',
-            function (PersonDocumentChecks) {
-              return PersonDocumentChecks.query({ id: scFormParams.lotId }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('chooseChecks', {
+        includedChecks: $scope.model.includedChecks,
+        lotId: scFormParams.lotId
+      });
 
       modalInstance.result.then(function (selectedChecks) {
         $scope.includedChecks = $scope.includedChecks.concat(selectedChecks);
@@ -205,12 +174,10 @@
     };
 
     $scope.addMedical = function () {
-      var modalInstance = namedModal.open(
-        'newMedical',
-        {
-          person: $scope.person,
-          caseTypeId: scFormParams.caseTypeId
-        });
+      var modalInstance = scModal.open('newMedical', {
+        person: $scope.person,
+        caseTypeId: scFormParams.caseTypeId
+      });
 
       modalInstance.result.then(function (newMedical) {
         $scope.includedMedicals.push(newMedical);
@@ -220,20 +187,11 @@
     };
 
     $scope.addExistingMedical = function () {
-      var modalInstance = namedModal.open(
-        'chooseMedicals',
-        {
-          includedMedicals: $scope.model.includedMedicals,
-          person: $scope.person
-        },
-        {
-          medicals: [
-            'PersonDocumentMedicals',
-            function (PersonDocumentMedicals) {
-              return PersonDocumentMedicals.query({ id: scFormParams.lotId }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('chooseMedicals', {
+        includedMedicals: $scope.model.includedMedicals,
+        person: $scope.person,
+        lotId: scFormParams.lotId
+      });
 
       modalInstance.result.then(function (selectedMedicals) {
         $scope.includedMedicals = $scope.includedMedicals.concat(selectedMedicals);
@@ -253,19 +211,10 @@
         hideLicences.push(parseInt(scFormParams.partIndex, 10));
       }
 
-      var modalInstance = namedModal.open(
-        'chooseLicences',
-        {
-          includedLicences: hideLicences
-        },
-        {
-          licences: [
-            'PersonLicences',
-            function (PersonLicences) {
-              return PersonLicences.query({ id: scFormParams.lotId }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('chooseLicences', {
+        includedLicences: hideLicences,
+        lotId: scFormParams.lotId
+      });
 
       modalInstance.result.then(function (selectedLicences) {
         $scope.includedLicences = $scope.includedLicences.concat(selectedLicences);
@@ -281,7 +230,7 @@
 
   PersonLicenceEditionCtrl.$inject = [
     '$scope',
-    'namedModal',
+    'scModal',
     '$q',
     'Persons',
     'PersonRatings',

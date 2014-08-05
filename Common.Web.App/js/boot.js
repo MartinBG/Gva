@@ -13,9 +13,9 @@
   ]).config([
     '$controllerProvider',
     '$stateProvider',
-    'namedModalProvider',
+    'scModalProvider',
     '$provide',
-    function ($controllerProvider, $stateProvider, namedModalProvider, $provide) {
+    function ($controllerProvider, $stateProvider, scModalProvider, $provide) {
       $controllerProvider.register =
         _.wrap($controllerProvider.register, function (original, name, constructor) {
           if (angular.isObject(name)) {
@@ -27,7 +27,7 @@
           return original.apply($controllerProvider, [name, constructor]);
         });
 
-      namedModalProvider.modal = _.wrap(namedModalProvider.modal,
+      scModalProvider.modal = _.wrap(scModalProvider.modal,
         function (original, name, template, controller) {
           var modalObj = {
             template: template,
@@ -36,7 +36,7 @@
 
           modals[name] = modalObj;
 
-          return original.apply(namedModalProvider, [name, modalObj]);
+          return original.apply(scModalProvider, [name, modalObj]);
         });
 
       $stateProvider.state = _.wrap($stateProvider.state, function (original, name, definition) {

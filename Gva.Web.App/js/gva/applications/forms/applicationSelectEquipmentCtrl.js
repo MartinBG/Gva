@@ -1,9 +1,9 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function AppSelectEquipmentCtrl($scope, namedModal) {
+  function AppSelectEquipmentCtrl($scope, scModal) {
     $scope.chooseEquipment = function () {
-      var modalInstance = namedModal.open('chooseEquipment');
+      var modalInstance = scModal.open('chooseEquipment');
 
       modalInstance.result.then(function (equipmentId) {
         $scope.model.lot.id = equipmentId;
@@ -13,7 +13,7 @@
     };
 
       $scope.newEquipment = function () {
-        var modalInstance = namedModal.open('newEquipment');
+        var modalInstance = scModal.open('newEquipment');
 
         modalInstance.result.then(function (equipmentId) {
           $scope.model.lot.id = equipmentId;
@@ -23,7 +23,7 @@
       };
   }
 
-  AppSelectEquipmentCtrl.$inject = ['$scope', 'namedModal'];
+  AppSelectEquipmentCtrl.$inject = ['$scope', 'scModal'];
 
   angular.module('gva').controller('AppSelectEquipmentCtrl', AppSelectEquipmentCtrl);
 }(angular));

@@ -26,5 +26,18 @@
     'appTypes'
   ];
 
+  ChooseAppTypesModalCtrl.$resolve = {
+    appTypes: [
+      'Nomenclatures',
+      'scModalParams',
+      function (Nomenclatures, scModalParams) {
+        return Nomenclatures.query({
+          alias: 'applicationTypes',
+          caseTypeAlias: scModalParams.caseType.alias
+        }).$promise;
+      }
+    ]
+  };
+
   angular.module('gva').controller('ChooseAppTypesModalCtrl', ChooseAppTypesModalCtrl);
 }(angular));

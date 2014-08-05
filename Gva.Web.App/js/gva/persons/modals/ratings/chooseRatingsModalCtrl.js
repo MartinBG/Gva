@@ -5,13 +5,13 @@
   function ChooseRatingsModalCtrl(
     $scope,
     $modalInstance,
-    ratings,
-    includedRatings
+    scModalParams,
+    ratings
   ) {
     $scope.selectedRatings = [];
 
     $scope.ratings = _.filter(ratings, function (rating) {
-      return !_.contains(includedRatings, rating.partIndex);
+      return !_.contains(scModalParams.includedRatings, rating.partIndex);
     });
 
     $scope.addRatings = function () {
@@ -35,9 +35,19 @@
   ChooseRatingsModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'ratings',
-    'includedRatings'
+    'scModalParams',
+    'ratings'
   ];
+
+  ChooseRatingsModalCtrl.$resolve = {
+    ratings: [
+      'PersonRatings',
+      'scModalParams',
+      function (PersonRatings, scModalParams) {
+        return PersonRatings.query({ id: scModalParams.lotId }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('ChooseRatingsModalCtrl', ChooseRatingsModalCtrl);
 }(angular, _, $));

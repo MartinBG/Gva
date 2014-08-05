@@ -6,7 +6,7 @@
     $state,
     OrganizationInspections,
     Nomenclatures,
-    namedModal,
+    scModal,
     scFormParams
     ) {
     $scope.lotId = scFormParams.lotId;
@@ -52,19 +52,10 @@
     });
 
     $scope.chooseAudits = function () {
-      var modalInstance = namedModal.open(
-        'chooseInspections',
-        {
-          includedInspections: $scope.model.part.includedAudits
-        },
-        {
-          inspections: [
-            'OrganizationInspections',
-            function (OrganizationInspections) {
-              return OrganizationInspections.query({ id: scFormParams.lotId }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('chooseInspections', {
+        includedInspections: $scope.model.part.includedAudits,
+        lotId: scFormParams.lotId
+      });
 
       modalInstance.result.then(function (selectedInspections) {
         $scope.model.part.includedAudits = _.pluck(selectedInspections, 'partIndex');
@@ -165,7 +156,7 @@
     '$state',
     'OrganizationInspections',
     'Nomenclatures',
-    'namedModal',
+    'scModal',
     'scFormParams'
   ];
 

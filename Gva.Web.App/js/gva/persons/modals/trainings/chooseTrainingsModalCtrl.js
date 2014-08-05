@@ -5,13 +5,13 @@
   function ChooseTrainingsModalCtrl(
     $scope,
     $modalInstance,
-    trainings,
-    includedTrainings
+    scModalParams,
+    trainings
   ) {
     $scope.selectedTrainings = [];
 
     $scope.trainings = _.filter(trainings, function (training) {
-      return !_.contains(includedTrainings, training.partIndex);
+      return !_.contains(scModalParams.includedTrainings, training.partIndex);
     });
 
     $scope.addTrainings = function () {
@@ -35,9 +35,19 @@
   ChooseTrainingsModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'trainings',
-    'includedTrainings'
+    'scModalParams',
+    'trainings'
   ];
+
+  ChooseTrainingsModalCtrl.$resolve = {
+    trainings: [
+      'PersonDocumentTrainings',
+      'scModalParams',
+      function (PersonDocumentTrainings, scModalParams) {
+        return PersonDocumentTrainings.query({ id: scModalParams.lotId }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('ChooseTrainingsModalCtrl', ChooseTrainingsModalCtrl);
 }(angular, _, $));

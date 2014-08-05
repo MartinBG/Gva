@@ -6,19 +6,19 @@
     $scope,
     $modalInstance,
     PersonRatings,
-    rating,
-    lotId
+    scModalParams,
+    rating
   ) {
     $scope.form = {};
     $scope.rating = rating;
-    $scope.lotId = lotId;
+    $scope.lotId = scModalParams.lotId;
 
     $scope.save = function () {
       return $scope.form.newRatingForm.$validate()
         .then(function () {
           if ($scope.form.newRatingForm.$valid) {
             return PersonRatings
-              .save({ id: lotId }, $scope.rating)
+              .save({ id: $scope.lotId }, $scope.rating)
               .$promise
               .then(function (savedRating) {
                 return $modalInstance.close(savedRating);
@@ -36,8 +36,8 @@
     '$scope',
     '$modalInstance',
     'PersonRatings',
-    'rating',
-    'lotId'
+    'scModalParams',
+    'rating'
   ];
 
   NewRatingModalCtrl.$resolve = {

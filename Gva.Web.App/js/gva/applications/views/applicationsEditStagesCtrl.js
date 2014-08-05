@@ -7,7 +7,7 @@
     $state,
     $stateParams,
     $sce,
-    namedModal,
+    scModal,
     DocStages,
     appStages,
     doc
@@ -25,12 +25,10 @@
     $scope.newAppStage = function () {
       var nextOrdinal = Math.max(0, _.max(_.pluck($scope.appStages, 'ordinal'))) + 1;
 
-      var modalInstance = namedModal.open(
-        'newAppStage',
-        {
-          ordinal: nextOrdinal,
-          appId: $stateParams.id
-        });
+      var modalInstance = scModal.open('newAppStage', {
+        ordinal: nextOrdinal,
+        appId: $stateParams.id
+      });
 
       modalInstance.result.then(function () {
         return $state.transitionTo($state.$current, $stateParams, { reload: true });
@@ -40,19 +38,10 @@
     };
 
     $scope.viewAppStage = function (stage) {
-      var modalInstance = namedModal.open(
-        'editAppStage',
-        {
-          appId: $stateParams.id
-        },
-        {
-          stageModel: [
-            'AppStages',
-            function (AppStages) {
-              return AppStages.get({ id: $stateParams.id, ind: stage.id }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('editAppStage', {
+        appId: $stateParams.id,
+        stageId: stage.id
+      });
 
       modalInstance.result.then(function () {
         return $state.transitionTo($state.$current, $stateParams, { reload: true });
@@ -62,18 +51,7 @@
     };
 
     $scope.endDocStage = function () {
-      var stageModel = DocStages.get({
-        id: doc.docId,
-        docVersion: doc.version
-      })
-        .$promise
-        .then(function (result) {
-          result.docVersion = doc.version;
-          result.docTypeId = doc.docTypeId;
-          return result;
-        });
-
-      var modalInstance = namedModal.open('endDocStage', { stageModel: stageModel });
+      var modalInstance = scModal.open('endDocStage', { doc: doc });
 
       modalInstance.result.then(function () {
         return $state.transitionTo($state.$current, $stateParams, { reload: true });
@@ -83,18 +61,14 @@
     };
 
     $scope.nextDocStage = function () {
-      var caseDoc = _.first(doc.docRelations, function (item) {
+      var caseDoc = _.find(doc.docRelations, function (item) {
         return item.docId === item.rootDocId;
       });
 
-      var stageModel = {
-        docId: doc.docId,
-        docVersion: caseDoc.length > 0 ? caseDoc[0].docVersion : doc.version,
-        docTypeId: caseDoc.length > 0 ? caseDoc[0].docDocTypeId : doc.docTypeId,
-        startingDate: moment().startOf('minute').format('YYYY-MM-DDTHH:mm:ss')
-      };
-
-      var modalInstance = namedModal.open('nextDocStage', { stageModel: stageModel });
+      var modalInstance = scModal.open('nextDocStage', {
+        caseDoc: caseDoc,
+        doc: doc
+      });
 
       modalInstance.result.then(function () {
         return $state.transitionTo($state.$current, $stateParams, { reload: true });
@@ -104,18 +78,7 @@
     };
 
     $scope.editDocStage = function () {
-      var stageModel = DocStages.get({
-        id: doc.docId,
-        docVersion: doc.version
-      })
-        .$promise
-        .then(function (result) {
-          result.docVersion = doc.version;
-          result.docTypeId = doc.docTypeId;
-          return result;
-        });
-
-      var modalInstance = namedModal.open('editDocStage', { stageModel: stageModel });
+      var modalInstance = scModal.open('editDocStage', { doc: doc });
 
       modalInstance.result.then(function () {
         return $state.transitionTo($state.$current, $stateParams, { reload: true });
@@ -134,8 +97,6 @@
         });
       });
     };
-    //
-
   }
 
   ApplicationsEditStagesCtrl.$inject = [
@@ -143,7 +104,7 @@
     '$state',
     '$stateParams',
     '$sce',
-    'namedModal',
+    'scModal',
     'DocStages',
     'appStages',
     'doc'

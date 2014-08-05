@@ -33,5 +33,20 @@
     'person'
   ];
 
+  NewPersonModalCtrl.$resolve = {
+    person: [
+      'scModalParams',
+      function (scModalParams) {
+        return {
+          personData: {
+            uin: scModalParams.uin,
+            firstName: scModalParams.firstName,
+            lastName: scModalParams.lastName
+          }
+        };
+      }
+    ]
+  };
+
   angular.module('gva').controller('NewPersonModalCtrl', NewPersonModalCtrl);
 }(angular));

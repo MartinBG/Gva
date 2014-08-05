@@ -9,7 +9,7 @@
     $sce,
     Applications,
     appModel,
-    namedModal
+    scModal
     ) {
     $scope.appModel = appModel;
     $scope.filter = $stateParams.filter;
@@ -24,15 +24,7 @@
     };
 
     $scope.selectDoc = function () {
-      var modalInstance = namedModal.open('chooseDoc', {}, {
-        docs: [
-          '$stateParams',
-          'Applications',
-          function ($stateParams, Applications) {
-            return Applications.notLinkedDocs($stateParams).$promise;
-          }
-        ]
-      });
+      var modalInstance = scModal.open('chooseDoc', { filter: $scope.filter });
 
       modalInstance.result.then(function (doc) {
         $scope.appModel.doc = doc;
@@ -93,7 +85,7 @@
     '$sce',
     'Applications',
     'appModel',
-    'namedModal'
+    'scModal'
   ];
 
   ApplicationsLinkCtrl.$resolve = {

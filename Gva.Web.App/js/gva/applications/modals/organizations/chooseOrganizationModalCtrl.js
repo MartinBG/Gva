@@ -6,15 +6,14 @@
     $scope,
     $modalInstance,
     Organizations,
-    organizations,
-    uin,
-    name
+    scModalParams,
+    organizations
   ) {
     $scope.organizations = organizations;
 
     $scope.filters = {
-      uin: uin,
-      name: name
+      uin: scModalParams.uin,
+      name: scModalParams.name
     };
 
     $scope.search = function () {
@@ -36,10 +35,19 @@
     '$scope',
     '$modalInstance',
     'Organizations',
-    'organizations',
-    'uin',
-    'name'
+    'scModalParams',
+    'organizations'
   ];
+
+  ChooseOrganizationModalCtrl.$resolve = {
+    organizations: [
+      'Organizations',
+      'scModalParams',
+      function (Organizations, scModalParams) {
+        return Organizations.query(scModalParams).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('ChooseOrganizationModalCtrl', ChooseOrganizationModalCtrl);
 }(angular));

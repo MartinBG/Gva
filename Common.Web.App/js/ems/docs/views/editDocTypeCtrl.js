@@ -9,7 +9,7 @@
     Docs,
     doc,
     docTypeModel,
-    namedModal
+    scModal
   ) {
     $scope.oldDoc = doc;
     $scope.doc = docTypeModel.doc;
@@ -60,16 +60,8 @@
     };
 
     $scope.selectUnit = function selectUnit(mode) {
-      var modalInstance = namedModal.open('chooseUnit', {
+      var modalInstance = scModal.open('chooseUnit', {
         selectedUnits: $scope.doc[$scope.fullFieldName(mode)]
-      }, {
-        units: [
-          'Nomenclatures',
-          function (Nomenclatures) {
-            var params = _.assign({ alias: 'employeeUnit' });
-            return Nomenclatures.query(params).$promise;
-          }
-        ]
       });
 
       docTypeModel.missingFields = $scope.missingFields;
@@ -230,7 +222,7 @@
     'Docs',
     'doc',
     'docTypeModel',
-    'namedModal'
+    'scModal'
   ];
 
   EditDocTypeCtrl.$resolve = {

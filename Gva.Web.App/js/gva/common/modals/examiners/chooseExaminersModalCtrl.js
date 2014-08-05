@@ -5,14 +5,14 @@
   function ChooseExaminersModalCtrl(
     $scope,
     $modalInstance,
-    examiners,
-    includedExaminers
+    scModalParams,
+    examiners
   ) {
       $scope.examiners = examiners;
 
       $scope.selectedExaminers = [];
 
-      var includedExamienrsNames =  _.pluck(includedExaminers, 'name');
+      var includedExamienrsNames = _.pluck(scModalParams.includedExaminers, 'name');
       $scope.examiners = _.filter(examiners, function (examiner) {
         return !_.contains(includedExamienrsNames, examiner.name);
       });
@@ -39,8 +39,8 @@
   ChooseExaminersModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'examiners',
-    'includedExaminers'
+    'scModalParams',
+    'examiners'
   ];
 
   ChooseExaminersModalCtrl.$resolve = {

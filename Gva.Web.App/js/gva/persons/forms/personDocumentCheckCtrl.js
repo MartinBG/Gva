@@ -2,10 +2,10 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentCheckCtrl($scope, namedModal, scFormParams) {
+  function PersonDocumentCheckCtrl($scope, scModal, scFormParams) {
     $scope.isNew = scFormParams.isNew;
     $scope.choosePublisher = function () {
-      var modalInstance = namedModal.open('choosePublisher');
+      var modalInstance = scModal.open('choosePublisher');
 
       modalInstance.result.then(function (publisherName) {
         $scope.model.documentPublisher = publisherName;
@@ -15,7 +15,7 @@
     };
   }
 
-  PersonDocumentCheckCtrl.$inject = ['$scope', 'namedModal', 'scFormParams'];
+  PersonDocumentCheckCtrl.$inject = ['$scope', 'scModal', 'scFormParams'];
 
   angular.module('gva').controller('PersonDocumentCheckCtrl', PersonDocumentCheckCtrl);
 }(angular));

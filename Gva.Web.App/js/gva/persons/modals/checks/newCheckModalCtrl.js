@@ -6,21 +6,20 @@
     $scope,
     $modalInstance,
     PersonDocumentChecks,
-    personDocumentCheck,
-    lotId,
-    caseTypeId
+    scModalParams,
+    personDocumentCheck
   ) {
     $scope.form = {};
     $scope.personDocumentCheck = personDocumentCheck;
-    $scope.lotId = lotId;
-    $scope.caseTypeId = caseTypeId;
+    $scope.lotId = scModalParams.lotId;
+    $scope.caseTypeId = scModalParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.form.newDocumentCheckForm.$validate()
         .then(function () {
           if ($scope.form.newDocumentCheckForm.$valid) {
             return PersonDocumentChecks
-              .save({ id: lotId }, $scope.personDocumentCheck)
+              .save({ id: $scope.lotId }, $scope.personDocumentCheck)
               .$promise
               .then(function (savedCheck) {
                 return $modalInstance.close(savedCheck);
@@ -38,9 +37,8 @@
     '$scope',
     '$modalInstance',
     'PersonDocumentChecks',
-    'personDocumentCheck',
-    'lotId',
-    'caseTypeId'
+    'scModalParams',
+    'personDocumentCheck'
   ];
 
   NewCheckModalCtrl.$resolve = {

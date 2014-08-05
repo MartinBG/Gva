@@ -4,7 +4,7 @@
   function OrganizationAmendmentCtrl(
     $scope,
     $state,
-    namedModal,
+    scModal,
     scFormParams) {
     $scope.lotId = scFormParams.lotId;
 
@@ -45,20 +45,10 @@
     };
 
     $scope.chooseDocuments = function () {
-      var modalInstance = namedModal.open(
-        'chooseOrganizationDocs',
-        {
-          includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex'),
-          lotId: scFormParams.lotId
-        },
-        {
-          docs: [
-            'OrganizationsInventory',
-            function (OrganizationsInventory) {
-              return OrganizationsInventory.query({ id: scFormParams.lotId }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('chooseOrganizationDocs', {
+        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex'),
+        lotId: scFormParams.lotId
+      });
 
       modalInstance.result.then(function (selectedDocs) {
         $scope.model.includedDocuments = $scope.model.includedDocuments.concat(selectedDocs);
@@ -115,16 +105,7 @@
     });
 
     $scope.chooseLimitation = function (section) {
-      var modalInstance = namedModal.open('chooseLimitation', {}, {
-        limitations: [
-          'Nomenclatures',
-          function (Nomenclatures) {
-            return Nomenclatures.query({
-              alias: section.alias
-            }).$promise;
-          }
-        ]
-      });
+      var modalInstance = scModal.open('chooseLimitation', { section: section });
 
       modalInstance.result.then(function (limitationName) {
         if (section.alias === 'lim147limitations') {
@@ -169,7 +150,7 @@
   OrganizationAmendmentCtrl.$inject = [
     '$scope',
     '$state',
-    'namedModal',
+    'scModal',
     'scFormParams'
   ];
 

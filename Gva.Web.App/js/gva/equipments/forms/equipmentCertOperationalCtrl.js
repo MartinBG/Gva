@@ -4,7 +4,7 @@
   function EquipmentCertOperationalCtrl(
     $scope,
     $state,
-    namedModal,
+    scModal,
     scFormParams
   ) {
     $scope.deleteDocument = function (document) {
@@ -13,20 +13,10 @@
     };
 
     $scope.chooseDocuments = function () {
-      var modalInstance = namedModal.open(
-        'chooseEquipmentsDocs',
-        {
-          includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex'),
-          lotId: scFormParams.lotId
-        },
-        {
-          docs: [
-            'EquipmentsInventory',
-            function (EquipmentsInventory) {
-              return EquipmentsInventory.query({ id: scFormParams.lotId }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('chooseEquipmentsDocs', {
+        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex'),
+        lotId: scFormParams.lotId
+      });
 
       modalInstance.result.then(function (selectedDocs) {
         $scope.model.includedDocuments = $scope.model.includedDocuments.concat(selectedDocs);
@@ -55,7 +45,7 @@
   EquipmentCertOperationalCtrl.$inject = [
     '$scope',
     '$state',
-    'namedModal',
+    'scModal',
     'scFormParams'
   ];
 

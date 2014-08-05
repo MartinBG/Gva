@@ -1,9 +1,9 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function CommonExaminerCtrl($scope, namedModal) {
+  function CommonExaminerCtrl($scope, scModal) {
     $scope.addExaminer = function () {
-      var modalInstance = namedModal.open('chooseExaminers', {
+      var modalInstance = scModal.open('chooseExaminers', {
         includedExaminers: $scope.model
       });
 
@@ -21,7 +21,7 @@
     };
   }
 
-  CommonExaminerCtrl.$inject = ['$scope', 'namedModal'];
+  CommonExaminerCtrl.$inject = ['$scope', 'scModal'];
 
   angular.module('gva')
     .controller('CommonExaminerCtrl', CommonExaminerCtrl);

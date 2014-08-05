@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
   function DocsViewCtrl(
@@ -7,20 +7,12 @@
     $scope,
     $stateParams,
     doc,
-    namedModal
+    scModal
   ) {
     $scope.doc = doc;
 
     $scope.newCorr = function () {
-      var modalInstance = namedModal.open('newCorr', null, {
-        corr: [
-          '$stateParams',
-          'Corrs',
-          function resolveCorr($stateParams, Corrs) {
-            return Corrs.getNew().$promise;
-          }
-        ]
-      });
+      var modalInstance = scModal.open('newCorr');
 
       modalInstance.result.then(function (nomItem) {
         var newCorr = $scope.doc.docCorrespondents.slice();
@@ -32,16 +24,9 @@
     };
 
     $scope.selectCorr = function () {
-      var modalInstance = namedModal.open('chooseCorr', {
+      var modalInstance = scModal.open('chooseCorr', {
         selectedCorrs: $scope.doc.docCorrespondents,
         corr: {}
-      }, {
-        corrs: [
-          'Corrs',
-          function (Corrs) {
-            return Corrs.get().$promise;
-          }
-        ]
       });
 
       modalInstance.result.then(function (nomItem) {
@@ -147,16 +132,8 @@
         };
       }
 
-      modalInstance = namedModal.open('chooseUnit', {
+      modalInstance = scModal.open('chooseUnit', {
         selectedUnits: selectedUnits
-      }, {
-        units: [
-          'Nomenclatures',
-          function (Nomenclatures) {
-            var params = _.assign({ alias: 'employeeUnit' });
-            return Nomenclatures.query(params).$promise;
-          }
-        ]
       });
 
       modalInstance.result.then(function (unit) {
@@ -172,8 +149,8 @@
     '$scope',
     '$stateParams',
     'doc',
-    'namedModal'
+    'scModal'
   ];
 
   angular.module('ems').controller('DocsViewCtrl', DocsViewCtrl);
-}(angular, _));
+}(angular));
