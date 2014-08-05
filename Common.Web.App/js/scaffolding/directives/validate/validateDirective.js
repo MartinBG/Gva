@@ -120,6 +120,13 @@
           return $q.all(validationResultPromises).then(function () {
             if (form) {
               form.$validated = true;
+
+              var unwatch = scope.$watch('form.$readonly', function (readonly) {
+                if (readonly) {
+                  form.$validated = false;
+                  unwatch();
+                }
+              });
             }
 
             return (form || control).$valid;
