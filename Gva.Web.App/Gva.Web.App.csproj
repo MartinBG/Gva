@@ -390,11 +390,11 @@
     <Content Include="js\gva\common\modals\persons\choosePersonModalCtrl.js" />
     <Content Include="js\gva\common\modals\persons\newPersonModal.html" />
     <Content Include="js\gva\common\modals\persons\newPersonModalCtrl.js" />
-    <Content Include="js\gva\directives\application\applicationDirective.js" />
-    <Content Include="js\gva\directives\resources\applicationNoms.js" />
-    <Content Include="js\gva\directives\partSelect\partSelectDirective.js" />
-    <Content Include="js\gva\directives\resources\applicationNoms.js" />
-    <Content Include="js\gva\directives\resources\gvaParts.js" />
+    <Content Include="js\gva\common\directives\application\applicationDirective.js" />
+    <Content Include="js\gva\common\resources\applicationNoms.js" />
+    <Content Include="js\gva\common\directives\partSelect\partSelectDirective.js" />
+    <Content Include="js\gva\common\resources\applicationNoms.js" />
+    <Content Include="js\gva\common\resources\gvaParts.js" />
     <Content Include="js\gva\equipments\forms\equipmentCertOperational.html" />
     <Content Include="js\gva\equipments\forms\equipmentCertOperationalCtrl.js" />
     <Content Include="js\gva\equipments\forms\equipmentData.html" />
