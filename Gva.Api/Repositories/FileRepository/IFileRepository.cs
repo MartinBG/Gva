@@ -13,5 +13,7 @@ namespace Gva.Api.Repositories.FileRepository
         void DeleteFileReferences(PartVersion partVersion);
 
         GvaLotFile[] GetFileReferences(int partId, int? casetype);
+
+        bool IsUniqueBPN(int lotId, int caseTypeId, string bookPageNumber, int? fileId = null);
     }
 }

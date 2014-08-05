@@ -5,6 +5,7 @@ using Common.Json;
 using Gva.Api.ModelsDO;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Repositories.LotRepositories;
+using Gva.Api.Repositories.FileRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -12,10 +13,12 @@ namespace Gva.Api.Controllers
     public class GvaPartsController : ApiController
     {
         private ILotRepository lotRepository;
+        private IFileRepository fileRepository;
 
-        public GvaPartsController(ILotRepository lotRepository)
+        public GvaPartsController(ILotRepository lotRepository, IFileRepository fileRepository)
         {
             this.lotRepository = lotRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("{*path:regex(^aircraftCertRegistrationsFM$)}")]
@@ -56,6 +59,16 @@ namespace Gva.Api.Controllers
             }
 
             return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("isUniqueBPN")]
+        public IHttpActionResult IsUniqueBPN(int lotId, int caseTypeId, string bookPageNumber, int? fileId = null)
+        {
+            return Ok(new
+            {
+                isUnique = this.fileRepository.IsUniqueBPN(lotId, caseTypeId, bookPageNumber, fileId)
+            });
         }
     }
 }
