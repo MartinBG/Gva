@@ -66,16 +66,22 @@ namespace Regs.Api.Repositories.LotRepositories
         public Lot GetLotIndex(int lotId)
         {
             Lot lot = this.unitOfWork.DbContext.Set<Lot>()
-                .Include(l => l.Parts)
                 .Include(l => l.Commits)
                 .Include(l => l.Set)
-                .Include(l => l.Set.SetParts)
                 .SingleOrDefault(l => l.LotId == lotId);
 
             if (lot == null)
             {
                 throw new Exception(string.Format("Cannot find lot with id: {0}", lotId));
             }
+
+            this.unitOfWork.DbContext.Set<SetPart>()
+                .Where(sp => sp.SetId == lot.SetId)
+                .Load();
+
+            this.unitOfWork.DbContext.Set<Part>()
+                .Where(p => p.LotId == lotId)
+                .Load();
 
             Commit commit = this.unitOfWork.DbContext.Set<Commit>()
                 .Include(c => c.CommitVersions)
@@ -92,16 +98,22 @@ namespace Regs.Api.Repositories.LotRepositories
         public Lot GetLot(int lotId, int? commitId = null)
         {
             Lot lot = this.unitOfWork.DbContext.Set<Lot>()
-                .Include(l => l.Parts)
                 .Include(l => l.Commits)
                 .Include(l => l.Set)
-                .Include(l => l.Set.SetParts)
                 .SingleOrDefault(l => l.LotId == lotId);
 
             if (lot == null)
             {
                 throw new Exception(string.Format("Cannot find lot with id: {0}", lotId));
             }
+
+            this.unitOfWork.DbContext.Set<SetPart>()
+                .Where(sp => sp.SetId == lot.SetId)
+                .Load();
+
+            this.unitOfWork.DbContext.Set<Part>()
+                .Where(p => p.LotId == lotId)
+                .Load();
 
             Commit commit;
             if (commitId.HasValue)
