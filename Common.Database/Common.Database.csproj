@@ -44,6 +44,7 @@
   <ItemGroup>
     <Content Include="Create\Create.sql" />
     <Content Include="Create\CreateDB.sql" />
+    <Content Include="Create\Diagram\Units.sql" />
     <Content Include="Create\Tables\Addresses\Countries.sql" />
     <Content Include="Create\Tables\Addresses\Districts.sql" />
     <Content Include="Create\Tables\Addresses\Municipalities.sql" />
