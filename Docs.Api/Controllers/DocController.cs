@@ -2564,23 +2564,111 @@ namespace Docs.Api.Controllers
                 //Common
                 if (docTypeUri == RioDocumentMetadata.ReceiptNotAcknowledgedMessageMetadata.DocumentTypeURIValue)
                 {
-                    content = RioObjectUtils.CreateR0090ReceiptNotAcknowledgedMessage();
+                    var activeServiceProvider = GetActiveElectronicServiceProvider();
+                    var correspondentNamesUinEmail = GetCorrespondentNamesUinAndEmail(parentDocId);
+
+                    content = RioObjectUtils.CreateR0090ReceiptNotAcknowledgedMessage(
+                        correspondentNamesUinEmail.Item1,
+                        correspondentNamesUinEmail.Item2,
+                        correspondentNamesUinEmail.Item3,
+                        correspondentNamesUinEmail.Item4,
+                        correspondentNamesUinEmail.Item5,
+                        null,
+                        null,
+                        null,
+                        activeServiceProvider.Code,
+                        activeServiceProvider.Name,
+                        activeServiceProvider.Bulstat);
                 }
                 //Common
                 else if (docTypeUri == RioDocumentMetadata.ReceiptAcknowledgedMessageMetadata.DocumentTypeURIValue)
                 {
-                    content = RioObjectUtils.CreateR0101ReceiptAcknowledgedMessage();
+                    var activeServiceProvider = GetActiveElectronicServiceProvider();
+                    var correspondentNamesUinEmail = GetCorrespondentNamesUinAndEmail(parentDocId);
+                    var registeredBy = String.Format("Служител {0}", activeServiceProvider.Name);
+
+                    content = RioObjectUtils.CreateR0101ReceiptAcknowledgedMessage(
+                        null,
+                        registeredBy,
+                        null,
+                        null,
+                        null,
+                        null,
+                        correspondentNamesUinEmail.Item1,
+                        correspondentNamesUinEmail.Item2,
+                        correspondentNamesUinEmail.Item3,
+                        correspondentNamesUinEmail.Item4,
+                        correspondentNamesUinEmail.Item5,
+                        null,
+                        null,
+                        null,
+                        activeServiceProvider.Code,
+                        activeServiceProvider.Name,
+                        activeServiceProvider.Bulstat);
                 }
                 //Common
                 else if (docTypeUri == RioDocumentMetadata.RemovingIrregularitiesInstructionsMetadata.DocumentTypeURIValue)
                 {
-                    content = RioObjectUtils.CreateR3010RemovingIrregularitiesInstructions();
+                    var activeServiceProvider = GetActiveElectronicServiceProvider();
+                    var correspondentNamesUinEmail = GetCorrespondentNamesUinAndEmail(parentDocId);
+                    var registeredBy = String.Format("Служител {0}", activeServiceProvider.Name);
+                    Doc caseDoc = null;
+                    if (caseDocId.HasValue)
+                    {
+                        caseDoc = this.unitOfWork.DbContext.Set<Doc>().SingleOrDefault(e => e.DocId == caseDocId.Value);
+                    }
+                    Doc parentDoc = null;
+                    if (parentDocId.HasValue)
+                    {
+                        parentDoc = this.unitOfWork.DbContext.Set<Doc>().SingleOrDefault(e => e.DocId == parentDocId.Value);
+                    }
+
+                    content = RioObjectUtils.CreateR3010RemovingIrregularitiesInstructions(
+                        activeServiceProvider.Name,
+                        caseDoc != null ? caseDoc.RegDate : null,
+                        caseDoc != null ? caseDoc.RegIndex : null,
+                        caseDoc != null ? caseDoc.RegNumber.HasValue ? caseDoc.RegNumber.ToString() : null : null,
+                        parentDoc != null ? parentDoc.RegDate : null,
+                        parentDoc != null ? parentDoc.RegIndex : null,
+                        parentDoc != null ? parentDoc.RegNumber.HasValue ? parentDoc.RegNumber.ToString() : null : null,
+                        null,
+                        null,
+                        null,
+                        correspondentNamesUinEmail.Item1,
+                        correspondentNamesUinEmail.Item2,
+                        correspondentNamesUinEmail.Item3,
+                        correspondentNamesUinEmail.Item4,
+                        correspondentNamesUinEmail.Item5,
+                        activeServiceProvider.Code,
+                        activeServiceProvider.Name,
+                        activeServiceProvider.Bulstat,
+                        null,
+                        registeredBy);
                 }
                 //Common
                 else if (docTypeUri == RioDocumentMetadata.ContainerTransferFileCompetenceMetadata.DocumentTypeURIValue)
                 {
+                    var activeServiceProvider = GetActiveElectronicServiceProvider();
+                    var correspondentNamesUinEmail = GetCorrespondentNamesUinAndEmail(parentDocId);
                     var competenceFiles = GetCompetenceFilesByDocId(caseDocId);
-                    content = RioObjectUtils.CreateR6064ContainerTransferFileCompetence(competenceFiles);
+                    Doc caseDoc = null;
+                    if (caseDocId.HasValue)
+                    {
+                        caseDoc = this.unitOfWork.DbContext.Set<Doc>().SingleOrDefault(e => e.DocId == caseDocId.Value);
+                    }
+
+                    content = RioObjectUtils.CreateR6064ContainerTransferFileCompetence(
+                        competenceFiles,
+                        caseDoc != null ? caseDoc.RegDate : null,
+                        caseDoc != null ? caseDoc.RegIndex : null,
+                        caseDoc != null ? caseDoc.RegNumber.HasValue ? caseDoc.RegNumber.ToString() : null : null,
+                        correspondentNamesUinEmail.Item1,
+                        correspondentNamesUinEmail.Item2,
+                        correspondentNamesUinEmail.Item3,
+                        correspondentNamesUinEmail.Item4,
+                        activeServiceProvider.Code,
+                        activeServiceProvider.Name,
+                        activeServiceProvider.Bulstat);
                 }
                 //Mosv
                 else if (docTypeUri == RioDocumentMetadata.DecisionGrantAccessPublicInformationMetadata.DocumentTypeURIValue)
@@ -2594,6 +2682,66 @@ namespace Docs.Api.Controllers
             {
                 return null;
             }
+        }
+
+        private ElectronicServiceProvider GetActiveElectronicServiceProvider()
+        {
+            return this.unitOfWork.DbContext.Set<ElectronicServiceProvider>().FirstOrDefault(e => e.IsActive);
+        }
+
+        private Tuple<string, string, string, string, string> GetCorrespondentNamesUinAndEmail(int? docId)
+        {
+            string firstName = null;
+            string secondName = null;
+            string lastName = null;
+            string uin = null;
+            string email = null;
+
+            if (docId.HasValue)
+            {
+
+                DocCorrespondent docCorrespondent =
+                    this.unitOfWork.DbContext.Set<DocCorrespondent>()
+                    .FirstOrDefault(e => e.DocId == docId);
+
+                if (docCorrespondent != null)
+                {
+                    Correspondent correspondent =
+                        this.unitOfWork.DbContext.Set<Correspondent>()
+                        .Include(e => e.CorrespondentType)
+                        .SingleOrDefault(e => e.CorrespondentId == docCorrespondent.CorrespondentId);
+
+                    if (correspondent != null)
+                    {
+                        if (correspondent.CorrespondentType.Alias == "BulgarianCitizen")
+                        {
+                            firstName = correspondent.BgCitizenFirstName;
+                            lastName = correspondent.BgCitizenLastName;
+                            uin = correspondent.BgCitizenUIN;
+                        }
+                        else if (correspondent.CorrespondentType.Alias == "Foreigner")
+                        {
+                            firstName = correspondent.ForeignerFirstName;
+                            lastName = correspondent.ForeignerLastName;
+                        }
+                        else if (correspondent.CorrespondentType.Alias == "LegalEntity")
+                        {
+                            if (correspondent.LegalEntityName != null || correspondent.LegalEntityBulstat != null)
+                            {
+                                firstName = (correspondent.LegalEntityName ?? String.Empty + " " + correspondent.LegalEntityBulstat ?? String.Empty).Trim();
+                            }
+                        }
+                        else if (correspondent.CorrespondentType.Alias == "ForeignLegalEntity")
+                        {
+                            firstName = correspondent.FLegalEntityName;
+                        }
+
+                        email = correspondent.Email;
+                    }
+                }
+            }
+
+            return new Tuple<string, string, string, string, string>(firstName, secondName, lastName, uin, email);
         }
 
         private List<Rio.Data.Utils.RioObjectUtils.CompetenceContainerFile> GetCompetenceFilesByDocId(int? caseDocId)

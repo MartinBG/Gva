@@ -19,7 +19,7 @@
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>795</TabRatio>
-  <ActiveSheet>5</ActiveSheet>
+  <ActiveSheet>6</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -6262,7 +6262,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <LeftColumnVisible>12</LeftColumnVisible>
    <Panes>
     <Pane>
@@ -6305,7 +6304,7 @@
     <Cell><Data ss:Type="String">ИАОС</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">iaos</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">3</Data></Cell>
@@ -6313,7 +6312,7 @@
     <Cell><Data ss:Type="String">БД Благоевград</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">bg_blagoevgrad</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">4</Data></Cell>
@@ -6321,7 +6320,7 @@
     <Cell><Data ss:Type="String">БД Варна</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">bd_varna</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">5</Data></Cell>
@@ -6329,7 +6328,7 @@
     <Cell><Data ss:Type="String">БД Пловдив</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">bd_plovdiv</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">6</Data></Cell>
@@ -6337,7 +6336,7 @@
     <Cell><Data ss:Type="String">БД Плевен</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">bd_pleven</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">7</Data></Cell>
@@ -6345,7 +6344,7 @@
     <Cell><Data ss:Type="String">ДНП Пирин</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">dnp_pirin</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">8</Data></Cell>
@@ -6353,7 +6352,7 @@
     <Cell><Data ss:Type="String">ДНП Рила</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">dnp_rila</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">9</Data></Cell>
@@ -6361,7 +6360,7 @@
     <Cell><Data ss:Type="String">ДНП Централен Балкан</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">dnp_tsentralenbalkan</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">10</Data></Cell>
@@ -6369,7 +6368,7 @@
     <Cell><Data ss:Type="String">РИОСВ Благоевград</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_blagoevgrad</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">11</Data></Cell>
@@ -6377,7 +6376,7 @@
     <Cell><Data ss:Type="String">РИОСВ Бургас</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_burgas</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">12</Data></Cell>
@@ -6385,7 +6384,7 @@
     <Cell><Data ss:Type="String">РИОСВ Варна</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_varna</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">13</Data></Cell>
@@ -6393,7 +6392,7 @@
     <Cell><Data ss:Type="String">РИОСВ ВеликоТърново</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_velikotarnovo</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">14</Data></Cell>
@@ -6401,7 +6400,7 @@
     <Cell><Data ss:Type="String">РИОСВ Враца</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_vratsa</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">15</Data></Cell>
@@ -6409,7 +6408,7 @@
     <Cell><Data ss:Type="String">РИОСВ Монтана</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_montana</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">16</Data></Cell>
@@ -6417,7 +6416,7 @@
     <Cell><Data ss:Type="String">РИОСВ Пазарджик</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_pazardzhik</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">17</Data></Cell>
@@ -6425,7 +6424,7 @@
     <Cell><Data ss:Type="String">РИОСВ Перник</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_pernik</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">18</Data></Cell>
@@ -6433,7 +6432,7 @@
     <Cell><Data ss:Type="String">РИОСВ Плевен</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_pleven</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">19</Data></Cell>
@@ -6441,7 +6440,7 @@
     <Cell><Data ss:Type="String">РИОСВ Пловдив</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_plovdiv</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">20</Data></Cell>
@@ -6449,7 +6448,7 @@
     <Cell><Data ss:Type="String">РИОСВ Русе</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_ruse</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">21</Data></Cell>
@@ -6457,7 +6456,7 @@
     <Cell><Data ss:Type="String">РИОСВ Смолян</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_smolyan</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">22</Data></Cell>
@@ -6465,7 +6464,7 @@
     <Cell><Data ss:Type="String">РИОСВ София</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_sofia</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">23</Data></Cell>
@@ -6473,7 +6472,7 @@
     <Cell><Data ss:Type="String">РИОСВ Стара Загора</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_starazagora</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">24</Data></Cell>
@@ -6481,7 +6480,7 @@
     <Cell><Data ss:Type="String">РИОСВ Хасково</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_haskovo</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="Number">25</Data></Cell>
@@ -6489,7 +6488,7 @@
     <Cell><Data ss:Type="String">РИОСВ Шумен</Data></Cell>
     <Cell><Data ss:Type="String">000215889  </Data></Cell>
     <Cell><Data ss:Type="String">riosv_shumen</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -6499,11 +6498,12 @@
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
    <Unsynced/>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>14</ActiveRow>
-     <ActiveCol>3</ActiveCol>
+     <ActiveRow>3</ActiveRow>
+     <ActiveCol>9</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

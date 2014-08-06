@@ -898,8 +898,7 @@ namespace Docs.Api.Controllers
         {
             var predicate =
                 PredicateBuilder.True<ElectronicServiceProvider>()
-                .AndStringContains(e => e.Name, term)
-                .And(e => e.IsActive);
+                .AndStringContains(e => e.Name, term);
 
             var results =
                 this.unitOfWork.DbContext.Set<ElectronicServiceProvider>()
