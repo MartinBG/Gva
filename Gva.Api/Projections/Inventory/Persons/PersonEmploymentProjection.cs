@@ -42,6 +42,7 @@ namespace Gva.Api.Projections.Inventory.Persons
             invItem.Valid = personEmployment.Content.Get<string>("valid.code") == "Y";
             invItem.FromDate = personEmployment.Content.Get<DateTime>("hiredate");
             invItem.ToDate = null;
+            invItem.Notes = personEmployment.Content.Get<string>("notes");
 
             invItem.CreatedBy = this.userRepository.GetUser(personEmployment.Part.CreatorId).Fullname;
             invItem.CreationDate = personEmployment.Part.CreateDate;

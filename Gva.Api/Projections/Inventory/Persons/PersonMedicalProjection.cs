@@ -49,6 +49,7 @@ namespace Gva.Api.Projections.Inventory.Persons
             invItem.Valid = null;
             invItem.FromDate = personMedical.Content.Get<DateTime>("documentDateValidFrom");
             invItem.ToDate = personMedical.Content.Get<DateTime>("documentDateValidTo");
+            invItem.Notes = personMedical.Content.Get<string>("notes");
 
             invItem.CreatedBy = this.userRepository.GetUser(personMedical.Part.CreatorId).Fullname;
             invItem.CreationDate = personMedical.Part.CreateDate;

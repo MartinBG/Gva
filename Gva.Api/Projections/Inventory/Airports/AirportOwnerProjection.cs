@@ -42,6 +42,7 @@ namespace Gva.Api.Projections.Inventory.Airports
             invItem.Valid = null;
             invItem.FromDate = airportOwner.Content.Get<DateTime>("fromDate");
             invItem.ToDate = airportOwner.Content.Get<DateTime?>("toDate");
+            invItem.Notes = airportOwner.Content.Get<string>("notes");
 
             invItem.CreatedBy = this.userRepository.GetUser(airportOwner.Part.CreatorId).Fullname;
             invItem.CreationDate = airportOwner.Part.CreateDate;

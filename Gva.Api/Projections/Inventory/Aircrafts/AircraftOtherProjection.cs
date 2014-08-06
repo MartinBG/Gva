@@ -44,6 +44,7 @@ namespace Gva.Api.Projections.Inventory.Aircrafts
             invItem.Valid = valid == null ? (bool?)null : valid.Code == "Y";
             invItem.FromDate = aircraftOther.Content.Get<DateTime?>("documentDateValidFrom");
             invItem.ToDate = aircraftOther.Content.Get<DateTime?>("documentDateValidTo");
+            invItem.Notes = aircraftOther.Content.Get<string>("notes");
 
             invItem.CreatedBy = this.userRepository.GetUser(aircraftOther.Part.CreatorId).Fullname;
             invItem.CreationDate = aircraftOther.Part.CreateDate;
