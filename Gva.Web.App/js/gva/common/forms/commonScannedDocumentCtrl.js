@@ -4,13 +4,12 @@
 
   function CommonScannedDocCtrl(
     $scope,
-    $stateParams,
     Nomenclatures,
     GvaParts,
     scFormParams
   ) {
     var caseType = null;
-    $scope.lotId = $stateParams.id;
+    $scope.lotId = scFormParams.lotId;
     $scope.setPart = scFormParams.setPart;
 
     var addNewFile = function () {
@@ -43,10 +42,10 @@
     });
 
     $scope.addFile = function () {
-      if ($stateParams.caseTypeId && !caseType) {
+      if (scFormParams.caseTypeId && !caseType) {
         return Nomenclatures.get({
-          alias: 'organizationCaseTypes',
-          id: $stateParams.caseTypeId
+          alias: 'caseTypes',
+          id: scFormParams.caseTypeId
         }).$promise.then(function (ct) {
           caseType = ct;
           addNewFile();
@@ -79,7 +78,7 @@
         }
         else {
           return GvaParts.isUniqueBPN({
-            lotId: $stateParams.id,
+            lotId: scFormParams.lotId,
             caseTypeId: file.caseType.nomValueId,
             bookPageNumber: file.bookPageNumber,
             fileId: file.lotFileId
@@ -96,7 +95,6 @@
 
   CommonScannedDocCtrl.$inject = [
     '$scope',
-    '$stateParams',
     'Nomenclatures',
     'GvaParts',
     'scFormParams'

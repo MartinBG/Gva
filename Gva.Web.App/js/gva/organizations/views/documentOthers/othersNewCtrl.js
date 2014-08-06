@@ -9,6 +9,10 @@
     OrganizationDocumentOthers,
     organizationDocumentOther
   ) {
+    $scope.organizationDocumentOther = organizationDocumentOther;
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
+
     $scope.save = function () {
       return $scope.newDocumentOtherForm.$validate()
         .then(function () {
@@ -21,8 +25,6 @@
           }
         });
     };
-
-    $scope.organizationDocumentOther = organizationDocumentOther;
 
     $scope.cancel = function () {
       return $state.go('root.organizations.view.documentOthers.search');

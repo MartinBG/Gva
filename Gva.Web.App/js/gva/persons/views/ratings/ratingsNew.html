@@ -12,7 +12,8 @@
       <gva-rating name="ratingForm" ng-model="rating.part" sc-form-params="{ isNew: true }"></gva-rating>
 
       <gva-rating-edition name="ratingEditionForm" ng-if="rating.part.staffType" ng-model="rating.part.editions[0]"
-        sc-data-staff-type="rating.part.staffType"></gva-rating-edition>
+        sc-form-params="{ lotId: lotId }" sc-data-staff-type="rating.part.staffType">
+      </gva-rating-edition>
     </div>
   </div>
 </ng-form>

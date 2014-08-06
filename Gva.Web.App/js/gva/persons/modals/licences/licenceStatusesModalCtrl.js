@@ -6,14 +6,12 @@
     $scope,
     $modalInstance,
     PersonLicences,
-    licence,
-    personId,
-    licenceInd,
+    scModalParams,
     statusModel
   ) {
     $scope.form = {};
     $scope.statusModel = statusModel;
-    $scope.licence = licence;
+    $scope.licence = scModalParams.licence;
 
     $scope.save = function () {
       return $scope.form.licenceStatusesForm.$validate().then(function () {
@@ -24,11 +22,13 @@
           $scope.licence.part.statuses.push(statusModel);
           $scope.licence.part.valid = statusModel.valid;
 
-          return PersonLicences
-            .save({ id: personId, ind: licenceInd }, $scope.licence).$promise
-            .then(function () {
-              return $modalInstance.close();
-            });
+          return PersonLicences.save({
+            id: scModalParams.personId,
+            ind: scModalParams.licenceInd
+          },
+          $scope.licence).$promise.then(function () {
+           return $modalInstance.close();
+          });
         }
       });
     };
@@ -43,9 +43,7 @@
     '$scope',
     '$modalInstance',
     'PersonLicences',
-    'licence',
-    'personId',
-    'licenceInd',
+    'scModalParams',
     'statusModel'
   ];
 

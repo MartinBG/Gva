@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    namedModal,
+    scModal,
     PersonLicences,
     licence,
     scMessage
@@ -15,6 +15,7 @@
     $scope.licence = licence;
     $scope.editMode = null;
     $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.$watch('licence.part.editions | last', function (lastEdition) {
       $scope.currentEdition = lastEdition;
@@ -85,7 +86,7 @@
         licenceInd: $stateParams.ind
       };
 
-      var modalInstance = namedModal.open('licenceStatuses', params);
+      var modalInstance = scModal.open('licenceStatuses', params);
 
       modalInstance.result.then(function () {
         $state.transitionTo($state.current, $stateParams, { reload: true });
@@ -99,7 +100,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'namedModal',
+    'scModal',
     'PersonLicences',
     'licence',
     'scMessage'

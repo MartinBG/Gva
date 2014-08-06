@@ -10,6 +10,8 @@
     employment
   ) {
     $scope.personDocumentEmployment = employment;
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newDocumentEmploymentForm.$validate()

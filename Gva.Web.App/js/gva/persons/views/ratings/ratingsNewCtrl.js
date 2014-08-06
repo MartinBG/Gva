@@ -10,6 +10,7 @@
     rating
   ) {
     $scope.rating = rating;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newRatingForm.$validate()

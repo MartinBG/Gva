@@ -9,6 +9,9 @@
     EquipmentCertOperationals,
     equipmentCertOper
   ) {
+    $scope.equipmentCertOper = equipmentCertOper;
+    $scope.lotId = $stateParams.id;
+
     $scope.save = function () {
       return $scope.newCertOperForm.$validate()
         .then(function () {
@@ -21,8 +24,6 @@
           }
         });
     };
-
-    $scope.equipmentCertOper = equipmentCertOper;
 
     $scope.cancel = function () {
       return $state.go('root.equipments.view.opers.search');

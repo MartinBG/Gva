@@ -4,7 +4,6 @@
 
   function PersonDataCtrl(
     $scope,
-    $stateParams,
     Persons,
     Nomenclatures,
     scFormParams
@@ -95,7 +94,10 @@
       if (!$scope.model.uin) {
         return true;
       }
-      return Persons.isUniqueUin({ uin: $scope.model.uin, personId: $stateParams.id }).$promise
+      return Persons.isUniqueUin({
+        uin: $scope.model.uin,
+        personId: scFormParams.personId
+      }).$promise
         .then(function (result) {
           return result.isUnique;
         });
@@ -104,7 +106,6 @@
 
   PersonDataCtrl.$inject = [
     '$scope',
-    '$stateParams',
     'Persons',
     'Nomenclatures',
     'scFormParams'

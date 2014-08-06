@@ -14,6 +14,8 @@
 
     $scope.organizationDocumentOther = organizationDocumentOther;
     $scope.editMode = null;
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';

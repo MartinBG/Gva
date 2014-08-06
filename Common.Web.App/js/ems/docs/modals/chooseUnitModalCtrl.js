@@ -6,8 +6,8 @@
     $modalInstance,
     $scope,
     Nomenclatures,
-    units,
-    selectedUnits
+    scModalParams,
+    units
   ) {
     $scope.units = units;
 
@@ -15,7 +15,7 @@
       name: null
     };
 
-    $scope.selectedUnits = _.map(selectedUnits, function (unit) {
+    $scope.selectedUnits = _.map(scModalParams.selectedUnits, function (unit) {
       return unit.nomValueId;
     });
 
@@ -43,9 +43,18 @@
     '$modalInstance',
     '$scope',
     'Nomenclatures',
-    'units',
-    'selectedUnits'
+    'scModalParams',
+    'units'
   ];
+
+  ChooseUnitModalCtrl.$resolve = {
+    units: [
+      'Nomenclatures',
+      function (Nomenclatures) {
+        return Nomenclatures.query({ alias: 'employeeUnit' }).$promise;
+      }
+    ]
+  };
 
   angular.module('ems').controller('ChooseUnitModalCtrl', ChooseUnitModalCtrl);
 }(angular, _));

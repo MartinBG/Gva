@@ -5,13 +5,13 @@
   function ChooseRatingsModalCtrl(
     $scope,
     $modalInstance,
-    ratings,
-    includedRatings
+    scModalParams,
+    ratings
   ) {
     $scope.selectedRatings = [];
 
     $scope.ratings = _.filter(ratings, function (rating) {
-      return !_.contains(includedRatings, rating.partIndex);
+      return !_.contains(scModalParams.includedRatings, rating.partIndex);
     });
 
     $scope.addRatings = function () {
@@ -35,16 +35,16 @@
   ChooseRatingsModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'ratings',
-    'includedRatings'
+    'scModalParams',
+    'ratings'
   ];
 
   ChooseRatingsModalCtrl.$resolve = {
     ratings: [
-      '$stateParams',
       'PersonRatings',
-      function ($stateParams, PersonRatings) {
-        return PersonRatings.query({ id: $stateParams.id }).$promise;
+      'scModalParams',
+      function (PersonRatings, scModalParams) {
+        return PersonRatings.query({ id: scModalParams.lotId }).$promise;
       }
     ]
   };

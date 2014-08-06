@@ -6,16 +6,15 @@
     $scope,
     $modalInstance,
     Persons,
-    persons,
-    uin,
-    names
+    scModalParams,
+    persons
   ) {
     $scope.persons = persons;
 
     $scope.filters = {
       lin: null,
-      uin: uin,
-      names: names
+      uin: scModalParams.uin,
+      names: scModalParams.names
     };
 
     $scope.search = function () {
@@ -44,10 +43,19 @@
     '$scope',
     '$modalInstance',
     'Persons',
-    'persons',
-    'uin',
-    'names'
+    'scModalParams',
+    'persons'
   ];
+
+  ChoosePersonModalCtrl.$resolve = {
+    persons: [
+      'Persons',
+      'scModalParams',
+      function (Persons, scModalParams) {
+        return Persons.query(scModalParams).$promise;
+      }
+    ]
+  };
 
   angular.module('gva').controller('ChoosePersonModalCtrl', ChoosePersonModalCtrl);
 }(angular));

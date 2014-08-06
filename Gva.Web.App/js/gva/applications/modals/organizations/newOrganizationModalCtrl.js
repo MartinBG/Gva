@@ -33,5 +33,19 @@
     'organization'
   ];
 
+  NewOrganizationModalCtrl.$resolve = {
+    organization: [
+      'scModalParams',
+      function (scModalParams) {
+        return {
+          organizationData: {
+            uin: scModalParams.uin,
+            name: scModalParams.name
+          }
+        };
+      }
+    ]
+  };
+
   angular.module('gva').controller('NewOrganizationModalCtrl', NewOrganizationModalCtrl);
 }(angular));

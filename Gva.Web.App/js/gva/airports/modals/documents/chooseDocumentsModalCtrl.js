@@ -4,20 +4,19 @@
 
   function ChooseAirportDocsModalCtrl(
     $scope,
-    $stateParams,
     $modalInstance,
     AirportsInventory,
-    docs,
-    includedDocs
+    scModalParams,
+    docs
   ) {
     $scope.selectedDocs = [];
 
     $scope.docs = _.filter(docs, function (doc) {
-      return !_.contains(includedDocs, doc.partIndex);
+      return !_.contains(scModalParams.includedDocs, doc.partIndex);
     });
 
     $scope.searchParams = {
-      id: $stateParams.id,
+      id: scModalParams.lotId,
       documentParts: []
     };
 
@@ -54,7 +53,7 @@
           null
       }).$promise.then(function (docs) {
         $scope.docs = _.filter(docs, function (doc) {
-          return !_.contains(includedDocs, doc.partIndex);
+          return !_.contains(scModalParams.includedDocs, doc.partIndex);
         });
       });
     };
@@ -62,19 +61,18 @@
 
   ChooseAirportDocsModalCtrl.$inject = [
     '$scope',
-    '$stateParams',
     '$modalInstance',
     'AirportsInventory',
-    'docs',
-    'includedDocs'
+    'scModalParams',
+    'docs'
   ];
 
   ChooseAirportDocsModalCtrl.$resolve = {
     docs: [
-      '$stateParams',
       'AirportsInventory',
-      function ($stateParams, AirportsInventory) {
-        return AirportsInventory.query({ id: $stateParams.id }).$promise;
+      'scModalParams',
+      function (AirportsInventory, scModalParams) {
+        return AirportsInventory.query({ id: scModalParams.lotId }).$promise;
       }
     ]
   };

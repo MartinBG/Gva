@@ -10,8 +10,8 @@
     aircraftDocumentDebt
   ) {
     $scope.isEdit = false;
-
     $scope.debt = aircraftDocumentDebt;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newDocumentDebtForm.$validate()

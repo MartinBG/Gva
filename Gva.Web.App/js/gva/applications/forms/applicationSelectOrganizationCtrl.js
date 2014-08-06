@@ -1,7 +1,7 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function AppSelectOrganizationCtrl($scope, namedModal) {
+  function AppSelectOrganizationCtrl($scope, scModal) {
     $scope.chooseOrganization = function () {
       var params = {
         uin: null,
@@ -13,14 +13,7 @@
         params.uin = $scope.model.doc.docCorrespondents[0].legalEntityBulstat;
       }
 
-      var modalInstance = namedModal.open('chooseOrganization', params, {
-        organizations: [
-          'Organizations',
-          function (Organizations) {
-            return Organizations.query(params).$promise;
-          }
-        ]
-      });
+      var modalInstance = scModal.open('chooseOrganization', params);
 
       modalInstance.result.then(function (organizationId) {
         $scope.model.lot.id = organizationId;
@@ -30,16 +23,17 @@
     };
 
     $scope.newOrganization = function () {
-      var org = {
-        organizationData: {}
+      var params = {
+        uin: null,
+        name: null
       };
 
       if ($scope.model.doc && $scope.model.doc.docCorrespondents.length > 0) {
-        org.organizationData.uin = $scope.model.doc.docCorrespondents[0].legalEntityBulstat;
-        org.organizationData.name = $scope.model.doc.docCorrespondents[0].legalEntityName;
+        params.uin = $scope.model.doc.docCorrespondents[0].legalEntityBulstat;
+        params.name = $scope.model.doc.docCorrespondents[0].legalEntityName;
       }
 
-      var modalInstance = namedModal.open('newOrganization', { organization: org });
+      var modalInstance = scModal.open('newOrganization', params);
 
       modalInstance.result.then(function (organizationId) {
         $scope.model.lot.id = organizationId;
@@ -49,7 +43,7 @@
     };
   }
 
-  AppSelectOrganizationCtrl.$inject = ['$scope', 'namedModal'];
+  AppSelectOrganizationCtrl.$inject = ['$scope', 'scModal'];
 
   angular.module('gva').controller('AppSelectOrganizationCtrl', AppSelectOrganizationCtrl);
 }(angular));

@@ -24,5 +24,17 @@
     'limitations'
   ];
 
+  ChooseLimitationModalCtrl.$resolve = {
+    limitations: [
+      'Nomenclatures',
+      'scModalParams',
+      function (Nomenclatures, scModalParams) {
+        return Nomenclatures.query({
+          alias: scModalParams.section.alias
+        }).$promise;
+      }
+    ]
+  };
+
   angular.module('gva').controller('ChooseLimitationModalCtrl', ChooseLimitationModalCtrl);
 }(angular));

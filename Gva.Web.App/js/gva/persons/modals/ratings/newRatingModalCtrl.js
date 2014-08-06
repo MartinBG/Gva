@@ -5,19 +5,20 @@
   function NewRatingModalCtrl(
     $scope,
     $modalInstance,
-    $stateParams,
     PersonRatings,
+    scModalParams,
     rating
   ) {
     $scope.form = {};
     $scope.rating = rating;
+    $scope.lotId = scModalParams.lotId;
 
     $scope.save = function () {
       return $scope.form.newRatingForm.$validate()
         .then(function () {
           if ($scope.form.newRatingForm.$valid) {
             return PersonRatings
-              .save({ id: $stateParams.id }, $scope.rating)
+              .save({ id: $scope.lotId }, $scope.rating)
               .$promise
               .then(function (savedRating) {
                 return $modalInstance.close(savedRating);
@@ -34,8 +35,8 @@
   NewRatingModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    '$stateParams',
     'PersonRatings',
+    'scModalParams',
     'rating'
   ];
 

@@ -53,9 +53,21 @@
   ];
 
   NextDocStageModalCtrl.$resolve = {
-    stageModel: function () {
-      return {};
-    }
+    stageModel: [
+      'scModalParams',
+      function (scModalParams) {
+        return {
+          docId: scModalParams.doc.docId,
+          docVersion: scModalParams.caseDoc ?
+            scModalParams.caseDoc.docVersion :
+            scModalParams.doc.version,
+          docTypeId: scModalParams.caseDoc ?
+            scModalParams.caseDoc.docDocTypeId :
+            scModalParams.doc.docTypeId,
+          startingDate: moment().startOf('minute').format('YYYY-MM-DDTHH:mm:ss')
+        };
+      }
+    ]
   };
 
   angular.module('gva').controller('NextDocStageModalCtrl', NextDocStageModalCtrl);

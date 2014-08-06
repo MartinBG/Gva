@@ -7,7 +7,9 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
   'use strict';
 
   function ApplicationsDirective($state, $stateParams, $compile, $parse, ApplicationNoms) {
-    function preLink(scope) {
+    function preLink(scope, element, attrs) {
+      var lotId = $parse(attrs.lotId)(scope) || attrs.lotId || $stateParams.id;
+
       scope.appSelectOpt = {
         multiple: true,
         id: function (app) {
@@ -25,7 +27,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
           container.append($compile(elem)(scope));
         },
         query: function (query) {
-          ApplicationNoms.query({ id: $stateParams.id, term: query.term }).$promise
+          ApplicationNoms.query({ id: lotId, term: query.term }).$promise
               .then(function (result) {
                 query.callback({
                   results: result
@@ -37,6 +39,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
 
     function postLink(scope, iElement, iAttrs) {
       var setPart = $parse(iAttrs.setPart)(scope) || iAttrs.setPart,
+          lotId = $parse(iAttrs.lotId)(scope) || iAttrs.lotId || $stateParams.id,
           stateName;
       if (setPart === 'person') {
         stateName = 'root.persons.view.documentApplications.edit';
@@ -56,7 +59,7 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
 
       scope.viewApplication = function (partIndex) {
         $state.go(stateName, {
-          id: $stateParams.id,
+          id: lotId,
           ind: partIndex
         });
       };

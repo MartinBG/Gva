@@ -11,8 +11,11 @@
     scMessage
   ) {
     var originalExam = _.cloneDeep(exam);
+
     $scope.exam = exam;
     $scope.editMode = null;
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';

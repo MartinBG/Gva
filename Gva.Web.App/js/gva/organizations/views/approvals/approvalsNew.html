@@ -16,7 +16,9 @@
       <gva-organization-approval name="organizationApprovalForm" ng-model="approval.part"></gva-organization-approval>
 
       <h5 class="form-header" l10n-text="organizations.approvalNew.amendmentTitle"></h5>
-      <gva-organization-amendment name="organizationAmendmentForm" ng-model="approval.part.amendments[0]"></gva-organization-amendment>
+      <gva-organization-amendment name="organizationAmendmentForm" ng-model="approval.part.amendments[0]"
+        sc-form-params="{ lotId: lotId }">
+      </gva-organization-amendment>
     </div>
   </div>
 </ng-form>

@@ -4,20 +4,19 @@
 
   function ChooseOrgDocsModalCtrl(
     $scope,
-    $stateParams,
     $modalInstance,
     OrganizationsInventory,
-    docs,
-    includedDocs
+    scModalParams,
+    docs
   ) {
     $scope.selectedDocs = [];
 
     $scope.docs = _.filter(docs, function (doc) {
-      return !_.contains(includedDocs, doc.partIndex);
+      return !_.contains(scModalParams.includedDocs, doc.partIndex);
     });
 
     $scope.searchParams = {
-      id: $stateParams.id,
+      id: scModalParams.lotId,
       documentParts: []
     };
 
@@ -54,7 +53,7 @@
           null
       }).$promise.then(function (docs) {
         $scope.docs = _.filter(docs, function (doc) {
-          return !_.contains(includedDocs, doc.partIndex);
+          return !_.contains(scModalParams.includedDocs, doc.partIndex);
         });
       });
     };
@@ -62,19 +61,18 @@
 
   ChooseOrgDocsModalCtrl.$inject = [
     '$scope',
-    '$stateParams',
     '$modalInstance',
     'OrganizationsInventory',
-    'docs',
-    'includedDocs'
+    'scModalParams',
+    'docs'
   ];
 
   ChooseOrgDocsModalCtrl.$resolve = {
     docs: [
-      '$stateParams',
       'OrganizationsInventory',
-      function ($stateParams, OrganizationsInventory) {
-        return OrganizationsInventory.query({ id: $stateParams.id }).$promise;
+      'scModalParams',
+      function (OrganizationsInventory, scModalParams) {
+        return OrganizationsInventory.query({ id: scModalParams.lotId }).$promise;
       }
     ]
   };

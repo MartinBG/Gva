@@ -6,19 +6,21 @@
     $scope,
     $modalInstance,
     PersonDocumentMedicals,
-    personDocumentMedical,
-    person
+    scModalParams,
+    personDocumentMedical
   ) {
     $scope.form = {};
     $scope.personDocumentMedical = personDocumentMedical;
-    $scope.personLin = person.lin;
+    $scope.personLin = scModalParams.person.lin;
+    $scope.lotId = scModalParams.person.id;
+    $scope.caseTypeId = scModalParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.form.newDocumentMedicalForm.$validate()
         .then(function () {
           if ($scope.form.newDocumentMedicalForm.$valid) {
             return PersonDocumentMedicals
-              .save({ id: person.id }, $scope.personDocumentMedical)
+              .save({ id: $scope.lotId }, $scope.personDocumentMedical)
               .$promise
               .then(function (savedMedical) {
                 return $modalInstance.close(savedMedical);
@@ -36,8 +38,8 @@
     '$scope',
     '$modalInstance',
     'PersonDocumentMedicals',
-    'personDocumentMedical',
-    'person'
+    'scModalParams',
+    'personDocumentMedical'
   ];
 
   NewMedicalModalCtrl.$resolve = {

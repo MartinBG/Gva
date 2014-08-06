@@ -13,6 +13,7 @@
     var originalApproval = _.cloneDeep(approval);
     $scope.approval = approval;
     $scope.editMode = null;
+    $scope.lotId = $stateParams.id;
 
     $scope.$watch('approval.part.amendments | last', function (lastAmendment) {
       $scope.currentAmendment = lastAmendment;

@@ -1,7 +1,13 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function OrganizationAmendmentCtrl($scope, $state, namedModal) {
+  function OrganizationAmendmentCtrl(
+    $scope,
+    $state,
+    scModal,
+    scFormParams) {
+    $scope.lotId = scFormParams.lotId;
+
     $scope.select2Options = {
       multiple: false,
       allowClear: true,
@@ -39,8 +45,9 @@
     };
 
     $scope.chooseDocuments = function () {
-      var modalInstance = namedModal.open('chooseOrganizationDocs', {
-        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex')
+      var modalInstance = scModal.open('chooseOrganizationDocs', {
+        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex'),
+        lotId: scFormParams.lotId
       });
 
       modalInstance.result.then(function (selectedDocs) {
@@ -98,17 +105,7 @@
     });
 
     $scope.chooseLimitation = function (section) {
-      var modalInstance = namedModal.open('chooseLimitation', {}, {
-        limitations: [
-          '$stateParams',
-          'Nomenclatures',
-          function ($stateParams, Nomenclatures) {
-            return Nomenclatures.query({
-              alias: section.alias
-            }).$promise;
-          }
-        ]
-      });
+      var modalInstance = scModal.open('chooseLimitation', { section: section });
 
       modalInstance.result.then(function (limitationName) {
         if (section.alias === 'lim147limitations') {
@@ -150,7 +147,12 @@
     };
   }
 
-  OrganizationAmendmentCtrl.$inject = ['$scope', '$state', 'namedModal'];
+  OrganizationAmendmentCtrl.$inject = [
+    '$scope',
+    '$state',
+    'scModal',
+    'scFormParams'
+  ];
 
   angular.module('gva').controller('OrganizationAmendmentCtrl', OrganizationAmendmentCtrl);
 }(angular, _));

@@ -6,11 +6,13 @@
     $scope,
     $modalInstance,
     Applications,
+    scModalParams,
     docs
   ) {
     $scope.docs = docs.documents;
 
     $scope.filters = {
+      filter: scModalParams.filter,
       fromDate: null,
       toDate: null,
       regUri: null,
@@ -40,15 +42,16 @@
     '$scope',
     '$modalInstance',
     'Applications',
+    'scModalParams',
     'docs'
   ];
 
   ChooseDocModalCtrl.$resolve = {
     docs: [
-      '$stateParams',
       'Applications',
-      function ($stateParams, Applications) {
-        return Applications.notLinkedDocs($stateParams).$promise;
+      'scModalParams',
+      function (Applications, scModalParams) {
+        return Applications.notLinkedDocs(scModalParams).$promise;
       }
     ]
   };

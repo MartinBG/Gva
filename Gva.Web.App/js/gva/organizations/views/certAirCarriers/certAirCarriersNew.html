@@ -13,6 +13,8 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-organization-certificate name="newCertAirCarrierForm" ng-model="certificate.part"></gva-organization-certificate>
+      <gva-organization-certificate name="newCertAirCarrierForm" ng-model="certificate.part"
+        sc-form-params="{ lotId: lotId }">
+      </gva-organization-certificate>
   </div>
 </ng-form>

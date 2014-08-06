@@ -15,7 +15,9 @@
       </div>
     </div>
     <div class="well-sm panel-body">
-      <gva-airport-cert-operational name="airportCertOperForm" ng-model="airportCertOper.part"></gva-airport-cert-operational>
+      <gva-airport-cert-operational name="airportCertOperForm" ng-model="airportCertOper.part"
+        sc-form-params="{ lotId: lotId }">
+      </gva-airport-cert-operational>
     </div>
   </div>
 </ng-form>

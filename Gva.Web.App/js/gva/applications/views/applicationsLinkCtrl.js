@@ -9,7 +9,7 @@
     $sce,
     Applications,
     appModel,
-    namedModal
+    scModal
     ) {
     $scope.appModel = appModel;
     $scope.filter = $stateParams.filter;
@@ -24,7 +24,7 @@
     };
 
     $scope.selectDoc = function () {
-      var modalInstance = namedModal.open('chooseDoc');
+      var modalInstance = scModal.open('chooseDoc', { filter: $scope.filter });
 
       modalInstance.result.then(function (doc) {
         $scope.appModel.doc = doc;
@@ -85,7 +85,7 @@
     '$sce',
     'Applications',
     'appModel',
-    'namedModal'
+    'scModal'
   ];
 
   ApplicationsLinkCtrl.$resolve = {

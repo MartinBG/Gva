@@ -4,11 +4,13 @@
   function OrganizationRecommendationCtrl(
     $scope,
     $state,
-    $stateParams,
     OrganizationInspections,
     Nomenclatures,
-    namedModal
+    scModal,
+    scFormParams
     ) {
+    $scope.lotId = scFormParams.lotId;
+
     $scope.auditorsReview = {
       auditDetails: [],
       disparities: []
@@ -38,7 +40,7 @@
       });
     };
 
-    OrganizationInspections.query({ id: $stateParams.id }).$promise.then(function (inspections) {
+    OrganizationInspections.query({ id: scFormParams.lotId }).$promise.then(function (inspections) {
       var unbindWatcher = $scope.$watch('model', function () {
         if (!$scope.model) {
           return;
@@ -50,8 +52,9 @@
     });
 
     $scope.chooseAudits = function () {
-      var modalInstance = namedModal.open('chooseInspections', {
-        includedInspections: $scope.model.part.includedAudits
+      var modalInstance = scModal.open('chooseInspections', {
+        includedInspections: $scope.model.part.includedAudits,
+        lotId: scFormParams.lotId
       });
 
       modalInstance.result.then(function (selectedInspections) {
@@ -64,7 +67,7 @@
 
     $scope.editDisparity = function (disparity) {
       return $state.go('root.organizations.view.inspections.edit', {
-        id: $stateParams.id,
+        id: scFormParams.lotId,
         ind: disparity.partIndex
       });
     };
@@ -151,10 +154,10 @@
   OrganizationRecommendationCtrl.$inject = [
     '$scope',
     '$state',
-    '$stateParams',
     'OrganizationInspections',
     'Nomenclatures',
-    'namedModal'
+    'scModal',
+    'scFormParams'
   ];
 
   angular.module('gva')

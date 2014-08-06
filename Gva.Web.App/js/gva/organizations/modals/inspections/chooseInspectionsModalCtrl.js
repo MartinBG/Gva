@@ -4,17 +4,16 @@
 
   function ChooseInspectionsModalCtrl(
     $scope,
-    $stateParams,
     $modalInstance,
-    inspections,
-    includedInspections
+    scModalParams,
+    inspections
   ) {
     $scope.inspections = _.chain(inspections)
       .filter(function (inspection) {
         return inspection.part.auditDetails.length !== 0;
       })
       .map(function (inspection) {
-        if (_.contains(includedInspections, inspection.partIndex)) {
+        if (_.contains(scModalParams.includedInspections, inspection.partIndex)) {
           inspection.checked = true;
         }
 
@@ -34,18 +33,17 @@
 
   ChooseInspectionsModalCtrl.$inject = [
     '$scope',
-    '$stateParams',
     '$modalInstance',
-    'inspections',
-    'includedInspections'
+    'scModalParams',
+    'inspections'
   ];
 
   ChooseInspectionsModalCtrl.$resolve = {
     inspections: [
-      '$stateParams',
       'OrganizationInspections',
-      function ($stateParams, OrganizationInspections) {
-        return OrganizationInspections.query({ id: $stateParams.id }).$promise;
+      'scModalParams',
+      function (OrganizationInspections, scModalParams) {
+        return OrganizationInspections.query({ id: scModalParams.lotId }).$promise;
       }
     ]
   };

@@ -1,7 +1,7 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function CommonSelectPersonCtrl($scope, namedModal, scFormParams) {
+  function CommonSelectPersonCtrl($scope, scModal, scFormParams) {
     $scope.newClass = scFormParams.newClass;
     $scope.choosePerson = function () {
       var params = {
@@ -14,14 +14,7 @@
         params.uin = $scope.model.doc.docCorrespondents[0].bgCitizenUIN;
       }
 
-      var modalInstance = namedModal.open('choosePerson', params, {
-        persons: [
-          'Persons',
-          function (Persons) {
-            return Persons.query(params).$promise;
-          }
-        ]
-      });
+      var modalInstance = scModal.open('choosePerson', params);
 
       modalInstance.result.then(function (personId) {
         $scope.model.lot.id = personId;
@@ -31,17 +24,19 @@
     };
 
     $scope.newPerson = function () {
-      var person = {
-        personData: {}
+      var params = {
+        uin: null,
+        firstName: null,
+        lastName: null
       };
 
       if ($scope.model.doc && $scope.model.doc.docCorrespondents.length > 0) {
-        person.personData.uin = $scope.model.doc.docCorrespondents[0].bgCitizenUIN;
-        person.personData.firstName = $scope.model.doc.docCorrespondents[0].bgCitizenFirstName;
-        person.personData.lastName = $scope.model.doc.docCorrespondents[0].bgCitizenLastName;
+        params.uin = $scope.model.doc.docCorrespondents[0].bgCitizenUIN;
+        params.firstName = $scope.model.doc.docCorrespondents[0].bgCitizenFirstName;
+        params.lastName = $scope.model.doc.docCorrespondents[0].bgCitizenLastName;
       }
 
-      var modalInstance = namedModal.open('newPerson', { person: person });
+      var modalInstance = scModal.open('newPerson', params);
 
       modalInstance.result.then(function (personId) {
         $scope.model.lot.id = personId;
@@ -51,7 +46,7 @@
     };
   }
 
-  CommonSelectPersonCtrl.$inject = ['$scope', 'namedModal', 'scFormParams'];
+  CommonSelectPersonCtrl.$inject = ['$scope', 'scModal', 'scFormParams'];
 
   angular.module('gva').controller('CommonSelectPersonCtrl', CommonSelectPersonCtrl);
 }(angular));

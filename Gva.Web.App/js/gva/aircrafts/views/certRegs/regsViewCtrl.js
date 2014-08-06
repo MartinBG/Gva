@@ -17,6 +17,7 @@
     $scope.reg = aircraftCertRegistration;
     $scope.aw = aircraftCertAirworthiness;
     $scope.debts = debts;
+    $scope.lotId = $stateParams.id;
 
     if ($scope.regView) {
       $stateParams.ind = $scope.regView.currentIndex;

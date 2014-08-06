@@ -76,11 +76,6 @@
       templateUrl: 'js/gva/persons/forms/personStatus.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaPersonApplication',
-      templateUrl: 'js/gva/persons/forms/personApplication.html',
-      controller: 'PersonApplicationCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaPersonDocumentMedical',
       templateUrl: 'js/gva/persons/forms/personDocumentMedical.html',
       controller: 'PersonDocumentMedicalCtrl'
@@ -111,7 +106,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaRatingEdition',
-      templateUrl: 'js/gva/persons/forms/personRatingEdition.html'
+      templateUrl: 'js/gva/persons/forms/personRatingEdition.html',
+      controller: 'PersonRatingEditionCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaRating',
@@ -186,7 +182,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertAirworthinessFm',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessFM.html'
+      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessFM.html',
+      controller: 'AircraftCertAirworthinessFmCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAirworthinessReviewOther',
@@ -396,8 +393,8 @@
       templateUrl: 'js/gva/aircrafts/forms/aircraftInspector.html',
       controller: 'AircraftInspectorCtrl'
     });
-  }]).config(['namedModalProvider', function (namedModalProvider) {
-    namedModalProvider
+  }]).config(['scModalProvider', function (scModalProvider) {
+    scModalProvider
      .modal('choosePublisher', 'js/gva/common/modals/publishers/choosePublisherModal.html', 'ChoosePublisherModalCtrl')
      .modal('choosePerson'   , 'js/gva/common/modals/persons/choosePersonModal.html'      , 'ChoosePersonModalCtrl'   )
      .modal('newPerson'      , 'js/gva/common/modals/persons/newPersonModal.html'         , 'NewPersonModalCtrl'      )
@@ -417,8 +414,8 @@
       .state(['root.applications.edit.case.addPart'                , '/addPart?docId&docFileId&setPartAlias'                                                   , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditAddPart.html'   , 'ApplicationsEditAddPartCtrl'   ]])
       .state(['root.applications.edit.case.linkPart'               , '/linkPart?docFileId'                                                                     , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditLinkPart.html'  , 'ApplicationsEditLinkPartCtrl'  ]])
       .state(['root.applications.edit.stages'                      , '/stages'                                                                                 , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditStages.html'    , 'ApplicationsEditStagesCtrl'    ]]);
-  }]).config(['namedModalProvider', function (namedModalProvider) {
-    namedModalProvider
+  }]).config(['scModalProvider', function (scModalProvider) {
+    scModalProvider
      .modal('chooseAppType'     , 'js/gva/applications/modals/applicationTypes/chooseAppTypesModal.html'    , 'ChooseAppTypesModalCtrl'    )
      .modal('chooseOrganization', 'js/gva/applications/modals/organizations/chooseOrganizationModal.html'   , 'ChooseOrganizationModalCtrl')
      .modal('newOrganization'   , 'js/gva/applications/modals/organizations/newOrganizationModal.html'      , 'NewOrganizationModalCtrl'   )
@@ -428,8 +425,6 @@
      .modal('newAirport'        , 'js/gva/applications/modals/airports/newAirportModal.html'                , 'NewAirportModalCtrl'        )
      .modal('chooseEquipment'   , 'js/gva/applications/modals/equipments/chooseEquipmentModal.html'         , 'ChooseEquipmentModalCtrl'   )
      .modal('newEquipment'      , 'js/gva/applications/modals/equipments/newEquipmentModal.html'            , 'NewEquipmentModalCtrl'      )
-     .modal('chooseCorr'        , 'js/ems/docs/modals/chooseCorrModal.html'                                 , 'ChooseCorrModalCtrl'        )
-     .modal('newCorr'           , 'js/ems/docs/modals/newCorrModal.html'                                    , 'NewCorrModalCtrl'           )
      .modal('chooseDoc'         , 'js/gva/applications/modals/docs/chooseDocModal.html'                     , 'ChooseDocModalCtrl'         )
      .modal('editDocStage'      , 'js/gva/applications/modals/stages/editDocStageModal.html'                , 'EditDocStageModalCtrl'      )
      .modal('endDocStage'       , 'js/gva/applications/modals/stages/endDocStageModal.html'                 , 'EndDocStageModalCtrl'       )
@@ -506,8 +501,8 @@
       .state(['root.persons.view.documentApplications.search'              , ''                                                                            , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsSearch.html', 'DocApplicationsSearchCtrl'     ]])
       .state(['root.persons.view.documentApplications.new'                 , '/new'                                                                        , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsNew.html'   , 'DocApplicationsNewCtrl'        ]])
       .state(['root.persons.view.documentApplications.edit'                , '/:ind'                                                                       , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsEdit.html'  , 'DocApplicationsEditCtrl'       ]]);
-  }]).config(['namedModalProvider', function (namedModalProvider) {
-    namedModalProvider
+  }]).config(['scModalProvider', function (scModalProvider) {
+    scModalProvider
     .modal('chooseTrainings' , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html' , 'ChooseTrainingsModalCtrl')
     .modal('newTraining'     , 'js/gva/persons/modals/trainings/newTrainingModal.html'     , 'NewTrainingModalCtrl'    )
     .modal('chooseChecks'    , 'js/gva/persons/modals/checks/chooseChecksModal.html'       , 'ChooseChecksModalCtrl'   )
@@ -680,8 +675,8 @@
       .state(['root.organizations.view.documentApplications.new'                                 , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/documentApplications/organizationsDocApplicationsNew.html'                                   , 'OrganizationsDocApplicationsNewCtrl'               ]])
       .state(['root.organizations.view.documentApplications.edit'                                , '/:ind'                                      , ['@root.organizations.view', 'js/gva/organizations/views/documentApplications/organizationsDocApplicationsEdit.html'                                  , 'OrganizationsDocApplicationsEditCtrl'              ]])
       .state(['root.organizations.view.inventory'                                                , '/inventory'                                 , ['@root.organizations.view', 'js/gva/organizations/views/inventory/organizationsInventorySearch.html'                                                 , 'OrganizationsInventorySearchCtrl'                  ]]);
-  }]).config(['namedModalProvider', function (namedModalProvider) {
-      namedModalProvider
+  }]).config(['scModalProvider', function (scModalProvider) {
+      scModalProvider
       .modal('chooseOrganizationDocs', 'js/gva/organizations/modals/documents/chooseDocumentsModal.html'    , 'ChooseOrgDocsModalCtrl'    )
       .modal('chooseInspections'     , 'js/gva/organizations/modals/inspections/chooseInspectionsModal.html', 'ChooseInspectionsModalCtrl')
       .modal('chooseLimitation'      , 'js/gva/organizations/modals/limitations/chooseLimitationModal.html' , 'ChooseLimitationModalCtrl' )
@@ -714,8 +709,8 @@
       .state(['root.airports.view.inspections.new'              , '/new'                                     , ['@root.airports.view', 'js/gva/airports/views/inspections/airportsInspectionsNew.html'          , 'AirportsInspectionsNewCtrl'    ]])
       .state(['root.airports.view.inspections.edit'             , '/:ind'                                    , ['@root.airports.view', 'js/gva/airports/views/inspections/airportsInspectionsEdit.html'         , 'AirportsInspectionsEditCtrl'   ]])
       .state(['root.airports.view.inventory'                    , '/inventory'                               , ['@root.airports.view', 'js/gva/airports/views/inventory/inventorySearch.html'                   , 'AirportInventorySearchCtrl'    ]]);
-    }]).config(['namedModalProvider', function (namedModalProvider) {
-      namedModalProvider
+    }]).config(['scModalProvider', function (scModalProvider) {
+      scModalProvider
       .modal('chooseAirportsDocs', 'js/gva/airports/modals/documents/chooseDocumentsModal.html', 'ChooseAirportDocsModalCtrl');
     }]).config(['$stateProvider', function ($stateProvider) {
       $stateProvider
@@ -745,8 +740,8 @@
       .state(['root.equipments.view.inspections.new'            , '/new'                                     , ['@root.equipments.view', 'js/gva/equipments/views/inspections/equipmentsInspectionsNew.html'        , 'EquipmentsInspectionsNewCtrl'   ]])
       .state(['root.equipments.view.inspections.edit'           , '/:ind'                                    , ['@root.equipments.view', 'js/gva/equipments/views/inspections/equipmentsInspectionsEdit.html'       , 'EquipmentsInspectionsEditCtrl'  ]])
       .state(['root.equipments.view.inventory'                  , '/inventory'                               , ['@root.equipments.view', 'js/gva/equipments/views/inventory/inventorySearch.html'                   , 'EquipmentInventorySearchCtrl'   ]]);
-    }]).config(['namedModalProvider', function (namedModalProvider) {
-    namedModalProvider
+    }]).config(['scModalProvider', function (scModalProvider) {
+    scModalProvider
     .modal('chooseEquipmentsDocs', 'js/gva/equipments/modals/documents/chooseDocumentsModal.html', 'ChooseEquipmentsDocsModalCtrl');
   }]);
 }(angular));

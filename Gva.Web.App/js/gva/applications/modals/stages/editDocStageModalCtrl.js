@@ -53,9 +53,22 @@
   ];
 
   EditDocStageModalCtrl.$resolve = {
-    stageModel: function () {
-      return {};
-    }
+    stageModel: [
+      'DocStages',
+      'scModalParams',
+      function (DocStages, scModalParams) {
+        return DocStages.get({
+          id: scModalParams.doc.docId,
+          docVersion: scModalParams.doc.version
+        })
+        .$promise
+        .then(function (result) {
+          result.docVersion = scModalParams.doc.version;
+          result.docTypeId = scModalParams.doc.docTypeId;
+          return result;
+        });
+      }
+    ]
   };
   angular.module('gva').controller('EditDocStageModalCtrl', EditDocStageModalCtrl);
 }(angular, moment));

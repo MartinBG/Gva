@@ -15,7 +15,8 @@
     <div class="well-sm panel-body">
       <gva-aircraft-document-occurrence name="aircraftDocumentOccurrenceForm" ng-model="aircraftDocumentOccurrence.part"></gva-aircraft-document-occurrence>
 
-      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentOccurrence.files" sc-form-params="{ setPart: 'aircraft' }"></gva-common-scanned-document>
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentOccurrence.files"
+        sc-form-params="{ setPart: 'aircraft', lotId: lotId }"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

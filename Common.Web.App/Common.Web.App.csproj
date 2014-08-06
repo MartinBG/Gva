@@ -220,7 +220,7 @@
     <Content Include="js\scaffolding\directives\validate\validateDirective.js" />
     <Content Include="js\scaffolding\directives\validationError\validationErrorDirective.html" />
     <Content Include="js\scaffolding\directives\validationError\validationErrorDirective.js" />
-    <Content Include="js\scaffolding\providers\namedModalProvider.js" />
+    <Content Include="js\scaffolding\providers\scModalProvider.js" />
     <Content Include="js\scaffolding\providers\scaffoldingProvider.js" />
     <Content Include="js\scaffolding\resources\nomenclatures.js" />
     <Content Include="js\scaffolding\scaffolding.js" />

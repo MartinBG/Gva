@@ -7,7 +7,7 @@
     $scope,
     $state,
     $stateParams,
-    namedModal,
+    scModal,
     Applications,
     Nomenclatures,
     PersonsInfo,
@@ -68,45 +68,24 @@
       }
 
       return partData.$promise.then(function (d) {
-        var modalInstance = namedModal.open('newCorr', null, {
-          corr: [
-            '$stateParams',
-            'Nomenclatures',
-            'Corrs',
-            function ($stateParams, Nomenclatures, Corrs) {
-              return $q.all({
-                corrTypes: Nomenclatures.query({ alias: 'correspondentType' }).$promise,
-                corr: Corrs.getNew().$promise
-              }).then(function (res) {
-                if (isPersonSelect) {
-                  res.corr.correspondentTypeId = _(res.corrTypes).filter({
-                    alias: 'BulgarianCitizen'
-                  }).first().nomValueId;
-                  res.corr.correspondentType = _(res.corrTypes).filter({
-                    alias: 'BulgarianCitizen'
-                  }).first();
+        var params = {};
 
-                  res.corr.bgCitizenFirstName = d.personData.part.firstName;
-                  res.corr.bgCitizenLastName = d.personData.part.lastName;
-                  if (d.personData.part.uin) {
-                    res.corr.bgCitizenUIN = d.personData.part.uin;
-                  }
-                  if (d.personData.part.email) {
-                    res.corr.email = d.personData.part.email;
-                  }
-                }
-                if (isOrgSelect) {
-                  res.corr.legalEntityName = d.part.name;
-                  if (d.part.uin) {
-                    res.corr.legalEntityBulstat = d.part.uin;
-                  }
-                }
+        if (isPersonSelect) {
+          params.person = {
+            firstName: d.personData.part.firstName,
+            lastName: d.personData.part.lastName,
+            uin: d.personData.part.uin,
+            email: d.personData.part.email
+          };
+        }
+        else if (isOrgSelect) {
+          params.org = {
+            name: d.part.name,
+            uin: d.part.uin
+          };
+        }
 
-                return res.corr;
-              });
-            }
-          ]
-        });
+        var modalInstance = scModal.open('newCorr', params);
 
         modalInstance.result.then(function (nomItem) {
           var newCorr = $scope.application.docCorrespondents.slice();
@@ -156,16 +135,9 @@
           }
         }
 
-        modalInstance = namedModal.open('chooseCorr', {
+        modalInstance = scModal.open('chooseCorr', {
           selectedCorrs: selectedCorrs,
           corr: corr
-        }, {
-          corrs: [
-            'Corrs',
-            function (Corrs) {
-              return Corrs.get().$promise;
-            }
-          ]
         });
 
         modalInstance.result.then(function (nomItem) {
@@ -183,20 +155,7 @@
     };
 
     $scope.selectAppType = function () {
-      var modalInstance = namedModal.open(
-        'chooseAppType',
-        { },
-        {
-          appTypes: [
-            'Nomenclatures',
-            function (Nomenclatures) {
-              return Nomenclatures.query({
-                alias: 'applicationTypes',
-                caseTypeAlias: $scope.application.caseType.alias
-              }).$promise;
-            }
-          ]
-        });
+      var modalInstance = scModal.open('chooseAppType', { caseType: $scope.application.caseType });
 
       modalInstance.result.then(function (appType) {
         $scope.application.applicationType = appType;
@@ -257,7 +216,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'namedModal',
+    'scModal',
     'Applications',
     'Nomenclatures',
     'PersonsInfo',

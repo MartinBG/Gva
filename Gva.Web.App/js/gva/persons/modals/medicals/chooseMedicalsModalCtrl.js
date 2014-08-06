@@ -5,15 +5,14 @@
   function ChooseMedicalsModalCtrl(
     $scope,
     $modalInstance,
-    medicals,
-    person,
-    includedMedicals
+    scModalParams,
+    medicals
   ) {
-    $scope.person = person;
+    $scope.person = scModalParams.person;
     $scope.selectedMedicals = [];
 
     $scope.medicals = _.filter(medicals, function (medical) {
-      return !_.contains(includedMedicals, medical.partIndex);
+      return !_.contains(scModalParams.includedMedicals, medical.partIndex);
     });
 
     $scope.addMedicals = function () {
@@ -37,24 +36,16 @@
   ChooseMedicalsModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'medicals',
-    'person',
-    'includedMedicals'
+    'scModalParams',
+    'medicals'
   ];
 
   ChooseMedicalsModalCtrl.$resolve = {
     medicals: [
-      '$stateParams',
       'PersonDocumentMedicals',
-      function ($stateParams, PersonDocumentMedicals) {
-        return PersonDocumentMedicals.query({ id: $stateParams.id }).$promise;
-      }
-    ],
-    person: [
-      '$stateParams',
-      'Persons',
-      function ($stateParams, Persons) {
-        return Persons.get({ id: $stateParams.id }).$promise;
+      'scModalParams',
+      function (PersonDocumentMedicals, scModalParams) {
+        return PersonDocumentMedicals.query({ id: scModalParams.lotId }).$promise;
       }
     ]
   };

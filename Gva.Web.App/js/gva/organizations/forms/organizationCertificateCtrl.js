@@ -1,9 +1,13 @@
 ﻿/*global angular,_*/
 (function (angular,_) {
   'use strict';
-  function OrganizationCertificateCtrl($scope, $state, $stateParams, namedModal) {
 
-    $scope.lotId = $stateParams.id;
+  function OrganizationCertificateCtrl(
+    $scope,
+    $state,
+    scModal,
+    scFormParams) {
+    $scope.lotId = scFormParams.lotId;
 
     $scope.deleteDocument = function (document) {
       var index = $scope.model.includedDocuments.indexOf(document);
@@ -11,8 +15,9 @@
     };
 
     $scope.chooseDocuments = function () {
-      var modalInstance = namedModal.open('chooseOrganizationDocs', {
-        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex')
+      var modalInstance = scModal.open('chooseOrganizationDocs', {
+        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex'),
+        lotId: $scope.lotId
       });
 
       modalInstance.result.then(function (selectedDocs) {
@@ -36,7 +41,12 @@
     };
   }
 
-  OrganizationCertificateCtrl.$inject = ['$scope', '$state', '$stateParams', 'namedModal'];
+  OrganizationCertificateCtrl.$inject = [
+    '$scope',
+    '$state',
+    'scModal',
+    'scFormParams'
+  ];
 
   angular.module('gva')
     .controller('OrganizationCertificateCtrl', OrganizationCertificateCtrl);

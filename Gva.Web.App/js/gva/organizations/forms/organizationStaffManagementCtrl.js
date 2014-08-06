@@ -1,9 +1,11 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function OrgStaffManagementCtrl($scope, namedModal) {
+  function OrgStaffManagementCtrl($scope, scModal, scFormParams) {
+    $scope.lotId = scFormParams.lotId;
+
     $scope.chooseEmployment = function () {
-      var modalInstance = namedModal.open('chooseEmployment');
+      var modalInstance = scModal.open('chooseEmployment');
 
       modalInstance.result.then(function (employmentName) {
         $scope.model.part.position = employmentName;
@@ -11,7 +13,7 @@
     };
   }
 
-  OrgStaffManagementCtrl.$inject = ['$scope', 'namedModal'];
+  OrgStaffManagementCtrl.$inject = ['$scope', 'scModal', 'scFormParams'];
 
   angular.module('gva').controller('OrgStaffManagementCtrl', OrgStaffManagementCtrl);
 }(angular));

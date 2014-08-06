@@ -16,10 +16,11 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-organization-certificate name="certGroundServiceOperatorsSnoOperationalForm" ng-model="certificate.part"></gva-organization-certificate>
+      <gva-organization-certificate name="certGroundServiceOperatorsSnoOperationalForm" ng-model="certificate.part"
+        sc-form-params="{ lotId: lotId }">
+      </gva-organization-certificate>
 
       <h5 class="form-header" l10n-text="organizations.editCertGroundServiceOperatorsSnoOperational.equipmentForm"></h5>
-
       <gva-organization-equipment ng-model="certificate.part" name="organizationEquipmentForm"></gva-organization-equipment>
     </div>
   </div>

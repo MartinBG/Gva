@@ -10,8 +10,8 @@
     aircraftCertRegistration
   ) {
     $scope.isEdit = false;
-
     $scope.reg = aircraftCertRegistration;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newCertRegForm.$validate()

@@ -5,13 +5,13 @@
   function ChooseChecksModalCtrl(
     $scope,
     $modalInstance,
-    checks,
-    includedChecks
+    scModalParams,
+    checks
   ) {
     $scope.selectedChecks = [];
 
     $scope.checks = _.filter(checks, function (check) {
-      return !_.contains(includedChecks, check.partIndex);
+      return !_.contains(scModalParams.includedChecks, check.partIndex);
     });
 
     $scope.addChecks = function () {
@@ -35,16 +35,16 @@
   ChooseChecksModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'checks',
-    'includedChecks'
+    'scModalParams',
+    'checks'
   ];
 
   ChooseChecksModalCtrl.$resolve = {
     checks: [
-      '$stateParams',
       'PersonDocumentChecks',
-      function ($stateParams, PersonDocumentChecks) {
-        return PersonDocumentChecks.query({ id: $stateParams.id }).$promise;
+      'scModalParams',
+      function (PersonDocumentChecks, scModalParams) {
+        return PersonDocumentChecks.query({ id: scModalParams.lotId }).$promise;
       }
     ]
   };

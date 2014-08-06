@@ -15,7 +15,7 @@
       <sc-button name="searchBtn" btn-click="search()" text="equipments.chooseDocumentsModal.search" class="btn btn-sm btn-primary" icon="glyphicon-search"></sc-button>
     </div>
 
-    <sc-datatable items="docs" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+    <sc-datatable items="docs" filterable="false" pageable="true" sortable="false" dynamic-columns="false">
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
         <input type="checkbox" ng-checked="selectedDocuments | contains:item" sc-click="selectDoc($event, item)">
       </sc-column>

@@ -14,8 +14,8 @@
 
     $scope.personDocumentOther = personDocumentOther;
     $scope.editMode = null;
-
-    $scope.backFromChild = false;
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';

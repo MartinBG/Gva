@@ -9,6 +9,9 @@
     AircraftDocumentOwners,
     aircraftDocumentOwner
   ) {
+    $scope.aircraftDocumentOwner = aircraftDocumentOwner;
+    $scope.lotId = $stateParams.id;
+
     $scope.save = function () {
       return $scope.newDocumentOwnerForm.$validate()
         .then(function () {
@@ -21,8 +24,6 @@
           }
         });
     };
-
-    $scope.aircraftDocumentOwner = aircraftDocumentOwner;
 
     $scope.cancel = function () {
       return $state.go('root.aircrafts.view.owners.search');

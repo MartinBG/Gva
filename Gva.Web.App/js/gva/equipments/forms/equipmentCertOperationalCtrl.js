@@ -1,16 +1,21 @@
 ﻿/*global angular,_*/
 (function (angular,_) {
   'use strict';
-  function EquipmentCertOperationalCtrl($scope, $state, namedModal) {
-
+  function EquipmentCertOperationalCtrl(
+    $scope,
+    $state,
+    scModal,
+    scFormParams
+  ) {
     $scope.deleteDocument = function (document) {
       var index = $scope.model.includedDocuments.indexOf(document);
       $scope.model.includedDocuments.splice(index, 1);
     };
 
     $scope.chooseDocuments = function () {
-      var modalInstance = namedModal.open('chooseEquipmentsDocs', {
-        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex')
+      var modalInstance = scModal.open('chooseEquipmentsDocs', {
+        includedDocs: _.pluck($scope.model.includedDocuments, 'partIndex'),
+        lotId: scFormParams.lotId
       });
 
       modalInstance.result.then(function (selectedDocs) {
@@ -37,7 +42,12 @@
     };
   }
 
-  EquipmentCertOperationalCtrl.$inject = ['$scope', '$state', 'namedModal'];
+  EquipmentCertOperationalCtrl.$inject = [
+    '$scope',
+    '$state',
+    'scModal',
+    'scFormParams'
+  ];
 
   angular.module('gva').controller('EquipmentCertOperationalCtrl', EquipmentCertOperationalCtrl);
 }(angular,_));

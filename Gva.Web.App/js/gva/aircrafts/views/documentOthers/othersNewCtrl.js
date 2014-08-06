@@ -9,6 +9,9 @@
     AircraftDocumentOthers,
     aircraftDocumentOther
   ) {
+    $scope.aircraftDocumentOther = aircraftDocumentOther;
+    $scope.lotId = $stateParams.id;
+
     $scope.save = function () {
       return $scope.newDocumentOtherForm.$validate()
         .then(function () {
@@ -21,8 +24,6 @@
           }
         });
     };
-
-    $scope.aircraftDocumentOther = aircraftDocumentOther;
 
     $scope.cancel = function () {
       return $state.go('root.aircrafts.view.others.search');

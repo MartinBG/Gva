@@ -8,17 +8,11 @@
     $stateParams,
     $filter,
     PersonLicences,
-    person,
     licence
   ) {
-    $scope.person = person;
     $scope.licence = licence;
-
-    $scope.backFromChild = false;
-
-    if ($state.previous && $state.previous.includes[$state.current.name]) {
-      $scope.backFromChild = true;
-    }
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newLicenceForm.$validate().then(function () {
@@ -43,7 +37,6 @@
     '$stateParams',
     '$filter',
     'PersonLicences',
-    'person',
     'licence'
   ];
 

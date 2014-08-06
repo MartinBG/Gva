@@ -97,8 +97,8 @@
       templateUrl: 'js/ems/docs/forms/competenceTransfer/competenceTransfer.html',
       controller: 'CompetenceTransferCtrl'
     });
-  }]).config(['namedModalProvider', function (namedModalProvider) {
-    namedModalProvider
+  }]).config(['scModalProvider', function (scModalProvider) {
+    scModalProvider
      .modal('chooseUnit', 'js/ems/docs/modals/chooseUnitModal.html', 'ChooseUnitModalCtrl')
      .modal('chooseCorr', 'js/ems/docs/modals/chooseCorrModal.html', 'ChooseCorrModalCtrl')
      .modal('newCorr'   , 'js/ems/docs/modals/newCorrModal.html'   , 'NewCorrModalCtrl'   );

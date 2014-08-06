@@ -16,6 +16,7 @@
       },
       applications: []
     };
+    $scope.lotId = $stateParams.id;
 
     $scope.reviewForm15 = {
       airworthinessReviewType: art15A,

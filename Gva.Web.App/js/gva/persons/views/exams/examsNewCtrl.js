@@ -12,6 +12,8 @@
     exam
   ) {
     $scope.exam = exam;
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.messages = {};
 
     $scope.save = function () {

@@ -61,6 +61,7 @@
     <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessReviewOther.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthiness.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessFM.html" />
+    <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessFMCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessViewCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertMark.html" />
@@ -624,8 +625,6 @@
     <Content Include="js\gva\persons\forms\inspectorDataCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentCheckCtrl.js" />
     <Content Include="js\gva\persons\forms\personAddress.html" />
-    <Content Include="js\gva\persons\forms\personApplication.html" />
-    <Content Include="js\gva\persons\forms\personApplicationCtrl.js" />
     <Content Include="js\gva\persons\forms\personData.html" />
     <Content Include="js\gva\persons\forms\personDataCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentCheck.html" />
@@ -649,6 +648,7 @@
     <Content Include="js\gva\persons\forms\personRating.html" />
     <Content Include="js\gva\persons\forms\personRatingCtrl.js" />
     <Content Include="js\gva\persons\forms\personRatingEdition.html" />
+    <Content Include="js\gva\persons\forms\personRatingEditionCtrl.js" />
     <Content Include="js\gva\persons\forms\personStatus.html" />
     <Content Include="js\gva\common\modals\publishers\choosePublisherModal.html" />
     <Content Include="js\gva\common\modals\publishers\choosePublisherModalCtrl.js" />

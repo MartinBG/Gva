@@ -26,6 +26,7 @@
 
     $scope.isEditAw = false;
     $scope.isEditReview = false;
+    $scope.lotId = $stateParams.id;
 
     //aw
     $scope.editAw = function () {

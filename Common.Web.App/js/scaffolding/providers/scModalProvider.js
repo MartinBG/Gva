@@ -2,7 +2,7 @@
 (function (angular,_) {
   'use strict';
 
-  function NamedModalProvider() {
+  function ScModalProvider() {
     var modals = {};
 
     this.modal = function modal(name, modalObj) {
@@ -11,33 +11,36 @@
       return this;
     };
 
-    this.$get = ['$modal', function modalProviderFactory($modal) {
+    this.$get = ['$modal', '$injector', function modalProviderFactory($modal, $injector) {
       var self = this;
 
       self.modal = { };
 
-      self.modal.open = function (modalName, params, resolveParams) {
+      self.modal.open = function (modalName, params) {
         var modalObj = modals[modalName];
+        params = params || {};
 
         if (!modalObj) {
           return new Error('Invalid modal ' + modalName);
         }
 
-        var resolve = modalObj.resolve || {};
+        var promisesObj = {
+          scModalParams: function () {
+            return params;
+          }
+        };
 
-        _.forOwn(params, function (param, paramName) {
-          resolve[paramName] = function () {
-            return param;
+        _.forOwn(modalObj.resolve, function (value, key) {
+          promisesObj[key] = function () {
+            return $injector.invoke(value, null, { scModalParams: params });
           };
         });
-
-        _.extend(resolve, resolveParams);
 
         return $modal.open({
           templateUrl: modalObj.template,
           controller: modalObj.controller,
           windowClass: 'xlg-modal',
-          resolve: resolve,
+          resolve: promisesObj,
           backdrop: 'static'
         });
       };
@@ -46,5 +49,5 @@
     }];
   }
 
-  angular.module('scaffolding').provider('namedModal', NamedModalProvider);
+  angular.module('scaffolding').provider('scModal', ScModalProvider);
 }(angular,_));

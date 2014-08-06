@@ -10,6 +10,8 @@
     personDocumentOther
   ) {
     $scope.personDocumentOther = personDocumentOther;
+    $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newDocumentOtherForm.$validate()

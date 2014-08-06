@@ -5,13 +5,13 @@
   function ChooseLicencesModalCtrl(
     $scope,
     $modalInstance,
-    licences,
-    includedLicences
+    scModalParams,
+    licences
   ) {
     $scope.selectedLicences = [];
 
     $scope.licences = _.filter(licences, function (licence) {
-      return !_.contains(includedLicences, licence.partIndex);
+      return !_.contains(scModalParams.includedLicences, licence.partIndex);
     });
 
     $scope.addLicences = function () {
@@ -35,16 +35,16 @@
   ChooseLicencesModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'licences',
-    'includedLicences'
+    'scModalParams',
+    'licences'
   ];
 
   ChooseLicencesModalCtrl.$resolve = {
     licences: [
-      '$stateParams',
       'PersonLicences',
-      function ($stateParams, PersonLicences) {
-        return PersonLicences.query({ id: $stateParams.id }).$promise;
+      'scModalParams',
+      function (PersonLicences, scModalParams) {
+        return PersonLicences.query({ id: scModalParams.lotId }).$promise;
       }
     ]
   };

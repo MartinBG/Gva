@@ -15,7 +15,9 @@
       </div>
     </div>
     <div class="well-sm panel-body">
-      <gva-equipment-cert-operational name="equipmentCertOperForm" ng-model="equipmentCertOper.part"></gva-equipment-cert-operational>
+      <gva-equipment-cert-operational name="equipmentCertOperForm" ng-model="equipmentCertOper.part"
+        sc-form-params="{ lotId: lotId }">
+      </gva-equipment-cert-operational>
     </div>
   </div>
 </ng-form>

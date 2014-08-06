@@ -13,6 +13,7 @@
 
     $scope.aircraftData = aircraftData;
     $scope.editMode = null;
+    $scope.lotId = $stateParams.id;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';

@@ -8,7 +8,7 @@
     <ng-form name="innerForm{{$index}}" sc-validate="{}" sc-form-readonly>
       <div class="row">
         <button type="button" ng-hide="file.isDocFile || form.$readonly" class="close" aria-hidden="true" style="float: none;" ng-click="removeFile($index)">×</button>
-        <sc-field type="nomenclature" ng-model="file.caseType" alias="'personCaseTypes'" params="{lotId: lotId}" ng-required="true" l10n-text="common.scannedDocumentlDirective.caseType" class="col-sm-2"></sc-field>
+        <sc-field type="nomenclature" ng-model="file.caseType" alias="'caseTypes'" params="{lotId: lotId}" ng-required="true" l10n-text="common.scannedDocumentlDirective.caseType" class="col-sm-2"></sc-field>
         <sc-field type="text" ng-model="file.bookPageNumber" ng-required="true" sc-validate="{ unique: isUniqueBPN(file) }" validations="{unique: 'errorTexts.notUniqueBPN'}" l10n-text="common.scannedDocumentlDirective.bookPageNumber" class="col-sm-3 col-md-2"></sc-field>
         <sc-field type="int" ng-model="file.pageCount" min="0" l10n-text="common.scannedDocumentlDirective.pageCount" validations="{min: 'default'}" class="col-sm-3 col-md-2"></sc-field>
         <div class="form-group col-sm-3">
@@ -16,10 +16,10 @@
           <sc-files ng-model="file.file" readonly="{{file.isDocFile}}" name="file" ng-readonly="file.isDocFile || form.$readonly"></sc-files>
         </div>
       </div>
-      <div class="row" ng-hide="hideApplications">
+      <div class="row" ng-if="!hideApplications">
         <div class="form-group col-sm-10 col-md-7">
           <label class="control-label" l10n-text="common.scannedDocumentlDirective.applications"></label>
-          <gva-applications ng-model="file.applications" set-part="setPart" ng-readonly="form.$readonly"></gva-applications>
+          <gva-applications ng-model="file.applications" set-part="setPart" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
         </div>
       </div>
       <hr ng-hide="$last">

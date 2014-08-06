@@ -7,7 +7,7 @@
     $state,
     $stateParams,
     Docs,
-    namedModal,
+    scModal,
     docModel,
     parentDoc
   ) {
@@ -41,15 +41,7 @@
     };
 
     $scope.newCorr = function () {
-      var modalInstance = namedModal.open('newCorr', null, {
-        corr: [
-          '$stateParams',
-          'Corrs',
-          function resolveCorr($stateParams, Corrs) {
-            return Corrs.getNew().$promise;
-          }
-        ]
-      });
+      var modalInstance = scModal.open('newCorr');
 
       modalInstance.result.then(function (nomItem) {
         var newCorr = $scope.docModel.doc.correspondents.slice();
@@ -66,16 +58,9 @@
         return selectedCorrs.push({ nomValueId: corr });
       });
 
-      modalInstance = namedModal.open('chooseCorr', {
+      modalInstance = scModal.open('chooseCorr', {
         selectedCorrs: selectedCorrs,
         corr: {}
-      }, {
-        corrs: [
-          'Corrs',
-          function (Corrs) {
-            return Corrs.get().$promise;
-          }
-        ]
       });
 
       modalInstance.result.then(function (nomItem) {
@@ -99,7 +84,7 @@
     '$state',
     '$stateParams',
     'Docs',
-    'namedModal',
+    'scModal',
     'docModel',
     'parentDoc'
   ];
