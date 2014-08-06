@@ -118,7 +118,7 @@
             }
           }
           else {
-            selectTab($scope.tabList, newSection, true);
+            selectTab($scope.tabList, newSection, false);
             $scope.secondTabList = newSection.children;
             selectTab($scope.secondTabList, newSection.children[0], true);
             return $state.go(newSection.children[0].state)['catch'](function (error) {
