@@ -104,7 +104,7 @@ namespace Gva.Api.Controllers
             )
         {
             var applications = this.applicationRepository.GetApplications(
-                lotSetAlias: filter, 
+                lotSetAlias: filter,
                 fromDate: fromDate,
                 toDate: toDate,
                 personLin: personLin,
@@ -119,20 +119,28 @@ namespace Gva.Api.Controllers
         [Route("{id:int}")]
         public IHttpActionResult GetApplication(int id)
         {
-            var application = this.applicationRepository.Find(id,
-                e => e.GvaAppLotFiles.Select(f => f.DocFile),
-                e => e.GvaAppLotFiles.Select(f => f.GvaLotFile),
-                e => e.Doc.DocFiles);
-
-            Set set = (from l in this.unitOfWork.DbContext.Set<Lot>()
-                    where l.LotId == application.LotId
-                    select l.Set)
-                    .Single();
+            var application = this.unitOfWork.DbContext.Set<GvaApplication>()
+                .Include(a => a.Doc)
+                .SingleOrDefault(a => a.GvaApplicationId == id);
 
             if (application == null)
             {
                 throw new Exception("Cannot find application with id " + id);
             }
+
+            this.unitOfWork.DbContext.Set<DocFile>()
+                .Where(df => df.DocId == application.DocId)
+                .Load();
+
+            this.unitOfWork.DbContext.Set<GvaAppLotFile>()
+                .Include(af => af.GvaLotFile)
+                .Include(af => af.DocFile)
+                .Where(af => af.GvaApplicationId == id)
+                .Load();
+
+            Set set = this.unitOfWork.DbContext.Set<Lot>()
+                .Single(l => l.LotId == application.LotId)
+                .Set;
 
             ApplicationDO returnValue = new ApplicationDO(application, set.Alias, set.SetId);
 
@@ -175,13 +183,13 @@ namespace Gva.Api.Controllers
 
             if (application.DocId.HasValue)
             {
-                var docRelations = this.docRepository.GetCaseRelationsByDocId(application.DocId.Value,
+                var docRelations = this.docRepository.GetCaseRelationsByDocId(
+                    application.DocId.Value,
                     e => e.Doc.DocFiles,
                     e => e.Doc.DocDirection,
                     e => e.Doc.DocType,
                     e => e.Doc.DocStatus,
-                    e => e.Doc.DocEntryType
-                    );
+                    e => e.Doc.DocEntryType);
 
                 List<GvaAppLotFile> appFilesInCase = new List<GvaAppLotFile>();
 
