@@ -171,5 +171,20 @@ namespace Gva.Api.Repositories.FileRepository
             
             this.unitOfWork.DbContext.Set<GvaLotFile>().Remove(lotFile);
         }
+
+        public bool IsUniqueBPN(int lotId, int caseTypeId, string bookPageNumber, int? fileId = null)
+        {
+            var lotFiles = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                .Where(p => p.LotPart.LotId == lotId && p.GvaCaseTypeId == caseTypeId && p.PageIndex == bookPageNumber);
+
+            if (fileId.HasValue)
+            {
+                return !lotFiles.Where(f => f.GvaLotFileId != fileId).Any();
+            }
+            else
+            {
+                return !lotFiles.Any();
+            }
+        }
     }
 }

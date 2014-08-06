@@ -29,7 +29,7 @@ namespace Gva.Api.ModelsDO
 
             this.CaseType = new NomValue()
             {
-                NomValueId = lotFile.GvaCaseTypeId.Value,
+                NomValueId = lotFile.GvaCaseTypeId,
                 Name = lotFile.GvaCaseType.Name
             };
 

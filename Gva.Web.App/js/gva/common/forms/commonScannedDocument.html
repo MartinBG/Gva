@@ -5,11 +5,11 @@
 
   </button>
   <div ng-repeat="file in model | filter:showFile()">
-    <ng-form name="innerForm" sc-validate="{}" sc-form-readonly>
+    <ng-form name="innerForm{{$index}}" sc-validate="{}" sc-form-readonly>
       <div class="row">
         <button type="button" ng-hide="file.isDocFile || form.$readonly" class="close" aria-hidden="true" style="float: none;" ng-click="removeFile($index)">×</button>
         <sc-field type="nomenclature" ng-model="file.caseType" alias="'personCaseTypes'" params="{lotId: lotId}" ng-required="true" l10n-text="common.scannedDocumentlDirective.caseType" class="col-sm-2"></sc-field>
-        <sc-field type="text" ng-model="file.bookPageNumber" ng-required="true" l10n-text="common.scannedDocumentlDirective.bookPageNumber" class="col-sm-3 col-md-2"></sc-field>
+        <sc-field type="text" ng-model="file.bookPageNumber" ng-required="true" sc-validate="{ unique: isUniqueBPN(file) }" validations="{unique: 'errorTexts.notUniqueBPN'}" l10n-text="common.scannedDocumentlDirective.bookPageNumber" class="col-sm-3 col-md-2"></sc-field>
         <sc-field type="int" ng-model="file.pageCount" min="0" l10n-text="common.scannedDocumentlDirective.pageCount" validations="{min: 'default'}" class="col-sm-3 col-md-2"></sc-field>
         <div class="form-group col-sm-3">
           <label class="control-label" l10n-text="common.scannedDocumentlDirective.fileName"></label>

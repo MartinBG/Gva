@@ -2,13 +2,19 @@
 (function (angular, Select2, _) {
   'use strict';
 
-  function CommonScannedDocCtrl($scope, $stateParams, Nomenclatures, scFormParams) {
+  function CommonScannedDocCtrl(
+    $scope,
+    $stateParams,
+    Nomenclatures,
+    GvaParts,
+    scFormParams
+  ) {
     var caseType = null;
     $scope.lotId = $stateParams.id;
     $scope.setPart = scFormParams.setPart;
 
     var addNewFile = function () {
-      $scope.model.unshift({
+      $scope.model.push({
         caseType: caseType,
         file: null,
         bookPageNumber: null,
@@ -65,9 +71,36 @@
         return !file.isDeleted;
       };
     };
+
+    $scope.isUniqueBPN = function (file) {
+      return function () { 
+        if (!file.caseType || !file.bookPageNumber) {
+          return true;
+        }
+        else {
+          return GvaParts.isUniqueBPN({
+            lotId: $stateParams.id,
+            caseTypeId: file.caseType.nomValueId,
+            bookPageNumber: file.bookPageNumber,
+            fileId: file.lotFileId
+          })
+            .$promise
+            .then(function (data) {
+              return data.isUnique;
+            });
+        }
+
+      };
+    };
   }
 
-  CommonScannedDocCtrl.$inject = ['$scope', '$stateParams', 'Nomenclatures', 'scFormParams'];
+  CommonScannedDocCtrl.$inject = [
+    '$scope',
+    '$stateParams',
+    'Nomenclatures',
+    'GvaParts',
+    'scFormParams'
+  ];
 
   angular.module('gva').controller('CommonScannedDocCtrl', CommonScannedDocCtrl);
 }(angular, Select2, _));

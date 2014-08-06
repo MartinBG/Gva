@@ -14,13 +14,13 @@ namespace Gva.Api.Models
 
         public int GvaLotFileId { get; set; }
 
-        public int? LotPartId { get; set; }
+        public int LotPartId { get; set; }
 
         public int? GvaFileId { get; set; }
 
         public int? DocFileId { get; set; }
 
-        public int? GvaCaseTypeId { get; set; }
+        public int GvaCaseTypeId { get; set; }
 
         public string PageIndex { get; set; }
 
@@ -65,10 +65,10 @@ namespace Gva.Api.Models
             this.HasOptional(t => t.GvaFile)
                 .WithMany(t => t.GvaLotFiles)
                 .HasForeignKey(d => d.GvaFileId);
-            this.HasOptional(t => t.LotPart)
+            this.HasRequired(t => t.LotPart)
                 .WithMany()
                 .HasForeignKey(d => d.LotPartId);
-            this.HasOptional(t => t.GvaCaseType)
+            this.HasRequired(t => t.GvaCaseType)
                 .WithMany(t => t.GvaLotFiles)
                 .HasForeignKey(d => d.GvaCaseTypeId);
         }
