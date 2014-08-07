@@ -76,19 +76,28 @@
         if (!file.caseType || !file.bookPageNumber) {
           return true;
         }
-        else {
-          return GvaParts.isUniqueBPN({
-            lotId: scFormParams.lotId,
-            caseTypeId: file.caseType.nomValueId,
-            bookPageNumber: file.bookPageNumber,
-            fileId: file.lotFileId
-          })
-            .$promise
-            .then(function (data) {
-              return data.isUnique;
-            });
+
+        for (var i = 0; i < $scope.model.length; i++) {
+          if ($scope.model[i] !== file &&
+            $scope.model[i].caseType &&
+            $scope.model[i].caseType.nomValueId === file.caseType.nomValueId &&
+            $scope.model[i].bookPageNumber &&
+            $scope.model[i].bookPageNumber === file.bookPageNumber
+          ) {
+            return false;
+          }
         }
 
+        return GvaParts.isUniqueBPN({
+          lotId: scFormParams.lotId,
+          caseTypeId: file.caseType.nomValueId,
+          bookPageNumber: file.bookPageNumber,
+          fileId: file.lotFileId
+        })
+          .$promise
+          .then(function (data) {
+            return data.isUnique;
+          });
       };
     };
   }
