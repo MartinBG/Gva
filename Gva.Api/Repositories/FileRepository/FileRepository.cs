@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Data;
+using Docs.Api.Models;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Newtonsoft.Json.Linq;
@@ -37,11 +38,17 @@ namespace Gva.Api.Repositories.FileRepository
 
                 var lotFileId = (int)fileObj.LotFileId;
                 var lotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
-                        .Include(f => f.GvaAppLotFiles)
-                        .Include(f => f.GvaFile)
                         .Include(f => f.DocFile)
-                        .Include(f => f.GvaFile.GvaLotFiles)
                         .SingleOrDefault(f => f.GvaLotFileId == lotFileId);
+
+                this.unitOfWork.DbContext.Set<GvaAppLotFile>()
+                    .Where(ga => ga.GvaLotFileId == lotFileId)
+                    .Load();
+
+                this.unitOfWork.DbContext.Set<GvaFile>()
+                    .Include(f => f.GvaLotFiles)
+                    .Where(f => f.GvaFileId == lotFile.GvaFileId)
+                    .Load();
 
                 if ((bool)fileObj.IsDeleted)
                 {
@@ -69,14 +76,19 @@ namespace Gva.Api.Repositories.FileRepository
 
         public GvaLotFile[] GetFileReferences(int partId, int? caseType)
         {
-            return this.unitOfWork.DbContext.Set<GvaLotFile>()
+            var result = this.unitOfWork.DbContext.Set<GvaLotFile>()
                 .Include(f => f.DocFile)
                 .Include(f => f.GvaFile)
                 .Include(f => f.GvaCaseType)
-                .Include(f => f.GvaAppLotFiles)
-                .Include(f => f.GvaAppLotFiles.Select(gf => gf.GvaApplication))
                 .Where(f => f.LotPartId == partId && (caseType.HasValue ? f.GvaCaseTypeId == caseType : true))
                 .ToArray();
+
+            this.unitOfWork.DbContext.Set<GvaAppLotFile>()
+                .Include(ga => ga.GvaApplication)
+                .Where(ga => ga.GvaLotFile.LotPartId == partId && (caseType.HasValue ? ga.GvaLotFile.GvaCaseTypeId == caseType : true))
+                .Load();
+
+            return result;
         }
 
         private GvaLotFile AddLotFile(Part part, FileDO fileObj)
@@ -166,7 +178,7 @@ namespace Gva.Api.Repositories.FileRepository
             }
             if (lotFile.DocFile != null)
             {
-                this.unitOfWork.DbContext.Set<Docs.Api.Models.DocFile>().Remove(lotFile.DocFile);
+                this.unitOfWork.DbContext.Set<DocFile>().Remove(lotFile.DocFile);
             }
             
             this.unitOfWork.DbContext.Set<GvaLotFile>().Remove(lotFile);
