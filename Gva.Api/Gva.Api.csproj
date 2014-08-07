@@ -81,6 +81,7 @@
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
     <Compile Include="Controllers\GvaSuggestionController.cs" />
+    <Compile Include="Controllers\GvaFilePartController.cs" />
     <Compile Include="Controllers\GvaPartsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\EquipmentsController.cs" />
@@ -89,8 +90,11 @@
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
+    <Compile Include="Controllers\Persons\MedicalsController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
+    <Compile Include="ModelsDO\PartVersionDO2.cs" />
+    <Compile Include="ModelsDO\Persons\PersonMedicalDO.cs" />
     <Compile Include="Models\GvaApplicationStage.cs" />
     <Compile Include="Models\GvaStage.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />

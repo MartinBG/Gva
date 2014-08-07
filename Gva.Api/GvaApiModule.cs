@@ -27,6 +27,7 @@ using Gva.Api.Repositories.StageRepository;
 using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.WordTemplates;
 using Regs.Api.LotEvents;
+using Gva.Api.Controllers.Persons;
 
 namespace Gva.Api
 {
@@ -109,6 +110,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationStageRepository>().As<IApplicationStageRepository>().InstancePerLifetimeScope();
 
             //controllers
+            moduleBuilder.RegisterType<MedicalsController>().InstancePerLifetimeScope();
+
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaLotsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonsController>().InstancePerLifetimeScope();

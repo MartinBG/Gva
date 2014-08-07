@@ -54,6 +54,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         Set GetLotSet(int lotSetId);
 
-        ApplicationNomDO[] GetInitApplication(int? applicationId);
+        ApplicationNomDO GetInitApplication(int? applicationId);
     }
 }

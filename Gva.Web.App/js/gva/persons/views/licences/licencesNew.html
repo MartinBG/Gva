@@ -12,7 +12,7 @@
       <gva-licence name="licenceForm" ng-model="licence.part" sc-form-params="{ isNew: true, lotId: lotId }"></gva-licence>
 
       <gva-licence-edition name="licenceEditionForm" ng-if="licence.part.staffType" ng-model="licence.part.editions[0]"
-        sc-form-params="{ isNew: true, lotId: lotId, caseTypeId: caseTypeId }"
+        sc-form-params="{ isNew: true, lotId: lotId, caseTypeId: caseTypeId, appId: appId }"
         sc-data-staff-type="licence.part.staffType">
       </gva-licence-edition>
     </div>
