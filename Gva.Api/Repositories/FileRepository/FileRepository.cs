@@ -112,6 +112,7 @@ namespace Gva.Api.Repositories.FileRepository
                 GvaFile = file,
                 GvaCaseTypeId = fileObj.CaseType.NomValueId,
                 PageIndex = (string)fileObj.BookPageNumber,
+                PageIndexInt = GetPageIndexInt(fileObj.BookPageNumber),
                 PageNumber = (int?)fileObj.PageCount
             };
 
@@ -135,6 +136,7 @@ namespace Gva.Api.Repositories.FileRepository
         {
             lotFile.GvaCaseTypeId = fileObj.CaseType.NomValueId;
             lotFile.PageIndex = fileObj.BookPageNumber;
+            lotFile.PageIndexInt = GetPageIndexInt(fileObj.BookPageNumber);
             lotFile.PageNumber = fileObj.PageCount;
 
             var nonModifiedApps = lotFile.GvaAppLotFiles.Join(
@@ -196,6 +198,19 @@ namespace Gva.Api.Repositories.FileRepository
             else
             {
                 return !lotFiles.Any();
+            }
+        }
+
+        public int? GetPageIndexInt(string pageIndex)
+        {
+            Regex regExp = new Regex(@"(\d+)");
+            if (pageIndex != null && regExp.IsMatch(pageIndex))
+            {
+                return Int32.Parse(regExp.Match(pageIndex).Value);
+            }
+            else
+            {
+                return null;
             }
         }
     }

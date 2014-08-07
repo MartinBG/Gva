@@ -49,6 +49,7 @@ namespace Gva.Api.Controllers
         private IApplicationRepository applicationRepository;
         private INomRepository nomRepository;
         private IApplicationStageRepository applicationStageRepository;
+        private IFileRepository fileRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
 
@@ -82,6 +83,7 @@ namespace Gva.Api.Controllers
             this.nomRepository = nomRepository;
             this.applicationStageRepository = applicationStageRepository;
             this.lotEventDispatcher = lotEventDispatcher;
+            this.fileRepository = fileRepository;
         }
 
         protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
@@ -265,6 +267,7 @@ namespace Gva.Api.Controllers
                     DocFile = docFile,
                     GvaCaseTypeId = linkNewPart.Get<int>("appFile.caseTypeId"),
                     PageIndex = linkNewPart.Get<string>("appFile.bookPageNumber"),
+                    PageIndexInt = this.fileRepository.GetPageIndexInt(linkNewPart.Get<string>("appFile.bookPageNumber")),
                     PageNumber = linkNewPart.Get<int>("appFile.pageCount")
                 };
 
@@ -275,6 +278,7 @@ namespace Gva.Api.Controllers
                     DocFile = docFile
                 };
 
+                this.applicationRepository.AddGvaLotFile(lotFile);
                 this.applicationRepository.AddGvaAppLotFile(gvaAppLotFile);
 
                 this.unitOfWork.Save();
@@ -338,6 +342,7 @@ namespace Gva.Api.Controllers
                     DocFile = docFile,
                     GvaCaseTypeId = newPart.Get<int>("appFile.caseTypeId"),
                     PageIndex = newPart.Get<string>("appFile.bookPageNumber"),
+                    PageIndexInt = this.fileRepository.GetPageIndexInt(newPart.Get<string>("appFile.bookPageNumber")),
                     PageNumber = newPart.Get<int>("appFile.pageCount")
                 };
 
@@ -348,6 +353,7 @@ namespace Gva.Api.Controllers
                     DocFile = docFile
                 };
 
+                this.applicationRepository.AddGvaLotFile(lotFile);
                 this.applicationRepository.AddGvaAppLotFile(gvaAppLotFile);
 
                 this.unitOfWork.Save();
@@ -567,6 +573,7 @@ namespace Gva.Api.Controllers
                     DocFile = null,
                     GvaCaseTypeId = applicationNewDO.CaseTypeId,
                     PageIndex = null,
+                    PageIndexInt = null,
                     PageNumber = null
                 };
 
@@ -577,6 +584,7 @@ namespace Gva.Api.Controllers
                     DocFile = null
                 };
 
+                this.applicationRepository.AddGvaLotFile(lotFile);
                 this.applicationRepository.AddGvaAppLotFile(gvaAppLotFile);
 
                 this.unitOfWork.Save();
