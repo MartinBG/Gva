@@ -7,6 +7,10 @@
       'isUniqueBPN': {
         method: 'GET',
         url: 'api/gvaParts/:lotId/isUniqueBPN'
+      },
+      'getNextBPN': {
+        method: 'GET',
+        url: 'api/gvaParts/:lotId/getNextBPN'
       }
     });
   }]);

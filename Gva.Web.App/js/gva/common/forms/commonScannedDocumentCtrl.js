@@ -100,6 +100,39 @@
           });
       };
     };
+
+    $scope.getBPN = function (changedFile) {
+      if (!changedFile.caseType || changedFile.bookPageNumber) {
+        return;
+      }
+
+      var getIntRegExp = /^(\d+)/,
+          currentBPNs = _($scope.model)
+            .filter(function (file) {
+              return file.caseType &&
+                file.bookPageNumber &&
+                file.caseType.nomValueId === changedFile.caseType.nomValueId &&
+                getIntRegExp.test(file.bookPageNumber);
+            })
+            .map(function (file) {
+              return parseInt(getIntRegExp.exec(file.bookPageNumber)[0], 10);
+            })
+            .value();
+
+      var currentNextBPN = null;
+      if (currentBPNs.length) {
+        currentNextBPN = _(currentBPNs).max() + 1;
+      }
+
+      GvaParts.getNextBPN({
+        lotId: scFormParams.lotId,
+        caseTypeId: changedFile.caseType.nomValueId
+      })
+      .$promise
+      .then(function (data) {
+        changedFile.bookPageNumber = Math.max(data.nextBPN, currentNextBPN).toString();
+      });
+    };
   }
 
   CommonScannedDocCtrl.$inject = [

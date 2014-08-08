@@ -203,7 +203,7 @@ namespace Gva.Api.Repositories.FileRepository
 
         public int? GetPageIndexInt(string pageIndex)
         {
-            Regex regExp = new Regex(@"(\d+)");
+            Regex regExp = new Regex(@"^(\d+)");
             if (pageIndex != null && regExp.IsMatch(pageIndex))
             {
                 return Int32.Parse(regExp.Match(pageIndex).Value);
@@ -212,6 +212,19 @@ namespace Gva.Api.Repositories.FileRepository
             {
                 return null;
             }
+        }
+
+        public int GetNextBPN(int lotId, int caseTypeId)
+        {
+            var maxBPN = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                .Where(p => p.LotPart.LotId == lotId && p.GvaCaseTypeId == caseTypeId)
+                .Select(p => p.PageIndexInt)
+                .Max();
+            if(!maxBPN.HasValue)
+            {
+                return 1;
+            }
+            return maxBPN.Value + 1;
         }
     }
 }
