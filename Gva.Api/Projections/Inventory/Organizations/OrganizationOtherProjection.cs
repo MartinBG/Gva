@@ -43,6 +43,7 @@ namespace Gva.Api.Projections.Inventory.Organizations
             invItem.Valid = organizationOther.Content.Get<string>("valid.code") == "Y";
             invItem.FromDate = organizationOther.Content.Get<DateTime>("documentDateValidFrom");
             invItem.ToDate = organizationOther.Content.Get<DateTime?>("documentDateValidTo");
+            invItem.Notes = organizationOther.Content.Get<string>("notes");
 
             invItem.CreatedBy = this.userRepository.GetUser(organizationOther.Part.CreatorId).Fullname;
             invItem.CreationDate = organizationOther.Part.CreateDate;

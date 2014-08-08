@@ -8,6 +8,7 @@ using Docs.Api.Models;
 using Gva.Api.Models;
 using Gva.Api.Models.Views;
 using Gva.Api.ModelsDO;
+using System;
 
 namespace Gva.Api.Repositories.InventoryRepository
 {
@@ -98,6 +99,27 @@ namespace Gva.Api.Repositories.InventoryRepository
                                 new FileDataDO(i.GvaFile) :
                                 null
                 });
+        }
+
+        public IEnumerable<string> GetNotes(string notes)
+        {
+            var predicate = PredicateBuilder.True<GvaViewInventoryItem>();
+            if (notes != null)
+            {
+                char[] separator = { ' ' };
+                var terms = notes.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string term in terms)
+                {
+                    predicate = predicate.AndStringContains(p => p.Notes, term);
+                }
+            }
+
+            return this.unitOfWork.DbContext.Set<GvaViewInventoryItem>()
+                .Where(predicate)
+                .Where(e => e.Notes != null)
+                .Select(i => i.Notes)
+                .Distinct()
+                .ToList();
         }
     }
 }

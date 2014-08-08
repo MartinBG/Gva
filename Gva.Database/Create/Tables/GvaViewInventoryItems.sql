@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[GvaViewInventoryItems] (
     [Valid]            BIT              NULL,
     [FromDate]         DATETIME2        NULL,
     [ToDate]           DATETIME2        NULL,
+    [Notes]            NVARCHAR(MAX)    NOT NULL,
     [CreatedBy]        NVARCHAR(50)     NOT NULL,
     [CreationDate]     DATETIME2        NOT NULL,
     [EditedBy]         NVARCHAR(50)     NULL,
@@ -36,6 +37,7 @@ exec spDescColumn N'GvaViewInventoryItems', N'Publisher'       , N'Издате�
 exec spDescColumn N'GvaViewInventoryItems', N'Valid'           , N'Валиден.'
 exec spDescColumn N'GvaViewInventoryItems', N'FromDate'        , N'Валиден от дата.'
 exec spDescColumn N'GvaViewInventoryItems', N'ToDate'          , N'Валиден до дата.'
+exec spDescColumn N'GvaViewInventoryItems', N'Notes'           , N'Бележки.'
 exec spDescColumn N'GvaViewInventoryItems', N'CreatedBy'       , N'Създател.'
 exec spDescColumn N'GvaViewInventoryItems', N'CreationDate'    , N'Дата на създаване.'
 exec spDescColumn N'GvaViewInventoryItems', N'EditedBy'        , N'Последно променен от.'

@@ -44,6 +44,7 @@ namespace Gva.Api.Projections.Inventory.Equipments
             invItem.Valid = valid == null ? (bool?)null : valid.Code == "Y";
             invItem.FromDate = equipmentOther.Content.Get<DateTime?>("documentDateValidFrom");
             invItem.ToDate = equipmentOther.Content.Get<DateTime?>("documentDateValidTo");
+            invItem.Notes = equipmentOther.Content.Get<string>("notes");
 
             invItem.CreatedBy = this.userRepository.GetUser(equipmentOther.Part.CreatorId).Fullname;
             invItem.CreationDate = equipmentOther.Part.CreateDate;

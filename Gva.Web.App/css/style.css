@@ -526,3 +526,47 @@ table.treetable span.indenter a {
     padding: 5px;
     margin-top: 0px;
 }
+
+/*SUGGESTION DIRECTIVE*/
+.typeahead-textarea.input-group .form-control {
+  border-radius: 4px;
+}
+
+.typeahead-textarea.input-group .input-group-addon {
+  border: 0;
+  background-color: inherit;
+  vertical-align: top;
+}
+
+.twitter-typeahead{
+  width: 100%;
+}
+
+.tt-dropdown-menu {
+  text-align: left;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border-color: #66afe9;
+  border-style: solid;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  border-width: 0 1px 1px 1px;
+  border-radius: 0px 0px 4px 4px;
+}
+
+.tt-suggestion {
+  padding: 3px 10px;
+  line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+}
+
+.tt-suggestion p {
+  margin: 0;
+}

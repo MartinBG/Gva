@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
+    <Compile Include="Controllers\GvaSuggestionController.cs" />
     <Compile Include="Controllers\GvaPartsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\EquipmentsController.cs" />

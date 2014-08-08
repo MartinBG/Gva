@@ -7,5 +7,7 @@ namespace Gva.Api.Repositories.InventoryRepository
     public interface IInventoryRepository
     {
         IEnumerable<InventoryItemDO> GetInventoryItemsForLot(int lotId, int? caseTypeId);
+
+        IEnumerable<string> GetNotes(string term);
     }
 }

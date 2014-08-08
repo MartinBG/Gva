@@ -42,6 +42,7 @@ namespace Gva.Api.Projections.Inventory.Persons
             invItem.Valid = null;
             invItem.FromDate = null;
             invItem.ToDate = null;
+            invItem.Notes = personApplication.Content.Get<string>("notes");
 
             invItem.CreatedBy = this.userRepository.GetUser(personApplication.Part.CreatorId).Fullname;
             invItem.CreationDate = personApplication.Part.CreateDate;

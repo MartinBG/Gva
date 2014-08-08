@@ -42,6 +42,7 @@ namespace Gva.Api.Projections.Inventory.Aircrafts
             invItem.Valid = null;
             invItem.FromDate = aircraftOwner.Content.Get<DateTime?>("fromDate");
             invItem.ToDate = aircraftOwner.Content.Get<DateTime?>("toDate");
+            invItem.Notes = aircraftOwner.Content.Get<string>("notes");
 
             invItem.CreatedBy = this.userRepository.GetUser(aircraftOwner.Part.CreatorId).Fullname;
             invItem.CreationDate = aircraftOwner.Part.CreateDate;

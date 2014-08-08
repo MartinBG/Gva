@@ -29,6 +29,8 @@ namespace Gva.Api.Models.Views
 
         public DateTime? ToDate { get; set; }
 
+        public string Notes { get; set; }
+
         public string CreatedBy { get; set; }
 
         public DateTime CreationDate { get; set; }
@@ -84,6 +86,7 @@ namespace Gva.Api.Models.Views
             this.Property(t => t.Valid).HasColumnName("Valid");
             this.Property(t => t.FromDate).HasColumnName("FromDate");
             this.Property(t => t.ToDate).HasColumnName("ToDate");
+            this.Property(t => t.Notes).HasColumnName("Notes");
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
             this.Property(t => t.CreationDate).HasColumnName("CreationDate");
             this.Property(t => t.EditedBy).HasColumnName("EditedBy");

@@ -156,6 +156,9 @@
     <Content Include="js\scaffolding\directives\button\buttonDirective.html" />
     <Content Include="js\scaffolding\directives\button\buttonDirective.js" />
     <Content Include="js\scaffolding\directives\click\clickDirective.js" />
+    <Content Include="js\scaffolding\directives\suggestion\textareaSuggestionDirective.html" />
+    <Content Include="js\scaffolding\directives\suggestion\suggestionDirectives.js" />
+    <Content Include="js\scaffolding\directives\suggestion\textSuggestionDirective.html" />
     <Content Include="js\scaffolding\services\message\messageModalCtrl.js" />
     <Content Include="js\scaffolding\services\message\messageModal.html" />
     <Content Include="js\scaffolding\services\message\messageService.js" />
