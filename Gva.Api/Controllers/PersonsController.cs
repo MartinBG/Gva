@@ -171,22 +171,19 @@ namespace Gva.Api.Controllers
             return base.GetFilePart(lotId, path, caseTypeId);
         }
 
-        [Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings/\d+$)}")]
+        [Route(@"{lotId}/{*path:regex(^ratings/\d+$)}")]
         public override IHttpActionResult GetApplicationPart(int lotId, string path)
         {
             return base.GetApplicationPart(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^licences$)}"),
-        Route(@"{lotId}/{*path:regex(^ratings$)}")]
+        [Route(@"{lotId}/{*path:regex(^ratings$)}")]
         public override IHttpActionResult GetApplicationParts(int lotId, string path)
         {
             return base.GetApplicationParts(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^licences$)}"),
-        Route(@"{lotId}/{*path:regex(^ratings$)}")]
+        [Route(@"{lotId}/{*path:regex(^ratings$)}")]
         public IHttpActionResult PostNewApplicationPart(int lotId, string path, JObject content)
         {
             UserContext userContext = this.Request.GetUserContext();
@@ -208,8 +205,7 @@ namespace Gva.Api.Controllers
             return Ok(new PartVersionDO(partVersion));
         }
 
-        [Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),
-        Route(@"{lotId}/{*path:regex(^ratings/\d+$)}")]
+        [Route(@"{lotId}/{*path:regex(^ratings/\d+$)}")]
         public IHttpActionResult PostApplicationPart(int lotId, string path, JObject content)
         {
             UserContext userContext = this.Request.GetUserContext();
@@ -271,20 +267,6 @@ namespace Gva.Api.Controllers
             {
                 NextLin = this.personRepository.GetNextLin(linTypeId)
             });
-        }
-
-        [Route("{lotId}/lastLicenceNumber")]
-        public IHttpActionResult GetLastLicenceNumber(int lotId, string licenceType)
-        {
-
-            PartVersion[] licences = this.lotRepository.GetLotIndex(lotId).Index.GetParts("licences");
-
-            string licenceNumber = licences.Where(l => l.Content.Get("licenceType.code").ToString() == licenceType)
-                .OrderBy(l => l.Part.PartId)
-                .Where(l => l.Content.Get("licenceNumber") != null)
-                .Select(l => l.Content.Get("licenceNumber").ToString()).FirstOrDefault();
-
-            return Ok(new JObject(new JProperty("number", licenceNumber)));
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
@@ -368,7 +350,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^licences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^ratings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
@@ -437,23 +418,6 @@ namespace Gva.Api.Controllers
             {
                 isUnique = this.personRepository.IsUniqueUin(uin, personId)
             });
-        }
-
-        [Route(@"{lotId}/licences/init")]
-        public IHttpActionResult GetInitLicence(int lotId, int? appId = null)
-        {
-
-            this.lotRepository.GetLotIndex(lotId);
-            var apps = this.applicationRepository.GetInitApplication(appId);
-
-            return Ok(new
-                {
-                    part = new
-                    {
-                        valid = this.nomRepository.GetNomValue("boolean", "yes"),
-                        editions = new [] { new { applications = apps } }
-                    }
-                });
         }
     }
 }

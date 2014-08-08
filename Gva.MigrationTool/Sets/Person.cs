@@ -1527,18 +1527,18 @@ namespace Gva.MigrationTool.Sets
                         includedLicences = includedLicences[r.Field<int>("ID")],
                         includedChecks = includedChecks[r.Field<int>("ID")],
 
-                        AMLlimitations = new
+                        amlLimitations = new
                         {
-                            AT_a_Ids = transformLimitations66(r.Field<string>("LIM_AT_A"), noms),
-                            AT_b1_Ids = transformLimitations66(r.Field<string>("LIM_AT_B1"), noms),
-                            AP_a_Ids = transformLimitations66(r.Field<string>("LIM_AP_A"), noms),
-                            AP_b1_Ids = transformLimitations66(r.Field<string>("LIM_AP_B1"), noms),
-                            HT_a_Ids = transformLimitations66(r.Field<string>("LIM_HT_A"), noms),
-                            HT_b1_Ids = transformLimitations66(r.Field<string>("LIM_HT_B1"), noms),
-                            HP_a_Ids = transformLimitations66(r.Field<string>("LIM_HP_A"), noms),
-                            HP_b1_Ids = transformLimitations66(r.Field<string>("LIM_HP_B1"), noms),
+                            at_a_Ids = transformLimitations66(r.Field<string>("LIM_AT_A"), noms),
+                            at_b1_Ids = transformLimitations66(r.Field<string>("LIM_AT_B1"), noms),
+                            ap_a_Ids = transformLimitations66(r.Field<string>("LIM_AP_A"), noms),
+                            ap_b1_Ids = transformLimitations66(r.Field<string>("LIM_AP_B1"), noms),
+                            ht_a_Ids = transformLimitations66(r.Field<string>("LIM_HT_A"), noms),
+                            ht_b1_Ids = transformLimitations66(r.Field<string>("LIM_HT_B1"), noms),
+                            hp_a_Ids = transformLimitations66(r.Field<string>("LIM_HP_A"), noms),
+                            hp_b1_Ids = transformLimitations66(r.Field<string>("LIM_HP_B1"), noms),
                             avionics_Ids = transformLimitations66(r.Field<string>("LIM_AVIONICS"), noms),
-                            PE_b3_Ids = transformLimitations66(r.Field<string>("LIM_PE_B3"), noms)
+                            pe_b3_Ids = transformLimitations66(r.Field<string>("LIM_PE_B3"), noms)
                         }
                     })
                 .ToList()
@@ -1571,7 +1571,7 @@ namespace Gva.MigrationTool.Sets
                             r.includedLicences,
                             r.includedChecks,
 
-                            r.AMLlimitations
+                            r.amlLimitations
                         })));
 
             var statuses = oracleConn.CreateStoreCommand(
