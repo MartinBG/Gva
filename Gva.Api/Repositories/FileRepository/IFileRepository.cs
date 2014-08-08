@@ -15,5 +15,9 @@ namespace Gva.Api.Repositories.FileRepository
         GvaLotFile[] GetFileReferences(int partId, int? casetype);
 
         bool IsUniqueBPN(int lotId, int caseTypeId, string bookPageNumber, int? fileId = null);
+
+        int? GetPageIndexInt(string pageIndex);
+
+        int GetNextBPN(int lotId, int caseTypeId);
     }
 }

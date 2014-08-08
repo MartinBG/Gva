@@ -70,6 +70,15 @@ namespace Gva.Api.Controllers
                 isUnique = this.fileRepository.IsUniqueBPN(lotId, caseTypeId, bookPageNumber, fileId)
             });
         }
+
+        [Route("getNextBPN")]
+        public IHttpActionResult GetNextBPN(int lotId, int caseTypeId)
+        {
+            return Ok(new
+            {
+                nextBPN = this.fileRepository.GetNextBPN(lotId, caseTypeId)
+            });
+        }
     }
 }
 

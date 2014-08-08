@@ -76,20 +76,62 @@
         if (!file.caseType || !file.bookPageNumber) {
           return true;
         }
-        else {
-          return GvaParts.isUniqueBPN({
-            lotId: scFormParams.lotId,
-            caseTypeId: file.caseType.nomValueId,
-            bookPageNumber: file.bookPageNumber,
-            fileId: file.lotFileId
-          })
-            .$promise
-            .then(function (data) {
-              return data.isUnique;
-            });
+
+        for (var i = 0; i < $scope.model.length; i++) {
+          if ($scope.model[i] !== file &&
+            $scope.model[i].caseType &&
+            $scope.model[i].caseType.nomValueId === file.caseType.nomValueId &&
+            $scope.model[i].bookPageNumber &&
+            $scope.model[i].bookPageNumber === file.bookPageNumber
+          ) {
+            return false;
+          }
         }
 
+        return GvaParts.isUniqueBPN({
+          lotId: scFormParams.lotId,
+          caseTypeId: file.caseType.nomValueId,
+          bookPageNumber: file.bookPageNumber,
+          fileId: file.lotFileId
+        })
+          .$promise
+          .then(function (data) {
+            return data.isUnique;
+          });
       };
+    };
+
+    $scope.getBPN = function (changedFile) {
+      if (!changedFile.caseType || changedFile.bookPageNumber) {
+        return;
+      }
+
+      var getIntRegExp = /^(\d+)/,
+          currentBPNs = _($scope.model)
+            .filter(function (file) {
+              return file.caseType &&
+                file.bookPageNumber &&
+                file.caseType.nomValueId === changedFile.caseType.nomValueId &&
+                getIntRegExp.test(file.bookPageNumber);
+            })
+            .map(function (file) {
+              return parseInt(getIntRegExp.exec(file.bookPageNumber)[0], 10);
+            })
+            .value();
+
+      var currentNextBPN = null;
+      if (currentBPNs.length) {
+        currentNextBPN = _(currentBPNs).max() + 1;
+      }
+
+      GvaParts.getNextBPN({
+        lotId: scFormParams.lotId,
+        caseTypeId: changedFile.caseType.nomValueId
+      })
+      .$promise
+      .then(function (data) {
+        changedFile.bookPageNumber = Math.max(data.nextBPN, currentNextBPN).toString();
+      });
     };
   }
 
