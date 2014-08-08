@@ -13,7 +13,7 @@ CREATE TABLE [dbo].[GvaViewInventoryItems] (
     [Valid]            BIT              NULL,
     [FromDate]         DATETIME2        NULL,
     [ToDate]           DATETIME2        NULL,
-    [Notes]            NVARCHAR(MAX)    NOT NULL,
+    [Notes]            NVARCHAR(MAX)    NULL,
     [CreatedBy]        NVARCHAR(50)     NOT NULL,
     [CreationDate]     DATETIME2        NOT NULL,
     [EditedBy]         NVARCHAR(50)     NULL,
