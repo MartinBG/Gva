@@ -80,22 +80,31 @@
       return $state.go('root.docs.new', { parentDocId: $scope.doc.docId, eDoc: true });
     };
 
-    $scope.attachDocInternal = function (docEntryTypeAlias) {
+    $scope.attachDocInternal = function (docEntryTypeAlias, docTypeAlias) {
       return Docs
         .createChild({
           id: doc.docId,
-          docEntryTypeAlias: docEntryTypeAlias
+          docEntryTypeAlias: docEntryTypeAlias,
+          docTypeAlias: docTypeAlias
         }, {}).$promise.then(function (result) {
           return $state.go('root.docs.edit.view', { id: result.docId });
         });
     };
 
     $scope.attachResolution = function () {
-      return $scope.attachDocInternal('Resolution');
+      return $scope.attachDocInternal('Resolution', 'Resolution');
+    };
+
+    $scope.attachResolutionParentOnly = function () {
+      return $scope.attachDocInternal('Resolution', 'ResolutionParentOnly');
     };
 
     $scope.attachTask = function () {
-      return $scope.attachDocInternal('Task');
+      return $scope.attachDocInternal('Task', 'Task');
+    };
+
+    $scope.attachTaskParentOnly = function () {
+      return $scope.attachDocInternal('Task', 'TaskParentOnly');
     };
 
     $scope.attachRemark = function () {

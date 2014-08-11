@@ -11,7 +11,8 @@
               method: 'POST',
               url: 'api/docs/:id/create',
               params: {
-                docEntryTypeAlias: '@docEntryTypeAlias'
+                docEntryTypeAlias: '@docEntryTypeAlias',
+                docTypeAlias: '@docTypeAlias'
               }
             },
             'register': {

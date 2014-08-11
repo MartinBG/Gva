@@ -957,7 +957,7 @@ namespace Docs.Api.Controllers
         /// <param name="docEntryTypeAlias">Тип на документа</param>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult CreateChildDoc(int id, string docEntryTypeAlias = null)
+        public IHttpActionResult CreateChildDoc(int id, string docEntryTypeAlias = null, string docTypeAlias = null)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -990,8 +990,8 @@ namespace Docs.Api.Controllers
                             return Unauthorized();
                         }
 
-                        docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
-                        docSubject = "Разпределение чрез резолюция";
+                        docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docTypeAlias.ToLower());
+                        docSubject = docTypeAlias.Contains("ParentOnly") ? "Разпределение чрез резолюция върху документ" : "Разпределение чрез резолюция";
                         break;
                     case "task":
                         if (!hasManagementPermission)
@@ -999,8 +999,8 @@ namespace Docs.Api.Controllers
                             return Unauthorized();
                         }
 
-                        docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());
-                        docSubject = "Разпределение чрез задача";
+                        docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docTypeAlias.ToLower());
+                        docSubject = docTypeAlias.Contains("ParentOnly") ? "Разпределение чрез задача върху документ" : "Разпределение чрез задача";
                         break;
                     case "remark":
                         docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docEntryTypeAlias.ToLower());

@@ -457,6 +457,20 @@ INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],
 INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(453,65,N'Липса на данни в подаден документ',NULL,NULL);
 INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(454,65,N'Липса на указан приложен документ в комплекта',NULL,NULL);
 INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(455,65,N'Други проверки, предвидени в нормативен акт',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(456,66,N'Неизползване или използване на грешен образец',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(457,66,N'Нарушена структура на данни в електронен документ',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(458,66,N'Невалиден електронен подпис',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(459,66,N'Липса на съответствие между заявено авторство в документа и автора на електронния подпис',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(460,66,N'Липса на данни в подаден документ',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(461,66,N'Липса на указан приложен документ в комплекта',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(462,66,N'Други проверки, предвидени в нормативен акт',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(463,67,N'Неизползване или използване на грешен образец',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(464,67,N'Нарушена структура на данни в електронен документ',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(465,67,N'Невалиден електронен подпис',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(466,67,N'Липса на съответствие между заявено авторство в документа и автора на електронния подпис',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(467,67,N'Липса на данни в подаден документ',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(468,67,N'Липса на указан приложен документ в комплекта',NULL,NULL);
+INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES(469,67,N'Други проверки, предвидени в нормативен акт',NULL,NULL);
 SET IDENTITY_INSERT [IrregularityTypes] OFF
 GO
 

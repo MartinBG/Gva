@@ -18,10 +18,18 @@
                   action: attachResolution,
                   visible: doc.flags.isVisibleCreateChildResolution
                 }, {
+                  text: 'docs.edit.resolutionParentOnly',
+                  action: attachResolutionParentOnly,
+                  visible: doc.flags.isVisibleCreateChildResolution
+                }, {
                   text: 'docs.edit.task',
                   action: attachTask,
                   visible: doc.flags.isVisibleCreateChildTask
                 }, {
+                  text: 'docs.edit.taskParentOnly',
+                  action: attachTaskParentOnly,
+                  visible: doc.flags.isVisibleCreateChildTask
+                },{
                   text: 'docs.edit.remark',
                   action: attachRemark,
                   visible: doc.flags.isVisibleCreateChildRemark
