@@ -171,72 +171,6 @@ namespace Gva.Api.Controllers
             return base.GetFilePart(lotId, path, caseTypeId);
         }
 
-        [Route(@"{lotId}/{*path:regex(^ratings/\d+$)}")]
-        public override IHttpActionResult GetApplicationPart(int lotId, string path)
-        {
-            return base.GetApplicationPart(lotId, path);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^ratings$)}")]
-        public override IHttpActionResult GetApplicationParts(int lotId, string path)
-        {
-            return base.GetApplicationParts(lotId, path);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^ratings$)}")]
-        public IHttpActionResult PostNewApplicationPart(int lotId, string path, JObject content)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            var partContent = content.Get<JObject>("part");
-            partContent.Add("nextIndex", 1);
-            partContent.Get<JObject>("editions[0]").Add("index", 0);
-            PartVersion partVersion = lot.CreatePart(path + "/*", partContent, userContext);
-
-            this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
-
-            this.applicationRepository.AddApplicationRefs(partVersion.Part, content.GetItems<ApplicationNomDO>("part.editions[0].applications"));
-
-            lot.Commit(userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            return Ok(new PartVersionDO(partVersion));
-        }
-
-        [Route(@"{lotId}/{*path:regex(^ratings/\d+$)}")]
-        public IHttpActionResult PostApplicationPart(int lotId, string path, JObject content)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            var partContent = content.Get<JObject>("part");
-            int nextIndex = partContent.Get<int>("nextIndex");
-            var part = lot.Parts.FirstOrDefault(p => p.Path == path);
-
-            foreach (var edition in partContent.GetItems<JObject>("editions"))
-            {
-                if (!edition.Get<int?>("index").HasValue)
-                {
-                    edition.Add("index", nextIndex);
-                    nextIndex++;
-                }
-
-                this.applicationRepository.AddApplicationRefs(part, edition.GetItems<ApplicationNomDO>("applications"));
-            }
-
-            partContent.Get("nextIndex").Replace(nextIndex);
-
-            lot.UpdatePart(path, partContent, userContext);
-
-            lot.Commit(userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            return Ok();
-        }
-
         [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses$)}")]
@@ -350,7 +284,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^ratings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]

@@ -40,29 +40,13 @@
 
   RatingsNewCtrl.$resolve = {
     rating: [
-      'application',
-      'Nomenclatures',
-      function (application, Nomenclatures) {
-        return Nomenclatures
-          .get({ alias: 'caa', valueAlias: 'BG' })
-          .$promise
-          .then(function (caa) {
-            if (application) {
-              return {
-                part: {
-                  caa: caa,
-                  editions: [{ applications: [application] }]
-                }
-              };
-            } else {
-              return {
-                part: {
-                  caa: caa,
-                  editions: [{}]
-                }
-              };
-            }
-          });
+      '$stateParams',
+      'PersonRatings',
+      function ($stateParams, PersonRatings) {
+        return PersonRatings.newRating({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

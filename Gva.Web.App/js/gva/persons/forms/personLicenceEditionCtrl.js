@@ -88,7 +88,10 @@
     }
     
     $scope.addRating = function () {
-      var modalInstance = scModal.open('newRating', { lotId: scFormParams.lotId });
+      var modalInstance = scModal.open('newRating', {
+        lotId: scFormParams.lotId,
+        appId: scFormParams.appId
+      });
 
       modalInstance.result.then(function (newRating) {
         $scope.includedRatings.push(newRating);
