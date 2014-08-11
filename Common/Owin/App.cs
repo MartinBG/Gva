@@ -89,7 +89,7 @@ namespace Common.Owin
             config.Filters.Add(new NLogTraceFilter());
             config.Filters.Add(new NLogExceptionFilter());
 
-            config.MapHttpAttributeRoutes();
+            config.MapHttpAttributeRoutes(new CustomDirectRouteProvider());
 
             foreach (IWebApiConfig webApiConfig in container.Resolve<IEnumerable<IWebApiConfig>>())
             {
