@@ -7,31 +7,30 @@ namespace CodeFirstStoreFunctions
     using System.Diagnostics;
     using System.Linq;
 
-    internal class FunctionImport
+    internal class FunctionDescriptor
     {
         private readonly string _name;
-        private readonly EdmType _returnType;
-        private readonly KeyValuePair<string, EdmType>[] _parameters;
+        private readonly EdmType[] _returnTypes;
+        private readonly ParameterDescriptor[] _parameters;
         private readonly string _resultColumnName;
         private readonly string _databaseSchema;
-        private readonly string _storeFunctionName;
-        private readonly bool _isComposable;
+        private readonly StoreFunctionKind _storeFunctionKind;
 
-        public FunctionImport(string name, IEnumerable<KeyValuePair<string, EdmType>> parameters, 
-            EdmType returnType, string resultColumnName, string databaseSchema, string storeFunctionName, bool isComposable)
-        {
+        public FunctionDescriptor(string name, IEnumerable<ParameterDescriptor> parameters,
+            EdmType[] returnTypes, string resultColumnName, string databaseSchema, StoreFunctionKind storeFunctionKind)
+      {
             Debug.Assert(!string.IsNullOrWhiteSpace(name), "invalid name");
             Debug.Assert(parameters != null, "parameters is null");
-            Debug.Assert(parameters.All(p => p.Value != null), "invalid parameter type");
-            Debug.Assert(returnType != null, "returnType is null");
+            Debug.Assert(parameters.All(p => p.EdmType != null), "invalid parameter type");
+            Debug.Assert(returnTypes != null && returnTypes.Length > 0, "returnTypes array is null or empty");
+            Debug.Assert(storeFunctionKind == StoreFunctionKind.StoredProcedure|| returnTypes.Length == 1, "multiple return types for non-sproc");
 
             _name = name;
-            _returnType = returnType;
+            _returnTypes = returnTypes;
             _parameters = parameters.ToArray();
             _resultColumnName = resultColumnName;
             _databaseSchema = databaseSchema;
-            _storeFunctionName = storeFunctionName;
-            _isComposable = isComposable;
+            _storeFunctionKind = storeFunctionKind;
         }
 
         public string Name
@@ -39,12 +38,12 @@ namespace CodeFirstStoreFunctions
             get { return _name; }
         }
 
-        public EdmType ReturnType 
+        public EdmType[] ReturnTypes
         { 
-            get { return _returnType; } 
+            get { return _returnTypes; } 
         }
 
-        public IEnumerable<KeyValuePair<string, EdmType>> Parameters
+        public IEnumerable<ParameterDescriptor> Parameters
         {
             get { return _parameters; }
         }
@@ -59,14 +58,9 @@ namespace CodeFirstStoreFunctions
             get { return _databaseSchema; }
         }
 
-        public string StoreFunctionName
+        public StoreFunctionKind StoreFunctionKind
         {
-            get { return _storeFunctionName; }
-        }
-
-        public bool IsComposable
-        {
-            get { return _isComposable; }
+            get { return _storeFunctionKind; }
         }
     }
 }

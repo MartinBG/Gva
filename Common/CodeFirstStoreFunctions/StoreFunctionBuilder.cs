@@ -27,57 +27,78 @@ namespace CodeFirstStoreFunctions
             _namespace = @namespace ?? "CodeFirstDatabaseSchema";
         }
 
-        public EdmFunction Create(FunctionImport functionImport)
+        public EdmFunction Create(FunctionDescriptor functionDescriptor)
         {
-            Debug.Assert(functionImport != null, "functionImport is null");
+            Debug.Assert(functionDescriptor != null, "functionDescriptor is null");
 
-            if (_schema == null && functionImport.DatabaseSchema == null)
+            if (_schema == null && functionDescriptor.DatabaseSchema == null)
             {
                 throw new InvalidOperationException(
                     string.Format(
                         "Database schema is not defined for function '{0}'. Either set a default database schema or use the DbFunctionEx attribute with non-null DatabaseSchema value.",
-                        functionImport.Name));
-            }
-
-            var returnParameters = new List<FunctionParameter>();
-            if (functionImport.IsComposable)
-            {
-                var returnEdmType =
-                    CreateReturnRowType(functionImport.ResultColumnName, functionImport.ReturnType);
-
-                returnParameters.Add(
-                    FunctionParameter.Create(
-                        "ReturnParam",
-                        returnEdmType.GetCollectionType(),
-                        ParameterMode.ReturnValue));
+                        functionDescriptor.Name));
             }
 
             var functionPayload =
-                new EdmFunctionPayload()
+                new EdmFunctionPayload
                 {
-                    Parameters = functionImport
+                    Parameters = functionDescriptor
                         .Parameters
                         .Select(
                             p => FunctionParameter.Create(
-                                p.Key, 
+                                p.Name, 
                                 GetStorePrimitiveType(
-                                    p.Value.BuiltInTypeKind == BuiltInTypeKind.EnumType 
-                                        ? ((EnumType)p.Value).UnderlyingType 
-                                        : p.Value), 
-                                ParameterMode.In)).ToArray(),
+                                    p.EdmType.BuiltInTypeKind == BuiltInTypeKind.EnumType 
+                                        ? ((EnumType)p.EdmType).UnderlyingType 
+                                        : p.EdmType), 
+                                p.IsOutParam 
+                                    ? ParameterMode.InOut 
+                                    : ParameterMode.In)).ToArray(),
 
-                    ReturnParameters = returnParameters,
-                    IsComposable = functionImport.IsComposable,
-                    Schema = functionImport.DatabaseSchema ?? _schema,
-                    StoreFunctionName = functionImport.StoreFunctionName
+                    ReturnParameters = CreateFunctionReturnParameters(functionDescriptor),
+                    IsComposable = functionDescriptor.StoreFunctionKind != StoreFunctionKind.StoredProcedure,
+                    Schema = functionDescriptor.DatabaseSchema ?? _schema,
                 };
 
             return EdmFunction.Create(
-                functionImport.Name,
+                functionDescriptor.Name,
                 _namespace,
                 DataSpace.SSpace,
                 functionPayload,
                 null);
+        }
+
+        private List<FunctionParameter> CreateFunctionReturnParameters(FunctionDescriptor functionDescriptor)
+        {
+            var returnParameters = new List<FunctionParameter>();
+
+            EdmType returnEdmType = null;
+            switch (functionDescriptor.StoreFunctionKind)
+            {
+                case StoreFunctionKind.TableValuedFunction:
+                    Debug.Assert(functionDescriptor.ReturnTypes.Length == 1, "Expected only one returnType for composable functions");
+                    returnEdmType =
+                        CreateReturnRowType(functionDescriptor.ResultColumnName, functionDescriptor.ReturnTypes[0])
+                            .GetCollectionType();
+                    break;
+                case StoreFunctionKind.ScalarUserDefinedFunction:
+                    var returnPrimtiveType = functionDescriptor.ReturnTypes[0].BuiltInTypeKind == BuiltInTypeKind.EnumType
+                        ? ((EnumType) functionDescriptor.ReturnTypes[0]).UnderlyingType
+                        : functionDescriptor.ReturnTypes[0];
+                    returnEdmType = GetStorePrimitiveType(returnPrimtiveType);
+                    break;
+            }
+
+            if (returnEdmType != null)
+            {
+                returnParameters.Add(
+                    FunctionParameter.Create(
+                        "ReturnParam",
+                        returnEdmType,
+                        ParameterMode.ReturnValue));
+            }
+
+            return returnParameters;
         }
 
         private EdmType CreateReturnRowType(string propertyName, EdmType edmType)
@@ -115,18 +136,33 @@ namespace CodeFirstStoreFunctions
         {
             Debug.Assert(entityType != null, "entityType == null");
 
-            var entityTypeMapping =
-                _model.ConceptualToStoreMapping.EntitySetMappings.SelectMany(s => s.EntityTypeMappings)
-                    .Single(t => t.EntityType == entityType);
+            var types = Tools.GetTypeHierarchy(entityType);
+            var entityTypeMappings =
+                _model.ConceptualToStoreMapping.EntitySetMappings
+                    .SelectMany(s => s.EntityTypeMappings)
+                    .Where(t => types.Contains(t.EntityType))
+                        .ToArray();
 
             List<EdmProperty> rowTypeProperties = new List<EdmProperty>();
-            foreach (var propertyMapping in _model.GetEntityTypePropertyMappings(entityType).OfType<ScalarPropertyMapping>())
+            foreach (var property in entityType.Properties)
             {
-                rowTypeProperties.Add(EdmProperty.Create(propertyMapping.Column.Name,
-                    TypeUsage.Create(
-                        propertyMapping.Column.TypeUsage.EdmType,
-                        propertyMapping.Column.TypeUsage.Facets.Where(
-                            f => f.Name != "StoreGeneratedPattern" && f.Name != "ConcurrencyMode"))));
+                foreach (var entityTypeMapping in entityTypeMappings)
+                {
+                    var propertyMapping =
+                        (ScalarPropertyMapping)entityTypeMapping.Fragments.SelectMany(f => f.PropertyMappings)
+                        .FirstOrDefault(p => p.Property == property);
+
+                    if (propertyMapping != null)
+                    {
+                        rowTypeProperties.Add(EdmProperty.Create(propertyMapping.Column.Name,
+                            TypeUsage.Create(
+                                propertyMapping.Column.TypeUsage.EdmType,
+                                propertyMapping.Column.TypeUsage.Facets.Where(
+                                    f => f.Name != "StoreGeneratedPattern" && f.Name != "ConcurrencyMode"))));
+
+                        break;
+                    }
+                }
             }
 
             return RowType.Create(rowTypeProperties, null);

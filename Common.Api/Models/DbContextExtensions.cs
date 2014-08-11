@@ -12,15 +12,14 @@ namespace Common.Api.Models
 {
     public static class DbContextExtensions
     {
-        [DbFunctionDetailsAttribute(StoreFunctionName = "ufnGetNomValuesByTextContentProperty")]
-        [DbFunction("dummy", "edmGetNomValuesByTextContentProperty")]
+        [DbFunction("dummy", "ufnGetNomValuesByTextContentProperty")]
         public static IQueryable<NomValue> GetNomValuesByTextContentProperty(this DbContext context, string nomAlias, string textContentProperty, string valueAsString)
         {
             var objectContext = ((IObjectContextAdapter)context).ObjectContext;
 
             return objectContext
                 .CreateQuery<NomValue>(
-                    "[" + objectContext.DefaultContainerName + "].[edmGetNomValuesByTextContentProperty](@nomAlias, @textContentProperty, @valueAsString)",
+                    "[" + objectContext.DefaultContainerName + "].[ufnGetNomValuesByTextContentProperty](@nomAlias, @textContentProperty, @valueAsString)",
                     CreateClassObjectParameter("nomAlias", nomAlias),
                     CreateClassObjectParameter("textContentProperty", textContentProperty),
                     CreateClassObjectParameter("valueAsString", valueAsString));

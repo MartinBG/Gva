@@ -11,13 +11,12 @@ namespace CodeFirstStoreFunctions
     using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
-
+    using System.Runtime.CompilerServices;
 
     internal class FunctionDiscovery
     {
         private readonly DbModel _model;
         private readonly Type _type;
-        private readonly bool _isStaticClass;
 
         public FunctionDiscovery(DbModel model, Type type)
         {
@@ -26,109 +25,190 @@ namespace CodeFirstStoreFunctions
 
             _model = model;
             _type = type;
-            _isStaticClass = type.IsAbstract && type.IsSealed;
         }
 
-        public IEnumerable<FunctionImport> FindFunctionImports()
+        public IEnumerable<FunctionDescriptor> FindFunctions()
         {
-            BindingFlags bindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.InvokeMethod;
-            if (_isStaticClass)
-            {
-                bindingFlags |= BindingFlags.Static;
-            }
-            else
-            {
-                bindingFlags |= BindingFlags.Instance;
-            }
+            const BindingFlags bindingFlags =
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.InvokeMethod |
+                BindingFlags.Static | BindingFlags.Instance;
 
-            var methods = _type
-                .GetMethods(bindingFlags)
-                .Where(m => !m.IsSpecialName);//Skip property getters/setters
-
-            foreach (var method in methods)
+            foreach (var method in _type.GetMethods(bindingFlags))
             {
-                var functionImport = CreateFunctionImport(method);
-                if (functionImport != null)
+                var functionDescriptor = CreateFunctionDescriptor(method);
+                if (functionDescriptor != null)
                 {
-                    yield return functionImport;
+                    yield return functionDescriptor;
                 }
             }
         }
 
-        private FunctionImport CreateFunctionImport(MethodInfo method)
+        private FunctionDescriptor CreateFunctionDescriptor(MethodInfo method)
         {
             var functionAttribute = (DbFunctionAttribute)Attribute.GetCustomAttribute(method, typeof(DbFunctionAttribute));
             var returnGenericTypeDefinition = method.ReturnType.IsGenericType
                 ? method.ReturnType.GetGenericTypeDefinition()
                 : null;
             
-            if((returnGenericTypeDefinition == typeof (IQueryable<>) && functionAttribute != null) ||  //TVF
-               returnGenericTypeDefinition == typeof (ObjectResult<>))                                 // StoredProc
+            if(functionAttribute != null ||                             // TVF, scalar UDF or StoreProc
+               returnGenericTypeDefinition == typeof (ObjectResult<>))  // StoredProc without DbFunction attribute
             {
                 var functionDetailsAttr = 
                     Attribute.GetCustomAttribute(method, typeof(DbFunctionDetailsAttribute)) as DbFunctionDetailsAttribute;
-                
-                return new FunctionImport(
+
+                var storeFunctionKind =
+                    returnGenericTypeDefinition == typeof (IQueryable<>)
+                        ? StoreFunctionKind.TableValuedFunction
+                        : returnGenericTypeDefinition == typeof (ObjectResult<>)
+                            ? StoreFunctionKind.StoredProcedure
+                            : StoreFunctionKind.ScalarUserDefinedFunction;
+
+                if (storeFunctionKind == StoreFunctionKind.ScalarUserDefinedFunction && 
+                    (functionAttribute == null || functionAttribute.NamespaceName != "CodeFirstDatabaseSchema"))
+                {
+                    throw new InvalidOperationException("Scalar store functions must be decorated with the 'DbFunction' attribute with the 'CodeFirstDatabaseSchema' namespace.");
+                }
+
+                var unwrapperReturnType =
+                    storeFunctionKind == StoreFunctionKind.ScalarUserDefinedFunction
+                        ? method.ReturnType
+                        : method.ReturnType.GetGenericArguments()[0];
+
+                return new FunctionDescriptor(
                     (functionAttribute != null ? functionAttribute.FunctionName : null) ?? method.Name,
-                    GetParameters(method),
-                    GetReturnEdmItemType(method.ReturnType.GetGenericArguments()[0]),
+                    GetParameters(method, storeFunctionKind),
+                    GetReturnTypes(method.Name, unwrapperReturnType, functionDetailsAttr, storeFunctionKind),
                     functionDetailsAttr != null ? functionDetailsAttr.ResultColumnName : null,
                     functionDetailsAttr != null ? functionDetailsAttr.DatabaseSchema : null,
-                    functionDetailsAttr != null ? functionDetailsAttr.StoreFunctionName : null,
-                    isComposable: returnGenericTypeDefinition == typeof(IQueryable<>));
+                    storeFunctionKind);
             }
 
             return null;
         }
 
-        private IEnumerable<KeyValuePair<string, EdmType>> GetParameters(MethodInfo method)
+        private IEnumerable<ParameterDescriptor> GetParameters(MethodInfo method, StoreFunctionKind storeFunctionKind)
         {
             Debug.Assert(method != null, "method is null");
 
-            // TODO: Output parameters, nullable?
             foreach (var parameter in method.GetParameters())
             {
-                if (_isStaticClass && parameter.Position == 0)
+                if (method.IsDefined(typeof(ExtensionAttribute), false) && parameter.Position == 0)
                 {
                     continue;
                 }
 
+                if (parameter.IsOut || parameter.ParameterType.IsByRef)
+                {
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "The parameter '{0}' is an out or ref parameter. To map Input/Output database parameters use the 'ObjectParameter' as the parameter type.",
+                            parameter.Name));
+                }
+
+                var parameterType = parameter.ParameterType;
+
+                var isObjectParameter = parameter.ParameterType == typeof (ObjectParameter);
+                if (isObjectParameter)
+                {
+                    var paramType = (ParameterTypeAttribute)Attribute.GetCustomAttribute(parameter, typeof (ParameterTypeAttribute));
+                    
+                    if (paramType == null)
+                    {
+                        throw new InvalidOperationException(
+                            string.Format(
+                                "Cannot infer type for parameter '{0}'. All ObjectParameter parameters must be decorated with the ParameterTypeAttribute.",
+                                parameter.Name));    
+                    }
+
+                    parameterType = paramType.Type;
+                }
+
+                var unwrappedParameterType = Nullable.GetUnderlyingType(parameterType) ?? parameterType;
+
                 var parameterEdmType =
-                    parameter.ParameterType.IsEnum
-                        ? FindEnumType(parameter.ParameterType)
-                        : GetEdmPrimitiveTypeForClrType(parameter.ParameterType);
+                    unwrappedParameterType.IsEnum
+                        ? FindEnumType(unwrappedParameterType)
+                        : GetEdmPrimitiveTypeForClrType(unwrappedParameterType);
 
                 if (parameterEdmType == null)
                 {
-                    throw 
+                    throw
                         new InvalidOperationException(
                             string.Format(
-                            "The type '{0}' of the parameter '{1}' of function '{2}' is invalid. Parameters can only be of a type that can be converted to an Edm scalar type",
-                            parameter.ParameterType.FullName, parameter.Name, method.Name));
+                                "The type '{0}' of the parameter '{1}' of function '{2}' is invalid. Parameters can only be of a type that can be converted to an Edm scalar type",
+                                unwrappedParameterType.FullName, parameter.Name, method.Name));
                 }
 
-                yield return new KeyValuePair<string, EdmType>(parameter.Name, parameterEdmType);
+                if (storeFunctionKind == StoreFunctionKind.ScalarUserDefinedFunction &&
+                    parameterEdmType.BuiltInTypeKind != BuiltInTypeKind.PrimitiveType)
+                {
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "The parameter '{0}' is of the '{1}' type which is not an Edm primitive type. Types of parameters of store scalar functions must be Edm primitive types.",
+                            parameter.Name, parameterEdmType));
+                }
+
+                yield return new ParameterDescriptor(parameter.Name, parameterEdmType, isObjectParameter);
             }
+        }
+
+        private EdmType[] GetReturnTypes(string methodName, Type methodReturnType,
+            DbFunctionDetailsAttribute functionDetailsAttribute, StoreFunctionKind storeFunctionKind)
+        {
+            Debug.Assert(methodReturnType != null, "methodReturnType is null");
+
+            var resultTypes = functionDetailsAttribute != null ? functionDetailsAttribute.ResultTypes : null;
+
+            if (storeFunctionKind != StoreFunctionKind.StoredProcedure && resultTypes != null)
+            {
+                throw new InvalidOperationException(
+                    "The DbFunctionDetailsAttribute.ResultTypes property should be used only for stored procedures returning multiple resultsets and must be null for composable function imports.");
+            }
+
+            resultTypes = resultTypes == null || resultTypes.Length == 0 ? null : resultTypes;
+
+            if (resultTypes != null && resultTypes[0] != methodReturnType)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        "The ObjectResult<T> item type returned by the method '{0}' is '{1}' but the first type specified in the `DbFunctionDetailsAttribute.ResultTypes` is '{2}'. The ObjectResult<T> item type must match the first type from the `DbFunctionDetailsAttribute.ResultTypes` array.",
+                        methodName, methodReturnType.FullName, resultTypes[0].FullName));
+            }
+
+            var edmResultTypes = (resultTypes ?? new[] {methodReturnType}).Select(GetReturnEdmItemType).ToArray();
+
+            if (storeFunctionKind == StoreFunctionKind.ScalarUserDefinedFunction &&
+                edmResultTypes[0].BuiltInTypeKind != BuiltInTypeKind.PrimitiveType)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        "The type '{0}' returned by the method '{1}' cannot be mapped to an Edm primitive type. Scalar user defined functions have to return types that can be mapped to Edm primitive types.",
+                        methodReturnType.FullName, methodName));
+            }
+
+            return edmResultTypes;
         }
 
         private EdmType GetReturnEdmItemType(Type type)
         {
-            var edmType = GetEdmPrimitiveTypeForClrType(type);
+            var unwrappedType = Nullable.GetUnderlyingType(type) ?? type;
+
+            var edmType = GetEdmPrimitiveTypeForClrType(unwrappedType);
             if (edmType != null)
             {
                 return edmType;
             }
 
-            if (type.IsEnum)
+            if (unwrappedType.IsEnum)
             {
-                if ((edmType = FindEnumType(type)) != null)
+                if ((edmType = FindEnumType(unwrappedType)) != null)
                 {
                     return edmType;
                 }
             }
             else
             {
-                if((edmType = FindStructuralType(type)) != null)
+                if ((edmType = FindStructuralType(unwrappedType)) != null)
                 {
                     return edmType;
                 }                

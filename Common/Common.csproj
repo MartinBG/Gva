@@ -126,11 +126,15 @@
     <Compile Include="Blob\BlobWriteStream.cs" />
     <Compile Include="CodeFirstStoreFunctions\DbFunctionDetailsAttribute.cs" />
     <Compile Include="CodeFirstStoreFunctions\DbModelExtensions.cs" />
+    <Compile Include="CodeFirstStoreFunctions\FunctionDescriptor.cs" />
     <Compile Include="CodeFirstStoreFunctions\FunctionDiscovery.cs" />
-    <Compile Include="CodeFirstStoreFunctions\FunctionImport.cs" />
     <Compile Include="CodeFirstStoreFunctions\FunctionsConvention.cs" />
     <Compile Include="CodeFirstStoreFunctions\FunctionsConvention`1.cs" />
+    <Compile Include="CodeFirstStoreFunctions\ParameterDescriptor.cs" />
+    <Compile Include="CodeFirstStoreFunctions\ParameterTypeAttribute.cs" />
     <Compile Include="CodeFirstStoreFunctions\StoreFunctionBuilder.cs" />
+    <Compile Include="CodeFirstStoreFunctions\StoreFunctionKind.cs" />
+    <Compile Include="CodeFirstStoreFunctions\Tools.cs" />
     <Compile Include="Data\IDbContextInitializer.cs" />
     <Compile Include="Data\IDbConfiguration.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
