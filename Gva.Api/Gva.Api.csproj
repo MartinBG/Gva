@@ -98,6 +98,7 @@
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\Persons\ChecksController.cs" />
     <Compile Include="Controllers\Persons\AddressesController.cs" />
+    <Compile Include="Controllers\Persons\DocumentIdsController.cs" />
     <Compile Include="Controllers\Persons\StatusesController.cs" />
     <Compile Include="Controllers\Persons\FlyingExperiencesController.cs" />
     <Compile Include="Controllers\Persons\TrainingsController.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="ModelsDO\PeriodDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonCheckDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonDocumentIdDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonFlyingExperienceDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonRatingEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceAmlLimitationsDO.cs" />
