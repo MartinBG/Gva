@@ -123,6 +123,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<RadiosController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<NoisesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PermitsToFlyController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<SmodsController>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();

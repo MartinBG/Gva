@@ -81,6 +81,7 @@
     <Compile Include="Controllers\Aircrafts\NoisesController.cs" />
     <Compile Include="Controllers\Aircrafts\PermitsToFlyController.cs" />
     <Compile Include="Controllers\Aircrafts\RadiosController.cs" />
+    <Compile Include="Controllers\Aircrafts\SmodsController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
     <Compile Include="Controllers\GvaSuggestionController.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertPermitToFlyDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertSmodDO.cs" />
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />

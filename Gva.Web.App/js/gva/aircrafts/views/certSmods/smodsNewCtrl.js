@@ -39,12 +39,15 @@
     'aircraftCertSmod'
   ];
   CertSmodsNewCtrl.$resolve = {
-    aircraftCertSmod: function () {
-      return {
-        part: {},
-        applications: []
-      };
-    }
+    aircraftCertSmod: [
+      '$stateParams',
+      'AircraftCertSmods',
+      function ($stateParams, AircraftCertSmods) {
+        return AircraftCertSmods.newCertSmod({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('CertSmodsNewCtrl', CertSmodsNewCtrl);
