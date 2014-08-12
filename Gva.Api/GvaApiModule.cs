@@ -125,6 +125,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<NoisesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PermitsToFlyController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<SmodsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<MarksController>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();

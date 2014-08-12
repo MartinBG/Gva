@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Aircrafts\MarksController.cs" />
     <Compile Include="Controllers\Aircrafts\NoisesController.cs" />
     <Compile Include="Controllers\Aircrafts\PermitsToFlyController.cs" />
     <Compile Include="Controllers\Aircrafts\RadiosController.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Controllers\Persons\LicencesController.cs" />
     <Compile Include="Controllers\Persons\MedicalsController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertMarkDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertPermitToFlyDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioDO.cs" />
