@@ -6,12 +6,12 @@
     $scope,
     $state,
     Organizations,
-    scFormParams
+    scFormParams,
+    scModal
   ) {
     $scope.setPart = scFormParams.setPart;
     $scope.lotId = scFormParams.lotId;
 
-    $scope.watchList = [];
     $scope.model.part.examiners = $scope.model.part.examiners || [];
     $scope.model.part.auditDetails = $scope.model.part.auditDetails || [];
     $scope.model.part.disparities = $scope.model.part.disparities || [];
@@ -25,37 +25,25 @@
       });
     }
 
-    $scope.changedSortOrder = function (newValue, oldValue) {
-      if (_.where($scope.model.part.disparities, { sortOrder: newValue })[0]) {
-        var subject = _.where($scope.model.part.disparities, { sortOrder: newValue })[0].subject,
-          auditDetail = _.where($scope.model.part.auditDetails, { subject: subject })[0],
-          sortOrderIndex = auditDetail.disparities.indexOf(oldValue);
-        auditDetail.disparities[sortOrderIndex] = newValue;
-      }
-    };
-
-    for (var index = 0; index < $scope.model.part.disparities.length; index++) {
-      var watchString = 'model.part.disparities[' + index + '].sortOrder';
-      $scope.watchList.push($scope.$watch(watchString, $scope.changedSortOrder));
-    }
-
     $scope.addDisparity = function (detail) {
-      var maxSortNumber = 0;
-
-      _.each($scope.model.part.auditDetails, function (auditDetail) {
-        maxSortNumber = Math.max(maxSortNumber, _.max(auditDetail.disparities));
-      });
-
-      detail.disparities.push(++maxSortNumber);
-
-      $scope.model.part.disparities.push({
-        sortOrder: maxSortNumber,
+      var disparity = {
         subject: detail.subject
+      };
+      var modalInstance = scModal.open('editDisparity', {
+        disparity: disparity
       });
-      var watchString = 'model.part.disparities[' +
-        $scope.model.part.disparities.length +
-        '].sortOrder';
-      $scope.watchList.push($scope.$watch(watchString, $scope.changedSortOrder));
+
+      modalInstance.result.then(function () {
+        var maxSortNumber = 0;
+        _.each($scope.model.part.auditDetails, function (auditDetail) {
+          maxSortNumber = Math.max(maxSortNumber, _.max(auditDetail.disparities));
+        });
+        detail.disparities.push(++maxSortNumber);
+        disparity.sortOrder = maxSortNumber;
+        $scope.model.part.disparities.push(disparity);
+      });
+
+      return modalInstance.opened;
     };
 
     $scope.deleteDisparity = function (disparity) {
@@ -66,7 +54,14 @@
 
       var index = $scope.model.part.disparities.indexOf(disparity);
       $scope.model.part.disparities.splice(index, 1);
-      $scope.watchList[index]();
+    };
+
+    $scope.editDisparity = function (disparity) {
+      var modalInstance = scModal.open('editDisparity', {
+        disparity: disparity
+      });
+
+      return modalInstance.opened;
     };
 
     $scope.viewRecommendation = function (recommendation) {
@@ -81,7 +76,8 @@
     '$scope',
     '$state',
     'Organizations',
-    'scFormParams'
+    'scFormParams',
+    'scModal'
   ];
 
   angular.module('gva').controller('CommonInspectionCtrl', CommonInspectionCtrl);

@@ -15,7 +15,6 @@
       auditDetails: [],
       disparities: []
     };
-    $scope.watchList = [];
 
     var fillAuditorsReview = function (inspections) {
       $scope.auditorsReview.auditDetails = [];
@@ -65,13 +64,6 @@
       return modalInstance.opened;
     };
 
-    $scope.editDisparity = function (disparity) {
-      return $state.go('root.organizations.view.inspections.edit', {
-        id: scFormParams.lotId,
-        ind: disparity.partIndex
-      });
-    };
-
     $scope.insertAuditDetails = function () {
       return Nomenclatures.query({
         alias: 'auditDetails',
@@ -83,31 +75,20 @@
       });
     };
 
-    $scope.changedSortOrder = function (newValue, oldValue) {
-      if (_.where($scope.model.part.descriptionReview.disparities,
-        { sortOrder: newValue })[0]) {
-        var subject =
-          _.where($scope.model.part.descriptionReview.disparities,
-          { sortOrder: newValue })[0].subject,
-          auditDetail,
-          sortOrderIndex;
-
-        _.each($scope.model.part.descriptionReview.auditDetails, function (detail) {
-          if (!!auditDetail) {
-            return;
-          }
-          auditDetail = _.where(detail.group, { subject: subject })[0];
-        });
-
-        sortOrderIndex = auditDetail.disparities.indexOf(oldValue);
-        auditDetail.disparities[sortOrderIndex] = newValue;
-      }
+    $scope.editAuditorsReviewDisparity = function (disparity) {
+      return $state.go('root.organizations.view.inspections.edit', {
+        id: scFormParams.lotId,
+        ind: disparity.partIndex
+      });
     };
 
-    for (var index = 0; index < $scope.model.part.descriptionReview.disparities.length; index++) {
-      var watchString = 'model.part.descriptionReview.disparities[' + index + '].sortOrder';
-      $scope.watchList.push($scope.$watch(watchString, $scope.changedSortOrder));
-    }
+    $scope.editDescriptionReviewDisparity = function (disparity) {
+      var modalInstance = scModal.open('editDisparity', {
+        disparity: disparity
+      });
+
+      return modalInstance.opened;
+    };
 
     $scope.addDisparity = function (detail) {
       var maxSortNumber = 0;
@@ -118,19 +99,25 @@
         });
       });
 
-      detail.disparities.push(++maxSortNumber);
-
-      $scope.model.part.descriptionReview.disparities.push({
-        sortOrder: maxSortNumber,
-        subject: detail.subject,
-        auditPart: detail.auditPart
+      var disparity = {
+          subject: detail.subject,
+          auditPart: detail.auditPart
+        };
+      var modalInstance = scModal.open('editDisparity', {
+        disparity: disparity
       });
 
-      var watchString = 'model.part.descriptionReview.disparities[' +
-        $scope.model.part.descriptionReview.disparities.length +
-        '].sortOrder';
-      $scope.watchList.push($scope.$watch(watchString, $scope.changedSortOrder));
+      modalInstance.result.then(function () {
+        var maxSortNumber = 0;
+        _.each($scope.model.part.auditDetails, function (auditDetail) {
+          maxSortNumber = Math.max(maxSortNumber, _.max(auditDetail.disparities));
+        });
+        detail.disparities.push(++maxSortNumber);
+        disparity.sortOrder = maxSortNumber;
+        $scope.model.part.descriptionReview.disparities.push(disparity);
+      });
 
+      return modalInstance.opened;
     };
 
     $scope.deleteDisparity = function (disparity) {
@@ -147,7 +134,6 @@
 
       var index = $scope.model.part.descriptionReview.disparities.indexOf(disparity);
       $scope.model.part.descriptionReview.disparities.splice(index, 1);
-      $scope.watchList[index]();
     };
   }
 

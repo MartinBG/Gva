@@ -41,6 +41,18 @@
           search: 'Търси',
           age: 'Възраст'
         },
+        editDisparityModal: {
+          title: 'Редакция на несъответствие',
+          save:'Запис',
+          cancel: 'Отказ',
+          refNumber: 'Реф. №',
+          disparityLevel: 'Ниво',
+          rectifyAction: 'Внесени коригиращи действия',
+          closureDocument: '№ на документ за закриване',
+          removalDate: 'Дата за отстраняване',
+          closureDate: 'Дата на закриване',
+          description: 'Описание на несъответствие'
+        },
         publishers: {
           publisherType: 'Тип',
           name: 'Наименование',
@@ -87,19 +99,6 @@
           code: 'Код',
           insertAuditDetails: 'Въведи списъка за обобщени констатации'
         },
-        disparityDirective: {
-          subject: 'Тема',
-          sortOrder: '№',
-          refNumber: 'Реф. №',
-          description: 'Описание на несъответствие',
-          disparityLevel: 'Ниво',
-          removalDate: 'Дата за отстраняване',
-          rectifyAction: 'Внесени коригиращи действия',
-          closureDate: 'Дата на закриване',
-          closureDocument: '№ на документ за закриване',
-          noAvailableDisparities: 'Няма намерени резултати',
-          auditPart: 'Част'
-        },
         inspectionDirective: {
           organizationTitle: 'Одит',
           auditCaseType: 'Тип на одита',
@@ -129,7 +128,16 @@
           formDate: 'Форма за заявен обхват на одобрението от дата',
           inspectionPeriod: 'Период, в който ВС може да бъде видяно',
           disparitiesTitle: 'Несъответствия',
-          applications: 'Заявления'
+          applications: 'Заявления',
+          sortOrder: '№',
+          refNumber: 'Реф. №',
+          description: 'Описание на несъответствие',
+          disparityLevel: 'Ниво',
+          removalDate: 'Дата за отстраняване',
+          rectifyAction: 'Внесени коригиращи действия',
+          closureDate: 'Дата на закриване',
+          closureDocument: '№ на документ за закриване',
+          noAvailableDisparities: 'Няма намерени резултати'
         },
         examinerDirective: {
           addExaminer: 'Добави одитори',
@@ -3692,8 +3700,8 @@
             rectifyAction: 'Внесени коригиращи действия',
             closureDate: 'Дата на закриване',
             closureDocument: '№ на документ за закриване',
-            auditPart: 'Част',
-            noAvailableDisparities: 'Няма намерени резултати'
+            noAvailableDisparities: 'Няма намерени резултати',
+            auditPart: 'Част'
           },
           recommendations: {
             title: '5. Препоръки',

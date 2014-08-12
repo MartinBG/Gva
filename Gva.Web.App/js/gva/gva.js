@@ -357,11 +357,6 @@
       controller: 'CommonAuditDetailCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaCommonDisparity',
-      templateUrl: 'js/gva/common/forms/commonDisparity.html',
-      controller: 'CommonDisparityCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaCommonDocumentApplication',
       templateUrl: 'js/gva/common/forms/commonDocumentApplication.html',
       controller: 'CommonDocumentApplicationCtrl'
@@ -398,7 +393,8 @@
      .modal('choosePublisher', 'js/gva/common/modals/publishers/choosePublisherModal.html', 'ChoosePublisherModalCtrl')
      .modal('choosePerson'   , 'js/gva/common/modals/persons/choosePersonModal.html'      , 'ChoosePersonModalCtrl'   )
      .modal('newPerson'      , 'js/gva/common/modals/persons/newPersonModal.html'         , 'NewPersonModalCtrl'      )
-     .modal('chooseExaminers', 'js/gva/common/modals/examiners/chooseExaminersModal.html' , 'ChooseExaminersModalCtrl');
+     .modal('chooseExaminers', 'js/gva/common/modals/examiners/chooseExaminersModal.html' , 'ChooseExaminersModalCtrl')
+     .modal('editDisparity'  , 'js/gva/common/modals/disparities/editDisparityModal.html' , 'EditDisparityModalCtrl'  );
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])
