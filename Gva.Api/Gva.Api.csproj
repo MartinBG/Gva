@@ -96,6 +96,7 @@
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\Persons\ChecksController.cs" />
     <Compile Include="Controllers\Persons\AddressesController.cs" />
+    <Compile Include="Controllers\Persons\FlyingExperiencesController.cs" />
     <Compile Include="Controllers\Persons\TrainingsController.cs" />
     <Compile Include="Controllers\Persons\RatingsController.cs" />
     <Compile Include="Controllers\Persons\LicencesController.cs" />
@@ -107,8 +108,10 @@
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />
+    <Compile Include="ModelsDO\PeriodDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonCheckDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonFlyingExperienceDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonRatingEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceAmlLimitationsDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceEditionDO.cs" />
@@ -116,6 +119,7 @@
     <Compile Include="ModelsDO\Persons\PersonMedicalDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonRatingDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonTrainingDO.cs" />
+    <Compile Include="ModelsDO\TimeDO.cs" />
     <Compile Include="Models\GvaApplicationStage.cs" />
     <Compile Include="Models\GvaStage.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
