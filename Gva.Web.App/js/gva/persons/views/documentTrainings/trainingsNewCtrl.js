@@ -42,20 +42,13 @@
 
   DocumentTrainingsNewCtrl.$resolve = {
     personDocumentTraining: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'PersonDocumentTrainings',
+      function ($stateParams, PersonDocumentTrainings) {
+        return PersonDocumentTrainings.newTraining({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

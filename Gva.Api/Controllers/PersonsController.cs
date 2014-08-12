@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
@@ -15,7 +15,6 @@ using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Common.Api.Repositories.NomRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -161,7 +160,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
@@ -182,7 +180,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{path:regex(^personDocumentEducations$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentEmployments$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentExams$)}"),
-         Route(@"{lotId}/{path:regex(^personDocumentTrainings$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentOthers$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}"),
          Route(@"{lotId}/{*path:regex(^personExams$)}")]
@@ -206,7 +203,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentExams$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentTrainings$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers$)}"),
@@ -221,7 +217,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
@@ -277,7 +272,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentTrainings/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
