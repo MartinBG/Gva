@@ -91,6 +91,7 @@
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
+    <Compile Include="Controllers\Persons\ChecksController.cs" />
     <Compile Include="Controllers\Persons\RatingsController.cs" />
     <Compile Include="Controllers\Persons\LicencesController.cs" />
     <Compile Include="Controllers\Persons\MedicalsController.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonCheckDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonRatingEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceAmlLimitationsDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceEditionDO.cs" />

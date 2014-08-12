@@ -158,7 +158,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentChecks/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
@@ -180,7 +179,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{path:regex(^personDocumentIds$)}"),
-         Route(@"{lotId}/{path:regex(^personDocumentChecks$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentEducations$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentEmployments$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentExams$)}"),
@@ -204,7 +202,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentChecks$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEducations$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds$)}"),
@@ -220,7 +217,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentChecks/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
@@ -277,7 +273,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentChecks/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),

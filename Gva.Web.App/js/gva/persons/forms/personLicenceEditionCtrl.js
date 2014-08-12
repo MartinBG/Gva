@@ -160,7 +160,8 @@
     $scope.addCheck = function () {
       var modalInstance = scModal.open('newCheck', {
         lotId: scFormParams.lotId,
-        caseTypeId: scFormParams.caseTypeId
+        caseTypeId: scFormParams.caseTypeId,
+        appId: scFormParams.appId
       });
 
       modalInstance.result.then(function (newCheck) {

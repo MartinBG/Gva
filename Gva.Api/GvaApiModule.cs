@@ -110,8 +110,9 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationStageRepository>().As<IApplicationStageRepository>().InstancePerLifetimeScope();
 
             // person controllers
-            moduleBuilder.RegisterType<MedicalsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ChecksController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<LicencesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<MedicalsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<RatingsController>().InstancePerLifetimeScope();
 
             //controllers
