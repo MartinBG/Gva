@@ -127,6 +127,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PermitsToFlyController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<SmodsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<MarksController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<DocumentOthersController>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();
