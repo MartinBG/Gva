@@ -148,8 +148,7 @@ namespace Gva.Api.Controllers
             return Ok(new PersonInfoDO(personDataPart, inspectorDataPart));
         }
 
-        [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
+        [Route(@"{lotId}/{*path:regex(^personFlyingExperiences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
         {
@@ -168,8 +167,7 @@ namespace Gva.Api.Controllers
             return base.GetFilePart(lotId, path, caseTypeId);
         }
 
-        [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
-         Route(@"{lotId}/{*path:regex(^personFlyingExperiences$)}"),
+        [Route(@"{lotId}/{*path:regex(^personFlyingExperiences$)}"),
          Route(@"{lotId}/{*path:regex(^personStatuses$)}")]
         public override IHttpActionResult GetParts(int lotId, string path)
         {
@@ -198,8 +196,7 @@ namespace Gva.Api.Controllers
             });
         }
 
-        [Route(@"{lotId}/{*path:regex(^personAddresses$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentEducations$)}"),
+        [Route(@"{lotId}/{*path:regex(^personDocumentEducations$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentExams$)}"),
@@ -212,8 +209,7 @@ namespace Gva.Api.Controllers
             return base.PostNewPart(lotId, path, content);
         }
 
-        [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
+        [Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
@@ -267,8 +263,7 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        [Route(@"{lotId}/{*path:regex(^personAddresses/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
+        [Route(@"{lotId}/{*path:regex(^personDocumentEducations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentIds/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
