@@ -178,6 +178,16 @@
         <input type="checkbox" ng-model="model.currentVersion.paragraph1.proc.table2.row7.tick2" ng-disabled="readonly"/> Не<br />
       </td>
     </tr>
+    <tr>
+      <td colspan="3">
+        <i>Други бележки: </i><br />
+        <sc-textarea rows="2" ng-model="model.currentVersion.paragraph1.proc.table2.findings" ng-readonly="readonly"></sc-textarea>
+        <div class="glyphicon glyphicon-question-sign text-danger"
+          ng-if="(model.currentVersion.paragraph1.proc.table2.findings !== model.compareToVersion.paragraph1.proc.table2.findings) && model.isComparing"
+          popover="Стойността в избрания за сравнение чеклист е: {{ model.compareToVersion.paragraph1.proc.table2.findings }}"
+          popover-trigger="mouseenter"></div>
+      </td>
+    </tr>
   </table>
   <br />
 
@@ -2063,14 +2073,14 @@
     <tr>
       <td>1. Решението е изготвено съгласно образеца, утвърден от изпълнителния директор на АОП (чл. 5, ал. 5 във връзка с чл. 5, ал. 1, т. 1, б. „а” от ППЗОП).</td>
       <td style="width: 130px;">
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row1.col2.tick1" ng-disabled="readonly"/> Да<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row1.col2.tick2" ng-disabled="readonly"/> Не<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row1.col2.tick1" ng-disabled="readonly"/> Да<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row1.col2.tick2" ng-disabled="readonly"/> Не<br />
       </td>
       <td style="width: 330px;">
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row1.col3.tick1" ng-disabled="readonly"/> няма препоръки/препоръките са отразени точно<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row1.col3.tick2" ng-disabled="readonly"/> препоръките не са приети, но са представени приемливи мотиви<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row1.col3.tick3" ng-disabled="readonly"/> препоръките не са приети и не са представени мотиви/ представените мотиви са неприемливи<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row1.col3.tick4" ng-disabled="readonly"/> допуснати са нови несъответствия<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row1.col3.tick1" ng-disabled="readonly"/> няма препоръки/препоръките са отразени точно<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row1.col3.tick2" ng-disabled="readonly"/> препоръките не са приети, но са представени приемливи мотиви<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row1.col3.tick3" ng-disabled="readonly"/> препоръките не са приети и не са представени мотиви/ представените мотиви са неприемливи<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row1.col3.tick4" ng-disabled="readonly"/> допуснати са нови несъответствия<br />
       </td>
     </tr>
     <tr>
@@ -2083,64 +2093,64 @@
           - орган и срок за обжалване;<br />
           - трите имена, длъжност и подпис* на лицето, издало акта.</td>
       <td>
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row2.col2.tick1" ng-disabled="readonly"/> Да<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row2.col2.tick2" ng-disabled="readonly"/> Не<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row2.col2.tick1" ng-disabled="readonly"/> Да<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row2.col2.tick2" ng-disabled="readonly"/> Не<br />
       </td>
       <td>
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row2.col3.tick1" ng-disabled="readonly"/> няма препоръки/препоръките са отразени точно<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row2.col3.tick2" ng-disabled="readonly"/> препоръките не са приети, но са представени приемливи мотиви<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row2.col3.tick3" ng-disabled="readonly"/> препоръките не са приети и не са представени мотиви/ представените мотиви са неприемливи<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row2.col3.tick4" ng-disabled="readonly"/> допуснати са нови несъответствия<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row2.col3.tick1" ng-disabled="readonly"/> няма препоръки/препоръките са отразени точно<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row2.col3.tick2" ng-disabled="readonly"/> препоръките не са приети, но са представени приемливи мотиви<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row2.col3.tick3" ng-disabled="readonly"/> препоръките не са приети и не са представени мотиви/ представените мотиви са неприемливи<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row2.col3.tick4" ng-disabled="readonly"/> допуснати са нови несъответствия<br />
       </td>
     </tr>
     <tr>
       <td>3. Мотивите за откриване на избрания вид процедура съответстват на изискванията на ЗОП.</td>
       <td>
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row3.col2.tick1" ng-disabled="readonly"/> Да<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row3.col2.tick2" ng-disabled="readonly"/> Не<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row3.col2.tick3" ng-disabled="readonly"/> Не е приложимо<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row3.col2.tick1" ng-disabled="readonly"/> Да<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row3.col2.tick2" ng-disabled="readonly"/> Не<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row3.col2.tick3" ng-disabled="readonly"/> Не е приложимо<br />
       </td>
       <td>
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row3.col3.tick1" ng-disabled="readonly"/> няма препоръки/препоръките са отразени точно<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row3.col3.tick2" ng-disabled="readonly"/> препоръките не са приети, но са представени приемливи мотиви<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row3.col3.tick3" ng-disabled="readonly"/> препоръките не са приети и не са представени мотиви/ представените мотиви са неприемливи<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row3.col3.tick4" ng-disabled="readonly"/> допуснати са нови несъответствия<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row3.col3.tick1" ng-disabled="readonly"/> няма препоръки/препоръките са отразени точно<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row3.col3.tick2" ng-disabled="readonly"/> препоръките не са приети, но са представени приемливи мотиви<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row3.col3.tick3" ng-disabled="readonly"/> препоръките не са приети и не са представени мотиви/ представените мотиви са неприемливи<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row3.col3.tick4" ng-disabled="readonly"/> допуснати са нови несъответствия<br />
       </td>
     </tr>
     <tr>
       <td>4. В решението не са включени условия или изисквания, които дават предимство или необосновано ограничават участието на лица в ОП и които не са свързани с предмета и количеството или обема на обществената поръчка (чл. 25, ал. 5 ЗОП).</td>
       <td>
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row4.col2.tick1" ng-disabled="readonly"/> Да<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row4.col2.tick2" ng-disabled="readonly"/> Не<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row4.col2.tick3" ng-disabled="readonly"/> Не е приложимо<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row4.col2.tick1" ng-disabled="readonly"/> Да<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row4.col2.tick2" ng-disabled="readonly"/> Не<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row4.col2.tick3" ng-disabled="readonly"/> Не е приложимо<br />
       </td>
       <td>
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row4.col3.tick1" ng-disabled="readonly"/> няма препоръки/препоръките са отразени точно<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row4.col3.tick2" ng-disabled="readonly"/> препоръките не са приети, но са представени приемливи мотиви<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row4.col3.tick3" ng-disabled="readonly"/> препоръките не са приети и не са представени мотиви/ представените мотиви са неприемливи<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row4.col3.tick4" ng-disabled="readonly"/> допуснати са нови несъответствия<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row4.col3.tick1" ng-disabled="readonly"/> няма препоръки/препоръките са отразени точно<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row4.col3.tick2" ng-disabled="readonly"/> препоръките не са приети, но са представени приемливи мотиви<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row4.col3.tick3" ng-disabled="readonly"/> препоръките не са приети и не са представени мотиви/ представените мотиви са неприемливи<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row4.col3.tick4" ng-disabled="readonly"/> допуснати са нови несъответствия<br />
       </td>
     </tr>
     <tr>
       <td><i>Не се констатират други несъответствия:</i></td>
       <td>
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row5.col2.tick1" ng-disabled="readonly"/> Да<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row5.col2.tick2" ng-disabled="readonly"/> Не<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row5.col2.tick1" ng-disabled="readonly"/> Да<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row5.col2.tick2" ng-disabled="readonly"/> Не<br />
       </td>
       <td>
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row5.col3.tick1" ng-disabled="readonly"/> няма препоръки/препоръките са отразени точно<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row5.col3.tick2" ng-disabled="readonly"/> препоръките не са приети, но са представени приемливи мотиви<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row5.col3.tick3" ng-disabled="readonly"/> препоръките не са приети и не са представени мотиви/ представените мотиви са неприемливи<br />
-        <input type="checkbox" ng-model="model.currentVersion.paragraph3.technique.table1.row5.col3.tick4" ng-disabled="readonly"/> допуснати са нови несъответствия<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row5.col3.tick1" ng-disabled="readonly"/> няма препоръки/препоръките са отразени точно<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row5.col3.tick2" ng-disabled="readonly"/> препоръките не са приети, но са представени приемливи мотиви<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row5.col3.tick3" ng-disabled="readonly"/> препоръките не са приети и не са представени мотиви/ представените мотиви са неприемливи<br />
+        <input type="checkbox" ng-model="model.currentVersion.paragraph3.decision.table1.row5.col3.tick4" ng-disabled="readonly"/> допуснати са нови несъответствия<br />
       </td>
     </tr>
     <tr>
       <td colspan="3">
         <i>Констатации, препоръки и/или указания:</i><br />
-        <sc-textarea rows="2" ng-model="model.currentVersion.paragraph3.technique.table1.findings" ng-readonly="readonly"></sc-textarea>
+        <sc-textarea rows="2" ng-model="model.currentVersion.paragraph3.decision.table1.findings" ng-readonly="readonly"></sc-textarea>
         <div class="glyphicon glyphicon-question-sign text-danger"
-          ng-if="(model.currentVersion.paragraph3.technique.table1.findings !== model.compareToVersion.paragraph3.technique.table1.findings) && model.isComparing"
-          popover="Стойността в избрания за сравнение чеклист е: {{ model.compareToVersion.paragraph2.technique.table1.findings }}"
+          ng-if="(model.currentVersion.paragraph3.decision.table1.findings !== model.compareToVersion.paragraph3.decision.table1.findings) && model.isComparing"
+          popover="Стойността в избрания за сравнение чеклист е: {{ model.compareToVersion.paragraph2.decision.table1.findings }}"
           popover-trigger="mouseenter"></div>
       </td>
     </tr>
@@ -2148,6 +2158,7 @@
   <span><i>* Не следва да се съдържат в проекта на документ</i></span>
   <br />
 
+  <br />
   <div style="text-align: left; font-weight: bold;">
     РАЗДЕЛ IV<br />
     Методика за оценка<br />
@@ -2588,14 +2599,14 @@
     РАЗДЕЛ VII<br />
     Допълнителна информация<br />
   </div>
-  <sc-textarea rows="2" ng-model="model.editableFile.paragraph7.additionalInfo" ng-readonly="readonly"></sc-textarea>
+  <sc-textarea rows="2" ng-model="model.currentVersion.paragraph7.additionalInfo" ng-readonly="readonly"></sc-textarea>
   <br />
 
   <div style="text-align: left; font-weight: bold;">
     РАЗДЕЛ VIII<br />
     Допълнителна информация<br />
   </div>
-  <sc-textarea rows="2" ng-model="model.editableFile.paragraph8.additionalInfo" ng-readonly="readonly"></sc-textarea>
+  <sc-textarea rows="2" ng-model="model.currentVersion.paragraph8.additionalInfo" ng-readonly="readonly"></sc-textarea>
   <br />
 
 </ng-form>
