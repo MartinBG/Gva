@@ -10,3 +10,5 @@
 *.exe binary
 *.dll binary
 *.pdb binary
+*.doc binary
+*.docx binary
