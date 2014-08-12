@@ -11,6 +11,7 @@ CREATE TABLE [dbo].[NomValues](
     [Alias]           NVARCHAR (50)  NULL,
     [TextContent]     NVARCHAR (MAX) NULL,
     [IsActive]        BIT            NOT NULL,
+    [Order]           INT            NOT NULL DEFAULT(0),
     [OldId]           NVARCHAR(500)  NULL,
     CONSTRAINT [PK_NomValues]           PRIMARY KEY ([NomValueId]),
     CONSTRAINT [FK_NomValues_Noms]      FOREIGN KEY ([NomId])         REFERENCES [dbo].[Noms] ([NomId]),
@@ -28,5 +29,6 @@ exec spDescColumn N'NomValues', N'ParentValueId' , N'Идентификатор 
 exec spDescColumn N'NomValues', N'Alias'         , N'Символен идентификатор.'
 exec spDescColumn N'NomValues', N'TextContent'   , N'Съдържание.'
 exec spDescColumn N'NomValues', N'IsActive'      , N'Маркер за валидност.'
-exec spDescColumn N'NomValues', N'OldId'   , N'Идентификатор за миграцията.'
+exec spDescColumn N'NomValues', N'Order'         , N'Маркер за подредба.'
+exec spDescColumn N'NomValues', N'OldId'         , N'Идентификатор за миграцията.'
 GO

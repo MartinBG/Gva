@@ -56,6 +56,8 @@ namespace Common.Api.Models
 
         public bool IsActive { get; set; }
 
+        public int Order { get; set; }
+
         public string OldId { get; set; }
 
         [JsonIgnore]
@@ -92,6 +94,9 @@ namespace Common.Api.Models
             this.Property(t => t.IsActive)
                 .IsRequired();
 
+            this.Property(t => t.Order)
+                .IsRequired();
+
             // Table & Column Mappings
             this.ToTable("NomValues");
             this.Property(t => t.NomValueId).HasColumnName("NomValueId");
@@ -103,6 +108,7 @@ namespace Common.Api.Models
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.TextContentString).HasColumnName("TextContent");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
+            this.Property(t => t.Order).HasColumnName("Order");
 
             // Relationships
             this.HasRequired(t => t.Nom)

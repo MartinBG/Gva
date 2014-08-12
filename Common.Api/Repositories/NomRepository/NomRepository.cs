@@ -58,7 +58,8 @@ namespace Common.Api.Repositories.NomRepository
 
             return this.unitOfWork.DbContext.Set<NomValue>()
                 .Where(predicate)
-                .OrderBy(nv => nv.Name)
+                .OrderBy(nv => nv.Order)
+                .ThenBy(nv => nv.Name)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }
@@ -93,7 +94,8 @@ namespace Common.Api.Repositories.NomRepository
                     (c) => c.ParentValueId,
                     (p, c) => c)
                 .Where(predicate)
-                .OrderBy(nv => nv.Name)
+                .OrderBy(nv => nv.Order)
+                .ThenBy(nv => nv.Name)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
         }
