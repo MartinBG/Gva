@@ -39,9 +39,15 @@
   ];
 
   StatusesNewCtrl.$resolve = {
-    status: function () {
-      return {};
-    }
+    status: [
+      '$stateParams',
+      'PersonStatuses',
+      function ($stateParams, PersonStatuses) {
+        return PersonStatuses.newStatus({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('StatusesNewCtrl', StatusesNewCtrl);

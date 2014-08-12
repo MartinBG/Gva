@@ -117,6 +117,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<LicencesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<MedicalsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<RatingsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<StatusesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<TrainingsController>().InstancePerLifetimeScope();
 
             //Aircraft controllers
