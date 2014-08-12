@@ -65,7 +65,7 @@ namespace Gva.Api.Controllers.Persons
                 }
             };
 
-            return Ok(new PartVersionDO2<PersonLicenceDO>(newLicence));
+            return Ok(new ApplicationPartVersionDO<PersonLicenceDO>(newLicence));
         }
 
         [Route("{partIndex}/newEdition")]
@@ -87,7 +87,7 @@ namespace Gva.Api.Controllers.Persons
             return Ok(newLicenceEdition);
         }
 
-        public override IHttpActionResult PostNewPart(int lotId, PartVersionDO2<PersonLicenceDO> licence)
+        public override IHttpActionResult PostNewPart(int lotId, ApplicationPartVersionDO<PersonLicenceDO> licence)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
@@ -100,10 +100,10 @@ namespace Gva.Api.Controllers.Persons
 
             this.unitOfWork.Save();
 
-            return Ok(new PartVersionDO2<PersonLicenceDO>(partVersion));
+            return Ok(new ApplicationPartVersionDO<PersonLicenceDO>(partVersion));
         }
 
-        public override IHttpActionResult PostPart(int lotId, int partIndex, PartVersionDO2<PersonLicenceDO> licence)
+        public override IHttpActionResult PostPart(int lotId, int partIndex, ApplicationPartVersionDO<PersonLicenceDO> licence)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
@@ -126,7 +126,7 @@ namespace Gva.Api.Controllers.Persons
 
             this.unitOfWork.Save();
 
-            return Ok(new PartVersionDO2<PersonLicenceDO>(licenceRartVersion));
+            return Ok(new ApplicationPartVersionDO<PersonLicenceDO>(licenceRartVersion));
         }
 
         [Route("lastLicenceNumber")]

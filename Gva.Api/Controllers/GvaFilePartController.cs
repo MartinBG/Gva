@@ -37,7 +37,7 @@ namespace Gva.Api.Controllers
 
         [Route("")]
         [Validate]
-        public virtual IHttpActionResult PostNewPart(int lotId, PartVersionDO2<T> partVersionDO)
+        public virtual IHttpActionResult PostNewPart(int lotId, FilePartVersionDO<T> partVersionDO)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
@@ -50,12 +50,12 @@ namespace Gva.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return Ok(new PartVersionDO2<T>(partVersion));
+            return Ok(new FilePartVersionDO<T>(partVersion));
         }
 
         [Route("{partIndex}")]
         [Validate]
-        public virtual IHttpActionResult PostPart(int lotId, int partIndex, PartVersionDO2<T> partVersionDO)
+        public virtual IHttpActionResult PostPart(int lotId, int partIndex, FilePartVersionDO<T> partVersionDO)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
@@ -94,7 +94,7 @@ namespace Gva.Api.Controllers
             var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(string.Format("{0}/{1}", this.path, partIndex));
             var lotFiles = this.fileRepository.GetFileReferences(partVersion.PartId, caseTypeId);
 
-            return Ok(new PartVersionDO2<T>(partVersion, lotFiles));
+            return Ok(new FilePartVersionDO<T>(partVersion, lotFiles));
         }
 
         [Route("")]
@@ -102,13 +102,13 @@ namespace Gva.Api.Controllers
         {
             var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts(this.path);
 
-            List<PartVersionDO2<T>> partVersionDOs = new List<PartVersionDO2<T>>();
+            List<FilePartVersionDO<T>> partVersionDOs = new List<FilePartVersionDO<T>>();
             foreach (var partVersion in partVersions)
             {
                 var lotFiles = this.fileRepository.GetFileReferences(partVersion.PartId, caseTypeId);
                 if (!caseTypeId.HasValue || lotFiles.Length != 0)
                 {
-                    partVersionDOs.Add(new PartVersionDO2<T>(partVersion, lotFiles));
+                    partVersionDOs.Add(new FilePartVersionDO<T>(partVersion, lotFiles));
                 }
             }
 

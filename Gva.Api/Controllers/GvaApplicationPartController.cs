@@ -37,7 +37,7 @@ namespace Gva.Api.Controllers
 
         [Route("")]
         [Validate]
-        public virtual IHttpActionResult PostNewPart(int lotId, PartVersionDO2<T> partVersionDO)
+        public virtual IHttpActionResult PostNewPart(int lotId, ApplicationPartVersionDO<T> partVersionDO)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
@@ -50,12 +50,12 @@ namespace Gva.Api.Controllers
 
             this.unitOfWork.Save();
 
-            return Ok(new PartVersionDO2<T>(partVersion));
+            return Ok(new ApplicationPartVersionDO<T>(partVersion));
         }
 
         [Route("{partIndex}")]
         [Validate]
-        public virtual IHttpActionResult PostPart(int lotId, int partIndex, PartVersionDO2<T> partVersionDO)
+        public virtual IHttpActionResult PostPart(int lotId, int partIndex, ApplicationPartVersionDO<T> partVersionDO)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
@@ -88,25 +88,25 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-         [Route("{partIndex}")]
+        [Route("{partIndex}")]
         public virtual IHttpActionResult GetPart(int lotId, int partIndex)
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(string.Format("{0}/{1}", this.path, partIndex));
             var lotObjects = this.applicationRepository.GetApplicationRefs(partVersion.PartId);
 
-            return Ok(new PartVersionDO2<T>(partVersion, lotObjects));
+            return Ok(new ApplicationPartVersionDO<T>(partVersion, lotObjects));
         }
 
-         [Route("")]
+        [Route("")]
         public virtual IHttpActionResult GetParts(int lotId)
         {
             var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts(this.path);
 
-            List<PartVersionDO2<T>> partVersionDOs = new List<PartVersionDO2<T>>();
+            List<ApplicationPartVersionDO<T>> partVersionDOs = new List<ApplicationPartVersionDO<T>>();
             foreach (var partVersion in partVersions)
             {
                 var gvaApplications = this.applicationRepository.GetApplicationRefs(partVersion.PartId);
-                partVersionDOs.Add(new PartVersionDO2<T>(partVersion, gvaApplications));
+                partVersionDOs.Add(new ApplicationPartVersionDO<T>(partVersion, gvaApplications));
             }
 
             return Ok(partVersionDOs);

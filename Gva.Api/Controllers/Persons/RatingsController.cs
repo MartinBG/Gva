@@ -69,7 +69,7 @@ namespace Gva.Api.Controllers.Persons
                 }
             };
 
-            return Ok(new PartVersionDO2<PersonRatingDO>(newRating));
+            return Ok(new ApplicationPartVersionDO<PersonRatingDO>(newRating));
         }
 
         [Route("{partIndex}/newEdition")]
@@ -91,7 +91,7 @@ namespace Gva.Api.Controllers.Persons
             return Ok(newRatingEdition);
         }
 
-        public override IHttpActionResult PostNewPart(int lotId, PartVersionDO2<PersonRatingDO> rating)
+        public override IHttpActionResult PostNewPart(int lotId, ApplicationPartVersionDO<PersonRatingDO> rating)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
@@ -104,10 +104,10 @@ namespace Gva.Api.Controllers.Persons
 
             this.unitOfWork.Save();
 
-            return Ok(new PartVersionDO2<PersonRatingDO>(partVersion));
+            return Ok(new ApplicationPartVersionDO<PersonRatingDO>(partVersion));
         }
 
-        public override IHttpActionResult PostPart(int lotId, int partIndex, PartVersionDO2<PersonRatingDO> rating)
+        public override IHttpActionResult PostPart(int lotId, int partIndex, ApplicationPartVersionDO<PersonRatingDO> rating)
         {
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
@@ -130,7 +130,7 @@ namespace Gva.Api.Controllers.Persons
 
             this.unitOfWork.Save();
 
-            return Ok(new PartVersionDO2<PersonRatingDO>(ratingRartVersion));
+            return Ok(new ApplicationPartVersionDO<PersonRatingDO>(ratingRartVersion));
         }
     }
 }

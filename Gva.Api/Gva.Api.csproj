@@ -95,8 +95,9 @@
     <Compile Include="Controllers\Persons\LicencesController.cs" />
     <Compile Include="Controllers\Persons\MedicalsController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
+    <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
-    <Compile Include="ModelsDO\PartVersionDO2.cs" />
+    <Compile Include="ModelsDO\FilePartVersionDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonRatingEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceAmlLimitationsDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceEditionDO.cs" />

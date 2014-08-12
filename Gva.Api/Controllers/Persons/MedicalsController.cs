@@ -53,7 +53,7 @@ namespace Gva.Api.Controllers.Persons
                 });
             }
 
-            return Ok(new PartVersionDO2<PersonMedicalDO>(newMedical, files));
+            return Ok(new FilePartVersionDO<PersonMedicalDO>(newMedical, files));
         }
     }
 }

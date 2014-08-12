@@ -5,26 +5,17 @@ using Regs.Api.Models;
 
 namespace Gva.Api.ModelsDO
 {
-    public class PartVersionDO2<T> where T : class, new()
+    public class ApplicationPartVersionDO<T> where T : class, new()
     {
-        public PartVersionDO2(PartVersion partVersion)
+        public ApplicationPartVersionDO(PartVersion partVersion)
         {
             this.PartIndex = partVersion.Part.Index;
             this.PartId = partVersion.PartId;
             this.Part = partVersion.Content.ToObject<T>();
-            this.Files = new List<FileDO>();
             this.Applications = new List<ApplicationNomDO>();
         }
 
-        public PartVersionDO2(PartVersion partVersion, GvaLotFile[] lotFiles)
-            : this(partVersion)
-        {
-            this.Files = lotFiles
-                .Select(lf => new FileDO(lf))
-                .ToList();
-        }
-
-        public PartVersionDO2(PartVersion partVersion, GvaApplication[] lotObjects)
+        public ApplicationPartVersionDO(PartVersion partVersion, GvaApplication[] lotObjects)
             : this(partVersion)
         {
             this.Applications = lotObjects
@@ -32,20 +23,19 @@ namespace Gva.Api.ModelsDO
                 .ToList();
         }
 
-        public PartVersionDO2(T part, List<FileDO> files = null)
+        public ApplicationPartVersionDO(T part, List<ApplicationNomDO> applications = null)
             : this()
         {
             this.Part = part;
 
-            if (files != null)
+            if (applications != null)
             {
-                this.Files = files;
+                this.Applications = applications;
             }
         }
 
-        public PartVersionDO2()
+        public ApplicationPartVersionDO()
         {
-            this.Files = new List<FileDO>();
             this.Applications = new List<ApplicationNomDO>();
             this.Part = new T();
         }
@@ -55,8 +45,6 @@ namespace Gva.Api.ModelsDO
         public int PartId { get; set; }
 
         public T Part { get; set; }
-
-        public List<FileDO> Files { get; set; }
 
         public List<ApplicationNomDO> Applications { get; set; }
     }
