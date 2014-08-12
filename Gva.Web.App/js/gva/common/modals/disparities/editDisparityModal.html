@@ -1,0 +1,33 @@
+﻿<ng-form name="form.editDisparityForm" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="common.editDisparityModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="common.editDisparityModal.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="common.editDisparityModal.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <div class="row">
+        <sc-field type="text" ng-model="disparity.refNumber" l10n-text="common.editDisparityModal.refNumber" class="col-sm-3 col-md-2" ng-required="true"></sc-field>
+        <sc-field type="nomenclature" ng-model="disparity.disparityLevel" alias="'disparityLevels'" ng-required="true" l10n-text="common.editDisparityModal.disparityLevel" class="col-sm-3 col-md-2"></sc-field>
+      </div>
+      <div class="row">
+        <sc-field type="text" ng-model="disparity.rectifyAction" l10n-text="common.editDisparityModal.rectifyAction" class="col-sm-4 col-md-3"></sc-field>
+        <sc-field type="text" ng-model="disparity.closureDocument"  l10n-text="common.editDisparityModal.closureDocument" class="col-sm-4 col-md-3"></sc-field>
+      </div>
+      <div class="row">
+        <sc-field type="date" ng-model="disparity.removalDate" l10n-text="common.editDisparityModal.removalDate" class="col-sm-3 col-md-3"></sc-field>
+        <sc-field type="date" ng-model="disparity.closureDate" l10n-text="common.editDisparityModal.closureDate" class="col-sm-3 col-md-3"></sc-field>
+      </div>
+      <div class="row">
+        <sc-field type="textarea" rows="3" ng-model="disparity.description" ng-required="true" l10n-text="common.editDisparityModal.description" class="col-sm-6 col-md-4"></sc-field>
+      </div>
+    </div>
+  </div>
+</ng-form>

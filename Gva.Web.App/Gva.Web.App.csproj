@@ -377,8 +377,6 @@
     <Content Include="js\gva\applications\views\docsLinkAppCtrl.js" />
     <Content Include="js\gva\common\forms\commonAuditDetail.html" />
     <Content Include="js\gva\common\forms\commonAuditDetailCtrl.js" />
-    <Content Include="js\gva\common\forms\commonDisparity.html" />
-    <Content Include="js\gva\common\forms\commonDisparityCtrl.js" />
     <Content Include="js\gva\common\forms\commonDocumentApplication.html" />
     <Content Include="js\gva\common\forms\commonDocumentApplicationCtrl.js" />
     <Content Include="js\gva\common\forms\commonInspection.html" />
@@ -387,6 +385,8 @@
     <Content Include="js\gva\common\forms\commonScannedDocumentCtrl.js" />
     <Content Include="js\gva\common\forms\commonSelectPerson.html" />
     <Content Include="js\gva\common\forms\commonSelectPersonCtrl.js" />
+    <Content Include="js\gva\common\modals\disparities\editDisparityModalCtrl.js" />
+    <Content Include="js\gva\common\modals\disparities\editDisparityModal.html" />
     <Content Include="js\gva\common\modals\persons\choosePersonModal.html" />
     <Content Include="js\gva\common\modals\persons\choosePersonModalCtrl.js" />
     <Content Include="js\gva\common\modals\persons\newPersonModal.html" />
