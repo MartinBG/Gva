@@ -38,13 +38,17 @@
     'AircraftCertNoises',
     'aircraftCertNoise'
   ];
+
   CertNoisesNewCtrl.$resolve = {
-    aircraftCertNoise: function () {
-      return {
-        part: {},
-        applications: []
-      };
-    }
+    aircraftCertNoise: [
+      '$stateParams',
+      'AircraftCertNoises',
+      function ($stateParams, AircraftCertNoises) {
+        return AircraftCertNoises.newCertNoise({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('CertNoisesNewCtrl', CertNoisesNewCtrl);

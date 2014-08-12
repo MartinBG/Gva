@@ -119,6 +119,7 @@ namespace Gva.Api
 
             //Aircraft controllers
             moduleBuilder.RegisterType<RadiosController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<NoisesController>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();
