@@ -60,15 +60,7 @@
           path: $stateParams.setPartPath,
           lotId: $stateParams.lotId,
           ind: $stateParams.ind
-        })
-          .$promise.then(function (application) {
-          application.files = {
-            hideApplications: true,
-            files: application.files
-          };
-
-          return application;
-        });
+        }).$promise;
       }
     ]
   };

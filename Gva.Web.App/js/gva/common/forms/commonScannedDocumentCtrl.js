@@ -11,6 +11,7 @@
     var caseType = null;
     $scope.lotId = scFormParams.lotId;
     $scope.setPart = scFormParams.setPart;
+    $scope.hideApplications = scFormParams.hideApplications;
 
     var addNewFile = function () {
       $scope.model.push({
@@ -23,18 +24,7 @@
       });
     };
 
-    if (_.isArray($scope.model)) {
-      $scope.hideApplications = false;
-    }
-    else {
-      $scope.hideApplications = $scope.model.hideApplications;
-    }
-
     $scope.$watch('model', function () {
-      if (!_.isArray($scope.model)) {
-        $scope.model = $scope.model.files;
-      }
-
       angular.forEach($scope.model, function (file) {
         file.isDeleted = false;
         file.isAdded = file.isAdded || false;

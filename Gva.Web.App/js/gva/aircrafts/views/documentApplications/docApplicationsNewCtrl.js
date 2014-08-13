@@ -42,10 +42,7 @@
     aircraftDocumentApplication: function () {
       return {
         part: {},
-        files: {
-          hideApplications: true,
-          files: []
-        }
+        files: []
       };
     }
   };

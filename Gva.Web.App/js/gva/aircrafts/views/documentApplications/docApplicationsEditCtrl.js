@@ -72,15 +72,7 @@
       '$stateParams',
       'AircraftDocumentApplications',
       function ($stateParams, AircraftDocumentApplications) {
-        return AircraftDocumentApplications.get($stateParams).$promise
-            .then(function (application) {
-          application.files = {
-            hideApplications: true,
-            files: application.files
-          };
-
-          return application;
-        });
+        return AircraftDocumentApplications.get($stateParams).$promise;
       }
     ]
   };
