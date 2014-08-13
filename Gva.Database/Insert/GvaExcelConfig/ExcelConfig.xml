@@ -2427,20 +2427,21 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="ElectronicServiceProviders">
-  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="2" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="2" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
    <Column ss:AutoFitWidth="0" ss:Width="171"/>
    <Column ss:AutoFitWidth="0" ss:Width="75"/>
    <Column ss:AutoFitWidth="0" ss:Width="88.5"/>
    <Column ss:AutoFitWidth="0" ss:Width="122.25"/>
-   <Column ss:AutoFitWidth="0" ss:Width="111"/>
-   <Column ss:AutoFitWidth="0" ss:Width="66"/>
+   <Column ss:AutoFitWidth="0" ss:Width="111" ss:Span="1"/>
+   <Column ss:Index="7" ss:AutoFitWidth="0" ss:Width="66"/>
    <Row ss:AutoFitHeight="0" ss:StyleID="s65">
     <Cell><Data ss:Type="String">ElectronicServiceProviderId</Data></Cell>
     <Cell><Data ss:Type="String">Code</Data></Cell>
     <Cell><Data ss:Type="String">Name</Data></Cell>
     <Cell><Data ss:Type="String">Bulstat</Data></Cell>
     <Cell><Data ss:Type="String">Alias</Data></Cell>
+    <Cell><Data ss:Type="String">EndPointAddress</Data></Cell>
     <Cell><Data ss:Type="String">IsActive</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0" ss:StyleID="s64">
@@ -2449,7 +2450,7 @@
     <Cell><Data ss:Type="String">ГВА</Data></Cell>
     <Cell><Data ss:Type="String">121805755</Data></Cell>
     <Cell><Data ss:Type="String">gva</Data></Cell>
-    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">1</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -2462,8 +2463,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>8</ActiveRow>
-     <ActiveCol>2</ActiveCol>
+     <ActiveRow>4</ActiveRow>
+     <ActiveCol>7</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

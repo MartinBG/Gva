@@ -8,6 +8,7 @@ CREATE TABLE ElectronicServiceProviders
     Name				NVARCHAR (200) NOT NULL,
 	Bulstat				NVARCHAR (50)  NOT NULL,
 	Alias				NVARCHAR (200) NOT NULL,
+	EndPointAddress		NVARCHAR (500) NULL,
     IsActive			BIT            NOT NULL,
     Version				ROWVERSION     NOT NULL,
     CONSTRAINT PK_ElectronicServiceProviders PRIMARY KEY CLUSTERED (ElectronicServiceProviderId),

@@ -49,7 +49,8 @@ namespace Docs.Api
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/changeDocClassification"        , "Doc", "ChangeDocClassification");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createNewCase"                  , "Doc", "CreateNewCase");
             this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}/getCorrespondentEmail"          , "Doc", "GetCorrespondentEmail");
-            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/sendCorrespondentEmail"         , "Doc", "sendCorrespondentEmail");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/sendCorrespondentEmail"         , "Doc", "SendCorrespondentEmail");
+            this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/sendCompetenceTransferDoc"      , "Doc", "SendCompetenceTransferDoc");
             this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}"                                , "Doc", "GetDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}"                                , "Doc", "UpdateDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createTicket"                   , "Doc", "CreateDocFileTicket");

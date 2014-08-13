@@ -97,6 +97,8 @@
     <Content Include="js\ems\docs\modals\chooseCorrModalCtrl.js" />
     <Content Include="js\ems\docs\modals\chooseUnitModal.html" />
     <Content Include="js\ems\docs\modals\chooseUnitModalCtrl.js" />
+    <Content Include="js\ems\docs\modals\sendTransferDocModal.html" />
+    <Content Include="js\ems\docs\modals\sendTransferDocModalCtrl.js" />
     <Content Include="js\ems\docs\modals\newCorrModal.html" />
     <Content Include="js\ems\docs\modals\newCorrModalCtrl.js" />
     <Content Include="js\ems\docs\recources\docs.js" />

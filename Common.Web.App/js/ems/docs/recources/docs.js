@@ -107,6 +107,13 @@
               method: 'POST',
               url: 'api/docs/:id/sendCorrespondentEmail'
             },
+            'sendCompetenceTransferDoc': {
+              method: 'POST',
+              url: 'api/docs/:id/sendCompetenceTransferDoc',
+              params: {
+                electronicServiceProviderId: '@electronicServiceProviderId'
+              }
+            },
             'getRioEditableFile': {
               method: 'GET',
               url: 'api/docs/:id/getRioEditableFile'

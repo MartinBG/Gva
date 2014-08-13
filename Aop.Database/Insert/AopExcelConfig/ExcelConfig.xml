@@ -19,7 +19,7 @@
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>812</TabRatio>
-  <ActiveSheet>6</ActiveSheet>
+  <ActiveSheet>7</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -1810,11 +1810,11 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>4</ActiveRow>
+     <ActiveRow>33</ActiveRow>
+     <ActiveCol>10</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -1822,7 +1822,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="ElectronicServiceProviders">
-  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="2" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="2" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s67"><Data ss:Type="String">ElectronicServiceProviderId</Data></Cell>
@@ -1830,6 +1830,7 @@
     <Cell ss:StyleID="s67"><Data ss:Type="String">Name</Data></Cell>
     <Cell ss:StyleID="s67"><Data ss:Type="String">Bulstat</Data></Cell>
     <Cell ss:StyleID="s67"><Data ss:Type="String">Alias</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">EndPointAddress</Data></Cell>
     <Cell ss:StyleID="s67"><Data ss:Type="String">IsActive</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
@@ -1838,6 +1839,7 @@
     <Cell ss:StyleID="s66"><Data ss:Type="String">АОП</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">131236380</Data></Cell>
     <Cell ss:StyleID="s66"><Data ss:Type="String">aop</Data></Cell>
+    <Cell ss:StyleID="s66"/>
     <Cell ss:StyleID="s66"><Data ss:Type="String">1</Data></Cell>
    </Row>
   </Table>
@@ -1848,11 +1850,12 @@
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
    <Unsynced/>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>1</ActiveRow>
-     <ActiveCol>1</ActiveCol>
+     <ActiveRow>31</ActiveRow>
+     <ActiveCol>15</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

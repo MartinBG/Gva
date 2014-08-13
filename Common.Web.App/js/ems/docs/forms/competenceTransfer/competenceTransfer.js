@@ -6,7 +6,8 @@
     $scope,
     $modal,
     Docs,
-    Nomenclatures
+    Nomenclatures,
+    scModal
   ) {
 
     Docs.getRioEditableFile({
@@ -110,13 +111,27 @@
         });
     };
 
+    $scope.sendDoc = function () {
+      var modalInstance = scModal.open('sendTransferDoc', {
+        docId: $scope.model.docId
+      });
+
+      modalInstance.result.then(function () {
+        //var newCorr = $scope.docModel.doc.correspondents.slice();
+        //newCorr.push(nomItem.nomValueId);
+        //$scope.docModel.doc.correspondents = newCorr;
+      });
+
+      return modalInstance.opened;
+    };
   }
 
   CompetenceTransferCtrl.$inject = [
     '$scope',
     '$modal',
     'Docs',
-    'Nomenclatures'
+    'Nomenclatures',
+    'scModal'
   ];
 
   angular.module('ems').controller('CompetenceTransferCtrl', CompetenceTransferCtrl);

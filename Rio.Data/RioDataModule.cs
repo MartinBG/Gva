@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Mosv.RioBridge.Extractions.AttachedDocDo.Common;
 using Mosv.RioBridge.Extractions.AttachedDocDo.Mosv;
 using Rio.Data.Extractions.ApplicationDataDo.Aop;
 using Rio.Data.Extractions.ApplicationDataDo.Gva;
@@ -6,6 +7,7 @@ using Rio.Data.Extractions.AttachedDocDo.Aop;
 using Rio.Data.Extractions.AttachedDocDo.Gva;
 using Rio.Data.Extractions.CorrespondentDo.Aop;
 using Rio.Data.Extractions.CorrespondentDo.Mosv;
+using Rio.Data.Extractions.ServiceProviderDo.Common;
 using Rio.Data.Extractions.ServiceProviderDo.Mosv;
 using Rio.Data.RioObjectExtraction;
 using Rio.Data.Utils.RioDocumentParser;
@@ -20,6 +22,8 @@ namespace Rio.Data
             moduleBuilder.RegisterType<RioDocumentParser>().As<IRioDocumentParser>();
 
             //---ApplicationDataDo Extractions-------------------------------------------------------
+            //Common
+            moduleBuilder.RegisterType<R6064ApplicationDataDoExtraction>().As<IRioObjectExtraction>();
             //Gva
             moduleBuilder.RegisterType<R4186ApplicationDataDoExtraction>().As<IRioObjectExtraction>();
             moduleBuilder.RegisterType<R4240ApplicationDataDoExtraction>().As<IRioObjectExtraction>();
@@ -118,6 +122,8 @@ namespace Rio.Data
             moduleBuilder.RegisterType<AopApplicationCorrespondentDoExtraction>().As<IRioObjectExtraction>();
 
             //---ServiceProviderDo Extractions-------------------------------------------------------
+            //Mosv
+            moduleBuilder.RegisterType<R6064ServiceProviderDoExtraction>().As<IRioObjectExtraction>();
             //Mosv
             moduleBuilder.RegisterType<R6016ServiceProviderDoExtraction>().As<IRioObjectExtraction>();
             moduleBuilder.RegisterType<R6054ServiceProviderDoExtraction>().As<IRioObjectExtraction>();

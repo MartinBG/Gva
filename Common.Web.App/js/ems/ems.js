@@ -101,7 +101,8 @@
     scModalProvider
      .modal('chooseUnit', 'js/ems/docs/modals/chooseUnitModal.html', 'ChooseUnitModalCtrl')
      .modal('chooseCorr', 'js/ems/docs/modals/chooseCorrModal.html', 'ChooseCorrModalCtrl')
-     .modal('newCorr'   , 'js/ems/docs/modals/newCorrModal.html'   , 'NewCorrModalCtrl'   );
+     .modal('newCorr', 'js/ems/docs/modals/newCorrModal.html', 'NewCorrModalCtrl')
+     .modal('sendTransferDoc', 'js/ems/docs/modals/sendTransferDocModal.html', 'SendTransferDocModalCtrl');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.docs'                                     , '/docs?filter&fromDate&toDate&regUri&docName&docTypeId&docStatusId&hideRead&isCase&corrs&units&ds&hasLot'                                                                                                           ])

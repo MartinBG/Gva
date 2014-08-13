@@ -25,6 +25,12 @@
           search: 'Търси',
           cancel: 'Отказ',
           select: 'Избор'
+        },
+        sendTransferDoc: {
+          title: 'Изпращане на документа за препращане по компетентност',
+          receiverServiceProvider: 'Изпрати към',
+          cancel: 'Отказ',
+          send: 'Изпрати'
         }
       },
       docs: {
@@ -432,7 +438,8 @@
         documents: 'Документи',
         docType: 'Вид на документ',
         download: 'Свали',
-        view: 'Преглед'
+        view: 'Преглед',
+        sendDoc: 'Изпрати документа'
       },
       portalModal: {
         eApplication: {

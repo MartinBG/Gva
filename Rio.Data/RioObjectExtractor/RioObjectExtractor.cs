@@ -21,9 +21,16 @@ namespace Rio.Data.RioObjectExtractor
         {
             var extraction = (RioObjectExtraction<TDo>)this.extractions
                 .Where(e => e.RioObjectType == rioApplication.GetType() && e.DoType == typeof(TDo))
-                .Single();
+                .SingleOrDefault();
 
-            return extraction.Extract(rioApplication);
+            if (extraction != null)
+            {
+                return extraction.Extract(rioApplication);
+            }
+            else
+            {
+                return default(TDo);
+            }
         }
     }
 }

@@ -84,9 +84,9 @@ namespace Docs.SqlConfig
             {
                 TableName = "ElectronicServiceProviders",
                 IdColumn = "ElectronicServiceProviderId",
-                AllColumns = new string[] { "ElectronicServiceProviderId", "Code", "Name", "Bulstat", "Alias", "IsActive"},
-                StringColumns = new string[] { "Code", "Name", "Bulstat", "Alias" },
-                SQLFormat = "INSERT INTO [ElectronicServiceProviders]([ElectronicServiceProviderId], [Code], [Name], [Bulstat], [Alias], [IsActive]) VALUES({0},{1},{2},{3},{4},{5});",
+                AllColumns = new string[] { "ElectronicServiceProviderId", "Code", "Name", "Bulstat", "Alias", "EndPointAddress", "IsActive"},
+                StringColumns = new string[] { "Code", "Name", "Bulstat", "EndPointAddress", "Alias" },
+                SQLFormat = "INSERT INTO [ElectronicServiceProviders]([ElectronicServiceProviderId], [Code], [Name], [Bulstat], [Alias], [EndPointAddress], [IsActive]) VALUES({0},{1},{2},{3},{4},{5},{6});",
                 HasIdentityInsert = true,
                 HasIdValues = true,
                 SetEmptyStringWhenValueMissing = true

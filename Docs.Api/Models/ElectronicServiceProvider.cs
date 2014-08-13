@@ -17,6 +17,8 @@ namespace Docs.Api.Models
 
         public string Alias { get; set; }
 
+        public string EndPointAddress { get; set; }
+
         public bool IsActive { get; set; }
 
         public byte[] Version { get; set; }
@@ -46,6 +48,9 @@ namespace Docs.Api.Models
                 .IsRequired()
                 .HasMaxLength(200);
 
+            this.Property(t => t.EndPointAddress)
+                .HasMaxLength(500);
+
             this.Property(t => t.Version)
                 .IsRequired()
                 .IsFixedLength()
@@ -59,6 +64,7 @@ namespace Docs.Api.Models
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Bulstat).HasColumnName("Bulstat");
             this.Property(t => t.Alias).HasColumnName("Alias");
+            this.Property(t => t.EndPointAddress).HasColumnName("EndPointAddress");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
             this.Property(t => t.Version).HasColumnName("Version");
         }

@@ -894,7 +894,7 @@ namespace Docs.Api.Controllers
         }
 
         [Route("electronicServiceProvider")]
-        public IHttpActionResult GetElectronicServiceProviders(string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetElectronicServiceProviders(string term = null, bool? excludeActiveProvider = null, int offset = 0, int? limit = null)
         {
             var predicate =
                 PredicateBuilder.True<ElectronicServiceProvider>()
@@ -915,6 +915,11 @@ namespace Docs.Api.Controllers
                     isActive = e.IsActive
                 })
                 .ToList();
+
+            if (excludeActiveProvider.HasValue && excludeActiveProvider.Value)
+            {
+                results = results.Where(e => e.isActive == false).ToList();
+            }
 
             return Ok(results);
         }

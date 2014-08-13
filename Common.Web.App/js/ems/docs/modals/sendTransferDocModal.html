@@ -1,0 +1,26 @@
+﻿<ng-form name="form.sendTransferDocForm" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="common.sendTransferDoc.title"></strong>
+      <div class="pull-right">
+        <sc-button name="cancelBtn" btn-click="cancel()" text="common.sendTransferDoc.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+
+      <div class="row">
+        <div class="form-group col-sm-10" sc-has-error="receiverServiceProvider">
+          <label class="control-label" l10n-text="common.sendTransferDoc.receiverServiceProvider"></label><br />
+          <sc-nomenclature name="receiverServiceProvider" ng-model="receiverServiceProvider.id" nom-obj="receiverServiceProvider.obj" mode="id" alias="'electronicServiceProvider'" params="{ excludeActiveProvider: true }" ng-required="true"></sc-nomenclature>
+        </div>
+
+        <div class="form-group col-sm-2">
+          <br />
+          <sc-button name="sendBtn" btn-click="send()" text="common.sendTransferDoc.send" class="btn btn-default btn-sm"></sc-button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-form>

@@ -767,7 +767,8 @@ namespace Rio.Objects
                 {
                     {"ctfc", "http://ereg.egov.bg/segment/R-6064"},
                 },
-                "ContainerTransferFileCompetence.xsl");
+                "ContainerTransferFileCompetence.xsl",
+                false);
 
         public static readonly RioDocumentMetadata TransferContainerMetadata =
             new RioDocumentMetadata(

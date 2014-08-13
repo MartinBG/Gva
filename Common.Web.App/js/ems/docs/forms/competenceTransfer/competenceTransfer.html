@@ -4,11 +4,11 @@
     <div class="row">
       <div class="form-group col-sm-4">
         <label class="control-label" l10n-text="competenceTransfer.senderServiceProviderName"></label><br />
-        <sc-nomenclature ng-model="senderServiceProvider.id" nom-obj="senderServiceProvider.obj" mode="id" alias="'electronicServiceProvider'" ng-change="senderServiceProviderChange()" ng-readonly="readonly"></sc-nomenclature>
+        <sc-nomenclature ng-model="senderServiceProvider.id" nom-obj="senderServiceProvider.obj" mode="id" alias="'electronicServiceProvider'" ng-change="senderServiceProviderChange()" ng-readonly="true"></sc-nomenclature>
       </div>
       <div class="form-group col-sm-4">
         <label class="control-label" l10n-text="competenceTransfer.receiverServiceProviderName"></label><br />
-        <sc-nomenclature ng-model="receiverServiceProvider.id" nom-obj="receiverServiceProvider.obj" mode="id" alias="'electronicServiceProvider'" ng-change="receiverServiceProviderChange()" ng-readonly="readonly"></sc-nomenclature>
+        <sc-nomenclature ng-model="receiverServiceProvider.id" nom-obj="receiverServiceProvider.obj" mode="id" alias="'electronicServiceProvider'" ng-change="receiverServiceProviderChange()" params="{ excludeActiveProvider: true }" ng-readonly="readonly"></sc-nomenclature>
       </div>
     </div>
 
@@ -58,10 +58,6 @@
       </div>
     </div>
 
-
-
-
-
     <div class="row"> 
       <div class="form-group col-sm-12">
         <label class="control-label" l10n-text="competenceTransfer.documents"></label>
@@ -94,6 +90,12 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+
+    <div class="row" style="float: right;"> 
+      <div class="form-group col-sm-12">
+        <sc-button btn-click="sendDoc()" class="btn btn-default btn-sm" text="competenceTransfer.sendDoc" ng-show="readonly"></sc-button>
       </div>
     </div>
 

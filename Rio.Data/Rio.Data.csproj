@@ -58,6 +58,7 @@
     <Compile Include="DataObjects\CorrespondentDo.cs" />
     <Compile Include="Extractions\ApplicationDataDo\Aop\AopApplicationDataDoExtraction.cs" />
     <Compile Include="Extractions\ApplicationDataDo\ApplicationDataDoExtraction.cs" />
+    <Compile Include="Extractions\ApplicationDataDo\Common\R6064ApplicationDataDoExtraction.cs" />
     <Compile Include="Extractions\ApplicationDataDo\Gva\R4186ApplicationDataDoExtraction.cs" />
     <Compile Include="Extractions\ApplicationDataDo\Gva\R4240ApplicationDataDoExtraction.cs" />
     <Compile Include="Extractions\ApplicationDataDo\Gva\R4242ApplicationDataDoExtraction.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Extractions\CorrespondentDo\Mosv\R6016CorrespondentDoExtraction.cs" />
     <Compile Include="Extractions\CorrespondentDo\Mosv\R6054CorrespondentDoExtraction.cs" />
     <Compile Include="Extractions\CorrespondentDo\Mosv\R6056CorrespondentDoExtraction.cs" />
+    <Compile Include="Extractions\ServiceProviderDo\Comon\R6064ServiceProviderDoExtraction.cs" />
     <Compile Include="Extractions\ServiceProviderDo\Mosv\R6016ServiceProviderDoExtraction.cs" />
     <Compile Include="Extractions\ServiceProviderDo\Mosv\R6054ServiceProviderDoExtraction.cs" />
     <Compile Include="Extractions\ServiceProviderDo\Mosv\R6056ServiceProviderDoExtraction.cs" />

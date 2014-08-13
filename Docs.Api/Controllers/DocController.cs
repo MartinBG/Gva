@@ -22,6 +22,7 @@ using Rio.Objects;
 using Rio.Data.Abbcdn;
 using System.ServiceModel;
 using Abbcdn;
+using Rio.Data.ServiceContracts.AppCommunicator;
 
 namespace Docs.Api.Controllers
 {
@@ -2517,6 +2518,59 @@ namespace Docs.Api.Controllers
 
                 return Ok();
             }
+        }
+
+        [HttpPost]
+        public IHttpActionResult SendCompetenceTransferDoc(int id, int electronicServiceProviderId)
+        {
+            var doc = this.docRepository.Find(id,
+               e => e.DocFiles.Select(df => df.DocFileOriginType),
+               e => e.DocFiles.Select(df => df.DocFileType));
+
+            if (doc == null)
+            {
+                return BadRequest();
+            }
+
+            DocFile editable = doc.DocFiles.FirstOrDefault(e => e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
+            if (editable == null || editable.DocFileType.Alias != "ContainerTransferFileCompetence")
+            {
+                return BadRequest();
+            }
+
+            byte[] content;
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+            {
+                connection.Open();
+
+                using (MemoryStream m1 = new MemoryStream())
+                using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", editable.DocFileContentId))
+                {
+                    blobStream.CopyTo(m1);
+                    content = m1.ToArray();
+                }
+            }
+
+            string xmlContent = Utf8Utils.GetString(content);
+
+            ElectronicServiceProvider electronicServiceProvider =
+                this.unitOfWork.DbContext.Set<ElectronicServiceProvider>().FirstOrDefault(e => e.ElectronicServiceProviderId == electronicServiceProviderId);
+
+            using (var channelFactory = new ChannelFactory<IDocumentService>("AppCommunicatorEndpoint", new EndpointAddress(electronicServiceProvider.EndPointAddress)))
+            {
+                DocumentRequest documentRequest = new DocumentRequest()
+                {
+                    DocumentData = xmlContent,
+                    DocumentFileName = String.Format("CompetenceTransferDoc_{0}.xml", editable.DocFileContentId.ToString()),
+                    DocumentGuid = editable.DocFileContentId
+                };
+
+                var service = channelFactory.CreateChannel();
+                DocumentInfo documentInfo = service.ProcessStructuredDocument(documentRequest);
+            }
+
+            return Ok();
         }
 
         [HttpGet]

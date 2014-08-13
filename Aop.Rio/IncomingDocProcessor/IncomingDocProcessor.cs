@@ -175,22 +175,25 @@ namespace Aop.Rio.IncomingDocProcessor
                     this.unitOfWork.DbContext.Set<DocFile>().Add(initialDocFile);
 
                     //Add attached application files as DocFiles
-                    foreach (var attachedAppFile in attachedDocuments)
+                    if (attachedDocuments != null && attachedDocuments.Count > 0)
                     {
-                        byte[] fileContent = null;
-                        if (attachedAppFile.UseAbbcdn)
+                        foreach (var attachedAppFile in attachedDocuments)
                         {
-                            fileContent = AbbcdnStorage.DownloadFile(Guid.Parse(attachedAppFile.UniqueIdentifier)).ContentBytes;
-                        }
-                        else
-                        {
-                            fileContent = attachedAppFile.BytesContent;
-                        }
+                            byte[] fileContent = null;
+                            if (attachedAppFile.UseAbbcdn)
+                            {
+                                fileContent = AbbcdnStorage.DownloadFile(Guid.Parse(attachedAppFile.UniqueIdentifier)).ContentBytes;
+                            }
+                            else
+                            {
+                                fileContent = attachedAppFile.BytesContent;
+                            }
 
-                        Guid key = WriteToBlob(fileContent);
+                            Guid key = WriteToBlob(fileContent);
 
-                        DocFile attachedAppDocFile = CreateEApplicationAttachDocFile(attachedAppFile, initialDoc, publicDocFileKind.DocFileKindId, key);
-                        this.unitOfWork.DbContext.Set<DocFile>().Add(attachedAppDocFile);
+                            DocFile attachedAppDocFile = CreateEApplicationAttachDocFile(attachedAppFile, initialDoc, publicDocFileKind.DocFileKindId, key);
+                            this.unitOfWork.DbContext.Set<DocFile>().Add(attachedAppDocFile);
+                        }
                     }
 
                     this.unitOfWork.Save();
@@ -251,9 +254,12 @@ namespace Aop.Rio.IncomingDocProcessor
                 discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.NotAuthenticated);
             }
 
-            if (!rioValidator.CheckSupportedFileFormats(attachedDocuments.Select(e => e.FileName).ToList(), supportedFileFormats))
+            if (attachedDocuments != null && attachedDocuments.Count > 0)
             {
-                discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
+                if (!rioValidator.CheckSupportedFileFormats(attachedDocuments.Select(e => e.FileName).ToList(), supportedFileFormats))
+                {
+                    discrepancies.Add(ElectronicDocumentDiscrepancyTypeNomenclature.IncorrectAttachmentsFormat);
+                }
             }
 
             //TODO: Implement
@@ -284,11 +290,14 @@ namespace Aop.Rio.IncomingDocProcessor
         //TODO
         private void MarkAttachedFilesAsUsed(IList<AttachedDocDo> attachedDocuments)
         {
-            foreach (var attachedDoc in attachedDocuments)
+            if (attachedDocuments != null && attachedDocuments.Count > 0)
             {
-                if (attachedDoc.UseAbbcdn)
+                foreach (var attachedDoc in attachedDocuments)
                 {
-                    AbbcdnStorage.SetIsInUse(Guid.Parse(attachedDoc.AbbcdnInfo.AttachedDocumentUniqueIdentifier), true);
+                    if (attachedDoc.UseAbbcdn)
+                    {
+                        AbbcdnStorage.SetIsInUse(Guid.Parse(attachedDoc.AbbcdnInfo.AttachedDocumentUniqueIdentifier), true);
+                    }
                 }
             }
         }
