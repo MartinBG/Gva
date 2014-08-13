@@ -583,9 +583,6 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult ChangeDocParent(int id, int newDocId)
         {
-            throw new NotImplementedException();
-
-            //todo SetDocUsers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
@@ -609,6 +606,8 @@ namespace Docs.Api.Controllers
                     return NotFound();
                 }
 
+                int oldCaseId = this.docRepository.GetCaseId(id);
+
                 List<int> docIds = this.docRepository.fnGetSubordinateDocs(id);
 
                 DocRelation newDocRelation = this.unitOfWork.DbContext.Set<DocRelation>().FirstOrDefault(e => e.DocId == newDocId);
@@ -631,6 +630,9 @@ namespace Docs.Api.Controllers
                 doc.IsCase = false;
 
                 this.unitOfWork.Save();
+
+                this.docRepository.ExecSpSetDocUnitTokens(docId: oldCaseId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: newDocId);
 
                 transaction.Commit();
 
@@ -726,9 +728,6 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateNewCase(int id)
         {
-            throw new NotImplementedException();
-
-            //todo SetDocUsers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
@@ -752,6 +751,8 @@ namespace Docs.Api.Controllers
                     return NotFound();
                 }
 
+                int oldCaseId = this.docRepository.GetCaseId(id);
+
                 List<int> docIds = this.docRepository.fnGetSubordinateDocs(id);
                 List<DocRelation> docRelations = this.docRepository.GetCaseRelationsByDocId(id);
 
@@ -771,6 +772,9 @@ namespace Docs.Api.Controllers
                 doc.IsCase = true;
 
                 this.unitOfWork.Save();
+
+                this.docRepository.ExecSpSetDocUnitTokens(docId: oldCaseId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: id);
 
                 transaction.Commit();
 
