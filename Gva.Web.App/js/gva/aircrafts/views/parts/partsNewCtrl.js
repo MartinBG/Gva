@@ -38,11 +38,15 @@
   ];
 
   PartsNewCtrl.$resolve = {
-    aircraftPart: function () {
-      return {
-        part: {}
-      };
-    }
+    aircraftPart: [
+      '$stateParams',
+      'AircraftParts',
+      function ($stateParams, AircraftParts) {
+        return AircraftParts.newPart({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('PartsNewCtrl', PartsNewCtrl);
