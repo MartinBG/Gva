@@ -11,31 +11,30 @@ using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Persons
 {
-    [RoutePrefix("api/persons/{lotId}/personDocumentMedicals")]
+    [RoutePrefix("api/persons/{lotId}/personDocumentIds")]
     [Authorize]
-    public class MedicalsController : GvaFilePartController<PersonMedicalDO>
+    public class PersonDocumentIdsController : GvaFilePartController<PersonDocumentIdDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
 
-        public MedicalsController(
+        public PersonDocumentIdsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base("personDocumentMedicals", unitOfWork, lotRepository, fileRepository, lotEventDispatcher)
+            : base("personDocumentIds", unitOfWork, lotRepository, fileRepository, lotEventDispatcher)
         {
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewMedical(int lotId, int? appId = null)
+        public IHttpActionResult GetNewDocumentId(int lotId, int? appId = null)
         {
-            PersonMedicalDO newMedical = new PersonMedicalDO()
+            PersonDocumentIdDO newDocumentId = new PersonDocumentIdDO()
             {
-                DocumentNumberPrefix = "MED BG",
                 DocumentDateValidFrom = DateTime.Now
             };
 
@@ -53,7 +52,7 @@ namespace Gva.Api.Controllers.Persons
                 });
             }
 
-            return Ok(new FilePartVersionDO<PersonMedicalDO>(newMedical, files));
+            return Ok(new FilePartVersionDO<PersonDocumentIdDO>(newDocumentId, files));
         }
     }
 }

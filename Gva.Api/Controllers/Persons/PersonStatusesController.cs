@@ -11,9 +11,9 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personStatuses")]
     [Authorize]
-    public class StatusesController : GvaApplicationPartController<PersonStatusDO>
+    public class PersonStatusesController : GvaApplicationPartController<PersonStatusDO>
     {
-        public StatusesController(
+        public PersonStatusesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,

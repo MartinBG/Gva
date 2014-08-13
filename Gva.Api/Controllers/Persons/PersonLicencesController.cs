@@ -18,7 +18,7 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/licences")]
     [Authorize]
-    public class LicencesController : GvaApplicationPartController<PersonLicenceDO>
+    public class PersonLicencesController : GvaApplicationPartController<PersonLicenceDO>
     {
         private string path;
         private IUnitOfWork unitOfWork;
@@ -26,7 +26,7 @@ namespace Gva.Api.Controllers.Persons
         private IApplicationRepository applicationRepository;
         private ILotEventDispatcher lotEventDispatcher;
 
-        public LicencesController(
+        public PersonLicencesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,

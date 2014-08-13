@@ -18,7 +18,7 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/ratings")]
     [Authorize]
-    public class RatingsController : GvaApplicationPartController<PersonRatingDO>
+    public class PersonRatingsController : GvaApplicationPartController<PersonRatingDO>
     {
         private string path;
         private IUnitOfWork unitOfWork;
@@ -27,7 +27,7 @@ namespace Gva.Api.Controllers.Persons
         private ILotEventDispatcher lotEventDispatcher;
         private INomRepository nomRepository;
 
-        public RatingsController(
+        public PersonRatingsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,

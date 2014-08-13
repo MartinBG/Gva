@@ -11,29 +11,29 @@ using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Persons
 {
-    [RoutePrefix("api/persons/{lotId}/personDocumentIds")]
+    [RoutePrefix("api/persons/{lotId}/personDocumentTrainings")]
     [Authorize]
-    public class DocumentIdsController : GvaFilePartController<PersonDocumentIdDO>
+    public class PersonTrainingsController : GvaFilePartController<PersonTrainingDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
 
-        public DocumentIdsController(
+        public PersonTrainingsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base("personDocumentIds", unitOfWork, lotRepository, fileRepository, lotEventDispatcher)
+            : base("personDocumentTrainings", unitOfWork, lotRepository, fileRepository, lotEventDispatcher)
         {
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewDocumentId(int lotId, int? appId = null)
+        public IHttpActionResult GetNewTraining(int lotId, int? appId = null)
         {
-            PersonDocumentIdDO newDocumentId = new PersonDocumentIdDO()
+            PersonTrainingDO newTraining = new PersonTrainingDO()
             {
                 DocumentDateValidFrom = DateTime.Now
             };
@@ -52,7 +52,7 @@ namespace Gva.Api.Controllers.Persons
                 });
             }
 
-            return Ok(new FilePartVersionDO<PersonDocumentIdDO>(newDocumentId, files));
+            return Ok(new FilePartVersionDO<PersonTrainingDO>(newTraining, files));
         }
     }
 }

@@ -10,9 +10,9 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personFlyingExperiences")]
     [Authorize]
-    public class FlyingExperiencesController : GvaApplicationPartController<PersonFlyingExperienceDO>
+    public class PersonFlyingExperiencesController : GvaApplicationPartController<PersonFlyingExperienceDO>
     {
-        public FlyingExperiencesController(
+        public PersonFlyingExperiencesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,

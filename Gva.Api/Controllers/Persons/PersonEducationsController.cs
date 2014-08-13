@@ -12,12 +12,12 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personDocumentEducations")]
     [Authorize]
-    public class EducationsController : GvaFilePartController<PersonEducationDO>
+    public class PersonEducationsController : GvaFilePartController<PersonEducationDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
 
-        public EducationsController(
+        public PersonEducationsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,

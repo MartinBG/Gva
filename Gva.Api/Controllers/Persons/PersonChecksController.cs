@@ -13,12 +13,12 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personDocumentChecks")]
     [Authorize]
-    public class ChecksController : GvaFilePartController<PersonCheckDO>
+    public class PersonChecksController : GvaFilePartController<PersonCheckDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
 
-        public ChecksController(
+        public PersonChecksController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,

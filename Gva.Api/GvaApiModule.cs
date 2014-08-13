@@ -111,17 +111,17 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationStageRepository>().As<IApplicationStageRepository>().InstancePerLifetimeScope();
 
             //Person controllers
-            moduleBuilder.RegisterType<AddressesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonAddressesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonApplicationsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<ChecksController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<DocumentIdsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<EducationsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<FlyingExperiencesController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<LicencesController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<MedicalsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<RatingsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<StatusesController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<TrainingsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonChecksController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonDocumentIdsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonEducationsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonFlyingExperiencesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonLicencesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonMedicalsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonRatingsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonStatusesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonTrainingsController>().InstancePerLifetimeScope();
 
             //Aircraft controllers
             moduleBuilder.RegisterType<RadiosController>().InstancePerLifetimeScope();
