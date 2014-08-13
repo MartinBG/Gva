@@ -4,6 +4,7 @@ using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Common;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
 using Newtonsoft.Json.Linq;

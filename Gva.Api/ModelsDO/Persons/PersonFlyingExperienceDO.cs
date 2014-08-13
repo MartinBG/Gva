@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
+using Gva.Api.ModelsDO.Common;
 
 namespace Gva.Api.ModelsDO.Persons
 {

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
-namespace Gva.Api.ModelsDO
+namespace Gva.Api.ModelsDO.Common
 {
     public class DocumentApplicationDO
     {

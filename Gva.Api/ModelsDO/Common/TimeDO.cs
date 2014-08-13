@@ -1,4 +1,4 @@
-﻿namespace Gva.Api.ModelsDO
+﻿namespace Gva.Api.ModelsDO.Common
 {
     public class TimeDO
     {

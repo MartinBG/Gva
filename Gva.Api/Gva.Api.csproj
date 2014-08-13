@@ -118,9 +118,9 @@
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />
-    <Compile Include="ModelsDO\PeriodDO.cs" />
+    <Compile Include="ModelsDO\Common\PeriodDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressDO.cs" />
-    <Compile Include="ModelsDO\DocumentApplicationDO.cs" />
+    <Compile Include="ModelsDO\Common\DocumentApplicationDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonCheckDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentIdDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonEducationDO.cs" />
@@ -133,7 +133,7 @@
     <Compile Include="ModelsDO\Persons\PersonRatingDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonStatusDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonTrainingDO.cs" />
-    <Compile Include="ModelsDO\TimeDO.cs" />
+    <Compile Include="ModelsDO\Common\TimeDO.cs" />
     <Compile Include="Models\GvaApplicationStage.cs" />
     <Compile Include="Models\GvaStage.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
