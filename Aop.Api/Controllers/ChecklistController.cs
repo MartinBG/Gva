@@ -1,7 +1,9 @@
 ﻿using Aop.Api.Models;
+using Aop.Api.Utils;
 using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Blob;
+using Common.Utils;
 using Common.WordTemplates;
 using Docs.Api.Models;
 using Newtonsoft.Json;
@@ -321,6 +323,94 @@ namespace Aop.Api.Controllers
                 }).ToString();
 
                 string contentStr = string.Format("{{ versions: [{0}] }}", emptyChecklist);
+
+                if (!copy && !correct)
+                {
+                    Doc doc = this.docRepository.Find(docId, e => e.DocFiles);
+
+                    var fedFile = doc.DocFiles.FirstOrDefault(e => e.DocFileName.EndsWith(".fed"));
+
+                    if (fedFile != null)
+                    {
+                        byte[] fedContent;
+
+                        using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                        {
+                            connection.Open();
+
+                            using (MemoryStream m1 = new MemoryStream())
+                            using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", fedFile.DocFileContentId))
+                            {
+                                blobStream.CopyTo(m1);
+                                fedContent = m1.ToArray();
+                            }
+                        }
+
+                        List<NOMv5.nom> noms = FedHelper.GetFedDocumentNomenclatures();
+                        List<NUTv5.item> nuts = FedHelper.GetFedDocumentNuts();
+
+                        FEDv5.document fedDoc = XmlSerializerUtils.XmlDeserializeFromBytes<FEDv5.document>(fedContent);
+
+                        FedExtractor.noms = noms;
+
+                        string contractor = FedExtractor.GetContractor(fedDoc);
+                        string contractorLotNum = FedExtractor.GetContractorBatch(fedDoc);
+
+                        string procType = FedExtractor.GetProcedureTypeShort(fedDoc);
+                        string obj = FedExtractor.GetObject(fedDoc);
+                        string criteria = FedExtractor.GetOffersCriteriaOnly(fedDoc);
+                        string subject = FedExtractor.GetSubject(fedDoc);
+                        string val = FedExtractor.GetPredictedValue(fedDoc);
+
+                        string fedValueChecklist = JsonConvert.SerializeObject(new
+                        {
+                            version = "1",
+                            author = unitUser.Unit.Name,
+                            createDate = DateTime.Now,
+                            paragraph1 = new
+                            {
+                                employer = new
+                                {
+                                    table1 = new
+                                    {
+                                        row1 = contractor,
+                                        row3 = contractorLotNum
+                                    }
+                                },
+                                proc = new
+                                {
+                                    table1 = new
+                                    {
+                                        row1 = new
+                                        {
+                                            tick1 = procType == "Открита" ? true : false,
+                                            tick2 = procType == "Ограничена" ? true : false,
+                                            tick3 = procType == "Ускорена ограничена" ? true : false,
+                                            tick4 = procType == "Договаряне" ? true : false,
+                                            tick5 = procType == "Ускорена процедура на договаряне" || procType == "Ускорена на договаряне" ? true : false,
+                                            tick6 = procType == "Състезателен диалог" ? true : false,
+                                        },
+                                        row2 = new
+                                        {
+                                            tick1 = obj == "Строителство" ? true : false,
+                                            tick2 = obj == "Доставки" ? true : false,
+                                            tick3 = obj == "Услуги" ? true : false
+                                        },
+                                        row4 = subject,
+                                        row5 = val,
+                                        row7 = new
+                                        {
+                                            tick1 = obj.ToLower() == "най-ниска цена" ? true : false,
+                                            tick2 = obj == "икономически най-изгодна оферта с оглед на" || obj == "икономически най-изгодна оферта при" ? true : false
+                                        }
+                                    }
+                                }
+                            }
+                        }).ToString();
+
+                        contentStr = string.Format("{{ versions: [{0}] }}", fedValueChecklist);
+                    }
+                }
 
                 if (copy || correct)
                 {

@@ -196,7 +196,7 @@ namespace Aop.Api.Utils
             }
         }
 
-        //EИК
+        //Възложител - EИК
         public static string GetEIK(FEDv5.document document)
         {
             try

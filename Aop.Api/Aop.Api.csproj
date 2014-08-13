@@ -151,6 +151,7 @@
     <Compile Include="Repositories\Aop\AppRepository.cs" />
     <Compile Include="Repositories\Aop\IAppRepository.cs" />
     <Compile Include="Utils\FedExtractor.cs" />
+    <Compile Include="Utils\FedHelper.cs" />
     <Compile Include="WordTemplates\IDataGenerator.cs" />
     <Compile Include="WordTemplates\DataGenerator.cs" />
   </ItemGroup>

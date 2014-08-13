@@ -471,8 +471,8 @@ namespace Aop.Api.Controllers
                         }
                     }
 
-                    List<NOMv5.nom> noms = GetFedDocumentNomenclatures();
-                    List<NUTv5.item> nuts = GetFedDocumentNuts();
+                    List<NOMv5.nom> noms = FedHelper.GetFedDocumentNomenclatures();
+                    List<NUTv5.item> nuts = FedHelper.GetFedDocumentNuts();
 
                     FEDv5.document fedDoc = XmlSerializerUtils.XmlDeserializeFromBytes<FEDv5.document>(fedContent);
 
@@ -575,8 +575,8 @@ namespace Aop.Api.Controllers
                         }
                     }
 
-                    List<NOMv5.nom> noms = GetFedDocumentNomenclatures();
-                    List<NUTv5.item> nuts = GetFedDocumentNuts();
+                    List<NOMv5.nom> noms = FedHelper.GetFedDocumentNomenclatures();
+                    List<NUTv5.item> nuts = FedHelper.GetFedDocumentNuts();
 
                     FEDv5.document fedDoc = XmlSerializerUtils.XmlDeserializeFromBytes<FEDv5.document>(fedContent);
 
@@ -648,24 +648,6 @@ namespace Aop.Api.Controllers
                 err = "",
                 aopApplicationId = app.AopApplicationId
             });
-        }
-
-        private List<NOMv5.nom> GetFedDocumentNomenclatures()
-        {
-            var xmlPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FedNoms/nom.xml");
-            var nomXml = System.IO.File.ReadAllText(xmlPath);
-            var nomObj = XmlSerializerUtils.XmlDeserializeFromString<NOMv5.nomenclature>(nomXml);
-
-            return nomObj.nom;
-        }
-
-        private List<NUTv5.item> GetFedDocumentNuts()
-        {
-            var xmlPath = System.Web.Hosting.HostingEnvironment.MapPath("~/FedNoms/nuts.xml");
-            var nutXml = System.IO.File.ReadAllText(xmlPath);
-            var nutObj = XmlSerializerUtils.XmlDeserializeFromString<NUTv5.nuts>(nutXml);
-
-            return nutObj.item;
         }
     }
 }
