@@ -310,8 +310,7 @@ namespace Gva.Api.Controllers
             return Ok(parts.Select(pv => new PartVersionDO(pv)));
         }
 
-        [Route(@"{lotId}/{*path:regex(^aircraftDocumentOwners/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
+        [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentApplications/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^documentOccurrences/\d+$)}"),
@@ -348,8 +347,7 @@ namespace Gva.Api.Controllers
             return Ok(parts.Select(pv => new PartVersionDO(pv)));
         }
 
-        [Route(@"{lotId}/{*path:regex(^aircraftDocumentOwners$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM$)}"),
+        [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentApplications$)}"),
          Route(@"{lotId}/{*path:regex(^documentOccurrences$)}"),
@@ -367,8 +365,7 @@ namespace Gva.Api.Controllers
             return base.GetApplicationParts(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^aircraftDocumentOwners$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM$)}"),
+        [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts$)}"),
          Route(@"{lotId}/{*path:regex(^documentOccurrences$)}"),
          Route(@"{lotId}/{*path:regex(^inspections$)}"),
@@ -381,8 +378,7 @@ namespace Gva.Api.Controllers
             return base.PostNewPart(lotId, path, content);
         }
 
-        [Route(@"{lotId}/{*path:regex(^aircraftDocumentOwners/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
+        [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^documentOccurrences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
@@ -396,8 +392,7 @@ namespace Gva.Api.Controllers
             return base.PostPart(lotId, path, content);
         }
 
-        [Route(@"{lotId}/{*path:regex(^aircraftDocumentOwners/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
+        [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^documentOccurrences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
