@@ -207,7 +207,6 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^aircraftData$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftParts/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^maintenances/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
         {
@@ -337,8 +336,7 @@ namespace Gva.Api.Controllers
             return base.PostPart(lotId, path, content);
         }
 
-        [Route(@"{lotId}/{*path:regex(^aircraftParts$)}"),
-         Route(@"{lotId}/{*path:regex(^maintenances$)}")]
+        [Route(@"{lotId}/{*path:regex(^aircraftParts$)}")]
         public override IHttpActionResult GetParts(int lotId, string path)
         {
             return base.GetParts(lotId, path);
@@ -375,7 +373,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftParts$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts$)}"),
-         Route(@"{lotId}/{*path:regex(^maintenances$)}"),
          Route(@"{lotId}/{*path:regex(^documentOccurrences$)}"),
          Route(@"{lotId}/{*path:regex(^inspections$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}"),
@@ -391,7 +388,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftParts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^maintenances/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^documentOccurrences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentApplications/\d+$)}"),
@@ -408,7 +404,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftParts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^maintenances/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^documentOccurrences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),

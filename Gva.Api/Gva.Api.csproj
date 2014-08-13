@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOthersController.cs" />
+    <Compile Include="Controllers\Aircrafts\AircraftMaintenancesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftMarksController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftNoisesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftPermitsToFlyController.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertSmodDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOtherDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftMaintenanceDO.cs" />
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />
