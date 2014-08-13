@@ -16,6 +16,7 @@ SELECT  nv.[NomValueId],
         nv.[Alias],
         nv.[TextContent],
         nv.[IsActive],
+        nv.[Order],
         nv.[OldId]
     FROM NomValues nv
     CROSS APPLY dbo.ufnParseJSON(nv.TextContent) as j
