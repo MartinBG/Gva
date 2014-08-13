@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Common.Api.Models;
-using System.Collections.Generic;
 
 namespace Gva.Api.ModelsDO.Aircrafts
 {
@@ -28,8 +25,5 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public double? Takeoff { get; set; }
 
         public string AdditionalModification { get; set; }
-
-        public List<ApplicationNomDO> Applications { get; set; }
-
     }
 }

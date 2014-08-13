@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
-using System.Collections.Generic;
 
 namespace Gva.Api.ModelsDO.Aircrafts
 {
@@ -32,8 +31,5 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public string Class { get; set; }
 
         public string Bandwidth { get; set; }
-
-        public List<ApplicationNomDO> Applications { get; set; }
-
     }
 }

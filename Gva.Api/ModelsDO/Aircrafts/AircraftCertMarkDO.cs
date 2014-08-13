@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
-using System.Collections.Generic;
 
 namespace Gva.Api.ModelsDO.Aircrafts
 {
@@ -24,8 +23,5 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         [Required(ErrorMessage = "Valid is required.")]
         public NomValue Valid { get; set; }
-
-        public List<ApplicationNomDO> Applications { get; set; }
-
     }
 }
