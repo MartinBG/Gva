@@ -124,12 +124,12 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonTrainingsController>().InstancePerLifetimeScope();
 
             //Aircraft controllers
-            moduleBuilder.RegisterType<RadiosController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<NoisesController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PermitsToFlyController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<SmodsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<MarksController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<DocumentOthersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftRadiosController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftNoisesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftPermitsToFlyController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftSmodsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftMarksController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftDocumentOthersController>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();
