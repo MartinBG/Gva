@@ -398,7 +398,9 @@ namespace Gva.Api.Controllers
             return Ok(caseTypes);
         }
 
-        [Route("caseTypes/{id:int}")]
+        [Route("caseTypes/{id:int}"),
+         Route("personCaseTypes/{id:int}"),
+         Route("organizationCaseTypes/{id:int}")]
         public IHttpActionResult GetCaseType(int id)
         {
             var caseType = this.caseTypeRepository.GetCaseType(id);
