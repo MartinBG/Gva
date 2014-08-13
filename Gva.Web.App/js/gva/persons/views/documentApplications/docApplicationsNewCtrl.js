@@ -39,12 +39,15 @@
     'personDocumentApplication'
   ];
   DocApplicationsNewCtrl.$resolve = {
-    personDocumentApplication: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    personDocumentApplication: [
+      '$stateParams',
+      'PersonDocumentApplications',
+      function ($stateParams, PersonDocumentApplications) {
+        return PersonDocumentApplications.newApplication({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('DocApplicationsNewCtrl', DocApplicationsNewCtrl);

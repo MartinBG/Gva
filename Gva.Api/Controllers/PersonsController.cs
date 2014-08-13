@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Web.Http;
-using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
@@ -13,7 +12,6 @@ using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
-using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers
@@ -30,7 +28,6 @@ namespace Gva.Api.Controllers
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
-        private INomRepository nomRepository;
 
         public PersonsController(
             IUnitOfWork unitOfWork,
@@ -40,8 +37,7 @@ namespace Gva.Api.Controllers
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
-            ILotEventDispatcher lotEventDispatcher,
-            INomRepository nomRepository)
+            ILotEventDispatcher lotEventDispatcher)
             : base(applicationRepository, lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
@@ -52,7 +48,6 @@ namespace Gva.Api.Controllers
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
-            this.nomRepository = nomRepository;
         }
 
         [Route("")]
@@ -151,7 +146,6 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
@@ -161,7 +155,6 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{path:regex(^personDocumentEmployments$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentExams$)}"),
          Route(@"{lotId}/{path:regex(^personDocumentOthers$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}"),
          Route(@"{lotId}/{*path:regex(^personExams$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
@@ -190,7 +183,6 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^personDocumentEmployments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personDocumentOthers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
@@ -244,57 +236,6 @@ namespace Gva.Api.Controllers
         public override IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^personDocumentApplications$)}")]
-        public IHttpActionResult PostNewApplication(int lotId, string path, JObject content)
-        {
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                UserContext userContext = this.Request.GetUserContext();
-                var lot = this.lotRepository.GetLotIndex(lotId);
-
-                PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
-
-                this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
-
-                lot.Commit(userContext, lotEventDispatcher);
-
-                GvaApplication application = new GvaApplication()
-                {
-                    Lot = lot,
-                    GvaAppLotPart = partVersion.Part
-                };
-
-                applicationRepository.AddGvaApplication(application);
-
-                transaction.Commit();
-            }
-
-            this.unitOfWork.Save();
-
-            return Ok();
-        }
-
-        [Route(@"{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
-        public IHttpActionResult DeleteApplication(int lotId, string path)
-        {
-            IHttpActionResult result;
-
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
-
-                applicationRepository.DeleteGvaApplication(partVersion.Part.PartId);
-
-                result = base.DeletePart(lotId, path);
-
-                transaction.Commit();
-            }
-
-            this.unitOfWork.Save();
-
-            return result;
         }
 
         [HttpGet]

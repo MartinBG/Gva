@@ -99,6 +99,7 @@
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\Persons\ChecksController.cs" />
     <Compile Include="Controllers\Persons\AddressesController.cs" />
+    <Compile Include="Controllers\Persons\PersonApplicationsController.cs" />
     <Compile Include="Controllers\Persons\EducationsController.cs" />
     <Compile Include="Controllers\Persons\DocumentIdsController.cs" />
     <Compile Include="Controllers\Persons\StatusesController.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />
     <Compile Include="ModelsDO\PeriodDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressDO.cs" />
+    <Compile Include="ModelsDO\DocumentApplicationDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonCheckDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentIdDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonEducationDO.cs" />
