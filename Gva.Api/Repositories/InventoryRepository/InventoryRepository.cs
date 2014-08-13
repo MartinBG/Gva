@@ -34,7 +34,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                 select new
                 {
                     i.LotId,
-                    f.GvaCaseTypeId,
+                    GvaCaseTypeId = (int?)f.GvaCaseTypeId,
 
                     SetPartAlias = i.SetPartAlias,
                     PartIndex = i.Part.Index,
