@@ -114,6 +114,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonAddressesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonChecksController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonDocumentExamsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonDocumentIdsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonDocumentOthersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonEducationsController>().InstancePerLifetimeScope();

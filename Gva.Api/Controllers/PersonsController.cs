@@ -143,15 +143,13 @@ namespace Gva.Api.Controllers
             return Ok(new PersonInfoDO(personDataPart, inspectorDataPart));
         }
 
-        [Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
+        [Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFilePart(lotId, path, caseTypeId);
         }
 
-        [Route(@"{lotId}/{path:regex(^personDocumentExams$)}"),
-         Route(@"{lotId}/{*path:regex(^personExams$)}")]
+        [Route(@"{lotId}/{*path:regex(^personExams$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFileParts(lotId, path, caseTypeId);
@@ -167,15 +165,13 @@ namespace Gva.Api.Controllers
             });
         }
 
-        [Route(@"{lotId}/{*path:regex(^personDocumentExams$)}"),
-         Route(@"{lotId}/{*path:regex(^personExams$)}")]
+        [Route(@"{lotId}/{*path:regex(^personExams$)}")]
         public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
         }
 
-        [Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
+        [Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
@@ -221,8 +217,7 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        [Route(@"{lotId}/{*path:regex(^personDocumentExams/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
+        [Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);
