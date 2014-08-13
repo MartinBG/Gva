@@ -42,7 +42,7 @@ namespace Gva.Api.Projections.Inventory.Persons
                     "{0}-{1}-{2}-{3}",
                     personMedical.Content.Get<string>("documentNumberPrefix"),
                     personMedical.Content.Get<string>("documentNumber"),
-                    personMedical.Content.Get<string>("lin"),
+                    personData.Content.Get<string>("lin"),
                     personMedical.Content.Get<string>("documentNumberSuffix"));
             invItem.Date = personMedical.Content.Get<DateTime>("documentDateValidFrom");
             invItem.Publisher = personMedical.Content.Get<string>("documentPublisher.name");
