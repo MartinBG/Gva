@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Aircrafts\AircraftDocumentApplicationsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOccurrencesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOthersController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOwnersController.cs" />
