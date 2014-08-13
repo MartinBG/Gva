@@ -97,6 +97,7 @@
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
+    <Compile Include="Controllers\Persons\PersonEmploymentsController.cs" />
     <Compile Include="Controllers\Persons\PersonChecksController.cs" />
     <Compile Include="Controllers\Persons\PersonAddressesController.cs" />
     <Compile Include="Controllers\Persons\PersonApplicationsController.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="ModelsDO\Persons\PersonCheckDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentIdDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonEducationDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonEmploymentDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonFlyingExperienceDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonRatingEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceAmlLimitationsDO.cs" />
