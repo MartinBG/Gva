@@ -313,7 +313,6 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentApplications/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^documentOccurrences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
@@ -350,7 +349,6 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentApplications$)}"),
-         Route(@"{lotId}/{*path:regex(^documentOccurrences$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
@@ -367,7 +365,6 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts$)}"),
-         Route(@"{lotId}/{*path:regex(^documentOccurrences$)}"),
          Route(@"{lotId}/{*path:regex(^inspections$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM$)}"),
@@ -380,7 +377,6 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^documentOccurrences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentApplications/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
@@ -394,7 +390,6 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^documentOccurrences/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinessesFM/\d+$)}"),

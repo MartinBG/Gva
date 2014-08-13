@@ -40,20 +40,13 @@
 
   DocOccurrencesNewCtrl.$resolve = {
     aircraftDocumentOccurrence: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'AircraftDocumentOccurrences',
+      function ($stateParams, AircraftDocumentOccurrences) {
+        return AircraftDocumentOccurrences.newDocumentOccurrence({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

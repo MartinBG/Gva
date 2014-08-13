@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Aircrafts\AircraftDocumentOccurrencesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOthersController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOwnersController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftMaintenancesController.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftCertPermitToFlyDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertSmodDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOccurrenceDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOtherDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOwnerDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftMaintenanceDO.cs" />
