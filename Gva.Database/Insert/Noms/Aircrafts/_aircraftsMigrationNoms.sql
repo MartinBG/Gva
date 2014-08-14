@@ -16,7 +16,7 @@ VALUES
     (N'Типове тежести върху ВС'              , N'aircraftDebtTypes'           ),
     (N'Класове инциденти с ВС'               , N'aircraftOccurrenceClasses'   ),
     (N'Типове удостоверения за ВС'           , N'aircraftCertificateTypes'    ),
-    (N'Типове опериране на ВС'               , N'aircraftOperTypes'           ), --TODO NOT USED ANYWHERE?
+    (N'Типове опериране на ВС'               , N'aircraftOperTypes'           ),
     (N'Типове типов сертификат за ВС'        , N'aircraftTypeCertificateTypes'),
     (N'Причини за отписване на ВС'           , N'aircraftRemovalReasons'      ),
     (N'Типове радиооборудване на ВС'         , N'aircraftRadiotypes'          ),
