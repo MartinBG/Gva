@@ -48,15 +48,15 @@
 
   <div class="row">
     <div class="form-group col-sm-12">
-      <label class="control-label" ng-show="!form.$readonly">
+      <div class="table-buttons" ng-show="!form.$readonly">
         <sc-button btn-click="addRating()" text="persons.licenceEditionDirective.addRating" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
         <sc-button btn-click="addExistingRating()" text="persons.licenceEditionDirective.addExistingRating" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
-      </label>
+      </div>
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th width="1px" ng-show="!form.$readonly"></th>
-            <th width="1px" ng-show="!form.$readonly"></th>
+            <th width="1px" ng-if="!form.$readonly && model.includedRatings.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.includedRatings.length"></th>
             <th l10n-text="persons.licenceEditionDirective.ratingsTable.ratingType"></th>
             <th l10n-text="persons.licenceEditionDirective.ratingsTable.ratingClass"></th>
             <th l10n-text="persons.licenceEditionDirective.ratingsTable.authorization"></th>
@@ -66,12 +66,12 @@
         </thead>
         <tbody ng-model="model.includedRatings" ui-sortable="{ items:'tr:not(.sort-disabled)' }">
           <tr class="sort-disabled" ng-if="!model.includedRatings.length">
-            <td colspan="{{form.$readonly ? 5 : 7}}" class="text-center" l10n-text="persons.licenceEditionDirective.noRatings"></td>
+            <td colspan="5" class="text-center" l10n-text="persons.licenceEditionDirective.noRatings"></td>
           </tr>
           <tr ng-repeat="rating in includedRatings" ng-class="{'sort-disabled': form.$readonly}">
-            <td ng-show="!form.$readonly"><span class="fa fa-bars"></span>
+            <td ng-if="!form.$readonly && model.includedRatings.length"><span class="fa fa-bars"></span>
             </td>
-            <td ng-show="!form.$readonly">
+            <td ng-if="!form.$readonly && model.includedRatings.length">
               <sc-button name="deleteRatingBtn" class="btn btn-xs btn-danger" btn-click="removeRating(rating)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{rating.part.personRatingLevel.name || rating.part.ratingType.name}}</td>
@@ -90,15 +90,15 @@
 
   <div class="row">
     <div class="form-group col-sm-12">
-      <label class="control-label" ng-show="!form.$readonly">
+      <div class="table-buttons" ng-show="!form.$readonly">
         <sc-button btn-click="addTraining()" text="persons.licenceEditionDirective.addTraining" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
         <sc-button btn-click="addExistingTraining()" text="persons.licenceEditionDirective.addExistingTraining" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
-      </label>
+      </div>
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th width="1px" ng-show="!form.$readonly"></th>
-            <th width="1px" ng-show="!form.$readonly"></th>
+            <th width="1px" ng-if="!form.$readonly && model.includedTrainings.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.includedTrainings.length"></th>
             <th l10n-text="persons.licenceEditionDirective.trainingsTable.number"></th>
             <th l10n-text="persons.licenceEditionDirective.trainingsTable.dateValidFrom"></th>
             <th l10n-text="persons.licenceEditionDirective.trainingsTable.dateValidTo"></th>
@@ -110,12 +110,12 @@
         </thead>
         <tbody ng-model="model.includedTrainings" ui-sortable="{ items:'tr:not(.sort-disabled)' }">
           <tr class="sort-disabled" ng-if="!model.includedTrainings.length">
-            <td colspan="{{form.$readonly ? 7 : 9}}" class="text-center" l10n-text="persons.licenceEditionDirective.noTrainings"></td>
+            <td colspan="7" class="text-center" l10n-text="persons.licenceEditionDirective.noTrainings"></td>
           </tr>
           <tr ng-repeat="training in includedTrainings" ng-class="{'sort-disabled': form.$readonly}">
-            <td ng-show="!form.$readonly"><span class="fa fa-bars"></span>
+            <td ng-if="!form.$readonly && model.includedTrainings.length"><span class="fa fa-bars"></span>
             </td>
-            <td ng-show="!form.$readonly">
+            <td ng-if="!form.$readonly && model.includedTrainings.length">
               <sc-button name="deleteTrainingBtn" class="btn btn-xs btn-danger" btn-click="removeTraining(training)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{training.part.documentNumber}}</td>
@@ -136,15 +136,15 @@
 
   <div class="row">
     <div class="form-group col-sm-12">
-      <label class="control-label" ng-show="!form.$readonly">
+      <div class="table-buttons" ng-show="!form.$readonly">
         <sc-button btn-click="addCheck()" text="persons.licenceEditionDirective.addCheck" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
         <sc-button btn-click="addExistingCheck()" text="persons.licenceEditionDirective.addExistingCheck" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
-      </label>
+      </div>
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th width="1px" ng-show="!form.$readonly"></th>
-            <th width="1px" ng-show="!form.$readonly"></th>
+            <th width="1px" ng-if="!form.$readonly && model.includedChecks.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.includedChecks.length"></th>
             <th l10n-text="persons.licenceEditionDirective.checksTable.documentNumber"></th>
             <th l10n-text="persons.licenceEditionDirective.checksTable.personCheckDocumentType"></th>
             <th l10n-text="persons.licenceEditionDirective.checksTable.personCheckDocumentRole"></th>
@@ -163,12 +163,12 @@
         </thead>
         <tbody ng-model="model.includedChecks" ui-sortable="{ items:'tr:not(.sort-disabled)' }">
           <tr class="sort-disabled" ng-if="!model.includedChecks.length">
-            <td colspan="{{form.$readonly ? 7 : 9}}" class="text-center" l10n-text="persons.licenceEditionDirective.noChecks"></td>
+            <td colspan="14" class="text-center" l10n-text="persons.licenceEditionDirective.noChecks"></td>
           </tr>
           <tr ng-repeat="check in includedChecks" ng-class="{'sort-disabled': form.$readonly}">
-            <td ng-show="!form.$readonly"><span class="fa fa-bars"></span>
+            <td ng-if="!form.$readonly && model.includedChecks.length"><span class="fa fa-bars"></span>
             </td>
-            <td ng-show="!form.$readonly">
+            <td ng-if="!form.$readonly && model.includedChecks.length">
               <sc-button name="deleteCheckBtn" class="btn btn-xs btn-danger" btn-click="removeCheck(check)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{check.part.documentNumber}}</td>
@@ -196,15 +196,15 @@
 
   <div class="row">
     <div class="form-group col-sm-12">
-      <label class="control-label" ng-show="!form.$readonly">
+      <div class="table-buttons" ng-show="!form.$readonly">
         <sc-button btn-click="addMedical()" text="persons.licenceEditionDirective.addMed" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
         <sc-button btn-click="addExistingMedical()" text="persons.licenceEditionDirective.addExistingMed" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
-      </label>
+      </div>
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th width="1px" ng-show="!form.$readonly"></th>
-            <th width="1px" ng-show="!form.$readonly"></th>
+            <th width="1px" ng-if="!form.$readonly && model.includedMedicals.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.includedMedicals.length"></th>
             <th l10n-text="persons.licenceEditionDirective.medsTable.number"></th>
             <th l10n-text="persons.licenceEditionDirective.medsTable.dateValidFrom"></th>
             <th l10n-text="persons.licenceEditionDirective.medsTable.dateValidTo"></th>
@@ -215,12 +215,12 @@
         </thead>
         <tbody ng-model="model.includedMedicals" ui-sortable="{items:'tr:not(.sort-disabled)' }">
           <tr class="sort-disabled" ng-if="!model.includedMedicals.length">
-            <td colspan="{{readonly ? 6 : 8}}" class="text-center" l10n-text="persons.licenceEditionDirective.noMeds"></td>
+            <td colspan="6" class="text-center" l10n-text="persons.licenceEditionDirective.noMeds"></td>
           </tr>
           <tr ng-repeat="medical in includedMedicals" ng-class="{'sort-disabled': form.$readonly}">
-            <td ng-show="!form.$readonly"><span class="fa fa-bars"></span>
+            <td ng-if="!form.$readonly && model.includedMedicals.length"><span class="fa fa-bars"></span>
             </td>
-            <td ng-show="!form.$readonly">
+            <td ng-if="!form.$readonly && model.includedMedicals.length">
               <sc-button name="deleteMedicalBtn" class="btn btn-xs btn-danger" btn-click="removeMedical(medical)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{medical.part.documentNumberPrefix}}-{{medical.part.documentNumber}}-{{person.lin}}-{{medical.part.documentNumberSuffix}}</td>
@@ -239,14 +239,14 @@
 
     <div class="row">
       <div class="form-group col-sm-12">
-        <label class="control-label" ng-show="!form.$readonly">
+        <div class="table-buttons" ng-show="!form.$readonly">
           <sc-button btn-click="addExistingLicence()" text="persons.licenceEditionDirective.addExistingLicence" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
-        </label>
+        </div>
         <table class="table table-striped table-bordered">
           <thead>
             <tr>
-              <th width="1px" ng-show="!form.$readonly"></th>
-              <th width="1px" ng-show="!form.$readonly"></th>
+              <th width="1px" ng-if="!form.$readonly && model.includedLicences.length"></th>
+              <th width="1px" ng-if="!form.$readonly && model.includedLicences.length"></th>
               <th l10n-text="persons.licenceEditionDirective.licencesTable.licenceNumber"></th>
               <th l10n-text="persons.licenceEditionDirective.licencesTable.licenceType"></th>
               <th l10n-text="persons.licenceEditionDirective.licencesTable.documentDateValidFrom"></th>
@@ -259,9 +259,9 @@
               <td colspan="{{form.$readonly ? 6 : 8}}" class="text-center" l10n-text="persons.licenceEditionDirective.noLicences"></td>
             </tr>
             <tr ng-repeat="licence in includedLicences" ng-class="{'sort-disabled': form.$readonly}">
-              <td ng-show="!form.$readonly"><span class="fa fa-bars"></span>
+              <td ng-if="!form.$readonly && model.includedLicences.length"><span class="fa fa-bars"></span>
               </td>
-              <td ng-show="!form.$readonly">
+              <td ng-if="!form.$readonly && model.includedLicences.length">
                 <sc-button name="deleteLicenceBtn" class="btn btn-xs btn-danger" btn-click="removeLicence(licence)" icon="glyphicon-remove"></sc-button>
               </td>
               <td>{{licence.part.licenceNumber}}</td>

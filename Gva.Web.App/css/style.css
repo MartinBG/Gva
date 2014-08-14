@@ -461,6 +461,10 @@ ul.checkbox-list li {
     margin-top: 0px;
 }
 
+.table-buttons {
+    margin-bottom: 3px;
+}
+
 /* treetable */
 table.treetable span.indenter {
   display: inline-block;
