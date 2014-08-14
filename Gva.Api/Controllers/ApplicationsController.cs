@@ -18,6 +18,7 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -148,7 +149,7 @@ namespace Gva.Api.Controllers
 
             if (set.Alias == "Person")
             {
-                returnValue.Person = new PersonDO(this.personRepository.GetPerson(application.LotId));
+                returnValue.Person = new PersonViewDO(this.personRepository.GetPerson(application.LotId));
             }
             else if (set.Alias == "Organization")
             {

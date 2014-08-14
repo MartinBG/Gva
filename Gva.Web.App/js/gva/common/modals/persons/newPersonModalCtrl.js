@@ -35,15 +35,15 @@
 
   NewPersonModalCtrl.$resolve = {
     person: [
+      'Persons',
       'scModalParams',
-      function (scModalParams) {
-        return {
-          personData: {
-            uin: scModalParams.uin,
-            firstName: scModalParams.firstName,
-            lastName: scModalParams.lastName
-          }
-        };
+      function (Persons, scModalParams) {
+        return Persons.newPerson({
+          firstName: scModalParams.firstName,
+          lastName: scModalParams.lastName,
+          uin: scModalParams.uin,
+          extendedVersion: false
+        }).$promise;
       }
     ]
   };

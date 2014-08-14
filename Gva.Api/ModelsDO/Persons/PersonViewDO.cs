@@ -4,11 +4,11 @@ using System.Linq;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 
-namespace Gva.Api.ModelsDO
+namespace Gva.Api.ModelsDO.Persons
 {
-    public class PersonDO
+    public class PersonViewDO
     {
-        public PersonDO(GvaViewPerson personData)
+        public PersonViewDO(GvaViewPerson personData)
         {
             this.Id = personData.LotId;
             this.Lin = personData.Lin;

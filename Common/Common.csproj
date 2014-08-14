@@ -174,6 +174,7 @@
     <Compile Include="Utils\NLogExceptionFilter.cs" />
     <Compile Include="Utils\NLogTraceFilter.cs" />
     <Compile Include="Utils\RequestIdLayoutRenderer.cs" />
+    <Compile Include="ValidationAttributes\MinimumLengthAttribute.cs" />
     <Compile Include="WordTemplates\WordCustomXmlToContentControls.cs" />
     <Compile Include="WordTemplates\WordTemplateProcessor.cs" />
   </ItemGroup>

@@ -105,7 +105,7 @@
     <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
-    <Compile Include="Controllers\PersonsController.cs" />
+    <Compile Include="Controllers\Persons\PersonsController.cs" />
     <Compile Include="Controllers\Persons\PersonExamsController.cs" />
     <Compile Include="Controllers\Persons\PersonDocumentExamsController.cs" />
     <Compile Include="Controllers\Persons\PersonDocumentOthersController.cs" />
@@ -143,9 +143,12 @@
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />
     <Compile Include="ModelsDO\Common\PeriodDO.cs" />
+    <Compile Include="ModelsDO\Persons\InspectorDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressDO.cs" />
     <Compile Include="ModelsDO\Common\DocumentApplicationDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonCheckDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonDataDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentExamDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentIdDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentOtherDO.cs" />
@@ -226,9 +229,9 @@
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
-    <Compile Include="ModelsDO\PersonInfoDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonInfoDO.cs" />
     <Compile Include="ModelsDO\RegistrationsDO.cs" />
-    <Compile Include="ModelsDO\PersonDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonViewDO.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegMark.cs" />
     <Compile Include="Models\ASExamQuestion.cs" />
     <Compile Include="Models\ASExamVariantQuestion.cs" />

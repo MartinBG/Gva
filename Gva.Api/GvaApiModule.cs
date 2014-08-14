@@ -111,6 +111,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationStageRepository>().As<IApplicationStageRepository>().InstancePerLifetimeScope();
 
             //Person controllers
+            moduleBuilder.RegisterType<PersonsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonAddressesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonChecksController>().InstancePerLifetimeScope();
@@ -147,7 +148,6 @@ namespace Gva.Api
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaLotsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AirportsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<EquipmentsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftsController>().InstancePerLifetimeScope();

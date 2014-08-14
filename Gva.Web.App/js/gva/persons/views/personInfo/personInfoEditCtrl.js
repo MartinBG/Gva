@@ -39,7 +39,7 @@
     };
 
     $scope.showInspData = function () {
-      return _.some($scope.personInfo.personData.part.caseTypes, function (caseType) {
+      return _.some($scope.personInfo.personData.caseTypes, function (caseType) {
         return caseType.alias === 'inspector';
       });
     };

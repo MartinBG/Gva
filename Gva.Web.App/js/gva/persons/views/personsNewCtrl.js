@@ -25,13 +25,12 @@
   PersonsNewCtrl.$inject = ['$scope', '$state', 'Persons', 'person'];
 
   PersonsNewCtrl.$resolve = {
-    person: function () {
-      return {
-        personData: {},
-        personDocumentId: {},
-        personAddress: {}
-      };
-    }
+    person: [
+      'Persons',
+      function (Persons) {
+        return Persons.newPerson().$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('PersonsNewCtrl', PersonsNewCtrl);

@@ -3,6 +3,7 @@ using Gva.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.ModelsDO
 {
@@ -36,7 +37,7 @@ namespace Gva.Api.ModelsDO
 
         public string LotSetAlias { get; set; }
         public int LotSetId { get; set; }
-        public PersonDO Person { get; set; }
+        public PersonViewDO Person { get; set; }
         public OrganizationDO Organization { get; set; }
         public AircraftDO Aircraft { get; set; }
         public AirportDO Airport { get; set; }
