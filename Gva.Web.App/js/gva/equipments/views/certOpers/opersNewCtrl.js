@@ -39,13 +39,15 @@
   ];
 
   EquipmentOpersNewCtrl.$resolve = {
-    equipmentCertOper: function () {
-      return {
-        part: {
-          includedDocuments: []
-        }
-      };
-    }
+    equipmentCertOper: [
+      '$stateParams',
+      'EquipmentCertOperationals',
+      function ($stateParams, EquipmentCertOperationals) {
+        return EquipmentCertOperationals.newCertOperational({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('EquipmentOpersNewCtrl', EquipmentOpersNewCtrl);

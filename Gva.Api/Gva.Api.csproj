@@ -96,6 +96,7 @@
     <Compile Include="Controllers\Aircrafts\AircraftSmodsController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
+    <Compile Include="Controllers\Equipments\EquipmentCertOperationalsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentDocumentOthersController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentApplicationsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentOwnersController.cs" />
@@ -147,6 +148,9 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftTypeCertDO.cs" />
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
+    <Compile Include="ModelsDO\Equipments\EquipmentCertOperationalDO.cs" />
+    <Compile Include="ModelsDO\Equipments\EquipmentCertOperationalExtDO.cs" />
+    <Compile Include="ModelsDO\Equipments\EquipmentIncludedDocDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentOwnerDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentDocumentOtherDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />
