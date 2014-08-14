@@ -124,12 +124,6 @@ namespace Gva.Api.Controllers
             return base.GetPart(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers/\d+$)}")]
-        public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
-        {
-            return base.GetFilePart(lotId, path, caseTypeId);
-        }
-
         [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
         public override IHttpActionResult GetApplicationPart(int lotId, string path)
         {
@@ -148,36 +142,27 @@ namespace Gva.Api.Controllers
             return base.GetParts(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers$)}")]
-        public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
-        {
-            return base.GetFileParts(lotId, path, caseTypeId);
-        }
-
         [Route(@"{lotId}/{*path:regex(^inspections$)}")]
         public override IHttpActionResult GetApplicationParts(int lotId, string path)
         {
             return base.GetApplicationParts(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers$)}"),
-         Route(@"{lotId}/{*path:regex(^inspections$)}"),
+        [Route(@"{lotId}/{*path:regex(^inspections$)}"),
          Route(@"{lotId}/{*path:regex(^equipmentCertOperationals$)}")]
         public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
         }
 
-        [Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
+        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^equipmentCertOperationals/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
         }
 
-        [Route(@"{lotId}/{*path:regex(^equipmentDocumentOthers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
+        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^equipmentCertOperationals/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {

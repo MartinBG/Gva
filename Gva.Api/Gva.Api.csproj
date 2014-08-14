@@ -95,6 +95,7 @@
     <Compile Include="Controllers\Aircrafts\AircraftSmodsController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
+    <Compile Include="Controllers\Equipments\EquipmentDocumentOthersController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentApplicationsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentOwnersController.cs" />
     <Compile Include="Controllers\GvaSuggestionController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentOwnerDO.cs" />
+    <Compile Include="ModelsDO\Equipments\EquipmentDocumentOtherDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />
     <Compile Include="ModelsDO\Common\PeriodDO.cs" />
     <Compile Include="ModelsDO\Persons\InspectorDataDO.cs" />
