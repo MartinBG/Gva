@@ -142,6 +142,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftCertAirworthinessesFMController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftCertAirworthinessesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDocumentDebtsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftDocumentDebtsFMController>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();

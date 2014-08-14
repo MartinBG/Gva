@@ -38,27 +38,16 @@
     'AircraftDocumentDebtsFM',
     'aircraftDocumentDebt'
   ];
+
   DocDebtsFMNewCtrl.$resolve = {
     aircraftDocumentDebt: [
       '$stateParams',
-      'application',
-      function ($stateParams, application) {
-        if (application) {
-          return {
-            part: {
-              lotId : $stateParams.id
-            },
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {
-              lotId : $stateParams.id
-            },
-            files: []
-          };
-        }
+      'AircraftDocumentDebtsFM',
+      function ($stateParams, AircraftDocumentDebtsFM) {
+        return AircraftDocumentDebtsFM.newDocumentDebtFM({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };
