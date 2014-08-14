@@ -130,6 +130,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonTrainingsController>().InstancePerLifetimeScope();
 
             //Equipment controllers
+            moduleBuilder.RegisterType<EquipmentApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<EquipmentOwnersController>().InstancePerLifetimeScope();
 
             //Aircraft controllers
