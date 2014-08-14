@@ -27,7 +27,8 @@
   EquipmentsNewCtrl.$resolve = {
     equipment: function () {
       return {
-        equipmentData: {}
+        equipmentData: {
+        }
       };
     }
   };

@@ -40,20 +40,13 @@
 
   EquipmentOwnersNewCtrl.$resolve = {
     equipmentDocumentOwner: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'EquipmentDocumentOwners',
+      function ($stateParams, EquipmentDocumentOwners) {
+        return EquipmentDocumentOwners.newOwner({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        });
       }
     ]
   };

@@ -29,6 +29,7 @@ using Gva.Api.WordTemplates;
 using Regs.Api.LotEvents;
 using Gva.Api.Controllers.Persons;
 using Gva.Api.Controllers.Aircrafts;
+using Gva.Api.Controllers.Equipments;
 
 namespace Gva.Api
 {
@@ -127,6 +128,9 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonRatingsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonStatusesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonTrainingsController>().InstancePerLifetimeScope();
+
+            //Equipment controllers
+            moduleBuilder.RegisterType<EquipmentOwnersController>().InstancePerLifetimeScope();
 
             //Aircraft controllers
             moduleBuilder.RegisterType<AircraftRadiosController>().InstancePerLifetimeScope();
