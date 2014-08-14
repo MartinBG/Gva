@@ -260,7 +260,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
@@ -293,7 +292,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
@@ -307,7 +305,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts$)}"),
          Route(@"{lotId}/{*path:regex(^inspections$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM$)}")]
@@ -317,7 +314,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}")]
@@ -327,14 +323,12 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);
         }
-
 
         [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}")]
         public IHttpActionResult DeleteRegPart(int lotId, string path)

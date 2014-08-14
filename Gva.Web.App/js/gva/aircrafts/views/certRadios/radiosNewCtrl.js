@@ -48,7 +48,8 @@
           id: $stateParams.id
         }).$promise;
       }
-    ]};
+    ]
+  };
 
   angular.module('gva').controller('CertRadiosNewCtrl', CertRadiosNewCtrl);
 }(angular));
