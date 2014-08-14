@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesFMController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentApplicationsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOccurrencesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOthersController.cs" />
@@ -118,6 +119,9 @@
     <Compile Include="Controllers\Persons\PersonLicencesController.cs" />
     <Compile Include="Controllers\Persons\PersonMedicalsController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftAirworthinessForm15Main.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftAirworthinessReviewOtherDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertMarkDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertPermitToFlyDO.cs" />
@@ -126,6 +130,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOccurrenceDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOtherDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOwnerDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftInspectorDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftMaintenanceDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftPartDO.cs" />
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
