@@ -38,13 +38,17 @@
     'AircraftCertAirworthinesses',
     'aircraftCertAirworthiness'
   ];
+
   CertAirworthinessesNewCtrl.$resolve = {
-    aircraftCertAirworthiness: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    aircraftCertAirworthiness: [
+      '$stateParams',
+      'AircraftCertAirworthinesses',
+      function ($stateParams, AircraftCertAirworthinesses) {
+        return AircraftCertAirworthinesses.newCertAirworthiness({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('CertAirworthinessesNewCtrl', CertAirworthinessesNewCtrl);

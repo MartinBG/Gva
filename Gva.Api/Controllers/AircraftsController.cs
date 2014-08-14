@@ -261,8 +261,7 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFilePart(lotId, path, caseTypeId);
@@ -295,8 +294,7 @@ namespace Gva.Api.Controllers
 
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses$)}")]
+         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFileParts(lotId, path, caseTypeId);
@@ -312,8 +310,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts$)}"),
          Route(@"{lotId}/{*path:regex(^inspections$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses$)}")]
+         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM$)}")]
         public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
@@ -323,8 +320,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
@@ -333,8 +329,7 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^aircraftDocumentDebtsFM/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^aircraftDocumentDebts/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertAirworthinesses/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrations/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);
