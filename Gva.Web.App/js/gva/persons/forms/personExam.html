@@ -1,20 +1,20 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div style="width: 500px; float:left">
     <div class="row">
-      <sc-field type="date" ng-model="model.examDate" ng-required="true" l10n-text="persons.examDirective.examDate" class="col-md-4 col-sm-4"></sc-field>
+      <sc-field type="date" ng-model="model.part.examDate" ng-required="true" l10n-text="persons.examDirective.examDate" class="col-md-4 col-sm-4"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.commonQuestion" alias="'commonQuestions'" ng-required="true" l10n-text="persons.examDirective.commonQuestions" class="col-md-5 col-sm-8"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.commonQuestion" alias="'commonQuestions'" ng-required="true" l10n-text="persons.examDirective.commonQuestions" class="col-md-5 col-sm-8"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.specializedQuestion" alias="'specializedQuestions'" ng-required="true" l10n-text="persons.examDirective.specializedQuestions" class="col-md-5 col-sm-8"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.specializedQuestion" alias="'specializedQuestions'" ng-required="true" l10n-text="persons.examDirective.specializedQuestions" class="col-md-5 col-sm-8"></sc-field>
     </div>
     <br />
     <h5 class="form-header" l10n-text="persons.examDirective.commonQuestions" style="margin-top:10px;"></h5>
     <div class="row">
       <div class="col-md-5 col-sm-4">
         <ol>
-          <li ng-repeat="question in model.commonQuestions | limitTo: 5" style="padding-bottom: 5px;">
+          <li ng-repeat="question in model.part.commonQuestions | limitTo: 5" style="padding-bottom: 5px;">
             <ul class="list-inline answer-list">
               <li>
                 <input type="checkbox" ng-model="question[0]" ng-disabled="form.$readonly">
@@ -34,7 +34,7 @@
       </div>
       <div class="col-md-5 col-sm-4">
         <ol start="6">
-          <li ng-repeat="question in model.commonQuestions | limitTo: 10 | limitTo: -5" style="padding-bottom: 5px;">
+          <li ng-repeat="question in model.part.commonQuestions | limitTo: 10 | limitTo: -5" style="padding-bottom: 5px;">
             <ul class="list-inline answer-list">
               <li>
                 <input type="checkbox" ng-model="question[0]" ng-disabled="form.$readonly">
@@ -58,7 +58,7 @@
     <div class="row">
       <div class="col-md-5 col-sm-4">
         <ol>
-          <li ng-repeat="question in model.specializedQuestions | limitTo: 10" style="padding-bottom: 5px;">
+          <li ng-repeat="question in model.part.specializedQuestions | limitTo: 10" style="padding-bottom: 5px;">
             <ul class="list-inline answer-list">
               <li>
                 <input type="checkbox" ng-model="question[0]" ng-disabled="form.$readonly">
@@ -78,7 +78,7 @@
       </div>
       <div class="col-md-5 col-sm-4">
         <ol start="11">
-          <li ng-repeat="question in model.specializedQuestions | limitTo: 20 | limitTo: -10" style="padding-bottom: 5px;">
+          <li ng-repeat="question in model.part.specializedQuestions | limitTo: 20 | limitTo: -10" style="padding-bottom: 5px;">
             <ul class="list-inline answer-list">
               <li>
                 <input type="checkbox" ng-model="question[0]" ng-disabled="form.$readonly">
@@ -98,53 +98,40 @@
       </div>
     </div>
   </div>
-  <div style="float: right;">
-    <img width="580" height="800" ng-src="{{model.file}}">
+  <div id="image-placeholder" style="float: right;">
+    <i ng-show="loadingImage"></i>
+    <img width="580" height="800" ng-src="{{file}}" ng-hide="loadingImage || !file">
+    <div class="form-group has-error" ng-show="imageError">
+      <label class="control-label"></label>
+      <span class="help-block">
+        <span class="glyphicon glyphicon-remove"></span>
+        <span>{{imageError}}</span>
+      </span>
+    </div>
   </div>
   <div class="clear"></div>
 
   <h5 class="form-header" l10n-text="persons.examDirective.inspectors" style="margin-top:20px;"></h5>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.inspectors" alias="'inspectors'" multiple class="col-sm-8"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.inspectors" alias="'inspectors'" multiple class="col-sm-8"></sc-field>
   </div>
 
   <h5 class="form-header" l10n-text="persons.examDirective.grading" style="margin-top:20px;"></h5>
   <div class="row">
-    <sc-field type="int" ng-model="model.score" l10n-text="persons.examDirective.score" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="int" ng-model="model.part.score" l10n-text="persons.examDirective.score" class="col-md-2 col-sm-4"></sc-field>
 
     <sc-field-group class="col-md-1 col-sm-1" text="persons.examDirective.successThreshold" validations="{required: 'default'}" field-name="successThreshold">
-      <sc-int ng-model="model.successThreshold" name="successThreshold" class="col-md-2 col-sm-4" min="1" max="100" required ng-disabled="form.$readonly"></sc-int>
+      <sc-int ng-model="model.part.successThreshold" name="successThreshold" class="col-md-2 col-sm-4" min="1" max="100" required ng-disabled="form.$readonly"></sc-int>
       <span>%</span>
     </sc-field-group>
 
-    <sc-field type="nomenclature" ng-model="model.passed" alias="'boolean'" l10n-text="persons.examDirective.passed" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.passed" alias="'boolean'" l10n-text="persons.examDirective.passed" class="col-md-2 col-sm-4"></sc-field>
 
-    <div class="form-group">
-      <label class="control-label"></label>
-      <div class="input-group input-group-sm">
-        <sc-button btn-click="$raise('scOnExtractAnswers')" text="persons.examDirective.extract" class="btn btn-primary btn-sm" ng-disabled="form.$readonly"></sc-button>
-      </div>
-    </div>
     <div class="form-group">
       <label class="control-label"></label>
       <div class="input-group input-group-sm">
         <sc-button btn-click="gradeExam()" text="persons.examDirective.grade" class="btn btn-primary btn-sm" ng-disabled="form.$readonly"></sc-button>
       </div>
-    </div>
-
-    <div class="form-group has-success" ng-if="msg.success">
-      <label class="control-label"></label>
-      <span class="help-block">
-        <span class="glyphicon glyphicon-ok"></span>
-        <span>{{msg.success}}</span>
-      </span>
-    </div>
-    <div class="form-group has-error" ng-if="msg.error">
-      <label class="control-label"></label>
-      <span class="help-block">
-        <span class="glyphicon glyphicon-remove"></span>
-        <span>{{msg.error}}</span>
-      </span>
     </div>
   </div>
 </ng-form>

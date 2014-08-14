@@ -40,7 +40,6 @@
         .then(function (data) {
           return $state.go('root.persons.securityExam.part', { id: page }).then(function () {
             $scope.setPaging(page);
-            $scope.personExams[page - 1].part.file = 'data:image/jpg;base64,' + data.file;
             $scope.personExams[page - 1].files[0].file = data.gvaFile;
             $scope.personExams[page - 1].files[0].isAdded = true;
             $scope.btnClicked = false;
@@ -118,53 +117,18 @@
   ];
 
   SecurityExamBatchCtrl.$resolve = {
-    personExam: function () {
-      return {
-        formReadonly: false,
-        lot: {},
-        partIndex: null,
-        part: {
-          successThreshold: 60,
-          commonQuestions: [
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false]
-          ],
-          specializedQuestions: [
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false],
-            [false, false, false, false]
-          ]
-        },
-        files: [
-          { caseType: null }
-        ]
-      };
-    },
+    personExam: [
+      '$stateParams',
+      'PersonExams',
+      function ($stateParams, PersonExams) {
+        return PersonExams.newExam().$promise.then(function (exam) {
+          exam.formReadonly = false;
+          exam.lot = {};
+
+          return exam;
+        });
+      }
+    ],
     pageModel: [
       'l10n',
       function (l10n) {

@@ -5,8 +5,6 @@
   function SecurityExamBatchPartCtrl(
     $scope,
     $state,
-    l10n,
-    SecurityExam,
     PersonExams,
     pageModel
   ) {
@@ -14,10 +12,10 @@
       return $state.go('root.persons.securityExam');
     }
 
-    $scope.messages = {};
     $scope.exams = null;
     $scope.pageModel = pageModel;
     $scope.personExam = $scope.personExams[$scope.pageModel.currentPage - 1];
+
     if (!$scope.personExam.formReadonly) {
       $scope.personExam.part.examDate = $scope.commonData.examDate;
       $scope.personExam.part.commonQuestion = $scope.commonData.commonQuestion;
@@ -66,48 +64,6 @@
       }
     });
 
-    $scope.extractAnswers = function () {
-      var ext, exts = ['pdf', 'jpg', 'bmp', 'jpeg', 'png', 'tiff'];
-
-      if ($scope.personExam.files.length > 0 && !!$scope.personExam.files[0].file) {
-        ext = $scope.personExam.files[0].file.name.split('.').pop();
-        if (exts.indexOf(ext) === -1) {
-          $scope.messages.error = l10n.get('errorTexts.noPDForIMGFile');
-          $scope.messages.success = undefined;
-        }
-        else {
-          return SecurityExam.getAnswers({
-            fileKey: $scope.personExam.files[0].file.key,
-            name: $scope.personExam.files[0].file.name
-          }, {}).$promise
-          .then(function (data) {
-            if (data.err) {
-              $scope.messages.error = data.err;
-              $scope.messages.success = undefined;
-            }
-            else {
-              $scope.personExam.part.commonQuestions = data.answ.commonQuestions1;
-              data.answ.commonQuestions2.forEach(function (qs) {
-                $scope.personExam.part.commonQuestions.push(qs);
-              });
-
-              $scope.personExam.part.specializedQuestions = data.answ.specializedQuestions1;
-              data.answ.specializedQuestions2.forEach(function (qs) {
-                $scope.personExam.part.specializedQuestions.push(qs);
-              });
-
-              $scope.messages.success = l10n.get('successTexts.successExtract');
-              $scope.messages.error = undefined;
-            }
-          });
-        }
-      }
-      else {
-        $scope.messages.error = l10n.get('errorTexts.noFile');
-        $scope.messages.success = undefined;
-      }
-    };
-
     $scope.save = function () {
       return $scope.newExamBatchForm.$validate().then(function () {
         if ($scope.newExamBatchForm.$valid) {
@@ -145,8 +101,6 @@
   SecurityExamBatchPartCtrl.$inject = [
     '$scope',
     '$state',
-    'l10n',
-    'SecurityExam',
     'PersonExams',
     'pageModel'
   ];

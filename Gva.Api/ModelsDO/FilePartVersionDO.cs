@@ -40,7 +40,7 @@ namespace Gva.Api.ModelsDO
             this.Part = new T();
         }
 
-        public int PartIndex { get; set; }
+        public int? PartIndex { get; set; }
 
         public int PartId { get; set; }
 

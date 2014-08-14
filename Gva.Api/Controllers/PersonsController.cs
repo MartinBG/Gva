@@ -18,7 +18,7 @@ namespace Gva.Api.Controllers
 {
     [RoutePrefix("api/persons")]
     [Authorize]
-    public class PersonsController : GvaLotsController
+    public class PersonsController : ApiController
     {
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
@@ -38,7 +38,6 @@ namespace Gva.Api.Controllers
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base(applicationRepository, lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -143,19 +142,6 @@ namespace Gva.Api.Controllers
             return Ok(new PersonInfoDO(personDataPart, inspectorDataPart));
         }
 
-        [Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
-        public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
-        {
-            return base.GetFilePart(lotId, path, caseTypeId);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^personExams$)}")]
-        public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
-        {
-            return base.GetFileParts(lotId, path, caseTypeId);
-        }
-
-
         [Route("nextLin")]
         public IHttpActionResult GetNextLin(int linTypeId)
         {
@@ -163,18 +149,6 @@ namespace Gva.Api.Controllers
             {
                 NextLin = this.personRepository.GetNextLin(linTypeId)
             });
-        }
-
-        [Route(@"{lotId}/{*path:regex(^personExams$)}")]
-        public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
-        {
-            return base.PostNewPart(lotId, path, content);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
-        public override IHttpActionResult PostPart(int lotId, string path, JObject content)
-        {
-            return base.PostPart(lotId, path, content);
         }
 
         [Route(@"{lotId}/personInfo")]
@@ -215,12 +189,6 @@ namespace Gva.Api.Controllers
             }
 
             return Ok();
-        }
-
-        [Route(@"{lotId}/{*path:regex(^personExams/\d+$)}")]
-        public override IHttpActionResult DeletePart(int lotId, string path)
-        {
-            return base.DeletePart(lotId, path);
         }
 
         [HttpGet]

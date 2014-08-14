@@ -19,6 +19,7 @@ using Common.Data;
 using Gva.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Docs.Api.DataObjects;
+using System.Drawing.Imaging;
 
 namespace Gva.Api.Controllers
 {
@@ -154,7 +155,7 @@ namespace Gva.Api.Controllers
             string[] extentions = { ".pdf", ".jpg", ".bmp", ".jpeg", ".png", ".tiff" };
             if (!extentions.Contains(Path.GetExtension(name)))
             {
-                return Ok(new { err = "No PDF or IMAGE file" });
+                return Ok(new { err = "noPDForIMGFile" });
             }
 
             using (MemoryStream m1 = new MemoryStream())
@@ -174,7 +175,7 @@ namespace Gva.Api.Controllers
                 {
                     using (GhostscriptRasterizer rasterizer = new GhostscriptRasterizer())
                     {
-                        rasterizer.Open(m1, lastInstalledVersion, false);
+                        rasterizer.Open(m1, lastInstalledVersion, true);
 
                         //Copied, because rasterizer disposes itself
                         bitmapImg = new Bitmap(rasterizer.GetPage(300, 300, 1));
@@ -219,8 +220,65 @@ namespace Gva.Api.Controllers
             }
             else
             {
-                return Ok(new { err = "Failed recognition!" });
+                return Ok(new { err = "failedRecognition" });
             }
+        }
+
+        [Route("getImage")]
+        [HttpGet]
+        public IHttpActionResult GetImage(string fileKey, string name)
+        {
+            GhostscriptVersionInfo lastInstalledVersion = GhostscriptVersionInfo.GetLastInstalledVersion(GhostscriptLicense.GPL | GhostscriptLicense.AFPL, GhostscriptLicense.GPL);
+            byte[] image;
+
+            string[] extentions = { ".pdf", ".jpg", ".bmp", ".jpeg", ".png", ".tiff" };
+            if (!extentions.Contains(Path.GetExtension(name)))
+            {
+                return Ok(new { err = "noPDForIMGFile" });
+            }
+
+            using (MemoryStream m1 = new MemoryStream())
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                {
+                    connection.Open();
+
+                    using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", fileKey))
+                    {
+                        blobStream.CopyTo(m1);
+                    }
+                }
+
+                Bitmap bitmapImg;
+                if (Path.GetExtension(name) == ".pdf")
+                {
+                    using (GhostscriptRasterizer rasterizer = new GhostscriptRasterizer())
+                    {
+                        rasterizer.Open(m1, lastInstalledVersion, false);
+
+                        //Copied, because rasterizer disposes itself
+                        bitmapImg = new Bitmap(rasterizer.GetPage(300, 300, 1));
+                    }
+                }
+                else
+                {
+                    bitmapImg = new Bitmap(m1);
+                }
+
+                using (bitmapImg)
+                {
+                    using (Bitmap bitmapImgResized = OMRReader.ResizeImage(bitmapImg, 580, 800))
+                    {
+                        using (MemoryStream m2 = new MemoryStream())
+                        {
+                            bitmapImgResized.Save(m2, ImageFormat.Jpeg);
+                            image = m2.ToArray();
+                        }
+                    }
+                }
+            }
+
+            return Ok(new { image = image });
         }
 
         [Route("calculateGrade")]
