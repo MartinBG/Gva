@@ -42,6 +42,7 @@ namespace Gva.Api.Controllers
                 .GetLotIndex(lotId)
                 .Index.GetPart(path)
                 .Content.Get<int>("licenceType.nomValueId");
+
             string templateName = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent.Get<string>("templateName");
 
             var dataGenerator = this.dataGenerators.First(dg => dg.TemplateNames.Contains(templateName));
@@ -50,24 +51,12 @@ namespace Gva.Api.Controllers
             var wordTemplate = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
                 .SingleOrDefault(t => t.Name == templateName);
 
+            var memoryStream = new MemoryStream(wordTemplate.Template); // no need to dispose the memory stream as StreamContent handles that
+            new WordTemplateTransformer(memoryStream).Transform(json);
+            memoryStream.Position = 0;
+
             HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new PushStreamContent(
-                (outputStream, httpContent, transportContext) =>
-                {
-                    using (outputStream)
-                    {
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            memoryStream.Write(wordTemplate.Template, 0, wordTemplate.Template.Length);
-
-                            WordTemplateTransformer tt = new WordTemplateTransformer(memoryStream);
-                            tt.Transform(json);
-
-                            memoryStream.Position = 0;
-                            memoryStream.CopyTo(outputStream);
-                        }
-                    }
-                });
+            result.Content = new StreamContent(memoryStream);
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
             result.Content.Headers.ContentDisposition =
                 new ContentDispositionHeaderValue("attachment")
