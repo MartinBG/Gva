@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesFMController.cs" />
+    <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentApplicationsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentDebtsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentDebtsFMController.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertPermitToFlyDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertRegistrationDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertSmodDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMDO.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectorDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftMaintenanceDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftPartDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftTypeCertDO.cs" />
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentOwnerDO.cs" />
