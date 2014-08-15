@@ -1,10 +1,10 @@
 ﻿using Gva.Api.Models.Views.Airport;
 
-namespace Gva.Api.ModelsDO
+namespace Gva.Api.ModelsDO.Airports
 {
-    public class AirportDO
+    public class AirportViewDO
     {
-        public AirportDO(GvaViewAirport airportData)
+        public AirportViewDO(GvaViewAirport airportData)
         {
             this.Id = airportData.LotId;
             this.Name = airportData.Name;

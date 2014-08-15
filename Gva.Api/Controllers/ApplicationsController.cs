@@ -18,6 +18,7 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Airports;
 using Gva.Api.ModelsDO.Equipments;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.AircraftRepository;
@@ -162,7 +163,7 @@ namespace Gva.Api.Controllers
             }
             else if (set.Alias == "Airport")
             {
-                returnValue.Airport = new AirportDO(this.airportRepository.GetAirport(application.LotId));
+                returnValue.Airport = new AirportViewDO(this.airportRepository.GetAirport(application.LotId));
             }
             else if (set.Alias == "Equipment")
             {

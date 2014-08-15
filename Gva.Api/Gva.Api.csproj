@@ -100,7 +100,7 @@
     <Compile Include="Controllers\Airports\AirportInspectionsController.cs" />
     <Compile Include="Controllers\Airports\AirportOwnersController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
-    <Compile Include="Controllers\AirportsController.cs" />
+    <Compile Include="Controllers\Airports\AirportsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentInspectionsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentCertOperationalsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentDocumentOthersController.cs" />
@@ -155,12 +155,16 @@
     <Compile Include="ModelsDO\Airports\AirportCertOperationalDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportCertOperationalExtDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportDocumentOtherDO.cs" />
+    <Compile Include="ModelsDO\Airports\AirportFrequencyDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportIncludedDocDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportInspectionDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportOwnerDO.cs" />
+    <Compile Include="ModelsDO\Airports\AirportDataDO.cs" />
+    <Compile Include="ModelsDO\Airports\AirportRadioNavAid.cs" />
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\Common\AuditDetailDO.cs" />
+    <Compile Include="ModelsDO\Common\CoordinatesDO.cs" />
     <Compile Include="ModelsDO\Common\DisparityDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentCertOperationalDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentCertOperationalExtDO.cs" />
@@ -246,7 +250,7 @@
     <Compile Include="ModelsDO\ApplicationNewDO.cs" />
     <Compile Include="ModelsDO\ApplicationLinkDO.cs" />
     <Compile Include="ModelsDO\ApprovalPartVersionDO.cs" />
-    <Compile Include="ModelsDO\AirportDO.cs" />
+    <Compile Include="ModelsDO\Airports\AirportViewDO.cs" />
     <Compile Include="ModelsDO\ApplicationLotObjectDO.cs" />
     <Compile Include="ModelsDO\PartSelectDO.cs" />
     <Compile Include="ModelsDO\ASExamDO.cs" />
