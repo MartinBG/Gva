@@ -30,7 +30,7 @@ namespace Gva.Api.Controllers.Organizations
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewInspection(int lotId, int? appId = null)
+        public IHttpActionResult GetNewStaffManagement(int lotId, int? appId = null)
         {
             var applications = new List<ApplicationNomDO>();
             if (appId.HasValue)
@@ -39,9 +39,9 @@ namespace Gva.Api.Controllers.Organizations
                 applications.Add(this.applicationRepository.GetInitApplication(appId));
             }
 
-            OrganizationStaffManagementDO newInspection = new OrganizationStaffManagementDO();
+            OrganizationStaffManagementDO newStaffManagement = new OrganizationStaffManagementDO();
 
-            return Ok(new ApplicationPartVersionDO<OrganizationStaffManagementDO>(newInspection, applications));
+            return Ok(new ApplicationPartVersionDO<OrganizationStaffManagementDO>(newStaffManagement, applications));
         }
     }
 }
