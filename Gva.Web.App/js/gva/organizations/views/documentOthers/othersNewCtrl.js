@@ -41,20 +41,13 @@
 
   OrganizationDocOthersNewCtrl.$resolve = {
     organizationDocumentOther: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'OrganizationDocumentOthers',
+      function ($stateParams, OrganizationDocumentOthers) {
+        return OrganizationDocumentOthers.newDocument({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

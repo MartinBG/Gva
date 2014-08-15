@@ -139,12 +139,6 @@ namespace Gva.Api.Controllers
             return base.GetPart(lotId, path);
         }
 
-         [Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}")]
-        public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
-        {
-            return base.GetFilePart(lotId, path, caseTypeId);
-        }
-
         [Route(@"{lotId}/{*path:regex(^organizationInspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}"),
@@ -169,12 +163,6 @@ namespace Gva.Api.Controllers
         public override IHttpActionResult GetParts(int lotId, string path)
         {
             return base.GetParts(lotId, path);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}")]
-        public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
-        {
-            return base.GetFileParts(lotId, path, caseTypeId);
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationInspections$)}"),
@@ -210,7 +198,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRecommendations$)}")]
         public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
@@ -231,7 +218,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
@@ -263,8 +249,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
-        Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {
             return base.DeletePart(lotId, path);

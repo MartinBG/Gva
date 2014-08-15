@@ -116,6 +116,7 @@
     <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\Organizations\OrganizationDocumentOthersController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationApplicationsController.cs" />
     <Compile Include="Controllers\Persons\PersonsController.cs" />
     <Compile Include="Controllers\Persons\PersonExamsController.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="ModelsDO\Equipments\EquipmentDocumentOtherDO.cs" />
     <Compile Include="ModelsDO\FilePartVersionDO.cs" />
     <Compile Include="ModelsDO\Common\PeriodDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationDocumentOtherDO.cs" />
     <Compile Include="ModelsDO\Persons\InspectorDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressDO.cs" />
     <Compile Include="ModelsDO\Common\DocumentApplicationDO.cs" />
