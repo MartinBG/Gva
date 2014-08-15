@@ -94,6 +94,7 @@
     <Compile Include="Controllers\Aircrafts\AircraftPermitsToFlyController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftRadiosController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftSmodsController.cs" />
+    <Compile Include="Controllers\Airports\AirportApplicationsController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\AirportsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentInspectionsController.cs" />

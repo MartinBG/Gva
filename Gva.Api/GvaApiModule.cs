@@ -1,6 +1,10 @@
 ﻿using Autofac;
 using Common.Data;
 using Gva.Api.Controllers;
+using Gva.Api.Controllers.Aircrafts;
+using Gva.Api.Controllers.Airports;
+using Gva.Api.Controllers.Equipments;
+using Gva.Api.Controllers.Persons;
 using Gva.Api.Models;
 using Gva.Api.Projections.Aircraft;
 using Gva.Api.Projections.Airport;
@@ -16,6 +20,7 @@ using Gva.Api.Projections.Person;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.FileRepository;
@@ -24,12 +29,8 @@ using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.PublisherRepository;
 using Gva.Api.Repositories.StageRepository;
-using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.WordTemplates;
 using Regs.Api.LotEvents;
-using Gva.Api.Controllers.Persons;
-using Gva.Api.Controllers.Aircrafts;
-using Gva.Api.Controllers.Equipments;
 
 namespace Gva.Api
 {
@@ -136,6 +137,9 @@ namespace Gva.Api
             moduleBuilder.RegisterType<EquipmentDocumentOthersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<EquipmentInspectionsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<EquipmentOwnersController>().InstancePerLifetimeScope();
+
+            //Airport controllers
+            moduleBuilder.RegisterType<AirportApplicationsController>().InstancePerLifetimeScope();
 
             //Aircraft controllers
             moduleBuilder.RegisterType<AircraftRadiosController>().InstancePerLifetimeScope();

@@ -117,57 +117,6 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        [Route(@"{lotId}/{*path:regex(^airportDocumentApplications$)}")]
-        public IHttpActionResult PostNewApplication(int lotId, string path, JObject content)
-        {
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                UserContext userContext = this.Request.GetUserContext();
-                var lot = this.lotRepository.GetLotIndex(lotId);
-
-                PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
-
-                this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
-
-                lot.Commit(userContext, lotEventDispatcher);
-
-                GvaApplication application = new GvaApplication()
-                {
-                    Lot = lot,
-                    GvaAppLotPart = partVersion.Part
-                };
-
-                applicationRepository.AddGvaApplication(application);
-
-                transaction.Commit();
-            }
-
-            this.unitOfWork.Save();
-
-            return Ok();
-        }
-
-        [Route(@"{lotId}/{*path:regex(^airportDocumentApplications/\d+$)}")]
-        public IHttpActionResult DeleteApplication(int lotId, string path)
-        {
-            IHttpActionResult result;
-
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
-
-                applicationRepository.DeleteGvaApplication(partVersion.Part.PartId);
-
-                result = base.DeletePart(lotId, path);
-
-                transaction.Commit();
-            }
-
-            this.unitOfWork.Save();
-
-            return result;
-        }
-
         [Route(@"{lotId}/{*path:regex(^airportData$)}"),
          Route(@"{lotId}/{*path:regex(^airportCertOperationals/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
@@ -176,7 +125,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^airportDocumentOwners/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^airportDocumentApplications/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^airportDocumentOthers/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
@@ -202,7 +150,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^airportDocumentOwners$)}"),
-         Route(@"{lotId}/{*path:regex(^airportDocumentApplications$)}"),
          Route(@"{lotId}/{*path:regex(^airportDocumentOthers$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
@@ -225,7 +172,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^airportDocumentOwners/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^airportDocumentApplications/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^airportDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^airportCertOperationals/\d+$)}")]

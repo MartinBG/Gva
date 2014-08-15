@@ -37,13 +37,17 @@
     'AirportDocumentApplications',
     'airportDocumentApplication'
   ];
+
   AirportApplicationsNewCtrl.$resolve = {
-    airportDocumentApplication: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    airportDocumentApplication: [
+      '$stateParams',
+      'AirportDocumentApplications',
+      function ($stateParams, AirportDocumentApplications) {
+        return AirportDocumentApplications.newApplication({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('AirportApplicationsNewCtrl', AirportApplicationsNewCtrl);

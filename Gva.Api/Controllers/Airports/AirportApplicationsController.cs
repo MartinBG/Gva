@@ -12,11 +12,11 @@ using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
-namespace Gva.Api.Controllers.Equipments
+namespace Gva.Api.Controllers.Airports
 {
-    [RoutePrefix("api/equipments/{lotId}/equipmentDocumentApplications")]
+    [RoutePrefix("api/airports/{lotId}/airportDocumentApplications")]
     [Authorize]
-    public class EquipmentApplicationsController : GvaFilePartController<DocumentApplicationDO>
+    public class AirportApplicationsController : GvaFilePartController<DocumentApplicationDO>
     {
         private string path;
         private IUnitOfWork unitOfWork;
@@ -25,15 +25,15 @@ namespace Gva.Api.Controllers.Equipments
         private ILotRepository lotRepository;
         private ILotEventDispatcher lotEventDispatcher;
 
-        public EquipmentApplicationsController(
+        public AirportApplicationsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base("equipmentDocumentApplications", unitOfWork, lotRepository, fileRepository, lotEventDispatcher)
+            : base("airportDocumentApplications", unitOfWork, lotRepository, fileRepository, lotEventDispatcher)
         {
-            this.path = "equipmentDocumentApplications";
+            this.path = "airportDocumentApplications";
             this.unitOfWork = unitOfWork;
             this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
