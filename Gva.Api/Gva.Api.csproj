@@ -106,7 +106,7 @@
     <Compile Include="Controllers\GvaApplicationPartController.cs" />
     <Compile Include="Controllers\GvaPartsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
-    <Compile Include="Controllers\EquipmentsController.cs" />
+    <Compile Include="Controllers\Equipments\EquipmentsController.cs" />
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
@@ -153,6 +153,8 @@
     <Compile Include="ModelsDO\Common\DisparityDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentCertOperationalDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentCertOperationalExtDO.cs" />
+    <Compile Include="ModelsDO\Equipments\EquipmentDataDO.cs" />
+    <Compile Include="ModelsDO\Equipments\EquipmentDataExtDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentIncludedDocDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentInspectionDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentOwnerDO.cs" />
@@ -239,7 +241,7 @@
     <Compile Include="ModelsDO\ASExamDO.cs" />
     <Compile Include="ModelsDO\PublisherDO.cs" />
     <Compile Include="ModelsDO\PartVersionDO.cs" />
-    <Compile Include="ModelsDO\EquipmentDO.cs" />
+    <Compile Include="ModelsDO\Equipments\EquipmentViewDO.cs" />
     <Compile Include="ModelsDO\OrganizationDO.cs" />
     <Compile Include="ModelsDO\AircraftDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />

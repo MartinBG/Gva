@@ -18,6 +18,7 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Equipments;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
@@ -165,7 +166,7 @@ namespace Gva.Api.Controllers
             }
             else if (set.Alias == "Equipment")
             {
-                returnValue.Equipment = new EquipmentDO(this.equipmentRepository.GetEquipment(application.LotId));
+                returnValue.Equipment = new EquipmentViewDO(this.equipmentRepository.GetEquipment(application.LotId));
             }
 
             var appFilesAll = this.unitOfWork.DbContext.Set<GvaAppLotFile>()

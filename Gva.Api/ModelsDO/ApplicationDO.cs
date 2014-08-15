@@ -1,8 +1,7 @@
-﻿using Docs.Api.DataObjects;
+﻿using System.Collections.Generic;
+using Docs.Api.DataObjects;
 using Gva.Api.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Gva.Api.ModelsDO.Equipments;
 using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.ModelsDO
@@ -41,7 +40,7 @@ namespace Gva.Api.ModelsDO
         public OrganizationDO Organization { get; set; }
         public AircraftDO Aircraft { get; set; }
         public AirportDO Airport { get; set; }
-        public EquipmentDO Equipment { get; set; }
+        public EquipmentViewDO Equipment { get; set; }
 
         public List<ApplicationDocRelationDO> AppDocCase { get; set; }
 

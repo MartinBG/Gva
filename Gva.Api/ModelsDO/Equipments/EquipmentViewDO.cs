@@ -1,11 +1,11 @@
 ﻿using System;
 using Gva.Api.Models.Views.Equipment;
 
-namespace Gva.Api.ModelsDO
+namespace Gva.Api.ModelsDO.Equipments
 {
-    public class EquipmentDO
+    public class EquipmentViewDO
     {
-        public EquipmentDO(GvaViewEquipment equipmentData)
+        public EquipmentViewDO(GvaViewEquipment equipmentData)
         {
             this.Id = equipmentData.LotId;
             this.Name = equipmentData.Name;
