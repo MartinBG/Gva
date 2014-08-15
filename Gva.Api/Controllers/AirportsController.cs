@@ -123,8 +123,7 @@ namespace Gva.Api.Controllers
             return base.GetPart(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^airportDocumentOwners/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^airportDocumentOthers/\d+$)}")]
+        [Route(@"{lotId}/{*path:regex(^airportDocumentOwners/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFilePart(lotId, path, caseTypeId);
@@ -142,8 +141,7 @@ namespace Gva.Api.Controllers
             return base.PostPart(lotId, path, content);
         }
 
-        [Route(@"{lotId}/{*path:regex(^airportDocumentOwners$)}"),
-         Route(@"{lotId}/{*path:regex(^airportDocumentOthers$)}")]
+        [Route(@"{lotId}/{*path:regex(^airportDocumentOwners$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFileParts(lotId, path, caseTypeId);
@@ -156,7 +154,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^airportDocumentOwners$)}"),
-         Route(@"{lotId}/{*path:regex(^airportDocumentOthers$)}"),
          Route(@"{lotId}/{*path:regex(^inspections$)}")]
         public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
@@ -164,7 +161,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^airportDocumentOwners/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^airportDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
@@ -172,7 +168,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^airportDocumentOwners/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^airportDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
         public override IHttpActionResult DeletePart(int lotId, string path)
         {

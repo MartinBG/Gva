@@ -40,20 +40,13 @@
 
   AirportOthersNewCtrl.$resolve = {
     airportDocumentOther: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'AirportDocumentOthers',
+      function ($stateParams, AirportDocumentOthers) {
+        return AirportDocumentOthers.newDocument({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };
