@@ -648,7 +648,7 @@ namespace Aop.Api.Controllers
 
                     string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"App\word_templates\stanovishte_template.docx");
 
-                    using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.ReadWrite))
+                    using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.Read))
                     using (var memoryStream = new MemoryStream())
                     using (var blobWriter = new BlobWriter(connection))
                     using (var stream = blobWriter.OpenStream())
@@ -839,7 +839,7 @@ namespace Aop.Api.Controllers
 
                     string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"App\word_templates\doklad_template.docx");
 
-                    using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.ReadWrite))
+                    using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.Read))
                     using (var memoryStream = new MemoryStream())
                     using (var blobWriter = new BlobWriter(connection))
                     using (var stream = blobWriter.OpenStream())

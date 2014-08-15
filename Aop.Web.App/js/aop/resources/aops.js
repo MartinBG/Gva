@@ -43,6 +43,13 @@
               method: 'GET',
               url: 'api/aop/apps/docs/:id'
             },
+            'getProperDocTypeForApp': {
+              method: 'GET',
+              url: 'api/aop/apps/properDocType',
+              params: {
+                type: ''
+              }
+            },
             'getDocs': {
               method: 'GET',
               url: 'api/aop/apps/docs'

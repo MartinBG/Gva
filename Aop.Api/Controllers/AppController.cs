@@ -307,6 +307,38 @@ namespace Aop.Api.Controllers
             return Ok();
         }
 
+        [Route("properDocType")]
+        [HttpGet]
+        public IHttpActionResult GetPorperDocTypeForApp(string type)
+        {
+            int? docTypeId = null;
+            DocType dt;
+
+            if (type == "stDoc")
+            {
+                dt = this.unitOfWork.DbContext.Set<DocType>().FirstOrDefault(e => e.Alias == "R-0001"); //? maybe change the alias
+
+                if (dt != null)
+                {
+                    docTypeId = dt.DocTypeId;
+                }
+            }
+            else if (type == "ndDoc")
+            {
+                dt = this.unitOfWork.DbContext.Set<DocType>().FirstOrDefault(e => e.Alias == "R-0002"); //? maybe change the alias
+
+                if (dt != null)
+                {
+                    docTypeId = dt.DocTypeId;
+                }
+            }
+
+            return Ok(new
+            {
+                docTypeId = docTypeId
+            });
+        }
+
         [Route("docs")]
         [HttpGet]
         public IHttpActionResult GetDocs(

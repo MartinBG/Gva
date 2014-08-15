@@ -84,15 +84,14 @@
     };
 
     $scope.connectToDoc = function (type) {
-      if (type === 'stDoc') {
-        return $state.go('root.apps.edit.docSelect',
-          { type: type, csDocTypeId: 15, csIsChosen: 1 }, null, null); //? hardcoded
-      } else if (type === 'ndDoc') {
-        return $state.go('root.apps.edit.docSelect',
-          { type: type, csDocTypeId: 13, csIsChosen: 1 }, null, null); //? hardcoded
-      } else {
-        return $state.go('root.apps.edit.docSelect', { type: type, csIsChosen: 1 }, null, null);
-      }
+      return Aops.getProperDocTypeForApp({ type: type }).$promise.then(function (data) {
+        if (data.docTypeId) {
+          return $state.go('root.apps.edit.docSelect',
+            { type: type, csDocTypeId: data.docTypeId, csIsChosen: 1 }, null, null);
+        } else {
+          return $state.go('root.apps.edit.docSelect', { type: type, csIsChosen: 1 }, null, null);
+        }
+      });
     };
 
     $scope.disconnectDoc = function (connections) {
