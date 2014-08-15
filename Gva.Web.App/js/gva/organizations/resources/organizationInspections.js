@@ -3,6 +3,15 @@
   'use strict';
 
   angular.module('gva').factory('OrganizationInspections', ['$resource', function ($resource) {
-    return $resource('api/organizations/:id/organizationInspections/:ind');
+    return $resource('api/organizations/:id/organizationInspections/:ind', {}, {
+      getRecommendations: {
+        method: 'GET',
+        url: 'api/organizations/:id/organizationInspections/:ind/recommendations'
+      },
+      newInspection: {
+        method: 'GET',
+        url: 'api/organizations/:id/organizationInspections/new'
+      }
+    });
   }]);
 }(angular));

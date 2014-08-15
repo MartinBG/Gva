@@ -41,28 +41,13 @@
 
   OrganizationsInspectionsNewCtrl.$resolve = {
     organizationInspection: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {
-              examiners: [],
-              auditDetails: [],
-              disparities: []
-            },
-            applications: [application]
-          };
-        }
-        else {
-          return {
-            part: {
-              examiners: [],
-              auditDetails: [],
-              disparities: []
-            },
-            files: []
-          };
-        }
+      '$stateParams',
+      'OrganizationInspections',
+      function ($stateParams, OrganizationInspections) {
+        return OrganizationInspections.newInspection({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

@@ -5,7 +5,7 @@
   function CommonInspectionCtrl(
     $scope,
     $state,
-    Organizations,
+    OrganizationInspections,
     scFormParams,
     scModal
   ) {
@@ -17,7 +17,7 @@
     $scope.model.part.disparities = $scope.model.part.disparities || [];
 
     if($scope.setPart === 'organization' && $scope.model.partIndex) {
-      Organizations.getRecommendations({
+      OrganizationInspections.getRecommendations({
         id: $scope.lotId,
         ind: $scope.model.partIndex
       }).$promise.then(function (result) {
@@ -75,7 +75,7 @@
   CommonInspectionCtrl.$inject = [
     '$scope',
     '$state',
-    'Organizations',
+    'OrganizationInspections',
     'scFormParams',
     'scModal'
   ];

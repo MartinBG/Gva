@@ -9,6 +9,9 @@ namespace Gva.Api.ModelsDO.Common
         [Required(ErrorMessage = "SortOrder is required.")]
         public int? SortOrder { get; set; }
 
+        [Required(ErrorMessage = "Subject is required.")]
+        public string Subject { get; set; }
+
         [Required(ErrorMessage = "RefNumber is required.")]
         public string RefNumber { get; set; }
 

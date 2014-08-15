@@ -1,10 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Common
 {
     public class AuditDetailDO
     {
+        public AuditDetailDO()
+        {
+            this.Disparities = new List<int>();
+        }
+
         public string SortOrder { get; set; }
 
         public string Code { get; set; }
@@ -13,5 +19,7 @@ namespace Gva.Api.ModelsDO.Common
 
         [Required(ErrorMessage = "AuditResult is required.")]
         public NomValue AuditResult { get; set; }
+
+        public List<int> Disparities { get; set; }
     }
 }
