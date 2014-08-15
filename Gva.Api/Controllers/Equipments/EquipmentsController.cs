@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Filters;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Equipments;
@@ -70,6 +71,7 @@ namespace Gva.Api.Controllers.Equipments
         }
 
         [Route("")]
+        [Validate]
         public IHttpActionResult PostEquipment(EquipmentDataDO equipmentData)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
@@ -100,6 +102,7 @@ namespace Gva.Api.Controllers.Equipments
         }
 
         [Route(@"{lotId}/equipmentData")]
+        [Validate]
         public IHttpActionResult PostEquipmentData(int lotId, EquipmentDataDO equipmentData)
         {
             UserContext userContext = this.Request.GetUserContext();
