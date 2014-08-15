@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
@@ -13,7 +12,6 @@ using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
-using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers
@@ -123,40 +121,10 @@ namespace Gva.Api.Controllers
             return base.GetPart(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^airportDocumentOwners/\d+$)}")]
-        public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
-        {
-            return base.GetFilePart(lotId, path, caseTypeId);
-        }
-
         [Route(@"{lotId}/{*path:regex(^airportData$)}")]
         public IHttpActionResult PostAirportData(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^airportDocumentOwners$)}")]
-        public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
-        {
-            return base.GetFileParts(lotId, path, caseTypeId);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^airportDocumentOwners$)}")]
-        public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
-        {
-            return base.PostNewPart(lotId, path, content);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^airportDocumentOwners/\d+$)}")]
-        public override IHttpActionResult PostPart(int lotId, string path, JObject content)
-        {
-            return base.PostPart(lotId, path, content);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^airportDocumentOwners/\d+$)}")]
-        public override IHttpActionResult DeletePart(int lotId, string path)
-        {
-            return base.DeletePart(lotId, path);
         }
     }
 }
