@@ -38,9 +38,15 @@
   ];
 
   OrganizationAddressesNewCtrl.$resolve = {
-    organizationAddress: function () {
-      return {};
-    }
+    organizationAddress: [
+      '$stateParams',
+      'OrganizationAddresses',
+      function ($stateParams, OrganizationAddresses) {
+        return OrganizationAddresses.newAddress({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('OrganizationAddressesNewCtrl', OrganizationAddressesNewCtrl);
