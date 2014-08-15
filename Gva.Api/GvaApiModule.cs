@@ -142,6 +142,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AirportApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AirportCertOperationalsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AirportDocumentOthersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AirportInspectionsController>().InstancePerLifetimeScope();
 
             //Aircraft controllers
             moduleBuilder.RegisterType<AircraftRadiosController>().InstancePerLifetimeScope();
