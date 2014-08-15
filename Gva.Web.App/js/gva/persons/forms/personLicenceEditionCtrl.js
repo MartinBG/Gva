@@ -6,6 +6,7 @@
     $scope,
     scModal,
     $q,
+    scMessage,
     Persons,
     PersonRatings,
     PersonDocumentTrainings,
@@ -110,7 +111,12 @@
     };
 
     $scope.removeRating = function (rating) {
-      $scope.includedRatings = _.without($scope.includedRatings, rating);
+      return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            $scope.includedRatings = _.without($scope.includedRatings, rating);
+          }
+        });
     };
 
     $scope.addTraining = function () {
@@ -140,7 +146,12 @@
     };
 
     $scope.removeTraining = function (training) {
-      $scope.includedTrainings = _.without($scope.includedTrainings, training);
+      return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            $scope.includedTrainings = _.without($scope.includedTrainings, training);
+          }
+        });
     };
 
     $scope.addCheck = function () {
@@ -170,7 +181,12 @@
     };
 
     $scope.removeCheck = function (check) {
-      $scope.includedChecks = _.without($scope.includedChecks, check);
+      return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            $scope.includedChecks = _.without($scope.includedChecks, check);
+          }
+        });
     };
 
     $scope.addMedical = function () {
@@ -201,7 +217,12 @@
     };
 
     $scope.removeMedical = function (medical) {
-      $scope.includedMedicals = _.without($scope.includedMedicals, medical);
+      return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            $scope.includedMedicals = _.without($scope.includedMedicals, medical);
+          }
+        });
     };
 
     $scope.addExistingLicence = function () {
@@ -224,7 +245,12 @@
     };
 
     $scope.removeLicence = function (licence) {
-      $scope.includedLicences = _.without($scope.includedLicences, licence);
+      return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            $scope.includedLicences = _.without($scope.includedLicences, licence);
+          }
+        });
     };
   }
 
@@ -232,6 +258,7 @@
     '$scope',
     'scModal',
     '$q',
+    'scMessage',
     'Persons',
     'PersonRatings',
     'PersonDocumentTrainings',
