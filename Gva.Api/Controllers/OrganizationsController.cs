@@ -27,7 +27,6 @@ namespace Gva.Api.Controllers
         private ILotRepository lotRepository;
         private IInventoryRepository inventoryRepository;
         private IOrganizationRepository organizationRepository;
-        private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
@@ -47,7 +46,6 @@ namespace Gva.Api.Controllers
             this.lotRepository = lotRepository;
             this.inventoryRepository = inventoryRepository;
             this.organizationRepository = organizationRepository;
-            this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
@@ -141,8 +139,7 @@ namespace Gva.Api.Controllers
             return base.GetPart(lotId, path);
         }
 
-         [Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
-          Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}")]
+         [Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}")]
         public override IHttpActionResult GetFilePart(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFilePart(lotId, path, caseTypeId);
@@ -174,8 +171,7 @@ namespace Gva.Api.Controllers
             return base.GetParts(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentApplications$)}")]
+        [Route(@"{lotId}/{*path:regex(^organizationDocumentOthers$)}")]
         public override IHttpActionResult GetFileParts(int lotId, string path, int? caseTypeId = null)
         {
             return base.GetFileParts(lotId, path, caseTypeId);
@@ -237,8 +233,7 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationDocumentOthers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}"),
-            Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
+         Route(@"{lotId}/{*path:regex(^organizationRecommendations/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
@@ -274,57 +269,5 @@ namespace Gva.Api.Controllers
         {
             return base.DeletePart(lotId, path);
         }
-
-        [Route(@"{lotId}/{*path:regex(^organizationDocumentApplications$)}")]
-        public IHttpActionResult PostNewApplication(int lotId, string path, JObject content)
-        {
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                UserContext userContext = this.Request.GetUserContext();
-                var lot = this.lotRepository.GetLotIndex(lotId);
-
-                PartVersion partVersion = lot.CreatePart(path + "/*", content.Get<JObject>("part"), userContext);
-
-                this.fileRepository.AddFileReferences(partVersion, content.GetItems<FileDO>("files"));
-
-                lot.Commit(userContext, lotEventDispatcher);
-
-                GvaApplication application = new GvaApplication()
-                {
-                    Lot = lot,
-                    GvaAppLotPart = partVersion.Part
-                };
-
-                applicationRepository.AddGvaApplication(application);
-
-                this.unitOfWork.Save();
-
-                transaction.Commit();
-            }
-
-            return Ok();
-        }
-
-        [Route(@"{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}")]
-        public IHttpActionResult DeleteApplication(int lotId, string path)
-        {
-            IHttpActionResult result;
-
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
-
-                applicationRepository.DeleteGvaApplication(partVersion.Part.PartId);
-
-                result = base.DeletePart(lotId, path);
-
-                this.unitOfWork.Save();
-
-                transaction.Commit();
-            }
-
-            return result;
-        }
-
     }
 }

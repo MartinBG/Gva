@@ -116,6 +116,7 @@
     <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\Organizations\OrganizationApplicationsController.cs" />
     <Compile Include="Controllers\Persons\PersonsController.cs" />
     <Compile Include="Controllers\Persons\PersonExamsController.cs" />
     <Compile Include="Controllers\Persons\PersonDocumentExamsController.cs" />

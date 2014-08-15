@@ -4,6 +4,7 @@ using Gva.Api.Controllers;
 using Gva.Api.Controllers.Aircrafts;
 using Gva.Api.Controllers.Airports;
 using Gva.Api.Controllers.Equipments;
+using Gva.Api.Controllers.Organizations;
 using Gva.Api.Controllers.Persons;
 using Gva.Api.Models;
 using Gva.Api.Projections.Aircraft;
@@ -145,6 +146,9 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AirportDocumentOthersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AirportInspectionsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AirportOwnersController>().InstancePerLifetimeScope();
+
+            //Organization controllers
+            moduleBuilder.RegisterType<OrganizationApplicationsController>().InstancePerLifetimeScope();
 
             //Aircraft controllers
             moduleBuilder.RegisterType<AircraftRadiosController>().InstancePerLifetimeScope();
