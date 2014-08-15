@@ -11,23 +11,29 @@
 
     $scope.insertAuditDetails = function () {
       var queryString = {};
-      if ($scope.$parent.form.$name === 'aircraftInspectionForm') {
+      if ($scope.setPart === 'aircraft') {
         queryString = {
           alias: 'auditPartRequirements',
           type: 'aircrafts'
         };
-      } else if ($scope.$parent.form.$name === 'organizationInspectionForm') {
+      } else if ($scope.setPart === 'organization') {
         queryString = {
           alias: 'auditPartRequirements',
           auditPartCode: $scope.model.auditPart.code,
           type: 'organizations'
         };
-      } else if ($scope.$parent.form.$name === 'airportInspectionForm') {
+      } else if ($scope.setPart === 'airport') {
         queryString = {
           alias: 'auditDetails',
           type: 'airports'
         };
+      } else if ($scope.setPart === 'equipment') {
+        queryString = {
+          alias: 'auditDetails',
+          type: 'equipments'
+        };
       }
+
       return Nomenclatures.query(queryString)
         .$promise.then(function (details) {
           $scope.model.auditDetails = details;

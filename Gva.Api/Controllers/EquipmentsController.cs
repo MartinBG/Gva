@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
@@ -13,7 +12,6 @@ using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
-using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers
@@ -124,40 +122,10 @@ namespace Gva.Api.Controllers
             return base.GetPart(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
-        public override IHttpActionResult GetApplicationPart(int lotId, string path)
-        {
-            return base.GetApplicationPart(lotId, path);
-        }
-
         [Route(@"{lotId}/{*path:regex(^equipmentData$)}")]
         public IHttpActionResult PostEquipmentData(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^inspections$)}")]
-        public override IHttpActionResult GetApplicationParts(int lotId, string path)
-        {
-            return base.GetApplicationParts(lotId, path);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^inspections$)}")]
-        public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
-        {
-            return base.PostNewPart(lotId, path, content);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
-        public override IHttpActionResult PostPart(int lotId, string path, JObject content)
-        {
-            return base.PostPart(lotId, path, content);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
-        public override IHttpActionResult DeletePart(int lotId, string path)
-        {
-            return base.DeletePart(lotId, path);
         }
     }
 }
