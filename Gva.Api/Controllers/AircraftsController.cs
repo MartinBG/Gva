@@ -154,109 +154,10 @@ namespace Gva.Api.Controllers
             return Ok();
         }
 
-        [Route(@"{lotId}/{*path:regex(^aircraftData$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}")]
+        [Route(@"{lotId}/{*path:regex(^aircraftData$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
         {
             return base.GetPart(lotId, path);
-        }
-
-        public RegistrationViewDO CreateRegistrationView(IEnumerable<PartVersion> registrations, IEnumerable<PartVersion> airworthinesses, int? regPartIndex)
-        {
-            var regs =
-                (from r in registrations
-                join aw in airworthinesses on r.Part.Index equals aw.Content.Get<int>("registration.nomValueId") into gaws
-                from aw in gaws.DefaultIfEmpty()
-                group aw by r into aws
-                orderby aws.Key.Content.Get<int>("actNumber") descending
-                select aws)
-                .Select((aws, i) =>
-                    new
-                    {
-                        Position = i,
-                        Reg = aws.Key,
-                        Aws = aws.Where(aw => aw != null).OrderByDescending(a => a.Content.Get<DateTime>("issueDate")).AsEnumerable()
-                    })
-                .ToList();
-
-            var currentReg =
-                //used to create a variable from this annonymous type
-                new
-                {
-                    Position = default(int),
-                    Reg = default(PartVersion),
-                    Aws = Enumerable.Empty<PartVersion>()
-                };
-
-            if (regPartIndex.HasValue)
-            {
-                currentReg = regs.Where(r => r.Reg.Part.Index == regPartIndex).FirstOrDefault();
-            }
-            else
-            {
-                currentReg = regs.FirstOrDefault();
-            }
-
-            RegistrationViewDO regView = new RegistrationViewDO();
-            regView.CurrentIndex = currentReg.Reg.Part.Index;
-
-            var currentRegAw = regs
-                .Where(r => r.Position >= currentReg.Position && r.Aws.Any())
-                .Select(r =>
-                    new
-                    {
-                        Aw = r.Aws.First(),
-                        IsForCurrentReg = r == currentReg
-                    })
-                .FirstOrDefault();
-
-            if (currentRegAw != null)
-            {
-                regView.AirworthinessIndex = currentRegAw.Aw.Part.Index;
-                regView.HasAirworthiness = currentRegAw.IsForCurrentReg;
-            }
-            else
-            {
-                regView.AirworthinessIndex = null;
-                regView.HasAirworthiness = false;
-            }
-
-            int position = currentReg.Position;
-
-            regView.LastIndex = regs[0].Reg.Part.Index;
-            regView.NextIndex = position > 0 ? regs[position - 1].Reg.Part.Index : (int?)null;
-            regView.PrevIndex = position < regs.Count - 1 ? regs[position + 1].Reg.Part.Index : (int?)null;
-            regView.FirstIndex = regs[regs.Count - 1].Reg.Part.Index;
-
-            regView.LastReg = regs[0].Reg.Content;
-            regView.FirstReg = regs[regs.Count - 1].Reg.Content;
-
-            return regView;
-        }
-
-        [Route(@"{lotId}/aircraftCertRegistrationsFM/view")]
-        [Route(@"{lotId}/aircraftCertRegistrationsFM/{regPartIndex}/view")]
-        public IHttpActionResult GetRegistrationView(int lotId, int? regPartIndex = null)
-        {
-            var index = this.lotRepository.GetLotIndex(lotId).Index;
-            var registrations = index.GetParts("aircraftCertRegistrationsFM");
-            var airworthinesses = index.GetParts("aircraftCertAirworthinessesFM");
-            if (registrations.Length > 0)
-            {
-                return Ok(CreateRegistrationView(registrations, airworthinesses, regPartIndex));
-            }
-            else
-            {
-                return Ok();
-            }
-        }
-
-        [Route(@"{lotId}/aircraftCertRegistrationsFM/{regPartIndex}/debts")]
-        public IHttpActionResult GetRegistrationDebts(int lotId, int regPartIndex)
-        {
-            var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftDocumentDebtsFM").Where(e => e.Content.Get<int>("registration.nomValueId") == regPartIndex);
-
-            return Ok(parts.Select(pv => new PartVersionDO(pv)));
         }
 
         [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
@@ -271,34 +172,19 @@ namespace Gva.Api.Controllers
             return base.PostPart(lotId, path, content);
         }
 
-        public override IHttpActionResult GetParts(int lotId, string path)
-        {
-            return base.GetParts(lotId, path);
-        }
-
-        [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM$)}")]
-        public IHttpActionResult GetRegistrations(int lotId, string path)
-        {
-            var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts(path).OrderByDescending(e => e.Content.Get<int>("actNumber"));
-
-            return Ok(parts.Select(pv => new PartVersionDO(pv)));
-        }
-
         [Route(@"{lotId}/{*path:regex(^inspections$)}")]
         public override IHttpActionResult GetApplicationParts(int lotId, string path)
         {
             return base.GetApplicationParts(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^inspections$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM$)}")]
+        [Route(@"{lotId}/{*path:regex(^inspections$)}")]
         public override IHttpActionResult PostNewPart(int lotId, string path, JObject content)
         {
             return base.PostNewPart(lotId, path, content);
         }
 
-        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}")]
+        [Route(@"{lotId}/{*path:regex(^inspections/\d+$)}")]
         public override IHttpActionResult PostPart(int lotId, string path, JObject content)
         {
             return base.PostPart(lotId, path, content);
@@ -310,26 +196,5 @@ namespace Gva.Api.Controllers
             return base.DeletePart(lotId, path);
         }
 
-        [Route(@"{lotId}/{*path:regex(^aircraftCertRegistrationsFM/\d+$)}")]
-        public IHttpActionResult DeleteRegPart(int lotId, string path)
-        {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            var partVersion = lot.DeletePart(path, userContext);
-            this.fileRepository.DeleteFileReferences(partVersion);
-            this.applicationRepository.DeleteApplicationRefs(partVersion);
-            var registrations = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftCertRegistrationsFM").ToList();
-            if (registrations.Count > 0)
-            {
-                var lastRegistration = registrations.FirstOrDefault();
-                lastRegistration.Content.Property("isCurrent").Value = true;
-                lot.UpdatePart("aircraftCertRegistrationsFM/" + lastRegistration.Part.Index , lastRegistration.Content, userContext);
-            }
-            lot.Commit(userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            return Ok();
-        }
     }
 }

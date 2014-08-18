@@ -31,20 +31,26 @@
     $scope.save = function () {
       return $scope.newCertRegForm.$validate()
          .then(function () {
-            if ($scope.newCertRegForm.$valid) {
-              return AircraftCertRegistrationsFM
+           if ($scope.newCertRegForm.$valid) {
+             if (oldReg && oldReg.part) {
+               return AircraftCertRegistrationsFM
+               .save({ id: $stateParams.id, ind: oldReg.partIndex }, oldReg).$promise
+               .then(function () {
+                 return AircraftCertRegistrationsFM
+                .save({ id: $stateParams.id }, $scope.reg).$promise
+                .then(function () {
+                  return $state.go('root.aircrafts.view.regsFM.search');
+                });
+               });
+             } else {
+               return AircraftCertRegistrationsFM
               .save({ id: $stateParams.id }, $scope.reg).$promise
               .then(function () {
-                if (oldReg && oldReg.part) {
-                  return AircraftCertRegistrationsFM
-                  .save({ id: $stateParams.id, ind: oldReg.partIndex }, oldReg).$promise
-                  .then(function () {
-                    return $state.go('root.aircrafts.view.regsFM.search');
-                  });
-                } else {
-                  return $state.go('root.aircrafts.view.regsFM.search');
-                }
+                return $state.go('root.aircrafts.view.regsFM.search');
               });
+             }
+
+
             }
           });
     };
@@ -63,19 +69,15 @@
     'oldReg'
   ];
   CertRegsFMNewCtrl.$resolve = {
-    aircraftCertRegistration: function () {
-      return {
-        part: {
-          removal: null,
-          isActive: true,
-          isCurrent: true,
-          ownerIsOrg: true,
-          operIsOrg: true,
-          lessorIsOrg: true
-        },
-        files: []
-      };
-    },
+    aircraftCertRegistration: [
+      '$stateParams',
+      'AircraftCertRegistrationsFM',
+      function ($stateParams, AircraftCertRegistrationsFM) {
+        return AircraftCertRegistrationsFM.newCertRegistrationFM({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ],
     oldReg: [
       '$stateParams',
       'AircraftCertRegistrationsFM',

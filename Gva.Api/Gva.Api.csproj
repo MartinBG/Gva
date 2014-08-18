@@ -81,6 +81,7 @@
     <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesFMController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsController.cs" />
+    <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsFMController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentApplicationsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentDebtsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentDebtsFMController.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertRegistrationFMDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationAuditplanDO.cs" />
     <Compile Include="Controllers\Organizations\OrganizationAuditplansController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationAddressesController.cs" />

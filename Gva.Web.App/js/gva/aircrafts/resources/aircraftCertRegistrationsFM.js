@@ -4,6 +4,10 @@
 
   angular.module('gva').factory('AircraftCertRegistrationsFM', ['$resource', function ($resource) {
     return $resource('api/aircrafts/:id/aircraftCertRegistrationsFM/:ind', {}, {
+      'newCertRegistrationFM': {
+        method: 'GET',
+        url: 'api/aircrafts/:id/aircraftCertRegistrations/new'
+      },
       'getView': {
         method: 'GET',
         url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/view',
