@@ -7,6 +7,7 @@
   function SearchButtonDirective($parse, l10n) {
     function ButtonCompile (tElement, tAttrs) {
       var btnClasses = tElement.attr('class');
+      tElement.removeAttr('class');
 
       if (tAttrs.action === 'add') {
         tElement.children('button, sc-button').remove();

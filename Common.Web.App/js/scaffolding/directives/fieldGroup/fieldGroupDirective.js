@@ -55,7 +55,7 @@
               modelFound = true;
             }
             else if (modelFound) {
-              if (tagName === 'BUTTON') {
+              if (tagName === 'BUTTON' || tagName === 'A') {
                 addons[1].prop('class', 'input-group-btn');
               }
 
@@ -63,7 +63,7 @@
               addons[1].append(elem);
             }
             else {
-              if (tagName === 'BUTTON') {
+              if (tagName === 'BUTTON' || tagName === 'A') {
                 addons[0].prop('class', 'input-group-btn');
               }
 
