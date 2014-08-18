@@ -1359,7 +1359,7 @@ namespace Gva.MigrationTool.Sets
                         locationIndicator = noms["locationIndicators"].ByOldId(r.Field<long?>("INDICATOR_ID").ToString()),
                         sector = r.Field<string>("SECTOR"),
                         aircraftTypeGroup = noms["aircraftTypeGroups"].ByOldId(r.Field<long?>("RATING_GROUP66_ID").ToString()),
-                        aircraftTypeCategory = noms["aircraftClases66"].ByOldId(r.Field<long?>("RATING_CAT66_ID").ToString()).NomValueId(),
+                        aircraftTypeCategory = noms["aircraftClases66"].ByOldId(r.Field<long?>("RATING_CAT66_ID").ToString()),
                         caa = noms["caa"].ByOldId(r.Field<decimal?>("CAA_ID").ToString()),
                         editions = editions[r.Field<int>("ID")]
                     }))
