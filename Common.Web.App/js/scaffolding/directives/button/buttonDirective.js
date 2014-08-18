@@ -1,24 +1,51 @@
-﻿// Usage: <sc-button type="" name="" btn-click="" text="" class="" icon=""></sc-button>
+﻿// Usage: <sc-button type=""
+//                   name=""
+//                   btn-click=""
+//                   btn-sref="{state: '...', params: {...}, options: {...}}"
+//                   text=""
+//                   class=""
+//                   icon="">
+// </sc-button>
 
 /*global angular*/
 (function (angular) {
   'use strict';
 
-  function ButtonDirective($parse, $exceptionHandler, l10n) {
+  function ButtonDirective($parse, $exceptionHandler, l10n, $state) {
 
     function ButtonLink(scope, element, attrs) {
       var elementCtrl = {};
 
+      var sref;
+      if (attrs.btnSref) {
+        sref = $parse(attrs.btnSref)(scope.$parent);
+
+        attrs.$set('href', $state.href(sref.state, sref.params, sref.options));
+      }
+
       scope.$parent[attrs.name] = elementCtrl;
 
       element.on('click', function (event) {
+        if (event.which !== 1) {
+          // not left click
+          return;
+        }
+
+        event.preventDefault();
+
         if (elementCtrl.$pending) {
           return;
         }
 
         scope.$apply(function () {
-          // add $event local variables to the expression context as ngClick does
-          var result = scope.btnClick({ $event: event });
+          var result;
+          if (sref) {
+            result = $state.go(sref.state, sref.params, sref.options);
+          }
+          else {
+            // add $event local variables to the expression context as ngClick does
+            result = scope.btnClick({ $event: event });
+          }
 
           // check if the result is promise
           if (result && result.then && typeof (result.then) === 'function') {
@@ -57,7 +84,7 @@
     };
   }
 
-  ButtonDirective.$inject = ['$parse', '$exceptionHandler', 'l10n'];
+  ButtonDirective.$inject = ['$parse', '$exceptionHandler', 'l10n', '$state'];
 
   angular.module('scaffolding').directive('scButton', ButtonDirective);
 }(angular));

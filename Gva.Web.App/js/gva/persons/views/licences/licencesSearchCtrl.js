@@ -9,6 +9,7 @@
     $filter,
     licences
   ) {
+    $scope.lotId = $stateParams.id;
     $scope.licences = licences;
     
     $scope.isInvalidLicence = function(item){
@@ -19,17 +20,6 @@
         documentDateValidTo = $filter('last')(item.part.editions).documentDateValidTo;
 
       return moment(currentDate).isAfter(documentDateValidTo);
-    };
-
-    $scope.viewLicence = function (licence) {
-      return $state.go('root.persons.view.licences.edit', {
-        id: $stateParams.id,
-        ind: licence.partIndex
-      });
-    };
-
-    $scope.newLicence = function () {
-      return $state.go('root.persons.view.licences.new');
     };
   }
 
