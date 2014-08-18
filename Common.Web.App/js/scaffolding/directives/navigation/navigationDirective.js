@@ -16,17 +16,13 @@
         userFullname: '@',
         changePasswordState: '@'
       },
-      controller: function NavigationCtrl($scope, $state) {
-        $scope.changePassword = function changePassword() {
-          return $state.go($scope.changePasswordState);
-        };
-
+      controller: ['$scope', function NavigationCtrl($scope) {
         $scope.logout = function logout() {
           return authService.signOut().then(function () {
             $window.location.reload();
           });
         };
-      }
+      }]
     };
   }
   NavigationDirective.$inject = ['authService', '$window'];

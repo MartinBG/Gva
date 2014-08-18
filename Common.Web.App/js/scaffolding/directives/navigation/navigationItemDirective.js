@@ -22,7 +22,7 @@
         params: '&'
       },
       templateUrl: 'js/scaffolding/directives/navigation/navigationItemDirective.html',
-      controller: function NavigationItemCtrl($scope, $state) {
+      controller: ['$scope', function NavigationItemCtrl($scope) {
         $scope.item = {
           active: $scope.active,
           parent: $scope.parent,
@@ -32,11 +32,7 @@
           url: $scope.url,
           newTab: $scope.newTab
         };
-
-        $scope.stateGo = function stateGo() {
-          return $state.go($scope.state, $scope.params(), { inherit: false });
-        };
-      }
+      }]
     };
   }
 
