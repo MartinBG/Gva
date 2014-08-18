@@ -1,4 +1,4 @@
-﻿// Usage: <a sc-sref="{state: '...', params: {...}}" name="linkName">text</a>
+﻿// Usage: <a sc-sref="{state: '...', params: {...}, options: {...}}" name="linkName">text</a>
 
 /*global angular*/
 (function (angular) {
@@ -13,7 +13,8 @@
           srefExpr = $parse(attrs.scSref)(scope),
           state = srefExpr.state,
           params = srefExpr.params,
-          link =  $state.href(state, params);
+          options = srefExpr.options,
+          link = $state.href(state, params, options);
 
         attrs.$set('href', link);
 
