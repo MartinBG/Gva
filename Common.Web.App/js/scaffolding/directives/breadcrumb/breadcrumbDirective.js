@@ -14,7 +14,7 @@
         homeState: '@'
       },
       templateUrl: 'js/scaffolding/directives/breadcrumb/breadcrumbDirective.html',
-      controller: function BreadcrumbCtrl($scope, $state, l10n) {
+      controller: ['$scope', '$state', 'l10n', function BreadcrumbCtrl($scope, $state, l10n) {
         $scope.getBreadcrumbStates = function (state) {
           var states = [];
 
@@ -42,7 +42,7 @@
         $scope.$on('$stateChangeSuccess', function () {
           $scope.breadcrumbStates = $scope.getBreadcrumbStates($state.$current);
         });
-      }
+      }]
     };
   }
 
