@@ -14,8 +14,8 @@
   <RemovePersonalInformation/>
  </OfficeDocumentSettings>
  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
-  <WindowHeight>13515</WindowHeight>
-  <WindowWidth>30720</WindowWidth>
+  <WindowHeight>8955</WindowHeight>
+  <WindowWidth>21570</WindowWidth>
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>795</TabRatio>
@@ -368,7 +368,7 @@
   </Style>
  </Styles>
  <Worksheet ss:Name="RegisterIndexes">
-  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="34" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="35" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s64" ss:DefaultRowHeight="15">
    <Column ss:Index="4" ss:StyleID="s64" ss:Width="157.5"/>
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="337.5"/>
@@ -422,7 +422,14 @@
     <Cell><Data ss:Type="String">{0}</Data></Cell>
     <Cell><Data ss:Type="String">Потребителски регистър</Data></Cell>
    </Row>
-   <Row ss:Index="10" ss:AutoFitHeight="0">
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">0003</Data></Cell>
+    <Cell><Data ss:Type="String">Incoming</Data></Cell>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">{0}</Data></Cell>
+    <Cell><Data ss:Type="String">Регистър на външно входирани документи</Data></Cell>
+   </Row>
+   <Row ss:Index="11" ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">000001</Data></Cell>
     <Cell><Data ss:Type="String">000001</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
@@ -611,12 +618,10 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <TopRowVisible>9</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>39</ActiveRow>
-     <ActiveCol>4</ActiveCol>
+     <ActiveRow>5</ActiveRow>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -3847,8 +3852,8 @@
     <Cell ss:StyleID="Default"/>
     <Cell><Data ss:Type="String">1</Data></Cell>
     <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="Default"/>
-    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
+    <Cell ss:StyleID="s64"><Data ss:Type="String">000099</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
@@ -6304,11 +6309,12 @@
     <VerticalResolution>600</VerticalResolution>
    </Print>
    <Selected/>
+   <TopRowVisible>6</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>18</ActiveRow>
-     <ActiveCol>11</ActiveCol>
+     <ActiveRow>25</ActiveRow>
+     <ActiveCol>4</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

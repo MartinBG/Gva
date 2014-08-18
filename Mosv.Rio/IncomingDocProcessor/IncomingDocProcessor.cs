@@ -155,7 +155,27 @@ namespace Mosv.Rio.IncomingDocProcessor
 
                     this.unitOfWork.Save();
 
-                    this.docRepository.RegisterDoc(initialDoc, systemUnitUser, systemUserContext);
+                    if (applicationDataDo.DocFileTypeAlias == "ContainerTransferFileCompetence")
+                    {
+                        var competenceTransferObj = XmlSerializerUtils.XmlDeserializeFromString<R_6064.ContainerTransferFileCompetence>(xmlContent);
+
+                        if (!String.IsNullOrWhiteSpace(competenceTransferObj.FileTransferredJurisdiction.AISCaseURI.DocumentURI.RegisterIndex) &&
+                            !String.IsNullOrWhiteSpace(competenceTransferObj.FileTransferredJurisdiction.AISCaseURI.DocumentURI.SequenceNumber) &&
+                            competenceTransferObj.FileTransferredJurisdiction.AISCaseURI.DocumentURI.ReceiptOrSigningDate.HasValue)
+                        {
+                            this.docRepository.IncomingRegisterDoc(
+                                initialDoc,
+                                systemUnitUser,
+                                systemUserContext,
+                                competenceTransferObj.FileTransferredJurisdiction.AISCaseURI.DocumentURI.RegisterIndex,
+                                int.Parse(competenceTransferObj.FileTransferredJurisdiction.AISCaseURI.DocumentURI.SequenceNumber),
+                                competenceTransferObj.FileTransferredJurisdiction.AISCaseURI.DocumentURI.ReceiptOrSigningDate.Value);
+                        }
+                    }
+                    else
+                    {
+                        this.docRepository.RegisterDoc(initialDoc, systemUnitUser, systemUserContext);
+                    }
 
                     AddDocUnit(initialDoc, systemUnitUser.Unit, systemUser);
 

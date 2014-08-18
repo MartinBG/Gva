@@ -89,6 +89,16 @@ namespace Docs.Api.Repositories.DocRepository
             bool checkVersion = false,
             byte[] docVersion = null);
 
+        string IncomingRegisterDoc(
+            Doc doc,
+            UnitUser unitUser,
+            UserContext userContext,
+            string regIndex,
+            int regNumber,
+            DateTime regDate,
+            bool checkVersion = false,
+            byte[] docVersion = null);
+
         void GenerateAccessCode(Doc doc, UserContext userContext);
 
         Doc CreateDoc(

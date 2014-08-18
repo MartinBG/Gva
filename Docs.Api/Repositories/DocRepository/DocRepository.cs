@@ -627,6 +627,64 @@ namespace Docs.Api.Repositories.DocRepository
             return string.Empty;
         }
 
+        public string IncomingRegisterDoc(
+            Doc doc,
+            UnitUser unitUser,
+            UserContext userContext,
+            string regIndex,
+            int regNumber,
+            DateTime regDate,
+            bool checkVersion = false,
+            byte[] docVersion = null)
+        {
+            doc.EnsureDocRelationsAreLoaded();
+
+            if (checkVersion)
+            {
+                doc.EnsureForProperVersion(docVersion);
+            }
+
+            DateTime currentDate = DateTime.Now;
+
+            RegisterIndex registerIndex = this.unitOfWork.DbContext.Set<RegisterIndex>()
+               .SingleOrDefault(e => e.Alias == "Incoming");
+
+            var docRegisterId = this.spGetDocRegisterIdByRegisterIndexId(registerIndex.RegisterIndexId);
+
+            if (!string.IsNullOrEmpty(doc.RegUri))
+            {
+                throw new Exception("Document has been already registered.");
+            }
+
+            if (registerIndex == null)
+            {
+                throw new Exception("RegisterIndex can not be found.");
+            }
+
+            doc.Register(
+                docRegisterId.Value,
+                String.Format("{0}-{1}-{2}", regIndex, regNumber.ToString(), regDate.ToString("dd.MM.yyyy")),
+                regIndex,
+                regNumber,
+                regDate,
+                userContext);
+
+            DocWorkflowAction docWorkflowAction = this.unitOfWork.DbContext.Set<DocWorkflowAction>()
+                .SingleOrDefault(e => e.Alias.ToLower() == "Registration".ToLower());
+
+            doc.CreateDocWorkflow(
+                docWorkflowAction,
+                currentDate,
+                null,
+                null,
+                unitUser.UnitId,
+                doc.RegUri,
+                unitUser.UnitUserId,
+                userContext);
+
+            return string.Empty;
+        }
+
         public void GenerateAccessCode(Doc doc, UserContext userContext)
         {
             CodeGeneratorUtils codeGenerator = new CodeGeneratorUtils();
