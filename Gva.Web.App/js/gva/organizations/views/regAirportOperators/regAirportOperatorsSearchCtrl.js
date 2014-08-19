@@ -8,19 +8,7 @@
     $stateParams,
     organizationRegAirportOperators
   ) {
-
     $scope.organizationRegAirportOperators = organizationRegAirportOperators;
-
-    $scope.editRegAirportOperator = function (address) {
-      return $state.go('root.organizations.view.regAirportOperators.edit', {
-        id: $stateParams.id,
-        ind: address.partIndex
-      });
-    };
-
-    $scope.newRegAirportOperator = function () {
-      return $state.go('root.organizations.view.regAirportOperators.new');
-    };
   }
 
   RegAirportOperatorsSearchCtrl.$inject = [

@@ -9,18 +9,6 @@
     marks
   ) {
     $scope.marks = marks;
-
-
-    $scope.editCertMark = function (mark) {
-      return $state.go('root.aircrafts.view.marks.edit', {
-        id: $stateParams.id,
-        ind: mark.partIndex
-      });
-    };
-
-    $scope.newCertMark = function () {
-      return $state.go('root.aircrafts.view.marks.new');
-    };
   }
 
   CertMarksSearchCtrl.$inject = [

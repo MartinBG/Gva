@@ -8,19 +8,7 @@
     $stateParams,
     organizationRegGroundServiceOperators
   ) {
-
     $scope.organizationRegGroundServiceOperators = organizationRegGroundServiceOperators;
-
-    $scope.editRegGroundServiceOperator = function (address) {
-      return $state.go('root.organizations.view.regGroundServiceOperators.edit', {
-        id: $stateParams.id,
-        ind: address.partIndex
-      });
-    };
-
-    $scope.newRegGroundServiceOperator = function () {
-      return $state.go('root.organizations.view.regGroundServiceOperators.new');
-    };
   }
 
   RegGroundServiceOperatorsSearchCtrl.$inject = [

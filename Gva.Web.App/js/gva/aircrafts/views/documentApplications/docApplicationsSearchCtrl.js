@@ -10,17 +10,6 @@
     aircraftDocumentApplications
   ) {
     $scope.aircraftDocumentApplications = aircraftDocumentApplications;
-
-    $scope.editApplication = function (application) {
-      return $state.go('root.aircrafts.view.applications.edit', {
-        id: $stateParams.id,
-        ind: application.partIndex
-      });
-    };
-
-    $scope.newApplication = function () {
-      return $state.go('root.aircrafts.view.applications.new');
-    };
   }
 
   AircraftApplicationsSearchCtrl.$inject = [

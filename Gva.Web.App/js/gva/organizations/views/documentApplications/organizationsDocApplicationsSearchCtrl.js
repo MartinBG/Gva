@@ -9,18 +9,6 @@
     organizationDocumentApplications
   ) {
     $scope.organizationDocumentApplications = organizationDocumentApplications;
-
-
-    $scope.editApplication = function (application) {
-      return $state.go('root.organizations.view.documentApplications.edit', {
-        id: $stateParams.id,
-        ind: application.partIndex
-      });
-    };
-
-    $scope.newApplication = function () {
-      return $state.go('root.organizations.view.documentApplications.new');
-    };
   }
 
   OrganizationsDocApplicationsSearchCtrl.$inject = [

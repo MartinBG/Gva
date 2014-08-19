@@ -8,20 +8,7 @@
     $stateParams,
     organizationInspections
   ) {
-
     $scope.organizationInspections = organizationInspections;
-
-    $scope.newInspection = function () {
-      return $state.go('root.organizations.view.inspections.new');
-    };
-
-    $scope.editInspection = function (inspection) {
-      return $state.go('root.organizations.view.inspections.edit', {
-        id: $stateParams.id,
-        ind: inspection.partIndex
-      });
-    };
-
   }
 
   OrganizationsInspectionsSearchCtrl.$inject = [

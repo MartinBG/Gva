@@ -1,7 +1,7 @@
 ﻿<div>
   <sc-datatable items="indexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="editBtn" btn-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="editBtn" btn-sref="{state: getState(item.setPartAlias), params: {ind: item.partIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber">
     </sc-column>
@@ -35,7 +35,7 @@
  <h5 class="form-header" l10n-text="persons.inventorySearch.notIndexed"></h5>
   <sc-datatable items="notIndexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="editBtn" btn-click="edit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="editBtn" btn-sref="{state: getState(item.setPartAlias), params: {ind: item.partIndex}}"  class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber">
     </sc-column>

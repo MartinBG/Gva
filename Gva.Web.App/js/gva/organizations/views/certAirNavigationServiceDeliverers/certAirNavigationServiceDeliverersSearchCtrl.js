@@ -8,19 +8,7 @@
     $stateParams,
     certAirNavigationServiceDeliverers
   ) {
-
     $scope.certAirNavigationServiceDeliverers = certAirNavigationServiceDeliverers;
-
-    $scope.editCertAirNavigationServiceDeliverer = function (cert) {
-      return $state.go('root.organizations.view.certAirNavigationServiceDeliverers.edit', {
-        id: $stateParams.id,
-        ind: cert.partIndex
-      });
-    };
-
-    $scope.newCertAirNavigationServiceDeliverer = function () {
-      return $state.go('root.organizations.view.certAirNavigationServiceDeliverers.new');
-    };
   }
 
   CertAirNavigationServiceDeliverersSearchCtrl.$inject = [

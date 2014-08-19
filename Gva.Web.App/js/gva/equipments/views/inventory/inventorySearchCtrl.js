@@ -17,20 +17,15 @@
       return !item.bookPageNumber;
     });
 
-    $scope.edit = function (item) {
-      var state;
-
-      if (item.setPartAlias === 'equipmentOther') {
-        state = 'root.equipments.view.others.edit';
+    $scope.getState = function (setPartAlias) {
+      switch(setPartAlias) { 
+      case 'equipmentOther':
+        return 'root.equipments.view.others.edit';
+      case 'equipmentOwner':
+        return 'root.equipments.view.owners.edit';
+      case 'equipmentApplication':
+        return 'root.equipments.view.applications.edit';
       }
-      else if (item.setPartAlias === 'equipmentOwner') {
-        state = 'root.equipments.view.owners.edit';
-      }
-      else if (item.setPartAlias === 'equipmentApplication') {
-        state = 'root.equipments.view.applications.edit';
-      }
-
-      return $state.go(state, { ind: item.partIndex });
     };
   }
 

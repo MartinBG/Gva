@@ -9,7 +9,6 @@
     $filter,
     licences
   ) {
-    $scope.lotId = $stateParams.id;
     $scope.licences = licences;
     
     $scope.isInvalidLicence = function(item){

@@ -7,20 +7,7 @@
     $state,
     $stateParams,
     equipmentInspections) {
-
     $scope.equipmentInspections = equipmentInspections;
-
-    $scope.newInspection = function () {
-      return $state.go('root.equipments.view.inspections.new');
-    };
-
-    $scope.editInspection = function (inspection) {
-      return $state.go('root.equipments.view.inspections.edit', {
-        id: $stateParams.id,
-        ind: inspection.partIndex
-      });
-    };
-
   }
 
   EquipmentsInspectionsSearchCtrl.$inject = [

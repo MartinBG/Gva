@@ -1,7 +1,7 @@
-﻿<sc-button name="createBtn" btn-click="newApproval()" text="organizations.approvalSearch.newApproval" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+﻿<sc-button name="createBtn" btn-sref="{ state: 'root.organizations.view.approvals.new' }" text="organizations.approvalSearch.newApproval" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="organizationApprovals" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
-    <sc-button name="viewBtn" btn-click="viewAmendment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="viewBtn" btn-sref="{ state: 'root.organizations.view.approvals.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.approvalType.name" title="organizations.approvalSearch.approvalType">
   </sc-column>

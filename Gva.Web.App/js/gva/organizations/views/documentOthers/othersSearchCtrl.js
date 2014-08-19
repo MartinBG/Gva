@@ -9,18 +9,6 @@
     documentOthers
   ) {
     $scope.documentOthers = documentOthers;
-
-    $scope.editDocumentOther = function (documentOther) {
-      return $state.go('root.organizations.view.documentOthers.edit',
-        {
-          id: $stateParams.id,
-          ind: documentOther.partIndex
-        });
-    };
-
-    $scope.newDocumentOther = function () {
-      return $state.go('root.organizations.view.documentOthers.new');
-    };
   }
 
   OrganizationDocOthersSearchCtrl.$inject = [

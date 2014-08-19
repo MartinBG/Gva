@@ -1,7 +1,7 @@
-﻿<sc-button name="createBtn" btn-click="newStatus()" text="persons.statusSearch.newState" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+﻿<sc-button name="createBtn" btn-sref="{state: 'root.persons.view.statuses.new'}" text="persons.statusSearch.newState" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="statuses" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
-    <sc-button name="editBtn" btn-click="editStatus(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="editBtn" btn-sref="{state: 'root.persons.view.statuses.edit', params: {ind: item.partIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.personStatusType.name" title="persons.statusSearch.personStatusType" type="string">
   </sc-column>

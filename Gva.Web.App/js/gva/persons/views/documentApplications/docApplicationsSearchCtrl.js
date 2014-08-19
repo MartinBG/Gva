@@ -9,18 +9,6 @@
     personDocumentApplications
   ) {
     $scope.personDocumentApplications = personDocumentApplications;
-
-
-    $scope.editApplication = function (application) {
-      return $state.go('root.persons.view.documentApplications.edit', {
-        id: $stateParams.id,
-        ind: application.partIndex
-      });
-    };
-
-    $scope.newApplication = function () {
-      return $state.go('root.persons.view.documentApplications.new');
-    };
   }
 
   DocApplicationsSearchCtrl.$inject = [

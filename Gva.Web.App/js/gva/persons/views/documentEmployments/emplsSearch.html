@@ -1,7 +1,7 @@
-﻿<sc-button name="createBtn" btn-click="newDocumentEmployment()" text="persons.employmentSearch.newEmployment" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+﻿<sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.employments.new' }" text="persons.employmentSearch.newEmployment" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="employments" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
-    <sc-button name="editBtn" btn-click="editDocumentEmployment(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="editBtn" btn-sref="{ state: 'root.persons.view.employments.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.hiredate" title="persons.employmentSearch.hiredate" type="date">
   </sc-column>

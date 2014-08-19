@@ -8,20 +8,7 @@
     $stateParams,
     exams
   ) {
-
     $scope.exams = exams;
-
-    $scope.editExam = function (exam) {
-      return $state.go('root.persons.view.examASs.edit',
-        {
-          id: $stateParams.id,
-          ind: exam.partIndex
-        });
-    };
-
-    $scope.newExam = function () {
-      return $state.go('root.persons.view.examASs.new');
-    };
   }
 
   ExamsSearchCtrl.$inject = [

@@ -29,10 +29,6 @@
     $scope.newEquipment = function () {
       return $state.go('root.equipments.new');
     };
-
-    $scope.viewEquipment = function (equipment) {
-      return $state.go('root.equipments.view', { id: equipment.id });
-    };
   }
 
   EquipmentsSearchCtrl.$inject = [

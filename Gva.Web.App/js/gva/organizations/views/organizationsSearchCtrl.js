@@ -36,10 +36,6 @@
     $scope.newOrganization = function () {
       return $state.go('root.organizations.new');
     };
-
-    $scope.viewOrganization = function (organization) {
-      return $state.go('root.organizations.view', { id: organization.id });
-    };
   }
 
   OrganizationsSearchCtrl.$inject = [

@@ -9,17 +9,6 @@
     ratings
   ) {
     $scope.ratings = ratings;
-
-    $scope.viewEdition = function (rating) {
-      return $state.go('root.persons.view.ratings.edit', {
-        id: $stateParams.id,
-        ind: rating.partIndex
-      });
-    };
-
-    $scope.newRating = function () {
-      return $state.go('root.persons.view.ratings.new');
-    };
   }
 
   RatingsSearchCtrl.$inject = [

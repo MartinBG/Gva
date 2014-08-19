@@ -9,18 +9,6 @@
     documentOwners
   ) {
     $scope.documentOwners = documentOwners;
-
-    $scope.editDocumentOwner = function (documentOwner) {
-      return $state.go('root.airports.view.owners.edit',
-        {
-          id: $stateParams.id,
-          ind: documentOwner.partIndex
-        });
-    };
-
-    $scope.newDocumentOwner = function () {
-      return $state.go('root.airports.view.owners.new');
-    };
   }
 
   AirportOwnersSearchCtrl.$inject = [

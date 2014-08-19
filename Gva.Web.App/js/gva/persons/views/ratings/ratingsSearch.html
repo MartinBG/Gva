@@ -1,8 +1,8 @@
 ﻿<div>
-  <sc-button name="createBtn" btn-click="newRating()" text="persons.ratingSearch.newRating" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+  <sc-button name="createBtn" btn-sref="{state: 'root.persons.view.ratings.new'}" text="persons.ratingSearch.newRating" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
   <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="viewBtn" btn-click="viewEdition(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="viewBtn" btn-sref="{state: 'root.persons.view.ratings.edit', params: {ind: item.partIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column data="part.personRatingLevel.name || part.ratingType.name" title="persons.ratingSearch.ratingTypeOrRatingLevel">
     </sc-column>

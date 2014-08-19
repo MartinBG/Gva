@@ -9,18 +9,6 @@
     trainings
   ) {
     $scope.documentTrainings = trainings;
-
-    $scope.editDocumentTraining = function (documentTraining) {
-      return $state.go('root.persons.view.documentTrainings.edit',
-        {
-          id: $stateParams.id,
-          ind: documentTraining.partIndex
-        });
-    };
-
-    $scope.newDocumentTraining = function () {
-      return $state.go('root.persons.view.documentTrainings.new');
-    };
   }
 
   DocumentTrainingsSearchCtrl.$inject = [

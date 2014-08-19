@@ -8,19 +8,7 @@
     $stateParams,
     organizationAuditplans
   ) {
-
     $scope.organizationAuditplans = organizationAuditplans;
-
-    $scope.editAuditplan = function (address) {
-      return $state.go('root.organizations.view.auditplans.edit', {
-        id: $stateParams.id,
-        ind: address.partIndex
-      });
-    };
-
-    $scope.newAuditplan = function () {
-      return $state.go('root.organizations.view.auditplans.new');
-    };
   }
 
   AuditplansSearchCtrl.$inject = [

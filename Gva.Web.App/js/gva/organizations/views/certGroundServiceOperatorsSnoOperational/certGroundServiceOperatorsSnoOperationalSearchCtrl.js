@@ -8,20 +8,8 @@
     $stateParams,
     organizationCertGroundServiceOperatorsSnoOperational
   ) {
-
     $scope.certGroundServiceOperatorsSnoOperational =
       organizationCertGroundServiceOperatorsSnoOperational;
-
-    $scope.editCertGroundServiceOperatorSnoOperational = function (cert) {
-      return $state.go('root.organizations.view.groundServiceOperatorsSnoOperational.edit', {
-        id: $stateParams.id,
-        ind: cert.partIndex
-      });
-    };
-
-    $scope.newCertGroundServiceOperatorSnoOperational = function () {
-      return $state.go('root.organizations.view.groundServiceOperatorsSnoOperational.new');
-    };
   }
 
   CertGroundServiceOperatorsSnoOperationalSearchCtrl.$inject = [

@@ -14,7 +14,7 @@
 
   <sc-datatable items="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="viewButton" btn-click="viewPerson(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.id }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column data="lin" title="persons.search.lin">
     </sc-column>

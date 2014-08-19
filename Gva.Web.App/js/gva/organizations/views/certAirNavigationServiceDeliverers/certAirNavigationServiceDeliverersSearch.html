@@ -1,7 +1,7 @@
-﻿<sc-button name="createBtn" btn-click="newCertAirNavigationServiceDeliverer()" text="organizations.certAirNavigationServiceDelivererSearch.newCertAirNavigationServiceDeliverer" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+﻿<sc-button name="createBtn" btn-sref="{ state: 'root.organizations.view.certAirNavigationServiceDeliverers.new' }" text="organizations.certAirNavigationServiceDelivererSearch.newCertAirNavigationServiceDeliverer" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="certAirNavigationServiceDeliverers" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
-    <sc-button name="editBtn" btn-click="editCertAirNavigationServiceDeliverer(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="editBtn" btn-sref="{ state: 'root.organizations.view.certAirNavigationServiceDeliverers.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.certNumber" title="organizations.certAirNavigationServiceDelivererSearch.certNumber">
   </sc-column>

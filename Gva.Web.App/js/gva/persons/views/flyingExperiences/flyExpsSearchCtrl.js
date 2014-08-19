@@ -9,17 +9,6 @@
     flyingExperiences
   ) {
     $scope.flyingExperiences = flyingExperiences;
-
-    $scope.editFlyingExperience = function (flyingExperience) {
-      return $state.go(
-        'root.persons.view.flyingExperiences.edit',
-        { id: $stateParams.id, ind: flyingExperience.partIndex }
-      );
-    };
-
-    $scope.newFlyingExperience = function () {
-      return $state.go('root.persons.view.flyingExperiences.new');
-    };
   }
 
   FlyingExperiencesSearchCtrl.$inject = [

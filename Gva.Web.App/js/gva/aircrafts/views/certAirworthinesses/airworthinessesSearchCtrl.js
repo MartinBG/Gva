@@ -9,16 +9,6 @@
     aws
   ) {
     $scope.aws = aws;
-    $scope.editCertAirworthiness = function (aw) {
-      return $state.go('root.aircrafts.view.airworthinesses.edit', {
-        id: $stateParams.id,
-        ind: aw.partIndex
-      });
-    };
-
-    $scope.newCertAirworthiness = function () {
-      return $state.go('root.aircrafts.view.airworthinesses.new');
-    };
   }
 
   CertAirworthinessesSearchCtrl.$inject = [

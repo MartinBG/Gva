@@ -13,7 +13,7 @@
 
   <sc-datatable items="organizations" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="viewButton" btn-click="viewOrganization(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="viewButton" btn-sref="{state: 'root.organizations.view', params: { id: item.id }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
       <sc-column data="name" title="organizations.search.name">
     </sc-column>

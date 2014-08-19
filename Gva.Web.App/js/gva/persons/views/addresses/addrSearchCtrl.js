@@ -8,19 +8,7 @@
     $stateParams,
     addresses
   ) {
-
     $scope.addresses = addresses;
-
-    $scope.editAddress = function (address) {
-      return $state.go('root.persons.view.addresses.edit', {
-        id: $stateParams.id,
-        ind: address.partIndex
-      });
-    };
-
-    $scope.newAddress = function () {
-      return $state.go('root.persons.view.addresses.new');
-    };
   }
 
   AddressesSearchCtrl.$inject = [

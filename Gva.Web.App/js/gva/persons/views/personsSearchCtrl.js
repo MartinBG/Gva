@@ -37,9 +37,6 @@
       return $state.go('root.persons.new');
     };
 
-    $scope.viewPerson = function (person) {
-      return $state.go('root.persons.view.licences.search', { id: person.id });
-    };
   }
 
   PersonsSearchCtrl.$inject = [

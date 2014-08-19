@@ -15,18 +15,6 @@
     $scope.showNewButton = _.filter(regs, function (reg) {
       return reg.part.isActive;
     }).length < 1;
-
-
-    $scope.editCertReg = function (reg) {
-      return $state.go('root.aircrafts.view.regsFM.edit', {
-        id: $stateParams.id,
-        ind: reg.partIndex
-      });
-    };
-
-    $scope.newCertReg = function () {
-      return $state.go('root.aircrafts.view.regsFM.newWizzard');
-    };
   }
 
   CertRegsFMSearchCtrl.$inject = [
