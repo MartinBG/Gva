@@ -119,6 +119,8 @@
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRegistrationFMDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftDataDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationAuditplanDO.cs" />
     <Compile Include="Controllers\Organizations\OrganizationAuditplansController.cs" />
@@ -259,7 +261,7 @@
     <Compile Include="Projections\Inventory\Airports\AirportApplicationProjection.cs" />
     <Compile Include="Projections\Inventory\Airports\AirportOtherProjection.cs" />
     <Compile Include="Projections\Inventory\Airports\AirportOwnerProjection.cs" />
-    <Compile Include="Controllers\AircraftsController.cs" />
+    <Compile Include="Controllers\Aircrafts\AircraftsController.cs" />
     <Compile Include="ModelsDO\ApplicationListDO.cs" />
     <Compile Include="ModelsDO\ApplicationNomDO.cs" />
     <Compile Include="ModelsDO\ApplicationDO.cs" />
@@ -276,7 +278,7 @@
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentViewDO.cs" />
     <Compile Include="ModelsDO\OrganizationDO.cs" />
-    <Compile Include="ModelsDO\AircraftDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftViewDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />
     <Compile Include="ModelsDO\InventoryItemDO.cs" />

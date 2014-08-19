@@ -39,7 +39,7 @@ namespace Gva.Api.ModelsDO
         public int LotSetId { get; set; }
         public PersonViewDO Person { get; set; }
         public OrganizationDO Organization { get; set; }
-        public AircraftDO Aircraft { get; set; }
+        public AircraftViewDO Aircraft { get; set; }
         public AirportViewDO Airport { get; set; }
         public EquipmentViewDO Equipment { get; set; }
 

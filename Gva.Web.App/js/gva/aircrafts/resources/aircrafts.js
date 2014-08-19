@@ -15,6 +15,10 @@
       'checkMSN': {
         method: 'GET',
         url: 'api/aircrafts/checkMSN'
+      },
+      newAircraft: {
+        method: 'GET',
+        url: 'api/aircrafts/new'
       }
     });
   }]);

@@ -6,7 +6,7 @@
     return $resource('api/aircrafts/:id/aircraftCertRegistrationsFM/:ind', {}, {
       'newCertRegistrationFM': {
         method: 'GET',
-        url: 'api/aircrafts/:id/aircraftCertRegistrations/new'
+        url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/new'
       },
       'getView': {
         method: 'GET',

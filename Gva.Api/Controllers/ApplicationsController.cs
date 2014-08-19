@@ -159,7 +159,7 @@ namespace Gva.Api.Controllers
             }
             else if (set.Alias == "Aircraft")
             {
-                returnValue.Aircraft = new AircraftDO(this.aircraftRepository.GetAircraft(application.LotId));
+                returnValue.Aircraft = new AircraftViewDO(this.aircraftRepository.GetAircraft(application.LotId));
             }
             else if (set.Alias == "Airport")
             {

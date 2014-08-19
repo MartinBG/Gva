@@ -3,13 +3,13 @@ using Gva.Api.Models.Views.Aircraft;
 
 namespace Gva.Api.ModelsDO
 {
-    public class AircraftDO
+    public class AircraftViewDO
     {
-        public AircraftDO()
+        public AircraftViewDO()
         {
         }
 
-        public AircraftDO(GvaViewAircraft aircraftData)
+        public AircraftViewDO(GvaViewAircraft aircraftData)
         {
             this.Id = aircraftData.LotId;
             this.ManSN = aircraftData.ManSN;

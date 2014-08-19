@@ -18,12 +18,14 @@ using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Common.Filters;
+using Gva.Api.ModelsDO.Aircrafts;
 
 namespace Gva.Api.Controllers
 {
     [RoutePrefix("api/aircrafts")]
     [Authorize]
-    public class AircraftsController : GvaLotsController
+    public class AircraftsController : ApiController
     {
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
@@ -47,7 +49,6 @@ namespace Gva.Api.Controllers
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base(applicationRepository, lotRepository, fileRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -66,7 +67,7 @@ namespace Gva.Api.Controllers
         {
             var aircrafts = this.aircraftRepository.GetAircrafts(mark: mark, manSN: manSN, model: model, icao: icao, airCategory: airCategory, aircraftProducer: aircraftProducer, exact: exact);
 
-            return Ok(aircrafts.Select(a => new AircraftDO(a)));
+            return Ok(aircrafts.Select(a => new AircraftViewDO(a)));
         }
 
         [Route("{lotId}")]
@@ -74,18 +75,18 @@ namespace Gva.Api.Controllers
         {
             var aircraft = this.aircraftRepository.GetAircraft(lotId);
 
-            return Ok(new AircraftDO(aircraft));
+            return Ok(new AircraftViewDO(aircraft));
         }
 
         [Route("")]
-        public IHttpActionResult PostAircraft(JObject aircraft)
+        public IHttpActionResult PostAircraft(AircraftDO aircraft)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
                 var newLot = this.lotRepository.CreateLot("Aircraft", userContext);
 
-                newLot.CreatePart("aircraftData", aircraft.Get<JObject>("aircraftData"), userContext);
+                newLot.CreatePart("aircraftData", JObject.FromObject(aircraft.AircraftData), userContext);
                 int aircraftCaseTypeId = this.caseTypeRepository.GetCaseTypesForSet("Aircraft").Single().GvaCaseTypeId;
                 this.caseTypeRepository.AddCaseTypes(newLot, new int[] { aircraftCaseTypeId });
                 newLot.Commit(userContext, lotEventDispatcher);
@@ -155,15 +156,35 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftData$)}")]
-        public override IHttpActionResult GetPart(int lotId, string path)
+        [Validate]
+        public IHttpActionResult GetAircraftData(int lotId)
         {
-            return base.GetPart(lotId, path);
+            var aircraft = this.lotRepository.GetLotIndex(lotId);
+
+            var aircraftDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart("aircraftData");
+
+            return Ok(aircraftDataPart.Content.ToObject<AircraftDataDO>());
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftData$)}")]
-        public IHttpActionResult PostAircraftData(int lotId, string path, JObject content)
+        [Validate]
+        public IHttpActionResult PostAircraftData(int lotId, AircraftDataDO aircraftData)
         {
-            return base.PostPart(lotId, path, content);
+            UserContext userContext = this.Request.GetUserContext();
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            PartVersion partVersion = lot.UpdatePart("aircraftData", JObject.FromObject(aircraftData), userContext);
+
+            lot.Commit(userContext, lotEventDispatcher);
+
+            this.unitOfWork.Save();
+
+            return Ok();
+        }
+
+        [Route("new")]
+        public IHttpActionResult GetNewAircraft()
+        {
+            return Ok(new AircraftDO());
         }
     }
 }
