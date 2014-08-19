@@ -14,17 +14,6 @@
       $state.go('root.aircrafts.view.maintenances.search', {
       });
     };
-
-    $scope.newMaintenance = function () {
-      return $state.go('root.aircrafts.view.maintenances.new');
-    };
-
-    $scope.editMaintenance = function (maintenance) {
-      return $state.go('root.aircrafts.view.maintenances.edit', {
-        id: $stateParams.id,
-        ind: maintenance.partIndex
-      });
-    };
   }
 
   MaintenancesSearchCtrl.$inject = [

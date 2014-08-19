@@ -9,18 +9,6 @@
     certOpers
   ) {
     $scope.certOpers = certOpers;
-
-    $scope.editCertOper = function (certOper) {
-      return $state.go('root.equipments.view.opers.edit',
-        {
-          id: $stateParams.id,
-          ind: certOper.partIndex
-        });
-    };
-
-    $scope.newCertOper = function () {
-      return $state.go('root.equipments.view.opers.new');
-    };
   }
 
   EquipmentOpersSearchCtrl.$inject = [

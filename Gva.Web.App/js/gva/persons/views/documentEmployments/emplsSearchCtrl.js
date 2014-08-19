@@ -9,18 +9,6 @@
     empls
   ) {
     $scope.employments = empls;
-
-    $scope.editDocumentEmployment = function (employment) {
-      return $state.go('root.persons.view.employments.edit',
-        {
-          id: $stateParams.id,
-          ind: employment.partIndex
-        });
-    };
-
-    $scope.newDocumentEmployment = function () {
-      return $state.go('root.persons.view.employments.new');
-    };
   }
 
   DocumentEmploymentsSearchCtrl.$inject = [

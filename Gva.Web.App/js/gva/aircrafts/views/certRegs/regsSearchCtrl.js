@@ -10,17 +10,6 @@
     regs
   ) {
     $scope.regs = regs;
-
-    $scope.editCertReg = function (reg) {
-      return $state.go('root.aircrafts.view.regs.edit', {
-        id: $stateParams.id,
-        ind: reg.partIndex
-      });
-    };
-
-    $scope.newCertReg = function () {
-      return $state.go('root.aircrafts.view.regs.new');
-    };
   }
 
   CertRegsSearchCtrl.$inject = [

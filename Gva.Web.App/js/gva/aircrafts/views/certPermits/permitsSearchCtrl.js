@@ -9,17 +9,6 @@
     permits
   ) {
     $scope.permits = permits;
-
-    $scope.editCertPermit = function (permit) {
-      return $state.go('root.aircrafts.view.permits.edit', {
-        id: $stateParams.id,
-        ind: permit.partIndex
-      });
-    };
-
-    $scope.newCertPermit = function () {
-      return $state.go('root.aircrafts.view.permits.new');
-    };
   }
 
   CertPermitsToFlySearchCtrl.$inject = [

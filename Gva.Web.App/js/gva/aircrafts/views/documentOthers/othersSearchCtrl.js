@@ -9,18 +9,6 @@
     documentOthers
   ) {
     $scope.documentOthers = documentOthers;
-
-    $scope.editDocumentOther = function (documentOther) {
-      return $state.go('root.aircrafts.view.others.edit',
-        {
-          id: $stateParams.id,
-          ind: documentOther.partIndex
-        });
-    };
-
-    $scope.newDocumentOther = function () {
-      return $state.go('root.aircrafts.view.others.new');
-    };
   }
 
   AircraftOthersSearchCtrl.$inject = [

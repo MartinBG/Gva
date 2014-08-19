@@ -8,19 +8,7 @@
     $stateParams,
     organizationStaffExaminers
   ) {
-
     $scope.organizationStaffExaminers = organizationStaffExaminers;
-
-    $scope.editStaffChecker = function (staffExaminer) {
-      return $state.go('root.organizations.view.staffExaminers.edit', {
-        id: $stateParams.id,
-        ind: staffExaminer.partIndex
-      });
-    };
-
-    $scope.newStaffExaminer = function () {
-      return $state.go('root.organizations.view.staffExaminers.new');
-    };
   }
 
   StaffExaminersSearchCtrl.$inject = [

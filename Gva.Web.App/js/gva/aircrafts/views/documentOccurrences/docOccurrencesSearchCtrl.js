@@ -7,24 +7,7 @@
     $state,
     $stateParams,
     aircraftDocumentOccurrences) {
-
     $scope.aircraftDocumentOccurrences = aircraftDocumentOccurrences;
-
-    $scope.search = function () {
-      $state.go('root.aircrafts.view.occurrences.search', {
-      });
-    };
-
-    $scope.newOccurrence = function () {
-      return $state.go('root.aircrafts.view.occurrences.new');
-    };
-
-    $scope.editOccurrence = function (occurrence) {
-      return $state.go('root.aircrafts.view.occurrences.edit', {
-        id: $stateParams.id,
-        ind: occurrence.partIndex
-      });
-    };
   }
 
   DocOccurrencesSearchCtrl.$inject = [

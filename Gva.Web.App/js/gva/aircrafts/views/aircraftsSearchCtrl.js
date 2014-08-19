@@ -35,10 +35,6 @@
     $scope.newAircraft = function () {
       return $state.go('root.aircrafts.newWizzard');
     };
-
-    $scope.viewAircraft = function (aircraft) {
-      return $state.go('root.aircrafts.view', { id: aircraft.id });
-    };
   }
 
   AircraftsSearchCtrl.$inject = [

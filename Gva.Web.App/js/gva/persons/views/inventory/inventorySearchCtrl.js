@@ -17,35 +17,25 @@
        return !item.bookPageNumber;
     });
 
-    $scope.edit = function (item) {
-      var state;
-
-      if (item.setPartAlias === 'personEducation') {
-        state = 'root.persons.view.documentEducations.edit';
+    $scope.getState = function (setPartAlias) {
+      switch(setPartAlias) { 
+      case 'personEducation':
+        return 'root.persons.view.documentEducations.edit';
+      case 'personDocumentId':
+        return 'root.persons.view.documentIds.edit';
+      case 'personTraining':
+        return 'root.persons.view.documentTrainings.edit';
+      case  'personMedical':
+        return 'root.persons.view.medicals.edit';
+      case 'personCheck':
+        return 'root.persons.view.checks.edit';
+      case 'personOther':
+        return 'root.persons.view.documentOthers.edit';
+      case 'personApplication':
+        return 'root.persons.view.documentApplications.edit';
+      case 'personEmployment':
+        return 'root.persons.view.employments.edit';
       }
-      else if (item.setPartAlias === 'personDocumentId') {
-        state = 'root.persons.view.documentIds.edit';
-      }
-      else if (item.setPartAlias === 'personTraining') {
-        state = 'root.persons.view.documentTrainings.edit';
-      }
-      else if (item.setPartAlias === 'personMedical') {
-        state = 'root.persons.view.medicals.edit';
-      }
-      else if (item.setPartAlias === 'personCheck') {
-        state = 'root.persons.view.checks.edit';
-      }
-      else if (item.setPartAlias === 'personOther') {
-        state = 'root.persons.view.documentOthers.edit';
-      }
-      else if (item.setPartAlias === 'personApplication') {
-        state = 'root.persons.view.documentApplications.edit';
-      }
-      else if (item.setPartAlias === 'personEmployment') {
-        state = 'root.persons.view.employments.edit';
-      }
-
-      return $state.go(state, { ind: item.partIndex });
     };
   }
 

@@ -9,18 +9,6 @@
     airportDocumentApplications
   ) {
     $scope.airportDocumentApplications = airportDocumentApplications;
-
-
-    $scope.editApplication = function (application) {
-      return $state.go('root.airports.view.applications.edit', {
-        id: $stateParams.id,
-        ind: application.partIndex
-      });
-    };
-
-    $scope.newApplication = function () {
-      return $state.go('root.airports.view.applications.new');
-    };
   }
 
   AirportApplicationsSearchCtrl.$inject = [

@@ -16,21 +16,16 @@
     $scope.notIndexed =  _.filter(inventory, function(item) {
        return !item.bookPageNumber;
     });
-
-    $scope.edit = function (item) {
-      var state;
-
-      if (item.setPartAlias === 'airportOther') {
-        state = 'root.airports.view.others.edit';
+    
+    $scope.getState = function (setPartAlias) {
+      switch(setPartAlias) { 
+      case 'airportOther':
+        return 'root.airports.view.others.edit';
+      case 'airportOwner':
+        return 'root.airports.view.owners.edit';
+      case 'airportApplication':
+        return 'root.airports.view.applications.edit';
       }
-      else if (item.setPartAlias === 'airportOwner') {
-        state = 'root.airports.view.owners.edit';
-      }
-      else if (item.setPartAlias === 'airportApplication') {
-        state = 'root.airports.view.applications.edit';
-      }
-
-      return $state.go(state, { ind: item.partIndex });
     };
   }
 

@@ -17,17 +17,13 @@
        return !item.bookPageNumber;
     });
 
-    $scope.edit = function (item) {
-      var state;
-
-      if (item.setPartAlias === 'organizationOther') {
-        state = 'root.organizations.view.documentOthers.edit';
+    $scope.getState = function (setPartAlias) {
+      switch(setPartAlias) { 
+      case 'organizationOther':
+        return 'root.organizations.view.documentOthers.edit';
+      case 'organizationApplication':
+        return 'root.organizations.view.documentApplications.edit';
       }
-      else if (item.setPartAlias === 'organizationApplication') {
-        state = 'root.organizations.view.documentApplications.edit';
-      }
-
-      return $state.go(state, { ind: item.partIndex });
     };
   }
 

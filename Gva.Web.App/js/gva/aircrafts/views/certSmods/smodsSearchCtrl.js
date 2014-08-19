@@ -9,17 +9,6 @@
     smods
   ) {
     $scope.smods = smods;
-
-    $scope.editCertSmod = function (smod) {
-      return $state.go('root.aircrafts.view.smods.edit', {
-        id: $stateParams.id,
-        ind: smod.partIndex
-      });
-    };
-
-    $scope.newCertSmod = function () {
-      return $state.go('root.aircrafts.view.smods.new');
-    };
   }
 
   CertSmodsSearchCtrl.$inject = [

@@ -8,19 +8,7 @@
     $stateParams,
     organizationApprovals
   ) {
-
     $scope.organizationApprovals = organizationApprovals;
-
-    $scope.viewAmendment = function (item) {
-      return $state.go('root.organizations.view.approvals.edit', {
-        id: $stateParams.id,
-        ind: item.partIndex
-      });
-    };
-
-    $scope.newApproval = function () {
-      return $state.go('root.organizations.view.approvals.new');
-    };
   }
 
   ApprovalsSearchCtrl.$inject = [

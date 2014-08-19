@@ -9,18 +9,6 @@
     parts
   ) {
     $scope.parts = parts;
-
-    $scope.editPart = function (part) {
-      return $state.go('root.aircrafts.view.parts.edit',
-        {
-          id: $stateParams.id,
-          ind: part.partIndex
-        });
-    };
-
-    $scope.newPart = function () {
-      return $state.go('root.aircrafts.view.parts.new');
-    };
   }
 
   PartsSearchCtrl.$inject = [

@@ -38,18 +38,6 @@
         inspectorName: inspectorName
       };
     });
-
-
-    $scope.editCertAirworthiness = function (aw) {
-      return $state.go('root.aircrafts.view.airworthinessesFM.edit', {
-        id: $stateParams.id,
-        ind: aw.partIndex
-      });
-    };
-
-    $scope.newCertAirworthiness = function () {
-      return $state.go('root.aircrafts.view.airworthinessesFM.new');
-    };
   }
 
   CertAirworthinessesFMSearchCtrl.$inject = [

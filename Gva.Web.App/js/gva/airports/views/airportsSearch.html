@@ -9,7 +9,7 @@
 
   <sc-datatable items="airports" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="viewButton" btn-click="viewAirport(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="viewButton" btn-sref="{state: 'root.airports.view', params: { id: item.id }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column data="airportType" title="airports.search.airportType">
     </sc-column>

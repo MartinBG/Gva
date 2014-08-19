@@ -9,17 +9,6 @@
     radios
   ) {
     $scope.radios = radios;
-
-    $scope.editCertRadio = function (radio) {
-      return $state.go('root.aircrafts.view.radios.edit', {
-        id: $stateParams.id,
-        ind: radio.partIndex
-      });
-    };
-
-    $scope.newCertRadio = function () {
-      return $state.go('root.aircrafts.view.radios.new');
-    };
   }
 
   CertRadiosSearchCtrl.$inject = [

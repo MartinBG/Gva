@@ -10,17 +10,6 @@
     debts
   ) {
     $scope.debts = debts;
-
-    $scope.editDocumentDebt = function (debt) {
-      return $state.go('root.aircrafts.view.debtsFM.edit', {
-        id: $stateParams.id,
-        ind: debt.partIndex
-      });
-    };
-
-    $scope.newDocumentDebt = function () {
-      return $state.go('root.aircrafts.view.debtsFM.new');
-    };
   }
 
   DocDebtsFMSearchCtrl.$inject = [

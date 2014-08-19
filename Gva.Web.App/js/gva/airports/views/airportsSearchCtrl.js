@@ -31,10 +31,6 @@
     $scope.newAirport = function () {
       return $state.go('root.airports.new');
     };
-
-    $scope.viewAirport = function (airport) {
-      return $state.go('root.airports.view', { id: airport.id });
-    };
   }
 
   AirportsSearchCtrl.$inject = [

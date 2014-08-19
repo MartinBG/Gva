@@ -9,18 +9,6 @@
     docIds
   ) {
     $scope.documentIds = docIds;
-
-    $scope.editDocumentId = function (documentId) {
-      return $state.go('root.persons.view.documentIds.edit',
-        {
-          id: $stateParams.id,
-          ind: documentId.partIndex
-        });
-    };
-
-    $scope.newDocumentId = function () {
-      return $state.go('root.persons.view.documentIds.new');
-    };
   }
 
   DocumentIdsSearchCtrl.$inject = [

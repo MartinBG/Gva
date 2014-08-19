@@ -9,17 +9,6 @@
     statuses
   ) {
     $scope.statuses = statuses;
-
-    $scope.editStatus = function (status) {
-      return $state.go('root.persons.view.statuses.edit', {
-        id: $stateParams.id,
-        ind: status.partIndex
-      });
-    };
-
-    $scope.newStatus = function () {
-      return $state.go('root.persons.view.statuses.new');
-    };
   }
 
   StatusesSearchCtrl.$inject = [

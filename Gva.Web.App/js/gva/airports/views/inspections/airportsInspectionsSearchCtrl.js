@@ -7,20 +7,7 @@
     $state,
     $stateParams,
     airportInspections) {
-
     $scope.airportInspections = airportInspections;
-
-    $scope.newInspection = function () {
-      return $state.go('root.airports.view.inspections.new');
-    };
-
-    $scope.editInspection = function (inspection) {
-      return $state.go('root.airports.view.inspections.edit', {
-        id: $stateParams.id,
-        ind: inspection.partIndex
-      });
-    };
-
   }
 
   AirportsInspectionsSearchCtrl.$inject = [

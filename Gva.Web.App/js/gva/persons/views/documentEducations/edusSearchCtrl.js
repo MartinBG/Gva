@@ -9,18 +9,6 @@
     edus
     ) {
     $scope.documentEducations = edus;
-
-    $scope.editDocumentEducation = function (documentEducation) {
-      return $state.go('root.persons.view.documentEducations.edit',
-        {
-          id: $stateParams.id,
-          ind: documentEducation.partIndex
-        });
-    };
-
-    $scope.newDocumentEducation = function () {
-      return $state.go('root.persons.view.documentEducations.new');
-    };
   }
 
   DocumentEducationsSearchCtrl.$inject = [

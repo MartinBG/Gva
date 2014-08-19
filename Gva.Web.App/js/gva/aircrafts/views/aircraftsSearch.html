@@ -12,7 +12,7 @@
 
   <sc-datatable items="aircrafts" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="viewButton" btn-click="viewAircraft(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="viewButton" btn-sref="{state: 'root.aircrafts.view', params: { id: item.id }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column data="mark" title="aircrafts.search.mark">
     </sc-column>
