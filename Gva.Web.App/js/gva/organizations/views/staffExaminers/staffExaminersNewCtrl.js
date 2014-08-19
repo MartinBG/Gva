@@ -39,13 +39,15 @@
   ];
 
   StaffExaminersNewCtrl.$resolve = {
-    organizationStaffExaminer: function () {
-      return { 
-        part: {
-          approvedAircrafts: []
-        }
-      };
-    }
+    organizationStaffExaminer: [
+      '$stateParams',
+      'OrganizationStaffExaminers',
+      function ($stateParams, OrganizationStaffExaminers) {
+        return OrganizationStaffExaminers.newStaffExaminer({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('StaffExaminersNewCtrl', StaffExaminersNewCtrl);

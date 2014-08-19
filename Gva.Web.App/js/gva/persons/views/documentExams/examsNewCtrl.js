@@ -40,12 +40,16 @@
   ];
 
   DocumentExamsNewCtrl.$resolve = {
-    exam: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    exam: [
+      '$stateParams',
+      'PersonDocumentExams',
+      function ($stateParams, PersonDocumentExams) {
+        return PersonDocumentExams.newExam({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('DocumentExamsNewCtrl', DocumentExamsNewCtrl);

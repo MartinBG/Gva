@@ -40,20 +40,13 @@
 
   AirportOwnersNewCtrl.$resolve = {
     airportDocumentOwner: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'AirportDocumentOwners',
+      function ($stateParams, AirportDocumentOwners) {
+        return AirportDocumentOwners.newOwner({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

@@ -42,20 +42,13 @@
 
   DocumentEducationsNewCtrl.$resolve = {
     edu: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'PersonDocumentEducations',
+      function ($stateParams, PersonDocumentEducations) {
+        return PersonDocumentEducations.newEducation({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

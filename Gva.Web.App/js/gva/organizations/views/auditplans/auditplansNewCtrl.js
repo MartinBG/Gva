@@ -38,9 +38,15 @@
   ];
 
   AuditplansNewCtrl.$resolve = {
-    organizationAuditplan: function () {
-      return {};
-    }
+    organizationAuditplan: [
+      '$stateParams',
+      'OrganizationAuditplans',
+      function ($stateParams, OrganizationAuditplans) {
+        return OrganizationAuditplans.newAuditplan({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('AuditplansNewCtrl', AuditplansNewCtrl);

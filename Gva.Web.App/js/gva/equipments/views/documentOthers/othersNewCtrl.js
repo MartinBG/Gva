@@ -40,20 +40,13 @@
 
   EquipmentOthersNewCtrl.$resolve = {
     equipmentDocumentOther: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'EquipmentDocumentOthers',
+      function ($stateParams, EquipmentDocumentOthers) {
+        return EquipmentDocumentOthers.newDocument({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

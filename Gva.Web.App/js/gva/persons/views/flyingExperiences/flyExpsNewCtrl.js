@@ -39,9 +39,15 @@
   ];
 
   FlyingExperiencesNewCtrl.$resolve = {
-    personFlyingExperience: function () {
-      return {};
-    }
+    personFlyingExperience: [
+      '$stateParams',
+      'PersonFlyingExperiences',
+      function ($stateParams, PersonFlyingExperiences) {
+        return PersonFlyingExperiences.newFlyingExperience({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('FlyingExperiencesNewCtrl', FlyingExperiencesNewCtrl);

@@ -300,20 +300,20 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .SingleOrDefault(p => p.SetId == lotSetId);
         }
 
-        public ApplicationNomDO[] GetInitApplication(int? applicationId)
+        public ApplicationNomDO GetInitApplication(int? applicationId)
         {
             if (!applicationId.HasValue)
             {
-                return new ApplicationNomDO[] { };
+                return null;
             }
 
             GvaApplication nomApp = this.GetNomApplication((int)applicationId);
             if (nomApp != null && nomApp.GvaAppLotPart != null)
             {
-                return new ApplicationNomDO[] { new ApplicationNomDO(nomApp) };
+                return new ApplicationNomDO(nomApp);
             }
 
-            return new ApplicationNomDO[] { };
+            return null;
         }
     }
 }

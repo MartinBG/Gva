@@ -45,20 +45,14 @@
 
   DocumentMedicalsNewCtrl.$resolve = {
     med: [
+      '$stateParams',
       'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      'PersonDocumentMedicals',
+      function ($stateParams, application, PersonDocumentMedicals) {
+        return PersonDocumentMedicals.newMedical({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ],
     person: [

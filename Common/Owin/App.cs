@@ -21,6 +21,24 @@ namespace Common.Owin
 {
     public class App
     {
+        public static JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings()
+                {
+#if DEBUG
+                    Formatting = Formatting.Indented,
+#else
+                    Formatting = Formatting.None,
+#endif
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    NullValueHandling = NullValueHandling.Include,
+                    DefaultValueHandling = DefaultValueHandling.Include,
+                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    Converters = new List<JsonConverter>()
+                    {
+                        new StringEnumConverter { CamelCaseText = true }
+                    }
+                };
+
         public static void Configure(IAppBuilder app, IContainer container)
         {
             app.UseAutofacMiddleware(container);
@@ -67,29 +85,14 @@ namespace Common.Owin
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            config.Formatters.JsonFormatter.SerializerSettings =
-                new JsonSerializerSettings()
-                {
-#if DEBUG
-                    Formatting = Formatting.Indented,
-#else
-                    Formatting = Formatting.None,
-#endif
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    NullValueHandling = NullValueHandling.Include,
-                    DefaultValueHandling = DefaultValueHandling.Include,
-                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                    Converters = new List<JsonConverter>()
-                    {
-                        new StringEnumConverter { CamelCaseText = true }
-                    }
-                };
+            config.Formatters.JsonFormatter.SerializerSettings = JsonSerializerSettings;
+
+            JsonConvert.DefaultSettings = () => JsonSerializerSettings;
 
             config.Filters.Add(new NLogTraceFilter());
             config.Filters.Add(new NLogExceptionFilter());
 
-            config.MapHttpAttributeRoutes();
+            config.MapHttpAttributeRoutes(new CustomDirectRouteProvider());
 
             foreach (IWebApiConfig webApiConfig in container.Resolve<IEnumerable<IWebApiConfig>>())
             {

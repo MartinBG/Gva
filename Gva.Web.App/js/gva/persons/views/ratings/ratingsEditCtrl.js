@@ -25,9 +25,14 @@
     };
 
     $scope.newEdition = function () {
-      $scope.rating.part.editions.push({});
-
-      $scope.editMode = 'edit';
+      return PersonRatings.newRatingEdition({
+        id: $stateParams.id,
+        ind: $stateParams.ind,
+        appId: $stateParams.appId
+      }).$promise.then(function (edition) {
+        $scope.rating.part.editions.push(edition);
+        $scope.editMode = 'edit';
+      });
     };
 
     $scope.editLastEdition = function () {
@@ -65,9 +70,10 @@
 
             return PersonRatings
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.rating).$promise
-              .then(function () {
+              .then(function (rating) {
                 $scope.editMode = null;
-                originalRating = _.cloneDeep($scope.rating);
+                $scope.rating = rating;
+                originalRating = _.cloneDeep(rating);
               }, function () {
                 $scope.editMode = 'edit';
               });

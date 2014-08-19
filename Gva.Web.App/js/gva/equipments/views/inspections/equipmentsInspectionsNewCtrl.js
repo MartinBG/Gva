@@ -40,28 +40,13 @@
 
   EquipmentsInspectionsNewCtrl.$resolve = {
     equipmentInspection: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {
-              examiners: [],
-              auditDetails: [],
-              disparities: []
-            },
-            applications: [application]
-          };
-        }
-        else {
-          return {
-            part: {
-              examiners: [],
-              auditDetails: [],
-              disparities: []
-            },
-            files: []
-          };
-        }
+      '$stateParams',
+      'EquipmentInspections',
+      function ($stateParams, EquipmentInspections) {
+        return EquipmentInspections.newInspection({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

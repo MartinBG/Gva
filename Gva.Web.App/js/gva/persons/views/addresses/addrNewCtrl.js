@@ -39,9 +39,15 @@
   ];
 
   AddressesNewCtrl.$resolve = {
-    address: function () {
-      return {};
-    }
+    address: [
+      '$stateParams',
+      'PersonAddresses',
+      function ($stateParams, PersonAddresses) {
+        return PersonAddresses.newAddress({
+          id: $stateParams.id
+        });
+      }
+    ]
   };
 
   angular.module('gva').controller('AddressesNewCtrl', AddressesNewCtrl);

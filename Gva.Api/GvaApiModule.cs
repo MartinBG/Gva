@@ -1,6 +1,11 @@
 ﻿using Autofac;
 using Common.Data;
 using Gva.Api.Controllers;
+using Gva.Api.Controllers.Aircrafts;
+using Gva.Api.Controllers.Airports;
+using Gva.Api.Controllers.Equipments;
+using Gva.Api.Controllers.Organizations;
+using Gva.Api.Controllers.Persons;
 using Gva.Api.Models;
 using Gva.Api.Projections.Aircraft;
 using Gva.Api.Projections.Airport;
@@ -16,6 +21,7 @@ using Gva.Api.Projections.Person;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.FileRepository;
@@ -24,7 +30,6 @@ using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.PublisherRepository;
 using Gva.Api.Repositories.StageRepository;
-using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.WordTemplates;
 using Regs.Api.LotEvents;
 
@@ -108,13 +113,74 @@ namespace Gva.Api
             moduleBuilder.RegisterType<StageRepository>().As<IStageRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ApplicationStageRepository>().As<IApplicationStageRepository>().InstancePerLifetimeScope();
 
+            //Person controllers
+            moduleBuilder.RegisterType<PersonsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonAddressesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonApplicationsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonChecksController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonDocumentExamsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonDocumentIdsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonDocumentOthersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonEducationsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonEmploymentsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonExamsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonFlyingExperiencesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonLicencesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonMedicalsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonRatingsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonStatusesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonTrainingsController>().InstancePerLifetimeScope();
+
+            //Equipment controllers
+            moduleBuilder.RegisterType<EquipmentsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<EquipmentApplicationsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<EquipmentCertOperationalsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<EquipmentDocumentOthersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<EquipmentInspectionsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<EquipmentOwnersController>().InstancePerLifetimeScope();
+
+            //Airport controllers
+            moduleBuilder.RegisterType<AirportsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AirportApplicationsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AirportCertOperationalsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AirportDocumentOthersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AirportInspectionsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AirportOwnersController>().InstancePerLifetimeScope();
+
+            //Organization controllers
+            moduleBuilder.RegisterType<OrganizationAddressesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationApplicationsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationAuditplansController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationDocumentOthersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationInspectionsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationStaffExaminersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationStaffManagementController>().InstancePerLifetimeScope();
+
+            //Aircraft controllers
+            moduleBuilder.RegisterType<AircraftsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftRadiosController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftNoisesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftPermitsToFlyController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftSmodsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftMarksController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftDocumentOthersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftMaintenanceController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftPartsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftDocumentOwnersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftDocumentOccurrencesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftDocumentApplicationsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftCertAirworthinessesFMController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftCertAirworthinessesController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftDocumentDebtsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftDocumentDebtsFMController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftCertRegistrationsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftCertRegistrationsFMController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftInspectionsController>().InstancePerLifetimeScope();
+
+
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaLotsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AirportsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<EquipmentsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaNomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaSuggestionController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationsController>().InstancePerLifetimeScope();

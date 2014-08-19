@@ -42,12 +42,16 @@
   ];
 
   NewTrainingModalCtrl.$resolve = {
-    personDocumentTraining: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    personDocumentTraining: [
+      'PersonDocumentTrainings',
+      'scModalParams',
+      function (PersonDocumentTrainings, scModalParams) {
+        return PersonDocumentTrainings.newTraining({
+          id: scModalParams.id,
+          appId: scModalParams.appId
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('NewTrainingModalCtrl', NewTrainingModalCtrl);

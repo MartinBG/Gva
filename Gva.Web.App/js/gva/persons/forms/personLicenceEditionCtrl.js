@@ -88,7 +88,10 @@
     }
     
     $scope.addRating = function () {
-      var modalInstance = scModal.open('newRating', { lotId: scFormParams.lotId });
+      var modalInstance = scModal.open('newRating', {
+        lotId: scFormParams.lotId,
+        appId: scFormParams.appId
+      });
 
       modalInstance.result.then(function (newRating) {
         $scope.includedRatings.push(newRating);
@@ -122,7 +125,8 @@
     $scope.addTraining = function () {
       var modalInstance = scModal.open('newTraining', {
         lotId: scFormParams.lotId,
-        caseTypeId: scFormParams.caseTypeId
+        caseTypeId: scFormParams.caseTypeId,
+        appId: scFormParams.appId
       });
 
       modalInstance.result.then(function (newTraining) {
@@ -157,7 +161,8 @@
     $scope.addCheck = function () {
       var modalInstance = scModal.open('newCheck', {
         lotId: scFormParams.lotId,
-        caseTypeId: scFormParams.caseTypeId
+        caseTypeId: scFormParams.caseTypeId,
+        appId: scFormParams.appId
       });
 
       modalInstance.result.then(function (newCheck) {
@@ -192,7 +197,8 @@
     $scope.addMedical = function () {
       var modalInstance = scModal.open('newMedical', {
         person: $scope.person,
-        caseTypeId: scFormParams.caseTypeId
+        caseTypeId: scFormParams.caseTypeId,
+        appId: scFormParams.appId
       });
 
       modalInstance.result.then(function (newMedical) {

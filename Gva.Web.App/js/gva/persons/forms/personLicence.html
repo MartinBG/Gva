@@ -6,7 +6,7 @@
   <div ng-if="model.staffType">
     <div class="row">
       <sc-field type="nomenclature" alias="'licenceTypes'" ng-model="model.licenceType" ng-required="true" params="{staffTypeAlias: model.staffType.alias, fclCode: model.fcl.code}" l10n-text="persons.licenceDirective.licenceType" class="col-sm-3"></sc-field>
-      <sc-field type="text" ng-model="lastLicenceNumber" l10n-text="persons.licenceDirective.lastLicenceNumber" class="col-sm-4"></sc-field>
+      <sc-field type="text" ng-model="lastLicenceNumber" l10n-text="persons.licenceDirective.lastLicenceNumber" disabled class="col-sm-4"></sc-field>
     </div>
     <div class="row">
       <sc-field type="text" ng-model="model.licenceNumber" l10n-text="persons.licenceDirective.licenceNumber" class="col-sm-3"></sc-field>

@@ -18,6 +18,9 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Airports;
+using Gva.Api.ModelsDO.Equipments;
+using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -148,7 +151,7 @@ namespace Gva.Api.Controllers
 
             if (set.Alias == "Person")
             {
-                returnValue.Person = new PersonDO(this.personRepository.GetPerson(application.LotId));
+                returnValue.Person = new PersonViewDO(this.personRepository.GetPerson(application.LotId));
             }
             else if (set.Alias == "Organization")
             {
@@ -156,15 +159,15 @@ namespace Gva.Api.Controllers
             }
             else if (set.Alias == "Aircraft")
             {
-                returnValue.Aircraft = new AircraftDO(this.aircraftRepository.GetAircraft(application.LotId));
+                returnValue.Aircraft = new AircraftViewDO(this.aircraftRepository.GetAircraft(application.LotId));
             }
             else if (set.Alias == "Airport")
             {
-                returnValue.Airport = new AirportDO(this.airportRepository.GetAirport(application.LotId));
+                returnValue.Airport = new AirportViewDO(this.airportRepository.GetAirport(application.LotId));
             }
             else if (set.Alias == "Equipment")
             {
-                returnValue.Equipment = new EquipmentDO(this.equipmentRepository.GetEquipment(application.LotId));
+                returnValue.Equipment = new EquipmentViewDO(this.equipmentRepository.GetEquipment(application.LotId));
             }
 
             var appFilesAll = this.unitOfWork.DbContext.Set<GvaAppLotFile>()

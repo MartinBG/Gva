@@ -40,20 +40,13 @@
 
   AircraftsInspectionsNewCtrl.$resolve = {
     aircraftInspection: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            applications: [application]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'AircraftInspections',
+      function ($stateParams, AircraftInspections) {
+        return AircraftInspections.newInspection({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

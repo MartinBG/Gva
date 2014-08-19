@@ -71,15 +71,7 @@
       '$stateParams',
       'OrganizationDocumentApplications',
       function ($stateParams, OrganizationDocumentApplications) {
-        return OrganizationDocumentApplications.get($stateParams).$promise
-            .then(function (application) {
-          application.files = {
-            hideApplications: true,
-            files: application.files
-          };
-
-          return application;
-        });
+        return OrganizationDocumentApplications.get($stateParams).$promise;
       }
     ]
   };

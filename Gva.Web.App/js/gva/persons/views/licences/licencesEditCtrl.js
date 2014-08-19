@@ -16,6 +16,7 @@
     $scope.editMode = null;
     $scope.lotId = $stateParams.id;
     $scope.caseTypeId = $stateParams.caseTypeId;
+    $scope.appId = $stateParams.appId;
 
     $scope.$watch('licence.part.editions | last', function (lastEdition) {
       $scope.currentEdition = lastEdition;
@@ -27,9 +28,14 @@
     };
 
     $scope.newEdition = function () {
-      $scope.licence.part.editions.push({});
-
-      $scope.editMode = 'edit';
+      return PersonLicences.newLicenceEdition({
+        id: $stateParams.id,
+        ind: $stateParams.ind,
+        appId: $stateParams.appId
+      }).$promise.then(function (edition) {
+        $scope.licence.part.editions.push(edition);
+        $scope.editMode = 'edit';
+      });
     };
 
     $scope.editLastEdition = function () {
@@ -64,9 +70,10 @@
             $scope.editMode = 'saving';
             return PersonLicences
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.licence).$promise
-              .then(function () {
+              .then(function (licence) {
                 $scope.editMode = null;
-                originalLicence = _.cloneDeep($scope.licence);
+                $scope.licence = licence;
+                originalLicence = _.cloneDeep(licence);
               }, function () {
                 $scope.editMode = 'edit';
               });

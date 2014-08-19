@@ -12,8 +12,9 @@
     $scope.licences = licences;
     
     $scope.isInvalidLicence = function(item){
-      return item.part.valid.code === 'N';
+      return item.part.valid && item.part.valid.code === 'N';
     };
+
     $scope.isExpiredLicence = function(item) {
       var currentDate = new Date(),
         documentDateValidTo = $filter('last')(item.part.editions).documentDateValidTo;

@@ -4,13 +4,17 @@
 
   angular.module('gva').factory('Persons', ['$resource', function ($resource) {
     return $resource('api/persons/:id', {}, {
-      'getNextLin': {
+      getNextLin: {
         method: 'GET',
         url: 'api/persons/nextLin'
       },
-      'isUniqueUin': {
+      isUniqueUin: {
         method: 'GET',
         url: 'api/persons/isUniqueUin'
+      },
+      newPerson: {
+        method: 'GET',
+        url: 'api/persons/new'
       }
     });
   }]);

@@ -43,12 +43,16 @@
   ];
 
   NewMedicalModalCtrl.$resolve = {
-    personDocumentMedical: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    personDocumentMedical: [
+      'PersonDocumentMedicals',
+      'scModalParams',
+      function (PersonDocumentMedicals, scModalParams) {
+        return PersonDocumentMedicals.newMedical({
+          id: scModalParams.person.id,
+          appId: scModalParams.appId
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('NewMedicalModalCtrl', NewMedicalModalCtrl);

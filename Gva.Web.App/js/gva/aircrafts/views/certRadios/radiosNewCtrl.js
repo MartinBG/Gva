@@ -38,13 +38,17 @@
     'AircraftCertRadios',
     'aircraftCertRadio'
   ];
+
   CertRadiosNewCtrl.$resolve = {
-    aircraftCertRadio: function () {
-      return {
-        part: {},
-        applications: []
-      };
-    }
+    aircraftCertRadio: [
+      '$stateParams',
+      'AircraftCertRadios',
+      function ($stateParams, AircraftCertRadios) {
+        return AircraftCertRadios.newCertRadio({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('CertRadiosNewCtrl', CertRadiosNewCtrl);

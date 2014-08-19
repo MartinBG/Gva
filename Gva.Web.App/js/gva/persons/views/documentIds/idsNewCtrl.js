@@ -42,20 +42,13 @@
 
   DocumentIdsNewCtrl.$resolve = {
     docId: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'PersonDocumentIds',
+      function ($stateParams, PersonDocumentIds) {
+        return PersonDocumentIds.newDocumentId({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

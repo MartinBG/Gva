@@ -5,21 +5,25 @@
   angular.module('gva').factory('SecurityExam', ['$resource', function ($resource) {
     return $resource('api/securityExam', {},
       {
-        'extractPages': {
+        extractPages: {
           method: 'POST',
           url: 'api/securityExam/extractPages'
         },
-        'getAnswers': {
+        getAnswers: {
           method: 'GET',
           url: 'api/securityExam/getAnswers'
         },
-        'calculateGrade': {
+        calculateGrade: {
           method: 'POST',
           url: 'api/securityExam/calculateGrade'
         },
-        'getPreview': {
+        getPreview: {
           method: 'GET',
           url: 'api/securityExam/getPreview'
+        },
+        getImage: {
+          method: 'GET',
+          url: 'api/securityExam/getImage'
         }
       });
   }]);

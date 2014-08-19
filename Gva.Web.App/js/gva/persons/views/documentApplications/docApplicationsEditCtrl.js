@@ -73,15 +73,7 @@
       '$stateParams',
       'PersonDocumentApplications',
       function ($stateParams, PersonDocumentApplications) {
-        return PersonDocumentApplications.get($stateParams).$promise
-            .then(function (application) {
-          application.files = {
-            hideApplications: true,
-            files: application.files
-          };
-
-          return application;
-        });
+        return PersonDocumentApplications.get($stateParams).$promise;
       }
     ]
   };

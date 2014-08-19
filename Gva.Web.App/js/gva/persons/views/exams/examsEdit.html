@@ -14,12 +14,12 @@
         </sc-button>
       </div>
     </div>
-  </div>
 
-  <div class="well-sm panel-body">
-    <gva-person-exam name="examForm" ng-model="exam.part" sc-on-extract-answers="extractAnswers()" sc-form-params="{ msg: messages }"></gva-person-exam>
+    <div class="well-sm panel-body">
+      <gva-person-exam name="examForm" ng-model="exam"></gva-person-exam>
 
-    <gva-common-scanned-document name="personScannedDocumentForm" ng-model="exam.files"
-      sc-form-params="{ setPart: 'person', lotId: lotId, caseTypeId: caseTypeId }"></gva-common-scanned-document>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="exam.files"
+        sc-form-params="{ setPart: 'person', lotId: lotId, caseTypeId: caseTypeId }"></gva-common-scanned-document>
+    </div>
   </div>
 </ng-form>

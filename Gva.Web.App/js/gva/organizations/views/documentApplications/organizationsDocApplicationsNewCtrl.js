@@ -38,16 +38,17 @@
     'OrganizationDocumentApplications',
     'organizationDocumentApplication'
   ];
+
   OrganizationsDocApplicationsNewCtrl.$resolve = {
-    organizationDocumentApplication: function () {
-      return {
-        part: {},
-        files: {
-          hideApplications: true,
-          files: []
-        }
-      };
-    }
+    organizationDocumentApplication: [
+      '$stateParams',
+      'OrganizationDocumentApplications',
+      function ($stateParams, OrganizationDocumentApplications) {
+        return OrganizationDocumentApplications.newApplication({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva')

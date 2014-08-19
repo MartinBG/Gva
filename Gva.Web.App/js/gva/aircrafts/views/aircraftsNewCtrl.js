@@ -41,11 +41,12 @@
   AircraftsNewCtrl.$inject = ['$scope', '$state', 'Aircrafts', 'aircraft'];
 
   AircraftsNewCtrl.$resolve = {
-    aircraft: function () {
-      return {
-        aircraftData: {}
-      };
-    }
+    aircraft: [
+      'Aircrafts',
+      function (Aircrafts) {
+        return Aircrafts.newAircraft().$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('AircraftsNewCtrl', AircraftsNewCtrl);

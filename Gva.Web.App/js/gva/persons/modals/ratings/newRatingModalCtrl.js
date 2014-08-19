@@ -41,13 +41,16 @@
   ];
 
   NewRatingModalCtrl.$resolve = {
-    rating: function () {
-      return {
-        part: {
-          editions: [{}]
-        }
-      };
-    }
+    rating: [
+      'PersonRatings',
+      'scModalParams',
+      function (PersonRatings, scModalParams) {
+        return PersonRatings.newRating({
+          id: scModalParams.lotId,
+          appId: scModalParams.appId
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('NewRatingModalCtrl', NewRatingModalCtrl);

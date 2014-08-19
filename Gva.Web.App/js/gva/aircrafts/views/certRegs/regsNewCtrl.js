@@ -38,13 +38,17 @@
     'AircraftCertRegistrations',
     'aircraftCertRegistration'
   ];
+
   CertRegsNewCtrl.$resolve = {
-    aircraftCertRegistration: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    aircraftCertRegistration: [
+      '$stateParams',
+      'AircraftCertRegistrations',
+      function ($stateParams, AircraftCertRegistrations) {
+        return AircraftCertRegistrations.newCertRegistration({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('CertRegsNewCtrl', CertRegsNewCtrl);

@@ -42,12 +42,16 @@
   ];
 
   NewCheckModalCtrl.$resolve = {
-    personDocumentCheck: function () {
-      return {
-        part: {},
-        files: []
-      };
-    }
+    personDocumentCheck: [
+      'PersonDocumentChecks',
+      'scModalParams',
+      function (PersonDocumentChecks, scModalParams) {
+        return PersonDocumentChecks.newCheck({
+          id: scModalParams.lotId,
+          appId: scModalParams.appId
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('NewCheckModalCtrl', NewCheckModalCtrl);

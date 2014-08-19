@@ -1761,7 +1761,7 @@ namespace Gva.MigrationTool.Sets
                         __oldId = r.Field<long>("ID"),
                         __migrTable = "AC_CERTIFICATE",
 
-                        register = r.Field<long>("ID").ToString().Substring(0, 1),
+                        register = noms["registers"].ByCode(r.Field<long>("ID").ToString().Substring(0, 1)),
                         certNumber = r.Field<string>("CERT_NUMBER"),
                         certDate = r.Field<DateTime?>("CERT_DATE"),
                         aircraftNewOld = noms["aircraftPartStatuses"].ByCode(r.Field<string>("NEW_USED")),

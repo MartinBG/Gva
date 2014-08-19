@@ -691,7 +691,6 @@
     <Content Include="js\gva\persons\resources\persons.js" />
     <Content Include="js\gva\persons\resources\personsInfo.js" />
     <Content Include="js\gva\persons\resources\personsInventory.js" />
-    <Content Include="js\gva\persons\resources\personsLastLicenceNumber.js" />
     <Content Include="js\gva\persons\resources\personStatuses.js" />
     <Content Include="js\gva\persons\resources\publishers.js" />
     <Content Include="js\gva\persons\views\addresses\addrEdit.html" />

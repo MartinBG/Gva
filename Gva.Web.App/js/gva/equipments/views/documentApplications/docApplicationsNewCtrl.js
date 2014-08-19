@@ -38,15 +38,15 @@
     'equipmentDocumentApplication'
   ];
   EquipmentApplicationsNewCtrl.$resolve = {
-    equipmentDocumentApplication: function () {
-      return {
-        part: {},
-        files: {
-          hideApplications: true,
-          files: []
-        }
-      };
-    }
+    equipmentDocumentApplication: [
+      '$stateParams',
+      'EquipmentDocumentApplications',
+      function ($stateParams, EquipmentDocumentApplications) {
+        return EquipmentDocumentApplications.newApplication({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('EquipmentApplicationsNewCtrl', EquipmentApplicationsNewCtrl);

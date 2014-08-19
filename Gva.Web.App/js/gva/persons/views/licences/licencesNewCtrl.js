@@ -13,6 +13,7 @@
     $scope.licence = licence;
     $scope.lotId = $stateParams.id;
     $scope.caseTypeId = $stateParams.caseTypeId;
+    $scope.appId = $stateParams.appId;
 
     $scope.save = function () {
       return $scope.newLicenceForm.$validate().then(function () {
@@ -45,7 +46,10 @@
       '$stateParams',
       'PersonLicences',
       function ($stateParams, PersonLicences) {
-        return PersonLicences.init({ id: $stateParams.id, appId: $stateParams.appId }).$promise;
+        return PersonLicences.newLicence({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

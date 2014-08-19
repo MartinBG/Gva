@@ -39,12 +39,15 @@
     'aircraftCertPermitToFly'
   ];
   CertPermitsToFlyNewCtrl.$resolve = {
-    aircraftCertPermitToFly: function () {
-      return {
-        part: {},
-        applications: []
-      };
-    }
+    aircraftCertPermitToFly: [
+      '$stateParams',
+      'AircraftCertPermitsToFly',
+      function ($stateParams, AircraftCertPermitsToFly) {
+        return AircraftCertPermitsToFly.newCertPermitToFly({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('CertPermitsToFlyNewCtrl', CertPermitsToFlyNewCtrl);

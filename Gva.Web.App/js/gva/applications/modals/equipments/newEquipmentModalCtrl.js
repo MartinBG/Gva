@@ -34,11 +34,12 @@
   ];
 
   NewEquipmentModalCtrl.$resolve = {
-    equipment: function () {
-      return {
-        equipmentData: {}
-      };
-    }
+    equipment: [
+      'Equipments',
+      function (Equipments) {
+        return Equipments.newEquipment().$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('NewEquipmentModalCtrl', NewEquipmentModalCtrl);

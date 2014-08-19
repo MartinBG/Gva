@@ -85,12 +85,26 @@
     return value.length < padding ? padInt('0' + value, padding) : value;
   }
 
+  function isInRange(value, type) {
+    if (type === 'int') {
+      return value > -2147483648 && value < 2147483647;
+    }
+    else if (type === 'float') {
+      return value > -1.7976931348623157E+308 && value < 1.7976931348623157E+308;
+    }
+    return false;
+  }
+
   createNumberDirective(
     'scFloat',
     function () {
       return function (strValue) {
         var num = parseFloat((strValue || '').replace(',', '.'));
-        return isNaN(num) ? undefined : Math.round((num + 0.00001) * 100) / 100;
+        return isNaN(num) ?
+          undefined :
+          isInRange(num, 'float') ?
+            Math.round((num + 0.00001) * 100) / 100 :
+            undefined;
       };
     },
     function (attrs, $filter, $locale) {
@@ -107,7 +121,11 @@
     function () {
       return function (strValue) {
         var num = parseInt(strValue, 10);
-        return isNaN(num) ? undefined : num;
+        return isNaN(num) ?
+          undefined :
+          isInRange(num, 'int') ?
+            num :
+            undefined;
       };
     },
     function (attrs) {

@@ -41,18 +41,13 @@
 
   StaffManagementNewCtrl.$resolve = {
     organizationStaffManagement: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            applications: [application]
-          };
-        }
-        else {
-          return {
-            part: {}
-          };
-        }
+      '$stateParams',
+      'OrganizationStaffManagements',
+      function ($stateParams, OrganizationStaffManagements) {
+        return OrganizationStaffManagements.newStaffManagement({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

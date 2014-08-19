@@ -38,9 +38,15 @@
   ];
 
   MaintenancesNewCtrl.$resolve = {
-    aircraftMaintenance: function () {
-      return {};
-    }
+    aircraftMaintenance: [
+      '$stateParams',
+      'AircraftMaintenances',
+      function ($stateParams, AircraftMaintenances) {
+        return AircraftMaintenances.newMaintenance({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('MaintenancesNewCtrl', MaintenancesNewCtrl);

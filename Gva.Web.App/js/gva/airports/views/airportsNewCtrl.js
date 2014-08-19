@@ -25,14 +25,12 @@
   AirportsNewCtrl.$inject = ['$scope', '$state', 'Airports', 'airport'];
 
   AirportsNewCtrl.$resolve = {
-    airport: function () {
-      return {
-        airportData: {
-          frequencies: [],
-          radioNavigationAids: []
-        }
-      };
-    }
+    airport: [
+      'Airports',
+      function (Airports) {
+        return Airports.newAirport().$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('AirportsNewCtrl', AirportsNewCtrl);

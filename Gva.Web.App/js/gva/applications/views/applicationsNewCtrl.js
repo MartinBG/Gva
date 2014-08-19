@@ -72,10 +72,10 @@
 
         if (isPersonSelect) {
           params.person = {
-            firstName: d.personData.part.firstName,
-            lastName: d.personData.part.lastName,
-            uin: d.personData.part.uin,
-            email: d.personData.part.email
+            firstName: d.personData.firstName,
+            lastName: d.personData.lastName,
+            uin: d.personData.uin,
+            email: d.personData.email
           };
         }
         else if (isOrgSelect) {
@@ -120,12 +120,12 @@
         var modalInstance, corr = {};
 
         if (isPersonSelect) {
-          corr.displayName = d.personData.part.firstName + ' ' + d.personData.part.lastName;
-          if (d.personData.part.uin) {
-            corr.displayName = corr.displayName + ' ' + d.personData.part.uin;
+          corr.displayName = d.personData.firstName + ' ' + d.personData.lastName;
+          if (d.personData.uin) {
+            corr.displayName = corr.displayName + ' ' + d.personData.uin;
           }
-          if (d.personData.part.email) {
-            corr.email = d.personData.part.email;
+          if (d.personData.email) {
+            corr.email = d.personData.email;
           }
         }
         if (isOrgSelect) {

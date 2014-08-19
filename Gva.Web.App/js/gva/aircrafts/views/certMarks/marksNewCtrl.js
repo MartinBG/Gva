@@ -39,12 +39,15 @@
     'aircraftCertMark'
   ];
   CertMarksNewCtrl.$resolve = {
-    aircraftCertMark: function () {
-      return {
-        part: {},
-        applications: []
-      };
-    }
+    aircraftCertMark: [
+      '$stateParams',
+      'AircraftCertMarks',
+      function ($stateParams, AircraftCertMarks) {
+        return AircraftCertMarks.newCertMark({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('CertMarksNewCtrl', CertMarksNewCtrl);

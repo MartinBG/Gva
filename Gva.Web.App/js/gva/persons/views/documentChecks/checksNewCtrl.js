@@ -39,22 +39,16 @@
     'PersonDocumentChecks',
     'personDocumentCheck'
   ];
+
   DocumentChecksNewCtrl.$resolve = {
     personDocumentCheck: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {},
-            files: [{ isAdded: true, applications: [application] }]
-          };
-        }
-        else {
-          return {
-            part: {},
-            files: []
-          };
-        }
+      '$stateParams',
+      'PersonDocumentChecks',
+      function ($stateParams, PersonDocumentChecks) {
+        return PersonDocumentChecks.newCheck({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };

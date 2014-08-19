@@ -40,28 +40,13 @@
 
   AirportsInspectionsNewCtrl.$resolve = {
     airportInspection: [
-      'application',
-      function (application) {
-        if (application) {
-          return {
-            part: {
-              examiners: [],
-              auditDetails: [],
-              disparities: []
-            },
-            applications: [application]
-          };
-        }
-        else {
-          return {
-            part: {
-              examiners: [],
-              auditDetails: [],
-              disparities: []
-            },
-            files: []
-          };
-        }
+      '$stateParams',
+      'AirportInspections',
+      function ($stateParams, AirportInspections) {
+        return AirportInspections.newInspection({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
       }
     ]
   };
