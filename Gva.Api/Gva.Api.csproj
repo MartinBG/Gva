@@ -118,10 +118,13 @@
     <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\Organizations\OrganizationCertAirportOperatorsController.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRegistrationFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDataDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectionDO.cs" />
+    <Compile Include="ModelsDO\Organizations\ExtDO.cs" />
+    <Compile Include="ModelsDO\Organizations\IncludedDocumentDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationAuditplanDO.cs" />
     <Compile Include="Controllers\Organizations\OrganizationAuditplansController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationAddressesController.cs" />
@@ -192,6 +195,7 @@
     <Compile Include="ModelsDO\Common\PeriodDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationAddressDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovedAircraftsDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationCertAirportOperatorDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationDocumentOtherDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationInspectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffExaminerDO.cs" />
