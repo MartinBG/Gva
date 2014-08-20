@@ -40,13 +40,15 @@
   ];
 
   CertAirCarriersNewCtrl.$resolve = {
-    certificate: function () {
-      return {
-        part: {
-          includedDocuments: []
-        }
-      };
-    }
+    certificate: [
+      '$stateParams',
+      'CertAirCarriers',
+      function ($stateParams, CertAirCarriers) {
+        return CertAirCarriers.newCertAirCarrier({
+          id: $stateParams.id
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('CertAirCarriersNewCtrl', CertAirCarriersNewCtrl);
