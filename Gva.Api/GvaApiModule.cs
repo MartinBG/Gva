@@ -156,6 +156,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<OrganizationStaffExaminersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationStaffManagementController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationCertAirportOperatorsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationCertGroundServiceOperatorsController>().InstancePerLifetimeScope();
             
 
             //Aircraft controllers
