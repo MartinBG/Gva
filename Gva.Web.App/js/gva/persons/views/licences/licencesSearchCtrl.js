@@ -15,6 +15,14 @@
       return item.part.valid && item.part.valid.code === 'N';
     };
 
+    $scope.isExpiringLicence = function(item) {
+      var today = moment(new Date()),
+        documentDateValidTo = $filter('last')(item.part.editions).documentDateValidTo,
+        difference = moment(documentDateValidTo).diff(today, 'days');
+
+      return 0 <= difference && difference <= 30;
+    };
+
     $scope.isExpiredLicence = function(item) {
       var currentDate = new Date(),
         documentDateValidTo = $filter('last')(item.part.editions).documentDateValidTo;
