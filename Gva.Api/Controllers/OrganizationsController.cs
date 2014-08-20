@@ -127,7 +127,6 @@ namespace Gva.Api.Controllers
          Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationCertAirOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers/\d+$)}")]
         public override IHttpActionResult GetPart(int lotId, string path)
@@ -146,7 +145,6 @@ namespace Gva.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationCertAirOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirCarriers$)}")]
         public override IHttpActionResult GetParts(int lotId, string path)
@@ -163,7 +161,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationCertAirOperators$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers$)}"),
          Route(@"{lotId}/{*path:regex(^organizationApprovals$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators$)}"),
@@ -176,7 +173,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationCertAirOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationApprovals/\d+/amendments/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators/\d+$)}"),
@@ -200,7 +196,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^organizationGroundServiceOperatorsSnoOperational/\d+$)}"),
-         Route(@"{lotId}/{*path:regex(^organizationCertAirOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationCertAirNavigationServiceDeliverers/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegAirportOperators/\d+$)}"),
          Route(@"{lotId}/{*path:regex(^organizationRegGroundServiceOperators/\d+$)}"),
