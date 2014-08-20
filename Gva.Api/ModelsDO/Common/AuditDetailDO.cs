@@ -11,6 +11,8 @@ namespace Gva.Api.ModelsDO.Common
             this.Disparities = new List<int>();
         }
 
+        public string AuditPart { get; set; }
+
         public string SortOrder { get; set; }
 
         public string Code { get; set; }
