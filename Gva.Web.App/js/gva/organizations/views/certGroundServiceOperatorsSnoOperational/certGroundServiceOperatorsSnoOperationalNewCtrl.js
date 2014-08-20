@@ -41,14 +41,16 @@
   ];
 
   CertGroundServiceOperatorsSnoOperationalNewCtrl.$resolve = {
-    certificate: function () {
-      return {
-        part: {
-          includedDocuments: [],
-          ssno: []
-        }
-      };
-    }
+    certificate: [
+      '$stateParams',
+      'OrganizationCertGroundServiceOperatorsSnoOperationals',
+      function ($stateParams, OrganizationCertGroundServiceOperatorsSnoOperationals) {
+        return OrganizationCertGroundServiceOperatorsSnoOperationals
+          .newGroundServiceOperatorsSnoOperational({
+            id: $stateParams.id
+          }).$promise;
+      }
+    ]
   };
 
   angular.module('gva')

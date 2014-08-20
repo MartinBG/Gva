@@ -161,7 +161,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<OrganizationCertAirNavigationServiceDeliverersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationCertAirCarriersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationRecommendationsController>().InstancePerLifetimeScope();
-            
+            moduleBuilder.RegisterType<OrganizationGroundServiceOperatorsSnoOperationalController>().InstancePerLifetimeScope();
 
             //Aircraft controllers
             moduleBuilder.RegisterType<AircraftsController>().InstancePerLifetimeScope();

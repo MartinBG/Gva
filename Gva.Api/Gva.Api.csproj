@@ -124,11 +124,13 @@
     <Compile Include="Controllers\Organizations\OrganizationCertAirportOperatorsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationCertGroundServiceOperatorsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationRecommendationsController.cs" />
+    <Compile Include="Controllers\Organizations\OrganizationGroundServiceOperatorsSnoOperationalController.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRegistrationFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDataDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationGroupDO.cs" />
+    <Compile Include="ModelsDO\Organizations\EquipmentDO.cs" />
     <Compile Include="ModelsDO\Organizations\ExtDO.cs" />
     <Compile Include="ModelsDO\Organizations\IncludedDocumentDO.cs" />
     <Compile Include="ModelsDO\Common\ExaminerDO.cs" />
@@ -211,6 +213,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationCertAirportOperatorDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationCertGroundServiceOperatorDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationDocumentOtherDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationGroundServiceOperatorsSnoOperationalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationInspectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffExaminerDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffManagementDO.cs" />
