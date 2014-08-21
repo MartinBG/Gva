@@ -13,7 +13,7 @@
           return $http({
             method: 'GET',
             url: 'api/suggestions/notes',
-            params: {alias: alias, term: term}
+            params: { alias: alias, term: term }
           })
           .then(function (result) {
             return cb(result.data);
@@ -26,7 +26,6 @@
         replace: true,
         require: '?ngModel',
         scope: {
-          model: '=ngModel',
           alias: '&'
         },
         templateUrl: templateUrl,
@@ -48,8 +47,20 @@
             displayKey: _.identity,
             source: substringMatcher(alias)
           })
-          .on('typeahead:selected', function (ev, suggestion){
-            ngModel.$setViewValue(suggestion);
+          .on('typeahead:selected', function (ev, suggestion) {
+            scope.$apply(function () {
+              ngModel.$setViewValue(suggestion);
+            });
+          });
+
+          ngModel.$render = function () {
+            input.typeahead('val', ngModel.$viewValue);
+          };
+
+          input.change(function() {
+            scope.$apply(function () {
+              ngModel.$setViewValue(input.typeahead('val'));
+            });
           });
 
           attrs.$observe('readonly', function (value) {

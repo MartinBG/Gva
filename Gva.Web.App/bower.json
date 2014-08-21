@@ -20,7 +20,7 @@
     "jquery-modern": "jquery#2.0.3",
     "jquery-legacy": "belchev/jquery-angular-node-names#f3fd1c1b968720f5b0de2ec4ffb641136be9ddf6",
     "jquery-ui": "1.10.3",
-    "typeahead.js": "georgiyordanov/typeahead.js#2e6f20b96415afe90867bafacb7065a6c2b6191e",
+    "typeahead.js": "pharant/typeahead.js#463fbcd66706a384dd8c2d1e36d0d8d2125bc962",
     "blueimp-file-upload": "8.9.0",
     "select2-bootstrap-css": "fk/select2-bootstrap-css#48cd4b44bc94046cab20e0d345c978483684ab2e",
     "html5shiv": "3.7.0",
