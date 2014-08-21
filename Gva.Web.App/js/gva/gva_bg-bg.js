@@ -2989,10 +2989,6 @@
           certAirNavigationServiceDeliverer: 'Свидетелство',
           certGroundServiceOperators: 'Лиценз',
           groundServiceOperatorsSnoOperational: 'Удостоверение за експлоатационна годност',
-          registers: 'Регистри',
-          regAirportOperators: 'Издадени лицензи за летищен оператор',
-          regGroundServiceOperators:
-            'Издадени лицензи за оператор по наземно обслужване или самообслужване',
           inventory: 'Опис',
           applications: 'Заявления'
         },
@@ -3409,50 +3405,6 @@
           save: 'Запис',
           cancel: 'Отказ',
           deleteRecommendation: 'Изтрий'
-        },
-        regAirportOperatorSearch: {
-          newRegAirportOperator: 'Ново удостоверение',
-          certNumber: '№ на удостоверение',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          organization: 'Организация',
-          address: 'Седалище и адрес на управление на оператора',
-          revokeDate: 'Дата на отнемане',
-          revokeCause: 'Причина за отнемане'
-        },
-        newRegAirportOperator: {
-          title: 'Нов лиценз за летищен оператор',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editRegAirportOperator: {
-          title: 'Преглед на лиценз за летищен оператор',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deleteOperator: 'Изтрий'
-        },
-        regGroundServiceOperatorSearch: {
-          newRegGroundServiceOperator: 'Ново удостоверение',
-          certNumber: '№ на удостоверение',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          organization: 'Организация',
-          address: 'Седалище и адрес на управление на оператора',
-          revokeDate: 'Дата на отнемане',
-          revokeCause: 'Причина за отнемане'
-        },
-        newRegGroundServiceOperator: {
-          title: 'Нов лиценз за оператор по наземно обслужване / самообслужване',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editRegGroundServiceOperator: {
-          title: 'Преглед на лиценз за оператор по наземно обслужване / самообслужване',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deleteOperator: 'Изтрий'
         },
         organizationDocApplicationSearch: {
           newApplication: 'Ново заявление',
@@ -3930,14 +3882,6 @@
         'root.organizations.view.staffExaminers': 'Проверяващи',
         'root.organizations.view.staffExaminers.new': 'Нов проверяващ',
         'root.organizations.view.staffExaminers.edit': 'Преглед на проверяващ',
-        'root.organizations.view.regAirportOperators':
-          'Регистър за издадени лицензи за летищен оператор',
-        'root.organizations.view.regAirportOperators.new': 'Нов лиценз',
-        'root.organizations.view.regAirportOperators.edit': 'Преглед на лиценз',
-        'root.organizations.view.regGroundServiceOperators':
-          'Регистър за издадени лицензи за оператор по наземно обслужване или самообслужване',
-        'root.organizations.view.regGroundServiceOperators.new': 'Нов лиценз',
-        'root.organizations.view.regGroundServiceOperators.edit': 'Преглед на лиценз',
         'root.organizations.view.documentApplications': 'Заявления',
         'root.organizations.view.documentApplications.new': 'Новo заявление',
         'root.organizations.view.documentApplications.edit': 'Преглед на заявление',

@@ -472,7 +472,6 @@
     <Content Include="js\gva\common\forms\commonExaminer.html" />
     <Content Include="js\gva\common\forms\commonExaminerCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationRecommendationCtrl.js" />
-    <Content Include="js\gva\organizations\forms\organizationRegister.html" />
     <Content Include="js\gva\organizations\forms\organizationStaffExaminer.html" />
     <Content Include="js\gva\organizations\forms\organizationStaffExaminerCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationStaffManagement.html" />
@@ -500,8 +499,6 @@
     <Content Include="js\gva\organizations\resources\organizationDocumentOthers.js" />
     <Content Include="js\gva\organizations\resources\organizationInspections.js" />
     <Content Include="js\gva\organizations\resources\organizationRecommendations.js" />
-    <Content Include="js\gva\organizations\resources\organizationRegAirportOperators.js" />
-    <Content Include="js\gva\organizations\resources\organizationRegGroundServiceOperators.js" />
     <Content Include="js\gva\organizations\resources\organizations.js" />
     <Content Include="js\gva\organizations\resources\organizationsData.js" />
     <Content Include="js\gva\organizations\resources\organizationsInventory.js" />
@@ -595,18 +592,6 @@
     <Content Include="js\gva\organizations\views\recommendations\recommendationsNewCtrl.js" />
     <Content Include="js\gva\organizations\views\recommendations\recommendationsSearch.html" />
     <Content Include="js\gva\organizations\views\recommendations\recommendationsSearchCtrl.js" />
-    <Content Include="js\gva\organizations\views\regAirportOperators\regAirportOperatorsEdit.html" />
-    <Content Include="js\gva\organizations\views\regAirportOperators\regAirportOperatorsEditCtrl.js" />
-    <Content Include="js\gva\organizations\views\regAirportOperators\regAirportOperatorsNew.html" />
-    <Content Include="js\gva\organizations\views\regAirportOperators\regAirportOperatorsNewCtrl.js" />
-    <Content Include="js\gva\organizations\views\regAirportOperators\regAirportOperatorsSearch.html" />
-    <Content Include="js\gva\organizations\views\regAirportOperators\regAirportOperatorsSearchCtrl.js" />
-    <Content Include="js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsEdit.html" />
-    <Content Include="js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsEditCtrl.js" />
-    <Content Include="js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsNew.html" />
-    <Content Include="js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsNewCtrl.js" />
-    <Content Include="js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsSearch.html" />
-    <Content Include="js\gva\organizations\views\regGroundServiceOperators\regGroundServiceOperatorsSearchCtrl.js" />
     <Content Include="js\gva\organizations\views\staffExaminers\staffExaminersEdit.html" />
     <Content Include="js\gva\organizations\views\staffExaminers\staffExaminersEditCtrl.js" />
     <Content Include="js\gva\organizations\views\staffExaminers\staffExaminersNew.html" />
@@ -1031,7 +1016,6 @@
     <Content Include="test\gva\organizations\mocks\organizationInspectionsHttp.js" />
     <Content Include="test\gva\organizations\mocks\organizationLots.js" />
     <Content Include="test\gva\organizations\mocks\organizationRecommendationsHttp.js" />
-    <Content Include="test\gva\organizations\mocks\organizationRegGroundServiceOperatorsHttp.js" />
     <Content Include="test\gva\organizations\mocks\organizationsHttp.js" />
     <Content Include="test\gva\organizations\mocks\organizationStaffExaminersHttp.js" />
     <Content Include="test\gva\organizations\mocks\organizationStaffManagementHttp.js" />
