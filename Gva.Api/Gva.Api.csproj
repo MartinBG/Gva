@@ -118,6 +118,7 @@
     <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\Organizations\OrganizationApprovalsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationCertAirCarriersController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationCertAirNavigationServiceDeliverersController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationCertAirOperatorsController.cs" />
@@ -129,6 +130,11 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftDataDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectionDO.cs" />
+    <Compile Include="ModelsDO\Organizations\AmendmentDO.cs" />
+    <Compile Include="ModelsDO\Organizations\Lims145DO.cs" />
+    <Compile Include="ModelsDO\Organizations\Lims147DO.cs" />
+    <Compile Include="ModelsDO\Organizations\LimsMGDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationGroupDO.cs" />
     <Compile Include="ModelsDO\Organizations\EquipmentDO.cs" />
     <Compile Include="ModelsDO\Organizations\ExtDO.cs" />

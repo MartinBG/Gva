@@ -11,5 +11,6 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public DateTime? approvalDate { get; set; }
 
+        public Object LinkedLim { get; set; }
     }
 }

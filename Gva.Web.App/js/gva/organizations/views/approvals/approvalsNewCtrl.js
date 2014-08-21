@@ -39,18 +39,16 @@
   ];
 
   ApprovalsNewCtrl.$resolve = {
-    organizationApproval: function () {
-      return {
-        part: {
-          amendments: [{
-            includedDocuments: [],
-            lims145: [],
-            lims147: [],
-            limsMG: []
-          }]
-        }
-      };
-    }
+    organizationApproval: [
+      '$stateParams',
+      'OrganizationApprovals',
+      function ($stateParams, OrganizationApprovals) {
+        return OrganizationApprovals.newApproval({
+          id: $stateParams.id,
+          appId: $stateParams.appId
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('ApprovalsNewCtrl', ApprovalsNewCtrl);
