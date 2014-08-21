@@ -237,6 +237,7 @@
     <Compile Include="ModelsDO\Persons\PersonEmploymentDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonFlyingExperienceDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonLicenceStatusDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonRatingEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceAmlLimitationsDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLicenceEditionDO.cs" />

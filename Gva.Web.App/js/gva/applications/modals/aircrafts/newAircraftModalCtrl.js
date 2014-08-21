@@ -34,11 +34,12 @@
   ];
 
   NewAircraftModalCtrl.$resolve = {
-    aircraft: function () {
-      return {
-        aircraftData: {}
-      };
-    }
+    aircraft: [
+      'Aircrafts',
+      function (Aircrafts) {
+        return Aircrafts.newAircraft().$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('NewAircraftModalCtrl', NewAircraftModalCtrl);

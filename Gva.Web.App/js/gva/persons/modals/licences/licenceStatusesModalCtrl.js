@@ -48,9 +48,15 @@
   ];
 
   LicenceStatusesModalCtrl.$resolve = {
-    statusModel: function () {
-      return {};
-    }
+    statusModel: [
+      'scModalParams',
+      'PersonLicences',
+      function (scModalParams, PersonLicences) {
+        return PersonLicences.newLicenceStatus({
+          id: scModalParams.personId
+        }).$promise;
+      }
+    ]
   };
 
   angular.module('gva').controller('LicenceStatusesModalCtrl', LicenceStatusesModalCtrl);
