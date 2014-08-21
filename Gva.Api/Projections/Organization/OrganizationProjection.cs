@@ -34,12 +34,12 @@ namespace Gva.Api.Projections.Organization
             organization.LotId = organizationData.Part.Lot.LotId;
             organization.Name = organizationData.Content.Get<string>("name");
             organization.NameAlt = organizationData.Content.Get<string>("nameAlt");
-            organization.CAO = organizationData.Content.Get<string>("CAO");
+            organization.Cao = organizationData.Content.Get<string>("cao");
             organization.Valid = organizationData.Content.Get<string>("valid.code") == "Y";
             organization.Uin = organizationData.Content.Get<string>("uin");
             organization.OrganizationTypeId = organizationData.Content.Get<int>("organizationType.nomValueId");
             organization.DateValidTo = organizationData.Content.Get<DateTime?>("dateValidTo");
-            organization.DateCAOValidTo = organizationData.Content.Get<DateTime?>("dateCAOValidTo");
+            organization.DateCaoValidTo = organizationData.Content.Get<DateTime?>("dateCaoValidTo");
 
             return organization;
         }

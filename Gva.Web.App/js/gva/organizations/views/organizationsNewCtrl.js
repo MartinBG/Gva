@@ -5,7 +5,7 @@
   function OrganizationsNewCtrl($scope, $state, Organizations, organization, caseType) {
     $scope.organization = organization;
     if (caseType) {
-      $scope.organization.organizationData.caseTypes = [caseType];
+      $scope.organization.caseTypes = [caseType];
     }
 
     $scope.save = function () {
@@ -28,11 +28,12 @@
   OrganizationsNewCtrl.$inject = ['$scope', '$state', 'Organizations', 'organization', 'caseType'];
 
   OrganizationsNewCtrl.$resolve = {
-    organization: function () {
-      return {
-        organizationData: {}
-      };
-    },
+    organization: [
+      'Organizations',
+      function (Organizations) {
+        return Organizations.newOrganization().$promise;
+      }
+    ],
     caseType: [
       '$stateParams',
       'Nomenclatures',

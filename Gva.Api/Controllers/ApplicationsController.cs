@@ -155,7 +155,7 @@ namespace Gva.Api.Controllers
             }
             else if (set.Alias == "Organization")
             {
-                returnValue.Organization = new OrganizationDO(this.organizationRepository.GetOrganization(application.LotId));
+                returnValue.Organization = new OrganizationViewDO(this.organizationRepository.GetOrganization(application.LotId));
             }
             else if (set.Alias == "Aircraft")
             {

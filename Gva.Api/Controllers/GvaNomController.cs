@@ -351,7 +351,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetOrganizations(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.organizationRepository.GetOrganizations(name: term, caseTypeId: null, offset: offset, limit: limit, uin: null, CAO: null, dateCAOValidTo: null, dateValidTo: null)
+                this.organizationRepository.GetOrganizations(name: term, caseTypeId: null, offset: offset, limit: limit, uin: null, cao: null, dateCaoValidTo: null, dateValidTo: null)
                 .Select(e => new
                 {
                     NomValueId = e.LotId,

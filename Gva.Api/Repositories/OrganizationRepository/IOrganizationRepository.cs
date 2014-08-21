@@ -9,10 +9,10 @@ namespace Gva.Api.Repositories.OrganizationRepository
         IEnumerable<GvaViewOrganization> GetOrganizations(
             string name,
             int? caseTypeId,
-            string CAO,
+            string cao,
             string uin,
             DateTime? dateValidTo,
-            DateTime? dateCAOValidTo,
+            DateTime? dateCaoValidTo,
             bool exact = false,
             int offset = 0,
             int? limit = null);

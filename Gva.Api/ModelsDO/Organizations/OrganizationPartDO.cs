@@ -12,7 +12,6 @@ namespace Gva.Api.ModelsDO.Organizations
             this.Examiners = new List<ExaminerDO>();
         }
 
-
         public List<ExaminerDO> Examiners { get; set; }
     }
 }

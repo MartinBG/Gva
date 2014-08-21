@@ -117,8 +117,8 @@
     <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
-    <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationApprovalsController.cs" />
+    <Compile Include="Controllers\Organizations\OrganizationsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationCertAirCarriersController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationCertAirNavigationServiceDeliverersController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationCertAirOperatorsController.cs" />
@@ -135,6 +135,7 @@
     <Compile Include="ModelsDO\Organizations\Lims147DO.cs" />
     <Compile Include="ModelsDO\Organizations\LimsMGDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationDataDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationGroupDO.cs" />
     <Compile Include="ModelsDO\Organizations\EquipmentDO.cs" />
     <Compile Include="ModelsDO\Organizations\ExtDO.cs" />
@@ -304,7 +305,7 @@
     <Compile Include="ModelsDO\PublisherDO.cs" />
     <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentViewDO.cs" />
-    <Compile Include="ModelsDO\OrganizationDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationViewDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftViewDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
     <Compile Include="ModelsDO\FileDO.cs" />

@@ -24,10 +24,10 @@
 
     $scope.search = function () {
       $state.go('root.organizations.search', {
-        CAO: $scope.filters.CAO,
+        cao: $scope.filters.cao,
         uin: $scope.filters.uin,
         dateValidTo: $scope.filters.dateValidTo,
-        dateCAOValidTo: $scope.filters.dateCAOValidTo,
+        dateCaoValidTo: $scope.filters.dateCaoValidTo,
         organizationName: $scope.filters.organizationName,
         caseTypeId: $scope.filters.caseTypeId
       });

@@ -4,25 +4,25 @@ using System.Collections.Generic;
 using Gva.Api.Models.Views.Organization;
 namespace Gva.Api.ModelsDO
 {
-    public class OrganizationDO
+    public class OrganizationViewDO
     {
-        public OrganizationDO(GvaViewOrganization o)
+        public OrganizationViewDO(GvaViewOrganization o)
         {
             this.Id = o.LotId;
             this.Name = o.Name;
-            this.CAO = o.CAO;
+            this.Cao = o.Cao;
             this.Uin = o.Uin;
             this.Valid = o.Valid;
             this.OrganizationType = o.OrganizationType.Name;
             this.DateValidTo = o.DateValidTo;
-            this.DateCAOValidTo = o.DateCAOValidTo;
+            this.DateCaoValidTo = o.DateCaoValidTo;
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public string CAO { get; set; }
+        public string Cao { get; set; }
 
         public string Uin { get; set; }
 
@@ -32,7 +32,7 @@ namespace Gva.Api.ModelsDO
 
         public DateTime? DateValidTo { get; set; }
 
-        public DateTime? DateCAOValidTo { get; set; }
+        public DateTime? DateCaoValidTo { get; set; }
 
         public List<string> CaseTypes { get; set; }
 

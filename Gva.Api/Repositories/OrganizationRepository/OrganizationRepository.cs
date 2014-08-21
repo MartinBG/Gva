@@ -23,16 +23,16 @@ namespace Gva.Api.Repositories.OrganizationRepository
         public IEnumerable<GvaViewOrganization> GetOrganizations(
             string name,
             int? caseTypeId,
-            string CAO,
+            string cao,
             string uin,
             DateTime? dateValidTo,
-            DateTime? dateCAOValidTo,
+            DateTime? dateCaoValidTo,
             bool exact,
             int offset = 0,
             int? limit = null)
         {
             var predicate = PredicateBuilder.True<GvaViewOrganization>()
-                .AndStringMatches(o => o.CAO, CAO, exact)
+                .AndStringMatches(o => o.Cao, cao, exact)
                 .AndStringMatches(o => o.Uin, uin, exact)
                 .AndStringMatches(o => o.Name, name, exact);
 
@@ -42,10 +42,10 @@ namespace Gva.Api.Repositories.OrganizationRepository
                 predicate = predicate.And(o => o.DateValidTo < maxDate);
             }
 
-            if (dateCAOValidTo.HasValue)
+            if (dateCaoValidTo.HasValue)
             {
-                var maxDate = dateCAOValidTo.Value.Date.AddDays(1);
-                predicate = predicate.And(o => o.DateCAOValidTo < maxDate);
+                var maxDate = dateCaoValidTo.Value.Date.AddDays(1);
+                predicate = predicate.And(o => o.DateCaoValidTo < maxDate);
             }
 
             if (caseTypeId.HasValue)
