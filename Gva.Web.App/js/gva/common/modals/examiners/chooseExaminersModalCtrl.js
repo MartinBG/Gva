@@ -12,9 +12,9 @@
 
       $scope.selectedExaminers = [];
 
-      var includedExamienrsNames = _.pluck(scModalParams.includedExaminers, 'name');
+      var includedExaminersNames = _.pluck(scModalParams.includedExaminers, 'name');
       $scope.examiners = _.filter(examiners, function (examiner) {
-        return !_.contains(includedExamienrsNames, examiner.name);
+        return !_.contains(includedExaminersNames, examiner.name);
       });
 
       $scope.addExaminers = function () {

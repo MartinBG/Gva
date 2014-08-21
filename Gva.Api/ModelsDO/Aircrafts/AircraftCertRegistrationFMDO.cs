@@ -3,11 +3,16 @@ using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 using System.Collections.Generic;
 
-
 namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftCertRegistrationFMDO
     {
+        public AircraftCertRegistrationFMDO()
+        {
+            this.CatAW = new List<NomValue>();
+            this.Limitations = new List<NomValue>();
+        }
+
         public int? CertNumber { get; set; }
 
         public NomValue Register { get; set; }

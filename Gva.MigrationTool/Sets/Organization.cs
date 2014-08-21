@@ -216,11 +216,11 @@ namespace Gva.MigrationTool.Sets
                         lot.CreatePart("organizationApprovals/*", organizationApproval, context);
                     }
 
-                    //var organizationRecommendations = this.getOrganizationRecommendation(organizationId, noms, organizationDocuments, getPerson, nomApplications);
-                    //foreach (var organizationRecommendation in organizationRecommendations)
-                    //{
-                    //    lot.CreatePart("organizationRecommendations/*", organizationRecommendation, context);
-                    //}
+                    var organizationRecommendations = this.getOrganizationRecommendation(organizationId, noms, organizationDocuments, getPerson, nomApplications);
+                    foreach (var organizationRecommendation in organizationRecommendations)
+                    {
+                        lot.CreatePart("organizationRecommendations/*", organizationRecommendation, context);
+                    }
 
 
                     var organizationManagementStaffs = this.getOrganizationManagementStaff(organizationId, noms, getPersonByApexId);

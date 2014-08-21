@@ -25,14 +25,14 @@
     };
 
     $scope.newAmendment = function () {
-      $scope.approval.part.amendments.push({
-          includedDocuments: [],
-          lims145: [],
-          lims147: [],
-          limsMG: []
-        });
-
-      $scope.editMode = 'edit';
+      return OrganizationApprovals.newApprovalAmendment({
+        id: $stateParams.id,
+        ind: $stateParams.ind,
+        appId: $stateParams.appId
+      }).$promise.then(function (amendment) {
+        $scope.approval.part.amendments.push(amendment);
+        $scope.editMode = 'edit';
+      });
     };
 
     $scope.editLastAmendment = function () {
@@ -101,7 +101,10 @@
       '$stateParams',
       'OrganizationApprovals',
       function ($stateParams, OrganizationApprovals) {
-        return OrganizationApprovals.get($stateParams).$promise;
+        return OrganizationApprovals.get({
+          id: $stateParams.id,
+          ind: $stateParams.ind
+        }).$promise;
       }
     ]
   };

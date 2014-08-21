@@ -8,6 +8,13 @@ namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftInspectionDO
     {
+        public AircraftInspectionDO()
+        {
+            this.AuditDetails = new List<AuditDetailDO>();
+            this.Disparities = new List<DisparityDO>();
+            this.Examiners = new List<NomValue>();
+        }
+
         public NomValue AuditCaseTypes { get; set; }
 
         public string DocumentNumber { get; set; }

@@ -35,14 +35,13 @@
 
   NewOrganizationModalCtrl.$resolve = {
     organization: [
+      'Organizations',
       'scModalParams',
-      function (scModalParams) {
-        return {
-          organizationData: {
-            uin: scModalParams.uin,
-            name: scModalParams.name
-          }
-        };
+      function (Organizations, scModalParams) {
+        return Organizations.newOrganization({
+          uin: scModalParams.uin,
+          name: scModalParams.name
+        }).$promise;
       }
     ]
   };

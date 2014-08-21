@@ -7,10 +7,10 @@
       return {
         id: organization.lotId,
         name: organization.organizationData.part.name,
-        CAO: organization.organizationData.part.CAO,
+        cao: organization.organizationData.part.cao,
         uin: organization.organizationData.part.uin,
         organizationType: organization.organizationData.part.organizationType.name,
-        dateCAOValidTo: organization.organizationData.part.dateCAOValidTo,
+        dateCaoValidTo: organization.organizationData.part.dateCaoValidTo,
         dateValidTo: organization.organizationData.part.dateValidTo,
         valid: organization.organizationData.part.valid.name
       };

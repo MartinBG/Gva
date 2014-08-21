@@ -15,7 +15,7 @@ namespace Gva.Api.Models.Views.Organization
 
         public string NameAlt { get; set; }
 
-        public string CAO { get; set; }
+        public string Cao { get; set; }
 
         public string Uin { get; set; }
 
@@ -25,7 +25,7 @@ namespace Gva.Api.Models.Views.Organization
 
         public DateTime? DateValidTo { get; set; }
 
-        public DateTime? DateCAOValidTo { get; set; }
+        public DateTime? DateCaoValidTo { get; set; }
 
         public virtual Lot Lot { get; set; }
 
@@ -59,7 +59,7 @@ namespace Gva.Api.Models.Views.Organization
                 .IsRequired()
                 .HasMaxLength(100);
 
-            this.Property(t => t.CAO)
+            this.Property(t => t.Cao)
                 .HasMaxLength(50);
 
             this.Property(t => t.Uin)
@@ -74,11 +74,11 @@ namespace Gva.Api.Models.Views.Organization
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.NameAlt).HasColumnName("NameAlt");
             this.Property(t => t.Uin).HasColumnName("Uin");
-            this.Property(t => t.CAO).HasColumnName("CAO");
+            this.Property(t => t.Cao).HasColumnName("Cao");
             this.Property(t => t.Valid).HasColumnName("Valid");
             this.Property(t => t.OrganizationTypeId).HasColumnName("OrganizationTypeId");
             this.Property(t => t.DateValidTo).HasColumnName("DateValidTo");
-            this.Property(t => t.DateCAOValidTo).HasColumnName("DateCAOValidTo");
+            this.Property(t => t.DateCaoValidTo).HasColumnName("DateCaoValidTo");
 
             // Relationships
             this.HasRequired(t => t.Lot)

@@ -9,6 +9,8 @@ namespace Gva.Api.ModelsDO.Common
         [Required(ErrorMessage = "SortOrder is required.")]
         public int? SortOrder { get; set; }
 
+        public string AuditPart { get; set; }
+
         [Required(ErrorMessage = "Subject is required.")]
         public string Subject { get; set; }
 

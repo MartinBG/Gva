@@ -148,6 +148,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AirportOwnersController>().InstancePerLifetimeScope();
 
             //Organization controllers
+            moduleBuilder.RegisterType<OrganizationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationAddressesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationAuditplansController>().InstancePerLifetimeScope();
@@ -155,6 +156,14 @@ namespace Gva.Api
             moduleBuilder.RegisterType<OrganizationInspectionsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationStaffExaminersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationStaffManagementController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationCertAirportOperatorsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationCertGroundServiceOperatorsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationCertAirOperatorsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationCertAirNavigationServiceDeliverersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationCertAirCarriersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationRecommendationsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationGroundServiceOperatorsSnoOperationalController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationApprovalsController>().InstancePerLifetimeScope();
 
             //Aircraft controllers
             moduleBuilder.RegisterType<AircraftsController>().InstancePerLifetimeScope();
@@ -183,7 +192,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<GvaLotsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaNomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaSuggestionController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<OrganizationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PrintController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaPublisherController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaPartsController>().InstancePerLifetimeScope();

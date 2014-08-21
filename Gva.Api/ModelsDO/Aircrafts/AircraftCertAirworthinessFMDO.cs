@@ -7,6 +7,11 @@ namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftCertAirworthinessFMDO
     {
+        public AircraftCertAirworthinessFMDO()
+        {
+            this.Reviews = new List<Object>();
+        }
+
         [Required(ErrorMessage = "AirworthinessCertificateType is required.")]
         public NomValue AirworthinessCertificateType { get; set; }
 

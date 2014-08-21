@@ -145,5 +145,11 @@ namespace Gva.Api.Controllers.Persons
 
             return Ok(new JObject(new JProperty("number", licenceNumber)));
         }
+
+        [Route("newStatus")]
+        public IHttpActionResult GetNewLicenceStatus(int lotId)
+        {
+            return Ok(new PersonLicenceStatusDO());
+        }
     }
 }
