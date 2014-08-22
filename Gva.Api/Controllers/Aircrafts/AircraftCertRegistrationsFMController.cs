@@ -17,7 +17,7 @@ namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/aircraftCertRegistrationsFM")]
     [Authorize]
-    public class AircraftCertRegistrationsFMController : GvaFilePartController<AircraftCertRegistrationFMDO>
+    public class AircraftCertRegistrationsFMController : GvaApplicationPartController<AircraftCertRegistrationFMDO>
     {
         private string path;
         private ILotRepository lotRepository;
@@ -29,10 +29,9 @@ namespace Gva.Api.Controllers.Aircrafts
         public AircraftCertRegistrationsFMController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base("aircraftCertRegistrationsFM", unitOfWork, lotRepository, fileRepository, lotEventDispatcher)
+            : base("aircraftCertRegistrationsFM", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
         {
             this.path = "aircraftCertRegistrationsFM";
             this.lotRepository = lotRepository;
@@ -82,11 +81,11 @@ namespace Gva.Api.Controllers.Aircrafts
             }
         }
 
-        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
+        public override IHttpActionResult GetParts(int lotId)
         {
             var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts(this.path).OrderByDescending(e => e.Content.Get<int>("actNumber"));
 
-            return Ok(parts.Select(pv => new FilePartVersionDO<AircraftCertRegistrationFMDO>(pv)));
+            return Ok(parts.Select(pv => new ApplicationPartVersionDO<AircraftCertRegistrationFMDO>(pv)));
         }
 
         public override IHttpActionResult DeletePart(int lotId, int partIndex)

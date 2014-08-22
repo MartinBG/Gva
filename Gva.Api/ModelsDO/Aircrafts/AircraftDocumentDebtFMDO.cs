@@ -9,6 +9,8 @@ namespace Gva.Api.ModelsDO.Aircrafts
         [Required(ErrorMessage = "Registration is required.")]
         public PartSelectDO Registration { get; set; }
 
+        public int CertId { get; set; }
+
         public DateTime? RegDate { get; set; }
 
         [Required(ErrorMessage = "RegTime is required.")]
