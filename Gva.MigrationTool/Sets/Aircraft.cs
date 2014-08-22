@@ -63,13 +63,21 @@ namespace Gva.MigrationTool.Sets
 
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                foreach (var aircraftApexId in this.getAircraftApexIds())
+                Func<Lot> createLot = () =>
                 {
                     var lot = lotRepository.CreateLot("Aircraft", context);
-                    var aircraftData = this.getAircraftData(aircraftApexId, noms);
-                    lot.CreatePart("aircraftDataApex", aircraftData, context);
                     int aircraftCaseTypeId = caseTypeRepository.GetCaseTypesForSet("Aircraft").Single().GvaCaseTypeId;
                     caseTypeRepository.AddCaseTypes(lot, new int[] { aircraftCaseTypeId });
+
+                    return lot;
+                };
+
+                foreach (var aircraftApexId in this.getAircraftApexIds())
+                {
+                    var lot = createLot();
+                    var aircraftData = this.getAircraftData(aircraftApexId, noms);
+                    lot.CreatePart("aircraftDataApex", aircraftData, context);
+
                     lot.Commit(context, lotEventDispatcher);
 
                     unitOfWork.Save();
@@ -101,7 +109,7 @@ namespace Gva.MigrationTool.Sets
                     else
                     {
                         Console.WriteLine("MISSING AIRCRAFT WITH MSN {0} IN APEX", msn);//TODO
-                        lot = lotRepository.CreateLot("Aircraft", context);
+                        lot = createLot();
                     }
 
                     if (lot.Index.GetPart("aircraftData") != null)
@@ -313,7 +321,7 @@ namespace Gva.MigrationTool.Sets
                             addPartWithFiles("aircraftCertAirworthinesses/*", aircraftCertAirworthiness);
                         }
 
-                        var aircraftCertPermitsToFly = this.getAircraftCertPermitsToFly(certId, nomApplications);
+                        var aircraftCertPermitsToFly = this.getAircraftCertPermitsToFly(certId, nomApplications, noms);
                         foreach (var aircraftCertPermitToFly in aircraftCertPermitsToFly)
                         {
                             addPartWithFiles("aircraftCertPermitsToFly/*", aircraftCertPermitToFly);
@@ -1148,7 +1156,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -1326,7 +1334,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
@@ -1447,7 +1455,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -1643,7 +1651,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -1736,7 +1744,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -1841,7 +1849,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", null),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", null),
                                     new JProperty("pageCount", null),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
@@ -1951,7 +1959,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", null),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", null),
                                     new JProperty("pageCount", null),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
@@ -2018,7 +2026,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", null),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", null),
                                     new JProperty("pageCount", null),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
@@ -2091,14 +2099,14 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", null),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", null),
                                     new JProperty("pageCount", null),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
                     .ToList();
         }
 
-        private IList<JObject> getAircraftCertPermitsToFly(long certId, Dictionary<int, JObject> nomApplications)
+        private IList<JObject> getAircraftCertPermitsToFly(long certId, Dictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_FLY_PERMIT WHERE {0} {1}",
@@ -2178,7 +2186,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", null),
-                                    new JProperty("caseType", Utils.DUMMY_PILOT_CASE_TYPE),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", null),
                                     new JProperty("pageCount", null),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))

@@ -151,6 +151,17 @@ namespace Gva.MigrationTool.Nomenclatures
 
             using (var dependencies = dependencyFactory())
             {
+                noms["aircraftCaseTypes"] = dependencies.Value.Item3.GetCaseTypesForSet("Aircraft").ToDictionary(ct => Guid.NewGuid().ToString(), ct =>
+                    new NomValue
+                    {
+                        NomValueId = ct.GvaCaseTypeId,
+                        Name = ct.Name,
+                        Alias = ct.Alias
+                    });
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
                 noms["airworthinessCertificateTypes"] = dependencies.Value.Item2.GetNomValues("airworthinessCertificateTypes").ToDictionary(n => Guid.NewGuid().ToString());
             }
 

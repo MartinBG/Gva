@@ -77,7 +77,7 @@ namespace Gva.MigrationTool
                 return null;
             }
             hours = hours.HasValue ? hours.Value : 0;
-            minutes = hours.HasValue ? minutes.Value : 0;
+            minutes = minutes.HasValue ? minutes.Value : 0;
 
             return ((hours * 60) + minutes) * 60000;
         }
