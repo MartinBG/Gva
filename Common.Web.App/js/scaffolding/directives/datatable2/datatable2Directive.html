@@ -1,0 +1,46 @@
+﻿<div>
+  <div ng-transclude></div>
+
+  <div class="form-inline" style="text-align: right; margin-bottom: 3px;">
+    <div class="form-group" ng-show="filterable" style="width: 300px">
+      <input ng-model="filter" type="search" class="form-control input-sm" placeholder="{{dataTableTexts.search}}" />
+    </div>
+
+    <div class="form-group" ng-show="filterable">
+      <select ng-model="pageSize" class="form-control input-sm" style="width: 100px; text-align: left;">
+        <option >10</option>
+        <option >25</option>
+        <option >50</option>
+        <option >100</option>
+      </select>
+    </div>
+
+    <div class="btn-group dynamic-columns-btn" ng-show="dynamicColumns">
+      <button type="button" class="btn btn-default btn-sm" l10n-text="scaffolding.scDatatable.deleteColumns"></button>
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu pull-right" role="menu" style="text-align: left;">
+        <li ng-repeat="column in columnDefs | filter:nonEmpty">
+          <input type="checkbox" ng-click="hideColumn(column.index[0])" ng-model="column.visible">
+          <span>{{column.title}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div ng-class="{'table-responsive': scrollable}">
+    <table style="margin-bottom: 0; clear: both;" cellpadding="0" cellspacing="0" border="0" class="table table-bordered sc-data-table"></table>
+  </div>
+
+  <div class="datatable-info-text pull-left" style="padding-top: 8px; font-size: 11px;" ng-show="hasInfoText">{{dataTableTexts.info}}</div>
+  <div class="datatable-filtered-text pull-left" style="margin-left: 3px; padding-top: 8px; font-size: 11px;" ng-show="hasInfoText && filter && (items.length !== filteredItems.length)">{{dataTableTexts.filtered}}</div>
+  <ul class="pagination pull-right" style="margin: 2px;">
+    <li ng-class="{'disabled' : pagingContents.length === 0 || currentPage === 1}"><a href="" ng-click="setCurrentPage(currentPage-1, $event)">{{dataTableTexts.previousPage}}</a></li>
+    <li ng-class="{'disabled' : !pagingContent, 'active' : pagingContent === currentPage}" ng-repeat="pagingContent in pagingContents">
+      <a href="" ng-click="setCurrentPage(pagingContent, $event)">{{pagingContent || '...'}}</a>
+    </li>
+    <li ng-class="{'disabled' : pagingContents.length === 0 || currentPage === pageCount}"><a href="" ng-click="setCurrentPage(currentPage+1, $event)">{{dataTableTexts.nextPage}}</a></li>
+  </ul>
+</div>

@@ -7,6 +7,7 @@
     $state,
     $stateParams,
     $sce,
+    Docs,
     docs
   ) {
     $scope.docs = docs.documents;
@@ -60,6 +61,18 @@
     $scope.newDoc = function () {
       return $state.go('root.docs.new');
     };
+
+    $scope.getDocs = function (page, pageSize) {
+      var params = {};
+
+      _.assign(params, $stateParams);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return Docs.get(params).$promise;
+    };
   }
 
   DocsSearchCtrl.$inject = [
@@ -67,9 +80,11 @@
     '$state',
     '$stateParams',
     '$sce',
+    'Docs',
     'docs'
   ];
 
+  //? this resolve is useless as the scDatatable2 will make the call?
   DocsSearchCtrl.$resolve = {
     docs: [
       '$stateParams',

@@ -159,6 +159,10 @@
     <Content Include="js\scaffolding\directives\button\buttonDirective.js" />
     <Content Include="js\scaffolding\directives\click\clickDirective.js" />
     <Content Include="js\scaffolding\directives\accessToken\accessTokenDirective.js" />
+    <Content Include="js\scaffolding\directives\datatable2\column2Directive.js" />
+    <Content Include="js\scaffolding\directives\datatable2\datatable2Ctrl.js" />
+    <Content Include="js\scaffolding\directives\datatable2\datatable2Directive.html" />
+    <Content Include="js\scaffolding\directives\datatable2\datatable2Directive.js" />
     <Content Include="js\scaffolding\directives\suggestion\textareaSuggestionDirective.html" />
     <Content Include="js\scaffolding\directives\suggestion\suggestionDirectives.js" />
     <Content Include="js\scaffolding\directives\suggestion\textSuggestionDirective.html" />

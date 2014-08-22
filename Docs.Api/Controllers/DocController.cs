@@ -208,10 +208,6 @@ namespace Docs.Api.Controllers
         {
             this.userContext = this.Request.GetUserContext();
 
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            limit = 1000;
-            offset = 0;
-
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
             ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
@@ -443,8 +439,6 @@ namespace Docs.Api.Controllers
 
             List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
 
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            //? gonna fail miserably with more docs
             foreach (var item in returnValue)
             {
                 if (docView == DocView.ForControl || docView == DocView.ForManagement)
