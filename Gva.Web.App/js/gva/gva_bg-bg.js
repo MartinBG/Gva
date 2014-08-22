@@ -658,7 +658,6 @@
           issueDate: 'Дата на издаване',
           issueNumber: 'Удостоверение №',
           validToDate: 'Срок на валидност',
-          audit: 'Инспекция',
           organization: 'Организация',
           inspector: 'Проверил',
           valid: 'Валиден'
