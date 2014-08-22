@@ -20,6 +20,8 @@ namespace Gva.Api.ModelsDO.Persons
 
         public int? Index { get; set; }
 
+        public NomValue Inspector { get; set; }
+
         [Required(ErrorMessage = "DocumentDateValidFrom is required!")]
         public DateTime? DocumentDateValidFrom { get; set; }
 

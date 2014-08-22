@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Common.Api.Repositories.NomRepository;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -25,13 +26,15 @@ namespace Gva.Api.Controllers.Persons
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
         private ILotEventDispatcher lotEventDispatcher;
+        private INomRepository nomRepository;
 
         public PersonLicencesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            INomRepository nomRepository)
             : base("licences", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
         {
             this.path = "licences";
@@ -39,6 +42,7 @@ namespace Gva.Api.Controllers.Persons
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
             this.lotEventDispatcher = lotEventDispatcher;
+            this.nomRepository = nomRepository;
         }
 
         [Route("new")]
@@ -54,6 +58,7 @@ namespace Gva.Api.Controllers.Persons
             PersonLicenceDO newLicence = new PersonLicenceDO()
             {
                 NextIndex = 1,
+                Valid = this.nomRepository.GetNomValue("boolean", "yes"),
                 Editions = new[]
                 {
                     new PersonLicenceEditionDO()
