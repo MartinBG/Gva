@@ -130,6 +130,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftDataDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectionDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
     <Compile Include="ModelsDO\Organizations\AmendmentDO.cs" />
     <Compile Include="ModelsDO\Organizations\Lims145DO.cs" />
     <Compile Include="ModelsDO\Organizations\Lims147DO.cs" />
