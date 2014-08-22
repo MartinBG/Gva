@@ -1063,7 +1063,7 @@ namespace Gva.MigrationTool.Sets
 
                         documentNumberPrefix = r.Field<string>("NO1"),
                         documentNumber = r.Field<string>("NO2"),
-                        documentNumbeSuffix = r.Field<string>("NO3"),
+                        documentNumberSuffix = r.Field<string>("NO3"),
                         documentDateValidFrom = r.Field<DateTime?>("DATE_FROM"),
                         documentDateValidTo = r.Field<DateTime?>("DATE_TO"),
                         medClass = noms["medClasses"].ByOldId(r.Field<decimal?>("MED_CLASS_ID").ToString()),
@@ -1138,7 +1138,7 @@ namespace Gva.MigrationTool.Sets
 
                                     "documentNumberPrefix",
                                     "documentNumber",
-                                    "documentNumbeSuffix",
+                                    "documentNumberSuffix",
                                     "documentDateValidFrom",
                                     "documentDateValidTo",
                                     "medClass",

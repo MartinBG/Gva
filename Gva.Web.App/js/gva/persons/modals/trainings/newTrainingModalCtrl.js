@@ -47,7 +47,7 @@
       'scModalParams',
       function (PersonDocumentTrainings, scModalParams) {
         return PersonDocumentTrainings.newTraining({
-          id: scModalParams.id,
+          id: scModalParams.lotId,
           appId: scModalParams.appId
         }).$promise;
       }
