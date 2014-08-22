@@ -1195,9 +1195,9 @@ namespace Gva.MigrationTool.Sets
                         nightIFR = new { hours = r.Field<short?>("AMNTH_NGT_I"), minutes = r.Field<short?>("AMNTM_NGT_I") },
                         nightVFR = new { hours = r.Field<short?>("AMNTH_NGT_V"), minutes = r.Field<short?>("AMNTM_NGT_V") },
                         nightLandings = r.Field<short?>("LND_NGT"),
-                        total = new { hours = r.Field<int?>("AMOUNT"), minutes = r.Field<short?>("AMOUNT_M") },
-                        totalDoc = new { hours = r.Field<int?>("AMOUNT_SUM"), minutes = r.Field<short?>("AMOUNT_M_SUM") },
-                        totalLastMonths = new { hours = r.Field<int?>("AMOUNT_12"), minutes = r.Field<short?>("AMOUNT_M_12") },
+                        total = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT"), r.Field<short?>("AMOUNT_M")),
+                        totalDoc = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT_SUM"), r.Field<short?>("AMOUNT_M_SUM")),
+                        totalLastMonths = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT_12"), r.Field<short?>("AMOUNT_M_12")),
                         notes = r.Field<string>("NOTES")
                     }))
                 .ToList();
