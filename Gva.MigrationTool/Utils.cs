@@ -69,5 +69,17 @@ namespace Gva.MigrationTool
 
             return o;
         }
+
+        public static int? TimeToMilliseconds(int? hours, int? minutes)
+        {
+            if (!hours.HasValue && !minutes.HasValue)
+            {
+                return null;
+            }
+            hours = hours.HasValue ? hours.Value : 0;
+            minutes = hours.HasValue ? minutes.Value : 0;
+
+            return ((hours * 60) + minutes) * 60000;
+        }
     }
 }
