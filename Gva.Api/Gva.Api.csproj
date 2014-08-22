@@ -140,7 +140,6 @@
     <Compile Include="ModelsDO\Organizations\EquipmentDO.cs" />
     <Compile Include="ModelsDO\Organizations\ExtDO.cs" />
     <Compile Include="ModelsDO\Organizations\IncludedDocumentDO.cs" />
-    <Compile Include="ModelsDO\Common\ExaminerDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationDescriptionReviewDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationPartDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDO.cs" />

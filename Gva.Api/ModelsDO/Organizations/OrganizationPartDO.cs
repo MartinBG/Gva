@@ -9,9 +9,9 @@ namespace Gva.Api.ModelsDO.Organizations
     {
         public OrganizationPartDO()
         {
-            this.Examiners = new List<ExaminerDO>();
+            this.Examiners = new List<NomValue>();
         }
 
-        public List<ExaminerDO> Examiners { get; set; }
+        public List<NomValue> Examiners { get; set; }
     }
 }
