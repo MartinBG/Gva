@@ -13,7 +13,7 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public string Email { get; set; }
 
-        public NomValue ContactPerson { get; set; }
+        public string ContactPerson { get; set; }
 
         public string Fax { get; set; }
 

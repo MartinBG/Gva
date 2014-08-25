@@ -5,8 +5,10 @@
   </div>
   <div class="row">
     <sc-field type="text" ng-model="model.email" l10n-text="organizations.organizationAddressDirective.email" class="col-sm-4 col-md-3"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.contactPerson" alias="'persons'" l10n-text="organizations.organizationAddressDirective.contactPerson" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="text" ng-model="model.fax" l10n-text="organizations.organizationAddressDirective.fax" class="col-sm-3 col-md-2"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="text" ng-model="model.contactPerson" l10n-text="organizations.organizationAddressDirective.contactPerson" class="col-sm-8 col-md-6"></sc-field>
   </div>
   <div class="row">
     <sc-field type="text" ng-model="model.address" ng-required="true" l10n-text="organizations.organizationAddressDirective.address" class="col-sm-6 col-md-4"></sc-field>
