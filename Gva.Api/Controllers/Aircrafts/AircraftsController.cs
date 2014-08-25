@@ -79,6 +79,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
+        [Validate]
         public IHttpActionResult PostAircraft(AircraftDO aircraft)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
@@ -156,7 +157,6 @@ namespace Gva.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftData$)}")]
-        [Validate]
         public IHttpActionResult GetAircraftData(int lotId)
         {
             var aircraft = this.lotRepository.GetLotIndex(lotId);
