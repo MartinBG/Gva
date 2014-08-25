@@ -9,8 +9,12 @@ namespace Gva.Api.ModelsDO.Organizations
     {
         public NomValue Inspector { get; set; }
 
-        public DateTime? approvalDate { get; set; }
+        public DateTime? ApprovalDate { get; set; }
 
         public Object LinkedLim { get; set; }
+
+        public int? PartIndex { get; set; }
+
+        public string SetPartAlias { get; set; }
     }
 }
