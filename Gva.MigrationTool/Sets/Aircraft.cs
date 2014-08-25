@@ -1387,11 +1387,9 @@ namespace Gva.MigrationTool.Sets
                         __PAGES_COUNT = (int?)r.Field<decimal?>("PAGES_COUNT"),
 
                         localDate = r.Field<DateTime?>("LOCAL_DATE"),
-                        localTime = new
-                        {
-                            hours = r.Field<DateTime?>("LOCAL_DATE").Value.Hour,
-                            minutes = r.Field<DateTime?>("LOCAL_DATE").Value.Minute
-                        },
+                        localTime = Utils.TimeToMilliseconds(
+                            r.Field<DateTime?>("LOCAL_DATE").Value.Hour,
+                            r.Field<DateTime?>("LOCAL_DATE").Value.Minute),
                         aircraftOccurrenceClass = noms["aircraftOccurrenceClasses"].ByCode(r.Field<string>("CLASS")),
                         country = noms["countries"].ByOldId(r.Field<decimal?>("ID_COUNTRY").ToString()),
                         area = r.Field<string>("AREA"),
