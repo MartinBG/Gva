@@ -10,7 +10,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public NomValue Examiner { get; set; }
 
-        public NomValue Other { get; set; }
-
+        public string Other { get; set; }
     }
 }

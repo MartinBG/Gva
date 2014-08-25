@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
-using System.Collections.Generic;
 
 namespace Gva.Api.ModelsDO.Aircrafts
 {
@@ -9,7 +9,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
     {
         public AircraftCertAirworthinessFMDO()
         {
-            this.Reviews = new List<Object>();
+            this.Reviews = new List<AircraftCertAirworthinessReviewFMDO>();
         }
 
         [Required(ErrorMessage = "AirworthinessCertificateType is required.")]
@@ -24,7 +24,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
         [Required(ErrorMessage = "IssueDate is required.")]
         public DateTime? IssueDate { get; set; }
 
-        public List<Object> Reviews { get; set; }
-
+        public List<AircraftCertAirworthinessReviewFMDO> Reviews { get; set; }
     }
 }
