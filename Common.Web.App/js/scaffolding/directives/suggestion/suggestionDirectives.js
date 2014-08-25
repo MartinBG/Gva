@@ -12,8 +12,8 @@
         return function findMatches(term, cb) {
           return $http({
             method: 'GET',
-            url: 'api/suggestions/notes',
-            params: { alias: alias, term: term }
+            url: 'api/suggestions/' + alias,
+            params: {term: term}
           })
           .then(function (result) {
             return cb(result.data);
