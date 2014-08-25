@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Web.Http;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Http;
+using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.ApplicationRepository;
-using Regs.Api.LotEvents;
-using Regs.Api.Repositories.LotRepositories;
 using Gva.Api.Repositories.FileRepository;
-using Common.Api.UserContext;
+using Regs.Api.LotEvents;
 using Regs.Api.Models;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
@@ -29,6 +29,7 @@ namespace Gva.Api.Controllers.Aircrafts
         public AircraftCertRegistrationsFMController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
+            IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher)
             : base("aircraftCertRegistrationsFM", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
@@ -61,7 +62,7 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts("aircraftDocumentDebtsFM").Where(e => e.Content.Get<int>("registration.partIndex") == partIndex);
 
-            return Ok(parts.Select(pv => new PartVersionDO(pv)));
+            return Ok(parts.Select(pv => new FilePartVersionDO<AircraftDocumentDebtFMDO>(pv)));
         }
 
         [Route("view")]
@@ -71,9 +72,10 @@ namespace Gva.Api.Controllers.Aircrafts
             var index = this.lotRepository.GetLotIndex(lotId).Index;
             var registrations = index.GetParts("aircraftCertRegistrationsFM");
             var airworthinesses = index.GetParts("aircraftCertAirworthinessesFM");
+
             if (registrations.Length > 0)
             {
-                return Ok(CreateRegistrationView(registrations, airworthinesses, partIndex));
+                return Ok(this.CreateRegistrationView(registrations, airworthinesses, partIndex));
             }
             else
             {
@@ -83,7 +85,9 @@ namespace Gva.Api.Controllers.Aircrafts
 
         public override IHttpActionResult GetParts(int lotId)
         {
-            var parts = this.lotRepository.GetLotIndex(lotId).Index.GetParts(this.path).OrderByDescending(e => e.Content.Get<int>("actNumber"));
+            var parts = this.lotRepository.GetLotIndex(lotId).Index
+                .GetParts(this.path)
+                .OrderByDescending(e => e.Content.Get<int>("actNumber"));
 
             return Ok(parts.Select(pv => new ApplicationPartVersionDO<AircraftCertRegistrationFMDO>(pv)));
         }
@@ -93,8 +97,10 @@ namespace Gva.Api.Controllers.Aircrafts
             UserContext userContext = this.Request.GetUserContext();
             var lot = this.lotRepository.GetLotIndex(lotId);
             var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), userContext);
+
             this.fileRepository.DeleteFileReferences(partVersion);
             this.applicationRepository.DeleteApplicationRefs(partVersion);
+
             var registrations = this.lotRepository.GetLotIndex(lotId).Index.GetParts(this.path).ToList();
             if (registrations.Count > 0)
             {
@@ -102,14 +108,14 @@ namespace Gva.Api.Controllers.Aircrafts
                 lastRegistration.Content.Property("isCurrent").Value = true;
                 lot.UpdatePart(this.path + "/" + lastRegistration.Part.Index, lastRegistration.Content, userContext);
             }
-            lot.Commit(userContext, lotEventDispatcher);
 
+            lot.Commit(userContext, this.lotEventDispatcher);
             this.unitOfWork.Save();
 
             return Ok();
         }
 
-        public RegistrationViewDO CreateRegistrationView(IEnumerable<PartVersion> registrations, IEnumerable<PartVersion> airworthinesses, int? regPartIndex)
+        private RegistrationViewDO CreateRegistrationView(IEnumerable<PartVersion> registrations, IEnumerable<PartVersion> airworthinesses, int? regPartIndex)
         {
             var regs =
                 (from r in registrations

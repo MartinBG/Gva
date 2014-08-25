@@ -1,0 +1,31 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Common.Api.Models;
+
+namespace Gva.Api.ModelsDO.Aircrafts
+{
+    public class AircraftCertDeregFMDO
+    {
+        [Required(ErrorMessage = "Date is required.")]
+        public DateTime? Date { get; set; }
+
+        [Required(ErrorMessage = "Reason is required.")]
+        public NomValue Reason { get; set; }
+
+        public string Text { get; set; }
+
+        public string DocumentNumber { get; set; }
+
+        public DateTime? DocumentDate { get; set; }
+
+        public NomValue Inspector { get; set; }
+
+        public NomValue Country { get; set; }
+
+        public string Notes { get; set; }
+
+        public string NotesAlt { get; set; }
+
+        public AircraftCertDeregExportFMDO Export { get; set; }
+    }
+}

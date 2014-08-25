@@ -1,7 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Common.Api.Models;
 using System.Collections.Generic;
+using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Aircrafts
 {
@@ -47,7 +46,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? LeasingDocDate { get; set; }
 
-        public string LeasingEndDate { get; set; }
+        public DateTime? LeasingEndDate { get; set; }
 
         public NomValue LesorOrganization { get; set; }
 
@@ -55,7 +54,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public string LeasingAgreement { get; set; }
 
-        public Object Removal { get; set; }
+        public AircraftCertDeregFMDO Removal { get; set; }
 
         public bool? IsActive { get; set; }
 
@@ -66,6 +65,5 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public bool? OperIsOrg { get; set; }
 
         public bool? LessorIsOrg { get; set; }
-        
     }
 }

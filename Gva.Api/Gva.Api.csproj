@@ -126,6 +126,8 @@
     <Compile Include="Controllers\Organizations\OrganizationCertGroundServiceOperatorsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationRecommendationsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationGroundServiceOperatorsSnoOperationalController.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregExportFMDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRegistrationFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDataDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDO.cs" />
