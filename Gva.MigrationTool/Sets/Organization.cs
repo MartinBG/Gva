@@ -195,13 +195,13 @@ namespace Gva.MigrationTool.Sets
                         lot.CreatePart("organizationAddresses/*", organizationAddress, context);
                     }
 
-                    Dictionary<int, JObject> organizationDocuments = new Dictionary<int, JObject>();
+                    Dictionary<int, PartVersion> organizationDocuments = new Dictionary<int, PartVersion>();
 
                     var organizationDocumentOthers = this.getOrganizationDocumentOthers(organizationId, nomApplications, noms);
                     foreach (var organizationDocumentOther in organizationDocumentOthers)
                     {
                         var pv = addPartWithFiles("organizationDocumentOthers/*", organizationDocumentOther);
-                        organizationDocuments.Add(organizationDocumentOther["part"]["__oldId"].Value<int>(), pv.Content);
+                        organizationDocuments.Add(organizationDocumentOther["part"]["__oldId"].Value<int>(), pv);
                     }
 
                     var organizationAuditPlans = this.getOrganizationAuditPlan(organizationId, noms);
@@ -332,7 +332,7 @@ namespace Gva.MigrationTool.Sets
         private IList<JObject> getOrganizationApproval(
             int organizationId, Dictionary<string,
             Dictionary<string, NomValue>> noms,
-            Dictionary<int, JObject> orgDocuments,
+            Dictionary<int, PartVersion> orgDocuments,
             Func<int?, JObject> getPersonByApexId,
             Dictionary<int, JObject> nomApplications)
         {
@@ -386,7 +386,12 @@ namespace Gva.MigrationTool.Sets
                         linkedLim = r.Field<long?>("ID_SCH_145") == null ?
                                 r.Field<long?>("ID_SCH_147") == null ? r.Field<long?>("ID_SCH_MG") == null ? null : limMG[r.Field<long?>("ID_SCH_MG")] : lim147[r.Field<long?>("ID_SCH_147")] :
                                 lim145[r.Field<long?>("ID_SCH_145")],
-                        linkedDocument = orgDocuments.ContainsKey(r.Field<int>("PERSON_DOCUMENT_ID")) ? orgDocuments[r.Field<int>("PERSON_DOCUMENT_ID")] : null,
+                        partIndex = orgDocuments.ContainsKey(r.Field<int>("PERSON_DOCUMENT_ID")) ?
+                            (int?)orgDocuments[r.Field<int>("PERSON_DOCUMENT_ID")].Part.Index :
+                            null,
+                        setPartAlias = orgDocuments.ContainsKey(r.Field<int>("PERSON_DOCUMENT_ID")) ?
+                            orgDocuments[r.Field<int>("PERSON_DOCUMENT_ID")].Part.SetPart.Alias :
+                            null,
                     })
                 .GroupBy(g => g.__approvalScheduleId)
                 .ToDictionary(l => l.Key, l => l.Select(n =>
@@ -397,7 +402,8 @@ namespace Gva.MigrationTool.Sets
                         n.inspector,
                         n.approvalDate,
                         n.linkedLim,
-                        n.linkedDocument
+                        n.partIndex,
+                        n.setPartAlias
                     }).ToArray());
 
             var limsMGResults = this.oracleConn.CreateStoreCommand(
