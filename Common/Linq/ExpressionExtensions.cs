@@ -31,6 +31,17 @@ namespace Common.Linq
             return expr.AndPropertyEquals(prop, value.Value);
         }
 
+        public static Expression<Func<T1, bool>> AndEquals<T1, T2>(this Expression<Func<T1, bool>> expr, Expression<Func<T1, Nullable<T2>>> prop, Nullable<T2> value)
+            where T2 : struct
+        {
+            if (!value.HasValue)
+            {
+                return expr;
+            }
+
+            return expr.AndPropertyEquals(prop, value);
+        }
+
         public static Expression<Func<T, bool>> AndStringMatches<T>(this Expression<Func<T, bool>> expr, Expression<Func<T, string>> prop, string value, bool exactMatch)
         {
             if (string.IsNullOrEmpty(value))

@@ -12,7 +12,7 @@ namespace Gva.Api.Models.Views.Person
     {
         public int LotId { get; set; }
 
-        public int Lin { get; set; }
+        public int? Lin { get; set; }
 
         public int LinTypeId { get; set; }
 

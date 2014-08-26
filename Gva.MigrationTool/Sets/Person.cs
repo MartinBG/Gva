@@ -72,12 +72,6 @@ namespace Gva.MigrationTool.Sets
 
                     var personData = this.getPersonData(personId, noms, personCaseTypes);
 
-                    if (!personData.Get<int?>("lin").HasValue)
-                    {
-                        Console.WriteLine("NO LIN FOR PERSON WITH ID " + personId);
-                        continue;
-                    }
-
                     var lot = lotRepository.CreateLot("Person", context);
 
                     caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes").Select(ct => ct.Get<int>("nomValueId")));

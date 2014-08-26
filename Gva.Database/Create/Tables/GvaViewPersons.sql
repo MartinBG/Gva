@@ -3,7 +3,7 @@ GO
 
 CREATE TABLE [dbo].[GvaViewPersons] (
     [LotId]            INT           NOT NULL,
-    [Lin]              INT           NOT NULL UNIQUE,
+    [Lin]              INT           NULL,
     [LinTypeId]        INT           NOT NULL,
     [Uin]              NVARCHAR(50)  NULL,
     [Names]            NVARCHAR(MAX) NOT NULL,
@@ -18,6 +18,11 @@ CREATE TABLE [dbo].[GvaViewPersons] (
     CONSTRAINT [FK_GvaViewPersons_GvaViewOrganizations] FOREIGN KEY ([OrganizationId]) REFERENCES [dbo].[GvaViewOrganizations] ([LotId]),
     CONSTRAINT [FK_GvaViewPersons_NomValues2]           FOREIGN KEY ([EmploymentId])   REFERENCES [dbo].[NomValues] ([NomValueId])
 )
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [UQ_IDX_GvaViewPersons_Lin]
+ON [dbo].[GvaViewPersons](Lin)
+WHERE Lin IS NOT NULL;
 GO
 
 CREATE UNIQUE NONCLUSTERED INDEX [UQ_IDX_GvaViewPersons_Uin]
