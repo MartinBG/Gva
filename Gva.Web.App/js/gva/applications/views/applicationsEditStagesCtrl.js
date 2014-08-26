@@ -116,21 +116,26 @@
       'Docs',
       'application',
       function resolveDoc($stateParams, Docs, application) {
-        return Docs.get({ id: application.docId }).$promise.then(function (doc) {
-          doc.openAccordion = false;
-          doc.flags = {};
+        if (application.docId) {
+          return Docs.get({ id: application.docId }).$promise.then(function (doc) {
+            doc.openAccordion = false;
+            doc.flags = {};
 
-          //? depends on caseDoc on current doc
-          doc.flags.isVisibleNextStageCmd = true;
-          doc.flags.isVisibleEndStageCmd = doc.docElectronicServiceStages.length > 0 &&
-            !doc.docElectronicServiceStages[doc.docElectronicServiceStages.length - 1].endingDate;
-          doc.flags.isVisibleEditStageCmd =
-            doc.canEditTechElectronicServiceStage;
-          doc.flags.isVisibleReverseStageCmd = doc.docElectronicServiceStages.length > 1 &&
-            doc.canEditTechElectronicServiceStage;
+            //? depends on caseDoc on current doc
+            doc.flags.isVisibleNextStageCmd = true;
+            doc.flags.isVisibleEndStageCmd = doc.docElectronicServiceStages.length > 0 &&
+              !doc.docElectronicServiceStages[doc.docElectronicServiceStages.length - 1].endingDate;
+            doc.flags.isVisibleEditStageCmd =
+              doc.canEditTechElectronicServiceStage;
+            doc.flags.isVisibleReverseStageCmd = doc.docElectronicServiceStages.length > 1 &&
+              doc.canEditTechElectronicServiceStage;
 
-          return doc;
-        });
+            return doc;
+          });
+        }
+        else {
+          return {};
+        }
       }
     ],
     appStages: [
