@@ -7,9 +7,9 @@
     $state,
     $stateParams,
     AircraftInspections,
-    aircraftInspection) {
+    aircraftInspection
+  ) {
     $scope.aircraftInspection = aircraftInspection;
-    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newInspectionForm.$validate()
@@ -18,8 +18,11 @@
           return AircraftInspections
             .save({ id: $stateParams.id }, $scope.aircraftInspection)
             .$promise
-            .then(function () {
-              return $state.go('root.aircrafts.view.inspections.search');
+            .then(function (inspection) {
+              return $state.go('root.aircrafts.view.inspections.edit', { 
+                  id: $stateParams.id,
+                  ind: inspection.partIndex
+                });
             });
         }
       });

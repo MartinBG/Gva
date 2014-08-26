@@ -10,7 +10,7 @@
   ) {
     $scope.inspections = _.chain(inspections)
       .filter(function (inspection) {
-        return inspection.part.auditDetails.length !== 0;
+        return inspection.part.inspectionDetails.length > 0;
       })
       .map(function (inspection) {
         if (_.contains(scModalParams.includedInspections, inspection.partIndex)) {

@@ -6,7 +6,8 @@
     return $resource('api/organizations/:id/organizationInspections/:ind', {}, {
       getRecommendations: {
         method: 'GET',
-        url: 'api/organizations/:id/organizationInspections/:ind/recommendations'
+        url: 'api/organizations/:id/organizationInspections/:ind/recommendations',
+        isArray: true
       },
       newInspection: {
         method: 'GET',

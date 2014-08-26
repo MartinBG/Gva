@@ -1,18 +1,19 @@
 ﻿<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <h5 class="table-header" l10n-text="{{examinersText}}"></h5>
   <label class="control-label" ng-show="!form.$readonly">
-    <sc-button btn-click="addExaminer()" text="common.examinerDirective.addExaminer" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+    <sc-button btn-click="addExaminer()" text="{{addExaminerText}}" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
   </label>
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
         <th width="1px" ng-show="!form.$readonly"></th>
         <th width="1px" ng-show="!form.$readonly"></th>
-        <th l10n-text="common.examinerDirective.examiner"></th>
+        <th l10n-text="{{examinerText}}"></th>
       </tr>
     </thead>
     <tbody ng-model="model" ui-sortable="{items:'tr:not(.sort-disabled)' }">
       <tr class="sort-disabled" ng-if="!model.length">
-        <td colspan="{{form.$readonly ? 1 : 3}}" class="text-center" l10n-text="common.examinerDirective.noAvailableExaminers"></td>
+        <td colspan="{{form.$readonly ? 1 : 3}}" class="text-center" l10n-text="{{noAvailableExaminersText}}"></td>
       </tr>
       <tr ng-repeat="examiner in model" ng-class="{'sort-disabled': form.$readonly}">
         <td ng-show="!form.$readonly"><span class="fa fa-bars"></span>

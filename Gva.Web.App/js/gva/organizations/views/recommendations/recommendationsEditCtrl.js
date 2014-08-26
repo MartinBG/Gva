@@ -1,5 +1,5 @@
 ﻿/*global angular,_*/
-(function (angular) {
+(function (angular, _) {
   'use strict';
 
   function RecommendationsEditCtrl(
@@ -8,10 +8,12 @@
     $stateParams,
     OrganizationRecommendations,
     organizationRecommendation,
+    recommendationInspections,
     scMessage
   ) {
     var originalRecommendation = _.cloneDeep(organizationRecommendation);
     $scope.lotId = $stateParams.id;
+    $scope.recommendationInspections = recommendationInspections;
 
     $scope.organizationRecommendation = organizationRecommendation;
     $scope.editMode = null;
@@ -62,6 +64,7 @@
     '$stateParams',
     'OrganizationRecommendations',
     'organizationRecommendation',
+    'recommendationInspections',
     'scMessage'
   ];
 
@@ -75,8 +78,33 @@
           ind: $stateParams.ind
         }).$promise;
       }
+    ],
+    recommendationInspections: [
+      '$stateParams',
+      '$q',
+      'OrganizationRecommendations',
+      'OrganizationInspections',
+      function ($stateParams, $q, OrganizationRecommendations, OrganizationInspections) {
+        return OrganizationRecommendations
+          .get({
+            id: $stateParams.id,
+            ind: $stateParams.ind
+          })
+          .$promise
+          .then(function (recommendation) {
+            //TODO move to a projection
+            return $q.all(_.map(recommendation.part.inspections, function (inspectionPartIndex) {
+              return OrganizationInspections
+                .get({
+                  id: $stateParams.id,
+                  ind: inspectionPartIndex
+                })
+                .$promise;
+            }));
+          });
+      }
     ]
   };
 
   angular.module('gva').controller('RecommendationsEditCtrl', RecommendationsEditCtrl);
-}(angular));
+}(angular, _));

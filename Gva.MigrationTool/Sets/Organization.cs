@@ -67,9 +67,13 @@ namespace Gva.MigrationTool.Sets
 
                 foreach (var organizationId in organizationIds)
                 {
+                    var orgCaseTypes = this.getOrgCaseTypes(organizationId, noms);
+                    orgCaseTypes.Add(noms["organizationCaseTypes"].ByAlias("org"));
+
+                    var organizationData = this.getOrganizationData(organizationId, noms, orgCaseTypes);
+
                     var lot = lotRepository.CreateLot("Organization", context);
 
-                    var organizationData = this.getOrganizationData(organizationId, noms);
                     caseTypeRepository.AddCaseTypes(lot, organizationData.GetItems<JObject>("caseTypes").Select(ct => ct.Get<int>("nomValueId")));
 
                     lot.CreatePart("organizationData", organizationData, context);
@@ -180,13 +184,13 @@ namespace Gva.MigrationTool.Sets
                                 Utils.ToJObject(appNomDO));
                     }
 
-                    //Dictionary<int, int> inspections = new Dictionary<int, int>();
-
+                    Dictionary<int, int> inspectionPartIndexes = new Dictionary<int, int>();
                     var organizationInspections = this.getOrganizationInspections(organizationId, nomApplications, getPersonByApexId, noms);
                     foreach (var organizationInspection in organizationInspections)
                     {
-                        var pv = lot.CreatePart("organizationInspections/*", organizationInspection, context);
-                        //inspections.Add(aircraftInspection["__oldId"].Value<int>(), pv.Part.Index.Value);
+                        var pv = lot.CreatePart("organizationInspections/*", organizationInspection.Get<JObject>("part"), context);
+                        applicationRepository.AddApplicationRefs(pv.Part, organizationInspection.GetItems<ApplicationNomDO>("applications"));
+                        inspectionPartIndexes.Add(organizationInspection.Get<int>("part.__oldId"), pv.Part.Index);
                     }
 
                     var organizationAddresses = this.getOrganizationAddress(organizationId, noms);
@@ -216,11 +220,11 @@ namespace Gva.MigrationTool.Sets
                         lot.CreatePart("organizationApprovals/*", organizationApproval, context);
                     }
 
-                    //var organizationRecommendations = this.getOrganizationRecommendation(organizationId, noms, organizationDocuments, getPerson, nomApplications);
-                    //foreach (var organizationRecommendation in organizationRecommendations)
-                    //{
-                    //    lot.CreatePart("organizationRecommendations/*", organizationRecommendation, context);
-                    //}
+                    var organizationRecommendations = this.getOrganizationRecommendation(organizationId, getPersonByApexId, nomApplications, noms, inspectionPartIndexes);
+                    foreach (var organizationRecommendation in organizationRecommendations)
+                    {
+                        lot.CreatePart("organizationRecommendations/*", organizationRecommendation, context);
+                    }
 
                     var organizationManagementStaffs = this.getOrganizationManagementStaff(organizationId, noms, getPersonByApexId);
                     foreach (var organizationManagementStaff in organizationManagementStaffs)
@@ -259,11 +263,35 @@ namespace Gva.MigrationTool.Sets
         {
             return this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.FIRM")
                 .Materialize(r => r.Field<int>("ID"))
-                .Where(id => new int[] { 206, 317, 367, 447, 467, 561, 563, 565, 567, 568, 742, 807, 833, 1432 }.Contains(id))
+                .Where(id => new int[] { 203, 206, 317, 367, 447, 467, 561, 563, 565, 567, 568, 742, 807, 833, 1432 }.Contains(id))
                 .ToList();
         }
 
-        private JObject getOrganizationData(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private List<NomValue> getOrgCaseTypes(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        {
+            int approvalCount = this.oracleConn.CreateStoreCommand(
+                @"SELECT COUNT(*) AP_COUNT FROM CAA_DOC.APPROVAL WHERE {0}",
+                new DbClause("ID_FIRM = {0}", organizationId))
+                .Materialize(r => r.Field<int>("AP_COUNT"))
+                .Single();
+
+            int auditsCount = this.oracleConn.CreateStoreCommand(
+                @"SELECT COUNT(*) A_COUNT FROM CAA_DOC.AUDITS WHERE {0}",
+                new DbClause("ID_FIRM = {0}", organizationId))
+                .Materialize(r => r.Field<int>("A_COUNT"))
+                .Single();
+
+            List<NomValue> result = new List<NomValue>();
+
+            if (approvalCount > 0 || auditsCount > 0)
+            {
+                result.Add(noms["organizationCaseTypes"].ByAlias("approvedOrg"));
+            }
+
+            return result;
+        }
+
+        private JObject getOrganizationData(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, List<NomValue> caseTypes)
         {
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.FIRM WHERE {0} {1}",
@@ -275,10 +303,7 @@ namespace Gva.MigrationTool.Sets
                     {
                         __oldId = r.Field<int>("ID"),
                         __migrTable = "FIRM",
-                        caseTypes = new[] //TODO
-                        {
-                            Utils.DUMMY_APPROVED_ORG_CASE_TYPE
-                        },
+                        caseTypes = caseTypes,
                         name = r.Field<string>("NAME"),
                         nameAlt = r.Field<string>("NAME_TRANS"),
                         code = r.Field<string>("CODE"),
@@ -530,9 +555,8 @@ namespace Gva.MigrationTool.Sets
                         limsMG = r.Field<long?>("ID") != null && limsMGResults.ContainsKey(r.Field<int>("ID")) ? limsMGResults[r.Field<int>("ID")] : null,
                         includedDocuments = r.Field<long?>("ID") != null && includedDocumentsResults.ContainsKey(r.Field<int>("ID")) ? includedDocumentsResults[r.Field<int>("ID")] : null,
                         applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
-                            new JArray () { nomApplications[r.Field<int>("ID_REQUEST")] } :
-                            null
-
+                            new JArray() { nomApplications[r.Field<int>("ID_REQUEST")] } :
+                            new JArray()
                     })
                 .GroupBy(g => g.__approvalId)
                 .ToDictionary(a => a.Key, a => a.Select(n =>
@@ -579,99 +603,154 @@ namespace Gva.MigrationTool.Sets
             Func<int?, JObject> getPersonByApexId,
             Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            var inspectionDisparities = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM 
-                    CAA_DOC.REC_DISPARITY
-                    WHERE ID_AUDIT in (SELECT ID FROM CAA_DOC.AUDITS WHERE {0})",
-                    new DbClause("ID_FIRM = {0}", organizationId)
+            var disparities = this.oracleConn.CreateStoreCommand(
+                @"SELECT ADT.ID ID_AUDIT,
+                        AD.ID_REQUIREMENT,
+                        RD.SEQ,
+                        RD.REF_NUMBER,
+                        RD.DESCRIPTION,
+                        RD.REC_DISPRT_LEVEL,
+                        RD.REMOVAL_DATE,
+                        RD.RECTIFY_ACTION,
+                        RD.CLOSURE_DATE,
+                        RD.CLOSURE_DOC
+                    FROM 
+                    CAA_DOC.AUDITS ADT
+                    LEFT OUTER JOIN CAA_DOC.REC_DISPARITY RD ON ADT.ID = RD.ID_AUDIT
+                    LEFT OUTER JOIN CAA_DOC.AUDITS_DETAIL AD ON RD.ID_AUDIT_DETAIL = AD.ID",
+                    new DbClause("ADT.ID_FIRM = {0}", organizationId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        idAudit = r.Field<long?>("ID_AUDIT"),
-                        idAuditDetail = r.Field<long?>("ID_AUDIT_DETAIL"),
-                        sortOrder = r.Field<decimal?>("SEQ"),
-                        refNumber = r.Field<string>("REF_NUMBER"),
-                        description = r.Field<string>("DESCRIPTION"),
-                        disparityLevel = r.Field<decimal?>("REC_DISPRT_LEVEL"),
-                        removalDate = r.Field<DateTime?>("REMOVAL_DATE"),
-                        rectifyAction = r.Field<string>("RECTIFY_ACTION"),
-                        closureDate = r.Field<DateTime?>("CLOSURE_DATE"),
-                        closureDocument = r.Field<string>("CLOSURE_DOC")
+                        ID_AUDIT = r.Field<int>("ID_AUDIT"),
+                        ID_REQUIREMENT = r.Field<int?>("ID_REQUIREMENT"),
+                        SEQ = r.Field<int?>("SEQ"),
+                        REF_NUMBER = r.Field<string>("REF_NUMBER"),
+                        DESCRIPTION = r.Field<string>("DESCRIPTION"),
+                        REC_DISPRT_LEVEL = r.Field<int?>("REC_DISPRT_LEVEL"),
+                        REMOVAL_DATE = r.Field<DateTime?>("REMOVAL_DATE"),
+                        RECTIFY_ACTION = r.Field<string>("RECTIFY_ACTION"),
+                        CLOSURE_DATE = r.Field<DateTime?>("CLOSURE_DATE"),
+                        CLOSURE_DOC = r.Field<string>("CLOSURE_DOC")
                     })
-                    .GroupBy(g => g.idAudit)
-                    .ToDictionary(g => g.Key, g =>
-                        g.GroupBy(k => k.idAuditDetail)
-                        .ToDictionary(k => k.Key, k => k.Select(n =>
-                            new
-                            {
-                                n.sortOrder,
-                                n.refNumber,
-                                n.description,
-                                n.disparityLevel,
-                                n.removalDate,
-                                n.rectifyAction,
-                                n.closureDate,
-                                n.closureDocument
-                            }).ToArray()));
+                    .GroupBy(g => g.ID_AUDIT)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g
+                            .Where(d => d.ID_REQUIREMENT.HasValue && d.REC_DISPRT_LEVEL.HasValue)
+                            .OrderBy(d => d.SEQ)
+                            .Select(d =>
+                                new
+                                {
+                                    detailCode = noms["auditPartRequirements"].ByOldId(d.ID_REQUIREMENT.ToString()).Code,
+                                    refNumber = d.REF_NUMBER,
+                                    disparityLevel =  noms["disparityLevels"].ByCode(d.REC_DISPRT_LEVEL.ToString()),
+                                    rectifyAction = d.RECTIFY_ACTION,
+                                    closureDocument = d.CLOSURE_DOC,
+                                    description = d.DESCRIPTION,
+                                    removalDate = d.REMOVAL_DATE,
+                                    closureDate = d.CLOSURE_DATE
+                                })
+                            .ToArray());
 
             var inspectionDetails = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM 
-                    CAA_DOC.AUDITS_DETAIL
-                    WHERE ID_AUDIT in (SELECT ID FROM CAA_DOC.AUDITS WHERE {0})",
-                    new DbClause("ID_FIRM = {0}", organizationId)
+                @"SELECT ADT.ID ID_AUDIT,
+                        AD.STATE,
+                        AD.ID_REQUIREMENT
+                    FROM 
+                    CAA_DOC.AUDITS ADT
+                    LEFT OUTER JOIN CAA_DOC.AUDITS_DETAIL AD ON ADT.ID = AD.ID_AUDIT
+                    WHERE {0}",
+                    new DbClause("ADT.ID_FIRM = {0}", organizationId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        auditResult = noms["auditResults"].ByCode(r.Field<string>("STATE")),
-                        auditPartRequirement = noms["auditPartRequirements"].ByOldId(r.Field<long?>("ID_REQUIREMENT").ToString()),
-                        disparities = inspectionDisparities.Keys.Contains(r.Field<long?>("ID_AUDIT")) ?
-                            (inspectionDisparities[r.Field<long?>("ID_AUDIT")].ContainsKey(r.Field<long?>("ID")) ? inspectionDisparities[r.Field<long?>("ID_AUDIT")][r.Field<long?>("ID")] : null) :
-                            null
+                        ID_AUDIT = r.Field<int>("ID_AUDIT"),
+                        STATE = r.Field<string>("STATE"),
+                        ID_REQUIREMENT = r.Field<int?>("ID_REQUIREMENT")
                     })
-                .ToArray();
+                .GroupBy(e => e.ID_AUDIT)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g
+                        .Where(i => i.ID_REQUIREMENT.HasValue)
+                        .Select(ad =>
+                            new
+                            {
+                                auditResult = noms["auditResults"].ByCode(ad.STATE ?? "-1"),
+                                auditPartRequirement = noms["auditPartRequirements"].ByOldId(ad.ID_REQUIREMENT.ToString())
+                            })
+                        .Select(r =>
+                            new
+                            {
+                                code = r.auditPartRequirement.Code,
+                                subject = r.auditPartRequirement.Name,
+                                auditResult = r.auditResult
+                            })
+                        .ToArray());
 
-            var inspectors = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM 
-                    CAA_DOC.AUDITOR
-                    WHERE ID_ODIT in (SELECT ID FROM CAA_DOC.AUDITS WHERE {0})",
-                    new DbClause("ID_FIRM = {0}", organizationId)
+            var examiners = this.oracleConn.CreateStoreCommand(
+                @"SELECT ADTR.SEQ,
+                        E.PERSON_ID,
+                        ADT.ID AUDIT_ID
+                    FROM
+                    CAA_DOC.AUDITS ADT
+                    LEFT OUTER JOIN CAA_DOC.AUDITOR ADTR ON ADT.ID = ADTR.ID_ODIT
+                    LEFT OUTER JOIN CAA_DOC.EXAMINER E ON ADTR.ID_EXAMINER = E.ID
+                    WHERE {0}",
+                    new DbClause("ADT.ID_FIRM = {0}", organizationId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        sortOrder = r.Field<decimal?>("SEQ").ToString(),
-                        examinerId = getPersonByApexId((int?)r.Field<decimal?>("ID_EXAMINER")),
+                        AUDIT_ID = r.Field<int>("AUDIT_ID"),
+                        SEQ = r.Field<int?>("SEQ"),
+                        PERSON_ID = r.Field<int?>("PERSON_ID"),
                     })
-                .ToArray();
+                .GroupBy(e => e.AUDIT_ID)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g
+                        .Where(i => i.SEQ.HasValue && i.PERSON_ID.HasValue)
+                        .OrderBy(i => i.SEQ.Value)
+                        .Select(i => getPersonByApexId(i.PERSON_ID.Value))
+                        .ToArray());
 
             return this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.AUDITS WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID_FIRM = {0}", organizationId)
+                @"SELECT * FROM CAA_DOC.AUDITS WHERE {0}",
+                new DbClause("ID_FIRM = {0}", organizationId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "AUDITS",
-                        documentNumber = r.Field<string>("DOC_NUMBER"),
-                        auditReason = noms["auditReasons"].ByCode(r.Field<string>("REASON")),
-                        auditType = noms["auditTypes"].ByCode(r.Field<string>("AUDIT_MODE")),
-                        subject = r.Field<string>("SUBJECT"),
-                        auditState = noms["auditStatuses"].ByCode(r.Field<string>("STATE")),
-                        notification = noms["boolean"].ByCode(r.Field<string>("NOTIFICATION") == "Y" ? "Y" : "N"),
-                        startDate = r.Field<DateTime?>("DATE_BEGIN"),
-                        endDate = r.Field<DateTime?>("DATE_END"),
-                        inspectionPlace = r.Field<string>("INSPECTION_PLACE"),
-                        inspectionFrom = r.Field<DateTime?>("INSPECTION_FROM"),
-                        inspectionTo = r.Field<DateTime?>("INSPECTION_TO"),
-                        auditDetails = inspectionDetails,
-                        examiners = inspectors,
+                        part =
+                            new
+                            {
+                                __oldId = r.Field<int>("ID"),
+                                __migrTable = "AUDITS",
+
+                                documentNumber = r.Field<string>("DOC_NUMBER"),
+                                auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
+                                auditReason = noms["auditReasons"].ByCode(r.Field<string>("REASON")),
+                                auditType = noms["auditTypes"].ByCode(r.Field<string>("AUDIT_MODE")),
+                                auditState = noms["auditStatuses"].ByCode(r.Field<string>("STATE")),
+                                notification = noms["boolean"].ByCode(r.Field<string>("NOTIFICATION") == "Y" ? "Y" : "N"),
+                                subject = r.Field<string>("SUBJECT"),
+                                inspectionPlace = r.Field<string>("INSPECTION_PLACE"),
+                                startDate = r.Field<DateTime?>("DATE_BEGIN"),
+                                endDate = r.Field<DateTime?>("DATE_END"),
+
+                                inspectionDetails = inspectionDetails[r.Field<int>("ID")],
+                                disparities = disparities[r.Field<int>("ID")],
+                                examiners = examiners[r.Field<int>("ID")],
+
+                                caseType = noms["organizationCaseTypes"].ByAlias("approvedOrg")
+                            },
                         applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
-                            new JArray() { nomApplications[r.Field<int>("ID_REQUEST")] } :
-                            null
+                            new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
+                            new object[0]
                     }))
                 .ToList();
         }
@@ -881,77 +960,176 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        //TODO
         private IList<JObject> getOrganizationRecommendation(
             int organizationId,
-            Func<int?, JObject> getPerson,
+            Func<int?, JObject> getPersonByApexId,
             Dictionary<int, JObject> nomApplications,
-            Dictionary<string, Dictionary<string, NomValue>> noms)
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<int, int> inspectionPartIndexes)
         {
-            var disparitiesResults = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.REC_DISPARITY WHERE ID_REC_COMPLIANCE IN ( SELECT ID FROM CAA_DOC.REC_COMPLIANCE WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE {0} {1}))",
-                new DbClause("1=1"),
-                new DbClause("and ID_FIRM = {0}", organizationId)
+            var disparities = this.oracleConn.CreateStoreCommand(
+                @"SELECT R.ID REC_ID,
+                        RC.ID_SECTION SECTION_DETAIL_ID,
+                        RD.SEQ,
+                        RD.REF_NUMBER,
+                        RD.DESCRIPTION,
+                        RD.REC_DISPRT_LEVEL,
+                        RD.REMOVAL_DATE,
+                        RD.RECTIFY_ACTION,
+                        RD.CLOSURE_DATE,
+                        RD.CLOSURE_DOC
+                    FROM 
+                    CAA_DOC.RECOMMENDATION R
+                    LEFT OUTER JOIN CAA_DOC.REC_COMPLIANCE RC ON R.ID = RC.ID_REC
+                    LEFT OUTER JOIN CAA_DOC.REC_DISPARITY RD ON RC.ID = RD.ID_REC_COMPLIANCE",
+                    new DbClause("R.ID_FIRM = {0}", organizationId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "REC_DISPARITY",
-                        sortOrder = r.Field<decimal?>("SEQ"),
-                        refNumber = r.Field<string>("REF_NUMBER"),
-                        description = r.Field<string>("DESCRIPTION"),
-                        disparityLevel = r.Field<decimal?>("REC_DISPRT_LEVEL"),
-                        removalDate = r.Field<DateTime?>("REMOVAL_DATE"),
-                        rectifyAction = r.Field<string>("RECTIFY_ACTION"),
-                        closureDate = r.Field<DateTime?>("CLOSURE_DATE"),
-                        closureDocument = r.Field<string>("CLOSURE_DOC")
+                        REC_ID = r.Field<int>("REC_ID"),
+                        SECTION_DETAIL_ID = r.Field<int?>("SECTION_DETAIL_ID"),
+                        SEQ = r.Field<int?>("SEQ"),
+                        REF_NUMBER = r.Field<string>("REF_NUMBER"),
+                        DESCRIPTION = r.Field<string>("DESCRIPTION"),
+                        REC_DISPRT_LEVEL = r.Field<decimal?>("REC_DISPRT_LEVEL"),
+                        REMOVAL_DATE = r.Field<DateTime?>("REMOVAL_DATE"),
+                        RECTIFY_ACTION = r.Field<string>("RECTIFY_ACTION"),
+                        CLOSURE_DATE = r.Field<DateTime?>("CLOSURE_DATE"),
+                        CLOSURE_DOC = r.Field<string>("CLOSURE_DOC")
                     })
-                .ToArray();
+                    .GroupBy(g => g.REC_ID)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g
+                            .Where(d => d.SECTION_DETAIL_ID.HasValue && d.REC_DISPRT_LEVEL.HasValue)
+                            .OrderBy(d => d.SEQ)
+                            .Select(d =>
+                                new
+                                {
+                                    detailCode = noms["auditPartSectionDetails"].ByOldId(d.SECTION_DETAIL_ID.ToString()).Code,
+                                    refNumber = d.REF_NUMBER,
+                                    disparityLevel = noms["disparityLevels"].ByCode(d.REC_DISPRT_LEVEL.ToString()),
+                                    rectifyAction = d.RECTIFY_ACTION,
+                                    closureDocument = d.CLOSURE_DOC,
+                                    description = d.DESCRIPTION,
+                                    removalDate = d.REMOVAL_DATE,
+                                    closureDate = d.CLOSURE_DATE
+                                })
+                            .ToArray());
 
-            var descriptionReviewResults = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.REC_COMPLIANCE WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE {0} {1})",
-                new DbClause("1=1"),
-                new DbClause("and ID_FIRM = {0}", organizationId)
+            var recommendationDetails = this.oracleConn.CreateStoreCommand(
+                @"SELECT R.ID REC_ID,
+                        RC.ID_SECTION SECTION_DETAIL_ID,
+                        RC.STATE,
+                        S.NAME SECTION_NAME,
+                        S.CODE SECTION_CODE
+                    FROM 
+                    CAA_DOC.RECOMMENDATION R
+                    LEFT OUTER JOIN CAA_DOC.REC_COMPLIANCE RC ON R.ID = RC.ID_REC
+                    LEFT OUTER JOIN CAA_DOC.NM_SECTION_DETAIL SD ON RC.ID_SECTION  = SD.ID
+                    LEFT OUTER JOIN CAA_DOC.NM_SECTION S ON SD.ID_SECTION = S.ID
+                    WHERE {0}",
+                    new DbClause("R.ID_FIRM = {0}", organizationId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "REC_COMPLIANCE",
-                        auditPartSectionDetailId = r.Field<long?>("ID_SECTION"),
-                        auditResultId = r.Field<string>("STATE"),
-                        disparities = disparitiesResults
+                        REC_ID = r.Field<int>("REC_ID"),
+                        SECTION_DETAIL_ID = r.Field<int?>("SECTION_DETAIL_ID"),
+                        STATE = r.Field<string>("STATE"),
+                        SECTION_NAME = r.Field<string>("SECTION_NAME"),
+                        SECTION_CODE = r.Field<string>("SECTION_CODE")
                     })
-                .ToArray();
+                .GroupBy(e => e.REC_ID)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g
+                        .Where(i => i.SECTION_DETAIL_ID.HasValue)
+                        .Select(ad =>
+                            new
+                            {
+                                sectionName = ad.SECTION_NAME,
+                                sectionCode = ad.SECTION_CODE,
+                                recommendationResult = noms["recommendationResults"].ByCode(ad.STATE ?? "U"),
+                                auditPartSectionDetail = noms["auditPartSectionDetails"].ByOldId(ad.SECTION_DETAIL_ID.ToString())
+                            })
+                        .GroupBy(ad => new { ad.sectionName, ad.sectionCode })
+                        .Select(g1 =>
+                            new
+                            {
+                                sectionName = g1.Key.sectionName,
+                                sectionCode = g1.Key.sectionCode,
+                                details = g1
+                                    .Select(gi =>
+                                        new
+                                        {
+                                            subject = gi.auditPartSectionDetail.Name,
+                                            recommendationResult = gi.recommendationResult,
+                                            code = gi.auditPartSectionDetail.Code,
+                                        })
+                                    .ToArray()
+                            })
+                        .ToArray());
+
+            var inspections = this.oracleConn.CreateStoreCommand(
+                @"SELECT R.ID REC_ID,
+                        A.ID AUDIT_ID
+                    FROM CAA_DOC.RECOMMENDATION R
+                    LEFT OUTER JOIN CAA_DOC.AUDITS A ON R.ID = A.ID_REC
+                    WHERE {0}",
+                new DbClause("R.ID_FIRM = {0}", organizationId)
+                )
+                .Materialize(r =>
+                    new
+                    {
+                        REC_ID = r.Field<int>("REC_ID"),
+                        AUDIT_ID = r.Field<int?>("AUDIT_ID"),
+                    })
+                .GroupBy(r => r.REC_ID)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g
+                        .Where(i => i.AUDIT_ID.HasValue)
+                        .Select(gi => inspectionPartIndexes[gi.AUDIT_ID.Value])
+                        .ToArray());
 
             var examiners = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.REC_AUDITOR WHERE ID_REC IN ( SELECT ID FROM CAA_DOC.RECOMMENDATION WHERE {0} {1})",
-                new DbClause("1=1"),
-                new DbClause("and ID_FIRM = {0}", organizationId)
+                @"SELECT A.PART,
+                        A.SEQ,
+                        E.PERSON_ID,
+                        R.ID REC_ID
+                    FROM
+                    CAA_DOC.RECOMMENDATION R
+                    LEFT OUTER JOIN CAA_DOC.REC_AUDITOR A ON R.ID = A.ID_REC
+                    LEFT OUTER JOIN CAA_DOC.EXAMINER E ON A.ID_EXAMINER = E.ID
+                    WHERE {0}",
+                    new DbClause("R.ID_FIRM = {0}", organizationId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "REC_AUDITOR",
-                        part = r.Field<string>("PART"),
-                        sortOrder = r.Field<decimal?>("SEQ"),
-                        examiner = getPerson((int?)r.Field<decimal?>("ID_EXAMINER")),
+                        PART = r.Field<string>("PART"),
+                        REC_ID = r.Field<int>("REC_ID"),
+                        SEQ = r.Field<decimal?>("SEQ"),
+                        PERSON_ID = r.Field<int?>("PERSON_ID"),
                     })
-                .GroupBy(g => g.part)
-                .ToDictionary(d => d.Key, d => d.Select(n =>
-                    new
-                    {
-                        n.part,
-                        n.sortOrder,
-                        n.examiner
-                    }).ToArray());
+                .GroupBy(e => e.REC_ID)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g
+                        .Where(i => i.SEQ.HasValue && i.PERSON_ID.HasValue && !string.IsNullOrEmpty(i.PART))
+                        .GroupBy(i => i.PART)
+                        .ToDictionary(
+                            g1 => g1.Key,
+                            g1 => g1
+                                .OrderBy(i => i.SEQ.Value)
+                                .Select(i => getPersonByApexId(i.PERSON_ID.Value))
+                                .ToArray()));
 
-            var parts = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.RECOMMENDATION WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID_FIRM = {0}", organizationId)
+            return this.oracleConn.CreateStoreCommand(
+                @"SELECT * FROM CAA_DOC.RECOMMENDATION WHERE {0}",
+                new DbClause("ID_FIRM = {0}", organizationId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
@@ -959,12 +1137,8 @@ namespace Gva.MigrationTool.Sets
                         __oldId = r.Field<int>("ID"),
                         __migrTable = "RECOMMENDATION",
 
-                        recommendationPartId = r.Field<long?>("ID_PART"),
-                        formDate = r.Field<DateTime?>("FORM_DATE"),
-                        formText = r.Field<string>("FORM_TEXT"),
-                        interviewedStaff = r.Field<string>("INTERVIEWED_STAFF"),
-                        fromDate = r.Field<DateTime?>("NADZOR_FROM"),
-                        toDate = r.Field<DateTime?>("NADZOR_TO"),
+                        auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
+
                         finished1Date = r.Field<DateTime?>("DATE_FINISHED_P1"),
                         town1 = r.Field<string>("TOWN_P1"),
                         finished2Date = r.Field<DateTime?>("DATE_FINISHED_P2"),
@@ -975,94 +1149,25 @@ namespace Gva.MigrationTool.Sets
                         town4 = r.Field<string>("TOWN_P4"),
                         finished5Date = r.Field<DateTime?>("DATE_FINISHED_P5"),
                         town5 = r.Field<string>("TOWN_P5"),
+                        part1Examiners = examiners[r.Field<int>("ID")].ContainsKey("1") ? examiners[r.Field<int>("ID")]["1"] : new object[0],
+                        part2Examiners = examiners[r.Field<int>("ID")].ContainsKey("2") ? examiners[r.Field<int>("ID")]["2"] : new object[0],
+                        part3Examiners = examiners[r.Field<int>("ID")].ContainsKey("3") ? examiners[r.Field<int>("ID")]["3"] : new object[0],
+                        part4Examiners = examiners[r.Field<int>("ID")].ContainsKey("4") ? examiners[r.Field<int>("ID")]["4"] : new object[0],
+                        part5Examiners = examiners[r.Field<int>("ID")].ContainsKey("5") ? examiners[r.Field<int>("ID")]["5"] : new object[0],
+
+                        formDate = r.Field<DateTime?>("FORM_DATE"),
+                        formText = r.Field<string>("FORM_TEXT"),
+                        interviewedStaff = r.Field<string>("INTERVIEWED_STAFF"),
+                        inspectionFromDate = r.Field<DateTime?>("NADZOR_FROM"),
+                        inspectionToDate = r.Field<DateTime?>("NADZOR_TO"),
                         documentDescription = r.Field<string>("DESCRIPTION_DOC"),
                         recommendation = r.Field<string>("RECOMMENDATION"),
-                        part1 = new
-                        {
-                            examiners = examiners.ContainsKey("1") ? examiners["1"] : null
-                        },
-                        part2 = new
-                        {
-                            examiners = examiners.ContainsKey("2") ? examiners["2"] : null
-                        },
-                        part3 = new
-                        {
-                            examiners = examiners.ContainsKey("3") ? examiners["3"] : null
-                        },
-                        part4 = new
-                        {
-                            examiners = examiners.ContainsKey("4") ? examiners["4"] : null
-                        },
-                        part5 = new
-                        {
-                            examiners = examiners.ContainsKey("5") ? examiners["5"] : null
-                        },
-                        descriptionReview = descriptionReviewResults
+
+                        inspections = inspections[r.Field<int>("ID")],
+                        recommendationDetails = recommendationDetails[r.Field<int>("ID")],
+                        disparities = disparities[r.Field<int>("ID")]
                     }))
                 .ToList();
-
-            var apps = this.oracleConn.CreateStoreCommand(
-                @"SELECT R.ID REQUEST_ID,
-                        RCM.ID RCM_ID
-                    FROM CAA_DOC.REQUEST R
-                    JOIN CAA_DOC.RECOMMENDATION RCM ON RCM.ID_REQUEST = R.ID
-                                WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and RCM.ID_FIRM = {0}", organizationId)
-                )
-                .Materialize(r =>
-                    new
-                    {
-                        recommendationId = r.Field<int>("RCM_ID"),
-                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
-                    })
-                .ToList();
-
-            return (from part in parts
-                    join app in apps on part.Get<int>("__oldId") equals app.recommendationId into ag
-                    select new JObject(
-                        new JProperty("part",
-                            Utils.Pluck(part,
-                                new string[] 
-                                {
-                                    "__oldId",
-                                    "__migrTable",
-
-                                    "recommendationPartId",
-                                    "formDate",
-                                    "formText",
-                                    "interviewedStaff",
-                                    "fromDate",
-                                    "toDate",
-                                    "finished1Date",
-                                    "town1",
-                                    "finished2Date",
-                                    "town2",
-                                    "finished3Date",
-                                    "town3",
-                                    "finished4Date",
-                                    "town4",
-                                    "finished5Date",
-                                    "town5",
-                                    "documentDescription",
-                                    "recommendation",
-                                    "part1",
-                                    "part2",
-                                    "part3",
-                                    "part4",
-                                    "part5",
-                                    "descriptionReview"
-                                })),
-                        new JProperty("files",
-                            new JArray(
-                                new JObject(
-                                    new JProperty("isAdded", true),
-                                    new JProperty("file", null),
-                                    new JProperty("caseType", Utils.DUMMY_APPROVED_ORG_CASE_TYPE), //TODO
-                                    new JProperty("bookPageNumber", null),
-                                    new JProperty("pageCount", null),
-                                    new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
-                    .ToList();
         }
 
         private IList<JObject> getOrganizationManagementStaff(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPersonByApexId)

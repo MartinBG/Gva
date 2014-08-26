@@ -21,9 +21,17 @@ namespace Common.Api.Repositories.NomRepository
 
         IEnumerable<NomValue> GetNomValues(
             string alias,
-            string parentAlias,
             string prop,
             string propValue,
+            string term = null,
+            int offset = 0,
+            int? limit = null);
+
+        IEnumerable<NomValue> GetNomValues(
+            string alias,
+            string parentAlias,
+            string parentProp,
+            string parentPropValue,
             string term = null,
             int offset = 0,
             int? limit = null);

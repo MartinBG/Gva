@@ -1,5 +1,5 @@
 ﻿/*global angular,_*/
-(function (angular) {
+(function (angular, _) {
   'use strict';
 
   function AircraftsInspectionsEditCtrl(
@@ -8,13 +8,13 @@
     $stateParams,
     AircraftInspections,
     aircraftInspection,
-    scMessage) {
+    scMessage
+  ) {
     var originalInspection = _.cloneDeep(aircraftInspection);
 
     $scope.aircraftInspection = aircraftInspection;
-    $scope.editMode = null;
-    $scope.lotId = $stateParams.id;
 
+    $scope.editMode = null;
     $scope.edit = function () {
       $scope.editMode = 'edit';
     };
@@ -76,4 +76,4 @@
   };
 
   angular.module('gva').controller('AircraftsInspectionsEditCtrl', AircraftsInspectionsEditCtrl);
-}(angular));
+}(angular, _));

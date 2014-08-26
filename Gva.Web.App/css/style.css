@@ -341,8 +341,8 @@ table.sc-data-table td.buttons-cell
   margin-top: 20px;
 }
 
-.form-header:first-child {
-    margin-top: 0px;
+.form-header-first {
+  margin-top: 0px;
 }
 
 .navigation a {
@@ -488,7 +488,7 @@ ul.checkbox-list li {
   margin-top: 20px;
 }
 
-.table-header:first-child {
+.table-header-first {
     margin-top: 0px;
 }
 

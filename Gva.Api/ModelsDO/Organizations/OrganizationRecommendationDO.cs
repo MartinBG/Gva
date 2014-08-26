@@ -2,22 +2,26 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
+using Gva.Api.ModelsDO.Common;
 
 namespace Gva.Api.ModelsDO.Organizations
 {
     public class OrganizationRecommendationDO
     {
-        public OrganizationRecommendationDO(){
-            this.Part1 = new OrganizationPartDO();
-            this.Part2 = new OrganizationPartDO();
-            this.Part3 = new OrganizationPartDO();
-            this.Part4 = new OrganizationPartDO();
-            this.Part5 = new OrganizationPartDO();
-            this.DescriptionReview = new OrganizationDescriptionReviewDO();
-            this.IncludedAudits = new List<int>();
+        public OrganizationRecommendationDO()
+        {
+            this.Part1Examiners = new List<NomValue>();
+            this.Part2Examiners = new List<NomValue>();
+            this.Part3Examiners = new List<NomValue>();
+            this.Part4Examiners = new List<NomValue>();
+            this.Part5Examiners = new List<NomValue>();
+
+            this.Inspections = new List<int>();
+            this.RecommendationDetails = new List<OrganizationRecommendationSectionDO>();
+            this.Disparities = new List<DisparityDO>();
         }
 
-        public NomValue RecommendationPart { get; set; }
+        public NomValue AuditPart { get; set; }
 
         public DateTime? FormDate { get; set; }
 
@@ -25,9 +29,9 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public string InterviewedStaff { get; set; }
 
-        public DateTime? FromDate { get; set; }
+        public DateTime? InspectionFromDate { get; set; }
 
-        public DateTime? ToDate { get; set; }
+        public DateTime? InspectionToDate { get; set; }
 
         public DateTime? Finished1Date { get; set; }
 
@@ -53,18 +57,20 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public string Recommendation { get; set; }
 
-        public OrganizationPartDO Part1 { get; set; }
+        public List<NomValue> Part1Examiners { get; set; }
 
-        public OrganizationPartDO Part2 { get; set; }
+        public List<NomValue> Part2Examiners { get; set; }
 
-        public OrganizationPartDO Part3 { get; set; }
+        public List<NomValue> Part3Examiners { get; set; }
 
-        public OrganizationPartDO Part4 { get; set; }
+        public List<NomValue> Part4Examiners { get; set; }
 
-        public OrganizationPartDO Part5 { get; set; }
+        public List<NomValue> Part5Examiners { get; set; }
 
-        public OrganizationDescriptionReviewDO DescriptionReview { get; set; }
+        public List<int> Inspections { get; set; }
 
-        public List<int> IncludedAudits { get; set; }
+        public List<OrganizationRecommendationSectionDO> RecommendationDetails { get; set; }
+
+        public List<DisparityDO> Disparities { get; set; }
     }
 }

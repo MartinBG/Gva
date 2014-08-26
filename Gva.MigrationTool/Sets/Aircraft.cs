@@ -298,8 +298,10 @@ namespace Gva.MigrationTool.Sets
                     var aircraftInspections = this.getAircraftInspections(aircraftApexId, nomApplications, getPersonByApexId, noms);
                     foreach (var aircraftInspection in aircraftInspections)
                     {
-                        var pv = lot.CreatePart("inspections/*", aircraftInspection, context);
-                        inspections.Add(aircraftInspection["__oldId"].Value<int>(), pv.Part.Index);
+                        var pv = lot.CreatePart("inspections/*", aircraftInspection.Get<JObject>("part"), context);
+                        applicationRepository.AddApplicationRefs(pv.Part, aircraftInspection.GetItems<ApplicationNomDO>("applications"));
+
+                        inspections.Add(aircraftInspection.Get<int>("part.__oldId"), pv.Part.Index);
                     }
 
                     var aircraftDocumentDebts = this.getAircraftDocumentDebts(aircraftApexId, nomApplications, getPersonByApexId, noms, documentOwnersOldIdToPartIndex);
@@ -1466,99 +1468,155 @@ namespace Gva.MigrationTool.Sets
             Func<int?, JObject> getPersonByApexId,
             Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            var inspectionDisparities = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM 
-                                CAA_DOC.REC_DISPARITY
-                                WHERE ID_AUDIT in (SELECT ID FROM CAA_DOC.AUDITS WHERE {0})",
-                    new DbClause("ID_AIRCRAFT = {0}", aircraftId)
+            var disparities = this.oracleConn.CreateStoreCommand(
+                @"SELECT ADT.ID ID_AUDIT,
+                        AD.ID_REQUIREMENT,
+                        RD.SEQ,
+                        RD.REF_NUMBER,
+                        RD.DESCRIPTION,
+                        RD.REC_DISPRT_LEVEL,
+                        RD.REMOVAL_DATE,
+                        RD.RECTIFY_ACTION,
+                        RD.CLOSURE_DATE,
+                        RD.CLOSURE_DOC
+                    FROM 
+                    CAA_DOC.AUDITS ADT
+                    LEFT OUTER JOIN CAA_DOC.REC_DISPARITY RD ON ADT.ID = RD.ID_AUDIT
+                    LEFT OUTER JOIN CAA_DOC.AUDITS_DETAIL AD ON RD.ID_AUDIT_DETAIL = AD.ID",
+                    new DbClause("ADT.ID_AIRCRAFT = {0}", aircraftId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        idAudit = r.Field<long?>("ID_AUDIT"),
-                        idAuditDetail = r.Field<long?>("ID_AUDIT_DETAIL"),
-                        sortOrder = r.Field<decimal?>("SEQ"),
-                        refNumber = r.Field<string>("REF_NUMBER"),
-                        description = r.Field<string>("DESCRIPTION"),
-                        disparityLevel = r.Field<decimal?>("REC_DISPRT_LEVEL"),
-                        removalDate = r.Field<DateTime?>("REMOVAL_DATE"),
-                        rectifyAction = r.Field<string>("RECTIFY_ACTION"),
-                        closureDate = r.Field<DateTime?>("CLOSURE_DATE"),
-                        closureDocument = r.Field<string>("CLOSURE_DOC")
+                        ID_AUDIT = r.Field<long?>("ID_AUDIT"),
+                        ID_REQUIREMENT = r.Field<long?>("ID_REQUIREMENT"),
+                        SEQ = r.Field<decimal?>("SEQ"),
+                        REF_NUMBER = r.Field<string>("REF_NUMBER"),
+                        DESCRIPTION = r.Field<string>("DESCRIPTION"),
+                        REC_DISPRT_LEVEL = r.Field<decimal?>("REC_DISPRT_LEVEL"),
+                        REMOVAL_DATE = r.Field<DateTime?>("REMOVAL_DATE"),
+                        RECTIFY_ACTION = r.Field<string>("RECTIFY_ACTION"),
+                        CLOSURE_DATE = r.Field<DateTime?>("CLOSURE_DATE"),
+                        CLOSURE_DOC = r.Field<string>("CLOSURE_DOC")
                     })
-                    .GroupBy(g => g.idAudit)
-                    .ToDictionary(g => g.Key, g =>
-                        g.GroupBy(k => k.idAuditDetail)
-                        .ToDictionary(k => k.Key, k => k.Select(n =>
-                            new
-                            {
-                                n.sortOrder,
-                                n.refNumber,
-                                n.description,
-                                n.disparityLevel,
-                                n.removalDate,
-                                n.rectifyAction,
-                                n.closureDate,
-                                n.closureDocument
-                            }).ToArray()));
+                    .GroupBy(g => g.ID_AUDIT)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g
+                            .Where(d => d.ID_REQUIREMENT.HasValue && d.REC_DISPRT_LEVEL.HasValue)
+                            .OrderBy(d => d.SEQ)
+                            .Select(d =>
+                                new
+                                {
+                                    detailCode = noms["auditPartRequirements"].ByOldId(d.ID_REQUIREMENT.ToString()).Code,
+                                    refNumber = d.REF_NUMBER,
+                                    disparityLevel = noms["disparityLevels"].ByCode(d.REC_DISPRT_LEVEL.ToString()),
+                                    rectifyAction = d.RECTIFY_ACTION,
+                                    closureDocument = d.CLOSURE_DOC,
+                                    description = d.DESCRIPTION,
+                                    removalDate = d.REMOVAL_DATE,
+                                    closureDate = d.CLOSURE_DATE
+                                })
+                            .ToArray());
 
             var inspectionDetails = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM 
-                    CAA_DOC.AUDITS_DETAIL
-                    WHERE ID_AUDIT in (SELECT ID FROM CAA_DOC.AUDITS WHERE {0})",
-                    new DbClause("ID_AIRCRAFT = {0}", aircraftId)
+                @"SELECT ADT.ID ID_AUDIT,
+                        AD.STATE,
+                        AD.ID_REQUIREMENT
+                    FROM 
+                    CAA_DOC.AUDITS ADT
+                    LEFT OUTER JOIN CAA_DOC.AUDITS_DETAIL AD ON ADT.ID = AD.ID_AUDIT
+                    WHERE {0}",
+                    new DbClause("ADT.ID_AIRCRAFT = {0}", aircraftId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        auditResult = noms["auditResults"].ByCode(r.Field<string>("STATE")),
-                        auditPartRequirement = noms["auditPartRequirements"].ByOldId(r.Field<long?>("ID_REQUIREMENT").ToString()),
-                        disparities = inspectionDisparities.Keys.Contains(r.Field<long?>("ID_AUDIT")) ?
-                            (inspectionDisparities[r.Field<long?>("ID_AUDIT")].ContainsKey(r.Field<long?>("ID")) ? inspectionDisparities[r.Field<long?>("ID_AUDIT")][r.Field<long?>("ID")] : null) :
-                            null
+                        ID_AUDIT = r.Field<int>("ID_AUDIT"),
+                        STATE = r.Field<string>("STATE"),
+                        ID_REQUIREMENT = r.Field<long?>("ID_REQUIREMENT")
                     })
-                .ToArray();
+                .GroupBy(e => e.ID_AUDIT)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g
+                        .Where(i => i.ID_REQUIREMENT.HasValue)
+                        .Select(ad =>
+                            new
+                            {
+                                auditResult = noms["auditResults"].ByCode(ad.STATE ?? "-1"),
+                                auditPartRequirement = noms["auditPartRequirements"].ByOldId(ad.ID_REQUIREMENT.ToString())
+                            })
+                        .Select(r =>
+                            new
+                            {
+                                code = r.auditPartRequirement.Code,
+                                subject = r.auditPartRequirement.Name,
+                                auditResult = r.auditResult
+                            })
+                        .ToArray());
 
-            var inspectors = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM 
-                    CAA_DOC.AUDITOR
-                    WHERE ID_ODIT in (SELECT ID FROM CAA_DOC.AUDITS WHERE {0})",
-                    new DbClause("ID_AIRCRAFT = {0}", aircraftId)
+            var examiners = this.oracleConn.CreateStoreCommand(
+                @"SELECT ADTR.SEQ,
+                        E.PERSON_ID,
+                        ADT.ID AUDIT_ID
+                    FROM
+                    CAA_DOC.AUDITS ADT
+                    LEFT OUTER JOIN CAA_DOC.AUDITOR ADTR ON ADT.ID = ADTR.ID_ODIT
+                    LEFT OUTER JOIN CAA_DOC.EXAMINER E ON ADTR.ID_EXAMINER = E.ID
+                    WHERE {0}",
+                    new DbClause("ADT.ID_AIRCRAFT = {0}", aircraftId)
                 )
                 .Materialize(r =>
                     new
                     {
-                        sortOrder = r.Field<decimal?>("SEQ").ToString(),
-                        examinerId = getPersonByApexId((int?)r.Field<decimal?>("ID_EXAMINER")),
+                        AUDIT_ID = r.Field<int>("AUDIT_ID"),
+                        SEQ = r.Field<decimal?>("SEQ"),
+                        PERSON_ID = r.Field<int?>("PERSON_ID"),
                     })
-                .ToArray();
+                .GroupBy(e => e.AUDIT_ID)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g
+                        .Where(i => i.SEQ.HasValue && i.PERSON_ID.HasValue)
+                        .OrderBy(i => i.SEQ.Value)
+                        .Select(i => getPersonByApexId(i.PERSON_ID.Value))
+                        .ToArray());
 
             return this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.AUDITS WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
+                @"SELECT * FROM CAA_DOC.AUDITS WHERE {0}",
+                new DbClause("ID_AIRCRAFT = {0}", aircraftId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "AUDITS",
-                        documentNumber = r.Field<string>("DOC_NUMBER"),
-                        auditReason = noms["auditReasons"].ByCode(r.Field<string>("REASON")),
-                        auditType = noms["auditTypes"].ByCode(r.Field<string>("AUDIT_MODE")),
-                        subject = r.Field<string>("SUBJECT"),
-                        auditState = noms["auditStatuses"].ByCode(r.Field<string>("STATE")),
-                        notification = noms["boolean"].ByCode(r.Field<string>("NOTIFICATION") == "Y" ? "Y" : "N"),
-                        startDate = r.Field<DateTime?>("DATE_BEGIN"),
-                        endDate = r.Field<DateTime?>("DATE_END"),
-                        inspectionPlace = r.Field<string>("INSPECTION_PLACE"),
-                        inspectionFrom = r.Field<DateTime?>("INSPECTION_FROM"),
-                        inspectionTo = r.Field<DateTime?>("INSPECTION_TO"),
-                        auditDetails = inspectionDetails,
-                        examiners = inspectors,
+                        part =
+                            new
+                            {
+                                __oldId = r.Field<int>("ID"),
+                                __migrTable = "AUDITS",
+
+                                documentNumber = r.Field<string>("DOC_NUMBER"),
+                                auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
+                                auditReason = noms["auditReasons"].ByCode(r.Field<string>("REASON")),
+                                auditType = noms["auditTypes"].ByCode(r.Field<string>("AUDIT_MODE")),
+                                auditState = noms["auditStatuses"].ByCode(r.Field<string>("STATE")),
+                                notification = noms["boolean"].ByCode(r.Field<string>("NOTIFICATION") == "Y" ? "Y" : "N"),
+                                subject = r.Field<string>("SUBJECT"),
+                                inspectionPlace = r.Field<string>("INSPECTION_PLACE"),
+                                startDate = r.Field<DateTime?>("DATE_BEGIN"),
+                                endDate = r.Field<DateTime?>("DATE_END"),
+
+                                inspectionDetails = inspectionDetails[r.Field<int>("ID")],
+                                disparities = disparities[r.Field<int>("ID")],
+                                examiners = examiners[r.Field<int>("ID")],
+
+                                inspectionFrom = r.Field<DateTime?>("INSPECTION_FROM"),
+                                inspectionTo = r.Field<DateTime?>("INSPECTION_TO")
+                            },
                         applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
-                            new JArray () { nomApplications[r.Field<int>("ID_REQUEST")] } :
-                            null
+                            new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
+                            new object[0]
                     }))
                 .ToList();
         }

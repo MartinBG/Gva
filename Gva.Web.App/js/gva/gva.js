@@ -343,14 +343,14 @@
       controller: 'CommonScannedDocCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaCommonInspection',
-      templateUrl: 'js/gva/common/forms/commonInspection.html',
-      controller: 'CommonInspectionCtrl'
+      name: 'gvaCommonInspectionData',
+      templateUrl: 'js/gva/common/forms/commonInspectionData.html',
+      controller: 'CommonInspectionDataCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaCommonAuditDetail',
-      templateUrl: 'js/gva/common/forms/commonAuditDetail.html',
-      controller: 'CommonAuditDetailCtrl'
+      name: 'gvaCommonInspectionDetails',
+      templateUrl: 'js/gva/common/forms/commonInspectionDetails.html',
+      controller: 'CommonInspectionDetailsCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaCommonDocumentApplication',
@@ -358,9 +358,9 @@
       controller: 'CommonDocumentApplicationCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaCommonExaminer',
-      templateUrl: 'js/gva/common/forms/commonExaminer.html',
-      controller: 'CommonExaminerCtrl'
+      name: 'gvaCommonExaminers',
+      templateUrl: 'js/gva/common/forms/commonExaminers.html',
+      controller: 'CommonExaminersCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaEquipmentData',

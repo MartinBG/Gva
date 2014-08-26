@@ -8,15 +8,20 @@
     $stateParams,
     EquipmentInspections,
     equipmentInspection,
-    scMessage) {
-    var originalDoc = _.cloneDeep(equipmentInspection);
+    scMessage
+  ) {
+    var originalInspection = _.cloneDeep(equipmentInspection);
 
     $scope.equipmentInspection = equipmentInspection;
-    $scope.editMode = null;
-    $scope.lotId = $stateParams.id;
 
+    $scope.editMode = null;
     $scope.edit = function () {
       $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.equipmentInspection = _.cloneDeep(originalInspection);
     };
 
     $scope.save = function () {
@@ -33,11 +38,6 @@
       });
     };
 
-    $scope.cancel = function () {
-      $scope.editMode = null;
-      $scope.equipmentInspection = _.cloneDeep(originalDoc);
-    };
-    
     $scope.deleteInspection = function () {
       return scMessage('common.messages.confirmDelete')
       .then(function (result) {

@@ -13,17 +13,21 @@
     $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
-      return $scope.newInspectionForm.$validate()
-      .then(function () {
-        if ($scope.newInspectionForm.$valid) {
-          return OrganizationInspections
-            .save({ id: $stateParams.id }, $scope.organizationInspection)
-            .$promise
-            .then(function () {
-              return $state.go('root.organizations.view.inspections.search');
-            });
-        }
-      });
+      return $scope.newInspectionForm
+        .$validate()
+        .then(function () {
+          if ($scope.newInspectionForm.$valid) {
+            return OrganizationInspections
+              .save({ id: $stateParams.id }, $scope.organizationInspection)
+              .$promise
+              .then(function (inspection) {
+                return $state.go('root.organizations.view.inspections.edit', { 
+                  id: $stateParams.id,
+                  ind: inspection.partIndex
+                });
+              });
+          }
+        });
     };
 
     $scope.cancel = function () {

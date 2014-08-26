@@ -29,7 +29,7 @@ namespace Gva.Api.Projections.Organization
 
             recommendation.LotId = part.Part.Lot.LotId;
             recommendation.PartIndex = part.Part.Index;
-            recommendation.RecommendationPartName = part.Content.Get<string>("recommendationPart.name");
+            recommendation.AuditPartName = part.Content.Get<string>("auditPart.name");
             recommendation.FormText = part.Content.Get<string>("formText");
             recommendation.FormDate = part.Content.Get<DateTime?>("formDate");
 

@@ -130,17 +130,23 @@ namespace Gva.MigrationTool.Nomenclatures
 
             using (var dependencies = dependencyFactory())
             {
-                noms["gvaCaseTypes"] = dependencies.Value.Item2.GetNomValues("linTypes").ToDictionary(n => Guid.NewGuid().ToString());
-            }
-
-            using (var dependencies = dependencyFactory())
-            {
                 noms["testScores"] = dependencies.Value.Item2.GetNomValues("testScores").ToDictionary(n => Guid.NewGuid().ToString());
             }
 
             using (var dependencies = dependencyFactory())
             {
                 noms["personCaseTypes"] = dependencies.Value.Item3.GetCaseTypesForSet("Person").ToDictionary(ct => Guid.NewGuid().ToString(), ct =>
+                    new NomValue
+                    {
+                        NomValueId = ct.GvaCaseTypeId,
+                        Name = ct.Name,
+                        Alias = ct.Alias
+                    });
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
+                noms["organizationCaseTypes"] = dependencies.Value.Item3.GetCaseTypesForSet("Organization").ToDictionary(ct => Guid.NewGuid().ToString(), ct =>
                     new NomValue
                     {
                         NomValueId = ct.GvaCaseTypeId,
@@ -168,6 +174,11 @@ namespace Gva.MigrationTool.Nomenclatures
             using (var dependencies = dependencyFactory())
             {
                 noms["airworthinessReviewTypes"] = dependencies.Value.Item2.GetNomValues("airworthinessReviewTypes").ToDictionary(n => Guid.NewGuid().ToString());
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
+                noms["disparityLevels"] = dependencies.Value.Item2.GetNomValues("disparityLevels").ToDictionary(n => Guid.NewGuid().ToString());
             }
 
             using (var dependencies = dependencyFactory())
@@ -503,6 +514,12 @@ namespace Gva.MigrationTool.Nomenclatures
             using (var dependencies = dependencyFactory())
             {
                 migrateAuditResults(dependencies.Value.Item2, oracleConn);
+                dependencies.Value.Item1.Save();
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
+                migrateRecommendationResults(dependencies.Value.Item2, oracleConn);
                 dependencies.Value.Item1.Save();
             }
 
@@ -2248,7 +2265,7 @@ namespace Gva.MigrationTool.Nomenclatures
         private void migrateAuditPartRequirmants(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditPartRequirements");
-            var idPartAliases = new Dictionary<string, string>()
+            var auditPartAliases = new Dictionary<string, string>()
             {
                 { "1", "145"},
                 { "2", "MF"},
@@ -2261,7 +2278,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
             for(int i = 200; i <= 211; i++)
             {
-                idPartAliases.Add(i.ToString(), "ACAM");
+                auditPartAliases.Add(i.ToString(), "ACAM");
             }
 
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_REQUIREMENT")
@@ -2274,12 +2291,12 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = null,
                         Alias = null,
                         IsActive = true,
-                        ParentValueId = noms["auditParts"].ByOldId(r.Field<long?>("ID_PART").ToString()).NomValueId(),
+                        Order = r.Field<int?>("SORT_ORDER") ?? 0,
+                        ParentValueId = null,
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
-                                idPart = r.Field<long?>("ID_PART") != null ? idPartAliases[r.Field<long>("ID_PART").ToString()] : "",
-                                sortOrder = r.Field<decimal?>("SORT_ORDER").ToString()
+                                auditPart = r.Field<long?>("ID_PART") != null ? auditPartAliases[r.Field<long>("ID_PART").ToString()] : "",
                             })
                     })
                 .ToList();
@@ -2295,7 +2312,7 @@ namespace Gva.MigrationTool.Nomenclatures
         private void migrateAuditPartSections(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditPartSections");
-            var idPartAliases = new Dictionary<string, string>()
+            var auditPartAliases = new Dictionary<string, string>()
             {
                 { "1", "145"},
                 { "2", "MF"},
@@ -2313,12 +2330,12 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = null,
                         Alias = null,
                         IsActive = true,
+                        Order = r.Field<int?>("SORT_ORDER") ?? 0,
                         ParentValueId = noms["auditParts"].ByOldId(r.Field<long?>("ID_PART").ToString()).NomValueId(),
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
-                                idPart = r.Field<long?>("ID_PART") != null ? idPartAliases[r.Field<long>("ID_PART").ToString()] : "",
-                                sortOrder = r.Field<short?>("SORT_ORDER").ToString()
+                                auditPart = r.Field<long?>("ID_PART") != null ? auditPartAliases[r.Field<long>("ID_PART").ToString()] : ""
                             })
                     })
                 .ToList();
@@ -2344,12 +2361,8 @@ namespace Gva.MigrationTool.Nomenclatures
                         NameAlt = null,
                         Alias = null,
                         IsActive = true,
-                        ParentValueId = noms["auditPartSections"].ByOldId(r.Field<long?>("ID_SECTION").ToString()).NomValueId(),
-                        TextContentString = JsonConvert.SerializeObject(
-                            new
-                            {
-                                sortOrder = r.Field<decimal?>("SORT_ORDER").ToString(),
-                            })
+                        Order = r.Field<int?>("SORT_ORDER") ?? 0,
+                        ParentValueId = noms["auditPartSections"].ByOldId(r.Field<long?>("ID_SECTION").ToString()).NomValueId()
                     })
                 .ToList();
 
@@ -2442,7 +2455,7 @@ namespace Gva.MigrationTool.Nomenclatures
         private void migrateAuditResults(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("auditResults");
-            var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'CC_RESULT'")
+            var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'CC_RESULT' ORDER BY SEQ")
                 .Materialize(r =>
                     new NomValue
                     {
@@ -2461,6 +2474,32 @@ namespace Gva.MigrationTool.Nomenclatures
             foreach (var row in results)
             {
                 noms["auditResults"][row.OldId] = row;
+                nom.NomValues.Add(row);
+            }
+        }
+
+        private void migrateRecommendationResults(INomRepository repo, OracleConnection conn)
+        {
+            Nom nom = repo.GetNom("recommendationResults");
+            var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_SHORT_LISTS where domain = 'AUDIT_DSTATE' ORDER BY SEQ")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = r.Field<object>("ID").ToString(),
+                        Code = r.Field<string>("CODE"),
+                        Name = r.Field<string>("MEANING"),
+                        NameAlt = r.Field<string>("MEANING_TRANS"),
+                        Alias = null,
+                        IsActive = true,
+                        ParentValueId = null,
+                        TextContentString = null
+                    })
+                .ToList();
+
+            noms["recommendationResults"] = new Dictionary<string, NomValue>();
+            foreach (var row in results)
+            {
+                noms["recommendationResults"][row.OldId] = row;
                 nom.NomValues.Add(row);
             }
         }

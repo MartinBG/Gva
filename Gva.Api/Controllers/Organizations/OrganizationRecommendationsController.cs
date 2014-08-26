@@ -14,36 +14,21 @@ namespace Gva.Api.Controllers.Organizations
     [Authorize]
     public class OrganizationRecommendationsController : GvaApplicationPartController<OrganizationRecommendationDO>
     {
-        private IApplicationRepository applicationRepository;
-        private ILotRepository lotRepository;
-        private IOrganizationRepository organizationRepository;
-
         public OrganizationRecommendationsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher,
-            IOrganizationRepository organizationRepository)
+            ILotEventDispatcher lotEventDispatcher)
             : base("organizationRecommendations", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
         {
-            this.applicationRepository = applicationRepository;
-            this.lotRepository = lotRepository;
-            this.organizationRepository = organizationRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewRecommendation(int lotId, int? appId = null)
+        public IHttpActionResult GetNewRecommendation(int lotId)
         {
-            var applications = new List<ApplicationNomDO>();
-            if (appId.HasValue)
-            {
-                this.lotRepository.GetLotIndex(lotId);
-                applications.Add(this.applicationRepository.GetInitApplication(appId));
-            }
-
             OrganizationRecommendationDO newRecommendation = new OrganizationRecommendationDO();
 
-            return Ok(new ApplicationPartVersionDO<OrganizationRecommendationDO>(newRecommendation, applications));
+            return Ok(new ApplicationPartVersionDO<OrganizationRecommendationDO>(newRecommendation));
         }
     }
 }

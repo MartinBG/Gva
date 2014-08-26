@@ -16,21 +16,22 @@ SELECT @equipmentSetId = LotSetId FROM LotSets WHERE Alias = 'Equipment'
 INSERT INTO [GvaCaseTypes]
     ([GvaCaseTypeId], [Name]       , [Alias]            , [LotSetId]        )
 VALUES
-    (1              , N'Общи'      , 'none'             , @personSetId      ),
+    (1              , N'Общи'      , 'person'           , @personSetId      ),
     (2              , N'Екипажи'   , 'flightCrew'       , @personSetId      ),
     (3              , N'ОВД'       , 'ovd'              , @personSetId      ),
     (4              , N'ТО(AML)'   , 'to_vs'            , @personSetId      ),
     (5              , N'ТО(СУВД)'  , 'to_suvd'          , @personSetId      ),
     (6              , N'Инспектор' , 'inspector'        , @personSetId      ),
     (7              , N'Проверяващ', 'examiner'         , @personSetId      ),
-    (8              , N'ОО'        , 'approvedOrg'      , @organizationSetId),
-    (9              , N'ЛО'        , 'airportOperator'  , @organizationSetId),
-    (10             , N'ОНО'       , 'groundSvcOperator', @organizationSetId),
-    (11             , N'ВП'        , 'airCarrier'       , @organizationSetId),
-    (12             , N'АО'        , 'airOperator'      , @organizationSetId),
-    (13             , N'АУЦ'       , 'educationOrg'     , @organizationSetId),
-    (14             , N'ДАО'       , 'airNavSvcProvider', @organizationSetId),
-    (15             , N'ВС'        , 'aircraft'         , @aircraftSetId    ),
-    (16             , N'Летище'    , 'airport'          , @airportSetId     ),
-    (17             , N'Съоръжение', 'equipment'        , @equipmentSetId   )
+    (8              , N'Общи'      , 'org'              , @organizationSetId),
+    (9              , N'ОО'        , 'approvedOrg'      , @organizationSetId),
+    (10             , N'ЛО'        , 'airportOperator'  , @organizationSetId),
+    (11             , N'ОНО'       , 'groundSvcOperator', @organizationSetId),
+    (12             , N'ВП'        , 'airCarrier'       , @organizationSetId),
+    (13             , N'АО'        , 'airOperator'      , @organizationSetId),
+    (14             , N'АУЦ'       , 'educationOrg'     , @organizationSetId),
+    (15             , N'ДАО'       , 'airNavSvcProvider', @organizationSetId),
+    (16             , N'ВС'        , 'aircraft'         , @aircraftSetId    ),
+    (17             , N'Летище'    , 'airport'          , @airportSetId     ),
+    (18             , N'Съоръжение', 'equipment'        , @equipmentSetId   )
 GO

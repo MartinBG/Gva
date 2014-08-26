@@ -24,14 +24,14 @@ namespace Gva.Api.Projections.Organization
             List<GvaViewOrganizationInspectionRecommendation> inspectionsToRecommendation = new List<GvaViewOrganizationInspectionRecommendation>();
             foreach (var recommendation in recommendations)
             {
-                foreach (int auditIndex in recommendation.Content.GetItems<int>("includedAudits"))
+                foreach (int inspectionPartIndex in recommendation.Content.GetItems<int>("inspections"))
                 {
                     inspectionsToRecommendation.Add(
                         new GvaViewOrganizationInspectionRecommendation()
                         {
                             LotId = recommendation.Part.Lot.LotId,
                             RecommendationPartIndex = recommendation.Part.Index,
-                            InspectionPartIndex= auditIndex
+                            InspectionPartIndex = inspectionPartIndex
                         });
                 }
             }

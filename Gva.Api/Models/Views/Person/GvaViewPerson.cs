@@ -58,7 +58,7 @@ namespace Gva.Api.Models.Views.Person
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.Lin)
-                .IsRequired();
+                .IsOptional();
 
             this.Property(t => t.LinTypeId)
                 .IsRequired();

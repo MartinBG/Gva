@@ -4,24 +4,19 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Common
 {
-    public class AuditDetailDO
+    public class InspectionDetailDO
     {
-        public AuditDetailDO()
+        public InspectionDetailDO()
         {
-            this.Disparities = new List<int>();
         }
 
-        public string AuditPart { get; set; }
-
-        public string SortOrder { get; set; }
-
+        [Required(ErrorMessage = "Code is required.")]
         public string Code { get; set; }
 
+        [Required(ErrorMessage = "Subject is required.")]
         public string Subject { get; set; }
 
         [Required(ErrorMessage = "AuditResult is required.")]
         public NomValue AuditResult { get; set; }
-
-        public List<int> Disparities { get; set; }
     }
 }

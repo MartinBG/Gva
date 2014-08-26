@@ -17,10 +17,13 @@ using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Repositories.LotRepositories;
 using Gva.Api.Repositories.StageRepository;
+using System;
+using Common.Data;
 
 namespace Gva.Api.Controllers
 {
     [RoutePrefix("api/nomenclatures")]
+    [Authorize]
     public class GvaNomController : ApiController
     {
         private ILotRepository lotRepository;
@@ -568,102 +571,6 @@ namespace Gva.Api.Controllers
             return Ok(nomValues);
         }
 
-        [Route("auditPartRequirements")]
-        public IHttpActionResult GetAuditPartRequirements(string type = null, string auditPartCode = null)
-        {
-            JObject defaultAuditResult = this.nomRepository.GetNomValues("auditResults").Where(r => r.Code == "-1")
-                .Select(n => new JObject(
-                    new JProperty("nomValueId", n.NomValueId),
-                    new JProperty("code", n.Code),
-                    new JProperty("name", n.Name))).First();
-
-            var requirements = this.nomRepository.GetNomValues("auditPartRequirements");
-
-            if (type == "organizations" || type == "aircrafts")
-            {
-                requirements = requirements.Where(r => r.TextContent.Get("idPart") != null);
-
-                if (type == "organizations")
-                {
-                    requirements = requirements.Where(r => r.TextContent.Get<string>("idPart") == auditPartCode);
-                }
-                if (type == "aircrafts")
-                {
-                    requirements = requirements.Where(r => r.TextContent.Get<string>("idPart") == "aircrafts");
-                }
-
-                JArray auditPartRequirements = new JArray();
-                foreach (var requirement in requirements)
-                {
-                    string sortOrder = requirement.TextContent.Get<string>("sortOrder");
-                    auditPartRequirements.Add(
-                        new JObject(
-                            new JProperty("subject", requirement.Name),
-                            new JProperty("auditResult", defaultAuditResult),
-                            new JProperty("disparities", new JArray()),
-                            new JProperty("code", requirement.Code),
-                            new JProperty("sortOrder", sortOrder)
-                    ));
-                }
-
-                return Ok(auditPartRequirements.OrderBy(e => e.Get<int>("sortOrder")));
-
-            }
-
-            return Ok(requirements);
-        }
-
-        [Route("auditDetails")]
-        public IHttpActionResult GetAuditDetails(string type = null, string auditPartCode = null)
-        {
-            JObject defaultAuditResult = this.nomRepository.GetNomValues("auditResults").Where(r => r.Code == "-1")
-                .Select(n => new JObject(
-                    new JProperty("nomValueId", n.NomValueId),
-                    new JProperty("code", n.Code),
-                    new JProperty("name", n.Name))).First();
-
-
-            JArray auditDetails = new JArray();
-
-            if (type == "organizationRecommendations")
-            {
-
-                this.nomRepository.GetNomValues("auditPartSections").ToArray();
-                var requirements = this.nomRepository.GetNomValues("auditPartSectionDetails")
-                    .Where(d => d.ParentValue.TextContent.Get<string>("idPart") == auditPartCode)
-                    .GroupBy(d => d.ParentValue.Code)
-                    .OrderBy(d => d.Key);
-
-                foreach (var requirement in requirements)
-                {
-                    JArray elements = new JArray();
-                    foreach (var element in requirement)
-                    {
-                        string sortOrder = element.TextContent.Get<string>("sortOrder");
-
-                        elements.Add(
-                            new JObject(
-                                new JProperty("groupTitle", element.ParentValue.Code + ' ' + element.ParentValue.Name),
-                                new JProperty("subject", element.Name),
-                                new JProperty("auditResult", defaultAuditResult),
-                                new JProperty("disparities", new JArray()),
-                                new JProperty("auditPart", element.Code),
-                                new JProperty("titlePart", element.Code.Split('.')[0]),
-                                new JProperty("sortOrder", sortOrder)));
-                    }
-                    auditDetails.Add(
-                       new JObject(
-                           new JProperty("groupTitle", elements.First().Get("groupTitle")),
-                           new JProperty("group",
-                               elements
-                               .OrderBy(e => e.Get<string>("titlePart"))
-                               .ThenBy(e => e.Get<int>("sortOrder")))));
-                }
-            }
-
-            return Ok(auditDetails);
-        }
-
         [Route("aircraftProducers")]
         public IHttpActionResult GetAircraftProducers(string term = null, int offset = 0, int? limit = null, bool? makeEngine = false, bool? makeRadio = false, bool? makePropeller = false, bool? makeAircraft = false)
         {
@@ -720,8 +627,8 @@ namespace Gva.Api.Controllers
             var nomValues = this.nomRepository.GetNomValues(
                 alias: "ratingClasses",
                 parentAlias: "ratingClassGroups",
-                prop: "staffTypeAlias",
-                propValue: staffTypeAlias,
+                parentProp: "staffTypeAlias",
+                parentPropValue: staffTypeAlias,
                 term: term,
                 offset: offset,
                 limit: limit);
@@ -735,9 +642,11 @@ namespace Gva.Api.Controllers
             var nomValues = this.nomRepository.GetNomValues(
                 alias: "authorizations",
                 parentAlias: "authorizationGroups",
-                prop: "staffTypeAlias",
-                propValue: staffTypeAlias,
-                term: term);
+                parentProp: "staffTypeAlias",
+                parentPropValue: staffTypeAlias,
+                term: term,
+                offset: offset,
+                limit: limit);
 
             return Ok(nomValues);
         }

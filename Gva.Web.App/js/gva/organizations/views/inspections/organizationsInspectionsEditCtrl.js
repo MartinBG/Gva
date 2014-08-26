@@ -11,11 +11,11 @@
     scMessage
   ) {
     var originalInspection = _.cloneDeep(organizationInspection);
-
-    $scope.organizationInspection = organizationInspection;
-    $scope.editMode = null;
     $scope.lotId = $stateParams.id;
 
+    $scope.organizationInspection = organizationInspection;
+
+    $scope.editMode = null;
     $scope.edit = function () {
       $scope.editMode = 'edit';
     };
@@ -25,6 +25,22 @@
       $scope.organizationInspection = _.cloneDeep(originalInspection);
     };
 
+    if($scope.organizationInspection.partIndex) {
+      OrganizationInspections.getRecommendations({
+        id: $scope.lotId,
+        ind: $scope.organizationInspection.partIndex
+      }).$promise.then(function (recommendations) {
+        $scope.recommendations = recommendations;
+      });
+    }
+
+    $scope.viewRecommendation = function (recommendation) {
+      return $state.go('root.organizations.view.recommendations.edit', {
+        id: $scope.lotId,
+        ind: recommendation.partIndex
+      });
+    };
+
     $scope.save = function () {
       return $scope.editInspectionForm.$validate()
       .then(function () {
@@ -32,13 +48,11 @@
           return OrganizationInspections
             .save({
               id: $stateParams.id,
-              ind: $stateParams.childInd ? $stateParams.childInd : $stateParams.ind
+              ind: $stateParams.ind
             }, $scope.organizationInspection)
             .$promise
             .then(function () {
-              return $stateParams.childInd ?
-                $state.go('^') :
-                $state.go('root.organizations.view.inspections.search');
+              return $state.go('root.organizations.view.inspections.search');
             });
         }
       });
@@ -52,9 +66,7 @@
             id: $stateParams.id,
             ind: organizationInspection.partIndex
           }).$promise.then(function () {
-            return $stateParams.childInd ?
-              $state.go('^') :
-              $state.go('root.organizations.view.inspections.search');
+            return $state.go('root.organizations.view.inspections.search');
           });
         }
       });
@@ -77,7 +89,7 @@
       function ($stateParams, OrganizationInspections) {
         return OrganizationInspections.get({
           id: $stateParams.id,
-          ind: $stateParams.childInd? $stateParams.childInd: $stateParams.ind
+          ind: $stateParams.ind
         }).$promise;
       }
     ]

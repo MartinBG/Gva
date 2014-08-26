@@ -45,8 +45,7 @@
       'OrganizationRecommendations',
       function ($stateParams, OrganizationRecommendations) {
         return OrganizationRecommendations.newRecommendation({
-          id: $stateParams.id,
-          appId: $stateParams.appId
+          id: $stateParams.id
         }).$promise;
        }
     ]

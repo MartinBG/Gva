@@ -3,7 +3,7 @@
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.organizations.view.recommendations.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.recommendationPart.name" title="organizations.recommendationSearch.recommendationPart">
+  <sc-column data="part.auditPart.name" title="organizations.recommendationSearch.auditPart">
   </sc-column>
   <sc-column data="part.formText" title="organizations.recommendationSearch.formText">
   </sc-column>
@@ -22,7 +22,5 @@
   <sc-column data="part.documentDescription" title="organizations.recommendationSearch.documentDescription">
   </sc-column>
   <sc-column data="part.recommendation" title="organizations.recommendationSearch.recommendation">
-  </sc-column>
-  <sc-column data="applications[0].applicationName" title="organizations.recommendationSearch.application">
   </sc-column>
 </sc-datatable>

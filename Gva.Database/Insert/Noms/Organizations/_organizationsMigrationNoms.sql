@@ -8,5 +8,6 @@ VALUES
     (N'Състояния на одобрение'                                              , N'approvalStates'                    ),
     (N'Типове одобрения'                                                    , N'approvalTypes'                     ),
     (N'Видове организации'                                                  , N'organizationKinds'                 ),
-    (N'Класификатор на организации'                                         , N'organizationTypes'                 )
+    (N'Класификатор на организации'                                         , N'organizationTypes'                 ),
+    (N'Резултати от Доклад от препоръки'                                    , N'recommendationResults'             )
 GO

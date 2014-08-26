@@ -16,8 +16,25 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-common-inspection name="organizationInspectionForm" ng-model="organizationInspection"
-        sc-form-params="{ setPart: 'organization', lotId: lotId }"></gva-common-inspection>
+      <gva-common-inspection-data name="inspectionDataForm" ng-model="organizationInspection" sc-form-params="{ setPart: 'organization' }"></gva-common-inspection-data>
+
+      <div class="row">
+        <sc-field class="col-sm-6 col-md-4" type="nomenclature" ng-model="organizationInspection.part.caseType" alias="'caseTypes'" params="{lotId: lotId}"
+          ng-required="false" ng-readonly="editInspectionForm.$readonly" l10n-text="organizations.editInspection.caseType">
+        </sc-field>
+      </div>
+
+      <h5 class="table-header" l10n-text="organizations.editInspection.recommendations"></h5>
+      <sc-datatable items="recommendations" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
+        <sc-column sortable="false" class="buttons-cell" has-content="true">
+          <sc-button btn-click="viewRecommendation(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-disabled="form.$readonly"></sc-button>
+        </sc-column>
+        <sc-column data="auditPartName" title="organizations.editInspection.auditPart"></sc-column>
+        <sc-column data="formDate" title="organizations.editInspection.formDate" type="date"></sc-column>
+        <sc-column data="formText" title="organizations.editInspection.formText"></sc-column>
+      </sc-datatable>
+
+      <gva-common-inspection-details name="inspectionDetailsForm" ng-model="organizationInspection.part" sc-form-params="{ setPart: 'organization' }"></gva-common-inspection-details>
     </div>
   </div>
 </ng-form>

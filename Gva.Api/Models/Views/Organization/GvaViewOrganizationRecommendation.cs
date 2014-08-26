@@ -12,7 +12,7 @@ namespace Gva.Api.Models.Views.Organization
 
         public int PartIndex { get; set; }
 
-        public string RecommendationPartName { get; set; }
+        public string AuditPartName { get; set; }
 
         public string FormText { get; set; }
 
@@ -34,7 +34,7 @@ namespace Gva.Api.Models.Views.Organization
             this.Property(t => t.PartIndex)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.RecommendationPartName)
+            this.Property(t => t.AuditPartName)
                 .HasMaxLength(150);
             this.Property(t => t.FormText)
                 .HasMaxLength(150);
@@ -43,7 +43,7 @@ namespace Gva.Api.Models.Views.Organization
             this.ToTable("GvaViewOrganizationRecommendations");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
-            this.Property(t => t.RecommendationPartName).HasColumnName("RecommendationPartName");
+            this.Property(t => t.AuditPartName).HasColumnName("AuditPartName");
             this.Property(t => t.FormText).HasColumnName("FormText");
             this.Property(t => t.FormDate).HasColumnName("FormDate");
 

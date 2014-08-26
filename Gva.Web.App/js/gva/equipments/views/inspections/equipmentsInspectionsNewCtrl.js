@@ -7,9 +7,9 @@
     $state,
     $stateParams,
     EquipmentInspections,
-    equipmentInspection) {
+    equipmentInspection
+  ) {
     $scope.equipmentInspection = equipmentInspection;
-    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newInspectionForm.$validate()
@@ -18,8 +18,11 @@
           return EquipmentInspections
             .save({ id: $stateParams.id }, $scope.equipmentInspection)
             .$promise
-            .then(function () {
-              return $state.go('root.equipments.view.inspections.search');
+            .then(function (inspection) {
+              return $state.go('root.equipments.view.inspections.edit', { 
+                  id: $stateParams.id,
+                  ind: inspection.partIndex
+                });
             });
         }
       });

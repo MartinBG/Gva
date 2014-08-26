@@ -1,0 +1,28 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row">
+    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="common.inspectionDataDirective.documentNumber" class="col-sm-3 col-md-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.auditPart" alias="'auditParts'" l10n-text="common.inspectionDataDirective.auditPart" class="col-sm-3 col-md-3"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="nomenclature" ng-model="model.part.auditReason" alias="'auditReasons'" ng-required="true" l10n-text="common.inspectionDataDirective.auditReason" class="col-sm-3 col-md-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.auditType" alias="'auditTypes'" ng-required="true" l10n-text="common.inspectionDataDirective.auditType" class="col-sm-3 col-md-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.auditState" alias="'auditStatuses'" ng-required="true" l10n-text="common.inspectionDataDirective.auditState" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.notification" alias="'boolean'" ng-required="true" l10n-text="common.inspectionDataDirective.notification" class="col-sm-3 col-md-2"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="textarea" rows="3" ng-model="model.part.subject" ng-required="true" l10n-text="common.inspectionDataDirective.subject" class="col-sm-12 col-md-10"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="textarea" rows="3" ng-model="model.part.inspectionPlace" ng-required="true" l10n-text="common.inspectionDataDirective.inspectionPlace" class="col-sm-12 col-md-10"></sc-field>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-10">
+      <label class="control-label" l10n-text="common.inspectionDataDirective.applications"></label>
+      <gva-applications ng-model="model.applications" set-part="setPart" ng-readonly="form.$readonly"></gva-applications>
+    </div>
+  </div>
+  <div class="row">
+    <sc-field type="date" ng-model="model.part.startDate" ng-required="true" l10n-text="common.inspectionDataDirective.startDate" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.endDate" l10n-text="common.inspectionDataDirective.endDate" class="col-sm-3 col-md-2"></sc-field>
+  </div>
+</ng-form>

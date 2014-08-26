@@ -1,7 +1,12 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function CommonExaminerCtrl($scope, scModal) {
+  function CommonExaminersCtrl($scope, scModal, scFormParams) {
+    $scope.addExaminerText = scFormParams.addExaminerText;
+    $scope.examinerText = scFormParams.examinerText;
+    $scope.examinersText = scFormParams.examinersText;
+    $scope.noAvailableExaminersText = scFormParams.noAvailableExaminersText;
+
     $scope.addExaminer = function () {
       var modalInstance = scModal.open('chooseExaminers', {
         includedExaminers: $scope.model
@@ -21,8 +26,8 @@
     };
   }
 
-  CommonExaminerCtrl.$inject = ['$scope', 'scModal'];
+  CommonExaminersCtrl.$inject = ['$scope', 'scModal', 'scFormParams'];
 
   angular.module('gva')
-    .controller('CommonExaminerCtrl', CommonExaminerCtrl);
+    .controller('CommonExaminersCtrl', CommonExaminersCtrl);
 }(angular));

@@ -1,0 +1,88 @@
+﻿<ng-form  class="form-inline" sc-validate="{}" sc-form-readonly>
+  
+  <h5 class="table-header" l10n-text="common.inspectionDetailsDirective.title"></h5>
+
+  <sc-button btn-click="insertInspectionDetails()"
+    ng-disabled="(setPart === 'organization' && !model.auditPart) || form.$readonly"
+    ng-if="!model.inspectionDetails.length"
+    text="common.inspectionDetailsDirective.insertInspectionDetails" class="btn btn-primary btn-xs" icon="glyphicon-download-alt">
+  </sc-button>
+
+  <table class="table table-striped table-bordered ctrl-table" ng-if="model.inspectionDetails.length > 0">
+    <thead>
+      <tr>
+        <th style="width: 60px;" l10n-text="common.inspectionDetailsDirective.code"></th>
+        <th style="width: 310px;" l10n-text="common.inspectionDetailsDirective.subject"></th>
+        <th style="width: 310px;" l10n-text="common.inspectionDetailsDirective.auditResult"></th>
+        <th l10n-text="common.inspectionDetailsDirective.disparity"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="detail in model.inspectionDetails">
+        <td style="width: 10px;">
+          {{detail.code}}
+        </td>
+        <td>
+          {{detail.subject}}
+        </td>
+        <td class="ctrl-cell">
+          <sc-nomenclature ng-model="detail.auditResult" alias="'auditResults'" name="auditResult" ng-required="true" ng-readonly="form.$readonly"></sc-nomenclature>
+        </td>
+        <td>
+          <sc-button name="addDisparityBtn" type="button" btn-click="addDisparity(detail)" class="btn btn-primary btn-xs pull-right" icon="glyphicon-plus" 
+              ng-show="detail.auditResult.code === '1' || detail.auditResult.code === '2'"
+              ng-disabled="form.$readonly">
+          </sc-button>
+          <div class="nav-pills pull-left" ng-repeat="dispIndex in detailDisparities[detail.code]">
+              <a href="" scroll-to=".disparity{{dispIndex + 1}}">
+                <span class="badge">{{dispIndex + 1}}</span>
+              </a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h5 class="table-header" l10n-text="common.inspectionDetailsDirective.disparitiesTitle"></h5>
+  <table class="table table-striped table-bordered ctrl-table">
+    <thead>
+      <tr>
+        <th style="width: 10px;" l10n-text="common.inspectionDetailsDirective.index"></th>
+        <th l10n-text="common.inspectionDetailsDirective.refNumber"></th>
+        <th l10n-text="common.inspectionDetailsDirective.description"></th>
+        <th l10n-text="common.inspectionDetailsDirective.disparityLevel"></th>
+        <th style="width: 105px;" l10n-text="common.inspectionDetailsDirective.removalDate"></th>
+        <th style="width: 105px;" l10n-text="common.inspectionDetailsDirective.closureDate"></th>
+        <th l10n-text="common.inspectionDetailsDirective.rectifyAction"></th>
+        <th l10n-text="common.inspectionDetailsDirective.closureDocument"></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="disparity in model.disparities" class="disparity{{$index + 1}}">
+        <td>{{$index + 1}}</td>
+        <td>{{disparity.refNumber}}</td>
+        <td>{{disparity.description}}</td>
+        <td>{{disparity.disparityLevel.name}}</td>
+        <td>{{disparity.removalDate | date:'mediumDate'}}</td>
+        <td>{{disparity.closureDate | date:'mediumDate'}}</td>
+        <td>{{disparity.rectifyAction}}</td>
+        <td>{{disparity.closureDocument}}</td>
+        <td>
+          <sc-button name="editBtn" btn-click="editDisparity(disparity)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-disabled="form.$readonly"></sc-button>
+          <sc-button name="deleteDisparityBtn" type="button" btn-click="deleteDisparity(disparity)" class="btn btn-primary btn-xs" icon="glyphicon-remove" ng-disabled="form.$readonly"></sc-button>
+        </td>
+      </tr>
+      <tr ng-if="!model.disparities.length">
+        <td colspan="9" class="text-center" l10n-text="common.inspectionDetailsDirective.noAvailableDisparities"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <gva-common-examiners ng-model="model.examiners" name="examinersForm" sc-form-params="{
+    addExaminerText: 'common.inspectionDetailsDirective.addAuditor',
+    examinerText: 'common.inspectionDetailsDirective.auditor',
+    examinersText: 'common.inspectionDetailsDirective.auditors',
+    noAvailableExaminersText: 'common.inspectionDetailsDirective.noAvailableAuditors'
+  }"></gva-common-examiners>
+</ng-form>

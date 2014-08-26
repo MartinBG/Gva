@@ -108,6 +108,7 @@
     <Compile Include="Controllers\Equipments\EquipmentDocumentOthersController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentApplicationsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentOwnersController.cs" />
+    <Compile Include="Controllers\AuditsController.cs" />
     <Compile Include="Controllers\GvaSuggestionController.cs" />
     <Compile Include="Controllers\GvaFilePartController.cs" />
     <Compile Include="Controllers\GvaApplicationPartController.cs" />
@@ -136,17 +137,16 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftReviewAmendmentFMDO.cs" />
     <Compile Include="ModelsDO\Organizations\AmendmentDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDetailDO.cs" />
     <Compile Include="ModelsDO\Organizations\Lims145DO.cs" />
     <Compile Include="ModelsDO\Organizations\Lims147DO.cs" />
     <Compile Include="ModelsDO\Organizations\LimsMGDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationDataDO.cs" />
-    <Compile Include="ModelsDO\Organizations\OrganizationGroupDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationRecommendationSectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\EquipmentDO.cs" />
     <Compile Include="ModelsDO\Organizations\ExtDO.cs" />
     <Compile Include="ModelsDO\Organizations\IncludedDocumentDO.cs" />
-    <Compile Include="ModelsDO\Organizations\OrganizationDescriptionReviewDO.cs" />
-    <Compile Include="ModelsDO\Organizations\OrganizationPartDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationAuditplanDO.cs" />
     <Compile Include="Controllers\Organizations\OrganizationAuditplansController.cs" />
@@ -203,7 +203,7 @@
     <Compile Include="ModelsDO\Airports\AirportRadioNavAid.cs" />
     <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
-    <Compile Include="ModelsDO\Common\AuditDetailDO.cs" />
+    <Compile Include="ModelsDO\Common\InspectionDetailDO.cs" />
     <Compile Include="ModelsDO\Common\CoordinatesDO.cs" />
     <Compile Include="ModelsDO\Common\DisparityDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentCertOperationalDO.cs" />

@@ -8,15 +8,20 @@
     $stateParams,
     AirportInspections,
     airportInspection,
-    scMessage) {
-    var originalDoc = _.cloneDeep(airportInspection);
+    scMessage
+  ) {
+    var originalInspection = _.cloneDeep(airportInspection);
 
     $scope.airportInspection = airportInspection;
-    $scope.editMode = null;
-    $scope.lotId = $stateParams.id;
 
+    $scope.editMode = null;
     $scope.edit = function () {
       $scope.editMode = 'edit';
+    };
+
+    $scope.cancel = function () {
+      $scope.editMode = null;
+      $scope.airportInspection = _.cloneDeep(originalInspection);
     };
 
     $scope.save = function () {
@@ -33,12 +38,6 @@
       });
     };
 
-
-    $scope.cancel = function () {
-      $scope.editMode = null;
-      $scope.airportInspection = _.cloneDeep(originalDoc);
-    };
-    
     $scope.deleteInspection = function () {
       return scMessage('common.messages.confirmDelete')
       .then(function (result) {

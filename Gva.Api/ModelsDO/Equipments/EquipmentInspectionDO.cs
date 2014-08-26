@@ -10,7 +10,7 @@ namespace Gva.Api.ModelsDO.Equipments
     {
         public EquipmentInspectionDO()
         {
-            this.AuditDetails = new List<AuditDetailDO>();
+            this.InspectionDetails = new List<InspectionDetailDO>();
             this.Disparities = new List<DisparityDO>();
             this.Examiners = new List<NomValue>();
         }
@@ -42,7 +42,7 @@ namespace Gva.Api.ModelsDO.Equipments
 
         public DateTime? EndDate { get; set; }
 
-        public List<AuditDetailDO> AuditDetails { get; set; }
+        public List<InspectionDetailDO> InspectionDetails { get; set; }
 
         public List<DisparityDO> Disparities { get; set; }
 

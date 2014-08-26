@@ -62,7 +62,7 @@ namespace Gva.MigrationTool.Sets
                 foreach (var personId in this.getPersonIds())
                 {
                     var personCaseTypes = this.getPersonCaseTypes(personId, noms);
-                    personCaseTypes.Add(noms["personCaseTypes"].ByAlias("none"));
+                    personCaseTypes.Add(noms["personCaseTypes"].ByAlias("person"));
 
                     var inspectorData = this.getInspectorData(personId, noms);
                     if (inspectorData != null)
@@ -444,7 +444,7 @@ namespace Gva.MigrationTool.Sets
                 .OrderByDescending(r => r)
                 //.Take(1000)
                 //.Where(r => r == 6730) //РАДОСТИНА
-                .Where(id => new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 16, 19, 21, 24, 38, 41, 42, 61, 101, 102, 104, 122, 123, 124, 125, 127, 128, 129, 130, 131, 132, 133, 134, 135, 142, 150, 162, 177, 182, 189, 259, 265, 288, 442, 453, 462, 469, 518, 522, 536, 563, 682, 704, 762, 782, 784, 803, 822, 849, 862, 882, 924, 942, 962, 969, 988, 989, 991, 1006, 1013, 1015, 1021, 1026, 1030, 1063, 1087, 1070, 1071, 1104, 1114, 1116, 1117, 1149, 1150, 1153, 1222, 1268, 1302, 1341, 1344, 1405, 1500, 1544, 1546, 1581, 1604, 1605, 1608, 1619, 1678, 1738, 1800, 1828, 1834, 1938, 2007, 2103, 2112, 2139, 2143, 2193, 2219, 2286, 2318, 2373, 2396, 2414, 2417, 2425, 2590, 2606, 2631, 2644, 2654, 2659, 2666, 2683, 2708, 2712, 2713, 2715, 2748, 2783, 2786, 2889, 2894, 2953, 2955, 2961, 3059, 3095, 3100, 3285, 3294, 3372, 3373, 3394, 3458, 3491, 3521, 3569, 3646, 3679, 3816, 3897, 3913, 3933, 3999, 4015, 4028, 4039, 4100, 4124, 4128, 4213, 4324, 4535, 5443, 5464, 5465, 5466, 5468, 5483, 5603, 5823, 6023, 6730, 7328, 9200 }.Contains(id))
+                .Where(id => new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 16, 19, 21, 24, 38, 41, 42, 61, 101, 102, 104, 122, 123, 124, 125, 127, 128, 129, 130, 131, 132, 133, 134, 135, 142, 150, 162, 177, 182, 189, 259, 265, 288, 442, 453, 462, 469, 518, 522, 536, 563, 682, 704, 762, 782, 784, 803, 822, 849, 862, 882, 924, 942, 962, 969, 988, 989, 991, 1006, 1013, 1015, 1021, 1026, 1030, 1063, 1070, 1071, 1087, 1104, 1114, 1116, 1117, 1149, 1150, 1153, 1222, 1268, 1302, 1341, 1344, 1405, 1500, 1544, 1546, 1581, 1604, 1605, 1608, 1619, 1678, 1738, 1800, 1828, 1834, 1938, 2007, 2103, 2112, 2139, 2143, 2193, 2219, 2286, 2318, 2373, 2396, 2414, 2417, 2425, 2590, 2606, 2631, 2644, 2654, 2659, 2666, 2683, 2708, 2712, 2713, 2715, 2748, 2783, 2786, 2889, 2894, 2953, 2955, 2961, 3059, 3095, 3100, 3285, 3294, 3372, 3373, 3394, 3458, 3491, 3521, 3569, 3646, 3679, 3816, 3897, 3913, 3933, 3959, 3999, 4015, 4028, 4039, 4100, 4124, 4128, 4162, 4213, 4324, 4535, 5443, 5463, 5464, 5465, 5466, 5467, 5468, 5483, 5603, 5823, 6023, 6203, 6730, 7328, 8086, 9184, 9200 }.Contains(id))
                 .ToList();
         }
 
@@ -676,7 +676,7 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
                                     new JProperty("caseType",
                                         (licenceStaffTypeCode != null ? Utils.ToJObject(getPersonCaseTypeByStaffTypeCode(noms, licenceStaffTypeCode)) : null)
-                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("none"))),
+                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("person"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -826,7 +826,7 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("caseType",
                                         (appLicenceStaffTypeCode != null ? Utils.ToJObject(getPersonCaseTypeByStaffTypeCode(noms, appLicenceStaffTypeCode)) : null)
                                         ?? (licenceStaffTypeCode != null ? Utils.ToJObject(getPersonCaseTypeByStaffTypeCode(noms, licenceStaffTypeCode)) : null)
-                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("none"))),
+                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("person"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray(ag.Select(a => nomApplications[a.REQUEST_ID]))))))))
@@ -931,7 +931,7 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
                                     new JProperty("caseType",
                                         (appLicenceStaffTypeCode != null ? Utils.ToJObject(getPersonCaseTypeByStaffTypeCode(noms, appLicenceStaffTypeCode)) : null)
-                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("none"))),
+                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("person"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray(ag.Select(a => nomApplications[a.REQUEST_ID]))))))))
@@ -1018,7 +1018,7 @@ namespace Gva.MigrationTool.Sets
                                 new JObject(
                                     new JProperty("isAdded", true),
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
-                                    new JProperty("caseType", Utils.ToJObject(noms["personCaseTypes"].ByAlias("none"))),
+                                    new JProperty("caseType", Utils.ToJObject(noms["personCaseTypes"].ByAlias("person"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -1147,7 +1147,7 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
                                     new JProperty("caseType",
                                         (appLicenceStaffTypeCode != null ? Utils.ToJObject(getPersonCaseTypeByStaffTypeCode(noms, appLicenceStaffTypeCode)) : null)
-                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("none"))),
+                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("person"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray(ag.Select(a => nomApplications[a.REQUEST_ID]))))))))

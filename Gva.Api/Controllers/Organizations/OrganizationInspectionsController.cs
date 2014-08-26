@@ -49,10 +49,7 @@ namespace Gva.Api.Controllers.Organizations
         [Route("{inspectionPartIndex}/recommendations")]
         public IHttpActionResult GetInspectionRecommendations(int lotId, int inspectionPartIndex)
         {
-            return Ok(new
-            {
-                reports = this.organizationRepository.GetInspectionRecommendations(lotId, inspectionPartIndex)
-            });
+            return Ok(this.organizationRepository.GetInspectionRecommendations(lotId, inspectionPartIndex));
         }
     }
 }

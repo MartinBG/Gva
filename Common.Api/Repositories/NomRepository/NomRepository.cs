@@ -73,7 +73,6 @@ namespace Common.Api.Repositories.NomRepository
 
         public IEnumerable<NomValue> GetNomValues(
             string alias,
-            string parentAlias,
             string prop,
             string propValue,
             string term = null,
@@ -87,7 +86,31 @@ namespace Common.Api.Repositories.NomRepository
                 predicate = predicate.AndStringContains(nv => nv.Name, term);
             }
 
-            return this.unitOfWork.DbContext.GetNomValuesByTextContentProperty(parentAlias, prop, propValue)
+            return this.unitOfWork.DbContext.GetNomValuesByTextContentProperty(alias, prop, propValue)
+                .Where(predicate)
+                .OrderBy(nv => nv.Order)
+                .ThenBy(nv => nv.Name)
+                .WithOffsetAndLimit(offset, limit)
+                .ToList();
+        }
+
+        public IEnumerable<NomValue> GetNomValues(
+            string alias,
+            string parentAlias,
+            string parentProp,
+            string parentPropValue,
+            string term = null,
+            int offset = 0,
+            int? limit = null)
+        {
+            var predicate = PredicateBuilder.True<NomValue>();
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                predicate = predicate.AndStringContains(nv => nv.Name, term);
+            }
+
+            return this.unitOfWork.DbContext.GetNomValuesByTextContentProperty(parentAlias, parentProp, parentPropValue)
                 .Join(
                     this.unitOfWork.DbContext.Set<NomValue>().Where(nv => nv.Nom.Alias == alias),
                     (p) => p.NomValueId,

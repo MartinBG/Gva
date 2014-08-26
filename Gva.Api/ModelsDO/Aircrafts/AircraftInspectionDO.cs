@@ -10,12 +10,10 @@ namespace Gva.Api.ModelsDO.Aircrafts
     {
         public AircraftInspectionDO()
         {
-            this.AuditDetails = new List<AuditDetailDO>();
+            this.InspectionDetails = new List<InspectionDetailDO>();
             this.Disparities = new List<DisparityDO>();
             this.Examiners = new List<NomValue>();
         }
-
-        public NomValue AuditCaseTypes { get; set; }
 
         public string DocumentNumber { get; set; }
 
@@ -44,14 +42,15 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? EndDate { get; set; }
 
-        public DateTime? InspectionFrom { get; set; }
-
-        public DateTime? InspectionTo { get; set; }
-
-        public List<AuditDetailDO> AuditDetails { get; set; }
+        public List<InspectionDetailDO> InspectionDetails { get; set; }
 
         public List<DisparityDO> Disparities { get; set; }
 
         public List<NomValue> Examiners { get; set; }
+
+        //AircraftInspection specific fields
+        public DateTime? InspectionFrom { get; set; }
+
+        public DateTime? InspectionTo { get; set; }
     }
 }

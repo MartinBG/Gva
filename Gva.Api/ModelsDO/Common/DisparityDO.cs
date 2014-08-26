@@ -6,13 +6,8 @@ namespace Gva.Api.ModelsDO.Common
 {
     public class DisparityDO
     {
-        [Required(ErrorMessage = "SortOrder is required.")]
-        public int? SortOrder { get; set; }
-
-        public string AuditPart { get; set; }
-
-        [Required(ErrorMessage = "Subject is required.")]
-        public string Subject { get; set; }
+        [Required(ErrorMessage = "DetailCode is required.")]
+        public string DetailCode { get; set; }
 
         [Required(ErrorMessage = "RefNumber is required.")]
         public string RefNumber { get; set; }
