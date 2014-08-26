@@ -29,6 +29,12 @@ namespace Docs.Api.Repositories.DocRepository
 
         int? spGetDocRegisterIdByRegisterIndexId(int registerIndexId);
 
+        int? GetNextReceiptOrder(int docId);
+
+        List<Doc> RearangeReceiptOrder(int inCaseDocId, int boundaryDocId, bool everything = true);
+
+        List<Doc> RearangeBoundaryReceiptOrder(int inCaseDocId, int boundary);
+
         Doc MarkAsRead(int id, byte[] docVersion, int unitId, UserContext userContext);
 
         Doc MarkAsUnread(int id, byte[] docVersion, int unitId, UserContext userContext);

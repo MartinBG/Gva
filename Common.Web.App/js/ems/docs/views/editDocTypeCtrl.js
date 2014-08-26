@@ -240,7 +240,8 @@
                 docTypeId: doc.docTypeId,
                 docDirectionId: doc.docDirectionId,
                 primaryRegisterIndexId: data.primaryRegisterIndexId,
-                unregisterDoc: false
+                unregisterDoc: false,
+                receiptOrder: doc.receiptOrder
               },
               missingFields: [],
               allFields: [],

@@ -83,6 +83,84 @@ namespace Docs.Api.Repositories.DocRepository
             return this.ExecProcedure<int?>("spGetDocRegisterIdByRegisterIndexId", parameters).FirstOrDefault();
         }
 
+        public int? GetNextReceiptOrder(int docId)
+        {
+            Doc doc = this.Find(docId, e => e.DocEntryType);
+
+            if (doc.DocEntryType.Alias != "Document")
+            {
+                return null;
+            }
+
+            int caseId = GetCaseId(docId);
+
+            return (this.unitOfWork.DbContext.Set<DocRelation>()
+                .Include(e => e.Doc)
+                .Where(e => e.RootDocId == caseId)
+                .Max(e => e.Doc.ReceiptOrder) ?? 0) + 1;
+        }
+
+        public List<Doc> RearangeReceiptOrder(int inCaseDocId, int boundaryDocId, bool everything = true)
+        {
+            int boundary = 0;
+
+            if (!everything)
+            {
+                Doc doc = this.Find(boundaryDocId);
+
+                if (doc.ReceiptOrder.HasValue)
+                {
+                    boundary = doc.ReceiptOrder.Value;
+                }
+            }
+
+            int caseId = GetCaseId(inCaseDocId);
+
+            List<Doc> docs = this.unitOfWork.DbContext.Set<DocRelation>()
+                .Include(e => e.Doc)
+                .Where(e => e.RootDocId == caseId && e.Doc.DocEntryType.Alias == "Document")
+                .Where(e => !e.Doc.ReceiptOrder.HasValue || e.Doc.ReceiptOrder.Value > boundary)
+                .Select(e => e.Doc)
+                .OrderBy(e => e.ReceiptOrder)
+                .ToList();
+
+            int counter = 1;
+
+            if (!everything)
+            {
+                counter = boundary == 0 ? 1 : boundary;
+            }
+
+            foreach (var item in docs)
+            {
+                item.ReceiptOrder = counter;
+                counter++;
+            }
+
+            return docs;
+        }
+
+        public List<Doc> RearangeBoundaryReceiptOrder(int inCaseDocId, int boundary)
+        {
+            int caseId = GetCaseId(inCaseDocId);
+
+            List<Doc> docs = this.unitOfWork.DbContext.Set<DocRelation>()
+                .Include(e => e.Doc)
+                .Where(e => e.RootDocId == caseId && e.Doc.DocEntryType.Alias == "Document")
+                .Where(e => !e.Doc.ReceiptOrder.HasValue || e.Doc.ReceiptOrder.Value > boundary)
+                .Select(e => e.Doc)
+                .OrderBy(e => e.ReceiptOrder)
+                .ToList();
+
+            foreach (var item in docs)
+            {
+                item.ReceiptOrder = boundary;
+                boundary++;
+            }
+
+            return docs;
+        }
+
         public Doc MarkAsRead(int id, byte[] docVersion, int unitId, UserContext userContext)
         {
             Doc doc = this.Find(id, e => e.DocHasReads);

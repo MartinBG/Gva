@@ -628,6 +628,20 @@ namespace Docs.Api.Controllers
                 this.docRepository.ExecSpSetDocUnitTokens(docId: oldCaseId);
                 this.docRepository.ExecSpSetDocUnitTokens(docId: newDocId);
 
+                this.docRepository.RearangeReceiptOrder(oldCaseId, id, everything: false);
+
+                int? boundary = this.docRepository.GetNextReceiptOrder(newDocId);
+                if (boundary.HasValue)
+                {
+                    this.docRepository.RearangeBoundaryReceiptOrder(newDocId, boundary.Value);
+                }
+                else
+                {
+                    this.docRepository.RearangeReceiptOrder(newDocId, 0, everything: true);
+                }
+
+                this.unitOfWork.Save();
+
                 transaction.Commit();
 
                 return Ok();
@@ -770,6 +784,11 @@ namespace Docs.Api.Controllers
                 this.docRepository.ExecSpSetDocUnitTokens(docId: oldCaseId);
                 this.docRepository.ExecSpSetDocUnitTokens(docId: id);
 
+                this.docRepository.RearangeReceiptOrder(oldCaseId, id, everything: false);
+                this.docRepository.RearangeReceiptOrder(id, 0, everything: true);
+
+                this.unitOfWork.Save();
+
                 transaction.Commit();
 
                 return Ok();
@@ -907,6 +926,8 @@ namespace Docs.Api.Controllers
 
                     this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
                     this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
+
+                    newDoc.SetReceiptOrder(this.docRepository.GetNextReceiptOrder(newDoc.DocId), this.userContext);
 
                     if (preDoc.Register)
                     {
@@ -1663,6 +1684,8 @@ namespace Docs.Api.Controllers
                     oldDoc.DocTypeId = doc.DocTypeId;
                     oldDoc.DocDirectionId = doc.DocDirectionId;
                 }
+
+                oldDoc.ReceiptOrder = doc.ReceiptOrder;
 
                 this.unitOfWork.Save();
 
