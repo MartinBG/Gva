@@ -2,8 +2,8 @@
 (function (angular) {
   'use strict';
   function OrganizationDataCtrl($scope) {
-    $scope.requireCaseTypes = function () {
-      return $scope.model.caseTypes.length > 0;
+    $scope.requireCaseTypes = function (caseTypes) {
+      return caseTypes.length > 0;
     };
   }
 

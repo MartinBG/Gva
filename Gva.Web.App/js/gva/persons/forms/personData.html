@@ -44,7 +44,7 @@
     <sc-field type="text" ng-model="model.phone1" l10n-text="persons.personDataDirective.companyPhone" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.caseTypes" alias="'personCaseTypes'" sc-validate="{ requiredValue: requireCaseTypes }" multiple l10n-text="persons.personDataDirective.caseTypes" validations="{requiredValue: 'Задължително поле'}"
+    <sc-field type="nomenclature" ng-model="model.caseTypes" alias="'personCaseTypes'" sc-validate="{ requiredValue: requireCaseTypes }" sc-validate-immediate="true" multiple l10n-text="persons.personDataDirective.caseTypes" validations="{requiredValue: 'Задължително поле'}"
     class="col-sm-3 col-md-2"></sc-field>
   </div>
 </ng-form>

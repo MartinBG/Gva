@@ -27,8 +27,8 @@
       }
     };
 
-    $scope.requireCaseTypes = function () {
-      return $scope.model.caseTypes.length > 0;
+    $scope.requireCaseTypes = function (caseTypes) {
+      return caseTypes.length > 0;
     };
 
     $scope.uinValid = function () {

@@ -42,7 +42,7 @@
         <div class="form-group col-sm-2" sc-has-error="endingDate">
           <label class="control-label" l10n-text="applications.editDocStageModal.endingDate"></label>
           <sc-validation-error field-name="endingDate" validations="{required: 'default', invalidEndingDate: 'Изберете дата след днешната'}"></sc-validation-error>
-          <sc-date ng-model="stageModel.endingDate" name="endingDate" sc-validate="{ invalidEndingDate: isEndingDateValid }"></sc-date>
+          <sc-date ng-model="stageModel.endingDate" name="endingDate" sc-validate="{ invalidEndingDate: isEndingDateValid }" sc-validate-immediate="true"></sc-date>
         </div>
 
       </div>

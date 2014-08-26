@@ -89,11 +89,14 @@
           };
 
           if (immediate) {
-            control.$parsers.push(function (value) {
+            var validatorFn = function (value) {
               validator(value);
 
               return value;
-            });
+            };
+
+            control.$parsers.push(validatorFn);
+            control.$formatters.push(validatorFn);
           } else {
             validators.push(validator);
           }

@@ -150,8 +150,8 @@
       });
     };
 
-    $scope.requireCorrespondents = function () {
-      return $scope.application.docCorrespondents.length > 0;
+    $scope.requireCorrespondents = function (docCorrespondents) {
+      return docCorrespondents.length > 0;
     };
 
     $scope.selectAppType = function () {

@@ -31,12 +31,12 @@
       return $modalInstance.dismiss('cancel');
     };
 
-    $scope.isEndingDateValid = function () {
-      if (!$scope.stageModel.endingDate) {
+    $scope.isEndingDateValid = function (endingDate) {
+      if (!endingDate) {
         return true;
       }
       else {
-        var momentED = moment($scope.stageModel.endingDate).startOf('day'),
+        var momentED = moment(endingDate).startOf('day'),
           momentSD = moment($scope.stageModel.startingDate).startOf('day'),
           today = moment().startOf('day');
 
