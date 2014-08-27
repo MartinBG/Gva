@@ -2300,7 +2300,7 @@
           deleteEmpl: 'Изтрий'
         },
         newExam: {
-          title: 'Нов на теоретичен изпит',
+          title: 'Нов теоретичен изпит',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -3203,7 +3203,7 @@
           deleteStaffMng: 'Изтрий'
         },
         staffExaminerSearch: {
-          newStaffExaminer: 'Нов проверяващи',
+          newStaffExaminer: 'Нов проверяващ',
           code: 'Идентификационен код',
           valid: 'Валиден',
           person: 'Физическо лице',
@@ -3562,7 +3562,7 @@
           }
         },
         staffExaminerDirective: {
-          newStaffManagement: 'Нов проверяващи',
+          newStaffManagement: 'Нов проверяващ',
           nomValueId: 'Идентификатор',
           examinerCode: 'Идентификационен код',
           name: 'Наименование',
