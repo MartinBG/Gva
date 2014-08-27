@@ -217,7 +217,7 @@
           icao: 'ICAO код',
           runway: 'Полоса',
           course: 'Курс',
-          excess: 'Превишение ',
+          excess: 'Превишение',
           concrete: 'Полоса-бетон',
           edit: 'Редакция',
           viewApplication: 'Обратно към заявление: '
@@ -3777,7 +3777,7 @@
         'root.aircrafts.view.smods': 'S-code',
         'root.aircrafts.view.smods.new': 'Нов S-code',
         'root.aircrafts.view.smods.edit': 'Преглед на S-code',
-        'root.aircrafts.view.marks': 'Регистрационни знакове',
+        'root.aircrafts.view.marks': 'Регистрационни знаци',
         'root.aircrafts.view.marks.new': 'Нов знак',
         'root.aircrafts.view.marks.edit': 'Преглед на знак',
         'root.aircrafts.view.airworthinesses': 'Летателни годности',
