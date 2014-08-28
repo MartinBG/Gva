@@ -651,6 +651,8 @@
     <Content Include="js\gva\persons\modals\medicals\chooseMedicalsModalCtrl.js" />
     <Content Include="js\gva\persons\modals\medicals\newMedicalModal.html" />
     <Content Include="js\gva\persons\modals\medicals\newMedicalModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\licences\printLicenceModal.html" />
+    <Content Include="js\gva\persons\modals\licences\printLicenceModalCtrl.js" />
     <Content Include="js\gva\persons\modals\ratings\chooseRatingsModal.html" />
     <Content Include="js\gva\persons\modals\ratings\chooseRatingsModalCtrl.js" />
     <Content Include="js\gva\persons\modals\ratings\newRatingModal.html" />

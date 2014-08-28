@@ -171,7 +171,7 @@ namespace Gva.Api.WordTemplates
             }
         }
 
-        public object GetData(int lotId, string path, int index)
+        public object GetData(int lotId, string path)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart("personData").Content;
@@ -181,14 +181,15 @@ namespace Gva.Api.WordTemplates
                 new JObject() :
                 personAddressPart.Content;
             var licence = lot.Index.GetPart(path).Content;
-            var edition = licence.Get<JObject>(string.Format("editions[{0}]", index));
-            var firstEdition = licence.Get<JObject>("editions[0]");
+            var editions = licence.GetItems<JObject>("editions");
+            var firstEdition = editions.First();
+            var lastEdition = editions.Last();
 
-            var includedTrainings = edition.GetItems<int>("includedTrainings")
+            var includedTrainings = lastEdition.GetItems<int>("includedTrainings")
                 .Select(i => lot.Index.GetPart("personDocumentTrainings/" + i).Content);
-            var includedMedicals = edition.GetItems<int>("includedMedicals")
+            var includedMedicals = lastEdition.GetItems<int>("includedMedicals")
                 .Select(i => lot.Index.GetPart("personDocumentMedicals/" + i).Content);
-            var includedRatings = edition.GetItems<int>("includedRatings")
+            var includedRatings = lastEdition.GetItems<int>("includedRatings")
                 .Select(i => lot.Index.GetPart("ratings/" + i).Content);
 
             var licenceNumber = string.Format(
@@ -211,16 +212,16 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_TYPE_NAME_TRANS = licenceType.NameAlt == null ? string.Empty : licenceType.NameAlt.ToUpper(),
                     L_LICENCE_NO = licenceNumber,
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
-                    L_LICENCE_PRIV = this.GetLicencePrivilege(licenceType.Code, edition),
+                    L_LICENCE_PRIV = this.GetLicencePrivilege(licenceType.Code, lastEdition),
                     L_FIRST_ISSUE_DATE = firstEdition.Get<DateTime>("documentDateValidFrom"),
-                    L_ISSUE_DATE = edition.Get<DateTime>("documentDateValidFrom"),
+                    L_ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_TYPE_NAME = licenceType.Name.ToLower(),
                     T_LICENCE_NO = licenceNumber,
                     T_FIRST_ISSUE_DATE = firstEdition.Get<DateTime>("documentDateValidFrom"),
-                    T_VALID_DATE = edition.Get<DateTime>("documentDateValidTo"),
-                    T_ACTION = edition.Get<string>("licenceAction.name").ToUpper(),
-                    T_ISSUE_DATE = edition.Get<DateTime>("documentDateValidFrom"),
+                    T_VALID_DATE = lastEdition.Get<DateTime>("documentDateValidTo"),
+                    T_ACTION = lastEdition.Get<string>("licenceAction.name").ToUpper(),
+                    T_ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     T_DOCUMENTS = documents.Take(documents.Length / 2),
                     T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
                     T_MED_CERT = this.GetMedCerts(licenceType.Code, includedMedicals, personData),

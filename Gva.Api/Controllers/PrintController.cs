@@ -38,9 +38,10 @@ namespace Gva.Api.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        [Route(@"api/print")]
-        public HttpResponseMessage Get(int lotId, string path, int index)
+        [Route("api/print")]
+        public HttpResponseMessage Get(int lotId, int licenceInd)
         {
+            string path = string.Format("{0}/{1}", "licences", licenceInd);
             int licenceTypeId = this.lotRepository
                 .GetLotIndex(lotId)
                 .Index.GetPart(path)
@@ -49,7 +50,7 @@ namespace Gva.Api.Controllers
             string templateName = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent.Get<string>("templateName");
 
             var dataGenerator = this.dataGenerators.First(dg => dg.TemplateNames.Contains(templateName));
-            object data = dataGenerator.GetData(lotId, path, index);
+            object data = dataGenerator.GetData(lotId, path);
 
             JsonSerializer jsonSerializer = JsonSerializer.Create(App.JsonSerializerSettings);
             jsonSerializer.ContractResolver = new DefaultContractResolver();

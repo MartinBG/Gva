@@ -2552,6 +2552,13 @@
           add: 'Добави',
           cancel: 'Отказ'
         },
+        printLicenceModal: {
+          title: 'Принтиране на лиценз',
+          stampNumber: 'Печатен док. номер',
+          cancel: 'Отказ',
+          save: 'Запис',
+          print: 'Принтирай'
+        },
         licencesSearch: {
           newLicence: 'Нов лиценз',
           licenceNumber: 'Лиценз No',

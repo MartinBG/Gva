@@ -77,7 +77,7 @@ namespace Gva.Api.WordTemplates
             }
         }
 
-        public object GetData(int lotId, string path, int index)
+        public object GetData(int lotId, string path)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart("personData").Content;
@@ -86,15 +86,17 @@ namespace Gva.Api.WordTemplates
             var personAddress = personAddressPart == null ?
                 new JObject() :
                 personAddressPart.Content;
-            var licence = lot.Index.GetPart(path).Content;
-            var edition = licence.Get<JObject>(string.Format("editions[{0}]", index));
-            var firstEdition = licence.Get<JObject>("editions[0]");
 
-            var includedRatings = edition.GetItems<int>("includedRatings")
+            var licence = lot.Index.GetPart(path).Content;
+            var editions = licence.GetItems<JObject>("editions");
+            var firstEdition = editions.First();
+            var lastEdition = editions.Last();
+
+            var includedRatings = lastEdition.GetItems<int>("includedRatings")
                 .Select(i => lot.Index.GetPart("ratings/" + i).Content);
-            var includedTrainings = edition.GetItems<int>("includedTrainings")
+            var includedTrainings = lastEdition.GetItems<int>("includedTrainings")
                 .Select(i => lot.Index.GetPart("personDocumentTrainings/" + i).Content);
-            var includedMedicals = edition.GetItems<int>("includedMedicals")
+            var includedMedicals = lastEdition.GetItems<int>("includedMedicals")
                 .Select(i => lot.Index.GetPart("personDocumentMedicals/" + i).Content);
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
@@ -151,7 +153,7 @@ namespace Gva.Api.WordTemplates
                     ENDORSEMENT = this.GetEndorsements(includedRatings),
                     L_LANG_LEVEL = langLevel,
                     L_FIRST_ISSUE_DATE = firstEdition.Get<DateTime>("documentDateValidFrom"),
-                    L_ISSUE_DATE = edition.Get<DateTime>("documentDateValidFrom"),
+                    L_ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     NAME = string.Format(
                         "{0} {1} {2}",
                         personData.Get<string>("firstName"),
@@ -168,8 +170,8 @@ namespace Gva.Api.WordTemplates
                     T_LICENCE_CODE = " РП ",
                     T_LICENCE_NO = licenceNumber,
                     T_FIRST_ISSUE_DATE = firstEdition.Get<DateTime>("documentDateValidFrom"),
-                    T_ACTION = edition.Get<string>("licenceAction.name").ToUpper(),
-                    T_ISSUE_DATE = edition.Get<DateTime>("documentDateValidFrom"),
+                    T_ACTION = lastEdition.Get<string>("licenceAction.name").ToUpper(),
+                    T_ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     T_DOCUMENTS = documents.Take(documents.Length / 2),
                     T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
                     T_LANG_LEVEL_NO = number++,

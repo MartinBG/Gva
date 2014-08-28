@@ -31,7 +31,7 @@ namespace Gva.Api.WordTemplates
             }
         }
 
-        public object GetData(int lotId, string path, int index)
+        public object GetData(int lotId, string path)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart("personData").Content;
@@ -41,8 +41,11 @@ namespace Gva.Api.WordTemplates
                 new JObject() :
                 personAddressPart.Content;
             var licence = lot.Index.GetPart(path).Content;
-            var firstEdition = licence.Get<JObject>("editions[0]");
-            var lastEdition = licence.Get<JObject>(string.Format("editions[{0}]", index));
+
+            var editions = licence.GetItems<JObject>("editions");
+            var firstEdition = editions.First();
+            var lastEdition = editions.Last();
+
             var includedRatings = lastEdition.GetItems<int>("includedRatings")
                 .Select(i => lot.Index.GetPart("ratings/" + i).Content);
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));

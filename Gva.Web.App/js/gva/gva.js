@@ -495,16 +495,17 @@
       .state(['root.persons.view.documentApplications.edit'                , '/:ind'                                                                       , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsEdit.html'  , 'DocApplicationsEditCtrl'       ]]);
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
-    .modal('chooseTrainings' , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html' , 'ChooseTrainingsModalCtrl')
-    .modal('newTraining'     , 'js/gva/persons/modals/trainings/newTrainingModal.html'     , 'NewTrainingModalCtrl'    )
-    .modal('chooseChecks'    , 'js/gva/persons/modals/checks/chooseChecksModal.html'       , 'ChooseChecksModalCtrl'   )
-    .modal('newCheck'        , 'js/gva/persons/modals/checks/newCheckModal.html'           , 'NewCheckModalCtrl'       )
-    .modal('chooseRatings'   , 'js/gva/persons/modals/ratings/chooseRatingsModal.html'     , 'ChooseRatingsModalCtrl'  )
-    .modal('newRating'       , 'js/gva/persons/modals/ratings/newRatingModal.html'         , 'NewRatingModalCtrl'      )
-    .modal('chooseMedicals'  , 'js/gva/persons/modals/medicals/chooseMedicalsModal.html'   , 'ChooseMedicalsModalCtrl' )
-    .modal('newMedical'      , 'js/gva/persons/modals/medicals/newMedicalModal.html'       , 'NewMedicalModalCtrl'     )
-    .modal('chooseLicences'  , 'js/gva/persons/modals/licences/chooseLicencesModal.html'   , 'ChooseLicencesModalCtrl' )
-    .modal('licenceStatuses' , 'js/gva/persons/modals/licences/licenceStatusesModal.html'  , 'LicenceStatusesModalCtrl');
+    .modal('chooseTrainings' , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html' , 'ChooseTrainingsModalCtrl'      )
+    .modal('newTraining'     , 'js/gva/persons/modals/trainings/newTrainingModal.html'     , 'NewTrainingModalCtrl'          )
+    .modal('chooseChecks'    , 'js/gva/persons/modals/checks/chooseChecksModal.html'       , 'ChooseChecksModalCtrl'         )
+    .modal('newCheck'        , 'js/gva/persons/modals/checks/newCheckModal.html'           , 'NewCheckModalCtrl'             )
+    .modal('chooseRatings'   , 'js/gva/persons/modals/ratings/chooseRatingsModal.html'     , 'ChooseRatingsModalCtrl'        )
+    .modal('newRating'       , 'js/gva/persons/modals/ratings/newRatingModal.html'         , 'NewRatingModalCtrl'            )
+    .modal('chooseMedicals'  , 'js/gva/persons/modals/medicals/chooseMedicalsModal.html'   , 'ChooseMedicalsModalCtrl'       )
+    .modal('newMedical'      , 'js/gva/persons/modals/medicals/newMedicalModal.html'       , 'NewMedicalModalCtrl'           )
+    .modal('chooseLicences'  , 'js/gva/persons/modals/licences/chooseLicencesModal.html'   , 'ChooseLicencesModalCtrl'       )
+    .modal('licenceStatuses' , 'js/gva/persons/modals/licences/licenceStatusesModal.html'  , 'LicenceStatusesModalCtrl'      )
+    .modal('printLicence'    , 'js/gva/persons/modals/licences/printLicenceModal.html'     , 'PrintLicenceModalCtrl'   , 'xs');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.aircrafts'                                          , '/aircrafts?mark&manSN&model&airCategory&aircraftProducer'                                                                                                                           ])

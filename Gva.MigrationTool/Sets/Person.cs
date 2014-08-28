@@ -1500,7 +1500,6 @@ namespace Gva.MigrationTool.Sets
                         __LICENCE_ID = r.Field<int>("LICENCE_ID"),
 
                         //TODO show somewhere?
-                        __PAPER_NO = r.Field<string>("PAPER_NO"),
                         __BOOK_PAGE_NO = r.Field<int?>("BOOK_PAGE_NO"),
                         __PAGES_COUNT = r.Field<int?>("PAGES_COUNT"),
                         __LIM_OTHER = r.Field<string>("LIM_OTHER"),
@@ -1511,7 +1510,8 @@ namespace Gva.MigrationTool.Sets
                         documentDateValidTo = r.Field<DateTime?>("VALID_DATE"),
                         notes = r.Field<string>("NOTES"),
                         notesAlt = r.Field<string>("NOTES_TRANS"),
-                        licenceAction = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_ACTION_ID")),
+                        licenceAction = noms["licenceActions"].ByOldId(r.Field<string>("LICENCE_ACTION_ID")),
+                        stampNumber = r.Field<string>("PAPER_NO"),
                         limitations = transformLimitations66(r.Field<string>("LIMITATIONS_OLD"), noms),
 
                         applications = r.Field<int?>("REQUEST_ID") != null ? new JObject[] { nomApplications[r.Field<int?>("REQUEST_ID").Value] } : new JObject[0],
@@ -1544,7 +1544,6 @@ namespace Gva.MigrationTool.Sets
                             r.__oldId,
                             r.__migrTable,
 
-                            r.__PAPER_NO,
                             r.__BOOK_PAGE_NO,
                             r.__PAGES_COUNT,
                             r.__LIM_OTHER,
@@ -1556,6 +1555,7 @@ namespace Gva.MigrationTool.Sets
                             r.notes,
                             r.notesAlt,
                             r.licenceAction,
+                            r.stampNumber,
                             r.limitations,
 
                             r.applications,

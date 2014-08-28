@@ -25,7 +25,7 @@ namespace Gva.Api.WordTemplates
             }
         }
 
-        public object GetData(int lotId, string path, int index)
+        public object GetData(int lotId, string path)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart("personData").Content;
@@ -35,9 +35,9 @@ namespace Gva.Api.WordTemplates
                 new JObject() :
                 personEmplPart.Content;
             var licence = lot.Index.GetPart(path).Content;
-            var edition = licence.Get<JObject>(string.Format("editions[{0}]", index));
+            var lastEdition = licence.GetItems<JObject>("editions").Last();
 
-            var includedRatings = edition.GetItems<int>("includedRatings")
+            var includedRatings = lastEdition.GetItems<int>("includedRatings")
                 .Select(i => lot.Index.GetPart("ratings/" + i).Content);
 
             dynamic licenceHolder = this.GetLicenceHolder(personData);
@@ -53,8 +53,8 @@ namespace Gva.Api.WordTemplates
                     COMPANY = personEmployment.Get<string>("organization.nameAlt"),
                     OCCUPATION = occupation,
                     COUNTRY = personData.Get<string>("country.nameAlt"),
-                    VALID_DATE = edition.Get<DateTime>("documentDateValidTo"),
-                    ISSUE_DATE = edition.Get<DateTime>("documentDateValidFrom"),
+                    VALID_DATE = lastEdition.Get<DateTime>("documentDateValidTo"),
+                    ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     D_LICENCE_NO = licence.Get<string>("licenceNumber"),
                     D_LICENCE_HOLDER = new
                     {
@@ -64,8 +64,8 @@ namespace Gva.Api.WordTemplates
                     D_COMPANY = personEmployment.Get<string>("organization.nameAlt"),
                     D_OCCUPATION = occupation,
                     D_COUNTRY = personData.Get<string>("country.nameAlt"),
-                    D_VALID_DATE = edition.Get<DateTime>("documentDateValidTo"),
-                    D_ISSUE_DATE = edition.Get<DateTime>("documentDateValidFrom")
+                    D_VALID_DATE = lastEdition.Get<DateTime>("documentDateValidTo"),
+                    D_ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom")
                 }
             };
 

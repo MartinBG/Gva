@@ -15,7 +15,7 @@
       lastLicenceNumber: {
         method: 'GET',
         url: 'api/persons/:id/licences/lastLicenceNumber'
-      },      
+      },
       newLicenceStatus: {
         method: 'GET',
         url: 'api/persons/:id/licences/newStatus'

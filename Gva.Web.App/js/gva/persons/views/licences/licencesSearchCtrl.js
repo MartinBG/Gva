@@ -7,6 +7,7 @@
     $state,
     $stateParams,
     $filter,
+    scModal,
     licences
   ) {
     $scope.licences = licences;
@@ -29,10 +30,25 @@
 
       return moment(currentDate).isAfter(documentDateValidTo);
     };
+
+    $scope.print = function (licence) {
+      var params = {
+        lotId: $stateParams.id,
+        index: licence.partIndex
+      };
+
+      var modalInstance = scModal.open('printLicence', params);
+
+      modalInstance.result.then(function (savedLicence) {
+        licence = savedLicence;
+      });
+
+      return modalInstance.opened;
+    };
   }
 
   LicencesSearchCtrl.$inject =
-    ['$scope', '$state', '$stateParams', '$filter', 'licences'];
+    ['$scope', '$state', '$stateParams', '$filter', 'scModal','licences'];
 
   LicencesSearchCtrl.$resolve = {
     licences: [

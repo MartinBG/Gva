@@ -129,7 +129,7 @@ namespace Gva.Api.WordTemplates
             }
         }
 
-        public object GetData(int lotId, string path, int index)
+        public object GetData(int lotId, string path)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart("personData").Content;
@@ -139,20 +139,20 @@ namespace Gva.Api.WordTemplates
                 new JObject() :
                 personAddressPart.Content;
             var licence = lot.Index.GetPart(path).Content;
-            var edition = licence.Get<JObject>(string.Format("editions[{0}]", index));
+            var lastEdition = licence.GetItems<JObject>("editions").Last();
 
-            var includedTrainings = edition.GetItems<int>("includedTrainings")
+            var includedTrainings = lastEdition.GetItems<int>("includedTrainings")
                 .Select(i => lot.Index.GetPart("personDocumentTrainings/" + i).Content);
-            var includedRatings = edition.GetItems<int>("includedRatings")
+            var includedRatings = lastEdition.GetItems<int>("includedRatings")
                 .Select(i => lot.Index.GetPart("ratings/" + i).Content);
-            var includedLicences = edition.GetItems<int>("includedLicences")
+            var includedLicences = lastEdition.GetItems<int>("includedLicences")
                 .Select(i => lot.Index.GetPart("licences/" + i).Content);
-            var includedMedicals = edition.GetItems<int>("includedMedicals")
+            var includedMedicals = lastEdition.GetItems<int>("includedMedicals")
                 .Select(i => lot.Index.GetPart("personDocumentMedicals/" + i).Content);
-            var includedExams = edition.GetItems<int>("includedExams")
+            var includedExams = lastEdition.GetItems<int>("includedExams")
                 .Select(i => lot.Index.GetPart("personDocumentExams/" + i).Content);
 
-            var inspectorId = edition.Get<int?>("inspector.nomValueId");
+            var inspectorId = lastEdition.Get<int?>("inspector.nomValueId");
             object[] instructorData = new object[0];
             object[] examinerData = new object[0];
             if (inspectorId.HasValue)
@@ -182,10 +182,10 @@ namespace Gva.Api.WordTemplates
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
-            var otherLicences = this.GetOtherLicences(licenceCaCode, edition, includedLicences);
+            var otherLicences = this.GetOtherLicences(licenceCaCode, lastEdition, includedLicences);
             var rtoRating = this.GetRtoRating(includedRatings);
             var engLevel = this.GetEngLevel(includedTrainings);
-            var limitations = this.GetLimitations(edition, includedMedicals, includedExams);
+            var limitations = this.GetLimitations(lastEdition, includedMedicals, includedExams);
             var ratings = this.GetRaitings(includedRatings);
             var country = this.GetCountry(personAddress);
             var licenceNumber = string.Format(
@@ -202,7 +202,7 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
                     COUNTRY_NAME_BG = country.Name,
                     COUNTRY_CODE = country.TextContent.Get<string>("nationalityCodeCA"),
-                    ISSUE_DATE = edition.Get<DateTime>("documentDateValidFrom"),
+                    ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     OTHER_LICENCE = otherLicences,
                     T_DOCUMENTS = new object[0],
                     L_LICENCE_PRIV = this.GetLicencePrivileges(licence),
@@ -218,7 +218,7 @@ namespace Gva.Api.WordTemplates
                     T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_TYPE_NAME = licenceType.Name.ToLower(),
                     T_LICENCE_NO = licenceNumber,
-                    T_ISSUE_DATE = edition.Get<DateTime>("documentDateValidFrom"),
+                    T_ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     OTHER_LICENCE2 = otherLicences,
                     T_MED_CERT = this.GetMedCerts(includedMedicals, personData),
                     T_DOCUMENTS2 = this.GetDocuments2(licence, includedTrainings),

@@ -28,10 +28,11 @@
         });
 
       scModalProvider.modal = _.wrap(scModalProvider.modal,
-        function (original, name, template, controller) {
+        function (original, name, template, controller, size) {
           var modalObj = {
             template: template,
-            controller: controller
+            controller: controller,
+            size: size || 'xlg'
           };
 
           modals[name] = modalObj;
