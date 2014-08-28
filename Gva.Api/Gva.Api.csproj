@@ -228,6 +228,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationInspectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffExaminerDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffManagementDO.cs" />
+    <Compile Include="ModelsDO\Persons\GvaViewPersonLicenceEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\InspectorDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressDO.cs" />
     <Compile Include="ModelsDO\Common\DocumentApplicationDO.cs" />
