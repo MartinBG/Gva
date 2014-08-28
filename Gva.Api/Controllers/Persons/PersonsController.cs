@@ -230,5 +230,12 @@ namespace Gva.Api.Controllers.Persons
                 isUnique = this.personRepository.IsUniqueUin(uin, personId)
             });
         }
+
+        [Route("stampDocuments")]
+        public IHttpActionResult GetDocumentsForStamp()
+        {
+            var x = this.applicationRepository.GetDocumentsForStamp();
+            return Ok(this.applicationRepository.GetDocumentsForStamp());
+        }
     }
 }

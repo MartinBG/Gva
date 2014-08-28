@@ -884,5 +884,10 @@ namespace Gva.Api.Controllers
 
             return Ok(applicationStage);
         }
+
+        public List<PersonStampDocDO> GetDocumentsForStamp()
+        {
+            return this.applicationRepository.GetDocumentsForStamp();
+        }
     }
 }
