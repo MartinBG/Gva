@@ -20,7 +20,8 @@
             'new': 'Нов документ',
             news: 'Нови документи',
             corrsSearch: 'Кореспонденти',
-            corrsNew: 'Нов кореспондент'
+            corrsNew: 'Нов кореспондент',
+            printableDocs: 'Документи за печат'
           },
           persons: {
             title: 'ЛАП',

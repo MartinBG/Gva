@@ -106,6 +106,44 @@ namespace Gva.Api.Repositories.PersonRepository
                 .ToList();
         }
 
+        public IEnumerable<GvaViewPersonLicenceEdition> GetPrintableDocs(
+            int? licenceType = null,
+            int? licenceAction = null,
+            int? lin = null,
+            string uin = null,
+            string names = null,
+            bool exact = false)
+        {
+            var predicate = PredicateBuilder.True<GvaViewPersonLicenceEdition>();
+
+            predicate = predicate
+                .And(e => string.IsNullOrEmpty(e.StampNumber))
+                .And(e => e.IsLastEdition == true)
+                .AndEquals(e => e.Person.Lin, lin)
+                .AndStringMatches(e => e.Person.Uin, uin, exact)
+                .AndStringMatches(e => e.Person.Names, names, exact);
+
+            if (licenceType.HasValue)
+            {
+                predicate = predicate.AndEquals(e => e.LicenceTypeId, licenceType);
+            }
+
+            if (licenceAction.HasValue)
+            {
+                predicate = predicate.AndEquals(e => e.LicenceActionId, licenceAction);
+            }
+
+            return this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
+                .Include(e => e.Person)
+                .Include(p => p.Person.LinType)
+                .Include(p => p.Person.Organization)
+                .Include(p => p.Person.Employment)
+                .Include(p => p.Person.Inspector)
+                .Include(e => e.Part)
+                .Where(predicate)
+                .ToList();
+        }
+
         public int GetNextLin(int linTypeId)
         {
             int? lastLin = this.unitOfWork.DbContext.Set<GvaViewPerson>()

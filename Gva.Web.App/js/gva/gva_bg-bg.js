@@ -2618,6 +2618,18 @@
           notes: 'Бележки',
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        printableDocsSearch: {
+          lin: 'ЛИН',
+          uin: 'ЕГН',
+          names: 'Имена',
+          licenceAction: 'Основание',
+          licenceType: 'Вид лиценз',
+          licenceNumber: 'Лиценз No',
+          dateValidFrom: 'Дата на издаване',
+          dateValidTo: 'Валиден до',
+          application: 'Заявление',
+          search: 'Търси'
         }
       },
       applications: {
@@ -3902,7 +3914,8 @@
         'root.equipments.view.inspections': 'Инспекции',
         'root.equipments.view.inspections.new': 'Нова инспекция',
         'root.equipments.view.inspections.edit': 'Преглед на инспекция',
-        'root.equipments.view.inventory': 'Опис'
+        'root.equipments.view.inventory': 'Опис',
+        'root.printableDocs': 'Документи за печат'
       }
     });
   }]);

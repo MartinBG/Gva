@@ -191,6 +191,19 @@ namespace Gva.Api.Controllers.Persons
             return Ok();
         }
 
+        [Route("printableDocs")]
+        public IHttpActionResult GetPrintableDocs(
+            int? licenceType = null,
+            int? licenceAction = null,
+            int? lin = null,
+            string uin = null,
+            string names = null)
+        {
+            var docs = this.personRepository.GetPrintableDocs(licenceType, licenceAction, lin, uin, names);
+
+            return Ok(docs.Select(d => new GvaViewPersonLicenceEditionDO(d)));
+        }
+
         [Route("{lotId}/inventory")]
         public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
         {

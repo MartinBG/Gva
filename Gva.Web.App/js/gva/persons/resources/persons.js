@@ -15,6 +15,11 @@
       newPerson: {
         method: 'GET',
         url: 'api/persons/new'
+      },
+      getPrintableDocs: {
+        method: 'GET',
+        url: 'api/persons/printableDocs',
+        isArray: true
       }
     });
   }]);

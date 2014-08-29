@@ -30,6 +30,14 @@ namespace Gva.Api.Repositories.PersonRepository
             int offset = 0,
             int? limit = null);
 
+        IEnumerable<GvaViewPersonLicenceEdition> GetPrintableDocs(
+            int? licenceType = null,
+            int? licenceAction = null,
+            int? lin = null,
+            string uin = null,
+            string names = null,
+            bool exact = false);
+
         int GetNextLin(int linTypeId);
 
         bool IsUniqueUin(string uin, int? personId = null);

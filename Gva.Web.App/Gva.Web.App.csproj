@@ -778,6 +778,8 @@
     <Content Include="js\gva\persons\views\personsSearchCtrl.js" />
     <Content Include="js\gva\persons\views\personsView.html" />
     <Content Include="js\gva\persons\views\personsViewCtrl.js" />
+    <Content Include="js\gva\persons\views\printableDocs\printableDocsSearch.html" />
+    <Content Include="js\gva\persons\views\printableDocs\printableDocsSearchCtrl.js" />
     <Content Include="js\gva\persons\views\ratings\ratingsEdit.html" />
     <Content Include="js\gva\persons\views\ratings\ratingsEditCtrl.js" />
     <Content Include="js\gva\persons\views\ratings\ratingsNew.html" />
