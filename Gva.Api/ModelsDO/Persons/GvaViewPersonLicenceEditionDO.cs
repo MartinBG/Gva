@@ -9,7 +9,7 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class GvaViewPersonLicenceEditionDO
     {
-        public GvaViewPersonLicenceEditionDO(GvaViewPersonLicenceEdition edition)
+        public GvaViewPersonLicenceEditionDO(GvaViewPersonLicenceEdition edition, int? stageId = null, bool isReady = false, bool isReceived = false)
         {
             this.LotId = edition.LotId;
             this.PartIndex = edition.Part.Index;
@@ -19,6 +19,19 @@ namespace Gva.Api.ModelsDO.Persons
             this.DateValidFrom = edition.DateValidFrom;
             this.DateValidTo = edition.DateValidTo;
             this.LicenceActionId = edition.LicenceActionId;
+            this.LicenceActionId = edition.LicenceActionId;
+            this.IsReady = isReady;
+            this.IsReceived = isReady;
+
+            if (edition.LicenceActionId != null) 
+            {
+                this.LicenceActionName = edition.LicenceAction.Name;
+            }
+            if (stageId.HasValue)
+            {
+                this.StageId = stageId.Value;
+            }
+
             this.LicenceNumber = edition.LicenceNumber;
             this.Person = new PersonViewDO(edition.Person);
 
@@ -49,7 +62,15 @@ namespace Gva.Api.ModelsDO.Persons
 
         public int LicenceActionId { get; set; }
 
+        public string LicenceActionName { get; set; }
+
         public string LicenceNumber { get; set; }
+
+        public int StageId { get; set; }
+
+        public bool IsReceived { get; set; }
+
+        public bool IsReady { get; set; }
 
         public PersonViewDO Person { get; set; }
 

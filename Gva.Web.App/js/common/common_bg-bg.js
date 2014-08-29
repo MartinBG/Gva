@@ -29,7 +29,8 @@
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
             appsLink: 'Свържи заявление',
-            exam: 'Нов теор.изпит АС'
+            exam: 'Нов теор.изпит АС',
+            stampedDocuments: 'Документи за печат'
           },
           aircrafts: {
             title: 'ВС',

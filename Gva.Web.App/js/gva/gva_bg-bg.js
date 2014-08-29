@@ -2117,6 +2117,21 @@
           cancel: 'Отказ',
           inspDataTitle: 'Данни за инспектор'
         },
+        stampedDocumentsView: {
+          save: 'Запиши',
+          licenceNumber: 'No',
+          uin: 'ЕГН',
+          lin: 'ЛИН',
+          names: 'Име',
+          documentDateValidFrom: 'Издаден',
+          documentDateValidTo: 'Валиден до',
+          licenceAction: 'Основание',
+          ready: 'Готов',
+          stampNumber: 'Номер на печат',
+          application: 'Заявление',
+          received: 'Получен',
+          finished: 'Приключено заявление'
+        },
         viewPerson: {
           name: 'Име',
           uin: 'ЕГН',
@@ -3702,6 +3717,7 @@
         'root.applications.edit.case.linkPart': 'Свързване',
         'root.applications.edit.stages': 'Дейности по заявление',
         'root.persons': 'Физически лица',
+        'root.persons.stampedDocuments': 'Печат на доументи',
         'root.persons.new': 'Ново физическо лице',
         'root.persons.securityExam': 'Нов теоретичен изпит АС',
         'root.persons.view': 'Лично досие',

@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Json;
 using Common.Filters;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
@@ -13,6 +14,9 @@ using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
+using System.Collections.Generic;
+using Gva.Api.Repositories.ApplicationStageRepository;
+using System;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -25,6 +29,7 @@ namespace Gva.Api.Controllers.Persons
         private IInventoryRepository inventoryRepository;
         private IPersonRepository personRepository;
         private IApplicationRepository applicationRepository;
+        private IApplicationStageRepository applicationStageRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
 
@@ -34,6 +39,7 @@ namespace Gva.Api.Controllers.Persons
             IInventoryRepository inventoryRepository,
             IPersonRepository personRepository,
             IApplicationRepository applicationRepository,
+            IApplicationStageRepository applicationStageRepository,
             ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher)
         {
@@ -42,6 +48,7 @@ namespace Gva.Api.Controllers.Persons
             this.inventoryRepository = inventoryRepository;
             this.personRepository = personRepository;
             this.applicationRepository = applicationRepository;
+            this.applicationStageRepository = applicationStageRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
         }
@@ -244,11 +251,43 @@ namespace Gva.Api.Controllers.Persons
             });
         }
 
-        [Route("stampDocuments")]
-        public IHttpActionResult GetDocumentsForStamp()
+        [HttpGet]
+        [Route("stampedDocuments")]
+        public IHttpActionResult GetStampedDocuments()
         {
-            var x = this.applicationRepository.GetDocumentsForStamp();
-            return Ok(this.applicationRepository.GetDocumentsForStamp());
+            return Ok(this.personRepository.GetStampedDocuments());
+        }
+
+        [HttpPost]
+        [Route("stampedDocuments")]
+        public IHttpActionResult PostStampedDocuments(JArray stampedDocuments)
+        {
+            foreach (JObject document in stampedDocuments)
+            {
+                int applicationId = document.Get<int>("applicationId");
+                string stageAlias = document.Get<string>("stageAlias");
+                int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
+                    .Where(s => s.Alias.Equals(stageAlias))
+                    .Single().GvaStageId;
+
+                GvaApplicationStage lastStage = 
+                    this.applicationStageRepository.GetApplicationStages(applicationId).Last();
+
+                GvaApplicationStage applicationStage = new GvaApplicationStage() 
+                { 
+                    GvaStageId = stageId,
+                    StartingDate = DateTime.Now,
+                    Ordinal = lastStage.Ordinal + 1,
+                    GvaApplicationId = applicationId
+                };
+
+                this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
+
+            }
+
+            this.unitOfWork.Save();
+
+            return Ok();
         }
     }
 }

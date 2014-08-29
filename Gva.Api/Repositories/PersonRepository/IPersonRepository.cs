@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
+using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -41,5 +42,7 @@ namespace Gva.Api.Repositories.PersonRepository
         int GetNextLin(int linTypeId);
 
         bool IsUniqueUin(string uin, int? personId = null);
+
+        List<GvaViewPersonLicenceEditionDO> GetStampedDocuments();
     }
 }

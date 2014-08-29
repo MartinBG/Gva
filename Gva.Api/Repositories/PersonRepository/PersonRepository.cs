@@ -7,6 +7,8 @@ using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
+using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -140,6 +142,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(p => p.Person.Employment)
                 .Include(p => p.Person.Inspector)
                 .Include(e => e.Part)
+                .Include(e => e.LicenceAction)
                 .Where(predicate)
                 .ToList();
         }
@@ -171,6 +174,37 @@ namespace Gva.Api.Repositories.PersonRepository
                 return !this.unitOfWork.DbContext.Set<GvaViewPerson>()
                     .Where(p => p.Uin == uin).Any();
             }
+        }
+
+        public List<GvaViewPersonLicenceEditionDO> GetStampedDocuments()
+        {
+            return (from edition in this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
+                        .Include(e => e.Person)
+                        .Include(e => e.Part)
+                        .Include(e => e.Application)
+                        .Include(e => e.LicenceAction)
+                        .Include(p => p.Person.LinType)
+                        .Include(p => p.Person.Organization)
+                        .Include(p => p.Person.Employment)
+                        .Include(p => p.Person.Inspector)
+                        .ToList()
+                    where edition.StampNumber != null
+                    select edition)
+                    .ToList()
+                    .Select(edition =>  
+                    {
+                        List<int> stages = this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                            .Where(s => s.GvaApplicationId == edition.GvaApplicationId)
+                            .Select(s => s.GvaStageId)
+                            .ToList();
+
+                        return new GvaViewPersonLicenceEditionDO(
+                            edition,
+                            stages.Max(),
+                            stages.Contains(6),
+                            stages.Contains(7));
+                    })
+                    .ToList();
         }
     }
 }
