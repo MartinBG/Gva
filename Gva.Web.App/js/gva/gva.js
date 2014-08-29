@@ -504,6 +504,7 @@
     .modal('chooseMedicals'  , 'js/gva/persons/modals/medicals/chooseMedicalsModal.html'   , 'ChooseMedicalsModalCtrl'       )
     .modal('newMedical'      , 'js/gva/persons/modals/medicals/newMedicalModal.html'       , 'NewMedicalModalCtrl'           )
     .modal('chooseLicences'  , 'js/gva/persons/modals/licences/chooseLicencesModal.html'   , 'ChooseLicencesModalCtrl'       )
+    .modal('editLicence'     , 'js/gva/persons/modals/licences/editLicenceModal.html'      , 'EditLicenceModalCtrl'          )
     .modal('licenceStatuses' , 'js/gva/persons/modals/licences/licenceStatusesModal.html'  , 'LicenceStatusesModalCtrl'      )
     .modal('printLicence'    , 'js/gva/persons/modals/licences/printLicenceModal.html'     , 'PrintLicenceModalCtrl'   , 'xs');
   }]).config(['$stateProvider', function ($stateProvider) {

@@ -2552,6 +2552,13 @@
           add: 'Добави',
           cancel: 'Отказ'
         },
+        editLicenceModal: {
+          title: 'Преглед на лиценз',
+          save: 'Запис',
+          cancel: 'Отказ',
+          licenceForm: 'Лиценз',
+          editionForm: 'Вписване'
+        },
         printLicenceModal: {
           title: 'Принтиране на лиценз',
           stampNumber: 'Печатен док. номер',
