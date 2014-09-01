@@ -20,6 +20,16 @@
         method: 'GET',
         url: 'api/persons/printableDocs',
         isArray: true
+      },
+      getStampedDocuments: {
+        method: 'GET',
+        url: 'api/persons/stampedDocuments',
+        isArray: true
+      },
+      saveStampedDocuments: {
+        method: 'POST',
+        url: 'api/persons/stampedDocuments',
+        isArray: true
       }
     });
   }]);

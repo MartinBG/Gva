@@ -228,6 +228,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationInspectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffExaminerDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffManagementDO.cs" />
+    <Compile Include="ModelsDO\Persons\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\Persons\GvaViewPersonLicenceEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\InspectorDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressDO.cs" />
@@ -252,6 +253,7 @@
     <Compile Include="ModelsDO\Persons\PersonStatusDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonTrainingDO.cs" />
     <Compile Include="ModelsDO\Common\TimeDO.cs" />
+    <Compile Include="Models\GvaConstants.cs" />
     <Compile Include="Models\GvaApplicationStage.cs" />
     <Compile Include="Models\GvaStage.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />

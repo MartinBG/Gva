@@ -188,21 +188,19 @@ namespace Gva.Api.Repositories.PersonRepository
                         .Include(p => p.Person.Employment)
                         .Include(p => p.Person.Inspector)
                         .ToList()
-                    where edition.StampNumber != null
+                    where edition.StampNumber != null && edition.Application != null &&
+                        this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                        .Any(a => a.GvaApplicationId == edition.Application.GvaApplicationId)
                     select edition)
-                    .ToList()
-                    .Select(edition =>  
+                    .Select(edition =>
                     {
                         List<int> stages = this.unitOfWork.DbContext.Set<GvaApplicationStage>()
                             .Where(s => s.GvaApplicationId == edition.GvaApplicationId)
                             .Select(s => s.GvaStageId)
                             .ToList();
 
-                        return new GvaViewPersonLicenceEditionDO(
-                            edition,
-                            stages.Max(),
-                            stages.Contains(6),
-                            stages.Contains(7));
+                        return new GvaViewPersonLicenceEditionDO(edition, stages);
+
                     })
                     .ToList();
         }

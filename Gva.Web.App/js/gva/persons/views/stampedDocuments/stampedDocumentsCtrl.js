@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    PersonStampedDocuments,
+    Persons,
     documents,
     scModal
     ) {
@@ -14,23 +14,26 @@
 
       $scope.save = function () {
       var documentsForStamp = _.map($scope.documents, function(document){
-        var stageAlias = '';
+        var stageAliases = [];
         if(document.licenceReady) {
-          stageAlias = 'licenceReady';
-        } else if (document.done) {
-          stageAlias = 'done';
-        } else if (document) {
-          stageAlias = 'returned';
+          stageAliases.push('licenceReady');
+        } 
+        if (document.done) {
+          stageAliases.push('done');
         }
-        if (stageAlias !== '') {
+        if (document.returned) {
+          stageAliases.push('returned');
+        }
+
+        if (stageAliases !== []) {
           return {
             applicationId: document.application.applicationId,
-            stageAlias: stageAlias
+            stageAliases: stageAliases
           };
         }
       });
-      return PersonStampedDocuments
-        .save(documentsForStamp)
+      return Persons
+        .saveStampedDocuments(documentsForStamp)
         .$promise
         .then(function () {
           return $state.transitionTo($state.current, $stateParams, { reload: true });
@@ -83,16 +86,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonStampedDocuments',
+    'Persons',
     'documents',
     'scModal'
   ];
 
   StampedDocumentsCtrl.$resolve = {
     documents: [
-      'PersonStampedDocuments',
-      function (PersonStampedDocuments) {
-        return PersonStampedDocuments.query().$promise;
+      'Persons',
+      function (Persons) {
+        return Persons.getStampedDocuments().$promise;
       }
     ]
   };

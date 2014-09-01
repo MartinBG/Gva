@@ -10,7 +10,7 @@
       {{item.person.lin}}
     </sc-column>
     <sc-column data="person.uin" title="persons.stampedDocumentsView.uin" has-content="true">
-      {{item.person.lin}}
+      {{item.person.uin}}
     </sc-column>
     <sc-column data="person.names" title="persons.stampedDocumentsView.names" has-content="true">
       {{item.person.names}}
@@ -27,13 +27,13 @@
     <sc-column data="licenceActionName" title="persons.stampedDocumentsView.licenceAction">
    </sc-column>
     <sc-column title="persons.stampedDocumentsView.ready" sortable="false" class="buttons-cell" has-content="true">
-      <input type="checkbox" ng-checked="item.isReady" ng-disabled="item.stageId >= 6" sc-click="selectCheck($event, item, 'licenceReady')">
+      <input type="checkbox" ng-checked="item.isReady" ng-disabled="item.isReady" sc-click="selectCheck($event, item, 'licenceReady')">
     </sc-column>
     <sc-column title="persons.stampedDocumentsView.received" sortable="false" class="buttons-cell" has-content="true">
-      <input type="checkbox" ng-checked="item.isReceived" ng-disabled="item.stageId >= 7" sc-click="selectCheck($event, item, 'returned')">
+      <input type="checkbox" ng-checked="item.isReceived" ng-disabled="item.isReceived" sc-click="selectCheck($event, item, 'returned')">
     </sc-column>
     <sc-column title="persons.stampedDocumentsView.finished" sortable="false" class="buttons-cell" has-content="true">
-      <input type="checkbox" ng-checked="item.stageId === 8" sc-click="selectCheck($event, item, 'done')">
+      <input type="checkbox" ng-checked="item.isDone" ng-disabled="item.isDone" sc-click="selectCheck($event, item, 'done')">
     </sc-column>
   </sc-datatable>
 </ng-form>

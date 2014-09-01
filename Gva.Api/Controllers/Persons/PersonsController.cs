@@ -260,28 +260,33 @@ namespace Gva.Api.Controllers.Persons
 
         [HttpPost]
         [Route("stampedDocuments")]
-        public IHttpActionResult PostStampedDocuments(JArray stampedDocuments)
+        public IHttpActionResult PostStampedDocuments(List<AplicationStageDO> stampedDocuments)
         {
-            foreach (JObject document in stampedDocuments)
+            foreach (AplicationStageDO document in stampedDocuments)
             {
-                int applicationId = document.Get<int>("applicationId");
-                string stageAlias = document.Get<string>("stageAlias");
-                int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
-                    .Where(s => s.Alias.Equals(stageAlias))
-                    .Single().GvaStageId;
+                int applicationId = document.ApplicationId;
+                int lastStageOrdinal =
+                        this.applicationStageRepository.GetApplicationStages(applicationId).Last().Ordinal;
 
-                GvaApplicationStage lastStage = 
-                    this.applicationStageRepository.GetApplicationStages(applicationId).Last();
+                foreach (string stageAlias in document.StageAliases)
+                {
+                    int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
+                        .Where(s => s.Alias.Equals(stageAlias))
+                        .Single().GvaStageId;
 
-                GvaApplicationStage applicationStage = new GvaApplicationStage() 
-                { 
-                    GvaStageId = stageId,
-                    StartingDate = DateTime.Now,
-                    Ordinal = lastStage.Ordinal + 1,
-                    GvaApplicationId = applicationId
-                };
+                    lastStageOrdinal++;
 
-                this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
+                    GvaApplicationStage applicationStage = new GvaApplicationStage()
+                    {
+                        
+                        GvaStageId = stageId,
+                        StartingDate = DateTime.Now,
+                        Ordinal = lastStageOrdinal,
+                        GvaApplicationId = applicationId
+                    };
+
+                    this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
+                }
 
             }
 

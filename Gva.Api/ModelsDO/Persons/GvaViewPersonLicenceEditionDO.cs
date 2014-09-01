@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 
 namespace Gva.Api.ModelsDO.Persons
 {
     public class GvaViewPersonLicenceEditionDO
     {
-        public GvaViewPersonLicenceEditionDO(GvaViewPersonLicenceEdition edition, int? stageId = null, bool isReady = false, bool isReceived = false)
+        public GvaViewPersonLicenceEditionDO(GvaViewPersonLicenceEdition edition, List<int> stages = null)
         {
             this.LotId = edition.LotId;
             this.PartIndex = edition.Part.Index;
@@ -19,17 +20,16 @@ namespace Gva.Api.ModelsDO.Persons
             this.DateValidFrom = edition.DateValidFrom;
             this.DateValidTo = edition.DateValidTo;
             this.LicenceActionId = edition.LicenceActionId;
-            this.LicenceActionId = edition.LicenceActionId;
-            this.IsReady = isReady;
-            this.IsReceived = isReady;
+            if (stages != null)
+            {
+                this.IsReady = stages.Contains(GvaConstants.IsReadyApplication);
+                this.IsReceived = stages.Contains(GvaConstants.IsReceivedApplication);
+                this.IsDone = stages.Contains(GvaConstants.IsDoneApplication);
+            }
 
-            if (edition.LicenceActionId != null) 
+            if (edition.LicenceAction != null) 
             {
                 this.LicenceActionName = edition.LicenceAction.Name;
-            }
-            if (stageId.HasValue)
-            {
-                this.StageId = stageId.Value;
             }
 
             this.LicenceNumber = edition.LicenceNumber;
@@ -66,11 +66,11 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string LicenceNumber { get; set; }
 
-        public int StageId { get; set; }
-
         public bool IsReceived { get; set; }
 
         public bool IsReady { get; set; }
+
+        public bool IsDone { get; set; }
 
         public PersonViewDO Person { get; set; }
 
