@@ -8,10 +8,13 @@ using System.Web.Http;
 using Common.Api.Repositories.NomRepository;
 using Common.Data;
 using Common.Json;
+using Common.Owin;
 using Common.WordTemplates;
 using Gva.Api.Models;
 using Gva.Api.WordTemplates;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers
@@ -46,7 +49,12 @@ namespace Gva.Api.Controllers
             string templateName = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent.Get<string>("templateName");
 
             var dataGenerator = this.dataGenerators.First(dg => dg.TemplateNames.Contains(templateName));
-            JObject json = dataGenerator.GetData(lotId, path, index);
+            object data = dataGenerator.GetData(lotId, path, index);
+
+            JsonSerializer jsonSerializer = JsonSerializer.Create(App.JsonSerializerSettings);
+            jsonSerializer.ContractResolver = new DefaultContractResolver();
+
+            JObject json = JObject.FromObject(data, jsonSerializer);
 
             var wordTemplate = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
                 .SingleOrDefault(t => t.Name == templateName);

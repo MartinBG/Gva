@@ -31,7 +31,7 @@ namespace Gva.Api.WordTemplates
             }
         }
 
-        public JObject GetData(int lotId, string path, int index)
+        public object GetData(int lotId, string path, int index)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart("personData").Content;
@@ -130,7 +130,7 @@ namespace Gva.Api.WordTemplates
                 }
             };
 
-            return JObject.FromObject(json);
+            return json;
         }
 
         private NomValue GetCountry(JObject personAddress)
