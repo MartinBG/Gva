@@ -87,7 +87,10 @@ namespace Gva.MigrationTool.Sets
                     string name = organizationData.Get<string>("name");
                     string nameAlt = organizationData.Get<string>("nameAlt");
 
-                    orgNamesEnToLotId.Add(nameAlt, lotId);
+                    if (!orgNamesEnToLotId.ContainsKey(nameAlt))//TODO
+                    {
+                        orgNamesEnToLotId.Add(nameAlt, lotId);
+                    }
 
                     if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(nameAlt))
                     {
@@ -97,7 +100,10 @@ namespace Gva.MigrationTool.Sets
                     string uin = organizationData.Get<string>("uin");
                     if (!string.IsNullOrWhiteSpace(uin))
                     {
-                        orgUinToLotId.Add(uin, lotId);
+                        if (!orgUinToLotId.ContainsKey(uin))//TODO
+                        {
+                            orgUinToLotId.Add(uin, lotId);
+                        }
                     }
 
                     orgLotIdToOrgNom.Add(lotId, Utils.ToJObject(

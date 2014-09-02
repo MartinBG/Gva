@@ -762,9 +762,12 @@ namespace Gva.MigrationTool.Sets
                     }))
                 .ToList();
 
-            var lastReg = registrations.Last();
-            lastReg["isActive"] = true;
-            lastReg["isCurrent"] = true;
+            var lastReg = registrations.LastOrDefault();
+            if (lastReg != null)
+            {
+                lastReg["isActive"] = true;
+                lastReg["isCurrent"] = true;
+            }
 
             return registrations;
         }
