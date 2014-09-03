@@ -47,6 +47,7 @@ GO
 :r $(rootPath)"\Tables\Units\UnitRelations.sql"
 :r $(rootPath)"\Tables\Units\UnitClassifications.sql"
 :r $(rootPath)"\Tables\Units\UnitUsers.sql"
+:r $(rootPath)"\Tables\Units\UnitTokens.sql"
 
 ---------------------------------------------------------------
 -- Diagram
@@ -60,6 +61,18 @@ GO
 
 :r $(rootPath)\"Functions\ufnParseJSON.sql"
 :r $(rootPath)\"Functions\ufnGetNomValuesByTextContentProperty.sql"
+:r $(rootPath)\"Functions\fnGetParentClassifications.sql"
+:r $(rootPath)\"Functions\fnGetParentUnits.sql"
+:r $(rootPath)\"Functions\fnGetSubordinateClassifications.sql"
+:r $(rootPath)\"Functions\fnGetSubordinateUnits.sql"
+
+---------------------------------------------------------------
+--Procedures
+---------------------------------------------------------------
+
+:r $(rootPath)\"Procedures\spGetUnitClassifications.sql"
+:r $(rootPath)\"Procedures\spSetDeactiveUnit.sql"
+:r $(rootPath)\"Procedures\spSetUnitTokens.sql"
 
 ---------------------------------------------------------------
 -- Insert

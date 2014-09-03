@@ -83,19 +83,12 @@ GO
 :r $(rootPath)"\Tables\Emails\EmailAttachments.sql"
 
 --Tokens
-:r $(rootPath)"\Tables\Tokens\UnitTokens.sql"
 :r $(rootPath)"\Tables\Tokens\DocTokens.sql"
 
 ---------------------------------------------------------------
 -- Functions
 ---------------------------------------------------------------
 :r $(rootPath)"\Functions\fnCheckForRegisteredChildDocs.sql"
---Classifications Fn
-:r $(rootPath)"\Functions\fnGetParentClassifications.sql"
-:r $(rootPath)"\Functions\fnGetSubordinateClassifications.sql"
---Units Fn
-:r $(rootPath)"\Functions\fnGetParentUnits.sql"
-:r $(rootPath)"\Functions\fnGetSubordinateUnits.sql"
 :r $(rootPath)"\Functions\fnGetSubordinateDocs.sql"
 
 ---------------------------------------------------------------
@@ -106,12 +99,7 @@ GO
 :r $(rootPath)"\Procedures\spGetDocRegisterNextNumber.sql"
 :r $(rootPath)"\Procedures\spDeleteNotRegisteredDoc.sql"
 
---Classifications
-:r $(rootPath)"\Procedures\Classifications\spGetUnitClassifications.sql"
-:r $(rootPath)"\Procedures\Classifications\spSetDeactiveUnit.sql"
-
 --Tokens
-:r $(rootPath)"\Procedures\Tokens\spSetUnitTokens.sql"
 :r $(rootPath)"\Procedures\Tokens\spSetDocTokens.sql"
 :r $(rootPath)"\Procedures\Tokens\spSetDocUnitTokens.sql"
 
