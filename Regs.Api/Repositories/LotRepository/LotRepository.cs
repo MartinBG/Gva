@@ -10,10 +10,12 @@ namespace Regs.Api.Repositories.LotRepositories
     public class LotRepository : ILotRepository
     {
         private IUnitOfWork unitOfWork;
+        private UserContext userContext;
 
-        public LotRepository(IUnitOfWork unitOfWork)
+        public LotRepository(IUnitOfWork unitOfWork, UserContext userContext)
         {
             this.unitOfWork = unitOfWork;
+            this.userContext = userContext;
         }
 
         public Set GetSet(int setId)
@@ -34,17 +36,17 @@ namespace Regs.Api.Repositories.LotRepositories
             return set;
         }
 
-        public Lot CreateLot(string setAlias, UserContext userContext)
+        public Lot CreateLot(string setAlias)
         {
-            return this.CreateLot(this.GetSet(setAlias), userContext);
+            return this.CreateLot(this.GetSet(setAlias));
         }
 
-        public Lot CreateLot(Set set, UserContext userContext)
+        public Lot CreateLot(Set set)
         {
             Commit index = new Commit
             {
                 CommitId = Commit.CommitSequence.NextValue(),
-                CommiterId = userContext.UserId,
+                CommiterId = this.userContext.UserId,
                 CommitDate = DateTime.Now,
                 IsIndex = true,
                 IsLoaded = true

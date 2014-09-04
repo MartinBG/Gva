@@ -86,7 +86,7 @@ namespace Gva.Api.Controllers.Organizations
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
-                var newLot = this.lotRepository.CreateLot("Organization", userContext);
+                var newLot = this.lotRepository.CreateLot("Organization");
 
                 newLot.CreatePart("organizationData", JObject.FromObject(organizationData), userContext);
                 this.caseTypeRepository.AddCaseTypes(newLot, organizationData.CaseTypes.Select(ct => ct.NomValueId));

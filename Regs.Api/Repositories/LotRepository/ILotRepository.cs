@@ -9,9 +9,9 @@ namespace Regs.Api.Repositories.LotRepositories
 
         Set GetSet(string alias);
 
-        Lot CreateLot(string setAlias, UserContext userContext);
+        Lot CreateLot(string setAlias);
 
-        Lot CreateLot(Set set, UserContext userContext);
+        Lot CreateLot(Set set);
 
         Lot GetLot(int lotId, int? commitId = null);
 

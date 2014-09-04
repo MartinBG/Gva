@@ -27,6 +27,7 @@ namespace Regs.Api.Tests.Specs
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<LotRepository>().As<ILotRepository>();
             builder.RegisterType<LotEventDispatcher>().As<ILotEventDispatcher>();
+            builder.Register(c => new UserContext(1)).SingleInstance();
             this.container = builder.Build();
         }
 
@@ -49,20 +50,20 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1 = lf1.Resolve<IUnitOfWork>();
                 lotRepository1 = lf1.Resolve<ILotRepository>();
                 lotEventDispatcher1 = lf1.Resolve<ILotEventDispatcher>();
-                userContext1 = new UserContext(1);
+                userContext1 = lf1.Resolve<UserContext>();
 
                 var lf2 = container.BeginLifetimeScope();
                 unitOfWork2 = lf2.Resolve<IUnitOfWork>();
                 lotRepository2 = lf2.Resolve<ILotRepository>();
                 lotEventDispatcher2 = lf2.Resolve<ILotEventDispatcher>();
-                userContext2 = new UserContext(1);
+                userContext2 = lf2.Resolve<UserContext>();
 
                 return DisposableTuple.Create(lf1, lf2);
             });
 
             "can be saved empty".Assert(() =>
             {
-                var lot1 = lotRepository1.CreateLot("Person", userContext1);
+                var lot1 = lotRepository1.CreateLot("Person");
                 unitOfWork1.Save();
 
                 var lot2 = lotRepository2.GetLotIndex(lot1.LotId);
@@ -70,7 +71,7 @@ namespace Regs.Api.Tests.Specs
             });
             "can be saved with multiple parts in the index".Assert(() =>
             {
-                var lot1 = lotRepository1.CreateLot("Person", userContext1);
+                var lot1 = lotRepository1.CreateLot("Person");
                 lot1.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext1);
                 lot1.UpdatePart("personAddresses/0", JObject.Parse("{ address: '0-1' }"), userContext1);
                 lot1.CreatePart("personAddresses/1", JObject.Parse("{ address: '1' }"), userContext1);
@@ -85,7 +86,7 @@ namespace Regs.Api.Tests.Specs
             });
             "can be commited".Assert(() =>
             {
-                var lot1 = lotRepository1.CreateLot("Person", userContext1);
+                var lot1 = lotRepository1.CreateLot("Person");
                 lot1.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext1);
                 lot1.Commit(userContext1, lotEventDispatcher1);
                 unitOfWork1.Save();
@@ -96,7 +97,7 @@ namespace Regs.Api.Tests.Specs
             });
             "can be commited partially".Assert(() =>
             {
-                var lot1 = lotRepository1.CreateLot("Person", userContext1);
+                var lot1 = lotRepository1.CreateLot("Person");
                 lot1.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext1);
                 lot1.CreatePart("personAddresses/1", JObject.Parse("{ address: '1' }"), userContext1);
                 lot1.Commit(userContext1, lotEventDispatcher1, new string[] { "personAddresses/0" });
@@ -108,12 +109,12 @@ namespace Regs.Api.Tests.Specs
             });
             "cannot be commited without modifications".Assert(() =>
             {
-                var lot1 = lotRepository1.CreateLot("Person", userContext1);
+                var lot1 = lotRepository1.CreateLot("Person");
                 Assert.Throws<InvalidOperationException>(() => lot1.Commit(userContext1, lotEventDispatcher1));
             });
             "must contain all latest versions of all parts after every commit in its index".Assert(() =>
             {
-                var lot1 = lotRepository1.CreateLot("Person", userContext1);
+                var lot1 = lotRepository1.CreateLot("Person");
                 lot1.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext1);
                 lot1.Commit(userContext1, lotEventDispatcher1, new string[] { "personAddresses/0" });
                 unitOfWork1.Save();
@@ -152,9 +153,9 @@ namespace Regs.Api.Tests.Specs
                     var unitOfWork = lf.Resolve<IUnitOfWork>();
                     var lotRepository = lf.Resolve<ILotRepository>();
                     var lotEventDispatcher = lf.Resolve<ILotEventDispatcher>();
-                    var userContext = new UserContext(1);
+                    var userContext = lf.Resolve<UserContext>();
 
-                    var newLot = lotRepository.CreateLot("Person", userContext);
+                    var newLot = lotRepository.CreateLot("Person");
 
                     newLot.CreatePart("personAddresses/0", JObject.Parse("{ country: null }"), userContext);
                     newLot.CreatePart("personStatuses/*", JObject.Parse("{ name: 'status1' }"), userContext);
@@ -181,13 +182,13 @@ namespace Regs.Api.Tests.Specs
                 unitOfWork1 = lf1.Resolve<IUnitOfWork>();
                 lotRepository1 = lf1.Resolve<ILotRepository>();
                 lotEventDispatcher1 = lf1.Resolve<ILotEventDispatcher>();
-                userContext1 = new UserContext(1);
+                userContext1 = lf1.Resolve<UserContext>();
 
                 var lf2 = container.BeginLifetimeScope();
                 unitOfWork2 = lf2.Resolve<IUnitOfWork>();
                 lotRepository2 = lf2.Resolve<ILotRepository>();
                 lotEventDispatcher2 = lf2.Resolve<ILotEventDispatcher>();
-                userContext2 = new UserContext(1);
+                userContext2 = lf2.Resolve<UserContext>();
 
                 return DisposableTuple.Create(lf1, lf2);
             });

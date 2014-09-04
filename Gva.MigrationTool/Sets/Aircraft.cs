@@ -65,7 +65,7 @@ namespace Gva.MigrationTool.Sets
 
                 Func<Lot> createLot = () =>
                 {
-                    var lot = lotRepository.CreateLot("Aircraft", context);
+                    var lot = lotRepository.CreateLot("Aircraft");
                     int aircraftCaseTypeId = caseTypeRepository.GetCaseTypesForSet("Aircraft").Single().GvaCaseTypeId;
                     caseTypeRepository.AddCaseTypes(lot, new int[] { aircraftCaseTypeId });
 

@@ -77,7 +77,7 @@ namespace Gva.Api.Controllers.Equipments
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
-                var newLot = this.lotRepository.CreateLot("Equipment", userContext);
+                var newLot = this.lotRepository.CreateLot("Equipment");
 
                 newLot.CreatePart("equipmentData", JObject.FromObject(equipmentData), userContext);
                 int equipmentCaseTypeId = this.caseTypeRepository.GetCaseTypesForSet("Equipment").Single().GvaCaseTypeId;

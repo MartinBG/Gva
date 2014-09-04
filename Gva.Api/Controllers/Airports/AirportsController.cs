@@ -77,7 +77,7 @@ namespace Gva.Api.Controllers.Airports
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
-                var newLot = this.lotRepository.CreateLot("Airport", userContext);
+                var newLot = this.lotRepository.CreateLot("Airport");
 
                 newLot.CreatePart("airportData", JObject.FromObject(airportData), userContext);
                 int airportCaseTypeId = this.caseTypeRepository.GetCaseTypesForSet("Airport").Single().GvaCaseTypeId;

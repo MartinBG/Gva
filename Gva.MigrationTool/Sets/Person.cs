@@ -72,7 +72,7 @@ namespace Gva.MigrationTool.Sets
 
                     var personData = this.getPersonData(personId, noms, personCaseTypes);
 
-                    var lot = lotRepository.CreateLot("Person", context);
+                    var lot = lotRepository.CreateLot("Person");
 
                     caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes").Select(ct => ct.Get<int>("nomValueId")));
 
