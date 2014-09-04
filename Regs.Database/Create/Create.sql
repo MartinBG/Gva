@@ -17,7 +17,7 @@ GO
 :r $(rootPath)\"Tables\LotPartVersions.sql"
 :r $(rootPath)\"Tables\LotCommitVersions.sql"
 :r $(rootPath)\"Tables\LotPartExts.sql"
-
+:r $(rootPath)\"Tables\LotPartTokens.sql"
 
 ---------------------------------------------------------------
 -- Diagram

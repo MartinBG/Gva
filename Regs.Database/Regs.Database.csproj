@@ -48,6 +48,7 @@
     <Content Include="Create\Sequences\PartVersionSequence.sql" />
     <Content Include="Create\Sequences\PartSequence.sql" />
     <Content Include="Create\Sequences\LotSequence.sql" />
+    <Content Include="Create\Tables\LotPartTokens.sql" />
     <Content Include="Create\Tables\LotSetSchemas.sql" />
     <Content Include="Create\Tables\LotSchemas.sql" />
     <Content Include="Create\Tables\LotPartOperations.sql" />
