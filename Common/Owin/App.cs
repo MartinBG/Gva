@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.Owin;
+using Autofac.Integration.WebApi;
 using Autofac.Integration.WebApi.Owin;
 using Common.Http;
 using Common.Jobs;
@@ -81,6 +82,10 @@ namespace Common.Owin
         public static void ConfigureWebApi(IAppBuilder app, IContainer container)
         {
             HttpConfiguration config = new HttpConfiguration();
+
+            ContainerBuilder builder = new ContainerBuilder();
+            builder.RegisterHttpRequestMessage(config);
+            builder.Update(container);
 
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
