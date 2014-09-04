@@ -82,9 +82,9 @@ namespace Gva.Api.WordTemplates
             var ratings = this.GetRaitings(includedRatings);
             var country = this.GetCountry(personAddress);
             var licenceNumber = string.Format(
-                "BG {0} - {1} - {2}",
+                "BGR. {0} - {1} - {2}",
                 licenceType.Code,
-                licence.LicenceNumber,
+                Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var documents = this.GetDocuments(licence, includedTrainings);
             var nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
@@ -105,7 +105,7 @@ namespace Gva.Api.WordTemplates
                     ENG_LEVEL = engLevel,
                     T_RATING = ratings,
                     INSTRUCTOR = instructorData,
-                    T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
+                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_TYPE_NAME = licenceType.Name.ToLower(),
                     T_LICENCE_NO = licenceNumber,
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
@@ -191,6 +191,7 @@ namespace Gva.Api.WordTemplates
             {
                 dynamic dateValidPrivilege = LicenceDictionary.LicencePrivilege["dateValid2"];
                 string dateValid = edition.DocumentDateValidTo.Value.ToString("dd.MM.yyyy");
+                string dateValidTrans = edition.DocumentDateValidTo.Value.ToString("dd MMMM yyyy");
 
                 result = new List<object>()
                 {
@@ -202,7 +203,7 @@ namespace Gva.Api.WordTemplates
                 {
                     NO = dateValidPrivilege.NO,
                     NAME_BG = string.Format(dateValidPrivilege.NAME_BG, dateValid),
-                    NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValid)
+                    NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValidTrans)
                 });
             }
 
@@ -347,29 +348,6 @@ namespace Gva.Api.WordTemplates
                             AUTH_NOTES = instrRatingEdPart.NotesAlt
                         };
                     }).ToArray<object>();
-        }
-
-        private object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress)
-        {
-            return new
-                {
-                    NAME = string.Format(
-                        "{0} {1} {2}",
-                        personData.FirstName,
-                        personData.MiddleName,
-                        personData.LastName).ToUpper(),
-                    LIN = personData.Lin,
-                    EGN = personData.Uin,
-                    ADDRESS = string.Format(
-                        "{0}, {1}",
-                        personAddress.Settlement.Name,
-                        personAddress.Address),
-                    TELEPHONE = personData.Phone1 ??
-                                personData.Phone2 ??
-                                personData.Phone3 ??
-                                personData.Phone4 ??
-                                personData.Phone5
-                };
         }
 
         private List<object> GetMedCerts(IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)

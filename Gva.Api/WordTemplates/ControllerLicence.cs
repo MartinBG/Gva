@@ -106,9 +106,9 @@ namespace Gva.Api.WordTemplates
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
-                "BG {0} - {1} - {2}",
+                "BGR. {0} - {1} - {2}",
                 licenceType.Code,
-                licence.LicenceNumber,
+                Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var placeOfBirth = personData.PlaceOfBirth;
             var country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
@@ -166,11 +166,7 @@ namespace Gva.Api.WordTemplates
                     LIN = personData.Lin,
                     EGN = personData.Uin,
                     ADDRESS1 = address,
-                    TELEPHONE = personData.Phone1 ??
-                        personData.Phone2 ??
-                        personData.Phone3 ??
-                        personData.Phone4 ??
-                        personData.Phone5,
+                    TELEPHONE = Utils.GetPhonesString(personData),
                     T_LICENCE_CODE = " РП ",
                     T_LICENCE_NO = licenceNumber,
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,

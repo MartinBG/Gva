@@ -57,7 +57,7 @@ namespace Gva.Api.WordTemplates
             var licenceNumber = string.Format(
                 "{0}.{1} - {2}",
                 string.IsNullOrWhiteSpace(licenceCode) ? "BG" : licenceCode,
-                licence.LicenceNumber,
+                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var personNameBG = string.Format("{0} {1} {2}",
                 personData.FirstName,
@@ -189,7 +189,7 @@ namespace Gva.Api.WordTemplates
                     CAT1 = aliases.Contains("A") ? "X" : "n/a",
                     CAT2 = aliases.Contains("B 1") ? "X" : "n/a",
                     CAT3 = aliases.Contains("B 2") ? "X" : "n/a",
-                    CAT4 = aliases.Contains("C") ? "X" : "n/a"
+                    CAT43 = aliases.Contains("C") ? "X" : "n/a"
                 });
             }
             return results.ToArray<object>();

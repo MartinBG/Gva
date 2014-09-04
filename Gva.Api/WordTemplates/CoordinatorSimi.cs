@@ -111,9 +111,9 @@ namespace Gva.Api.WordTemplates
                         VALID_DATE = r.Editions.Last().DocumentDateValidTo
                     });
             var licenceNumber = string.Format(
-                "BG {0} - {1} - {2}",
+                "BGR. {0} - {1} - {2}",
                 licenceType.Code,
-                licence.LicenceNumber,
+                Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
             List<dynamic> licencePrivileges = this.GetLicencePrivileges();
@@ -138,7 +138,7 @@ namespace Gva.Api.WordTemplates
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_ENDORSEMENT = tEndorsements,
-                    T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
+                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_NO = licenceNumber,
                     T_LICENCE_CODE = licenceType.Code,
                     T_ACTION = firstEdition.LicenceAction.Name.ToUpper(),
@@ -189,29 +189,6 @@ namespace Gva.Api.WordTemplates
                     COUNTRY_NAME_BG = nationality.Name,
                     COUNTRY_CODE = nationality.TextContent.Get<string>("nationalityCodeCA")
                 }
-            };
-        }
-
-        private object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress)
-        {
-            return new
-            {
-                NAME = string.Format(
-                    "{0} {1} {2}",
-                    personData.FirstName,
-                    personData.MiddleName,
-                    personData.LastName),
-                LIN = personData.Lin,
-                EGN = personData.Uin,
-                ADDRESS = string.Format(
-                    "{0}, {1}",
-                    personAddress.Settlement.Name,
-                    personAddress.Address),
-                TELEPHONE = personData.Phone1 ??
-                            personData.Phone2 ??
-                            personData.Phone3 ??
-                            personData.Phone4 ??
-                            personData.Phone5
             };
         }
 

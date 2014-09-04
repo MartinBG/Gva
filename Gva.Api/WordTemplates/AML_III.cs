@@ -57,7 +57,7 @@ namespace Gva.Api.WordTemplates
             var licenceNumber = string.Format(
                 "{0}.{1} - {2}",
                 string.IsNullOrWhiteSpace(licenceCode) ? "BG" : licenceCode,
-                licence.LicenceNumber,
+                Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var personNameBG = string.Format("{0} {1} {2}",
                     personData.FirstName,

@@ -35,9 +35,9 @@ namespace Gva.Api.WordTemplates
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
                .FirstOrDefault(a => a.Content.Valid.Code == "Y");
-             var personAddress = personAddressPart == null ?
-                new PersonAddressDO() :
-                personAddressPart.Content;
+            var personAddress = personAddressPart == null ?
+               new PersonAddressDO() :
+               personAddressPart.Content;
 
             var licencePart = lot.Index.GetPart<PersonLicenceDO>(path);
             var licence = licencePart.Content;
@@ -56,7 +56,7 @@ namespace Gva.Api.WordTemplates
             var licenceNumber = string.Format(
                 "BG {0} - {1} - {2}",
                 licence.LicenceType.Code,
-                licence.LicenceNumber,
+                Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var personName = string.Format("{0} {1} {2}",
                     personData.FirstName,
@@ -85,7 +85,7 @@ namespace Gva.Api.WordTemplates
                     ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     LIC_NO2 = licenceNumber,
-                    CAT1 = "A", 
+                    CAT1 = "A",
                     CAT2 = "B 1",
                     CAT3 = "B 2",
                     CAT4 = "C",
@@ -95,7 +95,7 @@ namespace Gva.Api.WordTemplates
                     DATE_OF_BIRTH1 = string.Format("{0:dd.mm.yyyy} {1}",
                         personData.DateOfBirth,
                         personData.PlaceOfBirth.Name),
-                    ADDR =  personAddress.Address,
+                    ADDR = personAddress.Address,
                     NATIONALITY1 = country.Name,
                     LICNO = licenceNumber,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
@@ -123,7 +123,7 @@ namespace Gva.Api.WordTemplates
 
             return country;
         }
-        
+
         private object[] GetCategories(IEnumerable<PersonRatingDO> includedRatings)
         {
             List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
@@ -137,20 +137,20 @@ namespace Gva.Api.WordTemplates
                     .Select(rating => rating.AircraftTypeCategory.NomValueId);
 
                 IEnumerable<NomValue> categories = categoriesIds.Select(categoryId => this.nomRepository.GetNomValue("aircraftClases66", categoryId));
-                IEnumerable<string> aliases =   categories.Select(category => category.TextContent.Get<string>("alias"));
+                IEnumerable<string> aliases = categories.Select(category => category.TextContent.Get<string>("alias"));
 
-                    results.Add(new
+                results.Add(new
+                {
+                    NAME = new
                     {
-                        NAME = new
-                        {
-                            EN = group66.NameAlt,
-                            BG = group66.Name
-                        },
-                        CAT1 = aliases.Contains("A") ? "X" : "n/a",
-                        CAT2 = aliases.Contains("B 1") ? "X" : "n/a",
-                        CAT3 = aliases.Contains("B 2") ? "X" : "n/a",
-                        CAT4 = aliases.Contains("C") ? "X" : "n/a"
-                    });
+                        EN = group66.NameAlt,
+                        BG = group66.Name
+                    },
+                    CAT1 = aliases.Contains("A") ? "X" : "n/a",
+                    CAT2 = aliases.Contains("B 1") ? "X" : "n/a",
+                    CAT3 = aliases.Contains("B 2") ? "X" : "n/a",
+                    CAT4 = aliases.Contains("C") ? "X" : "n/a"
+                });
             }
 
             return results.ToArray<object>();
@@ -163,7 +163,7 @@ namespace Gva.Api.WordTemplates
 
             return includedRatings
                 .Where(r => r.AircraftTypeGroup != null && r.AircraftTypeCategory != null &&
-                    validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.AircraftTypeCategory.ParentValueId.Value).Code) && 
+                    validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.AircraftTypeCategory.ParentValueId.Value).Code) &&
                     validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", r.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")))
                 .Select(r =>
                     {
@@ -181,11 +181,11 @@ namespace Gva.Api.WordTemplates
         private object[] GetACLimitations(IEnumerable<PersonRatingDO> includedRatings)
         {
             List<string> validAliases = new List<string> { "A", "B 1", "B 2", "C" };
-            List<string> validCode = new List<string> { "1", "2", "3", "4", "5", "6"};
+            List<string> validCode = new List<string> { "1", "2", "3", "4", "5", "6" };
 
             return includedRatings
                 .Where(r => r.AircraftTypeGroup != null && r.AircraftTypeCategory != null &&
-                    validCode.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.AircraftTypeCategory.ParentValueId.Value).Code) && 
+                    validCode.Contains(this.nomRepository.GetNomValue("aircraftGroup66", r.AircraftTypeCategory.ParentValueId.Value).Code) &&
                     validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", r.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")))
                 .Select(r =>
                     {
@@ -201,7 +201,7 @@ namespace Gva.Api.WordTemplates
 
         private object[] GetLimitations(PersonLicenceEditionDO lastLicenceEdition)
         {
-            IList<object> limitations= new List<object>();
+            IList<object> limitations = new List<object>();
 
             List<NomValue> AT_a_Ids = lastLicenceEdition.AmlLimitations == null ?
                 new List<NomValue>() :

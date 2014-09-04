@@ -395,6 +395,7 @@
     <Compile Include="WordTemplates\LicenceDictionary.cs" />
     <Compile Include="WordTemplates\Pilot142year2013.cs" />
     <Compile Include="WordTemplates\StudentFilghtLicence.cs" />
+    <Compile Include="WordTemplates\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

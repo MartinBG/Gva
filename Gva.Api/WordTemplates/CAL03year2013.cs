@@ -54,7 +54,7 @@ namespace Gva.Api.WordTemplates
             var refNumber = string.Format(
                 "BG {0} - {1} - {2}",
                 licenceType.Code,
-                licence.LicenceNumber,
+                Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var personName = string.Format("{0} {1} {2}",
                     personData.FirstName,

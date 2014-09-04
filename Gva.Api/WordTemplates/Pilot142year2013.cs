@@ -198,7 +198,7 @@ namespace Gva.Api.WordTemplates
             var licenceNumber = string.Format(
                 "BGR {0} - {1} - {2}",
                 licenceType.Code,
-                licence.LicenceNumber,
+                Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
             var json = new
@@ -222,7 +222,7 @@ namespace Gva.Api.WordTemplates
                     INSTRUCTOR_NO_ENTRIES = instrNoEntries,
                     EXAMINER_DATA = examinerData.Select(ed => new { EXAMINER = ed }),
                     EXAMINER_NO_ENTRIES = examinerNoData,
-                    T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
+                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_TYPE_NAME = licenceType.Name.ToLower(),
                     T_LICENCE_NO = licenceNumber,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom.Value,
@@ -502,29 +502,6 @@ namespace Gva.Api.WordTemplates
                             AUTH_NOTES = exRatingEdPart.NotesAlt
                         };
                     }).ToArray<object>();
-        }
-
-        private object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress)
-        {
-            return new
-                {
-                    NAME = string.Format(
-                        "{0} {1} {2}",
-                        personData.FirstName,
-                        personData.MiddleName,
-                        personData.LastName).ToUpper(),
-                    LIN = personData.Lin,
-                    EGN = personData.Uin,
-                    ADDRESS = string.Format(
-                        "{0}, {1}",
-                        personAddress.Settlement.Name,
-                        personAddress.Address),
-                    TELEPHONE = personData.Phone1 ??
-                                personData.Phone2 ??
-                                personData.Phone3 ??
-                                personData.Phone4 ??
-                                personData.Phone5
-                };
         }
 
         private List<object> GetMedCerts(IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)

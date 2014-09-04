@@ -50,7 +50,7 @@ namespace Gva.Api.WordTemplates
             {
                 root = new
                 {
-                    LICENCE_NO = licence.LicenceNumber,
+                    LICENCE_NO = Utils.PadLicenceNumber(licence.LicenceNumber),
                     FOREIGN_LICENCE_NO = licence.ForeignLicenceNumber,
                     LICENCE_HOLDER = licenceHolder,
                     COMPANY = personEmploymentOrg,
@@ -58,7 +58,7 @@ namespace Gva.Api.WordTemplates
                     COUNTRY = personData.Country.NameAlt,
                     VALID_DATE = lastEdition.DocumentDateValidTo,
                     ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    D_LICENCE_NO = licence.LicenceNumber,
+                    D_LICENCE_NO = Utils.PadLicenceNumber(licence.LicenceNumber),
                     D_LICENCE_HOLDER = new
                     {
                         D_NAME = licenceHolder.NAME,

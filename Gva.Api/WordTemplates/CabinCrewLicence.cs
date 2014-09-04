@@ -78,7 +78,7 @@ namespace Gva.Api.WordTemplates
             var licenceNumber = string.Format(
                 "BG {0} - {1} - {2}",
                 licenceType.Code,
-                licence.LicenceNumber,
+                Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
             //TODO - includedExams! var documents = this.GetDocuments(includedTrainings, includedExams, licenceType.Code);
@@ -97,7 +97,7 @@ namespace Gva.Api.WordTemplates
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_PRIVILEGE = this.GetLicencePrivileges(licenceType.Code, lastEdition),
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
+                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_TYPE_NAME = licenceType.Name.ToLower(),
                     T_LICENCE_NO = licenceNumber,
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
@@ -171,43 +171,20 @@ namespace Gva.Api.WordTemplates
                 {
                     dynamic dateValidPrivilege = LicenceDictionary.LicencePrivilege["dateValid"];
                     string dateValid = edition.DocumentDateValidTo.Value.ToString("dd.MM.yyyy");
+                    string dateValidTrans = edition.DocumentDateValidTo.Value.ToString("dd MMMM yyyy");
 
                     result = new List<object>(privileges);
                     result.Add(new
                     {
                         NO = dateValidPrivilege.NO,
                         NAME_BG = string.Format(dateValidPrivilege.NAME_BG, dateValid),
-                        NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValid)
+                        NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValidTrans)
                     });
                 }
             }
 
             return result.OrderBy(p => p.NO).ToList<object>();
         }
-
-        private object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress)
-        {
-            return new
-            {
-                NAME = string.Format(
-                    "{0} {1} {2}",
-                    personData.FirstName,
-                    personData.MiddleName,
-                    personData.LastName).ToUpper(),
-                LIN = personData.Lin,
-                EGN = personData.Uin,
-                ADDRESS = string.Format(
-                    "{0}, {1}",
-                    personAddress.Settlement.Name,
-                    personAddress.Address),
-                TELEPHONE = personData.Phone1 ??
-                            personData.Phone2 ??
-                            personData.Phone3 ??
-                            personData.Phone4 ??
-                            personData.Phone5
-            };
-        }
-
         private object[] GetDocuments(
             IEnumerable<JObject> includedTrainings,
             IEnumerable<JObject> includedExams,

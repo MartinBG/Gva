@@ -57,8 +57,8 @@ namespace Gva.Api.WordTemplates
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
                 "BG {0} - {1} - {2}",
-                licenceType.Code,
-                licence.LicenceNumber,
+                licenceType.TextContent.Get<string>("licenceCode"),
+                Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings);
@@ -80,7 +80,7 @@ namespace Gva.Api.WordTemplates
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     ENDORSEMENT = this.GetEndorsements(includedRatings),
-                    T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
+                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_CODE = licenceCaCode,
                     T_LICENCE_NO = licenceNumber,
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
@@ -160,29 +160,6 @@ namespace Gva.Api.WordTemplates
                         NAME = g.Key,
                         DATE = g.Min(r => r.Editions.Last().DocumentDateValidFrom)
                     }).ToList<object>();
-        }
-
-        private object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress)
-        {
-            return new
-            {
-                NAME = string.Format(
-                    "{0} {1} {2}",
-                    personData.FirstName,
-                    personData.MiddleName,
-                    personData.LastName).ToUpper(),
-                LIN = personData.Lin,
-                EGN = personData.Uin,
-                ADDRESS = string.Format(
-                    "{0}, {1}",
-                    personAddress.Settlement.Name,
-                    personAddress.Address),
-                TELEPHONE = personData.Phone1 ??
-                            personData.Phone2 ??
-                            personData.Phone3 ??
-                            personData.Phone4 ??
-                            personData.Phone5
-            };
         }
 
         private object[] GetDocuments(string licenceTypeCode, IEnumerable<PersonTrainingDO> includedTrainings)

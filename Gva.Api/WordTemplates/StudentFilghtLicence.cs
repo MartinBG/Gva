@@ -83,7 +83,7 @@ namespace Gva.Api.WordTemplates
             var licenceNumber = string.Format(
                 "BGR {0} - {1} - {2}",
                 licenceTypeCode,
-                licence.LicenceNumber,
+                Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
             var documents = this.GetDocuments(licenceTypeCode, includedTrainings);
@@ -99,7 +99,7 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_PRIV = this.GetLicencePrivileges(licenceTypeCode, lastEdition),
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
+                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_NO = licenceNumber,
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     T_VALID_DATE = lastEdition.DocumentDateValidTo,
@@ -115,29 +115,6 @@ namespace Gva.Api.WordTemplates
             };
 
             return json;
-        }
-
-        private object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress)
-        {
-            return new
-            {
-                NAME = string.Format(
-                    "{0} {1} {2}",
-                    personData.FirstName,
-                    personData.MiddleName,
-                    personData.LastName).ToUpper(),
-                LIN = personData.Lin,
-                EGN = personData.Uin,
-                ADDRESS = string.Format(
-                    "{0}, {1}",
-                    personAddress.Settlement.Name,
-                    personAddress.Address),
-                TELEPHONE = personData.Phone1 ??
-                            personData.Phone2 ??
-                            personData.Phone3 ??
-                            personData.Phone4 ??
-                            personData.Phone5
-            };
         }
 
         private object GetPersonData(PersonDataDO personData, PersonAddressDO personAddress)
@@ -195,13 +172,15 @@ namespace Gva.Api.WordTemplates
                 {
                     dynamic dateValidPrivilege = LicenceDictionary.LicencePrivilege["dateValid"];
                     string dateValid = edition.DocumentDateValidTo.Value.ToString("dd.MM.yyyy");
+                    string dateValidTrans = edition.DocumentDateValidTo.Value.ToString("dd MMMM yyyy");
+
 
                     result = new List<object>(privileges);
                     result.Add(new
                     {
                         NO = dateValidPrivilege.NO,
                         NAME_BG = string.Format(dateValidPrivilege.NAME_BG, dateValid),
-                        NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValid)
+                        NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValidTrans)
                     });
                 }
             }
