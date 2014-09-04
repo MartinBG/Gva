@@ -83,14 +83,9 @@ namespace Regs.Api.Repositories.LotRepositories
                 .Where(p => p.LotId == lotId)
                 .Load();
 
-            Commit commit = this.unitOfWork.DbContext.Set<Commit>()
-                .Include(c => c.CommitVersions)
-                .Include(c => c.CommitVersions.Select(cv => cv.PartVersion))
-                .Include(c => c.CommitVersions.Select(cv => cv.OldPartVersion))
-                .Where(c => c.LotId == lotId && c.IsIndex == true)
-                .SingleOrDefault();
+            var indexCommitId = lot.Commits.Where(c => c.IsIndex).Single().CommitId;
 
-            commit.IsLoaded = true;
+            Commit commit = this.LoadCommit(indexCommitId);
 
             return lot;
         }
@@ -118,11 +113,8 @@ namespace Regs.Api.Repositories.LotRepositories
             Commit commit;
             if (commitId.HasValue)
             {
-                commit = this.unitOfWork.DbContext.Set<Commit>()
-                    .Include(c => c.CommitVersions)
-                    .Include(c => c.CommitVersions.Select(cv => cv.PartVersion))
-                    .Include(c => c.CommitVersions.Select(cv => cv.OldPartVersion))
-                    .SingleOrDefault(c => c.CommitId == commitId);
+                commit = this.LoadCommit(commitId);
+
                 if (commit.LotId != lotId)
                 {
                     throw new Exception(string.Format("The specified commit with id {0} does not belong to lot with id {1}", commitId, lotId));
@@ -130,21 +122,15 @@ namespace Regs.Api.Repositories.LotRepositories
             }
             else
             {
-                commit = this.unitOfWork.DbContext.Set<Commit>()
-                    .Where(c => c.LotId == lotId && c.IsIndex == true)
-                    .Select(c => c.ParentCommit)
-                    .Include(c => c.CommitVersions)
-                    .Include(c => c.CommitVersions.Select(cv => cv.PartVersion))
-                    .Include(c => c.CommitVersions.Select(cv => cv.OldPartVersion))
-                    .SingleOrDefault();
+                var lastCommitId = lot.Commits.Where(c => c.IsIndex).Single().ParentCommitId;
 
-                if (commit == null)
+                if (lastCommitId == null)
                 {
                     throw new Exception(string.Format("The specified lot with id {0} does not have a non-index commit.", lotId));
                 }
-            }
 
-            commit.IsLoaded = true;
+                commit = this.LoadCommit(lastCommitId);
+            }
 
             return lot;
         }
