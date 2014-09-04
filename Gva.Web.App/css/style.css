@@ -530,6 +530,9 @@ table.treetable span.indenter a {
   .xlg-modal > * {
     width: 740px;
   }
+  .xs-modal > * {
+    width: 400px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -544,7 +547,7 @@ table.treetable span.indenter a {
   }
 }
 
-.xlg-modal .modal-content .panel {
+.xlg-modal .modal-content .panel, .xs-modal .modal-content .panel {
     margin: 5px;
 }
 

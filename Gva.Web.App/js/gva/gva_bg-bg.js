@@ -2117,6 +2117,21 @@
           cancel: 'Отказ',
           inspDataTitle: 'Данни за инспектор'
         },
+        stampedDocumentsView: {
+          save: 'Запиши',
+          licenceNumber: 'No',
+          uin: 'ЕГН',
+          lin: 'ЛИН',
+          names: 'Име',
+          documentDateValidFrom: 'Издаден',
+          documentDateValidTo: 'Валиден до',
+          licenceAction: 'Основание',
+          ready: 'Готов',
+          stampNumber: 'Номер на печат',
+          application: 'Заявление',
+          received: 'Получен',
+          finished: 'Приключено заявление'
+        },
         viewPerson: {
           name: 'Име',
           uin: 'ЕГН',
@@ -2552,6 +2567,20 @@
           add: 'Добави',
           cancel: 'Отказ'
         },
+        editLicenceModal: {
+          title: 'Преглед на лиценз',
+          save: 'Запис',
+          cancel: 'Отказ',
+          licenceForm: 'Лиценз',
+          editionForm: 'Вписване'
+        },
+        printLicenceModal: {
+          title: 'Принтиране на лиценз',
+          stampNumber: 'Печатен док. номер',
+          cancel: 'Отказ',
+          save: 'Запис',
+          print: 'Принтирай'
+        },
         licencesSearch: {
           newLicence: 'Нов лиценз',
           licenceNumber: 'Лиценз No',
@@ -2604,6 +2633,18 @@
           notes: 'Бележки',
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        printableDocsSearch: {
+          lin: 'ЛИН',
+          uin: 'ЕГН',
+          names: 'Имена',
+          licenceAction: 'Основание',
+          licenceType: 'Вид лиценз',
+          licenceNumber: 'Лиценз No',
+          dateValidFrom: 'Дата на издаване',
+          dateValidTo: 'Валиден до',
+          application: 'Заявление',
+          search: 'Търси'
         }
       },
       applications: {
@@ -3676,6 +3717,7 @@
         'root.applications.edit.case.linkPart': 'Свързване',
         'root.applications.edit.stages': 'Дейности по заявление',
         'root.persons': 'Физически лица',
+        'root.persons.stampedDocuments': 'Печат на доументи',
         'root.persons.new': 'Ново физическо лице',
         'root.persons.securityExam': 'Нов теоретичен изпит АС',
         'root.persons.view': 'Лично досие',
@@ -3888,7 +3930,8 @@
         'root.equipments.view.inspections': 'Инспекции',
         'root.equipments.view.inspections.new': 'Нова инспекция',
         'root.equipments.view.inspections.edit': 'Преглед на инспекция',
-        'root.equipments.view.inventory': 'Опис'
+        'root.equipments.view.inventory': 'Опис',
+        'root.printableDocs': 'Документи за печат'
       }
     });
   }]);

@@ -430,6 +430,7 @@
       .state(['root.persons.new'                                           , '/new'                                                                        , ['@root'             , 'js/gva/persons/views/personsNew.html'                                , 'PersonsNewCtrl'                ]])
       .state(['root.persons.securityExam'                                  , '/securityExam'                                                               , ['@root'             , 'js/gva/persons/views/exams/securityExamBatch.html'                   , 'SecurityExamBatchCtrl'         ]])
       .state(['root.persons.securityExam.part'                             , '/:id'                                                                        , ['@root.persons.securityExam', 'js/gva/persons/views/exams/securityExamBatchPart.html'       , 'SecurityExamBatchPartCtrl'     ]])
+      .state(['root.persons.stampedDocuments'                              , '/stampedDocuments'                                                             , ['@root'             , 'js/gva/persons/views/stampedDocuments/stampedDocuments.html'       , 'StampedDocumentsCtrl'            ]])
       .state(['root.persons.view'                                          , '/:id?caseTypeId&appId&filter'                                                , ['@root'             , 'js/gva/persons/views/personsView.html'                               , 'PersonsViewCtrl'               ]])
       .state(['root.persons.view.edit'                                     , '/personInfo'                                                                 , ['@root'             , 'js/gva/persons/views/personInfo/personInfoEdit.html'                 , 'PersonInfoEditCtrl'            ]])
       .state(['root.persons.view.addresses'                                , '/addresses'                                                                                                                                                                                                    ])
@@ -492,19 +493,23 @@
       .state(['root.persons.view.documentApplications'                     , '/documentApplications'                                                                                                                                                                                         ])
       .state(['root.persons.view.documentApplications.search'              , ''                                                                            , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsSearch.html', 'DocApplicationsSearchCtrl'     ]])
       .state(['root.persons.view.documentApplications.new'                 , '/new'                                                                        , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsNew.html'   , 'DocApplicationsNewCtrl'        ]])
-      .state(['root.persons.view.documentApplications.edit'                , '/:ind'                                                                       , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsEdit.html'  , 'DocApplicationsEditCtrl'       ]]);
+      .state(['root.persons.view.documentApplications.edit'                , '/:ind'                                                                       , ['@root.persons.view', 'js/gva/persons/views/documentApplications/docApplicationsEdit.html'  , 'DocApplicationsEditCtrl'       ]])
+      .state(['root.printableDocs'                                         , '/printableDocs?lin&uin&names&licenceType&licenceAction'                                                                                                                                                        ])
+      .state(['root.printableDocs.search'                                  , ''                                                                            , ['@root'            , 'js/gva/persons/views/printableDocs/printableDocsSearch.html'          ,'PrintableDocsSearchCtrl'        ]]);
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
-    .modal('chooseTrainings' , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html' , 'ChooseTrainingsModalCtrl')
-    .modal('newTraining'     , 'js/gva/persons/modals/trainings/newTrainingModal.html'     , 'NewTrainingModalCtrl'    )
-    .modal('chooseChecks'    , 'js/gva/persons/modals/checks/chooseChecksModal.html'       , 'ChooseChecksModalCtrl'   )
-    .modal('newCheck'        , 'js/gva/persons/modals/checks/newCheckModal.html'           , 'NewCheckModalCtrl'       )
-    .modal('chooseRatings'   , 'js/gva/persons/modals/ratings/chooseRatingsModal.html'     , 'ChooseRatingsModalCtrl'  )
-    .modal('newRating'       , 'js/gva/persons/modals/ratings/newRatingModal.html'         , 'NewRatingModalCtrl'      )
-    .modal('chooseMedicals'  , 'js/gva/persons/modals/medicals/chooseMedicalsModal.html'   , 'ChooseMedicalsModalCtrl' )
-    .modal('newMedical'      , 'js/gva/persons/modals/medicals/newMedicalModal.html'       , 'NewMedicalModalCtrl'     )
-    .modal('chooseLicences'  , 'js/gva/persons/modals/licences/chooseLicencesModal.html'   , 'ChooseLicencesModalCtrl' )
-    .modal('licenceStatuses' , 'js/gva/persons/modals/licences/licenceStatusesModal.html'  , 'LicenceStatusesModalCtrl');
+    .modal('chooseTrainings' , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html' , 'ChooseTrainingsModalCtrl'      )
+    .modal('newTraining'     , 'js/gva/persons/modals/trainings/newTrainingModal.html'     , 'NewTrainingModalCtrl'          )
+    .modal('chooseChecks'    , 'js/gva/persons/modals/checks/chooseChecksModal.html'       , 'ChooseChecksModalCtrl'         )
+    .modal('newCheck'        , 'js/gva/persons/modals/checks/newCheckModal.html'           , 'NewCheckModalCtrl'             )
+    .modal('chooseRatings'   , 'js/gva/persons/modals/ratings/chooseRatingsModal.html'     , 'ChooseRatingsModalCtrl'        )
+    .modal('newRating'       , 'js/gva/persons/modals/ratings/newRatingModal.html'         , 'NewRatingModalCtrl'            )
+    .modal('chooseMedicals'  , 'js/gva/persons/modals/medicals/chooseMedicalsModal.html'   , 'ChooseMedicalsModalCtrl'       )
+    .modal('newMedical'      , 'js/gva/persons/modals/medicals/newMedicalModal.html'       , 'NewMedicalModalCtrl'           )
+    .modal('chooseLicences'  , 'js/gva/persons/modals/licences/chooseLicencesModal.html'   , 'ChooseLicencesModalCtrl'       )
+    .modal('editLicence'     , 'js/gva/persons/modals/licences/editLicenceModal.html'      , 'EditLicenceModalCtrl'          )
+    .modal('licenceStatuses' , 'js/gva/persons/modals/licences/licenceStatusesModal.html'  , 'LicenceStatusesModalCtrl'      )
+    .modal('printLicence'    , 'js/gva/persons/modals/licences/printLicenceModal.html'     , 'PrintLicenceModalCtrl'   , 'xs');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.aircrafts'                                          , '/aircrafts?mark&manSN&model&airCategory&aircraftProducer'                                                                                                                           ])

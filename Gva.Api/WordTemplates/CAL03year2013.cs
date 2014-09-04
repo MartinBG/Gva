@@ -32,16 +32,17 @@ namespace Gva.Api.WordTemplates
             }
         }
 
-        public object GetData(int lotId, string path, int index)
+        public object GetData(int lotId, string path)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart("personData").Content;
             var licence = lot.Index.GetPart(path).Content;
-            var edition = licence.Get<JObject>(string.Format("editions[{0}]", index));
 
-            var includedRatings = edition.GetItems<int>("includedRatings")
+            var lastEdition = licence.GetItems<JObject>("editions").Last();
+
+            var includedRatings = lastEdition.GetItems<int>("includedRatings")
                 .Select(i => lot.Index.GetPart("ratings/" + i).Content);
-    
+
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
 
             var ratings = this.GetRatings(includedRatings);
@@ -77,7 +78,7 @@ namespace Gva.Api.WordTemplates
                     BIRTHPLACE_TRANS1 = placeOfBirth.NameAlt,
                     NATIONALITY1 = nationality.Name,
                     NATIONALITY_CODE1 = nationality.TextContent.Get<string>("nationalityCodeCA"),
-                    ISSUE_DATE1 = edition.Get<DateTime>("documentDateValidFrom"),
+                    ISSUE_DATE1 = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     REF_NO2 = refNumber,
                     PERSON_NAME2 = personName,
                     PERSON_NAME_TRANS2 = personNameAlt,
@@ -88,7 +89,7 @@ namespace Gva.Api.WordTemplates
                     BIRTHPLACE_TRANS2 = placeOfBirth.NameAlt,
                     NATIONALITY2 = nationality.Name,
                     NATIONALITY_CODE2 = nationality.TextContent.Get<string>("nationalityCodeCA"),
-                    ISSUE_DATE2 = edition.Get<DateTime>("documentDateValidFrom"),
+                    ISSUE_DATE2 = lastEdition.Get<DateTime>("documentDateValidFrom"),
                     REF_NO21 = refNumber,
                     REF_NO22 = refNumber,
                     T_RATING1 = ratings,

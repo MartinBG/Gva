@@ -1,0 +1,43 @@
+﻿<div>
+  <sc-search selected-filters="filters" btn-classes="col-sm-2">
+    <sc-filter type="nomenclature" name="licenceType" class="col-sm-3" removable="false" alias="licenceTypes" mode="id" label="persons.printableDocsSearch.licenceType"></sc-filter>
+    <sc-filter type="nomenclature" name="licenceAction" class="col-sm-3" removable="false" alias="licenceActions" mode="id" label="persons.printableDocsSearch.licenceAction"></sc-filter>
+    <sc-filter type="int" name="lin" class="col-sm-2" removable="false" label="persons.printableDocsSearch.lin"></sc-filter>
+    <sc-filter type="text" name="uin" class="col-sm-2" removable="true" label="persons.printableDocsSearch.uin"></sc-filter>
+    <sc-filter type="text" name="names" class="col-sm-3" removable="false" label="persons.printableDocsSearch.names"></sc-filter>
+    <sc-search-button action="search()" text="persons.printableDocsSearch.search" icon="glyphicon-search"></sc-search-button>
+    <sc-search-button action="add"></sc-search-button>
+  </sc-search>
+
+  <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <sc-button name="viewLicence" sc-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <a ng-click="print(item)">
+        <span class="glyphicon glyphicon-print"></span>
+      </a>
+    </sc-column>
+    <sc-column title="persons.printableDocsSearch.licenceNumber" has-content="true">
+      {{item.licenceNumber}}
+    </sc-column>
+    <sc-column title="persons.printableDocsSearch.lin" has-content="true">
+      {{item.person.lin}}
+    </sc-column>
+    <sc-column title="persons.printableDocsSearch.uin" has-content="true">
+      {{item.person.uin}}
+    </sc-column>
+    <sc-column title="persons.printableDocsSearch.names" has-content="true">
+      {{item.person.names}}
+    </sc-column>
+    <sc-column title="persons.printableDocsSearch.dateValidFrom" has-content="true">
+      {{item.dateValidFrom | date : format : mediumDate}}
+    </sc-column>
+    <sc-column title="persons.printableDocsSearch.dateValidTo" has-content="true">
+      {{item.dateValidTo| date : format : mediumDate}}
+    </sc-column>
+    <sc-column title="persons.printableDocsSearch.application" has-content="true">
+      <a ng-click="viewApplication(item.lotId, item.application.partIndex)">{{item.application.applicationName}}</a>
+    </sc-column>
+  </sc-datatable>
+</div>

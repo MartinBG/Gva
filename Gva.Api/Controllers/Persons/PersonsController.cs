@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Json;
 using Common.Filters;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
@@ -13,6 +14,9 @@ using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
+using System.Collections.Generic;
+using Gva.Api.Repositories.ApplicationStageRepository;
+using System;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -25,6 +29,7 @@ namespace Gva.Api.Controllers.Persons
         private IInventoryRepository inventoryRepository;
         private IPersonRepository personRepository;
         private IApplicationRepository applicationRepository;
+        private IApplicationStageRepository applicationStageRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
 
@@ -34,6 +39,7 @@ namespace Gva.Api.Controllers.Persons
             IInventoryRepository inventoryRepository,
             IPersonRepository personRepository,
             IApplicationRepository applicationRepository,
+            IApplicationStageRepository applicationStageRepository,
             ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher)
         {
@@ -42,6 +48,7 @@ namespace Gva.Api.Controllers.Persons
             this.inventoryRepository = inventoryRepository;
             this.personRepository = personRepository;
             this.applicationRepository = applicationRepository;
+            this.applicationStageRepository = applicationStageRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
         }
@@ -191,6 +198,19 @@ namespace Gva.Api.Controllers.Persons
             return Ok();
         }
 
+        [Route("printableDocs")]
+        public IHttpActionResult GetPrintableDocs(
+            int? licenceType = null,
+            int? licenceAction = null,
+            int? lin = null,
+            string uin = null,
+            string names = null)
+        {
+            var docs = this.personRepository.GetPrintableDocs(licenceType, licenceAction, lin, uin, names);
+
+            return Ok(docs.Select(d => new GvaViewPersonLicenceEditionDO(d)));
+        }
+
         [Route("{lotId}/inventory")]
         public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
         {
@@ -229,6 +249,50 @@ namespace Gva.Api.Controllers.Persons
             {
                 isUnique = this.personRepository.IsUniqueUin(uin, personId)
             });
+        }
+
+        [HttpGet]
+        [Route("stampedDocuments")]
+        public IHttpActionResult GetStampedDocuments()
+        {
+            return Ok(this.personRepository.GetStampedDocuments());
+        }
+
+        [HttpPost]
+        [Route("stampedDocuments")]
+        public IHttpActionResult PostStampedDocuments(List<AplicationStageDO> stampedDocuments)
+        {
+            foreach (AplicationStageDO document in stampedDocuments)
+            {
+                int applicationId = document.ApplicationId;
+                int lastStageOrdinal =
+                        this.applicationStageRepository.GetApplicationStages(applicationId).Last().Ordinal;
+
+                foreach (string stageAlias in document.StageAliases)
+                {
+                    int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
+                        .Where(s => s.Alias.Equals(stageAlias))
+                        .Single().GvaStageId;
+
+                    lastStageOrdinal++;
+
+                    GvaApplicationStage applicationStage = new GvaApplicationStage()
+                    {
+                        
+                        GvaStageId = stageId,
+                        StartingDate = DateTime.Now,
+                        Ordinal = lastStageOrdinal,
+                        GvaApplicationId = applicationId
+                    };
+
+                    this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
+                }
+
+            }
+
+            this.unitOfWork.Save();
+
+            return Ok();
         }
     }
 }

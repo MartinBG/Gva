@@ -1,0 +1,35 @@
+﻿<ng-form name="form.editLicenceForm" sc-validate="{}" sc-form-readonly="edition.index !== lastEdition.index || edition.stampNumber">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="persons.editLicenceModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.editLicenceModal.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"
+          ng-show="edition.index === lastEdition.index && !edition.stampNumber">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.editLicenceModal.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <h5 class="form-header" l10n-text="persons.editLicenceModal.licenceForm"></h5>
+      <gva-licence name="licenceForm" ng-model="licence.part" sc-form-params="{ isNew: false, lotId: lotId }"></gva-licence>
+
+      <div class="row">
+        <sc-field-group class="col-sm-3" text="persons.licenceDirective.valid">
+          <sc-nomenclature alias="'boolean'" ng-model="licence.part.valid" ng-readonly="true"></sc-nomenclature>
+          <sc-button name="viewStatusesBtn" btn-click="viewStatuses()" class="btn btn-default" icon="glyphicon-pencil"
+            ng-disabled="edition.index !== lastEdition.index || edition.stampNumber"></sc-button>
+        </sc-field-group>
+      </div>
+
+      <h5 class="form-header" l10n-text="persons.editLicenceModal.editionForm"></h5>
+      <gva-licence-edition name="licenceEditionForm" ng-model="edition"
+        sc-form-params="{ isNew: false, lotId: lotId, partIndex: licence.partIndex }"
+        sc-data-staff-type="licence.part.staffType">
+      </gva-licence-edition>
+    </div>
+  </div>
+</ng-form>

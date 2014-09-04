@@ -606,6 +606,8 @@
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
+    <Content Include="js\gva\persons\views\stampedDocuments\stampedDocumentsCtrl.js" />
+    <Content Include="js\gva\persons\views\stampedDocuments\stampedDocuments.html" />
     <Content Include="js\gva\persons\forms\personDocumentMedicalCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentOtherCtrl.js" />
     <Content Include="js\gva\persons\forms\inspectorData.html" />
@@ -645,12 +647,16 @@
     <Content Include="js\gva\persons\modals\checks\newCheckModalCtrl.js" />
     <Content Include="js\gva\persons\modals\licences\chooseLicencesModal.html" />
     <Content Include="js\gva\persons\modals\licences\chooseLicencesModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\licences\editLicenceModal.html" />
+    <Content Include="js\gva\persons\modals\licences\editLicenceModalCtrl.js" />
     <Content Include="js\gva\persons\modals\licences\licenceStatusesModal.html" />
     <Content Include="js\gva\persons\modals\licences\licenceStatusesModalCtrl.js" />
     <Content Include="js\gva\persons\modals\medicals\chooseMedicalsModal.html" />
     <Content Include="js\gva\persons\modals\medicals\chooseMedicalsModalCtrl.js" />
     <Content Include="js\gva\persons\modals\medicals\newMedicalModal.html" />
     <Content Include="js\gva\persons\modals\medicals\newMedicalModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\licences\printLicenceModal.html" />
+    <Content Include="js\gva\persons\modals\licences\printLicenceModalCtrl.js" />
     <Content Include="js\gva\persons\modals\ratings\chooseRatingsModal.html" />
     <Content Include="js\gva\persons\modals\ratings\chooseRatingsModalCtrl.js" />
     <Content Include="js\gva\persons\modals\ratings\newRatingModal.html" />
@@ -774,6 +780,8 @@
     <Content Include="js\gva\persons\views\personsSearchCtrl.js" />
     <Content Include="js\gva\persons\views\personsView.html" />
     <Content Include="js\gva\persons\views\personsViewCtrl.js" />
+    <Content Include="js\gva\persons\views\printableDocs\printableDocsSearch.html" />
+    <Content Include="js\gva\persons\views\printableDocs\printableDocsSearchCtrl.js" />
     <Content Include="js\gva\persons\views\ratings\ratingsEdit.html" />
     <Content Include="js\gva\persons\views\ratings\ratingsEditCtrl.js" />
     <Content Include="js\gva\persons\views\ratings\ratingsNew.html" />

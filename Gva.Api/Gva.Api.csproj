@@ -228,6 +228,8 @@
     <Compile Include="ModelsDO\Organizations\OrganizationInspectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffExaminerDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffManagementDO.cs" />
+    <Compile Include="ModelsDO\Persons\ApplicationStageDO.cs" />
+    <Compile Include="ModelsDO\Persons\GvaViewPersonLicenceEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\InspectorDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressDO.cs" />
     <Compile Include="ModelsDO\Common\DocumentApplicationDO.cs" />
@@ -251,11 +253,13 @@
     <Compile Include="ModelsDO\Persons\PersonStatusDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonTrainingDO.cs" />
     <Compile Include="ModelsDO\Common\TimeDO.cs" />
+    <Compile Include="Models\GvaConstants.cs" />
     <Compile Include="Models\GvaApplicationStage.cs" />
     <Compile Include="Models\GvaStage.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
+    <Compile Include="Models\Views\Person\GvaViewPersonLicenceEdition.cs" />
     <Compile Include="Projections\Aircraft\AircraftProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegistrationProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegMarkProjection.cs" />
@@ -289,6 +293,7 @@
     <Compile Include="Projections\Organization\OrganizationRecommendationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationExaminerProjection.cs" />
+    <Compile Include="Projections\Person\PersonLicenceEditionProjection.cs" />
     <Compile Include="Projections\Person\PersonInspectorProjection.cs" />
     <Compile Include="Projections\Person\PersonProjection.cs" />
     <Compile Include="Projections\Inventory\Airports\AirportApplicationProjection.cs" />

@@ -5,6 +5,11 @@
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.licences.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <a ng-click="print(item)">
+        <span class="glyphicon glyphicon-print"></span>
+      </a>
+    </sc-column>
     <sc-column data="part.licenceNumber" title="persons.licencesSearch.licenceNumber">
     </sc-column>
     <sc-column data="part.licenceType.name" title="persons.licencesSearch.licenceType">

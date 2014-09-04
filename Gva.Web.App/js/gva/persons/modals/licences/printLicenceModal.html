@@ -1,0 +1,20 @@
+﻿<ng-form class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="persons.printLicenceModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" ng-if="!model.stampNumberReadonly" btn-click="save()" text="persons.printLicenceModal.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.printLicenceModal.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <div class="row">
+        <sc-field type="text" ng-model="model.stampNumber" ng-readonly="model.stampNumberReadonly" l10n-text="persons.printLicenceModal.stampNumber" class="col-sm-8"></sc-field>
+        <div class="labeless">
+          <sc-button name="printBtn" btn-click="print()" text="persons.printLicenceModal.print" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

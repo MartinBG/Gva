@@ -39,7 +39,7 @@
         return $modal.open({
           templateUrl: modalObj.template,
           controller: modalObj.controller,
-          windowClass: 'xlg-modal',
+          windowClass: modalObj.size + '-modal',
           resolve: promisesObj,
           backdrop: 'static'
         });

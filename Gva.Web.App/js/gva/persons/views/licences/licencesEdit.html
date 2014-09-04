@@ -1,4 +1,4 @@
-<ng-form name="editLicenceForm" sc-validate="{}" sc-form-readonly="editMode !== 'edit'">
+<ng-form name="editLicenceForm" sc-validate="{}" sc-form-readonly="editMode !== 'edit' || lastEdition.stampNumber">
   <h5 class="form-header" l10n-text="persons.editLicence.editions"></h5>
 
   <div>
@@ -30,12 +30,6 @@
       <sc-column title="persons.editLicence.pageCount" has-content="true">
         {{item.pageCount}}
       </sc-column>
-      <sc-column sortable="false" class="buttons-cell" has-content="true">
-        <a target="_self" ng-hide="item.index === undefined" ng-href="api/print?lotId={{lotId}}&path=licences/{{licence.partIndex}}&index={{item.index}}">
-          <span class="glyphicon glyphicon-print"></span>
-
-        </a>
-      </sc-column>
     </sc-datatable>
     <div style="clear: both"></div>
   </div>
@@ -47,7 +41,7 @@
       <div class="pull-right">
         <sc-button name="createBtn" btn-click="newEdition()" text="persons.editLicence.newEdition" class="btn btn-primary btn-xs" icon="glyphicon-plus" ng-show="!editMode" ng-disabled="currentEdition !== lastEdition">
         </sc-button>
-        <sc-button name="editBtn" btn-click="editLastEdition()" text="persons.editLicence.editLastEdition" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode" ng-disabled="currentEdition !== lastEdition">
+        <sc-button name="editBtn" btn-click="editLastEdition()" text="persons.editLicence.editLastEdition" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode" ng-disabled="currentEdition !== lastEdition || lastEdition.stampNumber">
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteLastEdition(item)" text="persons.editLicence.deleteLastEdition" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" ng-disabled="currentEdition !== lastEdition"></sc-button>
         <sc-button name="saveBtn" btn-click="save()" text="persons.editLicence.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">

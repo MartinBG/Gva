@@ -39,6 +39,8 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string NotesAlt { get; set; }
 
+        public string StampNumber { get; set; }
+
         public List<ApplicationNomDO> Applications { get; set; }
 
         public List<int> IncludedRatings { get; set; }
