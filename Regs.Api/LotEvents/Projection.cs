@@ -39,6 +39,9 @@ namespace Regs.Api.LotEvents
                 return;
             }
 
+            var context = this.unitOfWork.DbContext;
+            context.Configuration.AutoDetectChangesEnabled = false;
+
             var commit = commitEvent.Commit;
             var lot = commitEvent.Lot;
 
@@ -91,6 +94,9 @@ namespace Regs.Api.LotEvents
             {
                 newView.Value.State = EntityState.Added;
             }
+
+            context.Configuration.AutoDetectChangesEnabled = true;
+            context.ChangeTracker.DetectChanges();
         }
 
         private DbEntityEntry<TView> FindInContext(EntityKey entityKey)
