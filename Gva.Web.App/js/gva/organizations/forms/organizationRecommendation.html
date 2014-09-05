@@ -73,9 +73,9 @@
             <td ng-show="!form.$readonly">
               <sc-button class="btn btn-xs btn-danger" btn-click="deleteInspection(inspection)" icon="glyphicon-remove"></sc-button>
             </td>
-            <td>{{inspection.part.startDate | date:'mediumDate'}}</td>
-            <td>{{inspection.part.endDate | date:'mediumDate'}}</td>
-            <td>{{inspection.part.subject}}</td>
+            <td>{{inspection.startDate | date:'mediumDate'}}</td>
+            <td>{{inspection.endDate | date:'mediumDate'}}</td>
+            <td>{{inspection.subject}}</td>
           </tr>
         </tbody>
       </table>

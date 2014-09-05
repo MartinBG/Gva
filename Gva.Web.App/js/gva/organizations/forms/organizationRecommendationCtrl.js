@@ -4,6 +4,7 @@
   function OrganizationRecommendationCtrl(
     $scope,
     AuditPartSectionDetails,
+    OrganizationInspections,
     scModal,
     scFormParams
   ) {
@@ -16,32 +17,68 @@
       part5: false
     };
 
-    function fillInspectionsDisparities() {
+    function fillInspections() {
+      $scope.inspections = [];
       $scope.inspectionsDisparities = [];
 
-      _.each($scope.inspections, function (inspection) {
-        $scope.inspectionsDisparities =
-          $scope.inspectionsDisparities.concat(inspection.part.disparities);
-      });
+      if (!$scope.model || !$scope.model.part.inspections.length) {
+        return;
+      }
+
+      OrganizationInspections
+        .query({ id: $scope.lotId, partIndexes: $scope.model.part.inspections })
+        .$promise
+        .then(function (inspections) {
+          _(inspections)
+            .sortBy(function (i) {
+              return $scope.model.part.inspections.indexOf(i.partIndex);
+            })
+            .each(function (i) {
+              $scope.inspections.push({
+                partIndex: i.partIndex, //used for deletion
+                startDate: i.part.startDate,
+                endDate: i.part.endDate,
+                subject: i.part.subject
+              });
+
+              _.each(i.part.disparities, function (d) {
+                $scope.inspectionsDisparities.push({
+                  inspectionPartIndex: i.partIndex, //used for deletion
+                  refNumber: d.refNumber,
+                  description: d.description,
+                  disparityLevel: d.disparityLevel,
+                  removalDate: d.removalDate,
+                  closureDate: d.closureDate,
+                  rectifyAction: d.rectifyAction,
+                  closureDocument: d.closureDocument
+                });
+              });
+            });
+        });
     }
 
     function fillDetailDisparities() {
       $scope.detailDisparities = {};
 
-      if (!$scope.model.part.recommendationDetails || !$scope.model.part.disparities) {
+      if (!$scope.model ||
+        !$scope.model.part.recommendationDetails.length ||
+        !$scope.model.part.disparities.length
+      ) {
         return;
       }
 
       _.each($scope.model.part.disparities, function (d, i) {
         $scope.detailDisparities[d.detailCode] = $scope.detailDisparities[d.detailCode] || [];
         $scope.detailDisparities[d.detailCode].push(i);
-      });
+      }); 
     }
 
-    fillDetailDisparities();
-
-    $scope.inspections = scFormParams.inspections;
-    fillInspectionsDisparities();
+    $scope.$watch(function() {
+      return $scope.model;
+    }, function () {
+      fillInspections();
+      fillDetailDisparities();
+    });
 
     $scope.chooseInspections = function () {
       var modalInstance = scModal.open('chooseInspections', {
@@ -50,19 +87,25 @@
       });
 
       modalInstance.result.then(function (selectedInspections) {
-        $scope.inspections = selectedInspections;
         $scope.model.part.inspections = _.pluck(selectedInspections, 'partIndex');
-        fillInspectionsDisparities();
+
+        fillInspections();
       });
 
       return modalInstance.opened;
     };
 
-    $scope.deleteInspection = function (inspection) {
-      var index = $scope.inspections.indexOf(inspection);
-      Array.prototype.splice.apply($scope.inspections, [index, 1]);
-      Array.prototype.splice.apply($scope.model.part.inspections, [index, 1]);
-      fillInspectionsDisparities();
+    $scope.deleteInspection = function (inspectionPartIndex) {
+      var index = $scope.model.part.inspections.indexOf(inspectionPartIndex);
+      $scope.model.part.inspections.splice(index, 1);
+
+      $scope.inspections = _.filter($scope.inspections, function (i) {
+        return i.partIndex === inspectionPartIndex;
+      });
+
+      $scope.inspectionsDisparities = _.filter($scope.inspectionsDisparities, function (d) {
+        return d.inspectionPartIndex === inspectionPartIndex;
+      });
     };
 
     $scope.insertRecommendationDetails = function () {
@@ -110,6 +153,7 @@
   OrganizationRecommendationCtrl.$inject = [
     '$scope',
     'AuditPartSectionDetails',
+    'OrganizationInspections',
     'scModal',
     'scFormParams'
   ];

@@ -83,7 +83,7 @@ namespace Gva.Api.Controllers.Aircrafts
             }
         }
 
-        public override IHttpActionResult GetParts(int lotId)
+        public override IHttpActionResult GetParts(int lotId, [FromUri] int[] partIndexes = null)
         {
             var parts = this.lotRepository.GetLotIndex(lotId).Index
                 .GetParts(this.path)

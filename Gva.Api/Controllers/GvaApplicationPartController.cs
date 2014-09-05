@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
@@ -98,9 +99,14 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
-        public virtual IHttpActionResult GetParts(int lotId)
+        public virtual IHttpActionResult GetParts(int lotId, [FromUri] int[] partIndexes = null)
         {
             var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts(this.path);
+
+            if (partIndexes != null && partIndexes.Length > 0)
+            {
+                partVersions = partVersions.Where(pv => partIndexes.Contains(pv.Part.Index)).ToArray();
+            }
 
             List<ApplicationPartVersionDO<T>> partVersionDOs = new List<ApplicationPartVersionDO<T>>();
             foreach (var partVersion in partVersions)
