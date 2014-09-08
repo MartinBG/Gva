@@ -190,7 +190,6 @@ namespace Gva.Api
 
             //controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<GvaLotsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaNomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<GvaSuggestionController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PrintController>().InstancePerLifetimeScope();

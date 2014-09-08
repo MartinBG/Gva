@@ -115,7 +115,6 @@
     <Compile Include="Controllers\GvaPartsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentsController.cs" />
-    <Compile Include="Controllers\GvaLotsController.cs" />
     <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationApprovalsController.cs" />
