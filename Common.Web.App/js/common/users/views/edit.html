@@ -18,12 +18,32 @@
       </div>
     </div>
     <div class="form-group">
+      <label class="control-label col-sm-3" l10n-text="common.users.edit.email"></label>
+      <div class="col-sm-4">
+        <sc-text ng-model="user.email"></sc-text>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-3" l10n-text="common.users.edit.appointmentDate"></label>
+      <div class="col-sm-4">
+        <sc-date ng-model="user.appointmentDate"></sc-date>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" l10n-text="common.users.edit.resignationdate"></label>
+      <div class="col-sm-4">
+        <sc-date ng-model="user.resignationDate"></sc-date>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label class="control-label col-sm-3" l10n-text="common.users.edit.comment"></label>
       <div class="col-sm-4">
         <sc-textarea rows="3" class="form-control" ng-model="user.notes"></sc-textarea>
       </div>
     </div>
-    <div class="form-group">
+    <!--<div class="form-group">
       <label class="control-label col-sm-3" l10n-text="common.users.edit.entrance"></label>
       <div class="col-sm-4">
         <div class="checkbox">
@@ -35,7 +55,7 @@
           <span l10n-text="common.users.edit.withCertificate"></span>
         </div>
       </div>
-    </div>
+    </div>-->
     <div class="form-group" ng-class="{'has-error': saveClicked && userForm.password.$invalid}"
       ng-show="setPassword">
       <label class="control-label col-sm-3" l10n-text="common.users.edit.password"></label>
@@ -60,10 +80,20 @@
         <span id="certificateInvalid" class="help-block" ng-show="saveClicked && userForm.certificate.$invalid" l10n-text="common.users.edit.inputCertificate"></span>
       </div>
     </div>
+
+    <div class="form-group" ng-class="{'has-error': saveClicked && (unitExists || userForm.unitId.$invalid)}">
+      <label class="control-label col-sm-3" l10n-text="common.users.edit.unit"></label>
+      <div class="col-sm-4">
+        <sc-nomenclature name="unitId" ng-model="user.unitId" alias="'employeeUnit'" mode="id" required></sc-nomenclature>
+        <span id="unitIdInvalid" class="help-block" ng-show="saveClicked && userForm.unitId.$invalid" l10n-text="common.users.edit.inputUnit"></span>
+        <span id="unitExists" class="help-block" ng-show="unitExists" l10n-text="common.users.edit.unitExists"></span>
+      </div>
+    </div>
+
     <div class="form-group">
       <label class="control-label col-sm-3" l10n-text="common.users.edit.roles"></label>
       <div class="col-sm-5">
-        <ul class="list-inline checkbox-list">
+        <ul class="list-unstyled">
           <li ng-repeat="role in roles">
             <input type="checkbox" ng-model="role.selected">
             <span>{{role.name}}</span>

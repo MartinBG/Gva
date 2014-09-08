@@ -11,7 +11,8 @@
     Users,
     Roles
   ) {
-    var userExistsPromise;
+    var userExistsPromise,
+      unitExistsPromise;
 
     if ($stateParams.userId) {
       $scope.isEdit = true;
@@ -30,12 +31,13 @@
     }).then(function (res) {
       res.roles.forEach(function (role) {
         role.selected =
-          $filter('filter')(res.user.roles || [], {roleId: role.roleId}).length > 0;
+          $filter('filter')(res.user.roles || [], { roleId: role.roleId }).length > 0;
       });
 
-      $scope.setPassword = res.user.hasPassword;
+      $scope.setPassword = res.user.hasPassword || true;
       $scope.password = '';
       $scope.confirmPassword = '';
+
       $scope.setCertificate = !!res.user.certificateThumbprint;
       $scope.certificate = res.user.certificateThumbprint;
     });
@@ -56,7 +58,7 @@
           $scope.user.certificateThumbprint = '';
         }
 
-        $scope.user.roles = $filter('filter')($scope.roles, {selected: true});
+        $scope.user.roles = $filter('filter')($scope.roles, { selected: true });
 
         if ($scope.isEdit) {
           userExistsPromise = $q.when(false);
@@ -69,9 +71,25 @@
             });
         }
 
-        userExistsPromise.then(function (exists) {
-          $scope.userExists = exists;
-          if (!exists) {
+        if ($scope.user.unitId) {
+          unitExistsPromise =
+            Users.checkDuplicateUnit({
+              userId: $scope.user.userId,
+              unitId: $scope.user.unitId
+            })
+          .$promise;
+        } else {
+          unitExistsPromise = $q.when(false);
+        }
+
+        $q.all({
+          user1: userExistsPromise,
+          unit1: unitExistsPromise
+        }).then(function (res) {
+          $scope.userExists = res.user1;
+          $scope.unitExists = res.unit1.result;
+
+          if (!$scope.userExists && !$scope.unitExists) {
             $scope.user.$save().then(function () {
               $state.go('root.users.search');
             });

@@ -28,6 +28,15 @@ namespace Common.Api
 
             //user
             this.MapRoute(config, HttpMethod.Get, "api/user/currentData", "User", "GetUserData");
+            this.MapRoute(config, HttpMethod.Get, "api/user/duplicateUnit", "User", "CheckDuplicateUnit");
+            this.MapRoute(config, HttpMethod.Get, "api/users", "User", "GetUsers");
+            this.MapRoute(config, HttpMethod.Get, "api/users/{id}", "User", "GetUser");
+            this.MapRoute(config, HttpMethod.Post, "api/users/{id}", "User", "UpdateUser");
+            this.MapRoute(config, HttpMethod.Post, "api/users", "User", "CreateUser");
+            
+
+            //role
+            this.MapRoute(config, HttpMethod.Get, "api/roles", "User", "GetRoles");
         }
 
         private void MapRoute(HttpConfiguration config, HttpMethod method, string route, string controller, string action, IDictionary<string, object> paramConstraints = null)

@@ -5,6 +5,8 @@ GO
 -- Tables
 ---------------------------------------------------------------
 
+:r $(rootPath)"\Tables\Users\RoleClassifications.sql"
+
 :r $(rootPath)"\Tables\AopApplicationCriteria.sql"
 :r $(rootPath)"\Tables\AopApplicationObjects.sql"
 :r $(rootPath)"\Tables\AopEmployerTypes.sql"
@@ -54,3 +56,5 @@ GO
 --Insert ADDITIONAL
 ---------------------------------------------------------------
 
+:r $(rootPath)\"..\Insert\Users\Roles.sql"
+:r $(rootPath)\"..\Insert\Users\UserRoles.sql"

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Web.Helpers;
 using Newtonsoft.Json;
+using System;
 
 namespace Common.Api.Models
 {
@@ -16,6 +17,8 @@ namespace Common.Api.Models
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Fullname { get; set; }
+        public DateTime? AppointmentDate { get; set; }
+        public DateTime? ResignationDate { get; set; }
         public string Notes { get; set; }
         public string CertificateThumbprint { get; set; }
         public string Email { get; set; }
@@ -81,6 +84,8 @@ namespace Common.Api.Models
             this.Property(t => t.PasswordSalt).HasColumnName("PasswordSalt");
             this.Property(t => t.HasPassword).HasColumnName("HasPassword");
             this.Property(t => t.Fullname).HasColumnName("Fullname");
+            this.Property(t => t.AppointmentDate).HasColumnName("AppointmentDate");
+            this.Property(t => t.ResignationDate).HasColumnName("ResignationDate");
             this.Property(t => t.Notes).HasColumnName("Notes");
             this.Property(t => t.CertificateThumbprint).HasColumnName("CertificateThumbprint");
             this.Property(t => t.Email).HasColumnName("Email");

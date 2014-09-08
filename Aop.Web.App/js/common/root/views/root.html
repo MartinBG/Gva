@@ -8,7 +8,7 @@
   </sc-navigation-item>
   <sc-navigation-item state="root.apps.search" text="common.navigation.apps.search"></sc-navigation-item>
   <sc-navigation-item state="root.docs.search" text="common.navigation.reports.search"></sc-navigation-item>
-  <sc-navigation-item text="common.navigation.admin.title" icon="glyphicon glyphicon-wrench" parent="true">
+  <sc-navigation-item text="common.navigation.admin.title" icon="glyphicon glyphicon-wrench" parent="true" ng-if="showAdmin">
     <sc-navigation-item state="root.users.search" text="common.navigation.admin.users"></sc-navigation-item>
     <sc-navigation-item state="root.users.search" text="common.navigation.admin.noms"></sc-navigation-item>
   </sc-navigation-item>
