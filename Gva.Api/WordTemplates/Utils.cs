@@ -45,5 +45,14 @@ namespace Gva.Api.WordTemplates
         {
             return licenceNumber.ToString().PadLeft(5, '0');
         }
+
+        internal static List<object> FillBlankData(List<object> data, int size)
+        {
+            while (data.Count < size)
+            {
+                data.Add(new object());
+            }
+            return data;
+        }
     }
 }

@@ -63,9 +63,8 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
 
             var inspectorId = lastEdition.Inspector == null ? (int?)null : lastEdition.Inspector.NomValueId;
-
-            object[] instructorData = new object[0];
-            object[] examinerData = new object[0];
+            var instructorData = new List<object>();
+            var examinerData = new List<object>();
             if (inspectorId.HasValue)
             {
                 var inspectorRatings = this.lotRepository.GetLotIndex(inspectorId.Value)
@@ -125,9 +124,9 @@ namespace Gva.Api.WordTemplates
                     L_RATING = ratings,
                     INSTRUCTOR1 = instructorData,
                     EXAMINER1 = examinerData,
-                    REVAL = new object[0],
-                    REVAL2 = new object[0],
-                    REVAL3 = new object[0],
+                    REVAL = new object[10],
+                    REVAL2 = new object[10],
+                    REVAL3 = new object[10],
                     L_ABBREVIATION = this.GetAbbreviations(licenceType.Code)
                 }
             };
@@ -287,7 +286,7 @@ namespace Gva.Api.WordTemplates
                 .Where(nv => nv.Code == "FT" || nv.Code == "FC")
                 .Select(nv => nv.NomValueId);
 
-            return includedRatings
+            var result =  includedRatings
                 .Where(r => r.Authorization != null && r.Authorization.Code != "RTO" && !authorizationGroupIds.Contains(r.Authorization.ParentValueId.Value))
                 .Select(r =>
                     {
@@ -306,15 +305,18 @@ namespace Gva.Api.WordTemplates
                             VALID_DATE = lastEdition.DocumentDateValidTo
                         };
                     }).ToList<object>();
+
+            result = Utils.FillBlankData(result, 19);
+            return result;
         }
 
-        private object[] GetInstructorData(IEnumerable<PersonRatingDO> inspectorRatings)
+        private List<object> GetInstructorData(IEnumerable<PersonRatingDO> inspectorRatings)
         {
             var authorizationGroupId = this.nomRepository.GetNomValues("authorizationGroups")
                 .First(nv => nv.Code == "FT")
                 .NomValueId;
 
-            return inspectorRatings
+            var result = inspectorRatings
                 .Where(p => p.Authorization != null && p.Authorization.Code != "RTO" && p.Authorization.ParentValueId == authorizationGroupId)
                 .Select(p =>
                     {
@@ -329,16 +331,19 @@ namespace Gva.Api.WordTemplates
                             VALID_DATE = instrRatingEdPart.DocumentDateValidFrom,
                             AUTH_NOTES = instrRatingEdPart.NotesAlt
                         };
-                    }).ToArray<object>();
+                    }).ToList<object>();
+
+            result = Utils.FillBlankData(result, 4);
+            return result;
         }
 
-        private object[] GetExaminerData(IEnumerable<PersonRatingDO> inspectorRatings)
+        private List<object> GetExaminerData(IEnumerable<PersonRatingDO> inspectorRatings)
         {
             var authorizationGroupId = this.nomRepository.GetNomValues("authorizationGroups")
                 .First(nv => nv.Code == "FC")
                 .NomValueId;
 
-            return inspectorRatings
+            var result = inspectorRatings
                 .Where(p => p.Authorization != null && p.Authorization.Code != "RTO" && p.Authorization.ParentValueId == authorizationGroupId)
                 .Select(p =>
                     {
@@ -354,7 +359,10 @@ namespace Gva.Api.WordTemplates
                             VALID_DATE = exRatingEdPart.DocumentDateValidFrom,
                             AUTH_NOTES = exRatingEdPart.NotesAlt
                         };
-                    }).ToArray<object>();
+                    }).ToList<object>();
+
+            result = Utils.FillBlankData(result, 8);
+            return result;
         }
 
         private List<object> GetMedCerts(IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)

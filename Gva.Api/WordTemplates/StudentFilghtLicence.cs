@@ -242,9 +242,9 @@ namespace Gva.Api.WordTemplates
                 }).ToArray<object>();
         }
 
-        private object[] GetRaitings(IEnumerable<PersonRatingDO> includedRatings)
+        private List<object> GetRaitings(IEnumerable<PersonRatingDO> includedRatings)
         {
-            return includedRatings.Select(r =>
+            var result = includedRatings.Select(r =>
                 {
                     PersonRatingEditionDO lastEdition = r.Editions.Last();
 
@@ -261,7 +261,10 @@ namespace Gva.Api.WordTemplates
                         ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                         VALID_DATE = lastEdition.DocumentDateValidTo
                     };
-                }).ToArray<object>();
+                }).ToList<object>();
+
+            result = Utils.FillBlankData(result, 3);
+            return result;
         }
 
         private object[] GetScools(IEnumerable<PersonRatingDO> includedRatings)

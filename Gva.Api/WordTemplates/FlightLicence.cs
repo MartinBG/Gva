@@ -337,7 +337,7 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetTRatings(IEnumerable<PersonRatingDO> includedRatings)
         {
-            return includedRatings.Select(r =>
+            var result = includedRatings.Select(r =>
             {
                 PersonRatingEditionDO lastEdition = r.Editions.Last();
 
@@ -355,11 +355,14 @@ namespace Gva.Api.WordTemplates
                     VALID_DATE = lastEdition.DocumentDateValidTo
                 };
             }).ToList<object>();
+
+            result = Utils.FillBlankData(result, 11);
+            return result;
         }
 
         private List<object> GetLRatings(IEnumerable<PersonRatingDO> includedRatings)
         {
-            return includedRatings.Select(r =>
+            var result = includedRatings.Select(r =>
             {
                 PersonRatingEditionDO lastEdition = r.Editions.Last();
 
@@ -375,6 +378,10 @@ namespace Gva.Api.WordTemplates
                     VALID_DATE = lastEdition.DocumentDateValidTo
                 };
             }).ToList<object>();
+
+
+            result = Utils.FillBlankData(result, 11);
+            return result;
         }
 
         private List<object> GetLicencePrivilege(string licenceTypeCode, PersonLicenceEditionDO edition)

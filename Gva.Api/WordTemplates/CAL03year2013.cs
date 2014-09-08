@@ -105,9 +105,9 @@ namespace Gva.Api.WordTemplates
             return json;
         }
 
-        private object[] GetRatings(IEnumerable<PersonRatingDO> includedRatings)
+        private List<object> GetRatings(IEnumerable<PersonRatingDO> includedRatings)
         {
-            return includedRatings
+            var result =  includedRatings
                 .Select(r =>
                 {
                     PersonRatingEditionDO lastEdition = r.Editions.Last();
@@ -127,7 +127,9 @@ namespace Gva.Api.WordTemplates
                         ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                         VALID_DATE = lastEdition.DocumentDateValidTo
                     };
-                }).ToArray<object>();
+                }).ToList<object>();
+            result = Utils.FillBlankData(result, 10);
+            return result;
         }
 
     }

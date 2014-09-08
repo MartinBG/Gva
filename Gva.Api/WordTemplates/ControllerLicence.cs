@@ -205,7 +205,7 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetRatings(IEnumerable<PersonRatingDO> includedRatings)
         {
-            return includedRatings
+            var result =  includedRatings
                 .Where(r => r.RatingClass != null || r.RatingType != null)
                 .GroupBy(r => string.Format(
                     "{0} {1}",
@@ -219,11 +219,14 @@ namespace Gva.Api.WordTemplates
                         DATE = g.Min(r => r.Editions.Last().DocumentDateValidFrom)
                     };
                 }).ToList<object>();
+
+            result = Utils.FillBlankData(result, 3);
+            return result;
         }
 
         private List<object> GetEndorsements(IEnumerable<PersonRatingDO> includedRatings)
         {
-            return includedRatings
+            var result =  includedRatings
                 .Where(r => r.Authorization != null)
                 .GroupBy(r => r.Authorization.Name)
                 .Select(g =>
@@ -234,11 +237,14 @@ namespace Gva.Api.WordTemplates
                         DATE = g.Min(r => r.Editions.Last().DocumentDateValidFrom)
                     };
                 }).ToList<object>();
+
+            result = Utils.FillBlankData(result, 3);
+            return result;
         }
 
         private List<object> GetEndorsements2(IEnumerable<PersonRatingDO> includedRatings)
         {
-            return includedRatings
+            var result =  includedRatings
                 .Where(r => r.StaffType.Alias == "ovd")
                 .Select(r =>
                 {
@@ -264,6 +270,9 @@ namespace Gva.Api.WordTemplates
                         };
                     }
                 }).ToList<object>();
+
+            result = Utils.FillBlankData(result, 9);
+            return result;
         }
 
         private object GetEngLevel(IEnumerable<PersonTrainingDO> includedTrainings)

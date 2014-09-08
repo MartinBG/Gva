@@ -152,7 +152,7 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetEndorsements(IEnumerable<PersonRatingDO> includedRatings)
         {
-            return includedRatings
+            var result =  includedRatings
                 .Where(r => r.Authorization != null)
                 .GroupBy(r => r.Authorization.Name)
                 .Select(g => new
@@ -160,6 +160,9 @@ namespace Gva.Api.WordTemplates
                         NAME = g.Key,
                         DATE = g.Min(r => r.Editions.Last().DocumentDateValidFrom)
                     }).ToList<object>();
+
+            result = Utils.FillBlankData(result, 4);
+            return result;
         }
 
         private object[] GetDocuments(string licenceTypeCode, IEnumerable<PersonTrainingDO> includedTrainings)
@@ -194,7 +197,7 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetEndorsements2(IEnumerable<PersonRatingDO> includedRatings)
         {
-            return includedRatings
+            var result = includedRatings
                 .Where(r => r.StaffType.Alias == "ovd")
                 .Select(r =>
                 {
@@ -211,6 +214,9 @@ namespace Gva.Api.WordTemplates
                         };
                     }
                 }).ToList<object>();
+
+            result = Utils.FillBlankData(result, 11);
+            return result;
         }
 
         private List<object> GetAbbreviations()
