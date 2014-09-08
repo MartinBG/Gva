@@ -1,4 +1,4 @@
-﻿<form name="loginForm" novalidate sc-validate="{}">
+﻿<form name="loginForm" novalidate ng-submit="login(form, username, password)" sc-validate="{}">
   <div class="modal-header">
     <h3 class="modal-title" l10n-text="common.login.modalTitle"></h3>
   </div>
@@ -7,7 +7,7 @@
       <div class="form-group col-sm-6" sc-has-error="username">
         <label class="control-label" l10n-text="common.login.username"></label>
         <sc-validation-error field-name="username" validations="{required: 'default'}"></sc-validation-error>
-        <sc-text ng-model="username" name="username" ng-required="true" autofocus="true"></sc-text>
+        <sc-text ng-model="username" name="username" ng-required="true"></sc-text>
       </div>
       <div class="form-group col-sm-6" sc-has-error="password">
         <label class="control-label" l10n-text="common.login.password"></label>
@@ -22,6 +22,9 @@
     </div>
   </div>
   <div class="modal-footer">
-    <sc-button type="submit" class="btn btn-primary" btn-click="login(loginForm)" text="common.login.loginBtn" icon="glyphicon-log-in"></sc-button>
+    <button type="submit" class="btn btn-primary" ng-disabled="submitting">
+      <span class="glyphicon" ng-class="{'glyphicon-loading': submitting, 'glyphicon-log-in': !submitting }"></span>
+      <span l10n-text="common.login.loginBtn"></span>
+    </button>
   </div>
 </form>
