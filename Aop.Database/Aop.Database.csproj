@@ -65,6 +65,8 @@
   <ItemGroup>
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
+    <Content Include="Create\Procedures\Tokens\spSetAopApplicationTokens.sql" />
+    <Content Include="Create\Procedures\Tokens\spSetAopApplicationUnitTokens.sql" />
     <Content Include="Create\Tables\AopApplications.sql" />
     <Content Include="Create\Tables\AopEmployers.sql" />
     <Content Include="Create\Tables\AopEmployerTypes.sql" />
@@ -74,7 +76,9 @@
     <Content Include="Create\Tables\AopApplicationCriteria.sql" />
     <Content Include="Create\Tables\AopApplicationObjects.sql" />
     <Content Include="Create\Tables\AopPortalDocRelations.sql" />
+    <Content Include="Create\Tables\Tokens\AopApplicationTokens.sql" />
     <Content Include="Create\Tables\Users\RoleClassifications.sql" />
+    <Content Include="Create\Views\vwAopApplicationUsers.sql" />
     <Content Include="Insert\AopCorrespondents.sql" />
     <Content Include="Insert\AopExcelConfig\ClassificationRelations.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
@@ -133,6 +137,7 @@
     <Content Include="Insert\AopApplicationCriteria.sql" />
     <Content Include="Insert\AopApplicationObjects.sql" />
     <Content Include="Insert\Docs\DocEntryTypes.sql" />
+    <Content Include="Insert\Users\RoleClassifications.sql" />
     <Content Include="Insert\Users\UserRoles.sql" />
     <Content Include="Insert\Users\Roles.sql" />
   </ItemGroup>

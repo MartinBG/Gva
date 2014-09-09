@@ -126,5 +126,12 @@ namespace Aop.Api.DataObjects
         public DocRelationDO NDDocRelation { get; set; }
         public DocRelationDO NDChecklistRelation { get; set; }
         public DocRelationDO NDReportRelation { get; set; }
+
+        #region Permissions
+
+        public bool CanRead { get; set; }
+        public bool CanEdit { get; set; }
+
+        #endregion
     }
 }

@@ -16,6 +16,9 @@ namespace Aop.Api.Models
             modelBuilder.Configurations.Add(new AopEmployerTypeMap());
             modelBuilder.Configurations.Add(new AopProcedureStatusMap());
             modelBuilder.Configurations.Add(new AopPortalDocRelationsMap());
+
+            modelBuilder.Configurations.Add(new AopApplicationTokenMap());
+            modelBuilder.Configurations.Add(new vwAopApplicationUserMap());
         }
     }
 }

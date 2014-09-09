@@ -3,12 +3,12 @@
   <div class="panel panel-default">
     <nav class="panel-heading">
       <div class="collapse navbar-collapse" id="menu-navigation" style="padding: 0px;">
-        <sc-button ng-show="!inEditMode" btn-click="enterEditMode()" text="apps.edit.edit" class="btn btn-default btn-sm" icon="glyphicon-edit"></sc-button>
-        <sc-button ng-show="inEditMode" name="saveBtn" btn-click="save()" text="apps.edit.save" class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk" ng-disabled="appForm.$pristine"></sc-button>
-        <sc-button ng-show="inEditMode" btn-click="exitEditMode()" text="apps.edit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
+        <sc-button ng-show="!inEditMode && app.flags.isVisibleEditCmd" btn-click="enterEditMode()" text="apps.edit.edit" class="btn btn-default btn-sm" icon="glyphicon-edit"></sc-button>
+        <sc-button ng-show="inEditMode && app.flags.isVisibleEditCmd" name="saveBtn" btn-click="save()" text="apps.edit.save" class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk" ng-disabled="appForm.$pristine"></sc-button>
+        <sc-button ng-show="inEditMode && app.flags.isVisibleEditCmd" btn-click="exitEditMode()" text="apps.edit.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-button>
 
         <div class="pull-right">
-          <sc-button ng-show="!inEditMode" btn-click="remove()" text="apps.edit.remove" class="btn btn-danger btn-sm" icon="glyphicon-remove"></sc-button>
+          <sc-button ng-show="!inEditMode && app.flags.isVisibleEditCmd" btn-click="remove()" text="apps.edit.remove" class="btn btn-danger btn-sm" icon="glyphicon-remove"></sc-button>
         </div>
       </div>
     </nav>
@@ -66,7 +66,7 @@
                 {{ app.stDocRelation.docRegUri}} {{app.stDocRelation.docDocTypeName}}: {{app.stDocRelation.docSubject }}
               </a>
             </div>
-            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode && app.flags.isVisibleEditCmd">
               <a sc-click="connectToDoc('stDoc')" ng-if="!app.stDocRelation.docRelationId" style="cursor: pointer;">свържи</a>
               <a sc-click="disconnectDoc(['stDocId', 'stChecklistId', 'stNoteId'])" ng-if="app.stDocRelation.docRelationId" style="cursor: pointer;">разкачи</a>&nbsp|
               <a sc-click="readFedForFirstStage()" ng-if="app.stDocRelation.docRelationId" style="cursor: pointer;">прочети .fed</a>
@@ -80,7 +80,7 @@
                 {{ app.stChecklistRelation.docRegUri}} {{app.stChecklistRelation.docDocTypeName}}: {{app.stChecklistRelation.docSubject }}
               </a>
             </div>
-            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode && app.flags.isVisibleEditCmd">
               <a sc-click="connectToDoc('stChecklist')" ng-if="!app.stChecklistRelation.docRelationId" style="cursor: pointer;">свържи</a>
               <a sc-click="disconnectDoc(['stChecklistId'])" ng-if="app.stChecklistRelation.docRelationId" style="cursor: pointer;">разкачи</a>&nbsp|
               <a sc-click="generateSTChecklist('new')" style="cursor: pointer;">нов</a>&nbsp|
@@ -96,7 +96,7 @@
                 {{ app.stNoteRelation.docRegUri}} {{app.stNoteRelation.docDocTypeName}}: {{app.stNoteRelation.docSubject }}
               </a>
             </div>
-            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode && app.flags.isVisibleEditCmd">
               <a sc-click="connectToDoc('stNote')" ng-if="!app.stNoteRelation.docRelationId" style="cursor: pointer;">свържи</a>
               <a sc-click="disconnectDoc(['stNoteId'])" ng-if="app.stNoteRelation.docRelationId" style="cursor: pointer;">разкачи</a>&nbsp|
               <a sc-click="generateSTNote()" ng-if="app.stChecklistRelation.docRelationId && !app.stNoteRelation.docRelationId" style="cursor: pointer;">генерирай</a>
@@ -159,7 +159,7 @@
                 {{ app.ndDocRelation.docRegUri}} {{app.ndDocRelation.docDocTypeName}}: {{app.ndDocRelation.docSubject }}
               </a>
             </div>
-            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode && app.flags.isVisibleEditCmd">
               <a sc-click="connectToDoc('ndDoc')" ng-if="!app.ndDocRelation.docRelationId" style="cursor: pointer;">свържи</a>
               <a sc-click="disconnectDoc(['ndDocId', 'ndChecklistId', 'ndReportId'])" ng-if="app.ndDocRelation.docRelationId" style="cursor: pointer;">разкачи</a>&nbsp|
               <a sc-click="readFedForSecondStage()" ng-if="app.ndDocRelation.docRelationId" style="cursor: pointer;">прочети .fed</a>
@@ -173,7 +173,7 @@
                 {{ app.ndChecklistRelation.docRegUri}} {{app.ndChecklistRelation.docDocTypeName}}: {{app.ndChecklistRelation.docSubject }}
               </a>
             </div>
-            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode && app.flags.isVisibleEditCmd">
               <a sc-click="connectToDoc('ndChecklist')" ng-if="!app.ndChecklistRelation.docRelationId" style="cursor: pointer;">свържи</a>
               <a sc-click="disconnectDoc(['ndChecklistId'])" ng-if="app.ndChecklistRelation.docRelationId" style="cursor: pointer;">разкачи</a>&nbsp|
               <a sc-click="generateNDChecklist('new')" style="cursor: pointer;">нов</a>&nbsp|
@@ -189,7 +189,7 @@
                 {{ app.ndReportRelation.docRegUri}} {{app.ndReportRelation.docDocTypeName}}: {{app.ndReportRelation.docSubject }}
               </a>
             </div>
-            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode">
+            <div class="form-group col-md-3 pull-right" ng-if="!inEditMode && app.flags.isVisibleEditCmd">
               <a sc-click="connectToDoc('ndReport')" ng-if="!app.ndReportRelation.docRelationId" style="cursor: pointer;">свържи</a>
               <a sc-click="disconnectDoc(['ndReportId'])" ng-if="app.ndReportRelation.docRelationId" style="cursor: pointer;">разкачи</a>&nbsp|
               <a sc-click="generateNDReport()" ng-if="app.ndChecklistRelation.docRelationId && !app.ndReportRelation.docRelationId" style="cursor: pointer;">генерирай</a>

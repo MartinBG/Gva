@@ -10,6 +10,9 @@ using Common.Api.UserContext;
 using Common.Api.Repositories;
 using Common.Linq;
 using Docs.Api.Models;
+using System.Data.SqlClient;
+using Common.Extensions;
+using Common.Api.Models;
 
 namespace Aop.Api.Repositories.Aop
 {
@@ -20,10 +23,33 @@ namespace Aop.Api.Repositories.Aop
         {
         }
 
-        public List<AopApp> GetApps(int limit, int offset, out int totalCount)
+        public void ExecSpSetAopApplicationTokens(int? aopApplicationId = null)
+        {
+            var parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("AopApplicationId", Helper.CastToSqlDbValue(aopApplicationId)));
+
+            this.ExecuteSqlCommand("spSetAopApplicationTokens @AopApplicationId", parameters);
+        }
+
+        public void ExecSpSetAopApplicationUnitTokens(int? aopApplicationId = null)
+        {
+            var parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("AopApplicationId", Helper.CastToSqlDbValue(aopApplicationId)));
+
+            this.ExecuteSqlCommand("spSetAopApplicationUnitTokens @AopApplicationId", parameters);
+        }
+
+        public List<AopApp> GetApps(
+            int limit,
+            int offset,
+            UnitUser unitUser,
+            ClassificationPermission readPermission,
+            out int totalCount)
         {
             System.Linq.Expressions.Expression<Func<AopApp, bool>> predicate = PredicateBuilder
                 .True<AopApp>();
+
+            predicate = predicate.And(e => e.vwAopApplicationUsers.Any(v => v.ClassificationPermissionId == readPermission.ClassificationPermissionId && v.UnitId == unitUser.UnitId));
 
             //if (!string.IsNullOrEmpty(displayName))
             //{
@@ -113,6 +139,19 @@ namespace Aop.Api.Repositories.Aop
         public AopEmployerType GetAopEmployerTypeByAlias(string alias)
         {
             return this.unitOfWork.DbContext.Set<AopEmployerType>().FirstOrDefault(e => e.Alias.ToLower() == alias.ToLower());
+        }
+
+        public List<vwAopApplicationUser> GetvwAopApplicationUsersForAppByUnitId(int aopApplicationId, UnitUser unitUser)
+        {
+            return this.unitOfWork.DbContext.Set<vwAopApplicationUser>()
+                .Include(e => e.ClassificationPermission)
+                .Where(e => e.UnitId == unitUser.UnitId && e.AopApplicationId == aopApplicationId)
+                .ToList();
+        }
+
+        public bool HasPermission(int unitId, int aopApplicationId, int permissionId)
+        {
+            return this.unitOfWork.DbContext.Set<vwAopApplicationUser>().Any(e => e.AopApplicationId == aopApplicationId && e.UnitId == unitId && e.ClassificationPermissionId == permissionId);
         }
     }
 }

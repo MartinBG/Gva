@@ -36,17 +36,20 @@ namespace Aop.Api.Controllers
         private UserContext userContext;
         private IUserRepository userRepository;
         private IDataGenerator dataGenerator;
+        private Docs.Api.Repositories.ClassificationRepository.IClassificationRepository classificationRepository;
 
         public AppController(IUnitOfWork unitOfWork,
             IAppRepository appRepository,
             IDocRepository docRepository,
             IUserRepository userRepository,
+            Docs.Api.Repositories.ClassificationRepository.IClassificationRepository classificationRepository,
             IDataGenerator dataGenerator)
         {
             this.unitOfWork = unitOfWork;
             this.appRepository = appRepository;
             this.docRepository = docRepository;
             this.userRepository = userRepository;
+            this.classificationRepository = classificationRepository;
             this.dataGenerator = dataGenerator;
         }
 
@@ -73,6 +76,9 @@ namespace Aop.Api.Controllers
 
                 this.unitOfWork.Save();
 
+                this.appRepository.ExecSpSetAopApplicationTokens(aopApplicationId: app.AopApplicationId);
+                this.appRepository.ExecSpSetAopApplicationUnitTokens(aopApplicationId: app.AopApplicationId);
+
                 transaction.Commit();
 
                 return Ok(new
@@ -91,13 +97,12 @@ namespace Aop.Api.Controllers
             string correspondentEmail = null
             )
         {
-            //? hot fix: load fist 1000 corrs, so the paging with datatable will work
-            limit = 1000;
-            offset = 0;
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+            ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
 
             int totalCount = 0;
 
-            var returnValue = this.appRepository.GetApps(limit, offset, out totalCount)
+            var returnValue = this.appRepository.GetApps(limit, offset, unitUser, readPermission, out totalCount)
                 .Select(e => new AppListItemDO(e))
                 .ToList();
 
@@ -141,6 +146,18 @@ namespace Aop.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetApp(int id)
         {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasReadPermission =
+                this.appRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasReadPermission)
+            {
+                return Unauthorized();
+            }
+
             AopApp app = this.appRepository.Find(id,
                 e => e.CreateUnit,
                 e => e.AopEmployer);
@@ -236,6 +253,17 @@ namespace Aop.Api.Controllers
 
             #endregion
 
+            #region Set permissions
+
+            List<vwAopApplicationUser> vwAopApplicationUsers = this.appRepository.GetvwAopApplicationUsersForAppByUnitId(id, unitUser);
+
+            returnValue.CanRead = vwAopApplicationUsers.Any(e => e.AopApplicationId == app.AopApplicationId && e.ClassificationPermission.Alias == "Read");
+
+            returnValue.CanEdit = vwAopApplicationUsers.Any(e => e.AopApplicationId == app.AopApplicationId && e.ClassificationPermission.Alias == "Edit");
+
+            #endregion
+
+
             return Ok(returnValue);
         }
 
@@ -243,6 +271,20 @@ namespace Aop.Api.Controllers
         [HttpPost]
         public IHttpActionResult UpdateApp(int id, AppDO app)
         {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasEditPermission =
+                this.appRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId) &&
+                this.appRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasEditPermission)
+            {
+                return Unauthorized();
+            }
+
             var oldApp = this.appRepository.Find(id);
 
             oldApp.EnsureForProperVersion(app.Version);
@@ -289,6 +331,9 @@ namespace Aop.Api.Controllers
 
             this.unitOfWork.Save();
 
+            this.appRepository.ExecSpSetAopApplicationTokens(aopApplicationId: oldApp.AopApplicationId);
+            this.appRepository.ExecSpSetAopApplicationUnitTokens(aopApplicationId: oldApp.AopApplicationId);
+
             return Ok(new
             {
                 err = "",
@@ -300,6 +345,20 @@ namespace Aop.Api.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteApp(int id)
         {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasEditPermission =
+                this.appRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId) &&
+                this.appRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasEditPermission)
+            {
+                return Unauthorized();
+            }
+
             this.appRepository.DeteleAopApp(id);
 
             this.unitOfWork.Save();
@@ -478,6 +537,20 @@ namespace Aop.Api.Controllers
         [HttpPost]
         public IHttpActionResult ReadFedForFirstStage(int id)
         {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasEditPermission =
+                this.appRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId) &&
+                this.appRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasEditPermission)
+            {
+                return Unauthorized();
+            }
+
             AopApp app = this.appRepository.Find(id);
 
             if (app.STDocId.HasValue)
@@ -582,6 +655,20 @@ namespace Aop.Api.Controllers
         [HttpPost]
         public IHttpActionResult ReadFedForSecondStage(int id)
         {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasEditPermission =
+                this.appRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId) &&
+                this.appRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasEditPermission)
+            {
+                return Unauthorized();
+            }
+
             AopApp app = this.appRepository.Find(id);
 
             if (app.STDocId.HasValue)

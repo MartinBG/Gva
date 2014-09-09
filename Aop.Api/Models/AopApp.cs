@@ -10,6 +10,11 @@ namespace Aop.Api.Models
 {
     public partial class AopApp
     {
+        public AopApp()
+        {
+            this.vwAopApplicationUsers = new List<vwAopApplicationUser>();
+        }
+
         public int AopApplicationId { get; set; }
         public Nullable<int> DocId { get; set; }
         public int CreateUnitId { get; set; }
@@ -61,6 +66,8 @@ namespace Aop.Api.Models
         public virtual Doc NDChecklist { get; set; }
         public virtual Doc NDReport { get; set; }
         public virtual Common.Api.Models.Unit CreateUnit { get; set; }
+
+        public virtual ICollection<vwAopApplicationUser> vwAopApplicationUsers { get; set; }
 
         public void EnsureForProperVersion(byte[] version)
         {

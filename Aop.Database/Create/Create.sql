@@ -5,6 +5,8 @@ GO
 -- Tables
 ---------------------------------------------------------------
 
+
+
 :r $(rootPath)"\Tables\Users\RoleClassifications.sql"
 
 :r $(rootPath)"\Tables\AopApplicationCriteria.sql"
@@ -17,6 +19,21 @@ GO
 :r $(rootPath)"\Tables\AopEmployers.sql"
 :r $(rootPath)"\Tables\AopApplications.sql"
 :r $(rootPath)"\Tables\AopPortalDocRelations.sql"
+
+--Tokens
+:r $(rootPath)"\Tables\Tokens\AopApplicationTokens.sql"
+
+---------------------------------------------------------------
+-- Views
+---------------------------------------------------------------
+
+:r $(rootPath)"\Views\vwAopApplicationUsers.sql"
+
+---------------------------------------------------------------
+-- Procedures
+---------------------------------------------------------------
+:r $(rootPath)"\Procedures\Tokens\spSetAopApplicationTokens.sql"
+:r $(rootPath)"\Procedures\Tokens\spSetAopApplicationUnitTokens.sql"
 
 ---------------------------------------------------------------
 -- Diagram
@@ -35,7 +52,7 @@ GO
 :r $(rootPath)\"..\Insert\AopExcelConfig\IrregularityTypes.sql"
 :r $(rootPath)\"..\Insert\AopExcelConfig\Classifications.sql"
 :r $(rootPath)\"..\Insert\AopExcelConfig\ClassificationRelations.sql"
-:r $(rootPath)\"..\Insert\AopExcelConfig\UnitClassifications.sql"
+--:r $(rootPath)\"..\Insert\AopExcelConfig\UnitClassifications.sql"
 :r $(rootPath)\"..\Insert\AopExcelConfig\DocTypeUnitRoles.sql"
 :r $(rootPath)\"..\Insert\AopExcelConfig\DocTypeClassifications.sql"
 :r $(rootPath)\"..\Insert\AopExcelConfig\ElectronicServiceStages.sql"
@@ -58,3 +75,4 @@ GO
 
 :r $(rootPath)\"..\Insert\Users\Roles.sql"
 :r $(rootPath)\"..\Insert\Users\UserRoles.sql"
+:r $(rootPath)\"..\Insert\Users\RoleClassifications.sql"
