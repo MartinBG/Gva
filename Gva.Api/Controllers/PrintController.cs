@@ -61,7 +61,9 @@ namespace Gva.Api.Controllers
             var wordTemplate = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
                 .SingleOrDefault(t => t.Name == templateName);
 
-            var memoryStream = new MemoryStream(wordTemplate.Template); // no need to dispose the memory stream as StreamContent handles that
+            var memoryStream = new MemoryStream();  // no need to dispose the memory stream as StreamContent handles that
+            memoryStream.Write(wordTemplate.Template, 0, wordTemplate.Template.Length);
+
             new WordTemplateTransformer(memoryStream).Transform(json);
             memoryStream.Position = 0;
 
