@@ -10,6 +10,7 @@ CREATE TABLE [dbo].[LotParts] (
     [CreatorId]     INT            NOT NULL,
     [CreateDate]    DATETIME2      NOT NULL,
     CONSTRAINT [PK_LotParts]             PRIMARY KEY ([LotPartId]),
+    CONSTRAINT [UQ_LotParts_LotId_Index] UNIQUE      ([LotId], [Index]),
     CONSTRAINT [FK_LotParts_LotSetParts] FOREIGN KEY ([LotSetPartId]) REFERENCES [dbo].[LotSetParts] ([LotSetPartId]),
     CONSTRAINT [FK_LotParts_Lots]        FOREIGN KEY ([LotId])        REFERENCES [dbo].[Lots]        ([LotId]),
     CONSTRAINT [FK_LotParts_Users]       FOREIGN KEY ([CreatorId])    REFERENCES [dbo].[Users]       ([UserId])

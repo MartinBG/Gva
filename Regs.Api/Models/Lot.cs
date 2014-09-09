@@ -63,16 +63,14 @@ namespace Regs.Api.Models
             var currentDate = DateTime.Now;
             this.ModifyDate = currentDate;
 
+            int partIndex = this.NextIndex++;
             string expandedPath;
-            int partIndex;
             if (path.EndsWith("/*"))
             {
-                partIndex = this.NextIndex++;
                 expandedPath = path.Replace("*", partIndex.ToString());
             }
             else
             {
-                partIndex = 0;
                 expandedPath = path;
             }
 
