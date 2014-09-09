@@ -267,10 +267,16 @@ namespace Gva.MigrationTool.Sets
 
         private IList<int> getOrganizationIds()
         {
-            return this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.FIRM")
-                .Materialize(r => r.Field<int>("ID"))
-                .Where(id => new int[] { 203, 206, 317, 367, 447, 467, 561, 563, 565, 567, 568, 742, 807, 833, 1432 }.Contains(id))
-                .ToList();
+            var ids = this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.FIRM")
+                .Materialize(r => r.Field<int>("ID"));
+
+            if (Migration.IsPartial)
+            {
+                ids = ids
+                    .Where(id => new int[] { 203, 206, 317, 367, 447, 467, 561, 563, 565, 567, 568, 742, 807, 833, 1432 }.Contains(id));
+            }
+
+            return ids.ToList();
         }
 
         private List<NomValue> getOrgCaseTypes(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms)

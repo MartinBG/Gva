@@ -505,13 +505,19 @@ namespace Gva.MigrationTool.Sets
 
         private IList<string> getAircraftFmIds()
         {
-            return this.sqlConn.CreateStoreCommand("select n_Act_ID from Acts")
-                .Materialize(r => r.Field<string>("n_Act_ID"))
-                .Where(id =>
-                    id == "1286" || //LZ-TIM
-                    id == "1303" || //LZ-YUP
-                    id == "1473") //LZ-KEC
-                .ToList();
+            var ids = this.sqlConn.CreateStoreCommand("select n_Act_ID from Acts")
+                .Materialize(r => r.Field<string>("n_Act_ID"));
+
+            if (Migration.IsPartial)
+            {
+                ids = ids
+                    .Where(id =>
+                        id == "1286" || //LZ-TIM
+                        id == "1303" || //LZ-YUP
+                        id == "1473"); //LZ-KEC
+            }
+
+            return ids.ToList();
         }
 
         private JObject getAircraftDataFM(string aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
@@ -1003,12 +1009,18 @@ namespace Gva.MigrationTool.Sets
 
         private IList<int> getAircraftApexIds()
         {
-            return this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.AIRCRAFT")
-                .Materialize(r => r.Field<int>("ID"))
-                .Where(id =>
-                    id == 1286 || //LZ-TIM
-                    id == 1303) //LZ-YUP
-                .ToList();
+            var ids = this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.AIRCRAFT")
+                .Materialize(r => r.Field<int>("ID"));
+
+            if (Migration.IsPartial)
+            {
+                ids = ids
+                    .Where(id =>
+                        id == 1286 || //LZ-TIM
+                        id == 1303); //LZ-YUP
+            }
+
+            return ids.ToList();
         }
 
         private JObject getAircraftData(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
