@@ -1,0 +1,21 @@
+﻿<sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+  <sc-filter type="text" name="name" class="col-sm-3" removable="false" label="noms.units.search.name"></sc-filter>
+  <sc-filter type="nomenclature" name="unitTypeId" class="col-sm-3" removable="false" alias="unitType" load="false" mode="id" label="noms.units.search.unitTypeId"></sc-filter>
+  <sc-search-button action="search()" text="noms.units.search.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
+  <sc-search-button action="newUnit()" text="noms.units.search.new" icon="glyphicon glyphicon-plus"></sc-search-button>
+  <sc-search-button action="add"></sc-search-button>
+</sc-search>
+
+<sc-datatable items="units" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
+    <sc-button name="viewButton" btn-click="editUnit(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column data="parentName" title="noms.units.search.parentName">
+  </sc-column>
+   <sc-column data="name" title="noms.units.search.name">
+  </sc-column>
+  <sc-column data="unitTypeName" title="noms.units.search.unitTypeName">
+  </sc-column>
+  <sc-column data="isActive? 'Да' : 'Не'" title="noms.units.search.isActive">
+  </sc-column>
+</sc-datatable>

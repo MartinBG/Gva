@@ -1,0 +1,25 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+
+  <div class="well-sm panel-body">
+    <div class="row">
+      <sc-field type="nomenclature" alias="'unit'" mode="id" ng-model="model.parentId" l10n-text="noms.units.form.unit" class="col-sm-4"></sc-field>
+    </div>
+
+    <div class="row">
+      <sc-field type="text" ng-model="model.name" l10n-text="noms.units.form.name" class="col-sm-4"></sc-field>
+    </div>
+
+    <div class="row">
+      <sc-field type="nomenclature" alias="'unitType'" mode="id" ng-model="model.unitTypeId" l10n-text="noms.units.form.unitType" class="col-sm-4" ng-required="true"></sc-field>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-4">
+        <label class="control-label" l10n-text="noms.units.form.isActive"></label>
+        <input type="checkbox" ng-model="model.isActive"/>
+      </div>
+    </div>
+  </div>
+
+</ng-form>
+

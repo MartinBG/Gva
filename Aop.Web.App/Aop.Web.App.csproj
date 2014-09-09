@@ -81,6 +81,18 @@
     <Content Include="js\ems\docs\forms\docView\task.html" />
     <Content Include="js\ems\docs\views\docsCase.html" />
     <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
+    <Content Include="js\ems\ems.js" />
+    <Content Include="js\ems\ems_bg-bg.js" />
+    <Content Include="js\ems\noms\forms\unitData.html" />
+    <Content Include="js\ems\noms\resources\units.js" />
+    <Content Include="js\ems\noms\views\unitsEdit.html" />
+    <Content Include="js\ems\noms\views\unitsEditCtrl.js" />
+    <Content Include="js\ems\noms\views\unitsNew.html" />
+    <Content Include="js\ems\noms\views\unitsNewCtrl.js" />
+    <Content Include="js\ems\noms\views\unitsSearch.html" />
+    <Content Include="js\ems\noms\views\unitsSearchCtrl.js" />
+    <Content Include="js\ems\noms\views\nomsCtrl.js" />
+    <Content Include="js\ems\noms\views\noms.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".editorconfig" />
@@ -92,6 +104,7 @@
     <None Include="word_templates\doklad_template.docx" />
     <None Include="word_templates\stanovishte_template.docx" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

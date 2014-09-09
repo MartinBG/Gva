@@ -76,10 +76,12 @@
     <Compile Include="Controllers\AppEmpController.cs" />
     <Compile Include="Controllers\AppNomController.cs" />
     <Compile Include="Controllers\ChecklistController.cs" />
+    <Compile Include="Controllers\AopNomController.cs" />
     <Compile Include="DataObjects\Aop\AopEmployerDO.cs" />
     <Compile Include="DataObjects\Aop\AppDO.cs" />
     <Compile Include="DataObjects\Aop\AppListItemDO.cs" />
     <Compile Include="AopApiModule.cs" />
+    <Compile Include="DataObjects\UnitDO.cs" />
     <Compile Include="Fedv5\Classes\address.cs" />
     <Compile Include="Fedv5\Classes\addresses.cs" />
     <Compile Include="Fedv5\Classes\attachments.cs" />

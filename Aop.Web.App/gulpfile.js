@@ -29,7 +29,7 @@ var config = {
   app: function () {
     return utils.uniqueQueue(
         gulp.src('js/app.js', { base: '.' }),
-        gulp.src('../Common.Web.App/js/ems/ems.js', { base: '../Common.Web.App/' }),
+        gulp.src('js/ems/ems.js'),
         gulp.src('js/**/*.js', { base: '.' }),
         gulp.src('../Common.Web.App/js/**/*.js', { base: '../Common.Web.App/' })
     );
