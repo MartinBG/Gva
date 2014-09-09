@@ -71,7 +71,7 @@
           </tr>
           <tr ng-repeat="inspection in inspections">
             <td ng-show="!form.$readonly">
-              <sc-button class="btn btn-xs btn-danger" btn-click="deleteInspection(inspection)" icon="glyphicon-remove"></sc-button>
+              <sc-button class="btn btn-xs btn-danger" btn-click="deleteInspection(inspection.partIndex)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{inspection.startDate | date:'mediumDate'}}</td>
             <td>{{inspection.endDate | date:'mediumDate'}}</td>

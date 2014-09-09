@@ -100,11 +100,11 @@
       $scope.model.part.inspections.splice(index, 1);
 
       $scope.inspections = _.filter($scope.inspections, function (i) {
-        return i.partIndex === inspectionPartIndex;
+        return i.partIndex !== inspectionPartIndex;
       });
 
       $scope.inspectionsDisparities = _.filter($scope.inspectionsDisparities, function (d) {
-        return d.inspectionPartIndex === inspectionPartIndex;
+        return d.inspectionPartIndex !== inspectionPartIndex;
       });
     };
 

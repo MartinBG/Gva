@@ -19,7 +19,7 @@
 
     fillDetailDisparities();
 
-    $scope.insertinspectionDetails = function () {
+    $scope.insertInspectionDetails = function () {
       var query = {};
       if ($scope.setPart === 'aircraft') {
         query = {

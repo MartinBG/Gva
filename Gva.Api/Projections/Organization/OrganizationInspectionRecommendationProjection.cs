@@ -20,7 +20,6 @@ namespace Gva.Api.Projections.Organization
         public override IEnumerable<GvaViewOrganizationInspectionRecommendation> Execute(PartCollection parts)
         {
             var recommendations = parts.GetAll("organizationRecommendation");
-            var inspections = parts.GetAll("organizationInspection");
             List<GvaViewOrganizationInspectionRecommendation> inspectionsToRecommendation = new List<GvaViewOrganizationInspectionRecommendation>();
             foreach (var recommendation in recommendations)
             {
