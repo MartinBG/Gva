@@ -72,10 +72,22 @@ namespace Common.Data
             {
                 this.context.ChangeTracker.DetectChanges();
 
-                foreach (ObjectStateEntry entry in ((IObjectContextAdapter)this.context).ObjectContext.ObjectStateManager
-                                                 .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
-                                                 .Where(e => !e.IsRelationship))
+                // we evaluate the entries in advance because some of them may become detached
+                // as others before them are deleted (in case they have dependent key)
+                var addedOrModifiedEntityEntries =
+                    ((IObjectContextAdapter)this.context).ObjectContext.ObjectStateManager
+                    .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
+                    .Where(e => !e.IsRelationship)
+                    .ToList();
+
+                foreach (ObjectStateEntry entry in addedOrModifiedEntityEntries)
                 {
+                    // skip if a parent entity was deleted and a dependent entity becomes detached
+                    if (entry.State == EntityState.Detached)
+                    {
+                        continue;
+                    }
+
                     if (entry.RelationshipManager.GetAllRelatedEnds()
                         .Any(re =>
                             re is EntityReference &&
