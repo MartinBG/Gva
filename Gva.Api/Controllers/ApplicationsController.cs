@@ -278,6 +278,8 @@ namespace Gva.Api.Controllers
 
                 this.unitOfWork.Save();
 
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
                 transaction.Commit();
 
                 return Ok();
@@ -350,6 +352,8 @@ namespace Gva.Api.Controllers
                 this.applicationRepository.AddGvaAppLotFile(gvaAppLotFile);
 
                 this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
 
                 transaction.Commit();
 
@@ -578,6 +582,8 @@ namespace Gva.Api.Controllers
 
                 this.unitOfWork.Save();
 
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
                 transaction.Commit();
 
                 return Ok(new
@@ -609,18 +615,24 @@ namespace Gva.Api.Controllers
          Route(@"appPart/{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
         public IHttpActionResult PostApplicationPart(string path, int lotId, JObject application)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            PartVersion partVersion = lot.UpdatePart(path, application.Get<JObject>("part"), userContext);
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                PartVersion partVersion = lot.UpdatePart(path, application.Get<JObject>("part"), this.userContext);
 
-            this.fileRepository.AddFileReferences(partVersion, application.GetItems<FileDO>("files"));
-            this.applicationRepository.AddApplicationRefs(partVersion.Part, application.GetItems<ApplicationNomDO>("applications"));
+                this.fileRepository.AddFileReferences(partVersion, application.GetItems<FileDO>("files"));
+                this.applicationRepository.AddApplicationRefs(partVersion.Part, application.GetItems<ApplicationNomDO>("applications"));
 
-            lot.Commit(userContext, lotEventDispatcher);
+                lot.Commit(this.userContext, lotEventDispatcher);
 
-            this.unitOfWork.Save();
+                this.unitOfWork.Save();
 
-            return Ok();
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
+            }
         }
 
         [Route("link")]

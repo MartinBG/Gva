@@ -6,6 +6,7 @@ using Gva.Api.Repositories.ApplicationRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 using System;
+using Common.Api.UserContext;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
@@ -17,8 +18,11 @@ namespace Gva.Api.Controllers.Aircrafts
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
-            : base("aircraftParts", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher) { }
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
+            : base("aircraftParts", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+        {
+        }
 
         [Route("new")]
         public IHttpActionResult GetNewPart()

@@ -27,6 +27,7 @@ namespace Gva.Api.Controllers.Persons
         private IApplicationRepository applicationRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private INomRepository nomRepository;
+        private UserContext userContext;
 
         public PersonLicencesController(
             IUnitOfWork unitOfWork,
@@ -34,8 +35,9 @@ namespace Gva.Api.Controllers.Persons
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
-            INomRepository nomRepository)
-            : base("licences", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
+            INomRepository nomRepository,
+            UserContext userContext)
+            : base("licences", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
             this.path = "licences";
             this.unitOfWork = unitOfWork;
@@ -43,6 +45,7 @@ namespace Gva.Api.Controllers.Persons
             this.applicationRepository = applicationRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.nomRepository = nomRepository;
+            this.userContext = userContext;
         }
 
         [Route("new")]
@@ -94,44 +97,56 @@ namespace Gva.Api.Controllers.Persons
 
         public override IHttpActionResult PostNewPart(int lotId, ApplicationPartVersionDO<PersonLicenceDO> licence)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(this.path + "/*", JObject.FromObject(licence.Part), userContext);
+                PartVersion partVersion = lot.CreatePart(this.path + "/*", JObject.FromObject(licence.Part), this.userContext);
 
-            this.applicationRepository.AddApplicationRefs(partVersion.Part, licence.Part.Editions[0].Applications);
+                this.applicationRepository.AddApplicationRefs(partVersion.Part, licence.Part.Editions[0].Applications);
 
-            lot.Commit(userContext, this.lotEventDispatcher);
+                lot.Commit(this.userContext, this.lotEventDispatcher);
 
-            this.unitOfWork.Save();
+                this.unitOfWork.Save();
 
-            return Ok(new ApplicationPartVersionDO<PersonLicenceDO>(partVersion));
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok(new ApplicationPartVersionDO<PersonLicenceDO>(partVersion));
+            }
         }
 
         public override IHttpActionResult PostPart(int lotId, int partIndex, ApplicationPartVersionDO<PersonLicenceDO> licence)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            var lastEdition = licence.Part.Editions.Last();
-            if (!lastEdition.Index.HasValue)
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                lastEdition.Index = licence.Part.NextIndex;
-                licence.Part.NextIndex++;
+                var lot = this.lotRepository.GetLotIndex(lotId);
+
+                var lastEdition = licence.Part.Editions.Last();
+                if (!lastEdition.Index.HasValue)
+                {
+                    lastEdition.Index = licence.Part.NextIndex;
+                    licence.Part.NextIndex++;
+                }
+
+                var partVersion = lot.UpdatePart(
+                    string.Format("{0}/{1}", this.path, partIndex),
+                    JObject.FromObject(licence.Part),
+                    this.userContext);
+
+                this.applicationRepository.AddApplicationRefs(partVersion.Part, lastEdition.Applications);
+
+                lot.Commit(this.userContext, this.lotEventDispatcher);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok(new ApplicationPartVersionDO<PersonLicenceDO>(partVersion));
             }
-
-            var licenceRartVersion = lot.UpdatePart(
-                string.Format("{0}/{1}", this.path, partIndex),
-                JObject.FromObject(licence.Part),
-                userContext);
-
-            this.applicationRepository.AddApplicationRefs(licenceRartVersion.Part, lastEdition.Applications);
-
-            lot.Commit(userContext, this.lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            return Ok(new ApplicationPartVersionDO<PersonLicenceDO>(licenceRartVersion));
         }
 
         [Route("lastLicenceNumber")]

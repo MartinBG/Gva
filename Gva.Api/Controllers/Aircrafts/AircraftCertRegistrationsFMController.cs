@@ -25,14 +25,16 @@ namespace Gva.Api.Controllers.Aircrafts
         private IApplicationRepository applicationRepository;
         private IUnitOfWork unitOfWork;
         private ILotEventDispatcher lotEventDispatcher;
+        private UserContext userContext;
 
         public AircraftCertRegistrationsFMController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
-            : base("aircraftCertRegistrationsFM", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
+            : base("aircraftCertRegistrationsFM", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
             this.path = "aircraftCertRegistrationsFM";
             this.lotRepository = lotRepository;
@@ -40,6 +42,7 @@ namespace Gva.Api.Controllers.Aircrafts
             this.applicationRepository = applicationRepository;
             this.unitOfWork = unitOfWork;
             this.lotEventDispatcher = lotEventDispatcher;
+            this.userContext = userContext;
         }
 
         [Route("new")]
@@ -94,25 +97,32 @@ namespace Gva.Api.Controllers.Aircrafts
 
         public override IHttpActionResult DeletePart(int lotId, int partIndex)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), userContext);
-
-            this.fileRepository.DeleteFileReferences(partVersion);
-            this.applicationRepository.DeleteApplicationRefs(partVersion);
-
-            var registrations = this.lotRepository.GetLotIndex(lotId).Index.GetParts(this.path).ToList();
-            if (registrations.Count > 0)
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                var lastRegistration = registrations.FirstOrDefault();
-                lastRegistration.Content.Property("isCurrent").Value = true;
-                lot.UpdatePart(this.path + "/" + lastRegistration.Part.Index, lastRegistration.Content, userContext);
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
+
+                this.fileRepository.DeleteFileReferences(partVersion);
+                this.applicationRepository.DeleteApplicationRefs(partVersion);
+
+                var registrations = this.lotRepository.GetLotIndex(lotId).Index.GetParts(this.path).ToList();
+                if (registrations.Count > 0)
+                {
+                    var lastRegistration = registrations.FirstOrDefault();
+                    lastRegistration.Content.Property("isCurrent").Value = true;
+                    lot.UpdatePart(this.path + "/" + lastRegistration.Part.Index, lastRegistration.Content, this.userContext);
+                }
+
+                lot.Commit(this.userContext, this.lotEventDispatcher);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
             }
-
-            lot.Commit(userContext, this.lotEventDispatcher);
-            this.unitOfWork.Save();
-
-            return Ok();
         }
 
         private RegistrationViewDO CreateRegistrationView(IEnumerable<PartVersion> registrations, IEnumerable<PartVersion> airworthinesses, int? regPartIndex)

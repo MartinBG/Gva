@@ -26,6 +26,7 @@ namespace Gva.Api.Controllers.Persons
         private IApplicationRepository applicationRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private INomRepository nomRepository;
+        private UserContext userContext;
 
         public PersonRatingsController(
             IUnitOfWork unitOfWork,
@@ -33,8 +34,9 @@ namespace Gva.Api.Controllers.Persons
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
-            INomRepository nomRepository)
-            : base("ratings", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
+            INomRepository nomRepository,
+            UserContext userContext)
+            : base("ratings", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
             this.path = "ratings";
             this.unitOfWork = unitOfWork;
@@ -42,6 +44,7 @@ namespace Gva.Api.Controllers.Persons
             this.applicationRepository = applicationRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.nomRepository = nomRepository;
+            this.userContext = userContext;
         }
 
         [Route("new")]
@@ -93,44 +96,56 @@ namespace Gva.Api.Controllers.Persons
 
         public override IHttpActionResult PostNewPart(int lotId, ApplicationPartVersionDO<PersonRatingDO> rating)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(path + "/*", JObject.FromObject(rating.Part), userContext);
+                PartVersion partVersion = lot.CreatePart(path + "/*", JObject.FromObject(rating.Part), this.userContext);
 
-            this.applicationRepository.AddApplicationRefs(partVersion.Part, rating.Part.Editions[0].Applications);
+                this.applicationRepository.AddApplicationRefs(partVersion.Part, rating.Part.Editions[0].Applications);
 
-            lot.Commit(userContext, lotEventDispatcher);
+                lot.Commit(this.userContext, lotEventDispatcher);
 
-            this.unitOfWork.Save();
+                this.unitOfWork.Save();
 
-            return Ok(new ApplicationPartVersionDO<PersonRatingDO>(partVersion));
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok(new ApplicationPartVersionDO<PersonRatingDO>(partVersion));
+            }
         }
 
         public override IHttpActionResult PostPart(int lotId, int partIndex, ApplicationPartVersionDO<PersonRatingDO> rating)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            var lastEdition = rating.Part.Editions.Last();
-            if (!lastEdition.Index.HasValue)
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                lastEdition.Index = rating.Part.NextIndex;
-                rating.Part.NextIndex++;
+                var lot = this.lotRepository.GetLotIndex(lotId);
+
+                var lastEdition = rating.Part.Editions.Last();
+                if (!lastEdition.Index.HasValue)
+                {
+                    lastEdition.Index = rating.Part.NextIndex;
+                    rating.Part.NextIndex++;
+                }
+
+                var partVersion = lot.UpdatePart(
+                    string.Format("{0}/{1}", this.path, partIndex),
+                    JObject.FromObject(rating.Part),
+                    this.userContext);
+
+                this.applicationRepository.AddApplicationRefs(partVersion.Part, lastEdition.Applications);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok(new ApplicationPartVersionDO<PersonRatingDO>(partVersion));
             }
-
-            var ratingRartVersion = lot.UpdatePart(
-                string.Format("{0}/{1}", this.path, partIndex),
-                JObject.FromObject(rating.Part),
-                userContext);
-
-            this.applicationRepository.AddApplicationRefs(ratingRartVersion.Part, lastEdition.Applications);
-
-            lot.Commit(userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            return Ok(new ApplicationPartVersionDO<PersonRatingDO>(ratingRartVersion));
         }
     }
 }

@@ -6,6 +6,7 @@ using Gva.Api.Repositories.ApplicationRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 using System.Collections.Generic;
+using Common.Api.UserContext;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
@@ -20,8 +21,9 @@ namespace Gva.Api.Controllers.Aircrafts
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
-            : base("inspections", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
+            : base("inspections", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;

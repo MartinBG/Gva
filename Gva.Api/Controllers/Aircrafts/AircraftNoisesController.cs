@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
@@ -17,8 +18,9 @@ namespace Gva.Api.Controllers.Aircrafts
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
-            : base("aircraftCertNoises", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher) { }
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
+            : base("aircraftCertNoises", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext) { }
 
         [Route("new")]
         public IHttpActionResult GetNewCertNoise()

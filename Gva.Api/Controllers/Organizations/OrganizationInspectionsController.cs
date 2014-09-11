@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Organizations;
@@ -23,8 +24,9 @@ namespace Gva.Api.Controllers.Organizations
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
-            IOrganizationRepository organizationRepository)
-            : base("organizationInspections", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
+            IOrganizationRepository organizationRepository,
+            UserContext userContext)
+            : base("organizationInspections", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;

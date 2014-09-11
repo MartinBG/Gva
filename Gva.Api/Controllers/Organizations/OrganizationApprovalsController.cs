@@ -7,6 +7,7 @@ using Gva.Api.Repositories.OrganizationRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 using System.Collections.Generic;
+using Common.Api.UserContext;
 
 namespace Gva.Api.Controllers.Organizations
 {
@@ -24,8 +25,9 @@ namespace Gva.Api.Controllers.Organizations
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
-            IOrganizationRepository organizationRepository)
-            : base("organizationApprovals", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
+            IOrganizationRepository organizationRepository,
+            UserContext userContext)
+            : base("organizationApprovals", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;

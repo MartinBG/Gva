@@ -6,6 +6,7 @@ using Gva.Api.Repositories.ApplicationRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 using Common.Api.Repositories.NomRepository;
+using Common.Api.UserContext;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
@@ -20,8 +21,9 @@ namespace Gva.Api.Controllers.Aircrafts
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
-            INomRepository nomRepository)
-            : base("aircraftCertAirworthinessesFM", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
+            INomRepository nomRepository,
+            UserContext userContext)
+            : base("aircraftCertAirworthinessesFM", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
         }

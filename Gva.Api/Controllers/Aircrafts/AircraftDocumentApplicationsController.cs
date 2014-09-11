@@ -26,14 +26,16 @@ namespace Gva.Api.Controllers.Aircrafts
         private IApplicationRepository applicationRepository;
         private IUnitOfWork unitOfWork;
         private ILotEventDispatcher lotEventDispatcher;
+        private UserContext userContext;
 
         public AircraftDocumentApplicationsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
-            : base("aircraftDocumentApplications", unitOfWork, lotRepository, fileRepository, lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
+            : base("aircraftDocumentApplications", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.path = "aircraftDocumentApplications";
             this.lotRepository = lotRepository;
@@ -41,6 +43,7 @@ namespace Gva.Api.Controllers.Aircrafts
             this.applicationRepository = applicationRepository;
             this.unitOfWork = unitOfWork;
             this.lotEventDispatcher = lotEventDispatcher;
+            this.userContext = userContext;
         }
 
         [Route("new")]
@@ -53,14 +56,13 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                UserContext userContext = this.Request.GetUserContext();
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                PartVersion partVersion = lot.CreatePart(path + "/*", JObject.FromObject(application.Part), userContext);
+                PartVersion partVersion = lot.CreatePart(path + "/*", JObject.FromObject(application.Part), this.userContext);
 
                 this.fileRepository.AddFileReferences(partVersion, application.Files);
 
-                lot.Commit(userContext, lotEventDispatcher);
+                lot.Commit(this.userContext, lotEventDispatcher);
 
                 GvaApplication gvaApplication = new GvaApplication()
                 {
@@ -70,28 +72,36 @@ namespace Gva.Api.Controllers.Aircrafts
 
                 applicationRepository.AddGvaApplication(gvaApplication);
 
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
                 transaction.Commit();
             }
-
-            this.unitOfWork.Save();
 
             return Ok();
         }
 
         public override IHttpActionResult DeletePart(int lotId, int partIndex)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), userContext);
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
 
-            this.fileRepository.DeleteFileReferences(partVersion);
-            this.applicationRepository.DeleteGvaApplication(partVersion.PartId);
+                this.fileRepository.DeleteFileReferences(partVersion);
+                this.applicationRepository.DeleteGvaApplication(partVersion.PartId);
 
-            lot.Commit(userContext, lotEventDispatcher);
+                lot.Commit(this.userContext, lotEventDispatcher);
 
-            this.unitOfWork.Save();
+                this.unitOfWork.Save();
 
-            return Ok();
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
+            }
         }
     }
 }

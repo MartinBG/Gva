@@ -21,72 +21,93 @@ namespace Gva.Api.Controllers
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
         private ILotEventDispatcher lotEventDispatcher;
+        private UserContext userContext;
 
         public GvaApplicationPartController(
             string path,
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
         {
             this.path = path;
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
             this.lotEventDispatcher = lotEventDispatcher;
+            this.userContext = userContext;
         }
 
         [Route("")]
         [Validate]
         public virtual IHttpActionResult PostNewPart(int lotId, ApplicationPartVersionDO<T> partVersionDO)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
 
-            PartVersion partVersion = lot.CreatePart(this.path + "/*", JObject.FromObject(partVersionDO.Part), userContext);
+                PartVersion partVersion = lot.CreatePart(this.path + "/*", JObject.FromObject(partVersionDO.Part), this.userContext);
 
-            this.applicationRepository.AddApplicationRefs(partVersion.Part, partVersionDO.Applications);
+                this.applicationRepository.AddApplicationRefs(partVersion.Part, partVersionDO.Applications);
 
-            lot.Commit(userContext, lotEventDispatcher);
+                lot.Commit(this.userContext, lotEventDispatcher);
 
-            this.unitOfWork.Save();
+                this.unitOfWork.Save();
 
-            return Ok(new ApplicationPartVersionDO<T>(partVersion));
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok(new ApplicationPartVersionDO<T>(partVersion));
+            }
         }
 
         [Route("{partIndex}")]
         [Validate]
         public virtual IHttpActionResult PostPart(int lotId, int partIndex, ApplicationPartVersionDO<T> partVersionDO)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            PartVersion partVersion = lot.UpdatePart(
-                string.Format("{0}/{1}", this.path, partIndex),
-                JObject.FromObject(partVersionDO.Part),
-                userContext);
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                PartVersion partVersion = lot.UpdatePart(
+                    string.Format("{0}/{1}", this.path, partIndex),
+                    JObject.FromObject(partVersionDO.Part),
+                    this.userContext);
 
-            this.applicationRepository.AddApplicationRefs(partVersion.Part, partVersionDO.Applications);
+                this.applicationRepository.AddApplicationRefs(partVersion.Part, partVersionDO.Applications);
 
-            lot.Commit(userContext, lotEventDispatcher);
+                lot.Commit(this.userContext, lotEventDispatcher);
 
-            this.unitOfWork.Save();
+                this.unitOfWork.Save();
 
-            return Ok();
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
+            }
         }
 
         [Route("{partIndex}")]
         public virtual IHttpActionResult DeletePart(int lotId, int partIndex)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), userContext);
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
 
-            this.applicationRepository.DeleteApplicationRefs(partVersion);
-            lot.Commit(userContext, lotEventDispatcher);
+                this.applicationRepository.DeleteApplicationRefs(partVersion);
+                lot.Commit(this.userContext, lotEventDispatcher);
 
-            this.unitOfWork.Save();
+                this.unitOfWork.Save();
 
-            return Ok();
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
+            }
         }
 
         [Route("{partIndex}")]
