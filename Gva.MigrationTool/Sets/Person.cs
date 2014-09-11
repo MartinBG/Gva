@@ -141,7 +141,7 @@ namespace Gva.MigrationTool.Sets
 
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                    var lot = lotRepository.GetLotIndex(personIdToLotId[personId]);
+                    var lot = lotRepository.GetLotIndex(personIdToLotId[personId], fullAccess: true);
 
                     var personAddresses = this.getPersonAddresses(personId, noms);
                     foreach (var address in personAddresses)

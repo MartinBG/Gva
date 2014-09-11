@@ -77,6 +77,7 @@
     <Compile Include="LotEvents\CommitEvent.cs" />
     <Compile Include="LotEvents\ILotEventHandler.cs" />
     <Compile Include="Models\CommitVersion.cs" />
+    <Compile Include="Models\PartUser.cs" />
     <Compile Include="Models\PartCollection.cs" />
     <Compile Include="Models\Schema.cs" />
     <Compile Include="Models\RegsDbContextInitializer.cs" />

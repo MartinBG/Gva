@@ -14,6 +14,7 @@ namespace Regs.Api.Models
         public Part()
         {
             this.PartVersions = new List<PartVersion>();
+            this.PartUsers = new List<PartUser>();
         }
 
         public int PartId { get; set; }
@@ -37,6 +38,8 @@ namespace Regs.Api.Models
         public virtual SetPart SetPart { get; set; }
 
         public virtual ICollection<PartVersion> PartVersions { get; set; }
+
+        public virtual ICollection<PartUser> PartUsers { get; set; }
 
         public bool Matches(string path)
         {

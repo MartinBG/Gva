@@ -110,7 +110,7 @@ namespace Regs.Api.Tests.Specs
                 int secondCommitId = secondCommit.CommitId;
 
                 //load the second commit
-                lotRepository.GetLot(lot.LotId, secondCommitId);
+                lotRepository.GetLot(lot.LotId, secondCommitId, fullAccess: true);
 
                 lot.Reset(firstCommitId, userContext, lotEventDispatcher);
 

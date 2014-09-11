@@ -66,7 +66,7 @@ namespace Regs.Api.Tests.Specs
                 var lot1 = lotRepository1.CreateLot("Person");
                 unitOfWork1.Save();
 
-                var lot2 = lotRepository2.GetLotIndex(lot1.LotId);
+                var lot2 = lotRepository2.GetLotIndex(lot1.LotId, fullAccess: true);
                 Assert.NotNull(lot2);
             });
             "can be saved with multiple parts in the index".Assert(() =>
@@ -78,7 +78,7 @@ namespace Regs.Api.Tests.Specs
                 lot1.CreatePart("personAddresses/2", JObject.Parse("{ address: '2'}"), userContext1);
                 unitOfWork1.Save();
 
-                var lot2 = lotRepository2.GetLotIndex(lot1.LotId);
+                var lot2 = lotRepository2.GetLotIndex(lot1.LotId, fullAccess: true);
                 dynamic addresses = lot2.Index.GetParts("personAddresses");
                 Assert.Equal("0-1", (string)addresses[0].Content.address);
                 Assert.Equal("1", (string)addresses[1].Content.address);
@@ -91,7 +91,7 @@ namespace Regs.Api.Tests.Specs
                 lot1.Commit(userContext1, lotEventDispatcher1);
                 unitOfWork1.Save();
 
-                var lot2 = lotRepository2.GetLot(lot1.LotId);
+                var lot2 = lotRepository2.GetLot(lot1.LotId, fullAccess: true);
                 dynamic address = lot2.LastCommit.GetPart("personAddresses/0").Content;
                 Assert.Equal("0", (string)address.address);
             });
@@ -103,7 +103,7 @@ namespace Regs.Api.Tests.Specs
                 lot1.Commit(userContext1, lotEventDispatcher1, new string[] { "personAddresses/0" });
                 unitOfWork1.Save();
 
-                var lot2 = lotRepository2.GetLot(lot1.LotId);
+                var lot2 = lotRepository2.GetLot(lot1.LotId, fullAccess: true);
                 dynamic addressPart = lot2.LastCommit.GetPart("personAddresses/1");
                 Assert.Null(addressPart);
             });
@@ -122,7 +122,7 @@ namespace Regs.Api.Tests.Specs
                 lot1.Commit(userContext1, lotEventDispatcher1, new string[] { "personAddresses/1" });
                 unitOfWork1.Save();
 
-                var lot2 = lotRepository2.GetLotIndex(lot1.LotId);
+                var lot2 = lotRepository2.GetLotIndex(lot1.LotId, fullAccess: true);
                 dynamic addresses = lot2.Index.GetParts("personAddresses");
                 Assert.Equal("0", (string)addresses[0].Content.address);
                 Assert.Equal("1", (string)addresses[1].Content.address);
@@ -195,70 +195,70 @@ namespace Regs.Api.Tests.Specs
 
             "can have a part in its index updated".Assert(() =>
             {
-                var lot1 = lotRepository1.GetLotIndex(lotId);
+                var lot1 = lotRepository1.GetLotIndex(lotId, fullAccess: true);
                 dynamic address = lot1.Index.GetPart("personAddresses/0").Content;
                 address.country = "USA";
                 lot1.UpdatePart("personAddresses/0", address, userContext1);
                 unitOfWork1.Save();
 
-                var lot2 = lotRepository2.GetLotIndex(lotId);
+                var lot2 = lotRepository2.GetLotIndex(lotId, fullAccess: true);
                 dynamic updatedAddress = lot2.Index.GetPart("personAddresses/0").Content;
                 Assert.Equal("USA", (string)updatedAddress.country);
             });
             "can have a commited part be deleted".Assert(() =>
             {
-                var lot1 = lotRepository1.GetLotIndex(lotId);
+                var lot1 = lotRepository1.GetLotIndex(lotId, fullAccess: true);
                 lot1.DeletePart("personStatuses/1", userContext1);
                 unitOfWork1.Save();
 
-                var lot2 = lotRepository2.GetLotIndex(lotId);
+                var lot2 = lotRepository2.GetLotIndex(lotId, fullAccess: true);
                 var deletedRating = lot2.Index.GetPart("personStatuses/1");
                 Assert.Null(deletedRating);
             });
             "cannot have a part in its index deleted".Assert(() =>
             {
-                var lot1 = lotRepository1.GetLotIndex(lotId);
+                var lot1 = lotRepository1.GetLotIndex(lotId, fullAccess: true);
                 Assert.Throws<InvalidOperationException>(() => lot1.DeletePart("personAddresses/0", userContext1));
             });
             "can have a part previously deleted be created again".Assert(() =>
             {
-                var lot1 = lotRepository1.GetLotIndex(lotId);
+                var lot1 = lotRepository1.GetLotIndex(lotId, fullAccess: true);
                 lot1.CreatePart("personStatuses/0", JObject.Parse("{ name: 'status1-1' }"), userContext1);
                 unitOfWork1.Save();
 
-                var lot2 = lotRepository2.GetLotIndex(lotId);
+                var lot2 = lotRepository2.GetLotIndex(lotId, fullAccess: true);
                 dynamic createdRating = lot2.Index.GetPart("personStatuses/0").Content;
                 Assert.Equal("status1-1", (string)createdRating.name);
             });
             "can have a part in its index reset".Assert(() =>
             {
-                var lot1 = lotRepository1.GetLotIndex(lotId);
+                var lot1 = lotRepository1.GetLotIndex(lotId, fullAccess: true);
 
                 //load the second commit
-                lotRepository1.GetLot(lotId, secondCommitId);
+                lotRepository1.GetLot(lotId, secondCommitId, fullAccess: true);
 
                 lot1.ResetPart("personAddresses/0");
                 unitOfWork1.Save();
 
-                var lot2 = lotRepository2.GetLotIndex(lotId);
+                var lot2 = lotRepository2.GetLotIndex(lotId, fullAccess: true);
                 dynamic resetAddress = lot2.Index.GetPart("personAddresses/0").Content;
                 Assert.Equal("Austria", (string)resetAddress.country);
             });
             "cannot have a part in its index reset if the last commit is not loaded".Assert(() =>
             {
-                var lot1 = lotRepository1.GetLotIndex(lotId);
+                var lot1 = lotRepository1.GetLotIndex(lotId, fullAccess: true);
                 Assert.Throws<InvalidOperationException>(() => lot1.ResetPart("personAddresses/0"));
             });
             "cannot be modified concurrently".Assert(() =>
             {
                 //get and modify the lot
-                var lot1 = lotRepository1.GetLotIndex(lotId);
+                var lot1 = lotRepository1.GetLotIndex(lotId, fullAccess: true);
                 dynamic address = lot1.Index.GetPart("personAddresses/0").Content;
                 address.country = "USA";
                 lot1.UpdatePart("personAddresses/0", address, userContext1);
 
                 //get and modify the lot from a different context
-                Lot lot2 = lotRepository2.GetLotIndex(lotId);
+                Lot lot2 = lotRepository2.GetLotIndex(lotId, fullAccess: true);
                 lot2.CreatePart("personStatuses/2", JObject.Parse(@"{}"), userContext2);
                 unitOfWork2.Save();
 
@@ -267,38 +267,38 @@ namespace Regs.Api.Tests.Specs
             });
             "can be reset to a previous commit".Assert(() =>
             {
-                var lot1 = lotRepository1.GetLotIndex(lotId);
+                var lot1 = lotRepository1.GetLotIndex(lotId, fullAccess: true);
                 lot1.Commit(userContext1, lotEventDispatcher1);
 
                 //load the second commit
-                lotRepository1.GetLot(lotId, secondCommitId);
+                lotRepository1.GetLot(lotId, secondCommitId, fullAccess: true);
 
                 lot1.Reset(firstCommitId, userContext1, lotEventDispatcher1);
                 unitOfWork1.Save();
 
-                var lot2 = lotRepository2.GetLot(lotId);
+                var lot2 = lotRepository2.GetLot(lotId, fullAccess: true);
                 dynamic previousAddress = lot2.LastCommit.GetPart("personAddresses/0").Content;
                 Assert.Null((string)previousAddress.country);
             });
             "cannot be reset to a previous commit if all later commits have not been loaded".Assert(() =>
             {
-                var lot1 = lotRepository1.GetLotIndex(lotId);
+                var lot1 = lotRepository1.GetLotIndex(lotId, fullAccess: true);
                 lot1.Commit(userContext1, lotEventDispatcher1);
                 Assert.Throws<InvalidOperationException>(() => lot1.Reset(firstCommitId, userContext1, lotEventDispatcher1));
             });
             "must have all latest versions of all existing parts in its index after reset".Assert(() => 
             {
-                var lot1 = lotRepository1.GetLotIndex(lotId);
+                var lot1 = lotRepository1.GetLotIndex(lotId, fullAccess: true);
                 lot1.Commit(userContext1, lotEventDispatcher1);
 
                 //load the second commit
-                lotRepository1.GetLot(lotId, secondCommitId);
+                lotRepository1.GetLot(lotId, secondCommitId, fullAccess: true);
 
                 lot1.Reset(secondCommitId, userContext1, lotEventDispatcher1);
                 unitOfWork1.Save();
 
-                lotRepository1.GetLot(lotId, firstCommitId);
-                var lot2 = lotRepository2.GetLotIndex(lotId);
+                lotRepository1.GetLot(lotId, firstCommitId, fullAccess: true);
+                var lot2 = lotRepository2.GetLotIndex(lotId, fullAccess: true);
                 dynamic resetAddress = lot2.Index.GetPart("personAddresses/0").Content;
                 Assert.Equal("Austria", (string)resetAddress.country);
             });

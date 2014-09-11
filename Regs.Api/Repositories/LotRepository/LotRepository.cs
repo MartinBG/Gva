@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Extensions;
 using Regs.Api.Models;
 
 namespace Regs.Api.Repositories.LotRepositories
 {
     public class LotRepository : ILotRepository
     {
+        private const int ReadPermissionId = 1;
+
         private IUnitOfWork unitOfWork;
         private UserContext userContext;
 
@@ -65,7 +70,7 @@ namespace Regs.Api.Repositories.LotRepositories
             return lot;
         }
 
-        public Lot GetLotIndex(int lotId)
+        public Lot GetLotIndex(int lotId, bool fullAccess = false)
         {
             Lot lot = this.unitOfWork.DbContext.Set<Lot>()
                 .Include(l => l.Commits)
@@ -77,22 +82,16 @@ namespace Regs.Api.Repositories.LotRepositories
                 throw new Exception(string.Format("Cannot find lot with id: {0}", lotId));
             }
 
-            this.unitOfWork.DbContext.Set<SetPart>()
-                .Where(sp => sp.SetId == lot.SetId)
-                .Load();
-
-            this.unitOfWork.DbContext.Set<Part>()
-                .Where(p => p.LotId == lotId)
-                .Load();
+            this.LoadParts(lot, fullAccess);
 
             var indexCommitId = lot.Commits.Where(c => c.IsIndex).Single().CommitId;
 
-            Commit commit = this.LoadCommit(indexCommitId);
+            Commit commit = this.LoadCommit(lot, indexCommitId, fullAccess);
 
             return lot;
         }
 
-        public Lot GetLot(int lotId, int? commitId = null)
+        public Lot GetLot(int lotId, int? commitId = null, bool fullAccess = false)
         {
             Lot lot = this.unitOfWork.DbContext.Set<Lot>()
                 .Include(l => l.Commits)
@@ -104,18 +103,12 @@ namespace Regs.Api.Repositories.LotRepositories
                 throw new Exception(string.Format("Cannot find lot with id: {0}", lotId));
             }
 
-            this.unitOfWork.DbContext.Set<SetPart>()
-                .Where(sp => sp.SetId == lot.SetId)
-                .Load();
-
-            this.unitOfWork.DbContext.Set<Part>()
-                .Where(p => p.LotId == lotId)
-                .Load();
+            this.LoadParts(lot, fullAccess);
 
             Commit commit;
             if (commitId.HasValue)
             {
-                commit = this.LoadCommit(commitId);
+                commit = this.LoadCommit(lot, commitId, fullAccess);
 
                 if (commit.LotId != lotId)
                 {
@@ -131,27 +124,66 @@ namespace Regs.Api.Repositories.LotRepositories
                     throw new Exception(string.Format("The specified lot with id {0} does not have a non-index commit.", lotId));
                 }
 
-                commit = this.LoadCommit(lastCommitId);
+                commit = this.LoadCommit(lot, lastCommitId, fullAccess);
             }
 
             return lot;
         }
 
-        public Commit LoadCommit(int? commitId)
+        public Commit LoadCommit(Lot lot, int? commitId, bool fullAccess = false)
         {
             if (!commitId.HasValue)
             {
                 throw new Exception("Invalid commit id");
             }
 
-            var commit = this.unitOfWork.DbContext.Set<Commit>()
-                .Include(c => c.CommitVersions)
-                .Include(c => c.CommitVersions.Select(cv => cv.PartVersion))
-                .Include(c => c.CommitVersions.Select(cv => cv.OldPartVersion))
-                .SingleOrDefault(c => c.CommitId == commitId);
+            var commitData = 
+                this.unitOfWork.DbContext.Set<CommitVersion>()
+                .Include(cv => cv.PartVersion)
+                .Include(cv => cv.OldPartVersion)
+                .Where(cv => cv.CommitId == commitId);
+
+            if (!fullAccess)
+            {
+                int[] partIds = lot.Parts.Select(p => p.PartId).ToArray();
+
+                commitData = commitData
+                    .Where(cv => partIds.Contains(cv.PartVersion.PartId));
+            }
+
+            commitData.Load();
+
+            var commit = this.unitOfWork.DbContext.Set<Commit>().Find(commitId.Value);
+
             commit.IsLoaded = true;
 
             return commit;
+        }
+
+        public void ExecSpSetLotPartTokens(int? lotPartId = null)
+        {
+            var parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("LotPartId", Helper.CastToSqlDbValue(lotPartId)));
+
+            this.unitOfWork.DbContext.Database.ExecuteSqlCommand("spSetLotPartTokens @LotPartId", parameters.ToArray());
+        }
+
+        private void LoadParts(Lot lot, bool fullAccess)
+        {
+            this.unitOfWork.DbContext.Set<SetPart>()
+                .Where(sp => sp.SetId == lot.SetId)
+                .Load();
+
+            var partData =
+                this.unitOfWork.DbContext.Set<Part>()
+                .Where(p => p.LotId == lot.LotId);
+
+            if (!fullAccess)
+            {
+                partData = partData.Where(p => p.PartUsers.Any(v => v.ClassificationPermissionId == ReadPermissionId && v.UserId == this.userContext.UserId));
+            }
+
+            partData.Load();
         }
     }
 }

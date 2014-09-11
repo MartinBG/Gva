@@ -6,8 +6,11 @@ CREATE TABLE [dbo].[GvaCaseTypes] (
     [Name]             NVARCHAR (200) NULL,
     [Alias]            NVARCHAR (200) NULL,
     [LotSetId]         INT            NULL,
-    CONSTRAINT [PK_GvaCases]         PRIMARY KEY ([GvaCaseTypeId]),
-    CONSTRAINT [FK_GvaCases_LotSets] FOREIGN KEY([LotSetId]) REFERENCES [dbo].[LotSets] ([LotSetId]),
+    [IsDefault]        BIT            NOT NULL,
+    [ClassificationId] INT            NULL,
+    CONSTRAINT [PK_GvaCases]                 PRIMARY KEY ([GvaCaseTypeId]),
+    CONSTRAINT [FK_GvaCases_LotSets]         FOREIGN KEY ([LotSetId]) REFERENCES [dbo].[LotSets] ([LotSetId]),
+    CONSTRAINT [FK_GvaCases_Classifications] FOREIGN KEY ([ClassificationId]) REFERENCES [dbo].[Classifications] ([ClassificationId])
 )
 GO
 
@@ -16,4 +19,6 @@ exec spDescColumn N'GvaCaseTypes', N'GvaCaseTypeId'   , N'Уникален си�
 exec spDescColumn N'GvaCaseTypes', N'Name'            , N'Име на типа дело.'
 exec spDescColumn N'GvaCaseTypes', N'Alias'           , N'Символен идентификатор.'
 exec spDescColumn N'GvaCaseTypes', N'LotSetId'        , N'Тип партида.'
+exec spDescColumn N'GvaCaseTypes', N'IsDefault'       , N'Партовете за които няма запис в GvaLotFiles се считат за принадлежащи на default-ния caseType от техния LotSet.'
+exec spDescColumn N'GvaCaseTypes', N'ClassificationId', N'Класификация отговаряща на типа дело.'
 GO

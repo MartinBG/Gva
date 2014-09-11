@@ -13,10 +13,12 @@ namespace Regs.Api.Repositories.LotRepositories
 
         Lot CreateLot(Set set);
 
-        Lot GetLot(int lotId, int? commitId = null);
+        Lot GetLot(int lotId, int? commitId = null, bool fullAccess = false);
 
-        Lot GetLotIndex(int lotId);
+        Lot GetLotIndex(int lotId, bool fullAccess = false);
 
-        Commit LoadCommit(int? commitId);
+        Commit LoadCommit(Lot lot, int? commitId, bool fullAccess = false);
+
+        void ExecSpSetLotPartTokens(int? lotPartId = null);
     }
 }
