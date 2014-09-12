@@ -17,7 +17,7 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "LicenceType is required.")]
         public NomValue LicenceType { get; set; }
 
-        public string LicenceNumber { get; set; }
+        public int? LicenceNumber { get; set; }
 
         public string ForeignLicenceNumber { get; set; }
 

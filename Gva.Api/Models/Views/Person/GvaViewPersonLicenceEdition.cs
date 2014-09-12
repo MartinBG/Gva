@@ -24,7 +24,7 @@ namespace Gva.Api.Models.Views.Person
 
         public int LicenceActionId { get; set; }
 
-        public string LicenceNumber { get; set; }
+        public int LicenceNumber { get; set; }
 
         public bool IsLastEdition { get; set; }
 
@@ -63,9 +63,6 @@ namespace Gva.Api.Models.Views.Person
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.StampNumber)
-                .HasMaxLength(50);
-
-            this.Property(t => t.LicenceNumber)
                 .HasMaxLength(50);
 
             // Table & Column Mappings

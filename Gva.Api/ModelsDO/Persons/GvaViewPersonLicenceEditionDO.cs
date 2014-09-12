@@ -64,7 +64,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string LicenceActionName { get; set; }
 
-        public string LicenceNumber { get; set; }
+        public int LicenceNumber { get; set; }
 
         public bool IsReceived { get; set; }
 

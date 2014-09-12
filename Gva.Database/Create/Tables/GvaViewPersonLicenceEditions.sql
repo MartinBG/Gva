@@ -11,6 +11,7 @@ CREATE TABLE [dbo].[GvaViewPersonLicenceEditions] (
     [DateValidTo]           DATETIME2     NOT NULL,
     [LicenceActionId]       INT           NOT NULL,
     [LicenceNumber]         NVARCHAR(50)  NULL,
+    [LicenceNumber]         INT           NOT NULL,
     [IsLastEdition]         BIT           NOT NULL,
     [GvaApplicationId]      INT           NULL,
     [ApplicationName]       NVARCHAR(MAX) NULL,
