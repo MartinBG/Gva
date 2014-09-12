@@ -7,8 +7,6 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonLicenceDO
     {
-        public int NextIndex { get; set; }
-
         [Required(ErrorMessage = "StaffType is required.")]
         public NomValue StaffType { get; set; }
 
@@ -24,8 +22,6 @@ namespace Gva.Api.ModelsDO.Persons
         public DateTime? DocumentDateValidTo { get; set; }
 
         public NomValue Valid { get; set; }
-
-        public PersonLicenceEditionDO[] Editions { get; set; }
 
         public List<PersonLicenceStatusDO> Statuses { get; set; }
     }

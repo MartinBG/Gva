@@ -44,5 +44,9 @@ namespace Gva.Api.Repositories.PersonRepository
         bool IsUniqueUin(string uin, int? personId = null);
 
         List<GvaViewPersonLicenceEditionDO> GetStampedDocuments();
+
+        IEnumerable<GvaViewPersonLicenceEdition> GetLicences(int lotId);
+
+        string GetLastLicenceNumber(int lotId, string licenceTypeCode);
     }
 }

@@ -15,7 +15,7 @@
         if ($scope.model.licenceType) {
           PersonLicences.lastLicenceNumber({
             id: scFormParams.lotId,
-            licenceType: $scope.model.licenceType.code
+            licenceTypeCode: $scope.model.licenceType.code
           }).$promise
             .then(function (lastLicenceNumber) {
               if (lastLicenceNumber.number === null) {
