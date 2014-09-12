@@ -5,31 +5,31 @@
   function PrintLicenceModalCtrl(
     $scope,
     $modalInstance,
-    PersonLicences,
+    PersonLicenceEditions,
     scModalParams,
-    licence
+    licenceEdition
   ) {
-    var lastEdition = _.last(licence.part.editions);
 
     $scope.model = {
-      stampNumber: lastEdition.stampNumber,
-      stampNumberReadonly: !!lastEdition.stampNumber
+      stampNumber: licenceEdition.part.stampNumber,
+      stampNumberReadonly: !!licenceEdition.part.stampNumber
     };
 
     $scope.save = function () {
-      lastEdition.stampNumber = $scope.model.stampNumber;
+      licenceEdition.part.stampNumber = $scope.model.stampNumber;
 
-      return PersonLicences.save({
+      return PersonLicenceEditions.save({
         id: scModalParams.lotId,
-        ind: scModalParams.index
-      }, licence).$promise.then(function (savedLicence) {
-        return $modalInstance.close(savedLicence);
+        ind: scModalParams.licencePartIndex,
+        index: scModalParams.editionPartIndex
+      }, licenceEdition).$promise.then(function (savedEdition) {
+        return $modalInstance.close(savedEdition);
       });
     };
 
     $scope.print = function () {
       var href = 'api/print?lotId=' + scModalParams.lotId +
-                  '&licenceInd=' + scModalParams.index,
+                  '&licenceInd=' + scModalParams.licencePartIndex,
           hiddenElement = $('<a href="' + href + '" target="_self"></a>')[0];
 
       hiddenElement.click();
@@ -43,19 +43,20 @@
   PrintLicenceModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'PersonLicences',
+    'PersonLicenceEditions',
     'scModalParams',
-    'licence'
+    'licenceEdition'
   ];
 
   PrintLicenceModalCtrl.$resolve = {
-    licence: [
+    licenceEdition: [
       'scModalParams',
-      'PersonLicences',
-      function resolveDocs(scModalParams, PersonLicences) {
-        return PersonLicences.get({
+      'PersonLicenceEditions',
+      function resolveDocs(scModalParams, PersonLicenceEditions) {
+        return PersonLicenceEditions.get({
           id: scModalParams.lotId,
-          ind: scModalParams.index
+          ind: scModalParams.licencePartIndex,
+          index: scModalParams.editionPartIndex
         }).$promise;
       }
     ]

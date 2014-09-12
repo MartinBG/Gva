@@ -31,17 +31,16 @@
     $scope.print = function (doc) {
       var params = {
         lotId: doc.lotId,
-        index: doc.partIndex
+        licencePartIndex: doc.partIndex,
+        editionPartIndex: doc.editionPartIndex
       };
 
       var modalInstance = scModal.open('printLicence', params);
 
-      modalInstance.result.then(function (savedLicence) {
-        var edition = _.find(savedLicence.part.editions, function (edition) {
-          return edition.index === doc.editionIndex;
-        });
+      modalInstance.result.then(function (savedLicenceEdition) {
+        var edition = savedLicenceEdition;
 
-        doc.stampNumber = edition.stampNumber;
+        doc.stampNumber = edition.part.stampNumber;
       });
 
       return modalInstance.opened;
@@ -50,23 +49,22 @@
     $scope.viewDoc = function (doc) {
       var params = {
         lotId: doc.lotId,
-        licenceIndex: doc.partIndex,
+        licencePartIndex: doc.partIndex,
         editionIndex: doc.editionIndex
       };
 
       var modalInstance = scModal.open('editLicence', params);
 
-      modalInstance.result.then(function (savedLicence) {
-        var edition = _.find(savedLicence.part.editions, function (edition) {
-          return edition.index === doc.editionIndex;
-        });
+      modalInstance.result.then(function (returnValue) {
+        var edition = returnValue.savedLicenceEdition,
+            licence = returnValue.licence;
 
-        doc.licenceNumber = savedLicence.part.licenceNumber;
-        doc.licenceTypeId = savedLicence.part.licenceType.nomValueId;
-        doc.dateValidFrom = edition.documentDateValidFrom;
-        doc.dateValidTo = edition.documentDateValidTo;
-        doc.licenceActionId = edition.licenceAction.nomValueId;
-        doc.application = edition.applications[0];
+        doc.licenceNumber = licence.part.licenceNumber;
+        doc.licenceTypeId = licence.part.licenceType.nomValueId;
+        doc.dateValidFrom = edition.part.documentDateValidFrom;
+        doc.dateValidTo = edition.part.documentDateValidTo;
+        doc.licenceActionId = edition.part.licenceAction.nomValueId;
+        doc.application = edition.files.length !== 0 ? edition.files[0].applications[0] : null;
       });
 
       return modalInstance.opened;

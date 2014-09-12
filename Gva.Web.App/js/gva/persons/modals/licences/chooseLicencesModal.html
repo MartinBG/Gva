@@ -12,15 +12,15 @@
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
         <input type="checkbox" ng-checked="selectedLicences | contains:item" sc-click="selectLicence($event, item)">
       </sc-column>
-      <sc-column data="part.licenceNumber" title="persons.chooseLicencesModal.licenceNumber">
+      <sc-column data="licenceNumber" title="persons.chooseLicencesModal.licenceNumber">
       </sc-column>
-      <sc-column data="part.licenceType.name" title="persons.chooseLicencesModal.licenceType">
+      <sc-column data="licenceType.name" title="persons.chooseLicencesModal.licenceType">
       </sc-column>
-      <sc-column data="(part.editions | last).documentDateValidFrom" title="persons.chooseLicencesModal.documentDateValidFrom" type="date">
+      <sc-column data="dateValidFrom" title="persons.chooseLicencesModal.documentDateValidFrom" type="date">
       </sc-column>
-      <sc-column data="(part.editions | last).documentDateValidTo" title="persons.chooseLicencesModal.documentDateValidTo" type="date">
+      <sc-column data="dateValidTo" title="persons.chooseLicencesModal.documentDateValidTo" type="date">
       </sc-column>
-      <sc-column data="(part.editions | first).documentDateValidFrom" title="persons.chooseLicencesModal.firstEditionValidFrom" type="date">
+      <sc-column data="firstDocDateValidFrom" title="persons.chooseLicencesModal.firstEditionValidFrom" type="date">
       </sc-column>
     </sc-datatable>
   </div>
