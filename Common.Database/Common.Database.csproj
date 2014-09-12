@@ -45,6 +45,13 @@
     <Content Include="Create\Create.sql" />
     <Content Include="Create\CreateDB.sql" />
     <Content Include="Create\Diagram\Units.sql" />
+    <Content Include="Create\Functions\fnGetParentClassifications.sql" />
+    <Content Include="Create\Functions\fnGetParentUnits.sql" />
+    <Content Include="Create\Functions\fnGetSubordinateClassifications.sql" />
+    <Content Include="Create\Functions\fnGetSubordinateUnits.sql" />
+    <Content Include="Create\Procedures\spGetUnitClassifications.sql" />
+    <Content Include="Create\Procedures\spSetDeactiveUnit.sql" />
+    <Content Include="Create\Procedures\spSetUnitTokens.sql" />
     <Content Include="Create\Tables\Addresses\Countries.sql" />
     <Content Include="Create\Tables\Addresses\Districts.sql" />
     <Content Include="Create\Tables\Addresses\Municipalities.sql" />
@@ -60,6 +67,7 @@
     <Content Include="Create\Tables\Units\UnitClassifications.sql" />
     <Content Include="Create\Tables\Units\UnitRelations.sql" />
     <Content Include="Create\Tables\Units\Units.sql" />
+    <Content Include="Create\Tables\Units\UnitTokens.sql" />
     <Content Include="Create\Tables\Units\UnitTypes.sql" />
     <Content Include="Create\Tables\Units\UnitUsers.sql" />
     <Content Include="Create\Tables\Users\Roles.sql" />

@@ -27,6 +27,7 @@ namespace Gva.Api.Controllers.Airports
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
+        private UserContext userContext;
 
         public AirportsController(
             IUnitOfWork unitOfWork,
@@ -35,7 +36,8 @@ namespace Gva.Api.Controllers.Airports
             IAirportRepository airportRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
-            ILotEventDispatcher lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -44,6 +46,7 @@ namespace Gva.Api.Controllers.Airports
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
+            this.userContext = userContext;
         }
 
         [Route("new")]
@@ -76,16 +79,18 @@ namespace Gva.Api.Controllers.Airports
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                UserContext userContext = this.Request.GetUserContext();
-                var newLot = this.lotRepository.CreateLot("Airport", userContext);
+                var newLot = this.lotRepository.CreateLot("Airport");
 
-                newLot.CreatePart("airportData", JObject.FromObject(airportData), userContext);
+                var partVersion = newLot.CreatePart("airportData", JObject.FromObject(airportData), this.userContext);
+
                 int airportCaseTypeId = this.caseTypeRepository.GetCaseTypesForSet("Airport").Single().GvaCaseTypeId;
                 this.caseTypeRepository.AddCaseTypes(newLot, new int[] { airportCaseTypeId });
 
-                newLot.Commit(userContext, lotEventDispatcher);
+                newLot.Commit(this.userContext, lotEventDispatcher);
 
                 this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
 
                 transaction.Commit();
 
@@ -105,15 +110,21 @@ namespace Gva.Api.Controllers.Airports
         [Validate]
         public IHttpActionResult PostAirportData(int lotId, AirportDataDO airportData)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            lot.UpdatePart("airportData", JObject.FromObject(airportData), userContext);
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                var partVersion = lot.UpdatePart("airportData", JObject.FromObject(airportData), this.userContext);
 
-            lot.Commit(userContext, this.lotEventDispatcher);
+                lot.Commit(this.userContext, this.lotEventDispatcher);
 
-            this.unitOfWork.Save();
+                this.unitOfWork.Save();
 
-            return Ok();
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
+            }
         }
 
         [Route("{lotId}/inventory")]

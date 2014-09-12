@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Equipments;
@@ -23,8 +24,9 @@ namespace Gva.Api.Controllers.Equipments
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
-            : base("equipmentDocumentOthers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
+            : base("equipmentDocumentOthers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;

@@ -71,7 +71,7 @@ namespace Mosv.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
-                var newLot = this.lotRepository.CreateLot("Admission", userContext);
+                var newLot = this.lotRepository.CreateLot("Admission");
 
                 newLot.CreatePart("admissionData", admission.Get<JObject>("admissionData"), userContext);
 
@@ -167,7 +167,7 @@ namespace Mosv.Api.Controllers
 
                 if (lotType == "admission")
                 {
-                    var newLot = this.lotRepository.CreateLot("Admission", userContext);
+                    var newLot = this.lotRepository.CreateLot("Admission");
 
                     newLot.CreatePart("admissionData", jObj, userContext);
 
@@ -187,7 +187,7 @@ namespace Mosv.Api.Controllers
                 }
                 else if (lotType == "signal")
                 {
-                    var newLot = this.lotRepository.CreateLot("Signal", userContext);
+                    var newLot = this.lotRepository.CreateLot("Signal");
 
                     newLot.CreatePart("signalData", jObj, userContext);
 
@@ -207,7 +207,7 @@ namespace Mosv.Api.Controllers
                 }
                 else if (lotType == "suggestion")
                 {
-                    var newLot = this.lotRepository.CreateLot("Suggestion", userContext);
+                    var newLot = this.lotRepository.CreateLot("Suggestion");
 
                     newLot.CreatePart("suggestionData", jObj, userContext);
 

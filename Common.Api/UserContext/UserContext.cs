@@ -8,12 +8,16 @@ namespace Common.Api.UserContext
     {
         private int userId;
 
+        protected UserContext()
+        {
+        }
+
         public UserContext(int userId)
         {
             this.userId = userId;
         }
 
-        public int UserId
+        public virtual int UserId
         {
             get
             {

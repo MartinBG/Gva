@@ -24,14 +24,16 @@ namespace Gva.Api.Controllers.Persons
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
         private ILotEventDispatcher lotEventDispatcher;
+        private UserContext userContext;
 
         public PersonApplicationsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
-            : base("personDocumentApplications", unitOfWork, lotRepository, fileRepository, lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
+            : base("personDocumentApplications", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.path = "personDocumentApplications";
             this.unitOfWork = unitOfWork;
@@ -39,6 +41,7 @@ namespace Gva.Api.Controllers.Persons
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
             this.lotEventDispatcher = lotEventDispatcher;
+            this.userContext = userContext;
         }
 
         [Route("new")]
@@ -54,45 +57,57 @@ namespace Gva.Api.Controllers.Persons
 
         public override IHttpActionResult PostNewPart(int lotId, FilePartVersionDO<DocumentApplicationDO> application)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-
-            PartVersion partVersion = lot.CreatePart(
-                path + "/*",
-                JObject.FromObject(application.Part),
-                userContext);
-
-            this.fileRepository.AddFileReferences(partVersion, application.Files);
-
-            lot.Commit(userContext, this.lotEventDispatcher);
-
-            GvaApplication gvaApplication = new GvaApplication()
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                LotId = lot.LotId,
-                GvaAppLotPartId = partVersion.Part.PartId
-            };
+                var lot = this.lotRepository.GetLotIndex(lotId);
 
-            this.applicationRepository.AddGvaApplication(gvaApplication);
+                PartVersion partVersion = lot.CreatePart(
+                    path + "/*",
+                    JObject.FromObject(application.Part),
+                    this.userContext);
 
-            this.unitOfWork.Save();
+                this.fileRepository.AddFileReferences(partVersion, application.Files);
 
-            return Ok();
+                lot.Commit(this.userContext, this.lotEventDispatcher);
+
+                GvaApplication gvaApplication = new GvaApplication()
+                {
+                    LotId = lot.LotId,
+                    GvaAppLotPartId = partVersion.Part.PartId
+                };
+
+                this.applicationRepository.AddGvaApplication(gvaApplication);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
+            }
         }
 
         public override IHttpActionResult DeletePart(int lotId, int partIndex)
         {
-            UserContext userContext = this.Request.GetUserContext();
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), userContext);
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
 
-            this.fileRepository.DeleteFileReferences(partVersion);
-            this.applicationRepository.DeleteGvaApplication(partVersion.PartId);
+                this.fileRepository.DeleteFileReferences(partVersion);
+                this.applicationRepository.DeleteGvaApplication(partVersion.PartId);
 
-            lot.Commit(userContext, lotEventDispatcher);
+                lot.Commit(this.userContext, lotEventDispatcher);
 
-            this.unitOfWork.Save();
+                this.unitOfWork.Save();
 
-            return Ok();
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
+            }
         }
     }
 }

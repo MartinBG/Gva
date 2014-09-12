@@ -72,7 +72,7 @@ namespace Gva.MigrationTool.Sets
 
                     var personData = this.getPersonData(personId, noms, personCaseTypes);
 
-                    var lot = lotRepository.CreateLot("Person", context);
+                    var lot = lotRepository.CreateLot("Person");
 
                     caseTypeRepository.AddCaseTypes(lot, personData.GetItems<JObject>("caseTypes").Select(ct => ct.Get<int>("nomValueId")));
 
@@ -141,7 +141,7 @@ namespace Gva.MigrationTool.Sets
 
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                    var lot = lotRepository.GetLotIndex(personIdToLotId[personId]);
+                    var lot = lotRepository.GetLotIndex(personIdToLotId[personId], fullAccess: true);
 
                     var personAddresses = this.getPersonAddresses(personId, noms);
                     foreach (var address in personAddresses)

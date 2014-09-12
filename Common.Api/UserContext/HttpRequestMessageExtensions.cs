@@ -7,6 +7,11 @@ namespace Common.Api.UserContext
     {
         public static UserContext GetUserContext(this HttpRequestMessage request)
         {
+            if (!request.GetOwinEnvironment().ContainsKey("oauth.Properties"))
+            {
+                return new UnathorizedUserContext();
+            }
+
             AuthenticationProperties properties = request.GetOwinEnvironment()["oauth.Properties"] as AuthenticationProperties;
             return new UserContext(int.Parse(properties.Dictionary["userId"]));
         }

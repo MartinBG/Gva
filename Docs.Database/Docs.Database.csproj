@@ -51,19 +51,12 @@
     <Content Include="Create\Functions\fnGetSubordinateDocs.sql" />
     <Content Include="Create\Functions\fnCheckForRegisteredChildDocs.sql" />
     <Content Include="Create\Functions\fnGetCorrespondentDisplayName.sql" />
-    <Content Include="Create\Functions\fnGetParentClassifications.sql" />
-    <Content Include="Create\Functions\fnGetParentUnits.sql" />
-    <Content Include="Create\Functions\fnGetSubordinateClassifications.sql" />
-    <Content Include="Create\Functions\fnGetSubordinateUnits.sql" />
-    <Content Include="Create\Procedures\Classifications\spGetUnitClassifications.sql" />
-    <Content Include="Create\Procedures\Classifications\spSetDeactiveUnit.sql" />
     <Content Include="Create\Procedures\spGetDocRegisterIdByRegisterIndexId.sql" />
     <Content Include="Create\Procedures\spDeleteNotRegisteredDoc.sql" />
     <Content Include="Create\Procedures\spGetDocRegisterId.sql" />
     <Content Include="Create\Procedures\spGetDocRegisterNextNumber.sql" />
     <Content Include="Create\Procedures\Tokens\spSetDocTokens.sql" />
     <Content Include="Create\Procedures\Tokens\spSetDocUnitTokens.sql" />
-    <Content Include="Create\Procedures\Tokens\spSetUnitTokens.sql" />
     <Content Include="Create\Tables\Emails\Emails.sql" />
     <Content Include="Create\Tables\Emails\EmailStatuses.sql" />
     <Content Include="Create\Tables\Emails\EmailTypes.sql" />
@@ -115,7 +108,6 @@
     <Content Include="Create\Tables\Others\IrregularityTypes.sql" />
     <Content Include="Create\Tables\Registers\RegisterIndexes.sql" />
     <Content Include="Create\Tables\Tokens\DocTokens.sql" />
-    <Content Include="Create\Tables\Tokens\UnitTokens.sql" />
     <Content Include="Create\Views\vwDocUsers.sql" />
     <Content Include="Insert\Emails\EmailAddresseeTypes.sql" />
     <Content Include="Insert\Emails\EmailStatuses.sql" />

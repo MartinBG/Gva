@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Organizations;
@@ -18,8 +19,9 @@ namespace Gva.Api.Controllers.Organizations
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
-            : base("organizationRecommendations", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
+            : base("organizationRecommendations", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
         }
 

@@ -72,7 +72,7 @@ namespace Gva.MigrationTool.Sets
 
                     var organizationData = this.getOrganizationData(organizationId, noms, orgCaseTypes);
 
-                    var lot = lotRepository.CreateLot("Organization", context);
+                    var lot = lotRepository.CreateLot("Organization");
 
                     caseTypeRepository.AddCaseTypes(lot, organizationData.GetItems<JObject>("caseTypes").Select(ct => ct.Get<int>("nomValueId")));
 
@@ -140,7 +140,7 @@ namespace Gva.MigrationTool.Sets
                     var caseTypeRepository = dependencies.Value.Item9;
                     var context = dependencies.Value.Item10;
 
-                    var lot = lotRepository.GetLotIndex(orgApexIdToLotId[organizationId]);
+                    var lot = lotRepository.GetLotIndex(orgApexIdToLotId[organizationId], fullAccess: true);
 
                     Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
                     {

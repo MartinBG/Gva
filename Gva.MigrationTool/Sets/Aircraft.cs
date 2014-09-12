@@ -65,7 +65,7 @@ namespace Gva.MigrationTool.Sets
 
                 Func<Lot> createLot = () =>
                 {
-                    var lot = lotRepository.CreateLot("Aircraft", context);
+                    var lot = lotRepository.CreateLot("Aircraft");
                     int aircraftCaseTypeId = caseTypeRepository.GetCaseTypesForSet("Aircraft").Single().GvaCaseTypeId;
                     caseTypeRepository.AddCaseTypes(lot, new int[] { aircraftCaseTypeId });
 
@@ -104,7 +104,7 @@ namespace Gva.MigrationTool.Sets
                     Lot lot;
                     if (apexMSNtoLotId.ContainsKey(msn))
                     {
-                        lot = lotRepository.GetLotIndex(apexMSNtoLotId[msn]);
+                        lot = lotRepository.GetLotIndex(apexMSNtoLotId[msn], fullAccess: true);
                     }
                     else
                     {
@@ -211,7 +211,7 @@ namespace Gva.MigrationTool.Sets
 
                     unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                    var lot = lotRepository.GetLotIndex(aircraftApexIdtoLotId[aircraftApexId]);
+                    var lot = lotRepository.GetLotIndex(aircraftApexIdtoLotId[aircraftApexId], fullAccess: true);
 
                     var aircraftParts = this.getAircraftParts(aircraftApexId, noms);
                     foreach (var aircraftPart in aircraftParts)
@@ -415,7 +415,7 @@ namespace Gva.MigrationTool.Sets
                         continue;
                     }
 
-                    Lot lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId]);
+                    Lot lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId], fullAccess: true);
 
                     var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspector, getPersonByFmOrgName, getOrgByFmOrgName);
                     foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)

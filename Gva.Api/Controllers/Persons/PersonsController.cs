@@ -17,6 +17,7 @@ using Regs.Api.Repositories.LotRepositories;
 using System.Collections.Generic;
 using Gva.Api.Repositories.ApplicationStageRepository;
 using System;
+using Regs.Api.Models;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -32,6 +33,7 @@ namespace Gva.Api.Controllers.Persons
         private IApplicationStageRepository applicationStageRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
+        private UserContext userContext;
 
         public PersonsController(
             IUnitOfWork unitOfWork,
@@ -41,7 +43,8 @@ namespace Gva.Api.Controllers.Persons
             IApplicationRepository applicationRepository,
             IApplicationStageRepository applicationStageRepository,
             ICaseTypeRepository caseTypeRepository,
-            ILotEventDispatcher lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -51,6 +54,7 @@ namespace Gva.Api.Controllers.Persons
             this.applicationStageRepository = applicationStageRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
+            this.userContext = userContext;
         }
 
         [Route("new")]
@@ -112,31 +116,44 @@ namespace Gva.Api.Controllers.Persons
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                UserContext userContext = this.Request.GetUserContext();
-                var newLot = this.lotRepository.CreateLot("Person", userContext);
+                var newLot = this.lotRepository.CreateLot("Person");
 
-                newLot.CreatePart("personData", JObject.FromObject(person.PersonData), userContext);
+                var personDataPart = newLot.CreatePart("personData", JObject.FromObject(person.PersonData), this.userContext);
                 this.caseTypeRepository.AddCaseTypes(newLot, person.PersonData.CaseTypes.Select(ct => ct.NomValueId));
 
+                PartVersion documentIdPart = null;
                 if (person.PersonDocumentId != null)
                 {
-                    var documentIdPart = newLot.CreatePart(
+                    documentIdPart = newLot.CreatePart(
                         "personDocumentIds/*",
                         JObject.FromObject(person.PersonDocumentId),
-                        userContext);
+                        this.userContext);
                 }
 
+                PartVersion personAddressPart = null;
                 if (person.PersonAddress != null)
                 {
-                    newLot.CreatePart(
+                    personAddressPart = newLot.CreatePart(
                         "personAddresses/*",
                         JObject.FromObject(person.PersonAddress),
-                        userContext);
+                        this.userContext);
                 }
 
-                newLot.Commit(userContext, lotEventDispatcher);
+                newLot.Commit(this.userContext, lotEventDispatcher);
 
                 this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(personDataPart.PartId);
+
+                if (documentIdPart != null)
+                {
+                    this.lotRepository.ExecSpSetLotPartTokens(documentIdPart.PartId);
+                }
+
+                if (personAddressPart != null)
+                {
+                    this.lotRepository.ExecSpSetLotPartTokens(personAddressPart.PartId);
+                }
 
                 transaction.Commit();
 
@@ -161,36 +178,44 @@ namespace Gva.Api.Controllers.Persons
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                UserContext userContext = this.Request.GetUserContext();
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                this.caseTypeRepository.AddCaseTypes(
-                    lot,
-                    personInfo.PersonData.CaseTypes.Select(ct => ct.NomValueId));
-                lot.UpdatePart("personData", JObject.FromObject(personInfo.PersonData), userContext);
+                this.caseTypeRepository.AddCaseTypes(lot, personInfo.PersonData.CaseTypes.Select(ct => ct.NomValueId));
+
+                var personDataPart = lot.UpdatePart("personData", JObject.FromObject(personInfo.PersonData), this.userContext);
+
                 this.unitOfWork.Save();
 
                 var caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId);
                 var inspectorDataPart = lot.Index.GetPart("inspectorData");
 
+                PartVersion changedInspectorDataPart = null;
                 if (caseTypes.Any(ct => ct.Alias == "inspector"))
                 {
                     if (inspectorDataPart == null)
                     {
-                        lot.CreatePart("inspectorData", JObject.FromObject(personInfo.InspectorData), userContext);
+                        changedInspectorDataPart = lot.CreatePart("inspectorData", JObject.FromObject(personInfo.InspectorData), this.userContext);
                     }
                     else
                     {
-                        lot.UpdatePart("inspectorData", JObject.FromObject(personInfo.InspectorData), userContext);
+                        changedInspectorDataPart = lot.UpdatePart("inspectorData", JObject.FromObject(personInfo.InspectorData), this.userContext);
                     }
                 }
                 else if (inspectorDataPart != null)
                 {
-                    lot.DeletePart("inspectorData", userContext);
+                    changedInspectorDataPart = lot.DeletePart("inspectorData", this.userContext);
                 }
 
-                lot.Commit(userContext, this.lotEventDispatcher);
+                lot.Commit(this.userContext, this.lotEventDispatcher);
+
                 this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(personDataPart.PartId);
+
+                if (changedInspectorDataPart != null)
+                {
+                    this.lotRepository.ExecSpSetLotPartTokens(changedInspectorDataPart.PartId);
+                }
 
                 transaction.Commit();
             }

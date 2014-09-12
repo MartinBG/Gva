@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
@@ -16,8 +17,9 @@ namespace Gva.Api.Controllers.Persons
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
-            : base("personFlyingExperiences", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
+            : base("personFlyingExperiences", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
         }
 

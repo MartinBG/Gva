@@ -225,6 +225,10 @@ namespace Gva.MigrationTool
                 //migrate organizations
                 organization.migrateOrganizations(noms, orgIdtoLotId, getAircraftByApexId, getPersonByApexId);
 
+                Console.WriteLine("Rebuilding lot part tokens...");
+                var lotRepository = scope.Resolve<ILotRepository>();
+                lotRepository.ExecSpSetLotPartTokens();
+
                 timer.Stop();
                 Console.WriteLine("Migration time - {0}", timer.Elapsed.TotalMinutes);
             }

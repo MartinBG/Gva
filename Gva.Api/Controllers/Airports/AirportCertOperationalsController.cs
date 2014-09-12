@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Airports;
@@ -16,8 +17,9 @@ namespace Gva.Api.Controllers.Airports
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher)
-            : base("airportCertOperationals", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
+            : base("airportCertOperationals", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
         }
 

@@ -7,8 +7,8 @@
  xmlns:html="http://www.w3.org/TR/REC-html40">
  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
   <Created>2006-09-16T00:00:00Z</Created>
-  <LastSaved>2014-04-23T12:11:02Z</LastSaved>
-  <Version>15.00</Version>
+  <LastSaved>2014-09-08T10:03:06Z</LastSaved>
+  <Version>14.00</Version>
  </DocumentProperties>
  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
   <RemovePersonalInformation/>
@@ -19,6 +19,7 @@
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
+  <ActiveSheet>9</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -371,7 +372,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
@@ -384,7 +384,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="Classifications">
-  <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="15" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="23" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s64" ss:DefaultRowHeight="15">
    <Column ss:Index="2" ss:StyleID="s64" ss:Width="359.25"/>
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="99.75"/>
@@ -411,58 +411,98 @@
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">0102</Data></Cell>
-    <Cell><Data ss:Type="String">ЛАП</Data></Cell>
+    <Cell><Data ss:Type="String">Физически лица</Data></Cell>
     <Cell ss:StyleID="Default"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010201</Data></Cell>
+    <Cell><Data ss:Type="String">Общи</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">person</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010202</Data></Cell>
+    <Cell><Data ss:Type="String">Екипажи</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">flightCrew</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010203</Data></Cell>
+    <Cell><Data ss:Type="String">ОВД</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">ovd</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010204</Data></Cell>
+    <Cell><Data ss:Type="String">ТО(AML)</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">to_vs</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010205</Data></Cell>
+    <Cell><Data ss:Type="String">ТО(СУВД)</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">to_suvd</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010206</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">ПКС</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">security</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">0103</Data></Cell>
     <Cell><Data ss:Type="String">ВС</Data></Cell>
-    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">aircraft</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">0104</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">ЛЛП</Data></Cell>
-    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">airport</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">0105</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">ССНО</Data></Cell>
-    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">equipment</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">0106</Data></Cell>
+    <Cell><Data ss:Type="String">Организации</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010601</Data></Cell>
+    <Cell><Data ss:Type="String">Общи</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">org</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010602</Data></Cell>
+    <Cell><Data ss:Type="String">ОО</Data></Cell>
+    <Cell><Data ss:Type="String">approvedOrg</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010603</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">ЛО</Data></Cell>
-    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">airportOperator</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">0107</Data></Cell>
+    <Cell><Data ss:Type="String">010604</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">АУЦ</Data></Cell>
-    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">educationOrg</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">0108</Data></Cell>
+    <Cell><Data ss:Type="String">010605</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">ВП</Data></Cell>
-    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">airCarrier</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">0109</Data></Cell>
+    <Cell><Data ss:Type="String">010606</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">САО</Data></Cell>
-    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">airOperator</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">0110</Data></Cell>
+    <Cell><Data ss:Type="String">010607</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">СИАНО</Data></Cell>
-    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">airNavSvcProvider</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">0111</Data></Cell>
+    <Cell><Data ss:Type="String">010608</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">НСВНК и АСУВД</Data></Cell>
-    <Cell ss:StyleID="Default"/>
-   </Row>
-   <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">0112</Data></Cell>
-    <Cell ss:StyleID="s69"><Data ss:Type="String">ПКС</Data></Cell>
-    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">groundSvcOperator</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -481,8 +521,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>37</ActiveRow>
-     <ActiveCol>1</ActiveCol>
+     <ActiveRow>11</ActiveRow>
+     <RangeSelection>R12C1:R12C2</RangeSelection>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -753,7 +793,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <TopRowVisible>12</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
@@ -4023,10 +4062,12 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveCol>2</ActiveCol>
+     <ActiveRow>18</ActiveRow>
+     <ActiveCol>10</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

@@ -5,17 +5,25 @@ SET IDENTITY_INSERT [Classifications] ON
 INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(1,N'Всички документи',N'',1);
 INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(2,N'Услуги',N'',1);
 INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(3,N'Заявления',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(4,N'ЛАП',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(5,N'ВС',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(6,N'ЛЛП',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(7,N'ССНО',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(8,N'ЛО',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(9,N'АУЦ',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(10,N'ВП',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(11,N'САО',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(12,N'СИАНО',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(13,N'НСВНК и АСУВД',N'',1);
-INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(14,N'ПКС',N'',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(4,N'Физически лица',N'',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(5,N'Общи',N'person',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(6,N'Екипажи',N'flightCrew',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(7,N'ОВД',N'ovd',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(8,N'ТО(AML)',N'to_vs',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(9,N'ТО(СУВД)',N'to_suvd',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(10,N'ПКС',N'security',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(11,N'ВС',N'aircraft',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(12,N'ЛЛП',N'airport',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(13,N'ССНО',N'equipment',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(14,N'Организации',N'',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(15,N'Общи',N'org',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(16,N'ОО',N'approvedOrg',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(17,N'ЛО',N'airportOperator',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(18,N'АУЦ',N'educationOrg',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(19,N'ВП',N'airCarrier',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(20,N'САО',N'airOperator',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(21,N'СИАНО',N'airNavSvcProvider',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(22,N'НСВНК и АСУВД',N'groundSvcOperator',1);
 SET IDENTITY_INSERT [Classifications] OFF
 GO
 

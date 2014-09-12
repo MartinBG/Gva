@@ -25,6 +25,7 @@ namespace Regs.Api.Tests.Specs
             builder.RegisterType<LotRepository>().As<ILotRepository>();
             builder.RegisterType<LotEventDispatcher>().As<ILotEventDispatcher>();
             builder.RegisterType<MockLotEventHandler>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            builder.Register(c => new UserContext(1));
             this.container = builder.Build();
         }
 
@@ -45,9 +46,9 @@ namespace Regs.Api.Tests.Specs
                 lotRepository = lf.Resolve<ILotRepository>();
                 mockLotEventHandler = (MockLotEventHandler)lf.Resolve<ILotEventHandler>();
                 lotEventDispatcher = lf.Resolve<ILotEventDispatcher>();
-                userContext = new UserContext(1);
+                userContext = lf.Resolve<UserContext>();
 
-                lot = lotRepository.CreateLot("Person", userContext);
+                lot = lotRepository.CreateLot("Person");
                 lot.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
@@ -92,9 +93,9 @@ namespace Regs.Api.Tests.Specs
                 lotRepository = lf.Resolve<ILotRepository>();
                 mockLotEventHandler = (MockLotEventHandler)lf.Resolve<ILotEventHandler>();
                 lotEventDispatcher = lf.Resolve<ILotEventDispatcher>();
-                userContext = new UserContext(1);
+                userContext = lf.Resolve<UserContext>();
 
-                lot = lotRepository.CreateLot("Person", userContext);
+                lot = lotRepository.CreateLot("Person");
                 lot.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
@@ -109,7 +110,7 @@ namespace Regs.Api.Tests.Specs
                 int secondCommitId = secondCommit.CommitId;
 
                 //load the second commit
-                lotRepository.GetLot(lot.LotId, secondCommitId);
+                lotRepository.GetLot(lot.LotId, secondCommitId, fullAccess: true);
 
                 lot.Reset(firstCommitId, userContext, lotEventDispatcher);
 

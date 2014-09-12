@@ -28,6 +28,7 @@ namespace Gva.Api.Controllers.Organizations
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
+        private UserContext userContext;
 
         public OrganizationsController(
             IUnitOfWork unitOfWork,
@@ -36,7 +37,8 @@ namespace Gva.Api.Controllers.Organizations
             IOrganizationRepository organizationRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
-            ILotEventDispatcher lotEventDispatcher)
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -45,6 +47,7 @@ namespace Gva.Api.Controllers.Organizations
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
+            this.userContext = userContext;
         }
 
         [Route("new")]
@@ -85,15 +88,17 @@ namespace Gva.Api.Controllers.Organizations
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                UserContext userContext = this.Request.GetUserContext();
-                var newLot = this.lotRepository.CreateLot("Organization", userContext);
+                var newLot = this.lotRepository.CreateLot("Organization");
 
-                newLot.CreatePart("organizationData", JObject.FromObject(organizationData), userContext);
+                var partVersion = newLot.CreatePart("organizationData", JObject.FromObject(organizationData), this.userContext);
+
                 this.caseTypeRepository.AddCaseTypes(newLot, organizationData.CaseTypes.Select(ct => ct.NomValueId));
 
-                newLot.Commit(userContext, lotEventDispatcher);
+                newLot.Commit(this.userContext, lotEventDispatcher);
 
                 this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
 
                 transaction.Commit();
 
@@ -115,21 +120,24 @@ namespace Gva.Api.Controllers.Organizations
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                UserContext userContext = this.Request.GetUserContext();
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                this.caseTypeRepository.AddCaseTypes(
-                    lot,
-                    organizationData.CaseTypes.Select(ct => ct.NomValueId));
-                lot.UpdatePart("organizationData", JObject.FromObject(organizationData), userContext);
-                this.unitOfWork.Save();
+                this.caseTypeRepository.AddCaseTypes(lot, organizationData.CaseTypes.Select(ct => ct.NomValueId));
 
-                lot.Commit(userContext, this.lotEventDispatcher);
+                var partVersion = lot.UpdatePart("organizationData", JObject.FromObject(organizationData), this.userContext);
 
                 this.unitOfWork.Save();
+
+                lot.Commit(this.userContext, this.lotEventDispatcher);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
                 transaction.Commit();
+
+                return Ok();
             }
-            return Ok();
         }
 
         [Route("{lotId}/organizationInventory")]

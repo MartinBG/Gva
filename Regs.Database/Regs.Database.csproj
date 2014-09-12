@@ -48,6 +48,7 @@
     <Content Include="Create\Sequences\PartVersionSequence.sql" />
     <Content Include="Create\Sequences\PartSequence.sql" />
     <Content Include="Create\Sequences\LotSequence.sql" />
+    <Content Include="Create\Tables\LotPartTokens.sql" />
     <Content Include="Create\Tables\LotSetSchemas.sql" />
     <Content Include="Create\Tables\LotSchemas.sql" />
     <Content Include="Create\Tables\LotPartOperations.sql" />
@@ -59,6 +60,7 @@
     <Content Include="Create\Tables\LotParts.sql" />
     <Content Include="Create\Tables\LotSets.sql" />
     <Content Include="Create\Tables\Lots.sql" />
+    <Content Include="Create\Views\vwLotPartUsers.sql" />
     <Content Include="Insert\LotPartOperations.sql" />
   </ItemGroup>
   <ItemGroup />
