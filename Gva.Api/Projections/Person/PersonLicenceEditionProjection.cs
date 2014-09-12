@@ -20,28 +20,37 @@ namespace Gva.Api.Projections.Person
         public override IEnumerable<GvaViewPersonLicenceEdition> Execute(PartCollection parts)
         {
             var licences = parts.GetAll("licences");
+            var editions = parts.GetAll("licenceEditions");
 
-            return licences.SelectMany(l => l.Content.GetItems<JObject>("editions").Select(e => this.Create(l, e)));
+            return licences.SelectMany(l => {
+                var licenceEditions = editions.Where(e => e.Content.Get<int>("licencePartIndex") == l.Part.Index).ToArray();
+                return licenceEditions.Select(e => this.Create(l, e, licenceEditions));
+            });
         }
 
-        private GvaViewPersonLicenceEdition Create(PartVersion personLicence, JObject edition)
+        private GvaViewPersonLicenceEdition Create(PartVersion personLicence, PartVersion edition, PartVersion[] editions)
         {
             GvaViewPersonLicenceEdition licenceEdition = new GvaViewPersonLicenceEdition();
 
-            var lastEdition = personLicence.Content.GetItems<JObject>("editions").Last();
+            var firstEdition = editions.Where(ed => ed.Content.Get<int>("index") == editions.Min(e => e.Content.Get<int>("index"))).SingleOrDefault();
+            var lastEdition = editions.Where(ed => ed.Content.Get<int>("index") == editions.Max(e => e.Content.Get<int>("index"))).SingleOrDefault();
             licenceEdition.LotId = personLicence.Part.Lot.LotId;
             licenceEdition.PartId = personLicence.Part.PartId;
-            licenceEdition.EditionIndex = edition.Get<int>("index");
+            licenceEdition.EditionIndex = edition.Content.Get<int>("index");
             licenceEdition.LicenceTypeId = personLicence.Content.Get<int>("licenceType.nomValueId");
-            licenceEdition.StampNumber = edition.Get<string>("stampNumber");
-            licenceEdition.DateValidFrom = edition.Get<DateTime>("documentDateValidFrom");
-            licenceEdition.DateValidTo = edition.Get<DateTime>("documentDateValidTo");
-            licenceEdition.LicenceActionId = edition.Get<int>("licenceAction.nomValueId");
-            licenceEdition.LicenceNumber = personLicence.Content.Get<string>("licenceNumber");
-            licenceEdition.IsLastEdition = lastEdition.Get<int>("index") == edition.Get<int>("index");
-            licenceEdition.GvaApplicationId = edition.Get<int?>("applications[0].applicationId");
-            licenceEdition.ApplicationName = edition.Get<string>("applications[0].applicationName");
-            licenceEdition.ApplicationPartIndex = edition.Get<int?>("applications[0].partIndex");
+            licenceEdition.StampNumber = edition.Content.Get<string>("stampNumber");
+            licenceEdition.DateValidFrom = edition.Content.Get<DateTime>("documentDateValidFrom");
+            licenceEdition.DateValidTo = edition.Content.Get<DateTime?>("documentDateValidTo");
+            licenceEdition.LicenceActionId = edition.Content.Get<int>("licenceAction.nomValueId");
+            licenceEdition.LicenceNumber = personLicence.Content.Get<int>("licenceNumber");
+            licenceEdition.IsLastEdition = lastEdition.Content.Get<int>("index") == edition.Content.Get<int>("index");
+            licenceEdition.GvaApplicationId = edition.Content.Get<int?>("applications[0].applicationId");
+            licenceEdition.ApplicationName = edition.Content.Get<string>("applications[0].applicationName");
+            licenceEdition.ApplicationPartIndex = edition.Content.Get<int?>("applications[0].partIndex");
+            licenceEdition.LicencePartIndex = personLicence.Part.Index;
+            licenceEdition.EditionPartIndex = edition.Part.Index;
+            licenceEdition.FirstDocDateValidFrom = firstEdition.Content.Get<DateTime>("documentDateValidFrom");
+            licenceEdition.Valid = personLicence.Content.Get<string>("valid.code") == "Y";
 
             return licenceEdition;
         }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
+using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons
 {
@@ -44,6 +45,11 @@ namespace Gva.Api.ModelsDO.Persons
                     PartIndex = edition.ApplicationPartIndex
                 };
             }
+            this.LicenceType = edition.LicenceType;
+            this.LicencePartIndex = edition.LicencePartIndex;
+            this.EditionPartIndex = edition.EditionPartIndex;
+            this.FirstDocDateValidFrom = edition.FirstDocDateValidFrom;
+            this.Valid = edition.Valid;
         }
 
         public int LotId { get; set; }
@@ -58,7 +64,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public DateTime DateValidFrom { get; set; }
 
-        public DateTime DateValidTo { get; set; }
+        public DateTime? DateValidTo { get; set; }
 
         public int LicenceActionId { get; set; }
 
@@ -75,5 +81,15 @@ namespace Gva.Api.ModelsDO.Persons
         public PersonViewDO Person { get; set; }
 
         public ApplicationNomDO Application { get; set; }
+
+        public NomValue LicenceType { get; set; }
+
+        public int LicencePartIndex { get; set; }
+
+        public int EditionPartIndex { get; set; }
+
+        public DateTime FirstDocDateValidFrom { get; set; }
+
+        public bool Valid { get; set; }
     }
 }

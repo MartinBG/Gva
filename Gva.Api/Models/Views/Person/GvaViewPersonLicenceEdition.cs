@@ -3,11 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
 using Regs.Api.Models;
+using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.Models.Views.Person
 {
     public partial class GvaViewPersonLicenceEdition
     {
+
         public int LotId { get; set; }
 
         public int PartId { get; set; }
@@ -20,7 +22,7 @@ namespace Gva.Api.Models.Views.Person
 
         public DateTime DateValidFrom { get; set; }
 
-        public DateTime DateValidTo { get; set; }
+        public DateTime? DateValidTo { get; set; }
 
         public int LicenceActionId { get; set; }
 
@@ -34,6 +36,14 @@ namespace Gva.Api.Models.Views.Person
 
         public int? ApplicationPartIndex { get; set; }
 
+        public int LicencePartIndex { get; set; }
+
+        public int EditionPartIndex { get; set; }
+
+        public DateTime FirstDocDateValidFrom { get; set; }
+
+        public bool Valid { get; set; }
+
         public virtual GvaViewPerson Person { get; set; }
 
         public virtual Part Part { get; set; }
@@ -43,6 +53,7 @@ namespace Gva.Api.Models.Views.Person
         public virtual NomValue LicenceAction { get; set; }
 
         public virtual GvaApplication Application { get; set; }
+
     }
 
     public class GvaViewPersonLicenceEditionMap : EntityTypeConfiguration<GvaViewPersonLicenceEdition>
@@ -80,7 +91,11 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
             this.Property(t => t.ApplicationName).HasColumnName("ApplicationName");
             this.Property(t => t.ApplicationPartIndex).HasColumnName("ApplicationPartIndex");
-
+            this.Property(t => t.LicencePartIndex).HasColumnName("LicencePartIndex");
+            this.Property(t => t.EditionPartIndex).HasColumnName("EditionPartIndex");
+            this.Property(t => t.FirstDocDateValidFrom).HasColumnName("FirstDocDateValidFrom");
+            this.Property(t => t.Valid).HasColumnName("Valid");
+            
             // Relationships
             this.HasRequired(t => t.Person)
                 .WithMany(d => d.PersonLicenceEditions)
