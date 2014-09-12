@@ -676,6 +676,7 @@
     <Content Include="js\gva\persons\resources\personDocumentMedicals.js" />
     <Content Include="js\gva\persons\resources\personDocumentOthers.js" />
     <Content Include="js\gva\persons\resources\personDocumentTrainings.js" />
+    <Content Include="js\gva\persons\resources\personLicenceEditions.js" />
     <Content Include="js\gva\persons\resources\securityExam.js" />
     <Content Include="js\gva\persons\resources\personExams.js" />
     <Content Include="js\gva\persons\resources\personFlyingExperiences.js" />
@@ -766,8 +767,12 @@
     <Content Include="js\gva\persons\views\inventory\inventorySearchCtrl.js" />
     <Content Include="js\gva\persons\views\licences\chooseLicence.html" />
     <Content Include="js\gva\persons\views\licences\chooseLicenceCtrl.js" />
-    <Content Include="js\gva\persons\views\licences\licencesEdit.html" />
-    <Content Include="js\gva\persons\views\licences\licencesEditCtrl.js" />
+    <Content Include="js\gva\persons\views\licences\licenceEditions\licenceEditionsEdit.html" />
+    <Content Include="js\gva\persons\views\licences\licenceEditions\licenceEditionsEditCtrl.js" />
+    <Content Include="js\gva\persons\views\licences\licenceEditions\licenceEditionsNew.html" />
+    <Content Include="js\gva\persons\views\licences\licenceEditions\licenceEditionsNewCtrl.js" />
+    <Content Include="js\gva\persons\views\licences\licencesView.html" />
+    <Content Include="js\gva\persons\views\licences\licencesViewCtrl.js" />
     <Content Include="js\gva\persons\views\licences\licencesNew.html" />
     <Content Include="js\gva\persons\views\licences\licencesNewCtrl.js" />
     <Content Include="js\gva\persons\views\licences\licencesSearch.html" />

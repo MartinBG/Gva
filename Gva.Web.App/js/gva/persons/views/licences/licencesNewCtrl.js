@@ -8,9 +8,9 @@
     $stateParams,
     $filter,
     PersonLicences,
-    licence
+    newLicence
   ) {
-    $scope.licence = licence;
+    $scope.newLicence = newLicence;
     $scope.lotId = $stateParams.id;
     $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.appId = $stateParams.appId;
@@ -19,7 +19,8 @@
       return $scope.newLicenceForm.$validate().then(function () {
         if ($scope.newLicenceForm.$valid) {
           return PersonLicences
-            .save({ id: $stateParams.id }, $scope.licence).$promise
+            .save(
+              { id: $stateParams.id }, $scope.newLicence).$promise
             .then(function () {
               return $state.go('root.persons.view.licences.search');
             });
@@ -38,11 +39,11 @@
     '$stateParams',
     '$filter',
     'PersonLicences',
-    'licence'
+    'newLicence'
   ];
 
   LicencesNewCtrl.$resolve = {
-    licence: [
+    newLicence: [
       '$stateParams',
       'PersonLicences',
       function ($stateParams, PersonLicences) {
