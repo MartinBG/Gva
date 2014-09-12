@@ -62,8 +62,14 @@ namespace Gva.Api.WordTemplates
             var personAddress = personAddressPart == null ?
                 new JObject() :
                 personAddressPart.Content;
-            var licence = lot.Index.GetPart(path).Content;
-            var editions = licence.GetItems<JObject>("editions");
+
+            var licencePart = lot.Index.GetPart(path);
+            var licence = licencePart.Content;
+            var editions = lot.Index.GetParts("licenceEditions")
+                .Where(e => e.Content.Get<int>("licencePartIndex") == licencePart.Part.Index)
+                .OrderBy(e => e.Content.Get<int>("index"))
+                .Select(e => e.Content);
+
             var firstEdition = editions.First();
             var lastEdition = editions.Last();
 
