@@ -76,7 +76,7 @@ namespace Common.Api.Controllers
                         signedStream.Position = 0;
                         signedStream.CopyTo(stream);
 
-                        var blobKey = await blobWriter.GetBlobKeyAsync();
+                        var blobKey = blobWriter.GetBlobKey();
 
                         return Request.CreateResponse(HttpStatusCode.OK, new { fileKey = blobKey });
                     }

@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Security.Cryptography;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Common.Blob
 {
     public class BlobWriter : IDisposable
     {
+        private static object updatingSyncRoot = new Object();
+
         private SqlConnection connection;
         private Stream stream;
         private int id;
@@ -37,6 +41,9 @@ namespace Common.Blob
             }
         }
 
+        //GetBlobKey is only synchronous as updates need to be executed sequentially
+        //it would be hard to implement such a method in a way that would not lead
+        //to deadlocking when both the sync and async versions are used
         public Guid GetBlobKey()
         {
             // make sure noone writes to the blob after we calculate its hash
@@ -46,9 +53,11 @@ namespace Common.Blob
             using (SqlTransaction trn = this.connection.BeginTransaction())
             using (SqlCommand cmdUpdate = this.CreateUpdateCmd(trn, out blobKeyParam))
             {
-                cmdUpdate.ExecuteNonQuery();
-
-                trn.Commit();
+                lock (updatingSyncRoot)
+                {
+                    cmdUpdate.ExecuteNonQuery();
+                    trn.Commit();
+                }
 
                 return (Guid)blobKeyParam.Value;
             }
@@ -69,23 +78,6 @@ namespace Common.Blob
                 this.stream = new CryptoStream(blobStream, this.sha1, CryptoStreamMode.Write);
 
                 return this.stream;
-            }
-        }
-
-        public async Task<Guid> GetBlobKeyAsync()
-        {
-            // make sure noone writes to the blob after we calculate its hash
-            this.stream.Close();
-
-            SqlParameter blobKeyParam;
-            using (SqlTransaction trn = this.connection.BeginTransaction())
-            using (SqlCommand cmdUpdate = this.CreateUpdateCmd(trn, out blobKeyParam))
-            {
-                await cmdUpdate.ExecuteNonQueryAsync();
-
-                trn.Commit();
-
-                return (Guid)blobKeyParam.Value;
             }
         }
 
