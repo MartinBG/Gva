@@ -101,6 +101,7 @@
     <Content Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="word_templates\checklist.docx" />
     <None Include="word_templates\doklad_template.docx" />
     <None Include="word_templates\stanovishte_template.docx" />
   </ItemGroup>

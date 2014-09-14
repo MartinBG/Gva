@@ -85,7 +85,8 @@
               <a sc-click="disconnectDoc(['stChecklistId'])" ng-if="app.stChecklistRelation.docRelationId" style="cursor: pointer;">разкачи</a>&nbsp|
               <a sc-click="generateSTChecklist('new')" style="cursor: pointer;">нов</a>&nbsp|
               <a sc-click="generateSTChecklist('copy')" style="cursor: pointer;">копие</a>&nbsp|
-              <a sc-click="generateSTChecklist('correct')" style="cursor: pointer;">поправка</a>
+              <a sc-click="generateSTChecklist('correct')" style="cursor: pointer;">поправка</a>&nbsp|
+              <a ng-href="api/aop/apps/{{ app.aopApplicationId }}/download/checklist?identifier=st" target="_blank">свали</a>
             </div>
           </div>
 
@@ -178,7 +179,8 @@
               <a sc-click="disconnectDoc(['ndChecklistId'])" ng-if="app.ndChecklistRelation.docRelationId" style="cursor: pointer;">разкачи</a>&nbsp|
               <a sc-click="generateNDChecklist('new')" style="cursor: pointer;">нов</a>&nbsp|
               <a sc-click="generateNDChecklist('copy')" style="cursor: pointer;">копие</a>&nbsp|
-              <a sc-click="generateNDChecklist('correct')" style="cursor: pointer;">поправка</a>
+              <a sc-click="generateNDChecklist('correct')" style="cursor: pointer;">поправка</a>&nbsp|
+              <a ng-href="api/aop/apps/{{ app.aopApplicationId }}/download/checklist?identifier=nd" target="_blank">свали</a>
             </div>
           </div>
 

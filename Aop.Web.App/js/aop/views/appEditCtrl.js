@@ -103,7 +103,7 @@
     };
 
     //ST
-    $scope.generateSTChecklist = function (action) {
+    $scope.generateSTChecklist = function (action) { //? merge in one with generateNDChecklist?
       return Aops
         .generateChecklist({
           id: $scope.app.aopApplicationId,
