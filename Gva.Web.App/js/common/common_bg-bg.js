@@ -20,8 +20,7 @@
             'new': 'Нов документ',
             news: 'Нови документи',
             corrsSearch: 'Кореспонденти',
-            corrsNew: 'Нов кореспондент',
-            printableDocs: 'Документи за печат'
+            corrsNew: 'Нов кореспондент'
           },
           persons: {
             title: 'ЛАП',
@@ -29,7 +28,8 @@
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
             exam: 'Нов теор.изпит АС',
-            stampedDocuments: 'Документи за печат'
+            printableDocs: 'Документи за печат',
+            stampedDocuments: 'Лицензи за получаване'
           },
           aircrafts: {
             title: 'ВС',

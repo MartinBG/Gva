@@ -3834,7 +3834,8 @@
         'root.equipments.view.inspections.new': 'Нова инспекция',
         'root.equipments.view.inspections.edit': 'Преглед на инспекция',
         'root.equipments.view.inventory': 'Опис',
-        'root.printableDocs': 'Документи за печат'
+        'root.printableDocs': 'Документи за печат',
+        'root.stampedDocuments': 'Лицензи за получаване'
       }
     });
   }]);
