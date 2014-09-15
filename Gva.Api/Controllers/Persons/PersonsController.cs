@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using Gva.Api.Repositories.ApplicationStageRepository;
 using System;
 using Regs.Api.Models;
+using Common.Api.Repositories.NomRepository;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -32,6 +33,7 @@ namespace Gva.Api.Controllers.Persons
         private IApplicationRepository applicationRepository;
         private IApplicationStageRepository applicationStageRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private INomRepository nomRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
 
@@ -43,6 +45,7 @@ namespace Gva.Api.Controllers.Persons
             IApplicationRepository applicationRepository,
             IApplicationStageRepository applicationStageRepository,
             ICaseTypeRepository caseTypeRepository,
+            INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
         {
@@ -53,6 +56,7 @@ namespace Gva.Api.Controllers.Persons
             this.applicationRepository = applicationRepository;
             this.applicationStageRepository = applicationStageRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.nomRepository = nomRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
         }
@@ -79,6 +83,8 @@ namespace Gva.Api.Controllers.Persons
                 newPerson.PersonDocumentId = new PersonDocumentIdDO();
                 newPerson.PersonAddress = new PersonAddressDO();
             }
+
+            newPerson.PersonData.Country = this.nomRepository.GetNomValue("countries", "BG");
 
             return Ok(newPerson);
         }

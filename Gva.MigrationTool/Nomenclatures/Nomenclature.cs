@@ -759,7 +759,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Name = r.Field<string>("NAME"),
                         NameAlt = r.Field<string>("NAME_TRANS"),
                         ParentValueId = null,
-                        Alias = null,
+                        Alias = r.Field<string>("CODE") == "BG" ? "BG" : null,
                         TextContentString = JsonConvert.SerializeObject(
                             new {
                                 NationalityCodeCA = r.Field<string>("CA_NATIONALITY_CODE"),
