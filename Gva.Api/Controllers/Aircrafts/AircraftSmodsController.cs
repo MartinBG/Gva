@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
@@ -13,20 +14,27 @@ namespace Gva.Api.Controllers.Aircrafts
     [Authorize]
     public class AircraftSmodsController : GvaApplicationPartController<AircraftCertSmodDO>
     {
+        private INomRepository nomRepository;
+
         public AircraftSmodsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
+            INomRepository nomRepository,
             UserContext userContext)
             : base("aircraftCertSmods", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
+            this.nomRepository = nomRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewCertSmod()
         {
-            return Ok(new ApplicationPartVersionDO<AircraftCertSmodDO>(new AircraftCertSmodDO()));
+            AircraftCertSmodDO certificate = new AircraftCertSmodDO();
+            certificate.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+
+            return Ok(new ApplicationPartVersionDO<AircraftCertSmodDO>(certificate));
         }
     }
 }

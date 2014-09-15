@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
@@ -14,21 +15,28 @@ namespace Gva.Api.Controllers.Organizations
     [Authorize]
     public class OrganizationCertAirNavigationServiceDeliverersController : GvaApplicationPartController<OrganizationCertAirNavigationServiceDelivererDO>
     {
+        private INomRepository nomRepository;
+
         public OrganizationCertAirNavigationServiceDeliverersController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher,
             IOrganizationRepository organizationRepository,
+            INomRepository nomRepository,
+            ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("organizationCertAirNavigationServiceDeliverers", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
+            this.nomRepository = nomRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewCertAirNavigationServiceDeliverer(int lotId)
         {
-            return Ok(new ApplicationPartVersionDO<OrganizationCertAirNavigationServiceDelivererDO>(new OrganizationCertAirNavigationServiceDelivererDO()));
+            OrganizationCertAirNavigationServiceDelivererDO certificate = new OrganizationCertAirNavigationServiceDelivererDO();
+            certificate.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+
+            return Ok(new ApplicationPartVersionDO<OrganizationCertAirNavigationServiceDelivererDO>(certificate));
         }
     }
 }

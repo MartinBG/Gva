@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
@@ -18,17 +19,20 @@ namespace Gva.Api.Controllers.Persons
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
+        private INomRepository nomRepository;
 
         public PersonDocumentExamsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
+            INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("personDocumentExams", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.applicationRepository = applicationRepository;
+            this.nomRepository = nomRepository;
             this.lotRepository = lotRepository;
         }
 
@@ -39,6 +43,8 @@ namespace Gva.Api.Controllers.Persons
             {
                 DocumentDateValidFrom = DateTime.Now
             };
+
+            newDocumentExam.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
             var files = new List<FileDO>();
             if (appId.HasValue)
