@@ -1954,7 +1954,6 @@
           authorization: 'Разрешение',
           aircraftTypeGroup: 'Тип/Група ВС',
           ratingCategory: 'Категория',
-          personRatingModel: 'Модел',
           administration: 'Администрация'
         },
         licenceDirective: {
@@ -2458,8 +2457,7 @@
           lastEditionValidFrom: 'Издаден',
           lastEditionValidTo: 'Валиден до',
           lastEditionNotes: 'Бележки',
-          lastEditionNotesAlt: 'Бележки лат.',
-          personRatingModel: 'Модел'
+          lastEditionNotesAlt: 'Бележки лат.'
         },
         ratingEdit: {
           title: 'Вписване',
@@ -2474,7 +2472,6 @@
           documentDateValidTo: 'Валиден до',
           notes: 'Бележки',
           notesAlt: 'Бележки лат.',
-          personRatingModel: 'Модел',
           inspector: 'Инспектор',
           newEdition: 'Ново вписване',
           editLastEdition: 'Редакция',

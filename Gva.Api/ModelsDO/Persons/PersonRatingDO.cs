@@ -22,9 +22,6 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string Sector { get; set; }
 
-        [Required(ErrorMessage = "PersonRatingModel is required.")]
-        public NomValue PersonRatingModel { get; set; }
-
         public NomValue AircraftTypeGroup { get; set; }
 
         public NomValue AircraftTypeCategory { get; set; }
