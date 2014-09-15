@@ -4,23 +4,15 @@ GO
 ---------------------------------------------------------------
 -- Tables
 ---------------------------------------------------------------
-
-
-
+--Roles
 :r $(rootPath)"\Tables\Users\RoleClassifications.sql"
 
-:r $(rootPath)"\Tables\AopApplicationCriteria.sql"
-:r $(rootPath)"\Tables\AopApplicationObjects.sql"
-:r $(rootPath)"\Tables\AopEmployerTypes.sql"
-:r $(rootPath)"\Tables\AopApplicationTypes.sql"
-:r $(rootPath)"\Tables\AopChecklistStatuses.sql"
-:r $(rootPath)"\Tables\AopProcedureStatuses.sql"
-
+--Aop specific
 :r $(rootPath)"\Tables\AopEmployers.sql"
 :r $(rootPath)"\Tables\AopApplications.sql"
 :r $(rootPath)"\Tables\AopPortalDocRelations.sql"
 
---Tokens
+--Aop Tokens
 :r $(rootPath)"\Tables\Tokens\AopApplicationTokens.sql"
 
 ---------------------------------------------------------------
@@ -60,18 +52,18 @@ GO
 :r $(rootPath)\"..\Insert\AopExcelConfig\Users.sql"
 :r $(rootPath)\"..\Insert\AopExcelConfig\ConfigFinalize.sql"
 
-:r $(rootPath)\"..\Insert\AopCorrespondents.sql"
-
-:r $(rootPath)\"..\Insert\AopApplicationCriteria.sql"
-:r $(rootPath)\"..\Insert\AopApplicationObjects.sql"
-:r $(rootPath)\"..\Insert\AopApplicationTypes.sql"
-:r $(rootPath)\"..\Insert\AopChecklistStatuses.sql"
-:r $(rootPath)\"..\Insert\AopEmployerTypes.sql"
-:r $(rootPath)\"..\Insert\AopProcedureStatuses.sql"
-
 ---------------------------------------------------------------
 --Insert ADDITIONAL
 ---------------------------------------------------------------
+
+:r $(rootPath)\"..\Insert\AopCorrespondents.sql"
+
+:r $(rootPath)\"..\Insert\Noms\AopApplicationCriteria.sql"
+:r $(rootPath)\"..\Insert\Noms\AopApplicationObjects.sql"
+:r $(rootPath)\"..\Insert\Noms\AopApplicationTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\AopChecklistStatuses.sql"
+:r $(rootPath)\"..\Insert\Noms\AopEmployerTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\AopProcedureStatuses.sql"
 
 :r $(rootPath)\"..\Insert\Users\Roles.sql"
 :r $(rootPath)\"..\Insert\Users\UserRoles.sql"

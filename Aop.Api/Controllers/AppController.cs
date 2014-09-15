@@ -4,6 +4,7 @@ using Aop.Api.Repositories.Aop;
 using Aop.Api.Utils;
 using Aop.Api.WordTemplates;
 using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.Repositories.UserRepository;
 using Common.Api.UserContext;
 using Common.Blob;
@@ -12,6 +13,7 @@ using Common.Extensions;
 using Common.Utils;
 using Docs.Api.DataObjects;
 using Docs.Api.Models;
+using Docs.Api.Repositories.ClassificationRepository;
 using Docs.Api.Repositories.DocRepository;
 using System;
 using System.Collections.Generic;
@@ -35,14 +37,16 @@ namespace Aop.Api.Controllers
         private IDocRepository docRepository;
         private UserContext userContext;
         private IUserRepository userRepository;
+        private INomRepository nomRepository;
         private IDataGenerator dataGenerator;
-        private Docs.Api.Repositories.ClassificationRepository.IClassificationRepository classificationRepository;
+        private IClassificationRepository classificationRepository;
 
         public AppController(IUnitOfWork unitOfWork,
             IAppRepository appRepository,
             IDocRepository docRepository,
             IUserRepository userRepository,
-            Docs.Api.Repositories.ClassificationRepository.IClassificationRepository classificationRepository,
+            IClassificationRepository classificationRepository,
+            INomRepository nomRepository,
             IDataGenerator dataGenerator)
         {
             this.unitOfWork = unitOfWork;
@@ -50,6 +54,7 @@ namespace Aop.Api.Controllers
             this.docRepository = docRepository;
             this.userRepository = userRepository;
             this.classificationRepository = classificationRepository;
+            this.nomRepository = nomRepository;
             this.dataGenerator = dataGenerator;
         }
 
@@ -590,25 +595,25 @@ namespace Aop.Api.Controllers
                     string subject = FedExtractor.GetSubject(fedDoc);
                     string val = FedExtractor.GetPredictedValue(fedDoc);
 
-                    var stAopApplicationType = this.unitOfWork.DbContext.Set<AopApplicationType>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(procType.ToLower()));
+                    var stAopApplicationType = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationType" && e.Name.ToLower().StartsWith(procType.ToLower()));
                     if (stAopApplicationType != null)
                     {
-                        app.STAopApplicationTypeId = stAopApplicationType.AopApplicationTypeId;
+                        app.STAopApplicationTypeId = stAopApplicationType.NomValueId;
                     }
 
-                    var stObject = this.unitOfWork.DbContext.Set<AopApplicationObject>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(obj.ToLower()));
+                    var stObject = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationObject" && e.Name.ToLower().StartsWith(obj.ToLower()));
                     if (stObject != null)
                     {
-                        app.STObjectId = stObject.AopApplicationObjectId;
+                        app.STObjectId = stObject.NomValueId;
                     }
 
-                    var stCriteria = this.unitOfWork.DbContext.Set<AopApplicationCriteria>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(criteria.ToLower()));
+                    var stCriteria = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationCriteria" && e.Name.ToLower().StartsWith(criteria.ToLower()));
                     if (stCriteria != null)
                     {
-                        app.STCriteriaId = stCriteria.AopApplicationCriteriaId;
+                        app.STCriteriaId = stCriteria.NomValueId;
                     }
 
                     app.STSubject = subject;
@@ -629,9 +634,9 @@ namespace Aop.Api.Controllers
                         string aopEmpName = FedExtractor.GetContractor(fedDoc);
                         string aopEmpLotNum = FedExtractor.GetContractorBatch(fedDoc);
 
-                        AopEmployerType unknownAopEmpType = this.appRepository.GetAopEmployerTypeByAlias("Unknown");
+                        NomValue unknownAopEmpType = this.nomRepository.GetNomValue("AopApplicationObject", "Unknown");
 
-                        AopEmployer emp = appRepository.CreateAopEmployer(aopEmpName, aopEmpLotNum, aopEmpUic, unknownAopEmpType.AopEmployerTypeId);
+                        AopEmployer emp = appRepository.CreateAopEmployer(aopEmpName, aopEmpLotNum, aopEmpUic, unknownAopEmpType.NomValueId);
 
                         this.unitOfWork.DbContext.Set<AopEmployer>().Add(emp);
 
@@ -708,25 +713,25 @@ namespace Aop.Api.Controllers
                     string subject = FedExtractor.GetSubject(fedDoc);
                     string val = FedExtractor.GetPredictedValue(fedDoc);
 
-                    var ndAopApplicationType = this.unitOfWork.DbContext.Set<AopApplicationType>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(procType.ToLower()));
+                    var ndAopApplicationType = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationType" && e.Name.ToLower().StartsWith(procType.ToLower()));
                     if (ndAopApplicationType != null)
                     {
-                        app.NDAopApplicationTypeId = ndAopApplicationType.AopApplicationTypeId;
+                        app.NDAopApplicationTypeId = ndAopApplicationType.NomValueId;
                     }
 
-                    var ndObject = this.unitOfWork.DbContext.Set<AopApplicationObject>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(obj.ToLower()));
+                    var ndObject = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationObject" && e.Name.ToLower().StartsWith(obj.ToLower()));
                     if (ndObject != null)
                     {
-                        app.NDObjectId = ndObject.AopApplicationObjectId;
+                        app.NDObjectId = ndObject.NomValueId;
                     }
 
-                    var ndCriteria = this.unitOfWork.DbContext.Set<AopApplicationCriteria>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(criteria.ToLower()));
+                    var ndCriteria = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationCriteria" && e.Name.ToLower().StartsWith(criteria.ToLower()));
                     if (ndCriteria != null)
                     {
-                        app.NDCriteriaId = ndCriteria.AopApplicationCriteriaId;
+                        app.NDCriteriaId = ndCriteria.NomValueId;
                     }
 
                     app.NDSubject = subject;
@@ -747,9 +752,9 @@ namespace Aop.Api.Controllers
                         string aopEmpName = FedExtractor.GetContractor(fedDoc);
                         string aopEmpLotNum = FedExtractor.GetContractorBatch(fedDoc);
 
-                        AopEmployerType unknownAopEmpType = this.appRepository.GetAopEmployerTypeByAlias("Unknown");
+                        NomValue unknownAopEmpType = this.nomRepository.GetNomValue("AopApplicationObject", "Unknown");
 
-                        AopEmployer emp = appRepository.CreateAopEmployer(aopEmpName, aopEmpLotNum, aopEmpUic, unknownAopEmpType.AopEmployerTypeId);
+                        AopEmployer emp = appRepository.CreateAopEmployer(aopEmpName, aopEmpLotNum, aopEmpUic, unknownAopEmpType.NomValueId);
 
                         this.unitOfWork.DbContext.Set<AopEmployer>().Add(emp);
 

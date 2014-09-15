@@ -32,7 +32,7 @@ namespace Aop.Api.Repositories.Aop
 
         AopEmployer CreateAopEmployer(string name, string lotNum, string uic, int aopEmployerTypeId);
 
-        AopEmployerType GetAopEmployerTypeByAlias(string alias);
+        NomValue GetAopEmployerTypeByAlias(string alias);
 
         List<vwAopApplicationUser> GetvwAopApplicationUsersForAppByUnitId(int aopApplicationId, UnitUser unitUser);
 

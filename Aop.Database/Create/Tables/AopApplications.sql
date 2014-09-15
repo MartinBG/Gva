@@ -40,30 +40,31 @@ CREATE TABLE [dbo].[AopApplications] (
     [NDReportId] INT NULL,
 
     [Version] ROWVERSION NOT NULL,
-    CONSTRAINT [PK_AopApplications]           PRIMARY KEY ([AopApplicationId]),
 
-    CONSTRAINT [FK_AopApplications_Units]      FOREIGN KEY ([CreateUnitId])            REFERENCES [dbo].[Units] ([UnitId]),
+    CONSTRAINT [PK_AopApplications] PRIMARY KEY ([AopApplicationId]),
 
-    CONSTRAINT [FK_AopApplications_AopEmployers]      FOREIGN KEY ([AopEmployerId])            REFERENCES [dbo].[AopEmployers] ([AopEmployerId]),
+    CONSTRAINT [FK_AopApplications_Units] FOREIGN KEY ([CreateUnitId]) REFERENCES [dbo].[Units] ([UnitId]),
 
-    CONSTRAINT [FK_AopApplications_Docs]      FOREIGN KEY ([DocId])            REFERENCES [dbo].[Docs] ([DocId]),
-    CONSTRAINT [FK_AopApplications_Docs2]      FOREIGN KEY ([STDocId])            REFERENCES [dbo].[Docs] ([DocId]),
-    CONSTRAINT [FK_AopApplications_Docs3]      FOREIGN KEY ([STChecklistId])            REFERENCES [dbo].[Docs] ([DocId]),
-    CONSTRAINT [FK_AopApplications_Docs4]      FOREIGN KEY ([STNoteId])            REFERENCES [dbo].[Docs] ([DocId]),
+    CONSTRAINT [FK_AopApplications_AopEmployers] FOREIGN KEY ([AopEmployerId]) REFERENCES [dbo].[AopEmployers] ([AopEmployerId]),
 
-    CONSTRAINT [FK_AopApplications_Docs5]      FOREIGN KEY ([NDDocId])            REFERENCES [dbo].[Docs] ([DocId]),
-    CONSTRAINT [FK_AopApplications_Docs6]      FOREIGN KEY ([NDChecklistId])            REFERENCES [dbo].[Docs] ([DocId]),
-    CONSTRAINT [FK_AopApplications_Docs7]      FOREIGN KEY ([NDReportId])            REFERENCES [dbo].[Docs] ([DocId]),
+    CONSTRAINT [FK_AopApplications_Docs] FOREIGN KEY ([DocId]) REFERENCES [dbo].[Docs] ([DocId]),
+    CONSTRAINT [FK_AopApplications_Docs2] FOREIGN KEY ([STDocId]) REFERENCES [dbo].[Docs] ([DocId]),
+    CONSTRAINT [FK_AopApplications_Docs3] FOREIGN KEY ([STChecklistId]) REFERENCES [dbo].[Docs] ([DocId]),
+    CONSTRAINT [FK_AopApplications_Docs4] FOREIGN KEY ([STNoteId]) REFERENCES [dbo].[Docs] ([DocId]),
 
-    CONSTRAINT [FK_AopApplications_AopChecklistStatuses]      FOREIGN KEY ([STChecklistStatusId])            REFERENCES [dbo].[AopChecklistStatuses] ([AopChecklistStatusId]),
-    CONSTRAINT [FK_AopApplications_AopChecklistStatuses2]      FOREIGN KEY ([NDChecklistStatusId])            REFERENCES [dbo].[AopChecklistStatuses] ([AopChecklistStatusId]),
+    CONSTRAINT [FK_AopApplications_Docs5] FOREIGN KEY ([NDDocId]) REFERENCES [dbo].[Docs] ([DocId]),
+    CONSTRAINT [FK_AopApplications_Docs6] FOREIGN KEY ([NDChecklistId]) REFERENCES [dbo].[Docs] ([DocId]),
+    CONSTRAINT [FK_AopApplications_Docs7] FOREIGN KEY ([NDReportId]) REFERENCES [dbo].[Docs] ([DocId]),
 
-    CONSTRAINT [FK_AopApplications_AopProcedureStatuses]      FOREIGN KEY ([NDProcedureStatusId])            REFERENCES [dbo].[AopProcedureStatuses] ([AopProcedureStatusId]),
+    CONSTRAINT [FK_AopApplications_NomValues] FOREIGN KEY ([STChecklistStatusId]) REFERENCES [dbo].[NomValues] ([NomValueId]),
+    CONSTRAINT [FK_AopApplications_NomValues2] FOREIGN KEY ([NDChecklistStatusId]) REFERENCES [dbo].[NomValues] ([NomValueId]),
 
-    CONSTRAINT [FK_AopApplications_AopApplicationCriteria]      FOREIGN KEY ([STCriteriaId])            REFERENCES [dbo].[AopApplicationCriteria] ([AopApplicationCriteriaId]),
-    CONSTRAINT [FK_AopApplications_AopApplicationCriteria2]      FOREIGN KEY ([NDCriteriaId])            REFERENCES [dbo].[AopApplicationCriteria] ([AopApplicationCriteriaId]),
+    CONSTRAINT [FK_AopApplications_NomValues3] FOREIGN KEY ([NDProcedureStatusId]) REFERENCES [dbo].[NomValues] ([NomValueId]),
 
-    CONSTRAINT [FK_AopApplications_AopApplicationObjects]      FOREIGN KEY ([STObjectId])            REFERENCES [dbo].[AopApplicationObjects] ([AopApplicationObjectId]),
-    CONSTRAINT [FK_AopApplications_AopApplicationObjects2]      FOREIGN KEY ([NDObjectId])            REFERENCES [dbo].[AopApplicationObjects] ([AopApplicationObjectId])
+    CONSTRAINT [FK_AopApplications_NomValues4] FOREIGN KEY ([STCriteriaId]) REFERENCES [dbo].[NomValues] ([NomValueId]),
+    CONSTRAINT [FK_AopApplications_NomValues5] FOREIGN KEY ([NDCriteriaId]) REFERENCES [dbo].[NomValues] ([NomValueId]),
+
+    CONSTRAINT [FK_AopApplications_NomValues6] FOREIGN KEY ([STObjectId]) REFERENCES [dbo].[NomValues] ([NomValueId]),
+    CONSTRAINT [FK_AopApplications_NomValues7] FOREIGN KEY ([NDObjectId]) REFERENCES [dbo].[NomValues] ([NomValueId])
 )
 GO

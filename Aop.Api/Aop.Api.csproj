@@ -141,14 +141,8 @@
     <Compile Include="Fedv5\Partials\section_setsection.cs" />
     <Compile Include="Fedv5\Partials\section_setsectiongroup.cs" />
     <Compile Include="Models\AopApp.cs" />
-    <Compile Include="Models\AopApplicationCriteria.cs" />
-    <Compile Include="Models\AopApplicationObject.cs" />
-    <Compile Include="Models\AopApplicationType.cs" />
-    <Compile Include="Models\AopChecklistStatus.cs" />
     <Compile Include="Models\AopDbConfiguration.cs" />
     <Compile Include="Models\AopEmployer.cs" />
-    <Compile Include="Models\AopEmployerType.cs" />
-    <Compile Include="Models\AopProcedureStatus.cs" />
     <Compile Include="Models\AopPortalDocRelation.cs" />
     <Compile Include="Models\AopApplicationToken.cs" />
     <Compile Include="Models\vwAopApplicationUser.cs" />

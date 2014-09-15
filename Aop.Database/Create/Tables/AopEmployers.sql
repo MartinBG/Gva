@@ -9,6 +9,6 @@ CREATE TABLE [dbo].[AopEmployers] (
     [AopEmployerTypeId] INT NOT NULL,
     [Version] ROWVERSION NOT NULL,
     CONSTRAINT [PK_AopEmployers] PRIMARY KEY ([AopEmployerId]),
-    CONSTRAINT [FK_AopEmployers_AopEmployerTypes] FOREIGN KEY ([AopEmployerTypeId]) REFERENCES [dbo].[AopEmployerTypes] ([AopEmployerTypeId])
+    CONSTRAINT [FK_AopEmployers_NomValues] FOREIGN KEY ([AopEmployerTypeId]) REFERENCES [dbo].[NomValues] ([NomValueId])
 )
 GO

@@ -136,9 +136,9 @@ namespace Aop.Api.Repositories.Aop
             return emp;
         }
 
-        public AopEmployerType GetAopEmployerTypeByAlias(string alias)
+        public NomValue GetAopEmployerTypeByAlias(string alias)
         {
-            return this.unitOfWork.DbContext.Set<AopEmployerType>().FirstOrDefault(e => e.Alias.ToLower() == alias.ToLower());
+            return this.unitOfWork.DbContext.Set<NomValue>().Where(nv => nv.Nom.Alias == "AopEmployerType" && nv.Alias == alias).SingleOrDefault();
         }
 
         public List<vwAopApplicationUser> GetvwAopApplicationUsersForAppByUnitId(int aopApplicationId, UnitUser unitUser)
