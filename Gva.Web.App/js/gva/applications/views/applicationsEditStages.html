@@ -11,7 +11,7 @@
     <sc-column data="inspectorName" title="applications.edit.stages.appStageInspector">
     </sc-column>
   </sc-datatable>
-  <sc-button name="createBtn" btn-click="newAppStage()" text="applications.edit.stages.newAppStage" class="btn btn-default btn-xs"></sc-button>
+  <sc-button name="createBtn" btn-click="newAppStage()" text="applications.edit.stages.newAppStage" class="btn btn-primary btn-xs" icon="glyphicon-plus"></sc-button>
 
   <h5 class="table-header" l10n-text="applications.edit.stages.docStages"></h5>
   <table class="table table-bordered table-condensed" style="margin-bottom:15px;">
@@ -41,12 +41,12 @@
       </tr>
     </tbody>
   </table>
-  <sc-button name="endStageButton" btn-click="endDocStage()" text="applications.edit.stages.endElectronicStage" class="btn btn-default btn-xs" ng-show="doc.flags.isVisibleEndStageCmd">
+  <sc-button name="endStageButton" btn-click="endDocStage()" text="applications.edit.stages.endElectronicStage" class="btn btn-primary btn-xs" icon="glyphicon-flag" ng-show="doc.flags.isVisibleEndStageCmd">
   </sc-button>
-  <sc-button name="nextStageButton" btn-click="nextDocStage()" text="applications.edit.stages.nextElectronicStage" class="btn btn-default btn-xs" ng-show="doc.flags.isVisibleNextStageCmd">
+  <sc-button name="nextStageButton" btn-click="nextDocStage()" text="applications.edit.stages.nextElectronicStage" class="btn btn-primary btn-xs" icon="glyphicon-arrow-right" ng-show="doc.flags.isVisibleNextStageCmd">
   </sc-button>
-  <sc-button name="editStageButton" btn-click="editDocStage()" text="applications.edit.stages.techEditElectronicStage" class="btn btn-default btn-xs" ng-show="doc.flags.isVisibleEditStageCmd">
+  <sc-button name="editStageButton" btn-click="editDocStage()" text="applications.edit.stages.techEditElectronicStage" class="btn btn-danger btn-xs" icon="glyphicon-cog" ng-show="doc.flags.isVisibleEditStageCmd">
   </sc-button>
-  <sc-button name="reverseStageButton" btn-click="reverseDocStage()" text="applications.edit.stages.reverseElectronicStage" class="btn btn-default btn-xs" ng-show="doc.flags.isVisibleReverseStageCmd">
+  <sc-button name="reverseStageButton" btn-click="reverseDocStage()" text="applications.edit.stages.reverseElectronicStage" class="btn btn-danger btn-xs" icon="glyphicon-arrow-left" ng-show="doc.flags.isVisibleReverseStageCmd">
   </sc-button>
 </div>
