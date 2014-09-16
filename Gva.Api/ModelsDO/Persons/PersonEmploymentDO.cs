@@ -12,6 +12,7 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "Valid is required.")]
         public NomValue Valid { get; set; }
 
+        [Required(ErrorMessage = "Organization is required.")]
         public NomValue Organization { get; set; }
 
         [Required(ErrorMessage = "EmploymentCategory is required.")]
