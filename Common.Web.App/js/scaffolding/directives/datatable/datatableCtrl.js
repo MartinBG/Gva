@@ -99,16 +99,12 @@
     var updateSortedItems = function () {
       if ($scope.sortingColumnIndex !== null && $scope.sortingColumnIndex !== undefined) {
         $scope.sortedItems = $scope.filteredItems.slice();
+        $scope.sortedItems = _.sortBy($scope.sortedItems, function(x) {
+          return x[$scope.sortingColumnIndex];
+        });
 
-        if ($scope.sortingType === 'asc') {
-          $scope.sortedItems.sort(function (x, y) {
-            return x[$scope.sortingColumnIndex] > y[$scope.sortingColumnIndex] ? 1 : -1;
-          });
-        }
-        else {
-          $scope.sortedItems.sort(function (x, y) {
-            return x[$scope.sortingColumnIndex] < y[$scope.sortingColumnIndex] ? 1 : -1;
-          });
+        if ($scope.sortingType !== 'asc') {
+          $scope.sortedItems.reverse();
         }
       }
       else {
