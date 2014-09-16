@@ -1,0 +1,22 @@
+﻿<ng-form name="nomenclatureForm" class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="common.nomenclatures.noms.edit.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="common.nomenclatures.noms.edit.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="common.nomenclatures.noms.edit.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <div class="row">
+        <sc-field type="text" ng-model="nomenclature.name" ng-required="true" l10n-text="common.nomenclatures.noms.edit.name" class="col-sm-4"></sc-field>
+      </div>
+  </div>
+
+  </div>
+</ng-form>

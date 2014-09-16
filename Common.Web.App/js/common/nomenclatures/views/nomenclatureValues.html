@@ -1,0 +1,15 @@
+﻿<sc-button btn-click="newNomenclatureValue()" text="common.nomenclatures.nomValues.search.newNomValue" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+
+<sc-datatable items="nomenclatureValues" filterable="true" pageable="true" sortable="true">
+  <sc-column sortable="false" class="buttons-cell-compact" has-content="true">
+    <sc-button name="viewButton" btn-click="editNomenclatureValue(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column sortable="false" data="code" title="common.nomenclatures.nomValues.search.code">
+  </sc-column>
+  <sc-column sortable="false" data="name" title="common.nomenclatures.nomValues.search.name">
+  </sc-column>
+  <sc-column sortable="false" data="alias" title="common.nomenclatures.nomValues.search.alias">
+  </sc-column>
+  <!--<sc-column sortable="false" data="name" title="common.nomenclatures.nomValues.search.parent">
+  </sc-column>-->
+</sc-datatable>

@@ -1,0 +1,53 @@
+﻿<ng-form name="nomenclatureForm" class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="common.nomenclatures.nomValues.edit.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="common.nomenclatures.nomValues.edit.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="common.nomenclatures.nomValues.edit.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+        <sc-button name="deleteBtn" ng-if="nomenclatureValue.nomValueId && !nomenclatureValue.alias" btn-click="deleteNomenclatureValue()" text="common.nomenclatures.nomValues.edit.remove" class="btn btn-danger btn-xs" icon="glyphicon-remove">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <div class="row">
+        <sc-field type="nomenclature" alias="'nomList'" mode="id" ng-model="nomenclatureValue.nomId" l10n-text="common.nomenclatures.nomValues.edit.nomType" class="col-sm-4" ng-readonly="true"></sc-field>
+      </div>
+
+      <div class="row">
+        <sc-field type="text" ng-model="nomenclatureValue.code" ng-required="true" l10n-text="common.nomenclatures.nomValues.edit.code" class="col-sm-4"></sc-field>
+      </div>
+
+      <div class="row">
+        <sc-field type="text" ng-model="nomenclatureValue.name" ng-required="true" l10n-text="common.nomenclatures.nomValues.edit.name" class="col-sm-4"></sc-field>
+      </div>
+
+      <div class="row">
+        <sc-field type="text" ng-model="nomenclatureValue.nameAlt" l10n-text="common.nomenclatures.nomValues.edit.altName" class="col-sm-4"></sc-field>
+      </div>
+
+      <div class="row">
+        <sc-field type="nomenclature" alias="'nomList'" mode="id" ng-model="nomenclatureValue.parentNomId" l10n-text="common.nomenclatures.nomValues.edit.parentNomType" class="col-sm-4"></sc-field>
+        <sc-field type="nomenclature" alias="'nomValueList'" mode="id" ng-model="nomenclatureValue.parentValueId" params="{ parentValueId: nomenclatureValue.parentNomId ? nomenclatureValue.parentNomId : -1 }" l10n-text="common.nomenclatures.nomValues.edit.parentNomValue" class="col-sm-4"></sc-field>
+      </div>
+
+      <div class="row">
+        <sc-field type="text" ng-model="nomenclatureValue.order" l10n-text="common.nomenclatures.nomValues.edit.order" class="col-sm-4"></sc-field>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.isActive"></label>
+          <input type="checkbox" ng-model="nomenclatureValue.isActive"/>
+        </div>
+      </div>
+  </div>
+
+  </div>
+</ng-form>
+

@@ -7,6 +7,8 @@ namespace Common.Api.Repositories.NomRepository
     {
         Nom GetNom(string alias);
 
+        NomValue GetNomValue(int id);
+
         NomValue GetNomValue(string alias, int id);
 
         NomValue GetNomValue(string alias, string valueAlias);
@@ -18,6 +20,8 @@ namespace Common.Api.Repositories.NomRepository
         IEnumerable<NomValue> GetNomValues(string alias, string term = null, int? parentValueId = null, int offset = 0, int? limit = null);
 
         IEnumerable<NomValue> GetNomValues(string alias);
+
+        IEnumerable<NomValue> GetNomValues(int nomId);
 
         IEnumerable<NomValue> GetNomValues(
             string alias,

@@ -24,6 +24,13 @@ namespace Common.Api.Repositories.NomRepository
               .SingleOrDefault(n => n.Alias == alias);
         }
 
+        public NomValue GetNomValue(int id)
+        {
+            return this.unitOfWork.DbContext.Set<NomValue>()
+                .Include(nv => nv.ParentValue)
+                .Where(nv => nv.NomValueId == id).SingleOrDefault();
+        }
+
         public NomValue GetNomValue(string alias, int id)
         {
             return this.unitOfWork.DbContext.Set<NomValue>().Where(nv => nv.Nom.Alias == alias && nv.NomValueId == id).SingleOrDefault();
@@ -68,6 +75,13 @@ namespace Common.Api.Repositories.NomRepository
         {
             return this.unitOfWork.DbContext.Set<NomValue>()
                 .Where(nv => nv.Nom.Alias == alias)
+                .ToList();
+        }
+
+        public IEnumerable<NomValue> GetNomValues(int nomId)
+        {
+            return this.unitOfWork.DbContext.Set<NomValue>()
+                .Where(nv => nv.Nom.NomId == nomId)
                 .ToList();
         }
 
