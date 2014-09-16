@@ -19,6 +19,13 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string ForeignLicenceNumber { get; set; }
 
+        public NomValue ForeignPublisher { get; set; }
+
+        public NomValue Employment { get; set; }
+
+        [Required(ErrorMessage = "Publisher is required.")]
+        public NomValue Publisher { get; set; }
+
         public DateTime? DocumentDateValidTo { get; set; }
 
         public NomValue Valid { get; set; }

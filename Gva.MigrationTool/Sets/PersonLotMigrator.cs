@@ -280,9 +280,11 @@ namespace Gva.MigrationTool.Sets
                         }
 
                         var personDocumentEmployments = this.getPersonDocumentEmployments(personId, noms, getOrgByApexId, blobIdsToFileKeys);
+                        Dictionary<int, PartVersion> employmentsByOldId = new Dictionary<int, PartVersion>();
                         foreach (var docEmployment in personDocumentEmployments)
                         {
-                            addPartWithFiles("personDocumentEmployments/*", docEmployment);
+                            var pv = addPartWithFiles("personDocumentEmployments/*", docEmployment);
+                            employmentsByOldId.Add(docEmployment.Get<int>("part.__oldId"), pv);
                         }
 
                         var personDocumentMedicals = this.getPersonDocumentMedicals(personId, nomApplications, noms, appApexIdToStaffTypeCode, blobIdsToFileKeys);
@@ -330,7 +332,7 @@ namespace Gva.MigrationTool.Sets
                         }
 
                         var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
-                        var personLicences = this.getPersonLicences(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
+                        var personLicences = this.getPersonLicences(personId, getPersonByApexId, noms, employmentsByOldId);
                         Dictionary<int, int> licenceOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personLicence in personLicences)
                         {
@@ -1408,8 +1410,34 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("applications", r.applications)))))));
         }
 
-        private IList<JObject> getPersonLicences(int personId, Func<int?, JObject> getPersonByApexId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private IList<JObject> getPersonLicences(
+            int personId,
+            Func<int?, JObject> getPersonByApexId,
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<int, PartVersion> employmentsByOldId)
         {
+            Func<int?, JObject> getEmployment = (employmentId) =>
+            {
+                if (!employmentId.HasValue)
+                {
+                    return null;
+                }
+                else if (!employmentsByOldId.ContainsKey(employmentId.Value))
+                {
+                    return null;
+                }
+                else
+                {
+                    var employment = employmentsByOldId[employmentId.Value];
+                    return new JObject(
+                        new JProperty("nomValueId", employment.Part.Index),
+                        new JProperty("name", string.Format(
+                            "{0}, {1} {2}",
+                            employment.Content.Get<string>("organization.name"),
+                            employment.Content.Get<DateTime>("hiredate").ToString("dd.MM.yyyy"),
+                            employment.Content.Get<string>("valid.code") == "N" ? "(НЕВАЛИДНА)" : null)));
+                }
+            };
             var statuses = oracleConn.CreateStoreCommand(
                 @"SELECT L.ID LICENCE_ID,
                                     E.PERSON_ID EXAMINER_ID,
@@ -1482,9 +1510,6 @@ namespace Gva.MigrationTool.Sets
                         __migrTable = "LICENCE",
 
                         //TODO show somewhere?
-                        __PUBLISHER_CAA_ID = r.Field<int?>("PUBLISHER_CAA_ID"),
-                        __FOREIGN_CAA_ID = r.Field<int?>("FOREIGN_CAA_ID"),
-                        __EMPLOYEE_ID = r.Field<int?>("EMPLOYEE_ID"),
                         __ISSUE_DATE = r.Field<DateTime?>("ISSUE_DATE"),
 
                         licenceType = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_TYPE_ID")),
@@ -1493,7 +1518,10 @@ namespace Gva.MigrationTool.Sets
                         licenceNumber = r.Field<string>("LICENCE_NO"),
                         foreignLicenceNumber = r.Field<string>("FOREIGN_LICENCE_NO"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        statuses = statuses.ContainsKey(r.Field<int>("ID")) ? statuses[r.Field<int>("ID")] : null
+                        statuses = statuses.ContainsKey(r.Field<int>("ID")) ? statuses[r.Field<int>("ID")] : null,
+                        publisher = noms["caa"].ByOldId(r.Field<int?>("PUBLISHER_CAA_ID").ToString()),
+                        foreignPublisher = noms["caa"].ByOldId(r.Field<int?>("FOREIGN_CAA_ID").ToString()),
+                        employment = getEmployment(r.Field<int?>("EMPLOYEE_ID"))
                     }))
                 .ToList();
         }

@@ -9,6 +9,7 @@
     scFormParams
   ) {
     $scope.isNew = scFormParams.isNew;
+    $scope.lotId = scFormParams.lotId;
 
     if ($scope.isNew) {
       $scope.$watch('model.licenceType', function () {

@@ -1964,7 +1964,10 @@
           foreignLicenceNumber: 'Чужд лиценз No',
           valid: 'Действителен',
           fcl: 'FCL',
-          lastLicenceNumber: 'Последеният издаден лиценз от избрания тип е с No'
+          lastLicenceNumber: 'Последеният издаден лиценз от избрания тип е с No',
+          foreignPublisher: 'Чужда администрация',
+          employment: 'Месторабота',
+          publisher: 'Администрация'
         },
         licenceEditionDirective: {
           documentDateValidFrom: 'Дата на издаване',
