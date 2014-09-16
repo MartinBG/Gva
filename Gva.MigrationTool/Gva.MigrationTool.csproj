@@ -57,6 +57,7 @@
     <Reference Include="Oracle.ManagedDataAccess, Version=4.121.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -65,10 +66,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blobs\Blob.cs" />
+    <Compile Include="Blobs\BlobDownloader.cs" />
+    <Compile Include="Blobs\BlobUploader.cs" />
     <Compile Include="DataExtensions.cs" />
     <Compile Include="DbClause.cs" />
     <Compile Include="FmOrgMatcher.cs" />
+    <Compile Include="Sets\AircraftApexLotCreator.cs" />
+    <Compile Include="Sets\AircraftApexLotMigrator.cs" />
+    <Compile Include="Sets\AircraftFmLotCreator.cs" />
+    <Compile Include="Sets\AircraftFmLotMigrator.cs" />
     <Compile Include="Sets\Organization.cs" />
+    <Compile Include="Sets\OrganizationLotCreator.cs" />
+    <Compile Include="Sets\OrganizationLotMigrator.cs" />
+    <Compile Include="Sets\PersonLotCreator.cs" />
+    <Compile Include="Sets\PersonLotMigrator.cs" />
+    <Compile Include="Sets\PersonUtils.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Materializer.cs" />
     <Compile Include="Migration.cs" />

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 namespace Gva.MigrationTool
@@ -34,16 +37,23 @@ namespace Gva.MigrationTool
 
     public class Utils
     {
-        public const string DUMMY_FILE_KEY = "7C0604F9-FB44-4CCD-BE0E-66E82142AE76";
-        public static readonly JObject DUMMY_PILOT_CASE_TYPE = 
-            new JObject(
-                new JProperty("nomValueId", 1),
-                new JProperty("name", "Пилот"));
-        public static readonly JObject DUMMY_APPROVED_ORG_CASE_TYPE = 
-            new JObject(
-                new JProperty("nomValueId", 3),
-                new JProperty("name", "ОО"),
-                new JProperty("alias", "approvedOrg"));
+        public static Task RunParallel(string numberOfParallelTasksKey, Func<Task> taskCreator)
+        {
+            int numberOfParallelTasks = int.Parse(ConfigurationManager.AppSettings[numberOfParallelTasksKey]);
+            var parallelTasks = Enumerable.Range(0, numberOfParallelTasks).Select(i => taskCreator()).ToArray();
+            return Task.WhenAll(parallelTasks);
+        }
+
+        public static Task RunParallel<TActionContext>(string numberOfParallelActionsKey, CancellationToken ct, Func<TActionContext> actionContextFactory, Action<TActionContext> action)
+        {
+            int numberOfParallelTasks = int.Parse(ConfigurationManager.AppSettings[numberOfParallelActionsKey]);
+            var actionContexts = Enumerable.Range(0, numberOfParallelTasks).Select(i => actionContextFactory());
+            var parallelTasks = actionContexts
+                .Select(ac => Task.Run(() => action(ac), ct))
+                .ToArray();
+
+            return Task.WhenAll(parallelTasks);
+        }
 
         public static JObject ToJObject(object o)
         {
@@ -80,6 +90,44 @@ namespace Gva.MigrationTool
             minutes = minutes.HasValue ? minutes.Value : 0;
 
             return ((hours * 60) + minutes) * 60000;
+        }
+
+        public static bool FmCheckValue(string val)
+        {
+            return !String.IsNullOrEmpty(val) && val.Trim() != "n/a" && val.Trim() != "n / a";
+        }
+
+        public static int? FmToNum(string val)
+        {
+            int value;
+            if (FmCheckValue(val) && Int32.TryParse(val.Trim(), out value))
+            {
+                return value;
+            }
+
+            return null;
+        }
+
+        public static decimal? FmToDecimal(string val)
+        {
+            decimal value;
+            if (FmCheckValue(val) && decimal.TryParse(val.Trim(), out value))
+            {
+                return value;
+            }
+
+            return null;
+        }
+
+        public static DateTime? FmToDate(string val)
+        {
+            DateTime value;
+            if (FmCheckValue(val) && DateTime.TryParseExact(val.Trim(), "d.M.yyyy", null, System.Globalization.DateTimeStyles.None, out value))
+            {
+                return value;
+            }
+
+            return null;
         }
     }
 }

@@ -1,30 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Oracle.DataAccess.Client;
-using Common.Data;
-using Regs.Api.Models;
-using Common.Api.Models;
-using Docs.Api.Models;
-using Gva.Api.Models;
-using Regs.Api.Repositories.LotRepositories;
-using Common.Api.UserContext;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Gva.MigrationTool.Sets;
-using Gva.MigrationTool.Nomenclatures;
-using Regs.Api.LotEvents;
-using Newtonsoft.Json.Serialization;
+using System.Configuration;
 using System.Data.SqlClient;
-using System.Data.Common;
+using System.Diagnostics;
 using Autofac;
 using Common;
 using Common.Api;
+using Common.Api.UserContext;
 using Docs.Api;
 using Gva.Api;
+using Gva.MigrationTool.Blobs;
+using Gva.MigrationTool.Nomenclatures;
+using Gva.MigrationTool.Sets;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using Oracle.DataAccess.Client;
 using Regs.Api;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.MigrationTool
 {
@@ -32,10 +25,7 @@ namespace Gva.MigrationTool
     {
         public static bool IsPartial = true;
 
-        private const string oracleConnStr = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.0.19)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=VENI.CAA)));User Id=system;Password=DBSYSTEMVENI;";
-        private const string sqlConnStr = "Data Source=.\\;Initial Catalog=GvaAircraft;Integrated Security=True;MultipleActiveResultSets=True";
-
-        public static IContainer CreateAutofacContainer()
+        private static ContainerBuilder CreateGvaContainerBuilder()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule(new CommonModule());
@@ -44,14 +34,47 @@ namespace Gva.MigrationTool
             builder.RegisterModule(new GvaApiModule());
             builder.RegisterModule(new RegsApiModule());
 
-            builder.Register(c => new OracleConnection(oracleConnStr)).InstancePerLifetimeScope();
-            builder.Register(c => new SqlConnection(sqlConnStr)).InstancePerLifetimeScope();
             builder.Register(c => new UserContext(2)).InstancePerLifetimeScope();
 
+            return builder;
+        }
+
+        private static IContainer CreateBlobContainer()
+        {
+            ContainerBuilder builder = CreateGvaContainerBuilder();
+
+            builder.Register(c => new OracleConnection(ConfigurationManager.ConnectionStrings["Apex"].ConnectionString)).InstancePerLifetimeScope();
+            builder.Register(c => new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString)).InstancePerLifetimeScope();
+
+            builder.RegisterType<Gva.MigrationTool.Blobs.Blob>().InstancePerLifetimeScope();
+            builder.RegisterType<BlobUploader>().InstancePerLifetimeScope();
+            builder.RegisterType<BlobDownloader>().InstancePerLifetimeScope();
+
+            return builder.Build();
+        }
+
+        private static IContainer CreateSetContainer()
+        {
+            ContainerBuilder builder = CreateGvaContainerBuilder();
+
+            builder.Register(c => new OracleConnection(ConfigurationManager.ConnectionStrings["Apex"].ConnectionString)).InstancePerLifetimeScope();
+            builder.Register(c => new SqlConnection(ConfigurationManager.ConnectionStrings["GvaAircraft"].ConnectionString)).InstancePerLifetimeScope();
+
             builder.RegisterType<Nomenclature>().InstancePerLifetimeScope();
-            builder.RegisterType<Aircraft>().InstancePerLifetimeScope();
+
             builder.RegisterType<Person>().InstancePerLifetimeScope();
+            builder.RegisterType<PersonLotCreator>().InstancePerLifetimeScope();
+            builder.RegisterType<PersonLotMigrator>().InstancePerLifetimeScope();
+
             builder.RegisterType<Organization>().InstancePerLifetimeScope();
+            builder.RegisterType<OrganizationLotCreator>().InstancePerLifetimeScope();
+            builder.RegisterType<OrganizationLotMigrator>().InstancePerLifetimeScope();
+
+            builder.RegisterType<Aircraft>().InstancePerLifetimeScope();
+            builder.RegisterType<AircraftApexLotCreator>().InstancePerLifetimeScope();
+            builder.RegisterType<AircraftApexLotMigrator>().InstancePerLifetimeScope();
+            builder.RegisterType<AircraftFmLotCreator>().InstancePerLifetimeScope();
+            builder.RegisterType<AircraftFmLotMigrator>().InstancePerLifetimeScope();
 
             return builder.Build();
         }
@@ -75,24 +98,33 @@ namespace Gva.MigrationTool
                 };
             };
 
-            var container = CreateAutofacContainer();
+            var blobContainer = CreateBlobContainer();
+            Dictionary<int, string> blobIdsToFileKeys;
+            using (var scope = blobContainer.BeginLifetimeScope())
+            {
+                var blob = scope.Resolve<Gva.MigrationTool.Blobs.Blob>();
+                blobIdsToFileKeys = blob.migrateBlobs();
+            }
 
-            using (var scope = container.BeginLifetimeScope())
+            var setContainer = CreateSetContainer();
+            using (var scope = setContainer.BeginLifetimeScope())
             {
                 OracleConnection oracleConn = scope.Resolve<OracleConnection>();
                 SqlConnection sqlConn = scope.Resolve<SqlConnection>();
 
-                System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch();
+                Stopwatch timer = new Stopwatch();
                 timer.Start();
 
                 oracleConn.Open();
                 sqlConn.Open();
 
+                
                 var nomenclature = scope.Resolve<Nomenclature>();
                 var aircraft = scope.Resolve<Aircraft>();
                 var person = scope.Resolve<Person>();
                 var organization = scope.Resolve<Organization>();
 
+                
                 var noms = nomenclature.migrateNomenclatures();
 
                 Dictionary<int, int> aircraftApexIdtoLotId = new Dictionary<int, int>();
@@ -219,17 +251,22 @@ namespace Gva.MigrationTool
                     getPersonByApexId,
                     getOrgByApexId,
                     getPersonByFmOrgName,
-                    getOrgByFmOrgName);
+                    getOrgByFmOrgName,
+                    blobIdsToFileKeys);
 
                 //migrate persosns
-                person.migratePersons(noms, personIdToLotId, getAircraftByApexId, getPersonByApexId, getOrgByApexId);
+                person.migratePersons(noms, personIdToLotId, getAircraftByApexId, getPersonByApexId, getOrgByApexId, blobIdsToFileKeys);
 
                 //migrate organizations
-                organization.migrateOrganizations(noms, orgIdtoLotId, getAircraftByApexId, getPersonByApexId);
+                organization.migrateOrganizations(noms, orgIdtoLotId, getAircraftByApexId, getPersonByApexId, blobIdsToFileKeys);
 
+                Stopwatch rebuildTimer = new Stopwatch();
+                rebuildTimer.Start();
                 Console.WriteLine("Rebuilding lot part tokens...");
                 var lotRepository = scope.Resolve<ILotRepository>();
                 lotRepository.ExecSpSetLotPartTokens();
+                rebuildTimer.Stop();
+                Console.WriteLine("Rebuilding lot part tokens time - {0}", rebuildTimer.Elapsed.TotalMinutes);
 
                 timer.Stop();
                 Console.WriteLine("Migration time - {0}", timer.Elapsed.TotalMinutes);
