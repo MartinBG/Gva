@@ -10,7 +10,8 @@
         <span class="glyphicon glyphicon-print"></span>
       </a>
     </sc-column>
-    <sc-column data="licenceNumber" title="persons.licencesSearch.licenceNumber">
+    <sc-column title="persons.licencesSearch.licenceNumber" has-content="true">
+      {{licenceNumberFormatMask(item)}}
     </sc-column>
     <sc-column data="licenceType.name" title="persons.licencesSearch.licenceType">
     </sc-column>

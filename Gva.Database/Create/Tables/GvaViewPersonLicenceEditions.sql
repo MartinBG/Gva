@@ -18,7 +18,10 @@ CREATE TABLE [dbo].[GvaViewPersonLicenceEditions] (
     [LicencePartIndex]      INT           NOT NULL,
     [EditionPartIndex]      INT           NOT NULL,
     [FirstDocDateValidFrom] DATETIME2     NOT NULL,
-    [Valid]                 BIT           NULL
+    [Valid]                 BIT           NULL,
+    [LicenceTypeCode]       NVARCHAR(50)  NOT NULL,
+    [LicenceTypeCaCode]     NVARCHAR(50)  NOT NULL,
+    [PublisherCode]         NVARCHAR(50)  NOT NULL
 
     CONSTRAINT [PK_GvaViewPersonLicenceEditions]                      PRIMARY KEY ([LotId], [LotPartId], [EditionIndex]),
     CONSTRAINT [FK_GvaViewPersonLicenceEditions_GvaViewPersons]       FOREIGN KEY ([LotId])                                    REFERENCES [dbo].[GvaViewPersons] ([LotId]),

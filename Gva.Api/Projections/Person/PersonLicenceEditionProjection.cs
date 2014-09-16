@@ -7,14 +7,19 @@ using Gva.Api.Models.Views.Person;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
+using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
 
 namespace Gva.Api.Projections.Person
 {
     public class PersonLicenceEditionProjection : Projection<GvaViewPersonLicenceEdition>
     {
-        public PersonLicenceEditionProjection(IUnitOfWork unitOfWork)
+        private INomRepository nomRepository;
+
+        public PersonLicenceEditionProjection(IUnitOfWork unitOfWork, INomRepository nomRepository)
             : base(unitOfWork, "Person")
         {
+            this.nomRepository = nomRepository;
         }
 
         public override IEnumerable<GvaViewPersonLicenceEdition> Execute(PartCollection parts)
@@ -34,6 +39,8 @@ namespace Gva.Api.Projections.Person
 
             var firstEdition = editions.Where(ed => ed.Content.Get<int>("index") == editions.Min(e => e.Content.Get<int>("index"))).SingleOrDefault();
             var lastEdition = editions.Where(ed => ed.Content.Get<int>("index") == editions.Max(e => e.Content.Get<int>("index"))).SingleOrDefault();
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", personLicence.Content.Get<int>("licenceType.nomValueId"));
+
             licenceEdition.LotId = personLicence.Part.Lot.LotId;
             licenceEdition.PartId = personLicence.Part.PartId;
             licenceEdition.EditionIndex = edition.Content.Get<int>("index");
@@ -51,6 +58,9 @@ namespace Gva.Api.Projections.Person
             licenceEdition.EditionPartIndex = edition.Part.Index;
             licenceEdition.FirstDocDateValidFrom = firstEdition.Content.Get<DateTime>("documentDateValidFrom");
             licenceEdition.Valid = personLicence.Content.Get<string>("valid.code") == "Y";
+            licenceEdition.LicenceTypeCode = licenceType.TextContent.Get<string>("licenceCode");
+            licenceEdition.LicenceTypeCaCode = licenceType.TextContent.Get<string>("codeCA");
+            licenceEdition.PublisherCode = personLicence.Content.Get<string>("publisher.code");
 
             return licenceEdition;
         }

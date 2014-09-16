@@ -44,6 +44,12 @@ namespace Gva.Api.Models.Views.Person
 
         public bool Valid { get; set; }
 
+        public string LicenceTypeCode { get; set; }
+
+        public string LicenceTypeCaCode { get; set; }
+
+        public string PublisherCode { get; set; }
+
         public virtual GvaViewPerson Person { get; set; }
 
         public virtual Part Part { get; set; }
@@ -95,6 +101,9 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.EditionPartIndex).HasColumnName("EditionPartIndex");
             this.Property(t => t.FirstDocDateValidFrom).HasColumnName("FirstDocDateValidFrom");
             this.Property(t => t.Valid).HasColumnName("Valid");
+            this.Property(t => t.LicenceTypeCode).HasColumnName("LicenceTypeCode");
+            this.Property(t => t.LicenceTypeCaCode).HasColumnName("LicenceTypeCaCode");
+            this.Property(t => t.PublisherCode).HasColumnName("PublisherCode");
             
             // Relationships
             this.HasRequired(t => t.Person)

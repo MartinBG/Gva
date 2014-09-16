@@ -50,6 +50,9 @@ namespace Gva.Api.ModelsDO.Persons
             this.EditionPartIndex = edition.EditionPartIndex;
             this.FirstDocDateValidFrom = edition.FirstDocDateValidFrom;
             this.Valid = edition.Valid;
+            this.LicenceTypeCode = edition.LicenceTypeCode;
+            this.LicenceTypeCaCode = edition.LicenceTypeCaCode;
+            this.PublisherCode = edition.PublisherCode;
         }
 
         public int LotId { get; set; }
@@ -91,5 +94,11 @@ namespace Gva.Api.ModelsDO.Persons
         public DateTime FirstDocDateValidFrom { get; set; }
 
         public bool Valid { get; set; }
+
+        public string LicenceTypeCode { get; set; }
+
+        public string LicenceTypeCaCode { get; set; }
+
+        public string PublisherCode { get; set; }
     }
 }
