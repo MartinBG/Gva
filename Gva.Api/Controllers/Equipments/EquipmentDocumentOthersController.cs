@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
@@ -18,18 +19,21 @@ namespace Gva.Api.Controllers.Equipments
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
+        private INomRepository nomRepository;
 
         public EquipmentDocumentOthersController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
+            INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("equipmentDocumentOthers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
+            this.nomRepository = nomRepository;
         }
 
         [Route("new")]
@@ -39,6 +43,7 @@ namespace Gva.Api.Controllers.Equipments
             {
                 DocumentDateValidFrom = DateTime.Now
             };
+            newDocumentOther.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
             var files = new List<FileDO>();
             if (appId.HasValue)

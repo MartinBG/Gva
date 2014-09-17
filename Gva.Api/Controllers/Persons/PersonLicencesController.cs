@@ -91,6 +91,8 @@ namespace Gva.Api.Controllers.Persons
                 Edition = new FilePartVersionDO<PersonLicenceEditionDO>(edition, files)
             };
 
+            newLicence.Licence.Part.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+
             return Ok(newLicence);
         }
 
@@ -185,7 +187,10 @@ namespace Gva.Api.Controllers.Persons
         [Route("newStatus")]
         public IHttpActionResult GetNewLicenceStatus(int lotId)
         {
-            return Ok(new PersonLicenceStatusDO());
+            PersonLicenceStatusDO licenceStatus = new PersonLicenceStatusDO();
+            licenceStatus.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+
+            return Ok(licenceStatus);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
@@ -17,18 +18,21 @@ namespace Gva.Api.Controllers.Organizations
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
+        private INomRepository nomRepository;
 
         public OrganizationStaffManagementController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher,
             IOrganizationRepository organizationRepository,
+            INomRepository nomRepository,
+            ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("organizationStaffManagement", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
+            this.nomRepository = nomRepository;
         }
 
         [Route("new")]
@@ -42,6 +46,7 @@ namespace Gva.Api.Controllers.Organizations
             }
 
             OrganizationStaffManagementDO newStaffManagement = new OrganizationStaffManagementDO();
+            newStaffManagement.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
             return Ok(new ApplicationPartVersionDO<OrganizationStaffManagementDO>(newStaffManagement, applications));
         }

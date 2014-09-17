@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
@@ -14,21 +15,28 @@ namespace Gva.Api.Controllers.Organizations
     [Authorize]
     public class OrganizationCertGroundServiceOperatorsController : GvaApplicationPartController<OrganizationCertGroundServiceOperatorDO>
     {
+        private INomRepository nomRepository;
+
         public OrganizationCertGroundServiceOperatorsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            ILotEventDispatcher lotEventDispatcher,
             IOrganizationRepository organizationRepository,
+            INomRepository nomRepository,
+            ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("organizationCertGroundServiceOperators", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
+            this.nomRepository = nomRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewCertGroundServiceOperator(int lotId)
         {
-            return Ok(new ApplicationPartVersionDO<OrganizationCertGroundServiceOperatorDO>(new OrganizationCertGroundServiceOperatorDO()));
+            OrganizationCertGroundServiceOperatorDO certificate = new OrganizationCertGroundServiceOperatorDO();
+            certificate.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+
+            return Ok(new ApplicationPartVersionDO<OrganizationCertGroundServiceOperatorDO>(certificate));
         }
     }
 }

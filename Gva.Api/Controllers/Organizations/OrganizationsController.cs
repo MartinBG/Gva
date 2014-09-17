@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
@@ -27,6 +28,7 @@ namespace Gva.Api.Controllers.Organizations
         private IOrganizationRepository organizationRepository;
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private INomRepository nomRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
 
@@ -37,6 +39,7 @@ namespace Gva.Api.Controllers.Organizations
             IOrganizationRepository organizationRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
+            INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
         {
@@ -46,6 +49,7 @@ namespace Gva.Api.Controllers.Organizations
             this.organizationRepository = organizationRepository;
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.nomRepository = nomRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
         }
@@ -55,6 +59,8 @@ namespace Gva.Api.Controllers.Organizations
         {
             OrganizationDataDO organizationData = new OrganizationDataDO();
             organizationData.Icao = null;
+            organizationData.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+
             return Ok(organizationData);
         }
 
