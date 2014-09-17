@@ -28,8 +28,8 @@
       </tr>
       <tr ng-repeat="item in adc.applicationLotFiles">
         <td></td>
-        <td ng-if="item.hasAppFile">{{ item.setPartName }} <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" title="{{item.file.name}}">{{item.file.name}}</a></td>
-        <td ng-if="!item.hasAppFile"><a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" title="{{item.file.name}}">{{item.file.name}}</a></td>
+        <td ng-if="item.hasAppFile">{{ item.setPartName }} <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" sc-access-token title="{{item.file.name}}">{{item.file.name}}</a></td>
+        <td ng-if="!item.hasAppFile"><a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" sc-access-token title="{{item.file.name}}">{{item.file.name}}</a></td>
         <td>
           <div ng-if="item.hasAppFile">
             <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</a>
