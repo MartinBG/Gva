@@ -4,7 +4,7 @@
 (function (angular, _, $) {
   'use strict';
 
-  function SearchDirective($timeout) {
+  function SearchDirective($timeout, $parse) {
     function SearchController ($scope) {
       var filters = {},
           //an object used as the special value of the watch expression
@@ -73,6 +73,15 @@
           });
         });
 
+        if (attrs.defaultAction) {
+          var parsedAction = $parse(attrs.defaultAction);
+          element.bind('keypress', function (event) {
+            if(event.keyCode === 13) {
+              parsedAction($scope.$parent);
+            }
+          });
+        }
+
         scSearch.initialize();
 
         //delaying the focus, because using a templateUrl leads to
@@ -93,14 +102,15 @@
       templateUrl: 'js/scaffolding/directives/search/searchDirective.html',
       scope: {
         selectedFilters: '=',
-        btnClasses: '@'
+        btnClasses: '@',
+        defaultAction: '&'
       },
       controller: ['$scope', SearchController],
       compile: SearchCompile
     };
   }
 
-  SearchDirective.inject = ['$timeout'];
+  SearchDirective.inject = ['$timeout', '$parse'];
 
   angular.module('scaffolding').directive('scSearch', SearchDirective);
 }(angular, _, $));
