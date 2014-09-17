@@ -24,7 +24,7 @@
   <sc-column data="files[0].pageCount" title="persons.otherSearch.pageCount">
   </sc-column>
   <sc-column sortable="false" title="persons.otherSearch.file" has-content="true">
-    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" ng-show="item.files[0].file" title="{{item.files[0].file.name}}">
+    <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files[0].file" title="{{item.files[0].file.name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>
   </sc-column>

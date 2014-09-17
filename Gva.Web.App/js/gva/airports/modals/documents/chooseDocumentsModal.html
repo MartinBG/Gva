@@ -40,7 +40,7 @@
       <sc-column data="pageCount" title="airports.chooseDocumentsModal.pageCount">
       </sc-column>
       <sc-column sortable="false" title="airports.chooseDocumentsModal.file" has-content="true">
-        <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" ng-show="item.file" title="{{item.file.name}}">
+        <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" sc-access-token ng-show="item.file" title="{{item.file.name}}">
           <span class="glyphicon glyphicon-file"></span>
         </a>
       </sc-column>
