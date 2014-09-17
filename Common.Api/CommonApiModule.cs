@@ -21,7 +21,8 @@ namespace Common.Api
             moduleBuilder.RegisterType<CommonApiWebApiConfig>().As<IWebApiConfig>().SingleInstance();
             moduleBuilder.RegisterType<NomRepository>().As<INomRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<ApplicationOAuthProvider>().As<IOAuthAuthorizationServerProvider>().SingleInstance();
+            moduleBuilder.RegisterType<ApplicationOAuthServerProvider>().As<IOAuthAuthorizationServerProvider>().SingleInstance();
+            moduleBuilder.RegisterType<ApplicationOAuthBearerProvider>().As<IOAuthBearerAuthenticationProvider>().SingleInstance();
             moduleBuilder.Register(c => c.Resolve<HttpRequestMessage>().GetUserContext()).InstancePerRequest();
 
             //controllers

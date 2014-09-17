@@ -13,9 +13,9 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace Common.Api.OAuth
 {
-    public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
+    public class ApplicationOAuthServerProvider : OAuthAuthorizationServerProvider
     {
-        public ApplicationOAuthProvider()
+        public ApplicationOAuthServerProvider()
         {
         }
 

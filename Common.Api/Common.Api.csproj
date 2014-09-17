@@ -133,7 +133,8 @@
     <Compile Include="Models\UnitToken.cs" />
     <Compile Include="Models\UnitType.cs" />
     <Compile Include="Models\UnitUser.cs" />
-    <Compile Include="OAuth\ApplicationOAuthProvider.cs" />
+    <Compile Include="OAuth\ApplicationOAuthBearerProvider.cs" />
+    <Compile Include="OAuth\ApplicationOAuthServerProvider.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Models\Nom.cs" />

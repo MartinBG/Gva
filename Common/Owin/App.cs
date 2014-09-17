@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.Owin;
@@ -10,6 +13,7 @@ using Common.Jobs;
 using Common.Utils;
 using Microsoft.Owin;
 using Microsoft.Owin.FileSystems;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.StaticFiles;
@@ -52,17 +56,20 @@ namespace Common.Owin
 
         public static void ConfigureAuth(IAppBuilder app, IContainer container)
         {
-            app.UseOAuthBearerTokens(new OAuthAuthorizationServerOptions
+            app.UseOAuthAuthorizationServer(new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/api/token"),
                 Provider = container.Resolve<IOAuthAuthorizationServerProvider>(),
-                //override the token serialization/deserialization to be able to capture the properties
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(8),
+                AllowInsecureHttp = true
+            });
+
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions
+            {
+                Provider = container.Resolve<IOAuthBearerAuthenticationProvider>(),
+                //override the token deserialization to be able to capture the properties
                 AccessTokenProvider = new AuthenticationTokenProvider()
                 {
-                    OnCreate = (c) =>
-                    {
-                        c.SetToken(c.SerializeTicket());
-                    },
                     OnReceive = (c) =>
                     {
                         c.DeserializeTicket(c.Token);
@@ -73,9 +80,7 @@ namespace Common.Owin
                             c.OwinContext.Environment["oauth.Properties"] = c.Ticket.Properties;
                         }
                     }
-                },
-                AccessTokenExpireTimeSpan = TimeSpan.FromHours(8),
-                AllowInsecureHttp = true
+                }
             });
         }
 
