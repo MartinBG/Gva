@@ -1,49 +1,48 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" alias="'inspectors'" ng-model="model.inspector" l10n-text="persons.licenceEditionDirective.inspector" class="col-sm-3"></sc-field>
-    <sc-field type="date" ng-model="model.documentDateValidFrom" ng-required="true" l10n-text="persons.licenceEditionDirective.documentDateValidFrom" class="col-sm-2"></sc-field>
-    <sc-field type="date" ng-model="model.documentDateValidTo" ng-required="true" l10n-text="persons.licenceEditionDirective.documentDateValidTo" class="col-sm-2"></sc-field>
+    <sc-field type="nomenclature" alias="'inspectors'" ng-model="model.part.inspector" l10n-text="persons.licenceEditionDirective.inspector" class="col-sm-3"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.licenceEditionDirective.documentDateValidFrom" class="col-sm-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidTo" ng-required="staffType.alias !== 'flightCrew' || ( fcl.code !== 'Y' && licenceType.code !== 'BG CCA')"
+      l10n-text="persons.licenceEditionDirective.documentDateValidTo" class="col-sm-2" ng-if="staffType.alias !== 'flightCrew' || ( fcl.code !== 'Y' && licenceType.code !== 'BG CCA')">
+    </sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" alias="'licenceActions'" ng-model="model.licenceAction" ng-required="true" l10n-text="persons.licenceEditionDirective.licenceAction" class="col-sm-4"></sc-field>
+    <sc-field type="nomenclature" alias="'licenceActions'" ng-model="model.part.licenceAction" ng-required="true" l10n-text="persons.licenceEditionDirective.licenceAction" class="col-sm-4"></sc-field>
   </div>
   <div ng-if="staffType.alias === 'to_vs'">
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.amlLimitations.at_a_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.AT_a_Ids" class="col-sm-3"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.amlLimitations.at_b1_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.AT_b1_Ids" class="col-sm-3"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.amlLimitations.at_a_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.AT_a_Ids" class="col-sm-3"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.amlLimitations.at_b1_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.AT_b1_Ids" class="col-sm-3"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.amlLimitations.ap_a_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.AP_a_Ids" class="col-sm-3"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.amlLimitations.ap_b1_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.AP_b1_Ids" class="col-sm-3"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.amlLimitations.ap_a_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.AP_a_Ids" class="col-sm-3"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.amlLimitations.ap_b1_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.AP_b1_Ids" class="col-sm-3"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.amlLimitations.ht_a_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.HT_a_Ids" class="col-sm-3"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.amlLimitations.ht_b1_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.HT_b1_Ids" class="col-sm-3"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.amlLimitations.ht_a_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.HT_a_Ids" class="col-sm-3"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.amlLimitations.ht_b1_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.HT_b1_Ids" class="col-sm-3"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.amlLimitations.hp_a_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.HP_a_Ids" class="col-sm-3"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.amlLimitations.hp_b1_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.HP_b1_Ids" class="col-sm-3"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.amlLimitations.hp_a_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.HP_a_Ids" class="col-sm-3"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.amlLimitations.hp_b1_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.HP_b1_Ids" class="col-sm-3"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.amlLimitations.avionics_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.avionics_Ids" class="col-sm-3"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.amlLimitations.avionics_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.avionics_Ids" class="col-sm-3"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.amlLimitations.pe_b3_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.PE_b3_Ids" class="col-sm-6"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.amlLimitations.pe_b3_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.PE_b3_Ids" class="col-sm-6"></sc-field>
     </div>
   </div>
   <div class="row" ng-if="staffType.alias === 'flightCrew'">
-    <sc-field type="nomenclature" ng-model="model.limitations" alias="'limitations66'" multiple="multiple" params="{general: 'F'}" l10n-text="persons.licenceEditionDirective.limitations" class="col-sm-5"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'limitations66'" multiple="multiple" params="{general: 'F'}" l10n-text="persons.licenceEditionDirective.limitations" class="col-sm-5"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="3" ng-model="model.notes" l10n-text="persons.licenceEditionDirective.notes" class="col-md-3"></sc-field>
-    <sc-field type="text" rows="3" ng-model="model.notesAlt" l10n-text="persons.licenceEditionDirective.notesAlt" class="col-md-3"></sc-field>
+    <sc-field type="text" rows="3" ng-model="model.part.notes" l10n-text="persons.licenceEditionDirective.notes" class="col-md-3"></sc-field>
+    <sc-field type="text" rows="3" ng-model="model.part.notesAlt" l10n-text="persons.licenceEditionDirective.notesAlt" class="col-md-3"></sc-field>
   </div>
-  <div class="row">
-    <div class="form-group col-sm-9 col-md-7">
-      <label class="control-label" l10n-text="persons.licenceEditionDirective.applications"></label>
-      <gva-applications ng-model="model.applications" set-part="'person'" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
-    </div>
-  </div>
+
+  <gva-common-scanned-document name="personScannedDocumentForm" ng-model="model.files" sc-form-params="{ setPart: 'person', lotId: lotId, caseTypeId: caseTypeId }"></gva-common-scanned-document>
+
   <h5 class="form-header" l10n-text="persons.licenceEditionDirective.ratings"></h5>
 
   <div class="row">
@@ -55,8 +54,8 @@
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th width="1px" ng-if="!form.$readonly && model.includedRatings.length"></th>
-            <th width="1px" ng-if="!form.$readonly && model.includedRatings.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.part.includedRatings.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.part.includedRatings.length"></th>
             <th l10n-text="persons.licenceEditionDirective.ratingsTable.ratingType"></th>
             <th l10n-text="persons.licenceEditionDirective.ratingsTable.ratingClass"></th>
             <th l10n-text="persons.licenceEditionDirective.ratingsTable.authorization"></th>
@@ -64,14 +63,14 @@
             <th l10n-text="persons.licenceEditionDirective.ratingsTable.dateValidTo"></th>
           </tr>
         </thead>
-        <tbody ng-model="includedRatings" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
-          <tr class="sort-disabled" ng-if="!model.includedRatings.length">
+        <tbody ng-model="model.part.includedRatings" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
+          <tr class="sort-disabled" ng-if="!model.part.includedRatings.length">
             <td colspan="5" class="text-center" l10n-text="persons.licenceEditionDirective.noRatings"></td>
           </tr>
           <tr ng-repeat="rating in includedRatings">
-            <td ng-if="!form.$readonly && model.includedRatings.length"><span class="fa fa-bars drag-handle"></span>
+            <td ng-if="!form.$readonly && model.part.includedRatings.length"><span class="fa fa-bars drag-handle"></span>
             </td>
-            <td ng-if="!form.$readonly && model.includedRatings.length">
+            <td ng-if="!form.$readonly && model.part.includedRatings.length">
               <sc-button name="deleteRatingBtn" class="btn btn-xs btn-danger" btn-click="removeRating(rating)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{rating.part.personRatingLevel.name || rating.part.ratingType.name}}</td>
@@ -97,8 +96,8 @@
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th width="1px" ng-if="!form.$readonly && model.includedTrainings.length"></th>
-            <th width="1px" ng-if="!form.$readonly && model.includedTrainings.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.part.includedTrainings.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.part.includedTrainings.length"></th>
             <th l10n-text="persons.licenceEditionDirective.trainingsTable.number"></th>
             <th l10n-text="persons.licenceEditionDirective.trainingsTable.dateValidFrom"></th>
             <th l10n-text="persons.licenceEditionDirective.trainingsTable.dateValidTo"></th>
@@ -108,14 +107,14 @@
             <th l10n-text="persons.licenceEditionDirective.trainingsTable.docRole"></th>
           </tr>
         </thead>
-        <tbody ng-model="includedTrainings" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
-          <tr class="sort-disabled" ng-if="!model.includedTrainings.length">
+        <tbody ng-model="model.part.includedTrainings" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
+          <tr class="sort-disabled" ng-if="!model.part.includedTrainings.length">
             <td colspan="7" class="text-center" l10n-text="persons.licenceEditionDirective.noTrainings"></td>
           </tr>
           <tr ng-repeat="training in includedTrainings">
-            <td ng-if="!form.$readonly && model.includedTrainings.length"><span class="fa fa-bars drag-handle"></span>
+            <td ng-if="!form.$readonly && model.part.includedTrainings.length"><span class="fa fa-bars drag-handle"></span>
             </td>
-            <td ng-if="!form.$readonly && model.includedTrainings.length">
+            <td ng-if="!form.$readonly && model.part.includedTrainings.length">
               <sc-button name="deleteTrainingBtn" class="btn btn-xs btn-danger" btn-click="removeTraining(training)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{training.part.documentNumber}}</td>
@@ -143,8 +142,8 @@
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th width="1px" ng-if="!form.$readonly && model.includedChecks.length"></th>
-            <th width="1px" ng-if="!form.$readonly && model.includedChecks.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.part.includedChecks.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.part.includedChecks.length"></th>
             <th l10n-text="persons.licenceEditionDirective.checksTable.documentNumber"></th>
             <th l10n-text="persons.licenceEditionDirective.checksTable.personCheckDocumentType"></th>
             <th l10n-text="persons.licenceEditionDirective.checksTable.personCheckDocumentRole"></th>
@@ -161,14 +160,14 @@
             <th l10n-text="persons.licenceEditionDirective.checksTable.pageCount"></th>
           </tr>
         </thead>
-        <tbody ng-model="includedChecks" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
-          <tr class="sort-disabled" ng-if="!model.includedChecks.length">
+        <tbody ng-model="model.part.includedChecks" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
+          <tr class="sort-disabled" ng-if="!model.part.includedChecks.length">
             <td colspan="14" class="text-center" l10n-text="persons.licenceEditionDirective.noChecks"></td>
           </tr>
           <tr ng-repeat="check in includedChecks">
-            <td ng-if="!form.$readonly && model.includedChecks.length"><span class="fa fa-bars drag-handle"></span>
+            <td ng-if="!form.$readonly && model.part.includedChecks.length"><span class="fa fa-bars drag-handle"></span>
             </td>
-            <td ng-if="!form.$readonly && model.includedChecks.length">
+            <td ng-if="!form.$readonly && model.part.includedChecks.length">
               <sc-button name="deleteCheckBtn" class="btn btn-xs btn-danger" btn-click="removeCheck(check)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{check.part.documentNumber}}</td>
@@ -203,8 +202,8 @@
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th width="1px" ng-if="!form.$readonly && model.includedMedicals.length"></th>
-            <th width="1px" ng-if="!form.$readonly && model.includedMedicals.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.part.includedMedicals.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.part.includedMedicals.length"></th>
             <th l10n-text="persons.licenceEditionDirective.medsTable.number"></th>
             <th l10n-text="persons.licenceEditionDirective.medsTable.dateValidFrom"></th>
             <th l10n-text="persons.licenceEditionDirective.medsTable.dateValidTo"></th>
@@ -213,14 +212,14 @@
             <th l10n-text="persons.licenceEditionDirective.medsTable.publisher"></th>
           </tr>
         </thead>
-        <tbody ng-model="includedMedicals" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
-          <tr class="sort-disabled" ng-if="!model.includedMedicals.length">
+        <tbody ng-model="model.part.includedMedicals" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
+          <tr class="sort-disabled" ng-if="!model.part.includedMedicals.length">
             <td colspan="6" class="text-center" l10n-text="persons.licenceEditionDirective.noMeds"></td>
           </tr>
           <tr ng-repeat="medical in includedMedicals">
-            <td ng-if="!form.$readonly && model.includedMedicals.length"><span class="fa fa-bars drag-handle"></span>
+            <td ng-if="!form.$readonly && model.part.includedMedicals.length"><span class="fa fa-bars drag-handle"></span>
             </td>
-            <td ng-if="!form.$readonly && model.includedMedicals.length">
+            <td ng-if="!form.$readonly && model.part.includedMedicals.length">
               <sc-button name="deleteMedicalBtn" class="btn btn-xs btn-danger" btn-click="removeMedical(medical)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{medical.part.documentNumberPrefix}}-{{medical.part.documentNumber}}-{{person.lin}}-{{medical.part.documentNumberSuffix}}</td>
@@ -245,8 +244,8 @@
         <table class="table table-striped table-bordered">
           <thead>
             <tr>
-              <th width="1px" ng-if="!form.$readonly && model.includedLicences.length"></th>
-              <th width="1px" ng-if="!form.$readonly && model.includedLicences.length"></th>
+              <th width="1px" ng-if="!form.$readonly && model.part.includedLicences.length"></th>
+              <th width="1px" ng-if="!form.$readonly && model.part.includedLicences.length"></th>
               <th l10n-text="persons.licenceEditionDirective.licencesTable.licenceNumber"></th>
               <th l10n-text="persons.licenceEditionDirective.licencesTable.licenceType"></th>
               <th l10n-text="persons.licenceEditionDirective.licencesTable.documentDateValidFrom"></th>
@@ -254,23 +253,23 @@
               <th l10n-text="persons.licenceEditionDirective.licencesTable.firstEditionValidFrom"></th>
             </tr>
           </thead>
-          <tbody ng-model="includedLicences" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
-            <tr class="sort-disabled" ng-if="!model.includedLicences.length">
+          <tbody ng-model="model.part.includedLicences" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
+            <tr class="sort-disabled" ng-if="!model.part.includedLicences.length">
               <td colspan="5" class="text-center" l10n-text="persons.licenceEditionDirective.noLicences"></td>
             </tr>
             <tr ng-repeat="licence in includedLicences">
-              <td ng-if="!form.$readonly && model.includedLicences.length"><span class="fa fa-bars drag-handle"></span>
+              <td ng-if="!form.$readonly && model.part.includedLicences.length"><span class="fa fa-bars drag-handle"></span>
               </td>
-              <td ng-if="!form.$readonly && model.includedLicences.length">
+              <td ng-if="!form.$readonly && model.part.includedLicences.length">
                 <sc-button name="deleteLicenceBtn" class="btn btn-xs btn-danger" btn-click="removeLicence(licence)" icon="glyphicon-remove"></sc-button>
               </td>
-              <td>{{licence.part.licenceNumber}}</td>
-              <td>{{licence.part.licenceType.name}}</td>
-              <td><span>{{(licence.part.editions | last).documentDateValidFrom  | date:'mediumDate'}}</span>
+              <td>{{licence.licenceNumber}}</td>
+              <td>{{licence.licenceType.name}}</td>
+              <td><span>{{licence.dateValidFrom | date:'mediumDate'}}</span>
               </td>
-              <td><span>{{(licence.part.editions | last).documentDateValidTo  | date:'mediumDate'}}</span>
+              <td><span>{{licence.dateValidTo | date:'mediumDate'}}</span>
               </td>
-              <td><span>{{(licence.part.editions | first).documentDateValidFrom  | date:'mediumDate'}}</span>
+              <td><span>{{licence.firstDocDateValidFrom | date:'mediumDate'}}</span>
               </td>
             </tr>
           </tbody>

@@ -1,0 +1,18 @@
+﻿<ng-form name="newLicenceEditionForm" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="persons.newLicenceEdition.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.newLicenceEdition.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.newLicenceEdition.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </div>
+    <div class="well-sm panel-body">
+      <gva-licence-edition name="licenceEditionForm" ng-model="newLicenceEdition"
+        sc-form-params="{ isNew: true, lotId: lotId, caseTypeId: caseTypeId, appId: appId }"
+        sc-data-staff-type="$parent.licence.part.staffType" sc-data-fcl="$parent.licence.part.fcl"
+        sc-data-licence-type="$parent.licence.part.licenceType">
+      </gva-licence-edition>
+    </div>
+  </div>
+</ng-form>

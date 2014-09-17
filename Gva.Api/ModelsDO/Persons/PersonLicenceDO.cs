@@ -7,8 +7,6 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonLicenceDO
     {
-        public int NextIndex { get; set; }
-
         [Required(ErrorMessage = "StaffType is required.")]
         public NomValue StaffType { get; set; }
 
@@ -17,15 +15,20 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "LicenceType is required.")]
         public NomValue LicenceType { get; set; }
 
-        public string LicenceNumber { get; set; }
+        public int? LicenceNumber { get; set; }
 
         public string ForeignLicenceNumber { get; set; }
+
+        public NomValue ForeignPublisher { get; set; }
+
+        public NomValue Employment { get; set; }
+
+        [Required(ErrorMessage = "Publisher is required.")]
+        public NomValue Publisher { get; set; }
 
         public DateTime? DocumentDateValidTo { get; set; }
 
         public NomValue Valid { get; set; }
-
-        public PersonLicenceEditionDO[] Editions { get; set; }
 
         public List<PersonLicenceStatusDO> Statuses { get; set; }
     }

@@ -8,26 +8,32 @@
     scModalParams,
     scModal,
     PersonLicences,
-    licence
+    PersonLicenceEditions,
+    licence,
+    licenceEditions
   ) {
     $scope.form = {};
     $scope.licence = licence;
     $scope.lotId = scModalParams.lotId;
-    $scope.lastEdition = _.last($scope.licence.part.editions);
-    $scope.edition = _.find($scope.licence.part.editions, function (edition) {
-      return edition.index === scModalParams.editionIndex;
+    $scope.lastEdition = _.last(licenceEditions);
+    $scope.edition = _.find(licenceEditions, function (edition) {
+      return edition.part.index === scModalParams.editionIndex;
     });
 
     $scope.save = function () {
       return $scope.form.editLicenceForm.$validate().then(function () {
         if ($scope.form.editLicenceForm.$valid) {
-          return PersonLicences.save({
+          return PersonLicenceEditions.save({
               id: scModalParams.lotId,
-              ind: scModalParams.licenceIndex
-            }, $scope.licence)
+              ind: scModalParams.licencePartIndex,
+              index: $scope.edition.partIndex
+          }, $scope.edition)
           .$promise
-          .then(function (savedLicence) {
-            return $modalInstance.close(savedLicence);
+          .then(function (savedLicenceEdition) {
+            var returnValue = {};
+            returnValue.savedLicenceEdition = savedLicenceEdition;
+            returnValue.licence = $scope.licence;
+            return $modalInstance.close(returnValue);
           });
         }
       });
@@ -41,7 +47,7 @@
       var params = {
         licence: $scope.licence,
         personId: scModalParams.lotId,
-        licenceInd: scModalParams.licenceIndex
+        licenceInd: scModalParams.licencePartIndex
       };
 
       var modalInstance = scModal.open('licenceStatuses', params);
@@ -56,7 +62,9 @@
     'scModalParams',
     'scModal',
     'PersonLicences',
-    'licence'
+    'PersonLicenceEditions',
+    'licence',
+    'licenceEditions'
   ];
 
   EditLicenceModalCtrl.$resolve = {
@@ -66,7 +74,17 @@
       function (PersonLicences, scModalParams) {
         return PersonLicences.get({
           id: scModalParams.lotId,
-          ind: scModalParams.licenceIndex
+          ind: scModalParams.licencePartIndex
+        }).$promise;
+      }
+    ],
+    licenceEditions: [
+      'PersonLicenceEditions',
+      'scModalParams',
+      function (PersonLicenceEditions, scModalParams) {
+        return PersonLicenceEditions.query({
+          id: scModalParams.lotId,
+          ind: scModalParams.licencePartIndex
         }).$promise;
       }
     ]

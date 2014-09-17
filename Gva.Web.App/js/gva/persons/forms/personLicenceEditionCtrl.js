@@ -16,6 +16,7 @@
     scFormParams
   ) {
     $scope.lotId = scFormParams.lotId;
+    $scope.isNew = scFormParams.isNew;
 
     $q.all([
       Persons.get({ id: scFormParams.lotId }).$promise,
@@ -37,44 +38,44 @@
           return;
         }
 
-        $scope.model.includedRatings = $scope.model.includedRatings || [];
-        $scope.includedRatings = _.map($scope.model.includedRatings, function (ind) {
+        $scope.model.part.includedRatings = $scope.model.part.includedRatings || [];
+        $scope.includedRatings = _.map($scope.model.part.includedRatings, function (ind) {
           return _.find(ratings, { partIndex: ind });
         });
         $scope.$watchCollection('includedRatings', function () {
-          $scope.model.includedRatings = _.pluck($scope.includedRatings, 'partIndex');
+          $scope.model.part.includedRatings = _.pluck($scope.includedRatings, 'partIndex');
         });
 
-        $scope.model.includedTrainings = $scope.model.includedTrainings || [];
-        $scope.includedTrainings = _.map($scope.model.includedTrainings, function (ind) {
+        $scope.model.part.includedTrainings = $scope.model.part.includedTrainings || [];
+        $scope.includedTrainings = _.map($scope.model.part.includedTrainings, function (ind) {
           return _.find(trainings, { partIndex: ind });
         });
         $scope.$watchCollection('includedTrainings', function () {
-          $scope.model.includedTrainings = _.pluck($scope.includedTrainings, 'partIndex');
+          $scope.model.part.includedTrainings = _.pluck($scope.includedTrainings, 'partIndex');
         });
 
-        $scope.model.includedChecks = $scope.model.includedChecks || [];
-        $scope.includedChecks = _.map($scope.model.includedChecks, function (ind) {
+        $scope.model.part.includedChecks = $scope.model.part.includedChecks || [];
+        $scope.includedChecks = _.map($scope.model.part.includedChecks, function (ind) {
           return _.where(checks, { partIndex: ind })[0];
         });
         $scope.$watchCollection('includedChecks', function () {
-          $scope.model.includedChecks = _.pluck($scope.includedChecks, 'partIndex');
+          $scope.model.part.includedChecks = _.pluck($scope.includedChecks, 'partIndex');
         });
 
-        $scope.model.includedMedicals = $scope.model.includedMedicals || [];
-        $scope.includedMedicals = _.map($scope.model.includedMedicals, function (ind) {
+        $scope.model.part.includedMedicals = $scope.model.part.includedMedicals || [];
+        $scope.includedMedicals = _.map($scope.model.part.includedMedicals, function (ind) {
           return _.find(medicals, { partIndex: ind });
         });
         $scope.$watchCollection('includedMedicals', function () {
-          $scope.model.includedMedicals = _.pluck($scope.includedMedicals, 'partIndex');
+          $scope.model.part.includedMedicals = _.pluck($scope.includedMedicals, 'partIndex');
         });
 
-        $scope.model.includedLicences = $scope.model.includedLicences || [];
-        $scope.includedLicences = _.map($scope.model.includedLicences, function (ind) {
+        $scope.model.part.includedLicences = $scope.model.part.includedLicences || [];
+        $scope.includedLicences = _.map($scope.model.part.includedLicences, function (ind) {
           return _.find(licences, { partIndex: ind });
         });
         $scope.$watchCollection('includedLicences', function () {
-          $scope.model.includedLicences = _.pluck($scope.includedLicences, 'partIndex');
+          $scope.model.part.includedLicences = _.pluck($scope.includedLicences, 'partIndex');
         });
 
         // removing the watcher after the model have been set
@@ -82,9 +83,8 @@
       });
     });
 
-    $scope.isNew = scFormParams.isNew;
-    if($scope.isNew && $scope.model.documentDateValidFrom === undefined){
-      $scope.model.documentDateValidFrom = moment(new Date());
+    if($scope.isNew && $scope.model.part.documentDateValidFrom === undefined){
+      $scope.model.part.documentDateValidFrom = moment(new Date());
     }
     
     $scope.addRating = function () {
@@ -102,7 +102,7 @@
 
     $scope.addExistingRating = function () {
       var modalInstance = scModal.open('chooseRatings', {
-        includedRatings: $scope.model.includedRatings,
+        includedRatings: $scope.model.part.includedRatings,
         lotId: scFormParams.lotId
       });
 
@@ -138,7 +138,7 @@
 
     $scope.addExistingTraining = function () {
       var modalInstance = scModal.open('chooseTrainings', {
-        includedTrainings: $scope.model.includedTrainings,
+        includedTrainings: $scope.model.part.includedTrainings,
         lotId: scFormParams.lotId
       });
 
@@ -174,7 +174,7 @@
 
     $scope.addExistingCheck = function () {
       var modalInstance = scModal.open('chooseChecks', {
-        includedChecks: $scope.model.includedChecks,
+        includedChecks: $scope.model.part.includedChecks,
         lotId: scFormParams.lotId
       });
 
@@ -210,7 +210,7 @@
 
     $scope.addExistingMedical = function () {
       var modalInstance = scModal.open('chooseMedicals', {
-        includedMedicals: $scope.model.includedMedicals,
+        includedMedicals: $scope.model.part.includedMedicals,
         person: $scope.person,
         lotId: scFormParams.lotId
       });
@@ -232,7 +232,7 @@
     };
 
     $scope.addExistingLicence = function () {
-      var hideLicences = _.clone($scope.model.includedLicences);
+      var hideLicences = _.clone($scope.model.part.includedLicences);
 
       if (scFormParams.partIndex) {
         hideLicences.push(parseInt(scFormParams.partIndex, 10));

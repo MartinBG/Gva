@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
+using Common.Filters;
 
 namespace Gva.Api.ModelsDO.Persons
 {
@@ -10,13 +11,14 @@ namespace Gva.Api.ModelsDO.Persons
         public PersonLicenceEditionDO()
         {
             this.Limitations = new List<NomValue>();
-            this.Applications = new List<ApplicationNomDO>();
             this.IncludedRatings = new List<int>();
             this.IncludedTrainings = new List<int>();
             this.IncludedChecks = new List<int>();
             this.IncludedMedicals = new List<int>();
             this.IncludedLicences = new List<int>();
         }
+
+        public int LicencePartIndex { get; set; }
 
         public int? Index { get; set; }
 
@@ -25,7 +27,6 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "DocumentDateValidFrom is required!")]
         public DateTime? DocumentDateValidFrom { get; set; }
 
-        [Required(ErrorMessage = "DocumentDateValidTo is required!")]
         public DateTime? DocumentDateValidTo { get; set; }
 
         [Required(ErrorMessage = "LicenceAction is required!")]
@@ -40,8 +41,6 @@ namespace Gva.Api.ModelsDO.Persons
         public string NotesAlt { get; set; }
 
         public string StampNumber { get; set; }
-
-        public List<ApplicationNomDO> Applications { get; set; }
 
         public List<int> IncludedRatings { get; set; }
 

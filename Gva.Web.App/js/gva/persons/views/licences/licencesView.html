@@ -1,0 +1,30 @@
+<ng-form name="editLicenceForm" sc-validate="{}" sc-form-readonly="">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="persons.editLicence.title"></strong>
+      <div class="pull-right">
+        <sc-button name="createBtn" btn-click="newEdition()" text="persons.editLicence.newEdition" class="btn btn-primary btn-xs" icon="glyphicon-plus">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <h5 class="form-header" l10n-text="persons.editLicence.licenceForm"></h5>
+      <gva-licence name="licenceForm" ng-model="licence.part" sc-form-params="{ isNew: false, lotId: lotId }"></gva-licence>
+
+      <div class="row">
+        <sc-field-group class="col-sm-3" text="persons.licenceDirective.valid">
+          <sc-nomenclature alias="'boolean'" ng-model="licence.part.valid" ng-readonly="true"></sc-nomenclature>
+          <sc-button name="viewStatusesBtn" btn-click="viewStatuses()" class="btn btn-default" icon="glyphicon-pencil" ng-disabled="editMode"></sc-button>
+        </sc-field-group>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div ui-view></div>
+    <div class="clear"></div>
+  </div>
+
+</ng-form>
+

@@ -13,28 +13,25 @@
     $scope.licences = licences;
     
     $scope.isInvalidLicence = function(item){
-      return item.part.valid && item.part.valid.code === 'N';
+      return !item.valid;
     };
 
     $scope.isExpiringLicence = function(item) {
       var today = moment(new Date()),
-        documentDateValidTo = $filter('last')(item.part.editions).documentDateValidTo,
-        difference = moment(documentDateValidTo).diff(today, 'days');
+          difference = moment(item.dateValidTo).diff(today, 'days');
 
       return 0 <= difference && difference <= 30;
     };
 
     $scope.isExpiredLicence = function(item) {
-      var currentDate = new Date(),
-        documentDateValidTo = $filter('last')(item.part.editions).documentDateValidTo;
-
-      return moment(currentDate).isAfter(documentDateValidTo);
+      return moment(new Date()).isAfter(item.dateValidTo);
     };
 
     $scope.print = function (licence) {
       var params = {
         lotId: $stateParams.id,
-        index: licence.partIndex
+        index: licence.partIndex,
+        editionIndex: licence.editionPartIndex
       };
 
       var modalInstance = scModal.open('printLicence', params);
@@ -44,6 +41,22 @@
       });
 
       return modalInstance.opened;
+    };
+
+    $scope.licenceNumberFormatMask = function(item) {
+      var licenceNumberMask = item.licenceNumber.toString(),
+          licenceNumberLength = licenceNumberMask.length;
+
+      if (licenceNumberLength < 5) {
+        var i, difference = 5 - licenceNumberLength;
+        for (i = 0; i < difference; i++) {
+          licenceNumberMask = '0' + licenceNumberMask;
+        }
+      }
+
+      return item.publisherCode + ' ' +
+             item.licenceTypeCode + ' ' +
+             licenceNumberMask;
     };
   }
 

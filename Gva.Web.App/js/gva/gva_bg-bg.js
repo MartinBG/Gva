@@ -1964,7 +1964,10 @@
           foreignLicenceNumber: 'Чужд лиценз No',
           valid: 'Действителен',
           fcl: 'FCL',
-          lastLicenceNumber: 'Последеният издаден лиценз от избрания тип е с No'
+          lastLicenceNumber: 'Последеният издаден лиценз от избрания тип е с No',
+          foreignPublisher: 'Чужда администрация',
+          employment: 'Месторабота',
+          publisher: 'Администрация'
         },
         licenceEditionDirective: {
           documentDateValidFrom: 'Дата на издаване',
@@ -2597,7 +2600,12 @@
         editLicence: {
           title: 'Преглед на лиценз',
           licenceForm: 'Лиценз',
-          editionForm: 'Вписване',
+          newEdition: 'Ново вписване',
+          viewStatuses: 'Статус'
+        },
+        editLicenceEditions: {
+          title: 'Преглед на вписвания',
+          editionForm: 'Редакция на вписване',
           editions: 'Вписвания',
           limitations: 'Ограничения',
           documentDateValidFrom: 'Издаден',
@@ -2608,12 +2616,15 @@
           bookPageNumber: '№ стр. в делов. книга',
           pageCount: 'Брой стр.',
           licenceAction: 'Основание',
-          newEdition: 'Ново вписване',
-          editLastEdition: 'Редакция',
-          deleteLastEdition: 'Изтриване',
+          edit: 'Редакция',
+          deleteEdition: 'Изтриване',
           save: 'Запис',
-          cancel: 'Отказ',
-          viewStatuses: 'Статус'
+          cancel: 'Отказ'
+        },
+        newLicenceEdition: {
+          title: 'Ново вписване',
+          save: 'Запис',
+          cancel: 'Отказ'
         },
         licenceStatus: {
           valid: 'Валидност',
@@ -3702,6 +3713,9 @@
       },
       successTexts: {
         successExtract: 'Успешно разпознаване'
+      },
+      statusTexts: {
+        noSuchLastLicenceNumber: 'Не е издаван такъв лиценз'
       },
       states: {
         'root.applications': 'Заявления',

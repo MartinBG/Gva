@@ -9,6 +9,7 @@ using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -16,11 +17,13 @@ namespace Gva.Api.Repositories.PersonRepository
     {
         private IUnitOfWork unitOfWork;
         private INomRepository nomRepository;
+        private ILotRepository lotRepository;
 
-        public PersonRepository(IUnitOfWork unitOfWork, INomRepository nomRepository)
+        public PersonRepository(IUnitOfWork unitOfWork, INomRepository nomRepository, ILotRepository lotRepository)
         {
             this.unitOfWork = unitOfWork;
             this.nomRepository = nomRepository;
+            this.lotRepository = lotRepository;
         }
 
         public IEnumerable<GvaViewPerson> GetPersons(
@@ -203,6 +206,38 @@ namespace Gva.Api.Repositories.PersonRepository
 
                     })
                     .ToList();
+        }
+
+        public IEnumerable<GvaViewPersonLicenceEdition> GetLicences(int lotId)
+        {
+
+            return this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
+                .Include(e => e.Person)
+                .Include(p => p.Person.LinType)
+                .Include(p => p.Person.Organization)
+                .Include(p => p.Person.Employment)
+                .Include(p => p.Person.Inspector)
+                .Include(e => e.Part)
+                .Include(e => e.LicenceAction)
+                .Include(e => e.LicenceType)
+                .Where(e => e.LotId == lotId && e.IsLastEdition == true)
+                .ToList();
+        }
+
+        public string GetLastLicenceNumber(int lotId, string licenceTypeCode)
+        {
+            string licenceNumber = null;
+            var licenceNumbers = this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
+                .Include(e => e.LicenceType)
+                .Where(e => e.LicenceType.Code == licenceTypeCode)
+                .Select(e => e.LicenceNumber);
+
+            if (licenceNumbers.Any())
+            {
+                licenceNumber = licenceNumbers.Max().ToString();
+            }
+
+            return licenceNumber;
         }
     }
 }

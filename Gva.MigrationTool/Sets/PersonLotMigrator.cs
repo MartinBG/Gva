@@ -280,9 +280,11 @@ namespace Gva.MigrationTool.Sets
                         }
 
                         var personDocumentEmployments = this.getPersonDocumentEmployments(personId, noms, getOrgByApexId, blobIdsToFileKeys);
+                        Dictionary<int, PartVersion> employmentsByOldId = new Dictionary<int, PartVersion>();
                         foreach (var docEmployment in personDocumentEmployments)
                         {
-                            addPartWithFiles("personDocumentEmployments/*", docEmployment);
+                            var pv = addPartWithFiles("personDocumentEmployments/*", docEmployment);
+                            employmentsByOldId.Add(docEmployment.Get<int>("part.__oldId"), pv);
                         }
 
                         var personDocumentMedicals = this.getPersonDocumentMedicals(personId, nomApplications, noms, appApexIdToStaffTypeCode, blobIdsToFileKeys);
@@ -329,30 +331,35 @@ namespace Gva.MigrationTool.Sets
                             ratingOldIdToPartIndex.Add(personRating.Get<int>("__oldId"), pv.Part.Index);
                         }
 
-                        var personLicences = this.getPersonLicences(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
+                        var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
+                        var personLicences = this.getPersonLicences(personId, getPersonByApexId, noms, employmentsByOldId);
                         Dictionary<int, int> licenceOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personLicence in personLicences)
                         {
+                            var licencePartVersion = lot.CreatePart("licences/*", personLicence, context);
+
                             int nextIndex = 0;
 
-                            foreach (var edition in personLicence["editions"].Cast<JObject>())
+                            foreach (var edition in personLicenceEditions[personLicence.Get<int>("__oldId")])
                             {
-                                edition.Add("index", nextIndex);
+                                var editionPart = edition["part"] as JObject;
+                                editionPart.Add("licencePartIndex", licencePartVersion.Part.Index);
+                                editionPart.Add("index", nextIndex);
                                 nextIndex++;
+
+                                var editionPartVersion = addPartWithFiles("licenceEditions/*", edition);
                             }
 
-                            personLicence.Add("nextIndex", nextIndex);
-
-                            var pv = lot.CreatePart("licences/*", personLicence, context);
-                            licenceOldIdToPartIndex.Add(personLicence.Get<int>("__oldId"), pv.Part.Index);
+                            licenceOldIdToPartIndex.Add(personLicence.Get<int>("__oldId"), licencePartVersion.Part.Index);
                         }
 
                         //replace included licence ids with part indexes
                         foreach (var personLicence in personLicences)
                         {
-                            foreach (var edition in personLicence.GetItems<JObject>("editions"))
+                            foreach (var edition in personLicenceEditions[personLicence.Get<int>("__oldId")])
                             {
-                                edition.Property("includedLicences").Value = new JArray(edition.GetItems<int>("includedLicences").Select(l => licenceOldIdToPartIndex[l]).ToArray());
+                                var editionPart = edition["part"] as JObject;
+                                editionPart.Property("includedLicences").Value = new JArray(edition.GetItems<int>("includedLicences").Select(l => licenceOldIdToPartIndex[l]).ToArray());
                             }
                         }
 
@@ -1181,7 +1188,7 @@ namespace Gva.MigrationTool.Sets
                 .ToList(); ;
         }
 
-        private IList<JObject> getPersonLicences(
+        private IDictionary<int, IEnumerable<JObject>> getPersonLicenceEditions(
             int personId,
             Func<int?, JObject> getPersonByApexId,
             IDictionary<int, JObject> nomApplications,
@@ -1280,7 +1287,7 @@ namespace Gva.MigrationTool.Sets
                 .GroupBy(r => r.LICENCE_LOG_ID)
                 .ToDictionary(g => g.Key, g => g.Where(r => r.LICENCE_ID != null).Select(r => r.LICENCE_ID.Value).ToArray());
 
-            var editions = oracleConn.CreateStoreCommand(
+            return oracleConn.CreateStoreCommand(
                 @"SELECT E.PERSON_ID EXAMINER_ID,
                         LL.LICENCE_ID,
                         LL.ID,
@@ -1305,10 +1312,12 @@ namespace Gva.MigrationTool.Sets
                         LL.LIM_HP_B1,
                         LL.LIM_AVIONICS,
                         LL.LIM_PE_B3,
-                        LL.REQUEST_ID
+                        LL.REQUEST_ID,
+                        LT.STAFF_TYPE_ID
                     FROM CAA_DOC.LICENCE L
                     JOIN CAA_DOC.LICENCE_LOG LL ON LL.LICENCE_ID = L.ID
                     LEFT OUTER JOIN CAA_DOC.EXAMINER E ON E.ID = LL.EXAMINER_ID
+                    INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON L.LICENCE_TYPE_ID = LT.ID
                     WHERE {0}",
                 new DbClause("L.PERSON_ID = {0}", personId)
                 )
@@ -1320,9 +1329,11 @@ namespace Gva.MigrationTool.Sets
 
                         __LICENCE_ID = r.Field<int>("LICENCE_ID"),
 
+                        staffType = noms["staffTypes"].ByOldId(r.Field<string>("STAFF_TYPE_ID")),
+                        bookPageNumber = r.Field<int?>("BOOK_PAGE_NO"),
+                        pageCount = r.Field<int?>("PAGES_COUNT"),
+
                         //TODO show somewhere?
-                        __BOOK_PAGE_NO = r.Field<int?>("BOOK_PAGE_NO"),
-                        __PAGES_COUNT = r.Field<int?>("PAGES_COUNT"),
                         __LIM_OTHER = r.Field<string>("LIM_OTHER"),
                         __LIM_MED_CERT = r.Field<string>("LIM_MED_CERT"),
 
@@ -1359,52 +1370,90 @@ namespace Gva.MigrationTool.Sets
                 .ToList()
                 .GroupBy(r => r.__LICENCE_ID)
                 .ToDictionary(g => g.Key,
-                    g => g.Select(r => Utils.ToJObject(
-                        new
-                        {
-                            r.__oldId,
-                            r.__migrTable,
+                    g => g.Select(r => new JObject(
+                        new JProperty("part",
+                            Utils.ToJObject(
+                                new
+                                {
+                                    r.__oldId,
+                                    r.__migrTable,
 
-                            r.__BOOK_PAGE_NO,
-                            r.__PAGES_COUNT,
-                            r.__LIM_OTHER,
-                            r.__LIM_MED_CERT,
+                                    r.__LIM_OTHER,
+                                    r.__LIM_MED_CERT,
 
-                            r.inspector,
-                            r.documentDateValidFrom,
-                            r.documentDateValidTo,
-                            r.notes,
-                            r.notesAlt,
-                            r.licenceAction,
-                            r.stampNumber,
-                            r.limitations,
+                                    r.inspector,
+                                    r.documentDateValidFrom,
+                                    r.documentDateValidTo,
+                                    r.notes,
+                                    r.notesAlt,
+                                    r.licenceAction,
+                                    r.stampNumber,
+                                    r.limitations,
 
-                            r.applications,
-                            r.includedRatings,
-                            r.includedMedicals,
-                            r.includedTrainings,
-                            r.includedLicences,
-                            r.includedChecks,
+                                    r.includedRatings,
+                                    r.includedMedicals,
+                                    r.includedTrainings,
+                                    r.includedLicences,
+                                    r.includedChecks,
 
-                            r.amlLimitations
-                        })));
+                                    r.amlLimitations
+                                })),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", (r.staffType.Code != null ? Utils.ToJObject(PersonUtils.getPersonCaseTypeByStaffTypeCode(noms, r.staffType.Code)) : null)
+                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("person"))),
+                                    new JProperty("bookPageNumber", r.bookPageNumber),
+                                    new JProperty("pageCount", r.pageCount),
+                                    new JProperty("applications", r.applications)))))));
+        }
 
+        private IList<JObject> getPersonLicences(
+            int personId,
+            Func<int?, JObject> getPersonByApexId,
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<int, PartVersion> employmentsByOldId)
+        {
+            Func<int?, JObject> getEmployment = (employmentId) =>
+            {
+                if (!employmentId.HasValue)
+                {
+                    return null;
+                }
+                else if (!employmentsByOldId.ContainsKey(employmentId.Value))
+                {
+                    return null;
+                }
+                else
+                {
+                    var employment = employmentsByOldId[employmentId.Value];
+                    return new JObject(
+                        new JProperty("nomValueId", employment.Part.Index),
+                        new JProperty("name", string.Format(
+                            "{0}, {1} {2}",
+                            employment.Content.Get<string>("organization.name"),
+                            employment.Content.Get<DateTime>("hiredate").ToString("dd.MM.yyyy"),
+                            employment.Content.Get<string>("valid.code") == "N" ? "(НЕВАЛИДНА)" : null)));
+                }
+            };
             var statuses = oracleConn.CreateStoreCommand(
                 @"SELECT L.ID LICENCE_ID,
-                        E.PERSON_ID EXAMINER_ID,
-                        LCS.ID LICENCE_CHANGE_STAT_ID,
-                        LCS.CHANGE_DATE,
-                        LCS.CHANGE_REASON_ID,
-                        LCS.CHANGE_TO_VALID_YN,
-                        LCS.NOTES,
-                        LCS.INS_USER,
-                        LCS.INS_DATE,
-                        LCS.UPD_USER,
-                        LCS.UPD_DATE
-                    FROM CAA_DOC.LICENCE L
-                    JOIN CAA_DOC.LICENCE_CHANGE_STAT LCS ON LCS.LICENCE_ID = L.ID
-                    LEFT OUTER JOIN CAA_DOC.EXAMINER E ON E.ID = LCS.EXAMINER_ID
-                    WHERE {0}",
+                                    E.PERSON_ID EXAMINER_ID,
+                                    LCS.ID LICENCE_CHANGE_STAT_ID,
+                                    LCS.CHANGE_DATE,
+                                    LCS.CHANGE_REASON_ID,
+                                    LCS.CHANGE_TO_VALID_YN,
+                                    LCS.NOTES,
+                                    LCS.INS_USER,
+                                    LCS.INS_DATE,
+                                    LCS.UPD_USER,
+                                    LCS.UPD_DATE
+                                FROM CAA_DOC.LICENCE L
+                                JOIN CAA_DOC.LICENCE_CHANGE_STAT LCS ON LCS.LICENCE_ID = L.ID
+                                LEFT OUTER JOIN CAA_DOC.EXAMINER E ON E.ID = LCS.EXAMINER_ID
+                                WHERE {0}",
                 new DbClause("L.PERSON_ID = {0}", personId)
                 )
                 .Materialize(r =>
@@ -1461,9 +1510,6 @@ namespace Gva.MigrationTool.Sets
                         __migrTable = "LICENCE",
 
                         //TODO show somewhere?
-                        __PUBLISHER_CAA_ID = r.Field<int?>("PUBLISHER_CAA_ID"),
-                        __FOREIGN_CAA_ID = r.Field<int?>("FOREIGN_CAA_ID"),
-                        __EMPLOYEE_ID = r.Field<int?>("EMPLOYEE_ID"),
                         __ISSUE_DATE = r.Field<DateTime?>("ISSUE_DATE"),
 
                         licenceType = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_TYPE_ID")),
@@ -1472,8 +1518,10 @@ namespace Gva.MigrationTool.Sets
                         licenceNumber = r.Field<string>("LICENCE_NO"),
                         foreignLicenceNumber = r.Field<string>("FOREIGN_LICENCE_NO"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        editions = editions[r.Field<int>("ID")],
-                        statuses = statuses.ContainsKey(r.Field<int>("ID")) ? statuses[r.Field<int>("ID")] : null
+                        statuses = statuses.ContainsKey(r.Field<int>("ID")) ? statuses[r.Field<int>("ID")] : null,
+                        publisher = noms["caa"].ByOldId(r.Field<int?>("PUBLISHER_CAA_ID").ToString()),
+                        foreignPublisher = noms["caa"].ByOldId(r.Field<int?>("FOREIGN_CAA_ID").ToString()),
+                        employment = getEmployment(r.Field<int?>("EMPLOYEE_ID"))
                     }))
                 .ToList();
         }

@@ -36,9 +36,15 @@ namespace Gva.Api.WordTemplates
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
             var personData = lot.Index.GetPart("personData").Content;
-            var licence = lot.Index.GetPart(path).Content;
 
-            var lastEdition = licence.GetItems<JObject>("editions").Last();
+            var licencePart = lot.Index.GetPart(path);
+            var licence = licencePart.Content;
+            var editions = lot.Index.GetParts("licenceEditions")
+                .Where(e => e.Content.Get<int>("licencePartIndex") == licencePart.Part.Index)
+                .OrderBy(e => e.Content.Get<int>("index"))
+                .Select(e => e.Content);
+
+            var lastEdition = editions.Last();
 
             var includedRatings = lastEdition.GetItems<int>("includedRatings")
                 .Select(i => lot.Index.GetPart("ratings/" + i).Content);

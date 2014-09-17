@@ -8,10 +8,6 @@
         method: 'GET',
         url: 'api/persons/:id/licences/new'
       },
-      newLicenceEdition: {
-        method: 'GET',
-        url: 'api/persons/:id/licences/:ind/newEdition'
-      },
       lastLicenceNumber: {
         method: 'GET',
         url: 'api/persons/:id/licences/lastLicenceNumber'

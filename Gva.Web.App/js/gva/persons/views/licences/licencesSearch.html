@@ -3,22 +3,23 @@
   <sc-datatable items="licences" filterable="true" pageable="true" sortable="true" dynamic-columns="true"
     row-class="{'invalidLicence' : isInvalidLicence(item), 'expiredLicence' : (!isInvalidLicence(item) && isExpiredLicence(item)), 'expiringLicence' : isExpiringLicence(item)}">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.licences.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.licences.view.editions.edit', params: {ind: item.partIndex, index: item.editionPartIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <a ng-click="print(item)">
         <span class="glyphicon glyphicon-print"></span>
       </a>
     </sc-column>
-    <sc-column data="part.licenceNumber" title="persons.licencesSearch.licenceNumber">
+    <sc-column title="persons.licencesSearch.licenceNumber" has-content="true">
+      {{licenceNumberFormatMask(item)}}
     </sc-column>
-    <sc-column data="part.licenceType.name" title="persons.licencesSearch.licenceType">
+    <sc-column data="licenceType.name" title="persons.licencesSearch.licenceType">
     </sc-column>
-    <sc-column data="(part.editions | last).documentDateValidFrom" title="persons.licencesSearch.documentDateValidFrom" type="date">
+    <sc-column data="dateValidFrom" title="persons.licencesSearch.documentDateValidFrom" type="date">
     </sc-column>
-    <sc-column data="(part.editions | last).documentDateValidTo" title="persons.licencesSearch.documentDateValidTo" type="date">
+    <sc-column data="dateValidTo" title="persons.licencesSearch.documentDateValidTo" type="date">
     </sc-column>
-    <sc-column data="(part.editions | first).documentDateValidFrom" title="persons.licencesSearch.firstEditionValidFrom" type="date">
+    <sc-column data="firstDocDateValidFrom" title="persons.licencesSearch.firstEditionValidFrom" type="date">
     </sc-column>
   </sc-datatable>
 </div>

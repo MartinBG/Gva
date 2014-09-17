@@ -705,6 +705,23 @@ namespace Gva.Api.Controllers
                 name = stage.Name
             });
         }
+
+        [Route("employments")]
+        public IHttpActionResult GetEmployments(int lotId)
+        {
+            var returnValue = this.lotRepository.GetLotIndex(lotId).Index.GetParts("personDocumentEmployments")
+                .Select(e => new
+                {
+                    nomValueId = e.Part.Index,
+                    name = string.Format(
+                        "{0}, {1} {2}",
+                        e.Content.Get<string>("organization.name"),
+                        e.Content.Get<DateTime>("hiredate").ToString("dd.MM.yyyy"),
+                        e.Content.Get<string>("valid.code") == "N" ? "(НЕВАЛИДНА)" : null)
+                });
+
+            return Ok(returnValue);
+        }
     }
 }
 
