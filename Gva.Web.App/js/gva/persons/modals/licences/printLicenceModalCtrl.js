@@ -1,5 +1,5 @@
-﻿/*global angular, _, $*/
-(function (angular, _, $) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
   function PrintLicenceModalCtrl(
@@ -12,7 +12,9 @@
 
     $scope.model = {
       stampNumber: licenceEdition.part.stampNumber,
-      stampNumberReadonly: !!licenceEdition.part.stampNumber
+      stampNumberReadonly: !!licenceEdition.part.stampNumber,
+      lotId: scModalParams.lotId,
+      index: scModalParams.index
     };
 
     $scope.save = function () {
@@ -25,14 +27,6 @@
       }, licenceEdition).$promise.then(function (savedEdition) {
         return $modalInstance.close(savedEdition);
       });
-    };
-
-    $scope.print = function () {
-      var href = 'api/print?lotId=' + scModalParams.lotId +
-                  '&licenceInd=' + scModalParams.licencePartIndex,
-          hiddenElement = $('<a href="' + href + '" target="_self"></a>')[0];
-
-      hiddenElement.click();
     };
 
     $scope.cancel = function () {
@@ -63,4 +57,4 @@
   };
 
   angular.module('gva').controller('PrintLicenceModalCtrl', PrintLicenceModalCtrl);
-}(angular, _, $));
+}(angular));
