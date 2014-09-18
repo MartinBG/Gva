@@ -2881,7 +2881,8 @@
           cancel: 'Отказ',
           select: 'Избери',
           name: 'Наименование',
-          code: 'Код'
+          code: 'Код',
+          search: 'Търси'
         },
         corrSelect: {
           correspondent: 'Кореспондент',

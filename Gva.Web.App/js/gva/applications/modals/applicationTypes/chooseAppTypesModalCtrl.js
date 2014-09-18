@@ -6,12 +6,26 @@
     $scope,
     $modalInstance,
     Nomenclatures,
+    scModalParams,
     appTypes
   ) {
     $scope.appTypes = appTypes;
+    $scope.searchParams = {
+      code: null,
+      alias: 'applicationTypes',
+      caseTypeAlias: scModalParams.caseType.alias,
+      name: null
+    };
 
     $scope.cancel = function () {
       return $modalInstance.dismiss('cancel');
+    };
+
+    $scope.search = function () {
+      return Nomenclatures.query($scope.searchParams)
+        .$promise.then(function (appTypes) {
+          $scope.appTypes = appTypes;
+        });
     };
 
     $scope.chooseAppType = function (appType) {
@@ -23,6 +37,7 @@
     '$scope',
     '$modalInstance',
     'Nomenclatures',
+    'scModalParams',
     'appTypes'
   ];
 
