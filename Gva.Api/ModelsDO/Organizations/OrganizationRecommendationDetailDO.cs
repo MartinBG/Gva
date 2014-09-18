@@ -6,10 +6,6 @@ namespace Gva.Api.ModelsDO.Organizations
 {
     public class OrganizationRecommendationDetailDO
     {
-        public OrganizationRecommendationDetailDO()
-        {
-        }
-
         [Required(ErrorMessage = "Code is required.")]
         public string Code { get; set; }
 

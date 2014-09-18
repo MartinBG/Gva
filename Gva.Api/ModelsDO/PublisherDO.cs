@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Gva.Api.Models;
-
-namespace Gva.Api.ModelsDO
+﻿namespace Gva.Api.ModelsDO
 {
     public class PublisherDO
     {

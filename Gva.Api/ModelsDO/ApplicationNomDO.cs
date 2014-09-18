@@ -1,6 +1,4 @@
-﻿using System;
-using Common.Json;
-using Gva.Api.Models;
+﻿using Gva.Api.Models;
 using Gva.Api.ModelsDO.Common;
 
 namespace Gva.Api.ModelsDO

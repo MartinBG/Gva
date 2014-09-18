@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Gva.Api.Models;
+﻿using System.Collections.Generic;
 using Docs.Api.DataObjects;
 
 namespace Gva.Api.ModelsDO

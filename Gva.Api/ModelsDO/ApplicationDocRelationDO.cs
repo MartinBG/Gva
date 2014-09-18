@@ -1,9 +1,6 @@
-﻿using Docs.Api.DataObjects;
+﻿using System.Collections.Generic;
+using Docs.Api.DataObjects;
 using Docs.Api.Models;
-using Gva.Api.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Gva.Api.ModelsDO
 {
@@ -39,21 +36,29 @@ namespace Gva.Api.ModelsDO
         }
 
         public int DocRelationId { get; set; }
-        public Nullable<int> DocId { get; set; }
-        public Nullable<int> ParentDocId { get; set; }
-        public Nullable<int> RootDocId { get; set; }
+
+        public int? DocId { get; set; }
+
+        public int? ParentDocId { get; set; }
+
+        public int? RootDocId { get; set; }
+
         public byte[] Version { get; set; }
 
         public string DocDocDirectionName { get; set; }
+
         public string DocRegUri { get; set; }
+
         public string DocDocStatusName { get; set; }
+
         public string DocDocStatusAlias { get; set; }
+
         public byte[] DocVersion { get; set; }
 
         public string DocDocTypeName { get; set; }
+
         public string DocSubject { get; set; }
 
         public List<ApplicationLotFileDO> ApplicationLotFiles { get; set; }
-
     }
 }

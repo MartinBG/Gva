@@ -1,10 +1,4 @@
-﻿using Docs.Api.Models;
-using Gva.Api.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Gva.Api.Models;
 
 namespace Docs.Api.DataObjects
 {
@@ -18,7 +12,9 @@ namespace Docs.Api.DataObjects
         }
 
         public string SetPartName { get; set; }
+
         public string SetPartAlias { get; set; }
+
         public int? PartIndex { get; set; }
     }
 }

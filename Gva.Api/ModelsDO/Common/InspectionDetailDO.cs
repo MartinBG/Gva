@@ -6,10 +6,6 @@ namespace Gva.Api.ModelsDO.Common
 {
     public class InspectionDetailDO
     {
-        public InspectionDetailDO()
-        {
-        }
-
         [Required(ErrorMessage = "Code is required.")]
         public string Code { get; set; }
 

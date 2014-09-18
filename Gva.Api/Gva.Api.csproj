@@ -137,6 +137,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftReviewAmendmentFMDO.cs" />
     <Compile Include="ModelsDO\Organizations\AmendmentDO.cs" />
+    <Compile Include="ModelsDO\Organizations\LimitationDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDetailDO.cs" />
     <Compile Include="ModelsDO\Organizations\Lims145DO.cs" />
     <Compile Include="ModelsDO\Organizations\Lims147DO.cs" />
