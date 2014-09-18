@@ -74,14 +74,16 @@ namespace Regs.Api.Models
             }
         }
 
-        public PartVersion GetPart(string path)
+        public PartVersion<T> GetPart<T>(string path)
+            where T : class
         {
-            return this.Parts.Get(path);
+            return this.Parts.Get<T>(path);
         }
 
-        public PartVersion[] GetParts(string pathSpec)
+        public PartVersion<T>[] GetParts<T>(string pathSpec)
+            where T : class
         {
-            return this.Parts.GetAll(pathSpec);
+            return this.Parts.GetAll<T>(pathSpec);
         }
     }
 

@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Json;
-using Mosv.Api.Models;
+using Common.Filters;
 using Mosv.Api.ModelsDO;
-using Newtonsoft.Json.Linq;
+using Mosv.Api.ModelsDO.Suggestion;
+using Mosv.Api.Repositories.SuggestionRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Mosv.Api.Repositories.SuggestionRepository;
-using System.Data.Entity;
 
 namespace Mosv.Api.Controllers
 {
     [RoutePrefix("api/suggestion")]
     [Authorize]
-    public class SuggestionsController : MosvLotsController
+    public class SuggestionsController : ApiController
     {
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
@@ -30,7 +28,6 @@ namespace Mosv.Api.Controllers
             ILotRepository lotRepository,
             ISuggestionRepository suggestionRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base(lotRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -53,11 +50,18 @@ namespace Mosv.Api.Controllers
                 incomingDateТо,
                 applicant);
 
-            return Ok(admissions.Select(s => new SuggestionDO(s)));
+            return Ok(admissions.Select(s => new SuggestionViewDO(s)));
+        }
+
+        [Route("new")]
+        public IHttpActionResult GetNewSuggestion()
+        {
+            return Ok(new SuggestionDO());
         }
 
         [Route("")]
-        public IHttpActionResult PostSuggestion(JObject suggestion)
+        [Validate]
+        public IHttpActionResult PostSuggestion(SuggestionDO suggestion)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -77,12 +81,12 @@ namespace Mosv.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^suggestionData$)}")]
-        public override IHttpActionResult GetPart(int lotId, string path)
+        public IHttpActionResult GetPart(int lotId, string path)
         {
-            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
+            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart<SuggestionDO>(path);
 
             var suggestion = this.suggestionRepository.GetSuggestion(lotId);
-            SuggestionDO suggestionDO = new SuggestionDO(suggestion);
+            SuggestionViewDO suggestionDO = new SuggestionViewDO(suggestion);
 
             if (suggestionDO.ApplicationDocId.HasValue)
             {
@@ -100,21 +104,27 @@ namespace Mosv.Api.Controllers
             return Ok(new
             {
                 data = suggestionDO,
-                partData = new PartVersionDO(part)
+                partData = new PartVersionDO<SuggestionDO>(part)
             });
         }
 
         [Route(@"{lotId}/{*path:regex(^suggestionData$)}")]
-        public IHttpActionResult PostSuggestionData(int lotId, string path, JObject content)
+        public IHttpActionResult PostSuggestionData(int lotId, string path, PartVersionDO<SuggestionDO> partVersionDO)
         {
-            var lot = this.lotRepository.GetLotIndex(lotId);
+            UserContext userContext = this.Request.GetUserContext();
 
-            return base.PostPart(lotId, path, content);
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            PartVersion<SuggestionDO> partVersion = lot.UpdatePart(path, partVersionDO.Part, userContext);
+            lot.Commit(userContext, lotEventDispatcher);
+
+            this.unitOfWork.Save();
+
+            return Ok();
         }
 
         [Route("{id}/fastSave")]
         [HttpPost]
-        public IHttpActionResult FastSaveSignal(int id, SignalDO data)
+        public IHttpActionResult FastSaveSignal(int id, SuggestionViewDO data)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {

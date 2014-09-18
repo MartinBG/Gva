@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views.Airport;
+using Gva.Api.ModelsDO.Airports;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -16,7 +16,7 @@ namespace Gva.Api.Projections.Airport
 
         public override IEnumerable<GvaViewAirport> Execute(PartCollection parts)
         {
-            var airportData = parts.Get("airportData");
+            var airportData = parts.Get<AirportDataDO>("airportData");
 
             if (airportData == null)
             {
@@ -26,20 +26,20 @@ namespace Gva.Api.Projections.Airport
             return new[] { this.Create(airportData) };
         }
 
-        private GvaViewAirport Create(PartVersion airportData)
+        private GvaViewAirport Create(PartVersion<AirportDataDO> airportData)
         {
             GvaViewAirport airport = new GvaViewAirport();
 
             airport.LotId = airportData.Part.Lot.LotId;
-            airport.Name = airportData.Content.Get<string>("name");
-            airport.NameAlt = airportData.Content.Get<string>("nameAlt");
-            airport.Place = airportData.Content.Get<string>("place");
-            airport.AirportTypeId = airportData.Content.Get<int>("airportType.nomValueId");
-            airport.ICAO = airportData.Content.Get<string>("icao");
-            airport.Runway = airportData.Content.Get<string>("runway");
-            airport.Course = airportData.Content.Get<string>("course");
-            airport.Excess = airportData.Content.Get<string>("excess");
-            airport.Concrete = airportData.Content.Get<string>("concrete");
+            airport.Name = airportData.Content.Name;
+            airport.NameAlt = airportData.Content.NameAlt;
+            airport.Place = airportData.Content.Place;
+            airport.AirportTypeId = airportData.Content.AirportType.NomValueId;
+            airport.ICAO = airportData.Content.Icao;
+            airport.Runway = airportData.Content.Runway;
+            airport.Course = airportData.Content.Course;
+            airport.Excess = airportData.Content.Excess;
+            airport.Concrete = airportData.Content.Concrete;
 
             return airport;
         }

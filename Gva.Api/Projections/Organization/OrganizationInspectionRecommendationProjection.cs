@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views.Organization;
-using Newtonsoft.Json.Linq;
+using Gva.Api.ModelsDO.Organizations;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -19,11 +16,12 @@ namespace Gva.Api.Projections.Organization
 
         public override IEnumerable<GvaViewOrganizationInspectionRecommendation> Execute(PartCollection parts)
         {
-            var recommendations = parts.GetAll("organizationRecommendation");
+            var recommendations = parts.GetAll<OrganizationRecommendationDO>("organizationRecommendation");
+
             List<GvaViewOrganizationInspectionRecommendation> inspectionsToRecommendation = new List<GvaViewOrganizationInspectionRecommendation>();
             foreach (var recommendation in recommendations)
             {
-                foreach (int inspectionPartIndex in recommendation.Content.GetItems<int>("inspections"))
+                foreach (int inspectionPartIndex in recommendation.Content.Inspections)
                 {
                     inspectionsToRecommendation.Add(
                         new GvaViewOrganizationInspectionRecommendation()
@@ -34,6 +32,7 @@ namespace Gva.Api.Projections.Organization
                         });
                 }
             }
+
             return inspectionsToRecommendation;
         }
     }

@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Json;
+using Common.Filters;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
+using Gva.Api.Repositories.PersonRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
-using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Common.Api.Repositories.NomRepository;
-using Common.Filters;
-using Gva.Api.Repositories.PersonRepository;
-using System.Net;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -151,13 +148,11 @@ namespace Gva.Api.Controllers.Persons
 
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                PartVersion licencePartVersion = lot.CreatePart("licences/*", JObject.FromObject(newLicence.Licence.Part), this.userContext);
-
+                var licencePartVersion = lot.CreatePart("licences/*", newLicence.Licence.Part, this.userContext);
                 newLicence.Edition.Part.LicencePartIndex = licencePartVersion.Part.Index;
 
-                PartVersion editionPartVersion = lot.CreatePart("licenceEditions/*", JObject.FromObject(newLicence.Edition.Part), this.userContext);
-
-                this.fileRepository.AddFileReferences(editionPartVersion, newLicence.Edition.Files);
+                var editionPartVersion = lot.CreatePart("licenceEditions/*", newLicence.Edition.Part, this.userContext);
+                this.fileRepository.AddFileReferences(editionPartVersion.Part, newLicence.Edition.Files);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 

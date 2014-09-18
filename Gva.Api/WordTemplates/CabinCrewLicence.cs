@@ -4,6 +4,7 @@ using System.Linq;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Json;
+using Gva.Api.ModelsDO.Persons;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -46,41 +47,41 @@ namespace Gva.Api.WordTemplates
         public object GetData(int lotId, string path)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
-            var personData = lot.Index.GetPart("personData").Content;
-            var personAddressPart = lot.Index.GetParts("personAddresses")
-                .FirstOrDefault(a => a.Content.Get<string>("valid.code") == "Y");
+            var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            var personAddressPart = lot.Index.GetParts<PersonAddressDO>("personAddresses")
+                .FirstOrDefault(a => a.Content.Valid.Code == "Y");
             var personAddress = personAddressPart == null ?
-                new JObject() :
+                new PersonAddressDO() :
                 personAddressPart.Content;
 
-            var licencePart = lot.Index.GetPart(path);
+            var licencePart = lot.Index.GetPart<PersonLicenceDO>(path);
             var licence = licencePart.Content;
-            var editions = lot.Index.GetParts("licenceEditions")
-                .Where(e => e.Content.Get<int>("licencePartIndex") == licencePart.Part.Index)
-                .OrderBy(e => e.Content.Get<int>("index"))
+            var editions = lot.Index.GetParts<PersonLicenceEditionDO>("licenceEditions")
+                .Where(e => e.Content.LicencePartIndex == licencePart.Part.Index)
+                .OrderBy(e => e.Content.Index)
                 .Select(e => e.Content);
 
             var firstEdition = editions.First();
             var lastEdition = editions.Last();
 
-            var includedTrainings = lastEdition.GetItems<int>("includedTrainings")
-                .Select(i => lot.Index.GetPart("personDocumentTrainings/" + i).Content);
-            var includedExams = lastEdition.GetItems<int>("includedExams")
-                .Select(i => lot.Index.GetPart("personDocumentExams/" + i).Content);
-            var includedMedicals = lastEdition.GetItems<int>("includedMedicals")
-                .Select(i => lot.Index.GetPart("personDocumentMedicals/" + i).Content);
-            var includedRatings = lastEdition.GetItems<int>("includedRatings")
-                .Select(i => lot.Index.GetPart("ratings/" + i).Content);
+            var includedTrainings = lastEdition.IncludedTrainings
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
+            //TODO - includedExams! var includedExams = lastEdition.GetItems<int>("includedExams")
+            //TODO - includedExams!     .Select(i => lot.Index.GetPart("personDocumentExams/" + i).Content);
+            var includedMedicals = lastEdition.IncludedMedicals
+                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
+            var includedRatings = lastEdition.IncludedRatings
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i).Content);
 
-            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Get<int>("licenceType.nomValueId"));
+            var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
                 "BG {0} - {1} - {2}",
                 licenceType.Code,
-                licence.Get<string>("licenceNumber"),
-                personData.Get<string>("lin"));
+                licence.LicenceNumber,
+                personData.Lin);
 
-            var documents = this.GetDocuments(includedTrainings, includedExams, licenceType.Code);
+            //TODO - includedExams! var documents = this.GetDocuments(includedTrainings, includedExams, licenceType.Code);
             var ratings = this.GetRatings(includedRatings);
 
             var json = new
@@ -93,18 +94,18 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_CA_CODE = licenceCaCode,
                     L_LICENCE_NO = licenceNumber,
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
-                    L_FIRST_ISSUE_DATE = firstEdition.Get<DateTime>("documentDateValidFrom"),
+                    L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_PRIVILEGE = this.GetLicencePrivileges(licenceType.Code, lastEdition),
-                    L_ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
+                    L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_LICENCE_HOLDER = this.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_TYPE_NAME = licenceType.Name.ToLower(),
                     T_LICENCE_NO = licenceNumber,
-                    T_FIRST_ISSUE_DATE = firstEdition.Get<DateTime>("documentDateValidFrom"),
-                    T_VALID_DATE = lastEdition.Get<DateTime>("documentDateValidTo"),
-                    T_ACTION = lastEdition.Get<string>("licenceAction.name").ToUpper(),
-                    T_ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
-                    T_DOCUMENTS = documents.Take(documents.Length / 2),
-                    T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
+                    T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
+                    T_VALID_DATE = lastEdition.DocumentDateValidTo,
+                    T_ACTION = lastEdition.LicenceAction.Name.ToUpper(),
+                    T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
+                    //TODO - includedExams! T_DOCUMENTS = documents.Take(documents.Length / 2),
+                    //TODO - includedExams! T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
                     MED_CERT = this.GetMedCerts(licenceType.Code, includedMedicals, personData),
                     T_RATING = ratings,
                     L_RATING2 = ratings,
@@ -115,23 +116,23 @@ namespace Gva.Api.WordTemplates
             return json;
         }
 
-        private object GetPersonData(JObject personData, JObject personAddress)
+        private object GetPersonData(PersonDataDO personData, PersonAddressDO personAddress)
         {
-            var placeOfBirth = personData.Get<NomValue>("placeOfBirth");
+            var placeOfBirth = personData.PlaceOfBirth;
             var country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
-            var nationality = this.nomRepository.GetNomValue("countries", personData.Get<int>("country.nomValueId"));
+            var nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
 
             return new
             {
-                FAMILY_BG = personData.Get<string>("lastName").ToUpper(),
-                FAMILY_TRANS = personData.Get<string>("lastNameAlt").ToUpper(),
-                FIRST_NAME_BG = personData.Get<string>("firstName").ToUpper(),
-                FIRST_NAME_TRANS = personData.Get<string>("firstNameAlt").ToUpper(),
-                SURNAME_BG = personData.Get<string>("middleName").ToUpper(),
-                SURNAME_TRANS = personData.Get<string>("middleNameAlt").ToUpper(),
+                FAMILY_BG = personData.LastName.ToUpper(),
+                FAMILY_TRANS = personData.LastNameAlt.ToUpper(),
+                FIRST_NAME_BG = personData.FirstName.ToUpper(),
+                FIRST_NAME_TRANS = personData.FirstNameAlt.ToUpper(),
+                SURNAME_BG = personData.MiddleName.ToUpper(),
+                SURNAME_TRANS = personData.MiddleNameAlt.ToUpper(),
                 DATEPLACE_OF_BIRTH = new
                 {
-                    DATE_OF_BIRTH = personData.Get<DateTime>("dateOfBirth"),
+                    DATE_OF_BIRTH = personData.DateOfBirth,
                     PLACE_OF_BIRTH = new
                     {
                         COUNTRY_NAME = country.Name,
@@ -145,12 +146,12 @@ namespace Gva.Api.WordTemplates
                 },
                 ADDRESS_BG = string.Format(
                     "{0}, {1}",
-                    personAddress.Get<string>("settlement.name"),
-                    personAddress.Get<string>("address")),
+                    personAddress.Settlement.Name,
+                    personAddress.Address),
                 ADDRESS_TRANS = string.Format(
                     "{0}, {1}",
-                    personAddress.Get<string>("addressAlt"),
-                    personAddress.Get<string>("settlement.nameAlt")),
+                    personAddress.AddressAlt,
+                    personAddress.Settlement.NameAlt),
                 NATIONALITY = new
                 {
                     COUNTRY_NAME_BG = nationality.Name,
@@ -159,7 +160,7 @@ namespace Gva.Api.WordTemplates
             };
         }
 
-        private List<object> GetLicencePrivileges(string licenceTypeCode, JObject edition)
+        private List<object> GetLicencePrivileges(string licenceTypeCode, PersonLicenceEditionDO edition)
         {
             List<object> privileges;
             List<dynamic> result = new object[0].ToList();
@@ -169,7 +170,7 @@ namespace Gva.Api.WordTemplates
                 if (licenceTypeCode == "C/AL")
                 {
                     dynamic dateValidPrivilege = LicenceDictionary.LicencePrivilege["dateValid"];
-                    string dateValid = edition.Get<DateTime>("documentDateValidTo").ToString("dd.MM.yyyy");
+                    string dateValid = edition.DocumentDateValidTo.Value.ToString("dd.MM.yyyy");
 
                     result = new List<object>(privileges);
                     result.Add(new
@@ -184,26 +185,26 @@ namespace Gva.Api.WordTemplates
             return result.OrderBy(p => p.NO).ToList<object>();
         }
 
-        private object GetLicenceHolder(JObject personData, JObject personAddress)
+        private object GetLicenceHolder(PersonDataDO personData, PersonAddressDO personAddress)
         {
             return new
             {
                 NAME = string.Format(
                     "{0} {1} {2}",
-                    personData.Get<string>("firstName"),
-                    personData.Get<string>("middleName"),
-                    personData.Get<string>("lastName")).ToUpper(),
-                LIN = personData.Get<string>("lin"),
-                EGN = personData.Get<string>("uin"),
+                    personData.FirstName,
+                    personData.MiddleName,
+                    personData.LastName).ToUpper(),
+                LIN = personData.Lin,
+                EGN = personData.Uin,
                 ADDRESS = string.Format(
                     "{0}, {1}",
-                    personAddress.Get<string>("settlement.name"),
-                    personAddress.Get<string>("address")),
-                TELEPHONE = personData.Get<string>("phone1") ??
-                            personData.Get<string>("phone2") ??
-                            personData.Get<string>("phone3") ??
-                            personData.Get<string>("phone4") ??
-                            personData.Get<string>("phone5")
+                    personAddress.Settlement.Name,
+                    personAddress.Address),
+                TELEPHONE = personData.Phone1 ??
+                            personData.Phone2 ??
+                            personData.Phone3 ??
+                            personData.Phone4 ??
+                            personData.Phone5
             };
         }
 
@@ -260,7 +261,7 @@ namespace Gva.Api.WordTemplates
                 .ToArray<object>();
         }
 
-        private object[] GetMedCerts(string licenceTypeCode, IEnumerable<JObject> includedMedicals, JObject personData)
+        private object[] GetMedCerts(string licenceTypeCode, IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
         {
             return includedMedicals.Select(m =>
                 new
@@ -268,39 +269,39 @@ namespace Gva.Api.WordTemplates
                     ORDER_NO = 9,
                     NO = string.Format(
                         "{0}-{1}-{2}-{3}",
-                        m.Get<string>("documentNumberPrefix"),
-                        m.Get<string>("documentNumber"),
-                        personData.Get<string>("lin"),
-                        m.Get<string>("documentNumberSuffix")),
-                    ISSUE_DATE = m.Get<DateTime>("documentDateValidFrom"),
-                    VALID_DATE = m.Get<DateTime>("documentDateValidTo"),
-                    CLASS = m.Get<string>("medClass.name"),
-                    PUBLISHER = m.Get<string>("documentPublisher.name"),
-                    LIMITATION = string.Join(",", m.GetItems<JObject>("limitations").Select(l => l.Get<string>("name")))
+                        m.DocumentNumberPrefix,
+                        m.DocumentNumber,
+                        personData.Lin,
+                        m.DocumentNumberSuffix),
+                    ISSUE_DATE = m.DocumentDateValidFrom,
+                    VALID_DATE = m.DocumentDateValidTo,
+                    CLASS = m.MedClass.Name,
+                    PUBLISHER = m.DocumentPublisher.Name,
+                    LIMITATION = string.Join(",", m.Limitations.Select(l => l.Name))
                 }).ToArray<object>();
         }
 
-        private object[] GetRatings(IEnumerable<JObject> includedRatings)
+        private object[] GetRatings(IEnumerable<PersonRatingDO> includedRatings)
         {
             return includedRatings
                 .Select(r =>
                 {
-                    JObject lastEdition = r.GetItems<JObject>("editions").Last();
-                    var ratingType = r.Get<NomValue>("ratingType");
-                    var ratingClass = r.Get<NomValue>("ratingClass");
-                    var authorization = r.Get<NomValue>("authorization");
+                    PersonRatingEditionDO lastEdition = r.Editions.Last();
+                    var ratingTypeName = r.RatingType == null ? null : r.RatingType.Name;
+                    var ratingClassName = r.RatingClass == null ? null : r.RatingClass.Name;
+                    var authorizationName = r.Authorization == null ? null : r.Authorization.Name;
 
                     return new
                     {
-                        CLASS_AUTH = ratingClass == null && ratingType == null ?
-                            authorization.Name:
+                        CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypeName) ?
+                            authorizationName :
                             string.Format(
                                 "{0} {1} {2}",
-                                ratingType == null ? string.Empty : ratingType.Name,
-                                ratingClass == null ? string.Empty : ratingClass.Name,
-                                authorization == null ? string.Empty : "/ " + authorization.Name).Trim(),
-                        ISSUE_DATE = lastEdition.Get<DateTime>("documentDateValidFrom"),
-                        VALID_DATE = lastEdition.Get<DateTime>("documentDateValidTo")
+                                ratingTypeName,
+                                ratingClassName,
+                                string.IsNullOrEmpty(authorizationName) ? string.Empty : "/ " + authorizationName).Trim(),
+                        ISSUE_DATE = lastEdition.DocumentDateValidFrom,
+                        VALID_DATE = lastEdition.DocumentDateValidTo
                     };
                 }).ToArray<object>();
         }

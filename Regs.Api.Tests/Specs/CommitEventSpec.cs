@@ -2,7 +2,7 @@
 using Autofac;
 using Common.Api.UserContext;
 using Common.Data;
-using Newtonsoft.Json.Linq;
+using Gva.Api.ModelsDO.Persons;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
@@ -49,7 +49,7 @@ namespace Regs.Api.Tests.Specs
                 userContext = lf.Resolve<UserContext>();
 
                 lot = lotRepository.CreateLot("Person");
-                lot.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext);
+                lot.CreatePart("personAddresses/0", new PersonAddressDO {Address = "0" }, userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
                 return lf;
@@ -96,10 +96,10 @@ namespace Regs.Api.Tests.Specs
                 userContext = lf.Resolve<UserContext>();
 
                 lot = lotRepository.CreateLot("Person");
-                lot.CreatePart("personAddresses/0", JObject.Parse("{ address: '0' }"), userContext);
+                lot.CreatePart("personAddresses/0", new PersonAddressDO { Address = "0" }, userContext);
                 lot.Commit(userContext, lotEventDispatcher);
 
-                lot.CreatePart("personAddresses/1", JObject.Parse("{ address: '1' }"), userContext);
+                lot.CreatePart("personAddresses/1", new PersonAddressDO { Address = "1" }, userContext);
                 lot.Commit(userContext, lotEventDispatcher, new string[] { "personAddresses/1" });
                 unitOfWork.Save();
 

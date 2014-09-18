@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Api.UserContext;
 using Common.Sequence;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 
@@ -57,7 +58,7 @@ namespace Regs.Api.Models
             }
         }
 
-        public PartVersion CreatePart(string path, JObject json, UserContext userContext)
+        public PartVersion<T> CreatePart<T>(string path, T partContent, UserContext userContext) where T : class
         {
             Commit index = this.Index;
             var currentDate = DateTime.Now;
@@ -102,9 +103,9 @@ namespace Regs.Api.Models
                 PartOperation = PartOperation.Add,
                 CreatorId = userContext.UserId,
                 CreateDate = currentDate,
-                Part = part,
-                Content = json
+                Part = part
             };
+            partVersion.SetTextContent(partContent);
 
             CommitVersion commitVersion = new CommitVersion
             {
@@ -114,34 +115,36 @@ namespace Regs.Api.Models
 
             index.CommitVersions.Add(commitVersion);
 
-            return partVersion;
+            return new PartVersion<T>(partVersion);
         }
 
-        public PartVersion UpdatePart(string path, JObject json, UserContext userContext)
+        public PartVersion<T> UpdatePart<T>(string path, T partContent, UserContext userContext) where T : class
         {
-            PartVersion partVersion = this.Index.GetPart(path);
+            PartVersion partVersion = this.Index.Parts.Where(pv => pv.Part.Path == path).SingleOrDefault();
 
             if (partVersion == null)
             {
                 throw new ArgumentException("The specified path does not exist.");
             }
 
-            return this.UpdatePartVersion(partVersion, json, userContext);
+            return this.UpdatePartVersion(partVersion, partContent, userContext);
         }
 
-        public PartVersion DeletePart(string path, UserContext userContext)
+        public PartVersion<T> DeletePart<T>(string path, UserContext userContext)
+            where T : class
         {
-            PartVersion partVersion = this.Index.GetPart(path);
+            PartVersion partVersion = this.Index.Parts.Where(pv => pv.Part.Path == path).SingleOrDefault();
 
             if (partVersion == null)
             {
                 throw new ArgumentException("The specified path does not exist.");
             }
 
-            return this.DeletePartVersion(partVersion, userContext);
+            return this.DeletePartVersion<T>(partVersion, userContext);
         }
 
-        public PartVersion ResetPart(string path)
+        public PartVersion<T> ResetPart<T>(string path)
+            where T : class
         {
             Commit index = this.Index;
 
@@ -164,7 +167,6 @@ namespace Regs.Api.Models
             }
 
             Part part = partVersion.Part;
-
             part.PartVersions.Remove(partVersion);
 
             if (partVersion.PartOperation == PartOperation.Add)
@@ -185,7 +187,7 @@ namespace Regs.Api.Models
                 index.CommitVersions.Add(newCommitVersion);
             }
 
-            return partVersion;
+            return new PartVersion<T>(partVersion);
         }
 
         public void Reset(int commitId, UserContext userContext, ILotEventDispatcher lotEventDispatcher)
@@ -327,17 +329,18 @@ namespace Regs.Api.Models
             lotEventDispatcher.Dispatch(new CommitEvent(this, newIndex, index));
         }
 
-        private PartVersion UpdatePartVersion(PartVersion partVersion, JObject json, UserContext userContext)
+        private PartVersion<T> UpdatePartVersion<T>(PartVersion partVersion, T partContent, UserContext userContext)
+            where T : class
         {
             Commit currCommit = this.Index;
             this.ModifyDate = DateTime.Now;
 
             if (partVersion.OriginalCommit == currCommit)
             {
-                partVersion.Content = json;
+                partVersion.SetTextContent(partContent);
                 partVersion.CreatorId = userContext.UserId;
                 partVersion.CreateDate = DateTime.Now;
-                return partVersion;
+                return new PartVersion<T>(partVersion);
             }
 
             PartVersion updatedPartVersion = new PartVersion
@@ -347,9 +350,9 @@ namespace Regs.Api.Models
                 PartOperation = PartOperation.Update,
                 CreatorId = userContext.UserId,
                 CreateDate = DateTime.Now,
-                Part = partVersion.Part,
-                Content = json
+                Part = partVersion.Part
             };
+            updatedPartVersion.SetTextContent(partContent);
 
             var commitVersion = currCommit.CommitVersions.SingleOrDefault(cv => cv.PartVersion.Part == partVersion.Part);
             currCommit.CommitVersions.Remove(commitVersion);
@@ -362,10 +365,11 @@ namespace Regs.Api.Models
             };
             currCommit.CommitVersions.Add(newCommitVersion);
 
-            return updatedPartVersion;
+            return new PartVersion<T>(updatedPartVersion);
         }
 
-        private PartVersion DeletePartVersion(PartVersion partVersion, UserContext userContext)
+        private PartVersion<T> DeletePartVersion<T>(PartVersion partVersion, UserContext userContext)
+            where T : class
         {
             Commit currCommit = this.Index;
             this.ModifyDate = DateTime.Now;
@@ -383,7 +387,7 @@ namespace Regs.Api.Models
                 CreatorId = userContext.UserId,
                 CreateDate = DateTime.Now,
                 Part = partVersion.Part,
-                Content = partVersion.Content
+                TextContent = partVersion.TextContent
             };
 
             var commitVersion = currCommit.CommitVersions.SingleOrDefault(cv => cv.PartVersion.Part == partVersion.Part);
@@ -397,7 +401,7 @@ namespace Regs.Api.Models
             };
             currCommit.CommitVersions.Add(newCommitVersion);
 
-            return deletedPartVersion;
+            return new PartVersion<T>(deletedPartVersion);
         }
 
         private Commit GetCommit(int? commitId = null)

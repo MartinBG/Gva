@@ -8,11 +8,11 @@ namespace Gva.Api.Models.Views.Aircraft
 
         public int PartIndex { get; set; }
 
-        public int CertRegisterId { get; set; }
+        public int? CertRegisterId { get; set; }
 
-        public int CertNumber { get; set; }
+        public int? CertNumber { get; set; }
 
-        public int ActNumber { get; set; }
+        public int? ActNumber { get; set; }
 
         public string RegMark { get; set; }
 

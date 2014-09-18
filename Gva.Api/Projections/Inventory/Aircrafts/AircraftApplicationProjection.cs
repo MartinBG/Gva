@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views;
+using Gva.Api.ModelsDO.Common;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -22,12 +21,12 @@ namespace Gva.Api.Projections.Inventory.Aircrafts
 
         public override IEnumerable<GvaViewInventoryItem> Execute(PartCollection parts)
         {
-            var applications = parts.GetAll("aircraftDocumentApplications");
+            var applications = parts.GetAll<DocumentApplicationDO>("aircraftDocumentApplications");
 
             return applications.Select(a => this.Create(a));
         }
 
-        private GvaViewInventoryItem Create(PartVersion aircraftApplication)
+        private GvaViewInventoryItem Create(PartVersion<DocumentApplicationDO> aircraftApplication)
         {
             GvaViewInventoryItem invItem = new GvaViewInventoryItem();
 
@@ -35,14 +34,14 @@ namespace Gva.Api.Projections.Inventory.Aircrafts
             invItem.PartId = aircraftApplication.Part.PartId;
             invItem.SetPartAlias = aircraftApplication.Part.SetPart.Alias;
             invItem.Name = aircraftApplication.Part.SetPart.Name;
-            invItem.TypeId = aircraftApplication.Content.Get<int>("applicationType.nomValueId");
-            invItem.Number = aircraftApplication.Content.Get<string>("documentNumber");
-            invItem.Date = aircraftApplication.Content.Get<DateTime>("documentDate");
+            invItem.TypeId = aircraftApplication.Content.ApplicationType.NomValueId;
+            invItem.Number = aircraftApplication.Content.DocumentNumber;
+            invItem.Date = aircraftApplication.Content.DocumentDate.Value;
             invItem.Publisher = null;
             invItem.Valid = null;
             invItem.FromDate = null;
             invItem.ToDate = null;
-            invItem.Notes = aircraftApplication.Content.Get<string>("notes");
+            invItem.Notes = aircraftApplication.Content.Notes;
 
             invItem.CreatedBy = this.userRepository.GetUser(aircraftApplication.Part.CreatorId).Fullname;
             invItem.CreationDate = aircraftApplication.Part.CreateDate;

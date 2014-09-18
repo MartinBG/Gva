@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Mosv.Api.Models;
-using Newtonsoft.Json.Linq;
-using Regs.Api.Models;
+﻿using Regs.Api.Models;
 
 namespace Mosv.Api.ModelsDO
 {
-    public class PartVersionDO
+    public class PartVersionDO<T> where T : class, new()
     {
-        public PartVersionDO(PartVersion partVersion)
+        public PartVersionDO(PartVersion<T> partVersion)
         {
             this.PartIndex = partVersion.Part.Index;
             this.PartId = partVersion.PartId;
@@ -19,6 +15,6 @@ namespace Mosv.Api.ModelsDO
 
         public int PartId { get; set; }
 
-        public JObject Part { get; set; }
+        public T Part { get; set; }
     }
 }

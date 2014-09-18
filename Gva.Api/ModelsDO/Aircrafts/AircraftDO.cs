@@ -1,9 +1,4 @@
 ﻿using Regs.Api.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gva.Api.ModelsDO.Aircrafts
 {
@@ -14,9 +9,9 @@ namespace Gva.Api.ModelsDO.Aircrafts
             AircraftData = new AircraftDataDO();
         }
 
-        public AircraftDO(PartVersion aircraftDataPart)
+        public AircraftDO(PartVersion<AircraftDataDO> aircraftDataPart)
         {
-            this.AircraftData = aircraftDataPart.Content.ToObject<AircraftDataDO>();
+            this.AircraftData = aircraftDataPart.Content;
         }
 
         public AircraftDataDO AircraftData { get; set; }

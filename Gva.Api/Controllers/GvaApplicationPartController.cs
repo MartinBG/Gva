@@ -6,7 +6,6 @@ using Common.Data;
 using Common.Filters;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
-using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
@@ -47,7 +46,7 @@ namespace Gva.Api.Controllers
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                PartVersion partVersion = lot.CreatePart(this.path + "/*", JObject.FromObject(partVersionDO.Part), this.userContext);
+                PartVersion<T> partVersion = lot.CreatePart(this.path + "/*", partVersionDO.Part, this.userContext);
 
                 this.applicationRepository.AddApplicationRefs(partVersion.Part, partVersionDO.Applications);
 
@@ -70,9 +69,9 @@ namespace Gva.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                PartVersion partVersion = lot.UpdatePart(
+                PartVersion<T> partVersion = lot.UpdatePart(
                     string.Format("{0}/{1}", this.path, partIndex),
-                    JObject.FromObject(partVersionDO.Part),
+                    partVersionDO.Part,
                     this.userContext);
 
                 this.applicationRepository.AddApplicationRefs(partVersion.Part, partVersionDO.Applications);
@@ -95,9 +94,9 @@ namespace Gva.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
+                var partVersion = lot.DeletePart<T>(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
 
-                this.applicationRepository.DeleteApplicationRefs(partVersion);
+                this.applicationRepository.DeleteApplicationRefs(partVersion.Part);
                 lot.Commit(this.userContext, lotEventDispatcher);
 
                 this.unitOfWork.Save();
@@ -113,7 +112,7 @@ namespace Gva.Api.Controllers
         [Route("{partIndex}")]
         public virtual IHttpActionResult GetPart(int lotId, int partIndex)
         {
-            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(string.Format("{0}/{1}", this.path, partIndex));
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<T>(string.Format("{0}/{1}", this.path, partIndex));
             var lotObjects = this.applicationRepository.GetApplicationRefs(partVersion.PartId);
 
             return Ok(new ApplicationPartVersionDO<T>(partVersion, lotObjects));
@@ -122,7 +121,7 @@ namespace Gva.Api.Controllers
         [Route("")]
         public virtual IHttpActionResult GetParts(int lotId, [FromUri] int[] partIndexes = null)
         {
-            var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts(this.path);
+            var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts<T>(this.path);
 
             if (partIndexes != null && partIndexes.Length > 0)
             {

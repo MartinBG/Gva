@@ -10,6 +10,7 @@ using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
 using Common.Tests;
+using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.MigrationTool.Nomenclatures;
 using Newtonsoft.Json.Linq;
@@ -87,7 +88,7 @@ namespace Gva.MigrationTool.Sets
                             caseTypeRepository.AddCaseTypes(lot, new int[] { aircraftCaseTypeId });
                         }
 
-                        if (lot.Index.GetPart("aircraftData") != null)
+                        if (lot.Index.GetPart<AircraftDataDO>("aircraftData") != null)
                         {
                             Console.WriteLine("AIRCRAFT WITH MSN {0} IN FM HAS ALREADY BEEN MIGRATED", msn);//TODO
                             continue;
@@ -155,8 +156,8 @@ namespace Gva.MigrationTool.Sets
                         propellerAlt = r.Field<string>("t_Act_PropEn"),
                         modifOrWingColor = r.Field<string>("t_Act_ModifOrWingColorBg"),
                         modifOrWingColorAlt = r.Field<string>("t_Act_ModifOrWingColorEn"),
-                        maxMassT = Utils.FmToDecimal(r.Field<string>("n_Act_MTOM")),
-                        maxMassL = Utils.FmToDecimal(r.Field<string>("n_Act_MLMorPayMass")),
+                        maxMassT = (int?)Utils.FmToDecimal(r.Field<string>("n_Act_MTOM")),
+                        maxMassL = (int?)Utils.FmToDecimal(r.Field<string>("n_Act_MLMorPayMass")),
                         seats = Utils.FmToNum(r.Field<string>("n_Act_SeatNo")),
                         outputDate = Utils.FmToDate(r.Field<string>("d_Act_DateOutput")),
                         docRoom = r.Field<string>("t_Act_Place_of_Documents"),

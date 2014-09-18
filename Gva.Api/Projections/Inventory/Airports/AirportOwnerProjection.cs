@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views;
+using Gva.Api.ModelsDO.Airports;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -22,12 +21,12 @@ namespace Gva.Api.Projections.Inventory.Airports
 
         public override IEnumerable<GvaViewInventoryItem> Execute(PartCollection parts)
         {
-            var owners = parts.GetAll("airportDocumentOwners");
+            var owners = parts.GetAll<AirportOwnerDO>("airportDocumentOwners");
 
             return owners.Select(o => this.Create(o));
         }
 
-        public GvaViewInventoryItem Create(PartVersion airportOwner)
+        public GvaViewInventoryItem Create(PartVersion<AirportOwnerDO> airportOwner)
         {
             GvaViewInventoryItem invItem = new GvaViewInventoryItem();
 
@@ -35,14 +34,16 @@ namespace Gva.Api.Projections.Inventory.Airports
             invItem.PartId = airportOwner.Part.PartId;
             invItem.SetPartAlias = airportOwner.Part.SetPart.Alias;
             invItem.Name = airportOwner.Part.SetPart.Name;
-            invItem.TypeId = airportOwner.Content.Get<int>("airportRelation.nomValueId");
-            invItem.Number = airportOwner.Content.Get<string>("documentNumber");
-            invItem.Date = airportOwner.Content.Get<DateTime>("documentDate");
-            invItem.Publisher = airportOwner.Content.Get<string>("person.name") ?? airportOwner.Content.Get<string>("organization.name");
+            invItem.TypeId = airportOwner.Content.AirportRelation.NomValueId;
+            invItem.Number = airportOwner.Content.DocumentNumber;
+            invItem.Date = airportOwner.Content.DocumentDate.Value;
+            string personName = airportOwner.Content.Person == null ? null : airportOwner.Content.Person.Name;
+            string organizationName = airportOwner.Content.Organization == null ? null : airportOwner.Content.Organization.Name;
+            invItem.Publisher = personName ?? organizationName;
             invItem.Valid = null;
-            invItem.FromDate = airportOwner.Content.Get<DateTime>("fromDate");
-            invItem.ToDate = airportOwner.Content.Get<DateTime?>("toDate");
-            invItem.Notes = airportOwner.Content.Get<string>("notes");
+            invItem.FromDate = airportOwner.Content.FromDate.Value;
+            invItem.ToDate = airportOwner.Content.ToDate;
+            invItem.Notes = airportOwner.Content.Notes;
 
             invItem.CreatedBy = this.userRepository.GetUser(airportOwner.Part.CreatorId).Fullname;
             invItem.CreationDate = airportOwner.Part.CreateDate;

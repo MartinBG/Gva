@@ -86,10 +86,10 @@ namespace Gva.MigrationTool.Sets
                             lot.CreatePart("personAddresses/*", address, context);
                         }
 
-                        Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
+                        Func<string, JObject, PartVersion<JObject>> addPartWithFiles = (path, content) =>
                         {
                             var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
-                            fileRepository.AddFileReferences(pv, content.GetItems<FileDO>("files"));
+                            fileRepository.AddFileReferences(pv.Part, content.GetItems<FileDO>("files"));
                             return pv;
                         };
 
@@ -280,7 +280,7 @@ namespace Gva.MigrationTool.Sets
                         }
 
                         var personDocumentEmployments = this.getPersonDocumentEmployments(personId, noms, getOrgByApexId, blobIdsToFileKeys);
-                        Dictionary<int, PartVersion> employmentsByOldId = new Dictionary<int, PartVersion>();
+                        Dictionary<int, PartVersion<JObject>> employmentsByOldId = new Dictionary<int, PartVersion<JObject>>();
                         foreach (var docEmployment in personDocumentEmployments)
                         {
                             var pv = addPartWithFiles("personDocumentEmployments/*", docEmployment);
@@ -610,7 +610,7 @@ namespace Gva.MigrationTool.Sets
                         __LICENCE_STAFF_TYPE_CODE = r.Field<string>("LICENCE_STAFF_TYPE_CODE"),
 
                         documentNumber = r.Field<string>("DOC_NO"),
-                        documentPersonNumber = r.Field<decimal?>("PERSON_NUM"),
+                        documentPersonNumber = r.Field<int?>("PERSON_NUM"),
                         documentDateValidFrom = r.Field<DateTime?>("VALID_FROM"),
                         documentDateValidTo = r.Field<DateTime?>("VALID_TO"),
                         documentPublisher = r.Field<string>("DOC_PUBLISHER"),
@@ -1414,7 +1414,7 @@ namespace Gva.MigrationTool.Sets
             int personId,
             Func<int?, JObject> getPersonByApexId,
             Dictionary<string, Dictionary<string, NomValue>> noms,
-            Dictionary<int, PartVersion> employmentsByOldId)
+            Dictionary<int, PartVersion<JObject>> employmentsByOldId)
         {
             Func<int?, JObject> getEmployment = (employmentId) =>
             {

@@ -1,15 +1,15 @@
 ﻿using Mosv.Api.Models;
 using System;
+using Docs.Api.DataObjects;
 
-namespace Mosv.Api.ModelsDO
+namespace Mosv.Api.ModelsDO.Admission
 {
-    public class AdmissionDO
+    public class AdmissionViewDO
     {
-        public AdmissionDO()
-        {
-        }
+        public AdmissionViewDO()
+        { }
 
-        public AdmissionDO(MosvViewAdmission admission)
+        public AdmissionViewDO(MosvViewAdmission admission)
         {
             this.Id = admission.LotId;
             this.ApplicationDocId = admission.ApplicationDocId;
@@ -34,6 +34,6 @@ namespace Mosv.Api.ModelsDO
 
         public string ApplicantType { get; set; }
 
-        public Docs.Api.DataObjects.DocRelationDO ApplicationDocRelation { get; set; }
+        public DocRelationDO ApplicationDocRelation { get; set; }
     }
 }

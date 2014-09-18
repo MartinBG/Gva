@@ -60,13 +60,9 @@ namespace Gva.Api.Controllers.Equipments
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
+                var partVersion = lot.CreatePart(path + "/*", application.Part, this.userContext);
 
-                PartVersion partVersion = lot.CreatePart(
-                    path + "/*",
-                    JObject.FromObject(application.Part),
-                    this.userContext);
-
-                this.fileRepository.AddFileReferences(partVersion, application.Files);
+                this.fileRepository.AddFileReferences(partVersion.Part, application.Files);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 
@@ -93,9 +89,9 @@ namespace Gva.Api.Controllers.Equipments
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
+                var partVersion = lot.DeletePart<DocumentApplicationDO>(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
 
-                this.fileRepository.DeleteFileReferences(partVersion);
+                this.fileRepository.DeleteFileReferences(partVersion.Part);
                 this.applicationRepository.DeleteGvaApplication(partVersion.PartId);
 
                 lot.Commit(this.userContext, lotEventDispatcher);

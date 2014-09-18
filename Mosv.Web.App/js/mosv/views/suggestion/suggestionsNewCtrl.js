@@ -25,9 +25,12 @@
   SuggestionsNewCtrl.$inject = ['$scope', '$state', 'Suggestions', 'suggestion'];
 
   SuggestionsNewCtrl.$resolve = {
-    suggestion: function () {
-      return {};
-    }
+    suggestion: [
+      'Suggestions',
+      function (Suggestions) {
+        return Suggestions.newSuggestion().$promise;
+      }
+    ]
   };
 
   angular.module('mosv').controller('SuggestionsNewCtrl', SuggestionsNewCtrl);

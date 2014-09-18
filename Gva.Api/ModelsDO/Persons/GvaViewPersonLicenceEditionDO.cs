@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Common.Api.Models;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
-using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons
 {
@@ -36,14 +33,9 @@ namespace Gva.Api.ModelsDO.Persons
             this.LicenceNumber = edition.LicenceNumber;
             this.Person = new PersonViewDO(edition.Person);
 
-            if (edition.ApplicationPartIndex.HasValue)
+            if (edition.Application != null)
             {
-                this.Application = new ApplicationNomDO
-                {
-                    ApplicationId = edition.GvaApplicationId.Value,
-                    ApplicationName = edition.ApplicationName,
-                    PartIndex = edition.ApplicationPartIndex
-                };
+                this.Application = new ApplicationNomDO(edition.Application);
             }
             this.LicenceType = edition.LicenceType;
             this.LicencePartIndex = edition.LicencePartIndex;
@@ -73,7 +65,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string LicenceActionName { get; set; }
 
-        public int LicenceNumber { get; set; }
+        public int? LicenceNumber { get; set; }
 
         public bool IsReceived { get; set; }
 

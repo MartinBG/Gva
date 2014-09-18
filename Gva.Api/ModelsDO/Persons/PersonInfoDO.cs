@@ -7,12 +7,12 @@ namespace Gva.Api.ModelsDO.Persons
         public PersonInfoDO()
         { }
 
-        public PersonInfoDO(PartVersion personDataPart, PartVersion inspectorDataPart)
+        public PersonInfoDO(PartVersion<PersonDataDO> personDataPart, PartVersion<InspectorDataDO> inspectorDataPart)
         {
-            this.PersonData = personDataPart.Content.ToObject<PersonDataDO>();
+            this.PersonData = personDataPart.Content;
             this.InspectorData = inspectorDataPart == null ?
                 null :
-                inspectorDataPart.Content.ToObject<InspectorDataDO>();
+                inspectorDataPart.Content;
         }
 
         public PersonDataDO PersonData { get; set; }

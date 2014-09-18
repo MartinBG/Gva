@@ -46,9 +46,9 @@ namespace Gva.Api.Controllers
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                PartVersion partVersion = lot.CreatePart(this.path + "/*", JObject.FromObject(partVersionDO.Part), this.userContext);
+                PartVersion<T> partVersion = lot.CreatePart<T>(this.path + "/*", partVersionDO.Part, this.userContext);
 
-                this.fileRepository.AddFileReferences(partVersion, partVersionDO.Files);
+                this.fileRepository.AddFileReferences(partVersion.Part, partVersionDO.Files);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
 
@@ -69,12 +69,12 @@ namespace Gva.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                PartVersion partVersion = lot.UpdatePart(
+                PartVersion<T> partVersion = lot.UpdatePart(
                     string.Format("{0}/{1}", this.path, partIndex),
-                    JObject.FromObject(partVersionDO.Part),
+                    partVersionDO.Part,
                     this.userContext);
 
-                this.fileRepository.AddFileReferences(partVersion, partVersionDO.Files);
+                this.fileRepository.AddFileReferences(partVersion.Part, partVersionDO.Files);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
 
@@ -94,9 +94,9 @@ namespace Gva.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                var partVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
+                var partVersion = lot.DeletePart<T>(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
 
-                this.fileRepository.DeleteFileReferences(partVersion);
+                this.fileRepository.DeleteFileReferences(partVersion.Part);
                 lot.Commit(this.userContext, lotEventDispatcher);
 
                 this.unitOfWork.Save();
@@ -112,7 +112,7 @@ namespace Gva.Api.Controllers
         [Route("{partIndex}")]
         public virtual IHttpActionResult GetPart(int lotId, int partIndex, int? caseTypeId = null)
         {
-            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(string.Format("{0}/{1}", this.path, partIndex));
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<T>(string.Format("{0}/{1}", this.path, partIndex));
             var lotFiles = this.fileRepository.GetFileReferences(partVersion.PartId, caseTypeId);
 
             return Ok(new FilePartVersionDO<T>(partVersion, lotFiles));
@@ -121,7 +121,7 @@ namespace Gva.Api.Controllers
         [Route("")]
         public virtual IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
-            var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts(this.path);
+            var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts<T>(this.path);
 
             List<FilePartVersionDO<T>> partVersionDOs = new List<FilePartVersionDO<T>>();
             foreach (var partVersion in partVersions)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-using Gva.Api.Models.Views.Person;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace Gva.Api.Models.Views.Organization
 {

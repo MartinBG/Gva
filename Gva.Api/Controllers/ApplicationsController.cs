@@ -18,7 +18,9 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.ModelsDO.Airports;
+using Gva.Api.ModelsDO.Common;
 using Gva.Api.ModelsDO.Equipments;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.AircraftRepository;
@@ -245,7 +247,7 @@ namespace Gva.Api.Controllers
 
                 SetPart setPart = this.unitOfWork.DbContext.Set<SetPart>().FirstOrDefault(e => e.Alias == setPartAlias);
                 string path = setPart.PathRegex.Remove(setPart.PathRegex.IndexOf("\\"), 4).Remove(0, 1) + "*";
-                PartVersion partVersion = lot.CreatePart(path, linkNewPart.Value<JObject>("appPart"), this.userContext);
+                PartVersion<JObject> partVersion = lot.CreatePart(path, linkNewPart.Value<JObject>("appPart"), this.userContext);
                 lot.Commit(this.userContext, lotEventDispatcher);
 
                 if (Regex.IsMatch(setPart.Alias, @"\w+(Application)"))
@@ -302,7 +304,7 @@ namespace Gva.Api.Controllers
                 SetPart setPart = this.unitOfWork.DbContext.Set<SetPart>().FirstOrDefault(e => e.Alias == setPartAlias);
                 string path = setPart.PathRegex.Remove(setPart.PathRegex.IndexOf("\\"), 4).Remove(0, 1) + "*";
 
-                PartVersion partVersion = lot.CreatePart(path, newPart.Value<JObject>("appPart"), this.userContext);
+                PartVersion<JObject> partVersion = lot.CreatePart(path, newPart.Value<JObject>("appPart"), this.userContext);
                 lot.Commit(this.userContext, lotEventDispatcher);
 
                 if (Regex.IsMatch(setPart.Alias, @"\w+(Application)"))
@@ -534,20 +536,14 @@ namespace Gva.Api.Controllers
 
                 var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
 
-                var applicationJson = new
+                var application = new DocumentApplicationDO
                 {
-                    documentNumber = newDoc.RegIndex,
-                    documentDate = newDoc.RegDate.Value.ToString("yyyy-MM-ddTHH:mm:ss"),
-                    applicationType = new
-                    {
-                        nomValueId = applicationNewDO.ApplicationType.NomValueId,
-                        nomId = applicationNewDO.ApplicationType.NomId,
-                        name = applicationNewDO.ApplicationType.Name,
-                        nameAlt = applicationNewDO.ApplicationType.NameAlt
-                    }
+                    DocumentNumber = newDoc.RegIndex,
+                    DocumentDate = newDoc.RegDate.Value,
+                    ApplicationType = applicationNewDO.ApplicationType
                 };
 
-                PartVersion partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", JObject.FromObject(applicationJson), this.userContext);
+                PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, this.userContext);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
 
@@ -602,10 +598,10 @@ namespace Gva.Api.Controllers
          Route(@"appPart/{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
         public IHttpActionResult GetApplicationPart(string path, int lotId)
         {
-            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
             var lotFiles = this.fileRepository.GetFileReferences(partVersion.PartId, null);
 
-            return Ok(new PartVersionDO(partVersion, lotFiles));
+            return Ok(new FilePartVersionDO<DocumentApplicationDO>(partVersion, lotFiles));
         }
 
         [Route(@"appPart/{lotId}/{*path:regex(^aircraftDocumentApplications/\d+$)}"),
@@ -613,15 +609,14 @@ namespace Gva.Api.Controllers
          Route(@"appPart/{lotId}/{*path:regex(^equipmentDocumentApplications/\d+$)}"),
          Route(@"appPart/{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}"),
          Route(@"appPart/{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
-        public IHttpActionResult PostApplicationPart(string path, int lotId, JObject application)
+        public IHttpActionResult PostApplicationPart(string path, int lotId, FilePartVersionDO<DocumentApplicationDO> application)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                PartVersion partVersion = lot.UpdatePart(path, application.Get<JObject>("part"), this.userContext);
+                PartVersion<DocumentApplicationDO> partVersion = lot.UpdatePart(path, application.Part, this.userContext);
 
-                this.fileRepository.AddFileReferences(partVersion, application.GetItems<FileDO>("files"));
-                this.applicationRepository.AddApplicationRefs(partVersion.Part, application.GetItems<ApplicationNomDO>("applications"));
+                this.fileRepository.AddFileReferences(partVersion.Part, application.Files);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
 

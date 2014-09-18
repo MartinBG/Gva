@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views.Organization;
+using Gva.Api.ModelsDO.Organizations;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -17,7 +16,7 @@ namespace Gva.Api.Projections.Organization
 
         public override IEnumerable<GvaViewOrganization> Execute(PartCollection parts)
         {
-            var organizationData = parts.Get("organizationData");
+            var organizationData = parts.Get<OrganizationDataDO>("organizationData");
 
             if (organizationData == null)
             {
@@ -27,19 +26,19 @@ namespace Gva.Api.Projections.Organization
             return new[] { this.Create(organizationData) };
         }
 
-        private GvaViewOrganization Create(PartVersion organizationData)
+        private GvaViewOrganization Create(PartVersion<OrganizationDataDO> organizationData)
         {
             GvaViewOrganization organization = new GvaViewOrganization();
 
             organization.LotId = organizationData.Part.Lot.LotId;
-            organization.Name = organizationData.Content.Get<string>("name");
-            organization.NameAlt = organizationData.Content.Get<string>("nameAlt");
-            organization.Cao = organizationData.Content.Get<string>("cao");
-            organization.Valid = organizationData.Content.Get<string>("valid.code") == "Y";
-            organization.Uin = organizationData.Content.Get<string>("uin");
-            organization.OrganizationTypeId = organizationData.Content.Get<int>("organizationType.nomValueId");
-            organization.DateValidTo = organizationData.Content.Get<DateTime?>("dateValidTo");
-            organization.DateCaoValidTo = organizationData.Content.Get<DateTime?>("dateCaoValidTo");
+            organization.Name = organizationData.Content.Name;
+            organization.NameAlt = organizationData.Content.NameAlt;
+            organization.Cao = organizationData.Content.Cao;
+            organization.Valid = organizationData.Content.Valid.Code == "Y";
+            organization.Uin = organizationData.Content.Uin;
+            organization.OrganizationTypeId = organizationData.Content.OrganizationType.NomValueId;
+            organization.DateValidTo = organizationData.Content.DateValidTo;
+            organization.DateCaoValidTo = organizationData.Content.DateCaoValidTo;
 
             return organization;
         }

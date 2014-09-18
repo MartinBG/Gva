@@ -1,24 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Json;
+using Common.Filters;
 using Mosv.Api.Models;
 using Mosv.Api.ModelsDO;
+using Mosv.Api.ModelsDO.Admission;
+using Mosv.Api.Repositories.AdmissionRepository;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Mosv.Api.Repositories.AdmissionRepository;
-using System.Data.Entity;
 
 namespace Mosv.Api.Controllers
 {
     [RoutePrefix("api/admissions")]
     [Authorize]
-    public class AdmissionsController : MosvLotsController
+    public class AdmissionsController : ApiController
     {
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
@@ -30,7 +30,6 @@ namespace Mosv.Api.Controllers
             ILotRepository lotRepository,
             IAdmissionRepository admissionRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base(lotRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -53,27 +52,34 @@ namespace Mosv.Api.Controllers
                 applicantType,
                 applicant);
 
-            return Ok(admissions.Select(o => new AdmissionDO(o)));
+            return Ok(admissions.Select(o => new AdmissionViewDO(o)));
         }
 
         [Route("{lotId}")]
         public IHttpActionResult GetAdmission(int lotId)
         {
             var admission = this.admissionRepository.GetAdmission(lotId);
-            AdmissionDO returnValue = new AdmissionDO(admission);
+            AdmissionViewDO returnValue = new AdmissionViewDO(admission);
 
             return Ok(returnValue);
         }
 
+        [Route("new")]
+        public IHttpActionResult GetNewAdmission()
+        {
+            return Ok(new AdmissionDO());
+        }
+
         [Route("")]
-        public IHttpActionResult PostAdmission(JObject admission)
+        [Validate]
+        public IHttpActionResult PostAdmission(AdmissionDO admission)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
                 var newLot = this.lotRepository.CreateLot("Admission");
 
-                newLot.CreatePart("admissionData", admission.Get<JObject>("admissionData"), userContext);
+                newLot.CreatePart("admissionData", admission, userContext);
 
                 newLot.Commit(userContext, lotEventDispatcher);
 
@@ -86,12 +92,12 @@ namespace Mosv.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^admissionData$)}")]
-        public override IHttpActionResult GetPart(int lotId, string path)
+        public IHttpActionResult GetPart(int lotId, string path)
         {
-            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
+            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart<AdmissionDO>(path);
 
             var admission = this.admissionRepository.GetAdmission(lotId);
-            AdmissionDO admissionDO = new AdmissionDO(admission);
+            AdmissionViewDO admissionDO = new AdmissionViewDO(admission);
 
             if (admissionDO.ApplicationDocId.HasValue)
             {
@@ -109,21 +115,28 @@ namespace Mosv.Api.Controllers
             return Ok(new
             {
                 data = admissionDO,
-                partData = new PartVersionDO(part)
+                partData = new PartVersionDO<AdmissionDO>(part)
             });
         }
 
         [Route(@"{lotId}/{*path:regex(^admissionData$)}")]
-        public IHttpActionResult PostAdmissionData(int lotId, string path, JObject content)
+        [Validate]
+        public IHttpActionResult PostAdmissionData(int lotId, string path, PartVersionDO<AdmissionDO> partVersionDO)
         {
-            var lot = this.lotRepository.GetLotIndex(lotId);
+            UserContext userContext = this.Request.GetUserContext();
 
-            return base.PostPart(lotId, path, content);
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            PartVersion<AdmissionDO> partVersion = lot.UpdatePart(path, partVersionDO.Part, userContext);
+            lot.Commit(userContext, lotEventDispatcher);
+
+            this.unitOfWork.Save();
+
+            return Ok();
         }
 
         [Route("{id}/fastSave")]
         [HttpPost]
-        public IHttpActionResult FastSaveAdmission(int id, AdmissionDO data)
+        public IHttpActionResult FastSaveAdmission(int id, AdmissionViewDO data)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {

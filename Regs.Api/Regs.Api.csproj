@@ -79,6 +79,7 @@
     <Compile Include="Models\CommitVersion.cs" />
     <Compile Include="Models\PartUser.cs" />
     <Compile Include="Models\PartCollection.cs" />
+    <Compile Include="Models\PartVersion`1.cs" />
     <Compile Include="Models\Schema.cs" />
     <Compile Include="Models\RegsDbContextInitializer.cs" />
     <Compile Include="Repositories\LotRepository\ILotRepository.cs" />

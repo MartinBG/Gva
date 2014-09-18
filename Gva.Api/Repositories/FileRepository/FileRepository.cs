@@ -21,7 +21,7 @@ namespace Gva.Api.Repositories.FileRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddFileReferences(PartVersion partVersion, IEnumerable<FileDO> files)
+        public void AddFileReferences(Part part, IEnumerable<FileDO> files)
         {
             if (files == null)
             {
@@ -32,7 +32,7 @@ namespace Gva.Api.Repositories.FileRepository
             {
                 if ((bool)fileObj.IsAdded)
                 {
-                    var newFile = this.AddLotFile(partVersion.Part, fileObj);
+                    var newFile = this.AddLotFile(part, fileObj);
                     continue;
                 }
 
@@ -60,13 +60,13 @@ namespace Gva.Api.Repositories.FileRepository
             }
         }
 
-        public void DeleteFileReferences(PartVersion partVersion)
+        public void DeleteFileReferences(Part part)
         {
             var lotFiles = this.unitOfWork.DbContext.Set<GvaLotFile>()
                 .Include(f => f.GvaAppLotFiles)
                 .Include(f => f.GvaFile)
                 .Include(f => f.DocFile)
-                .Where(f => f.LotPartId == partVersion.Part.PartId);
+                .Where(f => f.LotPartId == part.PartId);
 
             foreach (var lotFile in lotFiles)
             {

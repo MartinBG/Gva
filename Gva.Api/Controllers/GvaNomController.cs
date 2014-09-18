@@ -7,6 +7,8 @@ using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Organizations;
+using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -14,11 +16,8 @@ using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
-using Newtonsoft.Json.Linq;
-using Regs.Api.Repositories.LotRepositories;
 using Gva.Api.Repositories.StageRepository;
-using System;
-using Common.Data;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers
 {
@@ -80,15 +79,15 @@ namespace Gva.Api.Controllers
         [Route("organizationsAudits")]
         public IHttpActionResult GetOrganizationsAudits(int lotId, string term = null)
         {
-            var audits = this.lotRepository.GetLotIndex(lotId).Index.GetParts("organizationInspections")
+            var audits = this.lotRepository.GetLotIndex(lotId).Index.GetParts<OrganizationInspectionDO>("organizationInspections")
                 .Select(i => new
                 {
                     nomValueId = i.Part.Index,
                     name = string.Format(
                         "№ {0} / {1} - {2}",
-                        i.Content.Get<string>("documentNumber"),
-                        i.Content.Get<string>("auditPart.name"),
-                        i.Content.Get<string>("auditReason.name"))
+                        i.Content.DocumentNumber,
+                        i.Content.AuditPart == null ? string.Empty : i.Content.AuditPart.Name,
+                        i.Content.AuditReason.Name)
                 });
 
             if (!string.IsNullOrEmpty(term))
@@ -719,15 +718,15 @@ namespace Gva.Api.Controllers
         [Route("employments")]
         public IHttpActionResult GetEmployments(int lotId)
         {
-            var returnValue = this.lotRepository.GetLotIndex(lotId).Index.GetParts("personDocumentEmployments")
+            var returnValue = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonEmploymentDO>("personDocumentEmployments")
                 .Select(e => new
                 {
                     nomValueId = e.Part.Index,
                     name = string.Format(
                         "{0}, {1} {2}",
-                        e.Content.Get<string>("organization.name"),
-                        e.Content.Get<DateTime>("hiredate").ToString("dd.MM.yyyy"),
-                        e.Content.Get<string>("valid.code") == "N" ? "(НЕВАЛИДНА)" : null)
+                        e.Content.Organization.Name,
+                        e.Content.Hiredate.Value.ToString("dd.MM.yyyy"),
+                        e.Content.Valid.Code == "N" ? "(НЕВАЛИДНА)" : null)
                 });
 
             return Ok(returnValue);

@@ -124,25 +124,19 @@ namespace Gva.Api.Controllers.Persons
             {
                 var newLot = this.lotRepository.CreateLot("Person");
 
-                var personDataPart = newLot.CreatePart("personData", JObject.FromObject(person.PersonData), this.userContext);
+                var personDataPart = newLot.CreatePart("personData", person.PersonData, this.userContext);
                 this.caseTypeRepository.AddCaseTypes(newLot, person.PersonData.CaseTypes.Select(ct => ct.NomValueId));
 
-                PartVersion documentIdPart = null;
+                PartVersion<PersonDocumentIdDO> documentIdPart = null;
                 if (person.PersonDocumentId != null)
                 {
-                    documentIdPart = newLot.CreatePart(
-                        "personDocumentIds/*",
-                        JObject.FromObject(person.PersonDocumentId),
-                        this.userContext);
+                    documentIdPart = newLot.CreatePart("personDocumentIds/*", person.PersonDocumentId, this.userContext);
                 }
 
-                PartVersion personAddressPart = null;
+                PartVersion<PersonAddressDO> personAddressPart = null;
                 if (person.PersonAddress != null)
                 {
-                    personAddressPart = newLot.CreatePart(
-                        "personAddresses/*",
-                        JObject.FromObject(person.PersonAddress),
-                        this.userContext);
+                    personAddressPart = newLot.CreatePart("personAddresses/*", person.PersonAddress, this.userContext);
                 }
 
                 newLot.Commit(this.userContext, lotEventDispatcher);
@@ -172,8 +166,8 @@ namespace Gva.Api.Controllers.Persons
         {
             var person = this.lotRepository.GetLotIndex(lotId);
 
-            var personDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart("personData");
-            var inspectorDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart("inspectorData");
+            var personDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart<PersonDataDO>("personData");
+            var inspectorDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart<InspectorDataDO>("inspectorData");
 
             return Ok(new PersonInfoDO(personDataPart, inspectorDataPart));
         }
@@ -188,28 +182,28 @@ namespace Gva.Api.Controllers.Persons
 
                 this.caseTypeRepository.AddCaseTypes(lot, personInfo.PersonData.CaseTypes.Select(ct => ct.NomValueId));
 
-                var personDataPart = lot.UpdatePart("personData", JObject.FromObject(personInfo.PersonData), this.userContext);
+                var personDataPart = lot.UpdatePart("personData", personInfo.PersonData, this.userContext);
 
                 this.unitOfWork.Save();
 
                 var caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId);
-                var inspectorDataPart = lot.Index.GetPart("inspectorData");
+                var inspectorDataPart = lot.Index.GetPart<InspectorDataDO>("inspectorData");
 
-                PartVersion changedInspectorDataPart = null;
+                PartVersion<InspectorDataDO> changedInspectorDataPart = null;
                 if (caseTypes.Any(ct => ct.Alias == "inspector"))
                 {
                     if (inspectorDataPart == null)
                     {
-                        changedInspectorDataPart = lot.CreatePart("inspectorData", JObject.FromObject(personInfo.InspectorData), this.userContext);
+                        changedInspectorDataPart = lot.CreatePart("inspectorData", personInfo.InspectorData, this.userContext);
                     }
                     else
                     {
-                        changedInspectorDataPart = lot.UpdatePart("inspectorData", JObject.FromObject(personInfo.InspectorData), this.userContext);
+                        changedInspectorDataPart = lot.UpdatePart("inspectorData", personInfo.InspectorData, this.userContext);
                     }
                 }
                 else if (inspectorDataPart != null)
                 {
-                    changedInspectorDataPart = lot.DeletePart("inspectorData", this.userContext);
+                    changedInspectorDataPart = lot.DeletePart<InspectorDataDO>("inspectorData", this.userContext);
                 }
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Docs.Api.DataObjects;
 using Gva.Api.Models;
+using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.ModelsDO.Airports;
 using Gva.Api.ModelsDO.Equipments;
 using Gva.Api.ModelsDO.Persons;

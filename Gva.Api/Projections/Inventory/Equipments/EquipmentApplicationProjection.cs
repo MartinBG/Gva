@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views;
+using Gva.Api.ModelsDO.Common;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -22,12 +21,12 @@ namespace Gva.Api.Projections.Inventory.Equipments
 
         public override IEnumerable<GvaViewInventoryItem> Execute(PartCollection parts)
         {
-            var applications = parts.GetAll("equipmentDocumentApplications");
+            var applications = parts.GetAll<DocumentApplicationDO>("equipmentDocumentApplications");
 
             return applications.Select(a => this.Create(a));
         }
 
-        public GvaViewInventoryItem Create(PartVersion equipmentApplication)
+        public GvaViewInventoryItem Create(PartVersion<DocumentApplicationDO> equipmentApplication)
         {
             GvaViewInventoryItem invItem = new GvaViewInventoryItem();
 
@@ -35,14 +34,14 @@ namespace Gva.Api.Projections.Inventory.Equipments
             invItem.PartId = equipmentApplication.Part.PartId;
             invItem.SetPartAlias = equipmentApplication.Part.SetPart.Alias;
             invItem.Name = equipmentApplication.Part.SetPart.Name;
-            invItem.TypeId = equipmentApplication.Content.Get<int>("applicationType.nomValueId");
-            invItem.Number = equipmentApplication.Content.Get<string>("documentNumber");
-            invItem.Date = equipmentApplication.Content.Get<DateTime>("documentDate");
+            invItem.TypeId = equipmentApplication.Content.ApplicationType.NomValueId;
+            invItem.Number = equipmentApplication.Content.DocumentNumber;
+            invItem.Date = equipmentApplication.Content.DocumentDate.Value;
             invItem.Publisher = null;
             invItem.Valid = null;
             invItem.FromDate = null;
             invItem.ToDate = null;
-            invItem.Notes = equipmentApplication.Content.Get<string>("notes");
+            invItem.Notes = equipmentApplication.Content.Notes;
 
             invItem.CreatedBy = this.userRepository.GetUser(equipmentApplication.Part.CreatorId).Fullname;
             invItem.CreationDate = equipmentApplication.Part.CreateDate;

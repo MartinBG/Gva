@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views;
+using Gva.Api.ModelsDO.Persons;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -22,12 +21,12 @@ namespace Gva.Api.Projections.Inventory.Persons
 
         public override IEnumerable<GvaViewInventoryItem> Execute(PartCollection parts)
         {
-            var checks = parts.GetAll("personDocumentChecks");
+            var checks = parts.GetAll<PersonCheckDO>("personDocumentChecks");
 
             return checks.Select(c => this.Create(c));
         }
 
-        private GvaViewInventoryItem Create(PartVersion personCheck)
+        private GvaViewInventoryItem Create(PartVersion<PersonCheckDO> personCheck)
         {
             GvaViewInventoryItem invItem = new GvaViewInventoryItem();
 
@@ -35,15 +34,15 @@ namespace Gva.Api.Projections.Inventory.Persons
             invItem.PartId = personCheck.Part.PartId;
             invItem.SetPartAlias = personCheck.Part.SetPart.Alias;
 
-            invItem.Name = personCheck.Content.Get<string>("documentRole.name");
-            invItem.TypeId = personCheck.Content.Get<int>("documentType.nomValueId");
-            invItem.Number = personCheck.Content.Get<string>("documentNumber");
-            invItem.Date = personCheck.Content.Get<DateTime>("documentDateValidFrom");
-            invItem.Publisher = personCheck.Content.Get<string>("documentPublisher");
-            invItem.Valid = personCheck.Content.Get<string>("valid.code") == "Y";
-            invItem.FromDate = personCheck.Content.Get<DateTime>("documentDateValidFrom");
-            invItem.ToDate = personCheck.Content.Get<DateTime?>("documentDateValidTo");
-            invItem.Notes = personCheck.Content.Get<string>("notes");
+            invItem.Name = personCheck.Content.DocumentRole.Name;
+            invItem.TypeId = personCheck.Content.DocumentType.NomValueId;
+            invItem.Number = personCheck.Content.DocumentNumber;
+            invItem.Date = personCheck.Content.DocumentDateValidFrom.Value;
+            invItem.Publisher = personCheck.Content.DocumentPublisher;
+            invItem.Valid = personCheck.Content.Valid.Code == "Y";
+            invItem.FromDate = personCheck.Content.DocumentDateValidFrom.Value;
+            invItem.ToDate = personCheck.Content.DocumentDateValidTo;
+            invItem.Notes = personCheck.Content.Notes;
 
             invItem.CreatedBy = this.userRepository.GetUser(personCheck.Part.CreatorId).Fullname;
             invItem.CreationDate = personCheck.Part.CreateDate;

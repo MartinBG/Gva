@@ -17,8 +17,10 @@ namespace Gva.Api.ModelsDO.Organizations
         [Required(ErrorMessage = "Person is required.")]
         public NomValue Person { get; set; }
 
+        [Required(ErrorMessage = "PermitedAW is required.")]
         public NomValue PermitedAW { get; set; }
 
+        [Required(ErrorMessage = "PermitedCheck is required.")]
         public NomValue PermitedCheck { get; set; }
 
         public string StampNum { get; set; }

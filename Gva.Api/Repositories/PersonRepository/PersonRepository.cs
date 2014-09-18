@@ -7,7 +7,6 @@ using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
-using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -193,7 +192,7 @@ namespace Gva.Api.Repositories.PersonRepository
                         .ToList()
                     where edition.StampNumber != null && edition.Application != null &&
                         this.unitOfWork.DbContext.Set<GvaApplicationStage>()
-                        .Any(a => a.GvaApplicationId == edition.Application.GvaApplicationId)
+                        .Any(a => a.GvaApplicationId == edition.GvaApplicationId)
                     select edition)
                     .Select(edition =>
                     {
@@ -210,7 +209,6 @@ namespace Gva.Api.Repositories.PersonRepository
 
         public IEnumerable<GvaViewPersonLicenceEdition> GetLicences(int lotId)
         {
-
             return this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
                 .Include(e => e.Person)
                 .Include(p => p.Person.LinType)
@@ -220,6 +218,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.Part)
                 .Include(e => e.LicenceAction)
                 .Include(e => e.LicenceType)
+                .Include(e => e.Application)
                 .Where(e => e.LotId == lotId && e.IsLastEdition == true)
                 .ToList();
         }

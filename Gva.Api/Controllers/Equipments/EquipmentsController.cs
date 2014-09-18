@@ -81,7 +81,7 @@ namespace Gva.Api.Controllers.Equipments
             {
                 var newLot = this.lotRepository.CreateLot("Equipment");
 
-                var partVersion = newLot.CreatePart("equipmentData", JObject.FromObject(equipmentData), this.userContext);
+                var partVersion = newLot.CreatePart("equipmentData", equipmentData, this.userContext);
 
                 int equipmentCaseTypeId = this.caseTypeRepository.GetCaseTypesForSet("Equipment").Single().GvaCaseTypeId;
                 this.caseTypeRepository.AddCaseTypes(newLot, new int[] { equipmentCaseTypeId });
@@ -101,9 +101,9 @@ namespace Gva.Api.Controllers.Equipments
         [Route(@"{lotId}/equipmentData")]
         public IHttpActionResult GetEquipmentData(int lotId)
         {
-            var equipmentData = this.lotRepository.GetLotIndex(lotId).Index.GetPart("equipmentData");
+            var equipmentData = this.lotRepository.GetLotIndex(lotId).Index.GetPart<EquipmentDataDO>("equipmentData");
 
-            return Ok(equipmentData.Content.ToObject<EquipmentDataDO>());
+            return Ok(equipmentData.Content);
         }
 
         [Route(@"{lotId}/equipmentData")]
@@ -113,7 +113,7 @@ namespace Gva.Api.Controllers.Equipments
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                var partVersion = lot.UpdatePart("equipmentData", JObject.FromObject(equipmentData), this.userContext);
+                var partVersion = lot.UpdatePart("equipmentData", equipmentData, this.userContext);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 

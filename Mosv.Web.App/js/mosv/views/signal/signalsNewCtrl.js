@@ -25,11 +25,12 @@
   SignalsNewCtrl.$inject = ['$scope', '$state', 'Signals', 'signal'];
 
   SignalsNewCtrl.$resolve = {
-    signal: function () {
-      return {
-        signalData: {}
-      };
-    }
+    signal: [
+      'Signals',
+      function (Signals) {
+        return Signals.newSignal().$promise;
+      }
+    ]
   };
 
   angular.module('mosv').controller('SignalsNewCtrl', SignalsNewCtrl);

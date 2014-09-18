@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views.Aircraft;
+using Gva.Api.ModelsDO.Aircrafts;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -17,22 +17,21 @@ namespace Gva.Api.Projections.Aircraft
 
         public override IEnumerable<GvaViewAircraftRegistration> Execute(PartCollection parts)
         {
-            var registrations = parts.GetAll("aircraftCertRegistrationsFM");
+            var registrations = parts.GetAll<AircraftCertRegistrationFMDO>("aircraftCertRegistrationsFM");
 
             return registrations.Select(reg => this.Create(reg));
         }
 
-        private GvaViewAircraftRegistration Create(PartVersion registration)
+        private GvaViewAircraftRegistration Create(PartVersion<AircraftCertRegistrationFMDO> registration)
         {
             GvaViewAircraftRegistration reg = new GvaViewAircraftRegistration();
 
-            // aircraftRegistrationFM
             reg.LotId = registration.Part.Lot.LotId;
             reg.PartIndex = registration.Part.Index;
-            reg.CertRegisterId = registration.Content.Get<int>("register.nomValueId");
-            reg.CertNumber = registration.Content.Get<int>("certNumber");
-            reg.ActNumber = registration.Content.Get<int>("actNumber");
-            reg.RegMark = registration.Content.Get<string>("regMark");
+            reg.CertRegisterId = registration.Content.Register != null ? (int?)null : registration.Content.Register.NomValueId;
+            reg.CertNumber = registration.Content.CertNumber;
+            reg.ActNumber = registration.Content.ActNumber;
+            reg.RegMark = registration.Content.RegMark;
 
             return reg;
         }

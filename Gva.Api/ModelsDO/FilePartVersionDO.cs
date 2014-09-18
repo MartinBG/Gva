@@ -7,15 +7,15 @@ namespace Gva.Api.ModelsDO
 {
     public class FilePartVersionDO<T> where T : class, new()
     {
-        public FilePartVersionDO(PartVersion partVersion)
+        public FilePartVersionDO(PartVersion<T> partVersion)
         {
             this.PartIndex = partVersion.Part.Index;
             this.PartId = partVersion.PartId;
-            this.Part = partVersion.Content.ToObject<T>();
+            this.Part = partVersion.Content;
             this.Files = new List<FileDO>();
         }
 
-        public FilePartVersionDO(PartVersion partVersion, GvaLotFile[] lotFiles)
+        public FilePartVersionDO(PartVersion<T> partVersion, GvaLotFile[] lotFiles)
             : this(partVersion)
         {
             this.Files = lotFiles

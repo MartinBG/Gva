@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using Docs.Api.Models;
 using Regs.Api.Models;
 
 namespace Mosv.Api.Models
@@ -19,7 +20,7 @@ namespace Mosv.Api.Models
 
         public string Applicant { get; set; }
 
-        public virtual Docs.Api.Models.Doc ApplicationDoc { get; set; }
+        public virtual Doc ApplicationDoc { get; set; }
 
         public virtual Lot Lot { get; set; }
     }

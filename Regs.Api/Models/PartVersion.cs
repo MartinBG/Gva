@@ -4,8 +4,6 @@ using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
 using Common.Sequence;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
 
 namespace Regs.Api.Models
 {
@@ -13,7 +11,22 @@ namespace Regs.Api.Models
     {
         public static Sequence PartVersionSequence = new Sequence("partVersionSequence");
 
-        private JObject content = null;
+        public PartVersion()
+        { }
+
+        public PartVersion(PartVersion pv)
+        {
+            this.PartVersionId = pv.PartVersionId;
+            this.PartId = pv.PartId;
+            this.Part = pv.Part;
+            this.TextContent = pv.TextContent;
+            this.OriginalCommitId = pv.OriginalCommitId;
+            this.OriginalCommit = pv.OriginalCommit;
+            this.CreatorId = pv.CreatorId;
+            this.Creator = pv.Creator;
+            this.CreateDate = pv.CreateDate;
+            this.PartOperation = pv.PartOperation;
+        }
 
         public int PartVersionId { get; set; }
 
@@ -35,40 +48,20 @@ namespace Regs.Api.Models
 
         public virtual User Creator { get; set; }
 
-        public JObject Content
+        public void SetTextContent<T>(T content)
         {
-            get
+            if (content == null)
             {
-                if (this.content == null)
-                {
-                    this.content = JObject.Parse(this.TextContent);
-                }
-
-                return this.content;
+                throw new ArgumentNullException("PartVersion.TextContent cannot be null, use DeletePart instead");
             }
-            set
-            {
-                this.content = value;
 
-                if (this.content == null)
-                {
-                    throw new ArgumentNullException("PartVersion.Content cannot be null, use DeletePart instead");
-                }
-
-                Schema schema = this.Part.SetPart.Schema;
-                if (schema != null && !this.content.IsValid(schema.JsonSchema))
-                {
-                    throw new ArgumentException(string.Format("Schema validation failed for part: {0}.", this.Part.SetPart.Alias));
-                }
-
-                Formatting formatting;
+            Formatting formatting;
 #if DEBUG
-                formatting = Formatting.Indented;
+            formatting = Formatting.Indented;
 #else
-                formatting = Formatting.None;
+            formatting = Formatting.None;
 #endif
-                this.TextContent = value.ToString(formatting);
-            }
+            this.TextContent = JsonConvert.SerializeObject(content, formatting);
         }
     }
 
@@ -106,9 +99,6 @@ namespace Regs.Api.Models
             this.HasRequired(t => t.Creator)
                 .WithMany()
                 .HasForeignKey(d => d.CreatorId);
-
-            // Local-only properties
-            this.Ignore(t => t.Content);
         }
     }
 }
