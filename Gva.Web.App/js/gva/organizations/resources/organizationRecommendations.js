@@ -7,6 +7,11 @@
       newRecommendation: {
         method: 'GET',
         url: 'api/organizations/:id/organizationRecommendations/new'
+      },
+      queryViews: {
+        method: 'GET',
+        url: 'api/organizations/:id/organizationRecommendations/views',
+        isArray: true
       }
     });
   }]);

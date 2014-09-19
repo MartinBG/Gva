@@ -20,5 +20,7 @@ namespace Gva.Api.Repositories.OrganizationRepository
         GvaViewOrganization GetOrganization(int organizationId);
 
         IEnumerable<GvaViewOrganizationRecommendation> GetInspectionRecommendations(int lotId, int inspectionPartIndex);
+
+        IEnumerable<GvaViewOrganizationRecommendation> GetRecommendations(int lotId);
     }
 }

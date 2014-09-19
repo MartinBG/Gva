@@ -307,7 +307,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationApproval',
-      templateUrl: 'js/gva/organizations/forms/organizationApproval.html'
+      templateUrl: 'js/gva/organizations/forms/organizationApproval.html',
+      controller: 'OrganizationApprovalCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationAmendment',
