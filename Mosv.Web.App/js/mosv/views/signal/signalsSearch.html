@@ -1,11 +1,11 @@
 ﻿<div>
-  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="search()">
     <sc-filter type="text" name="incomingNumber" class="col-sm-2" removable="false" label="signals.search.incomingNumber"></sc-filter>
     <sc-filter type="text" name="incomingLot" class="col-sm-2" removable="true" label="signals.search.incomingLot"></sc-filter>
     <sc-filter type="text" name="applicant" class="col-sm-2" removable="true" label="signals.search.applicant"></sc-filter>
     <sc-filter type="date" name="incomingDate" class="col-sm-2" removable="true" label="signals.search.incomingDate"></sc-filter>
     <sc-filter type="text" name="violation" class="col-sm-2" removable="true" label="signals.search.violation"></sc-filter>
-    <sc-search-button action="search()" text="signals.search.search" icon="glyphicon-search"></sc-search-button>
+    <sc-search-button action="search()" text="signals.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
     <sc-search-button action="newSignal()" text="signals.search.newSignal" icon="glyphicon-plus"></sc-search-button>
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
