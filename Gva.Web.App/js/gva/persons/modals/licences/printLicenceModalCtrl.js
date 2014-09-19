@@ -22,8 +22,8 @@
 
       return PersonLicenceEditions.save({
         id: scModalParams.lotId,
-        ind: scModalParams.licencePartIndex,
-        index: scModalParams.editionPartIndex
+        ind: scModalParams.index,
+        index: scModalParams.editionIndex
       }, licenceEdition).$promise.then(function (savedEdition) {
         return $modalInstance.close(savedEdition);
       });
@@ -49,8 +49,8 @@
       function resolveDocs(scModalParams, PersonLicenceEditions) {
         return PersonLicenceEditions.get({
           id: scModalParams.lotId,
-          ind: scModalParams.licencePartIndex,
-          index: scModalParams.editionPartIndex
+          ind: scModalParams.index,
+          index: scModalParams.editionIndex
         }).$promise;
       }
     ]

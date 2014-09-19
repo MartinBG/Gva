@@ -31,8 +31,8 @@
     $scope.print = function (doc) {
       var params = {
         lotId: doc.lotId,
-        licencePartIndex: doc.partIndex,
-        editionPartIndex: doc.editionPartIndex
+        index: doc.partIndex,
+        editionIndex: doc.editionPartIndex
       };
 
       var modalInstance = scModal.open('printLicence', params);
