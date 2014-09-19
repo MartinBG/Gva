@@ -7,7 +7,13 @@
   </div>
 
   <div class="well-sm panel-body">
-    <sc-datatable items="appTypes" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-search selected-filters="searchParams" btn-classes="col-sm-3 col-md-2">
+      <sc-filter type="text" name="code" removable="false" classes="col-sm-2" label="applications.chooseAppTypeModal.code"></sc-filter>
+      <sc-filter type="text" name="name" removable="false" label="applications.chooseAppTypeModal.name"></sc-filter>
+      <sc-search-button action="search()" classes="pull-left" text="applications.chooseAppTypeModal.search" icon="glyphicon-search"></sc-search-button>
+    </sc-search>
+
+    <sc-datatable items="appTypes" filterable="true" pageable="true" sortable="true" dynamic-columns="false">
       <sc-column sortable="false" class="buttons-cell" has-content="true">
         <sc-button btn-click="chooseAppType(item)" text="applications.chooseAppTypeModal.select" class="btn btn-xs btn-primary"></sc-button>
       </sc-column>
