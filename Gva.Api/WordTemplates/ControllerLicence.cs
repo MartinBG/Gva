@@ -115,7 +115,7 @@ namespace Gva.Api.WordTemplates
             var nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
             var address = string.Format(
                 "{0}, {1}",
-                personAddress.Settlement.Name,
+                personAddress.Settlement != null? personAddress.Settlement.Name : null,
                 personAddress.Address);
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings);
@@ -149,7 +149,7 @@ namespace Gva.Api.WordTemplates
                     ADDRESS_EN = string.Format(
                         "{0}, {1}",
                         personAddress.AddressAlt,
-                        personAddress.Settlement.Name),
+                        personAddress.Settlement != null ? personAddress.Settlement.Name : null),
                     NATIONALITY = nationality.Name,
                     NATIONALITY_EN = nationality.TextContent.Get<string>("nationalityCodeCA"),
                     L_LICENCE_PRIV = this.GetLicencePrivileges(licenceType.Code),

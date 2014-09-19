@@ -35,7 +35,7 @@ namespace Gva.Api.WordTemplates
                 EGN = personData.Uin,
                 ADDRESS = string.Format(
                     "{0}, {1}",
-                    personAddress.Settlement.Name,
+                    personAddress.Settlement !=null ? personAddress.Settlement.Name : null,
                     personAddress.Address),
                 TELEPHONE = GetPhonesString(personData)
             };

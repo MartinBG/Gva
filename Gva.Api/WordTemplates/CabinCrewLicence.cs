@@ -146,12 +146,12 @@ namespace Gva.Api.WordTemplates
                 },
                 ADDRESS_BG = string.Format(
                     "{0}, {1}",
-                    personAddress.Settlement.Name,
+                    personAddress.Settlement != null ? personAddress.Settlement.Name : null,
                     personAddress.Address),
                 ADDRESS_TRANS = string.Format(
                     "{0}, {1}",
                     personAddress.AddressAlt,
-                    personAddress.Settlement.NameAlt),
+                    personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null),
                 NATIONALITY = new
                 {
                     COUNTRY_NAME_BG = nationality.Name,
@@ -254,7 +254,7 @@ namespace Gva.Api.WordTemplates
                     VALID_DATE = m.DocumentDateValidTo,
                     CLASS = m.MedClass.Name,
                     PUBLISHER = m.DocumentPublisher.Name,
-                    LIMITATION = string.Join(",", m.Limitations.Select(l => l.Name))
+                    LIMITATION = m.Limitations != null ? string.Join(",", m.Limitations.Select(l => l.Name)) : null
                 }).ToArray<object>();
         }
 

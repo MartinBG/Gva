@@ -78,7 +78,7 @@ namespace Gva.Api.WordTemplates
                     SEX = personData.Sex.Name,
                     ADDRESS = string.Format(
                         "{0}, {1}",
-                        personAddress.Settlement.Name,
+                        personAddress.Settlement != null ? personAddress.Settlement.Name : null,
                         personAddress.Address),
                     NATIONALITY = country.Name,
                     NATIONALITY_EN = country.Code,
@@ -112,7 +112,7 @@ namespace Gva.Api.WordTemplates
         }
         private NomValue GetCountry(PersonAddressDO personAddress)
         {
-            int? countryId = personAddress.Settlement.ParentValueId;
+            int? countryId = personAddress.Settlement != null?  personAddress.Settlement.ParentValueId : null;
             NomValue country = countryId.HasValue ?
                 this.nomRepository.GetNomValue("countries", countryId.Value) :
                 new NomValue
@@ -173,7 +173,7 @@ namespace Gva.Api.WordTemplates
                             TYPE = r.AircraftTypeGroup.Name,
                             CAT = r.AircraftTypeCategory.Code,
                             DATE = lastEdition.DocumentDateValidFrom,
-                            LIMIT = lastEdition.Limitations.Count > 0 ? string.Join(",", lastEdition.Limitations.Select(l => l.Name)) : "NP"
+                            LIMIT = (lastEdition.Limitations != null && lastEdition.Limitations.Count > 0) ? string.Join(",", lastEdition.Limitations.Select(l => l.Name)) : "NP"
                         };
                     }).ToArray<object>();
         }
@@ -194,7 +194,7 @@ namespace Gva.Api.WordTemplates
                             {
                                 AIRCRAFT = r.AircraftTypeGroup.Name,
                                 CAT = r.AircraftTypeCategory.Code,
-                                LIM = lastEdition.Limitations.Count > 0 ? string.Join(",", lastEdition.Limitations.Select(l => l.Name)) : "NP"
+                                LIM = (lastEdition.Limitations != null && lastEdition.Limitations.Count > 0) ? string.Join(",", lastEdition.Limitations.Select(l => l.Name)) : "NP"
                             };
                     }).ToArray<object>();
         }
@@ -235,62 +235,62 @@ namespace Gva.Api.WordTemplates
             {
                 NAME = "Aeroplanes Turbine",
                 CAT = "A 1",
-                LIMT = AT_a_Ids.Count > 0 ? string.Join(",", AT_a_Ids.Select(l => l.Name)) : "No limitation"
+                LIMT = (AT_a_Ids != null && AT_a_Ids.Count > 0) ? string.Join(",", AT_a_Ids.Select(l => l.Name)) : "No limitation"
             });
 
             limitations.Add(new
             {
                 NAME = "Aeroplanes Turbine",
                 CAT = "B 1.1",
-                LIMT = AT_b1_Ids.Count > 0 ? string.Join(",", AT_b1_Ids.Select(l => l.Name)) : "No limitation"
+                LIMT = (AT_b1_Ids != null && AT_b1_Ids.Count > 0) ? string.Join(",", AT_b1_Ids.Select(l => l.Name)) : "No limitation"
             });
 
             limitations.Add(new
             {
                 NAME = "Aeroplanes Piston",
                 CAT = "A 2",
-                LIMT = AP_a_Ids.Count > 0 ? string.Join(",", AP_a_Ids.Select(l => l.Name)) : "No limitation"
+                LIMT = (AP_a_Ids != null && AP_a_Ids.Count > 0) ? string.Join(",", AP_a_Ids.Select(l => l.Name)) : "No limitation"
             });
 
             limitations.Add(new
             {
                 NAME = "Aeroplanes Piston",
                 CAT = "B 1.2",
-                LIMT = AP_b1_Ids.Count > 0 ? string.Join(",", AP_b1_Ids.Select(l => l.Name)) : "No limitation"
+                LIMT = (AP_b1_Ids != null && AP_b1_Ids.Count > 0) ? string.Join(",", AP_b1_Ids.Select(l => l.Name)) : "No limitation"
             });
 
             limitations.Add(new
             {
                 NAME = "Helicopters Turbine",
                 CAT = "A 3",
-                LIMT = HT_a_Ids.Count > 0 ? string.Join(",", HT_a_Ids.Select(l => l.Name)) : "No limitation"
+                LIMT = (HT_a_Ids != null && HT_a_Ids.Count > 0) ? string.Join(",", HT_a_Ids.Select(l => l.Name)) : "No limitation"
             });
 
             limitations.Add(new
             {
                 NAME = "Helicopters Turbine",
                 CAT = "B 1.3",
-                LIMT = HT_b1_Ids.Count > 0 ? string.Join(",", HT_b1_Ids.Select(l => l.Name)) : "No limitation"
+                LIMT = (HT_b1_Ids != null && HT_b1_Ids.Count > 0) ? string.Join(",", HT_b1_Ids.Select(l => l.Name)) : "No limitation"
             });
 
             limitations.Add(new
             {
                 NAME = "Helicopters Piston",
                 CAT = "A 4",
-                LIMT = HP_a_Ids.Count > 0 ? string.Join(",", HP_a_Ids.Select(l => l.Name)) : "No limitation"
+                LIMT = (HP_a_Ids != null && HP_a_Ids.Count > 0) ? string.Join(",", HP_a_Ids.Select(l => l.Name)) : "No limitation"
             });
 
             limitations.Add(new
             {
                 NAME = "Helicopters Piston",
                 CAT = "B 1.4",
-                LIMT = HP_b1_Ids.Count > 0 ? string.Join(",", HP_b1_Ids.Select(l => l.Name)) : "No limitation"
+                LIMT = (HT_b1_Ids != null && HT_b1_Ids.Count > 0) ? string.Join(",", HP_b1_Ids.Select(l => l.Name)) : "No limitation"
             });
             limitations.Add(new
             {
                 NAME = "Acionics",
                 CAT = "B 2",
-                LIMT = avionics_Ids.Count > 0 ? string.Join(",", avionics_Ids.Select(l => l.Name)) : "No limitation"
+                LIMT = (avionics_Ids != null && avionics_Ids.Count > 0) ? string.Join(",", avionics_Ids.Select(l => l.Name)) : "No limitation"
             });
 
             return limitations.ToArray<object>(); ;
