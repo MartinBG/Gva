@@ -27,5 +27,7 @@ namespace Gva.Api.ModelsDO.Organizations
         public string ApprovalStateNote { get; set; }
 
         public List<AmendmentDO> Amendments { get; set; }
+
+        public int? RecommendationReport { get; set; }
     }
 }

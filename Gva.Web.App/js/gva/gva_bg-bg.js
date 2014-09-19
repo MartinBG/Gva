@@ -3561,7 +3561,8 @@
           documentDateIssue: 'Дата на издаване',
           approvalState: 'Състояние на одобрението',
           approvalStateDate: 'Дата',
-          approvalStateNote: 'Бележки по състоянието'
+          approvalStateNote: 'Бележки по състоянието',
+          recommendationReport: 'Доклад за препоръки'
         },
         amendmentDirective: {
           documentNumber: 'Референтен № на описание	',

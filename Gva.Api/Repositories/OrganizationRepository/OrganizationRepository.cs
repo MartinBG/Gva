@@ -77,5 +77,10 @@ namespace Gva.Api.Repositories.OrganizationRepository
                    select r)
                    .ToList();
         }
+
+        public IEnumerable<GvaViewOrganizationRecommendation> GetRecommendations(int lotId)
+        {
+            return this.unitOfWork.DbContext.Set<GvaViewOrganizationRecommendation>().Where(r => r.LotId == lotId);
+        }
     }
 }
