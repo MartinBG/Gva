@@ -7,7 +7,7 @@
   </div>
 
   <div class="well-sm panel-body">
-    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="search()">
       <sc-filter type="date" name="fromDate" class="col-sm-3" removable="false" label="applications.chooseDocsModal.fromDate"></sc-filter>
       <sc-filter type="date" name="toDate" class="col-sm-3" removable="false" label="applications.chooseDocsModal.toDate"></sc-filter>
       <sc-filter type="text" name="regUri" class="col-sm-3" removable="false" label="applications.chooseDocsModal.regUri"></sc-filter>
@@ -20,7 +20,7 @@
       </sc-filter>
       <sc-filter type="nomenclature" name="units" class="col-sm-3" removable="false" alias="employeeUnit" load="false" mode="id" label="applications.chooseDocsModal.units" multiple="multiple">
       </sc-filter>
-      <sc-search-button action="search()" text="applications.chooseDocsModal.search" icon="glyphicon-search"></sc-search-button>
+      <sc-search-button action="search()" text="applications.chooseDocsModal.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
     </sc-search>
 
     <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">

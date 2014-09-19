@@ -7,11 +7,11 @@
   </div>
 
   <div class="well-sm panel-body">
-    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="search()">
       <sc-filter type="text" name="manSN" class="col-sm-3" removable="false" label="applications.chooseAircraftModal.manSN"></sc-filter>
       <sc-filter type="text" name="model" class="col-sm-3" removable="false" label="applications.chooseAircraftModal.model"></sc-filter>
       <sc-filter type="text" name="icao" class="col-sm-3" removable="true" label="applications.chooseAircraftModal.icao"></sc-filter>
-      <sc-search-button action="search()" text="applications.chooseAircraftModal.search" icon="glyphicon-search"></sc-search-button>
+      <sc-search-button action="search()" text="applications.chooseAircraftModal.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
       <sc-search-button action="add"></sc-search-button>
     </sc-search>
 

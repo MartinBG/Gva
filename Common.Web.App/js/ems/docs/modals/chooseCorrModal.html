@@ -7,10 +7,10 @@
   </div>
 
   <div class="well-sm panel-body">
-    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3">
+    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="search()">
       <sc-filter type="text" name="displayName" class="col-sm-3" removable="false" label="common.chooseCorr.displayName"></sc-filter>
       <sc-filter type="text" name="email" class="col-sm-3" removable="true" label="common.chooseCorr.email"></sc-filter>
-      <sc-search-button action="search()" text="common.chooseCorr.search" icon="glyphicon-search"></sc-search-button>
+      <sc-search-button action="search()" text="common.chooseCorr.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
       <sc-search-button action="add"></sc-search-button>
     </sc-search>
 
