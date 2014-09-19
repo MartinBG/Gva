@@ -73,7 +73,7 @@ namespace Gva.Api.WordTemplates
         {
             get
             {
-                return new string[] { "atcl1" };
+                return new string[] { "atcl1", "student_controller" };
             }
         }
 
