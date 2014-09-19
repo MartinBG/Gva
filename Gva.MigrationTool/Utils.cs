@@ -37,13 +37,6 @@ namespace Gva.MigrationTool
 
     public class Utils
     {
-        public static Task RunParallel(string numberOfParallelTasksKey, Func<Task> taskCreator)
-        {
-            int numberOfParallelTasks = int.Parse(ConfigurationManager.AppSettings[numberOfParallelTasksKey]);
-            var parallelTasks = Enumerable.Range(0, numberOfParallelTasks).Select(i => taskCreator()).ToArray();
-            return Task.WhenAll(parallelTasks);
-        }
-
         public static Task RunParallel<TActionContext>(string numberOfParallelActionsKey, CancellationToken ct, Func<TActionContext> actionContextFactory, Action<TActionContext> action)
         {
             int numberOfParallelTasks = int.Parse(ConfigurationManager.AppSettings[numberOfParallelActionsKey]);

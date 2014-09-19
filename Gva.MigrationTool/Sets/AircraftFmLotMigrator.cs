@@ -644,7 +644,7 @@ namespace Gva.MigrationTool.Sets
                         regDate = Utils.FmToDate(r.Field<string>("Date")),
                         aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action").Trim()),
                         documentNumber = r.Field<string>("gt_DocCAA"),
-                        documentDate = r.Field<string>("gd_DocCAA"),
+                        documentDate = Utils.FmToDate(r.Field<string>("gd_DocCAA")),
                         aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("Creditor")),
                         creditorDocument = r.Field<string>("Doc Creditor"),
                         inspector = getInspector(r.Field<string>("tUser"))
