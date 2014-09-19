@@ -114,7 +114,7 @@ namespace Mosv.DocCommunicator
 
         #region Not implemented methods
 
-        public IEnumerable<NomenclatureItem> SearchNomenclature(string ticketID, NomenclatureType type, int? startIndex, int? offset)
+        public IEnumerable<NomenclatureItem> SearchNomenclature(string ticketID, NomenclatureType type, NomenclatureLanguage language, int? startIndex, int? offset)
         {
             List<NomenclatureItem> list = new List<NomenclatureItem>();
 

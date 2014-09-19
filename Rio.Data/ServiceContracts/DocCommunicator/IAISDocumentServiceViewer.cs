@@ -59,7 +59,7 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
         /// <returns>List(NomenclatureItem)</returns>
         [OperationContract]
         [FaultContract(typeof(ReceiverFault))]
-        IEnumerable<NomenclatureItem> SearchNomenclature(string ticketID, NomenclatureType type, int? startIndex, int? offset);
+        IEnumerable<NomenclatureItem> SearchNomenclature(string ticketID, NomenclatureType type, NomenclatureLanguage language, int? startIndex, int? offset);
     }
 
     [DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
@@ -469,6 +469,16 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
         [EnumMember]
         Dummy = 999,
 
+    }
+
+    [DataContract(Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
+    public enum NomenclatureLanguage
+    {
+        [EnumMember]
+        Bulgarian = 0,
+
+        [EnumMember]
+        English = 1
     }
 
     [DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
