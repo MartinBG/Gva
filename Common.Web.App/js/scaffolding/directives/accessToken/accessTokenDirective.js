@@ -9,8 +9,16 @@
       restrict: 'A',
       priority: 110,
       link: function (scope, element, attrs) {
-        element.one('click', function () {
-          attrs.$set('href', attrs.href + '&access_token=' + sessionTokenStore.getToken());
+        element.on('click', function () {
+          if (/access_token/.test(attrs.href)) {
+            return;
+          } else {
+            if (/\?/.test(attrs.href)) {
+              attrs.$set('href', attrs.href + '&access_token=' + sessionTokenStore.getToken());
+            } else {
+              attrs.$set('href', attrs.href + '?access_token=' + sessionTokenStore.getToken());
+            }
+          }
         });
       }
     };
