@@ -89,7 +89,7 @@ namespace Gva.Api.Controllers
             {
                 var newLot = this.lotRepository.CreateLot("Aircraft");
 
-                var partVersion = newLot.CreatePart("aircraftData", JObject.FromObject(aircraft.AircraftData), this.userContext);
+                var partVersion = newLot.CreatePart("aircraftData", aircraft.AircraftData, this.userContext);
 
                 int aircraftCaseTypeId = this.caseTypeRepository.GetCaseTypesForSet("Aircraft").Single().GvaCaseTypeId;
                 this.caseTypeRepository.AddCaseTypes(newLot, new int[] { aircraftCaseTypeId });
@@ -166,9 +166,9 @@ namespace Gva.Api.Controllers
         {
             var aircraft = this.lotRepository.GetLotIndex(lotId);
 
-            var aircraftDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart("aircraftData");
+            var aircraftDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart<AircraftDataDO>("aircraftData");
 
-            return Ok(aircraftDataPart.Content.ToObject<AircraftDataDO>());
+            return Ok(aircraftDataPart.Content);
         }
 
         [Route(@"{lotId}/{*path:regex(^aircraftData$)}")]
@@ -178,7 +178,7 @@ namespace Gva.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                PartVersion partVersion = lot.UpdatePart("aircraftData", JObject.FromObject(aircraftData), this.userContext);
+                PartVersion<AircraftDataDO> partVersion = lot.UpdatePart("aircraftData", aircraftData, this.userContext);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
 

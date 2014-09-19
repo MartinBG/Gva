@@ -262,10 +262,10 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .ToArray();
         }
 
-        public void DeleteApplicationRefs(PartVersion partVersion)
+        public void DeleteApplicationRefs(Part part)
         {
             var lotObjects = this.unitOfWork.DbContext.Set<GvaLotObject>()
-                .Where(f => f.LotPartId == partVersion.Part.PartId)
+                .Where(f => f.LotPartId == part.PartId)
                 .ToList();
 
             foreach (var lotObject in lotObjects)

@@ -6,6 +6,7 @@ using Gva.Api.ModelsDO;
 using Newtonsoft.Json.Linq;
 using Regs.Api.Repositories.LotRepositories;
 using Gva.Api.Repositories.FileRepository;
+using Gva.Api.ModelsDO.Aircrafts;
 
 namespace Gva.Api.Controllers
 {
@@ -24,32 +25,33 @@ namespace Gva.Api.Controllers
         [Route("{*path:regex(^aircraftCertRegistrationsFM$)}")]
         public IHttpActionResult GetRegistrations(int lotId, string path, string term = null, int offset = 0, int? limit = null)
         {
-            return this.GetParts(
+            return this.GetParts<AircraftCertRegistrationFMDO>(
                 lotId: lotId,
                 path: path,
-                description: (o) => o.Get<string>("certNumber"),
+                description: (o) => o.CertNumber.HasValue ? o.CertNumber.ToString() : null,
                 term: term,
                 offset: offset,
                 limit: limit);
         }
 
-        private IHttpActionResult GetParts(
+        private IHttpActionResult GetParts<T>(
             int lotId,
             string path,
-            Func<JObject, string> description,
+            Func<T, string> description,
             string term,
             int offset,
             int? limit)
+            where T : class
         {
             term = term ?? string.Empty;
 
             var index = this.lotRepository.GetLotIndex(lotId).Index;
-            var result = index.GetParts(path).Select(pv => new PartSelectDO
+            var result = index.GetParts<T>(path).Select(pv => new PartSelectDO
                 {
                     PartIndex = pv.Part.Index,
                     Description = description(pv.Content)
                 })
-                .Where(p => p.Description.Contains(term))
+                .Where(p => !string.IsNullOrEmpty(p.Description) && p.Description.Contains(term))
                 .OrderBy(r => r.Description)
                 .Skip(offset);
 

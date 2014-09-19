@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views.Person;
+using Gva.Api.ModelsDO.Persons;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -18,52 +17,56 @@ namespace Gva.Api.Projections.Person
 
         public override IEnumerable<GvaViewPerson> Execute(PartCollection parts)
         {
-            var personData = parts.Get("personData");
+            var personData = parts.Get<PersonDataDO>("personData");
 
             if (personData == null)
             {
                 return new GvaViewPerson[] { };
             }
 
-            var personEmployment = parts.GetAll("personDocumentEmployments")
-                .Where(pv => pv.Content.Get<string>("valid.code") == "Y")
+            var personEmployment = parts.GetAll<PersonEmploymentDO>("personDocumentEmployments")
+                .Where(pv => pv.Content.Valid.Code == "Y")
                 .FirstOrDefault();
 
-            var personLicences = parts.GetAll("licences")
-                .Where(pv => pv.Content.Get<string>("valid.code") == "Y");
+            var personLicences = parts.GetAll<PersonLicenceDO>("licences")
+                .Where(pv => pv.Content.Valid != null && pv.Content.Valid.Code == "Y");
 
-            var personRatings = parts.GetAll("ratings")
-                .Where(pv => pv.Content.Get("ratingType") != null);
+            var personRatings = parts.GetAll<PersonRatingDO>("ratings")
+                .Where(pv => pv.Content.RatingType != null);
 
             return new[] { this.Create(personData, personEmployment, personLicences, personRatings) };
         }
 
-        private GvaViewPerson Create(PartVersion personData, PartVersion personEmployment, IEnumerable<PartVersion> personLicences, IEnumerable<PartVersion> personRatings)
+        private GvaViewPerson Create(
+            PartVersion<PersonDataDO> personData,
+            PartVersion<PersonEmploymentDO> personEmployment,
+            IEnumerable<PartVersion<PersonLicenceDO>> personLicences,
+            IEnumerable<PartVersion<PersonRatingDO>> personRatings)
         {
             GvaViewPerson person = new GvaViewPerson();
 
             person.LotId = personData.Part.Lot.LotId;
-            person.Lin = personData.Content.Get<int?>("lin");
-            person.LinTypeId = personData.Content.Get<int>("linType.nomValueId");
-            person.Uin = personData.Content.Get<string>("uin");
+            person.Lin = personData.Content.Lin;
+            person.LinTypeId = personData.Content.LinType.NomValueId;
+            person.Uin = personData.Content.Uin;
             person.Names = string.Format(
                 "{0} {1} {2}",
-                personData.Content.Get<string>("firstName"),
-                personData.Content.Get<string>("middleName"),
-                personData.Content.Get<string>("lastName"));
-            person.BirtDate = personData.Content.Get<DateTime>("dateOfBirth");
+                personData.Content.FirstName,
+                personData.Content.MiddleName,
+                personData.Content.LastName);
+            person.BirtDate = personData.Content.DateOfBirth.Value;
 
             if (personEmployment != null)
             {
-                person.EmploymentId = personEmployment.Content.Get<int>("employmentCategory.nomValueId");
-                person.OrganizationId = personEmployment.Content.Get<int?>("organization.nomValueId");
+                person.EmploymentId = personEmployment.Content.EmploymentCategory.NomValueId;
+                person.OrganizationId = personEmployment.Content.Organization.NomValueId;
             }
 
             if (personLicences.Count() > 0)
             {
                 person.Licences = string.Join(", ",
                 (personLicences
-                .Select(l => l.Content.Get<string>("licenceType.code"))
+                .Select(l => l.Content.LicenceType.Code)
                 .ToArray()));
             }
 
@@ -71,7 +74,7 @@ namespace Gva.Api.Projections.Person
             {
                 person.Ratings = string.Join(", ",
                 (personRatings
-                .Select(l => l.Content.Get<string>("ratingType.name"))
+                .Select(l => l.Content.RatingType.Name)
                 .ToArray()));
             }
 

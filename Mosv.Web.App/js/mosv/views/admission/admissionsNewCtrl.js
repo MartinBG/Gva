@@ -25,11 +25,12 @@
   AdmissionsNewCtrl.$inject = ['$scope', '$state', 'Admissions', 'admission'];
 
   AdmissionsNewCtrl.$resolve = {
-    admission: function () {
-      return {
-        admissionData: {}
-      };
-    }
+    admission: [
+      'Admissions',
+      function (Admissions) {
+        return Admissions.newAdmission().$promise;
+      }
+    ]
   };
 
   angular.module('mosv').controller('AdmissionsNewCtrl', AdmissionsNewCtrl);

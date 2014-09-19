@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views.Equipment;
+using Gva.Api.ModelsDO.Equipments;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -17,7 +16,7 @@ namespace Gva.Api.Projections.Equipment
 
         public override IEnumerable<GvaViewEquipment> Execute(PartCollection parts)
         {
-            var equipmentData = parts.Get("equipmentData");
+            var equipmentData = parts.Get<EquipmentDataDO>("equipmentData");
 
             if (equipmentData == null)
             {
@@ -27,19 +26,19 @@ namespace Gva.Api.Projections.Equipment
             return new[] { this.Create(equipmentData) };
         }
 
-        private GvaViewEquipment Create(PartVersion equipmentData)
+        private GvaViewEquipment Create(PartVersion<EquipmentDataDO> equipmentData)
         {
             GvaViewEquipment equipment = new GvaViewEquipment();
 
             equipment.LotId = equipmentData.Part.Lot.LotId;
-            equipment.Name = equipmentData.Content.Get<string>("name");
-            equipment.EquipmentProducerId = equipmentData.Content.Get<int>("equipmentProducer.nomValueId");
-            equipment.Place = equipmentData.Content.Get<string>("place");
-            equipment.EquipmentTypeId = equipmentData.Content.Get<int>("equipmentType.nomValueId");
-            equipment.ManDate = equipmentData.Content.Get<DateTime>("manDate");
-            equipment.ManPlace = equipmentData.Content.Get<string>("manPlace");
-            equipment.OperationalDate = equipmentData.Content.Get<DateTime?>("operationalDate");
-            equipment.Note = equipmentData.Content.Get<string>("note");
+            equipment.Name = equipmentData.Content.Name;
+            equipment.EquipmentProducerId = equipmentData.Content.EquipmentProducer.NomValueId;
+            equipment.Place = equipmentData.Content.Place;
+            equipment.EquipmentTypeId = equipmentData.Content.EquipmentType.NomValueId;
+            equipment.ManDate = equipmentData.Content.ManDate.Value;
+            equipment.ManPlace = equipmentData.Content.ManPlace;
+            equipment.OperationalDate = equipmentData.Content.OperationalDate;
+            equipment.Note = equipmentData.Content.Note;
 
             return equipment;
         }

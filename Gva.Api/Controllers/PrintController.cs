@@ -11,6 +11,7 @@ using Common.Json;
 using Common.Owin;
 using Common.WordTemplates;
 using Gva.Api.Models;
+using Gva.Api.ModelsDO.Persons;
 using Gva.Api.WordTemplates;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -44,8 +45,8 @@ namespace Gva.Api.Controllers
             string path = string.Format("{0}/{1}", "licences", licenceInd);
             int licenceTypeId = this.lotRepository
                 .GetLotIndex(lotId)
-                .Index.GetPart(path)
-                .Content.Get<int>("licenceType.nomValueId");
+                .Index.GetPart<PersonLicenceDO>(path)
+                .Content.LicenceType.NomValueId;
 
             string templateName = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent.Get<string>("templateName");
 

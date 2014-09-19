@@ -1,24 +1,18 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
+using Common.Api.UserContext;
 using Common.Data;
+using Common.Filters;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
-using Regs.Api.LotEvents;
-using Regs.Api.Repositories.LotRepositories;
-using Common.Api.Repositories.NomRepository;
-using System.Collections.Generic;
-using System;
-using Common.Json;
-using Common.Api.UserContext;
-using Regs.Api.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Gva.Api.Repositories.FileRepository;
-using Common.Filters;
-using System.Linq;
-using System.Web.Http.Results;
-using System.Net;
-using Common.Api.Models;
+using Regs.Api.LotEvents;
+using Regs.Api.Models;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -84,9 +78,9 @@ namespace Gva.Api.Controllers.Persons
         [Route("")]
         public IHttpActionResult GetParts(int lotId, int licencePartIndex, int? caseTypeId = null)
         {
-            var editionsPartVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts("licenceEditions")
-                .Where(epv => epv.Content.Get<int>("licencePartIndex") == licencePartIndex)
-                .OrderBy(epv => epv.Content.Get<int>("index"));
+            var editionsPartVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonLicenceEditionDO>("licenceEditions")
+                .Where(epv => epv.Content.LicencePartIndex == licencePartIndex)
+                .OrderBy(epv => epv.Content.Index);
 
             List<FilePartVersionDO<PersonLicenceEditionDO>> partVersionDOs = new List<FilePartVersionDO<PersonLicenceEditionDO>>();
             foreach (var editionsPartVersion in editionsPartVersions)
@@ -109,20 +103,20 @@ namespace Gva.Api.Controllers.Persons
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
-                var editionsPartVersions = lot.Index.GetParts("licenceEditions").Where(epv => epv.Content.Get<int>("licencePartIndex") == licencePartIndex);
-                var nextIndex = editionsPartVersions.Select(e => e.Content.Get<int>("index")).Max() + 1;
+                var editionsPartVersions = lot.Index.GetParts<PersonLicenceEditionDO>("licenceEditions")
+                    .Where(epv => epv.Content.LicencePartIndex == licencePartIndex);
+                var nextIndex = editionsPartVersions.Select(e => e.Content.Index).Max() + 1;
                 edition.Part.Index = nextIndex;
 
-                var licencePartVersion = lot.Index.GetPart("licences/" + licencePartIndex);
+                var licencePartVersion = lot.Index.GetPart<PersonLicenceDO>("licences/" + licencePartIndex);
 
                 if (EditionDocDateValidToValidation(licencePartVersion.Content, edition))
                 {
                     return BadRequest();
                 }
 
-                PartVersion partVersion = lot.CreatePart(this.path + "/*", JObject.FromObject(edition.Part), this.userContext);
-
-                this.fileRepository.AddFileReferences(partVersion, edition.Files);
+                var partVersion = lot.CreatePart(this.path + "/*", edition.Part, this.userContext);
+                this.fileRepository.AddFileReferences(partVersion.Part, edition.Files);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 
@@ -143,20 +137,15 @@ namespace Gva.Api.Controllers.Persons
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-
-                var licencePartVersion = lot.Index.GetPart("licences/" + licencePartIndex);
+                var licencePartVersion = lot.Index.GetPart<PersonLicenceDO>("licences/" + licencePartIndex);
 
                 if (EditionDocDateValidToValidation(licencePartVersion.Content, edition))
                 {
                     return BadRequest();
                 }
 
-                PartVersion partVersion = lot.UpdatePart(
-                    string.Format("{0}/{1}", this.path, partIndex),
-                    JObject.FromObject(edition.Part),
-                    this.userContext);
-
-                this.fileRepository.AddFileReferences(partVersion, edition.Files);
+                var partVersion = lot.UpdatePart(string.Format("{0}/{1}", this.path, partIndex), edition.Part, this.userContext);
+                this.fileRepository.AddFileReferences(partVersion.Part, edition.Files);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 
@@ -179,16 +168,16 @@ namespace Gva.Api.Controllers.Persons
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
                 PartVersion licencePartVersion = null;
-                var editionPartVersion = lot.DeletePart(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
-                var editionsPartVersions = lot.Index.GetParts("licenceEditions")
-                    .Where(epv => epv.Content.Get<int>("licencePartIndex") == licencePartIndex);
+                var editionPartVersion = lot.DeletePart<PersonLicenceEditionDO>(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
+                var editionsPartVersions = lot.Index.GetParts<PersonLicenceEditionDO>("licenceEditions")
+                    .Where(epv => epv.Content.LicencePartIndex == licencePartIndex);
 
                 if (editionsPartVersions.Count() == 0)
                 {
-                    licencePartVersion = lot.DeletePart(string.Format("{0}/{1}", "licences", licencePartIndex), this.userContext);
+                    licencePartVersion = lot.DeletePart<PersonLicenceDO>(string.Format("{0}/{1}", "licences", licencePartIndex), this.userContext);
                 }
 
-                this.fileRepository.DeleteFileReferences(editionPartVersion);
+                this.fileRepository.DeleteFileReferences(editionPartVersion.Part);
                 lot.Commit(this.userContext, lotEventDispatcher);
 
                 this.unitOfWork.Save();
@@ -205,10 +194,10 @@ namespace Gva.Api.Controllers.Persons
             }
         }
 
-        public bool EditionDocDateValidToValidation(JObject licence, FilePartVersionDO<PersonLicenceEditionDO> edition)
+        private bool EditionDocDateValidToValidation(PersonLicenceDO licence, FilePartVersionDO<PersonLicenceEditionDO> edition)
         {
-            if ((licence.Get<string>("staffType.alias") != "flightCrew" ||
-                    (licence.Get<NomValue>("fcl") != null && (licence.Get<string>("fcl.code") != "Y" && licence.Get<string>("licenceType.code") != "BG CCA")))
+            if ((licence.StaffType.Alias != "flightCrew" ||
+                    (licence.Fcl != null && licence.Fcl.Code != "Y" && licence.LicenceType.Code != "BG CCA"))
                 && edition.Part.DocumentDateValidTo == null)
             {
                 return true;

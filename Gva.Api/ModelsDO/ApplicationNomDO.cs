@@ -1,6 +1,5 @@
-﻿using System;
-using Common.Json;
-using Gva.Api.Models;
+﻿using Gva.Api.Models;
+using Gva.Api.ModelsDO.Common;
 
 namespace Gva.Api.ModelsDO
 {
@@ -14,7 +13,7 @@ namespace Gva.Api.ModelsDO
         {
             this.ApplicationId = application.GvaApplicationId;
             this.PartIndex = application.GvaAppLotPart.Index;
-            this.ApplicationName = application.GvaAppLotPart.Lot.Index.GetPart(application.GvaAppLotPart.Path).Content.Get<string>("applicationType.name");
+            this.ApplicationName = application.GvaAppLotPart.Lot.Index.GetPart<DocumentApplicationDO>(application.GvaAppLotPart.Path).Content.ApplicationType.Name;
         }
 
         public int ApplicationId { get; set; }

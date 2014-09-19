@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views;
+using Gva.Api.ModelsDO.Common;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -22,12 +21,12 @@ namespace Gva.Api.Projections.Inventory.Persons
 
         public override IEnumerable<GvaViewInventoryItem> Execute(PartCollection parts)
         {
-            var applications = parts.GetAll("personDocumentApplications");
+            var applications = parts.GetAll<DocumentApplicationDO>("personDocumentApplications");
 
             return applications.Select(a => this.Create(a));
         }
 
-        private GvaViewInventoryItem Create(PartVersion personApplication)
+        private GvaViewInventoryItem Create(PartVersion<DocumentApplicationDO> personApplication)
         {
             GvaViewInventoryItem invItem = new GvaViewInventoryItem();
 
@@ -35,14 +34,14 @@ namespace Gva.Api.Projections.Inventory.Persons
             invItem.PartId = personApplication.Part.PartId;
             invItem.SetPartAlias = personApplication.Part.SetPart.Alias;
             invItem.Name = personApplication.Part.SetPart.Name;
-            invItem.TypeId = personApplication.Content.Get<int>("applicationType.nomValueId");
-            invItem.Number = personApplication.Content.Get<string>("documentNumber");
-            invItem.Date = personApplication.Content.Get<DateTime>("documentDate");
+            invItem.TypeId = personApplication.Content.ApplicationType.NomValueId;
+            invItem.Number = personApplication.Content.DocumentNumber;
+            invItem.Date = personApplication.Content.DocumentDate.Value;
             invItem.Publisher = null;
             invItem.Valid = null;
             invItem.FromDate = null;
             invItem.ToDate = null;
-            invItem.Notes = personApplication.Content.Get<string>("notes");
+            invItem.Notes = personApplication.Content.Notes;
 
             invItem.CreatedBy = this.userRepository.GetUser(personApplication.Part.CreatorId).Fullname;
             invItem.CreationDate = personApplication.Part.CreateDate;

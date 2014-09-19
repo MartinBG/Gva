@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views;
+using Gva.Api.ModelsDO.Common;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -18,20 +17,20 @@ namespace Gva.Api.Projections.Application
 
         public override IEnumerable<GvaViewApplication> Execute(PartCollection parts)
         {
-            var applications = parts.GetAll("aircraftDocumentApplications");
+            var applications = parts.GetAll<DocumentApplicationDO>("aircraftDocumentApplications");
 
             return applications.Select(a => this.Create(a));
         }
 
-        private GvaViewApplication Create(PartVersion aircraftApplication)
+        private GvaViewApplication Create(PartVersion<DocumentApplicationDO> aircraftApplication)
         {
             GvaViewApplication application = new GvaViewApplication();
 
             application.LotId = aircraftApplication.Part.Lot.LotId;
             application.PartId = aircraftApplication.Part.PartId;
-            application.DocumentDate = aircraftApplication.Content.Get<DateTime?>("documentDate");
-            application.DocumentNumber = aircraftApplication.Content.Get<string>("documentNumber");
-            application.ApplicationTypeId = aircraftApplication.Content.Get<int>("applicationType.nomValueId");
+            application.DocumentDate = aircraftApplication.Content.DocumentDate;
+            application.DocumentNumber = aircraftApplication.Content.DocumentNumber;
+            application.ApplicationTypeId = aircraftApplication.Content.ApplicationType.NomValueId;
 
             return application;
         }

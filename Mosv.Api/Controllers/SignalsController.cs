@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Json;
-using Mosv.Api.Models;
+using Common.Filters;
 using Mosv.Api.ModelsDO;
-using Newtonsoft.Json.Linq;
+using Mosv.Api.ModelsDO.Signal;
+using Mosv.Api.Repositories.SignalRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Mosv.Api.Repositories.SignalRepository;
-using System.Data.Entity;
 
 namespace Mosv.Api.Controllers
 {
     [RoutePrefix("api/signals")]
     [Authorize]
-    public class SignalsController : MosvLotsController
+    public class SignalsController :ApiController
     {
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
@@ -30,7 +28,6 @@ namespace Mosv.Api.Controllers
             ILotRepository lotRepository,
             ISignalRepository signalRepository,
             ILotEventDispatcher lotEventDispatcher)
-            : base(lotRepository, unitOfWork, lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -55,18 +52,25 @@ namespace Mosv.Api.Controllers
                 institution,
                 violation);
 
-            return Ok(signals.Select(o => new SignalDO(o)));
+            return Ok(signals.Select(o => new SignalViewDO(o)));
+        }
+
+        [Route("new")]
+        public IHttpActionResult GetNewSignal()
+        {
+            return Ok(new SignalDO());
         }
 
         [Route("")]
-        public IHttpActionResult PostSignal(JObject signal)
+        [Validate]
+        public IHttpActionResult PostSignal(SignalDO signal)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 UserContext userContext = this.Request.GetUserContext();
                 var newLot = this.lotRepository.CreateLot("Signal");
 
-                newLot.CreatePart("signalData", signal.Get<JObject>("signalData"), userContext);
+                newLot.CreatePart("signalData", signal, userContext);
 
                 newLot.Commit(userContext, lotEventDispatcher);
 
@@ -79,12 +83,12 @@ namespace Mosv.Api.Controllers
         }
 
         [Route(@"{lotId}/{*path:regex(^signalData$)}")]
-        public override IHttpActionResult GetPart(int lotId, string path)
+        public IHttpActionResult GetPart(int lotId, string path)
         {
-            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart(path);
+            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart<SignalDO>(path);
 
             var signal = this.signalRepository.GetSignal(lotId);
-            SignalDO signalDO = new SignalDO(signal);
+            SignalViewDO signalDO = new SignalViewDO(signal);
 
             if (signalDO.ApplicationDocId.HasValue)
             {
@@ -102,21 +106,27 @@ namespace Mosv.Api.Controllers
             return Ok(new
             {
                 data = signalDO,
-                partData = new PartVersionDO(part)
+                partData = new PartVersionDO<SignalDO>(part)
             });
         }
 
         [Route(@"{lotId}/{*path:regex(^signalData$)}")]
-        public IHttpActionResult PostSignalData(int lotId, string path, JObject content)
+        public IHttpActionResult PostSignalData(int lotId, string path, PartVersionDO<SignalDO> partVersionDO)
         {
-            var lot = this.lotRepository.GetLotIndex(lotId);
+            UserContext userContext = this.Request.GetUserContext();
 
-            return base.PostPart(lotId, path, content);
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            PartVersion<SignalDO> partVersion = lot.UpdatePart(path, partVersionDO.Part, userContext);
+            lot.Commit(userContext, lotEventDispatcher);
+
+            this.unitOfWork.Save();
+
+            return Ok();
         }
 
         [Route("{id}/fastSave")]
         [HttpPost]
-        public IHttpActionResult FastSaveSignal(int id, SignalDO data)
+        public IHttpActionResult FastSaveSignal(int id, SignalViewDO data)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {

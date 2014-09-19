@@ -13,18 +13,21 @@ namespace Regs.Api.Models
         {
         }
 
-        public PartVersion Get(string path)
+        public PartVersion<T> Get<T>(string path)
+            where T : class
         {
-            return this
-                .Where(pv => pv.Part.Path == path)
-                .SingleOrDefault();
+            var partVersion = this.Where(pv => pv.Part.Path == path).SingleOrDefault();
+
+            return partVersion == null ? null : new PartVersion<T>(partVersion);
         }
 
-        public PartVersion[] GetAll(string pathSpec)
+        public PartVersion<T>[] GetAll<T>(string pathSpec)
+            where T : class
         {
             return this
                 .Where(pv => pv.Part.Matches(pathSpec))
                 .OrderBy(pv => pv.Part.Path)
+                .Select(pv => new PartVersion<T>(pv))
                 .ToArray();
         }
     }

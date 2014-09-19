@@ -1,5 +1,4 @@
 ﻿using System;
-using Gva.Api.Models;
 
 namespace Gva.Api.ModelsDO
 {

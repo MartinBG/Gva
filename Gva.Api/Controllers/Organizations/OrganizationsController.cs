@@ -96,7 +96,7 @@ namespace Gva.Api.Controllers.Organizations
             {
                 var newLot = this.lotRepository.CreateLot("Organization");
 
-                var partVersion = newLot.CreatePart("organizationData", JObject.FromObject(organizationData), this.userContext);
+                var partVersion = newLot.CreatePart("organizationData", organizationData, this.userContext);
 
                 this.caseTypeRepository.AddCaseTypes(newLot, organizationData.CaseTypes.Select(ct => ct.NomValueId));
 
@@ -115,9 +115,9 @@ namespace Gva.Api.Controllers.Organizations
         [Route(@"{lotId}/organizationData")]
         public IHttpActionResult GetOrganizationData(int lotId)
         {
-            var organizationData = this.lotRepository.GetLotIndex(lotId).Index.GetPart("organizationData");
+            var organizationData = this.lotRepository.GetLotIndex(lotId).Index.GetPart<OrganizationDataDO>("organizationData");
 
-            return Ok(organizationData.Content.ToObject<OrganizationDataDO>());
+            return Ok(organizationData.Content);
         }
 
         [Route(@"{lotId}/organizationData")]
@@ -130,7 +130,7 @@ namespace Gva.Api.Controllers.Organizations
 
                 this.caseTypeRepository.AddCaseTypes(lot, organizationData.CaseTypes.Select(ct => ct.NomValueId));
 
-                var partVersion = lot.UpdatePart("organizationData", JObject.FromObject(organizationData), this.userContext);
+                var partVersion = lot.UpdatePart("organizationData", organizationData, this.userContext);
 
                 this.unitOfWork.Save();
 

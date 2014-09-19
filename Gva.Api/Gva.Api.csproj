@@ -137,6 +137,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftReviewAmendmentFMDO.cs" />
     <Compile Include="ModelsDO\Organizations\AmendmentDO.cs" />
+    <Compile Include="ModelsDO\Organizations\LimitationDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDetailDO.cs" />
     <Compile Include="ModelsDO\Organizations\Lims145DO.cs" />
     <Compile Include="ModelsDO\Organizations\Lims147DO.cs" />
@@ -308,13 +309,11 @@
     <Compile Include="ModelsDO\ApplicationLotFileDO.cs" />
     <Compile Include="ModelsDO\ApplicationNewDO.cs" />
     <Compile Include="ModelsDO\ApplicationLinkDO.cs" />
-    <Compile Include="ModelsDO\ApprovalPartVersionDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportViewDO.cs" />
     <Compile Include="ModelsDO\ApplicationLotObjectDO.cs" />
     <Compile Include="ModelsDO\PartSelectDO.cs" />
     <Compile Include="ModelsDO\ASExamDO.cs" />
     <Compile Include="ModelsDO\PublisherDO.cs" />
-    <Compile Include="ModelsDO\PartVersionDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentViewDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationViewDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftViewDO.cs" />
@@ -322,7 +321,7 @@
     <Compile Include="ModelsDO\FileDO.cs" />
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonInfoDO.cs" />
-    <Compile Include="ModelsDO\RegistrationsDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\RegistrationViewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonViewDO.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegMark.cs" />
     <Compile Include="Models\ASExamQuestion.cs" />

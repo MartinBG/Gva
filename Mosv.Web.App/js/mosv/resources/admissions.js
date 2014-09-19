@@ -4,6 +4,10 @@
 
   angular.module('mosv').factory('Admissions', ['$resource', function ($resource) {
     return $resource('api/admissions/:id', {}, {
+      newAdmission: {
+        method: 'GET',
+        url: 'api/admissions/new'
+      },
       'fastSave': {
         method: 'POST',
         url: 'api/admissions/:id/fastSave'

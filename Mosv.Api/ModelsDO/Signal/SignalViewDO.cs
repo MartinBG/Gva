@@ -1,15 +1,14 @@
 ﻿using Mosv.Api.Models;
 using System;
 
-namespace Mosv.Api.ModelsDO
+namespace Mosv.Api.ModelsDO.Signal
 {
-    public class SignalDO
+    public class SignalViewDO
     {
-        public SignalDO()
-        {
-        }
+        public SignalViewDO()
+        { }
 
-        public SignalDO(MosvViewSignal signal)
+        public SignalViewDO(MosvViewSignal signal)
         {
             this.Id = signal.LotId;
             this.ApplicationDocId = signal.ApplicationDocId;

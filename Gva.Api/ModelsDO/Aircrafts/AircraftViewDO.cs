@@ -1,7 +1,7 @@
 ﻿using System;
 using Gva.Api.Models.Views.Aircraft;
 
-namespace Gva.Api.ModelsDO
+namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftViewDO
     {

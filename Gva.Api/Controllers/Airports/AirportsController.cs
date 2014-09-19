@@ -81,7 +81,7 @@ namespace Gva.Api.Controllers.Airports
             {
                 var newLot = this.lotRepository.CreateLot("Airport");
 
-                var partVersion = newLot.CreatePart("airportData", JObject.FromObject(airportData), this.userContext);
+                var partVersion = newLot.CreatePart("airportData", airportData, this.userContext);
 
                 int airportCaseTypeId = this.caseTypeRepository.GetCaseTypesForSet("Airport").Single().GvaCaseTypeId;
                 this.caseTypeRepository.AddCaseTypes(newLot, new int[] { airportCaseTypeId });
@@ -101,9 +101,9 @@ namespace Gva.Api.Controllers.Airports
         [Route(@"{lotId}/airportData")]
         public IHttpActionResult GetAirportData(int lotId)
         {
-            var airportData = this.lotRepository.GetLotIndex(lotId).Index.GetPart("airportData");
+            var airportData = this.lotRepository.GetLotIndex(lotId).Index.GetPart<AirportDataDO>("airportData");
 
-            return Ok(airportData.Content.ToObject<AirportDataDO>());
+            return Ok(airportData.Content);
         }
 
         [Route(@"{lotId}/airportData")]
@@ -113,7 +113,7 @@ namespace Gva.Api.Controllers.Airports
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                var partVersion = lot.UpdatePart("airportData", JObject.FromObject(airportData), this.userContext);
+                var partVersion = lot.UpdatePart("airportData", airportData, this.userContext);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 

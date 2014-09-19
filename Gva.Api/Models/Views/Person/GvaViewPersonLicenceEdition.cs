@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
 using Regs.Api.Models;
-using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.Models.Views.Person
 {
@@ -26,15 +25,9 @@ namespace Gva.Api.Models.Views.Person
 
         public int LicenceActionId { get; set; }
 
-        public int LicenceNumber { get; set; }
+        public int? LicenceNumber { get; set; }
 
         public bool IsLastEdition { get; set; }
-
-        public int? GvaApplicationId { get; set; }
-
-        public string ApplicationName { get; set; }
-
-        public int? ApplicationPartIndex { get; set; }
 
         public int LicencePartIndex { get; set; }
 
@@ -50,6 +43,8 @@ namespace Gva.Api.Models.Views.Person
 
         public string PublisherCode { get; set; }
 
+        public int? GvaApplicationId { get; set; }
+
         public virtual GvaViewPerson Person { get; set; }
 
         public virtual Part Part { get; set; }
@@ -59,7 +54,6 @@ namespace Gva.Api.Models.Views.Person
         public virtual NomValue LicenceAction { get; set; }
 
         public virtual GvaApplication Application { get; set; }
-
     }
 
     public class GvaViewPersonLicenceEditionMap : EntityTypeConfiguration<GvaViewPersonLicenceEdition>
@@ -82,6 +76,15 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.StampNumber)
                 .HasMaxLength(50);
 
+            this.Property(t => t.LicenceTypeCode)
+                .HasMaxLength(50);
+
+            this.Property(t => t.LicenceTypeCaCode)
+                .HasMaxLength(50);
+
+            this.Property(t => t.PublisherCode)
+                .HasMaxLength(50);
+
             // Table & Column Mappings
             this.ToTable("GvaViewPersonLicenceEditions");
             this.Property(t => t.LotId).HasColumnName("LotId");
@@ -94,9 +97,6 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LicenceActionId).HasColumnName("LicenceActionId");
             this.Property(t => t.LicenceNumber).HasColumnName("LicenceNumber");
             this.Property(t => t.IsLastEdition).HasColumnName("IsLastEdition");
-            this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
-            this.Property(t => t.ApplicationName).HasColumnName("ApplicationName");
-            this.Property(t => t.ApplicationPartIndex).HasColumnName("ApplicationPartIndex");
             this.Property(t => t.LicencePartIndex).HasColumnName("LicencePartIndex");
             this.Property(t => t.EditionPartIndex).HasColumnName("EditionPartIndex");
             this.Property(t => t.FirstDocDateValidFrom).HasColumnName("FirstDocDateValidFrom");
@@ -104,7 +104,8 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LicenceTypeCode).HasColumnName("LicenceTypeCode");
             this.Property(t => t.LicenceTypeCaCode).HasColumnName("LicenceTypeCaCode");
             this.Property(t => t.PublisherCode).HasColumnName("PublisherCode");
-            
+            this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
+
             // Relationships
             this.HasRequired(t => t.Person)
                 .WithMany(d => d.PersonLicenceEditions)
@@ -119,8 +120,8 @@ namespace Gva.Api.Models.Views.Person
                 .WithMany()
                 .HasForeignKey(t => t.LicenceActionId);
             this.HasOptional(t => t.Application)
-                .WithMany(d => d.PersonLicenceEditions)
-                .HasForeignKey(t => t.GvaApplicationId);
+                .WithMany(t => t.PersonLicenceEditions)
+                .HasForeignKey(d => d.GvaApplicationId);
         }
     }
 }

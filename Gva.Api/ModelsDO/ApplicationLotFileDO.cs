@@ -1,10 +1,5 @@
 ﻿using Docs.Api.Models;
 using Gva.Api.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Docs.Api.DataObjects
 {
@@ -70,21 +65,33 @@ namespace Docs.Api.DataObjects
         }
 
         public bool HasAppFile { get; set; }
+
         public int GvaLotFileId { get; set; }
+
         public int? PartIndex { get; set; }
+
         public string SetPartName { get; set; }
+
         public string SetPartAlias { get; set; }
+
         public int? PageNumber { get; set; }
+
         public string PageIndex { get; set; }
+
         public string GvaCaseTypeName { get; set; }
-        
+
         public int? DocFileId { get; set; }
+
         public int DocFileKindId { get; set; }
+
         public int DocFileTypeId { get; set; }
+
         public int? DocId { get; set; }
+
         public string Name { get; set; }
 
         public BlobDO File { get; set; }
+
         public string FileUrl { get; set; }
     }
 }

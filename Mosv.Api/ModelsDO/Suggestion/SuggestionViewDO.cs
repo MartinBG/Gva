@@ -1,15 +1,15 @@
 ﻿using System;
 using Mosv.Api.Models;
 
-namespace Mosv.Api.ModelsDO
+namespace Mosv.Api.ModelsDO.Suggestion
 {
-    public class SuggestionDO
+    public class SuggestionViewDO
     {
-        public SuggestionDO()
+        public SuggestionViewDO()
         {
         }
 
-        public SuggestionDO(MosvViewSuggestion suggestion)
+        public SuggestionViewDO(MosvViewSuggestion suggestion)
         {
             this.Id = suggestion.LotId;
             this.ApplicationDocId = suggestion.ApplicationDocId;

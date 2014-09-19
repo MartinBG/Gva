@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views;
+using Gva.Api.ModelsDO.Persons;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -22,14 +21,16 @@ namespace Gva.Api.Projections.Inventory.Persons
 
         public override IEnumerable<GvaViewInventoryItem> Execute(PartCollection parts)
         {
-            var medicals = parts.GetAll("personDocumentMedicals");
+            var medicals = parts.GetAll<PersonMedicalDO>("personDocumentMedicals");
 
-            var personData = parts.Get("personData");
+            var personData = parts.Get<PersonDataDO>("personData");
 
             return medicals.Select(m => this.Create(m, personData));
         }
 
-        private GvaViewInventoryItem Create(PartVersion personMedical, PartVersion personData)
+        private GvaViewInventoryItem Create
+            (PartVersion<PersonMedicalDO> personMedical,
+            PartVersion<PersonDataDO> personData)
         {
             GvaViewInventoryItem invItem = new GvaViewInventoryItem();
 
@@ -40,16 +41,16 @@ namespace Gva.Api.Projections.Inventory.Persons
             invItem.TypeId = null;
             invItem.Number = string.Format(
                     "{0}-{1}-{2}-{3}",
-                    personMedical.Content.Get<string>("documentNumberPrefix"),
-                    personMedical.Content.Get<string>("documentNumber"),
-                    personData.Content.Get<string>("lin"),
-                    personMedical.Content.Get<string>("documentNumberSuffix"));
-            invItem.Date = personMedical.Content.Get<DateTime>("documentDateValidFrom");
-            invItem.Publisher = personMedical.Content.Get<string>("documentPublisher.name");
+                    personMedical.Content.DocumentNumberPrefix,
+                    personMedical.Content.DocumentNumber,
+                    personData.Content.Lin,
+                    personMedical.Content.DocumentNumberSuffix);
+            invItem.Date = personMedical.Content.DocumentDateValidFrom.Value;
+            invItem.Publisher = personMedical.Content.DocumentPublisher.Name;
             invItem.Valid = null;
-            invItem.FromDate = personMedical.Content.Get<DateTime>("documentDateValidFrom");
-            invItem.ToDate = personMedical.Content.Get<DateTime>("documentDateValidTo");
-            invItem.Notes = personMedical.Content.Get<string>("notes");
+            invItem.FromDate = personMedical.Content.DocumentDateValidFrom.Value;
+            invItem.ToDate = personMedical.Content.DocumentDateValidTo.Value;
+            invItem.Notes = personMedical.Content.Notes;
 
             invItem.CreatedBy = this.userRepository.GetUser(personMedical.Part.CreatorId).Fullname;
             invItem.CreationDate = personMedical.Part.CreateDate;

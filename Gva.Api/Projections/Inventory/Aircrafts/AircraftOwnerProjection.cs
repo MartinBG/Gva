@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views;
+using Gva.Api.ModelsDO.Aircrafts;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -22,12 +21,12 @@ namespace Gva.Api.Projections.Inventory.Aircrafts
 
         public override IEnumerable<GvaViewInventoryItem> Execute(PartCollection parts)
         {
-            var owners = parts.GetAll("aircraftDocumentOwners");
+            var owners = parts.GetAll<AircraftDocumentOwnerDO>("aircraftDocumentOwners");
 
             return owners.Select(o => this.Create(o));
         }
 
-        private GvaViewInventoryItem Create(PartVersion aircraftOwner)
+        private GvaViewInventoryItem Create(PartVersion<AircraftDocumentOwnerDO> aircraftOwner)
         {
             GvaViewInventoryItem invItem = new GvaViewInventoryItem();
 
@@ -35,14 +34,17 @@ namespace Gva.Api.Projections.Inventory.Aircrafts
             invItem.PartId = aircraftOwner.Part.PartId;
             invItem.SetPartAlias = aircraftOwner.Part.SetPart.Alias;
             invItem.Name = aircraftOwner.Part.SetPart.Name;
-            invItem.TypeId = aircraftOwner.Content.Get<int>("aircraftRelation.nomValueId");
-            invItem.Number = aircraftOwner.Content.Get<string>("documentNumber");
-            invItem.Date = aircraftOwner.Content.Get<DateTime>("documentDate");
-            invItem.Publisher = aircraftOwner.Content.Get<string>("person.name") ?? aircraftOwner.Content.Get<string>("organization.name");
+            invItem.TypeId = aircraftOwner.Content.AircraftRelation.NomValueId;
+            invItem.Number = aircraftOwner.Content.DocumentNumber;
+            invItem.Date = aircraftOwner.Content.DocumentDate.Value;
+
+            string personName = aircraftOwner.Content.Person == null ? null : aircraftOwner.Content.Person.Name;
+            string organizationName = aircraftOwner.Content.Organization == null ? null : aircraftOwner.Content.Organization.Name;
+            invItem.Publisher = personName ?? organizationName;
             invItem.Valid = null;
-            invItem.FromDate = aircraftOwner.Content.Get<DateTime?>("fromDate");
-            invItem.ToDate = aircraftOwner.Content.Get<DateTime?>("toDate");
-            invItem.Notes = aircraftOwner.Content.Get<string>("notes");
+            invItem.FromDate = aircraftOwner.Content.FromDate;
+            invItem.ToDate = aircraftOwner.Content.ToDate;
+            invItem.Notes = aircraftOwner.Content.Notes;
 
             invItem.CreatedBy = this.userRepository.GetUser(aircraftOwner.Part.CreatorId).Fullname;
             invItem.CreationDate = aircraftOwner.Part.CreateDate;

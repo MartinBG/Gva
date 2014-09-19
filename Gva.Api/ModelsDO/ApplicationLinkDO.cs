@@ -1,9 +1,4 @@
-﻿using Docs.Api.DataObjects;
-using Gva.Api.Models;
-using Newtonsoft.Json.Linq;
-using System;
-
-namespace Gva.Api.ModelsDO
+﻿namespace Gva.Api.ModelsDO
 {
     public class ApplicationLinkDO
     {

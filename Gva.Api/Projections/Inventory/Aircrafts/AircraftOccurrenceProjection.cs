@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views;
+using Gva.Api.ModelsDO.Aircrafts;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 
@@ -22,12 +21,12 @@ namespace Gva.Api.Projections.Inventory.Aircrafts
 
         public override IEnumerable<GvaViewInventoryItem> Execute(PartCollection parts)
         {
-            var occurrences = parts.GetAll("documentOccurrences");
+            var occurrences = parts.GetAll<AircraftDocumentOccurenceDO>("documentOccurrences");
 
             return occurrences.Select(o => this.Create(o));
         }
 
-        private GvaViewInventoryItem Create(PartVersion aircraftOccurrence)
+        private GvaViewInventoryItem Create(PartVersion<AircraftDocumentOccurenceDO> aircraftOccurrence)
         {
             GvaViewInventoryItem invItem = new GvaViewInventoryItem();
 
@@ -35,14 +34,14 @@ namespace Gva.Api.Projections.Inventory.Aircrafts
             invItem.PartId = aircraftOccurrence.Part.PartId;
             invItem.SetPartAlias = aircraftOccurrence.Part.SetPart.Alias;
             invItem.Name = aircraftOccurrence.Part.SetPart.Name;
-            invItem.TypeId = aircraftOccurrence.Content.Get<int>("aircraftOccurrenceClass.nomValueId");
+            invItem.TypeId = aircraftOccurrence.Content.AircraftOccurrenceClass.NomValueId;
             invItem.Number = null;
-            invItem.Date = aircraftOccurrence.Content.Get<DateTime>("localDate");
-            invItem.Publisher = aircraftOccurrence.Content.Get<string>("country.name");
+            invItem.Date = aircraftOccurrence.Content.LocalDate.Value;
+            invItem.Publisher = aircraftOccurrence.Content.Country.Name;
             invItem.Valid = null;
             invItem.FromDate = null;
             invItem.ToDate = null;
-            invItem.Notes = aircraftOccurrence.Content.Get<string>("notes");
+            invItem.Notes = aircraftOccurrence.Content.Notes;
 
             invItem.CreatedBy = this.userRepository.GetUser(aircraftOccurrence.Part.CreatorId).Fullname;
             invItem.CreationDate = aircraftOccurrence.Part.CreateDate;

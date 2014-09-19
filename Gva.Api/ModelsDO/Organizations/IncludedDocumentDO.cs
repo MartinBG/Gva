@@ -1,7 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
 using Common.Api.Models;
-using System;
-using System.Collections.Generic;
 
 namespace Gva.Api.ModelsDO.Organizations
 {
@@ -11,7 +9,7 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public DateTime? ApprovalDate { get; set; }
 
-        public Object LinkedLim { get; set; }
+        public LimitationDO LinkedLim { get; set; }
 
         public int? PartIndex { get; set; }
 

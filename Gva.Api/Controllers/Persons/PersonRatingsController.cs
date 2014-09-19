@@ -99,8 +99,7 @@ namespace Gva.Api.Controllers.Persons
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-
-                PartVersion partVersion = lot.CreatePart(path + "/*", JObject.FromObject(rating.Part), this.userContext);
+                var partVersion = lot.CreatePart(path + "/*", rating.Part, this.userContext);
 
                 this.applicationRepository.AddApplicationRefs(partVersion.Part, rating.Part.Editions[0].Applications);
 
@@ -129,10 +128,7 @@ namespace Gva.Api.Controllers.Persons
                     rating.Part.NextIndex++;
                 }
 
-                var partVersion = lot.UpdatePart(
-                    string.Format("{0}/{1}", this.path, partIndex),
-                    JObject.FromObject(rating.Part),
-                    this.userContext);
+                var partVersion = lot.UpdatePart( string.Format("{0}/{1}", this.path, partIndex), rating.Part, this.userContext);
 
                 this.applicationRepository.AddApplicationRefs(partVersion.Part, lastEdition.Applications);
 

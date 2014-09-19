@@ -44,7 +44,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         GvaApplication[] GetApplicationRefs(int partId);
 
-        void DeleteApplicationRefs(PartVersion partVersion);
+        void DeleteApplicationRefs(Part part);
 
         IEnumerable<Set> GetLotSets(
             string name = null,

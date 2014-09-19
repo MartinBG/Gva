@@ -74,16 +74,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AdmissionsController.cs" />
-    <Compile Include="Controllers\MosvLotsController.cs" />
     <Compile Include="Controllers\SignalsController.cs" />
     <Compile Include="Controllers\SuggestionsController.cs" />
-    <Compile Include="LotEventHandlers\AdmissionView\AdmissionDataHandler.cs" />
-    <Compile Include="LotEventHandlers\SignalView\SignalDataHandler.cs" />
-    <Compile Include="LotEventHandlers\SuggestionView\SuggestionDataHandler.cs" />
-    <Compile Include="ModelsDO\AdmissionDO.cs" />
+    <Compile Include="Projections\AdmissionView\AdmissionProjection.cs" />
+    <Compile Include="Projections\SignalView\SignalProjection.cs" />
+    <Compile Include="Projections\SuggestionView\SuggestionProjection.cs" />
+    <Compile Include="ModelsDO\Admission\AdmissionDO.cs" />
+    <Compile Include="ModelsDO\Admission\AdmissionViewDO.cs" />
     <Compile Include="ModelsDO\PartVersionDO.cs" />
-    <Compile Include="ModelsDO\SignalDO.cs" />
-    <Compile Include="ModelsDO\SuggestionDO.cs" />
+    <Compile Include="ModelsDO\Signal\SignalDO.cs" />
+    <Compile Include="ModelsDO\Signal\SignalViewDO.cs" />
+    <Compile Include="ModelsDO\Suggestion\SuggestionDO.cs" />
+    <Compile Include="ModelsDO\Suggestion\SuggestionViewDO.cs" />
     <Compile Include="Models\MosvDbConfiguration.cs" />
     <Compile Include="Models\MosvViewAdmission.cs" />
     <Compile Include="Models\MosvViewSignal.cs" />
