@@ -25,4 +25,10 @@
     <sc-field type="date" ng-model="model.part.startDate" ng-required="true" l10n-text="common.inspectionDataDirective.startDate" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="date" ng-model="model.part.endDate" l10n-text="common.inspectionDataDirective.endDate" class="col-sm-3 col-md-2"></sc-field>
   </div>
+  <div class="row">
+    <div class="form-group col-sm-4 col-md-3">
+      <label class="control-label" l10n-text="common.inspectionDataDirective.controlCard"></label>
+      <sc-files ng-model="model.part.controlCard" ng-readonly="form.$readonly" name="controlCard"></sc-files>
+    </div>
+  </div>
 </ng-form>
