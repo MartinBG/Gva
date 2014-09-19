@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using Autofac;
 using Common;
 using Common.Api;
 using Common.Api.UserContext;
+using Common.Data;
 using Docs.Api;
 using Gva.Api;
 using Gva.MigrationTool.Blobs;
@@ -23,7 +25,34 @@ namespace Gva.MigrationTool
 {
     class Migration
     {
-        public static bool IsPartial = true;
+        public static object syncRoot = new object();
+        public static bool? isPartial = null;
+        public static bool IsPartial
+        {
+            get
+            {
+                if (isPartial == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (isPartial == null)
+                        {
+                            bool isPartialSetting;
+                            if (bool.TryParse(ConfigurationManager.AppSettings["PartialMigration"], out isPartialSetting))
+                            {
+                                isPartial = isPartialSetting;
+                            }
+                            else
+                            {
+                                isPartial = false;
+                            }
+                        }
+                    }
+                }
+
+                return isPartial.Value;
+            }
+        }
 
         private static ContainerBuilder CreateGvaContainerBuilder()
         {
@@ -35,6 +64,12 @@ namespace Gva.MigrationTool
             builder.RegisterModule(new RegsApiModule());
 
             builder.Register(c => new UserContext(2)).InstancePerLifetimeScope();
+            builder.Register(c =>
+            {
+                var unitOfWork = new UnitOfWork(c.Resolve<IEnumerable<IDbConfiguration>>(), c.Resolve<IEnumerable<IDbContextInitializer>>());
+                unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
+                return unitOfWork;
+            });
 
             return builder;
         }
@@ -254,7 +289,7 @@ namespace Gva.MigrationTool
                     getOrgByFmOrgName,
                     blobIdsToFileKeys);
 
-                //migrate persosns
+                //migrate persons
                 person.migratePersons(noms, personIdToLotId, getAircraftByApexId, getPersonByApexId, getOrgByApexId, blobIdsToFileKeys);
 
                 //migrate organizations
@@ -264,6 +299,8 @@ namespace Gva.MigrationTool
                 rebuildTimer.Start();
                 Console.WriteLine("Rebuilding lot part tokens...");
                 var lotRepository = scope.Resolve<ILotRepository>();
+                var unitOfWork = scope.Resolve<IUnitOfWork>();
+                ((IObjectContextAdapter)unitOfWork.DbContext).ObjectContext.CommandTimeout = 0;//wait indefinitely
                 lotRepository.ExecSpSetLotPartTokens();
                 rebuildTimer.Stop();
                 Console.WriteLine("Rebuilding lot part tokens time - {0}", rebuildTimer.Elapsed.TotalMinutes);
