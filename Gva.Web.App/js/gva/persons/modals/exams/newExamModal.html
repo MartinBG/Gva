@@ -1,0 +1,18 @@
+﻿<ng-form name="form.newDocumentExamForm" class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="persons.newExamModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.newExamModal.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.newExamModal.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <gva-person-document-exam name="examForm" ng-model="personDocumentExam.part"></gva-person-document-exam>
+
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentExam.files"
+        sc-form-params="{ setPart: 'person', lotId: lotId, caseTypeId: caseTypeId }"></gva-common-scanned-document>
+    </div>
+  </div>
+</ng-form>

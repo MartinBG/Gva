@@ -12,6 +12,7 @@ namespace Gva.Api.ModelsDO.Persons
         {
             this.Limitations = new List<NomValue>();
             this.IncludedRatings = new List<int>();
+            this.IncludedExams = new List<int>();
             this.IncludedTrainings = new List<int>();
             this.IncludedChecks = new List<int>();
             this.IncludedMedicals = new List<int>();
@@ -43,6 +44,8 @@ namespace Gva.Api.ModelsDO.Persons
         public string StampNumber { get; set; }
 
         public List<int> IncludedRatings { get; set; }
+
+        public List<int> IncludedExams { get; set; }
 
         public List<int> IncludedTrainings { get; set; }
 

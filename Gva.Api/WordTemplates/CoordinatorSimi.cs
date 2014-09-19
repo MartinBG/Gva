@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Json;
 using Gva.Api.ModelsDO.Persons;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.WordTemplates
@@ -58,9 +54,9 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i).Content);
-            //TODO - includedExams! var includedExams = lastEdition.GetItems<int>("includedExams")
-            //TODO - includedExams!     .Select(i => lot.Index.GetPart("personDocumentExams/" + i).Content);
-            //TODO - includedExams! var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedExams);
+            var includedExams = lastEdition.IncludedExams
+                .Select(i => lot.Index.GetPart<PersonDocumentExamDO>("personDocumentExams/" + i).Content);
+            var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedExams);
             var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");
 
             IEnumerable<PersonTrainingDO> engLevels = includedTrainings.Where(t => t.DocumentRole.Alias == "engTraining")
@@ -145,8 +141,8 @@ namespace Gva.Api.WordTemplates
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_LANG_LEVEL = tLangLevel,
-                    //TODO - includedExams! T_DOCUMENTS = documents.Take(documents.Length / 2),
-                    //TODO - includedExams! T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
+                    T_DOCUMENTS = documents.Take(documents.Length / 2),
+                    T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
                     L_ABBREVIATION = this.GetAbbreviations()
                 }
             };
@@ -192,7 +188,10 @@ namespace Gva.Api.WordTemplates
             };
         }
 
-        private object[] GetDocuments(string licenceTypeCode, IEnumerable<JObject> includedTrainings, IEnumerable<JObject> includedExams)
+        private object[] GetDocuments(
+            string licenceTypeCode,
+            IEnumerable<PersonTrainingDO> includedTrainings,
+            IEnumerable<PersonDocumentExamDO> includedExams)
         {
             string[] documentRoleCodes;
             bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceTypeCode, out documentRoleCodes);
@@ -203,35 +202,36 @@ namespace Gva.Api.WordTemplates
             }
 
             var trainings = includedTrainings
-                .Where(e => e.Get<string>("valid.code") == "Y")
+                .Where(e => e.Valid.Code == "Y")
                 .Select(t =>
                     new
                     {
                         DOC = new
                         {
-                            DOC_ROLE = t.Get<string>("documentRole.name"),
+                            DOC_ROLE = t.DocumentRole.Name,
                             SUB_DOC = new
                             {
-                                CLASS = t.Get<string>("documentType.name"),
-                                DOC_NO = t.Get<string>("documentNumber"),
-                                DATE = t.Get<DateTime>("documentDateValidFrom")
+                                CLASS = t.DocumentType.Name,
+                                DOC_NO = t.DocumentNumber,
+                                DATE = t.DocumentDateValidFrom
                             }
                         }
                     }).ToArray<dynamic>();
 
+            var examRole = this.nomRepository.GetNomValue("documentRoles", "exam");
             var exams = includedExams
-                .Where(e => e.Get<string>("valid.code") == "Y")
+                .Where(e => e.Valid != null && e.Valid.Code == "Y")
                 .Select(e =>
                     new
                     {
                         DOC = new
                         {
-                            DOC_ROLE = e.Get<string>("documentRole.name"),
+                            DOC_ROLE = examRole.Name,
                             SUB_DOC = new
                             {
-                                CLASS = e.Get<string>("documentType.name"),
-                                DOC_NO = e.Get<string>("documentNumber"),
-                                DATE = e.Get<DateTime>("documentDateValidFrom")
+                                CLASS = e.DocumentType.Name,
+                                DOC_NO = e.DocumentNumber,
+                                DATE = e.DocumentDateValidFrom
                             }
                         }
                     }).ToArray<dynamic>();

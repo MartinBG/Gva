@@ -9,6 +9,7 @@
     scMessage,
     Persons,
     PersonRatings,
+    PersonDocumentExams,
     PersonDocumentTrainings,
     PersonDocumentChecks,
     PersonDocumentMedicals,
@@ -21,6 +22,7 @@
     $q.all([
       Persons.get({ id: scFormParams.lotId }).$promise,
       PersonRatings.query({ id: scFormParams.lotId }).$promise,
+      PersonDocumentExams.query({ id: scFormParams.lotId }).$promise,
       PersonDocumentTrainings.query({ id: scFormParams.lotId }).$promise,
       PersonDocumentChecks.query({ id: scFormParams.lotId }).$promise,
       PersonDocumentMedicals.query({ id: scFormParams.lotId }).$promise,
@@ -28,10 +30,11 @@
     ]).then(function (results) {
       $scope.person = results[0];
       var ratings = results[1],
-          trainings = results[2],
-          checks = results[3],
-          medicals = results[4],
-          licences = results[5];
+          exams = results[2],
+          trainings = results[3],
+          checks = results[4],
+          medicals = results[5],
+          licences = results[6];
 
       var unbindWatcher = $scope.$watch('model', function () {
         if (!$scope.model) {
@@ -44,6 +47,14 @@
         });
         $scope.$watchCollection('includedRatings', function () {
           $scope.model.part.includedRatings = _.pluck($scope.includedRatings, 'partIndex');
+        });
+
+        $scope.model.part.includedExams = $scope.model.part.includedExams || [];
+        $scope.includedExams = _.map($scope.model.part.includedExams, function (ind) {
+          return _.find(exams, { partIndex: ind });
+        });
+        $scope.$watchCollection('includedExams', function () {
+          $scope.model.part.includedExams = _.pluck($scope.includedExams, 'partIndex');
         });
 
         $scope.model.part.includedTrainings = $scope.model.part.includedTrainings || [];
@@ -86,7 +97,7 @@
     if($scope.isNew && $scope.model.part.documentDateValidFrom === undefined){
       $scope.model.part.documentDateValidFrom = moment(new Date());
     }
-    
+
     $scope.addRating = function () {
       var modalInstance = scModal.open('newRating', {
         lotId: scFormParams.lotId,
@@ -118,6 +129,42 @@
         .then(function (result) {
           if (result === 'OK') {
             $scope.includedRatings = _.without($scope.includedRatings, rating);
+          }
+        });
+    };
+
+    $scope.addExam = function () {
+      var modalInstance = scModal.open('newExam', {
+        lotId: scFormParams.lotId,
+        caseTypeId: scFormParams.caseTypeId,
+        appId: scFormParams.appId
+      });
+
+      modalInstance.result.then(function (newExam) {
+        $scope.includedExams.push(newExam);
+      });
+
+      return modalInstance.opened;
+    };
+
+    $scope.addExistingExam = function () {
+      var modalInstance = scModal.open('chooseExams', {
+        includedExams: $scope.model.part.includedExams,
+        lotId: scFormParams.lotId
+      });
+
+      modalInstance.result.then(function (selectedExams) {
+        $scope.includedExams = $scope.includedExams.concat(selectedExams);
+      });
+
+      return modalInstance.opened;
+    };
+
+    $scope.removeExam = function (exam) {
+      return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            $scope.includedExams = _.without($scope.includedExams, exam);
           }
         });
     };
@@ -267,6 +314,7 @@
     'scMessage',
     'Persons',
     'PersonRatings',
+    'PersonDocumentExams',
     'PersonDocumentTrainings',
     'PersonDocumentChecks',
     'PersonDocumentMedicals',

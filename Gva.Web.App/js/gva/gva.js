@@ -510,6 +510,8 @@
     .modal('newRating'       , 'js/gva/persons/modals/ratings/newRatingModal.html'         , 'NewRatingModalCtrl'            )
     .modal('chooseMedicals'  , 'js/gva/persons/modals/medicals/chooseMedicalsModal.html'   , 'ChooseMedicalsModalCtrl'       )
     .modal('newMedical'      , 'js/gva/persons/modals/medicals/newMedicalModal.html'       , 'NewMedicalModalCtrl'           )
+    .modal('chooseExams'     , 'js/gva/persons/modals/exams/chooseExamsModal.html'         , 'ChooseExamsModalCtrl'          )
+    .modal('newExam'         , 'js/gva/persons/modals/exams/newExamModal.html'             , 'NewExamModalCtrl'              )
     .modal('chooseLicences'  , 'js/gva/persons/modals/licences/chooseLicencesModal.html'   , 'ChooseLicencesModalCtrl'       )
     .modal('editLicence'     , 'js/gva/persons/modals/licences/editLicenceModal.html'      , 'EditLicenceModalCtrl'          )
     .modal('licenceStatuses' , 'js/gva/persons/modals/licences/licenceStatusesModal.html'  , 'LicenceStatusesModalCtrl'      )

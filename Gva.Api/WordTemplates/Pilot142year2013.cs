@@ -5,8 +5,6 @@ using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Json;
 using Gva.Api.ModelsDO.Persons;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -156,8 +154,8 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonLicenceDO>("licences/" + i));
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
-            //TODO - includedExams! var includedExams = lastEdition.GetItems<int>("includedExams")
-            //TODO - includedExams!     .Select(i => lot.Index.GetPart("personDocumentExams/" + i).Content);
+            var includedExams = lastEdition.IncludedExams
+                .Select(i => lot.Index.GetPart<PersonDocumentExamDO>("personDocumentExams/" + i).Content);
 
             var inspectorId = lastEdition.Inspector == null ? (int?)null : lastEdition.Inspector.NomValueId;
             object[] instructorData = new object[0];
@@ -192,7 +190,7 @@ namespace Gva.Api.WordTemplates
             var otherLicences = this.GetOtherLicences(licenceCaCode, lot, lastEdition, includedLicences);
             var rtoRating = this.GetRtoRating(includedRatings);
             var engLevel = this.GetEngLevel(includedTrainings);
-            //TODO - includedExams! var limitations = this.GetLimitations(lastEdition, includedMedicals, includedExams);
+            var limitations = this.GetLimitations(lastEdition, includedMedicals, includedExams);
             var ratings = this.GetRaitings(includedRatings);
             var country = this.GetCountry(personAddress);
             var licenceNumber = string.Format(
@@ -216,7 +214,7 @@ namespace Gva.Api.WordTemplates
                     RTO_NOTES = rtoRating.Notes,
                     RTO_NOTES_EN = rtoRating.NotesAlt,
                     ENG_LEVEL = engLevel,
-                    //TODO - includedExams! LIMITS = limitations,
+                    LIMITS = limitations,
                     T_RATING = ratings,
                     INSTR_DATA = instructorData.Select(id => new { INSTRUCTOR = id }),
                     INSTRUCTOR_NO_ENTRIES = instrNoEntries,
@@ -235,7 +233,7 @@ namespace Gva.Api.WordTemplates
                     RTO_NOTES2 = rtoRating.Notes,
                     RTO_NOTES2_EN = rtoRating.NotesAlt,
                     ENG_LEVEL1 = engLevel,
-                    //TODO - includedExams! T_LIMITS = limitations,
+                    T_LIMITS = limitations,
                     EXAMINER_DATA1 = examinerData.Select(ed => new { EXAMINER1 = ed }),
                     EXAMINER1_NO_ENTRIES = examinerNoData,
                     L_ABBREVIATION = this.GetAbbreviations(licenceType.Code)
@@ -397,25 +395,24 @@ namespace Gva.Api.WordTemplates
         }
 
         private List<object> GetLimitations(
-            JObject edition,
-            IEnumerable<JObject> includedMedicals,
-            IEnumerable<JObject> includedExams)
+            PersonLicenceEditionDO edition,
+            IEnumerable<PersonMedicalDO> includedMedicals,
+            IEnumerable<PersonDocumentExamDO> includedExams)
         {
-            var limitations = edition.GetItems<NomValue>("limitations")
-                .Select(l => new { LIMIT_NAME = l.Name });
+            var limitations = edition.Limitations.Select(l => new { LIMIT_NAME = l.Name });
 
             limitations = limitations.Concat(includedMedicals
-                .SelectMany(m => m.GetItems<JObject>("limitations"))
-                .Select(l => new { LIMIT_NAME = l.Get<string>("name") }));
+                .SelectMany(m => m.Limitations)
+                .Select(l => new { LIMIT_NAME = l.Name }));
 
             limitations = limitations.Concat(includedExams
                 .Select(e => new
                 {
                     LIMIT_NAME = string.Format(
                         "{0} {1} {2}",
-                        e.Get<string>("documentNumber"),
-                        e.Get<string>("documentDateValidFrom"),
-                        e.Get<string>("documentDateValidTo"))
+                        e.DocumentNumber,
+                        e.DocumentDateValidFrom.Value.ToString("dd.MM.yyyy"),
+                        e.DocumentDateValidTo.HasValue ? e.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null).Trim()
                 }));
 
             return limitations.ToList<object>();

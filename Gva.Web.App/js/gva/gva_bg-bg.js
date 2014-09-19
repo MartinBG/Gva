@@ -1992,6 +1992,10 @@
           noRatings: 'Няма избрани квалификации',
           availableRatings: 'Налични квалификации',
           noAvailableRatings: 'Няма налични квалификации',
+          exams: 'Теоретични изпити към лиценза',
+          addExam: 'Нов изпит',
+          addExistingExam: 'Съществуващ изпит',
+          noExams: 'Няма избрани изпити',
           trainings: 'Обучения към лиценза',
           addTraining: 'Ново обучение',
           addExistingTraining: 'Съществуващо обучение',
@@ -2006,6 +2010,12 @@
             authorization: 'Разрешение (ограничения)',
             dateValidFrom: 'Издаден',
             dateValidTo: 'Валиден до'
+          },
+          examsTable: {
+            documentNumber: '№ на документа',
+            documentDateValidFrom: 'От дата',
+            documentPublisher: 'Издател',
+            valid: 'Валиден'
           },
           trainingsTable: {
             number: 'No',
@@ -2499,6 +2509,20 @@
         },
         newRatingModal: {
           title: 'Нова квалификация',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        chooseExamsModal: {
+          title: 'Избор на теоретичен изпит',
+          documentNumber: '№ на документа',
+          documentDateValidFrom: 'От дата',
+          documentPublisher: 'Издател',
+          valid: 'Валиден',
+          add: 'Добави',
+          cancel: 'Отказ'
+        },
+        newExamModal: {
+          title: 'Нов теоретичен изпит',
           save: 'Запис',
           cancel: 'Отказ'
         },

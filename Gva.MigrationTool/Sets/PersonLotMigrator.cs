@@ -194,6 +194,7 @@ namespace Gva.MigrationTool.Sets
                                 checkOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
                             }
                             else if (!(new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
+                              personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") != "6" &&
                               personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O")
                             {
                                 Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
@@ -230,7 +231,7 @@ namespace Gva.MigrationTool.Sets
                                 var pv = addPartWithFiles("personDocumentTrainings/*", personDocument);
                                 trainingOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
                             }
-                            else if (personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE") == "2" &&
+                            else if (personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O" &&
                               personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "6")
                             {
                                 Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
@@ -243,7 +244,6 @@ namespace Gva.MigrationTool.Sets
                                 "documentDateValidFrom",
                                 "documentDateValidTo",
                                 "documentType",
-                                "documentRole",
                                 "documentPublisher",
                                 "notes"
                             });
@@ -1253,6 +1253,7 @@ namespace Gva.MigrationTool.Sets
                 {
                     LICENCE_LOG_ID = r.LICENCE_LOG_ID,
                     PERSON_DOCUMENT_ID = r.PERSON_DOCUMENT_ID,
+                    examPartIndex = (r.PERSON_DOCUMENT_ID != null && exams.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? exams[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
                     trainingPartIndex = (r.PERSON_DOCUMENT_ID != null && trainings.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? trainings[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
                     checkPartIndex = (r.PERSON_DOCUMENT_ID != null && checks.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? checks[r.PERSON_DOCUMENT_ID.Value] : (int?)null
                 });
@@ -1265,6 +1266,10 @@ namespace Gva.MigrationTool.Sets
             var includedTrainings = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
                 .ToDictionary(g => g.Key, g => g.Where(r => r.trainingPartIndex != null).Select(r => r.trainingPartIndex.Value).ToArray());
+
+            var includedExams = includedDocuments
+                .GroupBy(r => r.LICENCE_LOG_ID)
+                .ToDictionary(g => g.Key, g => g.Where(r => r.examPartIndex != null).Select(r => r.examPartIndex.Value).ToArray());
 
             var includedChecks = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
@@ -1352,6 +1357,7 @@ namespace Gva.MigrationTool.Sets
                         includedTrainings = includedTrainings[r.Field<int>("ID")],
                         includedLicences = includedLicences[r.Field<int>("ID")],
                         includedChecks = includedChecks[r.Field<int>("ID")],
+                        includedExams = includedExams[r.Field<int>("ID")],
 
                         amlLimitations = new
                         {

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Json;
 using Gva.Api.ModelsDO.Persons;
-using Newtonsoft.Json.Linq;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.WordTemplates
@@ -66,8 +63,8 @@ namespace Gva.Api.WordTemplates
 
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
-            //TODO - includedExams! var includedExams = lastEdition.GetItems<int>("includedExams")
-            //TODO - includedExams!     .Select(i => lot.Index.GetPart("personDocumentExams/" + i).Content);
+            var includedExams = lastEdition.IncludedExams
+                .Select(i => lot.Index.GetPart<PersonDocumentExamDO>("personDocumentExams/" + i).Content);
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
@@ -81,7 +78,7 @@ namespace Gva.Api.WordTemplates
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
-            //TODO - includedExams! var documents = this.GetDocuments(includedTrainings, includedExams, licenceType.Code);
+            var documents = this.GetDocuments(includedTrainings, includedExams, licenceType.Code);
             var ratings = this.GetRatings(includedRatings);
 
             var json = new
@@ -104,8 +101,8 @@ namespace Gva.Api.WordTemplates
                     T_VALID_DATE = lastEdition.DocumentDateValidTo,
                     T_ACTION = lastEdition.LicenceAction.Name.ToUpper(),
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    //TODO - includedExams! T_DOCUMENTS = documents.Take(documents.Length / 2),
-                    //TODO - includedExams! T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
+                    T_DOCUMENTS = documents.Take(documents.Length / 2),
+                    T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
                     MED_CERT = this.GetMedCerts(licenceType.Code, includedMedicals, personData),
                     T_RATING = ratings,
                     L_RATING2 = ratings,
@@ -186,8 +183,8 @@ namespace Gva.Api.WordTemplates
             return result.OrderBy(p => p.NO).ToList<object>();
         }
         private object[] GetDocuments(
-            IEnumerable<JObject> includedTrainings,
-            IEnumerable<JObject> includedExams,
+            IEnumerable<PersonTrainingDO> includedTrainings,
+            IEnumerable<PersonDocumentExamDO> includedExams,
             string licenceTypeCode)
         {
             string[] documentRoleCodes;
@@ -198,44 +195,46 @@ namespace Gva.Api.WordTemplates
                 return new object[0];
             }
 
-            var trainings = includedTrainings
-                .Where(t => documentRoleCodes.Contains(t.Get<string>("documentRole.code")))
+            var docs = includedTrainings
+                .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code))
                 .Select(t =>
                     new
                     {
                         DOC = new
                         {
-                            DOC_ROLE = t.Get<string>("documentRole.name"),
+                            DOC_ROLE = t.DocumentRole.Name,
                             SUB_DOC = new
                             {
-                                CLASS = t.Get<string>("documentType.name"),
-                                DOC_NO = t.Get<string>("documentNumber"),
-                                DATE = t.Get<DateTime>("documentDateValidFrom")
+                                CLASS = t.DocumentType.Name,
+                                DOC_NO = t.DocumentNumber,
+                                DATE = t.DocumentDateValidFrom
                             }
                         }
                     }).ToArray<dynamic>();
 
-            var exams = includedExams
-                .Where(e => documentRoleCodes.Contains(e.Get<string>("documentRole.code")))
-                .Select(e =>
-                    new
-                    {
-                        DOC = new
+            var examRole = this.nomRepository.GetNomValue("documentRoles", "exam");
+            if (documentRoleCodes.Contains(examRole.Code))
+            {
+                var exams = includedExams
+                    .Select(e =>
+                        new
                         {
-                            DOC_ROLE = e.Get<string>("documentRole.name"),
-                            SUB_DOC = new
+                            DOC = new
                             {
-                                CLASS = e.Get<string>("documentType.name"),
-                                DOC_NO = e.Get<string>("documentNumber"),
-                                DATE = e.Get<DateTime>("documentDateValidFrom")
+                                DOC_ROLE = examRole.Name,
+                                SUB_DOC = new
+                                {
+                                    CLASS = e.DocumentType.Name,
+                                    DOC_NO = e.DocumentNumber,
+                                    DATE = e.DocumentDateValidFrom
+                                }
                             }
-                        }
-                    }).ToArray<dynamic>();
+                        }).ToArray<dynamic>();
 
-            return trainings
-                .Union(exams)
-                .OrderBy(d => d.DOC.SUB_DOC.DATE)
-                .ToArray<object>();
+                docs = docs.Union(exams).ToArray<dynamic>();
+            }
+
+            return docs.OrderBy(d => d.DOC.SUB_DOC.DATE).ToArray<object>();
         }
 
         private object[] GetMedCerts(string licenceTypeCode, IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
