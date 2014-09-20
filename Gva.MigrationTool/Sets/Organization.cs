@@ -98,7 +98,7 @@ namespace Gva.MigrationTool.Sets
             var ids = this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.FIRM")
                 .Materialize(r => r.Field<int>("ID"));
 
-            if (Migration.IsPartial)
+            if (Migration.IsPartialMigration)
             {
                 ids = ids
                     .Where(id => new int[] { 203, 206, 317, 367, 447, 467, 561, 563, 565, 567, 568, 742, 807, 833, 1432 }.Contains(id));

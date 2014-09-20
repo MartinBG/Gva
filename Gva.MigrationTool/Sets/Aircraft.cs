@@ -137,7 +137,7 @@ namespace Gva.MigrationTool.Sets
             var ids = this.sqlConn.CreateStoreCommand("select n_Act_ID from Acts")
                 .Materialize(r => r.Field<string>("n_Act_ID"));
 
-            if (Migration.IsPartial)
+            if (Migration.IsPartialMigration)
             {
                 ids = ids
                     .Where(id =>
@@ -154,7 +154,7 @@ namespace Gva.MigrationTool.Sets
             var ids = this.oracleConn.CreateStoreCommand("SELECT ID FROM CAA_DOC.AIRCRAFT")
                 .Materialize(r => r.Field<int>("ID"));
 
-            if (Migration.IsPartial)
+            if (Migration.IsPartialMigration)
             {
                 ids = ids
                     .Where(id =>

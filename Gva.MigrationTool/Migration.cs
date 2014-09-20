@@ -25,15 +25,15 @@ namespace Gva.MigrationTool
 {
     class Migration
     {
-        public static object syncRoot = new object();
+        public static object isPartialSyncRoot = new object();
         public static bool? isPartial = null;
-        public static bool IsPartial
+        public static bool IsPartialMigration
         {
             get
             {
                 if (isPartial == null)
                 {
-                    lock (syncRoot)
+                    lock (isPartialSyncRoot)
                     {
                         if (isPartial == null)
                         {

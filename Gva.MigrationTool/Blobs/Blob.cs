@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -41,7 +42,13 @@ namespace Gva.MigrationTool.Blobs
 
             Dictionary<int, string> blobIdsToFileKeys;
 
-            if (Migration.IsPartial)
+            bool isFakeBlobMigration;
+            if (!bool.TryParse(ConfigurationManager.AppSettings["FakeBlobMigration"], out isFakeBlobMigration))
+            {
+                isFakeBlobMigration = false;
+            }
+
+            if (isFakeBlobMigration)
             {
                 blobIdsToFileKeys = ids.ToDictionary(id => id, id => DUMMY_FILE_KEY);
             }

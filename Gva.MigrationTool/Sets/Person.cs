@@ -99,7 +99,7 @@ namespace Gva.MigrationTool.Sets
                 .OrderByDescending(r => r)
                 .AsEnumerable();
 
-            if (Migration.IsPartial)
+            if (Migration.IsPartialMigration)
             {
                 ids = ids
                     //.Take(1000)
