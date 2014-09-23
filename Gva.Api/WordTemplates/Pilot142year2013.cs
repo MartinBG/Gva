@@ -344,14 +344,14 @@ namespace Gva.Api.WordTemplates
         private PersonRatingEditionDO GetRtoRating(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             var rtoRatingPart = includedRatings.FirstOrDefault(r => r.Content.Authorization != null && r.Content.Authorization.Code == "RTO");
-            PartVersion<PersonRatingEditionDO> rtoRatingEd = new PartVersion<PersonRatingEditionDO>();
+            PersonRatingEditionDO rtoRatingEd = new PersonRatingEditionDO();
 
             if (rtoRatingPart != null)
             {
-                rtoRatingEd = ratingEditions.Where(e => e.Content.RatingPartIndex == rtoRatingPart.Part.Index).OrderBy(e => e.Content.Index).Last();
+                rtoRatingEd = ratingEditions.Where(e => e.Content.RatingPartIndex == rtoRatingPart.Part.Index).OrderBy(e => e.Content.Index).Last().Content;
             }
 
-            return rtoRatingEd.Content;
+            return rtoRatingEd;
         }
 
         private object GetEngLevel(IEnumerable<PersonTrainingDO> includedTrainings)

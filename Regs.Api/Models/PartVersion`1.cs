@@ -8,10 +8,6 @@ namespace Regs.Api.Models
     {
         private PartVersion wrapped;
 
-        public PartVersion()
-        {
-        }
-
         public PartVersion(PartVersion partVersion)
         {
             this.wrapped = partVersion;
