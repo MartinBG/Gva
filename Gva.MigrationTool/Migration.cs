@@ -69,7 +69,7 @@ namespace Gva.MigrationTool
                 var unitOfWork = new UnitOfWork(c.Resolve<IEnumerable<IDbConfiguration>>(), c.Resolve<IEnumerable<IDbContextInitializer>>());
                 unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
                 return unitOfWork;
-            });
+            }).As<IUnitOfWork>().InstancePerLifetimeScope();
 
             return builder;
         }

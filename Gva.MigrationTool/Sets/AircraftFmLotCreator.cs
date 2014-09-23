@@ -40,6 +40,7 @@ namespace Gva.MigrationTool.Sets
             Dictionary<string, int> apexMSNtoLotId,
             //intput
             ConcurrentQueue<string> aircraftFmIds,
+            ConcurrentDictionary<string, int> unusedMSNs,
             //output
             ConcurrentDictionary<string, int> fmIdtoLotId,
             ConcurrentDictionary<int, JObject> aircraftLotIdToAircraftNom,
@@ -78,7 +79,16 @@ namespace Gva.MigrationTool.Sets
                         Lot lot;
                         if (apexMSNtoLotId.ContainsKey(msn))
                         {
-                            lot = lotRepository.GetLotIndex(apexMSNtoLotId[msn], fullAccess: true);
+                            int dummy;
+                            if (unusedMSNs.TryRemove(msn, out dummy))
+                            {
+                                lot = lotRepository.GetLotIndex(apexMSNtoLotId[msn], fullAccess: true);
+                            }
+                            else
+                            {
+                                Console.WriteLine("DUPLICATE MSN - AIRCRAFT WITH MSN {0} IN FM HAS ALREADY BEEN MIGRATED", msn);//TODO
+                                continue;
+                            }
                         }
                         else
                         {
@@ -86,12 +96,6 @@ namespace Gva.MigrationTool.Sets
                             lot = lotRepository.CreateLot("Aircraft");
                             int aircraftCaseTypeId = caseTypeRepository.GetCaseTypesForSet("Aircraft").Single().GvaCaseTypeId;
                             caseTypeRepository.AddCaseTypes(lot, new int[] { aircraftCaseTypeId });
-                        }
-
-                        if (lot.Index.GetPart<AircraftDataDO>("aircraftData") != null)
-                        {
-                            Console.WriteLine("AIRCRAFT WITH MSN {0} IN FM HAS ALREADY BEEN MIGRATED", msn);//TODO
-                            continue;
                         }
 
                         lot.CreatePart("aircraftData", aircraftDataFM, context);

@@ -1488,7 +1488,7 @@ namespace Gva.MigrationTool.Sets
 
                         changeDate = r.Field<DateTime>("CHANGE_DATE"),
                         changeReason = noms["licenceChangeReasons"].ByOldId(r.Field<decimal>("CHANGE_REASON_ID").ToString()),
-                        valid = noms["boolean"].ByCode(r.Field<string>("CHANGE_TO_VALID_YN")),
+                        valid = noms["boolean"].ByCode(r.Field<string>("CHANGE_TO_VALID_YN") == "Y" ? "Y" : "N"),
                         notes = r.Field<string>("NOTES"),
                         inspector = getPersonByApexId((int?)r.Field<decimal?>("EXAMINER_ID"))
                     })
@@ -1558,7 +1558,13 @@ namespace Gva.MigrationTool.Sets
                 { "No, Electr. RADIO", "No:Radio" },
                 { "No, Electr, AVC(FAD)", "No:Electr:AVC(FAD)" },
                 { "Limited to,  Composite structure aeroplanes", "Limited to: Composite structure aeroplanes" },
-                { "Limited to,  Metal structure aeroplanes", "Limited to: Metal structure aeroplanes" }
+                { "Limited to,  Metal structure aeroplanes", "Limited to: Metal structure aeroplanes" },
+                { "Group 3,  Piston-engine airplanes-Limited to,  Metal Aeroplanes", "Group 3: Piston-engine airplanes-Limited to: Metal Aeroplanes" },
+                { "Piston-engine airplanes-Limited to,  Metal Aeroplanes", "Group 3: Piston-engine airplanes-Limited to: Metal Aeroplanes" },
+                { "Limited to,  Metal aeroplanes", "Limited to: Metal aeroplanes" },
+                { "Limited to,  Metal and Composite structure aeroplanes", "Limited to: Metal and Composite structure aeroplanes" },
+                { "Limited to,  Composite aeroplanes", "Limited to: Composite aeroplanes" },
+                { "Limited to,  Metal tubing and fabric aeroplanes", "Limited to: Metal tubing and fabric aeroplanes" }
             };
 
             Dictionary<string, string> postSplitLimFixups = new Dictionary<string, string>

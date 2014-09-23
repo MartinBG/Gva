@@ -65,6 +65,8 @@ namespace Gva.MigrationTool.Sets
                 .Wait();
 
             ConcurrentQueue<string> aircraftFmIds = new ConcurrentQueue<string>(this.getAircraftFmIds());
+            ConcurrentDictionary<string, int> unusedMSNs =
+                new ConcurrentDictionary<string, int>(apexMSNtoLotId.ToDictionary(kvp => kvp.Key, kvp => 0));//using the keys only, as there is no ConcurrentSet
 
             Utils.RunParallel("ParallelMigrations", ct,
                 () => this.aircraftFmLotCreatorFactory().Value,
@@ -72,7 +74,7 @@ namespace Gva.MigrationTool.Sets
                 {
                     using (aircraftFmLotCreator)
                     {
-                        aircraftFmLotCreator.StartCreating(noms, apexMSNtoLotId.ToDictionary(kvp => kvp.Key, kvp => kvp.Value), aircraftFmIds, fmIdtoLotId, aircraftLotIdToAircraftNom, cts, ct);
+                        aircraftFmLotCreator.StartCreating(noms, apexMSNtoLotId.ToDictionary(kvp => kvp.Key, kvp => kvp.Value), aircraftFmIds, unusedMSNs, fmIdtoLotId, aircraftLotIdToAircraftNom, cts, ct);
                     }
                 })
                 .Wait();

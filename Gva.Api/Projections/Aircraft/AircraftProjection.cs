@@ -42,8 +42,8 @@ namespace Gva.Api.Projections.Aircraft
             aircraft.ModelAlt = aircraftData.Content.ModelAlt;
             aircraft.OutputDate = aircraftData.Content.OutputDate;
             aircraft.ICAO = aircraftData.Content.ICAO;
-            aircraft.AirCategoryId = aircraftData.Content.AirCategory.NomValueId;
-            aircraft.AircraftProducerId = aircraftData.Content.AircraftProducer.NomValueId;
+            aircraft.AirCategoryId = aircraftData.Content.AirCategory == null ? (int?)null : aircraftData.Content.AirCategory.NomValueId;
+            aircraft.AircraftProducerId = aircraftData.Content.AircraftProducer == null ? (int?)null : aircraftData.Content.AircraftProducer.NomValueId;
             aircraft.Engine = aircraftData.Content.Engine;
             aircraft.Propeller = aircraftData.Content.Propeller;
             aircraft.ModifOrWingColor = aircraftData.Content.ModifOrWingColor;

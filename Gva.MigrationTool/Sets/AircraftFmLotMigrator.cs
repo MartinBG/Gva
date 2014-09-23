@@ -334,8 +334,8 @@ namespace Gva.MigrationTool.Sets
                         removal = new
                         {
                             date = Utils.FmToDate(r.Field<string>("dDeRegDate")),
-                            reason = r.Field<string>("tDeDocOther"),
-                            text = r.Field<string>("tRemarkDeReg"),
+                            reason = noms["aircraftRemovalReasonsFm"].ByAlias("migration"),
+                            text = (r.Field<string>("tDeDocOther") + "\n\n" + r.Field<string>("tRemarkDeReg")).Trim(),
                             documentNumber = r.Field<string>("tDeDocCAA"),
                             documentDate = Utils.FmToDate(r.Field<string>("dDeDateCAA")),
                             inspector = getInspector(r.Field<string>("tDeUser"))

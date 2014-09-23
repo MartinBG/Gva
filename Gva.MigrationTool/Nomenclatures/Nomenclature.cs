@@ -183,6 +183,11 @@ namespace Gva.MigrationTool.Nomenclatures
 
             using (var dependencies = dependencyFactory())
             {
+                noms["aircraftRemovalReasonsFm"] = dependencies.Value.Item2.GetNomValues("aircraftRemovalReasonsFm").ToDictionary(n => Guid.NewGuid().ToString());
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
                 migrateGenders(dependencies.Value.Item2, oracleConn);
                 dependencies.Value.Item1.Save();
             }
@@ -3328,6 +3333,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "RO"  , new Tuple<string,string>("Rotorcraft"                              , "Rotorcraft"                              )},
                 { "SA"  , new Tuple<string,string>("Small Aeroplane"                         , "Small Aeroplane"                         )},
                 { "SR"  , new Tuple<string,string>("Small Rotorcraft"                        , "Small Rotorcraft"                        )},
+                { "VL"  , new Tuple<string,string>("Very Light"                              , "Very Light"                              )},
                 { "VLA" , new Tuple<string,string>("Very Light Aeroplane"                    , "Very Light Aeroplane"                    )},
                 { "VLR" , new Tuple<string,string>("Very Light Rotorcraft"                   , "Very Light Rotorcraft"                   )}
             };
