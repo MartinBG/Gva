@@ -47,5 +47,7 @@ namespace Gva.Api.ModelsDO.Airports
         public List<DisparityDO> Disparities { get; set; }
 
         public List<NomValue> Examiners { get; set; }
+
+        public FileDataDO ControlCard { get; set; }
     }
 }

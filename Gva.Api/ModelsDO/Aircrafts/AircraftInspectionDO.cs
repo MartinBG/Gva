@@ -52,5 +52,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public DateTime? InspectionFrom { get; set; }
 
         public DateTime? InspectionTo { get; set; }
+
+        public FileDataDO ControlCard { get; set; }
     }
 }

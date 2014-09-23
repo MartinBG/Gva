@@ -50,5 +50,7 @@ namespace Gva.Api.ModelsDO.Organizations
 
         //OrganizationInspection specific fields
         public NomValue CaseType { get; set; }
+
+        public FileDataDO ControlCard { get; set; }
     }
 }

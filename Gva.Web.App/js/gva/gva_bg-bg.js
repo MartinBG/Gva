@@ -124,7 +124,8 @@
           caseType: 'Дело',
           inspectionPlace: 'Адрес на одитирания обект',
           startDate: 'Начална дата',
-          endDate: 'Крайна дата'
+          endDate: 'Крайна дата',
+          controlCard: 'Контролна карта'
         }
       },
       airports: {
