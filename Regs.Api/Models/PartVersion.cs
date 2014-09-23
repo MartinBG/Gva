@@ -14,31 +14,17 @@ namespace Regs.Api.Models
         public PartVersion()
         { }
 
-        public PartVersion(PartVersion pv)
-        {
-            this.PartVersionId = pv.PartVersionId;
-            this.PartId = pv.PartId;
-            this.Part = pv.Part;
-            this.TextContent = pv.TextContent;
-            this.OriginalCommitId = pv.OriginalCommitId;
-            this.OriginalCommit = pv.OriginalCommit;
-            this.CreatorId = pv.CreatorId;
-            this.Creator = pv.Creator;
-            this.CreateDate = pv.CreateDate;
-            this.PartOperation = pv.PartOperation;
-        }
+        public virtual int PartVersionId { get; set; }
 
-        public int PartVersionId { get; set; }
+        public virtual int PartId { get; set; }
 
-        public int PartId { get; set; }
+        public virtual string TextContent { get; set; }
 
-        public string TextContent { get; set; }
+        public virtual int OriginalCommitId { get; set; }
 
-        public int OriginalCommitId { get; set; }
+        public virtual int CreatorId { get; set; }
 
-        public int CreatorId { get; set; }
-
-        public DateTime CreateDate { get; set; }
+        public virtual DateTime CreateDate { get; set; }
 
         public virtual Commit OriginalCommit { get; set; }
 
