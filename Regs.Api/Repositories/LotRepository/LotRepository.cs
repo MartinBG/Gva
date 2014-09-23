@@ -160,12 +160,17 @@ namespace Regs.Api.Repositories.LotRepositories
             return commit;
         }
 
-        public void ExecSpSetLotPartTokens(int? lotPartId = null)
+        public void ExecSpSetLotPartTokens(int lotPartId)
         {
             var parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("LotPartId", Helper.CastToSqlDbValue(lotPartId)));
 
             this.unitOfWork.DbContext.Database.ExecuteSqlCommand("spSetLotPartTokens @LotPartId", parameters.ToArray());
+        }
+
+        public void ExecSpRebuildLotPartTokens()
+        {
+            this.unitOfWork.DbContext.Database.ExecuteSqlCommand("spRebuildLotPartTokens");
         }
 
         private void LoadParts(Lot lot, bool fullAccess)

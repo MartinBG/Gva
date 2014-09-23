@@ -301,7 +301,7 @@ namespace Gva.MigrationTool
                 var lotRepository = scope.Resolve<ILotRepository>();
                 var unitOfWork = scope.Resolve<IUnitOfWork>();
                 ((IObjectContextAdapter)unitOfWork.DbContext).ObjectContext.CommandTimeout = 0;//wait indefinitely
-                lotRepository.ExecSpSetLotPartTokens();
+                lotRepository.ExecSpRebuildLotPartTokens();
                 rebuildTimer.Stop();
                 Console.WriteLine("Rebuilding lot part tokens time - {0}", rebuildTimer.Elapsed.TotalMinutes);
 

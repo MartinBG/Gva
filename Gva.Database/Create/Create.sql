@@ -41,6 +41,7 @@ GO
 ---------------------------------------------------------------
 
 :r $(rootPath)\"Procedures\spSetLotPartTokens.sql"
+:r $(rootPath)\"Procedures\spRebuildLotPartTokens.sql"
 
 ---------------------------------------------------------------
 -- Diagram

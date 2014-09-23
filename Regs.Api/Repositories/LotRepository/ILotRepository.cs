@@ -19,6 +19,8 @@ namespace Regs.Api.Repositories.LotRepositories
 
         Commit LoadCommit(Lot lot, int? commitId, bool fullAccess = false);
 
-        void ExecSpSetLotPartTokens(int? lotPartId = null);
+        void ExecSpSetLotPartTokens(int lotPartId);
+
+        void ExecSpRebuildLotPartTokens();
     }
 }

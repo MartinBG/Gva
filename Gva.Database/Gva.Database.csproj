@@ -46,6 +46,7 @@
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\GvaViews.sql" />
     <Content Include="Create\Diagram\Gva.sql" />
+    <Content Include="Create\Procedures\spRebuildLotPartTokens.sql" />
     <Content Include="Create\Procedures\spSetLotPartTokens.sql" />
     <Content Include="Create\Tables\ASExamVariants.sql" />
     <Content Include="Create\Tables\ASExamQuestions.sql" />
