@@ -2,29 +2,23 @@
   <sc-button name="createBtn" btn-sref="{state: 'root.persons.view.ratings.new'}" text="persons.ratingSearch.newRating" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
   <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="viewBtn" btn-sref="{state: 'root.persons.view.ratings.edit', params: {ind: item.partIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="viewBtn" btn-sref="{state: 'root.persons.view.ratings.view.editions.edit', params: {ind: item.partIndex, index: item.editionPartIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-    <sc-column data="part.personRatingLevel.name || part.ratingType.name" title="persons.ratingSearch.ratingTypeOrRatingLevel">
+    <sc-column data="personRatingLevel.name || ratingType.name" title="persons.ratingSearch.ratingTypeOrRatingLevel">
     </sc-column>
-    <sc-column data="part.aircraftTypeGroup.name ||
-                     ((part.ratingClass.name || '') +
-                     (((part.editions | last).ratingSubClasses &&
-                        ' (' + ((part.editions | last).ratingSubClasses | pluck:'name' | join:', ') + ')') || ''))"
-               title="persons.ratingSearch.classOrCategory">
+    <sc-column data="aircraftTypeGroup.name || ((ratingClass.name || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : ''))" title="persons.ratingSearch.classOrCategory">
     </sc-column>
-    <sc-column data="(part.authorization.name || '') + ' ' +
-                    ((part.editions | last).limitations | pluck:'name' | join:', ')"
-               title="persons.ratingSearch.authorizationAndLimitations">
+    <sc-column data="((authorization && authorization.name) || '') + ' ' + (limitations || '')" title="persons.ratingSearch.authorizationAndLimitations">
     </sc-column>
-    <sc-column data="(part.editions | last).documentDateValidFrom" title="persons.ratingSearch.lastEditionValidFrom" type="date">
+    <sc-column data="lastDocDateValidFrom" title="persons.ratingSearch.lastEditionValidFrom" type="date">
     </sc-column>
-    <sc-column data="(part.editions | last).documentDateValidTo" title="persons.ratingSearch.lastEditionValidTo" type="date">
+    <sc-column data="lastDocDateValidTo" title="persons.ratingSearch.lastEditionValidTo" type="date">
     </sc-column>
-    <sc-column data="(part.editions | first).documentDateValidFrom" title="persons.ratingSearch.firstEditionValidFrom" type="date">
+    <sc-column data="firstDocDateValidFrom" title="persons.ratingSearch.firstEditionValidFrom" type="date">
     </sc-column>
-    <sc-column data="(part.editions | last).notes" title="persons.ratingSearch.lastEditionNotes">
+    <sc-column data="notes" title="persons.ratingSearch.lastEditionNotes">
     </sc-column>
-    <sc-column data="(part.editions | last).notesAlt" title="persons.ratingSearch.lastEditionNotesAlt">
+    <sc-column data="notesAlt" title="persons.ratingSearch.lastEditionNotesAlt">
     </sc-column>
   </sc-datatable>
 </div>

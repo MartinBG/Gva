@@ -27,7 +27,5 @@ namespace Gva.Api.ModelsDO.Persons
         public NomValue AircraftTypeCategory { get; set; }
 
         public NomValue Caa { get; set; }
-
-        public PersonRatingEditionDO[] Editions { get; set; }
     }
 }

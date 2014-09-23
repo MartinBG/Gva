@@ -5,6 +5,7 @@ using Common.Api.Repositories.NomRepository;
 using Common.Json;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
+using Regs.Api.Models;
 
 namespace Gva.Api.WordTemplates
 {
@@ -97,7 +98,8 @@ namespace Gva.Api.WordTemplates
             var lastEdition = editions.Last();
 
             var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i));
+            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedMedicals = lastEdition.IncludedMedicals
@@ -120,7 +122,7 @@ namespace Gva.Api.WordTemplates
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings);
             var langLevel = this.GetEngLevel(includedTrainings);
-            var endorsements2 = this.GetEndorsements2(includedRatings);
+            var endorsements2 = this.GetEndorsements2(includedRatings, ratingEditions);
             var abbreviations = this.GetAbbreviations(licenceType.Code);
 
             var json = new
@@ -153,8 +155,8 @@ namespace Gva.Api.WordTemplates
                     NATIONALITY = nationality.Name,
                     NATIONALITY_EN = nationality.TextContent.Get<string>("nationalityCodeCA"),
                     L_LICENCE_PRIV = this.GetLicencePrivileges(licenceType.Code),
-                    L_RATINGS = this.GetRatings(includedRatings),
-                    ENDORSEMENT = this.GetEndorsements(includedRatings),
+                    L_RATINGS = this.GetRatings(includedRatings, ratingEditions),
+                    ENDORSEMENT = this.GetEndorsements(includedRatings, ratingEditions),
                     L_LANG_LEVEL = langLevel,
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
@@ -203,20 +205,20 @@ namespace Gva.Api.WordTemplates
             return new object[0].ToList();
         }
 
-        private List<object> GetRatings(IEnumerable<PersonRatingDO> includedRatings)
+        private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
-            var result =  includedRatings
-                .Where(r => r.RatingClass != null || r.RatingType != null)
+            var result = includedRatings
+                .Where(r => r.Content.RatingClass != null || r.Content.RatingType != null)
                 .GroupBy(r => string.Format(
                     "{0} {1}",
-                    r.RatingClass == null ? string.Empty : r.RatingClass.Name,
-                    r.RatingType == null ? string.Empty : r.RatingType.Name).Trim())
+                    r.Content.RatingClass == null ? string.Empty : r.Content.RatingClass.Name,
+                    r.Content.RatingType == null ? string.Empty : r.Content.RatingType.Name).Trim())
                 .Select(g =>
                 {
                     return new
                     {
                         NAME = g.Key,
-                        DATE = g.Min(r => r.Editions.Last().DocumentDateValidFrom)
+                        DATE = g.Min(r => ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidFrom)
                     };
                 }).ToList<object>();
 
@@ -224,17 +226,17 @@ namespace Gva.Api.WordTemplates
             return result;
         }
 
-        private List<object> GetEndorsements(IEnumerable<PersonRatingDO> includedRatings)
+        private List<object> GetEndorsements(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
-            var result =  includedRatings
-                .Where(r => r.Authorization != null)
-                .GroupBy(r => r.Authorization.Name)
+            var result = includedRatings
+                .Where(r => r.Content.Authorization != null)
+                .GroupBy(r => r.Content.Authorization.Name)
                 .Select(g =>
                 {
                     return new
                     {
                         NAME = g.Key,
-                        DATE = g.Min(r => r.Editions.Last().DocumentDateValidFrom)
+                        DATE = g.Min(r => ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidFrom)
                     };
                 }).ToList<object>();
 
@@ -242,22 +244,22 @@ namespace Gva.Api.WordTemplates
             return result;
         }
 
-        private List<object> GetEndorsements2(IEnumerable<PersonRatingDO> includedRatings)
+        private List<object> GetEndorsements2(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
-            var result =  includedRatings
-                .Where(r => r.StaffType.Alias == "ovd")
+            var result = includedRatings
+                .Where(r => r.Content.StaffType.Alias == "ovd")
                 .Select(r =>
                 {
                     {
-                        PersonRatingEditionDO lastEdition = r.Editions.Last();
-                        var ratingType = r.RatingType == null ? null : r.RatingType.Name;
-                        var ratingClass = r.RatingClass == null ? null : r.RatingClass.Name;
-                        var authorization = r.Authorization == null ? null : r.Authorization.Name;
+                        var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
+                        var ratingType = r.Content.RatingType == null ? null : r.Content.RatingType.Name;
+                        var ratingClass = r.Content.RatingClass == null ? null : r.Content.RatingClass.Name;
+                        var authorization = r.Content.Authorization == null ? null : r.Content.Authorization.Name;
 
                         return new
                         {
-                            ICAO = r.LocationIndicator == null ? null : r.LocationIndicator.Name,
-                            SECTOR = r.Sector,
+                            ICAO = r.Content.LocationIndicator == null ? null : r.Content.LocationIndicator.Name,
+                            SECTOR = r.Content.Sector,
                             AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingType) ?
                                 authorization :
                                 string.Format(
@@ -265,8 +267,8 @@ namespace Gva.Api.WordTemplates
                                     ratingType,
                                     ratingClass,
                                     string.IsNullOrEmpty(authorization) ? string.Empty : " - " + authorization).Trim(),
-                            ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                            VALID_DATE = lastEdition.DocumentDateValidTo
+                            ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
+                            VALID_DATE = lastEdition.Content.DocumentDateValidTo
                         };
                     }
                 }).ToList<object>();

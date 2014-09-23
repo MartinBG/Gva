@@ -4,6 +4,7 @@ using Common.Api.Repositories.NomRepository;
 using Common.Json;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
+using Regs.Api.Models;
 
 namespace Gva.Api.WordTemplates
 {
@@ -42,11 +43,12 @@ namespace Gva.Api.WordTemplates
                 .Content;
 
             var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i));
+            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
 
-            var ratings = this.GetRatings(includedRatings);
+            var ratings = this.GetRatings(includedRatings, ratingEditions);
             var placeOfBirth = personData.PlaceOfBirth;
             var country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
             var nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
@@ -105,15 +107,16 @@ namespace Gva.Api.WordTemplates
             return json;
         }
 
-        private List<object> GetRatings(IEnumerable<PersonRatingDO> includedRatings)
+
+        private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             var result =  includedRatings
                 .Select(r =>
                 {
-                    PersonRatingEditionDO lastEdition = r.Editions.Last();
-                    var ratingTypeName = r.RatingType == null ? null : r.RatingType.Name;
-                    var ratingClassName = r.RatingClass == null ? null : r.RatingClass.Name;
-                    var authorizationName = r.Authorization == null ? null : r.Authorization.Name;
+                    var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
+                    var ratingTypeName = r.Content.RatingType == null ? null : r.Content.RatingType.Name;
+                    var ratingClassName = r.Content.RatingClass == null ? null : r.Content.RatingClass.Name;
+                    var authorizationName = r.Content.Authorization == null ? null : r.Content.Authorization.Name;
 
                     return new
                     {
@@ -124,8 +127,8 @@ namespace Gva.Api.WordTemplates
                                 ratingTypeName,
                                 ratingClassName,
                                 string.IsNullOrEmpty(ratingClassName) ? string.Empty : "/ " + authorizationName).Trim(),
-                        ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                        VALID_DATE = lastEdition.DocumentDateValidTo
+                        ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
+                        VALID_DATE = lastEdition.Content.DocumentDateValidTo
                     };
                 }).ToList<object>();
             result = Utils.FillBlankData(result, 10);

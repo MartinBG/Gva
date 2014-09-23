@@ -1,0 +1,16 @@
+﻿<ng-form name="newRatingEditionForm" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="persons.newRatingEdition.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.newRatingEdition.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.newRatingEdition.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </div>
+    <div class="well-sm panel-body">
+      <gva-rating-edition name="ratingEditionForm" ng-model="newRatingEdition"
+        sc-form-params="{ lotId: lotId }" sc-data-staff-type="$parent.rating.part.staffType">
+      </gva-rating-edition>
+    </div>
+  </div>
+</ng-form>

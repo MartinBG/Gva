@@ -7,17 +7,16 @@
     $state,
     $stateParams,
     PersonRatings,
-    rating
+    newRating
   ) {
-    $scope.rating = rating;
+    $scope.newRating = newRating;
     $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
-      return $scope.newRatingForm.$validate()
-        .then(function () {
+      return $scope.newRatingForm.$validate().then(function () {
           if ($scope.newRatingForm.$valid) {
             return PersonRatings
-              .save({ id: $stateParams.id }, $scope.rating).$promise
+              .save({ id: $stateParams.id }, $scope.newRating).$promise
               .then(function () {
                 return $state.go('root.persons.view.ratings.search');
               });
@@ -35,11 +34,11 @@
     '$state',
     '$stateParams',
     'PersonRatings',
-    'rating'
+    'newRating'
   ];
 
   RatingsNewCtrl.$resolve = {
-    rating: [
+    newRating: [
       '$stateParams',
       'PersonRatings',
       function ($stateParams, PersonRatings) {

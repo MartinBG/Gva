@@ -4,6 +4,7 @@ using Common.Api.Repositories.NomRepository;
 using Common.Json;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
+using Regs.Api.Models;
 
 namespace Gva.Api.WordTemplates
 {
@@ -49,7 +50,9 @@ namespace Gva.Api.WordTemplates
             var lastEdition = editions.Last();
 
             var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i));
+            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
+
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
 
@@ -62,7 +65,7 @@ namespace Gva.Api.WordTemplates
                 personData.Lin);
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings);
-            var endorsements2 = this.GetEndorsements2(includedRatings);
+            var endorsements2 = this.GetEndorsements2(includedRatings, ratingEditions);
 
             var json = new
             {
@@ -79,7 +82,7 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    ENDORSEMENT = this.GetEndorsements(includedRatings),
+                    ENDORSEMENT = this.GetEndorsements(includedRatings, ratingEditions),
                     T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_CODE = licenceCaCode,
                     T_LICENCE_NO = licenceNumber,
@@ -150,15 +153,15 @@ namespace Gva.Api.WordTemplates
             };
         }
 
-        private List<object> GetEndorsements(IEnumerable<PersonRatingDO> includedRatings)
+        private List<object> GetEndorsements(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
-            var result =  includedRatings
-                .Where(r => r.Authorization != null)
-                .GroupBy(r => r.Authorization.Name)
+            var result = includedRatings
+                .Where(r => r.Content.Authorization != null)
+                .GroupBy(r => r.Content.Authorization.Name)
                 .Select(g => new
                     {
                         NAME = g.Key,
-                        DATE = g.Min(r => r.Editions.Last().DocumentDateValidFrom)
+                        DATE = g.Min(r => ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidFrom)
                     }).ToList<object>();
 
             result = Utils.FillBlankData(result, 4);
@@ -195,22 +198,22 @@ namespace Gva.Api.WordTemplates
                     }).ToArray<object>();
         }
 
-        private List<object> GetEndorsements2(IEnumerable<PersonRatingDO> includedRatings)
+        private List<object> GetEndorsements2(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             var result = includedRatings
-                .Where(r => r.StaffType.Alias == "ovd")
+                .Where(r => r.Content.StaffType.Alias == "ovd")
                 .Select(r =>
                 {
                     {
-                        PersonRatingEditionDO lastEdition = r.Editions.Last();
+                        var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
 
                         return new
                         {
-                            ICAO = r.LocationIndicator == null ? null : r.LocationIndicator.Name,
-                            SECTOR = r.Sector,
-                            AUTH = r.Authorization == null ? null : r.Authorization.Name,
-                            ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                            VALID_DATE = lastEdition.DocumentDateValidTo
+                            ICAO = r.Content.LocationIndicator == null ? null : r.Content.LocationIndicator.Name,
+                            SECTOR = r.Content.Sector,
+                            AUTH = r.Content.Authorization == null ? null : r.Content.Authorization.Name,
+                            ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
+                            VALID_DATE = lastEdition.Content.DocumentDateValidTo
                         };
                     }
                 }).ToList<object>();

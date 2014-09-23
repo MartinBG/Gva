@@ -35,8 +35,14 @@
             .$promise
             .then(function (edition) {
               $scope.editMode = null;
-              $scope.currentLicenceEdition = edition;
-              originalLicenceEdition = _.cloneDeep(edition);
+              var editionIndex = null;
+              _.find($scope.licenceEditions, function (ed, index) {
+                if (ed.partIndex === edition.partIndex) {
+                  editionIndex = index;
+                }
+              });
+              originalLicenceEdition = _.cloneDeep($scope.currentLicenceEdition);
+              $scope.licenceEditions[editionIndex] = _.cloneDeep(edition);
             });
         }
       });

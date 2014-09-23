@@ -53,7 +53,8 @@ namespace Gva.Api.WordTemplates
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i));
+            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
             var includedExams = lastEdition.IncludedExams
                 .Select(i => lot.Index.GetPart<PersonDocumentExamDO>("personDocumentExams/" + i).Content);
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedExams);
@@ -81,30 +82,30 @@ namespace Gva.Api.WordTemplates
             }
 
             var endorsements = includedRatings
-                .Where(r => r.Authorization != null)
+                .Where(r => r.Content.Authorization != null)
                 .Select(r =>
                     new {
-                        NAME = r.Authorization.Code,
-                        DATE = r.Editions.Last().DocumentDateValidFrom
+                        NAME = r.Content.Authorization.Code,
+                        DATE = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidFrom
                     });
             var tEndorsements = includedRatings
-                .Where(r => r.Authorization != null)
+                .Where(r => r.Content.Authorization != null)
                 .Select(r =>
                     new {
-                        ICAO = r.LocationIndicator == null ? null : r.LocationIndicator.Code,
-                        AUTH = r.Authorization.Code,
-                        SECTOR = r.Sector,
-                        ISSUE_DATE = r.Editions.Last().DocumentDateValidFrom
+                        ICAO = r.Content.LocationIndicator == null ? null : r.Content.LocationIndicator.Code,
+                        AUTH = r.Content.Authorization.Code,
+                        SECTOR = r.Content.Sector,
+                        ISSUE_DATE = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidFrom
                     });
             var lEndorsements = includedRatings
-                .Where(r => r.Authorization != null)
+                .Where(r => r.Content.Authorization != null)
                 .Select(r =>
                     new
                     {
-                        ICAO = r.LocationIndicator == null ? null : r.LocationIndicator.Code,
-                        AUTH = r.Authorization.Code,
-                        SECTOR = r.Sector,
-                        VALID_DATE = r.Editions.Last().DocumentDateValidTo
+                        ICAO = r.Content.LocationIndicator == null ? null : r.Content.LocationIndicator.Code,
+                        AUTH = r.Content.Authorization.Code,
+                        SECTOR = r.Content.Sector,
+                        VALID_DATE = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidTo
                     });
             var licenceNumber = string.Format(
                 "BGR. {0} - {1} - {2}",

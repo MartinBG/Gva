@@ -72,12 +72,12 @@
             <td ng-if="!form.$readonly && model.part.includedRatings.length">
               <sc-button name="deleteRatingBtn" class="btn btn-xs btn-danger" btn-click="removeRating(rating)" icon="glyphicon-remove"></sc-button>
             </td>
-            <td>{{rating.part.personRatingLevel.name || rating.part.ratingType.name}}</td>
-            <td>{{rating.part.aircraftTypeGroup.name || (rating.part.ratingClass.name || '') + ((rating.part.editions | last).ratingSubClasses && ' (' + ((rating.part.editions | last).ratingSubClasses | pluck:'name' | join:', ') + ')')}}</td>
-            <td>{{(rating.part.authorization.name || '') + ' ' + ((rating.part.editions | last).limitations | pluck:'name' | join:', ')}}</td>
-            <td><span>{{(rating.part.editions | last).documentDateValidFrom | date:'mediumDate'}}</span>
+            <td>{{rating.personRatingLevel.name || rating.ratingType.name}}</td>
+            <td>{{rating.aircraftTypeGroup.name || ((rating.ratingClass.name || '') + ( rating.ratingSubClasses ? ' (' + rating.ratingSubClasses + ')' : ''))}}</td>
+            <td>{{(rating.authorization.name || '') + ' ' + rating.limitations ? rating.limitations : ''}}</td>
+            <td><span>{{rating.lastDocDateValidFrom | date:'mediumDate'}}</span>
             </td>
-            <td><span>{{(rating.part.editions | last).documentDateValidTo | date:'mediumDate'}}</span>
+            <td><span>{{rating.lastDocDateValidTo | date:'mediumDate'}}</span>
             </td>
           </tr>
         </tbody>

@@ -307,28 +307,27 @@ namespace Gva.MigrationTool.Sets
                             lot.CreatePart("personStatuses/*", personStatus, context);
                         }
 
-                        var personRatings = this.getPersonRatings(personId, getPersonByApexId, noms);
+                        var personRatingEditions = this.getPersonRatingEditions(personId, getPersonByApexId, noms,  nomApplications);
+                        var personRatings = this.getPersonRatings(personId, noms);
                         Dictionary<int, int> ratingOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personRating in personRatings)
                         {
+                            var ratingPartVersion = lot.CreatePart("ratings/*", personRating, context);
+
                             int nextIndex = 0;
 
-                            foreach (var edition in personRating["editions"].Cast<JObject>())
+                            foreach (var edition in personRatingEditions[personRating.Get<int>("__oldId")])
                             {
-                                edition.Add("index", nextIndex);
+                                var editionPart = edition["part"] as JObject;
+                                editionPart.Add("ratingPartIndex", ratingPartVersion.Part.Index);
+                                editionPart.Add("index", nextIndex);
                                 nextIndex++;
-                            }
 
-                            personRating.Add("nextIndex", nextIndex);
-
-                            var pv = lot.CreatePart("ratings/*", personRating, context);
-
-                            foreach (var edition in personRating.GetItems<JObject>("editions"))
-                            {
+                                var pv = lot.CreatePart("ratingEditions/*", edition.Get<JObject>("part"), context);
                                 applicationRepository.AddApplicationRefs(pv.Part, edition.GetItems<ApplicationNomDO>("applications"));
                             }
 
-                            ratingOldIdToPartIndex.Add(personRating.Get<int>("__oldId"), pv.Part.Index);
+                            ratingOldIdToPartIndex.Add(personRating.Get<int>("__oldId"), ratingPartVersion.Part.Index);
                         }
 
                         var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
@@ -1101,7 +1100,11 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        private IList<JObject> getPersonRatings(int personId, Func<int?, JObject> getPersonByApexId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        private IDictionary<int, IEnumerable<JObject>> getPersonRatingEditions(
+            int personId,
+            Func<int?, JObject> getPersonByApexId,
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<int, JObject> nomApplications)
         {
             Func<string, NomValue[]> transformSubclasses = (s) =>
             {
@@ -1113,7 +1116,7 @@ namespace Gva.MigrationTool.Sets
                 return s.Split(',').Select(sc => noms["ratingSubClasses"].ByCode(sc.Trim())).ToArray();
             };
 
-            var editions = oracleConn.CreateStoreCommand(
+            return oracleConn.CreateStoreCommand(
                 @"SELECT E.PERSON_ID EXAMINER_ID,
                         RD.ID,
                         RD.RATING_CAA_ID,
@@ -1122,19 +1125,23 @@ namespace Gva.MigrationTool.Sets
                         RD.ISSUE_DATE,
                         RD.VALID_DATE,
                         RD.NOTES,
-                        RD.NOTES_TRANS
+                        RD.NOTES_TRANS,
+                        RD.REQUEST_ID,
+                        R.STAFF_TYPE_ID
                     FROM CAA_DOC.RATING_CAA R
                     JOIN CAA_DOC.RATING_CAA_DATES RD ON RD.RATING_CAA_ID = R.ID
                     LEFT OUTER JOIN CAA_DOC.EXAMINER E ON E.ID = RD.EXAMINER_ID
                     WHERE {0}",
                 new DbClause("R.PERSON_ID = {0}", personId)
                 )
-                .Materialize(r => Utils.ToJObject(
+                .Materialize(r =>
                     new
                     {
                         __oldId = r.Field<int>("ID"),
                         __migrTable = "RATING_CAA_DATES",
+
                         __RATING_CAA_ID = r.Field<int>("RATING_CAA_ID"),
+                        __STAFF_TYPE = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()),
 
                         ratingSubClasses = transformSubclasses(r.Field<string>("SUBCLASSES")),
                         limitations = transformLimitations66(r.Field<string>("LIMITATIONS"), noms),
@@ -1142,26 +1149,37 @@ namespace Gva.MigrationTool.Sets
                         documentDateValidTo = r.Field<DateTime?>("VALID_DATE"),
                         notes = r.Field<string>("NOTES"),
                         notesAlt = r.Field<string>("NOTES_TRANS"),
-                        inspector = getPersonByApexId((int?)r.Field<decimal?>("EXAMINER_ID"))
-                    }))
+                        inspector = getPersonByApexId((int?)r.Field<decimal?>("EXAMINER_ID")),
+                        applications = r.Field<decimal?>("REQUEST_ID") != null ? new JObject[] { nomApplications[(int)r.Field<decimal?>("REQUEST_ID").Value] } : new JObject[0],
+                    })
                 .ToList()
-                .GroupBy(r => r.Get<int>("__RATING_CAA_ID"))
+                .OrderBy(r => r.documentDateValidFrom)
+                .GroupBy(r => r.__RATING_CAA_ID)
                 .ToDictionary(g => g.Key,
-                    g => g.Select(r => Utils.Pluck(r,
-                        new string[] 
-                        {
-                            "__oldId",
-                            "__migrTable",
+                    g => g.Select(r => new JObject(
+                        new JProperty("part",
+                            Utils.ToJObject(
+                                new
+                                {
+                                    r.__oldId,
+                                    r.__migrTable,
 
-                            "ratingSubClasses",
-                            "limitations",
-                            "documentDateValidFrom",
-                            "documentDateValidTo",
-                            "notes",
-                            "notesAlt",
-                            "inspector"
-                        })));
+                                    r.__RATING_CAA_ID,
+                                    r.__STAFF_TYPE,
 
+                                    r.ratingSubClasses,
+                                    r.limitations,
+                                    r.documentDateValidFrom,
+                                    r.documentDateValidTo,
+                                    r.notes,
+                                    r.notesAlt,
+                                    r.inspector
+                                })),
+                        new JProperty("applications", r.applications))));
+        }
+
+        private IList<JObject> getPersonRatings(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        {
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.RATING_CAA WHERE {0}",
                 new DbClause("PERSON_ID = {0}", personId)
@@ -1182,8 +1200,7 @@ namespace Gva.MigrationTool.Sets
                         sector = r.Field<string>("SECTOR"),
                         aircraftTypeGroup = noms["aircraftTypeGroups"].ByOldId(r.Field<long?>("RATING_GROUP66_ID").ToString()),
                         aircraftTypeCategory = noms["aircraftClases66"].ByOldId(r.Field<long?>("RATING_CAT66_ID").ToString()),
-                        caa = noms["caa"].ByOldId(r.Field<decimal?>("CAA_ID").ToString()),
-                        editions = editions[r.Field<int>("ID")]
+                        caa = noms["caa"].ByOldId(r.Field<decimal?>("CAA_ID").ToString())
                     }))
                 .ToList(); ;
         }
