@@ -17,6 +17,6 @@
     <sc-field type="nomenclature" alias="'aircraftClases66'" ng-model="model.aircraftTypeCategory" l10n-text="persons.ratingDirective.ratingCategory" class="col-sm-3"></sc-field>
   </div>
   <div class="row" ng-if="model.staffType">
-    <sc-field type="nomenclature" alias="'caa'" ng-model="model.caa" l10n-text="persons.ratingDirective.administration" class="col-sm-9"></sc-field>
+    <sc-field type="nomenclature" alias="'caa'" ng-model="model.caa" ng-readonly="true" ng-required="true" l10n-text="persons.ratingDirective.administration" class="col-sm-9"></sc-field>
   </div>
 </ng-form>

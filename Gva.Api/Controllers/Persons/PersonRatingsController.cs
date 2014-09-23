@@ -72,7 +72,10 @@ namespace Gva.Api.Controllers.Persons
 
             PersonRatingNewDO newRating = new PersonRatingNewDO()
             {
-                Rating = new ApplicationPartVersionDO<PersonRatingDO>(new PersonRatingDO()),
+                Rating = new ApplicationPartVersionDO<PersonRatingDO>(new PersonRatingDO()
+                {
+                    Caa = this.nomRepository.GetNomValue("caa", "BG")
+                }),
                 Edition = new ApplicationPartVersionDO<PersonRatingEditionDO>(edition, applications)
             };
 
