@@ -135,7 +135,7 @@ namespace Gva.MigrationTool.Sets
                         }
 
                         Dictionary<int, int> inspectionPartIndexes = new Dictionary<int, int>();
-                        var organizationInspections = this.getOrganizationInspections(organizationId, nomApplications, getPersonByApexId, noms);
+                        var organizationInspections = this.getOrganizationInspections(organizationId, nomApplications, getPersonByApexId, blobIdsToFileKeys, noms);
                         foreach (var organizationInspection in organizationInspections)
                         {
                             var pv = lot.CreatePart("organizationInspections/*", organizationInspection.Get<JObject>("part"), context);
@@ -337,6 +337,7 @@ namespace Gva.MigrationTool.Sets
             int organizationId,
             Dictionary<int, JObject> nomApplications,
             Func<int?, JObject> getPersonByApexId,
+            Dictionary<int, string> blobIdsToFileKeys,
             Dictionary<string, Dictionary<string, NomValue>> noms)
         {
             var disparities = this.oracleConn.CreateStoreCommand(
@@ -454,6 +455,32 @@ namespace Gva.MigrationTool.Sets
                         .Select(i => getPersonByApexId(i.PERSON_ID.Value))
                         .ToArray());
 
+            var controlCards = this.oracleConn.CreateStoreCommand(
+                @"SELECT A.ID,
+                        D.DOC_ID,
+                        D.MIME_TYPE,
+                        D.NAME
+                    FROM CAA_DOC.AUDITS A
+                    JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON A.ID + 80000000 = D.DOC_ID
+                    WHERE {0}",
+                new DbClause("A.ID_FIRM = {0}", organizationId)
+                )
+                .Materialize(r => 
+                    new
+                    {
+                        AUDIT_ID = r.Field<int>("ID"),
+                        DOC_ID = r.Field<int>("DOC_ID"),
+                        NAME = r.Field<string>("NAME"),
+                        MIME_TYPE = r.Field<string>("MIME_TYPE")
+                    })
+                .ToDictionary(a => a.AUDIT_ID, a =>
+                    new
+                    {
+                        key = blobIdsToFileKeys[a.DOC_ID],
+                        name = a.NAME,
+                        mimeType = a.MIME_TYPE
+                    });
+
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AUDITS WHERE {0}",
                 new DbClause("ID_FIRM = {0}", organizationId)
@@ -477,7 +504,7 @@ namespace Gva.MigrationTool.Sets
                                 inspectionPlace = r.Field<string>("INSPECTION_PLACE"),
                                 startDate = r.Field<DateTime?>("DATE_BEGIN"),
                                 endDate = r.Field<DateTime?>("DATE_END"),
-
+                                controlCard = controlCards[r.Field<int>("ID")],
                                 inspectionDetails = inspectionDetails[r.Field<int>("ID")],
                                 disparities = disparities[r.Field<int>("ID")],
                                 examiners = examiners[r.Field<int>("ID")],
