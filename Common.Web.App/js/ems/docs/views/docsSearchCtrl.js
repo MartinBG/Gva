@@ -84,7 +84,6 @@
     'docs'
   ];
 
-  //? this resolve is useless as the scDatatable2 will make the call?
   DocsSearchCtrl.$resolve = {
     docs: [
       '$stateParams',

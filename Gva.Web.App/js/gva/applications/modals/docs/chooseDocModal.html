@@ -24,22 +24,23 @@
       <sc-search-button action="clear"></sc-search-button>
     </sc-search>
 
-    <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-      <sc-column sortable="false" class="buttons-cell" has-content="true">
+    <sc-datatable2 items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+      <sc-column2 sortable="false" class="buttons-cell" has-content="true">
         <sc-button btn-click="selectDoc(item)" text="applications.chooseDocsModal.select" class="btn btn-xs btn-primary"></sc-button>
-      </sc-column>
-      <sc-column type="date" data="regDate" title="applications.chooseDocsModal.regDate">
-      </sc-column>
-      <sc-column data="regUri" title="applications.chooseDocsModal.regUri">
-      </sc-column>
-      <sc-column data="docTypeName + ': ' + docSubject" title="applications.chooseDocsModal.docSubject">
-      </sc-column>
-      <sc-column data="docDirectionName" title="applications.chooseDocsModal.docDirectionName">
-      </sc-column>
-      <sc-column data="docStatusName" title="applications.chooseDocsModal.docStatusName">
-      </sc-column>
-      <sc-column data="correspondentNames" title="applications.chooseDocsModal.correspondentName">
-      </sc-column>
-    </sc-datatable>
+      </sc-column2>
+      <sc-column2 type="date" data="regDate" title="applications.chooseDocsModal.regDate">
+      </sc-column2>
+      <sc-column2 data="regUri" title="applications.chooseDocsModal.regUri">
+      </sc-column2>
+      <sc-column2 data="docTypeName + ': ' + docSubject" title="applications.chooseDocsModal.docSubject">
+      </sc-column2>
+      <sc-column2 data="docDirectionName" title="applications.chooseDocsModal.docDirectionName">
+      </sc-column2>
+      <sc-column2 data="docStatusName" title="applications.chooseDocsModal.docStatusName">
+      </sc-column2>
+      <sc-column2 data="correspondentNames" title="applications.chooseDocsModal.correspondentName">
+      </sc-column2>
+    </sc-datatable2>
+
   </div>
 </div>

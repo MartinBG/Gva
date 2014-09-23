@@ -424,10 +424,6 @@ namespace Aop.Api.Controllers
         {
             this.userContext = this.Request.GetUserContext();
 
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            limit = 1000;
-            offset = 0;
-
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
             ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
@@ -439,8 +435,23 @@ namespace Aop.Api.Controllers
 
             int totalCount = 0;
             List<Doc> docs = new List<Doc>();
+            List<int> aopAppDocIds = new List<int>();
 
-            docs = this.docRepository.GetDocs(
+            if (isChosen == 1)
+            {
+                List<AopApp> allAopApps = this.unitOfWork.DbContext.Set<AopApp>().ToList();
+
+                aopAppDocIds =
+                    allAopApps.Where(e => e.STDocId.HasValue).Select(e => e.STDocId.Value)
+                    .Union(allAopApps.Where(e => e.STChecklistId.HasValue).Select(e => e.STChecklistId.Value))
+                    .Union(allAopApps.Where(e => e.STNoteId.HasValue).Select(e => e.STNoteId.Value))
+                    .Union(allAopApps.Where(e => e.NDDocId.HasValue).Select(e => e.NDDocId.Value))
+                    .Union(allAopApps.Where(e => e.NDChecklistId.HasValue).Select(e => e.NDChecklistId.Value))
+                    .Union(allAopApps.Where(e => e.NDReportId.HasValue).Select(e => e.NDReportId.Value))
+                    .ToList();
+            }
+
+            docs = this.docRepository.GetDocsExclusive(
                       fromDate,
                       toDate,
                       regUri,
@@ -452,6 +463,7 @@ namespace Aop.Api.Controllers
                       corrs,
                       units,
                       ds,
+                      aopAppDocIds,
                       limit,
                       offset,
                       docCasePartType,
@@ -466,8 +478,6 @@ namespace Aop.Api.Controllers
 
             List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
 
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            //? gonna fail miserably with more docs
             foreach (var item in returnValue)
             {
                 var docCorrespondents = this.unitOfWork.DbContext.Set<DocCorrespondent>()
@@ -476,30 +486,6 @@ namespace Aop.Api.Controllers
                     .ToList();
 
                 item.DocCorrespondents.AddRange(docCorrespondents.Select(e => new DocCorrespondentDO(e)).ToList());
-            }
-
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            //? gonna fail miserably with more docs
-            if (isChosen == 1) //true
-            {
-                List<AopApp> allAopApps = this.unitOfWork.DbContext.Set<AopApp>().ToList();
-                List<int> aopAppDocIds =
-                    allAopApps.Where(e => e.STDocId.HasValue).Select(e => e.STDocId.Value)
-                    .Union(allAopApps.Where(e => e.STChecklistId.HasValue).Select(e => e.STChecklistId.Value))
-                    .Union(allAopApps.Where(e => e.STNoteId.HasValue).Select(e => e.STNoteId.Value))
-                    .Union(allAopApps.Where(e => e.NDDocId.HasValue).Select(e => e.NDDocId.Value))
-                    .Union(allAopApps.Where(e => e.NDChecklistId.HasValue).Select(e => e.NDChecklistId.Value))
-                    .Union(allAopApps.Where(e => e.NDReportId.HasValue).Select(e => e.NDReportId.Value))
-                    .ToList();
-
-                for (int i = 0; i < returnValue.Count; i++)
-                {
-                    if (returnValue[i].DocId.HasValue &&
-                        aopAppDocIds.Contains(returnValue[i].DocId.Value))
-                    {
-                        returnValue.RemoveAt(i);
-                    }
-                }
             }
 
             StringBuilder sb = new StringBuilder();

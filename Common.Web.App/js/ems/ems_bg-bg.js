@@ -303,6 +303,7 @@
           docDirectionName: '',
           docStatusName: 'Статус',
           correspondentName: 'Кореспондент',
+          hideChosen: 'Скриване на вече избраните',
           search: 'Търси',
           cancel: 'Отказ'
         }

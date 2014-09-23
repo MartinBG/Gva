@@ -2,7 +2,16 @@
 (function (angular, _) {
   'use strict';
 
-  function CaseSelectCtrl($scope, $state, $stateParams, Docs, parentDoc) {
+  function CaseSelectCtrl(
+    $scope,
+    $state,
+    $stateParams,
+    Docs,
+    docs,
+    parentDoc) {
+    $scope.docs = docs.documents;
+    $scope.docCount = docs.documentCount;
+
     $scope.filters = {
       csFromDate: null,
       csToDate: null,
@@ -21,23 +30,6 @@
       }
     });
 
-    var stateParams = {
-      fromDate: $stateParams.csFromDate,
-      toDate: $stateParams.csToDate,
-      regUri: $stateParams.csRegUri,
-      docName: $stateParams.csDocName,
-      docTypeId: $stateParams.csDocTypeId,
-      docStatusId: $stateParams.csDocStatusId,
-      corrs: $stateParams.csCorrs,
-      units: $stateParams.csUnits,
-      isCase: true
-    };
-
-    Docs.get(stateParams).$promise.then(function (docs) {
-      $scope.docs = docs.documents;
-      $scope.docCount = docs.documentCount;
-    });
-
     $scope.search = function () {
       $state.go('root.docs.new.caseSelect', {
         csFromDate: $scope.filters.csFromDate,
@@ -50,6 +42,18 @@
         csUnits: $scope.filters.csUnits,
         csIsCase: true
       }, { reload: true });
+    };
+
+    $scope.getDocs = function (page, pageSize) {
+      var params = {};
+
+      _.assign(params, $stateParams);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return Docs.get(params).$promise;
     };
 
     $scope.selectDoc = function (result) {
@@ -67,7 +71,36 @@
     };
   }
 
-  CaseSelectCtrl.$inject = ['$scope', '$state', '$stateParams', 'Docs', 'parentDoc'];
+  CaseSelectCtrl.$inject = [
+    '$scope',
+    '$state',
+    '$stateParams',
+    'Docs',
+    'docs',
+    'parentDoc'
+  ];
+
+  CaseSelectCtrl.$resolve = {
+    docs: [
+      '$stateParams',
+      'Docs',
+      function resolveDocs($stateParams, Docs) {
+        var stateParams = {
+          fromDate: $stateParams.csFromDate,
+          toDate: $stateParams.csToDate,
+          regUri: $stateParams.csRegUri,
+          docName: $stateParams.csDocName,
+          docTypeId: $stateParams.csDocTypeId,
+          docStatusId: $stateParams.csDocStatusId,
+          corrs: $stateParams.csCorrs,
+          units: $stateParams.csUnits,
+          isCase: true
+        };
+
+        return Docs.get(stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('ems').controller('CaseSelectCtrl', CaseSelectCtrl);
 }(angular, _));

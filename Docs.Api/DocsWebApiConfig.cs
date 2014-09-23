@@ -23,7 +23,6 @@ namespace Docs.Api
             this.MapRoute(config, HttpMethod.Delete, "api/corrs/{id}", "Correspondent", "DeleteCorrespondent");
 
             //docs
-            this.MapRoute(config, HttpMethod.Get   , "api/docs/forSelect"                           , "Doc", "GetDocsForSelect");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/create"                         , "Doc", "CreateChildDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createAcknowledge"              , "Doc", "CreateChildAcknowledgeDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createNotAcknowledge"           , "Doc", "CreateChildNotAcknowledgeDoc");

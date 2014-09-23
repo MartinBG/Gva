@@ -19,9 +19,6 @@
           confirmDelete: 'Сигурни ли сте, че искате да изтриете данните?',
           save: 'Запис',
           cancel: 'Отказ'
-        },
-        caseSelect: {
-          hideChosen: 'Скриване на вече избраните'
         }
       },
       checklist: {

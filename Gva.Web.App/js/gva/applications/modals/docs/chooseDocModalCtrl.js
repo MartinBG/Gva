@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function ChooseDocModalCtrl(
@@ -10,6 +10,7 @@
     docs
   ) {
     $scope.docs = docs.documents;
+    $scope.docCount = docs.documentCount;
 
     $scope.filters = {
       set: scModalParams.set,
@@ -26,7 +27,20 @@
     $scope.search = function () {
       return Applications.notLinkedDocs($scope.filters).$promise.then(function (docs) {
         $scope.docs = docs.documents;
+        $scope.docCount = docs.documentCount;
       });
+    };
+
+    $scope.getDocs = function (page, pageSize) {
+      var params = {};
+
+      _.assign(params, $scope.filters);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return Applications.notLinkedDocs(params).$promise;
     };
 
     $scope.selectDoc = function (doc) {
@@ -57,4 +71,4 @@
   };
 
   angular.module('gva').controller('ChooseDocModalCtrl', ChooseDocModalCtrl);
-}(angular));
+}(angular, _));

@@ -140,6 +140,27 @@ namespace Docs.Api.Repositories.DocRepository
             UnitUser unitUser,
             out int totalCount);
 
+        List<Doc> GetCurrentExclusiveCaseDocs(
+            DateTime? fromDate,
+            DateTime? toDate,
+            string regUri,
+            string docName,
+            int? docTypeId,
+            int? docStatusId,
+            bool? hideRead,
+            bool? isCase,
+            string corrs,
+            string units,
+            string ds,
+            List<int> excludedDocId,
+            int limit,
+            int offset,
+            DocCasePartType docCasePartType,
+            List<DocStatus> docStatuses,
+            ClassificationPermission readPermission,
+            UnitUser unitUser,
+            out int totalCount);
+
         List<Doc> GetFinishedCaseDocs(
             DateTime? fromDate,
             DateTime? toDate,
@@ -280,6 +301,26 @@ namespace Docs.Api.Repositories.DocRepository
             ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount);
+
+        List<Doc> GetDocsExclusive(
+           DateTime? fromDate,
+           DateTime? toDate,
+           string regUri,
+           string docName,
+           int? docTypeId,
+           int? docStatusId,
+           bool? hideRead,
+           bool? isCase,
+           string corrs,
+           string units,
+           string ds,
+            List<int> excludedDocIds,
+           int limit,
+           int offset,
+           DocCasePartType docCasePartType,
+           ClassificationPermission readPermission,
+           UnitUser unitUser,
+           out int totalCount);
 
         List<Doc> GetDocsForChange(
             DateTime? fromDate,

@@ -7,7 +7,11 @@
     $state,
     $stateParams,
     Admissions,
+    docs,
     selectDoc) {
+    $scope.docs = docs.documents;
+    $scope.docCount = docs.documentCount;
+
     $scope.filters = {
       csFromDate: null,
       csToDate: null,
@@ -26,23 +30,6 @@
       }
     });
 
-    var stateParams = {
-      fromDate: $stateParams.csFromDate,
-      toDate: $stateParams.csToDate,
-      regUri: $stateParams.csRegUri,
-      docName: $stateParams.csDocName,
-      docTypeId: $stateParams.csDocTypeId,
-      docStatusId: $stateParams.csDocStatusId,
-      corrs: $stateParams.csCorrs,
-      units: $stateParams.csUnits,
-      isChosen: $stateParams.csIsChosen
-    };
-
-    Admissions.getDocs(stateParams).$promise.then(function (docs) {
-      $scope.docs = docs.documents;
-      $scope.docCount = docs.documentCount;
-    });
-
     $scope.search = function () {
       $state.go($state.current, {
         csFromDate: $scope.filters.csFromDate,
@@ -55,6 +42,18 @@
         csUnits: $scope.filters.csUnits,
         csIsChosen: $scope.filters.csIsChosen
       }, { reload: true });
+    };
+
+    $scope.getDocs = function (page, pageSize) {
+      var params = {};
+
+      _.assign(params, $stateParams);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return Admissions.getDocs(params).$promise;
     };
 
     $scope.selectDoc = function (result) {
@@ -78,7 +77,31 @@
     '$state',
     '$stateParams',
     'Admissions',
-    'selectDoc'];
+    'docs',
+    'selectDoc'
+  ];
+
+  AppDocSelectCtrl.$resolve = {
+    docs: [
+      '$stateParams',
+      'Admissions',
+      function resolveDocs($stateParams, Admissions) {
+        var stateParams = {
+          fromDate: $stateParams.csFromDate,
+          toDate: $stateParams.csToDate,
+          regUri: $stateParams.csRegUri,
+          docName: $stateParams.csDocName,
+          docTypeId: $stateParams.csDocTypeId,
+          docStatusId: $stateParams.csDocStatusId,
+          corrs: $stateParams.csCorrs,
+          units: $stateParams.csUnits,
+          isChosen: $stateParams.csIsChosen
+        };
+
+        return Admissions.getDocs(stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('mosv').controller('AppDocSelectCtrl', AppDocSelectCtrl);
 }(angular, _));

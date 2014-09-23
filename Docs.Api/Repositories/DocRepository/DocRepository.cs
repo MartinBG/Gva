@@ -974,6 +974,58 @@ namespace Docs.Api.Repositories.DocRepository
                 out totalCount);
         }
 
+        public List<Doc> GetCurrentExclusiveCaseDocs(
+            DateTime? fromDate,
+            DateTime? toDate,
+            string regUri,
+            string docName,
+            int? docTypeId,
+            int? docStatusId,
+            bool? hideRead,
+            bool? isCase,
+            string corrs,
+            string units,
+            string ds,
+            List<int> excludedDocId,
+            int limit,
+            int offset,
+            DocCasePartType docCasePartType,
+            List<DocStatus> docStatuses,
+            ClassificationPermission readPermission,
+            UnitUser unitUser,
+            out int totalCount)
+        {
+            DocStatus docStatusFinished = docStatuses.FirstOrDefault(e => e.Alias == "Finished");
+            DocStatus docStatusCanceled = docStatuses.FirstOrDefault(e => e.Alias == "Canceled");
+
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.IsCase)
+                .And(e => e.DocStatusId != docStatusFinished.DocStatusId)
+                .And(e => e.DocStatusId != docStatusCanceled.DocStatusId)
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId)
+                .And(e => !excludedDocId.Contains(e.DocId)); //? maybe written with a join to gvaapplications and move this method to specific repo
+
+            return GetDocsInternal(
+                fromDate,
+                toDate,
+                regUri,
+                docName,
+                docTypeId,
+                docStatusId,
+                corrs,
+                units,
+                ds,
+                limit,
+                offset,
+                predicate,
+                unitUser,
+                readPermission,
+                hideRead,
+                isCase,
+                out totalCount);
+        }
+
         public List<Doc> GetFinishedCaseDocs(
             DateTime? fromDate,
             DateTime? toDate,
@@ -1294,6 +1346,55 @@ namespace Docs.Api.Repositories.DocRepository
             System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
                 .True<Doc>()
                 .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId);
+
+            return GetDocsInternal(
+                fromDate,
+                toDate,
+                regUri,
+                docName,
+                docTypeId,
+                docStatusId,
+                corrs,
+                units,
+                ds,
+                limit,
+                offset,
+                predicate,
+                unitUser,
+                readPermission,
+                hideRead,
+                isCase,
+                out totalCount);
+        }
+
+        public List<Doc> GetDocsExclusive(
+            DateTime? fromDate,
+            DateTime? toDate,
+            string regUri,
+            string docName,
+            int? docTypeId,
+            int? docStatusId,
+            bool? hideRead,
+            bool? isCase,
+            string corrs,
+            string units,
+            string ds,
+            List<int> excludedDocIds,
+            int limit,
+            int offset,
+            DocCasePartType docCasePartType,
+            ClassificationPermission readPermission,
+            UnitUser unitUser,
+            out int totalCount)
+        {
+            List<int> corrIds = Helper.GetIdListFromString(corrs);
+            List<int> unitIds = Helper.GetIdListFromString(units);
+            List<int> docIds = Helper.GetIdListFromString(ds);
+
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId)
+                .And(e => !excludedDocIds.Contains(e.DocId)); //? maybe written with a join to aopapplications and move this method to specific repo
 
             return GetDocsInternal(
                 fromDate,

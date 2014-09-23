@@ -11,27 +11,27 @@
   </sc-filter>
   <sc-filter type="nomenclature" name="csUnits" class="col-sm-3" removable="false" alias="employeeUnit" load="false" mode="id" label="docs.caseSelect.units" multiple="multiple">
   </sc-filter>
-  <sc-filter type="nomenclature" name="csIsChosen" class="col-sm-3" removable="false" alias="boolean" load="false" mode="id" label="apps.caseSelect.hideChosen">
+  <sc-filter type="nomenclature" name="csIsChosen" class="col-sm-3" removable="false" alias="boolean" load="false" mode="id" label="docs.caseSelect.hideChosen">
   </sc-filter>
   <sc-search-button action="search()" text="docs.caseSelect.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
   <sc-search-button action="cancel()" text="docs.caseSelect.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-search-button>
   <sc-search-button action="clear"></sc-search-button>
 </sc-search>
 
-<sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" has-content="true">
-   <sc-button btn-click="selectDoc(item)" text="docs.caseSelect.select" class="btn btn-xs btn-primary"></sc-button>
-  </sc-column>
-  <sc-column type="date" data="regDate" title="docs.caseSelect.regDate">
-  </sc-column>
-  <sc-column data="regUri" title="docs.caseSelect.regUri">
-  </sc-column>
-  <sc-column data="docSubject" title="docs.caseSelect.docSubject">
-  </sc-column>
-  <sc-column data="docDirectionName" title="docs.caseSelect.docDirectionName">
-  </sc-column>
-  <sc-column data="docStatusName" title="docs.caseSelect.docStatusName">
-  </sc-column>
-  <sc-column data="correspondentName" title="docs.caseSelect.correspondentName">
-  </sc-column>
-</sc-datatable>
+<sc-datatable2 items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column2 sortable="false" class="buttons-cell" has-content="true">
+    <sc-button btn-click="selectDoc(item)" text="docs.caseSelect.select" class="btn btn-xs btn-primary"></sc-button>
+  </sc-column2>
+  <sc-column2 type="date" data="regDate" title="docs.search.regDate">
+  </sc-column2>
+  <sc-column2 data="regUri" title="docs.search.regUri">
+  </sc-column2>
+  <sc-column2 data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+  </sc-column2>
+  <sc-column2 data="docDirectionName" title="docs.search.docDirectionName">
+  </sc-column2>
+  <sc-column2 data="docStatusName" title="docs.search.docStatusName">
+  </sc-column2>
+  <sc-column2 data="correspondentNames" title="docs.search.correspondentName">
+  </sc-column2>
+</sc-datatable2>
