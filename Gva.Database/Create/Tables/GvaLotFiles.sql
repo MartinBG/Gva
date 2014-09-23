@@ -27,3 +27,6 @@ exec spDescColumn N'GvaLotFiles', N'GvaCaseTypeId'    , N'Тип дело.'
 exec spDescColumn N'GvaLotFiles', N'PageIndex'        , N'Номер на страницата в описа.'
 exec spDescColumn N'GvaLotFiles', N'PageNumber'       , N'Брой страници.'
 GO
+
+CREATE NONCLUSTERED INDEX [IDX_GvaLotFiles_LotPartId] ON [dbo].[GvaLotFiles] ([LotPartId])
+GO

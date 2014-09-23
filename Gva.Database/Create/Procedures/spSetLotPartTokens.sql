@@ -37,14 +37,10 @@ insert into @LotPartTokens(LotPartId, Token, CreateToken)
 
 
 --merge Token
-MERGE LotPartTokens AS t
-USING @LotPartTokens AS s 
-    ON t.LotPartId = s.LotPartId and t.Token = s.Token and t.CreateToken = s.CreateToken
-WHEN NOT MATCHED BY TARGET THEN
-    INSERT (LotPartId, Token, CreateToken)
-    VALUES (s.LotPartId, s.Token, s.CreateToken)
-WHEN NOT MATCHED BY SOURCE AND t.LotPartId in (select LotPartId from @LotPartTokens) THEN
-    DELETE;
+delete from LotPartTokens where LotPartId = @LotPartId
+
+insert into LotPartTokens(LotPartId, Token, CreateToken)
+    select LotPartId, Token, CreateToken from @LotPartTokens
 
 END
 GO
