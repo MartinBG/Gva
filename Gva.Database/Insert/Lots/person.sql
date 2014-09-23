@@ -20,6 +20,7 @@ VALUES
     (@setId    , 'Лиценз'                      , 'personLicence'         , N'^licences/\d+$'                  , NULL        ),
     (@setId    , 'Вписване към лиценз'         , 'personLicenceEdition'  , N'^licenceEditions/\d+$'           , NULL        ),
     (@setId    , 'Класове'                     , 'personRating'          , N'^ratings/\d+$'                   , NULL        ),
+    (@setId    , 'Вписване към клас'           , 'personRatingEdition'   , N'^ratingEditions/\d+$'            , NULL        ),
     (@setId    , 'Друг документ'               , 'personOther'           , N'^personDocumentOthers/\d+$'      , NULL        ),
     (@setId    , 'Заявление'                   , 'personApplication'     , N'^personDocumentApplications/\d+$', NULL        ),
     (@setId    , ''                            , 'exams'                 , N'^personExams/\d+$'               , NULL        ),

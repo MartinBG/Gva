@@ -127,6 +127,7 @@
     <Compile Include="Controllers\Organizations\OrganizationRecommendationsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationGroundServiceOperatorsSnoOperationalController.cs" />
     <Compile Include="Controllers\Persons\PersonLicenceEditionsController.cs" />
+    <Compile Include="Controllers\Persons\PersonRatingEditionsController.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregExportFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregFMDO.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationStaffManagementDO.cs" />
     <Compile Include="ModelsDO\Persons\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\Persons\GvaViewPersonLicenceEditionDO.cs" />
+    <Compile Include="ModelsDO\Persons\GvaViewPersonRatingDO.cs" />
     <Compile Include="ModelsDO\Persons\InspectorDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAddressDO.cs" />
     <Compile Include="ModelsDO\Common\DocumentApplicationDO.cs" />
@@ -252,6 +254,7 @@
     <Compile Include="ModelsDO\Persons\PersonLicenceDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonMedicalDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonRatingDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonRatingNewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonStatusDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonTrainingDO.cs" />
     <Compile Include="ModelsDO\Common\TimeDO.cs" />
@@ -262,6 +265,7 @@
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonLicenceEdition.cs" />
+    <Compile Include="Models\Views\Person\GvaViewPersonRating.cs" />
     <Compile Include="Projections\Aircraft\AircraftProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegistrationProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegMarkProjection.cs" />
@@ -347,6 +351,7 @@
     <Compile Include="Models\GvaLotObject.cs" />
     <Compile Include="Models\Views\Person\GvaViewPerson.cs" />
     <Compile Include="Models\GvaWordTemplate.cs" />
+    <Compile Include="Projections\Person\PersonRatingProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GvaApiModule.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegistrationRepository.cs" />

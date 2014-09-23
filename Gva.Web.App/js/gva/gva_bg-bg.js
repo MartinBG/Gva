@@ -2005,7 +2005,7 @@
           availableTrainings: 'Налични обучения',
           noAvailableTrainings: 'Няма налични обучения',
           ratingsTable: {
-            ratingType: 'Тип ВС (раб.място)',
+            ratingType: 'Тип ВС, Степен (раб. място)',
             ratingClass: 'Клас (категория)',
             authorization: 'Разрешение (ограничения)',
             dateValidFrom: 'Издаден',
@@ -2473,9 +2473,25 @@
           lastEditionNotesAlt: 'Бележки лат.'
         },
         ratingEdit: {
-          title: 'Вписване',
+          title: 'Преглед на квалификация',
           ratingForm: 'Квалификация',
-          editionForm: 'Вписване',
+          newEdition: 'Ново вписване',
+          editLastEdition: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        ratingNew: {
+          title: 'Нова квалификация',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        newRatingEdition: {
+          title: 'Ново вписване',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editRatingEdition: {
+          editionForm: 'Редакция на вписване',
           editions: 'Вписвания',
           ratingTypeOrRatingLevel: 'Тип ВС/Степен',
           classOrCategory: 'Клас/Подклас (Категория)',
@@ -2486,20 +2502,14 @@
           notes: 'Бележки',
           notesAlt: 'Бележки лат.',
           inspector: 'Инспектор',
-          newEdition: 'Ново вписване',
-          editLastEdition: 'Редакция',
-          deleteLastEdition: 'Изтриване',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        ratingNew: {
-          title: 'Нова квалификация',
+          edit: 'Редакция',
+          deleteEdition: 'Изтриване',
           save: 'Запис',
           cancel: 'Отказ'
         },
         chooseRatingsModal: {
           title: 'Избор на квалификации',
-          ratingTypeOrRatingLevel: 'Тип ВС (раб.място)',
+          ratingTypeOrRatingLevel: 'Тип ВС, Степен (раб.място)',
           classOrCategory: 'Клас (категория)',
           authorizationAndLimitations: 'Разрешение (ограничения)',
           lastEditionValidFrom: 'Издаден',

@@ -4,6 +4,7 @@ using Common.Api.Repositories.NomRepository;
 using Common.Json;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
+using Regs.Api.Models;
 
 namespace Gva.Api.WordTemplates
 {
@@ -54,11 +55,11 @@ namespace Gva.Api.WordTemplates
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i));
+            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
             var includedExams = lastEdition.IncludedExams
                 .Select(i => lot.Index.GetPart<PersonDocumentExamDO>("personDocumentExams/" + i).Content);
-
-            var classes = this.GetClasses(includedRatings);
+            var classes = this.GetClasses(includedRatings, ratingEditions);
             var documents = this.GetDocuments(includedTrainings, includedExams);
             var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
@@ -194,23 +195,23 @@ namespace Gva.Api.WordTemplates
             };
         }
 
-        private object[] GetClasses(IEnumerable<PersonRatingDO> includedRatings)
+        private object[] GetClasses(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             return includedRatings
-                .Where(r => r.StaffType.Code == "M")
+                .Where(r => r.Content.StaffType.Code == "M")
                 .Select(r =>
                 {
-                    PersonRatingEditionDO lastEdition = r.Editions.Last();
+                    var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
 
                     return new
                     {
-                        LEVEL = r.PersonRatingLevel == null ? null : r.PersonRatingLevel.Code,
-                        RATING = r.RatingClass == null ? null : r.RatingClass.Code,
-                        SUBRATING = string.Join(",", lastEdition.RatingSubClasses.Select(s => s.Code)),
-                        LICENCE = r.Authorization == null ? null : r.Authorization.Code,
-                        LIMITATION = string.Join(",", lastEdition.Limitations.Select(s => s.Name)),
-                        ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                        VALID_DATE = lastEdition.DocumentDateValidTo
+                        LEVEL = r.Content.PersonRatingLevel == null ? null : r.Content.PersonRatingLevel.Code,
+                        RATING = r.Content.RatingClass == null ? null : r.Content.RatingClass.Code,
+                        SUBRATING = string.Join(",", lastEdition.Content.RatingSubClasses.Select(s => s.Code)),
+                        LICENCE = r.Content.Authorization == null ? null : r.Content.Authorization.Code,
+                        LIMITATION = string.Join(",", lastEdition.Content.Limitations.Select(s => s.Name)),
+                        ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
+                        VALID_DATE = lastEdition.Content.DocumentDateValidTo
                     };
                 }).ToArray<dynamic>();
         }

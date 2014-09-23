@@ -238,5 +238,19 @@ namespace Gva.Api.Repositories.PersonRepository
 
             return licenceNumber;
         }
+
+        public IEnumerable<GvaViewPersonRating> GetRatings(int lotId)
+        {
+            return this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
+                .Include(e => e.Person)
+                .Include(e => e.Part)
+                .Include(e => e.RatingType)
+                .Include(e => e.RatingLevel)
+                .Include(e => e.RatingClass)
+                .Include(e => e.AircraftTypeGroup)
+                .Include(e => e.Authorization)
+                .Where(e => e.LotId == lotId)
+                .ToList();
+        }
     }
 }

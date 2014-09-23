@@ -4,6 +4,7 @@ using Common.Api.Repositories.NomRepository;
 using Common.Json;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
+using Regs.Api.Models;
 
 namespace Gva.Api.WordTemplates
 {
@@ -76,7 +77,8 @@ namespace Gva.Api.WordTemplates
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i));
+            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
 
             var licenceCaCode = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId).TextContent.Get<string>("codeCA");
             var licenceTypeCode = licence.LicenceType.Code;
@@ -108,8 +110,8 @@ namespace Gva.Api.WordTemplates
                     T_DOCUMENTS = documents.Take(documents.Length / 2),
                     T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
                     T_MED_CERT = this.GetMedCerts(licenceTypeCode, includedMedicals, personData),
-                    T_RATING = this.GetRaitings(includedRatings),
-                    L_RATING = this.GetScools(includedRatings),
+                    T_RATING = this.GetRaitings(includedRatings, ratingEditions),
+                    L_RATING = this.GetScools(includedRatings, ratingEditions),
                     L_ABBREVIATION = this.GetAbbreviations()
                 }
             };
@@ -242,24 +244,24 @@ namespace Gva.Api.WordTemplates
                 }).ToArray<object>();
         }
 
-        private List<object> GetRaitings(IEnumerable<PersonRatingDO> includedRatings)
+        private List<object> GetRaitings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             var result = includedRatings.Select(r =>
                 {
-                    PersonRatingEditionDO lastEdition = r.Editions.Last();
+                    var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
 
                     return new
                     {
                         TYPE = string.Format(
                             "{0} {1}",
-                            r.RatingClass == null ? null : r.RatingClass.Name,
-                            r.RatingType == null ? null : r.RatingType.Name),
+                            r.Content.RatingClass == null ? null : r.Content.RatingClass.Name,
+                            r.Content.RatingType == null ? null : r.Content.RatingType.Name),
                         AUTH_NOTES = string.Format(
                             "{0} {1}",
-                            r.Authorization == null ? null : r.Authorization.Name,
-                            lastEdition.Notes),
-                        ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                        VALID_DATE = lastEdition.DocumentDateValidTo
+                            r.Content.Authorization == null ? null : r.Content.Authorization.Name,
+                            lastEdition.Content.Notes),
+                        ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
+                        VALID_DATE = lastEdition.Content.DocumentDateValidTo
                     };
                 }).ToList<object>();
 
@@ -267,23 +269,23 @@ namespace Gva.Api.WordTemplates
             return result;
         }
 
-        private object[] GetScools(IEnumerable<PersonRatingDO> includedRatings)
+        private object[] GetScools(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             return includedRatings
-                .Where(r => r.RatingType != null && r.RatingClass != null)
+                .Where(r => r.Content.RatingType != null && r.Content.RatingClass != null)
                 .Select(r =>
                     {
-                        PersonRatingEditionDO lastEdition = r.Editions.Last();
+                        var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
 
                         return new
                         {
-                            SCHOOL = lastEdition.Notes,
+                            SCHOOL = lastEdition.Content.Notes,
                             TYPE = string.Format(
                                 "{0} {1}",
-                                r.RatingClass.Name,
-                                r.RatingType.Name),
-                            ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                            VALID_DATE = lastEdition.DocumentDateValidTo
+                                r.Content.RatingClass.Name,
+                                r.Content.RatingType.Name),
+                            ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
+                            VALID_DATE = lastEdition.Content.DocumentDateValidTo
                         };
                     }).ToArray<object>();
         }

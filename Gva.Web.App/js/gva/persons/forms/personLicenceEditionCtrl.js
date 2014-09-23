@@ -105,7 +105,16 @@
       });
 
       modalInstance.result.then(function (newRating) {
-        $scope.includedRatings.push(newRating);
+        PersonRatings.query({ id: scFormParams.lotId }).$promise.then(function (ratings) {
+          var rating = null;
+          _.find(ratings, function (r) {
+            if (r.partIndex === newRating.rating.partIndex) {
+              rating = r;
+            }
+          });
+          $scope.includedRatings.push(rating);
+        });
+        
       });
 
       return modalInstance.opened;

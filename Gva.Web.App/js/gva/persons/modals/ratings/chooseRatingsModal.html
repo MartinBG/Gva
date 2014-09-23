@@ -12,21 +12,15 @@
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
         <input type="checkbox" ng-checked="selectedRatings | contains:item" sc-click="selectRating($event, item)">
       </sc-column>
-      <sc-column data="part.personRatingLevel.name || part.ratingType.name" title="persons.chooseRatingsModal.ratingTypeOrRatingLevel">
+      <sc-column data="personRatingLevel.name || ratingType.name" title="persons.chooseRatingsModal.ratingTypeOrRatingLevel">
       </sc-column>
-      <sc-column data="part.aircraftTypeGroup.name ||
-                       (part.ratingClass.name || '') +
-                       ((part.editions | last).ratingSubClasses &&
-                          ' (' + ((part.editions | last).ratingSubClasses | pluck:'name' | join:', ') + ')')"
-                 title="persons.chooseRatingsModal.classOrCategory">
+      <sc-column data="aircraftTypeGroup.name || ((ratingClass.name || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : ''))" title="persons.chooseRatingsModal.classOrCategory">
       </sc-column>
-      <sc-column data="(part.authorization.name || '') + ' ' +
-                      ((part.editions | last).limitations | pluck:'name' | join:', ')"
-                 title="persons.chooseRatingsModal.authorizationAndLimitations">
+      <sc-column data="((authorization && authorization.name) || '') + ' ' + (limitations || '')" title="persons.chooseRatingsModal.authorizationAndLimitations">
       </sc-column>
-      <sc-column data="(part.editions | last).documentDateValidFrom" type="date" title="persons.chooseRatingsModal.lastEditionValidFrom">
+      <sc-column data="lastDocDateValidFrom" type="date" title="persons.chooseRatingsModal.lastEditionValidFrom">
       </sc-column>
-      <sc-column data="(part.editions | last).documentDateValidTo" type="date" title="persons.chooseRatingsModal.lastEditionValidTo">
+      <sc-column data="lastDocDateValidTo" type="date" title="persons.chooseRatingsModal.lastEditionValidTo">
       </sc-column>
     </sc-datatable>
   </div>

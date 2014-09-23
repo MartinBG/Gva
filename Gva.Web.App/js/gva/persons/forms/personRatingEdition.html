@@ -1,22 +1,22 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row" ng-if="staffType.alias === 'to_suvd'">
-    <sc-field type="nomenclature" ng-model="model.ratingSubClasses" alias="'ratingSubClasses'" multiple="multiple" l10n-text="persons.ratingEditionDirective.subclasses" class="col-sm-5"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.ratingSubClasses" alias="'ratingSubClasses'" multiple="multiple" l10n-text="persons.ratingEditionDirective.subclasses" class="col-sm-5"></sc-field>
   </div>
   <div class="row" ng-if="staffType.alias === 'to_suvd' || staffType.alias === 'to_vs'">
-    <sc-field type="nomenclature" ng-model="model.limitations" alias="'limitations66'" multiple="multiple" l10n-text="persons.ratingEditionDirective.limitations" class="col-sm-5"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'limitations66'" multiple="multiple" l10n-text="persons.ratingEditionDirective.limitations" class="col-sm-5"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="date" ng-model="model.documentDateValidFrom" ng-required="true" l10n-text="persons.ratingEditionDirective.documentDateValidFrom" class="col-sm-2"></sc-field>
-    <sc-field type="date" ng-model="model.documentDateValidTo" ng-required="true" l10n-text="persons.ratingEditionDirective.documentDateValidTo" class="col-sm-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.ratingEditionDirective.documentDateValidFrom" class="col-sm-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidTo" ng-required="true" l10n-text="persons.ratingEditionDirective.documentDateValidTo" class="col-sm-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" alias="'inspectors'" ng-model="model.inspector" l10n-text="persons.ratingEditionDirective.inspector" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" alias="'inspectors'" ng-model="model.part.inspector" l10n-text="persons.ratingEditionDirective.inspector" class="col-sm-3"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="3" ng-model="model.notes" l10n-text="persons.ratingEditionDirective.notes" class="col-md-6"></sc-field>
+    <sc-field type="text" rows="3" ng-model="model.part.notes" l10n-text="persons.ratingEditionDirective.notes" class="col-md-6"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" rows="3" ng-model="model.notesAlt" l10n-text="persons.ratingEditionDirective.notesAlt" class="col-md-6"></sc-field>
+    <sc-field type="text" rows="3" ng-model="model.part.notesAlt" l10n-text="persons.ratingEditionDirective.notesAlt" class="col-md-6"></sc-field>
   </div>
   <div class="row">
     <div class="form-group col-sm-9 col-md-7">

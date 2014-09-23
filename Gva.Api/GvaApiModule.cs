@@ -70,6 +70,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonInspectorProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonLicenceEditionProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonRatingProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
             //InventoryView
             moduleBuilder.RegisterType<AircraftApplicationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
@@ -130,6 +131,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonLicenceEditionsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonMedicalsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonRatingsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonRatingEditionsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonStatusesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonTrainingsController>().InstancePerLifetimeScope();
 
