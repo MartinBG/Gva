@@ -803,7 +803,7 @@ namespace Gva.MigrationTool.Sets
                         D.MIME_TYPE,
                         D.NAME
                     FROM CAA_DOC.AUDITS A
-                    JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON A.ID + 80000000 = D.DOC_ID
+                    LEFT OUTER JOIN CAA_DOC.DOCLIB_DOCUMENTS D ON A.ID + 80000000 = D.DOC_ID
                     WHERE {0}",
                 new DbClause("A.ID_AIRCRAFT = {0}", aircraftId)
                 )
@@ -811,14 +811,14 @@ namespace Gva.MigrationTool.Sets
                     new
                     {
                         AUDIT_ID = r.Field<int>("ID"),
-                        DOC_ID = r.Field<int>("DOC_ID"),
+                        DOC_ID = r.Field<int?>("DOC_ID"),
                         NAME = r.Field<string>("NAME"),
                         MIME_TYPE = r.Field<string>("MIME_TYPE")
                     })
-                .ToDictionary(a => a.AUDIT_ID, a =>
+                .ToDictionary(a => a.AUDIT_ID, a => a.DOC_ID == null ? null :
                     new
                     {
-                        key = blobIdsToFileKeys[a.DOC_ID],
+                        key = blobIdsToFileKeys[a.DOC_ID.Value],
                         name = a.NAME,
                         mimeType = a.MIME_TYPE
                     });
