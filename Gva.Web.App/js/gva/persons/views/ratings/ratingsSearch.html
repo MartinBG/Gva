@@ -8,7 +8,7 @@
     </sc-column>
     <sc-column data="aircraftTypeGroup.name || ((ratingClass.name || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : ''))" title="persons.ratingSearch.classOrCategory">
     </sc-column>
-    <sc-column data="((authorization && authorization.name) || '') + ' ' + (limitations || '')" title="persons.ratingSearch.authorizationAndLimitations">
+    <sc-column data="((authorization && authorization.name) || '') + ' ' + (limitations ? limitations : '')" title="persons.ratingSearch.authorizationAndLimitations">
     </sc-column>
     <sc-column data="lastDocDateValidFrom" title="persons.ratingSearch.lastEditionValidFrom" type="date">
     </sc-column>

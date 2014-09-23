@@ -2005,7 +2005,7 @@
           availableTrainings: 'Налични обучения',
           noAvailableTrainings: 'Няма налични обучения',
           ratingsTable: {
-            ratingType: 'Тип ВС (раб.място)',
+            ratingType: 'Тип ВС, Степен (раб. място)',
             ratingClass: 'Клас (категория)',
             authorization: 'Разрешение (ограничения)',
             dateValidFrom: 'Издаден',
@@ -2509,7 +2509,7 @@
         },
         chooseRatingsModal: {
           title: 'Избор на квалификации',
-          ratingTypeOrRatingLevel: 'Тип ВС (раб.място)',
+          ratingTypeOrRatingLevel: 'Тип ВС, Степен (раб.място)',
           classOrCategory: 'Клас (категория)',
           authorizationAndLimitations: 'Разрешение (ограничения)',
           lastEditionValidFrom: 'Издаден',
