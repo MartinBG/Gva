@@ -76,8 +76,6 @@ namespace Gva.MigrationTool.Sets
                         var lotEventDispatcher = dependencies.Value.Item5;
                         var context = dependencies.Value.Item6;
 
-                        unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
-
                         var lot = lotRepository.GetLotIndex(personIdToLotId[personId], fullAccess: true);
 
                         var personAddresses = this.getPersonAddresses(personId, noms);

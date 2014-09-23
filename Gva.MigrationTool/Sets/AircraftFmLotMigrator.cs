@@ -121,8 +121,6 @@ namespace Gva.MigrationTool.Sets
                         var lotEventDispatcher = dependencies.Value.Item9;
                         var context = dependencies.Value.Item10;
 
-                        unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
-
                         Func<string, bool, JObject> getInspectorImpl = (tRegUser, showErrorIfMissing) =>
                         {
                             if (string.IsNullOrWhiteSpace(tRegUser))

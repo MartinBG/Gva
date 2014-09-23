@@ -40,6 +40,7 @@ namespace Regs.Api.LotEvents
             }
 
             var context = this.unitOfWork.DbContext;
+            bool originalAutoDetectChanges = context.Configuration.AutoDetectChangesEnabled;
             context.Configuration.AutoDetectChangesEnabled = false;
 
             var commit = commitEvent.Commit;
@@ -95,7 +96,7 @@ namespace Regs.Api.LotEvents
                 newView.Value.State = EntityState.Added;
             }
 
-            context.Configuration.AutoDetectChangesEnabled = true;
+            context.Configuration.AutoDetectChangesEnabled = originalAutoDetectChanges;
             context.ChangeTracker.DetectChanges();
         }
 

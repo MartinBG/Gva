@@ -61,6 +61,7 @@ namespace Regs.Api.Models
         {
             InitializeStatics(context);
 
+            bool originalAutoDetectChanges = context.Configuration.AutoDetectChangesEnabled;
             context.Configuration.AutoDetectChangesEnabled = false;
 
             foreach (Set set in sets)
@@ -73,7 +74,7 @@ namespace Regs.Api.Models
                 context.Set<SetPart>().Attach(setPart);
             }
 
-            context.Configuration.AutoDetectChangesEnabled = true;
+            context.Configuration.AutoDetectChangesEnabled = originalAutoDetectChanges;
             context.ChangeTracker.DetectChanges();
         }
     }
