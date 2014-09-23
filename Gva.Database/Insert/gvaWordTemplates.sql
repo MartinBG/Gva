@@ -1,4 +1,4 @@
-﻿USE [Gva]
+﻿USE [$(dbName)]
 GO
 SET IDENTITY_INSERT [dbo].[GvaWordTemplates] ON 
 
