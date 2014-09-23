@@ -18,9 +18,6 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "DocumentType is required.")]
         public NomValue DocumentType { get; set; }
 
-        [Required(ErrorMessage = "DocumentRole is required.")]
-        public NomValue DocumentRole { get; set; }
-
         public string DocumentPublisher { get; set; }
 
         public string Notes { get; set; }

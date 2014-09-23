@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Json;
 using Gva.Api.ModelsDO.Persons;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.WordTemplates
@@ -60,11 +55,11 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i).Content);
-            //TODO - includedExams! var includedExams = lastEdition.GetItems<int>("includedExams")
-            //TODO - includedExams!    .Select(i => lot.Index.GetPart("personDocumentExams/" + i).Content);
+            var includedExams = lastEdition.IncludedExams
+                .Select(i => lot.Index.GetPart<PersonDocumentExamDO>("personDocumentExams/" + i).Content);
 
             var classes = this.GetClasses(includedRatings);
-            //TODO - includedExams! var documents = this.GetDocuments(includedTrainings, includedExams);
+            var documents = this.GetDocuments(includedTrainings, includedExams);
             var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
                 "BG {0} - {1} - {2}",
@@ -93,7 +88,7 @@ namespace Gva.Api.WordTemplates
                     T_ACTION = lastEdition.LicenceAction.Name,
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    //TODO - includedExams! T_DOCUMENTS = documents,
+                    T_DOCUMENTS = documents,
                     T_CLASSES = classes.Length > 10 ? classes.Take(classes.Length / 2) : classes,
                     L_CLASSES = classes.Length > 10 ? classes.Take(classes.Length / 2) : classes,
                     T_CLASSES2 = classes.Length > 10 ? classes.Skip(classes.Length / 2) : new object[0],
@@ -142,40 +137,43 @@ namespace Gva.Api.WordTemplates
             };
         }
 
-        private object[] GetDocuments(IEnumerable<JObject> includedTrainings, IEnumerable<JObject> includedExams)
+        private object[] GetDocuments(
+            IEnumerable<PersonTrainingDO> includedTrainings,
+            IEnumerable<PersonDocumentExamDO> includedExams)
         {
             var trainings = includedTrainings
-                .Where(t => t.Get<string>("valid.code") == "Y")
+                .Where(t => t.Valid.Code == "Y")
                 .Select(t =>
                     new
                     {
                         DOC = new
                         {
-                            DOC_ROLE = t.Get<string>("documentRole.name"),
+                            DOC_ROLE = t.DocumentRole.Name,
                             SUB_DOC = new
                             {
-                                DOC_TYPE = t.Get<string>("documentType.name"),
-                                DOC_NO = t.Get<string>("documentNumber"),
-                                DATE = t.Get<DateTime>("documentDateValidFrom"),
-                                DOC_PUBLISHER = t.Get<string>("documentPublisher")
+                                DOC_TYPE = t.DocumentType.Name,
+                                DOC_NO = t.DocumentNumber,
+                                DATE = t.DocumentDateValidFrom,
+                                DOC_PUBLISHER = t.DocumentPublisher
                             }
                         }
                     }).ToArray<dynamic>();
 
+            var examRole = this.nomRepository.GetNomValue("documentRoles", "exam");
             var exams = includedExams
-                .Where(e => e.Get<string>("valid.code") == "Y")
+                .Where(e => e.Valid != null && e.Valid.Code == "Y")
                 .Select(e =>
                     new
                     {
                         DOC = new
                         {
-                            DOC_ROLE = e.Get<string>("documentRole.name"),
+                            DOC_ROLE = examRole.Name,
                             SUB_DOC = new
                             {
-                                DOC_TYPE = e.Get<string>("documentType.name"),
-                                DOC_NO = e.Get<string>("documentNumber"),
-                                DATE = e.Get<DateTime>("documentDateValidFrom"),
-                                DOC_PUBLISHER = e.Get<string>("documentPublisher")
+                                DOC_TYPE = e.DocumentType.Name,
+                                DOC_NO = e.DocumentNumber,
+                                DATE = e.DocumentDateValidFrom,
+                                DOC_PUBLISHER = e.DocumentPublisher
                             }
                         }
                     }).ToArray<dynamic>();

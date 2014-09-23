@@ -1100,6 +1100,11 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "F", "flying"},
                 { "E", "graduation"},
             };
+            var roleAliases = new Dictionary<string, string>()
+            {
+                { "ENG", "engTraining" },
+                { "6", "exam" }
+            };
 
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_DOCUMENT_ROLE")
                 .Materialize(r =>
@@ -1109,7 +1114,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Code = r.Field<string>("CODE"),
                         Name = r.Field<string>("NAME"),
                         NameAlt = r.Field<string>("NAME_TRANS"),
-                        Alias = r.Field<string>("CODE") == "ENG" ? "engTraining" : null,
+                        Alias = roleAliases.ContainsKey(r.Field<string>("CODE")) ? roleAliases[r.Field<string>("CODE")] : null,
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
                         ParentValueId = null,
                         TextContentString = JsonConvert.SerializeObject(

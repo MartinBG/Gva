@@ -607,6 +607,10 @@
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
+    <Content Include="js\gva\persons\modals\exams\chooseExamsModal.html" />
+    <Content Include="js\gva\persons\modals\exams\chooseExamsModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\exams\newExamModal.html" />
+    <Content Include="js\gva\persons\modals\exams\newExamModalCtrl.js" />
     <Content Include="js\gva\persons\views\stampedDocuments\stampedDocumentsCtrl.js" />
     <Content Include="js\gva\persons\views\stampedDocuments\stampedDocuments.html" />
     <Content Include="js\gva\persons\forms\personDocumentMedicalCtrl.js" />
