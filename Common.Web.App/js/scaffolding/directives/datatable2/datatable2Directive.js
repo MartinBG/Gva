@@ -87,38 +87,6 @@ Usage <sc-datatable2 items="data"
               .html(columnDef.title + ' <span></span>')
               .addClass(columnDef.columnClass);
 
-            //if (sortable) {
-            //  if (columnDef.sortable) {
-            //    var sortingSpan = $('span', headerCell);
-
-            //    headerCell.addClass('sorting');
-            //    sortingSpan.addClass('glyphicon glyphicon-sort');
-
-            //    headerCell.on('click', function () {
-            //      $scope.$apply(function () {
-            //        if (sortingSpan.hasClass('glyphicon-sort-by-attributes')) {
-            //          $('th.sorting span', headerRow).removeClass();
-            //          $('th.sorting span', headerRow).addClass('glyphicon glyphicon-sort');
-
-            //          sortingSpan.removeClass();
-            //          sortingSpan.addClass('glyphicon glyphicon-sort-by-attributes-alt');
-
-            //          $scope.setSortingData(index, 'desc');
-            //        }
-            //        else {
-            //          $('th.sorting span', headerRow).removeClass();
-            //          $('th.sorting span', headerRow).addClass('glyphicon glyphicon-sort');
-
-            //          sortingSpan.removeClass();
-            //          sortingSpan.addClass('glyphicon glyphicon-sort-by-attributes');
-
-            //          $scope.setSortingData(index, 'asc');
-            //        }
-            //      });
-            //    });
-            //  }
-            //}
-
             headerRow.append(headerCell);
           });
 
@@ -250,6 +218,16 @@ Usage <sc-datatable2 items="data"
 
         $scope.$watch('filter', function (filter) {
           $scope.setFilter(filter);
+        });
+
+        $scope.$parent.$watchCollection($attrs.items, function (internalSet) {
+          if (!initializing) {
+            var items = _.cloneDeep(internalSet),
+              itemsCount = $scope.$parent[$attrs.itemsCount] || 0;
+
+            $scope.setItems(1, items, itemsCount || items.length);
+            $scope.render();
+          }
         });
 
         $element.bind('$destroy', function onDestroyDatatable() {

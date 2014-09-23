@@ -83,7 +83,7 @@
         return;
       }
       $scope.dataTableTexts.info = $interpolate(l10n.get('scaffolding.scDatatable.info'))({
-        total: numberWithCommas($scope.items.length),
+        total: numberWithCommas($scope.total),
         start: $scope.currentPage === 1 ?
           1 :
           numberWithCommas($scope.pageSize * ($scope.currentPage - 1) + 1),
@@ -102,6 +102,7 @@
 
     $scope.setItems = function (page, set, count) {
       $scope.items = [];
+      $scope.total = count;
       $scope.currentPage = page;
 
       for (var i = 0, l1 = set.length; i < l1; i++) {
@@ -119,7 +120,7 @@
         $scope.items.push(mappedItem);
       }
 
-      $scope.pageCount = Math.ceil(count / $scope.pageSize);
+      $scope.pageCount = Math.ceil($scope.total / $scope.pageSize);
       $scope.setPaging();
 
       updateDataTableTexts();
