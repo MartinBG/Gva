@@ -36,7 +36,7 @@ namespace Gva.Api.Models.Views.Person
 
         public DateTime LastDocDateValidFrom { get; set; }
 
-        public DateTime LastDocDateValidTo { get; set; }
+        public DateTime? LastDocDateValidTo { get; set; }
 
         public DateTime FirstDocDateValidFrom { get; set; }
 
