@@ -37,7 +37,7 @@ namespace Gva.Api.Projections.Person
             {
                 var licenceEditions = editions.Where(e => e.Content.LicencePartIndex == licence.Part.Index).ToArray();
                 var firstEdition = licenceEditions.Where(ed => ed.Content.Index == licenceEditions.Min(e => e.Content.Index)).Single();
-                var lastEdition = licenceEditions.Where(ed => ed.Content.Index == editions.Max(e => e.Content.Index)).Single();
+                var lastEdition = licenceEditions.Where(ed => ed.Content.Index == licenceEditions.Max(e => e.Content.Index)).Single();
                 var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Content.LicenceType.NomValueId);
 
                 foreach (var edition in licenceEditions)
