@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[GvaViewPersonRatings] (
     [RatingSubClasses]         NVARCHAR(MAX)     NULL,
     [Limitations]              NVARCHAR(MAX)     NULL,
     [LastDocDateValidFrom]     DATETIME2         NOT NULL,
-    [LastDocDateValidTo]       DATETIME2         NOT NULL,
+    [LastDocDateValidTo]       DATETIME2         NULL,
     [FirstDocDateValidFrom]    DATETIME2         NOT NULL,
     [Notes]                    NVARCHAR(MAX)     NULL,
     [NotesAlt]                 NVARCHAR(MAX)     NULL
