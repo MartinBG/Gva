@@ -1389,6 +1389,7 @@ namespace Gva.MigrationTool.Sets
                         }
                     })
                 .ToList()
+                .OrderBy(r => r.documentDateValidFrom)
                 .GroupBy(r => r.__LICENCE_ID)
                 .ToDictionary(g => g.Key,
                     g => g.Select(r => new JObject(
