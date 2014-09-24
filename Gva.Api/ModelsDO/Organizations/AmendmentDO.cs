@@ -9,26 +9,26 @@ namespace Gva.Api.ModelsDO.Organizations
     {
         public AmendmentDO()
         {
-            this.lims147 = new List<Lims147DO>();
-            this.lims145 = new List<Lims145DO>();
-            this.limsMG = new List<LimsMGDO>();
-            this.includedDocuments = new List<IncludedDocumentDO>();
+            this.Lims147 = new List<Lims147DO>();
+            this.Lims145 = new List<Lims145DO>();
+            this.LimsMG = new List<LimsMGDO>();
+            this.IncludedDocuments = new List<IncludedDocumentDO>();
             this.Applications = new List<ApplicationNomDO>();
         }
 
-        public string documentNumber { get; set; }
+        public string DocumentNumber { get; set; }
 
-        public string documentDateIssue { get; set; }
+        public string DocumentDateIssue { get; set; }
 
-        public int? changeNum { get; set; }
+        public int? ChangeNum { get; set; }
 
-        public List<Lims147DO> lims147 { get; set; }
+        public List<Lims147DO> Lims147 { get; set; }
 
-        public List<Lims145DO> lims145 { get; set; }
+        public List<Lims145DO> Lims145 { get; set; }
 
-        public List<LimsMGDO> limsMG { get; set; }
+        public List<LimsMGDO> LimsMG { get; set; }
 
-        public List<IncludedDocumentDO> includedDocuments { get; set; }
+        public List<IncludedDocumentDO> IncludedDocuments { get; set; }
 
         public List<ApplicationNomDO> Applications { get; set; }
     }
