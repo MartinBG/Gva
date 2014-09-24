@@ -640,6 +640,7 @@
           issueNumber: 'Удостоверение №',
           validToDate: 'Срок на валидност',
           organization: 'Организация',
+          audit: 'Инспекция',
           inspector: 'Проверил',
           valid: 'Валиден'
         },
