@@ -21,20 +21,15 @@
     <sc-column title="persons.printableDocsSearch.licenceNumber" has-content="true">
       {{licenceNumberFormatMask(item)}}
     </sc-column>
-    <sc-column title="persons.printableDocsSearch.lin" has-content="true">
-      {{item.person.lin}}
+    <sc-column title="persons.printableDocsSearch.lin"  data="person.lin">
     </sc-column>
-    <sc-column title="persons.printableDocsSearch.uin" has-content="true">
-      {{item.person.uin}}
+    <sc-column title="persons.printableDocsSearch.uin" data="person.uin">
     </sc-column>
-    <sc-column title="persons.printableDocsSearch.names" has-content="true">
-      {{item.person.names}}
+    <sc-column title="persons.printableDocsSearch.names" data="person.names">
     </sc-column>
-    <sc-column title="persons.printableDocsSearch.dateValidFrom" has-content="true">
-      {{item.dateValidFrom | date : format : mediumDate}}
+    <sc-column title="persons.printableDocsSearch.dateValidFrom" data="dateValidFrom" type="date">
     </sc-column>
-    <sc-column title="persons.printableDocsSearch.dateValidTo" has-content="true">
-      {{item.dateValidTo| date : format : mediumDate}}
+    <sc-column title="persons.printableDocsSearch.dateValidTo" data="dateValidTo" type="date">
     </sc-column>
     <sc-column title="persons.printableDocsSearch.application" has-content="true">
       <a ng-click="viewApplication(item.lotId, item.application.partIndex)">{{item.application.applicationName}}</a>
