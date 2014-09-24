@@ -37,10 +37,8 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public NomValue OperPerson { get; set; }
 
-        [MinimumLength(1)]
         public List<NomValue> CatAW { get; set; }
 
-        [MinimumLength(1)]
         public List<NomValue> Limitations { get; set; }
 
         public NomValue OperationType { get; set; }
