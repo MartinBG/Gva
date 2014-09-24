@@ -22,7 +22,6 @@ namespace Gva.Api.Controllers.Persons
     [Authorize]
     public class PersonRatingsController : GvaApplicationPartController<PersonRatingDO>
     {
-        private string path;
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
@@ -43,7 +42,6 @@ namespace Gva.Api.Controllers.Persons
             UserContext userContext)
             : base("ratings", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
         {
-            this.path = "ratings";
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
