@@ -57,7 +57,7 @@ namespace Gva.Api.Projections.Person
             string[] limitations = lastEdition.Content.Limitations != null ? lastEdition.Content.Limitations.Select(t => t.Name).ToArray() : null;
             rating.Limitations = limitations != null ? string.Join(", ", limitations) : null;
             rating.LastDocDateValidFrom = lastEdition.Content.DocumentDateValidFrom.Value;
-            rating.LastDocDateValidTo = lastEdition.Content.DocumentDateValidTo.Value;
+            rating.LastDocDateValidTo = lastEdition.Content.DocumentDateValidTo;
             rating.FirstDocDateValidFrom = firstEdition.Content.DocumentDateValidFrom.Value;
             rating.Notes = lastEdition.Content.Notes;
             rating.NotesAlt = lastEdition.Content.NotesAlt;
