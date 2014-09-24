@@ -13,19 +13,21 @@
       if (aw.part.reviews) {
         lastReview = aw.part.reviews[aw.part.reviews.length - 1];
 
-        if (lastReview.inspector && lastReview.inspector.inspector) {
-          inspectorName = lastReview.inspector.inspector.name;
-        }
+        if (lastReview) {
+          if (lastReview.inspector && lastReview.inspector.inspector) {
+            inspectorName = lastReview.inspector.inspector.name;
+          }
 
-        if (lastReview.amendment2) {
-          validFrom = lastReview.amendment2.issueDate;
-          validTo = lastReview.amendment2.validToDate;
-        } else if (lastReview.amendment1) {
-          validFrom = lastReview.amendment1.issueDate;
-          validTo = lastReview.amendment1.validToDate;
-        } else {
-          validFrom = lastReview.issueDate;
-          validTo = lastReview.validToDate;
+          if (lastReview.amendment2) {
+            validFrom = lastReview.amendment2.issueDate;
+            validTo = lastReview.amendment2.validToDate;
+          } else if (lastReview.amendment1) {
+            validFrom = lastReview.amendment1.issueDate;
+            validTo = lastReview.amendment1.validToDate;
+          } else {
+            validFrom = lastReview.issueDate;
+            validTo = lastReview.validToDate;
+          }
         }
       }
 
