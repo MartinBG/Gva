@@ -1,4 +1,4 @@
-﻿<ng-form class="form-inline">
+﻿<ng-form class="form-inline" name="form.printLicenceForm" sc-validate="{}">
   <div class="panel panel-default">
     <div class="panel-heading">
       <strong l10n-text="persons.printLicenceModal.title"></strong>
@@ -10,7 +10,7 @@
 
     <div class="well-sm panel-body">
       <div class="row">
-        <sc-field type="text" ng-model="model.stampNumber" ng-readonly="model.stampNumberReadonly" l10n-text="persons.printLicenceModal.stampNumber" class="col-sm-8"></sc-field>
+        <sc-field type="text" ng-model="model.stampNumber" ng-readonly="model.stampNumberReadonly" ng-required="true" l10n-text="persons.printLicenceModal.stampNumber" class="col-sm-8"></sc-field>
         <div class="labeless">
           <sc-link-button name="printBtn" ng-href="api/print?lotId={{model.lotId}}&licenceInd={{model.index}}" target="_blank" sc-access-token text="persons.printLicenceModal.print" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
         </div>

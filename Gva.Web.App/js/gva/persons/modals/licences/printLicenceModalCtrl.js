@@ -9,7 +9,7 @@
     scModalParams,
     licenceEdition
   ) {
-
+    $scope.form = {};
     $scope.model = {
       stampNumber: licenceEdition.part.stampNumber,
       stampNumberReadonly: !!licenceEdition.part.stampNumber,
@@ -18,14 +18,18 @@
     };
 
     $scope.save = function () {
-      licenceEdition.part.stampNumber = $scope.model.stampNumber;
+      return $scope.form.printLicenceForm.$validate().then(function () {
+        if ($scope.form.printLicenceForm.$valid) {
+          licenceEdition.part.stampNumber = $scope.model.stampNumber;
 
-      return PersonLicenceEditions.save({
-        id: scModalParams.lotId,
-        ind: scModalParams.index,
-        index: scModalParams.editionIndex
-      }, licenceEdition).$promise.then(function (savedEdition) {
-        return $modalInstance.close(savedEdition);
+          return PersonLicenceEditions.save({
+            id: scModalParams.lotId,
+            ind: scModalParams.index,
+            index: scModalParams.editionIndex
+          }, licenceEdition).$promise.then(function (savedEdition) {
+            return $modalInstance.close(savedEdition);
+          });
+        }
       });
     };
 
