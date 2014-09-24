@@ -175,6 +175,7 @@ namespace Gva.Api.WordTemplates
         {
             List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
             IEnumerable<NomValue> aircraftGroups66 = this.nomRepository.GetNomValues("aircraftGroup66").Where(r => validCodes.Contains(r.Code));
+            IEnumerable<NomValue> aircraftClases66 = this.nomRepository.GetNomValues("aircraftClases66");
 
             List<object> results = new List<object>();
             foreach (var group66 in aircraftGroups66)
@@ -185,18 +186,25 @@ namespace Gva.Api.WordTemplates
 
                 IEnumerable<NomValue> categories = categoriesIds.Select(categoryId => this.nomRepository.GetNomValue("aircraftClases66", categoryId));
                 IEnumerable<string> aliases = categories.Select(category => category.TextContent.Get<string>("alias"));
-
-                results.Add(new
+                 results.Add(new
                 {
                     NAME = new
                     {
                         EN = group66.NameAlt,
                         BG = group66.Name
                     },
-                    CAT1 = aliases.Contains("A") ? "X" : "n/a",
-                    CAT2 = aliases.Contains("B 1") ? "X" : "n/a",
-                    CAT3 = aliases.Contains("B 2") ? "X" : "n/a",
-                    CAT43 = aliases.Contains("C") ? "X" : "n/a"
+                    CAT1 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("A")).Any() ?
+                    "n/a" : aliases.Contains("A") ?
+                    aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("A")).First().Code : "X",
+                    CAT2 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 1")).Any() ?
+                    "n/a" : aliases.Contains("B 1") ?
+                    aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 1")).First().Code : "X",
+                    CAT3 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 2")).Any() ?
+                    "n/a" : aliases.Contains("B 2") ?
+                    aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 2")).First().Code : "X",
+                    CAT43 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("C")).Any() ?
+                    "n/a" : aliases.Contains("C") ?
+                    aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("C")).First().Code : "X",
                 });
             }
             return results.ToArray<object>();
