@@ -73,7 +73,7 @@ namespace Gva.Api.Repositories.OrganizationRepository
         {
             return (from r in this.unitOfWork.DbContext.Set<GvaViewOrganizationRecommendation>()
                    join ir in this.unitOfWork.DbContext.Set<GvaViewOrganizationInspectionRecommendation>() on r.PartIndex equals ir.RecommendationPartIndex
-                   where ir.InspectionPartIndex == inspectionPartIndex
+                   where ir.InspectionPartIndex == inspectionPartIndex && ir.LotId == lotId
                    select r)
                    .ToList();
         }
