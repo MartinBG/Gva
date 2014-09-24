@@ -5,7 +5,6 @@
   var organizationData = require('./organization-data.sample'),
     organizationAddresses = require('./organization-address.sample'),
     certAirportOperators = require('./organization-cert-airportoperator.sample'),
-    organizationAuditplans = require('./organization-auditplan.sample'),
     staffManagement = require('./organization-staff-managment.sample'),
     organizationOtherDocuments = require('./organization-document-other.sample'),
     certGroundServiceOperators = require('./organization-cert-groundserviceoperator.sample'),
@@ -43,16 +42,6 @@
         {
           partIndex: 5,
           part: certAirportOperators.organization1CertAirportOperator2
-        }
-      ],
-      organizationAuditplans: [
-        {
-          partIndex: 6,
-          part: organizationAuditplans.organization1Auditplan1
-        },
-        {
-          partIndex: 7,
-          part: organizationAuditplans.organization1Auditplan2
         }
       ],
       staffManagement: [

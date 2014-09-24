@@ -150,8 +150,6 @@
     <Compile Include="ModelsDO\Organizations\ExtDO.cs" />
     <Compile Include="ModelsDO\Organizations\IncludedDocumentDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDO.cs" />
-    <Compile Include="ModelsDO\Organizations\OrganizationAuditplanDO.cs" />
-    <Compile Include="Controllers\Organizations\OrganizationAuditplansController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationAddressesController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationStaffExaminersController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationStaffManagementController.cs" />

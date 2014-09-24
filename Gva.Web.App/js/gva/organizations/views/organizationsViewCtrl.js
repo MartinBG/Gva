@@ -86,8 +86,7 @@
       $scope.tablist = _.extend($scope.tablist, {
         'organizations.tabs.inspections': {
           'organizations.tabs.inspection': 'root.organizations.view.inspections',
-          'organizations.tabs.recommendations': 'root.organizations.view.recommendations',
-          'organizations.tabs.auditplans': 'root.organizations.view.auditplans'
+          'organizations.tabs.recommendations': 'root.organizations.view.recommendations'
         },
         'organizations.tabs.staff': {
           'organizations.tabs.staffManagement': 'root.organizations.view.staffManagement',

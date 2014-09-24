@@ -283,10 +283,6 @@
       controller: 'OrganizationCertificateCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaOrganizationAuditplan',
-      templateUrl: 'js/gva/organizations/forms/organizationAuditplan.html'
-    });
-    scaffoldingProvider.form({
       name: 'gvaOrganizationStaffManagement',
       templateUrl: 'js/gva/organizations/forms/organizationStaffManagement.html',
       controller: 'OrgStaffManagementCtrl'
@@ -632,10 +628,6 @@
       .state(['root.organizations.view.certAirCarriers.search'                                   , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/certAirCarriers/certAirCarriersSearch.html'                                                  , 'CertAirCarriersSearchCtrl'                         ]])
       .state(['root.organizations.view.certAirCarriers.new'                                      , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/certAirCarriers/certAirCarriersNew.html'                                                     , 'CertAirCarriersNewCtrl'                            ]])
       .state(['root.organizations.view.certAirCarriers.edit'                                     , '/:ind'                                      , ['@root.organizations.view', 'js/gva/organizations/views/certAirCarriers/certAirCarriersEdit.html'                                                    , 'CertAirCarriersEditCtrl'                           ]])
-      .state(['root.organizations.view.auditplans'                                               , '/auditplans'                                                                                                                                                                                                                                               ])
-      .state(['root.organizations.view.auditplans.search'                                        , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/auditplans/auditplansSearch.html'                                                            , 'AuditplansSearchCtrl'                              ]])
-      .state(['root.organizations.view.auditplans.new'                                           , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/auditplans/auditplansNew.html'                                                               , 'AuditplansNewCtrl'                                 ]])
-      .state(['root.organizations.view.auditplans.edit'                                          , '/:ind'                                      , ['@root.organizations.view', 'js/gva/organizations/views/auditplans/auditplansEdit.html'                                                              , 'AuditplansEditCtrl'                                ]])
       .state(['root.organizations.view.staffManagement'                                          , '/staffManagement'                                                                                                                                                                                                                                          ])
       .state(['root.organizations.view.staffManagement.search'                                   , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/staffManagement/staffManagementSearch.html'                                                  , 'StaffManagementSearchCtrl'                         ]])
       .state(['root.organizations.view.staffManagement.new'                                      , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/staffManagement/staffManagementNew.html'                                                     , 'StaffManagementNewCtrl'                            ]])

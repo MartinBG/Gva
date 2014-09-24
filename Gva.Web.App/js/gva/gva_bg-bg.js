@@ -3040,7 +3040,6 @@
           inspections: 'Одити и надзор',
           inspection: 'Одит',
           recommendations: 'Доклад от препоръки',
-          auditplans: 'План за надзор',
           staff: 'Персонал',
           staffManagement: 'Ръководен персонал',
           staffExaminers: 'Проверяващи ЛГ',
@@ -3230,24 +3229,6 @@
           postalCode: 'Пощенски код',
           contactPerson: 'Лице за контакти',
           email: 'E-мейл адрес'
-        },
-        auditplanSearch: {
-          newAuditplan: 'Нов план за одит',
-          auditPartRequirement: 'Изискване',
-          planYear: 'Година',
-          planMonth: 'Месец'
-        },
-        newAuditplan: {
-          title: 'Нов план за одит',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editAuditplan: {
-          title: 'Преглед на план за одит',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deleteAuditplan: 'Изтрий'
         },
         staffManagementSearch: {
           newStaffManagement: 'Нов ръководен персонал',
@@ -3511,11 +3492,6 @@
           testScore: 'Оценка от писмен тест',
           valid: 'Валиден',
           applications: 'Заявления'
-        },
-        auditplanDirective: {
-          auditPartRequirement: 'Изискване',
-          planYear: 'Година',
-          planMonth: 'Месец'
         },
         organizationDataDirective: {
           name: 'Наименование',
@@ -3900,9 +3876,6 @@
         'root.organizations.view.certAirNavigationServiceDeliverers.new': 'Ново свидетелство',
         'root.organizations.view.certAirNavigationServiceDeliverers.edit':
           'Преглед на свидетелство',
-        'root.organizations.view.auditplans': 'План за надзор',
-        'root.organizations.view.auditplans.new': 'Нов план за одит',
-        'root.organizations.view.auditplans.edit': 'Преглед на план за одит',
         'root.organizations.view.documentOthers': 'Други документи',
         'root.organizations.view.documentOthers.new': 'Нов документ',
         'root.organizations.view.documentOthers.edit': 'Преглед на документ',

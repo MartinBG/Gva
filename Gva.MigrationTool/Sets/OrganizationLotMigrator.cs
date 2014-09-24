@@ -158,12 +158,6 @@ namespace Gva.MigrationTool.Sets
                             organizationDocuments.Add(organizationDocumentOther["part"]["__oldId"].Value<int>(), pv);
                         }
 
-                        var organizationAuditPlans = this.getOrganizationAuditPlan(organizationId, noms);
-                        foreach (var organizationAuditPlan in organizationAuditPlans)
-                        {
-                            lot.CreatePart("organizationAuditplans/*", organizationAuditPlan, context);
-                        }
-
                         var organizationApprovals = this.getOrganizationApproval(organizationId, noms, organizationDocuments, getPersonByApexId, nomApplications);
                         foreach (var organizationApproval in organizationApprovals)
                         {
@@ -639,25 +633,6 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
                     .ToList();
-        }
-
-        private IList<JObject> getOrganizationAuditPlan(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms)
-        {
-            return this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.AUDITS_PLAN WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and FIRM_ID = {0}", organizationId)
-                )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "AUDITS_PLAN",
-                        auditPartRequirementId = noms["auditPartRequirements"].ByOldId(r.Field<long?>("NM_REQUIRM_ID").ToString()),
-                        planYear = r.Field<short?>("PLAN_YEAR"),
-                        planMonth = r.Field<short?>("PLAN_MONTH")
-                    }))
-                .ToList();
         }
 
         //TODO
