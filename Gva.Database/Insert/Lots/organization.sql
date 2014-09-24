@@ -11,7 +11,6 @@ INSERT INTO [LotSetParts]
     ([LotSetId], [Name]                                                                                  , [Alias]                                                      , [PathRegex]                                              , [LotSchemaId]            )
 VALUES
     (@setId    , 'Адрес'                                                                                 , 'organizationAddress'                                        , N'^organizationAddresses/\d+$'                           , NULL                     ),
-    (@setId    , 'План за одит'                                                                          , 'organizationAuditplan'                                      , N'^organizationAuditplans/\d+$'                          , NULL                     ),
     (@setId    , 'Лиценз на летищен оператор'                                                            , 'organizationCertAirportOperator'                            , N'^organizationCertAirportOperators/\d+$'                , NULL                     ),
     (@setId    , 'Лиценз на оператор по наземно обслужване или самообслужване'                           , 'organizationCertGroundServiceOperator'                      , N'^organizationCertGroundServiceOperators/\d+$'          , NULL                     ),
     (@setId    , 'Удостоверение за експлоатационна годност на системи и съоръжения за наземно обслужване', 'organizationOrganizationGroundServiceOperatorSnoOperational', N'^organizationGroundServiceOperatorsSnoOperational/\d+$', NULL                     ),

@@ -155,7 +155,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<OrganizationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationAddressesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationApplicationsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<OrganizationAuditplansController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationDocumentOthersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationInspectionsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationStaffExaminersController>().InstancePerLifetimeScope();

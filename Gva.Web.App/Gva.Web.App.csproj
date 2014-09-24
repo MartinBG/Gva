@@ -463,7 +463,6 @@
     <Content Include="js\gva\organizations\forms\organizationAmendment.html" />
     <Content Include="js\gva\organizations\forms\organizationAmendmentCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationApproval.html" />
-    <Content Include="js\gva\organizations\forms\organizationAuditplan.html" />
     <Content Include="js\gva\organizations\forms\organizationCertificate.html" />
     <Content Include="js\gva\organizations\forms\organizationCertificateCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationData.html" />
@@ -491,7 +490,6 @@
     <Content Include="js\gva\organizations\resources\organizationAddresses.js" />
     <Content Include="js\gva\organizations\resources\organizationApplications.js" />
     <Content Include="js\gva\organizations\resources\organizationApprovals.js" />
-    <Content Include="js\gva\organizations\resources\organizationAuditplans.js" />
     <Content Include="js\gva\organizations\resources\organizationCertAirCarriers.js" />
     <Content Include="js\gva\organizations\resources\organizationCertAirNavigationServiceDeliverers.js" />
     <Content Include="js\gva\organizations\resources\organizationCertAirOperators.js" />
@@ -519,12 +517,6 @@
     <Content Include="js\gva\organizations\views\approvals\approvalsNewCtrl.js" />
     <Content Include="js\gva\organizations\views\approvals\approvalsSearch.html" />
     <Content Include="js\gva\organizations\views\approvals\approvalsSearchCtrl.js" />
-    <Content Include="js\gva\organizations\views\auditplans\auditplansEdit.html" />
-    <Content Include="js\gva\organizations\views\auditplans\auditplansEditCtrl.js" />
-    <Content Include="js\gva\organizations\views\auditplans\auditplansNew.html" />
-    <Content Include="js\gva\organizations\views\auditplans\auditplansNewCtrl.js" />
-    <Content Include="js\gva\organizations\views\auditplans\auditplansSearch.html" />
-    <Content Include="js\gva\organizations\views\auditplans\auditplansSearchCtrl.js" />
     <Content Include="js\gva\organizations\views\certAirCarriers\certAirCarriersEdit.html" />
     <Content Include="js\gva\organizations\views\certAirCarriers\certAirCarriersEditCtrl.js" />
     <Content Include="js\gva\organizations\views\certAirCarriers\certAirCarriersNew.html" />
@@ -925,7 +917,6 @@
     <Content Include="schema\organizations\organization-address.sample.js" />
     <Content Include="schema\organizations\organization-amendment.sample.js" />
     <Content Include="schema\organizations\organization-approval.sample.js" />
-    <Content Include="schema\organizations\organization-auditplan.sample.js" />
     <Content Include="schema\organizations\organization-cert-airportoperator.sample.js" />
     <Content Include="schema\organizations\organization-cert-groundserviceoperator.sample.js" />
     <Content Include="schema\organizations\organization-cert-groundserviceoperatorssnooperational.sample.js" />
@@ -1031,7 +1022,6 @@
     <Content Include="test\gva\organizations\mocks\organizationAddressesHttp.js" />
     <Content Include="test\gva\organizations\mocks\organizationAmendmentsHttp.js" />
     <Content Include="test\gva\organizations\mocks\organizationApprovalsHttp.js" />
-    <Content Include="test\gva\organizations\mocks\organizationAuditplansHttp.js" />
     <Content Include="test\gva\organizations\mocks\organizationCertAirportOperatorsHttp.js" />
     <Content Include="test\gva\organizations\mocks\organizationCertGroundServiceOperatorsHttp.js" />
     <Content Include="test\gva\organizations\mocks\organizationCertGroundServiceOperatorsSnoOperationalHttp.js" />
