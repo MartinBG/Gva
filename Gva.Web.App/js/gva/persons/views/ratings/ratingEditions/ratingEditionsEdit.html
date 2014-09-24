@@ -42,7 +42,7 @@
     <div class="panel-heading">
       <strong l10n-text="persons.editRatingEdition.editionForm"></strong>
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="persons.editRatingEdition.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        <sc-button name="editBtn" btn-click="edit()" text="persons.editRatingEdition.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode" ng-disabled="currentRatingEdition.partIndex !== lastEditionIndex">
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteCurrentEdition()" text="persons.editRatingEdition.deleteEdition" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>

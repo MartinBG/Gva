@@ -18,6 +18,7 @@
     $scope.lotId = $stateParams.id;
     $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.appId = $stateParams.appId;
+    $scope.lastEditionIndex = _.last(licenceEditions).partIndex;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
