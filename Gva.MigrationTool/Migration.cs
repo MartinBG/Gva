@@ -295,15 +295,30 @@ namespace Gva.MigrationTool
                 //migrate organizations
                 organization.migrateOrganizations(noms, orgIdtoLotId, getAircraftByApexId, getPersonByApexId, blobIdsToFileKeys);
 
-                Stopwatch rebuildTimer = new Stopwatch();
-                rebuildTimer.Start();
-                Console.WriteLine("Rebuilding lot part tokens...");
+
                 var lotRepository = scope.Resolve<ILotRepository>();
                 var unitOfWork = scope.Resolve<IUnitOfWork>();
                 ((IObjectContextAdapter)unitOfWork.DbContext).ObjectContext.CommandTimeout = 0;//wait indefinitely
+
+                // rebuild indexes
+                Stopwatch indexRebuildTimer = new Stopwatch();
+                indexRebuildTimer.Start();
+                Console.WriteLine("Rebuilding indexes...");
+
+                unitOfWork.DbContext.Database.ExecuteSqlCommand("exec sp_MSforeachtable 'SET QUOTED_IDENTIFIER ON; ALTER INDEX ALL ON ? REBUILD'");
+
+                indexRebuildTimer.Stop();
+                Console.WriteLine("Rebuilding indexes time - {0}", indexRebuildTimer.Elapsed.TotalMinutes);
+
+                // rebuild lot part tokens
+                Stopwatch tokenRebuildTimer = new Stopwatch();
+                tokenRebuildTimer.Start();
+                Console.WriteLine("Rebuilding lot part tokens...");
+
                 lotRepository.ExecSpRebuildLotPartTokens();
-                rebuildTimer.Stop();
-                Console.WriteLine("Rebuilding lot part tokens time - {0}", rebuildTimer.Elapsed.TotalMinutes);
+
+                tokenRebuildTimer.Stop();
+                Console.WriteLine("Rebuilding lot part tokens time - {0}", tokenRebuildTimer.Elapsed.TotalMinutes);
 
                 timer.Stop();
                 Console.WriteLine("Migration time - {0}", timer.Elapsed.TotalMinutes);
