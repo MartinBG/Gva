@@ -61,6 +61,7 @@ namespace Gva.MigrationTool.Blobs
             if (waitHandle != null)
             {
                 int eventThatSignaledIndex = WaitHandle.WaitAny(new WaitHandle[] { waitHandle, this.cancellationToken.WaitHandle });
+                waitHandle.Dispose();
                 if (eventThatSignaledIndex == 1)
                 {
                     throw new OperationCanceledException(this.cancellationToken);
@@ -82,7 +83,6 @@ namespace Gva.MigrationTool.Blobs
                         this.incrementQueue.Dequeue();
                         this.currentSize += nextIncrement.Increment;
                         nextIncrement.WaitHandle.Set();
-                        nextIncrement.WaitHandle.Dispose();
                     }
                     else
                     {
