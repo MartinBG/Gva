@@ -4,7 +4,7 @@
 
   function AircraftDataCtrl($scope, Aircrafts, scFormParams) {
     $scope.isUniqueMSN = function (msn) {
-      return Aircrafts.checkMSN({ msn: msn, id: scFormParams.lotId }).$promise
+      return Aircrafts.checkMSN({ msn: msn, aircraftId: scFormParams.lotId }).$promise
         .then(function (data) {
           return data.isValid;
         });
