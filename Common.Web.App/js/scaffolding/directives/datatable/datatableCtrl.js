@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular, _, moment*/
+(function (angular, _, moment) {
   'use strict';
 
   function DatatableCtrl(
@@ -99,8 +99,17 @@
     var updateSortedItems = function () {
       if ($scope.sortingColumnIndex !== null && $scope.sortingColumnIndex !== undefined) {
         $scope.sortedItems = $scope.filteredItems.slice();
-        $scope.sortedItems = _.sortBy($scope.sortedItems, function(x) {
-          return x[$scope.sortingColumnIndex];
+        $scope.sortedItems = _.sortBy($scope.sortedItems, function (x) {
+          if ($scope.columnDefs[$scope.sortingColumnIndex].type === 'date') {
+            if (x[$scope.sortingColumnIndex] !== null &&
+              x[$scope.sortingColumnIndex] !== undefined) {
+              return moment(x[$scope.sortingColumnIndex], 'DD.MM.YYYY').toDate();
+            } else {
+              return undefined;
+            }
+          } else {
+            return x[$scope.sortingColumnIndex];
+          }
         });
 
         if ($scope.sortingType !== 'asc') {
@@ -271,4 +280,4 @@
   });
 
   angular.module('scaffolding').controller('DatatableCtrl', DatatableCtrl);
-}(angular, _));
+}(angular, _, moment));
