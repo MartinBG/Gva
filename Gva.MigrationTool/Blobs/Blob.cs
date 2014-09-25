@@ -62,7 +62,7 @@ namespace Gva.MigrationTool.Blobs
                 ConcurrentQueue<int> blobIds = new ConcurrentQueue<int>(ids);
                 BlockingCollection<long> downloadedBytes = new BlockingCollection<long>();
                 BlockingCollection<long> uploadedBytes = new BlockingCollection<long>();
-
+                RateLimiter rateLimiter = new RateLimiter(0, 2 * 1024 * 1024 * 1024L, ct);
 
                 Task.WaitAll(
                     Task.WhenAll(
@@ -72,7 +72,7 @@ namespace Gva.MigrationTool.Blobs
                             {
                                 using (downloader)
                                 {
-                                    downloader.StartDownloading(blobIds, blobContents, downloadedBytes, cts, ct);
+                                    downloader.StartDownloading(blobIds, rateLimiter, blobContents, downloadedBytes, cts, ct);
                                 }
                             })
                             .ContinueWith((t) =>
@@ -90,7 +90,7 @@ namespace Gva.MigrationTool.Blobs
                             {
                                 using (uploader)
                                 {
-                                    uploader.StartUploading(blobContents, blobIdsToFileKeysConcurrent, uploadedBytes, cts, ct);
+                                    uploader.StartUploading(blobContents, rateLimiter, blobIdsToFileKeysConcurrent, uploadedBytes, cts, ct);
                                 }
                             }))
                         .ContinueWith((t) =>
@@ -103,8 +103,8 @@ namespace Gva.MigrationTool.Blobs
                                     throw t.Exception;
                                 }
                             }),
-                    Task.Run(() => PrintInfo(Console.CursorTop, "Downloaded", downloadedBytes)),
-                    Task.Run(() => PrintInfo(Console.CursorTop + 1, "Uploaded", uploadedBytes)));
+                    Task.Run(() => PrintInfo(Console.CursorTop, "Downloaded", downloadedBytes, rateLimiter)),
+                    Task.Run(() => PrintInfo(Console.CursorTop + 1, "Uploaded", uploadedBytes, rateLimiter)));
 
                 blobIdsToFileKeys = blobIdsToFileKeysConcurrent.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             }
@@ -115,7 +115,7 @@ namespace Gva.MigrationTool.Blobs
             return blobIdsToFileKeys;
         }
 
-        private void PrintInfo(int cursorTop, string task, BlockingCollection<long> bytes)
+        private void PrintInfo(int cursorTop, string task, BlockingCollection<long> bytes, RateLimiter rateLimitier)
         {
             int count = 0;
             double totalSpeedKBPerSec = 0;
@@ -129,6 +129,8 @@ namespace Gva.MigrationTool.Blobs
             periodTimer.Start();
             long periodBytes = 0;
             long periodMs = 5000;
+
+            long maxSize = 0;
 
             foreach (var b in bytes.GetConsumingEnumerable())
             {
@@ -145,13 +147,16 @@ namespace Gva.MigrationTool.Blobs
 
                 totalSpeedKBPerSec = (((double)totalBytes) / 1024) / ((((double)totalTimer.ElapsedMilliseconds) + 1) / 1000);
 
+                maxSize = Math.Max(maxSize, rateLimitier.CurrentSize);
+
                 Console.SetCursorPosition(0, cursorTop);
                 Console.Write(
-                    string.Format("{0,-10} {1,6} | Avg: {2,7} KB/s | Current {3,7} KB/s",
+                    string.Format("{0,-10} {1,6} | Avg: {2,7} KB/s | Current {3,7} KB/s {4}",
                         task,
                         count,
                         Math.Round(totalSpeedKBPerSec, 1).ToString("0.0"),
-                        Math.Round(periodSpeedKBPerSec, 1).ToString("0.0"))
+                        Math.Round(periodSpeedKBPerSec, 1).ToString("0.0"),
+                        maxSize)
                     .PadRight(80));
             }
 

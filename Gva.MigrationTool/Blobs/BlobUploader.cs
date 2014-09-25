@@ -20,6 +20,7 @@ namespace Gva.MigrationTool.Blobs
         public void StartUploading(
             //intput
             BlockingCollection<Tuple<int, MemoryStream>> blobContents,
+            RateLimiter rateLimiter,
             //output
             ConcurrentDictionary<int, string> blobIdsToFileKeys,
             BlockingCollection<long> uploadedBytes,
@@ -60,6 +61,8 @@ namespace Gva.MigrationTool.Blobs
                         {
                             throw new Exception("blobId already present in dictionary");
                         }
+
+                        rateLimiter.Decrement(length);
                         uploadedBytes.Add(length);
                     }
                 }

@@ -19,6 +19,7 @@ namespace Gva.MigrationTool.Blobs
         public void StartDownloading(
             //intput
             ConcurrentQueue<int> blobIds,
+            RateLimiter rateLimiter,
             //output
             BlockingCollection<Tuple<int, MemoryStream>> blobContents,
             BlockingCollection<long> downloadedBytes,
@@ -56,8 +57,10 @@ namespace Gva.MigrationTool.Blobs
                             blob.CopyTo(ms);
                             ms.Position = 0;
 
-                            blobContents.Add(Tuple.Create(blobId, ms));
                             downloadedBytes.Add(ms.Length);
+
+                            rateLimiter.Increment(ms.Length);
+                            blobContents.Add(Tuple.Create(blobId, ms));
                         }
                     }
                 }
