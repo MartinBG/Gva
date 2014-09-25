@@ -257,7 +257,7 @@ namespace Gva.MigrationTool.Sets
                         model = r.Field<string>("PART_MODEL"),
                         modelAlt = r.Field<string>("PART_MODEL_TRANS"),
                         sn = r.Field<string>("SN"),
-                        count = r.Field<decimal?>("PART_NUMBER"),
+                        count = r.Field<int>("PART_NUMBER"),
                         aircraftPartStatus = noms["aircraftPartStatuses"].ByOldId(r.Field<string>("NEW_YN").ToString()),
                         manDate = r.Field<DateTime?>("MAN_DATE"),
                         manPlace = r.Field<string>("MAN_PLACE"),
