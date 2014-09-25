@@ -383,11 +383,12 @@
     });
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
-     .modal('choosePublisher', 'js/gva/common/modals/publishers/choosePublisherModal.html', 'ChoosePublisherModalCtrl')
-     .modal('choosePerson'   , 'js/gva/common/modals/persons/choosePersonModal.html'      , 'ChoosePersonModalCtrl'   )
-     .modal('newPerson'      , 'js/gva/common/modals/persons/newPersonModal.html'         , 'NewPersonModalCtrl'      )
-     .modal('chooseExaminers', 'js/gva/common/modals/examiners/chooseExaminersModal.html' , 'ChooseExaminersModalCtrl')
-     .modal('editDisparity'  , 'js/gva/common/modals/disparities/editDisparityModal.html' , 'EditDisparityModalCtrl'  );
+     .modal('choosePublisher', 'js/gva/common/modals/publishers/choosePublisherModal.html'  , 'ChoosePublisherModalCtrl')
+     .modal('choosePerson'   , 'js/gva/common/modals/persons/choosePersonModal.html'        , 'ChoosePersonModalCtrl'   )
+     .modal('newPerson'      , 'js/gva/common/modals/persons/newPersonModal.html'           , 'NewPersonModalCtrl'      )
+     .modal('chooseExaminers', 'js/gva/common/modals/examiners/chooseExaminersModal.html'   , 'ChooseExaminersModalCtrl')
+     .modal('editDisparity'  , 'js/gva/common/modals/disparities/editDisparityModal.html'   , 'EditDisparityModalCtrl'  )
+     .modal('viewApplication', 'js/gva/common/modals/applications/viewApplicationModal.html', 'ViewApplicationModalCtrl');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])

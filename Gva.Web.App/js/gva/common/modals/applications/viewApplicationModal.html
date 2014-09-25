@@ -1,0 +1,21 @@
+﻿<ng-form sc-form-readonly="true">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="common.viewApplicationModal.title"></strong>
+
+      <div class="pull-right">
+        <sc-button name="toAppBtn" btn-click="toApplication()" text="common.viewApplicationModal.toApp" class="btn btn-primary btn-xs" icon="glyphicon-arrow-right">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="common.viewApplicationModal.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <gva-common-document-application name="documentApplicationForm" ng-model="application.part" sc-form-params="{ lotId: lotId }"></gva-common-document-application>
+
+      <gva-common-scanned-document name="scannedDocumentForm" ng-model="application.files"
+        sc-form-params="{ setPart: setPart, lotId: lotId, hideApplications: true }"></gva-common-scanned-document>
+    </div>
+  </div>
+</ng-form>

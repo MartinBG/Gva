@@ -1,12 +1,10 @@
-﻿/*
-Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applications>
-*/
+﻿// Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applications>
 
 /*global angular, Select2*/
 (function (angular, Select2) {
   'use strict';
 
-  function ApplicationsDirective($state, $stateParams, $compile, $parse, ApplicationNoms) {
+  function ApplicationsDirective(scModal, $state, $stateParams, $compile, $parse, ApplicationNoms) {
     function preLink(scope, element, attrs) {
       var lotId = $parse(attrs.lotId)(scope) || attrs.lotId || $stateParams.id;
 
@@ -40,40 +38,69 @@ Usage: <gva-applications ng-model="model" state-name="stateName"></gva-applicati
     function postLink(scope, iElement, iAttrs) {
       var setPart = $parse(iAttrs.setPart)(scope) || iAttrs.setPart,
           lotId = $parse(iAttrs.lotId)(scope) || iAttrs.lotId || $stateParams.id,
-          stateName;
+          path;
+
       if (setPart === 'person') {
-        stateName = 'root.persons.view.documentApplications.edit';
+        path = 'personDocumentApplications';
       }
       else if (setPart === 'organization') {
-        stateName = 'root.organizations.view.documentApplications.edit';
+        path = 'organizationDocumentApplications';
       }
       else if (setPart === 'aircraft') {
-        stateName = 'root.aircrafts.view.applications.edit';
+        path = 'aircraftDocumentApplications';
       }
       else if (setPart === 'airport') {
-        stateName = 'root.airports.view.applications.edit';
+        path = 'airportDocumentApplications';
       }
       else if (setPart === 'equipment') {
-        stateName = 'root.equipments.view.applications.edit';
+        path = 'equipmentDocumentApplications';
       }
 
       scope.viewApplication = function (partIndex) {
-        $state.go(stateName, {
-          id: lotId,
-          ind: partIndex
+        var modalInstance = scModal.open('viewApplication', {
+          lotId: lotId,
+          path: path,
+          partIndex: partIndex,
+          setPart: setPart
         });
+
+        modalInstance.result.then(function () {
+          var stateName;
+
+          if (setPart === 'person') {
+            stateName = 'root.persons.view.documentApplications.edit';
+          }
+          else if (setPart === 'organization') {
+            stateName = 'root.organizations.view.documentApplications.edit';
+          }
+          else if (setPart === 'aircraft') {
+            stateName = 'root.aircrafts.view.applications.edit';
+          }
+          else if (setPart === 'airport') {
+            stateName = 'root.airports.view.applications.edit';
+          }
+          else if (setPart === 'equipment') {
+            stateName = 'root.equipments.view.applications.edit';
+          }
+
+          $state.go(stateName, { id: lotId, ind: partIndex });
+        });
+
+        return modalInstance.opened;
       };
     }
 
     return {
       restrict: 'E',
       replace: true,
-      template: '<input type="hidden" class="input-sm form-control" ui-select2="appSelectOpt" />',
+      template: '<input type="hidden" class="input-sm form-control"' +
+                    'id="appSelect" ui-select2="appSelectOpt" />',
       link: { pre: preLink, post: postLink }
     };
   }
 
   ApplicationsDirective.$inject = [
+    'scModal',
     '$state',
     '$stateParams',
     '$compile',

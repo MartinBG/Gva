@@ -53,6 +53,11 @@
           closureDate: 'Дата на закриване',
           description: 'Описание на несъответствие'
         },
+        viewApplicationModal: {
+          title: 'Преглед на заяление',
+          toApp: 'Към заявление',
+          cancel: 'Отказ'
+        },
         publishers: {
           publisherType: 'Тип',
           name: 'Наименование',
