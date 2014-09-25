@@ -128,7 +128,7 @@
             </td>
             <td>
               <sc-button type="button" btn-click="addDisparity(detail)" class="btn btn-primary btn-xs pull-right" icon="glyphicon-plus" 
-                  ng-show="detail.auditResult.code === 'D'"
+                  ng-show="detail.recommendationResult.code === 'D'"
                   ng-disabled="form.$readonly">
               </sc-button>
               <div class="nav-pills pull-left" ng-repeat="dispIndex in detailDisparities[detail.code]">
