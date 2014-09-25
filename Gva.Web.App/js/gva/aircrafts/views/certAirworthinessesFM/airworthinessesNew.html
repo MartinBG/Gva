@@ -19,10 +19,10 @@
 
       <div ng-if="aw.part.airworthinessCertificateType.alias !== 'special'">
         <h5 class="form-header" l10n-text="aircrafts.newAirworthiness.titleReview" style="margin-top: 20px;"></h5>
-        <gva-airworthiness-form15-main ng-if="aw.part.airworthinessCertificateType.alias === 'f24' || aw.part.airworthinessCertificateType.alias === 'f25' || aw.part.airworthinessCertificateType.alias === 'unknown'"
+        <gva-airworthiness-form15-main ng-if="aw.part.airworthinessCertificateType.alias === 'f24' || aw.part.airworthinessCertificateType.alias === 'f25'"
           name="airworthinessReview" ng-model="reviewForm15" readonly="readonly">
         </gva-airworthiness-form15-main>
-        <gva-airworthiness-review-other ng-if="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla'"
+        <gva-airworthiness-review-other ng-if="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla' || aw.part.airworthinessCertificateType.alias === 'unknown'"
           name="airworthinessReview" ng-model="reviewOther" readonly="readonly">
         </gva-airworthiness-review-other>
       </div>

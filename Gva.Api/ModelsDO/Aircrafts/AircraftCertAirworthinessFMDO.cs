@@ -18,7 +18,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
         [Required(ErrorMessage = "Registration is required.")]
         public PartSelectDO Registration { get; set; }
 
-        [Required(ErrorMessage = "DocumentNumber is required.")]
         public string DocumentNumber { get; set; }
 
         [Required(ErrorMessage = "IssueDate is required.")]

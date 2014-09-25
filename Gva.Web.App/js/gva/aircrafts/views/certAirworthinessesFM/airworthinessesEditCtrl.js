@@ -125,7 +125,7 @@
           form;
       if (actAlias === 'f24' || actAlias === 'f25') {
         form = $scope.airworthinessReviewF15Form;
-      } else if (actAlias === 'directive8' || actAlias === 'vla') {
+      } else if (actAlias === 'directive8' || actAlias === 'vla' || actAlias === 'unknown') {
         form = $scope.airworthinessReviewOtherForm;
       }
 
