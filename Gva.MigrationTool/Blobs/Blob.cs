@@ -62,7 +62,14 @@ namespace Gva.MigrationTool.Blobs
                 ConcurrentQueue<int> blobIds = new ConcurrentQueue<int>(ids);
                 BlockingCollection<long> downloadedBytes = new BlockingCollection<long>();
                 BlockingCollection<long> uploadedBytes = new BlockingCollection<long>();
-                RateLimiter rateLimiter = new RateLimiter(0, 2 * 1024 * 1024 * 1024L, ct);
+
+                int maxUploadQueueSizeInMB;
+                if (!int.TryParse(ConfigurationManager.AppSettings["MaxUploadQueueSizeInMB"], out maxUploadQueueSizeInMB))
+                {
+                    maxUploadQueueSizeInMB = 8 * 1024;//8GB default
+                }
+
+                RateLimiter rateLimiter = new RateLimiter(0, maxUploadQueueSizeInMB * 1024 * 1024L, ct);
 
                 Task.WaitAll(
                     Task.WhenAll(
