@@ -44,6 +44,8 @@ namespace Gva.MigrationTool.Blobs
 
                 try
                 {
+                    MemoryStream ms = new MemoryStream();
+
                     using (var cmd = (OracleCommand)oracleConn.CreateStoreCommand(
                         @"SELECT CONTENTS FROM CAA_DOC.DOCLIB_DOCUMENTS WHERE {0}",
                         new DbClause("DOC_ID = {0}", blobId)))
@@ -53,16 +55,15 @@ namespace Gva.MigrationTool.Blobs
 
                         using (var blob = reader.GetOracleBlob(reader.GetOrdinal("CONTENTS")))
                         {
-                            MemoryStream ms = new MemoryStream();
                             blob.CopyTo(ms);
                             ms.Position = 0;
-
-                            downloadedBytes.Add(ms.Length);
-
-                            rateLimiter.Increment(ms.Length);
-                            blobContents.Add(Tuple.Create(blobId, ms));
                         }
                     }
+
+                    downloadedBytes.Add(ms.Length);
+
+                    rateLimiter.Increment(ms.Length);
+                    blobContents.Add(Tuple.Create(blobId, ms));
                 }
                 catch (Exception)
                 {
