@@ -509,12 +509,15 @@ namespace Docs.Api.Controllers
                 this.docRepository.ExecSpSetDocUnitTokens(docId: oldCaseId);
                 this.docRepository.ExecSpSetDocUnitTokens(docId: newDocId);
 
-                this.docRepository.RearangeReceiptOrder(oldCaseId, id, everything: false);
+                if (oldCaseId != id)
+                {
+                    this.docRepository.RearangeReceiptOrder(oldCaseId, id, everything: false);
+                }
 
                 int? boundary = this.docRepository.GetNextReceiptOrder(newDocId);
                 if (boundary.HasValue)
                 {
-                    this.docRepository.RearangeBoundaryReceiptOrder(newDocId, boundary.Value);
+                    this.docRepository.RearangeBoundaryReceiptOrder(newDocId, id, boundary.Value);
                 }
                 else
                 {

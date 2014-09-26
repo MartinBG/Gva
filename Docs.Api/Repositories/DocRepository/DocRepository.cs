@@ -140,14 +140,16 @@ namespace Docs.Api.Repositories.DocRepository
             return docs;
         }
 
-        public List<Doc> RearangeBoundaryReceiptOrder(int inCaseDocId, int boundary)
+        public List<Doc> RearangeBoundaryReceiptOrder(int inCaseDocId, int docId, int boundary)
         {
             int caseId = GetCaseId(inCaseDocId);
+
+            List<int> docIds = this.fnGetSubordinateDocs(docId);
 
             List<Doc> docs = this.unitOfWork.DbContext.Set<DocRelation>()
                 .Include(e => e.Doc)
                 .Where(e => e.RootDocId == caseId && e.Doc.DocEntryType.Alias == "Document")
-                .Where(e => !e.Doc.ReceiptOrder.HasValue || e.Doc.ReceiptOrder.Value > boundary)
+                .Where(e => docIds.Contains(e.DocId))
                 .Select(e => e.Doc)
                 .OrderBy(e => e.ReceiptOrder)
                 .ToList();

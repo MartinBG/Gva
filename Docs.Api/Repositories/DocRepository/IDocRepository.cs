@@ -33,7 +33,7 @@ namespace Docs.Api.Repositories.DocRepository
 
         List<Doc> RearangeReceiptOrder(int inCaseDocId, int boundaryDocId, bool everything = true);
 
-        List<Doc> RearangeBoundaryReceiptOrder(int inCaseDocId, int boundary);
+        List<Doc> RearangeBoundaryReceiptOrder(int inCaseDocId, int docId, int boundary);
 
         Doc MarkAsRead(int id, byte[] docVersion, int unitId, UserContext userContext);
 
