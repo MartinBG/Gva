@@ -1,5 +1,5 @@
 ﻿/*
-Usage <sc-datatable2 items="data"
+Usage <sc-ajaxdatatable items="data"
         items-count = "count"
         fetch-fn = "fetchResult"
         set-prop = "result"
@@ -9,17 +9,17 @@ Usage <sc-datatable2 items="data"
         has-info-text="true|false"
         dynamic-columns="true|false"
         row-class="{'class' : expression}">
- </sc-datatable>
+ </sc-ajaxdatatable>
 */
 /*global angular, $, _*/
 (function (angular, $, _) {
   'use strict';
-  function Datatable2Directive(l10n, $timeout, $parse) {
+  function AjaxDatatableDirective(l10n, $timeout, $parse) {
     return {
       restrict: 'E',
       replace: true,
       transclude: true,
-      templateUrl: 'js/scaffolding/directives/datatable2/datatable2Directive.html',
+      templateUrl: 'js/scaffolding/directives/ajaxdatatable/ajaxdatatableDirective.html',
       scope: {
         filterable: '&',
         //pageable: '&',
@@ -240,12 +240,12 @@ Usage <sc-datatable2 items="data"
           dataTable.remove();
         });
       },
-      controller: 'Datatable2Ctrl'
+      controller: 'AjaxDatatableCtrl'
     };
   }
 
-  Datatable2Directive.$inject = ['l10n', '$timeout', '$parse'];
+  AjaxDatatableDirective.$inject = ['l10n', '$timeout', '$parse'];
 
-  angular.module('scaffolding').directive('scDatatable2', Datatable2Directive);
+  angular.module('scaffolding').directive('scAjaxdatatable', AjaxDatatableDirective);
 
 }(angular, $, _));

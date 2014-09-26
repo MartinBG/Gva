@@ -16,20 +16,20 @@
   <sc-search-button action="clear"></sc-search-button>
 </sc-search>
 
-<sc-datatable2 items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column2 sortable="false" class="buttons-cell" has-content="true">
+<sc-ajaxdatatable items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
     <sc-button btn-click="select(item.docId)" class="btn btn-xs btn-primary" text="docs.edit.case.changeDocParent.select"></sc-button>
-  </sc-column2>
-  <sc-column2 type="date" data="regDate" title="docs.search.regDate">
-  </sc-column2>
-  <sc-column2 data="regUri" title="docs.search.regUri">
-  </sc-column2>
-  <sc-column2 data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
-  </sc-column2>
-  <sc-column2 data="docDirectionName" title="docs.search.docDirectionName">
-  </sc-column2>
-  <sc-column2 data="docStatusName" title="docs.search.docStatusName">
-  </sc-column2>
-  <sc-column2 data="correspondentNames" title="docs.search.correspondentName">
-  </sc-column2>
-</sc-datatable2>
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn type="date" data="regDate" title="docs.search.regDate">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="regUri" title="docs.search.regUri">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="docDirectionName" title="docs.search.docDirectionName">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="docStatusName" title="docs.search.docStatusName">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="correspondentNames" title="docs.search.correspondentName">
+  </sc-ajaxcolumn>
+</sc-ajaxdatatable>

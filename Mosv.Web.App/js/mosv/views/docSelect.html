@@ -18,20 +18,20 @@
   <sc-search-button action="clear"></sc-search-button>
 </sc-search>
 
-<sc-datatable2 items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column2 sortable="false" class="buttons-cell" has-content="true">
+<sc-ajaxdatatable items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
    <sc-button btn-click="selectDoc(item)" text="docs.caseSelect.select" class="btn btn-xs btn-primary"></sc-button>
-  </sc-column2>
-  <sc-column2 type="date" data="regDate" title="docs.caseSelect.regDate">
-  </sc-column2>
-  <sc-column2 data="regUri" title="docs.caseSelect.regUri">
-  </sc-column2>
-  <sc-column2 data="docTypeName + ': ' + docSubject" title="docs.caseSelect.docSubject">
-  </sc-column2>
-  <sc-column2 data="docDirectionName" title="docs.caseSelect.docDirectionName">
-  </sc-column2>
-  <sc-column2 data="docStatusName" title="docs.caseSelect.docStatusName">
-  </sc-column2>
-  <sc-column2 data="correspondentName" title="docs.caseSelect.correspondentName">
-  </sc-column2>
-</sc-datatable2>
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn type="date" data="regDate" title="docs.caseSelect.regDate">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="regUri" title="docs.caseSelect.regUri">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="docTypeName + ': ' + docSubject" title="docs.caseSelect.docSubject">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="docDirectionName" title="docs.caseSelect.docDirectionName">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="docStatusName" title="docs.caseSelect.docStatusName">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="correspondentName" title="docs.caseSelect.correspondentName">
+  </sc-ajaxcolumn>
+</sc-ajaxdatatable>

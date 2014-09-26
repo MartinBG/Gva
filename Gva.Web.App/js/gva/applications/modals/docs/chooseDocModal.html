@@ -24,23 +24,23 @@
       <sc-search-button action="clear"></sc-search-button>
     </sc-search>
 
-    <sc-datatable2 items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-      <sc-column2 sortable="false" class="buttons-cell" has-content="true">
+    <sc-ajaxdatatable items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+      <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
         <sc-button btn-click="selectDoc(item)" text="applications.chooseDocsModal.select" class="btn btn-xs btn-primary"></sc-button>
-      </sc-column2>
-      <sc-column2 type="date" data="regDate" title="applications.chooseDocsModal.regDate">
-      </sc-column2>
-      <sc-column2 data="regUri" title="applications.chooseDocsModal.regUri">
-      </sc-column2>
-      <sc-column2 data="docTypeName + ': ' + docSubject" title="applications.chooseDocsModal.docSubject">
-      </sc-column2>
-      <sc-column2 data="docDirectionName" title="applications.chooseDocsModal.docDirectionName">
-      </sc-column2>
-      <sc-column2 data="docStatusName" title="applications.chooseDocsModal.docStatusName">
-      </sc-column2>
-      <sc-column2 data="correspondentNames" title="applications.chooseDocsModal.correspondentName">
-      </sc-column2>
-    </sc-datatable2>
+      </sc-ajaxcolumn>
+      <sc-ajaxcolumn type="date" data="regDate" title="applications.chooseDocsModal.regDate">
+      </sc-ajaxcolumn>
+      <sc-ajaxcolumn data="regUri" title="applications.chooseDocsModal.regUri">
+      </sc-ajaxcolumn>
+      <sc-ajaxcolumn data="docTypeName + ': ' + docSubject" title="applications.chooseDocsModal.docSubject">
+      </sc-ajaxcolumn>
+      <sc-ajaxcolumn data="docDirectionName" title="applications.chooseDocsModal.docDirectionName">
+      </sc-ajaxcolumn>
+      <sc-ajaxcolumn data="docStatusName" title="applications.chooseDocsModal.docStatusName">
+      </sc-ajaxcolumn>
+      <sc-ajaxcolumn data="correspondentNames" title="applications.chooseDocsModal.correspondentName">
+      </sc-ajaxcolumn>
+    </sc-ajaxdatatable>
 
   </div>
 </div>

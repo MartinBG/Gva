@@ -1,22 +1,22 @@
 ﻿/*
-Usage: <sc-column2 model-name="property"
+Usage: <sc-ajaxcolumn model-name="property"
         type="string|numeric|date"
         sortable="true|false"
         visible="true|false"
         class=""
         [title]
         has-content="true|false">
-      </sc-column>
+      </sc-ajaxcolumn>
 */
 
 /*global angular*/
 (function (angular) {
   'use strict';
 
-  function Column2Directive() {
+  function AjaxColumnDirective() {
     return {
       restrict: 'E',
-      require: '^scDatatable2',
+      require: '^scAjaxdatatable',
       transclude: true,
       link: function (scope, iElement, iAttrs, scDatatable1, childTranscludeFn) {
         scDatatable1.addColumn({
@@ -35,7 +35,7 @@ Usage: <sc-column2 model-name="property"
     };
   }
 
-  Column2Directive.$inject = [];
+  AjaxColumnDirective.$inject = [];
 
-  angular.module('scaffolding').directive('scColumn2', Column2Directive);
+  angular.module('scaffolding').directive('scAjaxcolumn', AjaxColumnDirective);
 }(angular));

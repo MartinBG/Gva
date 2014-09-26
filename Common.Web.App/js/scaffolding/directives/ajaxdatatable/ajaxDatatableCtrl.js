@@ -2,14 +2,14 @@
 (function (angular, _) {
   'use strict';
 
-  function Datatable2Ctrl(
+  function AjaxDatatableCtrl(
     $scope,
     $element,
     $attrs,
     $parse,
     l10n,
     $filter,
-    scDatatableConfig,
+    scAjaxDatatableConfig,
     $interpolate,
     $exceptionHandler) {
     $scope.columnDefs = [];
@@ -39,7 +39,7 @@
         var parsedExpression = $parse(column.data);
         dataFunction = function (item) {
           if (column.type === 'date') {
-            return $filter('date')(parsedExpression(item), scDatatableConfig.format);
+            return $filter('date')(parsedExpression(item), scAjaxDatatableConfig.format);
           }
           else if (column.type === 'boolean') {
             var value = parsedExpression(item);
@@ -222,22 +222,22 @@
     });
   }
 
-  Datatable2Ctrl.$inject = [
+  AjaxDatatableCtrl.$inject = [
     '$scope',
     '$element',
     '$attrs',
     '$parse',
     'l10n',
     '$filter',
-    'scDatatableConfig',
+    'scAjaxDatatableConfig',
     '$interpolate',
     '$exceptionHandler'
   ];
 
   angular.module('scaffolding')
-  .constant('scDatatableConfig', {
+  .constant('scAjaxDatatableConfig', {
     format: 'mediumDate'
   });
 
-  angular.module('scaffolding').controller('Datatable2Ctrl', Datatable2Ctrl);
+  angular.module('scaffolding').controller('AjaxDatatableCtrl', AjaxDatatableCtrl);
 }(angular, _));
