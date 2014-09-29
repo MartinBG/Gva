@@ -8,7 +8,7 @@
         <sc-button name="editEditionBtn" btn-sref="{ state: 'root.persons.view.ratings.view.editions.edit', params: { index: item.partIndex} }" ng-disabled="item.partIndex === currentRatingEdition.partIndex" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
       </sc-column>
       <sc-column title="persons.editRatingEdition.ratingTypeOrRatingLevel" has-content="true">
-        {{rating.part.personRatingLevel.name || rating.part.ratingType.name || rating.part.aircraftTypeGroup.name}}
+        {{rating.part.personRatingLevel.code || rating.part.ratingType.code || rating.part.aircraftTypeGroup.code}}
       </sc-column>
       <sc-column title="persons.editRatingEdition.documentDateValidFrom" has-content="true">
         {{item.part.documentDateValidFrom | date:'mediumDate'}}
@@ -20,10 +20,10 @@
         {{(ratingEditions | first).part.documentDateValidFrom | date:'mediumDate'}}
       </sc-column>
       <sc-column title="persons.editRatingEdition.classOrCategory" has-content="true">
-        {{(rating.part.ratingClass.name || '') + (item.part.ratingSubClasses && ' (' + (item.part.ratingSubClasses | pluck:'name' | join:', ') + ')')}}
+        {{(rating.part.ratingClass.code || '') + (item.part.ratingSubClasses && ' (' + (item.part.ratingSubClasses | pluck:'code' | join:', ') + ')')}}
       </sc-column>
       <sc-column title="persons.editRatingEdition.authorizationAndLimitations" has-content="true">
-        {{(rating.part.authorization.name || '') + ' ' + (item.part.limitations | pluck:'name' | join:', ')}}
+        {{(rating.part.authorization.code || '') + ' ' + (item.part.limitations | pluck:'code' | join:', ')}}
       </sc-column>
       <sc-column title="persons.editRatingEdition.notes" has-content="true">
         {{item.part.notes}}
