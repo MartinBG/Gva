@@ -626,7 +626,7 @@ namespace Gva.Api.Controllers
 
                 transaction.Commit();
 
-                return Ok();
+                return Ok(new FilePartVersionDO<DocumentApplicationDO>(partVersion));
             }
         }
 

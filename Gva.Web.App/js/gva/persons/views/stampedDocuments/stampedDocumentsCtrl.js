@@ -51,10 +51,21 @@
     };
 
     $scope.viewApplication = function (lotId, partIndex) {
-      return $state.go('root.persons.view.documentApplications.edit', {
-        id: lotId,
-        ind: partIndex
+      var modalInstance = scModal.open('viewApplication', {
+        lotId: lotId,
+        path: 'personDocumentApplications',
+        partIndex: partIndex,
+        setPart: 'person'
       });
+
+      modalInstance.result.then(function () {
+        return $state.go('root.persons.view.documentApplications.edit', {
+          id: lotId,
+          ind: partIndex
+        });
+      });
+
+      return modalInstance.opened;
     };
 
     $scope.viewDoc = function (doc) {
