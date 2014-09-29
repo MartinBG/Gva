@@ -192,7 +192,7 @@
     $scope.setSortingData = function (index, type) {
       $scope.sortingColumnIndex = index;
       $scope.sortingType = type;
-      $scope.currentPage = 1;
+      $scope.setCurrentPage(1);
 
       updateSortedItems();
     };
