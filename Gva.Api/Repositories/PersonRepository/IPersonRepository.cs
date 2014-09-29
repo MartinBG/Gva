@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
-using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -31,7 +30,7 @@ namespace Gva.Api.Repositories.PersonRepository
             int offset = 0,
             int? limit = null);
 
-        IEnumerable<GvaViewPersonLicenceEdition> GetPrintableDocs(
+        IEnumerable<GvaLicenceEdition> GetPrintableDocs(
             int? licenceType = null,
             int? licenceAction = null,
             int? lin = null,
@@ -43,9 +42,9 @@ namespace Gva.Api.Repositories.PersonRepository
 
         bool IsUniqueUin(string uin, int? personId = null);
 
-        List<GvaViewPersonLicenceEditionDO> GetStampedDocuments();
+        List<GvaLicenceEdition> GetStampedDocuments();
 
-        IEnumerable<GvaViewPersonLicenceEdition> GetLicences(int lotId);
+        IEnumerable<GvaLicenceEdition> GetLicences(int lotId);
 
         string GetLastLicenceNumber(int lotId, string licenceTypeCode);
 

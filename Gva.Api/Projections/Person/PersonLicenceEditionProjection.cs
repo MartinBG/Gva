@@ -59,7 +59,8 @@ namespace Gva.Api.Projections.Person
             GvaViewPersonLicenceEdition licenceEdition = new GvaViewPersonLicenceEdition();
 
             licenceEdition.LotId = personLicence.Part.Lot.LotId;
-            licenceEdition.PartId = personLicence.Part.PartId;
+            licenceEdition.LicencePartId = personLicence.Part.PartId;
+            licenceEdition.EditionPartId = edition.Part.PartId;
             licenceEdition.EditionIndex = edition.Content.Index.Value;
             licenceEdition.LicenceTypeId = personLicence.Content.LicenceType.NomValueId;
             licenceEdition.StampNumber = edition.Content.StampNumber;
@@ -75,13 +76,6 @@ namespace Gva.Api.Projections.Person
             licenceEdition.LicenceTypeCode = licenceType.TextContent.Get<string>("licenceCode");
             licenceEdition.LicenceTypeCaCode = licenceType.TextContent.Get<string>("codeCA");
             licenceEdition.PublisherCode = personLicence.Content.Publisher.Code;
-
-            var firstFile = this.fileRepository.GetFileReferences(edition.Part.PartId, null).FirstOrDefault();
-            if (firstFile != null)
-            {
-                var firstApplication = firstFile.GvaAppLotFiles.FirstOrDefault();
-                licenceEdition.GvaApplicationId = firstApplication == null ? (int?)null : firstApplication.GvaApplicationId;
-            }
 
             return licenceEdition;
         }

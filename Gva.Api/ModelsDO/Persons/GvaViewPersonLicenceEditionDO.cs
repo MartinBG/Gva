@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Common.Api.Models;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
@@ -8,35 +7,45 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class GvaViewPersonLicenceEditionDO
     {
-        public GvaViewPersonLicenceEditionDO(GvaViewPersonLicenceEdition edition, List<int> stages = null)
+        public GvaViewPersonLicenceEditionDO(GvaLicenceEdition edition)
         {
             this.LotId = edition.LotId;
-            this.PartIndex = edition.Part.Index;
+            this.PartIndex = edition.LicencePartIndex;
             this.EditionIndex = edition.EditionIndex;
             this.LicenceTypeId = edition.LicenceTypeId;
             this.StampNumber = edition.StampNumber;
             this.DateValidFrom = edition.DateValidFrom;
             this.DateValidTo = edition.DateValidTo;
             this.LicenceActionId = edition.LicenceActionId;
-            if (stages != null)
+            if (edition.GvaStageId.HasValue)
             {
-                this.IsReady = stages.Contains(GvaConstants.IsReadyApplication);
-                this.IsReceived = stages.Contains(GvaConstants.IsReceivedApplication);
-                this.IsDone = stages.Contains(GvaConstants.IsDoneApplication);
+                this.IsReady = edition.GvaStageId <= GvaConstants.IsReadyApplication;
+                this.IsReceived = edition.GvaStageId <= GvaConstants.IsReceivedApplication;
+                this.IsDone = edition.GvaStageId <= GvaConstants.IsDoneApplication;
             }
 
-            if (edition.LicenceAction != null) 
+            if (edition.LicenceAction != null)
             {
                 this.LicenceActionName = edition.LicenceAction.Name;
             }
 
             this.LicenceNumber = edition.LicenceNumber;
-            this.Person = new PersonViewDO(edition.Person);
+
+            if (edition.Person != null)
+            {
+                this.Person = new PersonViewDO(edition.Person);
+            }
 
             if (edition.Application != null)
             {
-                this.Application = new ApplicationNomDO(edition.Application);
+                this.Application = new ApplicationNomDO
+                {
+                    ApplicationName = edition.Application.ApplicationType.Name,
+                    PartIndex = edition.Application.Part.Index,
+                    ApplicationId = edition.GvaApplicationId.Value
+                };
             }
+
             this.LicenceType = edition.LicenceType;
             this.LicencePartIndex = edition.LicencePartIndex;
             this.EditionPartIndex = edition.EditionPartIndex;
