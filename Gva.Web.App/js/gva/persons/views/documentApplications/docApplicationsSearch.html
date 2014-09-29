@@ -3,17 +3,19 @@
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.persons.view.documentApplications.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.applicationType.name" title="persons.personDocApplicationSearch.applicationType">
-  </sc-column>
   <sc-column data="part.documentNumber" title="persons.personDocApplicationSearch.documentNumber">
+  </sc-column>
+  <sc-column data="part.applicationType.code" title="persons.personDocApplicationSearch.applicationCode">
+  </sc-column>
+  <sc-column data="part.applicationType.name" title="persons.personDocApplicationSearch.applicationType" visible="false">
   </sc-column>
   <sc-column data="part.documentDate" title="persons.personDocApplicationSearch.documentDate" type="date">
   </sc-column>
-  <sc-column data="part.applicationPaymentType.name" title="persons.personDocApplicationSearch.applicationPaymentType">
+  <sc-column data="part.applicationPaymentType.name" title="persons.personDocApplicationSearch.applicationPaymentType" visible="false">
   </sc-column>
   <sc-column data="part.taxAmount" title="persons.personDocApplicationSearch.taxAmount">
   </sc-column>
-  <sc-column data="part.currency.name" title="persons.personDocApplicationSearch.currency">
+  <sc-column data="part.currency.code" title="persons.personDocApplicationSearch.currency">
   </sc-column>
   <sc-column data="part.notes" title="persons.personDocApplicationSearch.notes">
   </sc-column>
