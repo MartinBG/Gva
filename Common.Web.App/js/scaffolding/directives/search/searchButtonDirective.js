@@ -1,7 +1,7 @@
 ﻿// Usage: <sc-search-button action="" class="" text="" icon=""></sc-search-button>
 
-/*globals angular, $ */
-(function (angular, $) {
+/*globals angular, _, $ */
+(function (angular,  _, $) {
   'use strict';
 
   function SearchButtonDirective($parse, l10n) {
@@ -41,8 +41,14 @@
         $scope.addFilter = function (filterName) {
           scSearch.selectedFilters[filterName] = null;
         };
-      }
-      else {
+      } else if ($scope.action === 'clear') {
+        $scope.clear = function () {
+          _.forEach(scSearch.selectedFilters, function (value, key) {
+            scSearch.selectedFilters[key] = null;
+          });
+          return scSearch.defaultAction($scope.$parent);
+        };
+      } else {
         $scope.text = l10n.get(attrs.text);
 
         parsedAction = $parse(attrs.action);
@@ -68,4 +74,4 @@
   SearchButtonDirective.$inject = ['$parse', 'l10n'];
 
   angular.module('scaffolding').directive('scSearchButton', SearchButtonDirective);
-}(angular, $));
+}(angular, _, $));
