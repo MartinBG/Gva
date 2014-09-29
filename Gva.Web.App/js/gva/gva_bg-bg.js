@@ -2099,14 +2099,15 @@
         personDocApplicationSearch: {
           newApplication: 'Ново заявление',
           documentNumber: '№ на документ',
+          applicationCode: 'Код',
           documentDate: 'От дата',
           notes: 'Бележки',
           bookPageNumber: '№ стр. в дело',
           pageCount: 'Брой стр.',
           applicationType: 'Тип заявление',
           applicationPaymentType: 'Член',
-          currency: 'Парична единица',
-          taxAmount: 'Платена такса',
+          currency: 'Валута',
+          taxAmount: 'Такса',
           file: 'Файл'
         },
         newPersonDocApplication: {
