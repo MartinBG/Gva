@@ -26,8 +26,6 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "Publisher is required.")]
         public NomValue Publisher { get; set; }
 
-        public DateTime? DocumentDateValidTo { get; set; }
-
         public NomValue Valid { get; set; }
 
         public List<PersonLicenceStatusDO> Statuses { get; set; }

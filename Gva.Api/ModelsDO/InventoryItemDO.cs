@@ -8,6 +8,8 @@ namespace Gva.Api.ModelsDO
 
         public int PartIndex { get; set; }
 
+        public int? ParentPartIndex { get; set; }
+
         public string Name { get; set; }
 
         public string Type { get; set; }

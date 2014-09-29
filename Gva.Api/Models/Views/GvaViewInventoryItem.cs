@@ -11,6 +11,8 @@ namespace Gva.Api.Models.Views
 
         public int PartId { get; set; }
 
+        public int? ParentPartId { get; set; }
+
         public string SetPartAlias { get; set; }
 
         public string Name { get; set; }
@@ -44,6 +46,8 @@ namespace Gva.Api.Models.Views
         public virtual Lot Lot { get; set; }
 
         public virtual Part Part { get; set; }
+
+        public virtual Part ParentPart { get; set; }
     }
 
     public class GvaViewInventoryItemMap : EntityTypeConfiguration<GvaViewInventoryItem>
@@ -77,6 +81,7 @@ namespace Gva.Api.Models.Views
             this.ToTable("GvaViewInventoryItems");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartId).HasColumnName("LotPartId");
+            this.Property(t => t.ParentPartId).HasColumnName("ParentLotPartId");
             this.Property(t => t.SetPartAlias).HasColumnName("SetPartAlias");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.TypeId).HasColumnName("TypeId");
@@ -100,6 +105,10 @@ namespace Gva.Api.Models.Views
             this.HasRequired(t => t.Part)
                 .WithMany()
                 .HasForeignKey(t => t.PartId);
+
+            this.HasOptional(t => t.ParentPart)
+                .WithMany()
+                .HasForeignKey(t => t.ParentPartId);
 
             this.HasOptional(t => t.Type)
                 .WithMany()

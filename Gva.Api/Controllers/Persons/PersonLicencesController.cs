@@ -19,7 +19,7 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/licences")]
     [Authorize]
-    public class PersonLicencesController : GvaApplicationPartController<PersonLicenceDO>
+    public class PersonLicencesController : GvaFilePartController<PersonLicenceDO>
     {
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
@@ -39,7 +39,7 @@ namespace Gva.Api.Controllers.Persons
             INomRepository nomRepository,
             IPersonRepository personRepository,
             UserContext userContext)
-            : base("licences", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("licences", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -82,7 +82,7 @@ namespace Gva.Api.Controllers.Persons
 
             PersonLicenceNewDO newLicence = new PersonLicenceNewDO()
             {
-                Licence = new ApplicationPartVersionDO<PersonLicenceDO>(licence),
+                Licence = new FilePartVersionDO<PersonLicenceDO>(licence),
                 Edition = new FilePartVersionDO<PersonLicenceEditionDO>(edition, files)
             };
 
@@ -91,15 +91,15 @@ namespace Gva.Api.Controllers.Persons
             return Ok(newLicence);
         }
 
-        public override IHttpActionResult GetParts(int lotId, [FromUri] int[] partIndexes = null)
+        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
-            var licences = this.personRepository.GetLicences(lotId);
+            var licences = this.personRepository.GetLicences(lotId, caseTypeId);
 
             return Ok(licences.Select(d => new GvaViewPersonLicenceEditionDO(d)));
         }
 
         [NonAction]
-        public override IHttpActionResult PostNewPart(int lotId, ApplicationPartVersionDO<PersonLicenceDO> partVersionDO)
+        public override IHttpActionResult PostNewPart(int lotId, FilePartVersionDO<PersonLicenceDO> partVersionDO)
         {
             throw new NotSupportedException();
         }
@@ -163,7 +163,7 @@ namespace Gva.Api.Controllers.Persons
 
                 return Ok(new PersonLicenceNewDO()
                     {
-                        Licence = new ApplicationPartVersionDO<PersonLicenceDO>(licencePartVersion),
+                        Licence = new FilePartVersionDO<PersonLicenceDO>(licencePartVersion),
                         Edition = new FilePartVersionDO<PersonLicenceEditionDO>(editionPartVersion)
                     });
             }

@@ -288,6 +288,7 @@
     <Compile Include="Projections\Inventory\Persons\PersonDocumentIdProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonEducationProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonEmploymentProjection.cs" />
+    <Compile Include="Projections\Inventory\Persons\PersonLicenceProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonMedicalProjection.cs" />
     <Compile Include="Projections\Inventory\Organizations\OrganizationApplicationProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonOtherProjection.cs" />

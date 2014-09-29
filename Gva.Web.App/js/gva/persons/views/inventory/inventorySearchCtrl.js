@@ -4,9 +4,6 @@
 
   function InventorySearchCtrl(
     $scope,
-    $state,
-    $stateParams,
-    $filter,
     inventory
   ) {
     $scope.inventory = inventory;
@@ -17,33 +14,51 @@
        return !item.bookPageNumber;
     });
 
-    $scope.getState = function (setPartAlias) {
-      switch(setPartAlias) { 
-      case 'personEducation':
-        return 'root.persons.view.documentEducations.edit';
-      case 'personDocumentId':
-        return 'root.persons.view.documentIds.edit';
-      case 'personTraining':
-        return 'root.persons.view.documentTrainings.edit';
-      case  'personMedical':
-        return 'root.persons.view.medicals.edit';
-      case 'personCheck':
-        return 'root.persons.view.checks.edit';
-      case 'personOther':
-        return 'root.persons.view.documentOthers.edit';
-      case 'personApplication':
-        return 'root.persons.view.documentApplications.edit';
-      case 'personEmployment':
-        return 'root.persons.view.employments.edit';
+    $scope.getState = function (item) {
+      var params = item.setPartAlias === 'personLicence' ?
+        { ind: item.parentPartIndex, index: item.partIndex } :
+        { ind: item.partIndex },
+          stateName;
+
+      switch (item.setPartAlias) {
+        case 'personEducation':
+          stateName = 'root.persons.view.documentEducations.edit';
+          break;
+        case 'personDocumentId':
+          stateName = 'root.persons.view.documentIds.edit';
+          break;
+        case 'personTraining':
+          stateName = 'root.persons.view.documentTrainings.edit';
+          break;
+        case 'personMedical':
+          stateName = 'root.persons.view.medicals.edit';
+          break;
+        case 'personCheck':
+          stateName = 'root.persons.view.checks.edit';
+          break;
+        case 'personOther':
+          stateName = 'root.persons.view.documentOthers.edit';
+          break;
+        case 'personApplication':
+          stateName = 'root.persons.view.documentApplications.edit';
+          break;
+        case 'personEmployment':
+          stateName = 'root.persons.view.employments.edit';
+          break;
+        case 'personLicence':
+          stateName = 'root.persons.view.licences.view.editions.edit';
+          break;
       }
+
+      return {
+        state: stateName,
+        params: params
+      };
     };
   }
 
   InventorySearchCtrl.$inject = [
     '$scope',
-    '$state',
-    '$stateParams',
-    '$filter',
     'inventory'
   ];
 
