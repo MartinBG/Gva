@@ -1,5 +1,6 @@
 ﻿<div style="display: inline-block;">
   <sc-button type="submit" btn-click="btnAction()" text="{{text}}" icon="{{icon}}" ng-show="icon"></sc-button>
+  <sc-button type="submit" btn-click="clear()" text="scaffolding.scSearchButton.clear" icon="glyphicon-remove" ng-if="action === 'clear'"></sc-button>
   <div class="btn-group" ng-show="(dropdownFilters | filter:{visible: true}).length">
     <button type="button" dropdown-toggle data-toggle="dropdown">
       <span class="glyphicon glyphicon-plus"></span>

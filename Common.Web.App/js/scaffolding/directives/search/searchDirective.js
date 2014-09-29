@@ -13,6 +13,7 @@
 
       this.selectedFilters = $scope.selectedFilters;
       this.dropdownFilters = $scope.dropdownFilters = [];
+      this.defaultAction = $scope.defaultAction;
 
       this.registerFilter = function (name, filterScope) {
         filters[name] = filterScope;
@@ -74,10 +75,10 @@
         });
 
         if (attrs.defaultAction) {
-          var parsedAction = $parse(attrs.defaultAction);
+          $scope.defaultAction = $parse(attrs.defaultAction);
           element.bind('keypress', function (event) {
             if(event.keyCode === 13) {
-              parsedAction($scope.$parent);
+              $scope.defaultAction($scope.$parent);
             }
           });
         }

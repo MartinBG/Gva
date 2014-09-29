@@ -41,6 +41,9 @@
         scMessage: {
           okButton: 'OK',
           cancelButton: 'Отказ'
+        },
+        scSearchButton: {
+          clear: 'Изчисти'
         }
       }
     });
