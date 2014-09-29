@@ -14,7 +14,7 @@
         {{item.part.documentDateValidTo | date:'mediumDate'}}
       </sc-column>
       <sc-column title="persons.editLicenceEditions.limitations" has-content="true">
-        {{item.part.limitations | pluck:'name' | join:', '}}
+        {{item.part.limitations | pluck:'code' | join:', '}}
       </sc-column>
       <sc-column title="persons.editLicenceEditions.notes" has-content="true">
         {{item.part.notes}}

@@ -52,9 +52,9 @@ namespace Gva.Api.Projections.Person
             rating.RatingClassId = personRating.Content.RatingClass != null ? personRating.Content.RatingClass.NomValueId : (int?)null;
             rating.AircraftTypeGroupId = personRating.Content.AircraftTypeGroup != null ? personRating.Content.AircraftTypeGroup.NomValueId : (int?)null;
             rating.AuthorizationId = personRating.Content.Authorization != null ? personRating.Content.Authorization.NomValueId : (int?)null;
-            string[] ratinSubClasses = lastEdition.Content.RatingSubClasses != null ? lastEdition.Content.RatingSubClasses.Select(t => t.Name).ToArray() : null;
+            string[] ratinSubClasses = lastEdition.Content.RatingSubClasses != null ? lastEdition.Content.RatingSubClasses.Select(t => t.Code).ToArray() : null;
             rating.RatingSubClasses = ratinSubClasses != null ? string.Join(", ", ratinSubClasses) : null;
-            string[] limitations = lastEdition.Content.Limitations != null ? lastEdition.Content.Limitations.Select(t => t.Name).ToArray() : null;
+            string[] limitations = lastEdition.Content.Limitations != null ? lastEdition.Content.Limitations.Select(t => t.Code).ToArray() : null;
             rating.Limitations = limitations != null ? string.Join(", ", limitations) : null;
             rating.LastDocDateValidFrom = lastEdition.Content.DocumentDateValidFrom.Value;
             rating.LastDocDateValidTo = lastEdition.Content.DocumentDateValidTo;

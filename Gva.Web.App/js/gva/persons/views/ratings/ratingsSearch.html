@@ -4,11 +4,11 @@
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewBtn" btn-sref="{state: 'root.persons.view.ratings.view.editions.edit', params: {ind: item.partIndex, index: item.editionPartIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-    <sc-column data="personRatingLevel.name || ratingType.name" title="persons.ratingSearch.ratingTypeOrRatingLevel">
+    <sc-column data="personRatingLevel.code || ratingType.code || aircraftTypeGroup.code" title="persons.ratingSearch.ratingTypeOrRatingLevel">
     </sc-column>
-    <sc-column data="aircraftTypeGroup.name || ((ratingClass.name || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : ''))" title="persons.ratingSearch.classOrCategory">
+    <sc-column data="(ratingClass.code || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : '')" title="persons.ratingSearch.classOrCategory">
     </sc-column>
-    <sc-column data="((authorization && authorization.name) || '') + ' ' + (limitations ? limitations : '')" title="persons.ratingSearch.authorizationAndLimitations">
+    <sc-column data="((authorization && authorization.code) || '') + ' ' + (limitations ? limitations : '')" title="persons.ratingSearch.authorizationAndLimitations">
     </sc-column>
     <sc-column data="lastDocDateValidFrom" title="persons.ratingSearch.lastEditionValidFrom" type="date">
     </sc-column>
