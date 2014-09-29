@@ -32,7 +32,7 @@
               id: $stateParams.id,
               ind: $stateParams.ind,
               index: $stateParams.index
-            }, $scope.currentRatingEdition, $scope.caseTypeId)
+            }, $scope.currentRatingEdition)
             .$promise
             .then(function (edition) {
               $scope.editMode = null;
@@ -69,7 +69,7 @@
               }
               else {
                 return $state.go(
-                  'root.persons.view.ratings.view.editions.edit',
+                  'root.persons.view.ratings.edit.editions.edit',
                   { index: _.last($scope.ratingEditions).partIndex });
               }
             });

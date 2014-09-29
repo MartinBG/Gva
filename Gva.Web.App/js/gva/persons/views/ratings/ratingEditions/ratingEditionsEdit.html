@@ -5,7 +5,7 @@
   <div>
     <sc-datatable items="ratingEditions" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
       <sc-column sortable="false" class="buttons-cell" has-content="true">
-        <sc-button name="editEditionBtn" btn-sref="{ state: 'root.persons.view.ratings.view.editions.edit', params: { index: item.partIndex} }" ng-disabled="item.partIndex === currentRatingEdition.partIndex" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+        <sc-button name="editEditionBtn" btn-sref="{ state: 'root.persons.view.ratings.edit.editions.edit', params: { index: item.partIndex} }" ng-disabled="item.partIndex === currentRatingEdition.partIndex" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
       </sc-column>
       <sc-column title="persons.editRatingEdition.ratingTypeOrRatingLevel" has-content="true">
         {{rating.part.personRatingLevel.code || rating.part.ratingType.code || rating.part.aircraftTypeGroup.code}}

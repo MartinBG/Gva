@@ -790,8 +790,8 @@
     <Content Include="js\gva\persons\views\personsViewCtrl.js" />
     <Content Include="js\gva\persons\views\printableDocs\printableDocsSearch.html" />
     <Content Include="js\gva\persons\views\printableDocs\printableDocsSearchCtrl.js" />
-    <Content Include="js\gva\persons\views\ratings\ratingsView.html" />
-    <Content Include="js\gva\persons\views\ratings\ratingsViewCtrl.js" />
+    <Content Include="js\gva\persons\views\ratings\ratingsEdit.html" />
+    <Content Include="js\gva\persons\views\ratings\ratingsEditCtrl.js" />
     <Content Include="js\gva\persons\views\ratings\ratingsNew.html" />
     <Content Include="js\gva\persons\views\ratings\ratingsNewCtrl.js" />
     <Content Include="js\gva\persons\views\ratings\ratingsSearch.html" />
