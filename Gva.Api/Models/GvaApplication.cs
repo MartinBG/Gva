@@ -1,8 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 using Regs.Api.Models;
-using System;
-using Gva.Api.Models.Views.Person;
 
 namespace Gva.Api.Models
 {
@@ -31,8 +30,6 @@ namespace Gva.Api.Models
         public virtual ICollection<GvaAppLotFile> GvaAppLotFiles { get; set; }
 
         public virtual ICollection<GvaLotObject> GvaLotObjects { get; set; }
-
-        public virtual ICollection<GvaViewPersonLicenceEdition> PersonLicenceEditions { get; set; }
     }
 
     public class GvaApplicationMap : EntityTypeConfiguration<GvaApplication>

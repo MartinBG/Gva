@@ -262,6 +262,7 @@
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
+    <Compile Include="Models\Views\Person\GvaLicenceEdition.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonLicenceEdition.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonRating.cs" />
     <Compile Include="Projections\Aircraft\AircraftProjection.cs" />

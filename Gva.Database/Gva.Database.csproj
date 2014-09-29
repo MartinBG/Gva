@@ -77,6 +77,7 @@
     <Content Include="Create\Tables\GvaApplications.sql" />
     <Content Include="Create\Tables\GvaViewPersonRatings.sql" />
     <Content Include="Create\Tables\GvaViewPersons.sql" />
+    <Content Include="Create\Views\vwGvaLicenceEditions.sql" />
     <Content Include="Insert\asExams.sql" />
     <Content Include="Insert\GvaCorrespondents.sql" />
     <Content Include="Insert\GvaExcelConfig\ClassificationRelations.sql">

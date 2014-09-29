@@ -7,7 +7,6 @@ using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
-using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Repositories.PersonRepository
@@ -110,7 +109,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .ToList();
         }
 
-        public IEnumerable<GvaViewPersonLicenceEdition> GetPrintableDocs(
+        public IEnumerable<GvaLicenceEdition> GetPrintableDocs(
             int? licenceType = null,
             int? licenceAction = null,
             int? lin = null,
@@ -118,10 +117,10 @@ namespace Gva.Api.Repositories.PersonRepository
             string names = null,
             bool exact = false)
         {
-            var predicate = PredicateBuilder.True<GvaViewPersonLicenceEdition>();
+            var predicate = PredicateBuilder.True<GvaLicenceEdition>();
 
             predicate = predicate
-                .And(e => string.IsNullOrEmpty(e.StampNumber))
+                .And(e => e.StampNumber == null)
                 .And(e => e.IsLastEdition == true)
                 .AndEquals(e => e.Person.Lin, lin)
                 .AndStringMatches(e => e.Person.Uin, uin, exact)
@@ -137,15 +136,15 @@ namespace Gva.Api.Repositories.PersonRepository
                 predicate = predicate.AndEquals(e => e.LicenceActionId, licenceAction);
             }
 
-            return this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
-                .Include(e => e.Person)
-                .Include(p => p.Person.LinType)
-                .Include(p => p.Person.Organization)
-                .Include(p => p.Person.Employment)
-                .Include(p => p.Person.Inspector)
-                .Include(e => e.Part)
+            return this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceAction)
+                .Include(e => e.Person)
+                .Include(e => e.Person.LinType)
+                .Include(e => e.Application)
+                .Include(e => e.Application.ApplicationType)
+                .Include(e => e.Application.Part)
                 .Where(predicate)
+                .OrderByDescending(i => i.DateValidFrom)
                 .ToList();
         }
 
@@ -178,48 +177,26 @@ namespace Gva.Api.Repositories.PersonRepository
             }
         }
 
-        public List<GvaViewPersonLicenceEditionDO> GetStampedDocuments()
+        public List<GvaLicenceEdition> GetStampedDocuments()
         {
-            return (from edition in this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
-                        .Include(e => e.Person)
-                        .Include(e => e.Part)
-                        .Include(e => e.Application)
-                        .Include(e => e.LicenceAction)
-                        .Include(p => p.Person.LinType)
-                        .Include(p => p.Person.Organization)
-                        .Include(p => p.Person.Employment)
-                        .Include(p => p.Person.Inspector)
-                        .ToList()
-                    where edition.StampNumber != null && edition.Application != null &&
-                        this.unitOfWork.DbContext.Set<GvaApplicationStage>()
-                        .Any(a => a.GvaApplicationId == edition.GvaApplicationId)
-                    select edition)
-                    .Select(edition =>
-                    {
-                        List<int> stages = this.unitOfWork.DbContext.Set<GvaApplicationStage>()
-                            .Where(s => s.GvaApplicationId == edition.GvaApplicationId)
-                            .Select(s => s.GvaStageId)
-                            .ToList();
-
-                        return new GvaViewPersonLicenceEditionDO(edition, stages);
-
-                    })
-                    .ToList();
+            return this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
+                .Include(e => e.LicenceAction)
+                .Include(e => e.Person)
+                .Include(e => e.Person.LinType)
+                .Include(e => e.Application)
+                .Include(e => e.Application.ApplicationType)
+                .Include(e => e.Application.Part)
+                .Where(e => e.StampNumber != null && e.GvaStageId.HasValue)
+                .OrderByDescending(i => i.DateValidFrom)
+                .ToList();
         }
 
-        public IEnumerable<GvaViewPersonLicenceEdition> GetLicences(int lotId)
+        public IEnumerable<GvaLicenceEdition> GetLicences(int lotId)
         {
-            return this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
-                .Include(e => e.Person)
-                .Include(p => p.Person.LinType)
-                .Include(p => p.Person.Organization)
-                .Include(p => p.Person.Employment)
-                .Include(p => p.Person.Inspector)
-                .Include(e => e.Part)
-                .Include(e => e.LicenceAction)
+            return this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceType)
-                .Include(e => e.Application)
                 .Where(e => e.LotId == lotId && e.IsLastEdition == true)
+                .OrderByDescending(i => i.DateValidFrom)
                 .ToList();
         }
 

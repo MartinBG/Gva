@@ -1,24 +1,22 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Json;
 using Common.Filters;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.PersonRepository;
-using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
-using Regs.Api.Repositories.LotRepositories;
-using System.Collections.Generic;
-using Gva.Api.Repositories.ApplicationStageRepository;
-using System;
 using Regs.Api.Models;
-using Common.Api.Repositories.NomRepository;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -280,7 +278,9 @@ namespace Gva.Api.Controllers.Persons
         [Route("stampedDocuments")]
         public IHttpActionResult GetStampedDocuments()
         {
-            return Ok(this.personRepository.GetStampedDocuments());
+            var docs = this.personRepository.GetStampedDocuments();
+
+            return Ok(docs.Select(d => new GvaViewPersonLicenceEditionDO(d)));
         }
 
         [HttpPost]

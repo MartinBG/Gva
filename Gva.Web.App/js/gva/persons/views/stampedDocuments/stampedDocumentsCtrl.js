@@ -32,6 +32,7 @@
           };
         }
       });
+
       return Persons
         .saveStampedDocuments(documentsForStamp)
         .$promise
@@ -59,7 +60,7 @@
     $scope.viewDoc = function (doc) {
       var params = {
         lotId: doc.lotId,
-        licenceIndex: doc.partIndex,
+        licencePartIndex: doc.partIndex,
         editionIndex: doc.editionIndex
       };
 

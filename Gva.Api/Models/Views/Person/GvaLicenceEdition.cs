@@ -6,7 +6,7 @@ using Regs.Api.Models;
 
 namespace Gva.Api.Models.Views.Person
 {
-    public partial class GvaViewPersonLicenceEdition
+    public partial class GvaLicenceEdition
     {
         public int LotId { get; set; }
 
@@ -44,6 +44,14 @@ namespace Gva.Api.Models.Views.Person
 
         public string PublisherCode { get; set; }
 
+        public int? GvaLotFileId { get; set; }
+
+        public int? GvaApplicationId { get; set; }
+
+        public int? ApplicationPartId { get; set; }
+
+        public int? GvaStageId { get; set; }
+
         public virtual GvaViewPerson Person { get; set; }
 
         public virtual Part LicencePart { get; set; }
@@ -53,11 +61,19 @@ namespace Gva.Api.Models.Views.Person
         public virtual NomValue LicenceType { get; set; }
 
         public virtual NomValue LicenceAction { get; set; }
+
+        public virtual GvaLotFile LotFile { get; set; }
+
+        public virtual GvaApplication GvaApplication { get; set; }
+
+        public virtual GvaViewApplication Application { get; set; }
+
+        public virtual GvaApplicationStage Stage { get; set; }
     }
 
-    public class GvaViewPersonLicenceEditionMap : EntityTypeConfiguration<GvaViewPersonLicenceEdition>
+    public class GvaLicenceEditionMap : EntityTypeConfiguration<GvaLicenceEdition>
     {
-        public GvaViewPersonLicenceEditionMap()
+        public GvaLicenceEditionMap()
         {
             // Primary Key
             this.HasKey(t => new { t.LotId, t.LicencePartId, t.EditionPartId });
@@ -72,20 +88,8 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.EditionPartId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.StampNumber)
-                .HasMaxLength(50);
-
-            this.Property(t => t.LicenceTypeCode)
-                .HasMaxLength(50);
-
-            this.Property(t => t.LicenceTypeCaCode)
-                .HasMaxLength(50);
-
-            this.Property(t => t.PublisherCode)
-                .HasMaxLength(50);
-
             // Table & Column Mappings
-            this.ToTable("GvaViewPersonLicenceEditions");
+            this.ToTable("vwGvaLicenceEditions");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.LicencePartId).HasColumnName("LicencePartId");
             this.Property(t => t.EditionPartId).HasColumnName("EditionPartId");
@@ -104,10 +108,14 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LicenceTypeCode).HasColumnName("LicenceTypeCode");
             this.Property(t => t.LicenceTypeCaCode).HasColumnName("LicenceTypeCaCode");
             this.Property(t => t.PublisherCode).HasColumnName("PublisherCode");
+            this.Property(t => t.GvaLotFileId).HasColumnName("GvaLotFileId");
+            this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
+            this.Property(t => t.ApplicationPartId).HasColumnName("ApplicationPartId");
+            this.Property(t => t.GvaStageId).HasColumnName("GvaStageId");
 
             // Relationships
             this.HasRequired(t => t.Person)
-                .WithMany(d => d.PersonLicenceEditions)
+                .WithMany()
                 .HasForeignKey(t => t.LotId);
             this.HasRequired(t => t.LicencePart)
                 .WithMany()
@@ -121,6 +129,18 @@ namespace Gva.Api.Models.Views.Person
             this.HasRequired(t => t.LicenceAction)
                 .WithMany()
                 .HasForeignKey(t => t.LicenceActionId);
+            this.HasOptional(t => t.LotFile)
+                .WithMany()
+                .HasForeignKey(t => t.GvaLotFileId);
+            this.HasOptional(t => t.GvaApplication)
+                .WithMany()
+                .HasForeignKey(t => t.GvaApplicationId);
+            this.HasOptional(t => t.Application)
+                .WithMany()
+                .HasForeignKey(t => new { t.LotId, t.ApplicationPartId });
+            this.HasOptional(t => t.Stage)
+                .WithMany()
+                .HasForeignKey(t => t.GvaStageId);
         }
     }
 }

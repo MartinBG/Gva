@@ -27,6 +27,7 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaViewPersonInspectorMap());
             modelBuilder.Configurations.Add(new GvaViewPersonLicenceEditionMap());
             modelBuilder.Configurations.Add(new GvaViewPersonRatingMap());
+            modelBuilder.Configurations.Add(new GvaLicenceEditionMap());
             modelBuilder.Configurations.Add(new GvaViewInventoryItemMap());
             modelBuilder.Configurations.Add(new GvaViewApplicationMap());
             modelBuilder.Configurations.Add(new GvaViewOrganizationMap());
