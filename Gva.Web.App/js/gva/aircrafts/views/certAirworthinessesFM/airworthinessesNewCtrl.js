@@ -30,7 +30,10 @@
 
               if (actAlias === 'f24' || actAlias === 'f25') {
                 aw.part.reviews.push($scope.reviewForm15);
-              } else if (actAlias === 'directive8' || actAlias === 'vla') {
+              } else if (
+                actAlias === 'directive8' ||
+                actAlias === 'vla' ||
+                actAlias === 'unknown') {
                 aw.part.reviews.push($scope.reviewOther);
               }
             }

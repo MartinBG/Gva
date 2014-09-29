@@ -97,7 +97,7 @@
         <gva-airworthiness-review-f15 ng-show="aw.part.airworthinessCertificateType.alias === 'f24' || aw.part.airworthinessCertificateType.alias === 'f25'"
           name="airworthinessReviewF15Form" ng-model="currentReview" readonly="!isEditReview">
         </gva-airworthiness-review-f15>
-        <gva-airworthiness-review-other ng-show="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla'"
+        <gva-airworthiness-review-other ng-show="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla' || aw.part.airworthinessCertificateType.alias === 'unknown'"
           name="airworthinessReviewOtherForm" ng-model="currentReview" readonly="!isEditReview">
         </gva-airworthiness-review-other>
       </div>
