@@ -2482,7 +2482,7 @@
         },
         ratingEdit: {
           title: 'Преглед на квалификация',
-          ratingForm: 'Квалификация',
+          edit: 'Редакция',
           newEdition: 'Ново вписване',
           editLastEdition: 'Редакция',
           save: 'Запис',
@@ -3785,7 +3785,7 @@
         'root.persons.view.flyingExperiences.edit': 'Преглед на летателен / практически опит',
         'root.persons.view.ratings': 'Квалификации',
         'root.persons.view.ratings.new': 'Нова квалификация',
-        'root.persons.view.ratings.view.editions.edit': 'Преглед на квалификационен клас',
+        'root.persons.view.ratings.edit': 'Преглед на квалификационен клас',
         'root.persons.view.exams': 'Теоритични изпити',
         'root.persons.view.exams.new': 'Нов теоритичен изпит',
         'root.persons.view.exams.edit': 'Преглед на теоритичен изпит',

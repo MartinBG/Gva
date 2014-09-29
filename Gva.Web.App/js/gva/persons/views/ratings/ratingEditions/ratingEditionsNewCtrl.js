@@ -19,7 +19,7 @@
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.newRatingEdition).$promise
             .then(function (edition) {
               return $state.go(
-                'root.persons.view.ratings.view.editions.edit',
+                'root.persons.view.ratings.edit.editions.edit',
                 { index: edition.partIndex });
             });
         }

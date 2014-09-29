@@ -1,24 +1,18 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
+using Common.Api.Repositories.NomRepository;
+using Common.Api.UserContext;
 using Common.Data;
+using Common.Filters;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
-using Regs.Api.LotEvents;
-using Regs.Api.Repositories.LotRepositories;
-using Common.Api.Repositories.NomRepository;
-using System.Collections.Generic;
-using System;
-using Common.Json;
-using Common.Api.UserContext;
-using Regs.Api.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Gva.Api.Repositories.FileRepository;
-using Common.Filters;
-using System.Linq;
-using System.Web.Http.Results;
-using System.Net;
-using Common.Api.Models;
+using Regs.Api.LotEvents;
+using Regs.Api.Models;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -124,7 +118,7 @@ namespace Gva.Api.Controllers.Persons
 
         [Route("{partIndex}")]
         [Validate]
-        public IHttpActionResult PostPart(int lotId, int ratingPartIndex, int partIndex, ApplicationPartVersionDO<PersonRatingEditionDO> edition, int? caseTypeId = null)
+        public IHttpActionResult PostPart(int lotId, int ratingPartIndex, int partIndex, ApplicationPartVersionDO<PersonRatingEditionDO> edition)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
