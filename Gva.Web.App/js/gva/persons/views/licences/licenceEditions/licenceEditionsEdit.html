@@ -5,7 +5,9 @@
   <div style="padding-bottom:20px;">
     <sc-datatable items="licenceEditions" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
       <sc-column sortable="false" class="buttons-cell" has-content="true">
-        <sc-button name="editEditionBtn" btn-sref="{ state: 'root.persons.view.licences.view.editions.edit', params: { index: item.partIndex} }" ng-disabled="item.partIndex === currentLicenceEdition.partIndex" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+        <sc-button name="editEditionBtn" icon="fa fa-circle-o fa-lg" icon-disabled="fa fa-check-circle-o fa-lg"
+          btn-sref="{ state: 'root.persons.view.licences.view.editions.edit', params: { index: item.partIndex} }"
+          ng-disabled="item.partIndex === currentLicenceEdition.partIndex"></sc-button>
       </sc-column>
       <sc-column title="persons.editLicenceEditions.documentDateValidFrom" has-content="true">
         {{item.part.documentDateValidFrom | date:'mediumDate'}}

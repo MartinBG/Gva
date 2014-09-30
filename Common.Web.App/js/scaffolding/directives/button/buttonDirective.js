@@ -4,7 +4,8 @@
 //                   btn-sref="{state: '...', params: {...}, options: {...}}"
 //                   text=""
 //                   class=""
-//                   icon="">
+//                   icon=""
+//                   icon-disabled="">
 // </sc-button>
 
 /*global angular*/
@@ -65,13 +66,21 @@
       if (!scope.text) {
         scope.text = attrs.text;
       }
+
+      scope.isDisabled = false;
+      if (attrs.iconDisabled) {
+        scope.$parent.$watch(attrs.ngDisabled, function (newVal) {
+          scope.isDisabled = newVal;
+        });
+      }
     }
     return {
       restrict: 'E',
       replace: true,
       scope: {
         btnClick: '&',
-        icon: '@'
+        icon: '@',
+        iconDisabled: '@'
       },
       templateUrl: 'js/scaffolding/directives/button/buttonDirective.html',
       compile: function compile(tElement, tAttrs) {
