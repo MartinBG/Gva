@@ -30,10 +30,10 @@
       <input type="checkbox" ng-checked="item.isReady" ng-disabled="item.isReady" sc-click="selectCheck($event, item, 'licenceReady')">
     </sc-column>
     <sc-column title="persons.stampedDocumentsView.received" sortable="false" class="buttons-cell" has-content="true">
-      <input type="checkbox" ng-checked="item.isReceived" ng-disabled="item.isReceived" sc-click="selectCheck($event, item, 'returned')">
+      <input type="checkbox" ng-checked="item.isReceived" ng-disabled="item.isReceived || !item.isReady" sc-click="selectCheck($event, item, 'returned')">
     </sc-column>
     <sc-column title="persons.stampedDocumentsView.finished" sortable="false" class="buttons-cell" has-content="true">
-      <input type="checkbox" ng-checked="item.isDone" ng-disabled="item.isDone" sc-click="selectCheck($event, item, 'done')">
+      <input type="checkbox" sc-click="selectCheck($event, item, 'done')">
     </sc-column>
   </sc-datatable>
 </ng-form>
