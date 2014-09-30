@@ -1,4 +1,4 @@
 ﻿<a>
-  <span ng-class="{'glyphicon': icon || $pending, 'glyphicon-loading': $pending, '{{icon}}': !$pending }"></span>
+  <span ng-class="{'glyphicon': icon || iconDisabled || $pending, 'glyphicon-loading': $pending, '{{iconDisabled}}': !$pending && isDisabled,'{{icon}}': !$pending && !isDisabled }"></span>
   <span>{{text}}</span>
 </a>
