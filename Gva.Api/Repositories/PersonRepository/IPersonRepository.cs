@@ -44,7 +44,7 @@ namespace Gva.Api.Repositories.PersonRepository
 
         List<GvaLicenceEdition> GetStampedDocuments();
 
-        IEnumerable<GvaLicenceEdition> GetLicences(int lotId);
+        IEnumerable<GvaLicenceEdition> GetLicences(int lotId, int? caseTypeId);
 
         string GetLastLicenceNumber(int lotId, string licenceTypeCode);
 

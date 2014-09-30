@@ -38,6 +38,7 @@ namespace Gva.Api.Repositories.InventoryRepository
 
                     SetPartAlias = i.SetPartAlias,
                     PartIndex = i.Part.Index,
+                    ParentPartIndex = (int?)i.ParentPart.Index,
                     Name = i.Name,
                     Type = i.Type,
                     Number = i.Number,
@@ -78,6 +79,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                 {
                     SetPartAlias = i.SetPartAlias,
                     PartIndex = i.PartIndex,
+                    ParentPartIndex = i.ParentPartIndex,
                     Name = i.Name,
                     Type = i.Type == null ? null : i.Type.Name,
                     Number = i.Number,

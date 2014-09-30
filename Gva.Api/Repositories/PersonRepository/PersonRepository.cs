@@ -191,8 +191,17 @@ namespace Gva.Api.Repositories.PersonRepository
                 .ToList();
         }
 
-        public IEnumerable<GvaLicenceEdition> GetLicences(int lotId)
+        public IEnumerable<GvaLicenceEdition> GetLicences(int lotId, int? caseTypeId)
         {
+            var predicate = PredicateBuilder.True<GvaLicenceEdition>()
+                .And(e => e.LotId == lotId)
+                .And(e => e.IsLastEdition == true);
+
+            if (caseTypeId != null)
+            {
+                predicate = predicate.And(f => f.LotFile.GvaCaseTypeId == caseTypeId.Value);
+            }
+
             return this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceType)
                 .Include(e => e.LotFile)
@@ -200,7 +209,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.Application.Part)
                 .Include(e => e.Application.ApplicationType)
                 .Include(e => e.LicenceAction)
-                .Where(e => e.LotId == lotId && e.IsLastEdition == true)
+                .Where(predicate)
                 .OrderByDescending(i => i.DateValidFrom)
                 .ToList();
         }
