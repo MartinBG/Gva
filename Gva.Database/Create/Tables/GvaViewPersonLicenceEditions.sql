@@ -20,6 +20,12 @@ CREATE TABLE [dbo].[GvaViewPersonLicenceEditions] (
     [LicenceTypeCode]       NVARCHAR(50)  NOT NULL,
     [LicenceTypeCaCode]     NVARCHAR(50)  NOT NULL,
     [PublisherCode]         NVARCHAR(50)  NOT NULL,
+    [ForeignLicenceNumber]  NVARCHAR(50)  NULL,
+    [ForeignPublisher]      NVARCHAR(100) NULL,
+    [Notes]                 NVARCHAR(MAX) NULL,
+    [Inspector]             NVARCHAR(100) NULL,
+    [StatusChange]          NVARCHAR(100) NULL,
+    [Limitations]           NVARCHAR(MAX) NULL,
     CONSTRAINT [PK_GvaViewPersonLicenceEditions]                      PRIMARY KEY ([LotId], [LicencePartId], [EditionPartId]),
     CONSTRAINT [FK_GvaViewPersonLicenceEditions_GvaViewPersons]       FOREIGN KEY ([LotId])                                    REFERENCES [dbo].[GvaViewPersons] ([LotId]),
     CONSTRAINT [FK_GvaViewPersonLicenceEditions_LotParts]             FOREIGN KEY ([LicencePartId])                            REFERENCES [dbo].[LotParts] ([LotPartId]),
@@ -43,4 +49,10 @@ exec spDescColumn N'GvaViewPersonLicenceEditions', N'DateValidTo'           , N'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'LicenceActionId'       , N'Основание.'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'LicenceNumber'         , N'Номер на лиценза.'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'IsLastEdition'         , N'Флаг, определящ дали вписаването е последно за лиценза.'
+exec spDescColumn N'GvaViewPersonLicenceEditions', N'ForeignLicenceNumber'  , N'Чужд лиценз No .'
+exec spDescColumn N'GvaViewPersonLicenceEditions', N'ForeignPublisher'      , N'Чужда администрация.'
+exec spDescColumn N'GvaViewPersonLicenceEditions', N'Notes'                 , N'Бележки.'
+exec spDescColumn N'GvaViewPersonLicenceEditions', N'Inspector'             , N'Инспектор.'
+exec spDescColumn N'GvaViewPersonLicenceEditions', N'StatusChange'          , N'Промяна на статуса.'
+exec spDescColumn N'GvaViewPersonLicenceEditions', N'Limitations'           , N'Ограничения.'
 GO

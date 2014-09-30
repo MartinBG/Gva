@@ -5,7 +5,7 @@ CREATE VIEW [dbo].[vwGvaLicenceEditions] WITH SCHEMABINDING
 AS
     select e.LotId, e.LicencePartId, e.EditionPartId, e.EditionIndex, e.LicenceTypeId, e.StampNumber, e.DateValidFrom, e.DateValidTo,
     e.LicenceActionId, e.LicenceNumber, e.IsLastEdition, e.LicencePartIndex, e.EditionPartIndex, e.FirstDocDateValidFrom,
-    e.Valid, e.LicenceTypeCode, e.LicenceTypeCaCode, e.PublisherCode,
+    e.Valid, e.LicenceTypeCode, e.LicenceTypeCaCode, e.PublisherCode, e.ForeignLicenceNumber, e.ForeignPublisher, e.Notes, e.Inspector, e.StatusChange, e.Limitations,
     lf.GvaLotFileId, ga.GvaApplicationId, ga.GvaAppLotPartId as ApplicationPartId, s.GvaStageId
     from [dbo].[GvaViewPersonLicenceEditions] e
         left join (select GvaLotFileId, LotPartId
@@ -21,3 +21,4 @@ AS
                     from [dbo].[GvaAppStages] apps
                     group by apps.GvaApplicationId) s on ga.GvaApplicationId = s.GvaApplicationId
 GO
+

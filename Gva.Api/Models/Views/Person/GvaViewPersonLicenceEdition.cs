@@ -53,6 +53,18 @@ namespace Gva.Api.Models.Views.Person
         public virtual NomValue LicenceType { get; set; }
 
         public virtual NomValue LicenceAction { get; set; }
+
+        public string ForeignLicenceNumber { get; set; }
+
+        public string ForeignPublisher { get; set; }
+
+        public string Notes { get; set; }
+
+        public string Inspector { get; set; }
+
+        public string StatusChange { get; set; }
+
+        public string Limitations { get; set; }
     }
 
     public class GvaViewPersonLicenceEditionMap : EntityTypeConfiguration<GvaViewPersonLicenceEdition>
@@ -104,6 +116,12 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LicenceTypeCode).HasColumnName("LicenceTypeCode");
             this.Property(t => t.LicenceTypeCaCode).HasColumnName("LicenceTypeCaCode");
             this.Property(t => t.PublisherCode).HasColumnName("PublisherCode");
+            this.Property(t => t.ForeignLicenceNumber).HasColumnName("ForeignLicenceNumber");
+            this.Property(t => t.ForeignPublisher).HasColumnName("ForeignPublisher");
+            this.Property(t => t.Notes).HasColumnName("Notes");
+            this.Property(t => t.Inspector).HasColumnName("Inspector");
+            this.Property(t => t.StatusChange).HasColumnName("StatusChange");
+            this.Property(t => t.Limitations).HasColumnName("Limitations");
 
             // Relationships
             this.HasRequired(t => t.Person)

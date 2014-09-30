@@ -195,6 +195,11 @@ namespace Gva.Api.Repositories.PersonRepository
         {
             return this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceType)
+                .Include(e => e.LotFile)
+                .Include(e => e.Application)
+                .Include(e => e.Application.Part)
+                .Include(e => e.Application.ApplicationType)
+                .Include(e => e.LicenceAction)
                 .Where(e => e.LotId == lotId && e.IsLastEdition == true)
                 .OrderByDescending(i => i.DateValidFrom)
                 .ToList();

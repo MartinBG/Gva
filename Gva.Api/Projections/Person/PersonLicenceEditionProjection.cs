@@ -76,6 +76,22 @@ namespace Gva.Api.Projections.Person
             licenceEdition.LicenceTypeCode = licenceType.TextContent.Get<string>("licenceCode");
             licenceEdition.LicenceTypeCaCode = licenceType.TextContent.Get<string>("codeCA");
             licenceEdition.PublisherCode = personLicence.Content.Publisher.Code;
+            licenceEdition.Notes = lastEdition.Notes;
+
+            if (lastEdition.Inspector != null)
+            {
+                licenceEdition.Inspector = lastEdition.Inspector.Name;
+            }
+            if (lastEdition.Limitations.Count > 0)
+            {
+                licenceEdition.Limitations = string.Join(", ", lastEdition.Limitations.Select(l => l.Name)).ToString();
+            }
+            if (personLicence.Content.Statuses != null)
+            {
+                PersonLicenceStatusDO lastStatus = personLicence.Content.Statuses.Last();
+
+                licenceEdition.StatusChange = string.Format("{0:d} {1}", lastStatus.ChangeDate, lastStatus.ChangeReason.Name);
+            }
 
             return licenceEdition;
         }
