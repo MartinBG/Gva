@@ -34,10 +34,6 @@
           return states;
         };
 
-        $scope.goTo = function goTo(state) {
-          return $state.go(state);
-        };
-
         $scope.breadcrumbStates = $scope.getBreadcrumbStates($state.$current);
         $scope.$on('$stateChangeSuccess', function () {
           $scope.breadcrumbStates = $scope.getBreadcrumbStates($state.$current);
