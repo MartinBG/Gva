@@ -2629,7 +2629,17 @@
           licenceType: 'Наименование',
           firstEditionValidFrom: 'Първоначално издаване',
           documentDateValidFrom: 'Издаден',
-          documentDateValidTo: 'Валиден до'
+          documentDateValidTo: 'Валиден до',
+          licenceAction: 'Основание',
+          statusChange: 'Промяна на статуса',
+          notes: 'Бележки',
+          inspector: 'Инспектор',
+          application: 'Заявление',
+          foreignLicence: 'Чужд лиценз No / Админ',
+          valid: 'Валидност',
+          pageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          limitations: 'Ограничения'
         },
         newLicence: {
           title: 'Нов лиценз',

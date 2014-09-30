@@ -21,5 +21,26 @@
     </sc-column>
     <sc-column data="firstDocDateValidFrom" title="persons.licencesSearch.firstEditionValidFrom" type="date">
     </sc-column>
+    <sc-column data="licenceActionName" title="persons.licencesSearch.licenceAction">
+    </sc-column>
+    <sc-column data="statusChange" title="persons.licencesSearch.statusChange">
+    </sc-column>
+    <sc-column data="inspector" title="persons.licencesSearch.inspector">
+    </sc-column>
+    <sc-column data="application.applicationName" title="persons.licencesSearch.application">
+    </sc-column>
+    <sc-column data="notes" title="persons.licencesSearch.notes" visible="false">
+    </sc-column>
+    <sc-column data="foreignLicence" title="persons.licencesSearch.foreignLicence" visible="false">
+    </sc-column>
+    <sc-column data="valid" title="persons.licencesSearch.valid" visible="false" has-content="true">
+      {{item.valid? 'Да' : 'Не'}}
+    </sc-column>
+    <sc-column data="pageNumber" title="persons.licencesSearch.pageNumber" visible="false">
+    </sc-column>
+    <sc-column data="pageCount" title="persons.licencesSearch.pageCount" visible="false">
+    </sc-column>
+    <sc-column data="limitations" title="persons.licencesSearch.limitations" visible="false">
+    </sc-column>
   </sc-datatable>
 </div>

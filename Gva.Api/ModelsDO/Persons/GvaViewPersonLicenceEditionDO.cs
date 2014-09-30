@@ -54,6 +54,18 @@ namespace Gva.Api.ModelsDO.Persons
             this.LicenceTypeCode = edition.LicenceTypeCode;
             this.LicenceTypeCaCode = edition.LicenceTypeCaCode;
             this.PublisherCode = edition.PublisherCode;
+            this.Inspector = edition.Inspector;
+            this.ForeignLicence = string.Format("{0} {1}", edition.ForeignLicenceNumber, edition.ForeignPublisher);
+            this.Notes = edition.Notes;
+            this.StatusChange = edition.StatusChange;
+
+            if (edition.GvaLotFileId.HasValue)
+            {
+                this.PageCount = edition.LotFile.PageNumber;
+                this.PageNumber = edition.LotFile.PageIndex;
+            }
+
+            this.Limitations = edition.Limitations;
         }
 
         public int LotId { get; set; }
@@ -101,5 +113,19 @@ namespace Gva.Api.ModelsDO.Persons
         public string LicenceTypeCaCode { get; set; }
 
         public string PublisherCode { get; set; }
+
+        public string Inspector { get; set; }
+
+        public string ForeignLicence { get; set; }
+
+        public string Notes { get; set; }
+
+        public string StatusChange { get; set; }
+
+        public string Limitations { get; set; }
+
+        public string PageNumber { get; set; }
+
+        public int? PageCount { get; set; }
     }
 }
