@@ -21,7 +21,6 @@ namespace Gva.Api.ModelsDO.Persons
             {
                 this.IsReady = edition.GvaStageId >= GvaConstants.IsReadyApplication;
                 this.IsReceived = edition.GvaStageId >= GvaConstants.IsReceivedApplication;
-                this.IsDone = edition.GvaStageId >= GvaConstants.IsDoneApplication;
             }
 
             if (edition.LicenceAction != null)

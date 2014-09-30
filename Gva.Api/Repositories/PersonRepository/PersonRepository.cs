@@ -186,7 +186,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.Application)
                 .Include(e => e.Application.ApplicationType)
                 .Include(e => e.Application.Part)
-                .Where(e => e.StampNumber != null && e.GvaStageId.HasValue)
+                .Where(e => e.StampNumber != null && e.GvaStageId.HasValue && e.GvaStageId < GvaConstants.IsDoneApplication)
                 .OrderByDescending(i => i.DateValidFrom)
                 .ToList();
         }
