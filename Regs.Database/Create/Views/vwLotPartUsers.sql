@@ -10,6 +10,3 @@ AS
         inner join dbo.UnitUsers u on ut.UnitId = u.UnitId and u.IsActive = 1
     group by lp.LotPartId, u.UserId, ut.ClassificationPermissionId
 GO
-
-CREATE UNIQUE CLUSTERED INDEX vwLotPartUsers_PK ON vwLotPartUsers (LotPartId, UserId, ClassificationPermissionId)
-GO
