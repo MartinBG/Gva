@@ -58,7 +58,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.Notes = edition.Notes;
             this.StatusChange = edition.StatusChange;
 
-            if (edition.GvaLotFileId.HasValue)
+            if (edition.LotFile != null)
             {
                 this.PageCount = edition.LotFile.PageNumber;
                 this.PageNumber = edition.LotFile.PageIndex;
