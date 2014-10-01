@@ -230,6 +230,13 @@ namespace Gva.Api.Repositories.PersonRepository
             return licenceNumber;
         }
 
+        public int GetLastLicenceEditionIndex(int lotId, int licencePartIndex)
+        {
+            return this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
+                .Single(e => e.LotId == lotId && e.LicencePartIndex == licencePartIndex && e.IsLastEdition)
+                .EditionPartIndex;
+        }
+
         public IEnumerable<GvaViewPersonRating> GetRatings(int lotId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewPersonRating>()

@@ -15,6 +15,10 @@
       newLicenceStatus: {
         method: 'GET',
         url: 'api/persons/:id/licences/newStatus'
+      },
+      lastEditionIndex: {
+        method: 'GET',
+        url: 'api/persons/:id/licences/:ind/lastEditionIndex'
       }
     });
   }]);

@@ -48,6 +48,8 @@ namespace Gva.Api.Repositories.PersonRepository
 
         string GetLastLicenceNumber(int lotId, string licenceTypeCode);
 
+        int GetLastLicenceEditionIndex(int lotId, int licencePartIndex);
+
         IEnumerable<GvaViewPersonRating> GetRatings(int lotId);
     }
 }
