@@ -73,6 +73,8 @@
           scope.isDisabled = newVal;
         });
       }
+
+      scope.iconBaseClass = scope.icon ? scope.icon.substring(0, scope.icon.indexOf('-')) : null;
     }
     return {
       restrict: 'E',

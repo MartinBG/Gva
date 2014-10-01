@@ -1,4 +1,10 @@
 ﻿<a>
-  <span ng-class="{'glyphicon': icon || iconDisabled || $pending, 'glyphicon-loading': $pending, '{{iconDisabled}}': !$pending && isDisabled,'{{icon}}': !$pending && !isDisabled }"></span>
+  <span ng-class="{
+    'glyphicon': iconBaseClass === 'glyphicon' || $pending,
+    'fa fa-lg': !$pending && iconBaseClass === 'fa',
+    'glyphicon-loading': $pending,
+    '{{iconDisabled}}': !$pending && isDisabled,
+    '{{icon}}': !$pending && !isDisabled
+  }"></span>
   <span>{{text}}</span>
 </a>
