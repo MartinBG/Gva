@@ -82,9 +82,9 @@ namespace Gva.Api.Projections.Person
             {
                 licenceEdition.Inspector = lastEdition.Inspector.Name;
             }
-            if (lastEdition.Limitations.Count > 0)
+            if (lastEdition.Limitations != null)
             {
-                licenceEdition.Limitations = string.Join(", ", lastEdition.Limitations.Select(l => l.Name)).ToString();
+                licenceEdition.Limitations = string.Join(", ", lastEdition.Limitations.Select(l => l.Name));
             }
             if (personLicence.Content.Statuses != null)
             {
