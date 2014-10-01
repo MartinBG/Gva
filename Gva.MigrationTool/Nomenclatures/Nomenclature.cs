@@ -1234,7 +1234,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     new NomValue
                     {
                         OldId = r.Field<object>("ID").ToString(),
-                        Code = null,
+                        Code = r.Field<string>("CODE"),
                         Name = r.Field<string>("NAME"),
                         NameAlt = r.Field<string>("NAME_TRANS"),
                         Alias = null,
