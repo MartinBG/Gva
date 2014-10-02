@@ -90,8 +90,8 @@
         scannedDocumentlDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
+          bookPageNumber: '№ стр.',
+          pageCount: 'Бр. стр.',
           caseType: 'Тип дело',
           applications: 'Заявления'
         },
