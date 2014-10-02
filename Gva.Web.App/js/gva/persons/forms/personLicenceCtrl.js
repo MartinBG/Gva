@@ -10,13 +10,14 @@
   ) {
     $scope.isNew = scFormParams.isNew;
     $scope.lotId = scFormParams.lotId;
+    $scope.caseTypeId = scFormParams.caseTypeId;
 
     if ($scope.isNew) {
-      $scope.$watch('model.licenceType', function () {
-        if ($scope.model.licenceType) {
+      $scope.$watch('model.part.licenceType', function () {
+        if ($scope.model.part.licenceType) {
           PersonLicences.lastLicenceNumber({
             id: scFormParams.lotId,
-            licenceTypeCode: $scope.model.licenceType.code
+            licenceTypeCode: $scope.model.part.licenceType.code
           }).$promise
             .then(function (lastLicenceNumber) {
               if (lastLicenceNumber.number === null) {
@@ -32,11 +33,6 @@
         }
       });
     }
-
-    $scope.changedStaffType = function () {
-      $scope.model.fcl = null;
-    };
-
   }
 
   PersonLicenceCtrl.$inject = [

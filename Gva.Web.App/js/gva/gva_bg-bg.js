@@ -1968,7 +1968,7 @@
           administration: 'Администрация'
         },
         licenceDirective: {
-          staffType: 'Тип персонал',
+          caseType: 'Тип дело',
           licenceType: 'Вид',
           licenceNumber: 'Лиценз No',
           foreignLicenceNumber: 'Чужд лиценз No',

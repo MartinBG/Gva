@@ -41,7 +41,7 @@
     <sc-field type="textarea" rows="3" ng-model="model.part.notesAlt" l10n-text="persons.licenceEditionDirective.notesAlt" class="col-md-3"></sc-field>
   </div>
 
-  <gva-common-scanned-document name="personScannedDocumentForm" ng-model="model.files" sc-form-params="{ setPart: 'person', lotId: lotId, caseTypeId: caseTypeId }"></gva-common-scanned-document>
+  <gva-common-scanned-document name="personScannedDocumentForm" ng-model="model.case" sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
 
   <h5 class="form-header" l10n-text="persons.licenceEditionDirective.ratings"></h5>
   <div class="row">

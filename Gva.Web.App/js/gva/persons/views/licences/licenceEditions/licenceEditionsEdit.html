@@ -25,10 +25,10 @@
       {{item.part.licenceAction.name}}
     </sc-column>
     <sc-column title="persons.editLicenceEditions.bookPageNumber" has-content="true">
-      {{(item.files | last).bookPageNumber}}
+      {{item.case.bookPageNumber}}
     </sc-column>
     <sc-column title="persons.editLicenceEditions.pageCount" has-content="true">
-      {{(item.files | last).pageCount}}
+      {{item.case.pageCount}}
     </sc-column>
   </sc-datatable>
   <div style="clear: both"></div>
@@ -52,8 +52,14 @@
 
     <div class="well-sm panel-body">
       <gva-licence-edition name="licenceEditionForm" ng-model="currentLicenceEdition"
-        sc-form-params="{ isNew: false, lotId: lotId, caseTypeId: caseTypeId, appId: appId }"
-        sc-data-staff-type="licence.part.staffType" sc-data-fcl="licence.part.fcl"
+        sc-form-params="{
+          isNew: false,
+          lotId: lotId,
+          caseTypeId: caseTypeId,
+          appId: appId,
+          partIndex: licence.partIndex
+        }"
+        sc-data-fcl="licence.part.fcl"
         sc-data-licence-type="licence.part.licenceType">
       </gva-licence-edition>
     </div>

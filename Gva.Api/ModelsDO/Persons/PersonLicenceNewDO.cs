@@ -2,8 +2,8 @@
 {
     public class PersonLicenceNewDO
     {
-        public FilePartVersionDO<PersonLicenceDO> Licence { get; set; }
+        public CaseTypePartDO<PersonLicenceDO> Licence { get; set; }
 
-        public FilePartVersionDO<PersonLicenceEditionDO> Edition { get; set; }
+        public CaseTypePartDO<PersonLicenceEditionDO> Edition { get; set; }
     }
 }

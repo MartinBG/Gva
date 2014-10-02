@@ -7,9 +7,6 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonLicenceDO
     {
-        [Required(ErrorMessage = "StaffType is required.")]
-        public NomValue StaffType { get; set; }
-
         public NomValue Fcl { get; set; }
 
         [Required(ErrorMessage = "LicenceType is required.")]

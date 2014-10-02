@@ -341,11 +341,11 @@ namespace Gva.MigrationTool.Sets
                         Dictionary<int, int> licenceOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personLicence in personLicences)
                         {
-                            var licencePartVersion = lot.CreatePart("licences/*", personLicence, context);
+                            var licencePartVersion = addPartWithFiles("licences/*", personLicence);
 
                             int nextIndex = 0;
 
-                            foreach (var edition in personLicenceEditions[personLicence.Get<int>("__oldId")])
+                            foreach (var edition in personLicenceEditions[personLicence.Get<int>("part.__oldId")])
                             {
                                 var editionPart = edition["part"] as JObject;
                                 editionPart.Add("licencePartIndex", licencePartVersion.Part.Index);
@@ -355,13 +355,13 @@ namespace Gva.MigrationTool.Sets
                                 var editionPartVersion = addPartWithFiles("licenceEditions/*", edition);
                             }
 
-                            licenceOldIdToPartIndex.Add(personLicence.Get<int>("__oldId"), licencePartVersion.Part.Index);
+                            licenceOldIdToPartIndex.Add(personLicence.Get<int>("part.__oldId"), licencePartVersion.Part.Index);
                         }
 
                         //replace included licence ids with part indexes
                         foreach (var personLicence in personLicences)
                         {
-                            foreach (var edition in personLicenceEditions[personLicence.Get<int>("__oldId")])
+                            foreach (var edition in personLicenceEditions[personLicence.Get<int>("part.__oldId")])
                             {
                                 var editionPart = edition["part"] as JObject;
                                 editionPart.Property("includedLicences").Value = new JArray(edition.GetItems<int>("includedLicences").Select(l => licenceOldIdToPartIndex[l]).ToArray());
@@ -1526,33 +1526,43 @@ namespace Gva.MigrationTool.Sets
                         L.FOREIGN_CAA_ID,
                         L.EMPLOYEE_ID,
                         L.ISSUE_DATE,
-                        LT.STAFF_TYPE_ID,
+                        ST.CODE as STAFF_TYPE_CODE,
                         LT.CODE as LICENCE_TYPE_CODE
                     FROM CAA_DOC.LICENCE L
                     INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON L.LICENCE_TYPE_ID = LT.ID
+                    INNER JOIN CAA_DOC.NM_STAFF_TYPE ST ON LT.STAFF_TYPE_ID = ST.ID
                     WHERE {0}",
                 new DbClause("L.PERSON_ID = {0}", personId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "LICENCE",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "LICENCE",
 
-                        //TODO show somewhere?
-                        __ISSUE_DATE = r.Field<DateTime?>("ISSUE_DATE"),
+                            //TODO show somewhere?
+                            __ISSUE_DATE = r.Field<DateTime?>("ISSUE_DATE"),
 
-                        licenceType = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_TYPE_ID")),
-                        staffType = noms["staffTypes"].ByOldId(r.Field<string>("STAFF_TYPE_ID")),
-                        fcl = noms["boolean"].ByCode(r.Field<string>("LICENCE_TYPE_CODE").Contains("FCL") ? "Y" : "N"),
-                        licenceNumber = r.Field<string>("LICENCE_NO"),
-                        foreignLicenceNumber = r.Field<string>("FOREIGN_LICENCE_NO"),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        statuses = statuses.ContainsKey(r.Field<int>("ID")) ? statuses[r.Field<int>("ID")] : null,
-                        publisher = noms["caa"].ByOldId(r.Field<int?>("PUBLISHER_CAA_ID").ToString()),
-                        foreignPublisher = noms["caa"].ByOldId(r.Field<int?>("FOREIGN_CAA_ID").ToString()),
-                        employment = getEmployment(r.Field<int?>("EMPLOYEE_ID"))
-                    }))
+                            licenceType = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_TYPE_ID")),
+                            fcl = noms["boolean"].ByCode(r.Field<string>("LICENCE_TYPE_CODE").Contains("FCL") ? "Y" : "N"),
+                            licenceNumber = r.Field<string>("LICENCE_NO"),
+                            foreignLicenceNumber = r.Field<string>("FOREIGN_LICENCE_NO"),
+                            valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
+                            statuses = statuses.ContainsKey(r.Field<int>("ID")) ? statuses[r.Field<int>("ID")] : null,
+                            publisher = noms["caa"].ByOldId(r.Field<int?>("PUBLISHER_CAA_ID").ToString()),
+                            foreignPublisher = noms["caa"].ByOldId(r.Field<int?>("FOREIGN_CAA_ID").ToString()),
+                            employment = getEmployment(r.Field<int?>("EMPLOYEE_ID"))
+                        })),
+                        new JProperty("files",
+                            new JArray(
+                              new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(PersonUtils.getPersonCaseTypeByStaffTypeCode(noms, (r.Field<string>("STAFF_TYPE_CODE"))))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray()))))))
                 .ToList();
         }
 

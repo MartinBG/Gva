@@ -15,7 +15,7 @@
 
     <div class="well-sm panel-body">
       <h5 class="form-header" l10n-text="persons.editLicenceModal.licenceForm"></h5>
-      <gva-licence name="licenceForm" ng-model="licence.part" sc-form-params="{ isNew: false, lotId: lotId }"></gva-licence>
+      <gva-licence name="licenceForm" ng-model="licence" sc-form-params="{ isNew: false, lotId: lotId }"></gva-licence>
 
       <div class="row">
         <sc-field-group class="col-sm-3" text="persons.editLicenceModal.valid">
@@ -40,7 +40,12 @@
 
       <h5 class="form-header" l10n-text="persons.editLicenceModal.editionForm"></h5>
       <gva-licence-edition name="licenceEditionForm" ng-model="edition"
-        sc-form-params="{ isNew: false, lotId: lotId, partIndex: licence.partIndex }"
+        sc-form-params="{
+          isNew: false,
+          lotId: lotId,
+          partIndex: licence.partIndex
+        }"
+        sc-data-fcl="licence.part.fcl"
         sc-data-staff-type="licence.part.staffType">
       </gva-licence-edition>
     </div>

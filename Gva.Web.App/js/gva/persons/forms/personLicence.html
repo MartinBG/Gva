@@ -1,22 +1,26 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly="!isNew">
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.staffType" alias="'staffTypes'" ng-required="true" ng-change="changedStaffType()" l10n-text="persons.licenceDirective.staffType" class="col-sm-4"></sc-field>
-    <sc-field type="nomenclature" alias="'boolean'" ng-model="model.fcl" l10n-text="persons.licenceDirective.fcl" class="col-sm-2" ng-if="model.staffType.alias === 'flightCrew'"></sc-field>
+    <div class="form-group col-sm-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="persons.licenceDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" ng-disabled="model.case.caseType" ng-required="true" init="isNew" case-type="caseTypeId"></gva-case-type>
+    </div>
+    <sc-field type="nomenclature" alias="'boolean'" ng-model="model.part.fcl" l10n-text="persons.licenceDirective.fcl" class="col-sm-2" ng-if="model.case.caseType.alias === 'flightCrew'"></sc-field>
   </div>
-  <div ng-if="model.staffType">
+  <div ng-if="model.case.caseType">
     <div class="row">
-      <sc-field type="nomenclature" alias="'licenceTypes'" ng-model="model.licenceType" ng-required="true" params="{staffTypeAlias: model.staffType.alias, fclCode: model.staffType.alias === 'flightCrew' ? model.fcl.code : undefined}" l10n-text="persons.licenceDirective.licenceType" class="col-sm-4"></sc-field>
-      <sc-field type="int" ng-model="model.licenceNumber" l10n-text="persons.licenceDirective.licenceNumber" class="col-sm-2"></sc-field>
+      <sc-field type="nomenclature" alias="'licenceTypes'" ng-model="model.part.licenceType" ng-required="true" params="{staffTypeAlias: model.case.caseType.alias, fclCode: model.case.caseType.alias === 'flightCrew' ? model.part.fcl.code : undefined}" l10n-text="persons.licenceDirective.licenceType" class="col-sm-4"></sc-field>
+      <sc-field type="int" ng-model="model.part.licenceNumber" l10n-text="persons.licenceDirective.licenceNumber" class="col-sm-2"></sc-field>
       <sc-field type="text" ng-model="lastLicenceNumber" l10n-text="persons.licenceDirective.lastLicenceNumber" disabled class="col-sm-4" ng-if="isNew"></sc-field>
     </div>
-    <div class="row" ng-if="model.licenceType.code === 'FOREIGN'">
-      <sc-field type="text" ng-model="model.foreignLicenceNumber" ng-required="true" l10n-text="persons.licenceDirective.foreignLicenceNumber" class="col-sm-2"></sc-field>
-      <sc-field type="nomenclature" alias="'caa'" ng-model="model.foreignPublisher" ng-required="true" l10n-text="persons.licenceDirective.foreignPublisher" class="col-sm-4"></sc-field>
-      <sc-field type="nomenclature" alias="'employments'" params="{lotId : lotId}" ng-model="model.employment" ng-required="true" l10n-text="persons.licenceDirective.employment" class="col-sm-4"></sc-field>
+    <div class="row" ng-if="model.part.licenceType.code === 'FOREIGN'">
+      <sc-field type="text" ng-model="model.part.foreignLicenceNumber" ng-required="true" l10n-text="persons.licenceDirective.foreignLicenceNumber" class="col-sm-2"></sc-field>
+      <sc-field type="nomenclature" alias="'caa'" ng-model="model.part.foreignPublisher" ng-required="true" l10n-text="persons.licenceDirective.foreignPublisher" class="col-sm-4"></sc-field>
+      <sc-field type="nomenclature" alias="'employments'" params="{lotId : lotId}" ng-model="model.part.employment" ng-required="true" l10n-text="persons.licenceDirective.employment" class="col-sm-4"></sc-field>
     </div>
     <div class="row" ng-if="isNew">
-      <sc-field type="nomenclature" alias="'boolean'" ng-model="model.valid" ng-readonly="true" l10n-text="persons.licenceDirective.valid" class="col-sm-3"></sc-field>
-      <sc-field type="nomenclature" alias="'caa'" ng-model="model.publisher" ng-readonly="true" ng-required="true" l10n-text="persons.licenceDirective.publisher" class="col-sm-7"></sc-field>
+      <sc-field type="nomenclature" alias="'boolean'" ng-model="model.part.valid" ng-readonly="true" l10n-text="persons.licenceDirective.valid" class="col-sm-3"></sc-field>
+      <sc-field type="nomenclature" alias="'caa'" ng-model="model.part.publisher" ng-readonly="true" ng-required="true" l10n-text="persons.licenceDirective.publisher" class="col-sm-7"></sc-field>
     </div>
   </div>
 </ng-form>

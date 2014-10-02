@@ -21,7 +21,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public int LicencePartIndex { get; set; }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
         public NomValue Inspector { get; set; }
 

@@ -61,7 +61,7 @@ namespace Gva.Api.Projections.Person
             licenceEdition.LotId = personLicence.Part.Lot.LotId;
             licenceEdition.LicencePartId = personLicence.Part.PartId;
             licenceEdition.EditionPartId = edition.Part.PartId;
-            licenceEdition.EditionIndex = edition.Content.Index.Value;
+            licenceEdition.EditionIndex = edition.Content.Index;
             licenceEdition.LicenceTypeId = personLicence.Content.LicenceType.NomValueId;
             licenceEdition.StampNumber = edition.Content.StampNumber;
             licenceEdition.DateValidFrom = edition.Content.DocumentDateValidFrom.Value;
