@@ -6,9 +6,12 @@
     $scope,
     $state,
     $stateParams,
+    PersonRatings,
     PersonRatingEditions,
+    rating,
     newRatingEdition
   ) {
+    $scope.rating = rating;
     $scope.newRatingEdition = newRatingEdition;
     $scope.lotId = $stateParams.id;
 
@@ -27,7 +30,11 @@
     };
 
     $scope.cancel = function () {
-      return $state.go('root.persons.view.ratings.search');
+      return PersonRatings.lastEditionIndex($stateParams).$promise.then(function (index) {
+        return $state.go(
+          'root.persons.view.ratings.edit.editions.edit',
+          { index: index.lastIndex });
+      });
     };
   }
 
@@ -35,7 +42,9 @@
     '$scope',
     '$state',
     '$stateParams',
+    'PersonRatings',
     'PersonRatingEditions',
+    'rating',
     'newRatingEdition'
   ];
 

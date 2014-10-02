@@ -6,8 +6,8 @@
     $scope,
     $state,
     $stateParams,
-    $filter,
     PersonLicenceEditions,
+    licence,
     currentLicenceEdition,
     licenceEditions,
     scMessage
@@ -19,6 +19,7 @@
     $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.appId = $stateParams.appId;
     $scope.lastEditionIndex = _.last(licenceEditions).partIndex;
+    $scope.licence = licence;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -36,12 +37,10 @@
             .$promise
             .then(function (edition) {
               $scope.editMode = null;
-              var editionIndex = null;
-              _.find($scope.licenceEditions, function (ed, index) {
-                if (ed.partIndex === edition.partIndex) {
-                  editionIndex = index;
-                }
+              var editionIndex = _.findIndex($scope.licenceEditions, function (ed) {
+                return ed.partIndex === edition.partIndex;
               });
+
               originalLicenceEdition = _.cloneDeep($scope.currentLicenceEdition);
               $scope.licenceEditions[editionIndex] = _.cloneDeep(edition);
             });
@@ -54,9 +53,6 @@
       return scMessage('common.messages.confirmDelete')
       .then(function (result) {
         if (result === 'OK') {
-          $scope.licenceEditions = _.remove($scope.licenceEditions, function (le) {
-            return le.partIndex !== currentLicenceEdition.partIndex;
-          });
           return PersonLicenceEditions
             .remove({
               id: $stateParams.id,
@@ -64,6 +60,10 @@
               index: $stateParams.index
             })
             .$promise.then(function () {
+              $scope.licenceEditions = _.remove($scope.licenceEditions, function (le) {
+                return le.partIndex !== currentLicenceEdition.partIndex;
+              });
+
               if ($scope.licenceEditions.length === 0) {
                 return $state.go('root.persons.view.licences.search');
               }
@@ -87,8 +87,8 @@
     '$scope',
     '$state',
     '$stateParams',
-    '$filter',
     'PersonLicenceEditions',
+    'licence',
     'currentLicenceEdition',
     'licenceEditions',
     'scMessage'

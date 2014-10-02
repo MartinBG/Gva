@@ -185,5 +185,13 @@ namespace Gva.Api.Controllers.Persons
 
             return Ok(licenceStatus);
         }
+
+        [Route("{licencePartIndex}/lastEditionIndex")]
+        public IHttpActionResult GetLastEditionIndex(int lotId, int licencePartIndex)
+        {
+            var lastLicenceEditionIndex = this.personRepository.GetLastLicenceEditionIndex(lotId, licencePartIndex);
+
+            return Ok(new { LastIndex = lastLicenceEditionIndex });
+        }
     }
 }

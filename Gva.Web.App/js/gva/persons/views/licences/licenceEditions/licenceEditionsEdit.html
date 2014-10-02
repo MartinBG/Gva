@@ -1,42 +1,40 @@
-﻿<ng-form name="editLicenceEditionForm" sc-validate="{}" sc-form-readonly="!editMode">
+﻿<h5 class="table-header" l10n-text="persons.editLicenceEditions.editions"></h5>
+<div style="padding-bottom:20px;">
+  <sc-datatable items="licenceEditions" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <sc-button name="editEditionBtn" icon="fa-circle-o" icon-disabled="fa-check-circle-o"
+        btn-sref="{ state: 'root.persons.view.licences.view.editions.edit', params: { index: item.partIndex} }"
+        ng-disabled="item.partIndex === currentLicenceEdition.partIndex"></sc-button>
+    </sc-column>
+    <sc-column title="persons.editLicenceEditions.documentDateValidFrom" has-content="true">
+      {{item.part.documentDateValidFrom | date:'mediumDate'}}
+    </sc-column>
+    <sc-column title="persons.editLicenceEditions.documentDateValidTo" has-content="true">
+      {{item.part.documentDateValidTo | date:'mediumDate'}}
+    </sc-column>
+    <sc-column title="persons.editLicenceEditions.limitations" has-content="true">
+      {{item.part.limitations | pluck:'code' | join:', '}}
+    </sc-column>
+    <sc-column title="persons.editLicenceEditions.notes" has-content="true">
+      {{item.part.notes}}
+    </sc-column>
+    <sc-column title="persons.editLicenceEditions.notesAlt" has-content="true">
+      {{item.part.notesAlt}}
+    </sc-column>
+    <sc-column title="persons.editLicenceEditions.licenceAction" has-content="true">
+      {{item.part.licenceAction.name}}
+    </sc-column>
+    <sc-column title="persons.editLicenceEditions.bookPageNumber" has-content="true">
+      {{(item.files | last).bookPageNumber}}
+    </sc-column>
+    <sc-column title="persons.editLicenceEditions.pageCount" has-content="true">
+      {{(item.files | last).pageCount}}
+    </sc-column>
+  </sc-datatable>
+  <div style="clear: both"></div>
+</div>
 
-  <h5 class="table-header" l10n-text="persons.editLicenceEditions.editions"></h5>
-
-  <div style="padding-bottom:20px;">
-    <sc-datatable items="licenceEditions" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
-      <sc-column sortable="false" class="buttons-cell" has-content="true">
-        <sc-button name="editEditionBtn" icon="fa fa-circle-o fa-lg" icon-disabled="fa fa-check-circle-o fa-lg"
-          btn-sref="{ state: 'root.persons.view.licences.view.editions.edit', params: { index: item.partIndex} }"
-          ng-disabled="item.partIndex === currentLicenceEdition.partIndex"></sc-button>
-      </sc-column>
-      <sc-column title="persons.editLicenceEditions.documentDateValidFrom" has-content="true">
-        {{item.part.documentDateValidFrom | date:'mediumDate'}}
-      </sc-column>
-      <sc-column title="persons.editLicenceEditions.documentDateValidTo" has-content="true">
-        {{item.part.documentDateValidTo | date:'mediumDate'}}
-      </sc-column>
-      <sc-column title="persons.editLicenceEditions.limitations" has-content="true">
-        {{item.part.limitations | pluck:'code' | join:', '}}
-      </sc-column>
-      <sc-column title="persons.editLicenceEditions.notes" has-content="true">
-        {{item.part.notes}}
-      </sc-column>
-      <sc-column title="persons.editLicenceEditions.notesAlt" has-content="true">
-        {{item.part.notesAlt}}
-      </sc-column>
-      <sc-column title="persons.editLicenceEditions.licenceAction" has-content="true">
-        {{item.part.licenceAction.name}}
-      </sc-column>
-      <sc-column title="persons.editLicenceEditions.bookPageNumber" has-content="true">
-        {{(item.files | last).bookPageNumber}}
-      </sc-column>
-      <sc-column title="persons.editLicenceEditions.pageCount" has-content="true">
-        {{(item.files | last).pageCount}}
-      </sc-column>
-    </sc-datatable>
-    <div style="clear: both"></div>
-  </div>
-
+<ng-form name="editLicenceEditionForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default">
     <div class="panel-heading">
       <strong l10n-text="persons.editLicenceEditions.editionForm"></strong>
@@ -55,8 +53,8 @@
     <div class="well-sm panel-body">
       <gva-licence-edition name="licenceEditionForm" ng-model="currentLicenceEdition"
         sc-form-params="{ isNew: false, lotId: lotId, caseTypeId: caseTypeId, appId: appId }"
-        sc-data-staff-type="$parent.licence.part.staffType" sc-data-fcl="$parent.licence.part.fcl"
-        sc-data-licence-type="$parent.licence.part.licenceType">
+        sc-data-staff-type="licence.part.staffType" sc-data-fcl="licence.part.fcl"
+        sc-data-licence-type="licence.part.licenceType">
       </gva-licence-edition>
     </div>
   </div>
