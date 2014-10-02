@@ -5,16 +5,13 @@ using System.Web.Http;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
+using Common.Filters;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
-using Gva.Api.Repositories.FileRepository;
-using Newtonsoft.Json.Linq;
-using Regs.Api.LotEvents;
-using Regs.Api.Models;
-using Regs.Api.Repositories.LotRepositories;
-using Common.Filters;
 using Gva.Api.Repositories.PersonRepository;
+using Regs.Api.LotEvents;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -25,7 +22,6 @@ namespace Gva.Api.Controllers.Persons
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
-        private IFileRepository fileRepository;
         private IPersonRepository personRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private INomRepository nomRepository;
@@ -35,7 +31,6 @@ namespace Gva.Api.Controllers.Persons
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
-            IFileRepository fileRepository,
             IPersonRepository personRepository,
             ILotEventDispatcher lotEventDispatcher,
             INomRepository nomRepository,
@@ -45,7 +40,6 @@ namespace Gva.Api.Controllers.Persons
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
-            this.fileRepository = fileRepository;
             this.personRepository = personRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.nomRepository = nomRepository;
@@ -124,6 +118,14 @@ namespace Gva.Api.Controllers.Persons
             var ratings = this.personRepository.GetRatings(lotId);
 
             return Ok(ratings.Select(d => new GvaViewPersonRatingDO(d)));
+        }
+
+        [Route("{ratingPartIndex}/lastEditionIndex")]
+        public IHttpActionResult GetLastEditionIndex(int lotId, int ratingPartIndex)
+        {
+            var lastRatingEditionIndex = this.personRepository.GetLastRatingEditionIndex(lotId, ratingPartIndex);
+
+            return Ok(new { LastIndex = lastRatingEditionIndex });
         }
     }
 }

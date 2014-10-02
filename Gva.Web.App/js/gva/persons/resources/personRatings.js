@@ -7,6 +7,10 @@
       newRating: {
         method: 'GET',
         url: 'api/persons/:id/ratings/new'
+      },
+      lastEditionIndex: {
+        method: 'GET',
+        url: 'api/persons/:id/ratings/:ind/lastEditionIndex'
       }
     });
   }]);

@@ -250,5 +250,12 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Where(e => e.LotId == lotId)
                 .ToList();
         }
+
+        public int GetLastRatingEditionIndex(int lotId, int ratingPartIndex)
+        {
+            return this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
+                .Single(e => e.LotId == lotId && e.RatingPartIndex == ratingPartIndex)
+                .EditionPartIndex;
+        }
     }
 }

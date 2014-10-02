@@ -1,26 +1,24 @@
-<div>
-  <ng-form name="editRatingForm" sc-validate="{}" sc-form-readonly="!editRatingMode">
-    <div class="panel panel-default" style="margin-top: 10px">
-      <div class="panel-heading">
-        <strong l10n-text="persons.ratingEdit.title"></strong>
-        <div class="pull-right">
-          <sc-button name="editBtn" btn-click="edit()" text="persons.ratingEdit.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editRatingMode">
-          </sc-button>
-          <sc-button name="createBtn" btn-click="newEdition()" text="persons.ratingEdit.newEdition" class="btn btn-default btn-xs" icon="glyphicon-plus" ng-show="!editRatingMode">
-          </sc-button>
-          <sc-button name="saveBtn" btn-click="save()" text="persons.ratingEdit.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editRatingMode">
-          </sc-button>
-          <sc-button name="cancelBtn" btn-click="cancel()" text="persons.ratingEdit.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editRatingMode">
-          </sc-button>
-        </div>
-      </div>
-
-      <div class="well-sm panel-body">
-        <gva-rating name="ratingForm" ng-model="rating.part" sc-form-params="{ isNew: false }"></gva-rating>
+<ng-form name="editRatingForm" sc-validate="{}" sc-form-readonly="!editRatingMode">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="persons.ratingEdit.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="persons.ratingEdit.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editRatingMode">
+        </sc-button>
+        <sc-button name="createBtn" btn-click="newEdition()" text="persons.ratingEdit.newEdition" class="btn btn-default btn-xs" icon="glyphicon-plus" ng-show="!editRatingMode">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="persons.ratingEdit.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editRatingMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.ratingEdit.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editRatingMode">
+        </sc-button>
       </div>
     </div>
-  </ng-form>
 
-  <div ui-view></div>
-  <div class="clear"></div>
-</div>
+    <div class="well-sm panel-body">
+      <gva-rating name="ratingForm" ng-model="rating.part" sc-form-params="{ isNew: false }"></gva-rating>
+    </div>
+  </div>
+</ng-form>
+
+<div ui-view></div>
+<div class="clear"></div>
