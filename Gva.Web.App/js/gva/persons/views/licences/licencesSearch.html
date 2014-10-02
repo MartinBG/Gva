@@ -1,6 +1,6 @@
 ﻿<div>
   <sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.licences.new' }" text="persons.licencesSearch.newLicence" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-  <sc-datatable items="licences" filterable="true" pageable="true" sortable="true" dynamic-columns="true"
+  <sc-datatable items="licences" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="dateValidFrom"
     row-class="{'invalidLicence' : isInvalidLicence(item), 'expiredLicence' : (!isInvalidLicence(item) && isExpiredLicence(item)), 'expiringLicence' : isExpiringLicence(item)}">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.licences.view.editions.edit', params: {ind: item.partIndex, index: item.editionPartIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>

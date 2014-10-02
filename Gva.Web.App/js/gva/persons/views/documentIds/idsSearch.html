@@ -1,5 +1,5 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.documentIds.new' }" text="persons.documentIdSearch.newDocumentId" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="documentIds" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+<sc-datatable items="documentIds" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" class="btn btn-xs btn-primary" btn-sref="{ state: 'root.persons.view.documentIds.edit', params: {ind: item.partIndex} }" icon="glyphicon-pencil"></sc-button>
   </sc-column>

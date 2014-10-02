@@ -54,7 +54,7 @@
     <div class="panel panel-default">
       <div class="panel-heading"><strong l10n-text="aircrafts.regView.debts"></strong></div>
       <div class="well-sm panel-body">
-         <sc-datatable items="debts" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+         <sc-datatable items="debts" filterable="false" pageable="false" sortable="false" dynamic-columns="false" default-sort="part.regDate">
            <sc-column sortable="false" class="buttons-cell" has-content="true">
              <sc-button name="editBtn" btn-click="editDocumentDebt(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
            </sc-column>
