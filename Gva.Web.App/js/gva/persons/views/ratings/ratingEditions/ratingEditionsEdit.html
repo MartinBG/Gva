@@ -19,7 +19,7 @@
       {{(ratingEditions | first).part.documentDateValidFrom | date:'mediumDate'}}
     </sc-column>
     <sc-column title="persons.editRatingEdition.classOrCategory" has-content="true">
-      {{(rating.part.ratingClass.code || '') + (item.part.ratingSubClasses && ' (' + (item.part.ratingSubClasses | pluck:'code' | join:', ') + ')')}}
+      {{(rating.part.ratingClass.code || '') + (item.part.ratingSubClasses.length > 0 ? ' (' + (item.part.ratingSubClasses | pluck:'code' | join:', ') + ')' : '')}}
     </sc-column>
     <sc-column title="persons.editRatingEdition.authorizationAndLimitations" has-content="true">
       {{(rating.part.authorization.code || '') + ' ' + (item.part.limitations | pluck:'code' | join:', ')}}
