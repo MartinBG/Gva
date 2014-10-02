@@ -1,5 +1,5 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.equipments.view.inspections.new' }" text="equipments.inspectionSearch.newInspection" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="equipmentInspections" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+<sc-datatable items="equipmentInspections" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.startDate">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.equipments.view.inspections.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>

@@ -1,5 +1,5 @@
 ﻿<div>
-  <sc-datatable items="indexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-datatable items="indexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="fromDate">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editBtn" btn-sref="{state: getState(item.setPartAlias), params: {ind: item.partIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>

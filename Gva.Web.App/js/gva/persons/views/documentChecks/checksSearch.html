@@ -1,5 +1,5 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.checks.new' }" text="persons.checkSearch.newCheck" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="checks" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+<sc-datatable items="checks" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.persons.view.checks.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>

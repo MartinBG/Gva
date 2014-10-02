@@ -11,7 +11,7 @@
   <sc-search-button action="clear"></sc-search-button>
 </sc-search>
 
-<sc-datatable items="applications" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+<sc-datatable items="applications" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="appPartDocumentDate">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="viewButton" btn-click="viewApplication(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>

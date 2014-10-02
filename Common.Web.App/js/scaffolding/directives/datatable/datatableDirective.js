@@ -24,7 +24,8 @@ Usage <sc-datatable items="data"
         sortable: '&',
         dynamicColumns: '&',
         scrollable: '&',
-        hasInfoText: '&'
+        hasInfoText: '&',
+        defaultSort: '@'
       },
       link: function ($scope, $element, $attrs) {
         var select2,
@@ -215,6 +216,10 @@ Usage <sc-datatable items="data"
         $scope.$parent.$watchCollection($attrs.items, function (items) {
           if (initializing) {
             renderHeader();
+            if ($scope.defaultSort) {
+              var index = _.findIndex($scope.columnDefs, { 'data': $scope.defaultSort});
+              $scope.setSortingData(index, 'desc');
+            }
             initializing = false;
           }
           if (!items) {
