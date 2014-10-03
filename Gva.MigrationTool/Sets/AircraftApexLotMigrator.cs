@@ -101,7 +101,7 @@ namespace Gva.MigrationTool.Sets
                         Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
                         {
                             var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
-                            fileRepository.AddFileReferences(pv.Part, content.GetItems<FileDO>("files"));
+                            fileRepository.AddFileReferences(pv.Part, content.GetItems<CaseDO>("files"));
                             return pv;
                         };
 

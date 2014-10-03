@@ -5,14 +5,15 @@ using Gva.Api.Models;
 
 namespace Gva.Api.ModelsDO
 {
-    public class FileDO
+    public class CaseDO
     {
-        public FileDO()
+        public CaseDO()
         {
+            this.IsAdded = true;
             this.Applications = new List<ApplicationNomDO>();
         }
 
-        public FileDO(GvaLotFile lotFile)
+        public CaseDO(GvaLotFile lotFile)
         {
             this.LotFileId = lotFile.GvaLotFileId;
             if (lotFile.DocFile != null)
@@ -30,7 +31,8 @@ namespace Gva.Api.ModelsDO
             this.CaseType = new NomValue()
             {
                 NomValueId = lotFile.GvaCaseTypeId,
-                Name = lotFile.GvaCaseType.Name
+                Name = lotFile.GvaCaseType.Name,
+                Alias = lotFile.GvaCaseType.Alias
             };
 
             this.IsDocFile = lotFile.DocFileId.HasValue;
@@ -46,7 +48,7 @@ namespace Gva.Api.ModelsDO
 
         public bool IsDeleted { get; set; }
 
-        public int LotFileId { get; set; }
+        public int? LotFileId { get; set; }
 
         public FileDataDO File { get; set; }
 

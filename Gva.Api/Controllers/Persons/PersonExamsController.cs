@@ -41,11 +41,11 @@ namespace Gva.Api.Controllers.Persons
                 SuccessThreshold = 60
             };
 
-            var files = new List<FileDO>();
+            var cases = new List<CaseDO>();
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                files.Add(new FileDO()
+                cases.Add(new CaseDO()
                 {
                     IsAdded = true,
                     Applications = new List<ApplicationNomDO>()
@@ -55,7 +55,7 @@ namespace Gva.Api.Controllers.Persons
                 });
             }
 
-            return Ok(new FilePartVersionDO<PersonExamDO>(newExam, files));
+            return Ok(new FilePartVersionDO<PersonExamDO>(newExam, cases));
         }
 
         [Route("~/api/persons/personExams/new")]
@@ -67,9 +67,9 @@ namespace Gva.Api.Controllers.Persons
                 SuccessThreshold = 60
             };
 
-            var files = new List<FileDO>() { new FileDO() };
+            var cases = new List<CaseDO>() { new CaseDO() };
 
-            return Ok(new FilePartVersionDO<PersonExamDO>(newExam, files));
+            return Ok(new FilePartVersionDO<PersonExamDO>(newExam, cases));
         }
     }
 }

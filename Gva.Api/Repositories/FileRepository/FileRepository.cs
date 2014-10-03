@@ -21,22 +21,22 @@ namespace Gva.Api.Repositories.FileRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddFileReferences(Part part, IEnumerable<FileDO> files)
+        public void AddFileReferences(Part part, IEnumerable<CaseDO> cases)
         {
-            if (files == null)
+            if (cases == null)
             {
                 return;
             }
 
-            foreach (var fileObj in files)
+            foreach (var caseDO in cases)
             {
-                if ((bool)fileObj.IsAdded)
+                if (caseDO.IsAdded)
                 {
-                    var newFile = this.AddLotFile(part, fileObj);
+                    this.AddLotFile(part, caseDO);
                     continue;
                 }
 
-                var lotFileId = (int)fileObj.LotFileId;
+                var lotFileId = caseDO.LotFileId;
                 var lotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
                         .Include(f => f.DocFile)
                         .SingleOrDefault(f => f.GvaLotFileId == lotFileId);
@@ -50,13 +50,51 @@ namespace Gva.Api.Repositories.FileRepository
                     .Where(f => f.GvaFileId == lotFile.GvaFileId)
                     .Load();
 
-                if ((bool)fileObj.IsDeleted)
+                if (caseDO.IsDeleted)
                 {
                     this.DeleteLotFile(lotFile);
                     continue;
                 }
 
-                this.UpdateLotFile(lotFile, fileObj);
+                this.UpdateLotFile(lotFile, caseDO);
+            }
+        }
+
+        public void AddFileReference(Part part, CaseDO caseDO)
+        {
+            if (caseDO == null)
+            {
+                return;
+            }
+
+            if (caseDO.IsAdded)
+            {
+                var oldFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                    .SingleOrDefault(f => f.LotPartId == part.PartId);
+                if (oldFile != null)
+                {
+                    this.DeleteLotFile(oldFile);
+                }
+
+                var newFile = this.AddLotFile(part, caseDO);
+            }
+            else
+            {
+                var lotFileId = caseDO.LotFileId;
+                var lotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                        .Include(f => f.DocFile)
+                        .SingleOrDefault(f => f.GvaLotFileId == lotFileId);
+
+                this.unitOfWork.DbContext.Set<GvaAppLotFile>()
+                    .Where(ga => ga.GvaLotFileId == lotFileId)
+                    .Load();
+
+                this.unitOfWork.DbContext.Set<GvaFile>()
+                    .Include(f => f.GvaLotFiles)
+                    .Where(f => f.GvaFileId == lotFile.GvaFileId)
+                    .Load();
+
+                this.UpdateLotFile(lotFile, caseDO);
             }
         }
 
@@ -91,16 +129,16 @@ namespace Gva.Api.Repositories.FileRepository
             return result;
         }
 
-        private GvaLotFile AddLotFile(Part part, FileDO fileObj)
+        private GvaLotFile AddLotFile(Part part, CaseDO caseDO)
         {
             GvaFile file = null;
-            if (fileObj.File != null)
+            if (caseDO.File != null)
             {
                 file = new GvaFile()
                 {
-                    Filename = fileObj.File.Name,
-                    MimeType = fileObj.File.MimeType,
-                    FileContentId = fileObj.File.Key
+                    Filename = caseDO.File.Name,
+                    MimeType = caseDO.File.MimeType,
+                    FileContentId = caseDO.File.Key
                 };
 
                 this.unitOfWork.DbContext.Set<GvaFile>().Add(file);
@@ -110,15 +148,15 @@ namespace Gva.Api.Repositories.FileRepository
             {
                 LotPart = part,
                 GvaFile = file,
-                GvaCaseTypeId = fileObj.CaseType.NomValueId,
-                PageIndex = (string)fileObj.BookPageNumber,
-                PageIndexInt = GetPageIndexInt(fileObj.BookPageNumber),
-                PageNumber = (int?)fileObj.PageCount
+                GvaCaseTypeId = caseDO.CaseType.NomValueId,
+                PageIndex = (string)caseDO.BookPageNumber,
+                PageIndexInt = GetPageIndexInt(caseDO.BookPageNumber),
+                PageNumber = (int?)caseDO.PageCount
             };
 
             this.unitOfWork.DbContext.Set<GvaLotFile>().Add(newLotFile);
 
-            foreach (var application in fileObj.Applications)
+            foreach (var application in caseDO.Applications)
             {
                 GvaAppLotFile appLotFile = new GvaAppLotFile()
                 {
@@ -132,15 +170,15 @@ namespace Gva.Api.Repositories.FileRepository
             return newLotFile;
         }
 
-        private void UpdateLotFile(GvaLotFile lotFile, FileDO fileObj)
+        private void UpdateLotFile(GvaLotFile lotFile, CaseDO caseDO)
         {
-            lotFile.GvaCaseTypeId = fileObj.CaseType.NomValueId;
-            lotFile.PageIndex = fileObj.BookPageNumber;
-            lotFile.PageIndexInt = GetPageIndexInt(fileObj.BookPageNumber);
-            lotFile.PageNumber = fileObj.PageCount;
+            lotFile.GvaCaseTypeId = caseDO.CaseType.NomValueId;
+            lotFile.PageIndex = caseDO.BookPageNumber;
+            lotFile.PageIndexInt = GetPageIndexInt(caseDO.BookPageNumber);
+            lotFile.PageNumber = caseDO.PageCount;
 
             var nonModifiedApps = lotFile.GvaAppLotFiles.Join(
-                fileObj.Applications,
+                caseDO.Applications,
                 gf => gf.GvaApplicationId,
                 a => a.ApplicationId,
                 (gf, a) => gf);
@@ -151,7 +189,7 @@ namespace Gva.Api.Repositories.FileRepository
                 this.unitOfWork.DbContext.Set<GvaAppLotFile>().Remove(application);
             }
 
-            foreach (var application in fileObj.Applications)
+            foreach (var application in caseDO.Applications)
             {
                 var appLotFile = lotFile.GvaAppLotFiles.SingleOrDefault(af => af.GvaApplicationId == (int)application.ApplicationId);
                 if (appLotFile == null)

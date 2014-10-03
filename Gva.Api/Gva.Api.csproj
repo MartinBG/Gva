@@ -322,7 +322,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationViewDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftViewDO.cs" />
     <Compile Include="ModelsDO\FileDataDO.cs" />
-    <Compile Include="ModelsDO\FileDO.cs" />
+    <Compile Include="ModelsDO\CaseDO.cs" />
     <Compile Include="ModelsDO\InventoryItemDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonInfoDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\RegistrationViewDO.cs" />

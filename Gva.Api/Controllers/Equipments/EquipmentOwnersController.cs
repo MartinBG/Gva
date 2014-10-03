@@ -36,11 +36,11 @@ namespace Gva.Api.Controllers.Equipments
         {
             EquipmentOwnerDO newOwner = new EquipmentOwnerDO();
 
-            var files = new List<FileDO>();
+            var cases = new List<CaseDO>();
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                files.Add(new FileDO()
+                cases.Add(new CaseDO()
                 {
                     IsAdded = true,
                     Applications = new List<ApplicationNomDO>()
@@ -50,7 +50,7 @@ namespace Gva.Api.Controllers.Equipments
                 });
             }
 
-            return Ok(new FilePartVersionDO<EquipmentOwnerDO>(newOwner, files));
+            return Ok(new FilePartVersionDO<EquipmentOwnerDO>(newOwner, cases));
         }
     }
 }

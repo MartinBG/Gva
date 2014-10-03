@@ -45,11 +45,11 @@ namespace Gva.Api.Controllers.Equipments
             };
             newDocumentOther.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
-            var files = new List<FileDO>();
+            var cases = new List<CaseDO>();
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                files.Add(new FileDO()
+                cases.Add(new CaseDO()
                 {
                     IsAdded = true,
                     Applications = new List<ApplicationNomDO>()
@@ -59,7 +59,7 @@ namespace Gva.Api.Controllers.Equipments
                 });
             }
 
-            return Ok(new FilePartVersionDO<EquipmentDocumentOtherDO>(newDocumentOther, files));
+            return Ok(new FilePartVersionDO<EquipmentDocumentOtherDO>(newDocumentOther, cases));
         }
     }
 }

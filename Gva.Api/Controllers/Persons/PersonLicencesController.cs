@@ -54,11 +54,11 @@ namespace Gva.Api.Controllers.Persons
         [Route("new")]
         public IHttpActionResult GetNewLicence(int lotId, int? appId = null)
         {
-            var files = new List<FileDO>();
+            var cases = new List<CaseDO>();
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                files.Add(new FileDO()
+                cases.Add(new CaseDO()
                 {
                     IsAdded = true,
                     Applications = new List<ApplicationNomDO>()
@@ -83,7 +83,7 @@ namespace Gva.Api.Controllers.Persons
             PersonLicenceNewDO newLicence = new PersonLicenceNewDO()
             {
                 Licence = new FilePartVersionDO<PersonLicenceDO>(licence),
-                Edition = new FilePartVersionDO<PersonLicenceEditionDO>(edition, files)
+                Edition = new FilePartVersionDO<PersonLicenceEditionDO>(edition, cases)
             };
 
             newLicence.Licence.Part.Valid = this.nomRepository.GetNomValue("boolean", "yes");

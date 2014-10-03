@@ -46,11 +46,11 @@ namespace Gva.Api.Controllers.Persons
 
             newDocumentId.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
-            var files = new List<FileDO>();
+            var cases = new List<CaseDO>();
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                files.Add(new FileDO()
+                cases.Add(new CaseDO()
                 {
                     IsAdded = true,
                     Applications = new List<ApplicationNomDO>()
@@ -60,7 +60,7 @@ namespace Gva.Api.Controllers.Persons
                 });
             }
 
-            return Ok(new FilePartVersionDO<PersonDocumentIdDO>(newDocumentId, files));
+            return Ok(new FilePartVersionDO<PersonDocumentIdDO>(newDocumentId, cases));
         }
     }
 }
