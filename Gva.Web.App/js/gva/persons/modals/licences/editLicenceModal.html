@@ -18,12 +18,25 @@
       <gva-licence name="licenceForm" ng-model="licence.part" sc-form-params="{ isNew: false, lotId: lotId }"></gva-licence>
 
       <div class="row">
-        <sc-field-group class="col-sm-3" text="persons.licenceDirective.valid">
+        <sc-field-group class="col-sm-3" text="persons.editLicenceModal.valid">
           <sc-nomenclature alias="'boolean'" ng-model="licence.part.valid" ng-readonly="true"></sc-nomenclature>
           <sc-button name="viewStatusesBtn" btn-click="viewStatuses()" class="btn btn-default" icon="glyphicon-pencil"
             ng-disabled="edition.part.index !== lastEdition.part.index || edition.part.stampNumber"></sc-button>
         </sc-field-group>
       </div>
+      <h5 class="table-header" style="margin-top: 0px" l10n-text="persons.editLicenceModal.statusChanges"></h5>
+      <sc-datatable items="licence.part.statuses" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false" default-sort="changeDate">
+        <sc-column data="changeDate" type="date" title="persons.editLicenceModal.changeDate">
+        </sc-column>
+        <sc-column data="valid.name" title="persons.editLicenceModal.valid2">
+        </sc-column>
+        <sc-column data="changeReason.name" title="persons.editLicenceModal.changeReason">
+        </sc-column>
+        <sc-column data="notes" title="persons.editLicenceModal.notes">
+        </sc-column>
+        <sc-column data="inspector.name" title="persons.editLicenceModal.inspector">
+        </sc-column>
+      </sc-datatable>
 
       <h5 class="form-header" l10n-text="persons.editLicenceModal.editionForm"></h5>
       <gva-licence-edition name="licenceEditionForm" ng-model="edition"
