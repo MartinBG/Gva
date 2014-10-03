@@ -90,6 +90,7 @@ namespace Gva.MigrationTool.Sets
 
         public void migrateAircrafts(
             Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<int, int> personIdToLotId,
             Dictionary<int, int> aircraftApexIdtoLotId,
             Dictionary<string, int> aircraftFmIdtoLotId,
             Func<int?, JObject> getPersonByApexId,
@@ -112,7 +113,7 @@ namespace Gva.MigrationTool.Sets
                 {
                     using (aircraftApexLotMigrator)
                     {
-                        aircraftApexLotMigrator.StartMigrating(noms, aircraftApexIdtoLotId, getPersonByApexId, getOrgByApexId, blobIdsToFileKeys, aircraftApexIds, cts, ct);
+                        aircraftApexLotMigrator.StartMigrating(noms, personIdToLotId, aircraftApexIdtoLotId, getPersonByApexId, getOrgByApexId, blobIdsToFileKeys, aircraftApexIds, cts, ct);
                     }
                 })
                 .Wait();

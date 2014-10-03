@@ -281,6 +281,7 @@ namespace Gva.MigrationTool
                 //migrate aircrafts
                 aircraft.migrateAircrafts(
                     noms,
+                    personIdToLotId,
                     aircraftApexIdtoLotId,
                     aircraftFmIdtoLotId,
                     getPersonByApexId,
@@ -293,7 +294,7 @@ namespace Gva.MigrationTool
                 person.migratePersons(noms, personIdToLotId, getAircraftByApexId, getPersonByApexId, getOrgByApexId, blobIdsToFileKeys);
 
                 //migrate organizations
-                organization.migrateOrganizations(noms, orgIdtoLotId, getAircraftByApexId, getPersonByApexId, blobIdsToFileKeys);
+                organization.migrateOrganizations(noms, personIdToLotId, orgIdtoLotId, getAircraftByApexId, getPersonByApexId, blobIdsToFileKeys);
 
 
                 var lotRepository = scope.Resolve<ILotRepository>();
