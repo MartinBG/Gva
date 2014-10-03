@@ -2614,7 +2614,14 @@
           save: 'Запис',
           cancel: 'Отказ',
           licenceForm: 'Лиценз',
-          editionForm: 'Вписване'
+          editionForm: 'Вписване',
+          statusChanges: 'Промени на статуса на лиценза',
+          valid2: 'Валидност',
+          changeDate: 'Дата на промяна',
+          changeReason: 'Причина за промяна',
+          inspector: 'Инспектор',
+          notes: 'Бележки',
+          valid: 'Действителен'
         },
         printLicenceModal: {
           title: 'Принтиране на лиценз',
@@ -2646,11 +2653,16 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
-        editLicence: {
+        licenceView: {
           title: 'Преглед на лиценз',
-          licenceForm: 'Лиценз',
-          newEdition: 'Ново вписване',
-          viewStatuses: 'Статус'
+          statusChanges: 'Промени на статуса на лиценза',
+          valid2: 'Валидност',
+          changeDate: 'Дата на промяна',
+          changeReason: 'Причина за промяна',
+          inspector: 'Инспектор',
+          notes: 'Бележки',
+          valid: 'Действителен',
+          newEdition: 'Ново вписване'
         },
         editLicenceEditions: {
           title: 'Преглед на вписвания',
