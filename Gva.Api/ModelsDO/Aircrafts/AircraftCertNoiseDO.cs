@@ -25,5 +25,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public double? Takeoff { get; set; }
 
         public string AdditionalModification { get; set; }
+
+        public string Notes { get; set; }
     }
 }
