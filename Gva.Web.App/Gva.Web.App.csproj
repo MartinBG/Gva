@@ -374,6 +374,7 @@
     <Content Include="js\gva\applications\views\applicationsEditPartCtrl.js" />
     <Content Include="js\gva\applications\views\docsLinkApp.html" />
     <Content Include="js\gva\applications\views\docsLinkAppCtrl.js" />
+    <Content Include="js\gva\common\directives\caseType\caseTypeDirective.js" />
     <Content Include="js\gva\common\forms\commonInspectionDetails.html" />
     <Content Include="js\gva\common\forms\commonInspectionDetailsCtrl.js" />
     <Content Include="js\gva\common\forms\commonDocumentApplication.html" />
