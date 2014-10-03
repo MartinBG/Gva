@@ -38,6 +38,10 @@ namespace Gva.Api.Models.Views.Aircraft
 
         public DateTime? OutputDate { get; set; }
 
+        public int? ActNumber { get; set; }
+
+        public int? CertNumber { get; set; }
+
         public virtual Lot Lot { get; set; }
 
         public virtual NomValue AirCategory { get; set; }
@@ -78,6 +82,8 @@ namespace Gva.Api.Models.Views.Aircraft
             this.Property(t => t.PropellerAlt).HasColumnName("PropellerAlt");
             this.Property(t => t.ModifOrWingColorAlt).HasColumnName("ModifOrWingColorAlt");
             this.Property(t => t.Mark).HasColumnName("Mark");
+            this.Property(t => t.CertNumber).HasColumnName("CertNumber");
+            this.Property(t => t.ActNumber).HasColumnName("ActNumber");
 
             // Relationships
             this.HasRequired(t => t.Lot)

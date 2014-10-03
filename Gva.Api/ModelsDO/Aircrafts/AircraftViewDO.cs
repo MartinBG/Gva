@@ -26,6 +26,8 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.PropellerAlt = aircraftData.PropellerAlt;
             this.ModifOrWingColorAlt = aircraftData.ModifOrWingColorAlt;
             this.Mark = aircraftData.Mark;
+            this.ActNumber = aircraftData.ActNumber;
+            this.CertNumber = aircraftData.CertNumber;
         }
 
         public int Id { get; set; }
@@ -57,5 +59,9 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public string ModifOrWingColorAlt { get; set; }
 
         public string Mark { get; set; }
+
+        public int? ActNumber { get; set; }
+
+        public int? CertNumber { get; set; }
     }
 }

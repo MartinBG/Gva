@@ -841,7 +841,10 @@
           manSN: 'MSN (сериен номер)',
           cofAType: 'CofA Type',
           edit: 'Редакция',
-          viewApplication: 'Обратно към заявление: '
+          viewApplication: 'Обратно към заявление: ',
+          actNumber: 'Деловоден номер',
+          certNumber: 'Регистрационен номер',
+          mark: 'Регистрационен знак'
         },
         regSearch: {
           isActive: 'Активна',
