@@ -4,10 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Data;
+using Common.Linq;
 using Docs.Api.Models;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
-using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.FileRepository
@@ -114,11 +114,19 @@ namespace Gva.Api.Repositories.FileRepository
 
         public GvaLotFile[] GetFileReferences(int partId, int? caseType)
         {
+            var predicate = PredicateBuilder.True<GvaLotFile>()
+                .And(f => f.LotPartId == partId);
+
+            if (caseType.HasValue)
+            {
+                predicate = predicate.And(f => f.GvaCaseTypeId == caseType);
+            }
+
             var result = this.unitOfWork.DbContext.Set<GvaLotFile>()
                 .Include(f => f.DocFile)
                 .Include(f => f.GvaFile)
                 .Include(f => f.GvaCaseType)
-                .Where(f => f.LotPartId == partId && (caseType.HasValue ? f.GvaCaseTypeId == caseType : true))
+                .Where(predicate)
                 .ToArray();
 
             this.unitOfWork.DbContext.Set<GvaAppLotFile>()
@@ -127,6 +135,31 @@ namespace Gva.Api.Repositories.FileRepository
                 .Load();
 
             return result;
+        }
+
+        public GvaLotFile GetFileReference(int partId, int? caseType)
+        {
+            var predicate = PredicateBuilder.True<GvaLotFile>()
+                .And(f => f.LotPartId == partId);
+
+            if (caseType.HasValue)
+            {
+                predicate = predicate.And(f => f.GvaCaseTypeId == caseType);
+            }
+
+            var result = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                .Include(f => f.DocFile)
+                .Include(f => f.GvaFile)
+                .Include(f => f.GvaCaseType)
+                .Where(predicate)
+                .ToList();
+
+            this.unitOfWork.DbContext.Set<GvaAppLotFile>()
+                .Include(ga => ga.GvaApplication)
+                .Where(ga => ga.GvaLotFile.LotPartId == partId && (caseType.HasValue ? ga.GvaLotFile.GvaCaseTypeId == caseType : true))
+                .Load();
+
+            return result.Count == 0 ? null : result.Single();
         }
 
         private GvaLotFile AddLotFile(Part part, CaseDO caseDO)

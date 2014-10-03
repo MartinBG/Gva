@@ -15,6 +15,8 @@ namespace Gva.Api.Repositories.FileRepository
 
         GvaLotFile[] GetFileReferences(int partId, int? casetype);
 
+        GvaLotFile GetFileReference(int partId, int? caseType);
+
         bool IsUniqueBPN(int lotId, int caseTypeId, string bookPageNumber, int? fileId = null);
 
         int? GetPageIndexInt(string pageIndex);
