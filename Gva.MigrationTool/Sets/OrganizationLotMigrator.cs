@@ -18,6 +18,7 @@ using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Gva.MigrationTool.Nomenclatures;
+using Gva.MigrationTool.Sets.Common;
 using Newtonsoft.Json.Linq;
 using Oracle.DataAccess.Client;
 using Regs.Api.LotEvents;
@@ -43,6 +44,7 @@ namespace Gva.MigrationTool.Sets
         public void StartMigrating(
             //input constants
             Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<int, int> personIdToLotId,
             Dictionary<int, int> orgApexIdToLotId,
             Func<int?, JObject> getAircraftByApexId,
             Func<int?, JObject> getPersonByApexId,
@@ -132,6 +134,13 @@ namespace Gva.MigrationTool.Sets
                             nomApplications.Add(
                                     app.Key,
                                     Utils.ToJObject(appNomDO));
+
+                            IList<GvaApplicationStage> appStages = CommonUtils.getApplicationStages(this.oracleConn, personIdToLotId, appNomDO.ApplicationId, app.Key);
+
+                            foreach (GvaApplicationStage stage in appStages)
+                            {
+                                unitOfWork.DbContext.Set<GvaApplicationStage>().Add(stage);
+                            }
                         }
 
                         Dictionary<int, int> inspectionPartIndexes = new Dictionary<int, int>();

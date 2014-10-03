@@ -70,6 +70,7 @@
     <Compile Include="Blobs\BlobDownloader.cs" />
     <Compile Include="Blobs\BlobUploader.cs" />
     <Compile Include="Blobs\RateLimiter.cs" />
+    <Compile Include="Sets\Common\CommonUtils.cs" />
     <Compile Include="DataExtensions.cs" />
     <Compile Include="DbClause.cs" />
     <Compile Include="FmOrgMatcher.cs" />

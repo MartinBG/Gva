@@ -14,6 +14,7 @@ using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.MigrationTool.Nomenclatures;
+using Gva.MigrationTool.Sets.Common;
 using Newtonsoft.Json.Linq;
 using Oracle.DataAccess.Client;
 using Regs.Api.LotEvents;
@@ -133,6 +134,13 @@ namespace Gva.MigrationTool.Sets
                             nomApplications.Add(
                                     app.Key,
                                     Utils.ToJObject(appNomDO));
+
+                            IList<GvaApplicationStage> appStages = CommonUtils.getApplicationStages(this.oracleConn, personIdToLotId, appNomDO.ApplicationId, app.Key);
+
+                            foreach (GvaApplicationStage stage in appStages)
+                            {
+                                unitOfWork.DbContext.Set<GvaApplicationStage>().Add(stage);
+                            }
                         }
 
                         var personDocuments = this.getPersonDocuments(personId, nomApplications, noms, appApexIdToStaffTypeCode, blobIdsToFileKeys);
