@@ -23,7 +23,7 @@
 
       <gva-person-document-employment name="addForm" ng-model="applicationPart.part" ng-if="applicationPart.setPartAlias === 'personEmployment'"></gva-person-document-employment>
 
-      <gva-person-document-medical name="addForm" ng-model="applicationPart.part" sc-form-params="{ personLin: personLin }" ng-if="applicationPart.setPartAlias === 'personMedical'"></gva-person-document-medical>
+      <gva-person-document-medical name="addForm" ng-model="applicationPart" sc-form-params="{ personLin: personLin }" ng-if="applicationPart.setPartAlias === 'personMedical'"></gva-person-document-medical>
 
       <gva-person-document-check name="addForm" ng-model="applicationPart.part" sc-form-params="{ isNew: true }" ng-if="applicationPart.setPartAlias === 'personCheck'"></gva-person-document-check>
 

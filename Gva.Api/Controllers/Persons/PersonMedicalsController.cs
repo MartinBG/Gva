@@ -14,7 +14,7 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personDocumentMedicals")]
     [Authorize]
-    public class PersonMedicalsController : GvaFilePartController<PersonMedicalDO>
+    public class PersonMedicalsController : GvaCaseTypePartController<PersonMedicalDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
@@ -41,21 +41,21 @@ namespace Gva.Api.Controllers.Persons
                 DocumentDateValidFrom = DateTime.Now
             };
 
-            var cases = new List<CaseDO>();
+            CaseDO caseDO = null;
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                cases.Add(new CaseDO()
+                caseDO = new CaseDO()
                 {
                     IsAdded = true,
                     Applications = new List<ApplicationNomDO>()
                     {
                         this.applicationRepository.GetInitApplication(appId)
                     }
-                });
+                };
             }
 
-            return Ok(new FilePartVersionDO<PersonMedicalDO>(newMedical, cases));
+            return Ok(new CaseTypePartDO<PersonMedicalDO>(newMedical, caseDO));
         }
     }
 }
