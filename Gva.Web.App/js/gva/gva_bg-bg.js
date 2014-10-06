@@ -1825,6 +1825,7 @@
           notes: 'Бележки'
         },
         personDocumentIdDirective: {
+          caseType: 'Тип дело',
           personDocumentIdTypeId: 'Тип документ',
           valid: 'Валиден',
           documentNumber: '№ на документ',

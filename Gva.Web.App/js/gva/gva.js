@@ -65,7 +65,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentId',
-      templateUrl: 'js/gva/persons/forms/personDocumentId.html'
+      templateUrl: 'js/gva/persons/forms/personDocumentId.html',
+      controller: 'PersonDocIdCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentEducation',

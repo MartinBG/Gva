@@ -15,7 +15,7 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personDocumentIds")]
     [Authorize]
-    public class PersonDocumentIdsController : GvaFilePartController<PersonDocumentIdDO>
+    public class PersonDocumentIdsController : GvaCaseTypesPartController<PersonDocumentIdDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
@@ -60,7 +60,7 @@ namespace Gva.Api.Controllers.Persons
                 });
             }
 
-            return Ok(new FilePartVersionDO<PersonDocumentIdDO>(newDocumentId, cases));
+            return Ok(new CaseTypesPartDO<PersonDocumentIdDO>(newDocumentId, cases));
         }
     }
 }

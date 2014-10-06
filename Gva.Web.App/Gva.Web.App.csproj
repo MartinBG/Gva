@@ -601,6 +601,7 @@
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
+    <Content Include="js\gva\persons\forms\personDocumentIdCtrl.js" />
     <Content Include="js\gva\persons\modals\exams\chooseExamsModal.html" />
     <Content Include="js\gva\persons\modals\exams\chooseExamsModalCtrl.js" />
     <Content Include="js\gva\persons\modals\exams\newExamModal.html" />

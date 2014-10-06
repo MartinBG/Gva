@@ -78,7 +78,7 @@ namespace Gva.Api.Controllers.Persons
 
             if (extendedVersion)
             {
-                newPerson.PersonDocumentId = new PersonDocumentIdDO();
+                newPerson.PersonDocumentId = new CaseTypesPartDO<PersonDocumentIdDO>();
                 newPerson.PersonAddress = new PersonAddressDO();
             }
 
@@ -128,7 +128,7 @@ namespace Gva.Api.Controllers.Persons
                 PartVersion<PersonDocumentIdDO> documentIdPart = null;
                 if (person.PersonDocumentId != null)
                 {
-                    documentIdPart = newLot.CreatePart("personDocumentIds/*", person.PersonDocumentId, this.userContext);
+                    documentIdPart = newLot.CreatePart("personDocumentIds/*", person.PersonDocumentId.Part, this.userContext);
                 }
 
                 PartVersion<PersonAddressDO> personAddressPart = null;

@@ -4,7 +4,7 @@
     {
         public PersonDataDO PersonData { get; set; }
 
-        public PersonDocumentIdDO PersonDocumentId { get; set; }
+        public CaseTypesPartDO<PersonDocumentIdDO> PersonDocumentId { get; set; }
 
         public PersonAddressDO PersonAddress { get; set; }
     }
