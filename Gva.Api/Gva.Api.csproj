@@ -103,6 +103,7 @@
     <Compile Include="Controllers\Airports\AirportOwnersController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\Airports\AirportsController.cs" />
+    <Compile Include="Controllers\GvaCaseTypesPartController.cs" />
     <Compile Include="Controllers\GvaCaseTypePartController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentInspectionsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentCertOperationalsController.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftReviewAmendmentFMDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
+    <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
     <Compile Include="ModelsDO\Organizations\AmendmentDO.cs" />
     <Compile Include="ModelsDO\Organizations\LimitationDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDetailDO.cs" />
