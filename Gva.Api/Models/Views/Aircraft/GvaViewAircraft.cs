@@ -28,6 +28,12 @@ namespace Gva.Api.Models.Views.Aircraft
 
         public string ModifOrWingColor { get; set; }
 
+        public string EngineAlt { get; set; }
+
+        public string PropellerAlt { get; set; }
+
+        public string ModifOrWingColorAlt { get; set; }
+
         public string Mark { get; set; }
 
         public DateTime? OutputDate { get; set; }
@@ -68,6 +74,9 @@ namespace Gva.Api.Models.Views.Aircraft
             this.Property(t => t.Engine).HasColumnName("Engine");
             this.Property(t => t.Propeller).HasColumnName("Propeller");
             this.Property(t => t.ModifOrWingColor).HasColumnName("ModifOrWingColor");
+            this.Property(t => t.EngineAlt).HasColumnName("EngineAlt");
+            this.Property(t => t.PropellerAlt).HasColumnName("PropellerAlt");
+            this.Property(t => t.ModifOrWingColorAlt).HasColumnName("ModifOrWingColorAlt");
             this.Property(t => t.Mark).HasColumnName("Mark");
 
             // Relationships

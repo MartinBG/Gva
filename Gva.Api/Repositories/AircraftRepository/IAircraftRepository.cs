@@ -8,7 +8,7 @@ namespace Gva.Api.Repositories.AircraftRepository
         IEnumerable<GvaViewAircraft> GetAircrafts(
             string mark,
             string manSN,
-            string model,
+            string modelAlt,
             string icao,
             string airCategory,
             string aircraftProducer,

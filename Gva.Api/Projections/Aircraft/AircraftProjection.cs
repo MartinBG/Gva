@@ -47,6 +47,9 @@ namespace Gva.Api.Projections.Aircraft
             aircraft.Engine = aircraftData.Content.Engine;
             aircraft.Propeller = aircraftData.Content.Propeller;
             aircraft.ModifOrWingColor = aircraftData.Content.ModifOrWingColor;
+            aircraft.EngineAlt = aircraftData.Content.EngineAlt;
+            aircraft.PropellerAlt = aircraftData.Content.PropellerAlt;
+            aircraft.ModifOrWingColorAlt = aircraftData.Content.ModifOrWingColorAlt;
 
             // currentRegistration
             if (activeRegistration != null)
