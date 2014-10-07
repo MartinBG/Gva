@@ -19,7 +19,7 @@ VALUES
     (@nomId , N'organizationApplication', N'Заявление'              , NULL     , 2              , N'organizationApplication', 1         , NULL         ),
 
     (@nomId , N'aircraftOwner'          , N'Свързано лице'          , NULL     , 3              , N'aircraftOwner'          , 1         , NULL         ),
-    (@nomId , N'aircraftDebtFM'         , N'Залог/запор'            , NULL     , 3              , N'aircraftDebtFM'         , 1         , NULL         ),
+    (@nomId , N'aircraftDebtFM'         , N'Тежест'                 , NULL     , 3              , N'aircraftDebtFM'         , 1         , NULL         ),
     (@nomId , N'aircraftOccurrence'     , N'Инцидент'               , NULL     , 3              , N'aircraftOccurrence'     , 1         , NULL         ),
     (@nomId , N'aircraftApplication'    , N'Заявление'              , NULL     , 3              , N'aircraftApplication'    , 1         , NULL         ),
     (@nomId , N'aircraftOther'          , N'Друг документ'          , NULL     , 3              , N'aircraftOther'          , 1         , NULL         ),
