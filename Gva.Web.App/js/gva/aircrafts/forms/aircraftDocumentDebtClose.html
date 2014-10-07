@@ -1,0 +1,18 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <h5 class="form-header" l10n-text="aircrafts.debtCloseDirective.title"></h5>
+  <div class="row">
+    <sc-field type="nomenclature" ng-model="model.inspector" alias="'inspectors'" l10n-text="aircrafts.debtCloseDirective.inspector" class="col-md-2 col-sm-4" ng-required="true"></sc-field>
+    <sc-field type="date" ng-model="model.issueDate" l10n-text="aircrafts.debtCloseDirective.date" class="col-md-2 col-sm-4"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="text" ng-model="model.caaDoc" l10n-text="aircrafts.debtCloseDirective.caaDoc" class="col-md-2 col-sm-4" ng-required="true"></sc-field>
+    <sc-field type="date" ng-model="model.caaDate" l10n-text="aircrafts.debtCloseDirective.caaDate" class="col-md-2 col-sm-4" ng-required="true"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="text" ng-model="model.creditorDoc" l10n-text="aircrafts.debtCloseDirective.creditorDoc" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.creditorDate" l10n-text="aircrafts.debtCloseDirective.creditorDate" class="col-md-2 col-sm-4"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="textarea" ng-model="model.notes" l10n-text="aircrafts.debtCloseDirective.notes" class="col-md-4 col-sm-8"></sc-field>
+  </div>
+</ng-form>

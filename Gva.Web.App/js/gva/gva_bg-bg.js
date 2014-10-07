@@ -1119,7 +1119,8 @@
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
-          deleteDebt: 'Изтрий'
+          deleteDebt: 'Изтрий',
+          close: 'Погасяване'
         },
         debtSearch: {
           certId: 'Регистрация №',
@@ -1411,6 +1412,16 @@
           creditorDocument: 'Док. и дата писма на кредитор',
           inspector: 'Инспектор',
           registration: 'Регистрация'
+        },
+        debtCloseDirective: {
+          title: 'Погасяване',
+          date: 'Дата на погасяване',
+          caaDoc: 'Наш документ №',
+          caaDate: 'Наша дата',
+          creditorDoc: 'Техен документ №',
+          creditorDate: 'Тяхна дата',
+          inspector: 'Инспектор',
+          notes: 'Бележки'
         },
         debtDirective: {
           certId: 'Регистрация №',

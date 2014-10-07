@@ -94,6 +94,7 @@
     <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessForm15Amendment.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessReviewF15.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessForm15Main.html" />
+    <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtClose.html" />
     <Content Include="js\gva\aircrafts\resources\aircrafts.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftsApex.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftApplications.js" />

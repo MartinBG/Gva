@@ -656,7 +656,9 @@ namespace Gva.MigrationTool.Sets
         private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regPart, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
         {
             return this.sqlConn.CreateStoreCommand(
-                @"select * from Morts where {0} {1}",
+                @"select * from Morts mo 
+                left outer join Morts_New mn on mn.n_Mort_ID_Old = mo.nRecNo
+                where {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and RegNo = {0}", certId)
                 )
@@ -674,7 +676,17 @@ namespace Gva.MigrationTool.Sets
                             documentDate = Utils.FmToDate(r.Field<string>("gd_DocCAA")),
                             aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("Creditor")),
                             creditorDocument = r.Field<string>("Doc Creditor"),
-                            inspector = getInspector(r.Field<string>("tUser"))
+                            inspector = getInspector(r.Field<string>("tUser")),
+                            isActive = r.Field<string>("n_Status") != "0",
+                            close = new {
+                                inspector = getInspector(r.Field<string>("t_Close_User")),
+                                date = Utils.FmToDate(r.Field<string>("d_Close_Date")),
+                                caaDoc = r.Field<string>("t_Close_CAA_Doc"),
+                                caaDate = Utils.FmToDate(r.Field<string>("d_Close_CAA_Date")),
+                                creditorDoc = r.Field<string>("t_Close_Creditor_Doc"),
+                                creditorDate = Utils.FmToDate(r.Field<string>("d_Close_Creditor_Date")),
+                                notes = r.Field<string>("t_Close_Notes")
+                            }
                         })),
                         new JProperty("files",
                             new JArray(

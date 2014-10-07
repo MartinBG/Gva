@@ -16,6 +16,10 @@
     $scope.editMode = null;
     $scope.lotId = $stateParams.id;
 
+    $scope.close = function () {
+      $scope.debt.part.isActive = false;
+    };
+
     $scope.edit = function () {
       $scope.editMode = 'edit';
     };
