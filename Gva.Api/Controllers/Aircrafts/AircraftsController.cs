@@ -66,9 +66,9 @@ namespace Gva.Api.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult GetAircrafts(string mark = null, string manSN = null, string model = null, string icao = null, string airCategory = null, string aircraftProducer = null, bool exact = false)
+        public IHttpActionResult GetAircrafts(string mark = null, string manSN = null, string modelAlt = null, string icao = null, string airCategory = null, string aircraftProducer = null, bool exact = false)
         {
-            var aircrafts = this.aircraftRepository.GetAircrafts(mark: mark, manSN: manSN, model: model, icao: icao, airCategory: airCategory, aircraftProducer: aircraftProducer, exact: exact);
+            var aircrafts = this.aircraftRepository.GetAircrafts(mark: mark, manSN: manSN, modelAlt: modelAlt, icao: icao, airCategory: airCategory, aircraftProducer: aircraftProducer, exact: exact);
 
             return Ok(aircrafts.Select(a => new AircraftViewDO(a)));
         }

@@ -518,7 +518,7 @@
     .modal('printLicence'    , 'js/gva/persons/modals/licences/printLicenceModal.html'     , 'PrintLicenceModalCtrl'   , 'xs');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state(['root.aircrafts'                                          , '/aircrafts?mark&manSN&model&airCategory&aircraftProducer'                                                                                                                           ])
+      .state(['root.aircrafts'                                          , '/aircrafts?mark&manSN&modelAlt&airCategory&aircraftProducer'                                                                                                                        ])
       .state(['root.aircrafts.search'                                   , ''                                           , ['@root'               , 'js/gva/aircrafts/views/aircraftsSearch.html'                            , 'AircraftsSearchCtrl'            ]])
       .state(['root.aircrafts.new'                                      , '/new'                                       , ['@root'               , 'js/gva/aircrafts/views/aircraftsNew.html'                               , 'AircraftsNewCtrl'               ]])
       .state(['root.aircrafts.newWizzard'                               , '/newWizzard'                                , ['@root'               , 'js/gva/aircrafts/views/aircraftsNewWizzard.html'                        , 'AircraftsNewWizzardCtrl'        ]])

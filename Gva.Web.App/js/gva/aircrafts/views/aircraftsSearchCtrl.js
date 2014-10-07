@@ -10,7 +10,7 @@
 
     $scope.filters = {
       manSN: null,
-      model: null,
+      modelAlt: null,
       mark: null
     };
 
@@ -25,7 +25,7 @@
     $scope.search = function () {
       $state.go('root.aircrafts.search', {
         manSN: $scope.filters.manSN,
-        model: $scope.filters.model,
+        modelAlt: $scope.filters.modelAlt,
         mark: $scope.filters.mark,
         airCategory: $scope.filters.airCategory,
         aircraftProducer: $scope.filters.aircraftProducer

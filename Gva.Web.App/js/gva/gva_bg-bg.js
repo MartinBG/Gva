@@ -715,6 +715,7 @@
         search: {
           manSN: 'Сериен номер',
           model: 'Модел',
+          modelAlt: 'Модел',
           outputDate: 'Дата на производство',
           icao: 'ICAO код',
           airCategory: 'AIR категория',
@@ -722,6 +723,9 @@
           engine: 'Двигател',
           propeller: 'Витло',
           ModifOrWingColor: 'Модификация/Цвят на крило',
+          engineAlt: 'Двигател',
+          propellerAlt: 'Витло',
+          ModifOrWingColorAlt: 'Модификация/Цвят на крило',
           'new': 'Ново ВС',
           search: 'Търси',
           mark: 'Рег. знак'

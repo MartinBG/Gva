@@ -22,6 +22,9 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.Engine = aircraftData.Engine;
             this.Propeller = aircraftData.Propeller;
             this.ModifOrWingColor = aircraftData.ModifOrWingColor;
+            this.EngineAlt = aircraftData.EngineAlt;
+            this.PropellerAlt = aircraftData.PropellerAlt;
+            this.ModifOrWingColorAlt = aircraftData.ModifOrWingColorAlt;
             this.Mark = aircraftData.Mark;
         }
 
@@ -46,6 +49,12 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public string Propeller { get; set; }
 
         public string ModifOrWingColor { get; set; }
+
+        public string EngineAlt { get; set; }
+
+        public string PropellerAlt { get; set; }
+
+        public string ModifOrWingColorAlt { get; set; }
 
         public string Mark { get; set; }
     }

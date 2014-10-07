@@ -19,7 +19,7 @@ namespace Gva.Api.Repositories.AircraftRepository
         public IEnumerable<GvaViewAircraft> GetAircrafts(
             string mark,
             string manSN,
-            string model,
+            string modelAlt,
             string icao,
             string airCategory,
             string aircraftProducer,
@@ -36,7 +36,7 @@ namespace Gva.Api.Repositories.AircraftRepository
 
             predicate = predicate
                 .AndStringMatches(p => p.ManSN, manSN, exact)
-                .AndStringMatches(p => p.Model, model, exact)
+                .AndStringMatches(p => p.ModelAlt, modelAlt, exact)
                 .AndStringMatches(p => p.Mark, mark, exact)
                 .AndStringMatches(p => p.ICAO, icao, exact)
                 .AndStringMatches(p => p.AirCategory.Name, airCategory, exact)
