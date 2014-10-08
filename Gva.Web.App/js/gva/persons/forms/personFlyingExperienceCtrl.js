@@ -4,6 +4,7 @@
 
   function PersonFlyingExperienceCtrl($scope, scFormParams) {
     $scope.isNew = scFormParams.isNew;
+    $scope.caseTypeId = scFormParams.caseTypeId;
   }
 
   PersonFlyingExperienceCtrl.$inject = ['$scope', 'scFormParams'];

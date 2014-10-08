@@ -15,7 +15,7 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personDocumentChecks")]
     [Authorize]
-    public class PersonChecksController : GvaFilePartController<PersonCheckDO>
+    public class PersonChecksController : GvaCaseTypePartController<PersonCheckDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
@@ -46,21 +46,21 @@ namespace Gva.Api.Controllers.Persons
 
             newCheck.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
-            var cases = new List<CaseDO>();
+            CaseDO caseDO = null;
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                cases.Add(new CaseDO()
+                caseDO = new CaseDO()
                 {
                     IsAdded = true,
                     Applications = new List<ApplicationNomDO>()
                     {
                         this.applicationRepository.GetInitApplication(appId)
                     }
-                });
+                };
             }
 
-            return Ok(new FilePartVersionDO<PersonCheckDO>(newCheck, cases));
+            return Ok(new CaseTypePartDO<PersonCheckDO>(newCheck, caseDO));
         }
     }
 }

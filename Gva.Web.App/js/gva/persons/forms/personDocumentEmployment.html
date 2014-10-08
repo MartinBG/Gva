@@ -1,16 +1,23 @@
-<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly> 
   <div class="row">
-    <sc-field type="date" ng-model="model.hiredate" ng-required="true" l10n-text="persons.personEmploymentDirective.hiredate" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="persons.personEmploymentDirective.valid" class="col-sm-2"></sc-field>
+    <div class="form-group col-sm-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="persons.personEmploymentDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" case-type="caseTypeId" ng-required="true"></gva-case-type>
+    </div>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.organization" alias="'organizations'" ng-required="true" l10n-text="persons.personEmploymentDirective.organization" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.employmentCategory" alias="'employmentCategories'" ng-required="true" l10n-text="persons.personEmploymentDirective.employmentCategory" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+    <sc-field type="date" ng-model="model.part.hiredate" ng-required="true" l10n-text="persons.personEmploymentDirective.hiredate" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="persons.personEmploymentDirective.valid" class="col-sm-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.country" alias="'countries'" ng-required="true" l10n-text="persons.personEmploymentDirective.country" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.organization" alias="'organizations'" ng-required="true" l10n-text="persons.personEmploymentDirective.organization" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.employmentCategory" alias="'employmentCategories'" ng-required="true" l10n-text="persons.personEmploymentDirective.employmentCategory" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="textarea-suggestion" rows="2" ng-model="model.notes" alias="'notes'" l10n-text="persons.personEmploymentDirective.notes" class="col-sm-10"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.country" alias="'countries'" ng-required="true" l10n-text="persons.personEmploymentDirective.country" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="textarea-suggestion" rows="2" ng-model="model.part.notes" alias="'notes'" l10n-text="persons.personEmploymentDirective.notes" class="col-sm-10"></sc-field>
   </div>
 </ng-form>

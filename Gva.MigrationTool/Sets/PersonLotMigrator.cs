@@ -304,7 +304,7 @@ namespace Gva.MigrationTool.Sets
                         var personFlyingExperiences = this.getPersonFlyingExperiences(personId, noms, getOrgByApexId, getAircraftByApexId);
                         foreach (var flyingExperience in personFlyingExperiences)
                         {
-                            lot.CreatePart("personFlyingExperiences/*", flyingExperience, context);
+                            addPartWithFiles("personFlyingExperiences/*", flyingExperience);
                         }
 
                         var personStatuses = this.getPersonStatuses(personId, noms);
@@ -1052,37 +1052,46 @@ namespace Gva.MigrationTool.Sets
                 @"SELECT * FROM CAA_DOC.FLYING_EXPERIENCE WHERE {0}",
                 new DbClause("PERSON_ID = {0}", personId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "FLYING_EXPERIENCE",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "FLYING_EXPERIENCE",
 
-                        staffType = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()),
-                        documentDate = r.Field<DateTime?>("DOCUMENT_DATE"),
-                        period = new { month = r.Field<string>("PERIOD_MONTH"), year = r.Field<string>("PERIOD_YEAR") },
-                        organization = getOrgByApexId(r.Field<int?>("FIRM_ID")),
-                        aircraft = getAircraftByApexId(r.Field<int?>("AC_ID")),
-                        ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
-                        ratingClass = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
-                        authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
-                        licenceType = noms["licenceTypes"].ByOldId(r.Field<decimal?>("LICENCE_TYPE_ID").ToString()),
-                        locationIndicator = noms["locationIndicators"].ByOldId(r.Field<long?>("INDICATOR_ID").ToString()),
-                        sector = r.Field<string>("SECTOR"),
-                        experienceRole = noms["experienceRoles"].ByOldId(r.Field<decimal?>("EXPERIENCE_ROLE_ID").ToString()),
-                        experienceMeasure = noms["experienceMeasures"].ByOldId(r.Field<decimal?>("MEASURE_ID").ToString()),
-                        dayIFR = new { hours = r.Field<short?>("AMNTH_DAY_I"), minutes = r.Field<short?>("AMNTM_DAY_I") },
-                        dayVFR = new { hours = r.Field<short?>("AMNTH_DAY_V"), minutes = r.Field<short?>("AMNTM_DAY_V") },
-                        dayLandings = r.Field<short?>("LND_DAY"),
-                        nightIFR = new { hours = r.Field<short?>("AMNTH_NGT_I"), minutes = r.Field<short?>("AMNTM_NGT_I") },
-                        nightVFR = new { hours = r.Field<short?>("AMNTH_NGT_V"), minutes = r.Field<short?>("AMNTM_NGT_V") },
-                        nightLandings = r.Field<short?>("LND_NGT"),
-                        total = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT"), r.Field<short?>("AMOUNT_M")),
-                        totalDoc = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT_SUM"), r.Field<short?>("AMOUNT_M_SUM")),
-                        totalLastMonths = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT_12"), r.Field<short?>("AMOUNT_M_12")),
-                        notes = r.Field<string>("NOTES")
-                    }))
-                .ToList();
+                            documentDate = r.Field<DateTime?>("DOCUMENT_DATE"),
+                            period = new { month = r.Field<string>("PERIOD_MONTH"), year = r.Field<string>("PERIOD_YEAR") },
+                            organization = getOrgByApexId(r.Field<int?>("FIRM_ID")),
+                            aircraft = getAircraftByApexId(r.Field<int?>("AC_ID")),
+                            ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
+                            ratingClass = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
+                            authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
+                            licenceType = noms["licenceTypes"].ByOldId(r.Field<decimal?>("LICENCE_TYPE_ID").ToString()),
+                            locationIndicator = noms["locationIndicators"].ByOldId(r.Field<long?>("INDICATOR_ID").ToString()),
+                            sector = r.Field<string>("SECTOR"),
+                            experienceRole = noms["experienceRoles"].ByOldId(r.Field<decimal?>("EXPERIENCE_ROLE_ID").ToString()),
+                            experienceMeasure = noms["experienceMeasures"].ByOldId(r.Field<decimal?>("MEASURE_ID").ToString()),
+                            dayIFR = new { hours = r.Field<short?>("AMNTH_DAY_I"), minutes = r.Field<short?>("AMNTM_DAY_I") },
+                            dayVFR = new { hours = r.Field<short?>("AMNTH_DAY_V"), minutes = r.Field<short?>("AMNTM_DAY_V") },
+                            dayLandings = r.Field<short?>("LND_DAY"),
+                            nightIFR = new { hours = r.Field<short?>("AMNTH_NGT_I"), minutes = r.Field<short?>("AMNTM_NGT_I") },
+                            nightVFR = new { hours = r.Field<short?>("AMNTH_NGT_V"), minutes = r.Field<short?>("AMNTM_NGT_V") },
+                            nightLandings = r.Field<short?>("LND_NGT"),
+                            total = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT"), r.Field<short?>("AMOUNT_M")),
+                            totalDoc = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT_SUM"), r.Field<short?>("AMOUNT_M_SUM")),
+                            totalLastMonths = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT_12"), r.Field<short?>("AMOUNT_M_12")),
+                            notes = r.Field<string>("NOTES")
+                         })),
+                         new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", r.Field<string>("STAFF_TYPE_ID") != null? Utils.ToJObject(PersonUtils.getPersonCaseTypeByStaffTypeCode(noms, (noms["staffTypes"].ByOldId(r.Field<string>("STAFF_TYPE_ID")).Code))): null),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray()))))))
+                        .ToList();
         }
 
         private IList<JObject> getPersonStatuses(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)

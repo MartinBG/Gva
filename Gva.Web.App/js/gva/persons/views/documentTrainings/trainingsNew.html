@@ -13,10 +13,11 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-document-training name="personDocumentTrainingForm" ng-model="personDocumentTraining.part" sc-form-params="{ isNew: true }"></gva-person-document-training>
+      <gva-person-document-training name="personDocumentTrainingForm" ng-model="personDocumentTraining"
+         sc-form-params="{ isNew: true, caseTypeId: caseTypeId }"></gva-person-document-training>
 
-      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentTraining.files"
-        sc-form-params="{ setPart: 'person', lotId: lotId, caseTypeId: caseTypeId }"></gva-common-scanned-document>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentTraining.case"
+        sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

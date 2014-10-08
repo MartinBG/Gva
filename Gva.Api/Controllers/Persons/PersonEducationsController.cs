@@ -13,7 +13,7 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personDocumentEducations")]
     [Authorize]
-    public class PersonEducationsController : GvaFilePartController<PersonEducationDO>
+    public class PersonEducationsController : GvaCaseTypePartController<PersonEducationDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
@@ -36,21 +36,21 @@ namespace Gva.Api.Controllers.Persons
         {
             PersonEducationDO newEducation = new PersonEducationDO();
 
-            var cases = new List<CaseDO>();
+            CaseDO caseDO = null;
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                cases.Add(new CaseDO()
+                caseDO = new CaseDO()
                 {
                     IsAdded = true,
                     Applications = new List<ApplicationNomDO>()
                     {
                         this.applicationRepository.GetInitApplication(appId)
                     }
-                });
+                };
             }
 
-            return Ok(new FilePartVersionDO<PersonEducationDO>(newEducation, cases));
+            return Ok(new CaseTypePartDO<PersonEducationDO>(newEducation, caseDO));
         }
     }
 }

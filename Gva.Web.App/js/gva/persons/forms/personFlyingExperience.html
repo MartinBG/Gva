@@ -1,85 +1,89 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.staffType" alias="'staffTypes'" ng-disabled="!isNew" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.staffType" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+    <div class="form-group col-sm-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" case-type="caseTypeId" ng-required="true"></gva-case-type>
+    </div>
   </div>
   <hr>
-  <div class="row" ng-if="model.staffType.alias">
-    <sc-field type="date" ng-model="model.documentDate" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.documentDate" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="text" ng-model="model.period.month" l10n-text="persons.personFlyingExperienceDirective.month" class="col-sm-2 col-md-2"></sc-field>
-    <sc-field type="text" ng-model="model.period.year" l10n-text="persons.personFlyingExperienceDirective.year" class="col-sm-2 col-md-2"></sc-field>
-    <sc-field type="text" ng-model="model.notes" l10n-text="persons.personFlyingExperienceDirective.sender" class="col-sm-4"></sc-field>
+  <div class="row" ng-if="model.case.caseType.alias">
+    <sc-field type="date" ng-model="model.part.documentDate" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.documentDate" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.period.month" l10n-text="persons.personFlyingExperienceDirective.month" class="col-sm-2 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.period.year" l10n-text="persons.personFlyingExperienceDirective.year" class="col-sm-2 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.notes" l10n-text="persons.personFlyingExperienceDirective.sender" class="col-sm-4"></sc-field>
   </div>
-  <div class="row" ng-if="model.staffType.alias === 'flightCrew'">
-    <sc-field type="nomenclature" ng-model="model.organization" alias="'organizations'" l10n-text="persons.personFlyingExperienceDirective.organization" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+  <div class="row" ng-if="model.case.caseType.alias === 'flightCrew'">
+    <sc-field type="nomenclature" ng-model="model.part.organization" alias="'organizations'" l10n-text="persons.personFlyingExperienceDirective.organization" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
   </div>
-  <div ng-if="model.staffType">
+  <div ng-if="model.case.caseType">
     <hr>
-    <div class="row" ng-if="model.staffType.alias === 'flightCrew' || model.staffType.alias === 'to_vs'">
-      <sc-field type="nomenclature" ng-model="model.aircraft" alias="'aircrafts'" l10n-text="persons.personFlyingExperienceDirective.aircraft" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.ratingType" alias="'ratingTypes'" l10n-text="persons.personFlyingExperienceDirective.ratingType" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+    <div class="row" ng-if="model.case.caseType.alias === 'flightCrew' || model.case.caseType.alias === 'to_vs'">
+      <sc-field type="nomenclature" ng-model="model.part.aircraft" alias="'aircrafts'" l10n-text="persons.personFlyingExperienceDirective.aircraft" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.ratingType" alias="'ratingTypes'" l10n-text="persons.personFlyingExperienceDirective.ratingType" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
     </div>
-    <div class="row" ng-if="model.staffType.alias === 'flightCrew' || model.staffType.alias === 'ovd'">
-      <sc-field type="nomenclature" ng-model="model.ratingClass" alias="'ratingClasses'" params="{ staffTypeAlias: model.staffType.alias }" l10n-text="persons.personFlyingExperienceDirective.ratingClass" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+    <div class="row" ng-if="model.case.caseType.alias === 'flightCrew' || model.case.caseType.alias === 'ovd'">
+      <sc-field type="nomenclature" ng-model="model.part.ratingClass" alias="'ratingClasses'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personFlyingExperienceDirective.ratingClass" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.licenceType" alias="'licenceTypes'" params="{ parentValueId: model.staffType.nomValueId }" l10n-text="persons.personFlyingExperienceDirective.licenceType" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.authorization" alias="'authorizations'" params="{ staffTypeAlias: model.staffType.alias }" l10n-text="persons.personFlyingExperienceDirective.authorization" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.licenceType" alias="'licenceTypes'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personFlyingExperienceDirective.licenceType" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personFlyingExperienceDirective.authorization" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
     </div>
-    <div class="row" ng-if="model.staffType.alias === 'ovd'">
-      <sc-field type="nomenclature" ng-model="model.locationIndicator" alias="'locationIndicators'" l10n-text="persons.personFlyingExperienceDirective.locationIndicator" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
-      <sc-field type="text" ng-model="model.sector" l10n-text="persons.personFlyingExperienceDirective.sector" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+    <div class="row" ng-if="model.case.caseType.alias === 'ovd'">
+      <sc-field type="nomenclature" ng-model="model.part.locationIndicator" alias="'locationIndicators'" l10n-text="persons.personFlyingExperienceDirective.locationIndicator" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+      <sc-field type="text" ng-model="model.part.sector" l10n-text="persons.personFlyingExperienceDirective.sector" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
     </div>
     <hr>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.experienceRole" alias="'experienceRoles'" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.experienceRole" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.experienceMeasure" alias="'experienceMeasures'" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.experienceMeasure" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.experienceRole" alias="'experienceRoles'" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.experienceRole" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.experienceMeasure" alias="'experienceMeasures'" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.experienceMeasure" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
     </div>
-    <div ng-if="model.staffType.alias === 'flightCrew'">
+    <div ng-if="model.case.caseType.alias === 'flightCrew'">
       <hr>
       <div class="row">
         <div class="form-group col-sm-3 col-md-2">
           <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.dayDuration"></label>
           <div class="input-group input-group-sm"> <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.IFR"></span>
-            <sc-int ng-model="model.dayIFR.hours" ng-readonly="form.$readonly"></sc-int>
+            <sc-int ng-model="model.part.dayIFR.hours" ng-readonly="form.$readonly"></sc-int>
             <span class="input-group-addon padding6">:</span>
-            <sc-int ng-model="model.dayIFR.minutes" ng-readonly="form.$readonly"></sc-int>
+            <sc-int ng-model="model.part.dayIFR.minutes" ng-readonly="form.$readonly"></sc-int>
           </div>
         </div>
         <div class="form-group col-sm-3 col-md-2">
           <label class="control-label" l10n-text="persons.personFlyingExperienceDirective.nightDuration"></label>
           <div class="input-group input-group-sm"> <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.IFR"></span>
-            <sc-int ng-model="model.nightIFR.hours" ng-readonly="form.$readonly"></sc-int>
+            <sc-int ng-model="model.part.nightIFR.hours" ng-readonly="form.$readonly"></sc-int>
             <span class="input-group-addon padding6">:</span>
-            <sc-int ng-model="model.nightIFR.minutes" ng-readonly="form.$readonly"></sc-int>
+            <sc-int ng-model="model.part.nightIFR.minutes" ng-readonly="form.$readonly"></sc-int>
           </div>
         </div>
       </div>
       <div class="row padding-top10">
         <div class="form-group col-sm-3 col-md-2">
           <div class="input-group input-group-sm"> <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.VFR"></span>
-            <sc-int ng-model="model.dayVFR.hours" ng-readonly="form.$readonly"></sc-int>
+            <sc-int ng-model="model.part.dayVFR.hours" ng-readonly="form.$readonly"></sc-int>
             <span class="input-group-addon padding6">:</span>
-            <sc-int ng-model="model.dayVFR.minutes" ng-readonly="form.$readonly"></sc-int>
+            <sc-int ng-model="model.part.dayVFR.minutes" ng-readonly="form.$readonly"></sc-int>
           </div>
         </div>
         <div class="form-group col-sm-3 col-md-2">
           <div class="input-group input-group-sm"> <span class="input-group-addon" l10n-text="persons.personFlyingExperienceDirective.VFR"></span>
-            <sc-int ng-model="model.nightVFR.hours" ng-readonly="form.$readonly"></sc-int>
+            <sc-int ng-model="model.part.nightVFR.hours" ng-readonly="form.$readonly"></sc-int>
             <span class="input-group-addon padding6">:</span>
-            <sc-int ng-model="model.nightVFR.minutes" ng-readonly="form.$readonly"></sc-int>
+            <sc-int ng-model="model.part.nightVFR.minutes" ng-readonly="form.$readonly"></sc-int>
           </div>
         </div>
       </div>
       <div class="row">
-        <sc-field type="int" ng-model="model.dayLandings" l10n-text="persons.personFlyingExperienceDirective.dayLandings" class="col-sm-3 col-md-2"></sc-field>
-        <sc-field type="int" ng-model="model.nightLandings" l10n-text="persons.personFlyingExperienceDirective.nightLandings" class="col-sm-3 col-md-2"></sc-field>
+        <sc-field type="int" ng-model="model.part.dayLandings" l10n-text="persons.personFlyingExperienceDirective.dayLandings" class="col-sm-3 col-md-2"></sc-field>
+        <sc-field type="int" ng-model="model.part.nightLandings" l10n-text="persons.personFlyingExperienceDirective.nightLandings" class="col-sm-3 col-md-2"></sc-field>
       </div>
     </div>
     <hr>
     <div class="row">
-      <sc-field type="time" ng-model="model.totalDoc" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.totalDoc" class="col-sm-3 col-md-2"></sc-field>
-      <sc-field type="time" ng-model="model.totalLastMonths" l10n-text="persons.personFlyingExperienceDirective.totalLastMonths" class="col-sm-3 col-md-2"></sc-field>
-      <sc-field type="time" ng-model="model.total" l10n-text="persons.personFlyingExperienceDirective.total" class="col-sm-3 col-md-2"></sc-field>
+      <sc-field type="time" ng-model="model.part.totalDoc" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.totalDoc" class="col-sm-3 col-md-2"></sc-field>
+      <sc-field type="time" ng-model="model.part.totalLastMonths" l10n-text="persons.personFlyingExperienceDirective.totalLastMonths" class="col-sm-3 col-md-2"></sc-field>
+      <sc-field type="time" ng-model="model.part.total" l10n-text="persons.personFlyingExperienceDirective.total" class="col-sm-3 col-md-2"></sc-field>
     </div>
   </div>
 </ng-form>

@@ -14,7 +14,7 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personDocumentEmployments")]
     [Authorize]
-    public class PersonEmploymentsController : GvaFilePartController<PersonEmploymentDO>
+    public class PersonEmploymentsController : GvaCaseTypePartController<PersonEmploymentDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
@@ -41,21 +41,21 @@ namespace Gva.Api.Controllers.Persons
             PersonEmploymentDO newEmployment = new PersonEmploymentDO();
             newEmployment.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
-            var cases = new List<CaseDO>();
+            CaseDO caseDO = null;
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                cases.Add(new CaseDO()
+                caseDO = new CaseDO()
                 {
                     IsAdded = true,
                     Applications = new List<ApplicationNomDO>()
                     {
                         this.applicationRepository.GetInitApplication(appId)
                     }
-                });
+                };
             }
 
-            return Ok(new FilePartVersionDO<PersonEmploymentDO>(newEmployment, cases));
+            return Ok(new CaseTypePartDO<PersonEmploymentDO>(newEmployment, caseDO));
         }
     }
 }

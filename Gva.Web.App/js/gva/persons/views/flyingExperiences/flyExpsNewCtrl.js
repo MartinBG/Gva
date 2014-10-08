@@ -10,6 +10,7 @@
     personFlyingExperience
   ) {
     $scope.personFlyingExperience = personFlyingExperience;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newFlyingExperienceForm.$validate()

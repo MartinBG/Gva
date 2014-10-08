@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentOtherCtrl($scope, scModal, scFormParams) {
+  function PersonDocumentExamCtrl($scope, scModal, scFormParams) {
     $scope.isNew = scFormParams.isNew;
     $scope.caseTypeId = scFormParams.caseTypeId;
 
@@ -17,7 +17,7 @@
     };
   }
 
-  PersonDocumentOtherCtrl.$inject = ['$scope', 'scModal', 'scFormParams'];
+  PersonDocumentExamCtrl.$inject = ['$scope', 'scModal', 'scFormParams'];
 
-  angular.module('gva').controller('PersonDocumentOtherCtrl', PersonDocumentOtherCtrl);
+  angular.module('gva').controller('PersonDocumentExamCtrl', PersonDocumentExamCtrl);
 }(angular));

@@ -1072,7 +1072,7 @@ namespace Gva.MigrationTool.Nomenclatures
                             new
                             {
                                 direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
-                                staffTypeAlias =
+                                caseTypeAlias =
                                     noms["staffTypes"]
                                     .ByCodeOrDefault(
                                         noms["directions"]
@@ -1126,7 +1126,7 @@ namespace Gva.MigrationTool.Nomenclatures
                             new
                             {
                                 direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
-                                staffTypeAlias =
+                                caseTypeAlias =
                                     noms["staffTypes"]
                                     .ByCodeOrDefault(
                                         noms["directions"]
@@ -1275,7 +1275,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
-                                staffTypeAlias = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).Alias
+                                caseTypeAlias = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).Alias
                             })
                     })
                 .ToList();
@@ -1363,7 +1363,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
-                                staffTypeAlias = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).Alias,
+                                caseTypeAlias = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).Alias,
                                 ratingClassGroupId = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("CLASS_GROUP_ID").ToString()).NomValueId()
                             })
                     })
@@ -1487,7 +1487,7 @@ namespace Gva.MigrationTool.Nomenclatures
                                 prtPrintableDocId = r.Field<decimal?>("PRT_PRINTABLE_DOCUMENT_ID"),
                                 qlfCode = r.Field<string>("QLF_CODE"),
                                 templateName = templateNames[r.Field<object>("PRT_PRINTABLE_DOCUMENT_ID").ToString()],
-                                staffTypeAlias = noms["staffTypes"].ByOldId(r.Field<int>("STAFF_TYPE_ID").ToString()).Alias
+                                caseTypeAlias = noms["staffTypes"].ByOldId(r.Field<int>("STAFF_TYPE_ID").ToString()).Alias
                             })
                     })
                 .ToList();

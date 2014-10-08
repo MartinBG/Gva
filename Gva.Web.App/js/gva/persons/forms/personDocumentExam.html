@@ -1,17 +1,24 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="text" ng-model="model.documentNumber" l10n-text="persons.personDocumentExamDirective.documentNumber" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" l10n-text="persons.personDocumentExamDirective.valid" class="col-sm-3 col-md-2"></sc-field>
+    <div class="form-group col-sm-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="persons.personDocumentExamDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" case-type="caseTypeId" ng-required="true"></gva-case-type>
+    </div>
   </div>
   <div class="row">
-    <sc-field type="date" ng-model="model.documentDateValidFrom" ng-required="true" l10n-text="persons.personDocumentExamDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="date" ng-model="model.documentDateValidTo" l10n-text="persons.personDocumentExamDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personDocumentExamDirective.documentNumber" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" l10n-text="persons.personDocumentExamDirective.valid" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.documentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false }" l10n-text="persons.personDocumentExamDirective.personOtherDocumentType" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="text" ng-model="model.documentPublisher" l10n-text="persons.personMedicalDirective.documentPublisher" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.personDocumentExamDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidTo" l10n-text="persons.personDocumentExamDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="textarea-suggestion" rows="2" ng-model="model.notes" alias="'notes'" l10n-text="persons.personDocumentExamDirective.notes" class="col-sm-10"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.documentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false }" l10n-text="persons.personDocumentExamDirective.personOtherDocumentType" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentPublisher" l10n-text="persons.personMedicalDirective.documentPublisher" class="col-sm-6 col-md-4"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="textarea-suggestion" rows="2" ng-model="model.part.notes" alias="'notes'" l10n-text="persons.personDocumentExamDirective.notes" class="col-sm-10"></sc-field>
   </div>
 </ng-form>

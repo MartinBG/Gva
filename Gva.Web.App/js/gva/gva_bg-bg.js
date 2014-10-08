@@ -1822,7 +1822,8 @@
           speciality: 'Специалност',
           graduation: 'Степен на образование',
           school: 'Учебно заведение',
-          notes: 'Бележки'
+          notes: 'Бележки',
+          caseType: 'Тип дело'
         },
         personDocumentIdDirective: {
           caseType: 'Тип дело',
@@ -1854,7 +1855,8 @@
           documentPublisher: 'Издател',
           limitations: 'Ограничения към свидетелство за медицинска годност',
           medClass: 'Клас',
-          notes: 'Бележки'
+          notes: 'Бележки',
+          caseType: 'Тип дело'
         },
         personEmploymentDirective: {
           hiredate: 'Дата на назначаване',
@@ -1862,10 +1864,10 @@
           organization: 'Организация',
           employmentCategory: 'Категория длъжност',
           country: 'Страна',
-          notes: 'Бележки'
+          notes: 'Бележки',
+          caseType: 'Тип дело'
         },
         personCheckDirective: {
-          staffType: 'Вид персонал',
           documentNumber: '№ на документа',
           documentPersonNumber: '№ в списъка',
           personCheckDocumentType: 'Тип документ',
@@ -1882,10 +1884,11 @@
           notes: 'Бележки',
           sector: 'Сектор/работно място',
           locationIndicator: 'Индикатор на местоположение',
-          ratingType: 'Тип ВС'
+          ratingType: 'Тип ВС',
+          caseType: 'Тип дело'
         },
         personDocumentTrainingDirective: {
-          staffType: 'Тип персонал',
+          caseType: 'Тип дело',
           documentNumber: '№ на документ',
           documentPersonNumber: '№ в списъка (групов документ)',
           documentDateValidFrom: 'Дата на завършване',
@@ -1905,7 +1908,7 @@
           notes: 'Бележки'
         },
         personFlyingExperienceDirective: {
-          staffType: 'Тип персонал',
+          caseType: 'Тип дело',
           documentDate: 'Дата на документа',
           month: 'За месец',
           year: 'Година',
@@ -1944,7 +1947,8 @@
           valid: 'Валиден',
           notes: 'Бележки',
           bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.'
+          pageCount: 'Брой стр.',
+          caseType: 'Тип дело'
         },
         ratingEditionDirective: {
           documentDateValidFrom: 'Дата на вписване',
@@ -2099,7 +2103,8 @@
           personOtherDocumentRole: 'Роля',
           valid: 'Действителен',
           bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.'
+          pageCount: 'Брой стр.',
+          caseType: 'Тип дело'
         },
         personDocApplicationSearch: {
           newApplication: 'Ново заявление',

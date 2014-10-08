@@ -13,7 +13,9 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience.part" sc-form-params="{ isNew: true }"></gva-person-flying-experience>
+      <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience" 
+        sc-form-params="{ isNew: true, caseTypeId: caseTypeId }">
+      </gva-person-flying-experience>
     </div>
   </div>
 </ng-form>
