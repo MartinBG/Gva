@@ -16,9 +16,10 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-common-document-application name="aircraftDocumentApplicationForm" ng-model="aircraftDocumentApplication.part" sc-form-params="{ lotId: lotId }"></gva-common-document-application>
+      <gva-common-document-application name="aircraftDocumentApplicationForm" ng-model="aircraftDocumentApplication"
+         sc-form-params="{ lotId: lotId, isNew: false, caseTypeId: caseTypeId }"></gva-common-document-application>
 
-      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentApplication.files"
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aircraftDocumentApplication.case"
         sc-form-params="{ setPart: 'aircraft', lotId: lotId, hideApplications: true }"></gva-common-scanned-document>
     </div>
   </div>

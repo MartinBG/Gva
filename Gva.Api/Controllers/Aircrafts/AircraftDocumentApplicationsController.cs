@@ -18,7 +18,7 @@ namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/aircraftDocumentApplications")]
     [Authorize]
-    public class AircraftDocumentApplicationsController : GvaFilePartController<DocumentApplicationDO>
+    public class AircraftDocumentApplicationsController : GvaCaseTypePartController<DocumentApplicationDO>
     {
         private string path;
         private ILotRepository lotRepository;
@@ -49,10 +49,10 @@ namespace Gva.Api.Controllers.Aircrafts
         [Route("new")]
         public IHttpActionResult GetNewDocumentApplication(int lotId)
         {
-            return Ok(new FilePartVersionDO<DocumentApplicationDO>(new DocumentApplicationDO()));
+            return Ok(new CaseTypePartDO<DocumentApplicationDO>(new DocumentApplicationDO()));
         }
 
-        public override IHttpActionResult PostNewPart(int lotId, FilePartVersionDO<DocumentApplicationDO> application)
+        public override IHttpActionResult PostNewPart(int lotId, CaseTypePartDO<DocumentApplicationDO> application)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -60,7 +60,7 @@ namespace Gva.Api.Controllers.Aircrafts
 
                 PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart<DocumentApplicationDO>(path + "/*", application.Part, this.userContext);
 
-                this.fileRepository.AddFileReferences(partVersion.Part, application.Files);
+                this.fileRepository.AddFileReference(partVersion.Part, application.Case);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
 

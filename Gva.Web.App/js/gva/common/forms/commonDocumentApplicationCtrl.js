@@ -4,6 +4,8 @@
 
   function CommonDocumentApplicationCtrl($scope, scFormParams) {
     $scope.lotId = scFormParams.lotId;
+    $scope.isNew = scFormParams.isNew;
+    $scope.caseTypeId = scFormParams.caseTypeId;
   }
 
   CommonDocumentApplicationCtrl.$inject = ['$scope', 'scFormParams'];

@@ -85,7 +85,8 @@
           applicationType: 'Тип заявление',
           applicationPaymentType: 'Член',
           currency: 'Парична единица',
-          taxAmount: 'Платена такса'
+          taxAmount: 'Платена такса',
+          caseType: 'Тип дело'
         },
         scannedDocumentlDirective: {
           title: 'Електронен (сканиран) документ',
