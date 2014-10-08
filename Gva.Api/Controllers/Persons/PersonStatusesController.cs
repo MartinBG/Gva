@@ -12,15 +12,14 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personStatuses")]
     [Authorize]
-    public class PersonStatusesController : GvaApplicationPartController<PersonStatusDO>
+    public class PersonStatusesController : GvaSimplePartController<PersonStatusDO>
     {
         public PersonStatusesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("personStatuses", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("personStatuses", unitOfWork, lotRepository, lotEventDispatcher, userContext)
         {
         }
 
@@ -32,7 +31,7 @@ namespace Gva.Api.Controllers.Persons
                 DocumentDateValidFrom = DateTime.Now
             };
 
-            return Ok(new ApplicationPartVersionDO<PersonStatusDO>(newStatus));
+            return Ok(new SimplePartDO<PersonStatusDO>(newStatus));
         }
     }
 }
