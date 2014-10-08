@@ -13,12 +13,12 @@
   </sc-column>
   <sc-column data="part.notes" title="persons.searchExam.notes"">
   </sc-column>
-  <sc-column data="files[0].bookPageNumber" title="persons.searchExam.bookPageNumber">
+  <sc-column data="cases[0].bookPageNumber" title="persons.searchExam.bookPageNumber">
   </sc-column>
-  <sc-column data="files[0].pageCount" title="persons.searchExam.pageCount">
+  <sc-column data="cases[0].pageCount" title="persons.searchExam.pageCount">
   </sc-column>
   <sc-column sortable="false" title="persons.searchExam.file" has-content="true">
-    <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
+    <a target="_self" ng-href="api/file?fileKey={{item.cases[0].file.key}}&fileName={{item.cases[0].file.name}}" sc-access-token ng-show="item.cases[0].file" title="{{item.cases[0].file.name}}">
       <span class="glyphicon glyphicon-file"></span>
     </a>
   </sc-column>

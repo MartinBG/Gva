@@ -2,8 +2,8 @@
   <div class="row">
     <div class="form-group col-sm-2" sc-has-error="caseType">
       <label class="control-label" l10n-text="persons.personDocumentExamDirective.caseType"></label>
-      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
-      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" case-type="caseTypeId" ng-required="true"></gva-case-type>
+      <sc-validation-error field-name="caseTypes" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.cases" name="caseTypes" multiple init="isNew" ng-disabled="form.$readonly" case-type="caseTypeId" ng-required="true"></gva-case-type>
     </div>
   </div>
   <div class="row">
