@@ -11,8 +11,9 @@
     scMessage
   ) {
     var originalInspection = _.cloneDeep(airportInspection);
-
+    $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.airportInspection = airportInspection;
+    $scope.lotId = $stateParams.lotId;
 
     $scope.editMode = null;
     $scope.edit = function () {

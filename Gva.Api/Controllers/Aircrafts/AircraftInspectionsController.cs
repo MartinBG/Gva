@@ -7,12 +7,13 @@ using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 using System.Collections.Generic;
 using Common.Api.UserContext;
+using Gva.Api.Repositories.FileRepository;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/inspections")]
     [Authorize]
-    public class AircraftInspectionsController : GvaApplicationPartController<AircraftInspectionDO>
+    public class AircraftInspectionsController : GvaCaseTypePartController<AircraftInspectionDO>
     {
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
@@ -21,9 +22,10 @@ namespace Gva.Api.Controllers.Aircrafts
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
+            IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("inspections", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("inspections", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
@@ -32,14 +34,21 @@ namespace Gva.Api.Controllers.Aircrafts
         [Route("new")]
         public IHttpActionResult GetNewInspection(int lotId, int? appId = null)
         {
-            var applications = new List<ApplicationNomDO>();
+            CaseDO caseDO = null;
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                applications.Add(this.applicationRepository.GetInitApplication(appId));
+                caseDO = new CaseDO()
+                {
+                    IsAdded = true,
+                    Applications = new List<ApplicationNomDO>()
+                    {
+                        this.applicationRepository.GetInitApplication(appId)
+                    }
+                };
             }
 
-            return Ok(new ApplicationPartVersionDO<AircraftInspectionDO>(new AircraftInspectionDO(), applications));
+            return Ok(new CaseTypePartDO<AircraftInspectionDO>(new AircraftInspectionDO(), caseDO));
         }
     }
 }

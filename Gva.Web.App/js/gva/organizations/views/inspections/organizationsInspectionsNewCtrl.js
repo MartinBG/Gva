@@ -11,6 +11,7 @@
   ) {
     $scope.organizationInspection = organizationInspection;
     $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newInspectionForm

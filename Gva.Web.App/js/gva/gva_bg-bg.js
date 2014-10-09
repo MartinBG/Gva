@@ -126,8 +126,7 @@
           auditState: 'Състояние',
           notification: 'Предв. уведом.',
           subject: 'Предмет на одит',
-          applications: 'Заявления',
-          caseType: 'Дело',
+          caseType: 'Тип дело',
           inspectionPlace: 'Адрес на одитирания обект',
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
@@ -3424,8 +3423,7 @@
           recommendations: 'Доклади от препоръки свързани с одит:',
           auditPart: 'Тип',
           formText: '№ на изменението',
-          formDate: 'Форма за заявен обхват на одобрението от дата',
-          caseType: 'Дело'
+          formDate: 'Форма за заявен обхват на одобрението от дата'
         },
         approvalSearch: {
           newApproval: 'Ново удостоверение',

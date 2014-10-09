@@ -5,6 +5,7 @@ using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Organizations;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -13,7 +14,7 @@ namespace Gva.Api.Controllers.Organizations
 {
     [RoutePrefix("api/organizations/{lotId}/organizationInspections")]
     [Authorize]
-    public class OrganizationInspectionsController : GvaApplicationPartController<OrganizationInspectionDO>
+    public class OrganizationInspectionsController : GvaCaseTypePartController<OrganizationInspectionDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
@@ -23,10 +24,11 @@ namespace Gva.Api.Controllers.Organizations
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
+            IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
             IOrganizationRepository organizationRepository,
             UserContext userContext)
-            : base("organizationInspections", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("organizationInspections", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
@@ -36,16 +38,23 @@ namespace Gva.Api.Controllers.Organizations
         [Route("new")]
         public IHttpActionResult GetNewInspection(int lotId, int? appId = null)
         {
-            var applications = new List<ApplicationNomDO>();
+
+            CaseDO caseDO = null;
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                applications.Add(this.applicationRepository.GetInitApplication(appId));
-            }
-
+                caseDO = new CaseDO()
+                {
+                    IsAdded = true,
+                    Applications = new List<ApplicationNomDO>()
+                    {
+                        this.applicationRepository.GetInitApplication(appId)
+                    }
+                };
+            } 
             OrganizationInspectionDO newInspection = new OrganizationInspectionDO();
 
-            return Ok(new ApplicationPartVersionDO<OrganizationInspectionDO>(newInspection, applications));
+            return Ok(new CaseTypePartDO<OrganizationInspectionDO>(newInspection, caseDO));
         }
 
         [Route("{inspectionPartIndex}/recommendations")]

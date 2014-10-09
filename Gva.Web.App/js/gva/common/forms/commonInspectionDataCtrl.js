@@ -7,6 +7,8 @@
     scFormParams
   ) {
     $scope.setPart = scFormParams.setPart;
+    $scope.isNew = scFormParams.isNew;
+    $scope.caseTypeId = scFormParams.caseTypeId;
   }
 
   CommonInspectionDataCtrl.$inject = [

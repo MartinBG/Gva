@@ -147,8 +147,7 @@ namespace Gva.MigrationTool.Sets
                         var organizationInspections = this.getOrganizationInspections(organizationId, nomApplications, getPersonByApexId, blobIdsToFileKeys, noms);
                         foreach (var organizationInspection in organizationInspections)
                         {
-                            var pv = lot.CreatePart("organizationInspections/*", organizationInspection.Get<JObject>("part"), context);
-                            applicationRepository.AddApplicationRefs(pv.Part, organizationInspection.GetItems<ApplicationNomDO>("applications"));
+                            var pv = addPartWithFiles("organizationInspections/*", organizationInspection);
                             inspectionPartIndexes.Add(organizationInspection.Get<int>("part.__oldId"), pv.Part.Index);
                         }
 
@@ -488,11 +487,9 @@ namespace Gva.MigrationTool.Sets
                 @"SELECT * FROM CAA_DOC.AUDITS WHERE {0}",
                 new DbClause("ID_FIRM = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        part =
-                            new
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
                             {
                                 __oldId = r.Field<int>("ID"),
                                 __migrTable = "AUDITS",
@@ -510,15 +507,21 @@ namespace Gva.MigrationTool.Sets
                                 controlCard = controlCards[r.Field<int>("ID")],
                                 inspectionDetails = inspectionDetails[r.Field<int>("ID")],
                                 disparities = disparities[r.Field<int>("ID")],
-                                examiners = examiners[r.Field<int>("ID")],
-
-                                caseType = noms["organizationCaseTypes"].ByAlias("approvedOrg")
-                            },
-                        applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
-                            new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
-                            new object[0]
-                    }))
-                .ToList();
+                                examiners = examiners[r.Field<int>("ID")]
+                            })),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("approvedOrg"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", 
+                                        (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
+                                        new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
+                                        new object[0]))))))
+                        .ToList();
         }
 
         private IList<JObject> getOrganizationAddress(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms)

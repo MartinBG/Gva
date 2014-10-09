@@ -178,9 +178,7 @@ namespace Gva.MigrationTool.Sets
                         var aircraftInspections = this.getAircraftInspections(aircraftApexId, nomApplications, getPersonByApexId, blobIdsToFileKeys, noms);
                         foreach (var aircraftInspection in aircraftInspections)
                         {
-                            var pv = lot.CreatePart("inspections/*", aircraftInspection.Get<JObject>("part"), context);
-                            applicationRepository.AddApplicationRefs(pv.Part, aircraftInspection.GetItems<ApplicationNomDO>("applications"));
-
+                            var pv = addPartWithFiles("inspections/*", aircraftInspection);
                             inspections.Add(aircraftInspection.Get<int>("part.__oldId"), pv.Part.Index);
                         }
 
@@ -837,38 +835,44 @@ namespace Gva.MigrationTool.Sets
                 @"SELECT * FROM CAA_DOC.AUDITS WHERE {0}",
                 new DbClause("ID_AIRCRAFT = {0}", aircraftId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        part =
-                            new
-                            {
-                                __oldId = r.Field<int>("ID"),
-                                __migrTable = "AUDITS",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "AUDITS",
 
-                                documentNumber = r.Field<string>("DOC_NUMBER"),
-                                auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
-                                auditReason = noms["auditReasons"].ByCode(r.Field<string>("REASON")),
-                                auditType = noms["auditTypes"].ByCode(r.Field<string>("AUDIT_MODE")),
-                                auditState = noms["auditStatuses"].ByCode(r.Field<string>("STATE")),
-                                notification = noms["boolean"].ByCode(r.Field<string>("NOTIFICATION") == "Y" ? "Y" : "N"),
-                                subject = r.Field<string>("SUBJECT"),
-                                inspectionPlace = r.Field<string>("INSPECTION_PLACE"),
-                                startDate = r.Field<DateTime?>("DATE_BEGIN"),
-                                endDate = r.Field<DateTime?>("DATE_END"),
-                                controlCard = controlCards[r.Field<int>("ID")],
-                                inspectionDetails = inspectionDetails[r.Field<int>("ID")],
-                                disparities = disparities[r.Field<int>("ID")],
-                                examiners = examiners[r.Field<int>("ID")],
+                            documentNumber = r.Field<string>("DOC_NUMBER"),
+                            auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
+                            auditReason = noms["auditReasons"].ByCode(r.Field<string>("REASON")),
+                            auditType = noms["auditTypes"].ByCode(r.Field<string>("AUDIT_MODE")),
+                            auditState = noms["auditStatuses"].ByCode(r.Field<string>("STATE")),
+                            notification = noms["boolean"].ByCode(r.Field<string>("NOTIFICATION") == "Y" ? "Y" : "N"),
+                            subject = r.Field<string>("SUBJECT"),
+                            inspectionPlace = r.Field<string>("INSPECTION_PLACE"),
+                            startDate = r.Field<DateTime?>("DATE_BEGIN"),
+                            endDate = r.Field<DateTime?>("DATE_END"),
+                            controlCard = controlCards[r.Field<int>("ID")],
+                            inspectionDetails = inspectionDetails[r.Field<int>("ID")],
+                            disparities = disparities[r.Field<int>("ID")],
+                            examiners = examiners[r.Field<int>("ID")],
 
-                                inspectionFrom = r.Field<DateTime?>("INSPECTION_FROM"),
-                                inspectionTo = r.Field<DateTime?>("INSPECTION_TO")
-                            },
-                        applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
-                            new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
-                            new object[0]
-                    }))
-                .ToList();
+                            inspectionFrom = r.Field<DateTime?>("INSPECTION_FROM"),
+                            inspectionTo = r.Field<DateTime?>("INSPECTION_TO")
+                        })),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications",
+                                        (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
+                                        new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
+                                        new object[0]))))))
+                        .ToList();
         }
 
         private IList<JObject> getAircraftDocumentDebts(

@@ -10,6 +10,8 @@
     equipmentInspection
   ) {
     $scope.equipmentInspection = equipmentInspection;
+    $scope.lotId = $stateParams.lotId;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newInspectionForm.$validate()

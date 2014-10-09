@@ -6,6 +6,7 @@ using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Equipments;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -13,7 +14,7 @@ namespace Gva.Api.Controllers.Equipments
 {
     [RoutePrefix("api/equipments/{lotId}/inspections")]
     [Authorize]
-    public class EquipmentInspectionsController : GvaApplicationPartController<EquipmentInspectionDO>
+    public class EquipmentInspectionsController : GvaCaseTypePartController<EquipmentInspectionDO>
     {
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
@@ -22,9 +23,10 @@ namespace Gva.Api.Controllers.Equipments
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
+            IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("inspections", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("inspections", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
@@ -33,11 +35,18 @@ namespace Gva.Api.Controllers.Equipments
         [Route("new")]
         public IHttpActionResult GetNewInspection(int lotId, int? appId = null)
         {
-            var applications = new List<ApplicationNomDO>();
+            CaseDO caseDO = null;
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                applications.Add(this.applicationRepository.GetInitApplication(appId));
+                caseDO = new CaseDO()
+                {
+                    IsAdded = true,
+                    Applications = new List<ApplicationNomDO>()
+                    {
+                        this.applicationRepository.GetInitApplication(appId)
+                    }
+                };
             }
 
             EquipmentInspectionDO newInspection = new EquipmentInspectionDO()
@@ -45,7 +54,7 @@ namespace Gva.Api.Controllers.Equipments
                 StartDate = DateTime.Now
             };
 
-            return Ok(new ApplicationPartVersionDO<EquipmentInspectionDO>(newInspection, applications));
+            return Ok(new CaseTypePartDO<EquipmentInspectionDO>(newInspection, caseDO));
         }
     }
 }

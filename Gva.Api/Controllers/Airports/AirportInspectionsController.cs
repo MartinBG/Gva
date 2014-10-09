@@ -6,6 +6,7 @@ using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Airports;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -13,7 +14,7 @@ namespace Gva.Api.Controllers.Airports
 {
     [RoutePrefix("api/airports/{lotId}/inspections")]
     [Authorize]
-    public class AirportInspectionsController : GvaApplicationPartController<AirportInspectionDO>
+    public class AirportInspectionsController : GvaCaseTypePartController<AirportInspectionDO>
     {
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
@@ -22,9 +23,10 @@ namespace Gva.Api.Controllers.Airports
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
+            IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("inspections", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("inspections", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
@@ -33,11 +35,18 @@ namespace Gva.Api.Controllers.Airports
         [Route("new")]
         public IHttpActionResult GetNewInspection(int lotId, int? appId = null)
         {
-            var applications = new List<ApplicationNomDO>();
+            CaseDO caseDO = null;
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                applications.Add(this.applicationRepository.GetInitApplication(appId));
+                caseDO = new CaseDO()
+                {
+                    IsAdded = true,
+                    Applications = new List<ApplicationNomDO>()
+                    {
+                        this.applicationRepository.GetInitApplication(appId)
+                    }
+                };
             }
 
             AirportInspectionDO newInspection = new AirportInspectionDO()
@@ -45,7 +54,7 @@ namespace Gva.Api.Controllers.Airports
                 StartDate = DateTime.Now
             };
 
-            return Ok(new ApplicationPartVersionDO<AirportInspectionDO>(newInspection, applications));
+            return Ok(new CaseTypePartDO<AirportInspectionDO>(newInspection, caseDO));
         }
     }
 }
