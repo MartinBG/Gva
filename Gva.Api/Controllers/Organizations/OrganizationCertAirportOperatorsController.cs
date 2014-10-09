@@ -13,19 +13,18 @@ namespace Gva.Api.Controllers.Organizations
 {
     [RoutePrefix("api/organizations/{lotId}/organizationCertAirportOperators")]
     [Authorize]
-    public class OrganizationCertAirportOperatorsController : GvaApplicationPartController<OrganizationCertAirportOperatorDO>
+    public class OrganizationCertAirportOperatorsController : GvaSimplePartController<OrganizationCertAirportOperatorDO>
     {
         private INomRepository nomRepository;
 
         public OrganizationCertAirportOperatorsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IApplicationRepository applicationRepository,
             IOrganizationRepository organizationRepository,
             INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("organizationCertAirportOperators", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("organizationCertAirportOperators", unitOfWork, lotRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
         }
@@ -36,7 +35,7 @@ namespace Gva.Api.Controllers.Organizations
             OrganizationCertAirportOperatorDO certificate = new OrganizationCertAirportOperatorDO();
             certificate.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
-            return Ok(new ApplicationPartVersionDO<OrganizationCertAirportOperatorDO>(certificate));
+            return Ok(new SimplePartDO<OrganizationCertAirportOperatorDO>(certificate));
         }
     }
 }

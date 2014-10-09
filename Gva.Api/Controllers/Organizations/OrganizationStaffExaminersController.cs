@@ -14,19 +14,18 @@ namespace Gva.Api.Controllers.Organizations
 {
     [RoutePrefix("api/organizations/{lotId}/organizationStaffExaminers")]
     [Authorize]
-    public class OrganizationStaffExaminersController : GvaApplicationPartController<OrganizationStaffExaminerDO>
+    public class OrganizationStaffExaminersController : GvaSimplePartController<OrganizationStaffExaminerDO>
     {
         private INomRepository nomRepository;
 
         public OrganizationStaffExaminersController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IApplicationRepository applicationRepository,
             IOrganizationRepository organizationRepository,
             INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("organizationStaffExaminers", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("organizationStaffExaminers", unitOfWork, lotRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
         }
@@ -37,7 +36,7 @@ namespace Gva.Api.Controllers.Organizations
             OrganizationStaffExaminerDO newStaffExaminer = new OrganizationStaffExaminerDO();
             newStaffExaminer.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
-            return Ok(new ApplicationPartVersionDO<OrganizationStaffExaminerDO>(newStaffExaminer));
+            return Ok(new SimplePartDO<OrganizationStaffExaminerDO>(newStaffExaminer));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Gva.Api.Controllers.Organizations
 {
     [RoutePrefix("api/organizations/{lotId}/organizationRecommendations")]
     [Authorize]
-    public class OrganizationRecommendationsController : GvaApplicationPartController<OrganizationRecommendationDO>
+    public class OrganizationRecommendationsController : GvaSimplePartController<OrganizationRecommendationDO>
     {
         private ILotRepository lotRepository;
         private IOrganizationRepository organizationRepository;
@@ -25,10 +25,9 @@ namespace Gva.Api.Controllers.Organizations
             IUnitOfWork unitOfWork,
             IOrganizationRepository organizationRepository,
             ILotRepository lotRepository,
-            IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("organizationRecommendations", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("organizationRecommendations", unitOfWork, lotRepository, lotEventDispatcher, userContext)
         {
             this.lotRepository = lotRepository;
             this.unitOfWork = unitOfWork;
@@ -40,7 +39,7 @@ namespace Gva.Api.Controllers.Organizations
         {
             OrganizationRecommendationDO newRecommendation = new OrganizationRecommendationDO();
 
-            return Ok(new ApplicationPartVersionDO<OrganizationRecommendationDO>(newRecommendation));
+            return Ok(new SimplePartDO<OrganizationRecommendationDO>(newRecommendation));
         }
 
         [Route("views")]

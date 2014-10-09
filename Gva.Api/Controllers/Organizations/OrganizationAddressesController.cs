@@ -13,19 +13,18 @@ namespace Gva.Api.Controllers.Organizations
 {
     [RoutePrefix("api/organizations/{lotId}/organizationAddresses")]
     [Authorize]
-    public class OrganizationAddressesController : GvaApplicationPartController<OrganizationAddressDO>
+    public class OrganizationAddressesController : GvaSimplePartController<OrganizationAddressDO>
     {
         private INomRepository nomRepository;
 
         public OrganizationAddressesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IApplicationRepository applicationRepository,
             IOrganizationRepository organizationRepository,
             INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("organizationAddresses", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("organizationAddresses", unitOfWork, lotRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
         }
@@ -36,7 +35,7 @@ namespace Gva.Api.Controllers.Organizations
             OrganizationAddressDO newAddress = new OrganizationAddressDO();
             newAddress.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
-            return Ok(new ApplicationPartVersionDO<OrganizationAddressDO>(newAddress));
+            return Ok(new SimplePartDO<OrganizationAddressDO>(newAddress));
         }
     }
 }
