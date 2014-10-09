@@ -1,8 +1,8 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
-  <div class="row" ng-if="staffType.alias === 'to_suvd'">
+  <div class="row" ng-if="caseType.alias === 'to_suvd'">
     <sc-field type="nomenclature" ng-model="model.part.ratingSubClasses" alias="'ratingSubClasses'" multiple="multiple" l10n-text="persons.ratingEditionDirective.subclasses" class="col-sm-5"></sc-field>
   </div>
-  <div class="row" ng-if="staffType.alias === 'to_suvd' || staffType.alias === 'to_vs'">
+  <div class="row" ng-if="caseType.alias === 'to_suvd' || caseType.alias === 'to_vs'">
     <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'limitations66'" multiple="multiple" l10n-text="persons.ratingEditionDirective.limitations" class="col-sm-5"></sc-field>
   </div>
   <div class="row">
@@ -20,8 +20,9 @@
   </div>
   <div class="row">
     <div class="form-group col-sm-9 col-md-7">
-      <label class="control-label" l10n-text="persons.ratingEditionDirective.applications"></label>
-      <gva-applications ng-model="model.applications" set-part="'person'" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="model.case"
+        sc-form-params="{ setPart: 'person', lotId: lotId, hideFiles: true }">
+      </gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

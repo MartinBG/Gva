@@ -6,6 +6,8 @@ using Common.Json;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
 using Regs.Api.Models;
+using Gva.Api.Repositories.FileRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 
 namespace Gva.Api.WordTemplates
 {
@@ -58,14 +60,20 @@ namespace Gva.Api.WordTemplates
 
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
+        private IFileRepository fileRepository;
+        private ICaseTypeRepository caseTypeRepository;
         private int number;
 
         public ControllerLicence(
             ILotRepository lotRepository,
-            INomRepository nomRepository)
+            INomRepository nomRepository,
+            IFileRepository fileRepository,
+            ICaseTypeRepository caseTypeRepository)
         {
             this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
+            this.fileRepository = fileRepository;
+            this.caseTypeRepository = caseTypeRepository;
             this.number = 1;
         }
 
@@ -246,8 +254,10 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetEndorsements2(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
+            int caseTypeId = this.caseTypeRepository.GetCaseType("ovd").GvaCaseTypeId;
+                
             var result = includedRatings
-                .Where(r => r.Content.StaffType.Alias == "ovd")
+                .Where(r => this.fileRepository.GetFileReference(r.PartId, caseTypeId) != null)
                 .Select(r =>
                 {
                     {
@@ -274,6 +284,7 @@ namespace Gva.Api.WordTemplates
                 }).ToList<object>();
 
             result = Utils.FillBlankData(result, 9);
+
             return result;
         }
 

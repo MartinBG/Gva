@@ -5,6 +5,9 @@ using Common.Json;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
 using Regs.Api.Models;
+using Gva.Api.ModelsDO;
+using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.FileRepository;
 
 namespace Gva.Api.WordTemplates
 {
@@ -13,13 +16,19 @@ namespace Gva.Api.WordTemplates
 
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
+        private IFileRepository fileRepository;
+        private ICaseTypeRepository caseTypeRepository;
 
         public RVD_Licence(
             ILotRepository lotRepository,
-            INomRepository nomRepository)
+            INomRepository nomRepository,
+            IFileRepository fileRepository,
+            ICaseTypeRepository caseTypeRepository)
         {
             this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
+            this.fileRepository = fileRepository;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         public string[] TemplateNames
@@ -197,8 +206,10 @@ namespace Gva.Api.WordTemplates
 
         private object[] GetClasses(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
+            int caseTypeId = this.caseTypeRepository.GetCaseType("to_suvd").GvaCaseTypeId;
+
             return includedRatings
-                .Where(r => r.Content.StaffType.Code == "M")
+                .Where(r => this.fileRepository.GetFileReference(r.PartId, caseTypeId) != null)
                 .Select(r =>
                 {
                     var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();

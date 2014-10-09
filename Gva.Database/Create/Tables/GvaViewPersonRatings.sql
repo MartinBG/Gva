@@ -18,8 +18,8 @@ CREATE TABLE [dbo].[GvaViewPersonRatings] (
     [LastDocDateValidTo]       DATETIME2         NULL,
     [FirstDocDateValidFrom]    DATETIME2         NOT NULL,
     [Notes]                    NVARCHAR(MAX)     NULL,
-    [NotesAlt]                 NVARCHAR(MAX)     NULL
-
+    [NotesAlt]                 NVARCHAR(MAX)     NULL,
+	[GvaCaseTypeId]            INT               NULL,
     CONSTRAINT [PK_GvaViewPersonRatings]                        PRIMARY KEY ([LotId], [LotPartId]),
     CONSTRAINT [FK_GvaViewPersonRatings_GvaViewPersons]         FOREIGN KEY ([LotId])                                  REFERENCES [dbo].[GvaViewPersons] ([LotId]),
     CONSTRAINT [FK_GvaViewPersonRatings_LotParts]               FOREIGN KEY ([LotPartId])                              REFERENCES [dbo].[LotParts] ([LotPartId]),
@@ -47,4 +47,5 @@ exec spDescColumn N'GvaViewPersonRatings', N'LastDocDateValidTo'       , N'Да�
 exec spDescColumn N'GvaViewPersonRatings', N'FirstDocDateValidFrom'    , N'Дата на вписване на първото вписване.'
 exec spDescColumn N'GvaViewPersonRatings', N'Notes'                    , N'Бележки към последното вписване.'
 exec spDescColumn N'GvaViewPersonRatings', N'NotesAlt'                 , N'Бележки лат. към последното вписване.'
+exec spDescColumn N'GvaViewPersonRatings', N'GvaCaseTypeId'            , N'Идентификатор на типа дело на квалификация.'
 GO

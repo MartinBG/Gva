@@ -32,7 +32,8 @@
             .save({
               id: $stateParams.id,
               ind: $stateParams.ind,
-              index: $stateParams.index
+              index: $stateParams.index,
+              caseTypeId: $scope.caseTypeId
             }, $scope.currentRatingEdition)
             .$promise
             .then(function (edition) {

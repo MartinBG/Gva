@@ -55,7 +55,13 @@
 
     <div class="well-sm panel-body">
       <gva-rating-edition name="ratingEditionForm" ng-model="currentRatingEdition"
-        sc-form-params="{ lotId: lotId }" sc-data-staff-type="rating.part.staffType">
+        sc-form-params="{
+          isNew: false,
+          lotId: lotId,
+          caseTypeId: caseTypeId,
+          appId: appId,
+          rating: rating.partIndex
+        }">
       </gva-rating-edition>
     </div>
   </div>

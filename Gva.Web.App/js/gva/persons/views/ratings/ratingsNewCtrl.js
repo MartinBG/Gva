@@ -7,19 +7,38 @@
     $state,
     $stateParams,
     PersonRatings,
+    PersonRatingEditions,
     newRating
   ) {
     $scope.newRating = newRating;
+    $scope.newEdition = null;
     $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
+    $scope.appId = $stateParams.appId;
+
+     $scope.$watch('newRating.case.caseType', function () {
+       if ($scope.newRating['case'].caseType) {
+         PersonRatingEditions.newRatingEdition({
+           id: $scope.lotId,
+           appId: $scope.appId,
+           caseTypeId: newRating['case'].caseType.nomValueId
+         }).$promise.then(function (edition) {
+           $scope.newEdition = edition;
+         });
+       }
+     });
+ 
 
     $scope.save = function () {
       return $scope.newRatingForm.$validate().then(function () {
           if ($scope.newRatingForm.$valid) {
-            return PersonRatings
-              .save({ id: $stateParams.id }, $scope.newRating).$promise
-              .then(function () {
-                return $state.go('root.persons.view.ratings.search');
-              });
+            return PersonRatings.save({ id: $stateParams.id }, {
+              rating: $scope.newRating,
+              edition: $scope.newEdition
+            }).$promise
+            .then(function () {
+              return $state.go('root.persons.view.ratings.search');
+            });
           }
         });
     };
@@ -34,6 +53,7 @@
     '$state',
     '$stateParams',
     'PersonRatings',
+    'PersonRatingEditions',
     'newRating'
   ];
 

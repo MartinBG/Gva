@@ -50,7 +50,7 @@ namespace Gva.Api.Repositories.PersonRepository
 
         int GetLastLicenceEditionIndex(int lotId, int licencePartIndex);
 
-        IEnumerable<GvaViewPersonRating> GetRatings(int lotId);
+        IEnumerable<GvaViewPersonRating> GetRatings(int lotId, int? caseTypeId);
 
         int GetLastRatingEditionIndex(int lotId, int ratingPartIndex);
     }

@@ -14,6 +14,8 @@
     $scope.rating = rating;
     $scope.newRatingEdition = newRatingEdition;
     $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
+    $scope.appId = $stateParams.appId;
 
     $scope.save = function () {
       return $scope.newRatingEditionForm.$validate().then(function () {
@@ -52,11 +54,13 @@
     newRatingEdition: [
       '$stateParams',
       'PersonRatingEditions',
-      function ($stateParams, PersonRatingEditions) {
+      'rating',
+      function ($stateParams, PersonRatingEditions, rating) {
         return PersonRatingEditions.newRatingEdition({
           id: $stateParams.id,
-          ind: $stateParams.ind,
-          appId: $stateParams.appId
+          ratingPartIndex: $stateParams.ind,
+          appId: $stateParams.appId,
+          caseTypeId: rating['case'].caseType.nomValueId
         }).$promise;
       }
     ]

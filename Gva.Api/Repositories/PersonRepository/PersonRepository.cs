@@ -237,8 +237,17 @@ namespace Gva.Api.Repositories.PersonRepository
                 .EditionPartIndex;
         }
 
-        public IEnumerable<GvaViewPersonRating> GetRatings(int lotId)
+        public IEnumerable<GvaViewPersonRating> GetRatings(int lotId, int? caseTypeId)
         {
+            
+            var predicate = PredicateBuilder.True<GvaViewPersonRating>()
+                .And(e => e.LotId == lotId);
+
+            if (caseTypeId != null)
+            {
+                predicate = predicate.And(f => f.GvaCaseTypeId == caseTypeId.Value);
+            }
+
             return this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
                 .Include(e => e.Person)
                 .Include(e => e.Part)

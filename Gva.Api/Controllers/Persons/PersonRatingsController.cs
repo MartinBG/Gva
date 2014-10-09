@@ -9,6 +9,7 @@ using Common.Filters;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -17,11 +18,11 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/ratings")]
     [Authorize]
-    public class PersonRatingsController : GvaApplicationPartController<PersonRatingDO>
+    public class PersonRatingsController : GvaCaseTypePartController<PersonRatingDO>
     {
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
-        private IApplicationRepository applicationRepository;
+        private IFileRepository fileRepository;
         private IPersonRepository personRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private INomRepository nomRepository;
@@ -30,16 +31,16 @@ namespace Gva.Api.Controllers.Persons
         public PersonRatingsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IApplicationRepository applicationRepository,
+            IFileRepository fileRepository,
             IPersonRepository personRepository,
             ILotEventDispatcher lotEventDispatcher,
             INomRepository nomRepository,
             UserContext userContext)
-            : base("ratings", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("ratings", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
-            this.applicationRepository = applicationRepository;
+            this.fileRepository = fileRepository;
             this.personRepository = personRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.nomRepository = nomRepository;
@@ -49,33 +50,16 @@ namespace Gva.Api.Controllers.Persons
         [Route("new")]
         public IHttpActionResult GetNewRating(int lotId, int? appId = null)
         {
-            var applications = new List<ApplicationNomDO>();
-            if (appId.HasValue)
+            PersonRatingDO rating = new PersonRatingDO()
             {
-                this.lotRepository.GetLotIndex(lotId);
-                applications.Add(this.applicationRepository.GetInitApplication(appId));
-            }
-
-            PersonRatingEditionDO edition = new PersonRatingEditionDO()
-            {
-                Index = 0,
-                DocumentDateValidFrom = DateTime.Now
+                Caa = this.nomRepository.GetNomValue("caa", "BG")
             };
 
-            PersonRatingNewDO newRating = new PersonRatingNewDO()
-            {
-                Rating = new ApplicationPartVersionDO<PersonRatingDO>(new PersonRatingDO()
-                {
-                    Caa = this.nomRepository.GetNomValue("caa", "BG")
-                }),
-                Edition = new ApplicationPartVersionDO<PersonRatingEditionDO>(edition, applications)
-            };
-
-            return Ok(newRating);
+            return Ok(new CaseTypePartDO<PersonRatingDO>(rating, new CaseDO()));
         }
 
         [NonAction]
-        public override IHttpActionResult PostNewPart(int lotId, ApplicationPartVersionDO<PersonRatingDO> partVersionDO)
+        public override IHttpActionResult PostNewPart(int lotId, CaseTypePartDO<PersonRatingDO> partVersionDO)
         {
             throw new NotSupportedException();
         }
@@ -89,12 +73,20 @@ namespace Gva.Api.Controllers.Persons
                 var lot = this.lotRepository.GetLotIndex(lotId);
 
                 var ratingPartVersion = lot.CreatePart("ratings/*", newRating.Rating.Part, this.userContext);
+                this.fileRepository.AddFileReference(ratingPartVersion.Part, newRating.Rating.Case);
 
-                newRating.Edition.Part.RatingPartIndex = ratingPartVersion.Part.Index;
+                newRating.Edition = new CaseTypePartDO<PersonRatingEditionDO>()
+                {
+                    Part = new PersonRatingEditionDO()
+                    {
+                        RatingPartIndex = ratingPartVersion.Part.Index,
+                        DocumentDateValidFrom = DateTime.Now
+                    },
+                    Case = newRating.Rating.Case
+                };
 
                 var editionPartVersion = lot.CreatePart("ratingEditions/*", newRating.Edition.Part, this.userContext);
-
-                this.applicationRepository.AddApplicationRefs(editionPartVersion.Part, newRating.Edition.Applications);
+                this.fileRepository.AddFileReference(editionPartVersion.Part, newRating.Edition.Case);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 
@@ -107,15 +99,15 @@ namespace Gva.Api.Controllers.Persons
 
                 return Ok(new PersonRatingNewDO()
                 {
-                    Rating = new ApplicationPartVersionDO<PersonRatingDO>(ratingPartVersion),
-                    Edition = new ApplicationPartVersionDO<PersonRatingEditionDO>(editionPartVersion)
+                    Rating = new CaseTypePartDO<PersonRatingDO>(ratingPartVersion),
+                    Edition = new CaseTypePartDO<PersonRatingEditionDO>(editionPartVersion)
                 });
             }
         }
 
-        public override IHttpActionResult GetParts(int lotId, [FromUri] int[] partIndexes = null)
+        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
-            var ratings = this.personRepository.GetRatings(lotId);
+            var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
 
             return Ok(ratings.Select(d => new GvaViewPersonRatingDO(d)));
         }

@@ -13,6 +13,7 @@
     $scope.lotId = scFormParams.lotId;
     $scope.setPart = scFormParams.setPart;
     $scope.hideApplications = scFormParams.hideApplications;
+    $scope.hideFiles = scFormParams.hideFiles;
 
     $scope.$watch('model', function () {
       if (isMultipleMode) {

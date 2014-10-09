@@ -1971,7 +1971,8 @@
           authorization: 'Разрешение',
           aircraftTypeGroup: 'Тип/Група ВС',
           ratingCategory: 'Категория',
-          administration: 'Администрация'
+          administration: 'Администрация',
+          caseType: 'Тип дело'
         },
         licenceDirective: {
           caseType: 'Тип дело',

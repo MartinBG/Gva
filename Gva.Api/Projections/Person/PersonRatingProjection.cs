@@ -10,16 +10,22 @@ using Regs.Api.Models;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.FileRepository;
 
 namespace Gva.Api.Projections.Person
 {
     public class PersonRatingProjection : Projection<GvaViewPersonRating>
     {
         private INomRepository nomRepository;
+        private IFileRepository fileRepository;
 
-        public PersonRatingProjection(IUnitOfWork unitOfWork, INomRepository nomRepository)
+        public PersonRatingProjection(
+            IUnitOfWork unitOfWork,
+            INomRepository nomRepository,
+            IFileRepository fileRepository)
             : base(unitOfWork, "Person")
         {
+            this.fileRepository = fileRepository;
             this.nomRepository = nomRepository;
         }
 
@@ -44,7 +50,7 @@ namespace Gva.Api.Projections.Person
 
             rating.LotId = personRating.Part.Lot.LotId;
             rating.PartId = personRating.Part.PartId;
-            rating.EditionIndex = lastEdition.Content.Index.Value;
+            rating.EditionIndex = lastEdition.Content.Index;
             rating.RatingPartIndex = personRating.Part.Index;
             rating.EditionPartIndex = lastEdition.Part.Index;
             rating.RatingTypeId = personRating.Content.RatingType != null ? personRating.Content.RatingType.NomValueId : (int?)null;
@@ -56,12 +62,23 @@ namespace Gva.Api.Projections.Person
             rating.RatingSubClasses = ratinSubClasses != null ? string.Join(", ", ratinSubClasses) : null;
             string[] limitations = lastEdition.Content.Limitations != null ? lastEdition.Content.Limitations.Select(t => t.Code).ToArray() : null;
             rating.Limitations = limitations != null ? string.Join(", ", limitations) : null;
-            rating.LastDocDateValidFrom = lastEdition.Content.DocumentDateValidFrom.Value;
+            if (lastEdition.Content.DocumentDateValidFrom.HasValue)
+            {
+                rating.LastDocDateValidFrom = firstEdition.Content.DocumentDateValidFrom.Value;
+            }
             rating.LastDocDateValidTo = lastEdition.Content.DocumentDateValidTo;
-            rating.FirstDocDateValidFrom = firstEdition.Content.DocumentDateValidFrom.Value;
+            if (firstEdition.Content.DocumentDateValidFrom.HasValue)
+            {
+                rating.FirstDocDateValidFrom = firstEdition.Content.DocumentDateValidFrom.Value;
+            }
             rating.Notes = lastEdition.Content.Notes;
             rating.NotesAlt = lastEdition.Content.NotesAlt;
-
+            var file = this.fileRepository.GetFileReference(personRating.Part.PartId, null);
+            if (file != null)
+            {
+                rating.GvaCaseTypeId = file.GvaCaseTypeId;
+            }
+            
             return rating;
         }
     }

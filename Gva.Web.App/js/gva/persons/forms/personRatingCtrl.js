@@ -4,6 +4,7 @@
 
   function PersonRatingCtrl($scope, scFormParams) {
     $scope.isNew = scFormParams.isNew;
+    $scope.caseTypeId = scFormParams.caseTypeId;
   }
 
   PersonRatingCtrl.$inject = ['$scope', 'scFormParams'];
