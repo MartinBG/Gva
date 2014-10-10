@@ -3471,7 +3471,8 @@
           notes: 'Бележки',
           organizationOtherDocumentType: 'Тип документ',
           organizationOtherDocumentRole: 'Роля',
-          valid: 'Действителен'
+          valid: 'Действителен',
+          caseType: 'Тип дело'
         },
         recommendationSearch: {
           newRecommendation: 'Нов доклад',

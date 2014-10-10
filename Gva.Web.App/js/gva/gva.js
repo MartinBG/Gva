@@ -298,7 +298,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationDocumentOther',
-      templateUrl: 'js/gva/organizations/forms/organizationDocumentOther.html'
+      templateUrl: 'js/gva/organizations/forms/organizationDocumentOther.html',
+      controller: 'OrgDocumentOtherCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationEquipment',

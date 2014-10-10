@@ -14,7 +14,7 @@ namespace Gva.Api.Controllers.Organizations
 {
     [RoutePrefix("api/organizations/{lotId}/organizationDocumentOthers")]
     [Authorize]
-    public class OrganizationDocumentOthersController : GvaFilePartController<OrganizationDocumentOtherDO>
+    public class OrganizationDocumentOthersController : GvaCaseTypePartController<OrganizationDocumentOtherDO>
     {
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
@@ -40,21 +40,21 @@ namespace Gva.Api.Controllers.Organizations
                 DocumentDateValidFrom = DateTime.Now
             };
 
-            var cases = new List<CaseDO>();
+            CaseDO caseDO = null;
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                cases.Add(new CaseDO()
+                caseDO = new CaseDO()
                 {
                     IsAdded = true,
                     Applications = new List<ApplicationNomDO>()
                     {
                         this.applicationRepository.GetInitApplication(appId)
                     }
-                });
+                };
             }
 
-            return Ok(new FilePartVersionDO<OrganizationDocumentOtherDO>(newDocumentOther, cases));
+            return Ok(new CaseTypePartDO<OrganizationDocumentOtherDO>(newDocumentOther, caseDO));
         }
     }
 }
