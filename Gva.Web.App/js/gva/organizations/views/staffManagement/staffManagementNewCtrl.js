@@ -11,6 +11,7 @@
   ) {
     $scope.organizationStaffManagement = organizationStaffManagement;
     $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newStaffManagement.$validate()

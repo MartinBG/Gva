@@ -77,7 +77,7 @@ namespace Gva.MigrationTool.Sets
                         {
                             orgCaseTypes.Add(noms["organizationCaseTypes"].ByAlias("approvedOrg"));
                         }
-                        orgCaseTypes.Add(noms["organizationCaseTypes"].ByAlias("org"));
+                        orgCaseTypes.Add(noms["organizationCaseTypes"].ByAlias("others"));
 
                         var organizationData = this.getOrganizationData(organizationId, noms, orgCaseTypes);
 

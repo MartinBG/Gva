@@ -3530,7 +3530,8 @@
           testDate: 'Дата на писмен тест',
           testScore: 'Оценка от писмен тест',
           valid: 'Валиден',
-          applications: 'Заявления'
+          applications: 'Заявления',
+          caseType: 'Тип дело'
         },
         organizationDataDirective: {
           name: 'Наименование',

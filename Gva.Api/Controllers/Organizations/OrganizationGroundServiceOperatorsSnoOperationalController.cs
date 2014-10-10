@@ -5,6 +5,7 @@ using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Organizations;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -13,19 +14,19 @@ namespace Gva.Api.Controllers.Organizations
 {
     [RoutePrefix("api/organizations/{lotId}/organizationGroundServiceOperatorsSnoOperational")]
     [Authorize]
-    public class OrganizationGroundServiceOperatorsSnoOperationalController : GvaApplicationPartController<OrganizationGroundServiceOperatorsSnoOperationalDO>
+    public class OrganizationGroundServiceOperatorsSnoOperationalController : GvaCaseTypePartController<OrganizationGroundServiceOperatorsSnoOperationalDO>
     {
         private INomRepository nomRepository;
 
         public OrganizationGroundServiceOperatorsSnoOperationalController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IApplicationRepository applicationRepository,
+            IFileRepository fileRepository,
             IOrganizationRepository organizationRepository,
             INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("organizationGroundServiceOperatorsSnoOperational", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("organizationGroundServiceOperatorsSnoOperational", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
         }
@@ -36,7 +37,7 @@ namespace Gva.Api.Controllers.Organizations
             OrganizationGroundServiceOperatorsSnoOperationalDO certificate = new OrganizationGroundServiceOperatorsSnoOperationalDO();
             certificate.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
-            return Ok(new ApplicationPartVersionDO<OrganizationGroundServiceOperatorsSnoOperationalDO>(certificate));
+            return Ok(new CaseTypePartDO<OrganizationGroundServiceOperatorsSnoOperationalDO>(certificate));
         }
     }
 }

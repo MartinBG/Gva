@@ -178,10 +178,10 @@ namespace Gva.MigrationTool.Sets
                             lot.CreatePart("organizationRecommendations/*", organizationRecommendation, context);
                         }
 
-                        var organizationManagementStaffs = this.getOrganizationManagementStaff(organizationId, noms, getPersonByApexId);
+                        var organizationManagementStaffs = this.getOrganizationManagementStaff(organizationId, noms, getPersonByApexId, isApprovedOrg);
                         foreach (var organizationManagementStaff in organizationManagementStaffs)
                         {
-                            lot.CreatePart("organizationStaffManagement/*", organizationManagementStaff, context);
+                            addPartWithFiles("organizationStaffManagement/*", organizationManagementStaff);
                         }
 
                         var organizationStaffExaminers = this.getOrganizationStaffExaminers(organizationId, noms, getPersonByApexId);
@@ -328,7 +328,7 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
                                     new JProperty("caseType", isApprovedOrg ?
                                         Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("approvedOrg")) :
-                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("org"))),
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("others"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -640,7 +640,7 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
                                     new JProperty("caseType", isApprovedOrg ?
                                         Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("approvedOrg")) :
-                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("org"))),
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("others"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -1101,25 +1101,44 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        private IList<JObject> getOrganizationManagementStaff(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPersonByApexId)
+        private IList<JObject> getOrganizationManagementStaff(
+            int organizationId,
+            Dictionary<string,
+            Dictionary<string,
+            NomValue>> noms,
+            Func<int?,
+            JObject> getPersonByApexId,
+            bool isApprovedOrg)
         {
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.MANAGEMENT_STAFF WHERE REQUEST_ID IN (SELECT ID FROM CAA_DOC.REQUEST WHERE {0} {1})",
                 new DbClause("1=1"),
                 new DbClause("and APPLICANT_FIRM_ID = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "MANAGEMENT_STAFF",
-                        position = r.Field<string>("POSITION"),
-                        person = getPersonByApexId((int?)r.Field<decimal?>("PERSON_ID")),
-                        testDate = r.Field<DateTime?>("TEST_DATE"),
-                        testScore = noms["testScores"].ByCode(r.Field<string>("TEST_SCORE")),
-                        number = r.Field<decimal?>("REQUEST_ID"),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
-                    }))
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "MANAGEMENT_STAFF",
+                            position = r.Field<string>("POSITION"),
+                            person = getPersonByApexId((int?)r.Field<decimal?>("PERSON_ID")),
+                            testDate = r.Field<DateTime?>("TEST_DATE"),
+                            testScore = noms["testScores"].ByCode(r.Field<string>("TEST_SCORE")),
+                            number = r.Field<decimal?>("REQUEST_ID"),
+                            valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
+                        })),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", isApprovedOrg ?
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("approvedOrg")) :
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("others"))), 
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray()))))))
                 .ToList();
         }
 
