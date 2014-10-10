@@ -12,7 +12,7 @@ VALUES
     (6              , N'Сигурност' , N'security'         ,           0, (select LotSetId from LotSets where Alias = N'Person'      ), (select ClassificationId from Classifications where Alias = N'security'         )),
     (7              , N'Инспектор' , N'inspector'        ,           0, (select LotSetId from LotSets where Alias = N'Person'      ), NULL                                                                            ),
     (8              , N'Проверяващ', N'examiner'         ,           0, (select LotSetId from LotSets where Alias = N'Person'      ), NULL                                                                            ),
-    (9              , N'Общи'      , N'org'              ,           1, (select LotSetId from LotSets where Alias = N'Organization'), (select ClassificationId from Classifications where Alias = N'org'              )),
+    (9              , N'Други'     , N'others'           ,           1, (select LotSetId from LotSets where Alias = N'Organization'), (select ClassificationId from Classifications where Alias = N'org'              )),
     (10             , N'ОО'        , N'approvedOrg'      ,           0, (select LotSetId from LotSets where Alias = N'Organization'), (select ClassificationId from Classifications where Alias = N'approvedOrg'      )),
     (11             , N'ЛО'        , N'airportOperator'  ,           0, (select LotSetId from LotSets where Alias = N'Organization'), (select ClassificationId from Classifications where Alias = N'airportOperator'  )),
     (12             , N'ОНО'       , N'groundSvcOperator',           0, (select LotSetId from LotSets where Alias = N'Organization'), (select ClassificationId from Classifications where Alias = N'groundSvcOperator')),

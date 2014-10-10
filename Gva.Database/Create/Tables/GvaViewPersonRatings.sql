@@ -19,7 +19,7 @@ CREATE TABLE [dbo].[GvaViewPersonRatings] (
     [FirstDocDateValidFrom]    DATETIME2         NOT NULL,
     [Notes]                    NVARCHAR(MAX)     NULL,
     [NotesAlt]                 NVARCHAR(MAX)     NULL,
-	[GvaCaseTypeId]            INT               NULL,
+    [GvaCaseTypeId]            INT               NULL,
     CONSTRAINT [PK_GvaViewPersonRatings]                        PRIMARY KEY ([LotId], [LotPartId]),
     CONSTRAINT [FK_GvaViewPersonRatings_GvaViewPersons]         FOREIGN KEY ([LotId])                                  REFERENCES [dbo].[GvaViewPersons] ([LotId]),
     CONSTRAINT [FK_GvaViewPersonRatings_LotParts]               FOREIGN KEY ([LotPartId])                              REFERENCES [dbo].[LotParts] ([LotPartId]),

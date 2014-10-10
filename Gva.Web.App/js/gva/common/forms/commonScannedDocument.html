@@ -1,10 +1,10 @@
 <ng-form class="form-inline" name="fileForm" sc-validate="{}" sc-form-readonly ng-show="model.length || model">
-  <h5 class="form-header" l10n-text="common.scannedDocumentlDirective.title" style="margin-top:10px;"></h5>
+  <h5 class="form-header" l10n-text="common.scannedDocumentlDirective.title" style="margin-top:10px;" ng-if="!hideFiles"></h5>
 
   <div ng-repeat ="file in files | filter:showFile()">
     <div class="row">
-      <sc-field type="text" ng-model="file.caseType.name" l10n-text="common.scannedDocumentlDirective.caseType" ng-disabled class="col-sm-2"></sc-field>
       <div ng-if="!hideFiles">
+        <sc-field type="text" ng-model="file.caseType.name" l10n-text="common.scannedDocumentlDirective.caseType" ng-disabled class="col-sm-2"></sc-field>
         <sc-field type="text" ng-model="file.bookPageNumber" ng-required="true" sc-validate="{ unique: isUniqueBPN(file) }" validations="{unique: 'errorTexts.notUniqueBPN'}" l10n-text="common.scannedDocumentlDirective.bookPageNumber" class="col-sm-2 col-md-1"></sc-field>
         <sc-field type="int" ng-model="file.pageCount" min="0" l10n-text="common.scannedDocumentlDirective.pageCount" validations="{min: 'default'}" class="col-sm-2 col-md-1"></sc-field>
         <div class="form-group col-sm-3">
