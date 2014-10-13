@@ -1868,32 +1868,17 @@
           caseType: 'Тип дело'
         },
         personCheckDirective: {
-          documentNumber: '№ на документа',
-          documentPersonNumber: '№ в списъка',
-          personCheckDocumentType: 'Тип документ',
-          documentDateValidFrom: 'От дата',
-          documentDateValidTo: 'Валидно до',
-          documentPublisher: 'Издател',
           ratingClass: 'Клас ВС',
           authorization: 'Разрешение',
           licenceType: 'Вид правоспособност',
           personCheckRatingValue: 'Оценка',
-          personCheckDocumentRole: 'Роля на документ',
           aircraftTypeGroup: 'Тип/Група ВС',
-          valid: 'Валиден',
           notes: 'Бележки',
           sector: 'Сектор/работно място',
           locationIndicator: 'Индикатор на местоположение',
-          ratingType: 'Тип ВС',
-          caseType: 'Тип дело'
+          ratingType: 'Тип ВС'
         },
         personDocumentTrainingDirective: {
-          caseType: 'Тип дело',
-          documentNumber: '№ на документ',
-          documentPersonNumber: '№ в списъка (групов документ)',
-          documentDateValidFrom: 'Дата на завършване',
-          documentDateValidTo: 'Срок на валидност',
-          documentPublisher: 'Издател',
           ratingType: 'Тип ВС',
           aircraftTypeGroup: 'Тип/Група ВС',
           ratingClass: 'Клас ВС',
@@ -1902,9 +1887,6 @@
           locationIndicator: 'Индикатор за местоположение',
           sector: 'Сектор/работно място',
           engLangLevel: 'Ниво на език',
-          personOtherDocumentType: 'Тип документ',
-          personOtherDocumentRole: 'Роля на документ',
-          valid: 'Валиден',
           notes: 'Бележки'
         },
         personFlyingExperienceDirective: {
@@ -2093,19 +2075,19 @@
           },
           applications: 'Заявления'
         },
-        personOtherDirective: {
+        personCommonDocDirective: {
+          caseType: 'Тип дело',
+          documentPublisher: 'Издател',
+          valid: 'Валиден',
           documentNumber: 'Док No',
-          documentPersonNumber: 'No в списъка (групов документ)',
+          documentPersonNumber: 'No в списъка',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
-          documentPublisher: 'Издател',
-          notes: 'Бележки',
-          personOtherDocumentType: 'Тип документ',
-          personOtherDocumentRole: 'Роля',
-          valid: 'Действителен',
-          bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.',
-          caseType: 'Тип дело'
+          personDocumentType: 'Тип документ',
+          personDocumentRole: 'Роля на документ'
+        },
+        personOtherDirective: {
+          notes: 'Бележки'
         },
         personDocApplicationSearch: {
           newApplication: 'Ново заявление',

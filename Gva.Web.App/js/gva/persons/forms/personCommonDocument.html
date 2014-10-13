@@ -1,0 +1,31 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row">
+    <div class="form-group col-sm-3 col-md-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="persons.personCommonDocDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" ng-required="true" case-type="caseTypeId"></gva-case-type>
+    </div>
+  </div>
+
+  <div class="row">
+    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personCommonDocDirective.documentNumber" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="int" ng-model="model.part.documentPersonNumber" l10n-text="persons.personCommonDocDirective.documentPersonNumber" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.personCommonDocDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidTo" l10n-text="persons.personCommonDocDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
+  </div>
+
+  <div class="row">
+    <sc-field-group class="col-sm-6 col-md-4" text="persons.personCommonDocDirective.documentPublisher" validations="{required: 'default'}" field-name="documentPublisher">
+      <sc-text ng-model="model.part.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="form.$readonly"></sc-text>
+      <sc-button class="btn btn-default" btn-click="choosePublisher()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
+    </sc-field-group>
+    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="persons.personCommonDocDirective.valid" class="col-sm-3 col-md-2"></sc-field>
+  </div>
+
+  <div class="row">
+    <sc-field type="nomenclature" ng-model="model.part.documentRole" alias="'documentRoles'" ng-required="true" params="{ categoryAlias: categoryAlias, caseTypeAliases: [model.case.caseType.alias] }" l10n-text="persons.personCommonDocDirective.personDocumentRole"
+      class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.documentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, caseTypeAliases: [model.case.caseType.alias] }" l10n-text="persons.personCommonDocDirective.personDocumentType"
+      class="col-sm-6 col-md-4"></sc-field>
+  </div>
+</ng-form>

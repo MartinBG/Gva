@@ -88,6 +88,11 @@
       controller: 'PersonDocumentEmploymentCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaPersonCommonDoc',
+      templateUrl: 'js/gva/persons/forms/personCommonDocument.html',
+      controller: 'PersonCommonDocCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonDocumentCheck',
       templateUrl: 'js/gva/persons/forms/personDocumentCheck.html',
       controller: 'PersonDocumentCheckCtrl'
