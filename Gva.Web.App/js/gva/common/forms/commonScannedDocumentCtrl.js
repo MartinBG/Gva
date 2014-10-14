@@ -32,6 +32,10 @@
 
     $scope.isUniqueBPN = function (file) {
       return function () {
+        if (!file.bookPageNumber) {
+          return true;
+        }
+
         return GvaParts.isUniqueBPN({
           lotId: scFormParams.lotId,
           caseTypeId: file.caseType.nomValueId,
