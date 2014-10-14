@@ -9,6 +9,7 @@
     scMessage,
     Persons,
     PersonRatings,
+    PersonDocumentLangCerts,
     PersonDocumentExams,
     PersonDocumentTrainings,
     PersonDocumentChecks,
@@ -22,6 +23,7 @@
     $q.all([
       Persons.get({ id: scFormParams.lotId }).$promise,
       PersonRatings.query({ id: scFormParams.lotId }).$promise,
+      PersonDocumentLangCerts.query({ id: scFormParams.lotId }).$promise,
       PersonDocumentExams.query({ id: scFormParams.lotId }).$promise,
       PersonDocumentTrainings.query({ id: scFormParams.lotId }).$promise,
       PersonDocumentChecks.query({ id: scFormParams.lotId }).$promise,
@@ -30,11 +32,12 @@
     ]).then(function (results) {
       $scope.person = results[0];
       var ratings = results[1],
-          exams = results[2],
-          trainings = results[3],
-          checks = results[4],
-          medicals = results[5],
-          licences = results[6];
+          langCerts = results[2],
+          exams = results[3],
+          trainings = results[4],
+          checks = results[5],
+          medicals = results[6],
+          licences = results[7];
 
       var unbindWatcher = $scope.$watch('model', function () {
         if (!$scope.model) {
@@ -47,6 +50,14 @@
         });
         $scope.$watchCollection('includedRatings', function () {
           $scope.model.part.includedRatings = _.pluck($scope.includedRatings, 'partIndex');
+        });
+
+        $scope.model.part.includedLangCerts = $scope.model.part.includedLangCerts || [];
+        $scope.includedLangCerts = _.map($scope.model.part.includedLangCerts, function (ind) {
+          return _.find(langCerts, { partIndex: ind });
+        });
+        $scope.$watchCollection('includedLangCerts', function () {
+          $scope.model.part.includedLangCerts = _.pluck($scope.includedLangCerts, 'partIndex');
         });
 
         $scope.model.part.includedExams = $scope.model.part.includedExams || [];
@@ -138,6 +149,53 @@
         .then(function (result) {
           if (result === 'OK') {
             $scope.includedRatings = _.without($scope.includedRatings, rating);
+          }
+        });
+    };
+
+    $scope.addLangCert = function () {
+      var modalInstance = scModal.open('newLangCert', {
+        lotId: scFormParams.lotId,
+        caseTypeId: scFormParams.caseTypeId,
+        appId: scFormParams.appId
+      });
+
+      modalInstance.result.then(function (newLangCert) {
+        PersonDocumentLangCerts.query({
+          id: scFormParams.lotId
+        }).$promise.then(function (langCerts) {
+          var langCert = null;
+          _.find(langCerts, function (lc) {
+            if (lc.partIndex === newLangCert.partIndex) {
+              langCert = lc;
+            }
+          });
+          $scope.includedLangCerts.push(langCert);
+        });
+
+      });
+
+      return modalInstance.opened;
+    };
+
+    $scope.addExistingLangCert = function () {
+      var modalInstance = scModal.open('chooseLangCerts', {
+        includedLangCerts: $scope.model.part.includedLangCerts,
+        lotId: scFormParams.lotId
+      });
+
+      modalInstance.result.then(function (selectedLangCerts) {
+        $scope.includedLangCerts = $scope.includedLangCerts.concat(selectedLangCerts);
+      });
+
+      return modalInstance.opened;
+    };
+
+    $scope.removeLangCert = function (langCert) {
+      return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            $scope.includedLangCerts = _.without($scope.includedLangCerts, langCert);
           }
         });
     };
@@ -323,6 +381,7 @@
     'scMessage',
     'Persons',
     'PersonRatings',
+    'PersonDocumentLangCerts',
     'PersonDocumentExams',
     'PersonDocumentTrainings',
     'PersonDocumentChecks',

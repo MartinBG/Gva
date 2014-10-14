@@ -690,6 +690,23 @@ namespace Gva.Api.Controllers
             return Ok(nomValues);
         }
 
+        [Route("langLevels")]
+        public IHttpActionResult GetLangLevels(string roleAlias = null, string term = null, int offset = 0, int? limit = null)
+        {
+            var langLevels = this.nomRepository.GetNomValues(
+                alias: "langLevels",
+                term: term,
+                offset: offset,
+                limit: limit);
+
+            if (!string.IsNullOrEmpty(roleAlias))
+            {
+                langLevels = langLevels.Where(l => l.TextContent.GetItems<string>("roleAliases").Contains(roleAlias));
+            }
+
+            return Ok(langLevels.OrderBy(l => l.TextContent.Get<int?>("seqNumber")));
+        }
+
         [Route("appStages")]
         public IHttpActionResult GetAppStages(string term = null)
         {

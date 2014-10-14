@@ -607,6 +607,8 @@
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
+    <Content Include="js\gva\persons\forms\personDocumentLangCert.html" />
+    <Content Include="js\gva\persons\forms\personDocumentLangCertCtrl.js" />
     <Content Include="js\gva\persons\forms\personCommonDocumentCtrl.js" />
     <Content Include="js\gva\persons\forms\personCommonDocument.html" />
     <Content Include="js\gva\persons\forms\personDocumentExamCtrl.js" />
@@ -617,7 +619,18 @@
     <Content Include="js\gva\persons\modals\exams\chooseExamsModalCtrl.js" />
     <Content Include="js\gva\persons\modals\exams\newExamModal.html" />
     <Content Include="js\gva\persons\modals\exams\newExamModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\langCerts\chooseLangCertsModal.html" />
+    <Content Include="js\gva\persons\modals\langCerts\chooseLangCertsModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\langCerts\newLangCertModal.html" />
+    <Content Include="js\gva\persons\modals\langCerts\newLangCertModalCtrl.js" />
+    <Content Include="js\gva\persons\resources\personDocumentLangCerts.js" />
     <Content Include="js\gva\persons\resources\personRatingEditions.js" />
+    <Content Include="js\gva\persons\views\documentLangCerts\langCertsEdit.html" />
+    <Content Include="js\gva\persons\views\documentLangCerts\langCertsEditCtrl.js" />
+    <Content Include="js\gva\persons\views\documentLangCerts\langCertsNew.html" />
+    <Content Include="js\gva\persons\views\documentLangCerts\langCertsNewCtrl.js" />
+    <Content Include="js\gva\persons\views\documentLangCerts\langCertsSearch.html" />
+    <Content Include="js\gva\persons\views\documentLangCerts\langCertsSearchCtrl.js" />
     <Content Include="js\gva\persons\views\ratings\ratingEditions\ratingEditionsEdit.html" />
     <Content Include="js\gva\persons\views\ratings\ratingEditions\ratingEditionsEditCtrl.js" />
     <Content Include="js\gva\persons\views\ratings\ratingEditions\ratingEditionsNew.html" />

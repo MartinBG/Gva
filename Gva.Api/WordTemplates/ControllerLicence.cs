@@ -110,6 +110,8 @@ namespace Gva.Api.WordTemplates
             var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
+            var includedLangCerts = lastEdition.IncludedLangCerts
+                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
 
@@ -129,7 +131,7 @@ namespace Gva.Api.WordTemplates
                 personAddress.Address);
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings);
-            var langLevel = this.GetEngLevel(includedTrainings);
+            var langLevel = this.GetEngLevel(includedLangCerts);
             var endorsements2 = this.GetEndorsements2(includedRatings, ratingEditions);
             var abbreviations = this.GetAbbreviations(licenceType.Code);
 
@@ -288,22 +290,21 @@ namespace Gva.Api.WordTemplates
             return result;
         }
 
-        private object GetEngLevel(IEnumerable<PersonTrainingDO> includedTrainings)
+        private object GetEngLevel(IEnumerable<PersonLangCertDO> includedLangCerts)
         {
-            var engTrainings = includedTrainings
-                .Where(t => t.DocumentRole.Alias == "engTraining");
+            var engCerts = includedLangCerts
+                .Where(t => t.DocumentRole.Alias == "engCert" && t.LangLevel != null);
 
-            PersonTrainingDO result = new PersonTrainingDO();
-            int currentSeqNumber = 0;
-            foreach (var engTraining in engTrainings)
+            if (engCerts.Count() == 0)
             {
-                int? engLangLevelId = engTraining.EngLangLevel == null ? (int?)null : engTraining.EngLangLevel.NomValueId;
-                if (!engLangLevelId.HasValue)
-                {
-                    continue;
-                }
+                return null;
+            }
 
-                var engLevel = this.nomRepository.GetNomValue("engLangLevels", engLangLevelId.Value);
+            PersonLangCertDO result = new PersonLangCertDO();
+            int currentSeqNumber = 0;
+            foreach (var engCert in engCerts)
+            {
+                var engLevel = this.nomRepository.GetNomValue("langLevels", engCert.LangLevel.NomValueId);
                 int? seqNumber = engLevel.TextContent.Get<int?>("seqNumber");
                 if (!seqNumber.HasValue)
                 {
@@ -312,19 +313,19 @@ namespace Gva.Api.WordTemplates
 
                 if (currentSeqNumber < seqNumber)
                 {
-                    result = engTraining;
+                    result = engCert;
                     currentSeqNumber = seqNumber.Value;
                 }
                 else if (currentSeqNumber == seqNumber &&
-                    DateTime.Compare(result.DocumentDateValidFrom.Value, engTraining.DocumentDateValidFrom.Value) < 0)
+                    DateTime.Compare(result.DocumentDateValidFrom.Value, engCert.DocumentDateValidFrom.Value) < 0)
                 {
-                    result = engTraining;
+                    result = engCert;
                 }
             }
 
             return new
             {
-                LEVEL = result.EngLangLevel == null ? null : result.EngLangLevel.Name,
+                LEVEL = result.LangLevel.Name,
                 ISSUE_DATE = result.DocumentDateValidFrom,
                 VALID_DATE = result.DocumentDateValidTo
             };

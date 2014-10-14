@@ -14,6 +14,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.IncludedRatings = new List<int>();
             this.IncludedExams = new List<int>();
             this.IncludedTrainings = new List<int>();
+            this.IncludedLangCerts = new List<int>();
             this.IncludedChecks = new List<int>();
             this.IncludedMedicals = new List<int>();
             this.IncludedLicences = new List<int>();
@@ -48,6 +49,8 @@ namespace Gva.Api.ModelsDO.Persons
         public List<int> IncludedExams { get; set; }
 
         public List<int> IncludedTrainings { get; set; }
+
+        public List<int> IncludedLangCerts { get; set; }
 
         public List<int> IncludedChecks { get; set; }
 

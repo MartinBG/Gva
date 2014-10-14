@@ -1,0 +1,32 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <gva-person-common-doc name="personDocumenForm" ng-model="model"
+      sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'languageCert' }"></gva-person-common-doc>
+
+  <div ng-show="model.case.caseType">
+    <div class="row">
+      <sc-field type="nomenclature" ng-model="model.part.langLevel" alias="'langLevels'" params="{ roleAlias: model.part.documentRole.alias }" l10n-text="persons.personDocumentLangCertDirective.langLevel" class="col-sm-6 col-md-4"></sc-field>
+    </div>
+
+    <div class="row">
+      <sc-field type="nomenclature" ng-model="model.part.ratingType" alias="'ratingTypes'" ng-disabled="model.part.ratingClass" l10n-text="persons.personDocumentLangCertDirective.ratingType" class="col-sm-6 col-md-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.aircraftTypeGroup" alias="'aircraftTypeGroups'" l10n-text="persons.personDocumentLangCertDirective.aircraftTypeGroup" class="col-sm-6 col-md-4"></sc-field>
+    </div>
+    <div class="row" ng-if="model.case.caseType.alias === 'flightCrew' || model.case.caseType.alias === 'ovd' || model.case.caseType.alias === 'to_vs'">
+      <sc-field type="nomenclature" ng-model="model.part.licenceType" alias="'licenceTypes'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personDocumentLangCertDirective.licenceType" class="col-sm-9 col-md-6"></sc-field>
+    </div>
+
+    <div class="row" ng-if="model.case.caseType.alias === 'ovd'">
+      <sc-field type="nomenclature" ng-model="model.part.locationIndicator" alias="'locationIndicators'" l10n-text="persons.personDocumentLangCertDirective.locationIndicator" class="col-sm-6 col-md-4"></sc-field>
+      <sc-field type="text" ng-model="model.part.sector" l10n-text="persons.personDocumentLangCertDirective.sector" class="col-sm-6 col-md-4"></sc-field>
+    </div>
+
+    <div class="row">
+      <sc-field type="nomenclature" ng-model="model.part.ratingClass" ng-disabled="model.part.ratingType" alias="'ratingClasses'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personDocumentLangCertDirective.ratingClass" class="col-sm-6 col-md-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personDocumentLangCertDirective.authorization" class="col-sm-6 col-md-4"></sc-field>
+    </div>
+
+    <div class="row">
+      <sc-field type="textarea-suggestion" rows="2" ng-model="model.part.notes" alias="'notes'" l10n-text="persons.personDocumentLangCertDirective.notes" class="col-md-8"></sc-field>
+    </div>
+  </div>
+</ng-form>

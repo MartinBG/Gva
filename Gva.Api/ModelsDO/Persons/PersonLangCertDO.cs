@@ -4,7 +4,7 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons
 {
-    public class PersonTrainingDO
+    public class PersonLangCertDO
     {
         public string DocumentNumber { get; set; }
 
@@ -37,6 +37,8 @@ namespace Gva.Api.ModelsDO.Persons
 
         [Required(ErrorMessage = "DocumentRole is required.")]
         public NomValue DocumentRole { get; set; }
+
+        public NomValue LangLevel { get; set; }
 
         [Required(ErrorMessage = "Valid is required.")]
         public NomValue Valid { get; set; }

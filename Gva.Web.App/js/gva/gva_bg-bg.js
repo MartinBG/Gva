@@ -1708,6 +1708,7 @@
           ratings: 'Класове',
           flyingExperiences: 'Летателен / практически опит',
           documentTrainings: 'Обучение',
+          documentLangCerts: 'Свид. за език',
           checks: 'Проверки',
           exams: 'Теор. изпити',
           medicals: 'Медицински',
@@ -1886,7 +1887,17 @@
           licenceType: 'Вид правоспособност',
           locationIndicator: 'Индикатор за местоположение',
           sector: 'Сектор/работно място',
-          engLangLevel: 'Ниво на език',
+          notes: 'Бележки'
+        },
+        personDocumentLangCertDirective: {
+          ratingType: 'Тип ВС',
+          aircraftTypeGroup: 'Тип/Група ВС',
+          ratingClass: 'Клас ВС',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          locationIndicator: 'Индикатор за местоположение',
+          sector: 'Сектор/работно място',
+          langLevel: 'Ниво на език',
           notes: 'Бележки'
         },
         personFlyingExperienceDirective: {
@@ -1995,6 +2006,10 @@
           addExam: 'Нов изпит',
           addExistingExam: 'Съществуващ изпит',
           noExams: 'Няма избрани изпити',
+          langCerts: 'Свидетелства за език към лиценза',
+          addLangCert: 'Ново свидетелство',
+          addExistingLangCert: 'Съществуващо свидетелство',
+          noLangCerts: 'Няма избрани свидетелства',
           trainings: 'Обучения към лиценза',
           addTraining: 'Ново обучение',
           addExistingTraining: 'Съществуващо обучение',
@@ -2012,6 +2027,14 @@
           },
           examsTable: {
             documentNumber: '№ на документа',
+            documentDateValidFrom: 'От дата',
+            documentPublisher: 'Издател',
+            valid: 'Валиден'
+          },
+          langCertsTable: {
+            documentNumber: '№ на документа',
+            langCertType: 'Тип',
+            langLevel: 'Ниво',
             documentDateValidFrom: 'От дата',
             documentPublisher: 'Издател',
             valid: 'Валиден'
@@ -2407,6 +2430,37 @@
           cancel: 'Отказ',
           deleteTraining: 'Изтрий'
         },
+        documentLangCertSearch: {
+          staffType: 'Тип персонал',
+          documentNumber: '№ на документ',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'До дата',
+          documentPublisher: 'Издател',
+          ratingType: 'Тип ВС (раб. място)',
+          ratingClass: 'Клас',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          personOtherDocumentType: 'Тип документ',
+          personOtherDocumentRole: 'Роля на документ',
+          valid: 'Валидно',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл',
+          newDocumentLangCert: 'Нов документ'
+        },
+        newDocumentLangCert: {
+          title: 'Ново свидетелство за език',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editDocumentLangCert: {
+          title: 'Преглед на свидетелство за език',
+          save: 'Запис',
+          edit: 'Редакция',
+          cancel: 'Отказ',
+          deleteLangCert: 'Изтрий'
+        },
         flyingExperienceSearch: {
           staffType: 'Тип персонал',
           month: 'Месец',
@@ -2520,6 +2574,22 @@
         },
         newRatingModal: {
           title: 'Нова квалификация',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        chooseLangCertsModal: {
+          title: 'Избор на свидетелства за език',
+          documentNumber: 'No на свидетелството',
+          documentDateValidFrom: 'От дата',
+          langCertType: 'Тип',
+          langLevel: 'Ниво',
+          documentPublisher: 'Издател',
+          valid: 'Валиден',
+          add: 'Добави',
+          cancel: 'Отказ'
+        },
+        newLangCertModal: {
+          title: 'Нова свидетелство за език',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -3804,9 +3874,12 @@
         'root.persons.view.medicals': 'Медицински',
         'root.persons.view.medicals.new': 'Новo медицинско',
         'root.persons.view.medicals.edit': 'Преглед на медицинско',
-        'root.persons.view.documentTrainings': 'Обучение',
+        'root.persons.view.documentTrainings': 'Обучения',
         'root.persons.view.documentTrainings.new': 'Ново обучение',
         'root.persons.view.documentTrainings.edit': 'Преглед на обучение',
+        'root.persons.view.documentLangCerts': 'Свидетелства за език',
+        'root.persons.view.documentLangCerts.new': 'Ново свидетелство',
+        'root.persons.view.documentLangCerts.edit': 'Преглед на свидетелство',
         'root.persons.view.flyingExperiences': 'Летателен / практически опит',
         'root.persons.view.flyingExperiences.new': 'Нов летателен / практически опит',
         'root.persons.view.flyingExperiences.edit': 'Преглед на летателен / практически опит',

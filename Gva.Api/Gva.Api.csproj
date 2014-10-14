@@ -130,6 +130,7 @@
     <Compile Include="Controllers\Organizations\OrganizationRecommendationsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationGroundServiceOperatorsSnoOperationalController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationApprovalAmendmentsController.cs" />
+    <Compile Include="Controllers\Persons\PersonLanguageCertificatesController.cs" />
     <Compile Include="Controllers\Persons\PersonLicenceEditionsController.cs" />
     <Compile Include="Controllers\Persons\PersonRatingEditionsController.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewFMDO.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonLangCertDO.cs" />
     <Compile Include="ModelsDO\SimplePartDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationlAmendmentDO.cs" />
     <Compile Include="ModelsDO\Organizations\LimitationDO.cs" />
@@ -295,6 +297,7 @@
     <Compile Include="Projections\Inventory\Equipments\EquipmentOtherProjection.cs" />
     <Compile Include="Projections\Inventory\Equipments\EquipmentOwnerProjection.cs" />
     <Compile Include="Projections\Inventory\Organizations\OrganizationOtherProjection.cs" />
+    <Compile Include="Projections\Inventory\Persons\PersonLanguageCertificateProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonCheckProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonDocumentIdProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonEducationProjection.cs" />

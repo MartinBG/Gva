@@ -103,6 +103,11 @@
       controller: 'PersonDocumentTrainingCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaPersonDocumentLangCert',
+      templateUrl: 'js/gva/persons/forms/personDocumentLangCert.html',
+      controller: 'PersonDocumentLangCertCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonDocumentOther',
       templateUrl: 'js/gva/persons/forms/personDocumentOther.html',
       controller: 'PersonDocumentOtherCtrl'
@@ -480,6 +485,10 @@
       .state(['root.persons.view.documentTrainings.search'                 , ''                                                                            , ['@root.persons.view'                 , 'js/gva/persons/views/documentTrainings/trainingsSearch.html'            , 'DocumentTrainingsSearchCtrl'   ]])
       .state(['root.persons.view.documentTrainings.new'                    , '/new'                                                                        , ['@root.persons.view'                 , 'js/gva/persons/views/documentTrainings/trainingsNew.html'               , 'DocumentTrainingsNewCtrl'      ]])
       .state(['root.persons.view.documentTrainings.edit'                   , '/:ind'                                                                       , ['@root.persons.view'                 , 'js/gva/persons/views/documentTrainings/trainingsEdit.html'              , 'DocumentTrainingsEditCtrl'     ]])
+      .state(['root.persons.view.documentLangCerts'                        , '/documentLangCerts'                                                                                                                                                                                                                ])
+      .state(['root.persons.view.documentLangCerts.search'                 , ''                                                                            , ['@root.persons.view'                 , 'js/gva/persons/views/documentLangCerts/langCertsSearch.html'            , 'DocumentLangCertsSearchCtrl'   ]])
+      .state(['root.persons.view.documentLangCerts.new'                    , '/new'                                                                        , ['@root.persons.view'                 , 'js/gva/persons/views/documentLangCerts/langCertsNew.html'               , 'DocumentLangCertsNewCtrl'      ]])
+      .state(['root.persons.view.documentLangCerts.edit'                   , '/:ind'                                                                       , ['@root.persons.view'                 , 'js/gva/persons/views/documentLangCerts/langCertsEdit.html'              , 'DocumentLangCertsEditCtrl'     ]])
       .state(['root.persons.view.flyingExperiences'                        , '/flyingExperiences'                                                                                                                                                                                                                ])
       .state(['root.persons.view.flyingExperiences.search'                 , ''                                                                            , ['@root.persons.view'                 , 'js/gva/persons/views/flyingExperiences/flyExpsSearch.html'              , 'FlyingExperiencesSearchCtrl'   ]])
       .state(['root.persons.view.flyingExperiences.new'                    , '/new'                                                                        , ['@root.persons.view'                 , 'js/gva/persons/views/flyingExperiences/flyExpsNew.html'                 , 'FlyingExperiencesNewCtrl'      ]])
@@ -522,6 +531,8 @@
     .modal('newMedical'      , 'js/gva/persons/modals/medicals/newMedicalModal.html'       , 'NewMedicalModalCtrl'           )
     .modal('chooseExams'     , 'js/gva/persons/modals/exams/chooseExamsModal.html'         , 'ChooseExamsModalCtrl'          )
     .modal('newExam'         , 'js/gva/persons/modals/exams/newExamModal.html'             , 'NewExamModalCtrl'              )
+    .modal('chooseLangCerts' , 'js/gva/persons/modals/langCerts/chooseLangCertsModal.html' , 'ChooseLangCertsModalCtrl'      )
+    .modal('newLangCert'     , 'js/gva/persons/modals/langCerts/newLangCertModal.html'     , 'NewLangCertModalCtrl'          )
     .modal('chooseLicences'  , 'js/gva/persons/modals/licences/chooseLicencesModal.html'   , 'ChooseLicencesModalCtrl'       )
     .modal('editLicence'     , 'js/gva/persons/modals/licences/editLicenceModal.html'      , 'EditLicenceModalCtrl'          )
     .modal('licenceStatuses' , 'js/gva/persons/modals/licences/licenceStatusesModal.html'  , 'LicenceStatusesModalCtrl'      )

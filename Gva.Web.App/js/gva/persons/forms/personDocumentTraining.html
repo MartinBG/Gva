@@ -21,12 +21,6 @@
       <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personDocumentTrainingDirective.authorization" class="col-sm-6 col-md-4"></sc-field>
     </div>
 
-    <div ng-if="model.part.documentRole.alias === 'engTraining'">
-      <div class="row">
-        <sc-field type="nomenclature" ng-model="model.part.engLangLevel" alias="'engLangLevels'" l10n-text="persons.personDocumentTrainingDirective.engLangLevel" class="col-sm-6 col-md-4"></sc-field>
-      </div>
-    </div>
-
     <div class="row">
       <sc-field type="textarea-suggestion" rows="2" ng-model="model.part.notes" alias="'notes'" l10n-text="persons.personDocumentTrainingDirective.notes" class="col-md-8"></sc-field>
     </div>

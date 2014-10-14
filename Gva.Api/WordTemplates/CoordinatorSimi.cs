@@ -52,6 +52,8 @@ namespace Gva.Api.WordTemplates
 
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
+            var includedLangCerts = lastEdition.IncludedLangCerts
+                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i));
             var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
@@ -60,8 +62,7 @@ namespace Gva.Api.WordTemplates
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedExams);
             var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");
 
-            IEnumerable<PersonTrainingDO> engLevels = includedTrainings.Where(t => t.DocumentRole.Alias == "engTraining")
-                .Where(t => t.EngLangLevel != null);
+            IEnumerable<PersonLangCertDO> engLevels = includedLangCerts.Where(t => t.DocumentRole.Alias == "engCert" && t.LangLevel != null);
 
             dynamic lLangLevel = null;
             dynamic tLangLevel = null;
@@ -69,13 +70,13 @@ namespace Gva.Api.WordTemplates
             {
                 lLangLevel = engLevels.Select(l => new
                 {
-                    LEVEL = l.EngLangLevel.Name,
+                    LEVEL = l.LangLevel.Name,
                     VALID_DATE = l.DocumentDateValidTo
                 });
 
-                 tLangLevel = engLevels.Select(l => new
-                 {
-                    LEVEL = l.EngLangLevel.Name,
+                tLangLevel = engLevels.Select(l => new
+                {
+                    LEVEL = l.LangLevel.Name,
                     ISSUE_DATE = l.DocumentDateValidFrom,
                     VALID_DATE = l.DocumentDateValidTo
                 });

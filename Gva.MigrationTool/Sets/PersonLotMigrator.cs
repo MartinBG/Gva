@@ -145,6 +145,7 @@ namespace Gva.MigrationTool.Sets
 
                         var personDocuments = this.getPersonDocuments(personId, nomApplications, noms, appApexIdToStaffTypeCode, blobIdsToFileKeys);
                         Dictionary<int, int> trainingOldIdToPartIndex = new Dictionary<int, int>();
+                        Dictionary<int, int> langCertOldIdToPartIndex = new Dictionary<int, int>();
                         Dictionary<int, int> examOldIdToPartIndex = new Dictionary<int, int>();
                         Dictionary<int, int> checkOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personDocument in personDocuments)
@@ -181,7 +182,6 @@ namespace Gva.MigrationTool.Sets
                                 "documentDateValidFrom",
                                 "documentDateValidTo",
                                 "documentPublisher",
-                                "staffType",
                                 "ratingType",
                                 "aircraftTypeGroup",
                                 "ratingClass",
@@ -200,8 +200,9 @@ namespace Gva.MigrationTool.Sets
                                 checkOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
                             }
                             else if (!(new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
-                              personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") != "6" &&
-                              personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O")
+                                personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O" &&
+                                (personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "ENG" ||
+                                personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "BG"))
                             {
                                 Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
                             {
@@ -213,7 +214,6 @@ namespace Gva.MigrationTool.Sets
                                 "documentDateValidFrom",
                                 "documentDateValidTo",
                                 "documentPublisher",
-                                "staffType",
                                 "ratingType",
                                 "aircraftTypeGroup",
                                 "ratingClass",
@@ -221,24 +221,19 @@ namespace Gva.MigrationTool.Sets
                                 "licenceType",
                                 "locationIndicator",
                                 "sector",
-                                "engLangLevel",
+                                "langLevel",
                                 "documentType",
                                 "documentRole",
                                 "valid",
                                 "notes",
                             });
 
-                                //general document
-                                if (personDocument.Get<JObject>("part.staffType") == null)
-                                {
-                                    personDocument.Get<JObject>("part")["staffType"] = Utils.ToJObject(noms["trainingStaffTypes"].ByOldId("0"));
-                                }
-
-                                var pv = addPartWithFiles("personDocumentTrainings/*", personDocument);
-                                trainingOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
+                                var pv = addPartWithFiles("personDocumentLangCertificates/*", personDocument);
+                                langCertOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
                             }
-                            else if (personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O" &&
-                              personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "6")
+                            else if (!(new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
+                                personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O" &&
+                                personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "6")
                             {
                                 Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
                             {
@@ -256,6 +251,35 @@ namespace Gva.MigrationTool.Sets
 
                                 var pv = addPartWithFiles("personDocumentExams/*", personDocument);
                                 examOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
+                            }
+                            else if (!(new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
+                              personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O")
+                            {
+                                Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
+                            {
+                                "__oldId",
+                                "__migrTable",
+
+                                "documentNumber",
+                                "documentPersonNumber",
+                                "documentDateValidFrom",
+                                "documentDateValidTo",
+                                "documentPublisher",
+                                "ratingType",
+                                "aircraftTypeGroup",
+                                "ratingClass",
+                                "authorization",
+                                "licenceType",
+                                "locationIndicator",
+                                "sector",
+                                "documentType",
+                                "documentRole",
+                                "valid",
+                                "notes",
+                            });
+
+                                var pv = addPartWithFiles("personDocumentTrainings/*", personDocument);
+                                trainingOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
                             }
                             else
                             {
@@ -335,7 +359,7 @@ namespace Gva.MigrationTool.Sets
                             ratingOldIdToPartIndex.Add(personRating.Get<int>("part.__oldId"), ratingPartVersion.Part.Index);
                         }
 
-                        var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
+                        var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, langCertOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
                         var personLicences = this.getPersonLicences(personId, getPersonByApexId, noms, employmentsByOldId);
                         Dictionary<int, int> licenceOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personLicence in personLicences)
@@ -618,7 +642,6 @@ namespace Gva.MigrationTool.Sets
                         documentDateValidFrom = r.Field<DateTime?>("VALID_FROM"),
                         documentDateValidTo = r.Field<DateTime?>("VALID_TO"),
                         documentPublisher = r.Field<string>("DOC_PUBLISHER"),
-                        staffType = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()),
                         ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
                         aircraftTypeGroup = noms["aircraftTypeGroups"].ByOldId(r.Field<long?>("ID_AC_GROUP").ToString()),
                         ratingClass = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
@@ -632,7 +655,7 @@ namespace Gva.MigrationTool.Sets
                         notes = r.Field<string>("NOTES"),
 
                         personCheckRatingValue = noms["personCheckRatingValues"].ByCode(r.Field<string>("RATING_VALUE")),
-                        engLangLevel = noms["engLangLevels"].ByOldId(r.Field<long?>("NM_EN_LANG_ID").ToString()),
+                        langLevel = noms["langLevels"].ByOldId(r.Field<long?>("NM_EN_LANG_ID").ToString()),
                     }))
                 .ToList();
 
@@ -1258,6 +1281,7 @@ namespace Gva.MigrationTool.Sets
             Dictionary<int, int> ratings,
             Dictionary<int, int> medicals,
             Dictionary<int, int> trainings,
+            Dictionary<int, int> langCerts,
             Dictionary<int, int> exams,
             Dictionary<int, int> checks)
         {
@@ -1317,17 +1341,22 @@ namespace Gva.MigrationTool.Sets
                     PERSON_DOCUMENT_ID = r.PERSON_DOCUMENT_ID,
                     examPartIndex = (r.PERSON_DOCUMENT_ID != null && exams.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? exams[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
                     trainingPartIndex = (r.PERSON_DOCUMENT_ID != null && trainings.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? trainings[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
+                    langCertPartIndex = (r.PERSON_DOCUMENT_ID != null && langCerts.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? langCerts[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
                     checkPartIndex = (r.PERSON_DOCUMENT_ID != null && checks.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? checks[r.PERSON_DOCUMENT_ID.Value] : (int?)null
                 });
 
-            foreach (var doc in includedDocuments.Where(d => d.PERSON_DOCUMENT_ID != null && d.trainingPartIndex == null && d.checkPartIndex == null && d.examPartIndex == null))
+            foreach (var doc in includedDocuments.Where(d => d.PERSON_DOCUMENT_ID != null && d.trainingPartIndex == null && d.checkPartIndex == null && d.examPartIndex == null && d.langCertPartIndex == null))
             {
-                Console.WriteLine("PERSON_DOCUMENT_ID {0} included in LICENCE_LOG_ID {1} is not a training, exam or check for PERSON_ID {2}", doc.PERSON_DOCUMENT_ID, doc.LICENCE_LOG_ID, personId);
+                Console.WriteLine("PERSON_DOCUMENT_ID {0} included in LICENCE_LOG_ID {1} is not a training, language certificate, exam or check for PERSON_ID {2}", doc.PERSON_DOCUMENT_ID, doc.LICENCE_LOG_ID, personId);
             }
 
             var includedTrainings = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
                 .ToDictionary(g => g.Key, g => g.Where(r => r.trainingPartIndex != null).Select(r => r.trainingPartIndex.Value).ToArray());
+
+            var includedLangCerts = includedDocuments
+                .GroupBy(r => r.LICENCE_LOG_ID)
+                .ToDictionary(g => g.Key, g => g.Where(r => r.langCertPartIndex != null).Select(r => r.langCertPartIndex.Value).ToArray());
 
             var includedExams = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
@@ -1417,6 +1446,7 @@ namespace Gva.MigrationTool.Sets
                         includedRatings = includedRatings[r.Field<int>("ID")],
                         includedMedicals = includedMedicals[r.Field<int>("ID")],
                         includedTrainings = includedTrainings[r.Field<int>("ID")],
+                        includedLangCerts = includedLangCerts[r.Field<int>("ID")],
                         includedLicences = includedLicences[r.Field<int>("ID")],
                         includedChecks = includedChecks[r.Field<int>("ID")],
                         includedExams = includedExams[r.Field<int>("ID")],
@@ -1462,6 +1492,7 @@ namespace Gva.MigrationTool.Sets
                                     r.includedRatings,
                                     r.includedMedicals,
                                     r.includedTrainings,
+                                    r.includedLangCerts,
                                     r.includedLicences,
                                     r.includedChecks,
 
