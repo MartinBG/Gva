@@ -14,7 +14,7 @@
 
     <div class="well-sm panel-body">
       <gva-common-document-application name="airportDocumentApplicationForm" ng-model="airportDocumentApplication" 
-        sc-form-params="{ lotId: lotId, isNew: true, caseTypeId: caseTypeId }"></gva-common-document-application>
+        sc-form-params="{ lotId: lotId, setPart: 'airport'  }"></gva-common-document-application>
 
       <gva-common-scanned-document name="airportScannedDocumentForm" ng-model="airportDocumentApplication.case"
         sc-form-params="{ setPart: 'airport', lotId: lotId, hideApplications: true }"></gva-common-scanned-document>

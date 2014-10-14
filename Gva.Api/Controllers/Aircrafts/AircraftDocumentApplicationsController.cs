@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Web.Http;
 using Common.Data;
@@ -13,6 +14,8 @@ using Newtonsoft.Json.Linq;
 using Common.Api.UserContext;
 using Regs.Api.Models;
 using Gva.Api.Models;
+using Common.Api.Models;
+using Gva.Api.Repositories.CaseTypeRepository;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
@@ -26,6 +29,7 @@ namespace Gva.Api.Controllers.Aircrafts
         private IApplicationRepository applicationRepository;
         private IUnitOfWork unitOfWork;
         private ILotEventDispatcher lotEventDispatcher;
+        private ICaseTypeRepository caseTypeRepository;
         private UserContext userContext;
 
         public AircraftDocumentApplicationsController(
@@ -33,6 +37,7 @@ namespace Gva.Api.Controllers.Aircrafts
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
+            ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("aircraftDocumentApplications", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
@@ -44,12 +49,24 @@ namespace Gva.Api.Controllers.Aircrafts
             this.unitOfWork = unitOfWork;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewDocumentApplication(int lotId)
         {
-            return Ok(new CaseTypePartDO<DocumentApplicationDO>(new DocumentApplicationDO()));
+            GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
+            CaseDO caseDO = new CaseDO()
+            {
+                CaseType = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                }
+            };
+
+            return Ok(new CaseTypePartDO<DocumentApplicationDO>(new DocumentApplicationDO(), caseDO));
         }
 
         public override IHttpActionResult PostNewPart(int lotId, CaseTypePartDO<DocumentApplicationDO> application)

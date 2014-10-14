@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Linq;
+using System.Web.Http;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
@@ -8,6 +9,9 @@ using Regs.Api.Repositories.LotRepositories;
 using System.Collections.Generic;
 using Common.Api.UserContext;
 using Gva.Api.Repositories.FileRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Models;
+using Common.Api.Models;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
@@ -17,11 +21,13 @@ namespace Gva.Api.Controllers.Aircrafts
     {
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
+        private ICaseTypeRepository caseTypeRepository;
 
         public AircraftInspectionsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
+            ICaseTypeRepository caseTypeRepository,
             IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
@@ -29,22 +35,31 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewInspection(int lotId, int? appId = null)
         {
-            CaseDO caseDO = null;
+            GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
+
+            CaseDO caseDO = new CaseDO() 
+            {
+                CaseType = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                }
+            };
+
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                caseDO = new CaseDO()
+                caseDO.IsAdded = true;
+                caseDO.Applications = new List<ApplicationNomDO>()
                 {
-                    IsAdded = true,
-                    Applications = new List<ApplicationNomDO>()
-                    {
-                        this.applicationRepository.GetInitApplication(appId)
-                    }
+                    this.applicationRepository.GetInitApplication(appId)
                 };
             }
 
