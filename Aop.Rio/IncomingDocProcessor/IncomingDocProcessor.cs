@@ -124,7 +124,7 @@ namespace Aop.Rio.IncomingDocProcessor
                     int docTypeId = this.unitOfWork.DbContext.Set<DocType>().Single(e => e.ElectronicServiceFileTypeUri == electronicServiceFileTypeUri).DocTypeId;
 
                     //Initial Doc
-                    Doc initialDoc = CreateInitialDoc(validationErrors, docTypeId, rootDoc == null, systemUser);
+                    Doc initialDoc = CreateInitialDoc(isDocAcknowledged, validationErrors, docTypeId, rootDoc == null, systemUser);
                     this.unitOfWork.DbContext.Set<Doc>().Add(initialDoc);
 
                     foreach (var correspondent in docCorrespondents)
@@ -328,7 +328,7 @@ namespace Aop.Rio.IncomingDocProcessor
             return returnValue;
         }
 
-        private Doc CreateInitialDoc(List<string> validationErrors, int docTypeId, bool isCase, User user)
+        private Doc CreateInitialDoc(bool isDocAcknowledged, List<string> validationErrors, int docTypeId, bool isCase, User user)
         {
             Doc doc = new Doc();
             doc.DocDirectionId = this.unitOfWork.DbContext.Set<DocDirection>().Where(e => e.Alias == "Incomming").Single().DocDirectionId;
@@ -337,7 +337,14 @@ namespace Aop.Rio.IncomingDocProcessor
             doc.DocSourceTypeId = this.unitOfWork.DbContext.Set<DocSourceType>().Where(e => e.Alias == "Internet").Single().DocSourceTypeId;
             doc.DocStatusId = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.Alias == "Processed").Single().DocStatusId;
             doc.DocDestinationTypeId = null;
-            doc.DocTypeId = docTypeId;
+            if (isDocAcknowledged)
+            {
+                doc.DocTypeId = docTypeId;
+            }
+            else
+            {
+                doc.DocTypeId = this.unitOfWork.DbContext.Set<DocType>().Where(e => e.Alias == "InvalidService").Single().DocTypeId;
+            }
             doc.DocFormatTypeId = this.unitOfWork.DbContext.Set<DocFormatType>().Where(e => e.Alias == "Electronic").Single().DocFormatTypeId;
             doc.DocCasePartTypeId = this.unitOfWork.DbContext.Set<DocCasePartType>().Where(e => e.Alias == "Public").Single().DocCasePartTypeId;
             doc.RegDate = DateTime.Now;
