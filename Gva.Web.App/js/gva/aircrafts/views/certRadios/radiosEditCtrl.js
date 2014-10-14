@@ -12,9 +12,9 @@
   ) {
     var originalRadio = _.cloneDeep(aircraftCertRadio);
 
-    $scope.isEdit = true;
     $scope.radio = aircraftCertRadio;
     $scope.editMode = null;
+    $scope.lotId = $stateParams.id;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';

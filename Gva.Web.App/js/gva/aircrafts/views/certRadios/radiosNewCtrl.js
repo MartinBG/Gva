@@ -9,8 +9,7 @@
     AircraftCertRadios,
     aircraftCertRadio
   ) {
-    $scope.isEdit = false;
-
+    $scope.lotId = $stateParams.id;
     $scope.radio = aircraftCertRadio;
 
     $scope.save = function () {

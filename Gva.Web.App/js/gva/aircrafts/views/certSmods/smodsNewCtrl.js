@@ -9,8 +9,7 @@
     AircraftCertSmods,
     aircraftCertSmod
   ) {
-    $scope.isEdit = false;
-
+    $scope.lotId = $stateParams.id;
     $scope.smod = aircraftCertSmod;
 
     $scope.save = function () {

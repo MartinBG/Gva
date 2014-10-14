@@ -1242,8 +1242,7 @@
           caaTo: 'ГВА писмо до',
           caaJob: 'ГВА писмо длъжност',
           caaToAddress: 'ГВА писмо адрес',
-          getScode: 'Генерирай S-код',
-          applications: 'Заявления'
+          getScode: 'Генерирай S-код'
         },
         markDirective: {
           valid: 'Валиден',
@@ -1324,8 +1323,7 @@
           tcdsn: 'TCDSN',
           tcds: 'TCDS',
           chapter: 'Chapter',
-          additionalModification: 'Допълнителна модификация',
-          applications: 'Заявления'
+          additionalModification: 'Допълнителна модификация'
         },
         radioDirective: {
           certNumber: '№',
@@ -1338,8 +1336,7 @@
           model: 'Модел',
           power: 'Мощност',
           'class': 'Клас на излъчване',
-          bandwidth: 'Честотна лента',
-          applications: 'Заявления'
+          bandwidth: 'Честотна лента'
         },
         regDirective: {
           typeCertTitle: 'Типов сертификат',

@@ -9,8 +9,7 @@
     AircraftCertNoises,
     aircraftCertNoise
   ) {
-    $scope.isEdit = false;
-
+    $scope.lotId = $stateParams.id;
     $scope.noise = aircraftCertNoise;
 
     $scope.save = function () {
