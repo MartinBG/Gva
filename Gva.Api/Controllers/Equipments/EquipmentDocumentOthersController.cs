@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Equipments;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -15,11 +18,13 @@ namespace Gva.Api.Controllers.Equipments
 {
     [RoutePrefix("api/equipments/{lotId}/equipmentDocumentOthers")]
     [Authorize]
-    public class EquipmentDocumentOthersController : GvaFilePartController<EquipmentDocumentOtherDO>
+    public class EquipmentDocumentOthersController : GvaCaseTypePartController<EquipmentDocumentOtherDO>
     {
+        private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
+        private ICaseTypeRepository caseTypeRepository;
 
         public EquipmentDocumentOthersController(
             IUnitOfWork unitOfWork,
@@ -27,6 +32,7 @@ namespace Gva.Api.Controllers.Equipments
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             INomRepository nomRepository,
+            ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("equipmentDocumentOthers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
@@ -34,32 +40,38 @@ namespace Gva.Api.Controllers.Equipments
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
+            this.fileRepository = fileRepository;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewDocumentOther(int lotId, int? appId = null)
         {
-            EquipmentDocumentOtherDO newDocumentOther = new EquipmentDocumentOtherDO()
+            GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("equipment").Single();
+            CaseDO caseDO = new CaseDO()
             {
-                DocumentDateValidFrom = DateTime.Now
+                CaseType = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
             };
-            newDocumentOther.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
-            var cases = new List<CaseDO>();
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                cases.Add(new CaseDO()
-                {
-                    IsAdded = true,
-                    Applications = new List<ApplicationNomDO>()
-                    {
-                        this.applicationRepository.GetInitApplication(appId)
-                    }
-                });
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
             }
 
-            return Ok(new FilePartVersionDO<EquipmentDocumentOtherDO>(newDocumentOther, cases));
+            EquipmentDocumentOtherDO newDocumentOther = new EquipmentDocumentOtherDO()
+            {
+                DocumentDateValidFrom = DateTime.Now,
+                Valid = this.nomRepository.GetNomValue("boolean", "yes")
+            };
+
+            return Ok(new CaseTypePartDO<EquipmentDocumentOtherDO>(newDocumentOther, caseDO));
         }
     }
 }
