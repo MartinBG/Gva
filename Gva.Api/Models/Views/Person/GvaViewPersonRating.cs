@@ -44,8 +44,6 @@ namespace Gva.Api.Models.Views.Person
 
         public string NotesAlt { get; set; }
 
-        public int? GvaCaseTypeId { get; set; }
-
         public virtual GvaViewPerson Person { get; set; }
 
         public virtual Part Part { get; set; }
@@ -95,7 +93,6 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.FirstDocDateValidFrom).HasColumnName("FirstDocDateValidFrom");
             this.Property(t => t.Notes).HasColumnName("Notes");
             this.Property(t => t.NotesAlt).HasColumnName("NotesAlt");
-            this.Property(t => t.GvaCaseTypeId).HasColumnName("GvaCaseTypeId");
 
             // Relationships
             this.HasRequired(t => t.Person)

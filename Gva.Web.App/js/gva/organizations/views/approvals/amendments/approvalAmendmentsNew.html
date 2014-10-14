@@ -1,0 +1,27 @@
+<ng-form name="newApprovalAmendmentForm" sc-validate="{}" sc-form-readonly>
+  <div class="panel panel-default" style="margin-top: 10px">
+     <div class="panel-heading">
+      <strong l10n-text="organizations.newApprovalAmendment.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.newApprovalAmendment.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.newApprovalAmendment.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <gva-organization-amendment name="approvalAmendmentForm" ng-model="newApprovalAmendment"
+        sc-form-params="{
+          isNew: false,
+          lotId: lotId,
+          caseTypeId: caseTypeId,
+          appId: appId,
+          partIndex: approval.partIndex
+        }"
+        sc-data-approval-type="approval.part.approvalType">
+      </gva-organization-amendment>
+    </div>
+
+  </div>
+
+</ng-form>
+

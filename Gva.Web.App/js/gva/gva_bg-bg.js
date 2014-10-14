@@ -3425,13 +3425,16 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
-        approvalEdit: {
-          title: 'Изменение',
+        newApprovalAmendment: {
+          title: 'Ново изменение',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editApprovalAmendments: {
+          amendmentForm: 'Редакция на изменение',
           amendmentTitle: 'Изменение',
           approvalForm: 'Удостоверение за одобрение',
-          amendmentForm: 'Изменение',
           amendments: 'Изменения',
-          newAmendment: 'Ново изменение',
           editLastAmendment: 'Редакция',
           deleteLastAmendment: 'Изтриване',
           approvalType: 'Тип одобрение',
@@ -3441,6 +3444,13 @@
           changeNumAmendment: 'Номер на изменение',
           approvalState: 'Състояние',
           documentNumberAmendment: 'Референтен № на описание на изменение',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        approvalEdit: {
+          title: 'Преглед на одобрение',
+          newAmendment: 'Ново изменение',
+          edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -3596,14 +3606,14 @@
           approvalState: 'Състояние на одобрението',
           approvalStateDate: 'Дата',
           approvalStateNote: 'Бележки по състоянието',
-          recommendationReport: 'Доклад за препоръки'
+          recommendationReport: 'Доклад за препоръки',
+          caseType: 'Тип дело'
         },
         amendmentDirective: {
           documentNumber: 'Референтен № на описание	',
           documentDateIssue: 'Дата на издаване',
           changeNum: '№ на изменение',
           noAvailableLimitations: 'Няма налични данни',
-          applications: 'Заявления',
           lims147: {
             title: 'Обхват на одобрение',
             sortOrder: 'Маркер за сортиране',

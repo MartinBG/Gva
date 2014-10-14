@@ -129,6 +129,7 @@
     <Compile Include="Controllers\Organizations\OrganizationCertGroundServiceOperatorsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationRecommendationsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationGroundServiceOperatorsSnoOperationalController.cs" />
+    <Compile Include="Controllers\Organizations\OrganizationApprovalAmendmentsController.cs" />
     <Compile Include="Controllers\Persons\PersonLicenceEditionsController.cs" />
     <Compile Include="Controllers\Persons\PersonRatingEditionsController.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewFMDO.cs" />
@@ -142,8 +143,10 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftReviewAmendmentFMDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
+    <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
     <Compile Include="ModelsDO\SimplePartDO.cs" />
-    <Compile Include="ModelsDO\Organizations\AmendmentDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationlAmendmentDO.cs" />
     <Compile Include="ModelsDO\Organizations\LimitationDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDetailDO.cs" />
     <Compile Include="ModelsDO\Organizations\Lims145DO.cs" />
@@ -265,6 +268,8 @@
     <Compile Include="Models\GvaConstants.cs" />
     <Compile Include="Models\GvaApplicationStage.cs" />
     <Compile Include="Models\GvaStage.cs" />
+    <Compile Include="Models\Views\Organization\GvaViewOrganizationAmendment.cs" />
+    <Compile Include="Models\Views\Organization\GvaViewOrganizationApproval.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
@@ -300,11 +305,13 @@
     <Compile Include="Projections\Inventory\Persons\PersonOtherProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonApplicationProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonTrainingProjection.cs" />
+    <Compile Include="Projections\Organization\OrganizationAmendmentProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationInspectionProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationInspectionRecommendationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationRecommendationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationExaminerProjection.cs" />
+    <Compile Include="Projections\Organization\OrganizationApprovalProjection.cs" />
     <Compile Include="Projections\Person\PersonLicenceEditionProjection.cs" />
     <Compile Include="Projections\Person\PersonInspectorProjection.cs" />
     <Compile Include="Projections\Person\PersonProjection.cs" />

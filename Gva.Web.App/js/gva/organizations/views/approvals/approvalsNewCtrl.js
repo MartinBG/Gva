@@ -7,17 +7,36 @@
     $state,
     $stateParams,
     OrganizationApprovals,
-    organizationApproval
+    OrganizationApprovalAmendments,
+    newApproval
   ) {
-    $scope.approval = organizationApproval;
+    $scope.newApproval = newApproval;
+    $scope.newAmendment = null;
     $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
+    $scope.appId = $stateParams.appId;
+
+    $scope.$watch('newApproval.case.caseType', function () {
+      if ($scope.newApproval['case'].caseType) {
+        OrganizationApprovalAmendments.newApprovalAmendment({
+          id: $scope.lotId,
+          appId: $scope.appId,
+          caseTypeId: newApproval['case'].caseType.nomValueId
+        }).$promise.then(function (amendment) {
+          $scope.newAmendment = amendment;
+        });
+      }
+    });
 
     $scope.save = function () {
       return $scope.newApprovalForm.$validate()
         .then(function () {
           if ($scope.newApprovalForm.$valid) {
             return OrganizationApprovals
-              .save({ id: $stateParams.id }, $scope.approval).$promise
+              .save({ id: $stateParams.id }, {
+                approval: $scope.newApproval,
+                amendment: $scope.newAmendment
+              }).$promise
               .then(function () {
                 return $state.go('root.organizations.view.approvals.search');
               });
@@ -35,11 +54,12 @@
     '$state',
     '$stateParams',
     'OrganizationApprovals',
-    'organizationApproval'
+    'OrganizationApprovalAmendments',
+    'newApproval'
   ];
 
   ApprovalsNewCtrl.$resolve = {
-    organizationApproval: [
+    newApproval: [
       '$stateParams',
       'OrganizationApprovals',
       function ($stateParams, OrganizationApprovals) {

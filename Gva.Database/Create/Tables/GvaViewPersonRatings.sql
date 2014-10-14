@@ -19,15 +19,14 @@ CREATE TABLE [dbo].[GvaViewPersonRatings] (
     [FirstDocDateValidFrom]    DATETIME2         NOT NULL,
     [Notes]                    NVARCHAR(MAX)     NULL,
     [NotesAlt]                 NVARCHAR(MAX)     NULL,
-    [GvaCaseTypeId]            INT               NULL,
     CONSTRAINT [PK_GvaViewPersonRatings]                        PRIMARY KEY ([LotId], [LotPartId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_GvaViewPersons]         FOREIGN KEY ([LotId])                                  REFERENCES [dbo].[GvaViewPersons] ([LotId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_LotParts]               FOREIGN KEY ([LotPartId])                              REFERENCES [dbo].[LotParts] ([LotPartId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_RatingTypeId]           FOREIGN KEY ([RatingTypeId])                           REFERENCES [dbo].[NomValues] ([NomValueId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_RatingLevelId]          FOREIGN KEY ([RatingLevelId])                          REFERENCES [dbo].[NomValues] ([NomValueId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_RatingClassId]          FOREIGN KEY ([RatingClassId])                          REFERENCES [dbo].[NomValues] ([NomValueId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_AircraftTypeGroupId]    FOREIGN KEY ([AircraftTypeGroupId])                    REFERENCES [dbo].[NomValues] ([NomValueId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_AuthorizationId]        FOREIGN KEY ([AuthorizationId])                        REFERENCES [dbo].[NomValues] ([NomValueId])
+    CONSTRAINT [FK_GvaViewPersonRatings_GvaViewPersons]         FOREIGN KEY ([LotId])                 REFERENCES [dbo].[GvaViewPersons] ([LotId]),
+    CONSTRAINT [FK_GvaViewPersonRatings_LotParts]               FOREIGN KEY ([LotPartId])             REFERENCES [dbo].[LotParts] ([LotPartId]),
+    CONSTRAINT [FK_GvaViewPersonRatings_RatingTypeId]           FOREIGN KEY ([RatingTypeId])          REFERENCES [dbo].[NomValues] ([NomValueId]),
+    CONSTRAINT [FK_GvaViewPersonRatings_RatingLevelId]          FOREIGN KEY ([RatingLevelId])         REFERENCES [dbo].[NomValues] ([NomValueId]),
+    CONSTRAINT [FK_GvaViewPersonRatings_RatingClassId]          FOREIGN KEY ([RatingClassId])         REFERENCES [dbo].[NomValues] ([NomValueId]),
+    CONSTRAINT [FK_GvaViewPersonRatings_AircraftTypeGroupId]    FOREIGN KEY ([AircraftTypeGroupId])   REFERENCES [dbo].[NomValues] ([NomValueId]),
+    CONSTRAINT [FK_GvaViewPersonRatings_AuthorizationId]        FOREIGN KEY ([AuthorizationId])       REFERENCES [dbo].[NomValues] ([NomValueId])
 )
 GO
 
@@ -47,5 +46,4 @@ exec spDescColumn N'GvaViewPersonRatings', N'LastDocDateValidTo'       , N'Да�
 exec spDescColumn N'GvaViewPersonRatings', N'FirstDocDateValidFrom'    , N'Дата на вписване на първото вписване.'
 exec spDescColumn N'GvaViewPersonRatings', N'Notes'                    , N'Бележки към последното вписване.'
 exec spDescColumn N'GvaViewPersonRatings', N'NotesAlt'                 , N'Бележки лат. към последното вписване.'
-exec spDescColumn N'GvaViewPersonRatings', N'GvaCaseTypeId'            , N'Идентификатор на типа дело на квалификация.'
 GO

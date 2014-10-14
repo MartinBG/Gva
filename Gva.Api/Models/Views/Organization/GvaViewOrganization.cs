@@ -38,6 +38,8 @@ namespace Gva.Api.Models.Views.Organization
         public virtual ICollection<GvaViewOrganizationInspection> Inspections { get; set; }
 
         public virtual ICollection<GvaLotCase> GvaLotCases { get; set; }
+
+        public virtual ICollection<GvaViewOrganizationApproval> OrganizationApprovals { get; set; }
     }
 
     public class GvaViewOrganizationMap : EntityTypeConfiguration<GvaViewOrganization>

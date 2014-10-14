@@ -24,6 +24,8 @@ GO
 :r $(rootPath)\"Tables\GvaViewOrganizationRecommendations.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizationInspections.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizationInspectionsRecommendations.sql"
+:r $(rootPath)\"Tables\GvaViewOrganizationApprovals.sql"
+:r $(rootPath)\"Tables\GvaViewOrganizationAmendments.sql"
 :r $(rootPath)\"Tables\GvaViewAirports.sql"
 :r $(rootPath)\"Tables\GvaViewEquipments.sql"
 :r $(rootPath)\"Tables\GvaViewAircrafts.sql"

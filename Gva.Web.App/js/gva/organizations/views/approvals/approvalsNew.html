@@ -13,11 +13,17 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-organization-approval name="organizationApprovalForm" ng-model="approval.part" sc-form-params="{ lotId: lotId }"></gva-organization-approval>
+      <gva-organization-approval name="organizationApprovalForm" ng-model="newApproval" 
+        sc-form-params="{ isNew: true, lotId: lotId, caseTypeId: caseTypeId }"></gva-organization-approval>
 
-      <h5 class="form-header" l10n-text="organizations.approvalNew.amendmentTitle"></h5>
-      <gva-organization-amendment name="organizationAmendmentForm" ng-model="approval.part.amendments[0]"
-        sc-form-params="{ lotId: lotId }">
+      <gva-organization-amendment name="organizationAmendmentForm"  ng-if="newAmendment" ng-model="newAmendment"
+        sc-form-params="{
+          isNew: true,
+          lotId: lotId,
+          caseTypeId: caseTypeId,
+          appId: appId
+        }"
+        sc-data-approval-type="newApproval.approval.part.approvalType">
       </gva-organization-amendment>
     </div>
   </div>

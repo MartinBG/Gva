@@ -11,21 +11,20 @@ using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
+using Gva.Api.Models;
+using Gva.Api.ModelsDO;
 
 namespace Gva.Api.Projections.Person
 {
     public class PersonRatingProjection : Projection<GvaViewPersonRating>
     {
         private INomRepository nomRepository;
-        private IFileRepository fileRepository;
 
         public PersonRatingProjection(
             IUnitOfWork unitOfWork,
-            INomRepository nomRepository,
-            IFileRepository fileRepository)
+            INomRepository nomRepository)
             : base(unitOfWork, "Person")
         {
-            this.fileRepository = fileRepository;
             this.nomRepository = nomRepository;
         }
 
@@ -73,12 +72,7 @@ namespace Gva.Api.Projections.Person
             }
             rating.Notes = lastEdition.Content.Notes;
             rating.NotesAlt = lastEdition.Content.NotesAlt;
-            var file = this.fileRepository.GetFileReference(personRating.Part.PartId, null);
-            if (file != null)
-            {
-                rating.GvaCaseTypeId = file.GvaCaseTypeId;
-            }
-            
+
             return rating;
         }
     }

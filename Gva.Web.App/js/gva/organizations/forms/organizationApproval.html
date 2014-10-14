@@ -1,12 +1,19 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.approvalType" alias="'approvalTypes'" ng-required="true" l10n-text="organizations.approvalDirective.approvalType" class="col-sm-4 col-md-3"></sc-field>
-    <sc-field type="text" ng-model="model.documentNumber" ng-required="true" l10n-text="organizations.approvalDirective.documentNumber" class="col-sm-2 col-md-2"></sc-field>
-    <sc-field type="date" ng-model="model.documentDateIssue" l10n-text="organizations.approvalDirective.documentDateIssue" class="col-sm-3 col-md-2"></sc-field>
+    <div class="form-group col-sm-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="organizations.approvalDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" case-type="caseTypeId" ng-required="true"></gva-case-type>
+    </div>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.approvalState" alias="'approvalStates'" l10n-text="organizations.approvalDirective.approvalState" class="col-sm-4 col-md-3"></sc-field>
-    <sc-field type="date" ng-model="model.approvalStateDate" l10n-text="organizations.approvalDirective.approvalStateDate" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.approvalType" alias="'approvalTypes'" ng-required="true"  ng-disabled="!isNew" l10n-text="organizations.approvalDirective.approvalType" class="col-sm-4 col-md-3"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" ng-required="true" l10n-text="organizations.approvalDirective.documentNumber" class="col-sm-2 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateIssue" l10n-text="organizations.approvalDirective.documentDateIssue" class="col-sm-3 col-md-2"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="nomenclature" ng-model="model.part.approvalState" alias="'approvalStates'" l10n-text="organizations.approvalDirective.approvalState" class="col-sm-4 col-md-3"></sc-field>
+    <sc-field type="date" ng-model="model.part.approvalStateDate" l10n-text="organizations.approvalDirective.approvalStateDate" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
     <div class="form-group col-sm-4 col-md-3">
@@ -15,6 +22,6 @@
     </div>
   </div>
   <div class="row">
-    <sc-field type="textarea" rows="3" cols="50" ng-model="model.approvalStateNote" l10n-text="organizations.approvalDirective.approvalStateNote" class="col-sm-7 col-md-5"></sc-field>
+    <sc-field type="textarea" rows="3" cols="50" ng-model="model.part.approvalStateNote" l10n-text="organizations.approvalDirective.approvalStateNote" class="col-sm-7 col-md-5"></sc-field>
   </div>
 </ng-form>

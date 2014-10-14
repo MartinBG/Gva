@@ -7,11 +7,6 @@ namespace Gva.Api.ModelsDO.Organizations
 {
     public class OrganizationApprovalDO
     {
-        public OrganizationApprovalDO()
-        {
-            this.Amendments = new List<AmendmentDO>();
-        }
-
         [Required(ErrorMessage = "ApprovalType is required.")]
         public NomValue ApprovalType { get; set; }
 
@@ -26,8 +21,8 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public string ApprovalStateNote { get; set; }
 
-        public List<AmendmentDO> Amendments { get; set; }
-
         public int? RecommendationReport { get; set; }
+
+        public int CaseTypeId { get; set; }
     }
 }

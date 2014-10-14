@@ -7,6 +7,7 @@ using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
+using Gva.Api.Repositories.FileRepository;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Repositories.PersonRepository
@@ -16,12 +17,18 @@ namespace Gva.Api.Repositories.PersonRepository
         private IUnitOfWork unitOfWork;
         private INomRepository nomRepository;
         private ILotRepository lotRepository;
+        private IFileRepository fileRepository;
 
-        public PersonRepository(IUnitOfWork unitOfWork, INomRepository nomRepository, ILotRepository lotRepository)
+        public PersonRepository(
+            IUnitOfWork unitOfWork,
+            INomRepository nomRepository,
+            ILotRepository lotRepository,
+            IFileRepository fileRepository)
         {
             this.unitOfWork = unitOfWork;
             this.nomRepository = nomRepository;
             this.lotRepository = lotRepository;
+            this.fileRepository = fileRepository;
         }
 
         public IEnumerable<GvaViewPerson> GetPersons(
@@ -239,16 +246,7 @@ namespace Gva.Api.Repositories.PersonRepository
 
         public IEnumerable<GvaViewPersonRating> GetRatings(int lotId, int? caseTypeId)
         {
-            
-            var predicate = PredicateBuilder.True<GvaViewPersonRating>()
-                .And(e => e.LotId == lotId);
-
-            if (caseTypeId != null)
-            {
-                predicate = predicate.And(f => f.GvaCaseTypeId == caseTypeId.Value);
-            }
-
-            return this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
+            IEnumerable<GvaViewPersonRating> ratings = this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
                 .Include(e => e.Person)
                 .Include(e => e.Part)
                 .Include(e => e.RatingType)
@@ -256,8 +254,18 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.RatingClass)
                 .Include(e => e.AircraftTypeGroup)
                 .Include(e => e.Authorization)
-                .Where(e => e.LotId == lotId)
-                .ToList();
+                .Where(e => e.LotId == lotId);
+
+            if (caseTypeId.HasValue)
+            {
+                return (from r in ratings
+                        join f in this.unitOfWork.DbContext.Set<GvaLotFile>().Include(f => f.GvaCaseType) on r.PartId equals f.LotPartId
+                        where f.GvaCaseTypeId == caseTypeId.Value
+                        select r);
+            }
+            else {
+                return ratings;
+            }
         }
 
         public int GetLastRatingEditionIndex(int lotId, int ratingPartIndex)

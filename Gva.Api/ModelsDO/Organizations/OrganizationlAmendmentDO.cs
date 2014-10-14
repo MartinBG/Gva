@@ -5,22 +5,27 @@ using System.Collections.Generic;
 
 namespace Gva.Api.ModelsDO.Organizations
 {
-    public class AmendmentDO
+    public class OrganizationAmendmentDO
     {
-        public AmendmentDO()
+        public OrganizationAmendmentDO()
         {
             this.Lims147 = new List<Lims147DO>();
             this.Lims145 = new List<Lims145DO>();
             this.LimsMG = new List<LimsMGDO>();
             this.IncludedDocuments = new List<IncludedDocumentDO>();
-            this.Applications = new List<ApplicationNomDO>();
         }
 
         public string DocumentNumber { get; set; }
 
-        public string DocumentDateIssue { get; set; }
+        public DateTime? DocumentDateIssue { get; set; }
 
         public int? ChangeNum { get; set; }
+
+        public int Index { get; set; }
+
+        public int ApprovalPartIndex { get; set; }
+
+        public int CaseTypeId { get; set; }
 
         public List<Lims147DO> Lims147 { get; set; }
 
@@ -29,7 +34,5 @@ namespace Gva.Api.ModelsDO.Organizations
         public List<LimsMGDO> LimsMG { get; set; }
 
         public List<IncludedDocumentDO> IncludedDocuments { get; set; }
-
-        public List<ApplicationNomDO> Applications { get; set; }
     }
 }

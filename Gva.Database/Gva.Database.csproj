@@ -51,6 +51,8 @@
     <Content Include="Create\Tables\ASExamVariants.sql" />
     <Content Include="Create\Tables\ASExamQuestions.sql" />
     <Content Include="Create\Tables\ASExamVariantQuestions.sql" />
+    <Content Include="Create\Tables\GvaViewOrganizationAmendments.sql" />
+    <Content Include="Create\Tables\GvaViewOrganizationApprovals.sql" />
     <Content Include="Create\Tables\GvaViewPersonLicenceEditions.sql" />
     <Content Include="Create\Tables\GvaViewOrganizationInspections.sql" />
     <Content Include="Create\Tables\GvaViewOrganizationInspectionsRecommendations.sql" />
@@ -165,9 +167,9 @@
   <ItemGroup>
     <None Include="CreateAll.bat" />
     <None Include="CreateAll.log">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>CreateAll.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </None>
     <None Include="CreateAll.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

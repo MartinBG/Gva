@@ -8,9 +8,9 @@
         method: 'GET',
         url: 'api/organizations/:id/organizationApprovals/new'
       },
-      newApprovalAmendment: {
+      lastAmendmentIndex: {
         method: 'GET',
-        url: 'api/organizations/:id/organizationApprovals/:ind/newAmendment'
+        url: 'api/organizations/:id/organizationApprovals/:ind/lastAmendmentIndex'
       }
     });
   }]);

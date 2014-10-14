@@ -492,6 +492,7 @@
     <Content Include="js\gva\organizations\modals\limitations\chooseLimitationModalCtrl.js" />
     <Content Include="js\gva\organizations\resources\organizationAddresses.js" />
     <Content Include="js\gva\organizations\resources\organizationApplications.js" />
+    <Content Include="js\gva\organizations\resources\organizationApprovalAmendments.js" />
     <Content Include="js\gva\organizations\resources\organizationApprovals.js" />
     <Content Include="js\gva\organizations\resources\organizationCertAirCarriers.js" />
     <Content Include="js\gva\organizations\resources\organizationCertAirNavigationServiceDeliverers.js" />
@@ -514,6 +515,10 @@
     <Content Include="js\gva\organizations\views\addresses\addrNewCtrl.js" />
     <Content Include="js\gva\organizations\views\addresses\addrSearch.html" />
     <Content Include="js\gva\organizations\views\addresses\addrSearchCtrl.js" />
+    <Content Include="js\gva\organizations\views\approvals\amendments\approvalAmendmentsEdit.html" />
+    <Content Include="js\gva\organizations\views\approvals\amendments\approvalAmendmentsEditCtrl.js" />
+    <Content Include="js\gva\organizations\views\approvals\amendments\approvalAmendmentsNew.html" />
+    <Content Include="js\gva\organizations\views\approvals\amendments\approvalAmendmentsNewCtrl.js" />
     <Content Include="js\gva\organizations\views\approvals\approvalsEdit.html" />
     <Content Include="js\gva\organizations\views\approvals\approvalsEditCtrl.js" />
     <Content Include="js\gva\organizations\views\approvals\approvalsNew.html" />
