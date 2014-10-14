@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Repositories.NomRepository;
@@ -8,7 +7,6 @@ using Common.Data;
 using Common.Filters;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Regs.Api.LotEvents;
@@ -75,16 +73,7 @@ namespace Gva.Api.Controllers.Persons
                 var ratingPartVersion = lot.CreatePart("ratings/*", newRating.Rating.Part, this.userContext);
                 this.fileRepository.AddFileReference(ratingPartVersion.Part, newRating.Rating.Case);
 
-                newRating.Edition = new CaseTypePartDO<PersonRatingEditionDO>()
-                {
-                    Part = new PersonRatingEditionDO()
-                    {
-                        RatingPartIndex = ratingPartVersion.Part.Index,
-                        DocumentDateValidFrom = DateTime.Now
-                    },
-                    Case = newRating.Rating.Case
-                };
-
+                newRating.Edition.Part.RatingPartIndex = ratingPartVersion.Part.Index;
                 var editionPartVersion = lot.CreatePart("ratingEditions/*", newRating.Edition.Part, this.userContext);
                 this.fileRepository.AddFileReference(editionPartVersion.Part, newRating.Edition.Case);
 

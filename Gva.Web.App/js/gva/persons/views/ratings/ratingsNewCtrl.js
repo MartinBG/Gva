@@ -27,7 +27,6 @@
          });
        }
      });
- 
 
     $scope.save = function () {
       return $scope.newRatingForm.$validate().then(function () {
