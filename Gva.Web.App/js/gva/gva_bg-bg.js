@@ -1304,8 +1304,7 @@
           pointFromAlt: 'Начален пункт (англ.)',
           pointToAlt: 'Краен пункт (англ.)',
           planStopsAlt: 'Планирани спирания (англ.)',
-          crewAlt: 'Екипаж (англ.)',
-          applications: 'Заявления'
+          crewAlt: 'Екипаж (англ.)'
         },
         noiseDirective: {
           issueNumber: '№',

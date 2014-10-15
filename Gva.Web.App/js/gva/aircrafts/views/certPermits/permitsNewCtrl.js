@@ -9,8 +9,8 @@
     AircraftCertPermitsToFly,
     aircraftCertPermitToFly
   ) {
-    $scope.isEdit = false;
 
+    $scope.lotId = $stateParams.id;
     $scope.permit = aircraftCertPermitToFly;
 
     $scope.save = function () {
