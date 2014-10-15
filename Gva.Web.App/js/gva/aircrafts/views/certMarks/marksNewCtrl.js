@@ -9,8 +9,7 @@
     AircraftCertMarks,
     aircraftCertMark
   ) {
-    $scope.isEdit = false;
-
+    $scope.lotId = $stateParams.id;
     $scope.mark = aircraftCertMark;
 
     $scope.save = function () {

@@ -22,6 +22,8 @@ namespace Gva.Api.Controllers.Aircrafts
     {
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private IFileRepository fileRepository;
+
         public AircraftRadiosController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
@@ -34,10 +36,11 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCertRadio()
+        public IHttpActionResult GetNewCertRadio(int lotId)
         {
             AircraftCertRadioDO newCertRadio = new AircraftCertRadioDO()
             {
@@ -53,7 +56,8 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                }
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
             };
             return Ok(new CaseTypePartDO<AircraftCertRadioDO>(newCertRadio, caseDO));
         }

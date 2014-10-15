@@ -63,7 +63,8 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                }
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
             };
 
             return Ok(new CaseTypePartDO<DocumentApplicationDO>(new DocumentApplicationDO(), caseDO));

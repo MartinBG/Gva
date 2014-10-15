@@ -21,6 +21,7 @@ namespace Gva.Api.Controllers.Aircrafts
     {
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private IFileRepository fileRepository;
 
         public AircraftSmodsController(
             ICaseTypeRepository caseTypeRepository,
@@ -34,10 +35,11 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCertSmod()
+        public IHttpActionResult GetNewCertSmod(int lotId)
         {
             AircraftCertSmodDO certificate = new AircraftCertSmodDO();
             certificate.Valid = this.nomRepository.GetNomValue("boolean", "yes");
@@ -49,8 +51,10 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                }
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
             };
+
             return Ok(new CaseTypePartDO<AircraftCertSmodDO>(certificate, caseDO));
         }
     }
