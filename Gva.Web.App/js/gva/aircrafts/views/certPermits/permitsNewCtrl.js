@@ -44,7 +44,8 @@
       'AircraftCertPermitsToFly',
       function ($stateParams, AircraftCertPermitsToFly) {
         return AircraftCertPermitsToFly.newCertPermitToFly({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

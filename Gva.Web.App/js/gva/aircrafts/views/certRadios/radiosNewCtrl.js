@@ -44,7 +44,8 @@
       'AircraftCertRadios',
       function ($stateParams, AircraftCertRadios) {
         return AircraftCertRadios.newCertRadio({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

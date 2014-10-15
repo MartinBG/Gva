@@ -21,11 +21,14 @@ namespace Gva.Api.Controllers.Aircrafts
     {
         private ICaseTypeRepository caseTypeRepository;
         private IFileRepository fileRepository;
+        private IApplicationRepository applicationRepository;
+        private ILotRepository lotRepository;
 
         public AircraftNoisesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
+            IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
@@ -33,10 +36,12 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             this.caseTypeRepository = caseTypeRepository;
             this.fileRepository = fileRepository;
+            this.applicationRepository = applicationRepository;
+            this.lotRepository = lotRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCertNoise(int lotId)
+        public IHttpActionResult GetNewCertNoise(int lotId, int? appId = null)
         {
             AircraftCertNoiseDO newCertNoise = new AircraftCertNoiseDO()
             {
@@ -54,6 +59,13 @@ namespace Gva.Api.Controllers.Aircrafts
                 },
                 BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
             };
+
+            if (appId.HasValue)
+            {
+                this.lotRepository.GetLotIndex(lotId);
+
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+            }
 
             return Ok(new CaseTypePartDO<AircraftCertNoiseDO>(newCertNoise, caseDO));
         }

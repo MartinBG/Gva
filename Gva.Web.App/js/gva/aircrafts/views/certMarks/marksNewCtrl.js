@@ -43,7 +43,8 @@
       'AircraftCertMarks',
       function ($stateParams, AircraftCertMarks) {
         return AircraftCertMarks.newCertMark({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

@@ -44,7 +44,8 @@
       'AircraftCertNoises',
       function ($stateParams, AircraftCertNoises) {
         return AircraftCertNoises.newCertNoise({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

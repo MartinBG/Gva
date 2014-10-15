@@ -23,6 +23,8 @@ namespace Gva.Api.Controllers.Aircrafts
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
         private IFileRepository fileRepository;
+        private ILotRepository lotRepository;
+        private IApplicationRepository applicationRepository;
 
         public AircraftRadiosController(
             IUnitOfWork unitOfWork,
@@ -30,6 +32,7 @@ namespace Gva.Api.Controllers.Aircrafts
             IFileRepository fileRepository,
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository,
+            IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("aircraftCertRadios", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
@@ -37,10 +40,12 @@ namespace Gva.Api.Controllers.Aircrafts
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.fileRepository = fileRepository;
+            this.lotRepository = lotRepository;
+            this.applicationRepository = applicationRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCertRadio(int lotId)
+        public IHttpActionResult GetNewCertRadio(int lotId, int? appId = null)
         {
             AircraftCertRadioDO newCertRadio = new AircraftCertRadioDO()
             {
@@ -59,6 +64,14 @@ namespace Gva.Api.Controllers.Aircrafts
                 },
                 BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
             };
+
+            if (appId.HasValue)
+            {
+                this.lotRepository.GetLotIndex(lotId);
+
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+            }
+
             return Ok(new CaseTypePartDO<AircraftCertRadioDO>(newCertRadio, caseDO));
         }
     }

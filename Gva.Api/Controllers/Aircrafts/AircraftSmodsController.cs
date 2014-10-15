@@ -22,6 +22,8 @@ namespace Gva.Api.Controllers.Aircrafts
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
         private IFileRepository fileRepository;
+        private ILotRepository lotRepository;
+        private IApplicationRepository applicationRepository;
 
         public AircraftSmodsController(
             ICaseTypeRepository caseTypeRepository,
@@ -36,10 +38,12 @@ namespace Gva.Api.Controllers.Aircrafts
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.fileRepository = fileRepository;
+            this.lotRepository = lotRepository;
+            this.applicationRepository = applicationRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCertSmod(int lotId)
+        public IHttpActionResult GetNewCertSmod(int lotId, int? appId = null)
         {
             AircraftCertSmodDO certificate = new AircraftCertSmodDO();
             certificate.Valid = this.nomRepository.GetNomValue("boolean", "yes");
@@ -54,6 +58,13 @@ namespace Gva.Api.Controllers.Aircrafts
                 },
                 BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
             };
+
+            if (appId.HasValue)
+            {
+                this.lotRepository.GetLotIndex(lotId);
+
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+            }
 
             return Ok(new CaseTypePartDO<AircraftCertSmodDO>(certificate, caseDO));
         }

@@ -43,7 +43,8 @@
       'AircraftCertSmods',
       function ($stateParams, AircraftCertSmods) {
         return AircraftCertSmods.newCertSmod({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

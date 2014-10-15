@@ -7,6 +7,7 @@ using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
@@ -21,11 +22,14 @@ namespace Gva.Api.Controllers.Aircrafts
         private IFileRepository fileRepository;
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private ILotRepository lotRepository;
+        private IApplicationRepository applicationRepository;
 
         public AircraftMarksController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
+            IApplicationRepository applicationRepository,
             INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             ICaseTypeRepository caseTypeRepository,
@@ -35,10 +39,12 @@ namespace Gva.Api.Controllers.Aircrafts
             this.fileRepository = fileRepository;
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.lotRepository = lotRepository;
+            this.applicationRepository = applicationRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCertMark(int lotId)
+        public IHttpActionResult GetNewCertMark(int lotId, int? appId = null)
         {
             AircraftCertMarkDO certificate = new AircraftCertMarkDO();
             certificate.Valid = this.nomRepository.GetNomValue("boolean", "yes");
@@ -53,6 +59,14 @@ namespace Gva.Api.Controllers.Aircrafts
                 },
                 BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
             };
+
+            if (appId.HasValue)
+            {
+                this.lotRepository.GetLotIndex(lotId);
+
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+            }
+
             return Ok(new CaseTypePartDO<AircraftCertMarkDO>(certificate, caseDO));
         }
     }
