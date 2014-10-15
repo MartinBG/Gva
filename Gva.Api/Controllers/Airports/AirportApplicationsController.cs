@@ -10,7 +10,6 @@ using Gva.Api.ModelsDO.Common;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
-using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
@@ -53,13 +52,7 @@ namespace Gva.Api.Controllers.Airports
         [Route("new")]
         public IHttpActionResult GetNewApplication(int lotId)
         {
-            DocumentApplicationDO newApplication = new DocumentApplicationDO()
-            {
-                DocumentDate = DateTime.Now
-            };
-
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("airport").Single();
-
             CaseDO caseDO = new CaseDO()
             {
                 CaseType = new NomValue()
@@ -67,7 +60,13 @@ namespace Gva.Api.Controllers.Airports
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                }
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+            };
+
+            DocumentApplicationDO newApplication = new DocumentApplicationDO()
+            {
+                DocumentDate = DateTime.Now
             };
 
             return Ok(new CaseTypePartDO<DocumentApplicationDO>(newApplication, caseDO));
