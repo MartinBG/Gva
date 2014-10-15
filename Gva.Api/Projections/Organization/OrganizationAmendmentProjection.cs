@@ -39,17 +39,11 @@ namespace Gva.Api.Projections.Organization
             GvaViewOrganizationAmendment amendment = new GvaViewOrganizationAmendment();
             amendment.LotId = organizationAmendment.Part.Lot.LotId;
             amendment.PartIndex = organizationAmendment.Part.Index;
+            amendment.PartId = organizationAmendment.Part.PartId;
             amendment.DocumentNumber = organizationAmendment.Content.DocumentNumber;
             amendment.ChangeNum = organizationAmendment.Content.ChangeNum;
             amendment.DocumentDateIssue = organizationAmendment.Content.DocumentDateIssue;
             amendment.ApprovalPartIndex = organizationAmendment.Content.ApprovalPartIndex;
-
-            GvaLotFile file = this.fileRepository.GetFileReference(organizationAmendment.PartId, null);
-            if (file != null && file.GvaAppLotFiles.Count > 0) 
-            {
-                GvaApplication application = this.applicationRepository.GetNomApplication(file.GvaAppLotFiles.First().GvaApplicationId);
-                amendment.ApplicationName = new ApplicationNomDO(application).ApplicationName;
-            }
 
             return amendment;
         }

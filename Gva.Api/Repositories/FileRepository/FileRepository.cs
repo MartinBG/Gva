@@ -156,6 +156,7 @@ namespace Gva.Api.Repositories.FileRepository
 
             this.unitOfWork.DbContext.Set<GvaAppLotFile>()
                 .Include(ga => ga.GvaApplication)
+                .Include(ga => ga.GvaApplication.GvaAppLotPart)
                 .Where(ga => ga.GvaLotFile.LotPartId == partId && (caseType.HasValue ? ga.GvaLotFile.GvaCaseTypeId == caseType : true))
                 .Load();
 

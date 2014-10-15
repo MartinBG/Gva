@@ -11,7 +11,7 @@ namespace Gva.Api.ModelsDO.Organizations
 {
     public class GvaViewOrganizationApprovalDO
     {
-        public GvaViewOrganizationApprovalDO(GvaViewOrganizationApproval approval)
+        public GvaViewOrganizationApprovalDO(GvaViewOrganizationApproval approval, ApplicationNomDO application)
         {
             GvaViewOrganizationAmendment amendment = approval.Amendments.OrderBy(a => a.Index).Last();
             this.LotId = approval.LotId;
@@ -20,7 +20,7 @@ namespace Gva.Api.ModelsDO.Organizations
             this.AmendmentDocumentNumber = amendment.DocumentNumber;
             this.ApprovalType = approval.ApprovalType;
             this.ApprovalState = approval.ApprovalState;
-            this.ApplicationName = approval.Amendments.Last().ApplicationName;
+            this.ApplicationName = application != null? application.ApplicationName : null;
             this.ChangeNum = amendment.ChangeNum;
             this.LastAmendmentDateIssue = amendment.DocumentDateIssue;
             this.FirstAmendmentDateIssue = approval.Amendments.OrderBy(a => a.Index).First().DocumentDateIssue;

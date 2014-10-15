@@ -1,12 +1,17 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
+using Gva.Api.Models;
+using Gva.Api.Models.Views.Organization;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Common;
 using Gva.Api.ModelsDO.Organizations;
+using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Regs.Api.LotEvents;
@@ -24,6 +29,7 @@ namespace Gva.Api.Controllers.Organizations
         private IOrganizationRepository organizationRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private INomRepository nomRepository;
+        private IApplicationRepository applicationRepository;
         private UserContext userContext;
 
         public OrganizationApprovalsController(
@@ -33,6 +39,7 @@ namespace Gva.Api.Controllers.Organizations
             IOrganizationRepository organizationRepository,
             ILotEventDispatcher lotEventDispatcher,
             INomRepository nomRepository,
+            IApplicationRepository applicationRepository,
             UserContext userContext)
             : base("approvals", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
@@ -43,6 +50,7 @@ namespace Gva.Api.Controllers.Organizations
             this.lotEventDispatcher = lotEventDispatcher;
             this.nomRepository = nomRepository;
             this.userContext = userContext;
+            this.applicationRepository = applicationRepository;
         }
 
         [Route("new")]
@@ -103,8 +111,24 @@ namespace Gva.Api.Controllers.Organizations
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
             var approvals = this.organizationRepository.GetApprovals(lotId, caseTypeId);
+            this.lotRepository.GetLotIndex(lotId);
 
-            return Ok(approvals.Select(a => new GvaViewOrganizationApprovalDO(a)));
+            return Ok(approvals.Select(approval =>  {
+
+                var lastAmendment = approval.Amendments.OrderByDescending(am => am.Index).First();
+                var lotFile = this.fileRepository.GetFileReference(lastAmendment.PartId, caseTypeId);
+                ApplicationNomDO application = null;
+                if (lotFile != null)
+                {
+                    var applications = new CaseDO(lotFile).Applications;
+                    if (applications.Count > 0)
+                    {
+                        application = new CaseDO(lotFile).Applications.First();
+                    }
+                }
+
+                return new GvaViewOrganizationApprovalDO(approval, application);
+            }));
         }
 
         [Route("{approvalPartIndex}/lastAmendmentIndex")]

@@ -22,8 +22,6 @@ namespace Gva.Api.Models.Views.Organization
 
         public int? ChangeNum { get; set; }
 
-        public string ApplicationName { get; set; }
-
         public int Index { get; set; }
 
         public virtual GvaViewOrganization Organization { get; set; }
@@ -54,10 +52,8 @@ namespace Gva.Api.Models.Views.Organization
             this.Property(t => t.PartId).HasColumnName("PartId");
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
-            this.Property(t => t.ApplicationName).HasColumnName("ApplicationName");
             this.Property(t => t.ApprovalPartIndex).HasColumnName("ApprovalPartIndex");
             this.Property(t => t.ChangeNum).HasColumnName("ChangeNum");
-            this.Property(t => t.ApplicationName).HasColumnName("ApplicationName");
             this.Property(t => t.DocumentDateIssue).HasColumnName("DocumentDateIssue");
             this.Property(t => t.Index).HasColumnName("Index");
             
