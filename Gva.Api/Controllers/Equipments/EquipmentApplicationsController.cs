@@ -49,7 +49,7 @@ namespace Gva.Api.Controllers.Equipments
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewApplication(int lotId, int? appId = null)
+        public IHttpActionResult GetNewApplication(int lotId)
         {
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("equipment").Single();
             CaseDO caseDO = new CaseDO()
@@ -62,12 +62,6 @@ namespace Gva.Api.Controllers.Equipments
                 },
                 BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
             };
-
-            if (appId.HasValue)
-            {
-                this.lotRepository.GetLotIndex(lotId);
-                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
-            }
 
             DocumentApplicationDO newApplication = new DocumentApplicationDO()
             {
