@@ -49,10 +49,10 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             AircraftCertRadioDO newCertRadio = new AircraftCertRadioDO()
             {
-                IssueDate = DateTime.Now
+                IssueDate = DateTime.Now,
+                Valid = this.nomRepository.GetNomValue("boolean", "yes")
             };
 
-            newCertRadio.Valid = this.nomRepository.GetNomValue("boolean", "yes");
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
             CaseDO caseDO = new CaseDO()
             {

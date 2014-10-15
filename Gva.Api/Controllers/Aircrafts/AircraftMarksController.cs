@@ -46,8 +46,11 @@ namespace Gva.Api.Controllers.Aircrafts
         [Route("new")]
         public IHttpActionResult GetNewCertMark(int lotId, int? appId = null)
         {
-            AircraftCertMarkDO certificate = new AircraftCertMarkDO();
-            certificate.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+            AircraftCertMarkDO certificate = new AircraftCertMarkDO()
+            {
+                Valid = this.nomRepository.GetNomValue("boolean", "yes")
+            };
+
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
             CaseDO caseDO = new CaseDO()
             {
