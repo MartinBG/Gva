@@ -12,7 +12,6 @@
   ) {
     var originalDebt = _.cloneDeep(aircraftDocumentDebt);
 
-    $scope.isEdit = true;
     $scope.debt = aircraftDocumentDebt;
     $scope.editMode = null;
     $scope.lotId = $stateParams.id;

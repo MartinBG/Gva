@@ -44,7 +44,8 @@
       'AircraftDocumentDebts',
       function ($stateParams, AircraftDocumentDebts) {
         return AircraftDocumentDebts.newDocumentDebt({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

@@ -192,7 +192,7 @@ namespace Gva.MigrationTool.Sets
                             {
                                 try
                                 {
-                                    lot.CreatePart("aircraftDocumentDebtsFM/*", aircraftDocumentDebtFM, context);
+                                    addPartWithFiles("aircraftDocumentDebtsFM/*", aircraftDocumentDebtFM);
                                 }
                                 catch (Exception e)
                                 {
@@ -642,21 +642,23 @@ namespace Gva.MigrationTool.Sets
                 new DbClause("1=1"),
                 new DbClause("and RegNo = {0}", certId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<string>("nRecNo"),
-                        __migrTable = "Morts",
-                        registration = regPart,
-                        certId = Utils.FmToNum(r.Field<string>("RegNo")),
-                        regDate = Utils.FmToDate(r.Field<string>("Date")),
-                        aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action").Trim()),
-                        documentNumber = r.Field<string>("gt_DocCAA"),
-                        documentDate = Utils.FmToDate(r.Field<string>("gd_DocCAA")),
-                        aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("Creditor")),
-                        creditorDocument = r.Field<string>("Doc Creditor"),
-                        inspector = getInspector(r.Field<string>("tUser"))
-                    }))
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<string>("nRecNo"),
+                            __migrTable = "Morts",
+                            registration = regPart,
+                            certId = Utils.FmToNum(r.Field<string>("RegNo")),
+                            regDate = Utils.FmToDate(r.Field<string>("Date")),
+                            aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action").Trim()),
+                            documentNumber = r.Field<string>("gt_DocCAA"),
+                            documentDate = Utils.FmToDate(r.Field<string>("gd_DocCAA")),
+                            aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("Creditor")),
+                            creditorDocument = r.Field<string>("Doc Creditor"),
+                            inspector = getInspector(r.Field<string>("tUser"))
+                        }),
+                        new JProperty("files",new JArray()))))
                 .ToList();
         }
 

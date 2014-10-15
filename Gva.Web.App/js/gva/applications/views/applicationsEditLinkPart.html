@@ -423,12 +423,12 @@
         </sc-column>
         <sc-column data="part.inspector.name" title="aircrafts.debtSearchFM.inspector">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="aircrafts.debtSearchFM.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="aircrafts.debtSearchFM.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="aircrafts.debtSearchFM.pageCount">
+        <sc-column data="case.pageCount" title="aircrafts.debtSearchFM.pageCount">
         </sc-column>
         <sc-column sortable="false" title="aircrafts.debtSearchFM.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
