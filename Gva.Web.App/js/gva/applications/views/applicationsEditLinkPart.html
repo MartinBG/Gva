@@ -38,12 +38,12 @@
         </sc-column>
         <sc-column data="part.valid.name" title="persons.documentIdSearch.valid">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="persons.documentIdSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="persons.documentIdSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="persons.documentIdSearch.pageCount">
+        <sc-column data="case.pageCount" title="persons.documentIdSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="persons.documentIdSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -65,12 +65,12 @@
         </sc-column>
         <sc-column data="part.graduation.name" title="persons.documentEducationSearch.graduation">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="persons.documentEducationSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="persons.documentEducationSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="persons.documentEducationSearch.pageCount">
+        <sc-column data="case.pageCount" title="persons.documentEducationSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="persons.documentEducationSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -96,12 +96,12 @@
         </sc-column>
         <sc-column data="part.valid.name" title="persons.employmentSearch.valid">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="persons.employmentSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="persons.employmentSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="persons.employmentSearch.pageCount">
+        <sc-column data="case.pageCount" title="persons.employmentSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="persons.employmentSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -125,14 +125,14 @@
         </sc-column>
         <sc-column data="part.documentPublisher" title="persons.medicalSearch.documentPublisher">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="persons.medicalSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="persons.medicalSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="persons.medicalSearch.pageCount">
+        <sc-column data="case.pageCount" title="persons.medicalSearch.pageCount">
         </sc-column>
         <sc-column data="part.notes" title="persons.medicalSearch.notes" visible="false">
         </sc-column>
         <sc-column sortable="false" title="persons.medicalSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -168,12 +168,12 @@
         </sc-column>
         <sc-column data="part.personCheckRatingValue.name" title="persons.checkSearch.ratingValue">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="persons.checkSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="persons.checkSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="persons.checkSearch.pageCount">
+        <sc-column data="case.pageCount" title="persons.checkSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="persons.checkSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -208,12 +208,12 @@
         <sc-column data="part.valid" title="persons.documentTrainingSearch.valid" has-content="true">
           <span>{{item.part.valid.name}}</span>
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="persons.documentTrainingSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="persons.documentTrainingSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="persons.documentTrainingSearch.pageCount">
+        <sc-column data="case.pageCount" title="persons.documentTrainingSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="persons.documentTrainingSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -241,12 +241,12 @@
         </sc-column>
         <sc-column data="part.notes" title="persons.otherSearch.notes" visible="false">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="persons.otherSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="persons.otherSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="persons.otherSearch.pageCount">
+        <sc-column data="case.pageCount" title="persons.otherSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="persons.otherSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -272,12 +272,12 @@
         </sc-column>
         <sc-column data="part.notes" title="persons.personDocApplicationSearch.notes">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="persons.personDocApplicationSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="persons.personDocApplicationSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="persons.personDocApplicationSearch.pageCount">
+        <sc-column data="case.pageCount" title="persons.personDocApplicationSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="persons.personDocApplicationSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -328,12 +328,12 @@
         </sc-column>
         <sc-column data="part.notes" title="organizations.organizationDocApplicationSearch.notes">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="organizations.organizationDocApplicationSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="organizations.organizationDocApplicationSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="organizations.organizationDocApplicationSearch.pageCount">
+        <sc-column data="case.pageCount" title="organizations.organizationDocApplicationSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="organizations.organizationDocApplicationSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -360,12 +360,12 @@
         </sc-column>
         <sc-column data="part.notes" title="aircrafts.otherSearch.notes" visible="false">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="aircrafts.otherSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="aircrafts.otherSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="aircrafts.otherSearch.pageCount">
+        <sc-column data="case.pageCount" title="aircrafts.otherSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="aircrafts.otherSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -487,12 +487,12 @@
         </sc-column>
         <sc-column data="part.notes" title="aircrafts.aircraftDocApplicationSearch.notes">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="aircrafts.aircraftDocApplicationSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="aircrafts.aircraftDocApplicationSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="aircrafts.aircraftDocApplicationSearch.pageCount">
+        <sc-column data="case.pageCount" title="aircrafts.aircraftDocApplicationSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="aircrafts.aircraftDocApplicationSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -519,12 +519,12 @@
         </sc-column>
         <sc-column data="part.notes" title="airports.otherSearch.notes" visible="false">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="airports.otherSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="airports.otherSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="airports.otherSearch.pageCount">
+        <sc-column data="case.pageCount" title="airports.otherSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="airports.otherSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -552,12 +552,12 @@
         </sc-column>
         <sc-column data="part.notes" title="airports.ownerSearch.notes" visible="false">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="airports.ownerSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="airports.ownerSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="airports.ownerSearch.pageCount">
+        <sc-column data="case.pageCount" title="airports.ownerSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="airports.ownerSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -583,12 +583,12 @@
         </sc-column>
         <sc-column data="part.notes" title="airports.airportDocApplicationSearch.notes">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="airports.airportDocApplicationSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="airports.airportDocApplicationSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="airports.airportDocApplicationSearch.pageCount">
+        <sc-column data="case.pageCount" title="airports.airportDocApplicationSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="airports.airportDocApplicationSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -615,12 +615,12 @@
         </sc-column>
         <sc-column data="part.notes" title="equipments.otherSearch.notes" visible="false">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="equipments.otherSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="equipments.otherSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="equipments.otherSearch.pageCount">
+        <sc-column data="case.pageCount" title="equipments.otherSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="equipments.otherSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -648,12 +648,12 @@
         </sc-column>
         <sc-column data="part.notes" title="equipments.ownerSearch.notes" visible="false">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="equipments.ownerSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="equipments.ownerSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="equipments.ownerSearch.pageCount">
+        <sc-column data="case.pageCount" title="equipments.ownerSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="equipments.ownerSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
@@ -679,12 +679,12 @@
         </sc-column>
         <sc-column data="part.notes" title="equipments.equipmentDocApplicationSearch.notes">
         </sc-column>
-        <sc-column data="files[0].bookPageNumber" title="equipments.equipmentDocApplicationSearch.bookPageNumber">
+        <sc-column data="case.bookPageNumber" title="equipments.equipmentDocApplicationSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="files[0].pageCount" title="equipments.equipmentDocApplicationSearch.pageCount">
+        <sc-column data="case.pageCount" title="equipments.equipmentDocApplicationSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="equipments.equipmentDocApplicationSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.files[0].file.key}}&fileName={{item.files[0].file.name}}" sc-access-token ng-show="item.files" title="{{item.files[0].file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>
