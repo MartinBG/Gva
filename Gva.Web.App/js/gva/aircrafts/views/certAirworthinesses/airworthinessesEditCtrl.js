@@ -12,7 +12,6 @@
   ) {
     var originalAirworthiness = _.cloneDeep(aircraftCertAirworthiness);
 
-    $scope.isEdit = true;
     $scope.aw = aircraftCertAirworthiness;
     $scope.editMode = null;
     $scope.lotId = $stateParams.id;

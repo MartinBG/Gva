@@ -23,6 +23,9 @@
       <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw" readonly="!isEditAw"
         sc-form-params="{ lotId: lotId }">
       </gva-aircraft-cert-airworthiness-fm>
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aw.case"
+        sc-form-params="{ setPart: 'aircraft', lotId: lotId, hideFiles: true }">
+      </gva-common-scanned-document>
     </div>
   </div>
 

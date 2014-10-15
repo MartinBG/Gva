@@ -11,6 +11,7 @@ using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
 using Common.Tests;
+using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
@@ -121,6 +122,8 @@ namespace Gva.MigrationTool.Sets
                         var lotEventDispatcher = dependencies.Value.Item9;
                         var context = dependencies.Value.Item10;
 
+                        var lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId], fullAccess: true);
+
                         Func<string, bool, JObject> getInspectorImpl = (tRegUser, showErrorIfMissing) =>
                         {
                             if (string.IsNullOrWhiteSpace(tRegUser))
@@ -151,13 +154,18 @@ namespace Gva.MigrationTool.Sets
 
                         Func<string, JObject> getInspectorOrDefault = (tRegUser) => getInspectorImpl(tRegUser, false);
 
+                        Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
+                        {
+                            var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
+                            fileRepository.AddFileReferences(pv.Part, content.GetItems<CaseDO>("files"));
+                            return pv;
+                        };
+
                         if (!aircraftFmIdtoLotId.ContainsKey(aircraftFmId))
                         {
                             //TODO remove, those are the ones with duplicate MSN skipped earlier
                             continue;
                         }
-
-                        Lot lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId], fullAccess: true);
 
                         var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspector, getPersonByFmOrgName, getOrgByFmOrgName);
                         foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
@@ -176,7 +184,7 @@ namespace Gva.MigrationTool.Sets
                             var aircraftCertAirworthinessFM = this.getAircraftCertAirworthinessFM(aircraftFmId, certId, noms, regPart, getInspector, getInspectorOrDefault);
                             if (aircraftCertAirworthinessFM != null)
                             {
-                                lot.CreatePart("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM, context);
+                                addPartWithFiles("aircraftCertAirworthinesses/*", aircraftCertAirworthinessFM);
                             }
 
                             var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regPart, noms, getInspector);
@@ -622,7 +630,9 @@ namespace Gva.MigrationTool.Sets
                 }
             }
 
-            return aw;
+            return new JObject(
+                    new JProperty("part", aw),
+                    new JProperty("files",new JArray()));
         }
 
         private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regPart, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)

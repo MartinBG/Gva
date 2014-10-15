@@ -60,7 +60,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessReviewOther.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthiness.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessFM.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessFMCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessViewCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertMark.html" />

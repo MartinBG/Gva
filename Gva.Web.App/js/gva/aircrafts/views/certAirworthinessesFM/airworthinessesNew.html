@@ -16,6 +16,9 @@
       <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw"
         sc-form-params="{ lotId: lotId }">
       </gva-aircraft-cert-airworthiness-fm>
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aw.case"
+        sc-form-params="{ setPart: 'aircraft', lotId: lotId, hideFiles: true }">
+      </gva-common-scanned-document>
 
       <div ng-if="aw.part.airworthinessCertificateType.alias !== 'special'">
         <h5 class="form-header" l10n-text="aircrafts.newAirworthiness.titleReview" style="margin-top: 20px;"></h5>
