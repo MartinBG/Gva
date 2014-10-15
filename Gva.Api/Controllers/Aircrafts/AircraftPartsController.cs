@@ -12,7 +12,7 @@ namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/aircraftParts")]
     [Authorize]
-    public class AircraftPartsController : GvaApplicationPartController<AircraftPartDO>
+    public class AircraftPartsController : GvaSimplePartController<AircraftPartDO>
     {
         public AircraftPartsController(
             IUnitOfWork unitOfWork,
@@ -20,14 +20,14 @@ namespace Gva.Api.Controllers.Aircrafts
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("aircraftParts", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("aircraftParts", unitOfWork, lotRepository, lotEventDispatcher, userContext)
         {
         }
 
         [Route("new")]
         public IHttpActionResult GetNewPart()
         {
-            return Ok(new ApplicationPartVersionDO<AircraftPartDO>(new AircraftPartDO()));
+            return Ok(new SimplePartDO<AircraftPartDO>(new AircraftPartDO()));
         }
     }
 }
