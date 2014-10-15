@@ -12,7 +12,7 @@ namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/maintenances")]
     [Authorize]
-    public class AircraftMaintenanceController : GvaApplicationPartController<AircraftMaintenanceDO>
+    public class AircraftMaintenanceController : GvaSimplePartController<AircraftMaintenanceDO>
     {
         public AircraftMaintenanceController(
             IUnitOfWork unitOfWork,
@@ -20,7 +20,7 @@ namespace Gva.Api.Controllers.Aircrafts
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("maintenances", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("maintenances", unitOfWork, lotRepository, lotEventDispatcher, userContext)
         {
         }
 
@@ -32,7 +32,7 @@ namespace Gva.Api.Controllers.Aircrafts
                 FromDate = DateTime.Now
             };
 
-            return Ok(new ApplicationPartVersionDO<AircraftMaintenanceDO>(newMaintenance));
+            return Ok(new SimplePartDO<AircraftMaintenanceDO>(newMaintenance));
         }
     }
 }
