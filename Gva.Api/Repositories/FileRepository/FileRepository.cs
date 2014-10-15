@@ -94,7 +94,14 @@ namespace Gva.Api.Repositories.FileRepository
                     .Where(f => f.GvaFileId == lotFile.GvaFileId)
                     .Load();
 
-                this.UpdateLotFile(lotFile, caseDO);
+                if (caseDO.IsDeleted)
+                {
+                    this.DeleteLotFile(lotFile);
+                }
+                else
+                {
+                    this.UpdateLotFile(lotFile, caseDO);
+                }
             }
         }
 
@@ -210,6 +217,32 @@ namespace Gva.Api.Repositories.FileRepository
             lotFile.PageIndex = caseDO.BookPageNumber;
             lotFile.PageIndexInt = GetPageIndexInt(caseDO.BookPageNumber);
             lotFile.PageNumber = caseDO.PageCount;
+
+            if (caseDO.File != null)
+            {
+                if (!lotFile.GvaFileId.HasValue)
+                {
+                    GvaFile file = new GvaFile()
+                    {
+                        Filename = caseDO.File.Name,
+                        MimeType = caseDO.File.MimeType,
+                        FileContentId = caseDO.File.Key
+                    };
+
+                    this.unitOfWork.DbContext.Set<GvaFile>().Add(file);
+                    lotFile.GvaFile = file;
+                }
+                else if (lotFile.GvaFile.FileContentId != caseDO.File.Key)
+                {
+                    lotFile.GvaFile.Filename = caseDO.File.Name;
+                    lotFile.GvaFile.MimeType = caseDO.File.MimeType;
+                    lotFile.GvaFile.FileContentId = caseDO.File.Key;
+                }
+            }
+            else if (lotFile.GvaFileId.HasValue)
+            {
+                this.unitOfWork.DbContext.Set<GvaFile>().Remove(lotFile.GvaFile);
+            }
 
             var nonModifiedApps = lotFile.GvaAppLotFiles.Join(
                 caseDO.Applications,
