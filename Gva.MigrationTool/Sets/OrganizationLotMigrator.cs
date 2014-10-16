@@ -155,7 +155,7 @@ namespace Gva.MigrationTool.Sets
                         var organizationAddresses = this.getOrganizationAddress(organizationId, noms);
                         foreach (var organizationAddress in organizationAddresses)
                         {
-                            lot.CreatePart("organizationAddresses/*", organizationAddress, context);
+                            addPartWithFiles("organizationAddresses/*", organizationAddress);
                         }
 
                         Dictionary<int, PartVersion> organizationDocuments = new Dictionary<int, PartVersion>();
@@ -190,7 +190,7 @@ namespace Gva.MigrationTool.Sets
                         var organizationRecommendations = this.getOrganizationRecommendation(organizationId, getPersonByApexId, nomApplications, noms, inspectionPartIndexes);
                         foreach (var organizationRecommendation in organizationRecommendations)
                         {
-                            lot.CreatePart("organizationRecommendations/*", organizationRecommendation, context);
+                            addPartWithFiles("organizationRecommendations/*", organizationRecommendation);
                         }
 
                         var organizationManagementStaffs = this.getOrganizationManagementStaff(organizationId, noms, getPersonByApexId, isApprovedOrg);
@@ -207,8 +207,7 @@ namespace Gva.MigrationTool.Sets
                                 Console.WriteLine("CANNOT FIND PERSON FOR organizationStaffExaminer WITH oldId " + organizationStaffExaminer.Get<int>("__oldId"));
                                 continue;
                             }
-
-                            lot.CreatePart("organizationStaffExaminers/*", organizationStaffExaminer, context);
+                            addPartWithFiles("organizationStaffExaminers/*", organizationStaffExaminer);
                         }
 
                         try
@@ -541,27 +540,42 @@ namespace Gva.MigrationTool.Sets
 
         private IList<JObject> getOrganizationAddress(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
+            JArray files = new JArray(){
+                noms["organizationCaseTypes"].Values.Select(c => 
+                    Utils.ToJObject(new
+                    {
+                        isAdded = true,
+                        file = (object)null,
+                        caseType = Utils.ToJObject(c),
+                        bookPageNumber = (string)null,
+                        pageCount = (int?)null,
+                        applications =  new JArray()
+                    }))
+            };
+
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.FIRM_ADDRESS WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and FIRM_ID = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "FIRM_ADDRESS",
-                        addressType = noms["addressTypes"].ByOldId(r.Field<decimal?>("ADDRESS_TYPE_ID").ToString()),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        settlement = noms["cities"].ByOldId(r.Field<decimal?>("TOWN_VILLAGE_ID").ToString()),
-                        address = r.Field<string>("ADDRESS"),
-                        addressAlt = r.Field<string>("ADDRESS_TRANS"),
-                        phone = r.Field<string>("PHONES"),
-                        fax = r.Field<string>("FAXES"),
-                        postalCode = r.Field<string>("POSTAL_CODE"),
-                        contactPerson = r.Field<string>("CONTACT_PERSON"),
-                        email = r.Field<string>("E_MAIL")
-                    }))
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "FIRM_ADDRESS",
+                            addressType = noms["addressTypes"].ByOldId(r.Field<decimal?>("ADDRESS_TYPE_ID").ToString()),
+                            valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
+                            settlement = noms["cities"].ByOldId(r.Field<decimal?>("TOWN_VILLAGE_ID").ToString()),
+                            address = r.Field<string>("ADDRESS"),
+                            addressAlt = r.Field<string>("ADDRESS_TRANS"),
+                            phone = r.Field<string>("PHONES"),
+                            fax = r.Field<string>("FAXES"),
+                            postalCode = r.Field<string>("POSTAL_CODE"),
+                            contactPerson = r.Field<string>("CONTACT_PERSON"),
+                            email = r.Field<string>("E_MAIL")
+                        })),
+                        new JProperty("files", files)))
                 .ToList();
         }
 
@@ -951,6 +965,19 @@ namespace Gva.MigrationTool.Sets
             Dictionary<string, Dictionary<string, NomValue>> noms,
             Dictionary<int, int> inspectionPartIndexes)
         {
+            JArray files = new JArray(){
+                noms["organizationCaseTypes"].Values.Select(c => 
+                    Utils.ToJObject(new
+                    {
+                        isAdded = true,
+                        file = (object)null,
+                        caseType = Utils.ToJObject(c),
+                        bookPageNumber = (string)null,
+                        pageCount = (int?)null,
+                        applications =  new JArray()
+                    }))
+            };
+
             var disparities = this.oracleConn.CreateStoreCommand(
                 @"SELECT R.ID REC_ID,
                         RC.ID_SECTION SECTION_DETAIL_ID,
@@ -1115,42 +1142,44 @@ namespace Gva.MigrationTool.Sets
                 @"SELECT * FROM CAA_DOC.RECOMMENDATION WHERE {0}",
                 new DbClause("ID_FIRM = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "RECOMMENDATION",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "RECOMMENDATION",
 
-                        auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
+                            auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
 
-                        finished1Date = r.Field<DateTime?>("DATE_FINISHED_P1"),
-                        town1 = r.Field<string>("TOWN_P1"),
-                        finished2Date = r.Field<DateTime?>("DATE_FINISHED_P2"),
-                        town2 = r.Field<string>("TOWN_P2"),
-                        finished3Date = r.Field<DateTime?>("DATE_FINISHED_P3"),
-                        town3 = r.Field<string>("TOWN_P3"),
-                        finished4Date = r.Field<DateTime?>("DATE_FINISHED_P4"),
-                        town4 = r.Field<string>("TOWN_P4"),
-                        finished5Date = r.Field<DateTime?>("DATE_FINISHED_P5"),
-                        town5 = r.Field<string>("TOWN_P5"),
-                        part1Examiners = examiners[r.Field<int>("ID")].ContainsKey("1") ? examiners[r.Field<int>("ID")]["1"] : new object[0],
-                        part2Examiners = examiners[r.Field<int>("ID")].ContainsKey("2") ? examiners[r.Field<int>("ID")]["2"] : new object[0],
-                        part3Examiners = examiners[r.Field<int>("ID")].ContainsKey("3") ? examiners[r.Field<int>("ID")]["3"] : new object[0],
-                        part4Examiners = examiners[r.Field<int>("ID")].ContainsKey("4") ? examiners[r.Field<int>("ID")]["4"] : new object[0],
-                        part5Examiners = examiners[r.Field<int>("ID")].ContainsKey("5") ? examiners[r.Field<int>("ID")]["5"] : new object[0],
+                            finished1Date = r.Field<DateTime?>("DATE_FINISHED_P1"),
+                            town1 = r.Field<string>("TOWN_P1"),
+                            finished2Date = r.Field<DateTime?>("DATE_FINISHED_P2"),
+                            town2 = r.Field<string>("TOWN_P2"),
+                            finished3Date = r.Field<DateTime?>("DATE_FINISHED_P3"),
+                            town3 = r.Field<string>("TOWN_P3"),
+                            finished4Date = r.Field<DateTime?>("DATE_FINISHED_P4"),
+                            town4 = r.Field<string>("TOWN_P4"),
+                            finished5Date = r.Field<DateTime?>("DATE_FINISHED_P5"),
+                            town5 = r.Field<string>("TOWN_P5"),
+                            part1Examiners = examiners[r.Field<int>("ID")].ContainsKey("1") ? examiners[r.Field<int>("ID")]["1"] : new object[0],
+                            part2Examiners = examiners[r.Field<int>("ID")].ContainsKey("2") ? examiners[r.Field<int>("ID")]["2"] : new object[0],
+                            part3Examiners = examiners[r.Field<int>("ID")].ContainsKey("3") ? examiners[r.Field<int>("ID")]["3"] : new object[0],
+                            part4Examiners = examiners[r.Field<int>("ID")].ContainsKey("4") ? examiners[r.Field<int>("ID")]["4"] : new object[0],
+                            part5Examiners = examiners[r.Field<int>("ID")].ContainsKey("5") ? examiners[r.Field<int>("ID")]["5"] : new object[0],
 
-                        formDate = r.Field<DateTime?>("FORM_DATE"),
-                        formText = r.Field<string>("FORM_TEXT"),
-                        interviewedStaff = r.Field<string>("INTERVIEWED_STAFF"),
-                        inspectionFromDate = r.Field<DateTime?>("NADZOR_FROM"),
-                        inspectionToDate = r.Field<DateTime?>("NADZOR_TO"),
-                        documentDescription = r.Field<string>("DESCRIPTION_DOC"),
-                        recommendation = r.Field<string>("RECOMMENDATION"),
+                            formDate = r.Field<DateTime?>("FORM_DATE"),
+                            formText = r.Field<string>("FORM_TEXT"),
+                            interviewedStaff = r.Field<string>("INTERVIEWED_STAFF"),
+                            inspectionFromDate = r.Field<DateTime?>("NADZOR_FROM"),
+                            inspectionToDate = r.Field<DateTime?>("NADZOR_TO"),
+                            documentDescription = r.Field<string>("DESCRIPTION_DOC"),
+                            recommendation = r.Field<string>("RECOMMENDATION"),
 
-                        inspections = inspections[r.Field<int>("ID")],
-                        recommendationDetails = recommendationDetails[r.Field<int>("ID")],
-                        disparities = disparities[r.Field<int>("ID")]
-                    }))
+                            inspections = inspections[r.Field<int>("ID")],
+                            recommendationDetails = recommendationDetails[r.Field<int>("ID")],
+                            disparities = disparities[r.Field<int>("ID")]
+                        })),
+                        new JProperty("files", files)))
                 .ToList();
         }
 
@@ -1240,6 +1269,19 @@ namespace Gva.MigrationTool.Sets
                     }))
                     .ToArray());
 
+            JArray files = new JArray(){
+                noms["organizationCaseTypes"].Values.Select(c => 
+                    Utils.ToJObject(new
+                    {
+                        isAdded = true,
+                        file = (object)null,
+                        caseType = Utils.ToJObject(c),
+                        bookPageNumber = (string)null,
+                        pageCount = (int?)null,
+                        applications =  new JArray()
+                    }))
+            };
+
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT ID,
                         EXAMINER_CODE,
@@ -1252,20 +1294,22 @@ namespace Gva.MigrationTool.Sets
                     WHERE CAA_ID IS NULL {0}",
                 new DbClause("AND ID_FIRM = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "EXAMINER",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "EXAMINER",
 
-                        examinerCode = r.Field<string>("EXAMINER_CODE"),
-                        stampNum = r.Field<string>("STAMP_NUM"),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        person = getPersonByApexId(r.Field<int>("PERSON_ID")),
-                        permitedAW = noms["boolean"].ByCode(r.Field<string>("PERMITED_AW") == "Y" ? "Y" : "N"),
-                        permitedCheck = noms["boolean"].ByCode(r.Field<string>("PERMITED_CHECK") == "Y" ? "Y" : "N"),
-                        approvedAircrafts = approvedAircrafts.ContainsKey(r.Field<int>("ID")) ? approvedAircrafts[r.Field<int>("ID")] : new JObject[0]
-                    }))
+                            examinerCode = r.Field<string>("EXAMINER_CODE"),
+                            stampNum = r.Field<string>("STAMP_NUM"),
+                            valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
+                            person = getPersonByApexId(r.Field<int>("PERSON_ID")),
+                            permitedAW = noms["boolean"].ByCode(r.Field<string>("PERMITED_AW") == "Y" ? "Y" : "N"),
+                            permitedCheck = noms["boolean"].ByCode(r.Field<string>("PERMITED_CHECK") == "Y" ? "Y" : "N"),
+                            approvedAircrafts = approvedAircrafts.ContainsKey(r.Field<int>("ID")) ? approvedAircrafts[r.Field<int>("ID")] : new JObject[0]
+                        })),
+                        new JProperty("files", files)))
                 .ToList();
         }
 

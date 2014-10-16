@@ -117,13 +117,14 @@ namespace Gva.Api.Controllers.Organizations
 
                 var lastAmendment = approval.Amendments.OrderByDescending(am => am.Index).First();
                 var lotFile = this.fileRepository.GetFileReference(lastAmendment.PartId, caseTypeId);
+
                 ApplicationNomDO application = null;
                 if (lotFile != null)
                 {
                     var applications = new CaseDO(lotFile).Applications;
                     if (applications.Count > 0)
                     {
-                        application = new CaseDO(lotFile).Applications.First();
+                        application = applications.First();
                     }
                 }
 
