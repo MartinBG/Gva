@@ -103,7 +103,6 @@
     <Compile Include="Controllers\Airports\AirportOwnersController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\Airports\AirportsController.cs" />
-    <Compile Include="Controllers\GvaSimplePartController.cs" />
     <Compile Include="Controllers\GvaCaseTypesPartController.cs" />
     <Compile Include="Controllers\GvaCaseTypePartController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentInspectionsController.cs" />
@@ -147,7 +146,6 @@
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLangCertDO.cs" />
-    <Compile Include="ModelsDO\SimplePartDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationlAmendmentDO.cs" />
     <Compile Include="ModelsDO\Organizations\LimitationDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDetailDO.cs" />
