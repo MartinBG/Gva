@@ -113,7 +113,6 @@
     <Compile Include="Controllers\AuditsController.cs" />
     <Compile Include="Controllers\GvaSuggestionController.cs" />
     <Compile Include="Controllers\GvaFilePartController.cs" />
-    <Compile Include="Controllers\GvaApplicationPartController.cs" />
     <Compile Include="Controllers\GvaPartsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentsController.cs" />
@@ -210,7 +209,6 @@
     <Compile Include="ModelsDO\Airports\AirportOwnerDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportDataDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportRadioNavAid.cs" />
-    <Compile Include="ModelsDO\ApplicationPartVersionDO.cs" />
     <Compile Include="ModelsDO\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\Common\InspectionDetailDO.cs" />
     <Compile Include="ModelsDO\Common\CoordinatesDO.cs" />
