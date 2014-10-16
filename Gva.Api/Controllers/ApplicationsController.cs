@@ -599,9 +599,9 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetApplicationPart(string path, int lotId)
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
-            var lotFiles = this.fileRepository.GetFileReferences(partVersion.PartId, null);
+            var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, null);
 
-            return Ok(new FilePartVersionDO<DocumentApplicationDO>(partVersion, lotFiles));
+            return Ok(new CaseTypePartDO<DocumentApplicationDO>(partVersion, lotFile));
         }
 
         [Route(@"appPart/{lotId}/{*path:regex(^aircraftDocumentApplications/\d+$)}"),
@@ -609,14 +609,14 @@ namespace Gva.Api.Controllers
          Route(@"appPart/{lotId}/{*path:regex(^equipmentDocumentApplications/\d+$)}"),
          Route(@"appPart/{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}"),
          Route(@"appPart/{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
-        public IHttpActionResult PostApplicationPart(string path, int lotId, FilePartVersionDO<DocumentApplicationDO> application)
+        public IHttpActionResult PostApplicationPart(string path, int lotId, CaseTypePartDO<DocumentApplicationDO> application)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
                 PartVersion<DocumentApplicationDO> partVersion = lot.UpdatePart(path, application.Part, this.userContext);
 
-                this.fileRepository.AddFileReferences(partVersion.Part, application.Files);
+                this.fileRepository.AddFileReference(partVersion.Part, application.Case);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
 
@@ -626,7 +626,7 @@ namespace Gva.Api.Controllers
 
                 transaction.Commit();
 
-                return Ok(new FilePartVersionDO<DocumentApplicationDO>(partVersion));
+                return Ok(new CaseTypePartDO<DocumentApplicationDO>(partVersion));
             }
         }
 

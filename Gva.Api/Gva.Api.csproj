@@ -112,7 +112,6 @@
     <Compile Include="Controllers\Equipments\EquipmentOwnersController.cs" />
     <Compile Include="Controllers\AuditsController.cs" />
     <Compile Include="Controllers\GvaSuggestionController.cs" />
-    <Compile Include="Controllers\GvaFilePartController.cs" />
     <Compile Include="Controllers\GvaPartsController.cs" />
     <Compile Include="Controllers\ExamsController.cs" />
     <Compile Include="Controllers\Equipments\EquipmentsController.cs" />
@@ -221,7 +220,6 @@
     <Compile Include="ModelsDO\Equipments\EquipmentInspectionDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentOwnerDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentDocumentOtherDO.cs" />
-    <Compile Include="ModelsDO\FilePartVersionDO.cs" />
     <Compile Include="ModelsDO\Common\PeriodDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationAddressDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovedAircraftsDO.cs" />
