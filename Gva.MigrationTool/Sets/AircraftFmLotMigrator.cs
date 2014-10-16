@@ -170,16 +170,16 @@ namespace Gva.MigrationTool.Sets
                         var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspector, getPersonByFmOrgName, getOrgByFmOrgName);
                         foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                         {
-                            var pv = lot.CreatePart("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM, context);
+                            var pv = addPartWithFiles("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM);
 
                             var regPart = Utils.ToJObject(
                                 new
                                 {
                                     partIndex = pv.Part.Index,
-                                    description = aircraftCertRegistrationFM.Get<int>("certNumber").ToString()
+                                    description = aircraftCertRegistrationFM.Get<int>("part.certNumber").ToString()
                                 });
 
-                            int certId = aircraftCertRegistrationFM["__oldId"].Value<int>();
+                            int certId = aircraftCertRegistrationFM.Get<int>("part.__oldId");
 
                             var aircraftCertAirworthinessFM = this.getAircraftCertAirworthinessFM(aircraftFmId, certId, noms, regPart, getInspector, getInspectorOrDefault);
                             if (aircraftCertAirworthinessFM != null)
@@ -351,9 +351,8 @@ namespace Gva.MigrationTool.Sets
                     })
                 .OrderBy(r => r.nRegNum)
                 .Select(r => new JObject(
-                    Utils.ToJObject(
                         new JProperty("part",
-                            new
+                           Utils.ToJObject(new
                             {
                                 r.__oldId,
                                 r.__migrTable,
@@ -676,7 +675,7 @@ namespace Gva.MigrationTool.Sets
                             aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("Creditor")),
                             creditorDocument = r.Field<string>("Doc Creditor"),
                             inspector = getInspector(r.Field<string>("tUser"))
-                        }),
+                        })),
                         new JProperty("files",
                             new JArray(
                                 new JObject(
@@ -685,7 +684,7 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
                                     new JProperty("bookPageNumber", null),
                                     new JProperty("pageCount", null),
-                                    new JProperty("applications", new JArray())))))))
+                                    new JProperty("applications", new JArray()))))))
                 .ToList();
         }
 
