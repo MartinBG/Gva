@@ -86,18 +86,6 @@ namespace Gva.MigrationTool.Sets
 
                         var lot = lotRepository.GetLotIndex(aircraftApexIdtoLotId[aircraftApexId], fullAccess: true);
 
-                        var aircraftParts = this.getAircraftParts(aircraftApexId, noms);
-                        foreach (var aircraftPart in aircraftParts)
-                        {
-                            lot.CreatePart("aircraftParts/*", aircraftPart, context);
-                        }
-
-                        var aircraftMaintenances = this.getAircraftMaintenances(aircraftApexId, getPersonByApexId, getOrgByApexId, noms);
-                        foreach (var aircraftMaintenance in aircraftMaintenances)
-                        {
-                            lot.CreatePart("maintenances/*", aircraftMaintenance, context);
-                        }
-
                         Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
                         {
                             var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
@@ -151,6 +139,18 @@ namespace Gva.MigrationTool.Sets
                             {
                                 unitOfWork.DbContext.Set<GvaApplicationStage>().Add(stage);
                             }
+                        }
+
+                        var aircraftParts = this.getAircraftParts(aircraftApexId, noms);
+                        foreach (var aircraftPart in aircraftParts)
+                        {
+                            addPartWithFiles("aircraftParts/*", aircraftPart);
+                        }
+
+                        var aircraftMaintenances = this.getAircraftMaintenances(aircraftApexId, getPersonByApexId, getOrgByApexId, noms);
+                        foreach (var aircraftMaintenance in aircraftMaintenances)
+                        {
+                            addPartWithFiles("maintenances/*", aircraftMaintenance);
                         }
 
                         var aircraftDocumentOccurrences = this.getAircraftDocumentOccurrences(aircraftApexId, nomApplications, noms, blobIdsToFileKeys);
@@ -250,7 +250,7 @@ namespace Gva.MigrationTool.Sets
 
         private IList<JObject> getAircraftParts(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return this.oracleConn.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_PART WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
@@ -272,6 +272,17 @@ namespace Gva.MigrationTool.Sets
                         description = r.Field<string>("DESCRIPTION"),
                     }))
                 .ToList();
+
+            return parts.Select(p => new JObject(
+                new JProperty("part", p),
+                new JProperty("files", new JArray(
+                    new JObject(
+                        new JProperty("isAdded", true),
+                        new JProperty("file", null),
+                        new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                        new JProperty("bookPageNumber", null),
+                        new JProperty("pageCount", null),
+                        new JProperty("applications", new JArray())))))).ToList();
         }
 
         private IList<JObject> getAircraftMaintenances(
@@ -280,7 +291,7 @@ namespace Gva.MigrationTool.Sets
             Func<int?, JObject> getOrgByApexId,
             Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return this.oracleConn.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_MAINTENANCE WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
@@ -298,6 +309,17 @@ namespace Gva.MigrationTool.Sets
                         person = getPersonByApexId((int?)r.Field<decimal?>("ID_PERSON")),
                     }))
                 .ToList();
+
+            return parts.Select(p => new JObject(
+                new JProperty("part", p),
+                new JProperty("files", new JArray(
+                    new JObject(
+                        new JProperty("isAdded", true),
+                        new JProperty("file", null),
+                        new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                        new JProperty("bookPageNumber", null),
+                        new JProperty("pageCount", null),
+                        new JProperty("applications", new JArray())))))).ToList();
         }
 
         private IList<JObject> getAircraftDocumentApplications(
