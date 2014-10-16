@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
@@ -12,6 +13,7 @@ using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Regs.Api.LotEvents;
@@ -32,6 +34,7 @@ namespace Gva.Api.Controllers.Persons
         private IApplicationStageRepository applicationStageRepository;
         private ICaseTypeRepository caseTypeRepository;
         private INomRepository nomRepository;
+        private IFileRepository fileRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
 
@@ -44,6 +47,7 @@ namespace Gva.Api.Controllers.Persons
             IApplicationStageRepository applicationStageRepository,
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository,
+            IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
         {
@@ -55,6 +59,7 @@ namespace Gva.Api.Controllers.Persons
             this.applicationStageRepository = applicationStageRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
+            this.fileRepository = fileRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
         }
@@ -135,6 +140,19 @@ namespace Gva.Api.Controllers.Persons
                 if (person.PersonAddress != null)
                 {
                     personAddressPart = newLot.CreatePart("personAddresses/*", person.PersonAddress, this.userContext);
+                    var cases = this.caseTypeRepository.GetCaseTypesForSet("person")
+                        .Select(ct => new CaseDO()
+                        {
+                            CaseType = new NomValue()
+                            {
+                                NomValueId = ct.GvaCaseTypeId,
+                                Name = ct.Name,
+                                Alias = ct.Alias
+                            },
+                            IsAdded = true
+                        });
+
+                    this.fileRepository.AddFileReferences(personAddressPart.Part, cases);
                 }
 
                 newLot.Commit(this.userContext, lotEventDispatcher);

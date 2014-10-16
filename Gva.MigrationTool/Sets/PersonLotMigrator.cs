@@ -79,12 +79,6 @@ namespace Gva.MigrationTool.Sets
 
                         var lot = lotRepository.GetLotIndex(personIdToLotId[personId], fullAccess: true);
 
-                        var personAddresses = this.getPersonAddresses(personId, noms);
-                        foreach (var address in personAddresses)
-                        {
-                            lot.CreatePart("personAddresses/*", address, context);
-                        }
-
                         Func<string, JObject, PartVersion<JObject>> addPartWithFiles = (path, content) =>
                         {
                             var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
@@ -303,6 +297,12 @@ namespace Gva.MigrationTool.Sets
                             }
                         }
 
+                        var personAddresses = this.getPersonAddresses(personId, noms);
+                        foreach (var address in personAddresses)
+                        {
+                            addPartWithFiles("personAddresses/*", address);
+                        }
+
                         var personDocumentEducations = this.getPersonDocumentEducations(personId, nomApplications, noms, appApexIdToStaffTypeCode, blobIdsToFileKeys);
                         foreach (var docEducation in personDocumentEducations)
                         {
@@ -334,7 +334,7 @@ namespace Gva.MigrationTool.Sets
                         var personStatuses = this.getPersonStatuses(personId, noms);
                         foreach (var personStatus in personStatuses)
                         {
-                            lot.CreatePart("personStatuses/*", personStatus, context);
+                            addPartWithFiles("personStatuses/*", personStatus);
                         }
 
                         var personRatingEditions = this.getPersonRatingEditions(personId, getPersonByApexId, noms,  nomApplications);
@@ -415,7 +415,7 @@ namespace Gva.MigrationTool.Sets
 
         private IList<JObject> getPersonAddresses(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return this.oracleConn.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.PERSON_ADDRESS WHERE {0}",
                 new DbClause("PERSON_ID = {0}", personId)
                 )
@@ -434,6 +434,18 @@ namespace Gva.MigrationTool.Sets
                         postalCode = r.Field<string>("POSTAL_CODE")
                     }))
                 .ToList();
+
+            var files = noms["personCaseTypes"].Values.Select(ct => new JObject(
+                new JProperty("isAdded", true),
+                new JProperty("file", null),
+                new JProperty("caseType", Utils.ToJObject(ct)),
+                new JProperty("bookPageNumber", null),
+                new JProperty("pageCount", null),
+                new JProperty("applications", new JArray())));
+
+            return parts.Select(p => new JObject(
+                new JProperty("part", p),
+                new JProperty("files", files))).ToList();
         }
 
         private Dictionary<int, string> getPersonApplicationsStaffTypeCodes(int personId)
@@ -1118,7 +1130,7 @@ namespace Gva.MigrationTool.Sets
 
         private IList<JObject> getPersonStatuses(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return this.oracleConn.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.PERSON_STATE WHERE {0}",
                 new DbClause("PERSON_ID = {0}", personId)
                 )
@@ -1135,6 +1147,18 @@ namespace Gva.MigrationTool.Sets
                         notes = r.Field<string>("REMARKS")
                     }))
                 .ToList();
+
+            var files = noms["personCaseTypes"].Values.Select(ct => new JObject(
+                new JProperty("isAdded", true),
+                new JProperty("file", null),
+                new JProperty("caseType", Utils.ToJObject(ct)),
+                new JProperty("bookPageNumber", null),
+                new JProperty("pageCount", null),
+                new JProperty("applications", new JArray())));
+
+            return parts.Select(p => new JObject(
+                new JProperty("part", p),
+                new JProperty("files", files))).ToList();
         }
 
         private IDictionary<int, IEnumerable<JObject>> getPersonRatingEditions(
