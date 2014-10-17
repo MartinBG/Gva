@@ -17,7 +17,7 @@
     $scope.appId = $stateParams.appId;
 
     $scope.$watch('newApproval.case.caseType', function () {
-      if ($scope.newApproval['case'].caseType) {
+      if ($scope.newApproval['case'] && $scope.newApproval['case'].caseType) {
         OrganizationApprovalAmendments.newApprovalAmendment({
           id: $scope.lotId,
           appId: $scope.appId,

@@ -17,7 +17,7 @@
     $scope.appId = $stateParams.appId;
 
      $scope.$watch('newRating.case.caseType', function () {
-       if ($scope.newRating['case'].caseType) {
+       if ($scope.newRating['case'] && $scope.newRating['case'].caseType) {
          PersonRatingEditions.newRatingEdition({
            id: $scope.lotId,
            appId: $scope.appId,
