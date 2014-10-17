@@ -1865,36 +1865,10 @@
           caseType: 'Тип дело'
         },
         personCheckDirective: {
-          ratingClass: 'Клас ВС',
-          authorization: 'Разрешение',
-          licenceType: 'Вид правоспособност',
-          personCheckRatingValue: 'Оценка',
-          aircraftTypeGroup: 'Тип/Група ВС',
-          notes: 'Бележки',
-          sector: 'Сектор/работно място',
-          locationIndicator: 'Индикатор на местоположение',
-          ratingType: 'Тип ВС'
-        },
-        personDocumentTrainingDirective: {
-          ratingType: 'Тип ВС',
-          aircraftTypeGroup: 'Тип/Група ВС',
-          ratingClass: 'Клас ВС',
-          authorization: 'Разрешение',
-          licenceType: 'Вид правоспособност',
-          locationIndicator: 'Индикатор за местоположение',
-          sector: 'Сектор/работно място',
-          notes: 'Бележки'
+          personCheckRatingValue: 'Оценка'
         },
         personDocumentLangCertDirective: {
-          ratingType: 'Тип ВС',
-          aircraftTypeGroup: 'Тип/Група ВС',
-          ratingClass: 'Клас ВС',
-          authorization: 'Разрешение',
-          licenceType: 'Вид правоспособност',
-          locationIndicator: 'Индикатор за местоположение',
-          sector: 'Сектор/работно място',
-          langLevel: 'Ниво на език',
-          notes: 'Бележки'
+          langLevel: 'Ниво на език'
         },
         personFlyingExperienceDirective: {
           caseType: 'Тип дело',
@@ -2104,6 +2078,16 @@
           documentDateValidTo: 'Валидно до',
           personDocumentType: 'Тип документ',
           personDocumentRole: 'Роля на документ'
+        },
+        personCommonDocDetailsDirective: {
+          ratingType: 'Тип ВС',
+          aircraftTypeGroup: 'Тип/Група ВС',
+          ratingClass: 'Клас ВС',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          locationIndicator: 'Индикатор за местоположение',
+          sector: 'Сектор/работно място',
+          notes: 'Бележки'
         },
         personOtherDirective: {
           notes: 'Бележки'

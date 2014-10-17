@@ -9,8 +9,7 @@
       var isMultiple = angular.isDefined(attrs.multiple),
           caseTypeId = $parse(attrs.caseType)(scope.$parent),
           init = $parse(attrs.init)(scope.$parent),
-          lotId = $parse(attrs.lotId)(scope.$parent) || attrs.lotId || $stateParams.id,
-          caseTypePromise = Nomenclatures.get({ alias: 'caseTypes', id: caseTypeId }).$promise;
+          lotId = $parse(attrs.lotId)(scope.$parent) || $stateParams.id;
 
       if (isMultiple) {
         scope.caseType = _.pluck(scope.model, gvaCaseTypeConfig.selectObj);
@@ -20,14 +19,16 @@
       }
 
       if (init && caseTypeId) {
-        caseTypePromise.then(function (caseType) {
-          if (isMultiple) {
-            scope.caseType.push(caseType);
-          }
-          else {
-            scope.caseType = caseType;
-          }
-        });
+        Nomenclatures.get({ alias: 'caseTypes', id: caseTypeId })
+          .$promise
+          .then(function (caseType) {
+            if (isMultiple) {
+              scope.caseType.push(caseType);
+            }
+            else {
+              scope.caseType = caseType;
+            }
+          });
       }
 
       scope.caseTypeOpt = {
@@ -47,7 +48,9 @@
         },
         query: function (query) {
           if (caseTypeId) {
-            caseTypePromise.then(function (caseType) {
+            Nomenclatures.get({ alias: 'caseTypes', id: caseTypeId })
+            .$promise
+            .then(function (caseType) {
               query.callback({
                 results: [caseType]
               });
