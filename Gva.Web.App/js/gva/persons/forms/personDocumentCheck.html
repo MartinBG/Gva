@@ -1,14 +1,13 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <gva-person-common-doc name="personDocumenForm" ng-model="model"
-      sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'check' }"></gva-person-common-doc>
+      sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'check', hideCaseType: hideCaseType }"></gva-person-common-doc>
 
-  <div ng-show="model.case">
-    <div ng-show="model.case.caseType">
-      <div class="row">
-        <sc-field type="nomenclature" ng-model="model.part.personCheckRatingValue" alias="'personCheckRatingValues'" l10n-text="persons.personCheckDirective.personCheckRatingValue" class="col-sm-3 col-md-2"></sc-field>
-      </div>
-      <gva-person-common-doc-details name="personDocumentDetailsForm" ng-model="model"
-        sc-form-params="{ categoryAlias: 'check' }"></gva-person-common-doc-details>
+  <div ng-show="model.case.caseType">
+    <div class="row">
+      <sc-field type="nomenclature" ng-model="model.part.personCheckRatingValue" alias="'personCheckRatingValues'" l10n-text="persons.personCheckDirective.personCheckRatingValue" class="col-sm-3 col-md-2"></sc-field>
     </div>
-  </div>
+
+    <gva-person-common-doc-details name="personDocumentDetailsForm" ng-model="model"
+      sc-form-params="{ categoryAlias: 'check' }"></gva-person-common-doc-details>
+</div>
 </ng-form>

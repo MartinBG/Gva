@@ -14,11 +14,8 @@
 
     <div class="well-sm panel-body">
       <div class="row">
-        <div class="form-group col-sm-4 col-md-4" sc-has-error="docPartType">
-          <label class="control-label" l10n-text="applications.edit.newFile.documentType"></label>
-          <sc-validation-error field-name="docPartType" validations="{required: 'default'}"></sc-validation-error>
-          <sc-nomenclature ng-model="docPartType" name="docPartType" alias="'documentParts'" params="{ parentValueId: lotSetId }" ng-required="true"></sc-nomenclature>
-        </div>
+        <sc-field type="nomenclature" ng-model="docPartType" alias="'documentParts'" params="{ parentValueId: lotSetId }" l10n-text="applications.edit.newFile.documentType" class="col-sm-4" ng-required="true"></sc-field>
+        <sc-field type="nomenclature" ng-model="caseType" alias="'caseTypes'" params=" {lotId: lotId }" l10n-text="applications.edit.newFile.caseType" class="col-sm-2" ng-required="true"></sc-field>
       </div>
     </div>
   </div>

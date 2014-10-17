@@ -5,6 +5,7 @@
   function PersonDocumentCheckCtrl($scope, scFormParams) {
     $scope.isNew = scFormParams.isNew;
     $scope.caseTypeId = scFormParams.caseTypeId;
+    $scope.hideCaseType = scFormParams.hideCaseType;
   }
 
   PersonDocumentCheckCtrl.$inject = ['$scope', 'scFormParams'];

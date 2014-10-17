@@ -1,7 +1,8 @@
-﻿using Docs.Api.Models;
+﻿using Docs.Api.DataObjects;
+using Docs.Api.Models;
 using Gva.Api.Models;
 
-namespace Docs.Api.DataObjects
+namespace Gva.Api.ModelsDO.Applications
 {
     public class ApplicationLotFileDO
     {

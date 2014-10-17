@@ -6,7 +6,7 @@
     $scope,
     $state,
     $stateParams,
-    Applications,
+    AplicationsCase,
     PersonDocumentIds,
     PersonDocumentEducations,
     PersonDocumentEmployments,
@@ -225,19 +225,15 @@
     };
 
     $scope.linkPart = function (partId) {
-      var linkExisting = {
+      return AplicationsCase.linkExistingPart({
+        id: $stateParams.id,
         docFileId: $stateParams.docFileId,
         partId: partId
-      };
-
-      return Applications
-        .linkExistingPart({ id: $stateParams.id }, linkExisting)
-          .$promise.then(function () {
-            return $state.transitionTo('root.applications.edit.case',
-              $stateParams, { reload: true }
-            );
-          });
-
+      }).$promise.then(function () {
+        return $state.transitionTo('root.applications.edit.case',
+          $stateParams, { reload: true }
+        );
+      });
     };
 
     $scope.cancel = function () {
@@ -249,7 +245,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Applications',
+    'AplicationsCase',
     'PersonDocumentIds',
     'PersonDocumentEducations',
     'PersonDocumentEmployments',

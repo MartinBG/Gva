@@ -18,7 +18,8 @@
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
     scaffoldingProvider.form({
       name: 'gvaApplicationDocument',
-      templateUrl: 'js/gva/applications/forms/applicationDocument.html'
+      templateUrl: 'js/gva/applications/forms/applicationDocument.html',
+      controller: 'AppDocumentCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaCommonSelectPerson',
@@ -411,18 +412,18 @@
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])
-      .state(['root.applications.search'                           , '?fromDate&toDate&personLin&aircraftIcao&organizationUin'                                 , ['@root'                  , 'js/gva/applications/views/applicationsSearch.html'        , 'ApplicationsSearchCtrl'        ]])
-      .state(['root.applications.new'                              , '/new'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsNew.html'           , 'ApplicationsNewCtrl'           ]])
-      .state(['root.applications.new.editPart'                     , '/:lotId/:setPartPath/:ind?appId'                                                         , ['@root'                  , 'js/gva/applications/views/applicationsEditPart.html'      , 'AppEditPartCtrl'               ]])
-      .state(['root.applications.link'                             , '/link'                                                                                   , ['@root'                  , 'js/gva/applications/views/applicationsLink.html'          , 'ApplicationsLinkCtrl'          ]])
-      .state(['root.applications.edit'                             , '/:id'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsEdit.html'          , 'ApplicationsEditCtrl'          ]])
-      .state(['root.applications.edit.case'                        , '/case'                                                                                   , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditCase.html'      , 'ApplicationsEditCaseCtrl'      ]])
-      .state(['root.applications.edit.case.newFile'                , '/newFile?docId&docFileId'                                                                , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditNewFile.html'   , 'ApplicationsEditNewFileCtrl'   ]])
-      .state(['root.applications.edit.case.newDocFile'             , '/newDocFile?docId'                                                                       , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditNewDocFile.html', 'ApplicationsEditNewDocFileCtrl']])
-      .state(['root.applications.edit.case.childDoc'               , '/childDoc?parentDocId'                                                                   , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditChildDoc.html'  , 'ApplicationsEditChildDocCtrl'  ]])
-      .state(['root.applications.edit.case.addPart'                , '/addPart?docId&docFileId&setPartAlias'                                                   , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditAddPart.html'   , 'ApplicationsEditAddPartCtrl'   ]])
-      .state(['root.applications.edit.case.linkPart'               , '/linkPart?docFileId'                                                                     , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditLinkPart.html'  , 'ApplicationsEditLinkPartCtrl'  ]])
-      .state(['root.applications.edit.stages'                      , '/stages'                                                                                 , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditStages.html'    , 'ApplicationsEditStagesCtrl'    ]]);
+      .state(['root.applications.search'                           , '?fromDate&toDate&personLin&aircraftIcao&organizationUin'                                 , ['@root'                  , 'js/gva/applications/views/applicationsSearch.html'             , 'ApplicationsSearchCtrl'        ]])
+      .state(['root.applications.new'                              , '/new'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsNew.html'                , 'ApplicationsNewCtrl'           ]])
+      .state(['root.applications.new.editPart'                     , '/:lotId/:setPartPath/:ind?appId'                                                         , ['@root'                  , 'js/gva/applications/views/applicationsEditPart.html'           , 'AppEditPartCtrl'               ]])
+      .state(['root.applications.link'                             , '/link'                                                                                   , ['@root'                  , 'js/gva/applications/views/applicationsLink.html'               , 'ApplicationsLinkCtrl'          ]])
+      .state(['root.applications.edit'                             , '/:id'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsEdit.html'               , 'ApplicationsEditCtrl'          ]])
+      .state(['root.applications.edit.case'                        , '/case'                                                                                   , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditCase.html'      , 'ApplicationsEditCaseCtrl'      ]])
+      .state(['root.applications.edit.case.newFile'                , '/newFile?docId&docFileId'                                                                , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditNewFile.html'   , 'ApplicationsEditNewFileCtrl'   ]])
+      .state(['root.applications.edit.case.newDocFile'             , '/newDocFile?docId'                                                                       , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditNewDocFile.html', 'ApplicationsEditNewDocFileCtrl']])
+      .state(['root.applications.edit.case.childDoc'               , '/childDoc?parentDocId'                                                                   , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditChildDoc.html'  , 'ApplicationsEditChildDocCtrl'  ]])
+      .state(['root.applications.edit.case.addPart'                , '/addPart?docId&docFileId&setPartAlias&caseTypeId'                                        , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditAddPart.html'   , 'ApplicationsEditAddPartCtrl'   ]])
+      .state(['root.applications.edit.case.linkPart'               , '/linkPart?docFileId'                                                                     , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditLinkPart.html'  , 'ApplicationsEditLinkPartCtrl'  ]])
+      .state(['root.applications.edit.stages'                      , '/stages'                                                                                 , ['@root.applications.edit', 'js/gva/applications/views/stages/applicationsEditStages.html'  , 'ApplicationsEditStagesCtrl'    ]]);
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
      .modal('chooseAppType'     , 'js/gva/applications/modals/applicationTypes/chooseAppTypesModal.html'    , 'ChooseAppTypesModalCtrl'    )

@@ -1,5 +1,5 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
-  <div class="row" ng-if="setPart === 'person' || setPart === 'organization'">
+  <div class="row" ng-if="(setPart === 'person' || setPart === 'organization') && !hideCaseType">
     <div class="form-group col-sm-2" sc-has-error="caseType">
       <label class="control-label" l10n-text="common.docApplicationDirective.caseType"></label>
       <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>

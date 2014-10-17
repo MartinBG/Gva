@@ -1,4 +1,4 @@
-﻿namespace Gva.Api.ModelsDO
+﻿namespace Gva.Api.ModelsDO.Applications
 {
     public class ApplicationLinkDO
     {

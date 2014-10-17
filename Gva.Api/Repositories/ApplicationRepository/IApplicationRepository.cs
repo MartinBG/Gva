@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Common.Api.Repositories;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Applications;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.ApplicationRepository

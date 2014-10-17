@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Common.Api.Models;
 
-namespace Gva.Api.ModelsDO
+namespace Gva.Api.ModelsDO.Applications
 {
     public class ApplicationNewDO
     {

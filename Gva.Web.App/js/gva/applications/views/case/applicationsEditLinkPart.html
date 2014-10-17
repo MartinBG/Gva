@@ -38,12 +38,12 @@
         </sc-column>
         <sc-column data="part.valid.name" title="persons.documentIdSearch.valid">
         </sc-column>
-        <sc-column data="case.bookPageNumber" title="persons.documentIdSearch.bookPageNumber">
+        <sc-column data="cases[0].bookPageNumber" title="persons.documentIdSearch.bookPageNumber">
         </sc-column>
-        <sc-column data="case.pageCount" title="persons.documentIdSearch.pageCount">
+        <sc-column data="cases[0].pageCount" title="persons.documentIdSearch.pageCount">
         </sc-column>
         <sc-column sortable="false" title="persons.documentIdSearch.file" has-content="true">
-          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
+          <a target="_self" ng-href="api/file?fileKey={{item.cases[0].file.key}}&fileName={{item.cases[0].file.name}}" sc-access-token ng-show="item.cases[0].file" title="{{item.cases[0].file.name}}">
             <span class="glyphicon glyphicon-file"></span>
           </a>
         </sc-column>

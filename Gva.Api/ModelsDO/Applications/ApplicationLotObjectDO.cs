@@ -1,6 +1,6 @@
 ﻿using Gva.Api.Models;
 
-namespace Docs.Api.DataObjects
+namespace Gva.Api.ModelsDO.Applications
 {
     public class ApplicationLotObjectDO
     {

@@ -54,12 +54,6 @@
       });
     };
 
-    $scope.newFile = function (docId) {
-      return $state.go('root.applications.edit.case.newFile', {
-        docId: docId
-      });
-    };
-
     $scope.newDocFile = function (docId) {
       return $state.go('root.applications.edit.case.newDocFile', {
         docId: docId
@@ -92,6 +86,12 @@
       }
       else if (value.setPartAlias === 'personTraining') {
         state = 'root.persons.view.documentTrainings.edit';
+      }
+      else if (value.setPartAlias === 'personExams') {
+        state = 'root.persons.view.exams.edit';
+      }
+      else if (value.setPartAlias === 'personLangCert') {
+        state = 'root.persons.view.documentLangCerts.edit';
       }
       else if (value.setPartAlias === 'personOther') {
         state = 'root.persons.view.documentOthers.edit';

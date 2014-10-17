@@ -1,6 +1,6 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <gva-person-common-doc name="personDocumenForm" ng-model="model"
-        sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'other' }"></gva-person-common-doc>
+        sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'other', hideCaseType: hideCaseType }"></gva-person-common-doc>
 
   <div class="row">
     <sc-field type="textarea-suggestion" rows="2" ng-model="model.part.notes" alias="'notes'" l10n-text="persons.personOtherDirective.notes" class="col-md-8"></sc-field>

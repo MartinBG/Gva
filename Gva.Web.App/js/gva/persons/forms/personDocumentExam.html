@@ -1,5 +1,5 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
-  <div class="row">
+  <div class="row" ng-if="!hideCaseType">
     <div class="form-group col-sm-3 col-md-2" sc-has-error="caseType">
       <label class="control-label" l10n-text="persons.personDocumentExamDirective.caseType"></label>
       <sc-validation-error field-name="caseTypes" validations="{required: 'default'}"></sc-validation-error>

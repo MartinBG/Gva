@@ -1,7 +1,7 @@
 ﻿using Gva.Api.Models;
 using System;
 
-namespace Gva.Api.ModelsDO
+namespace Gva.Api.ModelsDO.Applications
 {
     public class ApplicationListDO
     {

@@ -6,29 +6,21 @@
     $scope,
     $state,
     $stateParams,
-    Applications
+    AplicationsCase,
+    docFile
     ) {
-
-    $scope.files = {};
+    $scope.file = docFile;
 
     $scope.cancel = function () {
       return $state.go('^');
     };
 
     $scope.save = function () {
-      if (!$scope.files.docFiles) {
-        return $state.transitionTo('root.applications.edit.case', {
-          id: $stateParams.id
-        });
-      }
-
       return $scope.newDocFile.$validate().then(function () {
         if ($scope.newDocFile.$valid) {
-          return Applications
-            .attachDocFile({
-              id: $stateParams.id,
+          return AplicationsCase.attachDocFile({
               docId: $stateParams.docId
-            }, $scope.files.docFiles)
+            }, $scope.file)
             .$promise
             .then(function () {
               return $state.transitionTo('root.applications.edit.case', {
@@ -44,8 +36,19 @@
     '$scope',
     '$state',
     '$stateParams',
-    'Applications'
+    'AplicationsCase',
+    'docFile'
   ];
+
+  ApplicationsEditNewDocFileCtrl.$resolve = {
+    docFile: [
+      '$stateParams',
+      'AplicationsCase',
+      function ($stateParams, AplicationsCase) {
+        return AplicationsCase.newDocFile({ docId: $stateParams.docId }).$promise;
+      }
+    ]
+  };
 
   angular.module('gva')
     .controller('ApplicationsEditNewDocFileCtrl', ApplicationsEditNewDocFileCtrl);

@@ -1,41 +1,18 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <h5 class="form-header" l10n-text="applications.applicationDocument.title" style="margin-top:10px;"></h5>
   <div class="row">
-      <div class="form-group col-sm-3" sc-has-error="name">
-          <label class="control-label" l10n-text="applications.applicationDocument.name"></label>
-          <sc-validation-error field-name="name" validations="{required: 'default'}"></sc-validation-error>
-          <sc-text name="name" ng-model="model.name" required ng-readonly="readonly"></sc-text>
-      </div>
-
-      <div class="form-group col-sm-2" sc-has-error="docFileKind">
-          <label class="control-label" l10n-text="applications.applicationDocument.fileKind"></label>
-          <sc-validation-error field-name="docFileKind" validations="{required: 'default'}"></sc-validation-error>
-          <sc-nomenclature name="docFileKind" ng-model="model.docFileKindId" nom-obj="model.docFileKind" mode="id" alias="'docFileKind'" required ng-readonly="readonly"></sc-nomenclature>
-      </div>
+    <sc-field type="text" ng-model="model.name" l10n-text="applications.applicationDocument.name" class="col-sm-4" ng-readonly="true" ng-required="true"></sc-field>
+    <sc-field type="text" ng-model="model.docFileKind.name" l10n-text="applications.applicationDocument.fileKind" class="col-sm-2" ng-readonly="true" ng-required="true"></sc-field>
   </div>
+
   <div class="row">
-      <div class="form-group col-sm-3" sc-has-error="caseType">
-        <label class="control-label" l10n-text="applications.applicationDocument.caseType"></label>
-        <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
-        <sc-nomenclature ng-model="model.caseTypeId" name="caseType" mode="id" nom-obj="model.caseType" alias="'caseTypes'" params="{lotId: model.lotId}" required></sc-nomenclature>
-      </div>
-
-      <div class="form-group col-sm-2" sc-has-error="bookPageNumber">
-          <label class="control-label" l10n-text="applications.applicationDocument.pageIndex"></label>
-          <sc-validation-error field-name="bookPageNumber" validations="{required: 'default'}"></sc-validation-error>
-          <sc-text ng-model="model.bookPageNumber" name="bookPageNumber" required></sc-text>
-      </div>
-
-      <div class="form-group col-sm-2" sc-has-error="pageCount">
-          <label class="control-label" l10n-text="applications.applicationDocument.pageNumber"></label>
-          <sc-validation-error field-name="pageCount" validations="{required: 'default'}"></sc-validation-error>
-          <sc-int ng-model="model.pageCount" name="pageCount" min="0"></sc-int>
-      </div>
-
-      <div class="form-group col-sm-3" sc-has-error="file">
-          <label class="control-label" l10n-text="applications.applicationDocument.attachment"></label>
-          <sc-validation-error field-name="file" validations="{required: 'default'}"></sc-validation-error>
-          <sc-files name="file" ng-model="model.file" required ng-readonly="readonly"></sc-files>
-      </div>
+    <sc-field type="text" ng-model="model.caseType.name" l10n-text="applications.applicationDocument.caseType" class="col-sm-2" ng-readonly="true"></sc-field>
+    <sc-field type="text" ng-model="model.bookPageNumber" ng-required="true" sc-validate="{ unique: isUniqueBPN() }" validations="{unique: 'errorTexts.notUniqueBPN'}" l10n-text="applications.applicationDocument.pageIndex" class="col-sm-2"></sc-field>
+    <sc-field type="int" ng-model="model.pageCount" min="0" l10n-text="applications.applicationDocument.pageNumber" validations="{min: 'default'}" class="col-sm-2"></sc-field>
+    <div class="form-group col-sm-6" sc-has-error="file">
+      <label class="control-label" l10n-text="applications.applicationDocument.attachment"></label>
+      <sc-validation-error field-name="file" validations="{required: 'default'}"></sc-validation-error>
+      <sc-files name="file" ng-model="model.file" required ng-readonly="true"></sc-files>
+    </div>
   </div>
 </ng-form>

@@ -2829,6 +2829,7 @@
           newFile: {
             title: 'Нова страница в описа',
             documentType: 'Тип на документ',
+            caseType: 'Тип дело',
             cancel: 'Отказ',
             addPart: 'Продължи'
           },
@@ -2842,7 +2843,10 @@
           newDocFile: {
             title: 'Нов файл',
             cancel: 'Отказ',
-            save: 'Запис'
+            save: 'Запис',
+            name: 'Наименование',
+            docFileKind: 'Вид файл',
+            file: 'Прикачен файл'
           },
           linkFile: {
             title: 'Свържи документ в описа',
@@ -3055,7 +3059,7 @@
           fileKind: 'Вид файл',
           fileType: 'Тип файл',
           caseType: 'Тип дело',
-          pageIndex: '№ стр. в дело',
+          pageIndex: '№ стр.',
           pageNumber: 'Брой стр.',
           attachment: 'Прикачен файл'
         },

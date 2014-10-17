@@ -1,7 +1,7 @@
 ﻿using System;
 using Gva.Api.Models;
 
-namespace Gva.Api.ModelsDO
+namespace Gva.Api.ModelsDO.Applications
 {
     public class ApplicationStageDO
     {

@@ -6,6 +6,7 @@
     $scope.personLin = scFormParams.personLin;
     $scope.isNew = scFormParams.isNew;
     $scope.caseTypeId = scFormParams.caseTypeId;
+    $scope.hideCaseType = scFormParams.hideCaseType;
   }
 
   PersonDocumentLangCertCtrl.$inject = ['$scope', 'scFormParams'];

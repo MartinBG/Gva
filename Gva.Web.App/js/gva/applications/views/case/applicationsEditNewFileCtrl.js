@@ -9,7 +9,9 @@
     application
     ) {
     $scope.lotSetId = application.lotSetId;
+    $scope.lotId = application.lotId;
     $scope.docPartType = null;
+    $scope.caseType = null;
 
     $scope.cancel = function () {
       return $state.transitionTo('root.applications.edit.case', $stateParams, { reload: true });
@@ -22,7 +24,8 @@
             return $state.go('root.applications.edit.case.addPart', {
               docId: $stateParams.docId,
               docFileId: $stateParams.docFileId,
-              setPartAlias: $scope.docPartType.alias
+              setPartAlias: $scope.docPartType.alias,
+              caseTypeId: $scope.caseType.nomValueId
             });
           }
         });

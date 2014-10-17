@@ -5,6 +5,7 @@
   function PersonDocumentExamCtrl($scope, scModal, scFormParams) {
     $scope.isNew = scFormParams.isNew;
     $scope.caseTypeId = scFormParams.caseTypeId;
+    $scope.hideCaseType = scFormParams.hideCaseType;
 
     $scope.choosePublisher = function () {
       var modalInstance = scModal.open('choosePublisher');

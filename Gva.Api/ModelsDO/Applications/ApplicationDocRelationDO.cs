@@ -2,7 +2,7 @@
 using Docs.Api.DataObjects;
 using Docs.Api.Models;
 
-namespace Gva.Api.ModelsDO
+namespace Gva.Api.ModelsDO.Applications
 {
     public class ApplicationDocRelationDO
     {

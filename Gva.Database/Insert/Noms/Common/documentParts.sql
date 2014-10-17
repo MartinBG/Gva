@@ -7,11 +7,13 @@ INSERT INTO [NomValues]
     ([NomId], [Code]                    , [Name]                    , [NameAlt], [ParentValueId], [Alias]                   , [IsActive], [TextContent])
 VALUES
     (@nomId , N'personDocumentId'       , N'Документ за самоличност', NULL     , 1              , N'personDocumentId'       , 1         , NULL         ),
-    (@nomId , N'personEducation'        , N'Образования'            , NULL     , 1              , N'personEducation'        , 1         , NULL         ),
+    (@nomId , N'personEducation'        , N'Образование'            , NULL     , 1              , N'personEducation'        , 1         , NULL         ),
     (@nomId , N'personEmployment'       , N'Месторабота'            , NULL     , 1              , N'personEmployment'       , 1         , NULL         ),
-    (@nomId , N'personMedical'          , N'Медицински'             , NULL     , 1              , N'personMedical'          , 1         , NULL         ),
+    (@nomId , N'personMedical'          , N'Медицинско'             , NULL     , 1              , N'personMedical'          , 1         , NULL         ),
     (@nomId , N'personCheck'            , N'Проверка'               , NULL     , 1              , N'personCheck'            , 1         , NULL         ),
     (@nomId , N'personTraining'         , N'Обучение'               , NULL     , 1              , N'personTraining'         , 1         , NULL         ),
+    (@nomId , N'personLangCert'         , N'Свидетелство за език'   , NULL     , 1              , N'personLangCert'         , 1         , NULL         ),
+    (@nomId , N'personExams'            , N'Изпит'                  , NULL     , 1              , N'personExams'            , 1         , NULL         ),
     (@nomId , N'personOther'            , N'Друг документ'          , NULL     , 1              , N'personOther'            , 1         , NULL         ),
     (@nomId , N'personApplication'      , N'Заявление'              , NULL     , 1              , N'personApplication'      , 1         , NULL         ),
 
