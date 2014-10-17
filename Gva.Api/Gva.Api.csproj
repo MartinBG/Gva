@@ -295,6 +295,7 @@
     <Compile Include="Projections\Inventory\Equipments\EquipmentOtherProjection.cs" />
     <Compile Include="Projections\Inventory\Equipments\EquipmentOwnerProjection.cs" />
     <Compile Include="Projections\Inventory\Organizations\OrganizationOtherProjection.cs" />
+    <Compile Include="Projections\Inventory\Persons\PersonExamProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonLanguageCertificateProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonCheckProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonDocumentIdProjection.cs" />
