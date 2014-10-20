@@ -46,6 +46,11 @@
               method: 'GET',
               url: 'api/apps/getGvaCorrespodents',
               params: { lotId: '@lotId' }
+            },
+            getInitApp: {
+              method: 'GET',
+              url: 'api/apps/:lotId/initApplication/:appId',
+              params: { lotId: '@lotId' }
             }
           });
       }]);

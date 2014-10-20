@@ -12,6 +12,7 @@
     $scope.form = {};
     $scope.personDocumentCheck = personDocumentCheck;
     $scope.lotId = scModalParams.lotId;
+    $scope.appId = scModalParams.appId;
     $scope.caseTypeId = scModalParams.caseTypeId;
 
     $scope.save = function () {
@@ -47,8 +48,7 @@
       'scModalParams',
       function (PersonDocumentChecks, scModalParams) {
         return PersonDocumentChecks.newCheck({
-          id: scModalParams.lotId,
-          appId: scModalParams.appId
+          id: scModalParams.lotId
         }).$promise;
       }
     ]

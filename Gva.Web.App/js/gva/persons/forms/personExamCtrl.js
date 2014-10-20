@@ -8,7 +8,7 @@
     l10n,
     scFormParams
     ) {
-    var currFirstFile = $scope.model.cases[0].file || { };
+    var currFirstFile = $scope.model.cases[0] ? $scope.model.cases[0].file || {} : {};
 
     $scope.file = null;
     $scope.loadingImage = false;

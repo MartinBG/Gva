@@ -4,21 +4,34 @@
 (function (angular, Select2, _) {
   'use strict';
 
-  function CaseTypeDirective($stateParams, $parse, Nomenclatures, GvaParts, gvaCaseTypeConfig) {
+  function CaseTypeDirective(
+    $stateParams,
+    $parse,
+    $q,
+    Nomenclatures,
+    Applications,
+    GvaParts,
+    gvaCaseTypeConfig
+  ) {
     function preLink(scope, element, attrs) {
       var isMultiple = angular.isDefined(attrs.multiple),
           caseTypeId = $parse(attrs.caseType)(scope.$parent),
           init = $parse(attrs.init)(scope.$parent),
-          lotId = $parse(attrs.lotId)(scope.$parent) || $stateParams.id;
+          lotId = $parse(attrs.lotId)(scope.$parent) || $stateParams.id,
+          caseTypeChosen = false;
 
       if (isMultiple) {
         scope.caseType = _.pluck(scope.model, gvaCaseTypeConfig.selectObj);
+        caseTypeChosen = _.some(scope.caseType, function (ct) {
+          return ct.nomValueId === parseInt(caseTypeId, 10);
+        });
       }
       else if (!isMultiple && scope.model) {
         scope.caseType = scope.model[gvaCaseTypeConfig.selectObj];
+        caseTypeChosen = scope.caseType.nomValueId === parseInt(caseTypeId, 10);
       }
 
-      if (init && caseTypeId) {
+      if (init && caseTypeId && !caseTypeChosen) {
         Nomenclatures.get({ alias: 'caseTypes', id: caseTypeId })
           .$promise
           .then(function (caseType) {
@@ -73,7 +86,8 @@
 
     function postLink(scope, element, attrs) {
       var isMultiple = angular.isDefined(attrs.multiple),
-          lotId = $parse(attrs.lotId)(scope.$parent) || attrs.lotId || $stateParams.id;
+          appId = $parse(attrs.appId)(scope.$parent),
+          lotId = $parse(attrs.lotId)(scope.$parent) || $stateParams.id;
 
       scope.$watch('caseType', function (newValue, oldValue) {
         if (newValue === oldValue || !newValue && !oldValue) {
@@ -121,19 +135,31 @@
 
       var addNewFile = function (caseType) {
         var newFile = {
-          caseType: caseType,
-          file: null,
-          bookPageNumber: null,
-          pageCount: null,
-          isAdded: true,
-          isDeleted: false
-        };
+            caseType: caseType,
+            file: null,
+            bookPageNumber: null,
+            pageCount: null,
+            isAdded: true,
+            isDeleted: false
+          },
+          applicationPromise = null;
 
-        GvaParts.getNextBPN({
-          lotId: lotId,
-          caseTypeId: caseType.nomValueId
-        }).$promise.then(function (data) {
-          newFile.bookPageNumber = data.nextBPN.toString();
+        if (appId) {
+          applicationPromise = Applications.getInitApp({
+            lotId: lotId,
+            appId: appId
+          }).$promise;
+        }
+
+        $q.all({
+          BPN: GvaParts.getNextBPN({ lotId: lotId, caseTypeId: caseType.nomValueId }).$promise,
+          application: applicationPromise
+        }).then(function (res) {
+          newFile.bookPageNumber = res.BPN.nextBPN.toString();
+
+          if (res.application) {
+            newFile.applications = [res.application];
+          }
         });
 
         if (isMultiple) {
@@ -164,7 +190,9 @@
   CaseTypeDirective.$inject = [
     '$stateParams',
     '$parse',
+    '$q',
     'Nomenclatures',
+    'Applications',
     'GvaParts',
     'gvaCaseTypeConfig'
   ];

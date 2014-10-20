@@ -4,7 +4,7 @@
     <div class="form-group col-sm-3 col-md-2" sc-has-error="caseType">
       <label class="control-label" l10n-text="persons.personCommonDocDirective.caseType"></label>
       <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
-      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" ng-required="true" case-type="caseTypeId"></gva-case-type>
+      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" ng-required="true" case-type="caseTypeId" app-id="appId"></gva-case-type>
     </div>
   </div>
 

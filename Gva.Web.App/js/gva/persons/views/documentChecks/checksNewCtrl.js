@@ -12,6 +12,7 @@
     $scope.personDocumentCheck = personDocumentCheck;
     $scope.lotId = $stateParams.id;
     $scope.caseTypeId = $stateParams.caseTypeId;
+    $scope.appId = $stateParams.appId;
 
     $scope.save = function () {
       return $scope.newDocumentCheckForm.$validate()
@@ -46,8 +47,7 @@
       'PersonDocumentChecks',
       function ($stateParams, PersonDocumentChecks) {
         return PersonDocumentChecks.newCheck({
-          id: $stateParams.id,
-          appId: $stateParams.appId
+          id: $stateParams.id
         }).$promise;
       }
     ]
