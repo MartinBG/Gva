@@ -3,7 +3,6 @@ using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;

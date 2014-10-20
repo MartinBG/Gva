@@ -12,6 +12,7 @@
     $scope.form = {};
     $scope.newLangCert = newLangCert;
     $scope.caseTypeId = scModalParams.caseTypeId;
+    $scope.appId = scModalParams.appId;
     $scope.lotId = scModalParams.lotId;
 
     $scope.save = function () {
@@ -47,8 +48,7 @@
       'scModalParams',
       function (PersonDocumentLangCerts, scModalParams) {
         return PersonDocumentLangCerts.newLangCert({
-          id: scModalParams.lotId,
-          appId: scModalParams.appId
+          id: scModalParams.lotId
         }).$promise;
       }
     ]

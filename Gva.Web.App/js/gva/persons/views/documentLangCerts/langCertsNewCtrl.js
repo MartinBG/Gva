@@ -11,6 +11,7 @@
   ) {
     $scope.personDocumentLangCert = personDocumentLangCert;
     $scope.lotId = $stateParams.id;
+    $scope.appId = $stateParams.appId;
     $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
@@ -46,8 +47,7 @@
       'PersonDocumentLangCerts',
       function ($stateParams, PersonDocumentLangCerts) {
         return PersonDocumentLangCerts.newLangCert({
-          id: $stateParams.id,
-          appId: $stateParams.appId
+          id: $stateParams.id
         }).$promise;
       }
     ]
