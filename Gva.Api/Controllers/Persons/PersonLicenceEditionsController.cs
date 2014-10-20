@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
-using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
@@ -27,7 +26,6 @@ namespace Gva.Api.Controllers.Persons
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
         private ILotEventDispatcher lotEventDispatcher;
-        private INomRepository nomRepository;
         private IFileRepository fileRepository;
         private ICaseTypeRepository caseTypeRepository;
         private UserContext userContext;
@@ -39,7 +37,6 @@ namespace Gva.Api.Controllers.Persons
             ICaseTypeRepository caseTypeRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
-            INomRepository nomRepository,
             UserContext userContext)
             : base("licenceEditions", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
@@ -48,7 +45,6 @@ namespace Gva.Api.Controllers.Persons
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
             this.lotEventDispatcher = lotEventDispatcher;
-            this.nomRepository = nomRepository;
             this.fileRepository = fileRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.userContext = userContext;

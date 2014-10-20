@@ -47,7 +47,7 @@ namespace Gva.Api.Controllers.Persons
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewLicence(int lotId, int? appId = null)
+        public IHttpActionResult GetNewLicence(int lotId)
         {
             PersonLicenceDO licence = new PersonLicenceDO()
             {

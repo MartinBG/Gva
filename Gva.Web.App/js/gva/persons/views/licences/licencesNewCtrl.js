@@ -64,8 +64,7 @@
       'PersonLicences',
       function ($stateParams, PersonLicences) {
         return PersonLicences.newLicence({
-          id: $stateParams.id,
-          appId: $stateParams.appId
+          id: $stateParams.id
         }).$promise;
       }
     ]
