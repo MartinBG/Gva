@@ -13,7 +13,9 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-document-id name="personDocumentIdForm" ng-model="personDocumentId" sc-form-params="{ isNew: true, caseTypeId: caseTypeId }"></gva-person-document-id>
+      <gva-person-document-id name="personDocumentIdForm" ng-model="personDocumentId"
+        sc-form-params="{ isNew: true, caseTypeId: caseTypeId, appId: appId }">
+      </gva-person-document-id>
 
       <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentId.cases"
         sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>

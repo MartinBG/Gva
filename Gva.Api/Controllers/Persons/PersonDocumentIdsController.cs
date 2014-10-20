@@ -6,7 +6,6 @@ using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -17,50 +16,30 @@ namespace Gva.Api.Controllers.Persons
     [Authorize]
     public class PersonDocumentIdsController : GvaCaseTypesPartController<PersonDocumentIdDO>
     {
-        private IApplicationRepository applicationRepository;
-        private ILotRepository lotRepository;
         private INomRepository nomRepository;
 
         public PersonDocumentIdsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
-            IApplicationRepository applicationRepository,
             INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("personDocumentIds", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.applicationRepository = applicationRepository;
-            this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewDocumentId(int lotId, int? appId = null)
+        public IHttpActionResult GetNewDocumentId(int lotId)
         {
             PersonDocumentIdDO newDocumentId = new PersonDocumentIdDO()
             {
-                DocumentDateValidFrom = DateTime.Now
+                DocumentDateValidFrom = DateTime.Now,
+                Valid = this.nomRepository.GetNomValue("boolean", "yes")
             };
 
-            newDocumentId.Valid = this.nomRepository.GetNomValue("boolean", "yes");
-
-            var cases = new List<CaseDO>();
-            if (appId.HasValue)
-            {
-                this.lotRepository.GetLotIndex(lotId);
-                cases.Add(new CaseDO()
-                {
-                    IsAdded = true,
-                    Applications = new List<ApplicationNomDO>()
-                    {
-                        this.applicationRepository.GetInitApplication(appId)
-                    }
-                });
-            }
-
-            return Ok(new CaseTypesPartDO<PersonDocumentIdDO>(newDocumentId, cases));
+            return Ok(new CaseTypesPartDO<PersonDocumentIdDO>(newDocumentId, new List<CaseDO>()));
         }
     }
 }

@@ -3,7 +3,7 @@
     <div class="form-group col-sm-2" sc-has-error="caseTypes">
       <label class="control-label" l10n-text="persons.personDocumentIdDirective.caseType"></label>
       <sc-validation-error field-name="caseTypes" validations="{required: 'default'}"></sc-validation-error>
-      <gva-case-type model="model.cases" name="caseTypes" multiple init="isNew" ng-disabled="form.$readonly" case-type="caseTypeId"></gva-case-type>
+      <gva-case-type model="model.cases" name="caseTypes" multiple init="isNew" ng-disabled="form.$readonly" case-type="caseTypeId" app-id="appId"></gva-case-type>
     </div>
   </div>
   <div class="row">
