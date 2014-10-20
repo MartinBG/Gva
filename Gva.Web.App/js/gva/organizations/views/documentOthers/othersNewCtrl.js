@@ -11,6 +11,7 @@
   ) {
     $scope.organizationDocumentOther = organizationDocumentOther;
     $scope.lotId = $stateParams.id;
+    $scope.appId = $stateParams.appId;
     $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
@@ -45,8 +46,7 @@
       'OrganizationDocumentOthers',
       function ($stateParams, OrganizationDocumentOthers) {
         return OrganizationDocumentOthers.newDocument({
-          id: $stateParams.id,
-          appId: $stateParams.appId
+          id: $stateParams.id
         }).$promise;
       }
     ]
