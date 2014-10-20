@@ -3,6 +3,7 @@
       sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'languageCert', hideCaseType: hideCaseType }"></gva-person-common-doc>
 
   <div ng-show="model.case.caseType">
+     <h5 class="form-header" l10n-text="persons.personDocumentLangCertDirective.langCertData"></h5>
     <div class="row">
       <sc-field type="nomenclature" ng-model="model.part.langLevel" alias="'langLevels'" params="{ roleAlias: model.part.documentRole.alias }" l10n-text="persons.personDocumentLangCertDirective.langLevel" class="col-sm-6 col-md-4"></sc-field>
     </div>

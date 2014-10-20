@@ -1865,10 +1865,12 @@
           caseType: 'Тип дело'
         },
         personCheckDirective: {
-          personCheckRatingValue: 'Оценка'
+          personCheckRatingValue: 'Оценка',
+          checkData: 'Данни за проверка'
         },
         personDocumentLangCertDirective: {
-          langLevel: 'Ниво на език'
+          langLevel: 'Ниво на език',
+          langCertData: 'Данни за свидетелство за език'
         },
         personFlyingExperienceDirective: {
           caseType: 'Тип дело',
@@ -2077,7 +2079,8 @@
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
           personDocumentType: 'Тип документ',
-          personDocumentRole: 'Роля на документ'
+          personDocumentRole: 'Роля на документ',
+          title: 'Общи данни'
         },
         personCommonDocDetailsDirective: {
           ratingType: 'Тип ВС',
@@ -2087,7 +2090,8 @@
           licenceType: 'Вид правоспособност',
           locationIndicator: 'Индикатор за местоположение',
           sector: 'Сектор/работно място',
-          notes: 'Бележки'
+          notes: 'Бележки',
+          title: 'Данни за класификация'
         },
         personOtherDirective: {
           notes: 'Бележки'
