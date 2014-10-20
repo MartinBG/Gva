@@ -15,6 +15,8 @@
     $scope.imageError = null;
     $scope.isNew = scFormParams.isNew;
     $scope.caseTypeId = scFormParams.caseTypeId;
+    $scope.appId = scFormParams.appId;
+    $scope.hideCaseType = scFormParams.hideCaseType;
 
     $scope.gradeExam = function () {
       return $scope.form.$validate().then(function () {

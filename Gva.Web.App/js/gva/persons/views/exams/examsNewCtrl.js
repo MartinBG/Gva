@@ -11,6 +11,7 @@
   ) {
     $scope.exam = exam;
     $scope.lotId = $stateParams.id;
+    $scope.appId = $stateParams.appId;
     $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
@@ -42,8 +43,7 @@
       'PersonExams',
       function ($stateParams, PersonExams) {
         return PersonExams.newExam({
-          id: $stateParams.id,
-          appId: $stateParams.appId
+          id: $stateParams.id
         }).$promise;
       }
     ]

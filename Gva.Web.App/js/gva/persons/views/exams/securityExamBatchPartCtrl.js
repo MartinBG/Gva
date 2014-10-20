@@ -21,7 +21,7 @@
       $scope.personExam.part.commonQuestion = $scope.commonData.commonQuestion;
       $scope.personExam.part.specializedQuestion = $scope.commonData.specializedQuestion;
       $scope.personExam.part.inspectors = $scope.commonData.inspectors;
-      $scope.personExam.files[0].caseType = $scope.commonData.caseType;
+      $scope.personExam.cases[0].caseType = $scope.commonData.caseType;
     }
 
     $scope.$watch('personExam.lot.id', function (newValue, oldValue) {
@@ -58,7 +58,7 @@
         $scope.commonData.inspectors = newValue;
       }
     });
-    $scope.$watch('personExam.files[0].caseType', function (newValue, oldValue) {
+    $scope.$watch('personExam.cases[0].caseType', function (newValue, oldValue) {
       if (((newValue !== oldValue) || (newValue === oldValue)) && !!newValue) {
         $scope.commonData.caseType = newValue;
       }
@@ -69,7 +69,7 @@
         if ($scope.newExamBatchForm.$valid) {
           var exam = {
             part: $scope.personExam.part,
-            files: $scope.personExam.files
+            cases: $scope.personExam.cases
           };
 
           return PersonExams.save({
