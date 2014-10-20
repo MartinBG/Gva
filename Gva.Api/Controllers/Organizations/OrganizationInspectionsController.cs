@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
@@ -19,6 +20,8 @@ namespace Gva.Api.Controllers.Organizations
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
         private IOrganizationRepository organizationRepository;
+        private IFileRepository fileRepository;
+        private string path;
 
         public OrganizationInspectionsController(
             IUnitOfWork unitOfWork,
@@ -30,9 +33,11 @@ namespace Gva.Api.Controllers.Organizations
             UserContext userContext)
             : base("organizationInspections", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
+            this.path = "organizationInspections";
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
             this.organizationRepository = organizationRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]
@@ -61,6 +66,29 @@ namespace Gva.Api.Controllers.Organizations
         public IHttpActionResult GetInspectionRecommendations(int lotId, int inspectionPartIndex)
         {
             return Ok(this.organizationRepository.GetInspectionRecommendations(lotId, inspectionPartIndex));
+        }
+
+        [Route("data")]
+        public IHttpActionResult GetInspections(int lotId, int? caseTypeId = null, [FromUri] int?[] partIndexes = null)
+        {
+            var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts<OrganizationInspectionDO>(this.path);
+
+            if (partIndexes != null)
+            {
+                partVersions = partVersions.Where(pv => partIndexes.Contains(pv.Part.Index)).ToArray();
+            }
+
+            List<CaseTypePartDO<OrganizationInspectionDO>> partVersionDOs = new List<CaseTypePartDO<OrganizationInspectionDO>>();
+            foreach (var partVersion in partVersions)
+            {
+                var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFile != null)
+                {
+                    partVersionDOs.Add(new CaseTypePartDO<OrganizationInspectionDO>(partVersion, lotFile));
+                }
+            }
+
+            return Ok(partVersionDOs);
         }
     }
 }
