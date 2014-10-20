@@ -9,7 +9,6 @@
       personDocumentEducations = require('./person-document-education.sample'),
       personDocumentIds = require('./person-document-id.sample'),
       personDocumentOthers = require('./person-document-other.sample'),
-      personDocumentExams = require('./person-document-exam.sample'),
       personDocumentTrainings = require('./person-document-training.sample'),
       personDocumentMedicals = require('./person-document-med.sample'),
       personDocumentChecks = require('./person-document-checks.sample'),
@@ -162,16 +161,6 @@
         }
       ],
       personLicences: [],
-      personDocumentExams: [
-        {
-          partIndex: 27,
-          part: personDocumentExams.person1Exam1
-        },
-        {
-          partIndex: 28,
-          part: personDocumentExams.person1Exam2
-        }
-      ],
       personDocumentApplications: [
         {
           partIndex: 29,
@@ -207,8 +196,7 @@
       personDocumentChecks: [],
       personFlyingExperiences: [],
       personRatings: [],
-      personLicences: [],
-      personDocumentExams: []
+      personLicences: []
     },
     {
       lotId: 3,
@@ -234,8 +222,7 @@
       personDocumentChecks: [],
       personFlyingExperiences: [],
       personRatings: [],
-      personLicences: [],
-      personDocumentExams: []
+      personLicences: []
     }
   ]);
 }(angular));

@@ -613,7 +613,6 @@
     <Content Include="js\gva\persons\forms\personDocumentLangCertCtrl.js" />
     <Content Include="js\gva\persons\forms\personCommonDocumentCtrl.js" />
     <Content Include="js\gva\persons\forms\personCommonDocument.html" />
-    <Content Include="js\gva\persons\forms\personDocumentExamCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentEmploymentCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentEducationCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentIdCtrl.js" />
@@ -650,7 +649,6 @@
     <Content Include="js\gva\persons\forms\personDocumentCheck.html" />
     <Content Include="js\gva\persons\forms\personDocumentEducation.html" />
     <Content Include="js\gva\persons\forms\personDocumentEmployment.html" />
-    <Content Include="js\gva\persons\forms\personDocumentExam.html" />
     <Content Include="js\gva\persons\forms\personDocumentId.html" />
     <Content Include="js\gva\persons\forms\personDocumentMedical.html" />
     <Content Include="js\gva\persons\forms\personDocumentOther.html" />
@@ -702,7 +700,6 @@
     <Content Include="js\gva\persons\resources\personDocumentChecks.js" />
     <Content Include="js\gva\persons\resources\personDocumentEducations.js" />
     <Content Include="js\gva\persons\resources\personDocumentEmployments.js" />
-    <Content Include="js\gva\persons\resources\personDocumentExams.js" />
     <Content Include="js\gva\persons\resources\personDocumentIds.js" />
     <Content Include="js\gva\persons\resources\personDocumentMedicals.js" />
     <Content Include="js\gva\persons\resources\personDocumentOthers.js" />
@@ -748,12 +745,6 @@
     <Content Include="js\gva\persons\views\documentEmployments\emplsNewCtrl.js" />
     <Content Include="js\gva\persons\views\documentEmployments\emplsSearch.html" />
     <Content Include="js\gva\persons\views\documentEmployments\emplsSearchCtrl.js" />
-    <Content Include="js\gva\persons\views\documentExams\examsEdit.html" />
-    <Content Include="js\gva\persons\views\documentExams\examsEditCtrl.js" />
-    <Content Include="js\gva\persons\views\documentExams\examsNew.html" />
-    <Content Include="js\gva\persons\views\documentExams\examsNewCtrl.js" />
-    <Content Include="js\gva\persons\views\documentExams\examsSearch.html" />
-    <Content Include="js\gva\persons\views\documentExams\examsSearchCtrl.js" />
     <Content Include="js\gva\persons\views\documentIds\idsEdit.html" />
     <Content Include="js\gva\persons\views\documentIds\idsEditCtrl.js" />
     <Content Include="js\gva\persons\views\documentIds\idsNew.html" />
@@ -1072,7 +1063,6 @@
     <Content Include="test\gva\persons\mocks\personDocumentChecksHttp.js" />
     <Content Include="test\gva\persons\mocks\personDocumentEcucationsHttp.js" />
     <Content Include="test\gva\persons\mocks\personDocumentEmploymentsHttp.js" />
-    <Content Include="test\gva\persons\mocks\personDocumentExamHttp.js" />
     <Content Include="test\gva\persons\mocks\personDocumentIdsHttp.js" />
     <Content Include="test\gva\persons\mocks\personDocumentMedicalsHttp.js" />
     <Content Include="test\gva\persons\mocks\personDocumentOthersHttp.js" />

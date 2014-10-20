@@ -147,11 +147,6 @@
       templateUrl: 'js/gva/persons/forms/personLicenceStatus.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaPersonDocumentExam',
-      templateUrl: 'js/gva/persons/forms/personDocumentExam.html',
-      controller: 'PersonDocumentExamCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaPersonExam',
       templateUrl: 'js/gva/persons/forms/personExam.html',
       controller: 'PersonExamCtrl'
@@ -505,10 +500,6 @@
       .state(['root.persons.view.ratings.edit.editions'                    , '/ratingEditions'                                                                                                                                                                                                                   ])
       .state(['root.persons.view.ratings.edit.editions.new'                , '/new'                                                                        , ['@root.persons.view.ratings.edit'     , 'js/gva/persons/views/ratings/ratingEditions/ratingEditionsNew.html'     , 'RatingEditionsNewCtrl'        ]])
       .state(['root.persons.view.ratings.edit.editions.edit'               , '/:index'                                                                     , ['@root.persons.view.ratings.edit'     , 'js/gva/persons/views/ratings/ratingEditions/ratingEditionsEdit.html'    , 'RatingEditionsEditCtrl'       ]])
-      .state(['root.persons.view.exams'                                    , '/exams'                                                                                                                                                                                                                            ])
-      .state(['root.persons.view.exams.search'                             , ''                                                                            , ['@root.persons.view'                 , 'js/gva/persons/views/documentExams/examsSearch.html'                    , 'DocumentExamsSearchCtrl'       ]])
-      .state(['root.persons.view.exams.new'                                , '/new'                                                                        , ['@root.persons.view'                 , 'js/gva/persons/views/documentExams/examsNew.html'                       , 'DocumentExamsNewCtrl'          ]])
-      .state(['root.persons.view.exams.edit'                               , '/:ind'                                                                       , ['@root.persons.view'                 , 'js/gva/persons/views/documentExams/examsEdit.html'                      , 'DocumentExamsEditCtrl'         ]])
       .state(['root.persons.view.examASs'                                  , '/examASs'                                                                                                                                                                                                                          ])
       .state(['root.persons.view.examASs.search'                           , ''                                                                            , ['@root.persons.view'                 , 'js/gva/persons/views/exams/examsSearch.html'                            , 'ExamsSearchCtrl'               ]])
       .state(['root.persons.view.examASs.new'                              , '/new'                                                                        , ['@root.persons.view'                 , 'js/gva/persons/views/exams/examsNew.html'                               , 'ExamsNewCtrl'                  ]])

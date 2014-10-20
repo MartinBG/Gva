@@ -158,7 +158,7 @@ namespace Gva.Api.WordTemplates
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
             var includedExams = lastEdition.IncludedExams
-                .Select(i => lot.Index.GetPart<PersonDocumentExamDO>("personDocumentExams/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
 
             var inspectorId = lastEdition.Inspector == null ? (int?)null : lastEdition.Inspector.NomValueId;
             object[] instructorData = new object[0];
@@ -400,7 +400,7 @@ namespace Gva.Api.WordTemplates
         private List<object> GetLimitations(
             PersonLicenceEditionDO edition,
             IEnumerable<PersonMedicalDO> includedMedicals,
-            IEnumerable<PersonDocumentExamDO> includedExams)
+            IEnumerable<PersonTrainingDO> includedExams)
         {
             var limitations = edition.Limitations.Select(l => new { LIMIT_NAME = l.Name });
 

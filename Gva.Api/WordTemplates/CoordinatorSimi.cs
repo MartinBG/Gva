@@ -58,7 +58,7 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i));
             var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
             var includedExams = lastEdition.IncludedExams
-                .Select(i => lot.Index.GetPart<PersonDocumentExamDO>("personDocumentExams/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedExams);
             var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");
 
@@ -193,7 +193,7 @@ namespace Gva.Api.WordTemplates
         private object[] GetDocuments(
             string licenceTypeCode,
             IEnumerable<PersonTrainingDO> includedTrainings,
-            IEnumerable<PersonDocumentExamDO> includedExams)
+            IEnumerable<PersonTrainingDO> includedExams)
         {
             string[] documentRoleCodes;
             bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceTypeCode, out documentRoleCodes);

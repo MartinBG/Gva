@@ -7,6 +7,11 @@
       newTraining: {
         method: 'GET',
         url: 'api/persons/:id/personDocumentTrainings/new'
+      },
+      getExams: {
+        method: 'GET',
+        url: 'api/persons/:id/personDocumentTrainings/exams',
+        isArray: true
       }
     });
   }]);

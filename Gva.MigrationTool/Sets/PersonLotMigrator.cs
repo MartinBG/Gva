@@ -230,47 +230,49 @@ namespace Gva.MigrationTool.Sets
                                 personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "6")
                             {
                                 Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
-                            {
-                                "__oldId",
-                                "__migrTable",
+                                {
+                                    "__oldId",
+                                    "__migrTable",
 
-                                "documentNumber",
-                                "valid",
-                                "documentDateValidFrom",
-                                "documentDateValidTo",
-                                "documentType",
-                                "documentPublisher",
-                                "notes"
-                            });
+                                    "documentNumber",
+                                    "documentPersonNumber",
+                                    "documentDateValidFrom",
+                                    "documentDateValidTo",
+                                    "documentPublisher ",
+                                    "documentType",
+                                    "documentRole",
+                                    "valid",
+                                    "notes",
+                                });
 
-                                var pv = addPartWithFiles("personDocumentExams/*", personDocument);
+                                var pv = addPartWithFiles("personDocumentTrainings/*", personDocument);
                                 examOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
                             }
                             else if (!(new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
                               personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O")
                             {
                                 Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
-                            {
-                                "__oldId",
-                                "__migrTable",
+                                {
+                                    "__oldId",
+                                    "__migrTable",
 
-                                "documentNumber",
-                                "documentPersonNumber",
-                                "documentDateValidFrom",
-                                "documentDateValidTo",
-                                "documentPublisher",
-                                "ratingType",
-                                "aircraftTypeGroup",
-                                "ratingClass",
-                                "authorization",
-                                "licenceType",
-                                "locationIndicator",
-                                "sector",
-                                "documentType",
-                                "documentRole",
-                                "valid",
-                                "notes",
-                            });
+                                    "documentNumber",
+                                    "documentPersonNumber",
+                                    "documentDateValidFrom",
+                                    "documentDateValidTo",
+                                    "documentPublisher",
+                                    "ratingType",
+                                    "aircraftTypeGroup",
+                                    "ratingClass",
+                                    "authorization",
+                                    "licenceType",
+                                    "locationIndicator",
+                                    "sector",
+                                    "documentType",
+                                    "documentRole",
+                                    "valid",
+                                    "notes",
+                                });
 
                                 var pv = addPartWithFiles("personDocumentTrainings/*", personDocument);
                                 trainingOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
@@ -278,20 +280,20 @@ namespace Gva.MigrationTool.Sets
                             else
                             {
                                 Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
-                            {
-                                "__oldId",
-                                "__migrTable",
+                                {
+                                    "__oldId",
+                                    "__migrTable",
 
-                                "documentNumber",
-                                "documentPersonNumber",
-                                "documentDateValidFrom",
-                                "documentDateValidTo",
-                                "documentPublisher ",
-                                "documentType",
-                                "documentRole",
-                                "valid",
-                                "notes",
-                            });
+                                    "documentNumber",
+                                    "documentPersonNumber",
+                                    "documentDateValidFrom",
+                                    "documentDateValidTo",
+                                    "documentPublisher ",
+                                    "documentType",
+                                    "documentRole",
+                                    "valid",
+                                    "notes",
+                                });
 
                                 addPartWithFiles("personDocumentOthers/*", personDocument);
                             }

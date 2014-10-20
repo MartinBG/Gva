@@ -5,7 +5,7 @@
   function NewExamModalCtrl(
     $scope,
     $modalInstance,
-    PersonDocumentExams,
+    PersonDocumentTrainings,
     scModalParams,
     personDocumentExam
   ) {
@@ -13,12 +13,11 @@
     $scope.personDocumentExam = personDocumentExam;
     $scope.lotId = scModalParams.lotId;
     $scope.caseTypeId = scModalParams.caseTypeId;
-
     $scope.save = function () {
       return $scope.form.newDocumentExamForm.$validate()
         .then(function () {
           if ($scope.form.newDocumentExamForm.$valid) {
-            return PersonDocumentExams
+            return PersonDocumentTrainings
               .save({ id: $scope.lotId }, $scope.personDocumentExam)
               .$promise
               .then(function (savedExam) {
@@ -36,20 +35,20 @@
   NewExamModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'PersonDocumentExams',
+    'PersonDocumentTrainings',
     'scModalParams',
     'personDocumentExam'
   ];
 
   NewExamModalCtrl.$resolve = {
     personDocumentExam: [
-      'PersonDocumentExams',
+      'PersonDocumentTrainings',
       'scModalParams',
-      function (PersonDocumentExams, scModalParams) {
-        return PersonDocumentExams.newExam({
-          id: scModalParams.lotId,
-          appId: scModalParams.appId
-        }).$promise;
+      function (PersonDocumentTrainings, scModalParams) {
+        return PersonDocumentTrainings.newTraining({
+              id: scModalParams.lotId,
+              appId: scModalParams.appId
+            }).$promise;
       }
     ]
   };

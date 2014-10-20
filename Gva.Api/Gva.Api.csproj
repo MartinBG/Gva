@@ -169,7 +169,6 @@
     <Compile Include="Controllers\Organizations\OrganizationApplicationsController.cs" />
     <Compile Include="Controllers\Persons\PersonsController.cs" />
     <Compile Include="Controllers\Persons\PersonExamsController.cs" />
-    <Compile Include="Controllers\Persons\PersonDocumentExamsController.cs" />
     <Compile Include="Controllers\Persons\PersonDocumentOthersController.cs" />
     <Compile Include="Controllers\Persons\PersonEmploymentsController.cs" />
     <Compile Include="Controllers\Persons\PersonChecksController.cs" />
@@ -246,7 +245,6 @@
     <Compile Include="ModelsDO\Persons\PersonCheckDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDO.cs" />
-    <Compile Include="ModelsDO\Persons\PersonDocumentExamDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentIdDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentOtherDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonEducationDO.cs" />
@@ -295,7 +293,6 @@
     <Compile Include="Projections\Inventory\Equipments\EquipmentOtherProjection.cs" />
     <Compile Include="Projections\Inventory\Equipments\EquipmentOwnerProjection.cs" />
     <Compile Include="Projections\Inventory\Organizations\OrganizationOtherProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonExamProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonLanguageCertificateProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonCheckProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonDocumentIdProjection.cs" />

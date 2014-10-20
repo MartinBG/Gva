@@ -13,7 +13,6 @@ VALUES
     (@setId    , 'Образование'                 , 'personEducation'       , N'^personDocumentEducations/\d+$'      , NULL        ),
     (@setId    , 'Месторабота'                 , 'personEmployment'      , N'^personDocumentEmployments/\d+$'     , NULL        ),
     (@setId    , 'Медицинско свидетелство'     , 'personMedical'         , N'^personDocumentMedicals/\d+$'        , NULL        ),
-    (@setId    , ''                            , 'personExams'           , N'^personDocumentExams/\d+$'           , NULL        ),
     (@setId    , 'Обучение'                    , 'personTraining'        , N'^personDocumentTrainings/\d+$'       , NULL        ),
     (@setId    , 'Свидетелство за език'        , 'personLangCert'        , N'^personDocumentLangCertificates/\d+$', NULL        ),
     (@setId    , 'Летателен / практически опит', 'personFlyingExperience', N'^personFlyingExperiences/\d+$'       , NULL        ),

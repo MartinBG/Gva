@@ -1706,7 +1706,6 @@
           documentTrainings: 'Обучение',
           documentLangCerts: 'Свид. за език',
           checks: 'Проверки',
-          exams: 'Теор. изпити',
           medicals: 'Медицински',
           personData: 'Лични данни',
           addresses: 'Адреси',
@@ -1900,20 +1899,6 @@
           totalDoc: 'Общо количество (по документа)',
           totalLastMonths: 'Общ нальот за посл. 12 месеца',
           notUnique: 'Данните се дублират с вече съществуващ запис'
-        },
-        personDocumentExamDirective: {
-          title: 'Теоретичен изпит',
-          documentNumber: '№ на документ',
-          documentDateValidFrom: 'Валиден от',
-          documentDateValidTo: 'Валиден до',
-          documentPublisher: 'Издател',
-          personOtherDocumentType: 'Тип документ',
-          personOtherDocumentRole: 'Роля на документ',
-          valid: 'Валиден',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
-          caseType: 'Тип дело'
         },
         ratingEditionDirective: {
           documentDateValidFrom: 'Дата на вписване',
@@ -3871,9 +3856,6 @@
         'root.persons.view.ratings': 'Квалификации',
         'root.persons.view.ratings.edit.editions.new': 'Ново вписване на квалификация',
         'root.persons.view.ratings.edit.editions.edit': 'Преглед на квалификационен клас',
-        'root.persons.view.exams': 'Теоритични изпити',
-        'root.persons.view.exams.new': 'Нов теоритичен изпит',
-        'root.persons.view.exams.edit': 'Преглед на теоритичен изпит',
         'root.persons.view.examASs': 'Теоритични изпити АС',
         'root.persons.view.examASs.new': 'Нов теоритичен изпит АС',
         'root.persons.view.examASs.edit': 'Преглед на теоритичен изпит АС',
