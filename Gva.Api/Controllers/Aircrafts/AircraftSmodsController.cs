@@ -27,6 +27,7 @@ namespace Gva.Api.Controllers.Aircrafts
 
         public AircraftSmodsController(
             ICaseTypeRepository caseTypeRepository,
+            IApplicationRepository applicationRepository,
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,

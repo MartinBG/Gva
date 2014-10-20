@@ -39,6 +39,7 @@ namespace Gva.Api.Controllers.Aircrafts
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]

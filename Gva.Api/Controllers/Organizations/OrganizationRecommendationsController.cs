@@ -40,6 +40,7 @@ namespace Gva.Api.Controllers.Organizations
             this.unitOfWork = unitOfWork;
             this.organizationRepository = organizationRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]

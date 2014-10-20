@@ -1,6 +1,4 @@
-﻿using System.Web.Http;
-using Common.Api.Repositories.NomRepository;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
@@ -38,6 +36,7 @@ namespace Gva.Api.Controllers.Organizations
             : base("organizationGroundServiceOperatorsSnoOperational", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]

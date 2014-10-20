@@ -36,6 +36,7 @@ namespace Gva.Api.Controllers.Organizations
             : base("organizationCertAirOperators", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]
