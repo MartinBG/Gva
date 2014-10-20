@@ -58,7 +58,7 @@ namespace Gva.Api.Controllers.Organizations
         {
             OrganizationApprovalDO approval = new OrganizationApprovalDO();
 
-            return Ok(new CaseTypePartDO<OrganizationApprovalDO>(approval, new CaseDO()));
+            return Ok(new CaseTypePartDO<OrganizationApprovalDO>(approval));
         }
 
         [NonAction]

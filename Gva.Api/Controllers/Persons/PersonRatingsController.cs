@@ -53,7 +53,7 @@ namespace Gva.Api.Controllers.Persons
                 Caa = this.nomRepository.GetNomValue("caa", "BG")
             };
 
-            return Ok(new CaseTypePartDO<PersonRatingDO>(rating, new CaseDO()));
+            return Ok(new CaseTypePartDO<PersonRatingDO>(rating));
         }
 
         [NonAction]

@@ -55,7 +55,7 @@ namespace Gva.Api.Controllers.Persons
                 Publisher = this.nomRepository.GetNomValue("caa", "BG")
             };
 
-            return Ok(new CaseTypePartDO<PersonLicenceDO>(licence, new CaseDO()));
+            return Ok(new CaseTypePartDO<PersonLicenceDO>(licence));
         }
 
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)

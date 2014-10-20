@@ -57,13 +57,16 @@ namespace Gva.Api.Controllers.Persons
         [Route("~/api/persons/{lotId}/licenceEditions/new")]
         public IHttpActionResult GetNewLicenceEdition(int lotId, int caseTypeId, int? appId = null, int? licencePartIndex = null)
         {
-            CaseDO caseDO = new CaseDO();
             var caseType = this.caseTypeRepository.GetCaseType(caseTypeId);
-            caseDO.CaseType = new NomValue
+            CaseDO caseDO = new CaseDO()
             {
-                NomValueId = caseType.GvaCaseTypeId,
-                Name = caseType.Name,
-                Alias = caseType.Alias
+                CaseType = new NomValue
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseTypeId).ToString()
             };
 
             if (appId.HasValue)
