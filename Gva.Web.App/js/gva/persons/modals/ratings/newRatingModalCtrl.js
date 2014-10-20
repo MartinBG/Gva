@@ -31,10 +31,12 @@
       return $scope.form.newRatingForm.$validate()
         .then(function () {
           if ($scope.form.newRatingForm.$valid) {
-            return PersonRatings
-              .save({ id: $scope.lotId }, $scope.newRating)
-              .$promise
-              .then(function (savedRating) {
+            return PersonRatings.save(
+              { id: $scope.lotId },
+              {
+                rating: $scope.newRating,
+                edition: $scope.newEdition
+              }).$promise.then(function (savedRating) {
                 return $modalInstance.close(savedRating);
               });
           }
