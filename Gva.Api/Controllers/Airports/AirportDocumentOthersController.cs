@@ -19,9 +19,9 @@ namespace Gva.Api.Controllers.Airports
     [Authorize]
     public class AirportDocumentOthersController : GvaCaseTypePartController<AirportDocumentOtherDO>
     {
-        private IApplicationRepository applicationRepository;
-        private IFileRepository fileRepository;
         private ILotRepository lotRepository;
+        private IFileRepository fileRepository;
+        private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
 
         public AirportDocumentOthersController(
@@ -34,9 +34,9 @@ namespace Gva.Api.Controllers.Airports
             UserContext userContext)
             : base("airportDocumentOthers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.applicationRepository = applicationRepository;
-            this.fileRepository = fileRepository;
             this.lotRepository = lotRepository;
+            this.fileRepository = fileRepository;
+            this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
         }
 

@@ -1,21 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
+using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
-using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.ModelsDO.Common;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
-using Regs.Api.Repositories.LotRepositories;
-using Gva.Api.ModelsDO.Common;
-using Newtonsoft.Json.Linq;
-using Common.Api.UserContext;
 using Regs.Api.Models;
-using Gva.Api.Models;
-using Common.Api.Models;
-using Gva.Api.Repositories.CaseTypeRepository;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Aircrafts
 {

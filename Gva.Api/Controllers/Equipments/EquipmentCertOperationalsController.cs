@@ -1,18 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
-using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Equipments;
-using Gva.Api.ModelsDO.Organizations;
-using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
-using Gva.Api.Repositories.OrganizationRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -24,12 +19,10 @@ namespace Gva.Api.Controllers.Equipments
     {
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
-        private IFileRepository fileRepository;
 
         public EquipmentCertOperationalsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IApplicationRepository applicationRepository,
             INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             ICaseTypeRepository caseTypeRepository,
@@ -38,7 +31,6 @@ namespace Gva.Api.Controllers.Equipments
             : base("equipmentCertOperationals", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
-            this.fileRepository = fileRepository;
             this.caseTypeRepository = caseTypeRepository;
         }
 

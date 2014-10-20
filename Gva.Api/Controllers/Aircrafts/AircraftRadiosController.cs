@@ -22,7 +22,6 @@ namespace Gva.Api.Controllers.Aircrafts
     {
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
-        private IFileRepository fileRepository;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
 
@@ -39,7 +38,6 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
-            this.fileRepository = fileRepository;
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
         }
@@ -61,8 +59,7 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             if (appId.HasValue)

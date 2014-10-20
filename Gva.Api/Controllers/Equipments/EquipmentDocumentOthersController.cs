@@ -20,9 +20,9 @@ namespace Gva.Api.Controllers.Equipments
     [Authorize]
     public class EquipmentDocumentOthersController : GvaCaseTypePartController<EquipmentDocumentOtherDO>
     {
+        private ILotRepository lotRepository;
         private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
-        private ILotRepository lotRepository;
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
 
@@ -37,10 +37,10 @@ namespace Gva.Api.Controllers.Equipments
             UserContext userContext)
             : base("equipmentDocumentOthers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
-            this.nomRepository = nomRepository;
             this.fileRepository = fileRepository;
+            this.applicationRepository = applicationRepository;
+            this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
         }
 

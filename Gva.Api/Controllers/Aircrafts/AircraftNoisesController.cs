@@ -20,7 +20,6 @@ namespace Gva.Api.Controllers.Aircrafts
     public class AircraftNoisesController : GvaCaseTypePartController<AircraftCertNoiseDO>
     {
         private ICaseTypeRepository caseTypeRepository;
-        private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
 
@@ -35,7 +34,6 @@ namespace Gva.Api.Controllers.Aircrafts
             : base("aircraftCertNoises", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext) 
         {
             this.caseTypeRepository = caseTypeRepository;
-            this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
         }
@@ -56,8 +54,7 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             if (appId.HasValue)

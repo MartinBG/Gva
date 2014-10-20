@@ -1,17 +1,17 @@
 ﻿using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
+using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
-using Common.Api.Repositories.NomRepository;
-using Common.Api.UserContext;
-using Gva.Api.Models;
-using Gva.Api.Repositories.FileRepository;
-using Gva.Api.Repositories.CaseTypeRepository;
-using Common.Api.Models;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
@@ -19,7 +19,6 @@ namespace Gva.Api.Controllers.Aircrafts
     [Authorize]
     public class AircraftCertAirworthinessesFMController : GvaCaseTypePartController<AircraftCertAirworthinessFMDO>
     {
-        private IFileRepository fileRepository;
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
@@ -39,7 +38,6 @@ namespace Gva.Api.Controllers.Aircrafts
             this.nomRepository = nomRepository;
             this.lotRepository = lotRepository;
             this.caseTypeRepository = caseTypeRepository;
-            this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
         }
 
@@ -59,8 +57,7 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             if (appId.HasValue)

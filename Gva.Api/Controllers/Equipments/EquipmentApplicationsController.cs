@@ -21,12 +21,12 @@ namespace Gva.Api.Controllers.Equipments
     {
         private string path;
         private IUnitOfWork unitOfWork;
+        private ILotRepository lotRepository;
         private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
-        private ILotRepository lotRepository;
+        private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
-        private ICaseTypeRepository caseTypeRepository;
 
         public EquipmentApplicationsController(
             IUnitOfWork unitOfWork,
@@ -40,12 +40,12 @@ namespace Gva.Api.Controllers.Equipments
         {
             this.path = "equipmentDocumentApplications";
             this.unitOfWork = unitOfWork;
+            this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
-            this.lotRepository = lotRepository;
+            this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
-            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]

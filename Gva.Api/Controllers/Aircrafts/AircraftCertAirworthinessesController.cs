@@ -1,17 +1,16 @@
 ﻿using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
+using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
-using Common.Api.Repositories.NomRepository;
-using Common.Api.UserContext;
-using Gva.Api.Models;
-using Gva.Api.Repositories.FileRepository;
-using Gva.Api.Repositories.CaseTypeRepository;
-using Common.Api.Models;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
@@ -20,7 +19,6 @@ namespace Gva.Api.Controllers.Aircrafts
     public class AircraftCertAirworthinessesController : GvaCaseTypePartController<AircraftCertAirworthinessDO>
     {
         private IFileRepository fileRepository;
-        private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
@@ -28,7 +26,6 @@ namespace Gva.Api.Controllers.Aircrafts
         public AircraftCertAirworthinessesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            INomRepository nomRepository,
             ICaseTypeRepository caseTypeRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
@@ -36,7 +33,6 @@ namespace Gva.Api.Controllers.Aircrafts
             UserContext userContext)
             : base("aircraftCertAirworthinesses", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.nomRepository = nomRepository;
             this.lotRepository = lotRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.fileRepository = fileRepository;

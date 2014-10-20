@@ -1,17 +1,16 @@
 ﻿using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
+using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
-using System.Collections.Generic;
-using Common.Api.UserContext;
-using Gva.Api.Repositories.FileRepository;
-using Gva.Api.Repositories.CaseTypeRepository;
-using Gva.Api.Models;
-using Common.Api.Models;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
@@ -22,7 +21,6 @@ namespace Gva.Api.Controllers.Aircrafts
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
-        private IFileRepository fileRepository;
 
         public AircraftInspectionsController(
             IUnitOfWork unitOfWork,
@@ -37,7 +35,6 @@ namespace Gva.Api.Controllers.Aircrafts
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
-            this.fileRepository = fileRepository;
         }
 
         [Route("new")]
@@ -53,17 +50,12 @@ namespace Gva.Api.Controllers.Aircrafts
                     Name = caseType.Name,
                     Alias = caseType.Alias
                 },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
             };
 
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                caseDO.IsAdded = true;
-                caseDO.Applications = new List<ApplicationNomDO>()
-                {
-                    this.applicationRepository.GetInitApplication(appId)
-                };
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
             }
 
             return Ok(new CaseTypePartDO<AircraftInspectionDO>(new AircraftInspectionDO(), caseDO));

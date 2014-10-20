@@ -19,7 +19,6 @@ namespace Gva.Api.Controllers.Aircrafts
     [Authorize]
     public class AircraftMarksController : GvaCaseTypePartController<AircraftCertMarkDO>
     {
-        private IFileRepository fileRepository;
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
@@ -36,7 +35,6 @@ namespace Gva.Api.Controllers.Aircrafts
             UserContext userContext)
             : base("aircraftCertMarks", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.fileRepository = fileRepository;
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotRepository = lotRepository;
@@ -59,8 +57,7 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             if (appId.HasValue)

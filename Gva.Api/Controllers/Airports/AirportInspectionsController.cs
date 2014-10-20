@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.UserContext;
@@ -57,11 +56,8 @@ namespace Gva.Api.Controllers.Airports
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                caseDO.IsAdded = true;
-                caseDO.Applications = new List<ApplicationNomDO>()
-                {
-                    this.applicationRepository.GetInitApplication(appId)
-                };
+
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
             }
 
             AirportInspectionDO newInspection = new AirportInspectionDO()

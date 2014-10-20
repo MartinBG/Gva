@@ -1,9 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
 using System.Web.Http;
 using Common.Api.Models;
-using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.Models;
@@ -21,7 +19,6 @@ namespace Gva.Api.Controllers.Aircrafts
     [Authorize]
     public class AircraftDocumentOccurrencesController : GvaCaseTypePartController<AircraftDocumentOccurenceDO>
     {
-        private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
         private IFileRepository fileRepository;
         private ILotRepository lotRepository;
@@ -33,12 +30,10 @@ namespace Gva.Api.Controllers.Aircrafts
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
-            INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("documentOccurrences", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.fileRepository = fileRepository;
             this.lotRepository = lotRepository;

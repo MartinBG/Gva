@@ -19,7 +19,6 @@ namespace Gva.Api.Controllers.Aircrafts
     [Authorize]
     public class AircraftPermitsToFlyController : GvaCaseTypePartController<AircraftCertPermitToFlyDO>
     {
-        private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
@@ -34,7 +33,6 @@ namespace Gva.Api.Controllers.Aircrafts
             UserContext userContext)
             : base("aircraftCertPermitsToFly", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext) 
         {
-            this.fileRepository = fileRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
@@ -51,8 +49,7 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             if (appId.HasValue)

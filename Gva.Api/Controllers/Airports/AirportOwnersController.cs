@@ -18,9 +18,9 @@ namespace Gva.Api.Controllers.Airports
     [Authorize]
     public class AirportOwnersController : GvaCaseTypePartController<AirportOwnerDO>
     {
-        private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
         private IFileRepository fileRepository;
+        private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
 
         public AirportOwnersController(
@@ -33,9 +33,9 @@ namespace Gva.Api.Controllers.Airports
             UserContext userContext)
             : base("airportDocumentOwners", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
+            this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
         }
 

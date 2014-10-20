@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
-using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
-using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
@@ -25,7 +22,6 @@ namespace Gva.Api.Controllers.Aircrafts
         private string path;
         private ILotRepository lotRepository;
         private IFileRepository fileRepository;
-        private IApplicationRepository applicationRepository;
         private IUnitOfWork unitOfWork;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
@@ -35,7 +31,6 @@ namespace Gva.Api.Controllers.Aircrafts
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
-            IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
             ICaseTypeRepository caseTypeRepository,
             UserContext userContext)
@@ -44,7 +39,6 @@ namespace Gva.Api.Controllers.Aircrafts
             this.path = "aircraftCertRegistrationsFM";
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
-            this.applicationRepository = applicationRepository;
             this.unitOfWork = unitOfWork;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
@@ -62,8 +56,7 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             AircraftCertRegistrationFMDO newCertRegFM = new AircraftCertRegistrationFMDO()
@@ -141,9 +134,6 @@ namespace Gva.Api.Controllers.Aircrafts
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
                 var partVersion = lot.DeletePart<AircraftCertRegistrationFMDO>(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
-
-                this.fileRepository.DeleteFileReferences(partVersion.Part);
-                this.applicationRepository.DeleteApplicationRefs(partVersion.Part);
 
                 var registrations = this.lotRepository.GetLotIndex(lotId).Index
                     .GetParts<AircraftCertRegistrationFMDO>(this.path)

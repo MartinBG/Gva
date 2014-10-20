@@ -22,9 +22,9 @@ namespace Gva.Api.Controllers.Airports
     {
         private string path;
         private IUnitOfWork unitOfWork;
+        private ILotRepository lotRepository;
         private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
-        private ILotRepository lotRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
         private ICaseTypeRepository caseTypeRepository;
@@ -41,9 +41,9 @@ namespace Gva.Api.Controllers.Airports
         {
             this.path = "airportDocumentApplications";
             this.unitOfWork = unitOfWork;
+            this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
-            this.lotRepository = lotRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
             this.caseTypeRepository = caseTypeRepository;
