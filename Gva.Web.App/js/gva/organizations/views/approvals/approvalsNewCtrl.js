@@ -64,8 +64,7 @@
       'OrganizationApprovals',
       function ($stateParams, OrganizationApprovals) {
         return OrganizationApprovals.newApproval({
-          id: $stateParams.id,
-          appId: $stateParams.appId
+          id: $stateParams.id
         }).$promise;
       }
     ]

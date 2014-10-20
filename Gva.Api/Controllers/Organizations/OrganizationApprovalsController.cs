@@ -1,17 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
-using Gva.Api.Models;
-using Gva.Api.Models.Views.Organization;
 using Gva.Api.ModelsDO;
-using Gva.Api.ModelsDO.Common;
 using Gva.Api.ModelsDO.Organizations;
-using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Regs.Api.LotEvents;
@@ -28,8 +22,6 @@ namespace Gva.Api.Controllers.Organizations
         private IFileRepository fileRepository;
         private IOrganizationRepository organizationRepository;
         private ILotEventDispatcher lotEventDispatcher;
-        private INomRepository nomRepository;
-        private IApplicationRepository applicationRepository;
         private UserContext userContext;
 
         public OrganizationApprovalsController(
@@ -38,8 +30,6 @@ namespace Gva.Api.Controllers.Organizations
             IFileRepository fileRepository,
             IOrganizationRepository organizationRepository,
             ILotEventDispatcher lotEventDispatcher,
-            INomRepository nomRepository,
-            IApplicationRepository applicationRepository,
             UserContext userContext)
             : base("approvals", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
@@ -48,13 +38,11 @@ namespace Gva.Api.Controllers.Organizations
             this.fileRepository = fileRepository;
             this.organizationRepository = organizationRepository;
             this.lotEventDispatcher = lotEventDispatcher;
-            this.nomRepository = nomRepository;
             this.userContext = userContext;
-            this.applicationRepository = applicationRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewApproval(int lotId, int? appId = null)
+        public IHttpActionResult GetNewApproval(int lotId)
         {
             OrganizationApprovalDO approval = new OrganizationApprovalDO();
 
@@ -78,16 +66,7 @@ namespace Gva.Api.Controllers.Organizations
                 var approvalPartVersion = lot.CreatePart("approvals/*", newApproval.Approval.Part, this.userContext);
                 this.fileRepository.AddFileReference(approvalPartVersion.Part, newApproval.Approval.Case);
 
-                newApproval.Amendment = new CaseTypePartDO<OrganizationAmendmentDO>()
-                {
-                    Part = new OrganizationAmendmentDO()
-                    {
-                        ApprovalPartIndex = approvalPartVersion.Part.Index,
-                        DocumentDateIssue = DateTime.Now
-                    },
-                    Case = newApproval.Approval.Case
-                };
-
+                newApproval.Amendment.Part.ApprovalPartIndex = approvalPartVersion.Part.Index;
                 var amendmentPartVersion = lot.CreatePart("approvalAmendments/*", newApproval.Amendment.Part, this.userContext);
                 this.fileRepository.AddFileReference(amendmentPartVersion.Part, newApproval.Amendment.Case);
 

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
-using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Organizations;
-using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
@@ -28,7 +26,6 @@ namespace Gva.Api.Controllers.Organizations
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
         private ILotEventDispatcher lotEventDispatcher;
-        private INomRepository nomRepository;
         private IFileRepository fileRepository;
         private ICaseTypeRepository caseTypeRepository;
         private UserContext userContext;
@@ -40,7 +37,6 @@ namespace Gva.Api.Controllers.Organizations
             IFileRepository fileRepository,
             ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
-            INomRepository nomRepository,
             UserContext userContext)
             : base("approvalAmendments", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
@@ -49,7 +45,6 @@ namespace Gva.Api.Controllers.Organizations
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
             this.lotEventDispatcher = lotEventDispatcher;
-            this.nomRepository = nomRepository;
             this.fileRepository = fileRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.userContext = userContext;
@@ -59,7 +54,7 @@ namespace Gva.Api.Controllers.Organizations
         public IHttpActionResult GetNewApprovalAmendment(int lotId, int caseTypeId, int? appId = null, int? approvalPartIndex = null)
         {
             var caseType = this.caseTypeRepository.GetCaseType(caseTypeId);
-            CaseDO caseDO = new CaseDO() 
+            CaseDO caseDO = new CaseDO()
             { 
                 CaseType = new NomValue
                 {
