@@ -46,7 +46,7 @@ namespace Gva.Api.Controllers.Persons
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewRating(int lotId, int? appId = null)
+        public IHttpActionResult GetNewRating(int lotId)
         {
             PersonRatingDO rating = new PersonRatingDO()
             {

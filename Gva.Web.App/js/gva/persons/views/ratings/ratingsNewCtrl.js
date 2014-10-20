@@ -62,8 +62,7 @@
       'PersonRatings',
       function ($stateParams, PersonRatings) {
         return PersonRatings.newRating({
-          id: $stateParams.id,
-          appId: $stateParams.appId
+          id: $stateParams.id
         }).$promise;
       }
     ]

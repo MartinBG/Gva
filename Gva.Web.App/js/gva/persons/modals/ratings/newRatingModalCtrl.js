@@ -19,7 +19,7 @@
       if ($scope.newRating['case'] && $scope.newRating['case'].caseType) {
         PersonRatingEditions.newRatingEdition({
           id: $scope.lotId,
-          appId: $scope.appId,
+          appId: scModalParams.appId,
           caseTypeId: newRating['case'].caseType.nomValueId
         }).$promise.then(function (edition) {
           $scope.newEdition = edition;
@@ -63,8 +63,7 @@
       'scModalParams',
       function (PersonRatings, scModalParams) {
         return PersonRatings.newRating({
-          id: scModalParams.lotId,
-          appId: scModalParams.appId
+          id: scModalParams.lotId
         }).$promise;
       }
     ]
