@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Web.Http;
 using System.Linq;
+using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
-using Gva.Api.Models.Views.Organization;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Organizations;
-using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
-using Gva.Api.Repositories.CaseTypeRepository;
-using Common.Api.Models;
-using Gva.Api.Repositories.FileRepository;
 
 namespace Gva.Api.Controllers.Organizations
 {
@@ -20,11 +18,8 @@ namespace Gva.Api.Controllers.Organizations
     [Authorize]
     public class OrganizationRecommendationsController : GvaCaseTypesPartController<OrganizationRecommendationDO>
     {
-        private ILotRepository lotRepository;
         private IOrganizationRepository organizationRepository;
-        private IUnitOfWork unitOfWork;
         private ICaseTypeRepository caseTypeRepository;
-        private IFileRepository fileRepository;
 
         public OrganizationRecommendationsController(
             IUnitOfWork unitOfWork,
@@ -36,11 +31,8 @@ namespace Gva.Api.Controllers.Organizations
             UserContext userContext)
             : base("organizationRecommendations", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.lotRepository = lotRepository;
-            this.unitOfWork = unitOfWork;
             this.organizationRepository = organizationRepository;
             this.caseTypeRepository = caseTypeRepository;
-            this.fileRepository = fileRepository;
         }
 
         [Route("new")]

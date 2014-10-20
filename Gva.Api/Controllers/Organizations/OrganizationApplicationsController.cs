@@ -7,9 +7,7 @@ using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Common;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
-using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
-using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Organizations

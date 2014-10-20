@@ -5,13 +5,10 @@ using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
-using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Organizations;
-using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
-using Gva.Api.Repositories.OrganizationRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -27,7 +24,6 @@ namespace Gva.Api.Controllers.Organizations
         public OrganizationCertAirportOperatorsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IOrganizationRepository organizationRepository,
             INomRepository nomRepository,
             IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
