@@ -11,6 +11,7 @@
   ) {
     $scope.organizationInspection = organizationInspection;
     $scope.lotId = $stateParams.id;
+    $scope.appId = $stateParams.appId;
     $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
@@ -50,8 +51,7 @@
       'OrganizationInspections',
       function ($stateParams, OrganizationInspections) {
         return OrganizationInspections.newInspection({
-          id: $stateParams.id,
-          appId: $stateParams.appId
+          id: $stateParams.id
         }).$promise;
       }
     ]
