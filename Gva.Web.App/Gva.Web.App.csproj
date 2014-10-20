@@ -609,7 +609,6 @@
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
     <Content Include="js\gva\persons\forms\personCommonDocClassification.html" />
-    <Content Include="js\gva\persons\forms\personCommonDocClassificationCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentLangCert.html" />
     <Content Include="js\gva\persons\forms\personDocumentLangCertCtrl.js" />
     <Content Include="js\gva\persons\forms\personCommonDocumentCtrl.js" />
