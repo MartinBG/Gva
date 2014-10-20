@@ -5,6 +5,7 @@
     $scope.lotId = scFormParams.lotId;
     $scope.isNew = scFormParams.isNew;
     $scope.caseTypeId = scFormParams.caseTypeId;
+    $scope.appId = scFormParams.appId;
 
     $scope.chooseEmployment = function () {
       var modalInstance = scModal.open('chooseEmployment');
