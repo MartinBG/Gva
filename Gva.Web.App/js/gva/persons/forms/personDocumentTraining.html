@@ -2,7 +2,7 @@
   <gva-person-common-doc name="personDocumentForm" ng-model="model"
       sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'training', hideCaseType: hideCaseType }"></gva-person-common-doc>
   <div ng-show="model.case.caseType">
-    <gva-person-common-doc-details name="personDocumentDetailsForm" ng-model="model"
-      sc-form-params="{ categoryAlias: 'training' }"></gva-person-common-doc-details>
+    <gva-person-common-doc-classification name="personDocumentClassificationForm" ng-model="model"
+      sc-form-params="{ categoryAlias: 'training' }"></gva-person-common-doc-classification>
   </div>
 </ng-form>

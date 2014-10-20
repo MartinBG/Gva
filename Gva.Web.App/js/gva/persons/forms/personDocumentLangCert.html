@@ -7,7 +7,7 @@
     <div class="row">
       <sc-field type="nomenclature" ng-model="model.part.langLevel" alias="'langLevels'" params="{ roleAlias: model.part.documentRole.alias }" l10n-text="persons.personDocumentLangCertDirective.langLevel" class="col-sm-6 col-md-4"></sc-field>
     </div>
-    <gva-person-common-doc-details name="personDocumentDetailsForm" ng-model="model"
-      sc-form-params="{ categoryAlias: 'languageCert' }"></gva-person-common-doc-details>
+    <gva-person-common-doc-classification name="personDocumentClassificationForm" ng-model="model"
+      sc-form-params="{ categoryAlias: 'languageCert' }"></gva-person-common-doc-classification>
   </div>
 </ng-form>

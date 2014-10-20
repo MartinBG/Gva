@@ -2080,9 +2080,10 @@
           documentDateValidTo: 'Валидно до',
           personDocumentType: 'Тип документ',
           personDocumentRole: 'Роля на документ',
+          notes: 'Бележки',
           title: 'Общи данни'
         },
-        personCommonDocDetailsDirective: {
+        personCommonDocClassificationDirective: {
           ratingType: 'Тип ВС',
           aircraftTypeGroup: 'Тип/Група ВС',
           ratingClass: 'Клас ВС',
@@ -2090,11 +2091,7 @@
           licenceType: 'Вид правоспособност',
           locationIndicator: 'Индикатор за местоположение',
           sector: 'Сектор/работно място',
-          notes: 'Бележки',
           title: 'Данни за класификация'
-        },
-        personOtherDirective: {
-          notes: 'Бележки'
         },
         personDocApplicationSearch: {
           newApplication: 'Ново заявление',

@@ -94,9 +94,9 @@
       controller: 'PersonCommonDocCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaPersonCommonDocDetails',
-      templateUrl: 'js/gva/persons/forms/personCommonDocDetails.html',
-      controller: 'PersonCommonDocDetailsCtrl'
+      name: 'gvaPersonCommonDocClassification',
+      templateUrl: 'js/gva/persons/forms/personCommonDocClassification.html',
+      controller: 'PersonCommonDocClassificationCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentCheck',
