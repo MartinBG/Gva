@@ -9,7 +9,6 @@
     $parse,
     $q,
     Nomenclatures,
-    Applications,
     GvaParts,
     gvaCaseTypeConfig
   ) {
@@ -87,7 +86,8 @@
     function postLink(scope, element, attrs) {
       var isMultiple = angular.isDefined(attrs.multiple),
           appId = $parse(attrs.appId)(scope.$parent),
-          lotId = $parse(attrs.lotId)(scope.$parent) || $stateParams.id;
+          lotId = $parse(attrs.lotId)(scope.$parent) || $stateParams.id,
+          appOnly = angular.isDefined(attrs.appOnly);
 
       scope.$watch('caseType', function (newValue, oldValue) {
         if (newValue === oldValue || !newValue && !oldValue) {
@@ -134,44 +134,23 @@
       };
 
       var addNewFile = function (caseType) {
-        var newFile = {
-            caseType: caseType,
-            file: null,
-            bookPageNumber: null,
-            pageCount: null,
-            isAdded: true,
-            isDeleted: false
-          },
-          applicationPromise = null;
-
-        if (appId) {
-          applicationPromise = Applications.getInitApp({
-            lotId: lotId,
-            appId: appId
-          }).$promise;
-        }
-
-        $q.all({
-          BPN: GvaParts.getNextBPN({ lotId: lotId, caseTypeId: caseType.nomValueId }).$promise,
-          application: applicationPromise
-        }).then(function (res) {
-          newFile.bookPageNumber = res.BPN.nextBPN.toString();
-
-          if (res.application) {
-            newFile.applications = [res.application];
+        return GvaParts.getNewCase({
+          lotId: lotId,
+          caseTypeId: caseType.nomValueId,
+          appId: appId,
+          appOnly: appOnly
+        }).$promise.then(function (newFile) {
+          if (isMultiple) {
+            scope.model.push(newFile);
+          }
+          if (scope.model) {
+            scope.model.isDeleted = false;
+            scope.model.caseType = caseType;
+          }
+          else {
+            scope.model = newFile;
           }
         });
-
-        if (isMultiple) {
-          scope.model.push(newFile);
-        }
-        if (scope.model) {
-          scope.model.isDeleted = false;
-          scope.model.caseType = caseType;
-        }
-        else {
-          scope.model = newFile;
-        }
       };
     }
 
@@ -192,7 +171,6 @@
     '$parse',
     '$q',
     'Nomenclatures',
-    'Applications',
     'GvaParts',
     'gvaCaseTypeConfig'
   ];

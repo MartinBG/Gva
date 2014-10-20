@@ -61,8 +61,7 @@ namespace Gva.Api.Controllers.Organizations
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             if (appId.HasValue)

@@ -543,13 +543,5 @@ namespace Gva.Api.Controllers.Applications
 
             return Ok(new { corrs = new int[0] });
         }
-
-        [Route("{lotId}/initApplication/{appId}")]
-        public IHttpActionResult GetInitApplication(int lotId, int appId)
-        {
-            this.lotRepository.GetLotIndex(lotId);
-
-            return Ok(this.applicationRepository.GetInitApplication(appId));
-        }
     }
 }
