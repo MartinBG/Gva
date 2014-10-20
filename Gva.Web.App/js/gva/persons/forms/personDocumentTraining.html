@@ -1,6 +1,7 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <gva-person-common-doc name="personDocumentForm" ng-model="model"
-      sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'training', hideCaseType: hideCaseType }"></gva-person-common-doc>
+      sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'training', hideCaseType: hideCaseType, appId: appId }">
+  </gva-person-common-doc>
   <div ng-show="model.case.caseType">
     <gva-person-common-doc-classification name="personDocumentClassificationForm" ng-model="model"></gva-person-common-doc-classification>
   </div>
