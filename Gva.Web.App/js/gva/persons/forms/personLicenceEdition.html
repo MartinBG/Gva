@@ -145,7 +145,7 @@
         </thead>
         <tbody ng-model="model.part.includedLangCerts" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
           <tr class="sort-disabled" ng-if="!model.part.includedLangCerts.length">
-            <td colspan="5" class="text-center" l10n-text="persons.licenceEditionDirective.noLangCerts"></td>
+            <td colspan="6" class="text-center" l10n-text="persons.licenceEditionDirective.noLangCerts"></td>
           </tr>
           <tr ng-repeat="langCert in includedLangCerts">
             <td ng-if="!form.$readonly && model.part.includedLangCerts.length"><span class="fa fa-bars drag-handle"></span>
