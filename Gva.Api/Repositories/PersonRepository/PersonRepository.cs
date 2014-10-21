@@ -277,7 +277,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Single(e => e.LotId == lotId && e.PartIndex == ratingPartIndex)
                 .Editions.OrderBy(e => e.Index)
                 .Last()
-                .Index;
+                .PartIndex;
         }
     }
 }
