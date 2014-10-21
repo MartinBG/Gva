@@ -93,7 +93,8 @@ namespace Gva.Api.Repositories.OrganizationRepository
                 .Include(a => a.ApprovalState)
                 .Include(a => a.ApprovalType)
                 .Include(a => a.Amendments)
-                .Where(r => r.LotId == lotId);
+                .Where(r => r.LotId == lotId)
+                .ToList();
 
             if (caseTypeId.HasValue)
             {
