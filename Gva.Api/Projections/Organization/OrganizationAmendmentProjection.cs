@@ -43,7 +43,7 @@ namespace Gva.Api.Projections.Organization
             amendment.DocumentNumber = organizationAmendment.Content.DocumentNumber;
             amendment.ChangeNum = organizationAmendment.Content.ChangeNum;
             amendment.DocumentDateIssue = organizationAmendment.Content.DocumentDateIssue;
-            amendment.ApprovalPartIndex = organizationAmendment.Content.ApprovalPartIndex;
+            amendment.ApprovalPartIndex = organizationAmendment.Content.ApprovalPartIndex.Value;
 
             return amendment;
         }
