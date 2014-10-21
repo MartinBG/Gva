@@ -64,7 +64,7 @@ namespace Gva.Api.Projections.Person
             rating.Limitations = limitations != null ? string.Join(", ", limitations) : null;
             if (lastEdition.Content.DocumentDateValidFrom.HasValue)
             {
-                rating.LastDocDateValidFrom = firstEdition.Content.DocumentDateValidFrom.Value;
+                rating.LastDocDateValidFrom = lastEdition.Content.DocumentDateValidFrom.Value;
             }
             rating.LastDocDateValidTo = lastEdition.Content.DocumentDateValidTo;
             if (firstEdition.Content.DocumentDateValidFrom.HasValue)
