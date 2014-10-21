@@ -165,13 +165,6 @@ namespace Gva.Api.Controllers.Applications
                 .Where(e => e.GvaApplicationId == id)
                 .ToList();
 
-            returnValue.AppLotObjects = this.unitOfWork.DbContext.Set<GvaLotObject>()
-                .Include(e => e.LotPart.SetPart)
-                .Where(e => e.GvaApplicationId == id)
-                .ToList()
-                .Select(e => new ApplicationLotObjectDO(e))
-                .ToList();
-
             if (application.DocId.HasValue)
             {
                 var docRelations = this.docRepository.GetCaseRelationsByDocId(

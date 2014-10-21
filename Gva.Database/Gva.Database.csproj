@@ -73,7 +73,6 @@
     <Content Include="Create\Tables\GvaViewAircrafts.sql" />
     <Content Include="Create\Tables\GvaLotCases.sql" />
     <Content Include="Create\Tables\GvaCaseTypes.sql" />
-    <Content Include="Create\Tables\GvaLotObjects.sql" />
     <Content Include="Create\Tables\GvaLotFiles.sql" />
     <Content Include="Create\Tables\GvaAppLotFiles.sql" />
     <Content Include="Create\Tables\GvaFiles.sql" />

@@ -181,6 +181,7 @@ namespace Gva.Api.Controllers.Persons
                 if (editionsPartVersions.Count() == 0)
                 {
                     licencePartVersion = lot.DeletePart<PersonLicenceDO>(string.Format("{0}/{1}", "licences", licencePartIndex), this.userContext);
+                    this.fileRepository.DeleteFileReferences(licencePartVersion.Part);
                 }
 
                 this.fileRepository.DeleteFileReferences(editionPartVersion.Part);

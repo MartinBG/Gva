@@ -10,7 +10,6 @@ namespace Gva.Api.Models
         public GvaApplication()
         {
             this.GvaAppLotFiles = new List<GvaAppLotFile>();
-            this.GvaLotObjects = new List<GvaLotObject>();
         }
 
         public int GvaApplicationId { get; set; }
@@ -28,8 +27,6 @@ namespace Gva.Api.Models
         public virtual Part GvaAppLotPart { get; set; }
 
         public virtual ICollection<GvaAppLotFile> GvaAppLotFiles { get; set; }
-
-        public virtual ICollection<GvaLotObject> GvaLotObjects { get; set; }
     }
 
     public class GvaApplicationMap : EntityTypeConfiguration<GvaApplication>

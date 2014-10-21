@@ -328,7 +328,6 @@
     <Compile Include="ModelsDO\Applications\ApplicationNewDO.cs" />
     <Compile Include="ModelsDO\Applications\ApplicationLinkDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportViewDO.cs" />
-    <Compile Include="ModelsDO\Applications\ApplicationLotObjectDO.cs" />
     <Compile Include="ModelsDO\PartSelectDO.cs" />
     <Compile Include="ModelsDO\ASExamDO.cs" />
     <Compile Include="ModelsDO\PublisherDO.cs" />
@@ -362,7 +361,6 @@
     <Compile Include="Models\Views\GvaViewInventoryItem.cs" />
     <Compile Include="Models\GvaLotCase.cs" />
     <Compile Include="Models\GvaLotFile.cs" />
-    <Compile Include="Models\GvaLotObject.cs" />
     <Compile Include="Models\Views\Person\GvaViewPerson.cs" />
     <Compile Include="Models\GvaWordTemplate.cs" />
     <Compile Include="Projections\Person\PersonRatingProjection.cs" />

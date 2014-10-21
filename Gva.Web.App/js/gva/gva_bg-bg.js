@@ -2777,7 +2777,6 @@
           viewAirport: 'Преглед',
           viewEquipment: 'Преглед',
           unlinkedLotParts: 'Документи извън преписката',
-          appLotObjects: 'Вписвания',
           'case': {
             regNumber: 'Тип/№/Дата',
             description: 'Тип',

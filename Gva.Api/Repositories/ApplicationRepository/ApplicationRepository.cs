@@ -232,49 +232,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .FirstOrDefault(e => e.DocId == docId);
         }
 
-        public void AddApplicationRefs(Part part, IEnumerable<ApplicationNomDO> applications)
-        {
-            var lotObjects = this.unitOfWork.DbContext.Set<GvaLotObject>()
-                .Where(lo => lo.LotPartId == part.PartId)
-                .ToList();
-            foreach (var lotObject in lotObjects)
-            {
-                this.unitOfWork.DbContext.Set<GvaLotObject>().Remove(lotObject);
-            }
-
-            foreach (var application in applications)
-            {
-                GvaLotObject lotObject = new GvaLotObject()
-                {
-                    GvaApplicationId = application.ApplicationId,
-                    LotPart = part
-                };
-                this.unitOfWork.DbContext.Set<GvaLotObject>().Add(lotObject);
-            }
-        }
-
-        public GvaApplication[] GetApplicationRefs(int partId)
-        {
-            return this.unitOfWork.DbContext.Set<GvaLotObject>()
-                .Include(lo => lo.GvaApplication)
-                .Include(lo => lo.GvaApplication.GvaAppLotPart)
-                .Where(lo => lo.LotPartId == partId)
-                .Select(ga => ga.GvaApplication)
-                .ToArray();
-        }
-
-        public void DeleteApplicationRefs(Part part)
-        {
-            var lotObjects = this.unitOfWork.DbContext.Set<GvaLotObject>()
-                .Where(f => f.LotPartId == part.PartId)
-                .ToList();
-
-            foreach (var lotObject in lotObjects)
-            {
-                this.unitOfWork.DbContext.Set<GvaLotObject>().Remove(lotObject);
-            }
-        }
-
         public IEnumerable<Set> GetLotSets(
             string names = null,
             bool exact = false,

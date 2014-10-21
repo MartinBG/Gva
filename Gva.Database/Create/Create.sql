@@ -12,7 +12,6 @@ GO
 :r $(rootPath)\"Tables\GvaFiles.sql"
 :r $(rootPath)\"Tables\GvaLotFiles.sql"
 :r $(rootPath)\"Tables\GvaAppLotFiles.sql"
-:r $(rootPath)\"Tables\GvaLotObjects.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizations.sql"
 :r $(rootPath)\"Tables\GvaViewPersons.sql"
 :r $(rootPath)\"Tables\GvaViewPersonInspectors.sql"

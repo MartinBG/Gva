@@ -41,12 +41,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         GvaApplication GetGvaApplicationByDocId(int docId);
 
-        void AddApplicationRefs(Part part, IEnumerable<ApplicationNomDO> applications);
-
-        GvaApplication[] GetApplicationRefs(int partId);
-
-        void DeleteApplicationRefs(Part part);
-
         IEnumerable<Set> GetLotSets(
             string name = null,
             bool exact = false,

@@ -167,9 +167,10 @@ namespace Gva.Api.Controllers.Organizations
                 if (amendmentsPartVersions.Count() == 0)
                 {
                     approvalPartVersion = lot.DeletePart<OrganizationApprovalDO>(string.Format("{0}/{1}", "approvals", approvalPartIndex), this.userContext);
+                    this.fileRepository.DeleteFileReferences(approvalPartVersion.Part);
                 }
 
-                this.applicationRepository.DeleteApplicationRefs(amendmentPartVersion.Part);
+                this.fileRepository.DeleteFileReferences(amendmentPartVersion.Part);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 

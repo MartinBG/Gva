@@ -167,9 +167,10 @@ namespace Gva.Api.Controllers.Persons
                 if (editionsPartVersions.Count() == 0)
                 {
                     ratingPartVersion = lot.DeletePart<PersonRatingDO>(string.Format("{0}/{1}", "ratings", ratingPartIndex), this.userContext);
+                    this.fileRepository.DeleteFileReferences(ratingPartVersion.Part);
                 }
 
-                this.applicationRepository.DeleteApplicationRefs(editionPartVersion.Part);
+                this.fileRepository.DeleteFileReferences(editionPartVersion.Part);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 
