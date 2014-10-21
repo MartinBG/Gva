@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Repositories.NomRepository;
@@ -97,8 +98,11 @@ namespace Gva.Api.Controllers.Persons
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
             var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
+            List<GvaViewPersonRatingDO> ratingDOs= ratings.Select(rating =>
+                new GvaViewPersonRatingDO(rating, rating.Editions.OrderByDescending(e => e.Index).ToList()))
+                .ToList();
 
-            return Ok(ratings.Select(d => new GvaViewPersonRatingDO(d)));
+            return Ok(ratingDOs);
         }
 
         [Route("{ratingPartIndex}/lastEditionIndex")]

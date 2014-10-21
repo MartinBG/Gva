@@ -27,6 +27,8 @@ namespace Gva.Api.Models.Views.Organization
         public virtual GvaViewOrganization Organization { get; set; }
 
         public virtual GvaViewOrganizationApproval Approval { get; set; }
+
+        public virtual Part Part { get; set; }
     }
 
     public class GvaViewOrganizationAmendmentMap : EntityTypeConfiguration<GvaViewOrganizationAmendment>
@@ -49,7 +51,7 @@ namespace Gva.Api.Models.Views.Organization
             // Table & Column Mappings
             this.ToTable("GvaViewOrganizationAmendments");
             this.Property(t => t.LotId).HasColumnName("LotId");
-            this.Property(t => t.PartId).HasColumnName("PartId");
+            this.Property(t => t.PartId).HasColumnName("LotPartId");
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
             this.Property(t => t.ApprovalPartIndex).HasColumnName("ApprovalPartIndex");
@@ -61,6 +63,9 @@ namespace Gva.Api.Models.Views.Organization
             this.HasRequired(t => t.Approval)
                 .WithMany(d => d.Amendments)
                 .HasForeignKey(t => new { t.LotId, t.ApprovalPartIndex });
+            this.HasRequired(t => t.Part)
+                .WithMany()
+                .HasForeignKey(t => t.PartId);
         }
     }
 }

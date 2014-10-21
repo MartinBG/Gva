@@ -271,6 +271,7 @@
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
+    <Compile Include="Models\Views\Person\GvaViewPersonRatingEdition.cs" />
     <Compile Include="Models\Views\Person\GvaLicenceEdition.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonLicenceEdition.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonRating.cs" />
@@ -311,6 +312,7 @@
     <Compile Include="Projections\Organization\OrganizationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationExaminerProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationApprovalProjection.cs" />
+    <Compile Include="Projections\Person\PersonRatingEditionProjection.cs" />
     <Compile Include="Projections\Person\PersonLicenceEditionProjection.cs" />
     <Compile Include="Projections\Person\PersonInspectorProjection.cs" />
     <Compile Include="Projections\Person\PersonProjection.cs" />

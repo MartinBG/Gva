@@ -89,11 +89,23 @@ namespace Gva.Api.Repositories.OrganizationRepository
 
         public IEnumerable<GvaViewOrganizationApproval> GetApprovals(int lotId, int? caseTypeId)
         {
-            return this.unitOfWork.DbContext.Set<GvaViewOrganizationApproval>()
+            var approvals = this.unitOfWork.DbContext.Set<GvaViewOrganizationApproval>()
                 .Include(a => a.ApprovalState)
                 .Include(a => a.ApprovalType)
                 .Include(a => a.Amendments)
                 .Where(r => r.LotId == lotId);
+
+            if (caseTypeId.HasValue)
+            {
+                return (from r in approvals
+                        join f in this.unitOfWork.DbContext.Set<GvaLotFile>().Include(f => f.GvaCaseType) on r.PartId equals f.LotPartId
+                        where f.GvaCaseTypeId == caseTypeId.Value
+                        select r);
+            }
+            else
+            {
+                return approvals;
+            }
         }
 
         public int GetLastApprovalAmendmentIndex(int lotId, int approvalPartIndex)

@@ -4,13 +4,14 @@ GO
 CREATE TABLE [dbo].[GvaViewOrganizationAmendments] (
     [LotId]                    INT               NOT NULL,
     [PartIndex]                INT               NOT NULL,
-	[PartId]                   INT               NOT NULL,
+	[LotPartId]                INT               NOT NULL,
     [ApprovalPartIndex]        INT               NOT NULL,
     [DocumentNumber]           NVARCHAR(50)      NULL,
     [DocumentDateIssue]        DATETIME          NULL,
     [ChangeNum]                INT               NULL,
     [Index]                    INT               NOT NULL,
     CONSTRAINT [PK_GvaViewOrganizationAmendments]                                PRIMARY KEY ([LotId], [ApprovalPartIndex], [PartIndex]),
+    CONSTRAINT [FK_GvaViewOrganizationAmendments_LotParts]                       FOREIGN KEY ([LotPartId])                  REFERENCES [dbo].[LotParts] ([LotPartId]),
     CONSTRAINT [FK_GvaViewOrganizationAmendments_GvaViewOrganizationApprovals]   FOREIGN KEY ([LotId], [ApprovalPartIndex]) REFERENCES [dbo].[GvaViewOrganizationApprovals] ([LotId], [PartIndex])
 )
 GO

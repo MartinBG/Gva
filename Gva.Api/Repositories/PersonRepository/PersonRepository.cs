@@ -255,6 +255,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.AircraftTypeGroup)
                 .Include(e => e.Authorization)
                 .Include(e => e.LocationIndicator)
+                .Include(e => e.Editions)
                 .Where(e => e.LotId == lotId);
 
             if (caseTypeId.HasValue)
@@ -272,8 +273,11 @@ namespace Gva.Api.Repositories.PersonRepository
         public int GetLastRatingEditionIndex(int lotId, int ratingPartIndex)
         {
             return this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
-                .Single(e => e.LotId == lotId && e.RatingPartIndex == ratingPartIndex)
-                .EditionPartIndex;
+                .Include(r => r.Editions)
+                .Single(e => e.LotId == lotId && e.PartIndex == ratingPartIndex)
+                .Editions.OrderBy(e => e.Index)
+                .Last()
+                .Index;
         }
     }
 }
