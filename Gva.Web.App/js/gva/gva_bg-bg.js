@@ -1734,6 +1734,7 @@
           caseType: 'Тип дело'
         },
         examDirective: {
+          caseType: 'Тип дело',
           commonQuestions: 'Основни знания',
           specializedQuestions: 'Специализирани знания',
           examDate: 'Дата',
@@ -2225,7 +2226,7 @@
         },
         otherSearch: {
           documentNumber: 'Док No',
-          documentPersonNumber: 'No в списъка (групов документ)',
+          documentPersonNumber: 'No в списъка',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
           documentPublisher: 'Издател',

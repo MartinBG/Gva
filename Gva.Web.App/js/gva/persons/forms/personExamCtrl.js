@@ -29,9 +29,9 @@
       });
     };
 
-    $scope.$watch('model.cases[0].file', function (files) {
-      var firstFile = _.find(files, function (file) {
-        return !file.isDeleted && file.file;
+    $scope.$watch('model.cases', function (cases) {
+      var firstFile = _.find(cases, function (c) {
+        return !c.isDeleted && c.file;
       });
 
       if (!firstFile) {
