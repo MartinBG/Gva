@@ -87,9 +87,6 @@
       else if (value.setPartAlias === 'personTraining') {
         state = 'root.persons.view.documentTrainings.edit';
       }
-      else if (value.setPartAlias === 'personExams') {
-        state = 'root.persons.view.exams.edit';
-      }
       else if (value.setPartAlias === 'personLangCert') {
         state = 'root.persons.view.documentLangCerts.edit';
       }

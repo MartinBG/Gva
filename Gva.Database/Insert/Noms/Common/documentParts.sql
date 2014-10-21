@@ -13,7 +13,6 @@ VALUES
     (@nomId , N'personCheck'            , N'Проверка'               , NULL     , 1              , N'personCheck'            , 1         , NULL         ),
     (@nomId , N'personTraining'         , N'Обучение'               , NULL     , 1              , N'personTraining'         , 1         , NULL         ),
     (@nomId , N'personLangCert'         , N'Свидетелство за език'   , NULL     , 1              , N'personLangCert'         , 1         , NULL         ),
-    (@nomId , N'personExams'            , N'Изпит'                  , NULL     , 1              , N'personExams'            , 1         , NULL         ),
     (@nomId , N'personOther'            , N'Друг документ'          , NULL     , 1              , N'personOther'            , 1         , NULL         ),
     (@nomId , N'personApplication'      , N'Заявление'              , NULL     , 1              , N'personApplication'      , 1         , NULL         ),
 

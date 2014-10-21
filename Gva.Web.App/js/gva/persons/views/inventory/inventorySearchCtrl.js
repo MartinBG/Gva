@@ -51,9 +51,6 @@
         case 'personLangCert':
           stateName = 'root.persons.view.documentLangCerts.edit';
           break;
-        case 'personExams':
-          stateName = 'root.persons.view.exams.edit';
-          break;
       }
 
       return {
