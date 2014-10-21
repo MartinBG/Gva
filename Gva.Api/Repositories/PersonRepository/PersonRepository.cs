@@ -254,6 +254,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.RatingClass)
                 .Include(e => e.AircraftTypeGroup)
                 .Include(e => e.Authorization)
+                .Include(e => e.LocationIndicator)
                 .Where(e => e.LotId == lotId);
 
             if (caseTypeId.HasValue)

@@ -12,6 +12,7 @@ CREATE TABLE [dbo].[GvaViewPersonRatings] (
     [RatingClassId]            INT               NULL,
     [AircraftTypeGroupId]      INT               NULL,
     [AuthorizationId]          INT               NULL,
+    [LocationIndicatorId]      INT               NULL,
     [RatingSubClasses]         NVARCHAR(MAX)     NULL,
     [Limitations]              NVARCHAR(MAX)     NULL,
     [LastDocDateValidFrom]     DATETIME2         NOT NULL,
@@ -26,7 +27,8 @@ CREATE TABLE [dbo].[GvaViewPersonRatings] (
     CONSTRAINT [FK_GvaViewPersonRatings_RatingLevelId]          FOREIGN KEY ([RatingLevelId])         REFERENCES [dbo].[NomValues] ([NomValueId]),
     CONSTRAINT [FK_GvaViewPersonRatings_RatingClassId]          FOREIGN KEY ([RatingClassId])         REFERENCES [dbo].[NomValues] ([NomValueId]),
     CONSTRAINT [FK_GvaViewPersonRatings_AircraftTypeGroupId]    FOREIGN KEY ([AircraftTypeGroupId])   REFERENCES [dbo].[NomValues] ([NomValueId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_AuthorizationId]        FOREIGN KEY ([AuthorizationId])       REFERENCES [dbo].[NomValues] ([NomValueId])
+    CONSTRAINT [FK_GvaViewPersonRatings_AuthorizationId]        FOREIGN KEY ([AuthorizationId])       REFERENCES [dbo].[NomValues] ([NomValueId]),
+	CONSTRAINT [FK_GvaViewPersonRatings_LocationIndicatorId]    FOREIGN KEY ([LocationIndicatorId])   REFERENCES [dbo].[NomValues] ([NomValueId])
 )
 GO
 
@@ -39,6 +41,7 @@ exec spDescColumn N'GvaViewPersonRatings', N'RatingLevelId'            , N'Ст�
 exec spDescColumn N'GvaViewPersonRatings', N'RatingClassId'            , N'Клас ВС на квалификационния клас.'
 exec spDescColumn N'GvaViewPersonRatings', N'AircraftTypeGroupId'      , N'Група на ВС на квалификационния клас.'
 exec spDescColumn N'GvaViewPersonRatings', N'AuthorizationId'          , N'Разрешение на квалификационния клас.'
+exec spDescColumn N'GvaViewPersonRatings', N'LocationIndicatorId'      , N'Индикатор на местоположение.'
 exec spDescColumn N'GvaViewPersonRatings', N'RatingSubClasses'         , N'Подкласове на класа.'
 exec spDescColumn N'GvaViewPersonRatings', N'Limitations'              , N'Ограничения към класа.'
 exec spDescColumn N'GvaViewPersonRatings', N'LastDocDateValidFrom'     , N'Дата на вписване на последното вписване.'

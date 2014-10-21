@@ -30,6 +30,8 @@ namespace Gva.Api.Models.Views.Person
 
         public int? AuthorizationId { get; set; }
 
+        public int? LocationIndicatorId { get; set; }
+
         public string RatingSubClasses { get; set; }
 
         public string Limitations { get; set; }
@@ -47,6 +49,8 @@ namespace Gva.Api.Models.Views.Person
         public virtual GvaViewPerson Person { get; set; }
 
         public virtual Part Part { get; set; }
+
+        public virtual NomValue LocationIndicator { get; set; }
 
         public virtual NomValue RatingType { get; set; }
 
@@ -86,6 +90,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.RatingClassId).HasColumnName("RatingClassId");
             this.Property(t => t.AircraftTypeGroupId).HasColumnName("AircraftTypeGroupId");
             this.Property(t => t.AuthorizationId).HasColumnName("AuthorizationId");
+            this.Property(t => t.LocationIndicatorId).HasColumnName("LocationIndicatorId");
             this.Property(t => t.RatingSubClasses).HasColumnName("RatingSubClasses");
             this.Property(t => t.Limitations).HasColumnName("Limitations");
             this.Property(t => t.LastDocDateValidFrom).HasColumnName("LastDocDateValidFrom");
@@ -116,6 +121,9 @@ namespace Gva.Api.Models.Views.Person
             this.HasOptional(t => t.Authorization)
                 .WithMany()
                 .HasForeignKey(t => t.AuthorizationId);
+            this.HasOptional(t => t.LocationIndicator)
+                .WithMany()
+                .HasForeignKey(t => t.LocationIndicatorId);
         }
     }
 }

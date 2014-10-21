@@ -30,6 +30,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.FirstDocDateValidFrom = rating.FirstDocDateValidFrom;
             this.Notes = rating.Notes;
             this.NotesAlt = rating.NotesAlt;
+            this.LocationIndicator = rating.LocationIndicator;
         }
 
         public int LotId { get; set; }
@@ -41,6 +42,8 @@ namespace Gva.Api.ModelsDO.Persons
         public int RatingPartIndex { get; set; }
 
         public int EditionPartIndex { get; set; }
+
+        public NomValue LocationIndicator { get; set; }
 
         public NomValue RatingType { get; set; }
 

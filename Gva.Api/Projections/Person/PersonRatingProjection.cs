@@ -52,6 +52,7 @@ namespace Gva.Api.Projections.Person
             rating.EditionIndex = lastEdition.Content.Index;
             rating.RatingPartIndex = personRating.Part.Index;
             rating.EditionPartIndex = lastEdition.Part.Index;
+            rating.LocationIndicatorId = personRating.Content.LocationIndicator != null ? personRating.Content.LocationIndicator.NomValueId : (int?)null;
             rating.RatingTypeId = personRating.Content.RatingType != null ? personRating.Content.RatingType.NomValueId : (int?)null;
             rating.RatingLevelId = personRating.Content.PersonRatingLevel != null ?  personRating.Content.PersonRatingLevel.NomValueId : (int?)null;
             rating.RatingClassId = personRating.Content.RatingClass != null ? personRating.Content.RatingClass.NomValueId : (int?)null;
