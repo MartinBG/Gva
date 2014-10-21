@@ -54,7 +54,7 @@ namespace Gva.Api.Controllers.Persons
         public IHttpActionResult GetNewRatingEdition(int lotId, int caseTypeId, int? appId = null, int? ratingPartIndex = null)
         {
             var caseType = this.caseTypeRepository.GetCaseType(caseTypeId);
-            CaseDO caseDO = new CaseDO() 
+            CaseDO caseDO = new CaseDO()
             { 
                 CaseType = new NomValue
                 {
@@ -74,7 +74,7 @@ namespace Gva.Api.Controllers.Persons
             PersonRatingEditionDO newRatingEdition = new PersonRatingEditionDO()
             {
                 DocumentDateValidFrom = DateTime.Now,
-                RatingPartIndex = ratingPartIndex.HasValue ? ratingPartIndex.Value : 0,
+                RatingPartIndex = ratingPartIndex,
             };
 
             return Ok(new CaseTypePartDO<PersonRatingEditionDO>(newRatingEdition, caseDO));

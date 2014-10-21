@@ -75,7 +75,7 @@ namespace Gva.Api.Controllers.Persons
             PersonLicenceEditionDO newLicenceEdition = new PersonLicenceEditionDO()
             {
                 DocumentDateValidFrom = DateTime.Now,
-                LicencePartIndex = licencePartIndex.HasValue ? licencePartIndex.Value : 0
+                LicencePartIndex = licencePartIndex
             };
 
             return Ok(new CaseTypePartDO<PersonLicenceEditionDO>(newLicenceEdition, caseDO));

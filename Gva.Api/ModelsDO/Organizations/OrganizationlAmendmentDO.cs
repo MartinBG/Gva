@@ -23,7 +23,7 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public int Index { get; set; }
 
-        public int ApprovalPartIndex { get; set; }
+        public int? ApprovalPartIndex { get; set; }
 
         public int CaseTypeId { get; set; }
 

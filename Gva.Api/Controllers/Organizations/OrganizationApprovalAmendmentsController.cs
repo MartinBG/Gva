@@ -74,7 +74,7 @@ namespace Gva.Api.Controllers.Organizations
             OrganizationAmendmentDO newApprovalAmendment = new OrganizationAmendmentDO()
             {
                 DocumentDateIssue = DateTime.Now,
-                ApprovalPartIndex = approvalPartIndex.HasValue ? approvalPartIndex.Value : 0,
+                ApprovalPartIndex = approvalPartIndex
             };
 
             return Ok(new CaseTypePartDO<OrganizationAmendmentDO>(newApprovalAmendment, caseDO));

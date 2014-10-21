@@ -20,7 +20,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.IncludedLicences = new List<int>();
         }
 
-        public int LicencePartIndex { get; set; }
+        public int? LicencePartIndex { get; set; }
 
         public int Index { get; set; }
 
