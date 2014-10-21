@@ -202,9 +202,9 @@ namespace Gva.MigrationTool.Sets
                         var organizationStaffExaminers = this.getOrganizationStaffExaminers(organizationId, noms, getPersonByApexId);
                         foreach (var organizationStaffExaminer in organizationStaffExaminers)
                         {
-                            if (organizationStaffExaminer.Get<int?>("person.nomValueId") == null)
+                            if (organizationStaffExaminer.Get<int?>("part.person.nomValueId") == null)
                             {
-                                Console.WriteLine("CANNOT FIND PERSON FOR organizationStaffExaminer WITH oldId " + organizationStaffExaminer.Get<int>("__oldId"));
+                                Console.WriteLine("CANNOT FIND PERSON FOR organizationStaffExaminer WITH oldId " + organizationStaffExaminer.Get<int>("part.__oldId"));
                                 continue;
                             }
                             addPartWithFiles("organizationStaffExaminers/*", organizationStaffExaminer);
