@@ -12,9 +12,9 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-common-document-application name="documentApplicationForm" ng-model="application.part" sc-form-params="{ lotId: lotId }"></gva-common-document-application>
+      <gva-common-document-application name="documentApplicationForm" ng-model="application" sc-form-params="{ lotId: lotId }"></gva-common-document-application>
 
-      <gva-common-scanned-document name="scannedDocumentForm" ng-model="application.files"
+      <gva-common-scanned-document name="scannedDocumentForm" ng-model="application.case"
         sc-form-params="{ setPart: setPart, lotId: lotId, hideApplications: true }"></gva-common-scanned-document>
     </div>
   </div>
