@@ -12,7 +12,7 @@
           <sc-files ng-model="file.file" readonly="{{file.isDocFile}}" name="file" ng-readonly="file.isDocFile || form.$readonly"></sc-files>
         </div>
       </div>
-      <div class="form-group col-sm-3 col-md-5" ng-if="!hideApplications">
+      <div class="form-group" ng-if="!hideApplications" ng-class="{'col-sm-3 col-md-5': !hideFiles, 'col-sm-6': hideFiles}">
         <label class="control-label" l10n-text="common.scannedDocumentlDirective.applications"></label>
         <gva-applications ng-model="file.applications" set-part="setPart" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
       </div>
