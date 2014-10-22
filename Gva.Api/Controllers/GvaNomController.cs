@@ -446,6 +446,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetDocumentRoles(
             string term = null,
             string categoryAlias = null,
+            string valueAlias = null,
             [FromUri] string[] caseTypeAliases = null,
             [FromUri] string[] categoryCodes = null,
             int offset = 0,
@@ -455,6 +456,10 @@ namespace Gva.Api.Controllers
             if (categoryAlias == null && (caseTypeAliases == null || caseTypeAliases.Length == 0))
             {
                 nomValues = this.nomRepository.GetNomValues("documentRoles", term: term, offset: offset, limit: limit);
+            }
+            else if (valueAlias != null)
+            {
+                nomValues = this.nomRepository.GetNomValues("documentRoles", valueAliases: new string[] { valueAlias });
             }
             else
             {

@@ -6,13 +6,24 @@
     $scope,
     $modalInstance,
     PersonDocumentTrainings,
+    Nomenclatures,
     scModalParams,
     personDocumentExam
   ) {
     $scope.form = {};
+    $scope.caseTypeId = scModalParams.caseTypeId;
     $scope.personDocumentExam = personDocumentExam;
     $scope.lotId = scModalParams.lotId;
-    $scope.caseTypeId = scModalParams.caseTypeId;
+
+    $scope.$watch('personDocumentExam.case', function() {
+      Nomenclatures
+        .get({ alias: 'documentRoles', valueAlias: 'exam' })
+        .$promise
+        .then(function (theoreticalExamRole) {
+          $scope.personDocumentExam.part.documentRole = theoreticalExamRole;
+        });
+    });
+
     $scope.save = function () {
       return $scope.form.newDocumentExamForm.$validate()
         .then(function () {
@@ -36,6 +47,7 @@
     '$scope',
     '$modalInstance',
     'PersonDocumentTrainings',
+    'Nomenclatures',
     'scModalParams',
     'personDocumentExam'
   ];
@@ -46,8 +58,7 @@
       'scModalParams',
       function (PersonDocumentTrainings, scModalParams) {
         return PersonDocumentTrainings.newTraining({
-              id: scModalParams.lotId,
-              appId: scModalParams.appId
+              id: scModalParams.lotId
             }).$promise;
       }
     ]
