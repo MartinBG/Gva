@@ -17,6 +17,7 @@
     $scope.title = l10n.get('applications.edit.addPart.title') + ': ' + docPartType.name;
     $scope.setPartAlias = $stateParams.setPartAlias;
     $scope.lotId = application.lotId;
+    $scope.caseReadonly = !!$stateParams.docFileId;
 
     if ($stateParams.setPartAlias === 'personMedical') {
       $scope.personLin = person.lin;
@@ -30,13 +31,14 @@
       return $scope.addFormWrapper.$validate().then(function () {
         if ($scope.addFormWrapper.$valid) {
           return AplicationsCase.linkNewPart({
-              id: $stateParams.id,
-              setPartAlias: $scope.setPartAlias
-            }, $scope.applicationPart)
-            .$promise.then(function () {
-              return $state.transitionTo('root.applications.edit.case',
-                $stateParams, { reload: true });
-            });
+            id: $stateParams.id,
+            docId: $stateParams.docId,
+            setPartAlias: $scope.setPartAlias
+          }, $scope.applicationPart)
+          .$promise.then(function () {
+            return $state.transitionTo('root.applications.edit.case',
+              $stateParams, { reload: true });
+          });
         }
       });
     };

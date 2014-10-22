@@ -56,14 +56,18 @@ namespace Gva.Api.Controllers.Applications
         }
 
         [Route("~/api/apps/parts/{lotId}/{setPartAlias}/new")]
-        public IHttpActionResult GetNewPart(int lotId, string setPartAlias, int docId, int docFileId, int caseTypeId)
+        public IHttpActionResult GetNewPart(int lotId, string setPartAlias, int docId, int caseTypeId, int? docFileId = null)
         {
-            DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>()
-                .Include(e => e.DocFileOriginType)
-                .Include(e => e.DocFileKind)
-                .SingleOrDefault(e => e.DocFileId == docFileId);
-
             var caseType = this.caseTypeRepository.GetCaseType(caseTypeId);
+
+            DocFile docFile = null;
+            if (docFileId.HasValue)
+            {
+                docFile = this.unitOfWork.DbContext.Set<DocFile>()
+                    .Include(e => e.DocFileOriginType)
+                    .Include(e => e.DocFileKind)
+                    .SingleOrDefault(e => e.DocFileId == docFileId);
+            }
 
             if (Regex.IsMatch(setPartAlias, "^[a-zA-Z]+Application$"))
             {
@@ -81,32 +85,24 @@ namespace Gva.Api.Controllers.Applications
                 return Ok(newAppPart);
             }
 
-            string documentNumber = null;
-            DateTime? documentDateValidFrom = null;
-            string documentPublisher = null;
-            if (docFile.DocFileOriginType != null && docFile.DocFileOriginType.Alias == "EApplicationAttachedFile" && docFile.Name == "Копие от личната карта")
+            if (docFile != null &&
+                docFile.DocFileOriginType != null &&
+                docFile.DocFileOriginType.Alias == "EApplicationAttachedFile")
             {
-                documentNumber = "1234";
-                documentDateValidFrom = new DateTime(2014, 4, 15);
-                documentPublisher = "МВР";
+                // TODO get part
             }
 
-            var newPart = new PartDO<object>()
+            var newPart = new PartDO<JObject>()
             {
-                Part = new
-                {
-                    DocumentNumber = documentNumber,
-                    DocumentDateValidFrom = documentDateValidFrom,
-                    DocumentPublisher = documentPublisher
-                },
+                Part = new JObject(),
                 Case = new DocCaseDO(docFile, caseType)
             };
 
             return Ok(newPart);
         }
 
-        [Route("parts/linkNew")]
-        public IHttpActionResult PostCreatePartAndLink(int id, string setPartAlias, PartDO<JObject> linkNewPart)
+        [Route("parts/{setPartAlias}/linkNew")]
+        public IHttpActionResult PostCreatePartAndLink(int id, string setPartAlias, int docId, PartDO<JObject> linkNewPart)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -115,6 +111,7 @@ namespace Gva.Api.Controllers.Applications
 
                 SetPart setPart = this.unitOfWork.DbContext.Set<SetPart>().FirstOrDefault(e => e.Alias == setPartAlias);
                 string path = setPart.PathRegex.Remove(setPart.PathRegex.IndexOf("\\"), 4).Remove(0, 1) + "*";
+
                 PartVersion<JObject> partVersion = lot.CreatePart(path, linkNewPart.Part, this.userContext);
                 lot.Commit(this.userContext, lotEventDispatcher);
 
@@ -123,8 +120,34 @@ namespace Gva.Api.Controllers.Applications
                     application.GvaAppLotPart = partVersion.Part;
                 }
 
-                int docFileId = linkNewPart.Case.DocFileId;
-                DocFile docFile = this.unitOfWork.DbContext.Set<DocFile>().FirstOrDefault(e => e.DocFileId == docFileId);
+                DocFile docFile;
+                if (linkNewPart.Case.DocFileId.HasValue)
+                {
+                    docFile = this.unitOfWork.DbContext.Set<DocFile>().FirstOrDefault(e => e.DocFileId == linkNewPart.Case.DocFileId);
+                }
+                else
+                {
+                    var doc = this.docRepository.Find(docId);
+                    var docFileTypes = this.unitOfWork.DbContext.Set<DocFileType>().ToList();
+
+                    var docFileType = docFileTypes.FirstOrDefault(e => e.Extention == Path.GetExtension(linkNewPart.Case.File.Name));
+                    if (docFileType == null)
+                    {
+                        docFileType = docFileTypes.FirstOrDefault(e => e.Alias == "UnknownBinary");
+                    }
+
+                    docFile = doc.CreateDocFile(
+                        linkNewPart.Case.DocFileKind.NomValueId,
+                        docFileType.DocFileTypeId,
+                        null,
+                        linkNewPart.Case.Name,
+                        linkNewPart.Case.File.Name,
+                        String.Empty,
+                        linkNewPart.Case.File.Key,
+                        true,
+                        true,
+                        this.userContext);
+                }
 
                 GvaLotFile lotFile = new GvaLotFile()
                 {

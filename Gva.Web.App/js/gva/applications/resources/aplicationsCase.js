@@ -17,10 +17,11 @@
             },
             linkNewPart: {
               method: 'POST',
-              url: 'api/apps/:id/parts/linkNew',
+              url: 'api/apps/:id/parts/:setPartAlias/linkNew',
               params: {
                 id: '@id',
-                setPartAlias: '@setPartAlias'
+                setPartAlias: '@setPartAlias',
+                docId: '@docId'
               }
             },
             linkExistingPart: {

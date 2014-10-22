@@ -4,6 +4,8 @@
   'use strict';
 
   function AppDocumentCtrl($scope, GvaParts, scFormParams) {
+    $scope.caseReadonly = scFormParams.readonly;
+
     $scope.isUniqueBPN = function () {
       return function () {
         if (!$scope.model.bookPageNumber) {

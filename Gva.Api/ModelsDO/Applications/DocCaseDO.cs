@@ -17,19 +17,22 @@ namespace Gva.Api.ModelsDO.Applications
         public DocCaseDO(DocFile docFile, GvaCaseType caseType)
             : this()
         {
-            this.DocFileId = docFile.DocFileId;
-            this.Name = docFile.Name;
-
-            this.File.Key = docFile.DocFileContentId;
-            this.File.Name = docFile.DocFileName;
-            this.File.RelativePath = ""; //?
-
-            this.DocFileKind = new NomValue()
+            if (docFile != null)
             {
-                NomValueId = docFile.DocFileKindId,
-                Name = docFile.DocFileKind.Name,
-                Alias = docFile.DocFileKind.Alias
-            };
+                this.DocFileId = docFile.DocFileId;
+                this.Name = docFile.Name;
+
+                this.File.Key = docFile.DocFileContentId;
+                this.File.Name = docFile.DocFileName;
+                this.File.RelativePath = ""; //?
+
+                this.DocFileKind = new NomValue()
+                {
+                    NomValueId = docFile.DocFileKindId,
+                    Name = docFile.DocFileKind.Name,
+                    Alias = docFile.DocFileKind.Alias
+                };
+            }
 
             this.CaseType = new NomValue()
             {
@@ -39,7 +42,7 @@ namespace Gva.Api.ModelsDO.Applications
             };
         }
 
-        public int DocFileId { get; set; }
+        public int? DocFileId { get; set; }
 
         public NomValue DocFileKind { get; set; }
 

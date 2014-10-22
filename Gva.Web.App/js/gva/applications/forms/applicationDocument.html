@@ -1,18 +1,18 @@
 ﻿<ng-form class="form-inline" sc-validate="{}">
   <h5 class="form-header" l10n-text="applications.applicationDocument.title" style="margin-top:10px;"></h5>
   <div class="row">
-    <sc-field type="text" ng-model="model.name" l10n-text="applications.applicationDocument.name" class="col-sm-4" ng-readonly="true" ng-required="true"></sc-field>
-    <sc-field type="text" ng-model="model.docFileKind.name" l10n-text="applications.applicationDocument.fileKind" class="col-sm-2" ng-readonly="true" ng-required="true"></sc-field>
+    <sc-field type="text" ng-model="model.name" l10n-text="applications.applicationDocument.name" class="col-sm-4" ng-readonly="caseReadonly" ng-required="true"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.docFileKind" alias="'docFileKind'" l10n-text="applications.applicationDocument.fileKind" class="col-sm-2" ng-readonly="caseReadonly" ng-required="true"></sc-field>
   </div>
 
   <div class="row">
-    <sc-field type="text" ng-model="model.caseType.name" l10n-text="applications.applicationDocument.caseType" class="col-sm-2" ng-readonly="true"></sc-field>
+    <sc-field type="text" name="appDocName" ng-model="model.caseType.name" l10n-text="applications.applicationDocument.caseType" class="col-sm-2" ng-readonly="true"></sc-field>
     <sc-field type="text" ng-model="model.bookPageNumber" ng-required="true" sc-validate="{ unique: isUniqueBPN() }" validations="{unique: 'errorTexts.notUniqueBPN'}" l10n-text="applications.applicationDocument.pageIndex" class="col-sm-2"></sc-field>
     <sc-field type="int" ng-model="model.pageCount" min="0" l10n-text="applications.applicationDocument.pageNumber" validations="{min: 'default'}" class="col-sm-2"></sc-field>
-    <div class="form-group col-sm-6" sc-has-error="file">
+    <div class="form-group col-sm-6" sc-has-error="appDocFile">
       <label class="control-label" l10n-text="applications.applicationDocument.attachment"></label>
-      <sc-validation-error field-name="file" validations="{required: 'default'}"></sc-validation-error>
-      <sc-files name="file" ng-model="model.file" required ng-readonly="true"></sc-files>
+      <sc-validation-error field-name="appDocFile" validations="{required: 'default'}"></sc-validation-error>
+      <sc-files name="appDocFile" ng-model="model.file" ng-readonly="caseReadonly" required></sc-files>
     </div>
   </div>
 </ng-form>

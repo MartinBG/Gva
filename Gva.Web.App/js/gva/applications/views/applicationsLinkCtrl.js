@@ -66,7 +66,7 @@
               });
             }
             else {
-              return $state.go('root.applications.edit.case.addPart', {
+              return $state.go('root.applications.edit.case.newFile', {
                 id: app.applicationId,
                 docId: app.docId,
                 setPartAlias: $scope.setPartAlias

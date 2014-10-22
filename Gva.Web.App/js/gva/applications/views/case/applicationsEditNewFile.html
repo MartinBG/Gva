@@ -14,7 +14,7 @@
 
     <div class="well-sm panel-body">
       <div class="row">
-        <sc-field type="nomenclature" ng-model="docPartType" alias="'documentParts'" params="{ parentValueId: lotSetId }" l10n-text="applications.edit.newFile.documentType" class="col-sm-4" ng-required="true"></sc-field>
+        <sc-field type="nomenclature" ng-model="docPartType" alias="'documentParts'" params="{ parentValueId: lotSetId }" l10n-text="applications.edit.newFile.documentType" class="col-sm-4" ng-required="true" ng-disabled="!chooseDocPartType"></sc-field>
         <sc-field type="nomenclature" ng-model="caseType" alias="'caseTypes'" params=" {lotId: lotId }" l10n-text="applications.edit.newFile.caseType" class="col-sm-2" ng-required="true"></sc-field>
       </div>
     </div>

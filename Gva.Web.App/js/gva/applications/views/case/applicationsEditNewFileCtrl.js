@@ -6,11 +6,13 @@
     $scope,
     $state,
     $stateParams,
-    application
+    application,
+    docPartType
     ) {
     $scope.lotSetId = application.lotSetId;
     $scope.lotId = application.lotId;
-    $scope.docPartType = null;
+    $scope.docPartType = docPartType;
+    $scope.chooseDocPartType = !docPartType;
     $scope.caseType = null;
 
     $scope.cancel = function () {
@@ -36,8 +38,27 @@
     '$scope',
     '$state',
     '$stateParams',
-    'application'
+    'application',
+    'docPartType'
   ];
+
+  ApplicationsEditNewFileCtrl.$resolve = {
+    docPartType: [
+      '$stateParams',
+      'Nomenclatures',
+      function ($stateParams, Nomenclatures) {
+        if ($stateParams.setPartAlias) {
+          return Nomenclatures.get({
+            alias: 'documentParts',
+            valueAlias: $stateParams.setPartAlias
+          }).$promise;
+        }
+        else {
+          return null;
+        }
+      }
+    ]
+  };
 
   angular.module('gva').controller('ApplicationsEditNewFileCtrl', ApplicationsEditNewFileCtrl);
 }(angular));
