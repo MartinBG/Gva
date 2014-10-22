@@ -99,7 +99,7 @@ namespace Gva.Api.Controllers.Persons
         {
             var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
             List<GvaViewPersonRatingDO> ratingDOs= ratings.Select(rating =>
-                new GvaViewPersonRatingDO(rating, rating.Editions.OrderByDescending(e => e.Index).ToList()))
+                new GvaViewPersonRatingDO(rating, rating.Editions.OrderBy(e => e.Index).ToList()))
                 .ToList();
 
             return Ok(ratingDOs);

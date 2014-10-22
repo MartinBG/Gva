@@ -11,12 +11,12 @@ using Regs.Api.Models;
 
 namespace Gva.Api.Projections.Inventory.Persons
 {
-    public class PersonLicenceProjection : Projection<GvaViewInventoryItem>
+    public class PersonLicenceProjection2 : Projection<GvaViewInventoryItem>
     {
         private IUserRepository userRepository;
         private INomRepository nomRepository;
 
-        public PersonLicenceProjection(
+        public PersonLicenceProjection2(
             IUnitOfWork unitOfWork,
             IUserRepository userRepository,
             INomRepository nomRepository)

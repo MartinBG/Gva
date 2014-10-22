@@ -15,6 +15,7 @@ GO
 :r $(rootPath)\"Tables\GvaViewOrganizations.sql"
 :r $(rootPath)\"Tables\GvaViewPersons.sql"
 :r $(rootPath)\"Tables\GvaViewPersonInspectors.sql"
+:r $(rootPath)\"Tables\GvaViewPersonLicences.sql"
 :r $(rootPath)\"Tables\GvaViewPersonLicenceEditions.sql"
 :r $(rootPath)\"Tables\GvaViewPersonRatings.sql"
 :r $(rootPath)\"Tables\GvaViewPersonRatingEditions.sql"

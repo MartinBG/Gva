@@ -10,15 +10,17 @@ namespace Gva.Api.Models.Views.Person
     {
         public int LotId { get; set; }
 
-        public int LicencePartId { get; set; }
+        public int PartId { get; set; }
 
-        public int EditionPartId { get; set; }
+        public int PartIndex { get; set; }
 
-        public int EditionIndex { get; set; }
+        public int LicencePartIndex { get; set; }
 
-        public int LicenceTypeId { get; set; }
+        public int Index { get; set; }
 
         public string StampNumber { get; set; }
+
+        public DateTime FirstDocDateValidFrom { get; set; }
 
         public DateTime DateValidFrom { get; set; }
 
@@ -26,45 +28,20 @@ namespace Gva.Api.Models.Views.Person
 
         public int LicenceActionId { get; set; }
 
-        public int? LicenceNumber { get; set; }
-
         public bool IsLastEdition { get; set; }
-
-        public int LicencePartIndex { get; set; }
-
-        public int EditionPartIndex { get; set; }
-
-        public DateTime FirstDocDateValidFrom { get; set; }
-
-        public bool Valid { get; set; }
-
-        public string LicenceTypeCode { get; set; }
-
-        public string LicenceTypeCaCode { get; set; }
-
-        public string PublisherCode { get; set; }
-
-        public virtual GvaViewPerson Person { get; set; }
-
-        public virtual Part LicencePart { get; set; }
-
-        public virtual Part EditionPart { get; set; }
-
-        public virtual NomValue LicenceType { get; set; }
-
-        public virtual NomValue LicenceAction { get; set; }
-
-        public string ForeignLicenceNumber { get; set; }
-
-        public string ForeignPublisher { get; set; }
 
         public string Notes { get; set; }
 
         public string Inspector { get; set; }
 
-        public string StatusChange { get; set; }
-
         public string Limitations { get; set; }
+
+        public virtual Part Part { get; set; }
+
+        public virtual NomValue LicenceAction { get; set; }
+
+        public virtual GvaViewPersonLicence Licence { get; set; }
+
     }
 
     public class GvaViewPersonLicenceEditionMap : EntityTypeConfiguration<GvaViewPersonLicenceEdition>
@@ -72,73 +49,44 @@ namespace Gva.Api.Models.Views.Person
         public GvaViewPersonLicenceEditionMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.LotId, t.LicencePartId, t.EditionPartId });
+            this.HasKey(t => new { t.LotId, t.LicencePartIndex, t.PartIndex });
 
             // Properties
             this.Property(t => t.LotId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.LicencePartId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
-            this.Property(t => t.EditionPartId)
+            this.Property(t => t.PartId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.StampNumber)
                 .HasMaxLength(50);
 
-            this.Property(t => t.LicenceTypeCode)
-                .HasMaxLength(50);
-
-            this.Property(t => t.LicenceTypeCaCode)
-                .HasMaxLength(50);
-
-            this.Property(t => t.PublisherCode)
-                .HasMaxLength(50);
-
             // Table & Column Mappings
             this.ToTable("GvaViewPersonLicenceEditions");
             this.Property(t => t.LotId).HasColumnName("LotId");
-            this.Property(t => t.LicencePartId).HasColumnName("LicencePartId");
-            this.Property(t => t.EditionPartId).HasColumnName("EditionPartId");
-            this.Property(t => t.EditionIndex).HasColumnName("EditionIndex");
-            this.Property(t => t.LicenceTypeId).HasColumnName("LicenceTypeId");
+            this.Property(t => t.PartIndex).HasColumnName("PartIndex");
+            this.Property(t => t.PartId).HasColumnName("PartId");
             this.Property(t => t.StampNumber).HasColumnName("StampNumber");
+            this.Property(t => t.FirstDocDateValidFrom).HasColumnName("FirstDocDateValidFrom");
+            this.Property(t => t.IsLastEdition).HasColumnName("IsLastEdition");
             this.Property(t => t.DateValidFrom).HasColumnName("DateValidFrom");
             this.Property(t => t.DateValidTo).HasColumnName("DateValidTo");
             this.Property(t => t.LicenceActionId).HasColumnName("LicenceActionId");
-            this.Property(t => t.LicenceNumber).HasColumnName("LicenceNumber");
-            this.Property(t => t.IsLastEdition).HasColumnName("IsLastEdition");
             this.Property(t => t.LicencePartIndex).HasColumnName("LicencePartIndex");
-            this.Property(t => t.EditionPartIndex).HasColumnName("EditionPartIndex");
-            this.Property(t => t.FirstDocDateValidFrom).HasColumnName("FirstDocDateValidFrom");
-            this.Property(t => t.Valid).HasColumnName("Valid");
-            this.Property(t => t.LicenceTypeCode).HasColumnName("LicenceTypeCode");
-            this.Property(t => t.LicenceTypeCaCode).HasColumnName("LicenceTypeCaCode");
-            this.Property(t => t.PublisherCode).HasColumnName("PublisherCode");
-            this.Property(t => t.ForeignLicenceNumber).HasColumnName("ForeignLicenceNumber");
-            this.Property(t => t.ForeignPublisher).HasColumnName("ForeignPublisher");
             this.Property(t => t.Notes).HasColumnName("Notes");
             this.Property(t => t.Inspector).HasColumnName("Inspector");
-            this.Property(t => t.StatusChange).HasColumnName("StatusChange");
             this.Property(t => t.Limitations).HasColumnName("Limitations");
 
             // Relationships
-            this.HasRequired(t => t.Person)
-                .WithMany(d => d.PersonLicenceEditions)
-                .HasForeignKey(t => t.LotId);
-            this.HasRequired(t => t.LicencePart)
+            this.HasRequired(t => t.Part)
                 .WithMany()
-                .HasForeignKey(t => t.LicencePartId);
-            this.HasRequired(t => t.EditionPart)
-                .WithMany()
-                .HasForeignKey(t => t.EditionPartId);
-            this.HasRequired(t => t.LicenceType)
-                .WithMany()
-                .HasForeignKey(t => t.LicenceTypeId);
+                .HasForeignKey(t => t.PartId);
             this.HasRequired(t => t.LicenceAction)
                 .WithMany()
                 .HasForeignKey(t => t.LicenceActionId);
+            this.HasRequired(t => t.Licence)
+                .WithMany(d => d.Editions)
+                .HasForeignKey(t => new { t.LotId, t.LicencePartIndex });
         }
     }
 }

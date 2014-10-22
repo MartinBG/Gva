@@ -224,7 +224,7 @@ namespace Gva.Api.Repositories.PersonRepository
         public string GetLastLicenceNumber(int lotId, string licenceTypeCode)
         {
             string licenceNumber = null;
-            var licenceNumbers = this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
+            var licenceNumbers = this.unitOfWork.DbContext.Set<GvaViewPersonLicence>()
                 .Include(e => e.LicenceType)
                 .Where(e => e.LicenceType.Code == licenceTypeCode)
                 .Select(e => e.LicenceNumber);
@@ -241,7 +241,7 @@ namespace Gva.Api.Repositories.PersonRepository
         {
             return this.unitOfWork.DbContext.Set<GvaViewPersonLicenceEdition>()
                 .Single(e => e.LotId == lotId && e.LicencePartIndex == licencePartIndex && e.IsLastEdition)
-                .EditionPartIndex;
+                .PartIndex;
         }
 
         public IEnumerable<GvaViewPersonRating> GetRatings(int lotId, int? caseTypeId)

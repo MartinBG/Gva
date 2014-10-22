@@ -22,21 +22,21 @@ namespace Gva.Api.Models.Views.Person
 
         public DateTime DateValidFrom { get; set; }
 
+        public DateTime FirstDocDateValidFrom { get; set; }
+
         public DateTime? DateValidTo { get; set; }
 
         public int LicenceActionId { get; set; }
 
         public int? LicenceNumber { get; set; }
 
-        public bool IsLastEdition { get; set; }
-
         public int LicencePartIndex { get; set; }
 
         public int EditionPartIndex { get; set; }
 
-        public DateTime FirstDocDateValidFrom { get; set; }
-
         public bool Valid { get; set; }
+
+        public bool IsLastEdition { get; set; }
 
         public string LicenceTypeCode { get; set; }
 
@@ -108,14 +108,14 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.EditionIndex).HasColumnName("EditionIndex");
             this.Property(t => t.LicenceTypeId).HasColumnName("LicenceTypeId");
             this.Property(t => t.StampNumber).HasColumnName("StampNumber");
+            this.Property(t => t.FirstDocDateValidFrom).HasColumnName("FirstDocDateValidFrom");
             this.Property(t => t.DateValidFrom).HasColumnName("DateValidFrom");
             this.Property(t => t.DateValidTo).HasColumnName("DateValidTo");
             this.Property(t => t.LicenceActionId).HasColumnName("LicenceActionId");
             this.Property(t => t.LicenceNumber).HasColumnName("LicenceNumber");
-            this.Property(t => t.IsLastEdition).HasColumnName("IsLastEdition");
             this.Property(t => t.LicencePartIndex).HasColumnName("LicencePartIndex");
-            this.Property(t => t.EditionPartIndex).HasColumnName("EditionPartIndex");
-            this.Property(t => t.FirstDocDateValidFrom).HasColumnName("FirstDocDateValidFrom");
+            this.Property(t => t.EditionPartIndex).HasColumnName("PartIndex");
+            this.Property(t => t.IsLastEdition).HasColumnName("IsLastEdition");
             this.Property(t => t.Valid).HasColumnName("Valid");
             this.Property(t => t.LicenceTypeCode).HasColumnName("LicenceTypeCode");
             this.Property(t => t.LicenceTypeCaCode).HasColumnName("LicenceTypeCaCode");
@@ -130,6 +130,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
             this.Property(t => t.ApplicationPartId).HasColumnName("ApplicationPartId");
             this.Property(t => t.GvaStageId).HasColumnName("GvaStageId");
+            this.Property(t => t.IsLastEdition).HasColumnName("IsLastEdition");
 
             // Relationships
             this.HasRequired(t => t.Person)

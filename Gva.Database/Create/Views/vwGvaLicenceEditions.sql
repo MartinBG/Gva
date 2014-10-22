@@ -3,15 +3,16 @@ GO
 
 CREATE VIEW [dbo].[vwGvaLicenceEditions] WITH SCHEMABINDING
 AS
-    select e.LotId, e.LicencePartId, e.EditionPartId, e.EditionIndex, e.LicenceTypeId, e.StampNumber, e.DateValidFrom, e.DateValidTo,
-    e.LicenceActionId, e.LicenceNumber, e.IsLastEdition, e.LicencePartIndex, e.EditionPartIndex, e.FirstDocDateValidFrom,
-    e.Valid, e.LicenceTypeCode, e.LicenceTypeCaCode, e.PublisherCode, e.ForeignLicenceNumber, e.ForeignPublisher, e.Notes, e.Inspector, e.StatusChange, e.Limitations,
+    select l.LotId, e.PartId as EditionPartId, l.PartId as LicencePartId, e.[Index] as EditionIndex, l.LicenceTypeId, e.StampNumber, e.FirstDocDateValidFrom, e.DateValidFrom, e.DateValidTo,
+    e.LicenceActionId,l.LicenceNumber, e.LicencePartIndex, e.PartIndex, e.IsLastEdition,
+    l.Valid, l.LicenceTypeCode, l.LicenceTypeCaCode, l.PublisherCode, l.ForeignLicenceNumber, l.ForeignPublisher, e.Notes, e.Inspector, l.StatusChange, e.Limitations,
     lf.GvaLotFileId, ga.GvaApplicationId, ga.GvaAppLotPartId as ApplicationPartId, s.GvaStageId
     from [dbo].[GvaViewPersonLicenceEditions] e
+    join [dbo].[GvaViewPersonLicences] l on e.LicencePartIndex = l.PartIndex
         left join (select GvaLotFileId, LotPartId
                     from (select lf.GvaLotFileId, lf.LotPartId, ROW_NUMBER() over (partition by lf.LotPartId order by lf.LotPartId) as num
                     from [dbo].[GvaLotFiles] lf) x
-                    where x.num = 1) lf on e.EditionPartId = lf.LotPartId
+                    where x.num = 1) lf on e.PartId = lf.LotPartId
         left join (select GvaLotFileId, GvaApplicationId
                     from (select alf.GvaLotFileId, alf.GvaApplicationId, ROW_NUMBER() over (partition by alf.GvaLotFileId, alf.GvaApplicationId order by alf.GvaLotFileId, alf.GvaApplicationId) as num
                     from [dbo].[GvaAppLotFiles] alf) x
