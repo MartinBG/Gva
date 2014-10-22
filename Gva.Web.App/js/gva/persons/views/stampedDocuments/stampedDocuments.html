@@ -24,7 +24,7 @@
     <sc-column title="persons.stampedDocumentsView.application" has-content="true">
       <a ng-click="viewApplication(item.lotId, item.application.partIndex)">{{item.application.applicationName}}</a>
     </sc-column>
-    <sc-column data="licenceActionName" title="persons.stampedDocumentsView.licenceAction">
+    <sc-column data="licenceAction.code" title="persons.stampedDocumentsView.licenceAction">
    </sc-column>
     <sc-column title="persons.stampedDocumentsView.ready" sortable="false" class="buttons-cell" has-content="true">
       <input type="checkbox" ng-checked="item.isReady" ng-disabled="item.isReady" sc-click="selectCheck($event, item, 'licenceReady')">

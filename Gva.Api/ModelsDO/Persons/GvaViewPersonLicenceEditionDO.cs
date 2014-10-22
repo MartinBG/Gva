@@ -22,12 +22,8 @@ namespace Gva.Api.ModelsDO.Persons
                 this.IsReady = edition.GvaStageId >= GvaConstants.IsReadyApplication;
                 this.IsReceived = edition.GvaStageId >= GvaConstants.IsReceivedApplication;
             }
-
-            if (edition.LicenceAction != null)
-            {
-                this.LicenceActionName = edition.LicenceAction.Name;
-            }
-
+            
+            this.LicenceAction = edition.LicenceAction;
             this.LicenceNumber = edition.LicenceNumber;
 
             if (edition.Person != null)
@@ -83,8 +79,6 @@ namespace Gva.Api.ModelsDO.Persons
 
         public int LicenceActionId { get; set; }
 
-        public string LicenceActionName { get; set; }
-
         public int? LicenceNumber { get; set; }
 
         public bool IsReceived { get; set; }
@@ -98,6 +92,8 @@ namespace Gva.Api.ModelsDO.Persons
         public ApplicationNomDO Application { get; set; }
 
         public NomValue LicenceType { get; set; }
+
+        public NomValue LicenceAction { get; set; }
 
         public int LicencePartIndex { get; set; }
 
