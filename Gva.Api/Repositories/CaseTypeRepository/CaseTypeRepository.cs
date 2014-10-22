@@ -2,9 +2,8 @@
 using System.Data.Entity;
 using System.Linq;
 using Common.Data;
-using Common.Json;
+using Common.Linq;
 using Gva.Api.Models;
-using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.CaseTypeRepository
@@ -52,10 +51,18 @@ namespace Gva.Api.Repositories.CaseTypeRepository
             return this.unitOfWork.DbContext.Set<GvaCaseType>()
                 .SingleOrDefault(ct => ct.Alias == caseTypeAlias);
         }
-        public IEnumerable<GvaCaseType> GetCaseTypesForSet(string setAlias)
+        public IEnumerable<GvaCaseType> GetCaseTypesForSet(string setAlias, bool activeOnly = true)
         {
+            var predicate = PredicateBuilder.True<GvaCaseType>()
+                .And(ct => ct.LotSet.Alias == setAlias);
+
+            if (activeOnly)
+            {
+                predicate = predicate.And(ct => ct.IsActive);
+            }
+
             return this.unitOfWork.DbContext.Set<GvaCaseType>()
-                .Where(ct => ct.LotSet.Alias == setAlias)
+                .Where(predicate)
                 .ToList();
         }
 
@@ -63,7 +70,7 @@ namespace Gva.Api.Repositories.CaseTypeRepository
         {
             return this.unitOfWork.DbContext.Set<GvaLotCase>()
                 .Include(lc => lc.GvaCaseType)
-                .Where(lc => lc.LotId == lotId)
+                .Where(lc => lc.LotId == lotId && lc.GvaCaseType.IsActive)
                 .Select(lc => lc.GvaCaseType);
         }
     }

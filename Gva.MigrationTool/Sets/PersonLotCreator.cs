@@ -71,7 +71,6 @@ namespace Gva.MigrationTool.Sets
                         var context = dependencies.Value.Item5;
 
                         var personCaseTypes = this.getPersonCaseTypes(personId, noms);
-                        personCaseTypes.Add(noms["personCaseTypes"].ByAlias("person"));
 
                         var inspectorData = this.getInspectorData(personId, noms);
                         if (inspectorData != null)

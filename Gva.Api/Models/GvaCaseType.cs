@@ -20,6 +20,8 @@ namespace Gva.Api.Models
 
         public string Alias { get; set; }
 
+        public bool IsActive { get; set; }
+
         public int? LotSetId { get; set; }
 
         public virtual Set LotSet { get; set; }
@@ -56,6 +58,7 @@ namespace Gva.Api.Models
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.LotSetId).HasColumnName("LotSetId");
+            this.Property(t => t.IsActive).HasColumnName("IsActive");
 
             // Relationships
             this.HasOptional(t => t.LotSet)

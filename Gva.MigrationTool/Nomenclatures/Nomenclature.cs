@@ -135,7 +135,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
             using (var dependencies = dependencyFactory())
             {
-                noms["personCaseTypes"] = dependencies.Value.Item3.GetCaseTypesForSet("Person").ToDictionary(ct => Guid.NewGuid().ToString(), ct =>
+                noms["personCaseTypes"] = dependencies.Value.Item3.GetCaseTypesForSet("Person", false).ToDictionary(ct => Guid.NewGuid().ToString(), ct =>
                     new NomValue
                     {
                         NomValueId = ct.GvaCaseTypeId,

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Gva.Api.Models;
-using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.CaseTypeRepository
@@ -13,7 +12,7 @@ namespace Gva.Api.Repositories.CaseTypeRepository
 
         GvaCaseType GetCaseType(string caseTypeAlias);
 
-        IEnumerable<GvaCaseType> GetCaseTypesForSet(string setAlias);
+        IEnumerable<GvaCaseType> GetCaseTypesForSet(string setAlias, bool activeOnly = true);
 
         IEnumerable<GvaCaseType> GetCaseTypesForLot(int lotId);
     }
