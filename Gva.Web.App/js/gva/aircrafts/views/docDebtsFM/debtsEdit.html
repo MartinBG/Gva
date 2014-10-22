@@ -8,6 +8,8 @@
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteDocumentDebt()" text="aircrafts.editDebtFM.deleteDebt" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
+        <sc-button name="closeBtn" btn-click="close()" text="aircrafts.editDebtFM.close" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode && debt.part.isActive">
+        </sc-button>
         <sc-button name="saveBtn" btn-click="save()" text="aircrafts.editDebtFM.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
         <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.editDebtFM.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
@@ -17,6 +19,8 @@
 
     <div class="well-sm panel-body">
       <gva-aircraft-document-debt-fm name="aircraftDocumentDebtForm" ng-model="debt.part"></gva-aircraft-document-debt-fm>
+
+      <gva-aircraft-document-debt-close name="aircraftDocumentDebtCloseForm" ng-model="debt.part.close" ng-if="!debt.part.isActive"></gva-aircraft-document-debt-close>
 
       <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="debt.case"
         sc-form-params="{ setPart: 'aircraft', lotId: lotId }"></gva-common-scanned-document>

@@ -149,6 +149,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLangCertDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationlAmendmentDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtCloseDO.cs" />
     <Compile Include="ModelsDO\Organizations\LimitationDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDetailDO.cs" />
     <Compile Include="ModelsDO\Organizations\Lims145DO.cs" />

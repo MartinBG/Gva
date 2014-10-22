@@ -6,6 +6,11 @@ namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftDocumentDebtFMDO
     {
+        public AircraftDocumentDebtFMDO()
+        {
+            this.IsActive = true;
+        }
+
         [Required(ErrorMessage = "Registration is required.")]
         public PartSelectDO Registration { get; set; }
 
@@ -28,5 +33,9 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public string CreditorDocument { get; set; }
 
         public NomValue Inspector { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public AircraftDocumentDebtCloseDO Close { get; set; }
     }
 }
