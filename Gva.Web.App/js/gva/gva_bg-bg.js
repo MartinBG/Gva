@@ -2072,7 +2072,7 @@
           documentPublisher: 'Издател',
           valid: 'Валиден',
           documentNumber: 'Док No',
-          documentPersonNumber: 'No в списъка',
+          documentPersonNumber: 'No в списъка (групов док.)',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
           personDocumentType: 'Тип документ',
@@ -2237,7 +2237,7 @@
         },
         otherSearch: {
           documentNumber: 'Док No',
-          documentPersonNumber: 'No в списъка',
+          documentPersonNumber: 'No в списъка (групов док.)',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
           documentPublisher: 'Издател',
