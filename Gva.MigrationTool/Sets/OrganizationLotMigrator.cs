@@ -730,20 +730,18 @@ namespace Gva.MigrationTool.Sets
                         __migrTable = "APPROVAL_DOC_INCL",
                         inspector = getPersonByApexId((int?)r.Field<decimal?>("EXAMINER_ID")),
                         approvalDate = r.Field<DateTime?>("APPROWAL_DATE"),
-                        linkedLim = r.Field<long?>("ID_SCH_145") == null ?
-                                r.Field<long?>("ID_SCH_147") == null ? r.Field<long?>("ID_SCH_MG") == null ? null : 
-                                new {
+                        linkedLim = (r.Field<long?>("ID_SCH_145") != null ? new {
+                                    Id = r.Field<long?>("ID_SCH_145"),
+                                    Text = lim145[r.Field<long?>("ID_SCH_145")] 
+                                } : null) ??
+                                (r.Field<long?>("ID_SCH_147") != null ? new {
+                                    Id = r.Field<long?>("ID_SCH_147"),
+                                    Text = lim147[r.Field<long?>("ID_SCH_147")]
+                                } : null) ??
+                                (r.Field<long?>("ID_SCH_MG") != null ? new {
                                     Id = r.Field<long?>("ID_SCH_MG"),
                                     Text = limMG[r.Field<long?>("ID_SCH_MG")]
-                                } :
-                                new {
-                                    Id = r.Field<long?>("ID_SCH_147"),
-                                    Text = limMG[r.Field<long?>("ID_SCH_147")]
-                                } :
-                                new {
-                                    Id = r.Field<long?>("ID_SCH_145"),
-                                    Text = limMG[r.Field<long?>("ID_SCH_145")]
-                                },
+                                } : null),
                         partIndex = orgDocuments.ContainsKey(r.Field<int>("PERSON_DOCUMENT_ID")) ?
                             (int?)orgDocuments[r.Field<int>("PERSON_DOCUMENT_ID")].Part.Index :
                             null,

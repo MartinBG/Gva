@@ -6,16 +6,11 @@ namespace Gva.Api.ModelsDO.Organizations
 {
     public class IncludedDocumentDO
     {
-        public IncludedDocumentDO()
-        {
-            this.LinkedLim = new List<LimitationDO>();
-        }
-
         public NomValue Inspector { get; set; }
 
         public DateTime? ApprovalDate { get; set; }
 
-        public List<LimitationDO> LinkedLim { get; set; }
+        public LimitationDO LinkedLim { get; set; }
 
         public int? PartIndex { get; set; }
 
