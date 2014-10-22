@@ -9,35 +9,28 @@
     $scope.lotId = scFormParams.lotId;
     $scope.isNew = scFormParams.isNew;
 
+    var data = [];
     $scope.select2Options = {
       multiple: false,
       allowClear: true,
-      placeholder: ' '
+      placeholder: ' ',
+      width: 200,
+      data: function () {
+        return { results: data };
+      }
     };
 
     var updateSelect2Options = function (limitations) {
-      var select2Elem = angular.element('.select2input'),
-          currSelection = select2Elem.select2('val'),
-          tags = [],
-          newSelection;
-
-      angular.forEach(limitations, function(lim){
-        if(lim.lim147limitation) {
-          tags.push(lim.lim147limitation);
+      data = [];
+      angular.forEach(limitations, function (lim, index) {
+        if (lim.lim147limitation) {
+          data.push({ id: index, text: lim.lim147limitation });
         } else if(lim.lim145limitation) {
-          tags.push(lim.lim145limitation);
+          data.push({ id: index, text: lim.lim145limitation });
         } else if (lim.aircraftTypeGroup) {
-          tags.push(lim.aircraftTypeGroup);
+          data.push({ id: index, text: lim.aircraftTypeGroup });
         }
       });
-
-      newSelection = _.filter(currSelection, function (value) {
-        return _.contains(tags, value);
-      });
-
-      $scope.select2Options.tags = tags;
-      select2Elem.select2($scope.select2Options);
-      select2Elem.select2('val', newSelection);
     };
 
     $scope.deleteDocument = function (document) {
