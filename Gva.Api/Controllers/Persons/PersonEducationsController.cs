@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
@@ -11,7 +12,7 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personDocumentEducations")]
     [Authorize]
-    public class PersonEducationsController : GvaCaseTypePartController<PersonEducationDO>
+    public class PersonEducationsController : GvaCaseTypesPartController<PersonEducationDO>
     {
         public PersonEducationsController(
             IUnitOfWork unitOfWork,
@@ -27,7 +28,7 @@ namespace Gva.Api.Controllers.Persons
         {
             PersonEducationDO newEducation = new PersonEducationDO();
 
-            return Ok(new CaseTypePartDO<PersonEducationDO>(newEducation));
+            return Ok(new CaseTypesPartDO<PersonEducationDO>(newEducation, new List<CaseDO>()));
         }
     }
 }
