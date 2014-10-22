@@ -11,6 +11,7 @@ using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
 using Common.Tests;
+using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
@@ -121,6 +122,8 @@ namespace Gva.MigrationTool.Sets
                         var lotEventDispatcher = dependencies.Value.Item9;
                         var context = dependencies.Value.Item10;
 
+                        var lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId], fullAccess: true);
+
                         Func<string, bool, JObject> getInspectorImpl = (tRegUser, showErrorIfMissing) =>
                         {
                             if (string.IsNullOrWhiteSpace(tRegUser))
@@ -151,32 +154,37 @@ namespace Gva.MigrationTool.Sets
 
                         Func<string, JObject> getInspectorOrDefault = (tRegUser) => getInspectorImpl(tRegUser, false);
 
+                        Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
+                        {
+                            var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
+                            fileRepository.AddFileReferences(pv.Part, content.GetItems<CaseDO>("files"));
+                            return pv;
+                        };
+
                         if (!aircraftFmIdtoLotId.ContainsKey(aircraftFmId))
                         {
                             //TODO remove, those are the ones with duplicate MSN skipped earlier
                             continue;
                         }
 
-                        Lot lot = lotRepository.GetLotIndex(aircraftFmIdtoLotId[aircraftFmId], fullAccess: true);
-
                         var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspector, getPersonByFmOrgName, getOrgByFmOrgName);
                         foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                         {
-                            var pv = lot.CreatePart("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM, context);
+                            var pv = addPartWithFiles("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM);
 
                             var regPart = Utils.ToJObject(
                                 new
                                 {
                                     partIndex = pv.Part.Index,
-                                    description = aircraftCertRegistrationFM.Get<int>("certNumber").ToString()
+                                    description = aircraftCertRegistrationFM.Get<int>("part.certNumber").ToString()
                                 });
 
-                            int certId = aircraftCertRegistrationFM["__oldId"].Value<int>();
+                            int certId = aircraftCertRegistrationFM.Get<int>("part.__oldId");
 
                             var aircraftCertAirworthinessFM = this.getAircraftCertAirworthinessFM(aircraftFmId, certId, noms, regPart, getInspector, getInspectorOrDefault);
                             if (aircraftCertAirworthinessFM != null)
                             {
-                                lot.CreatePart("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM, context);
+                                addPartWithFiles("aircraftCertAirworthinesses/*", aircraftCertAirworthinessFM);
                             }
 
                             var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regPart, noms, getInspector);
@@ -184,7 +192,7 @@ namespace Gva.MigrationTool.Sets
                             {
                                 try
                                 {
-                                    lot.CreatePart("aircraftDocumentDebtsFM/*", aircraftDocumentDebtFM, context);
+                                    addPartWithFiles("aircraftDocumentDebtsFM/*", aircraftDocumentDebtFM);
                                 }
                                 catch (Exception e)
                                 {
@@ -342,50 +350,60 @@ namespace Gva.MigrationTool.Sets
                         }
                     })
                 .OrderBy(r => r.nRegNum)
-                .Select(r => Utils.ToJObject(
-                    new
-                    {
-                        r.__oldId,
-                        r.__migrTable,
-                        r.register,
-                        actNumber = r.nRegNum,
-                        certNumber = r.actRegNum >= r.nRegNum ? r.nRegNum : r.actRegNum,
-                        r.certDate,
-                        r.regMark,
-                        r.incomingDocNumber,
-                        r.incomingDocDate,
-                        r.incomingDocDesc,
-                        r.inspector,
-                        ownerIsOrg = r.owner.Item1,
-                        ownerOrganization = r.owner.Item2,
-                        ownerPerson = r.owner.Item3,
-                        operIsOrg = r.oper.Item1,
-                        operOrganization = r.oper.Item2,
-                        operPerson = r.oper.Item3,
-                        catAW = r.catAW != null ? new NomValue[] { r.catAW } : null,
-                        r.aircraftLimitation,
-                        r.leasingDocNumber,
-                        r.leasingDocDate,
-                        lessorIsOrg = r.leasingLessor.Item1,
-                        lesorOrganization = r.leasingLessor.Item2,
-                        lessorPerson = r.leasingLessor.Item3,
-                        r.leasingAgreement,
-                        r.leasingEndDate,
-                        r.status,
-                        r.EASA25Number,
-                        r.EASA25Date,
-                        r.EASA15Date,
-                        r.cofRDate,
-                        r.noiseDate,
-                        r.noiseNumber,
-                        r.paragraph,
-                        r.paragraphAlt,
-                        r.removal,
-                        isActive = false,
-                        isCurrent = false
-                    }))
+                .Select(r => new JObject(
+                        new JProperty("part",
+                           Utils.ToJObject(new
+                            {
+                                r.__oldId,
+                                r.__migrTable,
+                                r.register,
+                                actNumber = r.nRegNum,
+                                certNumber = r.actRegNum >= r.nRegNum ? r.nRegNum : r.actRegNum,
+                                r.certDate,
+                                r.regMark,
+                                r.incomingDocNumber,
+                                r.incomingDocDate,
+                                r.incomingDocDesc,
+                                r.inspector,
+                                ownerIsOrg = r.owner.Item1,
+                                ownerOrganization = r.owner.Item2,
+                                ownerPerson = r.owner.Item3,
+                                operIsOrg = r.oper.Item1,
+                                operOrganization = r.oper.Item2,
+                                operPerson = r.oper.Item3,
+                                catAW = r.catAW != null ? new NomValue[] { r.catAW } : null,
+                                r.aircraftLimitation,
+                                r.leasingDocNumber,
+                                r.leasingDocDate,
+                                lessorIsOrg = r.leasingLessor.Item1,
+                                lesorOrganization = r.leasingLessor.Item2,
+                                lessorPerson = r.leasingLessor.Item3,
+                                r.leasingAgreement,
+                                r.leasingEndDate,
+                                r.status,
+                                r.EASA25Number,
+                                r.EASA25Date,
+                                r.EASA15Date,
+                                r.cofRDate,
+                                r.noiseDate,
+                                r.noiseNumber,
+                                r.paragraph,
+                                r.paragraphAlt,
+                                r.removal,
+                                isActive = false,
+                                isCurrent = false
+                            })),
+                            new JProperty("files",
+                                new JArray(
+                                    new JObject(
+                                        new JProperty("isAdded", true),
+                                        new JProperty("file", null),
+                                        new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                                        new JProperty("bookPageNumber", null),
+                                        new JProperty("pageCount", null),
+                                        new JProperty("applications", new JArray()))))))
                 .ToList();
-
+                        
             var lastReg = registrations.LastOrDefault();
             if (lastReg != null)
             {
@@ -622,7 +640,17 @@ namespace Gva.MigrationTool.Sets
                 }
             }
 
-            return aw;
+            return new JObject(
+                    new JProperty("part", aw),
+                    new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray())))));
         }
 
         private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regPart, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
@@ -632,21 +660,31 @@ namespace Gva.MigrationTool.Sets
                 new DbClause("1=1"),
                 new DbClause("and RegNo = {0}", certId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<string>("nRecNo"),
-                        __migrTable = "Morts",
-                        registration = regPart,
-                        certId = Utils.FmToNum(r.Field<string>("RegNo")),
-                        regDate = Utils.FmToDate(r.Field<string>("Date")),
-                        aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action").Trim()),
-                        documentNumber = r.Field<string>("gt_DocCAA"),
-                        documentDate = Utils.FmToDate(r.Field<string>("gd_DocCAA")),
-                        aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("Creditor")),
-                        creditorDocument = r.Field<string>("Doc Creditor"),
-                        inspector = getInspector(r.Field<string>("tUser"))
-                    }))
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<string>("nRecNo"),
+                            __migrTable = "Morts",
+                            registration = regPart,
+                            certId = Utils.FmToNum(r.Field<string>("RegNo")),
+                            regDate = Utils.FmToDate(r.Field<string>("Date")),
+                            aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action").Trim()),
+                            documentNumber = r.Field<string>("gt_DocCAA"),
+                            documentDate = Utils.FmToDate(r.Field<string>("gd_DocCAA")),
+                            aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("Creditor")),
+                            creditorDocument = r.Field<string>("Doc Creditor"),
+                            inspector = getInspector(r.Field<string>("tUser"))
+                        })),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray()))))))
                 .ToList();
         }
 

@@ -1,28 +1,30 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Common;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
-using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
-using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Equipments
 {
     [RoutePrefix("api/equipments/{lotId}/equipmentDocumentApplications")]
     [Authorize]
-    public class EquipmentApplicationsController : GvaFilePartController<DocumentApplicationDO>
+    public class EquipmentApplicationsController : GvaCaseTypePartController<DocumentApplicationDO>
     {
         private string path;
         private IUnitOfWork unitOfWork;
+        private ILotRepository lotRepository;
         private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
-        private ILotRepository lotRepository;
+        private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
 
@@ -31,15 +33,17 @@ namespace Gva.Api.Controllers.Equipments
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
+            ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("equipmentDocumentApplications", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.path = "equipmentDocumentApplications";
             this.unitOfWork = unitOfWork;
+            this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
-            this.lotRepository = lotRepository;
+            this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
         }
@@ -47,22 +51,34 @@ namespace Gva.Api.Controllers.Equipments
         [Route("new")]
         public IHttpActionResult GetNewApplication(int lotId)
         {
+            GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("equipment").Single();
+            CaseDO caseDO = new CaseDO()
+            {
+                CaseType = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+            };
+
             DocumentApplicationDO newApplication = new DocumentApplicationDO()
             {
                 DocumentDate = DateTime.Now
             };
 
-            return Ok(new FilePartVersionDO<DocumentApplicationDO>(newApplication));
+            return Ok(new CaseTypePartDO<DocumentApplicationDO>(newApplication, caseDO));
         }
 
-        public override IHttpActionResult PostNewPart(int lotId, FilePartVersionDO<DocumentApplicationDO> application)
+        public override IHttpActionResult PostNewPart(int lotId, CaseTypePartDO<DocumentApplicationDO> application)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
                 var partVersion = lot.CreatePart(path + "/*", application.Part, this.userContext);
 
-                this.fileRepository.AddFileReferences(partVersion.Part, application.Files);
+                this.fileRepository.AddFileReference(partVersion.Part, application.Case);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 

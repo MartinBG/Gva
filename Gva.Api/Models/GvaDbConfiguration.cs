@@ -22,11 +22,12 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaAppLotFileMap());
             modelBuilder.Configurations.Add(new GvaFileMap());
             modelBuilder.Configurations.Add(new GvaLotFileMap());
-            modelBuilder.Configurations.Add(new GvaLotObjectMap());
             modelBuilder.Configurations.Add(new GvaViewPersonMap());
             modelBuilder.Configurations.Add(new GvaViewPersonInspectorMap());
+            modelBuilder.Configurations.Add(new GvaViewPersonLicenceMap());
             modelBuilder.Configurations.Add(new GvaViewPersonLicenceEditionMap());
             modelBuilder.Configurations.Add(new GvaViewPersonRatingMap());
+            modelBuilder.Configurations.Add(new GvaViewPersonRatingEditionMap());
             modelBuilder.Configurations.Add(new GvaLicenceEditionMap());
             modelBuilder.Configurations.Add(new GvaViewInventoryItemMap());
             modelBuilder.Configurations.Add(new GvaViewApplicationMap());
@@ -35,6 +36,8 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaViewOrganizationRecommendationMap());
             modelBuilder.Configurations.Add(new GvaViewOrganizationInspectionMap());
             modelBuilder.Configurations.Add(new GvaViewOrganizationInspectionRecommendationMap());
+            modelBuilder.Configurations.Add(new GvaViewOrganizationApprovalMap());
+            modelBuilder.Configurations.Add(new GvaViewOrganizationAmendmentMap());
             modelBuilder.Configurations.Add(new GvaViewAircraftMap());
             modelBuilder.Configurations.Add(new GvaViewAirportMap());
             modelBuilder.Configurations.Add(new GvaViewAircraftRegistrationMap());

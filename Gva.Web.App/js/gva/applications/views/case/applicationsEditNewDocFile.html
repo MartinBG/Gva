@@ -1,0 +1,27 @@
+﻿<ng-form name="newDocFile" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="applications.edit.newDocFile.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="applications.edit.newDocFile.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="applications.edit.newDocFile.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <div class="row">
+        <sc-field type="text" ng-model="file.name" ng-required="true" l10n-text="applications.edit.newDocFile.name" validations="{required: 'default'}" class="col-sm-3 col-lg-2"></sc-field>
+        <sc-field type="nomenclature" ng-model="file.docFileKindId" alias="'docFileKind'" mode="id" ng-required="true" l10n-text="applications.edit.newDocFile.docFileKind" validations="{required: 'default'}" class="col-sm-3 col-lg-2"></sc-field>
+        <div class="form-group col-sm-6 col-lg-8" sc-has-error="docFile">
+          <label class="control-label" l10n-text="applications.edit.newDocFile.file"></label>
+          <sc-validation-error field-name="docFile" validations="{required: 'default'}"></sc-validation-error>
+          <sc-files name="docFile" ng-model="file.file" ng-readonly="readonly" ng-required="true"></sc-files>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

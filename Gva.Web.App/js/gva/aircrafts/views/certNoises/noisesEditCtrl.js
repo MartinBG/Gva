@@ -12,7 +12,7 @@
   ) {
     var originalNoise = _.cloneDeep(aircraftCertNoise);
 
-    $scope.isEdit = true;
+    $scope.lotId = $stateParams.id;
     $scope.noise = aircraftCertNoise;
     $scope.editMode = null;
 

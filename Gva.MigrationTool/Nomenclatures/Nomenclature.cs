@@ -644,7 +644,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
             using (var dependencies = dependencyFactory())
             {
-                migrateEngLangLevels(dependencies.Value.Item2, oracleConn);
+                migrateLangLevels(dependencies.Value.Item2, oracleConn);
                 dependencies.Value.Item1.Save();
             }
 
@@ -1072,7 +1072,7 @@ namespace Gva.MigrationTool.Nomenclatures
                             new
                             {
                                 direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
-                                staffTypeAlias =
+                                caseTypeAlias =
                                     noms["staffTypes"]
                                     .ByCodeOrDefault(
                                         noms["directions"]
@@ -1096,6 +1096,7 @@ namespace Gva.MigrationTool.Nomenclatures
         private void migrateDocumentRoles(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("documentRoles");
+
             var categoryAliases = new Dictionary<string, string>()
             {
                 { "T", "check" },
@@ -1105,9 +1106,22 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "F", "flying"},
                 { "E", "graduation"},
             };
+
+            Func<string, string, string> getCategoryAliases = (categoryCode, code) =>
+            {
+                var categoryAlias = categoryAliases[categoryCode];
+                if (categoryAlias == "training" && (code == "ENG" || code == "BG"))
+                {
+                    return "languageCert";
+                }
+
+                return categoryAlias;
+            };
+
             var roleAliases = new Dictionary<string, string>()
             {
-                { "ENG", "engTraining" },
+                { "ENG", "engCert" },
+                { "BG", "bgCert" },
                 { "6", "exam" }
             };
 
@@ -1126,7 +1140,7 @@ namespace Gva.MigrationTool.Nomenclatures
                             new
                             {
                                 direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
-                                staffTypeAlias =
+                                caseTypeAlias =
                                     noms["staffTypes"]
                                     .ByCodeOrDefault(
                                         noms["directions"]
@@ -1135,7 +1149,7 @@ namespace Gva.MigrationTool.Nomenclatures
                                     .Alias(),
                                 isPersonsOnly = r.Field<string>("PERSON_ONLY") == "Y" ? true : false,
                                 categoryCode = r.Field<string>("CATEGORY_CODE"),
-                                categoryAlias = categoryAliases[r.Field<string>("CATEGORY_CODE")]
+                                categoryAlias = getCategoryAliases(r.Field<string>("CATEGORY_CODE"), r.Field<string>("CODE"))
                             })
                     })
                 .ToList();
@@ -1275,7 +1289,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
-                                staffTypeAlias = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).Alias
+                                caseTypeAlias = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).Alias
                             })
                     })
                 .ToList();
@@ -1363,7 +1377,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
-                                staffTypeAlias = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).Alias,
+                                caseTypeAlias = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()).Alias,
                                 ratingClassGroupId = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("CLASS_GROUP_ID").ToString()).NomValueId()
                             })
                     })
@@ -1487,7 +1501,7 @@ namespace Gva.MigrationTool.Nomenclatures
                                 prtPrintableDocId = r.Field<decimal?>("PRT_PRINTABLE_DOCUMENT_ID"),
                                 qlfCode = r.Field<string>("QLF_CODE"),
                                 templateName = templateNames[r.Field<object>("PRT_PRINTABLE_DOCUMENT_ID").ToString()],
-                                staffTypeAlias = noms["staffTypes"].ByOldId(r.Field<int>("STAFF_TYPE_ID").ToString()).Alias
+                                caseTypeAlias = noms["staffTypes"].ByOldId(r.Field<int>("STAFF_TYPE_ID").ToString()).Alias
                             })
                     })
                 .ToList();
@@ -3098,9 +3112,22 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        private void migrateEngLangLevels(INomRepository repo, OracleConnection conn)
+        private void migrateLangLevels(INomRepository repo, OracleConnection conn)
         {
-            Nom nom = repo.GetNom("engLangLevels");
+            var roleAliases = new Dictionary<string, string[]>()
+            {
+                { "L4", new string[] { "bgCert", "engCert" } },
+                { "L5", new string[] { "bgCert", "engCert" } },
+                { "L6", new string[] { "bgCert", "engCert" } },
+                { " L4", new string[] { "engCert" } },
+                { " L5", new string[] { "engCert" } },
+                { " L6", new string[] { "engCert" } },
+                { "B4", new string[] { "bgCert" } },
+                { "B5", new string[] { "bgCert" } },
+                { "B6", new string[] { "bgCert" } },
+            };
+
+            Nom nom = repo.GetNom("langLevels");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_ENG_LANG")
                 .Materialize(r =>
                     new NomValue
@@ -3115,15 +3142,16 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
+                                roleAliases = roleAliases[r.Field<string>("CODE")],
                                 seqNumber = r.Field<decimal?>("SEQ_NUMBER").ToString(),
                             })
                     })
                 .ToList();
 
-            noms["engLangLevels"] = new Dictionary<string, NomValue>();
+            noms["langLevels"] = new Dictionary<string, NomValue>();
             foreach (var row in results)
             {
-                noms["engLangLevels"][row.OldId] = row;
+                noms["langLevels"][row.OldId] = row;
                 nom.NomValues.Add(row);
             }
         }

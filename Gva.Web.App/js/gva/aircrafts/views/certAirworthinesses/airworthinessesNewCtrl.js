@@ -9,7 +9,6 @@
     AircraftCertAirworthinesses,
     aircraftCertAirworthiness
   ) {
-    $scope.isEdit = false;
     $scope.aw = aircraftCertAirworthiness;
     $scope.lotId = $stateParams.id;
 
@@ -45,7 +44,8 @@
       'AircraftCertAirworthinesses',
       function ($stateParams, AircraftCertAirworthinesses) {
         return AircraftCertAirworthinesses.newCertAirworthiness({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

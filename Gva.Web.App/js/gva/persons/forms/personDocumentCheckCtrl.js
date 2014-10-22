@@ -2,20 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentCheckCtrl($scope, scModal, scFormParams) {
+  function PersonDocumentCheckCtrl($scope, scFormParams) {
     $scope.isNew = scFormParams.isNew;
-    $scope.choosePublisher = function () {
-      var modalInstance = scModal.open('choosePublisher');
-
-      modalInstance.result.then(function (publisherName) {
-        $scope.model.documentPublisher = publisherName;
-      });
-
-      return modalInstance.opened;
-    };
+    $scope.caseTypeId = scFormParams.caseTypeId;
+    $scope.hideCaseType = scFormParams.hideCaseType;
+    $scope.appId = scFormParams.appId;
   }
 
-  PersonDocumentCheckCtrl.$inject = ['$scope', 'scModal', 'scFormParams'];
+  PersonDocumentCheckCtrl.$inject = ['$scope', 'scFormParams'];
 
   angular.module('gva').controller('PersonDocumentCheckCtrl', PersonDocumentCheckCtrl);
 }(angular));

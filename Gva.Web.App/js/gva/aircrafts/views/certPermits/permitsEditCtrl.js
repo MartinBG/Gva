@@ -12,7 +12,7 @@
   ) {
     var originalPermit = _.cloneDeep(aircraftCertPermitToFly);
 
-    $scope.isEdit = true;
+    $scope.lotId = $stateParams.id;
     $scope.permit = aircraftCertPermitToFly;
     $scope.editMode = null;
 

@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -14,14 +16,17 @@ namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/aircraftCertAirworthinesses")]
     [Authorize]
-    public class AircraftCertAirworthinessesController : GvaFilePartController<AircraftCertAirworthinessDO>
+    public class AircraftCertAirworthinessesController : GvaCaseTypePartController<AircraftCertAirworthinessDO>
     {
+        private IFileRepository fileRepository;
+        private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
 
         public AircraftCertAirworthinessesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
+            ICaseTypeRepository caseTypeRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
@@ -29,13 +34,34 @@ namespace Gva.Api.Controllers.Aircrafts
             : base("aircraftCertAirworthinesses", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.lotRepository = lotRepository;
+            this.caseTypeRepository = caseTypeRepository;
+            this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCertAirworthiness(int lotId)
+        public IHttpActionResult GetNewCertAirworthiness(int lotId, int? appId = null)
         {
-            return Ok(new FilePartVersionDO<AircraftCertAirworthinessDO>(new AircraftCertAirworthinessDO()));
+            GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
+            CaseDO caseDO = new CaseDO()
+            {
+                CaseType = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+            };
+
+            if (appId.HasValue)
+            {
+                this.lotRepository.GetLotIndex(lotId);
+
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+            }
+
+            return Ok(new CaseTypePartDO<AircraftCertAirworthinessDO>(new AircraftCertAirworthinessDO(), caseDO));
         }
     }
 }

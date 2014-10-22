@@ -1,15 +1,15 @@
 <ng-form sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.aircraftOccurrenceClass" alias="'aircraftOccurrenceClasses'" ng-required="true" l10n-text="aircrafts.occurrenceDirective.aircraftOccurrenceClass" class="col-sm-3"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.country" alias="'countries'" ng-required="true" l10n-text="aircrafts.occurrenceDirective.country" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.aircraftOccurrenceClass" alias="'aircraftOccurrenceClasses'" ng-required="true" l10n-text="aircrafts.occurrenceDirective.aircraftOccurrenceClass" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.country" alias="'countries'" ng-required="true" l10n-text="aircrafts.occurrenceDirective.country" class="col-sm-3"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="date" ng-model="model.localDate" ng-required="true" l10n-text="aircrafts.occurrenceDirective.localDate" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="time" ng-model="model.localTime" ng-required="true" l10n-text="aircrafts.occurrenceDirective.localTime" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="text" ng-model="model.area" ng-required="true" l10n-text="aircrafts.occurrenceDirective.area" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.localDate" ng-required="true" l10n-text="aircrafts.occurrenceDirective.localDate" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="time" ng-model="model.part.localTime" ng-required="true" l10n-text="aircrafts.occurrenceDirective.localTime" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.area" ng-required="true" l10n-text="aircrafts.occurrenceDirective.area" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="textarea" rows="3" ng-model="model.notes" l10n-text="aircrafts.occurrenceDirective.notes" class="col-md-3"></sc-field>
-    <sc-field type="textarea" rows="3" ng-model="model.occurrenceNotes" l10n-text="aircrafts.occurrenceDirective.occurrenceNotes" class="col-md-3"></sc-field>
+    <sc-field type="textarea" rows="3" ng-model="model.part.notes" l10n-text="aircrafts.occurrenceDirective.notes" class="col-md-3"></sc-field>
+    <sc-field type="textarea" rows="3" ng-model="model.part.occurrenceNotes" l10n-text="aircrafts.occurrenceDirective.occurrenceNotes" class="col-md-3"></sc-field>
   </div>
 </ng-form>

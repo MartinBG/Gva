@@ -44,7 +44,7 @@ namespace Gva.Api.Models.Views.Person
 
         public virtual ICollection<GvaLotCase> GvaLotCases { get; set; }
 
-        public virtual ICollection<GvaViewPersonLicenceEdition> PersonLicenceEditions { get; set; }
+        public virtual ICollection<GvaViewPersonLicence> PersonLicences { get; set; }
 
         public virtual ICollection<GvaViewPersonRating> PersonRatings { get; set; }
     }

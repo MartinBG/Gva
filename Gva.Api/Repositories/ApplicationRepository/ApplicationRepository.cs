@@ -14,6 +14,7 @@ using Gva.Api.Models.Views.Equipment;
 using Gva.Api.Models.Views.Organization;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Applications;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.ApplicationRepository
@@ -229,49 +230,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             return this.unitOfWork.DbContext.Set<GvaApplication>()
                 .FirstOrDefault(e => e.DocId == docId);
-        }
-
-        public void AddApplicationRefs(Part part, IEnumerable<ApplicationNomDO> applications)
-        {
-            var lotObjects = this.unitOfWork.DbContext.Set<GvaLotObject>()
-                .Where(lo => lo.LotPartId == part.PartId)
-                .ToList();
-            foreach (var lotObject in lotObjects)
-            {
-                this.unitOfWork.DbContext.Set<GvaLotObject>().Remove(lotObject);
-            }
-
-            foreach (var application in applications)
-            {
-                GvaLotObject lotObject = new GvaLotObject()
-                {
-                    GvaApplicationId = application.ApplicationId,
-                    LotPart = part
-                };
-                this.unitOfWork.DbContext.Set<GvaLotObject>().Add(lotObject);
-            }
-        }
-
-        public GvaApplication[] GetApplicationRefs(int partId)
-        {
-            return this.unitOfWork.DbContext.Set<GvaLotObject>()
-                .Include(lo => lo.GvaApplication)
-                .Include(lo => lo.GvaApplication.GvaAppLotPart)
-                .Where(lo => lo.LotPartId == partId)
-                .Select(ga => ga.GvaApplication)
-                .ToArray();
-        }
-
-        public void DeleteApplicationRefs(Part part)
-        {
-            var lotObjects = this.unitOfWork.DbContext.Set<GvaLotObject>()
-                .Where(f => f.LotPartId == part.PartId)
-                .ToList();
-
-            foreach (var lotObject in lotObjects)
-            {
-                this.unitOfWork.DbContext.Set<GvaLotObject>().Remove(lotObject);
-            }
         }
 
         public IEnumerable<Set> GetLotSets(

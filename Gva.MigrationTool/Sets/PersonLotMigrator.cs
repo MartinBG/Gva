@@ -79,16 +79,10 @@ namespace Gva.MigrationTool.Sets
 
                         var lot = lotRepository.GetLotIndex(personIdToLotId[personId], fullAccess: true);
 
-                        var personAddresses = this.getPersonAddresses(personId, noms);
-                        foreach (var address in personAddresses)
-                        {
-                            lot.CreatePart("personAddresses/*", address, context);
-                        }
-
                         Func<string, JObject, PartVersion<JObject>> addPartWithFiles = (path, content) =>
                         {
                             var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
-                            fileRepository.AddFileReferences(pv.Part, content.GetItems<FileDO>("files"));
+                            fileRepository.AddFileReferences(pv.Part, content.GetItems<CaseDO>("files"));
                             return pv;
                         };
 
@@ -145,6 +139,7 @@ namespace Gva.MigrationTool.Sets
 
                         var personDocuments = this.getPersonDocuments(personId, nomApplications, noms, appApexIdToStaffTypeCode, blobIdsToFileKeys);
                         Dictionary<int, int> trainingOldIdToPartIndex = new Dictionary<int, int>();
+                        Dictionary<int, int> langCertOldIdToPartIndex = new Dictionary<int, int>();
                         Dictionary<int, int> examOldIdToPartIndex = new Dictionary<int, int>();
                         Dictionary<int, int> checkOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personDocument in personDocuments)
@@ -181,7 +176,6 @@ namespace Gva.MigrationTool.Sets
                                 "documentDateValidFrom",
                                 "documentDateValidTo",
                                 "documentPublisher",
-                                "staffType",
                                 "ratingType",
                                 "aircraftTypeGroup",
                                 "ratingClass",
@@ -200,8 +194,9 @@ namespace Gva.MigrationTool.Sets
                                 checkOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
                             }
                             else if (!(new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
-                              personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") != "6" &&
-                              personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O")
+                                personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O" &&
+                                (personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "ENG" ||
+                                personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "BG"))
                             {
                                 Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
                             {
@@ -213,7 +208,6 @@ namespace Gva.MigrationTool.Sets
                                 "documentDateValidFrom",
                                 "documentDateValidTo",
                                 "documentPublisher",
-                                "staffType",
                                 "ratingType",
                                 "aircraftTypeGroup",
                                 "ratingClass",
@@ -221,62 +215,94 @@ namespace Gva.MigrationTool.Sets
                                 "licenceType",
                                 "locationIndicator",
                                 "sector",
-                                "engLangLevel",
+                                "langLevel",
                                 "documentType",
                                 "documentRole",
                                 "valid",
                                 "notes",
                             });
 
-                                //general document
-                                if (personDocument.Get<JObject>("part.staffType") == null)
+                                var pv = addPartWithFiles("personDocumentLangCertificates/*", personDocument);
+                                langCertOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
+                            }
+                            else if (!(new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
+                                personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O" &&
+                                personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "6")
+                            {
+                                Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
                                 {
-                                    personDocument.Get<JObject>("part")["staffType"] = Utils.ToJObject(noms["trainingStaffTypes"].ByOldId("0"));
-                                }
+                                    "__oldId",
+                                    "__migrTable",
+
+                                    "documentNumber",
+                                    "documentPersonNumber",
+                                    "documentDateValidFrom",
+                                    "documentDateValidTo",
+                                    "documentPublisher ",
+                                    "documentType",
+                                    "documentRole",
+                                    "valid",
+                                    "notes",
+                                });
+
+                                var pv = addPartWithFiles("personDocumentTrainings/*", personDocument);
+                                examOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
+                            }
+                            else if (!(new string[] { "3", "4", "5" }).Contains(personDocument.Get<string>("part.__DOCUMENT_TYPE_CODE")) &&
+                              personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O")
+                            {
+                                Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
+                                {
+                                    "__oldId",
+                                    "__migrTable",
+
+                                    "documentNumber",
+                                    "documentPersonNumber",
+                                    "documentDateValidFrom",
+                                    "documentDateValidTo",
+                                    "documentPublisher",
+                                    "ratingType",
+                                    "aircraftTypeGroup",
+                                    "ratingClass",
+                                    "authorization",
+                                    "licenceType",
+                                    "locationIndicator",
+                                    "sector",
+                                    "documentType",
+                                    "documentRole",
+                                    "valid",
+                                    "notes",
+                                });
 
                                 var pv = addPartWithFiles("personDocumentTrainings/*", personDocument);
                                 trainingOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
                             }
-                            else if (personDocument.Get<string>("part.__DOCUMENT_ROLE_CATEGORY_CODE") == "O" &&
-                              personDocument.Get<string>("part.__DOCUMENT_ROLE_CODE") == "6")
-                            {
-                                Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
-                            {
-                                "__oldId",
-                                "__migrTable",
-
-                                "documentNumber",
-                                "valid",
-                                "documentDateValidFrom",
-                                "documentDateValidTo",
-                                "documentType",
-                                "documentPublisher",
-                                "notes"
-                            });
-
-                                var pv = addPartWithFiles("personDocumentExams/*", personDocument);
-                                examOldIdToPartIndex.Add(personDocument.Get<int>("part.__oldId"), pv.Part.Index);
-                            }
                             else
                             {
                                 Utils.Pluck(personDocument.Get<JObject>("part"), new string[]
-                            {
-                                "__oldId",
-                                "__migrTable",
+                                {
+                                    "__oldId",
+                                    "__migrTable",
 
-                                "documentNumber",
-                                "documentPersonNumber",
-                                "documentDateValidFrom",
-                                "documentDateValidTo",
-                                "documentPublisher ",
-                                "documentType",
-                                "documentRole",
-                                "valid",
-                                "notes",
-                            });
+                                    "documentNumber",
+                                    "documentPersonNumber",
+                                    "documentDateValidFrom",
+                                    "documentDateValidTo",
+                                    "documentPublisher ",
+                                    "documentType",
+                                    "documentRole",
+                                    "valid",
+                                    "notes",
+                                });
 
                                 addPartWithFiles("personDocumentOthers/*", personDocument);
                             }
+                        }
+
+                        var personAddresses = this.getPersonAddresses(personId, noms);
+                        foreach (var address in personAddresses)
+                        {
+                            addPartWithFiles("personAddresses/*", address);
                         }
 
                         var personDocumentEducations = this.getPersonDocumentEducations(personId, nomApplications, noms, appApexIdToStaffTypeCode, blobIdsToFileKeys);
@@ -304,13 +330,13 @@ namespace Gva.MigrationTool.Sets
                         var personFlyingExperiences = this.getPersonFlyingExperiences(personId, noms, getOrgByApexId, getAircraftByApexId);
                         foreach (var flyingExperience in personFlyingExperiences)
                         {
-                            lot.CreatePart("personFlyingExperiences/*", flyingExperience, context);
+                            addPartWithFiles("personFlyingExperiences/*", flyingExperience);
                         }
 
                         var personStatuses = this.getPersonStatuses(personId, noms);
                         foreach (var personStatus in personStatuses)
                         {
-                            lot.CreatePart("personStatuses/*", personStatus, context);
+                            addPartWithFiles("personStatuses/*", personStatus);
                         }
 
                         var personRatingEditions = this.getPersonRatingEditions(personId, getPersonByApexId, noms,  nomApplications);
@@ -318,34 +344,33 @@ namespace Gva.MigrationTool.Sets
                         Dictionary<int, int> ratingOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personRating in personRatings)
                         {
-                            var ratingPartVersion = lot.CreatePart("ratings/*", personRating, context);
+                            var ratingPartVersion = addPartWithFiles("ratings/*", personRating);
 
                             int nextIndex = 0;
 
-                            foreach (var edition in personRatingEditions[personRating.Get<int>("__oldId")])
+                            foreach (var edition in personRatingEditions[personRating.Get<int>("part.__oldId")])
                             {
                                 var editionPart = edition["part"] as JObject;
                                 editionPart.Add("ratingPartIndex", ratingPartVersion.Part.Index);
                                 editionPart.Add("index", nextIndex);
                                 nextIndex++;
 
-                                var pv = lot.CreatePart("ratingEditions/*", edition.Get<JObject>("part"), context);
-                                applicationRepository.AddApplicationRefs(pv.Part, edition.GetItems<ApplicationNomDO>("applications"));
+                                var editionPartVersion = addPartWithFiles("ratingEditions/*", edition);
                             }
 
-                            ratingOldIdToPartIndex.Add(personRating.Get<int>("__oldId"), ratingPartVersion.Part.Index);
+                            ratingOldIdToPartIndex.Add(personRating.Get<int>("part.__oldId"), ratingPartVersion.Part.Index);
                         }
 
-                        var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
+                        var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, langCertOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
                         var personLicences = this.getPersonLicences(personId, getPersonByApexId, noms, employmentsByOldId);
                         Dictionary<int, int> licenceOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personLicence in personLicences)
                         {
-                            var licencePartVersion = lot.CreatePart("licences/*", personLicence, context);
+                            var licencePartVersion = addPartWithFiles("licences/*", personLicence);
 
                             int nextIndex = 0;
 
-                            foreach (var edition in personLicenceEditions[personLicence.Get<int>("__oldId")])
+                            foreach (var edition in personLicenceEditions[personLicence.Get<int>("part.__oldId")])
                             {
                                 var editionPart = edition["part"] as JObject;
                                 editionPart.Add("licencePartIndex", licencePartVersion.Part.Index);
@@ -355,13 +380,13 @@ namespace Gva.MigrationTool.Sets
                                 var editionPartVersion = addPartWithFiles("licenceEditions/*", edition);
                             }
 
-                            licenceOldIdToPartIndex.Add(personLicence.Get<int>("__oldId"), licencePartVersion.Part.Index);
+                            licenceOldIdToPartIndex.Add(personLicence.Get<int>("part.__oldId"), licencePartVersion.Part.Index);
                         }
 
                         //replace included licence ids with part indexes
                         foreach (var personLicence in personLicences)
                         {
-                            foreach (var edition in personLicenceEditions[personLicence.Get<int>("__oldId")])
+                            foreach (var edition in personLicenceEditions[personLicence.Get<int>("part.__oldId")])
                             {
                                 var editionPart = edition["part"] as JObject;
                                 editionPart.Property("includedLicences").Value = new JArray(edition.GetItems<int>("includedLicences").Select(l => licenceOldIdToPartIndex[l]).ToArray());
@@ -392,7 +417,7 @@ namespace Gva.MigrationTool.Sets
 
         private IList<JObject> getPersonAddresses(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return this.oracleConn.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.PERSON_ADDRESS WHERE {0}",
                 new DbClause("PERSON_ID = {0}", personId)
                 )
@@ -411,6 +436,18 @@ namespace Gva.MigrationTool.Sets
                         postalCode = r.Field<string>("POSTAL_CODE")
                     }))
                 .ToList();
+
+            var files = noms["personCaseTypes"].Values.Select(ct => new JObject(
+                new JProperty("isAdded", true),
+                new JProperty("file", null),
+                new JProperty("caseType", Utils.ToJObject(ct)),
+                new JProperty("bookPageNumber", null),
+                new JProperty("pageCount", null),
+                new JProperty("applications", new JArray())));
+
+            return parts.Select(p => new JObject(
+                new JProperty("part", p),
+                new JProperty("files", files))).ToList();
         }
 
         private Dictionary<int, string> getPersonApplicationsStaffTypeCodes(int personId)
@@ -619,10 +656,9 @@ namespace Gva.MigrationTool.Sets
                         documentDateValidFrom = r.Field<DateTime?>("VALID_FROM"),
                         documentDateValidTo = r.Field<DateTime?>("VALID_TO"),
                         documentPublisher = r.Field<string>("DOC_PUBLISHER"),
-                        staffType = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()),
                         ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
                         aircraftTypeGroup = noms["aircraftTypeGroups"].ByOldId(r.Field<long?>("ID_AC_GROUP").ToString()),
-                        ratingClass = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
+                        ratingClass = noms["ratingClasses"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
                         authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
                         licenceType = noms["licenceTypes"].ByOldId(r.Field<decimal?>("LICENCE_TYPE_ID").ToString()),
                         locationIndicator = noms["locationIndicators"].ByOldId(r.Field<long?>("ID_INDICATOR").ToString()),
@@ -633,7 +669,7 @@ namespace Gva.MigrationTool.Sets
                         notes = r.Field<string>("NOTES"),
 
                         personCheckRatingValue = noms["personCheckRatingValues"].ByCode(r.Field<string>("RATING_VALUE")),
-                        engLangLevel = noms["engLangLevels"].ByOldId(r.Field<long?>("NM_EN_LANG_ID").ToString()),
+                        langLevel = noms["langLevels"].ByOldId(r.Field<long?>("NM_EN_LANG_ID").ToString()),
                     }))
                 .ToList();
 
@@ -1052,42 +1088,51 @@ namespace Gva.MigrationTool.Sets
                 @"SELECT * FROM CAA_DOC.FLYING_EXPERIENCE WHERE {0}",
                 new DbClause("PERSON_ID = {0}", personId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "FLYING_EXPERIENCE",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "FLYING_EXPERIENCE",
 
-                        staffType = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()),
-                        documentDate = r.Field<DateTime?>("DOCUMENT_DATE"),
-                        period = new { month = r.Field<string>("PERIOD_MONTH"), year = r.Field<string>("PERIOD_YEAR") },
-                        organization = getOrgByApexId(r.Field<int?>("FIRM_ID")),
-                        aircraft = getAircraftByApexId(r.Field<int?>("AC_ID")),
-                        ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
-                        ratingClass = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
-                        authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
-                        licenceType = noms["licenceTypes"].ByOldId(r.Field<decimal?>("LICENCE_TYPE_ID").ToString()),
-                        locationIndicator = noms["locationIndicators"].ByOldId(r.Field<long?>("INDICATOR_ID").ToString()),
-                        sector = r.Field<string>("SECTOR"),
-                        experienceRole = noms["experienceRoles"].ByOldId(r.Field<decimal?>("EXPERIENCE_ROLE_ID").ToString()),
-                        experienceMeasure = noms["experienceMeasures"].ByOldId(r.Field<decimal?>("MEASURE_ID").ToString()),
-                        dayIFR = new { hours = r.Field<short?>("AMNTH_DAY_I"), minutes = r.Field<short?>("AMNTM_DAY_I") },
-                        dayVFR = new { hours = r.Field<short?>("AMNTH_DAY_V"), minutes = r.Field<short?>("AMNTM_DAY_V") },
-                        dayLandings = r.Field<short?>("LND_DAY"),
-                        nightIFR = new { hours = r.Field<short?>("AMNTH_NGT_I"), minutes = r.Field<short?>("AMNTM_NGT_I") },
-                        nightVFR = new { hours = r.Field<short?>("AMNTH_NGT_V"), minutes = r.Field<short?>("AMNTM_NGT_V") },
-                        nightLandings = r.Field<short?>("LND_NGT"),
-                        total = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT"), r.Field<short?>("AMOUNT_M")),
-                        totalDoc = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT_SUM"), r.Field<short?>("AMOUNT_M_SUM")),
-                        totalLastMonths = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT_12"), r.Field<short?>("AMOUNT_M_12")),
-                        notes = r.Field<string>("NOTES")
-                    }))
-                .ToList();
+                            documentDate = r.Field<DateTime?>("DOCUMENT_DATE"),
+                            period = new { month = r.Field<string>("PERIOD_MONTH"), year = r.Field<string>("PERIOD_YEAR") },
+                            organization = getOrgByApexId(r.Field<int?>("FIRM_ID")),
+                            aircraft = getAircraftByApexId(r.Field<int?>("AC_ID")),
+                            ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
+                            ratingClass = noms["ratingClasses"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
+                            authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
+                            licenceType = noms["licenceTypes"].ByOldId(r.Field<decimal?>("LICENCE_TYPE_ID").ToString()),
+                            locationIndicator = noms["locationIndicators"].ByOldId(r.Field<long?>("INDICATOR_ID").ToString()),
+                            sector = r.Field<string>("SECTOR"),
+                            experienceRole = noms["experienceRoles"].ByOldId(r.Field<decimal?>("EXPERIENCE_ROLE_ID").ToString()),
+                            experienceMeasure = noms["experienceMeasures"].ByOldId(r.Field<decimal?>("MEASURE_ID").ToString()),
+                            dayIFR = new { hours = r.Field<short?>("AMNTH_DAY_I"), minutes = r.Field<short?>("AMNTM_DAY_I") },
+                            dayVFR = new { hours = r.Field<short?>("AMNTH_DAY_V"), minutes = r.Field<short?>("AMNTM_DAY_V") },
+                            dayLandings = r.Field<short?>("LND_DAY"),
+                            nightIFR = new { hours = r.Field<short?>("AMNTH_NGT_I"), minutes = r.Field<short?>("AMNTM_NGT_I") },
+                            nightVFR = new { hours = r.Field<short?>("AMNTH_NGT_V"), minutes = r.Field<short?>("AMNTM_NGT_V") },
+                            nightLandings = r.Field<short?>("LND_NGT"),
+                            total = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT"), r.Field<short?>("AMOUNT_M")),
+                            totalDoc = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT_SUM"), r.Field<short?>("AMOUNT_M_SUM")),
+                            totalLastMonths = Utils.TimeToMilliseconds(r.Field<int?>("AMOUNT_12"), r.Field<short?>("AMOUNT_M_12")),
+                            notes = r.Field<string>("NOTES")
+                         })),
+                         new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", r.Field<string>("STAFF_TYPE_ID") != null? Utils.ToJObject(PersonUtils.getPersonCaseTypeByStaffTypeCode(noms, (noms["staffTypes"].ByOldId(r.Field<string>("STAFF_TYPE_ID")).Code))): null),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray()))))))
+                        .ToList();
         }
 
         private IList<JObject> getPersonStatuses(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return this.oracleConn.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.PERSON_STATE WHERE {0}",
                 new DbClause("PERSON_ID = {0}", personId)
                 )
@@ -1104,6 +1149,18 @@ namespace Gva.MigrationTool.Sets
                         notes = r.Field<string>("REMARKS")
                     }))
                 .ToList();
+
+            var files = noms["personCaseTypes"].Values.Select(ct => new JObject(
+                new JProperty("isAdded", true),
+                new JProperty("file", null),
+                new JProperty("caseType", Utils.ToJObject(ct)),
+                new JProperty("bookPageNumber", null),
+                new JProperty("pageCount", null),
+                new JProperty("applications", new JArray())));
+
+            return parts.Select(p => new JObject(
+                new JProperty("part", p),
+                new JProperty("files", files))).ToList();
         }
 
         private IDictionary<int, IEnumerable<JObject>> getPersonRatingEditions(
@@ -1133,10 +1190,11 @@ namespace Gva.MigrationTool.Sets
                         RD.NOTES,
                         RD.NOTES_TRANS,
                         RD.REQUEST_ID,
-                        R.STAFF_TYPE_ID
+                        ST.CODE as STAFF_TYPE_CODE
                     FROM CAA_DOC.RATING_CAA R
                     JOIN CAA_DOC.RATING_CAA_DATES RD ON RD.RATING_CAA_ID = R.ID
                     LEFT OUTER JOIN CAA_DOC.EXAMINER E ON E.ID = RD.EXAMINER_ID
+                    INNER JOIN CAA_DOC.NM_STAFF_TYPE ST ON R.STAFF_TYPE_ID = ST.ID
                     WHERE {0}",
                 new DbClause("R.PERSON_ID = {0}", personId)
                 )
@@ -1147,8 +1205,8 @@ namespace Gva.MigrationTool.Sets
                         __migrTable = "RATING_CAA_DATES",
 
                         __RATING_CAA_ID = r.Field<int>("RATING_CAA_ID"),
-                        __STAFF_TYPE = noms["staffTypes"].ByOldId(r.Field<decimal>("STAFF_TYPE_ID").ToString()),
 
+                        caseType = Utils.ToJObject(PersonUtils.getPersonCaseTypeByStaffTypeCode(noms, (r.Field<string>("STAFF_TYPE_CODE")))),
                         ratingSubClasses = transformSubclasses(r.Field<string>("SUBCLASSES")),
                         limitations = transformLimitations66(r.Field<string>("LIMITATIONS"), noms),
                         documentDateValidFrom = r.Field<DateTime?>("ISSUE_DATE"),
@@ -1171,7 +1229,6 @@ namespace Gva.MigrationTool.Sets
                                     r.__migrTable,
 
                                     r.__RATING_CAA_ID,
-                                    r.__STAFF_TYPE,
 
                                     r.ratingSubClasses,
                                     r.limitations,
@@ -1181,34 +1238,65 @@ namespace Gva.MigrationTool.Sets
                                     r.notesAlt,
                                     r.inspector
                                 })),
-                        new JProperty("applications", r.applications))));
+                            new JProperty("files",
+                                new JArray(
+                                  new JObject(
+                                        new JProperty("isAdded", true),
+                                        new JProperty("file", null),
+                                        new JProperty("caseType", r.caseType),
+                                        new JProperty("bookPageNumber", null),
+                                        new JProperty("pageCount", null),
+                                        new JProperty("applications", r.applications)))))));
         }
 
         private IList<JObject> getPersonRatings(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
             return this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.RATING_CAA WHERE {0}",
+                @"SELECT ST.CODE as STAFF_TYPE_CODE,
+                        R.ID,
+                        R.RATING_STEPEN,
+                        R.RATING_CLASS_ID,
+                        R.RATING_TYPE_ID,
+                        R.AUTHORIZATION_ID,
+                        R.RATING_MODEL,
+                        R.INDICATOR_ID,
+                        R.SECTOR,
+                        R.RATING_GROUP66_ID,
+                        R.RATING_CAT66_ID,
+                        R.CAA_ID
+                    FROM CAA_DOC.RATING_CAA R
+                    INNER JOIN CAA_DOC.NM_STAFF_TYPE ST ON R.STAFF_TYPE_ID = ST.ID
+                    WHERE {0}",
                 new DbClause("PERSON_ID = {0}", personId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "RATING_CAA",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "RATING_CAA",
 
-                        staffType = noms["staffTypes"].ByOldId(r.Field<decimal?>("STAFF_TYPE_ID").ToString()),
-                        personRatingLevel = noms["personRatingLevels"].ByCode(r.Field<string>("RATING_STEPEN")),
-                        ratingClass = noms["ratingClassGroups"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
-                        ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
-                        authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
-                        personRatingModel = noms["personRatingModels"].ByCode(r.Field<string>("RATING_MODEL")),
-                        locationIndicator = noms["locationIndicators"].ByOldId(r.Field<long?>("INDICATOR_ID").ToString()),
-                        sector = r.Field<string>("SECTOR"),
-                        aircraftTypeGroup = noms["aircraftTypeGroups"].ByOldId(r.Field<long?>("RATING_GROUP66_ID").ToString()),
-                        aircraftTypeCategory = noms["aircraftClases66"].ByOldId(r.Field<long?>("RATING_CAT66_ID").ToString()),
-                        caa = noms["caa"].ByOldId(r.Field<decimal?>("CAA_ID").ToString())
-                    }))
-                .ToList(); ;
+                            personRatingLevel = noms["personRatingLevels"].ByCode(r.Field<string>("RATING_STEPEN")),
+                            ratingClass = noms["ratingClasses"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
+                            ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
+                            authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
+                            personRatingModel = noms["personRatingModels"].ByCode(r.Field<string>("RATING_MODEL")),
+                            locationIndicator = noms["locationIndicators"].ByOldId(r.Field<long?>("INDICATOR_ID").ToString()),
+                            sector = r.Field<string>("SECTOR"),
+                            aircraftTypeGroup = noms["aircraftTypeGroups"].ByOldId(r.Field<long?>("RATING_GROUP66_ID").ToString()),
+                            aircraftTypeCategory = noms["aircraftClases66"].ByOldId(r.Field<long?>("RATING_CAT66_ID").ToString()),
+                            caa = noms["caa"].ByOldId(r.Field<decimal?>("CAA_ID").ToString())
+                        })),
+                         new JProperty("files",
+                            new JArray(
+                              new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(PersonUtils.getPersonCaseTypeByStaffTypeCode(noms, (r.Field<string>("STAFF_TYPE_CODE"))))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray()))))))
+                .ToList();
         }
 
         private IDictionary<int, IEnumerable<JObject>> getPersonLicenceEditions(
@@ -1219,6 +1307,7 @@ namespace Gva.MigrationTool.Sets
             Dictionary<int, int> ratings,
             Dictionary<int, int> medicals,
             Dictionary<int, int> trainings,
+            Dictionary<int, int> langCerts,
             Dictionary<int, int> exams,
             Dictionary<int, int> checks)
         {
@@ -1278,17 +1367,22 @@ namespace Gva.MigrationTool.Sets
                     PERSON_DOCUMENT_ID = r.PERSON_DOCUMENT_ID,
                     examPartIndex = (r.PERSON_DOCUMENT_ID != null && exams.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? exams[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
                     trainingPartIndex = (r.PERSON_DOCUMENT_ID != null && trainings.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? trainings[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
+                    langCertPartIndex = (r.PERSON_DOCUMENT_ID != null && langCerts.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? langCerts[r.PERSON_DOCUMENT_ID.Value] : (int?)null,
                     checkPartIndex = (r.PERSON_DOCUMENT_ID != null && checks.ContainsKey(r.PERSON_DOCUMENT_ID.Value)) ? checks[r.PERSON_DOCUMENT_ID.Value] : (int?)null
                 });
 
-            foreach (var doc in includedDocuments.Where(d => d.PERSON_DOCUMENT_ID != null && d.trainingPartIndex == null && d.checkPartIndex == null && d.examPartIndex == null))
+            foreach (var doc in includedDocuments.Where(d => d.PERSON_DOCUMENT_ID != null && d.trainingPartIndex == null && d.checkPartIndex == null && d.examPartIndex == null && d.langCertPartIndex == null))
             {
-                Console.WriteLine("PERSON_DOCUMENT_ID {0} included in LICENCE_LOG_ID {1} is not a training, exam or check for PERSON_ID {2}", doc.PERSON_DOCUMENT_ID, doc.LICENCE_LOG_ID, personId);
+                Console.WriteLine("PERSON_DOCUMENT_ID {0} included in LICENCE_LOG_ID {1} is not a training, language certificate, exam or check for PERSON_ID {2}", doc.PERSON_DOCUMENT_ID, doc.LICENCE_LOG_ID, personId);
             }
 
             var includedTrainings = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
                 .ToDictionary(g => g.Key, g => g.Where(r => r.trainingPartIndex != null).Select(r => r.trainingPartIndex.Value).ToArray());
+
+            var includedLangCerts = includedDocuments
+                .GroupBy(r => r.LICENCE_LOG_ID)
+                .ToDictionary(g => g.Key, g => g.Where(r => r.langCertPartIndex != null).Select(r => r.langCertPartIndex.Value).ToArray());
 
             var includedExams = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
@@ -1378,6 +1472,7 @@ namespace Gva.MigrationTool.Sets
                         includedRatings = includedRatings[r.Field<int>("ID")],
                         includedMedicals = includedMedicals[r.Field<int>("ID")],
                         includedTrainings = includedTrainings[r.Field<int>("ID")],
+                        includedLangCerts = includedLangCerts[r.Field<int>("ID")],
                         includedLicences = includedLicences[r.Field<int>("ID")],
                         includedChecks = includedChecks[r.Field<int>("ID")],
                         includedExams = includedExams[r.Field<int>("ID")],
@@ -1423,6 +1518,7 @@ namespace Gva.MigrationTool.Sets
                                     r.includedRatings,
                                     r.includedMedicals,
                                     r.includedTrainings,
+                                    r.includedLangCerts,
                                     r.includedLicences,
                                     r.includedChecks,
 
@@ -1526,33 +1622,43 @@ namespace Gva.MigrationTool.Sets
                         L.FOREIGN_CAA_ID,
                         L.EMPLOYEE_ID,
                         L.ISSUE_DATE,
-                        LT.STAFF_TYPE_ID,
+                        ST.CODE as STAFF_TYPE_CODE,
                         LT.CODE as LICENCE_TYPE_CODE
                     FROM CAA_DOC.LICENCE L
                     INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON L.LICENCE_TYPE_ID = LT.ID
+                    INNER JOIN CAA_DOC.NM_STAFF_TYPE ST ON LT.STAFF_TYPE_ID = ST.ID
                     WHERE {0}",
                 new DbClause("L.PERSON_ID = {0}", personId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "LICENCE",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "LICENCE",
 
-                        //TODO show somewhere?
-                        __ISSUE_DATE = r.Field<DateTime?>("ISSUE_DATE"),
+                            //TODO show somewhere?
+                            __ISSUE_DATE = r.Field<DateTime?>("ISSUE_DATE"),
 
-                        licenceType = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_TYPE_ID")),
-                        staffType = noms["staffTypes"].ByOldId(r.Field<string>("STAFF_TYPE_ID")),
-                        fcl = noms["boolean"].ByCode(r.Field<string>("LICENCE_TYPE_CODE").Contains("FCL") ? "Y" : "N"),
-                        licenceNumber = r.Field<string>("LICENCE_NO"),
-                        foreignLicenceNumber = r.Field<string>("FOREIGN_LICENCE_NO"),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        statuses = statuses.ContainsKey(r.Field<int>("ID")) ? statuses[r.Field<int>("ID")] : null,
-                        publisher = noms["caa"].ByOldId(r.Field<int?>("PUBLISHER_CAA_ID").ToString()),
-                        foreignPublisher = noms["caa"].ByOldId(r.Field<int?>("FOREIGN_CAA_ID").ToString()),
-                        employment = getEmployment(r.Field<int?>("EMPLOYEE_ID"))
-                    }))
+                            licenceType = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_TYPE_ID")),
+                            fcl = noms["boolean"].ByCode(r.Field<string>("LICENCE_TYPE_CODE").Contains("FCL") ? "Y" : "N"),
+                            licenceNumber = r.Field<string>("LICENCE_NO"),
+                            foreignLicenceNumber = r.Field<string>("FOREIGN_LICENCE_NO"),
+                            valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
+                            statuses = statuses.ContainsKey(r.Field<int>("ID")) ? statuses[r.Field<int>("ID")] : null,
+                            publisher = noms["caa"].ByOldId(r.Field<int?>("PUBLISHER_CAA_ID").ToString()),
+                            foreignPublisher = noms["caa"].ByOldId(r.Field<int?>("FOREIGN_CAA_ID").ToString()),
+                            employment = getEmployment(r.Field<int?>("EMPLOYEE_ID"))
+                        })),
+                        new JProperty("files",
+                            new JArray(
+                              new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(PersonUtils.getPersonCaseTypeByStaffTypeCode(noms, (r.Field<string>("STAFF_TYPE_CODE"))))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray()))))))
                 .ToList();
         }
 

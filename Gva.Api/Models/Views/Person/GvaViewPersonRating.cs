@@ -4,6 +4,7 @@ using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
 using Regs.Api.Models;
 using Gva.Api.ModelsDO.Persons;
+using System.Collections.Generic;
 
 namespace Gva.Api.Models.Views.Person
 {
@@ -14,11 +15,7 @@ namespace Gva.Api.Models.Views.Person
 
         public int PartId { get; set; }
 
-        public int EditionIndex { get; set; }
-
-        public int RatingPartIndex { get; set; }
-
-        public int EditionPartIndex { get; set; }
+        public int PartIndex { get; set; }
 
         public int? RatingTypeId { get; set; }
 
@@ -30,23 +27,9 @@ namespace Gva.Api.Models.Views.Person
 
         public int? AuthorizationId { get; set; }
 
-        public string RatingSubClasses { get; set; }
+        public int? LocationIndicatorId { get; set; }
 
-        public string Limitations { get; set; }
-
-        public DateTime LastDocDateValidFrom { get; set; }
-
-        public DateTime? LastDocDateValidTo { get; set; }
-
-        public DateTime FirstDocDateValidFrom { get; set; }
-
-        public string Notes { get; set; }
-
-        public string NotesAlt { get; set; }
-
-        public virtual GvaViewPerson Person { get; set; }
-
-        public virtual Part Part { get; set; }
+        public virtual NomValue LocationIndicator { get; set; }
 
         public virtual NomValue RatingType { get; set; }
 
@@ -58,6 +41,12 @@ namespace Gva.Api.Models.Views.Person
 
         public virtual NomValue Authorization { get; set; }
 
+        public virtual GvaViewPerson Person { get; set; }
+
+        public virtual Part Part { get; set; }
+
+        public virtual List<GvaViewPersonRatingEdition> Editions { get; set; }
+
     }
 
     public class GvaViewPersonRatingMap : EntityTypeConfiguration<GvaViewPersonRating>
@@ -65,7 +54,7 @@ namespace Gva.Api.Models.Views.Person
         public GvaViewPersonRatingMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.LotId, t.PartId });
+            this.HasKey(t => new { t.LotId, t.PartIndex });
 
             // Properties
             this.Property(t => t.LotId)
@@ -78,21 +67,13 @@ namespace Gva.Api.Models.Views.Person
             this.ToTable("GvaViewPersonRatings");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartId).HasColumnName("LotPartId");
-            this.Property(t => t.EditionIndex).HasColumnName("EditionIndex");
-            this.Property(t => t.RatingPartIndex).HasColumnName("RatingPartIndex");
-            this.Property(t => t.EditionPartIndex).HasColumnName("EditionPartIndex");
+            this.Property(t => t.PartIndex).HasColumnName("PartIndex");
             this.Property(t => t.RatingTypeId).HasColumnName("RatingTypeId");
             this.Property(t => t.RatingLevelId).HasColumnName("RatingLevelId");
             this.Property(t => t.RatingClassId).HasColumnName("RatingClassId");
             this.Property(t => t.AircraftTypeGroupId).HasColumnName("AircraftTypeGroupId");
             this.Property(t => t.AuthorizationId).HasColumnName("AuthorizationId");
-            this.Property(t => t.RatingSubClasses).HasColumnName("RatingSubClasses");
-            this.Property(t => t.Limitations).HasColumnName("Limitations");
-            this.Property(t => t.LastDocDateValidFrom).HasColumnName("LastDocDateValidFrom");
-            this.Property(t => t.LastDocDateValidTo).HasColumnName("LastDocDateValidTo");
-            this.Property(t => t.FirstDocDateValidFrom).HasColumnName("FirstDocDateValidFrom");
-            this.Property(t => t.Notes).HasColumnName("Notes");
-            this.Property(t => t.NotesAlt).HasColumnName("NotesAlt");
+            this.Property(t => t.LocationIndicatorId).HasColumnName("LocationIndicatorId");
 
             // Relationships
             this.HasRequired(t => t.Person)
@@ -116,6 +97,9 @@ namespace Gva.Api.Models.Views.Person
             this.HasOptional(t => t.Authorization)
                 .WithMany()
                 .HasForeignKey(t => t.AuthorizationId);
+            this.HasOptional(t => t.LocationIndicator)
+                .WithMany()
+                .HasForeignKey(t => t.LocationIndicatorId);
         }
     }
 }

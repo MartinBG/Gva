@@ -7,16 +7,14 @@ using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Common;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
-using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
-using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Organizations
 {
     [RoutePrefix("api/organizations/{lotId}/organizationDocumentApplications")]
     [Authorize]
-    public class OrganizationApplicationsController : GvaFilePartController<DocumentApplicationDO>
+    public class OrganizationApplicationsController : GvaCaseTypePartController<DocumentApplicationDO>
     {
         private string path;
         private IUnitOfWork unitOfWork;
@@ -52,10 +50,10 @@ namespace Gva.Api.Controllers.Organizations
                 DocumentDate = DateTime.Now
             };
 
-            return Ok(new FilePartVersionDO<DocumentApplicationDO>(newApplication));
+            return Ok(new CaseTypePartDO<DocumentApplicationDO>(newApplication));
         }
 
-        public override IHttpActionResult PostNewPart(int lotId, FilePartVersionDO<DocumentApplicationDO> application)
+        public override IHttpActionResult PostNewPart(int lotId, CaseTypePartDO<DocumentApplicationDO> application)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -63,7 +61,7 @@ namespace Gva.Api.Controllers.Organizations
 
                 var partVersion = lot.CreatePart(path + "/*", application.Part, this.userContext);
 
-                this.fileRepository.AddFileReferences(partVersion.Part, application.Files);
+                this.fileRepository.AddFileReference(partVersion.Part, application.Case);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 

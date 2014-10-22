@@ -16,7 +16,10 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-common-inspection-data name="equipmentInspectionForm" ng-model="equipmentInspection" sc-form-params="{ setPart: 'equipment' }"></gva-common-inspection-data>
+      <gva-common-inspection-data name="equipmentInspectionForm" ng-model="equipmentInspection" sc-form-params="{ setPart: 'equipment', isNew: false, caseTypeId: caseTypeId }"></gva-common-inspection-data>
+      <gva-common-scanned-document name="equipmentScannedDocumentForm" ng-model="equipmentInspection.case"
+        sc-form-params="{ setPart: 'equipment', lotId: lotId, hideFiles: true }">
+      </gva-common-scanned-document>
 
       <gva-common-inspection-details name="inspectionDetailsForm" ng-model="equipmentInspection.part" sc-form-params="{ setPart: 'equipment' }"></gva-common-inspection-details>
     </div>

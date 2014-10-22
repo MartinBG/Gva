@@ -30,7 +30,7 @@
           return $state.go('root.persons.securityExam.part', { id: page }).then(function () {
             $scope.setPaging(page);
             $scope.personExams[page - 1].part = data.part;
-            $scope.personExams[page - 1].files = data.files;
+            $scope.personExams[page - 1].cases = data.cases;
             $scope.btnClicked = false;
           });
         });
@@ -40,8 +40,8 @@
         .then(function (data) {
           return $state.go('root.persons.securityExam.part', { id: page }).then(function () {
             $scope.setPaging(page);
-            $scope.personExams[page - 1].files[0].file = data.gvaFile;
-            $scope.personExams[page - 1].files[0].isAdded = true;
+            $scope.personExams[page - 1].cases[0].file = data.gvaFile;
+            $scope.personExams[page - 1].cases[0].isAdded = true;
             $scope.btnClicked = false;
           });
         });

@@ -34,7 +34,7 @@ namespace Gva.Api.Projections.Inventory.Persons
             invItem.PartId = personDocumentId.Part.PartId;
             invItem.SetPartAlias = personDocumentId.Part.SetPart.Alias;
             invItem.Name = personDocumentId.Part.SetPart.Name;
-            invItem.TypeId = personDocumentId.Content.DocumentType.NomValueId;
+            invItem.TypeId = personDocumentId.Content.DocumentType == null ? (int?)null : personDocumentId.Content.DocumentType.NomValueId;
             invItem.Number = personDocumentId.Content.DocumentNumber;
             invItem.Date = personDocumentId.Content.DocumentDateValidFrom;
             invItem.Publisher = personDocumentId.Content.DocumentPublisher;

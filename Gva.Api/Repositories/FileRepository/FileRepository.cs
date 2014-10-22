@@ -4,10 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Data;
+using Common.Linq;
 using Docs.Api.Models;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
-using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.FileRepository
@@ -21,22 +21,22 @@ namespace Gva.Api.Repositories.FileRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddFileReferences(Part part, IEnumerable<FileDO> files)
+        public void AddFileReferences(Part part, IEnumerable<CaseDO> cases)
         {
-            if (files == null)
+            if (cases == null)
             {
                 return;
             }
 
-            foreach (var fileObj in files)
+            foreach (var caseDO in cases)
             {
-                if ((bool)fileObj.IsAdded)
+                if (caseDO.IsAdded)
                 {
-                    var newFile = this.AddLotFile(part, fileObj);
+                    this.AddLotFile(part, caseDO);
                     continue;
                 }
 
-                var lotFileId = (int)fileObj.LotFileId;
+                var lotFileId = caseDO.LotFileId;
                 var lotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
                         .Include(f => f.DocFile)
                         .SingleOrDefault(f => f.GvaLotFileId == lotFileId);
@@ -50,13 +50,58 @@ namespace Gva.Api.Repositories.FileRepository
                     .Where(f => f.GvaFileId == lotFile.GvaFileId)
                     .Load();
 
-                if ((bool)fileObj.IsDeleted)
+                if (caseDO.IsDeleted)
                 {
                     this.DeleteLotFile(lotFile);
                     continue;
                 }
 
-                this.UpdateLotFile(lotFile, fileObj);
+                this.UpdateLotFile(lotFile, caseDO);
+            }
+        }
+
+        public void AddFileReference(Part part, CaseDO caseDO)
+        {
+            if (caseDO == null)
+            {
+                return;
+            }
+
+            if (caseDO.IsAdded)
+            {
+                var oldFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                    .SingleOrDefault(f => f.LotPartId == part.PartId);
+                if (oldFile != null)
+                {
+                    this.DeleteLotFile(oldFile);
+                }
+
+                var newFile = this.AddLotFile(part, caseDO);
+            }
+            else
+            {
+                var lotFileId = caseDO.LotFileId;
+                var lotFile = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                        .Include(f => f.DocFile)
+                        .SingleOrDefault(f => f.GvaLotFileId == lotFileId);
+
+                this.unitOfWork.DbContext.Set<GvaAppLotFile>()
+                    .Where(ga => ga.GvaLotFileId == lotFileId)
+                    .Load();
+
+                this.unitOfWork.DbContext.Set<GvaFile>()
+                    .Include(f => f.GvaLotFiles)
+                    .Where(f => f.GvaFileId == lotFile.GvaFileId)
+                    .Load();
+
+                if (caseDO.IsDeleted)
+                {
+                    this.DeleteLotFile(lotFile);
+                }
+                else
+                {
+                    this.UpdateLotFile(lotFile, caseDO);
+                }
             }
         }
 
@@ -76,11 +121,19 @@ namespace Gva.Api.Repositories.FileRepository
 
         public GvaLotFile[] GetFileReferences(int partId, int? caseType)
         {
+            var predicate = PredicateBuilder.True<GvaLotFile>()
+                .And(f => f.LotPartId == partId);
+
+            if (caseType.HasValue)
+            {
+                predicate = predicate.And(f => f.GvaCaseTypeId == caseType);
+            }
+
             var result = this.unitOfWork.DbContext.Set<GvaLotFile>()
                 .Include(f => f.DocFile)
                 .Include(f => f.GvaFile)
                 .Include(f => f.GvaCaseType)
-                .Where(f => f.LotPartId == partId && (caseType.HasValue ? f.GvaCaseTypeId == caseType : true))
+                .Where(predicate)
                 .ToArray();
 
             this.unitOfWork.DbContext.Set<GvaAppLotFile>()
@@ -91,16 +144,41 @@ namespace Gva.Api.Repositories.FileRepository
             return result;
         }
 
-        private GvaLotFile AddLotFile(Part part, FileDO fileObj)
+        public GvaLotFile GetFileReference(int partId, int? caseType)
+        {
+            var predicate = PredicateBuilder.True<GvaLotFile>()
+                .And(f => f.LotPartId == partId);
+
+            if (caseType.HasValue)
+            {
+                predicate = predicate.And(f => f.GvaCaseTypeId == caseType);
+            }
+
+            var result = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                .Include(f => f.DocFile)
+                .Include(f => f.GvaFile)
+                .Include(f => f.GvaCaseType)
+                .Where(predicate)
+                .ToList();
+
+            this.unitOfWork.DbContext.Set<GvaAppLotFile>()
+                .Include(ga => ga.GvaApplication)
+                .Where(ga => ga.GvaLotFile.LotPartId == partId && (caseType.HasValue ? ga.GvaLotFile.GvaCaseTypeId == caseType : true))
+                .Load();
+
+            return result.Count == 0 ? null : result.Single();
+        }
+
+        private GvaLotFile AddLotFile(Part part, CaseDO caseDO)
         {
             GvaFile file = null;
-            if (fileObj.File != null)
+            if (caseDO.File != null)
             {
                 file = new GvaFile()
                 {
-                    Filename = fileObj.File.Name,
-                    MimeType = fileObj.File.MimeType,
-                    FileContentId = fileObj.File.Key
+                    Filename = caseDO.File.Name,
+                    MimeType = caseDO.File.MimeType,
+                    FileContentId = caseDO.File.Key
                 };
 
                 this.unitOfWork.DbContext.Set<GvaFile>().Add(file);
@@ -110,15 +188,15 @@ namespace Gva.Api.Repositories.FileRepository
             {
                 LotPart = part,
                 GvaFile = file,
-                GvaCaseTypeId = fileObj.CaseType.NomValueId,
-                PageIndex = (string)fileObj.BookPageNumber,
-                PageIndexInt = GetPageIndexInt(fileObj.BookPageNumber),
-                PageNumber = (int?)fileObj.PageCount
+                GvaCaseTypeId = caseDO.CaseType.NomValueId,
+                PageIndex = (string)caseDO.BookPageNumber,
+                PageIndexInt = GetPageIndexInt(caseDO.BookPageNumber),
+                PageNumber = (int?)caseDO.PageCount
             };
 
             this.unitOfWork.DbContext.Set<GvaLotFile>().Add(newLotFile);
 
-            foreach (var application in fileObj.Applications)
+            foreach (var application in caseDO.Applications)
             {
                 GvaAppLotFile appLotFile = new GvaAppLotFile()
                 {
@@ -132,15 +210,41 @@ namespace Gva.Api.Repositories.FileRepository
             return newLotFile;
         }
 
-        private void UpdateLotFile(GvaLotFile lotFile, FileDO fileObj)
+        private void UpdateLotFile(GvaLotFile lotFile, CaseDO caseDO)
         {
-            lotFile.GvaCaseTypeId = fileObj.CaseType.NomValueId;
-            lotFile.PageIndex = fileObj.BookPageNumber;
-            lotFile.PageIndexInt = GetPageIndexInt(fileObj.BookPageNumber);
-            lotFile.PageNumber = fileObj.PageCount;
+            lotFile.GvaCaseTypeId = caseDO.CaseType.NomValueId;
+            lotFile.PageIndex = caseDO.BookPageNumber;
+            lotFile.PageIndexInt = GetPageIndexInt(caseDO.BookPageNumber);
+            lotFile.PageNumber = caseDO.PageCount;
+
+            if (caseDO.File != null)
+            {
+                if (!lotFile.GvaFileId.HasValue)
+                {
+                    GvaFile file = new GvaFile()
+                    {
+                        Filename = caseDO.File.Name,
+                        MimeType = caseDO.File.MimeType,
+                        FileContentId = caseDO.File.Key
+                    };
+
+                    this.unitOfWork.DbContext.Set<GvaFile>().Add(file);
+                    lotFile.GvaFile = file;
+                }
+                else if (lotFile.GvaFile.FileContentId != caseDO.File.Key)
+                {
+                    lotFile.GvaFile.Filename = caseDO.File.Name;
+                    lotFile.GvaFile.MimeType = caseDO.File.MimeType;
+                    lotFile.GvaFile.FileContentId = caseDO.File.Key;
+                }
+            }
+            else if (lotFile.GvaFileId.HasValue)
+            {
+                this.unitOfWork.DbContext.Set<GvaFile>().Remove(lotFile.GvaFile);
+            }
 
             var nonModifiedApps = lotFile.GvaAppLotFiles.Join(
-                fileObj.Applications,
+                caseDO.Applications,
                 gf => gf.GvaApplicationId,
                 a => a.ApplicationId,
                 (gf, a) => gf);
@@ -151,7 +255,7 @@ namespace Gva.Api.Repositories.FileRepository
                 this.unitOfWork.DbContext.Set<GvaAppLotFile>().Remove(application);
             }
 
-            foreach (var application in fileObj.Applications)
+            foreach (var application in caseDO.Applications)
             {
                 var appLotFile = lotFile.GvaAppLotFiles.SingleOrDefault(af => af.GvaApplicationId == (int)application.ApplicationId);
                 if (appLotFile == null)

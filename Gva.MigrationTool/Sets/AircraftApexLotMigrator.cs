@@ -86,22 +86,10 @@ namespace Gva.MigrationTool.Sets
 
                         var lot = lotRepository.GetLotIndex(aircraftApexIdtoLotId[aircraftApexId], fullAccess: true);
 
-                        var aircraftParts = this.getAircraftParts(aircraftApexId, noms);
-                        foreach (var aircraftPart in aircraftParts)
-                        {
-                            lot.CreatePart("aircraftParts/*", aircraftPart, context);
-                        }
-
-                        var aircraftMaintenances = this.getAircraftMaintenances(aircraftApexId, getPersonByApexId, getOrgByApexId, noms);
-                        foreach (var aircraftMaintenance in aircraftMaintenances)
-                        {
-                            lot.CreatePart("maintenances/*", aircraftMaintenance, context);
-                        }
-
                         Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
                         {
                             var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
-                            fileRepository.AddFileReferences(pv.Part, content.GetItems<FileDO>("files"));
+                            fileRepository.AddFileReferences(pv.Part, content.GetItems<CaseDO>("files"));
                             return pv;
                         };
 
@@ -153,6 +141,18 @@ namespace Gva.MigrationTool.Sets
                             }
                         }
 
+                        var aircraftParts = this.getAircraftParts(aircraftApexId, noms);
+                        foreach (var aircraftPart in aircraftParts)
+                        {
+                            addPartWithFiles("aircraftParts/*", aircraftPart);
+                        }
+
+                        var aircraftMaintenances = this.getAircraftMaintenances(aircraftApexId, getPersonByApexId, getOrgByApexId, noms);
+                        foreach (var aircraftMaintenance in aircraftMaintenances)
+                        {
+                            addPartWithFiles("maintenances/*", aircraftMaintenance);
+                        }
+
                         var aircraftDocumentOccurrences = this.getAircraftDocumentOccurrences(aircraftApexId, nomApplications, noms, blobIdsToFileKeys);
                         foreach (var aircraftDocumentOccurrence in aircraftDocumentOccurrences)
                         {
@@ -178,9 +178,7 @@ namespace Gva.MigrationTool.Sets
                         var aircraftInspections = this.getAircraftInspections(aircraftApexId, nomApplications, getPersonByApexId, blobIdsToFileKeys, noms);
                         foreach (var aircraftInspection in aircraftInspections)
                         {
-                            var pv = lot.CreatePart("inspections/*", aircraftInspection.Get<JObject>("part"), context);
-                            applicationRepository.AddApplicationRefs(pv.Part, aircraftInspection.GetItems<ApplicationNomDO>("applications"));
-
+                            var pv = addPartWithFiles("inspections/*", aircraftInspection);
                             inspections.Add(aircraftInspection.Get<int>("part.__oldId"), pv.Part.Index);
                         }
 
@@ -209,10 +207,10 @@ namespace Gva.MigrationTool.Sets
                                 addPartWithFiles("aircraftCertPermitsToFly/*", aircraftCertPermitToFly);
                             }
 
-                            var aircraftCertNoises = this.getAircraftCertNoises(certId);
+                            var aircraftCertNoises = this.getAircraftCertNoises(certId, noms);
                             foreach (var aircraftCertNoise in aircraftCertNoises)
                             {
-                                lot.CreatePart("aircraftCertNoises/*", aircraftCertNoise, context);
+                                addPartWithFiles("aircraftCertNoises/*", aircraftCertNoise);
                             }
                         }
 
@@ -252,7 +250,7 @@ namespace Gva.MigrationTool.Sets
 
         private IList<JObject> getAircraftParts(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return this.oracleConn.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_PART WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
@@ -274,6 +272,17 @@ namespace Gva.MigrationTool.Sets
                         description = r.Field<string>("DESCRIPTION"),
                     }))
                 .ToList();
+
+            return parts.Select(p => new JObject(
+                new JProperty("part", p),
+                new JProperty("files", new JArray(
+                    new JObject(
+                        new JProperty("isAdded", true),
+                        new JProperty("file", null),
+                        new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                        new JProperty("bookPageNumber", null),
+                        new JProperty("pageCount", null),
+                        new JProperty("applications", new JArray())))))).ToList();
         }
 
         private IList<JObject> getAircraftMaintenances(
@@ -282,7 +291,7 @@ namespace Gva.MigrationTool.Sets
             Func<int?, JObject> getOrgByApexId,
             Dictionary<string, Dictionary<string, NomValue>> noms)
         {
-            return this.oracleConn.CreateStoreCommand(
+            var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_MAINTENANCE WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
@@ -300,6 +309,17 @@ namespace Gva.MigrationTool.Sets
                         person = getPersonByApexId((int?)r.Field<decimal?>("ID_PERSON")),
                     }))
                 .ToList();
+
+            return parts.Select(p => new JObject(
+                new JProperty("part", p),
+                new JProperty("files", new JArray(
+                    new JObject(
+                        new JProperty("isAdded", true),
+                        new JProperty("file", null),
+                        new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                        new JProperty("bookPageNumber", null),
+                        new JProperty("pageCount", null),
+                        new JProperty("applications", new JArray())))))).ToList();
         }
 
         private IList<JObject> getAircraftDocumentApplications(
@@ -837,38 +857,44 @@ namespace Gva.MigrationTool.Sets
                 @"SELECT * FROM CAA_DOC.AUDITS WHERE {0}",
                 new DbClause("ID_AIRCRAFT = {0}", aircraftId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        part =
-                            new
-                            {
-                                __oldId = r.Field<int>("ID"),
-                                __migrTable = "AUDITS",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "AUDITS",
 
-                                documentNumber = r.Field<string>("DOC_NUMBER"),
-                                auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
-                                auditReason = noms["auditReasons"].ByCode(r.Field<string>("REASON")),
-                                auditType = noms["auditTypes"].ByCode(r.Field<string>("AUDIT_MODE")),
-                                auditState = noms["auditStatuses"].ByCode(r.Field<string>("STATE")),
-                                notification = noms["boolean"].ByCode(r.Field<string>("NOTIFICATION") == "Y" ? "Y" : "N"),
-                                subject = r.Field<string>("SUBJECT"),
-                                inspectionPlace = r.Field<string>("INSPECTION_PLACE"),
-                                startDate = r.Field<DateTime?>("DATE_BEGIN"),
-                                endDate = r.Field<DateTime?>("DATE_END"),
-                                controlCard = controlCards[r.Field<int>("ID")],
-                                inspectionDetails = inspectionDetails[r.Field<int>("ID")],
-                                disparities = disparities[r.Field<int>("ID")],
-                                examiners = examiners[r.Field<int>("ID")],
+                            documentNumber = r.Field<string>("DOC_NUMBER"),
+                            auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
+                            auditReason = noms["auditReasons"].ByCode(r.Field<string>("REASON")),
+                            auditType = noms["auditTypes"].ByCode(r.Field<string>("AUDIT_MODE")),
+                            auditState = noms["auditStatuses"].ByCode(r.Field<string>("STATE")),
+                            notification = noms["boolean"].ByCode(r.Field<string>("NOTIFICATION") == "Y" ? "Y" : "N"),
+                            subject = r.Field<string>("SUBJECT"),
+                            inspectionPlace = r.Field<string>("INSPECTION_PLACE"),
+                            startDate = r.Field<DateTime?>("DATE_BEGIN"),
+                            endDate = r.Field<DateTime?>("DATE_END"),
+                            controlCard = controlCards[r.Field<int>("ID")],
+                            inspectionDetails = inspectionDetails[r.Field<int>("ID")],
+                            disparities = disparities[r.Field<int>("ID")],
+                            examiners = examiners[r.Field<int>("ID")],
 
-                                inspectionFrom = r.Field<DateTime?>("INSPECTION_FROM"),
-                                inspectionTo = r.Field<DateTime?>("INSPECTION_TO")
-                            },
-                        applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
-                            new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
-                            new object[0]
-                    }))
-                .ToList();
+                            inspectionFrom = r.Field<DateTime?>("INSPECTION_FROM"),
+                            inspectionTo = r.Field<DateTime?>("INSPECTION_TO")
+                        })),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications",
+                                        (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
+                                        new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
+                                        new object[0]))))))
+                        .ToList();
         }
 
         private IList<JObject> getAircraftDocumentDebts(
@@ -1325,32 +1351,42 @@ namespace Gva.MigrationTool.Sets
                     .ToList();
         }
 
-        private IList<JObject> getAircraftCertNoises(long certId)
+        private IList<JObject> getAircraftCertNoises(long certId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.AC_NOISE WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_CERTIFICATE = {0}", certId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "AC_S_CODE",
-                        certId = r.Field<long?>("ID_CERTIFICATE"),
-                        issueDate = r.Field<DateTime?>("ISSUE_DATE"),
-                        standart = r.Field<string>("NOISE_STANDARD"),
-                        standartAlt = r.Field<string>("NOISE_STANDARD_TRANS"),
-                        flyover = r.Field<float?>("FLYOVER_NOISE"),
-                        approach = r.Field<float?>("APPROACH_NOISE"),
-                        lateral = r.Field<float?>("LATERAL_NOISE"),
-                        overflight = r.Field<float?>("OVERFLIGHT_NOISE"),
-                        takeoff = r.Field<float?>("TAKE_OFF_NOISE"),
-                        modifications = r.Field<string>("MODIFICATIONS"),
-                        modificationsAlt = r.Field<string>("MODIFICATIONS_TRANS"),
-                        notes = r.Field<string>("REMARKS")
-                    }))
-                .ToList();
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                            {
+                                __oldId = r.Field<int>("ID"),
+                                __migrTable = "AC_S_CODE",
+                                certId = r.Field<long?>("ID_CERTIFICATE"),
+                                issueDate = r.Field<DateTime?>("ISSUE_DATE"),
+                                standart = r.Field<string>("NOISE_STANDARD"),
+                                standartAlt = r.Field<string>("NOISE_STANDARD_TRANS"),
+                                flyover = r.Field<float?>("FLYOVER_NOISE"),
+                                approach = r.Field<float?>("APPROACH_NOISE"),
+                                lateral = r.Field<float?>("LATERAL_NOISE"),
+                                overflight = r.Field<float?>("OVERFLIGHT_NOISE"),
+                                takeoff = r.Field<float?>("TAKE_OFF_NOISE"),
+                                modifications = r.Field<string>("MODIFICATIONS"),
+                                modificationsAlt = r.Field<string>("MODIFICATIONS_TRANS"),
+                                notes = r.Field<string>("REMARKS")
+                            })),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray()))))))
+                        .ToList();
         }
 
         private IList<JObject> getAircraftCertMarks(int aircraftId, Dictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms)

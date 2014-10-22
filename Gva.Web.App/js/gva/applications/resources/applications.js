@@ -7,15 +7,15 @@
       function ($resource) {
         return $resource('api/apps/:id', { id: '@id' },
           {
-            'notLinkedDocs': {
+            notLinkedDocs: {
               method: 'GET',
               url: 'api/apps/notLinkedDocs'
             },
-            'create': {
+            create: {
               method: 'POST',
               url: 'api/apps/create'
             },
-            'getAppPart': {
+            getAppPart: {
               method: 'GET',
               url: 'api/apps/appPart/:lotId/:path/:ind',
               params: {
@@ -24,7 +24,7 @@
                 ind: '@ind'
               }
             },
-            'editAppPart': {
+            editAppPart: {
               method: 'POST',
               url: 'api/apps/appPart/:lotId/:path/:ind',
               params: {
@@ -33,62 +33,16 @@
                 ind: '@ind'
               }
             },
-            'link': {
+            link: {
               method: 'POST',
               url: 'api/apps/link'
             },
-            'createPart': {
-              method: 'POST',
-              url: 'api/apps/:id/parts/create',
-              params: {
-                id: '@id',
-                docId: '@docId',
-                setPartAlias: '@setPartAlias'
-              }
-            },
-            'linkNewPart': {
-              method: 'POST',
-              url: 'api/apps/:id/parts/linkNew',
-              params: {
-                id: '@id',
-                setPartAlias: '@setPartAlias'
-              }
-            },
-            'linkExistingPart': {
-              method: 'POST',
-              url: 'api/apps/:id/parts/linkExisting',
-              params: {
-                id: '@id',
-                docFileId: '@docFileId',
-                partId: '@partId'
-              }
-            },
-            'getDocFile': {
-              method: 'GET',
-              url: 'api/apps/docFile',
-              params: { docFileId: '@docFileId' }
-            },
-            'getDoc': {
-              method: 'GET',
-              url: 'api/apps/doc',
-              params: { docId: '@docId' }
-            },
-            'attachDocFile': {
-              method: 'POST',
-              url: 'api/apps/:id/docFiles/create',
-              params: { docId: '@docId' }
-            },
-            'getApplicationByDocId': {
+            getApplicationByDocId: {
               method: 'GET',
               url: 'api/apps/appByDocId',
               params: { docId: '@docId' }
             },
-            'getPersonDocumentValues': {
-              method: 'GET',
-              url: 'api/apps/personDocumentValues',
-              params: { docFileId: '@docFileId' }
-            },
-            'getGvaCorrespodents': {
+            getGvaCorrespodents: {
               method: 'GET',
               url: 'api/apps/getGvaCorrespodents',
               params: { lotId: '@lotId' }

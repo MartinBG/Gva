@@ -2,14 +2,14 @@
   <div class="row">
     <sc-field type="nomenclature" alias="'inspectors'" ng-model="model.part.inspector" l10n-text="persons.licenceEditionDirective.inspector" class="col-sm-3"></sc-field>
     <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.licenceEditionDirective.documentDateValidFrom" class="col-sm-2"></sc-field>
-    <sc-field type="date" ng-model="model.part.documentDateValidTo" ng-required="staffType.alias !== 'flightCrew' || ( fcl.code !== 'Y' && licenceType.code !== 'BG CCA')"
-      l10n-text="persons.licenceEditionDirective.documentDateValidTo" class="col-sm-2" ng-if="staffType.alias !== 'flightCrew' || ( fcl.code !== 'Y' && licenceType.code !== 'BG CCA')">
+    <sc-field type="date" ng-model="model.part.documentDateValidTo" ng-required="model.case.caseType.alias !== 'flightCrew' || ( fcl.code !== 'Y' && licenceType.code !== 'BG CCA')"
+      l10n-text="persons.licenceEditionDirective.documentDateValidTo" class="col-sm-2" ng-if="model.case.caseType.alias !== 'flightCrew' || ( fcl.code !== 'Y' && licenceType.code !== 'BG CCA')">
     </sc-field>
   </div>
   <div class="row">
     <sc-field type="nomenclature" alias="'licenceActions'" ng-model="model.part.licenceAction" ng-required="true" l10n-text="persons.licenceEditionDirective.licenceAction" class="col-sm-4"></sc-field>
   </div>
-  <div ng-if="staffType.alias === 'to_vs'">
+  <div ng-if="model.case.caseType.alias === 'to_vs'">
     <div class="row">
       <sc-field type="nomenclature" ng-model="model.part.amlLimitations.at_a_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.AT_a_Ids" class="col-sm-3"></sc-field>
       <sc-field type="nomenclature" ng-model="model.part.amlLimitations.at_b1_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.AT_b1_Ids" class="col-sm-3"></sc-field>
@@ -33,7 +33,7 @@
       <sc-field type="nomenclature" ng-model="model.part.amlLimitations.pe_b3_Ids" alias="'limitations66'" multiple="multiple" params="{general: 'Y'}" l10n-text="persons.licenceEditionDirective.PE_b3_Ids" class="col-sm-6"></sc-field>
     </div>
   </div>
-  <div class="row" ng-if="staffType.alias === 'flightCrew'">
+  <div class="row" ng-if="model.case.caseType.alias === 'flightCrew'">
     <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'limitations66'" multiple="multiple" params="{general: 'F'}" l10n-text="persons.licenceEditionDirective.limitations" class="col-sm-5"></sc-field>
   </div>
   <div class="row">
@@ -41,7 +41,7 @@
     <sc-field type="textarea" rows="3" ng-model="model.part.notesAlt" l10n-text="persons.licenceEditionDirective.notesAlt" class="col-md-3"></sc-field>
   </div>
 
-  <gva-common-scanned-document name="personScannedDocumentForm" ng-model="model.files" sc-form-params="{ setPart: 'person', lotId: lotId, caseTypeId: caseTypeId }"></gva-common-scanned-document>
+  <gva-common-scanned-document name="personScannedDocumentForm" ng-model="model.case" sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
 
   <h5 class="form-header" l10n-text="persons.licenceEditionDirective.ratings"></h5>
   <div class="row">
@@ -123,6 +123,48 @@
     </div>
   </div>
 
+  <h5 class="form-header" l10n-text="persons.licenceEditionDirective.langCerts"></h5>
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <div class="table-buttons" ng-show="!form.$readonly">
+        <sc-button btn-click="addLangCert()" text="persons.licenceEditionDirective.addLangCert" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+        <sc-button btn-click="addExistingLangCert()" text="persons.licenceEditionDirective.addExistingLangCert" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      </div>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th width="1px" ng-if="!form.$readonly && model.part.includedLangCerts.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.part.includedLangCerts.length"></th>
+            <th l10n-text="persons.licenceEditionDirective.langCertsTable.documentNumber"></th>
+            <th l10n-text="persons.licenceEditionDirective.langCertsTable.documentDateValidFrom"></th>
+            <th l10n-text="persons.licenceEditionDirective.langCertsTable.langCertType"></th>
+            <th l10n-text="persons.licenceEditionDirective.langCertsTable.langLevel"></th>
+            <th l10n-text="persons.licenceEditionDirective.langCertsTable.documentPublisher"></th>
+            <th l10n-text="persons.licenceEditionDirective.langCertsTable.valid"></th>
+          </tr>
+        </thead>
+        <tbody ng-model="model.part.includedLangCerts" ui-sortable="{ items:'tr:not(.sort-disabled)', handle: '.drag-handle' }">
+          <tr class="sort-disabled" ng-if="!model.part.includedLangCerts.length">
+            <td colspan="6" class="text-center" l10n-text="persons.licenceEditionDirective.noLangCerts"></td>
+          </tr>
+          <tr ng-repeat="langCert in includedLangCerts">
+            <td ng-if="!form.$readonly && model.part.includedLangCerts.length"><span class="fa fa-bars drag-handle"></span>
+            </td>
+            <td ng-if="!form.$readonly && model.part.includedLangCerts.length">
+              <sc-button name="deleteLangCertBtn" class="btn btn-xs btn-danger" btn-click="removeLangCert(langCert)" icon="glyphicon-remove"></sc-button>
+            </td>
+            <td>{{langCert.part.documentNumber}}</td>
+            <td>{{langCert.part.documentDateValidFrom | date:'mediumDate'}}</td>
+            <td>{{langCert.part.documentRole.name}}</td>
+            <td>{{langCert.part.langLevel.name}}</td>
+            <td>{{langCert.part.documentPublisher}}</td>
+            <td>{{langCert.part.valid.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <h5 class="form-header" l10n-text="persons.licenceEditionDirective.trainings"></h5>
   <div class="row">
     <div class="form-group col-sm-12">
@@ -168,8 +210,8 @@
       </table>
     </div>
   </div>
-  <h5 class="form-header" l10n-text="persons.licenceEditionDirective.checks"></h5>
 
+  <h5 class="form-header" l10n-text="persons.licenceEditionDirective.checks"></h5>
   <div class="row">
     <div class="form-group col-sm-12">
       <div class="table-buttons" ng-show="!form.$readonly">
@@ -221,15 +263,15 @@
             <td>{{check.part.licenceType.name}}</td>
             <td>{{check.part.valid.name}}</td>
             <td>{{check.part.personCheckRatingValue.name}}</td>
-            <td>{{check.files[0].bookPageNumber}}</td>
-            <td>{{check.files[0].pageCount}}</td>
+            <td>{{check.case.bookPageNumber}}</td>
+            <td>{{check.case.pageCount}}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <h5 class="form-header" l10n-text="persons.licenceEditionDirective.meds"></h5>
 
+  <h5 class="form-header" l10n-text="persons.licenceEditionDirective.meds"></h5>
   <div class="row">
     <div class="form-group col-sm-12">
       <div class="table-buttons" ng-show="!form.$readonly">
@@ -270,7 +312,8 @@
       </table>
     </div>
   </div>
-  <div ng-if="staffType.alias === 'flightCrew'">
+
+  <div ng-if="model.case.caseType.alias === 'flightCrew'">
     <h5 class="form-header" l10n-text="persons.licenceEditionDirective.licences"></h5>
 
     <div class="row">

@@ -1,5 +1,12 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
+    <div class="form-group col-sm-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="organizations.staffManagementDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" case-type="caseTypeId" app-id="appId" app-only ng-required="true"></gva-case-type>
+    </div>
+  </div>
+  <div class="row">
     <sc-field-group class="col-sm-6 col-md-5" text="organizations.staffManagementDirective.position" validations="{required: 'default'}" field-name="position">
       <sc-text ng-model="model.part.position" name="position" ng-required="true" ng-readonly="form.$readonly"></sc-text>
       <sc-button class="btn btn-default" btn-click="chooseEmployment()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
@@ -11,12 +18,6 @@
   <div class="row">
     <sc-field type="date" ng-model="model.part.testDate" l10n-text="organizations.staffManagementDirective.testDate" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="nomenclature" ng-model="model.part.testScore" alias="'testScores'" l10n-text="organizations.staffManagementDirective.testScore" class="col-sm-3 col-md-3"></sc-field>
-  </div>
-  <div class="row">
-    <div class="form-group col-sm-6 col-md-5">
-      <label class="control-label" l10n-text="organizations.staffManagementDirective.applications"></label>
-      <gva-applications ng-model="model.applications" set-part="'organization'" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
-    </div>
   </div>
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="organizations.staffManagementDirective.valid" class="col-sm-3 col-md-2"></sc-field>

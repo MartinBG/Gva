@@ -1,25 +1,5 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
-  <div class="row">
-    <sc-field type="text" ng-model="model.documentNumber" l10n-text="persons.personOtherDirective.documentNumber" class="col-sm-6 col-md-3"></sc-field>
-    <sc-field type="text" ng-model="model.documentPersonNumber" l10n-text="persons.personOtherDirective.documentPersonNumber" class="col-sm-6 col-md-3"></sc-field>
-  </div>
-  <div class="row">
-    <sc-field-group class="col-sm-6 col-md-4" text="persons.personOtherDirective.documentPublisher" validations="{required: 'default'}" field-name="documentPublisher">
-      <sc-text ng-model="model.documentPublisher" name="documentPublisher" ng-required="true" ng-readonly="form.$readonly"></sc-text>
-      <sc-button class="btn btn-default" btn-click="choosePublisher()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
-    </sc-field-group>
-    <sc-field type="date" ng-model="model.documentDateValidFrom" l10n-text="persons.personOtherDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="date" ng-model="model.documentDateValidTo" l10n-text="persons.personOtherDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
-  </div>
-  <div class="row">
-    <sc-field type="nomenclature" ng-model="model.documentType" alias="'documentTypes'" params="{ isIdDocument: false, staffAliases: ['flightCrew', 'to_vs', 'ovd'] }" ng-required="true" l10n-text="persons.personOtherDirective.personOtherDocumentType" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.documentRole" alias="'documentRoles'" params="{ categoryAlias: 'other', staffAliases: ['flightCrew', 'to_vs', 'ovd'] }" ng-required="true" l10n-text="persons.personOtherDirective.personOtherDocumentRole"
-    class="col-sm-6 col-md-4"></sc-field>
-  </div>
-  <div class="row">
-    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="persons.personOtherDirective.valid" class="col-sm-3 col-md-2"></sc-field>
-  </div>
-  <div class="row">
-    <sc-field type="textarea-suggestion" rows="2" ng-model="model.notes" alias="'notes'" l10n-text="persons.personOtherDirective.notes" class="col-sm-10"></sc-field>
-  </div>
+  <gva-person-common-doc name="personDocumenForm" ng-model="model"
+        sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'other', hideCaseType: hideCaseType, appId: appId }">
+  </gva-person-common-doc>
 </ng-form>

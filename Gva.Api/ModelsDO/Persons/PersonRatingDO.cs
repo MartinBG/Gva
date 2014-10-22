@@ -7,9 +7,6 @@ namespace Gva.Api.ModelsDO.Persons
     {
         public int NextIndex { get; set; }
 
-        [Required(ErrorMessage = "StaffType is required.")]
-        public NomValue StaffType { get; set; }
-
         public NomValue PersonRatingLevel { get; set; }
 
         public NomValue RatingClass { get; set; }

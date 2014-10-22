@@ -1,10 +1,17 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row" ng-if="!hideCaseType">
+    <div class="form-group col-sm-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="persons.personMedicalDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" case-type="caseTypeId" app-id="appId"></gva-case-type>
+    </div>
+  </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.documentNumberPrefix" ng-required="true" l10n-text="persons.personMedicalDirective.testimonial" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumberPrefix" ng-required="true" l10n-text="persons.personMedicalDirective.testimonial" class="col-md-2 col-sm-3"></sc-field>
     <div class="form-group labeless" style="float: left;margin:auto -7px">
       <span>—</span>
     </div>
-    <sc-field type="text" ng-model="model.documentNumber" ng-required="true" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" ng-required="true" class="col-md-2 col-sm-3"></sc-field>
     <div class="form-group labeless" style="float: left; margin: auto -7px">
       <span>—</span>
     </div>
@@ -12,20 +19,20 @@
     <div class="form-group labeless" style="float: left; margin: auto -7px">
       <span>—</span>
     </div>
-    <sc-field type="text" ng-model="model.documentNumberSuffix" class="col-md-2 col-sm-3 labeless"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumberSuffix" class="col-md-2 col-sm-3 labeless"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.medClass" alias="'medClasses'" ng-required="true" l10n-text="persons.personMedicalDirective.medClass" class="col-md-2 col-sm-3"></sc-field>
-    <sc-field type="date" ng-model="model.documentDateValidFrom" ng-required="true" l10n-text="persons.personMedicalDirective.documentDateValidFrom" class="col-md-2 col-sm-3"></sc-field>
-    <sc-field type="date" ng-model="model.documentDateValidTo" ng-required="true" l10n-text="persons.personMedicalDirective.documentDateValidTo" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.medClass" alias="'medClasses'" ng-required="true" l10n-text="persons.personMedicalDirective.medClass" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.personMedicalDirective.documentDateValidFrom" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidTo" ng-required="true" l10n-text="persons.personMedicalDirective.documentDateValidTo" class="col-md-2 col-sm-3"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.limitations" alias="'medLimitation'" multiple="multiple" l10n-text="persons.personMedicalDirective.limitations" class="col-sm-9 col-md-6"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'medLimitation'" multiple="multiple" l10n-text="persons.personMedicalDirective.limitations" class="col-sm-9 col-md-6"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.documentPublisher" alias="'medDocPublishers'" ng-required="true" l10n-text="persons.personMedicalDirective.documentPublisher" class="col-sm-9 col-md-6"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.documentPublisher" alias="'medDocPublishers'" ng-required="true" l10n-text="persons.personMedicalDirective.documentPublisher" class="col-sm-9 col-md-6"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="textarea-suggestion" rows="2" ng-model="model.notes" alias="'notes'" l10n-text="persons.personMedicalDirective.notes" class="col-sm-10"></sc-field>
+    <sc-field type="textarea-suggestion" rows="2" ng-model="model.part.notes" alias="'notes'" l10n-text="persons.personMedicalDirective.notes" class="col-sm-10"></sc-field>
   </div>
 </ng-form>

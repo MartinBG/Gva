@@ -12,7 +12,7 @@
   ) {
     var originalInspection = _.cloneDeep(organizationInspection);
     $scope.lotId = $stateParams.id;
-
+    $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.organizationInspection = organizationInspection;
 
     $scope.editMode = null;

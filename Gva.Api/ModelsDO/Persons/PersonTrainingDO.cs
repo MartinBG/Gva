@@ -6,9 +6,6 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonTrainingDO
     {
-        [Required(ErrorMessage = "StaffType is required.")]
-        public NomValue StaffType { get; set; }
-
         public string DocumentNumber { get; set; }
 
         public int? DocumentPersonNumber { get; set; }
@@ -40,8 +37,6 @@ namespace Gva.Api.ModelsDO.Persons
 
         [Required(ErrorMessage = "DocumentRole is required.")]
         public NomValue DocumentRole { get; set; }
-
-        public NomValue EngLangLevel { get; set; }
 
         [Required(ErrorMessage = "Valid is required.")]
         public NomValue Valid { get; set; }

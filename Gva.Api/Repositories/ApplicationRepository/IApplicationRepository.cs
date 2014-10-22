@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Common.Api.Repositories;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Applications;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.ApplicationRepository
@@ -39,12 +40,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
         void AddGvaCorrespondent(GvaCorrespondent gvaCorrespondent);
 
         GvaApplication GetGvaApplicationByDocId(int docId);
-
-        void AddApplicationRefs(Part part, IEnumerable<ApplicationNomDO> applications);
-
-        GvaApplication[] GetApplicationRefs(int partId);
-
-        void DeleteApplicationRefs(Part part);
 
         IEnumerable<Set> GetLotSets(
             string name = null,

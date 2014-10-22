@@ -13,6 +13,7 @@
     $scope.personDocumentMedical = personDocumentMedical;
     $scope.personLin = scModalParams.person.lin;
     $scope.lotId = scModalParams.person.id;
+    $scope.appId = scModalParams.appId;
     $scope.caseTypeId = scModalParams.caseTypeId;
 
     $scope.save = function () {
@@ -48,8 +49,7 @@
       'scModalParams',
       function (PersonDocumentMedicals, scModalParams) {
         return PersonDocumentMedicals.newMedical({
-          id: scModalParams.person.id,
-          appId: scModalParams.appId
+          id: scModalParams.person.id
         }).$promise;
       }
     ]

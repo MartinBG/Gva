@@ -5,7 +5,7 @@
     $scope,
     scFormParams,
     OrganizationRecommendations) {
-
+    $scope.isNew = scFormParams.isNew;
     $scope.recommendations = [];
 
     OrganizationRecommendations

@@ -64,7 +64,7 @@
         doc.dateValidFrom = edition.part.documentDateValidFrom;
         doc.dateValidTo = edition.part.documentDateValidTo;
         doc.licenceActionId = edition.part.licenceAction.nomValueId;
-        doc.application = edition.files.length !== 0 ? edition.files[0].applications[0] : null;
+        doc.application = edition['case'].applications[0];
       });
 
       return modalInstance.opened;

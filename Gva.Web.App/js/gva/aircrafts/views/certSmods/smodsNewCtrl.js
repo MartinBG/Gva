@@ -9,8 +9,7 @@
     AircraftCertSmods,
     aircraftCertSmod
   ) {
-    $scope.isEdit = false;
-
+    $scope.lotId = $stateParams.id;
     $scope.smod = aircraftCertSmod;
 
     $scope.save = function () {
@@ -44,7 +43,8 @@
       'AircraftCertSmods',
       function ($stateParams, AircraftCertSmods) {
         return AircraftCertSmods.newCertSmod({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

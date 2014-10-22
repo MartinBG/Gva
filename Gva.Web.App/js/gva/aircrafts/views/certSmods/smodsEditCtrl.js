@@ -11,8 +11,7 @@
     scMessage
   ) {
     var originalSmod = _.cloneDeep(aircraftCertSmod);
-
-    $scope.isEdit = true;
+    $scope.lotId = $stateParams.id;
     $scope.smod = aircraftCertSmod;
     $scope.editMode = null;
 

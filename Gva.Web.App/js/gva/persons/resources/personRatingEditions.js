@@ -6,7 +6,7 @@
     return $resource('api/persons/:id/ratings/:ind/ratingEditions/:index', {}, {
       newRatingEdition: {
         method: 'GET',
-        url: 'api/persons/:id/ratings/:ind/ratingEditions/new'
+        url: 'api/persons/:id/ratingEditions/new'
       }
     });
   }]);

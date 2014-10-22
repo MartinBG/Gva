@@ -1,4 +1,11 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row" ng-if="setPart === 'person' || setPart === 'organization'">
+    <div class="form-group col-sm-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="common.inspectionDataDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" case-type="caseTypeId" app-id="appId" app-only ng-required="true"></gva-case-type>
+    </div>
+  </div>
   <div class="row">
     <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="common.inspectionDataDirective.documentNumber" class="col-sm-3 col-md-3"></sc-field>
     <sc-field type="nomenclature" ng-model="model.part.auditPart" alias="'auditParts'" l10n-text="common.inspectionDataDirective.auditPart" class="col-sm-3 col-md-3"></sc-field>
@@ -14,12 +21,6 @@
   </div>
   <div class="row">
     <sc-field type="textarea" rows="3" ng-model="model.part.inspectionPlace" ng-required="true" l10n-text="common.inspectionDataDirective.inspectionPlace" class="col-sm-12 col-md-10"></sc-field>
-  </div>
-  <div class="row">
-    <div class="form-group col-sm-12 col-md-10">
-      <label class="control-label" l10n-text="common.inspectionDataDirective.applications"></label>
-      <gva-applications ng-model="model.applications" set-part="setPart" ng-readonly="form.$readonly"></gva-applications>
-    </div>
   </div>
   <div class="row">
     <sc-field type="date" ng-model="model.part.startDate" ng-required="true" l10n-text="common.inspectionDataDirective.startDate" class="col-sm-3 col-md-2"></sc-field>

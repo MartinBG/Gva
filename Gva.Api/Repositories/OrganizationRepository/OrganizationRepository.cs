@@ -8,16 +8,20 @@ using System.Data.Entity;
 using Gva.Api.Models.Views.Organization;
 using Common.Extensions;
 using Newtonsoft.Json.Linq;
+using Gva.Api.ModelsDO.Organizations;
+using Gva.Api.Repositories.FileRepository;
 
 namespace Gva.Api.Repositories.OrganizationRepository
 {
     public class OrganizationRepository : IOrganizationRepository
     {
         private IUnitOfWork unitOfWork;
+        private IFileRepository fileRepository;
 
-        public OrganizationRepository(IUnitOfWork unitOfWork)
+        public OrganizationRepository(IUnitOfWork unitOfWork, IFileRepository fileRepository)
         {
             this.unitOfWork = unitOfWork;
+            this.fileRepository = fileRepository;
         }
 
         public IEnumerable<GvaViewOrganization> GetOrganizations(
@@ -81,6 +85,37 @@ namespace Gva.Api.Repositories.OrganizationRepository
         public IEnumerable<GvaViewOrganizationRecommendation> GetRecommendations(int lotId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewOrganizationRecommendation>().Where(r => r.LotId == lotId);
+        }
+
+        public IEnumerable<GvaViewOrganizationApproval> GetApprovals(int lotId, int? caseTypeId)
+        {
+            var approvals = this.unitOfWork.DbContext.Set<GvaViewOrganizationApproval>()
+                .Include(a => a.ApprovalState)
+                .Include(a => a.ApprovalType)
+                .Include(a => a.Amendments)
+                .Where(r => r.LotId == lotId)
+                .ToList();
+
+            if (caseTypeId.HasValue)
+            {
+                return (from r in approvals
+                        join f in this.unitOfWork.DbContext.Set<GvaLotFile>().Include(f => f.GvaCaseType) on r.PartId equals f.LotPartId
+                        where f.GvaCaseTypeId == caseTypeId.Value
+                        select r);
+            }
+            else
+            {
+                return approvals;
+            }
+        }
+
+        public int GetLastApprovalAmendmentIndex(int lotId, int approvalPartIndex)
+        {
+            return this.unitOfWork.DbContext.Set<GvaViewOrganizationAmendment>()
+                .Where(e => e.LotId == lotId && e.ApprovalPartIndex == approvalPartIndex)
+                .OrderByDescending(a => a.Index)
+                .First()
+                .PartIndex;
         }
     }
 }

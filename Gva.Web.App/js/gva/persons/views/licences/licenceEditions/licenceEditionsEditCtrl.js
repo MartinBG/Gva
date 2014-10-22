@@ -32,8 +32,9 @@
             .save({
               id: $stateParams.id,
               ind: $stateParams.ind,
-              index: $stateParams.index
-            }, $scope.currentLicenceEdition, $scope.caseTypeId)
+              index: $stateParams.index,
+              caseTypeId: $scope.caseTypeId
+            }, $scope.currentLicenceEdition)
             .$promise
             .then(function (edition) {
               $scope.editMode = null;

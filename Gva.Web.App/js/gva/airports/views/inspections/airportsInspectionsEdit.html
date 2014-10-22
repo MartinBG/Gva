@@ -16,7 +16,10 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-common-inspection-data name="airportInspectionForm" ng-model="airportInspection" sc-form-params="{ setPart: 'airport' }"></gva-common-inspection-data>
+      <gva-common-inspection-data name="airportInspectionForm" ng-model="airportInspection" sc-form-params="{ setPart: 'airport', isNew: false, caseTypeId: caseTypeId }"></gva-common-inspection-data>
+      <gva-common-scanned-document name="airportScannedDocumentForm" ng-model="airportInspection.case"
+        sc-form-params="{ setPart: 'airport', lotId: lotId, hideFiles: true }">
+      </gva-common-scanned-document>
 
       <gva-common-inspection-details name="inspectionDetailsForm" ng-model="airportInspection.part" sc-form-params="{ setPart: 'airport' }"></gva-common-inspection-details>
     </div>

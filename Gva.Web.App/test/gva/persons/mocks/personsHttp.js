@@ -97,8 +97,7 @@
             personDocumentChecks: [],
             personFlyingExperiences: [],
             personRatings: [],
-            personLicences: [],
-            personDocumentExams: []
+            personLicences: []
           };
 
           personLots.push(newPerson);

@@ -9,12 +9,17 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-licence name="licenceForm" ng-model="newLicence.licence.part" sc-form-params="{ isNew: true, lotId: lotId }"></gva-licence>
+      <gva-licence name="licenceForm" ng-model="newLicence" sc-form-params="{ isNew: true, lotId: lotId, caseTypeId: caseTypeId }"></gva-licence>
 
-      <gva-licence-edition name="licenceEditionForm" ng-if="newLicence.licence.part.staffType" ng-model="newLicence.edition"
-        sc-form-params="{ isNew: true, lotId: lotId, caseTypeId: caseTypeId, appId: appId }"
-        sc-data-staff-type="newLicence.licence.part.staffType" sc-data-fcl="newLicence.licence.part.fcl"
-        sc-data-licence-type="newLicence.licence.part.licenceType">
+      <gva-licence-edition name="licenceEditionForm" ng-if="newEdition" ng-model="newEdition"
+        sc-form-params="{
+          isNew: true,
+          lotId: lotId,
+          caseTypeId: caseTypeId,
+          appId: appId
+        }"
+        sc-data-fcl="newLicence.part.fcl"
+        sc-data-licence-type="newLicence.part.licenceType">
       </gva-licence-edition>
     </div>
   </div>

@@ -2,19 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentOtherCtrl($scope, scModal) {
-    $scope.choosePublisher = function () {
-      var modalInstance = scModal.open('choosePublisher');
-
-      modalInstance.result.then(function (publisherName) {
-        $scope.model.documentPublisher = publisherName;
-      });
-
-      return modalInstance.opened;
-    };
+  function PersonDocumentOtherCtrl($scope, scFormParams) {
+    $scope.isNew = scFormParams.isNew;
+    $scope.caseTypeId = scFormParams.caseTypeId;
+    $scope.hideCaseType = scFormParams.hideCaseType;
+    $scope.appId = scFormParams.appId;
   }
 
-  PersonDocumentOtherCtrl.$inject = ['$scope', 'scModal'];
+  PersonDocumentOtherCtrl.$inject = ['$scope', 'scFormParams'];
 
   angular.module('gva').controller('PersonDocumentOtherCtrl', PersonDocumentOtherCtrl);
 }(angular));

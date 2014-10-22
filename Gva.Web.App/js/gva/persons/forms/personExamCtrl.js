@@ -5,13 +5,18 @@
   function PersonExamCtrl(
     $scope,
     SecurityExam,
-    l10n
+    l10n,
+    scFormParams
     ) {
-    var currFirstFile = $scope.model.files[0] || { };
+    var currFirstFile = $scope.model.cases[0] ? $scope.model.cases[0].file || {} : {};
 
     $scope.file = null;
     $scope.loadingImage = false;
     $scope.imageError = null;
+    $scope.isNew = scFormParams.isNew;
+    $scope.caseTypeId = scFormParams.caseTypeId;
+    $scope.appId = scFormParams.appId;
+    $scope.hideCaseType = scFormParams.hideCaseType;
 
     $scope.gradeExam = function () {
       return $scope.form.$validate().then(function () {
@@ -24,9 +29,9 @@
       });
     };
 
-    $scope.$watch('model.files', function (files) {
-      var firstFile = _.find(files, function (file) {
-        return !file.isDeleted && file.file;
+    $scope.$watch('model.cases', function (cases) {
+      var firstFile = _.find(cases, function (c) {
+        return !c.isDeleted && c.file;
       });
 
       if (!firstFile) {
@@ -96,7 +101,8 @@
   PersonExamCtrl.$inject = [
     '$scope',
     'SecurityExam',
-    'l10n'
+    'l10n',
+    'scFormParams'
   ];
 
   angular.module('gva').controller('PersonExamCtrl', PersonExamCtrl);

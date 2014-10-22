@@ -26,7 +26,7 @@
       }
 
       OrganizationInspections
-        .query({ id: $scope.lotId, partIndexes: $scope.model.part.inspections })
+        .getInspectionsData({ id: $scope.lotId, partIndexes: $scope.model.part.inspections })
         .$promise
         .then(function (inspections) {
           _(inspections)

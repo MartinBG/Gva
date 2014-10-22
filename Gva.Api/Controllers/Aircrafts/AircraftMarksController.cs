@@ -1,10 +1,15 @@
-﻿using System.Web.Http;
+﻿using System.Linq;
+using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -12,29 +17,57 @@ namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/aircraftCertMarks")]
     [Authorize]
-    public class AircraftMarksController : GvaApplicationPartController<AircraftCertMarkDO>
+    public class AircraftMarksController : GvaCaseTypePartController<AircraftCertMarkDO>
     {
         private INomRepository nomRepository;
+        private ICaseTypeRepository caseTypeRepository;
+        private ILotRepository lotRepository;
+        private IApplicationRepository applicationRepository;
 
         public AircraftMarksController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
+            IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
+            ICaseTypeRepository caseTypeRepository,
             UserContext userContext)
-            : base("aircraftCertMarks", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("aircraftCertMarks", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
+            this.caseTypeRepository = caseTypeRepository;
+            this.lotRepository = lotRepository;
+            this.applicationRepository = applicationRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCertMark()
+        public IHttpActionResult GetNewCertMark(int lotId, int? appId = null)
         {
-            AircraftCertMarkDO certificate = new AircraftCertMarkDO();
-            certificate.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+            AircraftCertMarkDO certificate = new AircraftCertMarkDO()
+            {
+                Valid = this.nomRepository.GetNomValue("boolean", "yes")
+            };
 
-            return Ok(new ApplicationPartVersionDO<AircraftCertMarkDO>(certificate));
+            GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
+            CaseDO caseDO = new CaseDO()
+            {
+                CaseType = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                }
+            };
+
+            if (appId.HasValue)
+            {
+                this.lotRepository.GetLotIndex(lotId);
+
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+            }
+
+            return Ok(new CaseTypePartDO<AircraftCertMarkDO>(certificate, caseDO));
         }
     }
 }

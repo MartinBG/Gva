@@ -446,13 +446,13 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetDocumentRoles(
             string term = null,
             string categoryAlias = null,
-            [FromUri] string[] staffAliases = null,
+            [FromUri] string[] caseTypeAliases = null,
             [FromUri] string[] categoryCodes = null,
             int offset = 0,
             int? limit = null)
         {
             IEnumerable<NomValue> nomValues;
-            if (categoryAlias == null && (staffAliases == null || staffAliases.Length == 0))
+            if (categoryAlias == null && (caseTypeAliases == null || caseTypeAliases.Length == 0))
             {
                 nomValues = this.nomRepository.GetNomValues("documentRoles", term: term, offset: offset, limit: limit);
             }
@@ -474,10 +474,10 @@ namespace Gva.Api.Controllers
                             isMatch &= categoryCodes.Contains(nv.TextContent.Get<string>("categoryCode"));
                         }
 
-                        if (isMatch && staffAliases != null && staffAliases.Length > 0)
+                        if (isMatch && caseTypeAliases != null && caseTypeAliases.Length > 0)
                         {
-                            string staffTypeAliasStr = nv.TextContent.Get<string>("staffTypeAlias");
-                            isMatch &= string.IsNullOrWhiteSpace(staffTypeAliasStr) || staffAliases.Contains(staffTypeAliasStr);
+                            string caseTypeAliasStr = nv.TextContent.Get<string>("caseTypeAlias");
+                            isMatch &= string.IsNullOrWhiteSpace(caseTypeAliasStr) || caseTypeAliases.Contains(caseTypeAliasStr);
                         }
 
                         return isMatch;
@@ -519,7 +519,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("licenceTypes")]
-        public IHttpActionResult GetLicenceTypes(string term = null, string staffTypeAlias = null, string fclCode = null)
+        public IHttpActionResult GetLicenceTypes(string term = null, string caseTypeAlias = null, string fclCode = null)
         {
             IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("licenceTypes", term);
             if (fclCode == "Y")
@@ -527,19 +527,19 @@ namespace Gva.Api.Controllers
                 nomValues = nomValues.Where(l => l.TextContent.Get<string>("licenceCode").Contains("FCL"));
             }
 
-            if (!string.IsNullOrEmpty(staffTypeAlias))
+            if (!string.IsNullOrEmpty(caseTypeAlias))
             {
-                nomValues = nomValues.Where(l => l.TextContent.Get<string>("staffTypeAlias") == staffTypeAlias);
+                nomValues = nomValues.Where(l => l.TextContent.Get<string>("caseTypeAlias") == caseTypeAlias);
             }
 
             return Ok(nomValues);
         }
 
         [Route("documentTypes")]
-        public IHttpActionResult GetDocumentTypes(string term = null, bool? isIdDocument = null, [FromUri] string[] staffAliases = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetDocumentTypes(string term = null, bool? isIdDocument = null, [FromUri] string[] caseAliases = null, int offset = 0, int? limit = null)
         {
             IEnumerable<NomValue> nomValues;
-            if (isIdDocument == null && (staffAliases == null || staffAliases.Length > 0))
+            if (isIdDocument == null && (caseAliases == null || caseAliases.Length > 0))
             {
                 nomValues = this.nomRepository.GetNomValues("documentTypes", term: term, offset: offset, limit: limit);
             }
@@ -556,10 +556,10 @@ namespace Gva.Api.Controllers
                             isMatch &= nv.TextContent.Get<bool>("isIdDocument") == isIdDocument;
                         }
 
-                        if (isMatch && staffAliases != null && staffAliases.Length > 0)
+                        if (isMatch && caseAliases != null && caseAliases.Length > 0)
                         {
-                            string staffTypeAliasStr = nv.TextContent.Get<string>("staffTypeAlias");
-                            isMatch &= string.IsNullOrWhiteSpace(staffTypeAliasStr) || staffAliases.Contains(staffTypeAliasStr);
+                            string caseTypeAliasStr = nv.TextContent.Get<string>("caseTypeAlias");
+                            isMatch &= string.IsNullOrWhiteSpace(caseTypeAliasStr) || caseAliases.Contains(caseTypeAliasStr);
                         }
 
                         return isMatch;
@@ -621,13 +621,13 @@ namespace Gva.Api.Controllers
         }
 
         [Route("ratingClasses")]
-        public IHttpActionResult GetRatingClasses(string staffTypeAlias, string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetRatingClasses(string caseTypeAlias, string term = null, int offset = 0, int? limit = null)
         {
             var nomValues = this.nomRepository.GetNomValues(
                 alias: "ratingClasses",
                 parentAlias: "ratingClassGroups",
-                parentProp: "staffTypeAlias",
-                parentPropValue: staffTypeAlias,
+                parentProp: "caseTypeAlias",
+                parentPropValue: caseTypeAlias,
                 term: term,
                 offset: offset,
                 limit: limit);
@@ -636,13 +636,13 @@ namespace Gva.Api.Controllers
         }
 
         [Route("authorizations")]
-        public IHttpActionResult GetAuthorizations(string staffTypeAlias, string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetAuthorizations(string caseTypeAlias, string term = null, int offset = 0, int? limit = null)
         {
             var nomValues = this.nomRepository.GetNomValues(
                 alias: "authorizations",
                 parentAlias: "authorizationGroups",
-                parentProp: "staffTypeAlias",
-                parentPropValue: staffTypeAlias,
+                parentProp: "caseTypeAlias",
+                parentPropValue: caseTypeAlias,
                 term: term,
                 offset: offset,
                 limit: limit);
@@ -688,6 +688,23 @@ namespace Gva.Api.Controllers
             }
 
             return Ok(nomValues);
+        }
+
+        [Route("langLevels")]
+        public IHttpActionResult GetLangLevels(string roleAlias = null, string term = null, int offset = 0, int? limit = null)
+        {
+            var langLevels = this.nomRepository.GetNomValues(
+                alias: "langLevels",
+                term: term,
+                offset: offset,
+                limit: limit);
+
+            if (!string.IsNullOrEmpty(roleAlias))
+            {
+                langLevels = langLevels.Where(l => l.TextContent.GetItems<string>("roleAliases").Contains(roleAlias));
+            }
+
+            return Ok(langLevels.OrderBy(l => l.TextContent.Get<int?>("seqNumber")));
         }
 
         [Route("appStages")]

@@ -12,6 +12,11 @@
       newInspection: {
         method: 'GET',
         url: 'api/organizations/:id/organizationInspections/new'
+      },
+      getInspectionsData: {
+        method: 'GET',
+        url: 'api/organizations/:id/organizationInspections/data',
+        isArray: true
       }
     });
   }]);

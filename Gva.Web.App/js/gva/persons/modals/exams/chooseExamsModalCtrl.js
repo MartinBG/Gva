@@ -41,10 +41,10 @@
 
   ChooseExamsModalCtrl.$resolve = {
     exams: [
-      'PersonDocumentExams',
+      'PersonDocumentTrainings',
       'scModalParams',
-      function (PersonDocumentExams, scModalParams) {
-        return PersonDocumentExams.query({ id: scModalParams.lotId }).$promise;
+      function (PersonDocumentTrainings, scModalParams) {
+        return PersonDocumentTrainings.getExams({ id: scModalParams.lotId }).$promise;
       }
     ]
   };

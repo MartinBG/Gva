@@ -12,7 +12,6 @@
   ) {
     var originalRegistration = _.cloneDeep(aircraftCertRegistration);
 
-    $scope.isEdit = true;
     $scope.reg = aircraftCertRegistration;
     $scope.editMode = null;
     $scope.lotId = $stateParams.id;

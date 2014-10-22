@@ -3,7 +3,7 @@ using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -11,15 +11,15 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personFlyingExperiences")]
     [Authorize]
-    public class PersonFlyingExperiencesController : GvaApplicationPartController<PersonFlyingExperienceDO>
+    public class PersonFlyingExperiencesController : GvaCaseTypePartController<PersonFlyingExperienceDO>
     {
         public PersonFlyingExperiencesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IApplicationRepository applicationRepository,
+            IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
-            : base("personFlyingExperiences", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("personFlyingExperiences", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
         }
 
@@ -28,7 +28,7 @@ namespace Gva.Api.Controllers.Persons
         {
             PersonFlyingExperienceDO newFlyingExperience = new PersonFlyingExperienceDO();
 
-            return Ok(new ApplicationPartVersionDO<PersonFlyingExperienceDO>(newFlyingExperience));
+            return Ok(new CaseTypePartDO<PersonFlyingExperienceDO>(newFlyingExperience));
         }
     }
 }

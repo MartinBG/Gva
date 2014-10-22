@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
@@ -14,83 +15,59 @@ namespace Gva.Api.Projections.Person
 {
     public class PersonLicenceEditionProjection : Projection<GvaViewPersonLicenceEdition>
     {
-        private INomRepository nomRepository;
-        private IFileRepository fileRepository;
-
         public PersonLicenceEditionProjection(
-            IUnitOfWork unitOfWork,
-            INomRepository nomRepository,
-            IFileRepository fileRepository)
+            IUnitOfWork unitOfWork)
             : base(unitOfWork, "Person")
         {
-            this.nomRepository = nomRepository;
-            this.fileRepository = fileRepository;
         }
 
         public override IEnumerable<GvaViewPersonLicenceEdition> Execute(PartCollection parts)
         {
-            var licences = parts.GetAll<PersonLicenceDO>("licences");
-            var editions = parts.GetAll<PersonLicenceEditionDO>("licenceEditions");
+            List<GvaViewPersonLicenceEdition> editions = new List<GvaViewPersonLicenceEdition>();
+            var groupedEditions = parts.GetAll<PersonLicenceEditionDO>("licenceEditions")
+                .GroupBy(e => e.Content.LicencePartIndex)
+                .OrderBy(g => g.Key);
 
-            List<GvaViewPersonLicenceEdition> editionsView = new List<GvaViewPersonLicenceEdition>();
-            foreach (var licence in licences)
+            foreach(var editionsGroup in groupedEditions)
             {
-                var licenceEditions = editions.Where(e => e.Content.LicencePartIndex == licence.Part.Index).ToArray();
-                var firstEdition = licenceEditions.Where(ed => ed.Content.Index == licenceEditions.Min(e => e.Content.Index)).Single();
-                var lastEdition = licenceEditions.Where(ed => ed.Content.Index == licenceEditions.Max(e => e.Content.Index)).Single();
-                var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Content.LicenceType.NomValueId);
+                var orderedEditions = editionsGroup.OrderByDescending(e => e.Content.Index);
 
-                foreach (var edition in licenceEditions)
+                DateTime firstDocDateValidFrom = orderedEditions.Last().Content.DocumentDateValidFrom.Value;
+                int maxIndex = orderedEditions.First().Content.Index;
+
+                foreach (var edition in editionsGroup)
                 {
-                    editionsView.Add(this.Create(licence, edition, firstEdition.Content, lastEdition.Content, licenceType));
+                    editions.Add(this.Create(edition, firstDocDateValidFrom, edition.Content.Index == maxIndex));
                 }
             }
 
-            return editionsView;
+            return editions;
         }
 
-        private GvaViewPersonLicenceEdition Create(
-            PartVersion<PersonLicenceDO> personLicence,
-            PartVersion<PersonLicenceEditionDO> edition,
-            PersonLicenceEditionDO firstEdition,
-            PersonLicenceEditionDO lastEdition,
-            NomValue licenceType)
+        private GvaViewPersonLicenceEdition Create(PartVersion<PersonLicenceEditionDO> edition, DateTime firstDocDateValidFrom, bool isLastEdition)
         {
             GvaViewPersonLicenceEdition licenceEdition = new GvaViewPersonLicenceEdition();
 
-            licenceEdition.LotId = personLicence.Part.Lot.LotId;
-            licenceEdition.LicencePartId = personLicence.Part.PartId;
-            licenceEdition.EditionPartId = edition.Part.PartId;
-            licenceEdition.EditionIndex = edition.Content.Index.Value;
-            licenceEdition.LicenceTypeId = personLicence.Content.LicenceType.NomValueId;
+            licenceEdition.LotId = edition.Part.Lot.LotId;
+            licenceEdition.PartId = edition.Part.PartId;
+            licenceEdition.PartIndex = edition.Part.Index;
+            licenceEdition.LicencePartIndex = edition.Content.LicencePartIndex.Value;
+            licenceEdition.Index = edition.Content.Index;
             licenceEdition.StampNumber = edition.Content.StampNumber;
             licenceEdition.DateValidFrom = edition.Content.DocumentDateValidFrom.Value;
             licenceEdition.DateValidTo = edition.Content.DocumentDateValidTo;
             licenceEdition.LicenceActionId = edition.Content.LicenceAction.NomValueId;
-            licenceEdition.LicenceNumber = personLicence.Content.LicenceNumber;
-            licenceEdition.IsLastEdition = lastEdition.Index == edition.Content.Index;
-            licenceEdition.LicencePartIndex = personLicence.Part.Index;
-            licenceEdition.EditionPartIndex = edition.Part.Index;
-            licenceEdition.FirstDocDateValidFrom = firstEdition.DocumentDateValidFrom.Value;
-            licenceEdition.Valid = personLicence.Content.Valid != null && personLicence.Content.Valid.Code == "Y";
-            licenceEdition.LicenceTypeCode = licenceType.TextContent.Get<string>("licenceCode");
-            licenceEdition.LicenceTypeCaCode = licenceType.TextContent.Get<string>("codeCA");
-            licenceEdition.PublisherCode = personLicence.Content.Publisher.Code;
-            licenceEdition.Notes = lastEdition.Notes;
+            licenceEdition.Notes = edition.Content.Notes;
+            licenceEdition.FirstDocDateValidFrom = firstDocDateValidFrom;
+            licenceEdition.IsLastEdition = isLastEdition;
 
-            if (lastEdition.Inspector != null)
+            if (edition.Content.Inspector != null)
             {
-                licenceEdition.Inspector = lastEdition.Inspector.Name;
+                licenceEdition.Inspector = edition.Content.Inspector.Name;
             }
-            if (lastEdition.Limitations != null)
+            if (edition.Content.Limitations != null)
             {
-                licenceEdition.Limitations = string.Join(", ", lastEdition.Limitations.Select(l => l.Name));
-            }
-            if (personLicence.Content.Statuses != null)
-            {
-                PersonLicenceStatusDO lastStatus = personLicence.Content.Statuses.Last();
-
-                licenceEdition.StatusChange = string.Format("{0:d} {1}", lastStatus.ChangeDate, lastStatus.ChangeReason.Name);
+                licenceEdition.Limitations = string.Join(", ", edition.Content.Limitations.Select(l => l.Name));
             }
 
             return licenceEdition;

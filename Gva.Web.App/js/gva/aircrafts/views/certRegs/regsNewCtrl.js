@@ -9,7 +9,6 @@
     AircraftCertRegistrations,
     aircraftCertRegistration
   ) {
-    $scope.isEdit = false;
     $scope.reg = aircraftCertRegistration;
     $scope.lotId = $stateParams.id;
 

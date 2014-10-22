@@ -1,18 +1,25 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
-  <div class="row">
-    <sc-field type="text" ng-model="model.documentNumber" ng-required="true" l10n-text="persons.personDocumentEducationDirective.documentNumber" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="date" ng-model="model.completionDate" ng-required="true" l10n-text="persons.personDocumentEducationDirective.completionDate" class="col-sm-3 col-md-2"></sc-field>
+  <div class="row" ng-if="!hideCaseType">
+    <div class="form-group col-sm-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="persons.personDocumentEducationDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" init="isNew" ng-disabled="!isNew" case-type="caseTypeId" app-id="appId" ng-required="true"></gva-case-type>
+    </div>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.graduation" alias="'graduations'" ng-required="true" l10n-text="persons.personDocumentEducationDirective.graduation" class="col-sm-7 col-md-6 col-lg-5"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" ng-required="true" l10n-text="persons.personDocumentEducationDirective.documentNumber" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.completionDate" ng-required="true" l10n-text="persons.personDocumentEducationDirective.completionDate" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.school" alias="'schools'" params="{graduationId: model.graduation.nomValueId}" ng-required="true" l10n-text="persons.personDocumentEducationDirective.school" class="col-sm-7 col-md-6 col-lg-5"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.graduation" alias="'graduations'" ng-required="true" l10n-text="persons.personDocumentEducationDirective.graduation" class="col-sm-7 col-md-6 col-lg-5"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.speciality" ng-required="true" l10n-text="persons.personDocumentEducationDirective.speciality" class="col-sm-7 col-md-6 col-lg-5"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.school" alias="'schools'" params="{graduationId: model.part.graduation.nomValueId}" ng-required="true" l10n-text="persons.personDocumentEducationDirective.school" class="col-sm-7 col-md-6 col-lg-5"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="textarea-suggestion" rows="2" ng-model="model.notes" alias="'notes'" l10n-text="persons.personDocumentEducationDirective.notes" class="col-sm-10"></sc-field>
+    <sc-field type="text" ng-model="model.part.speciality" ng-required="true" l10n-text="persons.personDocumentEducationDirective.speciality" class="col-sm-7 col-md-6 col-lg-5"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="textarea-suggestion" rows="2" ng-model="model.part.notes" alias="'notes'" l10n-text="persons.personDocumentEducationDirective.notes" class="col-sm-10"></sc-field>
   </div>
 </ng-form>

@@ -12,6 +12,7 @@
     var originalRating = _.cloneDeep(rating);
     $scope.rating = rating;
     $scope.lotId = $stateParams.id;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.edit = function () {
       $scope.editRatingMode = 'edit';

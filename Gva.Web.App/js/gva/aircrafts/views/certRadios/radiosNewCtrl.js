@@ -9,8 +9,7 @@
     AircraftCertRadios,
     aircraftCertRadio
   ) {
-    $scope.isEdit = false;
-
+    $scope.lotId = $stateParams.id;
     $scope.radio = aircraftCertRadio;
 
     $scope.save = function () {
@@ -45,7 +44,8 @@
       'AircraftCertRadios',
       function ($stateParams, AircraftCertRadios) {
         return AircraftCertRadios.newCertRadio({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

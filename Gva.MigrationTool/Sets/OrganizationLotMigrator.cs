@@ -12,6 +12,7 @@ using Common.Json;
 using Common.Tests;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Organizations;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
@@ -91,7 +92,7 @@ namespace Gva.MigrationTool.Sets
                         Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
                         {
                             var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
-                            fileRepository.AddFileReferences(pv.Part, content.GetItems<FileDO>("files"));
+                            fileRepository.AddFileReferences(pv.Part, content.GetItems<CaseDO>("files"));
                             return pv;
                         };
 
@@ -147,15 +148,14 @@ namespace Gva.MigrationTool.Sets
                         var organizationInspections = this.getOrganizationInspections(organizationId, nomApplications, getPersonByApexId, blobIdsToFileKeys, noms);
                         foreach (var organizationInspection in organizationInspections)
                         {
-                            var pv = lot.CreatePart("organizationInspections/*", organizationInspection.Get<JObject>("part"), context);
-                            applicationRepository.AddApplicationRefs(pv.Part, organizationInspection.GetItems<ApplicationNomDO>("applications"));
+                            var pv = addPartWithFiles("organizationInspections/*", organizationInspection);
                             inspectionPartIndexes.Add(organizationInspection.Get<int>("part.__oldId"), pv.Part.Index);
                         }
 
                         var organizationAddresses = this.getOrganizationAddress(organizationId, noms);
                         foreach (var organizationAddress in organizationAddresses)
                         {
-                            lot.CreatePart("organizationAddresses/*", organizationAddress, context);
+                            addPartWithFiles("organizationAddresses/*", organizationAddress);
                         }
 
                         Dictionary<int, PartVersion> organizationDocuments = new Dictionary<int, PartVersion>();
@@ -167,34 +167,47 @@ namespace Gva.MigrationTool.Sets
                             organizationDocuments.Add(organizationDocumentOther["part"]["__oldId"].Value<int>(), pv);
                         }
 
-                        var organizationApprovals = this.getOrganizationApproval(organizationId, noms, organizationDocuments, getPersonByApexId, nomApplications);
+                        var organizationApprovalAmendments = this.getOrganizationApprovalAmendments(organizationId, noms, organizationDocuments, getPersonByApexId, nomApplications, isApprovedOrg);
+                        var organizationApprovals = this.getOrganizationApproval(organizationId, noms, isApprovedOrg);
                         foreach (var organizationApproval in organizationApprovals)
                         {
-                            lot.CreatePart("organizationApprovals/*", organizationApproval, context);
+                            var approvalPartVersion = addPartWithFiles("approvals/*", organizationApproval);
+
+                            int nextIndex = 0;
+
+                            foreach (var amendment in organizationApprovalAmendments[organizationApproval.Get<int>("part.__oldId")])
+                            {
+                                var amendmentPart = amendment["part"] as JObject;
+                                amendmentPart.Add("approvalPartIndex", approvalPartVersion.Part.Index);
+                                amendmentPart.Add("index", nextIndex);
+                                nextIndex++;
+
+                                var amendmentPartVersion = addPartWithFiles("approvalAmendments/*", amendment);
+                            }
+
                         }
 
                         var organizationRecommendations = this.getOrganizationRecommendation(organizationId, getPersonByApexId, nomApplications, noms, inspectionPartIndexes);
                         foreach (var organizationRecommendation in organizationRecommendations)
                         {
-                            lot.CreatePart("organizationRecommendations/*", organizationRecommendation, context);
+                            addPartWithFiles("organizationRecommendations/*", organizationRecommendation);
                         }
 
-                        var organizationManagementStaffs = this.getOrganizationManagementStaff(organizationId, noms, getPersonByApexId);
+                        var organizationManagementStaffs = this.getOrganizationManagementStaff(organizationId, noms, getPersonByApexId, isApprovedOrg);
                         foreach (var organizationManagementStaff in organizationManagementStaffs)
                         {
-                            lot.CreatePart("organizationStaffManagement/*", organizationManagementStaff, context);
+                            addPartWithFiles("organizationStaffManagement/*", organizationManagementStaff);
                         }
 
                         var organizationStaffExaminers = this.getOrganizationStaffExaminers(organizationId, noms, getPersonByApexId);
                         foreach (var organizationStaffExaminer in organizationStaffExaminers)
                         {
-                            if (organizationStaffExaminer.Get<int?>("person.nomValueId") == null)
+                            if (organizationStaffExaminer.Get<int?>("part.person.nomValueId") == null)
                             {
-                                Console.WriteLine("CANNOT FIND PERSON FOR organizationStaffExaminer WITH oldId " + organizationStaffExaminer.Get<int>("__oldId"));
+                                Console.WriteLine("CANNOT FIND PERSON FOR organizationStaffExaminer WITH oldId " + organizationStaffExaminer.Get<int>("part.__oldId"));
                                 continue;
                             }
-
-                            lot.CreatePart("organizationStaffExaminers/*", organizationStaffExaminer, context);
+                            addPartWithFiles("organizationStaffExaminers/*", organizationStaffExaminer);
                         }
 
                         try
@@ -329,7 +342,7 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
                                     new JProperty("caseType", isApprovedOrg ?
                                         Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("approvedOrg")) :
-                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("org"))),
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("others"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
@@ -488,11 +501,9 @@ namespace Gva.MigrationTool.Sets
                 @"SELECT * FROM CAA_DOC.AUDITS WHERE {0}",
                 new DbClause("ID_FIRM = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        part =
-                            new
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
                             {
                                 __oldId = r.Field<int>("ID"),
                                 __migrTable = "AUDITS",
@@ -510,40 +521,61 @@ namespace Gva.MigrationTool.Sets
                                 controlCard = controlCards[r.Field<int>("ID")],
                                 inspectionDetails = inspectionDetails[r.Field<int>("ID")],
                                 disparities = disparities[r.Field<int>("ID")],
-                                examiners = examiners[r.Field<int>("ID")],
-
-                                caseType = noms["organizationCaseTypes"].ByAlias("approvedOrg")
-                            },
-                        applications = (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
-                            new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
-                            new object[0]
-                    }))
-                .ToList();
+                                examiners = examiners[r.Field<int>("ID")]
+                            })),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("approvedOrg"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", 
+                                        (r.Field<decimal?>("ID_REQUEST") != null && nomApplications.ContainsKey(r.Field<int>("ID_REQUEST"))) ?
+                                        new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
+                                        new object[0]))))))
+                        .ToList();
         }
 
         private IList<JObject> getOrganizationAddress(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms)
         {
+            JArray files = new JArray(){
+                noms["organizationCaseTypes"].Values.Select(c => 
+                    Utils.ToJObject(new
+                    {
+                        isAdded = true,
+                        file = (object)null,
+                        caseType = Utils.ToJObject(c),
+                        bookPageNumber = (string)null,
+                        pageCount = (int?)null,
+                        applications =  new JArray()
+                    }))
+            };
+
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.FIRM_ADDRESS WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and FIRM_ID = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "FIRM_ADDRESS",
-                        addressType = noms["addressTypes"].ByOldId(r.Field<decimal?>("ADDRESS_TYPE_ID").ToString()),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        settlement = noms["cities"].ByOldId(r.Field<decimal?>("TOWN_VILLAGE_ID").ToString()),
-                        address = r.Field<string>("ADDRESS"),
-                        addressAlt = r.Field<string>("ADDRESS_TRANS"),
-                        phone = r.Field<string>("PHONES"),
-                        fax = r.Field<string>("FAXES"),
-                        postalCode = r.Field<string>("POSTAL_CODE"),
-                        contactPerson = r.Field<string>("CONTACT_PERSON"),
-                        email = r.Field<string>("E_MAIL")
-                    }))
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "FIRM_ADDRESS",
+                            addressType = noms["addressTypes"].ByOldId(r.Field<decimal?>("ADDRESS_TYPE_ID").ToString()),
+                            valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
+                            settlement = noms["cities"].ByOldId(r.Field<decimal?>("TOWN_VILLAGE_ID").ToString()),
+                            address = r.Field<string>("ADDRESS"),
+                            addressAlt = r.Field<string>("ADDRESS_TRANS"),
+                            phone = r.Field<string>("PHONES"),
+                            fax = r.Field<string>("FAXES"),
+                            postalCode = r.Field<string>("POSTAL_CODE"),
+                            contactPerson = r.Field<string>("CONTACT_PERSON"),
+                            email = r.Field<string>("E_MAIL")
+                        })),
+                        new JProperty("files", files)))
                 .ToList();
         }
 
@@ -637,20 +669,19 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("file", Utils.Pluck(file, new string[] { "key", "name", "mimeType" })),
                                     new JProperty("caseType", isApprovedOrg ?
                                         Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("approvedOrg")) :
-                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("org"))),
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("others"))),
                                     new JProperty("bookPageNumber", bookPageNumber),
                                     new JProperty("pageCount", pageCount),
                                     new JProperty("applications", new JArray()))))))
                     .ToList();
         }
-
-        //TODO
-        private IList<JObject> getOrganizationApproval(
-            int organizationId, Dictionary<string,
-            Dictionary<string, NomValue>> noms,
+        private IDictionary<int, IEnumerable<JObject>> getOrganizationApprovalAmendments(
+            int organizationId, 
+            Dictionary<string,Dictionary<string, NomValue>> noms,
             Dictionary<int, PartVersion> orgDocuments,
             Func<int?, JObject> getPersonByApexId,
-            Dictionary<int, JObject> nomApplications)
+            Dictionary<int, JObject> nomApplications,
+            bool isApprovedOrg)
         {
 
             var limMG = this.oracleConn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.SCH_MG_APPROVAL")
@@ -700,8 +731,19 @@ namespace Gva.MigrationTool.Sets
                         inspector = getPersonByApexId((int?)r.Field<decimal?>("EXAMINER_ID")),
                         approvalDate = r.Field<DateTime?>("APPROWAL_DATE"),
                         linkedLim = r.Field<long?>("ID_SCH_145") == null ?
-                                r.Field<long?>("ID_SCH_147") == null ? r.Field<long?>("ID_SCH_MG") == null ? null : limMG[r.Field<long?>("ID_SCH_MG")] : lim147[r.Field<long?>("ID_SCH_147")] :
-                                lim145[r.Field<long?>("ID_SCH_145")],
+                                r.Field<long?>("ID_SCH_147") == null ? r.Field<long?>("ID_SCH_MG") == null ? null : 
+                                new {
+                                    Id = r.Field<long?>("ID_SCH_MG"),
+                                    Text = limMG[r.Field<long?>("ID_SCH_MG")]
+                                } :
+                                new {
+                                    Id = r.Field<long?>("ID_SCH_147"),
+                                    Text = limMG[r.Field<long?>("ID_SCH_147")]
+                                } :
+                                new {
+                                    Id = r.Field<long?>("ID_SCH_145"),
+                                    Text = limMG[r.Field<long?>("ID_SCH_145")]
+                                },
                         partIndex = orgDocuments.ContainsKey(r.Field<int>("PERSON_DOCUMENT_ID")) ?
                             (int?)orgDocuments[r.Field<int>("PERSON_DOCUMENT_ID")].Part.Index :
                             null,
@@ -822,7 +864,7 @@ namespace Gva.MigrationTool.Sets
                         n.sortOrder,
                     }).ToArray());
 
-            var amendmentsResults = this.oracleConn.CreateStoreCommand(
+            return this.oracleConn.CreateStoreCommand(
                 @"SELECT APS.ID, APS.APPROVAL_TYPE, APS.REFERENCE, APS.ISSUE_DATE, APS.CHANGE_NUM, APS.ID_REQUEST, AP.ID AS AP_ID
                     FROM CAA_DOC.APPROVAL_SCHEDULE APS
                     JOIN CAA_DOC.APPROVAL AP
@@ -851,40 +893,68 @@ namespace Gva.MigrationTool.Sets
                     })
                 .GroupBy(g => g.__approvalId)
                 .ToDictionary(a => a.Key, a => a.Select(n =>
-                    new
-                    {
-                        n.__oldId,
-                        n.__migrTable,
-                        n.approvalType,
-                        n.documentNumber,
-                        n.documentDateIssue,
-                        n.changeNum,
-                        n.lims147,
-                        n.lims145,
-                        n.limsMG,
-                        n.includedDocuments,
-                        n.applications
-                    }).ToArray());
+                    new JObject(
+                        new JProperty("part",
+                         Utils.ToJObject( new {
+                            n.__oldId,
+                            n.__migrTable,
+                            n.approvalType,
+                            n.documentNumber,
+                            n.documentDateIssue,
+                            n.changeNum,
+                            n.lims147,
+                            n.lims145,
+                            n.limsMG,
+                            n.includedDocuments,
+                        })),
+                        new JProperty("files",
+                            new JArray(
+                              new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", isApprovedOrg ?
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("approvedOrg")) :
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("others"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", n.applications)))))));
+        }
 
+        //TODO
+        private IList<JObject> getOrganizationApproval(
+            int organizationId, 
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            bool isApprovedOrg)
+        {
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.APPROVAL WHERE {0} {1}",
                 new DbClause("1=1"),
                 new DbClause("and ID_FIRM = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "APPROVAL",
-                        approvalType = noms["approvalTypes"].ByCode(r.Field<string>("APPROVAL_TYPE")),
-                        documentNumber = r.Field<string>("REFERENCE"),
-                        documentDateIssue = r.Field<DateTime?>("ISSUE_DATE"),
-                        approvalState = noms["approvalStates"].ByCode(r.Field<string>("STATE")),
-                        approvalStateDate = r.Field<DateTime?>("STATE_DATE"),
-                        approvalStateNote = r.Field<string>("STATE_REMARKS"),
-                        amendments = amendmentsResults.ContainsKey(r.Field<int>("ID")) ? amendmentsResults[r.Field<int>("ID")] : null
-
-                    }))
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "APPROVAL",
+                            approvalType = noms["approvalTypes"].ByCode(r.Field<string>("APPROVAL_TYPE")),
+                            documentNumber = r.Field<string>("REFERENCE"),
+                            documentDateIssue = r.Field<DateTime?>("ISSUE_DATE"),
+                            approvalState = noms["approvalStates"].ByCode(r.Field<string>("STATE")),
+                            approvalStateDate = r.Field<DateTime?>("STATE_DATE"),
+                            approvalStateNote = r.Field<string>("STATE_REMARKS"),
+                        })),
+                        new JProperty("files",
+                            new JArray(
+                              new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", isApprovedOrg ?
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("approvedOrg")) :
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("others"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray()))))))
                 .ToList();
         }
 
@@ -895,6 +965,19 @@ namespace Gva.MigrationTool.Sets
             Dictionary<string, Dictionary<string, NomValue>> noms,
             Dictionary<int, int> inspectionPartIndexes)
         {
+            JArray files = new JArray(){
+                noms["organizationCaseTypes"].Values.Select(c => 
+                    Utils.ToJObject(new
+                    {
+                        isAdded = true,
+                        file = (object)null,
+                        caseType = Utils.ToJObject(c),
+                        bookPageNumber = (string)null,
+                        pageCount = (int?)null,
+                        applications =  new JArray()
+                    }))
+            };
+
             var disparities = this.oracleConn.CreateStoreCommand(
                 @"SELECT R.ID REC_ID,
                         RC.ID_SECTION SECTION_DETAIL_ID,
@@ -1059,64 +1142,85 @@ namespace Gva.MigrationTool.Sets
                 @"SELECT * FROM CAA_DOC.RECOMMENDATION WHERE {0}",
                 new DbClause("ID_FIRM = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "RECOMMENDATION",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "RECOMMENDATION",
 
-                        auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
+                            auditPart = noms["auditParts"].ByOldId(r.Field<int>("ID_PART").ToString()),
 
-                        finished1Date = r.Field<DateTime?>("DATE_FINISHED_P1"),
-                        town1 = r.Field<string>("TOWN_P1"),
-                        finished2Date = r.Field<DateTime?>("DATE_FINISHED_P2"),
-                        town2 = r.Field<string>("TOWN_P2"),
-                        finished3Date = r.Field<DateTime?>("DATE_FINISHED_P3"),
-                        town3 = r.Field<string>("TOWN_P3"),
-                        finished4Date = r.Field<DateTime?>("DATE_FINISHED_P4"),
-                        town4 = r.Field<string>("TOWN_P4"),
-                        finished5Date = r.Field<DateTime?>("DATE_FINISHED_P5"),
-                        town5 = r.Field<string>("TOWN_P5"),
-                        part1Examiners = examiners[r.Field<int>("ID")].ContainsKey("1") ? examiners[r.Field<int>("ID")]["1"] : new object[0],
-                        part2Examiners = examiners[r.Field<int>("ID")].ContainsKey("2") ? examiners[r.Field<int>("ID")]["2"] : new object[0],
-                        part3Examiners = examiners[r.Field<int>("ID")].ContainsKey("3") ? examiners[r.Field<int>("ID")]["3"] : new object[0],
-                        part4Examiners = examiners[r.Field<int>("ID")].ContainsKey("4") ? examiners[r.Field<int>("ID")]["4"] : new object[0],
-                        part5Examiners = examiners[r.Field<int>("ID")].ContainsKey("5") ? examiners[r.Field<int>("ID")]["5"] : new object[0],
+                            finished1Date = r.Field<DateTime?>("DATE_FINISHED_P1"),
+                            town1 = r.Field<string>("TOWN_P1"),
+                            finished2Date = r.Field<DateTime?>("DATE_FINISHED_P2"),
+                            town2 = r.Field<string>("TOWN_P2"),
+                            finished3Date = r.Field<DateTime?>("DATE_FINISHED_P3"),
+                            town3 = r.Field<string>("TOWN_P3"),
+                            finished4Date = r.Field<DateTime?>("DATE_FINISHED_P4"),
+                            town4 = r.Field<string>("TOWN_P4"),
+                            finished5Date = r.Field<DateTime?>("DATE_FINISHED_P5"),
+                            town5 = r.Field<string>("TOWN_P5"),
+                            part1Examiners = examiners[r.Field<int>("ID")].ContainsKey("1") ? examiners[r.Field<int>("ID")]["1"] : new object[0],
+                            part2Examiners = examiners[r.Field<int>("ID")].ContainsKey("2") ? examiners[r.Field<int>("ID")]["2"] : new object[0],
+                            part3Examiners = examiners[r.Field<int>("ID")].ContainsKey("3") ? examiners[r.Field<int>("ID")]["3"] : new object[0],
+                            part4Examiners = examiners[r.Field<int>("ID")].ContainsKey("4") ? examiners[r.Field<int>("ID")]["4"] : new object[0],
+                            part5Examiners = examiners[r.Field<int>("ID")].ContainsKey("5") ? examiners[r.Field<int>("ID")]["5"] : new object[0],
 
-                        formDate = r.Field<DateTime?>("FORM_DATE"),
-                        formText = r.Field<string>("FORM_TEXT"),
-                        interviewedStaff = r.Field<string>("INTERVIEWED_STAFF"),
-                        inspectionFromDate = r.Field<DateTime?>("NADZOR_FROM"),
-                        inspectionToDate = r.Field<DateTime?>("NADZOR_TO"),
-                        documentDescription = r.Field<string>("DESCRIPTION_DOC"),
-                        recommendation = r.Field<string>("RECOMMENDATION"),
+                            formDate = r.Field<DateTime?>("FORM_DATE"),
+                            formText = r.Field<string>("FORM_TEXT"),
+                            interviewedStaff = r.Field<string>("INTERVIEWED_STAFF"),
+                            inspectionFromDate = r.Field<DateTime?>("NADZOR_FROM"),
+                            inspectionToDate = r.Field<DateTime?>("NADZOR_TO"),
+                            documentDescription = r.Field<string>("DESCRIPTION_DOC"),
+                            recommendation = r.Field<string>("RECOMMENDATION"),
 
-                        inspections = inspections[r.Field<int>("ID")],
-                        recommendationDetails = recommendationDetails[r.Field<int>("ID")],
-                        disparities = disparities[r.Field<int>("ID")]
-                    }))
+                            inspections = inspections[r.Field<int>("ID")],
+                            recommendationDetails = recommendationDetails[r.Field<int>("ID")],
+                            disparities = disparities[r.Field<int>("ID")]
+                        })),
+                        new JProperty("files", files)))
                 .ToList();
         }
 
-        private IList<JObject> getOrganizationManagementStaff(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPersonByApexId)
+        private IList<JObject> getOrganizationManagementStaff(
+            int organizationId,
+            Dictionary<string,
+            Dictionary<string,
+            NomValue>> noms,
+            Func<int?,
+            JObject> getPersonByApexId,
+            bool isApprovedOrg)
         {
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT * FROM CAA_DOC.MANAGEMENT_STAFF WHERE REQUEST_ID IN (SELECT ID FROM CAA_DOC.REQUEST WHERE {0} {1})",
                 new DbClause("1=1"),
                 new DbClause("and APPLICANT_FIRM_ID = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "MANAGEMENT_STAFF",
-                        position = r.Field<string>("POSITION"),
-                        person = getPersonByApexId((int?)r.Field<decimal?>("PERSON_ID")),
-                        testDate = r.Field<DateTime?>("TEST_DATE"),
-                        testScore = noms["testScores"].ByCode(r.Field<string>("TEST_SCORE")),
-                        number = r.Field<decimal?>("REQUEST_ID"),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
-                    }))
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "MANAGEMENT_STAFF",
+                            position = r.Field<string>("POSITION"),
+                            person = getPersonByApexId((int?)r.Field<decimal?>("PERSON_ID")),
+                            testDate = r.Field<DateTime?>("TEST_DATE"),
+                            testScore = noms["testScores"].ByCode(r.Field<string>("TEST_SCORE")),
+                            number = r.Field<decimal?>("REQUEST_ID"),
+                            valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
+                        })),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", isApprovedOrg ?
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("approvedOrg")) :
+                                        Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("others"))), 
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray()))))))
                 .ToList();
         }
 
@@ -1165,6 +1269,19 @@ namespace Gva.MigrationTool.Sets
                     }))
                     .ToArray());
 
+            JArray files = new JArray(){
+                noms["organizationCaseTypes"].Values.Select(c => 
+                    Utils.ToJObject(new
+                    {
+                        isAdded = true,
+                        file = (object)null,
+                        caseType = Utils.ToJObject(c),
+                        bookPageNumber = (string)null,
+                        pageCount = (int?)null,
+                        applications =  new JArray()
+                    }))
+            };
+
             return this.oracleConn.CreateStoreCommand(
                 @"SELECT ID,
                         EXAMINER_CODE,
@@ -1177,20 +1294,22 @@ namespace Gva.MigrationTool.Sets
                     WHERE CAA_ID IS NULL {0}",
                 new DbClause("AND ID_FIRM = {0}", organizationId)
                 )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "EXAMINER",
+                .Materialize(r => new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(new
+                        {
+                            __oldId = r.Field<int>("ID"),
+                            __migrTable = "EXAMINER",
 
-                        examinerCode = r.Field<string>("EXAMINER_CODE"),
-                        stampNum = r.Field<string>("STAMP_NUM"),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        person = getPersonByApexId(r.Field<int>("PERSON_ID")),
-                        permitedAW = noms["boolean"].ByCode(r.Field<string>("PERMITED_AW") == "Y" ? "Y" : "N"),
-                        permitedCheck = noms["boolean"].ByCode(r.Field<string>("PERMITED_CHECK") == "Y" ? "Y" : "N"),
-                        approvedAircrafts = approvedAircrafts.ContainsKey(r.Field<int>("ID")) ? approvedAircrafts[r.Field<int>("ID")] : new JObject[0]
-                    }))
+                            examinerCode = r.Field<string>("EXAMINER_CODE"),
+                            stampNum = r.Field<string>("STAMP_NUM"),
+                            valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
+                            person = getPersonByApexId(r.Field<int>("PERSON_ID")),
+                            permitedAW = noms["boolean"].ByCode(r.Field<string>("PERMITED_AW") == "Y" ? "Y" : "N"),
+                            permitedCheck = noms["boolean"].ByCode(r.Field<string>("PERMITED_CHECK") == "Y" ? "Y" : "N"),
+                            approvedAircrafts = approvedAircrafts.ContainsKey(r.Field<int>("ID")) ? approvedAircrafts[r.Field<int>("ID")] : new JObject[0]
+                        })),
+                        new JProperty("files", files)))
                 .ToList();
         }
 

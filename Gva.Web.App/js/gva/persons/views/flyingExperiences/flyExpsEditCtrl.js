@@ -14,6 +14,7 @@
 
     $scope.personFlyingExperience = personFlyingExperience;
     $scope.editMode = null;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';

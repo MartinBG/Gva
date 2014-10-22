@@ -9,7 +9,6 @@
     AircraftDocumentDebtsFM,
     aircraftDocumentDebt
   ) {
-    $scope.isEdit = false;
     $scope.debt = aircraftDocumentDebt;
     $scope.lotId = $stateParams.id;
 

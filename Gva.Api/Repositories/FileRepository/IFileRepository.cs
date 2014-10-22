@@ -1,18 +1,21 @@
 ﻿using System.Collections.Generic;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
-using Newtonsoft.Json.Linq;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.FileRepository
 {
     public interface IFileRepository
     {
-        void AddFileReferences(Part part, IEnumerable<FileDO> files);
+        void AddFileReferences(Part part, IEnumerable<CaseDO> cases);
+
+        void AddFileReference(Part part, CaseDO caseDO);
 
         void DeleteFileReferences(Part part);
 
         GvaLotFile[] GetFileReferences(int partId, int? casetype);
+
+        GvaLotFile GetFileReference(int partId, int? caseType);
 
         bool IsUniqueBPN(int lotId, int caseTypeId, string bookPageNumber, int? fileId = null);
 

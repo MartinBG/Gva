@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Json;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
-using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -17,37 +17,48 @@ namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/aircraftCertRegistrationsFM")]
     [Authorize]
-    public class AircraftCertRegistrationsFMController : GvaApplicationPartController<AircraftCertRegistrationFMDO>
+    public class AircraftCertRegistrationsFMController : GvaCaseTypePartController<AircraftCertRegistrationFMDO>
     {
         private string path;
         private ILotRepository lotRepository;
         private IFileRepository fileRepository;
-        private IApplicationRepository applicationRepository;
         private IUnitOfWork unitOfWork;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
+        private ICaseTypeRepository caseTypeRepository;
 
         public AircraftCertRegistrationsFMController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
-            IApplicationRepository applicationRepository,
             ILotEventDispatcher lotEventDispatcher,
+            ICaseTypeRepository caseTypeRepository,
             UserContext userContext)
-            : base("aircraftCertRegistrationsFM", unitOfWork, lotRepository, applicationRepository, lotEventDispatcher, userContext)
+            : base("aircraftCertRegistrationsFM", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.path = "aircraftCertRegistrationsFM";
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
-            this.applicationRepository = applicationRepository;
             this.unitOfWork = unitOfWork;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCertRegFM ()
+        public IHttpActionResult GetNewCertRegFM (int lotId)
         {
+            GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
+            CaseDO caseDO = new CaseDO()
+            {
+                CaseType = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                }
+            };
+
             AircraftCertRegistrationFMDO newCertRegFM = new AircraftCertRegistrationFMDO()
             {
                 IsActive = true,
@@ -57,17 +68,27 @@ namespace Gva.Api.Controllers.Aircrafts
                 LessorIsOrg = true
             };
 
-            return Ok(new ApplicationPartVersionDO<AircraftCertRegistrationFMDO>(newCertRegFM));
+            return Ok(new CaseTypePartDO<AircraftCertRegistrationFMDO>(newCertRegFM, caseDO));
         }
 
         [Route("{partIndex}/debts")]
-        public IHttpActionResult GetRegistrationDebts(int lotId, int partIndex)
+        public IHttpActionResult GetRegistrationDebts(int lotId, int partIndex, int? caseTypeId = null)
         {
-            var parts = this.lotRepository.GetLotIndex(lotId).Index
+            var partVersions = this.lotRepository.GetLotIndex(lotId).Index
                 .GetParts<AircraftDocumentDebtFMDO>("aircraftDocumentDebtsFM")
                 .Where(e => e.Content.Registration.PartIndex == partIndex);
 
-            return Ok(parts.Select(pv => new FilePartVersionDO<AircraftDocumentDebtFMDO>(pv)));
+            List<CaseTypePartDO<AircraftDocumentDebtFMDO>> partVersionDOs = new List<CaseTypePartDO<AircraftDocumentDebtFMDO>>();
+            foreach (var partVersion in partVersions)
+            {
+                var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFile != null)
+                {
+                    partVersionDOs.Add(new CaseTypePartDO<AircraftDocumentDebtFMDO>(partVersion, lotFile));
+                }
+            }
+
+            return Ok(partVersionDOs);
         }
 
         [Route("view")]
@@ -88,13 +109,23 @@ namespace Gva.Api.Controllers.Aircrafts
             }
         }
 
-        public override IHttpActionResult GetParts(int lotId, [FromUri] int[] partIndexes = null)
+        public IHttpActionResult GetParts(int lotId, [FromUri] int[] partIndexes = null, int? caseTypeId = null)
         {
-            var parts = this.lotRepository.GetLotIndex(lotId).Index
+            var partVersions = this.lotRepository.GetLotIndex(lotId).Index
                 .GetParts<AircraftCertRegistrationFMDO>(this.path)
                 .OrderByDescending(e => e.Content.ActNumber);
 
-            return Ok(parts.Select(pv => new ApplicationPartVersionDO<AircraftCertRegistrationFMDO>(pv)));
+            List<CaseTypePartDO<AircraftCertRegistrationFMDO>> partVersionDOs = new List<CaseTypePartDO<AircraftCertRegistrationFMDO>>();
+            foreach (var partVersion in partVersions)
+            {
+                var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFile != null)
+                {
+                    partVersionDOs.Add(new CaseTypePartDO<AircraftCertRegistrationFMDO>(partVersion, lotFile));
+                }
+            }
+
+            return Ok(partVersionDOs);
         }
 
         public override IHttpActionResult DeletePart(int lotId, int partIndex)
@@ -103,9 +134,6 @@ namespace Gva.Api.Controllers.Aircrafts
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
                 var partVersion = lot.DeletePart<AircraftCertRegistrationFMDO>(string.Format("{0}/{1}", this.path, partIndex), this.userContext);
-
-                this.fileRepository.DeleteFileReferences(partVersion.Part);
-                this.applicationRepository.DeleteApplicationRefs(partVersion.Part);
 
                 var registrations = this.lotRepository.GetLotIndex(lotId).Index
                     .GetParts<AircraftCertRegistrationFMDO>(this.path)
@@ -168,9 +196,6 @@ namespace Gva.Api.Controllers.Aircrafts
                 currentReg = regs.FirstOrDefault();
             }
 
-            RegistrationViewDO regView = new RegistrationViewDO();
-            regView.CurrentIndex = currentReg.Reg.Part.Index;
-
             var currentRegAw = regs
                 .Where(r => r.Position >= currentReg.Position && r.Aws.Any())
                 .Select(r =>
@@ -181,28 +206,19 @@ namespace Gva.Api.Controllers.Aircrafts
                     })
                 .FirstOrDefault();
 
-            if (currentRegAw != null)
-            {
-                regView.AirworthinessIndex = currentRegAw.Aw.Part.Index;
-                regView.HasAirworthiness = currentRegAw.IsForCurrentReg;
-            }
-            else
-            {
-                regView.AirworthinessIndex = null;
-                regView.HasAirworthiness = false;
-            }
-
             int position = currentReg.Position;
 
-            regView.LastIndex = regs[0].Reg.Part.Index;
-            regView.NextIndex = position > 0 ? regs[position - 1].Reg.Part.Index : (int?)null;
-            regView.PrevIndex = position < regs.Count - 1 ? regs[position + 1].Reg.Part.Index : (int?)null;
-            regView.FirstIndex = regs[regs.Count - 1].Reg.Part.Index;
-
-            regView.LastReg = regs[0].Reg.Content;
-            regView.FirstReg = regs[regs.Count - 1].Reg.Content;
-
-            return regView;
+            return new RegistrationViewDO() { 
+                CurrentIndex = currentReg.Reg.Part.Index,
+                AirworthinessIndex =  currentRegAw != null ? currentRegAw.Aw.Part.Index : (int?)null,
+                HasAirworthiness = currentRegAw != null ? currentRegAw.IsForCurrentReg : false,
+                LastIndex = regs[0].Reg.Part.Index,
+                NextIndex = position > 0 ? regs[position - 1].Reg.Part.Index : (int?)null,
+                PrevIndex = position < regs.Count - 1 ? regs[position + 1].Reg.Part.Index : (int?)null,
+                FirstIndex = regs[regs.Count - 1].Reg.Part.Index,
+                LastReg = regs[0].Reg.Content,
+                FirstReg = regs[regs.Count - 1].Reg.Content
+            };
         }
     }
 }

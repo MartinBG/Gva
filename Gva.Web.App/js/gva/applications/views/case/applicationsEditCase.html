@@ -1,0 +1,67 @@
+﻿<div id="app-case">
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th style="width: 250px;"><span l10n-text="applications.edit.case.regNumber"></span></th>
+        <th><span l10n-text="applications.edit.case.description"></span></th>
+        <th style="width: 150px;"><span l10n-text="applications.edit.case.act"></span></th>
+        <th style="width: 200px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat-start="adc in application.appDocCase">
+        <td>
+          <a ng-click="viewDoc(adc.docId)">
+            <strong>{{ adc.docDocDirectionName }} : {{ adc.docRegUri }}</strong><br />
+            <strong>{{ adc.docDocStatusName }}</strong>
+          </a>
+        </td>
+        <td>
+          <strong>{{ adc.docDocTypeName }} : {{ adc.docSubject }}</strong>
+        </td>
+        <td></td>
+        <td style="text-align: right;">
+          <a ng-click="childDoc(adc.docId)" l10n-text="applications.edit.case.childDoc"></a>
+          <br />
+          <a ng-click="nextStatus(adc.docId, adc.docVersion)" ng-hide="!adc.nextStatusText">{{adc.nextStatusText}}</a>
+        </td>
+      </tr>
+      <tr ng-repeat="item in adc.applicationLotFiles">
+        <td></td>
+        <td ng-if="item.hasAppFile">{{ item.setPartName }} <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" sc-access-token title="{{item.file.name}}">{{item.file.name}}</a></td>
+        <td ng-if="!item.hasAppFile"><a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" sc-access-token title="{{item.file.name}}">{{item.file.name}}</a></td>
+        <td>
+          <div ng-if="item.hasAppFile">
+            <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</a>
+          </div>
+          <div ng-if="!item.hasAppFile">
+            <a ng-click="linkNew(adc.docId, item.docFileId)" l10n-text="applications.edit.case.linkNew"></a> / <a ng-click="linkPart(item.docFileId)" l10n-text="applications.edit.case.linkPart"></a>
+          </div>
+        </td>
+        <td></td>
+      </tr>
+      <tr ng-repeat-end>
+        <td colspan="4" style="text-align: right;">
+          <a ng-click="newDocFile(adc.docId)" l10n-text="applications.edit.case.newDocFile"></a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong l10n-text="applications.edit.unlinkedLotParts"></strong>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr ng-repeat="item in application.appFilesNotInCase">
+        <td></td>
+        <td>{{ item.setPartName }} <a ng-href="{{item.fileUrl}}" target="_blank"><span>{{ item.file.name }}</span></a></td>
+        <td>
+          <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</a>
+        </td>
+        <td></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

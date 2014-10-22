@@ -21,18 +21,18 @@
   <div class="clear"></div>
 
   <h5 class="form-header" l10n-text="persons.examBatchNew.title2"></h5>
-  <gva-person-exam name="examForm" ng-model="personExam" readonly="personExam.formReadonly"></gva-person-exam>
+  <gva-person-exam name="examForm" ng-model="personExam" sc-form-params="{ hideCaseType: true }" readonly="personExam.formReadonly"></gva-person-exam>
 
   <h5 class="form-header" l10n-text="persons.searchExamAS.title" style="margin-top:10px;"></h5>
   <div class="row" ng-if="!!personExam">
-    <sc-field type="nomenclature" ng-model="personExam.files[0].caseType" alias="'personCaseTypes'" ng-required="true" l10n-text="persons.searchExamAS.caseType" class="col-sm-2" ng-readonly="personExam.formReadonly"></sc-field>
+    <sc-field type="nomenclature" ng-model="personExam.cases[0].caseType" alias="'personCaseTypes'" ng-required="true" l10n-text="persons.searchExamAS.caseType" class="col-sm-2" ng-readonly="personExam.formReadonly"></sc-field>
 
-    <sc-field type="text" ng-model="personExam.files[0].bookPageNumber" ng-required="true" l10n-text="persons.searchExamAS.bookPageNumber" class="col-sm-3 col-md-2" ng-readonly="personExam.formReadonly"></sc-field>
-    <sc-field type="int" ng-model="personExam.files[0].pageCount" min="0" l10n-text="persons.searchExamAS.pageCount" validations="{min: 'default'}" class="col-sm-3 col-md-2" ng-readonly="personExam.formReadonly"></sc-field>
+    <sc-field type="text" ng-model="personExam.cases[0].bookPageNumber" ng-required="true" l10n-text="persons.searchExamAS.bookPageNumber" class="col-sm-3 col-md-2" ng-readonly="personExam.formReadonly"></sc-field>
+    <sc-field type="int" ng-model="personExam.cases[0].pageCount" min="0" l10n-text="persons.searchExamAS.pageCount" validations="{min: 'default'}" class="col-sm-3 col-md-2" ng-readonly="personExam.formReadonly"></sc-field>
 
     <div class="form-group col-sm-3">
       <label class="control-label" l10n-text="persons.searchExamAS.fileName"></label>
-      <sc-files ng-model="personExam.files[0].file" name="file" ng-readonly="true"></sc-files>
+      <sc-files ng-model="personExam.cases[0].file" name="file" ng-readonly="true"></sc-files>
     </div>
   </div>
 

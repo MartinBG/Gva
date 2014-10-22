@@ -9,8 +9,8 @@
     AircraftCertPermitsToFly,
     aircraftCertPermitToFly
   ) {
-    $scope.isEdit = false;
 
+    $scope.lotId = $stateParams.id;
     $scope.permit = aircraftCertPermitToFly;
 
     $scope.save = function () {
@@ -44,7 +44,8 @@
       'AircraftCertPermitsToFly',
       function ($stateParams, AircraftCertPermitsToFly) {
         return AircraftCertPermitsToFly.newCertPermitToFly({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

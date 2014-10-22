@@ -11,25 +11,29 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class GvaViewPersonRatingDO
     {
-        public GvaViewPersonRatingDO(GvaViewPersonRating rating)
+        public GvaViewPersonRatingDO(GvaViewPersonRating rating, List<GvaViewPersonRatingEdition> editions)
         {
+            GvaViewPersonRatingEdition lastEdition = editions.Last();
+            GvaViewPersonRatingEdition firstEdition = editions.First();
+
             this.LotId = rating.LotId;
             this.PartIndex = rating.Part.Index;
-            this.EditionIndex = rating.EditionIndex;
-            this.RatingPartIndex = rating.RatingPartIndex;
-            this.EditionPartIndex = rating.EditionPartIndex;
+            this.EditionIndex = lastEdition.Index;
+            this.RatingPartIndex = rating.PartIndex;
+            this.EditionPartIndex = lastEdition.PartIndex;
             this.RatingType = rating.RatingType;
             this.PersonRatingLevel = rating.RatingLevel;
             this.RatingClass = rating.RatingClass;
             this.AircraftTypeGroup = rating.AircraftTypeGroup;
             this.Authorization = rating.Authorization;
-            this.RatingSubClasses = rating.RatingSubClasses;
-            this.Limitations = rating.Limitations;
-            this.LastDocDateValidFrom = rating.LastDocDateValidFrom;
-            this.LastDocDateValidTo = rating.LastDocDateValidTo;
-            this.FirstDocDateValidFrom = rating.FirstDocDateValidFrom;
-            this.Notes = rating.Notes;
-            this.NotesAlt = rating.NotesAlt;
+            this.RatingSubClasses = lastEdition.RatingSubClasses;
+            this.Limitations = lastEdition.Limitations;
+            this.LastDocDateValidFrom = lastEdition.DocDateValidFrom;
+            this.LastDocDateValidTo = lastEdition.DocDateValidTo;
+            this.FirstDocDateValidFrom = firstEdition.DocDateValidFrom;
+            this.Notes = lastEdition.Notes;
+            this.NotesAlt = lastEdition.NotesAlt;
+            this.LocationIndicator = rating.LocationIndicator;
         }
 
         public int LotId { get; set; }
@@ -41,6 +45,8 @@ namespace Gva.Api.ModelsDO.Persons
         public int RatingPartIndex { get; set; }
 
         public int EditionPartIndex { get; set; }
+
+        public NomValue LocationIndicator { get; set; }
 
         public NomValue RatingType { get; set; }
 

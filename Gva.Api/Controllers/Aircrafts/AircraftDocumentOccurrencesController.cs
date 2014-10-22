@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -14,8 +17,10 @@ namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/documentOccurrences")]
     [Authorize]
-    public class AircraftDocumentOccurrencesController : GvaFilePartController<AircraftDocumentOccurenceDO>
+    public class AircraftDocumentOccurrencesController : GvaCaseTypePartController<AircraftDocumentOccurenceDO>
     {
+        private ICaseTypeRepository caseTypeRepository;
+        private IFileRepository fileRepository;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
 
@@ -24,10 +29,13 @@ namespace Gva.Api.Controllers.Aircrafts
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
+            ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("documentOccurrences", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
+            this.caseTypeRepository = caseTypeRepository;
+            this.fileRepository = fileRepository;
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
         }
@@ -35,21 +43,29 @@ namespace Gva.Api.Controllers.Aircrafts
         [Route("new")]
         public IHttpActionResult GetNewDocumentOccurrence (int lotId, int? appId = null)
         {
-            var files = new List<FileDO>();
+            GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
+            CaseDO caseDO = new CaseDO()
+            {
+                CaseType = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+            };
+
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                files.Add(new FileDO()
+                caseDO.IsAdded = true;
+                caseDO.Applications = new List<ApplicationNomDO>()
                 {
-                    IsAdded = true,
-                    Applications = new List<ApplicationNomDO>()
-                    {
-                        this.applicationRepository.GetInitApplication(appId)
-                    }
-                });
+                    this.applicationRepository.GetInitApplication(appId)
+                };
             }
 
-            return Ok(new FilePartVersionDO<AircraftDocumentOccurenceDO>(new AircraftDocumentOccurenceDO(), files));
+            return Ok(new CaseTypePartDO<AircraftDocumentOccurenceDO>(new AircraftDocumentOccurenceDO(), caseDO));
         }
     }
 }

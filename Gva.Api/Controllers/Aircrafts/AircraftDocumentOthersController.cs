@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -15,10 +18,12 @@ namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/aircraftDocumentOthers")]
     [Authorize]
-    public class AircraftDocumentOthersController : GvaFilePartController<AircraftDocumentOtherDO>
+    public class AircraftDocumentOthersController : GvaCaseTypePartController<AircraftDocumentOtherDO>
     {
-        private ILotRepository lotRepository;
+        private ICaseTypeRepository caseTypeRepository;
+        private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
+        private ILotRepository lotRepository;
         private INomRepository nomRepository;
 
         public AircraftDocumentOthersController(
@@ -26,13 +31,16 @@ namespace Gva.Api.Controllers.Aircrafts
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
-            INomRepository nomRepository,
+            ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
+            INomRepository nomRepository,
             UserContext userContext)
             : base("aircraftDocumentOthers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.lotRepository = lotRepository;
+            this.caseTypeRepository = caseTypeRepository;
+            this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
+            this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
         }
 
@@ -41,26 +49,30 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             AircraftDocumentOtherDO newDocumentOther = new AircraftDocumentOtherDO()
             {
-                DocumentDateValidFrom = DateTime.Now
+                DocumentDateValidFrom = DateTime.Now,
+                Valid = this.nomRepository.GetNomValue("boolean", "yes")
             };
 
-            newDocumentOther.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+            GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
+            CaseDO caseDO = new CaseDO()
+            {
+                CaseType = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+            };
 
-            var files = new List<FileDO>();
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
-                files.Add(new FileDO()
-                {
-                    IsAdded = true,
-                    Applications = new List<ApplicationNomDO>()
-                    {
-                        this.applicationRepository.GetInitApplication(appId)
-                    }
-                });
+
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
             }
 
-            return Ok(new FilePartVersionDO<AircraftDocumentOtherDO>(newDocumentOther, files));
+            return Ok(new CaseTypePartDO<AircraftDocumentOtherDO>(newDocumentOther, caseDO));
         }
     }
 }

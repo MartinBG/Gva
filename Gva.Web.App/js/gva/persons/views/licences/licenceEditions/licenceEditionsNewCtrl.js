@@ -54,11 +54,13 @@
     newLicenceEdition: [
       '$stateParams',
       'PersonLicenceEditions',
-      function ($stateParams, PersonLicenceEditions) {
+      'licence',
+      function ($stateParams, PersonLicenceEditions, licence) {
         return PersonLicenceEditions.newLicenceEdition({
           id: $stateParams.id,
-          ind: $stateParams.ind,
-          appId: $stateParams.appId
+          licencePartIndex: $stateParams.ind,
+          appId: $stateParams.appId,
+          caseTypeId: licence['case'].caseType.nomValueId
         }).$promise;
       }
     ]

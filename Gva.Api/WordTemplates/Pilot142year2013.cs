@@ -148,6 +148,8 @@ namespace Gva.Api.WordTemplates
 
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
+            var includedLangCerts = lastEdition.IncludedLangCerts
+                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i));
             var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
@@ -156,7 +158,7 @@ namespace Gva.Api.WordTemplates
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
             var includedExams = lastEdition.IncludedExams
-                .Select(i => lot.Index.GetPart<PersonDocumentExamDO>("personDocumentExams/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
 
             var inspectorId = lastEdition.Inspector == null ? (int?)null : lastEdition.Inspector.NomValueId;
             object[] instructorData = new object[0];
@@ -191,7 +193,7 @@ namespace Gva.Api.WordTemplates
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var otherLicences = this.GetOtherLicences(licenceCaCode, lot, lastEdition, includedLicences);
             var rtoRating = this.GetRtoRating(includedRatings, ratingEditions);
-            var engLevel = this.GetEngLevel(includedTrainings);
+            var engLevel = this.GetEngLevel(includedLangCerts);
             var limitations = this.GetLimitations(lastEdition, includedMedicals, includedExams);
             var ratings = this.GetRaitings(includedRatings, ratingEditions);
             var country = this.GetCountry(personAddress);
@@ -354,22 +356,21 @@ namespace Gva.Api.WordTemplates
             return rtoRatingEd;
         }
 
-        private object GetEngLevel(IEnumerable<PersonTrainingDO> includedTrainings)
+        private object GetEngLevel(IEnumerable<PersonLangCertDO> includedLangCerts)
         {
-            var engTrainings = includedTrainings
-                .Where(t => t.DocumentRole.Alias == "engTraining");
+            var engCerts = includedLangCerts
+                .Where(t => t.DocumentRole.Alias == "engCert" && t.LangLevel != null);
 
-            PersonTrainingDO result = new PersonTrainingDO();
-            int currentSeqNumber = 0;
-            foreach (var engTraining in engTrainings)
+            if (engCerts.Count() == 0)
             {
-                int? engLangLevelId = engTraining.EngLangLevel == null ? (int?)null : engTraining.EngLangLevel.NomValueId;
-                if (!engLangLevelId.HasValue)
-                {
-                    continue;
-                }
+                return null;
+            }
 
-                var engLevel = this.nomRepository.GetNomValue("engLangLevels", engLangLevelId.Value);
+            PersonLangCertDO result = new PersonLangCertDO();
+            int currentSeqNumber = 0;
+            foreach (var engCert in engCerts)
+            {
+                var engLevel = this.nomRepository.GetNomValue("langLevels", engCert.LangLevel.NomValueId);
                 int? seqNumber = engLevel.TextContent.Get<int?>("seqNumber");
                 if (!seqNumber.HasValue)
                 {
@@ -378,28 +379,28 @@ namespace Gva.Api.WordTemplates
 
                 if (currentSeqNumber < seqNumber)
                 {
-                    result = engTraining;
+                    result = engCert;
                     currentSeqNumber = seqNumber.Value;
                 }
                 else if (currentSeqNumber == seqNumber &&
-                    DateTime.Compare(result.DocumentDateValidFrom.Value, engTraining.DocumentDateValidFrom.Value) < 0)
+                    DateTime.Compare(result.DocumentDateValidFrom.Value, engCert.DocumentDateValidFrom.Value) < 0)
                 {
-                    result = engTraining;
+                    result = engCert;
                 }
             }
 
             return new
-                {
-                    LEVEL = result.EngLangLevel == null ? string.Empty : result.EngLangLevel.Name,
-                    ISSUE_DATE = result.DocumentDateValidFrom,
-                    VALID_DATE = result.DocumentDateValidTo
-                };
+            {
+                LEVEL = result.LangLevel.Name,
+                ISSUE_DATE = result.DocumentDateValidFrom,
+                VALID_DATE = result.DocumentDateValidTo
+            };
         }
 
         private List<object> GetLimitations(
             PersonLicenceEditionDO edition,
             IEnumerable<PersonMedicalDO> includedMedicals,
-            IEnumerable<PersonDocumentExamDO> includedExams)
+            IEnumerable<PersonTrainingDO> includedExams)
         {
             var limitations = edition.Limitations.Select(l => new { LIMIT_NAME = l.Name });
 

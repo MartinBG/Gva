@@ -65,7 +65,7 @@ namespace Gva.Api.WordTemplates
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedExams = lastEdition.IncludedExams
-                .Select(i => lot.Index.GetPart<PersonDocumentExamDO>("personDocumentExams/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
@@ -188,7 +188,7 @@ namespace Gva.Api.WordTemplates
         }
         private object[] GetDocuments(
             IEnumerable<PersonTrainingDO> includedTrainings,
-            IEnumerable<PersonDocumentExamDO> includedExams,
+            IEnumerable<PersonTrainingDO> includedExams,
             string licenceTypeCode)
         {
             string[] documentRoleCodes;

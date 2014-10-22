@@ -10,6 +10,8 @@
     airportInspection
   ) {
     $scope.airportInspection = airportInspection;
+    $scope.lotId = $stateParams.lotId;
+    $scope.caseTypeId = $stateParams.caseTypeId;
 
     $scope.save = function () {
       return $scope.newInspectionForm.$validate()

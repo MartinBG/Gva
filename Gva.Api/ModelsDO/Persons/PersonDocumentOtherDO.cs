@@ -8,11 +8,12 @@ namespace Gva.Api.ModelsDO.Persons
     {
         public string DocumentNumber { get; set; }
 
-        public string DocumentPersonNumber { get; set; }
+        public int? DocumentPersonNumber { get; set; }
 
         [Required(ErrorMessage = "DocumentPublisher is required.")]
         public string DocumentPublisher { get; set; }
 
+        [Required(ErrorMessage = "DocumentDateValidFrom is required.")]
         public DateTime? DocumentDateValidFrom { get; set; }
 
         public DateTime? DocumentDateValidTo { get; set; }

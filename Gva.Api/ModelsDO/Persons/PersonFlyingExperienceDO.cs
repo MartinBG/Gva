@@ -7,9 +7,6 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonFlyingExperienceDO
     {
-        [Required(ErrorMessage = "StaffType is required.")]
-        public NomValue StaffType { get; set; }
-
         [Required(ErrorMessage = "DocumentDate is required.")]
         public DateTime? DocumentDate { get; set; }
 

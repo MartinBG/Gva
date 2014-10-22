@@ -6,9 +6,6 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonCheckDO
     {
-        [Required(ErrorMessage = "StaffType is required.")]
-        public NomValue StaffType { get; set; }
-
         public NomValue AircraftTypeGroup { get; set; }
 
         public NomValue RatingType { get; set; }

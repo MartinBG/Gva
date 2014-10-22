@@ -18,7 +18,8 @@
   ]).config(['scaffoldingProvider', function (scaffoldingProvider) {
     scaffoldingProvider.form({
       name: 'gvaApplicationDocument',
-      templateUrl: 'js/gva/applications/forms/applicationDocument.html'
+      templateUrl: 'js/gva/applications/forms/applicationDocument.html',
+      controller: 'AppDocumentCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaCommonSelectPerson',
@@ -65,11 +66,13 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentId',
-      templateUrl: 'js/gva/persons/forms/personDocumentId.html'
+      templateUrl: 'js/gva/persons/forms/personDocumentId.html',
+      controller: 'PersonDocIdCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentEducation',
-      templateUrl: 'js/gva/persons/forms/personDocumentEducation.html'
+      templateUrl: 'js/gva/persons/forms/personDocumentEducation.html',
+      controller: 'PersonDocumentEducationCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonStatus',
@@ -82,7 +85,17 @@
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentEmployment',
-      templateUrl: 'js/gva/persons/forms/personDocumentEmployment.html'
+      templateUrl: 'js/gva/persons/forms/personDocumentEmployment.html',
+      controller: 'PersonDocumentEmploymentCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonCommonDoc',
+      templateUrl: 'js/gva/persons/forms/personCommonDocument.html',
+      controller: 'PersonCommonDocCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonCommonDocClassification',
+      templateUrl: 'js/gva/persons/forms/personCommonDocClassification.html'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentCheck',
@@ -93,6 +106,11 @@
       name: 'gvaPersonDocumentTraining',
       templateUrl: 'js/gva/persons/forms/personDocumentTraining.html',
       controller: 'PersonDocumentTrainingCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaPersonDocumentLangCert',
+      templateUrl: 'js/gva/persons/forms/personDocumentLangCert.html',
+      controller: 'PersonDocumentLangCertCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonDocumentOther',
@@ -127,10 +145,6 @@
     scaffoldingProvider.form({
       name: 'gvaLicenceStatus',
       templateUrl: 'js/gva/persons/forms/personLicenceStatus.html'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaPersonDocumentExam',
-      templateUrl: 'js/gva/persons/forms/personDocumentExam.html'
     });
     scaffoldingProvider.form({
       name: 'gvaPersonExam',
@@ -182,8 +196,7 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertAirworthinessFm',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessFM.html',
-      controller: 'AircraftCertAirworthinessFmCtrl'
+      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessFM.html'
     });
     scaffoldingProvider.form({
       name: 'gvaAirworthinessReviewOther',
@@ -294,7 +307,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationDocumentOther',
-      templateUrl: 'js/gva/organizations/forms/organizationDocumentOther.html'
+      templateUrl: 'js/gva/organizations/forms/organizationDocumentOther.html',
+      controller: 'OrgDocumentOtherCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationEquipment',
@@ -392,18 +406,18 @@
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])
-      .state(['root.applications.search'                           , '?fromDate&toDate&personLin&aircraftIcao&organizationUin'                                 , ['@root'                  , 'js/gva/applications/views/applicationsSearch.html'        , 'ApplicationsSearchCtrl'        ]])
-      .state(['root.applications.new'                              , '/new'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsNew.html'           , 'ApplicationsNewCtrl'           ]])
-      .state(['root.applications.new.editPart'                     , '/:lotId/:setPartPath/:ind?appId'                                                         , ['@root'                  , 'js/gva/applications/views/applicationsEditPart.html'      , 'AppEditPartCtrl'               ]])
-      .state(['root.applications.link'                             , '/link'                                                                                   , ['@root'                  , 'js/gva/applications/views/applicationsLink.html'          , 'ApplicationsLinkCtrl'          ]])
-      .state(['root.applications.edit'                             , '/:id'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsEdit.html'          , 'ApplicationsEditCtrl'          ]])
-      .state(['root.applications.edit.case'                        , '/case'                                                                                   , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditCase.html'      , 'ApplicationsEditCaseCtrl'      ]])
-      .state(['root.applications.edit.case.newFile'                , '/newFile?docId&docFileId'                                                                , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditNewFile.html'   , 'ApplicationsEditNewFileCtrl'   ]])
-      .state(['root.applications.edit.case.newDocFile'             , '/newDocFile?docId'                                                                       , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditNewDocFile.html', 'ApplicationsEditNewDocFileCtrl']])
-      .state(['root.applications.edit.case.childDoc'               , '/childDoc?parentDocId'                                                                   , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditChildDoc.html'  , 'ApplicationsEditChildDocCtrl'  ]])
-      .state(['root.applications.edit.case.addPart'                , '/addPart?docId&docFileId&setPartAlias'                                                   , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditAddPart.html'   , 'ApplicationsEditAddPartCtrl'   ]])
-      .state(['root.applications.edit.case.linkPart'               , '/linkPart?docFileId'                                                                     , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditLinkPart.html'  , 'ApplicationsEditLinkPartCtrl'  ]])
-      .state(['root.applications.edit.stages'                      , '/stages'                                                                                 , ['@root.applications.edit', 'js/gva/applications/views/applicationsEditStages.html'    , 'ApplicationsEditStagesCtrl'    ]]);
+      .state(['root.applications.search'                           , '?fromDate&toDate&personLin&aircraftIcao&organizationUin'                                 , ['@root'                  , 'js/gva/applications/views/applicationsSearch.html'             , 'ApplicationsSearchCtrl'        ]])
+      .state(['root.applications.new'                              , '/new'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsNew.html'                , 'ApplicationsNewCtrl'           ]])
+      .state(['root.applications.new.editPart'                     , '/:lotId/:setPartPath/:ind?appId'                                                         , ['@root'                  , 'js/gva/applications/views/applicationsEditPart.html'           , 'AppEditPartCtrl'               ]])
+      .state(['root.applications.link'                             , '/link'                                                                                   , ['@root'                  , 'js/gva/applications/views/applicationsLink.html'               , 'ApplicationsLinkCtrl'          ]])
+      .state(['root.applications.edit'                             , '/:id'                                                                                    , ['@root'                  , 'js/gva/applications/views/applicationsEdit.html'               , 'ApplicationsEditCtrl'          ]])
+      .state(['root.applications.edit.case'                        , '/case'                                                                                   , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditCase.html'      , 'ApplicationsEditCaseCtrl'      ]])
+      .state(['root.applications.edit.case.newFile'                , '/newFile?docId&docFileId'                                                                , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditNewFile.html'   , 'ApplicationsEditNewFileCtrl'   ]])
+      .state(['root.applications.edit.case.newDocFile'             , '/newDocFile?docId'                                                                       , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditNewDocFile.html', 'ApplicationsEditNewDocFileCtrl']])
+      .state(['root.applications.edit.case.childDoc'               , '/childDoc?parentDocId'                                                                   , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditChildDoc.html'  , 'ApplicationsEditChildDocCtrl'  ]])
+      .state(['root.applications.edit.case.addPart'                , '/addPart?docId&docFileId&setPartAlias&caseTypeId'                                        , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditAddPart.html'   , 'ApplicationsEditAddPartCtrl'   ]])
+      .state(['root.applications.edit.case.linkPart'               , '/linkPart?docFileId'                                                                     , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditLinkPart.html'  , 'ApplicationsEditLinkPartCtrl'  ]])
+      .state(['root.applications.edit.stages'                      , '/stages'                                                                                 , ['@root.applications.edit', 'js/gva/applications/views/stages/applicationsEditStages.html'  , 'ApplicationsEditStagesCtrl'    ]]);
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
      .modal('chooseAppType'     , 'js/gva/applications/modals/applicationTypes/chooseAppTypesModal.html'    , 'ChooseAppTypesModalCtrl'    )
@@ -470,6 +484,10 @@
       .state(['root.persons.view.documentTrainings.search'                 , ''                                                                            , ['@root.persons.view'                 , 'js/gva/persons/views/documentTrainings/trainingsSearch.html'            , 'DocumentTrainingsSearchCtrl'   ]])
       .state(['root.persons.view.documentTrainings.new'                    , '/new'                                                                        , ['@root.persons.view'                 , 'js/gva/persons/views/documentTrainings/trainingsNew.html'               , 'DocumentTrainingsNewCtrl'      ]])
       .state(['root.persons.view.documentTrainings.edit'                   , '/:ind'                                                                       , ['@root.persons.view'                 , 'js/gva/persons/views/documentTrainings/trainingsEdit.html'              , 'DocumentTrainingsEditCtrl'     ]])
+      .state(['root.persons.view.documentLangCerts'                        , '/documentLangCerts'                                                                                                                                                                                                                ])
+      .state(['root.persons.view.documentLangCerts.search'                 , ''                                                                            , ['@root.persons.view'                 , 'js/gva/persons/views/documentLangCerts/langCertsSearch.html'            , 'DocumentLangCertsSearchCtrl'   ]])
+      .state(['root.persons.view.documentLangCerts.new'                    , '/new'                                                                        , ['@root.persons.view'                 , 'js/gva/persons/views/documentLangCerts/langCertsNew.html'               , 'DocumentLangCertsNewCtrl'      ]])
+      .state(['root.persons.view.documentLangCerts.edit'                   , '/:ind'                                                                       , ['@root.persons.view'                 , 'js/gva/persons/views/documentLangCerts/langCertsEdit.html'              , 'DocumentLangCertsEditCtrl'     ]])
       .state(['root.persons.view.flyingExperiences'                        , '/flyingExperiences'                                                                                                                                                                                                                ])
       .state(['root.persons.view.flyingExperiences.search'                 , ''                                                                            , ['@root.persons.view'                 , 'js/gva/persons/views/flyingExperiences/flyExpsSearch.html'              , 'FlyingExperiencesSearchCtrl'   ]])
       .state(['root.persons.view.flyingExperiences.new'                    , '/new'                                                                        , ['@root.persons.view'                 , 'js/gva/persons/views/flyingExperiences/flyExpsNew.html'                 , 'FlyingExperiencesNewCtrl'      ]])
@@ -482,10 +500,6 @@
       .state(['root.persons.view.ratings.edit.editions'                    , '/ratingEditions'                                                                                                                                                                                                                   ])
       .state(['root.persons.view.ratings.edit.editions.new'                , '/new'                                                                        , ['@root.persons.view.ratings.edit'     , 'js/gva/persons/views/ratings/ratingEditions/ratingEditionsNew.html'     , 'RatingEditionsNewCtrl'        ]])
       .state(['root.persons.view.ratings.edit.editions.edit'               , '/:index'                                                                     , ['@root.persons.view.ratings.edit'     , 'js/gva/persons/views/ratings/ratingEditions/ratingEditionsEdit.html'    , 'RatingEditionsEditCtrl'       ]])
-      .state(['root.persons.view.exams'                                    , '/exams'                                                                                                                                                                                                                            ])
-      .state(['root.persons.view.exams.search'                             , ''                                                                            , ['@root.persons.view'                 , 'js/gva/persons/views/documentExams/examsSearch.html'                    , 'DocumentExamsSearchCtrl'       ]])
-      .state(['root.persons.view.exams.new'                                , '/new'                                                                        , ['@root.persons.view'                 , 'js/gva/persons/views/documentExams/examsNew.html'                       , 'DocumentExamsNewCtrl'          ]])
-      .state(['root.persons.view.exams.edit'                               , '/:ind'                                                                       , ['@root.persons.view'                 , 'js/gva/persons/views/documentExams/examsEdit.html'                      , 'DocumentExamsEditCtrl'         ]])
       .state(['root.persons.view.examASs'                                  , '/examASs'                                                                                                                                                                                                                          ])
       .state(['root.persons.view.examASs.search'                           , ''                                                                            , ['@root.persons.view'                 , 'js/gva/persons/views/exams/examsSearch.html'                            , 'ExamsSearchCtrl'               ]])
       .state(['root.persons.view.examASs.new'                              , '/new'                                                                        , ['@root.persons.view'                 , 'js/gva/persons/views/exams/examsNew.html'                               , 'ExamsNewCtrl'                  ]])
@@ -512,6 +526,8 @@
     .modal('newMedical'      , 'js/gva/persons/modals/medicals/newMedicalModal.html'       , 'NewMedicalModalCtrl'           )
     .modal('chooseExams'     , 'js/gva/persons/modals/exams/chooseExamsModal.html'         , 'ChooseExamsModalCtrl'          )
     .modal('newExam'         , 'js/gva/persons/modals/exams/newExamModal.html'             , 'NewExamModalCtrl'              )
+    .modal('chooseLangCerts' , 'js/gva/persons/modals/langCerts/chooseLangCertsModal.html' , 'ChooseLangCertsModalCtrl'      )
+    .modal('newLangCert'     , 'js/gva/persons/modals/langCerts/newLangCertModal.html'     , 'NewLangCertModalCtrl'          )
     .modal('chooseLicences'  , 'js/gva/persons/modals/licences/chooseLicencesModal.html'   , 'ChooseLicencesModalCtrl'       )
     .modal('editLicence'     , 'js/gva/persons/modals/licences/editLicenceModal.html'      , 'EditLicenceModalCtrl'          )
     .modal('licenceStatuses' , 'js/gva/persons/modals/licences/licenceStatusesModal.html'  , 'LicenceStatusesModalCtrl'      )
@@ -649,10 +665,13 @@
       .state(['root.organizations.view.inspections.search'                                       , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/inspections/organizationsInspectionsSearch.html'                                             , 'OrganizationsInspectionsSearchCtrl'                ]])
       .state(['root.organizations.view.inspections.new'                                          , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/inspections/organizationsInspectionsNew.html'                                                , 'OrganizationsInspectionsNewCtrl'                   ]])
       .state(['root.organizations.view.inspections.edit'                                         , '/:ind'                                      , ['@root.organizations.view', 'js/gva/organizations/views/inspections/organizationsInspectionsEdit.html'                                               , 'OrganizationsInspectionsEditCtrl'                  ]])
-      .state(['root.organizations.view.approvals'                                                , '/approvals'                                                                                                                                                                                                                                                ])
-      .state(['root.organizations.view.approvals.search'                                         , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/approvals/approvalsSearch.html'                                                              , 'ApprovalsSearchCtrl'                               ]])
-      .state(['root.organizations.view.approvals.new'                                            , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/approvals/approvalsNew.html'                                                                 , 'ApprovalsNewCtrl'                                  ]])
-      .state(['root.organizations.view.approvals.edit'                                           , '/:ind'                                      , ['@root.organizations.view', 'js/gva/organizations/views/approvals/approvalsEdit.html'                                                                , 'ApprovalsEditCtrl'                                 ]])
+      .state(['root.organizations.view.approvals'                                                , '/approvals'                                                                                                                                                                                                                                               ])
+      .state(['root.organizations.view.approvals.search'                                         , ''                                           , ['@root.organizations.view'                 , 'js/gva/organizations/views/approvals/approvalsSearch.html'                                             , 'ApprovalsSearchCtrl'                               ]])
+      .state(['root.organizations.view.approvals.new'                                            , '/new'                                       , ['@root.organizations.view'                 , 'js/gva/organizations/views/approvals/approvalsNew.html'                                                , 'ApprovalsNewCtrl'                                  ]])
+      .state(['root.organizations.view.approvals.edit'                                           , '/:ind'                                      , ['@root.organizations.view'                 , 'js/gva/organizations/views/approvals/approvalsEdit.html'                                               , 'ApprovalsEditCtrl'                                 ]])
+      .state(['root.organizations.view.approvals.edit.amendments'                                , '/approvalAmendments'                                                                                                                                                                                                                                       ])
+      .state(['root.organizations.view.approvals.edit.amendments.new'                            , '/new'                                       , ['@root.organizations.view.approvals.edit'  , 'js/gva/organizations/views/approvals/amendments/approvalAmendmentsNew.html'                            , 'ApprovalAmendmentsNewCtrl'                         ]])
+      .state(['root.organizations.view.approvals.edit.amendments.edit'                           , '/:index'                                    , ['@root.organizations.view.approvals.edit'  , 'js/gva/organizations/views/approvals/amendments/approvalAmendmentsEdit.html'                           , 'ApprovalAmendmentsEditCtrl'                        ]])
       .state(['root.organizations.view.staffExaminers'                                           , '/staffExaminers'                                                                                                                                                                                                                                           ])
       .state(['root.organizations.view.staffExaminers.search'                                    , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/staffExaminers/staffExaminersSearch.html'                                                    , 'StaffExaminersSearchCtrl'                          ]])
       .state(['root.organizations.view.staffExaminers.new'                                       , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/staffExaminers/staffExaminersNew.html'                                                       , 'StaffExaminersNewCtrl'                             ]])

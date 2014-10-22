@@ -47,6 +47,11 @@ namespace Gva.Api.Repositories.CaseTypeRepository
                 .SingleOrDefault(ct => ct.GvaCaseTypeId == caseTypeId);
         }
 
+        public GvaCaseType GetCaseType(string caseTypeAlias)
+        {
+            return this.unitOfWork.DbContext.Set<GvaCaseType>()
+                .SingleOrDefault(ct => ct.Alias == caseTypeAlias);
+        }
         public IEnumerable<GvaCaseType> GetCaseTypesForSet(string setAlias)
         {
             return this.unitOfWork.DbContext.Set<GvaCaseType>()

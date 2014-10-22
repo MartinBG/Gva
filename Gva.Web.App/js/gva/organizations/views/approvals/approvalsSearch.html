@@ -1,22 +1,22 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.organizations.view.approvals.new' }" text="organizations.approvalSearch.newApproval" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 <sc-datatable items="organizationApprovals" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
-    <sc-button name="viewBtn" btn-sref="{ state: 'root.organizations.view.approvals.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="viewBtn" btn-sref="{ state: 'root.organizations.view.approvals.edit.amendments.edit', params: {ind: item.partIndex, index: item.amendmentPartIndex } }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.approvalType.name" title="organizations.approvalSearch.approvalType">
+  <sc-column data="approvalType.name" title="organizations.approvalSearch.approvalType">
   </sc-column>
-  <sc-column data="part.documentNumber" title="organizations.approvalSearch.documentNumber">
+  <sc-column data="approvalDocumentNumber" title="organizations.approvalSearch.documentNumber">
   </sc-column>
-  <sc-column data="(part.amendments | last).documentNumber" title="organizations.approvalSearch.documentNumberAmendment">
+  <sc-column data="amendmentDocumentNumber" title="organizations.approvalSearch.documentNumberAmendment">
   </sc-column>
-  <sc-column data="(part.amendments | last).documentDateIssue" title="organizations.approvalSearch.documentFirstDateIssue" type="date">
+  <sc-column data="firstAmendmentDateIssue" title="organizations.approvalSearch.documentFirstDateIssue" type="date">
   </sc-column>
-  <sc-column data="(part.amendments | last).documentDateIssue" title="organizations.approvalSearch.documentDateIssueAmendment" type="date">
+  <sc-column data="lastAmendmentDateIssue" title="organizations.approvalSearch.documentDateIssueAmendment" type="date">
   </sc-column>
-  <sc-column data="(part.amendments | last).changeNum" title="organizations.approvalSearch.changeNumAmendment">
+  <sc-column data="changeNum" title="organizations.approvalSearch.changeNumAmendment">
   </sc-column>
-  <sc-column data="part.approvalState.name" title="organizations.approvalSearch.approvalState">
+  <sc-column data="approvalState.name" title="organizations.approvalSearch.approvalState">
   </sc-column>
-  <sc-column data="(part.amendments | last).applications[0].applicationName" title="organizations.approvalSearch.application">
+  <sc-column data="applicationName" title="organizations.approvalSearch.application">
   </sc-column>
 </sc-datatable>

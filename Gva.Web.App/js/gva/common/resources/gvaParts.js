@@ -8,9 +8,9 @@
         method: 'GET',
         url: 'api/gvaParts/:lotId/isUniqueBPN'
       },
-      'getNextBPN': {
+      'getNewCase': {
         method: 'GET',
-        url: 'api/gvaParts/:lotId/getNextBPN'
+        url: 'api/gvaParts/:lotId/getNewCase'
       }
     });
   }]);

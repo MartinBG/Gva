@@ -4,6 +4,10 @@
 
   function PersonDocumentMedicalCtrl($scope, scFormParams) {
     $scope.personLin = scFormParams.personLin;
+    $scope.isNew = scFormParams.isNew;
+    $scope.caseTypeId = scFormParams.caseTypeId;
+    $scope.hideCaseType = scFormParams.hideCaseType;
+    $scope.appId = scFormParams.appId;
   }
 
   PersonDocumentMedicalCtrl.$inject = ['$scope', 'scFormParams'];

@@ -13,9 +13,9 @@ namespace Gva.Api.ModelsDO.Persons
             this.Limitations = new List<NomValue>();
         }
 
-        public int? Index { get; set; }
+        public int Index { get; set; }
 
-        public int RatingPartIndex { get; set; }
+        public int? RatingPartIndex { get; set; }
 
         public List<NomValue> RatingSubClasses { get; set; }
 

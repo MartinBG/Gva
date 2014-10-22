@@ -67,7 +67,8 @@
       'AircraftCertAirworthinessesFM',
       function ($stateParams, AircraftCertAirworthinessesFM) {
         return AircraftCertAirworthinessesFM.newCertAirworthiness({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

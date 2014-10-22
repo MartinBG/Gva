@@ -6,7 +6,7 @@
 
   function ApplicationsDirective(scModal, $state, $stateParams, $compile, $parse, ApplicationNoms) {
     function preLink(scope, element, attrs) {
-      var lotId = $parse(attrs.lotId)(scope) || attrs.lotId || $stateParams.id;
+      var lotId = $parse(attrs.lotId)(scope) || $stateParams.id;
 
       scope.appSelectOpt = {
         multiple: true,
@@ -37,7 +37,7 @@
 
     function postLink(scope, iElement, iAttrs) {
       var setPart = $parse(iAttrs.setPart)(scope) || iAttrs.setPart,
-          lotId = $parse(iAttrs.lotId)(scope) || iAttrs.lotId || $stateParams.id,
+          lotId = $parse(iAttrs.lotId)(scope) || $stateParams.id,
           path;
 
       if (setPart === 'person') {

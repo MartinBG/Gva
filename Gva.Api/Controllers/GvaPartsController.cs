@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Http;
-using Common.Json;
+using Common.Api.Models;
 using Gva.Api.ModelsDO;
-using Newtonsoft.Json.Linq;
-using Regs.Api.Repositories.LotRepositories;
-using Gva.Api.Repositories.FileRepository;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.FileRepository;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers
 {
@@ -14,12 +15,20 @@ namespace Gva.Api.Controllers
     public class GvaPartsController : ApiController
     {
         private ILotRepository lotRepository;
+        private IApplicationRepository applicationRepository;
         private IFileRepository fileRepository;
+        private ICaseTypeRepository caseTypeRepository;
 
-        public GvaPartsController(ILotRepository lotRepository, IFileRepository fileRepository)
+        public GvaPartsController(
+            ILotRepository lotRepository,
+            IApplicationRepository applicationRepository,
+            IFileRepository fileRepository,
+            ICaseTypeRepository caseTypeRepository)
         {
             this.lotRepository = lotRepository;
+            this.applicationRepository = applicationRepository;
             this.fileRepository = fileRepository;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("{*path:regex(^aircraftCertRegistrationsFM$)}")]
@@ -73,13 +82,34 @@ namespace Gva.Api.Controllers
             });
         }
 
-        [Route("getNextBPN")]
-        public IHttpActionResult GetNextBPN(int lotId, int caseTypeId)
+        [Route("getNewCase")]
+        public IHttpActionResult GetNewCase(int lotId, int caseTypeId, int? appId = null, bool appOnly = false)
         {
-            return Ok(new
+            var caseType = this.caseTypeRepository.GetCaseType(caseTypeId);
+            CaseDO caseDO = new CaseDO()
             {
-                nextBPN = this.fileRepository.GetNextBPN(lotId, caseTypeId)
-            });
+                CaseType = new NomValue
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                },
+                IsAdded = true
+            };
+
+            if (!appOnly)
+            {
+                caseDO.BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseTypeId).ToString();
+            }
+
+            if (appId.HasValue)
+            {
+                this.lotRepository.GetLotIndex(lotId);
+
+                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+            }
+
+            return Ok(caseDO);
         }
     }
 }

@@ -9,8 +9,7 @@
     AircraftCertMarks,
     aircraftCertMark
   ) {
-    $scope.isEdit = false;
-
+    $scope.lotId = $stateParams.id;
     $scope.mark = aircraftCertMark;
 
     $scope.save = function () {
@@ -44,7 +43,8 @@
       'AircraftCertMarks',
       function ($stateParams, AircraftCertMarks) {
         return AircraftCertMarks.newCertMark({
-          id: $stateParams.id
+          id: $stateParams.id,
+          appId: $stateParams.appId
         }).$promise;
       }
     ]

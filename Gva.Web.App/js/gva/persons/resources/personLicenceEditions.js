@@ -6,7 +6,7 @@
     return $resource('api/persons/:id/licences/:ind/licenceEditions/:index', {}, {
       newLicenceEdition: {
         method: 'GET',
-        url: 'api/persons/:id/licences/:ind/licenceEditions/new'
+        url: 'api/persons/:id/licenceEditions/new'
       }
     });
   }]);

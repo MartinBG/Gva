@@ -3,7 +3,7 @@ INSERT INTO [Noms]
     ([Name]                                              , [Alias]                   )
 VALUES
     (N'Типове персонал за обучение'                      , N'trainingStaffTypes'     ),
-    (N'Нива на владеене на английски език'               , N'engLangLevels'          ),
+    (N'Нива на владеене на език'                         , N'langLevels'             ),
     (N'Модел на квалификация на Физическо лице'          , N'personRatingModels'     ),
     (N'Оценки при проверка на Физическо лице'            , N'personCheckRatingValues'),
     (N'Видове действия относно правоспособност'          , N'licenceActions'         ),

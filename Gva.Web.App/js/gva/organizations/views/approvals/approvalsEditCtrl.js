@@ -7,83 +7,41 @@
     $state,
     $stateParams,
     OrganizationApprovals,
-    approval,
-    scMessage
+    approval
   ) {
     var originalApproval = _.cloneDeep(approval);
     $scope.approval = approval;
-    $scope.editMode = null;
     $scope.lotId = $stateParams.id;
 
-    $scope.$watch('approval.part.amendments | last', function (lastAmendment) {
-      $scope.currentAmendment = lastAmendment;
-      $scope.lastAmendment = lastAmendment;
-    });
-
-    $scope.selectAmendment = function (item) {
-      $scope.currentAmendment = item;
-    };
-
     $scope.newAmendment = function () {
-      return OrganizationApprovals.newApprovalAmendment({
-        id: $stateParams.id,
-        ind: $stateParams.ind,
-        appId: $stateParams.appId
-      }).$promise.then(function (amendment) {
-        $scope.approval.part.amendments.push(amendment);
-        $scope.editMode = 'edit';
-      });
+      return $state.go('root.organizations.view.approvals.edit.amendments.new');
     };
 
-    $scope.editLastAmendment = function () {
-      $scope.editMode = 'edit';
-    };
-
-    $scope.deleteLastAmendment = function () {
-      $scope.approval.part.amendments.pop();
-
-      if ($scope.approval.part.amendments.length === 0) {
-        return scMessage('common.messages.confirmDelete')
-        .then(function (result) {
-          if (result === 'OK') {
-            return OrganizationApprovals
-              .remove({ id: $stateParams.id, ind: $stateParams.ind })
-              .$promise.then(function () {
-                return $state.go('root.organizations.view.approvals.search');
-              });
-          }
-        });
-      }
-      else {
-        return OrganizationApprovals
-          .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.approval)
-          .$promise.then(function () {
-            originalApproval = _.cloneDeep($scope.approval);
-          });
-      }
+    $scope.edit = function () {
+      $scope.editApprovalMode = 'edit';
     };
 
     $scope.save = function () {
-      return $scope.editApprovalForm.$validate()
-        .then(function () {
-          if ($scope.editApprovalForm.$valid) {
-            $scope.editMode = 'saving';
-            return OrganizationApprovals
-              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.approval)
-              .$promise
-              .then(function () {
-                $scope.editMode = null;
-                originalApproval = _.cloneDeep($scope.approval);
-              }, function () {
-                $scope.editMode = 'edit';
-              });
-          }
-        });
+      return $scope.editApprovalForm.$validate().then(function () {
+        if ($scope.editApprovalForm.$valid) {
+          return OrganizationApprovals
+            .save({
+              id: $stateParams.id,
+              ind: $stateParams.ind,
+              index: $stateParams.index
+            }, $scope.approval, $scope.caseTypeId)
+            .$promise
+            .then(function (savedApproval) {
+              $scope.editApprovalMode = null;
+              originalApproval = _.cloneDeep(savedApproval);
+            });
+        }
+      });
     };
 
     $scope.cancel = function () {
+      $scope.editApprovalMode = null;
       $scope.approval = _.cloneDeep(originalApproval);
-      $scope.editMode = null;
     };
   }
 
@@ -92,8 +50,7 @@
     '$state',
     '$stateParams',
     'OrganizationApprovals',
-    'approval',
-    'scMessage'
+    'approval'
   ];
 
   ApprovalsEditCtrl.$resolve = {

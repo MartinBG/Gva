@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
+using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
-using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.ModelsDO.Common;
 using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
-using Regs.Api.Repositories.LotRepositories;
-using Gva.Api.ModelsDO.Common;
-using Newtonsoft.Json.Linq;
-using Common.Api.UserContext;
 using Regs.Api.Models;
-using Gva.Api.Models;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/aircraftDocumentApplications")]
     [Authorize]
-    public class AircraftDocumentApplicationsController : GvaFilePartController<DocumentApplicationDO>
+    public class AircraftDocumentApplicationsController : GvaCaseTypePartController<DocumentApplicationDO>
     {
         private string path;
         private ILotRepository lotRepository;
@@ -26,6 +25,7 @@ namespace Gva.Api.Controllers.Aircrafts
         private IApplicationRepository applicationRepository;
         private IUnitOfWork unitOfWork;
         private ILotEventDispatcher lotEventDispatcher;
+        private ICaseTypeRepository caseTypeRepository;
         private UserContext userContext;
 
         public AircraftDocumentApplicationsController(
@@ -33,6 +33,7 @@ namespace Gva.Api.Controllers.Aircrafts
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
+            ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("aircraftDocumentApplications", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
@@ -44,15 +45,28 @@ namespace Gva.Api.Controllers.Aircrafts
             this.unitOfWork = unitOfWork;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewDocumentApplication(int lotId)
         {
-            return Ok(new FilePartVersionDO<DocumentApplicationDO>(new DocumentApplicationDO()));
+            GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
+            CaseDO caseDO = new CaseDO()
+            {
+                CaseType = new NomValue()
+                {
+                    NomValueId = caseType.GvaCaseTypeId,
+                    Name = caseType.Name,
+                    Alias = caseType.Alias
+                },
+                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+            };
+
+            return Ok(new CaseTypePartDO<DocumentApplicationDO>(new DocumentApplicationDO(), caseDO));
         }
 
-        public override IHttpActionResult PostNewPart(int lotId, FilePartVersionDO<DocumentApplicationDO> application)
+        public override IHttpActionResult PostNewPart(int lotId, CaseTypePartDO<DocumentApplicationDO> application)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -60,7 +74,7 @@ namespace Gva.Api.Controllers.Aircrafts
 
                 PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart<DocumentApplicationDO>(path + "/*", application.Part, this.userContext);
 
-                this.fileRepository.AddFileReferences(partVersion.Part, application.Files);
+                this.fileRepository.AddFileReference(partVersion.Part, application.Case);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
 

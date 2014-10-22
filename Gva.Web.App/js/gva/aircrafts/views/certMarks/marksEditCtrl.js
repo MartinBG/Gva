@@ -12,7 +12,7 @@
   ) {
     var originalMark = _.cloneDeep(aircraftCertMark);
 
-    $scope.isEdit = true;
+    $scope.lotId = $stateParams.id;
     $scope.mark = aircraftCertMark;
     $scope.editMode = null;
 

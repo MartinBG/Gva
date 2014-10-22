@@ -10,7 +10,7 @@
     $scope.indexed = _.filter(inventory, function(item) {
        return item.bookPageNumber;
     });
-    $scope.notIndexed =  _.filter(inventory, function(item) {
+    $scope.notIndexed = _.filter(inventory, function(item) {
        return !item.bookPageNumber;
     });
 
@@ -47,6 +47,9 @@
           break;
         case 'personLicence':
           stateName = 'root.persons.view.licences.view.editions.edit';
+          break;
+        case 'personLangCert':
+          stateName = 'root.persons.view.documentLangCerts.edit';
           break;
       }
 

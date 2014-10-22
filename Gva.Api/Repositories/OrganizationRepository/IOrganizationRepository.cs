@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gva.Api.Models.Views.Organization;
+using Gva.Api.ModelsDO.Organizations;
 
 namespace Gva.Api.Repositories.OrganizationRepository
 {
@@ -22,5 +23,9 @@ namespace Gva.Api.Repositories.OrganizationRepository
         IEnumerable<GvaViewOrganizationRecommendation> GetInspectionRecommendations(int lotId, int inspectionPartIndex);
 
         IEnumerable<GvaViewOrganizationRecommendation> GetRecommendations(int lotId);
+
+        IEnumerable<GvaViewOrganizationApproval> GetApprovals(int lotId, int? caseTypeId);
+
+        int GetLastApprovalAmendmentIndex(int lotId, int approvalPartIndex);
     }
 }

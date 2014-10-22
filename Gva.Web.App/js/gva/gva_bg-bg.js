@@ -85,13 +85,14 @@
           applicationType: 'Тип заявление',
           applicationPaymentType: 'Член',
           currency: 'Парична единица',
-          taxAmount: 'Платена такса'
+          taxAmount: 'Платена такса',
+          caseType: 'Тип дело'
         },
         scannedDocumentlDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
+          bookPageNumber: '№ стр.',
+          pageCount: 'Бр. стр.',
           caseType: 'Тип дело',
           applications: 'Заявления'
         },
@@ -125,8 +126,7 @@
           auditState: 'Състояние',
           notification: 'Предв. уведом.',
           subject: 'Предмет на одит',
-          applications: 'Заявления',
-          caseType: 'Дело',
+          caseType: 'Тип дело',
           inspectionPlace: 'Адрес на одитирания обект',
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
@@ -1242,8 +1242,7 @@
           caaTo: 'ГВА писмо до',
           caaJob: 'ГВА писмо длъжност',
           caaToAddress: 'ГВА писмо адрес',
-          getScode: 'Генерирай S-код',
-          applications: 'Заявления'
+          getScode: 'Генерирай S-код'
         },
         markDirective: {
           valid: 'Валиден',
@@ -1305,8 +1304,7 @@
           pointFromAlt: 'Начален пункт (англ.)',
           pointToAlt: 'Краен пункт (англ.)',
           planStopsAlt: 'Планирани спирания (англ.)',
-          crewAlt: 'Екипаж (англ.)',
-          applications: 'Заявления'
+          crewAlt: 'Екипаж (англ.)'
         },
         noiseDirective: {
           issueNumber: '№',
@@ -1324,8 +1322,7 @@
           tcdsn: 'TCDSN',
           tcds: 'TCDS',
           chapter: 'Chapter',
-          additionalModification: 'Допълнителна модификация',
-          applications: 'Заявления'
+          additionalModification: 'Допълнителна модификация'
         },
         radioDirective: {
           certNumber: '№',
@@ -1338,8 +1335,7 @@
           model: 'Модел',
           power: 'Мощност',
           'class': 'Клас на излъчване',
-          bandwidth: 'Честотна лента',
-          applications: 'Заявления'
+          bandwidth: 'Честотна лента'
         },
         regDirective: {
           typeCertTitle: 'Типов сертификат',
@@ -1708,8 +1704,8 @@
           ratings: 'Класове',
           flyingExperiences: 'Летателен / практически опит',
           documentTrainings: 'Обучение',
+          documentLangCerts: 'Свид. за език',
           checks: 'Проверки',
-          exams: 'Теор. изпити',
           medicals: 'Медицински',
           personData: 'Лични данни',
           addresses: 'Адреси',
@@ -1738,6 +1734,7 @@
           caseType: 'Тип дело'
         },
         examDirective: {
+          caseType: 'Тип дело',
           commonQuestions: 'Основни знания',
           specializedQuestions: 'Специализирани знания',
           examDate: 'Дата',
@@ -1822,9 +1819,11 @@
           speciality: 'Специалност',
           graduation: 'Степен на образование',
           school: 'Учебно заведение',
-          notes: 'Бележки'
+          notes: 'Бележки',
+          caseType: 'Тип дело'
         },
         personDocumentIdDirective: {
+          caseType: 'Тип дело',
           personDocumentIdTypeId: 'Тип документ',
           valid: 'Валиден',
           documentNumber: '№ на документ',
@@ -1853,7 +1852,8 @@
           documentPublisher: 'Издател',
           limitations: 'Ограничения към свидетелство за медицинска годност',
           medClass: 'Клас',
-          notes: 'Бележки'
+          notes: 'Бележки',
+          caseType: 'Тип дело'
         },
         personEmploymentDirective: {
           hiredate: 'Дата на назначаване',
@@ -1861,50 +1861,19 @@
           organization: 'Организация',
           employmentCategory: 'Категория длъжност',
           country: 'Страна',
-          notes: 'Бележки'
+          notes: 'Бележки',
+          caseType: 'Тип дело'
         },
         personCheckDirective: {
-          staffType: 'Вид персонал',
-          documentNumber: '№ на документа',
-          documentPersonNumber: '№ в списъка',
-          personCheckDocumentType: 'Тип документ',
-          documentDateValidFrom: 'От дата',
-          documentDateValidTo: 'Валидно до',
-          documentPublisher: 'Издател',
-          ratingClass: 'Клас ВС',
-          authorization: 'Разрешение',
-          licenceType: 'Вид правоспособност',
           personCheckRatingValue: 'Оценка',
-          personCheckDocumentRole: 'Роля на документ',
-          aircraftTypeGroup: 'Тип/Група ВС',
-          valid: 'Валиден',
-          notes: 'Бележки',
-          sector: 'Сектор/работно място',
-          locationIndicator: 'Индикатор на местоположение',
-          ratingType: 'Тип ВС'
+          checkData: 'Данни за проверка'
         },
-        personDocumentTrainingDirective: {
-          staffType: 'Тип персонал',
-          documentNumber: '№ на документ',
-          documentPersonNumber: '№ в списъка (групов документ)',
-          documentDateValidFrom: 'Дата на завършване',
-          documentDateValidTo: 'Срок на валидност',
-          documentPublisher: 'Издател',
-          ratingType: 'Тип ВС',
-          aircraftTypeGroup: 'Тип/Група ВС',
-          ratingClass: 'Клас ВС',
-          authorization: 'Разрешение',
-          licenceType: 'Вид правоспособност',
-          locationIndicator: 'Индикатор за местоположение',
-          sector: 'Сектор/работно място',
-          engLangLevel: 'Ниво на език',
-          personOtherDocumentType: 'Тип документ',
-          personOtherDocumentRole: 'Роля на документ',
-          valid: 'Валиден',
-          notes: 'Бележки'
+        personDocumentLangCertDirective: {
+          langLevel: 'Ниво на език',
+          langCertData: 'Данни за свидетелство за език'
         },
         personFlyingExperienceDirective: {
-          staffType: 'Тип персонал',
+          caseType: 'Тип дело',
           documentDate: 'Дата на документа',
           month: 'За месец',
           year: 'Година',
@@ -1932,19 +1901,6 @@
           totalLastMonths: 'Общ нальот за посл. 12 месеца',
           notUnique: 'Данните се дублират с вече съществуващ запис'
         },
-        personDocumentExamDirective: {
-          title: 'Теоретичен изпит',
-          documentNumber: '№ на документ',
-          documentDateValidFrom: 'Валиден от',
-          documentDateValidTo: 'Валиден до',
-          documentPublisher: 'Издател',
-          personOtherDocumentType: 'Тип документ',
-          personOtherDocumentRole: 'Роля на документ',
-          valid: 'Валиден',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.'
-        },
         ratingEditionDirective: {
           documentDateValidFrom: 'Дата на вписване',
           documentDateValidTo: 'Валидно до',
@@ -1961,14 +1917,15 @@
           personRatingLevel: 'Степен',
           sector: 'Сектор/работно място',
           locationIndicator: 'Индикатор на местоположение',
-          ratingClass: 'Клас ВС',
+          ratingClass: 'Клас',
           authorization: 'Разрешение',
           aircraftTypeGroup: 'Тип/Група ВС',
           ratingCategory: 'Категория',
-          administration: 'Администрация'
+          administration: 'Администрация',
+          caseType: 'Тип дело'
         },
         licenceDirective: {
-          staffType: 'Тип персонал',
+          caseType: 'Тип дело',
           licenceType: 'Вид',
           licenceNumber: 'Лиценз No',
           foreignLicenceNumber: 'Чужд лиценз No',
@@ -2007,6 +1964,10 @@
           addExam: 'Нов изпит',
           addExistingExam: 'Съществуващ изпит',
           noExams: 'Няма избрани изпити',
+          langCerts: 'Свидетелства за език към лиценза',
+          addLangCert: 'Ново свидетелство',
+          addExistingLangCert: 'Съществуващо свидетелство',
+          noLangCerts: 'Няма избрани свидетелства',
           trainings: 'Обучения към лиценза',
           addTraining: 'Ново обучение',
           addExistingTraining: 'Съществуващо обучение',
@@ -2024,6 +1985,14 @@
           },
           examsTable: {
             documentNumber: '№ на документа',
+            documentDateValidFrom: 'От дата',
+            documentPublisher: 'Издател',
+            valid: 'Валиден'
+          },
+          langCertsTable: {
+            documentNumber: '№ на документа',
+            langCertType: 'Тип',
+            langLevel: 'Ниво',
             documentDateValidFrom: 'От дата',
             documentPublisher: 'Издател',
             valid: 'Валиден'
@@ -2087,18 +2056,28 @@
           },
           applications: 'Заявления'
         },
-        personOtherDirective: {
+        personCommonDocDirective: {
+          caseType: 'Тип дело',
+          documentPublisher: 'Издател',
+          valid: 'Валиден',
           documentNumber: 'Док No',
-          documentPersonNumber: 'No в списъка (групов документ)',
+          documentPersonNumber: 'No в списъка',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
-          documentPublisher: 'Издател',
+          personDocumentType: 'Тип документ',
+          personDocumentRole: 'Роля на документ',
           notes: 'Бележки',
-          personOtherDocumentType: 'Тип документ',
-          personOtherDocumentRole: 'Роля',
-          valid: 'Действителен',
-          bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.'
+          title: 'Общи данни'
+        },
+        personCommonDocClassificationDirective: {
+          ratingType: 'Тип ВС',
+          aircraftTypeGroup: 'Тип/Група ВС',
+          ratingClass: 'Клас ВС',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          locationIndicator: 'Индикатор за местоположение',
+          sector: 'Сектор/работно място',
+          title: 'Данни за класификация'
         },
         personDocApplicationSearch: {
           newApplication: 'Ново заявление',
@@ -2247,7 +2226,7 @@
         },
         otherSearch: {
           documentNumber: 'Док No',
-          documentPersonNumber: 'No в списъка (групов документ)',
+          documentPersonNumber: 'No в списъка',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
           documentPublisher: 'Издател',
@@ -2418,6 +2397,37 @@
           cancel: 'Отказ',
           deleteTraining: 'Изтрий'
         },
+        documentLangCertSearch: {
+          staffType: 'Тип персонал',
+          documentNumber: '№ на документ',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'До дата',
+          documentPublisher: 'Издател',
+          ratingType: 'Тип ВС (раб. място)',
+          ratingClass: 'Клас',
+          authorization: 'Разрешение',
+          licenceType: 'Вид правоспособност',
+          personOtherDocumentType: 'Тип документ',
+          personOtherDocumentRole: 'Роля на документ',
+          valid: 'Валидно',
+          notes: 'Бележки',
+          bookPageNumber: '№ стр. в делов. книга',
+          pageCount: 'Брой стр.',
+          file: 'Файл',
+          newDocumentLangCert: 'Нов документ'
+        },
+        newDocumentLangCert: {
+          title: 'Ново свидетелство за език',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editDocumentLangCert: {
+          title: 'Преглед на свидетелство за език',
+          save: 'Запис',
+          edit: 'Редакция',
+          cancel: 'Отказ',
+          deleteLangCert: 'Изтрий'
+        },
         flyingExperienceSearch: {
           staffType: 'Тип персонал',
           month: 'Месец',
@@ -2531,6 +2541,22 @@
         },
         newRatingModal: {
           title: 'Нова квалификация',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        chooseLangCertsModal: {
+          title: 'Избор на свидетелства за език',
+          documentNumber: 'No на свидетелството',
+          documentDateValidFrom: 'От дата',
+          langCertType: 'Тип',
+          langLevel: 'Ниво',
+          documentPublisher: 'Издател',
+          valid: 'Валиден',
+          add: 'Добави',
+          cancel: 'Отказ'
+        },
+        newLangCertModal: {
+          title: 'Нова свидетелство за език',
           save: 'Запис',
           cancel: 'Отказ'
         },
@@ -2751,7 +2777,6 @@
           viewAirport: 'Преглед',
           viewEquipment: 'Преглед',
           unlinkedLotParts: 'Документи извън преписката',
-          appLotObjects: 'Вписвания',
           'case': {
             regNumber: 'Тип/№/Дата',
             description: 'Тип',
@@ -2790,6 +2815,7 @@
           newFile: {
             title: 'Нова страница в описа',
             documentType: 'Тип на документ',
+            caseType: 'Тип дело',
             cancel: 'Отказ',
             addPart: 'Продължи'
           },
@@ -2803,7 +2829,10 @@
           newDocFile: {
             title: 'Нов файл',
             cancel: 'Отказ',
-            save: 'Запис'
+            save: 'Запис',
+            name: 'Наименование',
+            docFileKind: 'Вид файл',
+            file: 'Прикачен файл'
           },
           linkFile: {
             title: 'Свържи документ в описа',
@@ -3016,7 +3045,7 @@
           fileKind: 'Вид файл',
           fileType: 'Тип файл',
           caseType: 'Тип дело',
-          pageIndex: '№ стр. в дело',
+          pageIndex: '№ стр.',
           pageNumber: 'Брой стр.',
           attachment: 'Прикачен файл'
         },
@@ -3416,8 +3445,7 @@
           recommendations: 'Доклади от препоръки свързани с одит:',
           auditPart: 'Тип',
           formText: '№ на изменението',
-          formDate: 'Форма за заявен обхват на одобрението от дата',
-          caseType: 'Дело'
+          formDate: 'Форма за заявен обхват на одобрението от дата'
         },
         approvalSearch: {
           newApproval: 'Ново удостоверение',
@@ -3437,13 +3465,16 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
-        approvalEdit: {
-          title: 'Изменение',
+        newApprovalAmendment: {
+          title: 'Ново изменение',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editApprovalAmendments: {
+          amendmentForm: 'Редакция на изменение',
           amendmentTitle: 'Изменение',
           approvalForm: 'Удостоверение за одобрение',
-          amendmentForm: 'Изменение',
           amendments: 'Изменения',
-          newAmendment: 'Ново изменение',
           editLastAmendment: 'Редакция',
           deleteLastAmendment: 'Изтриване',
           approvalType: 'Тип одобрение',
@@ -3456,6 +3487,13 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        approvalEdit: {
+          title: 'Преглед на одобрение',
+          newAmendment: 'Ново изменение',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         organizationOtherDirective: {
           documentNumber: 'Док No',
           documentPersonNumber: 'No в списъка (групов документ)',
@@ -3465,7 +3503,8 @@
           notes: 'Бележки',
           organizationOtherDocumentType: 'Тип документ',
           organizationOtherDocumentRole: 'Роля',
-          valid: 'Действителен'
+          valid: 'Действителен',
+          caseType: 'Тип дело'
         },
         recommendationSearch: {
           newRecommendation: 'Нов доклад',
@@ -3524,7 +3563,8 @@
           testDate: 'Дата на писмен тест',
           testScore: 'Оценка от писмен тест',
           valid: 'Валиден',
-          applications: 'Заявления'
+          applications: 'Заявления',
+          caseType: 'Тип дело'
         },
         organizationDataDirective: {
           name: 'Наименование',
@@ -3606,14 +3646,14 @@
           approvalState: 'Състояние на одобрението',
           approvalStateDate: 'Дата',
           approvalStateNote: 'Бележки по състоянието',
-          recommendationReport: 'Доклад за препоръки'
+          recommendationReport: 'Доклад за препоръки',
+          caseType: 'Тип дело'
         },
         amendmentDirective: {
           documentNumber: 'Референтен № на описание	',
           documentDateIssue: 'Дата на издаване',
           changeNum: '№ на изменение',
           noAvailableLimitations: 'Няма налични данни',
-          applications: 'Заявления',
           lims147: {
             title: 'Обхват на одобрение',
             sortOrder: 'Маркер за сортиране',
@@ -3804,18 +3844,18 @@
         'root.persons.view.medicals': 'Медицински',
         'root.persons.view.medicals.new': 'Новo медицинско',
         'root.persons.view.medicals.edit': 'Преглед на медицинско',
-        'root.persons.view.documentTrainings': 'Обучение',
+        'root.persons.view.documentTrainings': 'Обучения',
         'root.persons.view.documentTrainings.new': 'Ново обучение',
         'root.persons.view.documentTrainings.edit': 'Преглед на обучение',
+        'root.persons.view.documentLangCerts': 'Свидетелства за език',
+        'root.persons.view.documentLangCerts.new': 'Ново свидетелство',
+        'root.persons.view.documentLangCerts.edit': 'Преглед на свидетелство',
         'root.persons.view.flyingExperiences': 'Летателен / практически опит',
         'root.persons.view.flyingExperiences.new': 'Нов летателен / практически опит',
         'root.persons.view.flyingExperiences.edit': 'Преглед на летателен / практически опит',
         'root.persons.view.ratings': 'Квалификации',
         'root.persons.view.ratings.edit.editions.new': 'Ново вписване на квалификация',
         'root.persons.view.ratings.edit.editions.edit': 'Преглед на квалификационен клас',
-        'root.persons.view.exams': 'Теоритични изпити',
-        'root.persons.view.exams.new': 'Нов теоритичен изпит',
-        'root.persons.view.exams.edit': 'Преглед на теоритичен изпит',
         'root.persons.view.examASs': 'Теоритични изпити АС',
         'root.persons.view.examASs.new': 'Нов теоритичен изпит АС',
         'root.persons.view.examASs.edit': 'Преглед на теоритичен изпит АС',
