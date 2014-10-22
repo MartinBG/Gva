@@ -628,8 +628,7 @@ namespace Gva.MigrationTool.Sets
                     FROM CAA_DOC.PERSON_DOCUMENT PD
                     JOIN CAA_DOC.NM_DOCUMENT_TYPE DT ON PD.DOCUMENT_TYPE_ID = DT.ID
                     JOIN CAA_DOC.NM_DOCUMENT_ROLE DR ON PD.DOCUMENT_ROLE_ID = DR.ID
-                    LEFT OUTER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON PD.LICENCE_TYPE_ID = LT.ID
-                    LEFT OUTER JOIN CAA_DOC.NM_STAFF_TYPE ST ON ST.ID = LT.STAFF_TYPE_ID
+                    LEFT OUTER JOIN CAA_DOC.NM_STAFF_TYPE ST ON ST.ID = PD.STAFF_TYPE_ID
                     WHERE {0}",
                 new DbClause("PD.PERSON_ID = {0}", personId)
                 )
