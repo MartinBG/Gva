@@ -180,14 +180,6 @@ namespace Gva.MigrationTool.Sets
                         foreach (var aircraftCertRegistration in aircraftCertRegistrations)
                         {
                             addPartWithFiles("aircraftCertRegistrations/*", aircraftCertRegistration);
-
-                            long certId = aircraftCertRegistration.Get<long>("part.__oldId");
-
-                            var aircraftCertNoises = this.getAircraftCertNoises(certId, noms);
-                            foreach (var aircraftCertNoise in aircraftCertNoises)
-                            {
-                                addPartWithFiles("aircraftCertNoises/*", aircraftCertNoise);
-                            }
                         }
 
                         var aircraftCertSmods = this.getAircraftCertSmods(aircraftApexId, nomApplications, noms);
@@ -935,44 +927,6 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("pageCount", null),
                                     new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
                     .ToList();
-        }
-
-        private IList<JObject> getAircraftCertNoises(long certId, Dictionary<string, Dictionary<string, NomValue>> noms)
-        {
-            return this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.AC_NOISE WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID_CERTIFICATE = {0}", certId)
-                )
-                .Materialize(r => new JObject(
-                    new JProperty("part",
-                        Utils.ToJObject(new
-                            {
-                                __oldId = r.Field<int>("ID"),
-                                __migrTable = "AC_S_CODE",
-                                certId = r.Field<long?>("ID_CERTIFICATE"),
-                                issueDate = r.Field<DateTime?>("ISSUE_DATE"),
-                                standart = r.Field<string>("NOISE_STANDARD"),
-                                standartAlt = r.Field<string>("NOISE_STANDARD_TRANS"),
-                                flyover = r.Field<float?>("FLYOVER_NOISE"),
-                                approach = r.Field<float?>("APPROACH_NOISE"),
-                                lateral = r.Field<float?>("LATERAL_NOISE"),
-                                overflight = r.Field<float?>("OVERFLIGHT_NOISE"),
-                                takeoff = r.Field<float?>("TAKE_OFF_NOISE"),
-                                modifications = r.Field<string>("MODIFICATIONS"),
-                                modificationsAlt = r.Field<string>("MODIFICATIONS_TRANS"),
-                                notes = r.Field<string>("REMARKS")
-                            })),
-                        new JProperty("files",
-                            new JArray(
-                                new JObject(
-                                    new JProperty("isAdded", true),
-                                    new JProperty("file", null),
-                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
-                                    new JProperty("bookPageNumber", null),
-                                    new JProperty("pageCount", null),
-                                    new JProperty("applications", new JArray()))))))
-                        .ToList();
         }
 
         private IList<JObject> getAircraftCertSmods(int aircraftId, Dictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms)
