@@ -63,8 +63,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessViewCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoise.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoiseView.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertPermitToFly.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertPermitToFlyView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRadio.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRadioView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertReg.html" />
@@ -93,7 +91,6 @@
     <Content Include="js\gva\aircrafts\resources\aircraftApplications.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertAirworthinessesFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertNoises.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftCertPermitsToFly.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRadios.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRegistrations.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRegistrationsFM.js" />
@@ -135,12 +132,6 @@
     <Content Include="js\gva\aircrafts\views\certNoises\noisesNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certNoises\noisesSearch.html" />
     <Content Include="js\gva\aircrafts\views\certNoises\noisesSearchCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certPermits\permitsEdit.html" />
-    <Content Include="js\gva\aircrafts\views\certPermits\permitsEditCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certPermits\permitsNew.html" />
-    <Content Include="js\gva\aircrafts\views\certPermits\permitsNewCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certPermits\permitsSearch.html" />
-    <Content Include="js\gva\aircrafts\views\certPermits\permitsSearchCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certRadios\radiosEdit.html" />
     <Content Include="js\gva\aircrafts\views\certRadios\radiosEditCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certRadios\radiosNew.html" />

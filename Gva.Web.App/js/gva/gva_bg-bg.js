@@ -696,7 +696,6 @@
           regs: 'Регистрации',
           airworthinesses: 'Летателни годности',
           smods: 'S-code',
-          permits: 'Разрешения за полет',
           radios: 'Разрешителни за радиостанция',
           noises: 'Удостоверения за шум',
           docs: 'Документи',
@@ -960,28 +959,6 @@
           saveReview: 'Запис',
           cancelReview: 'Отказ'
         },
-        permitSearch: {
-          issuePlace: 'Място на издаване',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          pointFrom: 'Начален пункт',
-          pointTo: 'Краен пункт',
-          planStops: 'Планирани спирания',
-          crew: 'Екипаж',
-          newPermit: 'Ново разрешение'
-        },
-        newPermit: {
-          title: 'Ново разрешение за полет',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editPermit: {
-          title: 'Преглед на разрешение за полет',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deletePermit: 'Изтрий'
-        },
         noiseSearch: {
           tcdsn: 'TCDSN',
           issueDate: 'Дата на издаване',
@@ -1110,16 +1087,6 @@
           tcds: 'TCDS',
           chapter: 'Chapter'
         },
-        permitViewDirective: {
-          title: 'Разрешениe за полет',
-          issuePlace: 'Място на издаване',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          pointFrom: 'Начален пункт',
-          pointTo: 'Краен пункт',
-          planStops: 'Планирани спирания',
-          crew: 'Екипаж'
-        },
         radioViewDirective: {
           title: 'Разрешително за използване на радиостанция',
           valid: 'Валидно',
@@ -1171,23 +1138,6 @@
           approvalNumber: '№ на одобрение',
           organzation: 'Организация',
           refNumber: 'Реф.№ одобрение'
-        },
-        permitDirective: {
-          issuePlace: 'Място на издаване',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          purpose: 'Обхват на разрешението',
-          notes: 'Условия/Забележки',
-          pointFrom: 'Начален пункт',
-          pointTo: 'Краен пункт',
-          planStops: 'Планирани спирания',
-          crew: 'Екипаж',
-          purposeAlt: 'Обхват на разрешението (англ.)',
-          notesAlt: 'Условия/Забележки (англ.)',
-          pointFromAlt: 'Начален пункт (англ.)',
-          pointToAlt: 'Краен пункт (англ.)',
-          planStopsAlt: 'Планирани спирания (англ.)',
-          crewAlt: 'Екипаж (англ.)'
         },
         noiseDirective: {
           issueNumber: '№',
@@ -3708,9 +3658,6 @@
         'root.aircrafts.view.airworthinessesFM': 'Летателни годности',
         'root.aircrafts.view.airworthinessesFM.new': 'Нова годност',
         'root.aircrafts.view.airworthinessesFM.edit': 'Преглед на годност',
-        'root.aircrafts.view.permits': 'Разрешения за полет',
-        'root.aircrafts.view.permits.new': 'Ново разрешение',
-        'root.aircrafts.view.permits.edit': 'Преглед на разрешение',
         'root.aircrafts.view.noises': 'Удостоверения за шум',
         'root.aircrafts.view.noises.new': 'Ново удостоверение',
         'root.aircrafts.view.noises.edit': 'Преглед на удостоверение',

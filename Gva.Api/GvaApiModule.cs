@@ -180,7 +180,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRadiosController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftNoisesController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftPermitsToFlyController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftSmodsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDocumentOthersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftMaintenanceController>().InstancePerLifetimeScope();

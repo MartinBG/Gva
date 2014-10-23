@@ -183,12 +183,6 @@ namespace Gva.MigrationTool.Sets
 
                             long certId = aircraftCertRegistration.Get<long>("part.__oldId");
 
-                            var aircraftCertPermitsToFly = this.getAircraftCertPermitsToFly(certId, nomApplications, noms);
-                            foreach (var aircraftCertPermitToFly in aircraftCertPermitsToFly)
-                            {
-                                addPartWithFiles("aircraftCertPermitsToFly/*", aircraftCertPermitToFly);
-                            }
-
                             var aircraftCertNoises = this.getAircraftCertNoises(certId, noms);
                             foreach (var aircraftCertNoise in aircraftCertNoises)
                             {
@@ -930,93 +924,6 @@ namespace Gva.MigrationTool.Sets
                                     "removalDocumentDate",
                                     "removalInspectorId",
                                     "typeCert"
-                                })),
-                        new JProperty("files",
-                            new JArray(
-                                new JObject(
-                                    new JProperty("isAdded", true),
-                                    new JProperty("file", null),
-                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
-                                    new JProperty("bookPageNumber", null),
-                                    new JProperty("pageCount", null),
-                                    new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
-                    .ToList();
-        }
-
-        private IList<JObject> getAircraftCertPermitsToFly(long certId, Dictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms)
-        {
-            var parts = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.AC_FLY_PERMIT WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID_CERTIFICATE = {0}", certId)
-                )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "AC_FLY_PERMIT",
-                        certId = r.Field<long?>("ID_CERTIFICATE"),
-                        issueDate = r.Field<DateTime?>("ISSUE_DATE"),
-                        issuePlace = r.Field<string>("ISSUE_PLACE"),
-                        purpose = r.Field<string>("PURPOSE"),
-                        purposeAlt = r.Field<string>("PURPOSE_TRANS"),
-                        pointFrom = r.Field<string>("POINT_FROM"),
-                        pointFromAlt = r.Field<string>("POINT_FROM_TRANS"),
-                        pointTo = r.Field<string>("POINT_TO"),
-                        pointToAlt = r.Field<string>("POINT_TO_TRANS"),
-                        planStops = r.Field<string>("PLANED_STOPS"),
-                        planStopsAlt = r.Field<string>("PLANED_STOPS_TRANS"),
-                        validToDate = r.Field<DateTime?>("VALID_TO"),
-                        notes = r.Field<string>("REMARKS"),
-                        notesAlt = r.Field<string>("REMARKS_TRANS"),
-                        crew = r.Field<string>("CREW"),
-                        crewAlt = r.Field<string>("CREW_TRANS"),
-                    }))
-                .ToList();
-
-            var apps = this.oracleConn.CreateStoreCommand(
-                @"SELECT R.ID REQUEST_ID,
-                        AFP.ID AC_FLYPERM_ID
-                    FROM CAA_DOC.REQUEST R
-                    JOIN CAA_DOC.AC_FLY_PERMIT AFP ON AFP.ID_REQUEST = R.ID
-                                WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and AFP.ID_CERTIFICATE = {0}", certId)
-                )
-                .Materialize(r =>
-                    new
-                    {
-                        aircraftCertFlyPermitId = r.Field<int>("AC_FLYPERM_ID"),
-                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
-                    })
-                .ToList();
-
-            return (from part in parts
-                    join app in apps on part.Get<int>("__oldId") equals app.aircraftCertFlyPermitId into ag
-                    select new JObject(
-                        new JProperty("part",
-                            Utils.Pluck(part,
-                                new string[] 
-                                {
-                                    "__oldId",
-                                    "__migrTable",
-
-                                    "certId",
-                                    "issueDate",
-                                    "issuePlace",
-                                    "purpose",
-                                    "purposeAlt",
-                                    "pointFrom",
-                                    "pointFromAlt",
-                                    "pointTo",
-                                    "pointToAlt",
-                                    "planStops",
-                                    "planStopsAlt",
-                                    "valitoDate",
-                                    "notes",
-                                    "notesAlt",
-                                    "crew",
-                                    "crewAlt"
                                 })),
                         new JProperty("files",
                             new JArray(
