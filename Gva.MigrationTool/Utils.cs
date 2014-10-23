@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -104,7 +105,7 @@ namespace Gva.MigrationTool
         public static decimal? FmToDecimal(string val)
         {
             decimal value;
-            if (FmCheckValue(val) && decimal.TryParse(val.Trim(), out value))
+            if (FmCheckValue(val) && decimal.TryParse(val.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out value))
             {
                 return value;
             }
