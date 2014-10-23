@@ -88,7 +88,6 @@
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOwnersController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftInspectionsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftMaintenancesController.cs" />
-    <Compile Include="Controllers\Aircrafts\AircraftMarksController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftNoisesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftPermitsToFlyController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftRadiosController.cs" />
@@ -184,7 +183,6 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessForm15MainDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewOtherDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessFMDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertMarkDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertPermitToFlyDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioDO.cs" />

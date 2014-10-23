@@ -61,8 +61,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessFM.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessViewCtrl.js" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertMark.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertMarkView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoise.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoiseView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertPermitToFly.html" />
@@ -94,7 +92,6 @@
     <Content Include="js\gva\aircrafts\resources\aircrafts.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftApplications.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertAirworthinessesFM.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftCertMarks.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertNoises.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertPermitsToFly.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRadios.js" />
@@ -132,12 +129,6 @@
     <Content Include="js\gva\aircrafts\views\certAirworthinessesFM\airworthinessesNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certAirworthinessesFM\airworthinessesSearch.html" />
     <Content Include="js\gva\aircrafts\views\certAirworthinessesFM\airworthinessesSearchCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certMarks\marksEdit.html" />
-    <Content Include="js\gva\aircrafts\views\certMarks\marksEditCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certMarks\marksNew.html" />
-    <Content Include="js\gva\aircrafts\views\certMarks\marksNewCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certMarks\marksSearch.html" />
-    <Content Include="js\gva\aircrafts\views\certMarks\marksSearchCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certNoises\noisesEdit.html" />
     <Content Include="js\gva\aircrafts\views\certNoises\noisesEditCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certNoises\noisesNew.html" />

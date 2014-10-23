@@ -17,7 +17,6 @@ VALUES
     (@setId    , 'Регистация'                  , 'aircraftRegistration'   , N'^aircraftCertRegistrations/\d+$'    , NULL        ),
     (@setId    , 'Регистация'                  , 'aircraftRegistrationFM' , N'^aircraftCertRegistrationsFM/\d+$'  , NULL        ),
     (@setId    , 'Летателна годност'           , 'aircraftAirworthinessFM', N'^aircraftCertAirworthinessesFM/\d+$', NULL        ),
-    (@setId    , 'Регистрационен знак'         , 'aircraftMark'           , N'^aircraftCertMarks/\d+$'            , NULL        ),
     (@setId    , 'S-mode код'                  , 'aircraftSmod'           , N'^aircraftCertSmods/\d+$'            , NULL        ),
     (@setId    , 'Разрешително за полет'       , 'aircraftPermit'         , N'^aircraftCertPermitsToFly/\d+$'     , NULL        ),
     (@setId    , 'Удосотоверение за шум'       , 'aircraftNoise'          , N'^aircraftCertNoises/\d+$'           , NULL        ),

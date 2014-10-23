@@ -695,7 +695,6 @@
           currentReg: 'Текуща регистрация',
           regs: 'Регистрации',
           airworthinesses: 'Летателни годности',
-          marks: 'Регистрационни знаци',
           smods: 'S-code',
           permits: 'Разрешения за полет',
           radios: 'Разрешителни за радиостанция',
@@ -927,27 +926,6 @@
           cancel: 'Отказ',
           deleteSmod: 'Изтрий'
         },
-        markSearch: {
-          valid: 'Валиден',
-          mark: 'Рег. знак',
-          ltrInNumber: 'Тяхно писмо №',
-          ltrInDate: 'Тяхна дата',
-          ltrCaaNumber: 'ГВА писмо №',
-          ltrCaaDate: 'ГВА дата',
-          newMark: 'Нов знак'
-        },
-        newMark: {
-          title: 'Нов регистрационен знак',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editMark: {
-          title: 'Преглед на регистрационен знак',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deleteMark: 'Изтрий'
-        },
         airworthinessFMSearch: {
           newAirworthiness: 'Нова годност',
           airworthinessCertificateType: 'Тип сертификат',
@@ -1107,15 +1085,6 @@
           ltrCaaNumber: 'ГВА писмо №',
           ltrCaaDate: 'ГВА дата'
         },
-        markViewDirective: {
-          title: 'Регистрационен знак',
-          valid: 'Валиден',
-          mark: 'Рег. знак',
-          ltrInNumber: 'Тяхно писмо №',
-          ltrInDate: 'Тяхна дата',
-          ltrCaaNumber: 'ГВА писмо №',
-          ltrCaaDate: 'ГВА дата'
-        },
         airworthinessViewDirective: {
           title: 'Летателна годност',
           titleNoAw: '(от предходна регистрация)',
@@ -1173,15 +1142,6 @@
           caaJob: 'ГВА писмо длъжност',
           caaToAddress: 'ГВА писмо адрес',
           getScode: 'Генерирай S-код'
-        },
-        markDirective: {
-          valid: 'Валиден',
-          mark: 'Регистрационен знак',
-          ltrInNumber: 'Тяхно писмо №',
-          ltrInDate: 'Тяхна дата',
-          ltrCaaNumber: 'ГВА писмо №',
-          ltrCaaDate: 'ГВА дата',
-          applications: 'Заявления'
         },
         airworthinessFMDirective: {
           airworthinessCertificateType: 'Тип',
@@ -3745,9 +3705,6 @@
         'root.aircrafts.view.smods': 'S-code',
         'root.aircrafts.view.smods.new': 'Нов S-code',
         'root.aircrafts.view.smods.edit': 'Преглед на S-code',
-        'root.aircrafts.view.marks': 'Регистрационни знаци',
-        'root.aircrafts.view.marks.new': 'Нов знак',
-        'root.aircrafts.view.marks.edit': 'Преглед на знак',
         'root.aircrafts.view.airworthinessesFM': 'Летателни годности',
         'root.aircrafts.view.airworthinessesFM.new': 'Нова годност',
         'root.aircrafts.view.airworthinessesFM.edit': 'Преглед на годност',

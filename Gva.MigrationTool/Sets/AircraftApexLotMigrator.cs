@@ -196,12 +196,6 @@ namespace Gva.MigrationTool.Sets
                             }
                         }
 
-                        var aircraftCertMarks = this.getAircraftCertMarks(aircraftApexId, nomApplications, noms);
-                        foreach (var aircraftCertMark in aircraftCertMarks)
-                        {
-                            addPartWithFiles("aircraftCertMarks/*", aircraftCertMark);
-                        }
-
                         var aircraftCertSmods = this.getAircraftCertSmods(aircraftApexId, nomApplications, noms);
                         foreach (var aircraftCertSmod in aircraftCertSmods)
                         {
@@ -1072,73 +1066,6 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("pageCount", null),
                                     new JProperty("applications", new JArray()))))))
                         .ToList();
-        }
-
-        private IList<JObject> getAircraftCertMarks(int aircraftId, Dictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms)
-        {
-            var parts = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.AC_MARK WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
-                )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "AC_MARK",
-                        ltrInNumber = r.Field<string>("LTR_IN_NOM"),
-                        ltrInDate = r.Field<DateTime?>("LTR_IN_DATE"),
-                        ltrCaaNumber = r.Field<string>("LTR_CAA_NOM"),
-                        ltrCaaDate = r.Field<DateTime?>("LTR_CAA_DATE"),
-                        mark = r.Field<string>("MARK"),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
-                    }))
-                .ToList();
-
-            var apps = this.oracleConn.CreateStoreCommand(
-                @"SELECT R.ID REQUEST_ID,
-                        AM.ID AC_MARK_ID
-                    FROM CAA_DOC.REQUEST R
-                    JOIN CAA_DOC.AC_MARK AM ON AM.ID_REQUEST = R.ID
-                                WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and AM.ID_AIRCRAFT = {0}", aircraftId)
-                )
-                .Materialize(r =>
-                    new
-                    {
-                        aircraftCertMarkId = r.Field<int>("AC_MARK_ID"),
-                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
-                    })
-                .ToList();
-
-            return (from part in parts
-                    join app in apps on part.Get<int>("__oldId") equals app.aircraftCertMarkId into ag
-                    select new JObject(
-                        new JProperty("part",
-                            Utils.Pluck(part,
-                                new string[] 
-                                {
-                                    "__oldId",
-                                    "__migrTable",
-
-                                    "ltrInNumber",
-                                    "ltrInDate",
-                                    "ltrCaaNumber",
-                                    "ltrCaaDate",
-                                    "mark",
-                                    "valid"
-                                })),
-                        new JProperty("files",
-                            new JArray(
-                                new JObject(
-                                    new JProperty("isAdded", true),
-                                    new JProperty("file", null),
-                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
-                                    new JProperty("bookPageNumber", null),
-                                    new JProperty("pageCount", null),
-                                    new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
-                    .ToList();
         }
 
         private IList<JObject> getAircraftCertSmods(int aircraftId, Dictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms)
