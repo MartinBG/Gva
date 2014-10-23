@@ -7,7 +7,6 @@ INSERT INTO [LotSetParts]
     ([LotSetId], [Name]                        , [Alias]                  , [PathRegex]                           , [LotSchemaId])
 VALUES
     (@setId    , 'Данни за ВС'                 , 'aircraftData'           , N'^aircraftData$'                     , NULL        ),
-    (@setId    , 'Данни за ВС'                 , 'aircraftDataApex'       , N'^aircraftDataApex$'                 , NULL        ),
     (@setId    , 'Право на собственост'        , 'aircraftOwner'          , N'^aircraftDocumentOwners/\d+$'       , NULL        ),
     (@setId    , 'Оборудване'                  , 'aircraftPart'           , N'^aircraftParts/\d+$'                , NULL        ),
     (@setId    , 'Задължение'                  , 'aircraftDebtFM'         , N'^aircraftDocumentDebtsFM/\d+$'      , NULL        ),

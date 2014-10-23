@@ -5,15 +5,12 @@ using System.Linq;
 using System.Threading;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
-using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
 using Common.Tests;
-using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.MigrationTool.Nomenclatures;
 using Newtonsoft.Json.Linq;
 using Oracle.DataAccess.Client;
-using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.MigrationTool.Sets
@@ -21,12 +18,12 @@ namespace Gva.MigrationTool.Sets
     public class AircraftApexLotCreator : IDisposable
     {
         private bool disposed = false;
-        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
+        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository>>> dependencyFactory;
         private OracleConnection oracleConn;
 
         public AircraftApexLotCreator(
             OracleConnection oracleConn,
-            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
+            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
             this.oracleConn = oracleConn;
@@ -35,11 +32,12 @@ namespace Gva.MigrationTool.Sets
         public void StartCreating(
             //input constants
             Dictionary<string, Dictionary<string, NomValue>> noms,
+            Dictionary<string, int> MSNtoLotId,
             //intput
             ConcurrentQueue<int> aircraftApexIds,
+            ConcurrentDictionary<string, int> unusedMSNs,
             //output
             ConcurrentDictionary<int, int> apexIdtoLotId,
-            ConcurrentDictionary<string, int> apexMSNtoLotId,
             //cancellation
             CancellationTokenSource cts,
             CancellationToken ct)
@@ -65,31 +63,30 @@ namespace Gva.MigrationTool.Sets
                     {
                         var unitOfWork = dependencies.Value.Item1;
                         var lotRepository = dependencies.Value.Item2;
-                        var caseTypeRepository = dependencies.Value.Item3;
-                        var lotEventDispatcher = dependencies.Value.Item4;
-                        var context = dependencies.Value.Item5;
-
-                        var lot = lotRepository.CreateLot("Aircraft");
-                        int aircraftCaseTypeId = caseTypeRepository.GetCaseTypesForSet("Aircraft").Single().GvaCaseTypeId;
-                        caseTypeRepository.AddCaseTypes(lot, new int[] { aircraftCaseTypeId });
 
                         var aircraftData = this.getAircraftData(aircraftApexId, noms);
-                        lot.CreatePart("aircraftDataApex", aircraftData, context);
-
-                        lot.Commit(context, lotEventDispatcher);
-
-                        unitOfWork.Save();
-                        Console.WriteLine("Created aircraftDataApex part for aircraft with APEX id {0}", aircraftApexId);
-
-                        if (!apexIdtoLotId.TryAdd(aircraftApexId, lot.LotId))
-                        {
-                            throw new Exception(string.Format("aircraftApexId {0} already present in dictionary", aircraftApexId));
-                        }
-
                         var msn = aircraftData.Get<string>("manSN");
-                        if (!apexMSNtoLotId.TryAdd(msn, lot.LotId))
+                        if (MSNtoLotId.ContainsKey(msn))
                         {
-                            Console.WriteLine("DUPLICATE APEX MSN: {0}", msn);//TODO
+                            int dummy;
+                            if (unusedMSNs.TryRemove(msn, out dummy))
+                            {
+                                var lot = lotRepository.GetLotIndex(MSNtoLotId[msn], fullAccess: true);
+
+                                if (!apexIdtoLotId.TryAdd(aircraftApexId, lot.LotId))
+                                {
+                                    throw new Exception(string.Format("aircraftApexId {0} already present in dictionary", aircraftApexId));
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("DUPLICATE MSN - AIRCRAFT WITH MSN {0} IN APEX HAS ALREADY BEEN MIGRATED", msn); //TODO
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("MISSING AIRCRAFT WITH MSN {0} IN APEX", msn);//TODO
                         }
                     }
                 }

@@ -80,7 +80,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertSmodCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertSmodView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftData.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftDataApex.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDataCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebt.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtFM.html" />
@@ -96,7 +95,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessForm15Main.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtClose.html" />
     <Content Include="js\gva\aircrafts\resources\aircrafts.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftsApex.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftApplications.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertAirworthinesses.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertAirworthinessesFM.js" />
@@ -108,7 +106,6 @@
     <Content Include="js\gva\aircrafts\resources\aircraftCertRegistrationsFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertSmods.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftsData.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftsDataApex.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentApplications.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentDebts.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentDebtsFM.js" />
@@ -119,8 +116,6 @@
     <Content Include="js\gva\aircrafts\resources\aircraftsInventory.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftMaintenances.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftParts.js" />
-    <Content Include="js\gva\aircrafts\views\aircraftDataApex\aircraftDataEdit.html" />
-    <Content Include="js\gva\aircrafts\views\aircraftDataApex\aircraftDataEditCtrl.js" />
     <Content Include="js\gva\aircrafts\views\aircraftData\aircraftDataEdit.html" />
     <Content Include="js\gva\aircrafts\views\aircraftData\aircraftDataEditCtrl.js" />
     <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesEdit.html" />
@@ -129,8 +124,6 @@
     <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesSearch.html" />
     <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesSearchCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\aircraftsApexNew.html" />
-    <Content Include="js\gva\aircrafts\views\aircraftsApexNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\aircraftsNew.html" />
     <Content Include="js\gva\aircrafts\views\aircraftsNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\aircraftsNewWizzard.html" />

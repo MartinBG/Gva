@@ -10,12 +10,10 @@ using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
 using Common.Tests;
-using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.MigrationTool.Nomenclatures;
 using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
-using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.MigrationTool.Sets
@@ -37,12 +35,11 @@ namespace Gva.MigrationTool.Sets
         public void StartCreating(
             //input constants
             Dictionary<string, Dictionary<string, NomValue>> noms,
-            Dictionary<string, int> apexMSNtoLotId,
             //intput
             ConcurrentQueue<string> aircraftFmIds,
-            ConcurrentDictionary<string, int> unusedMSNs,
             //output
             ConcurrentDictionary<string, int> fmIdtoLotId,
+            ConcurrentDictionary<string, int> MSNtoLotId,
             ConcurrentDictionary<int, JObject> aircraftLotIdToAircraftNom,
             //cancellation
             CancellationTokenSource cts,
@@ -73,31 +70,11 @@ namespace Gva.MigrationTool.Sets
                         var lotEventDispatcher = dependencies.Value.Item4;
                         var context = dependencies.Value.Item5;
 
+                        var lot = lotRepository.CreateLot("Aircraft");
+                        int aircraftCaseTypeId = caseTypeRepository.GetCaseTypesForSet("Aircraft").Single().GvaCaseTypeId;
+                        caseTypeRepository.AddCaseTypes(lot, new int[] { aircraftCaseTypeId });
+
                         var aircraftDataFM = this.getAircraftDataFM(aircraftFmId, noms);
-                        var msn = aircraftDataFM.Get<string>("manSN");
-
-                        Lot lot;
-                        if (apexMSNtoLotId.ContainsKey(msn))
-                        {
-                            int dummy;
-                            if (unusedMSNs.TryRemove(msn, out dummy))
-                            {
-                                lot = lotRepository.GetLotIndex(apexMSNtoLotId[msn], fullAccess: true);
-                            }
-                            else
-                            {
-                                Console.WriteLine("DUPLICATE MSN - AIRCRAFT WITH MSN {0} IN FM HAS ALREADY BEEN MIGRATED", msn);//TODO
-                                continue;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("MISSING AIRCRAFT WITH MSN {0} IN APEX", msn);//TODO
-                            lot = lotRepository.CreateLot("Aircraft");
-                            int aircraftCaseTypeId = caseTypeRepository.GetCaseTypesForSet("Aircraft").Single().GvaCaseTypeId;
-                            caseTypeRepository.AddCaseTypes(lot, new int[] { aircraftCaseTypeId });
-                        }
-
                         lot.CreatePart("aircraftData", aircraftDataFM, context);
                         lot.Commit(context, lotEventDispatcher);
 
@@ -107,6 +84,12 @@ namespace Gva.MigrationTool.Sets
                         if (!fmIdtoLotId.TryAdd(aircraftFmId, lot.LotId))
                         {
                             throw new Exception(string.Format("aircraftFmId {0} already present in dictionary", aircraftFmId));
+                        }
+
+                        var msn = aircraftDataFM.Get<string>("manSN");
+                        if (!MSNtoLotId.TryAdd(msn, lot.LotId))
+                        {
+                            Console.WriteLine("DUPLICATE APEX MSN: {0}", msn);//TODO
                         }
 
                         bool aircraftLotIdAdded = aircraftLotIdToAircraftNom.TryAdd(lot.LotId, Utils.ToJObject(
