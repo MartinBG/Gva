@@ -11,7 +11,6 @@ namespace Gva.Api.ModelsDO.Applications
         {
             this.BookPageNumber = null;
             this.PageCount = null;
-            this.File = new BlobDO();
         }
 
         public DocCaseDO(DocFile docFile, GvaCaseType caseType)
@@ -22,9 +21,12 @@ namespace Gva.Api.ModelsDO.Applications
                 this.DocFileId = docFile.DocFileId;
                 this.Name = docFile.Name;
 
-                this.File.Key = docFile.DocFileContentId;
-                this.File.Name = docFile.DocFileName;
-                this.File.RelativePath = ""; //?
+                this.File = new BlobDO()
+                {
+                    Key = docFile.DocFileContentId,
+                    Name = docFile.DocFileName,
+                    RelativePath = "", //?
+                };
 
                 this.DocFileKind = new NomValue()
                 {
