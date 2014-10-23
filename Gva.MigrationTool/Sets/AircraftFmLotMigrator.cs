@@ -218,6 +218,8 @@ namespace Gva.MigrationTool.Sets
                 }
                 catch (Exception)
                 {
+                    Console.WriteLine("Error in FM aircraftId: {0}", aircraftFmId);
+
                     cts.Cancel();
                     throw;
                 }

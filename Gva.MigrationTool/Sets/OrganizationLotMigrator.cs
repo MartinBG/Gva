@@ -218,13 +218,15 @@ namespace Gva.MigrationTool.Sets
                         catch (InvalidOperationException)
                         {
                         }
-                        unitOfWork.Save();
+                            unitOfWork.Save();
 
                         Console.WriteLine("Migrated organizationId: {0}", organizationId);
                     }
                 }
                 catch (Exception)
                 {
+                    Console.WriteLine("Error in organizationId: {0}", organizationId);
+
                     cts.Cancel();
                     throw;
                 }

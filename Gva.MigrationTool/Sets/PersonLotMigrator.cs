@@ -409,6 +409,8 @@ namespace Gva.MigrationTool.Sets
                 }
                 catch (Exception)
                 {
+                    Console.WriteLine("Error in personId: {0}", personId);
+
                     cts.Cancel();
                     throw;
                 }

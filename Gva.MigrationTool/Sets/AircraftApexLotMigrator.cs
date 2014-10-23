@@ -242,6 +242,8 @@ namespace Gva.MigrationTool.Sets
                 }
                 catch (Exception)
                 {
+                    Console.WriteLine("Error in APEX aircraftId: {0}", aircraftApexId);
+
                     cts.Cancel();
                     throw;
                 }
