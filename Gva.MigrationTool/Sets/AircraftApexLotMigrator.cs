@@ -153,12 +153,10 @@ namespace Gva.MigrationTool.Sets
                             addPartWithFiles("documentOccurrences/*", aircraftDocumentOccurrence);
                         }
 
-                        Dictionary<int, int> documentOwnersOldIdToPartIndex = new Dictionary<int, int>();
                         var aircraftDocumentOwners = this.getAircraftDocumentOwners(aircraftApexId, nomApplications, getPersonByApexId, getOrgByApexId, noms, blobIdsToFileKeys);
                         foreach (var aircraftDocumentOwner in aircraftDocumentOwners)
                         {
                             var pv = addPartWithFiles("aircraftDocumentOwners/*", aircraftDocumentOwner);
-                            documentOwnersOldIdToPartIndex.Add(aircraftDocumentOwner.Get<int>("part.__oldId"), pv.Part.Index);
                         }
 
                         var aircraftDocumentOthers = this.getAircraftDocumentOthers(aircraftApexId, nomApplications, noms, blobIdsToFileKeys);
@@ -174,12 +172,6 @@ namespace Gva.MigrationTool.Sets
                         {
                             var pv = addPartWithFiles("inspections/*", aircraftInspection);
                             inspections.Add(aircraftInspection.Get<int>("part.__oldId"), pv.Part.Index);
-                        }
-
-                        var aircraftCertRegistrations = this.getAircraftCertRegistrations(aircraftApexId, getPersonByApexId, nomApplications, noms, documentOwnersOldIdToPartIndex);
-                        foreach (var aircraftCertRegistration in aircraftCertRegistrations)
-                        {
-                            addPartWithFiles("aircraftCertRegistrations/*", aircraftCertRegistration);
                         }
 
                         var aircraftCertSmods = this.getAircraftCertSmods(aircraftApexId, nomApplications, noms);
@@ -822,111 +814,6 @@ namespace Gva.MigrationTool.Sets
                                         new object[] { nomApplications[r.Field<int>("ID_REQUEST")] } :
                                         new object[0]))))))
                         .ToList();
-        }
-
-        private IList<JObject> getAircraftCertRegistrations(
-            int aircraftId,
-            Func<int?, JObject> getPersonByApexId,
-            Dictionary<int, JObject> nomApplications,
-            Dictionary<string, Dictionary<string, NomValue>> noms,
-            Dictionary<int, int> documentOwnersOldIdToPartIndex)
-        {
-            var parts = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.AC_CERTIFICATE WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
-                )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<long>("ID"),
-                        __migrTable = "AC_CERTIFICATE",
-
-                        register = noms["registers"].ByCode(r.Field<long>("ID").ToString().Substring(0, 1)),
-                        certNumber = r.Field<string>("CERT_NUMBER"),
-                        certDate = r.Field<DateTime?>("CERT_DATE"),
-                        aircraftNewOld = noms["aircraftPartStatuses"].ByCode(r.Field<string>("NEW_USED")),
-                        operationType = noms["aircraftOperTypes"].ByOldId(r.Field<long?>("ID_TYPE_OPER").ToString()),
-                        ownerPartIndex = r.Field<int?>("ID_OWNER") != null ? documentOwnersOldIdToPartIndex[r.Field<int?>("ID_OWNER").Value] : (int?)null,
-                        operatorPartIndex = r.Field<int?>("ID_OPER") != null ? documentOwnersOldIdToPartIndex[r.Field<int?>("ID_OPER").Value] : (int?)null,
-                        inspector = getPersonByApexId(r.Field<int?>("ID_EXAMINER_REG")),
-                        regnotes = r.Field<string>("NOTES_REG"),
-                        paragraph = r.Field<string>("PARAGRAPH"),
-                        paragraphAlt = r.Field<string>("PARAGRAPH_TRANS"),
-                        removalDate = r.Field<DateTime?>("REMOVAL_DATE"),
-                        removalReason = noms["aircraftRemovalReasons"].ByOldId(r.Field<string>("REMOVAL_REASON")),
-                        removalText = r.Field<string>("REMOVAL_TEXT"),
-                        removalDocumentNumber = r.Field<string>("REMOVAL_DOC_CAA"),
-                        removalDocumentDate = r.Field<DateTime?>("REMOVAL_DOC_DATE"),
-                        removalInspector = getPersonByApexId(r.Field<int?>("REMOVAL_ID_EXAMINER")),
-                        typeCert = new
-                        {
-                            aircraftTypeCertificateType = noms["aircraftTypeCertificateTypes"].ByCode(r.Field<string>("TC_TYPE")),
-                            certNumber = r.Field<string>("TC_EASA"),
-                            certDate = r.Field<DateTime?>("TC_DATE"),
-                            certRelease = r.Field<string>("TC_REALEASE"),
-                            country = noms["countries"].ByOldId(r.Field<decimal?>("TC_COUNTRY_ID").ToString())
-                        }
-                    }))
-                .ToList();
-
-            var apps = this.oracleConn.CreateStoreCommand(
-                @"SELECT R.ID REQUEST_ID,
-                        ACC.ID AC_CERT_ID
-                    FROM CAA_DOC.REQUEST R
-                    JOIN CAA_DOC.AIRCRAFT A ON A.ID = R.APPLICANT_AC_ID
-                    JOIN CAA_DOC.AC_CERTIFICATE ACC ON ACC.ID_AIRCRAFT = A.ID
-                                WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ACC.ID_AIRCRAFT = {0}", aircraftId)
-                )
-                .Materialize(r =>
-                    new
-                    {
-                        aircraftCerttificateId = r.Field<long>("AC_CERT_ID"),
-                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
-                    })
-                .ToList();
-
-            return (from part in parts
-                    join app in apps on part.Get<long>("__oldId") equals app.aircraftCerttificateId into ag
-                    select new JObject(
-                        new JProperty("part",
-                            Utils.Pluck(part,
-                                new string[] 
-                                {
-                                    "__oldId",
-                                    "__migrTable",
-
-                                    "register",
-                                    "certNumber",
-                                    "certDate",
-                                    "aircraftNewOld",
-                                    "operationType",
-                                    "owner",
-                                    "oper",
-                                    "inspector",
-                                    "regnotes",
-                                    "paragraph",
-                                    "paragraphAlt",
-                                    "removalDate",
-                                    "removalReason",
-                                    "removalText",
-                                    "removalDocumentNumber",
-                                    "removalDocumentDate",
-                                    "removalInspectorId",
-                                    "typeCert"
-                                })),
-                        new JProperty("files",
-                            new JArray(
-                                new JObject(
-                                    new JProperty("isAdded", true),
-                                    new JProperty("file", null),
-                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
-                                    new JProperty("bookPageNumber", null),
-                                    new JProperty("pageCount", null),
-                                    new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
-                    .ToList();
         }
 
         private IList<JObject> getAircraftCertSmods(int aircraftId, Dictionary<int, JObject> nomApplications, Dictionary<string, Dictionary<string, NomValue>> noms)

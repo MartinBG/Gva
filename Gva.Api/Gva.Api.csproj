@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesFMController.cs" />
-    <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsFMController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentApplicationsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentDebtsFMController.cs" />
@@ -184,7 +183,6 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertRegistrationDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertSmodDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOccurrenceDO.cs" />

@@ -65,7 +65,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoiseView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRadio.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRadioView.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertReg.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegDeregFM.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegFM.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegFMCtrl.js" />
@@ -92,7 +91,6 @@
     <Content Include="js\gva\aircrafts\resources\aircraftCertAirworthinessesFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertNoises.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRadios.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftCertRegistrations.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRegistrationsFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertSmods.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftsData.js" />
@@ -148,14 +146,8 @@
     <Content Include="js\gva\aircrafts\views\certRegsFM\regsNewWizzardCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certRegsFM\regsSearch.html" />
     <Content Include="js\gva\aircrafts\views\certRegsFM\regsSearchCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certRegs\regsEdit.html" />
-    <Content Include="js\gva\aircrafts\views\certRegs\regsEditCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certRegs\regsNew.html" />
-    <Content Include="js\gva\aircrafts\views\certRegs\regsNewCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certRegs\regsSearch.html" />
-    <Content Include="js\gva\aircrafts\views\certRegs\regsSearchCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certRegs\regsView.html" />
-    <Content Include="js\gva\aircrafts\views\certRegs\regsViewCtrl.js" />
+    <Content Include="js\gva\aircrafts\views\certRegsFM\regsView.html" />
+    <Content Include="js\gva\aircrafts\views\certRegsFM\regsViewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certSmods\smodsEdit.html" />
     <Content Include="js\gva\aircrafts\views\certSmods\smodsEditCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certSmods\smodsNew.html" />

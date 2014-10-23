@@ -805,20 +805,6 @@
           certNumber: 'Регистрационен номер',
           mark: 'Регистрационен знак'
         },
-        regSearch: {
-          isActive: 'Активна',
-          certNumber: '№',
-          certDate: 'Дата на регистрация',
-          aircraftTypeCertificateType: 'Типов сертификат',
-          aircraftNewOld: 'Ново ВС',
-          operationType: 'Тип на опериране',
-          removalDate: 'Дата на отписване',
-          removalReason: 'Причина за отписване',
-          newReg: 'Нова регистрация',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
-        },
         regFMSearch: {
           isActive: 'Активна',
           isCurrent: 'Текуща',
@@ -1169,23 +1155,6 @@
           power: 'Мощност',
           'class': 'Клас на излъчване',
           bandwidth: 'Честотна лента'
-        },
-        regDirective: {
-          typeCertTitle: 'Типов сертификат',
-          certNumber: 'Рег. номер',
-          actNumber: 'Дел. номер',
-          certDate: 'Дата на регистрация',
-          register: 'Регистър',
-          aircraftCertificateType: 'Вид удостоверение',
-          aircraftNewOld: 'ВС е ново',
-          operationType: 'Предвиждан тип на опериране',
-          inspector: 'Инспектор',
-          oper: 'Оператор',
-          typeCertNumber: 'Рег. номер',
-          typeCertDate: 'Дата на издаване',
-          typeCertRelease: 'Издание номер',
-          contry: 'Държава',
-          aircraftTypeCertificateType: 'Типов сертификат'
         },
         regFMDirective: {
           certNumber: 'Рег. номер',
@@ -3645,9 +3614,6 @@
         'root.aircrafts.new': 'Ново ВС',
         'root.aircrafts.view': 'Данни за ВС',
         'root.aircrafts.view.edit': 'Преглед',
-        'root.aircrafts.view.regs': 'Регистрации',
-        'root.aircrafts.view.regs.new': 'Нова регистрация',
-        'root.aircrafts.view.regs.edit': 'Преглед на регистрация',
         'root.aircrafts.view.regsFM': 'Регистрации',
         'root.aircrafts.view.regsFM.new': 'Нова регистрация',
         'root.aircrafts.view.regsFM.edit': 'Преглед на регистрация',

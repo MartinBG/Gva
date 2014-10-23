@@ -14,7 +14,6 @@ VALUES
     (@setId    , 'Инспекция'                   , 'aircraftInspection'     , N'^inspections/\d+$'                  , NULL        ),
     (@setId    , 'Заявление'                   , 'aircraftApplication'    , N'^aircraftDocumentApplications/\d+$' , NULL        ),
     (@setId    , 'Друг документ'               , 'aircraftOther'          , N'^aircraftDocumentOthers/\d+$'       , NULL        ),
-    (@setId    , 'Регистация'                  , 'aircraftRegistration'   , N'^aircraftCertRegistrations/\d+$'    , NULL        ),
     (@setId    , 'Регистация'                  , 'aircraftRegistrationFM' , N'^aircraftCertRegistrationsFM/\d+$'  , NULL        ),
     (@setId    , 'Летателна годност'           , 'aircraftAirworthinessFM', N'^aircraftCertAirworthinessesFM/\d+$', NULL        ),
     (@setId    , 'S-mode код'                  , 'aircraftSmod'           , N'^aircraftCertSmods/\d+$'            , NULL        ),
