@@ -241,10 +241,6 @@
       controller: 'AircraftDataCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaAircraftDocumentDebt',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftDocumentDebt.html'
-    });
-    scaffoldingProvider.form({
       name: 'gvaAircraftDocumentDebtFm',
       templateUrl: 'js/gva/aircrafts/forms/aircraftDocumentDebtFM.html'
     });
@@ -571,10 +567,6 @@
       .state(['root.aircrafts.view.radios.search'                       , ''                                           , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certRadios/radiosSearch.html'                    , 'CertRadiosSearchCtrl'           ]])
       .state(['root.aircrafts.view.radios.new'                          , '/new'                                       , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certRadios/radiosNew.html'                       , 'CertRadiosNewCtrl'              ]])
       .state(['root.aircrafts.view.radios.edit'                         , '/:ind'                                      , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certRadios/radiosEdit.html'                      , 'CertRadiosEditCtrl'             ]])
-      .state(['root.aircrafts.view.debts'                               , '/debts'                                                                                                                                                                             ])
-      .state(['root.aircrafts.view.debts.search'                        , ''                                           , ['@root.aircrafts.view', 'js/gva/aircrafts/views/docDebts/debtsSearch.html'                       , 'DocDebtsSearchCtrl'             ]])
-      .state(['root.aircrafts.view.debts.new'                           , '/new'                                       , ['@root.aircrafts.view', 'js/gva/aircrafts/views/docDebts/debtsNew.html'                          , 'DocDebtsNewCtrl'                ]])
-      .state(['root.aircrafts.view.debts.edit'                          , '/:ind'                                      , ['@root.aircrafts.view', 'js/gva/aircrafts/views/docDebts/debtsEdit.html'                         , 'DocDebtsEditCtrl'               ]])
       .state(['root.aircrafts.view.debtsFM'                             , '/debtsFM'                                                                                                                                                                           ])
       .state(['root.aircrafts.view.debtsFM.search'                      , ''                                           , ['@root.aircrafts.view', 'js/gva/aircrafts/views/docDebtsFM/debtsSearch.html'                     , 'DocDebtsFMSearchCtrl'           ]])
       .state(['root.aircrafts.view.debtsFM.new'                         , '/new'                                       , ['@root.aircrafts.view', 'js/gva/aircrafts/views/docDebtsFM/debtsNew.html'                        , 'DocDebtsFMNewCtrl'              ]])

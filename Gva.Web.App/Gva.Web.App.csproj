@@ -80,7 +80,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertSmodView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftData.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDataCtrl.js" />
-    <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebt.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtFM.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentOccurrence.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentOther.html" />
@@ -105,7 +104,6 @@
     <Content Include="js\gva\aircrafts\resources\aircraftCertSmods.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftsData.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentApplications.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftDocumentDebts.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentDebtsFM.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentOccurrences.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentOthers.js" />
@@ -190,12 +188,6 @@
     <Content Include="js\gva\aircrafts\views\docDebtsFM\debtsNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\docDebtsFM\debtsSearch.html" />
     <Content Include="js\gva\aircrafts\views\docDebtsFM\debtsSearchCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\docDebts\debtsEdit.html" />
-    <Content Include="js\gva\aircrafts\views\docDebts\debtsEditCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\docDebts\debtsNew.html" />
-    <Content Include="js\gva\aircrafts\views\docDebts\debtsNewCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\docDebts\debtsSearch.html" />
-    <Content Include="js\gva\aircrafts\views\docDebts\debtsSearchCtrl.js" />
     <Content Include="js\gva\aircrafts\views\documentApplications\docApplicationsEdit.html" />
     <Content Include="js\gva\aircrafts\views\documentApplications\docApplicationsEditCtrl.js" />
     <Content Include="js\gva\aircrafts\views\documentApplications\docApplicationsNew.html" />
