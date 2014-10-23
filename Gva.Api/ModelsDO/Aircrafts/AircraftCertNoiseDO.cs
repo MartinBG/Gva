@@ -10,8 +10,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public string Chapter { get; set; }
 
-        public string Tcds { get; set; }
-
         public string Tcdsn { get; set; }
 
         public double? Flyover { get; set; }
@@ -24,8 +22,10 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public double? Takeoff { get; set; }
 
-        public string AdditionalModification { get; set; }
+        public string AdditionalModifications { get; set; }
 
-        public string Notes { get; set; }
+        public string AdditionalModificationsAlt { get; set; }
+
+        public string Remarks { get; set; }
     }
 }

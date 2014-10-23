@@ -152,22 +152,7 @@ namespace Gva.MigrationTool.Sets
                         airCategory = noms["EASATypesFm"].ByName(r.Field<string>("t_Act_EASA_Type")),
                         euRegType = noms["EURegTypesFm"].ByName(r.Field<string>("t_Act_EU_RU")),
                         easaCategory = noms["EASACategoriesFm"].ByName(r.Field<string>("t_EASA_Category")),
-                        tcds = r.Field<string>("t_EASA_TCDS"),
-                        noise = new
-                        {
-                            issueNumber = Utils.FmToNum(r.Field<string>("n_Noise_No_Issued")),
-                            issueDate = Utils.FmToDate(r.Field<string>("d_CofN_45_Date")),
-                            tcdsn = r.Field<string>("t_Noise_TCDS"),
-                            chapter = r.Field<string>("t_Noise_Chapter"),
-                            lateral = Utils.FmToDecimal(r.Field<string>("n_Noise_Literal")),
-                            approach = Utils.FmToDecimal(r.Field<string>("n_Noise_Approach")),
-                            flyover = Utils.FmToDecimal(r.Field<string>("n_Noise_FlyOver")),
-                            overflight = Utils.FmToDecimal(r.Field<string>("n_Noise_OverFlight")),
-                            takeoff = Utils.FmToDecimal(r.Field<string>("n_Noise_TakeOff")),
-                            modifications = r.Field<string>("t_Noise_AddModifBg"),
-                            modificationsAlt = r.Field<string>("t_Noise_AddModifEn"),
-                            notes = r.Field<string>("t_Noise_Remark")
-                        }
+                        tcds = r.Field<string>("t_EASA_TCDS")
                     }))
                 .Single();
         }
