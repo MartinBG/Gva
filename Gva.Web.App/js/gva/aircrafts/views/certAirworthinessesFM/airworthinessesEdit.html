@@ -1,4 +1,4 @@
-<ng-form sc-validate="{}" sc-form-readonly>
+<ng-form sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="aircrafts.editAirworthiness.titleAw"></strong>
@@ -20,7 +20,7 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw" readonly="!isEditAw"
+      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw"
         sc-form-params="{ lotId: lotId }">
       </gva-aircraft-cert-airworthiness-fm>
       <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aw.case"
