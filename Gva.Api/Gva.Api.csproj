@@ -90,7 +90,6 @@
     <Compile Include="Controllers\Aircrafts\AircraftMaintenancesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftMarksController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftNoisesController.cs" />
-    <Compile Include="Controllers\Aircrafts\AircraftPartsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftPermitsToFlyController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftRadiosController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftSmodsController.cs" />
@@ -197,7 +196,6 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOwnerDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectorDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftMaintenanceDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftPartDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftTypeCertDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportCertOperationalDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportCertOperationalExtDO.cs" />

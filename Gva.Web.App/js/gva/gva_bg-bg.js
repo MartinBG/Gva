@@ -701,7 +701,6 @@
           radios: 'Разрешителни за радиостанция',
           noises: 'Удостоверения за шум',
           docs: 'Документи',
-          parts: 'Оборудване',
           debts: 'Тежести',
           maintenances: 'Поддръжки',
           occurrences: 'Инциденти',
@@ -1423,43 +1422,6 @@
           pageCount: 'Брой стр.',
           file: 'Файл',
           newOther: 'Нов документ'
-        },
-        aircraftPartDirective: {
-          aircraftPart: 'Тип',
-          partProducer: 'Производител',
-          model: 'Модел',
-          modelAlt: 'Модел (англ.)',
-          sn: 'Сериен №',
-          count: 'Брой',
-          aircraftPartStatus: 'Ново',
-          manDate: 'Дата на производство',
-          manPlace: 'Място на производство',
-          description: 'Описание на характеристики'
-        },
-        newPart: {
-          title: 'Нови системи, устройства и оборудване',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editPart: {
-          title: 'Преглед на системи, устройства и оборудване',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deletePart: 'Изтрий'
-        },
-        partSearch: {
-          newPart: 'Ново оборудване',
-          aircraftPart: 'Тип',
-          partProducer: 'Производител',
-          model: 'Модел',
-          modelAlt: 'Модел (англ.)',
-          sn: 'Сериен №',
-          count: 'Брой',
-          aircraftPartStatus: 'Ново',
-          manDate: 'Дата на производство',
-          manPlace: 'Място на производство',
-          description: 'Характеристики'
         },
         inspectionSearch: {
           newInspection: 'Нова инспекция',
@@ -3808,9 +3770,6 @@
         'root.aircrafts.view.owners': 'Свързани лица',
         'root.aircrafts.view.owners.new': 'Ново свързано лице',
         'root.aircrafts.view.owners.edit': 'Преглед на свързано лице',
-        'root.aircrafts.view.parts': 'Оборудване',
-        'root.aircrafts.view.parts.new': 'Ново оборудване',
-        'root.aircrafts.view.parts.edit': 'Преглед на оборудване',
         'root.aircrafts.view.inspections': 'Инспекции',
         'root.aircrafts.view.inspections.new': 'Нова инспекция',
         'root.aircrafts.view.inspections.edit': 'Преглед на инспекция',

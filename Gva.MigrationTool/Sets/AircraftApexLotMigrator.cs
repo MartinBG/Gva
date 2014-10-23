@@ -141,12 +141,6 @@ namespace Gva.MigrationTool.Sets
                             }
                         }
 
-                        var aircraftParts = this.getAircraftParts(aircraftApexId, noms);
-                        foreach (var aircraftPart in aircraftParts)
-                        {
-                            addPartWithFiles("aircraftParts/*", aircraftPart);
-                        }
-
                         var aircraftMaintenances = this.getAircraftMaintenances(aircraftApexId, getPersonByApexId, getOrgByApexId, noms);
                         foreach (var aircraftMaintenance in aircraftMaintenances)
                         {
@@ -236,43 +230,6 @@ namespace Gva.MigrationTool.Sets
                     throw;
                 }
             }
-        }
-
-        private IList<JObject> getAircraftParts(int aircraftId, Dictionary<string, Dictionary<string, NomValue>> noms)
-        {
-            var parts = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.AC_PART WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
-                )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "AC_PART",
-                        aircraftPart = noms["aircraftParts"].ByOldId(r.Field<long?>("PART_TYPE").ToString()),
-                        partProducer = noms["aircraftProducers"].ByOldId(r.Field<long?>("ID_MANUFACTURER").ToString()),
-                        model = r.Field<string>("PART_MODEL"),
-                        modelAlt = r.Field<string>("PART_MODEL_TRANS"),
-                        sn = r.Field<string>("SN"),
-                        count = r.Field<int>("PART_NUMBER"),
-                        aircraftPartStatus = noms["aircraftPartStatuses"].ByOldId(r.Field<string>("NEW_YN").ToString()),
-                        manDate = r.Field<DateTime?>("MAN_DATE"),
-                        manPlace = r.Field<string>("MAN_PLACE"),
-                        description = r.Field<string>("DESCRIPTION"),
-                    }))
-                .ToList();
-
-            return parts.Select(p => new JObject(
-                new JProperty("part", p),
-                new JProperty("files", new JArray(
-                    new JObject(
-                        new JProperty("isAdded", true),
-                        new JProperty("file", null),
-                        new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
-                        new JProperty("bookPageNumber", null),
-                        new JProperty("pageCount", null),
-                        new JProperty("applications", new JArray())))))).ToList();
         }
 
         private IList<JObject> getAircraftMaintenances(

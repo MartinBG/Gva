@@ -554,12 +554,6 @@ namespace Gva.MigrationTool.Nomenclatures
 
             using (var dependencies = dependencyFactory())
             {
-                migrateAircraftParts(dependencies.Value.Item2, oracleConn);
-                dependencies.Value.Item1.Save();
-            }
-
-            using (var dependencies = dependencyFactory())
-            {
                 migrateAircraftPartStatuses(dependencies.Value.Item2, oracleConn);
                 dependencies.Value.Item1.Save();
             }
@@ -2669,32 +2663,6 @@ namespace Gva.MigrationTool.Nomenclatures
             foreach (var row in results)
             {
                 noms["aircraftRelations"][row.OldId] = row;
-                nom.NomValues.Add(row);
-            }
-        }
-
-        private void migrateAircraftParts(INomRepository repo, OracleConnection conn)
-        {
-            Nom nom = repo.GetNom("aircraftParts");
-            var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_AC_PART")
-                .Materialize(r =>
-                    new NomValue
-                    {
-                        OldId = r.Field<object>("ID").ToString(),
-                        Code = r.Field<string>("CODE"),
-                        Name = r.Field<string>("NAME"),
-                        NameAlt = r.Field<string>("NAME_TRANS"),
-                        Alias = null,
-                        IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false,
-                        ParentValueId = null,
-                        TextContentString = null
-                    })
-                .ToList();
-
-            noms["aircraftParts"] = new Dictionary<string, NomValue>();
-            foreach (var row in results)
-            {
-                noms["aircraftParts"][row.OldId] = row;
                 nom.NomValues.Add(row);
             }
         }

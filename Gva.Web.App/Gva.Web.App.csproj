@@ -84,7 +84,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentOccurrence.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentOther.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentOwner.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftPart.html" />
     <Content Include="js\gva\aircrafts\forms\aircrafttMaintenance.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftInspector.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftInspectorCtrl.js" />
@@ -111,7 +110,6 @@
     <Content Include="js\gva\aircrafts\resources\aircraftInspections.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftsInventory.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftMaintenances.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftParts.js" />
     <Content Include="js\gva\aircrafts\views\aircraftData\aircraftDataEdit.html" />
     <Content Include="js\gva\aircrafts\views\aircraftData\aircraftDataEditCtrl.js" />
     <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesEdit.html" />
@@ -220,12 +218,6 @@
     <Content Include="js\gva\aircrafts\views\inspections\aircraftsInspectionsSearchCtrl.js" />
     <Content Include="js\gva\aircrafts\views\inventory\inventorySearch.html" />
     <Content Include="js\gva\aircrafts\views\inventory\inventorySearchCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\parts\partsEdit.html" />
-    <Content Include="js\gva\aircrafts\views\parts\partsEditCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\parts\partsNew.html" />
-    <Content Include="js\gva\aircrafts\views\parts\partsNewCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\parts\partsSearch.html" />
-    <Content Include="js\gva\aircrafts\views\parts\partsSearchCtrl.js" />
     <Content Include="js\gva\airports\forms\airportCertOperational.html" />
     <Content Include="js\gva\airports\forms\airportCertOperationalCtrl.js" />
     <Content Include="js\gva\airports\forms\airportData.html" />
