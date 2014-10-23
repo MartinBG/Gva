@@ -135,6 +135,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectionDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftReviewAmendmentFMDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMViewDO.cs" />
     <Compile Include="ModelsDO\Applications\DocCaseDO.cs" />
     <Compile Include="ModelsDO\Applications\PartDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
@@ -359,6 +360,8 @@
     <Compile Include="GvaApiModule.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegistrationRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegMarkRepository.cs" />
+    <Compile Include="Repositories\AircraftRepository\AircraftDocumentDebtFMRepository.cs" />
+    <Compile Include="Repositories\AircraftRepository\IAircraftDocumentDebtFMRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\IAircraftRegMarkRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\IAircraftRegistrationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\IApplicationRepository.cs" />

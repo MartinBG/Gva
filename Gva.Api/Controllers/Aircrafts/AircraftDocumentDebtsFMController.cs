@@ -6,6 +6,7 @@ using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
@@ -22,6 +23,7 @@ namespace Gva.Api.Controllers.Aircrafts
         private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
+        private IAircraftDocumentDebtFMRepository aircraftDocumentDebtFMRepository;
 
         public AircraftDocumentDebtsFMController(
             IUnitOfWork unitOfWork,
@@ -30,6 +32,7 @@ namespace Gva.Api.Controllers.Aircrafts
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
+            IAircraftDocumentDebtFMRepository aircraftDocumentDebtFMRepository,
             UserContext userContext)
             : base("aircraftDocumentDebtsFM", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
@@ -37,6 +40,14 @@ namespace Gva.Api.Controllers.Aircrafts
             this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
+            this.aircraftDocumentDebtFMRepository = aircraftDocumentDebtFMRepository;
+        }
+
+        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
+        {
+            var documentDebts = this.aircraftDocumentDebtFMRepository.GetDocumentDebts(lotId: lotId, caseTypeId: caseTypeId);
+
+            return Ok(documentDebts);
         }
 
         [Route("new")]

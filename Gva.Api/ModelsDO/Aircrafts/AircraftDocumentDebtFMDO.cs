@@ -12,7 +12,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
         }
 
         [Required(ErrorMessage = "Registration is required.")]
-        public PartSelectDO Registration { get; set; }
+        public NomValue Registration { get; set; }
 
         public int CertId { get; set; }
 

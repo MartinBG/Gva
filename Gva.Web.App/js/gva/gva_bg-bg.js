@@ -992,7 +992,8 @@
           deleteRadio: 'Изтрий'
         },
         debtSearchFM: {
-          certId: 'Регистрация №',
+          registrationCertNumber: 'Рег. №',
+          registrationActNumber: 'Дел. №',
           regDate: 'Дата',
           aircraftDebtType: 'Тежест',
           documentNumber: 'Вх.док ГВА',
@@ -1097,7 +1098,7 @@
         },
         airworthinessFMDirective: {
           airworthinessCertificateType: 'Тип',
-          registration: 'Регистрация №',
+          registration: 'Регистрация',
           documentNumber: 'Документ №',
           issueDate: 'Дата на издаване',
           issueDateSpecial: 'Дата изд. на екс. огр.'
@@ -1201,7 +1202,8 @@
           'export': 'Експортно удостоверение за ЛГ'
         },
         debtDirectiveFM: {
-          certId: 'Регистрация №',
+          registrationCertNumber: 'Рег. №',
+          registrationActNumber: 'Дел. №',
           regDate: 'Дата',
           regTime: 'Час',
           aircraftDebtType: 'Тежест',

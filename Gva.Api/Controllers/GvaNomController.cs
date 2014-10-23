@@ -7,6 +7,7 @@ using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.ModelsDO.Organizations;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.AircraftRepository;
@@ -96,6 +97,28 @@ namespace Gva.Api.Controllers
             }
 
             return Ok(audits);
+        }
+
+        [Route("aircraftsRegistrations")]
+        public IHttpActionResult GetAircraftsRegsitartions(int lotId, string term = null)
+        {
+            var registrations = this.lotRepository.GetLotIndex(lotId).Index
+                .GetParts<AircraftCertRegistrationFMDO>("aircraftCertRegistrationsFM")
+                .Select(i => new
+                {
+                    nomValueId = i.Part.Index,
+                    name = string.Format(
+                        i.Content.RegMark +
+                        (i.Content.CertNumber.HasValue ? string.Format("/рег.№ {0}", i.Content.CertNumber.ToString()) : string.Empty) +
+                        (i.Content.ActNumber.HasValue ? string.Format("/дел.№ {0}", i.Content.ActNumber.ToString()) : string.Empty))
+                });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                return Ok(registrations.Where(a => a.name.Contains(term)));
+            }
+
+            return Ok(registrations);
         }
 
         [Route("persons/{id:int}")]

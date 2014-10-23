@@ -9,8 +9,6 @@
     AircraftCertRegistrationsFM,
     aircraftCertRegistration
   ) {
-    $scope.isEdit = true;
-
     $scope.reg = aircraftCertRegistration;
 
     $scope.save = function () {

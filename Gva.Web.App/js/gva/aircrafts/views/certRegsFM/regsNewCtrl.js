@@ -7,17 +7,9 @@
     $state,
     $stateParams,
     AircraftCertRegistrationsFM,
-    aircraftCertRegistration,
-    oldReg
+    aircraftCertRegistration
   ) {
-    $scope.isEdit = false;
-
     $scope.reg = aircraftCertRegistration;
-
-    if (oldReg && oldReg.part) {
-      oldReg.part.isActive = false;
-      oldReg.part.isCurrent = false;
-    }
 
     if ($state.payload) {
       $scope.reg.part.register = $state.payload.register;
@@ -30,29 +22,15 @@
 
     $scope.save = function () {
       return $scope.newCertRegForm.$validate()
-         .then(function () {
-           if ($scope.newCertRegForm.$valid) {
-             if (oldReg && oldReg.part) {
-               return AircraftCertRegistrationsFM
-               .save({ id: $stateParams.id, ind: oldReg.partIndex }, oldReg).$promise
-               .then(function () {
-                 return AircraftCertRegistrationsFM
-                .save({ id: $stateParams.id }, $scope.reg).$promise
-                .then(function () {
-                  return $state.go('root.aircrafts.view.regsFM.search');
-                });
-               });
-             } else {
-               return AircraftCertRegistrationsFM
+        .then(function () {
+          if ($scope.newCertRegForm.$valid) {
+            return AircraftCertRegistrationsFM
               .save({ id: $stateParams.id }, $scope.reg).$promise
               .then(function () {
                 return $state.go('root.aircrafts.view.regsFM.search');
               });
-             }
-
-
-            }
-          });
+          }
+        });
     };
 
     $scope.cancel = function () {
@@ -65,8 +43,7 @@
     '$state',
     '$stateParams',
     'AircraftCertRegistrationsFM',
-    'aircraftCertRegistration',
-    'oldReg'
+    'aircraftCertRegistration'
   ];
   CertRegsFMNewCtrl.$resolve = {
     aircraftCertRegistration: [
@@ -76,19 +53,6 @@
         return AircraftCertRegistrationsFM.newCertRegistrationFM({
           id: $stateParams.id
         }).$promise;
-      }
-    ],
-    oldReg: [
-      '$stateParams',
-      'AircraftCertRegistrationsFM',
-      function ($stateParams, AircraftCertRegistrationsFM) {
-        if ($stateParams.oldInd) {
-          return AircraftCertRegistrationsFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
-            .$promise;
-        }
-        else {
-          return null;
-        }
       }
     ]
   };

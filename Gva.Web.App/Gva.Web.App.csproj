@@ -86,6 +86,8 @@
     <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessReviewF15.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessForm15Main.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtClose.html" />
+    <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtFMCtrl.js" />
+    <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessFMCtrl.js" />
     <Content Include="js\gva\aircrafts\resources\aircrafts.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftApplications.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertAirworthinessesFM.js" />
@@ -340,7 +342,6 @@
     <Content Include="js\gva\common\modals\persons\newPersonModalCtrl.js" />
     <Content Include="js\gva\common\directives\application\applicationDirective.js" />
     <Content Include="js\gva\common\resources\applicationNoms.js" />
-    <Content Include="js\gva\common\directives\partSelect\partSelectDirective.js" />
     <Content Include="js\gva\common\resources\applicationNoms.js" />
     <Content Include="js\gva\common\resources\auditPartRequirementDetails.js" />
     <Content Include="js\gva\organizations\forms\organizationDocumentOtherCtrl.js" />
