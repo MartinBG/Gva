@@ -18,7 +18,6 @@ VALUES
     (@setId    , 'Друг документ'               , 'aircraftOther'          , N'^aircraftDocumentOthers/\d+$'       , NULL        ),
     (@setId    , 'Регистация'                  , 'aircraftRegistration'   , N'^aircraftCertRegistrations/\d+$'    , NULL        ),
     (@setId    , 'Регистация'                  , 'aircraftRegistrationFM' , N'^aircraftCertRegistrationsFM/\d+$'  , NULL        ),
-    (@setId    , 'Летателна годност'           , 'aircraftAirworthiness'  , N'^aircraftCertAirworthinesses/\d+$'  , NULL        ),
     (@setId    , 'Летателна годност'           , 'aircraftAirworthinessFM', N'^aircraftCertAirworthinessesFM/\d+$', NULL        ),
     (@setId    , 'Регистрационен знак'         , 'aircraftMark'           , N'^aircraftCertMarks/\d+$'            , NULL        ),
     (@setId    , 'S-mode код'                  , 'aircraftSmod'           , N'^aircraftCertSmods/\d+$'            , NULL        ),

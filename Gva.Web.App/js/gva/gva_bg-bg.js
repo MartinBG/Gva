@@ -949,16 +949,6 @@
           cancel: 'Отказ',
           deleteMark: 'Изтрий'
         },
-        airworthinessSearch: {
-          aircraftCertificateType: 'Валиден',
-          refNumber: 'Рег. знак',
-          issueDate: 'Тяхно писмо №',
-          validToDate: 'Тяхна дата',
-          newAirworthiness: 'Нова годност',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
-        },
         airworthinessFMSearch: {
           newAirworthiness: 'Нова годност',
           airworthinessCertificateType: 'Тип сертификат',
@@ -1218,13 +1208,6 @@
           ltrCaaNumber: 'ГВА писмо №',
           ltrCaaDate: 'ГВА дата',
           applications: 'Заявления'
-        },
-        airworthinessDirective: {
-          aircraftCertificateType: 'Тип',
-          regNumber: '№',
-          refNumber: 'Реф.№',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност'
         },
         airworthinessFMDirective: {
           airworthinessCertificateType: 'Тип',
@@ -3859,9 +3842,6 @@
         'root.aircrafts.view.marks': 'Регистрационни знаци',
         'root.aircrafts.view.marks.new': 'Нов знак',
         'root.aircrafts.view.marks.edit': 'Преглед на знак',
-        'root.aircrafts.view.airworthinesses': 'Летателни годности',
-        'root.aircrafts.view.airworthinesses.new': 'Нова годност',
-        'root.aircrafts.view.airworthinesses.edit': 'Преглед на годност',
         'root.aircrafts.view.airworthinessesFM': 'Летателни годности',
         'root.aircrafts.view.airworthinessesFM.new': 'Нова годност',
         'root.aircrafts.view.airworthinessesFM.edit': 'Преглед на годност',

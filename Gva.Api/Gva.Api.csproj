@@ -78,7 +78,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesFMController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsFMController.cs" />
@@ -186,7 +185,6 @@
     <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessForm15MainDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewOtherDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertMarkDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />

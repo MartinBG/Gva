@@ -195,12 +195,6 @@ namespace Gva.MigrationTool.Sets
 
                             long certId = aircraftCertRegistration.Get<long>("part.__oldId");
 
-                            var aircraftCertAirworthinesses = this.getAircraftCertAirworthinesses(certId, inspections, getPersonByApexId, nomApplications, noms);
-                            foreach (var aircraftCertAirworthiness in aircraftCertAirworthinesses)
-                            {
-                                addPartWithFiles("aircraftCertAirworthinesses/*", aircraftCertAirworthiness);
-                            }
-
                             var aircraftCertPermitsToFly = this.getAircraftCertPermitsToFly(certId, nomApplications, noms);
                             foreach (var aircraftCertPermitToFly in aircraftCertPermitsToFly)
                             {
@@ -1142,117 +1136,6 @@ namespace Gva.MigrationTool.Sets
                                     "removalDocumentDate",
                                     "removalInspectorId",
                                     "typeCert"
-                                })),
-                        new JProperty("files",
-                            new JArray(
-                                new JObject(
-                                    new JProperty("isAdded", true),
-                                    new JProperty("file", null),
-                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
-                                    new JProperty("bookPageNumber", null),
-                                    new JProperty("pageCount", null),
-                                    new JProperty("applications", new JArray(ag.Select(a => a.nomApp))))))))
-                    .ToList();
-        }
-
-        private IList<JObject> getAircraftCertAirworthinesses(
-            long certId,
-            Dictionary<int, int> inspections,
-            Func<int?, JObject> getPersonByApexId,
-            Dictionary<int, JObject> nomApplications,
-            Dictionary<string, Dictionary<string, NomValue>> noms)
-        {
-            var parts = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.AC_AIRWORTHINESS WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID_CERTIFICATE = {0}", certId)
-                )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "AC_AIRWORTHINESS",
-                        aircraftCertificateType = noms["aircraftCertificateTypes"].ByCode(r.Field<string>("CERTIFICATE_TYPE")),
-                        certId = r.Field<long?>("ID_CERTIFICATE"),
-                        refNumber = r.Field<string>("REF_NUMBER"),
-                        issueDate = r.Field<DateTime?>("ISSUE_DATE"),
-                        validToDate = r.Field<DateTime?>("VALID_TO"),
-                        auditPartIndex = (r.Field<long?>("ID_AUDITS") != null && inspections.ContainsKey(r.Field<int>("ID_AUDITS"))) ?
-                            inspections[r.Field<int>("ID_AUDITS")] :
-                            (int?)null,//TODO
-                        approvalId = r.Field<long?>("ID_APPROVAL"),//TODO
-                        inspector = getPersonByApexId((int?)r.Field<decimal?>("ID_EXAMINER")),
-                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
-                        firstAmmendment = new
-                        {
-                            issueDate = r.Field<DateTime?>("EXT1_DATE"),
-                            validToDate = r.Field<DateTime?>("EXT1_VALID_TO"),
-                            approvalId = r.Field<long?>("EXT1_APPROVAL_ID"),//TODO
-                            inspector = getPersonByApexId((int?)r.Field<decimal?>("EXT1_ID_EXAMINER")),
-                        },
-                        secondAmmendment = new
-                        {
-                            issueDate = r.Field<DateTime?>("EXT2_DATE"),
-                            validToDate = r.Field<DateTime?>("EXT2_VALID_TO"),
-                            approvalId = r.Field<long?>("EXT2_APPROVAL_ID"),//TODO
-                            inspector = getPersonByApexId((int?)r.Field<decimal?>("EXT2_ID_EXAMINER")),
-                        },
-                        export = new
-                        {
-                            country = noms["countries"].ByOldId(r.Field<decimal?>("ID_COUNTRY_TRANSFER").ToString()),
-                            exceptions = r.Field<string>("EXEMPTIONS"),
-                            exceptionsAlt = r.Field<string>("EXEMPTIONS_TRANS"),
-                            special = r.Field<string>("SPECIAL_REQ"),
-                            specialAlt = r.Field<string>("SPECIAL_REQ_TRANS"),
-                        },
-                        revokeDate = r.Field<DateTime?>("REVOKE_DATE"),
-                        revokeinspector = getPersonByApexId((int?)r.Field<decimal?>("REVOKE_ID_EXAMINER")),
-                        revokeCause = r.Field<string>("SPECIAL_REQ")
-                    }))
-                .ToList();
-
-            var apps = this.oracleConn.CreateStoreCommand(
-                @"SELECT R.ID REQUEST_ID,
-                        AW.ID AC_AW_ID
-                    FROM CAA_DOC.REQUEST R
-                    JOIN CAA_DOC.AC_AIRWORTHINESS AW ON AW.ID_REQUEST = R.ID
-                                WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and AW.ID_CERTIFICATE = {0}", certId)
-                )
-                .Materialize(r =>
-                    new
-                    {
-                        aircraftAirworthinessId = r.Field<int>("AC_AW_ID"),
-                        nomApp = nomApplications[r.Field<int>("REQUEST_ID")]
-                    })
-                .ToList();
-
-            return (from part in parts
-                    join app in apps on part.Get<int>("__oldId") equals app.aircraftAirworthinessId into ag
-                    select new JObject(
-                        new JProperty("part",
-                            Utils.Pluck(part,
-                                new string[] 
-                                {
-                                    "__oldId",
-                                    "__migrTable",
-
-                                    "aircraftCertificateType",
-                                    "certId",
-                                    "refNumber",
-                                    "issueDate",
-                                    "validToDate",
-                                    "auditPartIndex",
-                                    "approvalId",
-                                    "inspector",
-                                    "valid",
-                                    "firstAmmendment",
-                                    "secondAmmendment",
-                                    "export",
-                                    "revokeDate",
-                                    "revokeinspector",
-                                    "revokeCause"
                                 })),
                         new JProperty("files",
                             new JArray(
