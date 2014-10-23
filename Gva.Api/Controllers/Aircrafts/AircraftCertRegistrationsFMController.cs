@@ -109,25 +109,6 @@ namespace Gva.Api.Controllers.Aircrafts
             }
         }
 
-        public IHttpActionResult GetParts(int lotId, [FromUri] int[] partIndexes = null, int? caseTypeId = null)
-        {
-            var partVersions = this.lotRepository.GetLotIndex(lotId).Index
-                .GetParts<AircraftCertRegistrationFMDO>(this.path)
-                .OrderByDescending(e => e.Content.ActNumber);
-
-            List<CaseTypePartDO<AircraftCertRegistrationFMDO>> partVersionDOs = new List<CaseTypePartDO<AircraftCertRegistrationFMDO>>();
-            foreach (var partVersion in partVersions)
-            {
-                var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
-                if (!caseTypeId.HasValue || lotFile != null)
-                {
-                    partVersionDOs.Add(new CaseTypePartDO<AircraftCertRegistrationFMDO>(partVersion, lotFile));
-                }
-            }
-
-            return Ok(partVersionDOs);
-        }
-
         public override IHttpActionResult DeletePart(int lotId, int partIndex)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())

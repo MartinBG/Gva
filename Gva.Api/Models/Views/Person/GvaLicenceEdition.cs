@@ -130,7 +130,6 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
             this.Property(t => t.ApplicationPartId).HasColumnName("ApplicationPartId");
             this.Property(t => t.GvaStageId).HasColumnName("GvaStageId");
-            this.Property(t => t.IsLastEdition).HasColumnName("IsLastEdition");
 
             // Relationships
             this.HasRequired(t => t.Person)
