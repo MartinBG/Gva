@@ -118,7 +118,8 @@ namespace Gva.MigrationTool.Sets
                 })
                 .Wait();
 
-            ConcurrentQueue<string> aircraftFmIds = new ConcurrentQueue<string>(this.getAircraftFmIds());
+            // use the keys in aircraftFmIdtoLotId because some aircrafts have duplicate MSNs and may have been skipped
+            ConcurrentQueue<string> aircraftFmIds = new ConcurrentQueue<string>(aircraftFmIdtoLotId.Keys);
 
             Utils.RunParallel("ParallelMigrations", ct,
                 () => this.aircraftFmLotMigratorFactory().Value,
