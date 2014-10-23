@@ -8,7 +8,7 @@ AS
     l.Valid, l.LicenceTypeCode, l.LicenceTypeCaCode, l.PublisherCode, l.ForeignLicenceNumber, l.ForeignPublisher, e.Notes, e.Inspector, l.StatusChange, e.Limitations,
     lf.GvaLotFileId, ga.GvaApplicationId, ga.GvaAppLotPartId as ApplicationPartId, s.GvaStageId
     from [dbo].[GvaViewPersonLicenceEditions] e
-    join [dbo].[GvaViewPersonLicences] l on e.LicencePartIndex = l.PartIndex
+    join [dbo].[GvaViewPersonLicences] l on e.LicencePartIndex = l.PartIndex and e.LotId = l.LotId
         left join (select GvaLotFileId, LotPartId
                     from (select lf.GvaLotFileId, lf.LotPartId, ROW_NUMBER() over (partition by lf.LotPartId order by lf.LotPartId) as num
                     from [dbo].[GvaLotFiles] lf) x
