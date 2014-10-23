@@ -7,7 +7,7 @@ CREATE TABLE [dbo].[GvaViewOrganizationAmendments] (
 	[LotPartId]                INT               NOT NULL,
     [ApprovalPartIndex]        INT               NOT NULL,
     [DocumentNumber]           NVARCHAR(50)      NULL,
-    [DocumentDateIssue]        DATETIME          NULL,
+    [DocumentDateIssue]        DATETIME2         NULL,
     [ChangeNum]                INT               NULL,
     [Index]                    INT               NOT NULL,
     CONSTRAINT [PK_GvaViewOrganizationAmendments]                                PRIMARY KEY ([LotId], [ApprovalPartIndex], [PartIndex]),
