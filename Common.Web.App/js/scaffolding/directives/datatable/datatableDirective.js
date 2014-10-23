@@ -84,7 +84,18 @@ Usage <sc-datatable items="data"
                 var sortingSpan = $('span', headerCell);
 
                 headerCell.addClass('sorting');
-                sortingSpan.addClass('glyphicon glyphicon-sort');
+
+                if ($scope.sortingColumnIndex && $scope.sortingColumnIndex === index) {
+                  if ($scope.sortingType === 'asc') {
+                    sortingSpan.addClass('glyphicon glyphicon-sort-by-attributes');
+                  }
+                  else {
+                    sortingSpan.addClass('glyphicon glyphicon-sort-by-attributes-alt');
+                  }
+                }
+                else {
+                  sortingSpan.addClass('glyphicon glyphicon-sort');
+                }
 
                 headerCell.on('click', function () {
                   $scope.$apply(function () {
@@ -214,14 +225,17 @@ Usage <sc-datatable items="data"
 
         var initializing = true;
         $scope.$parent.$watchCollection($attrs.items, function (items) {
+          if ($scope.defaultSort) {
+            var index = _.findIndex($scope.columnDefs, { 'data': $scope.defaultSort });
+            $scope.setSortingData(index, 'desc');
+          }
+
           if (initializing) {
             renderHeader();
-            if ($scope.defaultSort) {
-              var index = _.findIndex($scope.columnDefs, { 'data': $scope.defaultSort});
-              $scope.setSortingData(index, 'desc');
-            }
+
             initializing = false;
           }
+
           if (!items) {
             return;
           }
