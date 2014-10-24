@@ -4,10 +4,11 @@
     <sc-field type="date" ng-model="model.part.issueDate" l10n-text="aircrafts.noiseDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="text" ng-model="model.part.chapter" l10n-text="aircrafts.noiseDirective.chapter" class="col-md-2 col-sm-4"></sc-field>
   </div>
+
   <div class="row">
-    <sc-field type="text" ng-model="model.part.tcds" l10n-text="aircrafts.noiseDirective.tcds" class="col-md-3 col-sm-6"></sc-field>
     <sc-field type="text" ng-model="model.part.tcdsn" l10n-text="aircrafts.noiseDirective.tcdsn" class="col-md-3 col-sm-6"></sc-field>
   </div>
+
   <div class="row">
     <sc-field type="float" ng-model="model.part.flyover" l10n-text="aircrafts.noiseDirective.flyover" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="float" ng-model="model.part.approach" l10n-text="aircrafts.noiseDirective.approach" class="col-md-2 col-sm-4"></sc-field>
@@ -15,7 +16,16 @@
     <sc-field type="float" ng-model="model.part.overflight" l10n-text="aircrafts.noiseDirective.overflight" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="float" ng-model="model.part.takeoff" l10n-text="aircrafts.noiseDirective.takeoff" class="col-md-2 col-sm-4"></sc-field>
   </div>
+
   <div class="row">
-    <sc-field type="text" ng-model="model.part.additionalModification" l10n-text="aircrafts.noiseDirective.additionalModification" class="col-md-6 col-sm-12"></sc-field>
+    <sc-field type="text" ng-model="model.part.additionalModifications" l10n-text="aircrafts.noiseDirective.additionalModification" class="col-sm-6"></sc-field>
+  </div>
+
+  <div class="row">
+    <sc-field type="text" ng-model="model.part.additionalModificationsAlt" l10n-text="aircrafts.noiseDirective.additionalModification" class="col-sm-6"></sc-field>
+  </div>
+
+  <div class="row">
+    <sc-field type="textarea" rows="2" ng-model="model.part.remarks" l10n-text="aircrafts.noiseDirective.notes" class="col-sm-6"></sc-field>
   </div>
 </ng-form>

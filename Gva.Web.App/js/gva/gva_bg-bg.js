@@ -1070,7 +1070,6 @@
           overflight: 'Полет над',
           takeoff: 'Излитане',
           tcdsn: 'TCDSN',
-          tcds: 'TCDS',
           chapter: 'Chapter'
         },
         radioViewDirective: {
@@ -1139,7 +1138,6 @@
           modificationsAlt: 'Модификации (англ.)',
           notes: 'Забележки',
           tcdsn: 'TCDSN',
-          tcds: 'TCDS',
           chapter: 'Chapter',
           additionalModification: 'Допълнителна модификация'
         },

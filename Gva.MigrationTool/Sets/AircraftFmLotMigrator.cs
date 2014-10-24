@@ -167,6 +167,12 @@ namespace Gva.MigrationTool.Sets
                             continue;
                         }
 
+                        var aircraftCertNoiseFM = this.getAircraftCertNoiseFM(aircraftFmId, noms);
+                        if (aircraftCertNoiseFM != null)
+                        {
+                            addPartWithFiles("aircraftCertNoises/*", aircraftCertNoiseFM);
+                        }
+
                         var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspector, getPersonByFmOrgName, getOrgByFmOrgName);
                         foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                         {
@@ -414,6 +420,48 @@ namespace Gva.MigrationTool.Sets
             }
 
             return registrations;
+        }
+
+        private JObject getAircraftCertNoiseFM(
+            string aircraftFmId,
+            Dictionary<string, Dictionary<string, NomValue>> noms)
+        {
+            var certNoise = this.sqlConn.CreateStoreCommand(
+                @"select * from Acts where {0}",
+                new DbClause("n_Act_ID = {0}", aircraftFmId))
+                .Materialize(r =>
+                    new
+                    {
+                        __oldId = r.Field<int>("n_Act_ID"),
+                        __migrTable = "Acts",
+                        issueNumber = r.Field<string>("t_CofN_45_No"),
+                        issueDate =  Utils.FmToDate(r.Field<string>("d_CofN_45_Date")),
+                        printDate = Utils.FmToDate(r.Field<string>("d_CofN_45_Date_Print")),
+                        chapter = r.Field<string>("t_Noise_Chapter"),
+                        tcdsn = r.Field<string>("t_Noise_TCDS"),
+                        flyover = Utils.FmToDecimal(r.Field<string>("n_Noise_FlyOver")),
+                        approach = Utils.FmToDecimal(r.Field<string>("n_Noise_Approach")),
+                        lateral = Utils.FmToDecimal(r.Field<string>("n_Noise_Literal")),
+                        overflight = Utils.FmToDecimal(r.Field<string>("n_Noise_OverFlight")),
+                        takeoff = Utils.FmToDecimal(r.Field<string>("n_Noise_TakeOff")),
+                        additionalModifications = r.Field<string>("t_Noise_AddModifBg"),
+                        additionalModificationsAlt = r.Field<string>("t_Noise_AddModifEn"),
+                        remarks = r.Field<string>("t_Noise_Remark")
+                    })
+                .Single();
+
+                return new JObject(
+                    new JProperty("part",
+                        Utils.ToJObject(certNoise)),
+                        new JProperty("files",
+                            new JArray(
+                                new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray())))));
         }
 
         private JObject getAircraftCertAirworthinessFM(
