@@ -184,7 +184,7 @@ namespace Gva.MigrationTool.Sets
                             var aircraftCertAirworthinessFM = this.getAircraftCertAirworthinessFM(aircraftFmId, certId, noms, regPart, getInspector, getInspectorOrDefault);
                             if (aircraftCertAirworthinessFM != null)
                             {
-                                addPartWithFiles("aircraftCertAirworthinesses/*", aircraftCertAirworthinessFM);
+                                addPartWithFiles("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM);
                             }
 
                             var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regPart, noms, getInspector);

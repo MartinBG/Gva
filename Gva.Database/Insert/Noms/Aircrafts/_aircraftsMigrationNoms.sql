@@ -11,7 +11,6 @@ VALUES
     (N'Производители на ВС'                  , N'aircraftProducers'           ),
     (N'Типове ВС - за генериране на S-Code'  , N'aircraftSCodeTypes'          ),
     (N'Типове връзки с ВС'                   , N'aircraftRelations'           ),
-    (N'Типове компоненти на ВС'              , N'aircraftParts'               ),
     (N'Състояния на оборудване на ВС'        , N'aircraftPartStatuses'        ),
     (N'Типове тежести върху ВС'              , N'aircraftDebtTypes'           ),
     (N'Класове инциденти с ВС'               , N'aircraftOccurrenceClasses'   ),

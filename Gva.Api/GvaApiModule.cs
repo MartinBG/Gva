@@ -180,20 +180,14 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRadiosController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftNoisesController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftPermitsToFlyController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftSmodsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftMarksController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDocumentOthersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftMaintenanceController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftPartsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDocumentOwnersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDocumentOccurrencesController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDocumentApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftCertAirworthinessesFMController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftCertAirworthinessesController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftDocumentDebtsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDocumentDebtsFMController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftCertRegistrationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftCertRegistrationsFMController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftInspectionsController>().InstancePerLifetimeScope();
 

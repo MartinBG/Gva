@@ -695,13 +695,10 @@
           currentReg: 'Текуща регистрация',
           regs: 'Регистрации',
           airworthinesses: 'Летателни годности',
-          marks: 'Регистрационни знаци',
           smods: 'S-code',
-          permits: 'Разрешения за полет',
           radios: 'Разрешителни за радиостанция',
           noises: 'Удостоверения за шум',
           docs: 'Документи',
-          parts: 'Оборудване',
           debts: 'Тежести',
           maintenances: 'Поддръжки',
           occurrences: 'Инциденти',
@@ -773,44 +770,6 @@
           noiseData: 'Удостоверение за шум',
           aircraftType: 'Type of Aircraft'
         },
-        aircraftDataApexDirective: {
-          model: 'Модел',
-          name: 'Наименование',
-          nameAlt: 'Наименование (английски)',
-          series: 'Серия',
-          aircraftTypeGroup: 'Група ВС',
-          aircraftSCodeType: 'Тип (S-code)',
-          manSN: 'Сериен номер',
-          manPlace: 'Място на производство',
-          manDate: 'Дата на производство',
-          beaconCodeELT: 'Beacon код (60 битов) на ELT',
-          icao: 'ICAO код',
-          aircraftCategory: 'Тип ВС',
-          aircraftProducer: 'Производител',
-          docRoom: 'Документацията е в стая',
-          maxMassL: 'Макс. маса при кацане',
-          maxMassT: 'Макс. маса при излитане',
-          massData: 'Маса и център на тежестта',
-          ultralightData: 'За свръхлеки ВС',
-          noiseData: 'Шум',
-          radioData: 'Разрешително за радиостанция',
-          mass: 'Маса (kg)',
-          cax: '% CAX',
-          date: 'Дата на протокол от замерване',
-          color: 'Цвят на крилото',
-          colorAlt: 'Цвят на крилото (английски)',
-          payload: 'Полезен товар',
-          seats: 'Брой места',
-          flyover: 'Прелитане',
-          approach: 'Приближаване',
-          lateral: 'Странично',
-          overflight: 'Полет над',
-          takeoff: 'Излитане',
-          approvalNumber: 'Номер разрешително',
-          approvalDate: 'Дата',
-          incommingApprovalNumber: 'Документ - вх.номер',
-          incommingApprovalDate: 'Дата'
-        },
         newAircraft: {
           title: 'Ново ВС',
           save: 'Запис',
@@ -845,20 +804,6 @@
           actNumber: 'Деловоден номер',
           certNumber: 'Регистрационен номер',
           mark: 'Регистрационен знак'
-        },
-        regSearch: {
-          isActive: 'Активна',
-          certNumber: '№',
-          certDate: 'Дата на регистрация',
-          aircraftTypeCertificateType: 'Типов сертификат',
-          aircraftNewOld: 'Ново ВС',
-          operationType: 'Тип на опериране',
-          removalDate: 'Дата на отписване',
-          removalReason: 'Причина за отписване',
-          newReg: 'Нова регистрация',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
         },
         regFMSearch: {
           isActive: 'Активна',
@@ -966,37 +911,6 @@
           cancel: 'Отказ',
           deleteSmod: 'Изтрий'
         },
-        markSearch: {
-          valid: 'Валиден',
-          mark: 'Рег. знак',
-          ltrInNumber: 'Тяхно писмо №',
-          ltrInDate: 'Тяхна дата',
-          ltrCaaNumber: 'ГВА писмо №',
-          ltrCaaDate: 'ГВА дата',
-          newMark: 'Нов знак'
-        },
-        newMark: {
-          title: 'Нов регистрационен знак',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editMark: {
-          title: 'Преглед на регистрационен знак',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deleteMark: 'Изтрий'
-        },
-        airworthinessSearch: {
-          aircraftCertificateType: 'Валиден',
-          refNumber: 'Рег. знак',
-          issueDate: 'Тяхно писмо №',
-          validToDate: 'Тяхна дата',
-          newAirworthiness: 'Нова годност',
-          bookPageNumber: '№ на страница',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
-        },
         airworthinessFMSearch: {
           newAirworthiness: 'Нова годност',
           airworthinessCertificateType: 'Тип сертификат',
@@ -1030,28 +944,6 @@
           deleteReview: 'Изтрий',
           saveReview: 'Запис',
           cancelReview: 'Отказ'
-        },
-        permitSearch: {
-          issuePlace: 'Място на издаване',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          pointFrom: 'Начален пункт',
-          pointTo: 'Краен пункт',
-          planStops: 'Планирани спирания',
-          crew: 'Екипаж',
-          newPermit: 'Ново разрешение'
-        },
-        newPermit: {
-          title: 'Ново разрешение за полет',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editPermit: {
-          title: 'Преглед на разрешение за полет',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deletePermit: 'Изтрий'
         },
         noiseSearch: {
           tcdsn: 'TCDSN',
@@ -1125,31 +1017,6 @@
           deleteDebt: 'Изтрий',
           close: 'Погасяване'
         },
-        debtSearch: {
-          certId: 'Регистрация №',
-          regDate: 'Дата',
-          aircraftDebtType: 'Тежест',
-          contractNumber: 'Вх.док ГВА',
-          contractDate: 'Дата на док',
-          creditorName: 'Кредитор',
-          inspector: 'Инспектор',
-          newDebt: 'Нова тежест',
-          bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.',
-          file: 'Файл'
-        },
-        newDebt: {
-          title: 'Нова тежест',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editDebt: {
-          title: 'Преглед на тежест',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deleteDebt: 'Изтрий'
-        },
         regViewDirective: {
           title: 'Текуща регистрация',
           currentCert: 'Текущ запис',
@@ -1181,15 +1048,6 @@
           ltrCaaNumber: 'ГВА писмо №',
           ltrCaaDate: 'ГВА дата'
         },
-        markViewDirective: {
-          title: 'Регистрационен знак',
-          valid: 'Валиден',
-          mark: 'Рег. знак',
-          ltrInNumber: 'Тяхно писмо №',
-          ltrInDate: 'Тяхна дата',
-          ltrCaaNumber: 'ГВА писмо №',
-          ltrCaaDate: 'ГВА дата'
-        },
         airworthinessViewDirective: {
           title: 'Летателна годност',
           titleNoAw: '(от предходна регистрация)',
@@ -1215,16 +1073,6 @@
           tcds: 'TCDS',
           chapter: 'Chapter'
         },
-        permitViewDirective: {
-          title: 'Разрешениe за полет',
-          issuePlace: 'Място на издаване',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          pointFrom: 'Начален пункт',
-          pointTo: 'Краен пункт',
-          planStops: 'Планирани спирания',
-          crew: 'Екипаж'
-        },
         radioViewDirective: {
           title: 'Разрешително за използване на радиостанция',
           valid: 'Валидно',
@@ -1247,22 +1095,6 @@
           caaJob: 'ГВА писмо длъжност',
           caaToAddress: 'ГВА писмо адрес',
           getScode: 'Генерирай S-код'
-        },
-        markDirective: {
-          valid: 'Валиден',
-          mark: 'Регистрационен знак',
-          ltrInNumber: 'Тяхно писмо №',
-          ltrInDate: 'Тяхна дата',
-          ltrCaaNumber: 'ГВА писмо №',
-          ltrCaaDate: 'ГВА дата',
-          applications: 'Заявления'
-        },
-        airworthinessDirective: {
-          aircraftCertificateType: 'Тип',
-          regNumber: '№',
-          refNumber: 'Реф.№',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност'
         },
         airworthinessFMDirective: {
           airworthinessCertificateType: 'Тип',
@@ -1292,23 +1124,6 @@
           approvalNumber: '№ на одобрение',
           organzation: 'Организация',
           refNumber: 'Реф.№ одобрение'
-        },
-        permitDirective: {
-          issuePlace: 'Място на издаване',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          purpose: 'Обхват на разрешението',
-          notes: 'Условия/Забележки',
-          pointFrom: 'Начален пункт',
-          pointTo: 'Краен пункт',
-          planStops: 'Планирани спирания',
-          crew: 'Екипаж',
-          purposeAlt: 'Обхват на разрешението (англ.)',
-          notesAlt: 'Условия/Забележки (англ.)',
-          pointFromAlt: 'Начален пункт (англ.)',
-          pointToAlt: 'Краен пункт (англ.)',
-          planStopsAlt: 'Планирани спирания (англ.)',
-          crewAlt: 'Екипаж (англ.)'
         },
         noiseDirective: {
           issueNumber: '№',
@@ -1340,23 +1155,6 @@
           power: 'Мощност',
           'class': 'Клас на излъчване',
           bandwidth: 'Честотна лента'
-        },
-        regDirective: {
-          typeCertTitle: 'Типов сертификат',
-          certNumber: 'Рег. номер',
-          actNumber: 'Дел. номер',
-          certDate: 'Дата на регистрация',
-          register: 'Регистър',
-          aircraftCertificateType: 'Вид удостоверение',
-          aircraftNewOld: 'ВС е ново',
-          operationType: 'Предвиждан тип на опериране',
-          inspector: 'Инспектор',
-          oper: 'Оператор',
-          typeCertNumber: 'Рег. номер',
-          typeCertDate: 'Дата на издаване',
-          typeCertRelease: 'Издание номер',
-          contry: 'Държава',
-          aircraftTypeCertificateType: 'Типов сертификат'
         },
         regFMDirective: {
           certNumber: 'Рег. номер',
@@ -1425,37 +1223,6 @@
           creditorDate: 'Тяхна дата',
           inspector: 'Инспектор',
           notes: 'Бележки'
-        },
-        debtDirective: {
-          certId: 'Регистрация №',
-          regDate: 'Дата',
-          regTime: 'Час',
-          aircraftDebtType: 'Тежест',
-          contractNumber: 'Вх.док ГВА',
-          contractDate: 'Дата на док',
-          inspector: 'Инспектор',
-          creditorName: 'Кредитор',
-          creditorNameAlt: 'Кредитор (англ.)',
-          creditorData: 'Данни за кредитора',
-          creditorAddress: 'Адрес',
-          creditorEmail: 'Е-майл',
-          creditorContact: 'Лице за контакт',
-          creditorPhone: 'Телефон',
-          startDate: 'Дата на вписване',
-          startReason: 'Основание за вписване',
-          startReasonAlt: 'Основание за вписване (англ.)',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в делов. книга',
-          pageCount: 'Брой стр.',
-          ltrNumber: 'Писмо на ГВА - номер',
-          ltrDate: 'Дата',
-          endDate: 'Дата на заличаване',
-          endReason: 'Основание за заличаване',
-          closeInspector: 'Инспектор',
-          closeAplicationNumber: 'Писмо за заличаване - номер',
-          closeAplicationDate: 'Дата',
-          closeCaaAplicationNumber: 'Писмо на ГВА за заличаване - номер',
-          closeCaaAplicationDate: 'Дата'
         },
         aircraftOtherDirective: {
           title: 'Друг документ',
@@ -1534,43 +1301,6 @@
           pageCount: 'Брой стр.',
           file: 'Файл',
           newOther: 'Нов документ'
-        },
-        aircraftPartDirective: {
-          aircraftPart: 'Тип',
-          partProducer: 'Производител',
-          model: 'Модел',
-          modelAlt: 'Модел (англ.)',
-          sn: 'Сериен №',
-          count: 'Брой',
-          aircraftPartStatus: 'Ново',
-          manDate: 'Дата на производство',
-          manPlace: 'Място на производство',
-          description: 'Описание на характеристики'
-        },
-        newPart: {
-          title: 'Нови системи, устройства и оборудване',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editPart: {
-          title: 'Преглед на системи, устройства и оборудване',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deletePart: 'Изтрий'
-        },
-        partSearch: {
-          newPart: 'Ново оборудване',
-          aircraftPart: 'Тип',
-          partProducer: 'Производител',
-          model: 'Модел',
-          modelAlt: 'Модел (англ.)',
-          sn: 'Сериен №',
-          count: 'Брой',
-          aircraftPartStatus: 'Ново',
-          manDate: 'Дата на производство',
-          manPlace: 'Място на производство',
-          description: 'Характеристики'
         },
         inspectionSearch: {
           newInspection: 'Нова инспекция',
@@ -3882,13 +3612,8 @@
         'root.persons.view.documentApplications.edit': 'Преглед на заявление',
         'root.aircrafts': 'ВС',
         'root.aircrafts.new': 'Ново ВС',
-        'root.aircrafts.newApex': 'Ново ВС',
         'root.aircrafts.view': 'Данни за ВС',
         'root.aircrafts.view.edit': 'Преглед',
-        'root.aircrafts.view.editApex': 'Преглед',
-        'root.aircrafts.view.regs': 'Регистрации',
-        'root.aircrafts.view.regs.new': 'Нова регистрация',
-        'root.aircrafts.view.regs.edit': 'Преглед на регистрация',
         'root.aircrafts.view.regsFM': 'Регистрации',
         'root.aircrafts.view.regsFM.new': 'Нова регистрация',
         'root.aircrafts.view.regsFM.edit': 'Преглед на регистрация',
@@ -3896,18 +3621,9 @@
         'root.aircrafts.view.smods': 'S-code',
         'root.aircrafts.view.smods.new': 'Нов S-code',
         'root.aircrafts.view.smods.edit': 'Преглед на S-code',
-        'root.aircrafts.view.marks': 'Регистрационни знаци',
-        'root.aircrafts.view.marks.new': 'Нов знак',
-        'root.aircrafts.view.marks.edit': 'Преглед на знак',
-        'root.aircrafts.view.airworthinesses': 'Летателни годности',
-        'root.aircrafts.view.airworthinesses.new': 'Нова годност',
-        'root.aircrafts.view.airworthinesses.edit': 'Преглед на годност',
         'root.aircrafts.view.airworthinessesFM': 'Летателни годности',
         'root.aircrafts.view.airworthinessesFM.new': 'Нова годност',
         'root.aircrafts.view.airworthinessesFM.edit': 'Преглед на годност',
-        'root.aircrafts.view.permits': 'Разрешения за полет',
-        'root.aircrafts.view.permits.new': 'Ново разрешение',
-        'root.aircrafts.view.permits.edit': 'Преглед на разрешение',
         'root.aircrafts.view.noises': 'Удостоверения за шум',
         'root.aircrafts.view.noises.new': 'Ново удостоверение',
         'root.aircrafts.view.noises.edit': 'Преглед на удостоверение',
@@ -3915,9 +3631,6 @@
         'root.aircrafts.view.radios': 'Разрешителни за използване на радиостанция',
         'root.aircrafts.view.radios.new': 'Ново разрешително',
         'root.aircrafts.view.radios.edit': 'Преглед на разрешително',
-        'root.aircrafts.view.debts': 'Тежести',
-        'root.aircrafts.view.debts.new': 'Нова тежест',
-        'root.aircrafts.view.debts.edit': 'Преглед на тежест',
         'root.aircrafts.view.debtsFM': 'Тежести',
         'root.aircrafts.view.debtsFM.new': 'Нова тежест',
         'root.aircrafts.view.debtsFM.edit': 'Преглед на тежест',
@@ -3927,9 +3640,6 @@
         'root.aircrafts.view.owners': 'Свързани лица',
         'root.aircrafts.view.owners.new': 'Ново свързано лице',
         'root.aircrafts.view.owners.edit': 'Преглед на свързано лице',
-        'root.aircrafts.view.parts': 'Оборудване',
-        'root.aircrafts.view.parts.new': 'Ново оборудване',
-        'root.aircrafts.view.parts.edit': 'Преглед на оборудване',
         'root.aircrafts.view.inspections': 'Инспекции',
         'root.aircrafts.view.inspections.new': 'Нова инспекция',
         'root.aircrafts.view.inspections.edit': 'Преглед на инспекция',

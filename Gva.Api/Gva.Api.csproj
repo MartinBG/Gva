@@ -78,22 +78,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesFMController.cs" />
-    <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsFMController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentApplicationsController.cs" />
-    <Compile Include="Controllers\Aircrafts\AircraftDocumentDebtsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentDebtsFMController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOccurrencesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOthersController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentOwnersController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftInspectionsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftMaintenancesController.cs" />
-    <Compile Include="Controllers\Aircrafts\AircraftMarksController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftNoisesController.cs" />
-    <Compile Include="Controllers\Aircrafts\AircraftPartsController.cs" />
-    <Compile Include="Controllers\Aircrafts\AircraftPermitsToFlyController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftRadiosController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftSmodsController.cs" />
     <Compile Include="Controllers\Airports\AirportApplicationsController.cs" />
@@ -186,22 +180,16 @@
     <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessForm15MainDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewOtherDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessFMDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertMarkDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertPermitToFlyDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertRegistrationDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertSmodDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOccurrenceDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOtherDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentOwnerDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectorDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftMaintenanceDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftPartDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftTypeCertDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportCertOperationalDO.cs" />
     <Compile Include="ModelsDO\Airports\AirportCertOperationalExtDO.cs" />
