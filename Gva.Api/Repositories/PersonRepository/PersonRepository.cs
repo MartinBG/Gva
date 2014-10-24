@@ -246,7 +246,7 @@ namespace Gva.Api.Repositories.PersonRepository
 
         public IEnumerable<GvaViewPersonRating> GetRatings(int lotId, int? caseTypeId)
         {
-            IEnumerable<GvaViewPersonRating> ratings = this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
+            var ratings = this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
                 .Include(e => e.Person)
                 .Include(e => e.Part)
                 .Include(e => e.RatingType)
@@ -256,14 +256,17 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.Authorization)
                 .Include(e => e.LocationIndicator)
                 .Include(e => e.Editions)
-                .Where(e => e.LotId == lotId);
+                .Where(e => e.LotId == lotId)
+                .ToList();
 
             if (caseTypeId.HasValue)
             {
-                return (from r in ratings
-                        join f in this.unitOfWork.DbContext.Set<GvaLotFile>().Include(f => f.GvaCaseType) on r.PartId equals f.LotPartId
-                        where f.GvaCaseTypeId == caseTypeId.Value
-                        select r);
+                var lotPartsForCase = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                    .Where(f => f.LotPart.LotId == lotId && f.GvaCaseTypeId == caseTypeId.Value)
+                    .Select(f => f.LotPartId)
+                    .ToList();
+
+                return ratings.Where(a => lotPartsForCase.Contains(a.PartId)).ToList();
             }
             else {
                 return ratings;
