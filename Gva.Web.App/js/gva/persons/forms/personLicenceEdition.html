@@ -260,7 +260,7 @@
             <td>{{check.part.ratingType.name || check.part.sector}}</td>
             <td>{{check.part.ratingClass.name}}</td>
             <td>{{check.part.authorization.name}}</td>
-            <td>{{check.part.licenceType.name}}</td>
+            <td>{{check.part.licenceType.code}}</td>
             <td>{{check.part.valid.name}}</td>
             <td>{{check.part.personCheckRatingValue.name}}</td>
             <td>{{check.case.bookPageNumber}}</td>
@@ -344,7 +344,7 @@
                 <sc-button name="deleteLicenceBtn" class="btn btn-xs btn-danger" btn-click="removeLicence(licence)" icon="glyphicon-remove"></sc-button>
               </td>
               <td>{{licence.licenceNumber}}</td>
-              <td>{{licence.licenceType.name}}</td>
+              <td>{{licence.licenceType.code}}</td>
               <td><span>{{licence.dateValidFrom | date:'mediumDate'}}</span>
               </td>
               <td><span>{{licence.dateValidTo | date:'mediumDate'}}</span>
