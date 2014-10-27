@@ -16,7 +16,7 @@
       </sc-column>
       <sc-column data="aircraftTypeGroup.name || ((ratingClass.name || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : ''))" title="persons.chooseRatingsModal.classOrCategory">
       </sc-column>
-      <sc-column data="((authorization && authorization.name) || '') + ' ' + (limitations || '')" title="persons.chooseRatingsModal.authorizationAndLimitations">
+      <sc-column data="((authorization && authorization.code) || '') + ' ' + (limitations || '')" title="persons.chooseRatingsModal.authorizationAndLimitations">
       </sc-column>
       <sc-column data="lastDocDateValidFrom" type="date" title="persons.chooseRatingsModal.lastEditionValidFrom">
       </sc-column>
