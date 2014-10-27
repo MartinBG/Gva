@@ -193,7 +193,7 @@ namespace Gva.MigrationTool.Sets
                             addPartWithFiles("organizationRecommendations/*", organizationRecommendation);
                         }
 
-                        var organizationManagementStaffs = this.getOrganizationManagementStaff(organizationId, noms, getPersonByApexId, isApprovedOrg);
+                        var organizationManagementStaffs = this.getOrganizationManagementStaff(organizationId, nomApplications, noms, getPersonByApexId, isApprovedOrg);
                         foreach (var organizationManagementStaff in organizationManagementStaffs)
                         {
                             addPartWithFiles("organizationStaffManagement/*", organizationManagementStaff);
@@ -1185,11 +1185,9 @@ namespace Gva.MigrationTool.Sets
 
         private IList<JObject> getOrganizationManagementStaff(
             int organizationId,
-            Dictionary<string,
-            Dictionary<string,
-            NomValue>> noms,
-            Func<int?,
-            JObject> getPersonByApexId,
+            Dictionary<int, JObject> nomApplications,
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Func<int?, JObject> getPersonByApexId,
             bool isApprovedOrg)
         {
             return this.oracleConn.CreateStoreCommand(
@@ -1220,7 +1218,10 @@ namespace Gva.MigrationTool.Sets
                                         Utils.ToJObject(noms["organizationCaseTypes"].ByAlias("others"))), 
                                     new JProperty("bookPageNumber", null),
                                     new JProperty("pageCount", null),
-                                    new JProperty("applications", new JArray()))))))
+                                    new JProperty("applications",
+                                        (r.Field<decimal?>("REQUEST_ID") != null && nomApplications.ContainsKey(r.Field<int>("REQUEST_ID"))) ?
+                                        new object[] { nomApplications[r.Field<int>("REQUEST_ID")] } :
+                                        new object[0]))))))
                 .ToList();
         }
 
