@@ -175,7 +175,8 @@ namespace Gva.MigrationTool.Sets
 
                             int nextIndex = 0;
 
-                            foreach (var amendment in organizationApprovalAmendments[organizationApproval.Get<int>("part.__oldId")])
+                            foreach (var amendment in organizationApprovalAmendments[organizationApproval.Get<int>("part.__oldId")]
+                                .OrderBy(a => a.Get<int>("part.changeNum")))
                             {
                                 var amendmentPart = amendment["part"] as JObject;
                                 amendmentPart.Add("approvalPartIndex", approvalPartVersion.Part.Index);
