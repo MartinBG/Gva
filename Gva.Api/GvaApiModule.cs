@@ -62,14 +62,14 @@ namespace Gva.Api
 
             //OrganizationView
             moduleBuilder.RegisterType<OrganizationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<OrganizationExaminerProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationRecommendationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationInspectionProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationInspectionRecommendationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
-            //PersonView            
+            //PersonView
             moduleBuilder.RegisterType<PersonProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonInspectorProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonExaminerProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonLicenceProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonLicenceEditionProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonRatingProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
@@ -165,7 +165,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<OrganizationApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationDocumentOthersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationInspectionsController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<OrganizationStaffExaminersController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<OrganizationAwExaminersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationStaffManagementController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationCertAirportOperatorsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationCertGroundServiceOperatorsController>().InstancePerLifetimeScope();

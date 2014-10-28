@@ -13,7 +13,9 @@ namespace Gva.MigrationTool.Sets
                 { "F", "flightCrew" },
                 { "T", "ovd"},
                 { "G", "to_vs"},
-                { "M", "to_suvd"}
+                { "M", "to_suvd"},
+                { "staffExaminer", "staffExaminer" },
+                { "awExaminer", "awExaminer" }
             };
 
             return noms["personCaseTypes"].ByAlias(caseTypeAliases[code]);

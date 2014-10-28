@@ -13,7 +13,7 @@
         <option ng-if="inspectorTypesHash['other']" value="other" l10n-text="aircrafts.inspectorDirective.other"></option>
       </select>
       <sc-nomenclature ng-if="inspectorType  === 'inspector'" class="form-control input-sm" ng-model="model.inspector" name="inspector" alias="'inspectors'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-      <sc-nomenclature ng-if="inspectorType  === 'examiner'" class="form-control input-sm" ng-model="model.examiner" name="examiner" alias="'examiners'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
+      <sc-nomenclature ng-if="inspectorType  === 'examiner'" class="form-control input-sm" ng-model="model.examiner" name="examiner" alias="'awExaminers'" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
       <sc-text ng-if="inspectorType  === 'other'" class="form-control input-sm" ng-model="model.other" name="other" ng-required="true" ng-readonly="readonly"></sc-text>
     </div>
   </div>

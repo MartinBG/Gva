@@ -61,6 +61,10 @@
       controller: 'InspDataCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaExaminerData',
+      templateUrl: 'js/gva/persons/forms/examinerData.html'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonAddress',
       templateUrl: 'js/gva/persons/forms/personAddress.html'
     });
@@ -271,9 +275,9 @@
       controller: 'OrgStaffManagementCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaOrganizationStaffExaminer',
-      templateUrl: 'js/gva/organizations/forms/organizationStaffExaminer.html',
-      controller: 'OrganizationStaffExaminerCtrl'
+      name: 'gvaOrganizationAwExaminer',
+      templateUrl: 'js/gva/organizations/forms/organizationAwExaminer.html',
+      controller: 'OrganizationAwExaminerCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationDocumentOther',
@@ -339,9 +343,9 @@
       controller: 'CommonDocumentApplicationCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaCommonExaminers',
-      templateUrl: 'js/gva/common/forms/commonExaminers.html',
-      controller: 'CommonExaminersCtrl'
+      name: 'gvaCommonInspectors',
+      templateUrl: 'js/gva/common/forms/commonInspectors.html',
+      controller: 'CommonInspectorsCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaEquipmentData',
@@ -367,12 +371,12 @@
     });
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
-     .modal('choosePublisher', 'js/gva/common/modals/publishers/choosePublisherModal.html'  , 'ChoosePublisherModalCtrl')
-     .modal('choosePerson'   , 'js/gva/common/modals/persons/choosePersonModal.html'        , 'ChoosePersonModalCtrl'   )
-     .modal('newPerson'      , 'js/gva/common/modals/persons/newPersonModal.html'           , 'NewPersonModalCtrl'      )
-     .modal('chooseExaminers', 'js/gva/common/modals/examiners/chooseExaminersModal.html'   , 'ChooseExaminersModalCtrl')
-     .modal('editDisparity'  , 'js/gva/common/modals/disparities/editDisparityModal.html'   , 'EditDisparityModalCtrl'  )
-     .modal('viewApplication', 'js/gva/common/modals/applications/viewApplicationModal.html', 'ViewApplicationModalCtrl');
+     .modal('choosePublisher' , 'js/gva/common/modals/publishers/choosePublisherModal.html'  , 'ChoosePublisherModalCtrl' )
+     .modal('choosePerson'    , 'js/gva/common/modals/persons/choosePersonModal.html'        , 'ChoosePersonModalCtrl'    )
+     .modal('newPerson'       , 'js/gva/common/modals/persons/newPersonModal.html'           , 'NewPersonModalCtrl'       )
+     .modal('chooseInspectors', 'js/gva/common/modals/inspectors/chooseInspectorsModal.html' , 'ChooseInspectorsModalCtrl')
+     .modal('editDisparity'   , 'js/gva/common/modals/disparities/editDisparityModal.html'   , 'EditDisparityModalCtrl'   )
+     .modal('viewApplication' , 'js/gva/common/modals/applications/viewApplicationModal.html', 'ViewApplicationModalCtrl' );
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?filter'                                                                                                                                                                                                ])
@@ -616,10 +620,10 @@
       .state(['root.organizations.view.approvals.edit.amendments'                                , '/approvalAmendments'                                                                                                                                                                                                                                       ])
       .state(['root.organizations.view.approvals.edit.amendments.new'                            , '/new'                                       , ['@root.organizations.view.approvals.edit'  , 'js/gva/organizations/views/approvals/amendments/approvalAmendmentsNew.html'                            , 'ApprovalAmendmentsNewCtrl'                         ]])
       .state(['root.organizations.view.approvals.edit.amendments.edit'                           , '/:index'                                    , ['@root.organizations.view.approvals.edit'  , 'js/gva/organizations/views/approvals/amendments/approvalAmendmentsEdit.html'                           , 'ApprovalAmendmentsEditCtrl'                        ]])
-      .state(['root.organizations.view.staffExaminers'                                           , '/staffExaminers'                                                                                                                                                                                                                                           ])
-      .state(['root.organizations.view.staffExaminers.search'                                    , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/staffExaminers/staffExaminersSearch.html'                                                    , 'StaffExaminersSearchCtrl'                          ]])
-      .state(['root.organizations.view.staffExaminers.new'                                       , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/staffExaminers/staffExaminersNew.html'                                                       , 'StaffExaminersNewCtrl'                             ]])
-      .state(['root.organizations.view.staffExaminers.edit'                                      , '/:ind'                                      , ['@root.organizations.view', 'js/gva/organizations/views/staffExaminers/staffExaminersEdit.html'                                                      , 'StaffExaminersEditCtrl'                            ]])
+      .state(['root.organizations.view.awExaminers'                                              , '/awExaminers'                                                                                                                                                                                                                                              ])
+      .state(['root.organizations.view.awExaminers.search'                                       , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/awExaminers/awExaminersSearch.html'                                                          , 'AwExaminersSearchCtrl'                             ]])
+      .state(['root.organizations.view.awExaminers.new'                                          , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/awExaminers/awExaminersNew.html'                                                             , 'AwExaminersNewCtrl'                                ]])
+      .state(['root.organizations.view.awExaminers.edit'                                         , '/:ind'                                      , ['@root.organizations.view', 'js/gva/organizations/views/awExaminers/awExaminersEdit.html'                                                            , 'AwExaminersEditCtrl'                               ]])
       .state(['root.organizations.view.recommendations'                                          , '/recommendations'                                                                                                                                                                                                                                          ])
       .state(['root.organizations.view.recommendations.search'                                   , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/recommendations/recommendationsSearch.html'                                                  , 'RecommendationsSearchCtrl'                         ]])
       .state(['root.organizations.view.recommendations.new'                                      , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/recommendations/recommendationsNew.html'                                                     , 'RecommendationsNewCtrl'                            ]])

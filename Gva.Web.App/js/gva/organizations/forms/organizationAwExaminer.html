@@ -1,20 +1,16 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.examinerCode" required l10n-text="organizations.staffExaminerDirective.examinerCode" validations="{required: 'default'}" class="col-md-6 col-sm-8"></sc-field>
+    <sc-field type="text" ng-model="model.part.examinerCode" required l10n-text="organizations.awExaminerDirective.examinerCode" validations="{required: 'default'}" class="col-md-6 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.person" alias="'persons'" required l10n-text="organizations.staffExaminerDirective.person" validations="{required: 'default'}" class="col-md-6 col-sm-8"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.person" alias="'awExaminers'" required l10n-text="organizations.awExaminerDirective.person" validations="{required: 'default'}" class="col-md-6 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.permitedAW" alias="'boolean'" required l10n-text="organizations.staffExaminerDirective.permitedAW" validations="{required: 'default'}" class="col-md-3 col-sm-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.permitedCheck" alias="'boolean'" required l10n-text="organizations.staffExaminerDirective.permitedCheck" validations="{required: 'default'}" class="col-md-3 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.stampNum" l10n-text="organizations.awExaminerDirective.content.stampNumber" class="col-md-3 col-sm-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" required l10n-text="organizations.awExaminerDirective.valid" validations="{required: 'default'}" class="col-md-3 col-sm-4"></sc-field>
   </div>
-  <div class="row">
-    <sc-field type="text" ng-model="model.part.stampNum" l10n-text="organizations.staffExaminerDirective.content.stampNumber" class="col-md-3 col-sm-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" required l10n-text="organizations.staffExaminerDirective.valid" validations="{required: 'default'}" class="col-md-3 col-sm-4"></sc-field>
-  </div>
-  <div ng-show="model.part.permitedAW.code === 'Y'" style="margin-top:20px;">
-    <h5 class="form-header" l10n-text="organizations.staffExaminerDirective.approvedAircrafts.title"></h5>
+  <div style="margin-top:20px;">
+    <h5 class="form-header" l10n-text="organizations.awExaminerDirective.approvedAircrafts.title"></h5>
 
     <table class="table table-striped table-bordered">
       <thead>
@@ -22,29 +18,29 @@
           <th></th>
           <th>
             <div sc-has-error="aircraftTypeGroup">
-              <label class="control-label" l10n-text="organizations.staffExaminerDirective.approvedAircrafts.aircraftTypeGroup"></label>
+              <label class="control-label" l10n-text="organizations.awExaminerDirective.approvedAircrafts.aircraftTypeGroup"></label>
               <sc-validation-error field-name="aircraftTypeGroup" validations="{required: 'default'}"></sc-validation-error>
             </div>
           </th>
           <th>
             <div sc-has-error="dateApproved">
-              <label class="control-label" l10n-text="organizations.staffExaminerDirective.approvedAircrafts.dateApproved"></label>
+              <label class="control-label" l10n-text="organizations.awExaminerDirective.approvedAircrafts.dateApproved"></label>
               <sc-validation-error field-name="dateApproved" validations="{required: 'default'}"></sc-validation-error>
             </div>
           </th>
           <th>
             <div sc-has-error="inspector">
-              <label class="control-label" l10n-text="organizations.staffExaminerDirective.approvedAircrafts.inspector"></label>
+              <label class="control-label" l10n-text="organizations.awExaminerDirective.approvedAircrafts.inspector"></label>
               <sc-validation-error field-name="inspector" validations="{required: 'default'}"></sc-validation-error>
             </div>
           </th>
           <th>
             <div sc-has-error="valid">
-              <label class="control-label" l10n-text="organizations.staffExaminerDirective.approvedAircrafts.valid"></label>
+              <label class="control-label" l10n-text="organizations.awExaminerDirective.approvedAircrafts.valid"></label>
               <sc-validation-error field-name="valid" validations="{required: 'default'}"></sc-validation-error>
             </div>
           </th>
-          <th l10n-text="organizations.staffExaminerDirective.approvedAircrafts.notes"></th>
+          <th l10n-text="organizations.awExaminerDirective.approvedAircrafts.notes"></th>
         </tr>
       </thead>
       <tbody>
@@ -70,7 +66,7 @@
         </tr>
         <tr ng-repeat-end=""></tr>
         <tr class="sort-disabled" ng-if="!model.part.approvedAircrafts.length">
-          <td colspan="6" class="text-center" l10n-text="organizations.staffExaminerDirective.approvedAircrafts.noEntry"></td>
+          <td colspan="6" class="text-center" l10n-text="organizations.awExaminerDirective.approvedAircrafts.noEntry"></td>
         </tr>
         <tr>
           <td colspan="6" style="text-align: right; width: 1px;">

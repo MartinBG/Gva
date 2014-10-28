@@ -14,14 +14,14 @@ using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Organizations
 {
-    [RoutePrefix("api/organizations/{lotId}/organizationStaffExaminers")]
+    [RoutePrefix("api/organizations/{lotId}/organizationAwExaminers")]
     [Authorize]
-    public class OrganizationStaffExaminersController : GvaCaseTypesPartController<OrganizationStaffExaminerDO>
+    public class OrganizationAwExaminersController : GvaCaseTypesPartController<OrganizationAwExaminerDO>
     {
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
 
-        public OrganizationStaffExaminersController(
+        public OrganizationAwExaminersController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             INomRepository nomRepository,
@@ -29,14 +29,14 @@ namespace Gva.Api.Controllers.Organizations
             ILotEventDispatcher lotEventDispatcher,
             ICaseTypeRepository caseTypeRepository,
             UserContext userContext)
-            : base("organizationStaffExaminers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
+            : base("organizationAwExaminers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewStaffExaminer(int lotId)
+        public IHttpActionResult GetNewAwExaminer(int lotId)
         {
             List<CaseDO> cases = this.caseTypeRepository.GetCaseTypesForSet("organization")
                 .Select(c => new CaseDO()
@@ -51,12 +51,12 @@ namespace Gva.Api.Controllers.Organizations
                 })
                 .ToList();
 
-            OrganizationStaffExaminerDO newStaffExaminer = new OrganizationStaffExaminerDO()
+            OrganizationAwExaminerDO newAwExaminer = new OrganizationAwExaminerDO()
             {
                 Valid = this.nomRepository.GetNomValue("boolean", "yes")
             };
 
-            return Ok(new CaseTypesPartDO<OrganizationStaffExaminerDO>(newStaffExaminer, cases));
+            return Ok(new CaseTypesPartDO<OrganizationAwExaminerDO>(newAwExaminer, cases));
         }
     }
 }

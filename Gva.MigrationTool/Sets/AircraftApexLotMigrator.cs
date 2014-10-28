@@ -719,7 +719,7 @@ namespace Gva.MigrationTool.Sets
                             })
                         .ToArray());
 
-            var examiners = this.oracleConn.CreateStoreCommand(
+            var inspectors = this.oracleConn.CreateStoreCommand(
                 @"SELECT ADTR.SEQ,
                         E.PERSON_ID,
                         ADT.ID AUDIT_ID
@@ -796,7 +796,7 @@ namespace Gva.MigrationTool.Sets
                             controlCard = controlCards[r.Field<int>("ID")],
                             inspectionDetails = inspectionDetails[r.Field<int>("ID")],
                             disparities = disparities[r.Field<int>("ID")],
-                            examiners = examiners[r.Field<int>("ID")],
+                            inspectors = inspectors[r.Field<int>("ID")],
 
                             inspectionFrom = r.Field<DateTime?>("INSPECTION_FROM"),
                             inspectionTo = r.Field<DateTime?>("INSPECTION_TO")

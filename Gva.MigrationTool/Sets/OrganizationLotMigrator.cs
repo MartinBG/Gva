@@ -200,15 +200,15 @@ namespace Gva.MigrationTool.Sets
                             addPartWithFiles("organizationStaffManagement/*", organizationManagementStaff);
                         }
 
-                        var organizationStaffExaminers = this.getOrganizationStaffExaminers(organizationId, noms, getPersonByApexId);
-                        foreach (var organizationStaffExaminer in organizationStaffExaminers)
+                        var organizationAwExaminers = this.getOrganizationAwExaminers(organizationId, noms, getPersonByApexId);
+                        foreach (var organizationAwExaminer in organizationAwExaminers)
                         {
-                            if (organizationStaffExaminer.Get<int?>("part.person.nomValueId") == null)
+                            if (organizationAwExaminer.Get<int?>("part.person.nomValueId") == null)
                             {
-                                Console.WriteLine("CANNOT FIND PERSON FOR organizationStaffExaminer WITH oldId " + organizationStaffExaminer.Get<int>("part.__oldId"));
+                                Console.WriteLine("CANNOT FIND PERSON FOR organizationStaffExaminer WITH oldId " + organizationAwExaminer.Get<int>("part.__oldId"));
                                 continue;
                             }
-                            addPartWithFiles("organizationStaffExaminers/*", organizationStaffExaminer);
+                            addPartWithFiles("organizationAwExaminers/*", organizationAwExaminer);
                         }
 
                         try
@@ -447,7 +447,7 @@ namespace Gva.MigrationTool.Sets
                             })
                         .ToArray());
 
-            var examiners = this.oracleConn.CreateStoreCommand(
+            var inspectors = this.oracleConn.CreateStoreCommand(
                 @"SELECT ADTR.SEQ,
                         E.PERSON_ID,
                         ADT.ID AUDIT_ID
@@ -524,7 +524,7 @@ namespace Gva.MigrationTool.Sets
                                 controlCard = controlCards[r.Field<int>("ID")],
                                 inspectionDetails = inspectionDetails[r.Field<int>("ID")],
                                 disparities = disparities[r.Field<int>("ID")],
-                                examiners = examiners[r.Field<int>("ID")]
+                                inspectors = inspectors[r.Field<int>("ID")]
                             })),
                         new JProperty("files",
                             new JArray(
@@ -1106,7 +1106,7 @@ namespace Gva.MigrationTool.Sets
                         .Select(gi => inspectionPartIndexes[gi.AUDIT_ID.Value])
                         .ToArray());
 
-            var examiners = this.oracleConn.CreateStoreCommand(
+            var inspectors = this.oracleConn.CreateStoreCommand(
                 @"SELECT A.PART,
                         A.SEQ,
                         E.PERSON_ID,
@@ -1162,11 +1162,11 @@ namespace Gva.MigrationTool.Sets
                             town4 = r.Field<string>("TOWN_P4"),
                             finished5Date = r.Field<DateTime?>("DATE_FINISHED_P5"),
                             town5 = r.Field<string>("TOWN_P5"),
-                            part1Examiners = examiners[r.Field<int>("ID")].ContainsKey("1") ? examiners[r.Field<int>("ID")]["1"] : new object[0],
-                            part2Examiners = examiners[r.Field<int>("ID")].ContainsKey("2") ? examiners[r.Field<int>("ID")]["2"] : new object[0],
-                            part3Examiners = examiners[r.Field<int>("ID")].ContainsKey("3") ? examiners[r.Field<int>("ID")]["3"] : new object[0],
-                            part4Examiners = examiners[r.Field<int>("ID")].ContainsKey("4") ? examiners[r.Field<int>("ID")]["4"] : new object[0],
-                            part5Examiners = examiners[r.Field<int>("ID")].ContainsKey("5") ? examiners[r.Field<int>("ID")]["5"] : new object[0],
+                            part1Inspectors = inspectors[r.Field<int>("ID")].ContainsKey("1") ? inspectors[r.Field<int>("ID")]["1"] : new object[0],
+                            part2Inspectors = inspectors[r.Field<int>("ID")].ContainsKey("2") ? inspectors[r.Field<int>("ID")]["2"] : new object[0],
+                            part3Inspectors = inspectors[r.Field<int>("ID")].ContainsKey("3") ? inspectors[r.Field<int>("ID")]["3"] : new object[0],
+                            part4Inspectors = inspectors[r.Field<int>("ID")].ContainsKey("4") ? inspectors[r.Field<int>("ID")]["4"] : new object[0],
+                            part5Inspectors = inspectors[r.Field<int>("ID")].ContainsKey("5") ? inspectors[r.Field<int>("ID")]["5"] : new object[0],
 
                             formDate = r.Field<DateTime?>("FORM_DATE"),
                             formText = r.Field<string>("FORM_TEXT"),
@@ -1226,7 +1226,7 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        private IList<JObject> getOrganizationStaffExaminers(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPersonByApexId)
+        private IList<JObject> getOrganizationAwExaminers(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPersonByApexId)
         {
             var approvedAircrafts = this.oracleConn.CreateStoreCommand(
                 @"SELECT EAA.ID,
@@ -1293,7 +1293,7 @@ namespace Gva.MigrationTool.Sets
                         PERMITED_AW,
                         PERMITED_CHECK
                     FROM CAA_DOC.EXAMINER
-                    WHERE CAA_ID IS NULL {0}",
+                    WHERE CAA_ID IS NULL {0} AND PERMITED_AW = 'Y'",
                 new DbClause("AND ID_FIRM = {0}", organizationId)
                 )
                 .Materialize(r => new JObject(
@@ -1307,8 +1307,6 @@ namespace Gva.MigrationTool.Sets
                             stampNum = r.Field<string>("STAMP_NUM"),
                             valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
                             person = getPersonByApexId(r.Field<int>("PERSON_ID")),
-                            permitedAW = noms["boolean"].ByCode(r.Field<string>("PERMITED_AW") == "Y" ? "Y" : "N"),
-                            permitedCheck = noms["boolean"].ByCode(r.Field<string>("PERMITED_CHECK") == "Y" ? "Y" : "N"),
                             approvedAircrafts = approvedAircrafts.ContainsKey(r.Field<int>("ID")) ? approvedAircrafts[r.Field<int>("ID")] : new JObject[0]
                         })),
                         new JProperty("files", files)))

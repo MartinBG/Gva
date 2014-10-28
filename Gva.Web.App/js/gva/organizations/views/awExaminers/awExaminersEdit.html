@@ -1,0 +1,22 @@
+<ng-form name="editAwExaminer" sc-validate="{}" sc-form-readonly="!editMode">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="organizations.editAwExaminer.title"></strong>
+
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="organizations.editAwExaminer.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="deleteBtn" btn-click="deleteStaffChecker()" text="organizations.editAwExaminer.deleteStaffChecker" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="organizations.editAwExaminer.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="organizations.editAwExaminer.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <gva-organization-aw-examiner name="organizationAwExaminersForm" ng-model="organizationAwExaminer"></gva-organization-aw-examiner>
+    </div>
+  </div>
+</ng-form>

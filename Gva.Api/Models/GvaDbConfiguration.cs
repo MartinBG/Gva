@@ -24,6 +24,7 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaLotFileMap());
             modelBuilder.Configurations.Add(new GvaViewPersonMap());
             modelBuilder.Configurations.Add(new GvaViewPersonInspectorMap());
+            modelBuilder.Configurations.Add(new GvaViewPersonExaminerMap());
             modelBuilder.Configurations.Add(new GvaViewPersonLicenceMap());
             modelBuilder.Configurations.Add(new GvaViewPersonLicenceEditionMap());
             modelBuilder.Configurations.Add(new GvaViewPersonRatingMap());
@@ -32,7 +33,6 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaViewInventoryItemMap());
             modelBuilder.Configurations.Add(new GvaViewApplicationMap());
             modelBuilder.Configurations.Add(new GvaViewOrganizationMap());
-            modelBuilder.Configurations.Add(new GvaViewOrganizationExaminerMap());
             modelBuilder.Configurations.Add(new GvaViewOrganizationRecommendationMap());
             modelBuilder.Configurations.Add(new GvaViewOrganizationInspectionMap());
             modelBuilder.Configurations.Add(new GvaViewOrganizationInspectionRecommendationMap());

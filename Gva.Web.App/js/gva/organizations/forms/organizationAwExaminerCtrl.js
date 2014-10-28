@@ -1,7 +1,7 @@
 ﻿/*global angular*/
 (function (angular) {
   'use strict';
-  function OrganizationStaffExaminerCtrl($scope) {
+  function OrganizationAwExaminerCtrl($scope) {
     $scope.deleteAircraft = function (aircraft) {
       var index = $scope.model.part.approvedAircrafts.indexOf(aircraft);
       $scope.model.part.approvedAircrafts.splice(index, 1);
@@ -12,7 +12,7 @@
     };
   }
 
-  OrganizationStaffExaminerCtrl.$inject = ['$scope'];
+  OrganizationAwExaminerCtrl.$inject = ['$scope'];
 
-  angular.module('gva').controller('OrganizationStaffExaminerCtrl', OrganizationStaffExaminerCtrl);
+  angular.module('gva').controller('OrganizationAwExaminerCtrl', OrganizationAwExaminerCtrl);
 }(angular));

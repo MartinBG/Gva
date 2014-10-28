@@ -31,8 +31,6 @@ namespace Gva.Api.Models.Views.Organization
 
         public virtual NomValue OrganizationType { get; set; }
 
-        public virtual ICollection<GvaViewOrganizationExaminer> Examiners { get; set; }
-
         public virtual ICollection<GvaViewOrganizationRecommendation> Recommendations { get; set; }
 
         public virtual ICollection<GvaViewOrganizationInspection> Inspections { get; set; }

@@ -1,0 +1,14 @@
+﻿<sc-button name="createBtn" btn-sref="{ state: 'root.organizations.view.awExaminers.new' }" text="organizations.awExaminerSearch.newAwExaminer" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable items="organizationAwExaminers" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-column sortable="false" class="buttons-cell" has-content="true">
+    <sc-button name="editBtn" btn-sref="{ state: 'root.organizations.view.awExaminers.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column data="part.examinerCode" title="organizations.awExaminerSearch.code">
+  </sc-column>
+  <sc-column data="part.person.name" title="organizations.awExaminerSearch.person">
+  </sc-column>
+  <sc-column data="part.valid.name" type="date" title="organizations.awExaminerSearch.valid">
+  </sc-column>
+  <sc-column data="part.stampNum" title="organizations.awExaminerSearch.stampNumber">
+  </sc-column>
+</sc-datatable>

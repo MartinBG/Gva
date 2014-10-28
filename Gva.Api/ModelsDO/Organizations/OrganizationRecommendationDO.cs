@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 using Gva.Api.ModelsDO.Common;
 
@@ -10,11 +9,11 @@ namespace Gva.Api.ModelsDO.Organizations
     {
         public OrganizationRecommendationDO()
         {
-            this.Part1Examiners = new List<NomValue>();
-            this.Part2Examiners = new List<NomValue>();
-            this.Part3Examiners = new List<NomValue>();
-            this.Part4Examiners = new List<NomValue>();
-            this.Part5Examiners = new List<NomValue>();
+            this.Part1Inspectors = new List<NomValue>();
+            this.Part2Inspectors = new List<NomValue>();
+            this.Part3Inspectors = new List<NomValue>();
+            this.Part4Inspectors = new List<NomValue>();
+            this.Part5Inspectors = new List<NomValue>();
 
             this.Inspections = new List<int>();
             this.RecommendationDetails = new List<OrganizationRecommendationSectionDO>();
@@ -57,15 +56,15 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public string Recommendation { get; set; }
 
-        public List<NomValue> Part1Examiners { get; set; }
+        public List<NomValue> Part1Inspectors { get; set; }
 
-        public List<NomValue> Part2Examiners { get; set; }
+        public List<NomValue> Part2Inspectors { get; set; }
 
-        public List<NomValue> Part3Examiners { get; set; }
+        public List<NomValue> Part3Inspectors { get; set; }
 
-        public List<NomValue> Part4Examiners { get; set; }
+        public List<NomValue> Part4Inspectors { get; set; }
 
-        public List<NomValue> Part5Examiners { get; set; }
+        public List<NomValue> Part5Inspectors { get; set; }
 
         public List<int> Inspections { get; set; }
 
