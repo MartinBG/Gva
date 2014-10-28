@@ -18,7 +18,7 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-document-debt-fm name="aircraftDocumentDebtForm" ng-model="debt.part"></gva-aircraft-document-debt-fm>
+      <gva-aircraft-document-debt-fm name="aircraftDocumentDebtForm" ng-model="debt.part" sc-form-params="{ lotId: lotId }"></gva-aircraft-document-debt-fm>
 
       <gva-aircraft-document-debt-close name="aircraftDocumentDebtCloseForm" ng-model="debt.part.close" ng-if="!debt.part.isActive"></gva-aircraft-document-debt-close>
 

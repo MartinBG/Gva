@@ -12,13 +12,13 @@
   ) {
     var originalRegistration = _.cloneDeep(aircraftCertRegistration);
 
-    $scope.isEdit = true;
     $scope.reg = aircraftCertRegistration;
     $scope.editMode = null;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
     };
+
     $scope.rereg = function () {
       return $state.go('root.aircrafts.view.regsFM.newWizzard', {
         oldInd: aircraftCertRegistration.partIndex
@@ -29,9 +29,16 @@
       $scope.editMode = null;
       $scope.reg = _.cloneDeep(originalRegistration);
     };
+
     $scope.removeDereg = function () {
       $scope.reg.part.isActive = true;
       $scope.reg.part.removal = undefined;
+      return AircraftCertRegistrationsFM
+        .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.reg)
+        .$promise
+        .then(function () {
+          return $state.go($state.current, $stateParams, { reload: false });
+        });
     };
 
     $scope.save = function () {

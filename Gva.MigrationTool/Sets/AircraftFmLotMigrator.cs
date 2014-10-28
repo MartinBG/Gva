@@ -415,8 +415,8 @@ namespace Gva.MigrationTool.Sets
             var lastReg = registrations.LastOrDefault();
             if (lastReg != null)
             {
-                lastReg["isActive"] = true;
-                lastReg["isCurrent"] = true;
+                lastReg["part"]["isActive"] = true;
+                lastReg["part"]["isCurrent"] = true;
             }
 
             return registrations;

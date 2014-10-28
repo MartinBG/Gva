@@ -18,7 +18,6 @@
       regMarkInUse: {}
     };
     $scope.regMarkPattern = gvaConstants.regMarkPattern;
-
     $scope.currentStep = $scope.steps.chooseRegMark;
 
     $scope.model = {

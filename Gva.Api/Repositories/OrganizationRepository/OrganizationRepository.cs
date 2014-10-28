@@ -98,10 +98,12 @@ namespace Gva.Api.Repositories.OrganizationRepository
 
             if (caseTypeId.HasValue)
             {
-                return (from r in approvals
-                        join f in this.unitOfWork.DbContext.Set<GvaLotFile>().Include(f => f.GvaCaseType) on r.PartId equals f.LotPartId
-                        where f.GvaCaseTypeId == caseTypeId.Value
-                        select r);
+                var lotPartsForCase = this.unitOfWork.DbContext.Set<GvaLotFile>()
+                    .Where(f => f.LotPart.LotId == lotId && f.GvaCaseTypeId == caseTypeId.Value)
+                    .Select(f => f.LotPartId)
+                    .ToList();
+
+                return approvals.Where(a => lotPartsForCase.Contains(a.PartId)).ToList();
             }
             else
             {

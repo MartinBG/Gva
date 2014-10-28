@@ -9,7 +9,7 @@
     regs
   ) {
     $scope.regs = regs.sort(function(a, b) {
-      return b.part.actNumber-a.part.actNumber;
+      return b.part.actNumber - a.part.actNumber;
     });
 
     $scope.showNewButton = _.filter(regs, function (reg) {

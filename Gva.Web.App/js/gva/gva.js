@@ -180,7 +180,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertAirworthinessFm',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessFM.html'
+      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessFM.html',
+      controller: 'AircraftCertAirworthinessFMCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAirworthinessReviewOther',
@@ -222,7 +223,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftDocumentDebtFm',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftDocumentDebtFM.html'
+      templateUrl: 'js/gva/aircrafts/forms/aircraftDocumentDebtFM.html',
+      controller: 'AircraftDocumentDebtFMCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftDocumentDebtClose',

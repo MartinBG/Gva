@@ -1,9 +1,9 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" ng-readonly="model.partIndex" ng-model="model.part.airworthinessCertificateType" ng-required="true" alias="'airworthinessCertificateTypes'" l10n-text="aircrafts.airworthinessFMDirective.airworthinessCertificateType" class="col-md-6 col-sm-8"></sc-field>
+    <sc-field type="nomenclature" ng-readonly="model.partIndex" ng-model="model.part.airworthinessCertificateType" ng-required="true" params="{ lotId: lotId}" alias="'airworthinessCertificateTypes'" l10n-text="aircrafts.airworthinessFMDirective.airworthinessCertificateType" class="col-md-6 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <sc-field custom-type="gva-part-select" ng-model="model.part.registration" ng-required="true" lot-id="model.lotId" part-path="aircraftCertRegistrationsFM" l10n-text="aircrafts.airworthinessFMDirective.registration" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.registration" alias="'aircraftsRegistrations'" ng-required="true" params="{ lotId: lotId}" l10n-text="aircrafts.airworthinessFMDirective.registration" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="aircrafts.airworthinessFMDirective.documentNumber" class="col-md-2 col-sm-4"></sc-field>
     <sc-field ng-if="model.part.airworthinessCertificateType.alias !== 'special'"
       type="date" ng-model="model.part.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessFMDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
