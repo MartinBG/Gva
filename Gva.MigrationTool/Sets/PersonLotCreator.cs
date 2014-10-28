@@ -78,6 +78,12 @@ namespace Gva.MigrationTool.Sets
                             personCaseTypes.Add(noms["personCaseTypes"].ByAlias("inspector"));
                         }
 
+                        var examinerData = this.getExaminerData(personId, noms);
+                        if (examinerData != null)
+                        {
+                            personCaseTypes.Add(noms["personCaseTypes"].ByAlias("staffExaminer"));
+                        }
+
                         var personData = this.getPersonData(personId, noms, personCaseTypes);
 
                         var lot = lotRepository.CreateLot("Person");
@@ -88,6 +94,11 @@ namespace Gva.MigrationTool.Sets
                         if (inspectorData != null)
                         {
                             lot.CreatePart("inspectorData", inspectorData, context);
+                        }
+
+                        if (examinerData != null)
+                        {
+                            lot.CreatePart("examinerData", examinerData, context);
                         }
 
                         lot.Commit(context, lotEventDispatcher);
@@ -140,7 +151,8 @@ namespace Gva.MigrationTool.Sets
                 @"SELECT CODE FROM CAA_DOC.NM_STAFF_TYPE WHERE ID IN 
                     (SELECT STAFF_TYPE_ID FROM CAA_DOC.LICENCE L INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON L.LICENCE_TYPE_ID = LT.ID WHERE {0}
                     UNION ALL SELECT STAFF_TYPE_ID FROM CAA_DOC.RATING_CAA WHERE {0}
-                    UNION ALL SELECT PD.STAFF_TYPE_ID FROM CAA_DOC.PERSON_DOCUMENT PD INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON PD.LICENCE_TYPE_ID = LT.ID WHERE {0})",
+                    UNION ALL SELECT PD.STAFF_TYPE_ID FROM CAA_DOC.PERSON_DOCUMENT PD INNER JOIN CAA_DOC.NM_LICENCE_TYPE LT ON PD.LICENCE_TYPE_ID = LT.ID WHERE {0})
+                 UNION (SELECT 'awExaminer' as CODE FROM CAA_DOC.EXAMINER WHERE {0} AND PERMITED_AW = 'Y')",
                 new DbClause("PERSON_ID = {0}", personId))
                 .Materialize(r => r.Field<string>("CODE"))
                 .Select(c => PersonUtils.getPersonCaseTypeByStaffTypeCode(noms, c))
@@ -219,6 +231,30 @@ namespace Gva.MigrationTool.Sets
 
                         examinerCode = r.Field<string>("EXAMINER_CODE"),
                         caa = noms["caa"].ByOldId(r.Field<int>("CAA_ID").ToString()),
+                        stampNum = r.Field<string>("STAMP_NUM"),
+                        valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
+                    }))
+                .SingleOrDefault();
+        }
+
+        private JObject getExaminerData(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        {
+            return this.oracleConn.CreateStoreCommand(
+                @"SELECT E.ID,
+                        E.EXAMINER_CODE,
+                        E.VALID_YN,
+                        E.STAMP_NUM
+                    FROM CAA_DOC.EXAMINER E
+                    WHERE E.CAA_ID IS NULL AND PERMITED_CHECK = 'Y' AND {0}",
+                new DbClause("E.PERSON_ID = {0}", personId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldId = r.Field<int>("ID"),
+                        __migrTable = "EXAMINER",
+
+                        examinerCode = r.Field<string>("EXAMINER_CODE"),
                         stampNum = r.Field<string>("STAMP_NUM"),
                         valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N")
                     }))

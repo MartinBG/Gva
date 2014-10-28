@@ -142,6 +142,7 @@
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
+    <Compile Include="ModelsDO\Persons\ExaminerDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLangCertDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationlAmendmentDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtCloseDO.cs" />
@@ -158,7 +159,7 @@
     <Compile Include="ModelsDO\Organizations\IncludedDocumentDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationRecommendationDO.cs" />
     <Compile Include="Controllers\Organizations\OrganizationAddressesController.cs" />
-    <Compile Include="Controllers\Organizations\OrganizationStaffExaminersController.cs" />
+    <Compile Include="Controllers\Organizations\OrganizationAwExaminersController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationStaffManagementController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationInspectionsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationDocumentOthersController.cs" />
@@ -224,7 +225,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationDocumentOtherDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationGroundServiceOperatorsSnoOperationalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationInspectionDO.cs" />
-    <Compile Include="ModelsDO\Organizations\OrganizationStaffExaminerDO.cs" />
+    <Compile Include="ModelsDO\Organizations\OrganizationAwExaminerDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffManagementDO.cs" />
     <Compile Include="ModelsDO\Persons\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\Persons\GvaViewPersonLicenceEditionDO.cs" />
@@ -261,6 +262,7 @@
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
+    <Compile Include="Models\Views\Person\GvaViewPersonExaminer.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonLicence.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonRatingEdition.cs" />
     <Compile Include="Models\Views\Person\GvaLicenceEdition.cs" />
@@ -301,8 +303,8 @@
     <Compile Include="Projections\Organization\OrganizationInspectionRecommendationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationRecommendationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationProjection.cs" />
-    <Compile Include="Projections\Organization\OrganizationExaminerProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationApprovalProjection.cs" />
+    <Compile Include="Projections\Person\PersonExaminerProjection.cs" />
     <Compile Include="Projections\Person\PersonLicenceProjection.cs" />
     <Compile Include="Projections\Person\PersonRatingEditionProjection.cs" />
     <Compile Include="Projections\Person\PersonLicenceEditionProjection.cs" />
@@ -337,7 +339,6 @@
     <Compile Include="Models\ASExamVariantQuestion.cs" />
     <Compile Include="Models\ASExamVariant.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonInspector.cs" />
-    <Compile Include="Models\Views\Organization\GvaViewOrganizationExaminer.cs" />
     <Compile Include="Models\Views\Aircraft\GvaViewAircraftRegistration.cs" />
     <Compile Include="Models\Views\Equipment\GvaViewEquipment.cs" />
     <Compile Include="Models\Views\Airport\GvaViewAirport.cs" />

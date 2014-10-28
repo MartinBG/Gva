@@ -43,6 +43,12 @@
         return caseType.alias === 'inspector';
       });
     };
+
+    $scope.showExaminerData = function () {
+      return _.some($scope.personInfo.personData.caseTypes, function (caseType) {
+        return caseType.alias === 'staffExaminer';
+      });
+    };
   }
 
   PersonInfoEditCtrl.$inject = [

@@ -184,8 +184,9 @@ namespace Gva.Api.Controllers.Persons
 
             var personDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart<PersonDataDO>("personData");
             var inspectorDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart<InspectorDataDO>("inspectorData");
+            var examinerDataPart = this.lotRepository.GetLotIndex(lotId).Index.GetPart<ExaminerDataDO>("examinerData");
 
-            return Ok(new PersonInfoDO(personDataPart, inspectorDataPart));
+            return Ok(new PersonInfoDO(personDataPart, inspectorDataPart, examinerDataPart));
         }
 
         [Route(@"{lotId}/personInfo")]
@@ -203,8 +204,8 @@ namespace Gva.Api.Controllers.Persons
                 this.unitOfWork.Save();
 
                 var caseTypes = this.caseTypeRepository.GetCaseTypesForLot(lotId);
-                var inspectorDataPart = lot.Index.GetPart<InspectorDataDO>("inspectorData");
 
+                var inspectorDataPart = lot.Index.GetPart<InspectorDataDO>("inspectorData");
                 PartVersion<InspectorDataDO> changedInspectorDataPart = null;
                 if (caseTypes.Any(ct => ct.Alias == "inspector"))
                 {
@@ -222,6 +223,24 @@ namespace Gva.Api.Controllers.Persons
                     changedInspectorDataPart = lot.DeletePart<InspectorDataDO>("inspectorData", this.userContext);
                 }
 
+                var examinerDataPart = lot.Index.GetPart<ExaminerDataDO>("examinerData");
+                PartVersion<ExaminerDataDO> changedExaminerDataPart = null;
+                if (caseTypes.Any(ct => ct.Alias == "staffExaminer"))
+                {
+                    if (examinerDataPart == null)
+                    {
+                        changedExaminerDataPart = lot.CreatePart("examinerData", personInfo.ExaminerData, this.userContext);
+                    }
+                    else
+                    {
+                        changedExaminerDataPart = lot.UpdatePart("examinerData", personInfo.ExaminerData, this.userContext);
+                    }
+                }
+                else if (examinerDataPart != null)
+                {
+                    changedExaminerDataPart = lot.DeletePart<ExaminerDataDO>("examinerData", this.userContext);
+                }
+
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 
                 this.unitOfWork.Save();
@@ -231,6 +250,11 @@ namespace Gva.Api.Controllers.Persons
                 if (changedInspectorDataPart != null)
                 {
                     this.lotRepository.ExecSpSetLotPartTokens(changedInspectorDataPart.PartId);
+                }
+
+                if (changedExaminerDataPart != null)
+                {
+                    this.lotRepository.ExecSpSetLotPartTokens(changedExaminerDataPart.PartId);
                 }
 
                 transaction.Commit();

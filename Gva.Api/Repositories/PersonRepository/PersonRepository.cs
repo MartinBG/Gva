@@ -65,7 +65,7 @@ namespace Gva.Api.Repositories.PersonRepository
 
             if (isExaminer)
             {
-                predicate = predicate.And(p => p.OrganizationExaminers.Count != 0);
+                predicate = predicate.And(p => p.Examiner != null);
             }
 
             if (isInspector)
@@ -78,10 +78,33 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(p => p.Organization)
                 .Include(p => p.Employment)
                 .Include(p => p.Inspector)
+                .Include(p => p.Examiner)
                 .Where(predicate)
                 .OrderBy(p => p.Names)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
+        }
+
+        public List<GvaViewPerson> GetAwExaminers(string names, int offset = 0, int? limit = null)
+        {
+            var predicate = PredicateBuilder.True<GvaViewPerson>();
+
+            if (!string.IsNullOrEmpty(names))
+            {
+                predicate = predicate.AndStringMatches(p => p.Names, names, false);
+            }
+
+            var persons = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                .Include(p => p.Lot)
+                .Where(predicate);
+
+            return (from p in persons
+                    join ct in this.unitOfWork.DbContext.Set<GvaLotCase>().Include(lc => lc.GvaCaseType).Where(lc => lc.GvaCaseType.Alias == "awExaminer")
+                        on p.LotId equals ct.LotId
+                    orderby p.Names
+                    select p)
+                    .WithOffsetAndLimit(offset, limit)
+                    .ToList();
         }
 
         public GvaViewPerson GetPerson(int personId)

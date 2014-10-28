@@ -40,7 +40,7 @@ namespace Gva.Api.Models.Views.Person
 
         public virtual GvaViewPersonInspector Inspector { get; set; }
 
-        public virtual ICollection<GvaViewOrganizationExaminer> OrganizationExaminers { get; set; }
+        public virtual GvaViewPersonExaminer Examiner { get; set; }
 
         public virtual ICollection<GvaLotCase> GvaLotCases { get; set; }
 

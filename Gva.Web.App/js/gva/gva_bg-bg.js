@@ -1548,6 +1548,11 @@
           stampNum: 'Номер на печат',
           isValid: 'Валиден'
         },
+        examinerDataDirective: {
+          examinerCode: 'Идентификационен код',
+          stampNum: 'Номер на печат',
+          isValid: 'Валиден'
+        },
         personAddressDirective: {
           addressType: 'Вид',
           settlement: 'Населено място',
@@ -1862,7 +1867,8 @@
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
-          inspDataTitle: 'Данни за инспектор'
+          inspDataTitle: 'Данни за инспектор',
+          examinerDateTitle: 'Данни за проверяващ'
         },
         stampedDocumentsView: {
           save: 'Запиши',
@@ -2848,7 +2854,7 @@
           recommendations: 'Доклад от препоръки',
           staff: 'Персонал',
           staffManagement: 'Ръководен персонал',
-          staffExaminers: 'Проверяващи ЛГ',
+          awExaminers: 'Проверяващи ЛГ',
           addresses: 'Адреси',
           airportOperator: 'Летищен оператор',
           certAirportOperators: 'Лиценз',
@@ -3057,19 +3063,19 @@
           cancel: 'Отказ',
           deleteStaffMng: 'Изтрий'
         },
-        staffExaminerSearch: {
-          newStaffExaminer: 'Нов проверяващ',
+        awExaminerSearch: {
+          newAwExaminer: 'Нов проверяващ',
           code: 'Идентификационен код',
           valid: 'Валиден',
           person: 'Физическо лице',
           stampNumber: '№ на печат'
         },
-        newStaffExaminer: {
+        newAwExaminer: {
           title: 'Нов проверяващ',
           save: 'Запис',
           cancel: 'Отказ'
         },
-        editStaffChecker: {
+        editAwExaminer: {
           title: 'Преглед на проверяващ',
           edit: 'Редакция',
           save: 'Запис',
@@ -3428,7 +3434,7 @@
             noAvailableDocuments: 'Няма налични документи'
           }
         },
-        staffExaminerDirective: {
+        awExaminerDirective: {
           newStaffManagement: 'Нов проверяващ',
           nomValueId: 'Идентификатор',
           examinerCode: 'Идентификационен код',
@@ -3704,9 +3710,9 @@
         'root.organizations.view.amendments': 'Изменения на удостоверение за одобрение',
         'root.organizations.view.amendments.new': 'Ново изменение',
         'root.organizations.view.amendments.edit': 'Преглед на изменение',
-        'root.organizations.view.staffExaminers': 'Проверяващи',
-        'root.organizations.view.staffExaminers.new': 'Нов проверяващ',
-        'root.organizations.view.staffExaminers.edit': 'Преглед на проверяващ',
+        'root.organizations.view.awExaminers': 'Проверяващи',
+        'root.organizations.view.awExaminers.new': 'Нов проверяващ',
+        'root.organizations.view.awExaminers.edit': 'Преглед на проверяващ',
         'root.organizations.view.documentApplications': 'Заявления',
         'root.organizations.view.documentApplications.new': 'Новo заявление',
         'root.organizations.view.documentApplications.edit': 'Преглед на заявление',

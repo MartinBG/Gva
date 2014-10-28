@@ -40,15 +40,14 @@ namespace Gva.Api.Repositories.PublisherRepository
             if (publisherType == PublisherType.Undefined || publisherType == PublisherType.Examiner)
             {
                 publishers = this.Concat(publishers,
-                    from p in this.unitOfWork.DbContext.Set<GvaViewPerson>()
-                    join i in this.unitOfWork.DbContext.Set<GvaViewOrganizationExaminer>() on p.LotId equals i.PersonId
-                    where i.Valid && i.PermitedCheck
-                    select new PublisherDO
-                    {
-                        Name = p.Names,
-                        Code = i.ExaminerCode,
-                        PublisherType = PublisherType.Examiner
-                    });
+                    this.unitOfWork.DbContext.Set<GvaViewPerson>().Include(p => p.Examiner)
+                        .Where(p => p.Examiner != null && p.Examiner.Valid)
+                        .Select(p => new PublisherDO
+                        {
+                            Name = p.Names,
+                            Code = p.Examiner.ExaminerCode,
+                            PublisherType = PublisherType.Examiner
+                        }));
             }
 
             if (publisherType == PublisherType.Undefined || publisherType == PublisherType.School)

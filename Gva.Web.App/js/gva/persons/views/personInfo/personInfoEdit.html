@@ -22,6 +22,12 @@
 
         <gva-inspector-data name="inspectorDataForm" ng-model="personInfo.inspectorData"></gva-inspector-data>
       </div>
+
+      <div ng-if="showExaminerData()" style="margin-top:20px;">
+        <h5 class="form-header" l10n-text="persons.editPersonInfo.examinerDateTitle"></h5>
+
+        <gva-examiner-data name="examinerDataForm" ng-model="personInfo.examinerData"></gva-examiner-data>
+      </div>
     </div>
   </div>
 </ng-form>

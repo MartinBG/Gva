@@ -61,6 +61,10 @@
       controller: 'InspDataCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaExaminerData',
+      templateUrl: 'js/gva/persons/forms/examinerData.html'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonAddress',
       templateUrl: 'js/gva/persons/forms/personAddress.html'
     });
@@ -271,9 +275,9 @@
       controller: 'OrgStaffManagementCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaOrganizationStaffExaminer',
-      templateUrl: 'js/gva/organizations/forms/organizationStaffExaminer.html',
-      controller: 'OrganizationStaffExaminerCtrl'
+      name: 'gvaOrganizationAwExaminer',
+      templateUrl: 'js/gva/organizations/forms/organizationAwExaminer.html',
+      controller: 'OrganizationAwExaminerCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationDocumentOther',
@@ -616,10 +620,10 @@
       .state(['root.organizations.view.approvals.edit.amendments'                                , '/approvalAmendments'                                                                                                                                                                                                                                       ])
       .state(['root.organizations.view.approvals.edit.amendments.new'                            , '/new'                                       , ['@root.organizations.view.approvals.edit'  , 'js/gva/organizations/views/approvals/amendments/approvalAmendmentsNew.html'                            , 'ApprovalAmendmentsNewCtrl'                         ]])
       .state(['root.organizations.view.approvals.edit.amendments.edit'                           , '/:index'                                    , ['@root.organizations.view.approvals.edit'  , 'js/gva/organizations/views/approvals/amendments/approvalAmendmentsEdit.html'                           , 'ApprovalAmendmentsEditCtrl'                        ]])
-      .state(['root.organizations.view.staffExaminers'                                           , '/staffExaminers'                                                                                                                                                                                                                                           ])
-      .state(['root.organizations.view.staffExaminers.search'                                    , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/staffExaminers/staffExaminersSearch.html'                                                    , 'StaffExaminersSearchCtrl'                          ]])
-      .state(['root.organizations.view.staffExaminers.new'                                       , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/staffExaminers/staffExaminersNew.html'                                                       , 'StaffExaminersNewCtrl'                             ]])
-      .state(['root.organizations.view.staffExaminers.edit'                                      , '/:ind'                                      , ['@root.organizations.view', 'js/gva/organizations/views/staffExaminers/staffExaminersEdit.html'                                                      , 'StaffExaminersEditCtrl'                            ]])
+      .state(['root.organizations.view.awExaminers'                                              , '/awExaminers'                                                                                                                                                                                                                                              ])
+      .state(['root.organizations.view.awExaminers.search'                                       , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/awExaminers/awExaminersSearch.html'                                                          , 'AwExaminersSearchCtrl'                             ]])
+      .state(['root.organizations.view.awExaminers.new'                                          , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/awExaminers/awExaminersNew.html'                                                             , 'AwExaminersNewCtrl'                                ]])
+      .state(['root.organizations.view.awExaminers.edit'                                         , '/:ind'                                      , ['@root.organizations.view', 'js/gva/organizations/views/awExaminers/awExaminersEdit.html'                                                            , 'AwExaminersEditCtrl'                               ]])
       .state(['root.organizations.view.recommendations'                                          , '/recommendations'                                                                                                                                                                                                                                          ])
       .state(['root.organizations.view.recommendations.search'                                   , ''                                           , ['@root.organizations.view', 'js/gva/organizations/views/recommendations/recommendationsSearch.html'                                                  , 'RecommendationsSearchCtrl'                         ]])
       .state(['root.organizations.view.recommendations.new'                                      , '/new'                                       , ['@root.organizations.view', 'js/gva/organizations/views/recommendations/recommendationsNew.html'                                                     , 'RecommendationsNewCtrl'                            ]])

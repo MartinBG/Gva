@@ -90,7 +90,7 @@
         },
         'organizations.tabs.staff': {
           'organizations.tabs.staffManagement': 'root.organizations.view.staffManagement',
-          'organizations.tabs.staffExaminers': 'root.organizations.view.staffExaminers'
+          'organizations.tabs.awExaminers': 'root.organizations.view.awExaminers'
         },
         'organizations.tabs.addresses': 'root.organizations.view.addresses',
         'organizations.tabs.docs': {

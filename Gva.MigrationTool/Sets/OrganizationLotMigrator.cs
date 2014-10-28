@@ -200,15 +200,15 @@ namespace Gva.MigrationTool.Sets
                             addPartWithFiles("organizationStaffManagement/*", organizationManagementStaff);
                         }
 
-                        var organizationStaffExaminers = this.getOrganizationStaffExaminers(organizationId, noms, getPersonByApexId);
-                        foreach (var organizationStaffExaminer in organizationStaffExaminers)
+                        var organizationAwExaminers = this.getOrganizationAwExaminers(organizationId, noms, getPersonByApexId);
+                        foreach (var organizationAwExaminer in organizationAwExaminers)
                         {
-                            if (organizationStaffExaminer.Get<int?>("part.person.nomValueId") == null)
+                            if (organizationAwExaminer.Get<int?>("part.person.nomValueId") == null)
                             {
-                                Console.WriteLine("CANNOT FIND PERSON FOR organizationStaffExaminer WITH oldId " + organizationStaffExaminer.Get<int>("part.__oldId"));
+                                Console.WriteLine("CANNOT FIND PERSON FOR organizationStaffExaminer WITH oldId " + organizationAwExaminer.Get<int>("part.__oldId"));
                                 continue;
                             }
-                            addPartWithFiles("organizationStaffExaminers/*", organizationStaffExaminer);
+                            addPartWithFiles("organizationAwExaminers/*", organizationAwExaminer);
                         }
 
                         try
@@ -1226,7 +1226,7 @@ namespace Gva.MigrationTool.Sets
                 .ToList();
         }
 
-        private IList<JObject> getOrganizationStaffExaminers(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPersonByApexId)
+        private IList<JObject> getOrganizationAwExaminers(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<int?, JObject> getPersonByApexId)
         {
             var approvedAircrafts = this.oracleConn.CreateStoreCommand(
                 @"SELECT EAA.ID,
@@ -1293,7 +1293,7 @@ namespace Gva.MigrationTool.Sets
                         PERMITED_AW,
                         PERMITED_CHECK
                     FROM CAA_DOC.EXAMINER
-                    WHERE CAA_ID IS NULL {0}",
+                    WHERE CAA_ID IS NULL {0} AND PERMITED_AW = 'Y'",
                 new DbClause("AND ID_FIRM = {0}", organizationId)
                 )
                 .Materialize(r => new JObject(
@@ -1307,8 +1307,6 @@ namespace Gva.MigrationTool.Sets
                             stampNum = r.Field<string>("STAMP_NUM"),
                             valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),
                             person = getPersonByApexId(r.Field<int>("PERSON_ID")),
-                            permitedAW = noms["boolean"].ByCode(r.Field<string>("PERMITED_AW") == "Y" ? "Y" : "N"),
-                            permitedCheck = noms["boolean"].ByCode(r.Field<string>("PERMITED_CHECK") == "Y" ? "Y" : "N"),
                             approvedAircrafts = approvedAircrafts.ContainsKey(r.Field<int>("ID")) ? approvedAircrafts[r.Field<int>("ID")] : new JObject[0]
                         })),
                         new JProperty("files", files)))
