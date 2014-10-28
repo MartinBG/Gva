@@ -12,7 +12,7 @@ namespace Gva.Api.ModelsDO.Organizations
         {
             this.InspectionDetails = new List<InspectionDetailDO>();
             this.Disparities = new List<DisparityDO>();
-            this.Examiners = new List<NomValue>();
+            this.Inspectors = new List<NomValue>();
         }
 
         public string DocumentNumber { get; set; }
@@ -46,7 +46,7 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public List<DisparityDO> Disparities { get; set; }
 
-        public List<NomValue> Examiners { get; set; }
+        public List<NomValue> Inspectors { get; set; }
 
         public FileDataDO ControlCard { get; set; }
     }

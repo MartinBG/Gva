@@ -2947,8 +2947,8 @@
           inspectionFrom: 'Начална дата на изпълнение на одита',
           inspectionTo: 'Крайна дата на изпълнение на одита'
         },
-        chooseExaminersModal: {
-          title: 'Избор на проверяващ',
+        chooseInspectorsModal: {
+          title: 'Избор на инспектор',
           name: 'Име',
           cancel: 'Отказ',
           add: 'Добави'

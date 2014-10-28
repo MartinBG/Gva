@@ -447,7 +447,7 @@ namespace Gva.MigrationTool.Sets
                             })
                         .ToArray());
 
-            var examiners = this.oracleConn.CreateStoreCommand(
+            var inspectors = this.oracleConn.CreateStoreCommand(
                 @"SELECT ADTR.SEQ,
                         E.PERSON_ID,
                         ADT.ID AUDIT_ID
@@ -524,7 +524,7 @@ namespace Gva.MigrationTool.Sets
                                 controlCard = controlCards[r.Field<int>("ID")],
                                 inspectionDetails = inspectionDetails[r.Field<int>("ID")],
                                 disparities = disparities[r.Field<int>("ID")],
-                                examiners = examiners[r.Field<int>("ID")]
+                                inspectors = inspectors[r.Field<int>("ID")]
                             })),
                         new JProperty("files",
                             new JArray(
@@ -1106,7 +1106,7 @@ namespace Gva.MigrationTool.Sets
                         .Select(gi => inspectionPartIndexes[gi.AUDIT_ID.Value])
                         .ToArray());
 
-            var examiners = this.oracleConn.CreateStoreCommand(
+            var inspectors = this.oracleConn.CreateStoreCommand(
                 @"SELECT A.PART,
                         A.SEQ,
                         E.PERSON_ID,
@@ -1162,11 +1162,11 @@ namespace Gva.MigrationTool.Sets
                             town4 = r.Field<string>("TOWN_P4"),
                             finished5Date = r.Field<DateTime?>("DATE_FINISHED_P5"),
                             town5 = r.Field<string>("TOWN_P5"),
-                            part1Examiners = examiners[r.Field<int>("ID")].ContainsKey("1") ? examiners[r.Field<int>("ID")]["1"] : new object[0],
-                            part2Examiners = examiners[r.Field<int>("ID")].ContainsKey("2") ? examiners[r.Field<int>("ID")]["2"] : new object[0],
-                            part3Examiners = examiners[r.Field<int>("ID")].ContainsKey("3") ? examiners[r.Field<int>("ID")]["3"] : new object[0],
-                            part4Examiners = examiners[r.Field<int>("ID")].ContainsKey("4") ? examiners[r.Field<int>("ID")]["4"] : new object[0],
-                            part5Examiners = examiners[r.Field<int>("ID")].ContainsKey("5") ? examiners[r.Field<int>("ID")]["5"] : new object[0],
+                            part1Inspectors = inspectors[r.Field<int>("ID")].ContainsKey("1") ? inspectors[r.Field<int>("ID")]["1"] : new object[0],
+                            part2Inspectors = inspectors[r.Field<int>("ID")].ContainsKey("2") ? inspectors[r.Field<int>("ID")]["2"] : new object[0],
+                            part3Inspectors = inspectors[r.Field<int>("ID")].ContainsKey("3") ? inspectors[r.Field<int>("ID")]["3"] : new object[0],
+                            part4Inspectors = inspectors[r.Field<int>("ID")].ContainsKey("4") ? inspectors[r.Field<int>("ID")]["4"] : new object[0],
+                            part5Inspectors = inspectors[r.Field<int>("ID")].ContainsKey("5") ? inspectors[r.Field<int>("ID")]["5"] : new object[0],
 
                             formDate = r.Field<DateTime?>("FORM_DATE"),
                             formText = r.Field<string>("FORM_TEXT"),
