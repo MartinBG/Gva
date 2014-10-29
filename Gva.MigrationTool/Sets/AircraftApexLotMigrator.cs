@@ -84,7 +84,13 @@ namespace Gva.MigrationTool.Sets
                         var lotEventDispatcher = dependencies.Value.Item9;
                         var context = dependencies.Value.Item10;
 
-                        var lot = lotRepository.GetLotIndex(aircraftApexIdtoLotId[aircraftApexId], fullAccess: true);
+                        int lotId;
+                        if (!aircraftApexIdtoLotId.TryGetValue(aircraftApexId, out lotId))
+                        {
+                            continue;
+                        }
+
+                        var lot = lotRepository.GetLotIndex(lotId, fullAccess: true);
 
                         Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
                         {
