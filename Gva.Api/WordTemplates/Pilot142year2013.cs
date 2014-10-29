@@ -403,12 +403,12 @@ namespace Gva.Api.WordTemplates
             IEnumerable<PersonTrainingDO> includedExams)
         {
             var limitations = edition.Limitations.Select(l => new { LIMIT_NAME = l.Name });
-
-            limitations = limitations.Concat(includedMedicals
+            limitations = limitations.Union(includedMedicals
+                .Where(m => m.Limitations != null)
                 .SelectMany(m => m.Limitations)
                 .Select(l => new { LIMIT_NAME = l.Name }));
 
-            limitations = limitations.Concat(includedExams
+            limitations = limitations.Union(includedExams
                 .Select(e => new
                 {
                     LIMIT_NAME = string.Format(
@@ -520,7 +520,7 @@ namespace Gva.Api.WordTemplates
                     VALID_DATE = m.DocumentDateValidTo,
                     CLASS = m.MedClass.Name,
                     PUBLISHER = m.DocumentPublisher.Name,
-                    LIMITATION = string.Join(",", m.Limitations.Select(l => l.Name))
+                    LIMITATION = m.Limitations != null? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
                 }).ToList<object>();
             return result;
         }

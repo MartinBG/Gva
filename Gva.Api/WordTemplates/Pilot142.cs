@@ -384,7 +384,7 @@ namespace Gva.Api.WordTemplates
                     VALID_DATE = m.DocumentDateValidTo,
                     CLASS = m.MedClass.Name,
                     PUBLISHER = m.DocumentPublisher.Name,
-                    LIMITATION = string.Join(",", m.Limitations.Select(l => l.Name))
+                    LIMITATION = m.Limitations != null ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
                 }).ToList<object>();
         }
 
