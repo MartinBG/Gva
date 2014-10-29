@@ -58,20 +58,6 @@
           toApp: 'Към заявление',
           cancel: 'Отказ'
         },
-        publishers: {
-          publisherType: 'Тип',
-          name: 'Наименование',
-          back: 'Назад',
-          search: 'Търси',
-          select: 'Избор',
-          code: 'Код',
-          inspector: 'Инспектор',
-          examiner: 'Проверяващ',
-          school: 'Учебен център',
-          organization: 'Авио-организация',
-          caa: 'Въздушна администрация',
-          other: 'Други'
-        },
         selectPersonDirective: {
           person: 'Заявител',
           newPerson: 'Нов заявител'
@@ -80,15 +66,13 @@
           documentNumber: '№ на документ',
           documentDate: 'От дата',
           notes: 'Бележки',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
           applicationType: 'Тип заявление',
           applicationPaymentType: 'Член',
           currency: 'Парична единица',
           taxAmount: 'Платена такса',
           caseType: 'Тип дело'
         },
-        scannedDocumentlDirective: {
+        scannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',
           bookPageNumber: '№ стр.',
@@ -174,7 +158,6 @@
           file: 'Файл'
         },
         airportDataDirective: {
-          title: 'Данни за летище',
           airportType: 'Тип',
           name: 'Наименование',
           nameAlt: 'Наименование (англ.)',
@@ -199,12 +182,9 @@
           airportType: 'Тип',
           name: 'Наименование',
           nameAlt: 'Наименование (англ.)',
-          place: 'Местоположение',
           icao: 'ICAO код',
           runway: 'Полоса',
           course: 'Курс',
-          excess: 'Превишение',
-          concrete: 'Полоса-бетон',
           edit: 'Редакция',
           viewApplication: 'Обратно към заявление: '
         },
@@ -221,7 +201,6 @@
           cancel: 'Отказ'
         },
         airportOtherDirective: {
-          title: 'Друг документ',
           documentNumber: 'Док No',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
@@ -244,7 +223,6 @@
           title: 'Преглед на документ'
         },
         otherSearch: {
-          newDocument: 'Нов документ',
           documentNumber: 'Документ №',
           documentDateValidFrom: 'От дата',
           documentDateValidTo: 'До дата',
@@ -255,7 +233,8 @@
           bookPageNumber: '№ стр. в<br>делов. книга',
           pageCount: 'Брой стр.',
           newOther: 'Нов документ',
-          file: 'Файл'
+          file: 'Файл',
+          notes: 'Бележки'
         },
         inspectionSearch: {
           newInspection: 'Нова инспекция',
@@ -268,8 +247,6 @@
           startDate: 'Начална дата',
           endDate: 'Крайна дата',
           inspectionPlace: 'Адрес на одитирания обект',
-          bookPageNumber: '№ стр. в<br>делов. книга',
-          pageCount: 'Брой стр.',
           application: 'Преписка (Заявление)'
         },
         newInspection: {
@@ -285,7 +262,6 @@
           title: 'Преглед на инспекция за летище'
         },
         airportOwnerDirective: {
-          title: 'Свързано лице',
           airportRelation: 'Тип отношение',
           person: 'Физическо лице',
           organization: 'Организация',
@@ -319,10 +295,10 @@
           toDate: 'До дата',
           bookPageNumber: '№ стр. в<br>делов. книга',
           pageCount: 'Брой стр.',
-          file: 'Файл'
+          file: 'Файл',
+          notes: 'Бележки'
         },
         airportOperDirective: {
-          title: 'Удостоверение за експлоатационна годност',
           issueNumber: 'Номер на удостоверение',
           issueDate: 'Дата на издаване',
           validToDate: 'Срок на валидност',
@@ -334,7 +310,6 @@
           approvalDate: 'Дата на одобрение',
           docInspector: 'Инспектор',
           linkedDocument: 'Документ',
-          noAvailableDocs: 'Няма налични документи',
           ext: 'Продължение',
           extDate: 'Дата на издаване',
           extValidToDate: 'Дата на изтичане',
@@ -363,7 +338,6 @@
           issueDate: 'Дата на издаване',
           issueNumber: 'Удостоверение №',
           validToDate: 'Срок на валидност',
-          audit: 'Инспекция',
           organization: 'Организация',
           inspector: 'Проверил',
           valid: 'Валиден'
@@ -427,7 +401,6 @@
           manDate: 'Дата на производство',
           place: 'Местоположение',
           operationalDate: 'Дата на въвеждане в експлоатация',
-          note: 'Допълнително описание',
           'new': 'Ново съоръжение',
           search: 'Търси'
         },
@@ -449,7 +422,6 @@
           file: 'Файл'
         },
         equipmentDataDirective: {
-          title: 'Данни за съоръжение',
           equipmentType: 'Тип',
           name: 'Наименование',
           equipmentProducer: 'Производител',
@@ -474,8 +446,6 @@
           manPlace: 'Място на производство',
           manDate: 'Дата на производство',
           place: 'Местоположение',
-          operationalDate: 'Дата на въвеждане в експлоатация',
-          note: 'Допълнително описание',
           edit: 'Редакция',
           viewApplication: 'Обратно към заявление: '
         },
@@ -492,7 +462,6 @@
           cancel: 'Отказ'
         },
         equipmentOtherDirective: {
-          title: 'Друг документ',
           documentNumber: 'Док No',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
@@ -1249,7 +1218,8 @@
           bookPageNumber: '№ стр. в<br>делов. книга',
           pageCount: 'Брой стр.',
           file: 'Файл',
-          newOther: 'Нов документ'
+          newOther: 'Нов документ',
+          notes: 'Бележки'
         },
         aircraftOwnerDirective: {
           aircraftRelation: 'Тип отношение',
@@ -1286,7 +1256,8 @@
           bookPageNumber: '№ стр. в<br>делов. книга',
           pageCount: 'Брой стр.',
           file: 'Файл',
-          newOther: 'Нов документ'
+          newOther: 'Нов документ',
+          notes: 'Бележки'
         },
         inspectionSearch: {
           newInspection: 'Нова инспекция',
@@ -1310,11 +1281,7 @@
           title: 'Преглед на инспекция за въздухоплавателни средства',
           edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ',
-          deleteInsp: 'Изтрий',
-          inspectionPeriod: 'Период, в който ВС може да бъде видяно',
-          inspectionFrom: 'Начална дата',
-          inspectionTo: 'Крайна дата'
+          cancel: 'Отказ'
         },
         occurrenceSearch: {
           localTime: 'Час на инцидента',
@@ -1348,9 +1315,7 @@
           country: 'Държава',
           area: 'Място на инцидента',
           occurrenceNotes: 'Бележки по инцидента',
-          notes: 'Бележки',
-          bookPageNumber: '№ стр. в деловодна книга',
-          pageCount: 'Бр. страници на документа'
+          notes: 'Бележки'
         },
         newMaintenance: {
           title: 'Нова поддръжка',
@@ -3190,8 +3155,7 @@
           documentDateIssueAmendment: 'Дата на изменение',
           changeNumAmendment: 'Номер на изменение',
           approvalState: 'Състояние',
-          application: 'Преписка (Заявление)',
-          recommendationReport: 'Доклад от препоръки'
+          application: 'Преписка (Заявление)'
         },
         approvalNew: {
           title: 'Ново удостоверение за одобрение',

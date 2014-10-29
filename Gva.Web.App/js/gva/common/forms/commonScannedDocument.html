@@ -1,19 +1,19 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly ng-show="model.length || model">
-  <h5 class="form-header" l10n-text="common.scannedDocumentlDirective.title" style="margin-top:10px;" ng-if="!hideFiles"></h5>
+  <h5 class="form-header" l10n-text="common.scannedDocumentDirective.title" style="margin-top:10px;" ng-if="!hideFiles"></h5>
 
   <div ng-repeat ="file in files | filter:showFile()">
     <div class="row">
       <div ng-if="!hideFiles">
-        <sc-field type="text" ng-model="file.caseType.name" l10n-text="common.scannedDocumentlDirective.caseType" ng-disabled class="col-sm-2"></sc-field>
-        <sc-field type="text" ng-model="file.bookPageNumber" ng-required="true" sc-validate="{ unique: isUniqueBPN(file) }" validations="{unique: 'errorTexts.notUniqueBPN'}" l10n-text="common.scannedDocumentlDirective.bookPageNumber" class="col-sm-2 col-md-1"></sc-field>
-        <sc-field type="int" ng-model="file.pageCount" min="0" l10n-text="common.scannedDocumentlDirective.pageCount" validations="{min: 'default'}" class="col-sm-2 col-md-1"></sc-field>
+        <sc-field type="text" ng-model="file.caseType.name" l10n-text="common.scannedDocumentDirective.caseType" ng-disabled class="col-sm-2"></sc-field>
+        <sc-field type="text" ng-model="file.bookPageNumber" ng-required="true" sc-validate="{ unique: isUniqueBPN(file) }" validations="{unique: 'errorTexts.notUniqueBPN'}" l10n-text="common.scannedDocumentDirective.bookPageNumber" class="col-sm-2 col-md-1"></sc-field>
+        <sc-field type="int" ng-model="file.pageCount" min="0" l10n-text="common.scannedDocumentDirective.pageCount" validations="{min: 'default'}" class="col-sm-2 col-md-1"></sc-field>
         <div class="form-group col-sm-3">
-          <label class="control-label" l10n-text="common.scannedDocumentlDirective.fileName"></label>
+          <label class="control-label" l10n-text="common.scannedDocumentDirective.fileName"></label>
           <sc-files ng-model="file.file" readonly="{{file.isDocFile}}" name="file" ng-readonly="file.isDocFile || form.$readonly"></sc-files>
         </div>
       </div>
       <div class="form-group" ng-if="!hideApplications" ng-class="{'col-sm-3 col-md-5': !hideFiles, 'col-sm-6': hideFiles}">
-        <label class="control-label" l10n-text="common.scannedDocumentlDirective.applications"></label>
+        <label class="control-label" l10n-text="common.scannedDocumentDirective.applications"></label>
         <gva-applications ng-model="file.applications" set-part="setPart" lot-id="lotId" ng-readonly="form.$readonly"></gva-applications>
       </div>
     </div>
