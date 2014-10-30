@@ -987,7 +987,7 @@ namespace Gva.MigrationTool.Sets
                         documentDateValidTo = r.Field<DateTime?>("DATE_TO"),
                         medClass = noms["medClasses"].ByOldId(r.Field<decimal?>("MED_CLASS_ID").ToString()),
                         documentPublisher = noms["medDocPublishers"].ByName(r.Field<string>("PUBLISHER_NAME")),
-                        limitations = medLimitations.ContainsKey(r.Field<int>("ID")) ? medLimitations[r.Field<int>("ID")] : null,
+                        limitations = medLimitations.ContainsKey(r.Field<int>("ID")) ? medLimitations[r.Field<int>("ID")] : new NomValue[0],
                         notes = r.Field<string>("NOTES")
                     }))
                 .ToList();
@@ -1208,8 +1208,8 @@ namespace Gva.MigrationTool.Sets
                         __RATING_CAA_ID = r.Field<int>("RATING_CAA_ID"),
 
                         caseType = Utils.ToJObject(PersonUtils.getPersonCaseTypeByStaffTypeCode(noms, (r.Field<string>("STAFF_TYPE_CODE")))),
-                        ratingSubClasses = transformSubclasses(r.Field<string>("SUBCLASSES")),
-                        limitations = transformLimitations66(r.Field<string>("LIMITATIONS"), noms),
+                        ratingSubClasses = transformSubclasses(r.Field<string>("SUBCLASSES")) ?? new NomValue[0],
+                        limitations = transformLimitations66(r.Field<string>("LIMITATIONS"), noms) ?? new NomValue[0],
                         documentDateValidFrom = r.Field<DateTime?>("ISSUE_DATE"),
                         documentDateValidTo = r.Field<DateTime?>("VALID_DATE"),
                         notes = r.Field<string>("NOTES"),
@@ -1467,7 +1467,7 @@ namespace Gva.MigrationTool.Sets
                         notesAlt = r.Field<string>("NOTES_TRANS"),
                         licenceAction = noms["licenceActions"].ByOldId(r.Field<string>("LICENCE_ACTION_ID")),
                         stampNumber = r.Field<string>("PAPER_NO"),
-                        limitations = transformLimitations66(r.Field<string>("LIMITATIONS_OLD"), noms),
+                        limitations = transformLimitations66(r.Field<string>("LIMITATIONS_OLD"), noms) ?? new NomValue[0],
 
                         applications = r.Field<int?>("REQUEST_ID") != null ? new JObject[] { nomApplications[r.Field<int?>("REQUEST_ID").Value] } : new JObject[0],
                         includedRatings = includedRatings[r.Field<int>("ID")],

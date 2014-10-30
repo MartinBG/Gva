@@ -65,7 +65,7 @@ namespace Gva.Api.Projections.Person
             {
                 licenceEdition.Inspector = edition.Content.Inspector.Name;
             }
-            if (edition.Content.Limitations != null)
+            if (edition.Content.Limitations.Count > 0)
             {
                 licenceEdition.Limitations = string.Join(", ", edition.Content.Limitations.Select(l => l.Name));
             }

@@ -410,7 +410,7 @@ namespace Gva.Api.WordTemplates
             var limitations = edition.Limitations.Select(l => new { LIMIT_NAME = l.Name });
 
             limitations = limitations.Union(includedMedicals
-                .Where(m => m.Limitations != null)
+                .Where(m => m.Limitations.Count > 0)
                 .SelectMany(m => m.Limitations)
                 .Select(l => new { LIMIT_NAME = l.Name }));
 
@@ -526,7 +526,7 @@ namespace Gva.Api.WordTemplates
                     VALID_DATE = m.DocumentDateValidTo,
                     CLASS = m.MedClass.Name,
                     PUBLISHER = m.DocumentPublisher.Name,
-                    LIMITATION = m.Limitations != null? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
+                    LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
                 }).ToList<object>();
             return result;
         }

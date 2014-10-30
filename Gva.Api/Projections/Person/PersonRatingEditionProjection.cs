@@ -37,10 +37,8 @@ namespace Gva.Api.Projections.Person
             edition.PartId = licenceEdition.Part.PartId;
             edition.PartIndex = licenceEdition.Part.Index;
             edition.RatingPartIndex = licenceEdition.Content.RatingPartIndex.Value;
-            string[] ratinSubClasses = licenceEdition.Content.RatingSubClasses != null ? licenceEdition.Content.RatingSubClasses.Select(t => t.Code).ToArray() : null;
-            edition.RatingSubClasses = ratinSubClasses != null ? string.Join(", ", ratinSubClasses) : null;
-            string[] limitations = licenceEdition.Content.Limitations != null ? licenceEdition.Content.Limitations.Select(t => t.Code).ToArray() : null;
-            edition.Limitations = limitations != null ? string.Join(", ", limitations) : null;
+            edition.RatingSubClasses = licenceEdition.Content.RatingSubClasses.Count > 0 ? string.Join(", ", licenceEdition.Content.RatingSubClasses.Select(t => t.Code)) : null;
+            edition.Limitations = licenceEdition.Content.Limitations.Count > 0 ? string.Join(", ", licenceEdition.Content.Limitations.Select(t => t.Code)) : null;
             edition.DocDateValidTo = licenceEdition.Content.DocumentDateValidTo;
             edition.Notes = licenceEdition.Content.Notes;
             edition.NotesAlt = licenceEdition.Content.NotesAlt;

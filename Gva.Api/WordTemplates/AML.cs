@@ -161,7 +161,7 @@ namespace Gva.Api.WordTemplates
                     {
                         var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
 
-                        return r.Content.AircraftTypeGroup != null && lastEdition.Content.Limitations != null && lastEdition.Content.Limitations.Count == 0;
+                        return r.Content.AircraftTypeGroup != null && lastEdition.Content.Limitations.Count == 0;
                     })
                 .Select(r => new
                 {
@@ -228,7 +228,7 @@ namespace Gva.Api.WordTemplates
                         TYPE = r.Content.AircraftTypeGroup.Name,
                         CAT = r.Content.AircraftTypeCategory.Code,
                         DATE = lastEdition.Content.DocumentDateValidFrom,
-                        LIMIT = (lastEdition.Content.Limitations != null && lastEdition.Content.Limitations.Count > 0) ?
+                        LIMIT = lastEdition.Content.Limitations.Count > 0 ?
                             string.Join(",", lastEdition.Content.Limitations.Select(l => l.Name)) :
                             "NP"
                     };
@@ -254,7 +254,7 @@ namespace Gva.Api.WordTemplates
                         CAT = r.Content.AircraftTypeCategory.Code,
                         DATE_FROM = lastEdition.Content.DocumentDateValidFrom,
                         DATE_TO = lastEdition.Content.DocumentDateValidTo,
-                        LIMIT = (lastEdition.Content.Limitations != null && lastEdition.Content.Limitations.Count > 0) ?
+                        LIMIT = lastEdition.Content.Limitations.Count > 0 ?
                             string.Join(",", lastEdition.Content.Limitations.Select(l => l.Name)) :
                             "NP"
                     };
@@ -278,7 +278,7 @@ namespace Gva.Api.WordTemplates
 
                             AIRCRAFT = r.Content.AircraftTypeGroup.Name,
                             CAT = r.Content.AircraftTypeCategory.Code,
-                            LIM = (lastEdition.Content.Limitations != null && lastEdition.Content.Limitations.Count > 0) ? 
+                            LIM = lastEdition.Content.Limitations.Count > 0 ? 
                                 string.Join(",", lastEdition.Content.Limitations.Select(l => l.Name)) :
                                 "NP"
                         };
