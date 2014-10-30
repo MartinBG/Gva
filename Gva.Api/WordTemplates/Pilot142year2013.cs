@@ -402,7 +402,13 @@ namespace Gva.Api.WordTemplates
             IEnumerable<PersonMedicalDO> includedMedicals,
             IEnumerable<PersonTrainingDO> includedExams)
         {
+            if (edition.Limitations == null)
+            {
+                return new List<object>();
+            }
+
             var limitations = edition.Limitations.Select(l => new { LIMIT_NAME = l.Name });
+
             limitations = limitations.Union(includedMedicals
                 .Where(m => m.Limitations != null)
                 .SelectMany(m => m.Limitations)

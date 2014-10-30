@@ -159,7 +159,12 @@ namespace Gva.Api.WordTemplates
         private object[] GetAircrafts(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             return includedRatings
-                .Where(r => r.Content.AircraftTypeGroup != null && ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.Limitations.Count == 0)
+                .Where(r => 
+                    {
+                        var lastRatingEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
+
+                        return r.Content.AircraftTypeGroup != null && (lastRatingEdition.Content.Limitations == null || lastRatingEdition.Content.Limitations.Count == 0);
+                    })
                 .Select(r => new
                     {
                         AC_TYPE = r.Content.AircraftTypeGroup.Name,

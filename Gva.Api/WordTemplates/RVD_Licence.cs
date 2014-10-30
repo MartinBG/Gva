@@ -218,9 +218,9 @@ namespace Gva.Api.WordTemplates
                     {
                         LEVEL = r.Content.PersonRatingLevel == null ? null : r.Content.PersonRatingLevel.Code,
                         RATING = r.Content.RatingClass == null ? null : r.Content.RatingClass.Code,
-                        SUBRATING = string.Join(",", lastEdition.Content.RatingSubClasses.Select(s => s.Code)),
+                        SUBRATING = lastEdition.Content.RatingSubClasses != null ? string.Join(",", lastEdition.Content.RatingSubClasses.Select(s => s.Code)) : string.Empty,
                         LICENCE = r.Content.Authorization == null ? null : r.Content.Authorization.Code,
-                        LIMITATION = string.Join(",", lastEdition.Content.Limitations.Select(s => s.Name)),
+                        LIMITATION = lastEdition.Content.Limitations != null ? string.Join(",", lastEdition.Content.Limitations.Select(s => s.Name)) : string.Empty,
                         ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
                         VALID_DATE = lastEdition.Content.DocumentDateValidTo
                     };
