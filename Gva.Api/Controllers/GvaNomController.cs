@@ -71,7 +71,9 @@ namespace Gva.Api.Controllers
             if (!string.IsNullOrWhiteSpace(term))
             {
                 term = term.ToLower();
-                applications = applications.Where(n => n.ApplicationName.ToLower().Contains(term)).ToArray();
+                applications = applications.Where(n =>
+                    string.Format("{0} {1} {2}", n.ApplicationTypeCode, n.DocumentNumber, n.DocumentDate).Contains(term))
+                    .ToArray();
             }
 
             return Ok(applications);

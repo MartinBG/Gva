@@ -4,7 +4,15 @@
 (function (angular, Select2) {
   'use strict';
 
-  function ApplicationsDirective(scModal, $state, $stateParams, $compile, $parse, ApplicationNoms) {
+  function ApplicationsDirective(
+    scModal,
+    $state,
+    $stateParams,
+    $compile,
+    $parse,
+    $filter,
+    ApplicationNoms)
+  {
     function preLink(scope, element, attrs) {
       var lotId = $parse(attrs.lotId)(scope) || $stateParams.id;
 
@@ -14,12 +22,18 @@
           return app.applicationId;
         },
         formatResult: function (result, container, query, escapeMarkup) {
-          var markup = [];
-          Select2.util.markMatch(result.applicationName, query.term, markup, escapeMarkup);
+          var markup = [],
+            application = result.applicationTypeCode + ' ' +
+            result.documentNumber + ' ' +
+            $filter('date')(result.documentDate, 'mediumDate');
+          Select2.util.markMatch(application, query.term, markup, escapeMarkup);
           return markup.join('');
         },
         formatSelection: function (app, container) {
-          var text = Select2.util.escapeMarkup(app.applicationName),
+          var application = app.applicationTypeCode + ' ' +
+            app.documentNumber + ' ' +
+            $filter('date')(app.documentDate, 'mediumDate'),
+            text = Select2.util.escapeMarkup(application),
               elem = '<a ng-click="viewApplication(' + app.partIndex + ')">' + text + '</a>';
 
           container.append($compile(elem)(scope));
@@ -105,6 +119,7 @@
     '$stateParams',
     '$compile',
     '$parse',
+    '$filter',
     'ApplicationNoms'
   ];
 
