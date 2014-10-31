@@ -1,6 +1,6 @@
 ﻿<h5 class="table-header" l10n-text="persons.editRatingEdition.editions"></h5>
 <div>
-  <sc-datatable items="ratingEditions" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+  <sc-datatable items="ratingEditions" filterable="false" pageable="false" sortable="true" dynamic-columns="false">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editEditionBtn" icon="fa-circle-o" icon-disabled="fa-check-circle-o"
         btn-sref="{ state: 'root.persons.view.ratings.edit.editions.edit', params: { index: item.partIndex} }"
