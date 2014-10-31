@@ -1,11 +1,11 @@
 ﻿<div>
-  <sc-datatable items="indexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="fromDate">
+  <sc-datatable items="indexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="bookPageNumber">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editBtn" btn-sref="getState(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-    <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber">
+    <sc-column width="200px" data="bookPageNumber" title="persons.inventorySearch.bookPageNumber">
     </sc-column>
-    <sc-column data="name" title="persons.inventorySearch.document">
+    <sc-column width="200px" data="name" title="persons.inventorySearch.document">
     </sc-column>
     <sc-column data="type" title="persons.inventorySearch.type">
     </sc-column>
