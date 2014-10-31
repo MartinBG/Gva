@@ -6,6 +6,6 @@ namespace Gva.Api.Repositories.PublisherRepository
 {
     public interface IPublisherRepository
     {
-        IEnumerable<PublisherDO> GetPublishers(PublisherType publisherType, string publisherName = null, int offset = 0, int? limit = null);
+        IEnumerable<PublisherDO> GetPublishers(PublisherType publisherType, string publisherName = null, string publisherCode = null, int offset = 0, int? limit = null);
     }
 }
