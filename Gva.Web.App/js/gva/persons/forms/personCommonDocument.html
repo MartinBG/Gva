@@ -24,9 +24,9 @@
   </div>
 
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.documentRole" alias="'documentRoles'" ng-required="true" params="{ categoryAlias: categoryAlias, caseTypeAliases: [model.case.caseType.alias] }" l10n-text="persons.personCommonDocDirective.personDocumentRole"
-      class="col-sm-6 col-md-4"></sc-field>
     <sc-field type="nomenclature" ng-model="model.part.documentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, caseTypeAliases: [model.case.caseType.alias] }" l10n-text="persons.personCommonDocDirective.personDocumentType"
+      class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.documentRole" alias="'documentRoles'" ng-required="true" params="{ categoryAlias: categoryAlias, caseTypeAliases: [model.case.caseType.alias] }" l10n-text="persons.personCommonDocDirective.personDocumentRole"
       class="col-sm-6 col-md-4"></sc-field>
   </div>
   
