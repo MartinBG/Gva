@@ -107,6 +107,28 @@ namespace Gva.Api.Repositories.PersonRepository
                     .ToList();
         }
 
+        public List<GvaViewPerson> GetStaffExaminers(string names, int offset = 0, int? limit = null)
+        {
+            var predicate = PredicateBuilder.True<GvaViewPerson>();
+
+            if (!string.IsNullOrEmpty(names))
+            {
+                predicate = predicate.AndStringMatches(p => p.Names, names, false);
+            }
+
+            var persons = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                .Include(p => p.Lot)
+                .Where(predicate);
+
+            return (from p in persons
+                    join ct in this.unitOfWork.DbContext.Set<GvaLotCase>().Include(lc => lc.GvaCaseType).Where(lc => lc.GvaCaseType.Alias == "staffExaminer")
+                        on p.LotId equals ct.LotId
+                    orderby p.Names
+                    select p)
+                    .WithOffsetAndLimit(offset, limit)
+                    .ToList();
+        }
+
         public GvaViewPerson GetPerson(int personId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewPerson>()

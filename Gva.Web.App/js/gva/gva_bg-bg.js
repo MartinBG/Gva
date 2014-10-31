@@ -1603,6 +1603,7 @@
           documentDateValidFrom: 'Дата на вписване',
           documentDateValidTo: 'Валидно до',
           inspector: 'Инспектор',
+          examiner: 'Проверяващ',
           notes: 'Бележки',
           notesAlt: 'Бележки лат.',
           limitations: 'Ограничения',

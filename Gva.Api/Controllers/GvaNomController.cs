@@ -126,6 +126,7 @@ namespace Gva.Api.Controllers
         [Route("persons/{id:int}")]
         [Route("inspectors/{id:int}")]
         [Route("awExaminers/{id:int}")]
+        [Route("staffExaminers/{id:int}")]
         public IHttpActionResult GetPerson(int id)
         {
             var person = this.personRepository.GetPerson(id);
@@ -201,6 +202,21 @@ namespace Gva.Api.Controllers
         {
             var returnValue =
                 this.personRepository.GetAwExaminers(names: term, offset: offset, limit: limit)
+                .Select(e => new
+                {
+                    nomValueId = e.LotId,
+                    name = e.Names
+                });
+
+            return Ok(returnValue);
+        }
+
+
+        [Route("staffExaminers")]
+        public IHttpActionResult GetStaffExaminers(string term = null, int offset = 0, int? limit = null)
+        {
+            var returnValue =
+                this.personRepository.GetStaffExaminers(names: term, offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
