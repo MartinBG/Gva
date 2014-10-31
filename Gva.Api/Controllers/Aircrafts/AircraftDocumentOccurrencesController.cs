@@ -20,7 +20,6 @@ namespace Gva.Api.Controllers.Aircrafts
     public class AircraftDocumentOccurrencesController : GvaCaseTypePartController<AircraftDocumentOccurenceDO>
     {
         private ICaseTypeRepository caseTypeRepository;
-        private IFileRepository fileRepository;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
 
@@ -35,7 +34,6 @@ namespace Gva.Api.Controllers.Aircrafts
             : base("documentOccurrences", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.caseTypeRepository = caseTypeRepository;
-            this.fileRepository = fileRepository;
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
         }
@@ -51,8 +49,7 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             if (appId.HasValue)

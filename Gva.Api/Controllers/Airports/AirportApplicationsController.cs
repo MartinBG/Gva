@@ -61,8 +61,7 @@ namespace Gva.Api.Controllers.Airports
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             DocumentApplicationDO newApplication = new DocumentApplicationDO()

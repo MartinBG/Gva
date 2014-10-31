@@ -3,7 +3,7 @@
     <div class="form-group col-sm-2" sc-has-error="caseType">
       <label class="control-label" l10n-text="persons.ratingDirective.caseType"></label>
       <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
-      <gva-case-type model="model.case" name="caseType" ng-disabled="model.case.caseType" init="isNew" case-type="caseTypeId" app-only ng-required="true"></gva-case-type>
+      <gva-case-type model="model.case" name="caseType" ng-disabled="model.case.caseType" init="isNew" case-type="caseTypeId" ng-required="true"></gva-case-type>
     </div>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'flightCrew' || model.case.caseType.alias === 'ovd' || model.case.caseType.alias === 'to_suvd'">

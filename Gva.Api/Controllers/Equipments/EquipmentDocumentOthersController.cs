@@ -21,7 +21,6 @@ namespace Gva.Api.Controllers.Equipments
     public class EquipmentDocumentOthersController : GvaCaseTypePartController<EquipmentDocumentOtherDO>
     {
         private ILotRepository lotRepository;
-        private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
@@ -38,7 +37,6 @@ namespace Gva.Api.Controllers.Equipments
             : base("equipmentDocumentOthers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.lotRepository = lotRepository;
-            this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
@@ -55,8 +53,7 @@ namespace Gva.Api.Controllers.Equipments
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             if (appId.HasValue)

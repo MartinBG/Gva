@@ -317,18 +317,5 @@ namespace Gva.Api.Repositories.FileRepository
                 return null;
             }
         }
-
-        public int GetNextBPN(int lotId, int caseTypeId)
-        {
-            var maxBPN = this.unitOfWork.DbContext.Set<GvaLotFile>()
-                .Where(p => p.LotPart.LotId == lotId && p.GvaCaseTypeId == caseTypeId)
-                .Select(p => p.PageIndexInt)
-                .Max();
-            if(!maxBPN.HasValue)
-            {
-                return 1;
-            }
-            return maxBPN.Value + 1;
-        }
     }
 }

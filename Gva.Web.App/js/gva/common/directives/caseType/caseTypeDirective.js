@@ -86,8 +86,7 @@
     function postLink(scope, element, attrs) {
       var isMultiple = angular.isDefined(attrs.multiple),
           appId = $parse(attrs.appId)(scope.$parent),
-          lotId = $parse(attrs.lotId)(scope.$parent) || $stateParams.id,
-          appOnly = angular.isDefined(attrs.appOnly);
+          lotId = $parse(attrs.lotId)(scope.$parent) || $stateParams.id;
 
       scope.$watch('caseType', function (newValue, oldValue) {
         if (newValue === oldValue || !newValue && !oldValue) {
@@ -137,8 +136,7 @@
         return GvaParts.getNewCase({
           lotId: lotId,
           caseTypeId: caseType.nomValueId,
-          appId: appId,
-          appOnly: appOnly
+          appId: appId
         }).$promise.then(function (newFile) {
           if (isMultiple) {
             scope.model.push(newFile);

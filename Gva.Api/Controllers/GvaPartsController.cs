@@ -71,7 +71,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("getNewCase")]
-        public IHttpActionResult GetNewCase(int lotId, int caseTypeId, int? appId = null, bool appOnly = false)
+        public IHttpActionResult GetNewCase(int lotId, int caseTypeId, int? appId = null)
         {
             var caseType = this.caseTypeRepository.GetCaseType(caseTypeId);
             CaseDO caseDO = new CaseDO()
@@ -84,11 +84,6 @@ namespace Gva.Api.Controllers
                 },
                 IsAdded = true
             };
-
-            if (!appOnly)
-            {
-                caseDO.BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseTypeId).ToString();
-            }
 
             if (appId.HasValue)
             {
