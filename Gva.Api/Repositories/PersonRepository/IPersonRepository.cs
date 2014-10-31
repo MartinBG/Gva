@@ -42,7 +42,7 @@ namespace Gva.Api.Repositories.PersonRepository
             string names = null,
             bool exact = false);
 
-        int GetNextLin(int linTypeId);
+        int? GetNextLin(int linTypeId);
 
         bool IsUniqueUin(string uin, int? personId = null);
 

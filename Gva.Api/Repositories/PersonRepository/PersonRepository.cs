@@ -200,19 +200,28 @@ namespace Gva.Api.Repositories.PersonRepository
                 .ToList();
         }
 
-        public int GetNextLin(int linTypeId)
+        public int? GetNextLin(int linTypeId)
         {
-            int? lastLin = this.unitOfWork.DbContext.Set<GvaViewPerson>()
-                .Include(p => p.LinType)
-                .Where(p => p.LinTypeId == linTypeId)
-                .Max(p => (int?)p.Lin);
-
-            if (!lastLin.HasValue)
+            var linType = this.nomRepository.GetNomValue("linTypes", linTypeId);
+            if (linType.Code == "noLin")
             {
-                lastLin = this.nomRepository.GetNomValue("linTypes", linTypeId).TextContent.Get<int>("initialLinVal");
+                return null;
             }
+            else
+            {
+                var lins = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                .Include(p => p.LinType)
+                .Where(p => p.LinTypeId == linTypeId);
 
-            return lastLin.Value + 1;
+                int? lastLin = lins.Max(p => (int?)p.Lin);
+
+                if (!lastLin.HasValue)
+                {
+                    lastLin = linType.TextContent.Get<int>("initialLinVal");
+                }
+
+                return lastLin.Value + 1;
+            }
         }
 
         public bool IsUniqueUin(string uin, int? personId = null)

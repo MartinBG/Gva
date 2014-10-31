@@ -28,7 +28,7 @@
     person: [
       'Persons',
       function (Persons) {
-        return Persons.newPerson().$promise;
+        return Persons.newPerson({extendedVersion : false}).$promise;
       }
     ]
   };
