@@ -9,6 +9,23 @@
     airportDocumentApplications
   ) {
     $scope.airportDocumentApplications = airportDocumentApplications;
+
+    $scope.isDeclinedApp = function(item) {
+      if (item.part.stage) {
+        return item.part.stage.alias === 'declined';
+      }
+
+      return false;
+    };
+
+    $scope.isDoneApp = function(item) {
+      if (item.part.stage) {
+        return item.part.stage.alias === 'done';
+      }
+
+      return false;
+    };
+
   }
 
   AirportApplicationsSearchCtrl.$inject = [

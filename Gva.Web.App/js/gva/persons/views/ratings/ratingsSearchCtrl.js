@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, moment*/
+(function (angular, moment) {
   'use strict';
 
   function RatingsSearchCtrl(
@@ -9,6 +9,17 @@
     ratings
   ) {
     $scope.ratings = ratings;
+
+    $scope.isExpiringRating = function(item) {
+      var today = moment(new Date()),
+          difference = moment(item.lastDocDateValidTo).diff(today, 'days');
+
+      return 0 <= difference && difference <= 30;
+    };
+
+    $scope.isExpiredRating = function(item) {
+      return moment(new Date()).isAfter(item.lastDocDateValidTo);
+    };
   }
 
   RatingsSearchCtrl.$inject = [
@@ -29,4 +40,4 @@
   };
 
   angular.module('gva').controller('RatingsSearchCtrl', RatingsSearchCtrl);
-}(angular));
+}(angular, moment));

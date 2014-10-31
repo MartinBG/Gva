@@ -140,6 +140,7 @@
     <Compile Include="ModelsDO\Applications\PartDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
+    <Compile Include="ModelsDO\Common\DocumentApplicationViewDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
     <Compile Include="ModelsDO\Persons\ExaminerDataDO.cs" />
@@ -227,7 +228,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationInspectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationAwExaminerDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffManagementDO.cs" />
-    <Compile Include="ModelsDO\Persons\ApplicationStageDO.cs" />
+    <Compile Include="ModelsDO\Common\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\Persons\GvaViewPersonLicenceEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\GvaViewPersonRatingDO.cs" />
     <Compile Include="ModelsDO\Persons\InspectorDataDO.cs" />

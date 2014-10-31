@@ -9,6 +9,7 @@ using Common.Data;
 using Common.Filters;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Common;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.ApplicationStageRepository;
@@ -351,7 +352,6 @@ namespace Gva.Api.Controllers.Persons
 
                     GvaApplicationStage applicationStage = new GvaApplicationStage()
                     {
-                        
                         GvaStageId = stageId,
                         StartingDate = DateTime.Now,
                         Ordinal = lastStageOrdinal,

@@ -1789,7 +1789,8 @@
           applicationPaymentType: 'Член',
           currency: 'Валута',
           taxAmount: 'Такса',
-          file: 'Файл'
+          file: 'Файл',
+          stageName: 'Статус'
         },
         newPersonDocApplication: {
           title: 'Ново заявление',

@@ -436,14 +436,21 @@ table.table thead th {
     background-color: #f5f5f5;
 }
 
-.expiringLicence {
+.expiringDocument {
     background-color: #ffff99
 }
 
-.invalidLicence {
+.invalidDocument {
     background-color: #ffcc99
 }
-.expiredLicence {
+.expiredDocument {
+    background-color: #C0C0C0
+}
+
+.declinedApplication {
+    background-color: #ffcc99
+}
+.doneApplication {
     background-color: #C0C0C0
 }
 

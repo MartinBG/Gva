@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
@@ -11,6 +13,8 @@ using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Gva.Api.ModelsDO.Applications;
+using Common.Api.Models;
 
 namespace Gva.Api.Controllers.Persons
 {
@@ -105,6 +109,42 @@ namespace Gva.Api.Controllers.Persons
 
                 return Ok();
             }
+        }
+
+        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
+        {
+            var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts<DocumentApplicationViewDO>(this.path);
+
+            var appStages = (from gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                            join ga in this.unitOfWork.DbContext.Set<GvaApplication>().Where(a => a.LotId == lotId) on gas.GvaApplicationId equals ga.GvaApplicationId    
+                            group gas by ga.GvaAppLotPartId into appSt
+                            select new {appSt = appSt.OrderByDescending(s => s.GvaStageId).FirstOrDefault(), partId =  appSt.Key.Value})
+                            .ToList();
+            var stages = this.unitOfWork.DbContext.Set<GvaStage>();
+
+            List<CaseTypePartDO<DocumentApplicationViewDO>> partVersionDOs = new List<CaseTypePartDO<DocumentApplicationViewDO>>();
+            foreach (var partVersion in partVersions)
+            {
+                var appStage = appStages.Where(ap => ap.partId == partVersion.Part.PartId);
+                if(appStage.Count() > 0)
+                {
+                    int stageId = appStage.Single().appSt.GvaStageId;
+                    var stage = stages.Where(s => s.GvaStageId == stageId).Single();
+                    partVersion.Content.Stage = new NomValue() 
+                    {
+                        Name = stage.Name,
+                        Alias = stage.Alias
+                    };
+                }
+
+                var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFile != null)
+                {
+                    partVersionDOs.Add(new CaseTypePartDO<DocumentApplicationViewDO>(partVersion, lotFile));
+                }
+            }
+
+            return Ok(partVersionDOs);
         }
     }
 }
