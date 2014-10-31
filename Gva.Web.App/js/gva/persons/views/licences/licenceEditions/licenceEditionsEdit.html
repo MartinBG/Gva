@@ -34,12 +34,12 @@
   <div style="clear: both"></div>
 </div>
 
-<ng-form name="editLicenceEditionForm" sc-validate="{}" sc-form-readonly="!editMode">
+<ng-form name="editLicenceEditionForm" sc-validate="{}" sc-form-readonly="!editMode || currentLicenceEdition.part.stampNumber">
   <div class="panel panel-default">
     <div class="panel-heading">
       <strong l10n-text="persons.editLicenceEditions.editionForm"></strong>
       <div class="pull-right">
-        <sc-button name="editBtn" btn-click="edit()" text="persons.editLicenceEditions.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode" ng-disabled="currentLicenceEdition.part.stampNumber || currentLicenceEdition.partIndex !== lastEditionIndex">
+        <sc-button name="editBtn" btn-click="edit()" text="persons.editLicenceEditions.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode" ng-disabled="currentLicenceEdition.partIndex !== lastEditionIndex">
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteCurrentEdition()" text="persons.editLicenceEditions.deleteEdition" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
         </sc-button>
@@ -59,6 +59,7 @@
           appId: appId,
           partIndex: licence.partIndex
         }"
+        sc-data-edit-mode="editMode"
         sc-data-fcl="licence.part.fcl"
         sc-data-licence-type="licence.part.licenceType">
       </gva-licence-edition>

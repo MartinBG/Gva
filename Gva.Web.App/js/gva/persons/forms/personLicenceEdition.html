@@ -41,7 +41,7 @@
     <sc-field type="textarea" ng-model="model.part.notesAlt" sc-validate="{ invalidNotesAlt: notesAltShouldBeFilled}" l10n-text="persons.licenceEditionDirective.notesAlt" validations="{invalidNotesAlt: 'errorTexts.invalidNotesAlt'}" rows="3" class="col-md-3"></sc-field>
   </div>
 
-  <gva-common-scanned-document name="personScannedDocumentForm" ng-model="model.case" sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
+  <gva-common-scanned-document name="personScannedDocumentForm" readonly="!editMode" ng-model="model.case" sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
 
   <h5 class="form-header" l10n-text="persons.licenceEditionDirective.ratings"></h5>
   <div class="row">
