@@ -19,6 +19,20 @@
     $scope.lotId = scFormParams.lotId;
     $scope.isNew = scFormParams.isNew;
 
+    $scope.notesShouldBeFilled = function () {
+      if(!$scope.model.part.notes && $scope.model.part.notesAlt) {
+        return false;
+      }
+      return true;
+    };
+
+    $scope.notesAltShouldBeFilled = function () {
+      if($scope.model.part.notes && !$scope.model.part.notesAlt) {
+        return false;
+      }
+      return true;
+    };
+
     $q.all([
       Persons.get({ id: scFormParams.lotId }).$promise,
       PersonRatings.query({ id: scFormParams.lotId }).$promise,

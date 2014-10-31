@@ -37,8 +37,8 @@
     <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'limitations66'" multiple="multiple" params="{general: 'F'}" l10n-text="persons.licenceEditionDirective.limitations" class="col-sm-5"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="textarea" rows="3" ng-model="model.part.notes" l10n-text="persons.licenceEditionDirective.notes" class="col-md-3"></sc-field>
-    <sc-field type="textarea" rows="3" ng-model="model.part.notesAlt" l10n-text="persons.licenceEditionDirective.notesAlt" class="col-md-3"></sc-field>
+    <sc-field type="textarea" ng-model="model.part.notes" sc-validate="{ invalidNotes: notesShouldBeFilled}" l10n-text="persons.licenceEditionDirective.notes" validations="{invalidNotes: 'errorTexts.invalidNotes'}" rows="3" class="col-md-3"></sc-field>
+    <sc-field type="textarea" ng-model="model.part.notesAlt" sc-validate="{ invalidNotesAlt: notesAltShouldBeFilled}" l10n-text="persons.licenceEditionDirective.notesAlt" validations="{invalidNotesAlt: 'errorTexts.invalidNotesAlt'}" rows="3" class="col-md-3"></sc-field>
   </div>
 
   <gva-common-scanned-document name="personScannedDocumentForm" ng-model="model.case" sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
