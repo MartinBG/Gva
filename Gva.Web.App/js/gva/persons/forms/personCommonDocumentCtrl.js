@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function PersonCommonDocCtrl($scope, scModal, scFormParams) {
+  function PersonCommonDocCtrl($scope, scModal, scFormParams, Persons) {
     $scope.isNew = scFormParams.isNew;
     $scope.caseTypeId = scFormParams.caseTypeId;
     $scope.categoryAlias = scFormParams.categoryAlias;
@@ -18,9 +18,27 @@
 
       return modalInstance.opened;
     };
+
+    $scope.isUniqueDocNumber = function () {
+      if($scope.model.part.documentNumber) {
+        return Persons
+          .isUniqueDocNumber({
+            documentNumber: $scope.model.part.documentNumber,
+            documentPersonNumber: $scope.model.part.documentPersonNumber,
+            partIndex: $scope.model.partIndex
+          })
+        .$promise
+        .then(function (result) {
+          return result.isUnique;
+        });
+      } else {
+        return true;
+      }
+    };
+
   }
 
-  PersonCommonDocCtrl.$inject = ['$scope', 'scModal', 'scFormParams'];
+  PersonCommonDocCtrl.$inject = ['$scope', 'scModal', 'scFormParams', 'Persons'];
 
   angular.module('gva').controller('PersonCommonDocCtrl', PersonCommonDocCtrl);
 }(angular));

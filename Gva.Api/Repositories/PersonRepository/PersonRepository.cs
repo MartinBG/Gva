@@ -336,5 +336,23 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Last()
                 .PartIndex;
         }
+
+        public bool IsUniqueDocNumber(string documentNumber, int? documentPersonNumber, int? partIndex)
+        {
+            var predicate = PredicateBuilder.True<GvaViewPersonDocument>()
+                .And(d => d.DocumentNumber == documentNumber);
+
+            if (documentPersonNumber.HasValue)
+            {
+                predicate = predicate.And(d => d.DocumentPersonNumber == documentPersonNumber);
+            }
+
+            if (partIndex.HasValue)
+            {
+                predicate = predicate.And(d => d.PartIndex != partIndex);
+            }
+
+            return !this.unitOfWork.DbContext.Set<GvaViewPersonDocument>().Where(predicate).Any();
+        }
     }
 }

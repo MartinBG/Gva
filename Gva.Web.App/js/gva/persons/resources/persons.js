@@ -30,6 +30,10 @@
         method: 'POST',
         url: 'api/persons/stampedDocuments',
         isArray: true
+      },
+      isUniqueDocNumber: {
+        method: 'GET',
+        url: 'api/persons/:id/isUniqueDocNumber'
       }
     });
   }]);

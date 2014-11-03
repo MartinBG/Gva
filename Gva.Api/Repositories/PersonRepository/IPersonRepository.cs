@@ -57,5 +57,7 @@ namespace Gva.Api.Repositories.PersonRepository
         IEnumerable<GvaViewPersonRating> GetRatings(int lotId, int? caseTypeId);
 
         int GetLastRatingEditionIndex(int lotId, int ratingPartIndex);
+
+        bool IsUniqueDocNumber(string documentNumber, int? documentPersonNumber, int? partIndex);
     }
 }

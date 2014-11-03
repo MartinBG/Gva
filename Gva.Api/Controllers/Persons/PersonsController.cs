@@ -324,6 +324,16 @@ namespace Gva.Api.Controllers.Persons
         }
 
         [HttpGet]
+        [Route("isUniqueDocNumber")]
+        public IHttpActionResult IsUniqueDocNumber(string documentNumber, int? documentPersonNumber = null, int? partIndex = null)
+        {
+            return Ok(new
+            {
+                isUnique = this.personRepository.IsUniqueDocNumber(documentNumber, documentPersonNumber, partIndex)
+            });
+        }
+
+        [HttpGet]
         [Route("stampedDocuments")]
         public IHttpActionResult GetStampedDocuments()
         {

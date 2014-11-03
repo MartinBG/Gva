@@ -2,14 +2,9 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocIdCtrl($scope, scFormParams, Persons) {
-    $scope.isNew = scFormParams.isNew;
-    $scope.caseTypeId = scFormParams.caseTypeId;
-    $scope.appId = scFormParams.appId;
-    $scope.hideCaseType = scFormParams.hideCaseType;
-
+  function PersonStatusCtrl($scope, Persons) {
     $scope.isUniqueDocNumber = function () {
-      if($scope.model.part.documentNumber) {
+      if ($scope.model.part.documentNumber) {
         return Persons
           .isUniqueDocNumber({
             documentNumber: $scope.model.part.documentNumber,
@@ -25,7 +20,7 @@
     };
   }
 
-  PersonDocIdCtrl.$inject = ['$scope', 'scFormParams', 'Persons'];
+  PersonStatusCtrl.$inject = ['$scope', 'Persons'];
 
-  angular.module('gva').controller('PersonDocIdCtrl', PersonDocIdCtrl);
+  angular.module('gva').controller('PersonStatusCtrl', PersonStatusCtrl);
 }(angular));

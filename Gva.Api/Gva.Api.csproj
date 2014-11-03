@@ -143,6 +143,7 @@
     <Compile Include="ModelsDO\Common\DocumentApplicationViewDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonDocumentDO.cs" />
     <Compile Include="ModelsDO\Persons\ExaminerDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLangCertDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationlAmendmentDO.cs" />
@@ -263,6 +264,7 @@
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
+    <Compile Include="Models\Views\Person\GvaViewPersonDocument.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonExaminer.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonLicence.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonRatingEdition.cs" />
@@ -305,6 +307,7 @@
     <Compile Include="Projections\Organization\OrganizationRecommendationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationApprovalProjection.cs" />
+    <Compile Include="Projections\Inventory\Persons\PersonDocumentProjection.cs" />
     <Compile Include="Projections\Person\PersonExaminerProjection.cs" />
     <Compile Include="Projections\Person\PersonLicenceProjection.cs" />
     <Compile Include="Projections\Person\PersonRatingEditionProjection.cs" />
