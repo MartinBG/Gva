@@ -19,7 +19,13 @@ namespace Gva.Api.Repositories.PublisherRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<PublisherDO> GetPublishers(PublisherType publisherType, string publisherName = null, string publisherCode = null, int offset = 0, int? limit = null)
+        public IEnumerable<PublisherDO> GetPublishers(
+            PublisherType publisherType,
+            string publisherName = null,
+            string publisherCode = null,
+            string publisherLin = null,
+            int offset = 0,
+            int? limit = null)
         {
             IQueryable<PublisherDO> publishers = null;
 
@@ -31,6 +37,7 @@ namespace Gva.Api.Repositories.PublisherRepository
                     where i.Valid
                     select new PublisherDO
                     {
+                        Lin = p.Lin,
                         Name = p.Names,
                         Code = i.ExaminerCode,
                         PublisherType = PublisherType.Inspector
@@ -44,6 +51,7 @@ namespace Gva.Api.Repositories.PublisherRepository
                         .Where(p => p.Examiner != null && p.Examiner.Valid)
                         .Select(p => new PublisherDO
                         {
+                            Lin = p.Lin,
                             Name = p.Names,
                             Code = p.Examiner.ExaminerCode,
                             PublisherType = PublisherType.Examiner
@@ -57,6 +65,7 @@ namespace Gva.Api.Repositories.PublisherRepository
                     where nv.IsActive
                     select new PublisherDO
                     {
+                        Lin = null,
                         Name = nv.Name,
                         Code = null,
                         PublisherType = PublisherType.School
@@ -70,6 +79,7 @@ namespace Gva.Api.Repositories.PublisherRepository
                     where o.Valid
                     select new PublisherDO
                     {
+                        Lin = null,
                         Name = o.Name,
                         Code = o.OrganizationType.Name,
                         PublisherType = PublisherType.Organization
@@ -83,6 +93,7 @@ namespace Gva.Api.Repositories.PublisherRepository
                     where nv.IsActive && nv.Nom.Alias == "caa"
                     select new PublisherDO
                     {
+                        Lin = null,
                         Name = nv.Name,
                         Code = null,
                         PublisherType = PublisherType.Caa
@@ -96,6 +107,7 @@ namespace Gva.Api.Repositories.PublisherRepository
                     where nv.IsActive && nv.Nom.Alias == "otherDocPublishers"
                     select new PublisherDO
                     {
+                        Lin = null,
                         Name = nv.Name,
                         Code = null,
                         PublisherType = PublisherType.Other
@@ -105,6 +117,11 @@ namespace Gva.Api.Repositories.PublisherRepository
             if (!string.IsNullOrEmpty(publisherName)) 
             {
                 publishers = publishers.Where(p => p.Name.Contains(publisherName));
+            }
+
+            if (!string.IsNullOrEmpty(publisherLin))
+            {
+                publishers = publishers.Where(p => p.Lin.ToString().Contains(publisherLin));
             }
 
             if (!string.IsNullOrEmpty(publisherCode))

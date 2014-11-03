@@ -133,7 +133,7 @@ namespace Gva.Api.Controllers
             return Ok(new
             {
                 nomValueId = person.LotId,
-                name = person.Names
+                name = string.Format("{0} {1}", person.Lin, person.Names)
             });
         }
 
@@ -141,12 +141,17 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetPersons(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.personRepository.GetPersons(names: term, exact: false, offset: offset, limit: limit)
+                this.personRepository.GetPersons(offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
-                    name = e.Names
+                    name = string.Format("{0} {1}", e.Lin, e.Names)
                 });
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                returnValue = returnValue.Where(p => p.name.ToLower().Contains(term.ToLower()));
+            }
 
             return Ok(returnValue);
         }

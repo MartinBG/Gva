@@ -15,7 +15,7 @@
   ) {
     function preLink(scope, iElement, iAttrs, ngModel) {
       var idProp = scNomenclatureConfig.idProp,
-          nameProp = scNomenclatureConfig.nameProp,
+          nameProp = iAttrs.formatOptions || scNomenclatureConfig.nameProp,
           aliasProp = scNomenclatureConfig.aliasProp,
           alias = scope.alias(),
           isMultiple = angular.isDefined(iAttrs.multiple),

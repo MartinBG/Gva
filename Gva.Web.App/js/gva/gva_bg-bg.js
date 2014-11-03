@@ -9,6 +9,7 @@
         },
         choosePublisherModal: {
           title: 'Избор на издател',
+          lin: 'ЛИН',
           publisherType: 'Тип',
           name: 'Наименование',
           search: 'Търси',
