@@ -1,33 +1,34 @@
 ﻿<h5 class="table-header" l10n-text="persons.editLicenceEditions.editions"></h5>
 <div style="padding-bottom:20px;">
-  <sc-datatable items="licenceEditions" filterable="false" pageable="false" sortable="true" dynamic-columns="false" has-info-text="false">
+  <sc-datatable items="licenceEditions" filterable="false" pageable="false" sortable="true" dynamic-columns="false" has-info-text="false"
+    default-sort="part.documentDateValidFrom">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editEditionBtn" icon="fa-circle-o" icon-disabled="fa-check-circle-o"
         btn-sref="{ state: 'root.persons.view.licences.view.editions.edit', params: { index: item.partIndex} }"
         ng-disabled="item.partIndex === currentLicenceEdition.partIndex"></sc-button>
     </sc-column>
-    <sc-column title="persons.editLicenceEditions.documentDateValidFrom" has-content="true">
+    <sc-column data="part.documentDateValidFrom" title="persons.editLicenceEditions.documentDateValidFrom" has-content="true">
       {{item.part.documentDateValidFrom | date:'mediumDate'}}
     </sc-column>
-    <sc-column title="persons.editLicenceEditions.documentDateValidTo" has-content="true">
+    <sc-column data="part.documentDateValidTo" title="persons.editLicenceEditions.documentDateValidTo" has-content="true">
       {{item.part.documentDateValidTo | date:'mediumDate'}}
     </sc-column>
     <sc-column title="persons.editLicenceEditions.limitations" has-content="true">
       {{item.part.limitations | pluck:'code' | join:', '}}
     </sc-column>
-    <sc-column title="persons.editLicenceEditions.notes" has-content="true">
+    <sc-column data="part.notes" title="persons.editLicenceEditions.notes" has-content="true">
       {{item.part.notes}}
     </sc-column>
-    <sc-column title="persons.editLicenceEditions.notesAlt" has-content="true">
+    <sc-column data="part.notesAlt" title="persons.editLicenceEditions.notesAlt" has-content="true">
       {{item.part.notesAlt}}
     </sc-column>
-    <sc-column title="persons.editLicenceEditions.licenceAction" has-content="true">
+    <sc-column data="part.licenceAction.code" title="persons.editLicenceEditions.licenceAction" has-content="true">
       {{item.part.licenceAction.code}}
     </sc-column>
-    <sc-column title="persons.editLicenceEditions.bookPageNumber" has-content="true">
+    <sc-column data="case.bookPageNumber" title="persons.editLicenceEditions.bookPageNumber" has-content="true">
       {{item.case.bookPageNumber}}
     </sc-column>
-    <sc-column title="persons.editLicenceEditions.pageCount" has-content="true">
+    <sc-column data="case.pageCount" title="persons.editLicenceEditions.pageCount" has-content="true">
       {{item.case.pageCount}}
     </sc-column>
   </sc-datatable>
@@ -41,7 +42,7 @@
       <div class="pull-right">
         <sc-button name="editBtn" btn-click="edit()" text="persons.editLicenceEditions.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode" ng-disabled="currentLicenceEdition.partIndex !== lastEditionIndex">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteCurrentEdition()" text="persons.editLicenceEditions.deleteEdition" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
+        <sc-button name="deleteBtn" btn-click="deleteCurrentEdition()" text="persons.editLicenceEditions.deleteEdition" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" ng-disabled="currentLicenceEdition.partIndex !== lastEditionIndex">
         </sc-button>
         <sc-button name="saveBtn" btn-click="save()" text="persons.editLicenceEditions.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>
