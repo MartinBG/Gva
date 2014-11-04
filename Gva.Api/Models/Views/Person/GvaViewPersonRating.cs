@@ -29,6 +29,12 @@ namespace Gva.Api.Models.Views.Person
 
         public int? LocationIndicatorId { get; set; }
 
+        public int? AircraftTypeCategoryId { get; set; }
+
+        public int? CaaId { get; set; }
+
+        public string Sector { get; set; }
+
         public virtual NomValue LocationIndicator { get; set; }
 
         public virtual NomValue RatingType { get; set; }
@@ -40,6 +46,10 @@ namespace Gva.Api.Models.Views.Person
         public virtual NomValue AircraftTypeGroup { get; set; }
 
         public virtual NomValue Authorization { get; set; }
+
+        public virtual NomValue AircraftTypeCategory { get; set; }
+
+        public virtual NomValue Caa { get; set; }
 
         public virtual GvaViewPerson Person { get; set; }
 
@@ -63,6 +73,10 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.PartId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
+            this.Property(t => t.Sector)
+                .IsOptional()
+                .HasMaxLength(100);
+
             // Table & Column Mappings
             this.ToTable("GvaViewPersonRatings");
             this.Property(t => t.LotId).HasColumnName("LotId");
@@ -74,6 +88,9 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.AircraftTypeGroupId).HasColumnName("AircraftTypeGroupId");
             this.Property(t => t.AuthorizationId).HasColumnName("AuthorizationId");
             this.Property(t => t.LocationIndicatorId).HasColumnName("LocationIndicatorId");
+            this.Property(t => t.AircraftTypeCategoryId).HasColumnName("AircraftTypeCategoryId");
+            this.Property(t => t.CaaId).HasColumnName("CaaId");
+            this.Property(t => t.Sector).HasColumnName("Sector");
 
             // Relationships
             this.HasRequired(t => t.Person)
@@ -100,6 +117,13 @@ namespace Gva.Api.Models.Views.Person
             this.HasOptional(t => t.LocationIndicator)
                 .WithMany()
                 .HasForeignKey(t => t.LocationIndicatorId);
+            this.HasOptional(t => t.Caa)
+                .WithMany()
+                .HasForeignKey(t => t.CaaId);
+            this.HasOptional(t => t.AircraftTypeCategory)
+                .WithMany()
+                .HasForeignKey(t => t.AircraftTypeCategoryId);
+
         }
     }
 }

@@ -6,6 +6,8 @@ using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
+using Common.Linq;
+using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
@@ -98,7 +100,7 @@ namespace Gva.Api.Controllers.Persons
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
             var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
-            List<GvaViewPersonRatingDO> ratingDOs= ratings.Select(rating =>
+            List<GvaViewPersonRatingDO> ratingDOs = ratings.Select(rating =>
                 new GvaViewPersonRatingDO(rating, rating.Editions.OrderBy(e => e.Index).ToList()))
                 .ToList();
 
@@ -111,6 +113,58 @@ namespace Gva.Api.Controllers.Persons
             var lastRatingEditionIndex = this.personRepository.GetLastRatingEditionIndex(lotId, ratingPartIndex);
 
             return Ok(new { LastIndex = lastRatingEditionIndex });
+        }
+
+        [HttpPost]
+        [Route("isValid")]
+        public IHttpActionResult IsValidRating(int lotId, PersonRatingDO rating, int? ratingPartIndex = null)
+        {
+            var ratings = this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
+                .Where(r => r.LotId == lotId)
+                .ToList();
+
+            if (!string.IsNullOrEmpty(rating.Sector))
+            {
+                ratings = ratings.Where(r => string.Equals(r.Sector, rating.Sector)).ToList();
+            }
+            if (rating.RatingClass != null)
+            {
+                ratings = ratings.Where(r => r.RatingClassId == rating.RatingClass.NomValueId).ToList();
+            }
+
+            if (rating.RatingType != null)
+            {
+                ratings = ratings.Where(r => r.RatingTypeId == rating.RatingType.NomValueId).ToList();
+            }
+
+            if (rating.Authorization != null)
+            {
+                ratings = ratings.Where(r => r.AuthorizationId == rating.Authorization.NomValueId).ToList();
+            }
+
+            if (rating.AircraftTypeGroup != null)
+            {
+                ratings = ratings.Where(r => r.AircraftTypeGroupId == rating.AircraftTypeGroup.NomValueId).ToList();
+            }
+
+            if (rating.AircraftTypeCategory != null)
+            {
+                ratings = ratings.Where(r => r.AircraftTypeCategoryId == rating.AircraftTypeCategory.NomValueId).ToList();
+            }
+
+            if (rating.Caa != null)
+            {
+                ratings = ratings.Where(r => r.CaaId == rating.Caa.NomValueId).ToList();
+            }
+
+            if (ratingPartIndex.HasValue)
+            {
+                ratings = ratings.Where(r => r.PartIndex != ratingPartIndex).ToList();
+            }
+
+            return Ok(new {
+                isValid = !ratings.Any()
+            });
         }
     }
 }

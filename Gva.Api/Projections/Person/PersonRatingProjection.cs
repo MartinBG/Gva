@@ -47,7 +47,9 @@ namespace Gva.Api.Projections.Person
             rating.RatingClassId = personRating.Content.RatingClass != null ? personRating.Content.RatingClass.NomValueId : (int?)null;
             rating.AircraftTypeGroupId = personRating.Content.AircraftTypeGroup != null ? personRating.Content.AircraftTypeGroup.NomValueId : (int?)null;
             rating.AuthorizationId = personRating.Content.Authorization != null ? personRating.Content.Authorization.NomValueId : (int?)null;
-
+            rating.Sector = personRating.Content.Sector;
+            rating.CaaId = personRating.Content.Caa != null ? personRating.Content.Caa.NomValueId : (int?)null;
+            rating.AircraftTypeCategoryId = personRating.Content.AircraftTypeCategory != null ? personRating.Content.AircraftTypeCategory.NomValueId : (int?)null;
             return rating;
         }
     }

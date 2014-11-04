@@ -3489,7 +3489,8 @@
         invalidNotesAlt: 'Бележки лат. трябва да бъдат попълнени',
         notUniqueDocNumberAndPersonNumber: 'Комбинацията от номер на документа ' +
           'и номер в списъка трябва да е уникална',
-         notUniqueDocNumber: 'Номера на документа трябва да е уникален'
+         notUniqueDocNumber: 'Номера на документа трябва да е уникален',
+        notValidRating: 'Вече съществува квалификация с тези данни'
       },
       defaultErrorTexts: {
         required: 'Задължително поле',

@@ -11,6 +11,10 @@
       lastEditionIndex: {
         method: 'GET',
         url: 'api/persons/:id/ratings/:ind/lastEditionIndex'
+      },
+      isValid: {
+        method: 'POST',
+        url: 'api/persons/:id/ratings/isValid'
       }
     });
   }]);
