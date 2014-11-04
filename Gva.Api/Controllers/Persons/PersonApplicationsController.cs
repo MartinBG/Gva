@@ -81,6 +81,22 @@ namespace Gva.Api.Controllers.Persons
 
                 this.unitOfWork.Save();
 
+                int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
+                    .Where(s => s.Alias.Equals("new"))
+                    .Single().GvaStageId;
+
+                GvaApplicationStage applicationStage = new GvaApplicationStage()
+                {
+                    GvaStageId = stageId,
+                    StartingDate = DateTime.Now,
+                    Ordinal = 0,
+                    GvaApplicationId = gvaApplication.GvaApplicationId
+                };
+
+                this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
+
+                this.unitOfWork.Save();
+
                 this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
 
                 transaction.Commit();
