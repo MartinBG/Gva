@@ -18,7 +18,7 @@ namespace Gva.Api.ModelsDO
             this.ApplicationName = applicationContent.ApplicationType.Name;
             this.DocumentDate = applicationContent.DocumentDate;
             this.DocumentNumber = applicationContent.DocumentNumber;
-            this.ApplicationTypeCode = applicationContent.ApplicationType.Code;
+            this.DocId = application.DocId;
         }
 
         public int ApplicationId { get; set; }
@@ -31,6 +31,6 @@ namespace Gva.Api.ModelsDO
 
         public string DocumentNumber { get; set; }
 
-        public string ApplicationTypeCode { get; set; }
+        public int? DocId { get; set; }
     }
 }

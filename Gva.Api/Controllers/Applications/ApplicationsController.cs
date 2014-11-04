@@ -309,7 +309,6 @@ namespace Gva.Api.Controllers.Applications
 
                 var application = new DocumentApplicationDO
                 {
-                    DocumentNumber = newDoc.RegIndex,
                     DocumentDate = newDoc.RegDate.Value,
                     ApplicationType = applicationNewDO.ApplicationType
                 };

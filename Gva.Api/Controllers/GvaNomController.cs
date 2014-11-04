@@ -72,7 +72,7 @@ namespace Gva.Api.Controllers
             {
                 term = term.ToLower();
                 applications = applications.Where(n =>
-                    string.Format("{0} {1} {2}", n.ApplicationTypeCode, n.DocumentNumber, n.DocumentDate).Contains(term))
+                    string.Format("{0}-{1}-{2}", n.DocumentNumber, n.DocId, n.DocumentDate).Contains(term))
                     .ToArray();
             }
 

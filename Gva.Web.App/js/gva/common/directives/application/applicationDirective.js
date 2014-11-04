@@ -23,15 +23,15 @@
         },
         formatResult: function (result, container, query, escapeMarkup) {
           var markup = [],
-            application = result.applicationTypeCode + ' ' +
-            result.documentNumber + ' ' +
+            application = result.documentNumber + '-' +
+            result.docId + '-' +
             $filter('date')(result.documentDate, 'mediumDate');
           Select2.util.markMatch(application, query.term, markup, escapeMarkup);
           return markup.join('');
         },
         formatSelection: function (app, container) {
-          var application = app.applicationTypeCode + ' ' +
-            app.documentNumber + ' ' +
+          var application = app.documentNumber + '-' +
+            app.docId + '-' +
             $filter('date')(app.documentDate, 'mediumDate'),
             text = Select2.util.escapeMarkup(application),
               elem = '<a ng-click="viewApplication(' + app.partIndex + ')">' + text + '</a>';
