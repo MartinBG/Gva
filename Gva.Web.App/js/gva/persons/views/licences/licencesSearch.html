@@ -42,5 +42,10 @@
     </sc-column>
     <sc-column data="limitations" title="persons.licencesSearch.limitations" visible="false">
     </sc-column>
+    <sc-column sortable="false" title="persons.licencesSearch.file" has-content="true">
+      <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
+        <span class="glyphicon glyphicon-file"></span>
+      </a>
+    </sc-column>
   </sc-datatable>
 </div>

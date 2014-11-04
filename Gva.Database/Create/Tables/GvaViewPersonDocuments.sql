@@ -3,7 +3,7 @@ GO
 
 CREATE TABLE [dbo].[GvaViewPersonDocuments] (
     [LotId]                INT           NOT NULL,
-	[PartIndex]            INT           NOT NULL,
+    [PartIndex]            INT           NOT NULL,
     [DocumentNumber]       NVARCHAR(50)  NOT NULL,
     [DocumentPersonNumber] INT           NULL,
     CONSTRAINT [PK_GvaViewPersonDocuments]                PRIMARY KEY ([LotId], [PartIndex], [DocumentNumber]),

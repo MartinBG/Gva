@@ -2378,7 +2378,8 @@
           valid: 'Валидност',
           pageNumber: '№ стр. в<br>делов. книга',
           pageCount: 'Брой стр.',
-          limitations: 'Ограничения'
+          limitations: 'Ограничения',
+          file: 'Файл'
         },
         newLicence: {
           title: 'Нов лиценз',

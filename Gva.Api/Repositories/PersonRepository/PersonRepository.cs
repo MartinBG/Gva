@@ -266,6 +266,8 @@ namespace Gva.Api.Repositories.PersonRepository
             return this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceType)
                 .Include(e => e.LotFile)
+                .Include(e => e.LotFile.GvaCaseType)
+                .Include(e => e.LotFile.GvaFile)
                 .Include(e => e.Application)
                 .Include(e => e.Application.Part)
                 .Include(e => e.Application.ApplicationType)
