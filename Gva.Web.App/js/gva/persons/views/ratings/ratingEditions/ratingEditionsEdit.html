@@ -19,19 +19,19 @@
     <sc-column title="persons.editRatingEdition.firstEditionValidFrom" has-content="true">
       {{(ratingEditions | first).part.documentDateValidFrom | date:'mediumDate'}}
     </sc-column>
-    <sc-column title="persons.editRatingEdition.classOrCategory" has-content="true">
+    <sc-column title="persons.editRatingEdition.classOrCategory" has-content="true" class="wrap">
       {{(rating.part.ratingClass.code || '') + (item.part.ratingSubClasses.length > 0 ? ' (' + (item.part.ratingSubClasses | pluck:'code' | join:', ') + ')' : '')}}
     </sc-column>
-    <sc-column title="persons.editRatingEdition.authorizationAndLimitations" has-content="true">
+    <sc-column title="persons.editRatingEdition.authorizationAndLimitations" has-content="true" class="wrap">
       {{(rating.part.authorization.code || '') + ' ' + (item.part.limitations | pluck:'code' | join:', ')}}
     </sc-column>
-    <sc-column data="part.notes" title="persons.editRatingEdition.notes" has-content="true">
+    <sc-column data="part.notes" title="persons.editRatingEdition.notes" has-content="true" class="wrap">
       {{item.part.notes}}
     </sc-column>
-    <sc-column data="part.notesAlt" title="persons.editRatingEdition.notesAlt" has-content="true">
+    <sc-column data="part.notesAlt" title="persons.editRatingEdition.notesAlt" has-content="true" class="wrap">
       {{item.part.notesAlt}}
     </sc-column>
-    <sc-column data="part.inspector.name" title="persons.editRatingEdition.inspector" has-content="true">
+    <sc-column data="part.inspector.name" title="persons.editRatingEdition.inspector" has-content="true" class="wrap">
       {{item.part.inspector.name}}
     </sc-column>
   </sc-datatable>

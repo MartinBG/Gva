@@ -7,9 +7,9 @@
     </sc-column>
     <sc-column data="personRatingLevel.code || ratingType.code || aircraftTypeGroup.code || locationIndicator.code" title="persons.ratingSearch.ratingTypeOrRatingLevel">
     </sc-column>
-    <sc-column data="(ratingClass.code || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : '')" title="persons.ratingSearch.classOrCategory">
+    <sc-column data="(ratingClass.code || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : '')" title="persons.ratingSearch.classOrCategory" class="wrap">
     </sc-column>
-    <sc-column data="((authorization && authorization.code) || '') + ' ' + (limitations ? limitations : '')" title="persons.ratingSearch.authorizationAndLimitations">
+    <sc-column data="((authorization && authorization.code) || '') + ' ' + (limitations ? limitations : '')" title="persons.ratingSearch.authorizationAndLimitations" class="wrap">
     </sc-column>
     <sc-column data="lastDocDateValidFrom" title="persons.ratingSearch.lastEditionValidFrom" type="date">
     </sc-column>
@@ -17,9 +17,9 @@
     </sc-column>
     <sc-column data="firstDocDateValidFrom" title="persons.ratingSearch.firstEditionValidFrom" type="date">
     </sc-column>
-    <sc-column data="notes" title="persons.ratingSearch.lastEditionNotes">
+    <sc-column data="notes" title="persons.ratingSearch.lastEditionNotes" class="wrap">
     </sc-column>
-    <sc-column data="notesAlt" title="persons.ratingSearch.lastEditionNotesAlt">
+    <sc-column data="notesAlt" title="persons.ratingSearch.lastEditionNotesAlt" class="wrap">
     </sc-column>
   </sc-datatable>
 </div>

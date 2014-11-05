@@ -6,31 +6,31 @@
   </sc-column>
   <sc-column data="part.documentNumber" title="persons.checkSearch.documentNumber">
   </sc-column>
-  <sc-column data="part.documentType.name" title="persons.checkSearch.personCheckDocumentType">
+  <sc-column data="part.documentType.name" title="persons.checkSearch.personCheckDocumentType" class="wrap">
   </sc-column>
-  <sc-column data="part.documentRole.name" title="persons.checkSearch.personCheckDocumentRole">
+  <sc-column data="part.documentRole.name" title="persons.checkSearch.personCheckDocumentRole" class="wrap">
   </sc-column>
   <sc-column data="part.documentDateValidFrom" title="persons.checkSearch.documentDateValidFrom" type="date">
   </sc-column>
   <sc-column data="part.documentDateValidTo" title="persons.checkSearch.documentDateValidTo" type="date">
   </sc-column>
-  <sc-column data="part.documentPublisher" title="persons.checkSearch.documentPublisher">
+  <sc-column data="part.documentPublisher" title="persons.checkSearch.documentPublisher" class="wrap">
   </sc-column>
-  <sc-column data="part.ratingType.name || part.sector" title="persons.checkSearch.ratingType">
+  <sc-column data="part.ratingType.name || part.sector" title="persons.checkSearch.ratingType" class="wrap">
   </sc-column>
-  <sc-column data="part.ratingClass.name" title="persons.checkSearch.ratingClass">
+  <sc-column data="part.ratingClass.name" title="persons.checkSearch.ratingClass" class="wrap">
   </sc-column>
-  <sc-column data="part.authorization.code" title="persons.checkSearch.authorization">
+  <sc-column data="part.authorization.code" title="persons.checkSearch.authorization" class="wrap" visible="false">
   </sc-column>
-  <sc-column data="part.licenceType.code" title="persons.checkSearch.licenceType">
+  <sc-column data="part.licenceType.code" title="persons.checkSearch.licenceType" class="wrap" visible="false">
   </sc-column>
   <sc-column data="part.valid.name" title="persons.checkSearch.valid">
   </sc-column>
   <sc-column data="part.personCheckRatingValue.name" title="persons.checkSearch.ratingValue">
   </sc-column>
-  <sc-column data="case.bookPageNumber" title="persons.checkSearch.bookPageNumber">
+  <sc-column data="case.bookPageNumber" title="persons.checkSearch.bookPageNumber" visible="false">
   </sc-column>
-  <sc-column data="case.pageCount" title="persons.checkSearch.pageCount">
+  <sc-column data="case.pageCount" title="persons.checkSearch.pageCount" visible="false">
   </sc-column>
   <sc-column sortable="false" title="persons.checkSearch.file" has-content="true">
     <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">

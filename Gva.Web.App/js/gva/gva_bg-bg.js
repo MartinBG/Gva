@@ -369,7 +369,7 @@
           title: 'Преглед на заявление'
         },
         inventorySearch: {
-          bookPageNumber: '№ на страница',
+          bookPageNumber: '№ на стр.',
           document: 'Документ',
           type: 'Вид',
           docNumber: '№ на документа',
@@ -635,7 +635,7 @@
           title: 'Преглед на заявление'
         },
         inventorySearch: {
-          bookPageNumber: '№ на страница',
+          bookPageNumber: '№ на стр.',
           document: 'Документ',
           type: 'Вид',
           docNumber: '№ на документа',
@@ -1373,7 +1373,7 @@
           deleteApplication: 'Изтрий'
         },
         inventorySearch: {
-          bookPageNumber: '№ на страница',
+          bookPageNumber: '№ на стр.',
           document: 'Документ',
           type: 'Вид',
           docNumber: '№ на документа',
@@ -1929,7 +1929,7 @@
         },
         otherSearch: {
           documentNumber: 'Док No',
-          documentPersonNumber: 'No в списъка (групов док.)',
+          documentPersonNumber: 'No в списъка <br>(групов док.)',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
           documentPublisher: 'Издател',
@@ -2173,7 +2173,7 @@
           deleteFlyingExp: 'Изтрий'
         },
         inventorySearch: {
-          bookPageNumber: '№ на страница',
+          bookPageNumber: '№ на стр.',
           document: 'Документ',
           type: 'Вид',
           docNumber: '№ на документа',
@@ -2858,7 +2858,7 @@
           cancel: 'Отказ'
         },
         inventorySearch: {
-          bookPageNumber: '№ на страница',
+          bookPageNumber: '№ на стр.',
           document: 'Документ',
           type: 'Вид',
           docNumber: '№ на документа',
@@ -3040,7 +3040,7 @@
         },
         otherSearch: {
           documentNumber: 'Док No',
-          documentPersonNumber: 'No в списъка (групов документ)',
+          documentPersonNumber: 'No в списъка <br>(групов документ)',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
           documentPublisher: 'Издател',
