@@ -3493,8 +3493,9 @@
         invalidNotesAlt: 'Бележки лат. трябва да бъдат попълнени',
         notUniqueDocNumberAndPersonNumber: 'Комбинацията от номер на документа ' +
           'и номер в списъка трябва да е уникална',
-         notUniqueDocNumber: 'Номера на документа трябва да е уникален',
-        notValidRating: 'Вече съществува квалификация с тези данни'
+        notUniqueDocNumber: 'Номера на документа трябва да е уникален',
+        notValidRating: 'Вече съществува квалификация с тези данни',
+        notUniqueLicenceNumber: 'Съществува лиценз от същия вид със същия номер'
       },
       defaultErrorTexts: {
         required: 'Задължително поле',

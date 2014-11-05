@@ -356,5 +356,14 @@ namespace Gva.Api.Repositories.PersonRepository
 
             return !this.unitOfWork.DbContext.Set<GvaViewPersonDocument>().Where(predicate).Any();
         }
+
+        public bool IsUniqueLicenceNumber(string licenceTypeCode, int? licenceNumber)
+        {
+            var licences = this.unitOfWork.DbContext.Set<GvaViewPersonLicence>()
+                .Include(e => e.LicenceType)
+                .Where(e => e.LicenceType.Code == licenceTypeCode && e.LicenceNumber == licenceNumber);
+
+            return !licences.Any();
+        }
     }
 }

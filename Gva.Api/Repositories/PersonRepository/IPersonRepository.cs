@@ -59,5 +59,7 @@ namespace Gva.Api.Repositories.PersonRepository
         int GetLastRatingEditionIndex(int lotId, int ratingPartIndex);
 
         bool IsUniqueDocNumber(string documentNumber, int? documentPersonNumber, int? partIndex);
+
+        bool IsUniqueLicenceNumber(string licenceTypeCode, int? licenceNumber);
     }
 }

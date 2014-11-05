@@ -12,6 +12,10 @@
         method: 'GET',
         url: 'api/persons/:id/licences/lastLicenceNumber'
       },
+      isUniqueLicenceNumber: {
+        method: 'GET',
+        url: 'api/persons/:id/licences/isUniqueLicenceNumber'
+      },
       newLicenceStatus: {
         method: 'GET',
         url: 'api/persons/:id/licences/newStatus'
