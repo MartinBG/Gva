@@ -15,6 +15,11 @@
       isValid: {
         method: 'POST',
         url: 'api/persons/:id/ratings/isValid'
+      },
+      getRatingsByValidity: {
+        method: 'GET',
+        url: 'api/persons/:id/ratings/byValidity',
+        isArray: true
       }
     });
   }]);

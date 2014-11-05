@@ -2239,6 +2239,7 @@
           authorizationAndLimitations: 'Разрешение <br>(ограничения)',
           lastEditionValidFrom: 'Издаден',
           lastEditionValidTo: 'Валиден до',
+          showAll: 'Покажи всички',
           add: 'Добави',
           cancel: 'Отказ'
         },

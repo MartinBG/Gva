@@ -97,6 +97,27 @@ namespace Gva.Api.Controllers.Persons
             }
         }
 
+        [Route("byValidity")]
+        public IHttpActionResult GetRatingsByValidity(int lotId, int? caseTypeId = null, bool? valid = true)
+        {
+            var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
+            List<GvaViewPersonRatingDO> ratingDOs = new List<GvaViewPersonRatingDO>();
+            foreach (GvaViewPersonRating rating in ratings)
+            { 
+                var editions = rating.Editions;
+                if (valid == true)
+                { 
+                    editions = editions.Where(e => DateTime.Compare(e.DocDateValidTo, DateTime.Now) >= 0).ToList();
+                }
+                if (editions.Count > 0)
+                {
+                    ratingDOs.Add(new GvaViewPersonRatingDO(rating, rating.Editions.OrderBy(e => e.Index).ToList()));
+                }
+            }
+           
+            return Ok(ratingDOs);
+        }
+
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
             var ratings = this.personRepository.GetRatings(lotId, caseTypeId);

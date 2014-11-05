@@ -50,6 +50,7 @@ namespace Gva.Api.Projections.Person
             rating.Sector = personRating.Content.Sector;
             rating.CaaId = personRating.Content.Caa != null ? personRating.Content.Caa.NomValueId : (int?)null;
             rating.AircraftTypeCategoryId = personRating.Content.AircraftTypeCategory != null ? personRating.Content.AircraftTypeCategory.NomValueId : (int?)null;
+
             return rating;
         }
     }
