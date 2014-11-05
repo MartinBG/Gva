@@ -13,6 +13,9 @@
     $scope.application = application;
     $scope.editMode = null;
     $scope.lotId = $stateParams.lotId;
+    $scope.isNew = $stateParams.isNew;
+    $scope.set = $stateParams.set;
+    $scope.appId = $stateParams.appId || $stateParams.id;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -25,21 +28,21 @@
 
     $scope.save = function () {
       return $scope.editDocumentApplicationForm.$validate().then(function () {
-          if ($scope.editDocumentApplicationForm.$valid) {
-            return Applications.editAppPart({
-              path: $stateParams.setPartPath,
-              lotId: $stateParams.lotId,
-              ind: $stateParams.ind
-            },
-            $scope.application).$promise.then(function () {
-              $state.go('root.applications.edit.case', { id: $stateParams.appId });
-            });
-          }
-        });
+        if ($scope.editDocumentApplicationForm.$valid) {
+          return Applications.editAppPart({
+            path: $stateParams.setPartPath,
+            lotId: $scope.lotId,
+            ind: $stateParams.ind
+          },
+          $scope.application).$promise.then(function () {
+            return $state.go('root.applications.edit', { id: $scope.appId});
+          });
+        }
+      });
     };
 
     $scope.done = function () {
-      $state.go('root.applications.edit.case', { id: $stateParams.appId });
+      return $state.go('root.applications.edit', { id: $scope.appId});
     };
   }
 
@@ -57,7 +60,7 @@
       'Applications',
       function ($stateParams, Applications) {
         return Applications.getAppPart({
-          path: $stateParams.setPartPath,
+          path: $stateParams.set + 'DocumentApplications',
           lotId: $stateParams.lotId,
           ind: $stateParams.ind
         }).$promise;

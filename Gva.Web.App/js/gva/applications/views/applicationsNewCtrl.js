@@ -22,7 +22,7 @@
         if (!!newValue) {
           var caseTypes = [];
 
-          if ($scope.filter !== 'Person') {
+          if ($scope.set !== 'person') {
             caseTypes = Nomenclatures.query({
               alias: 'caseTypes',
               lotId: $scope.application.lot.id
@@ -50,18 +50,18 @@
     });
 
     $scope.application = application;
-    $scope.filter = $stateParams.filter;
+    $scope.set = $stateParams.set;
 
     $scope.newCorr = function () {
       var partData = {}, isPersonSelect, isOrgSelect;
       partData.$promise = $q.when(false);
 
       if ($scope.application.lot && $scope.application.lot.id) {
-        if ($scope.filter === 'Person') {
+        if ($scope.set === 'person') {
           isPersonSelect = true;
           partData = PersonsInfo.get({ id: $scope.application.lot.id });
         }
-        else if ($scope.filter === 'Organization') {
+        else if ($scope.set === 'organization') {
           isOrgSelect = true;
           partData = OrganizationsData.get({ id: $scope.application.lot.id });
         }
@@ -106,11 +106,11 @@
       });
 
       if ($scope.application.lot && $scope.application.lot.id) {
-        if ($scope.filter === 'Person') {
+        if ($scope.set === 'person') {
           isPersonSelect = true;
           partData = PersonsInfo.get({ id: $scope.application.lot.id });
         }
-        else if ($scope.filter === 'Organization') {
+        else if ($scope.set === 'organization') {
           isOrgSelect = true;
           partData = OrganizationsData.get({ id: $scope.application.lot.id });
         }
@@ -179,23 +179,7 @@
             applicationType: $scope.application.applicationType,
             caseTypeId: $scope.application.caseType.nomValueId
           };
-
-          //todo make it better
-          if ($scope.filter === 'Person') {
-            newApplication.setPartPath = 'personDocumentApplications';
-          }
-          else if ($scope.filter === 'Organization') {
-            newApplication.setPartPath = 'organizationDocumentApplications';
-          }
-          else if ($scope.filter === 'Aircraft') {
-            newApplication.setPartPath = 'aircraftDocumentApplications';
-          }
-          else if ($scope.filter === 'Airport') {
-            newApplication.setPartPath = 'airportDocumentApplications';
-          }
-          else if ($scope.filter === 'Equipment') {
-            newApplication.setPartPath = 'equipmentDocumentApplications';
-          }
+          newApplication.setPartPath = $scope.set + 'DocumentApplications';
 
           return Applications.create(newApplication).$promise.then(function (gvaApp) {
             return $state.go('root.applications.new.editPart', {
@@ -203,7 +187,8 @@
               ind: gvaApp.partIndex,
               lotId: gvaApp.lotId,
               appId: gvaApp.gvaApplicationId,
-              filter: $scope.filter
+              set: $scope.set,
+              isNew: true
             });
           });
         }

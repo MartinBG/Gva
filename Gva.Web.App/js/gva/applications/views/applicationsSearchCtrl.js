@@ -35,7 +35,8 @@
     };
 
     $scope.viewApplication = function (application) {
-      return $state.go('root.applications.edit.case', { id: application.applicationId });
+      return $state.go('root.applications.edit.case', 
+        { id: application.applicationId, set: $stateParams.set });
     };
 
     $scope.newApp = function () {

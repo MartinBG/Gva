@@ -24,6 +24,7 @@ namespace Gva.Api.ModelsDO.Applications
                 this.ApplicationId = gvaApp.GvaApplicationId;
                 this.DocId = gvaApp.DocId;
                 this.LotId = gvaApp.LotId;
+                this.PartIndex = gvaApp.GvaAppLotPart.Index;
                 this.GvaAppLotPartId = gvaApp.GvaAppLotPartId;
                 this.LotSetAlias = lotSetAlias;
                 this.LotSetId = lotSetId;
@@ -35,6 +36,8 @@ namespace Gva.Api.ModelsDO.Applications
         public int? DocId { get; set; }
 
         public int LotId { get; set; }
+
+        public int PartIndex { get; set; }
 
         public int? GvaAppLotPartId { get; set; }
 

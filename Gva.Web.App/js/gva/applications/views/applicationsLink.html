@@ -42,15 +42,15 @@
         </div>
       </div>
 
-      <gva-common-select-person name="personForm" ng-model="appModel" ng-if="filter === 'Person'" sc-form-params="{ newClass: 'col-sm-10' }"></gva-common-select-person>
+      <gva-common-select-person name="personForm" ng-model="appModel" ng-if="set === 'person'" sc-form-params="{ newClass: 'col-sm-10' }"></gva-common-select-person>
 
-      <gva-application-select-organization name="organizationForm" ng-model="appModel" ng-if="filter === 'Organization'"></gva-application-select-organization>
+      <gva-application-select-organization name="organizationForm" ng-model="appModel" ng-if="set === 'organization'"></gva-application-select-organization>
 
-      <gva-application-select-aircraft name="aircraftForm" ng-model="appModel" ng-if="filter === 'Aircraft'"></gva-application-select-aircraft>
+      <gva-application-select-aircraft name="aircraftForm" ng-model="appModel" ng-if="set === 'aircraft'"></gva-application-select-aircraft>
 
-      <gva-application-select-airport name="airportForm" ng-model="appModel" ng-if="filter === 'Airport'"></gva-application-select-airport>
+      <gva-application-select-airport name="airportForm" ng-model="appModel" ng-if="set === 'airport'"></gva-application-select-airport>
 
-      <gva-application-select-equipment name="equipmentForm" ng-model="appModel" ng-if="filter === 'Equipment'"></gva-application-select-equipment>
+      <gva-application-select-equipment name="equipmentForm" ng-model="appModel" ng-if="set === 'equipment'"></gva-application-select-equipment>
     </div>
   </div>
 </ng-form>

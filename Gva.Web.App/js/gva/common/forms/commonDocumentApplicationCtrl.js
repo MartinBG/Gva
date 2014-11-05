@@ -6,11 +6,11 @@
     $scope.lotId = scFormParams.lotId;
     $scope.isNew = scFormParams.isNew;
     $scope.caseTypeId = scFormParams.caseTypeId;
-    $scope.setPart = scFormParams.setPart;
+    $scope.set = scFormParams.set;
     $scope.hideCaseType = scFormParams.hideCaseType;
 
     $scope.isUniqueDocNumber = function () {
-      if($scope.setPart === 'person') {
+      if($scope.set === 'person') {
         return Persons
           .isUniqueDocNumber({
             documentNumber: $scope.model.part.documentNumber,

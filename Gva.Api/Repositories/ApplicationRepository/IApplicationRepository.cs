@@ -4,6 +4,7 @@ using Common.Api.Repositories;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Applications;
+using Gva.Api.ModelsDO.Common;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.ApplicationRepository
@@ -50,5 +51,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
         Set GetLotSet(int lotSetId);
 
         ApplicationNomDO GetInitApplication(int? applicationId);
+
+        List<CaseTypePartDO<DocumentApplicationDO>> GetApplicationsForLot(int lotId, string path, int? caseTypeId = null);
     }
 }

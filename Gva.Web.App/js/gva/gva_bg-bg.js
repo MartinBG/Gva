@@ -1804,7 +1804,8 @@
           save: 'Запис',
           cancel: 'Отказ',
           edit: 'Редакция',
-          deleteApplication: 'Изтрий'
+          deleteApplication: 'Изтрий',
+          stage: 'Статус на заявлението'
         },
         newPerson: {
           title: 'Ново лице',
@@ -2456,7 +2457,8 @@
         lotSet: 'Тип на дело',
         tabs: {
           'case': 'Преписка',
-          stages: 'Дейности по заявление'
+          stages: 'Дейности по заявление',
+          data: 'Данни за заявление'
         },
         edit: {
           equipmentName: 'Име',
@@ -3514,6 +3516,7 @@
         'root.applications.new.editApp': 'Преглед',
         'root.applications.link': 'Свържи заявление',
         'root.applications.edit': 'Преглед',
+        'root.applications.edit.data': 'Данни на заявление',
         'root.applications.edit.case': 'Преписка',
         'root.applications.edit.quals': 'Квалификации',
         'root.applications.edit.licenses': 'Лицензи',
@@ -3572,8 +3575,6 @@
         'root.persons.view.documentOthers.new': 'Нов документ',
         'root.persons.view.documentOthers.edit': 'Преглед на документ',
         'root.persons.view.documentApplications': 'Заявления',
-        'root.persons.view.documentApplications.new': 'Новo заявление',
-        'root.persons.view.documentApplications.edit': 'Преглед на заявление',
         'root.aircrafts': 'ВС',
         'root.aircrafts.new': 'Ново ВС',
         'root.aircrafts.view': 'Данни за ВС',
@@ -3614,8 +3615,6 @@
         'root.aircrafts.view.maintenances.new': 'Новa поддръжка',
         'root.aircrafts.view.maintenances.edit': 'Преглед на поддръжка',
         'root.aircrafts.view.applications': 'Заявления',
-        'root.aircrafts.view.applications.new': 'Ново заявление',
-        'root.aircrafts.view.applications.edit': 'Преглед на заявление',
         'root.aircrafts.view.inventory': 'Опис',
         'root.organizations': 'Организации',
         'root.organizations.new': 'Нова организация',
@@ -3672,8 +3671,6 @@
         'root.organizations.view.awExaminers.new': 'Нов проверяващ',
         'root.organizations.view.awExaminers.edit': 'Преглед на проверяващ',
         'root.organizations.view.documentApplications': 'Заявления',
-        'root.organizations.view.documentApplications.new': 'Новo заявление',
-        'root.organizations.view.documentApplications.edit': 'Преглед на заявление',
         'root.airports': 'Летища',
         'root.airports.new': 'Ново летище',
         'root.airports.view': 'Данни за летище',
@@ -3688,8 +3685,6 @@
         'root.airports.view.opers.new': 'Ново удостоверение',
         'root.airports.view.opers.edit': 'Преглед на удостоверение',
         'root.airports.view.applications': 'Заявления',
-        'root.airports.view.applications.new': 'Новo заявление',
-        'root.airports.view.applications.edit': 'Преглед на заявление',
         'root.airports.view.inspections': 'Инспекции',
         'root.airports.view.inspections.new': 'Нова инспекция',
         'root.airports.view.inspections.edit': 'Преглед на инспекция',
@@ -3708,8 +3703,6 @@
         'root.equipments.view.opers.new': 'Ново удостоверение',
         'root.equipments.view.opers.edit': 'Преглед на удостоверение',
         'root.equipments.view.applications': 'Заявления',
-        'root.equipments.view.applications.new': 'Новo заявление',
-        'root.equipments.view.applications.edit': 'Преглед на заявление',
         'root.equipments.view.inspections': 'Инспекции',
         'root.equipments.view.inspections.new': 'Нова инспекция',
         'root.equipments.view.inspections.edit': 'Преглед на инспекция',

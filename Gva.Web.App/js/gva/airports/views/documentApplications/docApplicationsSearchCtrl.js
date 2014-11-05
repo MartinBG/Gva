@@ -40,7 +40,7 @@
       '$stateParams',
       'AirportDocumentApplications',
       function ($stateParams, AirportDocumentApplications) {
-        return AirportDocumentApplications.query($stateParams).$promise;
+        return AirportDocumentApplications.query({lotId: $stateParams.id}).$promise;
       }
     ]
   };

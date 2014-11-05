@@ -15,15 +15,26 @@ using Gva.Api.Models.Views.Organization;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Applications;
+using Gva.Api.ModelsDO.Common;
+using Gva.Api.Repositories.FileRepository;
 using Regs.Api.Models;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Repositories.ApplicationRepository
 {
     public class ApplicationRepository : Repository<GvaApplication>, IApplicationRepository
     {
-        public ApplicationRepository(IUnitOfWork unitOfWork)
+        private ILotRepository lotRepository;
+        private IFileRepository fileRepository;
+
+        public ApplicationRepository(
+            IUnitOfWork unitOfWork,
+            ILotRepository lotRepository,
+            IFileRepository fileRepository)
             : base(unitOfWork)
         {
+            this.lotRepository = lotRepository;
+            this.fileRepository = fileRepository;
         }
 
         public IEnumerable<ApplicationListDO> GetApplications(
@@ -38,7 +49,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             )
         {
             var applicationsJoin =
-                from a in this.unitOfWork.DbContext.Set<GvaApplication>()
+                from a in this.unitOfWork.DbContext.Set<GvaApplication>().Include(a => a.GvaAppLotPart)
                 join lot in this.unitOfWork.DbContext.Set<Lot>() on a.LotId equals lot.LotId
                 join set in this.unitOfWork.DbContext.Set<Set>() on lot.SetId equals set.SetId
                 join part in this.unitOfWork.DbContext.Set<Part>() on a.GvaAppLotPartId equals part.PartId into part1
@@ -272,6 +283,48 @@ namespace Gva.Api.Repositories.ApplicationRepository
             }
 
             return null;
+        }
+
+        public List<CaseTypePartDO<DocumentApplicationDO>> GetApplicationsForLot(int lotId, string path, int? caseTypeId = null)
+        {
+            var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts<DocumentApplicationDO>(path);
+
+            var applicationStages = (from gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                             join ga in this.unitOfWork.DbContext.Set<GvaApplication>()
+                             .Where(a => a.LotId == lotId) on gas.GvaApplicationId equals ga.GvaApplicationId
+                             group gas by ga.GvaAppLotPartId into appStage
+                             select new { appStage = appStage.OrderByDescending(s => s.GvaStageId).FirstOrDefault(), partId = appStage.Key.Value })
+                            .ToList();
+
+            List<CaseTypePartDO<DocumentApplicationDO>> partVersionDOs = new List<CaseTypePartDO<DocumentApplicationDO>>();
+            foreach (var partVersion in partVersions)
+            {
+                var stage = applicationStages.Where(ap => ap.partId == partVersion.Part.PartId).FirstOrDefault();
+                if(stage != null)
+                {
+                    var applicationStage = stage.appStage;
+                    this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaStage).Load();
+                    this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaApplication).Load();
+
+                    partVersion.Content.LotId = applicationStage.GvaApplication.LotId;
+                    partVersion.Content.PartIndex = applicationStage.GvaApplication.GvaAppLotPart.Index;
+                    partVersion.Content.ApplicationId = applicationStage.GvaApplicationId;
+
+                    partVersion.Content.Stage = new NomValue()
+                    {
+                        Name = applicationStage.GvaStage.Name,
+                        Alias = applicationStage.GvaStage.Alias
+                    };
+                }
+
+                var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFile != null)
+                {
+                    partVersionDOs.Add(new CaseTypePartDO<DocumentApplicationDO>(partVersion, lotFile));
+                }
+            }
+
+            return partVersionDOs;
         }
     }
 }

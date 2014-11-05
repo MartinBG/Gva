@@ -39,7 +39,7 @@
       '$stateParams',
       'OrganizationDocumentApplications',
       function ($stateParams, OrganizationDocumentApplications) {
-        return OrganizationDocumentApplications.query($stateParams).$promise;
+        return OrganizationDocumentApplications.query({id: $stateParams.id}).$promise;
       }
     ]
   };
