@@ -24,7 +24,7 @@
       <ul class="dropdown-menu pull-right" role="menu" style="text-align: left;">
         <li ng-repeat="column in columnDefs | filter:nonEmpty">
           <input type="checkbox" ng-click="hideColumn(column.index[0])" ng-model="column.visible">
-          <span>{{column.title}}</span>
+          <span l10n-html="{{column.l10ntitle}}"></span>
         </li>
       </ul>
     </div>

@@ -63,6 +63,7 @@
         hasContent: column.hasContent,
         data: column.data,
         title: l10n.get(column.title) || '',
+        l10ntitle: column.title || '',
         dataFunction: dataFunction,
         sortable: column.sortable === 'false' ? false : true,
         visible: column.visible === 'false' ? false : true,
