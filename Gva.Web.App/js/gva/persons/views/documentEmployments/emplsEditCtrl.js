@@ -37,7 +37,7 @@
               }, $scope.personDocumentEmployment)
               .$promise
               .then(function () {
-                return $state.go('root.persons.view.employments.search');
+                return $state.go('root.persons.view.employments.search', {}, {reload: true});
               });
           }
         });
@@ -50,7 +50,7 @@
           return PersonDocumentEmployments
             .remove({ id: $stateParams.id, ind: employment.partIndex })
             .$promise.then(function () {
-              return $state.go('root.persons.view.employments.search');
+              return $state.go('root.persons.view.employments.search', {}, {reload: true});
             });
         }
       });

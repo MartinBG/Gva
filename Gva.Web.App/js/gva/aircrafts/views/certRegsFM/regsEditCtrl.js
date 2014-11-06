@@ -37,7 +37,7 @@
         .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.reg)
         .$promise
         .then(function () {
-          return $state.go($state.current, $stateParams, { reload: false });
+          return $state.go($state.current, $stateParams, { reload: true });
         });
     };
 
@@ -49,7 +49,7 @@
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.reg)
             .$promise
             .then(function () {
-              return $state.go('root.aircrafts.view.regsFM.search');
+              return $state.go('root.aircrafts.view.regsFM.search', {}, {reload: true});
             });
         }
       });
@@ -64,7 +64,7 @@
             ind: aircraftCertRegistration.partIndex
           })
           .$promise.then(function () {
-            return $state.go('root.aircrafts.view.regsFM.search');
+            return $state.go('root.aircrafts.view.regsFM.search', {}, {reload: true});
           });
         }
       });
@@ -78,7 +78,7 @@
       return $state.go('root.aircrafts.view.regsFM.dereg', {
         id: $stateParams.id,
         ind: $stateParams.ind
-      });
+      }, {reload: true});
     };
   }
 

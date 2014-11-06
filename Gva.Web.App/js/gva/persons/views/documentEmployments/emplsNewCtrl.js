@@ -19,16 +19,20 @@
         .then(function () {
           if ($scope.newDocumentEmploymentForm.$valid) {
             return PersonDocumentEmployments
-              .save({ id: $stateParams.id }, $scope.personDocumentEmployment).$promise
+              .save({ id: $stateParams.id }, $scope.personDocumentEmployment)
+              .$promise
               .then(function () {
-                return $state.go('root.persons.view.employments.search');
+                return $state.go('root.persons.view', {id: $scope.lotId})
+                  .then(function () {
+                    return $state.go('root.persons.view.employments.search', {}, {reload: true});
+                  });
               });
           }
         });
     };
 
     $scope.cancel = function () {
-      return $state.go('root.persons.view.employments.search');
+      return $state.go('root.persons.view.employments.search', {}, {reload: true});
     };
   }
 

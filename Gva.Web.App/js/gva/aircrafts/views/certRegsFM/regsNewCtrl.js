@@ -27,7 +27,7 @@
             return AircraftCertRegistrationsFM
               .save({ id: $stateParams.id }, $scope.reg).$promise
               .then(function () {
-                return $state.go('root.aircrafts.view.regsFM.search');
+                return $state.go('root.aircrafts.view.regsFM.search', {}, {reload: true});
               });
           }
         });
