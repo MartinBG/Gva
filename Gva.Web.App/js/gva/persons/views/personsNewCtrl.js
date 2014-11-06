@@ -10,8 +10,8 @@
       .then(function () {
         if ($scope.newPersonForm.$valid) {
           return Persons.save($scope.newPerson).$promise
-            .then(function () {
-              return $state.go('root.persons.search');
+            .then(function (result) {
+              return $state.go('root.persons.view.licences.search', { id: result.id });
             });
         }
       });
