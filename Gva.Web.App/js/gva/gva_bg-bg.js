@@ -1629,7 +1629,7 @@
           foreignLicenceNumber: 'Чужд лиценз No',
           valid: 'Действителен',
           fcl: 'FCL',
-          lastLicenceNumber: 'Последеният издаден лиценз от избрания тип е с No',
+          lastLicenceNumber: 'Посл. издаден лиценз от избр. тип е с No',
           foreignPublisher: 'Чужда администрация',
           employment: 'Месторабота',
           publisher: 'Администрация'
