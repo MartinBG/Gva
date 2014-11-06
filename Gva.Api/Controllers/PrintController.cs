@@ -13,6 +13,7 @@ using Common.WordTemplates;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.WordTemplates;
+using Microsoft.Office.Interop.Word;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
@@ -61,17 +62,37 @@ namespace Gva.Api.Controllers
             var wordTemplate = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
                 .SingleOrDefault(t => t.Name == templateName);
 
-            var memoryStream = new MemoryStream();  // no need to dispose the memory stream as StreamContent handles that
+            var memoryStream = new MemoryStream();
             memoryStream.Write(wordTemplate.Template, 0, wordTemplate.Template.Length);
 
             new WordTemplateTransformer(memoryStream).Transform(json);
             memoryStream.Position = 0;
 
+            var tmpDocFile = Path.GetTempFileName();
+            var tmpPdfFile = Path.GetTempFileName();
+
+            using(var tmpFileStream = File.OpenWrite(tmpDocFile))
+            {
+                memoryStream.CopyTo(tmpFileStream);
+            }
+
+            var document = new Application().Documents.Open(tmpDocFile);
+            document.ExportAsFixedFormat(tmpPdfFile, WdExportFormat.wdExportFormatPDF);
+            document.Close();
+            File.Delete(tmpDocFile);
+
+            var stream = new FileStream(tmpPdfFile, 
+                FileMode.OpenOrCreate,
+                FileAccess.ReadWrite,
+                FileShare.None,
+                tmpPdfFile.Length, 
+                FileOptions.DeleteOnClose);
+
             HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new StreamContent(memoryStream);
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+            result.Content = new StreamContent(stream);
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
             result.Content.Headers.ContentDisposition =
-                new ContentDispositionHeaderValue("attachment")
+                new ContentDispositionHeaderValue("inline")
                 {
                     FileName = templateName
                 };
