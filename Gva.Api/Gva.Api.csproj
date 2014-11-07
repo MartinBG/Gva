@@ -145,6 +145,8 @@
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
+    <Compile Include="ModelsDO\Persons\GvaViewPersonRatingEditionDO.cs" />
+    <Compile Include="ModelsDO\Persons\IncludedRatingDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentDO.cs" />
     <Compile Include="ModelsDO\Persons\ExaminerDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLangCertDO.cs" />

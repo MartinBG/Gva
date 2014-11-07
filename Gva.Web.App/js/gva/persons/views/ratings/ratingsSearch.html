@@ -3,7 +3,7 @@
   <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="lastDocDateValidFrom"
     row-class="{'expiredDocument' : (isExpiredRating(item)), 'expiringDocument' : isExpiringRating(item)}">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="viewBtn" btn-sref="{state: 'root.persons.view.ratings.edit.editions.edit', params: {ind: item.partIndex, index: item.editionPartIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="viewBtn" btn-sref="{state: 'root.persons.view.ratings.edit.editions.edit', params: {ind: item.ratingPartIndex, index: item.editionPartIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column data="personRatingLevel.code || ratingType.code || aircraftTypeGroup.code || locationIndicator.code" title="persons.ratingSearch.ratingTypeOrRatingLevel">
     </sc-column>

@@ -35,7 +35,7 @@
 
     $q.all([
       Persons.get({ id: scFormParams.lotId }).$promise,
-      PersonRatings.query({ id: scFormParams.lotId }).$promise,
+      PersonRatings.getRatingsWithAllEditions({ id: scFormParams.lotId }).$promise,
       PersonDocumentLangCerts.query({ id: scFormParams.lotId }).$promise,
       PersonDocumentTrainings.getExams({ id: scFormParams.lotId }).$promise,
       PersonDocumentTrainings.query({ id: scFormParams.lotId }).$promise,
@@ -58,11 +58,16 @@
         }
 
         $scope.model.part.includedRatings = $scope.model.part.includedRatings || [];
-        $scope.includedRatings = _.map($scope.model.part.includedRatings, function (ind) {
-          return _.find(ratings, { partIndex: ind });
+        $scope.includedRatings = _.map($scope.model.part.includedRatings, function (rating) {
+          return _.find(ratings, { ratingPartIndex: rating.ind,  editionPartIndex: rating.index });
         });
         $scope.$watchCollection('includedRatings', function () {
-          $scope.model.part.includedRatings = _.pluck($scope.includedRatings, 'partIndex');
+          $scope.model.part.includedRatings = _.map($scope.includedRatings, function (rating) {
+            return {
+              ind: rating.ratingPartIndex,
+              index: rating.editionPartIndex
+            };
+          });
         });
 
         $scope.model.part.includedLangCerts = $scope.model.part.includedLangCerts || [];
@@ -129,15 +134,17 @@
       });
 
       modalInstance.result.then(function (newRating) {
-        PersonRatings.query({ id: scFormParams.lotId }).$promise.then(function (ratings) {
-          var rating = null;
-          _.find(ratings, function (r) {
-            if (r.partIndex === newRating.rating.partIndex) {
-              rating = r;
-            }
+        PersonRatings.query({ id: scFormParams.lotId })
+          .$promise
+          .then(function (ratings) {
+            var rating = null;
+            _.find(ratings, function (r) {
+              if (r.partIndex === newRating.rating.partIndex) {
+                rating = r;
+              }
+            });
+            $scope.includedRatings.push(rating);
           });
-          $scope.includedRatings.push(rating);
-        });
         
       });
 

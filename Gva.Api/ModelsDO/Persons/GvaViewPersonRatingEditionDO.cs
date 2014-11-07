@@ -9,29 +9,23 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons
 {
-    public class GvaViewPersonRatingDO
+    public class GvaViewPersonRatingEditionDO
     {
-        public GvaViewPersonRatingDO(GvaViewPersonRating rating, List<GvaViewPersonRatingEdition> editions)
+        public GvaViewPersonRatingEditionDO(GvaViewPersonRating rating, GvaViewPersonRatingEdition edition)
         {
-            GvaViewPersonRatingEdition lastEdition = editions.Last();
-            GvaViewPersonRatingEdition firstEdition = editions.First();
-
             this.LotId = rating.LotId;
-            this.EditionIndex = lastEdition.Index;
+            this.EditionIndex = edition.Index;
             this.RatingPartIndex = rating.PartIndex;
-            this.EditionPartIndex = lastEdition.PartIndex;
+            this.EditionPartIndex = edition.PartIndex;
             this.RatingType = rating.RatingType;
             this.PersonRatingLevel = rating.RatingLevel;
             this.RatingClass = rating.RatingClass;
             this.AircraftTypeGroup = rating.AircraftTypeGroup;
             this.Authorization = rating.Authorization;
-            this.RatingSubClasses = lastEdition.RatingSubClasses;
-            this.Limitations = lastEdition.Limitations;
-            this.LastDocDateValidFrom = lastEdition.DocDateValidFrom;
-            this.LastDocDateValidTo = lastEdition.DocDateValidTo;
-            this.FirstDocDateValidFrom = firstEdition.DocDateValidFrom;
-            this.Notes = lastEdition.Notes;
-            this.NotesAlt = lastEdition.NotesAlt;
+            this.RatingSubClasses = edition.RatingSubClasses;
+            this.Limitations = edition.Limitations;
+            this.DocDateValidFrom = edition.DocDateValidFrom;
+            this.DocDateValidTo = edition.DocDateValidTo;
             this.LocationIndicator = rating.LocationIndicator;
         }
 
@@ -59,14 +53,8 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string Limitations { get; set; }
 
-        public DateTime LastDocDateValidFrom { get; set; }
+        public DateTime DocDateValidFrom { get; set; }
 
-        public DateTime LastDocDateValidTo { get; set; }
-
-        public DateTime FirstDocDateValidFrom { get; set; }
-
-        public string Notes { get; set; }
-
-        public string NotesAlt { get; set; }
+        public DateTime DocDateValidTo { get; set; }
     }
 }

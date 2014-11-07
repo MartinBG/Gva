@@ -118,6 +118,22 @@ namespace Gva.Api.Controllers.Persons
             return Ok(ratingDOs);
         }
 
+        [Route("getRatingsWithAllEditions")]
+        public IHttpActionResult GetRatingsWithAllEditions(int lotId, int? caseTypeId = null)
+        {
+            var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
+            List<GvaViewPersonRatingEditionDO> ratingEditionDOs = new List<GvaViewPersonRatingEditionDO>();
+            foreach (var rating in ratings)
+            { 
+                rating.Editions.ForEach(e =>
+                {
+                    ratingEditionDOs.Add(new GvaViewPersonRatingEditionDO(rating, e));
+                });
+            }
+
+            return Ok(ratingEditionDOs);
+        }
+
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
             var ratings = this.personRepository.GetRatings(lotId, caseTypeId);

@@ -13,7 +13,9 @@
 
     $scope.filterRatings = function (ratings) {
       return _.filter(ratings, function (rating) {
-        return !_.contains(scModalParams.includedRatings, rating.partIndex);
+        return _.where(scModalParams.includedRatings,
+          {ind: rating.ratingPartIndex, index: rating.editionPartIndex })
+          .length === 0;
       });
     };
 

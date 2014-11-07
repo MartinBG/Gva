@@ -20,6 +20,11 @@
         method: 'GET',
         url: 'api/persons/:id/ratings/byValidity',
         isArray: true
+      },
+      getRatingsWithAllEditions: {
+        method: 'GET',
+        url: 'api/persons/:id/ratings/getRatingsWithAllEditions',
+        isArray: true
       }
     });
   }]);

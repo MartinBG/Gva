@@ -11,7 +11,7 @@ namespace Gva.Api.ModelsDO.Persons
         public PersonLicenceEditionDO()
         {
             this.Limitations = new List<NomValue>();
-            this.IncludedRatings = new List<int>();
+            this.IncludedRatings = new List<IncludedRatingDO>();
             this.IncludedExams = new List<int>();
             this.IncludedTrainings = new List<int>();
             this.IncludedLangCerts = new List<int>();
@@ -44,7 +44,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string StampNumber { get; set; }
 
-        public List<int> IncludedRatings { get; set; }
+        public List<IncludedRatingDO> IncludedRatings { get; set; }
 
         public List<int> IncludedExams { get; set; }
 
