@@ -341,7 +341,7 @@ namespace Gva.MigrationTool.Sets
 
                         var personRatingEditions = this.getPersonRatingEditions(personId, getPersonByApexId, noms,  nomApplications);
                         var personRatings = this.getPersonRatings(personId, noms);
-                        Dictionary<int, int> ratingOldIdToPartIndex = new Dictionary<int, int>();
+                        Dictionary<int, JObject> ratingEditionOldIdToPartIndex = new Dictionary<int, JObject>();
                         foreach (var personRating in personRatings)
                         {
                             var ratingPartVersion = addPartWithFiles("ratings/*", personRating);
@@ -356,12 +356,16 @@ namespace Gva.MigrationTool.Sets
                                 nextIndex++;
 
                                 var editionPartVersion = addPartWithFiles("ratingEditions/*", edition);
-                            }
 
-                            ratingOldIdToPartIndex.Add(personRating.Get<int>("part.__oldId"), ratingPartVersion.Part.Index);
+                                ratingEditionOldIdToPartIndex.Add(edition.Get<int>("part.__oldId"),
+                                    new JObject() {
+                                        new JProperty("ind", ratingPartVersion.Part.Index),
+                                        new JProperty("index", editionPartVersion.Part.Index)
+                                    });
+                            }
                         }
 
-                        var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, langCertOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
+                        var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingEditionOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, langCertOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
                         var personLicences = this.getPersonLicences(personId, getPersonByApexId, noms, employmentsByOldId);
                         Dictionary<int, int> licenceOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personLicence in personLicences)
@@ -1305,7 +1309,7 @@ namespace Gva.MigrationTool.Sets
             Func<int?, JObject> getPersonByApexId,
             IDictionary<int, JObject> nomApplications,
             Dictionary<string, Dictionary<string, NomValue>> noms,
-            Dictionary<int, int> ratings,
+            Dictionary<int, JObject> ratingEditions,
             Dictionary<int, int> medicals,
             Dictionary<int, int> trainings,
             Dictionary<int, int> langCerts,
@@ -1314,7 +1318,8 @@ namespace Gva.MigrationTool.Sets
         {
             var includedRatings = oracleConn.CreateStoreCommand(
                 @"SELECT LL.ID LICENCE_LOG_ID,
-                        R.ID RATING_ID
+                        R.ID RATING_ID,
+                        RD.ID EDITION_ID
                     FROM CAA_DOC.LICENCE L
                     JOIN CAA_DOC.LICENCE_LOG LL ON LL.LICENCE_ID = L.ID
                     LEFT OUTER JOIN CAA_DOC.LICENCE_RATING_INCL LRI ON LRI.LICENCE_LOG_ID = LL.ID
@@ -1326,10 +1331,11 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => new
                 {
                     LICENCE_LOG_ID = r.Field<int>("LICENCE_LOG_ID"),
-                    RATING_ID = r.Field<int?>("RATING_ID")
+                    RATING_ID = r.Field<int?>("RATING_ID"),
+                    EDITION_ID = r.Field<int?>("EDITION_ID"),
                 })
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.RATING_ID != null).Select(r => ratings[r.RATING_ID.Value]).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.EDITION_ID != null).Select(r => ratingEditions[r.EDITION_ID.Value]).ToArray());
 
             var includedMedicals = oracleConn.CreateStoreCommand(
                 @"SELECT LL.ID LICENCE_LOG_ID,
