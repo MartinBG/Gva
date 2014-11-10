@@ -11,7 +11,7 @@
     $scope.isValid = function () {
       return PersonRatings.isValid({
         id: $scope.lotId,
-        ratingPartIndex: $scope.model.partIndex
+        ratingPartIndex: $scope.ratingPartIndex
       }, $scope.model.part)
         .$promise
         .then(function (result) {

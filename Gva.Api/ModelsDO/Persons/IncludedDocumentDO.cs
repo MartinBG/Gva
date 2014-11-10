@@ -9,11 +9,9 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons
 {
-    public class IncludedRatingDO
+    public class IncludedDocumentDO
     {
-        public int? Ind { get; set; }
-
-        public int? Index { get; set; }
+        public int? PartIndex { get; set; }
 
         public int? OrderNum { get; set; }
     }

@@ -393,7 +393,12 @@ namespace Gva.MigrationTool.Sets
                             foreach (var edition in personLicenceEditions[personLicence.Get<int>("part.__oldId")])
                             {
                                 var editionPart = edition["part"] as JObject;
-                                editionPart.Property("includedLicences").Value = new JArray(edition.GetItems<int>("includedLicences").Select(l => licenceOldIdToPartIndex[l]).ToArray());
+                                editionPart.Property("includedLicences").Value = new JArray(edition.GetItems<int>("includedLicences").Select((l, i) => 
+                                    new 
+                                    {
+                                        partIndex = licenceOldIdToPartIndex[l],
+                                        orderNum = i
+                                    }).ToArray());
                             }
                         }
 
@@ -1319,7 +1324,8 @@ namespace Gva.MigrationTool.Sets
             var includedRatings = oracleConn.CreateStoreCommand(
                 @"SELECT LL.ID LICENCE_LOG_ID,
                         R.ID RATING_ID,
-                        RD.ID EDITION_ID
+                        RD.ID EDITION_ID,
+                        LRI.SORT_ORDER
                     FROM CAA_DOC.LICENCE L
                     JOIN CAA_DOC.LICENCE_LOG LL ON LL.LICENCE_ID = L.ID
                     LEFT OUTER JOIN CAA_DOC.LICENCE_RATING_INCL LRI ON LRI.LICENCE_LOG_ID = LL.ID
@@ -1333,9 +1339,16 @@ namespace Gva.MigrationTool.Sets
                     LICENCE_LOG_ID = r.Field<int>("LICENCE_LOG_ID"),
                     RATING_ID = r.Field<int?>("RATING_ID"),
                     EDITION_ID = r.Field<int?>("EDITION_ID"),
+                    SORT_ORDER = r.Field<int?>("SORT_ORDER")
                 })
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.EDITION_ID != null).Select(r => ratingEditions[r.EDITION_ID.Value]).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.EDITION_ID != null)
+                    .Select(r => 
+                        new { 
+                            ind = (ratingEditions[r.EDITION_ID.Value]).Get<int>("ind"),
+                            index = (ratingEditions[r.EDITION_ID.Value]).Get<int>("index"),
+                            orderNum = r.SORT_ORDER
+                        }).ToArray());
 
             var includedMedicals = oracleConn.CreateStoreCommand(
                 @"SELECT LL.ID LICENCE_LOG_ID,
@@ -1352,7 +1365,12 @@ namespace Gva.MigrationTool.Sets
                     MED_CERT_ID = r.Field<int?>("MED_CERT_ID")
                 })
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.MED_CERT_ID != null).Select(r => medicals[r.MED_CERT_ID.Value]).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.MED_CERT_ID != null).Select((r, i) =>
+                    new 
+                    {
+                        partIndex = medicals[r.MED_CERT_ID.Value],
+                        orderNum = i
+                    }).ToArray());
 
             var includedDocuments = oracleConn.CreateStoreCommand(
                 @"SELECT LL.ID LICENCE_LOG_ID,
@@ -1385,19 +1403,40 @@ namespace Gva.MigrationTool.Sets
 
             var includedTrainings = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.trainingPartIndex != null).Select(r => r.trainingPartIndex.Value).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.trainingPartIndex != null).Select((r, i) =>
+                    new 
+                    {
+                        partIndex = r.trainingPartIndex.Value,
+                        orderNum = i
+                    }).ToArray());
 
             var includedLangCerts = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.langCertPartIndex != null).Select(r => r.langCertPartIndex.Value).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.langCertPartIndex != null).Select((r, i) =>
+                    new 
+                    {
+                        partIndex = r.langCertPartIndex.Value,
+                        orderNum = i
+                    }).ToArray());
 
             var includedExams = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.examPartIndex != null).Select(r => r.examPartIndex.Value).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.examPartIndex != null).Select((r, i) =>
+                    new 
+                    {
+                        partIndex = r.examPartIndex.Value,
+                        orderNum = i
+                    }).ToArray());
 
             var includedChecks = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.checkPartIndex != null).Select(r => r.checkPartIndex.Value).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.checkPartIndex != null).Select((r, i) => 
+                    new 
+                    {
+                        partIndex = r.checkPartIndex.Value,
+                        orderNum = i
+                    }).ToArray());
+
 
             var includedLicences = oracleConn.CreateStoreCommand(
                 @"SELECT LL.ID LICENCE_LOG_ID,

@@ -9,7 +9,7 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-rating name="ratingForm" ng-model="newRating" sc-form-params="{ isNew: true }"></gva-rating>
+      <gva-rating name="ratingForm" ng-model="newRating" sc-form-params="{ isNew: true, lotId: lotId }"></gva-rating>
 
       <gva-rating-edition name="ratingEditionForm" ng-if="newEdition" ng-model="newEdition" sc-form-params="{ lotId: lotId }">
       </gva-rating-edition>

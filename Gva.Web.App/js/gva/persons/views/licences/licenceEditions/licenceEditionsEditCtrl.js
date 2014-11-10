@@ -10,7 +10,8 @@
     licence,
     currentLicenceEdition,
     licenceEditions,
-    scMessage
+    scMessage,
+    scModal
   ) {
     var originalLicenceEdition = _.cloneDeep(currentLicenceEdition);
     $scope.currentLicenceEdition = currentLicenceEdition;
@@ -25,28 +26,27 @@
       $scope.editMode = 'edit';
     };
 
-    $scope.save = function () {
-      return $scope.editLicenceEditionForm.$validate().then(function () {
-        if ($scope.editLicenceEditionForm.$valid) {
-          return PersonLicenceEditions
-            .save({
-              id: $stateParams.id,
-              ind: $stateParams.ind,
-              index: $stateParams.index,
-              caseTypeId: $scope.caseTypeId
-            }, $scope.currentLicenceEdition)
-            .$promise
-            .then(function (edition) {
-              $scope.editMode = null;
-              var editionIndex = _.findIndex($scope.licenceEditions, function (ed) {
-                return ed.partIndex === edition.partIndex;
-              });
+    $scope.viewEditionDoc = function (editionPartIndex) {
+      var params = {
+        edition: $scope.currentLicenceEdition,
+        personId: $stateParams.id,
+        licenceInd: $stateParams.ind,
+        editionInd:  editionPartIndex,
+        caseTypeId: $stateParams.caseTypeId,
+        canEdit: false
+      };
 
-              originalLicenceEdition = _.cloneDeep($scope.currentLicenceEdition);
-              $scope.licenceEditions[editionIndex] = _.cloneDeep(edition);
-            });
-        }
+      if (editionPartIndex === $scope.lastEditionIndex) {
+        params.canEdit = true;
+      }
+
+      var modalInstance = scModal.open('licenceEditionDoc', params);
+
+      modalInstance.result.then(function () {
+        $state.reload();
       });
+
+      return modalInstance.opened;
     };
 
     $scope.deleteCurrentEdition = function () {
@@ -92,7 +92,8 @@
     'licence',
     'currentLicenceEdition',
     'licenceEditions',
-    'scMessage'
+    'scMessage',
+    'scModal'
   ];
 
   LicenceEditionsEditCtrl.$resolve = {

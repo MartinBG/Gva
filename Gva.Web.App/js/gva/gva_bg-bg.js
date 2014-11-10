@@ -1637,6 +1637,9 @@
           publisher: 'Администрация'
         },
         licenceEditionDirective: {
+          cancel: 'Отказ',
+          changeOrder: 'Ред',
+          saveOrder: 'Запиши',
           documentDateValidFrom: 'Дата на издаване',
           documentDateValidTo: 'Валидно до',
           inspector: 'Инспектор',
@@ -1724,9 +1727,7 @@
             ratingType: 'Тип ВС <br>(раб. място)',
             valid: 'Валидност',
             ratingValue: 'Оценка',
-            notes: 'Бележки',
-            bookPageNumber: '№ стр. в дело',
-            pageCount: 'Бр. стр.'
+            notes: 'Бележки'
           },
           meds: 'Медицински свидетелства към лиценза',
           addMed: 'Ново медицинско',
@@ -2343,6 +2344,12 @@
           add: 'Добави',
           cancel: 'Отказ'
         },
+        licenceEditionDocModal : {
+          title: 'Редакция на документ към вписване',
+          save: 'Запис',
+          cancel: 'Отказ',
+          back: 'Назад'
+        },
         editLicenceModal: {
           title: 'Преглед на лиценз',
           save: 'Запис',
@@ -2389,7 +2396,7 @@
           cancel: 'Отказ'
         },
         licenceView: {
-          title: 'Преглед на лиценз',
+          title: 'Лиценз',
           statusChanges: 'Промени на статуса на лиценза',
           valid2: 'Валидност',
           changeDate: 'Дата на промяна',
@@ -2397,7 +2404,16 @@
           inspector: 'Инспектор',
           notes: 'Бележки',
           valid: 'Действителен',
-          newEdition: 'Ново вписване'
+          newEdition: 'Ново вписване',
+          tabs: {
+            ratings: 'Квалификации',
+            exams: 'Теоретични изпити',
+            langCerts: 'Свидетелства за език',
+            trainings: 'Обучения',
+            checks: 'Проверки',
+            medicals: 'Медицински',
+            licences: 'Лицензи'
+          }
         },
         editLicenceEditions: {
           title: 'Преглед на вписвания',

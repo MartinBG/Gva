@@ -1,0 +1,20 @@
+﻿<ng-form  class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="persons.licenceEditionDocModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="persons.licenceEditionDocModal.save" ng-if="canEdit"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.licenceEditionDocModal.cancel"  ng-if="canEdit"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+        <sc-button name="backBtn" btn-click="cancel()" text="persons.licenceEditionDocModal.back"  ng-if="!canEdit"
+          class="btn btn-primary btn-xs" icon="glyphicon-arrow-left">
+        </sc-button>
+      </div>
+    </div>
+
+    <gva-common-scanned-document name="personScannedDocumentForm" readonly="!canEdit" ng-model="edition.case" sc-form-params="{ setPart: 'person', lotId: personId }"></gva-common-scanned-document>
+  </div>
+</ng-form>
