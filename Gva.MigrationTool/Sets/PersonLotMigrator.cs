@@ -663,7 +663,7 @@ namespace Gva.MigrationTool.Sets
 
                         __LICENCE_STAFF_TYPE_CODE = r.Field<string>("LICENCE_STAFF_TYPE_CODE"),
 
-                        documentNumber = r.Field<string>("DOC_NO"),
+                        documentNumber = !string.IsNullOrWhiteSpace(r.Field<string>("DOC_NO")) ? r.Field<string>("DOC_NO") : null,
                         documentPersonNumber = r.Field<int?>("PERSON_NUM"),
                         documentDateValidFrom = r.Field<DateTime?>("VALID_FROM"),
                         documentDateValidTo = r.Field<DateTime?>("VALID_TO"),

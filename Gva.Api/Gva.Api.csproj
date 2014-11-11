@@ -312,7 +312,7 @@
     <Compile Include="Projections\Organization\OrganizationRecommendationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationApprovalProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonDocumentProjection.cs" />
+    <Compile Include="Projections\Person\PersonDocumentProjection.cs" />
     <Compile Include="Projections\Person\PersonExaminerProjection.cs" />
     <Compile Include="Projections\Person\PersonLicenceProjection.cs" />
     <Compile Include="Projections\Person\PersonRatingEditionProjection.cs" />

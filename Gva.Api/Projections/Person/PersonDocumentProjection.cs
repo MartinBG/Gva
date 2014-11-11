@@ -14,7 +14,7 @@ using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 
-namespace Gva.Api.Projections.Inventory.Persons
+namespace Gva.Api.Projections.Person
 {
     public class PersonDocumentProjection : Projection<GvaViewPersonDocument>
     {
