@@ -12,6 +12,6 @@ CREATE TABLE [dbo].[GvaViewPersonDocuments] (
 GO
 exec spDescTable  N'GvaViewPersonDocuments', N'Документи на Физически лица.'
 exec spDescColumn N'GvaViewPersonDocuments', N'LotId'                , N'Идентификатор на партида на физическо лице.'
-exec spDescColumn N'DocumentNumber'        , N'DocumentNumber'       , N'Номер на документ.'
-exec spDescColumn N'DocumentPersonNumber'  , N'DocumentPersonNumber' , N'No в списъка (групов док.).'
+exec spDescColumn N'GvaViewPersonDocuments', N'DocumentNumber'       , N'Номер на документ.'
+exec spDescColumn N'GvaViewPersonDocuments', N'DocumentPersonNumber' , N'No в списъка (групов док.).'
 GO
