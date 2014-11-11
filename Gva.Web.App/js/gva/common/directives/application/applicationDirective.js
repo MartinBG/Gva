@@ -23,10 +23,10 @@
         },
         formatResult: function (result, container, query, escapeMarkup) {
           var markup = [],
-            application = result.applicationCode + '-';
+            application = result.applicationCode + ' ';
 
           if (result.oldDocumentNumber) {
-            application += result.oldDocumentNumber + '-' +
+            application += result.oldDocumentNumber + '/' +
               $filter('date')(result.documentDate, 'mediumDate');
           } else {
             application += result.documentNumber;
@@ -36,9 +36,9 @@
           return markup.join('');
         },
         formatSelection: function (app, container) {
-          var application = app.applicationCode + '-';
+          var application = app.applicationCode + ' ';
           if (app.oldDocumentNumber) {
-            application += app.oldDocumentNumber + '-' +
+            application += app.oldDocumentNumber + '/' +
               $filter('date')(app.documentDate, 'mediumDate');
           } else {
             application += app.documentNumber;

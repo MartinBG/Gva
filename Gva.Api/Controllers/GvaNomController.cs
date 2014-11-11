@@ -74,10 +74,10 @@ namespace Gva.Api.Controllers
                 List<ApplicationNomDO> matchingApp = new List<ApplicationNomDO>();
                 foreach(var app in applications)
                 {
-                    string applicationIdentificator = app.ApplicationCode + '-';
+                    string applicationIdentificator = app.ApplicationCode + ' ';
                     if (!string.IsNullOrEmpty(app.OldDocumentNumber))
                     {
-                        applicationIdentificator += string.Format("{0}-{1}", app.OldDocumentNumber, app.DocumentDate);
+                        applicationIdentificator += string.Format("{0}/{1}", app.OldDocumentNumber, app.DocumentDate);
                     }
                     else
                     {

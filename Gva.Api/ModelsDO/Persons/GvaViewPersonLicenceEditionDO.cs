@@ -35,7 +35,7 @@ namespace Gva.Api.ModelsDO.Persons
             {
                 this.Application = new ApplicationNomDO
                 {
-                    ApplicationName = edition.Application.ApplicationType.Name,
+                    ApplicationCode = edition.Application.ApplicationType.Code,
                     PartIndex = edition.Application.Part.Index,
                     ApplicationId = edition.GvaApplicationId.Value
                 };
