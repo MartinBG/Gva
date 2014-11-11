@@ -123,7 +123,8 @@
             $scope.includedRatings = _.without($scope.includedRatings, rating);
             _.remove($scope.currentLicenceEdition.part.includedRatings,
               function(includedRating) {
-                return rating.partIndex === includedRating.partIndex;
+                return rating.ratingPartIndex === includedRating.ind &&
+                  rating.editionPartIndex === includedRating.index;
               });
             $scope.save();
           }
