@@ -7,12 +7,14 @@
     $state,
     $stateParams,
     $sce,
+    applicationPart,
     scModal,
     DocStages,
     appStages,
     doc
   ) {
     $scope.doc = doc;
+    $scope.applicationPart = applicationPart;
     $scope.appStages = appStages;
     $scope.docElectronicServiceStages = _.map(_.cloneDeep(doc.docElectronicServiceStages),
       function (docElectronicServiceStage) {
@@ -104,6 +106,7 @@
     '$state',
     '$stateParams',
     '$sce',
+    'applicationPart',
     'scModal',
     'DocStages',
     'appStages',
@@ -143,6 +146,18 @@
       'AppStages',
       function resolveAppStages($stateParams, AppStages) {
         return AppStages.query({ id: $stateParams.id }).$promise;
+      }
+    ],
+    applicationPart: [
+      '$stateParams',
+      'Applications',
+      'application',
+      function ($stateParams, Applications, application) {
+        return Applications.getAppPart({
+          path: angular.lowercase(application.lotSetAlias) + 'DocumentApplications',
+          lotId: application.lotId,
+          ind: application.partIndex
+        }).$promise;
       }
     ]
   };

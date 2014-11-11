@@ -16,9 +16,10 @@ namespace Gva.Api.ModelsDO
             this.ApplicationId = application.GvaApplicationId;
             this.PartIndex = application.GvaAppLotPart.Index;
             this.ApplicationName = applicationContent.ApplicationType.Name;
+            this.ApplicationCode = applicationContent.ApplicationType.Code;
             this.DocumentDate = applicationContent.DocumentDate;
             this.DocumentNumber = applicationContent.DocumentNumber;
-            this.DocId = application.DocId;
+            this.OldDocumentNumber = applicationContent.OldDocumentNumber;
         }
 
         public int ApplicationId { get; set; }
@@ -27,10 +28,12 @@ namespace Gva.Api.ModelsDO
 
         public string ApplicationName { get; set; }
 
+        public string ApplicationCode { get; set; }
+
         public DateTime? DocumentDate { get; set; }
 
         public string DocumentNumber { get; set; }
 
-        public int? DocId { get; set; }
+        public string OldDocumentNumber { get; set; }
     }
 }

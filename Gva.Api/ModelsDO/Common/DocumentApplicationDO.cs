@@ -12,6 +12,8 @@ namespace Gva.Api.ModelsDO.Common
 
         public int PartIndex { get; set; }
 
+        public string OldDocumentNumber { get; set; }
+
         public string DocumentNumber { get; set; }
 
         [Required(ErrorMessage = "DocumentDate is required.")]

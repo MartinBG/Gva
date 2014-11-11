@@ -71,12 +71,29 @@ namespace Gva.Api.Controllers
             if (!string.IsNullOrWhiteSpace(term))
             {
                 term = term.ToLower();
-                applications = applications.Where(n =>
-                    string.Format("{0}-{1}-{2}", n.DocumentNumber, n.DocId, n.DocumentDate).Contains(term))
-                    .ToArray();
+                List<ApplicationNomDO> matchingApp = new List<ApplicationNomDO>();
+                foreach(var app in applications)
+                {
+                    string applicationIdentificator = app.ApplicationCode + '-';
+                    if (!string.IsNullOrEmpty(app.OldDocumentNumber))
+                    {
+                        applicationIdentificator += string.Format("{0}-{1}", app.OldDocumentNumber, app.DocumentDate);
+                    }
+                    else
+                    {
+                        applicationIdentificator += app.DocumentNumber;
+                    }
+                    if (applicationIdentificator.Contains(term))
+                    { 
+                        matchingApp.Add(app);
+                    }
+                }
+                return Ok(matchingApp);
             }
-
-            return Ok(applications);
+            else
+            {
+                return Ok(applications);
+            }
         }
 
         [Route("organizationsAudits")]

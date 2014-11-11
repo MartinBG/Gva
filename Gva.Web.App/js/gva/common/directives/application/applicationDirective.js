@@ -23,17 +23,28 @@
         },
         formatResult: function (result, container, query, escapeMarkup) {
           var markup = [],
-            application = result.documentNumber + '-' +
-            result.docId + '-' +
-            $filter('date')(result.documentDate, 'mediumDate');
+            application = result.applicationCode + '-';
+
+          if (result.oldDocumentNumber) {
+            application += result.oldDocumentNumber + '-' +
+              $filter('date')(result.documentDate, 'mediumDate');
+          } else {
+            application += result.documentNumber;
+          }
+
           Select2.util.markMatch(application, query.term, markup, escapeMarkup);
           return markup.join('');
         },
         formatSelection: function (app, container) {
-          var application = app.documentNumber + '-' +
-            app.docId + '-' +
-            $filter('date')(app.documentDate, 'mediumDate'),
-            text = Select2.util.escapeMarkup(application),
+          var application = app.applicationCode + '-';
+          if (app.oldDocumentNumber) {
+            application += app.oldDocumentNumber + '-' +
+              $filter('date')(app.documentDate, 'mediumDate');
+          } else {
+            application += app.documentNumber;
+          }
+
+          var text = Select2.util.escapeMarkup(application),
               elem = '<a ng-click="viewApplication(' + 
               app.partIndex  + ',' + app.applicationId + 
               ')">' + text + '</a>';

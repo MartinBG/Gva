@@ -147,6 +147,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     DocId = e.GApplication.DocId,
                     LotSetName = e.Set.Name,
                     AppPartId = e.GApplication.GvaAppLotPartId,
+                    LotId = e.GApplication.LotId,
                     AppPartIndex = e.GApplicationPart != null ? e.GApplicationPart.Index : (int?)null,
                     AppPartDocumentDate = e.GViewApplication != null ? e.GViewApplication.DocumentDate : null,
                     AppPartDocumentNumber = e.GViewApplication != null ? e.GViewApplication.DocumentNumber : null,

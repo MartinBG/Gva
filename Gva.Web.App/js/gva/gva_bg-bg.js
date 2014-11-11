@@ -1639,7 +1639,7 @@
         licenceEditionDirective: {
           cancel: 'Отказ',
           changeOrder: 'Ред',
-          saveOrder: 'Запиши',
+          saveOrder: 'Запис',
           documentDateValidFrom: 'Дата на издаване',
           documentDateValidTo: 'Валидно до',
           inspector: 'Инспектор',

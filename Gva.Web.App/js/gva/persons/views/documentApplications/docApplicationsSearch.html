@@ -1,12 +1,15 @@
-﻿<sc-datatable items="personDocumentApplications" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDate"
+﻿<sc-button name="createBtn" btn-sref="{ state: 'root.applications.new', params: {set: 'person'} }" text="persons.personDocApplicationSearch.newApplication" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable items="personDocumentApplications" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDate"
   row-class="{'declinedApplication' : isDeclinedApp(item), 'doneApplication' : isDoneApp(item)}">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ 
-      state: 'root.applications.edit',
+      state: 'root.applications.edit.data',
       params: { 
         id: item.part.applicationId,
-        setPartPath: 'personDocumentApplications',
-        set: 'person'
+        set: 'person',
+        lotId: item.part.lotId,
+        ind: item.partIndex,
+        setPartPath: 'personDocumentApplications'
       } 
     }" class="btn btn-xs btn-primary" icon="glyphicon-pencil">
     </sc-button>

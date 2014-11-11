@@ -112,7 +112,9 @@ namespace Gva.MigrationTool.Sets
                                         {
                                             ApplicationId = 0, //will be set later
                                             PartIndex = pv.Part.Index,
-                                            ApplicationName = docApplication.Get<string>("part.applicationType.name")
+                                            ApplicationName = docApplication.Get<string>("part.applicationType.name"),
+                                            ApplicationCode = docApplication.Get<string>("part.applicationType.code"),
+                                            OldDocumentNumber = docApplication.Get<string>("part.oldDocumentNumber")
                                         }));
                         }
 
@@ -521,8 +523,8 @@ namespace Gva.MigrationTool.Sets
                         __BOOK_PAGE_NO = r.Field<int?>("BOOK_PAGE_NO"),
                         __PAGES_COUNT = r.Field<int?>("PAGES_COUNT"),
                         __REQUEST_DATE = r.Field<DateTime?>("REQUEST_DATE"),
-
                         documentNumber = r.Field<string>("DOC_NO"),
+                        oldDocumentNumber = r.Field<string>("DOC_NO"),
                         documentDate = r.Field<DateTime?>("DOC_DATE"),
                         notes = r.Field<string>("NOTES"),
                         applicationType = noms["applicationTypes"].ByOldId(r.Field<decimal?>("REQUEST_TYPE_ID").ToString()),
@@ -577,7 +579,7 @@ namespace Gva.MigrationTool.Sets
                                     "__oldId",
                                     "__migrTable",
                                     "__REQUEST_DATE",
-
+                                    "oldDocumentNumber",
                                     "documentNumber",
                                     "documentDate",
                                     "notes",

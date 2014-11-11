@@ -115,6 +115,8 @@ namespace Gva.Api.Controllers.Applications
                 .Include(a => a.GvaAppLotPart)
                 .SingleOrDefault(a => a.GvaApplicationId == id);
 
+            this.lotRepository.GetLotIndex(application.LotId).Index.GetPart<DocumentApplicationDO>(string.Format("{0}", application.GvaAppLotPart.Path));
+
             if (application == null)
             {
                 throw new Exception("Cannot find application with id " + id);
@@ -134,7 +136,7 @@ namespace Gva.Api.Controllers.Applications
                 .Single(l => l.LotId == application.LotId)
                 .Set;
 
-            ApplicationDO returnValue = new ApplicationDO(application, set.Alias, set.SetId);
+            ApplicationDO returnValue = new ApplicationDO(application, set.Alias, set.SetId, new ApplicationNomDO(application));
 
             if (set.Alias == "Person")
             {
@@ -311,7 +313,8 @@ namespace Gva.Api.Controllers.Applications
                 var application = new DocumentApplicationDO
                 {
                     DocumentDate = newDoc.RegDate.Value,
-                    ApplicationType = applicationNewDO.ApplicationType
+                    ApplicationType = applicationNewDO.ApplicationType,
+                    DocumentNumber = newDoc.DocRelations.First().Doc.RegUri
                 };
 
                 PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, this.userContext);
