@@ -56,12 +56,13 @@
           lastOrderNum = _.last($scope.includedRatings).orderNum;
         }
 
-        PersonRatings.query({ id: $stateParams.id })
+        PersonRatings.getRatingsWithAllEditions({ id: $stateParams.id })
           .$promise
           .then(function (ratings) {
             var rating = null;
             _.find(ratings, function (r) {
-              if (r.ratingPartIndex === newRating.rating.partIndex) {
+              if (r.ratingPartIndex === newRating.rating.partIndex &&
+                r.editionPartIndex === newRating.edition.partIndex) {
                 rating = r;
               }
             });
@@ -107,6 +108,9 @@
           $scope.currentLicenceEdition.part.includedRatings.push(newlyAddedRating);
 
           rating.orderNum = newlyAddedRating.orderNum;
+          rating.docDateValidFrom = rating.lastDocDateValidFrom;
+          rating.docDateValidTo = rating.lastDocDateValidTo;
+
           $scope.includedRatings.push(rating);
         });
 
