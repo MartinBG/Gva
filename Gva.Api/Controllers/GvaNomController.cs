@@ -157,10 +157,10 @@ namespace Gva.Api.Controllers
         }
 
         [Route("persons")]
-        public IHttpActionResult GetPersons(string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetPersons(string term = null)
         {
             var returnValue =
-                this.personRepository.GetPersons(offset: offset, limit: limit)
+                this.personRepository.GetPersons()
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
