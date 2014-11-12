@@ -13,9 +13,8 @@
     $scope.application = application;
     $scope.editMode = null;
     $scope.lotId = $stateParams.lotId;
-    $scope.isNew = $stateParams.isNew;
     $scope.set = $stateParams.set;
-    $scope.appId = $stateParams.appId || $stateParams.id;
+    $scope.appId = $stateParams.id;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -35,14 +34,10 @@
             ind: $stateParams.ind
           },
           $scope.application).$promise.then(function () {
-            return $state.go('root.applications.edit', { id: $scope.appId});
+            $scope.editMode = null;
           });
         }
       });
-    };
-
-    $scope.done = function () {
-      return $state.go('root.applications.edit', { id: $scope.appId});
     };
   }
 
