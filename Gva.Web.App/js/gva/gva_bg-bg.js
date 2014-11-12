@@ -2118,7 +2118,8 @@
           bookPageNumber: '№ стр. в<br>делов. книга',
           pageCount: 'Брой стр.',
           file: 'Файл',
-          newDocumentLangCert: 'Нов документ'
+          newDocumentLangCert: 'Нов документ',
+          langLevel: 'Ниво на език'
         },
         newDocumentLangCert: {
           title: 'Ново свидетелство за език',
