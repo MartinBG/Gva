@@ -608,3 +608,13 @@ table.treetable span.indenter a {
 .tt-suggestion p {
   margin: 0;
 }
+
+.glyphicon-spin {
+     -webkit-transform-origin: 50% 47%;
+     transform-origin:50% 47%;
+     -ms-transform-origin:50% 47%;
+     -webkit-animation: spin .5s infinite linear;
+     -moz-animation: spin .5s infinite linear;
+     -o-animation: spin .5s infinite linear;
+     animation: spin .5s infinite linear;
+}

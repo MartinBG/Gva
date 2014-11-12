@@ -2,7 +2,7 @@
   <span ng-class="{
     'glyphicon': iconBaseClass === 'glyphicon' || $pending,
     'fa fa-lg': !$pending && iconBaseClass === 'fa',
-    'glyphicon-loading': $pending,
+    'glyphicon-refresh glyphicon-spin': $pending,
     '{{iconDisabled}}': !$pending && isDisabled,
     '{{icon}}': !$pending && !isDisabled
   }"></span>
