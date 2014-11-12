@@ -28,6 +28,15 @@
           createValQuery,
           valProp;
 
+      var iterpolationFunc;
+      if (formatOptions) {
+        iterpolationFunc = $interpolate(formatOptions);
+      } else {
+        iterpolationFunc = function (context) {
+          return context[nameProp];
+        };
+      }
+
       if (!alias) {
         throw new Error('sc-nomenclature alias not specified!');
       }
@@ -141,24 +150,14 @@
           var markup = [],
             resultString;
 
-          if(formatOptions)
-          {
-            resultString = $interpolate(formatOptions)(result);
-          } else {
-            resultString = result[nameProp];
-          }
+          resultString = iterpolationFunc(result);
 
           Select2.util.markMatch(resultString, query.term, markup, escapeMarkup);
           return markup.join('');
         },
         formatSelection: function (data) {
-          var resultString;
-          if(formatOptions)
-          {
-            resultString = $interpolate(formatOptions)(data);
-          } else {
-            resultString = data[nameProp];
-          }
+          var resultString = iterpolationFunc(data);
+
           return data ? Select2.util.escapeMarkup(resultString) : undefined;
         },
         id: function (obj) {
