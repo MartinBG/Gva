@@ -30,6 +30,7 @@ namespace Gva.Api.Projections.Application
             application.PartId = equipmentApplication.Part.PartId;
             application.DocumentDate = equipmentApplication.Content.DocumentDate;
             application.DocumentNumber = equipmentApplication.Content.DocumentNumber;
+            application.OldDocumentNumber = equipmentApplication.Content.OldDocumentNumber;
             application.ApplicationTypeId = equipmentApplication.Content.ApplicationType.NomValueId;
 
             return application;

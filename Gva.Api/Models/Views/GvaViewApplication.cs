@@ -16,6 +16,8 @@ namespace Gva.Api.Models.Views
 
         public string DocumentNumber { get; set; }
 
+        public string OldDocumentNumber { get; set; }
+
         public int ApplicationTypeId { get; set; }
 
         public virtual NomValue ApplicationType { get; set; }
@@ -48,6 +50,7 @@ namespace Gva.Api.Models.Views
             this.Property(t => t.PartId).HasColumnName("LotPartId");
             this.Property(t => t.DocumentDate).HasColumnName("DocumentDate");
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
+            this.Property(t => t.OldDocumentNumber).HasColumnName("OldDocumentNumber");
             this.Property(t => t.ApplicationTypeId).HasColumnName("ApplicationTypeId");
 
             // Relationships

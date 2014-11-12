@@ -27,7 +27,8 @@
     </sc-column>
     <sc-column data="inspector" title="persons.licencesSearch.inspector">
     </sc-column>
-    <sc-column data="application.applicationCode" title="persons.licencesSearch.application" class="wrap">
+    <sc-column title="persons.licencesSearch.application" class="wrap" has-content="true">
+      {{ !!item.application.oldDocumentNumber ? (item.application.applicationCode + ' ' + item.application.oldDocumentNumber + '/' + (item.application.documentDate | date: 'mediumDate')) : (item.application.applicationCode + ' ' + item.application.documentNumber) }}
     </sc-column>
     <sc-column data="notes" title="persons.licencesSearch.notes" visible="false" class="wrap">
     </sc-column>

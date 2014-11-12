@@ -30,6 +30,7 @@ namespace Gva.Api.Projections.Application
             application.PartId = personApplication.Part.PartId;
             application.DocumentDate = personApplication.Content.DocumentDate;
             application.DocumentNumber = personApplication.Content.DocumentNumber;
+            application.OldDocumentNumber = personApplication.Content.OldDocumentNumber;
             application.ApplicationTypeId = personApplication.Content.ApplicationType.NomValueId;
 
             return application;

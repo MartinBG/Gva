@@ -37,7 +37,10 @@ namespace Gva.Api.ModelsDO.Persons
                 {
                     ApplicationCode = edition.Application.ApplicationType.Code,
                     PartIndex = edition.Application.Part.Index,
-                    ApplicationId = edition.GvaApplicationId.Value
+                    ApplicationId = edition.GvaApplicationId.Value,
+                    DocumentDate = edition.Application.DocumentDate,
+                    DocumentNumber = edition.Application.DocumentNumber,
+                    OldDocumentNumber = edition.Application.OldDocumentNumber
                 };
             }
 
