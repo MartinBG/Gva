@@ -618,3 +618,7 @@ table.treetable span.indenter a {
      -o-animation: spin .5s infinite linear;
      animation: spin .5s infinite linear;
 }
+
+.table {
+    font-size: 11px;
+}
