@@ -213,7 +213,7 @@
                 value = kvp[1],
                 paramUndefined = !value && !$stateParams[param],
                 paramPresent = $stateParams.hasOwnProperty(param) &&
-                  $stateParams[param] === value;
+                  $stateParams[param] === String(value);
             return stateMatching && (paramUndefined || paramPresent);
           }, true);
         }

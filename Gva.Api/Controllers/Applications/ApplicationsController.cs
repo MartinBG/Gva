@@ -84,7 +84,7 @@ namespace Gva.Api.Controllers.Applications
 
         [Route("")]
         public IHttpActionResult GetApplications(
-            string filter = null,
+            string set = null,
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? personLin = null,
@@ -95,7 +95,7 @@ namespace Gva.Api.Controllers.Applications
             )
         {
             var applications = this.applicationRepository.GetApplications(
-                lotSetAlias: filter,
+                lotSetAlias: set,
                 fromDate: fromDate,
                 toDate: toDate,
                 personLin: personLin,
@@ -112,7 +112,10 @@ namespace Gva.Api.Controllers.Applications
         {
             var application = this.unitOfWork.DbContext.Set<GvaApplication>()
                 .Include(a => a.Doc)
+                .Include(a => a.GvaAppLotPart)
                 .SingleOrDefault(a => a.GvaApplicationId == id);
+
+            this.lotRepository.GetLotIndex(application.LotId).Index.GetPart<DocumentApplicationDO>(string.Format("{0}", application.GvaAppLotPart.Path));
 
             if (application == null)
             {
@@ -133,7 +136,7 @@ namespace Gva.Api.Controllers.Applications
                 .Single(l => l.LotId == application.LotId)
                 .Set;
 
-            ApplicationDO returnValue = new ApplicationDO(application, set.Alias, set.SetId);
+            ApplicationDO returnValue = new ApplicationDO(application, set.Alias, set.SetId, new ApplicationNomDO(application));
 
             if (set.Alias == "Person")
             {
@@ -309,9 +312,9 @@ namespace Gva.Api.Controllers.Applications
 
                 var application = new DocumentApplicationDO
                 {
-                    DocumentNumber = newDoc.RegIndex,
                     DocumentDate = newDoc.RegDate.Value,
-                    ApplicationType = applicationNewDO.ApplicationType
+                    ApplicationType = applicationNewDO.ApplicationType,
+                    DocumentNumber = newDoc.DocRelations.First().Doc.RegUri
                 };
 
                 PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, this.userContext);
@@ -349,6 +352,21 @@ namespace Gva.Api.Controllers.Applications
 
                 this.unitOfWork.Save();
 
+                int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
+                    .Where(s => s.Alias.Equals("new"))
+                    .Single().GvaStageId;
+
+                GvaApplicationStage applicationStage = new GvaApplicationStage()
+                {
+                    GvaStageId = stageId,
+                    StartingDate = DateTime.Now,
+                    Ordinal = 0,
+                    GvaApplicationId = newGvaApplication.GvaApplicationId
+                };
+
+                this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
+                this.unitOfWork.Save();
+
                 this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
 
                 transaction.Commit();
@@ -370,6 +388,27 @@ namespace Gva.Api.Controllers.Applications
         public IHttpActionResult GetApplicationPart(string path, int lotId)
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
+            var appStages = (from gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                             join ga in this.unitOfWork.DbContext.Set<GvaApplication>()
+                             .Where(a => a.LotId == lotId) on gas.GvaApplicationId equals ga.GvaApplicationId
+                             group gas by ga.GvaAppLotPartId into appSt
+                             select new { appSt = appSt.OrderByDescending(s => s.GvaStageId).FirstOrDefault(), partId = appSt.Key.Value })
+                            .ToList();
+
+            var applicationStage = appStages.Where(ap => ap.partId == partVersion.Part.PartId).Single().appSt;
+            this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaStage).Load();
+            this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaApplication).Load();
+
+            partVersion.Content.LotId = applicationStage.GvaApplication.LotId;
+            partVersion.Content.PartIndex = applicationStage.GvaApplication.GvaAppLotPart.Index;
+            partVersion.Content.ApplicationId = applicationStage.GvaApplicationId;
+
+            partVersion.Content.Stage = new NomValue()
+            {
+                Name = applicationStage.GvaStage.Name,
+                Alias = applicationStage.GvaStage.Alias
+            };
+
             var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, null);
 
             return Ok(new CaseTypePartDO<DocumentApplicationDO>(partVersion, lotFile));
@@ -430,7 +469,7 @@ namespace Gva.Api.Controllers.Applications
         public IHttpActionResult GetNotLinkedDocs(
             int limit = 10,
             int offset = 0,
-            string filter = null,
+            string set = null,
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string regUri = null,

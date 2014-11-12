@@ -67,7 +67,28 @@
     };
 
     $scope.viewPart = function (value) {
-      var state;
+      var state,
+        set;
+
+      if(value.setPartAlias.indexOf('Application') > 0) {
+        if (value.setPartAlias === 'personApplication') {
+          state = 'root.applications.edit';
+          set = 'person';
+        }
+        else if (value.setPartAlias === 'organizationApplication') {
+          state = 'root.applications.edit';
+          set = 'organization';
+        }
+        else if (value.setPartAlias === 'airportApplication') {
+          state = 'root.applications.edit';
+          set = 'airport';
+        }
+        return $state.go(state, {
+          id: application.applicationId,
+          setPartPath: set + 'DocumentApplications',
+          set: set
+        });
+      }
 
       if (value.setPartAlias === 'personDocumentId') {
         state = 'root.persons.view.documentIds.edit';
@@ -93,14 +114,8 @@
       else if (value.setPartAlias === 'personOther') {
         state = 'root.persons.view.documentOthers.edit';
       }
-      else if (value.setPartAlias === 'personApplication') {
-        state = 'root.persons.view.documentApplications.edit';
-      }
       else if (value.setPartAlias === 'organizationOther') {
         state = 'root.organizations.view.documentOthers.edit';
-      }
-      else if (value.setPartAlias === 'organizationApplication') {
-        state = 'root.organizations.view.documentApplications.edit';
       }
       else if (value.setPartAlias === 'aircraftOwner') {
         state = 'root.aircrafts.view.owners.edit';
@@ -122,9 +137,6 @@
       }
       else if (value.setPartAlias === 'airportOther') {
         state = 'root.airports.view.others.edit';
-      }
-      else if (value.setPartAlias === 'airportApplication') {
-        state = 'root.airports.view.applications.edit';
       }
       else if (value.setPartAlias === 'airportInspection') {
         state = 'root.airports.view.inspections.edit';

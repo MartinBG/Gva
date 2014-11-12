@@ -1,5 +1,6 @@
 ﻿<sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.documentLangCerts.new' }" text="persons.documentLangCertSearch.newDocumentLangCert" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="documentLangCerts" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom">
+<sc-datatable items="documentLangCerts" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDateValidFrom"
+  row-class="{'invalidDocument' : isInvalidDocument(item), 'expiredDocument' : (!isInvalidDocument(item) && isExpiredDocument(item)), 'expiringDocument' : isExpiringDocument(item)}">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" class="btn btn-xs btn-primary" btn-sref="{ state: 'root.persons.view.documentLangCerts.edit', params: {ind: item.partIndex} }" icon="glyphicon-pencil"></sc-button>
   </sc-column>
@@ -9,26 +10,28 @@
   </sc-column>
   <sc-column data="part.documentDateValidTo" title="persons.documentLangCertSearch.documentDateValidTo" type="date">
   </sc-column>
-  <sc-column data="part.documentPublisher" title="persons.documentLangCertSearch.documentPublisher">
+  <sc-column data="part.documentPublisher" title="persons.documentLangCertSearch.documentPublisher" class="wrap">
+  </sc-column>
+  <sc-column data="part.langLevel.name" title="persons.documentLangCertSearch.langLevel" class="wrap">
   </sc-column>
   <sc-column data="part.ratingType.name || part.sector" title="persons.documentLangCertSearch.ratingType">
   </sc-column>
   <sc-column data="part.ratingClass.name" title="persons.documentLangCertSearch.ratingClass">
   </sc-column>
-  <sc-column data="part.authorization.code" title="persons.documentLangCertSearch.authorization">
+  <sc-column data="part.authorization.code" title="persons.documentLangCertSearch.authorization" class="wrap">
   </sc-column>
-  <sc-column data="part.licenceType.code" title="persons.documentLangCertSearch.licenceType">
+  <sc-column data="part.licenceType.code" title="persons.documentLangCertSearch.licenceType" class="wrap">
   </sc-column>
-  <sc-column data="part.documentType.name" title="persons.documentLangCertSearch.personOtherDocumentType">
+  <sc-column data="part.documentType.name" title="persons.documentLangCertSearch.personOtherDocumentType" class="wrap">
   </sc-column>
-  <sc-column data="part.documentRole.name" title="persons.documentLangCertSearch.personOtherDocumentRole">
+  <sc-column data="part.documentRole.name" title="persons.documentLangCertSearch.personOtherDocumentRole" class="wrap">
   </sc-column>
   <sc-column data="part.valid" title="persons.documentLangCertSearch.valid" has-content="true">
     <span>{{item.part.valid.name}}</span>
   </sc-column>
-  <sc-column data="case.bookPageNumber" title="persons.documentLangCertSearch.bookPageNumber">
+  <sc-column data="case.bookPageNumber" title="persons.documentLangCertSearch.bookPageNumber" visible="false">
   </sc-column>
-  <sc-column data="case.pageCount" title="persons.documentLangCertSearch.pageCount">
+  <sc-column data="case.pageCount" title="persons.documentLangCertSearch.pageCount" visible="false">
   </sc-column>
   <sc-column sortable="false" title="persons.documentLangCertSearch.file" has-content="true">
     <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">

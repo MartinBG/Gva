@@ -20,7 +20,6 @@ namespace Gva.Api.Controllers.Aircrafts
     public class AircraftDocumentDebtsFMController : GvaCaseTypePartController<AircraftDocumentDebtFMDO>
     {
         private ICaseTypeRepository caseTypeRepository;
-        private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
         private IAircraftDocumentDebtFMRepository aircraftDocumentDebtFMRepository;
@@ -37,7 +36,6 @@ namespace Gva.Api.Controllers.Aircrafts
             : base("aircraftDocumentDebtsFM", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.caseTypeRepository = caseTypeRepository;
-            this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
             this.aircraftDocumentDebtFMRepository = aircraftDocumentDebtFMRepository;
@@ -61,8 +59,7 @@ namespace Gva.Api.Controllers.Aircrafts
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             if (appId.HasValue)

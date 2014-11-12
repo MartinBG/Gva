@@ -11,13 +11,13 @@ namespace Gva.Api.ModelsDO.Persons
         public PersonLicenceEditionDO()
         {
             this.Limitations = new List<NomValue>();
-            this.IncludedRatings = new List<int>();
-            this.IncludedExams = new List<int>();
-            this.IncludedTrainings = new List<int>();
-            this.IncludedLangCerts = new List<int>();
-            this.IncludedChecks = new List<int>();
-            this.IncludedMedicals = new List<int>();
-            this.IncludedLicences = new List<int>();
+            this.IncludedRatings = new List<IncludedRatingDO>();
+            this.IncludedExams = new List<IncludedDocumentDO>();
+            this.IncludedTrainings = new List<IncludedDocumentDO>();
+            this.IncludedLangCerts = new List<IncludedDocumentDO>();
+            this.IncludedChecks = new List<IncludedDocumentDO>();
+            this.IncludedMedicals = new List<IncludedDocumentDO>();
+            this.IncludedLicences = new List<IncludedDocumentDO>();
         }
 
         public int? LicencePartIndex { get; set; }
@@ -44,18 +44,18 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string StampNumber { get; set; }
 
-        public List<int> IncludedRatings { get; set; }
+        public List<IncludedRatingDO> IncludedRatings { get; set; }
 
-        public List<int> IncludedExams { get; set; }
+        public List<IncludedDocumentDO> IncludedExams { get; set; }
 
-        public List<int> IncludedTrainings { get; set; }
+        public List<IncludedDocumentDO> IncludedTrainings { get; set; }
 
-        public List<int> IncludedLangCerts { get; set; }
+        public List<IncludedDocumentDO> IncludedLangCerts { get; set; }
 
-        public List<int> IncludedChecks { get; set; }
+        public List<IncludedDocumentDO> IncludedChecks { get; set; }
 
-        public List<int> IncludedMedicals { get; set; }
+        public List<IncludedDocumentDO> IncludedMedicals { get; set; }
 
-        public List<int> IncludedLicences { get; set; }
+        public List<IncludedDocumentDO> IncludedLicences { get; set; }
     }
 }

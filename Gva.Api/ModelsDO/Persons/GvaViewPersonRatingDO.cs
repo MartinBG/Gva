@@ -17,7 +17,6 @@ namespace Gva.Api.ModelsDO.Persons
             GvaViewPersonRatingEdition firstEdition = editions.First();
 
             this.LotId = rating.LotId;
-            this.PartIndex = rating.Part.Index;
             this.EditionIndex = lastEdition.Index;
             this.RatingPartIndex = rating.PartIndex;
             this.EditionPartIndex = lastEdition.PartIndex;
@@ -37,8 +36,6 @@ namespace Gva.Api.ModelsDO.Persons
         }
 
         public int LotId { get; set; }
-
-        public int PartIndex { get; set; }
 
         public int EditionIndex { get; set; }
 
@@ -64,7 +61,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public DateTime LastDocDateValidFrom { get; set; }
 
-        public DateTime? LastDocDateValidTo { get; set; }
+        public DateTime LastDocDateValidTo { get; set; }
 
         public DateTime FirstDocDateValidFrom { get; set; }
 

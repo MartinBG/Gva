@@ -19,6 +19,10 @@
       <gva-common-document-application name="personDocumentApplicationForm" ng-model="personDocumentApplication" 
         sc-form-params="{ lotId: lotId, isNew: false, caseTypeId: caseTypeId, setPart: 'person' }"></gva-common-document-application>
 
+      <div class="row">
+        <sc-field type="text" ng-model="personDocumentApplication.part.stage.name" ng-readonly="true" l10n-text="persons.editPersonDocApplication.stage" class="col-sm-3"></sc-field>
+      </div>
+
       <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentApplication.case"
         sc-form-params="{ setPart: 'person', lotId: lotId, hideApplications: true }"></gva-common-scanned-document>
     </div>

@@ -6,13 +6,14 @@
     $scope,
     $state,
     $stateParams,
+    l10n,
     scModal,
     PersonLicences,
     licence
   ) {
     $scope.licence = licence;
     $scope.lotId = $stateParams.id;
-
+    $scope.title = l10n.get('persons.licenceView.title');
     $scope.newEdition = function () {
       return $state.go('root.persons.view.licences.view.editions.new');
     };
@@ -38,6 +39,7 @@
     '$scope',
     '$state',
     '$stateParams',
+    'l10n',
     'scModal',
     'PersonLicences',
     'licence'

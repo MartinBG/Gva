@@ -104,15 +104,37 @@
         <sc-button name="editBtn" btn-click="viewEquipment(application.lotId)" text="applications.edit.viewEquipment" class="btn btn-sm btn-primary pull-right" icon="glyphicon-search"></sc-button>
       </div>
     </div>
-
   </div>
 </div>
-
-<sc-tabs tab-list="{
-  'applications.tabs.case': 'root.applications.edit.case',
-  'applications.tabs.stages': 'root.applications.edit.stages'
-}"></sc-tabs>
-
+<div ng-if="application.oldDocumentNumber">
+  <sc-tabs tab-list="{
+  'applications.tabs.data': {
+      state: 'root.applications.edit.data',
+      stateParams: {
+        lotId: application.lotId,
+        ind: application.partIndex,
+        set: set,
+        setPartPath: setPartPath
+      }
+    },
+    'applications.tabs.stages': 'root.applications.edit.stages'
+  }"></sc-tabs>
+</div>
+<div ng-if="!application.oldDocumentNumber">
+  <sc-tabs tab-list="{
+  'applications.tabs.data': {
+      state: 'root.applications.edit.data',
+      stateParams: {
+        lotId: application.lotId,
+        ind: application.partIndex,
+        set: set,
+        setPartPath: setPartPath
+      }
+    },
+    'applications.tabs.case': 'root.applications.edit.case',
+    'applications.tabs.stages': 'root.applications.edit.stages'
+  }"></sc-tabs>
+</div>
 <div class="tab-content">
   <div ui-view></div>
   <div class="clear"></div>

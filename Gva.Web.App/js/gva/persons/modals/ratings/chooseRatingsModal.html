@@ -8,9 +8,14 @@
   </div>
 
   <div class="well-sm panel-body">
+    <div class="form-group">
+      <label class="control-label" l10n-text="persons.chooseRatingsModal.showAll" class="col-sm-3 col-md-2"></label>
+      <input type="checkbox"  sc-click="showAllRatings($event)"/>
+    </div>
+
     <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
-        <input type="checkbox" ng-checked="selectedRatings | contains:item" sc-click="selectRating($event, item)">
+        <input type="checkbox" ng-checked="selectedRatings | contains:item" sc-click="selectRating($event, item)"/>
       </sc-column>
       <sc-column data="personRatingLevel.name || ratingType.name" title="persons.chooseRatingsModal.ratingTypeOrRatingLevel">
       </sc-column>

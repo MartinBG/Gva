@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.Owin;
@@ -56,11 +57,13 @@ namespace Common.Owin
 
         public static void ConfigureAuth(IAppBuilder app, IContainer container)
         {
+            var sessionState = (SessionStateSection)WebConfigurationManager.GetSection("system.web/sessionState");
+
             app.UseOAuthAuthorizationServer(new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/api/token"),
                 Provider = container.Resolve<IOAuthAuthorizationServerProvider>(),
-                AccessTokenExpireTimeSpan = TimeSpan.FromHours(8),
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(sessionState.Timeout.TotalMinutes),
                 AllowInsecureHttp = true
             });
 

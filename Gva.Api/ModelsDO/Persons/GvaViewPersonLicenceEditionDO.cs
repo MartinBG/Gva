@@ -35,7 +35,7 @@ namespace Gva.Api.ModelsDO.Persons
             {
                 this.Application = new ApplicationNomDO
                 {
-                    ApplicationName = edition.Application.ApplicationType.Name,
+                    ApplicationCode = edition.Application.ApplicationType.Code,
                     PartIndex = edition.Application.Part.Index,
                     ApplicationId = edition.GvaApplicationId.Value
                 };
@@ -61,6 +61,7 @@ namespace Gva.Api.ModelsDO.Persons
             }
 
             this.Limitations = edition.Limitations;
+            this.Case = new CaseDO(edition.LotFile);
         }
 
         public int LotId { get; set; }
@@ -122,5 +123,7 @@ namespace Gva.Api.ModelsDO.Persons
         public string PageNumber { get; set; }
 
         public int? PageCount { get; set; }
+
+        public CaseDO Case { get; set; }
     }
 }

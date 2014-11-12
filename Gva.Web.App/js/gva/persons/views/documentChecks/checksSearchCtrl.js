@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, moment*/
+(function (angular, moment) {
   'use strict';
 
   function DocumentChecksSearchCtrl(
@@ -9,6 +9,21 @@
     checks
   ) {
     $scope.checks = checks;
+
+    $scope.isInvalidDocument = function(item){
+      return item.part.valid.code === 'N';
+    };
+
+    $scope.isExpiringDocument = function(item) {
+      var today = moment(new Date()),
+          difference = moment(item.part.documentDateValidTo).diff(today, 'days');
+
+      return 0 <= difference && difference <= 30;
+    };
+
+    $scope.isExpiredDocument = function(item) {
+      return moment(new Date()).isAfter(item.part.documentDateValidTo);
+    };
   }
 
   DocumentChecksSearchCtrl.$inject = [
@@ -29,4 +44,4 @@
   };
 
   angular.module('gva').controller('DocumentChecksSearchCtrl', DocumentChecksSearchCtrl);
-}(angular));
+}(angular, moment));

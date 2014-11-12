@@ -3,7 +3,7 @@
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="viewBtn" btn-sref="{ state: 'root.organizations.view.approvals.edit.amendments.edit', params: {ind: item.partIndex, index: item.amendmentPartIndex } }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="approvalType.name" title="organizations.approvalSearch.approvalType">
+  <sc-column data="approvalType.name" title="organizations.approvalSearch.approvalType" class="wrap">>
   </sc-column>
   <sc-column data="approvalDocumentNumber" title="organizations.approvalSearch.documentNumber">
   </sc-column>
@@ -17,6 +17,6 @@
   </sc-column>
   <sc-column data="approvalState.name" title="organizations.approvalSearch.approvalState">
   </sc-column>
-  <sc-column data="applicationName" title="organizations.approvalSearch.application">
+  <sc-column data="applicationName" title="organizations.approvalSearch.application" class="wrap">
   </sc-column>
 </sc-datatable>

@@ -8,6 +8,10 @@
 
   <div class="well-sm panel-body">
     <div class="row">
+      <div class="form-group col-md-1 col-sm-2">
+        <label class="control-label" l10n-text="common.choosePublisherModal.lin"></label>
+        <sc-text ng-model="searchParams.publisherLin">
+      </div>
       <div class="form-group col-md-3 col-sm-4">
         <label class="control-label" l10n-text="common.choosePublisherModal.name"></label>
         <sc-text ng-model="searchParams.publisherName">
@@ -15,6 +19,10 @@
       <div class="form-group col-md-3 col-sm-4">
         <label class="control-label" l10n-text="common.choosePublisherModal.publisherType"></label>
         <input type="hidden" ui-select2="{ data: publisherTypes, allowClear: true, placeholder: ' ' }" ng-model="searchParams.publisherType" class="form-control input-sm">
+      </div>
+      <div class="form-group col-md-1 col-sm-2">
+        <label class="control-label" l10n-text="common.choosePublisherModal.code"></label>
+        <sc-text ng-model="searchParams.publisherCode">
       </div>
       <div class="form-group col-sm-2 labeless">
         <sc-button class="btn btn-primary btn-sm" btn-click="search()" text="common.choosePublisherModal.search" icon="glyphicon-search"></sc-button>
@@ -24,6 +32,8 @@
     <sc-datatable items="publishers" filterable="true" pageable="true" sortable="false" dynamic-columns="false">
       <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
         <sc-button name="selectBtn" class="btn btn-xs btn-primary" btn-click="selectPublisher(item)" l10n-text="common.choosePublisherModal.select"></sc-button>
+      </sc-column>
+      <sc-column data="lin" sortable="true" title="common.choosePublisherModal.lin">
       </sc-column>
       <sc-column data="name" sortable="true" title="common.choosePublisherModal.name">
       </sc-column>

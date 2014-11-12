@@ -16,12 +16,20 @@
 
       <h5 class="form-header form-header-first" l10n-text="persons.newPerson.personDataForm"></h5>
       <gva-person-data name="personDataForm" ng-model="newPerson.personData" sc-form-params="{ isNew: true }"></gva-person-data>
+      
+      <h5 class="form-header" style="margin-top:10px;" ng-init="documentIdData = false">
+        <a l10n-text="persons.newPerson.documentIdForm" ng-click="documentIdData = !documentIdData" style="cursor:pointer;"></a>
+      </h5>
+      <div ng-if="documentIdData || newPerson.personDocumentId">
+        <gva-person-document-id name="personDocumentIdForm" ng-model="newPerson.personDocumentId" sc-form-params="{ hideCaseType: true }"></gva-person-document-id>
+      </div>
 
-      <h5 class="form-header" l10n-text="persons.newPerson.documentIdForm"></h5>
-      <gva-person-document-id name="personDocumentIdForm" ng-model="newPerson.personDocumentId" sc-form-params="{ hideCaseType: true }"></gva-person-document-id>
-
-      <h5 class="form-header" l10n-text="persons.newPerson.addressForm"></h5>
-      <gva-person-address name="personAddressForm" ng-model="newPerson.personAddress"></gva-person-address>
+      <h5 class="form-header" style="margin-top:10px;" ng-init="addressData = false">
+        <a l10n-text="persons.newPerson.addressForm" ng-click="addressData = !addressData" style="cursor:pointer;"></a>
+      </h5>
+      <div ng-if="addressData || newPerson.personAddress">
+        <gva-person-address name="personAddressForm" ng-model="newPerson.personAddress"></gva-person-address>
+      </div>
 
     </div>
   </div>

@@ -6,6 +6,8 @@ using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
+using Common.Linq;
+using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
@@ -95,10 +97,47 @@ namespace Gva.Api.Controllers.Persons
             }
         }
 
+        [Route("byValidity")]
+        public IHttpActionResult GetRatingsByValidity(int lotId, int? caseTypeId = null, bool? valid = true)
+        {
+            var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
+            List<GvaViewPersonRatingDO> ratingDOs = new List<GvaViewPersonRatingDO>();
+            foreach (GvaViewPersonRating rating in ratings)
+            { 
+                var editions = rating.Editions;
+                if (valid == true)
+                { 
+                    editions = editions.Where(e => DateTime.Compare(e.DocDateValidTo, DateTime.Now) >= 0).ToList();
+                }
+                if (editions.Count > 0)
+                {
+                    ratingDOs.Add(new GvaViewPersonRatingDO(rating, rating.Editions.OrderBy(e => e.Index).ToList()));
+                }
+            }
+           
+            return Ok(ratingDOs);
+        }
+
+        [Route("getRatingsWithAllEditions")]
+        public IHttpActionResult GetRatingsWithAllEditions(int lotId, int? caseTypeId = null)
+        {
+            var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
+            List<GvaViewPersonRatingEditionDO> ratingEditionDOs = new List<GvaViewPersonRatingEditionDO>();
+            foreach (var rating in ratings)
+            { 
+                rating.Editions.ForEach(e =>
+                {
+                    ratingEditionDOs.Add(new GvaViewPersonRatingEditionDO(rating, e));
+                });
+            }
+
+            return Ok(ratingEditionDOs);
+        }
+
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
         {
             var ratings = this.personRepository.GetRatings(lotId, caseTypeId);
-            List<GvaViewPersonRatingDO> ratingDOs= ratings.Select(rating =>
+            List<GvaViewPersonRatingDO> ratingDOs = ratings.Select(rating =>
                 new GvaViewPersonRatingDO(rating, rating.Editions.OrderBy(e => e.Index).ToList()))
                 .ToList();
 
@@ -111,6 +150,58 @@ namespace Gva.Api.Controllers.Persons
             var lastRatingEditionIndex = this.personRepository.GetLastRatingEditionIndex(lotId, ratingPartIndex);
 
             return Ok(new { LastIndex = lastRatingEditionIndex });
+        }
+
+        [HttpPost]
+        [Route("isValid")]
+        public IHttpActionResult IsValidRating(int lotId, PersonRatingDO rating, int? ratingPartIndex = null)
+        {
+            var ratings = this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
+                .Where(r => r.LotId == lotId)
+                .ToList();
+
+            if (!string.IsNullOrEmpty(rating.Sector))
+            {
+                ratings = ratings.Where(r => string.Equals(r.Sector, rating.Sector)).ToList();
+            }
+            if (rating.RatingClass != null)
+            {
+                ratings = ratings.Where(r => r.RatingClassId == rating.RatingClass.NomValueId).ToList();
+            }
+
+            if (rating.RatingType != null)
+            {
+                ratings = ratings.Where(r => r.RatingTypeId == rating.RatingType.NomValueId).ToList();
+            }
+
+            if (rating.Authorization != null)
+            {
+                ratings = ratings.Where(r => r.AuthorizationId == rating.Authorization.NomValueId).ToList();
+            }
+
+            if (rating.AircraftTypeGroup != null)
+            {
+                ratings = ratings.Where(r => r.AircraftTypeGroupId == rating.AircraftTypeGroup.NomValueId).ToList();
+            }
+
+            if (rating.AircraftTypeCategory != null)
+            {
+                ratings = ratings.Where(r => r.AircraftTypeCategoryId == rating.AircraftTypeCategory.NomValueId).ToList();
+            }
+
+            if (rating.Caa != null)
+            {
+                ratings = ratings.Where(r => r.CaaId == rating.Caa.NomValueId).ToList();
+            }
+
+            if (ratingPartIndex.HasValue)
+            {
+                ratings = ratings.Where(r => r.PartIndex != ratingPartIndex).ToList();
+            }
+
+            return Ok(new {
+                isValid = !ratings.Any()
+            });
         }
     }
 }

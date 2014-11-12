@@ -26,7 +26,7 @@ namespace Gva.Api.ModelsDO
 
         public DateTime? ToDate { get; set; }
 
-        public string BookPageNumber { get; set; }
+        public int? BookPageNumber { get; set; }
 
         public int? PageCount { get; set; }
 

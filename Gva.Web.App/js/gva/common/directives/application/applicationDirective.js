@@ -4,7 +4,15 @@
 (function (angular, Select2) {
   'use strict';
 
-  function ApplicationsDirective(scModal, $state, $stateParams, $compile, $parse, ApplicationNoms) {
+  function ApplicationsDirective(
+    scModal,
+    $state,
+    $stateParams,
+    $compile,
+    $parse,
+    $filter,
+    ApplicationNoms)
+  {
     function preLink(scope, element, attrs) {
       var lotId = $parse(attrs.lotId)(scope) || $stateParams.id;
 
@@ -14,13 +22,32 @@
           return app.applicationId;
         },
         formatResult: function (result, container, query, escapeMarkup) {
-          var markup = [];
-          Select2.util.markMatch(result.applicationName, query.term, markup, escapeMarkup);
+          var markup = [],
+            application = result.applicationCode + ' ';
+
+          if (result.oldDocumentNumber) {
+            application += result.oldDocumentNumber + '/' +
+              $filter('date')(result.documentDate, 'mediumDate');
+          } else {
+            application += result.documentNumber;
+          }
+
+          Select2.util.markMatch(application, query.term, markup, escapeMarkup);
           return markup.join('');
         },
         formatSelection: function (app, container) {
-          var text = Select2.util.escapeMarkup(app.applicationName),
-              elem = '<a ng-click="viewApplication(' + app.partIndex + ')">' + text + '</a>';
+          var application = app.applicationCode + ' ';
+          if (app.oldDocumentNumber) {
+            application += app.oldDocumentNumber + '/' +
+              $filter('date')(app.documentDate, 'mediumDate');
+          } else {
+            application += app.documentNumber;
+          }
+
+          var text = Select2.util.escapeMarkup(application),
+              elem = '<a ng-click="viewApplication(' + 
+              app.partIndex  + ',' + app.applicationId + 
+              ')">' + text + '</a>';
 
           container.append($compile(elem)(scope));
         },
@@ -38,25 +65,9 @@
     function postLink(scope, iElement, iAttrs) {
       var setPart = $parse(iAttrs.setPart)(scope) || iAttrs.setPart,
           lotId = $parse(iAttrs.lotId)(scope) || $stateParams.id,
-          path;
+          path = setPart + 'DocumentApplications';
 
-      if (setPart === 'person') {
-        path = 'personDocumentApplications';
-      }
-      else if (setPart === 'organization') {
-        path = 'organizationDocumentApplications';
-      }
-      else if (setPart === 'aircraft') {
-        path = 'aircraftDocumentApplications';
-      }
-      else if (setPart === 'airport') {
-        path = 'airportDocumentApplications';
-      }
-      else if (setPart === 'equipment') {
-        path = 'equipmentDocumentApplications';
-      }
-
-      scope.viewApplication = function (partIndex) {
+      scope.viewApplication = function (partIndex, applicationId) {
         var modalInstance = scModal.open('viewApplication', {
           lotId: lotId,
           path: path,
@@ -65,25 +76,13 @@
         });
 
         modalInstance.result.then(function () {
-          var stateName;
-
-          if (setPart === 'person') {
-            stateName = 'root.persons.view.documentApplications.edit';
-          }
-          else if (setPart === 'organization') {
-            stateName = 'root.organizations.view.documentApplications.edit';
-          }
-          else if (setPart === 'aircraft') {
-            stateName = 'root.aircrafts.view.applications.edit';
-          }
-          else if (setPart === 'airport') {
-            stateName = 'root.airports.view.applications.edit';
-          }
-          else if (setPart === 'equipment') {
-            stateName = 'root.equipments.view.applications.edit';
-          }
-
-          $state.go(stateName, { id: lotId, ind: partIndex });
+          var stateName = 'root.applications.edit',
+            params = { 
+              id: applicationId,
+              setPartPath: setPart + 'DocumentApplications',
+              set: setPart
+            };
+          $state.go(stateName, params);
         });
 
         return modalInstance.opened;
@@ -105,6 +104,7 @@
     '$stateParams',
     '$compile',
     '$parse',
+    '$filter',
     'ApplicationNoms'
   ];
 

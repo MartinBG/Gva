@@ -1,9 +1,9 @@
 ﻿<div>
   <sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.licences.new' }" text="persons.licencesSearch.newLicence" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
   <sc-datatable items="licences" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="dateValidFrom"
-    row-class="{'invalidLicence' : isInvalidLicence(item), 'expiredLicence' : (!isInvalidLicence(item) && isExpiredLicence(item)), 'expiringLicence' : isExpiringLicence(item)}">
+    row-class="{'invalidDocument' : isInvalidLicence(item), 'expiredDocument' : (!isInvalidLicence(item) && isExpiredLicence(item)), 'expiringDocument' : isExpiringLicence(item)}">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.licences.view.editions.edit', params: {ind: item.partIndex, index: item.editionPartIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.licences.view.editions.edit.ratings', params: {ind: item.partIndex, index: item.editionPartIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <a ng-click="print(item)">
@@ -27,9 +27,9 @@
     </sc-column>
     <sc-column data="inspector" title="persons.licencesSearch.inspector">
     </sc-column>
-    <sc-column data="application.applicationName" title="persons.licencesSearch.application">
+    <sc-column data="application.applicationCode" title="persons.licencesSearch.application" class="wrap">
     </sc-column>
-    <sc-column data="notes" title="persons.licencesSearch.notes" visible="false">
+    <sc-column data="notes" title="persons.licencesSearch.notes" visible="false" class="wrap">
     </sc-column>
     <sc-column data="foreignLicence" title="persons.licencesSearch.foreignLicence" visible="false">
     </sc-column>
@@ -41,6 +41,11 @@
     <sc-column data="pageCount" title="persons.licencesSearch.pageCount" visible="false">
     </sc-column>
     <sc-column data="limitations" title="persons.licencesSearch.limitations" visible="false">
+    </sc-column>
+    <sc-column sortable="false" title="persons.licencesSearch.file" has-content="true">
+      <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
+        <span class="glyphicon glyphicon-file"></span>
+      </a>
     </sc-column>
   </sc-datatable>
 </div>

@@ -66,15 +66,36 @@ namespace Gva.Api.Controllers
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            var applications = this.applicationRepository.GetNomApplications(lotId).Select(a => new ApplicationNomDO(a));
+            var applications = this.applicationRepository.GetNomApplications(lotId)
+                .Select(a => new ApplicationNomDO(a))
+                .OrderByDescending(a => a.DocumentDate);
 
             if (!string.IsNullOrWhiteSpace(term))
             {
                 term = term.ToLower();
-                applications = applications.Where(n => n.ApplicationName.ToLower().Contains(term)).ToArray();
+                List<ApplicationNomDO> matchingApp = new List<ApplicationNomDO>();
+                foreach(var app in applications)
+                {
+                    string applicationIdentificator = app.ApplicationCode + ' ';
+                    if (!string.IsNullOrEmpty(app.OldDocumentNumber))
+                    {
+                        applicationIdentificator += string.Format("{0}/{1}", app.OldDocumentNumber, app.DocumentDate);
+                    }
+                    else
+                    {
+                        applicationIdentificator += app.DocumentNumber;
+                    }
+                    if (applicationIdentificator.Contains(term))
+                    { 
+                        matchingApp.Add(app);
+                    }
+                }
+                return Ok(matchingApp);
             }
-
-            return Ok(applications);
+            else
+            {
+                return Ok(applications);
+            }
         }
 
         [Route("organizationsAudits")]
@@ -124,13 +145,14 @@ namespace Gva.Api.Controllers
         [Route("persons/{id:int}")]
         [Route("inspectors/{id:int}")]
         [Route("awExaminers/{id:int}")]
+        [Route("staffExaminers/{id:int}")]
         public IHttpActionResult GetPerson(int id)
         {
             var person = this.personRepository.GetPerson(id);
             return Ok(new
             {
                 nomValueId = person.LotId,
-                name = person.Names
+                name = string.Format("{0} {1}", person.Lin, person.Names)
             });
         }
 
@@ -138,12 +160,17 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetPersons(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.personRepository.GetPersons(names: term, exact: false, offset: offset, limit: limit)
+                this.personRepository.GetPersons(offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
-                    name = e.Names
+                    name = string.Format("{0} {1}", e.Lin, e.Names)
                 });
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                returnValue = returnValue.Where(p => p.name.ToLower().Contains(term.ToLower()));
+            }
 
             return Ok(returnValue);
         }
@@ -199,6 +226,21 @@ namespace Gva.Api.Controllers
         {
             var returnValue =
                 this.personRepository.GetAwExaminers(names: term, offset: offset, limit: limit)
+                .Select(e => new
+                {
+                    nomValueId = e.LotId,
+                    name = e.Names
+                });
+
+            return Ok(returnValue);
+        }
+
+
+        [Route("staffExaminers")]
+        public IHttpActionResult GetStaffExaminers(string term = null, int offset = 0, int? limit = null)
+        {
+            var returnValue =
+                this.personRepository.GetStaffExaminers(names: term, offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,

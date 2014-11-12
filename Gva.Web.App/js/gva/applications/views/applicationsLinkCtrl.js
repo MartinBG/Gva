@@ -12,7 +12,7 @@
     scModal
     ) {
     $scope.appModel = appModel;
-    $scope.filter = $stateParams.filter;
+    $scope.set = $stateParams.set;
     $scope.setPartAlias = '';
 
     $scope.cancel = function () {
@@ -24,7 +24,7 @@
     };
 
     $scope.selectDoc = function () {
-      var modalInstance = scModal.open('chooseDoc', { filter: $scope.filter });
+      var modalInstance = scModal.open('chooseDoc', { set: $scope.set });
 
       modalInstance.result.then(function (doc) {
         $scope.appModel.doc = doc;
@@ -41,23 +41,7 @@
             lotId: $scope.appModel.lot.id,
             docId: $scope.appModel.doc.docId
           };
-
-          //todo make it better
-          if ($scope.filter === 'Person') {
-            $scope.setPartAlias = 'personApplication';
-          }
-          else if ($scope.filter === 'Organization') {
-            $scope.setPartAlias = 'organizationApplication';
-          }
-          else if ($scope.filter === 'Aircraft') {
-            $scope.setPartAlias = 'aircraftApplication';
-          }
-          else if ($scope.filter === 'Airport') {
-            $scope.setPartAlias = 'airportApplication';
-          }
-          else if ($scope.filter === 'Equipment') {
-            $scope.setPartAlias = 'equipmentApplication';
-          }
+          $scope.setPartAlias = $scope.set + 'Application';
 
           return Applications.link(newApplication).$promise.then(function (app) {
             if ($scope.appModel.doc.isElectronic) {

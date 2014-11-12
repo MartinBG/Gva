@@ -16,7 +16,7 @@
       $scope.$watch('model.part.licenceType', function () {
         if ($scope.model.part.licenceType) {
           PersonLicences.lastLicenceNumber({
-            id: scFormParams.lotId,
+            id: $scope.lotId,
             licenceTypeCode: $scope.model.part.licenceType.code
           }).$promise
             .then(function (lastLicenceNumber) {
@@ -33,6 +33,23 @@
         }
       });
     }
+
+     $scope.isUniqueLicenceNumber = function () {
+      if($scope.model.part.licenceNumber) {
+        return PersonLicences
+          .isUniqueLicenceNumber({
+            id: $scope.lotId,
+            licenceNumber: $scope.model.part.licenceNumber,
+            licenceTypeCode: $scope.model.part.licenceType.code
+          })
+        .$promise
+        .then(function (result) {
+          return result.isUnique;
+        });
+      } else {
+        return true;
+      }
+    };
   }
 
   PersonLicenceCtrl.$inject = [

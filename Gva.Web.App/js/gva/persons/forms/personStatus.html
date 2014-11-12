@@ -1,15 +1,15 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.personStatusType" alias="'personStatusTypes'" ng-required="true" l10n-text="persons.personStatusDirective.personStatusType" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.personStatusType" alias="'personStatusTypes'" ng-required="true" l10n-text="persons.personStatusDirective.personStatusType" class="col-sm-6 col-md-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.documentNumber" l10n-text="persons.personStatusDirective.documentNumber" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personStatusDirective.documentNumber" sc-validate="{ unique: isUniqueDocNumber }" validations="{unique: 'errorTexts.notUniqueDocNumber'}" class="col-sm-6 col-md-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="date" ng-model="model.documentDateValidFrom" ng-required="true" l10n-text="persons.personStatusDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="date" ng-model="model.documentDateValidTo" l10n-text="persons.personStatusDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.personStatusDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDateValidTo" l10n-text="persons.personStatusDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="textarea" rows="3" ng-model="model.notes" l10n-text="persons.personStatusDirective.notes" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="textarea" rows="3" ng-model="model.part.notes" l10n-text="persons.personStatusDirective.notes" class="col-sm-6 col-md-4"></sc-field>
   </div>
 </ng-form>

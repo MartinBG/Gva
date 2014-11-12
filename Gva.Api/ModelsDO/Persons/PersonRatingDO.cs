@@ -5,7 +5,7 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonRatingDO
     {
-        public int NextIndex { get; set; }
+        public int? NextIndex { get; set; }
 
         public NomValue PersonRatingLevel { get; set; }
 

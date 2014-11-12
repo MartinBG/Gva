@@ -1,6 +1,7 @@
 ﻿<h5 class="table-header" l10n-text="persons.editRatingEdition.editions"></h5>
 <div>
-  <sc-datatable items="ratingEditions" filterable="false" pageable="false" sortable="false" dynamic-columns="false">
+  <sc-datatable items="ratingEditions" filterable="false" pageable="false" sortable="true" dynamic-columns="false"
+    default-sort="part.documentDateValidFrom">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editEditionBtn" icon="fa-circle-o" icon-disabled="fa-check-circle-o"
         btn-sref="{ state: 'root.persons.view.ratings.edit.editions.edit', params: { index: item.partIndex} }"
@@ -9,28 +10,28 @@
     <sc-column title="persons.editRatingEdition.ratingTypeOrRatingLevel" has-content="true">
       {{rating.part.personRatingLevel.code || rating.part.ratingType.code || rating.part.aircraftTypeGroup.code}}
     </sc-column>
-    <sc-column title="persons.editRatingEdition.documentDateValidFrom" has-content="true">
+    <sc-column data="part.documentDateValidFrom" title="persons.editRatingEdition.documentDateValidFrom" has-content="true">
       {{item.part.documentDateValidFrom | date:'mediumDate'}}
     </sc-column>
-    <sc-column title="persons.editRatingEdition.documentDateValidTo" has-content="true">
+    <sc-column data="part.documentDateValidTo" title="persons.editRatingEdition.documentDateValidTo" has-content="true">
       {{item.part.documentDateValidTo | date:'mediumDate'}}
     </sc-column>
     <sc-column title="persons.editRatingEdition.firstEditionValidFrom" has-content="true">
       {{(ratingEditions | first).part.documentDateValidFrom | date:'mediumDate'}}
     </sc-column>
-    <sc-column title="persons.editRatingEdition.classOrCategory" has-content="true">
+    <sc-column title="persons.editRatingEdition.classOrCategory" has-content="true" class="wrap">
       {{(rating.part.ratingClass.code || '') + (item.part.ratingSubClasses.length > 0 ? ' (' + (item.part.ratingSubClasses | pluck:'code' | join:', ') + ')' : '')}}
     </sc-column>
-    <sc-column title="persons.editRatingEdition.authorizationAndLimitations" has-content="true">
+    <sc-column title="persons.editRatingEdition.authorizationAndLimitations" has-content="true" class="wrap">
       {{(rating.part.authorization.code || '') + ' ' + (item.part.limitations | pluck:'code' | join:', ')}}
     </sc-column>
-    <sc-column title="persons.editRatingEdition.notes" has-content="true">
+    <sc-column data="part.notes" title="persons.editRatingEdition.notes" has-content="true" class="wrap">
       {{item.part.notes}}
     </sc-column>
-    <sc-column title="persons.editRatingEdition.notesAlt" has-content="true">
+    <sc-column data="part.notesAlt" title="persons.editRatingEdition.notesAlt" has-content="true" class="wrap">
       {{item.part.notesAlt}}
     </sc-column>
-    <sc-column title="persons.editRatingEdition.inspector" has-content="true">
+    <sc-column data="part.inspector.name" title="persons.editRatingEdition.inspector" has-content="true" class="wrap">
       {{item.part.inspector.name}}
     </sc-column>
   </sc-datatable>
@@ -44,7 +45,7 @@
       <div class="pull-right">
         <sc-button name="editBtn" btn-click="edit()" text="persons.editRatingEdition.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode" ng-disabled="currentRatingEdition.partIndex !== lastEditionIndex">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteCurrentEdition()" text="persons.editRatingEdition.deleteEdition" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
+        <sc-button name="deleteBtn" btn-click="deleteCurrentEdition()" text="persons.editRatingEdition.deleteEdition" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode" ng-disabled="currentRatingEdition.partIndex !== lastEditionIndex">
         </sc-button>
         <sc-button name="saveBtn" btn-click="save()" text="persons.editRatingEdition.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>

@@ -15,6 +15,8 @@ namespace Gva.Api.ModelsDO.Applications
 
         public int? AppPartIndex { get; set; }
 
+        public int? LotId { get; set; }
+
         public DateTime? AppPartDocumentDate { get; set; }
 
         public string AppPartDocumentNumber { get; set; }

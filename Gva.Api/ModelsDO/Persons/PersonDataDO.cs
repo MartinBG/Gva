@@ -39,7 +39,6 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "LinType is required.")]
         public NomValue LinType { get; set; }
 
-        [Required(ErrorMessage = "Lin is required.")]
         public int? Lin { get; set; }
 
         [Required(ErrorMessage = "DateOfBirth is required.")]
@@ -66,7 +65,6 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string Phone5 { get; set; }
 
-        [MinimumLength(1, ErrorMessage = "CaseTypes are required.")]
         public List<NomValue> CaseTypes { get; set; }
     }
 }

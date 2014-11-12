@@ -9,6 +9,22 @@
     organizationDocumentApplications
   ) {
     $scope.organizationDocumentApplications = organizationDocumentApplications;
+
+    $scope.isDeclinedApp = function(item) {
+      if (item.part.stage) {
+        return item.part.stage.alias === 'declined';
+      }
+
+      return false;
+    };
+
+    $scope.isDoneApp = function(item) {
+      if (item.part.stage) {
+        return item.part.stage.alias === 'done';
+      }
+
+      return false;
+    };
   }
 
   OrganizationsDocApplicationsSearchCtrl.$inject = [
@@ -23,7 +39,7 @@
       '$stateParams',
       'OrganizationDocumentApplications',
       function ($stateParams, OrganizationDocumentApplications) {
-        return OrganizationDocumentApplications.query($stateParams).$promise;
+        return OrganizationDocumentApplications.query({id: $stateParams.id}).$promise;
       }
     ]
   };

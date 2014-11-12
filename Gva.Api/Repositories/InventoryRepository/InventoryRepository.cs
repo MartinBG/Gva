@@ -51,7 +51,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                     CreationDate = i.CreationDate,
                     EditedBy = i.EditedBy,
                     EditedDate = i.EditedDate,
-                    BookPageNumber = f.PageIndex,
+                    BookPageNumber = f.PageIndexInt,
                     PageCount = f.PageNumber,
                     DocFile = df,
                     GvaFile = gf
@@ -68,13 +68,7 @@ namespace Gva.Api.Repositories.InventoryRepository
 
             return query.Where(predicate)
                 .ToList()
-                .OrderBy(f =>
-                {
-                    var pageIndexNumPart = Regex.Match(f.BookPageNumber ?? "", @"^\d+");
-                    return pageIndexNumPart.Success ?
-                        string.Format("{0:D5}{1}", int.Parse(pageIndexNumPart.Value), f.BookPageNumber.Substring(pageIndexNumPart.Value.Length)) :
-                        f.BookPageNumber;
-                })
+                .OrderBy(f => f.BookPageNumber)
                 .Select(i => new InventoryItemDO
                 {
                     SetPartAlias = i.SetPartAlias,

@@ -27,10 +27,6 @@
       }
     };
 
-    $scope.requireCaseTypes = function (caseTypes) {
-      return caseTypes.length > 0;
-    };
-
     $scope.uinValid = function () {
       if (!$scope.model.uin) {
         return true;

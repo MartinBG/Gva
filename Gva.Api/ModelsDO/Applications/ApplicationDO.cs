@@ -16,7 +16,7 @@ namespace Gva.Api.ModelsDO.Applications
             
         }
 
-        public ApplicationDO(GvaApplication gvaApp, string lotSetAlias, int lotSetId)
+        public ApplicationDO(GvaApplication gvaApp, string lotSetAlias, int lotSetId, ApplicationNomDO nom)
             : this()
         {
             if (gvaApp != null)
@@ -24,9 +24,11 @@ namespace Gva.Api.ModelsDO.Applications
                 this.ApplicationId = gvaApp.GvaApplicationId;
                 this.DocId = gvaApp.DocId;
                 this.LotId = gvaApp.LotId;
+                this.PartIndex = gvaApp.GvaAppLotPart.Index;
                 this.GvaAppLotPartId = gvaApp.GvaAppLotPartId;
                 this.LotSetAlias = lotSetAlias;
                 this.LotSetId = lotSetId;
+                this.OldDocumentNumber = nom.OldDocumentNumber;
             }
         }
 
@@ -36,11 +38,15 @@ namespace Gva.Api.ModelsDO.Applications
 
         public int LotId { get; set; }
 
+        public int PartIndex { get; set; }
+
         public int? GvaAppLotPartId { get; set; }
 
         public string LotSetAlias { get; set; }
 
         public int LotSetId { get; set; }
+
+        public string OldDocumentNumber { get; set; }
 
         public PersonViewDO Person { get; set; }
 

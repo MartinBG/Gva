@@ -19,12 +19,12 @@
   </sc-column>
   <sc-column data="part.incomingDocDate" title="aircrafts.regFMSearch.incomingDocDate" type="date">
   </sc-column>
-  <sc-column data="part.removal.inspector.name" title="aircrafts.regFMSearch.inspector" >
+  <sc-column data="part.removal.inspector.name" title="aircrafts.regFMSearch.inspector" class="wrap">
   </sc-column>
-  <sc-column title="aircrafts.regFMSearch.owner" has-content="true">
+  <sc-column title="aircrafts.regFMSearch.owner" has-content="true" class="wrap">
     {{item.part.ownerOrganization.name || item.part.ownerPerson.name}}
   </sc-column>
-  <sc-column title="aircrafts.regFMSearch.operator" has-content="true">
+  <sc-column title="aircrafts.regFMSearch.operator" has-content="true" class="wrap">
     {{item.part.operOrganization.name || item.part.operPerson.name}}
   </sc-column>
 </sc-datatable>

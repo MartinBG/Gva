@@ -59,11 +59,10 @@
   ApplicationsEditAddPartCtrl.$resolve = {
     applicationPart: [
       '$stateParams',
-      'application',
       'AplicationsCase',
-      function ($stateParams, application, AplicationsCase) {
+      function ($stateParams, AplicationsCase) {
         return AplicationsCase.newPart({
-          lotId: application.lotId,
+          lotId: $stateParams.lotId,
           setPartAlias: $stateParams.setPartAlias,
           docId: $stateParams.docId,
           docFileId: $stateParams.docFileId,
@@ -83,11 +82,10 @@
     ],
     person: [
       '$stateParams',
-      'application',
       'Persons',
-      function ($stateParams, application, Persons) {
+      function ($stateParams, Persons) {
         if ($stateParams.setPartAlias === 'personMedical') {
-          return Persons.get({ id: application.lotId }).$promise;
+          return Persons.get({ id: $stateParams.lotId }).$promise;
         } else {
           return null;
         }

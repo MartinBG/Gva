@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.part.documentType" alias="'documentTypes'" params="{ isIdDocument: true }" load="false" ng-required="true" l10n-text="persons.personDocumentIdDirective.personDocumentIdTypeId" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="text" ng-model="model.part.documentNumber" ng-required="true" l10n-text="persons.personDocumentIdDirective.documentNumber" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" ng-required="true" l10n-text="persons.personDocumentIdDirective.documentNumber" class="col-sm-3 col-md-2" sc-validate="{ unique: isUniqueDocNumber }" validations="{unique: 'errorTexts.notUniqueDocNumber'}"></sc-field>
     <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="persons.personDocumentIdDirective.valid" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">

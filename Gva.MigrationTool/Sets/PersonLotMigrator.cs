@@ -112,7 +112,9 @@ namespace Gva.MigrationTool.Sets
                                         {
                                             ApplicationId = 0, //will be set later
                                             PartIndex = pv.Part.Index,
-                                            ApplicationName = docApplication.Get<string>("part.applicationType.name")
+                                            ApplicationName = docApplication.Get<string>("part.applicationType.name"),
+                                            ApplicationCode = docApplication.Get<string>("part.applicationType.code"),
+                                            OldDocumentNumber = docApplication.Get<string>("part.oldDocumentNumber")
                                         }));
                         }
 
@@ -341,7 +343,7 @@ namespace Gva.MigrationTool.Sets
 
                         var personRatingEditions = this.getPersonRatingEditions(personId, getPersonByApexId, noms,  nomApplications);
                         var personRatings = this.getPersonRatings(personId, noms);
-                        Dictionary<int, int> ratingOldIdToPartIndex = new Dictionary<int, int>();
+                        Dictionary<int, JObject> ratingEditionOldIdToPartIndex = new Dictionary<int, JObject>();
                         foreach (var personRating in personRatings)
                         {
                             var ratingPartVersion = addPartWithFiles("ratings/*", personRating);
@@ -356,12 +358,16 @@ namespace Gva.MigrationTool.Sets
                                 nextIndex++;
 
                                 var editionPartVersion = addPartWithFiles("ratingEditions/*", edition);
-                            }
 
-                            ratingOldIdToPartIndex.Add(personRating.Get<int>("part.__oldId"), ratingPartVersion.Part.Index);
+                                ratingEditionOldIdToPartIndex.Add(edition.Get<int>("part.__oldId"),
+                                    new JObject() {
+                                        new JProperty("ind", ratingPartVersion.Part.Index),
+                                        new JProperty("index", editionPartVersion.Part.Index)
+                                    });
+                            }
                         }
 
-                        var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, langCertOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
+                        var personLicenceEditions = this.getPersonLicenceEditions(personId, getPersonByApexId, nomApplications, noms, ratingEditionOldIdToPartIndex, medicalOldIdToPartIndex, trainingOldIdToPartIndex, langCertOldIdToPartIndex, examOldIdToPartIndex, checkOldIdToPartIndex);
                         var personLicences = this.getPersonLicences(personId, getPersonByApexId, noms, employmentsByOldId);
                         Dictionary<int, int> licenceOldIdToPartIndex = new Dictionary<int, int>();
                         foreach (var personLicence in personLicences)
@@ -389,7 +395,12 @@ namespace Gva.MigrationTool.Sets
                             foreach (var edition in personLicenceEditions[personLicence.Get<int>("part.__oldId")])
                             {
                                 var editionPart = edition["part"] as JObject;
-                                editionPart.Property("includedLicences").Value = new JArray(edition.GetItems<int>("includedLicences").Select(l => licenceOldIdToPartIndex[l]).ToArray());
+                                editionPart.Property("includedLicences").Value = new JArray(edition.GetItems<int>("includedLicences").Select((l, i) => 
+                                    new 
+                                    {
+                                        partIndex = licenceOldIdToPartIndex[l],
+                                        orderNum = i
+                                    }).ToArray());
                             }
                         }
 
@@ -512,8 +523,8 @@ namespace Gva.MigrationTool.Sets
                         __BOOK_PAGE_NO = r.Field<int?>("BOOK_PAGE_NO"),
                         __PAGES_COUNT = r.Field<int?>("PAGES_COUNT"),
                         __REQUEST_DATE = r.Field<DateTime?>("REQUEST_DATE"),
-
                         documentNumber = r.Field<string>("DOC_NO"),
+                        oldDocumentNumber = r.Field<string>("DOC_NO"),
                         documentDate = r.Field<DateTime?>("DOC_DATE"),
                         notes = r.Field<string>("NOTES"),
                         applicationType = noms["applicationTypes"].ByOldId(r.Field<decimal?>("REQUEST_TYPE_ID").ToString()),
@@ -568,7 +579,7 @@ namespace Gva.MigrationTool.Sets
                                     "__oldId",
                                     "__migrTable",
                                     "__REQUEST_DATE",
-
+                                    "oldDocumentNumber",
                                     "documentNumber",
                                     "documentDate",
                                     "notes",
@@ -652,7 +663,7 @@ namespace Gva.MigrationTool.Sets
 
                         __LICENCE_STAFF_TYPE_CODE = r.Field<string>("LICENCE_STAFF_TYPE_CODE"),
 
-                        documentNumber = r.Field<string>("DOC_NO"),
+                        documentNumber = !string.IsNullOrWhiteSpace(r.Field<string>("DOC_NO")) ? r.Field<string>("DOC_NO") : null,
                         documentPersonNumber = r.Field<int?>("PERSON_NUM"),
                         documentDateValidFrom = r.Field<DateTime?>("VALID_FROM"),
                         documentDateValidTo = r.Field<DateTime?>("VALID_TO"),
@@ -1305,7 +1316,7 @@ namespace Gva.MigrationTool.Sets
             Func<int?, JObject> getPersonByApexId,
             IDictionary<int, JObject> nomApplications,
             Dictionary<string, Dictionary<string, NomValue>> noms,
-            Dictionary<int, int> ratings,
+            Dictionary<int, JObject> ratingEditions,
             Dictionary<int, int> medicals,
             Dictionary<int, int> trainings,
             Dictionary<int, int> langCerts,
@@ -1314,7 +1325,9 @@ namespace Gva.MigrationTool.Sets
         {
             var includedRatings = oracleConn.CreateStoreCommand(
                 @"SELECT LL.ID LICENCE_LOG_ID,
-                        R.ID RATING_ID
+                        R.ID RATING_ID,
+                        RD.ID EDITION_ID,
+                        LRI.SORT_ORDER
                     FROM CAA_DOC.LICENCE L
                     JOIN CAA_DOC.LICENCE_LOG LL ON LL.LICENCE_ID = L.ID
                     LEFT OUTER JOIN CAA_DOC.LICENCE_RATING_INCL LRI ON LRI.LICENCE_LOG_ID = LL.ID
@@ -1326,10 +1339,18 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r => new
                 {
                     LICENCE_LOG_ID = r.Field<int>("LICENCE_LOG_ID"),
-                    RATING_ID = r.Field<int?>("RATING_ID")
+                    RATING_ID = r.Field<int?>("RATING_ID"),
+                    EDITION_ID = r.Field<int?>("EDITION_ID"),
+                    SORT_ORDER = r.Field<int?>("SORT_ORDER")
                 })
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.RATING_ID != null).Select(r => ratings[r.RATING_ID.Value]).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.EDITION_ID != null)
+                    .Select(r => 
+                        new { 
+                            ind = (ratingEditions[r.EDITION_ID.Value]).Get<int>("ind"),
+                            index = (ratingEditions[r.EDITION_ID.Value]).Get<int>("index"),
+                            orderNum = r.SORT_ORDER
+                        }).ToArray());
 
             var includedMedicals = oracleConn.CreateStoreCommand(
                 @"SELECT LL.ID LICENCE_LOG_ID,
@@ -1346,7 +1367,12 @@ namespace Gva.MigrationTool.Sets
                     MED_CERT_ID = r.Field<int?>("MED_CERT_ID")
                 })
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.MED_CERT_ID != null).Select(r => medicals[r.MED_CERT_ID.Value]).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.MED_CERT_ID != null).Select((r, i) =>
+                    new 
+                    {
+                        partIndex = medicals[r.MED_CERT_ID.Value],
+                        orderNum = i
+                    }).ToArray());
 
             var includedDocuments = oracleConn.CreateStoreCommand(
                 @"SELECT LL.ID LICENCE_LOG_ID,
@@ -1379,19 +1405,40 @@ namespace Gva.MigrationTool.Sets
 
             var includedTrainings = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.trainingPartIndex != null).Select(r => r.trainingPartIndex.Value).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.trainingPartIndex != null).Select((r, i) =>
+                    new 
+                    {
+                        partIndex = r.trainingPartIndex.Value,
+                        orderNum = i
+                    }).ToArray());
 
             var includedLangCerts = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.langCertPartIndex != null).Select(r => r.langCertPartIndex.Value).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.langCertPartIndex != null).Select((r, i) =>
+                    new 
+                    {
+                        partIndex = r.langCertPartIndex.Value,
+                        orderNum = i
+                    }).ToArray());
 
             var includedExams = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.examPartIndex != null).Select(r => r.examPartIndex.Value).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.examPartIndex != null).Select((r, i) =>
+                    new 
+                    {
+                        partIndex = r.examPartIndex.Value,
+                        orderNum = i
+                    }).ToArray());
 
             var includedChecks = includedDocuments
                 .GroupBy(r => r.LICENCE_LOG_ID)
-                .ToDictionary(g => g.Key, g => g.Where(r => r.checkPartIndex != null).Select(r => r.checkPartIndex.Value).ToArray());
+                .ToDictionary(g => g.Key, g => g.Where(r => r.checkPartIndex != null).Select((r, i) => 
+                    new 
+                    {
+                        partIndex = r.checkPartIndex.Value,
+                        orderNum = i
+                    }).ToArray());
+
 
             var includedLicences = oracleConn.CreateStoreCommand(
                 @"SELECT LL.ID LICENCE_LOG_ID,

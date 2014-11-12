@@ -3,9 +3,9 @@
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.organizations.view.staffManagement.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.position" title="organizations.staffManagementSearch.position">
+  <sc-column data="part.position" title="organizations.staffManagementSearch.position" class="wrap">
   </sc-column>
-  <sc-column data="part.person.name" title="organizations.staffManagementSearch.person">
+  <sc-column data="part.person.name" title="organizations.staffManagementSearch.person" class="wrap">
   </sc-column>
   <sc-column data="part.testDate" type="date" title="organizations.staffManagementSearch.testDate">
   </sc-column>
@@ -13,6 +13,6 @@
   </sc-column>
   <sc-column data="part.valid.name" title="organizations.staffManagementSearch.valid">
   </sc-column>
-  <sc-column data="case.applications[0].applicationName" title="organizations.staffManagementSearch.application">
+  <sc-column data="case.applications[0].applicationName" title="organizations.staffManagementSearch.application" class="wrap">
   </sc-column>
 </sc-datatable>

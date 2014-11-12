@@ -20,7 +20,6 @@ namespace Gva.Api.Controllers.Airports
     public class AirportDocumentOthersController : GvaCaseTypePartController<AirportDocumentOtherDO>
     {
         private ILotRepository lotRepository;
-        private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
 
@@ -35,7 +34,6 @@ namespace Gva.Api.Controllers.Airports
             : base("airportDocumentOthers", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.lotRepository = lotRepository;
-            this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
         }
@@ -51,8 +49,7 @@ namespace Gva.Api.Controllers.Airports
                     NomValueId = caseType.GvaCaseTypeId,
                     Name = caseType.Name,
                     Alias = caseType.Alias
-                },
-                BookPageNumber = this.fileRepository.GetNextBPN(lotId, caseType.GvaCaseTypeId).ToString()
+                }
             };
 
             if (appId.HasValue)

@@ -24,7 +24,7 @@ namespace Gva.Api.Models.Views.Person
 
         public DateTime DocDateValidFrom { get; set; }
 
-        public DateTime? DocDateValidTo { get; set; }
+        public DateTime DocDateValidTo { get; set; }
 
         public string Notes { get; set; }
 

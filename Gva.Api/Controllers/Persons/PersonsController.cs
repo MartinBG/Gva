@@ -9,6 +9,7 @@ using Common.Data;
 using Common.Filters;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Common;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.ApplicationStageRepository;
@@ -323,6 +324,16 @@ namespace Gva.Api.Controllers.Persons
         }
 
         [HttpGet]
+        [Route("isUniqueDocNumber")]
+        public IHttpActionResult IsUniqueDocNumber(string documentNumber, int? documentPersonNumber = null, int? partIndex = null)
+        {
+            return Ok(new
+            {
+                isUnique = this.personRepository.IsUniqueDocNumber(documentNumber, documentPersonNumber, partIndex)
+            });
+        }
+
+        [HttpGet]
         [Route("stampedDocuments")]
         public IHttpActionResult GetStampedDocuments()
         {
@@ -351,7 +362,6 @@ namespace Gva.Api.Controllers.Persons
 
                     GvaApplicationStage applicationStage = new GvaApplicationStage()
                     {
-                        
                         GvaStageId = stageId,
                         StartingDate = DateTime.Now,
                         Ordinal = lastStageOrdinal,

@@ -10,16 +10,20 @@
   ) {
     $scope.equipmentDocumentApplications = equipmentDocumentApplications;
 
+    $scope.isDeclinedApp = function(item) {
+      if (item.part.stage) {
+        return item.part.stage.alias === 'declined';
+      }
 
-    $scope.editApplication = function (application) {
-      return $state.go('root.equipments.view.applications.edit', {
-        id: $stateParams.id,
-        ind: application.partIndex
-      });
+      return false;
     };
 
-    $scope.newApplication = function () {
-      return $state.go('root.equipments.view.applications.new');
+    $scope.isDoneApp = function(item) {
+      if (item.part.stage) {
+        return item.part.stage.alias === 'done';
+      }
+
+      return false;
     };
   }
 
@@ -35,7 +39,7 @@
       '$stateParams',
       'EquipmentDocumentApplications',
       function ($stateParams, EquipmentDocumentApplications) {
-        return EquipmentDocumentApplications.query($stateParams).$promise;
+        return EquipmentDocumentApplications.query({id: $stateParams.id}).$promise;
       }
     ]
   };

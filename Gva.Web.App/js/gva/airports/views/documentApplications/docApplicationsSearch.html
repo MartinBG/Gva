@@ -1,7 +1,18 @@
-﻿<sc-button name="createBtn" btn-sref="{ state: 'root.airports.view.applications.new' }" text="airports.airportDocApplicationSearch.newApplication" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="airportDocumentApplications" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDate">
+﻿<sc-button name="createBtn" btn-sref="{ state: 'root.applications.new', params: {set: 'airport'} }" text="airports.airportDocApplicationSearch.newApplication" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable items="airportDocumentApplications" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDate"
+  row-class="{'declinedApplication' : isDeclinedApp(item), 'doneApplication' : isDoneApp(item)}">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
-    <sc-button name="editBtn" btn-sref="{ state: 'root.airports.view.applications.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="editBtn" btn-sref="{ 
+      state: 'root.applications.edit.data',
+      params: { 
+        id: item.part.applicationId,
+        set: 'airport',
+        lotId: item.part.lotId,
+        ind: item.partIndex,
+        setPartPath: 'airportDocumentApplications'
+      } 
+    }" class="btn btn-xs btn-primary" icon="glyphicon-pencil">
+    </sc-button>
   </sc-column>
   <sc-column data="part.applicationType.name" title="airports.airportDocApplicationSearch.applicationType">
   </sc-column>
@@ -9,13 +20,15 @@
   </sc-column>
   <sc-column data="part.documentDate" title="airports.airportDocApplicationSearch.documentDate" type="date">
   </sc-column>
-  <sc-column data="part.applicationPaymentType.name" title="airports.airportDocApplicationSearch.applicationPaymentType">
+  <sc-column data="part.stage.name" title="persons.personDocApplicationSearch.stageName">
   </sc-column>
-  <sc-column data="part.taxAmount" title="airports.airportDocApplicationSearch.taxAmount">
+  <sc-column data="part.applicationPaymentType.name" title="airports.airportDocApplicationSearch.applicationPaymentType" class="wrap">
   </sc-column>
-  <sc-column data="part.currency.name" title="airports.airportDocApplicationSearch.currency">
+  <sc-column data="part.taxAmount" title="airports.airportDocApplicationSearch.taxAmount" visible="false">
   </sc-column>
-  <sc-column data="part.notes" title="airports.airportDocApplicationSearch.notes">
+  <sc-column data="part.currency.name" title="airports.airportDocApplicationSearch.currency" visible="false">
+  </sc-column>
+  <sc-column data="part.notes" title="airports.airportDocApplicationSearch.notes" class="wrap" visible="false">
   </sc-column>
   <sc-column data="case.bookPageNumber" title="airports.airportDocApplicationSearch.bookPageNumber">
   </sc-column>

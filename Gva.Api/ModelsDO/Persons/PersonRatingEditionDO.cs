@@ -29,6 +29,8 @@ namespace Gva.Api.ModelsDO.Persons
 
         public NomValue Inspector { get; set; }
 
+        public NomValue Examiner { get; set; }
+
         public string Notes { get; set; }
 
         public string NotesAlt { get; set; }

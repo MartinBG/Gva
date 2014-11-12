@@ -48,6 +48,9 @@
     <Reference Include="Ghostscript.NET">
       <HintPath>..\packages\Ghostscript.NET.1.1.8\lib\net40\Ghostscript.NET.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -142,6 +145,10 @@
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
+    <Compile Include="ModelsDO\Persons\IncludedDocumentDO.cs" />
+    <Compile Include="ModelsDO\Persons\GvaViewPersonRatingEditionDO.cs" />
+    <Compile Include="ModelsDO\Persons\IncludedRatingDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonDocumentDO.cs" />
     <Compile Include="ModelsDO\Persons\ExaminerDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLangCertDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationlAmendmentDO.cs" />
@@ -227,7 +234,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationInspectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationAwExaminerDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffManagementDO.cs" />
-    <Compile Include="ModelsDO\Persons\ApplicationStageDO.cs" />
+    <Compile Include="ModelsDO\Common\ApplicationStageDO.cs" />
     <Compile Include="ModelsDO\Persons\GvaViewPersonLicenceEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\GvaViewPersonRatingDO.cs" />
     <Compile Include="ModelsDO\Persons\InspectorDataDO.cs" />
@@ -262,6 +269,7 @@
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
+    <Compile Include="Models\Views\Person\GvaViewPersonDocument.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonExaminer.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonLicence.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonRatingEdition.cs" />
@@ -304,6 +312,7 @@
     <Compile Include="Projections\Organization\OrganizationRecommendationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationApprovalProjection.cs" />
+    <Compile Include="Projections\Person\PersonDocumentProjection.cs" />
     <Compile Include="Projections\Person\PersonExaminerProjection.cs" />
     <Compile Include="Projections\Person\PersonLicenceProjection.cs" />
     <Compile Include="Projections\Person\PersonRatingEditionProjection.cs" />

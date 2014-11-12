@@ -23,6 +23,8 @@ namespace Gva.Api.Repositories.PersonRepository
 
         List<GvaViewPerson> GetAwExaminers(string names, int offset = 0, int? limit = null);
 
+        List<GvaViewPerson> GetStaffExaminers(string names, int offset = 0, int? limit = null);
+
         GvaViewPerson GetPerson(int personId);
 
         IEnumerable<ASExamVariant> GetQuestions(
@@ -40,7 +42,7 @@ namespace Gva.Api.Repositories.PersonRepository
             string names = null,
             bool exact = false);
 
-        int GetNextLin(int linTypeId);
+        int? GetNextLin(int linTypeId);
 
         bool IsUniqueUin(string uin, int? personId = null);
 
@@ -55,5 +57,9 @@ namespace Gva.Api.Repositories.PersonRepository
         IEnumerable<GvaViewPersonRating> GetRatings(int lotId, int? caseTypeId);
 
         int GetLastRatingEditionIndex(int lotId, int ratingPartIndex);
+
+        bool IsUniqueDocNumber(string documentNumber, int? documentPersonNumber, int? partIndex);
+
+        bool IsUniqueLicenceNumber(string licenceTypeCode, int? licenceNumber);
     }
 }

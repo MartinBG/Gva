@@ -11,24 +11,24 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-common-select-person ng-if="filter === 'Person'" name="personForm"
+      <gva-common-select-person ng-if="set === 'person'" name="personForm"
           ng-model="application" sc-form-params="{ newClass: 'col-sm-10' }"></gva-common-select-person>
 
-      <gva-application-select-organization ng-if="filter === 'Organization'" name="organizationForm"
+      <gva-application-select-organization ng-if="set === 'organization'" name="organizationForm"
           ng-model="application"></gva-application-select-organization>
 
-      <gva-application-select-aircraft ng-if="filter === 'Aircraft'" name="aircraftForm"
+      <gva-application-select-aircraft ng-if="set === 'aircraft'" name="aircraftForm"
           ng-model="application"></gva-application-select-aircraft>
 
-      <gva-application-select-airport ng-if="filter === 'Airport'" name="airportForm"
+      <gva-application-select-airport ng-if="set === 'airport'" name="airportForm"
           ng-model="application"></gva-application-select-airport>
 
-      <gva-application-select-equipment ng-if="filter === 'Equipment'" name="equipmentForm"
+      <gva-application-select-equipment ng-if="set === 'equipment'" name="equipmentForm"
           ng-model="application"></gva-application-select-equipment>
 
       <div ng-if="application.lot.id">
         <div class="row">
-          <sc-field type="nomenclature" ng-if="filter === 'Person'" ng-model="application.caseType" alias="'caseTypes'" params="{lotId: application.lot.id}" ng-required="true" l10n-text="applications.newForm.caseType" class="col-sm-3 col-md-2"></sc-field>
+          <sc-field type="nomenclature" ng-if="set === 'person'" ng-model="application.caseType" alias="'caseTypes'" params="{lotId: application.lot.id}" ng-required="true" l10n-text="applications.newForm.caseType" class="col-sm-3 col-md-2"></sc-field>
 
           <sc-field-group class="col-sm-8" text="applications.newForm.applicationType" validations="{ required: 'default' }" field-name="applicationType">
             <sc-text ng-model="application.applicationType.name" name="applicationType" alias="'correspondent'" disabled ng-required="true"></sc-text>

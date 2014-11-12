@@ -161,5 +161,16 @@ namespace Gva.Api.Controllers.Persons
 
             return Ok(new { LastIndex = lastLicenceEditionIndex });
         }
+
+        [HttpGet]
+        [Route("isUniqueLicenceNumber")]
+        public IHttpActionResult IsUniqueLicenceNumber(string licenceTypeCode, int licenceNumber)
+        {
+            return Ok(
+                new
+                {
+                    isUnique = this.personRepository.IsUniqueLicenceNumber(licenceTypeCode, licenceNumber)
+                });
+        }
     }
 }

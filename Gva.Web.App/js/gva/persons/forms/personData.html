@@ -10,7 +10,7 @@
     <sc-field type="text" ng-model="model.lastNameAlt" ng-required="true" l10n-text="persons.personDataDirective.lastNameAlt" class="col-sm-4 col-md-3"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.uin " ng-required="model.country.code === 'BG' || model.country.code === 'BGR'" ng-change="setAgeSex()" sc-validate="{ validValue: uinValid, unique: isUniqueUin }" l10n-text="persons.personDataDirective.uin" validations="{validValue: 'errorTexts.uin', unique: 'errorTexts.notUniqueUin'}" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.uin" ng-change="setAgeSex()" sc-validate="{ validValue: uinValid, unique: isUniqueUin }" l10n-text="persons.personDataDirective.uin" validations="{validValue: 'errorTexts.uin', unique: 'errorTexts.notUniqueUin'}" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="nomenclature" ng-model="model.sex" alias="'gender'" ng-required="true" l10n-text="persons.personDataDirective.sex" class="col-sm-3 col-md-2"></sc-field>
     <sc-field-group class="col-sm-4 col-md-3" text="persons.personDataDirective.lin" validations="{required: 'default'}" field-name="lin">
       <button type="button" class="btn btn-sm btn-default dropdown-toggle" ng-disabled="!isNew" data-toggle="dropdown" style="width: 110px">
@@ -22,12 +22,12 @@
           <a ng-click="setLin(type)">{{type.name}}</a>
         </li>
       </ul>
-      <sc-int name="lin" ng-model="model.lin" ng-readonly="model.linType.code !== 'none'" ng-required="true"></sc-int>
+      <sc-int name="lin" ng-model="model.lin" ng-disabled="model.linType.code === 'noLin' || !isNew" ng-required="model.linType.code !== 'noLin' && isNew"></sc-int>
     </sc-field-group>
   </div>
   <div class="row">
     <sc-field type="date" ng-model="model.dateOfBirth" ng-required="true" l10n-text="persons.personDataDirective.dateOfBirth" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.placeOfBirth" alias="'cities'" ng-required="true" l10n-text="persons.personDataDirective.placeOfBirth" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.placeOfBirth" alias="'cities'" l10n-text="persons.personDataDirective.placeOfBirth" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="nomenclature" ng-model="model.country" alias="'countries'" ng-required="true" l10n-text="persons.personDataDirective.country" class="col-sm-4 col-md-3"></sc-field>
   </div>
   <div class="row">
@@ -44,7 +44,6 @@
     <sc-field type="text" ng-model="model.phone1" l10n-text="persons.personDataDirective.companyPhone" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.caseTypes" alias="'personCaseTypes'" sc-validate="{ requiredValue: requireCaseTypes }" sc-validate-immediate="true" multiple l10n-text="persons.personDataDirective.caseTypes" validations="{requiredValue: 'Задължително поле'}"
-    class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.caseTypes" alias="'personCaseTypes'" multiple l10n-text="persons.personDataDirective.caseTypes" class="col-sm-3 col-md-2"></sc-field>
   </div>
 </ng-form>

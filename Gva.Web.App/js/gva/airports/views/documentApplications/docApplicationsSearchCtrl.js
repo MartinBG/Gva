@@ -9,6 +9,23 @@
     airportDocumentApplications
   ) {
     $scope.airportDocumentApplications = airportDocumentApplications;
+
+    $scope.isDeclinedApp = function(item) {
+      if (item.part.stage) {
+        return item.part.stage.alias === 'declined';
+      }
+
+      return false;
+    };
+
+    $scope.isDoneApp = function(item) {
+      if (item.part.stage) {
+        return item.part.stage.alias === 'done';
+      }
+
+      return false;
+    };
+
   }
 
   AirportApplicationsSearchCtrl.$inject = [
@@ -23,7 +40,7 @@
       '$stateParams',
       'AirportDocumentApplications',
       function ($stateParams, AirportDocumentApplications) {
-        return AirportDocumentApplications.query($stateParams).$promise;
+        return AirportDocumentApplications.query({lotId: $stateParams.id}).$promise;
       }
     ]
   };

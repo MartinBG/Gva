@@ -6,7 +6,8 @@ DECLARE @nomId INT = @@IDENTITY
 INSERT INTO [NomValues]
     ([NomId], [Code]             , [Name]             , [NameAlt]          , [ParentValueId], [Alias], [IsActive], [TextContent])
 VALUES
-    (@nomId , N'none'            , N'Няма'            , N'Няма'            , NULL           , NULL   , 1         , NULL                         ),
+    (@nomId , N'none'            , N'Ръчно'           , N'Ръчно'           , NULL           , NULL   , 1         , NULL                         ),
+	(@nomId , N'noLin'           , N'Без ЛИН'         , N'Без ЛИН'         , NULL           , NULL   , 1         , NULL                         ),
     (@nomId , N'pilots'          , N'Пилоти'          , N'Пилоти'          , NULL           , NULL   , 1         , N'{ "initialLinVal": 10000 }'),
     (@nomId , N'flyingCrew'      , N'Летателен състав', N'Летателен състав', NULL           , NULL   , 1         , N'{ "initialLinVal": 20000 }'),
     (@nomId , N'crewStaff'       , N'Кабинен състав'  , N'Кабинен състав'  , NULL           , NULL   , 1         , N'{ "initialLinVal": 30000 }'),

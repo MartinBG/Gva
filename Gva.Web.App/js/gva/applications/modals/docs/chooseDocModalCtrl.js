@@ -12,7 +12,7 @@
     $scope.docs = docs.documents;
 
     $scope.filters = {
-      filter: scModalParams.filter,
+      set: scModalParams.set,
       fromDate: null,
       toDate: null,
       regUri: null,

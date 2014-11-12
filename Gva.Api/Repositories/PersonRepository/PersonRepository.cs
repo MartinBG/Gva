@@ -107,6 +107,28 @@ namespace Gva.Api.Repositories.PersonRepository
                     .ToList();
         }
 
+        public List<GvaViewPerson> GetStaffExaminers(string names, int offset = 0, int? limit = null)
+        {
+            var predicate = PredicateBuilder.True<GvaViewPerson>();
+
+            if (!string.IsNullOrEmpty(names))
+            {
+                predicate = predicate.AndStringMatches(p => p.Names, names, false);
+            }
+
+            var persons = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                .Include(p => p.Lot)
+                .Where(predicate);
+
+            return (from p in persons
+                    join ct in this.unitOfWork.DbContext.Set<GvaLotCase>().Include(lc => lc.GvaCaseType).Where(lc => lc.GvaCaseType.Alias == "staffExaminer")
+                        on p.LotId equals ct.LotId
+                    orderby p.Names
+                    select p)
+                    .WithOffsetAndLimit(offset, limit)
+                    .ToList();
+        }
+
         public GvaViewPerson GetPerson(int personId)
         {
             return this.unitOfWork.DbContext.Set<GvaViewPerson>()
@@ -178,19 +200,28 @@ namespace Gva.Api.Repositories.PersonRepository
                 .ToList();
         }
 
-        public int GetNextLin(int linTypeId)
+        public int? GetNextLin(int linTypeId)
         {
-            int? lastLin = this.unitOfWork.DbContext.Set<GvaViewPerson>()
-                .Include(p => p.LinType)
-                .Where(p => p.LinTypeId == linTypeId)
-                .Max(p => (int?)p.Lin);
-
-            if (!lastLin.HasValue)
+            var linType = this.nomRepository.GetNomValue("linTypes", linTypeId);
+            if (linType.Code == "noLin")
             {
-                lastLin = this.nomRepository.GetNomValue("linTypes", linTypeId).TextContent.Get<int>("initialLinVal");
+                return null;
             }
+            else
+            {
+                var lins = this.unitOfWork.DbContext.Set<GvaViewPerson>()
+                .Include(p => p.LinType)
+                .Where(p => p.LinTypeId == linTypeId);
 
-            return lastLin.Value + 1;
+                int? lastLin = lins.Max(p => (int?)p.Lin);
+
+                if (!lastLin.HasValue)
+                {
+                    lastLin = linType.TextContent.Get<int>("initialLinVal");
+                }
+
+                return lastLin.Value + 1;
+            }
         }
 
         public bool IsUniqueUin(string uin, int? personId = null)
@@ -235,6 +266,8 @@ namespace Gva.Api.Repositories.PersonRepository
             return this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceType)
                 .Include(e => e.LotFile)
+                .Include(e => e.LotFile.GvaCaseType)
+                .Include(e => e.LotFile.GvaFile)
                 .Include(e => e.Application)
                 .Include(e => e.Application.Part)
                 .Include(e => e.Application.ApplicationType)
@@ -304,6 +337,33 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Editions.OrderBy(e => e.Index)
                 .Last()
                 .PartIndex;
+        }
+
+        public bool IsUniqueDocNumber(string documentNumber, int? documentPersonNumber, int? partIndex)
+        {
+            var predicate = PredicateBuilder.True<GvaViewPersonDocument>()
+                .And(d => d.DocumentNumber == documentNumber);
+
+            if (documentPersonNumber.HasValue)
+            {
+                predicate = predicate.And(d => d.DocumentPersonNumber == documentPersonNumber);
+            }
+
+            if (partIndex.HasValue)
+            {
+                predicate = predicate.And(d => d.PartIndex != partIndex);
+            }
+
+            return !this.unitOfWork.DbContext.Set<GvaViewPersonDocument>().Where(predicate).Any();
+        }
+
+        public bool IsUniqueLicenceNumber(string licenceTypeCode, int? licenceNumber)
+        {
+            var licences = this.unitOfWork.DbContext.Set<GvaViewPersonLicence>()
+                .Include(e => e.LicenceType)
+                .Where(e => e.LicenceType.Code == licenceTypeCode && e.LicenceNumber == licenceNumber);
+
+            return !licences.Any();
         }
     }
 }

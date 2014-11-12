@@ -36,12 +36,16 @@
           }
         });
 
+        function isValidDate(value) {
+          return value.isValid() && parseInt(value.format('YYYY'), 10) > 1753;
+        }
+
         ngModel.$render = function () {
           var m = moment(ngModel.$viewValue),
             pickerValue,
             inputValue;
 
-          if (m.isValid() && ngModel.$viewValue) {
+          if (isValidDate(m) && ngModel.$viewValue) {
             pickerValue = m.startOf('day').toDate();
             inputValue = m.format(scDateConfig.dateDisplayFormat);
           } else {
@@ -61,7 +65,7 @@
           }
 
           scope.$apply(function () {
-            if (m && m.isValid()) {
+            if (m && isValidDate(m)) {
               ngModel.$setViewValue(
                 m.startOf('day').format(scDateConfig.dateModelFormat));
             } else {

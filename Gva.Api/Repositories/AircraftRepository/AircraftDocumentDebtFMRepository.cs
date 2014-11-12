@@ -63,10 +63,13 @@ namespace Gva.Api.Repositories.AircraftRepository
                 var registration = this.lotRepository.GetLotIndex(lotId).Index
                     .GetParts<AircraftCertRegistrationFMDO>("aircraftCertRegistrationsFM")
                     .Where(e => e.Part.Index == partVersion.Content.Registration.NomValueId)
-                    .Single();
+                    .FirstOrDefault();
 
-                aircraftDocumentDebtsViewPartVersion.Content.RegistrationActNumber = registration.Content.ActNumber;
-                aircraftDocumentDebtsViewPartVersion.Content.RegistrationCertNumber = registration.Content.CertNumber;
+                if (registration != null)
+                {
+                    aircraftDocumentDebtsViewPartVersion.Content.RegistrationActNumber = registration.Content.ActNumber;
+                    aircraftDocumentDebtsViewPartVersion.Content.RegistrationCertNumber = registration.Content.CertNumber;
+                }
 
                 var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
                 if (!caseTypeId.HasValue || lotFile != null)

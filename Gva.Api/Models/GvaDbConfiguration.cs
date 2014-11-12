@@ -30,6 +30,7 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaViewPersonRatingMap());
             modelBuilder.Configurations.Add(new GvaViewPersonRatingEditionMap());
             modelBuilder.Configurations.Add(new GvaLicenceEditionMap());
+            modelBuilder.Configurations.Add(new GvaViewPersonDocumentMap());
             modelBuilder.Configurations.Add(new GvaViewInventoryItemMap());
             modelBuilder.Configurations.Add(new GvaViewApplicationMap());
             modelBuilder.Configurations.Add(new GvaViewOrganizationMap());

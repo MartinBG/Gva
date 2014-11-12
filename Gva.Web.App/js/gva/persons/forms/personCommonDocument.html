@@ -9,7 +9,7 @@
   </div>
 
   <div class="row">
-    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personCommonDocDirective.documentNumber" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personCommonDocDirective.documentNumber" class="col-sm-3 col-md-2" sc-validate="{ unique: isUniqueDocNumber }" validations="{unique: 'errorTexts.notUniqueDocNumberAndPersonNumber'}"></sc-field>
     <sc-field type="int" ng-model="model.part.documentPersonNumber" l10n-text="persons.personCommonDocDirective.documentPersonNumber" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.personCommonDocDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="date" ng-model="model.part.documentDateValidTo" l10n-text="persons.personCommonDocDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
@@ -24,9 +24,9 @@
   </div>
 
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.documentRole" alias="'documentRoles'" ng-required="true" params="{ categoryAlias: categoryAlias, caseTypeAliases: [model.case.caseType.alias] }" l10n-text="persons.personCommonDocDirective.personDocumentRole"
-      class="col-sm-6 col-md-4"></sc-field>
     <sc-field type="nomenclature" ng-model="model.part.documentType" alias="'documentTypes'" ng-required="true" params="{ isIdDocument: false, caseTypeAliases: [model.case.caseType.alias] }" l10n-text="persons.personCommonDocDirective.personDocumentType"
+      class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.documentRole" alias="'documentRoles'" ng-required="true" params="{ categoryAlias: categoryAlias, caseTypeAliases: [model.case.caseType.alias] }" l10n-text="persons.personCommonDocDirective.personDocumentRole"
       class="col-sm-6 col-md-4"></sc-field>
   </div>
   

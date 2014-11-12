@@ -19,7 +19,7 @@
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.reg)
             .$promise
             .then(function () {
-              return $state.go('root.aircrafts.view.regsFM.search');
+              return $state.go('root.aircrafts.view.regsFM.search', {}, {reload: true});
             });
         }
       });

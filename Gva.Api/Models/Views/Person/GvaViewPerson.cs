@@ -47,6 +47,8 @@ namespace Gva.Api.Models.Views.Person
         public virtual ICollection<GvaViewPersonLicence> PersonLicences { get; set; }
 
         public virtual ICollection<GvaViewPersonRating> PersonRatings { get; set; }
+
+        public virtual ICollection<GvaViewPersonDocument> PersonDocuments { get; set; }
     }
 
     public class GvaViewPersonMap : EntityTypeConfiguration<GvaViewPerson>

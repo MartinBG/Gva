@@ -27,12 +27,16 @@
 
     $scope.searchParams = {
       publisherName: undefined,
-      publisherType: undefined
+      publisherType: undefined,
+      publisherCode: undefined,
+      publisherLin: undefined
     };
 
     $scope.search = function () {
       return Publishers.query({
         publisherName: $scope.searchParams.publisherName,
+        publisherCode: $scope.searchParams.publisherCode,
+        publisherLin: $scope.searchParams.publisherLin,
         publisherType: $scope.searchParams.publisherType ?
           $scope.searchParams.publisherType.id : undefined
       }).$promise.then(function (publishers) {
@@ -63,7 +67,8 @@
       function (Publishers) {
         return Publishers.query({
           publisherName: undefined,
-          publisherType: undefined
+          publisherType: undefined,
+          publisherCode: undefined
         }).$promise;
       }
     ]
