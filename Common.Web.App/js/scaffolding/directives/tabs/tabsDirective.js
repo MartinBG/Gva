@@ -89,7 +89,9 @@
             loading = false;
             return;
           }
-          if (newSection.isActive) {
+          if (newSection.isActive &&
+                (newSection.isState && newSection.state === $state.$current ||
+                 !newSection.isState && newSection.children[0].state === $state.$current)) {
             loading = false;
             return;
           }
