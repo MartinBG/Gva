@@ -44,7 +44,6 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "DateOfBirth is required.")]
         public DateTime? DateOfBirth { get; set; }
 
-        [Required(ErrorMessage = "PlaceOfBirth is required.")]
         public NomValue PlaceOfBirth { get; set; }
 
         [Required(ErrorMessage = "Country is required.")]
