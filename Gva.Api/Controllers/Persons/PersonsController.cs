@@ -83,8 +83,14 @@ namespace Gva.Api.Controllers.Persons
 
             if (extendedVersion)
             {
-                newPerson.PersonDocumentId = new CaseTypesPartDO<PersonDocumentIdDO>();
-                newPerson.PersonAddress = new PersonAddressDO();
+                newPerson.PersonDocumentId = new CaseTypesPartDO<PersonDocumentIdDO>(new PersonDocumentIdDO()
+                {
+                    Valid = this.nomRepository.GetNomValue("boolean", "yes")
+                }, new List<CaseDO>());
+                newPerson.PersonAddress = new PersonAddressDO()
+                {
+                    Valid = this.nomRepository.GetNomValue("boolean", "yes")
+                };
             }
 
             newPerson.PersonData.Country = this.nomRepository.GetNomValue("countries", "BG");
