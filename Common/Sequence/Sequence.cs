@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using Common.Data;
 
 namespace Common.Sequence
 {
@@ -46,7 +47,7 @@ namespace Common.Sequence
 
         private void GetNextRange(bool changeNextValue = true)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[UnitOfWork.ContextName].ConnectionString))
             {
                 connection.Open();
 
