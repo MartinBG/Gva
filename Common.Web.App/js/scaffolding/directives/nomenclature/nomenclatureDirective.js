@@ -10,12 +10,14 @@
     $filter,
     $parse,
     $exceptionHandler,
+    $interpolate,
     Nomenclatures,
     scNomenclatureConfig
   ) {
     function preLink(scope, iElement, iAttrs, ngModel) {
       var idProp = scNomenclatureConfig.idProp,
-          nameProp = iAttrs.formatOptions || scNomenclatureConfig.nameProp,
+          nameProp = scNomenclatureConfig.nameProp,
+          formatOptions = iAttrs.formatOptions,
           aliasProp = scNomenclatureConfig.aliasProp,
           alias = scope.alias(),
           isMultiple = angular.isDefined(iAttrs.multiple),
@@ -136,12 +138,28 @@
         },
         initSelection: initSelectionFunc,
         formatResult: function (result, container, query, escapeMarkup) {
-          var markup = [];
-          Select2.util.markMatch(result[nameProp], query.term, markup, escapeMarkup);
+          var markup = [],
+            resultString;
+
+          if(formatOptions)
+          {
+            resultString = $interpolate(formatOptions)(result);
+          } else {
+            resultString = result[nameProp];
+          }
+
+          Select2.util.markMatch(resultString, query.term, markup, escapeMarkup);
           return markup.join('');
         },
         formatSelection: function (data) {
-          return data ? Select2.util.escapeMarkup(data[nameProp]) : undefined;
+          var resultString;
+          if(formatOptions)
+          {
+            resultString = $interpolate(formatOptions)(data);
+          } else {
+            resultString = data[nameProp];
+          }
+          return data ? Select2.util.escapeMarkup(resultString) : undefined;
         },
         id: function (obj) {
           return obj[idProp];
@@ -166,6 +184,7 @@
     '$filter',
     '$parse',
     '$exceptionHandler',
+    '$interpolate',
     'Nomenclatures',
     'scNomenclatureConfig'
   ];
