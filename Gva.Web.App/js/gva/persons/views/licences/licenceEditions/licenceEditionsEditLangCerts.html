@@ -14,6 +14,7 @@
             <th width="1px" ng-if="currentLicenceEdition.part.includedLangCerts.length && !changeOrderMode"></th>
             <th l10n-text="persons.licenceEditionDirective.langCertsTable.documentNumber"></th>
             <th l10n-text="persons.licenceEditionDirective.langCertsTable.documentDateValidFrom"></th>
+            <th l10n-text="persons.licenceEditionDirective.langCertsTable.documentDateValidTo"></th>
             <th l10n-text="persons.licenceEditionDirective.langCertsTable.langCertType"></th>
             <th l10n-text="persons.licenceEditionDirective.langCertsTable.langLevel"></th>
             <th l10n-text="persons.licenceEditionDirective.langCertsTable.documentPublisher"></th>
@@ -33,6 +34,7 @@
             </td>
             <td>{{langCert.part.documentNumber}}</td>
             <td>{{langCert.part.documentDateValidFrom | date:'mediumDate'}}</td>
+            <td>{{langCert.part.documentDateValidTo | date:'mediumDate'}}</td>
             <td>{{langCert.part.documentRole.name}}</td>
             <td>{{langCert.part.langLevel.name}}</td>
             <td>{{langCert.part.documentPublisher}}</td>

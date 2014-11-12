@@ -1697,6 +1697,7 @@
             langCertType: 'Тип',
             langLevel: 'Ниво',
             documentDateValidFrom: 'От дата',
+            documentDateValidTo: 'До дата',
             documentPublisher: 'Издател',
             valid: 'Валиден'
           },
