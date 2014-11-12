@@ -66,7 +66,9 @@ namespace Gva.Api.Controllers
         {
             var lot = this.lotRepository.GetLotIndex(lotId);
 
-            var applications = this.applicationRepository.GetNomApplications(lotId).Select(a => new ApplicationNomDO(a));
+            var applications = this.applicationRepository.GetNomApplications(lotId)
+                .Select(a => new ApplicationNomDO(a))
+                .OrderByDescending(a => a.DocumentDate);
 
             if (!string.IsNullOrWhiteSpace(term))
             {
