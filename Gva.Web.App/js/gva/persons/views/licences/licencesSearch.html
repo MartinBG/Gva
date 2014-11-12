@@ -3,7 +3,7 @@
   <sc-datatable items="licences" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="dateValidFrom"
     row-class="{'invalidDocument' : isInvalidLicence(item), 'expiredDocument' : (!isInvalidLicence(item) && isExpiredLicence(item)), 'expiringDocument' : isExpiringLicence(item)}">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
-      <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.licences.view.editions.edit', params: {ind: item.partIndex, index: item.editionPartIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.licences.view.editions.edit.ratings', params: {ind: item.partIndex, index: item.editionPartIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <a ng-click="print(item)">
