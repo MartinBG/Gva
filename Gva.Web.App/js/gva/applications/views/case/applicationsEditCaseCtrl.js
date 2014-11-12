@@ -70,21 +70,25 @@
       var state,
         set;
 
+
       if(value.setPartAlias.indexOf('Application') > 0) {
         if (value.setPartAlias === 'personApplication') {
-          state = 'root.applications.edit';
+          state = 'root.applications.edit.data';
           set = 'person';
         }
         else if (value.setPartAlias === 'organizationApplication') {
-          state = 'root.applications.edit';
+          state = 'root.applications.edit.data';
           set = 'organization';
         }
         else if (value.setPartAlias === 'airportApplication') {
-          state = 'root.applications.edit';
+          state = 'root.applications.edit.data';
           set = 'airport';
         }
+
         return $state.go(state, {
           id: application.applicationId,
+          ind: value.partIndex,
+          lotId: application.lotId,
           setPartPath: set + 'DocumentApplications',
           set: set
         });
