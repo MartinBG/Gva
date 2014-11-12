@@ -3510,7 +3510,7 @@
         notUniqueDocNumberAndPersonNumber: 'Комбинацията от номер на документа ' +
           'и номер в списъка трябва да е уникална',
         notUniqueDocNumber: 'Номера на документа трябва да е уникален',
-        notValidRating: 'Вече съществува квалификация с тези данни',
+        notValidRating: 'Вече съществува такава квалификация',
         notUniqueLicenceNumber: 'Съществува лиценз от същия вид със същия номер'
       },
       defaultErrorTexts: {
