@@ -76,11 +76,13 @@
         });
 
         modalInstance.result.then(function () {
-          var stateName = 'root.applications.edit',
-            params = { 
-              id: applicationId,
+          var stateName = 'root.applications.edit.data',
+            params = {
               setPartPath: setPart + 'DocumentApplications',
-              set: setPart
+              set: setPart,
+              id: applicationId,
+              lotId: lotId,
+              ind: partIndex
             };
           $state.go(stateName, params);
         });
