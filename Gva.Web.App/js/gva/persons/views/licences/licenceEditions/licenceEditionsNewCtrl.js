@@ -24,7 +24,7 @@
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.newLicenceEdition).$promise
             .then(function (edition) {
               return $state.go(
-                'root.persons.view.licences.view.editions.edit',
+                'root.persons.view.licences.view.editions.edit.ratings',
                 { index: edition.partIndex });
             });
         }
@@ -34,7 +34,7 @@
     $scope.cancel = function () {
       return PersonLicences.lastEditionIndex($stateParams).$promise.then(function (index) {
         return $state.go(
-          'root.persons.view.licences.view.editions.edit',
+          'root.persons.view.licences.view.editions.edit.ratings',
           { index: index.lastIndex });
       });
     };
