@@ -15,7 +15,6 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "DocumentNumberPrefix is required.")]
         public string DocumentNumberPrefix { get; set; }
 
-        [Required(ErrorMessage = "DocumentNumber is required.")]
         public string DocumentNumber { get; set; }
 
         public string DocumentNumberSuffix { get; set; }
