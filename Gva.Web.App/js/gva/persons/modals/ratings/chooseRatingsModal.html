@@ -13,7 +13,7 @@
       <input type="checkbox"  sc-click="showAllRatings($event)"/>
     </div>
 
-    <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="lastDocDateValidTo">
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
         <input type="checkbox" ng-checked="selectedRatings | contains:item" sc-click="selectRating($event, item)"/>
       </sc-column>
