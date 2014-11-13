@@ -2256,6 +2256,7 @@
           title: 'Избор на свидетелства за език',
           documentNumber: 'No на свидетелството',
           documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'До дата',
           langCertType: 'Тип',
           langLevel: 'Ниво',
           documentPublisher: 'Издател',
