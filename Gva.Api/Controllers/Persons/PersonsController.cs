@@ -113,7 +113,7 @@ namespace Gva.Api.Controllers.Persons
             bool isExaminer = false,
             bool exact = false)
         {
-            var persons = this.personRepository.GetPersons(lin, linType, uin, caseType, names, licences, ratings, organization, isInspector, isExaminer, exact, 0, 1000);
+            var persons = this.personRepository.GetPersons(lin, linType, uin, caseType, names, licences, ratings, organization, isInspector, isExaminer, exact, 0, null);
 
             return Ok(persons.Select(p => new PersonViewDO(p)));
         }

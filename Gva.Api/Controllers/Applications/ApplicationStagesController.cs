@@ -44,7 +44,8 @@ namespace Gva.Api.Controllers.Applications
                 GvaStageId = appStage.Get<int>("stageId"),
                 StartingDate = appStage.Get<DateTime>("date"),
                 InspectorLotId = appStage.Get<int?>("inspectorId"),
-                Ordinal = appStage.Get<int>("ordinal")
+                Ordinal = appStage.Get<int>("ordinal"),
+                Note = appStage.Get<string>("note")
             };
 
             var applicationStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(stage);
@@ -72,6 +73,7 @@ namespace Gva.Api.Controllers.Applications
                 applicationStage.StartingDate = appStage.Get<DateTime>("date");
                 applicationStage.InspectorLotId = appStage.Get<int?>("inspectorId");
                 applicationStage.Ordinal = appStage.Get<int>("ordinal");
+                applicationStage.Note = appStage.Get<string>("note");
             }
 
             this.unitOfWork.Save();

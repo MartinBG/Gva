@@ -14,6 +14,7 @@ namespace Gva.Api.ModelsDO.Applications
             this.InspectorId = appStage.Inspector != null ? appStage.Inspector.LotId : (int?)null;
             this.InspectorName = appStage.Inspector != null ? appStage.Inspector.Person.Names : null;
             this.Ordinal = appStage.Ordinal;
+            this.Note = appStage.Note;
         }
 
         public int Id { get; set; }
@@ -27,6 +28,8 @@ namespace Gva.Api.ModelsDO.Applications
         public int? InspectorId { get; set; }
 
         public string InspectorName { get; set; }
+
+        public string Note { get; set; }
 
         public int Ordinal { get; set; }
     }

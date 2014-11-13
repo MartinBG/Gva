@@ -28,15 +28,18 @@ namespace Gva.MigrationTool.Sets.Common
 
             return oracleConn.CreateStoreCommand(
                 @"SELECT r.ID,
-                         r.EXAMINER_PERSON_ID,
-                         rl.STATE_ID,
-                         rl.INS_DATE,
-                         rl.INS_USER,
-                         s.SEQ_NO,
-                         row_number() OVER (ORDER BY rl.ON_DATE, rl.ID ) as ORDINAL
+                        p.ID as EXAMINER_ID,
+                        rl.STATE_ID,
+                        rl.ON_DATE,
+                        rl.INS_USER,
+                        rl.NOTE,
+                        s.SEQ_NO,
+                        row_number() OVER (ORDER BY rl.ON_DATE, rl.ID ) as ORDINAL
                     FROM CAA_DOC.REQUEST r
                     LEFT JOIN CAA_DOC.REQUEST_LOG rl on r.ID = rl.REQUEST_ID
                     JOIN CAA_DOC.NM_REQUEST_STATE s on rl.STATE_ID = s.id
+                    LEFT JOIN CAA_DOC.EXAMINER e on e.PERSON_ID = rl.PERSON_ID
+                    JOIN CAA_DOC.PERSON p on e.PERSON_ID = p.ID
                     WHERE {0}",
                     new DbClause("r.ID = {0}", oldApplicationId)
                 )
@@ -45,11 +48,12 @@ namespace Gva.MigrationTool.Sets.Common
                     {
                         GvaApplicationId = newApplicationId,
                         GvaStageId = gvaStageIds[r.Field<int>("STATE_ID")],
-                        StartingDate = r.Field<DateTime>("INS_DATE"),
+                        StartingDate = r.Field<DateTime>("ON_DATE"),
                         InspectorLotId = !Migration.IsPartialMigration ?
-                            (r.Field<int?>("EXAMINER_PERSON_ID") != null ? personIdToLotId[r.Field<int>("EXAMINER_PERSON_ID")] : (int?)null) :
-                            (r.Field<int?>("EXAMINER_PERSON_ID") != null ? (personIdToLotId.ContainsKey(r.Field<int>("EXAMINER_PERSON_ID")) ? personIdToLotId[r.Field<int>("EXAMINER_PERSON_ID")] : (int?)null) : (int?)null),
-                        Ordinal = r.Field<int>("ORDINAL")
+                            (r.Field<int?>("EXAMINER_ID") != null ? personIdToLotId[r.Field<int>("EXAMINER_ID")] : (int?)null) :
+                            (r.Field<int?>("EXAMINER_ID") != null ? (personIdToLotId.ContainsKey(r.Field<int>("EXAMINER_ID")) ? personIdToLotId[r.Field<int>("EXAMINER_ID")] : (int?)null) : (int?)null),
+                        Ordinal = r.Field<int>("ORDINAL"),
+                        Note = r.Field<string>("NOTE")
                     })
                 .ToList();
         }

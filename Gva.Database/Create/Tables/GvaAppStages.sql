@@ -2,12 +2,13 @@
 GO 
 
 CREATE TABLE [dbo].[GvaAppStages] (
-    [GvaAppStageId]      INT       NOT NULL IDENTITY,
-    [GvaApplicationId]   INT       NOT NULL,
-    [GvaStageId]         INT       NOT NULL,
-    [StartingDate]       DATETIME2 NOT NULL,
-    [InspectorLotId]     INT       NULL,
-    [Ordinal]            INT       NOT NULL,
+    [GvaAppStageId]      INT           NOT NULL IDENTITY,
+    [GvaApplicationId]   INT           NOT NULL,
+    [GvaStageId]         INT           NOT NULL,
+    [StartingDate]       DATETIME2     NOT NULL,
+    [InspectorLotId]     INT           NULL,
+    [Ordinal]            INT           NOT NULL,
+	[Note]               NVARCHAR(MAX) NULL,
     CONSTRAINT [PK_GvaAppStages]                          PRIMARY KEY ([GvaAppStageId]),
     CONSTRAINT [FK_GvaAppStages_GvaApplications]          FOREIGN KEY ([GvaApplicationId]) REFERENCES [dbo].[GvaApplications] ([GvaApplicationId]),
     CONSTRAINT [FK_GvaAppStages_GvaStages]                FOREIGN KEY ([GvaStageId])       REFERENCES [dbo].[GvaStages] ([GvaStageId]),
@@ -23,4 +24,5 @@ exec spDescColumn N'GvaAppStages', N'GvaStageId'         , N'Идентифик�
 exec spDescColumn N'GvaAppStages', N'StartingDate'       , N'Начална дата'
 exec spDescColumn N'GvaAppStages', N'InspectorLotId'     , N'Инспектор'
 exec spDescColumn N'GvaAppStages', N'Ordinal'            , N'Пореден номер'
+exec spDescColumn N'GvaAppStages', N'Note'               , N'Бележка'
 GO
