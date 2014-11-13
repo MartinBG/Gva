@@ -24,7 +24,6 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "DocumentRole is required.")]
         public NomValue DocumentRole { get; set; }
 
-        [Required(ErrorMessage = "DocumentPublisher is required.")]
         public string DocumentPublisher { get; set; }
 
         [Required(ErrorMessage = "DocumentDateValidFrom is required.")]
