@@ -589,13 +589,9 @@ namespace Gva.Api.Controllers
         }
 
         [Route("licenceTypes")]
-        public IHttpActionResult GetLicenceTypes(string term = null, string caseTypeAlias = null, string fclCode = null)
+        public IHttpActionResult GetLicenceTypes(string term = null, string caseTypeAlias = null)
         {
             IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("licenceTypes", term);
-            if (fclCode == "Y")
-            {
-                nomValues = nomValues.Where(l => l.TextContent.Get<string>("licenceCode").Contains("FCL"));
-            }
 
             if (!string.IsNullOrEmpty(caseTypeAlias))
             {

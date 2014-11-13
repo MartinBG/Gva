@@ -1631,7 +1631,6 @@
           licenceNumber: 'Лиценз No',
           foreignLicenceNumber: 'Чужд лиценз No',
           valid: 'Действителен',
-          fcl: 'FCL',
           lastLicenceNumber: 'Посл. издаден лиценз от избр. тип е с No',
           foreignPublisher: 'Чужда администрация',
           employment: 'Месторабота',

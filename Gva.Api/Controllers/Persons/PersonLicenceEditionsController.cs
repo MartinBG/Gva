@@ -115,11 +115,6 @@ namespace Gva.Api.Controllers.Persons
 
                 var licencePartVersion = lot.Index.GetPart<PersonLicenceDO>("licences/" + licencePartIndex);
 
-                if (EditionDocDateValidToValidation(licencePartVersion, edition))
-                {
-                    return BadRequest();
-                }
-
                 var partVersion = lot.CreatePart(this.path + "/*", edition.Part, this.userContext);
                 this.fileRepository.AddFileReference(partVersion.Part, edition.Case);
 
@@ -143,11 +138,6 @@ namespace Gva.Api.Controllers.Persons
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
                 var licencePartVersion = lot.Index.GetPart<PersonLicenceDO>("licences/" + licencePartIndex);
-
-                if (EditionDocDateValidToValidation(licencePartVersion, edition))
-                {
-                    return BadRequest();
-                }
 
                 var partVersion = lot.UpdatePart(string.Format("{0}/{1}", this.path, partIndex), edition.Part, this.userContext);
                 this.fileRepository.AddFileReference(partVersion.Part, edition.Case);
@@ -198,19 +188,6 @@ namespace Gva.Api.Controllers.Persons
 
                 return Ok();
             }
-        }
-
-        private bool EditionDocDateValidToValidation(PartVersion<PersonLicenceDO> licence, CaseTypePartDO<PersonLicenceEditionDO> edition)
-        {
-            var caseType = this.fileRepository.GetFileReference(licence.PartId, null).GvaCaseType;
-            if ((caseType.Alias != "flightCrew" ||
-                    (licence.Content.Fcl != null && licence.Content.Fcl.Code != "Y" && licence.Content.LicenceType.Code != "BG CCA"))
-                && edition.Part.DocumentDateValidTo == null)
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

@@ -5,11 +5,10 @@
       <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
       <gva-case-type model="model.case" name="caseType" ng-disabled="model.case.caseType" ng-required="true" init="isNew" case-type="caseTypeId"></gva-case-type>
     </div>
-    <sc-field type="nomenclature" alias="'boolean'" format-options="{{code}} {{name}}" ng-model="model.part.fcl" l10n-text="persons.licenceDirective.fcl" class="col-sm-2" ng-if="model.case.caseType.alias === 'flightCrew'"></sc-field>
   </div>
   <div ng-if="model.case.caseType">
     <div class="row">
-      <sc-field type="nomenclature" alias="'licenceTypes'" format-options="{{code}} {{name}}" ng-model="model.part.licenceType" ng-required="true" params="{staffTypeAlias: model.case.caseType.alias, fclCode: model.case.caseType.alias === 'flightCrew' ? model.part.fcl.code : undefined}" l10n-text="persons.licenceDirective.licenceType" class="col-sm-4"></sc-field>
+      <sc-field type="nomenclature" alias="'licenceTypes'" format-options="{{code}} {{name}}" ng-model="model.part.licenceType" ng-required="true" params="{staffTypeAlias: model.case.caseType.alias}" l10n-text="persons.licenceDirective.licenceType" class="col-sm-4"></sc-field>
       <sc-field type="int" ng-model="model.part.licenceNumber" l10n-text="persons.licenceDirective.licenceNumber"  sc-validate="{ unique: isUniqueLicenceNumber }" validations="{unique: 'errorTexts.notUniqueLicenceNumber'}" class="col-sm-2"></sc-field>
       <sc-field type="text" ng-model="lastLicenceNumber" l10n-text="persons.licenceDirective.lastLicenceNumber" disabled class="col-sm-4" ng-if="isNew"></sc-field>
     </div>

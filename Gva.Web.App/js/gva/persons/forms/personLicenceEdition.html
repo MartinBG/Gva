@@ -3,8 +3,7 @@
     <div class="row">
       <sc-field type="nomenclature" alias="'inspectors'" ng-model="model.part.inspector" l10n-text="persons.licenceEditionDirective.inspector" class="col-sm-3"></sc-field>
       <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.licenceEditionDirective.documentDateValidFrom" class="col-sm-2"></sc-field>
-      <sc-field type="date" ng-model="model.part.documentDateValidTo" ng-required="model.case.caseType.alias !== 'flightCrew' || ( fcl.code !== 'Y' && licenceType.code !== 'BG CCA')"
-        l10n-text="persons.licenceEditionDirective.documentDateValidTo" class="col-sm-2" ng-if="model.case.caseType.alias !== 'flightCrew' || ( fcl.code !== 'Y' && licenceType.code !== 'BG CCA')">
+      <sc-field type="date" ng-model="model.part.documentDateValidTo" l10n-text="persons.licenceEditionDirective.documentDateValidTo" class="col-sm-2">
       </sc-field>
     </div>
     <div class="row">

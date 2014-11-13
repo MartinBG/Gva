@@ -77,12 +77,6 @@ namespace Gva.Api.Controllers.Persons
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                if ((newLicence.Licence.Case.CaseType.Alias != "flightCrew" ||
-                    (newLicence.Licence.Part.Fcl != null && (newLicence.Licence.Part.Fcl.Code != "Y" && newLicence.Licence.Part.LicenceType.Code != "BG CCA")))
-                        && newLicence.Edition.Part.DocumentDateValidTo == null)
-                {
-                    return BadRequest();
-                }
 
                 if (newLicence.Licence.Part.LicenceType.Code == "FOREIGN" &&
                     (newLicence.Licence.Part.ForeignLicenceNumber == null || newLicence.Licence.Part.ForeignPublisher == null || newLicence.Licence.Part.Employment == null))
