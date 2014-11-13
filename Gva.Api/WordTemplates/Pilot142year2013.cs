@@ -147,18 +147,18 @@ namespace Gva.Api.WordTemplates
                 .Content;
 
             var includedTrainings = lastEdition.IncludedTrainings
-                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i.PartIndex).Content);
             var includedLangCerts = lastEdition.IncludedLangCerts
-                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i.PartIndex).Content);
             var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i));
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
             var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
             var includedLicences = lastEdition.IncludedLicences
-                .Select(i => lot.Index.GetPart<PersonLicenceDO>("licences/" + i));
+                .Select(i => lot.Index.GetPart<PersonLicenceDO>("licences/" + i.PartIndex));
             var includedMedicals = lastEdition.IncludedMedicals
-                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i.PartIndex).Content);
             var includedExams = lastEdition.IncludedExams
-                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i.PartIndex).Content);
 
             var inspectorId = lastEdition.Inspector == null ? (int?)null : lastEdition.Inspector.NomValueId;
             object[] instructorData = new object[0];
