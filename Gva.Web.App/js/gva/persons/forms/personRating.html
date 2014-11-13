@@ -7,25 +7,23 @@
     </div>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'flightCrew'">
-    <sc-field type="nomenclature" ng-model="model.part.ratingClass" ng-disabled="model.part.ratingType" format-options="{{code}} {{name}}" alias="'ratingClasses'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.ratingClass" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.ratingType" ng-disabled="model.part.ratingClass"  format-options="{{code}} {{name}}" alias="'ratingTypes'" l10n-text="persons.ratingDirective.ratingType" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" format-options="{{code}} {{name}}" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.authorization" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.ratingClass" ng-disabled="model.part.ratingType" alias="'ratingClasses'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.ratingClass" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.ratingType" ng-disabled="model.part.ratingClass"  alias="'ratingTypes'" l10n-text="persons.ratingDirective.ratingType" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.authorization" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'to_suvd'">
     <sc-field type="nomenclature" ng-model="model.part.personRatingLevel" alias="'personRatingLevels'" format-options="{{code}} {{name}}" l10n-text="persons.ratingDirective.personRatingLevel" class="col-sm-3"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.ratingClass" alias="'ratingClasses'" format-options="{{code}} {{name}}" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.ratingClass" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" format-options="{{code}} {{name}}" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.authorization" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.ratingClass" alias="'ratingClasses'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.ratingClass" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.authorization" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'ovd'">
-    <sc-field type="nomenclature" ng-model="model.part.ratingClass" alias="'ratingClasses'" format-options="{{code}} {{name}}" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.ratingClass" class="col-sm-3"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.authorization" format-options="{{code}} {{name}}" alias="'authorizations'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.authorization" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
-  </div>
-  <div class="row" ng-if="model.case.caseType.alias === 'ovd'">
+    <sc-field type="nomenclature" ng-model="model.part.ratingClass" alias="'ratingClasses'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.ratingClass" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.authorization" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
     <sc-field type="nomenclature" alias="'locationIndicators'" ng-model="model.part.locationIndicator" format-options="{{code}} {{name}}" l10n-text="persons.ratingDirective.locationIndicator" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
     <sc-field type="text" ng-model="model.part.sector" l10n-text="persons.ratingDirective.sector" class="col-sm-3"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'to_vs'">
-    <sc-field type="nomenclature" alias="'aircraftTypeGroups'" format-options="{{code}} {{name}}" ng-model="model.part.aircraftTypeGroup" l10n-text="persons.ratingDirective.aircraftTypeGroup" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" alias="'aircraftTypeGroups'" ng-model="model.part.aircraftTypeGroup" l10n-text="persons.ratingDirective.aircraftTypeGroup" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
     <sc-field type="nomenclature" alias="'aircraftClases66'" format-options="{{code}} {{name}}" ng-model="model.part.aircraftTypeCategory" l10n-text="persons.ratingDirective.ratingCategory" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType">

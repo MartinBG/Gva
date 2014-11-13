@@ -698,9 +698,19 @@ namespace Gva.Api.Controllers
                 parentAlias: "ratingClassGroups",
                 parentProp: "caseTypeAlias",
                 parentPropValue: caseTypeAlias,
-                term: term,
                 offset: offset,
                 limit: limit);
+
+            nomValues = nomValues.Select(n => new NomValue
+            {
+                NomValueId = n.NomValueId,
+                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name)
+            });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                nomValues = nomValues.Where(n => n.Name.Contains(term));
+            }
 
             return Ok(nomValues);
         }
@@ -713,9 +723,19 @@ namespace Gva.Api.Controllers
                 parentAlias: "authorizationGroups",
                 parentProp: "caseTypeAlias",
                 parentPropValue: caseTypeAlias,
-                term: term,
                 offset: offset,
                 limit: limit);
+
+            nomValues = nomValues.Select(n => new NomValue
+            {
+                NomValueId = n.NomValueId,
+                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name)
+            });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                nomValues = nomValues.Where(n => n.Name.Contains(term));
+            }
 
             return Ok(nomValues);
         }
@@ -818,6 +838,56 @@ namespace Gva.Api.Controllers
 
             return Ok(returnValue);
         }
+
+        [Route("ratingTypes")]
+        public IHttpActionResult GetRatingTypes(string term = null, string caseTypeAlias = null)
+        {
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("ratingTypes");
+
+            if (!string.IsNullOrEmpty(caseTypeAlias))
+            {
+                nomValues = nomValues.Where(l => l.TextContent.Get<string>("caseTypeAlias") == caseTypeAlias);
+            }
+
+            nomValues = nomValues.Select(n => new NomValue
+            {
+                NomValueId = n.NomValueId,
+                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name)
+            });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                nomValues = nomValues.Where(n => n.Name.Contains(term));
+            }
+
+            return Ok(nomValues);
+        }
+
+        [Route("aircraftTypeGroups")]
+        public IHttpActionResult GetAircraftTypeGroups(string term = null, string caseTypeAlias = null)
+        {
+            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("aircraftTypeGroups");
+
+            if (!string.IsNullOrEmpty(caseTypeAlias))
+            {
+                nomValues = nomValues.Where(l => l.TextContent.Get<string>("caseTypeAlias") == caseTypeAlias);
+            }
+
+            nomValues = nomValues.Select(n => new NomValue
+            {
+                NomValueId = n.NomValueId,
+                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name)
+            });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                nomValues = nomValues.Where(n => n.Name.Contains(term));
+            }
+
+            return Ok(nomValues);
+        }
+
+        
     }
 }
 
