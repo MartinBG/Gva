@@ -26,6 +26,8 @@ namespace Gva.Api.ModelsDO.Common
 
         public double? TaxAmount { get; set; }
 
+        public string TaxNumber { get; set; }
+        
         public NomValue Currency { get; set; }
 
         public string Notes { get; set; }

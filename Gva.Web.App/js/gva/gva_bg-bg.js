@@ -71,6 +71,7 @@
           applicationPaymentType: 'Член',
           currency: 'Парична единица',
           taxAmount: 'Платена такса',
+          taxNumber: '№ на такса',
           caseType: 'Тип дело'
         },
         scannedDocumentDirective: {
