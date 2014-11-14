@@ -14,7 +14,5 @@ namespace Gva.Api.ModelsDO.Persons
         public int? Ind { get; set; }
 
         public int? Index { get; set; }
-
-        public int? OrderNum { get; set; }
     }
 }

@@ -17,19 +17,16 @@
     $scope.currentLicenceEdition = currentLicenceEdition;
     $scope.changeOrderMode = false;
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
-
+    $scope.currentLicenceEdition.part.includedChecks =
+      $scope.currentLicenceEdition.part.includedChecks || [];
     PersonDocumentChecks
       .query({ id: $stateParams.id })
       .$promise
       .then(function (checks) {
         $scope.includedChecks = 
-          _.map($scope.currentLicenceEdition.part.includedChecks, function (check) {
-            var includedCheck = _.where(checks, { partIndex: check.partIndex })[0];
-            includedCheck.orderNum = check.orderNum;
-            return includedCheck;
+          _.map($scope.currentLicenceEdition.part.includedChecks, function (partIndex) {
+            return _.where(checks, { partIndex: partIndex })[0];
           });
-
-        $scope.includedChecks = _.sortBy($scope.includedChecks, 'orderNum');
       });
 
     $scope.addCheck = function () {
@@ -40,22 +37,8 @@
       });
 
       modalInstance.result.then(function (newCheck) {
-        var lastOrderNum = 0,
-          lastCheck = _.last($scope.includedChecks);
-        if (lastCheck) {
-          lastOrderNum = _.last($scope.includedChecks).orderNum;
-        }
-
-        newCheck.orderNum = ++lastOrderNum;
         $scope.includedChecks.push(newCheck);
-
-        $scope.currentLicenceEdition.part.includedChecks =
-          _.map($scope.includedChecks, function(check) {
-            return {
-              orderNum: check.orderNum,
-              partIndex: check.partIndex
-            };
-          });
+        $scope.currentLicenceEdition.part.includedChecks.push(newCheck.partIndex);
         $scope.save();
       });
 
@@ -64,27 +47,16 @@
 
     $scope.addExistingCheck = function () {
       var modalInstance = scModal.open('chooseChecks', {
-        includedChecks: _.pluck($scope.currentLicenceEdition.part.includedChecks, 'partIndex'),
+        includedChecks: $scope.currentLicenceEdition.part.includedChecks,
         lotId: $stateParams.id
       });
 
       modalInstance.result.then(function (selectedChecks) {
-        var lastOrderNum = 0,
-          lastCheck = _.last($scope.includedChecks);
-        if (lastCheck) {
-          lastOrderNum = _.last($scope.includedChecks).orderNum;
-        }
+        $scope.includedChecks = $scope.includedChecks.concat(selectedChecks);
 
-        _.forEach(selectedChecks, function(check) {
-          var newlyAddedCheck = {
-            orderNum: ++lastOrderNum,
-            partIndex: check.partIndex
-          };
-          $scope.currentLicenceEdition.part.includedChecks.push(newlyAddedCheck);
-
-          check.orderNum = newlyAddedCheck.orderNum;
-          $scope.includedChecks.push(check);
-        });
+        $scope.currentLicenceEdition.part.includedChecks = 
+          $scope.currentLicenceEdition.part.includedChecks
+          .concat(_.pluck(selectedChecks, 'partIndex'));
 
         $scope.save();
       });
@@ -99,9 +71,9 @@
             $scope.includedChecks = _.without($scope.includedChecks, check);
 
             _.remove($scope.currentLicenceEdition.part.includedChecks,
-                function(includedCheck) {
-                  return check.partIndex === includedCheck.partIndex;
-                });
+              function(includedCheckPartIndex) {
+                return check.partIndex === includedCheckPartIndex;
+              });
             $scope.save();
           }
         });
@@ -114,14 +86,8 @@
     $scope.saveOrder = function () {
       $scope.includedChecks = _.sortBy($scope.includedChecks, 'orderNum');
       $scope.changeOrderMode = false;
-      $scope.currentLicenceEdition.part.includedChecks = [];
-      _.forEach($scope.includedChecks, function (check) {
-        var changedCheck = {
-          orderNum: check.orderNum,
-          partIndex: check.partIndex
-        };
-        $scope.currentLicenceEdition.part.includedChecks.push(changedCheck);
-      });
+      $scope.currentLicenceEdition.part.includedChecks =
+        _.pluck($scope.includedChecks, 'partIndex');
       return $scope.save();
     }; 
 

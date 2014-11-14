@@ -17,7 +17,8 @@
   ) {
     $scope.currentLicenceEdition = currentLicenceEdition;
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
-
+    $scope.currentLicenceEdition.part.includedMedicals =
+      $scope.currentLicenceEdition.part.includedMedicals || [];
     $q.all([
       Persons.get({ id: $stateParams.id }).$promise,
       PersonDocumentMedicals.query({ id: $stateParams.id }).$promise
@@ -26,12 +27,9 @@
       var medicals = results[1];
 
       $scope.includedMedicals = 
-        _.map($scope.currentLicenceEdition.part.includedMedicals, function (medical) {
-          var includedMedical = _.where(medicals, { partIndex: medical.partIndex })[0];
-          includedMedical.orderNum = medical.orderNum;
-          return includedMedical;
+        _.map($scope.currentLicenceEdition.part.includedMedicals, function (partIndex) {
+          return _.where(medicals, { partIndex: partIndex })[0];
         });
-      $scope.includedMedicals = _.sortBy($scope.includedMedicals, 'orderNum');
     });
 
     $scope.addMedical = function () {
@@ -42,22 +40,8 @@
       });
 
       modalInstance.result.then(function (newMedical) {
-        var lastOrderNum = 0,
-          lastMedical = _.last($scope.includedMedicals);
-        if (lastMedical) {
-          lastOrderNum = _.last($scope.includedMedicals).orderNum;
-        }
-
-        newMedical.orderNum = ++lastOrderNum;
         $scope.includedMedicals.push(newMedical);
-
-        $scope.currentLicenceEdition.part.includedMedicals =
-          _.map($scope.includedMedicals, function(medical) {
-            return {
-              orderNum: medical.orderNum,
-              partIndex: medical.partIndex
-            };
-          });
+        $scope.currentLicenceEdition.part.includedMedicals.push(newMedical.partIndex);
         $scope.save();
       });
 
@@ -66,28 +50,17 @@
 
     $scope.addExistingMedical = function () {
       var modalInstance = scModal.open('chooseMedicals', {
-        includedMedicals: _.pluck($scope.currentLicenceEdition.part.includedMedicals, 'partIndex'),
+        includedMedicals: $scope.currentLicenceEdition.part.includedMedicals,
         person: $scope.person,
         lotId: $stateParams.id
       });
 
       modalInstance.result.then(function (selectedMedicals) {
-        var lastOrderNum = 0,
-          lastCert = _.last($scope.includedMedicals);
-        if (lastCert) {
-          lastOrderNum = _.last($scope.includedMedicals).orderNum;
-        }
+        $scope.includedMedicals = $scope.includedMedicals.concat(selectedMedicals);
 
-        _.forEach(selectedMedicals, function(medical) {
-          var newlyAddedMedical = {
-            orderNum: ++lastOrderNum,
-            partIndex: medical.partIndex
-          };
-          $scope.currentLicenceEdition.part.includedMedicals.push(newlyAddedMedical);
-
-          medical.orderNum = newlyAddedMedical.orderNum;
-          $scope.includedMedicals.push(medical);
-        });
+        $scope.currentLicenceEdition.part.includedMedicals = 
+          $scope.currentLicenceEdition.part.includedMedicals
+          .concat(_.pluck(selectedMedicals, 'partIndex'));
 
         $scope.save();
       });
@@ -100,10 +73,8 @@
         .then(function (result) {
           if (result === 'OK') {
             $scope.includedMedicals = _.without($scope.includedMedicals, medical);
-            _.remove($scope.currentLicenceEdition.part.includedMedicals,
-              function(includedMedical) {
-                return medical.partIndex === includedMedical.partIndex;
-              });
+            $scope.currentLicenceEdition.part.includedMedicals =
+              _.pluck($scope.includedMedicals, 'partIndex');
             $scope.save();
           }
         });
@@ -116,14 +87,8 @@
     $scope.saveOrder = function () {
       $scope.includedMedicals = _.sortBy($scope.includedMedicals, 'orderNum');
       $scope.changeOrderMode = false;
-      $scope.currentLicenceEdition.part.includedMedicals = [];
-      _.forEach($scope.includedMedicals, function (medical) {
-        var changedMedical = {
-          orderNum: medical.orderNum,
-          partIndex: medical.partIndex
-        };
-        $scope.currentLicenceEdition.part.includedMedicals.push(changedMedical);
-      });
+      $scope.currentLicenceEdition.part.includedMedicals =
+        _.pluck($scope.includedMedicals, 'partIndex');
       return $scope.save();
     }; 
 

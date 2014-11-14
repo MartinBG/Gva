@@ -16,6 +16,8 @@
 
     $scope.currentLicenceEdition = currentLicenceEdition;
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
+    $scope.currentLicenceEdition.part.includedTrainings =
+      $scope.currentLicenceEdition.part.includedTrainings || [];
 
     PersonRatings
       .getRatingsWithAllEditions({ id: $stateParams.id })
@@ -28,19 +30,6 @@
             editionPartIndex: rating.index
           });
         });
-
-        $scope.includedRatings = 
-          _.map($scope.currentLicenceEdition.part.includedRatings, function (rating) {
-            var includedRating = _.where(ratings, { 
-              ratingPartIndex: rating.ind,
-              editionPartIndex: rating.index
-            })[0];
-            includedRating.orderNum = rating.orderNum;
-
-            return includedRating;
-          });
-
-        $scope.includedRatings = _.sortBy($scope.includedRatings, 'orderNum');
       });
 
     $scope.addRating = function () {
@@ -50,12 +39,6 @@
       });
 
       modalInstance.result.then(function (newRating) {
-        var lastOrderNum = 0,
-          lastTraining = _.last($scope.includedRatings);
-        if (lastTraining) {
-          lastOrderNum = _.last($scope.includedRatings).orderNum;
-        }
-
         PersonRatings.getRatingsWithAllEditions({ id: $stateParams.id })
           .$promise
           .then(function (ratings) {
@@ -67,15 +50,13 @@
               }
             });
 
-            rating.orderNum = ++lastOrderNum;
             $scope.includedRatings.push(rating);
             
             $scope.currentLicenceEdition.part.includedRatings =
               _.map($scope.includedRatings, function(rating) {
                 return {
                   ind: rating.ratingPartIndex,
-                  index: rating.editionPartIndex,
-                  orderNum: rating.orderNum
+                  index: rating.editionPartIndex
                 };
               });
           });
@@ -93,21 +74,13 @@
       });
 
       modalInstance.result.then(function (selectedRatings) {
-        var lastOrderNum = 0,
-          lastRating = _.last($scope.includedRatings);
-        if (lastRating) {
-          lastOrderNum = _.last($scope.includedRatings).orderNum;
-        }
-
         _.forEach(selectedRatings, function(rating) {
           var newlyAddedRating = {
-            orderNum: ++lastOrderNum,
             ind: rating.ratingPartIndex,
             index: rating.editionPartIndex
           };
           $scope.currentLicenceEdition.part.includedRatings.push(newlyAddedRating);
 
-          rating.orderNum = newlyAddedRating.orderNum;
           rating.docDateValidFrom = rating.lastDocDateValidFrom;
           rating.docDateValidTo = rating.lastDocDateValidTo;
 
@@ -145,7 +118,6 @@
       $scope.currentLicenceEdition.part.includedRatings = [];
       _.forEach($scope.includedRatings, function (rating) {
         var changedRating = {
-          orderNum: rating.orderNum,
           ind: rating.ratingPartIndex,
           index: rating.editionPartIndex
         };

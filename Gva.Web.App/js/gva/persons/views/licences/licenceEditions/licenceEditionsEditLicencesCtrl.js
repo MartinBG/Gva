@@ -16,18 +16,17 @@
 
     $scope.currentLicenceEdition = currentLicenceEdition;
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
+        $scope.currentLicenceEdition.part.includedLicences =
+      $scope.currentLicenceEdition.part.includedLicences || [];
 
     PersonLicences
       .query({ id: $stateParams.id })
       .$promise
       .then(function (licences) {
         $scope.includedLicences = 
-          _.map($scope.currentLicenceEdition.part.includedLicences, function (licence) {
-            var includedLicence = _.where(licences, { partIndex: licence.partIndex })[0];
-            includedLicence.orderNum = licence.orderNum;
-            return includedLicence;
+          _.map($scope.currentLicenceEdition.part.includedLicences, function (partIndex) {
+           return _.where(licences, { partIndex: partIndex })[0];
           });
-        $scope.includedLicences = _.sortBy($scope.includedLicences, 'orderNum');
       });
 
     $scope.addExistingLicence = function () {
@@ -38,27 +37,16 @@
       }
 
       var modalInstance = scModal.open('chooseLicences', {
-        includedLicences: _.pluck(hideLicences, 'partIndex'),
+        includedLicences: hideLicences,
         lotId: $stateParams.id
       });
 
        modalInstance.result.then(function (selectedLicences) {
-        var lastOrderNum = 0,
-          lastLicence = _.last($scope.includedLicences);
-        if (lastLicence) {
-          lastOrderNum = _.last($scope.includedLicences).orderNum;
-        }
+        $scope.includedLicences = $scope.includedLicences.concat(selectedLicences);
 
-        _.forEach(selectedLicences, function(licence) {
-          var newlyAddedLicence = {
-            orderNum: ++lastOrderNum,
-            partIndex: licence.partIndex
-          };
-          $scope.currentLicenceEdition.part.includedLicences.push(newlyAddedLicence);
-
-          licence.orderNum = newlyAddedLicence.orderNum;
-          $scope.includedLicences.push(licence);
-        });
+        $scope.currentLicenceEdition.part.includedLicences = 
+          $scope.currentLicenceEdition.part.includedLicences
+          .concat(_.pluck(selectedLicences, 'partIndex'));
 
         $scope.save();
       });
@@ -71,9 +59,10 @@
         .then(function (result) {
           if (result === 'OK') {
             $scope.includedLicences = _.without($scope.includedLicences, licence);
+
             _.remove($scope.currentLicenceEdition.part.includedLicences,
-              function(includedLicence) {
-                return licence.partIndex === includedLicence.partIndex;
+              function(includedLicencesPartIndex) {
+                return licence.partIndex === includedLicencesPartIndex;
               });
             $scope.save();
           }
@@ -87,14 +76,8 @@
     $scope.saveOrder = function () {
       $scope.includedLicences = _.sortBy($scope.includedLicences, 'orderNum');
       $scope.changeOrderMode = false;
-      $scope.currentLicenceEdition.part.includedLicences = [];
-      _.forEach($scope.includedLicences, function (licence) {
-        var changedLicence = {
-          orderNum: licence.orderNum,
-          partIndex: licence.partIndex
-        };
-        $scope.currentLicenceEdition.part.includedLicences.push(changedLicence);
-      });
+      $scope.currentLicenceEdition.part.includedLicences =
+        _.pluck($scope.includedLicences, 'partIndex');
       return $scope.save();
     }; 
 

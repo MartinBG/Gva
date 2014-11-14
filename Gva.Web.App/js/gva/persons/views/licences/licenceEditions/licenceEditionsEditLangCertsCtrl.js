@@ -16,18 +16,17 @@
 
     $scope.currentLicenceEdition = currentLicenceEdition;
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
+    $scope.currentLicenceEdition.part.includedLangCerts =
+      $scope.currentLicenceEdition.part.includedLangCerts || [];
 
     PersonDocumentLangCerts
       .query({ id: $stateParams.id })
       .$promise
       .then(function (langCerts) {
         $scope.includedLangCerts = 
-          _.map($scope.currentLicenceEdition.part.includedLangCerts, function (cert) {
-            var includedLangCert = _.where(langCerts, { partIndex: cert.partIndex })[0];
-            includedLangCert.orderNum = cert.orderNum;
-            return includedLangCert;
+          _.map($scope.currentLicenceEdition.part.includedLangCerts, function (partIndex) {
+            return _.where(langCerts, { partIndex: partIndex })[0];
           });
-        $scope.includedLangCerts = _.sortBy($scope.includedLangCerts, 'orderNum');
       });
 
     $scope.addLangCert = function () {
@@ -38,22 +37,8 @@
       });
 
       modalInstance.result.then(function (newLangCert) {
-        var lastOrderNum = 0,
-          lastExam = _.last($scope.includedLangCerts);
-        if (lastExam) {
-          lastOrderNum = _.last($scope.includedLangCerts).orderNum;
-        }
-
-        newLangCert.orderNum = ++lastOrderNum;
         $scope.includedLangCerts.push(newLangCert);
-
-        $scope.currentLicenceEdition.part.includedLangCerts =
-          _.map($scope.includedLangCerts, function(langCert) {
-            return {
-              orderNum: langCert.orderNum,
-              partIndex: langCert.partIndex
-            };
-          });
+        $scope.currentLicenceEdition.part.includedLangCerts.push(newLangCert.partIndex);
         $scope.save();
       });
 
@@ -62,28 +47,16 @@
 
     $scope.addExistingLangCert = function () {
       var modalInstance = scModal.open('chooseLangCerts', {
-        includedLangCerts:
-          _.pluck($scope.currentLicenceEdition.part.includedLangCerts, 'partIndex'),
+        includedLangCerts: $scope.currentLicenceEdition.part.includedLangCerts,
         lotId: $stateParams.id
       });
 
       modalInstance.result.then(function (selectedLangCerts) {
-        var lastOrderNum = 0,
-          lastCert = _.last($scope.includedLangCerts);
-        if (lastCert) {
-          lastOrderNum = _.last($scope.includedLangCerts).orderNum;
-        }
+        $scope.includedLangCerts = $scope.includedLangCerts.concat(selectedLangCerts);
 
-        _.forEach(selectedLangCerts, function(langCert) {
-          var newlyAddedCertLang = {
-            orderNum: ++lastOrderNum,
-            partIndex: langCert.partIndex
-          };
-          $scope.currentLicenceEdition.part.includedLangCerts.push(newlyAddedCertLang);
-
-          langCert.orderNum = newlyAddedCertLang.orderNum;
-          $scope.includedLangCerts.push(langCert);
-        });
+        $scope.currentLicenceEdition.part.includedLangCerts = 
+          $scope.currentLicenceEdition.part.includedLangCerts
+          .concat(_.pluck(selectedLangCerts, 'partIndex'));
 
         $scope.save();
       });
@@ -96,9 +69,10 @@
         .then(function (result) {
           if (result === 'OK') {
             $scope.includedLangCerts = _.without($scope.includedLangCerts, langCert);
+
             _.remove($scope.currentLicenceEdition.part.includedLangCerts,
-              function(includedLangCert) {
-                return langCert.partIndex === includedLangCert.partIndex;
+              function(includedLangCertsPartIndex) {
+                return langCert.partIndex === includedLangCertsPartIndex;
               });
             $scope.save();
           }
@@ -112,14 +86,8 @@
     $scope.saveOrder = function () {
       $scope.includedLangCerts = _.sortBy($scope.includedLangCerts, 'orderNum');
       $scope.changeOrderMode = false;
-      $scope.currentLicenceEdition.part.includedLangCerts = [];
-      _.forEach($scope.includedLangCerts, function (cert) {
-        var changedCert = {
-          orderNum: cert.orderNum,
-          partIndex: cert.partIndex
-        };
-        $scope.currentLicenceEdition.part.includedLangCerts.push(changedCert);
-      });
+      $scope.currentLicenceEdition.part.includedLangCerts =
+        _.pluck($scope.includedLangCerts, 'partIndex');
       return $scope.save();
     }; 
 
