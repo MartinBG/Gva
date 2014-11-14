@@ -4,17 +4,21 @@
 (function (angular) {
   'use strict';
 
-  function SelectDirective() {
+  function SelectDirective($parse) {
+    function preLink (scope, iElement, iAttrs) {
+      scope.select2Options = $parse(iAttrs.scSelect)(scope.$parent);
+    }
+
     return {
       priority: 110,
       restrict: 'E',
       replace: true,
       templateUrl: 'js/scaffolding/directives/select/selectDirective.html',
-      compile: function (tElement, tAttrs) {
-        tAttrs.$set('uiSelect2', tAttrs.scSelect);
-      }
+      require: '?ngModel',
+      link: { pre: preLink }
     };
   }
+  SelectDirective.$inject = ['$parse'];
 
   angular.module('scaffolding').directive('scSelect', SelectDirective);
 }(angular));
