@@ -25,20 +25,20 @@
 
     $scope.publishers = publishers;
 
-    $scope.searchParams = {
-      publisherName: undefined,
-      publisherType: undefined,
-      publisherCode: undefined,
-      publisherLin: undefined
+    $scope.filters = {
+      name: null,
+      publisherType: null,
+      code: null,
+      lin: null
     };
 
     $scope.search = function () {
       return Publishers.query({
-        publisherName: $scope.searchParams.publisherName,
-        publisherCode: $scope.searchParams.publisherCode,
-        publisherLin: $scope.searchParams.publisherLin,
-        publisherType: $scope.searchParams.publisherType ?
-          $scope.searchParams.publisherType.id : undefined
+        publisherName: $scope.filters.name,
+        publisherCode: $scope.filters.code,
+        publisherLin: $scope.filters.lin,
+        publisherType: $scope.filters.publisherType ?
+          $scope.filters.publisherType.id : undefined
       }).$promise.then(function (publishers) {
         $scope.publishers = publishers;
       });
