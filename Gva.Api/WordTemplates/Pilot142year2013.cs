@@ -147,18 +147,18 @@ namespace Gva.Api.WordTemplates
                 .Content;
 
             var includedTrainings = lastEdition.IncludedTrainings
-                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedLangCerts = lastEdition.IncludedLangCerts
-                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
             var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
             var includedLicences = lastEdition.IncludedLicences
-                .Select(i => lot.Index.GetPart<PersonLicenceDO>("licences/" + i.PartIndex));
+                .Select(i => lot.Index.GetPart<PersonLicenceDO>("licences/" + i));
             var includedMedicals = lastEdition.IncludedMedicals
-                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
             var includedExams = lastEdition.IncludedExams
-                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
 
             var inspectorId = lastEdition.Inspector == null ? (int?)null : lastEdition.Inspector.NomValueId;
             object[] instructorData = new object[0];
@@ -209,8 +209,8 @@ namespace Gva.Api.WordTemplates
                 {
                     L_LICENCE_NO = licenceNumber,
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
-                    COUNTRY_NAME_BG = country.Name,
-                    COUNTRY_CODE = country.TextContent.Get<string>("nationalityCodeCA"),
+                    COUNTRY_NAME_BG = country != null ? country.Name : null,
+                    COUNTRY_CODE = country != null ? country.TextContent.Get<string>("nationalityCodeCA") : null,
                     ISSUE_DATE = lastEdition.DocumentDateValidFrom.Value,
                     OTHER_LICENCE = otherLicences,
                     T_DOCUMENTS = new object[0],
@@ -250,7 +250,11 @@ namespace Gva.Api.WordTemplates
         private object GetPersonData(PersonDataDO personData, PersonAddressDO personAddress)
         {
             var placeOfBirth = personData.PlaceOfBirth;
-            var country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
+            dynamic country = null;
+            if (placeOfBirth != null)
+            {
+                country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
+            }
 
             return new
             {
@@ -263,26 +267,26 @@ namespace Gva.Api.WordTemplates
                 DATE_OF_BIRTH = personData.DateOfBirth,
                 PLACE_OF_BIRTH = string.Format(
                     "{0} {1}",
-                    country.Name,
-                    placeOfBirth.Name),
+                    country != null ? country.Name : null,
+                    placeOfBirth != null ? placeOfBirth.Name : null),
                 PLACE_OF_BIRTH_TRAN = string.Format(
                     "{0} {1}",
-                    country.NameAlt,
-                    placeOfBirth.NameAlt),
+                    country != null ? country.NameAlt : null,
+                    placeOfBirth != null ? placeOfBirth.NameAlt : null),
                 ADDRESS = string.Format(
                     "{0}, {1}",
-                    personAddress.Settlement.Name,
+                    personAddress.Settlement != null? personAddress.Settlement.Name : null,
                     personAddress.Address),
                 ADDRESS_TRANS = string.Format(
                     "{0}, {1}",
                     personAddress.AddressAlt,
-                    personAddress.Settlement.NameAlt)
+                    personAddress.Settlement != null? personAddress.Settlement.NameAlt : null)
             };
         }
 
         private NomValue GetCountry(PersonAddressDO personAddress)
         {
-            int? countryId = personAddress.Settlement.ParentValueId;
+            int? countryId = personAddress.Settlement != null? personAddress.Settlement.ParentValueId : (int?)null;
 
             NomValue country = countryId.HasValue ?
                 this.nomRepository.GetNomValue("countries", countryId.Value) :
@@ -436,7 +440,7 @@ namespace Gva.Api.WordTemplates
             return includedRatings
                 .Where(r =>
                     r.Content.Authorization != null &&
-                    r.Content.Authorization.Code != "RTO" &&
+                    r.Content.Authorization.Code != "RTO" && r.Content.Authorization.ParentValueId.HasValue &&
                     !authorizationGroupIds.Contains(r.Content.Authorization.ParentValueId.Value))
                 .Select(r =>
                     {

@@ -54,16 +54,16 @@ namespace Gva.Api.WordTemplates
             var lastEdition = editions.Last();
 
             var includedTrainings = lastEdition.IncludedTrainings
-                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedLangCerts = lastEdition.IncludedLangCerts
-                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
             var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
             var includedLicences = lastEdition.IncludedLicences
-                .Select(i => lot.Index.GetPart<PersonLicenceDO>("licences/" + i.PartIndex));
+                .Select(i => lot.Index.GetPart<PersonLicenceDO>("licences/" + i));
             var includedMedicals = lastEdition.IncludedMedicals
-                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
 
             var inspectorId = lastEdition.Inspector == null ? (int?)null : lastEdition.Inspector.NomValueId;
             List<object> instructorData = new List<object>();
@@ -136,7 +136,11 @@ namespace Gva.Api.WordTemplates
         private object GetPersonData(PersonDataDO personData, PersonAddressDO personAddress)
         {
             var placeOfBirth = personData.PlaceOfBirth;
-            var country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
+            NomValue country = null;
+            if (placeOfBirth != null)
+            {
+                country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
+            }
 
             return new
             {
@@ -149,20 +153,20 @@ namespace Gva.Api.WordTemplates
                 DATE_OF_BIRTH = personData.DateOfBirth,
                 PLACE_OF_BIRTH = string.Format(
                     "{0} {1}",
-                    country.Name,
-                    placeOfBirth.Name),
+                    country != null ? country.Name : null,
+                    placeOfBirth != null ? placeOfBirth.Name : null),
                 PLACE_OF_BIRTH_TRAN = string.Format(
                     "{0} {1}",
-                    country.NameAlt,
-                    placeOfBirth.NameAlt),
+                    country != null ? country.NameAlt : null,
+                    placeOfBirth != null ? placeOfBirth.NameAlt : null),
                 ADDRESS = string.Format(
                     "{0}, {1}",
-                    personAddress.Settlement.Name,
+                    personAddress.Settlement != null ? personAddress.Settlement.Name : null,
                     personAddress.Address),
                 ADDRESS_TRANS = string.Format(
                     "{0}, {1}",
                     personAddress.AddressAlt,
-                    personAddress.Settlement.NameAlt)
+                    personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null)
             };
         }
 

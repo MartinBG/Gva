@@ -5,6 +5,7 @@ using Common.Json;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
 using Regs.Api.Models;
+using Common.Api.Models;
 
 namespace Gva.Api.WordTemplates
 {
@@ -191,9 +192,9 @@ namespace Gva.Api.WordTemplates
             var lastEdition = editions.Last();
 
             var includedTrainings = lastEdition.IncludedTrainings
-                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedMedicals = lastEdition.IncludedMedicals
-                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
             var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
@@ -243,8 +244,13 @@ namespace Gva.Api.WordTemplates
         private object GetPersonData(PersonDataDO personData, PersonAddressDO personAddress)
         {
             var placeOfBirth = personData.PlaceOfBirth;
-            var country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
-            var nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+            NomValue country = null;
+            NomValue nationality = null;
+            if (placeOfBirth != null)
+            {
+                country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
+                nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+            }
 
             return new
             {
@@ -259,13 +265,13 @@ namespace Gva.Api.WordTemplates
                     DATE_OF_BIRTH = personData.DateOfBirth,
                     PLACE_OF_BIRTH = new
                     {
-                        COUNTRY_NAME = country.Name,
-                        TOWN_VILLAGE_NAME = placeOfBirth.Name
+                        COUNTRY_NAME = country != null ? country.Name : null,
+                        TOWN_VILLAGE_NAME = placeOfBirth != null ? placeOfBirth.Name : null
                     },
                     PLACE_OF_BIRTH_TRANS = new
                     {
-                        COUNTRY_NAME = country.NameAlt,
-                        TOWN_VILLAGE_NAME = placeOfBirth.NameAlt
+                        COUNTRY_NAME = country != null ? country.NameAlt : null,
+                        TOWN_VILLAGE_NAME = placeOfBirth != null ? placeOfBirth.NameAlt : null
                     }
                 },
                 ADDRESS = string.Format(
@@ -278,8 +284,8 @@ namespace Gva.Api.WordTemplates
                     personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null),
                 NATIONALITY = new
                 {
-                    COUNTRY_NAME_BG = nationality.Name,
-                    COUNTRY_CODE = nationality.TextContent.Get<string>("nationalityCodeCA")
+                    COUNTRY_NAME_BG = nationality != null ? nationality.Name : null,
+                    COUNTRY_CODE = nationality != null ? nationality.TextContent.Get<string>("nationalityCodeCA") : null
                 }
             };
         }

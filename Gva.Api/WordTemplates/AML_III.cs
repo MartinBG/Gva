@@ -86,32 +86,32 @@ namespace Gva.Api.WordTemplates
                     BIRTH = new
                     {
                         DATE = personData.DateOfBirth,
-                        PLACE_EN = personData.PlaceOfBirth.NameAlt,
-                        PLACE = personData.PlaceOfBirth.Name
+                        PLACE_EN = personData.PlaceOfBirth != null ? personData.PlaceOfBirth.NameAlt : null,
+                        PLACE = personData.PlaceOfBirth != null ? personData.PlaceOfBirth.Name : null,
                     },
                     ADDRESS = new
                     {
                         ADDR_EN = string.Format(
                             "{0}, {1}",
-                            personAddress.Settlement.NameAlt,
+                            personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null,
                             personAddress.AddressAlt),
                         ADDR = string.Format(
                             "{0}, {1}",
-                            personAddress.Settlement.Name,
+                            personAddress.Settlement != null ? personAddress.Settlement.Name : null,
                             personAddress.Address),
                     },
                     NATIONALITY = new
                     {
-                        NAME = country.Name,
-                        CODE = country.Code
+                        NAME = country != null ? country.Name : null,
+                        CODE = country != null ? country.Code : null
                     },
                     LIC_NO2 = licenceNumber,
                     NAME = personNameBG,
                     BIRTH1 = string.Format("{0:dd.mm.yyyy} {1}",
                        personData.DateOfBirth,
-                       personData.PlaceOfBirth.Name),
+                       personData.PlaceOfBirth != null ?  personData.PlaceOfBirth.Name : null),
                     ADDR = personAddress.Address,
-                    NATIONALITY1 = country.Name,
+                    NATIONALITY1 = country != null ? country.Name : null,
                     LICNO = licenceNumber,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_VALID_DATE = lastEdition.DocumentDateValidTo,
@@ -144,7 +144,7 @@ namespace Gva.Api.WordTemplates
 
         private NomValue GetCountry(PersonAddressDO personAddress)
         {
-            int? countryId = personAddress.Settlement.ParentValueId;
+            int? countryId = personAddress.Settlement != null ? personAddress.Settlement.ParentValueId : (int?)null;
             NomValue country = countryId.HasValue ?
                 this.nomRepository.GetNomValue("countries", countryId.Value) :
                 new NomValue

@@ -8,6 +8,7 @@ using Regs.Api.Repositories.LotRepositories;
 using Regs.Api.Models;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
+using Common.Api.Models;
 
 namespace Gva.Api.WordTemplates
 {
@@ -109,11 +110,11 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
             var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
             var includedTrainings = lastEdition.IncludedTrainings
-                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedLangCerts = lastEdition.IncludedLangCerts
-                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
             var includedMedicals = lastEdition.IncludedMedicals
-                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i.PartIndex).Content);
+                .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
@@ -123,8 +124,13 @@ namespace Gva.Api.WordTemplates
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var placeOfBirth = personData.PlaceOfBirth;
-            var country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
-            var nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+            NomValue country = null;
+            NomValue nationality = null;
+            if (placeOfBirth != null)
+            {
+                country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
+                nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+            }
             var address = string.Format(
                 "{0}, {1}",
                 personAddress.Settlement != null? personAddress.Settlement.Name : null,
@@ -153,17 +159,17 @@ namespace Gva.Api.WordTemplates
                     SURNAME_BG = personData.MiddleName.ToUpper(),
                     SURNAME_TRANS = personData.MiddleNameAlt.ToUpper(),
                     DATE_OF_BIRTH = personData.DateOfBirth,
-                    COUNTRY = country.Name,
+                    COUNTRY = country != null? country.Name : null,
                     CITY = placeOfBirth.Name,
-                    COUNTRY_EN = country.NameAlt,
-                    CITY_EN = placeOfBirth.NameAlt,
+                    COUNTRY_EN = country != null ? country.NameAlt : null,
+                    CITY_EN = placeOfBirth != null? placeOfBirth.NameAlt : null,
                     ADDRESS = address,
                     ADDRESS_EN = string.Format(
                         "{0}, {1}",
                         personAddress.AddressAlt,
                         personAddress.Settlement != null ? personAddress.Settlement.Name : null),
-                    NATIONALITY = nationality.Name,
-                    NATIONALITY_EN = nationality.TextContent.Get<string>("nationalityCodeCA"),
+                    NATIONALITY = nationality != null ? nationality.Name : null,
+                    NATIONALITY_EN = nationality != null ? nationality.TextContent.Get<string>("nationalityCodeCA") : null ,
                     L_LICENCE_PRIV = this.GetLicencePrivileges(licenceType.Code),
                     L_RATINGS = this.GetRatings(includedRatings, ratingEditions),
                     ENDORSEMENT = this.GetEndorsements(includedRatings, ratingEditions),

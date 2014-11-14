@@ -5,6 +5,7 @@ using Common.Json;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
 using Regs.Api.Models;
+using Common.Api.Models;
 
 namespace Gva.Api.WordTemplates
 {
@@ -50,8 +51,14 @@ namespace Gva.Api.WordTemplates
 
             var ratings = this.GetRatings(includedRatings, ratingEditions);
             var placeOfBirth = personData.PlaceOfBirth;
-            var country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
-            var nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+            NomValue country = null;
+            NomValue nationality = null;
+            if (placeOfBirth != null) 
+            {
+                country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
+                nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
+            }
+
 
             var refNumber = string.Format(
                 "BG {0} - {1} - {2}",
@@ -75,23 +82,23 @@ namespace Gva.Api.WordTemplates
                     PERSON_NAME1 = personName,
                     PERSON_NAME_TRANS1 = personNameAlt,
                     BIRTHDATE1 = personData.DateOfBirth,
-                    BIRTHCOUNTRY1 = country.Name,
-                    BIRTHCOUNTRY_TRANS1 = country.NameAlt,
-                    BIRTHPLACE1 = placeOfBirth.Name,
-                    BIRTHPLACE_TRANS1 = placeOfBirth.NameAlt,
-                    NATIONALITY1 = nationality.Name,
-                    NATIONALITY_CODE1 = nationality.TextContent.Get<string>("nationalityCodeCA"),
+                    BIRTHCOUNTRY1 = country != null ? country.Name : null,
+                    BIRTHCOUNTRY_TRANS1 = country != null ? country.NameAlt : null,
+                    BIRTHPLACE1 = placeOfBirth != null? placeOfBirth.Name : null,
+                    BIRTHPLACE_TRANS1 = placeOfBirth != null ? placeOfBirth.NameAlt : null,
+                    NATIONALITY1 = nationality != null? nationality.Name : null,
+                    NATIONALITY_CODE1 = nationality != null? nationality.TextContent.Get<string>("nationalityCodeCA") : null,
                     ISSUE_DATE1 = lastEdition.DocumentDateValidFrom,
                     REF_NO2 = refNumber,
                     PERSON_NAME2 = personName,
                     PERSON_NAME_TRANS2 = personNameAlt,
                     BIRTHDATE2 = personData.DateOfBirth,
-                    BIRTHCOUNTRY2 = country.Name,
-                    BIRTHCOUNTRY_TRANS2 = country.NameAlt,
-                    BIRTHPLACE2 = placeOfBirth.Name,
-                    BIRTHPLACE_TRANS2 = placeOfBirth.NameAlt,
-                    NATIONALITY2 = nationality.Name,
-                    NATIONALITY_CODE2 = nationality.TextContent.Get<string>("nationalityCodeCA"),
+                    BIRTHCOUNTRY2 = country != null ? country.Name : null,
+                    BIRTHCOUNTRY_TRANS2 = country != null ? country.NameAlt : null,
+                    BIRTHPLACE2 = placeOfBirth != null ? placeOfBirth.Name : null,
+                    BIRTHPLACE_TRANS2 = placeOfBirth != null ? placeOfBirth.NameAlt : null,
+                    NATIONALITY2 = nationality != null ? nationality.Name : null,
+                    NATIONALITY_CODE2 = nationality != null ? nationality.TextContent.Get<string>("nationalityCodeCA") : null,
                     ISSUE_DATE2 = lastEdition.DocumentDateValidFrom,
                     REF_NO21 = refNumber,
                     REF_NO22 = refNumber,

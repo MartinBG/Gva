@@ -400,9 +400,9 @@ namespace Gva.Rio.IncomingDocProcessor
                     {
                         string foreignerFirstName = recipient.ForeignPerson.Names.FirstLatin;
                         string foreignerLastName = recipient.ForeignPerson.Names.LastLatin;
-                        string foreignerSettlement = recipient.ForeignPerson.PlaceOfBirth.SettlementName;
+                        string foreignerSettlement = recipient.ForeignPerson.PlaceOfBirth != null ? recipient.ForeignPerson.PlaceOfBirth.SettlementName : string.Empty;
                         DateTime? foreignerBirthDate = recipient.ForeignPerson.BirthDate;
-                        string foreignerCountryCode = recipient.ForeignPerson.PlaceOfBirth.CountryCode;
+                        string foreignerCountryCode = recipient.ForeignPerson.PlaceOfBirth != null ? recipient.ForeignPerson.PlaceOfBirth.CountryCode : string.Empty;
                         int? foreignerCountryId = null;
 
                         if (!String.IsNullOrWhiteSpace(foreignerCountryCode))
