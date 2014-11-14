@@ -23,7 +23,7 @@
         </thead>
         <tbody ng-model="currentLicenceEdition.part.includedLangCerts">
           <tr class="sort-disabled" ng-if="!currentLicenceEdition.part.includedLangCerts.length">
-            <td colspan="6" class="text-center" l10n-text="persons.licenceEditionDirective.noLangCerts"></td>
+            <td colspan="7" class="text-center" l10n-text="persons.licenceEditionDirective.noLangCerts"></td>
           </tr>
           <tr ng-repeat="langCert in includedLangCerts">
             <td ng-if="changeOrderMode">
