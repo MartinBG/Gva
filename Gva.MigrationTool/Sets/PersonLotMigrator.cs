@@ -1557,7 +1557,15 @@ namespace Gva.MigrationTool.Sets
                                         ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("person"))),
                                     new JProperty("bookPageNumber", r.bookPageNumber),
                                     new JProperty("pageCount", r.pageCount),
-                                    new JProperty("applications", r.applications)))))));
+                                    new JProperty("applications", r.applications)),
+                            new JObject(
+                                    new JProperty("isAdded", true),
+                                    new JProperty("file", null),
+                                    new JProperty("caseType", (r.staffType.Code != null ? Utils.ToJObject(PersonUtils.getPersonCaseTypeByStaffTypeCode(noms, r.staffType.Code)) : null)
+                                        ?? Utils.ToJObject(noms["personCaseTypes"].ByAlias("person"))),
+                                    new JProperty("bookPageNumber", null),
+                                    new JProperty("pageCount", null),
+                                    new JProperty("applications", new JArray())))))));
         }
 
         private IList<JObject> getPersonLicences(

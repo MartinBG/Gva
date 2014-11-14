@@ -112,7 +112,7 @@ namespace Gva.Api.Controllers.Persons
                 newLicence.Edition.Part.LicencePartIndex = licencePartVersion.Part.Index;
 
                 var editionPartVersion = lot.CreatePart("licenceEditions/*", newLicence.Edition.Part, this.userContext);
-                this.fileRepository.AddFileReference(editionPartVersion.Part, newLicence.Edition.Case);
+                this.fileRepository.AddFileReferences(editionPartVersion.Part, newLicence.Edition.Cases);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 
@@ -126,7 +126,7 @@ namespace Gva.Api.Controllers.Persons
                 return Ok(new PersonLicenceNewDO()
                     {
                         Licence = new CaseTypePartDO<PersonLicenceDO>(licencePartVersion),
-                        Edition = new CaseTypePartDO<PersonLicenceEditionDO>(editionPartVersion)
+                        Edition = new CaseTypesPartDO<PersonLicenceEditionDO>(editionPartVersion)
                     });
             }
         }

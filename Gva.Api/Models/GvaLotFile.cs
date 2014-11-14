@@ -24,6 +24,8 @@ namespace Gva.Api.Models
 
         public string PageIndex { get; set; }
 
+        public string Note { get; set; }
+
         public int? PageIndexInt { get; set; }
 
         public int? PageNumber { get; set; }
@@ -60,6 +62,7 @@ namespace Gva.Api.Models
             this.Property(t => t.PageIndex).HasColumnName("PageIndex");
             this.Property(t => t.PageIndexInt).HasColumnName("PageIndexInt");
             this.Property(t => t.PageNumber).HasColumnName("PageNumber");
+            this.Property(t => t.Note).HasColumnName("Note");
 
             // Relationships
             this.HasOptional(t => t.DocFile)

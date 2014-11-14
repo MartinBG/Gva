@@ -14,6 +14,7 @@
     $scope.setPart = scFormParams.setPart;
     $scope.hideApplications = scFormParams.hideApplications;
     $scope.hideFiles = scFormParams.hideFiles;
+    $scope.showNote = scFormParams.showNote;
 
     $scope.$watch('model', function () {
       if (isMultipleMode) {

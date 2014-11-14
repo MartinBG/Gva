@@ -27,6 +27,7 @@ namespace Gva.Api.ModelsDO
 
             this.BookPageNumber = lotFile.PageIndex;
             this.PageCount = lotFile.PageNumber;
+            this.Note = lotFile.Note;
 
             this.CaseType = new NomValue()
             {
@@ -53,6 +54,8 @@ namespace Gva.Api.ModelsDO
         public FileDataDO File { get; set; }
 
         public string BookPageNumber { get; set; }
+
+        public string Note { get; set; }
 
         public int? PageCount { get; set; }
 

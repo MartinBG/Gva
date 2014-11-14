@@ -337,7 +337,8 @@ namespace Gva.Api.Controllers.Applications
                     GvaCaseTypeId = applicationNewDO.CaseTypeId,
                     PageIndex = null,
                     PageIndexInt = null,
-                    PageNumber = null
+                    PageNumber = null,
+                    Note = null
                 };
 
                 GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()

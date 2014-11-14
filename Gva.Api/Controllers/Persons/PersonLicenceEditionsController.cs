@@ -19,7 +19,7 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/licences/{licencePartIndex}/licenceEditions")]
     [Authorize]
-    public class PersonLicenceEditionsController : GvaCaseTypePartController<PersonLicenceEditionDO>
+    public class PersonLicenceEditionsController : GvaCaseTypesPartController<PersonLicenceEditionDO>
     {
         private string path;
         private IUnitOfWork unitOfWork;
@@ -54,21 +54,32 @@ namespace Gva.Api.Controllers.Persons
         public IHttpActionResult GetNewLicenceEdition(int lotId, int caseTypeId, int? appId = null, int? licencePartIndex = null)
         {
             var caseType = this.caseTypeRepository.GetCaseType(caseTypeId);
-            CaseDO caseDO = new CaseDO()
-            {
-                CaseType = new NomValue
+            List<CaseDO> cases = new List<CaseDO>() { 
+                new CaseDO()
                 {
-                    NomValueId = caseType.GvaCaseTypeId,
-                    Name = caseType.Name,
-                    Alias = caseType.Alias
+                    CaseType = new NomValue
+                    {
+                        NomValueId = caseType.GvaCaseTypeId,
+                        Name = caseType.Name,
+                        Alias = caseType.Alias
+                    }
+                },
+                new CaseDO()
+                {
+                    CaseType = new NomValue
+                    {
+                        NomValueId = caseType.GvaCaseTypeId,
+                        Name = caseType.Name,
+                        Alias = caseType.Alias
+                    }
                 }
             };
-
             if (appId.HasValue)
             {
                 this.lotRepository.GetLotIndex(lotId);
 
-                caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
+                cases.First().Applications.Add(this.applicationRepository.GetInitApplication(appId));
+                cases.Last().Applications.Add(this.applicationRepository.GetInitApplication(appId));
             }
 
             PersonLicenceEditionDO newLicenceEdition = new PersonLicenceEditionDO()
@@ -77,7 +88,7 @@ namespace Gva.Api.Controllers.Persons
                 LicencePartIndex = licencePartIndex
             };
 
-            return Ok(new CaseTypePartDO<PersonLicenceEditionDO>(newLicenceEdition, caseDO));
+            return Ok(new CaseTypesPartDO<PersonLicenceEditionDO>(newLicenceEdition, cases));
         }
 
         [Route("")]
@@ -87,22 +98,22 @@ namespace Gva.Api.Controllers.Persons
                 .Where(epv => epv.Content.LicencePartIndex == licencePartIndex)
                 .OrderBy(epv => epv.Content.Index);
 
-            List<CaseTypePartDO<PersonLicenceEditionDO>> partVersionDOs = new List<CaseTypePartDO<PersonLicenceEditionDO>>();
+            List<CaseTypesPartDO<PersonLicenceEditionDO>> partVersionDOs = new List<CaseTypesPartDO<PersonLicenceEditionDO>>();
             foreach (var editionsPartVersion in editionsPartVersions)
             {
-                var lotFile = this.fileRepository.GetFileReference(editionsPartVersion.PartId, caseTypeId);
-                if (!caseTypeId.HasValue || lotFile != null)
+                var lotFiles = this.fileRepository.GetFileReferences(editionsPartVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFiles != null)
                 {
-                    partVersionDOs.Add(new CaseTypePartDO<PersonLicenceEditionDO>(editionsPartVersion, lotFile));
+                    partVersionDOs.Add(new CaseTypesPartDO<PersonLicenceEditionDO>(editionsPartVersion, lotFiles));
                 }
             }
-
+            
             return Ok(partVersionDOs);
         }
 
         [Route("")]
         [Validate]
-        public IHttpActionResult PostNewPart(int lotId, int licencePartIndex, CaseTypePartDO<PersonLicenceEditionDO> edition)
+        public IHttpActionResult PostNewPart(int lotId, int licencePartIndex, CaseTypesPartDO<PersonLicenceEditionDO> edition)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -116,7 +127,7 @@ namespace Gva.Api.Controllers.Persons
                 var licencePartVersion = lot.Index.GetPart<PersonLicenceDO>("licences/" + licencePartIndex);
 
                 var partVersion = lot.CreatePart(this.path + "/*", edition.Part, this.userContext);
-                this.fileRepository.AddFileReference(partVersion.Part, edition.Case);
+                this.fileRepository.AddFileReferences(partVersion.Part, edition.Cases);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 
@@ -126,13 +137,13 @@ namespace Gva.Api.Controllers.Persons
 
                 transaction.Commit();
 
-                return Ok(new CaseTypePartDO<PersonLicenceEditionDO>(partVersion));
+                return Ok(new CaseTypesPartDO<PersonLicenceEditionDO>(partVersion));
             }
         }
 
         [Route("{partIndex}")]
         [Validate]
-        public IHttpActionResult PostPart(int lotId, int licencePartIndex, int partIndex, CaseTypePartDO<PersonLicenceEditionDO> edition, int? caseTypeId = null)
+        public IHttpActionResult PostPart(int lotId, int licencePartIndex, int partIndex, CaseTypesPartDO<PersonLicenceEditionDO> edition, int? caseTypeId = null)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -140,7 +151,7 @@ namespace Gva.Api.Controllers.Persons
                 var licencePartVersion = lot.Index.GetPart<PersonLicenceDO>("licences/" + licencePartIndex);
 
                 var partVersion = lot.UpdatePart(string.Format("{0}/{1}", this.path, partIndex), edition.Part, this.userContext);
-                this.fileRepository.AddFileReference(partVersion.Part, edition.Case);
+                this.fileRepository.AddFileReferences(partVersion.Part, edition.Cases);
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 
@@ -150,9 +161,9 @@ namespace Gva.Api.Controllers.Persons
 
                 transaction.Commit();
 
-                var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
+                var lotFiles = this.fileRepository.GetFileReferences(partVersion.PartId, caseTypeId);
 
-                return Ok(new CaseTypePartDO<PersonLicenceEditionDO>(partVersion, lotFile));
+                return Ok(new CaseTypesPartDO<PersonLicenceEditionDO>(partVersion, lotFiles));
             }
         }
 

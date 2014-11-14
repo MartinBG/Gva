@@ -191,7 +191,8 @@ namespace Gva.Api.Repositories.FileRepository
                 GvaCaseTypeId = caseDO.CaseType.NomValueId,
                 PageIndex = (string)caseDO.BookPageNumber,
                 PageIndexInt = GetPageIndexInt(caseDO.BookPageNumber),
-                PageNumber = (int?)caseDO.PageCount
+                PageNumber = (int?)caseDO.PageCount,
+                Note = caseDO.Note,
             };
 
             this.unitOfWork.DbContext.Set<GvaLotFile>().Add(newLotFile);
@@ -216,6 +217,7 @@ namespace Gva.Api.Repositories.FileRepository
             lotFile.PageIndex = caseDO.BookPageNumber;
             lotFile.PageIndexInt = GetPageIndexInt(caseDO.BookPageNumber);
             lotFile.PageNumber = caseDO.PageCount;
+            lotFile.Note = caseDO.Note;
 
             if (caseDO.File != null)
             {

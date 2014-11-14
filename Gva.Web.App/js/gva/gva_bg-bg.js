@@ -80,7 +80,8 @@
           bookPageNumber: '№ стр.',
           pageCount: 'Бр. стр.',
           caseType: 'Тип дело',
-          applications: 'Заявления'
+          applications: 'Заявления',
+          note: 'Бележка'
         },
         inspectionDetailsDirective: {
           title: 'Главни обобщени констатации',

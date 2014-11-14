@@ -4,6 +4,6 @@
     {
         public CaseTypePartDO<PersonLicenceDO> Licence { get; set; }
 
-        public CaseTypePartDO<PersonLicenceEditionDO> Edition { get; set; }
+        public CaseTypesPartDO<PersonLicenceEditionDO> Edition { get; set; }
     }
 }
