@@ -333,11 +333,15 @@ namespace Gva.Api.Controllers.Persons
             });
         }
 
-        [HttpGet]
         [Route("stampedDocuments")]
-        public IHttpActionResult GetStampedDocuments()
+        public IHttpActionResult GetStampedDocuments(
+            string uin = null,
+            string names = null,
+            string stampNumber = null,
+            int? lin = null,
+            int? licenceNumber = null)
         {
-            var docs = this.personRepository.GetStampedDocuments();
+            var docs = this.personRepository.GetStampedDocuments(uin, names, stampNumber, lin, licenceNumber);
 
             return Ok(docs.Select(d => new GvaViewPersonLicenceEditionDO(d)));
         }

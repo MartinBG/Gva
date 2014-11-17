@@ -239,8 +239,43 @@ namespace Gva.Api.Repositories.PersonRepository
             }
         }
 
-        public List<GvaLicenceEdition> GetStampedDocuments()
+        public List<GvaLicenceEdition> GetStampedDocuments(
+            string uin,
+            string names,
+            string stampNumber,
+            int? lin = null,
+            int? licenceNumber = null)
         {
+            var predicate = PredicateBuilder.True<GvaLicenceEdition>()
+                .And(e => e.StampNumber != null && e.GvaStageId.HasValue)
+                .And(e => e.GvaStageId < GvaConstants.IsDoneApplication);
+
+            if (lin.HasValue) 
+            {
+                predicate = predicate.And(e => e.Person.Lin == lin);
+            }
+
+            if (!string.IsNullOrEmpty(uin))
+            {
+                predicate = predicate.And(e => e.Person.Uin.Contains(uin));
+            }
+
+            if (!string.IsNullOrEmpty(names)) 
+            {
+                predicate = predicate.And(e => e.Person.Names.Contains(names));
+            }
+
+
+            if (licenceNumber.HasValue)
+            {
+                predicate = predicate.And(e => e.LicenceNumber != null && e.LicenceNumber.Value == licenceNumber);
+            }
+
+            if (!string.IsNullOrEmpty(stampNumber))
+            {
+                predicate = predicate.And(e => e.StampNumber.Contains(stampNumber));
+            }
+
             return this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceAction)
                 .Include(e => e.Person)
@@ -248,7 +283,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.Application)
                 .Include(e => e.Application.ApplicationType)
                 .Include(e => e.Application.Part)
-                .Where(e => e.StampNumber != null && e.GvaStageId.HasValue && e.GvaStageId < GvaConstants.IsDoneApplication)
+                .Where(predicate)
                 .OrderByDescending(i => i.DateValidFrom)
                 .ToList();
         }

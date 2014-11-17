@@ -1827,7 +1827,9 @@
           examinerDateTitle: 'Данни за проверяващ'
         },
         stampedDocumentsView: {
+          search: 'Търси',
           save: 'Запиши',
+          licenceNumberSearch: 'No лиценз',
           licenceNumber: 'No',
           uin: 'ЕГН',
           lin: 'ЛИН',

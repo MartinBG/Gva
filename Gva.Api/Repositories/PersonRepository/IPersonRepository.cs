@@ -46,7 +46,12 @@ namespace Gva.Api.Repositories.PersonRepository
 
         bool IsUniqueUin(string uin, int? personId = null);
 
-        List<GvaLicenceEdition> GetStampedDocuments();
+        List<GvaLicenceEdition> GetStampedDocuments(
+            string uin,
+            string names,
+            string stampNumber,
+            int? lin = null,
+            int? licenceNumber = null);
 
         IEnumerable<GvaLicenceEdition> GetLicences(int lotId, int? caseTypeId);
 

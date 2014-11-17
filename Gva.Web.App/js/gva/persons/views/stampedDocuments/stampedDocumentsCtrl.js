@@ -11,6 +11,18 @@
     scModal
     ) {
       $scope.documents = documents;
+      $scope.filters = {
+        licenceNumber: null,
+        lin: null,
+        uin: null,
+        names: null
+      };
+
+      _.forOwn($stateParams, function (value, param) {
+        if (value !== null && value !== undefined) {
+          $scope.filters[param] = value;
+        }
+      });
 
       $scope.save = function () {
       var documentsForStamp = _.map($scope.documents, function(document){
@@ -39,6 +51,17 @@
         .then(function () {
           return $state.transitionTo($state.current, $stateParams, { reload: true });
         });
+    };
+
+    
+    $scope.search = function () {
+      return $state.go('root.persons.stampedDocuments', {
+        licenceNumber: $scope.filters.licenceNumber,
+        lin: $scope.filters.lin,
+        uin: $scope.filters.uin,
+        names: $scope.filters.names,
+        stampNumber: $scope.filters.stampNumber
+      });
     };
 
     $scope.selectCheck = function (event, item, action) {
@@ -81,9 +104,10 @@
 
   StampedDocumentsCtrl.$resolve = {
     documents: [
+      '$stateParams',
       'Persons',
-      function (Persons) {
-        return Persons.getStampedDocuments().$promise;
+      function ($stateParams, Persons) {
+        return Persons.getStampedDocuments($stateParams).$promise;
       }
     ]
   };
