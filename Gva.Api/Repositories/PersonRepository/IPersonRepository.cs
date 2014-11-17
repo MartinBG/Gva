@@ -61,5 +61,7 @@ namespace Gva.Api.Repositories.PersonRepository
         bool IsUniqueDocNumber(string documentNumber, int? documentPersonNumber, int? partIndex);
 
         bool IsUniqueLicenceNumber(string licenceTypeCode, int? licenceNumber);
+
+        bool IsFclLicence(int licenceTypeId);
     }
 }

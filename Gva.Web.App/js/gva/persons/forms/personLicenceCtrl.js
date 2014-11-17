@@ -27,6 +27,15 @@
                 $scope.lastLicenceNumber = lastLicenceNumber.number;
               }
             });
+          PersonLicences
+            .isFclLicence({
+              id: $scope.lotId,
+              licenceTypeId: $scope.model.part.licenceType.nomValueId
+            })
+          .$promise
+          .then(function (result) {
+            $scope.model.part.isFcl = result.isFcl;
+          });
         }
         else {
           $scope.lastLicenceNumber = null;

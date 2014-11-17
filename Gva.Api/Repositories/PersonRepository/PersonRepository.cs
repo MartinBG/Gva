@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Data;
 using Common.Json;
@@ -364,6 +365,13 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Where(e => e.LicenceType.Code == licenceTypeCode && e.LicenceNumber == licenceNumber);
 
             return !licences.Any();
+        }
+
+        public bool IsFclLicence(int licenceTypeId)
+        {
+            NomValue licenceType = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId);
+
+            return licenceType.TextContent.Get<string>("licenceCode").Contains("FCL") && licenceType.Code != "BG CCA";
         }
     }
 }

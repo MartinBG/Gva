@@ -1673,7 +1673,7 @@ namespace Gva.MigrationTool.Sets
                             __ISSUE_DATE = r.Field<DateTime?>("ISSUE_DATE"),
 
                             licenceType = noms["licenceTypes"].ByOldId(r.Field<string>("LICENCE_TYPE_ID")),
-                            fcl = noms["boolean"].ByCode(r.Field<string>("LICENCE_TYPE_CODE").Contains("FCL") ? "Y" : "N"),
+                            isFcl = r.Field<string>("LICENCE_TYPE_CODE").Contains("FCL") ? true : false,
                             licenceNumber = r.Field<string>("LICENCE_NO"),
                             foreignLicenceNumber = r.Field<string>("FOREIGN_LICENCE_NO"),
                             valid = noms["boolean"].ByCode(r.Field<string>("VALID_YN") == "Y" ? "Y" : "N"),

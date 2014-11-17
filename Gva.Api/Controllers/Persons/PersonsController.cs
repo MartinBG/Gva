@@ -377,5 +377,16 @@ namespace Gva.Api.Controllers.Persons
 
             return Ok();
         }
+
+        [HttpGet]
+        [Route("isFclLicence")]
+        public IHttpActionResult IsFclLicence(int licenceTypeId)
+        {
+            return Ok(
+                new
+                {
+                    isFcl = this.personRepository.IsFclLicence(licenceTypeId)
+                });
+        }
     }
 }

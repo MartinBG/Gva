@@ -23,6 +23,10 @@
       lastEditionIndex: {
         method: 'GET',
         url: 'api/persons/:id/licences/:ind/lastEditionIndex'
+      },
+      isFclLicence: {
+        method: 'GET',
+        url: 'api/persons/:id/licences/isFclLicence'
       }
     });
   }]);
