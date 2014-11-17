@@ -66,7 +66,7 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
-            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
+            var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
             var includedExams = lastEdition.IncludedExams
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var classes = this.GetClasses(includedRatings, ratingEditions);
@@ -212,24 +212,25 @@ namespace Gva.Api.WordTemplates
         private object[] GetClasses(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             int caseTypeId = this.caseTypeRepository.GetCaseType("to_suvd").GvaCaseTypeId;
-
-            return includedRatings
-                .Where(r => this.fileRepository.GetFileReference(r.PartId, caseTypeId) != null)
-                .Select(r =>
+            List<object> classes = new List<object>();
+            foreach (var edition in ratingEditions)
+            {
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                if(this.fileRepository.GetFileReference(rating.PartId, caseTypeId) != null)
                 {
-                    var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
-
-                    return new
+                    classes.Add(new
                     {
-                        LEVEL = r.Content.PersonRatingLevel == null ? null : r.Content.PersonRatingLevel.Code,
-                        RATING = r.Content.RatingClass == null ? null : r.Content.RatingClass.Code,
-                        SUBRATING = lastEdition.Content.RatingSubClasses.Count > 0 ? string.Join(",", lastEdition.Content.RatingSubClasses.Select(s => s.Code)) : string.Empty,
-                        LICENCE = r.Content.Authorization == null ? null : r.Content.Authorization.Code,
-                        LIMITATION = lastEdition.Content.Limitations.Count > 0 ? string.Join(",", lastEdition.Content.Limitations.Select(s => s.Name)) : string.Empty,
-                        ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
-                        VALID_DATE = lastEdition.Content.DocumentDateValidTo
-                    };
-                }).ToArray<dynamic>();
+                        LEVEL = rating.Content.PersonRatingLevel == null ? null : rating.Content.PersonRatingLevel.Code,
+                        RATING = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code,
+                        SUBRATING = edition.Content.RatingSubClasses.Count > 0 ? string.Join(",", edition.Content.RatingSubClasses.Select(s => s.Code)) : string.Empty,
+                        LICENCE = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code,
+                        LIMITATION = edition.Content.Limitations.Count > 0 ? string.Join(",", edition.Content.Limitations.Select(s => s.Name)) : string.Empty,
+                        ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                        VALID_DATE = edition.Content.DocumentDateValidTo
+                    });
+                }
+            }
+            return classes.ToArray();
         }
     }
 }

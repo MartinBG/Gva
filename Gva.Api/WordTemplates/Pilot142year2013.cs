@@ -152,7 +152,7 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
-            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
+            var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
             var includedLicences = lastEdition.IncludedLicences
                 .Select(i => lot.Index.GetPart<PersonLicenceDO>("licences/" + i));
             var includedMedicals = lastEdition.IncludedMedicals
@@ -350,14 +350,18 @@ namespace Gva.Api.WordTemplates
         private PersonRatingEditionDO GetRtoRating(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             var rtoRatingPart = includedRatings.FirstOrDefault(r => r.Content.Authorization != null && r.Content.Authorization.Code == "RTO");
-            PersonRatingEditionDO rtoRatingEd = new PersonRatingEditionDO();
 
-            if (rtoRatingPart != null)
+            List<PersonRatingEditionDO> rtoRatings = new List<PersonRatingEditionDO>();
+            foreach (var edition in ratingEditions)
             {
-                rtoRatingEd = ratingEditions.Where(e => e.Content.RatingPartIndex == rtoRatingPart.Part.Index).OrderBy(e => e.Content.Index).Last().Content;
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                if (rating.Content.Authorization != null && rating.Content.Authorization.Code == "RTO")
+                {
+                    rtoRatings.Add(edition.Content);
+                }
             }
 
-            return rtoRatingEd;
+            return rtoRatings.OrderBy(e => e.Index).Last();
         }
 
         private object GetEngLevel(IEnumerable<PersonLangCertDO> includedLangCerts)
@@ -437,28 +441,29 @@ namespace Gva.Api.WordTemplates
                 .Where(nv => nv.Code == "FT" || nv.Code == "FC")
                 .Select(nv => nv.NomValueId);
 
-            return includedRatings
-                .Where(r =>
-                    r.Content.Authorization != null &&
-                    r.Content.Authorization.Code != "RTO" && r.Content.Authorization.ParentValueId.HasValue &&
-                    !authorizationGroupIds.Contains(r.Content.Authorization.ParentValueId.Value))
-                .Select(r =>
+            List<object> ratings = new List<object>();
+            foreach (var edition in ratingEditions)
+            {
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                if (rating.Content.Authorization != null && rating.Content.Authorization.Code != "RTO" && !authorizationGroupIds.Contains(rating.Content.Authorization.ParentValueId.Value))
+                {
+                    ratings.Add(new
                     {
-                        var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
+                        TYPE = string.Format(
+                            "{0} {1}",
+                            rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Name,
+                            rating.Content.RatingType == null ? string.Empty : rating.Content.RatingType.Name).Trim(),
+                        AUTH_NOTES = string.Format(
+                            "{0} {1}",
+                            rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Name,
+                            edition.Content.NotesAlt).Trim(),
+                        VALID_DATE = edition.Content.DocumentDateValidTo
+                    });
+                }
+            }
 
-                        return new
-                        {
-                            TYPE = string.Format(
-                                "{0} {1}",
-                                r.Content.RatingClass == null ? string.Empty : r.Content.RatingClass.Name,
-                                r.Content.RatingType == null ? string.Empty : r.Content.RatingType.Name).Trim(),
-                            AUTH_NOTES = string.Format(
-                                "{0} {1}",
-                                r.Content.Authorization.Name,
-                                lastEdition.Content.NotesAlt).Trim(),
-                            VALID_DATE = lastEdition.Content.DocumentDateValidTo
-                        };
-                    }).ToList<object>();
+            ratings = Utils.FillBlankData(ratings, 19);
+            return ratings;
         }
 
         private object[] GetInstructorData(IEnumerable<PartVersion<PersonRatingDO>> inspectorRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> inspectorRatingEditions)

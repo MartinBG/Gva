@@ -43,9 +43,9 @@ namespace Gva.Api.WordTemplates
                 .Last()
                 .Content;
 
-            var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
-            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
+            var includedRatings = lastEdition.IncludedRatings.Select(i => i.Ind).Distinct()
+              .Select(ind => lot.Index.GetPart<PersonRatingDO>("ratings/" + ind));
+            var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
 
@@ -115,31 +115,31 @@ namespace Gva.Api.WordTemplates
         }
 
 
-        private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
+        private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> editions)
         {
-            var result =  includedRatings
-                .Select(r =>
+            List<object> ratingEditions = new List<object>();
+            foreach (var edition in editions)
+            {
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                var ratingTypeName = rating.Content.RatingType == null ? null : rating.Content.RatingType.Name;
+                var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name;
+                var authorizationName = rating.Content.Authorization == null ? null : rating.Content.Authorization.Name;
+                ratingEditions.Add(new
                 {
-                    var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
-                    var ratingTypeName = r.Content.RatingType == null ? null : r.Content.RatingType.Name;
-                    var ratingClassName = r.Content.RatingClass == null ? null : r.Content.RatingClass.Name;
-                    var authorizationName = r.Content.Authorization == null ? null : r.Content.Authorization.Name;
+                    CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypeName) ?
+                        authorizationName :
+                        string.Format(
+                            "{0} {1} {2}",
+                            ratingTypeName,
+                            ratingClassName,
+                            string.IsNullOrEmpty(authorizationName) ? string.Empty : "/ " + authorizationName).Trim(),
+                    ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                    VALID_DATE = edition.Content.DocumentDateValidTo
+                });
+            }
 
-                    return new
-                    {
-                        CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypeName) ?
-                            authorizationName :
-                            string.Format(
-                                "{0} {1} {2}",
-                                ratingTypeName,
-                                ratingClassName,
-                                string.IsNullOrEmpty(ratingClassName) ? string.Empty : "/ " + authorizationName).Trim(),
-                        ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
-                        VALID_DATE = lastEdition.Content.DocumentDateValidTo
-                    };
-                }).ToList<object>();
-            result = Utils.FillBlankData(result, 10);
-            return result;
+            ratingEditions = Utils.FillBlankData(ratingEditions, 10);
+            return ratingEditions;
         }
 
     }

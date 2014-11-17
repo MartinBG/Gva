@@ -58,9 +58,9 @@ namespace Gva.Api.WordTemplates
             var firstEdition = editions.First();
             var lastEdition = editions.Last();
 
-            var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
-            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
+            var includedRatings = lastEdition.IncludedRatings.Select(i => i.Ind).Distinct()
+                .Select(ind => lot.Index.GetPart<PersonRatingDO>("ratings/" + ind));
+            var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
 
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
@@ -211,30 +211,35 @@ namespace Gva.Api.WordTemplates
                     }).ToArray<object>();
         }
 
-        private List<object> GetEndorsements2(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
+        private List<object> GetEndorsements2(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> editions)
         {
             int caseTypeId = this.caseTypeRepository.GetCaseType("ovd").GvaCaseTypeId;
-
-            var result = includedRatings
-                .Where(r => this.fileRepository.GetFileReference(r.PartId, caseTypeId) != null)
-                .Select(r =>
+            List<object> ratingEditions = new List<object>();
+            foreach (var edition in editions)
+            {
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                var ratingType = rating.Content.RatingType == null ? null : rating.Content.RatingType.Name;
+                var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name;
+                var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Name;
+                ratingEditions.Add(new
                 {
-                    {
-                        var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
+                    ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Name,
+                    SECTOR = rating.Content.Sector,
+                    AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingType) ?
+                        authorization :
+                        string.Format(
+                            "{0} {1} {2}",
+                            ratingType,
+                            ratingClass,
+                            string.IsNullOrEmpty(authorization) ? string.Empty : " - " + authorization).Trim(),
+                    ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                    VALID_DATE = edition.Content.DocumentDateValidTo
+                });
+            }
 
-                        return new
-                        {
-                            ICAO = r.Content.LocationIndicator == null ? null : r.Content.LocationIndicator.Name,
-                            SECTOR = r.Content.Sector,
-                            AUTH = r.Content.Authorization == null ? null : r.Content.Authorization.Name,
-                            ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
-                            VALID_DATE = lastEdition.Content.DocumentDateValidTo
-                        };
-                    }
-                }).ToList<object>();
+            ratingEditions = Utils.FillBlankData(ratingEditions, 11);
 
-            result = Utils.FillBlankData(result, 11);
-            return result;
+            return ratingEditions;
         }
 
         private List<object> GetAbbreviations()

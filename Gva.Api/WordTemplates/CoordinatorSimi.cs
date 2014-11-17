@@ -4,6 +4,7 @@ using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Json;
 using Gva.Api.ModelsDO.Persons;
+using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.WordTemplates
@@ -55,9 +56,9 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedLangCerts = lastEdition.IncludedLangCerts
                 .Select(i => lot.Index.GetPart<PersonLangCertDO>("personDocumentLangCertificates/" + i).Content);
-            var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
-            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
+            var includedRatings = lastEdition.IncludedRatings.Select(i => i.Ind).Distinct()
+                .Select(ind => lot.Index.GetPart<PersonRatingDO>("ratings/" + ind));
+            var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
             var includedExams = lastEdition.IncludedExams
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedExams);
@@ -83,32 +84,10 @@ namespace Gva.Api.WordTemplates
                 });
             }
 
-            var endorsements = includedRatings
-                .Where(r => r.Content.Authorization != null)
-                .Select(r =>
-                    new {
-                        NAME = r.Content.Authorization.Code,
-                        DATE = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidFrom
-                    });
-            var tEndorsements = includedRatings
-                .Where(r => r.Content.Authorization != null)
-                .Select(r =>
-                    new {
-                        ICAO = r.Content.LocationIndicator == null ? null : r.Content.LocationIndicator.Code,
-                        AUTH = r.Content.Authorization.Code,
-                        SECTOR = r.Content.Sector,
-                        ISSUE_DATE = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidFrom
-                    });
-            var lEndorsements = includedRatings
-                .Where(r => r.Content.Authorization != null)
-                .Select(r =>
-                    new
-                    {
-                        ICAO = r.Content.LocationIndicator == null ? null : r.Content.LocationIndicator.Code,
-                        AUTH = r.Content.Authorization.Code,
-                        SECTOR = r.Content.Sector,
-                        VALID_DATE = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidTo
-                    });
+            var endorsements = this.GetEndorsements(includedRatings, ratingEditions);
+            var tEndorsements = this.GetTEndorsements(includedRatings, ratingEditions);
+            var lEndorsements = this.GetLEndorsements(includedRatings, ratingEditions);
+
             var licenceNumber = string.Format(
                 "BGR. {0} - {1} - {2}",
                 licenceType.Code,
@@ -248,6 +227,67 @@ namespace Gva.Api.WordTemplates
                 .Union(exams)
                 .OrderBy(d => d.DOC.SUB_DOC.DATE)
                 .ToArray<object>();
+        }
+
+        private List<object> GetEndorsements(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
+        {
+            List<object> endosments = new List<object>();
+            foreach(var edition in ratingEditions)
+            {
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                if(rating.Content.Authorization != null)
+                {
+                    endosments.Add(new {
+                        NAME = rating.Content.Authorization.Code,
+                        DATE = edition.Content.DocumentDateValidFrom
+                    });
+                }
+            };
+
+            return endosments;
+        }
+
+        private List<object> GetTEndorsements(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
+        {
+            List<object> endosments = new List<object>();
+            foreach (var edition in ratingEditions)
+            {
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                if (rating.Content.Authorization != null)
+                {
+                    endosments.Add(new
+                    {
+                        ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
+                        AUTH = rating.Content.Authorization.Code,
+                        SECTOR = rating.Content.Sector,
+                        ISSUE_DATE = edition.Content.DocumentDateValidFrom
+                    });
+                }
+            };
+
+            return endosments;
+        }
+
+        
+        private List<object> GetLEndorsements(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
+        {
+            List<object> endosments = new List<object>();
+            foreach (var edition in ratingEditions)
+            {
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                if (rating.Content.Authorization != null)
+                {
+                    endosments.Add(new
+                    {
+                        ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
+                        AUTH = rating.Content.Authorization.Code,
+                        SECTOR = rating.Content.Sector,
+                        VALID_DATE = edition.Content.DocumentDateValidTo
+                    });
+                }
+            };
+
+            return endosments;
         }
 
         private IEnumerable<object> GetAbbreviations()

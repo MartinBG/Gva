@@ -195,10 +195,9 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
-            var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
-            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
-
+            var includedRatings = lastEdition.IncludedRatings.Select(i => i.Ind).Distinct()
+                .Select(ind => lot.Index.GetPart<PersonRatingDO>("ratings/" + ind));
+            var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
             var licenceNumber = string.Format(
                 "BG {0} - {1} - {2}",
                 licence.LicenceType.Code,
@@ -345,51 +344,50 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetTRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
-            var result = includedRatings.Select(r =>
+            List<object> tRatings = new List<object>();
+            foreach (var edition in ratingEditions)
             {
-                var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
-
-                return new
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                tRatings.Add(new
                 {
                     TYPE = string.Format(
                         "{0} {1}",
-                        r.Content.RatingClass == null ? string.Empty : r.Content.RatingClass.Name,
-                        r.Content.RatingType == null ? string.Empty : r.Content.RatingType.Name).Trim(),
+                        rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Name,
+                        rating.Content.RatingType == null ? string.Empty : rating.Content.RatingType.Name).Trim(),
                     AUTH_NOTES = string.Format(
                         "{0} {1}",
-                        r.Content.Authorization == null ? string.Empty : r.Content.Authorization.Name,
-                        lastEdition.Content.Notes).Trim(),
-                    ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
-                    VALID_DATE = lastEdition.Content.DocumentDateValidTo
-                };
-            }).ToList<object>();
+                        rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Name,
+                        edition.Content.Notes).Trim(),
+                    ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                    VALID_DATE = edition.Content.DocumentDateValidTo
+                });
+            }
 
-            result = Utils.FillBlankData(result, 11);
-            return result;
+            tRatings = Utils.FillBlankData(tRatings, 11);
+            return tRatings;
         }
 
         private List<object> GetLRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
-            var result = includedRatings.Select(r =>
+            List<object> lRatings = new List<object>();
+            foreach (var edition in ratingEditions)
             {
-                var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
-
-                return new
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                lRatings.Add(new
                 {
                     TYPE = string.Format(
                         "{0} {1}",
-                        r.Content.RatingClass == null ? string.Empty : r.Content.RatingClass.Name,
-                        r.Content.RatingType == null ? string.Empty : r.Content.RatingType.Name).Trim(),
-                    AUTH = r.Content.Authorization == null ? string.Empty : r.Content.Authorization.Name,
-                    NOTES = lastEdition.Content.Notes,
-                    ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
-                    VALID_DATE = lastEdition.Content.DocumentDateValidTo
-                };
-            }).ToList<object>();
+                        rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Name,
+                        rating.Content.RatingType == null ? string.Empty : rating.Content.RatingType.Name).Trim(),
+                    AUTH = rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Name,
+                    NOTES = edition.Content.Notes,
+                    ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                    VALID_DATE = edition.Content.DocumentDateValidTo
+                });
+            }
 
-
-            result = Utils.FillBlankData(result, 11);
-            return result;
+            lRatings = Utils.FillBlankData(lRatings, 11);
+            return lRatings;
         }
 
         private List<object> GetLicencePrivilege(string licenceTypeCode, PersonLicenceEditionDO edition)

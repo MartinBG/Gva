@@ -77,10 +77,10 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
-            var includedRatings = lastEdition.IncludedRatings
+             var includedRatings = lastEdition.IncludedRatings
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
-            var ratingEditions = lot.Index.GetParts<PersonRatingEditionDO>("ratingEditions");
-
+            var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
+   
             var licenceCaCode = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId).TextContent.Get<string>("codeCA");
             var licenceTypeCode = licence.LicenceType.Code;
             var licenceNumber = string.Format(
@@ -112,7 +112,7 @@ namespace Gva.Api.WordTemplates
                     T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
                     T_MED_CERT = this.GetMedCerts(licenceTypeCode, includedMedicals, personData),
                     T_RATING = this.GetRaitings(includedRatings, ratingEditions),
-                    L_RATING = this.GetScools(includedRatings, ratingEditions),
+                    L_RATING = this.GetSchools(includedRatings, ratingEditions),
                     L_ABBREVIATION = this.GetAbbreviations()
                 }
             };
@@ -252,48 +252,48 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetRaitings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
-            var result = includedRatings.Select(r =>
+            List<object> ratings = new List<object>();
+            foreach (var edition in ratingEditions)
+            {
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                ratings.Add(new
                 {
-                    var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
+                    TYPE = string.Format(
+                           "{0} {1}",
+                           rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name,
+                           rating.Content.RatingType == null ? null : rating.Content.RatingType.Name),
+                    AUTH_NOTES = string.Format(
+                        "{0} {1}",
+                        rating.Content.Authorization == null ? null : rating.Content.Authorization.Name,
+                        edition.Content.Notes),
+                    ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                    VALID_DATE = edition.Content.DocumentDateValidTo
+                });
+            }
 
-                    return new
-                    {
-                        TYPE = string.Format(
-                            "{0} {1}",
-                            r.Content.RatingClass == null ? null : r.Content.RatingClass.Name,
-                            r.Content.RatingType == null ? null : r.Content.RatingType.Name),
-                        AUTH_NOTES = string.Format(
-                            "{0} {1}",
-                            r.Content.Authorization == null ? null : r.Content.Authorization.Name,
-                            lastEdition.Content.Notes),
-                        ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
-                        VALID_DATE = lastEdition.Content.DocumentDateValidTo
-                    };
-                }).ToList<object>();
-
-            result = Utils.FillBlankData(result, 3);
-            return result;
+            ratings = Utils.FillBlankData(ratings, 3);
+            return ratings;
         }
 
-        private object[] GetScools(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
+        private object[] GetSchools(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
-            return includedRatings
-                .Where(r => r.Content.RatingType != null && r.Content.RatingClass != null)
-                .Select(r =>
-                    {
-                        var lastEdition = ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last();
+            List<object> schools = new List<object>();
+            foreach (var edition in ratingEditions)
+            {
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                schools.Add(new
+                {
+                    SCHOOL = edition.Content.Notes,
+                    TYPE = string.Format(
+                        "{0} {1}",
+                        rating.Content.RatingClass.Name,
+                        rating.Content.RatingType.Name),
+                    ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                    VALID_DATE = edition.Content.DocumentDateValidTo
+                });
+            }
 
-                        return new
-                        {
-                            SCHOOL = lastEdition.Content.Notes,
-                            TYPE = string.Format(
-                                "{0} {1}",
-                                r.Content.RatingClass.Name,
-                                r.Content.RatingType.Name),
-                            ISSUE_DATE = lastEdition.Content.DocumentDateValidFrom,
-                            VALID_DATE = lastEdition.Content.DocumentDateValidTo
-                        };
-                    }).ToArray<object>();
+            return schools.ToArray();
         }
 
         private IEnumerable<object> GetAbbreviations()
