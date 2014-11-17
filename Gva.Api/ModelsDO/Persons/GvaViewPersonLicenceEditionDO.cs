@@ -61,10 +61,10 @@ namespace Gva.Api.ModelsDO.Persons
             {
                 this.PageCount = edition.LotFile.PageNumber;
                 this.PageNumber = edition.LotFile.PageIndex;
+                this.Case = new CaseDO(edition.LotFile);
             }
 
             this.Limitations = edition.Limitations;
-            this.Case = new CaseDO(edition.LotFile);
         }
 
         public int LotId { get; set; }
