@@ -46,30 +46,6 @@
       return modalInstance.opened;
     };
 
-    $scope.viewDoc = function (doc) {
-      var params = {
-        lotId: doc.lotId,
-        licencePartIndex: doc.partIndex,
-        editionIndex: doc.editionIndex
-      };
-
-      var modalInstance = scModal.open('editLicence', params);
-
-      modalInstance.result.then(function (returnValue) {
-        var edition = returnValue.savedLicenceEdition,
-            licence = returnValue.licence;
-
-        doc.licenceNumber = licence.part.licenceNumber;
-        doc.licenceTypeId = licence.part.licenceType.nomValueId;
-        doc.dateValidFrom = edition.part.documentDateValidFrom;
-        doc.dateValidTo = edition.part.documentDateValidTo;
-        doc.licenceActionId = edition.part.licenceAction.nomValueId;
-        doc.application = edition['case'].applications[0];
-      });
-
-      return modalInstance.opened;
-    };
-
     $scope.viewApplication = function (lotId, partIndex) {
       var modalInstance = scModal.open('viewApplication', {
         lotId: lotId,

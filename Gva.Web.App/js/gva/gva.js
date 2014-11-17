@@ -509,7 +509,6 @@
     .modal('chooseLangCerts'       , 'js/gva/persons/modals/langCerts/chooseLangCertsModal.html'   , 'ChooseLangCertsModalCtrl'      )
     .modal('newLangCert'           , 'js/gva/persons/modals/langCerts/newLangCertModal.html'       , 'NewLangCertModalCtrl'          )
     .modal('chooseLicences'        , 'js/gva/persons/modals/licences/chooseLicencesModal.html'     , 'ChooseLicencesModalCtrl'       )
-    .modal('editLicence'           , 'js/gva/persons/modals/licences/editLicenceModal.html'        , 'EditLicenceModalCtrl'          )
     .modal('licenceStatuses'       , 'js/gva/persons/modals/licences/licenceStatusesModal.html'    , 'LicenceStatusesModalCtrl'      )
     .modal('licenceEditionDoc'     , 'js/gva/persons/modals/licences/licenceEditionDocModal.html'  , 'LicenceEditionDocModalCtrl'    )
     .modal('printLicence'          , 'js/gva/persons/modals/licences/printLicenceModal.html'       , 'PrintLicenceModalCtrl'   , 'xs');

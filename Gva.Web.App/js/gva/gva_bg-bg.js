@@ -2354,20 +2354,6 @@
           cancel: 'Отказ',
           back: 'Назад'
         },
-        editLicenceModal: {
-          title: 'Преглед на лиценз',
-          save: 'Запис',
-          cancel: 'Отказ',
-          licenceForm: 'Лиценз',
-          editionForm: 'Вписване',
-          statusChanges: 'Промени на статуса на лиценза',
-          valid2: 'Валидност',
-          changeDate: 'Дата на промяна',
-          changeReason: 'Причина за промяна',
-          inspector: 'Инспектор',
-          notes: 'Бележки',
-          valid: 'Действителен'
-        },
         printLicenceModal: {
           title: 'Принтиране на лиценз',
           stampNumber: 'Печатен док. номер',

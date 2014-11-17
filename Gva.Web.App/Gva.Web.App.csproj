@@ -623,8 +623,6 @@
     <Content Include="js\gva\persons\modals\checks\newCheckModalCtrl.js" />
     <Content Include="js\gva\persons\modals\licences\chooseLicencesModal.html" />
     <Content Include="js\gva\persons\modals\licences\chooseLicencesModalCtrl.js" />
-    <Content Include="js\gva\persons\modals\licences\editLicenceModal.html" />
-    <Content Include="js\gva\persons\modals\licences\editLicenceModalCtrl.js" />
     <Content Include="js\gva\persons\modals\licences\licenceStatusesModal.html" />
     <Content Include="js\gva\persons\modals\licences\licenceStatusesModalCtrl.js" />
     <Content Include="js\gva\persons\modals\medicals\chooseMedicalsModal.html" />

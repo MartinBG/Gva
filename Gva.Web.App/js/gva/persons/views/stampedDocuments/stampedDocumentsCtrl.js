@@ -68,30 +68,6 @@
       return modalInstance.opened;
     };
 
-    $scope.viewDoc = function (doc) {
-      var params = {
-        lotId: doc.lotId,
-        licencePartIndex: doc.partIndex,
-        editionIndex: doc.editionIndex
-      };
-
-      var modalInstance = scModal.open('editLicence', params);
-
-      modalInstance.result.then(function (savedLicence) {
-        var edition = _.find(savedLicence.part.editions, function (edition) {
-          return edition.index === doc.editionIndex;
-        });
-
-        doc.licenceNumber = savedLicence.part.licenceNumber;
-        doc.licenceTypeId = savedLicence.part.licenceType.nomValueId;
-        doc.dateValidFrom = edition.documentDateValidFrom;
-        doc.dateValidTo = edition.documentDateValidTo;
-        doc.licenceActionId = edition.licenceAction.nomValueId;
-        doc.application = edition.applications[0];
-      });
-
-      return modalInstance.opened;
-    };
   }
 
   StampedDocumentsCtrl.$inject = [
