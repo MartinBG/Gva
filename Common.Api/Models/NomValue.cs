@@ -60,6 +60,14 @@ namespace Common.Api.Models
 
         public string OldId { get; set; }
 
+        public int? ParentNomId
+        {
+            get
+            {
+                return ParentValue != null ? ParentValue.NomId : (int?)null;
+            }
+        }
+
         [JsonIgnore]
         public virtual Nom Nom { get; set; }
 

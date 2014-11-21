@@ -7,7 +7,11 @@
     $state,
     $stateParams,
     Aops,
+    docs,
     selectDoc) {
+    $scope.docs = docs.documents;
+    $scope.docCount = docs.documentCount;
+
     $scope.filters = {
       csFromDate: null,
       csToDate: null,
@@ -26,23 +30,6 @@
       }
     });
 
-    var stateParams = {
-      fromDate: $stateParams.csFromDate,
-      toDate: $stateParams.csToDate,
-      regUri: $stateParams.csRegUri,
-      docName: $stateParams.csDocName,
-      docTypeId: $stateParams.csDocTypeId,
-      docStatusId: $stateParams.csDocStatusId,
-      corrs: $stateParams.csCorrs,
-      units: $stateParams.csUnits,
-      isChosen: $stateParams.csIsChosen
-    };
-
-    Aops.getDocs(stateParams).$promise.then(function (docs) {
-      $scope.docs = docs.documents;
-      $scope.docCount = docs.documentCount;
-    });
-
     $scope.search = function () {
       $state.go('root.apps.edit.docSelect', {
         csFromDate: $scope.filters.csFromDate,
@@ -55,6 +42,18 @@
         csUnits: $scope.filters.csUnits,
         csIsChosen: $scope.filters.csIsChosen
       }, { reload: true });
+    };
+
+    $scope.getDocs = function (page, pageSize) {
+      var params = {};
+
+      _.assign(params, $stateParams);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return Aops.getDocs(params).$promise;
     };
 
     $scope.selectDoc = function (result) {
@@ -78,7 +77,30 @@
     '$state',
     '$stateParams',
     'Aops',
+    'docs',
     'selectDoc'];
+
+  AppDocSelectCtrl.$resolve = {
+    docs: [
+      '$stateParams',
+      'Aops',
+      function resolveDocs($stateParams, Aops) {
+        var stateParams = {
+          fromDate: $stateParams.csFromDate,
+          toDate: $stateParams.csToDate,
+          regUri: $stateParams.csRegUri,
+          docName: $stateParams.csDocName,
+          docTypeId: $stateParams.csDocTypeId,
+          docStatusId: $stateParams.csDocStatusId,
+          corrs: $stateParams.csCorrs,
+          units: $stateParams.csUnits,
+          isChosen: $stateParams.csIsChosen
+        };
+
+        return Aops.getDocs(stateParams).$promise;
+      }
+    ]
+  };
 
   angular.module('aop').controller('AppDocSelectCtrl', AppDocSelectCtrl);
 }(angular, _));

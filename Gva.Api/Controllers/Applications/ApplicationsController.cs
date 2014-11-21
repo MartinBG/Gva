@@ -481,10 +481,6 @@ namespace Gva.Api.Controllers.Applications
             string units = null
             )
         {
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            limit = 1000;
-            offset = 0;
-
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
             ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocCasePartType docCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>().SingleOrDefault(e => e.Alias == "Control");
@@ -492,7 +488,13 @@ namespace Gva.Api.Controllers.Applications
 
             int totalCount = 0;
             DocView docView = DocView.Normal;
-            List<Doc> docs = this.docRepository.GetCurrentCaseDocs(
+
+            var gvaApplciations = applicationRepository.GetLinkedToDocsApplications().ToList();
+
+            //docs = docs.Where(e => !gvaApplciations.Any(a => a.DocId.Value == e.DocId)).ToList();
+            List<int> excludedDocIds = gvaApplciations.Where(e => e.DocId.HasValue).Select(e => e.DocId.Value).ToList();
+
+            List<Doc> docs = this.docRepository.GetCurrentExclusiveCaseDocs(
                 fromDate,
                 toDate,
                 regUri,
@@ -504,6 +506,7 @@ namespace Gva.Api.Controllers.Applications
                 corrs,
                 units,
                 null,
+                excludedDocIds,
                 limit,
                 offset,
                 docCasePartType,
@@ -511,10 +514,6 @@ namespace Gva.Api.Controllers.Applications
                 readPermission,
                 unitUser,
                 out totalCount);
-
-            var gvaApplciations = applicationRepository.GetLinkedToDocsApplications().ToList();
-
-            docs = docs.Where(e => !gvaApplciations.Any(a => a.DocId.Value == e.DocId)).ToList();
 
             List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
 

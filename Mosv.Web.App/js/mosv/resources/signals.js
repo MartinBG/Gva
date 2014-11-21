@@ -14,7 +14,7 @@
       },
       'getDocs': {
         method: 'GET',
-        url: 'api/docs/forSelect'
+        url: 'api/admissions/docs'
       },
       'loadData': {
         method: 'POST',

@@ -85,7 +85,7 @@ namespace Mosv.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^signalData$)}")]
         public IHttpActionResult GetPart(int lotId, string path)
         {
-            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart<SignalDO>(path);
+            var part = this.lotRepository.GetLotIndex(lotId, true).Index.GetPart<SignalDO>(path);
 
             var signal = this.signalRepository.GetSignal(lotId);
             SignalViewDO signalDO = new SignalViewDO(signal);
@@ -115,7 +115,7 @@ namespace Mosv.Api.Controllers
         {
             UserContext userContext = this.Request.GetUserContext();
 
-            var lot = this.lotRepository.GetLotIndex(lotId);
+            var lot = this.lotRepository.GetLotIndex(lotId, true);
             PartVersion<SignalDO> partVersion = lot.UpdatePart(path, partVersionDO.Part, userContext);
             lot.Commit(userContext, lotEventDispatcher);
 

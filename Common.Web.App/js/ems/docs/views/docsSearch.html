@@ -89,50 +89,50 @@
     </div>
 
     <div ng-show="!(filters.filter === 'manage' || filters.filter === 'control')">
-      <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-        <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <sc-ajaxdatatable items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+        <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
           <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-        </sc-column>
-        <sc-column type="date" data="regDate" title="docs.search.regDate">
-        </sc-column>
-        <sc-column data="regUri" title="docs.search.regUri">
-        </sc-column>
-        <sc-column data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
-        </sc-column>
-        <sc-column data="docDirectionName" title="docs.search.docDirectionName">
-        </sc-column>
-        <sc-column data="docStatusName" title="docs.search.docStatusName">
-        </sc-column>
-        <sc-column data="correspondentNames" title="docs.search.correspondentName">
-        </sc-column>
-      </sc-datatable>
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn type="date" data="regDate" title="docs.search.regDate">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn data="regUri" title="docs.search.regUri">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn data="docDirectionName" title="docs.search.docDirectionName">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn data="docStatusName" title="docs.search.docStatusName">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn data="correspondentNames" title="docs.search.correspondentName">
+        </sc-ajaxcolumn>
+      </sc-ajaxdatatable>
     </div>
 
     <div ng-show="filters.filter === 'manage' || filters.filter === 'control'">
-      <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-        <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <sc-ajaxdatatable items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+        <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
           <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-        </sc-column>
-        <sc-column title="docs.search.kase" has-content="true">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn title="docs.search.kase" has-content="true">
           <span><div ng-if="!!item.caseDocRelation.docRegUri">{{ item.caseDocRelation.docRegUri }}<br/></div>
             {{item.caseDocRelation.docDocDirectionName}} | {{item.caseDocRelation.docDocCasePartTypeName}}</span>
-        </sc-column>
-        <sc-column has-content="true">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn has-content="true">
            <span>{{ item.caseDocRelation.docDocTypeName }} : {{ item.caseDocRelation.docSubject}}</span>
-        </sc-column>
-        <sc-column data="correspondentNames" title="docs.search.correspondentName">
-        </sc-column>
-        <sc-column type="date" data="regDate" title="docs.search.regDate">
-        </sc-column>
-        <sc-column data="regUri" title="docs.search.regUri">
-        </sc-column>
-        <sc-column data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
-        </sc-column>
-        <sc-column data="docDirectionName" title="docs.search.docDirectionName">
-        </sc-column>
-        <sc-column data="docStatusName" title="docs.search.docStatusName">
-        </sc-column>
-      </sc-datatable>
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn data="correspondentNames" title="docs.search.correspondentName">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn type="date" data="regDate" title="docs.search.regDate">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn data="regUri" title="docs.search.regUri">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn data="docDirectionName" title="docs.search.docDirectionName">
+        </sc-ajaxcolumn>
+        <sc-ajaxcolumn data="docStatusName" title="docs.search.docStatusName">
+        </sc-ajaxcolumn>
+      </sc-ajaxdatatable>
     </div>
 
     <div class="clear"></div>

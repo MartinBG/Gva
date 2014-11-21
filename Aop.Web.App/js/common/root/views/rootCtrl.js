@@ -3,11 +3,20 @@
   'use strict';
 
   function RootCtrl($scope, $timeout, $http) {
+    $scope.userFullname = '';
+    $scope.permissions = [];
+    $scope.showAdmin = false;
+
     $http({
       method: 'GET',
       url: 'api/user/currentData'
     }).then(function (result) {
       $scope.userFullname = result.data.userFullname;
+      $scope.permissions = result.data.permissions;
+    });
+
+    $scope.$watch('permissions', function (val) {
+      $scope.showAdmin = val.indexOf('sys#admin') !== -1;
     });
 
     $scope.alerts = [];

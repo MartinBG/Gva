@@ -83,6 +83,86 @@ namespace Docs.Api.Repositories.DocRepository
             return this.ExecProcedure<int?>("spGetDocRegisterIdByRegisterIndexId", parameters).FirstOrDefault();
         }
 
+        public int? GetNextReceiptOrder(int docId)
+        {
+            Doc doc = this.Find(docId, e => e.DocEntryType);
+
+            if (doc.DocEntryType.Alias != "Document")
+            {
+                return null;
+            }
+
+            int caseId = GetCaseId(docId);
+
+            return (this.unitOfWork.DbContext.Set<DocRelation>()
+                .Include(e => e.Doc)
+                .Where(e => e.RootDocId == caseId)
+                .Max(e => e.Doc.ReceiptOrder) ?? 0) + 1;
+        }
+
+        public List<Doc> RearangeReceiptOrder(int inCaseDocId, int boundaryDocId, bool everything = true)
+        {
+            int boundary = 0;
+
+            if (!everything)
+            {
+                Doc doc = this.Find(boundaryDocId);
+
+                if (doc.ReceiptOrder.HasValue)
+                {
+                    boundary = doc.ReceiptOrder.Value;
+                }
+            }
+
+            int caseId = GetCaseId(inCaseDocId);
+
+            List<Doc> docs = this.unitOfWork.DbContext.Set<DocRelation>()
+                .Include(e => e.Doc)
+                .Where(e => e.RootDocId == caseId && e.Doc.DocEntryType.Alias == "Document")
+                .Where(e => !e.Doc.ReceiptOrder.HasValue || e.Doc.ReceiptOrder.Value > boundary)
+                .Select(e => e.Doc)
+                .OrderBy(e => e.ReceiptOrder)
+                .ToList();
+
+            int counter = 1;
+
+            if (!everything)
+            {
+                counter = boundary == 0 ? 1 : boundary;
+            }
+
+            foreach (var item in docs)
+            {
+                item.ReceiptOrder = counter;
+                counter++;
+            }
+
+            return docs;
+        }
+
+        public List<Doc> RearangeBoundaryReceiptOrder(int inCaseDocId, int docId, int boundary)
+        {
+            int caseId = GetCaseId(inCaseDocId);
+
+            List<int> docIds = this.fnGetSubordinateDocs(docId);
+
+            List<Doc> docs = this.unitOfWork.DbContext.Set<DocRelation>()
+                .Include(e => e.Doc)
+                .Where(e => e.RootDocId == caseId && e.Doc.DocEntryType.Alias == "Document")
+                .Where(e => docIds.Contains(e.DocId))
+                .Select(e => e.Doc)
+                .OrderBy(e => e.ReceiptOrder)
+                .ToList();
+
+            foreach (var item in docs)
+            {
+                item.ReceiptOrder = boundary;
+                boundary++;
+            }
+
+            return docs;
+        }
+
         public Doc MarkAsRead(int id, byte[] docVersion, int unitId, UserContext userContext)
         {
             Doc doc = this.Find(id, e => e.DocHasReads);
@@ -896,6 +976,58 @@ namespace Docs.Api.Repositories.DocRepository
                 out totalCount);
         }
 
+        public List<Doc> GetCurrentExclusiveCaseDocs(
+            DateTime? fromDate,
+            DateTime? toDate,
+            string regUri,
+            string docName,
+            int? docTypeId,
+            int? docStatusId,
+            bool? hideRead,
+            bool? isCase,
+            string corrs,
+            string units,
+            string ds,
+            List<int> excludedDocId,
+            int limit,
+            int offset,
+            DocCasePartType docCasePartType,
+            List<DocStatus> docStatuses,
+            ClassificationPermission readPermission,
+            UnitUser unitUser,
+            out int totalCount)
+        {
+            DocStatus docStatusFinished = docStatuses.FirstOrDefault(e => e.Alias == "Finished");
+            DocStatus docStatusCanceled = docStatuses.FirstOrDefault(e => e.Alias == "Canceled");
+
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.IsCase)
+                .And(e => e.DocStatusId != docStatusFinished.DocStatusId)
+                .And(e => e.DocStatusId != docStatusCanceled.DocStatusId)
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId)
+                .And(e => !excludedDocId.Contains(e.DocId)); //? maybe written with a join to gvaapplications and move this method to specific repo
+
+            return GetDocsInternal(
+                fromDate,
+                toDate,
+                regUri,
+                docName,
+                docTypeId,
+                docStatusId,
+                corrs,
+                units,
+                ds,
+                limit,
+                offset,
+                predicate,
+                unitUser,
+                readPermission,
+                hideRead,
+                isCase,
+                out totalCount);
+        }
+
         public List<Doc> GetFinishedCaseDocs(
             DateTime? fromDate,
             DateTime? toDate,
@@ -1216,6 +1348,55 @@ namespace Docs.Api.Repositories.DocRepository
             System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
                 .True<Doc>()
                 .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId);
+
+            return GetDocsInternal(
+                fromDate,
+                toDate,
+                regUri,
+                docName,
+                docTypeId,
+                docStatusId,
+                corrs,
+                units,
+                ds,
+                limit,
+                offset,
+                predicate,
+                unitUser,
+                readPermission,
+                hideRead,
+                isCase,
+                out totalCount);
+        }
+
+        public List<Doc> GetDocsExclusive(
+            DateTime? fromDate,
+            DateTime? toDate,
+            string regUri,
+            string docName,
+            int? docTypeId,
+            int? docStatusId,
+            bool? hideRead,
+            bool? isCase,
+            string corrs,
+            string units,
+            string ds,
+            List<int> excludedDocIds,
+            int limit,
+            int offset,
+            DocCasePartType docCasePartType,
+            ClassificationPermission readPermission,
+            UnitUser unitUser,
+            out int totalCount)
+        {
+            List<int> corrIds = Helper.GetIdListFromString(corrs);
+            List<int> unitIds = Helper.GetIdListFromString(units);
+            List<int> docIds = Helper.GetIdListFromString(ds);
+
+            System.Linq.Expressions.Expression<Func<Doc, bool>> predicate = PredicateBuilder
+                .True<Doc>()
+                .And(e => e.DocCasePartTypeId != docCasePartType.DocCasePartTypeId)
+                .And(e => !excludedDocIds.Contains(e.DocId)); //? maybe written with a join to aopapplications and move this method to specific repo
 
             return GetDocsInternal(
                 fromDate,

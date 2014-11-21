@@ -49,6 +49,18 @@
       }, { reload: true });
     };
 
+    $scope.getDocs = function (page, pageSize) {
+      var params = {};
+
+      _.assign(params, $stateParams);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return Docs.getDocsForChange(params).$promise;
+    };
+
     $scope.cancel = function () {
       return $state.go('^');
     };

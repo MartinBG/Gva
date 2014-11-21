@@ -1,0 +1,20 @@
+﻿<ng-form name="unitForm" class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="noms.units.edit.unitTitle"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="noms.units.edit.save"
+          class="btn btn-primary btn-sm" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="noms.units.edit.cancel"
+          class="btn btn-default btn-sm" icon="glyphicon-ban-circle">
+        </sc-button>
+        <sc-button name="deleteBtn" btn-click="deleteUnit()" text="noms.units.edit.deleteUnit" class="btn btn-danger btn-xs" icon="glyphicon-remove">
+        </sc-button>
+      </div>
+    </div>
+
+    <nom-unit-data name="unitDataForm" ng-model="unit" sc-form-params="{ isNew: false }"></nom-unit-data>
+  </div>
+</ng-form>
+

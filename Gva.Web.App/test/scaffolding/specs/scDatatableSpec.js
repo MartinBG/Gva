@@ -23,7 +23,7 @@
       datatablePage = new Page(ptor);
       expect(datatablePage.datatable1.getColumn('username')).toEqual(['georgi']);
     });
-    
+
     it('should filter properly with many users loaded', function () {
       datatablePage.loadManyEntriesInTable2();
       datatablePage.datatable2.setFilterInput('iztrit');
@@ -55,14 +55,14 @@
       datatablePage.datatable1.goToPage(2);
       expect(datatablePage.datatable1.getInfoText()).toContain('11');
     });
-    
+
     it('should evaluate column content expressions on next page', function () {
       datatablePage.loadManyEntriesInTable1();
       datatablePage.datatable1.goToPage(3);
       datatablePage.datatable1.getColumn('isActive').then(function(results){
         expect(results[3]).toBe('Не');
       });
-      
+
     });
 
     it('should load 100 entries per page', function() {
@@ -71,7 +71,7 @@
       expect(datatablePage.datatable1.getInfoText())
         .toEqual('Намерени общo 4,096 резултата (от 1 до 50)');
     });
-    
+
     it('should evaluate column content expressions when loading more entries', function () {
       datatablePage.loadManyEntriesInTable1();
       datatablePage.datatable1.setLengthFilterOption(2);
@@ -98,7 +98,7 @@
         expect(columnsClasses[1]).toMatch(/sorting/);
       });
     });
-    
+
     it('a column should be hidden because of the sc-column parameter called visibility',
       function () {
         expect(datatablePage.datatable3.getHeaders())
@@ -122,11 +122,11 @@
           });
         });
       });
-   
+
     it('correct settings should be set by sc-datatable parameters', function () {
       //no filter displayed
       expect(datatablePage.datatable3.isFilterDisplayed()).toEqual(false);
-      
+
       //no pagination displayed
       expect(datatablePage.datatable3.isPaginationDisplayed()).toEqual(false);
 

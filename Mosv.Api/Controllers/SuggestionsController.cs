@@ -83,7 +83,7 @@ namespace Mosv.Api.Controllers
         [Route(@"{lotId}/{*path:regex(^suggestionData$)}")]
         public IHttpActionResult GetPart(int lotId, string path)
         {
-            var part = this.lotRepository.GetLotIndex(lotId).Index.GetPart<SuggestionDO>(path);
+            var part = this.lotRepository.GetLotIndex(lotId, true).Index.GetPart<SuggestionDO>(path);
 
             var suggestion = this.suggestionRepository.GetSuggestion(lotId);
             SuggestionViewDO suggestionDO = new SuggestionViewDO(suggestion);
@@ -113,7 +113,7 @@ namespace Mosv.Api.Controllers
         {
             UserContext userContext = this.Request.GetUserContext();
 
-            var lot = this.lotRepository.GetLotIndex(lotId);
+            var lot = this.lotRepository.GetLotIndex(lotId, true);
             PartVersion<SuggestionDO> partVersion = lot.UpdatePart(path, partVersionDO.Part, userContext);
             lot.Commit(userContext, lotEventDispatcher);
 

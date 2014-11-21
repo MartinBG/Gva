@@ -1,3 +1,4 @@
+using Common.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -12,7 +13,7 @@ namespace Aop.Api.Models
         public string Uic { get; set; }
         public int AopEmployerTypeId { get; set; }
         public byte[] Version { get; set; }
-        public virtual AopEmployerType AopEmployerType { get; set; }
+        public virtual NomValue AopEmployerType { get; set; }
     }
 
     public class AopEmployerMap : EntityTypeConfiguration<AopEmployer>
@@ -50,7 +51,7 @@ namespace Aop.Api.Models
 
             // Relationships
             this.HasRequired(t => t.AopEmployerType)
-                .WithMany(t => t.AopEmployers)
+                .WithMany()
                 .HasForeignKey(d => d.AopEmployerTypeId);
 
         }

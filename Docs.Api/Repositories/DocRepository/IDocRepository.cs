@@ -29,6 +29,12 @@ namespace Docs.Api.Repositories.DocRepository
 
         int? spGetDocRegisterIdByRegisterIndexId(int registerIndexId);
 
+        int? GetNextReceiptOrder(int docId);
+
+        List<Doc> RearangeReceiptOrder(int inCaseDocId, int boundaryDocId, bool everything = true);
+
+        List<Doc> RearangeBoundaryReceiptOrder(int inCaseDocId, int docId, int boundary);
+
         Doc MarkAsRead(int id, byte[] docVersion, int unitId, UserContext userContext);
 
         Doc MarkAsUnread(int id, byte[] docVersion, int unitId, UserContext userContext);
@@ -126,6 +132,27 @@ namespace Docs.Api.Repositories.DocRepository
             string corrs,
             string units,
             string ds,
+            int limit,
+            int offset,
+            DocCasePartType docCasePartType,
+            List<DocStatus> docStatuses,
+            ClassificationPermission readPermission,
+            UnitUser unitUser,
+            out int totalCount);
+
+        List<Doc> GetCurrentExclusiveCaseDocs(
+            DateTime? fromDate,
+            DateTime? toDate,
+            string regUri,
+            string docName,
+            int? docTypeId,
+            int? docStatusId,
+            bool? hideRead,
+            bool? isCase,
+            string corrs,
+            string units,
+            string ds,
+            List<int> excludedDocId,
             int limit,
             int offset,
             DocCasePartType docCasePartType,
@@ -274,6 +301,26 @@ namespace Docs.Api.Repositories.DocRepository
             ClassificationPermission readPermission,
             UnitUser unitUser,
             out int totalCount);
+
+        List<Doc> GetDocsExclusive(
+           DateTime? fromDate,
+           DateTime? toDate,
+           string regUri,
+           string docName,
+           int? docTypeId,
+           int? docStatusId,
+           bool? hideRead,
+           bool? isCase,
+           string corrs,
+           string units,
+           string ds,
+            List<int> excludedDocIds,
+           int limit,
+           int offset,
+           DocCasePartType docCasePartType,
+           ClassificationPermission readPermission,
+           UnitUser unitUser,
+           out int totalCount);
 
         List<Doc> GetDocsForChange(
             DateTime? fromDate,

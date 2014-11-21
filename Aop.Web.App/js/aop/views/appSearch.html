@@ -7,20 +7,21 @@
   <sc-search-button action="add"></sc-search-button>
 </sc-search>
 
-<sc-datatable items="apps" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" has-content="true">
+
+<sc-ajaxdatatable items="apps" items-count="appCount" fectch-fn="getApps" set-prop="applications" count-prop="applicationCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="viewButton" btn-click="editApp(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-  </sc-column>
-  <sc-column data="createUnitName" title="apps.search.expert">
-  </sc-column>
-  <sc-column data="aopEmployerName" title="apps.search.employer">
-  </sc-column>
-  <sc-column data="email" title="apps.search.email">
-  </sc-column>
-  <sc-column title="apps.search.docIstage" has-content="true">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="createUnitName" title="apps.search.expert">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="aopEmployerName" title="apps.search.employer">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="email" title="apps.search.email">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn title="apps.search.docIstage" has-content="true">
     {{item.stDocRelation.docRegUri}} {{item.stDocRelation.docDocTypeName}}: {{item.stDocRelation.docSubject}}
-  </sc-column>
-  <sc-column title="apps.search.docIIstage" has-content="true">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn title="apps.search.docIIstage" has-content="true">
     {{item.ndDocRelation.docRegUri}} {{item.ndDocRelation.docDocTypeName}}: {{item.ndDocRelation.docSubject}}
-  </sc-column>
-</sc-datatable>
+  </sc-ajaxcolumn>
+</sc-ajaxdatatable>

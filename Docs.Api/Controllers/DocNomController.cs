@@ -978,5 +978,46 @@ namespace Docs.Api.Controllers
 
             return Ok(results);
         }
+
+        [Route("unitType/{id:int}")]
+        public IHttpActionResult GetUnitType(int id)
+        {
+            var result = this.unitOfWork.DbContext.Set<UnitType>()
+                .Where(e => e.UnitTypeId == id)
+                .SingleOrDefault();
+
+            return Ok(new
+            {
+                nomValueId = result.UnitTypeId,
+                name = result.Name,
+                alias = result.Alias,
+                isActive = result.IsActive
+            });
+        }
+
+        [Route("unitType")]
+        public IHttpActionResult GetUnitTypes(string term = null, int offset = 0, int? limit = null)
+        {
+            var predicate =
+                PredicateBuilder.True<UnitType>()
+                .AndStringContains(e => e.Name, term)
+                .And(e => e.IsActive);
+
+            var results =
+                this.unitOfWork.DbContext.Set<UnitType>()
+                .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
+                .Select(e => new
+                {
+                    nomValueId = e.UnitTypeId,
+                    name = e.Name,
+                    alias = e.Alias,
+                    isActive = e.IsActive
+                })
+                .ToList();
+
+            return Ok(results);
+        }
     }
 }

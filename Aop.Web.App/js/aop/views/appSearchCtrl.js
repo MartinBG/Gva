@@ -41,6 +41,18 @@
     $scope.editApp = function editCorr(app) {
       return $state.go('root.apps.edit', { id: app.aopApplicationId });
     };
+
+    $scope.getApps = function (page, pageSize) {
+      var params = {};
+
+      _.assign(params, $stateParams);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return Aops.get(params).$promise;
+    };
   }
 
   AppsSearchCtrl.$inject = [

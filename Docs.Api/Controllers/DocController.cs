@@ -57,121 +57,6 @@ namespace Docs.Api.Controllers
             catch { }
         }
 
-        [HttpGet]
-        public IHttpActionResult GetDocsForSelect(
-            int limit = 10,
-            int offset = 0,
-            string filter = null,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
-            string regUri = null,
-            string docName = null,
-            int? docTypeId = null,
-            int? docStatusId = null,
-            bool? hideRead = null,
-            string corrs = null,
-            string units = null,
-            string ds = null,
-            int? isChosen = null
-            )
-        {
-            this.userContext = this.Request.GetUserContext();
-
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            limit = 1000;
-            offset = 0;
-
-            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
-            ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
-            DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
-            DocCasePartType docCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>().SingleOrDefault(e => e.Alias == "Control");
-            List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().Where(e => e.IsActive).ToList();
-            List<DocUnitRole> docUnitRoles = this.unitOfWork.DbContext.Set<DocUnitRole>()
-                .Where(e => e.Alias.ToLower() == "incharge" || e.Alias.ToLower() == "controlling" || e.Alias.ToLower() == "to")
-                .ToList();
-
-            int totalCount = 0;
-            List<Doc> docs = new List<Doc>();
-
-            docs = this.docRepository.GetDocs(
-                      fromDate,
-                      toDate,
-                      regUri,
-                      docName,
-                      docTypeId,
-                      docStatusId,
-                      hideRead,
-                      null,
-                      corrs,
-                      units,
-                      ds,
-                      limit,
-                      offset,
-                      docCasePartType,
-                      readPermission,
-                      unitUser,
-                      out totalCount);
-
-            List<int> loadedDocIds = docs.Select(e => e.DocId).ToList();
-
-            var docHasReads = this.unitOfWork.DbContext.Set<DocHasRead>()
-                .Where(e => e.UnitId == unitUser.UnitId && loadedDocIds.Contains(e.DocId)).ToList();
-
-            List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
-
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            //? gonna fail miserably with more docs
-            foreach (var item in returnValue)
-            {
-                var docCorrespondents = this.unitOfWork.DbContext.Set<DocCorrespondent>()
-                    .Include(e => e.Correspondent.CorrespondentType)
-                    .Where(e => e.DocId == item.DocId)
-                    .ToList();
-
-                item.DocCorrespondents.AddRange(docCorrespondents.Select(e => new DocCorrespondentDO(e)).ToList());
-            }
-
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            //? gonna fail miserably with more docs
-
-            //? chosen
-            //if (isChosen == 1) //true
-            //{
-            //    List<AopApp> allAopApps = this.unitOfWork.DbContext.Set<AopApp>().ToList();
-            //    List<int> aopAppDocIds =
-            //        allAopApps.Where(e => e.STDocId.HasValue).Select(e => e.STDocId.Value)
-            //        .Union(allAopApps.Where(e => e.STChecklistId.HasValue).Select(e => e.STChecklistId.Value))
-            //        .Union(allAopApps.Where(e => e.STNoteId.HasValue).Select(e => e.STNoteId.Value))
-            //        .Union(allAopApps.Where(e => e.NDDocId.HasValue).Select(e => e.NDDocId.Value))
-            //        .Union(allAopApps.Where(e => e.NDChecklistId.HasValue).Select(e => e.NDChecklistId.Value))
-            //        .Union(allAopApps.Where(e => e.NDReportId.HasValue).Select(e => e.NDReportId.Value))
-            //        .ToList();
-
-            //    for (int i = 0; i < returnValue.Count; i++)
-            //    {
-            //        if (returnValue[i].DocId.HasValue &&
-            //            aopAppDocIds.Contains(returnValue[i].DocId.Value))
-            //        {
-            //            returnValue.RemoveAt(i);
-            //        }
-            //    }
-            //}
-
-            StringBuilder sb = new StringBuilder();
-
-            if (totalCount >= 10000)
-            {
-                sb.Append("Има повече от 10000 резултата, моля, въведете допълнителни филтри.");
-            }
-
-            return Ok(new
-            {
-                documents = returnValue,
-                documentCount = totalCount,
-                msg = sb.ToString()
-            });
-        }
-
         /// <summary>
         /// Търсене на документи
         /// </summary>
@@ -207,10 +92,6 @@ namespace Docs.Api.Controllers
             )
         {
             this.userContext = this.Request.GetUserContext();
-
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            limit = 1000;
-            offset = 0;
 
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
             ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
@@ -443,8 +324,6 @@ namespace Docs.Api.Controllers
 
             List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
 
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            //? gonna fail miserably with more docs
             foreach (var item in returnValue)
             {
                 if (docView == DocView.ForControl || docView == DocView.ForManagement)
@@ -495,8 +374,8 @@ namespace Docs.Api.Controllers
                 int min = docIds.Min(),
                     max = docIds.Max();
 
-                DocListItemDO minDoc = returnValue.FirstOrDefault(e => e.DocId == min);
-                DocListItemDO maxDoc = returnValue.FirstOrDefault(e => e.DocId == max);
+                DocListItemDO minDoc = new DocListItemDO(this.docRepository.Find(min));
+                DocListItemDO maxDoc = new DocListItemDO(this.docRepository.Find(max));
 
                 if (minDoc != null && maxDoc != null)
                 {
@@ -533,10 +412,6 @@ namespace Docs.Api.Controllers
             )
         {
             this.userContext = this.Request.GetUserContext();
-
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            limit = 1000;
-            offset = 0;
 
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
 
@@ -633,6 +508,23 @@ namespace Docs.Api.Controllers
 
                 this.docRepository.ExecSpSetDocUnitTokens(docId: oldCaseId);
                 this.docRepository.ExecSpSetDocUnitTokens(docId: newDocId);
+
+                if (oldCaseId != id)
+                {
+                    this.docRepository.RearangeReceiptOrder(oldCaseId, id, everything: false);
+                }
+
+                int? boundary = this.docRepository.GetNextReceiptOrder(newDocId);
+                if (boundary.HasValue)
+                {
+                    this.docRepository.RearangeBoundaryReceiptOrder(newDocId, id, boundary.Value);
+                }
+                else
+                {
+                    this.docRepository.RearangeReceiptOrder(newDocId, 0, everything: true);
+                }
+
+                this.unitOfWork.Save();
 
                 transaction.Commit();
 
@@ -776,6 +668,11 @@ namespace Docs.Api.Controllers
                 this.docRepository.ExecSpSetDocUnitTokens(docId: oldCaseId);
                 this.docRepository.ExecSpSetDocUnitTokens(docId: id);
 
+                this.docRepository.RearangeReceiptOrder(oldCaseId, id, everything: false);
+                this.docRepository.RearangeReceiptOrder(id, 0, everything: true);
+
+                this.unitOfWork.Save();
+
                 transaction.Commit();
 
                 return Ok();
@@ -913,6 +810,8 @@ namespace Docs.Api.Controllers
 
                     this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
                     this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
+
+                    newDoc.SetReceiptOrder(this.docRepository.GetNextReceiptOrder(newDoc.DocId), this.userContext);
 
                     if (preDoc.Register)
                     {
@@ -1669,6 +1568,8 @@ namespace Docs.Api.Controllers
                     oldDoc.DocTypeId = doc.DocTypeId;
                     oldDoc.DocDirectionId = doc.DocDirectionId;
                 }
+
+                oldDoc.ReceiptOrder = doc.ReceiptOrder;
 
                 this.unitOfWork.Save();
 

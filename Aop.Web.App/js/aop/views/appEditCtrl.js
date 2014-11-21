@@ -103,7 +103,7 @@
     };
 
     //ST
-    $scope.generateSTChecklist = function (action) {
+    $scope.generateSTChecklist = function (action) { //? merge in one with generateNDChecklist?
       return Aops
         .generateChecklist({
           id: $scope.app.aopApplicationId,
@@ -193,7 +193,13 @@
       '$stateParams',
       'Aops',
       function resolveApp($stateParams, Aops) {
-        return Aops.get({ id: $stateParams.id }).$promise;
+        return Aops.get({ id: $stateParams.id }).$promise.then(function (app) {
+
+          app.flags = {};
+          app.flags.isVisibleEditCmd = app.canEdit;
+
+          return app;
+        });
       }
     ],
     selectDoc: [function () {

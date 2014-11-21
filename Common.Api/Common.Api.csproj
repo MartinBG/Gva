@@ -116,17 +116,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonApiWebApiConfig.cs" />
+    <Compile Include="Controllers\NomenclatureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\SignController.cs" />
     <Compile Include="Controllers\NomController.cs" />
     <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Blob\MultipartBlobStreamProvider.cs" />
     <Compile Include="Blob\MultipartBlobData.cs" />
+    <Compile Include="DataObjects\UserDO.cs" />
+    <Compile Include="DataObjects\RoleDO.cs" />
+    <Compile Include="DataObjects\UserListItemDO.cs" />
     <Compile Include="Models\Blob.cs" />
     <Compile Include="Models\Classification.cs" />
     <Compile Include="Models\ClassificationRelation.cs" />
     <Compile Include="Models\DbContextExtensions.cs" />
     <Compile Include="Models\ClassificationPermission.cs" />
+    <Compile Include="Models\RoleClassification.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Models\UnitClassification.cs" />
     <Compile Include="Models\UnitRelation.cs" />

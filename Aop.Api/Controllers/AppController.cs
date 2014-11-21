@@ -4,6 +4,7 @@ using Aop.Api.Repositories.Aop;
 using Aop.Api.Utils;
 using Aop.Api.WordTemplates;
 using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.Repositories.UserRepository;
 using Common.Api.UserContext;
 using Common.Blob;
@@ -12,6 +13,7 @@ using Common.Extensions;
 using Common.Utils;
 using Docs.Api.DataObjects;
 using Docs.Api.Models;
+using Docs.Api.Repositories.ClassificationRepository;
 using Docs.Api.Repositories.DocRepository;
 using System;
 using System.Collections.Generic;
@@ -35,18 +37,24 @@ namespace Aop.Api.Controllers
         private IDocRepository docRepository;
         private UserContext userContext;
         private IUserRepository userRepository;
+        private INomRepository nomRepository;
         private IDataGenerator dataGenerator;
+        private IClassificationRepository classificationRepository;
 
         public AppController(IUnitOfWork unitOfWork,
             IAppRepository appRepository,
             IDocRepository docRepository,
             IUserRepository userRepository,
+            IClassificationRepository classificationRepository,
+            INomRepository nomRepository,
             IDataGenerator dataGenerator)
         {
             this.unitOfWork = unitOfWork;
             this.appRepository = appRepository;
             this.docRepository = docRepository;
             this.userRepository = userRepository;
+            this.classificationRepository = classificationRepository;
+            this.nomRepository = nomRepository;
             this.dataGenerator = dataGenerator;
         }
 
@@ -73,6 +81,9 @@ namespace Aop.Api.Controllers
 
                 this.unitOfWork.Save();
 
+                this.appRepository.ExecSpSetAopApplicationTokens(aopApplicationId: app.AopApplicationId);
+                this.appRepository.ExecSpSetAopApplicationUnitTokens(aopApplicationId: app.AopApplicationId);
+
                 transaction.Commit();
 
                 return Ok(new
@@ -91,13 +102,12 @@ namespace Aop.Api.Controllers
             string correspondentEmail = null
             )
         {
-            //? hot fix: load fist 1000 corrs, so the paging with datatable will work
-            limit = 1000;
-            offset = 0;
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+            ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
 
             int totalCount = 0;
 
-            var returnValue = this.appRepository.GetApps(limit, offset, out totalCount)
+            var returnValue = this.appRepository.GetApps(limit, offset, unitUser, readPermission, out totalCount)
                 .Select(e => new AppListItemDO(e))
                 .ToList();
 
@@ -141,6 +151,18 @@ namespace Aop.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetApp(int id)
         {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasReadPermission =
+                this.appRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasReadPermission)
+            {
+                return Unauthorized();
+            }
+
             AopApp app = this.appRepository.Find(id,
                 e => e.CreateUnit,
                 e => e.AopEmployer);
@@ -236,6 +258,17 @@ namespace Aop.Api.Controllers
 
             #endregion
 
+            #region Set permissions
+
+            List<vwAopApplicationUser> vwAopApplicationUsers = this.appRepository.GetvwAopApplicationUsersForAppByUnitId(id, unitUser);
+
+            returnValue.CanRead = vwAopApplicationUsers.Any(e => e.AopApplicationId == app.AopApplicationId && e.ClassificationPermission.Alias == "Read");
+
+            returnValue.CanEdit = vwAopApplicationUsers.Any(e => e.AopApplicationId == app.AopApplicationId && e.ClassificationPermission.Alias == "Edit");
+
+            #endregion
+
+
             return Ok(returnValue);
         }
 
@@ -243,6 +276,20 @@ namespace Aop.Api.Controllers
         [HttpPost]
         public IHttpActionResult UpdateApp(int id, AppDO app)
         {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasEditPermission =
+                this.appRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId) &&
+                this.appRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasEditPermission)
+            {
+                return Unauthorized();
+            }
+
             var oldApp = this.appRepository.Find(id);
 
             oldApp.EnsureForProperVersion(app.Version);
@@ -289,6 +336,9 @@ namespace Aop.Api.Controllers
 
             this.unitOfWork.Save();
 
+            this.appRepository.ExecSpSetAopApplicationTokens(aopApplicationId: oldApp.AopApplicationId);
+            this.appRepository.ExecSpSetAopApplicationUnitTokens(aopApplicationId: oldApp.AopApplicationId);
+
             return Ok(new
             {
                 err = "",
@@ -300,6 +350,20 @@ namespace Aop.Api.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteApp(int id)
         {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasEditPermission =
+                this.appRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId) &&
+                this.appRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasEditPermission)
+            {
+                return Unauthorized();
+            }
+
             this.appRepository.DeteleAopApp(id);
 
             this.unitOfWork.Save();
@@ -360,10 +424,6 @@ namespace Aop.Api.Controllers
         {
             this.userContext = this.Request.GetUserContext();
 
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            limit = 1000;
-            offset = 0;
-
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
             ClassificationPermission readPermission = this.unitOfWork.DbContext.Set<ClassificationPermission>().SingleOrDefault(e => e.Alias == "Read");
             DocSourceType docSourceType = this.unitOfWork.DbContext.Set<DocSourceType>().SingleOrDefault(e => e.Alias == "Internet");
@@ -375,8 +435,23 @@ namespace Aop.Api.Controllers
 
             int totalCount = 0;
             List<Doc> docs = new List<Doc>();
+            List<int> aopAppDocIds = new List<int>();
 
-            docs = this.docRepository.GetDocs(
+            if (isChosen == 1)
+            {
+                List<AopApp> allAopApps = this.unitOfWork.DbContext.Set<AopApp>().ToList();
+
+                aopAppDocIds =
+                    allAopApps.Where(e => e.STDocId.HasValue).Select(e => e.STDocId.Value)
+                    .Union(allAopApps.Where(e => e.STChecklistId.HasValue).Select(e => e.STChecklistId.Value))
+                    .Union(allAopApps.Where(e => e.STNoteId.HasValue).Select(e => e.STNoteId.Value))
+                    .Union(allAopApps.Where(e => e.NDDocId.HasValue).Select(e => e.NDDocId.Value))
+                    .Union(allAopApps.Where(e => e.NDChecklistId.HasValue).Select(e => e.NDChecklistId.Value))
+                    .Union(allAopApps.Where(e => e.NDReportId.HasValue).Select(e => e.NDReportId.Value))
+                    .ToList();
+            }
+
+            docs = this.docRepository.GetDocsExclusive(
                       fromDate,
                       toDate,
                       regUri,
@@ -388,6 +463,7 @@ namespace Aop.Api.Controllers
                       corrs,
                       units,
                       ds,
+                      aopAppDocIds,
                       limit,
                       offset,
                       docCasePartType,
@@ -402,8 +478,6 @@ namespace Aop.Api.Controllers
 
             List<DocListItemDO> returnValue = docs.Select(e => new DocListItemDO(e, unitUser)).ToList();
 
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            //? gonna fail miserably with more docs
             foreach (var item in returnValue)
             {
                 var docCorrespondents = this.unitOfWork.DbContext.Set<DocCorrespondent>()
@@ -412,30 +486,6 @@ namespace Aop.Api.Controllers
                     .ToList();
 
                 item.DocCorrespondents.AddRange(docCorrespondents.Select(e => new DocCorrespondentDO(e)).ToList());
-            }
-
-            //? hot fix: load fist 1000 docs, so the paging with datatable will work
-            //? gonna fail miserably with more docs
-            if (isChosen == 1) //true
-            {
-                List<AopApp> allAopApps = this.unitOfWork.DbContext.Set<AopApp>().ToList();
-                List<int> aopAppDocIds =
-                    allAopApps.Where(e => e.STDocId.HasValue).Select(e => e.STDocId.Value)
-                    .Union(allAopApps.Where(e => e.STChecklistId.HasValue).Select(e => e.STChecklistId.Value))
-                    .Union(allAopApps.Where(e => e.STNoteId.HasValue).Select(e => e.STNoteId.Value))
-                    .Union(allAopApps.Where(e => e.NDDocId.HasValue).Select(e => e.NDDocId.Value))
-                    .Union(allAopApps.Where(e => e.NDChecklistId.HasValue).Select(e => e.NDChecklistId.Value))
-                    .Union(allAopApps.Where(e => e.NDReportId.HasValue).Select(e => e.NDReportId.Value))
-                    .ToList();
-
-                for (int i = 0; i < returnValue.Count; i++)
-                {
-                    if (returnValue[i].DocId.HasValue &&
-                        aopAppDocIds.Contains(returnValue[i].DocId.Value))
-                    {
-                        returnValue.RemoveAt(i);
-                    }
-                }
             }
 
             StringBuilder sb = new StringBuilder();
@@ -478,6 +528,20 @@ namespace Aop.Api.Controllers
         [HttpPost]
         public IHttpActionResult ReadFedForFirstStage(int id)
         {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasEditPermission =
+                this.appRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId) &&
+                this.appRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasEditPermission)
+            {
+                return Unauthorized();
+            }
+
             AopApp app = this.appRepository.Find(id);
 
             if (app.STDocId.HasValue)
@@ -517,25 +581,25 @@ namespace Aop.Api.Controllers
                     string subject = FedExtractor.GetSubject(fedDoc);
                     string val = FedExtractor.GetPredictedValue(fedDoc);
 
-                    var stAopApplicationType = this.unitOfWork.DbContext.Set<AopApplicationType>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(procType.ToLower()));
+                    var stAopApplicationType = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationType" && e.Name.ToLower().StartsWith(procType.ToLower()));
                     if (stAopApplicationType != null)
                     {
-                        app.STAopApplicationTypeId = stAopApplicationType.AopApplicationTypeId;
+                        app.STAopApplicationTypeId = stAopApplicationType.NomValueId;
                     }
 
-                    var stObject = this.unitOfWork.DbContext.Set<AopApplicationObject>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(obj.ToLower()));
+                    var stObject = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationObject" && e.Name.ToLower().StartsWith(obj.ToLower()));
                     if (stObject != null)
                     {
-                        app.STObjectId = stObject.AopApplicationObjectId;
+                        app.STObjectId = stObject.NomValueId;
                     }
 
-                    var stCriteria = this.unitOfWork.DbContext.Set<AopApplicationCriteria>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(criteria.ToLower()));
+                    var stCriteria = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationCriteria" && e.Name.ToLower().StartsWith(criteria.ToLower()));
                     if (stCriteria != null)
                     {
-                        app.STCriteriaId = stCriteria.AopApplicationCriteriaId;
+                        app.STCriteriaId = stCriteria.NomValueId;
                     }
 
                     app.STSubject = subject;
@@ -556,9 +620,9 @@ namespace Aop.Api.Controllers
                         string aopEmpName = FedExtractor.GetContractor(fedDoc);
                         string aopEmpLotNum = FedExtractor.GetContractorBatch(fedDoc);
 
-                        AopEmployerType unknownAopEmpType = this.appRepository.GetAopEmployerTypeByAlias("Unknown");
+                        NomValue unknownAopEmpType = this.nomRepository.GetNomValue("AopApplicationObject", "Unknown");
 
-                        AopEmployer emp = appRepository.CreateAopEmployer(aopEmpName, aopEmpLotNum, aopEmpUic, unknownAopEmpType.AopEmployerTypeId);
+                        AopEmployer emp = appRepository.CreateAopEmployer(aopEmpName, aopEmpLotNum, aopEmpUic, unknownAopEmpType.NomValueId);
 
                         this.unitOfWork.DbContext.Set<AopEmployer>().Add(emp);
 
@@ -582,6 +646,20 @@ namespace Aop.Api.Controllers
         [HttpPost]
         public IHttpActionResult ReadFedForSecondStage(int id)
         {
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
+            ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+
+            bool hasEditPermission =
+                this.appRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId) &&
+                this.appRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+            if (!hasEditPermission)
+            {
+                return Unauthorized();
+            }
+
             AopApp app = this.appRepository.Find(id);
 
             if (app.STDocId.HasValue)
@@ -621,25 +699,25 @@ namespace Aop.Api.Controllers
                     string subject = FedExtractor.GetSubject(fedDoc);
                     string val = FedExtractor.GetPredictedValue(fedDoc);
 
-                    var ndAopApplicationType = this.unitOfWork.DbContext.Set<AopApplicationType>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(procType.ToLower()));
+                    var ndAopApplicationType = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationType" && e.Name.ToLower().StartsWith(procType.ToLower()));
                     if (ndAopApplicationType != null)
                     {
-                        app.NDAopApplicationTypeId = ndAopApplicationType.AopApplicationTypeId;
+                        app.NDAopApplicationTypeId = ndAopApplicationType.NomValueId;
                     }
 
-                    var ndObject = this.unitOfWork.DbContext.Set<AopApplicationObject>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(obj.ToLower()));
+                    var ndObject = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationObject" && e.Name.ToLower().StartsWith(obj.ToLower()));
                     if (ndObject != null)
                     {
-                        app.NDObjectId = ndObject.AopApplicationObjectId;
+                        app.NDObjectId = ndObject.NomValueId;
                     }
 
-                    var ndCriteria = this.unitOfWork.DbContext.Set<AopApplicationCriteria>()
-                        .FirstOrDefault(e => e.Name.ToLower().StartsWith(criteria.ToLower()));
+                    var ndCriteria = this.unitOfWork.DbContext.Set<NomValue>()
+                        .FirstOrDefault(e => e.Nom.Alias == "AopApplicationCriteria" && e.Name.ToLower().StartsWith(criteria.ToLower()));
                     if (ndCriteria != null)
                     {
-                        app.NDCriteriaId = ndCriteria.AopApplicationCriteriaId;
+                        app.NDCriteriaId = ndCriteria.NomValueId;
                     }
 
                     app.NDSubject = subject;
@@ -660,9 +738,9 @@ namespace Aop.Api.Controllers
                         string aopEmpName = FedExtractor.GetContractor(fedDoc);
                         string aopEmpLotNum = FedExtractor.GetContractorBatch(fedDoc);
 
-                        AopEmployerType unknownAopEmpType = this.appRepository.GetAopEmployerTypeByAlias("Unknown");
+                        NomValue unknownAopEmpType = this.nomRepository.GetNomValue("AopApplicationObject", "Unknown");
 
-                        AopEmployer emp = appRepository.CreateAopEmployer(aopEmpName, aopEmpLotNum, aopEmpUic, unknownAopEmpType.AopEmployerTypeId);
+                        AopEmployer emp = appRepository.CreateAopEmployer(aopEmpName, aopEmpLotNum, aopEmpUic, unknownAopEmpType.NomValueId);
 
                         this.unitOfWork.DbContext.Set<AopEmployer>().Add(emp);
 

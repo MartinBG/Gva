@@ -65,15 +65,14 @@
   <ItemGroup>
     <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
+    <Content Include="Create\Procedures\Tokens\spSetAopApplicationTokens.sql" />
+    <Content Include="Create\Procedures\Tokens\spSetAopApplicationUnitTokens.sql" />
     <Content Include="Create\Tables\AopApplications.sql" />
     <Content Include="Create\Tables\AopEmployers.sql" />
-    <Content Include="Create\Tables\AopEmployerTypes.sql" />
-    <Content Include="Create\Tables\AopApplicationTypes.sql" />
-    <Content Include="Create\Tables\AopChecklistStatuses.sql" />
-    <Content Include="Create\Tables\AopProcedureStatuses.sql" />
-    <Content Include="Create\Tables\AopApplicationCriteria.sql" />
-    <Content Include="Create\Tables\AopApplicationObjects.sql" />
     <Content Include="Create\Tables\AopPortalDocRelations.sql" />
+    <Content Include="Create\Tables\Tokens\AopApplicationTokens.sql" />
+    <Content Include="Create\Tables\Users\RoleClassifications.sql" />
+    <Content Include="Create\Views\vwAopApplicationUsers.sql" />
     <Content Include="Insert\AopCorrespondents.sql" />
     <Content Include="Insert\AopExcelConfig\ClassificationRelations.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
@@ -107,8 +106,6 @@
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
     <Content Include="Insert\AopExcelConfig\ExcelConfig.xml" />
-    <Content Include="Insert\AopEmployerTypes.sql" />
-    <Content Include="Insert\AopChecklistStatuses.sql" />
     <Content Include="Insert\AopExcelConfig\IrregularityTypes.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
@@ -127,11 +124,15 @@
     <Content Include="Insert\AopExcelConfig\Users.sql">
       <DependentUpon>ExcelConfig.tt</DependentUpon>
     </Content>
-    <Content Include="Insert\AopProcedureStatuses.sql" />
-    <Content Include="Insert\AopApplicationTypes.sql" />
-    <Content Include="Insert\AopApplicationCriteria.sql" />
-    <Content Include="Insert\AopApplicationObjects.sql" />
-    <Content Include="Insert\Docs\DocEntryTypes.sql" />
+    <Content Include="Insert\Noms\AopApplicationCriteria.sql" />
+    <Content Include="Insert\Noms\AopApplicationObjects.sql" />
+    <Content Include="Insert\Noms\AopApplicationTypes.sql" />
+    <Content Include="Insert\Noms\AopChecklistStatuses.sql" />
+    <Content Include="Insert\Noms\AopEmployerTypes.sql" />
+    <Content Include="Insert\Noms\AopProcedureStatuses.sql" />
+    <Content Include="Insert\Users\RoleClassifications.sql" />
+    <Content Include="Insert\Users\UserRoles.sql" />
+    <Content Include="Insert\Users\Roles.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Create\Diagram\" />

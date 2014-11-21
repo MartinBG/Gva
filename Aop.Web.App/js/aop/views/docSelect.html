@@ -11,27 +11,27 @@
   </sc-filter>
   <sc-filter type="nomenclature" name="csUnits" class="col-sm-3" removable="false" alias="employeeUnit" load="false" mode="id" label="docs.caseSelect.units" multiple="multiple">
   </sc-filter>
-  <sc-filter type="nomenclature" name="csIsChosen" class="col-sm-3" removable="false" alias="boolean" load="false" mode="id" label="apps.caseSelect.hideChosen">
+  <sc-filter type="nomenclature" name="csIsChosen" class="col-sm-3" removable="false" alias="boolean" load="false" mode="id" label="docs.caseSelect.hideChosen">
   </sc-filter>
   <sc-search-button action="search()" text="docs.caseSelect.search" class="btn btn-primary btn-sm" icon="glyphicon-search"></sc-search-button>
   <sc-search-button action="cancel()" text="docs.caseSelect.cancel" class="btn btn-default btn-sm" icon="glyphicon-ban-circle"></sc-search-button>
   <sc-search-button action="clear"></sc-search-button>
 </sc-search>
 
-<sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-  <sc-column sortable="false" class="buttons-cell" has-content="true">
-   <sc-button btn-click="selectDoc(item)" text="docs.caseSelect.select" class="btn btn-xs btn-primary"></sc-button>
-  </sc-column>
-  <sc-column type="date" data="regDate" title="docs.caseSelect.regDate">
-  </sc-column>
-  <sc-column data="regUri" title="docs.caseSelect.regUri">
-  </sc-column>
-  <sc-column data="docSubject" title="docs.caseSelect.docSubject">
-  </sc-column>
-  <sc-column data="docDirectionName" title="docs.caseSelect.docDirectionName">
-  </sc-column>
-  <sc-column data="docStatusName" title="docs.caseSelect.docStatusName">
-  </sc-column>
-  <sc-column data="correspondentName" title="docs.caseSelect.correspondentName">
-  </sc-column>
-</sc-datatable>
+<sc-ajaxdatatable items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
+    <sc-button btn-click="selectDoc(item)" text="docs.caseSelect.select" class="btn btn-xs btn-primary"></sc-button>
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn type="date" data="regDate" title="docs.search.regDate">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="regUri" title="docs.search.regUri">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="docDirectionName" title="docs.search.docDirectionName">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="docStatusName" title="docs.search.docStatusName">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="correspondentNames" title="docs.search.correspondentName">
+  </sc-ajaxcolumn>
+</sc-ajaxdatatable>

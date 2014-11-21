@@ -31,7 +31,9 @@
           admin: {
             title: 'Админ',
             users: 'Потребители',
-            noms: 'Номенклатури'
+            noms: 'Номенклатури',
+            nomenclatures: 'Общи номенклатури',
+            units: 'Служители'
           },
           help: {
             title: 'Помощ',
@@ -55,6 +57,9 @@
             usernameInvalid: 'потребителското име трябва да е поне 5 символа' +
               ' и да съдържа само букви, числа, подчертавки (_) и точки (.)',
             usernameExists: 'потребителското име е заето',
+            email: 'Имейл',
+            appointmentDate: 'Дата на назначаване',
+            resignationdate: 'Дата на напускане',
             comment: 'Коментар:',
             entrance: 'Вход:',
             withPassAndUsername: ' с потребителско име / парола',
@@ -65,17 +70,63 @@
             doNotMatch: 'паролите не съвпадат',
             certificate: 'Сертификат:',
             inputCertificate: 'въведете сертификат',
+            unit: 'Служител',
+            inputUnit: 'изберете служител',
+            unitExists: 'служителят е вече избран',
             roles: 'Роли:',
             active: 'Активен:',
             save: 'Запис',
             cancel: 'Отказ'
+          }
+        },
+        nomenclatures: {
+          noms: {
+            search: {
+              name: 'Наименование'
+            },
+            edit: {
+              title: 'Вид номенклатура',
+              save: 'Запис',
+              cancel: 'Отказ',
+              name: 'Наименование',
+              alias: 'Псевдоним'
+            }
+          },
+          nomValues: {
+            search: {
+              newNomValue: 'Нова номенклатура',
+              code: 'Код',
+              name: 'Наименование',
+              alias: 'Псевдоним',
+              parent: 'Родител'
+            },
+            edit: {
+              title: 'Номенклатура',
+              save: 'Запис',
+              cancel: 'Отказ',
+              remove: 'Изтриване',
+              nomType: 'Вид на номенклатурата',
+              code: 'Код',
+              name: 'Наименование',
+              altName: 'Алт. наименование',
+              alias: 'Псевдоним',
+              parentNomType: 'Вид на родителската номенклатура',
+              parentNomValue: 'Идентификатор на родителската номенклатура',
+              order: 'Пореден номер',
+              isActive: 'Активен'
+            }
           }
         }
       },
       states: {
         'root.users': 'Потребители',
         'root.users.new': 'Нов потребител',
-        'root.users.edit': 'Редакция'
+        'root.users.edit': 'Редакция',
+        'root.nomenclatures': 'Общи номенклатури',
+        'root.nomenclatures.new': 'Нов вид номенклатура',
+        'root.nomenclatures.edit': 'Редакция',
+        'root.nomenclatures.values': 'Списък стойности',
+        'root.nomenclatures.values.edit': 'Редакция'
       }
     });
   }]);

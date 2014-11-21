@@ -3,6 +3,8 @@
 <br />
 
 <sc-treetable items="docRelations" row-class="{ 'case-font-weight': item.docId === docId}">
+  <sc-tree-column data="docReceiptOrder || ''" title="docs.edit.case.receiptOrder">
+  </sc-tree-column>
   <sc-tree-column title="docs.edit.case.regNumber" has-content="true" width="250px">
     <span><div ng-if="!!item.docRegUri">{{ item.docRegUri }}<br/></div>
       {{item.docDocDirectionName}} | {{item.docDocCasePartTypeName}}</span>

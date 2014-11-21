@@ -285,10 +285,17 @@ form.card input.form-control[disabled]
   padding: 6px;
 }
 
-table.dataTable td.buttons-cell
+table.sc-data-table td.buttons-cell
 {
   white-space: nowrap;
   padding: 2px;
+}
+
+table.sc-data-table td.buttons-cell-compact
+{
+  white-space: nowrap;
+  padding: 2px;
+  width: 1px;
 }
 
 /*tabs loading*/

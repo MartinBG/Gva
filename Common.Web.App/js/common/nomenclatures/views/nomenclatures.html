@@ -1,0 +1,10 @@
+﻿<sc-datatable items="nomenclatures" filterable="true" pageable="true" sortable="true">
+  <sc-column sortable="false" class="buttons-cell-compact" has-content="true">
+    <sc-button name="viewButton" btn-click="editNomenclature(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column sortable="false" class="buttons-cell-compact" has-content="true">
+    <sc-button name="viewButton" btn-click="viewNomenclatureValues(item)" class="btn btn-xs btn-primary" icon="glyphicon-search"></sc-button>
+  </sc-column>
+  <sc-column sortable="false" data="name" title="common.nomenclatures.noms.search.name">
+  </sc-column>
+</sc-datatable>

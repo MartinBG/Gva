@@ -8,6 +8,8 @@ CREATE TABLE [dbo].[Users] (
     [PasswordSalt]          NVARCHAR (200)      NULL,
     [HasPassword]           BIT                 NOT NULL,
     [Fullname]              NVARCHAR (200)      NULL,
+    [AppointmentDate]       DATETIME            NULL,
+    [ResignationDate]       DATETIME            NULL,
     [Notes]                 NVARCHAR (MAX)      NULL,
     [CertificateThumbprint] NVARCHAR (200)      NULL,
     [Email]                 NVARCHAR (100)      NULL,

@@ -3,6 +3,8 @@
 <br />
 
 <sc-treetable items="docRelations" row-class="{ 'case-font-weight': item.docId === docId}">
+  <sc-tree-column data="docReceiptOrder || ''" title="docs.edit.case.receiptOrder">
+  </sc-tree-column>
   <sc-tree-column title="docs.edit.case.regNumber" has-content="true" width="250px">
     <span><div ng-if="!!item.docRegUri">{{ item.docRegUri }}<br/></div>
       {{item.docDocDirectionName}} | {{item.docDocCasePartTypeName}}</span>
@@ -10,7 +12,7 @@
   <sc-tree-column title="docs.edit.case.regDate" has-content="true">
     {{ item.docRegDate | date:'dd.MM.yyyy HH:mm' }}
   </sc-tree-column>
-  <sc-tree-column data="docDocStatusName" title="docs.edit.case.caseFinish.statusName">
+  <sc-tree-column data="docDocStatusName" title="docs.edit.case.statusName">
   </sc-tree-column>
   <sc-tree-column title="docs.edit.case.description" has-content="true">
     <span>{{ item.docDocTypeName }} : {{ item.docSubject}}</span>

@@ -1,4 +1,5 @@
 using Aop.Api.Models;
+using Common.Api.Models;
 using Docs.Api.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,11 @@ namespace Aop.Api.Models
 {
     public partial class AopApp
     {
+        public AopApp()
+        {
+            this.vwAopApplicationUsers = new List<vwAopApplicationUser>();
+        }
+
         public int AopApplicationId { get; set; }
         public Nullable<int> DocId { get; set; }
         public int CreateUnitId { get; set; }
@@ -45,14 +51,14 @@ namespace Aop.Api.Models
         public Nullable<int> NDChecklistStatusId { get; set; }
         public Nullable<int> NDReportId { get; set; }
         public byte[] Version { get; set; }
-        public virtual AopApplicationCriteria STCriteria { get; set; }
-        public virtual AopApplicationCriteria NDCriteria { get; set; }
-        public virtual AopApplicationObject STObject { get; set; }
-        public virtual AopApplicationObject NDObject { get; set; }
-        public virtual AopChecklistStatus STAopChecklistStatus { get; set; }
-        public virtual AopChecklistStatus NDAopChecklistStatus { get; set; }
+        public virtual NomValue STCriteria { get; set; }
+        public virtual NomValue NDCriteria { get; set; }
+        public virtual NomValue STObject { get; set; }
+        public virtual NomValue NDObject { get; set; }
+        public virtual NomValue STAopChecklistStatus { get; set; }
+        public virtual NomValue NDAopChecklistStatus { get; set; }
         public virtual AopEmployer AopEmployer { get; set; }
-        public virtual AopProcedureStatus NDAopProcedureStatus { get; set; }
+        public virtual NomValue NDAopProcedureStatus { get; set; }
         public virtual Doc CaseDoc { get; set; }
         public virtual Doc STDoc { get; set; }
         public virtual Doc STChecklist { get; set; }
@@ -61,6 +67,8 @@ namespace Aop.Api.Models
         public virtual Doc NDChecklist { get; set; }
         public virtual Doc NDReport { get; set; }
         public virtual Common.Api.Models.Unit CreateUnit { get; set; }
+
+        public virtual ICollection<vwAopApplicationUser> vwAopApplicationUsers { get; set; }
 
         public void EnsureForProperVersion(byte[] version)
         {

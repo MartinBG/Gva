@@ -88,7 +88,7 @@
       _.forEach($scope.docModel.doc.correspondents, function (corr) {
         return selectedCorrs.push({ nomValueId: corr });
       });
-      
+
       modalInstance = scModal.open('chooseCorr', {
         selectedCorrs: selectedCorrs,
         corr: {}

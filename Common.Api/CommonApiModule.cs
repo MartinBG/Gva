@@ -27,6 +27,7 @@ namespace Common.Api
 
             //controllers
             moduleBuilder.RegisterType<BlobController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<NomenclatureController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<NomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<SignController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<UserController>().InstancePerLifetimeScope();

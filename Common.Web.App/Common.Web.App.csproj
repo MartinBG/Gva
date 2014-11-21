@@ -45,10 +45,21 @@
     <Content Include=".gitignore" />
     <Content Include="js\auth.js" />
     <Content Include="js\boot.js" />
+    <Content Include="js\common\common.js" />
     <Content Include="js\common\filters\joinFilter.js" />
     <Content Include="js\common\filters\lodashFilters.js" />
     <Content Include="js\common\login\loginModal.html" />
     <Content Include="js\common\login\loginModalCtrl.js" />
+    <Content Include="js\common\nomenclatures\resources\NomenclatureValuesRsrc.js" />
+    <Content Include="js\common\nomenclatures\resources\NomenclaturesRsrc.js" />
+    <Content Include="js\common\nomenclatures\views\nomenclatureValuesEdit.html" />
+    <Content Include="js\common\nomenclatures\views\nomenclatureValuesEditCtrl.js" />
+    <Content Include="js\common\nomenclatures\views\nomenclatureValues.html" />
+    <Content Include="js\common\nomenclatures\views\nomenclatureValuesCtrl.js" />
+    <Content Include="js\common\nomenclatures\views\nomenclatures.html" />
+    <Content Include="js\common\nomenclatures\views\nomenclaturesCtrl.js" />
+    <Content Include="js\common\nomenclatures\views\nomenclaturesEdit.html" />
+    <Content Include="js\common\nomenclatures\views\nomenclaturesEditCtrl.js" />
     <Content Include="js\common\users\resources\roles.js" />
     <Content Include="js\common\users\resources\users.js" />
     <Content Include="js\common\users\views\edit.html" />
@@ -159,6 +170,10 @@
     <Content Include="js\scaffolding\directives\button\buttonDirective.js" />
     <Content Include="js\scaffolding\directives\click\clickDirective.js" />
     <Content Include="js\scaffolding\directives\accessToken\accessTokenDirective.js" />
+    <Content Include="js\scaffolding\directives\ajaxdatatable\ajaxColumnDirective.js" />
+    <Content Include="js\scaffolding\directives\ajaxdatatable\ajaxDatatableCtrl.js" />
+    <Content Include="js\scaffolding\directives\ajaxdatatable\ajaxdatatableDirective.html" />
+    <Content Include="js\scaffolding\directives\ajaxdatatable\ajaxDatatableDirective.js" />
     <Content Include="js\scaffolding\directives\suggestion\textareaSuggestionDirective.html" />
     <Content Include="js\scaffolding\directives\suggestion\suggestionDirectives.js" />
     <Content Include="js\scaffolding\directives\suggestion\textSuggestionDirective.html" />
@@ -235,7 +250,9 @@
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="js\common\nomenclatures\forms\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -15,6 +15,9 @@ using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace Aop.Api.Controllers
@@ -881,6 +884,78 @@ namespace Aop.Api.Controllers
                 {
                     docId = newDoc.DocId
                 });
+            }
+        }
+
+        [Route("api/aop/apps/{id}/download/checklist")]
+        [AllowAnonymous]
+        [HttpGet]
+        public HttpResponseMessage DownloadChecklist(int id, string identifier)
+        {
+            int checklistId;
+
+            AopApp app = this.unitOfWork.DbContext.Set<AopApp>().Find(id);
+
+            if (identifier == "st")
+            {
+                checklistId = app.STChecklistId.Value;
+            }
+            else if (identifier == "nd")
+            {
+                checklistId = app.NDChecklistId.Value;
+            }
+            else
+            {
+                throw new Exception("Identifier missing.");
+            }
+
+            DocFile editable = this.unitOfWork.DbContext.Set<DocFile>().FirstOrDefault(e => e.DocId == checklistId && e.DocFileOriginType.Alias == "EditableFile");
+
+            byte[] content;
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+            {
+                connection.Open();
+
+                using (MemoryStream m1 = new MemoryStream())
+                using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", editable.DocFileContentId))
+                {
+                    blobStream.CopyTo(m1);
+                    content = m1.ToArray();
+                }
+
+                string contentToString = System.Text.Encoding.UTF8.GetString(content);
+                JObject checklistObj = JsonConvert.DeserializeObject<JObject>(contentToString);
+                JArray checklistVersions = checklistObj["versions"] as JArray;
+                JObject latest = checklistVersions.First() as JObject;
+
+                string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"App\word_templates\checklist.docx");
+
+                using (FileStream template = File.Open(templatePath, FileMode.Open, FileAccess.Read))
+                {
+                    var memoryStream = new MemoryStream();
+
+                    template.CopyTo(memoryStream);
+
+                    WordTemplateTransformer tt = new WordTemplateTransformer(memoryStream);
+                    tt.Transform(latest);
+
+                    HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+
+                    memoryStream.Position = 0;
+                    result.Content = new StreamContent(memoryStream);
+
+                    result.Content.Headers.ContentType =
+                        new MediaTypeHeaderValue("application/octet-stream");
+
+                    result.Content.Headers.ContentDisposition =
+                        new ContentDispositionHeaderValue("attachment")
+                        {
+                            FileName = "checklist_for_print.docx"
+                        };
+
+                    return result;
+                }
             }
         }
     }

@@ -57,6 +57,7 @@ namespace Docs.Api.DataObjects
                 this.ExternalRegNumber = d.ExternalRegNumber;
                 this.CorrRegNumber = d.CorrRegNumber;
                 this.CorrRegDate = d.CorrRegDate;
+                this.ReceiptOrder = d.ReceiptOrder;
                 this.AccessCode = d.AccessCode;
                 this.AssignmentTypeId = d.AssignmentTypeId;
                 this.AssignmentDate = d.AssignmentDate;
@@ -133,6 +134,7 @@ namespace Docs.Api.DataObjects
         public string CorrRegNumber { get; set; }
         public DateTime? CorrRegDate { get; set; }
         public string AccessCode { get; set; }
+        public int? ReceiptOrder { get; set; }
 
         public int? AssignmentTypeId { get; set; }
         public DateTime? AssignmentDate { get; set; }

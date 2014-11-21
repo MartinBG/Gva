@@ -82,6 +82,8 @@ namespace Docs.Api.Models
 
         public Guid? LockObjectId { get; set; }
 
+        public int? ReceiptOrder { get; set; }
+
         public DateTime? ModifyDate { get; set; }
 
         public int? ModifyUserId { get; set; }
@@ -1153,6 +1155,14 @@ namespace Docs.Api.Models
             this.IsRegistered = false;
         }
 
+        public void SetReceiptOrder(int? order, UserContext userContext)
+        {
+            this.ModifyDate = DateTime.Now;
+            this.ModifyUserId = userContext.UserId;
+
+            this.ReceiptOrder = order;
+        }
+
         public void EnsureForProperVersion(byte[] version)
         {
             if (!this.Version.SequenceEqual(version))
@@ -1231,6 +1241,7 @@ namespace Docs.Api.Models
             this.Property(t => t.IsRegistered).HasColumnName("IsRegistered");
             this.Property(t => t.IsSigned).HasColumnName("IsSigned");
             this.Property(t => t.LockObjectId).HasColumnName("LockObjectId");
+            this.Property(t => t.ReceiptOrder).HasColumnName("ReceiptOrder");
             this.Property(t => t.ModifyDate).HasColumnName("ModifyDate");
             this.Property(t => t.ModifyUserId).HasColumnName("ModifyUserId");
             this.Property(t => t.IsActive).HasColumnName("IsActive");

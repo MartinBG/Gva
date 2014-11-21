@@ -159,6 +159,7 @@
             isCurrentStage: 'Текущ'
           },
           'case': {
+            receiptOrder: '#',
             regDate: 'Дата',
             regNumber: 'Рег.№',
             statusName: 'Статус',
@@ -192,6 +193,7 @@
             docType: {
               registerIndex: 'Регистър на документа',
               unregisterDoc: 'Дерегистриране на документа?',
+              receiptOrder: 'Пореден номер',
               docTypeGroup: 'Група',
               docType: 'Вид',
               docDirection: 'Част от преписка',
@@ -301,6 +303,7 @@
           docDirectionName: '',
           docStatusName: 'Статус',
           correspondentName: 'Кореспондент',
+          hideChosen: 'Скриване на вече избраните',
           search: 'Търси',
           cancel: 'Отказ'
         }

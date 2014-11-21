@@ -36,6 +36,7 @@ CREATE TABLE Docs
     IsRegistered    BIT             NOT NULL,
     IsSigned        BIT             NOT NULL,
 	LockObjectId    uniqueidentifier    NULL,
+    ReceiptOrder    INT NULL,
     ModifyDate      datetime        NULL,
     ModifyUserId    int             NULL,
 /*

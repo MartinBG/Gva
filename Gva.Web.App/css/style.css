@@ -323,6 +323,13 @@ table.sc-data-table td.buttons-cell
   width: 20px;
 }
 
+table.sc-data-table td.buttons-cell-compact
+{
+  white-space: nowrap;
+  padding: 2px;
+  width: 1px;
+}
+
 /*tabs loading*/
 .tab-loading {
   opacity: 0;
