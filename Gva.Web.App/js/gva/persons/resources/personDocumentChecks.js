@@ -7,6 +7,11 @@
       newCheck: {
         method: 'GET',
         url: 'api/persons/:id/personDocumentChecks/new'
+      },
+      getReports: {
+        method: 'GET',
+        url: 'api/persons/:id/personDocumentChecks/:ind/reports',
+        isArray: true
       }
     });
   }]);

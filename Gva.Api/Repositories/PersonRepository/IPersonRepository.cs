@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Web.Http;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
+using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Persons;
+using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -68,5 +72,7 @@ namespace Gva.Api.Repositories.PersonRepository
         bool IsUniqueLicenceNumber(string licenceTypeCode, int? licenceNumber);
 
         bool IsFclLicence(int licenceTypeId);
+
+        List<GvaViewPersonCheck> GetChecksForReport(string publisherNames, List<int> checks);
     }
 }

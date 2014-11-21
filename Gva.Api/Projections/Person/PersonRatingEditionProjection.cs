@@ -39,7 +39,12 @@ namespace Gva.Api.Projections.Person
             edition.RatingPartIndex = licenceEdition.Content.RatingPartIndex.Value;
             edition.RatingSubClasses = licenceEdition.Content.RatingSubClasses.Count > 0 ? string.Join(", ", licenceEdition.Content.RatingSubClasses.Select(t => t.Code)) : null;
             edition.Limitations = licenceEdition.Content.Limitations.Count > 0 ? string.Join(", ", licenceEdition.Content.Limitations.Select(t => t.Code)) : null;
-            edition.DocDateValidTo = licenceEdition.Content.DocumentDateValidTo.Value;
+            
+            if (licenceEdition.Content.DocumentDateValidTo.HasValue)
+            {
+                edition.DocDateValidTo = licenceEdition.Content.DocumentDateValidTo.Value;
+            }
+
             edition.Notes = licenceEdition.Content.Notes;
             edition.NotesAlt = licenceEdition.Content.NotesAlt;
             edition.Index = licenceEdition.Content.Index;

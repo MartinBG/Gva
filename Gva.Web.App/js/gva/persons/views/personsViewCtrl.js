@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function PersonsViewCtrl(
@@ -12,6 +12,35 @@
     $scope.person = person;
     $scope.application = application;
     $scope.caseType = parseInt($stateParams.caseTypeId, 10);
+    $scope.tabs = {
+      'persons.tabs.licences': 'root.persons.view.licences',
+      'persons.tabs.qualifications': {
+        'persons.tabs.ratings': 'root.persons.view.ratings',
+        'persons.tabs.flyingExperiences': 'root.persons.view.flyingExperiences',
+        'persons.tabs.documentTrainings': 'root.persons.view.documentTrainings',
+        'persons.tabs.checks': 'root.persons.view.checks',
+        'persons.tabs.documentLangCerts': 'root.persons.view.documentLangCerts',
+        'persons.tabs.examASs': 'root.persons.view.examASs'
+       },
+      'persons.tabs.medicals': 'root.persons.view.medicals',
+      'persons.tabs.personData': {
+        'persons.tabs.addresses': 'root.persons.view.addresses',
+        'persons.tabs.employments': 'root.persons.view.employments',
+        'persons.tabs.documentEducations': 'root.persons.view.documentEducations',
+        'persons.tabs.documentIds': 'root.persons.view.documentIds',
+        'persons.tabs.statuses': 'root.persons.view.statuses'
+      },
+      'persons.tabs.docs': {
+        'persons.tabs.others': 'root.persons.view.documentOthers'
+      },
+      'persons.tabs.inventory': 'root.persons.view.inventory',
+      'persons.tabs.applications': 'root.persons.view.documentApplications'
+    };
+
+    if(person.caseTypes.indexOf('staffExaminer') > 0 ||
+      person.caseTypes.indexOf('awExaminer') > 0) {
+      $scope.tabs = _.assign($scope.tabs, {'persons.tabs.reports': 'root.persons.view.reports'});
+    } 
 
     $scope.changeCaseType = function () {
       $stateParams.caseTypeId = $scope.caseType;
@@ -67,4 +96,4 @@
   };
 
   angular.module('gva').controller('PersonsViewCtrl', PersonsViewCtrl);
-}(angular));
+}(angular, _));

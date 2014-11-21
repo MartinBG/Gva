@@ -392,5 +392,12 @@ namespace Gva.Api.Controllers.Persons
                     isFcl = this.personRepository.IsFclLicence(licenceTypeId)
                 });
         }
+
+        [HttpGet]
+        [Route("getChecksForReport")]
+        public IHttpActionResult GetChecksForReport(string publisherNames = null, [FromUri] List<int> checks = null)
+        {
+            return Ok(this.personRepository.GetChecksForReport(publisherNames, checks));
+        }
     }
 }

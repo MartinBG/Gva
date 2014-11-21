@@ -20,6 +20,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.Employment = personData.Employment == null ? null : personData.Employment.Name;
             this.Licences = personData.Licences;
             this.Ratings = personData.Ratings;
+            this.CaseTypes = personData.CaseTypes;
         }
 
         public int Id { get; set; }
@@ -41,6 +42,8 @@ namespace Gva.Api.ModelsDO.Persons
         public string Organization { get; set; }
 
         public string Employment { get; set; }
+
+        public string CaseTypes { get; set; }
 
         private int GetAge(DateTime birthDate)
         {

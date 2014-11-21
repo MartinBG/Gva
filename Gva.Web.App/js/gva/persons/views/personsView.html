@@ -59,30 +59,7 @@
       {{ application.applicationCode + ' ' + application.documentNumber }}</a>
   </div>
 
-  <sc-tabs tab-list="{
-      'persons.tabs.licences': 'root.persons.view.licences',
-      'persons.tabs.qualifications': {
-        'persons.tabs.ratings': 'root.persons.view.ratings',
-        'persons.tabs.flyingExperiences': 'root.persons.view.flyingExperiences',
-        'persons.tabs.documentTrainings': 'root.persons.view.documentTrainings',
-        'persons.tabs.checks': 'root.persons.view.checks',
-        'persons.tabs.documentLangCerts': 'root.persons.view.documentLangCerts',
-        'persons.tabs.examASs': 'root.persons.view.examASs'
-       },
-      'persons.tabs.medicals': 'root.persons.view.medicals',
-      'persons.tabs.personData': {
-        'persons.tabs.addresses': 'root.persons.view.addresses',
-        'persons.tabs.employments': 'root.persons.view.employments',
-        'persons.tabs.documentEducations': 'root.persons.view.documentEducations',
-        'persons.tabs.documentIds': 'root.persons.view.documentIds',
-        'persons.tabs.statuses': 'root.persons.view.statuses'
-      },
-      'persons.tabs.docs': {
-        'persons.tabs.others': 'root.persons.view.documentOthers'
-      },
-      'persons.tabs.inventory': 'root.persons.view.inventory',
-      'persons.tabs.applications': 'root.persons.view.documentApplications'
-    }"></sc-tabs>
+  <sc-tabs tab-list="tabs"></sc-tabs>
   <div class="tab-content">
     <div ui-view></div>
     <div class="clear"></div>

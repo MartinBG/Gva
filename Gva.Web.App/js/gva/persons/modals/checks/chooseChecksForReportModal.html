@@ -1,0 +1,41 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="persons.chooseChecksForReportModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="addBtn" btn-click="addChecks()" text="persons.chooseChecksForReportModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="persons.chooseChecksForReportModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <sc-datatable items="checks" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+      <sc-column  sortable="false" class="buttons-cell" has-content="true">
+        <input type="checkbox" ng-checked="selectedChecks | contains:item" sc-click="selectCheck($event, item)">
+      </sc-column>
+      <sc-column data="personLin" title="persons.chooseChecksForReportModal.personLin">
+      </sc-column>
+      <sc-column data="documentNumber" title="persons.chooseChecksForReportModal.documentNumber">
+      </sc-column>
+      <sc-column data="documentType.name" title="persons.chooseChecksForReportModal.personCheckDocumentType">
+      </sc-column>
+      <sc-column data="documentRole.name" title="persons.chooseChecksForReportModal.personCheckDocumentRole">
+      </sc-column>
+      <sc-column data="documentDateValidFrom" title="persons.chooseChecksForReportModal.documentDateValidFrom" type="date">
+      </sc-column>
+      <sc-column data="documentDateValidTo" title="persons.chooseChecksForReportModal.documentDateValidTo" type="date">
+      </sc-column>
+      <sc-column data="ratingType.name || part.sector" title="persons.chooseChecksForReportModal.ratingType">
+      </sc-column>
+      <sc-column data="ratingClass.name" title="persons.chooseChecksForReportModal.ratingClass">
+      </sc-column>
+      <sc-column data="authorization.code" title="persons.chooseChecksForReportModal.authorization">
+      </sc-column>
+      <sc-column data="licenceType.code" title="persons.chooseChecksForReportModal.licenceType">
+      </sc-column>
+      <sc-column data="valid.name" title="persons.chooseChecksForReportModal.valid">
+      </sc-column>
+      <sc-column data="personCheckRatingValue.name" title="persons.chooseChecksForReportModal.ratingValue">
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 ﻿<div class="panel panel-default">
   <div class="panel-heading">
-    <strong l10n-text="persons.chooseChecksModal.title"></strong>
+    <strong l10n-text="persons.chooseChecksForReportModal.title"></strong>
     <div class="pull-right">
-      <sc-button name="addBtn" btn-click="addChecks()" text="persons.chooseChecksModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
-      <sc-button name="canceltn" btn-click="cancel()" text="persons.chooseChecksModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+      <sc-button name="addBtn" btn-click="addChecks()" text="persons.chooseChecksForReportModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="persons.chooseChecksForReportModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
     </div>
   </div>
 
@@ -12,29 +12,29 @@
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
         <input type="checkbox" ng-checked="selectedChecks | contains:item" sc-click="selectCheck($event, item)">
       </sc-column>
-      <sc-column data="part.documentNumber" title="persons.chooseChecksModal.documentNumber">
+      <sc-column data="part.documentNumber" title="persons.chooseChecksForReportModal.documentNumber">
       </sc-column>
-      <sc-column data="part.documentType.name" title="persons.chooseChecksModal.personCheckDocumentType">
+      <sc-column data="part.documentType.name" title="persons.chooseChecksForReportModal.personCheckDocumentType">
       </sc-column>
-      <sc-column data="part.documentRole.name" title="persons.chooseChecksModal.personCheckDocumentRole">
+      <sc-column data="part.documentRole.name" title="persons.chooseChecksForReportModal.personCheckDocumentRole">
       </sc-column>
-      <sc-column data="part.documentDateValidFrom" title="persons.chooseChecksModal.documentDateValidFrom" type="date">
+      <sc-column data="part.documentDateValidFrom" title="persons.chooseChecksForReportModal.documentDateValidFrom" type="date">
       </sc-column>
-      <sc-column data="part.documentDateValidTo" title="persons.chooseChecksModal.documentDateValidTo" type="date">
+      <sc-column data="part.documentDateValidTo" title="persons.chooseChecksForReportModal.documentDateValidTo" type="date">
       </sc-column>
-      <sc-column data="part.documentPublisher" title="persons.chooseChecksModal.documentPublisher">
+      <sc-column data="part.documentPublisher" title="persons.chooseChecksForReportModal.documentPublisher">
       </sc-column>
-      <sc-column data="part.ratingType.name || part.sector" title="persons.chooseChecksModal.ratingType">
+      <sc-column data="part.ratingType.name || part.sector" title="persons.chooseChecksForReportModal.ratingType">
       </sc-column>
-      <sc-column data="part.ratingClass.name" title="persons.chooseChecksModal.ratingClass">
+      <sc-column data="part.ratingClass.name" title="persons.chooseChecksForReportModal.ratingClass">
       </sc-column>
-      <sc-column data="part.authorization.code" title="persons.chooseChecksModal.authorization">
+      <sc-column data="part.authorization.code" title="persons.chooseChecksForReportModal.authorization">
       </sc-column>
-      <sc-column data="part.licenceType.code" title="persons.chooseChecksModal.licenceType">
+      <sc-column data="part.licenceType.code" title="persons.chooseChecksForReportModal.licenceType">
       </sc-column>
-      <sc-column data="part.valid.name" title="persons.chooseChecksModal.valid">
+      <sc-column data="part.valid.name" title="persons.chooseChecksForReportModal.valid">
       </sc-column>
-      <sc-column data="part.personCheckRatingValue.name" title="persons.chooseChecksModal.ratingValue">
+      <sc-column data="part.personCheckRatingValue.name" title="persons.chooseChecksForReportModal.ratingValue">
       </sc-column>
     </sc-datatable>
   </div>

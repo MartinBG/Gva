@@ -126,6 +126,7 @@
     <Compile Include="Controllers\Organizations\OrganizationRecommendationsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationGroundServiceOperatorsSnoOperationalController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationApprovalAmendmentsController.cs" />
+    <Compile Include="Controllers\Persons\PersonReportsController.cs" />
     <Compile Include="Controllers\Persons\PersonLanguageCertificatesController.cs" />
     <Compile Include="Controllers\Persons\PersonLicenceEditionsController.cs" />
     <Compile Include="Controllers\Persons\PersonRatingEditionsController.cs" />
@@ -145,6 +146,9 @@
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
+    <Compile Include="ModelsDO\Persons\RelatedReportDO.cs" />
+    <Compile Include="ModelsDO\Persons\IncludedCheckDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonReportDO.cs" />
     <Compile Include="ModelsDO\Persons\GvaViewPersonRatingEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\IncludedRatingDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonDocumentDO.cs" />
@@ -268,6 +272,9 @@
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
+    <Compile Include="Models\Views\Person\GvaViewPersonReportCheck.cs" />
+    <Compile Include="Models\Views\Person\GvaViewPersonReport.cs" />
+    <Compile Include="Models\Views\Person\GvaViewPersonCheck.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonDocument.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonExaminer.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonLicence.cs" />
@@ -294,8 +301,11 @@
     <Compile Include="Projections\Inventory\Equipments\EquipmentOtherProjection.cs" />
     <Compile Include="Projections\Inventory\Equipments\EquipmentOwnerProjection.cs" />
     <Compile Include="Projections\Inventory\Organizations\OrganizationOtherProjection.cs" />
+    <Compile Include="Projections\Person\PersonReportCheckProjection.cs" />
+    <Compile Include="Projections\Person\PersonReportProjection.cs" />
+    <Compile Include="Projections\Person\PersonCheckProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonLanguageCertificateProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonCheckProjection.cs" />
+    <Compile Include="Projections\Inventory\Persons\PersonInventoryCheckProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonDocumentIdProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonEducationProjection.cs" />
     <Compile Include="Projections\Inventory\Persons\PersonEmploymentProjection.cs" />

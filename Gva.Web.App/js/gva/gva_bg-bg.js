@@ -1415,7 +1415,8 @@
           others: 'Други',
           inventory: 'Опис',
           applications: 'Заявления',
-          examASs: 'Теор. изпити АС'
+          examASs: 'Теор. изпити АС',
+          reports: 'Отчети'
         },
         search: {
           names: 'Име',
@@ -1507,6 +1508,26 @@
           stampNum: 'Номер на печат',
           isValid: 'Валиден'
         },
+        personReportDirective: {
+          date: 'Дата',
+          reportNumber: 'No на отчет',
+          addChecks: 'Добави проверки',
+          checksTable: {
+            personLin: 'ЛИН',
+            documentNumber: '№ на документа',
+            ratingClass: 'Клас',
+            documentDateValidFrom: 'От дата',
+            documentDateValidTo: 'До дата',
+            authorization: 'Разре-<br>шение',
+            licenceType: 'Вид право-<br>способност',
+            personCheckDocumentType: 'Тип документ',
+            personCheckDocumentRole: 'Роля на документ',
+            ratingType: 'Тип ВС <br>(раб. място)',
+            valid: 'Валидност',
+            ratingValue: 'Оценка',
+            noChecks: 'Няма налични проверки'
+          }
+        },
         personAddressDirective: {
           addressType: 'Вид',
           settlement: 'Населено място',
@@ -1569,7 +1590,11 @@
         },
         personCheckDirective: {
           personCheckRatingValue: 'Оценка',
-          checkData: 'Данни за проверка'
+          checkData: 'Данни за проверка',
+          reports: 'Отчети в които е включена тази проверка',
+          date: 'Дата',
+          publisher: 'Издател',
+          reportNumber: 'Nо на отчета'
         },
         personDocumentLangCertDirective: {
           langLevel: 'Ниво на език',
@@ -1728,8 +1753,7 @@
             personCheckDocumentRole: 'Роля на документ',
             ratingType: 'Тип ВС <br>(раб. място)',
             valid: 'Валидност',
-            ratingValue: 'Оценка',
-            notes: 'Бележки'
+            ratingValue: 'Оценка'
           },
           meds: 'Медицински свидетелства към лиценза',
           addMed: 'Ново медицинско',
@@ -1853,6 +1877,23 @@
           caseType: 'Дело',
           edit: 'Редакция',
           viewApplication: 'Обратно към заявление: '
+        },
+        newReport: {
+          title: 'Нов отчет',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editReport: {
+          title: 'Преглед на отчет',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ',
+          deleteReport: 'Изтрий'
+        },
+        reportSearch: {
+          newReport: 'Нов отчет',
+          reportNumber: 'No на отчета',
+          date: 'Дата'
         },
         newAddress: {
           title: 'Нов адрес',
@@ -2304,6 +2345,24 @@
         },
         chooseChecksModal: {
           title: 'Избор на проверки',
+          documentNumber: '№ на документа',
+          personCheckDocumentType: 'Тип документ',
+          personCheckDocumentRole: 'Роля на документ',
+          documentDateValidFrom: 'От дата',
+          documentDateValidTo: 'До дата',
+          documentPublisher: 'Издател',
+          ratingType: 'Тип ВС<br>(раб. място)',
+          ratingClass: 'Клас',
+          authorization: 'Разре-<br>шение',
+          licenceType: 'Вид право-<br>способност',
+          valid: 'Валидност',
+          ratingValue: 'Оценка',
+          add: 'Добави',
+          cancel: 'Отказ'
+        },
+        chooseChecksForReportModal: {
+          title: 'Избор на проверки',
+          personLin: 'ЛИН',
           documentNumber: '№ на документа',
           personCheckDocumentType: 'Тип документ',
           personCheckDocumentRole: 'Роля на документ',
@@ -3586,6 +3645,9 @@
         'root.persons.view.documentOthers.new': 'Нов документ',
         'root.persons.view.documentOthers.edit': 'Преглед на документ',
         'root.persons.view.documentApplications': 'Заявления',
+        'root.persons.view.reports': 'Отчети',
+        'root.persons.view.reports.new': 'Нов отчет',
+        'root.persons.view.reports.edit': 'Преглед на отчет',
         'root.aircrafts': 'ВС',
         'root.aircrafts.new': 'Ново ВС',
         'root.aircrafts.view': 'Данни за ВС',

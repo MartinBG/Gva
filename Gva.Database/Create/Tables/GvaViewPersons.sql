@@ -12,6 +12,7 @@ CREATE TABLE [dbo].[GvaViewPersons] (
     [BirtDate]         DATETIME2     NOT NULL,
     [OrganizationId]   INT           NULL,
     [EmploymentId]     INT           NULL,
+	[CaseTypes]        NVARCHAR(MAX) NULL,
     CONSTRAINT [PK_GvaViewPersons]                      PRIMARY KEY ([LotId]),
     CONSTRAINT [FK_GvaViewPersons_Lots]                 FOREIGN KEY ([LotId])          REFERENCES [dbo].[Lots] ([LotId]),
     CONSTRAINT [FK_GvaViewPersons_NomValues]            FOREIGN KEY ([LinTypeId])      REFERENCES [dbo].[NomValues] ([NomValueId]),

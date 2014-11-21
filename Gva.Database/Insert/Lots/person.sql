@@ -25,6 +25,7 @@ VALUES
     (@setId    , 'Заявление'                   , 'personApplication'     , N'^personDocumentApplications/\d+$'    , NULL        ),
     (@setId    , ''                            , 'exams'                 , N'^personExams/\d+$'                   , NULL        ),
     (@setId    , 'Данни за инспектор'          , 'inspectorData'         , N'^inspectorData$'                     , NULL        ),
-    (@setId    , 'Данни за проверяващ'         , 'examinerData'          , N'^examinerData$'                      , NULL        )
+    (@setId    , 'Данни за проверяващ'         , 'examinerData'          , N'^examinerData$'                      , NULL        ),
+    (@setId    , 'Данни за отчет'              , 'personReport'          , N'^personReports/\d+$'                 , NULL        )
 GO
 

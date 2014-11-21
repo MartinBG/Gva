@@ -34,6 +34,11 @@
       isUniqueDocNumber: {
         method: 'GET',
         url: 'api/persons/:id/isUniqueDocNumber'
+      },
+      getChecksForReport: {
+        method: 'GET',
+        url: 'api/persons/:id/getChecksForReport',
+        isArray: true
       }
     });
   }]);

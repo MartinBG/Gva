@@ -17,7 +17,7 @@
 
     <div class="well-sm panel-body">
       <gva-person-document-check name="personDocumentCheckForm" ng-model="personDocumentCheck"
-         sc-form-params="{ isNew: false, caseTypeId: caseTypeId }"></gva-person-document-check>
+         sc-form-params="{ isNew: false, caseTypeId: caseTypeId, reports: reports }"></gva-person-document-check>
 
       <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentCheck.case"
         sc-form-params="{ setPart: 'person', lotId: lotId}">

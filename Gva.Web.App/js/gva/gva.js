@@ -65,6 +65,11 @@
       templateUrl: 'js/gva/persons/forms/examinerData.html'
     });
     scaffoldingProvider.form({
+      name: 'gvaPersonReport',
+      templateUrl: 'js/gva/persons/forms/personReport.html',
+      controller: 'PersonReportCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonAddress',
       templateUrl: 'js/gva/persons/forms/personAddress.html'
     });
@@ -420,6 +425,10 @@
       .state(['root.persons.stampedDocuments'                              , '/stampedDocuments'                                                           , ['@root'                                            , 'js/gva/persons/views/stampedDocuments/stampedDocuments.html'                                 , 'StampedDocumentsCtrl'            ]])
       .state(['root.persons.view'                                          , '/:id?caseTypeId&appId&filter'                                                , ['@root'                                            , 'js/gva/persons/views/personsView.html'                                                       , 'PersonsViewCtrl'                 ]])
       .state(['root.persons.view.edit'                                     , '/personInfo'                                                                 , ['@root'                                            , 'js/gva/persons/views/personInfo/personInfoEdit.html'                                         , 'PersonInfoEditCtrl'              ]])
+      .state(['root.persons.view.reports'                                  , '/reports'                                                                                                                                                                                                                                                               ])
+      .state(['root.persons.view.reports.search'                           , ''                                                                            , ['@root.persons.view'                               , 'js/gva/persons/views/reports/reportsSearch.html'                                             , 'ReportsSearchCtrl'               ]])
+      .state(['root.persons.view.reports.new'                              , '/new'                                                                        , ['@root.persons.view'                               , 'js/gva/persons/views/reports/reportsNew.html'                                                , 'ReportsNewCtrl'                  ]])
+      .state(['root.persons.view.reports.edit'                             , '/:ind'                                                                       , ['@root.persons.view'                               , 'js/gva/persons/views/reports/reportsEdit.html'                                               , 'ReportsEditCtrl'                 ]])
       .state(['root.persons.view.addresses'                                , '/addresses'                                                                                                                                                                                                                                                             ])
       .state(['root.persons.view.addresses.search'                         , ''                                                                            , ['@root.persons.view'                               , 'js/gva/persons/views/addresses/addrSearch.html'                                              , 'AddressesSearchCtrl'             ]])
       .state(['root.persons.view.addresses.new'                            , '/new'                                                                        , ['@root.persons.view'                               , 'js/gva/persons/views/addresses/addrNew.html'                                                 , 'AddressesNewCtrl'                ]])
@@ -499,6 +508,7 @@
     .modal('chooseTrainings'       , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html'   , 'ChooseTrainingsModalCtrl'      )
     .modal('newTraining'           , 'js/gva/persons/modals/trainings/newTrainingModal.html'       , 'NewTrainingModalCtrl'          )
     .modal('chooseChecks'          , 'js/gva/persons/modals/checks/chooseChecksModal.html'         , 'ChooseChecksModalCtrl'         )
+    .modal('chooseChecksForReport' , 'js/gva/persons/modals/checks/chooseChecksForReportModal.html', 'ChooseChecksForReportModalCtrl')
     .modal('newCheck'              , 'js/gva/persons/modals/checks/newCheckModal.html'             , 'NewCheckModalCtrl'             )
     .modal('chooseRatings'         , 'js/gva/persons/modals/ratings/chooseRatingsModal.html'       , 'ChooseRatingsModalCtrl'        )
     .modal('newRating'             , 'js/gva/persons/modals/ratings/newRatingModal.html'           , 'NewRatingModalCtrl'            )

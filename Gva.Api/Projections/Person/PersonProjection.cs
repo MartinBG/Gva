@@ -44,6 +44,7 @@ namespace Gva.Api.Projections.Person
         {
             GvaViewPerson person = new GvaViewPerson();
 
+            person.CaseTypes = string.Join(", ", personData.Content.CaseTypes.Select(c => c.Alias));
             person.LotId = personData.Part.Lot.LotId;
             person.Lin = personData.Content.Lin;
             person.LinTypeId = personData.Content.LinType.NomValueId;

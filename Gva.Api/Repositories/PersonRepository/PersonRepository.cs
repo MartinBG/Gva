@@ -1,14 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Data;
 using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
+using Gva.Api.Models.Views;
 using Gva.Api.Models.Views.Person;
+using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
+using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Repositories.PersonRepository
@@ -407,6 +411,32 @@ namespace Gva.Api.Repositories.PersonRepository
             NomValue licenceType = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId);
 
             return licenceType.TextContent.Get<string>("licenceCode").Contains("FCL") && licenceType.Code != "BG CCA";
+        }
+
+        public List<GvaViewPersonCheck> GetChecksForReport(string publisherNames, List<int> checks)
+        {
+            IEnumerable<GvaViewPersonCheck> result = this.unitOfWork.DbContext.Set<GvaViewPersonCheck>()
+                .Include(c => c.Authorization)
+                .Include(c => c.DocumentRole)
+                .Include(c => c.DocumentType)
+                .Include(c => c.Valid)
+                .Include(c => c.RatingClass)
+                .Include(c => c.RatingType)
+                .Include(c => c.PersonCheckRatingValue)
+                .Include(c => c.LicenceType);
+
+
+            if (!string.IsNullOrEmpty(publisherNames))
+            {
+                result = result.Where(c => !string.IsNullOrEmpty(c.Publisher) && c.Publisher.ToLower().Contains(publisherNames.ToLower()));
+            }
+
+            if (checks.Count() > 0)
+            {
+                result = result.Where(c => checks.Contains(c.PartId));
+            }
+
+            return result.ToList();
         }
     }
 }

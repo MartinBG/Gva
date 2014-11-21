@@ -9,5 +9,17 @@
     </div>
 
     <gva-person-common-doc-classification name="personDocumentClassificationForm" ng-model="model"></gva-person-common-doc-classification>
+
+    <div ng-if="reports.length > 0">
+      <h5 class="form-header" l10n-text="persons.personCheckDirective.reports" pageable="false"></h5>
+        <sc-datatable items="reports" sortable="true">
+          <sc-column data="publisher" title="persons.personCheckDirective.publisher">
+          </sc-column>
+          <sc-column data="reportNumber" title="persons.personCheckDirective.reportNumber">
+          </sc-column>
+          <sc-column data="date" title="persons.personCheckDirective.date" type="date">
+          </sc-column>
+        </sc-datatable>
+    </div>
 </div>
 </ng-form>

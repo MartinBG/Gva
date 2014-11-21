@@ -537,6 +537,8 @@
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
+    <Content Include="js\gva\persons\forms\personReport.html" />
+    <Content Include="js\gva\persons\forms\personReportCtrl.js" />
     <Content Include="js\gva\persons\forms\personStatusCtrl.js" />
     <Content Include="js\gva\persons\forms\examinerData.html" />
     <Content Include="js\gva\persons\forms\personCommonDocClassification.html" />
@@ -547,6 +549,8 @@
     <Content Include="js\gva\persons\forms\personDocumentEmploymentCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentEducationCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentIdCtrl.js" />
+    <Content Include="js\gva\persons\modals\checks\chooseChecksForReportModal.html" />
+    <Content Include="js\gva\persons\modals\checks\chooseChecksForReportModalCtrl.js" />
     <Content Include="js\gva\persons\modals\exams\chooseExamsModal.html" />
     <Content Include="js\gva\persons\modals\exams\chooseExamsModalCtrl.js" />
     <Content Include="js\gva\persons\modals\exams\newExamModal.html" />
@@ -557,8 +561,15 @@
     <Content Include="js\gva\persons\modals\langCerts\newLangCertModalCtrl.js" />
     <Content Include="js\gva\persons\modals\licences\licenceEditionDocModal.html" />
     <Content Include="js\gva\persons\modals\licences\licenceEditionDocModalCtrl.js" />
+    <Content Include="js\gva\persons\resources\personReports.js" />
     <Content Include="js\gva\persons\resources\personDocumentLangCerts.js" />
     <Content Include="js\gva\persons\resources\personRatingEditions.js" />
+    <Content Include="js\gva\persons\views\reports\reportsEdit.html" />
+    <Content Include="js\gva\persons\views\reports\reportsEditCtrl.js" />
+    <Content Include="js\gva\persons\views\reports\reportsNew.html" />
+    <Content Include="js\gva\persons\views\reports\reportsNewCtrl.js" />
+    <Content Include="js\gva\persons\views\reports\reportsSearch.html" />
+    <Content Include="js\gva\persons\views\reports\reportsSearchCtrl.js" />
     <Content Include="js\gva\persons\views\documentLangCerts\langCertsEdit.html" />
     <Content Include="js\gva\persons\views\documentLangCerts\langCertsEditCtrl.js" />
     <Content Include="js\gva\persons\views\documentLangCerts\langCertsNew.html" />

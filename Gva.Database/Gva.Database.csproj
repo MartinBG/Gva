@@ -51,6 +51,8 @@
     <Content Include="Create\Tables\ASExamVariants.sql" />
     <Content Include="Create\Tables\ASExamQuestions.sql" />
     <Content Include="Create\Tables\ASExamVariantQuestions.sql" />
+    <Content Include="Create\Tables\GvaViewPersonReportsChecks.sql" />
+    <Content Include="Create\Tables\GvaViewPersonChecks.sql" />
     <Content Include="Create\Tables\GvaViewPersonDocuments.sql" />
     <Content Include="Create\Tables\GvaViewPersonExaminers.sql" />
     <Content Include="Create\Tables\GvaViewPersonLicences.sql" />
@@ -80,6 +82,7 @@
     <Content Include="Create\Tables\GvaFiles.sql" />
     <Content Include="Create\Tables\GvaApplications.sql" />
     <Content Include="Create\Tables\GvaViewPersonRatings.sql" />
+    <Content Include="Create\Tables\GvaViewPersonReports.sql" />
     <Content Include="Create\Tables\GvaViewPersons.sql" />
     <Content Include="Create\Views\vwGvaLicenceEditions.sql" />
     <Content Include="Insert\asExams.sql" />

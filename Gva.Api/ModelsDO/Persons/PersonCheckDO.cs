@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
@@ -6,6 +7,11 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonCheckDO
     {
+        public PersonCheckDO()
+        {
+            Reports = new List<RelatedReportDO>();
+        }
+
         public NomValue AircraftTypeGroup { get; set; }
 
         public NomValue RatingType { get; set; }
@@ -43,5 +49,7 @@ namespace Gva.Api.ModelsDO.Persons
         public NomValue Valid { get; set; }
 
         public string Notes { get; set; }
+
+        public List<RelatedReportDO> Reports { get; set; }
     }
 }
