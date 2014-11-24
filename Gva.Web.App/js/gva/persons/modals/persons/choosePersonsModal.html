@@ -1,0 +1,21 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="persons.choosePersonsModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="addBtn" btn-click="addPersons()" text="persons.choosePersonsModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="persons.choosePersonsModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <sc-datatable items="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="false">
+      <sc-column  sortable="false" class="buttons-cell" has-content="true">
+        <input type="checkbox" ng-checked="selectedPersons | contains:item" sc-click="selectPerson($event, item)">
+      </sc-column>
+      <sc-column data="lin" title="persons.choosePersonsModal.lin">
+      </sc-column>
+      <sc-column data="names" title="persons.choosePersonsModal.names">
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>

@@ -73,6 +73,6 @@ namespace Gva.Api.Repositories.PersonRepository
 
         bool IsFclLicence(int licenceTypeId);
 
-        List<GvaViewPersonCheck> GetChecksForReport(string publisherNames, List<int> checks);
+        List<GvaViewPersonCheck> GetChecksForReport(List<int> checks);
     }
 }

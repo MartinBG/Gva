@@ -8,6 +8,7 @@
     $scope.categoryAlias = scFormParams.categoryAlias;
     $scope.hideCaseType = scFormParams.hideCaseType;
     $scope.appId = scFormParams.appId;
+    $scope.lotId = scFormParams.lotId;
 
     $scope.choosePublisher = function () {
       var modalInstance = scModal.open('choosePublisher');

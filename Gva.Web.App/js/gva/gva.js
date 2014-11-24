@@ -505,10 +505,10 @@
       .state(['root.printableDocs.search'                                  , ''                                                                            , ['@root'                                            , 'js/gva/persons/views/printableDocs/printableDocsSearch.html'                                 ,'PrintableDocsSearchCtrl'          ]]);
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
+    .modal('choosePersons'         , 'js/gva/persons/modals/persons/choosePersonsModal.html'       , 'ChoosePersonsModalCtrl'        )
     .modal('chooseTrainings'       , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html'   , 'ChooseTrainingsModalCtrl'      )
     .modal('newTraining'           , 'js/gva/persons/modals/trainings/newTrainingModal.html'       , 'NewTrainingModalCtrl'          )
     .modal('chooseChecks'          , 'js/gva/persons/modals/checks/chooseChecksModal.html'         , 'ChooseChecksModalCtrl'         )
-    .modal('chooseChecksForReport' , 'js/gva/persons/modals/checks/chooseChecksForReportModal.html', 'ChooseChecksForReportModalCtrl')
     .modal('newCheck'              , 'js/gva/persons/modals/checks/newCheckModal.html'             , 'NewCheckModalCtrl'             )
     .modal('chooseRatings'         , 'js/gva/persons/modals/ratings/chooseRatingsModal.html'       , 'ChooseRatingsModalCtrl'        )
     .modal('newRating'             , 'js/gva/persons/modals/ratings/newRatingModal.html'           , 'NewRatingModalCtrl'            )

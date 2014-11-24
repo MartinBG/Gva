@@ -109,6 +109,9 @@
       else if (value.setPartAlias === 'personCheck') {
         state = 'root.persons.view.checks.edit';
       }
+      else if (value.setPartAlias === 'personReport') {
+        state = 'root.persons.view.reports.edit';
+      }
       else if (value.setPartAlias === 'personTraining') {
         state = 'root.persons.view.documentTrainings.edit';
       }

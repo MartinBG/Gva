@@ -8,7 +8,7 @@
     $stateParams,
     PersonDocumentChecks,
     personDocumentCheck,
-    reports,
+    report,
     scMessage
   ) {
     var originalCheck = _.cloneDeep(personDocumentCheck);
@@ -17,7 +17,7 @@
     $scope.personDocumentCheck = personDocumentCheck;
     $scope.lotId = $stateParams.id;
     $scope.caseTypeId = $stateParams.caseTypeId;
-    $scope.reports = reports;
+    $scope.report = report;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -63,7 +63,7 @@
     '$stateParams',
     'PersonDocumentChecks',
     'personDocumentCheck',
-    'reports',
+    'report',
     'scMessage'
   ];
 
@@ -75,12 +75,12 @@
         return PersonDocumentChecks.get($stateParams).$promise;
       }
     ],
-    reports: [
+    report: [
       '$stateParams',
       'PersonDocumentChecks',
       function ($stateParams, PersonDocumentChecks) {
         return  PersonDocumentChecks
-          .getReports($stateParams)
+          .getReport($stateParams)
           .$promise;
       }
     ]

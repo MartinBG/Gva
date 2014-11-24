@@ -549,8 +549,8 @@
     <Content Include="js\gva\persons\forms\personDocumentEmploymentCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentEducationCtrl.js" />
     <Content Include="js\gva\persons\forms\personDocumentIdCtrl.js" />
-    <Content Include="js\gva\persons\modals\checks\chooseChecksForReportModal.html" />
-    <Content Include="js\gva\persons\modals\checks\chooseChecksForReportModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\persons\choosePersonsModal.html" />
+    <Content Include="js\gva\persons\modals\persons\choosePersonsModalCtrl.js" />
     <Content Include="js\gva\persons\modals\exams\chooseExamsModal.html" />
     <Content Include="js\gva\persons\modals\exams\chooseExamsModalCtrl.js" />
     <Content Include="js\gva\persons\modals\exams\newExamModal.html" />
@@ -648,8 +648,6 @@
     <Content Include="js\gva\persons\modals\ratings\newRatingModalCtrl.js" />
     <Content Include="js\gva\persons\modals\trainings\chooseTrainingsModal.html" />
     <Content Include="js\gva\persons\modals\trainings\chooseTrainingsModalCtrl.js" />
-    <Content Include="js\gva\persons\modals\trainings\newTrainingModal.html" />
-    <Content Include="js\gva\persons\modals\trainings\newTrainingModalCtrl.js" />
     <Content Include="js\gva\persons\resources\personAddresses.js" />
     <Content Include="js\gva\persons\resources\personApplications.js" />
     <Content Include="js\gva\persons\resources\personDocumentApplications.js" />

@@ -413,7 +413,7 @@ namespace Gva.Api.Repositories.PersonRepository
             return licenceType.TextContent.Get<string>("licenceCode").Contains("FCL") && licenceType.Code != "BG CCA";
         }
 
-        public List<GvaViewPersonCheck> GetChecksForReport(string publisherNames, List<int> checks)
+        public List<GvaViewPersonCheck> GetChecksForReport(List<int> checks)
         {
             IEnumerable<GvaViewPersonCheck> result = this.unitOfWork.DbContext.Set<GvaViewPersonCheck>()
                 .Include(c => c.Authorization)
@@ -424,12 +424,6 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(c => c.RatingType)
                 .Include(c => c.PersonCheckRatingValue)
                 .Include(c => c.LicenceType);
-
-
-            if (!string.IsNullOrEmpty(publisherNames))
-            {
-                result = result.Where(c => !string.IsNullOrEmpty(c.Publisher) && c.Publisher.ToLower().Contains(publisherNames.ToLower()));
-            }
 
             if (checks.Count() > 0)
             {

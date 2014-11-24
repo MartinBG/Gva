@@ -4,6 +4,11 @@
 
   function PersonReportCtrl($scope, Persons, scModal, scMessage, scFormParams) {
     $scope.includedChecks = [];
+    if ($scope.model.part) {
+      $scope.model.part.includedChecks = $scope.model.part.includedChecks || [];
+      $scope.model.part.includedPersons = $scope.model.part.includedPersons || [];
+    }
+
     if (!scFormParams.isNew && $scope.model.part.includedChecks.length) {
       Persons
         .getChecksForReport({
@@ -15,16 +20,34 @@
         });
     }
 
-    $scope.addCheck = function () {
-      var modalInstance = scModal.open('chooseChecksForReport', {
-        includedChecks: $scope.model.part.includedChecks,
-        publisherNames: scFormParams.names
+    $scope.addPersons = function () {
+      var modalInstance = scModal.open('choosePersons', {
+        includedPersons:  $scope.model.part.includedPersons
       });
 
-      $scope.model.part.includedChecks = $scope.model.part.includedChecks || [];
-      modalInstance.result.then(function (selectedChecks) {
-        $scope.includedChecks = $scope.includedChecks.concat(selectedChecks);
-        $scope.model.part.includedChecks = _.pluck(selectedChecks, 'partId');
+      modalInstance.result.then(function (selectedPersons) {
+        _.forEach(selectedPersons, function (person) {
+          $scope.model.part.includedPersons.push({
+            id: person.id,
+            lin: person.lin
+          });
+        });
+      });
+
+      return modalInstance.opened;
+    };
+
+    $scope.addCheck = function (person) {
+      var modalInstance = scModal.open('newCheck', {
+        lotId: person.id
+      });
+
+      modalInstance.result.then(function (newCheck) {
+        var check = newCheck.part;
+        check.personLin = person.lin;
+        $scope.includedChecks.push(check);
+
+        $scope.model.part.includedChecks.push(newCheck.partId);
       });
 
       return modalInstance.opened;
@@ -40,6 +63,16 @@
               function(includedCheck) {
                 return check.partId === includedCheck;
               });
+          }
+        });
+    };
+
+    $scope.removePerson = function (person) {
+      return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            $scope.model.part.includedPersons = 
+              _.without($scope.model.part.includedPersons, person);
           }
         });
     };

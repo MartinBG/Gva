@@ -8,10 +8,9 @@
         method: 'GET',
         url: 'api/persons/:id/personDocumentChecks/new'
       },
-      getReports: {
+      getReport: {
         method: 'GET',
-        url: 'api/persons/:id/personDocumentChecks/:ind/reports',
-        isArray: true
+        url: 'api/persons/:id/personDocumentChecks/:ind/report'
       }
     });
   }]);

@@ -17,12 +17,7 @@ namespace Gva.Api.Models.Views.Person
 
         public int ReportPartIndex { get; set; }
 
-        public int GvaViewPersonReportsChecksId { get; set; }
-
-        public virtual GvaViewPersonCheck Check { get; set; }
-
         public virtual GvaViewPersonReport Report { get; set; }
-
     }
 
     public class GvaViewPersonReportCheckMap : EntityTypeConfiguration<GvaViewPersonReportCheck>
@@ -30,10 +25,7 @@ namespace Gva.Api.Models.Views.Person
         public GvaViewPersonReportCheckMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.GvaViewPersonReportsChecksId, t.CheckLotId, t.ReportLotId, t.CheckPartIndex, t.ReportPartIndex });
-
-            this.Property(r => r.GvaViewPersonReportsChecksId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.HasKey(t => new { t.ReportLotId, t.ReportPartIndex, t.CheckLotId, t.CheckPartIndex });
 
             // Table & Column Mappings
             this.ToTable("GvaViewPersonReportsChecks");
@@ -43,13 +35,9 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.ReportPartIndex).HasColumnName("ReportPartIndex");
 
             //Relationships
-            this.HasRequired(t => t.Check)
-                .WithMany(t => t.ReportsChecks)
-                .HasForeignKey(t => new { t.CheckLotId, t.CheckPartIndex });
-
             this.HasRequired(t => t.Report)
                 .WithMany(t => t.ReportsChecks)
-                .HasForeignKey(t => new { t.ReportLotId, t.ReportPartIndex });
+                .HasForeignKey(d => new { d.ReportLotId, d.ReportPartIndex });
 
         }
     }

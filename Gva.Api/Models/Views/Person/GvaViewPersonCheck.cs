@@ -61,8 +61,6 @@ namespace Gva.Api.Models.Views.Person
 
         public virtual GvaViewPerson Person { get; set; }
 
-        public virtual ICollection<GvaViewPersonReportCheck> ReportsChecks { get; set; }
-
     }
 
     public class GvaViewPersonCheckMap : EntityTypeConfiguration<GvaViewPersonCheck>

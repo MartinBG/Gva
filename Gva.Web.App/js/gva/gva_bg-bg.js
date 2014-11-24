@@ -1511,7 +1511,11 @@
         personReportDirective: {
           date: 'Дата',
           reportNumber: 'No на отчет',
-          addChecks: 'Добави проверки',
+          addPersons: 'Добави физически лица',
+          addCheck: 'Добави проверкa',
+          includedPersons: 'Лица на които са направени проверки',
+          includedChecks: ' Проверки',
+          noAvailablePersons: 'Няма налични физически лица',
           checksTable: {
             personLin: 'ЛИН',
             documentNumber: '№ на документа',
@@ -1591,7 +1595,7 @@
         personCheckDirective: {
           personCheckRatingValue: 'Оценка',
           checkData: 'Данни за проверка',
-          reports: 'Отчети в които е включена тази проверка',
+          report: 'Отчет в който е включена тази проверка',
           date: 'Дата',
           publisher: 'Издател',
           reportNumber: 'Nо на отчета'
@@ -1893,7 +1897,8 @@
         reportSearch: {
           newReport: 'Нов отчет',
           reportNumber: 'No на отчета',
-          date: 'Дата'
+          date: 'Дата',
+          personsLins: 'ЛИН-ове на проверени лица'
         },
         newAddress: {
           title: 'Нов адрес',
@@ -2360,28 +2365,18 @@
           add: 'Добави',
           cancel: 'Отказ'
         },
-        chooseChecksForReportModal: {
-          title: 'Избор на проверки',
-          personLin: 'ЛИН',
-          documentNumber: '№ на документа',
-          personCheckDocumentType: 'Тип документ',
-          personCheckDocumentRole: 'Роля на документ',
-          documentDateValidFrom: 'От дата',
-          documentDateValidTo: 'До дата',
-          documentPublisher: 'Издател',
-          ratingType: 'Тип ВС<br>(раб. място)',
-          ratingClass: 'Клас',
-          authorization: 'Разре-<br>шение',
-          licenceType: 'Вид право-<br>способност',
-          valid: 'Валидност',
-          ratingValue: 'Оценка',
-          add: 'Добави',
-          cancel: 'Отказ'
-        },
         newCheckModal: {
           title: 'Нова проверка',
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        choosePersonsModal: {
+          title: 'Избор на физическо лице',
+          save: 'Запис',
+          cancel: 'Отказ',
+          lin: 'ЛИН',
+          names: 'Име',
+          add: 'Добави'
         },
         chooseMedicalsModal: {
           title: 'Избор на медицински',

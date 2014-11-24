@@ -7,4 +7,7 @@
   </sc-column>
   <sc-column data="part.date" title="persons.reportSearch.date" type="date">
   </sc-column>
+  <sc-column data="part.date" title="persons.reportSearch.personsLins" has-content="true">
+    {{item.part.includedPersons | pluck:'lin' | join:', '}}
+  </sc-column>
 </sc-datatable>

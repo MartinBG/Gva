@@ -48,8 +48,8 @@ namespace Gva.Api.Controllers.Persons
             return Ok(new CaseTypePartDO<PersonCheckDO>(newCheck));
         }
 
-        [Route("{partIndex}/reports")]
-        public List<RelatedReportDO> GetReports(int lotId, int partIndex)
+        [Route("{partIndex}/report")]
+        public RelatedReportDO GetReport(int lotId, int partIndex)
         {
             var reports = (from r in this.unitOfWork.DbContext.Set<GvaViewPersonReport>()
                     join rc in this.unitOfWork.DbContext.Set<GvaViewPersonReportCheck>() on r.LotId equals rc.ReportLotId
@@ -58,18 +58,18 @@ namespace Gva.Api.Controllers.Persons
 
             if (reports.Count() > 0)
             {
-                return reports.Select(r => new
+                var report = reports.Single();
+                return new
                     RelatedReportDO()
                     {
-                        Date = r.Date,
-                        ReportNumber = r.ReportNumber,
-                        Publisher = r.Publisher
-                    })
-                    .ToList();
+                        Date = report.Date,
+                        ReportNumber = report.ReportNumber,
+                        Publisher = report.Publisher
+                    };
             }
             else
             {
-                return new List<RelatedReportDO>();
+                return null;
             }
         }
     }
