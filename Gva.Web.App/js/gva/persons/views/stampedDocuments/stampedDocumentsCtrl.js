@@ -10,22 +10,22 @@
     documents,
     scModal
     ) {
-      $scope.documents = documents;
-      $scope.filters = {
-        licenceNumber: null,
-        lin: null,
-        uin: null,
-        names: null
-      };
+    $scope.documents = documents;
+    $scope.filters = {
+      licenceNumber: null,
+      lin: null,
+      uin: null,
+      names: null
+    };
 
-      _.forOwn($stateParams, function (value, param) {
-        if (value !== null && value !== undefined) {
-          $scope.filters[param] = value;
-        }
-      });
+    _.forOwn($stateParams, function (value, param) {
+      if (value !== null && value !== undefined) {
+        $scope.filters[param] = value;
+      }
+    });
 
-      $scope.save = function () {
-      var documentsForStamp = _.map($scope.documents, function(document){
+    $scope.save = function () {
+      var documentsForStamp = _.map($scope.documents, function (document) {
         var stageAliases = [];
         if(document.licenceReady) {
           stageAliases.push('licenceReady');
@@ -45,15 +45,19 @@
         }
       });
 
-      return Persons
-        .saveStampedDocuments(documentsForStamp)
-        .$promise
-        .then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
+      if (documentsForStamp.length > 0) {
+        return Persons
+          .saveStampedDocuments(documentsForStamp)
+          .$promise
+          .then(function () {
+            return $state.transitionTo($state.current, $stateParams, { reload: true });
+          });
+      } else {
+        return $state.transitionTo($state.current, $stateParams);
+      }
+
     };
 
-    
     $scope.search = function () {
       return $state.go('root.persons.stampedDocuments', {
         licenceNumber: $scope.filters.licenceNumber,
