@@ -86,7 +86,8 @@
           },
           admin: {
             title: 'Админ',
-            users: 'Потребители'
+            users: 'Потребители',
+            nomenclatures: 'Номенклатури'
           },
           help: {
             title: 'Помощ',
@@ -131,12 +132,55 @@
             save: 'Запис',
             cancel: 'Отказ'
           }
+        },
+        nomenclatures: {
+          noms: {
+            search: {
+              name: 'Наименование'
+            },
+            edit: {
+              title: 'Вид номенклатура',
+              save: 'Запис',
+              cancel: 'Отказ',
+              name: 'Наименование',
+              alias: 'Псевдоним'
+            }
+          },
+          nomValues: {
+            search: {
+              newNomValue: 'Нова номенклатура',
+              code: 'Код',
+              name: 'Наименование',
+              alias: 'Псевдоним',
+              parent: 'Родител'
+            },
+            edit: {
+              title: 'Номенклатура',
+              save: 'Запис',
+              cancel: 'Отказ',
+              remove: 'Изтриване',
+              nomType: 'Вид на номенклатурата',
+              code: 'Код',
+              name: 'Наименование',
+              altName: 'Алт. наименование',
+              alias: 'Псевдоним',
+              parentNomType: 'Вид на родителската номенклатура',
+              parentNomValue: 'Идентификатор на родителската номенклатура',
+              order: 'Пореден номер',
+              isActive: 'Активен'
+            }
+          }
         }
       },
       states: {
         'root.users': 'Потребители',
         'root.users.new': 'Нов потребител',
-        'root.users.edit': 'Редакция'
+        'root.users.edit': 'Редакция',
+        'root.nomenclatures': 'Общи номенклатури',
+        'root.nomenclatures.new': 'Нов вид номенклатура',
+        'root.nomenclatures.edit': 'Редакция',
+        'root.nomenclatures.values': 'Списък стойности',
+        'root.nomenclatures.values.edit': 'Редакция'
       }
     });
   }]);
