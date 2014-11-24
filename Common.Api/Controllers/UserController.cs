@@ -51,13 +51,17 @@ namespace Common.Api.Controllers
         public IHttpActionResult GetUsers(
             string username = null,
             string fullname = null,
-            bool? showActive = null)
+            string showActive = null)
         {
-            System.Linq.Expressions.Expression<Func<User, bool>> predicate = PredicateBuilder
-                .True<User>()
-                .AndStringContains(e => e.Username, username)
-                .AndStringContains(e => e.Fullname, fullname)
-                .AndEquals(e => e.IsActive, showActive);
+            var predicate = PredicateBuilder.True<User>()
+                .AndStringContains(u => u.Username, username)
+                .AndStringContains(u => u.Fullname, fullname);
+
+            if (!string.IsNullOrEmpty(showActive)) 
+            { 
+                bool isActive = showActive == "yes" ? true : false;
+                predicate = predicate.And(u => u.IsActive == isActive);
+            }
 
             List<UserListItemDO> returnValue = this.unitOfWork.DbContext.Set<User>()
                 .Include(e => e.Roles)

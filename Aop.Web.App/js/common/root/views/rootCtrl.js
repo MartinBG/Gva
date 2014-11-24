@@ -16,7 +16,9 @@
     });
 
     $scope.$watch('permissions', function (val) {
-      $scope.showAdmin = val.indexOf('sys#admin') !== -1;
+      if (val) {
+        $scope.showAdmin = val.indexOf('sys#admin') !== -1;
+      }
     });
 
     $scope.alerts = [];

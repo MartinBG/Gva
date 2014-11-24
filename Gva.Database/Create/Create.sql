@@ -5,6 +5,10 @@ GO
 -- Tables
 ---------------------------------------------------------------
 
+--Roles
+:r $(rootPath)"\Tables\Users\RoleClassifications.sql"
+---------------------------------------------------------------
+
 :r $(rootPath)\"Tables\GvaCaseTypes.sql"
 :r $(rootPath)\"Tables\GvaLotCases.sql"
 :r $(rootPath)\"Tables\GvaApplications.sql"
@@ -154,3 +158,11 @@ GO
 :r $(rootPath)\"..\Insert\Noms\Persons\linTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\Persons\asExamQuestionTypes.sql"
 :r $(rootPath)\"..\Insert\asExams.sql"
+
+---------------------------------------------------------------
+--Insert ADDITIONAL
+---------------------------------------------------------------
+
+:r $(rootPath)\"..\Insert\Users\Roles.sql"
+:r $(rootPath)\"..\Insert\Users\UserRoles.sql"
+:r $(rootPath)\"..\Insert\Users\RoleClassifications.sql"

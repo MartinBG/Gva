@@ -8,6 +8,13 @@
       url: 'api/user/currentData'
     }).then(function (result) {
       $scope.userFullname = result.data.userFullname;
+      $scope.permissions = result.data.permissions;
+    });
+
+    $scope.$watch('permissions', function (val) {
+      if (val) {
+        $scope.showAdmin = val.indexOf('sys#admin') !== -1;
+      }
     });
 
     $scope.alerts = [];

@@ -2,7 +2,9 @@
 (function (angular, _) {
   'use strict';
 
-  function UsersSearchCtrl($scope, $state, $stateParams, Users) {
+  function UsersSearchCtrl($scope, $state, $stateParams, users) {
+    $scope.users = users;
+
     $scope.filters = {
       username: null //always show the username filter
     };
@@ -21,34 +23,35 @@
       $state.go('root.users.search', {
         username: $scope.filters.username,
         fullname: $scope.filters.fullname,
-        showActive: $scope.filters.showActive && $scope.filters.showActive.alias
+        showActive: $scope.filters.showActive
       });
     };
-
-    Users.query($stateParams).$promise.then(function (users) {
-      $scope.users = users.map(function (user) {
-        var roles = '';
-        for (var i = 0; i < user.roles.length; i++) {
-          roles += user.roles[i].name + ', ';
-        }
-        roles = roles.substring(0, roles.length - 2);
-
-        return {
-          userId: user.userId,
-          username: user.username,
-          fullname: user.fullname,
-          roles: roles,
-          isActive: user.isActive
-        };
-      });
-    });
 
     $scope.editUser = function (user) {
       $state.go('root.users.edit', { userId: user.userId });
     };
   }
 
-  UsersSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'Users'];
+  UsersSearchCtrl.$inject = ['$scope', '$state', '$stateParams', 'users'];
 
+  UsersSearchCtrl.$resolve = {
+    users: [
+      '$stateParams',
+      'Users',
+      function ($stateParams, Users) {
+        return Users.query($stateParams).$promise.then(function (users) {
+          return users.map(function (user) {
+            return {
+              userId: user.userId,
+              username: user.username,
+              fullname: user.fullname,
+              roles: _.pluck(user.roles, 'name').join(', '),
+              isActive: user.isActive
+            };
+          });
+      });
+      }
+    ]
+  };
   angular.module('common').controller('UsersSearchCtrl', UsersSearchCtrl);
 }(angular, _));

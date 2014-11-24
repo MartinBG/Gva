@@ -84,6 +84,7 @@
     <Content Include="Create\Tables\GvaViewPersonRatings.sql" />
     <Content Include="Create\Tables\GvaViewPersonReports.sql" />
     <Content Include="Create\Tables\GvaViewPersons.sql" />
+    <Content Include="Create\Tables\Users\RoleClassifications.sql" />
     <Content Include="Create\Views\vwGvaLicenceEditions.sql" />
     <Content Include="Insert\asExams.sql" />
     <Content Include="Insert\GvaCorrespondents.sql" />
@@ -167,6 +168,9 @@
     <Content Include="Insert\Noms\Aircrafts\airworthinessCertificateTypes.sql" />
     <Content Include="Insert\Noms\Aircrafts\airworthinessReviewTypes.sql" />
     <Content Include="Insert\gvaStages.sql" />
+    <Content Include="Insert\Users\RoleClassifications.sql" />
+    <Content Include="Insert\Users\Roles.sql" />
+    <Content Include="Insert\Users\UserRoles.sql" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

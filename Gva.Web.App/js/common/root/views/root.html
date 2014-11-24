@@ -57,7 +57,7 @@
   <sc-navigation-item text="common.navigation.airNavSvcProviders.title" parent="true">
     <sc-navigation-item state="root.organizations.search" params="{ caseTypeId: getOrgCaseType('airNavSvcProvider') }" text="common.navigation.airNavSvcProviders.search"></sc-navigation-item>
   </sc-navigation-item>
-  <sc-navigation-item text="common.navigation.admin.title" icon="glyphicon glyphicon-wrench" parent="true">
+  <sc-navigation-item text="common.navigation.admin.title" icon="glyphicon glyphicon-wrench" parent="true" ng-if="showAdmin">
     <sc-navigation-item state="root.users.search" text="common.navigation.admin.users"></sc-navigation-item>
   </sc-navigation-item>
   <sc-navigation-item text="common.navigation.help.title" parent="true">
