@@ -15,6 +15,11 @@
       <sc-button name="editBtn" btn-click="viewEditionDoc(item.partIndex)" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-disabled="item.partIndex !== currentLicenceEdition.partIndex">
       </sc-button>
     </sc-column>
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <a ng-click="print(item)">
+        <span class="glyphicon glyphicon-print"></span>
+      </a>
+    </sc-column>
     <sc-column data="part.documentDateValidFrom" title="persons.editLicenceEditions.documentDateValidFrom" has-content="true">
       {{item.part.documentDateValidFrom | date:'mediumDate'}}
     </sc-column>

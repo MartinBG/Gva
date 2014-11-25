@@ -57,5 +57,7 @@ namespace Gva.Api.ModelsDO.Persons
         public List<int> IncludedMedicals { get; set; }
 
         public List<int> IncludedLicences { get; set; }
+
+        public Guid? PrintedDocumentBlobKey { get; set; }
     }
 }

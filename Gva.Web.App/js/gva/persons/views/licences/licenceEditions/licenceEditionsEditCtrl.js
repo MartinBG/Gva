@@ -26,6 +26,22 @@
       $scope.editMode = 'edit';
     };
 
+    $scope.print = function (edition) {
+      var params = {
+        lotId: $stateParams.id,
+        index: $scope.licence.partIndex,
+        editionIndex: edition.partIndex
+      };
+
+      var modalInstance = scModal.open('printLicence', params);
+
+      modalInstance.result.then(function (savedLicence) {
+        licence = savedLicence;
+      });
+
+      return modalInstance.opened;
+    };
+
     $scope.viewEditionDoc = function (editionPartIndex) {
       var params = {
         edition: $scope.currentLicenceEdition,

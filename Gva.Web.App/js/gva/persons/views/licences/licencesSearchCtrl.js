@@ -6,8 +6,6 @@
     $scope,
     $state,
     $stateParams,
-    $filter,
-    scModal,
     licences
   ) {
     $scope.licences = licences;
@@ -26,23 +24,6 @@
     $scope.isExpiredLicence = function(item) {
       return moment(new Date()).isAfter(item.dateValidTo);
     };
-
-    $scope.print = function (licence) {
-      var params = {
-        lotId: $stateParams.id,
-        index: licence.partIndex,
-        editionIndex: licence.editionPartIndex
-      };
-
-      var modalInstance = scModal.open('printLicence', params);
-
-      modalInstance.result.then(function (savedLicence) {
-        licence = savedLicence;
-      });
-
-      return modalInstance.opened;
-    };
-
     $scope.licenceNumberFormatMask = function(item) {
       var licenceNumberMask = item.licenceNumber.toString(),
           licenceNumberLength = licenceNumberMask.length;
@@ -61,7 +42,7 @@
   }
 
   LicencesSearchCtrl.$inject =
-    ['$scope', '$state', '$stateParams', '$filter', 'scModal','licences'];
+    ['$scope', '$state', '$stateParams', 'licences'];
 
   LicencesSearchCtrl.$resolve = {
     licences: [

@@ -92,8 +92,6 @@ namespace Gva.Api.Controllers
                                         gvaFiles.Add(file);
                                     }
                                 }
-
-
                             }
                         }
                     }

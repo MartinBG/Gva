@@ -14,7 +14,8 @@
       stampNumber: licenceEdition.part.stampNumber,
       stampNumberReadonly: !!licenceEdition.part.stampNumber,
       lotId: scModalParams.lotId,
-      index: scModalParams.index
+      index: scModalParams.index,
+      editionIndex: scModalParams.editionIndex
     };
 
     $scope.save = function () {
