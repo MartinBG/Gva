@@ -104,8 +104,8 @@ namespace Gva.Api.WordTemplates
                     ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     OTHER_LICENCE = otherLicences,
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),
-                    RTO_NOTES = rtoRating.Notes,
-                    RTO_NOTES_EN = rtoRating.NotesAlt,
+                    RTO_NOTES = rtoRating != null ? rtoRating.Notes : null,
+                    RTO_NOTES_EN = rtoRating != null ? rtoRating.NotesAlt : null,
                     ENG_LEVEL = engLevel,
                     T_RATING = ratings,
                     INSTRUCTOR = instructorData,
@@ -121,8 +121,8 @@ namespace Gva.Api.WordTemplates
                     T_DOCUMENTS = documents.Take(documents.Length / 2),
                     T_MED_CERT = this.GetMedCerts(includedMedicals, personData),
                     T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
-                    RTO_NOTES2 = rtoRating.Notes,
-                    RTO_NOTES2_EN = rtoRating.NotesAlt,
+                    RTO_NOTES2 = rtoRating != null ? rtoRating.Notes : null,
+                    RTO_NOTES2_EN = rtoRating != null ? rtoRating.NotesAlt : null,
                     ENG_LEVEL1 = engLevel,
                     L_RATING = ratings,
                     INSTRUCTOR1 = instructorData,
@@ -247,7 +247,7 @@ namespace Gva.Api.WordTemplates
                 }
             }
 
-            return rtoRatings.OrderBy(e => e.Index).Last();
+            return rtoRatings.OrderBy(e => e.Index).LastOrDefault();
         }
 
         private object GetEngLevel(IEnumerable<PersonLangCertDO> includedLangCerts)

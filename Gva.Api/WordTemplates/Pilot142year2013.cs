@@ -210,13 +210,13 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_NO = licenceNumber,
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
                     COUNTRY_NAME_BG = country != null ? country.Name : null,
-                    COUNTRY_CODE = country != null ? country.TextContent.Get<string>("nationalityCodeCA") : null,
+                    COUNTRY_CODE = country != null ? (country.TextContent != null ? country.TextContent.Get<string>("nationalityCodeCA") : null) : null,
                     ISSUE_DATE = lastEdition.DocumentDateValidFrom.Value,
                     OTHER_LICENCE = otherLicences,
                     T_DOCUMENTS = new object[0],
                     L_LICENCE_PRIV = this.GetLicencePrivileges(licence),
-                    RTO_NOTES = rtoRating.Notes,
-                    RTO_NOTES_EN = rtoRating.NotesAlt,
+                    RTO_NOTES = rtoRating != null ? rtoRating.Notes : null,
+                    RTO_NOTES_EN = rtoRating != null ? rtoRating.NotesAlt : null,
                     ENG_LEVEL = engLevel,
                     LIMITS = limitations,
                     T_RATING = ratings,
@@ -234,8 +234,8 @@ namespace Gva.Api.WordTemplates
                     L_RATING = ratings,
                     INSTR_DATA1 = instructorData.Select(id => new { INSTRUCTOR1 = id }),
                     INSTRUCTOR1_NO_ENTRIES = instrNoEntries,
-                    RTO_NOTES2 = rtoRating.Notes,
-                    RTO_NOTES2_EN = rtoRating.NotesAlt,
+                    RTO_NOTES2 = rtoRating != null ? rtoRating.Notes : null,
+                    RTO_NOTES2_EN = rtoRating != null ? rtoRating.NotesAlt : null,
                     ENG_LEVEL1 = engLevel,
                     T_LIMITS = limitations,
                     EXAMINER_DATA1 = examinerData.Select(ed => new { EXAMINER1 = ed }),
@@ -361,7 +361,7 @@ namespace Gva.Api.WordTemplates
                 }
             }
 
-            return rtoRatings.OrderBy(e => e.Index).Last();
+            return rtoRatings.OrderBy(e => e.Index).LastOrDefault();
         }
 
         private object GetEngLevel(IEnumerable<PersonLangCertDO> includedLangCerts)
