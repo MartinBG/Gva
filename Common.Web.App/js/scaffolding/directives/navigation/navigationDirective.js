@@ -6,7 +6,7 @@
 (function (angular) {
   'use strict';
 
-  function NavigationDirective(authService, $window) {
+  function NavigationDirective(authService, $window, scModal) {
     return {
       restrict: 'E',
       transclude: true,
@@ -22,9 +22,16 @@
             $window.location.reload();
           });
         };
+
+        $scope.changePassword = function changePassword() {
+          var modalInstance = scModal.open('changePassword');
+
+          return modalInstance.opened;
+        };
+
       }]
     };
   }
-  NavigationDirective.$inject = ['authService', '$window'];
+  NavigationDirective.$inject = ['authService', '$window', 'scModal'];
   angular.module('scaffolding').directive('scNavigation', NavigationDirective);
 }(angular));

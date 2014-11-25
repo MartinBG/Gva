@@ -54,6 +54,18 @@ namespace Common.Api.Models
         {
             return Crypto.VerifyHashedPassword(this.PasswordHash, password + this.PasswordSalt);
         }
+
+        public void ChangePassword(string oldPassword, string newPassword)
+        {
+            if (this.VerifyPassword(oldPassword))
+            {
+                this.SetPassword(newPassword);
+            }
+            else
+            {
+                throw new Exception("Wrong password provided");
+            }
+        }
     }
 
     public class UserMap : EntityTypeConfiguration<User>

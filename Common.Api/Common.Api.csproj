@@ -123,6 +123,7 @@
     <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Blob\MultipartBlobStreamProvider.cs" />
     <Compile Include="Blob\MultipartBlobData.cs" />
+    <Compile Include="DataObjects\PasswordsDO.cs" />
     <Compile Include="DataObjects\UserDO.cs" />
     <Compile Include="DataObjects\RoleDO.cs" />
     <Compile Include="DataObjects\UserListItemDO.cs" />

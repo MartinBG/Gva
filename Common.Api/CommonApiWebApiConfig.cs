@@ -33,7 +33,9 @@ namespace Common.Api
             this.MapRoute(config, HttpMethod.Get, "api/users/{id}", "User", "GetUser");
             this.MapRoute(config, HttpMethod.Post, "api/users/{id}", "User", "UpdateUser");
             this.MapRoute(config, HttpMethod.Post, "api/users", "User", "CreateUser");
-            
+
+            this.MapRoute(config, HttpMethod.Post, "api/user/changePassword", "User", "ChangeCurrentUserPassword");
+            this.MapRoute(config, HttpMethod.Post, "api/user/isCorrectPassword", "User", "IsCorrectPassword");
 
             //role
             this.MapRoute(config, HttpMethod.Get, "api/roles", "User", "GetRoles");

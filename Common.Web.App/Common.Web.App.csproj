@@ -60,6 +60,8 @@
     <Content Include="js\common\nomenclatures\views\nomenclaturesCtrl.js" />
     <Content Include="js\common\nomenclatures\views\nomenclaturesEdit.html" />
     <Content Include="js\common\nomenclatures\views\nomenclaturesEditCtrl.js" />
+    <Content Include="js\common\users\modals\changePasswordModal.html" />
+    <Content Include="js\common\users\modals\changePasswordModalCtrl.js" />
     <Content Include="js\common\users\resources\roles.js" />
     <Content Include="js\common\users\resources\users.js" />
     <Content Include="js\common\users\views\edit.html" />

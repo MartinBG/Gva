@@ -9,6 +9,7 @@ using Common.Api.DataObjects;
 using System.Collections.Generic;
 using System.Data.Entity;
 using Common.Api.Repositories.UserRepository;
+using System.Net.Http.Formatting;
 
 namespace Common.Api.Controllers
 {
@@ -269,6 +270,49 @@ namespace Common.Api.Controllers
                 .ToList();
 
             return Ok(returnValue);
+        }
+
+        public IHttpActionResult ChangeCurrentUserPassword(PasswordsDO passwords)
+        {
+            var userContext = this.Request.GetUserContext();
+
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                User user = this.unitOfWork.DbContext.Set<User>()
+                .Include(e => e.Roles)
+                .SingleOrDefault(e => e.UserId == userContext.UserId);
+
+                user.ChangePassword(passwords.OldPassword, passwords.NewPassword);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+            }
+
+            return Ok();
+        }
+
+        public IHttpActionResult IsCorrectPassword([FromBody] FormDataCollection formData)
+        {
+            var userContext = this.Request.GetUserContext();
+
+            bool isCorrect = false;
+            if (formData["password"] != null)
+            {
+                User user = this.unitOfWork.DbContext.Set<User>()
+                .Include(e => e.Roles)
+                .SingleOrDefault(e => e.UserId == userContext.UserId);
+
+                if (user != null)
+                {
+                    isCorrect = user.VerifyPassword(formData["password"]);
+                }
+            }
+
+            return Ok(new
+            {
+                isCorrect = isCorrect
+            });
         }
     }
 }
