@@ -11,7 +11,7 @@
       <thead>
         <tr>
           <th class="col-md-1 col-sm-2" ng-if="currentLicenceEdition.part.includedTrainings.length && changeOrderMode"></th>
-          <th width="1px" ng-if="currentLicenceEdition.part.includedTrainings.length && !changeOrderMode"></th>
+          <th width="1px" ng-if="currentLicenceEdition.part.includedTrainings.length && !changeOrderMode && isLast"></th>
           <th l10n-text="persons.licenceEditionDirective.trainingsTable.number"></th>
           <th l10n-text="persons.licenceEditionDirective.trainingsTable.dateValidFrom"></th>
           <th l10n-text="persons.licenceEditionDirective.trainingsTable.dateValidTo"></th>
@@ -29,7 +29,7 @@
           <td ng-if="changeOrderMode">
             <sc-int ng-model="training.orderNum" class="col-md-1 col-sm-2" ng-readonly="!changeOrderMode"></sc-int>
           </td>
-          <td ng-if="currentLicenceEdition.part.includedTrainings.length && !changeOrderMode">
+          <td ng-if="currentLicenceEdition.part.includedTrainings.length && !changeOrderMode && isLast">
             <sc-button name="deleteTrainingBtn" class="btn btn-xs btn-danger" btn-click="removeTraining(training)" icon="glyphicon-remove"></sc-button>
           </td>
           <td>{{training.part.documentNumber}}</td>

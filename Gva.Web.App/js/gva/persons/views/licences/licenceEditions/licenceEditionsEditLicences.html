@@ -11,7 +11,7 @@
         <thead>
           <tr>
             <th class="col-md-1 col-sm-2" ng-if="currentLicenceEdition.part.includedLicences.length && changeOrderMode"></th>
-            <th width="1px" ng-if="currentLicenceEdition.part.includedLicences.length && !changeOrderMode"></th>
+            <th width="1px" ng-if="currentLicenceEdition.part.includedLicences.length && !changeOrderMode && isLast"></th>
             <th l10n-text="persons.licenceEditionDirective.licencesTable.licenceNumber"></th>
             <th l10n-text="persons.licenceEditionDirective.licencesTable.licenceType"></th>
             <th l10n-text="persons.licenceEditionDirective.licencesTable.documentDateValidFrom"></th>
@@ -27,7 +27,7 @@
             <td ng-if="changeOrderMode">
               <sc-int ng-model="licence.orderNum" class="col-md-1 col-sm-2" ng-readonly="!changeOrderMode"></sc-int>
             </td>
-            <td ng-if="currentLicenceEdition.part.includedLicences.length && !changeOrderMode">
+            <td ng-if="currentLicenceEdition.part.includedLicences.length && !changeOrderMode && isLast">
               <sc-button name="deleteLicenceBtn" class="btn btn-xs btn-danger" btn-click="removeLicence(licence)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{licence.licenceNumber}}</td>

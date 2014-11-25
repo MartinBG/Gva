@@ -10,6 +10,7 @@
     PersonRatings,
     currentLicenceEdition,
     licenceEditions,
+    includedRatings,
     scMessage,
     scModal
   ) {
@@ -19,18 +20,7 @@
     $scope.currentLicenceEdition.part.includedTrainings =
       $scope.currentLicenceEdition.part.includedTrainings || [];
 
-    PersonRatings
-      .getRatingsWithAllEditions({ id: $stateParams.id })
-      .$promise
-      .then(function (ratings) {
-        $scope.includedRatings = _.map($scope.currentLicenceEdition.part.includedRatings,
-        function (rating) {
-          return _.find(ratings, { 
-            ratingPartIndex: rating.ind,
-            editionPartIndex: rating.index
-          });
-        });
-      });
+    $scope.includedRatings = includedRatings;
 
     $scope.addRating = function () {
       var modalInstance = scModal.open('newRating', {
@@ -150,10 +140,32 @@
     'PersonRatings',
     'currentLicenceEdition',
     'licenceEditions',
+    'includedRatings',
     'scMessage',
     'scModal'
   ];
 
+  LicenceEditionsEditRatingsCtrl.$resolve = {
+    includedRatings: [
+      '$stateParams',
+      'PersonRatings',
+      'currentLicenceEdition',
+      function ($stateParams, PersonRatings, currentLicenceEdition) {
+        return  PersonRatings
+        .getRatingsWithAllEditions({ id: $stateParams.id })
+        .$promise
+        .then(function (ratings) {
+          return _.map(currentLicenceEdition.part.includedRatings,
+            function (rating) {
+              return _.find(ratings, { 
+                ratingPartIndex: rating.ind,
+                editionPartIndex: rating.index
+              });
+            });
+       });
+      }
+    ]
+  };
 
   angular.module('gva')
     .controller('LicenceEditionsEditRatingsCtrl', LicenceEditionsEditRatingsCtrl);

@@ -11,7 +11,7 @@
       <thead>
         <tr>
           <th class="col-md-1 col-sm-2" ng-if="currentLicenceEdition.part.includedRatings.length && changeOrderMode"></th>
-          <th width="1px" ng-if="currentLicenceEdition.part.includedRatings.length && !changeOrderMode"></th>
+          <th width="1px" ng-if="currentLicenceEdition.part.includedRatings.length && !changeOrderMode && isLast"></th>
           <th l10n-text="persons.licenceEditionDirective.ratingsTable.ratingType"></th>
           <th l10n-text="persons.licenceEditionDirective.ratingsTable.ratingClass"></th>
           <th l10n-html="persons.licenceEditionDirective.ratingsTable.authorization"></th>
@@ -27,7 +27,7 @@
           <td ng-if="changeOrderMode">
             <sc-int ng-model="rating.orderNum" class="col-md-1 col-sm-2" ng-readonly="!changeOrderMode"></sc-int>
           </td>
-          <td ng-if="currentLicenceEdition.part.includedRatings.length && !changeOrderMode">
+          <td ng-if="currentLicenceEdition.part.includedRatings.length && !changeOrderMode && isLast">
             <sc-button name="deleteRatingBtn" class="btn btn-xs btn-danger" btn-click="removeRating(rating)" icon="glyphicon-remove"></sc-button>
           </td>
           <td>{{rating.personRatingLevel.name || rating.ratingType.name}}</td>

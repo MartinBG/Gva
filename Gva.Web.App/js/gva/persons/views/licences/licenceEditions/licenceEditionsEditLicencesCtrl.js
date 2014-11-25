@@ -6,10 +6,10 @@
     $scope,
     $state,
     $stateParams,
-    PersonLicences,
     PersonLicenceEditions,
     currentLicenceEdition,
     licenceEditions,
+    includedLicences,
     scMessage,
     scModal
   ) {
@@ -19,15 +19,7 @@
         $scope.currentLicenceEdition.part.includedLicences =
       $scope.currentLicenceEdition.part.includedLicences || [];
 
-    PersonLicences
-      .query({ id: $stateParams.id })
-      .$promise
-      .then(function (licences) {
-        $scope.includedLicences = 
-          _.map($scope.currentLicenceEdition.part.includedLicences, function (partIndex) {
-           return _.where(licences, { partIndex: partIndex })[0];
-          });
-      });
+    $scope.includedLicences = includedLicences;
 
     $scope.addExistingLicence = function () {
       var hideLicences = _.clone($scope.currentLicenceEdition.part.includedLicences);
@@ -101,14 +93,31 @@
     '$scope',
     '$state',
     '$stateParams',
-    'PersonLicences',
     'PersonLicenceEditions',
     'currentLicenceEdition',
     'licenceEditions',
+    'includedLicences',
     'scMessage',
     'scModal'
   ];
 
+  LicenceEditionsEditLicencesCtrl.$resolve = {
+    includedLicences: [
+      '$stateParams',
+      'PersonLicences',
+      'currentLicenceEdition',
+      function ($stateParams, PersonLicences, currentLicenceEdition) {
+        return PersonLicences
+        .query({ id: $stateParams.id })
+        .$promise
+        .then(function (licences) {
+          return _.map(currentLicenceEdition.part.includedLicences, function (partIndex) {
+            return _.where(licences, { partIndex: partIndex })[0];
+          });
+        });
+      }
+    ]
+  };
 
   angular.module('gva')
     .controller('LicenceEditionsEditLicencesCtrl', LicenceEditionsEditLicencesCtrl);

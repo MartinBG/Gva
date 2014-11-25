@@ -11,7 +11,7 @@
       <thead>
         <tr>
           <th class="col-md-1 col-sm-2" ng-if="currentLicenceEdition.part.includedChecks.length && changeOrderMode"></th>
-          <th width="1px" ng-if="currentLicenceEdition.part.includedChecks.length && !changeOrderMode"></th>
+          <th width="1px" ng-if="currentLicenceEdition.part.includedChecks.length && !changeOrderMode && isLast"></th>
           <th l10n-text="persons.licenceEditionDirective.checksTable.documentNumber"></th>
           <th l10n-text="persons.licenceEditionDirective.checksTable.personCheckDocumentType"></th>
           <th l10n-text="persons.licenceEditionDirective.checksTable.personCheckDocumentRole"></th>
@@ -34,7 +34,7 @@
           <td ng-if="changeOrderMode">
             <sc-int ng-model="check.orderNum" class="col-md-1 col-sm-2" ng-readonly="!changeOrderMode"></sc-int>
           </td>
-          <td ng-if="currentLicenceEdition.part.includedChecks.length && !changeOrderMode">
+          <td ng-if="currentLicenceEdition.part.includedChecks.length && !changeOrderMode && isLast">
             <sc-button name="deleteCheckBtn" class="btn btn-xs btn-danger" btn-click="removeCheck(check)" icon="glyphicon-remove"></sc-button>
           </td>
           <td>{{check.part.documentNumber}}</td>

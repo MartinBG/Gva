@@ -7,9 +7,9 @@
     $state,
     $stateParams,
     PersonLicenceEditions,
-    PersonDocumentTrainings,
     currentLicenceEdition,
     licenceEditions,
+    includedTrainings,
     scMessage,
     scModal
   ) {
@@ -18,16 +18,7 @@
     $scope.currentLicenceEdition.part.includedTrainings =
       $scope.currentLicenceEdition.part.includedTrainings || [];
 
-    PersonDocumentTrainings
-      .query({ id: $stateParams.id })
-      .$promise
-      .then(function (trainings) {
-        $scope.includedTrainings = 
-          _.map($scope.currentLicenceEdition.part.includedTrainings, function (partIndex) {
-            return _.where(trainings, { partIndex: partIndex })[0];
-          });
-      });
-
+    $scope.includedTrainings = includedTrainings;
     $scope.currentLicenceEdition = currentLicenceEdition;
 
     $scope.addTraining = function () {
@@ -110,13 +101,30 @@
     '$state',
     '$stateParams',
     'PersonLicenceEditions',
-    'PersonDocumentTrainings',
     'currentLicenceEdition',
     'licenceEditions',
+    'includedTrainings',
     'scMessage',
     'scModal'
   ];
 
+  LicenceEditionsEditTrainingsCtrl.$resolve = {
+    includedTrainings: [
+      '$stateParams',
+      'PersonDocumentTrainings',
+      'currentLicenceEdition',
+      function ($stateParams, PersonDocumentTrainings, currentLicenceEdition) {
+        return  PersonDocumentTrainings
+          .query({ id: $stateParams.id })
+          .$promise
+          .then(function (trainings) {
+            return _.map(currentLicenceEdition.part.includedTrainings, function (partIndex) {
+              return _.where(trainings, { partIndex: partIndex })[0];
+            });
+          });
+       }
+    ]
+  };
 
   angular.module('gva')
     .controller('LicenceEditionsEditTrainingsCtrl', LicenceEditionsEditTrainingsCtrl);

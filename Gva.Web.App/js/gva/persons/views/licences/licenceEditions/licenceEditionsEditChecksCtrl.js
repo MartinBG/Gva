@@ -7,7 +7,7 @@
     $state,
     $stateParams,
     PersonLicenceEditions,
-    PersonDocumentChecks,
+    includedChecks,
     currentLicenceEdition,
     licenceEditions,
     scMessage,
@@ -19,15 +19,7 @@
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
     $scope.currentLicenceEdition.part.includedChecks =
       $scope.currentLicenceEdition.part.includedChecks || [];
-    PersonDocumentChecks
-      .query({ id: $stateParams.id })
-      .$promise
-      .then(function (checks) {
-        $scope.includedChecks = 
-          _.map($scope.currentLicenceEdition.part.includedChecks, function (partIndex) {
-            return _.where(checks, { partIndex: partIndex })[0];
-          });
-      });
+    $scope.includedChecks = includedChecks;
 
     $scope.addCheck = function () {
       var modalInstance = scModal.open('newCheck', {
@@ -112,13 +104,30 @@
     '$state',
     '$stateParams',
     'PersonLicenceEditions',
-    'PersonDocumentChecks',
+    'includedChecks',
     'currentLicenceEdition',
     'licenceEditions',
     'scMessage',
     'scModal'
   ];
 
+  LicenceEditionsEditChecksCtrl.$resolve = {
+    includedChecks: [
+      '$stateParams',
+      'PersonDocumentChecks',
+      'currentLicenceEdition',
+      function ($stateParams, PersonDocumentChecks, currentLicenceEdition) {
+        return  PersonDocumentChecks
+          .query({ id: $stateParams.id })
+          .$promise
+          .then(function (checks) {
+            return _.map(currentLicenceEdition.part.includedChecks, function (partIndex) {
+              return _.where(checks, { partIndex: partIndex })[0];
+            });
+          });
+       }
+    ]
+  };
 
   angular.module('gva')
     .controller('LicenceEditionsEditChecksCtrl', LicenceEditionsEditChecksCtrl);

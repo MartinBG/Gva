@@ -7,7 +7,7 @@
     $state,
     $stateParams,
     PersonLicenceEditions,
-    PersonDocumentTrainings,
+    includedExams,
     currentLicenceEdition,
     licenceEditions,
     scMessage,
@@ -15,18 +15,9 @@
   ) {
     $scope.currentLicenceEdition = currentLicenceEdition;
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
-
     $scope.currentLicenceEdition.part.includedExams =
       $scope.currentLicenceEdition.part.includedExams || [];
-    PersonDocumentTrainings
-      .getExams({ id: $stateParams.id })
-      .$promise
-      .then(function (exams) {
-        $scope.includedExams = 
-          _.map($scope.currentLicenceEdition.part.includedExams, function (partIndex) {
-            return _.where(exams, { partIndex: partIndex })[0];
-          });
-      });
+    $scope.includedExams = includedExams;
 
     $scope.addExam = function () {
       var modalInstance = scModal.open('newExam', {
@@ -111,13 +102,30 @@
     '$state',
     '$stateParams',
     'PersonLicenceEditions',
-    'PersonDocumentTrainings',
+    'includedExams',
     'currentLicenceEdition',
     'licenceEditions',
     'scMessage',
     'scModal'
   ];
 
+  LicenceEditionsEditExamsCtrl.$resolve = {
+    includedExams: [
+      '$stateParams',
+      'PersonDocumentTrainings',
+      'currentLicenceEdition',
+      function ($stateParams, PersonDocumentTrainings, currentLicenceEdition) {
+        return  PersonDocumentTrainings
+          .getExams({ id: $stateParams.id })
+          .$promise
+          .then(function (exams) {
+            return _.map(currentLicenceEdition.part.includedExams, function (partIndex) {
+              return _.where(exams, { partIndex: partIndex })[0];
+            });
+          });
+       }
+    ]
+  };
 
   angular.module('gva')
     .controller('LicenceEditionsEditExamsCtrl', LicenceEditionsEditExamsCtrl);

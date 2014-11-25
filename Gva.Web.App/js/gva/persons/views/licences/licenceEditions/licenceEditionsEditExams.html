@@ -11,7 +11,7 @@
         <thead>
           <tr>
             <th class="col-md-1 col-sm-2" ng-if="currentLicenceEdition.part.includedExams.length && changeOrderMode"></th>
-            <th width="1px" ng-if="currentLicenceEdition.part.includedExams.length && !changeOrderMode"></th>
+            <th width="1px" ng-if="currentLicenceEdition.part.includedExams.length && !changeOrderMode && isLast"></th>
             <th l10n-text="persons.licenceEditionDirective.examsTable.documentNumber"></th>
             <th l10n-text="persons.licenceEditionDirective.examsTable.documentDateValidFrom"></th>
             <th l10n-text="persons.licenceEditionDirective.examsTable.documentPublisher"></th>
@@ -26,7 +26,7 @@
             <td ng-if="changeOrderMode">
               <sc-int ng-model="exam.orderNum" class="col-md-1 col-sm-2" ng-readonly="!changeOrderMode"></sc-int>
             </td>
-            <td ng-if="currentLicenceEdition.part.includedExams.length && !changeOrderMode">
+            <td ng-if="currentLicenceEdition.part.includedExams.length && !changeOrderMode && isLast">
               <sc-button name="deleteExamBtn" class="btn btn-xs btn-danger" btn-click="removeExam(exam)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{exam.part.documentNumber}}</td>

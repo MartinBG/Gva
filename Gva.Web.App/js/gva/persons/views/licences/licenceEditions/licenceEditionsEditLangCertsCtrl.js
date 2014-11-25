@@ -7,7 +7,7 @@
     $state,
     $stateParams,
     PersonLicenceEditions,
-    PersonDocumentLangCerts,
+    includedLangCerts,
     currentLicenceEdition,
     licenceEditions,
     scMessage,
@@ -18,16 +18,7 @@
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
     $scope.currentLicenceEdition.part.includedLangCerts =
       $scope.currentLicenceEdition.part.includedLangCerts || [];
-
-    PersonDocumentLangCerts
-      .query({ id: $stateParams.id })
-      .$promise
-      .then(function (langCerts) {
-        $scope.includedLangCerts = 
-          _.map($scope.currentLicenceEdition.part.includedLangCerts, function (partIndex) {
-            return _.where(langCerts, { partIndex: partIndex })[0];
-          });
-      });
+    $scope.includedLangCerts = includedLangCerts;
 
     $scope.addLangCert = function () {
       var modalInstance = scModal.open('newLangCert', {
@@ -112,14 +103,30 @@
     '$state',
     '$stateParams',
     'PersonLicenceEditions',
-    'PersonDocumentLangCerts',
+    'includedLangCerts',
     'currentLicenceEdition',
     'licenceEditions',
     'scMessage',
     'scModal'
   ];
 
-
+  LicenceEditionsEditLangCertsCtrl.$resolve = {
+    includedLangCerts: [
+      '$stateParams',
+      'PersonDocumentLangCerts',
+      'currentLicenceEdition',
+      function ($stateParams, PersonDocumentLangCerts, currentLicenceEdition) {
+        return  PersonDocumentLangCerts
+          .query({ id: $stateParams.id })
+          .$promise
+          .then(function (langCerts) {
+            return _.map(currentLicenceEdition.part.includedLangCerts, function (partIndex) {
+              return _.where(langCerts, { partIndex: partIndex })[0];
+            });
+          });
+      }
+    ]
+  };
   angular.module('gva')
     .controller('LicenceEditionsEditLangCertsCtrl', LicenceEditionsEditLangCertsCtrl);
 }(angular, _));

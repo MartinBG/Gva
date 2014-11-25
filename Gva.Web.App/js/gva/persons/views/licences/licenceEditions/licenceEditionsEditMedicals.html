@@ -11,7 +11,7 @@
       <thead>
         <tr>
           <th class="col-md-1 col-sm-2"ng-if="currentLicenceEdition.part.includedMedicals.length && changeOrderMode"></th>
-          <th width="1px" ng-if="currentLicenceEdition.part.includedMedicals.length && !changeOrderMode"></th>
+          <th width="1px" ng-if="currentLicenceEdition.part.includedMedicals.length && !changeOrderMode && isLast"></th>
           <th l10n-text="persons.licenceEditionDirective.medsTable.number"></th>
           <th l10n-text="persons.licenceEditionDirective.medsTable.dateValidFrom"></th>
           <th l10n-text="persons.licenceEditionDirective.medsTable.dateValidTo"></th>
@@ -28,7 +28,7 @@
           <td ng-if="changeOrderMode">
             <sc-int ng-model="medical.orderNum" class="col-md-1 col-sm-2" ng-readonly="!changeOrderMode"></sc-int>
           </td>
-          <td ng-if="currentLicenceEdition.part.includedMedicals.length && !changeOrderMode">
+          <td ng-if="currentLicenceEdition.part.includedMedicals.length && !changeOrderMode && isLast">
             <sc-button name="deleteMedicalBtn" class="btn btn-xs btn-danger" btn-click="removeMedical(medical)" icon="glyphicon-remove"></sc-button>
           </td>
           <td>{{medical.part.documentNumberPrefix}}-{{medical.part.documentNumber}}-{{person.lin}}-{{medical.part.documentNumberSuffix}}</td>
