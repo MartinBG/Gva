@@ -17,14 +17,17 @@ namespace Gva.MigrationTool.Sets
         private OracleConnection oracleConn;
         private Func<Owned<PersonLotCreator>> personLotCreatorFactory;
         private Func<Owned<PersonLotMigrator>> personLotMigratorFactory;
+        private Func<Owned<PersonLicenceDocMigrator>> personLicenceDocMigratorFactory;
 
         public Person(OracleConnection oracleConn,
             Func<Owned<PersonLotCreator>> personLotCreatorFactory,
-            Func<Owned<PersonLotMigrator>> personLotMigratorFactory)
+            Func<Owned<PersonLotMigrator>> personLotMigratorFactory,
+            Func<Owned<PersonLicenceDocMigrator>> personLicenceDocMigratorFactory)
         {
             this.oracleConn = oracleConn;
             this.personLotCreatorFactory = personLotCreatorFactory;
             this.personLotMigratorFactory = personLotMigratorFactory;
+            this.personLicenceDocMigratorFactory = personLicenceDocMigratorFactory;
         }
 
         public Tuple<Dictionary<int, int>, Dictionary<string, int>, Dictionary<int, JObject>> createPersonsLots(Dictionary<string, Dictionary<string, NomValue>> noms)
@@ -108,6 +111,19 @@ namespace Gva.MigrationTool.Sets
             }
 
             return ids.ToList();
+        }
+
+        public void migrateLicenceDocuments(
+            Dictionary<int, int> personIdToLotId)
+        {
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationToken ct = cts.Token;
+
+            PersonLicenceDocMigrator personLicenceDocMigrator = this.personLicenceDocMigratorFactory().Value;
+            personLicenceDocMigrator.MigrateLicenceDocuments(personIdToLotId, cts, ct);
         }
     }
 }

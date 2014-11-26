@@ -78,6 +78,7 @@
     <Compile Include="Sets\AircraftApexLotMigrator.cs" />
     <Compile Include="Sets\AircraftFmLotCreator.cs" />
     <Compile Include="Sets\AircraftFmLotMigrator.cs" />
+    <Compile Include="Sets\PersonLicenceDocMigrator.cs" />
     <Compile Include="Sets\Organization.cs" />
     <Compile Include="Sets\OrganizationLotCreator.cs" />
     <Compile Include="Sets\OrganizationLotMigrator.cs" />
