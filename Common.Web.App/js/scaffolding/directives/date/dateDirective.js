@@ -24,7 +24,8 @@
         span.datepicker({
           autoclose: true,
           format: scDateConfig.datepickerFormat,
-          language: 'bg'
+          language: 'bg',
+          weekStart: 1
         });
 
         attrs.$observe('readonly', function(value) {
