@@ -14,6 +14,6 @@ namespace Gva.Api.Repositories.PrintRepository
     {
         Guid SaveStreamToBlob(Stream stream, string connectionString);
 
-        FileStream ConvertMemoryStreamToPdfFile(MemoryStream memoryStream);
+        Stream ConvertWordStreamToPdfStream(Stream memoryStream);
     }
 }

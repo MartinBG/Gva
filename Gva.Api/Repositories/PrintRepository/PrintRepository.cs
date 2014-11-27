@@ -26,6 +26,9 @@ namespace Gva.Api.Repositories.PrintRepository
 {
     public class PrintRepository : IPrintRepository
     {
+        private readonly object syncRoot = new object();
+        private const int DEFAULT_BUFFER_SIZE = 81920;
+
         private IUnitOfWork unitOfWork;
         private UserContext userContext;
         private ILotRepository lotRepository;
@@ -62,7 +65,7 @@ namespace Gva.Api.Repositories.PrintRepository
             return licenceEditionDocBlobKey;
         }
 
-        public FileStream ConvertMemoryStreamToPdfFile(MemoryStream memoryStream)
+        public Stream ConvertWordStreamToPdfStream(Stream stream)
         {
             var tmpDocFile = Path.GetTempFileName();
             var tmpPdfFile = Path.GetTempFileName();
@@ -71,13 +74,15 @@ namespace Gva.Api.Repositories.PrintRepository
             {
                 using (var tmpFileStream = File.OpenWrite(tmpDocFile))
                 {
-                    memoryStream.CopyTo(tmpFileStream);
-                    memoryStream.Close();
+                    stream.CopyTo(tmpFileStream);
                 }
 
-                var document = new Application().Documents.Open(tmpDocFile);
-                document.ExportAsFixedFormat(tmpPdfFile, WdExportFormat.wdExportFormatPDF);
-                document.Close();
+                lock (syncRoot)
+                {
+                    var document = new Application().Documents.Open(tmpDocFile, false);
+                    document.ExportAsFixedFormat(tmpPdfFile, WdExportFormat.wdExportFormatPDF);
+                    document.Close();
+                }
             }
             finally
             {
@@ -85,10 +90,10 @@ namespace Gva.Api.Repositories.PrintRepository
             }
 
             return new FileStream(tmpPdfFile,
-                FileMode.OpenOrCreate,
-                FileAccess.ReadWrite,
+                FileMode.Open,
+                FileAccess.Read,
                 FileShare.None,
-                tmpPdfFile.Length,
+                DEFAULT_BUFFER_SIZE,
                 FileOptions.DeleteOnClose);
         }
     }

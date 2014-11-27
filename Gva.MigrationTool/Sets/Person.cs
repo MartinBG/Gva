@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Autofac.Features.OwnedInstances;
@@ -113,17 +115,85 @@ namespace Gva.MigrationTool.Sets
             return ids.ToList();
         }
 
-        public void migrateLicenceDocuments(
-            Dictionary<int, int> personIdToLotId)
+        public void migrateLicenceDocuments(Dictionary<int, int> personIdToLotId)
         {
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken ct = cts.Token;
 
-            PersonLicenceDocMigrator personLicenceDocMigrator = this.personLicenceDocMigratorFactory().Value;
-            personLicenceDocMigrator.MigrateLicenceDocuments(personIdToLotId, cts, ct);
+            Dictionary<int, IEnumerable<JObject>> personLicences = this.getPersonsLicenceDocuments();
+            ConcurrentQueue<int> personIds = new ConcurrentQueue<int>(personLicences.Keys.ToArray());
+
+            string loginUri = ConfigurationManager.AppSettings["ServerLoginUri"];
+            string userName = ConfigurationManager.AppSettings["ServerUserName"];
+            string userPassword = ConfigurationManager.AppSettings["ServerUserPassword"];
+
+            System.Net.CredentialCache credentialCache = new System.Net.CredentialCache();
+            credentialCache.Add(
+                new System.Uri(loginUri),
+                "Basic",
+                new System.Net.NetworkCredential(userName, userPassword)
+            );
+            HttpWebRequest loginRequest = (HttpWebRequest)WebRequest.Create(loginUri);
+            HttpWebResponse loginResponse = (HttpWebResponse)loginRequest.GetResponse();
+            CookieCollection cookies = loginResponse.Cookies;
+            loginResponse.Close();
+
+            Utils.RunParallel("ParallelMigrations", ct,
+                () => this.personLicenceDocMigratorFactory().Value,
+                (personLicenceDocMigrator) =>
+                {
+                    using (personLicenceDocMigrator)
+                    {
+                        personLicenceDocMigrator.MigrateLicenceDocuments(personIds, personIdToLotId, personLicences, cookies, cts, ct);
+                    }
+                })
+                .Wait();
+        }
+
+        private Dictionary<int, IEnumerable<JObject>> getPersonsLicenceDocuments()
+        {
+            string printDocumentUri = ConfigurationManager.AppSettings["ServerPrintDocumentUri"];
+
+            return this.oracleConn.CreateStoreCommand(
+                @"select '{0}'
+                || (select xml_generator from caa_doc.prt_printable_documents pr_doc
+                       where pr_doc.id = lt.prt_printable_document_id*DECODE('LL', 'RN', -1, 1))
+                ||'#p_number1='||ll.id||'.#p_printable_documents_id='
+                ||lt.prt_printable_document_id*DECODE('LL', 'RN', -1, 1)
+                ||'#p_uid='|| 'ri'
+                as for_print,
+                ll.ID,
+                p.ID as PERSON_ID
+                 from  caa_doc.CAA CAA,
+                       caa_doc.NM_LICENCE_TYPE lt,
+                       caa_doc.LICENCE l,
+                       caa_doc.licence_log ll,
+                       caa_doc.nm_licence_action la,
+                       caa_doc.person p
+                 where l.LICENCE_TYPE_ID = lt.ID
+                   and l.PUBLISHER_CAA_ID = CAA.ID
+                   and l.id = ll.licence_id
+                   and l.person_id = p.id
+                   and ll.licence_action_id = la.id",
+                    new DbClause(printDocumentUri))
+                .Materialize(r => new
+                {
+                    query_string = r.Field<string>("FOR_PRINT").Replace("#p", "&p"),
+                    old_id = r.Field<int>("ID"),
+                    person_id = r.Field<int>("PERSON_ID")
+                })
+                .ToList()
+                .GroupBy(d => d.person_id)
+                .ToDictionary(g => g.Key,
+                g => g.Select(r =>
+                    new JObject(
+                        Utils.ToJObject(
+                        new
+                        {
+                            r.query_string,
+                            r.old_id,
+                            r.person_id
+                        }))));
         }
     }
 }

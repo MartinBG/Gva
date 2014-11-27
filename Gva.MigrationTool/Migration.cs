@@ -154,13 +154,11 @@ namespace Gva.MigrationTool
                 oracleConn.Open();
                 sqlConn.Open();
 
-                
                 var nomenclature = scope.Resolve<Nomenclature>();
                 var aircraft = scope.Resolve<Aircraft>();
                 var person = scope.Resolve<Person>();
                 var organization = scope.Resolve<Organization>();
 
-                
                 var noms = nomenclature.migrateNomenclatures();
 
                 Dictionary<int, int> aircraftApexIdtoLotId = new Dictionary<int, int>();

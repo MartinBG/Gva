@@ -2,10 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using Autofac.Features.OwnedInstances;
 using Common.Api.UserContext;
@@ -41,7 +39,10 @@ namespace Gva.MigrationTool.Sets
         }
 
         public void MigrateLicenceDocuments(
+            ConcurrentQueue<int> personIds,
             Dictionary<int, int> personIdToLotId,
+            Dictionary<int, IEnumerable<JObject>> personsLicences,
+            CookieCollection cookies,
             //cancellation
             CancellationTokenSource cts,
             CancellationToken ct)
@@ -65,25 +66,11 @@ namespace Gva.MigrationTool.Sets
                 this.lotEventDispatcher = dependencies.Value.Item4;
                 this.userContext = dependencies.Value.Item5;
 
-                Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
                 string connectionString = ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString;
 
                 int personId = -1;
                 try
                 {
-                    var personsLicences = this.getPersonsLicenceDocuments();
-                    ConcurrentQueue<int> personIds = new ConcurrentQueue<int>(personsLicences.Keys.ToArray());
-
-                    string loginUri = "http://192.168.0.19:7777/pls/apex/f?p=223:1000:652650075342818::NO";
-                    System.Net.CredentialCache credentialCache = new System.Net.CredentialCache();
-                    credentialCache.Add(
-                        new System.Uri(loginUri),
-                        "Basic",
-                        new System.Net.NetworkCredential("ri", "caa123065")
-                    );
-                    HttpWebRequest loginRequest = (HttpWebRequest)WebRequest.Create(loginUri);
-                    HttpWebResponse loginResponse = (HttpWebResponse)loginRequest.GetResponse();
-
                     while (personIds.TryDequeue(out personId))
                     {
                         if (personIdToLotId.ContainsKey(personId))
@@ -104,24 +91,14 @@ namespace Gva.MigrationTool.Sets
 
                                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(queryString);
                                 request.CookieContainer = new CookieContainer();
-                                request.CookieContainer.Add(loginResponse.Cookies);
+                                request.CookieContainer.Add(cookies);
 
                                 using (HttpWebResponse httpResponse = (HttpWebResponse)request.GetResponse())
+                                using (var responseStream = httpResponse.GetResponseStream())
+                                using (var stream = printRepository.ConvertWordStreamToPdfStream(responseStream))
                                 {
-                                    using (StreamReader readStream = new StreamReader(httpResponse.GetResponseStream(), encode))
-                                    {
-                                        using (var memoryStream = new MemoryStream())
-                                        {
-                                            readStream.BaseStream.CopyTo(memoryStream);
-                                            memoryStream.Position = 0;
-                                            using (var fileStream = printRepository.ConvertMemoryStreamToPdfFile(memoryStream))
-                                            {
-                                                fileStream.Position = 0;
-                                                var licenceEditionDocBlobKey = printRepository.SaveStreamToBlob(fileStream, connectionString);
-                                                this.UpdateLicenceEdition(licenceEditionDocBlobKey, editionPartIndex, lot);
-                                            }
-                                        }
-                                    }
+                                    var licenceEditionDocBlobKey = printRepository.SaveStreamToBlob(stream, connectionString);
+                                    this.UpdateLicenceEdition(licenceEditionDocBlobKey, editionPartIndex, lot);
                                 }
                             }
                             Console.WriteLine("Migrated printed licences of personId: {0}", personId);
@@ -135,49 +112,6 @@ namespace Gva.MigrationTool.Sets
                     throw;
                 }
             }
-        }
-
-        private IDictionary<int, IEnumerable<JObject>> getPersonsLicenceDocuments()
-        {
-            return this.oracleConn.CreateStoreCommand(
-                @"select 
-                'http://192.168.0.19:7777/pls/apex/CAA_DOC.printable_documents_routines.print_document_in_msword?p_xml_generator='
-                || (select xml_generator from   caa_doc.prt_printable_documents pr_doc
-                       where pr_doc.id = lt.prt_printable_document_id*DECODE('LL', 'RN', -1, 1))
-                ||'#p_number1='||ll.id||'.#p_printable_documents_id='
-                ||lt.prt_printable_document_id*DECODE('LL', 'RN', -1, 1)
-                ||'#p_uid='|| 'ri'
-                as for_print,
-                ll.ID,
-                p.ID as PERSON_ID
-                 from   caa_doc.CAA CAA
-                       , caa_doc.NM_LICENCE_TYPE lt
-                       , caa_doc.LICENCE l
-                       , caa_doc.licence_log ll
-                       , caa_doc.nm_licence_action la
-                       , caa_doc.person p
-                 where   l.LICENCE_TYPE_ID=lt.ID
-                   and   l.PUBLISHER_CAA_ID=CAA.ID
-                   and   l.id = ll.licence_id
-                   and   l.person_id = p.id
-                   and   ll.licence_action_id = la.id")
-                .Materialize(r => new 
-                    {
-                        query_string = r.Field<string>("FOR_PRINT").Replace("#p", "&p"),
-                        old_id = r.Field<int>("ID"),
-                        person_id = r.Field<int>("PERSON_ID")
-                    })
-                    .ToList()
-                    .GroupBy(d => d.person_id)
-                    .ToDictionary(g => g.Key,
-                    g => g.Select(r => 
-                        new JObject(
-                            Utils.ToJObject(
-                            new {
-                                r.query_string,
-                                r.old_id,
-                                r.person_id
-                            }))));
         }
 
         public void UpdateLicenceEdition(Guid licenceEditionDocBlobKey, int editionPartIndex, Lot lot)

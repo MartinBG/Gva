@@ -86,16 +86,11 @@ namespace Gva.Api.Controllers
             }
             else
             {
-                using (var memoryStream = new MemoryStream())
+                using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName))
+                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
                 {
-                    this.GenerateWordDocument(lotId, path, templateName, memoryStream);
-                    memoryStream.Position = 0;
-                    using (var fileStream = this.printRepository.ConvertMemoryStreamToPdfFile(memoryStream))
-                    {
-                        fileStream.Position = 0;
-                        licenceEditionDocBlobKey = this.printRepository.SaveStreamToBlob(fileStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
-                        this.UpdateLicenceEdition(licenceEditionDocBlobKey, licenceEditionPartVersion, lot);
-                    }
+                    licenceEditionDocBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
+                    this.UpdateLicenceEdition(licenceEditionDocBlobKey, licenceEditionPartVersion, lot);
                 }
             }
 
@@ -115,7 +110,7 @@ namespace Gva.Api.Controllers
             return result;
         }
 
-        public void GenerateWordDocument(int lotId, string path, string templateName, MemoryStream memoryStream)
+        public Stream GenerateWordDocument(int lotId, string path, string templateName)
         {
             var dataGenerator = this.dataGenerators.First(dg => dg.TemplateNames.Contains(templateName));
             object data = dataGenerator.GetData(lotId, path);
@@ -128,10 +123,13 @@ namespace Gva.Api.Controllers
             var wordTemplate = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
                 .SingleOrDefault(t => t.Name == templateName);
 
+            var memoryStream = new MemoryStream();
             memoryStream.Write(wordTemplate.Template, 0, wordTemplate.Template.Length);
 
             new WordTemplateTransformer(memoryStream).Transform(json);
             memoryStream.Position = 0;
+
+            return memoryStream;
         }
 
         public void UpdateLicenceEdition(Guid licenceEditionDocBlobKey, PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion, Lot lot)
