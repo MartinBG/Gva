@@ -2,26 +2,18 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using Autofac.Features.OwnedInstances;
-using Common.Api.Models;
 using Common.Api.UserContext;
-using Common.Blob;
 using Common.Data;
 using Common.Json;
 using Common.Tests;
-using Gva.Api.Models;
-using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.ApplicationRepository;
-using Gva.Api.Repositories.FileRepository;
-using Gva.MigrationTool.Nomenclatures;
-using Gva.MigrationTool.Sets.Common;
+using Gva.Api.Repositories.PrintRepository;
 using Newtonsoft.Json.Linq;
 using Oracle.DataAccess.Client;
 using Regs.Api.LotEvents;
@@ -33,12 +25,16 @@ namespace Gva.MigrationTool.Sets
     public class PersonLicenceDocMigrator : IDisposable
     {
         private bool disposed = false;
-        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IFileRepository, IApplicationRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
+        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IPrintRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
         private OracleConnection oracleConn;
+        private ILotRepository lotRepository;
+        private IUnitOfWork unitOfWork;
+        private UserContext userContext;
+        private ILotEventDispatcher lotEventDispatcher;
 
         public PersonLicenceDocMigrator(
             OracleConnection oracleConn,
-            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IFileRepository, IApplicationRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
+            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, IPrintRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
             this.oracleConn = oracleConn;
@@ -63,13 +59,15 @@ namespace Gva.MigrationTool.Sets
             ct.ThrowIfCancellationRequested();
             using (var dependencies = this.dependencyFactory())
             {
-                var unitOfWork = dependencies.Value.Item1;
-                var lotRepository = dependencies.Value.Item2;
-                var fileRepository = dependencies.Value.Item3;
-                var applicationRepository = dependencies.Value.Item4;
-                var lotEventDispatcher = dependencies.Value.Item5;
-                var context = dependencies.Value.Item6;
+                this.unitOfWork = dependencies.Value.Item1;
+                this.lotRepository = dependencies.Value.Item2;
+                var printRepository = dependencies.Value.Item3;
+                this.lotEventDispatcher = dependencies.Value.Item4;
+                this.userContext = dependencies.Value.Item5;
+
                 Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
+                string connectionString = ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString;
+
                 int personId = -1;
                 try
                 {
@@ -91,6 +89,7 @@ namespace Gva.MigrationTool.Sets
                         if (personIdToLotId.ContainsKey(personId))
                         {
                             var lot = lotRepository.GetLotIndex(personIdToLotId[personId], fullAccess: true);
+
                             JObject licence = null;
                             ConcurrentQueue<JObject> personLicences = new ConcurrentQueue<JObject>(personsLicences[personId]);
 
@@ -111,7 +110,17 @@ namespace Gva.MigrationTool.Sets
                                 {
                                     using (StreamReader readStream = new StreamReader(httpResponse.GetResponseStream(), encode))
                                     {
-                                        this.SaveStreamToBlob(readStream.BaseStream, editionPartIndex, lot, unitOfWork, lotRepository, context, lotEventDispatcher);
+                                        using (var memoryStream = new MemoryStream())
+                                        {
+                                            readStream.BaseStream.CopyTo(memoryStream);
+                                            memoryStream.Position = 0;
+                                            using (var fileStream = printRepository.ConvertMemoryStreamToPdfFile(memoryStream))
+                                            {
+                                                fileStream.Position = 0;
+                                                var licenceEditionDocBlobKey = printRepository.SaveStreamToBlob(fileStream, connectionString);
+                                                this.UpdateLicenceEdition(licenceEditionDocBlobKey, editionPartIndex, lot);
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -171,39 +180,22 @@ namespace Gva.MigrationTool.Sets
                             }))));
         }
 
-        public void SaveStreamToBlob(Stream responseStream, int editionPartIndex, Lot lot,
-            IUnitOfWork unitOfWork, ILotRepository lotRepository, UserContext userContext, ILotEventDispatcher lotEventDispatcher)
+        public void UpdateLicenceEdition(Guid licenceEditionDocBlobKey, int editionPartIndex, Lot lot)
         {
-            using (var transaction = unitOfWork.BeginTransaction())
+            PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", editionPartIndex));
+            
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    responseStream.CopyTo(memoryStream);
+                licenceEditionPartVersion.Content.PrintedDocumentBlobKey = licenceEditionDocBlobKey;
 
-                    Guid licenceEditionDocBlobKey = Guid.Empty;
+                lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
 
-                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
-                    {
-                        connection.Open();
-                        using (var blobWriter = new BlobWriter(connection))
-                        using (var blobStream = blobWriter.OpenStream())
-                        {
-                            blobStream.Write(memoryStream.ToArray(), 0, (int)memoryStream.Length);
-                            licenceEditionDocBlobKey = blobWriter.GetBlobKey();
-                        }
-                    }
+                lot.Commit(this.userContext, this.lotEventDispatcher);
+                this.lotRepository.ExecSpSetLotPartTokens(licenceEditionPartVersion.PartId);
 
-                    PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", editionPartIndex));
-                    licenceEditionPartVersion.Content.PrintedDocumentBlobKey = licenceEditionDocBlobKey;
+                this.unitOfWork.Save();
 
-                    lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, userContext);
-
-                    lot.Commit(userContext, lotEventDispatcher);
-
-                    unitOfWork.Save();
-
-                    transaction.Commit();
-                }
+                transaction.Commit();
             }
         }
 

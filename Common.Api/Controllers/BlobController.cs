@@ -15,7 +15,7 @@ namespace Common.Api.Controllers
 {
     public class BlobController : ApiController
     {
-        public HttpResponseMessage Get(Guid fileKey, string mimeType = null, string fileName = null)
+        public HttpResponseMessage Get(Guid fileKey, string mimeType = null, string fileName = null, string dispositionType = null)
         {
             HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
             result.Content = new PushStreamContent(
@@ -35,7 +35,7 @@ namespace Common.Api.Controllers
             result.Content.Headers.ContentType =
                 new MediaTypeHeaderValue(string.IsNullOrEmpty(mimeType) ? "application/octet-stream" : mimeType);
             result.Content.Headers.ContentDisposition =
-                new ContentDispositionHeaderValue("attachment")
+                new ContentDispositionHeaderValue(string.IsNullOrEmpty(dispositionType) ? "attachment" : dispositionType)
                 {
                     FileName = fileName
                 };

@@ -392,6 +392,8 @@
     <Compile Include="Repositories\CaseTypeRepository\ICaseTypeRepository.cs" />
     <Compile Include="Repositories\AirportRepository\AirportRepository.cs" />
     <Compile Include="Repositories\AirportRepository\IAirportRepository.cs" />
+    <Compile Include="Repositories\PrintRepository\IPrintRepository.cs" />
+    <Compile Include="Repositories\PrintRepository\PrintRepository.cs" />
     <Compile Include="Repositories\PublisherRepository\IPublisherRepository.cs" />
     <Compile Include="Repositories\PublisherRepository\PublisherRepository.cs" />
     <Compile Include="Repositories\EquipmentRepository\EquipmentRepository.cs" />

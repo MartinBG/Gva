@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
-using Common.Api.Controllers;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
-using Common.Blob;
 using Common.Data;
 using Common.Json;
 using Common.Owin;
 using Common.WordTemplates;
 using Gva.Api.Models;
-using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.PrintRepository;
 using Gva.Api.WordTemplates;
-using Microsoft.Office.Interop.Word;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
@@ -38,11 +34,13 @@ namespace Gva.Api.Controllers
         private IUnitOfWork unitOfWork;
         private UserContext userContext;
         private ILotEventDispatcher lotEventDispatcher;
+        private IPrintRepository printRepository;
 
         public PrintController(
             IEnumerable<IDataGenerator> dataGenerators,
             ILotRepository lotRepository,
             INomRepository nomRepository,
+            IPrintRepository printRepository,
             ILotEventDispatcher lotEventDispatcher,
             IUnitOfWork unitOfWork,
             UserContext userContext)
@@ -50,6 +48,7 @@ namespace Gva.Api.Controllers
             this.dataGenerators = dataGenerators;
             this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
+            this.printRepository = printRepository;
             this.unitOfWork = unitOfWork;
             this.userContext = userContext;
             this.lotEventDispatcher = lotEventDispatcher;
@@ -76,67 +75,44 @@ namespace Gva.Api.Controllers
 
             PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", editionPartIndex));
 
-            var memoryStream = new MemoryStream();
-
             int licenceTypeId = lot.Index.GetPart<PersonLicenceDO>(path)
                 .Content.LicenceType.NomValueId;
             string templateName = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent.Get<string>("templateName");
 
-            //this licence has been already printed once
+            Guid licenceEditionDocBlobKey;
             if (licenceEditionPartVersion.Content.PrintedDocumentBlobKey.HasValue)
             {
-                this.CopyBlobContentToStream(licenceEditionPartVersion.Content.PrintedDocumentBlobKey.Value, memoryStream);
+                licenceEditionDocBlobKey = licenceEditionPartVersion.Content.PrintedDocumentBlobKey.Value;
             }
             else
             {
-                this.GenerateWordDocument(lotId, path, templateName, memoryStream);
-
-                //save newly generated word document as blob and update edition's part to reference it
-                this.SaveStreamToBlob(memoryStream, licenceEditionPartVersion, lot);
-            }
-
-            var fileStream = this.ConvertMemoryStreamToPdfFile(memoryStream);
-
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new StreamContent(fileStream);
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
-            result.Content.Headers.ContentDisposition =
-                new ContentDispositionHeaderValue("inline")
+                using (var memoryStream = new MemoryStream())
                 {
-                    FileName = templateName
-                };
-
-            return result;
-        }
-
-        public void SaveStreamToBlob(MemoryStream memoryStream, PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion, Lot lot)
-        {
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                Guid licenceEditionDocBlobKey = Guid.Empty;
-
-                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
-                {
-                    connection.Open();
-                    using (var blobWriter = new BlobWriter(connection))
-                    using (var blobStream = blobWriter.OpenStream())
+                    this.GenerateWordDocument(lotId, path, templateName, memoryStream);
+                    memoryStream.Position = 0;
+                    using (var fileStream = this.printRepository.ConvertMemoryStreamToPdfFile(memoryStream))
                     {
-                        blobStream.Write(memoryStream.ToArray(), 0, (int)memoryStream.Length);
-                        licenceEditionDocBlobKey = blobWriter.GetBlobKey();
+                        fileStream.Position = 0;
+                        licenceEditionDocBlobKey = this.printRepository.SaveStreamToBlob(fileStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
+                        this.UpdateLicenceEdition(licenceEditionDocBlobKey, licenceEditionPartVersion, lot);
                     }
                 }
-
-                licenceEditionPartVersion.Content.PrintedDocumentBlobKey = licenceEditionDocBlobKey;
-
-                lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
-
-                lot.Commit(this.userContext, lotEventDispatcher);
-                this.lotRepository.ExecSpSetLotPartTokens(licenceEditionPartVersion.PartId);
-
-                this.unitOfWork.Save();
-
-                transaction.Commit();
             }
+
+            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline", 
+                licenceEditionDocBlobKey, 
+                templateName);
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.Redirect);
+            result.Headers.Location = new Uri(url, UriKind.Relative);
+            result.Headers.CacheControl = new CacheControlHeaderValue()
+            {
+                NoCache = true,
+                NoStore = true,
+                MustRevalidate = true
+            };
+
+            return result;
         }
 
         public void GenerateWordDocument(int lotId, string path, string templateName, MemoryStream memoryStream)
@@ -158,40 +134,22 @@ namespace Gva.Api.Controllers
             memoryStream.Position = 0;
         }
 
-        public void CopyBlobContentToStream(Guid blobKey, MemoryStream memoryStream)
+        public void UpdateLicenceEdition(Guid licenceEditionDocBlobKey, PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion, Lot lot)
         {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                connection.Open();
+                licenceEditionPartVersion.Content.PrintedDocumentBlobKey = licenceEditionDocBlobKey;
 
-                var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", blobKey);
-                blobStream.CopyTo(memoryStream);
-                memoryStream.Position = 0;
+                lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
+                this.lotRepository.ExecSpSetLotPartTokens(licenceEditionPartVersion.PartId);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
             }
         }
 
-        public FileStream ConvertMemoryStreamToPdfFile(MemoryStream memoryStream)
-        {
-            var tmpDocFile = Path.GetTempFileName();
-            var tmpPdfFile = Path.GetTempFileName();
-
-            using (var tmpFileStream = File.OpenWrite(tmpDocFile))
-            {
-                memoryStream.CopyTo(tmpFileStream);
-                memoryStream.Close();
-            }
-
-            var document = new Application().Documents.Open(tmpDocFile);
-            document.ExportAsFixedFormat(tmpPdfFile, WdExportFormat.wdExportFormatPDF);
-            document.Close();
-            File.Delete(tmpDocFile);
-
-            return new FileStream(tmpPdfFile,
-                FileMode.OpenOrCreate,
-                FileAccess.ReadWrite,
-                FileShare.None,
-                tmpPdfFile.Length,
-                FileOptions.DeleteOnClose);
-        }
     }
 }
