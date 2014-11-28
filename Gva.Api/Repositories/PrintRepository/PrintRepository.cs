@@ -1,33 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Web.Http;
-using Common.Api.Models;
-using Common.Api.Repositories.NomRepository;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using Common.Api.UserContext;
 using Common.Blob;
 using Common.Data;
-using Common.Json;
-using Common.Linq;
-using Gva.Api.Models;
-using Gva.Api.Models.Views;
-using Gva.Api.Models.Views.Person;
-using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
 using Microsoft.Office.Interop.Word;
 using Regs.Api.LotEvents;
-using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Repositories.PrintRepository
 {
     public class PrintRepository : IPrintRepository
     {
-        private readonly object syncRoot = new object();
+        private static readonly object syncRoot = new object();
         private const int DEFAULT_BUFFER_SIZE = 81920;
+        private static readonly byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
 
         private IUnitOfWork unitOfWork;
         private UserContext userContext;
@@ -70,23 +60,49 @@ namespace Gva.Api.Repositories.PrintRepository
             var tmpDocFile = Path.GetTempFileName();
             var tmpPdfFile = Path.GetTempFileName();
 
-            try
+            lock (syncRoot)
             {
-                using (var tmpFileStream = File.OpenWrite(tmpDocFile))
+                Application wordApplication = null;
+                Document document = null;
+                try
                 {
-                    stream.CopyTo(tmpFileStream);
+                    using (var tmpFileStream = File.OpenWrite(tmpDocFile))
+                    {
+                        this.CopyStream(stream, tmpFileStream);
+                    }
+
+                    wordApplication = new Application();
+                    document = wordApplication.Documents.Open(
+                        ReadOnly: false,
+                        FileName: tmpDocFile,
+                        ConfirmConversions: false,
+                        OpenAndRepair: true,
+                        NoEncodingDialog: true);
+
+                    document.ExportAsFixedFormat(tmpPdfFile, WdExportFormat.wdExportFormatPDF);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    if (document != null)
+                    {
+                        document.Close(WdSaveOptions.wdDoNotSaveChanges, Missing.Value, Missing.Value);
+                        Marshal.FinalReleaseComObject(document);
+                    }
+
+                    if (wordApplication != null)
+                    {
+                        wordApplication.Quit(WdSaveOptions.wdDoNotSaveChanges, Missing.Value, Missing.Value);
+                        Marshal.FinalReleaseComObject(wordApplication);
+                        Marshal.ReleaseComObject(wordApplication);
+                    }
+
+                    File.Delete(tmpDocFile);
                 }
 
-                lock (syncRoot)
-                {
-                    var document = new Application().Documents.Open(tmpDocFile, false);
-                    document.ExportAsFixedFormat(tmpPdfFile, WdExportFormat.wdExportFormatPDF);
-                    document.Close();
-                }
-            }
-            finally
-            {
-                File.Delete(tmpDocFile);
             }
 
             return new FileStream(tmpPdfFile,
@@ -95,6 +111,15 @@ namespace Gva.Api.Repositories.PrintRepository
                 FileShare.None,
                 DEFAULT_BUFFER_SIZE,
                 FileOptions.DeleteOnClose);
+        }
+
+        private void CopyStream(Stream input, Stream output)
+        {
+            int read;
+            while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                output.Write(buffer, 0, read);
+            }
         }
     }
 }

@@ -133,6 +133,7 @@ namespace Gva.MigrationTool.Sets
                 "Basic",
                 new System.Net.NetworkCredential(userName, userPassword)
             );
+
             HttpWebRequest loginRequest = (HttpWebRequest)WebRequest.Create(loginUri);
             HttpWebResponse loginResponse = (HttpWebResponse)loginRequest.GetResponse();
             CookieCollection cookies = loginResponse.Cookies;

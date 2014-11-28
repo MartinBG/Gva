@@ -177,15 +177,14 @@ namespace Gva.Api.WordTemplates
                 if (licenceTypeCode == "C/AL")
                 {
                     dynamic dateValidPrivilege = LicenceDictionary.LicencePrivilege["dateValid"];
-                    string dateValid = edition.DocumentDateValidTo.Value.ToString("dd.MM.yyyy");
-                    string dateValidTrans = edition.DocumentDateValidTo.Value.ToString("dd MMMM yyyy");
+                    string dateValid = edition.DocumentDateValidTo.HasValue ? edition.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null;
 
                     result = new List<object>(privileges);
                     result.Add(new
                     {
                         NO = dateValidPrivilege.NO,
                         NAME_BG = string.Format(dateValidPrivilege.NAME_BG, dateValid),
-                        NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValidTrans)
+                        NAME_TRANS = string.Format(dateValidPrivilege.NAME_TRANS, dateValid)
                     });
                 }
             }
