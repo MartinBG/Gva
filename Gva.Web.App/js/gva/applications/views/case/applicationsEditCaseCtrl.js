@@ -177,7 +177,7 @@
         id: $scope.application.lotId,
         ind: value.partIndex,
         appId: application.applicationId,
-        filter: $stateParams.filter
+        set: $stateParams.set
       });
     };
 

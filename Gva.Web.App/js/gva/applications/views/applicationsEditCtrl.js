@@ -16,7 +16,7 @@
       return $state.go('root.persons.view', {
         id: id,
         appId: application.applicationId,
-        filter: $scope.set
+        set: $scope.set
       });
     };
 
@@ -24,7 +24,7 @@
       return $state.go('root.organizations.view', {
         id: id,
         appId: application.applicationId,
-        filter: $scope.set
+        set: $scope.set
       });
     };
 
@@ -32,7 +32,7 @@
       return $state.go('root.aircrafts.view', {
         id: id,
         appId: application.applicationId,
-        filter: $scope.set
+        set: $scope.set
       });
     };
 
@@ -40,7 +40,7 @@
       return $state.go('root.airports.view', {
         id: id,
         appId: application.applicationId,
-        filter: $scope.set
+        set: $scope.set
       });
     };
 
@@ -48,7 +48,7 @@
       return $state.go('root.equipments.view', {
         id: id,
         appId: application.applicationId,
-        filter: $scope.set
+        set: $scope.set
       });
     };
   }
