@@ -15,6 +15,7 @@ VALUES
     (@nomId , N'personLangCert'         , N'Свидетелство за език'   , NULL     , 1              , N'personLangCert'         , 1         , NULL         ),
     (@nomId , N'personOther'            , N'Друг документ'          , NULL     , 1              , N'personOther'            , 1         , NULL         ),
     (@nomId , N'personApplication'      , N'Заявление'              , NULL     , 1              , N'personApplication'      , 1         , NULL         ),
+    (@nomId , N'personReport'           , N'Отчет'                  , NULL     , 1              , N'personReport'           , 1         , NULL         ),
 
     (@nomId , N'organizationOther'      , N'Друг документ'          , NULL     , 2              , N'organizationOther'      , 1         , NULL         ),
     (@nomId , N'organizationApplication', N'Заявление'              , NULL     , 2              , N'organizationApplication', 1         , NULL         ),

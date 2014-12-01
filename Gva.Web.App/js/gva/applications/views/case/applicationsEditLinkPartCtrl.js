@@ -8,6 +8,7 @@
     $stateParams,
     AplicationsCase,
     PersonDocumentIds,
+    PersonReports,
     PersonDocumentEducations,
     PersonDocumentEmployments,
     PersonDocumentMedicals,
@@ -35,6 +36,7 @@
     $scope.docPartType = null;
 
     $scope.search = function () {
+      $scope.showPReport = false;
       $scope.showPDocumentId = false;
       $scope.showPDocumentEducation = false;
       $scope.showPDocumentEmployment = false;
@@ -57,12 +59,20 @@
       $scope.showEDocumentOther = false;
       $scope.showEDocumentApplication = false;
 
+
       if ($scope.docPartType) {
         if ($scope.docPartType.alias === 'personDocumentId') {
           return PersonDocumentIds.query({ id: $scope.application.lotId })
             .$promise.then(function (documentIds) {
               $scope.documentPart = documentIds;
               $scope.showPDocumentId = !!documentIds;
+            });
+        }
+        else if ($scope.docPartType.alias === 'personReport') {
+          return PersonReports.query({ id: $scope.application.lotId })
+            .$promise.then(function (reports) {
+              $scope.documentPart = reports;
+              $scope.showPReport = !!reports;
             });
         }
         else if ($scope.docPartType.alias === 'personEducation') {
@@ -247,6 +257,7 @@
     '$stateParams',
     'AplicationsCase',
     'PersonDocumentIds',
+    'PersonReports',
     'PersonDocumentEducations',
     'PersonDocumentEmployments',
     'PersonDocumentMedicals',

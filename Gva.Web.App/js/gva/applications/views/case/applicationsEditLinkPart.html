@@ -49,7 +49,20 @@
         </sc-column>
       </sc-datatable>
     </div>
-
+    <div ng-if="showPReport && docPartType.alias === 'personReport'">
+      <sc-datatable items="documentPart" filterable="false" pageable="true" sortable="false" dynamic-columns="false">
+        <sc-column sortable="false" class="buttons-cell" has-content="true">
+          <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
+        </sc-column>
+        <sc-column data="part.reportNumber" title="persons.reportSearch.reportNumber">
+        </sc-column>
+        <sc-column data="part.date" title="persons.reportSearch.date" type="date">
+        </sc-column>
+        <sc-column data="part.date" title="persons.reportSearch.personsLins" has-content="true">
+          {{item.part.includedPersons | pluck:'lin' | join:', '}}
+        </sc-column>
+      </sc-datatable>
+    </div>
     <div ng-if="showPDocumentEducation && docPartType.alias === 'personEducation'">
       <sc-datatable items="documentPart" filterable="false" pageable="true" sortable="false" dynamic-columns="false">
         <sc-column sortable="false" class="buttons-cell" has-content="true">
