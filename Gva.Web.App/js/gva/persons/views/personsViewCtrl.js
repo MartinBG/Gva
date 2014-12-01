@@ -37,8 +37,7 @@
       'persons.tabs.applications': 'root.persons.view.documentApplications'
     };
 
-    if(person.caseTypes.indexOf('staffExaminer') > 0 ||
-      person.caseTypes.indexOf('awExaminer') > 0) {
+    if(person.caseTypes.indexOf('staffExaminer') !== -1) {
       $scope.tabs = _.assign($scope.tabs, {'persons.tabs.reports': 'root.persons.view.reports'});
     } 
 
