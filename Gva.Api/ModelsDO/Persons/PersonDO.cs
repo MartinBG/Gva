@@ -7,5 +7,9 @@
         public CaseTypesPartDO<PersonDocumentIdDO> PersonDocumentId { get; set; }
 
         public PersonAddressDO PersonAddress { get; set; }
+
+        public InspectorDataDO InspectorData { get; set; }
+
+        public ExaminerDataDO ExaminerData { get; set; }
     }
 }

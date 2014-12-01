@@ -1842,6 +1842,8 @@
           title: 'Ново лице',
           personDataForm: 'Лични данни',
           documentIdForm: 'Документ за самоличност',
+          inspDataTitle: 'Данни за инспектор',
+          examinerDateTitle: 'Данни за проверяващ',
           addressForm: 'Адрес',
           save: 'Запис',
           cancel: 'Отказ'

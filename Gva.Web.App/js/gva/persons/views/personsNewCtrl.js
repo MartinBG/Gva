@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function PersonsNewCtrl($scope, $state, Persons, person) {
@@ -20,6 +20,18 @@
     $scope.cancel = function () {
       return $state.go('root.persons.search');
     };
+
+    $scope.showInspData = function () {
+      return _.some($scope.newPerson.personData.caseTypes, function (caseType) {
+        return caseType.alias === 'inspector';
+      });
+    };
+
+    $scope.showExaminerData = function () {
+      return _.some($scope.newPerson.personData.caseTypes, function (caseType) {
+        return caseType.alias === 'staffExaminer';
+      });
+    };
   }
 
   PersonsNewCtrl.$inject = ['$scope', '$state', 'Persons', 'person'];
@@ -34,4 +46,4 @@
   };
 
   angular.module('gva').controller('PersonsNewCtrl', PersonsNewCtrl);
-}(angular));
+}(angular, _));

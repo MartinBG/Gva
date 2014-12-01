@@ -162,6 +162,18 @@ namespace Gva.Api.Controllers.Persons
                     this.fileRepository.AddFileReferences(personAddressPart.Part, cases);
                 }
 
+                PartVersion<InspectorDataDO> inspectorDataPart = null;
+                if (person.InspectorData != null)
+                {
+                    inspectorDataPart = newLot.CreatePart("inspectorData", person.InspectorData, this.userContext);
+                }
+
+                PartVersion<ExaminerDataDO> examinerDataPart = null;
+                if (person.ExaminerData != null)
+                {
+                    examinerDataPart = newLot.CreatePart("examinerData", person.ExaminerData, this.userContext);
+                }
+
                 newLot.Commit(this.userContext, lotEventDispatcher);
 
                 this.unitOfWork.Save();
@@ -176,6 +188,16 @@ namespace Gva.Api.Controllers.Persons
                 if (personAddressPart != null)
                 {
                     this.lotRepository.ExecSpSetLotPartTokens(personAddressPart.PartId);
+                }
+
+                if (inspectorDataPart != null)
+                {
+                    this.lotRepository.ExecSpSetLotPartTokens(inspectorDataPart.PartId);
+                }
+
+                if (examinerDataPart != null)
+                {
+                    this.lotRepository.ExecSpSetLotPartTokens(examinerDataPart.PartId);
                 }
 
                 transaction.Commit();

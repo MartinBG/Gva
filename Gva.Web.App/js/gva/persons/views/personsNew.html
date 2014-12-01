@@ -31,6 +31,17 @@
         <gva-person-address name="personAddressForm" ng-model="newPerson.personAddress"></gva-person-address>
       </div>
 
+      <div ng-if="showInspData()" style="margin-top:20px;">
+        <h5 class="form-header" l10n-text="persons.newPerson.inspDataTitle"></h5>
+
+        <gva-inspector-data name="inspectorDataForm" ng-model="newPerson.inspectorData"></gva-inspector-data>
+      </div>
+
+      <div ng-if="showExaminerData()" style="margin-top:20px;">
+        <h5 class="form-header" l10n-text="persons.newPerson.examinerDateTitle"></h5>
+
+        <gva-examiner-data name="examinerDataForm" ng-model="newPerson.examinerData"></gva-examiner-data>
+      </div>
     </div>
   </div>
 </ng-form>
