@@ -24,6 +24,8 @@
         .then(function () {
           if ($scope.addDocPartType.$valid) {
             return $state.go('root.applications.edit.case.addPart', {
+              id: $stateParams.id,
+              lotId: $scope.lotId,
               docId: $stateParams.docId,
               docFileId: $stateParams.docFileId,
               setPartAlias: $scope.docPartType.alias,
