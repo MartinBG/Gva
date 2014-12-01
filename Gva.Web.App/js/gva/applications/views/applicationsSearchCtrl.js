@@ -11,7 +11,7 @@
     $scope.applications = applications;
 
     $scope.filters = {
-      filter: null,
+      set: null,
       fromDate: null,
       toDate: null,
       regUri: null
@@ -25,7 +25,7 @@
 
     $scope.search = function () {
       return $state.go('root.applications.search', {
-        filter: $scope.filters.filter,
+        set: $stateParams.set,
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         personLin: $scope.filters.personLin,
