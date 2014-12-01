@@ -46,7 +46,7 @@
       return modalInstance.opened;
     };
 
-    $scope.viewApplication = function (lotId, partIndex) {
+    $scope.viewApplication = function (appId, lotId, partIndex) {
       var modalInstance = scModal.open('viewApplication', {
         lotId: lotId,
         path: 'personDocumentApplications',
@@ -55,9 +55,12 @@
       });
 
       modalInstance.result.then(function () {
-        return $state.go('root.persons.view.documentApplications.edit', {
-          id: lotId,
-          ind: partIndex
+        return $state.go('root.applications.edit.data', {
+          id: appId,
+          set: 'person',
+          lotId: lotId,
+          ind: partIndex,
+          setPartPath: 'personDocumentApplications'
         });
       });
 

@@ -17,19 +17,43 @@
          return !item.bookPageNumber;
       });
 
-    $scope.getState = function (setPartAlias) {
-      switch(setPartAlias) { 
-      case 'aircraftOther':
-        return 'root.aircrafts.view.others.edit';
-      case 'aircraftOwner':
-        return 'root.aircrafts.view.owners.edit';
-      case 'aircraftOccurrence':
-        return 'root.aircrafts.view.occurrences.edit';
-      case 'aircraftDebtFM':
-        return 'root.aircrafts.view.debtsFM.edit';
-      case 'aircraftApplication':
-        return 'root.aircrafts.view.applications.edit';
+    $scope.getState = function (item) {
+      var params,
+          stateName;
+
+      if (item.setPartAlias === 'aircraftApplication') {
+        params = { 
+          ind: item.partIndex,
+          id: item.applicationId,
+          set: 'aircraft',
+          setPartPath: 'aircraftApplication',
+          lotId: $stateParams.id
+        };
+      } else {
+        params = { ind: item.partIndex };
       }
+      switch(item.setPartAlias) { 
+        case 'aircraftOther':
+          stateName = 'root.aircrafts.view.others.edit';
+          break;
+        case 'aircraftOwner':
+          stateName = 'root.aircrafts.view.owners.edit';
+          break;
+        case 'aircraftOccurrence':
+          stateName = 'root.aircrafts.view.occurrences.edit';
+          break;
+        case 'aircraftDebtFM':
+          stateName = 'root.aircrafts.view.debtsFM.edit';
+          break;
+        case 'aircraftApplication':
+          stateName = 'root.applications.edit.data';
+          break;
+      }
+
+      return {
+        state: stateName,
+        params: params
+      };
     };
   }
 

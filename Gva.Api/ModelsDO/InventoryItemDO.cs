@@ -10,6 +10,8 @@ namespace Gva.Api.ModelsDO
 
         public int? ParentPartIndex { get; set; }
 
+        public int? ApplicationId { get; set; }
+
         public string Name { get; set; }
 
         public string Type { get; set; }

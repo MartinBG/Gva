@@ -31,6 +31,8 @@ namespace Gva.Api.Repositories.InventoryRepository
                 from df in dfg.DefaultIfEmpty()
                 join gf in this.unitOfWork.DbContext.Set<GvaFile>() on f.GvaFileId equals gf.GvaFileId into gfg
                 from gf in gfg.DefaultIfEmpty()
+                join ga in this.unitOfWork.DbContext.Set<GvaApplication>() on i.PartId equals ga.GvaAppLotPartId into gai
+                from ga in gai.DefaultIfEmpty()
                 select new
                 {
                     i.LotId,
@@ -39,6 +41,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                     SetPartAlias = i.SetPartAlias,
                     PartIndex = i.Part.Index,
                     ParentPartIndex = (int?)i.ParentPart.Index,
+                    ApplicationId = (int?) ga.GvaApplicationId,
                     Name = i.Name,
                     Type = i.Type,
                     Number = i.Number,
@@ -74,6 +77,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                     SetPartAlias = i.SetPartAlias,
                     PartIndex = i.PartIndex,
                     ParentPartIndex = i.ParentPartIndex,
+                    ApplicationId = i.ApplicationId,
                     Name = i.Name,
                     Type = i.Type == null ? null : i.Type.Name,
                     Number = i.Number,

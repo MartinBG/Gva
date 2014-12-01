@@ -17,15 +17,37 @@
       return !item.bookPageNumber;
     });
 
-    $scope.getState = function (setPartAlias) {
-      switch(setPartAlias) { 
-      case 'equipmentOther':
-        return 'root.equipments.view.others.edit';
-      case 'equipmentOwner':
-        return 'root.equipments.view.owners.edit';
-      case 'equipmentApplication':
-        return 'root.equipments.view.applications.edit';
+    $scope.getState = function (item) {
+      var params,
+          stateName;
+
+      if (item.setPartAlias === 'equipmentApplication') {
+        params = { 
+          ind: item.partIndex,
+          id: item.applicationId,
+          set: 'equipment',
+          setPartPath: 'equipmentDocumentApplication',
+          lotId: $stateParams.id
+        };
+      } else {
+        params = { ind: item.partIndex };
       }
+      switch(item.setPartAlias) { 
+        case 'equipmentOther':
+          stateName = 'root.equipments.view.others.edit';
+          break;
+        case 'equipmentOwner':
+          stateName = 'root.equipments.view.owners.edit';
+          break;
+        case 'equipmentApplication':
+          stateName = 'root.applications.edit.data';
+          break;
+      }
+
+      return {
+        state: stateName,
+        params: params
+      };
     };
   }
 

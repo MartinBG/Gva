@@ -396,19 +396,23 @@ namespace Gva.Api.Controllers.Applications
                              select new { appSt = appSt.OrderByDescending(s => s.GvaStageId).FirstOrDefault(), partId = appSt.Key.Value })
                             .ToList();
 
-            var applicationStage = appStages.Where(ap => ap.partId == partVersion.Part.PartId).Single().appSt;
-            this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaStage).Load();
-            this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaApplication).Load();
-
-            partVersion.Content.LotId = applicationStage.GvaApplication.LotId;
-            partVersion.Content.PartIndex = applicationStage.GvaApplication.GvaAppLotPart.Index;
-            partVersion.Content.ApplicationId = applicationStage.GvaApplicationId;
-
-            partVersion.Content.Stage = new NomValue()
+            var stages = appStages.Where(ap => ap.partId == partVersion.Part.PartId);
+            if (stages.Count() > 0)
             {
-                Name = applicationStage.GvaStage.Name,
-                Alias = applicationStage.GvaStage.Alias
-            };
+                var applicationStage = stages.Single().appSt;
+                this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaStage).Load();
+                this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaApplication).Load();
+
+                partVersion.Content.LotId = applicationStage.GvaApplication.LotId;
+                partVersion.Content.PartIndex = applicationStage.GvaApplication.GvaAppLotPart.Index;
+                partVersion.Content.ApplicationId = applicationStage.GvaApplicationId;
+
+                partVersion.Content.Stage = new NomValue()
+                {
+                    Name = applicationStage.GvaStage.Name,
+                    Alias = applicationStage.GvaStage.Alias
+                };
+            }
 
             var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, null);
 

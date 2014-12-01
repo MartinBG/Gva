@@ -4,6 +4,7 @@
 
   function InventorySearchCtrl(
     $scope,
+    $stateParams,
     inventory
   ) {
     $scope.inventory = inventory;
@@ -15,11 +16,22 @@
     });
 
     $scope.getState = function (item) {
-      var params = item.setPartAlias === 'personLicence' ?
-        { ind: item.parentPartIndex, index: item.partIndex } :
-        { ind: item.partIndex },
+      var params,
           stateName;
 
+      if(item.setPartAlias === 'personLicence') {
+        params = { ind: item.parentPartIndex, index: item.partIndex };
+      } else if (item.setPartAlias === 'personApplication') {
+        params = { 
+          ind: item.partIndex,
+          id: item.applicationId,
+          set: 'person',
+          setPartPath: 'personDocumentApplication',
+          lotId: $stateParams.id
+        };
+      } else {
+        params = { ind: item.partIndex };
+      }
       switch (item.setPartAlias) {
         case 'personEducation':
           stateName = 'root.persons.view.documentEducations.edit';
@@ -40,7 +52,7 @@
           stateName = 'root.persons.view.documentOthers.edit';
           break;
         case 'personApplication':
-          stateName = 'root.persons.view.documentApplications.edit';
+          stateName = 'root.applications.edit.data';
           break;
         case 'personEmployment':
           stateName = 'root.persons.view.employments.edit';
@@ -62,6 +74,7 @@
 
   InventorySearchCtrl.$inject = [
     '$scope',
+    '$stateParams',
     'inventory'
   ];
 

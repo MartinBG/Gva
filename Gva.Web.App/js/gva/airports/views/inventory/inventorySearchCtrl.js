@@ -17,15 +17,37 @@
        return !item.bookPageNumber;
     });
     
-    $scope.getState = function (setPartAlias) {
-      switch(setPartAlias) { 
-      case 'airportOther':
-        return 'root.airports.view.others.edit';
-      case 'airportOwner':
-        return 'root.airports.view.owners.edit';
-      case 'airportApplication':
-        return 'root.airports.view.applications.edit';
+    $scope.getState = function (item) {
+      var params,
+          stateName;
+
+      if (item.setPartAlias === 'airportApplication') {
+        params = { 
+          ind: item.partIndex,
+          id: item.applicationId,
+          set: 'airport',
+          setPartPath: 'airportApplication',
+          lotId: $stateParams.id
+        };
+      } else {
+        params = { ind: item.partIndex };
       }
+      switch(item.setPartAlias) { 
+        case 'airportOther':
+          stateName = 'root.airports.view.others.edit';
+          break;
+        case 'airportOwner':
+          stateName = 'root.airports.view.owners.edit';
+          break;
+        case 'airportApplication':
+          stateName = 'root.applications.edit.data';
+          break;
+      }
+
+      return {
+        state: stateName,
+        params: params
+      };
     };
   }
 
