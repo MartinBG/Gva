@@ -3,13 +3,15 @@
   'use strict';
 
   function PersonReportCtrl($scope, Persons, scModal, scMessage, scFormParams) {
+    $scope.hideCaseType = scFormParams.hideCaseType;
+    $scope.isNew = scFormParams.isNew; 
     $scope.includedChecks = [];
     if ($scope.model.part) {
       $scope.model.part.includedChecks = $scope.model.part.includedChecks || [];
       $scope.model.part.includedPersons = $scope.model.part.includedPersons || [];
     }
 
-    if (!scFormParams.isNew && $scope.model.part.includedChecks.length) {
+    if (!$scope.isNew && $scope.model.part.includedChecks.length) {
       Persons
         .getChecksForReport({
           checks: $scope.model.part.includedChecks
@@ -85,7 +87,6 @@
     'scMessage',
     'scFormParams'
   ];
-
 
   angular.module('gva').controller('PersonReportCtrl', PersonReportCtrl);
 }(angular, _));

@@ -17,17 +17,8 @@ namespace Gva.Api.Controllers.Persons
 {
     [RoutePrefix("api/persons/{lotId}/personReports")]
     [Authorize]
-    public class PersonReportsController : GvaCaseTypesPartController<PersonReportDO>
+    public class PersonReportsController : GvaCaseTypePartController<PersonReportDO>
     {
-        private string path;
-        private IUnitOfWork unitOfWork;
-        private UserContext userContext;
-        private INomRepository nomRepository;
-        private ICaseTypeRepository caseTypeRepository;
-        private ILotRepository lotRepository;
-        private IFileRepository fileRepository;
-        private ILotEventDispatcher lotEventDispatcher;
-
         public PersonReportsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
@@ -38,35 +29,14 @@ namespace Gva.Api.Controllers.Persons
             UserContext userContext)
             : base("personReports", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.path = "personReports";
-            this.nomRepository = nomRepository;
-            this.caseTypeRepository = caseTypeRepository;
-            this.lotRepository = lotRepository;
-            this.userContext = userContext;
-            this.fileRepository = fileRepository;
-            this.lotEventDispatcher = lotEventDispatcher;
-            this.unitOfWork = unitOfWork;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewReport(int lotId)
         {
-            var cases = this.caseTypeRepository.GetCaseTypesForSet("person")
-                .Select(ct => new CaseDO()
-                    {
-                        CaseType = new NomValue()
-                        {
-                            NomValueId = ct.GvaCaseTypeId,
-                            Name = ct.Name,
-                            Alias = ct.Alias
-                        },
-                        IsAdded = true
-                    })
-                .ToList();
-
             PersonReportDO newReport = new PersonReportDO();
 
-            return Ok(new CaseTypesPartDO<PersonReportDO>(newReport, cases));
+            return Ok(new CaseTypePartDO<PersonReportDO>(newReport));
         }
     }
 }

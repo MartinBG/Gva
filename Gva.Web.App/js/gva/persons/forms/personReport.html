@@ -1,4 +1,12 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row" ng-if="!hideCaseType">
+    <div class="form-group col-sm-3 col-md-2" sc-has-error="caseType">
+      <label class="control-label" l10n-text="persons.personReportDirective.caseType"></label>
+      <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+      <gva-case-type model="model.case" name="caseType" lot-id="lotId" init="isNew" ng-disabled="!isNew" ng-required="true" case-type="caseTypeId" app-id="appId"></gva-case-type>
+    </div>
+  </div>
+  </div>
   <div class="row">
     <sc-field type="text" ng-model="model.part.reportNumber" ng-required="true" l10n-text="persons.personReportDirective.reportNumber" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="date" ng-model="model.part.date" ng-required="true" l10n-text="persons.personReportDirective.date" class="col-sm-3 col-md-2"></sc-field>

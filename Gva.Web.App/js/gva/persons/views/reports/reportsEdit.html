@@ -20,6 +20,10 @@
 
     <div class="well-sm panel-body">
       <gva-person-report name="reportForm" ng-model="report" sc-form-params="{ isNew: false }"></gva-person-report>
+      
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="report.case"
+        sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
+
     </div>
   </div>
 </ng-form>

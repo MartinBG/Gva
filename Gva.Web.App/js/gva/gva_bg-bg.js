@@ -1530,7 +1530,8 @@
             valid: 'Валидност',
             ratingValue: 'Оценка',
             noChecks: 'Няма налични проверки'
-          }
+          },
+          caseType: 'Тип дело'
         },
         personAddressDirective: {
           addressType: 'Вид',
