@@ -70,18 +70,18 @@
       var state,
         set;
 
-
       if(value.setPartAlias.indexOf('Application') > 0) {
+        state = 'root.applications.edit.data';
         if (value.setPartAlias === 'personApplication') {
-          state = 'root.applications.edit.data';
           set = 'person';
         }
+        else if (value.setPartAlias === 'aircraftApplication') {
+          set = 'organization';
+        }
         else if (value.setPartAlias === 'organizationApplication') {
-          state = 'root.applications.edit.data';
           set = 'organization';
         }
         else if (value.setPartAlias === 'airportApplication') {
-          state = 'root.applications.edit.data';
           set = 'airport';
         }
 
@@ -133,9 +133,6 @@
       else if (value.setPartAlias === 'aircraftOccurrence') {
         state = 'root.aircrafts.view.occurrences.edit';
       }
-      else if (value.setPartAlias === 'aircraftApplication') {
-        state = 'root.aircrafts.view.applications.edit';
-      }
       else if (value.setPartAlias === 'aircraftOther') {
         state = 'root.aircrafts.view.others.edit';
       }
@@ -154,18 +151,8 @@
       else if (value.setPartAlias === 'equipmentOther') {
         state = 'root.equipments.view.others.edit';
       }
-      else if (value.setPartAlias === 'equipmentApplication') {
-        state = 'root.equipments.view.applications.edit';
-      }
       else if (value.setPartAlias === 'equipmentInspection') {
         state = 'root.equipments.view.inspections.edit';
-      }
-
-      if (value.setPartAlias === 'personRating') {
-        state = 'root.persons.view.ratings.edit';
-      }
-      else if (value.setPartAlias === 'personLicence') {
-        state = 'root.persons.view.licences.edit';
       }
       else if (value.setPartAlias === 'aircraftInspection') {
         state = 'root.aircrafts.view.inspections.edit';
