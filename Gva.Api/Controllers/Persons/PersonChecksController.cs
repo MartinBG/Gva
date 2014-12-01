@@ -49,28 +49,18 @@ namespace Gva.Api.Controllers.Persons
         }
 
         [Route("{partIndex}/report")]
-        public RelatedReportDO GetReport(int lotId, int partIndex)
+        public IHttpActionResult GetReport(int lotId, int partIndex)
         {
-            var reports = (from r in this.unitOfWork.DbContext.Set<GvaViewPersonReport>()
-                    join rc in this.unitOfWork.DbContext.Set<GvaViewPersonReportCheck>() on r.LotId equals rc.ReportLotId
-                    where rc.CheckPartIndex == partIndex && rc.CheckLotId == lotId
-                    select r);
+            var report = (from r in this.unitOfWork.DbContext.Set<GvaViewPersonReport>()
+                          join rc in this.unitOfWork.DbContext.Set<GvaViewPersonReportCheck>() on r.LotId equals rc.ReportLotId
+                          where rc.CheckPartIndex == partIndex && rc.CheckLotId == lotId
+                          select new RelatedReportDO() { 
+                            Date = r.Date,
+                            ReportNumber = r.ReportNumber,
+                            Publisher = r.Publisher
+                          }).SingleOrDefault();
 
-            if (reports.Count() > 0)
-            {
-                var report = reports.Single();
-                return new
-                    RelatedReportDO()
-                    {
-                        Date = report.Date,
-                        ReportNumber = report.ReportNumber,
-                        Publisher = report.Publisher
-                    };
-            }
-            else
-            {
-                return null;
-            }
+            return Ok(new { result = report });
         }
     }
 }

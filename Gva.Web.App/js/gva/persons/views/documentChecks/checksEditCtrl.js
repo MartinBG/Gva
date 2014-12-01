@@ -79,9 +79,11 @@
       '$stateParams',
       'PersonDocumentChecks',
       function ($stateParams, PersonDocumentChecks) {
-        return  PersonDocumentChecks
+        return PersonDocumentChecks
           .getReport($stateParams)
-          .$promise;
+          .$promise.then(function (report) {
+            return report.result;
+          });
       }
     ]
   };

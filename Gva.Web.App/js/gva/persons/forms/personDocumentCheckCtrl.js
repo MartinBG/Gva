@@ -8,7 +8,7 @@
     $scope.hideCaseType = scFormParams.hideCaseType;
     $scope.lotId = scFormParams.lotId;
     $scope.appId = scFormParams.appId;
-    if(!$scope.isNew) {
+    if(!$scope.isNew && scFormParams.report !== null) {
       $scope.report = [scFormParams.report];
     }
   }
