@@ -464,7 +464,6 @@ namespace Gva.Api.Controllers.Applications
 
             var gvaApplciations = applicationRepository.GetLinkedToDocsApplications().ToList();
 
-            //docs = docs.Where(e => !gvaApplciations.Any(a => a.DocId.Value == e.DocId)).ToList();
             List<int> excludedDocIds = gvaApplciations.Where(e => e.DocId.HasValue).Select(e => e.DocId.Value).ToList();
 
             List<Doc> docs = this.docRepository.GetCurrentExclusiveCaseDocs(

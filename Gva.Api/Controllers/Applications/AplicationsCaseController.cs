@@ -69,22 +69,6 @@ namespace Gva.Api.Controllers.Applications
                     .SingleOrDefault(e => e.DocFileId == docFileId);
             }
 
-            if (Regex.IsMatch(setPartAlias, "^[a-zA-Z]+Application$"))
-            {
-                Doc doc = this.unitOfWork.DbContext.Set<Doc>().Find(docId);
-
-                var newAppPart = new PartDO<DocumentApplicationDO>()
-                {
-                    Part = new DocumentApplicationDO()
-                    {
-                        DocumentNumber = doc.RegUri
-                    },
-                    Case = new DocCaseDO(docFile, caseType)
-                };
-
-                return Ok(newAppPart);
-            }
-
             if (docFile != null &&
                 docFile.DocFileOriginType != null &&
                 docFile.DocFileOriginType.Alias == "EApplicationAttachedFile")
@@ -114,11 +98,6 @@ namespace Gva.Api.Controllers.Applications
 
                 PartVersion<JObject> partVersion = lot.CreatePart(path, linkNewPart.Part, this.userContext);
                 lot.Commit(this.userContext, lotEventDispatcher);
-
-                if (Regex.IsMatch(setPart.Alias, @"\w+(Application)"))
-                {
-                    application.GvaAppLotPart = partVersion.Part;
-                }
 
                 DocFile docFile;
                 if (linkNewPart.Case.DocFileId.HasValue)
@@ -193,11 +172,6 @@ namespace Gva.Api.Controllers.Applications
 
                 if (gvaLotFile != null)
                 {
-                    if (Regex.IsMatch(gvaLotFile.LotPart.SetPart.Alias, @"\w+(Application)"))
-                    {
-                        application.GvaAppLotPart = gvaLotFile.LotPart;
-                    }
-
                     GvaAppLotFile gvaAppLotFile = this.unitOfWork.DbContext.Set<GvaAppLotFile>()
                         .Include(e => e.DocFile)
                         .FirstOrDefault(e => e.GvaApplicationId == id && e.GvaLotFileId == gvaLotFile.GvaLotFileId);
