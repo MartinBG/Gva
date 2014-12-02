@@ -3,8 +3,12 @@
   'use strict';
 
   function AircraftDataCtrl($scope, Aircrafts, scFormParams) {
-    $scope.isUniqueMSN = function (msn) {
-      return Aircrafts.checkMSN({ msn: msn, aircraftId: scFormParams.lotId }).$promise
+    $scope.isUniqueMSN = function () {
+      return Aircrafts.checkMSN({
+        msn: $scope.model.manSN,
+        aircraftId: scFormParams.lotId
+      })
+        .$promise
         .then(function (data) {
           return data.isValid;
         });

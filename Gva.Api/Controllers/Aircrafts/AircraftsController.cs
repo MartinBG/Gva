@@ -114,7 +114,7 @@ namespace Gva.Api.Controllers
 
         [HttpGet]
         [Route("checkMSN")]
-        public IHttpActionResult checkMSN(string msn, int? aircraftId = null)
+        public IHttpActionResult CheckMSN(string msn, int? aircraftId = null)
         {
             bool isValid = this.aircraftRepository.IsUniqueMSN(msn, aircraftId);
 
