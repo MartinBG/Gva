@@ -26,7 +26,6 @@
           ind: item.partIndex,
           id: item.applicationId,
           set: 'equipment',
-          setPartPath: 'equipmentDocumentApplication',
           lotId: $stateParams.id
         };
       } else {

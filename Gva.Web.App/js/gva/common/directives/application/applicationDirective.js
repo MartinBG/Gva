@@ -78,7 +78,6 @@
         modalInstance.result.then(function () {
           var stateName = 'root.applications.edit.data',
             params = {
-              setPartPath: setPart + 'DocumentApplications',
               set: setPart,
               id: applicationId,
               lotId: lotId,

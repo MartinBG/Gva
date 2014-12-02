@@ -59,8 +59,7 @@
           id: appId,
           set: 'person',
           lotId: lotId,
-          ind: partIndex,
-          setPartPath: 'personDocumentApplications'
+          ind: partIndex
         });
       });
 

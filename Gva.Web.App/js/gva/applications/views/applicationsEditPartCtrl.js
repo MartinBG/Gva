@@ -29,7 +29,7 @@
       return $scope.editDocumentApplicationForm.$validate().then(function () {
         if ($scope.editDocumentApplicationForm.$valid) {
           return Applications.editAppPart({
-            path: $stateParams.setPartPath,
+            path: $scope.set + 'DocumentApplications',
             lotId: $scope.lotId,
             ind: $stateParams.ind
           },

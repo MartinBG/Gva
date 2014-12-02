@@ -10,7 +10,6 @@
     ) {
     $scope.application = application;
     $scope.set = $stateParams.set;
-    $scope.setPartPath = $stateParams.set + 'DocumentApplications';
 
     $scope.viewPerson = function (id) {
       return $state.go('root.persons.view', {

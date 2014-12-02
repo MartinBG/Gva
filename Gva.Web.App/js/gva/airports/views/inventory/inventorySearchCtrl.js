@@ -26,7 +26,6 @@
           ind: item.partIndex,
           id: item.applicationId,
           set: 'airport',
-          setPartPath: 'airportApplication',
           lotId: $stateParams.id
         };
       } else {

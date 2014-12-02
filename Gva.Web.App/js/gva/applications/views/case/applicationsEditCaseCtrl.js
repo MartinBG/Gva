@@ -76,7 +76,7 @@
           set = 'person';
         }
         else if (value.setPartAlias === 'aircraftApplication') {
-          set = 'organization';
+          set = 'aircraft';
         }
         else if (value.setPartAlias === 'organizationApplication') {
           set = 'organization';
@@ -89,7 +89,6 @@
           id: application.applicationId,
           ind: value.partIndex,
           lotId: application.lotId,
-          setPartPath: set + 'DocumentApplications',
           set: set
         });
       }

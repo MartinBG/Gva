@@ -26,7 +26,6 @@
           ind: item.partIndex,
           id: item.applicationId,
           set: 'person',
-          setPartPath: 'personDocumentApplication',
           lotId: $stateParams.id
         };
       } else {

@@ -40,8 +40,7 @@
           id: application.applicationId,
           set: $stateParams.set,
           lotId: application.lotId,
-          ind: application.appPartIndex,
-          setPartPath: $stateParams.set + 'DocumentApplications'
+          ind: application.appPartIndex
         });
     };
 

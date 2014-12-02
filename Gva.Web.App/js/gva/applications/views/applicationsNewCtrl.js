@@ -173,7 +173,6 @@
       .then(function () {
         if ($scope.appForm.$valid) {
           var newApplication = {
-            setPartPath: null,
             lotId: $scope.application.lot.id,
             correspondents: $scope.application.docCorrespondents,
             applicationType: $scope.application.applicationType,
@@ -183,7 +182,6 @@
 
           return Applications.create(newApplication).$promise.then(function (gvaApp) {
             return $state.go('root.applications.edit.data', {
-              setPartPath: newApplication.setPartPath,
               set: $scope.set,
               ind: gvaApp.partIndex,
               lotId: gvaApp.lotId,
