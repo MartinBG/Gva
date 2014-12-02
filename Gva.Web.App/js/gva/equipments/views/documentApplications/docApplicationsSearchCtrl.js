@@ -39,7 +39,7 @@
       '$stateParams',
       'EquipmentDocumentApplications',
       function ($stateParams, EquipmentDocumentApplications) {
-        return EquipmentDocumentApplications.query({id: $stateParams.id}).$promise;
+        return EquipmentDocumentApplications.query($stateParams).$promise;
       }
     ]
   };
