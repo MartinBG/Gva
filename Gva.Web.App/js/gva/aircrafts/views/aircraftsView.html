@@ -68,7 +68,7 @@
   </form>
 
   <div ng-if="application" class="alert alert-info" style="margin-bottom: 10px; padding: 7px 10px;">
-    <a ng-click="viewApplication(application.applicationId)" class="alert-link" style="cursor: pointer;"><span l10n-text="aircrafts.viewAircraft.viewApplication"></span>{{ application.applicationName }}</a>
+    <a ng-click="viewApplication(application.applicationId)" class="alert-link" style="cursor: pointer;"><span l10n-text="aircrafts.viewAircraft.viewApplication"></span>{{ application.applicationCode + ' ' + application.documentNumber }}</a>
   </div>
 
   <sc-tabs tab-list="{
