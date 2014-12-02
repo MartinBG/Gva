@@ -32,7 +32,7 @@
         <td ng-if="!item.hasAppFile"><a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" sc-access-token title="{{item.file.name}}">{{item.file.name}}</a></td>
         <td>
           <div ng-if="item.hasAppFile">
-            <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</a>
+            <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <div ng-if="item.pageIndex"><span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</div></a>
           </div>
           <div ng-if="!item.hasAppFile">
             <a ng-click="linkNew(adc.docId, item.docFileId)" l10n-text="applications.edit.case.linkNew"></a> / <a ng-click="linkPart(item.docFileId)" l10n-text="applications.edit.case.linkPart"></a>
@@ -57,7 +57,7 @@
         <td></td>
         <td>{{ item.setPartName }} <a ng-href="{{item.fileUrl}}" target="_blank"><span>{{ item.file.name }}</span></a></td>
         <td>
-          <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</a>
+          <a ng-click="viewPart(item)">{{ item.gvaCaseTypeName }} <div ng-if="item.pageIndex"><span l10n-text="applications.edit.case.page"></span>{{ item.pageIndex }}</div></a>
         </td>
         <td></td>
       </tr>
