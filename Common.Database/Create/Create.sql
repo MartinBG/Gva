@@ -79,6 +79,10 @@ GO
 ---------------------------------------------------------------
 
 :r $(rootPath)\"..\Insert\Noms\boolean.sql"
+:r $(rootPath)\"..\Insert\Addresses\districts.sql"
+:r $(rootPath)\"..\Insert\Addresses\municipalities.sql"
+:r $(rootPath)\"..\Insert\Addresses\settlements.sql"
+:r $(rootPath)\"..\Insert\Addresses\countries.sql"
 :r $(rootPath)\"..\Insert\TestBlobs.sql"
 :r $(rootPath)\"..\Insert\TestUsers.sql"
 

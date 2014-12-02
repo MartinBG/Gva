@@ -408,7 +408,7 @@ namespace Gva.Rio.IncomingDocProcessor
                         if (!String.IsNullOrWhiteSpace(foreignerCountryCode))
                         {
                             var country = this.unitOfWork.DbContext.Set<Country>()
-                                .SingleOrDefault(e => e.Alpha2Code == foreignerCountryCode);
+                                .SingleOrDefault(e => e.Code == foreignerCountryCode);
                             foreignerCountryId = country != null ? country.CountryId : (int?)null;
                         }
 
@@ -487,7 +487,7 @@ namespace Gva.Rio.IncomingDocProcessor
                         if (!String.IsNullOrWhiteSpace(fLegalEntityCountryCode))
                         {
                             var country = this.unitOfWork.DbContext.Set<Country>()
-                                .SingleOrDefault(e => e.Alpha2Code == fLegalEntityCountryCode);
+                                .SingleOrDefault(e => e.Code == fLegalEntityCountryCode);
                             fLegalEntityCountryId = country != null ? country.CountryId : (int?)null;
                         }
 

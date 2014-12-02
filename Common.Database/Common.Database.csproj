@@ -78,7 +78,11 @@
     <Content Include="Create\Tools\spDesc.sql" />
     <Content Include="Create\Tools\sp_generate_inserts.sql" />
     <Content Include="Create\Tools\Tool_ScriptDiagram2008.sql" />
+    <Content Include="Insert\Addresses\countries.sql" />
     <Content Include="Insert\Noms\boolean.sql" />
+    <Content Include="Insert\Addresses\districts.sql" />
+    <Content Include="Insert\Addresses\municipalities.sql" />
+    <Content Include="Insert\Addresses\settlements.sql" />
     <Content Include="Insert\TestBlobs.sql" />
     <Content Include="Insert\TestUsers.sql" />
     <Content Include="Create\Functions\ufnGetNomValuesByTextContentProperty.sql" />

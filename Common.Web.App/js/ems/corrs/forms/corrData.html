@@ -21,7 +21,7 @@
     </div>
 
     <!--BgCitizen-->
-    <div class="row" ng-show="model.correspondentType.alias == 'BulgarianCitizen'">
+    <div class="row" ng-show="model.correspondentType.alias === 'BulgarianCitizen'">
       <div class="form-group col-sm-4" sc-has-error="bgCitizenFirstName">
         <label class="control-label" l10n-text="corrs.edit.bgCitizenFirstName"></label>
         <sc-validation-error field-name="bgCitizenFirstName" validations="{required: 'default'}"></sc-validation-error>
@@ -39,7 +39,7 @@
     </div>
 
     <!--Foreigner-->
-    <div class="row" ng-show="model.correspondentType.alias == 'Foreigner'">
+    <div class="row" ng-show="model.correspondentType.alias === 'Foreigner'">
       <div class="form-group col-sm-4" sc-has-error="foreignerFirstName">
         <label class="control-label" l10n-text="corrs.edit.foreignerFirstName"></label>
         <sc-validation-error field-name="foreignerFirstName" validations="{required: 'default'}"></sc-validation-error>
@@ -55,19 +55,13 @@
         <sc-date ng-model="model.foreignerBirthDate"></sc-date>
       </div>
     </div>
-    <div class="row" ng-show="model.correspondentType.alias == 'Foreigner'">
-      <div class="form-group col-sm-4">
-        <label class="control-label" l10n-text="corrs.edit.foreignerCountry"></label>
-        <sc-nomenclature ng-model="model.foreignerCountry" alias="'countries'"></sc-nomenclature>
-      </div>
-      <div class="form-group col-sm-4">
-        <label class="control-label" l10n-text="corrs.edit.foreignerSettlement"></label>
-        <sc-text ng-model="model.foreignerSettlement"></sc-text>
-      </div>
+    <div class="row" ng-show="model.correspondentType.alias === 'Foreigner'">
+      <sc-field type="nomenclature" ng-model="model.foreignerCountryId" nom-obj="model.foreignerCountry" alias="'docsCountries'" mode="id" l10n-text="corrs.edit.foreignerCountry" class="col-sm-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.foreignerSettlementId" nom-obj="model.foreignerSettlement" alias="'docsSettlements'" mode="id" l10n-text="corrs.edit.foreignerSettlement" class="col-sm-4"></sc-field>
     </div>
 
     <!--LegalEntity-->
-    <div class="row" ng-show="model.correspondentType.alias == 'LegalEntity'">
+    <div class="row" ng-show="model.correspondentType.alias === 'LegalEntity'">
       <div class="form-group col-sm-4" sc-has-error="legalEntityName">
         <label class="control-label" l10n-text="corrs.edit.legalEntityName"></label>
         <sc-validation-error field-name="legalEntityName" validations="{required: 'default'}"></sc-validation-error>
@@ -81,18 +75,15 @@
     </div>
 
     <!--ForeignLegalEntity-->
-    <div class="row" ng-show="model.correspondentType.alias == 'ForeignLegalEntity'">
+    <div class="row" ng-show="model.correspondentType.alias === 'ForeignLegalEntity'">
       <div class="form-group col-sm-4" sc-has-error="fLegalEntityName">
         <label class="control-label" l10n-text="corrs.edit.fLegalEntityName"></label>
         <sc-validation-error field-name="fLegalEntityName" validations="{required: 'default'}"></sc-validation-error>
-        <sc-text name="fLegalEntityName" ng-model="model.fLegalEntityName" ng-required="model.correspondentType.alias == 'ForeignLegalEntity'"></sc-text>
+        <sc-text name="fLegalEntityName" ng-model="model.fLegalEntityName" ng-required="model.correspondentType.alias === 'ForeignLegalEntity'"></sc-text>
       </div>
-      <div class="form-group col-sm-4">
-        <label class="control-label" l10n-text="corrs.edit.fLegalEntityCountry"></label>
-        <sc-nomenclature ng-model="model.fLegalEntityCountryId" alias="'countries'"></sc-nomenclature>
-      </div>
+      <sc-field type="nomenclature" ng-model="model.fLegalEntityCountryId" nom-obj="model.fLegalEntityCountry" alias="'docsCountries'" mode="id" l10n-text="corrs.edit.fLegalEntityCountry" class="col-sm-4"></sc-field>
     </div>
-    <div class="row" ng-show="model.correspondentType.alias == 'ForeignLegalEntity'">
+    <div class="row" ng-show="model.correspondentType.alias === 'ForeignLegalEntity'">
       <div class="form-group col-sm-4">
         <label class="control-label" l10n-text="corrs.edit.fLegalEntityRegisterName"></label>
         <sc-text ng-model="model.fLegalEntityRegisterName"></sc-text>
@@ -102,7 +93,7 @@
         <sc-text ng-model="model.fLegalEntityRegisterNumber"></sc-text>
       </div>
     </div>
-    <div class="row" ng-show="model.correspondentType.alias == 'ForeignLegalEntity'">
+    <div class="row" ng-show="model.correspondentType.alias === 'ForeignLegalEntity'">
       <div class="form-group col-sm-8">
         <label class="control-label" l10n-text="corrs.edit.fLegalEntityOtherData"></label>
         <textarea ng-model="model.fLegalEntityOtherData" class="form-control" rows="3"></textarea>
@@ -110,10 +101,7 @@
     </div>
 
     <div class="row">
-      <div class="form-group col-sm-4">
-        <label class="control-label" l10n-text="corrs.edit.contactSettlementId"></label>
-        <sc-nomenclature ng-model="model.contactSettlementId" nom-obj="model.contactSettlement" mode="id" alias="'cities'"></sc-nomenclature>
-      </div>
+      <sc-field type="nomenclature" alias="'docsSettlements'" ng-model="model.contactSettlementId" nom-obj="model.contactSettlement" mode="id" l10n-text="corrs.edit.contactSettlementId" class="col-sm-4"></sc-field>
       <div class="form-group col-sm-4">
         <label class="control-label" l10n-text="corrs.edit.contactPostCode"></label>
         <sc-text ng-model="model.contactPostCode"></sc-text>

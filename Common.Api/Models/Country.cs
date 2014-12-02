@@ -12,11 +12,7 @@ namespace Common.Api.Models
 
         public string Name { get; set; }
 
-        public string NumericCode { get; set; }
-
-        public string Alpha3Code { get; set; }
-
-        public string Alpha2Code { get; set; }
+        public string Code { get; set; }
 
         public string Alias { get; set; }
 
@@ -39,15 +35,7 @@ namespace Common.Api.Models
                 .IsRequired()
                 .HasMaxLength(200);
 
-            this.Property(t => t.NumericCode)
-                .IsRequired()
-                .HasMaxLength(50);
-
-            this.Property(t => t.Alpha3Code)
-                .IsRequired()
-                .HasMaxLength(50);
-
-            this.Property(t => t.Alpha2Code)
+            this.Property(t => t.Code)
                 .IsRequired()
                 .HasMaxLength(50);
 
@@ -64,9 +52,7 @@ namespace Common.Api.Models
             this.ToTable("Countries");
             this.Property(t => t.CountryId).HasColumnName("CountryId");
             this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.NumericCode).HasColumnName("NumericCode");
-            this.Property(t => t.Alpha3Code).HasColumnName("Alpha3Code");
-            this.Property(t => t.Alpha2Code).HasColumnName("Alpha2Code");
+            this.Property(t => t.Code).HasColumnName("Code");
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.Description).HasColumnName("Description");
             this.Property(t => t.IsActive).HasColumnName("IsActive");

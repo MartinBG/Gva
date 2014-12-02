@@ -1019,5 +1019,87 @@ namespace Docs.Api.Controllers
 
             return Ok(results);
         }
+
+        [Route("docsSettlements/{id:int}")]
+        public IHttpActionResult GetSettlement(int id)
+        {
+            var result = this.unitOfWork.DbContext.Set<Settlement>()
+                .Where(e => e.SettlementId == id)
+                .SingleOrDefault();
+
+            return Ok(new
+            {
+                nomValueId = result.SettlementId,
+                name = result.Name,
+                alias = result.Alias,
+                isActive = result.IsActive
+            });
+        }
+
+        [Route("docsSettlements")]
+        public IHttpActionResult GetSettlements(string term = null, int offset = 0, int? limit = null)
+        {
+            var predicate =
+                PredicateBuilder.True<Settlement>()
+                .AndStringContains(e => e.Name, term)
+                .And(e => e.IsActive);
+
+            var results =
+                this.unitOfWork.DbContext.Set<Settlement>()
+                .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
+                .Select(e => new
+                {
+                    nomValueId = e.SettlementId,
+                    name = e.Name,
+                    alias = e.Alias,
+                    isActive = e.IsActive
+                })
+                .ToList();
+
+            return Ok(results);
+        }
+
+        [Route("docsCountries/{id:int}")]
+        public IHttpActionResult GetCountry(int id)
+        {
+            var result = this.unitOfWork.DbContext.Set<Country>()
+                .Where(e => e.CountryId == id)
+                .SingleOrDefault();
+
+            return Ok(new
+            {
+                nomValueId = result.CountryId,
+                name = result.Name,
+                alias = result.Alias,
+                isActive = result.IsActive
+            });
+        }
+
+        [Route("docsCountries")]
+        public IHttpActionResult GetCountries(string term = null, int offset = 0, int? limit = null)
+        {
+            var predicate =
+                PredicateBuilder.True<Country>()
+                .AndStringContains(e => e.Name, term)
+                .And(e => e.IsActive);
+
+            var results =
+                this.unitOfWork.DbContext.Set<Country>()
+                .Where(predicate)
+                .OrderBy(e => e.Name)
+                .WithOffsetAndLimit(offset, limit)
+                .Select(e => new
+                {
+                    nomValueId = e.CountryId,
+                    name = e.Name,
+                    alias = e.Alias,
+                    isActive = e.IsActive
+                })
+                .ToList();
+
+            return Ok(results);
+        }
     }
 }
