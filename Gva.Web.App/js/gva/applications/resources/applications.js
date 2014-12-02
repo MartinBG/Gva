@@ -17,19 +17,17 @@
             },
             getAppPart: {
               method: 'GET',
-              url: 'api/apps/appPart/:lotId/:path/:ind',
+              url: 'api/apps/appPart/:lotId/:ind',
               params: {
                 lotId: '@lotId',
-                path: '@path',
                 ind: '@ind'
               }
             },
             editAppPart: {
               method: 'POST',
-              url: 'api/apps/appPart/:lotId/:path/:ind',
+              url: 'api/apps/appPart/:lotId/:ind',
               params: {
                 lotId: '@lotId',
-                path: '@path',
                 ind: '@ind'
               }
             },

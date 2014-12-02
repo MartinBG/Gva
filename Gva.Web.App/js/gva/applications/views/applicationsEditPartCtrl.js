@@ -29,7 +29,6 @@
       return $scope.editDocumentApplicationForm.$validate().then(function () {
         if ($scope.editDocumentApplicationForm.$valid) {
           return Applications.editAppPart({
-            path: $scope.set + 'DocumentApplications',
             lotId: $scope.lotId,
             ind: $stateParams.ind
           },
@@ -55,7 +54,6 @@
       'Applications',
       function ($stateParams, Applications) {
         return Applications.getAppPart({
-          path: $stateParams.set + 'DocumentApplications',
           lotId: $stateParams.lotId,
           ind: $stateParams.ind
         }).$promise;

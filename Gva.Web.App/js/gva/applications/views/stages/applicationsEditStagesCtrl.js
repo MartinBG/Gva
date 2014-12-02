@@ -154,7 +154,6 @@
       'application',
       function ($stateParams, Applications, application) {
         return Applications.getAppPart({
-          path: angular.lowercase(application.lotSetAlias) + 'DocumentApplications',
           lotId: application.lotId,
           ind: application.partIndex
         }).$promise;

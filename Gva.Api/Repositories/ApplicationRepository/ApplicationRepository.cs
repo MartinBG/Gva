@@ -327,5 +327,38 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
             return partVersionDOs;
         }
+
+        public CaseTypePartDO<DocumentApplicationDO> GetApplicationPart(string path, int lotId)
+        {
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
+            var appStages = (from gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                             join ga in this.unitOfWork.DbContext.Set<GvaApplication>()
+                             .Where(a => a.LotId == lotId) on gas.GvaApplicationId equals ga.GvaApplicationId
+                             group gas by ga.GvaAppLotPartId into appSt
+                             select new { appSt = appSt.OrderByDescending(s => s.GvaStageId).FirstOrDefault(), partId = appSt.Key.Value })
+                            .ToList();
+
+            var stages = appStages.Where(ap => ap.partId == partVersion.Part.PartId);
+            if (stages.Count() > 0)
+            {
+                var applicationStage = stages.Single().appSt;
+                this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaStage).Load();
+                this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaApplication).Load();
+
+                partVersion.Content.LotId = applicationStage.GvaApplication.LotId;
+                partVersion.Content.PartIndex = applicationStage.GvaApplication.GvaAppLotPart.Index;
+                partVersion.Content.ApplicationId = applicationStage.GvaApplicationId;
+
+                partVersion.Content.Stage = new NomValue()
+                {
+                    Name = applicationStage.GvaStage.Name,
+                    Alias = applicationStage.GvaStage.Alias
+                };
+            }
+
+            var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, null);
+
+            return new CaseTypePartDO<DocumentApplicationDO>(partVersion, lotFile);
+        }
     }
 }

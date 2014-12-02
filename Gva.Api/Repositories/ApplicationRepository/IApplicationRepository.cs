@@ -53,5 +53,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
         ApplicationNomDO GetInitApplication(int? applicationId);
 
         List<CaseTypePartDO<DocumentApplicationDO>> GetApplicationsForLot(int lotId, string path, int? caseTypeId = null);
+
+        CaseTypePartDO<DocumentApplicationDO> GetApplicationPart(string path, int lotId);
     }
 }

@@ -34,7 +34,6 @@
       function (Applications, scModalParams) {
         return Applications.getAppPart({
           lotId: scModalParams.lotId,
-          path: scModalParams.path,
           ind: scModalParams.partIndex
         }).$promise;
       }

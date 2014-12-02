@@ -381,54 +381,23 @@ namespace Gva.Api.Controllers.Applications
             }
         }
 
-        [Route(@"appPart/{lotId}/{*path:regex(^aircraftDocumentApplications/\d+$)}"),
-         Route(@"appPart/{lotId}/{*path:regex(^airportDocumentApplications/\d+$)}"),
-         Route(@"appPart/{lotId}/{*path:regex(^equipmentDocumentApplications/\d+$)}"),
-         Route(@"appPart/{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}"),
-         Route(@"appPart/{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
-        public IHttpActionResult GetApplicationPart(string path, int lotId)
+        [Route(@"appPart/{lotId}/{partIndex}")]
+        public IHttpActionResult GetApplicationPart(int lotId, int partIndex)
         {
-            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
-            var appStages = (from gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>()
-                             join ga in this.unitOfWork.DbContext.Set<GvaApplication>()
-                             .Where(a => a.LotId == lotId) on gas.GvaApplicationId equals ga.GvaApplicationId
-                             group gas by ga.GvaAppLotPartId into appSt
-                             select new { appSt = appSt.OrderByDescending(s => s.GvaStageId).FirstOrDefault(), partId = appSt.Key.Value })
-                            .ToList();
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            string path = string.Format("{0}DocumentApplications/{1}", lot.Set.Alias.ToLower(), partIndex);
 
-            var stages = appStages.Where(ap => ap.partId == partVersion.Part.PartId);
-            if (stages.Count() > 0)
-            {
-                var applicationStage = stages.Single().appSt;
-                this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaStage).Load();
-                this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaApplication).Load();
-
-                partVersion.Content.LotId = applicationStage.GvaApplication.LotId;
-                partVersion.Content.PartIndex = applicationStage.GvaApplication.GvaAppLotPart.Index;
-                partVersion.Content.ApplicationId = applicationStage.GvaApplicationId;
-
-                partVersion.Content.Stage = new NomValue()
-                {
-                    Name = applicationStage.GvaStage.Name,
-                    Alias = applicationStage.GvaStage.Alias
-                };
-            }
-
-            var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, null);
-
-            return Ok(new CaseTypePartDO<DocumentApplicationDO>(partVersion, lotFile));
+            return Ok(this.applicationRepository.GetApplicationPart(path, lotId));
         }
 
-        [Route(@"appPart/{lotId}/{*path:regex(^aircraftDocumentApplications/\d+$)}"),
-         Route(@"appPart/{lotId}/{*path:regex(^airportDocumentApplications/\d+$)}"),
-         Route(@"appPart/{lotId}/{*path:regex(^equipmentDocumentApplications/\d+$)}"),
-         Route(@"appPart/{lotId}/{*path:regex(^organizationDocumentApplications/\d+$)}"),
-         Route(@"appPart/{lotId}/{*path:regex(^personDocumentApplications/\d+$)}")]
-        public IHttpActionResult PostApplicationPart(string path, int lotId, CaseTypePartDO<DocumentApplicationDO> application)
+        [Route(@"appPart/{lotId}/{partIndex}")]
+        public IHttpActionResult PostApplicationPart(int lotId, int partIndex, CaseTypePartDO<DocumentApplicationDO> application)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
+                string path = string.Format("{0}DocumentApplications/{1}", lot.Set.Alias.ToLower(), partIndex);
+
                 PartVersion<DocumentApplicationDO> partVersion = lot.UpdatePart(path, application.Part, this.userContext);
 
                 this.fileRepository.AddFileReference(partVersion.Part, application.Case);
