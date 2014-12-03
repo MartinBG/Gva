@@ -1,4 +1,4 @@
-﻿<ng-form sc-validate="{}" sc-form-readonly>
+﻿<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="col-sm-12 col-md-6" ng-class="{ 'has-error': form.$validated && !form.$readonly && (form['inspectorType'].$invalid || form['inspector'].$invalid || form['examiner'].$invalid || form['other'].$invalid) }">
     <label class="control-label" l10n-text="aircrafts.inspectorDirective.checkedBy"></label>
     <sc-validation-error field-name="inspectorType" validations="{required: null}"></sc-validation-error>
