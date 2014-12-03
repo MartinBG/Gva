@@ -10,7 +10,7 @@
   <div class="well-sm panel-body">
     <div class="row">
       <div class="form-group col-sm-9">
-        <sc-nomenclature ng-model="searchParams.documentParts" alias="'documentParts'" multiple="multiple" params="{set: 'equipment'}"></sc-nomenclature>
+        <sc-nomenclature ng-model="searchParams.documentParts" alias="'documentParts'" multiple="multiple" params="{set: 'equipment', withApplications: true}"></sc-nomenclature>
       </div>
       <sc-button name="searchBtn" btn-click="search()" text="equipments.chooseDocumentsModal.search" class="btn btn-sm btn-primary" icon="glyphicon-search"></sc-button>
     </div>

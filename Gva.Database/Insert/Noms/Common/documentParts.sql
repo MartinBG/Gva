@@ -14,18 +14,23 @@ VALUES
     (@nomId , N'personTraining'         , N'Обучение'               , NULL     , 1              , N'personTraining'         , 1         , NULL         ),
     (@nomId , N'personLangCert'         , N'Свидетелство за език'   , NULL     , 1              , N'personLangCert'         , 1         , NULL         ),
     (@nomId , N'personOther'            , N'Друг документ'          , NULL     , 1              , N'personOther'            , 1         , NULL         ),
+    (@nomId , N'personApplication'      , N'Заявление'              , NULL     , 1              , N'personApplication'      , 1         , NULL         ),
     (@nomId , N'personReport'           , N'Отчет'                  , NULL     , 1              , N'personReport'           , 1         , NULL         ),
 
     (@nomId , N'organizationOther'      , N'Друг документ'          , NULL     , 2              , N'organizationOther'      , 1         , NULL         ),
+    (@nomId , N'organizationApplication', N'Заявление'              , NULL     , 2              , N'organizationApplication', 1         , NULL         ),
 
     (@nomId , N'aircraftOwner'          , N'Свързано лице'          , NULL     , 3              , N'aircraftOwner'          , 1         , NULL         ),
     (@nomId , N'aircraftDebtFM'         , N'Тежест'                 , NULL     , 3              , N'aircraftDebtFM'         , 1         , NULL         ),
     (@nomId , N'aircraftOccurrence'     , N'Инцидент'               , NULL     , 3              , N'aircraftOccurrence'     , 1         , NULL         ),
+    (@nomId , N'aircraftApplication'    , N'Заявление'              , NULL     , 3              , N'aircraftApplication'    , 1         , NULL         ),
     (@nomId , N'aircraftOther'          , N'Друг документ'          , NULL     , 3              , N'aircraftOther'          , 1         , NULL         ),
 
     (@nomId , N'airportOwner'           , N'Свързано лице'          , NULL     , 4              , N'airportOwner'           , 1         , NULL         ),
     (@nomId , N'airportOther'           , N'Друг документ'          , NULL     , 4              , N'airportOther'           , 1         , NULL         ),
+    (@nomId , N'airportApplication'     , N'Заявление'              , NULL     , 4              , N'airportApplication'     , 1         , NULL         ),
 
     (@nomId , N'equipmentOwner'         , N'Свързано лице'          , NULL     , 5              , N'equipmentOwner'         , 1         , NULL         ),
-    (@nomId , N'equipmentOther'         , N'Друг документ'          , NULL     , 5              , N'equipmentOther'         , 1         , NULL         )
+    (@nomId , N'equipmentOther'         , N'Друг документ'          , NULL     , 5              , N'equipmentOther'         , 1         , NULL         ),
+    (@nomId , N'equipmentApplication'   , N'Заявление'              , NULL     , 5              , N'equipmentApplication'   , 1         , NULL         )
 GO

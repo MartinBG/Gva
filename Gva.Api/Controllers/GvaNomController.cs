@@ -559,9 +559,17 @@ namespace Gva.Api.Controllers
         }
 
         [Route("documentParts")]
-        public IHttpActionResult GetDocumentParts(string term = null, string set = null, int? parentValueId = null)
+        public IHttpActionResult GetDocumentParts(string term = null, string set = null, int? parentValueId = null, bool withApplications = false)
         {
-            IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("documentParts", term);
+            IEnumerable<NomValue> nomValues  = null;
+            if (withApplications)
+            {
+                nomValues = this.nomRepository.GetNomValues("documentParts", term);
+            }
+            else
+            {
+                nomValues = this.nomRepository.GetNomValues("documentParts", term).Where(nv => !nv.Code.Contains("Application"));
+            }
 
             if (!string.IsNullOrEmpty(set))
             {
