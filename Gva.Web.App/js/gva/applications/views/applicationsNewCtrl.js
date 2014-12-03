@@ -80,8 +80,8 @@
         }
         else if (isOrgSelect) {
           params.org = {
-            name: d.part.name,
-            uin: d.part.uin
+            name: d.name,
+            uin: d.uin
           };
         }
 
@@ -122,16 +122,16 @@
         if (isPersonSelect) {
           corr.displayName = d.personData.firstName + ' ' + d.personData.lastName;
           if (d.personData.uin) {
-            corr.displayName = corr.displayName + ' ' + d.personData.uin;
+            corr.displayName += ' ' + d.personData.uin;
           }
           if (d.personData.email) {
             corr.email = d.personData.email;
           }
         }
         if (isOrgSelect) {
-          corr.displayName = d.part.name;
-          if (d.part.uin) {
-            corr.displayName = corr.displayName + ' ' + d.part.uin;
+          corr.displayName = d.name;
+          if (d.uin) {
+            corr.displayName += ' ' + d.uin;
           }
         }
 
