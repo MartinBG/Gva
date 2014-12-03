@@ -2677,17 +2677,6 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
-        link: {
-          title: 'Свързване на заявление',
-          selectDoc: 'Избор на документ',
-          cancel: 'Отказ',
-          clear: 'Изчисти',
-          document: 'Документ',
-          docNumber: 'Рег.№',
-          docStatus: 'Статус',
-          docName: 'Име',
-          link: 'Свържи'
-        },
         equipmentSelect: {
           equipment: 'Съоръжение',
           newEquipment: 'Ново съоръжение'
@@ -2834,7 +2823,6 @@
           toDate: 'До дата',
           search: 'Търси',
           newApp: 'Ново',
-          linkApp: 'Свържи',
           lotSetName: 'Партида',
           documentNumber: '№ на документ',
           applicationType: 'Тип заявление',
@@ -3617,7 +3605,6 @@
         'root.applications': 'Заявления',
         'root.applications.new': 'Ново заявление',
         'root.applications.new.editApp': 'Преглед',
-        'root.applications.link': 'Свържи заявление',
         'root.applications.edit': 'Преглед',
         'root.applications.edit.data': 'Данни на заявление',
         'root.applications.edit.case': 'Преписка',

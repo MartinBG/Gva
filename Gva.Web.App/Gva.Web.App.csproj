@@ -303,8 +303,6 @@
     <Content Include="js\gva\applications\views\case\applicationsEditNewFileCtrl.js" />
     <Content Include="js\gva\applications\views\stages\applicationsEditStages.html" />
     <Content Include="js\gva\applications\views\stages\applicationsEditStagesCtrl.js" />
-    <Content Include="js\gva\applications\views\applicationsLink.html" />
-    <Content Include="js\gva\applications\views\applicationsLinkCtrl.js" />
     <Content Include="js\gva\applications\views\applicationsNew.html" />
     <Content Include="js\gva\applications\views\applicationsNewCtrl.js" />
     <Content Include="js\gva\applications\views\applicationsEditPart.html" />

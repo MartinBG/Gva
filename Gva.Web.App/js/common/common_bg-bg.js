@@ -28,7 +28,6 @@
             search: 'Физически лица',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
-            appsLink: 'Свържи заявление',
             exam: 'Нов теор.изпит АС',
             stampedDocuments: 'Документи за печат'
           },
@@ -36,29 +35,25 @@
             title: 'ВС',
             search: 'Въздухоплавателни средства',
             appsSearch: 'Заявления',
-            appsNew: 'Ново заявление',
-            appsLink: 'Свържи заявление'
+            appsNew: 'Ново заявление'
           },
           airports: {
             title: 'ЛЛП',
             search: 'Летища и лет. площадки',
             appsSearch: 'Заявления',
-            appsNew: 'Ново заявление',
-            appsLink: 'Свържи заявление'
+            appsNew: 'Ново заявление'
           },
           equipments: {
             title: 'СУВД',
             search: 'Системи за УВД',
             appsSearch: 'Заявления',
-            appsNew: 'Ново заявление',
-            appsLink: 'Свържи заявление'
+            appsNew: 'Ново заявление'
           },
           approvedOrgs: {
             title: 'ОО',
             search: 'Одобрени организации',
             appsSearch: 'Заявления',
-            appsNew: 'Ново заявление',
-            appsLink: 'Свържи заявление'
+            appsNew: 'Ново заявление'
           },
           airportOperators: {
             title: 'ЛО',

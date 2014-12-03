@@ -47,10 +47,6 @@
     $scope.newApp = function () {
       return $state.go('root.applications.new', $stateParams);
     };
-
-    $scope.linkApp = function () {
-      return $state.go('root.applications.link', $stateParams);
-    };
   }
 
   ApplicationsSearchCtrl.$inject = [
