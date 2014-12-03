@@ -1284,7 +1284,11 @@
           title: 'Преглед на инспекция за въздухоплавателни средства',
           edit: 'Редакция',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          inspectionPeriod: 'Период на надзора',
+          inspectionFrom: 'от',
+          inspectionTo: 'до',
+          deleteInspection: 'Изтриване'
         },
         occurrenceSearch: {
           localTime: 'Час на инцидента',
