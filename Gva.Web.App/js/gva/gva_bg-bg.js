@@ -1668,9 +1668,6 @@
           publisher: 'Администрация'
         },
         licenceEditionDirective: {
-          cancel: 'Отказ',
-          changeOrder: 'Ред',
-          saveOrder: 'Запис',
           documentDateValidFrom: 'Дата на издаване',
           documentDateValidTo: 'Валидно до',
           inspector: 'Инспектор',
@@ -1689,103 +1686,12 @@
           PE_b3_Ids: 'B3 Piston-engine non pressurised aeroplanes of 2 000 Kg MTOM and below',
           licenceAction: 'Основание',
           ratings: 'Квалификационни класове към лиценза',
-          addRating: 'Нов клас',
-          addExistingRating: 'Съществуващ клас',
-          noRatings: 'Няма избрани квалификации',
-          availableRatings: 'Налични квалификации',
-          noAvailableRatings: 'Няма налични квалификации',
           exams: 'Теоретични изпити към лиценза',
-          addExam: 'Нов изпит',
-          addExistingExam: 'Съществуващ изпит',
-          noExams: 'Няма избрани изпити',
           langCerts: 'Свидетелства за език към лиценза',
-          addLangCert: 'Ново свидетелство',
-          addExistingLangCert: 'Съществуващо свидетелство',
-          noLangCerts: 'Няма избрани свидетелства',
           trainings: 'Обучения към лиценза',
-          addTraining: 'Ново обучение',
-          addExistingTraining: 'Съществуващо обучение',
-          addExistingCheck: 'Съществуваща проверка',
-          addExistingLicence: 'Съществуващ лиценз',
-          noTrainings: 'Няма избрани обучения',
-          availableTrainings: 'Налични обучения',
-          noAvailableTrainings: 'Няма налични обучения',
-          ratingsTable: {
-            ratingType: 'Тип ВС, Степен (раб. място)',
-            ratingClass: 'Клас (категория)',
-            authorization: 'Разрешение <br>(ограничения)',
-            dateValidFrom: 'Издаден',
-            dateValidTo: 'Валиден до'
-          },
-          examsTable: {
-            documentNumber: '№ на документа',
-            documentDateValidFrom: 'От дата',
-            documentPublisher: 'Издател',
-            valid: 'Валиден'
-          },
-          langCertsTable: {
-            documentNumber: '№ на документа',
-            langCertType: 'Тип',
-            langLevel: 'Ниво',
-            documentDateValidFrom: 'От дата',
-            documentDateValidTo: 'До дата',
-            documentPublisher: 'Издател',
-            valid: 'Валиден'
-          },
-          trainingsTable: {
-            number: 'No',
-            dateValidFrom: 'От дата',
-            dateValidTo: 'Валидно до',
-            publisher: 'Издател',
-            ratingType: 'Тип ВС',
-            docType: 'Тип',
-            docRole: 'Роля'
-          },
           checks: 'Проверки към лиценза',
-          addCheck: 'Нова проверка',
-          noChecks: 'Няма избрани проверки',
-          availableChecks: 'Налични проверки',
-          noAvailableChecks: 'Няма налични проверки',
-          checksTable: {
-            documentNumber: '№ на документа',
-            ratingClass: 'Клас',
-            documentDateValidFrom: 'От дата',
-            documentDateValidTo: 'До дата',
-            documentPublisher: 'Издател',
-            authorization: 'Разре-<br>шение',
-            licenceType: 'Вид право-<br>способност',
-            personCheckDocumentType: 'Тип документ',
-            personCheckDocumentRole: 'Роля на документ',
-            ratingType: 'Тип ВС <br>(раб. място)',
-            valid: 'Валидност',
-            ratingValue: 'Оценка'
-          },
           meds: 'Медицински свидетелства към лиценза',
-          addMed: 'Ново медицинско',
-          addExistingMed: 'Съществуващо медицинско',
-          noMeds: 'Няма избрани медицински свидетелства',
-          availableMeds: 'Налични медицински свидетелства',
-          noAvailableMeds: 'Няма налични медицински свидетелства',
-          medsTable: {
-            number: 'Свидетелство',
-            dateValidFrom: 'От дата',
-            dateValidTo: 'Валидно до',
-            medClass: 'Клас',
-            limitations: 'Ограничения',
-            publisher: 'Издател'
-          },
           licences: 'Лицензи',
-          addExistingMLicence: 'Съществуващ лиценз',
-          noLicences: 'Няма избрани лицензи',
-          availableLicences: 'Налични лицензи',
-          noAvailableLicences: 'Няма налични лицензи',
-          licencesTable: {
-            licenceNumber: 'Лиценз No',
-            licenceType: 'Наименование',
-            firstEditionValidFrom: 'Първоначално издаване',
-            documentDateValidFrom: 'Издаден',
-            documentDateValidTo: 'Валиден до'
-          },
           applications: 'Заявления'
         },
         personCommonDocDirective: {
@@ -1810,6 +1716,131 @@
           locationIndicator: 'Индикатор за местоположение',
           sector: 'Сектор/работно място',
           title: 'Данни за класификация'
+        },
+        licenceEditionsEditChecksView: {
+          cancel: 'Отказ',
+          changeOrder: 'Ред',
+          saveOrder: 'Запис',
+          addExistingCheck: 'Съществуваща проверка',
+          addCheck: 'Нова проверка',
+          noChecks: 'Няма избрани проверки',
+          availableChecks: 'Налични проверки',
+          noAvailableChecks: 'Няма налични проверки',
+          checksTable: {
+            documentNumber: '№ на документа',
+            ratingClass: 'Клас',
+            documentDateValidFrom: 'От дата',
+            documentDateValidTo: 'До дата',
+            documentPublisher: 'Издател',
+            authorization: 'Разре-<br>шение',
+            licenceType: 'Вид право-<br>способност',
+            personCheckDocumentType: 'Тип документ',
+            personCheckDocumentRole: 'Роля на документ',
+            ratingType: 'Тип ВС <br>(раб. място)',
+            valid: 'Валидност',
+            ratingValue: 'Оценка'
+          }
+        },
+        licenceEditionsEditExamsView: {
+          cancel: 'Отказ',
+          changeOrder: 'Ред',
+          saveOrder: 'Запис',
+          addExam: 'Нов изпит',
+          addExistingExam: 'Съществуващ изпит',
+          noExams: 'Няма избрани изпити',
+          examsTable: {
+            documentNumber: '№ на документа',
+            documentDateValidFrom: 'От дата',
+            documentPublisher: 'Издател',
+            valid: 'Валиден'
+          }
+        },
+        licenceEditionsEditLangCertsView: {
+          cancel: 'Отказ',
+          changeOrder: 'Ред',
+          saveOrder: 'Запис',
+          addLangCert: 'Ново свидетелство',
+          addExistingLangCert: 'Съществуващо свидетелство',
+          noLangCerts: 'Няма избрани свидетелства',
+          langCertsTable: {
+            documentNumber: '№ на документа',
+            langCertType: 'Тип',
+            langLevel: 'Ниво',
+            documentDateValidFrom: 'От дата',
+            documentDateValidTo: 'До дата',
+            documentPublisher: 'Издател',
+            valid: 'Валиден'
+          }
+        },
+        licenceEditionsEditLicencesView: {
+          cancel: 'Отказ',
+          changeOrder: 'Ред',
+          saveOrder: 'Запис',
+          noLicences: 'Няма избрани лицензи',
+          availableLicences: 'Налични лицензи',
+          noAvailableLicences: 'Няма налични лицензи',
+          addExistingLicence: 'Съществуващ лиценз',
+          licencesTable: {
+            licenceNumber: 'Лиценз No',
+            licenceType: 'Наименование',
+            firstEditionValidFrom: 'Първоначално издаване',
+            documentDateValidFrom: 'Издаден',
+            documentDateValidTo: 'Валиден до'
+          }
+        },
+        licenceEditionsEditMedicalsView: {
+          cancel: 'Отказ',
+          changeOrder: 'Ред',
+          saveOrder: 'Запис',
+          addMed: 'Ново медицинско',
+          addExistingMed: 'Съществуващо медицинско',
+          noMeds: 'Няма избрани медицински свидетелства',
+          availableMeds: 'Налични медицински свидетелства',
+          noAvailableMeds: 'Няма налични медицински свидетелства',
+          medsTable: {
+            number: 'Свидетелство',
+            dateValidFrom: 'От дата',
+            dateValidTo: 'Валидно до',
+            medClass: 'Клас',
+            limitations: 'Ограничения',
+            publisher: 'Издател'
+          }
+        },
+        licenceEditionsEditRatingsView: {
+          cancel: 'Отказ',
+          changeOrder: 'Ред',
+          saveOrder: 'Запис',
+          addRating: 'Нов клас',
+          addExistingRating: 'Съществуващ клас',
+          noRatings: 'Няма избрани квалификации',
+          availableRatings: 'Налични квалификации',
+          noAvailableRatings: 'Няма налични квалификации',
+          ratingsTable: {
+            ratingType: 'Тип ВС, Степен (раб. място)',
+            ratingClass: 'Клас (категория)',
+            authorization: 'Разрешение <br>(ограничения)',
+            dateValidFrom: 'Издаден',
+            dateValidTo: 'Валиден до'
+          }
+        },
+        licenceEditionsEditTrainingsView: {
+          cancel: 'Отказ',
+          changeOrder: 'Ред',
+          saveOrder: 'Запис',
+          addTraining: 'Ново обучение',
+          addExistingTraining: 'Съществуващо обучение',
+          noTrainings: 'Няма избрани обучения',
+          availableTrainings: 'Налични обучения',
+          noAvailableTrainings: 'Няма налични обучения',
+          trainingsTable: {
+            number: 'No',
+            dateValidFrom: 'От дата',
+            dateValidTo: 'Валидно до',
+            publisher: 'Издател',
+            ratingType: 'Тип ВС',
+            docType: 'Тип',
+            docRole: 'Роля'
+          }
         },
         personDocApplicationSearch: {
           newApplication: 'Ново заявление',
