@@ -48,7 +48,10 @@
   </form>
 
   <div ng-if="application" class="alert alert-info" style="margin-bottom: 10px; padding: 7px 10px;">
-    <a ng-click="viewApplication(application.applicationId)" class="alert-link" style="cursor: pointer;"><span l10n-text="airports.viewAirport.viewApplication"></span>{{ application.applicationCode + ' ' + application.documentNumber }}</a>
+    <a ng-click="viewApplication(application.applicationId, application.partIndex)" class="alert-link" style="cursor: pointer;">
+      <span l10n-text="airports.viewAirport.viewApplication"></span>
+      {{ !!item.application.oldDocumentNumber ? (item.application.applicationCode + ' ' + item.application.oldDocumentNumber + '/' + (item.application.documentDate | date: 'mediumDate')) : (item.application.applicationCode + ' ' + item.application.documentNumber) }}
+    </a>
   </div>
 
   <sc-tabs tab-list="{

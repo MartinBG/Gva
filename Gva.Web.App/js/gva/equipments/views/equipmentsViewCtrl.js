@@ -16,10 +16,12 @@
       return $state.go('root.equipments.view.edit');
     };
 
-    $scope.viewApplication = function (appId) {
-      return $state.go('root.applications.edit.case', {
-        id: appId,
-        set: $stateParams.set
+    $scope.viewApplication = function (applicationId, partIndex) {
+      return $state.go('root.applications.edit.data', {
+        id: applicationId,
+        set: $stateParams.set,
+        lotId: $stateParams.id,
+        ind: partIndex
       });
     };
   }
