@@ -8,10 +8,6 @@ namespace Gva.Api.ModelsDO.Common
     {
         public int ApplicationId { get; set; }
 
-        public int LotId { get; set; }
-
-        public int PartIndex { get; set; }
-
         public string OldDocumentNumber { get; set; }
 
         public string DocumentNumber { get; set; }

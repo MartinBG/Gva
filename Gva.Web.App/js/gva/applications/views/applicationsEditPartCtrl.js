@@ -55,7 +55,8 @@
       function ($stateParams, Applications) {
         return Applications.getAppPart({
           lotId: $stateParams.lotId,
-          ind: $stateParams.ind
+          ind: $stateParams.ind,
+          id: $stateParams.id
         }).$promise;
       }
     ]

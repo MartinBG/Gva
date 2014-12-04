@@ -98,10 +98,10 @@ namespace Gva.MigrationTool.Sets
 
                         Dictionary<int, Tuple<GvaApplication, ApplicationNomDO>> applications =
                             new Dictionary<int, Tuple<GvaApplication, ApplicationNomDO>>();
-                        var aircraftDocumentApplications = this.getOrganizationDocumentApplications(organizationId, noms, blobIdsToFileKeys, isApprovedOrg);
-                        foreach (var aircraftDocumentApplication in aircraftDocumentApplications)
+                        var organizationDocumentApplications = this.getOrganizationDocumentApplications(organizationId, noms, blobIdsToFileKeys, isApprovedOrg);
+                        foreach (var organizationDocumentApplication in organizationDocumentApplications)
                         {
-                            var pv = addPartWithFiles("organizationDocumentApplications/*", aircraftDocumentApplication);
+                            var pv = addPartWithFiles("organizationDocumentApplications/*", organizationDocumentApplication);
 
                             GvaApplication application = new GvaApplication()
                             {
@@ -112,16 +112,16 @@ namespace Gva.MigrationTool.Sets
                             applicationRepository.AddGvaApplication(application);
 
                             applications.Add(
-                                aircraftDocumentApplication.Get<int>("part.__oldId"),
+                                organizationDocumentApplication.Get<int>("part.__oldId"),
                                     Tuple.Create(
                                         application,
                                         new ApplicationNomDO
                                         {
                                             ApplicationId = 0, //will be set later
                                             PartIndex = pv.Part.Index,
-                                            ApplicationName = aircraftDocumentApplication.Get<string>("part.applicationType.name"),
-                                            ApplicationCode = aircraftDocumentApplication.Get<string>("part.applicationType.code"),
-                                            OldDocumentNumber = aircraftDocumentApplication.Get<string>("part.oldDocumentNumber")
+                                            ApplicationName = organizationDocumentApplication.Get<string>("part.applicationType.name"),
+                                            ApplicationCode = organizationDocumentApplication.Get<string>("part.applicationType.code"),
+                                            OldDocumentNumber = organizationDocumentApplication.Get<string>("part.oldDocumentNumber")
                                         }));
                         }
 

@@ -9,6 +9,7 @@
     airportDocumentApplications
   ) {
     $scope.airportDocumentApplications = airportDocumentApplications;
+    $scope.lotId = $stateParams.id;
 
     $scope.isDeclinedApp = function(item) {
       if (item.part.stage) {

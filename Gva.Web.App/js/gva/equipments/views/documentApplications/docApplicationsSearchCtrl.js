@@ -9,6 +9,7 @@
     equipmentDocumentApplications
   ) {
     $scope.equipmentDocumentApplications = equipmentDocumentApplications;
+    $scope.lotId = $stateParams.id;
 
     $scope.isDeclinedApp = function(item) {
       if (item.part.stage) {

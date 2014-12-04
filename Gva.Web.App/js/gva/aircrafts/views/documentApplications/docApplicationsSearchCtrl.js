@@ -10,6 +10,7 @@
     aircraftDocumentApplications
   ) {
     $scope.aircraftDocumentApplications = aircraftDocumentApplications;
+    $scope.lotId = $stateParams.id;
 
     $scope.isDeclinedApp = function(item) {
       if (item.part.stage) {
