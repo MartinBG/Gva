@@ -17,7 +17,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public List<IncludedPersonDO> IncludedPersons { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public string ReportNumber { get; set; }
     }
