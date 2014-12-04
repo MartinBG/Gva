@@ -196,8 +196,13 @@ namespace Gva.Api.WordTemplates
                 licenceTypeCode == "PPA")
             {
                 dynamic dateValidPrivilege = LicenceDictionary.LicencePrivilege["dateValid2"];
-                string dateValid = edition.DocumentDateValidTo.Value.ToString("dd.MM.yyyy");
-                string dateValidTrans = edition.DocumentDateValidTo.Value.ToString("dd MMMM yyyy");
+                string dateValid = string.Empty;
+                string dateValidTrans = string.Empty;
+                if (edition.DocumentDateValidTo.HasValue)
+                {
+                    dateValid = edition.DocumentDateValidTo.Value.ToString("dd.MM.yyyy");
+                    dateValidTrans = edition.DocumentDateValidTo.Value.ToString("dd MMMM yyyy");
+                }
 
                 result = new List<object>()
                 {
