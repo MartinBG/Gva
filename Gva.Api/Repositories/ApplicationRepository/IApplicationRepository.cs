@@ -22,6 +22,39 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int? limit = null
             );
 
+        IEnumerable<ApplicationListDO> GetPersonApplications(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? personLin = null,
+            int offset = 0,
+            int? limit = null);
+        
+        IEnumerable<ApplicationListDO> GetAircraftApplications(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            string aircraftIcao = null,
+            int offset = 0,
+            int? limit = null);
+
+        IEnumerable<ApplicationListDO> GetOrganizationApplications(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            string organizationUin = null,
+            int offset = 0,
+            int? limit = null);
+
+        IEnumerable<ApplicationListDO> GetEquipmentApplications(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int offset = 0,
+            int? limit = null);
+
+        IEnumerable<ApplicationListDO> GetAirportApplications(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int offset = 0,
+            int? limit = null);
+
         GvaApplication[] GetNomApplications(int lotId);
 
         GvaApplication GetNomApplication(int applicationId);
