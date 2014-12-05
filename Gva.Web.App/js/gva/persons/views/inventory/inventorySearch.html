@@ -1,5 +1,6 @@
 ﻿<div>
-  <sc-datatable items="indexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="bookPageNumber">
+  <sc-datatable items="indexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="bookPageNumber"
+    row-class="{'invalidDocument' : isInvalidDocument(item), 'expiredDocument' : (!isInvalidDocument(item) && isExpiredDocument(item)), 'expiringDocument' : isExpiringDocument(item)}">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editBtn" btn-sref="getState(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
@@ -33,7 +34,8 @@
 
 <div style="margin-top:40px;">
  <h5 class="form-header" l10n-text="persons.inventorySearch.notIndexed"></h5>
-  <sc-datatable items="notIndexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-datatable items="notIndexed" filterable="true" pageable="true" sortable="true" dynamic-columns="true"
+    row-class="{'invalidDocument' : isInvalidDocument(item), 'expiredDocument' : (!isInvalidDocument(item) && isExpiredDocument(item)), 'expiringDocument' : isExpiringDocument(item)}">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editBtn" btn-sref="getState(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>

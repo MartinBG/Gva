@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular, moment, _*/
+(function (angular, moment, _) {
   'use strict';
 
   function InventorySearchCtrl(
@@ -69,6 +69,22 @@
         params: params
       };
     };
+
+    $scope.isInvalidDocument = function(item){
+      return item.valid === false;
+    };
+
+    $scope.isExpiringDocument = function(item) {
+      var today = moment(new Date()),
+          difference = moment(item.toDate).diff(today, 'days');
+
+      return 0 <= difference && difference <= 30;
+    };
+
+    $scope.isExpiredDocument = function(item) {
+      return moment(new Date()).isAfter(item.toDate);
+    };
+
   }
 
   InventorySearchCtrl.$inject = [
@@ -88,4 +104,4 @@
   };
 
   angular.module('gva').controller('InventorySearchCtrl', InventorySearchCtrl);
-}(angular, _));
+}(angular, moment, _));
