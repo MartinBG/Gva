@@ -1,5 +1,5 @@
 ﻿GO
-INSERT [dbo].[Noms] ([Name], [Alias]) VALUES (N'Номенклатура типове лин', N'linTypes')
+INSERT [dbo].[Noms] ([Name], [Alias]) VALUES (N'Типове лин', N'linTypes')
 
 DECLARE @nomId INT = @@IDENTITY
 

@@ -1,5 +1,5 @@
 ﻿GO
-INSERT [dbo].[Noms] ([Name], [Alias]) VALUES (N'Номенклатура Въздухоплавателни услуги', N'aircarrierServices')
+INSERT [dbo].[Noms] ([Name], [Alias]) VALUES (N'Въздухоплавателни услуги', N'aircarrierServices')
 
 DECLARE @nomId INT = @@IDENTITY
 

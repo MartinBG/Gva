@@ -1,5 +1,5 @@
 ﻿GO
-INSERT [dbo].[Noms] ([Name], [Alias]) VALUES (N'Номенклатура Оценка от писмен изпити', N'testScores')
+INSERT [dbo].[Noms] ([Name], [Alias]) VALUES (N'Оценка от писмен изпити', N'testScores')
 
 DECLARE @nomId INT = @@IDENTITY
 
