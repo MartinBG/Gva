@@ -10,7 +10,7 @@
   ) {
     $scope.documentTrainings = trainings;
 
-    $scope.isInvalidLicence = function(item){
+    $scope.isInvalidDocument = function(item){
       return item.part.valid.code === 'N';
     };
 
