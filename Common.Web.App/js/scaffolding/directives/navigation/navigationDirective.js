@@ -1,5 +1,5 @@
 ﻿// Usage:
-//<sc-navigation user-fullname="" change-password-state="">
+//<sc-navigation user-fullname="">
 //</sc-navigation>
 
 /*global angular*/
@@ -13,8 +13,7 @@
       replace: true,
       templateUrl: 'js/scaffolding/directives/navigation/navigationDirective.html',
       scope: {
-        userFullname: '@',
-        changePasswordState: '@'
+        userFullname: '@'
       },
       controller: ['$scope', function NavigationCtrl($scope) {
         $scope.logout = function logout() {
@@ -23,7 +22,7 @@
           });
         };
 
-        $scope.changePassword = function changePassword() {
+        $scope.changePassword = function () {
           var modalInstance = scModal.open('changePassword');
 
           return modalInstance.opened;

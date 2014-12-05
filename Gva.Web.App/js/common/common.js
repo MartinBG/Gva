@@ -12,7 +12,11 @@
     // @endif
     'l10n',
     'l10n-tools'
-  ]).config(['$stateProvider', function ($stateProvider) {
+  ]).config(['scModalProvider', function (scModalProvider) {
+      //jscs:disable disallowSpaceBeforeBinaryOperators, disallowSpacesInsideArrayBrackets, maximumLineLength
+    scModalProvider
+     .modal('changePassword', 'js/common/users/modals/changePasswordModal.html', 'ChangePasswordModalCtrl', 'xsm');
+  }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root'                           , null                    , ['@'         , 'js/common/root/views/root.html'                           , 'RootCtrl'                    ]])
       .state(['root.users'                     , '/users?username&fullname&showActive'                                                                                                ])

@@ -74,6 +74,17 @@
             save: 'Запис',
             cancel: 'Отказ'
           }
+        },
+        changePasswordModal: {
+          title: 'Смяна на парола',
+          oldPassword: 'Текуща парола',
+          newPassword: 'Нова парола',
+          confirmNewPassword: 'Повторете новата парола',
+          noPasswordMatch: 'Паролите не съвпадат',
+          passMustBeMin8symbols: 'Паролата трябва да бъде поне 8 символа',
+          wrongPassword: 'Грешна парола',
+          save: 'Запис',
+          cancel: 'Отказ'
         }
       },
       states: {
