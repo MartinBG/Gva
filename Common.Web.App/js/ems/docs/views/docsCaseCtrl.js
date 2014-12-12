@@ -49,10 +49,6 @@
     $scope.viewApplication = function (applicationId) {
       return $state.go('root.applications.edit.case', { id: applicationId });
     };
-
-    $scope.linkApplication = function () {
-      return $state.go('root.docs.edit.case.linkApp');
-    };
   }
 
   DocsCaseCtrl.$inject = [
