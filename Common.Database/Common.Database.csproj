@@ -75,6 +75,7 @@
     <Content Include="Create\Tables\Users\Users.sql" />
     <Content Include="Create\Functions\ufnParseJSON.sql" />
     <Content Include="Create\Tools\DocumentationScript.sql" />
+    <Content Include="Create\Tools\DocumentationScriptMD.sql" />
     <Content Include="Create\Tools\spDesc.sql" />
     <Content Include="Create\Tools\sp_generate_inserts.sql" />
     <Content Include="Create\Tools\Tool_ScriptDiagram2008.sql" />
