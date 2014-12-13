@@ -11,10 +11,6 @@
   ) {
     $scope.nomenclatures = nomenclatures;
 
-    $scope.editNomenclature = function (item) {
-      return $state.go('root.nomenclatures.edit', { id: item.nomId });
-    };
-
     $scope.viewNomenclatureValues = function (item) {
       return $state.go('root.nomenclatures.values', { nomId: item.nomId });
     };

@@ -143,11 +143,10 @@
           },
           nomValues: {
             search: {
-              newNomValue: 'Нова номенклатура',
+              newNomValue: 'Нова стойност',
               code: 'Код',
               name: 'Наименование',
-              alias: 'Псевдоним',
-              parent: 'Родител'
+              nameAlt: 'Наименование на английски език'
             },
             edit: {
               title: 'Номенклатура',

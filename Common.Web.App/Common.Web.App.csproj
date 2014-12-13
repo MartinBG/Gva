@@ -58,8 +58,6 @@
     <Content Include="js\common\nomenclatures\views\nomenclatureValuesCtrl.js" />
     <Content Include="js\common\nomenclatures\views\nomenclatures.html" />
     <Content Include="js\common\nomenclatures\views\nomenclaturesCtrl.js" />
-    <Content Include="js\common\nomenclatures\views\nomenclaturesEdit.html" />
-    <Content Include="js\common\nomenclatures\views\nomenclaturesEditCtrl.js" />
     <Content Include="js\common\users\modals\changePasswordModal.html" />
     <Content Include="js\common\users\modals\changePasswordModalCtrl.js" />
     <Content Include="js\common\users\resources\roles.js" />
