@@ -16,8 +16,8 @@
 
       var modalInstance = scModal.open('choosePerson', params);
 
-      modalInstance.result.then(function (personId) {
-        $scope.model.lot.id = personId;
+      modalInstance.result.then(function (person) {
+        $scope.model.lot.id = person.id;
       });
 
       return modalInstance.opened;

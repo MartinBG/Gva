@@ -6,7 +6,7 @@
       <div class="pull-right">
         <sc-button name="editBtn" btn-click="edit()" text="persons.editCheck.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
-        <sc-button name="deleteBtn" btn-click="deleteCheck()" text="persons.editCheck.deleteCheck" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && reports.length === 0">
+        <sc-button name="deleteBtn" btn-click="deleteCheck()" text="persons.editCheck.deleteCheck" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode && report === null">
         </sc-button>
         <sc-button name="saveBtn" btn-click="save()" text="persons.editCheck.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
         </sc-button>

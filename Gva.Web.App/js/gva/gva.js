@@ -504,7 +504,6 @@
       .state(['root.printableDocs.search'                                  , ''                                                                            , ['@root'                                            , 'js/gva/persons/views/printableDocs/printableDocsSearch.html'                                 ,'PrintableDocsSearchCtrl'          ]]);
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
-    .modal('choosePersons'         , 'js/gva/persons/modals/persons/choosePersonsModal.html'       , 'ChoosePersonsModalCtrl'        )
     .modal('chooseTrainings'       , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html'   , 'ChooseTrainingsModalCtrl'      )
     .modal('newTraining'           , 'js/gva/persons/modals/trainings/newTrainingModal.html'       , 'NewTrainingModalCtrl'          )
     .modal('chooseChecks'          , 'js/gva/persons/modals/checks/chooseChecksModal.html'         , 'ChooseChecksModalCtrl'         )

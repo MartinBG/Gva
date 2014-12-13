@@ -10,12 +10,9 @@ namespace Gva.Api.ModelsDO.Persons
         public PersonReportDO() 
         {
             IncludedChecks = new List<int>();
-            IncludedPersons = new List<IncludedPersonDO>();
         }
 
         public List<int> IncludedChecks { get; set; }
-
-        public List<IncludedPersonDO> IncludedPersons { get; set; }
 
         public DateTime? Date { get; set; }
 

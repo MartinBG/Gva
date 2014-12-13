@@ -1,6 +1,7 @@
 ﻿<div class="panel panel-default">
   <div class="panel-heading">
-    <strong l10n-text="common.choosePersonModal.title"></strong>
+    <strong l10n-text="common.choosePersonModal.title" ng-if="!showPersonTitle"></strong>
+    <strong l10n-text="common.choosePersonModal.personTitle"  ng-if="showPersonTitle"></strong>
     <div class="pull-right">
       <sc-button name="canceltn" btn-click="cancel()" text="common.choosePersonModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
     </div>

@@ -31,6 +31,7 @@
         },
         choosePersonModal: {
           title: 'Избор на заявител',
+          personTitle: 'Избор на физическо лице',
           cancel: 'Отказ',
           select: 'Избери',
           lin: 'ЛИН',
@@ -1515,11 +1516,8 @@
         personReportDirective: {
           date: 'Дата',
           reportNumber: 'No на отчет',
-          addPersons: 'Добави физически лица',
           addCheck: 'Добави проверкa',
-          includedPersons: 'Лица на които са направени проверки',
           includedChecks: ' Проверки',
-          noAvailablePersons: 'Няма налични физически лица',
           checksTable: {
             personLin: 'ЛИН',
             documentNumber: '№ на документа',
@@ -1935,8 +1933,7 @@
         reportSearch: {
           newReport: 'Нов отчет',
           reportNumber: 'No на отчета',
-          date: 'Дата',
-          personsLins: 'ЛИН-ове на проверени лица'
+          date: 'Дата'
         },
         newAddress: {
           title: 'Нов адрес',

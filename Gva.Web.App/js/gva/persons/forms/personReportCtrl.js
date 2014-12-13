@@ -22,24 +22,17 @@
         });
     }
 
-    $scope.addPersons = function () {
-      var modalInstance = scModal.open('choosePersons', {
-        includedPersons:  $scope.model.part.includedPersons
-      });
+    $scope.addCheck = function () {
+      var modalInstance = scModal.open('choosePerson', {showPersonTitle: true});
 
-      modalInstance.result.then(function (selectedPersons) {
-        _.forEach(selectedPersons, function (person) {
-          $scope.model.part.includedPersons.push({
-            id: person.id,
-            lin: person.lin
-          });
-        });
+      modalInstance.result.then(function (selectedPerson) {
+         $scope.createCheck(selectedPerson);
       });
 
       return modalInstance.opened;
     };
 
-    $scope.addCheck = function (person) {
+    $scope.createCheck = function (person) {
       var modalInstance = scModal.open('newCheck', {
         lotId: person.id
       });

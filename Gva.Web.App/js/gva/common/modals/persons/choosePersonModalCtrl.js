@@ -10,6 +10,7 @@
     persons
   ) {
     $scope.persons = persons;
+    $scope.showPersonTitle = scModalParams.showPersonTitle;
 
     $scope.filters = {
       lin: null,
@@ -35,7 +36,7 @@
     };
 
     $scope.selectPerson = function (person) {
-      return $modalInstance.close(person.id);
+      return $modalInstance.close(person);
     };
   }
 
