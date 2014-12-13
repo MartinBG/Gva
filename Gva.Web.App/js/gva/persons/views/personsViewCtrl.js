@@ -32,14 +32,17 @@
       },
       'persons.tabs.docs': {
         'persons.tabs.others': 'root.persons.view.documentOthers'
-      },
-      'persons.tabs.inventory': 'root.persons.view.inventory',
-      'persons.tabs.applications': 'root.persons.view.documentApplications'
+      }
     };
 
     if(person.caseTypes.indexOf('staffExaminer') !== -1) {
       $scope.tabs = _.assign($scope.tabs, {'persons.tabs.reports': 'root.persons.view.reports'});
     } 
+
+    $scope.tabs = _.assign($scope.tabs, {
+      'persons.tabs.inventory': 'root.persons.view.inventory',
+      'persons.tabs.applications': 'root.persons.view.documentApplications'
+    });
 
     $scope.changeCaseType = function () {
       $stateParams.caseTypeId = $scope.caseType;
