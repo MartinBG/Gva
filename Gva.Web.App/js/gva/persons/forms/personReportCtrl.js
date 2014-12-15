@@ -62,16 +62,6 @@
           }
         });
     };
-
-    $scope.removePerson = function (person) {
-      return scMessage('common.messages.confirmDelete')
-        .then(function (result) {
-          if (result === 'OK') {
-            $scope.model.part.includedPersons = 
-              _.without($scope.model.part.includedPersons, person);
-          }
-        });
-    };
   }
 
   PersonReportCtrl.$inject = [

@@ -1934,7 +1934,9 @@
         reportSearch: {
           newReport: 'Нов отчет',
           reportNumber: 'No на отчета',
-          date: 'Дата'
+          date: 'Дата',
+          file: 'Файл',
+          checkedPersons: 'ЛИН-ове на проверени физически лица'
         },
         newAddress: {
           title: 'Нов адрес',

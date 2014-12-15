@@ -6,15 +6,18 @@
     $scope,
     $state,
     $stateParams,
+    $compile,
     reports
   ) {
     $scope.reports = reports;
+
   }
 
   ReportsSearchCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
+    '$compile',
     'reports'
   ];
 

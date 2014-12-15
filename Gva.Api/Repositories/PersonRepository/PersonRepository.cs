@@ -415,7 +415,9 @@ namespace Gva.Api.Repositories.PersonRepository
 
         public List<GvaViewPersonCheck> GetChecksForReport(List<int> checks)
         {
-            IEnumerable<GvaViewPersonCheck> result = this.unitOfWork.DbContext.Set<GvaViewPersonCheck>()
+            if (checks.Count() > 0)
+            {
+                return this.unitOfWork.DbContext.Set<GvaViewPersonCheck>()
                 .Include(c => c.Authorization)
                 .Include(c => c.DocumentRole)
                 .Include(c => c.DocumentType)
@@ -423,14 +425,14 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(c => c.RatingClass)
                 .Include(c => c.RatingType)
                 .Include(c => c.PersonCheckRatingValue)
-                .Include(c => c.LicenceType);
-
-            if (checks.Count() > 0)
-            {
-                result = result.Where(c => checks.Contains(c.PartId));
+                .Include(c => c.LicenceType)
+                .Where(c => checks.Contains(c.PartId))
+                .ToList();
             }
-
-            return result.ToList();
+            else
+            {
+                return new List<GvaViewPersonCheck>();
+            }
         }
     }
 }

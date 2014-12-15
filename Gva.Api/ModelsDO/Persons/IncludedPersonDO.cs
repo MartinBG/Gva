@@ -2,8 +2,8 @@
 {
     public class IncludedPersonDO
     {
-        public int Id { get; set; }
+        public int LotId { get; set; }
 
-        public int Lin { get; set; }
+        public int? Lin { get; set; }
     }
 }
