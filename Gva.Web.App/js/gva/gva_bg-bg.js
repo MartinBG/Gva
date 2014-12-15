@@ -1516,6 +1516,7 @@
         personReportDirective: {
           date: 'Дата',
           reportNumber: 'No на отчет',
+          documentPersonNumber: 'No в списъка (групов док.)',
           addCheck: 'Добави проверкa',
           includedChecks: ' Проверки',
           checksTable: {

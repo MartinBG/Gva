@@ -13,7 +13,7 @@ namespace Gva.Api.Models.Views.Person
 
         public int PartIndex { get; set; }
 
-        public string ReportNumber { get; set; }
+        public string DocumentNumber { get; set; }
 
         public DateTime? Date { get; set; }
 
@@ -42,7 +42,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.Publisher)
                 .HasMaxLength(100);
 
-            this.Property(t => t.ReportNumber)
+            this.Property(t => t.DocumentNumber)
                 .HasMaxLength(50);
 
             // Table & Column Mappings
@@ -50,7 +50,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
             this.Property(t => t.Publisher).HasColumnName("Publisher");
-            this.Property(t => t.ReportNumber).HasColumnName("ReportNumber");
+            this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
             this.Property(t => t.Date).HasColumnName("Date");
 
             //Relationships

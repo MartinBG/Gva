@@ -36,6 +36,7 @@ namespace Gva.Api.Projections.Person
             var statuses = parts.GetAll<PersonDocumentDO>("personStatuses").Where(d => d.Content.DocumentNumber != null);
             var medicals = parts.GetAll<PersonDocumentDO>("personDocumentMedicals").Where(d => d.Content.DocumentNumber != null);
             var applications = parts.GetAll<PersonDocumentDO>("personDocumentApplications").Where(d => d.Content.DocumentNumber != null);
+            var reports = parts.GetAll<PersonDocumentDO>("personReports").Where(r => r.Content.DocumentNumber != null);
 
             documents = documentIds
                 .Union(checks)
@@ -46,6 +47,7 @@ namespace Gva.Api.Projections.Person
                 .Union(statuses)
                 .Union(medicals)
                 .Union(applications)
+                .Union(reports)
                 .ToList();
 
             return documents.Select(r => this.Create(r));

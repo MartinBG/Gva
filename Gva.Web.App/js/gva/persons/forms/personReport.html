@@ -8,7 +8,8 @@
   </div>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.reportNumber" ng-required="true" l10n-text="persons.personReportDirective.reportNumber" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" ng-required="true" l10n-text="persons.personReportDirective.reportNumber" class="col-sm-3 col-md-2" sc-validate="{ unique: isUniqueDocNumber }" validations="{unique: 'errorTexts.notUniqueDocNumberAndPersonNumber'}"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentPersonNumber" l10n-text="persons.personReportDirective.documentPersonNumber" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="date" ng-model="model.part.date" ng-required="true" l10n-text="persons.personReportDirective.date" class="col-sm-3 col-md-2"></sc-field>
   </div>
 

@@ -32,7 +32,7 @@ namespace Gva.Api.Projections.Person
             GvaViewPersonReport report = new GvaViewPersonReport();
             report.LotId = personReport.Part.LotId;
             report.PartIndex = personReport.Part.Index;
-            report.ReportNumber = personReport.Content.ReportNumber;
+            report.DocumentNumber = personReport.Content.DocumentNumber;
             report.Date = personReport.Content.Date;
 
             var person = this.unitOfWork.DbContext.Set<GvaViewPerson>().Where(p => p.LotId == personReport.Part.LotId).Single();

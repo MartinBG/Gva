@@ -61,7 +61,7 @@ namespace Gva.Api.Controllers.Persons
                                 PartIndex = r.PartIndex,
                                 LotId = r.LotId,
                                 Date = r.Date,
-                                ReportNumber = r.ReportNumber,
+                                DocumentNumber = r.DocumentNumber,
                                 Publisher = r.Publisher
                               }).SingleOrDefault();
 

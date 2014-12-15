@@ -54,12 +54,22 @@
         <sc-column sortable="false" class="buttons-cell" has-content="true">
           <sc-button name="selectBtn" btn-click="linkPart(item.partId)" l10n-text="applications.edit.linkFile.select" class="btn btn-xs btn-primary"></sc-button>
         </sc-column>
-        <sc-column data="part.reportNumber" title="persons.reportSearch.reportNumber">
+        <sc-column data="part.documentNumber" title="persons.reportSearch.reportNumber">
         </sc-column>
         <sc-column data="part.date" title="persons.reportSearch.date" type="date">
         </sc-column>
-        <sc-column data="part.date" title="persons.reportSearch.personsLins" has-content="true">
-          {{item.part.includedPersons | pluck:'lin' | join:', '}}
+        <sc-column data="part.date" title="persons.reportSearch.date" type="date">
+        </sc-column>
+        <sc-column data="part.includedPersonChecks" title="persons.reportSearch.checkedPersons" has-content="true" class="buttons-cell wrap">
+          <span ng-repeat="check in item.part.includedPersonChecks">
+            <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: check.lotId}}" text="{{check.lin}}"></sc-button>
+            {{ !$last ? ', ' : ''}}
+          </span>
+        </sc-column>
+        <sc-column sortable="false" title="persons.reportSearch.file" has-content="true">
+          <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
+            <span class="glyphicon glyphicon-file"></span>
+          </a>
         </sc-column>
       </sc-datatable>
     </div>

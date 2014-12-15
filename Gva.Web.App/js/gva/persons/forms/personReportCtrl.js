@@ -62,6 +62,23 @@
           }
         });
     };
+
+    $scope.isUniqueDocNumber = function () {
+      if($scope.model.part.documentNumber) {
+        return Persons
+          .isUniqueDocNumber({
+            documentNumber: $scope.model.part.documentNumber,
+            documentPersonNumber: $scope.model.part.documentPersonNumber,
+            partIndex: $scope.model.partIndex
+          })
+        .$promise
+        .then(function (result) {
+          return result.isUnique;
+        });
+      } else {
+        return true;
+      }
+    };
   }
 
   PersonReportCtrl.$inject = [
