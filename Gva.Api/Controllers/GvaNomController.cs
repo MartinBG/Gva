@@ -695,53 +695,51 @@ namespace Gva.Api.Controllers
         }
 
         [Route("ratingClasses")]
-        public IHttpActionResult GetRatingClasses(string caseTypeAlias, string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetRatingClasses(string caseTypeAlias, string term = null)
         {
             var nomValues = this.nomRepository.GetNomValues(
                 alias: "ratingClasses",
                 parentAlias: "ratingClassGroups",
                 parentProp: "caseTypeAlias",
-                parentPropValue: caseTypeAlias,
-                offset: offset,
-                limit: limit);
+                parentPropValue: caseTypeAlias);
 
             nomValues = nomValues.Select(n => new NomValue
             {
                 NomValueId = n.NomValueId,
-                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name)
+                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name),
+                Code = n.Code
             });
 
             if (!string.IsNullOrEmpty(term))
             {
-                nomValues = nomValues.Where(n => n.Name.Contains(term));
+                nomValues = nomValues.Where(n => n.Name.ToLower().Contains(term.ToLower()));
             }
 
-            return Ok(nomValues);
+            return Ok(nomValues.OrderBy(n => n.Name));
         }
 
         [Route("authorizations")]
-        public IHttpActionResult GetAuthorizations(string caseTypeAlias, string term = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetAuthorizations(string caseTypeAlias, string term = null)
         {
             var nomValues = this.nomRepository.GetNomValues(
                 alias: "authorizations",
                 parentAlias: "authorizationGroups",
                 parentProp: "caseTypeAlias",
-                parentPropValue: caseTypeAlias,
-                offset: offset,
-                limit: limit);
+                parentPropValue: caseTypeAlias);
 
             nomValues = nomValues.Select(n => new NomValue
             {
                 NomValueId = n.NomValueId,
-                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name)
+                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name),
+                Code = n.Code
             });
 
             if (!string.IsNullOrEmpty(term))
             {
-                nomValues = nomValues.Where(n => n.Name.Contains(term));
+                nomValues = nomValues.Where(n => n.Name.ToLower().Contains(term.ToLower()));
             }
 
-            return Ok(nomValues);
+            return Ok(nomValues.OrderBy(n => n.Name));
         }
 
         [Route("applicationTypes")]
@@ -856,15 +854,16 @@ namespace Gva.Api.Controllers
             nomValues = nomValues.Select(n => new NomValue
             {
                 NomValueId = n.NomValueId,
-                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name)
+                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name),
+                Code = n.Code
             });
 
             if (!string.IsNullOrEmpty(term))
             {
-                nomValues = nomValues.Where(n => n.Name.Contains(term));
+                nomValues = nomValues.Where(n => n.Name.ToLower().Contains(term.ToLower()));
             }
 
-            return Ok(nomValues);
+            return Ok(nomValues.OrderBy(n => n.Name));
         }
 
         [Route("aircraftTypeGroups")]
@@ -880,15 +879,16 @@ namespace Gva.Api.Controllers
             nomValues = nomValues.Select(n => new NomValue
             {
                 NomValueId = n.NomValueId,
-                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name)
+                Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name),
+                Code = n.Code
             });
 
             if (!string.IsNullOrEmpty(term))
             {
-                nomValues = nomValues.Where(n => n.Name.Contains(term));
+                nomValues = nomValues.Where(n => n.Name.ToLower().Contains(term.ToLower()));
             }
 
-            return Ok(nomValues);
+            return Ok(nomValues.OrderBy(n => n.Name));
         }
 
         
