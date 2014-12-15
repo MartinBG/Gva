@@ -12,18 +12,21 @@ INSERT INTO [ClassificationRelations]([ClassificationRelationId],[Classification
 INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(8,8,4,2);
 INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(9,9,4,2);
 INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(10,10,4,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(11,11,2,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(12,12,2,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(13,13,2,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(11,11,4,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(12,12,4,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(13,13,4,2);
 INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(14,14,2,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(15,15,14,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(16,16,14,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(17,17,14,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(18,18,14,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(19,19,14,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(20,20,14,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(21,21,14,2);
-INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(22,22,14,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(15,15,2,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(16,16,2,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(17,17,2,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(18,18,17,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(19,19,17,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(20,20,17,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(21,21,17,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(22,22,17,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(23,23,17,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(24,24,17,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(25,25,17,2);
 SET IDENTITY_INSERT [ClassificationRelations] OFF
 GO
 

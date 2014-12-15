@@ -19,7 +19,7 @@
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
-  <ActiveSheet>9</ActiveSheet>
+  <ActiveSheet>1</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -384,7 +384,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="Classifications">
-  <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="23" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="26" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s64" ss:DefaultRowHeight="15">
    <Column ss:Index="2" ss:StyleID="s64" ss:Width="359.25"/>
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="99.75"/>
@@ -443,6 +443,21 @@
     <Cell><Data ss:Type="String">010206</Data></Cell>
     <Cell ss:StyleID="s69"><Data ss:Type="String">ПКС</Data></Cell>
     <Cell ss:StyleID="Default"><Data ss:Type="String">security</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010207</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">Проверяващ лица</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">staffExaminer</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010208</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">Проверяващ ЛГ</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">awExaminer</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell><Data ss:Type="String">010209</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="String">Инспектор</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">inspector</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">0103</Data></Cell>
@@ -518,11 +533,12 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>11</ActiveRow>
-     <RangeSelection>R12C1:R12C2</RangeSelection>
+     <ActiveRow>20</ActiveRow>
+     <ActiveCol>1</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -4062,7 +4078,7 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
+   <TopRowVisible>12</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
