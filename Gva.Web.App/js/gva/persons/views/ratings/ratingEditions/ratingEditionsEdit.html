@@ -31,8 +31,8 @@
     <sc-column data="part.notesAlt" title="persons.editRatingEdition.notesAlt" has-content="true" class="wrap">
       {{item.part.notesAlt}}
     </sc-column>
-    <sc-column data="part.inspector.name" title="persons.editRatingEdition.inspector" has-content="true" class="wrap">
-      {{item.part.inspector.name}}
+    <sc-column data="part.inspector.name" title="persons.editRatingEdition.inspectorExaminer" has-content="true" class="wrap">
+      {{item.part.inspector.name || item.part.examiner.name}}
     </sc-column>
   </sc-datatable>
   <div style="clear: both"></div>

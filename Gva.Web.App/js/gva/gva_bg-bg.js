@@ -2313,7 +2313,7 @@
           documentDateValidTo: 'Валиден до',
           notes: 'Бележки',
           notesAlt: 'Бележки лат.',
-          inspector: 'Инспектор',
+          inspectorExaminer: 'Инспектор/Проверяващ',
           edit: 'Редакция',
           deleteEdition: 'Изтриване',
           save: 'Запис',
