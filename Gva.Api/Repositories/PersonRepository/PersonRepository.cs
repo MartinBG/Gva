@@ -410,7 +410,7 @@ namespace Gva.Api.Repositories.PersonRepository
         {
             NomValue licenceType = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId);
 
-            return licenceType.TextContent.Get<string>("licenceCode").Contains("FCL") && licenceType.Code != "BG CCA";
+            return licenceType.TextContent.Get<string>("licenceCode").Contains("FCL") || licenceType.Code == "BG CCA";
         }
 
         public List<GvaViewPersonCheck> GetChecksForReport(List<int> checks)
