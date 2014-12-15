@@ -14,6 +14,7 @@
     $scope.lotId = scModalParams.lotId;
     $scope.appId = scModalParams.appId;
     $scope.caseTypeId = scModalParams.caseTypeId;
+    $scope.publisher = scModalParams.publisher;
 
     $scope.save = function () {
       return $scope.form.newDocumentCheckForm.$validate()

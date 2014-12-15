@@ -34,7 +34,8 @@
 
     $scope.createCheck = function (person) {
       var modalInstance = scModal.open('newCheck', {
-        lotId: person.id
+        lotId: person.id,
+        publisher: scFormParams.publisher
       });
 
       modalInstance.result.then(function (newCheck) {

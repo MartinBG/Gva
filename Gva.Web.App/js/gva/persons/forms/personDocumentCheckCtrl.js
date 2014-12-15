@@ -8,6 +8,8 @@
     $scope.hideCaseType = scFormParams.hideCaseType;
     $scope.lotId = scFormParams.lotId;
     $scope.appId = scFormParams.appId;
+    $scope.publisher = scFormParams.publisher;
+
     if(!$scope.isNew && scFormParams.report !== null) {
       $scope.report = [scFormParams.report];
     }

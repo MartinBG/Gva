@@ -10,6 +10,10 @@
     $scope.appId = scFormParams.appId;
     $scope.lotId = scFormParams.lotId;
 
+    if (scFormParams.publisher) {
+      $scope.model.part.documentPublisher = scFormParams.publisher;
+    }
+
     $scope.choosePublisher = function () {
       var modalInstance = scModal.open('choosePublisher');
 
