@@ -10,6 +10,12 @@
     $scope.appId = scFormParams.appId;
     $scope.lotId = scFormParams.lotId;
 
+    if($scope.categoryAlias === 'check') {
+      $scope.documentNumberLabel = 'persons.personCommonDocDirective.documentNumberCheck';
+    } else {
+      $scope.documentNumberLabel = 'persons.personCommonDocDirective.documentNumber';
+    }
+
     if (scFormParams.publisher) {
       $scope.model.part.documentPublisher = scFormParams.publisher;
     }

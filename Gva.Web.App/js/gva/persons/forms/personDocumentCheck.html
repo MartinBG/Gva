@@ -1,6 +1,6 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <gva-person-common-doc name="personDocumenForm" ng-model="model"
-      sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'check', hideCaseType: hideCaseType, appId: appId, lotId: lotId, publisher: publisher }"></gva-person-common-doc>
+      sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'check', hideCaseType: hideCaseType, appId: appId, lotId: lotId }"></gva-person-common-doc>
 
   <div ng-show="model.case.caseType">
     <h5 class="form-header" l10n-text="persons.personCheckDirective.checkData"></h5>
@@ -13,11 +13,14 @@
     <div ng-if="report.length > 0">
       <h5 class="form-header" l10n-text="persons.personCheckDirective.report"></h5>
         <sc-datatable items="report" sortable="false" pageable="false" filterable="false" has-info-text="false" dynamic-columns="false" scrollable="false">
+          <sc-column sortable="false" class="buttons-cell" has-content="true">
+            <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.reports.edit', params: {id: item.lotId, ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+          </sc-column>
           <sc-column data="publisher" title="persons.personCheckDirective.publisher">
           </sc-column>
           <sc-column data="reportNumber" title="persons.personCheckDirective.reportNumber">
           </sc-column>
-          <sc-column data="date" title="persons.personCheckDirective.date" type="date">
+          <sc-column data="date" title="persons.personCheckDirective.reportDate" type="date">
           </sc-column>
         </sc-datatable>
     </div>

@@ -23,6 +23,7 @@
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
+        <th style="width: 1px" ng-if="model.part.includedChecks.length"></th>
         <th style="width: 1px" ng-if="model.part.includedChecks.length && !form.$readonly"></th>
         <th l10n-text="persons.personReportDirective.checksTable.personLin"></th>
         <th l10n-text="persons.personReportDirective.checksTable.documentNumber"></th>
@@ -43,6 +44,9 @@
         <td colspan="13" class="text-center" l10n-text="persons.personReportDirective.checksTable.noChecks"></td>
       </tr>
       <tr ng-repeat="check in includedChecks">
+        <td ng-if="model.part.includedChecks.length">
+          <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.checks.edit', params: {id: check.lotId, ind: check.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+        </td>
         <td ng-if="model.part.includedChecks.length && !form.$readonly">
           <sc-button name="deleteCheckBtn" class="btn btn-xs btn-danger" ng-disabled="form.$readonly" btn-click="removeCheck(check)" icon="glyphicon-remove"></sc-button>
         </td>

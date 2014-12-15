@@ -1520,7 +1520,7 @@
           includedChecks: ' Проверки',
           checksTable: {
             personLin: 'ЛИН',
-            documentNumber: '№ на документа',
+            documentNumber: 'No док. на проверка',
             ratingClass: 'Клас',
             documentDateValidFrom: 'От дата',
             documentDateValidTo: 'До дата',
@@ -1598,8 +1598,8 @@
         personCheckDirective: {
           personCheckRatingValue: 'Оценка',
           checkData: 'Данни за проверка',
-          report: 'Отчет в който е включена тази проверка',
-          date: 'Дата',
+          report: 'Отчет, в който е включена тази проверка',
+          reportDate: 'Дата на отчета',
           publisher: 'Издател',
           reportNumber: 'Nо на отчета'
         },
@@ -1701,6 +1701,7 @@
           documentPublisher: 'Издател',
           valid: 'Валиден',
           documentNumber: 'Док No',
+          documentNumberCheck: 'Док No на проверка',
           documentPersonNumber: 'No в списъка (групов док.)',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
