@@ -25,9 +25,9 @@ namespace Gva.Api.Repositories.PersonRepository
             int offset = 0,
             int? limit = null);
 
-        List<GvaViewPerson> GetAwExaminers(string names, int offset = 0, int? limit = null);
+        List<GvaViewPerson> GetAwExaminers(string names = null, int offset = 0, int? limit = null);
 
-        List<GvaViewPerson> GetStaffExaminers(string names, int offset = 0, int? limit = null);
+        List<GvaViewPerson> GetStaffExaminers(string names = null, int offset = 0, int? limit = null);
 
         GvaViewPerson GetPerson(int personId);
 

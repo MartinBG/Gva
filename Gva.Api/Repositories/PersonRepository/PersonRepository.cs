@@ -90,7 +90,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .ToList();
         }
 
-        public List<GvaViewPerson> GetAwExaminers(string names, int offset = 0, int? limit = null)
+        public List<GvaViewPerson> GetAwExaminers(string names = null, int offset = 0, int? limit = null)
         {
             var predicate = PredicateBuilder.True<GvaViewPerson>();
 
@@ -112,7 +112,7 @@ namespace Gva.Api.Repositories.PersonRepository
                     .ToList();
         }
 
-        public List<GvaViewPerson> GetStaffExaminers(string names, int offset = 0, int? limit = null)
+        public List<GvaViewPerson> GetStaffExaminers(string names = null, int offset = 0, int? limit = null)
         {
             var predicate = PredicateBuilder.True<GvaViewPerson>();
 

@@ -215,8 +215,13 @@ namespace Gva.Api.Controllers
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
-                    name = e.Names
+                    name = string.Format("{0} {1}", e.Lin, e.Names)
                 });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                returnValue = returnValue.Where(v => v.name.ToLower().Contains(term));
+            }
 
             return Ok(returnValue);
         }
@@ -229,8 +234,13 @@ namespace Gva.Api.Controllers
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
-                    name = e.Names
+                    name = string.Format("{0} {1}", e.Lin, e.Names)
                 });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                returnValue = returnValue.Where(v => v.name.ToLower().Contains(term));
+            }
 
             return Ok(returnValue);
         }
@@ -244,8 +254,13 @@ namespace Gva.Api.Controllers
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
-                    name = e.Names
+                    name = string.Format("{0} {1}", e.Lin, e.Names)
                 });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                returnValue = returnValue.Where(v => v.name.ToLower().Contains(term));
+            }
 
             return Ok(returnValue);
         }

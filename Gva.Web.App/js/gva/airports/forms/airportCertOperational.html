@@ -7,7 +7,7 @@
 
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.organization" alias="'organizations'" l10n-text="airports.airportOperDirective.organization" class="col-sm-6 col-md-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.inspector" alias="'inspectors'" l10n-text="airports.airportOperDirective.inspector" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.inspector" alias="'inspectors'" l10n-text="airports.airportOperDirective.inspector" params="{limit: null}" class="col-sm-6 col-md-4"></sc-field>
   </div>
 
   <div class="row">
@@ -28,7 +28,7 @@
     <tbody>
       <tr ng-repeat-start="document in model.includedDocuments">
         <td>
-          <sc-nomenclature ng-model="document.inspector" alias="'inspectors'" ng-readonly="form.$readonly"></sc-nomenclature>
+          <sc-nomenclature ng-model="document.inspector" alias="'inspectors'" params="{limit: null}" ng-readonly="form.$readonly"></sc-nomenclature>
         </td>
         <td class="col-sm-3 col-md-2">
           <sc-date ng-model="document.approvalDate" ng-readonly="form.$readonly"></sc-date>
@@ -53,7 +53,7 @@
   <div class="row" ng-show="extReview">
     <sc-field type="date" ng-model="model.ext.date" l10n-text="airports.airportOperDirective.extDate" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="date" ng-model="model.ext.validToDate" l10n-text="airports.airportOperDirective.extValidToDate" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.ext.inspector" alias="'inspectors'" l10n-text="airports.airportOperDirective.extInspector" class="col-md-4 col-sm-8"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.ext.inspector" alias="'inspectors'" params="{limit: null}" l10n-text="airports.airportOperDirective.extInspector" class="col-md-4 col-sm-8"></sc-field>
   </div>
 
   <h5 class="form-header" style="margin-top:10px;" ng-init="revokeReview = false">
@@ -61,7 +61,7 @@
   </h5>
   <div class="row" ng-show="revokeReview">
     <sc-field type="date" ng-model="model.revokeDate" l10n-text="airports.airportOperDirective.revokeDate" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.revokeInspector" alias="'inspectors'" l10n-text="airports.airportOperDirective.revokeInspector" class="col-md-4 col-sm-8"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.revokeInspector" alias="'inspectors'" params="{limit: null}" l10n-text="airports.airportOperDirective.revokeInspector" class="col-md-4 col-sm-8"></sc-field>
     <sc-field type="text" ng-model="model.revokeCause" l10n-text="airports.airportOperDirective.revokeCause" class="col-md-4 col-sm-8"></sc-field>
   </div>
 </ng-form>

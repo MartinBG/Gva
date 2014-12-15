@@ -3,7 +3,7 @@
     <sc-field type="text" ng-model="model.part.examinerCode" required l10n-text="organizations.awExaminerDirective.examinerCode" validations="{required: 'default'}" class="col-md-6 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.person" alias="'awExaminers'" required l10n-text="organizations.awExaminerDirective.person" validations="{required: 'default'}" class="col-md-6 col-sm-8"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.person" alias="'awExaminers'" params="{limit: null}" required l10n-text="organizations.awExaminerDirective.person" validations="{required: 'default'}" class="col-md-6 col-sm-8"></sc-field>
   </div>
   <div class="row">
     <sc-field type="text" ng-model="model.part.stampNum" l10n-text="organizations.awExaminerDirective.content.stampNumber" class="col-md-3 col-sm-4"></sc-field>

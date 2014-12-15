@@ -10,8 +10,8 @@
     <sc-field type="date" ng-model="model.part.documentDateValidTo" ng-required="true" l10n-text="persons.ratingEditionDirective.documentDateValidTo" class="col-sm-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" alias="'inspectors'" ng-model="model.part.inspector" l10n-text="persons.ratingEditionDirective.inspector" class="col-sm-3"></sc-field>
-    <sc-field type="nomenclature" alias="'staffExaminers'" ng-model="model.part.examiner" l10n-text="persons.ratingEditionDirective.examiner" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" alias="'inspectors'" ng-model="model.part.inspector" params="{limit: null}" l10n-text="persons.ratingEditionDirective.inspector" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" alias="'staffExaminers'" ng-model="model.part.examiner" params="{limit: null}" l10n-text="persons.ratingEditionDirective.examiner" class="col-sm-3"></sc-field>
   </div>
   <div class="row">
     <sc-field type="textarea" ng-model="model.part.notes" sc-validate="{ invalidNotes: notesShouldBeFilled}" l10n-text="persons.ratingEditionDirective.notes" validations="{invalidNotes: 'errorTexts.invalidNotes'}" rows="3" class="col-md-3"></sc-field>
