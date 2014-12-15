@@ -567,15 +567,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             var partVersions = this.lotRepository.GetLotIndex(lotId).Index.GetParts<DocumentApplicationDO>(path);
 
-            var applicationStages = (from gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>()
-                             join ga in this.unitOfWork.DbContext.Set<GvaApplication>().Where(a => a.LotId == lotId) on gas.GvaApplicationId equals ga.GvaApplicationId
-                             group gas by ga.GvaAppLotPartId into appStage
-                             select new { appStage = appStage.OrderByDescending(s => s.GvaStageId).FirstOrDefault(), partId = appStage.Key.Value })
-                            .ToList();
-
             List<CaseTypePartDO<DocumentApplicationDO>> partVersionDOs = new List<CaseTypePartDO<DocumentApplicationDO>>();
             foreach (var partVersion in partVersions)
             {
+                var stages = this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                    .Include(s => s.GvaStage)
+                    .Where(s => s.GvaApplication.LotId == lotId && s.GvaApplication.GvaAppLotPartId == partVersion.PartId)
+                    .OrderByDescending(a => a.GvaAppStageId)
+                    .ToList();
+
                 var gvaApplication = this.unitOfWork.DbContext.Set<GvaApplication>()
                     .Include(a => a.GvaAppLotPart)
                     .Where(a => a.GvaAppLotPartId == partVersion.PartId)
@@ -583,11 +583,9 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
                 partVersion.Content.ApplicationId = gvaApplication.GvaApplicationId;
 
-                var stage = applicationStages.Where(ap => ap.partId == partVersion.Part.PartId).FirstOrDefault();
-                if(stage != null)
+                if (stages.Count() > 0)
                 {
-                    var applicationStage = stage.appStage;
-                    this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaStage).Load();
+                    var applicationStage = stages.First();
                     partVersion.Content.Stage = new NomValue()
                     {
                         Name = applicationStage.GvaStage.Name,
@@ -608,11 +606,12 @@ namespace Gva.Api.Repositories.ApplicationRepository
         public CaseTypePartDO<DocumentApplicationDO> GetApplicationPart(string path, int lotId)
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
-            var appStages = (from gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>()
-                             join ga in this.unitOfWork.DbContext.Set<GvaApplication>().Where(a => a.LotId == lotId) on gas.GvaApplicationId equals ga.GvaApplicationId
-                             group gas by ga.GvaAppLotPartId into appSt
-                             select new { appStage = appSt.OrderByDescending(s => s.GvaStageId).FirstOrDefault(), partId = appSt.Key.Value })
-                            .ToList();
+
+            var stages = this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                .Include(s => s.GvaStage)
+                .Where(s => s.GvaApplication.LotId == lotId && s.GvaApplication.GvaAppLotPartId == partVersion.PartId)
+                .OrderByDescending(a => a.GvaAppStageId)
+                .ToList();
 
             var gvaApplication = this.unitOfWork.DbContext.Set<GvaApplication>()
                     .Include(a => a.GvaAppLotPart)
@@ -621,11 +620,9 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
             partVersion.Content.ApplicationId = gvaApplication.GvaApplicationId;
 
-            var stage = appStages.Where(ap => ap.partId == partVersion.Part.PartId).FirstOrDefault();
-            if (stage != null)
+            if (stages.Count() > 0)
             {
-                var applicationStage = stage.appStage;
-                this.unitOfWork.DbContext.Entry(applicationStage).Reference(a => a.GvaStage).Load();
+                var applicationStage = stages.FirstOrDefault();
                 partVersion.Content.Stage = new NomValue()
                 {
                     Name = applicationStage.GvaStage.Name,
