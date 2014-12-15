@@ -15,7 +15,6 @@ namespace Gva.Api.ModelsDO.Organizations
         [Required(ErrorMessage = "NameAlt is required.")]
         public string NameAlt { get; set; }
 
-        [Required(ErrorMessage = "Code is required.")]
         public string Code { get; set; }
 
         public string Uin { get; set; }
