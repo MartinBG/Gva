@@ -154,6 +154,7 @@
     <Content Include="Insert\GvaExcelConfig\ConfigFinalize.sql" />
     <Content Include="Insert\GvaExcelConfig\ExcelConfig.xml" />
     <Content Include="Insert\Noms\Organizations\aircarrierServices.sql" />
+    <Content Include="Insert\Noms\Persons\ratingNotes.sql" />
     <Content Include="Insert\Noms\Persons\linTypes.sql" />
     <Content Include="Insert\Noms\Persons\asExamQuestionTypes.sql" />
     <Content Include="Insert\Noms\Persons\_personsMigrationNoms.sql" />

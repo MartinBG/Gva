@@ -14,8 +14,8 @@
     <sc-field type="nomenclature" alias="'staffExaminers'" ng-model="model.part.examiner" ng-disabled="model.part.inspector" params="{limit: null}" l10n-text="persons.ratingEditionDirective.examiner" class="col-sm-3"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="textarea" ng-model="model.part.notes" sc-validate="{ invalidNotes: notesShouldBeFilled}" l10n-text="persons.ratingEditionDirective.notes" validations="{invalidNotes: 'errorTexts.invalidNotes'}" rows="3" class="col-md-3"></sc-field>
-    <sc-field type="textarea" ng-model="model.part.notesAlt" sc-validate="{ invalidNotesAlt: notesAltShouldBeFilled}" l10n-text="persons.ratingEditionDirective.notesAlt" validations="{invalidNotesAlt: 'errorTexts.invalidNotesAlt'}" rows="3" class="col-md-3"></sc-field>
+    <sc-field type="textarea-suggestion" ng-model="model.part.notes" sc-validate="{ invalidNotes: notesShouldBeFilled}" alias="'ratingNotes'" l10n-text="persons.ratingEditionDirective.notes" validations="{invalidNotes: 'errorTexts.invalidNotes'}" rows="3" class="col-md-3"></sc-field>
+    <sc-field type="textarea-suggestion" ng-model="model.part.notesAlt" sc-validate="{ invalidNotesAlt: notesAltShouldBeFilled}" alias="'ratingNotes'" l10n-text="persons.ratingEditionDirective.notesAlt" validations="{invalidNotesAlt: 'errorTexts.invalidNotesAlt'}" rows="3" class="col-md-3"></sc-field>
   </div>
   <div class="row">
     <div class="form-group col-sm-9 col-md-7">

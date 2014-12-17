@@ -156,6 +156,7 @@ GO
 
 :r $(rootPath)\"..\Insert\Noms\Persons\_personsMigrationNoms.sql"
 :r $(rootPath)\"..\Insert\Noms\Persons\linTypes.sql"
+:r $(rootPath)\"..\Insert\Noms\Persons\ratingNotes.sql"
 :r $(rootPath)\"..\Insert\Noms\Persons\asExamQuestionTypes.sql"
 :r $(rootPath)\"..\Insert\asExams.sql"
 
