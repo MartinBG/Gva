@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular, moment, _*/
+(function (angular, moment, _) {
   'use strict';
 
   function ApplicationsSearchCtrl(
@@ -47,6 +47,25 @@
     $scope.newApp = function () {
       return $state.go('root.applications.new', $stateParams);
     };
+
+    $scope.isExpiringApplication = function (item) {
+      if (item.gvaApplicationStage && item.gvaApplicationStage.stageTermDate) {
+        var today = moment(new Date()),
+          difference = moment(item.gvaApplicationStage.stageTermDate).diff(today, 'days');
+
+        return 0 <= difference && difference <= 7;
+      }
+
+      return false;
+    };
+
+    $scope.isExpiredApplication = function (item) {
+      if (item.gvaApplicationStage && item.gvaApplicationStage.stageTermDate) {
+        return moment(new Date()).isAfter(item.gvaApplicationStage.stageTermDate);
+      }
+
+      return false;
+    };
   }
 
   ApplicationsSearchCtrl.$inject = [
@@ -67,4 +86,4 @@
   };
 
   angular.module('gva').controller('ApplicationsSearchCtrl', ApplicationsSearchCtrl);
-}(angular, _));
+}(angular, moment, _));

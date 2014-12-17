@@ -357,12 +357,20 @@ namespace Gva.Api.Controllers.Applications
                     .Where(s => s.Alias.Equals("new"))
                     .Single().GvaStageId;
 
+                dynamic stageTermDate = null;
+                int? duration = this.nomRepository.GetNomValue("applicationTypes", application.ApplicationType.NomValueId).TextContent.Get<int?>("duration");
+                if (duration.HasValue)
+                {
+                    stageTermDate = DateTime.Now.AddDays(duration.Value);
+                }
+
                 GvaApplicationStage applicationStage = new GvaApplicationStage()
                 {
                     GvaStageId = stageId,
                     StartingDate = DateTime.Now,
                     Ordinal = 0,
-                    GvaApplicationId = newGvaApplication.GvaApplicationId
+                    GvaApplicationId = newGvaApplication.GvaApplicationId,
+                    StageTermDate = stageTermDate
                 };
 
                 this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);

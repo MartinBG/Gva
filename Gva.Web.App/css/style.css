@@ -444,21 +444,25 @@ table.table thead th {
 }
 
 .expiringDocument {
-    background-color: #ffff99
+    background-color: #ffff99;
+}
+
+.expiredApplication {
+    background-color: #FF9999;
 }
 
 .invalidDocument {
-    background-color: #ffcc99
+    background-color: #ffcc99;
 }
 .expiredDocument {
-    background-color: #C0C0C0
+    background-color: #C0C0C0;
 }
 
 .declinedApplication {
-    background-color: #ffcc99
+    background-color: #ffcc99;
 }
 .doneApplication {
-    background-color: #C0C0C0
+    background-color: #C0C0C0;
 }
 
 .ems-portal-modal-window .modal-dialog {

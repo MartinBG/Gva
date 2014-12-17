@@ -59,6 +59,8 @@ namespace Gva.Api.ModelsDO.Applications
 
         public string GvaEquipmentProducer { get; set; }
 
+        public GvaApplicationStage GvaApplicationStage { get; set; }
+
         public string Description
         {
             get

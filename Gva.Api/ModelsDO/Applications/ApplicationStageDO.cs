@@ -5,6 +5,10 @@ namespace Gva.Api.ModelsDO.Applications
 {
     public class ApplicationStageDO
     {
+        public ApplicationStageDO() 
+        {
+        }
+
         public ApplicationStageDO(GvaApplicationStage appStage)
         {
             this.Id = appStage.GvaAppStageId;

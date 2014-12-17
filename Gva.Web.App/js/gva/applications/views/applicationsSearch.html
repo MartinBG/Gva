@@ -10,13 +10,19 @@
   <sc-search-button action="add"></sc-search-button>
 </sc-search>
 
-<sc-datatable items="applications" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="appPartDocumentDate">
+<sc-datatable items="applications" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="appPartDocumentDate"
+  row-class="{'expiredApplication' : isExpiredApplication(item), 'expiringDocument' : isExpiringApplication(item)}">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="viewButton" btn-click="viewApplication(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="lotSetName" title="applications.search.lotSetName">
   </sc-column>
   <sc-column data="description" title="applications.search.description">
+  </sc-column>
+  <sc-column  title="applications.search.stageTermDate" has-content="true">
+    {{item.gvaApplicationStage.stageTermDate | date:'mediumDate'}}
+  </sc-column>
+  <sc-column  data="gvaApplicationStage.gvaStage.name" title="applications.search.stage">
   </sc-column>
   <sc-column data="appPartDocumentDate" type="date" title="applications.search.documentDate">
   </sc-column>

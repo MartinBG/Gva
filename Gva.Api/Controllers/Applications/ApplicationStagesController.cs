@@ -5,8 +5,10 @@ using Common.Data;
 using Common.Json;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO.Applications;
+using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.ApplicationStageRepository;
 using Newtonsoft.Json.Linq;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Applications
 {
@@ -16,13 +18,19 @@ namespace Gva.Api.Controllers.Applications
     {
         private IUnitOfWork unitOfWork;
         private IApplicationStageRepository applicationStageRepository;
+        private IApplicationRepository applicationRepository;
+        private ILotRepository lotRepository;
 
         public ApplicationStagesController(
             IUnitOfWork unitOfWork,
-            IApplicationStageRepository applicationStageRepository)
+            IApplicationStageRepository applicationStageRepository,
+            IApplicationRepository applicationRepository,
+            ILotRepository lotRepository)
         {
             this.unitOfWork = unitOfWork;
             this.applicationStageRepository = applicationStageRepository;
+            this.applicationRepository = applicationRepository;
+            this.lotRepository = lotRepository;
         }
 
         [Route("")]
@@ -36,23 +44,33 @@ namespace Gva.Api.Controllers.Applications
 
         [Route("")]
         [HttpPost]
-        public IHttpActionResult PostNewApplicationStage(int appId, JObject appStage)
+        public IHttpActionResult PostNewApplicationStage(int appId, ApplicationStageDO appStage)
         {
-            GvaApplicationStage stage = new GvaApplicationStage()
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                GvaApplicationId = appId,
-                GvaStageId = appStage.Get<int>("stageId"),
-                StartingDate = appStage.Get<DateTime>("date"),
-                InspectorLotId = appStage.Get<int?>("inspectorId"),
-                Ordinal = appStage.Get<int>("ordinal"),
-                Note = appStage.Get<string>("note")
-            };
+                int stageId = appStage.StageId;
+                var stageTermDate = this.applicationStageRepository.GetApplicationTermDate(appId, stageId);
+                GvaStage gvaStage = this.unitOfWork.DbContext.Set<GvaStage>().Find(stageId);
 
-            var applicationStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(stage);
+                GvaApplicationStage stage = new GvaApplicationStage()
+                {
+                    GvaApplicationId = appId,
+                    GvaStageId = gvaStage.GvaStageId,
+                    StartingDate = appStage.Date,
+                    InspectorLotId = appStage.InspectorId,
+                    Ordinal = appStage.Ordinal,
+                    Note = appStage.Note,
+                    StageTermDate = stageTermDate
+                };
 
-            this.unitOfWork.Save();
+                GvaApplicationStage applicationStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(stage);
 
-            return Ok(applicationStage);
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok(applicationStage);
+            }
         }
 
         [Route("{stageId}")]
@@ -64,21 +82,31 @@ namespace Gva.Api.Controllers.Applications
 
         [Route("{stageId}")]
         [HttpPost]
-        public IHttpActionResult PostApplicationStage(int appId, int stageId, JObject appStage)
+        public IHttpActionResult PostApplicationStage(int appId, int stageId, ApplicationStageDO appStage)
         {
-            var applicationStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>().Find(stageId);
-            if (applicationStage != null)
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                applicationStage.GvaStageId = appStage.Get<int>("stageId");
-                applicationStage.StartingDate = appStage.Get<DateTime>("date");
-                applicationStage.InspectorLotId = appStage.Get<int?>("inspectorId");
-                applicationStage.Ordinal = appStage.Get<int>("ordinal");
-                applicationStage.Note = appStage.Get<string>("note");
+                int gvaStageId = appStage.StageId;
+                GvaApplicationStage applicationStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>().Find(stageId);
+                var stageTermDate = this.applicationStageRepository.GetApplicationTermDate(appId, gvaStageId);
+                GvaStage gvaStage = this.unitOfWork.DbContext.Set<GvaStage>().Find(stageId);
+
+                if (applicationStage != null)
+                {
+                    applicationStage.GvaStageId = appStage.StageId;
+                    applicationStage.StartingDate = appStage.Date;
+                    applicationStage.InspectorLotId = appStage.InspectorId;
+                    applicationStage.Ordinal = appStage.Ordinal;
+                    applicationStage.Note = appStage.Note;
+                    applicationStage.StageTermDate = stageTermDate;
+                }
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok(applicationStage);
             }
-
-            this.unitOfWork.Save();
-
-            return Ok(applicationStage);
         }
 
         [Route("{stageId}")]

@@ -2831,6 +2831,8 @@
           status: 'Статус',
           lin: 'ЛИН',
           description: 'Описание',
+          stage: 'Статус',
+          stageTermDate: 'Срок',
           aircraftICAO: 'ICAO',
           organizationUIN: 'Булстат'
         },

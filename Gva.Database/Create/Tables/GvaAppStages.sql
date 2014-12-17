@@ -6,6 +6,7 @@ CREATE TABLE [dbo].[GvaAppStages] (
     [GvaApplicationId]   INT           NOT NULL,
     [GvaStageId]         INT           NOT NULL,
     [StartingDate]       DATETIME2     NOT NULL,
+	[StageTermDate]      DATETIME2     NULL,
     [InspectorLotId]     INT           NULL,
     [Ordinal]            INT           NOT NULL,
 	[Note]               NVARCHAR(MAX) NULL,
@@ -22,6 +23,7 @@ exec spDescColumn N'GvaAppStages', N'GvaAppStageId'      , N'Уникален с
 exec spDescColumn N'GvaAppStages', N'GvaApplicationId'   , N'Идентификатор на заявление'
 exec spDescColumn N'GvaAppStages', N'GvaStageId'         , N'Идентификатор на вид дейност'
 exec spDescColumn N'GvaAppStages', N'StartingDate'       , N'Начална дата'
+exec spDescColumn N'GvaAppStages', N'StageTermDate'      , N'Срок'
 exec spDescColumn N'GvaAppStages', N'InspectorLotId'     , N'Инспектор'
 exec spDescColumn N'GvaAppStages', N'Ordinal'            , N'Пореден номер'
 exec spDescColumn N'GvaAppStages', N'Note'               , N'Бележка'

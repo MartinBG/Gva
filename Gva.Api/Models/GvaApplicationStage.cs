@@ -23,6 +23,8 @@ namespace Gva.Api.Models
 
         public string Note { get; set; }
 
+        public DateTime? StageTermDate { get; set; }
+
         public virtual GvaApplication GvaApplication { get; set; }
 
         public virtual GvaStage GvaStage { get; set; }
@@ -47,6 +49,7 @@ namespace Gva.Api.Models
             this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
             this.Property(t => t.GvaStageId).HasColumnName("GvaStageId");
             this.Property(t => t.StartingDate).HasColumnName("StartingDate");
+            this.Property(t => t.StageTermDate).HasColumnName("StageTermDate");
             this.Property(t => t.InspectorLotId).HasColumnName("InspectorLotId");
             this.Property(t => t.Ordinal).HasColumnName("Ordinal");
             this.Property(t => t.Note).HasColumnName("Note");

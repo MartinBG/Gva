@@ -16,6 +16,8 @@
     $scope.doc = doc;
     $scope.applicationPart = applicationPart;
     $scope.appStages = appStages;
+    $scope.lastAppStage = _.last(appStages);
+
     $scope.docElectronicServiceStages = _.map(_.cloneDeep(doc.docElectronicServiceStages),
       function (docElectronicServiceStage) {
         docElectronicServiceStage.electronicServiceStageExecutors =

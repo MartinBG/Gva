@@ -7,6 +7,8 @@ using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
+using Common.Json;
+using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Common;
@@ -374,24 +376,34 @@ namespace Gva.Api.Controllers.Persons
         {
             foreach (AplicationStageDO document in stampedDocuments)
             {
-                int applicationId = document.ApplicationId;
-                int lastStageOrdinal =
-                        this.applicationStageRepository.GetApplicationStages(applicationId).Last().Ordinal;
+                var applicationStages = this.applicationStageRepository.GetApplicationStages(document.ApplicationId);
+                int lastStageOrdinal = applicationStages.Last().Ordinal;
 
-                foreach (string stageAlias in document.StageAliases)
+                var application = this.applicationRepository.GetApplicationById(document.ApplicationId);
+                int? documentDuration = application.ApplicationType.TextContent.Get<int?>("duration");
+
+                List<string> newStagesAliases = this.unitOfWork.DbContext.Set<GvaStage>()
+                        .Where(s => document.StageAliases.Contains(s.Alias))
+                        .OrderBy(s => s.GvaStageId)
+                        .Select(s => s.Alias)
+                        .ToList();
+
+                foreach (string stageAlias in newStagesAliases)
                 {
-                    int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
+                    var stage = this.unitOfWork.DbContext.Set<GvaStage>()
                         .Where(s => s.Alias.Equals(stageAlias))
-                        .Single().GvaStageId;
+                        .Single();
 
                     lastStageOrdinal++;
+                    var stageTermDate = this.applicationStageRepository.GetApplicationTermDate(document.ApplicationId, stage.GvaStageId);
 
                     GvaApplicationStage applicationStage = new GvaApplicationStage()
                     {
-                        GvaStageId = stageId,
+                        GvaStageId = stage.GvaStageId,
                         StartingDate = DateTime.Now,
                         Ordinal = lastStageOrdinal,
-                        GvaApplicationId = applicationId
+                        GvaApplicationId = document.ApplicationId,
+                        StageTermDate = stageTermDate
                     };
 
                     this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);

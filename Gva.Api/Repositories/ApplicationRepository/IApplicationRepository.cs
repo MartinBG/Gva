@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Common.Api.Repositories;
 using Gva.Api.Models;
+using Gva.Api.Models.Views;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Applications;
 using Gva.Api.ModelsDO.Common;
@@ -21,6 +22,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null
             );
+
+        GvaViewApplication GetApplicationById(int applicationId);
 
         IEnumerable<ApplicationListDO> GetPersonApplications(
             DateTime? fromDate = null,
