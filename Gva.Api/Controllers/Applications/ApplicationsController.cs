@@ -90,6 +90,7 @@ namespace Gva.Api.Controllers.Applications
             int? personLin = null,
             string aircraftIcao = null,
             string organizationUin = null,
+            int? stage = null,
             int offset = 0, 
             int? limit = null
             )
@@ -101,6 +102,7 @@ namespace Gva.Api.Controllers.Applications
                 personLin: personLin,
                 aircraftIcao: aircraftIcao,
                 organizationUin: organizationUin,
+                stage: stage,
                 offset: offset,
                 limit: limit);
 

@@ -30,7 +30,8 @@
         toDate: $scope.filters.toDate,
         personLin: $scope.filters.personLin,
         aircraftIcao: $scope.filters.aircraftIcao,
-        organizationUin: $scope.filters.organizationUin
+        organizationUin: $scope.filters.organizationUin,
+        stage: $scope.filters.stage
       }, { reload: true });
     };
 

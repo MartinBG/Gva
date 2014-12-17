@@ -44,29 +44,30 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int? personLin = null,
             string aircraftIcao = null,
             string organizationUin = null,
+            int? stage = null,
             int offset = 0,
             int? limit = null
             )
         {
             if (lotSetAlias == "person")
             {
-                return this.GetPersonApplications(fromDate, toDate, personLin, offset, limit);
+                return this.GetPersonApplications(fromDate, toDate, personLin, stage, offset, limit);
             }
             else if (lotSetAlias == "aircraft")
             {
-                return this.GetAircraftApplications(fromDate, toDate, aircraftIcao, offset, limit);
+                return this.GetAircraftApplications(fromDate, toDate, aircraftIcao, stage, offset, limit);
             }
             else if (lotSetAlias == "organization")
             {
-                return this.GetOrganizationApplications(fromDate, toDate, organizationUin, offset, limit);
+                return this.GetOrganizationApplications(fromDate, toDate, organizationUin, stage, offset, limit);
             }
             else if (lotSetAlias == "equipment")
             {
-                return this.GetEquipmentApplications(fromDate, toDate, offset, limit);
+                return this.GetEquipmentApplications(fromDate, toDate, stage, offset, limit);
             }
             else if (lotSetAlias == "airport")
             {
-                return this.GetAirportApplications(fromDate, toDate, offset, limit);
+                return this.GetAirportApplications(fromDate, toDate, stage, offset, limit);
             }
             else
             {
@@ -78,6 +79,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? personLin = null,
+            int? stage = null,
             int offset = 0,
             int? limit = null)
         {
@@ -125,7 +127,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             predicate = predicate
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
-                .AndEquals(e => e.GViewPerson.Lin, personLin);
+                .AndEquals(e => e.GViewPerson.Lin, personLin)
+                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
 
             var applications = applicationsJoin
                 .Where(predicate)
@@ -158,6 +161,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string aircraftIcao = null,
+            int? stage = null,
             int offset = 0,
             int? limit = null)
         {
@@ -210,7 +214,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             predicate = predicate
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
-                .AndStringContains(e => e.GViewAircraft.ICAO, aircraftIcao);
+                .AndStringContains(e => e.GViewAircraft.ICAO, aircraftIcao)
+                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
 
             var applications = applicationsJoin
                 .Where(predicate)
@@ -243,6 +248,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string organizationUin = null,
+            int? stage = null,
             int offset = 0,
             int? limit = null)
         {
@@ -290,7 +296,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             predicate = predicate
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
-                .AndStringContains(e => e.GViewOrganization.Uin, organizationUin);
+                .AndStringContains(e => e.GViewOrganization.Uin, organizationUin)
+                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
 
             var applications = applicationsJoin
                 .Where(predicate)
@@ -321,6 +328,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
         public IEnumerable<ApplicationListDO> GetEquipmentApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
+            int? stage = null,
             int offset = 0,
             int? limit = null)
         {
@@ -369,7 +377,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
             predicate = predicate
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
-                .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate);
+                .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
+                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
 
             var applications = applicationsJoin
                 .Where(predicate)
@@ -401,6 +410,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
         public IEnumerable<ApplicationListDO> GetAirportApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
+            int? stage = null,
             int offset = 0,
             int? limit = null)
         {
@@ -447,7 +457,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
             predicate = predicate
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
-                .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate);
+                .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
+                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
 
             var applications = applicationsJoin
                 .Where(predicate)
