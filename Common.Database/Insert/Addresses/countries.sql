@@ -1,10 +1,10 @@
 ﻿PRINT 'Insert Countries'
 GO
 
-SET IDENTITY_INSERT Gva.[dbo].[Countries] ON
+SET IDENTITY_INSERT [dbo].[Countries] ON
 GO
 
-INSERT INTO Gva.[dbo].[Countries]
+INSERT INTO [dbo].[Countries]
     ([CountryId], [Code], [Name], [IsActive])
 VALUES
 (1, 'AW', N'Аруба', 1),
