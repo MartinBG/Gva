@@ -1,7 +1,100 @@
-﻿<sc-datatable items="nomenclatures" filterable="true" pageable="true" sortable="true">
-  <sc-column sortable="false" class="buttons-cell-compact" has-content="true">
-    <sc-button name="viewButton" btn-click="viewNomenclatureValues(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-  </sc-column>
-  <sc-column sortable="false" data="name" title="common.nomenclatures.noms.search.name">
-  </sc-column>
-</sc-datatable>
+﻿  <sc-tabs tab-list="{
+    'common.nomenclatures.tabs.systemConfigs': {
+      'common.nomenclatures.tabs.applications': {
+        state: 'root.nomenclatures.search.applications',
+        stateParams: {
+          category: 'application'
+        }
+      },
+      'common.nomenclatures.tabs.licences': {
+        state: 'root.nomenclatures.search.licences',
+        stateParams: {
+          category: 'licence'
+        }
+      },
+      'common.nomenclatures.tabs.ratings': {
+        state: 'root.nomenclatures.search.ratings',
+        stateParams: {
+          category: 'rating'
+        }
+      },
+      'common.nomenclatures.tabs.documents': {
+        state: 'root.nomenclatures.search.documents',
+        stateParams: {
+          category: 'document'
+        }
+      },
+      'common.nomenclatures.tabs.orgApprovals': {
+        state: 'root.nomenclatures.search.orgApprovals',
+        stateParams: {
+          category: 'orgApproval'
+        }
+      },
+      'common.nomenclatures.tabs.inspections': {
+        state: 'root.nomenclatures.search.inspections',
+        stateParams: {
+          category: 'inspection'
+        }
+      }
+    },
+    'common.nomenclatures.tabs.system' : {
+      state: 'root.nomenclatures.search.system',
+      stateParams: {
+        category: 'system'
+      }
+    },
+    'common.nomenclatures.tabs.persons' : {
+        state: 'root.nomenclatures.search.persons',
+        stateParams: {
+          category: 'person'
+        }
+    },
+    'common.nomenclatures.tabs.aircrafts' : {
+        state: 'root.nomenclatures.search.aircrafts',
+        stateParams: {
+          category: 'aircraft'
+        }
+    },
+    'common.nomenclatures.tabs.organizations' : {
+      'common.nomenclatures.tabs.common' : {
+        state: 'root.nomenclatures.search.orgCommon',
+        stateParams: {
+          category: 'orgCommon'
+        }
+      },
+      'common.nomenclatures.tabs.145mf' : {
+        state: 'root.nomenclatures.search.org145mf',
+        stateParams: {
+        	category: 'org145mf'
+        }
+      },
+      'common.nomenclatures.tabs.147' : {
+        state: 'root.nomenclatures.search.org147',
+        stateParams: {
+          category: 'org147'
+        }
+      },
+      'common.nomenclatures.tabs.reports' : {
+        state: 'root.nomenclatures.search.orgReport',
+        stateParams: {
+          category: 'orgReport'
+        }
+      }
+    },
+    'common.nomenclatures.tabs.equipments' : {
+      state: 'root.nomenclatures.search.equipments',
+      stateParams: {
+        category: 'equipment'
+      }
+    },
+    'common.nomenclatures.tabs.airports' : {
+      state: 'root.nomenclatures.search.airports',
+      stateParams: {
+        category: 'airport'
+      }
+    }
+  }"></sc-tabs>
+  <div class="tab-content">
+    <div ui-view></div>
+    <div class="clear"></div>
+  </div>

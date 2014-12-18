@@ -129,6 +129,25 @@
           }
         },
         nomenclatures: {
+          tabs: {
+            systemConfigs: 'Конфигуриране на системата',
+            orgApprovals: 'Удостоверения за организации',
+            applications: 'Заявления',
+            licences: 'Лицензи',
+            ratings: 'Квалификации',
+            documents: 'Документи',
+            system: 'Системни номенклатури',
+            persons: 'Номенклатури за ФЛ',
+            aircrafts: 'Номенклатури за ВС	',
+            organizations: 'Номенклатури за организации',
+            common: 'Общи',
+            '145mf': '145/MF',
+            '147': '147',
+            reports: 'Доклади',
+            inspections: 'Инспекции',
+            equipments: 'Номенклатури за съоръжения',
+            airports: 'Номенклатури за летища'
+          },
           noms: {
             search: {
               name: 'Наименование'
@@ -184,8 +203,24 @@
         'root.nomenclatures': 'Общи номенклатури',
         'root.nomenclatures.new': 'Нов вид номенклатура',
         'root.nomenclatures.edit': 'Редакция',
-        'root.nomenclatures.values': 'Списък стойности',
-        'root.nomenclatures.values.edit': 'Редакция'
+        'root.nomenclatures.search.values': 'Списък стойности',
+        'root.nomenclatures.search.values.edit': 'Редакция',
+        'root.nomenclatures.search': 'Търсене',
+        'root.nomenclatures.search.applications': 'Заявления',
+        'root.nomenclatures.search.licences': 'Лицензи',
+        'root.nomenclatures.search.inspections': 'Инспекции',
+        'root.nomenclatures.search.ratings': 'Квалификации',
+        'root.nomenclatures.search.documents': 'Документи',
+        'root.nomenclatures.search.orgApprovals': 'Удостоверения за организации',
+        'root.nomenclatures.search.system': 'Системни номенклатури',
+        'root.nomenclatures.search.persons': 'Номенклатури за ФЛ',
+        'root.nomenclatures.search.aircrafts': 'Номенклатури за ВС	',
+        'root.nomenclatures.search.airports': 'Номенклатури за Летища	',
+        'root.nomenclatures.search.equipments': 'Номенклатури за Съоръжения	',
+        'root.nomenclatures.search.orgCommon': 'Общи номенклатури за организации',
+        'root.nomenclatures.search.org145mf': '145/MF',
+        'root.nomenclatures.search.org147': '147', 
+        'root.nomenclatures.search.orgReport': 'Доклади'
       }
     });
   }]);

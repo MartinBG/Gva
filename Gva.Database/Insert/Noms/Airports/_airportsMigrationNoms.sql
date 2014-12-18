@@ -1,7 +1,7 @@
 ﻿GO
 INSERT INTO [Noms]
-    ([Name]                                          , [Alias]            )
+    ([Name]                                          , [Alias]            , [Category])
 VALUES
-    (N'Типове връзки с Летище или летателна площадка', N'airportRelations'),
-    (N'Типове Летище или летателна площадка'         , N'airportTypes'    )
+    (N'Типове връзки с Летище или летателна площадка', N'airportRelations', 'airport'),
+    (N'Типове Летище или летателна площадка'         , N'airportTypes'    , 'airport')
 GO

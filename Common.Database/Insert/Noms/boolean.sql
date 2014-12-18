@@ -1,5 +1,5 @@
 ﻿GO
-INSERT [dbo].[Noms] ([Name], [Alias]) VALUES (N'Да/Не номенклатура', N'boolean')
+INSERT [dbo].[Noms] ([Name], [Alias], [Category]) VALUES (N'Да/Не номенклатура', N'boolean', N'system')
 
 DECLARE @nomId INT = @@IDENTITY
 

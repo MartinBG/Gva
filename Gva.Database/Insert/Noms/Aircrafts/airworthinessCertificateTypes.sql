@@ -1,5 +1,5 @@
 ﻿GO
-INSERT INTO Noms (Name, Alias) VALUES ('Тип летателна годност','airworthinessCertificateTypes')
+INSERT INTO Noms (Name, Alias, Category) VALUES ('Тип летателна годност','airworthinessCertificateTypes', 'aircraft')
 
 DECLARE @nomId INT = @@IDENTITY
 

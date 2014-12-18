@@ -1,5 +1,5 @@
 ﻿GO
-INSERT [dbo].[Noms] ([Name], [Alias]) VALUES (N'Бележки за квалификационен клас', N'ratingNotes')
+INSERT [dbo].[Noms] ([Name], [Alias], [Category]) VALUES (N'Бележки за квалификационен клас', N'ratingNotes', N'rating')
 
 DECLARE @nomId INT = @@IDENTITY
 

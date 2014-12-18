@@ -12,14 +12,14 @@
     $scope.nomenclatureValues = nomenclatureValues;
 
     $scope.editNomenclatureValue = function (item) {
-      return $state.go('root.nomenclatures.values.edit', {
+      return $state.go('root.nomenclatures.search.values.edit', {
         nomId: $stateParams.nomId,
         id: item.nomValueId
       });
     };
 
     $scope.newNomenclatureValue = function () {
-      return $state.go('root.nomenclatures.values.edit', {
+      return $state.go('root.nomenclatures.search.values.edit', {
         nomId: $stateParams.nomId,
         id: undefined
       });

@@ -1,5 +1,5 @@
 ﻿GO
-INSERT [dbo].[Noms] ([Name], [Alias]) VALUES (N'Производител', N'equipmentProducers')
+INSERT [dbo].[Noms] ([Name], [Alias], [Category]) VALUES (N'Производител', N'equipmentProducers', N'equipment')
 
 DECLARE @nomId INT = @@IDENTITY
 

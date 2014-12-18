@@ -17,6 +17,8 @@ namespace Common.Api.Models
 
         public string Alias { get; set; }
 
+        public string Category { get; set; }
+
         public virtual ICollection<NomValue> NomValues { get; set; }
     }
 
@@ -44,6 +46,7 @@ namespace Common.Api.Models
             this.Property(t => t.NomId).HasColumnName("NomId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Alias).HasColumnName("Alias");
+            this.Property(t => t.Category).HasColumnName("Category");
         }
     }
 }

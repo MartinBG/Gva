@@ -1,5 +1,5 @@
 ﻿GO
-INSERT [dbo].[Noms] ([Name], [Alias]) VALUES (N'Причина за дерегистрация на ВС', N'aircraftRemovalReasonsFm')
+INSERT [dbo].[Noms] ([Name], [Alias], [Category]) VALUES (N'Причина за дерегистрация на ВС', N'aircraftRemovalReasonsFm', 'aircraft')
 
 DECLARE @nomId INT = @@IDENTITY
 

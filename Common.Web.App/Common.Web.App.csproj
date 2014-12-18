@@ -52,6 +52,8 @@
     <Content Include="js\common\login\loginModalCtrl.js" />
     <Content Include="js\common\nomenclatures\resources\NomenclatureValuesRsrc.js" />
     <Content Include="js\common\nomenclatures\resources\NomenclaturesRsrc.js" />
+    <Content Include="js\common\nomenclatures\views\categoryNoms.html" />
+    <Content Include="js\common\nomenclatures\views\categoryNomsCtrl.js" />
     <Content Include="js\common\nomenclatures\views\nomenclatureValuesEdit.html" />
     <Content Include="js\common\nomenclatures\views\nomenclatureValuesEditCtrl.js" />
     <Content Include="js\common\nomenclatures\views\nomenclatureValues.html" />

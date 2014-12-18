@@ -31,6 +31,17 @@ namespace Common.Api.Controllers
             return Ok(noms);
         }
 
+        [Route("api/admin/nomenclatures")]
+        [HttpGet]
+        public IHttpActionResult GetNomenclaturesByCategory(string category)
+        {
+            List<Nom> noms = this.unitOfWork.DbContext.Set<Nom>()
+                .Where(n => n.Category.Equals(category))
+                .ToList();
+
+            return Ok(noms);
+        }
+
         [Route("api/admin/nomenclatures/{id:int}")]
         [HttpGet]
         public IHttpActionResult GetNomenclature(int id)

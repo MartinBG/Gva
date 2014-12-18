@@ -21,7 +21,7 @@
             id: $stateParams.id
           }, $scope.nomenclatureValue)
             .$promise.then(function () {
-              return $state.go('root.nomenclatures.values',
+              return $state.go('root.nomenclatures.search.values',
                 { nomId: $stateParams.nomId }, { reload: true });
             });
         }
@@ -29,7 +29,7 @@
     };
 
     $scope.cancel = function cancel() {
-      return $state.go('root.nomenclatures.values', { nomId: $stateParams.nomId });
+      return $state.go('root.nomenclatures.search.values', { nomId: $stateParams.nomId });
     };
 
     $scope.deleteNomenclatureValue = function () {
