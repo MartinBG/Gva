@@ -30,7 +30,7 @@
             title: l10n.get(tabTitle) || tabTitle,
             className: tabTitle.replace(' ', '-')
           },
-              tab = tabsObject[tabTitle];
+          tab = tabsObject[tabTitle];
 
           if (_.isString(tab)) {
             newTab.isState = true;
@@ -51,19 +51,31 @@
               newTab.isState = false;
               newTab.children = [];
 
-              angular.forEach(_.keys(tab), function (childTabTitle) {
-                var childTab = $state.get(tab[childTabTitle]);
-                newTab.children.push({
+              angular.forEach(_.keys(tab), function (child) {
+                var childTab = tabsObject[tabTitle][child];
+
+                var newChild = {
                   parent: newTab,
-                  title: l10n.get(childTabTitle) || childTabTitle,
+                  title: l10n.get(child) || child,
                   isActive: false,
                   isState: true,
-                  name: childTab.name,
-                  state: $state.getWrapper(childTab.name)['abstract'] ?
-                    $state.getWrapper(childTab.name).defaultChild :
-                    $state.getWrapper(childTab.name),
-                  className: childTabTitle.replace(' ', '-')
-                });
+                  className: child.replace(' ', '-')
+                };
+
+                if (_.isString(childTab)) {
+                  var newChildTab = $state.get(tab[child]);
+                  newChild.name = newChildTab.name;
+                  newChild.state = $state.getWrapper(newChildTab.name)['abstract'] ?
+                      $state.getWrapper(newChildTab.name).defaultChild :
+                      $state.getWrapper(newChildTab.name);
+                } else {
+                  newChild.state = $state.getWrapper(childTab.state)['abstract'] ?
+                    $state.getWrapper(childTab.state).defaultChild :
+                    $state.getWrapper(childTab.state);
+                  newChild.name = $state.get(childTab.state).name;
+                  newChild.stateParams = childTab.stateParams;
+                }
+                newTab.children.push(newChild);
               });
             }
           }
@@ -97,26 +109,22 @@
           }
 
           if (newSection.isState) {
+            var newStateParams = {};
             if (!!newSection.stateParams) {
-              var newStateParams = _.assign(_.cloneDeep($stateParams), newSection.stateParams);
+              newStateParams = _.assign(_.cloneDeep($stateParams), newSection.stateParams);
+            }
+
+            if (newSection.parent) {
+              selectTab($scope.secondTabList, newSection, true);
+              $state.go(newSection.state, newStateParams)['catch'](function (error) {
+                $exceptionHandler(error);
+              });
+            } else {
+              $scope.secondTabList = [];
               selectTab($scope.tabList, newSection, true);
               $state.go(newSection.state, newStateParams)['catch'](function (error) {
                 $exceptionHandler(error);
               });
-            }
-            else {
-              if (newSection.parent) {
-                selectTab($scope.secondTabList, newSection, true);
-                $state.go(newSection.state)['catch'](function (error) {
-                  $exceptionHandler(error);
-                });
-              } else {
-                $scope.secondTabList = [];
-                selectTab($scope.tabList, newSection, true);
-                $state.go(newSection.state)['catch'](function (error) {
-                  $exceptionHandler(error);
-                });
-              }
             }
           }
           else {
