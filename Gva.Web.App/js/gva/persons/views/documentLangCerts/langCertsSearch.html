@@ -12,7 +12,7 @@
   </sc-column>
   <sc-column data="part.documentPublisher" title="persons.documentLangCertSearch.documentPublisher" class="wrap">
   </sc-column>
-  <sc-column data="part.langLevel.name" title="persons.documentLangCertSearch.langLevel" class="wrap">
+  <sc-column data="(part.langLevelEntries | last).langLevel.name" title="persons.documentLangCertSearch.langLevel" class="wrap">
   </sc-column>
   <sc-column data="part.ratingType.name || part.sector" title="persons.documentLangCertSearch.ratingType">
   </sc-column>

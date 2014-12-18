@@ -1606,7 +1606,8 @@
         },
         personDocumentLangCertDirective: {
           langLevel: 'Ниво на език',
-          langCertData: 'Данни за свидетелство за език'
+          langCertData: 'Данни за свидетелство за език',
+          langLevelEntries: 'История на промени на ниво на език'
         },
         personFlyingExperienceDirective: {
           caseType: 'Тип дело',
@@ -2213,7 +2214,9 @@
         newDocumentLangCert: {
           title: 'Ново свидетелство за език',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          langLevel: 'Ниво на език',
+          changeDate: 'Дата'
         },
         editDocumentLangCert: {
           title: 'Преглед на свидетелство за език',
@@ -2354,7 +2357,19 @@
         newLangCertModal: {
           title: 'Нова свидетелство за език',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          langLevel: 'Ниво на език',
+          changeDate: 'Дата',
+          langCertData: 'Данни за ниво на език'
+        },
+        langLevelEntriesModal: {
+          title: 'Промяна на нивото на език',
+          save: 'Запис',
+          cancel: 'Отказ',
+          langLevel: 'Ниво на език',
+          newLangLevelChange: 'Ново ниво',
+          changeDate: 'Дата на промяна',
+          langLevelEntries: 'Промени на нивото на език'
         },
         chooseExamsModal: {
           title: 'Избор на теоретичен изпит',

@@ -540,8 +540,6 @@
     <Content Include="js\gva\persons\forms\personStatusCtrl.js" />
     <Content Include="js\gva\persons\forms\examinerData.html" />
     <Content Include="js\gva\persons\forms\personCommonDocClassification.html" />
-    <Content Include="js\gva\persons\forms\personDocumentLangCert.html" />
-    <Content Include="js\gva\persons\forms\personDocumentLangCertCtrl.js" />
     <Content Include="js\gva\persons\forms\personCommonDocumentCtrl.js" />
     <Content Include="js\gva\persons\forms\personCommonDocument.html" />
     <Content Include="js\gva\persons\forms\personDocumentEmploymentCtrl.js" />
@@ -553,6 +551,8 @@
     <Content Include="js\gva\persons\modals\exams\newExamModalCtrl.js" />
     <Content Include="js\gva\persons\modals\langCerts\chooseLangCertsModal.html" />
     <Content Include="js\gva\persons\modals\langCerts\chooseLangCertsModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\langCerts\langLevelEntriesModal.html" />
+    <Content Include="js\gva\persons\modals\langCerts\langLevelEntriesModalCtrl.js" />
     <Content Include="js\gva\persons\modals\langCerts\newLangCertModal.html" />
     <Content Include="js\gva\persons\modals\langCerts\newLangCertModalCtrl.js" />
     <Content Include="js\gva\persons\modals\licences\licenceEditionDocModal.html" />

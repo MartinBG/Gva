@@ -7,6 +7,10 @@
       newLangCert: {
         method: 'GET',
         url: 'api/persons/:id/personDocumentLangCertificates/new'
+      },
+      newLangLevel: {
+        method: 'GET',
+        url: 'api/persons/:id/personDocumentLangCertificates/newLangLevel'
       }
     });
   }]);

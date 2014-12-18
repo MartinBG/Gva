@@ -64,7 +64,7 @@ namespace Gva.Api.WordTemplates
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedExams);
             var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");
 
-            IEnumerable<PersonLangCertDO> engLevels = includedLangCerts.Where(t => t.DocumentRole.Alias == "engCert" && t.LangLevel != null);
+            IEnumerable<PersonLangCertDO> engLevels = includedLangCerts.Where(t => t.DocumentRole.Alias == "engCert" && t.LangLevelEntries.Count() > 0);
 
             dynamic lLangLevel = null;
             dynamic tLangLevel = null;
@@ -72,13 +72,13 @@ namespace Gva.Api.WordTemplates
             {
                 lLangLevel = engLevels.Select(l => new
                 {
-                    LEVEL = l.LangLevel.Name,
+                    LEVEL = l.LangLevelEntries.Last().LangLevel.Name,
                     VALID_DATE = l.DocumentDateValidTo
                 });
 
                 tLangLevel = engLevels.Select(l => new
                 {
-                    LEVEL = l.LangLevel.Name,
+                    LEVEL = l.LangLevelEntries.Last().LangLevel.Name,
                     ISSUE_DATE = l.DocumentDateValidFrom,
                     VALID_DATE = l.DocumentDateValidTo
                 });

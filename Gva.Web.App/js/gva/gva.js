@@ -118,11 +118,6 @@
       controller: 'PersonDocumentTrainingCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaPersonDocumentLangCert',
-      templateUrl: 'js/gva/persons/forms/personDocumentLangCert.html',
-      controller: 'PersonDocumentLangCertCtrl'
-    });
-    scaffoldingProvider.form({
       name: 'gvaPersonDocumentOther',
       templateUrl: 'js/gva/persons/forms/personDocumentOther.html',
       controller: 'PersonDocumentOtherCtrl'
@@ -518,6 +513,7 @@
     .modal('newLangCert'           , 'js/gva/persons/modals/langCerts/newLangCertModal.html'       , 'NewLangCertModalCtrl'          )
     .modal('chooseLicences'        , 'js/gva/persons/modals/licences/chooseLicencesModal.html'     , 'ChooseLicencesModalCtrl'       )
     .modal('licenceStatuses'       , 'js/gva/persons/modals/licences/licenceStatusesModal.html'    , 'LicenceStatusesModalCtrl'      )
+    .modal('langLevelEntries'      , 'js/gva/persons/modals/langCerts/langLevelEntriesModal.html'  , 'LangLevelEntriesModalCtrl'     )
     .modal('licenceEditionDoc'     , 'js/gva/persons/modals/licences/licenceEditionDocModal.html'  , 'LicenceEditionDocModalCtrl'    )
     .modal('printLicence'          , 'js/gva/persons/modals/licences/printLicenceModal.html'       , 'PrintLicenceModalCtrl'   , 'xs');
   }]).config(['$stateProvider', function ($stateProvider) {

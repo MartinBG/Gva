@@ -1,5 +1,5 @@
 ﻿/*global angular,_*/
-(function (angular) {
+(function (angular, _) {
   'use strict';
 
   function DocumentLangCertsEditCtrl(
@@ -8,6 +8,7 @@
     $stateParams,
     PersonDocumentLangCerts,
     personDocumentLangCert,
+    scModal,
     scMessage
   ) {
     var originalLangCert = _.cloneDeep(personDocumentLangCert);
@@ -15,7 +16,9 @@
     $scope.personDocumentLangCert = personDocumentLangCert;
     $scope.editMode = null;
     $scope.lotId = $stateParams.id;
+    $scope.partIndex = $stateParams.ind;
     $scope.caseTypeId = $stateParams.caseTypeId;
+    $scope.lastLangLevel = _.last(personDocumentLangCert.part.langLevelEntries);
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -53,6 +56,23 @@
         }
       });
     };
+
+    
+    $scope.viewLangLevels = function () {
+      var params = {
+        langCert: $scope.personDocumentLangCert,
+        lotId: $stateParams.id
+      };
+
+      var modalInstance = scModal.open('langLevelEntries', params);
+
+      modalInstance.result.then(function () {
+        return $state.go($state.current, $stateParams, { reload: true });
+      });
+
+      return modalInstance.opened;
+    };
+
   }
 
   DocumentLangCertsEditCtrl.$inject = [
@@ -61,6 +81,7 @@
     '$stateParams',
     'PersonDocumentLangCerts',
     'personDocumentLangCert',
+    'scModal',
     'scMessage'
   ];
 
@@ -75,4 +96,4 @@
   };
 
   angular.module('gva').controller('DocumentLangCertsEditCtrl', DocumentLangCertsEditCtrl);
-}(angular));
+}(angular, _));

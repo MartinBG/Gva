@@ -36,7 +36,7 @@
             <td>{{langCert.part.documentDateValidFrom | date:'mediumDate'}}</td>
             <td>{{langCert.part.documentDateValidTo | date:'mediumDate'}}</td>
             <td>{{langCert.part.documentRole.name}}</td>
-            <td>{{langCert.part.langLevel.name}}</td>
+            <td>{{(langCert.part.langLevelEntries | last).langLevel.name}}</td>
             <td>{{langCert.part.documentPublisher}}</td>
             <td>{{langCert.part.valid.name}}</td>
           </tr>

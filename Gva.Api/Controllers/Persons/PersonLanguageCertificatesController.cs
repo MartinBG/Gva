@@ -40,5 +40,16 @@ namespace Gva.Api.Controllers.Persons
 
             return Ok(new CaseTypePartDO<PersonLangCertDO>(newLangCert));
         }
+
+        [Route("newLangLevel")]
+        public IHttpActionResult GetNewLangLevel(int lotId)
+        {
+            PersonLangLevelDO langLevel = new PersonLangLevelDO()
+            {
+                ChangeDate = DateTime.Now
+            };
+
+            return Ok(langLevel);
+        }
     }
 }
