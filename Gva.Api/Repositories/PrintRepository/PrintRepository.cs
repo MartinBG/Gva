@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using Common.Api.UserContext;
 using Common.Blob;
 using Common.Data;
 using Gva.Api.Repositories.FileRepository;
-using Microsoft.Office.Interop.Word;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
+using SautinSoft;
 
 namespace Gva.Api.Repositories.PrintRepository
 {
@@ -62,8 +60,6 @@ namespace Gva.Api.Repositories.PrintRepository
 
             lock (syncRoot)
             {
-                Application wordApplication = null;
-                Document document = null;
                 try
                 {
                     using (var tmpFileStream = File.OpenWrite(tmpDocFile))
@@ -71,15 +67,10 @@ namespace Gva.Api.Repositories.PrintRepository
                         this.CopyStream(stream, tmpFileStream);
                     }
 
-                    wordApplication = new Application();
-                    document = wordApplication.Documents.Open(
-                        ReadOnly: false,
-                        FileName: tmpDocFile,
-                        ConfirmConversions: false,
-                        OpenAndRepair: true,
-                        NoEncodingDialog: true);
-
-                    document.ExportAsFixedFormat(tmpPdfFile, WdExportFormat.wdExportFormatPDF);
+                    UseOffice useOffice = new UseOffice();
+                    useOffice.InitWord();
+                    useOffice.ConvertFile(tmpDocFile, tmpPdfFile, UseOffice.eDirection.DOCX_to_PDF);
+                    useOffice.CloseWord();
                 }
                 catch (Exception)
                 {
@@ -87,19 +78,6 @@ namespace Gva.Api.Repositories.PrintRepository
                 }
                 finally
                 {
-                    if (document != null)
-                    {
-                        document.Close(WdSaveOptions.wdDoNotSaveChanges, Missing.Value, Missing.Value);
-                        Marshal.FinalReleaseComObject(document);
-                    }
-
-                    if (wordApplication != null)
-                    {
-                        wordApplication.Quit(WdSaveOptions.wdDoNotSaveChanges, Missing.Value, Missing.Value);
-                        Marshal.FinalReleaseComObject(wordApplication);
-                        Marshal.ReleaseComObject(wordApplication);
-                    }
-
                     File.Delete(tmpDocFile);
                 }
 
