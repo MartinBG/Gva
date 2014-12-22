@@ -471,7 +471,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasDocMovementPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 Doc doc = this.docRepository.Find(id);
@@ -550,7 +550,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasTechEditPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 var doc = this.docRepository.Find(id,
@@ -633,7 +633,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasDocMovementPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 Doc doc = this.docRepository.Find(id);
@@ -822,7 +822,7 @@ namespace Docs.Api.Controllers
 
                         if (!hasRegisterPermission)
                         {
-                            return Unauthorized();
+                            return BadRequest("Not enough permissions!");
                         }
 
                         this.docRepository.RegisterDoc(newDoc, unitUser, this.userContext);
@@ -891,7 +891,7 @@ namespace Docs.Api.Controllers
                     case "resolution":
                         if (!hasManagementPermission)
                         {
-                            return Unauthorized();
+                            return BadRequest("Not enough permissions!");
                         }
 
                         docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docTypeAlias.ToLower());
@@ -900,7 +900,7 @@ namespace Docs.Api.Controllers
                     case "task":
                         if (!hasManagementPermission)
                         {
-                            return Unauthorized();
+                            return BadRequest("Not enough permissions!");
                         }
 
                         docType = this.unitOfWork.DbContext.Set<DocType>().SingleOrDefault(e => e.Alias.ToLower() == docTypeAlias.ToLower());
@@ -1004,7 +1004,7 @@ namespace Docs.Api.Controllers
 
             if (!vwDocUsers.Any(e => e.ClassificationPermissionId == readPermission.ClassificationPermissionId))
             {
-                return BadRequest();
+                return BadRequest("Not enough permissions!");
             }
 
             var doc = this.docRepository.Find(id,
@@ -1245,7 +1245,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasEditPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 DateTime currentDate = DateTime.Now;
@@ -1446,7 +1446,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasDocCasePartManagementPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 Doc doc = this.docRepository.UpdateDocCasePartType(
@@ -1481,7 +1481,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasEditTechPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 Doc oldDoc = this.docRepository.Find(id,
@@ -1596,7 +1596,7 @@ namespace Docs.Api.Controllers
 
             if (!hasRegisterPermission)
             {
-                return Unauthorized();
+                return BadRequest("Not enough permissions!");
             }
 
             Doc doc = this.docRepository.Find(id,
@@ -1631,7 +1631,7 @@ namespace Docs.Api.Controllers
 
             if (!hasRegisterPermission)
             {
-                return Unauthorized();
+                return BadRequest("Not enough permissions!");
             }
 
             Doc doc = this.docRepository.Find(id,
@@ -1703,7 +1703,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasReadPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 Doc doc = this.docRepository.Find(id,
@@ -1790,7 +1790,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasStagePermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 if (doc.DocEntryType.Alias == "Resolution" || doc.DocEntryType.Alias == "Task")
@@ -1844,7 +1844,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasDocMovementPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 DocStatus cancelDocStatus = this.unitOfWork.DbContext.Set<DocStatus>()
@@ -1889,7 +1889,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasReversePermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 List<DocStatus> docStatuses = this.unitOfWork.DbContext.Set<DocStatus>().ToList();
@@ -1958,7 +1958,7 @@ namespace Docs.Api.Controllers
 
                     if (!hasPermission)
                     {
-                        return Unauthorized();
+                        return BadRequest("Not enough permissions!");
                     }
                 }
                 else if (dwAlias == "Sign".ToLower())
@@ -1973,7 +1973,7 @@ namespace Docs.Api.Controllers
 
                     if (!hasPermission)
                     {
-                        return Unauthorized();
+                        return BadRequest("Not enough permissions!");
                     }
                 }
                 else if (dwAlias == "Discuss".ToLower() || dwAlias == "Approval".ToLower())
@@ -1988,7 +1988,7 @@ namespace Docs.Api.Controllers
 
                     if (!hasPermission)
                     {
-                        return Unauthorized();
+                        return BadRequest("Not enough permissions!");
                     }
                 }
                 else
@@ -2008,7 +2008,7 @@ namespace Docs.Api.Controllers
 
                     if (!hasPermission)
                     {
-                        return Unauthorized();
+                        return BadRequest("Not enough permissions!");
                     }
                 }
 
@@ -2059,7 +2059,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasDocWorkflowManagementPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 Doc doc = this.docRepository.Find(id,
@@ -2150,7 +2150,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasEditTechElectronicServiceStagePermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 Doc doc = this.docRepository.Find(caseDocId,
@@ -2224,7 +2224,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasEditTechElectronicServiceStagePermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 Doc doc = this.docRepository.Find(caseDocId,
@@ -2305,7 +2305,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasEditPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 Ticket ticket = new Ticket();
@@ -2410,7 +2410,7 @@ namespace Docs.Api.Controllers
 
                 if (!hasSendEmailPermission)
                 {
-                    return Unauthorized();
+                    return BadRequest("Not enough permissions!");
                 }
 
                 Email correspondentEmail = this.emailRepository.CreateCorrespondentEmail(email);
