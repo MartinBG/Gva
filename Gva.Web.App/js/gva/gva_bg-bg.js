@@ -2469,7 +2469,8 @@
           stampNumber: 'Печатен док. номер',
           cancel: 'Отказ',
           save: 'Запис',
-          print: 'Принтирай'
+          print: 'Принтирай',
+          generateNew: 'Прегенерирай'
         },
         licencesSearch: {
           newLicence: 'Нов лиценз',

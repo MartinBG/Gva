@@ -55,7 +55,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("api/print")]
-        public HttpResponseMessage Get(int lotId, int licenceInd, int? editionInd = null)
+        public HttpResponseMessage Get(int lotId, int licenceInd, int? editionInd = null, bool generateNew = false)
         {
             string path = string.Format("{0}/{1}", "licences", licenceInd);
             var lot = lotRepository.GetLotIndex(lotId);
@@ -80,7 +80,7 @@ namespace Gva.Api.Controllers
             string templateName = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent.Get<string>("templateName");
 
             Guid licenceEditionDocBlobKey;
-            if (licenceEditionPartVersion.Content.PrintedDocumentBlobKey.HasValue)
+            if (licenceEditionPartVersion.Content.PrintedDocumentBlobKey.HasValue && !generateNew)
             {
                 licenceEditionDocBlobKey = licenceEditionPartVersion.Content.PrintedDocumentBlobKey.Value;
             }
