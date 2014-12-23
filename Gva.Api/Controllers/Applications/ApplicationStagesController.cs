@@ -48,9 +48,8 @@ namespace Gva.Api.Controllers.Applications
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                int stageId = appStage.StageId;
-                var stageTermDate = this.applicationStageRepository.GetApplicationTermDate(appId, stageId);
-                GvaStage gvaStage = this.unitOfWork.DbContext.Set<GvaStage>().Find(stageId);
+                var stageTermDate = this.applicationStageRepository.GetApplicationTermDate(appId, appStage.StageId);
+                GvaStage gvaStage = this.unitOfWork.DbContext.Set<GvaStage>().Find(appStage.StageId);
 
                 GvaApplicationStage stage = new GvaApplicationStage()
                 {
@@ -86,10 +85,8 @@ namespace Gva.Api.Controllers.Applications
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                int gvaStageId = appStage.StageId;
                 GvaApplicationStage applicationStage = this.unitOfWork.DbContext.Set<GvaApplicationStage>().Find(stageId);
-                var stageTermDate = this.applicationStageRepository.GetApplicationTermDate(appId, gvaStageId);
-                GvaStage gvaStage = this.unitOfWork.DbContext.Set<GvaStage>().Find(stageId);
+                var stageTermDate = this.applicationStageRepository.GetApplicationTermDate(appId, appStage.StageId);
 
                 if (applicationStage != null)
                 {
