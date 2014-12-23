@@ -10,7 +10,7 @@
 
     <div class="well-sm panel-body">
       <gva-person-common-doc name="personDocumentForm" ng-model="newLangCert"
-        sc-form-params="{ isNew: true, caseTypeId: caseTypeId, categoryAlias: 'languageCert', appId: appId }">
+        sc-form-params="{ isNew: true, caseTypeId: caseTypeId, categoryAlias: 'languageCert', appId: appId, withoutCertsAliases: withoutCertsAliases }">
       </gva-person-common-doc>
 
       <div ng-show="newLangCert.case.caseType">

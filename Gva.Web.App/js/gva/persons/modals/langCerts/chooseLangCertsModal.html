@@ -6,7 +6,9 @@
       <sc-button name="canceltn" btn-click="cancel()" text="persons.chooseLangCertsModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
     </div>
   </div>
-
+  <div class="alert alert-danger" role="alert" ng-if="showErrorMessage" style="padding:2px; margin: 2px 0px"
+    l10n-text="persons.chooseLangCertsModal.errorMessage">
+  </div>
   <div class="well-sm panel-body">
     <sc-datatable items="langCerts" filterable="true" pageable="true" sortable="true" default-sort="part.documentDateValidFrom">
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
@@ -20,7 +22,7 @@
       </sc-column>
       <sc-column data="part.documentRole.name" title="persons.chooseLangCertsModal.langCertType">
       </sc-column>
-      <sc-column data="part.langLevel.name" title="persons.chooseLangCertsModal.langLevel">
+      <sc-column data="(part.langLevelEntries | last).langLevel.name" title="persons.chooseLangCertsModal.langLevel">
       </sc-column>
       <sc-column data="part.documentPublisher" title="persons.chooseLangCertsModal.documentPublisher">
       </sc-column>

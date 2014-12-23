@@ -21,10 +21,16 @@
     $scope.includedLangCerts = includedLangCerts;
 
     $scope.addLangCert = function () {
+      var withoutCertsAliases =  _.uniq(_.map($scope.includedLangCerts,
+        function (cert) { 
+          return cert.part.documentRole.alias;
+        }));
+
       var modalInstance = scModal.open('newLangCert', {
         lotId: $stateParams.id,
         caseTypeId: $stateParams.caseTypeId,
-        appId: $stateParams.appId
+        appId: $stateParams.appId,
+        withoutCertsAliases: withoutCertsAliases
       });
 
       modalInstance.result.then(function (newLangCert) {

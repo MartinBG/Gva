@@ -2352,7 +2352,8 @@
           documentPublisher: 'Издател',
           valid: 'Валиден',
           add: 'Добави',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          errorMessage: 'Не може в едно вписване да има две свидетелства за един език.'
         },
         newLangCertModal: {
           title: 'Нова свидетелство за език',

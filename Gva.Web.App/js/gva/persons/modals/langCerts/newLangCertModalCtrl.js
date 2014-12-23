@@ -16,6 +16,7 @@
     $scope.caseTypeId = scModalParams.caseTypeId;
     $scope.appId = scModalParams.appId;
     $scope.lotId = scModalParams.lotId;
+    $scope.withoutCertsAliases = scModalParams.withoutCertsAliases;
 
     $scope.save = function () {
       return $scope.form.newLangCertForm.$validate()

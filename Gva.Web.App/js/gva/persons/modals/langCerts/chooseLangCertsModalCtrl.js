@@ -15,7 +15,24 @@
     });
 
     $scope.addLangCerts = function () {
-      return $modalInstance.close($scope.selectedLangCerts);
+      var includedLangCerts = _.filter(langCerts, function (langCert) {
+        return _.contains(scModalParams.includedLangCerts, langCert.partIndex);
+      });
+
+      var certs = _.union($scope.selectedLangCerts, includedLangCerts);
+
+      var bgLangCerts = _.filter(certs, function (cert) {
+        return cert.part.documentRole.alias === 'bgCert';
+      });
+      var engLangCerts = _.filter(certs, function (cert) {
+        return cert.part.documentRole.alias === 'engCert';
+      });
+
+      if(bgLangCerts.length > 1 || engLangCerts.length > 1) {
+        $scope.showErrorMessage = true;
+      } else {
+        return $modalInstance.close($scope.selectedLangCerts);
+      }
     };
 
     $scope.cancel = function () {
@@ -23,6 +40,7 @@
     };
 
     $scope.selectLangCert = function (event, langCert) {
+      $scope.showErrorMessage = false;
       if ($(event.target).is(':checked')) {
         $scope.selectedLangCerts.push(langCert);
       }

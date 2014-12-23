@@ -9,6 +9,7 @@
     $scope.hideCaseType = scFormParams.hideCaseType;
     $scope.appId = scFormParams.appId;
     $scope.lotId = scFormParams.lotId;
+    $scope.withoutCertsAliases = scFormParams.withoutCertsAliases;
 
     if($scope.categoryAlias === 'check') {
       $scope.documentNumberLabel = 'persons.personCommonDocDirective.documentNumberCheck';
