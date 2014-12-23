@@ -152,7 +152,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                         PersonId = e.GViewPerson != null ? (int?)e.GViewPerson.LotId : null,
                         PersonLin = e.GViewPerson != null ? (int?)e.GViewPerson.Lin : null,
                         PersonNames = e.GViewPerson != null ? e.GViewPerson.Names : null,
-                        GvaApplicationStage = e.GvaAppStage
+                        StageName = e.GvaAppStage != null ? e.GvaAppStage.GvaStage.Name : null,
+                        StageTermDate = e.GvaAppStage != null ? e.GvaAppStage.StageTermDate : null
                     })
                     .ToList();
         }
@@ -239,7 +240,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GvaAirCategory = e.GViewAircraftCat != null ? e.GViewAircraftCat.Name : null,
                     GvaAircraftProducer = e.GViewAircraftProd != null ? e.GViewAircraftProd.Name : null,
                     GvaAircraftICAO = e.GViewAircraft != null ? e.GViewAircraft.ICAO : null,
-                    GvaApplicationStage = e.GvaAppStage
+                    StageName = e.GvaAppStage != null ? e.GvaAppStage.GvaStage.Name : null,
+                    StageTermDate = e.GvaAppStage != null ? e.GvaAppStage.StageTermDate : null
                 })
                 .ToList();
         }
@@ -320,7 +322,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GvaOrganizationId = e.GViewOrganization != null ? (int?)e.GViewOrganization.LotId : null,
                     GvaOrganizationName = e.GViewOrganization != null ? e.GViewOrganization.Name : null,
                     GvaOrganizationUin = e.GViewOrganization != null ? e.GViewOrganization.Uin : null,
-                    GvaApplicationStage = e.GvaAppStage
+                    StageName = e.GvaAppStage != null ? e.GvaAppStage.GvaStage.Name : null,
+                    StageTermDate = e.GvaAppStage != null ? e.GvaAppStage.StageTermDate : null
                 })
                 .ToList();
         }
@@ -402,7 +405,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GvaEquipmentName = e.GViewEquipment != null ? e.GViewEquipment.Name : null,
                     GvaEquipmentType = e.GViewEquipmentType != null ? e.GViewEquipmentType.Name : null,
                     GvaEquipmentProducer = e.GViewEquipmentProducer != null ? e.GViewEquipmentProducer.Name : null,
-                    GvaApplicationStage = e.GvaAppStage
+                    StageName = e.GvaAppStage != null ? e.GvaAppStage.GvaStage.Name : null,
+                    StageTermDate = e.GvaAppStage != null ? e.GvaAppStage.StageTermDate : null
                 })
                 .ToList();
         }
@@ -481,7 +485,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GvaAirportId = e.GViewAirport != null ? (int?)e.GViewAirport.LotId : null,
                     GvaAirportType = e.GViewAirportType != null ? e.GViewAirportType.Name : null,
                     GvaAirportName = e.GViewAirport != null ? e.GViewAirport.Name : null,
-                    GvaApplicationStage = e.GvaAppStage
+                    StageName = e.GvaAppStage != null ? e.GvaAppStage.GvaStage.Name : null,
+                    StageTermDate = e.GvaAppStage != null ? e.GvaAppStage.StageTermDate : null
                 })
                 .ToList();
         }

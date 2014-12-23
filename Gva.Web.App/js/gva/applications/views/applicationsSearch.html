@@ -20,10 +20,9 @@
   </sc-column>
   <sc-column data="description" title="applications.search.description">
   </sc-column>
-  <sc-column  title="applications.search.stageTermDate" has-content="true">
-    {{item.gvaApplicationStage.stageTermDate | date:'mediumDate'}}
+  <sc-column  data="stageTermDate" title="applications.search.stageTermDate" type="date">
   </sc-column>
-  <sc-column  data="gvaApplicationStage.gvaStage.name" title="applications.search.stage">
+  <sc-column  data="stageName" title="applications.search.stage">
   </sc-column>
   <sc-column data="appPartDocumentDate" type="date" title="applications.search.documentDate">
   </sc-column>

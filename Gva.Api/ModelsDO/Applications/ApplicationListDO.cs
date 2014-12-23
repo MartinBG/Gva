@@ -59,7 +59,9 @@ namespace Gva.Api.ModelsDO.Applications
 
         public string GvaEquipmentProducer { get; set; }
 
-        public GvaApplicationStage GvaApplicationStage { get; set; }
+        public DateTime? StageTermDate { get; set; }
+
+        public string StageName { get; set; }
 
         public string Description
         {

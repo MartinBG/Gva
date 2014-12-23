@@ -50,9 +50,9 @@
     };
 
     $scope.isExpiringApplication = function (item) {
-      if (item.gvaApplicationStage && item.gvaApplicationStage.stageTermDate) {
+      if (item.stageTermDate) {
         var today = moment(new Date()),
-          difference = moment(item.gvaApplicationStage.stageTermDate).diff(today, 'days');
+          difference = moment(item.stageTermDate).diff(today, 'days');
 
         return 0 <= difference && difference <= 7;
       }
@@ -61,8 +61,8 @@
     };
 
     $scope.isExpiredApplication = function (item) {
-      if (item.gvaApplicationStage && item.gvaApplicationStage.stageTermDate) {
-        return moment(new Date()).isAfter(item.gvaApplicationStage.stageTermDate);
+      if (item.stageTermDate) {
+        return moment(new Date()).isAfter(item.stageTermDate);
       }
 
       return false;
