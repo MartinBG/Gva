@@ -41,6 +41,9 @@
       modalInstance.result.then(function (newCheck) {
         var check = newCheck.part;
         check.personLin = person.lin;
+        check.lotId = person.id;
+        check.partIndex = newCheck.partIndex;
+
         $scope.includedChecks.push(check);
 
         $scope.model.part.includedChecks.push(newCheck.partId);
