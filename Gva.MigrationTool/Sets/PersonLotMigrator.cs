@@ -217,6 +217,7 @@ namespace Gva.MigrationTool.Sets
                                 "licenceType",
                                 "locationIndicator",
                                 "sector",
+                                "langLevel",
                                 "langLevelEntries",
                                 "documentType",
                                 "documentRole",
@@ -676,13 +677,8 @@ namespace Gva.MigrationTool.Sets
                         notes = r.Field<string>("NOTES"),
 
                         personCheckRatingValue = noms["personCheckRatingValues"].ByCode(r.Field<string>("RATING_VALUE")),
-                        langLevelEntries = r.Field<long?>("NM_EN_LANG_ID") != null ? new JArray() 
-                        {
-                            new JObject 
-                            {
-                                 new JProperty("langLevel", Utils.ToJObject(noms["langLevels"].ByOldId(r.Field<long?>("NM_EN_LANG_ID").ToString()))),
-                            }
-                        } : new JArray()
+                        langLevel = noms["langLevels"].ByOldId(r.Field<long?>("NM_EN_LANG_ID").ToString()),
+                        langLevelEntries = new JArray()
                     }))
                 .ToList();
 

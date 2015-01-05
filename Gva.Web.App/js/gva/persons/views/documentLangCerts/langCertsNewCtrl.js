@@ -23,8 +23,7 @@
             if (!$scope.personDocumentLangCert.part.langLevelEntries) {
               $scope.personDocumentLangCert.part.langLevelEntries = [];
             }
-
-            $scope.personDocumentLangCert.part.langLevelEntries.push($scope.langLevelModel);
+            $scope.personDocumentLangCert.part.langLevel = $scope.langLevelModel.langLevel;
 
             return PersonDocumentLangCerts
               .save({ id: $stateParams.id }, $scope.personDocumentLangCert)

@@ -18,7 +18,6 @@
     $scope.lotId = $stateParams.id;
     $scope.partIndex = $stateParams.ind;
     $scope.caseTypeId = $stateParams.caseTypeId;
-    $scope.lastLangLevel = _.last(personDocumentLangCert.part.langLevelEntries);
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -33,6 +32,10 @@
       return $scope.editDocumentLangCertForm.$validate()
         .then(function () {
           if ($scope.editDocumentLangCertForm.$valid) {
+
+            $scope.personDocumentLangCert.part.langLevel = 
+              _.last($scope.personDocumentLangCert.part.langLevelEntries).langLevel;
+
             return PersonDocumentLangCerts
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentLangCert)
               .$promise

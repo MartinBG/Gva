@@ -24,7 +24,7 @@
         <h5 class="form-header" l10n-text="persons.personDocumentLangCertDirective.langCertData"></h5>
         <div class="row">
           <sc-field-group class="col-sm-3" text="persons.personDocumentLangCertDirective.langLevel">
-            <sc-nomenclature alias="'langLevels'" ng-model="lastLangLevel.langLevel" ng-readonly="true"></sc-nomenclature>
+            <sc-nomenclature alias="'langLevels'" ng-model="personDocumentLangCert.part.langLevel" ng-readonly="true"></sc-nomenclature>
             <sc-button name="viewLevelsBtn" btn-click="viewLangLevels()" class="btn btn-default" icon="glyphicon-pencil" ng-disabled="!editMode"></sc-button>
           </sc-field-group>
         </div>

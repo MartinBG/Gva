@@ -20,7 +20,9 @@
           if (!$scope.langCert.part.langLevelEntries) {
             $scope.langCert.part.langLevelEntries = [];
           }
+
           $scope.langCert.part.langLevelEntries.push(langLevelModel);
+          $scope.langCert.part.langLevel = langLevelModel.langLevel;
 
           return PersonDocumentLangCerts.save({
             id: scModalParams.lotId,

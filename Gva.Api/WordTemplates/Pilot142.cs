@@ -253,7 +253,7 @@ namespace Gva.Api.WordTemplates
         private object GetEngLevel(IEnumerable<PersonLangCertDO> includedLangCerts)
         {
             var engCerts = includedLangCerts
-                .Where(t => t.DocumentRole.Alias == "engCert" && t.LangLevelEntries.Count() > 0);
+                .Where(t => t.DocumentRole.Alias == "engCert" && t.LangLevel != null);
 
             if (engCerts.Count() == 0)
             {
@@ -264,7 +264,7 @@ namespace Gva.Api.WordTemplates
             int currentSeqNumber = 0;
             foreach (var engCert in engCerts)
             {
-                var engLevel = this.nomRepository.GetNomValue("langLevels", engCert.LangLevelEntries.Last().LangLevel.NomValueId);
+                var engLevel = this.nomRepository.GetNomValue("langLevels", engCert.LangLevel.NomValueId);
                 int? seqNumber = engLevel.TextContent.Get<int?>("seqNumber");
                 if (!seqNumber.HasValue)
                 {
@@ -285,7 +285,7 @@ namespace Gva.Api.WordTemplates
 
             return new
             {
-                LEVEL = result.LangLevelEntries.Last().LangLevel.Name,
+                LEVEL = result.LangLevel.Name,
                 ISSUE_DATE = result.DocumentDateValidFrom,
                 VALID_DATE = result.DocumentDateValidTo
             };

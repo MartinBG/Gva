@@ -44,6 +44,8 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "DocumentRole is required.")]
         public NomValue DocumentRole { get; set; }
 
+        public NomValue LangLevel { get; set; }
+
         public List<PersonLangLevelDO> LangLevelEntries { get; set; }
 
         [Required(ErrorMessage = "Valid is required.")]
