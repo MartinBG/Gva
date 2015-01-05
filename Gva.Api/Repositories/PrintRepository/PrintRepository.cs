@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using Common.Api.UserContext;
@@ -68,6 +69,8 @@ namespace Gva.Api.Repositories.PrintRepository
                     }
 
                     UseOffice useOffice = new UseOffice();
+                    useOffice.Serial = ConfigurationManager.AppSettings["Gva.Api:UseOfficeSerialNumber"];
+
                     useOffice.InitWord();
                     useOffice.ConvertFile(tmpDocFile, tmpPdfFile, UseOffice.eDirection.DOCX_to_PDF);
                     useOffice.CloseWord();
