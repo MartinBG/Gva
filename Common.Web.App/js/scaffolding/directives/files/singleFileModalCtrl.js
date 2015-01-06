@@ -54,7 +54,11 @@
           $modalInstance.close(uploadedFile);
         });
       } else {
-        $modalInstance.close();
+        if ($scope.file) {
+          $modalInstance.dismiss();
+        } else {
+          $modalInstance.close();
+        }
       }
     };
 
