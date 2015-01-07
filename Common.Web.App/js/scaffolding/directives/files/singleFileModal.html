@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
 
-  <span class="btn btn-success fileinput-button" ng-show="!isReadonly && !file">
+  <span class="btn btn-success fileinput-button" ng-if="!isReadonly && !file">
     <i class="glyphicon glyphicon-plus"></i>
     <span l10n-text="scaffolding.scFiles.modal.attachSingle"></span>
     <input class="test-file-upload-single-button" type="file" name="files[]" ui-jq="fileupload" ui-options="{ url: scFilesConfig.fileUrl, dataType: 'json', add: add }">
