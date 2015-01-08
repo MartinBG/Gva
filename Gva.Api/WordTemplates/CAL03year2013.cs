@@ -118,21 +118,21 @@ namespace Gva.Api.WordTemplates
         private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> editions)
         {
             List<object> ratingEditions = new List<object>();
-            foreach (var edition in editions)
+            foreach (var edition in editions.OrderBy(r => r.Content.DocumentDateValidFrom))
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var ratingTypeName = rating.Content.RatingType == null ? null : rating.Content.RatingType.Name;
+                var ratingTypeCode = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
                 var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name;
-                var authorizationName = rating.Content.Authorization == null ? null : rating.Content.Authorization.Name;
+                var authorizationCode = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 ratingEditions.Add(new
                 {
-                    CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypeName) ?
-                        authorizationName :
+                    CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypeCode) ?
+                        authorizationCode :
                         string.Format(
                             "{0} {1} {2}",
-                            ratingTypeName,
+                            ratingTypeCode,
                             ratingClassName,
-                            string.IsNullOrEmpty(authorizationName) ? string.Empty : "/ " + authorizationName).Trim(),
+                            string.IsNullOrEmpty(authorizationCode) ? string.Empty : " / " + authorizationCode).Trim(),
                     ISSUE_DATE = edition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo
                 });
