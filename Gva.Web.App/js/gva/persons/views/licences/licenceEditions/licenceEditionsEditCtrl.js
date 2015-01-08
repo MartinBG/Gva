@@ -30,7 +30,8 @@
       var params = {
         lotId: $stateParams.id,
         index: $scope.licence.partIndex,
-        editionIndex: edition.partIndex
+        editionIndex: edition.partIndex,
+        isLastEdition: $scope.lastEditionIndex === edition.partIndex
       };
 
       var modalInstance = scModal.open('printLicence', params);

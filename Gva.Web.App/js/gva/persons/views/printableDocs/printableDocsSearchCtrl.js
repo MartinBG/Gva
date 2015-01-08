@@ -32,7 +32,8 @@
       var params = {
         lotId: doc.lotId,
         index: doc.partIndex,
-        editionIndex: doc.editionPartIndex
+        editionIndex: doc.editionPartIndex,
+        isLastEditionIndex: true
       };
 
       var modalInstance = scModal.open('printLicence', params);

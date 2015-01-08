@@ -13,7 +13,7 @@
         <sc-field type="text" ng-model="model.stampNumber" ng-readonly="model.stampNumberReadonly" ng-required="true" l10n-text="persons.printLicenceModal.stampNumber" class="col-sm-5"></sc-field>
         <div class="labeless">
           <sc-link-button name="printBtn" ng-href="api/print?lotId={{model.lotId}}&licenceInd={{model.index}}&editionInd={{model.editionIndex}}" target="_blank" sc-access-token text="persons.printLicenceModal.print" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
-          <sc-link-button name="printBtn" ng-href="api/print?lotId={{model.lotId}}&licenceInd={{model.index}}&editionInd={{model.editionIndex}}&generateNew=true" target="_blank" sc-access-token text="persons.printLicenceModal.generateNew" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
+          <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/print?lotId={{model.lotId}}&licenceInd={{model.index}}&editionInd={{model.editionIndex}}&generateNew=true" target="_blank" sc-access-token text="persons.printLicenceModal.generateNew" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
         </div>
       </div>
     </div>

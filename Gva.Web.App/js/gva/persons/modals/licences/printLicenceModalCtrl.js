@@ -10,6 +10,7 @@
     licenceEdition
   ) {
     $scope.form = {};
+    $scope.isLastEdition = scModalParams.isLastEdition;
     $scope.model = {
       stampNumber: licenceEdition.part.stampNumber,
       stampNumberReadonly: !!licenceEdition.part.stampNumber,
