@@ -69,6 +69,8 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
+            var includedChecks = lastEdition.IncludedChecks
+                .Select(i => lot.Index.GetPart<PersonCheckDO>("personDocumentChecks/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings.Select(i => i.Ind).Distinct()
                 .Select(ind => lot.Index.GetPart<PersonRatingDO>("ratings/" + ind));
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
@@ -81,10 +83,31 @@ namespace Gva.Api.WordTemplates
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
-            var documents = this.GetDocuments(includedTrainings, includedExams, licenceType.Code);
-            var ratings = this.GetRatings(includedRatings, ratingEditions);
-            //TODO - includedExams! var documents = this.GetDocuments(includedTrainings, includedExams, licenceType.Code);
+            string[] documentRoleCodes;
+            bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceType.Code, out documentRoleCodes);
+            dynamic trainings = null;
+            dynamic exams = null;
+            dynamic simulators = null;
+            if (hasRoles)
+            {
+                trainings = this.GetTrainings(includedTrainings, documentRoleCodes);
 
+                NomValue examRole = this.nomRepository.GetNomValue("documentRoles", "exam");
+                NomValue simulatorRole = this.nomRepository.GetNomValue("documentRoles", "simulator");
+                NomValue practicalCheckRole = this.nomRepository.GetNomValue("documentRoles", "practicalCheck");
+
+                if (documentRoleCodes.Contains(examRole.Code) || documentRoleCodes.Contains(practicalCheckRole.Code))
+                {
+                    exams = this.GetExams(includedExams, includedChecks, practicalCheckRole);
+                }
+
+                if (documentRoleCodes.Contains(simulatorRole.Code))
+                {
+                    simulators = this.GetSimulators(includedChecks, simulatorRole);
+                }
+            }
+
+            var ratings = this.GetRatings(includedRatings, ratingEditions);
 
             var json = new
             {
@@ -106,8 +129,9 @@ namespace Gva.Api.WordTemplates
                     T_VALID_DATE = lastEdition.DocumentDateValidTo,
                     T_ACTION = lastEdition.LicenceAction.Name.ToUpper(),
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    T_DOCUMENTS = documents.Take(documents.Length / 2),
-                    T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
+                    T_DOCUMENTS = new { SUB_DOC = trainings },
+                    T_DOCUMENTS2 = new { SUB_DOC = exams },
+                    T_DOCUMENTS3 = new { SUB_DOC = simulators },
                     MED_CERT = this.GetMedCerts(licenceType.Code, includedMedicals, personData),
                     T_RATING = ratings,
                     L_RATING2 = ratings,
@@ -191,67 +215,75 @@ namespace Gva.Api.WordTemplates
 
             return result.OrderBy(p => p.NO).ToList<object>();
         }
-        private object[] GetDocuments(
+
+        private List<object> GetTrainings(
             IEnumerable<PersonTrainingDO> includedTrainings,
-            IEnumerable<PersonTrainingDO> includedExams,
-            string licenceTypeCode)
+            string[] documentRoleCodes)
         {
-            string[] documentRoleCodes;
-            bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceTypeCode, out documentRoleCodes);
-
-            if (!hasRoles)
-            {
-                return new object[0];
-            }
-
-            var docs = includedTrainings
+            var trainings = includedTrainings
                 .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code))
-                .Select(t =>
-                    new
-                    {
-                        DOC = new
-                        {
-                            DOC_ROLE = t.DocumentRole.Name,
-                            SUB_DOC = new
-                            {
-                                CLASS = t.DocumentType.Name,
-                                DOC_NO = t.DocumentNumber,
-                                DATE = t.DocumentDateValidFrom
-                            }
-                        }
-                    }).ToArray<dynamic>();
+                .Select(t => new
+                {
+                    CLASS = t.DocumentType.Name,
+                    DOC_NO = t.DocumentNumber,
+                    DATE = t.DocumentDateValidFrom
+                })
+                .OrderBy(d => d.DATE)
+                .ToList<object>();
 
-            var examRole = this.nomRepository.GetNomValue("documentRoles", "exam");
-            if (documentRoleCodes.Contains(examRole.Code))
-            {
-                var exams = includedExams
-                    .Select(e =>
-                        new
-                        {
-                            DOC = new
-                            {
-                                DOC_ROLE = examRole.Name,
-                                SUB_DOC = new
-                                {
-                                    CLASS = e.DocumentType.Name,
-                                    DOC_NO = e.DocumentNumber,
-                                    DATE = e.DocumentDateValidFrom
-                                }
-                            }
-                        }).ToArray<dynamic>();
-
-                docs = docs.Union(exams).ToArray<dynamic>();
-            }
-
-            return docs.OrderBy(d => d.DOC.SUB_DOC.DATE).ToArray<object>();
+            return Utils.FillBlankData(trainings, 4);
         }
 
-        private object[] GetMedCerts(string licenceTypeCode, IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
+        private List<object> GetExams(
+            IEnumerable<PersonTrainingDO> includedExams,
+            IEnumerable<PersonCheckDO> includedChecks,
+            NomValue practicalCheckRole)
         {
-            return includedMedicals.Select(m =>
+            var exams  = includedExams
+                .Select(t => new
+                    {
+                        CLASS = t.DocumentType.Name,
+                        DOC_NO = t.DocumentNumber,
+                        DATE = t.DocumentDateValidFrom
+                    })
+                    .OrderBy(d => d.DATE)
+                    .ToList<object>();
+
+           var checks =  includedChecks.Where(d => d.DocumentRole.Code == practicalCheckRole.Code)
+                .Select(t => new
+                {
+                    CLASS = t.DocumentType.Name,
+                    DOC_NO = t.DocumentNumber,
+                    DATE = t.DocumentDateValidFrom
+                })
+                    .OrderBy(d => d.DATE)
+                    .ToList<object>();
+
+           return Utils.FillBlankData(exams.Union(checks).ToList<object>(), 4);
+        }
+
+        private List<object> GetSimulators(
+            IEnumerable<PersonCheckDO> includedChecks,
+            NomValue simulatorRole)
+        {
+            var simulators = includedChecks.Where(t => t.DocumentRole.Code == simulatorRole.Code)
+                .Select(t => new
+                {
+                    CLASS = t.DocumentType.Name,
+                    DOC_NO = t.DocumentNumber,
+                    DATE = t.DocumentDateValidFrom
+                })
+                .OrderBy(d => d.DATE)
+                .ToList<object>();
+
+            return Utils.FillBlankData(simulators, 4);
+        }
+
+        private List<object> GetMedCerts(string licenceTypeCode, IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
+        {
+            var medicals = includedMedicals.Select(m =>
                 new
                 {
-                    ORDER_NO = 9,
                     NO = string.Format(
                         "{0}-{1}-{2}-{3}",
                         m.DocumentNumberPrefix,
@@ -263,27 +295,29 @@ namespace Gva.Api.WordTemplates
                     CLASS = m.MedClass.Name,
                     PUBLISHER = m.DocumentPublisher.Name,
                     LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
-                }).ToArray<object>();
+                }).ToList<object>();
+
+            return Utils.FillBlankData(medicals, 1);
         }
 
         private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> editions)
         {
             List<object> ratingEditions = new List<object>();
-            foreach (var edition in editions)
+            foreach (var edition in editions.OrderBy(r => r.Content.DocumentDateValidFrom))
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var ratingTypeName = rating.Content.RatingType == null ? null : rating.Content.RatingType.Name;
+                var ratingTypeCode = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
                 var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name;
-                var authorizationName = rating.Content.Authorization == null ? null : rating.Content.Authorization.Name;
+                var authorizationCode = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 ratingEditions.Add(new
                 {
-                    CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypeName) ?
-                        authorizationName :
+                    CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypeCode) ?
+                        authorizationCode :
                         string.Format(
                             "{0} {1} {2}",
-                            ratingTypeName,
+                            ratingTypeCode,
                             ratingClassName,
-                            string.IsNullOrEmpty(authorizationName) ? string.Empty : "/ " + authorizationName).Trim(),
+                            string.IsNullOrEmpty(authorizationCode) ? string.Empty : " / " + authorizationCode).Trim(),
                     ISSUE_DATE = edition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo
                 });

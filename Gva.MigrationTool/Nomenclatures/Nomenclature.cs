@@ -1116,7 +1116,9 @@ namespace Gva.MigrationTool.Nomenclatures
             {
                 { "ENG", "engCert" },
                 { "BG", "bgCert" },
-                { "6", "exam" }
+                { "6", "exam" },
+                { "7", "simulator" },
+                { "15", "practicalCheck" }
             };
 
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_DOCUMENT_ROLE")
