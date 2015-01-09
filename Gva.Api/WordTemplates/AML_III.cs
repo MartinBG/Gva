@@ -72,7 +72,8 @@ namespace Gva.Api.WordTemplates
                     personData.LastNameAlt).ToUpper();
 
             var categoryNP = this.GetCategoryNP(includedRatings, ratingEditions);
-
+            var limitations = lastEdition.AmlLimitations != null ? this.GetLimitations(lastEdition) : new object[0];
+            var acLimitations = this.GetACLimitations(includedRatings, ratingEditions);
             var json = new
             {
                 root = new
@@ -102,8 +103,8 @@ namespace Gva.Api.WordTemplates
                     },
                     NATIONALITY = new
                     {
-                        NAME = country != null ? country.Name : null,
-                        CODE = country != null ? country.Code : null
+                        NAME = country != null ? country.Code : null,
+                        CODE = country != null ? country.Name : null
                     },
                     LIC_NO2 = licenceNumber,
                     NAME = personNameBG,
@@ -132,8 +133,9 @@ namespace Gva.Api.WordTemplates
                     LIC_NO41 = licenceNumber,
                     AIRCRAFTS = this.GetAircrafts(includedRatings, ratingEditions),
                     LIC_NO5 = licenceNumber,
-                    LIMITATIONS = this.GetLimitations(lastEdition),
-                    AC_LIMITATIONS = this.GetACLimitations(includedRatings, ratingEditions),
+                    NA2 = limitations.Count() == 0 && acLimitations.Count() == 0 ? "No limitations" : "",
+                    LIMITATIONS = (limitations.Count() > 0 || acLimitations.Count() > 0) ? limitations : new object(),
+                    AC_LIMITATIONS = acLimitations.Count() > 0 ? acLimitations : new object(),
                     VALID_DATE = lastEdition.DocumentDateValidTo,
                     LIC_NO6 = licenceNumber
                 }
@@ -240,7 +242,7 @@ namespace Gva.Api.WordTemplates
                         DATE = edition.Content.DocumentDateValidFrom,
                         LIMIT = (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0) ?
                             string.Join(",", edition.Content.Limitations.Select(l => l.Name)) :
-                            "NP"
+                            ""
                     });
                 }
             }
@@ -259,7 +261,8 @@ namespace Gva.Api.WordTemplates
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
                     validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")))
+                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")) &&
+                    edition.Content.Limitations != null && edition.Content.Limitations.Count > 0)
                 {
                     categories.Add(new
                     {
@@ -267,9 +270,7 @@ namespace Gva.Api.WordTemplates
                         CAT = rating.Content.AircraftTypeCategory.Code,
                         DATE_FROM = edition.Content.DocumentDateValidFrom,
                         DATE_TO = edition.Content.DocumentDateValidTo,
-                        LIMIT = (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0) ?
-                            string.Join(",", edition.Content.Limitations.Select(l => l.Name)) :
-                            "NP"
+                        LIMIT = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
                     });
                 }
             }
@@ -288,15 +289,14 @@ namespace Gva.Api.WordTemplates
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
                     validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")))
+                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")) &&
+                    (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0))
                 {
                     acLimitations.Add(new
                     {
                         AIRCRAFT = rating.Content.AircraftTypeGroup.Name,
                         CAT = rating.Content.AircraftTypeCategory.Code,
-                        LIM = (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0) ?
-                            string.Join(",", edition.Content.Limitations.Select(l => l.Name)) :
-                            "NP"
+                        LIM = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
                     });
                 }
             }
@@ -306,7 +306,16 @@ namespace Gva.Api.WordTemplates
 
         private object[] GetLimitations(PersonLicenceEditionDO lastLicenceEdition)
         {
-            IList<object> limitations= new List<object>();
+            IList<object> limitations = new List<object>();
+
+            if (lastLicenceEdition.AmlLimitations.At_a_Ids == null && lastLicenceEdition.AmlLimitations.At_b1_Ids == null &&
+                lastLicenceEdition.AmlLimitations.Ap_a_Ids == null && lastLicenceEdition.AmlLimitations.Ap_b1_Ids == null &&
+                lastLicenceEdition.AmlLimitations.Ht_a_Ids == null && lastLicenceEdition.AmlLimitations.Ht_b1_Ids == null &&
+                lastLicenceEdition.AmlLimitations.Hp_a_Ids == null && lastLicenceEdition.AmlLimitations.Hp_b1_Ids == null &&
+                lastLicenceEdition.AmlLimitations.Avionics_Ids == null)
+            {
+                return new object[0];
+            }
 
             List<NomValue> AT_a_Ids = lastLicenceEdition.AmlLimitations == null ?
                 new List<NomValue>() :
