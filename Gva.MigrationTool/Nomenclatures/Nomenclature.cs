@@ -1098,7 +1098,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "A", "other"},
                 { "P", "docId"},
                 { "F", "flying"},
-                { "E", "graduation"},
+                { "E", "graduation"}
             };
 
             Func<string, string, string> getCategoryAliases = (categoryCode, code) =>
@@ -1118,7 +1118,9 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "BG", "bgCert" },
                 { "6", "exam" },
                 { "7", "simulator" },
-                { "15", "practicalCheck" }
+                { "15", "practicalCheck" },
+                { "4", "theoreticalTraining"},
+                { "3", "diploma"}
             };
 
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_DOCUMENT_ROLE")
