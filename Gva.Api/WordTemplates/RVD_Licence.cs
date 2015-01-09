@@ -100,10 +100,10 @@ namespace Gva.Api.WordTemplates
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_DOCUMENTS = documents,
-                    T_CLASSES = classes.Length > 10 ? classes.Take(classes.Length / 2) : classes,
-                    L_CLASSES = classes.Length > 10 ? classes.Take(classes.Length / 2) : classes,
-                    T_CLASSES2 = classes.Length > 10 ? classes.Skip(classes.Length / 2) : new object[0],
-                    L_CLASSES2 = classes.Length > 10 ? classes.Skip(classes.Length / 2) : new object[0]
+                    T_CLASSES = classes.Length > 20 ? classes.Take(classes.Length / 2) : classes,
+                    L_CLASSES = classes.Length > 20 ? classes.Take(classes.Length / 2) : classes,
+                    T_CLASSES2 = classes.Length > 20 ? classes.Skip(classes.Length / 2) : new List<object>() { new object() },
+                    L_CLASSES2 = classes.Length > 20 ? classes.Skip(classes.Length / 2) : new List<object>() { new object() }
                 }
             };
 
@@ -213,7 +213,7 @@ namespace Gva.Api.WordTemplates
         {
             int caseTypeId = this.caseTypeRepository.GetCaseType("to_suvd").GvaCaseTypeId;
             List<object> classes = new List<object>();
-            foreach (var edition in ratingEditions)
+            foreach (var edition in ratingEditions.OrderBy(r => r.Content.DocumentDateValidFrom))
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if(this.fileRepository.GetFileReference(rating.PartId, caseTypeId) != null)
@@ -230,6 +230,7 @@ namespace Gva.Api.WordTemplates
                     });
                 }
             }
+            
             return classes.ToArray();
         }
     }
