@@ -224,7 +224,7 @@ namespace Gva.Api.WordTemplates
                 .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code))
                 .Select(t => new
                 {
-                    CLASS = t.DocumentType.Name,
+                    CLASS = t.RatingType != null ? t.RatingType.Code : "",
                     DOC_NO = t.DocumentNumber,
                     DATE = t.DocumentDateValidFrom
                 })
@@ -242,7 +242,7 @@ namespace Gva.Api.WordTemplates
             var exams  = includedExams
                 .Select(t => new
                     {
-                        CLASS = t.DocumentType.Name,
+                        CLASS = t.RatingType != null ? t.RatingType.Code : "",
                         DOC_NO = t.DocumentNumber,
                         DATE = t.DocumentDateValidFrom
                     })
@@ -252,7 +252,7 @@ namespace Gva.Api.WordTemplates
            var checks =  includedChecks.Where(d => d.DocumentRole.Code == practicalCheckRole.Code)
                 .Select(t => new
                 {
-                    CLASS = t.DocumentType.Name,
+                    CLASS = t.RatingType != null ? t.RatingType.Code : "",
                     DOC_NO = t.DocumentNumber,
                     DATE = t.DocumentDateValidFrom
                 })
@@ -269,7 +269,7 @@ namespace Gva.Api.WordTemplates
             var simulators = includedChecks.Where(t => t.DocumentRole.Code == simulatorRole.Code)
                 .Select(t => new
                 {
-                    CLASS = t.DocumentType.Name,
+                    CLASS = t.RatingType != null ? t.RatingType.Code : "",
                     DOC_NO = t.DocumentNumber,
                     DATE = t.DocumentDateValidFrom
                 })
