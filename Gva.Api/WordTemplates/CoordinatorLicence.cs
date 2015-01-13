@@ -118,23 +118,6 @@ namespace Gva.Api.WordTemplates
                 }
             }
 
-            var emptyEntry = new List<object>()
-            {
-                new 
-                {
-                    DOC = new
-                    {
-                        SUB_DOC = new
-                        {
-                           DOC_TYPE = "",
-                           DOC_NO = "",
-                           DATE = "",
-                           DOC_PUBLISHER = ""
-                        }
-                    }
-                }
-            };
-
             var json = new
             {
                 root = new
@@ -157,11 +140,11 @@ namespace Gva.Api.WordTemplates
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     T_ACTION = lastEdition.LicenceAction.Name.ToUpper(),
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    T_THEORETICAL_EXAM = theoreticalExams.Count > 0 ? theoreticalExams : emptyEntry,
-                    T_ACCESS_ORDER_PRACTICAL_EDUC = accessOrderPractEducation.Count > 0 ? accessOrderPractEducation : emptyEntry,
-                    T_PRACTICAL_EXAM = practicalExams.Count > 0 ? practicalExams : emptyEntry,
-                    T_CHECK_AT_WORK = checksAtWork.Count > 0 ? checksAtWork : emptyEntry,
-                    T_ACCESS_ORDER_WORK_ALONE = accessOrderWorkAlone.Count > 0 ? accessOrderWorkAlone : emptyEntry,
+                    T_THEORETICAL_EXAM = theoreticalExams,
+                    T_ACCESS_ORDER_PRACTICAL_EDUC = accessOrderPractEducation,
+                    T_PRACTICAL_EXAM = practicalExams,
+                    T_CHECK_AT_WORK = checksAtWork,
+                    T_ACCESS_ORDER_WORK_ALONE = accessOrderWorkAlone,
                     T_ENDORSEMENT = endorsements2,
                     L_ENDORSEMENT = endorsements2,
                     L_ABBREVIATION = this.GetAbbreviations()
@@ -251,53 +234,35 @@ namespace Gva.Api.WordTemplates
         {
             var exams = includedExams.Where(d => d.DocumentRole.Code == examRole.Code)
                .Select(t => new
-               {
-                   DOC = new
-                   {
-                       SUB_DOC = new
-                       {
-                           DOC_TYPE = t.DocumentType.Name.ToLower(),
-                           DOC_NO = t.DocumentNumber,
-                           DATE = t.DocumentDateValidFrom,
-                           DOC_PUBLISHER = t.DocumentPublisher
-                       }
-                   }
+                {
+                    DOC_TYPE = t.DocumentType.Name.ToLower(),
+                    DOC_NO = t.DocumentNumber,
+                    DATE = t.DocumentDateValidFrom,
+                    DOC_PUBLISHER = t.DocumentPublisher
                })
                .ToList<object>();
 
             var trainings = includedTrainings.Where(d => d.DocumentRole.Code == examRole.Code)
                .Select(t => new
                {
-                   DOC = new
-                   {
-                       SUB_DOC = new
-                       {
-                           DOC_TYPE = t.DocumentType.Name.ToLower(),
-                           DOC_NO = t.DocumentNumber,
-                           DATE = t.DocumentDateValidFrom,
-                           DOC_PUBLISHER = t.DocumentPublisher
-                       }
-                   }
+                   DOC_TYPE = t.DocumentType.Name.ToLower(),
+                   DOC_NO = t.DocumentNumber,
+                   DATE = t.DocumentDateValidFrom,
+                   DOC_PUBLISHER = t.DocumentPublisher
                })
                .ToList<object>();
 
             var checks = includedChecks.Where(d => d.DocumentRole.Code == examRole.Code)
-                 .Select(t => new
-                 {
-                     DOC = new
-                     {
-                         SUB_DOC = new
-                         {
-                             DOC_TYPE = t.DocumentType.Name.ToLower(),
-                             DOC_NO = t.DocumentNumber,
-                             DATE = t.DocumentDateValidFrom,
-                             DOC_PUBLISHER = t.DocumentPublisher
-                         }
-                     }
+                 .Select(t => new 
+                {
+                    DOC_TYPE = t.DocumentType.Name.ToLower(),
+                    DOC_NO = t.DocumentNumber,
+                    DATE = t.DocumentDateValidFrom,
+                    DOC_PUBLISHER = t.DocumentPublisher
                  })
                  .ToList<object>();
 
-            return exams.Union(checks).Union(trainings).ToList<object>();
+            return Utils.FillBlankData(exams.Union(checks).Union(trainings).ToList<object>(), 1);
         }
 
         private List<object> GetChecks(
@@ -307,20 +272,14 @@ namespace Gva.Api.WordTemplates
             var checks = includedChecks.Where(d => d.DocumentRole.Code == checkRole.Code)
                  .Select(t => new
                  {
-                     DOC = new
-                     {
-                         SUB_DOC = new
-                         {
-                             DOC_TYPE = t.DocumentType.Name.ToLower(),
-                             DOC_NO = t.DocumentNumber,
-                             DATE = t.DocumentDateValidFrom,
-                             DOC_PUBLISHER = t.DocumentPublisher
-                         }
-                     }
+                     DOC_TYPE = t.DocumentType.Name.ToLower(),
+                     DOC_NO = t.DocumentNumber,
+                     DATE = t.DocumentDateValidFrom,
+                     DOC_PUBLISHER = t.DocumentPublisher
                  })
                  .ToList<object>();
 
-            return checks;
+            return Utils.FillBlankData(checks, 1);
         }
 
         private List<object> GetTrainings(
@@ -330,20 +289,14 @@ namespace Gva.Api.WordTemplates
             var trainings = includedTrainings.Where(d => d.DocumentRole.Code == trainingRole.Code)
                  .Select(t => new
                  {
-                     DOC = new
-                     {
-                         SUB_DOC = new
-                         {
-                             DOC_TYPE = t.DocumentType.Name.ToLower(),
-                             DOC_NO = t.DocumentNumber,
-                             DATE = t.DocumentDateValidFrom,
-                             DOC_PUBLISHER = t.DocumentPublisher
-                         }
-                     }
+                     DOC_TYPE = t.DocumentType.Name.ToLower(),
+                     DOC_NO = t.DocumentNumber,
+                     DATE = t.DocumentDateValidFrom,
+                     DOC_PUBLISHER = t.DocumentPublisher
                  })
                  .ToList<object>();
 
-            return trainings;
+            return Utils.FillBlankData(trainings, 1);
         }
 
         private List<object> GetEndorsements2(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> editions)
