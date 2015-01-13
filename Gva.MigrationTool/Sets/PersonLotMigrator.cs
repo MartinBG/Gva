@@ -241,7 +241,7 @@ namespace Gva.MigrationTool.Sets
                                     "documentPersonNumber",
                                     "documentDateValidFrom",
                                     "documentDateValidTo",
-                                    "documentPublisher ",
+                                    "documentPublisher",
                                     "documentType",
                                     "documentRole",
                                     "valid",
@@ -1547,6 +1547,7 @@ namespace Gva.MigrationTool.Sets
                                     r.includedLangCerts,
                                     r.includedLicences,
                                     r.includedChecks,
+                                    r.includedExams,
 
                                     r.amlLimitations
                                 })),
