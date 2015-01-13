@@ -523,6 +523,24 @@ namespace Gva.Api.WordTemplates
                     NAME_TRANS = "5. A legal identification document has to be carried for the purpose of identification of the licence holder."
                 }
             },
+            {
+                "FDAL",
+                new
+                {
+                    NO = 100,
+                    NAME_BG = "1.Притежателят на това свидетелство за правоспособност FDAL може да извършва дейности по координация и взаимодействие при УВД в органите за ОВД за които притежава валидно(и) разрешение(я), както следва:",
+                    NAME_TRANS = "1. The holder of this FDAL is entitled to exercise coordination and coactivities at ATM in the air traffic service unit(s) for which current endorsement(s) is/ are held as follows:"
+                }
+            },
+            {
+                "idDoc4",
+                new
+                {
+                    NO = 200,
+                    NAME_BG = "2. Притежателят на това свидетелство се легитимира с документ за самоличност.",
+                    NAME_TRANS = "2. A legal identification document has to be carried for the purpose of identification of the licence holder"
+                }
+            }
         };
 
         private static Dictionary<string, object> licenceAbbreviation = new Dictionary<string, object>()

@@ -64,6 +64,10 @@ namespace Gva.Api.WordTemplates
 
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
+            var includedExams = lastEdition.IncludedExams
+                .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
+            var includedChecks = lastEdition.IncludedChecks
+               .Select(i => lot.Index.GetPart<PersonCheckDO>("personDocumentChecks/" + i).Content);
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
@@ -73,8 +77,63 @@ namespace Gva.Api.WordTemplates
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
-            var documents = this.GetDocuments(licenceType.Code, includedTrainings);
             var endorsements2 = this.GetEndorsements2(includedRatings, ratingEditions);
+
+            string[] documentRoleCodes;
+            bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceType.Code, out documentRoleCodes);
+
+            dynamic theoreticalExams = null;
+            dynamic practicalExams = null;
+            dynamic accessOrderPractEducation = null;
+            dynamic accessOrderWorkAlone = null;
+            dynamic checksAtWork = null;
+
+            if (hasRoles)
+            {
+                NomValue theoreticalExamRole = this.nomRepository.GetNomValue("documentRoles", "exam");
+                NomValue practicalExamRole = this.nomRepository.GetNomValue("documentRoles", "practicalExams");
+                NomValue accessOrderPractEducationRole = this.nomRepository.GetNomValue("documentRoles", "accessOrderPractEduc");
+                NomValue accessOrderWorkAloneRole = this.nomRepository.GetNomValue("documentRoles", "accessOrderWorkAlone");
+                NomValue checkAtWorkRole = this.nomRepository.GetNomValue("documentRoles", "checkAtWork");
+
+                if (documentRoleCodes.Contains(theoreticalExamRole.Code) || documentRoleCodes.Contains(practicalExamRole.Code))
+                {
+                    practicalExams = this.GetExams(includedExams, includedChecks, includedTrainings, practicalExamRole);
+                    theoreticalExams = this.GetExams(includedExams, includedChecks, includedTrainings, theoreticalExamRole);
+                }
+
+                if (documentRoleCodes.Contains(checkAtWorkRole.Code))
+                {
+                    checksAtWork = this.GetChecks(includedChecks, checkAtWorkRole);
+                }
+
+                if (documentRoleCodes.Contains(accessOrderWorkAloneRole.Code))
+                {
+                    accessOrderWorkAlone = this.GetTrainings(includedTrainings, accessOrderWorkAloneRole);
+                }
+
+                if (documentRoleCodes.Contains(accessOrderPractEducationRole.Code))
+                {
+                    accessOrderPractEducation = this.GetTrainings(includedTrainings, accessOrderPractEducationRole);
+                }
+            }
+
+            var emptyEntry = new List<object>()
+            {
+                new 
+                {
+                    DOC = new
+                    {
+                        SUB_DOC = new
+                        {
+                           DOC_TYPE = "",
+                           DOC_NO = "",
+                           DATE = "",
+                           DOC_PUBLISHER = ""
+                        }
+                    }
+                }
+            };
 
             var json = new
             {
@@ -88,7 +147,7 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_TYPE_CA_CODE2 = licenceCaCode,
                     L_LICENCE_NO = licenceNumber,
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
-                    L_LICENCE_PRIV = this.GetLicencePrivileges(),
+                    L_LICENCE_PRIV = this.GetLicencePrivileges(licenceType.TextContent.Get<string>("licenceCode")),
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     ENDORSEMENT = this.GetEndorsements(includedRatings, ratingEditions),
@@ -98,8 +157,11 @@ namespace Gva.Api.WordTemplates
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     T_ACTION = lastEdition.LicenceAction.Name.ToUpper(),
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    T_DOCUMENTS = documents.Take(documents.Length / 2),
-                    T_DOCUMENTS2 = documents.Skip(documents.Length / 2),
+                    T_THEORETICAL_EXAM = theoreticalExams.Count > 0 ? theoreticalExams : emptyEntry,
+                    T_ACCESS_ORDER_PRACTICAL_EDUC = accessOrderPractEducation.Count > 0 ? accessOrderPractEducation : emptyEntry,
+                    T_PRACTICAL_EXAM = practicalExams.Count > 0 ? practicalExams : emptyEntry,
+                    T_CHECK_AT_WORK = checksAtWork.Count > 0 ? checksAtWork : emptyEntry,
+                    T_ACCESS_ORDER_WORK_ALONE = accessOrderWorkAlone.Count > 0 ? accessOrderWorkAlone : emptyEntry,
                     T_ENDORSEMENT = endorsements2,
                     L_ENDORSEMENT = endorsements2,
                     L_ABBREVIATION = this.GetAbbreviations()
@@ -157,12 +219,12 @@ namespace Gva.Api.WordTemplates
             };
         }
 
-        private List<object> GetLicencePrivileges()
+        private List<object> GetLicencePrivileges(string licenceCode)
         {
             return new List<object>()
             {
-                LicenceDictionary.LicencePrivilege["CATML"],
-                LicenceDictionary.LicencePrivilege["idDoc3"]
+                LicenceDictionary.LicencePrivilege[licenceCode],
+                LicenceDictionary.LicencePrivilege["idDoc4"]
             };
         }
 
@@ -170,7 +232,7 @@ namespace Gva.Api.WordTemplates
         {
             var result = includedRatings
                 .Where(r => r.Content.Authorization != null)
-                .GroupBy(r => r.Content.Authorization.Name)
+                .GroupBy(r => r.Content.Authorization.Code)
                 .Select(g => new
                     {
                         NAME = g.Key,
@@ -181,49 +243,122 @@ namespace Gva.Api.WordTemplates
             return result;
         }
 
-        private object[] GetDocuments(string licenceTypeCode, IEnumerable<PersonTrainingDO> includedTrainings)
+        private List<object> GetExams(
+            IEnumerable<PersonTrainingDO> includedExams,
+            IEnumerable<PersonCheckDO> includedChecks,
+            IEnumerable<PersonTrainingDO> includedTrainings,
+            NomValue examRole)
         {
-            string[] documentRoleCodes;
-            bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(licenceTypeCode, out documentRoleCodes);
+            var exams = includedExams.Where(d => d.DocumentRole.Code == examRole.Code)
+               .Select(t => new
+               {
+                   DOC = new
+                   {
+                       SUB_DOC = new
+                       {
+                           DOC_TYPE = t.DocumentType.Name.ToLower(),
+                           DOC_NO = t.DocumentNumber,
+                           DATE = t.DocumentDateValidFrom,
+                           DOC_PUBLISHER = t.DocumentPublisher
+                       }
+                   }
+               })
+               .ToList<object>();
 
-            if (!hasRoles)
-            {
-                return new object[0];
-            }
+            var trainings = includedTrainings.Where(d => d.DocumentRole.Code == examRole.Code)
+               .Select(t => new
+               {
+                   DOC = new
+                   {
+                       SUB_DOC = new
+                       {
+                           DOC_TYPE = t.DocumentType.Name.ToLower(),
+                           DOC_NO = t.DocumentNumber,
+                           DATE = t.DocumentDateValidFrom,
+                           DOC_PUBLISHER = t.DocumentPublisher
+                       }
+                   }
+               })
+               .ToList<object>();
 
-            return includedTrainings
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code))
-                .OrderBy(t => t.DocumentDateValidFrom)
-                .Select((t, i) =>
-                    new
-                    {
-                        DOC = new
-                        {
-                            DOC_ROLE = string.Format("{0}. {1}", i + 1, t.DocumentRole.Name),
-                            SUB_DOC = new
-                            {
-                                DOC_TYPE = t.DocumentType.Name,
-                                DOC_NO = t.DocumentNumber,
-                                DATE = t.DocumentDateValidFrom,
-                                DOC_PUBLISHER = t.DocumentPublisher
-                            }
-                        }
-                    }).ToArray<object>();
+            var checks = includedChecks.Where(d => d.DocumentRole.Code == examRole.Code)
+                 .Select(t => new
+                 {
+                     DOC = new
+                     {
+                         SUB_DOC = new
+                         {
+                             DOC_TYPE = t.DocumentType.Name.ToLower(),
+                             DOC_NO = t.DocumentNumber,
+                             DATE = t.DocumentDateValidFrom,
+                             DOC_PUBLISHER = t.DocumentPublisher
+                         }
+                     }
+                 })
+                 .ToList<object>();
+
+            return exams.Union(checks).Union(trainings).ToList<object>();
+        }
+
+        private List<object> GetChecks(
+            IEnumerable<PersonCheckDO> includedChecks,
+            NomValue checkRole)
+        {
+            var checks = includedChecks.Where(d => d.DocumentRole.Code == checkRole.Code)
+                 .Select(t => new
+                 {
+                     DOC = new
+                     {
+                         SUB_DOC = new
+                         {
+                             DOC_TYPE = t.DocumentType.Name.ToLower(),
+                             DOC_NO = t.DocumentNumber,
+                             DATE = t.DocumentDateValidFrom,
+                             DOC_PUBLISHER = t.DocumentPublisher
+                         }
+                     }
+                 })
+                 .ToList<object>();
+
+            return checks;
+        }
+
+        private List<object> GetTrainings(
+            IEnumerable<PersonTrainingDO> includedTrainings,
+            NomValue trainingRole)
+        {
+            var trainings = includedTrainings.Where(d => d.DocumentRole.Code == trainingRole.Code)
+                 .Select(t => new
+                 {
+                     DOC = new
+                     {
+                         SUB_DOC = new
+                         {
+                             DOC_TYPE = t.DocumentType.Name.ToLower(),
+                             DOC_NO = t.DocumentNumber,
+                             DATE = t.DocumentDateValidFrom,
+                             DOC_PUBLISHER = t.DocumentPublisher
+                         }
+                     }
+                 })
+                 .ToList<object>();
+
+            return trainings;
         }
 
         private List<object> GetEndorsements2(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> editions)
         {
             int caseTypeId = this.caseTypeRepository.GetCaseType("ovd").GvaCaseTypeId;
             List<object> ratingEditions = new List<object>();
-            foreach (var edition in editions)
+            foreach (var edition in editions.OrderBy(e => e.Content.DocumentDateValidFrom))
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var ratingType = rating.Content.RatingType == null ? null : rating.Content.RatingType.Name;
+                var ratingType = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
                 var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name;
-                var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Name;
+                var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 ratingEditions.Add(new
                 {
-                    ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Name,
+                    ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
                     SECTOR = rating.Content.Sector,
                     AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingType) ?
                         authorization :

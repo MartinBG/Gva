@@ -96,9 +96,9 @@ namespace Gva.Api.WordTemplates
                 NomValue simulatorRole = this.nomRepository.GetNomValue("documentRoles", "simulator");
                 NomValue practicalCheckRole = this.nomRepository.GetNomValue("documentRoles", "practicalCheck");
 
-                if (documentRoleCodes.Contains(examRole.Code) || documentRoleCodes.Contains(practicalCheckRole.Code))
+                if (documentRoleCodes.Contains(examRole.Code) || documentRoleCodes.Contains(examRole.Code))
                 {
-                    exams = this.GetExams(includedExams, includedChecks, practicalCheckRole);
+                    exams = this.GetExams(includedExams, includedChecks, examRole);
                 }
 
                 if (documentRoleCodes.Contains(simulatorRole.Code))

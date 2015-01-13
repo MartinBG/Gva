@@ -1120,7 +1120,11 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "7", "simulator" },
                 { "15", "practicalCheck" },
                 { "4", "theoreticalTraining"},
-                { "3", "diploma"}
+                { "3", "diploma"},
+                { "54", "practicalExams"},
+                { "47A", "accessOrderPractEduc"},
+                { "48A", "accessOrderWorkAlone"},
+                { "49A", "checkAtWork"}
             };
 
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_DOCUMENT_ROLE")
