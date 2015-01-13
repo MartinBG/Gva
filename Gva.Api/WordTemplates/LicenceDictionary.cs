@@ -113,8 +113,8 @@ namespace Gva.Api.WordTemplates
                 new
                 {
                     NO = 100,
-                    NAME_BG = "1. Притежателят на това свидетелство за правоспособност CATML с вписано разрешение SIMI към него може да:",
-                    NAME_TRANS = "1. The holder of this CATML, with registered SIMI endorsementis entitled to:"
+                    NAME_BG = "Притежателят на това свидетелство за правоспособност CATML с вписано разрешение SIMI към него може да:",
+                    NAME_TRANS = "The holder of this CATML, with registered SIMI endorsementis entitled to:"
                 }
             },
             {
@@ -122,8 +122,8 @@ namespace Gva.Api.WordTemplates
                 new
                 {
                     NO = 101,
-                    NAME_BG = "1а. обучава РП в курсове;",
-                    NAME_TRANS = "1a. train in courses air traffic controllers;"
+                    NAME_BG = "1. обучава РП в курсове;",
+                    NAME_TRANS = "1. train in courses air traffic controllers;"
                 }
             },
             {
@@ -131,8 +131,8 @@ namespace Gva.Api.WordTemplates
                 new
                 {
                     NO = 102,
-                    NAME_BG = "1б. участва в провеждането на изпити на РП на тренажор;",
-                    NAME_TRANS = "1b. to participle testing in the simulator the air traffic controllers;"
+                    NAME_BG = "2. участва в провеждането на изпити на РП на тренажор;",
+                    NAME_TRANS = "2. to participle testing in the simulator the air traffic controllers;"
                 }
             },
             {
@@ -140,8 +140,8 @@ namespace Gva.Api.WordTemplates
                 new
                 {
                     NO = 103,
-                    NAME_BG = "1в. участва при проверки и оценява компетентността на РП на тренажор;",
-                    NAME_TRANS = "1c. participle in checks and competence assessment of the air traffic controllers in the simulator;"
+                    NAME_BG = "3. участва при проверки и оценява компетентността на РП на тренажор;",
+                    NAME_TRANS = "3. participle in checks and competence assessment of the air traffic controllers in the simulator;"
                 }
             },
             {
@@ -149,8 +149,8 @@ namespace Gva.Api.WordTemplates
                 new
                 {
                     NO = 104,
-                    NAME_BG = "1г. Провежда обучение в АУЦ на ученици РП, обучаеми РП и РП с временно прекратена валидност на свидетелство за РП, квалификационен клас и/или разрешение, включително и да им провежда изпити, проверки или да извършва оценяване.",
-                    NAME_TRANS = "1d. carry out training of the air traffic controller-students in the Training Centre and trainee air traffic controllers and the air traffic controllers with temporarily discontinued validity of ATCL, rating and/or endorsement, including the administration of tests, checks or making assessments."
+                    NAME_BG = "4. Провежда обучение в АУЦ на ученици РП, обучаеми РП и РП с временно прекратена валидност на свидетелство за РП, квалификационен клас и/или разрешение, включително и да им провежда изпити, проверки или да извършва оценяване.",
+                    NAME_TRANS = "4. carry out training of the air traffic controller-students in the Training Centre and trainee air traffic controllers and the air traffic controllers with temporarily discontinued validity of ATCL, rating and/or endorsement, including the administration of tests, checks or making assessments."
                 }
             },
             {
