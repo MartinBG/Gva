@@ -104,7 +104,9 @@ namespace Gva.Api.Controllers.Applications
                 organizationUin: organizationUin,
                 stage: stage,
                 offset: offset,
-                limit: limit);
+                limit: limit)
+                .OrderByDescending(a => a.AppPartDocumentDate)
+                .Take(1000);
 
             return Ok(applications);
         }
