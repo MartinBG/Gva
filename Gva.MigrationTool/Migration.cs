@@ -320,10 +320,15 @@ namespace Gva.MigrationTool
                 tokenRebuildTimer.Stop();
                 Console.WriteLine("Rebuilding lot part tokens time - {0}", tokenRebuildTimer.Elapsed.TotalMinutes);
 
-                Stopwatch personLicenceDocumentsTimer = new Stopwatch();
-                person.migrateLicenceDocuments(personIdToLotId);
-                personLicenceDocumentsTimer.Stop();
-                Console.WriteLine("Migration of person licences documents time - {0}", personLicenceDocumentsTimer.Elapsed.TotalMinutes);
+                bool shouldMigrateLicences;
+                bool.TryParse(ConfigurationManager.AppSettings["MigrateLicences"], out shouldMigrateLicences);
+                if (shouldMigrateLicences)
+                {
+                    Stopwatch personLicenceDocumentsTimer = new Stopwatch();
+                    person.migrateLicenceDocuments(personIdToLotId);
+                    personLicenceDocumentsTimer.Stop();
+                    Console.WriteLine("Migration of person licences documents time - {0}", personLicenceDocumentsTimer.Elapsed.TotalMinutes);
+                }
 
                 timer.Stop();
                 Console.WriteLine("Migration time - {0}", timer.Elapsed.TotalMinutes);
