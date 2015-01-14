@@ -1116,17 +1116,24 @@ namespace Gva.MigrationTool.Nomenclatures
             {
                 { "ENG", "engCert" },
                 { "BG", "bgCert" },
-                { "6", "exam" },
-                { "7", "simulator" },
-                { "15", "practicalCheck" },
+                { "BTT", "basicTrainingTheorExam"},
+                { "RT1", "ratingTrainingTheorExam"},
+                { "RT2", "ratingTrainingPractExam"},
                 { "1", "flyingCheck"},
                 { "3", "diploma"},
                 { "4", "theoreticalTraining"},
                 { "5", "flyingTraining"},
-                { "54", "practicalExams"},
+                { "6", "exam" },
+                { "7", "simulator" },
+                { "15", "practicalCheck" },
                 { "47A", "accessOrderPractEduc"},
                 { "48A", "accessOrderWorkAlone"},
-                { "49A", "checkAtWork"}
+                { "49A", "checkAtWork"},
+                { "50A", "theorExamTransEducation"},
+                { "51A", "practExamPrelimEduc"},
+                { "52A", "RPcert"},
+                { "53", "practExamToGainAccess"},
+                { "54", "practicalExams"}
             };
 
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_DOCUMENT_ROLE")

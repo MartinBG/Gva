@@ -946,6 +946,50 @@ namespace Gva.Api.WordTemplates
             {
                 "11Simulator",
                 "11.Тренажор"
+            },
+            {
+                "BasicTraining",
+                "BASIC TRAINING (Теоретичен изпит)"
+            },
+            {
+                "RatingTrainingFirstStage",
+                "RATING TRAINING- І етап (Теоретичен изпит)"
+            },
+            {
+                "RatingTrainingSecondStage",
+                "RATING TRAINING- ІI етап (Практически изпит)"
+            },
+            {
+                "EngLangCert",
+                "Свидетелство за ниво на владеене на английски език"
+            },
+            {
+                "BgLangCert",
+                "Свидетелство за ниво на владеене на български език"
+            },
+            {
+                "TheoreticalExamTransitionalEducation",
+                "Теоретичен изпит - преходно обучение"
+            },
+            {
+                "PracticalExamPriliminaryEducation",
+                "Практически изпит - предварително обучение"
+            },
+            {
+                "RPcert",
+                "Свидетелство за професионална квалиф. на РП"
+            },
+            {
+                "AccessOrderPracticalEducation",
+                "Заповед за допуск до практическо обучение"
+            },
+            {
+                "PracticalExamToGainAccess",
+                "Практически изпит за допуск до самост. работа"
+            },
+            {
+                "AccessOrderWorkAlone",
+                "Заповед за допуск до самостоятелна работа"
             }
         };
 
