@@ -425,7 +425,6 @@
     <Compile Include="WordTemplates\CAL03year2013.cs" />
     <Compile Include="WordTemplates\AML.cs" />
     <Compile Include="WordTemplates\AML_III.cs" />
-    <Compile Include="WordTemplates\Pilot142.cs" />
     <Compile Include="WordTemplates\Pilot.cs" />
     <Compile Include="WordTemplates\RVD_Licence.cs" />
     <Compile Include="WordTemplates\ForeignLicence.cs" />
