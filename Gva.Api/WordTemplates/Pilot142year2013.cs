@@ -91,7 +91,7 @@ namespace Gva.Api.WordTemplates
             var rtoRating = this.GetRtoRating(includedRatings, ratingEditions);
             var langLevel = this.GetLangLevels(includedLangCerts);
             var limitations = this.GetLimitations(lastEdition, includedMedicals, includedExams);
-            var ratings = this.GetRaitings(includedRatings, ratingEditions);
+            var ratings = this.GetRatings(includedRatings, ratingEditions);
             var country = this.GetCountry(personAddress);
             var licenceNumber = string.Format(
                 "BGR. {0} - {1} - {2}",
@@ -298,7 +298,7 @@ namespace Gva.Api.WordTemplates
             return limitations.ToList<object>();
         }
 
-        private List<object> GetRaitings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
+        private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             var authorizationGroupIds = this.nomRepository.GetNomValues("authorizationGroups")
                 .Where(nv => nv.Code == "FT" || nv.Code == "FC")
@@ -337,8 +337,7 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions.OrderBy(r => r.Content.DocumentDateValidFrom))
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (authorizationGroup.NomValueId == rating.Content.Authorization.ParentValueId.Value &&
-                    (rating.Content.Authorization == null || rating.Content.Authorization.Code != "RTO"))
+                if (rating.Content.Authorization != null && authorizationGroup.NomValueId == rating.Content.Authorization.ParentValueId.Value && rating.Content.Authorization.Code != "RTO")
                 {
                     ratings.Add(new
                     {

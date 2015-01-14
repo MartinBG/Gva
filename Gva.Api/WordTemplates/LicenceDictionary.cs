@@ -186,8 +186,8 @@ namespace Gva.Api.WordTemplates
                 new
                 {
                     NO = 200,
-                    NAME_BG = "2. Правата на свидетелството трябва да се упражняват само ако притежателят има валиден медицински сертификат за съответните права.",
-                    NAME_TRANS = "2. The privileges of the licence shall be exercised only if the holder has a valid medical certificate for required privileges."
+                    NAME_BG = "Правата на свидетелството трябва да се упражняват само ако притежателят има валиден медицински сертификат за съответните права.",
+                    NAME_TRANS = "The privileges of the licence shall be exercised only if the holder has a valid medical certificate for required privileges."
                 }
             },
             {
@@ -488,7 +488,16 @@ namespace Gva.Api.WordTemplates
                 }
             },
             {
-                "requiresLegalID",
+                "requiresLegalID_Pilot",
+                new
+                {
+                    NO = 300,
+                    NAME_BG = "Притежателят на това свидетелство се легитимира с документ за самоличност.",
+                    NAME_TRANS = "A legal identification document has to be carried for the purpose of identification of the licence holder."
+                }
+            },
+            {
+                "requiresLegalID_RVD",
                 new
                 {
                     NO = 300,
@@ -916,6 +925,30 @@ namespace Gva.Api.WordTemplates
             }
         };
 
+        private static Dictionary<string, object> documentTitle = new Dictionary<string, object>()
+        {
+            {
+                "6TheoreticalTraining",
+                "6.Теоретично обучение"
+            },
+            {
+                "7FlyingTraining",
+                "7.Летателно обучение"
+            },
+            {
+                "8TheoreticalExam",
+                "8.Теоретичен изпит"
+            },
+            {
+                "9FlyingCheck",
+                "9.Летателна проверка"
+            },
+            {
+                "11Simulator",
+                "11.Тренажор"
+            }
+        };
+
         public static Dictionary<string, string[]> LicenceRole
         {
             get
@@ -937,6 +970,14 @@ namespace Gva.Api.WordTemplates
             get
             {
                 return licenceAbbreviation;
+            }
+        }
+
+        public static Dictionary<string, object> DocumentTitle
+        {
+            get
+            {
+                return documentTitle;
             }
         }
     }
