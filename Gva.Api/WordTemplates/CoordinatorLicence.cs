@@ -242,25 +242,9 @@ namespace Gva.Api.WordTemplates
                })
                .ToList<object>();
 
-            var trainings = includedTrainings.Where(d => d.DocumentRole.Code == examRole.Code)
-               .Select(t => new
-               {
-                   DOC_TYPE = t.DocumentType.Name.ToLower(),
-                   DOC_NO = t.DocumentNumber,
-                   DATE = t.DocumentDateValidFrom,
-                   DOC_PUBLISHER = t.DocumentPublisher
-               })
-               .ToList<object>();
-
-            var checks = includedChecks.Where(d => d.DocumentRole.Code == examRole.Code)
-                 .Select(t => new 
-                {
-                    DOC_TYPE = t.DocumentType.Name.ToLower(),
-                    DOC_NO = t.DocumentNumber,
-                    DATE = t.DocumentDateValidFrom,
-                    DOC_PUBLISHER = t.DocumentPublisher
-                 })
-                 .ToList<object>();
+            var trainings = this.GetTrainings(includedTrainings, examRole);
+            var checks = this.GetChecks(includedChecks, examRole);
+                
 
             return Utils.FillBlankData(exams.Union(checks).Union(trainings).ToList<object>(), 1);
         }
