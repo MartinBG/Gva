@@ -16,6 +16,7 @@ namespace Gva.Api.WordTemplates
 
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
+        private int number;
 
         public Pilot(
             ILotRepository lotRepository,
@@ -23,6 +24,7 @@ namespace Gva.Api.WordTemplates
         {
             this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
+            this.number = 6;
         }
 
         public string[] TemplateNames
@@ -300,7 +302,7 @@ namespace Gva.Api.WordTemplates
                     {
                         TYPE = string.Format(
                             "{0} {1}",
-                            rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Name,
+                            rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Code,
                             rating.Content.RatingType == null ? string.Empty : rating.Content.RatingType.Code).Trim(),
                         AUTH_NOTES = string.Format(
                             "{0} {1}",
@@ -311,8 +313,7 @@ namespace Gva.Api.WordTemplates
                 }
             }
 
-            ratings = Utils.FillBlankData(ratings, 19);
-            return ratings;
+            return Utils.FillBlankData(ratings, 19);
         }
 
         private List<object> GetRatingsDataByCode(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions, string code)
@@ -347,7 +348,7 @@ namespace Gva.Api.WordTemplates
             var result = includedMedicals.Select(m =>
                 new
                 {
-                    ORDER_NO = "10",
+                    ORDER_NO = number++,
                     NO = string.Format(
                         "{0}-{1}-{2}-{3}",
                         m.DocumentNumberPrefix,
@@ -361,15 +362,15 @@ namespace Gva.Api.WordTemplates
                     LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
                 }).ToList<object>();
 
-            var emptyEntry = new List<object>() { new { ORDER_NO = "10" } };
+            var emptyEntry = new List<object>() { new { ORDER_NO = number++ } };
 
             return result.Count() > 0 ? result : emptyEntry;
         }
 
         private List<object> GetTrainingsByCode(IEnumerable<PersonTrainingDO> includedTrainings, string roleCode, string[] documentRoleCodes)
         {
-            return includedTrainings
-                .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
+            var trainings = includedTrainings
+                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
                 .OrderBy(t => t.DocumentDateValidFrom)
                 .Select(t =>
                     new
@@ -379,12 +380,14 @@ namespace Gva.Api.WordTemplates
                         DATE = t.DocumentDateValidFrom,
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
+
+            return Utils.FillBlankData(trainings, 1);
         }
 
         private List<object> GetChecksByCode(IEnumerable<PersonCheckDO> includedChecks, string roleCode, string[] documentRoleCodes)
         {
-            return includedChecks
-                .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
+            var checks = includedChecks
+                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
                 .OrderBy(t => t.DocumentDateValidFrom)
                 .Select(t =>
                     new
@@ -394,6 +397,8 @@ namespace Gva.Api.WordTemplates
                         DATE = t.DocumentDateValidFrom,
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
+
+            return Utils.FillBlankData(checks, 1);
         }
 
         private List<object> GetDocuments(
@@ -425,7 +430,7 @@ namespace Gva.Api.WordTemplates
                 var flyingTrainings = this.GetTrainingsByCode(includedTrainings, flyingTrainingRole.Code, documentRoleCodes);
                 flyingTrainings = Utils.FillBlankData(flyingTrainings, 1);
 
-                var exams = includedExams.Where(d => d.DocumentRole.Code == theoreticalExamRole.Code)
+                var exams = includedExams.Where(d => d.Valid.Code == "Y" && documentRoleCodes.Contains(d.DocumentRole.Code) && d.DocumentRole.Code == theoreticalExamRole.Code)
                    .Select(t => new
                    {
                        DOC_TYPE = t.DocumentType.Name.ToLower(),
@@ -438,10 +443,7 @@ namespace Gva.Api.WordTemplates
                 exams = Utils.FillBlankData(exams, 1);
 
                 var simulators = this.GetChecksByCode(includedChecks, simulatorRole.Code, documentRoleCodes);
-                Utils.FillBlankData(simulators, 1);
-
                 var flyingChecks = this.GetChecksByCode(includedChecks, flyingCheckRole.Code, documentRoleCodes);
-                Utils.FillBlankData(flyingChecks, 1);
 
                 var result = new List<object>()
                 {
@@ -449,7 +451,7 @@ namespace Gva.Api.WordTemplates
                     {
                         DOC = new
                         {
-                            DOC_ROLE = String.Format("6. {0}", LicenceDictionary.DocumentTitle["TheoreticalTraining"]),
+                            DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["TheoreticalTraining"]),
                             SUB_DOC = theoreticalTrainings
                         }
                     },
@@ -457,7 +459,7 @@ namespace Gva.Api.WordTemplates
                     {
                         DOC = new
                         {
-                            DOC_ROLE = String.Format("7. {0}", LicenceDictionary.DocumentTitle["FlyingTraining"]),
+                            DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["FlyingTraining"]),
                             SUB_DOC = flyingTrainings
                         }
                     },
@@ -465,7 +467,7 @@ namespace Gva.Api.WordTemplates
                     {
                         DOC = new
                         {
-                            DOC_ROLE = String.Format("8. {0}", LicenceDictionary.DocumentTitle["TheoreticalExam"]),
+                            DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["TheoreticalExam"]),
                             SUB_DOC = exams
                         }
                     },
@@ -473,7 +475,7 @@ namespace Gva.Api.WordTemplates
                     {
                         DOC = new
                         {
-                            DOC_ROLE = String.Format("9. {0}", LicenceDictionary.DocumentTitle["FlyingCheck"]),
+                            DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["FlyingCheck"]),
                             SUB_DOC = flyingChecks
                         }
                     },
@@ -486,7 +488,7 @@ namespace Gva.Api.WordTemplates
                     {
                         DOC = new
                         {
-                            DOC_ROLE = String.Format("11. {0}", LicenceDictionary.DocumentTitle["Simulator"]),
+                            DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["Simulator"]),
                             SUB_DOC = simulators
                         }
                     });

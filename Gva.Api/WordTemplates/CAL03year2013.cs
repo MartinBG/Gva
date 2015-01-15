@@ -61,7 +61,7 @@ namespace Gva.Api.WordTemplates
 
 
             var refNumber = string.Format(
-                "BG {0} - {1} - {2}",
+                "{0} - {1} - {2}",
                 licenceType.Code,
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
@@ -122,7 +122,7 @@ namespace Gva.Api.WordTemplates
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 var ratingTypeCode = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
-                var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name;
+                var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
                 var authorizationCode = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 ratingEditions.Add(new
                 {

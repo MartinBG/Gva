@@ -86,8 +86,8 @@ namespace Gva.Api.WordTemplates
                 new
                 {
                     NO = 100,
-                    NAME_BG = "1. Правата на свидетелството се упражняват единствено ако притежателят има валидно медицинско свидетелство за исканото право.",
-                    NAME_TRANS = "1. The privileges of the licence shall be exercised only if the holder has a valid medical certificate for the required privilege."
+                    NAME_BG = "Правата на свидетелството се упражняват единствено ако притежателят има валидно медицинско свидетелство за исканото право.",
+                    NAME_TRANS = "The privileges of the licence shall be exercised only if the holder has a valid medical certificate for the required privilege."
                 }
             },
             {
@@ -177,8 +177,8 @@ namespace Gva.Api.WordTemplates
                 new
                 {
                     NO = 200,
-                    NAME_BG = "2. Трябва да се носи документ със снимка с цел идентифициране на притежателя на свидетелството за правоспособност.",
-                    NAME_TRANS = "2. A document containing a photo shall be carried for the purposes of identification of the licence holder."
+                    NAME_BG = "Трябва да се носи документ със снимка с цел идентифициране на притежателя на свидетелството за правоспособност.",
+                    NAME_TRANS = "A document containing a photo shall be carried for the purposes of identification of the licence holder."
                 }
             },
             {
@@ -927,6 +927,10 @@ namespace Gva.Api.WordTemplates
 
         private static Dictionary<string, object> documentTitle = new Dictionary<string, object>()
         {
+            {
+                "Diploma",
+                "Диплома за завършено образование"
+            },
             {
                 "Education",
                 "Образование"

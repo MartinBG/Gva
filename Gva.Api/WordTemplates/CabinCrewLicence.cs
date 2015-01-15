@@ -96,9 +96,9 @@ namespace Gva.Api.WordTemplates
                 NomValue simulatorRole = this.nomRepository.GetNomValue("documentRoles", "simulator");
                 NomValue practicalCheckRole = this.nomRepository.GetNomValue("documentRoles", "practicalCheck");
 
-                if (documentRoleCodes.Contains(examRole.Code) || documentRoleCodes.Contains(examRole.Code))
+                if (documentRoleCodes.Contains(examRole.Code) || documentRoleCodes.Contains(practicalCheckRole.Code))
                 {
-                    exams = this.GetExams(includedExams, includedChecks, examRole);
+                    exams = this.GetExams(includedExams, includedChecks, practicalCheckRole);
                 }
 
                 if (documentRoleCodes.Contains(simulatorRole.Code))
@@ -307,7 +307,7 @@ namespace Gva.Api.WordTemplates
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 var ratingTypeCode = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
-                var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name;
+                var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
                 var authorizationCode = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 ratingEditions.Add(new
                 {

@@ -314,19 +314,10 @@ namespace Gva.Api.WordTemplates
             NomValue ratingTrainingPractExamRole = this.nomRepository.GetNomValue("documentRoles", "ratingTrainingPractExam");
 
             var theoreticalTrainingExams = this.GetTraingsByCode(includedTrainings, theoreticalTrainingExamRole.Code, documentRoleCodes);
-            theoreticalTrainingExams = Utils.FillBlankData(theoreticalTrainingExams, 1);
-
             var ratingTrainingTheorExams = this.GetTraingsByCode(includedTrainings, ratingTrainingTheorExamRole.Code, documentRoleCodes);
-            ratingTrainingTheorExams = Utils.FillBlankData(ratingTrainingTheorExams, 1);
-
             var ratingTrainingPractExams = this.GetTraingsByCode(includedTrainings, ratingTrainingPractExamRole.Code, documentRoleCodes);
-            ratingTrainingPractExams = Utils.FillBlankData(ratingTrainingPractExams, 1);
-
             var bgLangCerts = this.GetLangCertsByCode(includedLangCerts, bgCertRole.Code, documentRoleCodes);
-            bgLangCerts = Utils.FillBlankData(bgLangCerts, 1);
-
             var engLangCerts = this.GetLangCertsByCode(includedLangCerts, engCertRole.Code, documentRoleCodes);
-            engLangCerts = Utils.FillBlankData(engLangCerts, 1);
 
             return new List<object>()
             {
@@ -375,8 +366,8 @@ namespace Gva.Api.WordTemplates
 
         private List<object> GetLangCertsByCode(IEnumerable<PersonLangCertDO> includedLangCerts, string roleCode, string[] documentRoleCodes)
         {
-            return includedLangCerts
-                .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
+            var langCerts = includedLangCerts
+                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
                 .OrderBy(t => t.DocumentDateValidFrom)
                 .Select(t =>
                     new
@@ -386,12 +377,14 @@ namespace Gva.Api.WordTemplates
                         DATE = t.DocumentDateValidFrom,
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
+
+            return Utils.FillBlankData(langCerts, 1);
         }
 
         private List<object> GetTraingsByCode(IEnumerable<PersonTrainingDO> includedTraings, string roleCode, string[] documentRoleCodes)
         {
-            return includedTraings
-                .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
+            var trainings = includedTraings
+                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
                 .OrderBy(t => t.DocumentDateValidFrom)
                 .Select(t =>
                     new
@@ -401,6 +394,8 @@ namespace Gva.Api.WordTemplates
                         DATE = t.DocumentDateValidFrom,
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
+
+            return Utils.FillBlankData(trainings, 1);
         }
 
         private List<object> GetMedCerts(IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData, string licenceCode)

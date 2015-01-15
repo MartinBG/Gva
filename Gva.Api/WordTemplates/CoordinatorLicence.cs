@@ -72,7 +72,7 @@ namespace Gva.Api.WordTemplates
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
-                "BG {0} - {1} - {2}",
+                "BGR.{0} - {1} - {2}",
                 licenceType.TextContent.Get<string>("licenceCode"),
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
@@ -244,7 +244,6 @@ namespace Gva.Api.WordTemplates
 
             var trainings = this.GetTrainings(includedTrainings, examRole);
             var checks = this.GetChecks(includedChecks, examRole);
-                
 
             return Utils.FillBlankData(exams.Union(checks).Union(trainings).ToList<object>(), 1);
         }
@@ -291,7 +290,7 @@ namespace Gva.Api.WordTemplates
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 var ratingType = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
-                var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name;
+                var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
                 var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 ratingEditions.Add(new
                 {

@@ -402,7 +402,7 @@ namespace Gva.Api.WordTemplates
                 });
             }
 
-            if ((new List<string> { "F/CL", "FDL", "PPL(A)", "CPL(A)", "ATPL(A)", "PPL(SA)", "FEL" }).Contains(licenceTypeCode))
+            if ((new List<string> { "F/CL", "FDL", "PPL(A)", "CPL(A)", "ATPL(A)", "PPL(SA)", "FEL", "PL(FB)" }).Contains(licenceTypeCode))
             {
                 NomValue theoreticalExamRole = this.nomRepository.GetNomValue("documentRoles", "exam");
                 var theoreticalExams = includedExams

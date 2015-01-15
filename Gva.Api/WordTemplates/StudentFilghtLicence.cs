@@ -6,6 +6,7 @@ using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Repositories.LotRepositories;
 using Regs.Api.Models;
 using Common.Api.Models;
+using System;
 
 namespace Gva.Api.WordTemplates
 {
@@ -35,6 +36,7 @@ namespace Gva.Api.WordTemplates
 
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
+        private int number;
 
         public StudentFilghtLicence(
             ILotRepository lotRepository,
@@ -42,6 +44,7 @@ namespace Gva.Api.WordTemplates
         {
             this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
+            this.number = 6;
         }
 
 
@@ -119,7 +122,7 @@ namespace Gva.Api.WordTemplates
                     T_DOCUMENTS =  trainings,
                     T_DOCUMENTS2 = educations,
                     T_MED_CERT = this.GetMedCerts(licenceTypeCode, includedMedicals, personData),
-                    T_RATING = this.GetRaitings(includedRatings, ratingEditions),
+                    T_RATING = this.GetRatings(includedRatings, ratingEditions),
                     L_RATING = this.GetSchools(includedRatings, ratingEditions),
                     L_ABBREVIATION = this.GetAbbreviations()
                 }
@@ -212,7 +215,7 @@ namespace Gva.Api.WordTemplates
         {
             var educationRole = this.nomRepository.GetNomValue("documentRoles", "diploma");
             var trainings = includedTrainings
-                .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == educationRole.Code)
+                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == educationRole.Code)
                 .OrderBy(t => t.DocumentDateValidFrom)
                 .Select(t =>
                     new
@@ -223,7 +226,17 @@ namespace Gva.Api.WordTemplates
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
 
-            return Utils.FillBlankData(trainings, 1);
+            return new List<object>()
+            {
+                new
+                {
+                    DOC = new
+                    {
+                        DOC_ROLE = String.Format("{0}. {1}", this.number++, LicenceDictionary.DocumentTitle["Diploma"]),
+                        SUB_DOC = Utils.FillBlankData(trainings, 1)
+                    }
+                }
+            };
         }
 
         private List<object> GetTrainings(
@@ -233,7 +246,7 @@ namespace Gva.Api.WordTemplates
             var trainingRole = this.nomRepository.GetNomValue("documentRoles", "theoreticalTraining");
 
             var trainings = includedTrainings
-                .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == trainingRole.Code)
+                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == trainingRole.Code)
                 .OrderBy(t => t.DocumentDateValidFrom)
                 .Select(t =>
                     new
@@ -244,17 +257,25 @@ namespace Gva.Api.WordTemplates
                         DOC_PUBLISHER = t.DocumentPublisher
                     }).ToList<object>();
 
-            return Utils.FillBlankData(trainings, 1);
+            return new List<object>()
+            {
+                new
+                {
+                    DOC = new
+                    {
+                        DOC_ROLE = String.Format("{0}. {1}", this.number++, LicenceDictionary.DocumentTitle["TheoreticalTraining"]),
+                        SUB_DOC = Utils.FillBlankData(trainings, 1)
+                    }
+                }
+            };
         }
 
         private List<object> GetMedCerts(string licenceTypeCode, IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
         {
-            int orderNumber = licenceTypeCode == "SP(A)" ? 8 : 1;
-
             var medicals = includedMedicals.Select(m =>
                 new
                 {
-                    ORDER_NO = orderNumber,
+                    ORDER_NO = this.number++,
                     NO = string.Format(
                         "{0}-{1}-{2}-{3}",
                         m.DocumentNumberPrefix,
@@ -268,10 +289,18 @@ namespace Gva.Api.WordTemplates
                     LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
                 }).ToList<object>();
 
-            return Utils.FillBlankData(medicals, 1);
+            if (medicals.Count() == 0)
+            { 
+                medicals.Add(new
+                {
+                    ORDER_NO = this.number++
+                });
+            }
+
+            return medicals;
         }
 
-        private List<object> GetRaitings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
+        private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             List<object> ratings = new List<object>();
             foreach (var edition in ratingEditions)

@@ -90,17 +90,17 @@ namespace Gva.Api.WordTemplates
 
                 if (documentRoleCodes.Contains(checkAtWorkRole.Code))
                 {
-                    checksAtWork = this.GetChecks(includedChecks, checkAtWorkRole);
+                    checksAtWork = Utils.FillBlankData(this.GetChecks(includedChecks, checkAtWorkRole), 1);
                 }
 
                 if (documentRoleCodes.Contains(accessOrderWorkAloneRole.Code))
                 {
-                    accessOrderWorkAlone = this.GetTrainings(includedTrainings, accessOrderWorkAloneRole);
+                    accessOrderWorkAlone = Utils.FillBlankData(this.GetTrainings(includedTrainings, accessOrderWorkAloneRole), 1);
                 }
 
                 if (documentRoleCodes.Contains(accessOrderPractEducationRole.Code))
                 {
-                    accessOrderPractEducation = this.GetTrainings(includedTrainings, accessOrderPractEducationRole);
+                    accessOrderPractEducation = Utils.FillBlankData(this.GetTrainings(includedTrainings, accessOrderPractEducationRole), 1);
                 }
             }
 
@@ -242,7 +242,7 @@ namespace Gva.Api.WordTemplates
             IEnumerable<PersonCheckDO> includedChecks,
             NomValue checkRole)
         {
-            var checks = includedChecks.Where(d => d.DocumentRole.Code == checkRole.Code)
+            return includedChecks.Where(d => d.Valid.Code == "Y" && d.DocumentRole.Code == checkRole.Code)
                  .Select(t => new
                  {
                     DOC_TYPE = t.DocumentType.Name.ToLower(),
@@ -251,15 +251,13 @@ namespace Gva.Api.WordTemplates
                     DOC_PUBLISHER = t.DocumentPublisher
                  })
                  .ToList<object>();
-
-            return Utils.FillBlankData(checks, 1);
         }
 
         private List<object> GetTrainings(
             IEnumerable<PersonTrainingDO> includedTrainings,
             NomValue trainingRole)
         {
-            var trainings = includedTrainings.Where(d => d.DocumentRole.Code == trainingRole.Code)
+            return includedTrainings.Where(d => d.Valid.Code == "Y" && d.DocumentRole.Code == trainingRole.Code)
                  .Select(t => new
                  {
                      DOC_TYPE = t.DocumentType.Name.ToLower(),
@@ -268,8 +266,6 @@ namespace Gva.Api.WordTemplates
                      DOC_PUBLISHER = t.DocumentPublisher
                  })
                  .ToList<object>();
-
-            return Utils.FillBlankData(trainings, 1);
         }
 
         private List<object> GetEndorsements(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
@@ -337,7 +333,7 @@ namespace Gva.Api.WordTemplates
             endosments = endosments
                 .Union(engLevels.Select(l => new
                 {
-                    AUTH = l.LangLevel.Name,
+                    AUTH = l.LangLevel.Name.ToUpper(),
                     VALID_DATE = l.DocumentDateValidTo
                 }))
                 .ToList<object>();
