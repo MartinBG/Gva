@@ -1746,9 +1746,9 @@ namespace Gva.MigrationTool.Sets
             return
                 preSplitLimFixup(limitations66)
                 .Split(',')
-                .Select(sc =>
-                    noms["limitations66"]
-                    .ByCode(postSplitLimFixup(sc.Trim())))
+                .Select(sc => postSplitLimFixup(sc.Trim()))
+                .Where(sc => noms["limitations66"].Any(v => v.Value.Code == sc))
+                .Select(sc => noms["limitations66"].ByCode(sc))
                 .ToArray();
         }
 
