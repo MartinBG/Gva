@@ -928,24 +928,36 @@ namespace Gva.Api.WordTemplates
         private static Dictionary<string, object> documentTitle = new Dictionary<string, object>()
         {
             {
-                "6TheoreticalTraining",
-                "6.Теоретично обучение"
+                "Education",
+                "Образование"
             },
             {
-                "7FlyingTraining",
-                "7.Летателно обучение"
+                "TheoreticalTraining",
+                "Теоретично обучение"
             },
             {
-                "8TheoreticalExam",
-                "8.Теоретичен изпит"
+                "FlyingTraining",
+                "Летателно обучение"
             },
             {
-                "9FlyingCheck",
-                "9.Летателна проверка"
+                "FlyingCheck",
+                "Летателна проверка"
             },
             {
-                "11Simulator",
-                "11.Тренажор"
+                "TheoreticalExam",
+                "Теоретичен изпит"
+            },
+            {
+                "PracticalTraining",
+                "Практическо обучение"
+            },
+            {
+                "PracticalCheck",
+                "Практическо проверка"
+            },
+            {
+                "Simulator",
+                "Тренажор"
             },
             {
                 "BasicTraining",
