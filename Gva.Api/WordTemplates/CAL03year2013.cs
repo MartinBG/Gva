@@ -124,6 +124,13 @@ namespace Gva.Api.WordTemplates
                 var ratingTypeCode = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
                 var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
                 var authorizationCode = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
+
+                var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
+                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                        .OrderByDescending(epv => epv.Content.Index)
+                        .Last();
+
                 ratingEditions.Add(new
                 {
                     CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypeCode) ?
@@ -133,7 +140,7 @@ namespace Gva.Api.WordTemplates
                             ratingTypeCode,
                             ratingClassName,
                             string.IsNullOrEmpty(authorizationCode) ? string.Empty : " / " + authorizationCode).Trim(),
-                    ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                    ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo
                 });
             }

@@ -218,6 +218,12 @@ namespace Gva.Api.WordTemplates
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if(this.fileRepository.GetFileReference(rating.PartId, caseTypeId) != null)
                 {
+                    var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
+                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                        .OrderByDescending(epv => epv.Content.Index)
+                        .Last();
+
                     classes.Add(new
                     {
                         LEVEL = rating.Content.PersonRatingLevel == null ? null : rating.Content.PersonRatingLevel.Code,
@@ -225,7 +231,7 @@ namespace Gva.Api.WordTemplates
                         SUBRATING = edition.Content.RatingSubClasses.Count > 0 ? string.Join(",", edition.Content.RatingSubClasses.Select(s => s.Code)) : string.Empty,
                         LICENCE = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code,
                         LIMITATION = edition.Content.Limitations.Count > 0 ? string.Join(",", edition.Content.Limitations.Select(s => s.Name)) : string.Empty,
-                        ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                        ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                         VALID_DATE = edition.Content.DocumentDateValidTo
                     });
                 }

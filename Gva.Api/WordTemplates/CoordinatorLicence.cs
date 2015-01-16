@@ -292,6 +292,12 @@ namespace Gva.Api.WordTemplates
                 var ratingType = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
                 var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
                 var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
+                var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
+                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                        .OrderByDescending(epv => epv.Content.Index)
+                        .Last();
+
                 ratingEditions.Add(new
                 {
                     ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
@@ -303,7 +309,7 @@ namespace Gva.Api.WordTemplates
                             ratingType,
                             ratingClass,
                             string.IsNullOrEmpty(authorization) ? string.Empty : " - " + authorization).Trim(),
-                    ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                    ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo
                 });
             }

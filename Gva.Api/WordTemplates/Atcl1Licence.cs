@@ -226,6 +226,12 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in editions.OrderBy(e => e.Content.DocumentDateValidFrom))
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
+                    .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                    .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                    .OrderByDescending(epv => epv.Content.Index)
+                    .Last();
+
                 var ratingType = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
                 var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
                 var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
@@ -243,7 +249,7 @@ namespace Gva.Api.WordTemplates
                                 ratingType,
                                 ratingClass,
                                 string.IsNullOrEmpty(authorization) ? string.Empty : " - " + authorization).Trim(),
-                        ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                        ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                         VALID_DATE = edition.Content.DocumentDateValidTo
                     };
                 }
@@ -432,7 +438,7 @@ namespace Gva.Api.WordTemplates
                         m.DocumentNumberSuffix),
                     ISSUE_DATE = m.DocumentDateValidFrom,
                     VALID_DATE = m.DocumentDateValidTo,
-                    CLASS = m.MedClass.Name,
+                    CLASS = m.MedClass.Name.ToUpper(),
                     PUBLISHER = m.DocumentPublisher.Name,
                     LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
                 }).ToList<object>();

@@ -565,6 +565,13 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+
+                var firstRatingEdition = this.lotRepository.GetLotIndex(edition.Part.LotId)
+                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                        .Where(epv => epv.Content.RatingPartIndex == edition.Content.RatingPartIndex)
+                        .OrderByDescending(epv => epv.Content.Index)
+                        .Last();
+
                 tRatings.Add(new
                 {
                     TYPE = string.Format(
@@ -575,7 +582,7 @@ namespace Gva.Api.WordTemplates
                         "{0} {1}",
                         rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Code,
                         edition.Content.Notes).Trim(),
-                    ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                    ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo
                 });
             }
@@ -588,6 +595,12 @@ namespace Gva.Api.WordTemplates
             List<object> lRatings = new List<object>();
             foreach (var edition in ratingEditions)
             {
+                var firstRatingEdition = this.lotRepository.GetLotIndex(edition.Part.LotId)
+                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                        .Where(epv => epv.Content.RatingPartIndex == edition.Content.RatingPartIndex)
+                        .OrderByDescending(epv => epv.Content.Index)
+                        .Last();
+
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 lRatings.Add(new
                 {
@@ -597,7 +610,7 @@ namespace Gva.Api.WordTemplates
                         rating.Content.RatingType == null ? string.Empty : rating.Content.RatingType.Code).Trim(),
                     AUTH = rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Code,
                     NOTES = edition.Content.Notes,
-                    ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                    ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo
                 });
             }

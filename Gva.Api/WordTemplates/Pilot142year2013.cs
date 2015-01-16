@@ -369,7 +369,7 @@ namespace Gva.Api.WordTemplates
                         m.DocumentNumberSuffix),
                     ISSUE_DATE = m.DocumentDateValidFrom,
                     VALID_DATE = m.DocumentDateValidTo,
-                    CLASS = m.MedClass.Name,
+                    CLASS = m.MedClass.Name.ToUpper(),
                     PUBLISHER = m.DocumentPublisher.Name,
                     LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
                 }).ToList<object>();

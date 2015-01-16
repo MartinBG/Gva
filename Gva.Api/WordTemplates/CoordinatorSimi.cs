@@ -276,9 +276,15 @@ namespace Gva.Api.WordTemplates
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if(rating.Content.Authorization != null)
                 {
+                    var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
+                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                        .OrderByDescending(epv => epv.Content.Index)
+                        .Last();
+
                     endosments.Add(new {
                         NAME = rating.Content.Authorization.Code,
-                        DATE = edition.Content.DocumentDateValidFrom
+                        DATE = firstRatingEdition.Content.DocumentDateValidFrom
                     });
                 }
             };
@@ -294,12 +300,18 @@ namespace Gva.Api.WordTemplates
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if (rating.Content.Authorization != null)
                 {
+                    var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
+                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                        .OrderByDescending(epv => epv.Content.Index)
+                        .Last();
+
                     endosments.Add(new
                     {
                         ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
                         AUTH = rating.Content.Authorization.Code,
                         SECTOR = rating.Content.Sector,
-                        ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                        ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                         VALID_DATE = edition.Content.DocumentDateValidTo
                     });
                 }

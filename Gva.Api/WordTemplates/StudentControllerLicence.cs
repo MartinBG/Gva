@@ -242,6 +242,12 @@ namespace Gva.Api.WordTemplates
                 object result = null;
                 if (withIssueDate)
                 {
+                    var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
+                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                        .OrderByDescending(epv => epv.Content.Index)
+                        .Last();
+
                     result = new
                     {
                         ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
@@ -253,7 +259,7 @@ namespace Gva.Api.WordTemplates
                                 ratingType,
                                 ratingClass,
                                 string.IsNullOrEmpty(authorization) ? string.Empty : " - " + authorization).Trim(),
-                        ISSUE_DATE = edition.Content.DocumentDateValidFrom,
+                        ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                         VALID_DATE = edition.Content.DocumentDateValidTo
                     };
                 }
@@ -412,7 +418,7 @@ namespace Gva.Api.WordTemplates
                         m.DocumentNumberSuffix),
                     ISSUE_DATE = m.DocumentDateValidFrom,
                     VALID_DATE = m.DocumentDateValidTo,
-                    CLASS = m.MedClass.Name,
+                    CLASS = m.MedClass.Name.ToUpper(),
                     PUBLISHER = m.DocumentPublisher.Name,
                     LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
                 }).ToList<object>();

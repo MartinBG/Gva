@@ -185,15 +185,21 @@ namespace Gva.Api.WordTemplates
                     validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
                     validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")))
                 {
+                    var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
+                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                        .OrderByDescending(epv => epv.Content.Index)
+                        .Last();
+
                     categories.Add(new
-                        {
-                            TYPE = rating.Content.AircraftTypeGroup.Name,
-                            CAT = rating.Content.AircraftTypeCategory.Code,
-                            DATE = edition.Content.DocumentDateValidFrom,
-                            LIMIT = (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0) ?
-                                string.Join(",", edition.Content.Limitations.Select(l => l.Name)) :
-                                ""
-                        });
+                    {
+                        TYPE = rating.Content.AircraftTypeGroup.Name,
+                        CAT = rating.Content.AircraftTypeCategory.Code,
+                        DATE = firstRatingEdition.Content.DocumentDateValidFrom,
+                        LIMIT = (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0) ?
+                            string.Join(",", edition.Content.Limitations.Select(l => l.Name)) :
+                            ""
+                    });
                 }
             }
 
