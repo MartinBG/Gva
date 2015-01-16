@@ -1477,6 +1477,8 @@ namespace Gva.MigrationTool.Sets
 
                         __LICENCE_ID = r.Field<int>("LICENCE_ID"),
 
+                        __LIM_MED_CERT = r.Field<string>("LIM_MED_CERT"),
+
                         staffType = noms["staffTypes"].ByOldId(r.Field<string>("STAFF_TYPE_ID")),
                         bookPageNumber = r.Field<int?>("BOOK_PAGE_NO"),
                         pageCount = r.Field<int?>("PAGES_COUNT"),
@@ -1489,8 +1491,7 @@ namespace Gva.MigrationTool.Sets
                         licenceAction = noms["licenceActions"].ByOldId(r.Field<string>("LICENCE_ACTION_ID")),
                         stampNumber = r.Field<string>("PAPER_NO"),
                         limitations = (r.Field<string>("LIMITATIONS_OLD") != null ? transformLimitations66(r.Field<string>("LIMITATIONS_OLD"), noms) : new NomValue[0])
-                            .Union(r.Field<string>("LIM_OTHER") != null ? transformLimitations66(r.Field<string>("LIM_OTHER"), noms) : new NomValue[0])
-                            .Union(r.Field<string>("LIM_MED_CERT") != null ? transformLimitations66(r.Field<string>("LIM_MED_CERT"), noms) : new NomValue[0]),
+                            .Union(r.Field<string>("LIM_OTHER") != null ? transformLimitations66(r.Field<string>("LIM_OTHER"), noms) : new NomValue[0]),
                         applications = r.Field<int?>("REQUEST_ID") != null ? new JObject[] { nomApplications[r.Field<int?>("REQUEST_ID").Value] } : new JObject[0],
                         includedRatings = includedRatings[r.Field<int>("ID")],
                         includedMedicals = includedMedicals[r.Field<int>("ID")],
