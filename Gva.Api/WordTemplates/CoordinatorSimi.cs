@@ -106,22 +106,24 @@ namespace Gva.Api.WordTemplates
 
             IEnumerable<PersonLangCertDO> engLevels = includedLangCerts.Where(t => t.DocumentRole.Alias == "engCert" && t.LangLevel != null);
 
-            dynamic lLangLevel = null;
-            dynamic tLangLevel = null;
+            List<object> lLangLevel = new List<object>();
+            List<object> tLangLevel = new List<object>();
             if (engLevels.Count() > 0)
             {
                 lLangLevel = engLevels.Select(l => new
                 {
                     LEVEL = l.LangLevel.Name,
                     VALID_DATE = l.DocumentDateValidTo
-                });
+                })
+                .ToList<object>();
 
                 tLangLevel = engLevels.Select(l => new
                 {
                     LEVEL = l.LangLevel.Name,
                     ISSUE_DATE = l.DocumentDateValidFrom,
                     VALID_DATE = l.DocumentDateValidTo
-                });
+                })
+                .ToList<object>();
             }
 
             var endorsements = this.GetEndorsements(includedRatings, ratingEditions);
@@ -149,7 +151,7 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),
                     ENDORSEMENT = endorsements,
                     L_ENDORSEMENT = lEndorsements,
-                    L_LANG_LEVEL = lLangLevel,
+                    L_LANG_LEVEL = Utils.FillBlankData(lLangLevel, 1),
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_ENDORSEMENT = tEndorsements,
@@ -159,7 +161,7 @@ namespace Gva.Api.WordTemplates
                     T_ACTION = firstEdition.LicenceAction.Name.ToUpper(),
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                    T_LANG_LEVEL = tLangLevel,
+                    T_LANG_LEVEL = Utils.FillBlankData(tLangLevel, 1),
                     T_THEORETICAL_EXAM = theoreticalExams,
                     T_ACCESS_ORDER_PRACTICAL_EDUC = accessOrderPractEducation,
                     T_PRACTICAL_EXAM = practicalExams,
@@ -326,13 +328,13 @@ namespace Gva.Api.WordTemplates
             IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions,
             IEnumerable<PersonLangCertDO> engLevels)
         {
-            List<object> endosments = new List<object>();
+            List<object> endorsements = new List<object>();
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if (rating.Content.Authorization != null)
                 {
-                    endosments.Add(new
+                    endorsements.Add(new
                     {
                         ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
                         AUTH = rating.Content.Authorization.Code,
@@ -342,7 +344,7 @@ namespace Gva.Api.WordTemplates
                 }
             };
 
-            endosments = endosments
+            endorsements = endorsements
                 .Union(engLevels.Select(l => new
                 {
                     AUTH = l.LangLevel.Name.ToUpper(),
@@ -350,7 +352,7 @@ namespace Gva.Api.WordTemplates
                 }))
                 .ToList<object>();
 
-            return Utils.FillBlankData(endosments, 11);
+            return Utils.FillBlankData(endorsements, 11);
         }
 
         private IEnumerable<object> GetAbbreviations()

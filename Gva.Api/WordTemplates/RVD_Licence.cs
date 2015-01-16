@@ -82,11 +82,11 @@ namespace Gva.Api.WordTemplates
             {
                 root = new
                 {
-                    L_NAME = licenceType.Name,
-                    L_NAME_TRANS = licenceType.NameAlt,
+                    L_NAME = licenceType.Name.ToUpper(),
+                    L_NAME_TRANS = licenceType.NameAlt.ToUpper(),
                     L_LICENCE_TYPE_CA_CODE = licenceCodeCa,
-                    L_NAME1 = licenceType.Name,
-                    L_NAME1_TRANS = licenceType.NameAlt,
+                    L_NAME1 = licenceType.Name.ToUpper(),
+                    L_NAME1_TRANS = licenceType.NameAlt.ToUpper(),
                     L_LICENCE_TYPE_CA_CODE2 = licenceCodeCa,
                     L_LICENCE_NO = licenceNumber,
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
@@ -114,9 +114,15 @@ namespace Gva.Api.WordTemplates
         {
             var placeOfBirth = personData.PlaceOfBirth;
             NomValue country = null;
+            NomValue nationality = null;
             if (placeOfBirth != null)
             {
                 country = this.nomRepository.GetNomValue("countries", placeOfBirth.ParentValueId.Value);
+                
+            }
+            if (personData.Country != null)
+            {
+                nationality = this.nomRepository.GetNomValue("countries", personData.Country.NomValueId);
             }
 
             return new
@@ -132,7 +138,7 @@ namespace Gva.Api.WordTemplates
                     DATE_OF_BIRTH = personData.DateOfBirth,
                     PLACE_OF_BIRTH = new
                     {
-                        COUNTRY_NAME = country != null? country.Name : null,
+                        COUNTRY_NAME = country != null ? country.Name : null,
                         TOWN_VILLAGE_NAME = placeOfBirth != null ? placeOfBirth.Name : null,
                     },
                     PLACE_OF_BIRTH_TRANS = new
@@ -143,12 +149,17 @@ namespace Gva.Api.WordTemplates
                 },
                 ADDRESS = string.Format(
                     "{0}, {1}",
-                    personAddress.Settlement !=null ? personAddress.Settlement.Name : null,
+                    personAddress.Settlement != null ? personAddress.Settlement.Name : null,
                     personAddress.Address),
                 ADDRESS_TRANS = string.Format(
                     "{0}, {1}",
                     personAddress.AddressAlt,
-                    personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null)
+                    personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null),
+                NATIONALITY = new
+                {
+                    COUNTRY_NAME_BG = country.Name,
+                    COUNTRY_CODE = nationality.TextContent.Get<string>("nationalityCodeCA"),
+                }
             };
         }
 
