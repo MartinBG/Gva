@@ -27,10 +27,11 @@
           return PersonDocumentLangCerts.save({
             id: scModalParams.lotId,
             ind: $scope.langCert.partIndex
-          },
-          $scope.langCert).$promise.then(function () {
-           return $modalInstance.close();
-          });
+          }, $scope.langCert)
+            .$promise
+            .then(function () {
+             return $modalInstance.close();
+            });
         }
       });
     };

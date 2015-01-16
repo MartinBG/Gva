@@ -61,7 +61,6 @@
       });
     };
 
-    
     $scope.viewLangLevels = function () {
       var params = {
         langCert: $scope.personDocumentLangCert,
@@ -69,10 +68,6 @@
       };
 
       var modalInstance = scModal.open('langLevelEntries', params);
-
-      modalInstance.result.then(function () {
-        return $state.go($state.current, $stateParams, { reload: true });
-      });
 
       return modalInstance.opened;
     };
