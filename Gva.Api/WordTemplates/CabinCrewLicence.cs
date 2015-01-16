@@ -77,9 +77,11 @@ namespace Gva.Api.WordTemplates
             
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
+
+            var licenceNumberCode = licence.LicenceType.Code.Replace("/", ".");
             var licenceNumber = string.Format(
-                "BG {0} - {1} - {2}",
-                licenceType.Code,
+                "BGR {0} - {1} - {2}",
+                licenceNumberCode.EndsWith("L") ? licenceNumberCode.Remove(licenceNumberCode.LastIndexOf("L")) : licenceNumberCode,
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 

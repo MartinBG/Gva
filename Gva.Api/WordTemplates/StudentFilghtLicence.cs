@@ -88,7 +88,7 @@ namespace Gva.Api.WordTemplates
             var licenceTypeCode = licence.LicenceType.Code;
             var licenceNumber = string.Format(
                 "BGR {0} - {1} - {2}",
-                licenceTypeCode,
+                licenceTypeCode.Replace("(", "").Replace(")", ""),
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             

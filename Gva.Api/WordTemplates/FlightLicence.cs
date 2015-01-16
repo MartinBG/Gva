@@ -205,9 +205,11 @@ namespace Gva.Api.WordTemplates
             var includedRatings = lastEdition.IncludedRatings.Select(i => i.Ind).Distinct()
                 .Select(ind => lot.Index.GetPart<PersonRatingDO>("ratings/" + ind));
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
+
+            var licenceNumberCode = licence.LicenceType.Code.Replace("/", ".").Replace("(", "").Replace(")", "");
             var licenceNumber = string.Format(
-                "BGR.{0} - {1} - {2}",
-                licence.LicenceType.Code,
+                "BGR. {0} - {1} - {2}",
+                licenceNumberCode.EndsWith("L") ? licenceNumberCode.Remove(licenceNumberCode.LastIndexOf("L")) : licenceNumberCode,
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
@@ -387,7 +389,7 @@ namespace Gva.Api.WordTemplates
                 });
             }
 
-            if ((new List<string> { "CPL(A)", "ATPL(A)", "CPL(H)", "ATPL(H)", "PPL(SA)", "FEL" }).Contains(licenceTypeCode))
+            if ((new List<string> { "PPL(A)", "CPL(A)", "ATPL(A)", "CPL(H)", "ATPL(H)", "PPL(SA)", "FEL" }).Contains(licenceTypeCode))
             {
                 NomValue flyingCheckRole = this.nomRepository.GetNomValue("documentRoles", "flyingCheck");
                 var flyingChecks = this.GetTrainingsByCode(includedTrainings, flyingCheckRole.Code, documentRoleCodes);

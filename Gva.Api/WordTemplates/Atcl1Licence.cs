@@ -74,7 +74,7 @@ namespace Gva.Api.WordTemplates
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
-                "BGR. {0} - {1} - {2}",
+                "BGR {0} - {1} - {2}",
                 licenceType.Code,
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);

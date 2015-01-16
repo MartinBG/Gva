@@ -58,8 +58,7 @@ namespace Gva.Api.WordTemplates
             var country = this.GetCountry(personAddress);
             string licenceCode = licence.LicenceType.Code;
             var licenceNumber = string.Format(
-                "{0}.{1} - {2}",
-                string.IsNullOrWhiteSpace(licenceCode) ? "BG" : licenceCode,
+                "BG.66.A {0} - {1}",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var personNameBG = string.Format("{0} {1} {2}",

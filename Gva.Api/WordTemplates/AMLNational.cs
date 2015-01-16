@@ -57,8 +57,7 @@ namespace Gva.Api.WordTemplates
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var country = this.GetCountry(personAddress);
             var licenceNumber = string.Format(
-                " BG {0} - {1} - {2}",
-                licence.LicenceType.Code,
+                " BGR. AM - {0} - {1}",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var personName = string.Format("{0} {1} {2}",
@@ -81,7 +80,7 @@ namespace Gva.Api.WordTemplates
                         personData.MiddleNameAlt,
                         personData.LastNameAlt).ToUpper(),
                     DATE_OF_BIRTH = personData.DateOfBirth,
-                    SEX = personData.Sex.Name,
+                    SEX = personData.Sex.Code,
                     ADDRESS = string.Format(
                         "{0}, {1}",
                         personAddress.Settlement != null ? personAddress.Settlement.Name : null,
@@ -133,7 +132,7 @@ namespace Gva.Api.WordTemplates
 
         private object[] GetCategories(IEnumerable<PartVersion<PersonRatingDO>> includedRatings)
         {
-            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
+            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6", "7" };
             IEnumerable<NomValue> aircraftGroups66 = this.nomRepository.GetNomValues("aircraftGroup66").Where(r => validCodes.Contains(r.Code));
             IEnumerable<NomValue> aircraftClases66 = this.nomRepository.GetNomValues("aircraftClases66");
 
@@ -147,26 +146,40 @@ namespace Gva.Api.WordTemplates
                 IEnumerable<NomValue> categories = categoriesIds.Select(categoryId => this.nomRepository.GetNomValue("aircraftClases66", categoryId));
                 IEnumerable<string> aliases = categories.Select(category => category.TextContent.Get<string>("alias"));
 
-                results.Add(new
+                if (group66.NameAlt != "Reserved")
                 {
-                    NAME = new
+                    results.Add(new
                     {
-                        EN = group66.NameAlt,
-                        BG = group66.Name
-                    },
-                    CAT1 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("A")).Any() ?
-                    "n/a" : aliases.Contains("A") ?
-                    aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("A")).First().Code : "X",
-                    CAT2 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 1")).Any() ?
-                    "n/a" : aliases.Contains("B 1") ?
-                    aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 1")).First().Code : "X",
-                    CAT3 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 2")).Any() ?
-                    "n/a" : aliases.Contains("B 2") ?
-                    aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 2")).First().Code : "X",
-                    CAT4 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("C")).Any() ?
-                    "n/a" : aliases.Contains("C") ?
-                    aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("C")).First().Code : "X",
-                });
+                        NAME = new
+                        {
+                            EN = group66.NameAlt,
+                            BG = group66.Name
+                        },
+                        CAT1 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("A")).Any() ?
+                        "n/a" : aliases.Contains("A") ?
+                        aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("A")).First().Code : "X",
+                        CAT2 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 1")).Any() ?
+                        "n/a" : aliases.Contains("B 1") ?
+                        aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 1")).First().Code : "X",
+                        CAT3 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 2")).Any() ?
+                        "n/a" : aliases.Contains("B 2") ?
+                        aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 2")).First().Code : "X",
+                        CAT4 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("C")).Any() ?
+                        "n/a" : aliases.Contains("C") ?
+                        aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("C")).First().Code : "X",
+                    });
+                }
+                else
+                {
+                    results.Add(new
+                    {
+                        NAME = new
+                        {
+                            EN = group66.NameAlt,
+                            BG = group66.Name
+                        }
+                    });
+                }
             }
 
             return results.ToArray<object>();

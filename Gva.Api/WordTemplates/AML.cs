@@ -51,15 +51,15 @@ namespace Gva.Api.WordTemplates
             var lastEdition = editions.Last();
 
             var includedRatings = lastEdition.IncludedRatings.Select(i => i.Ind).Distinct()
-                                 .Select(ind => lot.Index.GetPart<PersonRatingDO>("ratings/" + ind));
+                .Select(ind => lot.Index.GetPart<PersonRatingDO>("ratings/" + ind));
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var country = this.GetCountry(personAddress);
             string licenceCode = licence.LicenceType.Code;
             var licenceNumber = string.Format(
-                "BG.{0}.{1} - {2}",
-                licenceType.TextContent.Get<string>("licenceCode"),
+                "BG.66.{1} - {2}",
+                licenceType.TextContent.Get<string>("licenceCode").Replace("(", "").Replace(")", ""),
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var personNameBG = string.Format("{0} {1} {2}",

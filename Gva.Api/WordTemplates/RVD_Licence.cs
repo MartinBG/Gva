@@ -73,7 +73,7 @@ namespace Gva.Api.WordTemplates
             var documents = this.GetDocuments(includedTrainings, includedExams);
             var licenceCodeCa = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
-                "BG {0} - {1} - {2}",
+                "BGR. {0} - {1} - {2}",
                 licenceType.Code,
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);

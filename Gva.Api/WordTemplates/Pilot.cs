@@ -81,8 +81,8 @@ namespace Gva.Api.WordTemplates
             var ratings = this.GetRatings(includedRatings, ratingEditions);
             var country = this.GetCountry(personAddress);
             var licenceNumber = string.Format(
-                " BGR. {0} - {1} - {2}",
-                licenceType.Code,
+                " BGR {0} - {1} - {2}",
+                licenceType.Code.Replace("(", "").Replace(")", "").Replace("/", "."),
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var documents = this.GetDocuments(licence, licenceType.Code, includedTrainings, includedExams, includedChecks);

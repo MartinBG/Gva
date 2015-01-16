@@ -72,7 +72,7 @@ namespace Gva.Api.WordTemplates
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
-                "BGR.{0} - {1} - {2}",
+                "BGR. {0} - {1} - {2}",
                 licenceType.TextContent.Get<string>("licenceCode"),
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
@@ -222,8 +222,7 @@ namespace Gva.Api.WordTemplates
                         DATE = g.Min(r => ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidFrom)
                     }).ToList<object>();
 
-            result = Utils.FillBlankData(result, 4);
-            return result;
+            return Utils.FillBlankData(result, 3);
         }
 
         private List<object> GetExams(
@@ -314,9 +313,7 @@ namespace Gva.Api.WordTemplates
                 });
             }
 
-            ratingEditions = Utils.FillBlankData(ratingEditions, 11);
-
-            return ratingEditions;
+            return Utils.FillBlankData(ratingEditions, 11);
         }
 
         private List<object> GetAbbreviations()

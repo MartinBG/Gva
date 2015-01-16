@@ -95,7 +95,7 @@ namespace Gva.Api.WordTemplates
             var country = this.GetCountry(personAddress);
             var licenceNumber = string.Format(
                 "BGR. {0} - {1} - {2}",
-                licenceType.Code,
+                licenceType.Code.Replace("/", "."),
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
