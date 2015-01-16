@@ -515,7 +515,7 @@
     .modal('licenceStatuses'       , 'js/gva/persons/modals/licences/licenceStatusesModal.html'    , 'LicenceStatusesModalCtrl'      )
     .modal('langLevelEntries'      , 'js/gva/persons/modals/langCerts/langLevelEntriesModal.html'  , 'LangLevelEntriesModalCtrl'     )
     .modal('licenceEditionDoc'     , 'js/gva/persons/modals/licences/licenceEditionDocModal.html'  , 'LicenceEditionDocModalCtrl'    )
-    .modal('printLicence'          , 'js/gva/persons/modals/licences/printLicenceModal.html'       , 'PrintLicenceModalCtrl'   , 'xs');
+    .modal('printLicence'          , 'js/gva/persons/modals/licences/printLicenceModal.html'       , 'PrintLicenceModalCtrl'   , 'xs-2');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.aircrafts'                                          , '/aircrafts?mark&manSN&modelAlt&airCategory&aircraftProducer'                                                                                                                        ])

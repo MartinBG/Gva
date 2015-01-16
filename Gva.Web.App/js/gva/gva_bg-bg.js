@@ -2470,7 +2470,7 @@
           stampNumber: 'Печатен док. номер',
           cancel: 'Отказ',
           save: 'Запис',
-          print: 'Принтирай',
+          print: 'Преглед за печат',
           generateNew: 'Прегенерирай'
         },
         licencesSearch: {
