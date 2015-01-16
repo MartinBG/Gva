@@ -176,7 +176,7 @@ namespace Gva.Api.WordTemplates
                 .Select(c => new
                 {
                     AUTH = c.LangLevel.Name.ToUpper(),
-                    VALID_DATE = c.DocumentDateValidTo
+                    VALID_DATE = c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToShortDateString() : "unlimited"
 
                 }).ToList<object>();
         }
@@ -292,7 +292,7 @@ namespace Gva.Api.WordTemplates
             {
                 LEVEL = c.LangLevel.Name,
                 ISSUE_DATE = c.DocumentDateValidFrom,
-                VALID_DATE = c.DocumentDateValidTo
+                VALID_DATE = c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToShortDateString() : "unlimited"
             })
             .ToList<object>();
 

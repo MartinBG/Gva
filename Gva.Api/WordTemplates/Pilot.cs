@@ -278,7 +278,7 @@ namespace Gva.Api.WordTemplates
                 {
                     LEVEL = c.LangLevel.NameAlt,
                     ISSUE_DATE = c.DocumentDateValidFrom,
-                    VALID_DATE = c.DocumentDateValidTo
+                    VALID_DATE = c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToShortDateString() : "unlimited"
                 })
                 .ToList<object>();
 
