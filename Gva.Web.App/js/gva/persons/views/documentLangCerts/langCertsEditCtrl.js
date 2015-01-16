@@ -32,9 +32,10 @@
       return $scope.editDocumentLangCertForm.$validate()
         .then(function () {
           if ($scope.editDocumentLangCertForm.$valid) {
-
-            $scope.personDocumentLangCert.part.langLevel = 
+            if ($scope.personDocumentLangCert.part.langLevelEntries.length > 0) {
+              $scope.personDocumentLangCert.part.langLevel = 
               _.last($scope.personDocumentLangCert.part.langLevelEntries).langLevel;
+            }
 
             return PersonDocumentLangCerts
               .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personDocumentLangCert)
