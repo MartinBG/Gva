@@ -35,7 +35,8 @@
       }
     };
 
-    if(person.caseTypes.indexOf('staffExaminer') !== -1) {
+    if(person.caseTypes.indexOf('staffExaminer') !== -1 ||
+      person.caseTypes.indexOf('inspector') !== -1) {
       $scope.tabs = _.assign($scope.tabs, {'persons.tabs.reports': 'root.persons.view.reports'});
     } 
 

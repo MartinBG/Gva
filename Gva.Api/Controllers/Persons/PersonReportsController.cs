@@ -49,19 +49,7 @@ namespace Gva.Api.Controllers.Persons
         [Route("new")]
         public IHttpActionResult GetNewReport(int lotId)
         {
-            PersonReportDO newReport = new PersonReportDO();
-            GvaCaseType caseType = this.caseTypeRepository.GetCaseType("staffExaminer");
-            CaseDO caseDO = new CaseDO()
-            {
-                CaseType = new NomValue()
-                {
-                    NomValueId = caseType.GvaCaseTypeId,
-                    Name = caseType.Name,
-                    Alias = caseType.Alias
-                }
-            };
-
-            return Ok(new CaseTypePartDO<PersonReportDO>(newReport, caseDO));
+            return Ok(new CaseTypePartDO<PersonReportDO>(new PersonReportDO()));
         }
 
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
