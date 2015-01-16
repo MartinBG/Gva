@@ -33,7 +33,7 @@
         lotId: doc.lotId,
         index: doc.partIndex,
         editionIndex: doc.editionPartIndex,
-        isLastEditionIndex: true
+        isLastEdition: true
       };
 
       var modalInstance = scModal.open('printLicence', params);
