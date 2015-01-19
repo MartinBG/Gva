@@ -1,5 +1,5 @@
-﻿/*global angular,_*/
-(function (angular,_) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function ApplicationsNewCtrl(
@@ -14,6 +14,10 @@
     OrganizationsData,
     application
     ) {
+
+    $scope.application = application;
+    $scope.set = $stateParams.set;
+
     $scope.$watch('application.lot.id', function (newValue, oldValue) {
       if (newValue !== oldValue) {
         $scope.application.caseType = null;
@@ -49,8 +53,14 @@
       }
     });
 
-    $scope.application = application;
-    $scope.set = $stateParams.set;
+    $scope.addNewCaseType = function () {
+      var params = {
+        lotId: $scope.application.lot.id
+      };
+
+      var modalInstance = scModal.open('addCaseTypes', params);
+      return modalInstance.opened;
+    };
 
     $scope.newCorr = function () {
       var partData = {}, isPersonSelect, isOrgSelect;
@@ -218,4 +228,4 @@
   };
 
   angular.module('gva').controller('ApplicationsNewCtrl', ApplicationsNewCtrl);
-}(angular,_));
+}(angular, _));

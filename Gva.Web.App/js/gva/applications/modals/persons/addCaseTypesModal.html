@@ -1,0 +1,19 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="applications.addCaseTypesModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="saveBtn" btn-click="saveCaseTypes()" text="applications.addCaseTypesModal.save" class="btn btn-xs btn-primary"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="applications.addCaseTypesModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <sc-datatable items="caseTypes" filterable="true" pageable="false" sortable="true" dynamic-columns="false">
+      <sc-column  sortable="false" class="buttons-cell" has-content="true">
+        <input type="checkbox" ng-checked="selectedCaseTypes | contains:item" sc-click="selectCaseType($event, item)"/>
+      </sc-column>
+      <sc-column data="name" title="applications.chooseAppTypeModal.name">
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>

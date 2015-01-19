@@ -252,6 +252,8 @@
     <Content Include="js\gva\applications\forms\applicationSelectEquipment.html" />
     <Content Include="js\gva\applications\forms\applicationStage.html" />
     <Content Include="js\gva\applications\forms\applicationDocumentCtrl.js" />
+    <Content Include="js\gva\applications\modals\persons\addCaseTypesModal.html" />
+    <Content Include="js\gva\applications\modals\persons\addCaseTypesModalCtrl.js" />
     <Content Include="js\gva\applications\modals\stages\editAppStageModal.html" />
     <Content Include="js\gva\applications\modals\stages\editAppStageModalCtrl.js" />
     <Content Include="js\gva\applications\modals\stages\editDocStageModal.html" />

@@ -28,7 +28,10 @@
 
       <div ng-if="application.lot.id">
         <div class="row">
-          <sc-field type="nomenclature" ng-if="set === 'person'" ng-model="application.caseType" alias="'caseTypes'" params="{lotId: application.lot.id}" ng-required="true" l10n-text="applications.newForm.caseType" class="col-sm-3 col-md-2"></sc-field>
+          <sc-field-group ng-if="set === 'person'" class="col-sm-4 col-md-2" text="applications.newForm.caseType" validations="{ required: 'default' }" field-name="caseType">
+            <sc-nomenclature  ng-model="application.caseType" alias="'caseTypes'" name="caseType" params="{lotId: application.lot.id}" ng-required="true"></sc-nomenclature>
+            <sc-button btn-click="addNewCaseType()" class="btn btn-default" icon="glyphicon-plus"></sc-button>
+          </sc-field-group>
 
           <sc-field-group class="col-sm-8" text="applications.newForm.applicationType" validations="{ required: 'default' }" field-name="applicationType">
             <sc-text ng-model="application.applicationType.name" name="applicationType" alias="'correspondent'" disabled ng-required="true"></sc-text>

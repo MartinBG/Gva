@@ -394,21 +394,22 @@
       .state(['root.applications.edit.stages'                      , '/stages'                                                                                 , ['@root.applications.edit', 'js/gva/applications/views/stages/applicationsEditStages.html'  , 'ApplicationsEditStagesCtrl'    ]]);
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
-     .modal('chooseAppType'     , 'js/gva/applications/modals/applicationTypes/chooseAppTypesModal.html'    , 'ChooseAppTypesModalCtrl'    )
-     .modal('chooseOrganization', 'js/gva/applications/modals/organizations/chooseOrganizationModal.html'   , 'ChooseOrganizationModalCtrl')
-     .modal('newOrganization'   , 'js/gva/applications/modals/organizations/newOrganizationModal.html'      , 'NewOrganizationModalCtrl'   )
-     .modal('chooseAircraft'    , 'js/gva/applications/modals/aircrafts/chooseAircraftModal.html'           , 'ChooseAircraftModalCtrl'    )
-     .modal('newAircraft'       , 'js/gva/applications/modals/aircrafts/newAircraftModal.html'              , 'NewAircraftModalCtrl'       )
-     .modal('chooseAirport'     , 'js/gva/applications/modals/airports/chooseAirportModal.html'             , 'ChooseAirportModalCtrl'     )
-     .modal('newAirport'        , 'js/gva/applications/modals/airports/newAirportModal.html'                , 'NewAirportModalCtrl'        )
-     .modal('chooseEquipment'   , 'js/gva/applications/modals/equipments/chooseEquipmentModal.html'         , 'ChooseEquipmentModalCtrl'   )
-     .modal('newEquipment'      , 'js/gva/applications/modals/equipments/newEquipmentModal.html'            , 'NewEquipmentModalCtrl'      )
-     .modal('chooseDoc'         , 'js/gva/applications/modals/docs/chooseDocModal.html'                     , 'ChooseDocModalCtrl'         )
-     .modal('editDocStage'      , 'js/gva/applications/modals/stages/editDocStageModal.html'                , 'EditDocStageModalCtrl'      )
-     .modal('endDocStage'       , 'js/gva/applications/modals/stages/endDocStageModal.html'                 , 'EndDocStageModalCtrl'       )
-     .modal('nextDocStage'      , 'js/gva/applications/modals/stages/nextDocStageModal.html'                , 'NextDocStageModalCtrl'      )
-     .modal('newAppStage'       , 'js/gva/applications/modals/stages/newAppStageModal.html'                 , 'NewAppStageModalCtrl'       )
-     .modal('editAppStage'      , 'js/gva/applications/modals/stages/editAppStageModal.html'                , 'EditAppStageModalCtrl'      );
+     .modal('chooseAppType'     , 'js/gva/applications/modals/applicationTypes/chooseAppTypesModal.html'    , 'ChooseAppTypesModalCtrl'            )
+     .modal('addCaseTypes'      , 'js/gva/applications/modals/persons/addCaseTypesModal.html'               , 'AddCaseTypesModalCtrl'      , 'xs-2')
+     .modal('chooseOrganization', 'js/gva/applications/modals/organizations/chooseOrganizationModal.html'   , 'ChooseOrganizationModalCtrl'        )
+     .modal('newOrganization'   , 'js/gva/applications/modals/organizations/newOrganizationModal.html'      , 'NewOrganizationModalCtrl'           )
+     .modal('chooseAircraft'    , 'js/gva/applications/modals/aircrafts/chooseAircraftModal.html'           , 'ChooseAircraftModalCtrl'            )
+     .modal('newAircraft'       , 'js/gva/applications/modals/aircrafts/newAircraftModal.html'              , 'NewAircraftModalCtrl'               )
+     .modal('chooseAirport'     , 'js/gva/applications/modals/airports/chooseAirportModal.html'             , 'ChooseAirportModalCtrl'             )
+     .modal('newAirport'        , 'js/gva/applications/modals/airports/newAirportModal.html'                , 'NewAirportModalCtrl'                )
+     .modal('chooseEquipment'   , 'js/gva/applications/modals/equipments/chooseEquipmentModal.html'         , 'ChooseEquipmentModalCtrl'           )
+     .modal('newEquipment'      , 'js/gva/applications/modals/equipments/newEquipmentModal.html'            , 'NewEquipmentModalCtrl'              )
+     .modal('chooseDoc'         , 'js/gva/applications/modals/docs/chooseDocModal.html'                     , 'ChooseDocModalCtrl'                 )
+     .modal('editDocStage'      , 'js/gva/applications/modals/stages/editDocStageModal.html'                , 'EditDocStageModalCtrl'              )
+     .modal('endDocStage'       , 'js/gva/applications/modals/stages/endDocStageModal.html'                 , 'EndDocStageModalCtrl'               )
+     .modal('nextDocStage'      , 'js/gva/applications/modals/stages/nextDocStageModal.html'                , 'NextDocStageModalCtrl'              )
+     .modal('newAppStage'       , 'js/gva/applications/modals/stages/newAppStageModal.html'                 , 'NewAppStageModalCtrl'               )
+     .modal('editAppStage'      , 'js/gva/applications/modals/stages/editAppStageModal.html'                , 'EditAppStageModalCtrl'              );
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.persons'                                               , '/persons?exact&lin&uin&names&licences&ratings&organization&caseType&licenceNumber&stampNumber'                                                                                                                                                                          ])

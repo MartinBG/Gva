@@ -2764,6 +2764,12 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
+        addCaseTypesModal: {
+          title: 'Добавяне на типове дела към физическо лице',
+          save: 'Запис',
+          cancel: 'Отказ',
+          name: 'Наименование'
+        },
         organizationSelect: {
           organization: 'Организация',
           newOrganization: 'Нова организация'
