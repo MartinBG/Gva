@@ -17,8 +17,8 @@
 
     $scope.currentLicenceEdition = currentLicenceEdition;
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
-    $scope.currentLicenceEdition.part.includedTrainings =
-      $scope.currentLicenceEdition.part.includedTrainings || [];
+    $scope.currentLicenceEdition.part.includedRatings =
+      $scope.currentLicenceEdition.part.includedRatings || [];
 
     $scope.includedRatings = includedRatings;
 
@@ -41,17 +41,13 @@
             });
 
             $scope.includedRatings.push(rating);
-            
-            $scope.currentLicenceEdition.part.includedRatings =
-              _.map($scope.includedRatings, function(rating) {
-                return {
-                  ind: rating.ratingPartIndex,
-                  index: rating.editionPartIndex
-                };
-              });
-          });
+            $scope.currentLicenceEdition.part.includedRatings.push({
+              ind: rating.ratingPartIndex,
+              index: rating.editionPartIndex
+            });
 
-        $scope.save();
+            $scope.save();
+          });
       });
 
       return modalInstance.opened;
