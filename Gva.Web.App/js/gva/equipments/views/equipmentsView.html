@@ -52,6 +52,7 @@
       <span l10n-text="equipments.viewEquipment.viewApplication"></span>
       {{ !!application.oldDocumentNumber ? (application.applicationCode + ' ' + application.oldDocumentNumber + '/' + (application.documentDate | date: 'mediumDate')) : (application.applicationCode + ' ' + application.documentNumber) }}
     </a>
+    <button type="button" class="close" ng-click="exitApplication()">×</button>
   </div>
 
   <sc-tabs tab-list="{

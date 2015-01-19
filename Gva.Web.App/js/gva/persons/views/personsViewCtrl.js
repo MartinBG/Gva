@@ -62,6 +62,11 @@
         ind: partIndex
       });
     };
+
+    $scope.exitApplication = function () {
+      delete $stateParams.appId;
+      $state.transitionTo($state.current, $stateParams, { reload: true });
+    };
   }
 
   PersonsViewCtrl.$inject = [

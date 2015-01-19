@@ -52,6 +52,7 @@
       <span l10n-text="airports.viewAirport.viewApplication"></span>
       {{ !!item.application.oldDocumentNumber ? (item.application.applicationCode + ' ' + item.application.oldDocumentNumber + '/' + (item.application.documentDate | date: 'mediumDate')) : (item.application.applicationCode + ' ' + item.application.documentNumber) }}
     </a>
+    <button type="button" class="close" ng-click="exitApplication()">×</button>
   </div>
 
   <sc-tabs tab-list="{

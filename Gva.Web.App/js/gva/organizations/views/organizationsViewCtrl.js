@@ -27,6 +27,11 @@
       });
     };
 
+    $scope.exitApplication = function () {
+      delete $stateParams.appId;
+      $state.transitionTo($state.current, $stateParams, { reload: true });
+    };
+
     $scope.changeCaseType = function () {
       $stateParams.caseTypeId = $scope.caseType;
       $state.go($state.current, $stateParams, { reload: true });
