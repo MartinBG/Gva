@@ -41,7 +41,7 @@
         <td></td>
       </tr>
       <tr ng-repeat-end>
-        <td colspan="4" style="text-align: right;">
+        <td colspan="4" style="text-align: right;" ng-hide="!adc.nextStatusText">
           <a ng-click="newDocFile(adc.docId)" l10n-text="applications.edit.case.newDocFile"></a>
         </td>
       </tr>
