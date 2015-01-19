@@ -10,11 +10,12 @@ namespace Gva.Api.ModelsDO.Persons
         public PersonCheckDO()
         {
             Reports = new List<RelatedReportDO>();
+            RatingTypes = new List<NomValue>();
         }
 
         public NomValue AircraftTypeGroup { get; set; }
 
-        public NomValue RatingType { get; set; }
+        public List<NomValue> RatingTypes { get; set; }
 
         public NomValue LocationIndicator { get; set; }
 

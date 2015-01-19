@@ -42,7 +42,7 @@ namespace Gva.Api.Projections.Person
             rating.PartId = personRating.Part.PartId;
             rating.PartIndex = personRating.Part.Index;
             rating.LocationIndicatorId = personRating.Content.LocationIndicator != null ? personRating.Content.LocationIndicator.NomValueId : (int?)null;
-            rating.RatingTypeId = personRating.Content.RatingType != null ? personRating.Content.RatingType.NomValueId : (int?)null;
+            rating.RatingTypes = personRating.Content.RatingTypes.Count() > 0 ? string.Join(", ", personRating.Content.RatingTypes.Select(t => t.Code)) : null;
             rating.RatingLevelId = personRating.Content.PersonRatingLevel != null ?  personRating.Content.PersonRatingLevel.NomValueId : (int?)null;
             rating.RatingClassId = personRating.Content.RatingClass != null ? personRating.Content.RatingClass.NomValueId : (int?)null;
             rating.AircraftTypeGroupId = personRating.Content.AircraftTypeGroup != null ? personRating.Content.AircraftTypeGroup.NomValueId : (int?)null;

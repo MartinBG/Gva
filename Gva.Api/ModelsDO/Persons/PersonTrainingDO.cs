@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
@@ -6,6 +7,11 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonTrainingDO
     {
+        public PersonTrainingDO()
+        {
+            RatingTypes = new List<NomValue>();
+        }
+
         public string DocumentNumber { get; set; }
 
         public int? DocumentPersonNumber { get; set; }
@@ -18,7 +24,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public DateTime? DocumentDateValidTo { get; set; }
 
-        public NomValue RatingType { get; set; }
+        public List<NomValue> RatingTypes { get; set; }
 
         public NomValue AircraftTypeGroup { get; set; }
 

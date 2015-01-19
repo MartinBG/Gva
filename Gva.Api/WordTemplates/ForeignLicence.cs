@@ -92,17 +92,17 @@ namespace Gva.Api.WordTemplates
         {
             var resultArr = includedRatings.Select(r =>
                 {
-                    var ratingType = r.RatingType == null ? null : r.RatingType.Code;
+                    var ratingTypes = r.RatingTypes.Count() > 0 ? string.Join(", ", r.RatingTypes.Select(rt => rt.Code)) : "";
                     var ratingClass = r.RatingClass == null ? null : r.RatingClass.Code;
                     var authorization = r.Authorization == null ? null : r.Authorization.Code;
 
                     return string.Format(
                         "{0} {1} {2}",
                         ratingClass,
-                        ratingType,
+                        ratingTypes,
                         string.IsNullOrEmpty(authorization) ?
                             string.Empty :
-                            string.IsNullOrEmpty(ratingType) && string.IsNullOrEmpty(ratingClass) ? authorization : ", " + authorization
+                            string.IsNullOrEmpty(ratingTypes) && string.IsNullOrEmpty(ratingClass) ? authorization : ", " + authorization
                     ).Trim();
                 }).ToArray<string>();
 

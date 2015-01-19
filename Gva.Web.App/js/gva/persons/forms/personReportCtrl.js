@@ -43,7 +43,7 @@
         check.personLin = person.lin;
         check.lotId = person.id;
         check.partIndex = newCheck.partIndex;
-
+        check.ratingTypes = _.pluck(newCheck.part.ratingTypes, 'code').join(',');
         $scope.includedChecks.push(check);
 
         $scope.model.part.includedChecks.push(newCheck.partId);

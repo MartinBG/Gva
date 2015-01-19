@@ -579,7 +579,7 @@ namespace Gva.Api.WordTemplates
                     TYPE = string.Format(
                         "{0} {1}",
                         rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Code,
-                        rating.Content.RatingType == null ? string.Empty : rating.Content.RatingType.Code).Trim(),
+                        rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim(),
                     AUTH_NOTES = string.Format(
                         "{0} {1}",
                         rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Code,
@@ -609,7 +609,7 @@ namespace Gva.Api.WordTemplates
                     TYPE = string.Format(
                         "{0} {1}",
                         rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Code,
-                        rating.Content.RatingType == null ? string.Empty : rating.Content.RatingType.Code).Trim(),
+                        rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim(),
                     AUTH = rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Code,
                     NOTES = edition.Content.Notes,
                     ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,

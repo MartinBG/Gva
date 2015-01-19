@@ -178,7 +178,7 @@ namespace Gva.MigrationTool.Sets
                                 "documentDateValidFrom",
                                 "documentDateValidTo",
                                 "documentPublisher",
-                                "ratingType",
+                                "ratingTypes",
                                 "aircraftTypeGroup",
                                 "ratingClass",
                                 "authorization",
@@ -210,7 +210,7 @@ namespace Gva.MigrationTool.Sets
                                 "documentDateValidFrom",
                                 "documentDateValidTo",
                                 "documentPublisher",
-                                "ratingType",
+                                "ratingTypes",
                                 "aircraftTypeGroup",
                                 "ratingClass",
                                 "authorization",
@@ -264,7 +264,7 @@ namespace Gva.MigrationTool.Sets
                                     "documentDateValidFrom",
                                     "documentDateValidTo",
                                     "documentPublisher",
-                                    "ratingType",
+                                    "ratingTypes",
                                     "aircraftTypeGroup",
                                     "ratingClass",
                                     "authorization",
@@ -664,7 +664,9 @@ namespace Gva.MigrationTool.Sets
                         documentDateValidFrom = r.Field<DateTime?>("VALID_FROM"),
                         documentDateValidTo = r.Field<DateTime?>("VALID_TO"),
                         documentPublisher = r.Field<string>("DOC_PUBLISHER"),
-                        ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
+                        ratingTypes = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()) != null ? 
+                        new List<NomValue>() { noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()) } :
+                        new List<NomValue>(),
                         aircraftTypeGroup = noms["aircraftTypeGroups"].ByOldId(r.Field<long?>("ID_AC_GROUP").ToString()),
                         ratingClass = noms["ratingClasses"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
                         authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
@@ -1108,7 +1110,9 @@ namespace Gva.MigrationTool.Sets
                             period = new { month = r.Field<string>("PERIOD_MONTH"), year = r.Field<string>("PERIOD_YEAR") },
                             organization = getOrgByApexId(r.Field<int?>("FIRM_ID")),
                             aircraft = getAircraftByApexId(r.Field<int?>("AC_ID")),
-                            ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
+                            ratingTypes = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()) != null ? 
+                            new List<NomValue>() { noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()) } :
+                            new List<NomValue>(),
                             ratingClass = noms["ratingClasses"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
                             authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
                             licenceType = noms["licenceTypes"].ByOldId(r.Field<decimal?>("LICENCE_TYPE_ID").ToString()),
@@ -1287,7 +1291,9 @@ namespace Gva.MigrationTool.Sets
 
                             personRatingLevel = noms["personRatingLevels"].ByCode(r.Field<string>("RATING_STEPEN")),
                             ratingClass = noms["ratingClasses"].ByOldId(r.Field<decimal?>("RATING_CLASS_ID").ToString()),
-                            ratingType = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()),
+                            ratingTypes = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()) != null ?
+                            new List<NomValue>() { noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()) } :
+                            new List<NomValue>(),
                             authorization = noms["authorizations"].ByOldId(r.Field<decimal?>("AUTHORIZATION_ID").ToString()),
                             personRatingModel = noms["personRatingModels"].ByCode(r.Field<string>("RATING_MODEL")),
                             locationIndicator = noms["locationIndicators"].ByOldId(r.Field<long?>("INDICATOR_ID").ToString()),

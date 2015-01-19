@@ -121,7 +121,7 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in editions.OrderBy(r => r.Content.DocumentDateValidFrom))
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var ratingTypeCode = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
+                var ratingTypesCodes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "";
                 var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
                 var authorizationCode = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
 
@@ -133,11 +133,11 @@ namespace Gva.Api.WordTemplates
 
                 ratingEditions.Add(new
                 {
-                    CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypeCode) ?
+                    CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypesCodes) ?
                         authorizationCode :
                         string.Format(
                             "{0} {1} {2}",
-                            ratingTypeCode,
+                            ratingTypesCodes,
                             ratingClassName,
                             string.IsNullOrEmpty(authorizationCode) ? string.Empty : " / " + authorizationCode).Trim(),
                     ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,

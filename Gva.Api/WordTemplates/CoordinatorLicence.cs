@@ -288,7 +288,7 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in editions.OrderBy(e => e.Content.DocumentDateValidFrom))
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var ratingType = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
+                var ratingTypes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "";
                 var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
                 var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
@@ -301,11 +301,11 @@ namespace Gva.Api.WordTemplates
                 {
                     ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
                     SECTOR = rating.Content.Sector,
-                    AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingType) ?
+                    AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingTypes) ?
                         authorization :
                         string.Format(
                             "{0} {1} {2}",
-                            ratingType,
+                            ratingTypes,
                             ratingClass,
                             string.IsNullOrEmpty(authorization) ? string.Empty : " - " + authorization).Trim(),
                     ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,

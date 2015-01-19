@@ -8,7 +8,7 @@
         ng-disabled="item.partIndex === currentRatingEdition.partIndex"></sc-button>
     </sc-column>
     <sc-column title="persons.editRatingEdition.ratingTypeOrRatingLevel" has-content="true">
-      {{rating.part.personRatingLevel.code || rating.part.ratingType.code || rating.part.aircraftTypeGroup.code}}
+      {{rating.part.personRatingLevel.code || (rating.part.ratingTypes | pluck:'code' | join:', ') || rating.part.aircraftTypeGroup.code}}
     </sc-column>
     <sc-column data="part.documentDateValidFrom" title="persons.editRatingEdition.documentDateValidFrom" has-content="true">
       {{item.part.documentDateValidFrom | date:'mediumDate'}}

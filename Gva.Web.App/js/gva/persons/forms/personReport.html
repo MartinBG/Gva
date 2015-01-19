@@ -55,11 +55,9 @@
         <td>{{check.documentNumber}}</td>
         <td>{{check.documentType.name}}</td>
         <td>{{check.documentRole.name}}</td>
-        <td><span>{{check.documentDateValidFrom | date:'mediumDate'}}</span>
-        </td>
-        <td><span>{{check.documentDateValidTo | date:'mediumDate'}}</span>
-        </td>
-        <td>{{check.ratingType.name || check.sector}}</td>
+        <td>{{check.documentDateValidFrom | date:'mediumDate'}}</td>
+        <td>{{check.documentDateValidTo | date:'mediumDate'}}</td>
+        <td>{{check.ratingTypes || check.sector}}</td>
         <td>{{check.ratingClass.name}}</td>
         <td>{{check.authorization.code}}</td>
         <td>{{check.licenceType.code}}</td>

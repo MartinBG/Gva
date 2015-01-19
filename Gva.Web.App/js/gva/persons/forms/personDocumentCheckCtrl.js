@@ -10,7 +10,7 @@
     $scope.appId = scFormParams.appId;
     $scope.publisher = scFormParams.publisher;
 
-    if(!$scope.isNew && scFormParams.report !== null) {
+    if(!$scope.isNew && !!scFormParams.report) {
       $scope.report = [scFormParams.report];
     }
   }

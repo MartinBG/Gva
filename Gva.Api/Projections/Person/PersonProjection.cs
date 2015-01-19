@@ -58,14 +58,15 @@ namespace Gva.Api.Projections.Person
 
             if (personEmployment != null)
             {
-                person.EmploymentId = personEmployment.Content.EmploymentCategory.NomValueId;
-                person.OrganizationId = personEmployment.Content.Organization.NomValueId;
+                person.EmploymentId = personEmployment.Content.EmploymentCategory != null ? personEmployment.Content.EmploymentCategory.NomValueId : (int?)null;
+                person.OrganizationId = personEmployment.Content.Organization != null ? personEmployment.Content.Organization.NomValueId : (int?)null;
             }
 
             if (personLicences.Count() > 0)
             {
                 person.Licences = string.Join(", ",
                 (personLicences
+                .Where(l => l.Content.LicenceType != null)
                 .Select(l => l.Content.LicenceType.Code)
                 .ToArray()));
             }
@@ -78,11 +79,11 @@ namespace Gva.Api.Projections.Person
                     ratings.Add(rating.Content.AircraftTypeCategory.Code);
                 }
                 else { 
-                    var ratingType = rating.Content.RatingType != null ? rating.Content.RatingType.Code : null;
+                    var ratingTypes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(s => s.Code)) : null;
                     var ratingClass = rating.Content.RatingClass != null ? rating.Content.RatingClass.Code : null;
                     var authorization = rating.Content.Authorization != null ? rating.Content.Authorization.Code : null;
 
-                    var ratingData = (ratingType ?? ratingClass) + (authorization != null ? "/" + authorization : string.Empty);
+                    var ratingData = (ratingTypes ?? ratingClass) + (authorization != null ? "/" + authorization : string.Empty);
                     if (!string.IsNullOrEmpty(ratingData))
                     {
                         ratings.Add(ratingData);

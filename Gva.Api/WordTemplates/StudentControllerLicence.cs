@@ -193,11 +193,11 @@ namespace Gva.Api.WordTemplates
         private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             var result = includedRatings
-                .Where(r => r.Content.RatingClass != null || r.Content.RatingType != null)
+                .Where(r => r.Content.RatingClass != null || r.Content.RatingTypes.Count() > 0)
                 .GroupBy(r => string.Format(
                     "{0} {1}",
                     r.Content.RatingClass == null ? string.Empty : r.Content.RatingClass.Code,
-                    r.Content.RatingType == null ? string.Empty : r.Content.RatingType.Code).Trim())
+                    r.Content.RatingTypes.Count() > 0 ? string.Join(", ", r.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim())
                 .Select(g =>
                 {
                     return new
@@ -236,7 +236,7 @@ namespace Gva.Api.WordTemplates
             foreach (var edition in editions.OrderBy(e => e.Content.DocumentDateValidFrom))
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var ratingType = rating.Content.RatingType == null ? null : rating.Content.RatingType.Code;
+                var ratingTypes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "";
                 var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
                 var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 object result = null;
@@ -252,11 +252,11 @@ namespace Gva.Api.WordTemplates
                     {
                         ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
                         SECTOR = rating.Content.Sector,
-                        AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingType) ?
+                        AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingTypes) ?
                             authorization :
                             string.Format(
                                 "{0} {1} {2}",
-                                ratingType,
+                                ratingTypes,
                                 ratingClass,
                                 string.IsNullOrEmpty(authorization) ? string.Empty : " - " + authorization).Trim(),
                         ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
@@ -269,11 +269,11 @@ namespace Gva.Api.WordTemplates
                     {
                         ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
                         SECTOR = rating.Content.Sector,
-                        AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingType) ?
+                        AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingTypes) ?
                             authorization :
                             string.Format(
                                 "{0} {1} {2}",
-                                ratingType,
+                                ratingTypes,
                                 ratingClass,
                                 string.IsNullOrEmpty(authorization) ? string.Empty : " - " + authorization).Trim(),
                         VALID_DATE = edition.Content.DocumentDateValidTo

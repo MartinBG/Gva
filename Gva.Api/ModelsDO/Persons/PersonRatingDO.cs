@@ -1,17 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonRatingDO
     {
+        public PersonRatingDO()
+        {
+            RatingTypes = new List<NomValue>();
+        }
+
         public int? NextIndex { get; set; }
 
         public NomValue PersonRatingLevel { get; set; }
 
         public NomValue RatingClass { get; set; }
 
-        public NomValue RatingType { get; set; }
+        public List<NomValue> RatingTypes { get; set; }
 
         public NomValue Authorization { get; set; }
 

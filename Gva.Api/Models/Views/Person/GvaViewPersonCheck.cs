@@ -23,7 +23,7 @@ namespace Gva.Api.Models.Views.Person
 
         public int? DocumentRoleId { get; set; }
 
-        public int? RatingTypeId { get; set; }
+        public string RatingTypes { get; set; }
 
         public int? RatingClassId { get; set; }
 
@@ -46,8 +46,6 @@ namespace Gva.Api.Models.Views.Person
         public virtual NomValue DocumentType { get; set; }
 
         public virtual NomValue DocumentRole { get; set; }
-
-        public virtual NomValue RatingType { get; set; }
 
         public virtual NomValue RatingClass { get; set; }
 
@@ -95,7 +93,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
             this.Property(t => t.DocumentTypeId).HasColumnName("DocumentTypeId");
             this.Property(t => t.DocumentRoleId).HasColumnName("DocumentRoleId");
-            this.Property(t => t.RatingTypeId).HasColumnName("RatingTypeId");
+            this.Property(t => t.RatingTypes).HasColumnName("RatingTypes");
             this.Property(t => t.RatingClassId).HasColumnName("RatingClassId");
             this.Property(t => t.AuthorizationId).HasColumnName("AuthorizationId");
             this.Property(t => t.Sector).HasColumnName("Sector");
@@ -116,9 +114,6 @@ namespace Gva.Api.Models.Views.Person
             this.HasOptional(t => t.DocumentRole)
                 .WithMany()
                 .HasForeignKey(t => t.DocumentRoleId);
-            this.HasOptional(t => t.RatingType)
-                .WithMany()
-                .HasForeignKey(t => t.RatingTypeId);
             this.HasOptional(t => t.RatingClass)
                 .WithMany()
                 .HasForeignKey(t => t.RatingClassId);

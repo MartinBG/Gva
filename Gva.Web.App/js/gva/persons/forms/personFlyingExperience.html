@@ -20,7 +20,7 @@
     <hr>
     <div class="row" ng-if="model.case.caseType.alias === 'flightCrew' || model.case.caseType.alias === 'to_vs'">
       <sc-field type="nomenclature" ng-model="model.part.aircraft" alias="'aircrafts'" l10n-text="persons.personFlyingExperienceDirective.aircraft" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
-      <sc-field type="nomenclature" ng-model="model.part.ratingType" alias="'ratingTypes'" l10n-text="persons.personFlyingExperienceDirective.ratingType" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.ratingTypes" alias="'ratingTypes'" multiple="multiple" l10n-text="persons.personFlyingExperienceDirective.ratingType" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
     </div>
     <div class="row" ng-if="model.case.caseType.alias === 'flightCrew' || model.case.caseType.alias === 'ovd'">
       <sc-field type="nomenclature" ng-model="model.part.ratingClass" alias="'ratingClasses'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personFlyingExperienceDirective.ratingClass" class="col-sm-6 col-md-5 col-lg-4"></sc-field>

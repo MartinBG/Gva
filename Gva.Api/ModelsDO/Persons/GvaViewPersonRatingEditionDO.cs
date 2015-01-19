@@ -17,7 +17,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.EditionIndex = edition.Index;
             this.RatingPartIndex = rating.PartIndex;
             this.EditionPartIndex = edition.PartIndex;
-            this.RatingType = rating.RatingType;
+            this.RatingTypes = rating.RatingTypes;
             this.PersonRatingLevel = rating.RatingLevel;
             this.RatingClass = rating.RatingClass;
             this.AircraftTypeGroup = rating.AircraftTypeGroup;
@@ -39,7 +39,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public NomValue LocationIndicator { get; set; }
 
-        public NomValue RatingType { get; set; }
+        public string RatingTypes { get; set; }
 
         public NomValue PersonRatingLevel { get; set; }
 

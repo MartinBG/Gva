@@ -14,7 +14,8 @@
   </sc-column>
   <sc-column data="part.langLevel.name" title="persons.documentLangCertSearch.langLevel" class="wrap">
   </sc-column>
-  <sc-column data="part.ratingType.name || part.sector" title="persons.documentLangCertSearch.ratingType">
+  <sc-column title="persons.documentLangCertSearch.ratingType" has-content="true">
+    {{item.part.ratingTypes | pluck:'code' | join:', ' || item.part.sector}}
   </sc-column>
   <sc-column data="part.ratingClass.name" title="persons.documentLangCertSearch.ratingClass">
   </sc-column>
@@ -26,8 +27,7 @@
   </sc-column>
   <sc-column data="part.documentRole.name" title="persons.documentLangCertSearch.personOtherDocumentRole" class="wrap">
   </sc-column>
-  <sc-column data="part.valid" title="persons.documentLangCertSearch.valid" has-content="true">
-    <span>{{item.part.valid.name}}</span>
+  <sc-column data="part.valid.name" title="persons.documentLangCertSearch.valid" has-content="true">
   </sc-column>
   <sc-column data="case.bookPageNumber" title="persons.documentLangCertSearch.bookPageNumber" visible="false">
   </sc-column>

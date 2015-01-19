@@ -7,8 +7,8 @@
     </div>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'flightCrew'">
-    <sc-field type="nomenclature" ng-model="model.part.ratingClass" ng-disabled="model.part.ratingType" alias="'ratingClasses'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.ratingClass" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.ratingType" ng-disabled="model.part.ratingClass"  alias="'ratingTypes'" l10n-text="persons.ratingDirective.ratingType" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.ratingClass" ng-disabled="model.part.ratingTypes.length > 0" alias="'ratingClasses'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.ratingClass" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.ratingTypes" ng-disabled="model.part.ratingClass"  multiple="multiple" alias="'ratingTypes'" l10n-text="persons.ratingDirective.ratingType" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
     <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{caseTypeAlias: model.case.caseType.alias}" l10n-text="persons.ratingDirective.authorization" sc-validate="{ valid: isValid }" validations="{valid: 'errorTexts.notValidRating'}" class="col-sm-3"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'to_suvd'">

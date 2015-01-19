@@ -39,7 +39,7 @@ namespace Gva.Api.Projections.Person
             check.DocumentNumber = personCheck.Content.DocumentNumber;
             check.DocumentTypeId = personCheck.Content.DocumentType != null ? personCheck.Content.DocumentType.NomValueId : (int?)null;
             check.DocumentRoleId = personCheck.Content.DocumentRole != null ? personCheck.Content.DocumentRole.NomValueId : (int?)null;
-            check.RatingTypeId = personCheck.Content.RatingType != null ? personCheck.Content.RatingType.NomValueId : (int?)null;
+            check.RatingTypes = personCheck.Content.RatingTypes.Count() > 0 ? string.Join(", ", personCheck.Content.RatingTypes.Select(r => r.Code)) : null;
             check.RatingClassId = personCheck.Content.RatingClass != null ? personCheck.Content.RatingClass.NomValueId : (int?)null;
             check.AuthorizationId = personCheck.Content.Authorization != null ? personCheck.Content.Authorization.NomValueId : (int?)null;
             check.LicenceTypeId = personCheck.Content.LicenceType != null ? personCheck.Content.LicenceType.NomValueId : (int?)null;

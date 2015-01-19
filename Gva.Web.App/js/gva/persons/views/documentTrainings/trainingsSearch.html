@@ -12,7 +12,8 @@
   </sc-column>
   <sc-column data="part.documentPublisher" title="persons.documentTrainingSearch.documentPublisher" class="wrap">
   </sc-column>
-  <sc-column data="part.ratingType.name || part.sector" title="persons.documentTrainingSearch.ratingType">
+  <sc-column title="persons.documentTrainingSearch.ratingType" has-content="true">
+    {{item.part.ratingTypes | pluck:'code' | join:', ' || item.part.sector}}
   </sc-column>
   <sc-column data="part.ratingClass.name" title="persons.documentTrainingSearch.ratingClass" visible="false">
   </sc-column>
@@ -24,8 +25,7 @@
   </sc-column>
   <sc-column data="part.documentRole.name" title="persons.documentTrainingSearch.personOtherDocumentRole" class="wrap">
   </sc-column>
-  <sc-column data="part.valid" title="persons.documentTrainingSearch.valid" has-content="true">
-    <span>{{item.part.valid.name}}</span>
+  <sc-column data="part.valid.name" title="persons.documentTrainingSearch.valid" has-content="true">
   </sc-column>
   <sc-column data="case.bookPageNumber" title="persons.documentTrainingSearch.bookPageNumber" visible="false">
   </sc-column>

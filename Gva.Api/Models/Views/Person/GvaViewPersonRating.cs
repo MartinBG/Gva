@@ -17,7 +17,7 @@ namespace Gva.Api.Models.Views.Person
 
         public int PartIndex { get; set; }
 
-        public int? RatingTypeId { get; set; }
+        public string RatingTypes { get; set; }
 
         public int? RatingLevelId { get; set; }
 
@@ -36,8 +36,6 @@ namespace Gva.Api.Models.Views.Person
         public string Sector { get; set; }
 
         public virtual NomValue LocationIndicator { get; set; }
-
-        public virtual NomValue RatingType { get; set; }
 
         public virtual NomValue RatingLevel { get; set; }
 
@@ -82,7 +80,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartId).HasColumnName("LotPartId");
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
-            this.Property(t => t.RatingTypeId).HasColumnName("RatingTypeId");
+            this.Property(t => t.RatingTypes).HasColumnName("RatingTypes");
             this.Property(t => t.RatingLevelId).HasColumnName("RatingLevelId");
             this.Property(t => t.RatingClassId).HasColumnName("RatingClassId");
             this.Property(t => t.AircraftTypeGroupId).HasColumnName("AircraftTypeGroupId");
@@ -99,9 +97,6 @@ namespace Gva.Api.Models.Views.Person
             this.HasRequired(t => t.Part)
                 .WithMany()
                 .HasForeignKey(t => t.PartId);
-            this.HasOptional(t => t.RatingType)
-                .WithMany()
-                .HasForeignKey(t => t.RatingTypeId);
             this.HasOptional(t => t.RatingLevel)
                 .WithMany()
                 .HasForeignKey(t => t.RatingLevelId);

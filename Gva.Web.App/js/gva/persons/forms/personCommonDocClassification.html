@@ -4,7 +4,7 @@
     <sc-field type="nomenclature" ng-model="model.part.licenceType" alias="'licenceTypes'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.licenceType" class="col-sm-9 col-md-6"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'flightCrew'">
-    <sc-field type="nomenclature" ng-model="model.part.ratingType" alias="'ratingTypes'" ng-disabled="model.part.ratingClass" l10n-text="persons.personCommonDocClassificationDirective.ratingType" class="col-sm-6 col-md-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.ratingTypes" alias="'ratingTypes'" multiple="multiple" ng-disabled="model.part.ratingClass" l10n-text="persons.personCommonDocClassificationDirective.ratingType" class="col-sm-6 col-md-4"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'to_vs'">  
     <sc-field type="nomenclature" ng-model="model.part.aircraftTypeGroup" alias="'aircraftTypeGroups'" l10n-text="persons.personCommonDocClassificationDirective.aircraftTypeGroup" class="col-sm-6 col-md-4"></sc-field>
@@ -16,7 +16,7 @@
 
   <div ng-if="model.case.caseType.alias === 'flightCrew' || model.case.caseType.alias === 'ovd' || model.case.caseType.alias === 'to_suvd'">
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.part.ratingClass" ng-disabled="model.part.ratingType" alias="'ratingClasses'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.ratingClass" class="col-sm-6 col-md-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.ratingClass" ng-disabled="model.part.ratingTypes.length > 0" alias="'ratingClasses'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.ratingClass" class="col-sm-6 col-md-4"></sc-field>
       <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.authorization" class="col-sm-6 col-md-4"></sc-field>
     </div>
   </div>

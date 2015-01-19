@@ -317,7 +317,7 @@ namespace Gva.Api.WordTemplates
                     TYPE = string.Format(
                            "{0} {1}",
                            rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name,
-                           rating.Content.RatingType == null ? null : rating.Content.RatingType.Code),
+                           rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : ""),
                     AUTH_NOTES = string.Format(
                         "{0} {1}",
                         rating.Content.Authorization == null ? null : rating.Content.Authorization.Code,
@@ -349,7 +349,7 @@ namespace Gva.Api.WordTemplates
                     TYPE = string.Format(
                         "{0} {1}",
                         rating.Content.RatingClass != null ? rating.Content.RatingClass.Name : "",
-                        rating.Content.RatingType != null ? rating.Content.RatingType.Code : ""),
+                        rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : ""),
                     ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo
                 });

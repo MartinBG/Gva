@@ -10,6 +10,7 @@ namespace Gva.Api.ModelsDO.Persons
         public PersonLangCertDO() 
         {
             LangLevelEntries = new List<PersonLangLevelDO>();
+            RatingTypes = new List<NomValue>();
         }
 
         public string DocumentNumber { get; set; }
@@ -24,7 +25,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public DateTime? DocumentDateValidTo { get; set; }
 
-        public NomValue RatingType { get; set; }
+        public List<NomValue> RatingTypes { get; set; }
 
         public NomValue AircraftTypeGroup { get; set; }
 

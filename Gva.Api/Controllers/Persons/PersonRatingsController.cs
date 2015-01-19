@@ -169,9 +169,10 @@ namespace Gva.Api.Controllers.Persons
                 ratings = ratings.Where(r => r.RatingClassId == rating.RatingClass.NomValueId).ToList();
             }
 
-            if (rating.RatingType != null)
+            if (rating.RatingTypes.Count() > 0)
             {
-                ratings = ratings.Where(r => r.RatingTypeId == rating.RatingType.NomValueId).ToList();
+                string types = string.Join(", ", rating.RatingTypes.Select(r => r.Code));
+                ratings = ratings.Where(r => r.RatingTypes == types).ToList();
             }
 
             if (rating.Authorization != null)

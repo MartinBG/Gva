@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[GvaViewPersonRatings] (
     [LotId]                    INT               NOT NULL,
     [LotPartId]                INT               NOT NULL,
     [PartIndex]                INT               NOT NULL,
-    [RatingTypeId]             INT               NULL,
+    [RatingTypes]              NVARCHAR(MAX)     NULL,
     [RatingLevelId]            INT               NULL,
     [RatingClassId]            INT               NULL,
     [AircraftTypeGroupId]      INT               NULL,
@@ -17,7 +17,6 @@ CREATE TABLE [dbo].[GvaViewPersonRatings] (
     CONSTRAINT [PK_GvaViewPersonRatings]                        PRIMARY KEY ([LotId], [PartIndex]),
     CONSTRAINT [FK_GvaViewPersonRatings_GvaViewPersons]         FOREIGN KEY ([LotId])                 REFERENCES [dbo].[GvaViewPersons] ([LotId]),
     CONSTRAINT [FK_GvaViewPersonRatings_LotParts]               FOREIGN KEY ([LotPartId])             REFERENCES [dbo].[LotParts] ([LotPartId]),
-    CONSTRAINT [FK_GvaViewPersonRatings_RatingTypeId]           FOREIGN KEY ([RatingTypeId])          REFERENCES [dbo].[NomValues] ([NomValueId]),
     CONSTRAINT [FK_GvaViewPersonRatings_RatingLevelId]          FOREIGN KEY ([RatingLevelId])         REFERENCES [dbo].[NomValues] ([NomValueId]),
     CONSTRAINT [FK_GvaViewPersonRatings_RatingClassId]          FOREIGN KEY ([RatingClassId])         REFERENCES [dbo].[NomValues] ([NomValueId]),
     CONSTRAINT [FK_GvaViewPersonRatings_AircraftTypeGroupId]    FOREIGN KEY ([AircraftTypeGroupId])   REFERENCES [dbo].[NomValues] ([NomValueId]),
@@ -31,7 +30,7 @@ GO
 exec spDescTable  N'GvaViewPersonRatings', N'Данни за квалификационен клас.'
 exec spDescColumn N'GvaViewPersonRatings', N'LotId'                    , N'Идентификатор на партидата.'
 exec spDescColumn N'GvaViewPersonRatings', N'LotPartId'                , N'Идентификатор на част от партидата.'
-exec spDescColumn N'GvaViewPersonRatings', N'RatingTypeId'             , N'Тип ВС на квалификационния клас.'
+exec spDescColumn N'GvaViewPersonRatings', N'RatingTypes'              , N'Типове ВС на квалификационния клас.'
 exec spDescColumn N'GvaViewPersonRatings', N'RatingLevelId'            , N'Степен на квалификационния клас.'
 exec spDescColumn N'GvaViewPersonRatings', N'RatingClassId'            , N'Клас ВС на квалификационния клас.'
 exec spDescColumn N'GvaViewPersonRatings', N'AircraftTypeGroupId'      , N'Група на ВС на квалификационния клас.'
