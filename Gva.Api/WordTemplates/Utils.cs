@@ -126,23 +126,6 @@ namespace Gva.Api.WordTemplates
             return exams.Union(checks).Union(trainings).ToList<object>();
         }
 
-        internal static PersonRatingEditionDO GetRtoRating(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
-        {
-            var rtoRatingPart = includedRatings.FirstOrDefault(r => r.Content.Authorization != null && r.Content.Authorization.Code == "RTO");
-
-            List<PersonRatingEditionDO> rtoRatings = new List<PersonRatingEditionDO>();
-            foreach (var edition in ratingEditions)
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null && rating.Content.Authorization.Code == "RTO")
-                {
-                    rtoRatings.Add(edition.Content);
-                }
-            }
-
-            return rtoRatings.OrderBy(e => e.Index).LastOrDefault();
-        }
-
         internal static List<object> GetMedCerts(int orderNumber, IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
         {
             var medicals = includedMedicals.Select(m =>
@@ -217,73 +200,6 @@ namespace Gva.Api.WordTemplates
             }
 
             return Utils.FillBlankData(ratingEditions, 11);
-        }
-
-
-        internal static object[] GetCategoryNP(
-            IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
-            IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions,
-            List<string> validAliases,
-            List<string> validCodes,
-            INomRepository nomRepository,
-            ILotRepository lotRepository)
-        {
-
-            List<object> categories = new List<object>();
-            foreach (var edition in ratingEditions)
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
-                    validCodes.Contains(nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")) &&
-                    edition.Content.Limitations != null && edition.Content.Limitations.Count > 0)
-                {
-                    var firstRatingEdition = lotRepository.GetLotIndex(rating.Part.LotId)
-                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
-                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
-                        .OrderByDescending(epv => epv.Content.Index)
-                        .Last();
-
-                    categories.Add(new
-                    {
-                        TYPE = rating.Content.AircraftTypeGroup.Name,
-                        CAT = rating.Content.AircraftTypeCategory.Code,
-                        DATE_FROM = firstRatingEdition.Content.DocumentDateValidFrom,
-                        DATE_TO = edition.Content.DocumentDateValidTo,
-                        LIMIT = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
-                    });
-                }
-            }
-
-            return categories.ToArray();
-        }
-
-        internal static object[] GetACLimitations(
-            IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
-            IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions,
-            List<string> validAliases,
-            List<string> validCodes,
-            INomRepository nomRepository)
-        {
-            List<object> acLimitations = new List<object>();
-            foreach (var edition in ratingEditions)
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
-                    validCodes.Contains(nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")) &&
-                    (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0))
-                {
-                    acLimitations.Add(new
-                    {
-                        AIRCRAFT = rating.Content.AircraftTypeGroup.Name,
-                        CAT = rating.Content.AircraftTypeCategory.Code,
-                        LIM = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
-                    });
-                }
-            }
-
-            return acLimitations.ToArray();
         }
 
         internal static NomValue GetCountry(PersonAddressDO personAddress, INomRepository nomRepository)

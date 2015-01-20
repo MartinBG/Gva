@@ -66,10 +66,10 @@ namespace Gva.Api.WordTemplates
                     personData.LastName).ToUpper();
 
             List<string> validAliases = new List<string> { "A", "B 1", "B 2", "C" };
-            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
+            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6", "7" };
            
-            var acLimitations = Utils.GetACLimitations(includedRatings, ratingEditions, validAliases, validCodes, this.nomRepository);
-            var limitations = lastEdition.AmlLimitations != null ? this.GetLimitations(lastEdition) : new object[0];
+            var acLimitations = AMLUtils.GetACLimitations(includedRatings, ratingEditions, validAliases, validCodes, this.nomRepository);
+            var limitations = lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition) : new object[0];
 
             var json = new
             {
@@ -97,7 +97,7 @@ namespace Gva.Api.WordTemplates
                     CAT2 = "B 1",
                     CAT3 = "B 2",
                     CAT4 = "C",
-                    CATEGORIES = this.GetCategories(includedRatings),
+                    CATEGORIES = this.GetCategories(includedRatings, validCodes),
                     LIC_NO3 = licenceNumber,
                     NAME = personName,
                     DATE_OF_BIRTH1 = string.Format("{0:dd.mm.yyyy} {1}",
@@ -108,7 +108,7 @@ namespace Gva.Api.WordTemplates
                     LICNO = licenceNumber,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_VALID_DATE = lastEdition.DocumentDateValidTo,
-                    CATEGORY = this.GetCategory(includedRatings, ratingEditions),
+                    CATEGORY = AMLUtils.GetCategory(includedRatings, ratingEditions,validAliases, validCodes, this.nomRepository, lot),
                     NA = limitations.Count() == 0 && acLimitations.Count() == 0 ? "No limitations" : "",
                     LIMITATIONS = (limitations.Count() > 0 || acLimitations.Count() > 0) ? limitations : new object(),
                     AC_LIMITATIONS = acLimitations.Count() > 0 ? acLimitations : new object(),
@@ -119,11 +119,9 @@ namespace Gva.Api.WordTemplates
 
             return json;
         }
-        
 
-        private object[] GetCategories(IEnumerable<PartVersion<PersonRatingDO>> includedRatings)
+        private object[] GetCategories(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, List<string> validCodes)
         {
-            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6", "7" };
             IEnumerable<NomValue> aircraftGroups66 = this.nomRepository.GetNomValues("aircraftGroup66").Where(r => validCodes.Contains(r.Code));
             IEnumerable<NomValue> aircraftClases66 = this.nomRepository.GetNomValues("aircraftClases66");
 
@@ -174,151 +172,6 @@ namespace Gva.Api.WordTemplates
             }
 
             return results.ToArray<object>();
-        }
-
-        private object[] GetCategory(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
-        {
-            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "C" };
-            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
-
-            List<object> categories = new List<object>();
-            foreach (var edition in ratingEditions)
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
-                    validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")))
-                {
-                    var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
-                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
-                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
-                        .OrderByDescending(epv => epv.Content.Index)
-                        .Last();
-
-                    categories.Add(new
-                    {
-                        TYPE = rating.Content.AircraftTypeGroup.Name,
-                        CAT = rating.Content.AircraftTypeCategory.Code,
-                        DATE = firstRatingEdition.Content.DocumentDateValidFrom,
-                        LIMIT = (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0) ?
-                            string.Join(",", edition.Content.Limitations.Select(l => l.Name)) :
-                            ""
-                    });
-                }
-            }
-
-            if (categories.Count() == 0) {
-                categories.Add(new object());
-            }
-
-            return categories.ToArray();
-        }
-
-        private object[] GetLimitations(PersonLicenceEditionDO lastLicenceEdition)
-        {
-            IList<object> limitations = new List<object>();
-
-            if (lastLicenceEdition.AmlLimitations.At_a_Ids == null && lastLicenceEdition.AmlLimitations.At_b1_Ids == null &&
-                lastLicenceEdition.AmlLimitations.Ap_a_Ids == null && lastLicenceEdition.AmlLimitations.Ap_b1_Ids == null &&
-                lastLicenceEdition.AmlLimitations.Ht_a_Ids == null && lastLicenceEdition.AmlLimitations.Ht_b1_Ids == null &&
-                lastLicenceEdition.AmlLimitations.Hp_a_Ids == null && lastLicenceEdition.AmlLimitations.Hp_b1_Ids == null &&
-                lastLicenceEdition.AmlLimitations.Avionics_Ids == null)
-            {
-                return new object[0];
-            }
-
-
-            List<NomValue> AT_a_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
-                lastLicenceEdition.AmlLimitations.At_a_Ids;
-            List<NomValue> AT_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
-                lastLicenceEdition.AmlLimitations.At_b1_Ids;
-            List<NomValue> AP_a_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
-                lastLicenceEdition.AmlLimitations.Ap_a_Ids;
-            List<NomValue> AP_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
-                lastLicenceEdition.AmlLimitations.Ap_b1_Ids;
-            List<NomValue> HT_a_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
-                lastLicenceEdition.AmlLimitations.Ht_a_Ids;
-            List<NomValue> HT_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
-                lastLicenceEdition.AmlLimitations.Ht_b1_Ids;
-            List<NomValue> HP_a_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
-                lastLicenceEdition.AmlLimitations.Hp_a_Ids;
-            List<NomValue> HP_b1_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
-                lastLicenceEdition.AmlLimitations.Hp_b1_Ids;
-            List<NomValue> avionics_Ids = lastLicenceEdition.AmlLimitations == null ?
-                new List<NomValue>() :
-                lastLicenceEdition.AmlLimitations.Avionics_Ids;
-
-            limitations.Add(new
-            {
-                NAME = "Aeroplanes Turbine",
-                CAT = "A 1",
-                LIMT = (AT_a_Ids != null && AT_a_Ids.Count > 0) ? string.Join(",", AT_a_Ids.Select(l => l.Name)) : "No limitation"
-            });
-
-            limitations.Add(new
-            {
-                NAME = "Aeroplanes Turbine",
-                CAT = "B 1.1",
-                LIMT = (AT_b1_Ids != null && AT_b1_Ids.Count > 0) ? string.Join(",", AT_b1_Ids.Select(l => l.Name)) : "No limitation"
-            });
-
-            limitations.Add(new
-            {
-                NAME = "Aeroplanes Piston",
-                CAT = "A 2",
-                LIMT = (AP_a_Ids != null && AP_a_Ids.Count > 0) ? string.Join(",", AP_a_Ids.Select(l => l.Name)) : "No limitation"
-            });
-
-            limitations.Add(new
-            {
-                NAME = "Aeroplanes Piston",
-                CAT = "B 1.2",
-                LIMT = (AP_b1_Ids != null && AP_b1_Ids.Count > 0) ? string.Join(",", AP_b1_Ids.Select(l => l.Name)) : "No limitation"
-            });
-
-            limitations.Add(new
-            {
-                NAME = "Helicopters Turbine",
-                CAT = "A 3",
-                LIMT = (HT_a_Ids != null && HT_a_Ids.Count > 0) ? string.Join(",", HT_a_Ids.Select(l => l.Name)) : "No limitation"
-            });
-
-            limitations.Add(new
-            {
-                NAME = "Helicopters Turbine",
-                CAT = "B 1.3",
-                LIMT = (HT_b1_Ids != null && HT_b1_Ids.Count > 0) ? string.Join(",", HT_b1_Ids.Select(l => l.Name)) : "No limitation"
-            });
-
-            limitations.Add(new
-            {
-                NAME = "Helicopters Piston",
-                CAT = "A 4",
-                LIMT = (HP_a_Ids != null && HP_a_Ids.Count > 0) ? string.Join(",", HP_a_Ids.Select(l => l.Name)) : "No limitation"
-            });
-
-            limitations.Add(new
-            {
-                NAME = "Helicopters Piston",
-                CAT = "B 1.4",
-                LIMT = (HT_b1_Ids != null && HT_b1_Ids.Count > 0) ? string.Join(",", HP_b1_Ids.Select(l => l.Name)) : "No limitation"
-            });
-            limitations.Add(new
-            {
-                NAME = "Acionics",
-                CAT = "B 2",
-                LIMT = (avionics_Ids != null && avionics_Ids.Count > 0) ? string.Join(",", avionics_Ids.Select(l => l.Name)) : "No limitation"
-            });
-
-            return limitations.ToArray<object>(); ;
         }
     }
 }

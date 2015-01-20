@@ -66,8 +66,11 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
 
             var inspectorId = lastEdition.Inspector == null ? (int?)null : lastEdition.Inspector.NomValueId;
-            List<object> instructorData = this.GetRatingsDataByCode(includedRatings, ratingEditions, "FT");
-            List<object> examinerData = this.GetRatingsDataByCode(includedRatings, ratingEditions, "FC");
+
+            NomValue FTgroup = this.nomRepository.GetNomValues("authorizationGroups").First(nv => nv.Code == "FT");
+            NomValue FCgroup = this.nomRepository.GetNomValues("authorizationGroups").First(nv => nv.Code == "FC");
+            List<object> instructorData = PilotUtils.GetRatingsDataByCode(includedRatings, ratingEditions, FTgroup);
+            List<object> examinerData = PilotUtils.GetRatingsDataByCode(includedRatings, ratingEditions, FCgroup);
 
             object instrNoEntries = instructorData.Count == 0 ?
                 new
@@ -87,11 +90,16 @@ namespace Gva.Api.WordTemplates
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
-            var otherLicences = this.GetOtherLicences(licenceCaCode, lot, lastEdition, includedLicences);
-            var rtoRating = Utils.GetRtoRating(includedRatings, ratingEditions);
+            var otherLicences = PilotUtils.GetOtherLicences(publisherCaaCode, licenceCaCode, lot, lastEdition, includedLicences, this.nomRepository);
+            var rtoRating = PilotUtils.GetRtoRating(includedRatings, ratingEditions);
             var langLevel = Utils.GetLangCerts(includedLangCerts);
             var limitations = this.GetLimitations(lastEdition, includedMedicals, includedExams);
-            var ratings = this.GetRatings(includedRatings, ratingEditions);
+
+            List<int> authorizationGroupIds = nomRepository.GetNomValues("authorizationGroups")
+                .Where(nv => nv.Code == "FT" || nv.Code == "FC")
+                .Select(nv => nv.NomValueId)
+                .ToList();
+            var ratings = PilotUtils.GetRatings(includedRatings, ratingEditions, authorizationGroupIds);
             var country = Utils.GetCountry(personAddress, this.nomRepository);
             var licenceNumber = string.Format(
                 "BGR. {0} - {1} - {2}",
@@ -189,41 +197,6 @@ namespace Gva.Api.WordTemplates
             };
         }
 
-        private List<object> GetOtherLicences(
-            string licenceCaCode,
-            Lot lot,
-            PersonLicenceEditionDO edition,
-            IEnumerable<PartVersion<PersonLicenceDO>> includedLicences)
-        {
-            var otherLicences = new List<object>()
-            {
-                new
-                {
-                    LIC_NO = licenceCaCode,
-                    ISSUE_DATE = edition.DocumentDateValidFrom,
-                    C_CODE = publisherCaaCode
-                }
-            };
-
-            otherLicences = otherLicences.Concat(includedLicences.Select(l =>
-                {
-                    var lastEdition = lot.Index.GetParts<PersonLicenceEditionDO>("licenceEditions")
-                        .Where(e => e.Content.LicencePartIndex == l.Part.Index)
-                        .OrderBy(e => e.Content.Index)
-                        .Last()
-                        .Content;
-
-                    return new
-                    {
-                        LIC_NO = this.nomRepository.GetNomValue("licenceTypes", l.Content.LicenceType.NomValueId).TextContent.Get<string>("codeCA"),
-                        ISSUE_DATE = lastEdition.DocumentDateValidFrom,
-                        C_CODE = publisherCaaCode
-                    };
-                })).ToList();
-
-            return otherLicences;
-        }
-
         private List<object> GetLimitations(
             PersonLicenceEditionDO edition,
             IEnumerable<PersonMedicalDO> includedMedicals,
@@ -252,63 +225,6 @@ namespace Gva.Api.WordTemplates
                 }));
 
             return limitations.ToList<object>();
-        }
-
-        private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
-        {
-            var authorizationGroupIds = this.nomRepository.GetNomValues("authorizationGroups")
-                .Where(nv => nv.Code == "FT" || nv.Code == "FC")
-                .Select(nv => nv.NomValueId);
-
-            List<object> ratings = new List<object>();
-            foreach (var edition in ratingEditions.OrderBy(r => r.Content.DocumentDateValidFrom))
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization == null || (rating.Content.Authorization.Code != "RTO" && !authorizationGroupIds.Contains(rating.Content.Authorization.ParentValueId.Value)))
-                {
-                    ratings.Add(new
-                    {
-                        TYPE = string.Format(
-                            "{0} {1}",
-                            rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Name,
-                            rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim(),
-                        AUTH_NOTES = string.Format(
-                            "{0} {1}",
-                            rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Code,
-                            edition.Content.NotesAlt).Trim(),
-                        VALID_DATE = edition.Content.DocumentDateValidTo
-                    });
-                }
-            }
-
-            return ratings;
-        }
-
-        private List<object> GetRatingsDataByCode(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions, string code)
-        {
-            var authorizationGroup = this.nomRepository.GetNomValues("authorizationGroups")
-                .First(nv => nv.Code == code);
-
-            List<object> ratings = new List<object>();
-            foreach (var edition in ratingEditions.OrderBy(r => r.Content.DocumentDateValidFrom))
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null && authorizationGroup.NomValueId == rating.Content.Authorization.ParentValueId.Value && rating.Content.Authorization.Code != "RTO")
-                {
-                    ratings.Add(new
-                    {
-                        TYPE = string.Format(
-                            "{0} {1} {2}",
-                            rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Name,
-                            rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "",
-                            rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Code).Trim(),
-                        AUTH_NOTES = string.Format("{0}", edition.Content.NotesAlt).Trim(),
-                        VALID_DATE = edition.Content.DocumentDateValidTo
-                    });
-                }
-            }
-
-            return ratings;
         }
 
         private List<object> GetDocuments2(PersonLicenceDO licence, IEnumerable<PersonTrainingDO> includedTrainings)
