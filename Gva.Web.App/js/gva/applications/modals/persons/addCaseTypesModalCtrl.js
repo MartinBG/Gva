@@ -58,10 +58,9 @@
       '$q',
       'Nomenclatures',
       'scModalParams',
-      function ($q, Nomenclatures, scModalParams) {
+      function ($q, Nomenclatures) {
         return Nomenclatures.query({
-          alias: 'personCaseTypes',
-          set: scModalParams.set
+          alias: 'personCaseTypes'
         }).$promise;
       }
     ],
