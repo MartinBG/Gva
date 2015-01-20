@@ -55,7 +55,7 @@ namespace Gva.Api.WordTemplates
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
-            var country = this.GetCountry(personAddress);
+            var country = Utils.GetCountry(personAddress, this.nomRepository);
             var licenceNumber = string.Format(
                 " BGR. AM - {0} - {1}",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
@@ -65,8 +65,11 @@ namespace Gva.Api.WordTemplates
                     personData.MiddleName,
                     personData.LastName).ToUpper();
 
+            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "C" };
+            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
+           
+            var acLimitations = Utils.GetACLimitations(includedRatings, ratingEditions, validAliases, validCodes, this.nomRepository);
             var limitations = lastEdition.AmlLimitations != null ? this.GetLimitations(lastEdition) : new object[0];
-            var acLimitations = this.GetACLimitations(includedRatings, ratingEditions);
 
             var json = new
             {
@@ -116,19 +119,7 @@ namespace Gva.Api.WordTemplates
 
             return json;
         }
-        private NomValue GetCountry(PersonAddressDO personAddress)
-        {
-            int? countryId = personAddress.Settlement != null?  personAddress.Settlement.ParentValueId : null;
-            NomValue country = countryId.HasValue ?
-                this.nomRepository.GetNomValue("countries", countryId.Value) :
-                new NomValue
-                {
-                    Name = null,
-                    TextContentString = string.Empty
-                };
-
-            return country;
-        }
+        
 
         private object[] GetCategories(IEnumerable<PartVersion<PersonRatingDO>> includedRatings)
         {
@@ -221,32 +212,6 @@ namespace Gva.Api.WordTemplates
             }
 
             return categories.ToArray();
-        }
-
-        private object[] GetACLimitations(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
-        {
-            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "C" };
-            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "6" };
-
-            List<object> acLimitations = new List<object>();
-            foreach (var edition in ratingEditions)
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
-                    validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")) &&
-                    (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0))
-                {
-                    acLimitations.Add(new
-                    {
-                        AIRCRAFT = rating.Content.AircraftTypeGroup.Name,
-                        CAT = rating.Content.AircraftTypeCategory.Code,
-                        LIM = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
-                    });
-                }
-            }
-
-            return acLimitations.ToArray();
         }
 
         private object[] GetLimitations(PersonLicenceEditionDO lastLicenceEdition)

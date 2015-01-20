@@ -92,7 +92,7 @@ namespace Gva.Api.WordTemplates
                 personAddress.Address);
 
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedLangCerts);
-            var langLevel = this.GetEngLevel(includedLangCerts);
+            var langCerts = Utils.FillBlankData(Utils.GetLangCerts(includedLangCerts), 1);
             var langCertsInLEndorsments = this.GetLangCertsForEndosement(includedLangCerts);
             var lEndorsements = Utils.FillBlankData(this.GetEndorsements2(includedRatings, ratingEditions, false).Union(langCertsInLEndorsments).ToList(), 11);
 
@@ -127,8 +127,8 @@ namespace Gva.Api.WordTemplates
                     NATIONALITY_EN = nationality != null ? nationality.TextContent.Get<string>("nationalityCodeCA") : null ,
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),
                     L_RATINGS = this.GetRatings(includedRatings, ratingEditions),
-                    ENDORSEMENT = this.GetEndorsements(includedRatings, ratingEditions),
-                    L_LANG_LEVEL = langLevel,
+                    ENDORSEMENT = Utils.FillBlankData(Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository), 2),
+                    L_LANG_LEVEL = langCerts,
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     NAME = string.Format(
@@ -148,8 +148,8 @@ namespace Gva.Api.WordTemplates
                     T_DOCUMENTS = documents.Take(5),
                     T_DOCUMENTS2 = documents.Skip(5),
                     T_LANG_LEVEL_NO = number++,
-                    T_LANG_LEVEL = langLevel,
-                    T_MED_CERT = this.GetMedCerts(includedMedicals, personData, licenceType.Code),
+                    T_LANG_LEVEL = langCerts,
+                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
                     T_ACTIVE_NO = number++,
                     L_ENDORSEMENT = lEndorsements,
                     T_ENDORSEMENT = Utils.FillBlankData(this.GetEndorsements2(includedRatings, ratingEditions, true), 11),
@@ -207,25 +207,7 @@ namespace Gva.Api.WordTemplates
                     };
                 }).ToList<object>();
 
-            result = Utils.FillBlankData(result, 3);
-            return result;
-        }
-
-        private List<object> GetEndorsements(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
-        {
-            var result = includedRatings
-                .Where(r => r.Content.Authorization != null)
-                .GroupBy(r => r.Content.Authorization.Code)
-                .Select(g =>
-                {
-                    return new
-                    {
-                        NAME = g.Key,
-                        DATE = g.Min(r => ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidFrom)
-                    };
-                }).ToList<object>();
-
-            return Utils.FillBlankData(result, 2);
+            return Utils.FillBlankData(result, 3);
         }
 
         private List<object> GetEndorsements2(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> editions, bool withIssueDate)
@@ -286,19 +268,6 @@ namespace Gva.Api.WordTemplates
             return ratingEditions;
         }
 
-        private List<object> GetEngLevel(IEnumerable<PersonLangCertDO> includedLangCerts)
-        {
-            var langCerts = includedLangCerts.Select(c => new
-            {
-                LEVEL = c.LangLevel.Name,
-                ISSUE_DATE = c.DocumentDateValidFrom,
-                VALID_DATE = c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToShortDateString() : "unlimited"
-            })
-            .ToList<object>();
-
-            return Utils.FillBlankData(langCerts, 1);
-        }
-
         private List<object> GetDocuments(
             string licenceTypeCode,
             IEnumerable<PersonTrainingDO> includedTrainings,
@@ -319,11 +288,11 @@ namespace Gva.Api.WordTemplates
             NomValue ratingTrainingTheorExamRole = this.nomRepository.GetNomValue("documentRoles", "ratingTrainingTheorExam");
             NomValue ratingTrainingPractExamRole = this.nomRepository.GetNomValue("documentRoles", "ratingTrainingPractExam");
 
-            var theoreticalTrainingExams = this.GetTraingsByCode(includedTrainings, theoreticalTrainingExamRole.Code, documentRoleCodes);
-            var ratingTrainingTheorExams = this.GetTraingsByCode(includedTrainings, ratingTrainingTheorExamRole.Code, documentRoleCodes);
-            var ratingTrainingPractExams = this.GetTraingsByCode(includedTrainings, ratingTrainingPractExamRole.Code, documentRoleCodes);
-            var bgLangCerts = this.GetLangCertsByCode(includedLangCerts, bgCertRole.Code, documentRoleCodes);
-            var engLangCerts = this.GetLangCertsByCode(includedLangCerts, engCertRole.Code, documentRoleCodes);
+            var theoreticalTrainingExams = Utils.GetTrainingsByCode(includedTrainings, theoreticalTrainingExamRole.Code, documentRoleCodes);
+            var ratingTrainingTheorExams = Utils.GetTrainingsByCode(includedTrainings, ratingTrainingTheorExamRole.Code, documentRoleCodes);
+            var ratingTrainingPractExams = Utils.GetTrainingsByCode(includedTrainings, ratingTrainingPractExamRole.Code, documentRoleCodes);
+            var bgLangCerts = Utils.GetLangCertsByCode(includedLangCerts, bgCertRole.Code, documentRoleCodes);
+            var engLangCerts = Utils.GetLangCertsByCode(includedLangCerts, engCertRole.Code, documentRoleCodes);
 
             return new List<object>()
             {
@@ -332,7 +301,7 @@ namespace Gva.Api.WordTemplates
                     DOC = new
                     {
                         DOC_ROLE = string.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["BasicTraining"]),
-                        SUB_DOC = theoreticalTrainingExams
+                        SUB_DOC = Utils.FillBlankData(theoreticalTrainingExams, 1)
                     }
                 },
                 new 
@@ -340,7 +309,7 @@ namespace Gva.Api.WordTemplates
                     DOC = new
                     {
                         DOC_ROLE = string.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["RatingTrainingFirstStage"]),
-                        SUB_DOC = ratingTrainingTheorExams
+                        SUB_DOC = Utils.FillBlankData(ratingTrainingTheorExams, 1)
                     }
                 },
                 new 
@@ -348,7 +317,7 @@ namespace Gva.Api.WordTemplates
                     DOC = new
                     {
                         DOC_ROLE = string.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["RatingTrainingSecondStage"]),
-                        SUB_DOC = ratingTrainingPractExams
+                        SUB_DOC = Utils.FillBlankData(ratingTrainingPractExams, 1)
                     }
                 },
                 new 
@@ -356,7 +325,7 @@ namespace Gva.Api.WordTemplates
                     DOC = new
                     {
                         DOC_ROLE = string.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["EngLangCert"]),
-                        SUB_DOC = engLangCerts
+                        SUB_DOC = Utils.FillBlankData(engLangCerts, 1)
                     }
                 },
                 new 
@@ -364,74 +333,10 @@ namespace Gva.Api.WordTemplates
                     DOC = new
                     {
                         DOC_ROLE = string.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["BgLangCert"]),
-                        SUB_DOC = bgLangCerts
+                        SUB_DOC = Utils.FillBlankData(bgLangCerts, 1)
                     }
                 }
             };
-        }
-
-        private List<object> GetLangCertsByCode(IEnumerable<PersonLangCertDO> includedLangCerts, string roleCode, string[] documentRoleCodes)
-        {
-            var langCerts = includedLangCerts
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
-                .OrderBy(t => t.DocumentDateValidFrom)
-                .Select(t =>
-                    new
-                    {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
-                        DOC_NO = t.DocumentNumber,
-                        DATE = t.DocumentDateValidFrom,
-                        DOC_PUBLISHER = t.DocumentPublisher
-                    }).ToList<object>();
-
-            return Utils.FillBlankData(langCerts, 1);
-        }
-
-        private List<object> GetTraingsByCode(IEnumerable<PersonTrainingDO> includedTraings, string roleCode, string[] documentRoleCodes)
-        {
-            var trainings = includedTraings
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
-                .OrderBy(t => t.DocumentDateValidFrom)
-                .Select(t =>
-                    new
-                    {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
-                        DOC_NO = t.DocumentNumber,
-                        DATE = t.DocumentDateValidFrom,
-                        DOC_PUBLISHER = t.DocumentPublisher
-                    }).ToList<object>();
-
-            return Utils.FillBlankData(trainings, 1);
-        }
-
-        private List<object> GetMedCerts(IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData, string licenceCode)
-        {
-            var medicals = includedMedicals.Select(m =>
-                new
-                {
-                    ORDER_NO = number++,
-                    NO = string.Format(
-                        "{0}-{1}-{2}-{3}",
-                        m.DocumentNumberPrefix,
-                        m.DocumentNumber,
-                        personData.Lin,
-                        m.DocumentNumberSuffix),
-                    ISSUE_DATE = m.DocumentDateValidFrom,
-                    VALID_DATE = m.DocumentDateValidTo,
-                    CLASS = m.MedClass.Name.ToUpper(),
-                    PUBLISHER = m.DocumentPublisher.Name,
-                    LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
-                }).ToList<object>();
-
-            if (medicals.Count() == 0)
-            {
-                medicals.Add(new
-                {
-                    ORDER_NO = number++
-                });
-            }
-
-            return medicals;
         }
     }
 }

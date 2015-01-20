@@ -239,7 +239,7 @@ namespace Gva.Api.WordTemplates
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_DOCUMENTS = documents.Take((documents.Count() / 2) + 1),
                     T_DOCUMENTS2 = documents.Skip((documents.Count() / 2) + 1),
-                    T_MED_CERT = this.GetMedCerts(licenceType.Code, includedMedicals, personData),
+                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
                     T_RATING = this.GetTRatings(includedRatings, ratingEditions),
                     L_RATING = this.GetLRatings(includedRatings, ratingEditions),
                     L_ABBREVIATION = this.GetAbbreviations(licenceType.Code)
@@ -317,14 +317,14 @@ namespace Gva.Api.WordTemplates
             if(licenceTypeCode == "CPL(H)")
             {
                 NomValue educationRole = this.nomRepository.GetNomValue("documentRoles", "education");
-                var education = this.GetTrainingsByCode(includedTrainings, educationRole.Code, documentRoleCodes);
+                var education = Utils.GetTrainingsByCode(includedTrainings, educationRole.Code, documentRoleCodes);
 
                 documents.Add(new
                 {
                     DOC = new
                     {
                         DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["Education"]),
-                        SUB_DOC = education
+                        SUB_DOC = Utils.FillBlankData(education, 1)
                     }
                 });
             }
@@ -332,14 +332,14 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "F/CL", "FDL", "PPL(A)", "CPL(A)", "ATPL(A)", "CPL(H)", "ATPL(H)", "PPL(SA)", "FEL" }).Contains(licenceTypeCode))
             {
                 NomValue theoreticalTrainingRole = this.nomRepository.GetNomValue("documentRoles", "theoreticalTraining");
-                var theoreticalTrainings = this.GetTrainingsByCode(includedTrainings, theoreticalTrainingRole.Code, documentRoleCodes);
+                var theoreticalTrainings = Utils.GetTrainingsByCode(includedTrainings, theoreticalTrainingRole.Code, documentRoleCodes);
 
                 documents.Add(new
                 {
                     DOC = new
                     {
                         DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["TheoreticalTraining"]),
-                        SUB_DOC = theoreticalTrainings
+                        SUB_DOC = Utils.FillBlankData(theoreticalTrainings, 1)
                     }
                 });
             }
@@ -347,14 +347,14 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "F/CL", "FDL" }).Contains(licenceTypeCode))
             {
                 NomValue practicalTrainingRole = this.nomRepository.GetNomValue("documentRoles", "practicalTraining");
-                var practicalTrainings = this.GetTrainingsByCode(includedTrainings, practicalTrainingRole.Code, documentRoleCodes);
+                var practicalTrainings = Utils.GetTrainingsByCode(includedTrainings, practicalTrainingRole.Code, documentRoleCodes);
 
                 documents.Add(new
                 {
                     DOC = new
                     {
                         DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["PracticalTraining"]),
-                        SUB_DOC = practicalTrainings
+                        SUB_DOC = Utils.FillBlankData(practicalTrainings, 1)
                     }
                 });
             }
@@ -362,7 +362,7 @@ namespace Gva.Api.WordTemplates
             if ("F/CL" == licenceTypeCode)
             {
                 NomValue practicalCheckRole = this.nomRepository.GetNomValue("documentRoles", "practicalCheck");
-                var practicalChecks = this.GetChecksByCode(includedChecks, practicalCheckRole.Code, documentRoleCodes);
+                var practicalChecks = Utils.FillBlankData(Utils.GetChecksByCode(includedChecks, practicalCheckRole.Code, documentRoleCodes), 1);
 
                 documents.Add(new
                 {
@@ -377,14 +377,14 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "PPL(A)", "CPL(A)", "ATPL(A)", "PPL(SA)", "FEL" }).Contains(licenceTypeCode))
             {
                 NomValue flyingTrainingRole = this.nomRepository.GetNomValue("documentRoles", "flyingTraining");
-                var flyingTrainings = this.GetTrainingsByCode(includedTrainings, flyingTrainingRole.Code, documentRoleCodes);
+                var flyingTrainings = Utils.GetTrainingsByCode(includedTrainings, flyingTrainingRole.Code, documentRoleCodes);
 
                 documents.Add(new
                 {
                     DOC = new
                     {
                         DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["FlyingTraining"]),
-                        SUB_DOC = flyingTrainings
+                        SUB_DOC = Utils.FillBlankData(flyingTrainings, 1)
                     }
                 });
             }
@@ -392,14 +392,14 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "PPL(A)", "CPL(A)", "ATPL(A)", "CPL(H)", "ATPL(H)", "PPL(SA)", "FEL" }).Contains(licenceTypeCode))
             {
                 NomValue flyingCheckRole = this.nomRepository.GetNomValue("documentRoles", "flyingCheck");
-                var flyingChecks = this.GetTrainingsByCode(includedTrainings, flyingCheckRole.Code, documentRoleCodes);
+                var flyingChecks = Utils.GetTrainingsByCode(includedTrainings, flyingCheckRole.Code, documentRoleCodes);
 
                 documents.Add(new
                 {
                     DOC = new
                     {
                         DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["FlyingCheck"]),
-                        SUB_DOC = flyingChecks
+                        SUB_DOC = Utils.FillBlankData(flyingChecks, 1)
                     }
                 });
             }
@@ -432,14 +432,14 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "CPL(A)", "ATPL(A)", "PL(FB)", "FEL" }).Contains(licenceTypeCode))
             {
                 NomValue simulatorRole = this.nomRepository.GetNomValue("documentRoles", "simulator");
-                var simulators = this.GetTrainingsByCode(includedTrainings, simulatorRole.Code, documentRoleCodes);
+                var simulators = Utils.GetTrainingsByCode(includedTrainings, simulatorRole.Code, documentRoleCodes);
 
                 documents.Add(new
                 {
                     DOC = new
                     {
                         DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["Simulator"]),
-                        SUB_DOC = simulators
+                        SUB_DOC = Utils.FillBlankData(simulators, 1)
                     }
                 });
             }
@@ -447,14 +447,14 @@ namespace Gva.Api.WordTemplates
             if ((new List<string> { "CPL(A)", "ATPL(A)" }).Contains(licenceTypeCode))
             {
                 NomValue engCertRole = this.nomRepository.GetNomValue("documentRoles", "engCert");
-                var engCerts = this.GetLangCertsByCode(includedLangCerts, engCertRole.Code, documentRoleCodes);
+                var engCerts = Utils.GetLangCertsByCode(includedLangCerts, engCertRole.Code, documentRoleCodes);
 
                 documents.Add(new
                 {
                     DOC = new
                     {
                         DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["EngLangCert"]),
-                        SUB_DOC = engCerts
+                        SUB_DOC = Utils.FillBlankData(engCerts, 1)
                     }
                 });
             }
@@ -462,103 +462,19 @@ namespace Gva.Api.WordTemplates
             if ("ATPL(A)" == licenceTypeCode)
             {
                 NomValue bgCertRole = this.nomRepository.GetNomValue("documentRoles", "bgCert");
-                var bgCerts = this.GetLangCertsByCode(includedLangCerts, bgCertRole.Code, documentRoleCodes);
+                var bgCerts = Utils.GetLangCertsByCode(includedLangCerts, bgCertRole.Code, documentRoleCodes);
 
                 documents.Add(new
                 {
                     DOC = new
                     {
                         DOC_ROLE = String.Format("{0}. {1}", number++, LicenceDictionary.DocumentTitle["BgLangCert"]),
-                        SUB_DOC = bgCerts
+                        SUB_DOC = Utils.FillBlankData(bgCerts, 1)
                     }
                 });
             }
 
             return documents;
-        }
-
-        private List<object> GetTrainingsByCode(IEnumerable<PersonTrainingDO> includedTrainings, string roleCode, string[] documentRoleCodes)
-        {
-            var trainings = includedTrainings
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
-                .OrderBy(t => t.DocumentDateValidFrom)
-                .Select(t =>
-                    new
-                    {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
-                        DOC_NO = t.DocumentNumber,
-                        DATE = t.DocumentDateValidFrom,
-                        DOC_PUBLISHER = t.DocumentPublisher
-                    }).ToList<object>();
-
-            return Utils.FillBlankData(trainings, 1);
-        }
-
-        private List<object> GetLangCertsByCode(IEnumerable<PersonLangCertDO> includedLangCerts, string roleCode, string[] documentRoleCodes)
-        {
-            var langCerts = includedLangCerts
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
-                .OrderBy(t => t.DocumentDateValidFrom)
-                .Select(t =>
-                    new
-                    {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
-                        DOC_NO = t.DocumentNumber,
-                        DATE = t.DocumentDateValidFrom,
-                        DOC_PUBLISHER = t.DocumentPublisher
-                    }).ToList<object>();
-
-            return Utils.FillBlankData(langCerts, 1);
-        }
-
-        private List<object> GetChecksByCode(IEnumerable<PersonCheckDO> includedChecks, string roleCode, string[] documentRoleCodes)
-        {
-            var checks = includedChecks
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
-                .OrderBy(t => t.DocumentDateValidFrom)
-                .Select(t =>
-                    new
-                    {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
-                        DOC_NO = t.DocumentNumber,
-                        DATE = t.DocumentDateValidFrom,
-                        DOC_PUBLISHER = t.DocumentPublisher
-                    }).ToList<object>();
-
-            return Utils.FillBlankData(checks, 1);
-        }
-
-        private List<object> GetMedCerts(
-            string licenceTypeCode,
-            IEnumerable<PersonMedicalDO> includedMedicals,
-            PersonDataDO personData)
-        {
-            var medicals = includedMedicals.Select(m =>
-                new
-                {
-                    ORDER_NO = number++,
-                    NO = string.Format(
-                        "{0}-{1}-{2}-{3}",
-                        m.DocumentNumberPrefix,
-                        m.DocumentNumber,
-                        personData.Lin,
-                        m.DocumentNumberSuffix),
-                    ISSUE_DATE = m.DocumentDateValidFrom,
-                    VALID_DATE = m.DocumentDateValidTo,
-                    CLASS = m.MedClass.Name,
-                    PUBLISHER = m.DocumentPublisher.Name,
-                    LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
-                }).ToList<object>();
-
-            if (medicals.Count() == 0)
-            {
-                medicals.Add(new
-                {
-                    ORDER_NO = number++
-                });
-            }
-
-            return medicals;
         }
 
         private List<object> GetTRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)

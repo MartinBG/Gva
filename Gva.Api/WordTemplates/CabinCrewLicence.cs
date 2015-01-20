@@ -109,7 +109,7 @@ namespace Gva.Api.WordTemplates
                 }
             }
 
-            var ratings = this.GetRatings(includedRatings, ratingEditions);
+            var ratings = Utils.GetRatings(includedRatings, ratingEditions, this.lotRepository);
 
             var json = new
             {
@@ -134,7 +134,7 @@ namespace Gva.Api.WordTemplates
                     T_DOCUMENTS = new { SUB_DOC = trainings },
                     T_DOCUMENTS2 = new { SUB_DOC = exams },
                     T_DOCUMENTS3 = new { SUB_DOC = simulators },
-                    MED_CERT = this.GetMedCerts(licenceType.Code, includedMedicals, personData),
+                    MED_CERT = this.GetMedCerts(includedMedicals, personData),
                     T_RATING = ratings,
                     L_RATING2 = ratings,
                     L_ABBREV = this.GetAbbreviations()
@@ -281,7 +281,7 @@ namespace Gva.Api.WordTemplates
             return Utils.FillBlankData(simulators, 4);
         }
 
-        private List<object> GetMedCerts(string licenceTypeCode, IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
+        private List<object> GetMedCerts(IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
         {
             var medicals = includedMedicals.Select(m =>
                 new
@@ -300,39 +300,6 @@ namespace Gva.Api.WordTemplates
                 }).ToList<object>();
 
             return Utils.FillBlankData(medicals, 1);
-        }
-
-        private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> editions)
-        {
-            List<object> ratingEditions = new List<object>();
-            foreach (var edition in editions.OrderBy(r => r.Content.DocumentDateValidFrom))
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                var ratingTypesCodes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "";
-                var ratingClassName = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
-                var authorizationCode = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
-                var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
-                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
-                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
-                        .OrderByDescending(epv => epv.Content.Index)
-                        .Last();
-
-                ratingEditions.Add(new
-                {
-                    CLASS_AUTH = string.IsNullOrEmpty(ratingClassName) && string.IsNullOrEmpty(ratingTypesCodes) ?
-                        authorizationCode :
-                        string.Format(
-                            "{0} {1} {2}",
-                            ratingTypesCodes,
-                            ratingClassName,
-                            string.IsNullOrEmpty(authorizationCode) ? string.Empty : " / " + authorizationCode).Trim(),
-                    ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
-                    VALID_DATE = edition.Content.DocumentDateValidTo
-                });
-            }
-
-            ratingEditions = Utils.FillBlankData(ratingEditions, 11);
-            return ratingEditions;
         }
 
         private IEnumerable<object> GetAbbreviations()

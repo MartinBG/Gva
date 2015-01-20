@@ -88,11 +88,11 @@ namespace Gva.Api.WordTemplates
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var otherLicences = this.GetOtherLicences(licenceCaCode, lot, lastEdition, includedLicences);
-            var rtoRating = this.GetRtoRating(includedRatings, ratingEditions);
-            var langLevel = this.GetLangLevels(includedLangCerts);
+            var rtoRating = Utils.GetRtoRating(includedRatings, ratingEditions);
+            var langLevel = Utils.GetLangCerts(includedLangCerts);
             var limitations = this.GetLimitations(lastEdition, includedMedicals, includedExams);
             var ratings = this.GetRatings(includedRatings, ratingEditions);
-            var country = this.GetCountry(personAddress);
+            var country = Utils.GetCountry(personAddress, this.nomRepository);
             var licenceNumber = string.Format(
                 "BGR. {0} - {1} - {2}",
                 licenceType.Code.Replace("/", "."),
@@ -125,7 +125,7 @@ namespace Gva.Api.WordTemplates
                     T_LICENCE_NO = licenceNumber,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom.Value,
                     OTHER_LICENCE2 = otherLicences,
-                    T_MED_CERT = this.GetMedCerts(includedMedicals, personData),
+                    T_MED_CERT = Utils.GetMedCerts(10, includedMedicals, personData),
                     T_DOCUMENTS2 = this.GetDocuments2(licence, includedTrainings),
                     L_RATING = ratings,
                     INSTR_DATA1 = instructorData.Count > 0 ? new { INSTRUCTOR1 = instructorData } : null,
@@ -180,21 +180,6 @@ namespace Gva.Api.WordTemplates
             };
         }
 
-        private NomValue GetCountry(PersonAddressDO personAddress)
-        {
-            int? countryId = personAddress.Settlement != null? personAddress.Settlement.ParentValueId : (int?)null;
-
-            NomValue country = countryId.HasValue ?
-                this.nomRepository.GetNomValue("countries", countryId.Value) :
-                new NomValue
-                {
-                    Name = null,
-                    TextContentString = string.Empty
-                };
-
-            return country;
-        }
-
         private List<object> GetLicencePrivileges()
         {
             return new List<object>()
@@ -237,35 +222,6 @@ namespace Gva.Api.WordTemplates
                 })).ToList();
 
             return otherLicences;
-        }
-
-        private PersonRatingEditionDO GetRtoRating(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
-        {
-            var rtoRatingPart = includedRatings.FirstOrDefault(r => r.Content.Authorization != null && r.Content.Authorization.Code == "RTO");
-
-            List<PersonRatingEditionDO> rtoRatings = new List<PersonRatingEditionDO>();
-            foreach (var edition in ratingEditions)
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null && rating.Content.Authorization.Code == "RTO")
-                {
-                    rtoRatings.Add(edition.Content);
-                }
-            }
-
-            return rtoRatings.OrderBy(e => e.Index).LastOrDefault();
-        }
-
-        private List<object> GetLangLevels(IEnumerable<PersonLangCertDO> includedLangCerts)
-        {
-            return includedLangCerts.Select(l =>
-                new
-                {
-                    LEVEL = l.LangLevel.Name,
-                    ISSUE_DATE = l.DocumentDateValidFrom,
-                    VALID_DATE = l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToShortDateString() : "unlimited"
-                })
-                .ToList<object>();
         }
 
         private List<object> GetLimitations(
@@ -353,30 +309,6 @@ namespace Gva.Api.WordTemplates
             }
 
             return ratings;
-        }
-
-        private List<object> GetMedCerts(IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
-        {
-            var result = includedMedicals.Select(m =>
-                new
-                {
-                    ORDER_NO = "10",
-                    NO = string.Format(
-                        "{0}-{1}-{2}-{3}",
-                        m.DocumentNumberPrefix,
-                        m.DocumentNumber,
-                        personData.Lin,
-                        m.DocumentNumberSuffix),
-                    ISSUE_DATE = m.DocumentDateValidFrom,
-                    VALID_DATE = m.DocumentDateValidTo,
-                    CLASS = m.MedClass.Name.ToUpper(),
-                    PUBLISHER = m.DocumentPublisher.Name,
-                    LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
-                }).ToList<object>();
-
-            var emptyEntry = new List<object>() { new { ORDER_NO = "10" } };
-
-            return result.Count() > 0 ? result : emptyEntry;
         }
 
         private List<object> GetDocuments2(PersonLicenceDO licence, IEnumerable<PersonTrainingDO> includedTrainings)

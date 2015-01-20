@@ -121,7 +121,7 @@ namespace Gva.Api.WordTemplates
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_DOCUMENTS =  trainings,
                     T_DOCUMENTS2 = educations,
-                    T_MED_CERT = this.GetMedCerts(licenceTypeCode, includedMedicals, personData),
+                    T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
                     T_RATING = this.GetRatings(includedRatings, ratingEditions),
                     L_RATING = this.GetSchools(includedRatings, ratingEditions),
                     L_ABBREVIATION = this.GetAbbreviations()
@@ -214,17 +214,7 @@ namespace Gva.Api.WordTemplates
             string[] documentRoleCodes)
         {
             var educationRole = this.nomRepository.GetNomValue("documentRoles", "diploma");
-            var trainings = includedTrainings
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == educationRole.Code)
-                .OrderBy(t => t.DocumentDateValidFrom)
-                .Select(t =>
-                    new
-                    {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
-                        DOC_NO = t.DocumentNumber,
-                        DATE = t.DocumentDateValidFrom,
-                        DOC_PUBLISHER = t.DocumentPublisher
-                    }).ToList<object>();
+            var trainings = Utils.GetTrainingsByCode(includedTrainings, educationRole.Code, documentRoleCodes);
 
             return new List<object>()
             {
@@ -244,18 +234,7 @@ namespace Gva.Api.WordTemplates
             string[] documentRoleCodes)
         {
             var trainingRole = this.nomRepository.GetNomValue("documentRoles", "theoreticalTraining");
-
-            var trainings = includedTrainings
-                .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == trainingRole.Code)
-                .OrderBy(t => t.DocumentDateValidFrom)
-                .Select(t =>
-                    new
-                    {
-                        DOC_TYPE = t.DocumentType.Name.ToLower(),
-                        DOC_NO = t.DocumentNumber,
-                        DATE = t.DocumentDateValidFrom,
-                        DOC_PUBLISHER = t.DocumentPublisher
-                    }).ToList<object>();
+            var trainings = Utils.GetTrainingsByCode(includedTrainings, trainingRole.Code, documentRoleCodes);
 
             return new List<object>()
             {
@@ -270,42 +249,15 @@ namespace Gva.Api.WordTemplates
             };
         }
 
-        private List<object> GetMedCerts(string licenceTypeCode, IEnumerable<PersonMedicalDO> includedMedicals, PersonDataDO personData)
-        {
-            var medicals = includedMedicals.Select(m =>
-                new
-                {
-                    ORDER_NO = this.number++,
-                    NO = string.Format(
-                        "{0}-{1}-{2}-{3}",
-                        m.DocumentNumberPrefix,
-                        m.DocumentNumber,
-                        personData.Lin,
-                        m.DocumentNumberSuffix),
-                    ISSUE_DATE = m.DocumentDateValidFrom,
-                    VALID_DATE = m.DocumentDateValidTo,
-                    CLASS = m.MedClass.Name.ToUpper(),
-                    PUBLISHER = m.DocumentPublisher.Name,
-                    LIMITATION = m.Limitations.Count > 0 ? string.Join(",", m.Limitations.Select(l => l.Name)) : string.Empty
-                }).ToList<object>();
-
-            if (medicals.Count() == 0)
-            { 
-                medicals.Add(new
-                {
-                    ORDER_NO = this.number++
-                });
-            }
-
-            return medicals;
-        }
-
         private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
         {
             List<object> ratings = new List<object>();
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                var ratingTypesCodes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "";
+                var ratingClassCodes = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
+                var authorizationCode = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
                 var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
                         .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
                         .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
@@ -316,19 +268,18 @@ namespace Gva.Api.WordTemplates
                 {
                     TYPE = string.Format(
                            "{0} {1}",
-                           rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Name,
-                           rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : ""),
+                           ratingClassCodes,
+                           ratingTypesCodes),
                     AUTH_NOTES = string.Format(
                         "{0} {1}",
-                        rating.Content.Authorization == null ? null : rating.Content.Authorization.Code,
+                        authorizationCode,
                         edition.Content.Notes),
                     ISSUE_DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                     VALID_DATE = edition.Content.DocumentDateValidTo
                 });
             }
 
-            ratings = Utils.FillBlankData(ratings, 11);
-            return ratings;
+            return Utils.FillBlankData(ratings, 11);
         }
 
         private object[] GetSchools(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)

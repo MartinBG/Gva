@@ -55,7 +55,7 @@ namespace Gva.Api.WordTemplates
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
-            var country = this.GetCountry(personAddress);
+            var country = Utils.GetCountry(personAddress, this.nomRepository);
             string licenceCode = licence.LicenceType.Code;
             var licenceNumber = string.Format(
                 "BG.66.A {0} - {1}",
@@ -70,9 +70,13 @@ namespace Gva.Api.WordTemplates
                     personData.MiddleNameAlt,
                     personData.LastNameAlt).ToUpper();
 
-            var categoryNP = this.GetCategoryNP(includedRatings, ratingEditions);
+            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "B 3", "C" };
+            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "9", "10", "11" };
+            var categoryNP = Utils.GetCategoryNP(includedRatings, ratingEditions,validAliases, validCodes, this.nomRepository, this.lotRepository);
+            var acLimitations = Utils.GetACLimitations(includedRatings, ratingEditions, validAliases, validCodes, this.nomRepository);
+
             var limitations = lastEdition.AmlLimitations != null ? this.GetLimitations(lastEdition) : new object[0];
-            var acLimitations = this.GetACLimitations(includedRatings, ratingEditions);
+
             var json = new
             {
                 root = new
@@ -121,8 +125,8 @@ namespace Gva.Api.WordTemplates
                     CAT1 = "A",
                     CAT2 = "B 1",
                     CAT3 = "B 2",
-                    CAT4 = "B 3",
-                    CAT5 = "C",
+                    CAT4 = "C",
+                    CAT5 = "B 3",
                     CATEGORIES = this.GetCategories(includedRatings),
                     IS_DATE = lastEdition.DocumentDateValidFrom,
                     NA = categoryNP.Length == 0 ? "NOT APPLICABLE" : " ",
@@ -141,20 +145,6 @@ namespace Gva.Api.WordTemplates
             };
 
             return json;
-        }
-
-        private NomValue GetCountry(PersonAddressDO personAddress)
-        {
-            int? countryId = personAddress.Settlement != null ? personAddress.Settlement.ParentValueId : (int?)null;
-            NomValue country = countryId.HasValue ?
-                this.nomRepository.GetNomValue("countries", countryId.Value) :
-                new NomValue
-                {
-                    Name = null,
-                    TextContentString = string.Empty
-                };
-
-            return country;
         }
 
         private object[] GetAircrafts(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
@@ -259,66 +249,6 @@ namespace Gva.Api.WordTemplates
             }
 
             return categories.ToArray();
-        }
-
-        private object[] GetCategoryNP(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
-        {
-            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "B 3", "C" };
-            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "9", "10", "11" };
-
-            List<object> categories = new List<object>();
-            foreach (var edition in ratingEditions)
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
-                    validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")) &&
-                    edition.Content.Limitations != null && edition.Content.Limitations.Count > 0)
-                {
-                    var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
-                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
-                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
-                        .OrderByDescending(epv => epv.Content.Index)
-                        .Last();
-
-                    categories.Add(new
-                    {
-                        TYPE = rating.Content.AircraftTypeGroup.Name,
-                        CAT = rating.Content.AircraftTypeCategory.Code,
-                        DATE_FROM = firstRatingEdition.Content.DocumentDateValidFrom,
-                        DATE_TO = edition.Content.DocumentDateValidTo,
-                        LIMIT = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
-                    });
-                }
-            }
-
-            return categories.ToArray();
-        }
-
-        private object[] GetACLimitations(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
-        {
-            List<string> validAliases = new List<string> { "A", "B 1", "B 2", "B 3", "C" };
-            List<string> validCodes = new List<string> { "1", "2", "3", "4", "5", "9", "10", "11" };
-
-            List<object> acLimitations = new List<object>();
-            foreach (var edition in ratingEditions)
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.AircraftTypeGroup != null && rating.Content.AircraftTypeCategory != null &&
-                    validCodes.Contains(this.nomRepository.GetNomValue("aircraftGroup66", rating.Content.AircraftTypeCategory.ParentValueId.Value).Code) &&
-                    validAliases.Contains(this.nomRepository.GetNomValue("aircraftClases66", rating.Content.AircraftTypeCategory.NomValueId).TextContent.Get<string>("alias")) &&
-                    (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0))
-                {
-                    acLimitations.Add(new
-                    {
-                        AIRCRAFT = rating.Content.AircraftTypeGroup.Name,
-                        CAT = rating.Content.AircraftTypeCategory.Code,
-                        LIM = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
-                    });
-                }
-            }
-
-            return acLimitations.ToArray();
         }
 
         private object[] GetLimitations(PersonLicenceEditionDO lastLicenceEdition)

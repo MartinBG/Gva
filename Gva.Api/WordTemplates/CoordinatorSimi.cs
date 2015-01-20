@@ -82,26 +82,11 @@ namespace Gva.Api.WordTemplates
                 NomValue accessOrderWorkAloneRole = this.nomRepository.GetNomValue("documentRoles", "accessOrderWorkAlone");
                 NomValue checkAtWorkRole = this.nomRepository.GetNomValue("documentRoles", "checkAtWork");
 
-                if (documentRoleCodes.Contains(theoreticalExamRole.Code) || documentRoleCodes.Contains(practicalExamRole.Code))
-                {
-                    practicalExams = this.GetExams(includedExams, includedChecks, includedTrainings, practicalExamRole);
-                    theoreticalExams = this.GetExams(includedExams, includedChecks, includedTrainings, theoreticalExamRole);
-                }
-
-                if (documentRoleCodes.Contains(checkAtWorkRole.Code))
-                {
-                    checksAtWork = Utils.FillBlankData(this.GetChecks(includedChecks, checkAtWorkRole), 1);
-                }
-
-                if (documentRoleCodes.Contains(accessOrderWorkAloneRole.Code))
-                {
-                    accessOrderWorkAlone = Utils.FillBlankData(this.GetTrainings(includedTrainings, accessOrderWorkAloneRole), 1);
-                }
-
-                if (documentRoleCodes.Contains(accessOrderPractEducationRole.Code))
-                {
-                    accessOrderPractEducation = Utils.FillBlankData(this.GetTrainings(includedTrainings, accessOrderPractEducationRole), 1);
-                }
+                practicalExams = Utils.GetExamsByCode(includedExams, includedChecks, includedTrainings, practicalExamRole.Code, documentRoleCodes);
+                theoreticalExams = Utils.GetExamsByCode(includedExams, includedChecks, includedTrainings, theoreticalExamRole.Code, documentRoleCodes);
+                checksAtWork = Utils.GetChecksByCode(includedChecks, checkAtWorkRole.Code, documentRoleCodes);
+                accessOrderWorkAlone = Utils.GetTrainingsByCode(includedTrainings, accessOrderWorkAloneRole.Code, documentRoleCodes);
+                accessOrderPractEducation = Utils.GetTrainingsByCode(includedTrainings, accessOrderPractEducationRole.Code, documentRoleCodes);
             }
 
             IEnumerable<PersonLangCertDO> engLevels = includedLangCerts.Where(t => t.DocumentRole.Alias == "engCert" && t.LangLevel != null);
@@ -126,7 +111,7 @@ namespace Gva.Api.WordTemplates
                 .ToList<object>();
             }
 
-            var endorsements = this.GetEndorsements(includedRatings, ratingEditions);
+            var endorsements = Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository);
             var tEndorsements = this.GetTEndorsements(includedRatings, ratingEditions);
             var lEndorsements = this.GetLEndorsements(includedRatings, ratingEditions, engLevels);
 
@@ -149,7 +134,7 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_NO = licenceNumber,
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),
-                    ENDORSEMENT = endorsements,
+                    ENDORSEMENT = Utils.FillBlankData(endorsements, 2),
                     L_ENDORSEMENT = lEndorsements,
                     L_LANG_LEVEL = Utils.FillBlankData(lLangLevel, 1),
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
@@ -162,11 +147,11 @@ namespace Gva.Api.WordTemplates
                     T_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     T_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     T_LANG_LEVEL = Utils.FillBlankData(tLangLevel, 1),
-                    T_THEORETICAL_EXAM = theoreticalExams,
-                    T_ACCESS_ORDER_PRACTICAL_EDUC = accessOrderPractEducation,
-                    T_PRACTICAL_EXAM = practicalExams,
-                    T_CHECK_AT_WORK = checksAtWork,
-                    T_ACCESS_ORDER_WORK_ALONE = accessOrderWorkAlone,
+                    T_THEORETICAL_EXAM = Utils.FillBlankData(theoreticalExams, 1),
+                    T_ACCESS_ORDER_PRACTICAL_EDUC = Utils.FillBlankData(accessOrderPractEducation, 1),
+                    T_PRACTICAL_EXAM = Utils.FillBlankData(practicalExams, 1),
+                    T_CHECK_AT_WORK = Utils.FillBlankData(checksAtWork, 1),
+                    T_ACCESS_ORDER_WORK_ALONE = Utils.FillBlankData(accessOrderWorkAlone, 1),
                     L_ABBREVIATION = this.GetAbbreviations()
                 }
             };
@@ -215,83 +200,6 @@ namespace Gva.Api.WordTemplates
                     COUNTRY_CODE = nationality != null? nationality.TextContent.Get<string>("nationalityCodeCA") : null
                 }
             };
-        }
-
-
-        private List<object> GetExams(
-            IEnumerable<PersonTrainingDO> includedExams,
-            IEnumerable<PersonCheckDO> includedChecks,
-            IEnumerable<PersonTrainingDO> includedTrainings,
-            NomValue examRole)
-        {
-            var exams = includedExams.Where(d => d.DocumentRole.Code == examRole.Code)
-               .Select(t => new
-               {
-                   DOC_TYPE = t.DocumentType.Name.ToLower(),
-                   DOC_NO = t.DocumentNumber,
-                   DATE = t.DocumentDateValidFrom,
-                   DOC_PUBLISHER = t.DocumentPublisher
-               })
-               .ToList<object>();
-
-            var trainings = this.GetTrainings(includedTrainings, examRole);
-            var checks = this.GetChecks(includedChecks, examRole);
-
-            return Utils.FillBlankData(exams.Union(checks).Union(trainings).ToList<object>(), 1);
-        }
-
-        private List<object> GetChecks(
-            IEnumerable<PersonCheckDO> includedChecks,
-            NomValue checkRole)
-        {
-            return includedChecks.Where(d => d.Valid.Code == "Y" && d.DocumentRole.Code == checkRole.Code)
-                 .Select(t => new
-                 {
-                    DOC_TYPE = t.DocumentType.Name.ToLower(),
-                    DOC_NO = t.DocumentNumber,
-                    DATE = t.DocumentDateValidFrom,
-                    DOC_PUBLISHER = t.DocumentPublisher
-                 })
-                 .ToList<object>();
-        }
-
-        private List<object> GetTrainings(
-            IEnumerable<PersonTrainingDO> includedTrainings,
-            NomValue trainingRole)
-        {
-            return includedTrainings.Where(d => d.Valid.Code == "Y" && d.DocumentRole.Code == trainingRole.Code)
-                 .Select(t => new
-                 {
-                     DOC_TYPE = t.DocumentType.Name.ToLower(),
-                     DOC_NO = t.DocumentNumber,
-                     DATE = t.DocumentDateValidFrom,
-                     DOC_PUBLISHER = t.DocumentPublisher
-                 })
-                 .ToList<object>();
-        }
-
-        private List<object> GetEndorsements(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
-        {
-            List<object> endosments = new List<object>();
-            foreach(var edition in ratingEditions)
-            {
-                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if(rating.Content.Authorization != null)
-                {
-                    var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
-                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
-                        .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
-                        .OrderByDescending(epv => epv.Content.Index)
-                        .Last();
-
-                    endosments.Add(new {
-                        NAME = rating.Content.Authorization.Code,
-                        DATE = firstRatingEdition.Content.DocumentDateValidFrom
-                    });
-                }
-            };
-
-            return Utils.FillBlankData(endosments, 2);
         }
 
         private List<object> GetTEndorsements(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
