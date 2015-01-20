@@ -4,6 +4,7 @@
   angular.module('gva').config(['l10nProvider', function (l10n) {
     l10n.add('bg-bg', {
       common: {
+        title: 'Лицензиране на авиационен персонал, въздухоплавателни средства и летателна годност',
         messages: {
           confirmDelete: 'Сигурни ли сте, че искате да изтриете данните?'
         },
