@@ -90,7 +90,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                     .Include(a => a.GvaAppLotPart)
                     .Include(a => a.Lot.Set)
-                    .Include(a => a.GvaAppLotPart)
                     .Where(a => a.Lot.Set.Alias == "person")
 
                 join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
@@ -172,11 +171,9 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.GvaAppLotPart)
                     where a.Lot.Set.Alias == "aircraft"
 
-                    join va in this.unitOfWork.DbContext.Set<GvaViewApplication>()
-                    .Include(a => a.ApplicationType) on a.GvaAppLotPartId equals va.PartId into va1
+                    join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(a => a.ApplicationType) on a.GvaAppLotPartId equals va.PartId into va1
                     from va2 in va1.DefaultIfEmpty()
 
                     join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
@@ -260,7 +257,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.GvaAppLotPart)
                     where a.Lot.Set.Alias == "organization"
 
                     join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
@@ -341,7 +337,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.GvaAppLotPart)
                     where a.Lot.Set.Alias == "equipment"
 
                     join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
@@ -424,7 +419,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                        .Include(a => a.GvaAppLotPart)
                     where a.Lot.Set.Alias == "airport"
 
                     join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
