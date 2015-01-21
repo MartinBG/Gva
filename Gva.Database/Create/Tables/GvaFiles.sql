@@ -6,7 +6,8 @@ CREATE TABLE [dbo].[GvaFiles] (
     [Filename]      NVARCHAR (100)   NOT NULL,
     [MimeType]      NVARCHAR (50)    NULL,
     [FileContentId] UNIQUEIDENTIFIER NOT NULL,
-    CONSTRAINT [PK_GvaFiles] PRIMARY KEY ([GvaFileId])
+    CONSTRAINT [PK_GvaFiles]       PRIMARY KEY ([GvaFileId]),
+    CONSTRAINT [FK_GvaFiles_Blobs] FOREIGN KEY ([FileContentId]) REFERENCES [dbo].[Blobs] ([Key])
 )
 GO
 
