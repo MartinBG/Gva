@@ -90,7 +90,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                     .Include(a => a.GvaAppLotPart)
                     .Include(a => a.Lot.Set)
-                    .Where(a => a.Lot.Set.Alias == "person")
+                    .Where(a => a.Lot.Set.Alias == "person" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
 
                 join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
                 from gas2 in gas1.DefaultIfEmpty()
@@ -171,7 +171,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                    where a.Lot.Set.Alias == "aircraft"
+                    where a.Lot.Set.Alias == "aircraft" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
 
                     join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(a => a.ApplicationType) on a.GvaAppLotPartId equals va.PartId into va1
                     from va2 in va1.DefaultIfEmpty()
@@ -257,7 +257,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                    where a.Lot.Set.Alias == "organization"
+                    where a.Lot.Set.Alias == "organization" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
 
                     join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
                     from gas2 in gas1.DefaultIfEmpty()
@@ -337,7 +337,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                    where a.Lot.Set.Alias == "equipment"
+                    where a.Lot.Set.Alias == "equipment" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
 
                     join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
                     from gas2 in gas1.DefaultIfEmpty()
@@ -419,7 +419,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
-                    where a.Lot.Set.Alias == "airport"
+                    where a.Lot.Set.Alias == "airport" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
 
                     join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
                     from gas2 in gas1.DefaultIfEmpty()
@@ -493,7 +493,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             return this.unitOfWork.DbContext.Set<GvaApplication>()
                 .Include(a => a.GvaAppLotPart)
-                .Where(a => a.LotId == lotId && a.GvaAppLotPart != null)
+                .Where(a => a.LotId == lotId && a.GvaAppLotPart != null && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
                 .ToArray();
         }
 
@@ -604,16 +604,22 @@ namespace Gva.Api.Repositories.ApplicationRepository
             List<CaseTypePartDO<DocumentApplicationDO>> partVersionDOs = new List<CaseTypePartDO<DocumentApplicationDO>>();
             foreach (var partVersion in partVersions)
             {
+                var gvaApplication = this.unitOfWork.DbContext.Set<GvaApplication>()
+                    .Include(a => a.GvaAppLotPart)
+                    .Include(a => a.Doc.DocStatus)
+                    .Where(a => a.GvaAppLotPartId == partVersion.PartId && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
+                    .FirstOrDefault();
+
+                if (gvaApplication == null) 
+                {
+                    continue;
+                }
+
                 var stages = this.unitOfWork.DbContext.Set<GvaApplicationStage>()
                     .Include(s => s.GvaStage)
                     .Where(s => s.GvaApplication.LotId == lotId && s.GvaApplication.GvaAppLotPartId == partVersion.PartId)
                     .OrderByDescending(a => a.GvaAppStageId)
                     .ToList();
-
-                var gvaApplication = this.unitOfWork.DbContext.Set<GvaApplication>()
-                    .Include(a => a.GvaAppLotPart)
-                    .Where(a => a.GvaAppLotPartId == partVersion.PartId)
-                    .Single();
 
                 partVersion.Content.ApplicationId = gvaApplication.GvaApplicationId;
 

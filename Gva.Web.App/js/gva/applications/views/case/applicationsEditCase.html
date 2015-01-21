@@ -21,6 +21,10 @@
         </td>
         <td></td>
         <td style="text-align: right;">
+          <div ng-if="adc.docDocStatusAlias !== 'Canceled'">
+            <a ng-click="cancelStatus(adc.docId, adc.docVersion)" l10n-text="applications.edit.case.cancelApplication"></a>
+            <br />
+          </div>
           <a ng-click="childDoc(adc.docId)" l10n-text="applications.edit.case.childDoc"></a>
           <br />
           <a ng-click="nextStatus(adc.docId, adc.docVersion)" ng-hide="!adc.nextStatusText">{{adc.nextStatusText}}</a>

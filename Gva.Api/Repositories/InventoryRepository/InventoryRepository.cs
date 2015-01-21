@@ -31,7 +31,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                 from df in dfg.DefaultIfEmpty()
                 join gf in this.unitOfWork.DbContext.Set<GvaFile>() on f.GvaFileId equals gf.GvaFileId into gfg
                 from gf in gfg.DefaultIfEmpty()
-                join ga in this.unitOfWork.DbContext.Set<GvaApplication>() on i.PartId equals ga.GvaAppLotPartId into gai
+                join ga in this.unitOfWork.DbContext.Set<GvaApplication>().Include(a => a.Doc.DocStatus) on i.PartId equals ga.GvaAppLotPartId into gai
                 from ga in gai.DefaultIfEmpty()
                 select new
                 {
@@ -42,6 +42,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                     PartIndex = i.Part.Index,
                     ParentPartIndex = (int?)i.ParentPart.Index,
                     ApplicationId = (int?) ga.GvaApplicationId,
+                    DocStatus = ga.DocId.HasValue ? ga.Doc.DocStatus : null,
                     Name = i.Name,
                     Type = i.Type,
                     Number = i.Number,
@@ -62,7 +63,8 @@ namespace Gva.Api.Repositories.InventoryRepository
 
             var predicate =
                 PredicateBuilder.True(query)
-                .And(i => i.LotId == lotId);
+                .And(i => i.LotId == lotId)
+                .And(i => i.DocStatus == null || i.DocStatus.Alias != "Canceled");
 
             if (caseTypeId != null)
             {

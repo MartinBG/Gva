@@ -30,6 +30,17 @@
       return adc;
     });
 
+    $scope.cancelStatus = function (docId, docVersion) {
+      return DocStatuses.cancel({
+        id: docId,
+        docVersion: docVersion
+      }, {}).$promise.then(function () {
+        return $state.transitionTo(
+          'root.applications.search',
+          { set: $scope.application.lotSetAlias.toLowerCase() });
+      });
+    };
+
     $scope.nextStatus = function (docId, docVersion) {
       return DocStatuses.next({
         docId: docId,
