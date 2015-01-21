@@ -4,7 +4,9 @@
 
   function InventorySearchCtrl(
     $scope,
+    $state,
     $stateParams,
+    scModal,
     inventory
   ) {
     $scope.inventory = inventory;
@@ -14,6 +16,25 @@
     $scope.notIndexed = _.filter(inventory, function(item) {
        return !item.bookPageNumber;
     });
+
+    $scope.changeCaseType = function (item) {
+      var params = {
+        setPartAlias: item.setPartAlias,
+        partIndex: item.partIndex,
+        parentPartIndex: item.parentPartIndex,
+        applicationId: item.applicationId,
+        lotId: $stateParams.id
+      };
+
+      var modalInstance = scModal.open('changeCaseType', params);
+      modalInstance.result.then(function (caseType) {
+        if (caseType) {
+          $state.go($state.current, $stateParams, {reload: true});
+        }
+      });
+
+      return modalInstance.opened;
+    };
 
     $scope.getState = function (item) {
       var params,
@@ -26,7 +47,7 @@
           ind: item.partIndex,
           id: item.applicationId,
           set: 'person',
-          lotId: $stateParams.id
+          lotId: parseInt($stateParams.id, 10)
         };
       } else {
         params = { ind: item.partIndex };
@@ -89,7 +110,9 @@
 
   InventorySearchCtrl.$inject = [
     '$scope',
+    '$state',
     '$stateParams',
+    'scModal',
     'inventory'
   ];
 

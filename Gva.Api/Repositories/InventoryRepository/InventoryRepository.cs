@@ -25,7 +25,7 @@ namespace Gva.Api.Repositories.InventoryRepository
         {
             var query =
                 from i in this.unitOfWork.DbContext.Set<GvaViewInventoryItem>().Include(i => i.Type)
-                join f in this.unitOfWork.DbContext.Set<GvaLotFile>() on i.PartId equals f.LotPartId into fg
+                join f in this.unitOfWork.DbContext.Set<GvaLotFile>().Include(f => f.GvaCaseType) on i.PartId equals f.LotPartId into fg
                 from f in fg.DefaultIfEmpty()
                 join df in this.unitOfWork.DbContext.Set<DocFile>() on f.DocFileId equals df.DocFileId into dfg
                 from df in dfg.DefaultIfEmpty()
@@ -37,7 +37,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                 {
                     i.LotId,
                     GvaCaseTypeId = (int?)f.GvaCaseTypeId,
-
+                    GvaCaseTypeName = f.GvaCaseType.Name,
                     SetPartAlias = i.SetPartAlias,
                     PartIndex = i.Part.Index,
                     ParentPartIndex = (int?)i.ParentPart.Index,
@@ -77,6 +77,7 @@ namespace Gva.Api.Repositories.InventoryRepository
                 .Select(i => new InventoryItemDO
                 {
                     SetPartAlias = i.SetPartAlias,
+                    CaseTypeName = i.GvaCaseTypeName,
                     PartIndex = i.PartIndex,
                     ParentPartIndex = i.ParentPartIndex,
                     ApplicationId = i.ApplicationId,

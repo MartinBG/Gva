@@ -1,0 +1,18 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="persons.changeCaseTypeModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="canceltn" btn-click="cancel()" text="persons.changeCaseTypeModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <sc-datatable items="caseTypes" filterable="true" pageable="false" sortable="true" dynamic-columns="false">
+       <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+        <sc-button name="selectBtn" class="btn btn-xs btn-primary" btn-click="selectCaseType(item)" l10n-text="persons.changeCaseTypeModal.select"></sc-button>
+      </sc-column>
+      <sc-column data="name" title="persons.changeCaseTypeModal.name">
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>

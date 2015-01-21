@@ -14,6 +14,8 @@ namespace Gva.Api.ModelsDO
 
         public string Name { get; set; }
 
+        public string CaseTypeName { get; set; }
+
         public string Type { get; set; }
 
         public string Number { get; set; }

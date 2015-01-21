@@ -4,6 +4,15 @@
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editBtn" btn-sref="getState(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
+    <sc-column sortable="false" class="buttons-cell" has-content="true" title="persons.inventorySearch.caseType">
+      <a ng-if="item.setPartAlias !== 'personLicence' && item.setPartAlias !== 'personDocumentId' && item.setPartAlias !== 'personEducation'"
+            name="editBtn" ng-click="changeCaseType(item)">
+        {{item.caseTypeName}}
+      </a>
+      <span ng-if="item.setPartAlias === 'personLicence' || item.setPartAlias === 'personDocumentId' || item.setPartAlias === 'personEducation'">
+        {{item.caseTypeName}}
+      </span>
+    </sc-column>
     <sc-column data="bookPageNumber" title="persons.inventorySearch.bookPageNumber">
     </sc-column>
     <sc-column data="name" title="persons.inventorySearch.document">
@@ -38,6 +47,15 @@
     row-class="{'invalidDocument' : isInvalidDocument(item), 'expiredDocument' : (!isInvalidDocument(item) && isExpiredDocument(item)), 'expiringDocument' : isExpiringDocument(item)}">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editBtn" btn-sref="getState(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-column>
+        <sc-column sortable="false" class="buttons-cell" has-content="true" title="persons.inventorySearch.caseType">
+      <a ng-if="item.setPartAlias !== 'personLicence' && item.setPartAlias !== 'personDocumentId' && item.setPartAlias !== 'personEducation'"
+            name="editBtn" ng-click="changeCaseType(item)">
+        {{item.caseTypeName}}
+      </a>
+      <span ng-if="item.setPartAlias === 'personLicence' || item.setPartAlias === 'personDocumentId' || item.setPartAlias === 'personEducation'">
+        {{item.caseTypeName}}
+      </span>
     </sc-column>
     <sc-column data="name" title="persons.inventorySearch.document" class="wrap">
     </sc-column>

@@ -2268,6 +2268,7 @@
           deleteFlyingExp: 'Изтрий'
         },
         inventorySearch: {
+          caseType: 'Тип дело',
           bookPageNumber: '№ на стр.',
           document: 'Документ',
           type: 'Вид',
@@ -2473,6 +2474,12 @@
           save: 'Запис',
           print: 'Преглед за печат',
           generateNew: 'Прегенерирай'
+        },
+        changeCaseTypeModal: {
+          title: 'Промяна на типа дело',
+          cancel: 'Отказ',
+          select: 'Избери',
+          name: 'Наименование'
         },
         licencesSearch: {
           newLicence: 'Нов лиценз',
