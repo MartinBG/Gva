@@ -64,8 +64,8 @@
     };
 
     $scope.exitApplication = function () {
-      delete $stateParams.appId;
-      $state.transitionTo($state.current, $stateParams, { reload: true });
+      delete $state.params.appId;
+      $state.transitionTo($state.current, $state.params, { reload: true });
     };
   }
 
