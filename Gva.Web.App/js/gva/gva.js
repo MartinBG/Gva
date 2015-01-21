@@ -99,6 +99,11 @@
       controller: 'PersonDocumentEmploymentCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaPersonDocumentLangCert',
+      templateUrl: 'js/gva/persons/forms/personDocumentLangCert.html',
+      controller: 'PersonDocumentLangCertCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonCommonDoc',
       templateUrl: 'js/gva/persons/forms/personCommonDocument.html',
       controller: 'PersonCommonDocCtrl'

@@ -15,6 +15,7 @@
     PersonDocumentChecks,
     PersonDocumentTrainings,
     PersonDocumentOthers,
+    PersonDocumentLangCerts,
     OrganizationDocumentOthers,
     AircraftDocumentOthers,
     AircraftDocumentOccurrences,
@@ -122,6 +123,13 @@
               $scope.showPDocumentOther = !!documentOthers;
             });
         }
+        else if ($scope.docPartType.alias === 'personLangCert') {
+          return PersonDocumentLangCerts.query({ id: $scope.application.lotId })
+            .$promise.then(function (langCerts) {
+              $scope.documentPart = langCerts;
+              $scope.showPDocumentLangCert = !!langCerts;
+            });
+        }
         else if ($scope.docPartType.alias === 'organizationOther') {
           return OrganizationDocumentOthers.query({ id: $scope.application.lotId })
             .$promise.then(function (organizationOthers) {
@@ -218,6 +226,7 @@
     'PersonDocumentChecks',
     'PersonDocumentTrainings',
     'PersonDocumentOthers',
+    'PersonDocumentLangCerts',
     'OrganizationDocumentOthers',
     'AircraftDocumentOthers',
     'AircraftDocumentOccurrences',

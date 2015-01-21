@@ -9,22 +9,12 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-common-doc name="personDocumentForm" ng-model="newLangCert"
-        sc-form-params="{ isNew: true, caseTypeId: caseTypeId, categoryAlias: 'languageCert', appId: appId, withoutCertsAliases: withoutCertsAliases }">
-      </gva-person-common-doc>
-
-      <div ng-show="newLangCert.case.caseType">
-      <h5 class="form-header" l10n-text="persons.newLangCertModal.langCertData"></h5>
-      <div class="row">
-        <sc-field type="nomenclature" ng-model="langLevelModel.langLevel" alias="'langLevels'" params="{ roleAlias: langCert.part.documentRole.alias }" l10n-text="persons.newLangCertModal.langLevel" class="col-sm-3 col-md-2"></sc-field>
-        <sc-field type="date" ng-model="langLevelModel.changeDate" l10n-text="persons.newLangCertModal.changeDate" class="col-sm-2 col-md-2"></sc-field>
-      </div>
-
-      <gva-person-common-doc-classification name="personDocumentClassificationForm" ng-model="newLangCert"></gva-person-common-doc-classification>
+      <gva-person-document-lang-cert name="personDocumentLangCertForm" ng-model="newLangCert"
+      sc-form-params="{ isNew: true, caseTypeId: caseTypeId, appId: appId, lotId: lotId, withoutCertsAliases: withoutCertsAliases}">
+     </gva-person-document-lang-cert>
 
       <gva-common-scanned-document name="personScannedDocumentForm" ng-model="newLangCert.case"
-        sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
-
+      sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>

@@ -1,0 +1,30 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <gva-person-common-doc name="personDocumentForm" ng-model="model"
+      sc-form-params="{ isNew: isNew, caseTypeId: caseTypeId, categoryAlias: 'languageCert', hideCaseType: hideCaseType, appId: appId, withoutCertsAliases: withoutCertsAliases }">
+  </gva-person-common-doc>
+
+  <div ng-show="model.case.caseType">
+    <h5 class="form-header" l10n-text="persons.personDocumentLangCertDirective.langCertData"></h5>
+    <div class="row">
+      <sc-field  ng-if="isNew" type="nomenclature" ng-model="model.part.langLevel" alias="'langLevels'" params="{ roleAlias: model.part.documentRole.alias }" l10n-text="persons.newDocumentLangCert.langLevel" class="col-sm-3 col-md-2"></sc-field>
+     
+      <sc-field-group  ng-if="!isNew" class="col-sm-3" text="persons.personDocumentLangCertDirective.langLevel">
+        <sc-nomenclature alias="'langLevels'" ng-model="model.part.langLevel" ng-readonly="true"></sc-nomenclature>
+        <sc-button name="viewLevelsBtn" btn-click="viewLangLevels()" class="btn btn-default" icon="glyphicon-pencil"></sc-button>
+      </sc-field-group>
+    </div>
+    <div ng-if="!isNew">
+      <h5 class="table-header" style="margin-top: 10px" l10n-text="persons.personDocumentLangCertDirective.langLevelEntries"></h5>
+      <sc-datatable items="model.part.langLevelEntries" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false" default-sort="changeDate">
+        <sc-column data="changeDate" type="date" title="persons.licenceView.changeDate">
+        </sc-column>
+        <sc-column data="langLevel.name" title="persons.personDocumentLangCertDirective.langLevel">
+        </sc-column>
+      </sc-datatable>
+    </div>
+
+    <gva-person-common-doc-classification name="personDocumentClassificationForm" ng-model="model"></gva-person-common-doc-classification>
+
+  </div>
+</div>
+</ng-form>

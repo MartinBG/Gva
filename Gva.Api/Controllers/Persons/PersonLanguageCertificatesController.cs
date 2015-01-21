@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
@@ -35,7 +36,8 @@ namespace Gva.Api.Controllers.Persons
             PersonLangCertDO newLangCert = new PersonLangCertDO()
             {
                 DocumentDateValidFrom = DateTime.Now,
-                Valid = this.nomRepository.GetNomValue("boolean", "yes")
+                Valid = this.nomRepository.GetNomValue("boolean", "yes"),
+                LangLevelEntries = new List<PersonLangLevelDO>()
             };
 
             return Ok(new CaseTypePartDO<PersonLangCertDO>(newLangCert));

@@ -537,6 +537,8 @@
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementNewCtrl.js" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearch.html" />
     <Content Include="js\gva\organizations\views\staffManagement\staffManagementSearchCtrl.js" />
+    <Content Include="js\gva\persons\forms\personDocumentLangCert.html" />
+    <Content Include="js\gva\persons\forms\personDocumentLangCertCtrl.js" />
     <Content Include="js\gva\persons\forms\personReport.html" />
     <Content Include="js\gva\persons\forms\personReportCtrl.js" />
     <Content Include="js\gva\persons\forms\personStatusCtrl.js" />

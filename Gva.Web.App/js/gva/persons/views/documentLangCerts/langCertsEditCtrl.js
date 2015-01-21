@@ -60,18 +60,6 @@
         }
       });
     };
-
-    $scope.viewLangLevels = function () {
-      var params = {
-        langCert: $scope.personDocumentLangCert,
-        lotId: $stateParams.id
-      };
-
-      var modalInstance = scModal.open('langLevelEntries', params);
-
-      return modalInstance.opened;
-    };
-
   }
 
   DocumentLangCertsEditCtrl.$inject = [
@@ -80,7 +68,6 @@
     '$stateParams',
     'PersonDocumentLangCerts',
     'personDocumentLangCert',
-    'scModal',
     'scMessage'
   ];
 

@@ -7,12 +7,10 @@
     $modalInstance,
     PersonDocumentLangCerts,
     scModalParams,
-    newLangCert,
-    langLevelModel
+    newLangCert
   ) {
     $scope.form = {};
     $scope.newLangCert = newLangCert;
-    $scope.langLevelModel = langLevelModel;
     $scope.caseTypeId = scModalParams.caseTypeId;
     $scope.appId = scModalParams.appId;
     $scope.lotId = scModalParams.lotId;
@@ -22,12 +20,6 @@
       return $scope.form.newLangCertForm.$validate()
         .then(function () {
           if ($scope.form.newLangCertForm.$valid) {
-            if (!$scope.newLangCert.part.langLevelEntries) {
-              $scope.newLangCert.part.langLevelEntries = [];
-            }
-
-            $scope.newLangCert.part.langLevelEntries.push($scope.langLevelModel);
-
             return PersonDocumentLangCerts
               .save({ id: $scope.lotId }, $scope.newLangCert)
               .$promise
@@ -48,8 +40,7 @@
     '$modalInstance',
     'PersonDocumentLangCerts',
     'scModalParams',
-    'newLangCert',
-    'langLevelModel'
+    'newLangCert'
   ];
 
   NewLangCertModalCtrl.$resolve = {
@@ -59,15 +50,6 @@
       function (PersonDocumentLangCerts, scModalParams) {
         return PersonDocumentLangCerts.newLangCert({
           id: scModalParams.lotId
-        }).$promise;
-      }
-    ],
-    langLevelModel: [
-      '$stateParams',
-      'PersonDocumentLangCerts',
-      function ($stateParams, PersonDocumentLangCerts) {
-        return PersonDocumentLangCerts.newLangLevel({
-          id: $stateParams.id
         }).$promise;
       }
     ]

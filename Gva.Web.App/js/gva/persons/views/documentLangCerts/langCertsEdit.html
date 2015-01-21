@@ -16,32 +16,12 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-person-common-doc name="personDocumentForm" ng-model="personDocumentLangCert"
-          sc-form-params="{ isNew: false, caseTypeId: caseTypeId, categoryAlias: 'languageCert', hideCaseType: hideCaseType, appId: appId }">
-      </gva-person-common-doc>
+      <gva-person-document-lang-cert name="personDocumentLangCertForm" ng-model="personDocumentLangCert"
+        sc-form-params="{ isNew: false, caseTypeId: caseTypeId, appId: appId, lotId: lotId }">
+      </gva-person-document-lang-cert>
 
-      <div ng-show="personDocumentLangCert.case.caseType">
-        <h5 class="form-header" l10n-text="persons.personDocumentLangCertDirective.langCertData"></h5>
-        <div class="row">
-          <sc-field-group class="col-sm-3" text="persons.personDocumentLangCertDirective.langLevel">
-            <sc-nomenclature alias="'langLevels'" ng-model="personDocumentLangCert.part.langLevel" ng-readonly="true"></sc-nomenclature>
-            <sc-button name="viewLevelsBtn" btn-click="viewLangLevels()" class="btn btn-default" icon="glyphicon-pencil" ng-disabled="!editMode"></sc-button>
-          </sc-field-group>
-        </div>
-
-        <h5 class="table-header" style="margin-top: 0px" l10n-text="persons.personDocumentLangCertDirective.langLevelEntries"></h5>
-        <sc-datatable items="personDocumentLangCert.part.langLevelEntries" has-info-text="false" filterable="false" pageable="false" sortable="false" dynamic-columns="false" scrollable="false" default-sort="changeDate">
-          <sc-column data="changeDate" type="date" title="persons.licenceView.changeDate">
-          </sc-column>
-          <sc-column data="langLevel.name" title="persons.personDocumentLangCertDirective.langLevel">
-          </sc-column>
-        </sc-datatable>
-
-        <gva-person-common-doc-classification name="personDocumentClassificationForm" ng-model="personDocumentLangCert"></gva-person-common-doc-classification>
-
-        <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentLangCert.case"
-          sc-form-params="{ setPart: 'person', lotId: lotId }"></gva-common-scanned-document>
-      </div>
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personDocumentLangCert.case"
+        sc-form-params="{ lotId: lotId }"></gva-common-scanned-document>
     </div>
   </div>
 </ng-form>
