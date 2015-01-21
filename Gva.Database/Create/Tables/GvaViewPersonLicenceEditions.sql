@@ -2,24 +2,26 @@
 GO 
 
 CREATE TABLE [dbo].[GvaViewPersonLicenceEditions] (
-    [LotId]                 INT           NOT NULL,
-    [PartId]                INT           NOT NULL,
-    [PartIndex]             INT           NOT NULL,
-    [LicencePartIndex]      INT           NOT NULL,
-    [Index]                 INT           NOT NULL,
-    [IsLastEdition]         BIT           NOT NULL,
-    [StampNumber]           NVARCHAR(50)  NULL,
-    [FirstDocDateValidFrom] DATETIME2     NOT NULL,
-    [DateValidFrom]         DATETIME2     NOT NULL,
-    [DateValidTo]           DATETIME2     NULL,
-    [LicenceActionId]       INT           NOT NULL,
-    [Notes]                 NVARCHAR(MAX) NULL,
-    [Inspector]             NVARCHAR(100) NULL,
-    [Limitations]           NVARCHAR(MAX) NULL,
+    [LotId]                 INT              NOT NULL,
+    [PartId]                INT              NOT NULL,
+    [PartIndex]             INT              NOT NULL,
+    [LicencePartIndex]      INT              NOT NULL,
+    [Index]                 INT              NOT NULL,
+    [IsLastEdition]         BIT              NOT NULL,
+    [StampNumber]           NVARCHAR(50)     NULL,
+    [FirstDocDateValidFrom] DATETIME2        NOT NULL,
+    [DateValidFrom]         DATETIME2        NOT NULL,
+    [DateValidTo]           DATETIME2        NULL,
+    [LicenceActionId]       INT              NOT NULL,
+    [Notes]                 NVARCHAR(MAX)    NULL,
+    [Inspector]             NVARCHAR(100)    NULL,
+    [Limitations]           NVARCHAR(MAX)    NULL,
+    [PrintedFileId]         INT              NULL,
     CONSTRAINT [PK_GvaViewPersonLicenceEditions]                         PRIMARY KEY ([LotId], [LicencePartIndex], [PartIndex]),
     CONSTRAINT [FK_GvaViewPersonLicenceEditions_LotParts]                FOREIGN KEY ([PartId])                                 REFERENCES [dbo].[LotParts] ([LotPartId]),
     CONSTRAINT [FK_GvaViewPersonLicenceEditions_NomValues]               FOREIGN KEY ([LicenceActionId])                        REFERENCES [dbo].[NomValues] ([NomValueId]),
-    CONSTRAINT [FK_GvaViewPersonLicenceEditions_GvaViewPersonLicences]   FOREIGN KEY ([LotId], [LicencePartIndex])              REFERENCES [dbo].[GvaViewPersonLicences] ([LotId], [PartIndex])
+    CONSTRAINT [FK_GvaViewPersonLicenceEditions_GvaViewPersonLicences]   FOREIGN KEY ([LotId], [LicencePartIndex])              REFERENCES [dbo].[GvaViewPersonLicences] ([LotId], [PartIndex]),
+    CONSTRAINT [FK_GvaViewPersonLicenceEditions_GvaFiles]                FOREIGN KEY ([PrintedFileId])                          REFERENCES [dbo].[GvaFiles] ([GvaFileId])
 )
 GO
 
@@ -36,4 +38,5 @@ exec spDescColumn N'GvaViewPersonLicenceEditions', N'LicenceActionId'       , N'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'Notes'                 , N'Бележки.'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'Inspector'             , N'Инспектор.'
 exec spDescColumn N'GvaViewPersonLicenceEditions', N'Limitations'           , N'Ограничения.'
+exec spDescColumn N'GvaViewPersonLicenceEditions', N'PrintedFileId'         , N'Идентификатор на файла на принтиран лиценз.'
 GO

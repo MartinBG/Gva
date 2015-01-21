@@ -36,6 +36,8 @@ namespace Gva.Api.Models.Views.Person
 
         public string Limitations { get; set; }
 
+        public int? PrintedFileId { get; set; }
+
         public virtual Part Part { get; set; }
 
         public virtual NomValue LicenceAction { get; set; }
@@ -76,7 +78,8 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.Notes).HasColumnName("Notes");
             this.Property(t => t.Inspector).HasColumnName("Inspector");
             this.Property(t => t.Limitations).HasColumnName("Limitations");
-
+            this.Property(t => t.PrintedFileId).HasColumnName("PrintedFileId");
+            
             // Relationships
             this.HasRequired(t => t.Part)
                 .WithMany()

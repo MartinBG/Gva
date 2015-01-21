@@ -59,5 +59,7 @@ namespace Gva.Api.ModelsDO.Persons
         public List<int> IncludedLicences { get; set; }
 
         public Guid? PrintedDocumentBlobKey { get; set; }
+
+        public int? PrintedFileId { get; set; }
     }
 }

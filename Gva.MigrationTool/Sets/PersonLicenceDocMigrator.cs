@@ -10,6 +10,7 @@ using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
 using Common.Tests;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.PrintRepository;
 using Newtonsoft.Json.Linq;
@@ -121,6 +122,19 @@ namespace Gva.MigrationTool.Sets
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 licenceEditionPartVersion.Content.PrintedDocumentBlobKey = licenceEditionDocBlobKey;
+
+                GvaFile printedLicenceFile = new GvaFile()
+                {
+                    Filename = "migratedLicence",
+                    FileContentId = licenceEditionDocBlobKey,
+                    MimeType = "application/pdf"
+                };
+
+                this.unitOfWork.DbContext.Set<GvaFile>().Add(printedLicenceFile);
+
+                this.unitOfWork.Save();
+
+                licenceEditionPartVersion.Content.PrintedFileId = printedLicenceFile.GvaFileId;
 
                 lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
 

@@ -60,6 +60,7 @@ namespace Gva.Api.Projections.Person
             licenceEdition.Notes = edition.Content.Notes;
             licenceEdition.FirstDocDateValidFrom = firstDocDateValidFrom;
             licenceEdition.IsLastEdition = isLastEdition;
+            licenceEdition.PrintedFileId = edition.Content.PrintedFileId;
 
             if (edition.Content.Inspector != null)
             {

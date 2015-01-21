@@ -90,7 +90,7 @@ namespace Gva.Api.Controllers
                 using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
                 {
                     licenceEditionDocBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
-                    this.UpdateLicenceEdition(licenceEditionDocBlobKey, licenceEditionPartVersion, lot);
+                    this.UpdateLicenceEdition(licenceEditionDocBlobKey, licenceEditionPartVersion, lot, templateName);
                 }
             }
 
@@ -132,11 +132,24 @@ namespace Gva.Api.Controllers
             return memoryStream;
         }
 
-        public void UpdateLicenceEdition(Guid licenceEditionDocBlobKey, PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion, Lot lot)
+        public void UpdateLicenceEdition(Guid licenceEditionDocBlobKey, PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion, Lot lot, string templateName)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 licenceEditionPartVersion.Content.PrintedDocumentBlobKey = licenceEditionDocBlobKey;
+
+                GvaFile printedLicenceFile = new GvaFile()
+                {
+                    Filename = templateName,
+                    FileContentId = licenceEditionDocBlobKey,
+                    MimeType = "application/pdf"
+                };
+
+                this.unitOfWork.DbContext.Set<GvaFile>().Add(printedLicenceFile);
+
+                this.unitOfWork.Save();
+
+                licenceEditionPartVersion.Content.PrintedFileId = printedLicenceFile.GvaFileId;
 
                 lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
 
