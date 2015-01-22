@@ -39,7 +39,7 @@ namespace Gva.Api.WordTemplates
                 }
             }
 
-            return Utils.FillBlankData(ratings, 19);
+            return ratings;
         }
 
         internal static List<object> GetRatingsDataByCode(
@@ -81,9 +81,9 @@ namespace Gva.Api.WordTemplates
             {
                 new
                 {
-                    LIC_NO = licenceCaCode,
+                    LIC_NO = publisherCaaCode,
                     ISSUE_DATE = edition.DocumentDateValidFrom,
-                    C_CODE = publisherCaaCode
+                    C_CODE = licenceCaCode
                 }
             };
 

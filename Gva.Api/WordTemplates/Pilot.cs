@@ -85,7 +85,7 @@ namespace Gva.Api.WordTemplates
                 .Select(nv => nv.NomValueId)
                 .ToList();
 
-            var ratings = PilotUtils.GetRatings(includedRatings, ratingEditions, authorizationGroupIds);
+            var ratings = Utils.FillBlankData(PilotUtils.GetRatings(includedRatings, ratingEditions, authorizationGroupIds), 19);
             var country = Utils.GetCountry(personAddress, this.nomRepository);
             var licenceNumber = string.Format(
                 " BGR {0} - {1} - {2}",
@@ -110,7 +110,7 @@ namespace Gva.Api.WordTemplates
                     RTO_NOTES_EN = rtoRating != null ? rtoRating.NotesAlt : null,
                     ENG_LEVEL = langCerts,
                     T_RATING = ratings,
-                    INSTRUCTOR = instructorData.Count > 0 ? Utils.FillBlankData(instructorData, 4) : null,
+                    INSTRUCTOR = Utils.FillBlankData(instructorData, 4),
                     T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
                     T_LICENCE_TYPE_NAME = licenceType.Name.ToLower(),
                     T_LICENCE_NO = licenceNumber,
@@ -126,7 +126,7 @@ namespace Gva.Api.WordTemplates
                     RTO_NOTES2_EN = rtoRating != null ? rtoRating.NotesAlt : null,
                     ENG_LEVEL1 = langCerts,
                     L_RATING = ratings,
-                    INSTRUCTOR1 = instructorData.Count > 0 ? Utils.FillBlankData(instructorData, 4) : null,
+                    INSTRUCTOR1 = Utils.FillBlankData(instructorData, 4),
                     REVAL = new object[10],
                     REVAL2 = new object[10],
                     REVAL3 = new object[10],
