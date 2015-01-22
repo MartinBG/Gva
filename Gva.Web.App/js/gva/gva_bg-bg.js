@@ -61,6 +61,9 @@
           toApp: 'Към заявление',
           cancel: 'Отказ'
         },
+        applicationAlertInfoDirective: {
+          viewApplication: 'Обратно към заявление: '
+        },
         selectPersonDirective: {
           person: 'Заявител',
           newPerson: 'Нов заявител'
@@ -190,8 +193,7 @@
           icao: 'ICAO код',
           runway: 'Полоса',
           course: 'Курс',
-          edit: 'Редакция',
-          viewApplication: 'Обратно към заявление: '
+          edit: 'Редакция'
         },
         newAirport: {
           title: 'Ново съоръжение',
@@ -451,8 +453,7 @@
           manPlace: 'Място на производство',
           manDate: 'Дата на производство',
           place: 'Местоположение',
-          edit: 'Редакция',
-          viewApplication: 'Обратно към заявление: '
+          edit: 'Редакция'
         },
         newEquipment: {
           title: 'Ново съоръжение',
@@ -764,7 +765,6 @@
           manSN: 'MSN (сериен номер)',
           cofAType: 'CofA Type',
           edit: 'Редакция',
-          viewApplication: 'Обратно към заявление: ',
           actNumber: 'Деловоден номер',
           certNumber: 'Регистрационен номер',
           mark: 'Регистрационен знак'
@@ -1919,8 +1919,7 @@
           company: 'Фирма',
           employmentCategory: 'Длъжност',
           caseType: 'Дело',
-          edit: 'Редакция',
-          viewApplication: 'Обратно към заявление: '
+          edit: 'Редакция'
         },
         newReport: {
           title: 'Нов отчет',
@@ -2967,8 +2966,7 @@
           cao: 'САО',
           uin: 'Булстат',
           organizationType: 'Тип организация',
-          edit: 'Редакция',
-          viewApplication: 'Обратно към заявление: '
+          edit: 'Редакция'
         },
         newOrganization: {
           title: 'Нова организация',

@@ -12,6 +12,9 @@
     $scope.person = person;
     $scope.application = application;
     $scope.caseType = parseInt($stateParams.caseTypeId, 10);
+    $scope.set = $stateParams.set;
+    $scope.lotId = $stateParams.id;
+
     $scope.tabs = {
       'persons.tabs.licences': 'root.persons.view.licences',
       'persons.tabs.qualifications': {
@@ -52,20 +55,6 @@
 
     $scope.edit = function () {
       return $state.go('root.persons.view.edit');
-    };
-
-    $scope.viewApplication = function (applicationId, partIndex) {
-      return $state.go('root.applications.edit.data', {
-        id: applicationId,
-        set: $stateParams.set,
-        lotId: $stateParams.id,
-        ind: partIndex
-      });
-    };
-
-    $scope.exitApplication = function () {
-      delete $state.params.appId;
-      $state.transitionTo($state.current, $state.params, { reload: true });
     };
   }
 

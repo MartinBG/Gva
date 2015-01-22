@@ -67,13 +67,7 @@
     </div>
   </form>
 
-  <div ng-if="application" class="alert alert-info" style="margin-bottom: 10px; padding: 7px 10px;">
-    <a ng-click="viewApplication(application.applicationId, application.partIndex)" class="alert-link" style="cursor: pointer;">
-      <span l10n-text="aircrafts.viewAircraft.viewApplication"></span>
-      {{ !!application.oldDocumentNumber ? (application.applicationCode + ' ' + application.oldDocumentNumber + '/' + (application.documentDate | date: 'mediumDate')) : (application.applicationCode + ' ' + application.documentNumber) }}
-    </a>
-    <button type="button" class="close" ng-click="exitApplication()">×</button>
-  </div>
+  <gva-application-alert-info  ng-if="application" application="application" lot-id="{{lotId}}" set="{{set}}"></gva-application-alert-info>
 
   <sc-tabs tab-list="{
       'aircrafts.tabs.reg': {
