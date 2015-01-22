@@ -5,7 +5,6 @@
   function LangLevelEntriesModalCtrl(
     $scope,
     $modalInstance,
-    PersonDocumentLangCerts,
     scModalParams,
     langLevelModel
   ) {
@@ -24,14 +23,7 @@
           $scope.langCert.part.langLevelEntries.push(langLevelModel);
           $scope.langCert.part.langLevel = langLevelModel.langLevel;
 
-          return PersonDocumentLangCerts.save({
-            id: scModalParams.lotId,
-            ind: $scope.langCert.partIndex
-          }, $scope.langCert)
-            .$promise
-            .then(function () {
-             return $modalInstance.close();
-            });
+          return $modalInstance.close();
         }
       });
     };
@@ -45,7 +37,6 @@
   LangLevelEntriesModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
-    'PersonDocumentLangCerts',
     'scModalParams',
     'langLevelModel'
   ];

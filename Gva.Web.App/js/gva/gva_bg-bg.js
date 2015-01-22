@@ -2367,7 +2367,7 @@
         },
         langLevelEntriesModal: {
           title: 'Промяна на нивото на език',
-          save: 'Запис',
+          add: 'Добави',
           cancel: 'Отказ',
           langLevel: 'Ниво на език',
           newLangLevelChange: 'Ново ниво',
