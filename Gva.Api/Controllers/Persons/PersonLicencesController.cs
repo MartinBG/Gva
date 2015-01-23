@@ -52,7 +52,7 @@ namespace Gva.Api.Controllers.Persons
             PersonLicenceDO licence = new PersonLicenceDO()
             {
                 Valid = this.nomRepository.GetNomValue("boolean", "yes"),
-                Publisher = this.nomRepository.GetNomValue("caa", "BG")
+                Publisher = this.nomRepository.GetNomValue("caa", "BGR")
             };
 
             return Ok(new CaseTypePartDO<PersonLicenceDO>(licence));
