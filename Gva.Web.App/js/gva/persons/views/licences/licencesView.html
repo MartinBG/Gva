@@ -1,7 +1,7 @@
 <ng-form name="editLicenceForm"  sc-form-readonly="">
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
-      <strong>{{title}} {{licence.part.licenceType.name}} - {{licence.part.licenceNumber}}</strong>
+      <strong>{{title}} {{licence.part.publisher.code}} {{licence.part.licenceNumber}} - {{licence.part.licenceType.name}} </strong>
       <div class="pull-right">
         <sc-button name="createBtn" btn-click="newEdition()" text="persons.licenceView.newEdition" class="btn btn-primary btn-xs" icon="glyphicon-plus">
         </sc-button>
