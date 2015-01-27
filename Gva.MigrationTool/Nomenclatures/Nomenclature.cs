@@ -2025,13 +2025,19 @@ namespace Gva.MigrationTool.Nomenclatures
         private void migrateApplicationPaymentTypes(INomRepository repo, OracleConnection conn)
         {
             Nom nom = repo.GetNom("applicationPaymentTypes");
+            var namesByCode = new Dictionary<string, string>()
+            {
+                {"чл.117а(1)", "член 117 а(1) - За издаване на свидетелство за правоспособност на авиационния персонал"},
+                {"чл.117а(2)", "член 117 а(2) - За издаване на свидетелство за правоспособност на инженерно-техническия персонал"}
+            };
+
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_PAYMENT_TYPE")
                 .Materialize(r =>
                     new NomValue
                     {
                         OldId = r.Field<object>("ID").ToString(),
                         Code = r.Field<string>("CODE"),
-                        Name = r.Field<string>("NAME"),
+                        Name = namesByCode.ContainsKey(r.Field<string>("CODE")) ? namesByCode[r.Field<string>("CODE")] : r.Field<string>("NAME"),
                         NameAlt = r.Field<string>("NAME_TRANS"),
                         Alias = null,
                         IsActive = true,
