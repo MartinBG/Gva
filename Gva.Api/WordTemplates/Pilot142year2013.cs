@@ -241,7 +241,6 @@ namespace Gva.Api.WordTemplates
 
             return includedTrainings
                 .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code))
-                .OrderBy(t => t.DocumentDateValidFrom.Value)
                 .Select(t =>
                     new
                     {

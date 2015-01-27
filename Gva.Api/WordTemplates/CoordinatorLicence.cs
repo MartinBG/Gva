@@ -201,7 +201,7 @@ namespace Gva.Api.WordTemplates
         {
             int caseTypeId = this.caseTypeRepository.GetCaseType("ovd").GvaCaseTypeId;
             List<object> ratingEditions = new List<object>();
-            foreach (var edition in editions.OrderBy(e => e.Content.DocumentDateValidFrom))
+            foreach (var edition in editions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 var ratingTypes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "";

@@ -230,7 +230,6 @@ namespace Gva.Api.WordTemplates
                     DOC_NO = t.DocumentNumber,
                     DATE = t.DocumentDateValidFrom
                 })
-                .OrderBy(d => d.DATE)
                 .ToList<object>();
 
             return Utils.FillBlankData(trainings, 4);
@@ -243,13 +242,12 @@ namespace Gva.Api.WordTemplates
         {
             var exams  = includedExams
                 .Select(t => new
-                    {
-                        CLASS = t.RatingTypes.Count() > 0 ? string.Join(", ", t.RatingTypes.Select(rt => rt.Code)) : "",
-                        DOC_NO = t.DocumentNumber,
-                        DATE = t.DocumentDateValidFrom
-                    })
-                    .OrderBy(d => d.DATE)
-                    .ToList<object>();
+                {
+                    CLASS = t.RatingTypes.Count() > 0 ? string.Join(", ", t.RatingTypes.Select(rt => rt.Code)) : "",
+                    DOC_NO = t.DocumentNumber,
+                    DATE = t.DocumentDateValidFrom
+                })
+                .ToList<object>();
 
            var checks =  includedChecks.Where(d => d.DocumentRole.Code == practicalCheckRole.Code)
                 .Select(t => new
@@ -258,8 +256,7 @@ namespace Gva.Api.WordTemplates
                     DOC_NO = t.DocumentNumber,
                     DATE = t.DocumentDateValidFrom
                 })
-                    .OrderBy(d => d.DATE)
-                    .ToList<object>();
+                .ToList<object>();
 
            return Utils.FillBlankData(exams.Union(checks).ToList<object>(), 4);
         }
@@ -275,7 +272,6 @@ namespace Gva.Api.WordTemplates
                     DOC_NO = t.DocumentNumber,
                     DATE = t.DocumentDateValidFrom
                 })
-                .OrderBy(d => d.DATE)
                 .ToList<object>();
 
             return Utils.FillBlankData(simulators, 4);

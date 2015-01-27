@@ -206,7 +206,6 @@ namespace Gva.Api.WordTemplates
 
             return trainings
                 .Union(exams)
-                .OrderBy(d => d.DOC.SUB_DOC.DATE)
                 .ToArray<object>();
         }
 
@@ -224,7 +223,7 @@ namespace Gva.Api.WordTemplates
         {
             int caseTypeId = this.caseTypeRepository.GetCaseType("to_suvd").GvaCaseTypeId;
             List<object> classes = new List<object>();
-            foreach (var edition in ratingEditions.OrderBy(r => r.Content.DocumentDateValidFrom))
+            foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if(this.fileRepository.GetFileReference(rating.PartId, caseTypeId) != null)

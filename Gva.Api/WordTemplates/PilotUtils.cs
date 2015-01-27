@@ -18,7 +18,7 @@ namespace Gva.Api.WordTemplates
             List<int> authorizationGroupIds)
         {
             List<object> ratings = new List<object>();
-            foreach (var edition in ratingEditions.OrderBy(r => r.Content.DocumentDateValidFrom))
+            foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if (rating.Content.Authorization == null ||
@@ -48,7 +48,7 @@ namespace Gva.Api.WordTemplates
             NomValue authorizationGroup)
         {
             List<object> ratings = new List<object>();
-            foreach (var edition in ratingEditions.OrderBy(r => r.Content.DocumentDateValidFrom))
+            foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if (rating.Content.Authorization != null && authorizationGroup.NomValueId == rating.Content.Authorization.ParentValueId.Value && rating.Content.Authorization.Code != "RTO")

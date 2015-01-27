@@ -409,7 +409,6 @@ namespace Gva.Api.WordTemplates
                 NomValue theoreticalExamRole = this.nomRepository.GetNomValue("documentRoles", "exam");
                 var theoreticalExams = includedExams
                     .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == theoreticalExamRole.Code)
-                    .OrderBy(t => t.DocumentDateValidFrom)
                     .Select(t =>
                         new
                         {

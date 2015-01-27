@@ -62,7 +62,6 @@ namespace Gva.Api.WordTemplates
         {
             return includedLangCerts
                 .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
-                .OrderBy(t => t.DocumentDateValidFrom)
                 .Select(t =>
                     new
                     {
@@ -77,7 +76,6 @@ namespace Gva.Api.WordTemplates
         {
             return includedTraings
                 .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
-                .OrderBy(t => t.DocumentDateValidFrom)
                 .Select(t =>
                     new
                     {
@@ -92,7 +90,6 @@ namespace Gva.Api.WordTemplates
         {
             return includedChecks
                 .Where(t => t.Valid.Code == "Y" && documentRoleCodes.Contains(t.DocumentRole.Code) && t.DocumentRole.Code == roleCode)
-                .OrderBy(t => t.DocumentDateValidFrom)
                 .Select(t =>
                     new
                     {
@@ -173,7 +170,7 @@ namespace Gva.Api.WordTemplates
             ILotRepository lotRepository)
         {
             List<object> ratingEditions = new List<object>();
-            foreach (var edition in editions.OrderBy(r => r.Content.DocumentDateValidFrom))
+            foreach (var edition in editions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 var ratingTypesCodes = rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "";
