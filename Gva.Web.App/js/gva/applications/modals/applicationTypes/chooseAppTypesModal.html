@@ -14,11 +14,13 @@
       <sc-search-button action="clear"></sc-search-button>
     </sc-search>
 
-    <sc-datatable items="appTypes" filterable="true" pageable="true" sortable="true" dynamic-columns="false">
+    <sc-datatable items="appTypes" filterable="true" pageable="true" sortable="true" dynamic-columns="false" default-sort="code"
+       default-sorting-type="asc" page-size="25">
       <sc-column sortable="false" class="buttons-cell" has-content="true">
         <sc-button btn-click="chooseAppType(item)" text="applications.chooseAppTypeModal.select" class="btn btn-xs btn-primary"></sc-button>
       </sc-column>
-      <sc-column data="code" title="applications.chooseAppTypeModal.code">
+      <sc-column data="code" title="applications.chooseAppTypeModal.code" has-content="true">
+        <strong>{{item.code}}<strong>
       </sc-column>
       <sc-column data="name" title="applications.chooseAppTypeModal.name">
       </sc-column>
