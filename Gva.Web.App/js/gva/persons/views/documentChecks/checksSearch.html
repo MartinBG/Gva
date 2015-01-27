@@ -27,7 +27,7 @@
   </sc-column>
   <sc-column data="part.valid.name" title="persons.checkSearch.valid">
   </sc-column>
-  <sc-column data="part.personCheckRatingValue.name" title="persons.checkSearch.ratingValue">
+  <sc-column data="part.personCheckRatingValue ? part.personCheckRatingValue.name + '/' + part.personCheckRatingValue.nameAlt : ''" title="persons.checkSearch.ratingValue">
   </sc-column>
   <sc-column data="case.bookPageNumber" title="persons.checkSearch.bookPageNumber" visible="false">
   </sc-column>

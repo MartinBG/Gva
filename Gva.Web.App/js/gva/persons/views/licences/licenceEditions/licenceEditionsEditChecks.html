@@ -50,7 +50,7 @@
           <td>{{check.part.authorization.code}}</td>
           <td>{{check.part.licenceType.code}}</td>
           <td>{{check.part.valid.name}}</td>
-          <td>{{check.part.personCheckRatingValue.name}}</td>
+          <td>{{check.part.personCheckRatingValue ? check.part.personCheckRatingValue.name + '/' + check.part.personCheckRatingValue.nameAlt : ''}}</td>
         </tr>
       </tbody>
     </table>

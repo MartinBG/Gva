@@ -2886,13 +2886,11 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "I", new Tuple<string,string>("Недостатъчно"  , "Insufficient" )},
                 { "U", new Tuple<string,string>("Неприемливо"   , "Unacceptable" )},
                 { "К", new Tuple<string,string>("Компетентен"   , "Competent"    )},
-                { "Н", new Tuple<string,string>("Некомпетентен" , "Incompetent"  )},
-
-                //TODO
-                { "C", new Tuple<string,string>("C"             , ""             )}
+                { "Н", new Tuple<string,string>("Некомпетентен" , "Incompetent"  )}
             };
 
             noms["personCheckRatingValues"] = new Dictionary<string, NomValue>();
+            int order = 0;
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
@@ -2904,7 +2902,8 @@ namespace Gva.MigrationTool.Nomenclatures
                         Alias = null,
                         IsActive = true,
                         ParentValueId = null,
-                        TextContentString = null
+                        TextContentString = null,
+                        Order = order++
                     };
                 noms["personCheckRatingValues"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);

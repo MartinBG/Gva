@@ -5,7 +5,7 @@
   <div ng-show="model.case.caseType">
     <h5 class="form-header" l10n-text="persons.personCheckDirective.checkData"></h5>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.part.personCheckRatingValue" alias="'personCheckRatingValues'" l10n-text="persons.personCheckDirective.personCheckRatingValue" class="col-sm-3 col-md-2"></sc-field>
+      <sc-field type="nomenclature" format-options="{{name}} / {{nameAlt}}" ng-model="model.part.personCheckRatingValue" alias="'personCheckRatingValues'" l10n-text="persons.personCheckDirective.personCheckRatingValue" class="col-sm-5 col-md-3"></sc-field>
     </div>
 
     <gva-person-common-doc-classification name="personDocumentClassificationForm" ng-model="model"></gva-person-common-doc-classification>
