@@ -35,7 +35,5 @@ Usage: <sc-column model-name="property"
     };
   }
 
-  ColumnDirective.$inject = [];
-
   angular.module('scaffolding').directive('scColumn', ColumnDirective);
 }(angular));
