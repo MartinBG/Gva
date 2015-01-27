@@ -33,6 +33,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.Notes = lastEdition.Notes;
             this.NotesAlt = lastEdition.NotesAlt;
             this.LocationIndicator = rating.LocationIndicator;
+            this.Sector = rating.Sector;
         }
 
         public int LotId { get; set; }
@@ -44,6 +45,8 @@ namespace Gva.Api.ModelsDO.Persons
         public int EditionPartIndex { get; set; }
 
         public NomValue LocationIndicator { get; set; }
+
+        public string Sector { get; set; }
 
         public string RatingTypes { get; set; }
 
