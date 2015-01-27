@@ -25,10 +25,13 @@ Usage <sc-datatable items="data"
         dynamicColumns: '&',
         scrollable: '&',
         hasInfoText: '&',
-        defaultSort: '@'
+        defaultSort: '@',
+        defaultSortingType: '@',
+        pageSize: '@'
       },
       link: function ($scope, $element, $attrs) {
         var select2,
+            defaultPageSize = 10,
             tableHeader,
             tableRows = [],
             dataTable = $element.find('table'),
@@ -227,7 +230,8 @@ Usage <sc-datatable items="data"
         $scope.$parent.$watchCollection($attrs.items, function (items) {
           if ($scope.defaultSort) {
             var index = _.findIndex($scope.columnDefs, { 'data': $scope.defaultSort });
-            $scope.setSortingData(index, 'desc');
+            var sortingType = $scope.defaultSortingType || 'desc';
+            $scope.setSortingData(index, sortingType);
           }
 
           if (initializing) {
@@ -244,7 +248,7 @@ Usage <sc-datatable items="data"
         });
 
         $scope.$watch('pageSize', function (pageSize) {
-          $scope.setPageSize(pageSize);
+          $scope.setPageSize(pageSize || defaultPageSize);
         });
 
         $scope.$watchCollection('pageItems', function () {
