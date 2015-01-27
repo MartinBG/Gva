@@ -53,7 +53,7 @@ namespace Gva.Api.Controllers.Persons
         {
             PersonRatingDO rating = new PersonRatingDO()
             {
-                Caa = this.nomRepository.GetNomValue("caa", "BG")
+                Caa = this.nomRepository.GetNomValue("caa", "BGR")
             };
 
             return Ok(new CaseTypePartDO<PersonRatingDO>(rating));
