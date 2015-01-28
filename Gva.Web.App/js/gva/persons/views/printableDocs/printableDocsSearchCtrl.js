@@ -25,7 +25,7 @@
     });
 
     $scope.search = function () {
-      return $state.go('root.printableDocs.search', $scope.filters, { reload: true });
+      return $state.go('root.printableDocs', $scope.filters, { reload: true });
     };
 
     $scope.print = function (doc) {

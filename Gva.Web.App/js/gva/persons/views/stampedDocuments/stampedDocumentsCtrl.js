@@ -59,7 +59,7 @@
     };
 
     $scope.search = function () {
-      return $state.go('root.persons.stampedDocuments', {
+      return $state.go('root.stampedDocuments', {
         licenceNumber: $scope.filters.licenceNumber,
         lin: $scope.filters.lin,
         uin: $scope.filters.uin,
