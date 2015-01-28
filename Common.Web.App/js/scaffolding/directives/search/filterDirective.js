@@ -70,7 +70,7 @@
 
     return {
       restrict: 'E',
-      require: '?^scSearch',
+      require: '^scSearch',
       replace: true,
       scope: {
         removable: '&'

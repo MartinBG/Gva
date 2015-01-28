@@ -62,10 +62,12 @@
         });
       });
 
-      scope.text = l10n.get(attrs.text);
-      if (!scope.text) {
-        scope.text = attrs.text;
-      }
+      attrs.$observe('text', function (text) {
+        scope.text = l10n.get(text);
+        if (!scope.text) {
+          scope.text = text;
+        }
+      });
 
       scope.isDisabled = false;
       if (attrs.iconDisabled) {
