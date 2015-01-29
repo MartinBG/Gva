@@ -1716,7 +1716,7 @@
         personCommonDocClassificationDirective: {
           ratingType: 'Тип ВС',
           aircraftTypeGroup: 'Тип/Група ВС',
-          ratingClass: 'Клас ВС',
+          ratingClass: 'Клас',
           authorization: 'Разрешение',
           licenceType: 'Вид правоспособност',
           locationIndicator: 'Индикатор за местоположение',
