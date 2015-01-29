@@ -14,7 +14,7 @@
     <sc-field type="text" ng-model="model.part.sector" l10n-text="persons.personCommonDocClassificationDirective.sector" class="col-sm-6 col-md-4"></sc-field>
   </div>
 
-  <div ng-if="model.case.caseType.alias === 'flightCrew' || model.case.caseType.alias === 'ovd' || model.case.caseType.alias === 'to_suvd'">
+  <div ng-if="model.case.caseType.alias === 'flightCrew' || model.case.caseType.alias === 'ovd' || model.case.caseType.alias === 'to_suvd' || model.case.caseType.alias === 'to_vs'">
     <div class="row">
       <sc-field type="nomenclature" ng-model="model.part.ratingClass" ng-disabled="model.part.ratingTypes.length > 0" alias="'ratingClasses'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.ratingClass" class="col-sm-6 col-md-4"></sc-field>
       <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personCommonDocClassificationDirective.authorization" class="col-sm-6 col-md-4"></sc-field>
