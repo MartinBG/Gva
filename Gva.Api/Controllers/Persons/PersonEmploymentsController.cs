@@ -31,8 +31,11 @@ namespace Gva.Api.Controllers.Persons
         [Route("new")]
         public IHttpActionResult GetNewEmployment(int lotId)
         {
-            PersonEmploymentDO newEmployment = new PersonEmploymentDO();
-            newEmployment.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+            PersonEmploymentDO newEmployment = new PersonEmploymentDO()
+            {
+                Valid = this.nomRepository.GetNomValue("boolean", "yes"),
+                Country = this.nomRepository.GetNomValue("countries", "BG")
+            };
 
             return Ok(new CaseTypePartDO<PersonEmploymentDO>(newEmployment));
         }
