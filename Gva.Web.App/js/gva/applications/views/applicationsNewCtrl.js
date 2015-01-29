@@ -17,6 +17,7 @@
 
     $scope.application = application;
     $scope.set = $stateParams.set;
+    $scope.application.lot.id = $stateParams.lotId;
 
     $scope.$watch('application.lot.id', function (newValue, oldValue) {
       if (newValue !== oldValue) {
