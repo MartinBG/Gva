@@ -30,7 +30,7 @@
       <sc-field type="nomenclature" ng-model="model.part.authorization" alias="'authorizations'" params="{ caseTypeAlias: model.case.caseType.alias }" l10n-text="persons.personFlyingExperienceDirective.authorization" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
     </div>
     <div class="row" ng-if="model.case.caseType.alias === 'ovd'">
-      <sc-field type="nomenclature" ng-model="model.part.locationIndicator" alias="'locationIndicators'" l10n-text="persons.personFlyingExperienceDirective.locationIndicator" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.locationIndicator" format-options="{{code}} {{name}}" alias="'locationIndicators'" l10n-text="persons.personFlyingExperienceDirective.locationIndicator" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
       <sc-field type="text" ng-model="model.part.sector" l10n-text="persons.personFlyingExperienceDirective.sector" class="col-sm-6 col-md-5 col-lg-4"></sc-field>
     </div>
     <hr>
