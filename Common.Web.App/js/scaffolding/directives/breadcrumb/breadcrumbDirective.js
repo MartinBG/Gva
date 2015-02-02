@@ -18,7 +18,7 @@
         function BreadcrumbCtrl($scope, $window, $state, l10n) {
           $scope.getBreadcrumbStates = function (state) {
             var states = [];
-            if(l10n.states[state.self.name] || state.parent.name) {
+            if(l10n.states[state.self.name] || l10n.states[state.parent.name]) {
               $window.document.title = l10n.states[state.self.name] ||
                 l10n.states[state.parent.name];
             }  else {
