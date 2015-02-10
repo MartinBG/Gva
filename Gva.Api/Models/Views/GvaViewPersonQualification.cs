@@ -6,7 +6,7 @@ using Docs.Api.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using Gva.Api.Models.Views.Person;
 
-namespace Gva.Api.Models.Vew
+namespace Gva.Api.Models.Views
 {
     public partial class GvaViewPersonQualification
     {

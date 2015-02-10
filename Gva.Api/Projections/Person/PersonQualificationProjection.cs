@@ -5,7 +5,6 @@ using Common.Api.Repositories.NomRepository;
 using Common.Api.Repositories.UserRepository;
 using Common.Data;
 using Common.Json;
-using Gva.Api.Models.Vew;
 using Gva.Api.Models.Views;
 using Gva.Api.ModelsDO.Common;
 using Regs.Api.LotEvents;

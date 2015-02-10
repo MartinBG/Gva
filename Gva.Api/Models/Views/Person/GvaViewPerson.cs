@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
-using Gva.Api.Models.Vew;
 using Gva.Api.Models.Views.Organization;
 using Regs.Api.Models;
 

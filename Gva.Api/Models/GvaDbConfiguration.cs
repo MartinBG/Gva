@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity;
 using Common.Data;
-using Gva.Api.Models.Vew;
 using Gva.Api.Models.Views;
 using Gva.Api.Models.Views.Aircraft;
 using Gva.Api.Models.Views.Airport;

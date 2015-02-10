@@ -332,7 +332,7 @@ namespace Gva.Api.Controllers.Applications
                         .GetItems<int>("licenceTypeIds")
                         .ToList();
 
-                    application.examinationSystemData = new AppExaminationSystemDataDO();
+                    application.ExaminationSystemData = new AppExaminationSystemDataDO();
 
                     foreach (int licenceTypeId in licenceTypeIds)
                     { 
@@ -341,7 +341,7 @@ namespace Gva.Api.Controllers.Applications
                             .GetQualifications(licenceType.TextContent.Get<string>("qlf_code"))
                             .Single();
 
-                        application.examinationSystemData
+                        application.ExaminationSystemData
                             .Qualifications
                             .Add(new AppExamSystQualificationDO()
                             {

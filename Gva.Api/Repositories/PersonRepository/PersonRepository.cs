@@ -8,7 +8,6 @@ using Common.Data;
 using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
-using Gva.Api.Models.Vew;
 using Gva.Api.Models.Views;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO.ExaminationSystem;

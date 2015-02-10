@@ -10,7 +10,6 @@ using Common.Data;
 using Common.Linq;
 using Gva.Api.CommonUtils;
 using Gva.Api.Models;
-using Gva.Api.Models.Vew;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.ExaminationSystem;
 using Gva.Api.ModelsDO.Persons;

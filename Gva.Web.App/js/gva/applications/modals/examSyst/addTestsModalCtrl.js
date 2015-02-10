@@ -10,7 +10,7 @@
     $scope.form = {};
     $scope.qualificationCode = scModalParams.qualificationCode;
     $scope.certCampCode = scModalParams.certCampCode;
-    $scope.tests = scModalParams.tests;
+    $scope.tests = scModalParams.tests || [];
 
     $scope.deleteTest = function (test) {
       var index = $scope.tests.indexOf(test);
