@@ -1422,7 +1422,8 @@
           inventory: 'Опис',
           applications: 'Заявления',
           examASs: 'Теор. изпити АС',
-          reports: 'Отчети'
+          reports: 'Отчети',
+          examinationSystem: 'Изпитна система'
         },
         search: {
           names: 'Име',
@@ -1893,6 +1894,52 @@
           cancel: 'Отказ',
           inspDataTitle: 'Данни за инспектор',
           examinerDateTitle: 'Данни за проверяващ'
+        },
+        examinationSystemView: {
+          loadData: 'Прехвърляне на данни от Изпитна система за Сертификационни кампании',
+          updateStates:
+            'Автоматизирана актуализация на състоянията относно придобиване на квалификация',
+          loadDataForExaminees: 'Зареди данни от Изпитната система за Изпити',
+          tabs: {
+            qualifications: 'Квалификации',
+            tests: 'Тестове',
+            certPaths: 'Сертификационни пътища',
+            certCampaigns: 'Сертификационни кампании',
+            exams: 'Изпити'
+          }
+        },
+        qualifications: {
+          name: 'Наименование',
+          code: 'Идентификационен код'
+        },
+        exSystExams: {
+          uin: 'ЕГН',
+          lin: 'ЛИН',
+          result: 'Резултат',
+          status: 'Статус',
+          certCampaign: 'Сертификационна кампания',
+          test: 'Тест',
+          endTime: 'Край'
+        },
+        exSystTests: {
+          name: 'Наименование',
+          code: 'Идентификационен код',
+          qualificationName: 'Квалификация'
+        },
+        certCampaigns: {
+          name: 'Наименование',
+          code: 'Идентификационен код',
+          validFrom: 'Валидна от',
+          validTo: 'Валидна до',
+          qualificationName: 'Квалификация'
+        },
+        certPaths: {
+          name: 'Наименование',
+          code: 'Идентификационен код',
+          validFrom: 'Валидна от',
+          validTo: 'Валидна до',
+          qualificationName: 'Квалификация',
+          test: 'Тест'
         },
         stampedDocumentsView: {
           search: 'Търси',
@@ -3836,6 +3883,12 @@
         'root.equipments.view.inventory': 'Опис',
         'root.printableDocs': 'Документи за печат',
         'root.stampedDocuments': 'Лицензи за получаване'
+        'root.examinationSystem': 'Изпитна система',
+        'root.examinationSystem.qualifications': 'Квалификации',
+        'root.examinationSystem.tests': 'Тестове',
+        'root.examinationSystem.certCampaigns': 'Сертификационни кампании',
+        'root.examinationSystem.certPaths': 'Сертификационни пътища',
+        'root.examinationSystem.exams': 'Изпити'
       }
     });
   }]);

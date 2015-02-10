@@ -50,8 +50,10 @@ namespace Gva.Api.Controllers.Persons
                     })
                 .ToList();
 
-            PersonAddressDO newAddress = new PersonAddressDO();
-            newAddress.Valid = this.nomRepository.GetNomValue("boolean", "yes");
+            PersonAddressDO newAddress = new PersonAddressDO()
+            {
+                Valid = this.nomRepository.GetNomValue("boolean", "yes")
+            };
 
             return Ok(new CaseTypesPartDO<PersonAddressDO>(newAddress, cases));
         }

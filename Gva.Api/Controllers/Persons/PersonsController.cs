@@ -86,13 +86,14 @@ namespace Gva.Api.Controllers.Persons
 
             if (extendedVersion)
             {
+                NomValue ValidTrue = this.nomRepository.GetNomValue("boolean", "yes");
                 newPerson.PersonDocumentId = new CaseTypesPartDO<PersonDocumentIdDO>(new PersonDocumentIdDO()
                 {
-                    Valid = this.nomRepository.GetNomValue("boolean", "yes")
+                    Valid = ValidTrue
                 }, new List<CaseDO>());
                 newPerson.PersonAddress = new PersonAddressDO()
                 {
-                    Valid = this.nomRepository.GetNomValue("boolean", "yes")
+                    Valid = ValidTrue
                 };
             }
 

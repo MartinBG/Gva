@@ -25,6 +25,7 @@ using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.EquipmentRepository;
+using Gva.Api.Repositories.ExaminationSystemRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.OrganizationRepository;
@@ -112,6 +113,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonReportCheckProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
             //Repositories
+            moduleBuilder.RegisterType<ExaminationSystemRepository>().As<IExaminationSystemRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PrintRepository>().As<IPrintRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRepository>().As<IAircraftRepository>().InstancePerLifetimeScope();
@@ -213,6 +215,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<GvaPartsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ExamsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AuditsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ExaminationSystemController>().InstancePerLifetimeScope();
 
             moduleBuilder.RegisterType<Pilot142year2013>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<CoordinatorSimi>().As<IDataGenerator>().InstancePerLifetimeScope();

@@ -21,16 +21,19 @@ namespace Gva.MigrationTool.Sets
         private Func<Owned<PersonLotCreator>> personLotCreatorFactory;
         private Func<Owned<PersonLotMigrator>> personLotMigratorFactory;
         private Func<Owned<PersonLicenceDocMigrator>> personLicenceDocMigratorFactory;
+        private Func<Owned<ExaminationSystemDataMigrator>> examinationSystemDataMigratorFactory;
 
         public Person(OracleConnection oracleConn,
             Func<Owned<PersonLotCreator>> personLotCreatorFactory,
             Func<Owned<PersonLotMigrator>> personLotMigratorFactory,
-            Func<Owned<PersonLicenceDocMigrator>> personLicenceDocMigratorFactory)
+            Func<Owned<PersonLicenceDocMigrator>> personLicenceDocMigratorFactory,
+            Func<Owned<ExaminationSystemDataMigrator>> examinationSystemDataMigratorFactory)
         {
             this.oracleConn = oracleConn;
             this.personLotCreatorFactory = personLotCreatorFactory;
             this.personLotMigratorFactory = personLotMigratorFactory;
             this.personLicenceDocMigratorFactory = personLicenceDocMigratorFactory;
+            this.examinationSystemDataMigratorFactory = examinationSystemDataMigratorFactory;
         }
 
         public Tuple<Dictionary<int, int>, Dictionary<string, int>, Dictionary<int, JObject>> createPersonsLots(Dictionary<string, Dictionary<string, NomValue>> noms)
@@ -196,6 +199,23 @@ namespace Gva.MigrationTool.Sets
                             r.old_id,
                             r.person_id
                         }))));
+        }
+
+        public void migrateExaminationSystemData(Dictionary<int, int> personIdToLotId)
+        {
+            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationToken ct = cts.Token;
+
+            Utils.RunParallel("ParallelMigrations", ct,
+                () => this.examinationSystemDataMigratorFactory().Value,
+                (examinationSystemDataMigrator) =>
+                {
+                    using (examinationSystemDataMigrator)
+                    {
+                        examinationSystemDataMigrator.MigrateExaminationSystemData(personIdToLotId, cts, ct);
+                    }
+                })
+                .Wait();
         }
     }
 }

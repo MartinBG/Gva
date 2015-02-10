@@ -29,7 +29,8 @@
             appsNew: 'Ново заявление',
             exam: 'Нов теор.изпит АС',
             printableDocs: 'Документи за печат',
-            stampedDocuments: 'Лицензи за получаване'
+            stampedDocuments: 'Лицензи за получаване',
+            examinationSystem: 'Изпитна система',
           },
           aircrafts: {
             title: 'ВС',

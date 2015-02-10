@@ -101,6 +101,7 @@ namespace Gva.MigrationTool
             builder.RegisterType<PersonLotCreator>().InstancePerLifetimeScope();
             builder.RegisterType<PersonLotMigrator>().InstancePerLifetimeScope();
             builder.RegisterType<PersonLicenceDocMigrator>().InstancePerLifetimeScope();
+            builder.RegisterType<ExaminationSystemDataMigrator>().InstancePerLifetimeScope();
 
             builder.RegisterType<Organization>().InstancePerLifetimeScope();
             builder.RegisterType<OrganizationLotCreator>().InstancePerLifetimeScope();
@@ -329,7 +330,12 @@ namespace Gva.MigrationTool
                     personLicenceDocumentsTimer.Stop();
                     Console.WriteLine("Migration of person licences documents time - {0}", personLicenceDocumentsTimer.Elapsed.TotalMinutes);
                 }
-
+                /*
+                Stopwatch examinationSystemDataTimer = new Stopwatch();
+                person.migrateExaminationSystemData(personIdToLotId);
+                examinationSystemDataTimer.Stop();
+                Console.WriteLine("Migration of data from examination system time - {0}", examinationSystemDataTimer.Elapsed.TotalMinutes);
+                */
                 timer.Stop();
                 Console.WriteLine("Migration time - {0}", timer.Elapsed.TotalMinutes);
             }

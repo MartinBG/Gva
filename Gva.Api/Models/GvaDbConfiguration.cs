@@ -51,6 +51,11 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new ASExamVariantQuestionMap());
             modelBuilder.Configurations.Add(new ASExamVariantMap());
             modelBuilder.Configurations.Add(new ASExamQuestionMap());
+            modelBuilder.Configurations.Add(new GvaExSystCertCampaignMap());
+            modelBuilder.Configurations.Add(new GvaExSystCertPathMap());
+            modelBuilder.Configurations.Add(new GvaExSystExamineeMap());
+            modelBuilder.Configurations.Add(new GvaExSystQualificationMap());
+            modelBuilder.Configurations.Add(new GvaExSystTestMap());
         }
     }
 }

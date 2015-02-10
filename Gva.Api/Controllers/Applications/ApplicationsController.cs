@@ -25,6 +25,7 @@ using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.EquipmentRepository;
+using Gva.Api.Repositories.ExaminationSystemRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
@@ -49,6 +50,7 @@ namespace Gva.Api.Controllers.Applications
         private IApplicationRepository applicationRepository;
         private INomRepository nomRepository;
         private IFileRepository fileRepository;
+        private IExaminationSystemRepository examinationSystemRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
 
@@ -64,6 +66,7 @@ namespace Gva.Api.Controllers.Applications
             IApplicationRepository applicationRepository,
             INomRepository nomRepository,
             IFileRepository fileRepository,
+            IExaminationSystemRepository examinationSystemRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
         {
@@ -77,8 +80,9 @@ namespace Gva.Api.Controllers.Applications
             this.docRepository = docRepository;
             this.applicationRepository = applicationRepository;
             this.nomRepository = nomRepository;
-            this.lotEventDispatcher = lotEventDispatcher;
+            this.examinationSystemRepository = examinationSystemRepository;
             this.fileRepository = fileRepository;
+            this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
         }
 
@@ -321,6 +325,33 @@ namespace Gva.Api.Controllers.Applications
                     DocumentNumber = newDoc.DocRelations.First().Doc.RegUri
                 };
 
+                if (applicationNewDO.ApplicationType.Code.StartsWith("EX-") || applicationNewDO.ApplicationType.Code.StartsWith("EX/"))
+                {
+                    List<int> licenceTypeIds = this.nomRepository.GetNomValue(applicationNewDO.ApplicationType.NomValueId)
+                        .TextContent
+                        .GetItems<int>("licenceTypeIds")
+                        .ToList();
+
+                    application.examinationSystemData = new AppExaminationSystemDataDO();
+
+                    foreach (int licenceTypeId in licenceTypeIds)
+                    { 
+                        NomValue licenceType = this.nomRepository.GetNomValue(licenceTypeId);
+                        GvaExSystQualification qualification = this.examinationSystemRepository
+                            .GetQualifications(licenceType.TextContent.Get<string>("qlf_code"))
+                            .Single();
+
+                        application.examinationSystemData
+                            .Qualifications
+                            .Add(new AppExamSystQualificationDO()
+                            {
+                                LicenceType = licenceType,
+                                QualificationCode = qualification.Code,
+                                QualificationName = qualification.Name
+                            });
+                    }
+                }
+
                 PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, this.userContext);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
@@ -331,6 +362,7 @@ namespace Gva.Api.Controllers.Applications
                     Doc = newDoc,
                     GvaAppLotPart = partVersion.Part
                 };
+
 
                 applicationRepository.AddGvaApplication(newGvaApplication);
 

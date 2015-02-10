@@ -46,6 +46,13 @@ GO
 :r $(rootPath)\"Tables\ASExamVariantQuestions.sql"
 :r $(rootPath)\"Tables\GvaStages.sql"
 :r $(rootPath)\"Tables\GvaAppStages.sql"
+:r $(rootPath)\"Tables\GvaExSystQualifications.sql"
+:r $(rootPath)\"Tables\GvaExSystTests.sql"
+:r $(rootPath)\"Tables\GvaExSystCertPaths.sql"
+:r $(rootPath)\"Tables\GvaExSystCertCampaigns.sql"
+:r $(rootPath)\"Tables\GvaExSystExams.sql"
+:r $(rootPath)\"Tables\GvaExSystExaminees.sql"
+
 
 ---------------------------------------------------------------
 -- Views

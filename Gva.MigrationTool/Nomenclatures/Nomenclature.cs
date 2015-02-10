@@ -8,6 +8,7 @@ using Common.Api.Repositories.NomRepository;
 using Common.Data;
 using Common.Tests;
 using Docs.Api.Models;
+using Gva.Api.CommonUtils;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Newtonsoft.Json;
 using Oracle.DataAccess.Client;
@@ -1501,6 +1502,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
+                                qlf_code = r.Field<string>("QLF_CODE"),
                                 codeCA = r.Field<string>("CA_CODE"),
                                 dateValidFrom = r.Field<DateTime?>("DATE_FROM"),
                                 dateValidTo = r.Field<DateTime?>("DATE_TO"),
@@ -1989,6 +1991,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "C", new string[] { "aircraft" } },
                 { "O", new string[] { "approvedOrg", "airportOperator", "groundSvcOperator", "airCarrier", "airOperator", "educationOrg", "airNavSvcProvider" } },
             };
+
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_REQUEST_TYPE")
                 .Materialize(r =>
                     new NomValue
@@ -2007,7 +2010,7 @@ namespace Gva.MigrationTool.Nomenclatures
                                 dateValidTo = r.Field<DateTime?>("DATE_TO"),
                                 duration = r.Field<decimal?>("TIME_LIMIT"),
                                 direction = r.Field<string>("DIRECTION_ID"),
-                                licenceTypeIds = (r.Field<string>("LICENCE_TYPES") != null) ? r.Field<string>("LICENCE_TYPES").Split(':').Select(gi => int.Parse(gi)).ToArray() : null,
+                                licenceTypeIds = (r.Field<string>("LICENCE_TYPES") != null) ? r.Field<string>("LICENCE_TYPES").Split(':').Select(gi => noms["licenceTypes"].ByOldId(gi).NomValueId()).ToArray() : null,
                                 caseTypes = (r.Field<string>("DIRECTION_ID") != null) ? caseType[r.Field<string>("DIRECTION_ID")] : null,
                                 documentTypeId = docTypes.FirstOrDefault(dt => dt.Alias == "Request").DocTypeId
                             })

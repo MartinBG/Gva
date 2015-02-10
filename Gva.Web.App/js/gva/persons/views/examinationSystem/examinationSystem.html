@@ -1,0 +1,20 @@
+﻿<div style="padding:10px 0px 20px 0px" class="col-sm-12">
+  <sc-button name="loadBtn" btn-click="loadData()" text="persons.examinationSystemView.loadData" class="btn btn-primary btn-xs" icon="glyphicon-circle-arrow-down"></sc-button>
+  <br />
+  <sc-button name="loadBtn" btn-click="loadDataForExaminees()" text="persons.examinationSystemView.loadDataForExaminees" class="btn btn-primary btn-xs" icon="glyphicon-circle-arrow-down"></sc-button>
+  <br />
+  <sc-button name="updateBtn" btn-click="updateStates()" text="persons.examinationSystemView.updateStates" class="btn btn-primary btn-xs" icon="glyphicon-edit"></sc-button>
+</div>
+
+<sc-tabs tab-list="{
+  'persons.examinationSystemView.tabs.qualifications': 'root.examinationSystem.qualifications',
+  'persons.examinationSystemView.tabs.tests': 'root.examinationSystem.tests',
+  'persons.examinationSystemView.tabs.certCampaigns': 'root.examinationSystem.certCampaigns',
+  'persons.examinationSystemView.tabs.exams': 'root.examinationSystem.exams',
+  'persons.examinationSystemView.tabs.certPaths': 'root.examinationSystem.certPaths'
+}"></sc-tabs>
+<div class="tab-content">
+  <div ui-view></div>
+  <div class="clear"></div>
+</div>
+
