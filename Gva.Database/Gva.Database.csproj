@@ -51,6 +51,7 @@
     <Content Include="Create\Tables\ASExamVariants.sql" />
     <Content Include="Create\Tables\ASExamQuestions.sql" />
     <Content Include="Create\Tables\ASExamVariantQuestions.sql" />
+    <Content Include="Create\Tables\GvaViewPersonApplicationTests.sql" />
     <Content Include="Create\Tables\GvaViewPersonQualifications.sql" />
     <Content Include="Create\Tables\GvaExSystCertPaths.sql" />
     <Content Include="Create\Tables\GvaExSystCertCampaigns.sql" />

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
+using Gva.Api.Models.Views;
 using Regs.Api.Models;
 
 namespace Gva.Api.Models
@@ -10,6 +11,7 @@ namespace Gva.Api.Models
         public GvaApplication()
         {
             this.GvaAppLotFiles = new List<GvaAppLotFile>();
+            this.ApplicationTests = new List<GvaViewPersonApplicationTest>();
         }
 
         public int GvaApplicationId { get; set; }
@@ -27,6 +29,8 @@ namespace Gva.Api.Models
         public virtual Part GvaAppLotPart { get; set; }
 
         public virtual ICollection<GvaAppLotFile> GvaAppLotFiles { get; set; }
+
+        public virtual ICollection<GvaViewPersonApplicationTest> ApplicationTests { get; set; }
     }
 
     public class GvaApplicationMap : EntityTypeConfiguration<GvaApplication>
