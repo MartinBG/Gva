@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function ApplicationsEditCtrl(
@@ -10,6 +10,56 @@
     ) {
     $scope.application = application;
     $scope.set = $stateParams.set;
+
+    if ($scope.application.oldDocumentNumber) {
+      $scope.tabs = {
+        'applications.tabs.data': {
+            state: 'root.applications.edit.data',
+            stateParams: {
+              lotId: application.lotId,
+              ind: application.partIndex,
+              set: $scope.set
+            }
+          },
+          'applications.tabs.stages': 'root.applications.edit.stages'
+        };
+    } else {
+      $scope.tabs = {
+        'applications.tabs.data': {
+          state: 'root.applications.edit.data',
+          stateParams: {
+            lotId: $scope.application.lotId,
+            ind: $scope.application.partIndex,
+            set: $scope.set
+          }
+        },
+        'applications.tabs.case': 'root.applications.edit.case',
+        'applications.tabs.stages': 'root.applications.edit.stages',
+        'applications.tabs.examSyst': {
+          state: 'root.applications.edit.examSyst',
+          stateParams: {
+            lotId: $scope.application.lotId,
+            ind: $scope.application.partIndex,
+            set: $scope.set
+          }
+        }
+      };
+    }
+
+    if($scope.application.applicationTypeCode.indexOf('EX-') === 0 ||
+      $scope.application.applicationTypeCode.indexOf('EX/') === 0) {
+      var examSystState = {
+        'applications.tabs.examSyst': {
+          state: 'root.applications.edit.examSyst',
+          stateParams: {
+            lotId: $scope.application.lotId,
+            ind: $scope.application.partIndex,
+            set: $scope.set
+          }
+        }
+      };
+      $scope.tabs = _.assign($scope.tabs, examSystState);
+    }
 
     $scope.viewPerson = function (id) {
       return $state.go('root.persons.view', {
@@ -70,5 +120,4 @@
   };
 
   angular.module('gva').controller('ApplicationsEditCtrl', ApplicationsEditCtrl);
-}(angular
-));
+}(angular, _));

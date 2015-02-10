@@ -1,0 +1,47 @@
+﻿<ng-form name="editDocumentApplicationForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="persons.examinationSystem.title"></strong>
+    </div>
+
+    <div class="well-sm panel-body">
+      <h5 class="form-header" l10n-text="persons.examinationSystem.exSystTests"></h5>
+      <sc-datatable items="examSystData.part.exams" filterable="true" pageable="true" sortable="true">
+        <sc-column data="endTime" title="persons.examinationSystem.endTime" type="date">
+        </sc-column>
+        <sc-column data="test.name" title="persons.examinationSystem.test">
+        </sc-column>
+        <sc-column data="totalScore" title="persons.examinationSystem.totalScore">
+        </sc-column>
+        <sc-column data="status" title="persons.examinationSystem.status" has-content="true">
+          {{item.status === 'failed' ? 'Невзет' : (item.status === 'passed' ? 'Взет' : '') }}
+        </sc-column>
+        <sc-column data="certCamp.name" title="persons.examinationSystem.certCamp">
+        </sc-column>
+      </sc-datatable>
+      <div class="row">
+      </div>
+      <h5 class="form-header" l10n-text="persons.examinationSystem.qualificationsTitle"></h5>
+      <sc-button name="createBtn" text="persons.examinationSystem.newState" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+      <sc-datatable items="examSystData.part.states" filterable="true" pageable="true" sortable="true">
+        <sc-column data="qualification.name" title="persons.examinationSystem.qualificationName">
+        </sc-column>
+        <sc-column data="state" title="persons.examinationSystem.state" has-content="true">
+          {{item.state === 'Finished' ? 'Приключил' : ''}}
+          {{item.state === 'Started' ? 'Стартирал' : ''}}
+          {{item.state === 'Canceled' ? 'Прекратен' : ''}}
+        </sc-column>
+        <sc-column data="stateMethod" has-content="true">
+          {{item.stateMethod === 'Automatic' ? 'Автоматично' : ''}}
+          {{item.stateMethod === 'Manually' ? 'Ръчно' : ''}}
+        </sc-column>
+        <sc-column data="fromDate" title="persons.examinationSystem.fromDate" type="date">
+        </sc-column>
+        <sc-column data="toDate" title="persons.examinationSystem.toDate" type="date">
+        </sc-column>
+        <sc-column data="notes">
+        </sc-column>
+      </sc-datatable>
+    </div>
+  </div>
+</ng-form>

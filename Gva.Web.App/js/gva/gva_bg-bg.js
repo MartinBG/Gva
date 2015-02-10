@@ -1895,6 +1895,23 @@
           inspDataTitle: 'Данни за инспектор',
           examinerDateTitle: 'Данни за проверяващ'
         },
+        examinationSystem: {
+            title: 'Изпитна система',
+            exSystTests: 'ИС: Изпити',
+            qualificationName: 'Квалификация',
+            state: 'Състояние',
+            fromDate: 'От дата (включително)',
+            toDate: 'До дата (включително)',
+            test: 'Тест',
+            date: 'Дата на явяване',
+            totalScore: 'Резултат',
+            endTime: 'Край',
+            status: 'Статус',
+            newState: 'Ново състояние',
+            certCamp: 'Сертификационна кампания',
+            qualificationsTitle: 'Състояния относно придобиването на квалификации',
+            addNewState: 'Добави ново състояние'
+          },
         examinationSystemView: {
           loadData: 'Прехвърляне на данни от Изпитна система за Сертификационни кампании',
           updateStates:
@@ -2631,7 +2648,21 @@
         tabs: {
           'case': 'Преписка',
           stages: 'Дейности по заявление',
-          data: 'Данни за заявление'
+          data: 'Данни за заявление',
+          examSyst: 'Изпитна система'
+        },
+        appExSystDataDirective: {
+            date: 'Дата на явяване',
+            test: 'Тест',
+            status: 'Статус',
+            qualificationName: 'ИС: Квалификация',
+            licenceType: 'Вид правоспособност',
+            addTests: 'Към промяна на списък с тестове от заявлението',
+            certCampaign: 'Сертификационна кампания',
+            schools: 'Учебен център',
+            qualificationsTitle: 'Състояния относно придобиването на квалификации',
+            exSystTests: 'ИС: Тестове',
+            noEntry: 'Няма информация за тестове'
         },
         edit: {
           equipmentName: 'Име',
@@ -2733,6 +2764,12 @@
             pageIndex: 'Брой стр.',
             file: 'Файл',
             viewPart: 'Преглед'
+          },
+          examinationSystem: {
+            title: 'Данни за изпити',
+            save: 'Запис',
+            cancel: 'Отказ',
+            edit: 'Редакция'
           }
         },
         newForm: {
@@ -2824,6 +2861,14 @@
           save: 'Запис',
           cancel: 'Отказ',
           name: 'Наименование'
+        },
+        addTestsModal: {
+          title: 'Редакция на тестове',
+          save: 'Запис',
+          cancel: 'Отказ',
+          date: 'Дата на явяване',
+          test: 'Тест',
+          noEntry: 'Няма информация за тестове'
         },
         organizationSelect: {
           organization: 'Организация',
@@ -3749,6 +3794,7 @@
         'root.persons.view.reports': 'Отчети',
         'root.persons.view.reports.new': 'Нов отчет',
         'root.persons.view.reports.edit': 'Преглед на отчет',
+        'root.persons.view.examinationSystem': 'Изпитна система',
         'root.aircrafts': 'ВС',
         'root.aircrafts.new': 'Ново ВС',
         'root.aircrafts.view': 'Данни за ВС',

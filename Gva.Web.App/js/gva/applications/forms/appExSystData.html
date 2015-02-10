@@ -1,0 +1,53 @@
+﻿<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row">
+    <sc-field type="nomenclature" alias="'schools'" ng-model="model.school" 
+      l10n-text="applications.appExSystDataDirective.schools" class="col-sm-5">
+    </sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="nomenclature" alias="'appExSystCertCampaigns'" ng-readonly="model.tests.length === 0 || form.$readonly"
+        ng-model="model.certCampaign" l10n-text="applications.appExSystDataDirective.certCampaign" class="col-sm-5">
+    </sc-field>
+  </div>
+
+  <h5 class="form-header" l10n-text="applications.appExSystDataDirective.exSystTests"></h5>
+  <sc-button name="createBtn" text="applications.appExSystDataDirective.addTests" btn-click="addTests()"
+      ng-disabled="!model.certCampaign || form.$readonly" class="btn btn-sm btn-primary pull-left" icon="glyphicon-pencil"></sc-button>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="col-sm-7">
+          <label class="control-label" l10n-text="applications.appExSystDataDirective.test"></label>
+        </th>
+        <th class="col-sm-4">
+          <label class="control-label" l10n-text="applications.appExSystDataDirective.date"></label>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat-start="test in model.tests">
+        <td class="col-sm-7">
+          {{test.testData.name}}
+        </td>
+        <td class="col-sm-4">
+          {{test.date | date : format : 'mediumDate'}}
+        </td>
+      </tr>
+      <tr ng-repeat-end=""></tr>
+      <tr class="sort-disabled" ng-if="!model.tests.length">
+        <td colspan="2" class="text-center" l10n-text="applications.appExSystDataDirective.noEntry"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+  </div>
+  <h5 class="form-header" l10n-text="applications.appExSystDataDirective.qualificationsTitle"></h5>
+  <sc-datatable items="model.qualifications" filterable="true" pageable="false" sortable="true" dynamic-columns="false">
+    <sc-column data="licenceType.code" title="applications.appExSystDataDirective.licenceType">
+    </sc-column>
+    <sc-column data="qualificationName" title="applications.appExSystDataDirective.qualificationName">
+    </sc-column>
+    <sc-column data="status" title="applications.appExSystDataDirective.status">
+    </sc-column>
+  </sc-datatable>
+</ng-form>

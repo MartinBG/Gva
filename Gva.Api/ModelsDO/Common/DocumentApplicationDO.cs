@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
+using Gva.Api.ModelsDO.Applications;
 
 namespace Gva.Api.ModelsDO.Common
 {
@@ -29,5 +30,7 @@ namespace Gva.Api.ModelsDO.Common
         public string Notes { get; set; }
 
         public NomValue Stage { get; set; }
+
+        public AppExaminationSystemDataDO examinationSystemData { get; set; }
     }
 }

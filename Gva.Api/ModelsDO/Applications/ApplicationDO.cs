@@ -29,6 +29,7 @@ namespace Gva.Api.ModelsDO.Applications
                 this.LotSetAlias = lotSetAlias;
                 this.LotSetId = lotSetId;
                 this.OldDocumentNumber = nom.OldDocumentNumber;
+                this.ApplicationTypeCode = nom.ApplicationCode;
             }
         }
 
@@ -47,6 +48,8 @@ namespace Gva.Api.ModelsDO.Applications
         public int LotSetId { get; set; }
 
         public string OldDocumentNumber { get; set; }
+
+        public string ApplicationTypeCode { get; set; }
 
         public PersonViewDO Person { get; set; }
 

@@ -126,7 +126,14 @@ namespace Gva.Api.Controllers.Persons
         {
             var person = this.personRepository.GetPerson(lotId);
 
-            return Ok(new PersonViewDO(person));
+            var hasExamSystData = false;
+            var examSystDataPartVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<PersonExamSystDataDO>("personExamSystData");
+            if (examSystDataPartVersion != null)
+            {
+                hasExamSystData = true;
+            }
+
+            return Ok(new PersonViewDO(person, hasExamSystData));
         }
 
         [Route("")]

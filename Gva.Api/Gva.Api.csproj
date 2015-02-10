@@ -149,6 +149,7 @@
     <Compile Include="Controllers\Organizations\OrganizationRecommendationsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationGroundServiceOperatorsSnoOperationalController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationApprovalAmendmentsController.cs" />
+    <Compile Include="Controllers\Persons\PersonExamSystemController.cs" />
     <Compile Include="Controllers\Persons\PersonReportsController.cs" />
     <Compile Include="Controllers\Persons\PersonLanguageCertificatesController.cs" />
     <Compile Include="Controllers\Persons\PersonLicenceEditionsController.cs" />
@@ -164,6 +165,9 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftReviewAmendmentFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMViewDO.cs" />
+    <Compile Include="ModelsDO\Applications\AppExamSystQualificationDO.cs" />
+    <Compile Include="ModelsDO\Applications\AppExamSystTestDO.cs" />
+    <Compile Include="ModelsDO\Applications\AppExaminationSystemDataDO.cs" />
     <Compile Include="ModelsDO\Applications\DocCaseDO.cs" />
     <Compile Include="ModelsDO\Applications\PartDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
@@ -174,6 +178,9 @@
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystTestDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonExamSystStateDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonExamSystExamDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonExamSystDataDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonLangLevelDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonReportViewDO.cs" />
     <Compile Include="ModelsDO\Persons\IncludedPersonDO.cs" />

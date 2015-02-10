@@ -252,6 +252,10 @@
     <Content Include="js\gva\applications\forms\applicationSelectEquipment.html" />
     <Content Include="js\gva\applications\forms\applicationStage.html" />
     <Content Include="js\gva\applications\forms\applicationDocumentCtrl.js" />
+    <Content Include="js\gva\applications\forms\appExSystData.html" />
+    <Content Include="js\gva\applications\forms\appExSystDataCtrl.js" />
+    <Content Include="js\gva\applications\modals\examSyst\addTestsModal.html" />
+    <Content Include="js\gva\applications\modals\examSyst\addTestsModalCtrl.js" />
     <Content Include="js\gva\applications\modals\persons\addCaseTypesModal.html" />
     <Content Include="js\gva\applications\modals\persons\addCaseTypesModalCtrl.js" />
     <Content Include="js\gva\applications\modals\stages\editAppStageModal.html" />
@@ -305,6 +309,9 @@
     <Content Include="js\gva\applications\views\case\applicationsEditNewFileCtrl.js" />
     <Content Include="js\gva\applications\views\appExamSyst\appExamSyst.html" />
     <Content Include="js\gva\applications\views\appExamSyst\appExamSystCtrl.js" />
+    <Content Include="js\gva\persons\resources\personExamSystData.js" />
+    <Content Include="js\gva\persons\views\personExamSyst\personExamSyst.html" />
+    <Content Include="js\gva\persons\views\personExamSyst\personExamSystCtrl.js" />
     <Content Include="js\gva\applications\views\stages\applicationsEditStages.html" />
     <Content Include="js\gva\applications\views\stages\applicationsEditStagesCtrl.js" />
     <Content Include="js\gva\applications\views\applicationsNew.html" />

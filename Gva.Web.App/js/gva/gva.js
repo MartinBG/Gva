@@ -22,6 +22,11 @@
       controller: 'AppDocumentCtrl'
     });
     scaffoldingProvider.form({
+      name: 'gvaApplicationExamSystData',
+      templateUrl: 'js/gva/applications/forms/appExSystData.html',
+      controller: 'AppExSystDataCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaCommonSelectPerson',
       templateUrl: 'js/gva/common/forms/commonSelectPerson.html',
       controller: 'CommonSelectPersonCtrl'
@@ -396,25 +401,27 @@
       .state(['root.applications.edit.case.childDoc'               , '/childDoc?parentDocId'                                                                   , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditChildDoc.html'  , 'ApplicationsEditChildDocCtrl'  ]])
       .state(['root.applications.edit.case.addPart'                , '/addPart?docId&docFileId&setPartAlias&caseTypeId&lotId'                                  , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditAddPart.html'   , 'ApplicationsEditAddPartCtrl'   ]])
       .state(['root.applications.edit.case.linkPart'               , '/linkPart?docFileId'                                                                     , ['@root.applications.edit', 'js/gva/applications/views/case/applicationsEditLinkPart.html'  , 'ApplicationsEditLinkPartCtrl'  ]])
-      .state(['root.applications.edit.stages'                      , '/stages'                                                                                 , ['@root.applications.edit', 'js/gva/applications/views/stages/applicationsEditStages.html'  , 'ApplicationsEditStagesCtrl'    ]]);
+      .state(['root.applications.edit.stages'                      , '/stages'                                                                                 , ['@root.applications.edit', 'js/gva/applications/views/stages/applicationsEditStages.html'  , 'ApplicationsEditStagesCtrl'    ]])
+      .state(['root.applications.edit.examSyst'                    , '/:lotId/examSyst/:ind'                                                                   , ['@root.applications.edit', 'js/gva/applications/views/appExamSyst/appExamSyst.html'        , 'AppExamSystCtrl'               ]]);
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
-     .modal('chooseAppType'     , 'js/gva/applications/modals/applicationTypes/chooseAppTypesModal.html'    , 'ChooseAppTypesModalCtrl'            )
-     .modal('addCaseTypes'      , 'js/gva/applications/modals/persons/addCaseTypesModal.html'               , 'AddCaseTypesModalCtrl'      , 'xs-2')
-     .modal('chooseOrganization', 'js/gva/applications/modals/organizations/chooseOrganizationModal.html'   , 'ChooseOrganizationModalCtrl'        )
-     .modal('newOrganization'   , 'js/gva/applications/modals/organizations/newOrganizationModal.html'      , 'NewOrganizationModalCtrl'           )
-     .modal('chooseAircraft'    , 'js/gva/applications/modals/aircrafts/chooseAircraftModal.html'           , 'ChooseAircraftModalCtrl'            )
-     .modal('newAircraft'       , 'js/gva/applications/modals/aircrafts/newAircraftModal.html'              , 'NewAircraftModalCtrl'               )
-     .modal('chooseAirport'     , 'js/gva/applications/modals/airports/chooseAirportModal.html'             , 'ChooseAirportModalCtrl'             )
-     .modal('newAirport'        , 'js/gva/applications/modals/airports/newAirportModal.html'                , 'NewAirportModalCtrl'                )
-     .modal('chooseEquipment'   , 'js/gva/applications/modals/equipments/chooseEquipmentModal.html'         , 'ChooseEquipmentModalCtrl'           )
-     .modal('newEquipment'      , 'js/gva/applications/modals/equipments/newEquipmentModal.html'            , 'NewEquipmentModalCtrl'              )
-     .modal('chooseDoc'         , 'js/gva/applications/modals/docs/chooseDocModal.html'                     , 'ChooseDocModalCtrl'                 )
-     .modal('editDocStage'      , 'js/gva/applications/modals/stages/editDocStageModal.html'                , 'EditDocStageModalCtrl'              )
-     .modal('endDocStage'       , 'js/gva/applications/modals/stages/endDocStageModal.html'                 , 'EndDocStageModalCtrl'               )
-     .modal('nextDocStage'      , 'js/gva/applications/modals/stages/nextDocStageModal.html'                , 'NextDocStageModalCtrl'              )
-     .modal('newAppStage'       , 'js/gva/applications/modals/stages/newAppStageModal.html'                 , 'NewAppStageModalCtrl'               )
-     .modal('editAppStage'      , 'js/gva/applications/modals/stages/editAppStageModal.html'                , 'EditAppStageModalCtrl'              );
+     .modal('chooseAppType'        , 'js/gva/applications/modals/applicationTypes/chooseAppTypesModal.html'    , 'ChooseAppTypesModalCtrl'            )
+     .modal('addCaseTypes'         , 'js/gva/applications/modals/persons/addCaseTypesModal.html'               , 'AddCaseTypesModalCtrl'      , 'xs-2')
+     .modal('chooseOrganization'   , 'js/gva/applications/modals/organizations/chooseOrganizationModal.html'   , 'ChooseOrganizationModalCtrl'        )
+     .modal('newOrganization'      , 'js/gva/applications/modals/organizations/newOrganizationModal.html'      , 'NewOrganizationModalCtrl'           )
+     .modal('chooseAircraft'       , 'js/gva/applications/modals/aircrafts/chooseAircraftModal.html'           , 'ChooseAircraftModalCtrl'            )
+     .modal('newAircraft'          , 'js/gva/applications/modals/aircrafts/newAircraftModal.html'              , 'NewAircraftModalCtrl'               )
+     .modal('chooseAirport'        , 'js/gva/applications/modals/airports/chooseAirportModal.html'             , 'ChooseAirportModalCtrl'             )
+     .modal('newAirport'           , 'js/gva/applications/modals/airports/newAirportModal.html'                , 'NewAirportModalCtrl'                )
+     .modal('chooseEquipment'      , 'js/gva/applications/modals/equipments/chooseEquipmentModal.html'         , 'ChooseEquipmentModalCtrl'           )
+     .modal('newEquipment'         , 'js/gva/applications/modals/equipments/newEquipmentModal.html'            , 'NewEquipmentModalCtrl'              )
+     .modal('chooseDoc'            , 'js/gva/applications/modals/docs/chooseDocModal.html'                     , 'ChooseDocModalCtrl'                 )
+     .modal('editDocStage'         , 'js/gva/applications/modals/stages/editDocStageModal.html'                , 'EditDocStageModalCtrl'              )
+     .modal('endDocStage'          , 'js/gva/applications/modals/stages/endDocStageModal.html'                 , 'EndDocStageModalCtrl'               )
+     .modal('nextDocStage'         , 'js/gva/applications/modals/stages/nextDocStageModal.html'                , 'NextDocStageModalCtrl'              )
+     .modal('newAppStage'          , 'js/gva/applications/modals/stages/newAppStageModal.html'                 , 'NewAppStageModalCtrl'               )
+     .modal('editAppStage'         , 'js/gva/applications/modals/stages/editAppStageModal.html'                , 'EditAppStageModalCtrl'              )
+     .modal('appExSystChooseTests' , 'js/gva/applications/modals//examSyst/addTestsModal.html'                 , 'AddTestsModalCtrl'          , 'xs-2');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.persons'                                               , '/persons?exact&lin&uin&names&licences&ratings&organization&caseType'                                                                                                                                                                                                    ])
@@ -500,8 +507,9 @@
       .state(['root.persons.view.documentOthers.edit'                      , '/:ind'                                                                       , ['@root.persons.view'                               , 'js/gva/persons/views/documentOthers/othersEdit.html'                                         , 'DocumentOthersEditCtrl'          ]])
       .state(['root.persons.view.documentApplications'                     , '/documentApplications'                                                                                                                                                                                                                                                  ])
       .state(['root.persons.view.documentApplications.search'              , ''                                                                            , ['@root.persons.view'                               , 'js/gva/persons/views/documentApplications/docApplicationsSearch.html'                        , 'DocApplicationsSearchCtrl'       ]])
+      .state(['root.persons.view.examinationSystem'                        , '/examSyst'                                                                   , ['@root.persons.view'                               , 'js/gva/persons/views/personExamSyst/personExamSyst.html'                                     , 'PersonExamSystCtrl'              ]])
       .state(['root.printableDocs'                                         , '/printableDocs?lin&uin&names&licenceType&licenceAction'                      , ['@root'                                            , 'js/gva/persons/views/printableDocs/printableDocsSearch.html'                                 , 'PrintableDocsSearchCtrl'         ]])
-      .state(['root.stampedDocuments'                                      , '/stampedDocuments?lin&uin&names&stampNumber'                                 , ['@root'                                            , 'js/gva/persons/views/stampedDocuments/stampedDocuments.html'                                 , 'StampedDocumentsCtrl'            ]]);
+      .state(['root.stampedDocuments'                                      , '/stampedDocuments?lin&uin&names&stampNumber'                                 , ['@root'                                            , 'js/gva/persons/views/stampedDocuments/stampedDocuments.html'                                 , 'StampedDocumentsCtrl'            ]])
       .state(['root.examinationSystem'                                     , '/examinationSystem'                                                          , ['@root'                                            , 'js/gva/persons/views/examinationSystem/examinationSystem.html'                               , 'ExaminationSystemCtrl'           ]])
       .state(['root.examinationSystem.qualifications'                      , '/qualifications'                                                             , ['@root.examinationSystem'                          , 'js/gva/persons/views/examinationSystem/qualifications.html'                                  , 'QualificationsCtrl'              ]])
       .state(['root.examinationSystem.exams'                               , '/exams'                                                                      , ['@root.examinationSystem'                          , 'js/gva/persons/views/examinationSystem/exSystExaminees.html'                                 , 'ExSystExamineesCtrl'             ]])

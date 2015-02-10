@@ -19,6 +19,7 @@ using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.StageRepository;
 using Regs.Api.Repositories.LotRepositories;
+using Gva.Api.Repositories.ExaminationSystemRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -36,6 +37,7 @@ namespace Gva.Api.Controllers
         private ICaseTypeRepository caseTypeRepository;
         private INomRepository nomRepository;
         private IStageRepository stageRepository;
+        private IExaminationSystemRepository examinationSystemRepository;
 
         public GvaNomController(
             ILotRepository lotRepository,
@@ -47,7 +49,8 @@ namespace Gva.Api.Controllers
             IOrganizationRepository organizationRepository,
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository,
-            IStageRepository stageRepository)
+            IStageRepository stageRepository,
+            IExaminationSystemRepository examinationSystemRepository)
         {
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
@@ -59,6 +62,7 @@ namespace Gva.Api.Controllers
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
             this.stageRepository = stageRepository;
+            this.examinationSystemRepository = examinationSystemRepository;
         }
 
         [Route("{lotId}/applications")]
@@ -96,6 +100,44 @@ namespace Gva.Api.Controllers
             {
                 return Ok(applications);
             }
+        }
+
+        [Route("appExamSystTests")]
+        public IHttpActionResult GetAppExamSystTests(string term = null, string qualificationCode = null, string certCampCode = null)
+        {
+            var tests = this.examinationSystemRepository.GetTests(qualificationCode, certCampCode)
+                .Select(c => new
+                {
+                    nomValueId = c.Code,
+                    code = c.Code,
+                    name = c.Name
+                });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                return Ok(tests.Where(a => a.name.Contains(term)));
+            }
+
+            return Ok(tests);
+        }
+
+        [Route("appExSystCertCampaigns")]
+        public IHttpActionResult GetCertCampaigns(string term = null)
+        {
+            var campaigns = this.examinationSystemRepository.GetCertCampaigns()
+                .Select(c => new
+                { 
+                    nomValueId = c.Code,
+                    code = c.Code,
+                    name = c.Name
+                });
+                
+            if (!string.IsNullOrEmpty(term))
+            {
+                return Ok(campaigns.Where(a => a.name.Contains(term)));
+            }
+
+            return Ok(campaigns);
         }
 
         [Route("organizationsAudits")]

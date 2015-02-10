@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
+using Gva.Api.Models.Vew;
 using Gva.Api.Models.Views.Organization;
 using Regs.Api.Models;
 
@@ -42,6 +43,8 @@ namespace Gva.Api.Models.Views.Person
 
         public virtual GvaViewPersonInspector Inspector { get; set; }
 
+        public virtual ICollection<GvaExSystExaminee> Examinees { get; set; }
+
         public virtual GvaViewPersonExaminer Examiner { get; set; }
 
         public virtual ICollection<GvaLotCase> GvaLotCases { get; set; }
@@ -55,6 +58,8 @@ namespace Gva.Api.Models.Views.Person
         public virtual ICollection<GvaViewPersonReport> Reports { get; set; }
 
         public virtual ICollection<GvaViewPersonCheck> Checks { get; set; }
+
+        public virtual ICollection<GvaViewPersonQualification> Qualifications { get; set; }
     }
 
     public class GvaViewPersonMap : EntityTypeConfiguration<GvaViewPerson>
@@ -103,6 +108,9 @@ namespace Gva.Api.Models.Views.Person
             this.HasOptional(t => t.Organization)
                 .WithMany()
                 .HasForeignKey(t => t.OrganizationId);
+            this.HasOptional(t => t.Employment)
+                .WithMany()
+                .HasForeignKey(t => t.EmploymentId);
             this.HasOptional(t => t.Employment)
                 .WithMany()
                 .HasForeignKey(t => t.EmploymentId);

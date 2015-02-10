@@ -8,7 +8,7 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonViewDO
     {
-        public PersonViewDO(GvaViewPerson personData)
+        public PersonViewDO(GvaViewPerson personData, bool? hasExamSystData = false)
         {
             this.Id = personData.LotId;
             this.Lin = personData.Lin;
@@ -21,6 +21,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.Licences = personData.Licences;
             this.Ratings = personData.Ratings;
             this.CaseTypes = personData.CaseTypes;
+            this.HasExamSystData = hasExamSystData.Value;
         }
 
         public int Id { get; set; }
@@ -44,6 +45,8 @@ namespace Gva.Api.ModelsDO.Persons
         public string Employment { get; set; }
 
         public string CaseTypes { get; set; }
+
+        public bool HasExamSystData { get; set; }
 
         private int GetAge(DateTime birthDate)
         {

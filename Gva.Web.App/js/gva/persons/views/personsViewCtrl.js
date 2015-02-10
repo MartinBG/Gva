@@ -38,9 +38,14 @@
       }
     };
 
+    if (person.hasExamSystData) {
+      $scope.tabs = _.assign($scope.tabs, {
+        'persons.tabs.examinationSystem': 'root.persons.view.examinationSystem'
+      });
+    }
     if(person.caseTypes.indexOf('staffExaminer') !== -1 ||
       person.caseTypes.indexOf('inspector') !== -1) {
-      $scope.tabs = _.assign($scope.tabs, {'persons.tabs.reports': 'root.persons.view.reports'});
+      $scope.tabs = _.assign($scope.tabs, { 'persons.tabs.reports': 'root.persons.view.reports' });
     } 
 
     $scope.tabs = _.assign($scope.tabs, {
