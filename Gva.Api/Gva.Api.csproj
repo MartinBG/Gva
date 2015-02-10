@@ -302,6 +302,7 @@
     <Compile Include="ModelsDO\Persons\PersonStatusDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonTrainingDO.cs" />
     <Compile Include="ModelsDO\Common\TimeDO.cs" />
+    <Compile Include="Models\Views\GvaViewPersonQualification.cs" />
     <Compile Include="Models\GvaExSystCertPath.cs" />
     <Compile Include="Models\GvaExSystCertCampaign.cs" />
     <Compile Include="Models\GvaConstants.cs" />
@@ -344,6 +345,7 @@
     <Compile Include="Projections\Inventory\Equipments\EquipmentOtherProjection.cs" />
     <Compile Include="Projections\Inventory\Equipments\EquipmentOwnerProjection.cs" />
     <Compile Include="Projections\Inventory\Organizations\OrganizationOtherProjection.cs" />
+    <Compile Include="Projections\Person\PersonQualificationProjection.cs" />
     <Compile Include="Projections\Person\PersonReportCheckProjection.cs" />
     <Compile Include="Projections\Person\PersonReportProjection.cs" />
     <Compile Include="Projections\Person\PersonCheckProjection.cs" />

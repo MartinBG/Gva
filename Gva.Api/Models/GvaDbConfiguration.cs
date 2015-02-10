@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using Common.Data;
+using Gva.Api.Models.Vew;
 using Gva.Api.Models.Views;
 using Gva.Api.Models.Views.Aircraft;
 using Gva.Api.Models.Views.Airport;
@@ -29,6 +30,7 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaViewPersonLicenceEditionMap());
             modelBuilder.Configurations.Add(new GvaViewPersonRatingMap());
             modelBuilder.Configurations.Add(new GvaViewPersonRatingEditionMap());
+            modelBuilder.Configurations.Add(new GvaViewPersonQualificationMap());
             modelBuilder.Configurations.Add(new GvaLicenceEditionMap());
             modelBuilder.Configurations.Add(new GvaViewPersonDocumentMap());
             modelBuilder.Configurations.Add(new GvaViewPersonCheckMap());

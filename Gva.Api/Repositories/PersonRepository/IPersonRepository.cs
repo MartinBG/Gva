@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using Gva.Api.Models;
+using Gva.Api.Models.Vew;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.ExaminationSystem;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.Models;
 
@@ -74,5 +76,7 @@ namespace Gva.Api.Repositories.PersonRepository
         bool IsFclLicence(int licenceTypeId);
 
         List<GvaViewPersonCheck> GetChecksForReport(List<int> checks);
+
+        List<GvaExSystQualification> GetPersonQualifications(int lotId);
     }
 }

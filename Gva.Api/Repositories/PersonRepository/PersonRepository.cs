@@ -8,8 +8,10 @@ using Common.Data;
 using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
+using Gva.Api.Models.Vew;
 using Gva.Api.Models.Views;
 using Gva.Api.Models.Views.Person;
+using Gva.Api.ModelsDO.ExaminationSystem;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.Models;
@@ -431,6 +433,24 @@ namespace Gva.Api.Repositories.PersonRepository
             {
                 return new List<GvaViewPersonCheck>();
             }
+        }
+
+        public List<GvaExSystQualification> GetPersonQualifications(int lotId)
+        {
+            var qualifications = this.unitOfWork.DbContext.Set<GvaViewPersonQualification>()
+                .Where(q => q.LotId == lotId);
+
+            List<string> qualificationCodes = new List<string>();
+            foreach (GvaViewPersonQualification qualification in qualifications)
+            {
+                qualificationCodes = qualificationCodes.Union(qualification.QualificationCodes.Split(',')).ToList();
+            }
+
+            return this.unitOfWork.DbContext.Set<GvaExSystQualification>()
+                .Include(c => c.CertCampaigns)
+                .Include(c => c.CertPaths)
+                .Where(q => qualificationCodes.Contains(q.Code))
+                .ToList();
         }
     }
 }

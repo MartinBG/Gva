@@ -30,6 +30,7 @@ GO
 :r $(rootPath)\"Tables\GvaViewPersonReportsChecks.sql"
 :r $(rootPath)\"Tables\GvaViewInventoryItems.sql"
 :r $(rootPath)\"Tables\GvaViewApplications.sql"
+:r $(rootPath)\"Tables\GvaViewPersonQualifications.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizationRecommendations.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizationInspections.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizationInspectionsRecommendations.sql"
