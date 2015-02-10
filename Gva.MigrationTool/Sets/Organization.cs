@@ -9,6 +9,7 @@ using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
 using Newtonsoft.Json.Linq;
 using Oracle.DataAccess.Client;
+using Gva.Api.CommonUtils;
 
 namespace Gva.MigrationTool.Sets
 {

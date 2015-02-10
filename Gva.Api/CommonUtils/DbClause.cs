@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gva.MigrationTool
+namespace Gva.Api.CommonUtils
 {
     public class DbClause
     {

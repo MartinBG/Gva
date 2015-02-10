@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
+using Gva.Api.CommonUtils;
 using Newtonsoft.Json.Linq;
 using Oracle.DataAccess.Client;
 

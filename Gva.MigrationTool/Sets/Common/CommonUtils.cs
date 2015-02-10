@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gva.Api.CommonUtils;
 using Gva.Api.Models;
 using Oracle.DataAccess.Client;
 

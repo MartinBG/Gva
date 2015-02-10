@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Threading;
+using Gva.Api.CommonUtils;
 using Oracle.DataAccess.Client;
 
 namespace Gva.MigrationTool.Blobs

@@ -85,6 +85,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonUtils\DbClause.cs" />
+    <Compile Include="CommonUtils\Materializer.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesFMController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsFMController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentApplicationsController.cs" />
@@ -134,6 +136,7 @@
     <Compile Include="Controllers\Persons\PersonLanguageCertificatesController.cs" />
     <Compile Include="Controllers\Persons\PersonLicenceEditionsController.cs" />
     <Compile Include="Controllers\Persons\PersonRatingEditionsController.cs" />
+    <Compile Include="CommonUtils\DataExtensions.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregExportFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregFMDO.cs" />

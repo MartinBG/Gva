@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gva.MigrationTool
+namespace Gva.Api.CommonUtils
 {
     /// <summary>
     /// Supports shaping IDbCommand and IDbDataReader as CLR instances.
