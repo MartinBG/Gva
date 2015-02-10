@@ -1,4 +1,4 @@
-﻿/*jshint maxlen:false*/
+/*jshint maxlen:false*/
 /*global angular*/
 (function (angular) {
   'use strict';
@@ -384,6 +384,7 @@
     scModalProvider
      .modal('choosePublisher' , 'js/gva/common/modals/publishers/choosePublisherModal.html'  , 'ChoosePublisherModalCtrl' )
      .modal('choosePerson'    , 'js/gva/common/modals/persons/choosePersonModal.html'        , 'ChoosePersonModalCtrl'    )
+     .modal('choosePersons'   , 'js/gva/common/modals/persons/choosePersonsModal.html'       , 'ChoosePersonsModalCtrl'   )
      .modal('newPerson'       , 'js/gva/common/modals/persons/newPersonModal.html'           , 'NewPersonModalCtrl'       )
      .modal('chooseInspectors', 'js/gva/common/modals/inspectors/chooseInspectorsModal.html' , 'ChooseInspectorsModalCtrl')
      .modal('editDisparity'   , 'js/gva/common/modals/disparities/editDisparityModal.html'   , 'EditDisparityModalCtrl'   )
@@ -510,6 +511,9 @@
       .state(['root.persons.view.examinationSystem'                        , '/examSyst'                                                                   , ['@root.persons.view'                               , 'js/gva/persons/views/personExamSyst/personExamSyst.html'                                     , 'PersonExamSystCtrl'              ]])
       .state(['root.printableDocs'                                         , '/printableDocs?lin&uin&names&licenceType&licenceAction'                      , ['@root'                                            , 'js/gva/persons/views/printableDocs/printableDocsSearch.html'                                 , 'PrintableDocsSearchCtrl'         ]])
       .state(['root.stampedDocuments'                                      , '/stampedDocuments?lin&uin&names&stampNumber'                                 , ['@root'                                            , 'js/gva/persons/views/stampedDocuments/stampedDocuments.html'                                 , 'StampedDocumentsCtrl'            ]])
+      .state(['root.export'                                                , '/export'                                                                     , ['@root'                                            , 'js/gva/persons/views/export/exportView.html'                                                                                     ]])
+      .state(['root.export.personsData'                                    , '/personsData'                                                                , ['@root.export'                                     , 'js/gva/persons/views/export/exportPersonsData.html'                                          , 'ExportPersonsDataCtrl'           ]])
+      .state(['root.export.examsData'                                      , '/examsData'                                                                  , ['@root.export'                                     , 'js/gva/persons/views/export/exportExamsData.html'                                            , 'ExportExamsDataCtrl'             ]])
       .state(['root.examinationSystem'                                     , '/examinationSystem'                                                          , ['@root'                                            , 'js/gva/persons/views/examinationSystem/examinationSystem.html'                               , 'ExaminationSystemCtrl'           ]])
       .state(['root.examinationSystem.qualifications'                      , '/qualifications'                                                             , ['@root.examinationSystem'                          , 'js/gva/persons/views/examinationSystem/qualifications.html'                                  , 'QualificationsCtrl'              ]])
       .state(['root.examinationSystem.exams'                               , '/exams'                                                                      , ['@root.examinationSystem'                          , 'js/gva/persons/views/examinationSystem/exSystExaminees.html'                                 , 'ExSystExamineesCtrl'             ]])

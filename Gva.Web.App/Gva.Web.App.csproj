@@ -309,7 +309,12 @@
     <Content Include="js\gva\applications\views\case\applicationsEditNewFileCtrl.js" />
     <Content Include="js\gva\applications\views\appExamSyst\appExamSyst.html" />
     <Content Include="js\gva\applications\views\appExamSyst\appExamSystCtrl.js" />
+    <Content Include="js\gva\common\modals\persons\choosePersonsModal.html" />
+    <Content Include="js\gva\common\modals\persons\choosePersonsModalCtrl.js" />
     <Content Include="js\gva\persons\resources\personExamSystData.js" />
+    <Content Include="js\gva\persons\views\export\exportView.html" />
+    <Content Include="js\gva\persons\views\export\exportPersonsData.html" />
+    <Content Include="js\gva\persons\views\export\exportPersonsDataCtrl.js" />
     <Content Include="js\gva\persons\views\personExamSyst\personExamSyst.html" />
     <Content Include="js\gva\persons\views\personExamSyst\personExamSystCtrl.js" />
     <Content Include="js\gva\applications\views\stages\applicationsEditStages.html" />

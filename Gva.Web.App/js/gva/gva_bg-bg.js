@@ -1975,6 +1975,21 @@
           received: 'Получен',
           finished: 'Приключено заявление'
         },
+        exportView: {
+          tabs: {
+            examsData: 'Заявления за изпити',
+            personsData: 'Физически лица'
+          }
+        },
+        exportPersonsData: {
+          exportData: 'Експорт физически лица',
+          addPersons: 'Добави физически лица',
+          names: 'Име',
+          uin: 'ЕГН',
+          lin: 'ЛИН',
+          noEntry: 'Няма лица избрани за екпорт',
+          chosenPersons: 'Избрани за експорт физически лица'
+        },
         viewPerson: {
           name: 'Име',
           uin: 'ЕГН',
@@ -2490,13 +2505,21 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
-        choosePersonsModal: {
+        choosePersonModal: {
           title: 'Избор на физическо лице',
           save: 'Запис',
           cancel: 'Отказ',
           lin: 'ЛИН',
           names: 'Име',
           add: 'Добави'
+        },
+        choosePersonsModal: {
+          title: 'Избор на физически лица',
+          add: 'Добави',
+          cancel: 'Отказ',
+          lin: 'ЛИН',
+          names: 'Име',
+          uin: 'ЕГН'
         },
         chooseMedicalsModal: {
           title: 'Избор на медицински',
@@ -3928,7 +3951,9 @@
         'root.equipments.view.inspections.edit': 'Преглед на инспекция',
         'root.equipments.view.inventory': 'Опис',
         'root.printableDocs': 'Документи за печат',
-        'root.stampedDocuments': 'Лицензи за получаване'
+        'root.export': 'Експорт XML',
+        'root.export.personsData': 'Данни за Физически лица',
+        'root.export.examsData': 'Данни за изпити',
         'root.examinationSystem': 'Изпитна система',
         'root.examinationSystem.qualifications': 'Квалификации',
         'root.examinationSystem.tests': 'Тестове',

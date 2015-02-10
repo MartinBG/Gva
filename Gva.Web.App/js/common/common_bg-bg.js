@@ -31,6 +31,7 @@
             printableDocs: 'Документи за печат',
             stampedDocuments: 'Лицензи за получаване',
             examinationSystem: 'Изпитна система',
+            'export': 'Експорт XML'
           },
           aircrafts: {
             title: 'ВС',

@@ -149,6 +149,7 @@
     <Compile Include="Controllers\Organizations\OrganizationRecommendationsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationGroundServiceOperatorsSnoOperationalController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationApprovalAmendmentsController.cs" />
+    <Compile Include="Controllers\Persons\PersonExportXmlController.cs" />
     <Compile Include="Controllers\Persons\PersonExamSystemController.cs" />
     <Compile Include="Controllers\Persons\PersonReportsController.cs" />
     <Compile Include="Controllers\Persons\PersonLanguageCertificatesController.cs" />
