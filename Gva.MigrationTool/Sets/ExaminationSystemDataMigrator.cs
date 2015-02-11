@@ -42,6 +42,7 @@ namespace Gva.MigrationTool.Sets
 
         public void MigrateExaminationSystemData(
             Dictionary<int, int> personIdToLotId,
+            ConcurrentQueue<JObject> examinees,
             //cancellation
             CancellationTokenSource cts,
             CancellationToken ct)
@@ -65,33 +66,71 @@ namespace Gva.MigrationTool.Sets
 
                 try
                 {
+                    JObject examinee = null;
 
-                    var allNewQualifications = this.oracleConn.CreateStoreCommand(@"SELECT * FROM GVA_XM_QUALIFICATIONS_V@exams")
-                    .Materialize(r =>
-                        new GvaExSystQualification
-                        {
-                            Name = r.Field<string>("QLF_NAME"),
-                            Code = r.Field<string>("QLF_CODE")
-                        });
+                    while (examinees.TryDequeue(out examinee))
+                    {
+
+                    }
+                }
+                catch (Exception)
+                {
+                    cts.Cancel();
+                    throw;
+                }
+            }
+        }
+
+        public void MigrateDataForExaminations(
+            Dictionary<int, int> personIdToLotId,
+            //cancellation
+            CancellationTokenSource cts,
+            CancellationToken ct)
+        {
+            try
+            {
+                this.oracleConn.Open();
+            }
+            catch (Exception)
+            {
+                cts.Cancel();
+                throw;
+            }
+
+            ct.ThrowIfCancellationRequested();
+            using (var dependencies = this.dependencyFactory())
+            {
+                this.unitOfWork = dependencies.Value.Item1;
+                this.personRepository = dependencies.Value.Item2;
+                this.userContext = dependencies.Value.Item3;
+
+                try
+                {
+                    var allNewQualifications = this.oracleConn.CreateStoreCommand(@"SELECT DISTINCT QLF_CODE, QLF_NAME FROM CAA_DOC.EXAMS_QUALIFICATION")
+                           .Materialize(r =>
+                               new GvaExSystQualification
+                               {
+                                   Name = r.Field<string>("QLF_NAME"),
+                                   Code = r.Field<string>("QLF_CODE")
+                               });
 
                     var allCurrentQualificationCodes = allNewQualifications.Select(q => q.Code).ToList();
 
                     this.unitOfWork.DbContext.Set<GvaExSystQualification>().AddRange(allNewQualifications);
 
-                    var allNewExams = this.oracleConn.CreateStoreCommand(@"SELECT * FROM GVA_XM_TESTS_V@exams")
+                    var allNewExams = this.oracleConn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.EXAMS_TEST WHERE QLF_CODE IS NOT NULL")
                     .Materialize(r =>
                         new GvaExSystExam
                         {
                             Name = r.Field<string>("TEST_NAME"),
                             Code = r.Field<string>("TEST_CODE"),
                             QualificationCode = r.Field<string>("QLF_CODE")
-                        })
-                        .Where(t => allCurrentQualificationCodes.Contains(t.QualificationCode));
+                        });
 
                     this.unitOfWork.DbContext.Set<GvaExSystExam>().AddRange(allNewExams);
                     var allCurrentExamCodes = allNewExams.Select(q => q.Code).ToList();
 
-                    var allNewCertCampaigns = this.oracleConn.CreateStoreCommand(@"SELECT * FROM GVA_CERT_CAMPAIGNS_V@exams")
+                    var allNewCertCampaigns = this.oracleConn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.EXAMS_CERT_CAMPAIGN WHERE QLF_CODE IS NOT NULL")
                         .Materialize(r =>
                         new GvaExSystCertCampaign
                         {
@@ -100,13 +139,12 @@ namespace Gva.MigrationTool.Sets
                             ValidFrom = r.Field<DateTime?>("CERT_CAMP_VALID_FROM"),
                             ValidTo = r.Field<DateTime?>("CERT_CAMP_VALID_TO"),
                             QualificationCode = r.Field<string>("QLF_CODE")
-                        })
-                        .Where(t => allCurrentQualificationCodes.Contains(t.QualificationCode));
+                        });
 
                     this.unitOfWork.DbContext.Set<GvaExSystCertCampaign>().AddRange(allNewCertCampaigns);
                     var allCurrentCertCampaignCodes = allNewCertCampaigns.Select(q => q.Code).ToList();
 
-                    var allNewCertPaths = this.oracleConn.CreateStoreCommand(@"SELECT * FROM GVA_XM_QUALIFICATION_PATHS_V@exams")
+                    var allNewCertPaths = this.oracleConn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.EXAMS_CERT_PATH  WHERE QLF_CODE IS NOT NULL")
                     .Materialize(r =>
                         new GvaExSystCertPath
                         {
@@ -116,14 +154,11 @@ namespace Gva.MigrationTool.Sets
                             ValidTo = r.Field<DateTime?>("QLF_PATH_VALID_TO"),
                             ExamCode = r.Field<string>("TEST_CODE"),
                             QualificationCode = r.Field<string>("QLF_CODE")
-                        })
-                        .Where(t =>
-                            allCurrentQualificationCodes.Contains(t.QualificationCode) &&
-                            allCurrentExamCodes.Contains(t.ExamCode));
+                        });
 
                     this.unitOfWork.DbContext.Set<GvaExSystCertPath>().AddRange(allNewCertPaths);
 
-                    var allNewExaminees = this.oracleConn.CreateStoreCommand(@"SELECT * FROM GVA_XM_EXAMINEES_V@exams where LIN is not null or EGN is not null")
+                    var allExaminees = this.oracleConn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.EXAMS_EXAMINEE where ID_PERSON IS NOT NULL")
                     .Materialize(r =>
                         new
                         {
@@ -133,31 +168,25 @@ namespace Gva.MigrationTool.Sets
                             EndTime = r.Field<DateTime>("END_TIME"),
                             TotalScore = r.Field<float>("TOTAL_SCORE").ToString(),
                             ResultStatus = r.Field<string>("RESULT_STATUS"),
-                            CertCampCode = r.Field<string>("CERT_CAMP_CODE")
+                            CertCampCode = r.Field<string>("CERT_CAMP_CODE"),
+                            PersonId = r.Field<int>("ID_PERSON")
                         })
-                        .Where(t =>
-                            this.personRepository.GetPersons(lin: t.Lin, uin: t.Uin).Count() > 0 &&
-                            allCurrentExamCodes.Contains(t.ExamCode) &&
-                            (allCurrentCertCampaignCodes.Contains(t.CertCampCode) || t.CertCampCode == null))
-                        .Select(r =>
+                        .Where(p => personIdToLotId.ContainsKey(p.PersonId))
+                        .Select(p => new GvaExSystExaminee()
                         {
-                            int lotId = this.personRepository.GetPersons(lin: r.Lin, uin: r.Uin).First().LotId;
-
-                            return new GvaExSystExaminee
-                            {
-                                Lin = r.Lin,
-                                LotId = lotId,
-                                Uin = r.Uin,
-                                ExamCode = r.ExamCode,
-                                TotalScore = r.TotalScore,
-                                ResultStatus = r.ResultStatus,
-                                CertCampCode = r.CertCampCode
-                            };
+                            Lin = p.Lin,
+                            Uin = p.Uin,
+                            ExamCode = p.ExamCode,
+                            EndTime = p.EndTime,
+                            TotalScore = p.TotalScore,
+                            ResultStatus = p.ResultStatus,
+                            CertCampCode = p.CertCampCode,
+                            LotId = personIdToLotId[p.PersonId]
                         });
 
-                    this.unitOfWork.DbContext.Set<GvaExSystExaminee>().AddRange(allNewExaminees);
+                    this.unitOfWork.DbContext.Set<GvaExSystExaminee>().AddRange(allExaminees);
 
-                    this.unitOfWork.DbContext.SaveChanges();
+                    this.unitOfWork.Save();
                 }
                 catch (Exception)
                 {

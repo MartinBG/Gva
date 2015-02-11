@@ -296,6 +296,10 @@ namespace Gva.MigrationTool
                 //migrate organizations
                 organization.migrateOrganizations(noms, personIdToLotId, orgIdtoLotId, getAircraftByApexId, getPersonByApexId, blobIdsToFileKeys);
 
+                Stopwatch examinationSystemDataTimer = new Stopwatch();
+                person.migrateExaminationSystemData(personIdToLotId);
+                examinationSystemDataTimer.Stop();
+                Console.WriteLine("Migration of data from examination system time - {0}", examinationSystemDataTimer.Elapsed.TotalMinutes);
 
                 var lotRepository = scope.Resolve<ILotRepository>();
                 var unitOfWork = scope.Resolve<IUnitOfWork>();
@@ -330,12 +334,7 @@ namespace Gva.MigrationTool
                     personLicenceDocumentsTimer.Stop();
                     Console.WriteLine("Migration of person licences documents time - {0}", personLicenceDocumentsTimer.Elapsed.TotalMinutes);
                 }
-                /*
-                Stopwatch examinationSystemDataTimer = new Stopwatch();
-                person.migrateExaminationSystemData(personIdToLotId);
-                examinationSystemDataTimer.Stop();
-                Console.WriteLine("Migration of data from examination system time - {0}", examinationSystemDataTimer.Elapsed.TotalMinutes);
-                */
+
                 timer.Stop();
                 Console.WriteLine("Migration time - {0}", timer.Elapsed.TotalMinutes);
             }
