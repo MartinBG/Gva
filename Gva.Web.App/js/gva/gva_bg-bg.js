@@ -1990,6 +1990,21 @@
           noEntry: 'Няма лица избрани за екпорт',
           chosenPersons: 'Избрани за експорт физически лица'
         },
+        exportExamsData: {
+          exportData: 'Експорт изпити',
+          addExams: 'Добави изпити',
+          noEntry: 'Няма изпити избрани за екпорт',
+          chosenExams: 'Избрани за експорт изпити',
+          documentNumber: 'No',
+          documentDate: 'Дата',
+          personLin: 'ЛИН',
+          personUin: 'ЕГН',
+          personNames: 'Заявител',
+          stageName: 'Статус',
+          examName: 'Тест',
+          examDate: 'Дата на явяване на теста',
+          certCampName: 'Kампания'
+        },
         viewPerson: {
           name: 'Име',
           uin: 'ЕГН',
@@ -2520,6 +2535,20 @@
           lin: 'ЛИН',
           names: 'Име',
           uin: 'ЕГН'
+        },
+        chooseAppExamsModal: {
+          title: 'Избор на изпити',
+          add: 'Добави',
+          cancel: 'Отказ',
+          documentNumber: 'No',
+          documentDate: 'Дата',
+          personLin: 'ЛИН',
+          personUin: 'ЕГН',
+          personNames: 'Заявител',
+          stageName: 'Статус',
+          examName: 'Тест',
+          examDate: 'Дата на явяване на изпита',
+          certCampName: 'Kампания'
         },
         chooseMedicalsModal: {
           title: 'Избор на медицински',

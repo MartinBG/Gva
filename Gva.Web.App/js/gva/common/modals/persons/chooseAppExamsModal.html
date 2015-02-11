@@ -1,0 +1,35 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="persons.chooseAppExamsModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="addBtn" btn-click="addExams()" text="persons.chooseAppExamsModal.add" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="persons.chooseAppExamsModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <sc-datatable items="exams" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+      <sc-column  sortable="false" class="buttons-cell" has-content="true">
+        <input type="checkbox" ng-checked="selectedExams | contains:item" sc-click="selectExam($event, item)"/>
+      </sc-column>
+      <sc-column data="documentNumber" title="persons.chooseAppExamsModal.documentNumber">
+      </sc-column>
+      <sc-column data="documentDate" title="persons.chooseAppExamsModal.documentDate" type="date">
+      </sc-column>
+      <sc-column data="stageName" title="persons.chooseAppExamsModal.stageName">
+      </sc-column>
+      <sc-column data="personLin" title="persons.chooseAppExamsModal.personLin">
+      </sc-column>
+      <sc-column data="personUin" title="persons.chooseAppExamsModal.personUin">
+      </sc-column>
+      <sc-column data="personNames" title="persons.chooseAppExamsModal.personNames">
+      </sc-column>
+      <sc-column data="examName" title="persons.chooseAppExamsModal.examName">
+      </sc-column>
+      <sc-column data="examDate" title="persons.chooseAppExamsModal.examDate" type="date">
+      </sc-column>
+      <sc-column data="certCampName" title="persons.chooseAppExamsModal.certCampName">
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>

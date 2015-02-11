@@ -20,6 +20,8 @@ using System.Xml.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Models.Views;
 
 
 namespace Gva.Api.Controllers.Persons
@@ -28,13 +30,16 @@ namespace Gva.Api.Controllers.Persons
     {
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
+        private IApplicationRepository applicationRepository;
 
         public PersonExportXmlController(
             ILotRepository lotRepository,
-            INomRepository nomRepository)
+            INomRepository nomRepository,
+            IApplicationRepository applicationRepository)
         {
             this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
+            this.applicationRepository = applicationRepository;
         }
 
         [Route("api/exportXml/personsData")]
@@ -63,6 +68,49 @@ namespace Gva.Api.Controllers.Persons
                 };
 
             return result;
+        }
+
+        [Route("api/exportXml/examsData")]
+        [HttpGet]
+        public HttpResponseMessage ExportExamsData([FromUri]string examsData)
+        {
+            XElement rowset = new XElement("ROWSET");
+            XDocument xmlDoc = new XDocument(
+                 new XDeclaration("1.0", "utf-8", null),
+                 rowset);
+
+            foreach (PersonAppExamDO exam in JsonConvert.DeserializeObject<List<PersonAppExamDO>>(examsData))
+            {
+                
+                XElement row = new XElement("ROW");
+                this.AppendExamData(row, exam);
+                rowset.Add(row);
+            }
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new StringContent(string.Concat(xmlDoc));
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/xml");
+            result.Content.Headers.ContentDisposition =
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = "Export_Exam.xml"
+                };
+
+            return result;
+        }
+
+
+        private void AppendExamData(XElement row, PersonAppExamDO exam)
+        {
+            PersonDataDO person = this.lotRepository.GetLotIndex(exam.LotId).Index.GetPart<PersonDataDO>("personData").Content;
+            GvaViewApplication application = this.applicationRepository.GetApplicationById(exam.AppId);
+
+            row.Add(new XElement("DOC_NO", application.DocumentNumber));
+            row.Add(new XElement("DOC_DATE", application.DocumentDate.HasValue? application.DocumentDate.Value.ToShortDateString() : null));
+            row.Add(new XElement("EGN", person.Uin));
+            row.Add(new XElement("LIN", person.Lin));
+            row.Add(new XElement("CERT_CAMP_CODE", exam.CertCampCode));
+            row.Add(new XElement("TEST_CODE", exam.ExamCode));
         }
 
         private void AppendPersonData(int id, XElement row)

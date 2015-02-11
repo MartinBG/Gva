@@ -4,20 +4,17 @@
 
   function ExportExamsDataCtrl(
     $scope,
-    scModal,
-    Applications
+    scModal
   ) {
-     Applications.getExams().$promise.then(function(result)
-    {
-      $scope.examsForExport = result;
-    });
+    $scope.examsForExport = [];
 
     $scope.addExams = function () {
-      var modalInstance = scModal.open('chooseApplicationExams',
+      var modalInstance = scModal.open('chooseAppExams',
         { includedExams: $scope.examsForExport });
 
       modalInstance.result.then(function (exams) {
         $scope.examsForExport = $scope.examsForExport.concat(exams);
+        
       });
 
       return modalInstance.opened;
@@ -26,9 +23,20 @@
     $scope.removeExam = function (exam) {
       $scope.examsForExport = _.without($scope.examsForExport, exam);
     };
+
+    $scope.$watch('examsForExport', function() {
+        $scope.examsData = _.map($scope.examsForExport, function(exam) {
+          return {
+            lotId: exam.lotId,
+            appId: exam.applicationId,
+            certCampCode: exam.certCampCode,
+            examCode: exam.examCode
+          };
+        });
+      });
   }
 
-  ExportExamsDataCtrl.$inject = ['$scope', 'scModal', 'Applications'];
+  ExportExamsDataCtrl.$inject = ['$scope', 'scModal'];
 
   angular.module('gva').controller('ExportExamsDataCtrl', ExportExamsDataCtrl);
 }(angular, _));

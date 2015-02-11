@@ -74,7 +74,54 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 throw new NotSupportedException("Cannot get applications with not selected lot set alias!");
             }
         }
+        public IEnumerable<ApplicationExamListDO> GetPersonApplicationExams(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? personLin = null,
+            int? stage = null,
+            int offset = 0,
+            int? limit = null)
+        {
+            this.unitOfWork.DbContext.Set<GvaStage>().Load();
 
+            var applications =
+                (from a in this.unitOfWork.DbContext.Set<GvaViewPersonApplicationExam>()
+
+                join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
+                from gas2 in gas1.DefaultIfEmpty()
+
+                join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(va => va.ApplicationType) on gas2.GvaApplication.GvaAppLotPartId equals va.PartId into va1
+                from va2 in va1.DefaultIfEmpty()
+
+                join p in this.unitOfWork.DbContext.Set<GvaViewPerson>() on va2.LotId equals p.LotId into p1
+                from p2 in p1.DefaultIfEmpty()
+                select new
+                {
+                    Exam = a,
+                    Application = va2,
+                    Person = p2,
+                    Stage = gas2
+                })
+                .Select(ap => new ApplicationExamListDO()
+                {
+                    ApplicationId = ap.Exam.GvaApplicationId,
+                    LotId = ap.Exam.LotId,
+                    DocumentNumber = ap.Application.DocumentNumber,
+                    DocumentDate = ap.Application.DocumentDate,
+                    CertCampCode = ap.Exam.CertCampCode,
+                    CertCampName = ap.Exam.CertCampName,
+                    ExamCode = ap.Exam.ExamCode,
+                    ExamName = ap.Exam.ExamName,
+                    ExamDate = ap.Exam.ExamDate,
+                    PersonLin = ap.Person.Lin,
+                    PersonNames = ap.Person.Names,
+                    PersonUin = ap.Person.Uin,
+                    StageName = ap.Stage.GvaStage.Name
+                });
+
+            return applications;
+
+        }
         public IEnumerable<ApplicationListDO> GetPersonApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,

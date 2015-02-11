@@ -169,6 +169,7 @@
     <Compile Include="ModelsDO\Applications\AppExamSystQualificationDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExamSystExamDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExaminationSystemDataDO.cs" />
+    <Compile Include="ModelsDO\Applications\ApplicationExamListDO.cs" />
     <Compile Include="ModelsDO\Applications\DocCaseDO.cs" />
     <Compile Include="ModelsDO\Applications\PartDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystExamDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonAppExamDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamSystStateDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamSystExamDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamSystDataDO.cs" />
@@ -303,7 +305,7 @@
     <Compile Include="ModelsDO\Persons\PersonStatusDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonTrainingDO.cs" />
     <Compile Include="ModelsDO\Common\TimeDO.cs" />
-    <Compile Include="Models\Views\GvaViewPersonApplicationTest.cs" />
+    <Compile Include="Models\Views\GvaViewPersonApplicationExam.cs" />
     <Compile Include="Models\Views\GvaViewPersonQualification.cs" />
     <Compile Include="Models\GvaExSystCertPath.cs" />
     <Compile Include="Models\GvaExSystCertCampaign.cs" />

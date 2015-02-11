@@ -385,6 +385,7 @@
      .modal('choosePublisher' , 'js/gva/common/modals/publishers/choosePublisherModal.html'  , 'ChoosePublisherModalCtrl' )
      .modal('choosePerson'    , 'js/gva/common/modals/persons/choosePersonModal.html'        , 'ChoosePersonModalCtrl'    )
      .modal('choosePersons'   , 'js/gva/common/modals/persons/choosePersonsModal.html'       , 'ChoosePersonsModalCtrl'   )
+     .modal('chooseAppExams'  , 'js/gva/common/modals/persons/chooseAppExamsModal.html'      , 'ChooseAppExamsModalCtrl'  )
      .modal('newPerson'       , 'js/gva/common/modals/persons/newPersonModal.html'           , 'NewPersonModalCtrl'       )
      .modal('chooseInspectors', 'js/gva/common/modals/inspectors/chooseInspectorsModal.html' , 'ChooseInspectorsModalCtrl')
      .modal('editDisparity'   , 'js/gva/common/modals/disparities/editDisparityModal.html'   , 'EditDisparityModalCtrl'   )

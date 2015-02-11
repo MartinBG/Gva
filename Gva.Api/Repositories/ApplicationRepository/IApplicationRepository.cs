@@ -26,6 +26,14 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         GvaViewApplication GetApplicationById(int applicationId);
 
+        IEnumerable<ApplicationExamListDO> GetPersonApplicationExams(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? personLin = null,
+            int? stage = null,
+            int offset = 0,
+            int? limit = null);
+
         IEnumerable<ApplicationListDO> GetPersonApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,

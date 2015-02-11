@@ -44,6 +44,11 @@
               method: 'GET',
               url: 'api/apps/getGvaCorrespodents',
               params: { lotId: '@lotId' }
+            },
+            getExams: {
+              method: 'GET',
+              url: 'api/apps/exams',
+              isArray: true
             }
           });
       }]);
