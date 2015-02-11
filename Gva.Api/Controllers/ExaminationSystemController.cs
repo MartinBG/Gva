@@ -54,11 +54,11 @@ namespace Gva.Api.Controllers
             }
         }
 
-        [Route("tests")]
+        [Route("exams")]
         [HttpGet]
-        public IHttpActionResult GetTests(string qualificationCode = null, string certCampCode = null)
+        public IHttpActionResult GetExams(string qualificationCode = null, string certCampCode = null)
         {
-            return Ok(this.examinationSystemRepository.GetTests(qualificationCode, certCampCode));
+            return Ok(this.examinationSystemRepository.GetExams(qualificationCode, certCampCode));
         }
 
         [Route("examinees")]

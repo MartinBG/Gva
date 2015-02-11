@@ -15,12 +15,12 @@ namespace Gva.Api.ModelsDO.Applications
         public AppExaminationSystemDataDO()
         {
             Qualifications = new List<AppExamSystQualificationDO>();
-            Tests = new List<AppExamSystTestDO>();
+            Exams = new List<AppExamSystExamDO>();
         }
 
         public List<AppExamSystQualificationDO> Qualifications { get; set; }
 
-        public List<AppExamSystTestDO> Tests { get; set; }
+        public List<AppExamSystExamDO> Exams { get; set; }
 
         public NomValue School { get; set; }
 

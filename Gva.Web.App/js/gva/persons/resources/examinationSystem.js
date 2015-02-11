@@ -12,9 +12,9 @@
         method: 'GET',
         url: 'api/examinationSystem/updateStates'
       },
-      getTests: {
+      getExams: {
         method: 'GET',
-        url: 'api/examinationSystem/tests',
+        url: 'api/examinationSystem/exams',
         isArray: true
       },
       getCertCampaigns: {

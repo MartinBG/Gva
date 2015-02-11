@@ -4,7 +4,7 @@ using Gva.Api.ModelsDO.Common;
 
 namespace Gva.Api.ModelsDO.ExaminationSystem
 {
-    public class GvaExSystTestDO
+    public class GvaExSystExamDO
     {
         public string Name { get; set; }
 

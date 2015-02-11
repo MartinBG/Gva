@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function AddTestsModalCtrl(
+  function AddExamsModalCtrl(
     $scope,
     $modalInstance,
     scModalParams
@@ -10,15 +10,15 @@
     $scope.form = {};
     $scope.qualificationCode = scModalParams.qualificationCode;
     $scope.certCampCode = scModalParams.certCampCode;
-    $scope.tests = scModalParams.tests || [];
+    $scope.exams = scModalParams.exams || [];
 
-    $scope.deleteTest = function (test) {
-      var index = $scope.tests.indexOf(test);
-      $scope.tests.splice(index, 1);
+    $scope.deleteExam = function (exam) {
+      var index = $scope.exams.indexOf(exam);
+      $scope.exams.splice(index, 1);
     };
 
-    $scope.addTest = function () {
-      $scope.tests.push({});
+    $scope.addExam = function () {
+      $scope.exams.push({});
     };
 
     $scope.cancel = function () {
@@ -26,20 +26,20 @@
     };
 
     $scope.save = function () {
-      return $scope.form.addTestsForm.$validate()
+      return $scope.form.addExamsForm.$validate()
         .then(function () {
-          if ($scope.form.addTestsForm.$valid) {
-            return $modalInstance.close($scope.tests);
+          if ($scope.form.addExamsForm.$valid) {
+            return $modalInstance.close($scope.exams);
           }
         });
     };
   }
 
-  AddTestsModalCtrl.$inject = [
+  AddExamsModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
     'scModalParams'
   ];
 
-  angular.module('gva').controller('AddTestsModalCtrl', AddTestsModalCtrl);
+  angular.module('gva').controller('AddExamsModalCtrl', AddExamsModalCtrl);
 }(angular));

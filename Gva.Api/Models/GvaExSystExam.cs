@@ -6,7 +6,7 @@ using Docs.Api.Models;
 
 namespace Gva.Api.Models
 {
-    public partial class GvaExSystTest
+    public partial class GvaExSystExam
     {
         public string Name { get; set; }
 
@@ -19,9 +19,9 @@ namespace Gva.Api.Models
         public virtual GvaExSystQualification Qualification { get; set; }
     }
 
-    public class GvaExSystTestMap : EntityTypeConfiguration<GvaExSystTest>
+    public class GvaExSystExamMap : EntityTypeConfiguration<GvaExSystExam>
     {
-        public GvaExSystTestMap()
+        public GvaExSystExamMap()
         {
             // Primary Key
             this.HasKey(t => new { t.Code, t.QualificationCode });
@@ -40,14 +40,14 @@ namespace Gva.Api.Models
                 .HasMaxLength(200);
 
             // Table & Column Mappings
-            this.ToTable("GvaExSystTests");
+            this.ToTable("GvaExSystExams");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Code).HasColumnName("Code");
             this.Property(t => t.QualificationCode).HasColumnName("QualificationCode");
 
             // Relationships
             this.HasRequired(t => t.Qualification)
-                .WithMany(t => t.Tests)
+                .WithMany(t => t.Exams)
                 .HasForeignKey(d => d.QualificationCode);
 
         }

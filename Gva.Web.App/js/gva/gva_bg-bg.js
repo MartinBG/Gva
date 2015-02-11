@@ -1897,12 +1897,12 @@
         },
         examinationSystem: {
             title: 'Изпитна система',
-            exSystTests: 'ИС: Изпити',
+            exSystExams: 'ИС: Изпити',
             qualificationName: 'Квалификация',
             state: 'Състояние',
             fromDate: 'От дата (включително)',
             toDate: 'До дата (включително)',
-            test: 'Тест',
+            exam: 'Тест',
             date: 'Дата на явяване',
             totalScore: 'Резултат',
             endTime: 'Край',
@@ -1919,26 +1919,26 @@
           loadDataForExaminees: 'Прехвърляне на данни от Изпитната система за Изпити',
           tabs: {
             qualifications: 'Квалификации',
-            tests: 'Тестове',
+            exams: 'Тестове',
             certPaths: 'Сертификационни пътища',
             certCampaigns: 'Сертификационни кампании',
-            exams: 'Изпити'
+            examinees: 'Изпити'
           }
         },
         qualifications: {
           name: 'Наименование',
           code: 'Идентификационен код'
         },
-        exSystExams: {
+        exSystExaminees: {
           uin: 'ЕГН',
           lin: 'ЛИН',
           result: 'Резултат',
           status: 'Статус',
           certCampaign: 'Сертификационна кампания',
-          test: 'Тест',
+          exam: 'Тест',
           endTime: 'Край'
         },
-        exSystTests: {
+        exSystExams: {
           name: 'Наименование',
           code: 'Идентификационен код',
           qualificationName: 'Квалификация'
@@ -1956,7 +1956,7 @@
           validFrom: 'Валидна от',
           validTo: 'Валидна до',
           qualificationName: 'Квалификация',
-          test: 'Тест'
+          exam: 'Тест'
         },
         stampedDocumentsView: {
           search: 'Търси',
@@ -2676,15 +2676,15 @@
         },
         appExSystDataDirective: {
             date: 'Дата на явяване',
-            test: 'Тест',
+            exam: 'Тест',
             status: 'Статус',
             qualificationName: 'ИС: Квалификация',
             licenceType: 'Вид правоспособност',
-            addTests: 'Към промяна на списък с тестове от заявлението',
+            addExams: 'Към промяна на списък с тестове от заявлението',
             certCampaign: 'Сертификационна кампания',
             schools: 'Учебен център',
             qualificationsTitle: 'Състояния относно придобиването на квалификации',
-            exSystTests: 'ИС: Тестове',
+            exSystExams: 'ИС: Тестове',
             noEntry: 'Няма информация за тестове'
         },
         edit: {
@@ -2885,12 +2885,12 @@
           cancel: 'Отказ',
           name: 'Наименование'
         },
-        addTestsModal: {
+        addExamsModal: {
           title: 'Редакция на тестове',
           save: 'Запис',
           cancel: 'Отказ',
           date: 'Дата на явяване',
-          test: 'Тест',
+          exam: 'Тест',
           noEntry: 'Няма информация за тестове'
         },
         organizationSelect: {
@@ -3956,10 +3956,10 @@
         'root.export.examsData': 'Данни за изпити',
         'root.examinationSystem': 'Изпитна система',
         'root.examinationSystem.qualifications': 'Квалификации',
-        'root.examinationSystem.tests': 'Тестове',
+        'root.examinationSystem.exams': 'Тестове',
         'root.examinationSystem.certCampaigns': 'Сертификационни кампании',
         'root.examinationSystem.certPaths': 'Сертификационни пътища',
-        'root.examinationSystem.exams': 'Изпити'
+        'root.examinationSystem.examinees': 'Изпити'
       }
     });
   }]);

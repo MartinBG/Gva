@@ -10,9 +10,9 @@ namespace Gva.Api.ModelsDO.ExaminationSystem
 
         public int? Lin { get; set; }
 
-        public string TestName { get; set; }
+        public string ExamName { get; set; }
 
-        public string TestCode { get; set; }
+        public string ExamCode { get; set; }
 
         public DateTime? EndTime { get; set; }
 

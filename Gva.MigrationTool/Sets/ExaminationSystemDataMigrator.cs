@@ -78,9 +78,9 @@ namespace Gva.MigrationTool.Sets
 
                     this.unitOfWork.DbContext.Set<GvaExSystQualification>().AddRange(allNewQualifications);
 
-                    var allNewTests = this.oracleConn.CreateStoreCommand(@"SELECT * FROM GVA_XM_TESTS_V@exams")
+                    var allNewExams = this.oracleConn.CreateStoreCommand(@"SELECT * FROM GVA_XM_TESTS_V@exams")
                     .Materialize(r =>
-                        new GvaExSystTest
+                        new GvaExSystExam
                         {
                             Name = r.Field<string>("TEST_NAME"),
                             Code = r.Field<string>("TEST_CODE"),
@@ -88,8 +88,8 @@ namespace Gva.MigrationTool.Sets
                         })
                         .Where(t => allCurrentQualificationCodes.Contains(t.QualificationCode));
 
-                    this.unitOfWork.DbContext.Set<GvaExSystTest>().AddRange(allNewTests);
-                    var allCurrentTestCodes = allNewTests.Select(q => q.Code).ToList();
+                    this.unitOfWork.DbContext.Set<GvaExSystExam>().AddRange(allNewExams);
+                    var allCurrentExamCodes = allNewExams.Select(q => q.Code).ToList();
 
                     var allNewCertCampaigns = this.oracleConn.CreateStoreCommand(@"SELECT * FROM GVA_CERT_CAMPAIGNS_V@exams")
                         .Materialize(r =>
@@ -114,12 +114,12 @@ namespace Gva.MigrationTool.Sets
                             Code = r.Field<int>("QLF_PATH_ID"),
                             ValidFrom = r.Field<DateTime?>("QLF_PATH_VALID_FROM"),
                             ValidTo = r.Field<DateTime?>("QLF_PATH_VALID_TO"),
-                            TestCode = r.Field<string>("TEST_CODE"),
+                            ExamCode = r.Field<string>("TEST_CODE"),
                             QualificationCode = r.Field<string>("QLF_CODE")
                         })
                         .Where(t =>
                             allCurrentQualificationCodes.Contains(t.QualificationCode) &&
-                            allCurrentTestCodes.Contains(t.TestCode));
+                            allCurrentExamCodes.Contains(t.ExamCode));
 
                     this.unitOfWork.DbContext.Set<GvaExSystCertPath>().AddRange(allNewCertPaths);
 
@@ -129,7 +129,7 @@ namespace Gva.MigrationTool.Sets
                         {
                             Lin = r.Field<int?>("LIN"),
                             Uin = r.Field<string>("EGN"),
-                            TestCode = r.Field<string>("TEST_CODE"),
+                            ExamCode = r.Field<string>("TEST_CODE"),
                             EndTime = r.Field<DateTime>("END_TIME"),
                             TotalScore = r.Field<float>("TOTAL_SCORE").ToString(),
                             ResultStatus = r.Field<string>("RESULT_STATUS"),
@@ -137,7 +137,7 @@ namespace Gva.MigrationTool.Sets
                         })
                         .Where(t =>
                             this.personRepository.GetPersons(lin: t.Lin, uin: t.Uin).Count() > 0 &&
-                            allCurrentTestCodes.Contains(t.TestCode) &&
+                            allCurrentExamCodes.Contains(t.ExamCode) &&
                             (allCurrentCertCampaignCodes.Contains(t.CertCampCode) || t.CertCampCode == null))
                         .Select(r =>
                         {
@@ -148,7 +148,7 @@ namespace Gva.MigrationTool.Sets
                                 Lin = r.Lin,
                                 LotId = lotId,
                                 Uin = r.Uin,
-                                TestCode = r.TestCode,
+                                ExamCode = r.ExamCode,
                                 TotalScore = r.TotalScore,
                                 ResultStatus = r.ResultStatus,
                                 CertCampCode = r.CertCampCode

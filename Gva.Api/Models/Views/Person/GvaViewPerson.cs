@@ -60,7 +60,7 @@ namespace Gva.Api.Models.Views.Person
 
         public virtual ICollection<GvaViewPersonQualification> Qualifications { get; set; }
 
-        public virtual ICollection<GvaViewPersonApplicationTest> ApplicationTests { get; set; }
+        public virtual ICollection<GvaViewPersonApplicationExam> ApplicationExams { get; set; }
     }
 
     public class GvaViewPersonMap : EntityTypeConfiguration<GvaViewPerson>

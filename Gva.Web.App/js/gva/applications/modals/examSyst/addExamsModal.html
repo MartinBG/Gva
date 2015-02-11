@@ -1,0 +1,47 @@
+﻿<ng-form name="form.addExamsForm" sc-validate="{}">
+  <div class="panel-heading">
+    <strong l10n-text="applications.addExamsModal.title"></strong>
+    <div class="pull-right">
+      <sc-button name="saveBtn" btn-click="save()" text="applications.addExamsModal.save" class="btn btn-xs btn-primary"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="applications.addExamsModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <table class="table table-striped table-bordered">
+      <thead ng-class="{'has-error': form.addExamsForm.$invalid}">
+        <tr>
+          <th style="width:1px"></th>
+          <th class="col-sm-7">
+            <label class="control-label" l10n-text="applications.addExamsModal.exam"></label>
+          </th>
+          <th class="col-sm-4">
+            <label class="control-label" l10n-text="applications.addExamsModal.date"></label>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat-start="exam in exams">
+          <td style="width: 1px;">
+            <sc-button type="button" class="btn btn-primary btn-sm" btn-click="deleteExam(exam)" icon="glyphicon-remove"></sc-button>
+          </td>
+          <td class="col-sm-7">
+            <sc-nomenclature ng-model="exam.examData" ng-required="true" alias="'appExamSystExams'" params="{qualificationCode: qualificationCode, certCampCode: certCampCode}"></sc-nomenclature>
+          </td>
+          <td class="col-sm-4">
+            <sc-date type="date" ng-model="exam.date" ng-required="true"></sc-date>
+          </td>
+        </tr>
+        <tr ng-repeat-end=""></tr>
+        <tr class="sort-disabled" ng-if="!exams.length">
+          <td colspan="3" class="text-center" l10n-text="applications.addExamsModal.noEntry"></td>
+        </tr>
+        <tr>
+          <td colspan="3" style="text-align: right; width: 1px;">
+            <sc-button type="button" btn-click="addExam()" class="btn btn-primary btn-sm" icon="glyphicon-plus"></sc-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-form>

@@ -102,10 +102,10 @@ namespace Gva.Api.Controllers
             }
         }
 
-        [Route("appExamSystTests")]
-        public IHttpActionResult GetAppExamSystTests(string term = null, string qualificationCode = null, string certCampCode = null)
+        [Route("appExamSystExams")]
+        public IHttpActionResult GetAppExamSystExams(string term = null, string qualificationCode = null, string certCampCode = null)
         {
-            var tests = this.examinationSystemRepository.GetTests(qualificationCode, certCampCode)
+            var exams = this.examinationSystemRepository.GetExams(qualificationCode, certCampCode)
                 .Select(c => new
                 {
                     nomValueId = c.Code,
@@ -115,10 +115,10 @@ namespace Gva.Api.Controllers
 
             if (!string.IsNullOrEmpty(term))
             {
-                return Ok(tests.Where(a => a.name.Contains(term)));
+                return Ok(exams.Where(a => a.name.Contains(term)));
             }
 
-            return Ok(tests);
+            return Ok(exams);
         }
 
         [Route("appExSystCertCampaigns")]

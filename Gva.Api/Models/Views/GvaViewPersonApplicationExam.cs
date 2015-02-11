@@ -8,7 +8,7 @@ using Gva.Api.Models.Views.Person;
 
 namespace Gva.Api.Models.Views
 {
-    public partial class GvaViewPersonApplicationTest
+    public partial class GvaViewPersonApplicationExam
     {
         public int LotId { get; set; }
 
@@ -18,23 +18,23 @@ namespace Gva.Api.Models.Views
 
         public string CertCampName { get; set; }
 
-        public string TestCode { get; set; }
+        public string ExamCode { get; set; }
 
-        public string TestName { get; set; }
+        public string ExamName { get; set; }
 
-        public DateTime TestDate { get; set; }
+        public DateTime ExamDate { get; set; }
 
         public virtual GvaApplication Application { get; set; }
 
         public virtual GvaViewPerson Person { get; set; }
     }
 
-    public class GvaViewPersonApplicationTestMap : EntityTypeConfiguration<GvaViewPersonApplicationTest>
+    public class GvaViewPersonApplicationExamMap : EntityTypeConfiguration<GvaViewPersonApplicationExam>
     {
-        public GvaViewPersonApplicationTestMap()
+        public GvaViewPersonApplicationExamMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.LotId, t.GvaApplicationId, t.TestCode });
+            this.HasKey(t => new { t.LotId, t.GvaApplicationId, t.ExamCode });
 
             // Properties
             this.Property(t => t.LotId)
@@ -51,30 +51,30 @@ namespace Gva.Api.Models.Views
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.TestCode)
+            this.Property(t => t.ExamCode)
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.TestName)
+            this.Property(t => t.ExamName)
                 .IsRequired()
                 .HasMaxLength(50);
 
             // Table & Column Mappings
-            this.ToTable("GvaViewPersonApplicationTests");
+            this.ToTable("GvaViewPersonApplicationExams");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
             this.Property(t => t.CertCampCode).HasColumnName("CertCampCode");
             this.Property(t => t.CertCampName).HasColumnName("CertCampName");
-            this.Property(t => t.TestCode).HasColumnName("TestCode");
-            this.Property(t => t.TestName).HasColumnName("TestName");
-            this.Property(t => t.TestDate).HasColumnName("TestDate");
+            this.Property(t => t.ExamCode).HasColumnName("ExamCode");
+            this.Property(t => t.ExamName).HasColumnName("ExamName");
+            this.Property(t => t.ExamDate).HasColumnName("ExamDate");
 
             // Relationships
             this.HasRequired(t => t.Application)
-                .WithMany(t => t.ApplicationTests)
+                .WithMany(t => t.ApplicationExams)
                 .HasForeignKey(d => d.GvaApplicationId);
             this.HasRequired(t => t.Person)
-                .WithMany(t => t.ApplicationTests)
+                .WithMany(t => t.ApplicationExams)
                 .HasForeignKey(d => d.LotId);
 
         }

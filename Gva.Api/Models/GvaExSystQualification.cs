@@ -12,7 +12,7 @@ namespace Gva.Api.Models
         {
             this.CertCampaigns = new List<GvaExSystCertCampaign>();
             this.CertPaths = new List<GvaExSystCertPath>();
-            this.Tests = new List<GvaExSystTest>();
+            this.Exams = new List<GvaExSystExam>();
         }
 
         public string Name { get; set; }
@@ -23,7 +23,7 @@ namespace Gva.Api.Models
 
         public virtual ICollection<GvaExSystCertPath> CertPaths { get; set; }
 
-        public virtual ICollection<GvaExSystTest> Tests { get; set; }
+        public virtual ICollection<GvaExSystExam> Exams { get; set; }
     }
 
     public class GvaExSystQualificationMap : EntityTypeConfiguration<GvaExSystQualification>

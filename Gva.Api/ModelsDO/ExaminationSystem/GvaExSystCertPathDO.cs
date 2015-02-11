@@ -16,6 +16,6 @@ namespace Gva.Api.ModelsDO.ExaminationSystem
 
         public string QualificationName { get; set; }
 
-        public string TestName { get; set; }
+        public string ExamName { get; set; }
     }
 }

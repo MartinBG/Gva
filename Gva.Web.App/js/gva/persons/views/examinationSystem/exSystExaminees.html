@@ -1,17 +1,17 @@
 ﻿<sc-datatable items="examinees" filterable="true" pageable="true" sortable="true">
-  <sc-column data="uin" title="persons.exSystExams.uin">
+  <sc-column data="uin" title="persons.exSystExaminees.uin">
   </sc-column>
-  <sc-column data="lin" title="persons.exSystExams.lin">
+  <sc-column data="lin" title="persons.exSystExaminees.lin">
   </sc-column>
-  <sc-column data="endTime" title="persons.exSystExams.endTime">
+  <sc-column data="endTime" title="persons.exSystExaminees.endTime">
   </sc-column>
-  <sc-column data="totalScore" title="persons.exSystExams.result">
+  <sc-column data="totalScore" title="persons.exSystExaminees.result">
   </sc-column>
-  <sc-column data="resultStatus" title="persons.exSystExams.status" has-content="true">
+  <sc-column data="resultStatus" title="persons.exSystExaminees.status" has-content="true">
     {{ item.resultStatus === 'failed' ? 'Невзет' : (item.resultStatus === 'passed' ? 'Взет': '') }}
   </sc-column>
-  <sc-column data="certCampName" title="persons.exSystExams.certCampaign">
+  <sc-column data="certCampName" title="persons.exSystExaminees.certCampaign">
   </sc-column>
-  <sc-column data="testName" title="persons.exSystExams.test">
+  <sc-column data="examName" title="persons.exSystExaminees.exam">
   </sc-column>
 </sc-datatable>

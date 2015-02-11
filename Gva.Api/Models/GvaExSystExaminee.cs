@@ -15,7 +15,7 @@ namespace Gva.Api.Models
 
         public int? Lin { get; set; }
 
-        public string TestCode { get; set; }
+        public string ExamCode { get; set; }
 
         public DateTime EndTime { get; set; }
 
@@ -46,7 +46,7 @@ namespace Gva.Api.Models
             this.Property(t => t.TotalScore)
                 .HasMaxLength(10);
 
-            this.Property(t => t.TestCode)
+            this.Property(t => t.ExamCode)
                 .IsRequired()
                 .HasMaxLength(200);
 
@@ -62,7 +62,7 @@ namespace Gva.Api.Models
             this.Property(t => t.GvaExSystExamineeId).HasColumnName("GvaExSystExamineeId");
             this.Property(t => t.Uin).HasColumnName("Uin");
             this.Property(t => t.Lin).HasColumnName("Lin");
-            this.Property(t => t.TestCode).HasColumnName("TestCode");
+            this.Property(t => t.ExamCode).HasColumnName("ExamCode");
             this.Property(t => t.EndTime).HasColumnName("EndTime");
             this.Property(t => t.TotalScore).HasColumnName("TotalScore");
             this.Property(t => t.ResultStatus).HasColumnName("ResultStatus");

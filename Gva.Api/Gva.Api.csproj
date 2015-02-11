@@ -167,7 +167,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftReviewAmendmentFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMViewDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExamSystQualificationDO.cs" />
-    <Compile Include="ModelsDO\Applications\AppExamSystTestDO.cs" />
+    <Compile Include="ModelsDO\Applications\AppExamSystExamDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExaminationSystemDataDO.cs" />
     <Compile Include="ModelsDO\Applications\DocCaseDO.cs" />
     <Compile Include="ModelsDO\Applications\PartDO.cs" />
@@ -176,7 +176,7 @@
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystCertCampaignDO.cs" />
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystCertPathDO.cs" />
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystExamineeDO.cs" />
-    <Compile Include="ModelsDO\ExaminationSystem\GvaExSystTestDO.cs" />
+    <Compile Include="ModelsDO\ExaminationSystem\GvaExSystExamDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamSystStateDO.cs" />
@@ -311,7 +311,7 @@
     <Compile Include="Models\GvaApplicationStage.cs" />
     <Compile Include="Models\GvaExSystExaminee.cs" />
     <Compile Include="Models\GvaExSystQualification.cs" />
-    <Compile Include="Models\GvaExSystTest.cs" />
+    <Compile Include="Models\GvaExSystExam.cs" />
     <Compile Include="Models\GvaStage.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationAmendment.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationApproval.cs" />
@@ -347,7 +347,7 @@
     <Compile Include="Projections\Inventory\Equipments\EquipmentOtherProjection.cs" />
     <Compile Include="Projections\Inventory\Equipments\EquipmentOwnerProjection.cs" />
     <Compile Include="Projections\Inventory\Organizations\OrganizationOtherProjection.cs" />
-    <Compile Include="Projections\Person\PersonApplicationTestProjection.cs" />
+    <Compile Include="Projections\Person\PersonApplicationExamProjection.cs" />
     <Compile Include="Projections\Person\PersonQualificationProjection.cs" />
     <Compile Include="Projections\Person\PersonReportCheckProjection.cs" />
     <Compile Include="Projections\Person\PersonReportProjection.cs" />

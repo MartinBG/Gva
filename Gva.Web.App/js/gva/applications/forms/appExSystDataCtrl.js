@@ -4,15 +4,15 @@
   'use strict';
 
   function AppExSystDataCtrl($scope, scModal) {
-    $scope.addTests = function () {
-      var modalInstance = scModal.open('appExSystChooseTests', {
+    $scope.addExams = function () {
+      var modalInstance = scModal.open('appExSystChooseExams', {
         qualificationCode: $scope.model.qualificationCode,
         certCampCode: $scope.model.certCampaign.code,
-        tests: $scope.model.tests
+        exams: $scope.model.exams
       });
 
-    modalInstance.result.then(function (tests) {
-        $scope.model.tests = tests;
+    modalInstance.result.then(function (exams) {
+        $scope.model.exams = exams;
       });
 
       return modalInstance.opened;

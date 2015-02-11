@@ -7,7 +7,7 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonExamSystExamDO
     {
-        public GvaExSystTestDO Test { get; set; }
+        public GvaExSystExamDO Exam { get; set; }
 
         public DateTime EndTime { get; set; }
 

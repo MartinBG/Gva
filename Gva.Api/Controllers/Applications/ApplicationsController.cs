@@ -115,6 +115,23 @@ namespace Gva.Api.Controllers.Applications
             return Ok(applications);
         }
 
+        [Route("exams")]
+        public IHttpActionResult GetApplicationExams(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? personLin = null,
+            int? stage = null,
+            int offset = 0, 
+            int? limit = null
+            )
+        {
+            var applications = this.applicationRepository.GetPersonApplicationExams()
+                .OrderByDescending(a => a.DocumentDate)
+                .Take(1000);
+
+            return Ok(applications);
+        }
+
         [Route("{id:int}")]
         public IHttpActionResult GetApplication(int id)
         {

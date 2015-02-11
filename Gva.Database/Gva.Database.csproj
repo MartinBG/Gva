@@ -51,12 +51,12 @@
     <Content Include="Create\Tables\ASExamVariants.sql" />
     <Content Include="Create\Tables\ASExamQuestions.sql" />
     <Content Include="Create\Tables\ASExamVariantQuestions.sql" />
-    <Content Include="Create\Tables\GvaViewPersonApplicationTests.sql" />
+    <Content Include="Create\Tables\GvaViewPersonApplicationExams.sql" />
     <Content Include="Create\Tables\GvaViewPersonQualifications.sql" />
     <Content Include="Create\Tables\GvaExSystCertPaths.sql" />
     <Content Include="Create\Tables\GvaExSystCertCampaigns.sql" />
     <Content Include="Create\Tables\GvaExSystExaminees.sql" />
-    <Content Include="Create\Tables\GvaExSystTests.sql" />
+    <Content Include="Create\Tables\GvaExSystExams.sql" />
     <Content Include="Create\Tables\GvaExSystQualifications.sql" />
     <Content Include="Create\Tables\GvaViewPersonReportsChecks.sql" />
     <Content Include="Create\Tables\GvaViewPersonChecks.sql" />

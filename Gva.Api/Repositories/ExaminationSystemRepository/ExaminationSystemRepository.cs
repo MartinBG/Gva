@@ -80,19 +80,19 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                     Name = c.Name,
                     ValidFrom = c.ValidFrom,
                     ValidTo = c.ValidTo,
-                    TestName = c.Test.Name,
+                    ExamName = c.Exam.Name,
                     QualificationName = c.Qualification.Name
                 })
                 .ToList();
         }
 
-        public List<GvaExSystTestDO> GetTests(
+        public List<GvaExSystExamDO> GetExams(
             string qualificationCode = null,
             string certCampCode = null,
-            string testCode = null,
+            string examCode = null,
             int? certPathCode = null)
         {
-            var predicate = PredicateBuilder.True<GvaExSystTest>();
+            var predicate = PredicateBuilder.True<GvaExSystExam>();
 
             if (!string.IsNullOrEmpty(qualificationCode))
             {
@@ -101,7 +101,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
             if (!string.IsNullOrEmpty(qualificationCode))
             {
-                predicate = predicate.And(q => q.Code == testCode);
+                predicate = predicate.And(q => q.Code == examCode);
             }
 
             if (!string.IsNullOrEmpty(certCampCode))
@@ -109,14 +109,14 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                 predicate = predicate.And(q => q.Qualification.CertCampaigns.Select(c => c.Code).Contains(certCampCode));
             }
 
-            var request = this.unitOfWork.DbContext.Set<GvaExSystTest>().Where(predicate);
+            var request = this.unitOfWork.DbContext.Set<GvaExSystExam>().Where(predicate);
             if (certPathCode.HasValue)
             {
                 request = request.Where(r => r.CertPaths.Any(p => p.Code == certPathCode));
             }
 
             return request
-                .Select(c => new GvaExSystTestDO()
+                .Select(c => new GvaExSystExamDO()
                 {
                     Code = c.Code,
                     Name = c.Name,
@@ -128,7 +128,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
         public List<GvaExSystExamineeDO> GetExaminees()
         {
             return (from e in this.unitOfWork.DbContext.Set<GvaExSystExaminee>()
-                    join t in this.unitOfWork.DbContext.Set<GvaExSystTest>() on e.TestCode equals t.Code
+                    join t in this.unitOfWork.DbContext.Set<GvaExSystExam>() on e.ExamCode equals t.Code
                     select new GvaExSystExamineeDO
                     {
                         TotalScore = e.TotalScore,
@@ -138,7 +138,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         Lin = e.Lin,
                         LotId = e.LotId,
                         EndTime = e.EndTime,
-                        TestName = t.Name
+                        ExamName = t.Name
                     }).ToList();
         }
 
@@ -223,8 +223,8 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                 var allCertCampaigns = from cc in this.unitOfWork.DbContext.Set<GvaExSystCertCampaign>() select cc;
                 this.unitOfWork.DbContext.Set<GvaExSystCertCampaign>().RemoveRange(allCertCampaigns);
 
-                var allTests = from t in this.unitOfWork.DbContext.Set<GvaExSystTest>() select t;
-                this.unitOfWork.DbContext.Set<GvaExSystTest>().RemoveRange(allTests);
+                var allExams = from t in this.unitOfWork.DbContext.Set<GvaExSystExam>() select t;
+                this.unitOfWork.DbContext.Set<GvaExSystExam>().RemoveRange(allExams);
                 this.unitOfWork.Save();
 
                 var allQualifications = from q in this.unitOfWork.DbContext.Set<GvaExSystQualification>() select q;
@@ -243,9 +243,9 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
                 this.unitOfWork.DbContext.Set<GvaExSystQualification>().AddRange(allNewQualifications);
 
-                var allNewTests = connection.CreateStoreCommand(@"SELECT * FROM GVA_XM_TESTS_V@exams")
+                var allNewExams = connection.CreateStoreCommand(@"SELECT * FROM GVA_XM_TESTS_V@exams")
                 .Materialize(r => 
-                    new GvaExSystTest
+                    new GvaExSystExam
                     {
                         Name = r.Field<string>("TEST_NAME"),
                         Code = r.Field<string>("TEST_CODE"),
@@ -253,8 +253,8 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                     })
                     .Where(t => allCurrentQualificationCodes.Contains(t.QualificationCode));
 
-                this.unitOfWork.DbContext.Set<GvaExSystTest>().AddRange(allNewTests);
-                var allCurrentTestCodes = allNewTests.Select(q => q.Code).ToList();
+                this.unitOfWork.DbContext.Set<GvaExSystExam>().AddRange(allNewExams);
+                var allCurrentExamCodes = allNewExams.Select(q => q.Code).ToList();
                 
                 var allNewCertCampaigns = connection.CreateStoreCommand(@"SELECT * FROM GVA_CERT_CAMPAIGNS_V@exams")
                     .Materialize(r =>
@@ -279,25 +279,25 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         Code = r.Field<int>("QLF_PATH_ID"),
                         ValidFrom = r.Field<DateTime?>("QLF_PATH_VALID_FROM"),
                         ValidTo = r.Field<DateTime?>("QLF_PATH_VALID_TO"),
-                        TestCode = r.Field<string>("TEST_CODE"),
+                        ExamCode = r.Field<string>("TEST_CODE"),
                         QualificationCode = r.Field<string>("QLF_CODE")
                     })
                     .Where(t =>
                         allCurrentQualificationCodes.Contains(t.QualificationCode) &&
-                        allCurrentTestCodes.Contains(t.TestCode));
+                        allCurrentExamCodes.Contains(t.ExamCode));
 
                this.unitOfWork.DbContext.Set<GvaExSystCertPath>().AddRange(allNewCertPaths);
 
                if (extractExaminees)
                {
-                   this.ExtractDataFromExaminationSystemForExaminees(connection, allNewTests, allNewCertCampaigns, allNewQualifications);
+                   this.ExtractDataFromExaminationSystemForExaminees(connection, allNewExams, allNewCertCampaigns, allNewQualifications);
                }
             }
         }
 
         private void ExtractDataFromExaminationSystemForExaminees(
             OracleConnection connection,
-            IEnumerable<GvaExSystTest> allNewTests,
+            IEnumerable<GvaExSystExam> allNewExams,
             IEnumerable<GvaExSystCertCampaign> allNewCertCampaigns,
             IEnumerable<GvaExSystQualification> allNewQualifications)
         {
@@ -307,7 +307,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                 {
                     Lin = r.Field<int?>("LIN"),
                     Uin = r.Field<string>("EGN"),
-                    TestCode = r.Field<string>("TEST_CODE"),
+                    ExamCode = r.Field<string>("TEST_CODE"),
                     EndTime = r.Field<DateTime>("END_TIME"),
                     TotalScore = r.Field<float>("TOTAL_SCORE").ToString(),
                     ResultStatus = r.Field<string>("RESULT_STATUS"),
@@ -323,7 +323,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         Lin = r.Lin,
                         LotId = lotId,
                         Uin = r.Uin,
-                        TestCode = r.TestCode,
+                        ExamCode = r.ExamCode,
                         TotalScore = r.TotalScore,
                         ResultStatus = r.ResultStatus,
                         CertCampCode = r.CertCampCode,
@@ -335,7 +335,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
             Dictionary<int, List<PersonExamSystExamDO>> examsPerPersonData =
                 (from e in allNewExaminees
-                 join t in allNewTests on e.TestCode equals t.Code
+                 join t in allNewExams on e.ExamCode equals t.Code
                  select new
                  {
                      TotalScore = e.TotalScore,
@@ -343,7 +343,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                      ResultStatus = e.ResultStatus,
                      LotId = e.LotId,
                      EndTime = e.EndTime,
-                     Test = t
+                     Exam = t
                  })
                 .GroupBy(g => g.LotId)
                 .ToDictionary(g => g.Key,
@@ -359,13 +359,13 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             },
                         Status = e.ResultStatus,
                         EndTime = e.EndTime,
-                        Test =
-                            new GvaExSystTestDO()
+                        Exam =
+                            new GvaExSystExamDO()
                             {
-                                Code = e.Test.Code,
-                                Name = e.Test.Name,
-                                QualificationName = allNewQualifications.Where(q => q.Code == e.Test.QualificationCode).Single().Name,
-                                QualificationCode = allNewQualifications.Where(q => q.Code == e.Test.QualificationCode).Single().Code
+                                Code = e.Exam.Code,
+                                Name = e.Exam.Name,
+                                QualificationName = allNewQualifications.Where(q => q.Code == e.Exam.QualificationCode).Single().Name,
+                                QualificationCode = allNewQualifications.Where(q => q.Code == e.Exam.QualificationCode).Single().Code
                             }
                     }).ToList());
 
@@ -392,7 +392,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
             PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.Index.GetPart<PersonExamSystDataDO>("personExamSystData");
             List<PersonExamSystExamDO> allPersonExams = examSystDataPartVersion.Content.Exams;
 
-            var qualificationsCodes = allPersonExams.Select(q => q.Test.QualificationCode);
+            var qualificationsCodes = allPersonExams.Select(q => q.Exam.QualificationCode);
             List <GvaExSystQualification> allPersonQualifications = this.unitOfWork.DbContext.Set<GvaExSystQualification>()
                 .Include(c => c.CertCampaigns)
                 .Include(c => c.CertPaths)
@@ -404,26 +404,26 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                 var certPaths = qualification.CertPaths.GroupBy(p => p.Code);
                 foreach (var certPath in certPaths)
                 {
-                    List<string> requiredTestCodes = certPath.Select(p => p.TestCode).Distinct().ToList();
+                    List<string> requiredExamCodes = certPath.Select(p => p.ExamCode).Distinct().ToList();
 
                     PersonExamSystStateDO lastStatePerQualification = examSystDataPartVersion.Content.States
                         .Where(s => s.Qualification.Code == qualification.Code && s.State == "Started")
                         .OrderByDescending(s => s.FromDate)
                         .FirstOrDefault();
 
-                    List<PersonExamSystExamDO> availableTests = allPersonExams
-                            .Where(e => e.Test.QualificationCode == qualification.Code &&
-                                requiredTestCodes.Contains(e.Test.Code))
+                    List<PersonExamSystExamDO> availableExams = allPersonExams
+                            .Where(e => e.Exam.QualificationCode == qualification.Code &&
+                                requiredExamCodes.Contains(e.Exam.Code))
                                  .ToList();
 
-                    if (availableTests.Count() == 0)
+                    if (availableExams.Count() == 0)
                     {
                         continue;
                     }
 
                     if (lastStatePerQualification != null)
                     {
-                        availableTests = availableTests
+                        availableExams = availableExams
                             .Where(t => t.EndTime >= lastStatePerQualification.FromDate)
                             .ToList();
 
@@ -436,7 +436,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         }
                     }
 
-                    if (availableTests.Select(t => t.CertCamp).Count() > 6 && lastStatePerQualification != null)
+                    if (availableExams.Select(t => t.CertCamp).Count() > 6 && lastStatePerQualification != null)
                     {
                         lastStatePerQualification.Notes = "Достигнат е пределно допустим брой сесиии";
                         lastStatePerQualification.StateMethod = "Automatic";
@@ -444,7 +444,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
                         continue;
                     }
-                    else if (availableTests.GroupBy(c => c.Test.Code).Any(t => t.Count() > 4 && t.All(te => te.Status == "failed")) && lastStatePerQualification != null)
+                    else if (availableExams.GroupBy(c => c.Exam.Code).Any(t => t.Count() > 4 && t.All(te => te.Status == "failed")) && lastStatePerQualification != null)
                     {
                         lastStatePerQualification.Notes = "Достигнат е пределно допустим брой на невзети изпити за тест";
                         lastStatePerQualification.StateMethod = "Automatic";
@@ -452,13 +452,13 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         continue;
                     }
 
-                    var firstTestDate = availableTests.OrderByDescending(t => t.EndTime).Last().EndTime;
-                    if (requiredTestCodes.All(rtc => availableTests.Where(t => t.Status == "passed").Select(t => t.Test.Code).Contains(rtc)))
+                    var firstExamDate = availableExams.OrderByDescending(t => t.EndTime).Last().EndTime;
+                    if (requiredExamCodes.All(rtc => availableExams.Where(t => t.Status == "passed").Select(t => t.Exam.Code).Contains(rtc)))
                     {
                         PersonExamSystStateDO newStateFinished = new PersonExamSystStateDO()
                         {
-                            FromDate = firstTestDate,
-                            ToDate = firstTestDate.AddMonths(18),
+                            FromDate = firstExamDate,
+                            ToDate = firstExamDate.AddMonths(18),
                             Qualification = qualification,
                             StateMethod = "Automatic",
                             State = "Finished"
@@ -468,12 +468,12 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         continue;
                     }
 
-                    if(availableTests.Where(t => t.Status == "passed").Count() > 0)
+                    if (availableExams.Where(t => t.Status == "passed").Count() > 0)
                     {
                         PersonExamSystStateDO newState = new PersonExamSystStateDO()
                         {
-                            FromDate = firstTestDate,
-                            ToDate = firstTestDate.AddMonths(18),
+                            FromDate = firstExamDate,
+                            ToDate = firstExamDate.AddMonths(18),
                             Qualification = qualification,
                             StateMethod = "Automatic",
                             State = "Started"

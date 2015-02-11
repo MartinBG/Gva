@@ -10,9 +10,9 @@ using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.ModelsDO.Applications
 {
-    public class AppExamSystTestDO
+    public class AppExamSystExamDO
     {
-        public GvaExSystTestDO TestData { get; set; }
+        public GvaExSystExamDO ExamData { get; set; }
 
         public DateTime Date { get; set; }
     }

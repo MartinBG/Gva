@@ -18,11 +18,11 @@ namespace Gva.Api.Models
 
         public string QualificationCode { get; set; }
 
-        public string TestCode { get; set; }
+        public string ExamCode { get; set; }
 
         public virtual GvaExSystQualification Qualification { get; set; }
 
-        public virtual GvaExSystTest Test { get; set; }
+        public virtual GvaExSystExam Exam { get; set; }
     }
 
     public class GvaExSystCertPathMap : EntityTypeConfiguration<GvaExSystCertPath>
@@ -30,7 +30,7 @@ namespace Gva.Api.Models
         public GvaExSystCertPathMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.Code, t.QualificationCode, t.TestCode });
+            this.HasKey(t => new { t.Code, t.QualificationCode, t.ExamCode });
 
             // Properties
             this.Property(t => t.Name)
@@ -44,7 +44,7 @@ namespace Gva.Api.Models
                 .IsRequired()
                 .HasMaxLength(200);
 
-            this.Property(t => t.TestCode)
+            this.Property(t => t.ExamCode)
                 .IsRequired()
                 .HasMaxLength(200);
 
@@ -55,16 +55,16 @@ namespace Gva.Api.Models
             this.Property(t => t.ValidFrom).HasColumnName("ValidFrom");
             this.Property(t => t.ValidTo).HasColumnName("ValidTo");
             this.Property(t => t.QualificationCode).HasColumnName("QualificationCode");
-            this.Property(t => t.TestCode).HasColumnName("TestCode");
+            this.Property(t => t.ExamCode).HasColumnName("ExamCode");
 
             // Relationships
             this.HasRequired(t => t.Qualification)
                 .WithMany(t => t.CertPaths)
                 .HasForeignKey(d => d.QualificationCode);
 
-            this.HasRequired(t => t.Test)
+            this.HasRequired(t => t.Exam)
                 .WithMany(t => t.CertPaths)
-                .HasForeignKey(d => new { d.TestCode, d.QualificationCode });
+                .HasForeignKey(d => new { d.ExamCode, d.QualificationCode });
 
         }
     }

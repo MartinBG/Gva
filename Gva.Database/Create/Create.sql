@@ -30,7 +30,7 @@ GO
 :r $(rootPath)\"Tables\GvaViewPersonReportsChecks.sql"
 :r $(rootPath)\"Tables\GvaViewInventoryItems.sql"
 :r $(rootPath)\"Tables\GvaViewApplications.sql"
-:r $(rootPath)\"Tables\GvaViewPersonApplicationTests.sql"
+:r $(rootPath)\"Tables\GvaViewPersonApplicationExams.sql"
 :r $(rootPath)\"Tables\GvaViewPersonQualifications.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizationRecommendations.sql"
 :r $(rootPath)\"Tables\GvaViewOrganizationInspections.sql"
@@ -49,10 +49,9 @@ GO
 :r $(rootPath)\"Tables\GvaStages.sql"
 :r $(rootPath)\"Tables\GvaAppStages.sql"
 :r $(rootPath)\"Tables\GvaExSystQualifications.sql"
-:r $(rootPath)\"Tables\GvaExSystTests.sql"
+:r $(rootPath)\"Tables\GvaExSystExams.sql"
 :r $(rootPath)\"Tables\GvaExSystCertPaths.sql"
 :r $(rootPath)\"Tables\GvaExSystCertCampaigns.sql"
-:r $(rootPath)\"Tables\GvaExSystExams.sql"
 :r $(rootPath)\"Tables\GvaExSystExaminees.sql"
 
 

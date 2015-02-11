@@ -17,7 +17,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
         List<GvaExSystCertPathDO> GetCertPaths();
 
-        List<GvaExSystTestDO> GetTests(string qualificationCode = null, string certCampCode = null, string testCode = null, int? certPathCode = null);
+        List<GvaExSystExamDO> GetExams(string qualificationCode = null, string certCampCode = null, string examCode = null, int? certPathCode = null);
 
         List<GvaExSystExamineeDO> GetExaminees();
 

@@ -254,8 +254,8 @@
     <Content Include="js\gva\applications\forms\applicationDocumentCtrl.js" />
     <Content Include="js\gva\applications\forms\appExSystData.html" />
     <Content Include="js\gva\applications\forms\appExSystDataCtrl.js" />
-    <Content Include="js\gva\applications\modals\examSyst\addTestsModal.html" />
-    <Content Include="js\gva\applications\modals\examSyst\addTestsModalCtrl.js" />
+    <Content Include="js\gva\applications\modals\examSyst\addExamsModal.html" />
+    <Content Include="js\gva\applications\modals\examSyst\addExamsModalCtrl.js" />
     <Content Include="js\gva\applications\modals\persons\addCaseTypesModal.html" />
     <Content Include="js\gva\applications\modals\persons\addCaseTypesModalCtrl.js" />
     <Content Include="js\gva\applications\modals\stages\editAppStageModal.html" />
@@ -312,6 +312,8 @@
     <Content Include="js\gva\common\modals\persons\choosePersonsModal.html" />
     <Content Include="js\gva\common\modals\persons\choosePersonsModalCtrl.js" />
     <Content Include="js\gva\persons\resources\personExamSystData.js" />
+    <Content Include="js\gva\persons\views\export\exportExamsData.html" />
+    <Content Include="js\gva\persons\views\export\exportExamsDataCtrl.js" />
     <Content Include="js\gva\persons\views\export\exportView.html" />
     <Content Include="js\gva\persons\views\export\exportPersonsData.html" />
     <Content Include="js\gva\persons\views\export\exportPersonsDataCtrl.js" />
@@ -587,8 +589,8 @@
     <Content Include="js\gva\persons\views\examinationSystem\certCampaignsCtrl.js" />
     <Content Include="js\gva\persons\views\examinationSystem\certPaths.html" />
     <Content Include="js\gva\persons\views\examinationSystem\certPathsCtrl.js" />
-    <Content Include="js\gva\persons\views\examinationSystem\exSystTests.html" />
-    <Content Include="js\gva\persons\views\examinationSystem\exSystTestsCtrl.js" />
+    <Content Include="js\gva\persons\views\examinationSystem\exSystExams.html" />
+    <Content Include="js\gva\persons\views\examinationSystem\exSystExamsCtrl.js" />
     <Content Include="js\gva\persons\views\examinationSystem\exSystExaminees.html" />
     <Content Include="js\gva\persons\views\examinationSystem\exSystExamineesCtrl.js" />
     <Content Include="js\gva\persons\views\examinationSystem\qualifications.html" />
