@@ -162,6 +162,10 @@
       templateUrl: 'js/gva/persons/forms/personLicenceStatus.html'
     });
     scaffoldingProvider.form({
+      name: 'gvaQualificationState',
+      templateUrl: 'js/gva/persons/forms/qualificationfState.html'
+    });
+    scaffoldingProvider.form({
       name: 'gvaPersonExam',
       templateUrl: 'js/gva/persons/forms/personExam.html',
       controller: 'PersonExamCtrl'
@@ -523,24 +527,25 @@
       .state(['root.examinationSystem.certPaths'                           , '/certPaths'                                                                  , ['@root.examinationSystem'                          , 'js/gva/persons/views/examinationSystem/certPaths.html'                                       , 'CertPathsCtrl'                   ]]);
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
-    .modal('chooseTrainings'       , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html'   , 'ChooseTrainingsModalCtrl'          )
-    .modal('newTraining'           , 'js/gva/persons/modals/trainings/newTrainingModal.html'       , 'NewTrainingModalCtrl'              )
-    .modal('chooseChecks'          , 'js/gva/persons/modals/checks/chooseChecksModal.html'         , 'ChooseChecksModalCtrl'             )
-    .modal('newCheck'              , 'js/gva/persons/modals/checks/newCheckModal.html'             , 'NewCheckModalCtrl'                 )
-    .modal('chooseRatings'         , 'js/gva/persons/modals/ratings/chooseRatingsModal.html'       , 'ChooseRatingsModalCtrl'            )
-    .modal('newRating'             , 'js/gva/persons/modals/ratings/newRatingModal.html'           , 'NewRatingModalCtrl'                )
-    .modal('chooseMedicals'        , 'js/gva/persons/modals/medicals/chooseMedicalsModal.html'     , 'ChooseMedicalsModalCtrl'           )
-    .modal('newMedical'            , 'js/gva/persons/modals/medicals/newMedicalModal.html'         , 'NewMedicalModalCtrl'               )
-    .modal('chooseExams'           , 'js/gva/persons/modals/exams/chooseExamsModal.html'           , 'ChooseExamsModalCtrl'              )
-    .modal('newExam'               , 'js/gva/persons/modals/exams/newExamModal.html'               , 'NewExamModalCtrl'                  )
-    .modal('chooseLangCerts'       , 'js/gva/persons/modals/langCerts/chooseLangCertsModal.html'   , 'ChooseLangCertsModalCtrl'          )
-    .modal('newLangCert'           , 'js/gva/persons/modals/langCerts/newLangCertModal.html'       , 'NewLangCertModalCtrl'              )
-    .modal('chooseLicences'        , 'js/gva/persons/modals/licences/chooseLicencesModal.html'     , 'ChooseLicencesModalCtrl'           )
-    .modal('licenceStatuses'       , 'js/gva/persons/modals/licences/licenceStatusesModal.html'    , 'LicenceStatusesModalCtrl'          )
-    .modal('langLevelEntries'      , 'js/gva/persons/modals/langCerts/langLevelEntriesModal.html'  , 'LangLevelEntriesModalCtrl'         )
-    .modal('licenceEditionDoc'     , 'js/gva/persons/modals/licences/licenceEditionDocModal.html'  , 'LicenceEditionDocModalCtrl'        )
-    .modal('printLicence'          , 'js/gva/persons/modals/licences/printLicenceModal.html'       , 'PrintLicenceModalCtrl'     , 'xs-2')
-    .modal('changeCaseType'        , 'js/gva/persons/modals/caseTypes/changeCaseTypeModal.html'    , 'ChangeCaseTypeModalCtrl'   , 'xs-2');
+    .modal('chooseTrainings'       , 'js/gva/persons/modals/trainings/chooseTrainingsModal.html'      , 'ChooseTrainingsModalCtrl'          )
+    .modal('newTraining'           , 'js/gva/persons/modals/trainings/newTrainingModal.html'          , 'NewTrainingModalCtrl'              )
+    .modal('chooseChecks'          , 'js/gva/persons/modals/checks/chooseChecksModal.html'            , 'ChooseChecksModalCtrl'             )
+    .modal('newCheck'              , 'js/gva/persons/modals/checks/newCheckModal.html'                , 'NewCheckModalCtrl'                 )
+    .modal('chooseRatings'         , 'js/gva/persons/modals/ratings/chooseRatingsModal.html'          , 'ChooseRatingsModalCtrl'            )
+    .modal('newRating'             , 'js/gva/persons/modals/ratings/newRatingModal.html'              , 'NewRatingModalCtrl'                )
+    .modal('chooseMedicals'        , 'js/gva/persons/modals/medicals/chooseMedicalsModal.html'        , 'ChooseMedicalsModalCtrl'           )
+    .modal('newMedical'            , 'js/gva/persons/modals/medicals/newMedicalModal.html'            , 'NewMedicalModalCtrl'               )
+    .modal('chooseExams'           , 'js/gva/persons/modals/exams/chooseExamsModal.html'              , 'ChooseExamsModalCtrl'              )
+    .modal('newExam'               , 'js/gva/persons/modals/exams/newExamModal.html'                  , 'NewExamModalCtrl'                  )
+    .modal('chooseLangCerts'       , 'js/gva/persons/modals/langCerts/chooseLangCertsModal.html'      , 'ChooseLangCertsModalCtrl'          )
+    .modal('newLangCert'           , 'js/gva/persons/modals/langCerts/newLangCertModal.html'          , 'NewLangCertModalCtrl'              )
+    .modal('chooseLicences'        , 'js/gva/persons/modals/licences/chooseLicencesModal.html'        , 'ChooseLicencesModalCtrl'           )
+    .modal('licenceStatuses'       , 'js/gva/persons/modals/licences/licenceStatusesModal.html'       , 'LicenceStatusesModalCtrl'          )
+    .modal('langLevelEntries'      , 'js/gva/persons/modals/langCerts/langLevelEntriesModal.html'     , 'LangLevelEntriesModalCtrl'         )
+    .modal('licenceEditionDoc'     , 'js/gva/persons/modals/licences/licenceEditionDocModal.html'     , 'LicenceEditionDocModalCtrl'        )
+    .modal('printLicence'          , 'js/gva/persons/modals/licences/printLicenceModal.html'          , 'PrintLicenceModalCtrl'     , 'xs-2')
+    .modal('changeCaseType'        , 'js/gva/persons/modals/caseTypes/changeCaseTypeModal.html'       , 'ChangeCaseTypeModalCtrl'   , 'xs-2')
+    .modal('newQualificationState' , 'js/gva/persons/modals/qualificationStates/newQlfStateModal.html', 'NewQlfStateModalCtrl'      , 'xs-2');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.aircrafts'                                          , '/aircrafts?mark&manSN&modelAlt&airCategory&aircraftProducer'                                                                                                                        ])

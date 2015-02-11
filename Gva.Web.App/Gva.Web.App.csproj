@@ -313,6 +313,9 @@
     <Content Include="js\gva\common\modals\persons\choosePersonsModalCtrl.js" />
     <Content Include="js\gva\common\modals\persons\chooseAppExamsModal.html" />
     <Content Include="js\gva\common\modals\persons\chooseAppExamsModalCtrl.js" />
+    <Content Include="js\gva\persons\forms\qualificationfState.html" />
+    <Content Include="js\gva\persons\modals\qualificationStates\newQlfStateModal.html" />
+    <Content Include="js\gva\persons\modals\qualificationStates\newQlfStateModalCtrl.js" />
     <Content Include="js\gva\persons\resources\personExamSystData.js" />
     <Content Include="js\gva\persons\views\export\exportExamsData.html" />
     <Content Include="js\gva\persons\views\export\exportExamsDataCtrl.js" />

@@ -6,7 +6,7 @@
 
     <div class="well-sm panel-body">
       <h5 class="form-header" l10n-text="persons.examinationSystem.exSystExams"></h5>
-      <sc-datatable items="examSystData.part.exams" filterable="true" pageable="true" sortable="true">
+      <sc-datatable items="examSystData.part.exams" filterable="true" pageable="true" sortable="true"  default-sort="endTime">
         <sc-column data="endTime" title="persons.examinationSystem.endTime" type="date">
         </sc-column>
         <sc-column data="exam.name" title="persons.examinationSystem.exam">
@@ -22,8 +22,8 @@
       <div class="row">
       </div>
       <h5 class="form-header" l10n-text="persons.examinationSystem.qualificationsTitle"></h5>
-      <sc-button name="createBtn" text="persons.examinationSystem.newState" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-      <sc-datatable items="examSystData.part.states" filterable="true" pageable="true" sortable="true">
+      <sc-button name="createBtn" text="persons.examinationSystem.newState" btn-click="addNewState()" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+      <sc-datatable items="examSystData.part.states" filterable="true" pageable="true" sortable="true" default-sort="fromDate">
         <sc-column data="qualification.name" title="persons.examinationSystem.qualificationName">
         </sc-column>
         <sc-column data="state" title="persons.examinationSystem.state" has-content="true">

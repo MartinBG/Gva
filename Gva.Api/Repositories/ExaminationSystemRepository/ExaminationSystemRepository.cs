@@ -427,7 +427,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             .Where(t => t.EndTime >= lastStatePerQualification.FromDate)
                             .ToList();
 
-                        if (DateTime.Compare(DateTime.Now, lastStatePerQualification.ToDate) > 0)
+                        if (lastStatePerQualification.ToDate.HasValue? DateTime.Compare(DateTime.Now, lastStatePerQualification.ToDate.Value) > 0 : false)
                         {
                             lastStatePerQualification.Notes = "Не са взети всички необходими изпити за квалификацията за срока от 18 месеца";
                             lastStatePerQualification.StateMethod = "Automatic";
@@ -483,6 +483,22 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                     }
                 }
             }
+
+            lot.UpdatePart("personExamSystData", examSystDataPartVersion.Content, this.userContext);
+
+            lot.Commit(this.userContext, lotEventDispatcher);
+
+            this.unitOfWork.Save();
+
+            this.lotRepository.ExecSpSetLotPartTokens(examSystDataPartVersion.PartId);
+        }
+
+        public void SaveNewState(int lotId, PersonExamSystStateDO state)
+        {
+            Lot lot = this.lotRepository.GetLotIndex(lotId);
+            PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.Index.GetPart<PersonExamSystDataDO>("personExamSystData");
+
+            examSystDataPartVersion.Content.States.Add(state);
 
             lot.UpdatePart("personExamSystData", examSystDataPartVersion.Content, this.userContext);
 

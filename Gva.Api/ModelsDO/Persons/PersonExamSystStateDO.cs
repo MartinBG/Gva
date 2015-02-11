@@ -10,7 +10,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+        public DateTime? ToDate { get; set; }
 
         public string State { get; set; }
 

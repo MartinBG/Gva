@@ -140,6 +140,25 @@ namespace Gva.Api.Controllers
             return Ok(campaigns);
         }
 
+        [Route("appExSystQualifications")]
+        public IHttpActionResult GetQualifications(string term = null)
+        {
+            var qualifications = this.examinationSystemRepository.GetQualifications()
+                .Select(c => new
+                {
+                    nomValueId = c.Code,
+                    code = c.Code,
+                    name = c.Name
+                });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                return Ok(qualifications.Where(a => a.name.Contains(term)));
+            }
+
+            return Ok(qualifications);
+        }
+
         [Route("organizationsAudits")]
         public IHttpActionResult GetOrganizationsAudits(int lotId, string term = null)
         {

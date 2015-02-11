@@ -1439,6 +1439,18 @@
           search: 'Търси',
           caseType: 'Тип дело'
         },
+        qlfStateDirective: {
+          title: 'Създаване на състояние относно придибиване на квалификация',
+          save: 'Запис',
+          cancel: 'Отказ',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          state: 'Състояние',
+          stateStarted: 'Стартирал',
+          stateCanceled: 'Прекратен',
+          stateFinished: 'Приключил',
+          qualification: 'Квалификация'
+        },
         examDirective: {
           caseType: 'Тип дело',
           commonQuestions: 'Основни знания',
@@ -2520,10 +2532,13 @@
           save: 'Запис',
           cancel: 'Отказ'
         },
-        choosePersonModal: {
-          title: 'Избор на физическо лице',
+        newQlfStateModal: {
           save: 'Запис',
           cancel: 'Отказ',
+          title: 'Ново състояние'
+        },
+        choosePersonModal: {
+          title: 'Избор на физическо лице',
           lin: 'ЛИН',
           names: 'Име',
           add: 'Добави'
