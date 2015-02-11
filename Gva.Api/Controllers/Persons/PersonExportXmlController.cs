@@ -39,7 +39,7 @@ namespace Gva.Api.Controllers.Persons
 
         [Route("api/exportXml/personsData")]
         [HttpGet]
-        public HttpResponseMessage Export([FromUri]string personIds)
+        public HttpResponseMessage ExportPersonsData([FromUri]string personIds)
         {
             XElement rowset = new XElement("ROWSET");
             XDocument xmlDoc = new XDocument(
@@ -59,7 +59,7 @@ namespace Gva.Api.Controllers.Persons
             result.Content.Headers.ContentDisposition =
                 new ContentDispositionHeaderValue("attachment")
                 {
-                    FileName = "personsData.xml"
+                    FileName = "Export_FL.xml"
                 };
 
             return result;

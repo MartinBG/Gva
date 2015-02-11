@@ -14,7 +14,6 @@
 
       modalInstance.result.then(function (persons) {
         $scope.personsForExport = $scope.personsForExport.concat(persons);
-        $scope.personIds = _.pluck($scope.personsForExport, 'id');
       });
 
       return modalInstance.opened;
@@ -22,8 +21,11 @@
 
     $scope.removePerson = function (person) {
       $scope.personsForExport = _.without($scope.personsForExport, person);
-      $scope.personIds = _.without($scope.personIds, person.id);
     };
+
+    $scope.$watch('personsForExport', function() {
+      $scope.personIds = _.pluck($scope.personsForExport, 'id');
+    });
   }
 
   ExportPersonsDataCtrl.$inject = ['$scope', 'scModal'];
