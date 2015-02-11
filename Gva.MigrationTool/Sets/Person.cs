@@ -9,7 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
+using Common.Data;
 using Gva.Api.CommonUtils;
+using Gva.Api.Models;
 using Newtonsoft.Json.Linq;
 using Oracle.DataAccess.Client;
 
@@ -23,7 +25,8 @@ namespace Gva.MigrationTool.Sets
         private Func<Owned<PersonLicenceDocMigrator>> personLicenceDocMigratorFactory;
         private Func<Owned<ExaminationSystemDataMigrator>> examinationSystemDataMigratorFactory;
 
-        public Person(OracleConnection oracleConn,
+        public Person(
+            OracleConnection oracleConn,
             Func<Owned<PersonLotCreator>> personLotCreatorFactory,
             Func<Owned<PersonLotMigrator>> personLotMigratorFactory,
             Func<Owned<PersonLicenceDocMigrator>> personLicenceDocMigratorFactory,
@@ -206,16 +209,21 @@ namespace Gva.MigrationTool.Sets
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken ct = cts.Token;
 
+            this.examinationSystemDataMigratorFactory().Value.MigrateDataForExaminations(personIdToLotId, cts, ct);
+
+            ConcurrentQueue<int> personIds = new ConcurrentQueue<int>(this.getPersonIds());
+
             Utils.RunParallel("ParallelMigrations", ct,
                 () => this.examinationSystemDataMigratorFactory().Value,
                 (examinationSystemDataMigrator) =>
                 {
                     using (examinationSystemDataMigrator)
                     {
-                        examinationSystemDataMigrator.MigrateExaminationSystemData(personIdToLotId, cts, ct);
+                        examinationSystemDataMigrator.MigrateExaminationSystemData(personIdToLotId, personIds, cts, ct);
                     }
                 })
                 .Wait();
+
         }
     }
 }
