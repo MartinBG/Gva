@@ -7,7 +7,7 @@
       <tr>
         <th width="1px">
         </th>
-        <th class="col-sm-1">
+        <th class="col-sm-2">
           <label class="control-label" l10n-text="persons.exportExamsData.documentNumber"></label>
         </th>
         <th class="col-sm-1">
@@ -41,11 +41,11 @@
         <td width="1px">
           <sc-button btn-click="removeExam(exam)" class="btn btn-danger btn-xs" icon="glyphicon-remove"></sc-button>
         </td>
-        <td class="col-sm-1">
+        <td class="col-sm-2">
           {{exam.documentNumber}}
         </td>
         <td class="col-sm-1">
-          {{exam.documentDate}}
+          {{exam.documentDate | date : format : 'mediumDate'}}
         </td>
         <td class="col-sm-1">
           {{exam.stageName}}
@@ -63,7 +63,7 @@
           {{exam.examName}}
         </td>
         <td class="col-sm-1">
-          {{exam.examDate}}
+          {{exam.examDate | date : format : 'mediumDate'}}
         </td>
         <td class="col-sm-2">
           {{exam.certCampName}}
