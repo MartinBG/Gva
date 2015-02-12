@@ -35,25 +35,24 @@ namespace Gva.Api.Projections.Person
                 foreach (var states in examSystData.Content.States.GroupBy(s => s.Qualification.Code))
                 {
                     PersonExamSystStateDO lastState = states.OrderBy(s => s.FromDate).Last();
-                    qualifications.Add(this.Create(lastState, examSystData.Part.LotId));
+
+                    NomValue licenceType = this.nomRepository.GetNomValues("licenceTypes")
+                        .Where(s => s.TextContent.Get<string>("qlfCode") == lastState.Qualification.Code).SingleOrDefault();
+                    if (licenceType != null)
+                    { 
+                        qualifications.Add(new GvaViewPersonQualification()
+                        {
+                            QualificationCode = lastState.Qualification.Code,
+                            QualificationName = lastState.Qualification.Name,
+                            State = lastState.State,
+                            StateMethod = lastState.StateMethod,
+                            LotId = examSystData.Part.LotId,
+                            LicenceTypeCode = licenceType.Code
+                        });
+                    }
                 }
             }
             return qualifications;
-        }
-
-        private GvaViewPersonQualification Create(PersonExamSystStateDO state, int lotId)
-        {
-            NomValue licenceType = this.nomRepository.GetNomValues("licenceTypes")
-                .Where(s => s.TextContent.Get<string>("qlfCode") == state.Qualification.Code).Single();
-            return new GvaViewPersonQualification()
-            {
-                QualificationCode = state.Qualification.Code,
-                QualificationName = state.Qualification.Name,
-                State = state.State,
-                StateMethod = state.StateMethod,
-                LotId = lotId,
-                LicenceTypeCode = licenceType.Code
-            };
         }
     }
 }
