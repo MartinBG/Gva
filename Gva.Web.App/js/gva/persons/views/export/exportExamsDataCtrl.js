@@ -28,7 +28,7 @@
         $scope.examsData = _.map($scope.examsForExport, function(exam) {
           return {
             lotId: exam.lotId,
-            appId: exam.applicationId,
+            appPartId: exam.appPartId,
             certCampCode: exam.certCampCode,
             examCode: exam.examCode
           };

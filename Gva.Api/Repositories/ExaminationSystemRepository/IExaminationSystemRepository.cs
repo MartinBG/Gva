@@ -11,7 +11,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 {
     public interface IExaminationSystemRepository
     {
-        void ExtractDataFromExaminationSystem(bool extractExaminees);
+        void ExtractDataFromExaminationSystem();
 
         List<GvaExSystCertCampaignDO> GetCertCampaigns(string code = null);
 
@@ -19,7 +19,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
         List<GvaExSystExamDO> GetExams(string qualificationCode = null, string certCampCode = null, string examCode = null, int? certPathCode = null);
 
-        List<GvaExSystExamineeDO> GetExaminees();
+        List<GvaExSystExamineeDO> GetExaminees(int? lotId = null);
 
         List<GvaExSystQualification> GetQualifications(string qualificationCode = null);
 

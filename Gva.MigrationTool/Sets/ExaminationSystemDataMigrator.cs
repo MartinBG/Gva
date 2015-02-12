@@ -101,11 +101,9 @@ namespace Gva.MigrationTool.Sets
                             })
                             .ToList();
 
-                        var exams = this.GetExams(personId);
                         var states = this.GetStates(personId);
                         PersonExamSystDataDO data = new PersonExamSystDataDO()
                         {
-                            Exams = exams,
                             States = states
                         };
 
@@ -231,56 +229,6 @@ namespace Gva.MigrationTool.Sets
                     throw;
                 }
             }
-        }
-
-        private List<PersonExamSystExamDO> GetExams(int personId)
-        {
-            return this.oracleConn.CreateStoreCommand(
-                        @"SELECT DISTINCT
-                                 ee.end_time,
-                                 ee.total_score,
-                                 ee.result_status,
-                                 ee.cert_camp_code,
-                                 ee.cert_camp_name,
-                                 ee.test_code,
-                                 ee.test_name,
-                                 ecc.qlf_code,
-                                 ecc.qlf_name,
-                                 ecc.cert_camp_valid_to,
-                                 ecc.cert_camp_valid_from
-                            FROM CAA_DOC.exams_examinee ee,
-                                 (select distinct cert_camp_name, cert_camp_code, qlf_code, qlf_name, cert_camp_valid_to, cert_camp_valid_from from CAA_DOC.exams_cert_campaign) ecc,
-                                 (select distinct test_code, test_name from CAA_DOC.exams_test) et,
-                                 CAA_DOC.person p
-                            WHERE  ee.cert_camp_code = ecc.cert_camp_code (+)
-                            AND  ee.test_code = et.test_code (+)
-                            AND  (p.egn = ee.egn or p.lin = ee.lin)
-                            AND  {0}",
-                            new DbClause("p.id = {0}", personId)
-                        ).Materialize(r =>
-                            new PersonExamSystExamDO
-                            {
-                                Exam = new GvaExSystExamDO()
-                                {
-                                    Code = r.Field<string>("test_code"),
-                                    Name = r.Field<string>("test_name"),
-                                    QualificationCode = r.Field<string>("qlf_code"),
-                                    QualificationName = r.Field<string>("qlf_name")
-                                },
-                                CertCamp = new GvaExSystCertCampaignDO() 
-                                {
-                                    Code = r.Field<string>("cert_camp_code"),
-                                    Name = r.Field<string>("cert_camp_name"),
-                                    QualificationCode = r.Field<string>("qlf_code"),
-                                    QualificationName = r.Field<string>("qlf_name"),
-                                    ValidFrom = r.Field<DateTime?>("cert_camp_valid_from"),
-                                    ValidTo = r.Field<DateTime?>("cert_camp_valid_to")
-                                },
-                                EndTime = r.Field<DateTime>("end_time"),
-                                Status = r.Field<string>("result_status"),
-                                TotalScore = r.Field<string>("total_score"),
-                            })
-                            .ToList();
         }
 
         private List<PersonExamSystStateDO> GetStates(int personId)

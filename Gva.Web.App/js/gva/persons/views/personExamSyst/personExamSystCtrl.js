@@ -7,8 +7,11 @@
     $state, 
     $stateParams,
     scModal,
+    exams,
     examSystData) {
+
     $scope.examSystData = examSystData;
+    $scope.exams = exams;
 
     $scope.addNewState = function () {
       var modalInstance = scModal.open('newQualificationState', {
@@ -28,6 +31,7 @@
     '$state',
     '$stateParams',
     'scModal',
+    'exams',
     'examSystData'
   ];
   
@@ -38,9 +42,16 @@
       function ($stateParams, PersonsExamSystData) {
         return PersonsExamSystData.get({ id: $stateParams.id }).$promise;
       }
+    ],
+    exams: [
+      '$stateParams',
+      'ExaminationSystem',
+      function ($stateParams, ExaminationSystem) {
+        return ExaminationSystem.getPersonExams({ lotId: $stateParams.id }).$promise;
+      }
     ]
   };
-
+  
 
   angular.module('gva').controller('PersonExamSystCtrl', PersonExamSystCtrl);
 }(angular));

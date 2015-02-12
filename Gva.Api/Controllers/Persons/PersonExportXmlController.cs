@@ -103,7 +103,7 @@ namespace Gva.Api.Controllers.Persons
         private void AppendExamData(XElement row, PersonAppExamDO exam)
         {
             PersonDataDO person = this.lotRepository.GetLotIndex(exam.LotId).Index.GetPart<PersonDataDO>("personData").Content;
-            GvaViewApplication application = this.applicationRepository.GetApplicationById(exam.AppId);
+            GvaViewApplication application = this.applicationRepository.GetApplicationByPartId(exam.AppPartId);
 
             row.Add(new XElement("DOC_NO", application.DocumentNumber));
             row.Add(new XElement("DOC_DATE", application.DocumentDate.HasValue? application.DocumentDate.Value.ToShortDateString() : null));

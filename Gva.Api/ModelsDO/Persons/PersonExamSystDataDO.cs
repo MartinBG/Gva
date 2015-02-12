@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO.Common;
+using Gva.Api.ModelsDO.ExaminationSystem;
 
 namespace Gva.Api.ModelsDO.Persons
 {
@@ -9,11 +10,8 @@ namespace Gva.Api.ModelsDO.Persons
     {
         public PersonExamSystDataDO()
         {
-            Exams = new List<PersonExamSystExamDO>();
             States = new List<PersonExamSystStateDO>();
         }
-
-        public List<PersonExamSystExamDO> Exams { get; set; }
 
         public List<PersonExamSystStateDO> States { get; set; }
     }

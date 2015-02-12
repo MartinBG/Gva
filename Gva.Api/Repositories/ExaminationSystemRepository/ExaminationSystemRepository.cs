@@ -125,21 +125,31 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                 .ToList();
         }
 
-        public List<GvaExSystExamineeDO> GetExaminees()
+        public List<GvaExSystExamineeDO> GetExaminees(int? lotId = null)
         {
-            return (from e in this.unitOfWork.DbContext.Set<GvaExSystExaminee>()
+
+            var query = (from e in this.unitOfWork.DbContext.Set<GvaExSystExaminee>()
                     join t in this.unitOfWork.DbContext.Set<GvaExSystExam>() on e.ExamCode equals t.Code
-                    select new GvaExSystExamineeDO
-                    {
-                        TotalScore = e.TotalScore,
-                        CertCampName = e.CertCampaign.Name,
-                        ResultStatus = e.ResultStatus,
-                        Uin = e.Uin,
-                        Lin = e.Lin,
-                        LotId = e.LotId,
-                        EndTime = e.EndTime,
-                        ExamName = t.Name
-                    }).ToList();
+                    select new {Examinee = e, Test = t});
+
+            if (lotId.HasValue)
+            {
+               query = query.Where(r => r.Examinee.LotId == lotId.Value);
+            }
+
+            return query.Select(r => new GvaExSystExamineeDO()
+            {
+                TotalScore = r.Examinee.TotalScore,
+                CertCampCode = r.Examinee.CertCampaign.Code,
+                CertCampName = r.Examinee.CertCampaign.Name,
+                ResultStatus = r.Examinee.ResultStatus,
+                Uin = r.Examinee.Uin,
+                Lin = r.Examinee.Lin,
+                LotId = r.Examinee.LotId,
+                EndTime = r.Examinee.EndTime,
+                ExamName = r.Test.Name,
+                ExamCode = r.Test.Code
+            }).ToList();
         }
 
         public List<GvaExSystQualification> GetQualifications(string qualificationCode = null)
@@ -156,53 +166,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                 .ToList();
         }
 
-        private void SaveDataPerPerson(int lotId, List<PersonExamSystExamDO> examsData)
-        {
-            Lot lot = this.lotRepository.GetLotIndex(lotId);
-            PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.Index.GetPart<PersonExamSystDataDO>("personExamSystData");
-
-            if (examSystDataPartVersion == null)
-            {
-                var cases = this.caseTypeRepository.GetCaseTypesForSet("person")
-                .Select(ct => new CaseDO()
-                    {
-                        CaseType = new NomValue()
-                        {
-                            NomValueId = ct.GvaCaseTypeId,
-                            Name = ct.Name,
-                            Alias = ct.Alias
-                        },
-                        IsAdded = true
-                    })
-                .ToList();
-
-                PersonExamSystDataDO data = new PersonExamSystDataDO()
-                {
-                    Exams = examsData
-                };
-
-                examSystDataPartVersion = lot.CreatePart("personExamSystData", data, this.userContext);
-
-                this.fileRepository.AddFileReferences(examSystDataPartVersion.Part, cases);
-            }
-            else
-            {
-                examSystDataPartVersion.Content.Exams = examSystDataPartVersion.Content.Exams
-                    .Union(examsData)
-                    .ToList();
-
-                lot.UpdatePart("personExamSystData", examSystDataPartVersion.Content, this.userContext);
-            }
-
-            lot.Commit(this.userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            this.lotRepository.ExecSpSetLotPartTokens(examSystDataPartVersion.PartId);
-
-        }
-
-        public void ExtractDataFromExaminationSystem(bool extractExaminees) 
+        public void ExtractDataFromExaminationSystem() 
         {
             using (OracleConnection connection = new OracleConnection(ConfigurationManager.ConnectionStrings["ExaminationSystem"].ConnectionString))
             {
@@ -288,20 +252,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
                this.unitOfWork.DbContext.Set<GvaExSystCertPath>().AddRange(allNewCertPaths);
 
-               if (extractExaminees)
-               {
-                   this.ExtractDataFromExaminationSystemForExaminees(connection, allNewExams, allNewCertCampaigns, allNewQualifications);
-               }
-            }
-        }
-
-        private void ExtractDataFromExaminationSystemForExaminees(
-            OracleConnection connection,
-            IEnumerable<GvaExSystExam> allNewExams,
-            IEnumerable<GvaExSystCertCampaign> allNewCertCampaigns,
-            IEnumerable<GvaExSystQualification> allNewQualifications)
-        {
-            var allNewExaminees = connection.CreateStoreCommand(@"SELECT * FROM GVA_XM_EXAMINEES_V@exams where LIN is not null or EGN is not null")
+               var allNewExaminees = connection.CreateStoreCommand(@"SELECT * FROM GVA_XM_EXAMINEES_V@exams where LIN is not null or EGN is not null")
                 .Materialize(r =>
                 new
                 {
@@ -331,47 +282,43 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                     };
                 });
 
-            this.unitOfWork.DbContext.Set<GvaExSystExaminee>().AddRange(allNewExaminees);
+               this.unitOfWork.DbContext.Set<GvaExSystExaminee>().AddRange(allNewExaminees);
 
-            Dictionary<int, List<PersonExamSystExamDO>> examsPerPersonData =
-                (from e in allNewExaminees
-                 join t in allNewExams on e.ExamCode equals t.Code
-                 select new
-                 {
-                     TotalScore = e.TotalScore,
-                     CertCamp = allNewCertCampaigns.Where(c => c.Code == e.CertCampCode).Single(),
-                     ResultStatus = e.ResultStatus,
-                     LotId = e.LotId,
-                     EndTime = e.EndTime,
-                     Exam = t
-                 })
-                .GroupBy(g => g.LotId)
-                .ToDictionary(g => g.Key,
-                    g => g.Select(e => new PersonExamSystExamDO()
+               Dictionary<int, List<PersonExamSystExamDO>> examsPerPersonData =
+                   (from e in allNewExaminees
+                    join t in allNewExams on e.ExamCode equals t.Code
+                    select new
                     {
                         TotalScore = e.TotalScore,
-                        CertCamp = 
-                            new GvaExSystCertCampaignDO() 
-                            {
-                                Code = e.CertCamp.Code,
-                                Name = e.CertCamp.Name,
-                                QualificationName = allNewQualifications.Where(q => q.Code == e.CertCamp.QualificationCode).Single().Name
-                            },
-                        Status = e.ResultStatus,
+                        CertCamp = allNewCertCampaigns.Where(c => c.Code == e.CertCampCode).Single(),
+                        ResultStatus = e.ResultStatus,
+                        LotId = e.LotId,
                         EndTime = e.EndTime,
-                        Exam =
-                            new GvaExSystExamDO()
-                            {
-                                Code = e.Exam.Code,
-                                Name = e.Exam.Name,
-                                QualificationName = allNewQualifications.Where(q => q.Code == e.Exam.QualificationCode).Single().Name,
-                                QualificationCode = allNewQualifications.Where(q => q.Code == e.Exam.QualificationCode).Single().Code
-                            }
-                    }).ToList());
-
-            foreach (int lotId in examsPerPersonData.Keys)
-            {
-                this.SaveDataPerPerson(lotId, examsPerPersonData[lotId]);
+                        Exam = t
+                    })
+                   .GroupBy(g => g.LotId)
+                   .ToDictionary(g => g.Key,
+                       g => g.Select(e => new PersonExamSystExamDO()
+                       {
+                           TotalScore = e.TotalScore,
+                           CertCamp =
+                               new GvaExSystCertCampaignDO()
+                               {
+                                   Code = e.CertCamp.Code,
+                                   Name = e.CertCamp.Name,
+                                   QualificationName = allNewQualifications.Where(q => q.Code == e.CertCamp.QualificationCode).Single().Name
+                               },
+                           Status = e.ResultStatus,
+                           EndTime = e.EndTime,
+                           Exam =
+                               new GvaExSystExamDO()
+                               {
+                                   Code = e.Exam.Code,
+                                   Name = e.Exam.Name,
+                                   QualificationName = allNewQualifications.Where(q => q.Code == e.Exam.QualificationCode).Single().Name,
+                                   QualificationCode = allNewQualifications.Where(q => q.Code == e.Exam.QualificationCode).Single().Code
+                               }
+                       }).ToList());
             }
         }
 
@@ -390,9 +337,40 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
         {
             Lot lot = this.lotRepository.GetLotIndex(lotId);
             PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.Index.GetPart<PersonExamSystDataDO>("personExamSystData");
-            List<PersonExamSystExamDO> allPersonExams = examSystDataPartVersion.Content.Exams;
+            List<GvaExSystExamineeDO> allPersonExams = this.GetExaminees(lotId);
 
-            var qualificationsCodes = allPersonExams.Select(q => q.Exam.QualificationCode);
+            if (examSystDataPartVersion == null)
+            {
+                var cases = this.caseTypeRepository.GetCaseTypesForSet("person")
+                .Select(ct => new CaseDO()
+                {
+                    CaseType = new NomValue()
+                    {
+                        NomValueId = ct.GvaCaseTypeId,
+                        Name = ct.Name,
+                        Alias = ct.Alias
+                    },
+                    IsAdded = true
+                })
+                .ToList();
+
+                PersonExamSystDataDO data = new PersonExamSystDataDO()
+                {
+                    States = new List<PersonExamSystStateDO>()
+                };
+
+                examSystDataPartVersion = lot.CreatePart("personExamSystData", data, this.userContext);
+
+                this.fileRepository.AddFileReferences(examSystDataPartVersion.Part, cases);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(examSystDataPartVersion.PartId);
+            }
+
+            var qualificationsCodes = allPersonExams.Select(q => q.QualificationCode);
             List <GvaExSystQualification> allPersonQualifications = this.unitOfWork.DbContext.Set<GvaExSystQualification>()
                 .Include(c => c.CertCampaigns)
                 .Include(c => c.CertPaths)
@@ -411,9 +389,9 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         .OrderByDescending(s => s.FromDate)
                         .FirstOrDefault();
 
-                    List<PersonExamSystExamDO> availableExams = allPersonExams
-                            .Where(e => e.Exam.QualificationCode == qualification.Code &&
-                                requiredExamCodes.Contains(e.Exam.Code))
+                    List<GvaExSystExamineeDO> availableExams = allPersonExams
+                            .Where(e => e.QualificationCode == qualification.Code &&
+                                requiredExamCodes.Contains(e.ExamCode))
                                  .ToList();
 
                     if (availableExams.Count() == 0)
@@ -436,7 +414,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         }
                     }
 
-                    if (availableExams.Select(t => t.CertCamp).Count() > 6 && lastStatePerQualification != null)
+                    if (availableExams.Select(t => t.CertCampCode).Count() > 6 && lastStatePerQualification != null)
                     {
                         lastStatePerQualification.Notes = "Достигнат е пределно допустим брой сесиии";
                         lastStatePerQualification.StateMethod = "Automatically";
@@ -444,7 +422,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
                         continue;
                     }
-                    else if (availableExams.GroupBy(c => c.Exam.Code).Any(t => t.Count() > 4 && t.All(te => te.Status == "failed")) && lastStatePerQualification != null)
+                    else if (availableExams.GroupBy(c => c.ExamCode).Any(t => t.Count() > 4 && t.All(te => te.ResultStatus == "failed")) && lastStatePerQualification != null)
                     {
                         lastStatePerQualification.Notes = "Достигнат е пределно допустим брой на невзети изпити за тест";
                         lastStatePerQualification.StateMethod = "Automatically";
@@ -452,8 +430,8 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         continue;
                     }
 
-                    var firstExamDate = availableExams.OrderByDescending(t => t.EndTime).Last().EndTime;
-                    if (requiredExamCodes.All(rtc => availableExams.Where(t => t.Status == "passed").Select(t => t.Exam.Code).Contains(rtc)))
+                    var firstExamDate = availableExams.OrderByDescending(t => t.EndTime).Last().EndTime.Value;
+                    if (requiredExamCodes.All(rtc => availableExams.Where(t => t.ResultStatus == "passed").Select(t => t.ExamCode).Contains(rtc)))
                     {
                         PersonExamSystStateDO newStateFinished = new PersonExamSystStateDO()
                         {
@@ -468,7 +446,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         continue;
                     }
 
-                    if (availableExams.Where(t => t.Status == "passed").Count() > 0)
+                    if (availableExams.Where(t => t.ResultStatus == "passed").Count() > 0)
                     {
                         PersonExamSystStateDO newState = new PersonExamSystStateDO()
                         {

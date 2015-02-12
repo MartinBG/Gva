@@ -707,6 +707,14 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .Single();
         }
 
+        public GvaViewApplication GetApplicationByPartId(int applicationPartId)
+        {
+            return this.unitOfWork.DbContext.Set<GvaViewApplication>()
+                .Include(a => a.ApplicationType)
+                .Where(gva => gva.PartId == applicationPartId)
+                .Single();
+        }
+
         public CaseTypePartDO<DocumentApplicationDO> GetApplicationPart(string path, int lotId)
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
@@ -751,6 +759,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
                 partVersion.Content.ExaminationSystemData.Qualifications = qualifications;
             }
+
             if (stages.Count() > 0)
             {
                 var applicationStage = stages.FirstOrDefault();

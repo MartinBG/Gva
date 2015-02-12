@@ -40,11 +40,11 @@ namespace Gva.Api.Controllers
 
         [Route("loadData")]
         [HttpGet]
-        public IHttpActionResult GetDataFromExaminationSystem(bool loadExaminees)
+        public IHttpActionResult GetDataFromExaminationSystem()
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                this.examinationSystemRepository.ExtractDataFromExaminationSystem(loadExaminees);
+                this.examinationSystemRepository.ExtractDataFromExaminationSystem();
 
                 this.unitOfWork.Save();
 
@@ -87,6 +87,13 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetQualifications(string qualificationCode = null)
         {
             return Ok(this.examinationSystemRepository.GetQualifications(qualificationCode));
+        }
+
+        [Route("personExams")]
+        [HttpGet]
+        public IHttpActionResult GetPersonExams(int lotId)
+        {
+            return Ok(this.examinationSystemRepository.GetExaminees(lotId));
         }
     }
 }

@@ -36,6 +36,11 @@
         method: 'GET',
         url: 'api/examinationSystem/examinees',
         isArray: true
+      },
+      getPersonExams: {
+        method: 'GET',
+        url: 'api/examinationSystem/personExams',
+        isArray: true
       }
     });
   }]);

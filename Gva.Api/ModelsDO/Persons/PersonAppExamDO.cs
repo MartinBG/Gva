@@ -7,7 +7,7 @@ namespace Gva.Api.ModelsDO.Persons
 {
     public class PersonAppExamDO
     {
-        public int AppId { get; set; }
+        public int AppPartId { get; set; }
 
         public int LotId { get; set; }
 

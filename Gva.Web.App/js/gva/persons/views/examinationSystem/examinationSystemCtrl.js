@@ -7,10 +7,7 @@
     ExaminationSystem
   ) {
     $scope.loadData = function () {
-      return ExaminationSystem.loadData({loadExaminees : false}).$promise;
-    };
-    $scope.loadDataForExaminees = function () {
-      return ExaminationSystem.loadData({loadExaminees : true}).$promise;
+      return ExaminationSystem.loadData().$promise;
     };
     $scope.updateStates = function () {
       return ExaminationSystem.updateStates().$promise;
