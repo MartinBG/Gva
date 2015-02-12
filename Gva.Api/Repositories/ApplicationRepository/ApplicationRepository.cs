@@ -4,8 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using Common.Api.Models;
 using Common.Api.Repositories;
+using Common.Api.Repositories.NomRepository;
 using Common.Data;
 using Common.Linq;
+using Common.Json;
 using Gva.Api.Models;
 using Gva.Api.Models.Views;
 using Gva.Api.Models.Views.Aircraft;
@@ -25,16 +27,19 @@ namespace Gva.Api.Repositories.ApplicationRepository
     public class ApplicationRepository : Repository<GvaApplication>, IApplicationRepository
     {
         private ILotRepository lotRepository;
+        private INomRepository nomRepository;
         private IFileRepository fileRepository;
 
         public ApplicationRepository(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IFileRepository fileRepository)
+            IFileRepository fileRepository,
+            INomRepository nomRepository)
             : base(unitOfWork)
         {
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
+            this.nomRepository = nomRepository;
         }
 
         public IEnumerable<ApplicationListDO> GetApplications(
@@ -719,6 +724,33 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
             partVersion.Content.ApplicationId = gvaApplication.GvaApplicationId;
 
+ 
+            if(partVersion.Content.ExaminationSystemData != null)
+            {
+                var licenceTypeIds = this.nomRepository.GetNomValue(partVersion.Content.ApplicationType.NomValueId)
+                    .TextContent
+                    .GetItems<int>("licenceTypeIds");
+                List<AppExamSystQualificationDO> qualifications = new List<AppExamSystQualificationDO>();
+                foreach (int licenceTypeId in licenceTypeIds)
+                {
+                    var licenceType = this.nomRepository.GetNomValue(licenceTypeId);
+                    var qualification = this.unitOfWork.DbContext.Set<GvaViewPersonQualification>()
+                        .Where(q => q.LotId == lotId && q.LicenceTypeCode == licenceType.Code).FirstOrDefault();
+                    if(qualification != null)
+                    {
+                        qualifications.Add(
+                            new AppExamSystQualificationDO()
+                            {
+                                LicenceType = licenceType,
+                                QualificationCode = qualification.QualificationCode,
+                                QualificationName = qualification.QualificationName,
+                                State = string.Format("{0} {1}", qualification.State, qualification.StateMethod)
+                            });
+                    }
+                }
+
+                partVersion.Content.ExaminationSystemData.Qualifications = qualifications;
+            }
             if (stages.Count() > 0)
             {
                 var applicationStage = stages.FirstOrDefault();

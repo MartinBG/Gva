@@ -75,7 +75,5 @@ namespace Gva.Api.Repositories.PersonRepository
         bool IsFclLicence(int licenceTypeId);
 
         List<GvaViewPersonCheck> GetChecksForReport(List<int> checks);
-
-        List<GvaExSystQualification> GetPersonQualifications(int lotId);
     }
 }

@@ -1502,7 +1502,6 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
-                                qlf_code = r.Field<string>("QLF_CODE"),
                                 codeCA = r.Field<string>("CA_CODE"),
                                 dateValidFrom = r.Field<DateTime?>("DATE_FROM"),
                                 dateValidTo = r.Field<DateTime?>("DATE_TO"),

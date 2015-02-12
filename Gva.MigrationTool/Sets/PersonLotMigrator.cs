@@ -527,56 +527,6 @@ namespace Gva.MigrationTool.Sets
                     .GroupBy(r => r.Get<int>("__oldApplicationId"))
                     .ToDictionary(r => r.Key, r => r.ToArray());
 
-            Dictionary<int, string> states = new Dictionary<int, string>()
-            {
-                {1, "Started"},
-                {2, "Canceled"},
-                {3, "Finished"}
-            };
-
-             Dictionary<int, string> stateMethods = new Dictionary<int, string>()
-            {
-                {1, "Automatically"},
-                {2, "Manually"}
-            };
-
-            Dictionary<decimal, JObject[]> lastStateOfQualification = this.oracleConn.CreateStoreCommand(
-                @"SELECT lastState.state, 
-                    lastState.qlf_code,
-                    lastState.state_method,
-                    eq.qlf_name,
-                    lastState.id_person,
-                    lt.id as licence_type_id,
-                    rt.id as request_type_id
-                    FROM 
-                    (SELECT id, id_person, date_from, date_to, state, qlf_code, state_method, notes_auto_state
-                                FROM   CAA_DOC.exams_state_log es
-                                WHERE es.date_from = (select MAX(ess.date_from)
-                                                        FROM   CAA_DOC.exams_state_log ess
-                                                        WHERE  ess.id_person = es.id_person)) lastState 
-                    LEFT JOIN CAA_DOC.nm_licence_type lt on lt.qlf_code = lastState.qlf_code
-                    LEFT JOIN CAA_DOC.exams_qualification eq on eq.qlf_code = lt.qlf_code,
-                    CAA_DOC.nm_request_type    rt
-                    WHERE rt.licence_types is not null
-                    and   ':'||rt.licence_types||':' like '%:'||lt.id||':%'
-                      AND {0}",
-                new DbClause("lastState.id_person = {0}", personId)
-                ).Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        qualificationCode = r.Field<string>("qlf_code"),
-                        qualificationName = r.Field<string>("qlf_name"),
-                        state = r.Field<int?>("state") != null ? 
-                        ( r.Field<int?>("state_method") != null ?
-                                string.Format("{0} {1}", states[r.Field<int>("state")], stateMethods[r.Field<int>("state_method")]) : states[r.Field<int>("state")])
-                        : "Липсва състояние",
-                        licenceType = noms["licenceTypes"].ByOldId(r.Field<decimal?>("licence_type_id").ToString()),
-                        __request_type_id = r.Field<decimal>("request_type_id"),
-                    }))
-                    .ToList()
-                    .GroupBy(r => r.Get<decimal>("__request_type_id"))
-                    .ToDictionary(r => r.Key, r => r.ToArray());
-
             Func<string, int> parseStringToInt = (stringValue) =>
                         {
                             int outValue;
@@ -623,9 +573,7 @@ namespace Gva.MigrationTool.Sets
                         taxAmount = r.Field<decimal?>("TAX_AMOUNT"),
                         examinationSystemData = new {
                             exams = r.Field<string>("CERT_CAMP_CODE") != null && applicationExams.ContainsKey(r.Field<int>("ID")) ? applicationExams[r.Field<int>("ID")] : new JObject[0],
-                            qualifications = r.Field<decimal?>("REQUEST_TYPE_ID") != null &&
-                            lastStateOfQualification.ContainsKey(r.Field<decimal>("REQUEST_TYPE_ID")) ?
-                                lastStateOfQualification[r.Field<decimal>("REQUEST_TYPE_ID")]: new JObject[0],
+                            qualifications = new JObject[0],
                             certCampaign = r.Field<string>("CERT_CAMP_CODE") != null ?
                                 new
                                 {
