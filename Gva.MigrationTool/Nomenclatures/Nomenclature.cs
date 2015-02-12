@@ -1168,11 +1168,31 @@ namespace Gva.MigrationTool.Nomenclatures
                     })
                 .ToList();
 
+            results.Add(new NomValue()
+            {
+                Name = "Вътрешна проверка",
+                NameAlt = "Вътрешна проверка",
+                Alias = null,
+                IsActive = true,
+                TextContentString = JsonConvert.SerializeObject(
+                    new
+                    {
+                        direction = 6393,
+                        caseTypeAlia = "flightCrew",
+                        isPersonsOnly = true,
+                        categoryCode = "T",
+                        categoryAlias = "check"
+                    })
+            });
+
             noms["documentRoles"] = new Dictionary<string, NomValue>();
             foreach (var row in results)
             {
-                noms["documentRoles"][row.OldId] = row;
-                nom.NomValues.Add(row);
+                if (row.OldId != null)
+                {
+                    noms["documentRoles"][row.OldId] = row;
+                    nom.NomValues.Add(row);
+                }
             }
         }
 
@@ -1339,6 +1359,8 @@ namespace Gva.MigrationTool.Nomenclatures
                             })
                     })
                 .ToList();
+
+            results = results.Where(r => r.Name != "FDA").ToList();
 
             noms["ratingClasses"] = new Dictionary<string, NomValue>();
             foreach (var row in results)
