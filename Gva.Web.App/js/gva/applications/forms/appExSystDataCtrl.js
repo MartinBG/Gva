@@ -1,9 +1,23 @@
-﻿/*global angular*/
+﻿/*global angular, _*/
 
-(function (angular) {
+(function (angular, _) {
   'use strict';
 
   function AppExSystDataCtrl($scope, scModal) {
+    $scope.qualifications =  _.map($scope.model.qualifications,
+      function (qualification) {
+        var state = qualification.state;
+        if(state.indexOf(' ') > 0)
+        {
+          state = state.split(' ');
+        }
+        return {
+          qualificationName: qualification.qualificationName,
+          licenceTypeCode: qualification.licenceType.Code,
+          state: state[0],
+          method: state[1]
+        };
+      });
     $scope.addExams = function () {
       var modalInstance = scModal.open('appExSystChooseExams', {
         qualificationCode: $scope.model.qualificationCode,
@@ -22,4 +36,4 @@
   AppExSystDataCtrl.$inject = ['$scope', 'scModal'];
 
   angular.module('gva').controller('AppExSystDataCtrl', AppExSystDataCtrl);
-}(angular));
+}(angular, _));

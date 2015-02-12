@@ -42,12 +42,18 @@
   <div class="row">
   </div>
   <h5 class="form-header" l10n-text="applications.appExSystDataDirective.qualificationsTitle"></h5>
-  <sc-datatable items="model.qualifications" filterable="true" pageable="false" sortable="true" dynamic-columns="false">
-    <sc-column data="licenceType.code" title="applications.appExSystDataDirective.licenceType">
+  <sc-datatable items="qualifications" filterable="true" pageable="false" sortable="true" dynamic-columns="false">
+    <sc-column data="licenceTypeCode" title="applications.appExSystDataDirective.licenceType">
     </sc-column>
     <sc-column data="qualificationName" title="applications.appExSystDataDirective.qualificationName">
+
     </sc-column>
-    <sc-column data="status" title="applications.appExSystDataDirective.status">
+    <sc-column data="state" title="applications.appExSystDataDirective.status" has-content="true">
+       {{ item.state === 'Finished' ? 'Приключил' : ' '}}
+       {{ item.state === 'Started' ? 'Стартирал' : ' '}}
+       {{ item.state === 'Canceled' ? 'Прекратен' : ' '}}
+       {{item.method === 'Automatically' ? 'Автоматично' : ''}}
+       {{item.method === 'Manually' ? 'Ръчно' : ''}}
     </sc-column>
   </sc-datatable>
 </ng-form>

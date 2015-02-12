@@ -12,7 +12,7 @@ namespace Gva.Api.Models.Views
     {
         public int LotId { get; set; }
 
-        public int GvaApplicationId { get; set; }
+        public int AppPartId { get; set; }
 
         public string CertCampCode { get; set; }
 
@@ -22,9 +22,9 @@ namespace Gva.Api.Models.Views
 
         public string ExamName { get; set; }
 
-        public DateTime ExamDate { get; set; }
+        public DateTime? ExamDate { get; set; }
 
-        public virtual GvaApplication Application { get; set; }
+        public virtual GvaViewApplication Application { get; set; }
 
         public virtual GvaViewPerson Person { get; set; }
     }
@@ -34,13 +34,13 @@ namespace Gva.Api.Models.Views
         public GvaViewPersonApplicationExamMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.LotId, t.GvaApplicationId, t.ExamCode });
+            this.HasKey(t => new { t.LotId, t.AppPartId, t.ExamCode });
 
             // Properties
             this.Property(t => t.LotId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.GvaApplicationId)
+            this.Property(t => t.AppPartId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.CertCampCode)
@@ -62,7 +62,7 @@ namespace Gva.Api.Models.Views
             // Table & Column Mappings
             this.ToTable("GvaViewPersonApplicationExams");
             this.Property(t => t.LotId).HasColumnName("LotId");
-            this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
+            this.Property(t => t.AppPartId).HasColumnName("AppPartId");
             this.Property(t => t.CertCampCode).HasColumnName("CertCampCode");
             this.Property(t => t.CertCampName).HasColumnName("CertCampName");
             this.Property(t => t.ExamCode).HasColumnName("ExamCode");
@@ -72,7 +72,7 @@ namespace Gva.Api.Models.Views
             // Relationships
             this.HasRequired(t => t.Application)
                 .WithMany(t => t.ApplicationExams)
-                .HasForeignKey(d => d.GvaApplicationId);
+                .HasForeignKey(d => new { d.LotId, d.AppPartId });
             this.HasRequired(t => t.Person)
                 .WithMany(t => t.ApplicationExams)
                 .HasForeignKey(d => d.LotId);

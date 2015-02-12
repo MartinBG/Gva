@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
@@ -25,6 +26,8 @@ namespace Gva.Api.Models.Views
         public virtual Lot Lot { get; set; }
 
         public virtual Part Part { get; set; }
+
+        public virtual ICollection<GvaViewPersonApplicationExam> ApplicationExams { get; set; }
     }
 
     public class GvaViewApplicationMap : EntityTypeConfiguration<GvaViewApplication>

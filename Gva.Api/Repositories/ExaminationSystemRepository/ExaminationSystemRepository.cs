@@ -430,7 +430,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         if (lastStatePerQualification.ToDate.HasValue? DateTime.Compare(DateTime.Now, lastStatePerQualification.ToDate.Value) > 0 : false)
                         {
                             lastStatePerQualification.Notes = "Не са взети всички необходими изпити за квалификацията за срока от 18 месеца";
-                            lastStatePerQualification.StateMethod = "Automatic";
+                            lastStatePerQualification.StateMethod = "Automatically";
                             lastStatePerQualification.State = "Canceled";
                             continue;
                         }
@@ -439,7 +439,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                     if (availableExams.Select(t => t.CertCamp).Count() > 6 && lastStatePerQualification != null)
                     {
                         lastStatePerQualification.Notes = "Достигнат е пределно допустим брой сесиии";
-                        lastStatePerQualification.StateMethod = "Automatic";
+                        lastStatePerQualification.StateMethod = "Automatically";
                         lastStatePerQualification.State = "Canceled";
 
                         continue;
@@ -447,7 +447,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                     else if (availableExams.GroupBy(c => c.Exam.Code).Any(t => t.Count() > 4 && t.All(te => te.Status == "failed")) && lastStatePerQualification != null)
                     {
                         lastStatePerQualification.Notes = "Достигнат е пределно допустим брой на невзети изпити за тест";
-                        lastStatePerQualification.StateMethod = "Automatic";
+                        lastStatePerQualification.StateMethod = "Automatically";
                         lastStatePerQualification.State = "Canceled";
                         continue;
                     }
@@ -460,7 +460,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             FromDate = firstExamDate,
                             ToDate = firstExamDate.AddMonths(18),
                             Qualification = qualification,
-                            StateMethod = "Automatic",
+                            StateMethod = "Automatically",
                             State = "Finished"
                         };
 
@@ -475,7 +475,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             FromDate = firstExamDate,
                             ToDate = firstExamDate.AddMonths(18),
                             Qualification = qualification,
-                            StateMethod = "Automatic",
+                            StateMethod = "Automatically",
                             State = "Started"
                         };
 

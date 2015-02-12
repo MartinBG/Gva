@@ -5,7 +5,7 @@ namespace Gva.Api.ModelsDO.Applications
 {
     public class ApplicationExamListDO
     {
-        public int ApplicationId { get; set; }
+        public int AppPartId { get; set; }
 
         public int? LotId { get; set; }
 
@@ -29,6 +29,6 @@ namespace Gva.Api.ModelsDO.Applications
 
         public string CertCampCode { get; set; }
 
-        public DateTime ExamDate { get; set; }
+        public DateTime? ExamDate { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Gva.MigrationTool.Sets.Common
 {
     public static class CommonUtils
     {
-        public static IList<GvaApplicationStage> getApplicationStages(
+        public static IList<GvaApplicationStage> GetApplicationStages(
             OracleConnection oracleConn,
             IDictionary<int, int> personIdToLotId,
             int newApplicationId,

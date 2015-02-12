@@ -16,7 +16,7 @@ namespace Gva.Api.ModelsDO.Applications
 
         public string QualificationName { get; set; }
 
-        public string Status { get; set; }
+        public string State { get; set; }
 
         public NomValue LicenceType { get; set; }
     }

@@ -139,7 +139,7 @@ namespace Gva.MigrationTool.Sets
                                     app.Key,
                                     Utils.ToJObject(appNomDO));
 
-                            IList<GvaApplicationStage> appStages = CommonUtils.getApplicationStages(this.oracleConn, personIdToLotId, appNomDO.ApplicationId, app.Key);
+                            IList<GvaApplicationStage> appStages = CommonUtils.GetApplicationStages(this.oracleConn, personIdToLotId, appNomDO.ApplicationId, app.Key);
 
                             foreach (GvaApplicationStage stage in appStages)
                             {

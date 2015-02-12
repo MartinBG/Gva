@@ -25,11 +25,14 @@ namespace Gva.Api.Projections.Person
         {
             var applications = parts.GetAll<DocumentApplicationDO>("personDocumentApplications");
             List<GvaViewPersonApplicationExam> result = new List<GvaViewPersonApplicationExam>();
-            foreach (var application in applications.Where(a => a.Content.ExaminationSystemData != null && a.Content.ExaminationSystemData.Exams.Count() > 0))
+            foreach (var application in applications.Where(
+                a => a.Content.ExaminationSystemData != null &&
+                a.Content.ExaminationSystemData.Exams != null && 
+                a.Content.ExaminationSystemData.Exams.Count() > 0))
             {
                 List<GvaViewPersonApplicationExam> exams = application.Content.ExaminationSystemData.Exams
                     .Select(t =>
-                        this.Create(t, application.Content.ApplicationId, application.Part.LotId, application.Content.ExaminationSystemData.CertCampaign))
+                        this.Create(t, application.PartId, application.Part.LotId, application.Content.ExaminationSystemData.CertCampaign))
                     .ToList();
                 result = result.Union(exams)
                     .ToList();
@@ -39,10 +42,10 @@ namespace Gva.Api.Projections.Person
         }
 
 
-        private GvaViewPersonApplicationExam Create(AppExamSystExamDO exam, int applicationId, int lotId, NomValue certCampaign)
+        private GvaViewPersonApplicationExam Create(AppExamSystExamDO exam, int applicationPartId, int lotId, NomValue certCampaign)
         {
             GvaViewPersonApplicationExam applicationExam = new GvaViewPersonApplicationExam();
-            applicationExam.GvaApplicationId = applicationId;
+            applicationExam.AppPartId = applicationPartId;
             applicationExam.LotId = lotId;
             applicationExam.ExamCode = exam.ExamData.Code;
             applicationExam.ExamName = exam.ExamData.Name;

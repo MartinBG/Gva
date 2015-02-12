@@ -132,7 +132,7 @@ namespace Gva.MigrationTool.Sets
                                     app.Key,
                                     Utils.ToJObject(appNomDO));
 
-                            IList<GvaApplicationStage> appStages = CommonUtils.getApplicationStages(this.oracleConn, personIdToLotId, appNomDO.ApplicationId, app.Key);
+                            IList<GvaApplicationStage> appStages = CommonUtils.GetApplicationStages(this.oracleConn, personIdToLotId, appNomDO.ApplicationId, app.Key);
 
                             foreach (GvaApplicationStage stage in appStages)
                             {
@@ -495,6 +495,95 @@ namespace Gva.MigrationTool.Sets
             Dictionary<int, string> appApexIdToStaffTypeCode,
             Dictionary<int, string> blobIdsToFileKeys)
         {
+            Dictionary<int, JObject[]> applicationExams = this.oracleConn.CreateStoreCommand(
+                @"SELECT
+                    et.test_name, 
+                    er.test_code,
+                    er.on_date,
+                    er.id_request,
+                    et.qlf_code,
+                    et.qlf_name
+                FROM CAA_DOC.EXAMS_REQUEST er
+                LEFT JOIN (select distinct test_code, test_name, qlf_code, qlf_name from CAA_DOC.exams_test) et on er.test_code = et.test_code
+                LEFT JOIN CAA_DOC.REQUEST r on r.id = er.id_request
+                WHERE {0}",
+                new DbClause("r.applicant_person_id = {0}", personId)
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        __oldApplicationId = r.Field<int>("id_request"),
+                        date = r.Field<DateTime?>("on_date"),
+                        examData = new
+                        {
+                            Name = r.Field<string>("test_name"),
+                            Code = r.Field<string>("test_code"),
+                            QualificationName = r.Field<string>("qlf_code"),
+                            QualificationCode = r.Field<string>("qlf_name")
+                        },
+                       
+                    }))
+                    .ToList()
+                    .GroupBy(r => r.Get<int>("__oldApplicationId"))
+                    .ToDictionary(r => r.Key, r => r.ToArray());
+
+            Dictionary<int, string> states = new Dictionary<int, string>()
+            {
+                {1, "Started"},
+                {2, "Canceled"},
+                {3, "Finished"}
+            };
+
+             Dictionary<int, string> stateMethods = new Dictionary<int, string>()
+            {
+                {1, "Automatically"},
+                {2, "Manually"}
+            };
+
+            Dictionary<decimal, JObject[]> lastStateOfQualification = this.oracleConn.CreateStoreCommand(
+                @"SELECT lastState.state, 
+                    lastState.qlf_code,
+                    lastState.state_method,
+                    eq.qlf_name,
+                    lastState.id_person,
+                    lt.id as licence_type_id,
+                    rt.id as request_type_id
+                    FROM 
+                    (SELECT id, id_person, date_from, date_to, state, qlf_code, state_method, notes_auto_state
+                                FROM   CAA_DOC.exams_state_log es
+                                WHERE es.date_from = (select MAX(ess.date_from)
+                                                        FROM   CAA_DOC.exams_state_log ess
+                                                        WHERE  ess.id_person = es.id_person)) lastState 
+                    LEFT JOIN CAA_DOC.nm_licence_type lt on lt.qlf_code = lastState.qlf_code
+                    LEFT JOIN CAA_DOC.exams_qualification eq on eq.qlf_code = lt.qlf_code,
+                    CAA_DOC.nm_request_type    rt
+                    WHERE rt.licence_types is not null
+                    and   ':'||rt.licence_types||':' like '%:'||lt.id||':%'
+                      AND {0}",
+                new DbClause("lastState.id_person = {0}", personId)
+                ).Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        qualificationCode = r.Field<string>("qlf_code"),
+                        qualificationName = r.Field<string>("qlf_name"),
+                        state = r.Field<int?>("state") != null ? 
+                        ( r.Field<int?>("state_method") != null ?
+                                string.Format("{0} {1}", states[r.Field<int>("state")], stateMethods[r.Field<int>("state_method")]) : states[r.Field<int>("state")])
+                        : "Липсва състояние",
+                        licenceType = noms["licenceTypes"].ByOldId(r.Field<decimal?>("licence_type_id").ToString()),
+                        __request_type_id = r.Field<decimal>("request_type_id"),
+                    }))
+                    .ToList()
+                    .GroupBy(r => r.Get<decimal>("__request_type_id"))
+                    .ToDictionary(r => r.Key, r => r.ToArray());
+
+            Func<string, int> parseStringToInt = (stringValue) =>
+                        {
+                            int outValue;
+                            int.TryParse(stringValue, out outValue);
+                            return outValue;
+                        };
+
             var parts = this.oracleConn.CreateStoreCommand(
                 @"SELECT R.ID,
                         R.BOOK_PAGE_NO,
@@ -506,8 +595,12 @@ namespace Gva.MigrationTool.Sets
                         R.REQUEST_TYPE_ID,
                         R.PAYMENT_REASON_ID,
                         R.CURRENCY_ID,
-                        R.TAX_AMOUNT
+                        R.TAX_AMOUNT,
+                        R.ID_SCHOOL,
+                        ECC.CERT_CAMP_CODE,
+                        ECC.CERT_CAMP_NAME
                     FROM CAA_DOC.REQUEST R
+                    LEFT JOIN (select cert_camp_code, cert_camp_name, qlf_code from CAA_DOC.EXAMS_CERT_CAMPAIGN) ecc on r.cert_camp_code = ecc.cert_camp_code
                     WHERE {0}",
                 new DbClause("R.APPLICANT_PERSON_ID = {0}", personId)
                 )
@@ -527,7 +620,21 @@ namespace Gva.MigrationTool.Sets
                         applicationType = noms["applicationTypes"].ByOldId(r.Field<decimal?>("REQUEST_TYPE_ID").ToString()),
                         applicationPaymentType = noms["applicationPaymentTypes"].ByOldId(r.Field<decimal?>("PAYMENT_REASON_ID").ToString()),
                         currency = noms["currencies"].ByOldId(r.Field<decimal?>("CURRENCY_ID").ToString()),
-                        taxAmount = r.Field<decimal?>("TAX_AMOUNT")
+                        taxAmount = r.Field<decimal?>("TAX_AMOUNT"),
+                        examinationSystemData = new {
+                            exams = r.Field<string>("CERT_CAMP_CODE") != null && applicationExams.ContainsKey(r.Field<int>("ID")) ? applicationExams[r.Field<int>("ID")] : new JObject[0],
+                            qualifications = r.Field<decimal?>("REQUEST_TYPE_ID") != null &&
+                            lastStateOfQualification.ContainsKey(r.Field<decimal>("REQUEST_TYPE_ID")) ?
+                                lastStateOfQualification[r.Field<decimal>("REQUEST_TYPE_ID")]: new JObject[0],
+                            certCampaign = r.Field<string>("CERT_CAMP_CODE") != null ?
+                                new
+                                {
+                                    NomValueId = parseStringToInt(r.Field<string>("CERT_CAMP_CODE").Substring(0, 6)),
+                                    Name = r.Field<string>("CERT_CAMP_NAME"),
+                                    Code = r.Field<string>("CERT_CAMP_CODE")
+                                } : null,
+                            school = r.Field<decimal?>("ID_SCHOOL").HasValue ? noms["applicationPaymentTypes"].ByOldId(r.Field<decimal?>("ID_SCHOOL").ToString()) : null
+                        }
                     }))
                 .ToList();
 
@@ -583,7 +690,8 @@ namespace Gva.MigrationTool.Sets
                                     "applicationType",
                                     "applicationPaymentType",
                                     "currency",
-                                    "taxAmount"
+                                    "taxAmount", 
+                                    "examinationSystemData"
                                 })),
                         new JProperty("files",
                             new JArray(

@@ -74,6 +74,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 throw new NotSupportedException("Cannot get applications with not selected lot set alias!");
             }
         }
+
         public IEnumerable<ApplicationExamListDO> GetPersonApplicationExams(
             DateTime? fromDate = null,
             DateTime? toDate = null,
@@ -87,7 +88,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             var applications =
                 (from a in this.unitOfWork.DbContext.Set<GvaViewPersonApplicationExam>()
 
-                join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
+                join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId)
+                .Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.AppPartId equals gas.GvaApplication.GvaAppLotPartId into gas1
                 from gas2 in gas1.DefaultIfEmpty()
 
                 join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(va => va.ApplicationType) on gas2.GvaApplication.GvaAppLotPartId equals va.PartId into va1
@@ -104,7 +106,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 })
                 .Select(ap => new ApplicationExamListDO()
                 {
-                    ApplicationId = ap.Exam.GvaApplicationId,
+                    AppPartId = ap.Exam.AppPartId,
                     LotId = ap.Exam.LotId,
                     DocumentNumber = ap.Application.DocumentNumber,
                     DocumentDate = ap.Application.DocumentDate,
@@ -122,6 +124,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             return applications;
 
         }
+
         public IEnumerable<ApplicationListDO> GetPersonApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,

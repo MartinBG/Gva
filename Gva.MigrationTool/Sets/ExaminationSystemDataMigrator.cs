@@ -312,7 +312,7 @@ namespace Gva.MigrationTool.Sets
                                 FromDate = r.Field<DateTime>("date_from"),
                                 ToDate = r.Field<DateTime?>("date_to"),
                                 State =  states[r.Field<int>("state")],
-                                StateMethod = r.Field<int>("state_method") == 1 ? "Automatic" : "Manually",
+                                StateMethod = r.Field<int>("state_method") == 1 ? "Automatically" : "Manually",
                                 Notes = r.Field<string>("notes_auto_state"),
                                 Qualification = new GvaExSystQualification()
                                 {
@@ -322,6 +322,7 @@ namespace Gva.MigrationTool.Sets
                             })
                             .ToList();
         }
+
         public void Dispose()
         {
             this.Dispose(true);
