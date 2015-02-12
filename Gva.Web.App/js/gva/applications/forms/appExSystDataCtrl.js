@@ -13,7 +13,7 @@
         }
         return {
           qualificationName: qualification.qualificationName,
-          licenceTypeCode: qualification.licenceType.Code,
+          licenceTypeCode: qualification.licenceType.code,
           state: state[0],
           method: state[1]
         };
