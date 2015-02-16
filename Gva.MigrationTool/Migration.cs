@@ -17,7 +17,7 @@ using Gva.MigrationTool.Sets;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 using Regs.Api;
 using Regs.Api.Repositories.LotRepositories;
 

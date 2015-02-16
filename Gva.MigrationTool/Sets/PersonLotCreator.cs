@@ -13,7 +13,7 @@ using Gva.Api.CommonUtils;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.MigrationTool.Nomenclatures;
 using Newtonsoft.Json.Linq;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
 

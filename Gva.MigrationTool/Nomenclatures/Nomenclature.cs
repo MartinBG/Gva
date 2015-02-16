@@ -11,7 +11,7 @@ using Docs.Api.Models;
 using Gva.Api.CommonUtils;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Newtonsoft.Json;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Gva.MigrationTool.Nomenclatures
 {

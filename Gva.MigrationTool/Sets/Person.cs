@@ -13,7 +13,7 @@ using Common.Data;
 using Gva.Api.CommonUtils;
 using Gva.Api.Models;
 using Newtonsoft.Json.Linq;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Gva.MigrationTool.Sets
 {

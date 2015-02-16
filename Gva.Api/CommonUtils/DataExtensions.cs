@@ -136,7 +136,7 @@ namespace Gva.Api.CommonUtils
                 foreach (object val in clause.Parameters)
                 {
                     DbParameter param = command.CreateParameter();
-                    if (connection is Oracle.DataAccess.Client.OracleConnection)
+                    if (connection is Oracle.ManagedDataAccess.Client.OracleConnection)
                     {
                         param.ParameterName = String.Format(":P{0}{1}", i, j);
                     }

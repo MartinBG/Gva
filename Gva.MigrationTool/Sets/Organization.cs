@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
 using Newtonsoft.Json.Linq;
-using Oracle.DataAccess.Client;
 using Gva.Api.CommonUtils;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Gva.MigrationTool.Sets
 {

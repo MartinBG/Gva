@@ -15,7 +15,6 @@ using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.PrintRepository;
 using Gva.Api.CommonUtils;
 using Newtonsoft.Json.Linq;
-using Oracle.DataAccess.Client;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
@@ -25,6 +24,7 @@ using Gva.Api.ModelsDO;
 using Common.Api.Models;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.ModelsDO.ExaminationSystem;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Gva.MigrationTool.Sets
 {

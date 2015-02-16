@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Autofac.Features.OwnedInstances;
 using Gva.Api.CommonUtils;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Gva.MigrationTool.Blobs
 {

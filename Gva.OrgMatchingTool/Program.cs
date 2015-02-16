@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Oracle.DataAccess.Client;
 using System.Data.SqlClient;
-using System.Data.Common;
-using CarlosAg.ExcelXmlWriter;
-using Gva.OrgMatchingTool.Model;
-using Gva.MigrationTool;
+using System.Linq;
 using System.Text.RegularExpressions;
+using CarlosAg.ExcelXmlWriter;
+using Gva.Api.CommonUtils;
+using Gva.OrgMatchingTool.Model;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Gva.OrgMatchingTool
 {

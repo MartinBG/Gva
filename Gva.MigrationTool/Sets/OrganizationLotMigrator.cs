@@ -22,10 +22,10 @@ using Gva.Api.Repositories.PersonRepository;
 using Gva.MigrationTool.Nomenclatures;
 using Gva.MigrationTool.Sets.Common;
 using Newtonsoft.Json.Linq;
-using Oracle.DataAccess.Client;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Gva.MigrationTool.Sets
 {

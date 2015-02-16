@@ -14,7 +14,7 @@ using Gva.Api.Models;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.PrintRepository;
 using Newtonsoft.Json.Linq;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;

@@ -11,7 +11,7 @@ using Common.Tests;
 using Gva.Api.CommonUtils;
 using Gva.MigrationTool.Nomenclatures;
 using Newtonsoft.Json.Linq;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.MigrationTool.Sets
