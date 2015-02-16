@@ -13,10 +13,10 @@
         </sc-column>
         <sc-column data="totalScore" title="persons.examinationSystem.totalScore">
         </sc-column>
-        <sc-column data="status" title="persons.examinationSystem.status" has-content="true">
-          {{item.status === 'failed' ? 'Невзет' : (item.status === 'passed' ? 'Взет' : '') }}
+        <sc-column data="resultStatus" title="persons.examinationSystem.status" has-content="true">
+          {{item.resultStatus === 'failed' ? 'Невзет' : (item.resultStatus === 'passed' ? 'Взет' : '') }}
         </sc-column>
-        <sc-column data="certCamp.name" title="persons.examinationSystem.certCamp">
+        <sc-column data="certCampName" title="persons.examinationSystem.certCamp">
         </sc-column>
       </sc-datatable>
       <div class="row">
