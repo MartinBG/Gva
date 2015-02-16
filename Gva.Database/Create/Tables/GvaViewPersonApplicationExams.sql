@@ -8,8 +8,8 @@ CREATE TABLE [dbo].[GvaViewPersonApplicationExams] (
     [CertCampName]         NVARCHAR(50)  NOT NULL,
     [ExamCode]             NVARCHAR(50)  NOT NULL,
     [ExamName]             NVARCHAR(50)  NOT NULL,
-    [ExamDate]             DATETIME2     NULL,
-    CONSTRAINT [PK_GvaViewPersonApplicationExams]                 PRIMARY KEY ([LotId], [AppPartId], [ExamCode]),
+    [ExamDate]             DATETIME2     NOT NULL,
+    CONSTRAINT [PK_GvaViewPersonApplicationExams]                 PRIMARY KEY ([LotId], [AppPartId], [ExamCode], [ExamDate]),
     CONSTRAINT [FK_GvaViewPersonApplicationExams_GvaViewApplications] FOREIGN KEY ([LotId], [AppPartId]) REFERENCES [dbo].[GvaViewApplications] ([LotId], [LotPartId]),
     CONSTRAINT [FK_GvaViewPersonApplicationExams_GvaViewPersons]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[GvaViewPersons] ([LotId])
 )

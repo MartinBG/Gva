@@ -22,7 +22,7 @@ namespace Gva.Api.Models.Views
 
         public string ExamName { get; set; }
 
-        public DateTime? ExamDate { get; set; }
+        public DateTime ExamDate { get; set; }
 
         public virtual GvaViewApplication Application { get; set; }
 
@@ -34,7 +34,7 @@ namespace Gva.Api.Models.Views
         public GvaViewPersonApplicationExamMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.LotId, t.AppPartId, t.ExamCode });
+            this.HasKey(t => new { t.LotId, t.AppPartId, t.ExamCode, t.ExamDate });
 
             // Properties
             this.Property(t => t.LotId)
