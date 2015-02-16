@@ -14,6 +14,6 @@ namespace Gva.Api.ModelsDO.Applications
     {
         public GvaExSystExamDO ExamData { get; set; }
 
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }
