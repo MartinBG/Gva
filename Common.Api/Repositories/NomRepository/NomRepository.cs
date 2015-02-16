@@ -60,6 +60,7 @@ namespace Common.Api.Repositories.NomRepository
             var predicate =
                 PredicateBuilder.True<NomValue>()
                 .And(nv => nv.Nom.Alias == alias)
+                .And(nv => nv.IsActive)
                 .AndEquals(nv => nv.ParentValueId.Value, parentValueId)
                 .AndStringContains(nv => nv.Name, term);
 
@@ -74,14 +75,14 @@ namespace Common.Api.Repositories.NomRepository
         public IEnumerable<NomValue> GetNomValues(string alias)
         {
             return this.unitOfWork.DbContext.Set<NomValue>()
-                .Where(nv => nv.Nom.Alias == alias)
+                .Where(nv => nv.Nom.Alias == alias && nv.IsActive)
                 .ToList();
         }
 
         public IEnumerable<NomValue> GetNomValues(int nomId)
         {
             return this.unitOfWork.DbContext.Set<NomValue>()
-                .Where(nv => nv.Nom.NomId == nomId)
+                .Where(nv => nv.Nom.NomId == nomId && nv.IsActive)
                 .ToList();
         }
 
@@ -93,7 +94,7 @@ namespace Common.Api.Repositories.NomRepository
             int offset = 0,
             int? limit = null)
         {
-            var predicate = PredicateBuilder.True<NomValue>();
+            var predicate = PredicateBuilder.True<NomValue>().And(nv => nv.IsActive);
 
             if (!string.IsNullOrWhiteSpace(term))
             {
@@ -117,7 +118,7 @@ namespace Common.Api.Repositories.NomRepository
             int offset = 0,
             int? limit = null)
         {
-            var predicate = PredicateBuilder.True<NomValue>();
+            var predicate = PredicateBuilder.True<NomValue>().And(nv => nv.IsActive);
 
             if (!string.IsNullOrWhiteSpace(term))
             {

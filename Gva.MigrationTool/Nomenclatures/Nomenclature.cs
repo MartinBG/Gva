@@ -2903,14 +2903,15 @@ namespace Gva.MigrationTool.Nomenclatures
         {
             Nom nom = repo.GetNom("personCheckRatingValues");
 
-            var nomInfo = new Dictionary<string, Tuple<string,string>>()
+            var nomInfo = new Dictionary<string, Tuple<string, string, bool>>()
             {
-                { "G", new Tuple<string,string>("Добро"         , "Good"         )},
-                { "S", new Tuple<string,string>("Задоволително" , "Satisfactory" )},
-                { "I", new Tuple<string,string>("Недостатъчно"  , "Insufficient" )},
-                { "U", new Tuple<string,string>("Неприемливо"   , "Unacceptable" )},
-                { "К", new Tuple<string,string>("Компетентен"   , "Competent"    )},
-                { "Н", new Tuple<string,string>("Некомпетентен" , "Incompetent"  )}
+                { "G", new Tuple<string,string, bool>("Добро"         , "Good"         , true)},
+                { "S", new Tuple<string,string, bool>("Задоволително" , "Satisfactory" , true)},
+                { "I", new Tuple<string,string, bool>("Недостатъчно"  , "Insufficient" , true)},
+                { "U", new Tuple<string,string, bool>("Неприемливо"   , "Unacceptable" , true)},
+                { "К", new Tuple<string,string, bool>("Компетентен"   , "Competent"    , true)},
+                { "Н", new Tuple<string,string, bool>("Некомпетентен" , "Incompetent"  , true)},
+                { "C", new Tuple<string,string, bool>("C"             , "C"            , false)}
             };
 
             noms["personCheckRatingValues"] = new Dictionary<string, NomValue>();
@@ -2924,7 +2925,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Name = ni.Value.Item1,
                         NameAlt = ni.Value.Item2,
                         Alias = null,
-                        IsActive = true,
+                        IsActive = ni.Value.Item3,
                         ParentValueId = null,
                         TextContentString = null,
                         Order = order++
