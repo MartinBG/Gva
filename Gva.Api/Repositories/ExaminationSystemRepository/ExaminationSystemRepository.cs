@@ -405,11 +405,23 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             .Where(t => t.EndTime >= lastStatePerQualification.FromDate)
                             .ToList();
 
-                        if (lastStatePerQualification.ToDate.HasValue? DateTime.Compare(DateTime.Now, lastStatePerQualification.ToDate.Value) > 0 : false)
+                        var lastTest = availableExams.Where(e => e.EndTime.HasValue).OrderByDescending(e => e.EndTime).First();
+                        if (lastStatePerQualification.ToDate.HasValue? DateTime.Compare(lastTest.EndTime.Value, lastStatePerQualification.ToDate.Value) > 0 : false)
                         {
-                            lastStatePerQualification.Notes = "Не са взети всички необходими изпити за квалификацията за срока от 18 месеца";
-                            lastStatePerQualification.StateMethod = "Automatically";
                             lastStatePerQualification.State = "Canceled";
+                            lastStatePerQualification.Notes = "Съществува изпит след датата на приключване";
+                            lastStatePerQualification.StateMethod = "Automatically";
+
+                            PersonExamSystStateDO newStateFinished = new PersonExamSystStateDO()
+                            {
+                                FromDate = lastTest.EndTime.Value,
+                                ToDate = lastTest.EndTime.Value.AddMonths(18),
+                                Qualification = qualification,
+                                StateMethod = "Automatically",
+                                State = "Started"
+                            };
+
+                            examSystDataPartVersion.Content.States.Add(newStateFinished);
                             continue;
                         }
                     }
