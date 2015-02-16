@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System.Configuration;
+using System.Linq;
 using System.Web.Http;
 using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.Repositories.ExaminationSystemRepository;
+using Oracle.ManagedDataAccess.Client;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers
@@ -94,6 +96,24 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetPersonExams(int lotId)
         {
             return Ok(this.examinationSystemRepository.GetExaminees(lotId));
+        }
+
+        [Route("checkConnection")]
+        [HttpGet]
+        public IHttpActionResult CheckConnection()
+        {
+            using (OracleConnection connection = new OracleConnection(ConfigurationManager.ConnectionStrings["ExaminationSystem"].ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    return Ok(new { isConnected = true });
+                }
+                catch
+                {
+                    return Ok(new { isConnected = false });
+                }
+            }
         }
     }
 }

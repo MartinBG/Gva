@@ -12,6 +12,14 @@
     $scope.updateStates = function () {
       return ExaminationSystem.updateStates().$promise;
     };
+    $scope.checkConnection = function () {
+      return ExaminationSystem.checkConnection()
+        .$promise
+        .then(function (result) {
+          $scope.showCheckResult = true;
+          $scope.isConnected = result.isConnected;
+        });
+    };
   }
 
   ExaminationSystemCtrl.$inject = ['$scope', 'ExaminationSystem'];

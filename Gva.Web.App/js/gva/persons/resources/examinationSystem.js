@@ -41,6 +41,10 @@
         method: 'GET',
         url: 'api/examinationSystem/personExams',
         isArray: true
+      },
+      checkConnection: {
+        method: 'GET',
+        url: 'api/examinationSystem/checkConnection'
       }
     });
   }]);
