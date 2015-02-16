@@ -355,7 +355,7 @@ namespace Gva.Api.Controllers.Applications
                     { 
                         NomValue licenceType = this.nomRepository.GetNomValue(licenceTypeId);
                         GvaExSystQualification qualification = this.examinationSystemRepository
-                            .GetQualifications(licenceType.TextContent.Get<string>("qlf_code"))
+                            .GetQualifications(licenceType.TextContent.Get<string>("qlfCode"))
                             .Single();
 
                         application.ExaminationSystemData
