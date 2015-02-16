@@ -236,7 +236,7 @@ namespace Gva.MigrationTool.Sets
             Dictionary<int, string> states = new Dictionary<int, string> ()
             {
                 { 1, "Started"}, 
-                { 2, "Cenceled"},
+                { 2, "Canceled"},
                 { 3, "Finished"}
             };
 
