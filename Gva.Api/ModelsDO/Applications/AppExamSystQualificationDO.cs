@@ -18,6 +18,8 @@ namespace Gva.Api.ModelsDO.Applications
 
         public string State { get; set; }
 
+        public string StateMethod { get; set; }
+
         public NomValue LicenceType { get; set; }
     }
 }

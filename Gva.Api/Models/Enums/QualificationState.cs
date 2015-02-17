@@ -10,6 +10,7 @@ namespace Gva.Api.Models.Enums
     {
         Started,
         Canceled,
-        Finished
+        Finished,
+        Missing
     }
 }
