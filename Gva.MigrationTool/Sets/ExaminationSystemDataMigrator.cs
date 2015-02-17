@@ -16,6 +16,7 @@ using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Oracle.ManagedDataAccess.Client;
+using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -24,7 +25,7 @@ namespace Gva.MigrationTool.Sets
     public class ExaminationSystemDataMigrator : IDisposable
     {
         private bool disposed = false;
-        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, IFileRepository, UserContext>>> dependencyFactory;
+        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, IFileRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
         private OracleConnection oracleConn;
         private IUnitOfWork unitOfWork;
         private UserContext userContext;
@@ -33,7 +34,7 @@ namespace Gva.MigrationTool.Sets
 
         public ExaminationSystemDataMigrator(
             OracleConnection oracleConn,
-            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, IFileRepository, UserContext>>> dependencyFactory)
+            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, IFileRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
             this.oracleConn = oracleConn;
@@ -63,7 +64,8 @@ namespace Gva.MigrationTool.Sets
                 var lotRepository = dependencies.Value.Item2;
                 this.caseTypeRepository = dependencies.Value.Item3;
                 this.fileRepository = dependencies.Value.Item4;
-                this.userContext = dependencies.Value.Item5;
+                var lotEventDispatcher = dependencies.Value.Item5;
+                this.userContext = dependencies.Value.Item6;
 
                 try
                 {
@@ -103,6 +105,8 @@ namespace Gva.MigrationTool.Sets
                         PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.CreatePart("personExamSystData", data, this.userContext);
 
                         this.fileRepository.AddFileReferences(examSystDataPartVersion.Part, cases);
+
+                        lot.Commit(this.userContext, lotEventDispatcher);
                     }
 
                     this.unitOfWork.Save();

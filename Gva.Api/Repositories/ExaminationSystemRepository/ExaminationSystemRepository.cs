@@ -288,6 +288,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                Dictionary<int, List<PersonExamSystExamDO>> examsPerPersonData =
                    (from e in allNewExaminees
                     join t in allNewExams on e.ExamCode equals t.Code
+                    where allCurrentCertCampaignCodes.Contains(e.CertCampaign.Code)
                     select new
                     {
                         TotalScore = e.TotalScore,

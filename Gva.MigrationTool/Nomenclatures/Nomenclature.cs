@@ -1535,7 +1535,7 @@ namespace Gva.MigrationTool.Nomenclatures
                                 licenceTypeDictionary2Id = noms["licenceTypeDictionary"].ByOldId(r.Field<decimal?>("LICENCE_DICTIONARY2_ID").ToString()).NomValueId(),
                                 licenceCode = r.Field<string>("LICENCE_CODE"),
                                 prtPrintableDocId = r.Field<decimal?>("PRT_PRINTABLE_DOCUMENT_ID"),
-                                qlfCode = r.Field<string>("QLF_CODE"),
+                                qlfCode = r.Field<string>("LICENCE_CODE") != "FCL.CPA" ? r.Field<string>("QLF_CODE") : null,
                                 templateName = templateNames[r.Field<object>("PRT_PRINTABLE_DOCUMENT_ID").ToString()],
                                 caseTypeAlias = noms["staffTypes"].ByOldId(r.Field<int>("STAFF_TYPE_ID").ToString()).Alias
                             })

@@ -27,7 +27,7 @@ namespace Gva.Api.Projections.Person
 
         public override IEnumerable<GvaViewPersonQualification> Execute(PartCollection parts)
         {
-            var examSystData = parts.GetAll<PersonExamSystDataDO>("personExamSystData").SingleOrDefault();
+            var examSystData = parts.Get<PersonExamSystDataDO>("personExamSystData");
 
             List<GvaViewPersonQualification> qualifications = new List<GvaViewPersonQualification>();
             if (examSystData != null)
@@ -37,7 +37,9 @@ namespace Gva.Api.Projections.Person
                     PersonExamSystStateDO lastState = states.OrderBy(s => s.FromDate).Last();
 
                     NomValue licenceType = this.nomRepository.GetNomValues("licenceTypes")
-                        .Where(s => s.TextContent.Get<string>("qlfCode") == lastState.Qualification.Code).SingleOrDefault();
+                        .Where(s => s.TextContent.Get<string>("qlfCode") == lastState.Qualification.Code)
+                        .SingleOrDefault();
+
                     if (licenceType != null)
                     { 
                         qualifications.Add(new GvaViewPersonQualification()
