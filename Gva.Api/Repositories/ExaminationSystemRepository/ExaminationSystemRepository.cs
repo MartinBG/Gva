@@ -287,8 +287,10 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
         public void ReloadStates()
         {
-            var allPersonsWithQualificationsToReload = this.unitOfWork.DbContext.Set<GvaExSystExaminee>()
+            var allPersonsWithQualificationsToReload =
+                this.unitOfWork.DbContext.Set<GvaExSystExaminee>()
                 .Include(e => e.Exam)
+                .ToList()
                 .GroupBy(q => q.LotId);
 
             Dictionary<string, GvaExSystQualification> allQualifications = this.unitOfWork.DbContext.Set<GvaExSystQualification>()
@@ -307,7 +309,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
             PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.Index.GetPart<PersonExamSystDataDO>("personExamSystData");
 
             var qualificationCodes = allPersonExams.Select(e => e.Exam.QualificationCode).Distinct();
-            List<GvaExSystQualification> allPersonQualifications = null;
+            List<GvaExSystQualification> allPersonQualifications = new List<GvaExSystQualification>();
             foreach(var qualificationCode in qualificationCodes)
             {
                 allPersonQualifications.Add(allQualifications[qualificationCode]);
@@ -324,7 +326,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                     if (examSystDataPartVersion != null)
                     {
                         lastStatePerQualification = examSystDataPartVersion.Content.States
-                        .Where(s => s.Qualification.Code == qualification.Code && s.State == "Started")
+                        .Where(s => s.QualificationCode == qualification.Code && s.State == "Started")
                         .OrderByDescending(s => s.FromDate)
                         .FirstOrDefault();
                     }
@@ -360,7 +362,8 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             {
                                 FromDate = lastExam.EndTime,
                                 ToDate = lastExam.EndTime.AddMonths(18),
-                                Qualification = qualification,
+                                QualificationCode = qualification.Code,
+                                QualificationName = qualification.Name,
                                 StateMethod = QualificationStateMethod.Automatically.ToString(),
                                 State = QualificationState.Started.ToString()
                             });
@@ -390,7 +393,8 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         {
                             FromDate = firstExam.EndTime,
                             ToDate = firstExam.EndTime.AddMonths(18),
-                            Qualification = qualification,
+                            QualificationCode = qualification.Code,
+                            QualificationName = qualification.Name,
                             StateMethod = QualificationStateMethod.Automatically.ToString(),
                             State = QualificationState.Finished.ToString()
                         });
@@ -403,7 +407,8 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         {
                             FromDate = firstExam.EndTime,
                             ToDate = firstExam.EndTime.AddMonths(18),
-                            Qualification = qualification,
+                            QualificationCode = qualification.Code,
+                            QualificationName = qualification.Name,
                             StateMethod = QualificationStateMethod.Automatically.ToString(),
                             State = QualificationState.Started.ToString()
                         });
@@ -450,12 +455,20 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
             }
         }
 
-        public void SaveNewState(int lotId, PersonExamSystStateDO state)
+        public void SaveNewState(int lotId, PersonNewExamSystStateDO state)
         {
             Lot lot = this.lotRepository.GetLotIndex(lotId);
             PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.Index.GetPart<PersonExamSystDataDO>("personExamSystData");
 
-            examSystDataPartVersion.Content.States.Add(state);
+            examSystDataPartVersion.Content.States.Add(new PersonExamSystStateDO()
+            {
+                QualificationCode = state.Qualification.Code,
+                QualificationName = state.Qualification.Name,
+                State = state.State,
+                StateMethod = state.StateMethod,
+                FromDate = state.FromDate,
+                ToDate = state.ToDate
+            });
 
             lot.UpdatePart("personExamSystData", examSystDataPartVersion.Content, this.userContext);
 

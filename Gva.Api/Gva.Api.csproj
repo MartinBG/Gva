@@ -176,6 +176,7 @@
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystExamDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
+    <Compile Include="ModelsDO\Persons\PersonNewExamSystStateDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonAppExamDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamSystStateDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamSystExamDO.cs" />

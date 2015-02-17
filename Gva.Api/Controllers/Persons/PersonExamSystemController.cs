@@ -47,7 +47,7 @@ namespace Gva.Api.Controllers.Persons
         [Route("newState")]
         public IHttpActionResult GetNewManualState(int lotId)
         {
-            PersonExamSystStateDO state = new PersonExamSystStateDO()
+            PersonNewExamSystStateDO state = new PersonNewExamSystStateDO()
             {
                 StateMethod = QualificationStateMethod.Manually.ToString(),
                 FromDate = DateTime.Now,
@@ -59,7 +59,7 @@ namespace Gva.Api.Controllers.Persons
         }
 
         [Route("saveState")]
-        public IHttpActionResult PostNewManualState(int lotId, PersonExamSystStateDO state)
+        public IHttpActionResult PostNewManualState(int lotId, PersonNewExamSystStateDO state)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {

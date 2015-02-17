@@ -4,11 +4,9 @@ using Gva.Api.ModelsDO.Common;
 
 namespace Gva.Api.ModelsDO.Persons
 {
-    public class PersonExamSystStateDO
+    public class PersonNewExamSystStateDO
     {
-        public string QualificationCode { get; set; }
-
-        public string QualificationName { get; set; }
+        public GvaExSystQualification Qualification { get; set; }
 
         public DateTime FromDate { get; set; }
 

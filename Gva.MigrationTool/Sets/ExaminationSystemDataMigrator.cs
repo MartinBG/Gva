@@ -259,11 +259,8 @@ namespace Gva.MigrationTool.Sets
                                 State =  states[r.Field<int>("state")],
                                 StateMethod = r.Field<int>("state_method") == 1 ? QualificationStateMethod.Automatically.ToString() : QualificationStateMethod.Manually.ToString(),
                                 Notes = r.Field<string>("notes_auto_state"),
-                                Qualification = new GvaExSystQualification()
-                                {
-                                    Code = r.Field<string>("qlf_code"),
-                                    Name = r.Field<string>("qlf_name")
-                                }
+                                QualificationName = r.Field<string>("qlf_name"),
+                                QualificationCode = r.Field<string>("qlf_code")
                             })
                             .ToList();
         }
