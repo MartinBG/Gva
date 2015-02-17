@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
@@ -64,8 +65,11 @@ namespace Gva.Api.Repositories.PersonRepository
 
             if (!string.IsNullOrEmpty(names))
             {
-                var namesToSearch = names.Split(' ').ToArray();
-                predicate = predicate.And(o => namesToSearch.All(n => o.Names.Contains(n)));
+                var namesToSearch = names.Split(new [] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var name in namesToSearch)
+                {
+                    predicate = predicate.And(p => p.Names.Contains(name));
+                }
             }
 
             if (caseTypeId.HasValue)
