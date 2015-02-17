@@ -27,6 +27,8 @@ namespace Gva.Api.Models
 
         public int LotId { get; set; }
 
+        public virtual GvaExSystExam Exam { get; set; }
+
         public virtual GvaExSystCertCampaign CertCampaign { get; set; }
 
         public virtual GvaViewPerson Person { get; set; }
@@ -73,6 +75,10 @@ namespace Gva.Api.Models
             this.HasOptional(t => t.CertCampaign)
                 .WithMany(t => t.Examinees)
                 .HasForeignKey(d => d.CertCampCode);
+
+            this.HasRequired(t => t.Exam)
+                .WithMany(t => t.Examinees)
+                .HasForeignKey(d => d.ExamCode);
 
             this.HasRequired(t => t.Person)
                 .WithMany(t => t.Examinees)

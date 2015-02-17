@@ -14,6 +14,8 @@ namespace Gva.Api.Models
 
         public string QualificationCode { get; set; }
 
+        public virtual ICollection<GvaExSystExaminee> Examinees { get; set; }
+
         public virtual ICollection<GvaExSystCertPath> CertPaths { get; set; }
 
         public virtual GvaExSystQualification Qualification { get; set; }
@@ -24,7 +26,7 @@ namespace Gva.Api.Models
         public GvaExSystExamMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.Code, t.QualificationCode });
+            this.HasKey(t => t.Code);
 
             // Properties
             this.Property(t => t.Name)

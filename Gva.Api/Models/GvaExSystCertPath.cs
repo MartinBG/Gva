@@ -64,7 +64,7 @@ namespace Gva.Api.Models
 
             this.HasRequired(t => t.Exam)
                 .WithMany(t => t.CertPaths)
-                .HasForeignKey(d => new { d.ExamCode, d.QualificationCode });
+                .HasForeignKey(d => d.ExamCode);
 
         }
     }
