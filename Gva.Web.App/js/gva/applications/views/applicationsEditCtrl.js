@@ -34,15 +34,7 @@
           }
         },
         'applications.tabs.case': 'root.applications.edit.case',
-        'applications.tabs.stages': 'root.applications.edit.stages',
-        'applications.tabs.examSyst': {
-          state: 'root.applications.edit.examSyst',
-          stateParams: {
-            lotId: $scope.application.lotId,
-            ind: $scope.application.partIndex,
-            set: $scope.set
-          }
-        }
+        'applications.tabs.stages': 'root.applications.edit.stages'
       };
     }
 
