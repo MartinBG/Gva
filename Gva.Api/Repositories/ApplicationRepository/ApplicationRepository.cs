@@ -738,19 +738,21 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 var licenceTypeIds = this.nomRepository.GetNomValue(partVersion.Content.ApplicationType.NomValueId)
                     .TextContent
                     .GetItems<int>("licenceTypeIds");
+
                 List<AppExamSystQualificationDO> qualifications = new List<AppExamSystQualificationDO>();
                 foreach (int licenceTypeId in licenceTypeIds)
                 {
                     var licenceType = this.nomRepository.GetNomValue(licenceTypeId);
                     string licenceQlfCode = licenceType.TextContent.Get<string>("qlfCode");
+                    if (!string.IsNullOrEmpty(licenceQlfCode))
+                    {
+                        var qualification = this.unitOfWork.DbContext.Set<GvaExSystQualification>()
+                            .Where(q => q.Code == licenceQlfCode)
+                            .FirstOrDefault();
 
-                    var qualification = this.unitOfWork.DbContext.Set<GvaExSystQualification>()
-                        .Where(q => q.Code == licenceQlfCode)
-                        .FirstOrDefault();
-                    
-                    var personQualification = this.unitOfWork.DbContext.Set<GvaViewPersonQualification>()
-                        .Where(q => q.LotId == lotId && q.LicenceTypeCode == licenceType.Code)
-                        .FirstOrDefault();
+                        var personQualification = this.unitOfWork.DbContext.Set<GvaViewPersonQualification>()
+                            .Where(q => q.LotId == lotId && q.LicenceTypeCode == licenceType.Code)
+                            .FirstOrDefault();
 
                         qualifications.Add(
                             new AppExamSystQualificationDO()
@@ -761,6 +763,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                                 State = personQualification != null ? personQualification.State : QualificationState.Missing.ToString(),
                                 StateMethod = personQualification != null ? personQualification.StateMethod : null
                             });
+                    }
+
                 }
 
                 partVersion.Content.ExaminationSystemData.Qualifications = qualifications;
