@@ -20,6 +20,7 @@ using Oracle.ManagedDataAccess.Client;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Gva.Api.Models.Enums;
 
 namespace Gva.Api.Repositories.ExaminationSystemRepository
 {
@@ -405,53 +406,53 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             .Where(t => t.EndTime >= lastStatePerQualification.FromDate)
                             .ToList();
 
-                        var lastTest = availableExams.Where(e => e.EndTime.HasValue).OrderByDescending(e => e.EndTime).First();
-                        if (lastStatePerQualification.ToDate.HasValue? DateTime.Compare(lastTest.EndTime.Value, lastStatePerQualification.ToDate.Value) > 0 : false)
+                        var lastExam = availableExams.Where(e => e.EndTime.HasValue).OrderByDescending(e => e.EndTime).First();
+                        if (lastStatePerQualification.ToDate.HasValue ? DateTime.Compare(lastExam.EndTime.Value, lastStatePerQualification.ToDate.Value) > 0 : false)
                         {
-                            lastStatePerQualification.State = "Canceled";
-                            lastStatePerQualification.Notes = "Съществува изпит след датата на приключване";
-                            lastStatePerQualification.StateMethod = "Automatically";
+                            lastStatePerQualification.State = QualificationState.Canceled.ToString();
+                            lastStatePerQualification.Notes = "Съществува изпит след датата на приключване на статуса";
+                            lastStatePerQualification.StateMethod = QualificationStateMethod.Automatically.ToString();
 
-                            PersonExamSystStateDO newStateFinished = new PersonExamSystStateDO()
+                            PersonExamSystStateDO newState = new PersonExamSystStateDO()
                             {
-                                FromDate = lastTest.EndTime.Value,
-                                ToDate = lastTest.EndTime.Value.AddMonths(18),
+                                FromDate = lastExam.EndTime.Value,
+                                ToDate = lastExam.EndTime.Value.AddMonths(18),
                                 Qualification = qualification,
-                                StateMethod = "Automatically",
-                                State = "Started"
+                                StateMethod = QualificationStateMethod.Automatically.ToString(),
+                                State = QualificationState.Started.ToString()
                             };
 
-                            examSystDataPartVersion.Content.States.Add(newStateFinished);
+                            examSystDataPartVersion.Content.States.Add(newState);
+                            continue;
+                        }
+
+                        if (availableExams.Select(t => t.CertCampCode).Count() > 6)
+                        {
+                            lastStatePerQualification.Notes = "Достигнат е пределно допустим брой сесиии";
+                            lastStatePerQualification.StateMethod = QualificationStateMethod.Automatically.ToString();
+                            lastStatePerQualification.State = QualificationState.Canceled.ToString();
+
+                            continue;
+                        }
+                        else if (availableExams.GroupBy(c => c.ExamCode).Any(t => t.Count() > 4))
+                        {
+                            lastStatePerQualification.Notes = "Достигнат е пределно допустим брой на невзети изпити за тест";
+                            lastStatePerQualification.StateMethod = QualificationStateMethod.Automatically.ToString();
+                            lastStatePerQualification.State = QualificationState.Canceled.ToString();
                             continue;
                         }
                     }
 
-                    if (availableExams.Select(t => t.CertCampCode).Count() > 6 && lastStatePerQualification != null)
-                    {
-                        lastStatePerQualification.Notes = "Достигнат е пределно допустим брой сесиии";
-                        lastStatePerQualification.StateMethod = "Automatically";
-                        lastStatePerQualification.State = "Canceled";
-
-                        continue;
-                    }
-                    else if (availableExams.GroupBy(c => c.ExamCode).Any(t => t.Count() > 4 && t.All(te => te.ResultStatus == "failed")) && lastStatePerQualification != null)
-                    {
-                        lastStatePerQualification.Notes = "Достигнат е пределно допустим брой на невзети изпити за тест";
-                        lastStatePerQualification.StateMethod = "Automatically";
-                        lastStatePerQualification.State = "Canceled";
-                        continue;
-                    }
-
-                    var firstExamDate = availableExams.OrderByDescending(t => t.EndTime).Last().EndTime.Value;
+                    var firstExam = availableExams.OrderByDescending(t => t.EndTime).Last();
                     if (requiredExamCodes.All(rtc => availableExams.Where(t => t.ResultStatus == "passed").Select(t => t.ExamCode).Contains(rtc)))
                     {
                         PersonExamSystStateDO newStateFinished = new PersonExamSystStateDO()
                         {
-                            FromDate = firstExamDate,
-                            ToDate = firstExamDate.AddMonths(18),
+                            FromDate = firstExam.EndTime.Value,
+                            ToDate = firstExam.EndTime.Value.AddMonths(18),
                             Qualification = qualification,
-                            StateMethod = "Automatically",
-                            State = "Finished"
+                            StateMethod = QualificationStateMethod.Automatically.ToString(),
+                            State = QualificationState.Finished.ToString()
                         };
 
                         examSystDataPartVersion.Content.States.Add(newStateFinished);
@@ -462,11 +463,11 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                     {
                         PersonExamSystStateDO newState = new PersonExamSystStateDO()
                         {
-                            FromDate = firstExamDate,
-                            ToDate = firstExamDate.AddMonths(18),
+                            FromDate = firstExam.EndTime.Value,
+                            ToDate = firstExam.EndTime.Value.AddMonths(18),
                             Qualification = qualification,
-                            StateMethod = "Automatically",
-                            State = "Started"
+                            StateMethod = QualificationStateMethod.Automatically.ToString(),
+                            State = QualificationState.Started.ToString()
                         };
 
                         examSystDataPartVersion.Content.States.Add(newState);

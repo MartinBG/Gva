@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models.Enums;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ExaminationSystemRepository;
@@ -48,10 +49,10 @@ namespace Gva.Api.Controllers.Persons
         {
             PersonExamSystStateDO state = new PersonExamSystStateDO()
             {
-                StateMethod = "Manually",
+                StateMethod = QualificationStateMethod.Manually.ToString(),
                 FromDate = DateTime.Now,
                 ToDate = DateTime.Now.AddMonths(18),
-                State = "Started"
+                State = QualificationState.Started.ToString()
             };
 
             return Ok(state);

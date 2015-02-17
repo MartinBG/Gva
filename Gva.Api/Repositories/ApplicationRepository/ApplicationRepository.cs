@@ -732,7 +732,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
             partVersion.Content.ApplicationId = gvaApplication.GvaApplicationId;
 
- 
             if(partVersion.Content.ExaminationSystemData != null)
             {
                 var licenceTypeIds = this.nomRepository.GetNomValue(partVersion.Content.ApplicationType.NomValueId)

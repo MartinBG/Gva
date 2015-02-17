@@ -1,30 +1,23 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using Autofac.Features.OwnedInstances;
+using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Json;
 using Common.Tests;
-using Gva.Api.Models;
-using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.PrintRepository;
 using Gva.Api.CommonUtils;
-using Newtonsoft.Json.Linq;
-using Regs.Api.LotEvents;
+using Gva.Api.Models;
+using Gva.Api.Models.Enums;
+using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.FileRepository;
+using Oracle.ManagedDataAccess.Client;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
-using Gva.Api.Repositories.PersonRepository;
-using Gva.Api.Repositories.CaseTypeRepository;
-using Gva.Api.ModelsDO;
-using Common.Api.Models;
-using Gva.Api.Repositories.FileRepository;
-using Gva.Api.ModelsDO.ExaminationSystem;
-using Oracle.ManagedDataAccess.Client;
 
 namespace Gva.MigrationTool.Sets
 {
@@ -260,7 +253,7 @@ namespace Gva.MigrationTool.Sets
                                 FromDate = r.Field<DateTime>("date_from"),
                                 ToDate = r.Field<DateTime?>("date_to"),
                                 State =  states[r.Field<int>("state")],
-                                StateMethod = r.Field<int>("state_method") == 1 ? "Automatically" : "Manually",
+                                StateMethod = r.Field<int>("state_method") == 1 ? QualificationStateMethod.Automatically.ToString() : QualificationStateMethod.Manually.ToString(),
                                 Notes = r.Field<string>("notes_auto_state"),
                                 Qualification = new GvaExSystQualification()
                                 {

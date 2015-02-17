@@ -18,6 +18,7 @@
           method: state[1]
         };
       });
+
     $scope.addExams = function () {
       var modalInstance = scModal.open('appExSystChooseExams', {
         qualificationCode: $scope.model.qualificationCode,

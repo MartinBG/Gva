@@ -301,6 +301,8 @@
     <Compile Include="ModelsDO\Persons\PersonStatusDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonTrainingDO.cs" />
     <Compile Include="ModelsDO\Common\TimeDO.cs" />
+    <Compile Include="Models\Enums\QualificationStateMethod.cs" />
+    <Compile Include="Models\Enums\QualificationState.cs" />
     <Compile Include="Models\Views\GvaViewPersonApplicationExam.cs" />
     <Compile Include="Models\Views\GvaViewPersonQualification.cs" />
     <Compile Include="Models\GvaExSystCertPath.cs" />
