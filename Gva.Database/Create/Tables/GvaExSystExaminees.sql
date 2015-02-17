@@ -12,7 +12,6 @@ CREATE TABLE [dbo].[GvaExSystExaminees] (
     [CertCampCode]           NVARCHAR(200)   NULL,
     [LotId]                  INT             NOT NULL,
     CONSTRAINT [PK_GvaExSystExaminees] PRIMARY KEY ([GvaExSystExamineeId]),
-    CONSTRAINT [FK_GvaExSystExaminees_GvaExSystCertCampaigns] FOREIGN KEY ([CertCampCode]) REFERENCES [dbo].[GvaExSystCertCampaigns] ([Code]),
     CONSTRAINT [FK_GvaExSystExaminees_GvaViewPersons] FOREIGN KEY ([LotId]) REFERENCES [dbo].[GvaViewPersons] ([LotId])
 )
 GO

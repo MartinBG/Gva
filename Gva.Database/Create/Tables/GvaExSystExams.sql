@@ -5,8 +5,7 @@ CREATE TABLE [dbo].[GvaExSystExams] (
     [Name]              NVARCHAR(200)  NOT NULL,
     [Code]              NVARCHAR(200)  NOT NULL UNIQUE,
     [QualificationCode] NVARCHAR(200)  NOT NULL,
-    CONSTRAINT [PK_GvaExSystExams] PRIMARY KEY ([Code], [QualificationCode]),
-    CONSTRAINT [FK_GvaExSystExams_GvaExSystQualifications] FOREIGN KEY ([QualificationCode]) REFERENCES [dbo].[GvaExSystQualifications] ([Code])
+    CONSTRAINT [PK_GvaExSystExams] PRIMARY KEY ([Code], [QualificationCode])
 )
 GO
 

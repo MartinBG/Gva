@@ -7,8 +7,7 @@ CREATE TABLE [dbo].[GvaExSystCertCampaigns] (
     [ValidFrom]         DATETIME2      NULL,
     [ValidTo]           DATETIME2      NULL,
     [QualificationCode] NVARCHAR(200)  NOT NULL,
-    CONSTRAINT [PK_vaExSystCertCampaigns] PRIMARY KEY ([Code]),
-    CONSTRAINT [FK_GvaExSystCertCampaigns_GvaExSystQualifications] FOREIGN KEY ([QualificationCode]) REFERENCES [dbo].[GvaExSystQualifications] ([Code])
+    CONSTRAINT [PK_vaExSystCertCampaigns] PRIMARY KEY ([Code])
 )
 GO
 

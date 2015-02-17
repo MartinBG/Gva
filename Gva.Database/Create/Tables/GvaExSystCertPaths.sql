@@ -8,9 +8,7 @@ CREATE TABLE [dbo].[GvaExSystCertPaths] (
     [ValidTo]           DATETIME2      NULL,
     [QualificationCode] NVARCHAR(200)  NOT NULL,
     [ExamCode]          NVARCHAR(200)  NOT NULL,
-    CONSTRAINT [PK_GvaExSystCertPaths] PRIMARY KEY ([Code], [QualificationCode], [ExamCode]),
-    CONSTRAINT [FK_GvaExSystCertPaths_GvaExSystQualifications] FOREIGN KEY ([QualificationCode]) REFERENCES [dbo].[GvaExSystQualifications] ([Code]),
-    CONSTRAINT [FK_GvaExSystCertPaths_GvaExSystExams] FOREIGN KEY ( [ExamCode], [QualificationCode]) REFERENCES [dbo].[GvaExSystExams] ([Code], [QualificationCode])
+    CONSTRAINT [PK_GvaExSystCertPaths] PRIMARY KEY ([Code], [QualificationCode], [ExamCode])
 )
 GO
 

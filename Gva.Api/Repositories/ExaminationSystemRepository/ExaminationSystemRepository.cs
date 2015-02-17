@@ -178,22 +178,11 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                 command.CommandType = CommandType.StoredProcedure;
                 command.ExecuteNonQuery();
 
-                var allExaminees = from ex in this.unitOfWork.DbContext.Set<GvaExSystExaminee>() select ex;
-                this.unitOfWork.DbContext.Set<GvaExSystExaminee>().RemoveRange(allExaminees);
-
-                var allCertPaths = from cp in this.unitOfWork.DbContext.Set<GvaExSystCertPath>() select cp;
-                this.unitOfWork.DbContext.Set<GvaExSystCertPath>().RemoveRange(allCertPaths);
-                this.unitOfWork.Save();
-
-                var allCertCampaigns = from cc in this.unitOfWork.DbContext.Set<GvaExSystCertCampaign>() select cc;
-                this.unitOfWork.DbContext.Set<GvaExSystCertCampaign>().RemoveRange(allCertCampaigns);
-
-                var allExams = from t in this.unitOfWork.DbContext.Set<GvaExSystExam>() select t;
-                this.unitOfWork.DbContext.Set<GvaExSystExam>().RemoveRange(allExams);
-                this.unitOfWork.Save();
-
-                var allQualifications = from q in this.unitOfWork.DbContext.Set<GvaExSystQualification>() select q;
-                this.unitOfWork.DbContext.Set<GvaExSystQualification>().RemoveRange(allQualifications);
+                this.unitOfWork.DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE dbo.GvaExSystExaminees");
+                this.unitOfWork.DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE dbo.GvaExSystCertPaths");
+                this.unitOfWork.DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE dbo.GvaExSystCertCampaigns");
+                this.unitOfWork.DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE dbo.GvaExSystExams");
+                this.unitOfWork.DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE dbo.GvaExSystQualifications");
                 this.unitOfWork.Save();
 
                 var allNewQualifications = connection.CreateStoreCommand(@"SELECT * FROM GVA_XM_QUALIFICATIONS_V@exams")
@@ -204,24 +193,20 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         Code = r.Field<string>("QLF_CODE")
                     });
 
-                var allCurrentQualificationCodes = allNewQualifications.Select(q => q.Code).ToList();
-
                 this.unitOfWork.DbContext.Set<GvaExSystQualification>().AddRange(allNewQualifications);
 
-                var allNewExams = connection.CreateStoreCommand(@"SELECT * FROM GVA_XM_TESTS_V@exams")
+                var allNewExams = connection.CreateStoreCommand(@"SELECT * FROM GVA_XM_TESTS_V@exams where QLF_CODE is not null")
                 .Materialize(r => 
                     new GvaExSystExam
                     {
                         Name = r.Field<string>("TEST_NAME"),
                         Code = r.Field<string>("TEST_CODE"),
                         QualificationCode = r.Field<string>("QLF_CODE")
-                    })
-                    .Where(t => allCurrentQualificationCodes.Contains(t.QualificationCode));
+                    });
 
                 this.unitOfWork.DbContext.Set<GvaExSystExam>().AddRange(allNewExams);
-                var allCurrentExamCodes = allNewExams.Select(q => q.Code).ToList();
-                
-                var allNewCertCampaigns = connection.CreateStoreCommand(@"SELECT * FROM GVA_CERT_CAMPAIGNS_V@exams")
+
+                var allNewCertCampaigns = connection.CreateStoreCommand(@"SELECT * FROM GVA_CERT_CAMPAIGNS_V@exams where QLF_CODE is not null")
                     .Materialize(r =>
                     new GvaExSystCertCampaign
                     {
@@ -230,13 +215,11 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         ValidFrom = r.Field<DateTime?>("CERT_CAMP_VALID_FROM"),
                         ValidTo = r.Field<DateTime?>("CERT_CAMP_VALID_TO"),
                         QualificationCode = r.Field<string>("QLF_CODE")
-                    })
-                    .Where(t => allCurrentQualificationCodes.Contains(t.QualificationCode));
+                    });
 
                 this.unitOfWork.DbContext.Set<GvaExSystCertCampaign>().AddRange(allNewCertCampaigns);
-                var allCurrentCertCampaignCodes = allNewCertCampaigns.Select(q => q.Code).ToList();
 
-                var allNewCertPaths = connection.CreateStoreCommand(@"SELECT * FROM GVA_XM_QUALIFICATION_PATHS_V@exams")
+                var allNewCertPaths = connection.CreateStoreCommand(@"SELECT * FROM GVA_XM_QUALIFICATION_PATHS_V@exams where QLF_CODE is not null")
                 .Materialize(r =>
                     new GvaExSystCertPath
                     {
@@ -246,10 +229,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         ValidTo = r.Field<DateTime?>("QLF_PATH_VALID_TO"),
                         ExamCode = r.Field<string>("TEST_CODE"),
                         QualificationCode = r.Field<string>("QLF_CODE")
-                    })
-                    .Where(t =>
-                        allCurrentQualificationCodes.Contains(t.QualificationCode) &&
-                        allCurrentExamCodes.Contains(t.ExamCode));
+                    });
 
                this.unitOfWork.DbContext.Set<GvaExSystCertPath>().AddRange(allNewCertPaths);
 
@@ -284,43 +264,6 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                 });
 
                this.unitOfWork.DbContext.Set<GvaExSystExaminee>().AddRange(allNewExaminees);
-
-               Dictionary<int, List<PersonExamSystExamDO>> examsPerPersonData =
-                   (from e in allNewExaminees
-                    join t in allNewExams on e.ExamCode equals t.Code
-                    where allCurrentCertCampaignCodes.Contains(e.CertCampaign.Code)
-                    select new
-                    {
-                        TotalScore = e.TotalScore,
-                        CertCamp = allNewCertCampaigns.Where(c => c.Code == e.CertCampCode).Single(),
-                        ResultStatus = e.ResultStatus,
-                        LotId = e.LotId,
-                        EndTime = e.EndTime,
-                        Exam = t
-                    })
-                   .GroupBy(g => g.LotId)
-                   .ToDictionary(g => g.Key,
-                       g => g.Select(e => new PersonExamSystExamDO()
-                       {
-                           TotalScore = e.TotalScore,
-                           CertCamp =
-                               new GvaExSystCertCampaignDO()
-                               {
-                                   Code = e.CertCamp.Code,
-                                   Name = e.CertCamp.Name,
-                                   QualificationName = allNewQualifications.Where(q => q.Code == e.CertCamp.QualificationCode).Single().Name
-                               },
-                           Status = e.ResultStatus,
-                           EndTime = e.EndTime,
-                           Exam =
-                               new GvaExSystExamDO()
-                               {
-                                   Code = e.Exam.Code,
-                                   Name = e.Exam.Name,
-                                   QualificationName = allNewQualifications.Where(q => q.Code == e.Exam.QualificationCode).Single().Name,
-                                   QualificationCode = allNewQualifications.Where(q => q.Code == e.Exam.QualificationCode).Single().Code
-                               }
-                       }).ToList());
             }
         }
 

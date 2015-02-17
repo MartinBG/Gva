@@ -46,9 +46,17 @@ namespace Gva.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                this.examinationSystemRepository.ExtractDataFromExaminationSystem();
+                try
+                {
+                    this.unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
+                    this.examinationSystemRepository.ExtractDataFromExaminationSystem();
 
-                this.unitOfWork.Save();
+                    this.unitOfWork.Save();
+                }
+                finally
+                {
+                    this.unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = true;
+                }
 
                 transaction.Commit();
 
