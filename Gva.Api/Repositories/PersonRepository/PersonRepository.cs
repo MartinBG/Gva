@@ -58,11 +58,15 @@ namespace Gva.Api.Repositories.PersonRepository
                 .AndEquals(p => p.Lin, lin)
                 .AndStringMatches(p => p.LinType.Name, linType, exact)
                 .AndStringMatches(p => p.Uin, uin, exact)
-                .AndStringMatches(p => p.Names, names, exact)
                 .AndStringContains(p => p.Licences, licences)
                 .AndStringContains(p => p.Ratings, ratings)
                 .AndStringMatches(p => p.Organization == null ? null : p.Organization.Name, organization, exact);
 
+            if (!string.IsNullOrEmpty(names))
+            {
+                var namesToSearch = names.Split(' ').ToArray();
+                predicate = predicate.And(o => namesToSearch.All(n => o.Names.Contains(n)));
+            }
 
             if (caseTypeId.HasValue)
             {
