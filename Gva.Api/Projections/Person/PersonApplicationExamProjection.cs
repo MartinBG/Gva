@@ -24,6 +24,7 @@ namespace Gva.Api.Projections.Person
         public override IEnumerable<GvaViewPersonApplicationExam> Execute(PartCollection parts)
         {
             var applications = parts.GetAll<DocumentApplicationDO>("personDocumentApplications");
+
             List<GvaViewPersonApplicationExam> result = new List<GvaViewPersonApplicationExam>();
             foreach (var application in applications.Where(
                 a => a.Content.ExaminationSystemData != null &&
@@ -40,7 +41,6 @@ namespace Gva.Api.Projections.Person
 
             return result;
         }
-
 
         private GvaViewPersonApplicationExam Create(AppExamSystExamDO exam, int applicationPartId, int lotId, NomValue certCampaign)
         {

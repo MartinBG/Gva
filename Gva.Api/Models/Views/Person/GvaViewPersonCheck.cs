@@ -15,8 +15,6 @@ namespace Gva.Api.Models.Views.Person
 
         public int PartIndex { get; set; }
 
-        public int? PersonLin { get; set; }
-
         public string DocumentNumber { get; set; }
 
         public int? DocumentTypeId { get; set; }
@@ -89,7 +87,6 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartId).HasColumnName("PartId");
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
-            this.Property(t => t.PersonLin).HasColumnName("PersonLin");
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
             this.Property(t => t.DocumentTypeId).HasColumnName("DocumentTypeId");
             this.Property(t => t.DocumentRoleId).HasColumnName("DocumentRoleId");

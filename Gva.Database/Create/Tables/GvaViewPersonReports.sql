@@ -4,7 +4,6 @@ GO
 CREATE TABLE [dbo].[GvaViewPersonReports] (
     [LotId]                    INT           NOT NULL,
     [PartIndex]                INT           NOT NULL,
-    [Publisher]                NVARCHAR(100) NULL,
     [DocumentNumber]           NVARCHAR(50)  NULL,
     [Date]                     DATETIME2     NULL,
     CONSTRAINT [PK_GvaViewPersonReports]                PRIMARY KEY ([LotId], [PartIndex]),

@@ -433,6 +433,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(c => c.RatingClass)
                 .Include(c => c.PersonCheckRatingValue)
                 .Include(c => c.LicenceType)
+                .Include(c => c.Person)
                 .Where(c => checks.Contains(c.PartId))
                 .ToList();
             }

@@ -32,11 +32,14 @@ namespace Gva.Api.Projections.Person
             List<GvaViewPersonQualification> qualifications = new List<GvaViewPersonQualification>();
             if (examSystData != null)
             {
+                var allLicenceTypesWithQlfCode = this.nomRepository.GetNomValues("licenceTypes")
+                    .Where(s => s.TextContent.Get<string>("qlfCode") != null);
+
                 foreach (var states in examSystData.Content.States.GroupBy(s => s.QualificationCode))
                 {
                     PersonExamSystStateDO lastState = states.OrderBy(s => s.FromDate).Last();
 
-                    NomValue licenceType = this.nomRepository.GetNomValues("licenceTypes")
+                    NomValue licenceType = allLicenceTypesWithQlfCode
                         .Where(s => s.TextContent.Get<string>("qlfCode") == lastState.QualificationCode)
                         .SingleOrDefault();
 

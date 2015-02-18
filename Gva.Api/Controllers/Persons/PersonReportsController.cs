@@ -63,7 +63,7 @@ namespace Gva.Api.Controllers.Persons
                     .GroupBy(c => c.LotId)
                     .Select(c => new IncludedPersonDO() {
                         LotId = c.First().LotId,
-                        Lin = c.First().PersonLin
+                        Lin = c.First().Person.Lin
                     })
                     .ToList();
 

@@ -17,8 +17,6 @@ namespace Gva.Api.Models.Views.Person
 
         public DateTime? Date { get; set; }
 
-        public string Publisher { get; set; }
-
         public virtual GvaViewPerson Person { get; set; }
 
         public virtual ICollection<GvaViewPersonReportCheck> ReportsChecks { get; set; }
@@ -39,9 +37,6 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.PartIndex)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.Publisher)
-                .HasMaxLength(100);
-
             this.Property(t => t.DocumentNumber)
                 .HasMaxLength(50);
 
@@ -49,7 +44,6 @@ namespace Gva.Api.Models.Views.Person
             this.ToTable("GvaViewPersonReports");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
-            this.Property(t => t.Publisher).HasColumnName("Publisher");
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
             this.Property(t => t.Date).HasColumnName("Date");
 

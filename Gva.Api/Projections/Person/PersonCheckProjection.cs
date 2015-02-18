@@ -31,7 +31,6 @@ namespace Gva.Api.Projections.Person
         {
             GvaViewPersonCheck check = new GvaViewPersonCheck();
 
-            check.PersonLin = this.unitOfWork.DbContext.Set<GvaViewPerson>().Where(p => p.LotId == personCheck.Part.LotId).Single().Lin;
             check.LotId = personCheck.Part.LotId;
             check.PartId = personCheck.Part.PartId;
             check.PartIndex = personCheck.Part.Index;

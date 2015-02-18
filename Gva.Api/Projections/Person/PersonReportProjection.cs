@@ -35,9 +35,6 @@ namespace Gva.Api.Projections.Person
             report.DocumentNumber = personReport.Content.DocumentNumber;
             report.Date = personReport.Content.Date;
 
-            var person = this.unitOfWork.DbContext.Set<GvaViewPerson>().Where(p => p.LotId == personReport.Part.LotId).Single();
-            report.Publisher = string.Format("{0} {1}", person.Lin, person.Names);
-
             return report;
         }
     }
