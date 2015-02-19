@@ -34,5 +34,9 @@ namespace Gva.Api.ModelsDO.Persons
         public string Notes { get; set; }
 
         public string NotesAlt { get; set; }
+
+        public DateTime? CheckDate { get; set; }
+
+        public DateTime? CheckDateIR { get; set; }
     }
 }

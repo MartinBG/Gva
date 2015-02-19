@@ -1653,6 +1653,8 @@
         ratingEditionDirective: {
           documentDateValidFrom: 'Дата на вписване',
           documentDateValidTo: 'Валидно до',
+          checkDate: 'Дата на проверка',
+          checkDateIR: 'Дата на IR проверка',
           inspector: 'Инспектор',
           examiner: 'Проверяващ',
           notes: 'Бележки',
