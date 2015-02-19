@@ -52,6 +52,8 @@ namespace Gva.Api.Controllers
 
                 this.examinationSystemRepository.ExtractDataFromExaminationSystem();
 
+                this.unitOfWork.Save();
+
                 transaction.Commit();
 
                 return Ok();
