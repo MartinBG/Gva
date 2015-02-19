@@ -309,13 +309,15 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                         IsAdded = true
                     })
                     .ToList();
+
             foreach (var person in allPersonsWithQualificationsToReload)
             {
                 this.ReloadStatePerPerson(person.Key, person.ToList(), allQualifications, cases);
             }
         }
 
-        private void ReloadStatePerPerson(int lotId,
+        private void ReloadStatePerPerson(
+            int lotId,
             List<GvaExSystExaminee> allPersonExams,
             Dictionary<string, GvaExSystQualification> allQualifications,
             List<CaseDO> cases)
@@ -341,10 +343,10 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             .Where(e => requiredExamCodes.Contains(e.ExamCode))
                             .ToList();
 
-                    PersonExamSystStateDO lastState = null;
+                    PersonExamSystStateDO lastStartedState = null;
                     if (examSystDataPartVersion != null)
                     {
-                        lastState = examSystDataPartVersion.Content.States
+                        lastStartedState = examSystDataPartVersion.Content.States
                             .Where(s => s.QualificationCode == qualification.Code && s.State == "Started")
                             .OrderByDescending(s => s.FromDate)
                             .FirstOrDefault();
@@ -361,7 +363,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                                 .ToList();
                         }
 
-                        if (lastState != null)
+                        if (lastStartedState != null)
                         {
                             if (availableExams.Count() == 0)
                             {
@@ -369,11 +371,11 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             }
 
                             var lastExam = availableExams.OrderBy(e => e.EndTime).Last();
-                            if (lastState.ToDate.HasValue ? DateTime.Compare(lastExam.EndTime, lastState.ToDate.Value) > 0 : false)
+                            if (lastStartedState.ToDate.HasValue ? DateTime.Compare(lastExam.EndTime, lastStartedState.ToDate.Value) > 0 : false)
                             {
-                                lastState.State = QualificationState.Canceled.ToString();
-                                lastState.Notes = "Съществува изпит след датата на приключване на статуса";
-                                lastState.StateMethod = QualificationStateMethod.Automatically.ToString();
+                                lastStartedState.State = QualificationState.Canceled.ToString();
+                                lastStartedState.Notes = "Съществува изпит след датата на приключване на статуса";
+                                lastStartedState.StateMethod = QualificationStateMethod.Automatically.ToString();
 
                                 newStates.Add(new PersonExamSystStateDO()
                                 {
@@ -384,22 +386,22 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                                     StateMethod = QualificationStateMethod.Automatically.ToString(),
                                     State = QualificationState.Started.ToString()
                                 });
-                                continue;
+                                break;
                             }
 
                             if (availableExams.Select(t => t.CertCampCode).Count() > 6)
                             {
-                                lastState.Notes = "Достигнат е пределно допустим брой сесиии";
-                                lastState.StateMethod = QualificationStateMethod.Automatically.ToString();
-                                lastState.State = QualificationState.Canceled.ToString();
-                                continue;
+                                lastStartedState.Notes = "Достигнат е пределно допустим брой сесиии";
+                                lastStartedState.StateMethod = QualificationStateMethod.Automatically.ToString();
+                                lastStartedState.State = QualificationState.Canceled.ToString();
+                                break;
                             }
                             else if (availableExams.GroupBy(c => c.ExamCode).Any(t => t.Count() > 4))
                             {
-                                lastState.Notes = "Достигнат е пределно допустим брой на невзети изпити за тест";
-                                lastState.StateMethod = QualificationStateMethod.Automatically.ToString();
-                                lastState.State = QualificationState.Canceled.ToString();
-                                continue;
+                                lastStartedState.Notes = "Достигнат е пределно допустим брой на невзети изпити за тест";
+                                lastStartedState.StateMethod = QualificationStateMethod.Automatically.ToString();
+                                lastStartedState.State = QualificationState.Canceled.ToString();
+                                break;
                             }
                         }
                     }
@@ -431,10 +433,10 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             StateMethod = QualificationStateMethod.Automatically.ToString(),
                             State = QualificationState.Finished.ToString()
                         });
-                        continue;
+                        break;
                     }
 
-                    if (availableExams.Where(t => t.ResultStatus == "passed").Count() > 0)
+                    if (availableExams.Where(t => t.ResultStatus == "passed").Count() > 0 && lastStartedState == null)
                     {
                         newStates.Add(new PersonExamSystStateDO()
                         {
@@ -445,6 +447,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                             StateMethod = QualificationStateMethod.Automatically.ToString(),
                             State = QualificationState.Started.ToString()
                         });
+                        break;
                     }
                 }
             }
