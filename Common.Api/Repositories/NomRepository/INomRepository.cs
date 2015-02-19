@@ -17,17 +17,18 @@ namespace Common.Api.Repositories.NomRepository
 
         IEnumerable<NomValue> GetNomValues(string alias, string[] valueAliases);
 
-        IEnumerable<NomValue> GetNomValues(string alias, string term = null, int? parentValueId = null, int offset = 0, int? limit = null);
+        IEnumerable<NomValue> GetNomValues(string alias, string term = null, int? parentValueId = null, int offset = 0, int? limit = null, bool onlyActive = true);
 
         IEnumerable<NomValue> GetNomValues(string alias);
 
-        IEnumerable<NomValue> GetNomValues(int nomId);
+        IEnumerable<NomValue> GetNomValues(int nomId, bool onlyActive = true);
 
         IEnumerable<NomValue> GetNomValues(
             string alias,
             string prop,
             string propValue,
             string term = null,
+            bool onlyActive = true,
             int offset = 0,
             int? limit = null);
 
@@ -37,6 +38,7 @@ namespace Common.Api.Repositories.NomRepository
             string parentProp,
             string parentPropValue,
             string term = null,
+            bool onlyActive = true,
             int offset = 0,
             int? limit = null);
     }

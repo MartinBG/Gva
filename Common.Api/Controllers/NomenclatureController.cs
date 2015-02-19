@@ -68,7 +68,7 @@ namespace Common.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetNomenclatureValues(int nomId)
         {
-            List<NomValue> nomValues = this.nomRepository.GetNomValues(nomId).ToList();
+            List<NomValue> nomValues = this.nomRepository.GetNomValues(nomId, false).ToList();
 
             return Ok(nomValues);
         }

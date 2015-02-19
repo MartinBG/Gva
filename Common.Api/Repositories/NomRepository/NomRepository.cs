@@ -55,12 +55,12 @@ namespace Common.Api.Repositories.NomRepository
                 .ToList();
         }
 
-        public IEnumerable<NomValue> GetNomValues(string alias, string term = null, int? parentValueId = null, int offset = 0, int? limit = null)
+        public IEnumerable<NomValue> GetNomValues(string alias, string term = null, int? parentValueId = null, int offset = 0, int? limit = null, bool onlyActive = true)
         {
             var predicate =
                 PredicateBuilder.True<NomValue>()
                 .And(nv => nv.Nom.Alias == alias)
-                .And(nv => nv.IsActive)
+                .And(nv => onlyActive ? nv.IsActive : true)
                 .AndEquals(nv => nv.ParentValueId.Value, parentValueId)
                 .AndStringContains(nv => nv.Name, term);
 
@@ -75,14 +75,14 @@ namespace Common.Api.Repositories.NomRepository
         public IEnumerable<NomValue> GetNomValues(string alias)
         {
             return this.unitOfWork.DbContext.Set<NomValue>()
-                .Where(nv => nv.Nom.Alias == alias && nv.IsActive)
+                .Where(nv => nv.Nom.Alias == alias)
                 .ToList();
         }
 
-        public IEnumerable<NomValue> GetNomValues(int nomId)
+        public IEnumerable<NomValue> GetNomValues(int nomId, bool onlyActive = true)
         {
             return this.unitOfWork.DbContext.Set<NomValue>()
-                .Where(nv => nv.Nom.NomId == nomId && nv.IsActive)
+                .Where(nv => nv.Nom.NomId == nomId && (onlyActive ? nv.IsActive : true))
                 .ToList();
         }
 
@@ -91,10 +91,12 @@ namespace Common.Api.Repositories.NomRepository
             string prop,
             string propValue,
             string term = null,
+            bool onlyActive = true,
             int offset = 0,
             int? limit = null)
         {
-            var predicate = PredicateBuilder.True<NomValue>().And(nv => nv.IsActive);
+            var predicate = PredicateBuilder.True<NomValue>()
+                .And(nv => onlyActive ? nv.IsActive : true);
 
             if (!string.IsNullOrWhiteSpace(term))
             {
@@ -115,10 +117,12 @@ namespace Common.Api.Repositories.NomRepository
             string parentProp,
             string parentPropValue,
             string term = null,
+            bool onlyActive = true,
             int offset = 0,
             int? limit = null)
         {
-            var predicate = PredicateBuilder.True<NomValue>().And(nv => nv.IsActive);
+            var predicate = PredicateBuilder.True<NomValue>()
+                .And(nv => onlyActive ? nv.IsActive : true);
 
             if (!string.IsNullOrWhiteSpace(term))
             {
