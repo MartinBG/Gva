@@ -2004,13 +2004,11 @@
           names: 'Име',
           uin: 'ЕГН',
           lin: 'ЛИН',
-          noEntry: 'Няма лица избрани за екпорт',
           chosenPersons: 'Избрани за експорт физически лица'
         },
         exportExamsData: {
           exportData: 'Експорт изпити',
           addExams: 'Добави изпити',
-          noEntry: 'Няма изпити избрани за екпорт',
           chosenExams: 'Избрани за експорт изпити',
           documentNumber: 'No',
           documentDate: 'Дата',

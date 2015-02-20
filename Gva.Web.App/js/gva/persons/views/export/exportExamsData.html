@@ -2,77 +2,28 @@
   <h5 class="form-header" l10n-text="persons.exportExamsData.exportData"></h5>
   <sc-link-button name="exportBtn" ng-disabled="!examsData.length"ng-href="api/exportXml/examsData?examsData={{examsData}}" target="_blank" sc-access-token text="persons.exportExamsData.exportData" class="btn btn-primary btn-sm"></sc-link-button>
   <sc-button btn-click="addExams()" class="btn btn-default btn-sm" icon="glyphicon-plus"></sc-button>
-  <table class="table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th width="1px">
-        </th>
-        <th class="col-sm-2">
-          <label class="control-label" l10n-text="persons.exportExamsData.documentNumber"></label>
-        </th>
-        <th class="col-sm-1">
-          <label class="control-label" l10n-text="persons.exportExamsData.documentDate"></label>
-        </th>
-        <th class="col-sm-1">
-          <label class="control-label" l10n-text="persons.exportExamsData.stageName"></label>
-        </th>
-        <th class="col-sm-1">
-          <label class="control-label" l10n-text="persons.exportExamsData.personLin"></label>
-        </th>
-        <th class="col-sm-1">
-          <label class="control-label" l10n-text="persons.exportExamsData.personUin"></label>
-        </th>
-        <th class="col-sm-2">
-          <label class="control-label" l10n-text="persons.exportExamsData.personNames"></label>
-        </th>
-        <th class="col-sm-2">
-          <label class="control-label" l10n-text="persons.exportExamsData.examName"></label>
-        </th>
-        <th class="col-sm-1">
-          <label class="control-label" l10n-text="persons.exportExamsData.examDate"></label>
-        </th>
-        <th class="col-sm-2">
-          <label class="control-label" l10n-text="persons.exportExamsData.certCampName"></label>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat-start="exam in examsForExport">
-        <td width="1px">
-          <sc-button btn-click="removeExam(exam)" class="btn btn-danger btn-xs" icon="glyphicon-remove"></sc-button>
-        </td>
-        <td class="col-sm-2">
-          {{exam.documentNumber}}
-        </td>
-        <td class="col-sm-1">
-          {{exam.documentDate | date : format : 'mediumDate'}}
-        </td>
-        <td class="col-sm-1">
-          {{exam.stageName}}
-        </td>
-        <td class="col-sm-1">
-          {{exam.personLin}}
-        </td>
-        <td class="col-sm-1">
-          {{exam.personUin}}
-        </td>
-        <td class="col-sm-2">
-          {{exam.personNames}}
-        </td>
-        <td class="col-sm-2">
-          {{exam.examName}}
-        </td>
-        <td class="col-sm-1">
-          {{exam.examDate | date : format : 'mediumDate'}}
-        </td>
-        <td class="col-sm-2">
-          {{exam.certCampName}}
-        </td>
-      </tr>
-      <tr ng-repeat-end=""></tr>
-      <tr class="sort-disabled" ng-if="!examsForExport.length">
-        <td colspan="10" class="text-center" l10n-text="persons.exportExamsData.noEntry"></td>
-      </tr>
-    </tbody>
-  </table>
+  <sc-datatable items="examsForExport" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <sc-button btn-click="removeExam(item)" class="btn btn-danger btn-xs" icon="glyphicon-remove"></sc-button>
+    </sc-column>
+    <sc-column data="documentNumber" title="persons.exportExamsData.documentNumber">
+    </sc-column>
+    <sc-column data="documentDate" title="persons.exportExamsData.documentDate" type="date">
+    </sc-column>
+    <sc-column data="stageName" title="persons.exportExamsData.stageName">
+    </sc-column>
+    <sc-column data="personLin" title="persons.exportExamsData.personLin">
+    </sc-column>
+    <sc-column data="personUin" title="persons.exportExamsData.personUin">
+    </sc-column>
+    <sc-column data="personNames" title="persons.exportExamsData.personNames">
+    </sc-column>
+    <sc-column data="examName" title="persons.exportExamsData.examName">
+    </sc-column>
+    <sc-column data="examDate" title="persons.exportExamsData.examDate" type="date">
+    </sc-column>
+    <sc-column data="certCampName" title="persons.exportExamsData.certCampName">
+    </sc-column>
+  </sc-datatable>
 </div>
+
