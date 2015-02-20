@@ -23,8 +23,6 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
         List<GvaExSystQualification> GetQualifications(string qualificationCode = null);
 
-        void SaveNewState(int lotId, PersonNewExamSystStateDO state);
-
         void ReloadStates();
     }
 }

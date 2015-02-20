@@ -9,9 +9,11 @@
     $scope.loadData = function () {
       return ExaminationSystem.loadData().$promise;
     };
+
     $scope.updateStates = function () {
       return ExaminationSystem.updateStates().$promise;
     };
+
     $scope.checkConnection = function () {
       return ExaminationSystem.checkConnection()
         .$promise

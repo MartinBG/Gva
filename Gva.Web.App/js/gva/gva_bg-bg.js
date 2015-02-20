@@ -1910,6 +1910,9 @@
           examinerDateTitle: 'Данни за проверяващ'
         },
         examinationSystem: {
+            save: 'Запис',
+            cancel: 'Отказ',
+            edit: 'Редакция',
             title: 'Изпитна система',
             exSystExams: 'ИС: Изпити',
             qualificationName: 'Квалификация',

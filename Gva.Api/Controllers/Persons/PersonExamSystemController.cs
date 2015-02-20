@@ -20,6 +20,8 @@ namespace Gva.Api.Controllers.Persons
         private IFileRepository fileRepository;
         private IUnitOfWork unitOfWork;
         private IExaminationSystemRepository examinationSystemRepository;
+        private ILotEventDispatcher lotEventDispatcher;
+        private UserContext userContext;
 
         public PersonExamSystemController(
             IUnitOfWork unitOfWork,
@@ -34,6 +36,8 @@ namespace Gva.Api.Controllers.Persons
             this.fileRepository = fileRepository;
             this.unitOfWork = unitOfWork;
             this.examinationSystemRepository = examinationSystemRepository;
+            this.lotEventDispatcher = lotEventDispatcher;
+            this.userContext = userContext;
         }
 
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null) 
@@ -42,6 +46,28 @@ namespace Gva.Api.Controllers.Persons
             var lotFiles = this.fileRepository.GetFileReferences(partVersion.PartId, caseTypeId);
 
             return Ok(new CaseTypesPartDO<PersonExamSystDataDO>(partVersion, lotFiles));
+        }
+
+        [Route("updateInfo")]
+        [HttpPost]
+        public IHttpActionResult PostData(int lotId, PersonExamSystDataDO data)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+
+                var partVersion = lot.UpdatePart("personExamSystData", data, this.userContext);
+
+                lot.Commit(this.userContext, this.lotEventDispatcher);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
+            }
         }
 
         [Route("newState")]
@@ -56,19 +82,6 @@ namespace Gva.Api.Controllers.Persons
             };
 
             return Ok(state);
-        }
-
-        [Route("saveState")]
-        public IHttpActionResult PostNewManualState(int lotId, PersonNewExamSystStateDO state)
-        {
-            using (var transaction = this.unitOfWork.BeginTransaction())
-            {
-                this.examinationSystemRepository.SaveNewState(lotId,state);
-
-                transaction.Commit();
-
-                return Ok();
-            }
         }
     }
 }

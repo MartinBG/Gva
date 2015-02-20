@@ -2,15 +2,15 @@
 (function (angular) {
   'use strict';
 
-  angular.module('gva').factory('PersonsExamSystData', ['$resource', function ($resource) {
+  angular.module('gva').factory('PersonExamSystData', ['$resource', function ($resource) {
     return $resource('api/persons/:id/personExamSystData', {}, {
       newState: {
         method: 'GET',
         url: 'api/persons/:id/personExamSystData/newState'
       },
-      saveState: {
+      updateInfo: {
         method: 'POST',
-        url: 'api/persons/:id/personExamSystData/saveState'
+        url: 'api/persons/:id/personExamSystData/updateInfo'
       }
     });
   }]);

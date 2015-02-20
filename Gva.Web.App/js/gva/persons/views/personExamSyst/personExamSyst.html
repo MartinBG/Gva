@@ -2,6 +2,14 @@
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
       <strong l10n-text="persons.examinationSystem.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="persons.examinationSystem.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="persons.examinationSystem.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.examinationSystem.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
     </div>
 
     <div class="well-sm panel-body">
@@ -22,8 +30,11 @@
       <div class="row">
       </div>
       <h5 class="form-header" l10n-text="persons.examinationSystem.qualificationsTitle"></h5>
-      <sc-button name="createBtn" text="persons.examinationSystem.newState" btn-click="addNewState()" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+      <sc-button name="createBtn" text="persons.examinationSystem.newState" btn-click="addNewState()"  ng-hide="!editMode" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
       <sc-datatable items="examSystData.part.states" filterable="true" pageable="true" sortable="true" default-sort="fromDate">
+        <sc-column has-content="true">
+          <sc-button type="button" class="btn btn-danger  btn-sm" btn-click="deleteState(item)" icon="glyphicon-remove" ng-disabled="!editMode"></sc-button>
+        </sc-column>
         <sc-column data="qualificationName" title="persons.examinationSystem.qualificationName">
         </sc-column>
         <sc-column data="state" title="persons.examinationSystem.state" has-content="true">

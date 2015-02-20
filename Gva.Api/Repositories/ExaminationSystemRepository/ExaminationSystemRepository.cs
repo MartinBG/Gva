@@ -472,29 +472,5 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
                 this.lotRepository.ExecSpSetLotPartTokens(examSystDataPartVersion.PartId);
             }
         }
-
-        public void SaveNewState(int lotId, PersonNewExamSystStateDO state)
-        {
-            Lot lot = this.lotRepository.GetLotIndex(lotId);
-            PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.Index.GetPart<PersonExamSystDataDO>("personExamSystData");
-
-            examSystDataPartVersion.Content.States.Add(new PersonExamSystStateDO()
-            {
-                QualificationCode = state.Qualification.Code,
-                QualificationName = state.Qualification.Name,
-                State = state.State,
-                StateMethod = state.StateMethod,
-                FromDate = state.FromDate,
-                ToDate = state.ToDate
-            });
-
-            lot.UpdatePart("personExamSystData", examSystDataPartVersion.Content, this.userContext);
-
-            lot.Commit(this.userContext, lotEventDispatcher);
-
-            this.unitOfWork.Save();
-
-            this.lotRepository.ExecSpSetLotPartTokens(examSystDataPartVersion.PartId);
-        }
     }
 }

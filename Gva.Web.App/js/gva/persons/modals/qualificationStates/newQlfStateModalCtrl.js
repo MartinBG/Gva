@@ -6,23 +6,23 @@
     $scope,
     $modalInstance,
     scModalParams,
-    PersonsExamSystData,
     newState
   ) {
     $scope.form = {};
     $scope.newState = newState;
-    $scope.lotId = scModalParams.lotId;
 
     $scope.save = function () {
       return $scope.form.newQlfStateForm.$validate()
         .then(function () {
           if ($scope.form.newQlfStateForm.$valid) {
-            return PersonsExamSystData
-              .saveState({ id: $scope.lotId }, $scope.newState)
-              .$promise
-              .then(function () {
-                return $modalInstance.close();
-              });
+            return $modalInstance.close({
+              qualificationCode: $scope.newState.qualification.code,
+              qualificationName: $scope.newState.qualification.name,
+              fromDate: $scope.newState.fromDate,
+              toDate: $scope.newState.toDate,
+              stateMethod: $scope.newState.stateMethod,
+              state: $scope.newState.state
+            });
           }
         });
     };
@@ -36,16 +36,15 @@
     '$scope',
     '$modalInstance',
     'scModalParams',
-    'PersonsExamSystData',
     'newState'
   ];
 
   NewQlfStateModalCtrl.$resolve = {
     newState: [
-      'PersonsExamSystData',
+      'PersonExamSystData',
       'scModalParams',
-      function (PersonsExamSystData, scModalParams) {
-        return PersonsExamSystData.newState({
+      function (PersonExamSystData, scModalParams) {
+        return PersonExamSystData.newState({
           id: scModalParams.lotId
         }).$promise;
       }
