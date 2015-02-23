@@ -41,7 +41,9 @@ namespace Gva.Api.WordTemplates
                 .Content;
 
             var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind).Content);
+                .Select(i => i.Ind)
+                .Distinct()
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Value).Content);
 
             dynamic licenceHolder = this.GetLicenceHolder(personData);
             string occupation = this.GetOccupation(includedRatings);

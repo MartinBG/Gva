@@ -65,7 +65,9 @@ namespace Gva.Api.WordTemplates
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
+                .Select(i => i.Ind)
+                .Distinct()
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Value));
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
             var includedExams = lastEdition.IncludedExams
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);

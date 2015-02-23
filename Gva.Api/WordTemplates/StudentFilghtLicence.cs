@@ -80,8 +80,10 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
             var includedMedicals = lastEdition.IncludedMedicals
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
-             var includedRatings = lastEdition.IncludedRatings
-                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Ind));
+            var includedRatings = lastEdition.IncludedRatings
+                .Select(i => i.Ind)
+                .Distinct()
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Value));
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
    
             var licenceCaCode = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId).TextContent.Get<string>("codeCA");

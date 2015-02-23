@@ -43,8 +43,10 @@ namespace Gva.Api.WordTemplates
                 .Last()
                 .Content;
 
-            var includedRatings = lastEdition.IncludedRatings.Select(i => i.Ind).Distinct()
-              .Select(ind => lot.Index.GetPart<PersonRatingDO>("ratings/" + ind));
+            var includedRatings = lastEdition.IncludedRatings
+                .Select(i => i.Ind)
+                .Distinct()
+                .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Value));
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
