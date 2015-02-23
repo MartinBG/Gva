@@ -769,13 +769,17 @@ namespace Gva.MigrationTool.Nomenclatures
                             }),
                         IsActive = true
                     })
+                .GroupBy(r => r.Name)
                 .ToList();
 
             noms["countries"] = new Dictionary<string, NomValue>();
-            foreach (var row in results)
+            foreach (var rows in results)
             {
-                noms["countries"][row.OldId] = row;
-                nom.NomValues.Add(row);
+                foreach(var row in rows)
+                {
+                    noms["countries"][row.OldId] = rows.First();
+                }
+                nom.NomValues.Add(rows.First());
             }
         }
 
@@ -803,13 +807,17 @@ namespace Gva.MigrationTool.Nomenclatures
                             }),
                         IsActive = r.Field<string>("VALID_YN") == "Y" ? true : false
                     })
-                .ToList();
+                    .GroupBy(r => r.Name)
+                    .ToList();
 
             noms["cities"] = new Dictionary<string, NomValue>();
-            foreach (var row in results)
+            foreach (var rows in results)
             {
-                noms["cities"][row.OldId] = row;
-                nom.NomValues.Add(row);
+                foreach (var row in rows)
+                {
+                    noms["cities"][row.OldId] = rows.First();
+                }
+                nom.NomValues.Add(rows.First());
             }
         }
 
@@ -1003,13 +1011,17 @@ namespace Gva.MigrationTool.Nomenclatures
                                     .ToArray()
                             })
                     })
-                .ToList();
+                    .GroupBy(r => r.Name)
+                    .ToList();
 
             noms["schools"] = new Dictionary<string, NomValue>();
-            foreach (var row in results)
+            foreach (var rows in results)
             {
-                noms["schools"][row.OldId] = row;
-                nom.NomValues.Add(row);
+                foreach (var row in rows)
+                {
+                    noms["schools"][row.OldId] = rows.First();
+                }
+                nom.NomValues.Add(rows.First());
             }
         }
 
@@ -1170,6 +1182,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
             results.Add(new NomValue()
             {
+                OldId = "0",
                 Name = "Вътрешна проверка",
                 NameAlt = "Вътрешна проверка",
                 Alias = null,
@@ -1191,8 +1204,8 @@ namespace Gva.MigrationTool.Nomenclatures
                 if (row.OldId != null)
                 {
                     noms["documentRoles"][row.OldId] = row;
-                    nom.NomValues.Add(row);
                 }
+                nom.NomValues.Add(row);
             }
         }
 
@@ -1208,7 +1221,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Name = r.Field<string>("MEANING"),
                         NameAlt = r.Field<string>("MEANING_TRANS"),
                         Alias = null,
-                        IsActive = true,
+                        IsActive = r.Field<string>("CODE") != "BR" ? true : false,
                         ParentValueId = null,
                         TextContentString = null
                     })
