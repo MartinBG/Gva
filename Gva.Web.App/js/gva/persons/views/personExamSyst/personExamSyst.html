@@ -14,7 +14,7 @@
 
     <div class="well-sm panel-body">
       <h5 class="form-header" l10n-text="persons.examinationSystem.exSystExams"></h5>
-      <sc-datatable items="exams" filterable="true" pageable="true" sortable="true"  default-sort="endTime">
+      <sc-datatable items="exams" filterable="true" pageable="true" sortable="true" default-sort="endTime">
         <sc-column data="endTime" title="persons.examinationSystem.endTime" type="date">
         </sc-column>
         <sc-column data="examName" title="persons.examinationSystem.exam">
@@ -31,7 +31,7 @@
       </div>
       <h5 class="form-header" l10n-text="persons.examinationSystem.qualificationsTitle"></h5>
       <sc-button name="createBtn" text="persons.examinationSystem.newState" btn-click="addNewState()"  ng-hide="!editMode" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-      <sc-datatable items="examSystData.part.states" filterable="true" pageable="true" sortable="true" default-sort="fromDate">
+      <sc-datatable items="examSystData.part.states" filterable="true" pageable="true" sortable="true" default-sort="fromDate" default-sorting-type="desc">
         <sc-column has-content="true">
           <sc-button type="button" class="btn btn-danger  btn-sm" btn-click="deleteState(item)" icon="glyphicon-remove" ng-disabled="!editMode"></sc-button>
         </sc-column>
