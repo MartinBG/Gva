@@ -573,7 +573,6 @@ namespace Gva.MigrationTool.Sets
                         taxAmount = r.Field<decimal?>("TAX_AMOUNT"),
                         examinationSystemData = new {
                             exams = r.Field<string>("CERT_CAMP_CODE") != null && applicationExams.ContainsKey(r.Field<int>("ID")) ? applicationExams[r.Field<int>("ID")] : new JObject[0],
-                            qualifications = new JObject[0],
                             certCampaign = r.Field<string>("CERT_CAMP_CODE") != null ?
                                 new
                                 {

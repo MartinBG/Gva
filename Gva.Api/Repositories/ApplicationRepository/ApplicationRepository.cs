@@ -93,21 +93,20 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
             var applications =
                 (from a in this.unitOfWork.DbContext.Set<GvaViewPersonApplicationExam>()
+                     .Include(a => a.Application)
+                     .Include(a => a.Person)
 
-                join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId)
-                .Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.AppPartId equals gas.GvaApplication.GvaAppLotPartId into gas1
+                join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>()
+                                .GroupBy(ap => ap.GvaApplicationId)
+                                .Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault())
+                         on a.AppPartId equals gas.GvaApplication.GvaAppLotPartId into gas1
                 from gas2 in gas1.DefaultIfEmpty()
 
-                join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(va => va.ApplicationType) on gas2.GvaApplication.GvaAppLotPartId equals va.PartId into va1
-                from va2 in va1.DefaultIfEmpty()
-
-                join p in this.unitOfWork.DbContext.Set<GvaViewPerson>() on va2.LotId equals p.LotId into p1
-                from p2 in p1.DefaultIfEmpty()
                 select new
                 {
                     Exam = a,
-                    Application = va2,
-                    Person = p2,
+                    Application = a.Application,
+                    Person = a.Person,
                     Stage = gas2
                 })
                 .Select(ap => new ApplicationExamListDO()
@@ -146,15 +145,12 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                     .Include(a => a.GvaAppLotPart)
                     .Include(a => a.Lot.Set)
+                    .Include(a => a.Stages)
+                    .Include(a => a.GvaViewApplication)
+                    .Include(a => a.GvaViewApplication.ApplicationType)
                     .Where(a => a.Lot.Set.Alias == "person" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
 
-                join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
-                from gas2 in gas1.DefaultIfEmpty()
-
-                join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(va => va.ApplicationType) on a.GvaAppLotPartId equals va.PartId into va1
-                from va2 in va1.DefaultIfEmpty()
-
-                join p in this.unitOfWork.DbContext.Set<GvaViewPerson>() on va2.LotId equals p.LotId into p1
+                join p in this.unitOfWork.DbContext.Set<GvaViewPerson>() on a.LotId equals p.LotId into p1
                 from p2 in p1.DefaultIfEmpty()
 
                 select new
@@ -162,10 +158,10 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     GApplication = a,
                     Set = a.Lot.Set,
                     GApplicationPart = a.GvaAppLotPart,
-                    GViewApplication = va2,
-                    GViewApplicationType = va2.ApplicationType,
+                    GViewApplication = a.GvaViewApplication,
+                    GViewApplicationType = a.GvaViewApplication.ApplicationType,
                     GViewPerson = p2,
-                    GvaAppStage = gas2
+                    GvaAppStage = a.Stages.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()
                 };
 
             var predicate = PredicateBuilder.True(new
@@ -227,29 +223,26 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
+                        .Include(a => a.Stages)
+                        .Include(a => a.GvaViewApplication)
+                        .Include(a => a.GvaViewApplication.ApplicationType)
                     where a.Lot.Set.Alias == "aircraft" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
-
-                    join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(a => a.ApplicationType) on a.GvaAppLotPartId equals va.PartId into va1
-                    from va2 in va1.DefaultIfEmpty()
-
-                    join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
-                    from gas2 in gas1.DefaultIfEmpty()
 
                     join ac in this.unitOfWork.DbContext.Set<GvaViewAircraft>()
                     .Include(a => a.AirCategory)
-                    .Include(a => a.AircraftProducer) on va2.LotId equals ac.LotId into ac1
+                    .Include(a => a.AircraftProducer) on a.LotId equals ac.LotId into ac1
                     from ac2 in ac1.DefaultIfEmpty()
                     select new
                     {
                         GApplication = a,
                         Set = a.Lot.Set,
                         GApplicationPart = a.GvaAppLotPart,
-                        GViewApplication = va2,
-                        GViewApplicationType = va2.ApplicationType,
+                        GViewApplication = a.GvaViewApplication,
+                        GViewApplicationType = a.GvaViewApplication.ApplicationType,
                         GViewAircraft = ac2,
                         GViewAircraftCat = ac2.AirCategory,
                         GViewAircraftProd = ac2.AircraftProducer,
-                        GvaAppStage = gas2
+                        GvaAppStage = a.Stages.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()
                     };
 
             var predicate = PredicateBuilder.True(new
@@ -313,26 +306,24 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
+                        .Include(a => a.Stages)
+                        .Include(a => a.GvaViewApplication)
+                        .Include(a => a.GvaViewApplication.ApplicationType)
+
                     where a.Lot.Set.Alias == "organization" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
 
-                    join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
-                    from gas2 in gas1.DefaultIfEmpty()
-
-                    join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(a => a.ApplicationType) on a.GvaAppLotPartId equals va.PartId into va1
-                    from va2 in va1.DefaultIfEmpty()
-
-                    join o in this.unitOfWork.DbContext.Set<GvaViewOrganization>().Include(o => o.OrganizationType) on va2.LotId equals o.LotId into o1
+                    join o in this.unitOfWork.DbContext.Set<GvaViewOrganization>().Include(o => o.OrganizationType) on a.LotId equals o.LotId into o1
                     from o2 in o1.DefaultIfEmpty()
                     select new
                     {
                         GApplication = a,
                         Set = a.Lot.Set,
                         GApplicationPart = a.GvaAppLotPart,
-                        GViewApplication = va2,
-                        GViewApplicationType = va2.ApplicationType,
+                        GViewApplication = a.GvaViewApplication,
+                        GViewApplicationType = a.GvaViewApplication.ApplicationType,
                         GViewOrganization = o2,
                         GViewOrganizationType = o2.OrganizationType,
-                        GvaAppStage = gas2
+                        GvaAppStage = a.Stages.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()
                     };
 
             var predicate = PredicateBuilder.True(new
@@ -393,27 +384,24 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
+                        .Include(a => a.Stages)
+                        .Include(a => a.GvaViewApplication)
+                        .Include(a => a.GvaViewApplication.ApplicationType)
                     where a.Lot.Set.Alias == "equipment" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
 
-                    join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
-                    from gas2 in gas1.DefaultIfEmpty()
-
-                    join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(a => a.ApplicationType) on a.GvaAppLotPartId equals va.PartId into va1
-                    from va2 in va1.DefaultIfEmpty()
-
-                    join eq in this.unitOfWork.DbContext.Set<GvaViewEquipment>().Include(e => e.EquipmentType).Include(e => e.EquipmentProducer) on va2.LotId equals eq.LotId into eq1
+                    join eq in this.unitOfWork.DbContext.Set<GvaViewEquipment>().Include(e => e.EquipmentType).Include(e => e.EquipmentProducer) on a.LotId equals eq.LotId into eq1
                     from eq2 in eq1.DefaultIfEmpty()
                     select new
                     {
                         GApplication = a,
                         Set = a.Lot.Set,
                         GApplicationPart = a.GvaAppLotPart,
-                        GViewApplication = va2,
-                        GViewApplicationType = va2.ApplicationType,
+                        GViewApplication = a.GvaViewApplication,
+                        GViewApplicationType = a.GvaViewApplication.ApplicationType,
                         GViewEquipment = eq2,
                         GViewEquipmentType = eq2.EquipmentType,
                         GViewEquipmentProducer = eq2.EquipmentProducer,
-                        GvaAppStage = gas2
+                        GvaAppStage = a.Stages.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()
                     };
 
             var predicate = PredicateBuilder.True(new
@@ -475,26 +463,23 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     from a in this.unitOfWork.DbContext.Set<GvaApplication>()
                         .Include(a => a.GvaAppLotPart)
                         .Include(a => a.Lot.Set)
+                        .Include(a => a.Stages)
+                        .Include(a => a.GvaViewApplication)
+                        .Include(a => a.GvaViewApplication.ApplicationType)
                     where a.Lot.Set.Alias == "airport" && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true)
 
-                    join gas in this.unitOfWork.DbContext.Set<GvaApplicationStage>().GroupBy(ap => ap.GvaApplicationId).Select(s => s.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()) on a.GvaApplicationId equals gas.GvaApplicationId into gas1
-                    from gas2 in gas1.DefaultIfEmpty()
-
-                    join va in this.unitOfWork.DbContext.Set<GvaViewApplication>().Include(a => a.ApplicationType) on a.GvaAppLotPartId equals va.PartId into va1
-                    from va2 in va1.DefaultIfEmpty()
-
-                    join ap in this.unitOfWork.DbContext.Set<GvaViewAirport>().Include(ai => ai.AirportType) on va2.LotId equals ap.LotId into ap1
+                    join ap in this.unitOfWork.DbContext.Set<GvaViewAirport>().Include(ai => ai.AirportType) on a.LotId equals ap.LotId into ap1
                     from ap2 in ap1.DefaultIfEmpty()
                     select new
                     {
                         GApplication = a,
                         Set = a.Lot.Set,
                         GApplicationPart = a.GvaAppLotPart,
-                        GViewApplication = va2,
-                        GViewApplicationType = va2.ApplicationType,
+                        GViewApplication = a.GvaViewApplication,
+                        GViewApplicationType = a.GvaViewApplication.ApplicationType,
                         GViewAirport = ap2,
                         GViewAirportType = ap2.AirportType,
-                        GvaAppStage = gas2
+                        GvaAppStage = a.Stages.OrderByDescending(ap => ap.GvaAppStageId).FirstOrDefault()
                     };
 
             var predicate = PredicateBuilder.True(new
@@ -663,6 +648,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 var gvaApplication = this.unitOfWork.DbContext.Set<GvaApplication>()
                     .Include(a => a.GvaAppLotPart)
                     .Include(a => a.Doc.DocStatus)
+                    .Include(a => a.Stages)
                     .Where(a => a.GvaAppLotPartId == partVersion.PartId && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
                     .FirstOrDefault();
 
@@ -671,17 +657,12 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     continue;
                 }
 
-                var stages = this.unitOfWork.DbContext.Set<GvaApplicationStage>()
-                    .Include(s => s.GvaStage)
-                    .Where(s => s.GvaApplication.LotId == lotId && s.GvaApplication.GvaAppLotPartId == partVersion.PartId)
-                    .OrderByDescending(a => a.GvaAppStageId)
-                    .ToList();
-
                 partVersion.Content.ApplicationId = gvaApplication.GvaApplicationId;
 
-                if (stages.Count() > 0)
+                if (gvaApplication.Stages.Count() > 0)
                 {
-                    var applicationStage = stages.First();
+                    this.unitOfWork.DbContext.Set<GvaStage>().Load();
+                    var applicationStage = gvaApplication.Stages.OrderByDescending(a => a.GvaAppStageId).First();
                     partVersion.Content.Stage = new NomValue()
                     {
                         Name = applicationStage.GvaStage.Name,
@@ -720,59 +701,18 @@ namespace Gva.Api.Repositories.ApplicationRepository
         {
             var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
 
-            var stages = this.unitOfWork.DbContext.Set<GvaApplicationStage>()
-                .Include(s => s.GvaStage)
-                .Where(s => s.GvaApplication.LotId == lotId && s.GvaApplication.GvaAppLotPartId == partVersion.PartId)
-                .OrderByDescending(a => a.GvaAppStageId)
-                .ToList();
-
             var gvaApplication = this.unitOfWork.DbContext.Set<GvaApplication>()
                     .Include(a => a.GvaAppLotPart)
+                    .Include(a => a.Stages)
                     .Where(a => a.GvaAppLotPartId == partVersion.PartId)
                     .Single();
 
             partVersion.Content.ApplicationId = gvaApplication.GvaApplicationId;
 
-            if(partVersion.Content.ExaminationSystemData != null)
+            if (gvaApplication.Stages.Count() > 0)
             {
-                var licenceTypeIds = this.nomRepository.GetNomValue(partVersion.Content.ApplicationType.NomValueId)
-                    .TextContent
-                    .GetItems<int>("licenceTypeIds");
-
-                List<AppExamSystQualificationDO> qualifications = new List<AppExamSystQualificationDO>();
-                foreach (int licenceTypeId in licenceTypeIds)
-                {
-                    var licenceType = this.nomRepository.GetNomValue(licenceTypeId);
-                    string licenceQlfCode = licenceType.TextContent.Get<string>("qlfCode");
-                    if (!string.IsNullOrEmpty(licenceQlfCode))
-                    {
-                        var qualification = this.unitOfWork.DbContext.Set<GvaExSystQualification>()
-                            .Where(q => q.Code == licenceQlfCode)
-                            .FirstOrDefault();
-
-                        var personQualification = this.unitOfWork.DbContext.Set<GvaViewPersonQualification>()
-                            .Where(q => q.LotId == lotId && q.LicenceTypeCode == licenceType.Code)
-                            .FirstOrDefault();
-
-                        qualifications.Add(
-                            new AppExamSystQualificationDO()
-                            {
-                                LicenceType = licenceType,
-                                QualificationCode = qualification.Code,
-                                QualificationName = qualification.Name,
-                                State = personQualification != null ? personQualification.State : QualificationState.Missing.ToString(),
-                                StateMethod = personQualification != null ? personQualification.StateMethod : null
-                            });
-                    }
-
-                }
-
-                partVersion.Content.ExaminationSystemData.Qualifications = qualifications;
-            }
-
-            if (stages.Count() > 0)
-            {
-                var applicationStage = stages.FirstOrDefault();
+                this.unitOfWork.DbContext.Set<GvaStage>().Load();
+                var applicationStage = gvaApplication.Stages.OrderByDescending(a => a.GvaAppStageId).First();
                 partVersion.Content.Stage = new NomValue()
                 {
                     Name = applicationStage.GvaStage.Name,
@@ -783,6 +723,44 @@ namespace Gva.Api.Repositories.ApplicationRepository
             var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, null);
 
             return new CaseTypePartDO<DocumentApplicationDO>(partVersion, lotFile);
+        }
+
+        public List<AppExamSystQualificationDO> GetApplicationQualifications(string path, int lotId)
+        {
+            var partVersion = this.lotRepository.GetLotIndex(lotId).Index.GetPart<DocumentApplicationDO>(path);
+
+            var licenceTypeIds = this.nomRepository.GetNomValue(partVersion.Content.ApplicationType.NomValueId)
+                    .TextContent
+                    .GetItems<int>("licenceTypeIds");
+
+            List<AppExamSystQualificationDO> qualifications = new List<AppExamSystQualificationDO>();
+            foreach (int licenceTypeId in licenceTypeIds)
+            {
+                var licenceType = this.nomRepository.GetNomValue(licenceTypeId);
+                string licenceQlfCode = licenceType.TextContent.Get<string>("qlfCode");
+                if (!string.IsNullOrEmpty(licenceQlfCode))
+                {
+                    var qualification = this.unitOfWork.DbContext.Set<GvaExSystQualification>()
+                        .Where(q => q.Code == licenceQlfCode)
+                        .FirstOrDefault();
+
+                    var personQualification = this.unitOfWork.DbContext.Set<GvaViewPersonQualification>()
+                        .Where(q => q.LotId == lotId && q.LicenceTypeCode == licenceType.Code)
+                        .FirstOrDefault();
+
+                    qualifications.Add(
+                        new AppExamSystQualificationDO()
+                        {
+                            LicenceType = licenceType,
+                            QualificationCode = qualification.Code,
+                            QualificationName = qualification.Name,
+                            State = personQualification != null ? personQualification.State : QualificationState.Missing.ToString(),
+                            StateMethod = personQualification != null ? personQualification.StateMethod : null
+                        });
+                }
+            }
+
+            return qualifications;
         }
     }
 }

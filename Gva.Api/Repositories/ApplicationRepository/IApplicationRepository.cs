@@ -107,5 +107,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
         List<CaseTypePartDO<DocumentApplicationDO>> GetApplicationsForLot(int lotId, string path, int? caseTypeId = null);
 
         CaseTypePartDO<DocumentApplicationDO> GetApplicationPart(string path, int lotId);
+
+        List<AppExamSystQualificationDO> GetApplicationQualifications(string path, int lotId);
     }
 }

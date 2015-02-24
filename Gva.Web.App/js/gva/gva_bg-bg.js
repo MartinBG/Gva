@@ -2724,13 +2724,9 @@
         appExSystDataDirective: {
             date: 'Дата на явяване',
             exam: 'Тест',
-            status: 'Статус',
-            qualificationName: 'ИС: Квалификация',
-            licenceType: 'Вид правоспособност',
             addExams: 'Към промяна на списък с тестове от заявлението',
             certCampaign: 'Сертификационна кампания',
             schools: 'Учебен център',
-            qualificationsTitle: 'Състояния относно придобиването на квалификации',
             exSystExams: 'ИС: Тестове',
             noEntry: 'Няма информация за тестове'
         },
@@ -2839,7 +2835,11 @@
             title: 'Данни за изпити',
             save: 'Запис',
             cancel: 'Отказ',
-            edit: 'Редакция'
+            edit: 'Редакция',
+            qualificationsTitle: 'Състояния относно придобиването на квалификации',
+            qualificationName: 'ИС: Квалификация',
+            status: 'Статус',
+            licenceType: 'Вид правоспособност'
           }
         },
         newForm: {

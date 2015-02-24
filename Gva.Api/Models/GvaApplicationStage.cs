@@ -56,7 +56,7 @@ namespace Gva.Api.Models
 
             // Relationships ??
             this.HasRequired(t => t.GvaApplication)
-                .WithMany()
+                .WithMany(t => t.Stages)
                 .HasForeignKey(d => d.GvaApplicationId);
 
             this.HasRequired(t => t.GvaStage)

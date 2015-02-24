@@ -11,6 +11,22 @@
 
     <div class="well-sm panel-body">
       <gva-application-exam-syst-data name="appExamSystDataForm" ng-model="application.part.examinationSystemData"></gva-application-exam-syst-data>
+
+      <h5 class="form-header" l10n-text="applications.edit.examinationSystem.qualificationsTitle"></h5>
+      <sc-datatable items="qualifications" filterable="true" pageable="false" sortable="true" dynamic-columns="false">
+        <sc-column data="licenceType.code" title="applications.edit.examinationSystem.licenceType">
+        </sc-column>
+        <sc-column data="qualificationName" title="applications.edit.examinationSystem.qualificationName">
+        </sc-column>
+        <sc-column data="state" title="applications.edit.examinationSystem.status" has-content="true">
+            {{ item.state === 'Finished' ? 'Приключил' : ' '}}
+            {{ item.state === 'Started' ? 'Стартирал' : ' '}}
+            {{ item.state === 'Canceled' ? 'Прекратен' : ' '}}
+            {{ item.state === 'Missing' ? 'Липсва състояние' : ' '}}
+            {{item.stateMethod === 'Automatically' ? ' - автоматично' : ''}}
+            {{item.stateMethod === 'Manually' ? '- ръчно' : ''}}
+        </sc-column>
+      </sc-datatable>
     </div>
   </div>
 </ng-form>

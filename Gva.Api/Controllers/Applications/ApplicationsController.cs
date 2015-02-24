@@ -342,33 +342,6 @@ namespace Gva.Api.Controllers.Applications
                     DocumentNumber = newDoc.DocRelations.First().Doc.RegUri
                 };
 
-                if (applicationNewDO.ApplicationType.Code.StartsWith("EX-") || applicationNewDO.ApplicationType.Code.StartsWith("EX/"))
-                {
-                    List<int> licenceTypeIds = this.nomRepository.GetNomValue(applicationNewDO.ApplicationType.NomValueId)
-                        .TextContent
-                        .GetItems<int>("licenceTypeIds")
-                        .ToList();
-
-                    application.ExaminationSystemData = new AppExaminationSystemDataDO();
-
-                    foreach (int licenceTypeId in licenceTypeIds)
-                    { 
-                        NomValue licenceType = this.nomRepository.GetNomValue(licenceTypeId);
-                        GvaExSystQualification qualification = this.examinationSystemRepository
-                            .GetQualifications(licenceType.TextContent.Get<string>("qlfCode"))
-                            .Single();
-
-                        application.ExaminationSystemData
-                            .Qualifications
-                            .Add(new AppExamSystQualificationDO()
-                            {
-                                LicenceType = licenceType,
-                                QualificationCode = qualification.Code,
-                                QualificationName = qualification.Name
-                            });
-                    }
-                }
-
                 PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, this.userContext);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
@@ -450,6 +423,16 @@ namespace Gva.Api.Controllers.Applications
 
             return Ok(this.applicationRepository.GetApplicationPart(path, lotId));
         }
+
+        [Route(@"appPart/{lotId}/{partIndex}/qualifications")]
+        public IHttpActionResult GetApplicationQualifications(int lotId, int partIndex)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            string path = string.Format("{0}DocumentApplications/{1}", lot.Set.Alias.ToLower(), partIndex);
+
+            return Ok(this.applicationRepository.GetApplicationQualifications(path, lotId));
+        }
+
 
         [Route(@"appPart/{lotId}/{partIndex}")]
         public IHttpActionResult PostApplicationPart(int lotId, int partIndex, CaseTypePartDO<DocumentApplicationDO> application)

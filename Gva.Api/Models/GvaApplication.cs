@@ -28,6 +28,10 @@ namespace Gva.Api.Models
         public virtual Part GvaAppLotPart { get; set; }
 
         public virtual ICollection<GvaAppLotFile> GvaAppLotFiles { get; set; }
+
+        public virtual ICollection<GvaApplicationStage> Stages { get; set; }
+
+        public virtual GvaViewApplication GvaViewApplication { get; set; }
     }
 
     public class GvaApplicationMap : EntityTypeConfiguration<GvaApplication>
@@ -55,6 +59,9 @@ namespace Gva.Api.Models
             this.HasOptional(t => t.GvaAppLotPart)
                 .WithMany()
                 .HasForeignKey(d => d.GvaAppLotPartId);
+            this.HasOptional(t => t.GvaViewApplication)
+                .WithMany()
+                .HasForeignKey(d => new { d.LotId, d.GvaAppLotPartId });
         }
     }
 }

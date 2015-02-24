@@ -23,6 +23,15 @@
                 ind: '@ind'
               }
             },
+            getAppQualifications: {
+              method: 'GET',
+              url: 'api/apps/appPart/:lotId/:ind/qualifications',
+              params: {
+                lotId: '@lotId',
+                ind: '@ind'
+              },
+              isArray: true
+            },
             editAppPart: {
               method: 'POST',
               url: 'api/apps/appPart/:lotId/:ind',

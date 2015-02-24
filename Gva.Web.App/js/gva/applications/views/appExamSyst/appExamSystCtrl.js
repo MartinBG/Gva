@@ -6,9 +6,11 @@
     $scope,
     $stateParams,
     Applications,
-    application) {
+    application,
+    qualifications) {
     var originalApplication = _.cloneDeep(application);
     $scope.application = application;
+    $scope.qualifications = qualifications;
     $scope.lotId = $stateParams.lotId;
     $scope.ind = $stateParams.ind;
     $scope.editMode = null;
@@ -41,7 +43,8 @@
     '$scope',
     '$stateParams',
     'Applications',
-    'application'
+    'application',
+    'qualifications'
   ];
 
   AppExamSystCtrl.$resolve = {
@@ -50,6 +53,17 @@
       'Applications',
       function ($stateParams, Applications) {
         return Applications.getAppPart({
+          lotId: $stateParams.lotId,
+          ind: $stateParams.ind,
+          id: $stateParams.id
+        }).$promise;
+      }
+    ],
+    qualifications: [
+      '$stateParams',
+      'Applications',
+      function ($stateParams, Applications) {
+        return Applications.getAppQualifications({
           lotId: $stateParams.lotId,
           ind: $stateParams.ind,
           id: $stateParams.id
