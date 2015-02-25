@@ -38,6 +38,7 @@ namespace Gva.Api.Controllers
         private INomRepository nomRepository;
         private IStageRepository stageRepository;
         private IExaminationSystemRepository examinationSystemRepository;
+        private IAircraftRegistrationRepository aircraftRegistrationRepository;
 
         public GvaNomController(
             ILotRepository lotRepository,
@@ -50,7 +51,8 @@ namespace Gva.Api.Controllers
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository,
             IStageRepository stageRepository,
-            IExaminationSystemRepository examinationSystemRepository)
+            IExaminationSystemRepository examinationSystemRepository,
+            IAircraftRegistrationRepository aircraftRegistrationRepository)
         {
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
@@ -63,6 +65,7 @@ namespace Gva.Api.Controllers
             this.nomRepository = nomRepository;
             this.stageRepository = stageRepository;
             this.examinationSystemRepository = examinationSystemRepository;
+            this.aircraftRegistrationRepository = aircraftRegistrationRepository;
         }
 
         [Route("{lotId}/applications")]
@@ -182,25 +185,9 @@ namespace Gva.Api.Controllers
         }
 
         [Route("aircraftsRegistrations")]
-        public IHttpActionResult GetAircraftsRegsitartions(int lotId, string term = null)
+        public IHttpActionResult GetAircraftsRegistrations(int lotId, string term = null)
         {
-            var registrations = this.lotRepository.GetLotIndex(lotId).Index
-                .GetParts<AircraftCertRegistrationFMDO>("aircraftCertRegistrationsFM")
-                .Select(i => new
-                {
-                    nomValueId = i.Part.Index,
-                    name = string.Format(
-                        i.Content.RegMark +
-                        (i.Content.CertNumber.HasValue ? string.Format("/рег.№ {0}", i.Content.CertNumber.ToString()) : string.Empty) +
-                        (i.Content.ActNumber.HasValue ? string.Format("/дел.№ {0}", i.Content.ActNumber.ToString()) : string.Empty))
-                });
-
-            if (!string.IsNullOrEmpty(term))
-            {
-                return Ok(registrations.Where(a => a.name.Contains(term)));
-            }
-
-            return Ok(registrations);
+            return Ok(this.aircraftRegistrationRepository.GetAircraftRegistrationNoms(lotId, term));
         }
 
         [Route("persons/{id:int}")]

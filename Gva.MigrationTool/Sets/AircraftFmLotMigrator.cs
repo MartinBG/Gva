@@ -178,23 +178,26 @@ namespace Gva.MigrationTool.Sets
                         foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                         {
                             var pv = addPartWithFiles("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM);
-
-                            var regPart = Utils.ToJObject(
-                                new
-                                {
-                                    partIndex = pv.Part.Index,
-                                    description = aircraftCertRegistrationFM.Get<int>("part.certNumber").ToString()
-                                });
+                            int? certNumber = aircraftCertRegistrationFM.Get<int?>("part.certNumber");
+                            int? actNumber = aircraftCertRegistrationFM.Get<int?>("part.actNumber");
+                            var registration = new NomValue()
+                            {
+                                NomValueId = pv.Part.Index,
+                                Name = string.Format(
+                                    aircraftCertRegistrationFM.Get<string>("part.regMark") +
+                                    (certNumber.HasValue ? string.Format("/рег.№ {0}", certNumber.ToString()) : string.Empty) +
+                                    (actNumber.HasValue ? string.Format("/дел.№ {0}", actNumber.ToString()) : string.Empty))
+                            };
 
                             int certId = aircraftCertRegistrationFM.Get<int>("part.__oldId");
 
-                            var aircraftCertAirworthinessFM = this.getAircraftCertAirworthinessFM(aircraftFmId, certId, noms, regPart, getInspector, getInspectorOrDefault);
+                            var aircraftCertAirworthinessFM = this.getAircraftCertAirworthinessFM(aircraftFmId, certId, noms, registration, getInspector, getInspectorOrDefault);
                             if (aircraftCertAirworthinessFM != null)
                             {
                                 addPartWithFiles("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM);
                             }
 
-                            var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, regPart, noms, getInspector);
+                            var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, registration, noms, getInspector);
                             foreach (var aircraftDocumentDebtFM in aircraftDocumentDebtsFM)
                             {
                                 try
@@ -469,7 +472,7 @@ namespace Gva.MigrationTool.Sets
             string aircraftFmId,
             int certId,
             Dictionary<string, Dictionary<string, NomValue>> noms,
-            JObject regPart,
+            NomValue registration,
             Func<string, JObject> getInspector,
             Func<string, JObject> getInspectorOrDefault)
         {
@@ -606,12 +609,13 @@ namespace Gva.MigrationTool.Sets
 
             certType = noms["airworthinessCertificateTypes"].ByAlias(actAlias);
 
-            var aw =
-                new JObject(
-                    new JProperty("airworthinessCertificateType", Utils.ToJObject(certType)),
-                    new JProperty("registration", regPart),
-                    new JProperty("documentNumber", act.t_CofA_No),
-                    new JProperty("issueDate", issueDate));
+            var aw = Utils.ToJObject(new
+            {
+                airworthinessCertificateType = certType,
+                registration = registration,
+                documentNumber = act.t_CofA_No,
+                issueDate = issueDate
+            });
 
             if (actAlias == "special")
             {
@@ -704,7 +708,7 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("applications", new JArray())))));
         }
 
-        private IList<JObject> getAircraftDocumentDebtsFM(int certId, JObject regPart, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
+        private IList<JObject> getAircraftDocumentDebtsFM(int certId, NomValue registration, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
         {
             return this.sqlConn.CreateStoreCommand(
                 @"select * from Morts mo 
@@ -719,7 +723,7 @@ namespace Gva.MigrationTool.Sets
                         {
                             __oldId = r.Field<string>("nRecNo"),
                             __migrTable = "Morts",
-                            registration = regPart,
+                            registration = registration,
                             certId = Utils.FmToNum(r.Field<string>("RegNo")),
                             regDate = Utils.FmToDate(r.Field<string>("Date")),
                             aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action").Trim()),

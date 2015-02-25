@@ -29,6 +29,7 @@ namespace Gva.Api.Controllers.Aircrafts
         private UserContext userContext;
         private ICaseTypeRepository caseTypeRepository;
         private IAircraftDocumentDebtFMRepository aircraftDocumentDebtFMRepository;
+        private IAircraftRegistrationRepository aircraftRegistrationRepository;
 
         public AircraftCertRegistrationsFMController(
             IUnitOfWork unitOfWork,
@@ -37,6 +38,7 @@ namespace Gva.Api.Controllers.Aircrafts
             ILotEventDispatcher lotEventDispatcher,
             ICaseTypeRepository caseTypeRepository,
             IAircraftDocumentDebtFMRepository aircraftDocumentDebtFMRepository,
+            IAircraftRegistrationRepository aircraftRegistrationRepository,
             UserContext userContext)
             : base("aircraftCertRegistrationsFM", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
@@ -48,6 +50,7 @@ namespace Gva.Api.Controllers.Aircrafts
             this.userContext = userContext;
             this.caseTypeRepository = caseTypeRepository;
             this.aircraftDocumentDebtFMRepository = aircraftDocumentDebtFMRepository;
+            this.aircraftRegistrationRepository = aircraftRegistrationRepository;
         }
 
         [Route("new")]
@@ -139,7 +142,7 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             var regs =
                 (from r in registrations
-                 join aw in airworthinesses on r.Part.Index equals aw.Content.Registration.PartIndex into gaws
+                 join aw in airworthinesses on r.Part.Index equals aw.Content.Registration.NomValueId into gaws
                  from aw in gaws.DefaultIfEmpty()
                  group aw by r into aws
                  orderby aws.Key.Content.ActNumber descending
@@ -238,7 +241,10 @@ namespace Gva.Api.Controllers.Aircrafts
                     List<PartVersion<AircraftDocumentDebtFMDO>> documentDebtsPartsVersions = new List<PartVersion<AircraftDocumentDebtFMDO>>();
                     foreach (var documentDebt in documentDebts)
                     {
-                        documentDebt.Part.Registration.NomValueId = certRegistartionPartVersion.Part.Index;
+                        documentDebt.Part.Registration = this.aircraftRegistrationRepository.GetAircraftRegistrationNoms(lotId)
+                            .Where(r => r.NomValueId == certRegistartionPartVersion.Part.Index)
+                            .Single();
+
                         PartVersion<AircraftDocumentDebtFMDO> documentDebtPartVersion =
                             lot.CreatePart<AircraftDocumentDebtFMDO>("aircraftDocumentDebtsFM/*", documentDebt.Part, this.userContext);
                         this.fileRepository.AddFileReference(documentDebtPartVersion.Part, documentDebt.Case);

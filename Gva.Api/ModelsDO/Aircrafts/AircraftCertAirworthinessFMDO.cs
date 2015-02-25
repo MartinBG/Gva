@@ -16,7 +16,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public NomValue AirworthinessCertificateType { get; set; }
 
         [Required(ErrorMessage = "Registration is required.")]
-        public PartSelectDO Registration { get; set; }
+        public NomValue Registration { get; set; }
 
         public string DocumentNumber { get; set; }
 
