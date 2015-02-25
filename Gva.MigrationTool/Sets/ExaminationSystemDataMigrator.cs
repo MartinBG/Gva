@@ -25,16 +25,14 @@ namespace Gva.MigrationTool.Sets
     public class ExaminationSystemDataMigrator : IDisposable
     {
         private bool disposed = false;
-        private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, IFileRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
+        private Func<Owned<DisposableTuple<IUnitOfWork, UserContext>>> dependencyFactory;
         private OracleConnection oracleConn;
         private IUnitOfWork unitOfWork;
         private UserContext context;
-        private ICaseTypeRepository caseTypeRepository;
-        private IFileRepository fileRepository;
 
         public ExaminationSystemDataMigrator(
             OracleConnection oracleConn,
-            Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, IFileRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
+            Func<Owned<DisposableTuple<IUnitOfWork, UserContext>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
             this.oracleConn = oracleConn;
