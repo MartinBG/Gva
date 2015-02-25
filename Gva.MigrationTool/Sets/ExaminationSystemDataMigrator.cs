@@ -28,7 +28,7 @@ namespace Gva.MigrationTool.Sets
         private Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, IFileRepository, ILotEventDispatcher, UserContext>>> dependencyFactory;
         private OracleConnection oracleConn;
         private IUnitOfWork unitOfWork;
-        private UserContext userContext;
+        private UserContext context;
         private ICaseTypeRepository caseTypeRepository;
         private IFileRepository fileRepository;
 
@@ -57,21 +57,21 @@ namespace Gva.MigrationTool.Sets
                 throw;
             }
 
-            ct.ThrowIfCancellationRequested();
-            using (var dependencies = this.dependencyFactory())
+            int personId;
+            while (personIds.TryDequeue(out personId))
             {
-                this.unitOfWork = dependencies.Value.Item1;
-                var lotRepository = dependencies.Value.Item2;
-                this.caseTypeRepository = dependencies.Value.Item3;
-                this.fileRepository = dependencies.Value.Item4;
-                var lotEventDispatcher = dependencies.Value.Item5;
-                this.userContext = dependencies.Value.Item6;
+                ct.ThrowIfCancellationRequested();
 
                 try
                 {
-                    int personId;
-                    while (personIds.TryDequeue(out personId))
+                    using (var dependencies = this.dependencyFactory())
                     {
+                        this.unitOfWork = dependencies.Value.Item1;
+                        var lotRepository = dependencies.Value.Item2;
+                        this.caseTypeRepository = dependencies.Value.Item3;
+                        this.fileRepository = dependencies.Value.Item4;
+                        var lotEventDispatcher = dependencies.Value.Item5;
+                        this.context = dependencies.Value.Item6;
 
                         var lot = lotRepository.GetLotIndex(personIdToLotId[personId], fullAccess: true);
 
@@ -102,17 +102,28 @@ namespace Gva.MigrationTool.Sets
                             States = states
                         };
 
-                        PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.CreatePart("personExamSystData", data, this.userContext);
+                        PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.CreatePart("personExamSystData", data, this.context);
 
                         this.fileRepository.AddFileReferences(examSystDataPartVersion.Part, cases);
 
-                        lot.Commit(this.userContext, lotEventDispatcher);
-                    }
+                        try
+                        {
+                            lot.Commit(this.context, lotEventDispatcher);
+                        }
+                        //swallow the Cannot commit without modifications exception
+                        catch (InvalidOperationException)
+                        {
+                        }
 
-                    this.unitOfWork.Save();
+                        unitOfWork.Save();
+
+                        Console.WriteLine("Migrated examination data of personId: {0}", personId);
+                    }
                 }
                 catch (Exception)
                 {
+                    Console.WriteLine("Error in migration of examination data of personId: {0}", personId);
+
                     cts.Cancel();
                     throw;
                 }
