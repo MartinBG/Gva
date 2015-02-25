@@ -4,6 +4,7 @@
 
   function AppExamSystCtrl(
     $scope,
+    $state,
     $stateParams,
     Applications,
     application,
@@ -26,9 +27,11 @@
             lotId: $scope.lotId,
             ind: $scope.ind
           },
-          $scope.application).$promise.then(function () {
-            $scope.editMode = null;
-          });
+          $scope.application).$promise
+            .then(function () {
+              $scope.editMode = null;
+              $state.transitionTo('root.applications.edit.data', $stateParams);
+            });
         }
       });
     };
@@ -41,6 +44,7 @@
 
   AppExamSystCtrl.$inject = [
     '$scope',
+    '$state',
     '$stateParams',
     'Applications',
     'application',
