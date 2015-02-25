@@ -4,7 +4,7 @@ GO
 CREATE TABLE [dbo].[GvaViewOrganizationAmendments] (
     [LotId]                    INT               NOT NULL,
     [PartIndex]                INT               NOT NULL,
-	[LotPartId]                INT               NOT NULL,
+    [LotPartId]                INT               NOT NULL,
     [ApprovalPartIndex]        INT               NOT NULL,
     [DocumentNumber]           NVARCHAR(50)      NULL,
     [DocumentDateIssue]        DATETIME2         NULL,
