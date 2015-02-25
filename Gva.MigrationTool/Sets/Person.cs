@@ -210,20 +210,6 @@ namespace Gva.MigrationTool.Sets
             CancellationToken ct = cts.Token;
 
             this.examinationSystemDataMigratorFactory().Value.MigrateDataForExaminations(personIdToLotId, cts, ct);
-
-            ConcurrentQueue<int> personIds = new ConcurrentQueue<int>(this.getPersonIds());
-
-            Utils.RunParallel("ParallelMigrations", ct,
-                () => this.examinationSystemDataMigratorFactory().Value,
-                (examinationSystemDataMigrator) =>
-                {
-                    using (examinationSystemDataMigrator)
-                    {
-                        examinationSystemDataMigrator.MigrateExaminationSystemData(personIdToLotId, personIds, cts, ct);
-                    }
-                })
-                .Wait();
-
         }
     }
 }

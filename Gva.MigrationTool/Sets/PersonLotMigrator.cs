@@ -11,7 +11,9 @@ using Common.Json;
 using Common.Tests;
 using Gva.Api.CommonUtils;
 using Gva.Api.Models;
+using Gva.Api.Models.Enums;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.MigrationTool.Nomenclatures;
@@ -401,6 +403,12 @@ namespace Gva.MigrationTool.Sets
                             }
                         }
 
+                        var examSystPart = this.GetQualificationStates(personId, noms);
+                        if(examSystPart != null)
+                        {
+                            addPartWithFiles("personExamSystData", examSystPart);
+                        }
+
                         try
                         {
                             lot.Commit(context, lotEventDispatcher);
@@ -422,6 +430,62 @@ namespace Gva.MigrationTool.Sets
                     cts.Cancel();
                     throw;
                 }
+            }
+        }
+
+        private JObject GetQualificationStates(int personId, Dictionary<string, Dictionary<string, NomValue>> noms)
+        {
+            Dictionary<int, string> stateAlias = new Dictionary<int, string>()
+            {
+                { 1, "Started"}, 
+                { 3, "Canceled"},
+                { 2, "Finished"}
+            };
+
+            var states = this.oracleConn.CreateStoreCommand(
+                        @"SELECT es.id,
+                            es.date_from,
+                            es.date_to,
+                            es.state,
+                            eq.qlf_code,
+                            eq.qlf_name,
+                            es.id_person,
+                            es.state_method,
+                            es.notes_auto_state
+                            FROM  CAA_DOC.EXAMS_STATE_LOG es,
+                                CAA_DOC.EXAMS_QUALIFICATION eq
+                            WHERE es.qlf_code = eq.qlf_code and {0}",
+                            new DbClause("es.ID_PERSON = {0}", personId)
+                        ).Materialize(r =>
+                            new PersonExamSystStateDO
+                            {
+                                FromDate = r.Field<DateTime>("date_from"),
+                                ToDate = r.Field<DateTime?>("date_to"),
+                                State = stateAlias[r.Field<int>("state")],
+                                StateMethod = r.Field<int>("state_method") == 1 ? QualificationStateMethod.Automatically.ToString() : QualificationStateMethod.Manually.ToString(),
+                                Notes = r.Field<string>("notes_auto_state"),
+                                QualificationName = r.Field<string>("qlf_name"),
+                                QualificationCode = r.Field<string>("qlf_code")
+                            })
+                            .ToList();
+
+            var files = noms["personCaseTypes"].Values.Select(ct => new JObject(
+                    new JProperty("isAdded", true),
+                    new JProperty("file", null),
+                    new JProperty("caseType", Utils.ToJObject(ct)),
+                    new JProperty("bookPageNumber", null),
+                    new JProperty("pageCount", null),
+                    new JProperty("applications", new JArray())));
+
+            if (states.Count() > 0)
+            {
+                return new JObject(
+                    new JProperty("part", Utils.ToJObject(new {states = states})),
+                    new JProperty("files", files));
+            }
+            else
+            {
+                return null;
             }
         }
 

@@ -296,9 +296,9 @@ namespace Gva.MigrationTool
                 //migrate organizations
                 organization.migrateOrganizations(noms, personIdToLotId, orgIdtoLotId, getAircraftByApexId, getPersonByApexId, blobIdsToFileKeys);
 
-                bool shouldMigrateExaminationData;
-                bool.TryParse(ConfigurationManager.AppSettings["MigrateExaminationData"], out shouldMigrateExaminationData);
-                if (shouldMigrateExaminationData)
+                bool migrateExaminationData;
+                bool.TryParse(ConfigurationManager.AppSettings["MigrateExaminationData"], out migrateExaminationData);
+                if (migrateExaminationData)
                 {
                     Stopwatch examinationSystemDataTimer = new Stopwatch();
                     person.migrateExaminationSystemData(personIdToLotId);
@@ -330,9 +330,9 @@ namespace Gva.MigrationTool
                 tokenRebuildTimer.Stop();
                 Console.WriteLine("Rebuilding lot part tokens time - {0}", tokenRebuildTimer.Elapsed.TotalMinutes);
 
-                bool shouldMigrateLicences;
-                bool.TryParse(ConfigurationManager.AppSettings["MigrateLicences"], out shouldMigrateLicences);
-                if (shouldMigrateLicences)
+                bool migrateLicences;
+                bool.TryParse(ConfigurationManager.AppSettings["MigrateLicences"], out migrateLicences);
+                if (migrateLicences)
                 {
                     Stopwatch personLicenceDocumentsTimer = new Stopwatch();
                     person.migrateLicenceDocuments(personIdToLotId);
