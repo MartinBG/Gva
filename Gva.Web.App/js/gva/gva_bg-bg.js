@@ -1072,20 +1072,23 @@
         airworthinessReviewOtherDirective: {
           issueDate: 'Дата на издаване',
           validToDate: 'Валиден до',
-          approvalNumber: '№ на одобрение'
+          approvalNumber: '№ на одобрение',
+          status: 'Статус'
         },
         airworthinessForm15MainDirective: {
           airworthinessReviewType: 'Тип',
           issueDate: 'Дата на издаване',
           validToDate: 'Валиден до',
-          approvalNumber: '№ на одобрение'
+          approvalNumber: '№ на одобрение',
+          status: 'Статус'
         },
         airworthinessForm15AmendmentDirective: {
           issueDate: 'Дата на издаване',
           validToDate: 'Валиден до',
           approvalNumber: '№ на одобрение',
           organzation: 'Организация',
-          refNumber: 'Реф.№ одобрение'
+          refNumber: 'Реф.№ одобрение',
+          status: 'Статус'
         },
         noiseDirective: {
           issueNumber: '№',

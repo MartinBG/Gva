@@ -17,6 +17,9 @@ namespace Gva.Api.ModelsDO.Aircrafts
         [Required(ErrorMessage = "ApprovalNumber is required.")]
         public string ApprovalNumber { get; set; }
 
+        [Required(ErrorMessage = "Status is required.")]
+        public NomValue Status { get; set; }
+
         [Required(ErrorMessage = "Inspector is required.")]
         public AircraftInspectorDO Inspector { get; set; }
 

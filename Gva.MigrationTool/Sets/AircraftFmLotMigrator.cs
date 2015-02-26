@@ -530,9 +530,9 @@ namespace Gva.MigrationTool.Sets
 
             var issues = this.sqlConn.CreateStoreCommand(
                 @"select * from 
-                    (select nRegNum, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspetor as t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA1 as r1
+                    (select nRegNum, NumberIssue, t_ARC_Type, nStatus, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspetor as t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA1 as r1
                         union all
-                    select nRegNum, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA2 as r2) s
+                    select nRegNum, NumberIssue, t_ARC_Type, nStatus, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA2 as r2) s
                 where {0}
                 order by NumberIssue",
                 new DbClause("nRegNum = {0}", certId)
@@ -544,6 +544,7 @@ namespace Gva.MigrationTool.Sets
                         __migrTable = "CofA1, CofA2",
 
                         t_ARC_Type = r.Field<string>("t_ARC_Type"),
+                        nStatus = r.Field<string>("nStatus"),
 
                         dDateEASA_25_Issue = Utils.FmToDate(r.Field<string>("dDateEASA_25_Issue")),
                         d_24_Issue = Utils.FmToDate(r.Field<string>("d_24_Issue")),
@@ -632,11 +633,14 @@ namespace Gva.MigrationTool.Sets
                 int l = issues.Count;
                 for (int i = 0; i < l; i++)
                 {
-                    var review = new JObject(
-                        new JProperty("issueDate", issues[i].dFrom),
-                        new JProperty("validToDate", issues[i].dValid),
-                        new JProperty("approvalNumber", issues[i].t_ARC_RefNo),
-                        new JProperty("inspector", new JObject()));
+                    var review = Utils.ToJObject( new {
+                        issueDate = issues[i].dFrom,
+                        validToDate = issues[i].dValid,
+                        approvalNumber = issues[i].t_ARC_RefNo,
+                        inspector = new JObject(),
+                        status = noms["aircraftRegStatsesFm"].ByOldId(issues[i].nStatus)
+                    });
+
                     reviews.Add(review);
 
                     var inspector = getInspector(issues[i].t_CAA_Inspetor);
@@ -668,22 +672,26 @@ namespace Gva.MigrationTool.Sets
                         if (i < l - 1 && issues[i].dIssue == issues[i + 1].dIssue &&
                             !(i < l - 3 && issues[i].dIssue == issues[i + 3].dIssue)) //if more than 3 consecutive treat as separate
                         {
-                            review.Add("amendment1", new JObject(
-                                new JProperty("issueDate", issues[i + 1].dFrom),
-                                new JProperty("validToDate", issues[i + 1].dValid),
-                                new JProperty("approvalNumber", issues[i + 1].t_ARC_RefNo),
-                                new JProperty("inspector", getExaminerOrOther(issues[i + 1].t_Reviewed_By))));
+                            review.Add("amendment1", Utils.ToJObject( new {
+                                issueDate = issues[i + 1].dFrom,
+                                validToDate = issues[i + 1].dValid,
+                                approvalNumber = issues[i + 1].t_ARC_RefNo,
+                                inspector = getExaminerOrOther(issues[i + 1].t_Reviewed_By),
+                                status = noms["aircraftRegStatsesFm"].ByOldId(issues[i + 1].nStatus)
+                            }));
 
                             trySetType(issues[i + 1].t_ARC_Type);
                             i++;
 
                             if (i < l - 2 && issues[i].dIssue == issues[i + 2].dIssue)
                             {
-                                review.Add("amendment2", new JObject(
-                                    new JProperty("issueDate", issues[i + 2].dFrom),
-                                    new JProperty("validToDate", issues[i + 2].dValid),
-                                    new JProperty("approvalNumber", issues[i + 2].t_ARC_RefNo),
-                                    new JProperty("inspector", getExaminerOrOther(issues[i + 2].t_Reviewed_By))));
+                                review.Add("amendment2",  Utils.ToJObject( new {
+                                    issueDate = issues[i + 2].dFrom,
+                                    validToDate = issues[i + 2].dValid,
+                                    approvalNumber = issues[i + 2].t_ARC_RefNo,
+                                    inspector = getExaminerOrOther(issues[i + 2].t_Reviewed_By),
+                                    status = noms["aircraftRegStatsesFm"].ByOldId(issues[i + 2].nStatus)
+                                }));
 
                                 trySetType(issues[i + 2].t_ARC_Type);
                                 i++;

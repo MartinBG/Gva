@@ -6,6 +6,9 @@ namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftCertAirworthinessReviewOtherDO
     {
+        [Required(ErrorMessage = "Status is required.")]
+        public NomValue Status { get; set; }
+
         [Required(ErrorMessage = "IssueDate is required.")]
         public DateTime? IssueDate { get; set; }
 
