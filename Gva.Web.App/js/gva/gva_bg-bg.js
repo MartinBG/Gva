@@ -1002,7 +1002,12 @@
           view: 'Прегледай',
           incomingDocNumber: 'Вх. номер ГВА',
           incomingDocDate: 'От дата',
-          category: 'Категория'
+          category: 'Категория',
+          leasingDocNumber: 'Одобрение на лизинг',
+          leasingDocDate: 'Дата',
+          leasingLessor: 'Лизингодател',
+          leasingAgreement: 'Договор за лизинг и анекси към него',
+          leasingEndDate: 'Срок'
         },
         smodViewDirective: {
           title: 'S-code',

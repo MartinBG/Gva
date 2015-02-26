@@ -61,6 +61,21 @@
       <div class="row">
         <sc-field type="nomenclature" ng-model="model.limitations" alias="'aircraftLimitationsFm'" multiple l10n-text="aircrafts.regViewDirective.limitations" class="col-md-8 col-sm-12"></sc-field>
       </div>
+      
+      <div class="row">
+        <sc-field type="text" ng-model="model.leasingDocNumber" l10n-text="aircrafts.regViewDirective.leasingDocNumber" class="col-md-2 col-sm-4"></sc-field>
+        <sc-field type="date" ng-model="model.leasingDocDate" l10n-text="aircrafts.regViewDirective.leasingDocDate" class="col-md-2 col-sm-4"></sc-field>
+        <sc-field type="date" ng-model="model.leasingEndDate" l10n-text="aircrafts.regViewDirective.leasingEndDate" class="col-md-2 col-sm-4"></sc-field>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-4 col-sm-6">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.leasingLessor"></label>
+          <input disabled name="leasingLessor" type="text" class="form-control input-sm" value="{{model.operIsOrg? model.lesorOrganization.name : model.lessorPerson.name}}">
+        </div>
+      </div>
+      <div class="row">
+        <sc-field type="text" ng-model="model.leasingAgreement" l10n-text="aircrafts.regViewDirective.leasingAgreement" class="col-md-8 col-sm-12"></sc-field>
+      </div>
     </div>
   </div>
 </ng-form>
