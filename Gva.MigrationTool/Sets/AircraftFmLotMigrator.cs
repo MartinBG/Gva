@@ -196,19 +196,19 @@ namespace Gva.MigrationTool.Sets
                             {
                                 addPartWithFiles("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM);
                             }
+                        }
 
-                            var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(certId, registration, noms, getInspector);
-                            foreach (var aircraftDocumentDebtFM in aircraftDocumentDebtsFM)
+                        var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(aircraftFmId, noms, getInspector);
+                        foreach (var aircraftDocumentDebtFM in aircraftDocumentDebtsFM)
+                        {
+                            try
                             {
-                                try
-                                {
-                                    addPartWithFiles("aircraftDocumentDebtsFM/*", aircraftDocumentDebtFM);
-                                }
-                                catch (Exception e)
-                                {
-                                    Console.WriteLine("ERROR CREATEPART AIRCRAFTDOCUMENTDEBTSFM {0}", e.Message);//TODO
-                                    throw e;
-                                }
+                                addPartWithFiles("aircraftDocumentDebtsFM/*", aircraftDocumentDebtFM);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("ERROR CREATEPART AIRCRAFTDOCUMENTDEBTSFM {0}", e.Message);//TODO
+                                throw e;
                             }
                         }
 
@@ -708,14 +708,14 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("applications", new JArray())))));
         }
 
-        private IList<JObject> getAircraftDocumentDebtsFM(int certId, NomValue registration, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
+        private IList<JObject> getAircraftDocumentDebtsFM(string aircraftFmId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
         {
             return this.sqlConn.CreateStoreCommand(
                 @"select * from Morts mo 
                 left outer join Morts_New mn on mn.n_Mort_ID_Old = mo.nRecNo
                 where {0} {1}",
                 new DbClause("1=1"),
-                new DbClause("and RegNo = {0}", certId)
+                new DbClause("and nActID = {0}", aircraftFmId)
                 )
                 .Materialize(r => new JObject(
                     new JProperty("part",
@@ -723,8 +723,6 @@ namespace Gva.MigrationTool.Sets
                         {
                             __oldId = r.Field<string>("nRecNo"),
                             __migrTable = "Morts",
-                            registration = registration,
-                            certId = Utils.FmToNum(r.Field<string>("RegNo")),
                             regDate = Utils.FmToDate(r.Field<string>("Date")),
                             aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action").Trim()),
                             documentNumber = r.Field<string>("gt_DocCAA"),

@@ -11,11 +11,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.IsActive = true;
         }
 
-        [Required(ErrorMessage = "Registration is required.")]
-        public NomValue Registration { get; set; }
-
-        public int CertId { get; set; }
-
         public DateTime? RegDate { get; set; }
 
         [Required(ErrorMessage = "RegTime is required.")]

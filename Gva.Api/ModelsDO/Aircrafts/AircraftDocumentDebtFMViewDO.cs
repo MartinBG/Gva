@@ -6,10 +6,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftDocumentDebtFMViewDO
     {
-        public int? RegistrationCertNumber { get; set; }
-
-        public int? RegistrationActNumber { get; set; }
-
         public DateTime? RegDate { get; set; }
 
         public NomValue AircraftDebtType { get; set; }

@@ -106,17 +106,9 @@
     ],
     debts: [
       '$stateParams',
-      'AircraftCertRegistrationsFM',
-      'aircraftCertRegistrationView',
-      function ($stateParams, AircraftCertRegistrationsFM, aircraftCertRegistrationView) {
-        if (aircraftCertRegistrationView) {
-          return AircraftCertRegistrationsFM.getDebts({
-            id: $stateParams.id,
-            ind: aircraftCertRegistrationView.currentIndex
-          }).$promise;
-        } else {
-          return undefined;
-        }
+      'AircraftDocumentDebtsFM',
+      function ($stateParams, AircraftDocumentDebtsFM) {
+        return AircraftDocumentDebtsFM.query({id: $stateParams.id}).$promise;
       }
     ]
   };

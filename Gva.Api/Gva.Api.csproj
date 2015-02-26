@@ -428,8 +428,6 @@
     <Compile Include="GvaApiModule.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegistrationRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegMarkRepository.cs" />
-    <Compile Include="Repositories\AircraftRepository\AircraftDocumentDebtFMRepository.cs" />
-    <Compile Include="Repositories\AircraftRepository\IAircraftDocumentDebtFMRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\IAircraftRegMarkRepository.cs" />
     <Compile Include="Repositories\AircraftRepository\IAircraftRegistrationRepository.cs" />
     <Compile Include="Repositories\ApplicationRepository\IApplicationRepository.cs" />

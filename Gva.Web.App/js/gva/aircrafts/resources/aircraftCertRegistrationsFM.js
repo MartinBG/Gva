@@ -20,11 +20,6 @@
             return null;
           }
         }
-      },
-      'getDebts': {
-        method: 'GET',
-        url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/debts',
-        isArray: true
       }
     });
   }]);

@@ -28,7 +28,6 @@ namespace Gva.Api.Controllers.Aircrafts
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
         private ICaseTypeRepository caseTypeRepository;
-        private IAircraftDocumentDebtFMRepository aircraftDocumentDebtFMRepository;
         private IAircraftRegistrationRepository aircraftRegistrationRepository;
 
         public AircraftCertRegistrationsFMController(
@@ -37,7 +36,6 @@ namespace Gva.Api.Controllers.Aircrafts
             IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
             ICaseTypeRepository caseTypeRepository,
-            IAircraftDocumentDebtFMRepository aircraftDocumentDebtFMRepository,
             IAircraftRegistrationRepository aircraftRegistrationRepository,
             UserContext userContext)
             : base("aircraftCertRegistrationsFM", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
@@ -49,7 +47,6 @@ namespace Gva.Api.Controllers.Aircrafts
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
             this.caseTypeRepository = caseTypeRepository;
-            this.aircraftDocumentDebtFMRepository = aircraftDocumentDebtFMRepository;
             this.aircraftRegistrationRepository = aircraftRegistrationRepository;
         }
 
@@ -77,13 +74,6 @@ namespace Gva.Api.Controllers.Aircrafts
             };
 
             return Ok(new CaseTypePartDO<AircraftCertRegistrationFMDO>(newCertRegFM, caseDO));
-
-        }
-
-        [Route("{partIndex}/debts")]
-        public IHttpActionResult GetRegistrationDebts(int lotId, int partIndex, int? caseTypeId = null)
-        {
-            return Ok(this.aircraftDocumentDebtFMRepository.GetDocumentDebts(lotId, partIndex, caseTypeId));
         }
 
         [Route("view")]
@@ -233,35 +223,8 @@ namespace Gva.Api.Controllers.Aircrafts
                     certRegistartionPartVersion = lot.CreatePart<AircraftCertRegistrationFMDO>(this.path + "/*", partVersionDO.Part, this.userContext);
                     this.fileRepository.AddFileReference(certRegistartionPartVersion.Part, partVersionDO.Case);
 
-                    //copy all active debts of the old registration to the new one
-                    List<CaseTypePartDO<AircraftDocumentDebtFMDO>> documentDebts =
-                        this.aircraftDocumentDebtFMRepository.GetRegistrationDebts(lotId, oldRegistration.Part.Index, null)
-                        .Where(r => r.Part.IsActive).ToList();
-
-                    List<PartVersion<AircraftDocumentDebtFMDO>> documentDebtsPartsVersions = new List<PartVersion<AircraftDocumentDebtFMDO>>();
-                    foreach (var documentDebt in documentDebts)
-                    {
-                        documentDebt.Part.Registration = this.aircraftRegistrationRepository.GetAircraftRegistrationNoms(lotId)
-                            .Where(r => r.NomValueId == certRegistartionPartVersion.Part.Index)
-                            .Single();
-
-                        PartVersion<AircraftDocumentDebtFMDO> documentDebtPartVersion =
-                            lot.CreatePart<AircraftDocumentDebtFMDO>("aircraftDocumentDebtsFM/*", documentDebt.Part, this.userContext);
-                        this.fileRepository.AddFileReference(documentDebtPartVersion.Part, documentDebt.Case);
-
-                        documentDebtsPartsVersions.Add(documentDebtPartVersion);
-                    }
-
                     lot.Commit(this.userContext, lotEventDispatcher);
                     this.unitOfWork.Save();
-
-                    if (documentDebtsPartsVersions.Count > 0)
-                    {
-                        foreach (var documentDebtsPartsVersion in documentDebtsPartsVersions)
-                        {
-                            this.lotRepository.ExecSpSetLotPartTokens(documentDebtsPartsVersion.PartId);
-                        }
-                    }
                 }
                 else
                 {

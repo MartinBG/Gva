@@ -6,7 +6,6 @@
 
   module.exports = {
     aircraft1Debt1: {
-      certId: '123',
       regDate: '2005-09-04T00:00',
       regTime: {
         hours: '12',

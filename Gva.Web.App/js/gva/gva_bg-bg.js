@@ -956,8 +956,6 @@
           deleteRadio: 'Изтрий'
         },
         debtSearchFM: {
-          registrationCertNumber: 'Рег. №',
-          registrationActNumber: 'Дел. №',
           regDate: 'Дата',
           aircraftDebtType: 'Тежест',
           documentNumber: 'Вх.док ГВА',
@@ -1166,8 +1164,6 @@
           'export': 'Експортно удостоверение за ЛГ'
         },
         debtDirectiveFM: {
-          registrationCertNumber: 'Рег. №',
-          registrationActNumber: 'Дел. №',
           regDate: 'Дата',
           regTime: 'Час',
           aircraftDebtType: 'Тежест',
@@ -1175,8 +1171,7 @@
           documentDate: 'Дата на док',
           aircraftCreditor: 'Кредитор',
           creditorDocument: 'Док. и дата писма на кредитор',
-          inspector: 'Инспектор',
-          registration: 'Регистрация'
+          inspector: 'Инспектор'
         },
         debtCloseDirective: {
           title: 'Погасяване',

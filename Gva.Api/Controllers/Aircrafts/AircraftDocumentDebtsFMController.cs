@@ -22,7 +22,6 @@ namespace Gva.Api.Controllers.Aircrafts
         private ICaseTypeRepository caseTypeRepository;
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
-        private IAircraftDocumentDebtFMRepository aircraftDocumentDebtFMRepository;
 
         public AircraftDocumentDebtsFMController(
             IUnitOfWork unitOfWork,
@@ -31,25 +30,16 @@ namespace Gva.Api.Controllers.Aircrafts
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
-            IAircraftDocumentDebtFMRepository aircraftDocumentDebtFMRepository,
             UserContext userContext)
             : base("aircraftDocumentDebtsFM", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.caseTypeRepository = caseTypeRepository;
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
-            this.aircraftDocumentDebtFMRepository = aircraftDocumentDebtFMRepository;
-        }
-
-        public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
-        {
-            var documentDebts = this.aircraftDocumentDebtFMRepository.GetDocumentDebts(lotId: lotId, caseTypeId: caseTypeId);
-
-            return Ok(documentDebts);
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewDocumentDebtFM (int lotId, int? appId = null)
+        public IHttpActionResult GetNewDocumentDebtFM(int lotId, int? appId = null)
         {
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
             CaseDO caseDO = new CaseDO()
