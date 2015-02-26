@@ -1392,7 +1392,7 @@
         inspectorDirective: {
           checkedBy: 'Заверил',
           inspector: 'Инспектор ГВА',
-          examiner: 'Проверяващ',
+          examiner: 'Персонал за преглед',
           other: 'Друг'
         }
       },
