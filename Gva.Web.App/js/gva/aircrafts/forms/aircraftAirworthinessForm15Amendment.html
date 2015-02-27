@@ -2,11 +2,9 @@
   <div class="row">
     <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessForm15AmendmentDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="date" ng-model="model.validToDate" ng-required="true" l10n-text="aircrafts.airworthinessForm15AmendmentDirective.validToDate" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="text" ng-model="model.approvalNumber" ng-required="true" l10n-text="aircrafts.airworthinessForm15AmendmentDirective.approvalNumber" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.organization" alias="'organizations'" l10n-text="aircrafts.airworthinessForm15AmendmentDirective.organzation" class="col-md-4 col-sm-8"></sc-field>
-    <sc-field type="text" ng-model="model.refNumber" ng-required="true" l10n-text="aircrafts.airworthinessForm15AmendmentDirective.refNumber" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.organization" alias="'organizations'" l10n-text="aircrafts.airworthinessForm15AmendmentDirective.organization" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
     <gva-aircraft-inspector name="inspector" ng-model="model.inspector" readonly="readonly" sc-form-params="{ inspectorTypes: ['examiner','other'] }"></gva-aircraft-inspector>

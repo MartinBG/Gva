@@ -15,8 +15,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
         [Required(ErrorMessage = "ValidToDate is required.")]
         public DateTime? ValidToDate { get; set; }
 
-        [Required(ErrorMessage = "ApprovalNumber is required.")]
-        public string ApprovalNumber { get; set; }
+        public NomValue Organization { get; set; }
 
         [Required(ErrorMessage = "Inspector is required.")]
         public AircraftInspectorDO Inspector { get; set; }

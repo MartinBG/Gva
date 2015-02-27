@@ -553,8 +553,7 @@ namespace Gva.MigrationTool.Sets
                         dValid = Utils.FmToDate(r.Field<string>("dValid")),
 
                         t_CAA_Inspetor = r.Field<string>("t_CAA_Inspector"),
-                        t_Reviewed_By = r.Field<string>("t_Reviewed_By"),
-                        t_ARC_RefNo = r.Field<string>("t_ARC_RefNo")
+                        t_Reviewed_By = r.Field<string>("t_Reviewed_By")
                     })
                 .ToList();
 
