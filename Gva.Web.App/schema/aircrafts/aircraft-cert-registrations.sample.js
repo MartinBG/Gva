@@ -19,7 +19,6 @@
       paragraph: '',
       paragraphAlt: '',
       aircraftNewOld: nomenclatures.get('aircraftNewOld', 'new'),
-      operationType: nomenclatures.get('operationTypes', 'OT1'),
       isActive: nomenclatures.get('boolean', 'false'),
       removal: {
         date: '2003-05-15T00:00',
@@ -49,7 +48,6 @@
       paragraph: '',
       paragraphAlt: '',
       aircraftNewOld: nomenclatures.get('aircraftNewOld', 'new'),
-      operationType: nomenclatures.get('operationTypes', 'OT2'),
       isActive: nomenclatures.get('boolean', 'false'),
       removal: {
         date: '2007-05-15T00:00',
@@ -79,7 +77,6 @@
       paragraph: '',
       paragraphAlt: '',
       aircraftNewOld: nomenclatures.get('aircraftNewOld', 'new'),
-      operationType: nomenclatures.get('operationTypes', 'OT1'),
       isActive: nomenclatures.get('boolean', 'false'),
       removal: {
         date: '2013-05-15T00:00',
@@ -109,7 +106,6 @@
       paragraph: '',
       paragraphAlt: '',
       aircraftNewOld: nomenclatures.get('aircraftNewOld', 'new'),
-      operationType: nomenclatures.get('operationTypes', 'OT1'),
       isActive: nomenclatures.get('boolean', 'true'),
       removal: {
         date: null,

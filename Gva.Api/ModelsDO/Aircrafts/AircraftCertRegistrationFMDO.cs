@@ -41,8 +41,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public List<NomValue> Limitations { get; set; }
 
-        public NomValue OperationType { get; set; }
-
         public string LeasingDocNumber { get; set; }
 
         public DateTime? LeasingDocDate { get; set; }
