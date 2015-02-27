@@ -7,9 +7,11 @@
     $state,
     $stateParams,
     AircraftCertAirworthinessesFM,
+    AircraftCertRegistrationsFM,
     originalAw,
     scMessage
   ) {
+
     function resetAw() {
       $scope.aw = _.cloneDeep(originalAw);
     }
@@ -23,6 +25,18 @@
 
     resetAw();
     resetReviews();
+
+    $scope.disableNewAmmendment = false;
+    $scope.$watch('aw.part.registration', function() {
+      AircraftCertRegistrationsFM.get({
+          id: $stateParams.id,
+          ind: $scope.aw.part.registration.nomValueId
+        })
+      .$promise
+      .then(function (reg) {
+        $scope.disableNewAmmendment = reg.part.status.code !== '1' && reg.part.status.code !== '2';
+      });
+    });
 
     $scope.isEditAw = false;
     $scope.isEditReview = false;
@@ -154,6 +168,7 @@
     '$state',
     '$stateParams',
     'AircraftCertAirworthinessesFM',
+    'AircraftCertRegistrationsFM',
     'aircraftCertAirworthiness',
     'scMessage'
   ];
@@ -170,6 +185,6 @@
       }
     ]
   };
-
+  
   angular.module('gva').controller('CertAirworthinessesFMEditCtrl', CertAirworthinessesFMEditCtrl);
 }(angular));

@@ -75,7 +75,7 @@
           <sc-button 
             ng-if="reviews && reviews.length && (aw.part.airworthinessCertificateType.alias === 'f24' || aw.part.airworthinessCertificateType.alias === 'f25')"
             ng-show="!isEditReview"
-            ng-disabled="reviews[reviews.length - 1] !== currentReview || reviews[reviews.length - 1].amendment2"
+            ng-disabled="reviews[reviews.length - 1] !== currentReview || reviews[reviews.length - 1].amendment2 || disableNewAmmendment"
             btn-click="newAmendment()" name="newAmendmentBtn" text="aircrafts.editAirworthiness.newAmendment" class="btn btn-primary btn-xs" icon="glyphicon-plus">
           </sc-button>
           <sc-button ng-if="reviews && reviews.length"
