@@ -6,7 +6,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftCertDeregFMDO
     {
-        [Required(ErrorMessage = "Date is required.")]
         public DateTime? Date { get; set; }
 
         [Required(ErrorMessage = "Reason is required.")]
