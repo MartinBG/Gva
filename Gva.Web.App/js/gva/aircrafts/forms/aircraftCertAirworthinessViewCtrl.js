@@ -4,12 +4,6 @@
 
   function AircraftCertAirworthinessViewCtrl($scope, $state, scFormParams) {
     $scope.aircraftId = scFormParams.lotId;
-    $scope.status = function() {
-      var lastReview = $scope.model.reviews[$scope.model.reviews.length - 1];
-      return lastReview.amendment2 ? lastReview.amendment2.status.name :
-             lastReview.amendment1 ? lastReview.amendment1.status.name :
-             lastReview.status.name;
-    };
 
     $scope.validFromDate = function () {
       if (!$scope.model || !$scope.model.reviews || !$scope.model.reviews.length) {
