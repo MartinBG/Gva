@@ -426,7 +426,6 @@
     <Content Include="js\gva\organizations\forms\organizationCertificate.html" />
     <Content Include="js\gva\organizations\forms\organizationCertificateCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationData.html" />
-    <Content Include="js\gva\organizations\forms\organizationDataCtrl.js" />
     <Content Include="js\gva\organizations\forms\organizationDocumentOther.html" />
     <Content Include="js\gva\organizations\forms\organizationEquipment.html" />
     <Content Include="js\gva\organizations\forms\organizationEquipmentCtrl.js" />

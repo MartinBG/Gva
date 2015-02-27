@@ -267,8 +267,7 @@
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationData',
-      templateUrl: 'js/gva/organizations/forms/organizationData.html',
-      controller: 'OrganizationDataCtrl'
+      templateUrl: 'js/gva/organizations/forms/organizationData.html'
     });
     scaffoldingProvider.form({
       name: 'gvaOrganizationAddress',

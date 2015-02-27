@@ -8,6 +8,10 @@ namespace Gva.Api.ModelsDO.Organizations
 {
     public class OrganizationDataDO
     {
+        public OrganizationDataDO() 
+        {
+            this.CaseTypes = new List<NomValue>();
+        }
 
         [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
@@ -19,7 +23,6 @@ namespace Gva.Api.ModelsDO.Organizations
 
         public string Uin { get; set; }
 
-        [MinimumLength(1, ErrorMessage = "CaseTypes are required.")]
         public List<NomValue> CaseTypes { get; set; }
 
         public string Cao { get; set; }
