@@ -39,6 +39,13 @@
       <sc-column title="aircrafts.editAirworthiness.airworthinessReviewType" has-content="true">
         {{item.airworthinessReviewType.name}}
       </sc-column>
+      <sc-column title="aircrafts.editAirworthiness.status" has-content="true" class="wrap">
+        <div ng-switch="!!item.amendment1 + !!item.amendment2">
+          <span ng-switch-when="0">{{item.status.name}}</span>
+          <span ng-switch-when="1">{{item.amendment1.status.name}}</span>
+          <span ng-switch-when="2">{{item.amendment2.status.name}}</span>
+        </div>
+      </sc-column>
       <sc-column title="aircrafts.editAirworthiness.issueDate" has-content="true">
         {{item.issueDate | date:'mediumDate'}}
       </sc-column>

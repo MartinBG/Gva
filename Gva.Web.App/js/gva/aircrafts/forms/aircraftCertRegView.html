@@ -40,6 +40,10 @@
           <label class="control-label" l10n-text="aircrafts.regViewDirective.incomingDocDate"></label>
           <input disabled name="incomingDocDate" type="text" class="form-control input-sm" value="{{model.incomingDocDate | date: 'dd.MM.yyyy'}}">
         </div>
+        <div class="form-group col-md-4 col-sm-5">
+          <label class="control-label" l10n-text="aircrafts.regViewDirective.status"></label>
+          <input disabled name="status" type="text" class="form-control input-sm" value="{{model.status.name}}">
+        </div>
       </div>
       <div class="row">
         <div class="form-group col-md-4 col-sm-6">

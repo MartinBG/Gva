@@ -53,6 +53,8 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public NomValue LessorPerson { get; set; }
 
+        public NomValue Status { get; set; }
+
         public string LeasingAgreement { get; set; }
 
         public AircraftCertDeregFMDO Removal { get; set; }

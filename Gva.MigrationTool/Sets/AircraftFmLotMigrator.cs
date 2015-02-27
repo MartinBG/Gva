@@ -530,9 +530,9 @@ namespace Gva.MigrationTool.Sets
 
             var issues = this.sqlConn.CreateStoreCommand(
                 @"select * from 
-                    (select nRegNum, NumberIssue, t_ARC_Type, nStatus, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspetor as t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA1 as r1
+                    (select nRegNum, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspetor as t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA1 as r1
                         union all
-                    select nRegNum, NumberIssue, t_ARC_Type, nStatus, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA2 as r2) s
+                    select nRegNum, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA2 as r2) s
                 where {0}
                 order by NumberIssue",
                 new DbClause("nRegNum = {0}", certId)
@@ -544,7 +544,6 @@ namespace Gva.MigrationTool.Sets
                         __migrTable = "CofA1, CofA2",
 
                         t_ARC_Type = r.Field<string>("t_ARC_Type"),
-                        nStatus = r.Field<string>("nStatus"),
 
                         dDateEASA_25_Issue = Utils.FmToDate(r.Field<string>("dDateEASA_25_Issue")),
                         d_24_Issue = Utils.FmToDate(r.Field<string>("d_24_Issue")),
@@ -636,9 +635,7 @@ namespace Gva.MigrationTool.Sets
                     var review = Utils.ToJObject( new {
                         issueDate = issues[i].dFrom,
                         validToDate = issues[i].dValid,
-                        approvalNumber = issues[i].t_ARC_RefNo,
-                        inspector = new JObject(),
-                        status = noms["aircraftRegStatsesFm"].ByOldId(issues[i].nStatus)
+                        inspector = new JObject()
                     });
 
                     reviews.Add(review);
@@ -675,9 +672,7 @@ namespace Gva.MigrationTool.Sets
                             review.Add("amendment1", Utils.ToJObject( new {
                                 issueDate = issues[i + 1].dFrom,
                                 validToDate = issues[i + 1].dValid,
-                                approvalNumber = issues[i + 1].t_ARC_RefNo,
-                                inspector = getExaminerOrOther(issues[i + 1].t_Reviewed_By),
-                                status = noms["aircraftRegStatsesFm"].ByOldId(issues[i + 1].nStatus)
+                                inspector = getExaminerOrOther(issues[i + 1].t_Reviewed_By)
                             }));
 
                             trySetType(issues[i + 1].t_ARC_Type);
@@ -688,9 +683,7 @@ namespace Gva.MigrationTool.Sets
                                 review.Add("amendment2",  Utils.ToJObject( new {
                                     issueDate = issues[i + 2].dFrom,
                                     validToDate = issues[i + 2].dValid,
-                                    approvalNumber = issues[i + 2].t_ARC_RefNo,
-                                    inspector = getExaminerOrOther(issues[i + 2].t_Reviewed_By),
-                                    status = noms["aircraftRegStatsesFm"].ByOldId(issues[i + 2].nStatus)
+                                    inspector = getExaminerOrOther(issues[i + 2].t_Reviewed_By)
                                 }));
 
                                 trySetType(issues[i + 2].t_ARC_Type);

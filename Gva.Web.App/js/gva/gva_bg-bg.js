@@ -896,6 +896,7 @@
           saveAw: 'Запис',
           cancelAw: 'Отказ',
           reviews: 'Прегледи',
+          status: 'Статус',
           airworthinessReviewType: 'Тип',
           issueDate: 'Издадено на',
           from: 'Валидно от',
@@ -990,6 +991,7 @@
           register: 'Регистър',
           regMark: 'Рег. знак',
           certDate: 'Дата на рег.',
+          status: 'Статус',
           owner: 'Собственик',
           oper: 'Оператор',
           catAW: 'Категория на опериране',
@@ -1021,7 +1023,8 @@
           validToDate: 'Валидно до',
           validFromDate: 'Валидно от',
           inspector: 'Заверил инспектор',
-          'new': 'Нова ЛГ'
+          'new': 'Нова ЛГ',
+          status: 'Статус'
         },
         noiseViewDirective: {
           title: 'Удостоверение за шум',
@@ -1071,24 +1074,18 @@
         },
         airworthinessReviewOtherDirective: {
           issueDate: 'Дата на издаване',
-          validToDate: 'Валиден до',
-          approvalNumber: '№ на одобрение',
-          status: 'Статус'
+          validToDate: 'Валиден до'
         },
         airworthinessForm15MainDirective: {
           airworthinessReviewType: 'Тип',
           issueDate: 'Дата на издаване',
           validToDate: 'Валиден до',
-          approvalNumber: '№ на одобрение',
-          status: 'Статус'
+          organization: 'Организация'
         },
         airworthinessForm15AmendmentDirective: {
           issueDate: 'Дата на издаване',
           validToDate: 'Валиден до',
-          approvalNumber: '№ на одобрение',
-          organzation: 'Организация',
-          refNumber: 'Реф.№ одобрение',
-          status: 'Статус'
+          organization: 'Организация'
         },
         noiseDirective: {
           issueNumber: '№',
@@ -1139,7 +1136,7 @@
           leasingLessor: 'Лизингодател',
           leasingAgreement: 'Договор за лизинг и анекси към него',
           leasingEndDate: 'Срок',
-          status: 'Състояние',
+          status: 'Статус',
           EASA25Number: 'EASA Form 25',
           EASA25Date: 'Дата',
           EASA15Date: 'EASA Form 15',

@@ -51,7 +51,7 @@ namespace Gva.Api.Controllers.Aircrafts
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCertRegFM (int lotId)
+        public IHttpActionResult GetNewCertRegFM(int lotId)
         {
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();
             CaseDO caseDO = new CaseDO()
@@ -81,7 +81,7 @@ namespace Gva.Api.Controllers.Aircrafts
         public IHttpActionResult GetRegistrationView(int lotId, int? partIndex = null)
         {
             var index = this.lotRepository.GetLotIndex(lotId).Index;
-            var registrations = index.GetParts<AircraftCertRegistrationFMDO>("aircraftCertRegistrationsFM");
+            var registrations = index.GetParts<AircraftCertRegistrationFMDO>(this.path);
             var airworthinesses = index.GetParts<AircraftCertAirworthinessFMDO>("aircraftCertAirworthinessesFM");
 
             if (registrations.Length > 0)
