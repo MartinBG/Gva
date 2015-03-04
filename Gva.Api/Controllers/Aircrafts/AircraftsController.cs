@@ -20,6 +20,7 @@ using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 using Common.Filters;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.Models.Views.Aircraft;
 
 namespace Gva.Api.Controllers
 {
@@ -71,6 +72,15 @@ namespace Gva.Api.Controllers
             var aircrafts = this.aircraftRepository.GetAircrafts(mark: mark, manSN: manSN, modelAlt: modelAlt, icao: icao, airCategory: airCategory, aircraftProducer: aircraftProducer, exact: exact);
 
             return Ok(aircrafts.Select(a => new AircraftViewDO(a)));
+        }
+
+        [Route("registrations")]
+        public IHttpActionResult GetAircraftsRegistrations(string regMark = null, int? certNumber = null, int? actNumber = null)
+        {
+            var aircrafts = this.aircraftRegistrationRepository
+                .GetAircraftsRegistrations(regMark: regMark, certNumber: certNumber, actNumber: actNumber);
+
+            return Ok(aircrafts.ToList());
         }
 
         [Route("{lotId}")]

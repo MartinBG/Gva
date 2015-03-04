@@ -19,6 +19,11 @@
       newAircraft: {
         method: 'GET',
         url: 'api/aircrafts/new'
+      },
+      getRegistrations: {
+        method: 'GET',
+        url: 'api/aircrafts/registrations',
+        isArray: true
       }
     });
   }]);

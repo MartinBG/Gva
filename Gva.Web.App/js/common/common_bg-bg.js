@@ -36,6 +36,7 @@
           aircrafts: {
             title: 'ВС',
             search: 'Въздухоплавателни средства',
+            registrations: 'Регистрации',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление'
           },

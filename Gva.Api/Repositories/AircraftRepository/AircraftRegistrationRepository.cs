@@ -2,6 +2,7 @@
 using System.Linq;
 using Common.Api.Models;
 using Common.Data;
+using Common.Linq;
 using Gva.Api.Models.Views.Aircraft;
 using Gva.Api.ModelsDO.Aircrafts;
 using Regs.Api.Repositories.LotRepositories;
@@ -26,6 +27,30 @@ namespace Gva.Api.Repositories.AircraftRepository
             return this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
                 .Where(v => v.CertRegisterId == registerId)
                 .Max(v => (int?)v.ActNumber);
+        }
+
+        public List<GvaViewAircraftRegistration> GetAircraftsRegistrations(string regMark = null, int? certNumber = null, int? actNumber = null)
+        {
+            var predicate = PredicateBuilder.True<GvaViewAircraftRegistration>();
+
+            if (!string.IsNullOrEmpty(regMark))
+            {
+                predicate = predicate.And(a => a.RegMark.Contains(regMark));
+            }
+
+            if (certNumber.HasValue)
+            {
+                predicate = predicate.And(a => a.CertNumber == certNumber.Value);
+            }
+
+            if (actNumber.HasValue)
+            {
+                predicate = predicate.And(a => a.ActNumber == actNumber.Value);
+            }
+
+            return this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
+                .Where(predicate)
+                .ToList();
         }
 
         public List<NomValue> GetAircraftRegistrationNoms(int lotId, string term = null)

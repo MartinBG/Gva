@@ -156,6 +156,8 @@
     <Content Include="js\gva\aircrafts\views\certSmods\smodsNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certSmods\smodsSearch.html" />
     <Content Include="js\gva\aircrafts\views\certSmods\smodsSearchCtrl.js" />
+    <Content Include="js\gva\aircrafts\views\aircraftsRegistrationsSearch.html" />
+    <Content Include="js\gva\aircrafts\views\aircraftsRegistrationsSearchCtrl.js" />
     <Content Include="js\gva\aircrafts\views\docDebtsFM\debtsEdit.html" />
     <Content Include="js\gva\aircrafts\views\docDebtsFM\debtsEditCtrl.js" />
     <Content Include="js\gva\aircrafts\views\docDebtsFM\debtsNew.html" />

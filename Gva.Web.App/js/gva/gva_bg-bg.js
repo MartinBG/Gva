@@ -692,6 +692,12 @@
           search: 'Търси',
           mark: 'Рег. знак'
         },
+        registrations: {
+          actNumber: 'Деловоден №',
+          certNumber: 'Регистрационен №',
+          search: 'Търси',
+          regMark: 'Регистрационен. знак'
+        },
         aircraftScannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',
@@ -3865,6 +3871,7 @@
         'root.persons.view.reports.edit': 'Преглед на отчет',
         'root.persons.view.examinationSystem': 'Изпитна система',
         'root.aircrafts': 'ВС',
+        'root.aircrafts.registrations': 'Регистрации на Въздухоплавателни средства',
         'root.aircrafts.new': 'Ново ВС',
         'root.aircrafts.view': 'Данни за ВС',
         'root.aircrafts.view.edit': 'Преглед',
