@@ -1752,7 +1752,6 @@ namespace Gva.MigrationTool.Nomenclatures
                             new
                             {
                                 general = r.Field<string>("GENERAL"),
-                                point = 8
                             })
                     })
                 .ToList();
