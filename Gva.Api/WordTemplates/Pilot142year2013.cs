@@ -94,8 +94,25 @@ namespace Gva.Api.WordTemplates
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var otherLicences = PilotUtils.GetOtherLicences(publisherCaaCode, licenceCaCode, lot, lastEdition, includedLicences, this.nomRepository);
             var rtoRating = PilotUtils.GetRtoRating(includedRatings, ratingEditions);
-            var langLevel = Utils.GetLangCerts(includedLangCerts);
-            var limitations = this.GetLimitations(lastEdition, includedMedicals, includedExams);
+            var langLevel = includedLangCerts.Where(c => c.LangLevel != null).Select(c => new
+            {
+                LEVEL = c.LangLevel.Name,
+                VALID_DATE = c.LangLevel.Name.Contains("6") ? "for life" :
+                    (c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToShortDateString() : "unlimited")
+            })
+            .ToList<object>();
+
+            var allIncludedLimitations66Codes = lastEdition.Limitations.Select(s => s.Code);
+            var allIncludedLimitations66 = this.nomRepository.GetNomValues("limitations66")
+                .Where(l => allIncludedLimitations66Codes.Contains(l.Code));
+
+            var limitationsP8 = allIncludedLimitations66
+                .Where(l => l.TextContent.Get<int>("point") == 8)
+                .Select(l => new { LIMIT_NAME = l.Name });
+            var limitationsP13 = allIncludedLimitations66
+                .Where(l => l.TextContent.Get<int>("point") == 13)
+                .Select(l => new { LIMIT_NAME = l.Name });
+
 
             List<int> authorizationGroupIds = nomRepository.GetNomValues("authorizationGroups")
                 .Where(nv => nv.Code == "FT" || nv.Code == "FC")
@@ -124,7 +141,8 @@ namespace Gva.Api.WordTemplates
                     RTO_NOTES = rtoRating != null ? rtoRating.Notes : null,
                     RTO_NOTES_EN = rtoRating != null ? rtoRating.NotesAlt : null,
                     ENG_LEVEL = langLevel,
-                    LIMITS = limitations,
+                    LIMITSp8 = limitationsP8,
+                    LIMITSp13 = limitationsP13,
                     T_RATING = ratings,
                     INSTR_DATA = instructorData.Count > 0 ? new { INSTRUCTOR = instructorData } : null,
                     INSTRUCTOR_NO_ENTRIES = instrNoEntries,
@@ -143,7 +161,7 @@ namespace Gva.Api.WordTemplates
                     RTO_NOTES2 = rtoRating != null ? rtoRating.Notes : null,
                     RTO_NOTES2_EN = rtoRating != null ? rtoRating.NotesAlt : null,
                     ENG_LEVEL1 = langLevel,
-                    T_LIMITS = limitations,
+                    LIMITS2p13 = limitationsP13,
                     EXAMINER_DATA1 = examinerData.Count > 0 ? new { EXAMINER1 = examinerData } : null,
                     EXAMINER1_NO_ENTRIES = examinerNoData,
                     L_ABBREVIATION = this.GetAbbreviations()
