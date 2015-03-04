@@ -1,5 +1,5 @@
 ﻿GO
-INSERT [dbo].[Noms] ([Name], [Alias], [Category]) VALUES (N'Нива на несъответстие', N'disparityLevels', N'inspection')
+INSERT [dbo].[Noms] ([Name], [Alias], [Category]) VALUES (N'Нива на несъответстие', N'disparityLevels', N'system')
 
 DECLARE @nomId INT = @@IDENTITY
 

@@ -1,9 +1,15 @@
 ﻿  <sc-tabs tab-list="{
-    'common.nomenclatures.tabs.systemConfigs': {
-      'common.nomenclatures.tabs.applications': {
-        state: 'root.nomenclatures.search.applications',
+    'common.nomenclatures.tabs.system' : {
+      state: 'root.nomenclatures.search.system',
+      stateParams: {
+        category: 'system'
+      }
+    },
+    'common.nomenclatures.tabs.persons' : {
+      'common.nomenclatures.tabs.personsCommon': {
+        state: 'root.nomenclatures.search.persons',
         stateParams: {
-          category: 'application'
+          category: 'person'
         }
       },
       'common.nomenclatures.tabs.licences': {
@@ -17,37 +23,7 @@
         stateParams: {
           category: 'rating'
         }
-      },
-      'common.nomenclatures.tabs.documents': {
-        state: 'root.nomenclatures.search.documents',
-        stateParams: {
-          category: 'document'
-        }
-      },
-      'common.nomenclatures.tabs.orgApprovals': {
-        state: 'root.nomenclatures.search.orgApprovals',
-        stateParams: {
-          category: 'orgApproval'
-        }
-      },
-      'common.nomenclatures.tabs.inspections': {
-        state: 'root.nomenclatures.search.inspections',
-        stateParams: {
-          category: 'inspection'
-        }
       }
-    },
-    'common.nomenclatures.tabs.system' : {
-      state: 'root.nomenclatures.search.system',
-      stateParams: {
-        category: 'system'
-      }
-    },
-    'common.nomenclatures.tabs.persons' : {
-        state: 'root.nomenclatures.search.persons',
-        stateParams: {
-          category: 'person'
-        }
     },
     'common.nomenclatures.tabs.aircrafts' : {
         state: 'root.nomenclatures.search.aircrafts',

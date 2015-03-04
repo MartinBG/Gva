@@ -1,5 +1,5 @@
 ﻿GO
-INSERT [dbo].[Noms] ([Name], [Alias], [Category]) VALUES (N'Типове документи', N'documentParts', N'document')
+INSERT [dbo].[Noms] ([Name], [Alias], [Category]) VALUES (N'Видове документи', N'documentParts', N'system')
 
 DECLARE @nomId INT = @@IDENTITY
 
