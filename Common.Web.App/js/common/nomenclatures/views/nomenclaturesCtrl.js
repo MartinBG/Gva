@@ -10,10 +10,6 @@
     nomenclatures
   ) {
     $scope.nomenclatures = nomenclatures;
-
-    $scope.viewNomenclatureValues = function (item) {
-      return $state.go('root.nomenclatures.values', { nomId: item.nomId });
-    };
   }
 
   NomenclaturesCtrl.$inject = [

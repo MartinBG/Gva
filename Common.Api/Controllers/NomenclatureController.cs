@@ -7,6 +7,7 @@ using Common.Linq;
 using Newtonsoft.Json.Linq;
 using System;
 using Common.Data;
+using Common.Api.DataObjects;
 
 namespace Common.Api.Controllers
 {
@@ -78,13 +79,31 @@ namespace Common.Api.Controllers
         public IHttpActionResult GetNomenclatureValue(int nomId, int id)
         {
             NomValue nomValue = this.nomRepository.GetNomValue(id);
+            JObject textContent = null;
+            if (!string.IsNullOrEmpty(nomValue.TextContentString))
+            {
+                 textContent = JObject.Parse(nomValue.TextContentString);
+            }
+            NomValueDO nomValueDO = new NomValueDO()
+            {
+                NomValueId = nomValue.NomValueId,
+                NomId = nomValue.NomId,
+                Code = nomValue.Code,
+                Name = nomValue.Name,
+                NameAlt = nomValue.NameAlt,
+                ParentValueId = nomValue.ParentValueId,
+                Alias = nomValue.Alias,
+                TextContent = textContent,
+                IsActive = nomValue.IsActive,
+                Order = nomValue.Order
+            };
 
-            return Ok(nomValue);
+            return Ok(nomValueDO);
         }
 
         [Route("api/admin/nomenclatures/{nomId:int}/values")]
         [HttpPost]
-        public IHttpActionResult CreateNomenclatureValue(int nomId, NomValue data)
+        public IHttpActionResult CreateNomenclatureValue(int nomId, NomValueDO data)
         {
             NomValue nomValue = new NomValue();
 
@@ -96,6 +115,11 @@ namespace Common.Api.Controllers
             nomValue.IsActive = data.IsActive;
             nomValue.Order = data.Order;
 
+            if (data.TextContent != null)
+            {
+                nomValue.TextContentString = data.TextContent.ToString();
+            }
+
             this.unitOfWork.DbContext.Set<NomValue>().Add(nomValue);
 
             this.unitOfWork.Save();
@@ -105,7 +129,7 @@ namespace Common.Api.Controllers
 
         [Route("api/admin/nomenclatures/{nomId:int}/values/{id:int}")]
         [HttpPost]
-        public IHttpActionResult UpdateNomenclatureValue(int nomId, int id, NomValue data)
+        public IHttpActionResult UpdateNomenclatureValue(int nomId, int id, NomValueDO data)
         {
             NomValue nomValue = this.unitOfWork.DbContext.Set<NomValue>().FirstOrDefault(e => e.NomValueId == id);
 
@@ -115,6 +139,11 @@ namespace Common.Api.Controllers
             nomValue.ParentValueId = data.ParentValueId;
             nomValue.IsActive = data.IsActive;
             nomValue.Order = data.Order;
+
+            if (data.TextContent != null)
+            {
+                nomValue.TextContentString = data.TextContent.ToString();
+            }
 
             this.unitOfWork.Save();
 
@@ -198,7 +227,8 @@ namespace Common.Api.Controllers
                 nomValueId = result.NomValueId,
                 name = result.Name,
                 alias = result.Alias,
-                isActive = result.IsActive
+                isActive = result.IsActive,
+                textContent = result.TextContent
             });
         }
 

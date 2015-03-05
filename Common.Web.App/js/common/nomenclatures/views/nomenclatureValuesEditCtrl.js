@@ -12,6 +12,7 @@
     scMessage
   ) {
     $scope.nomenclatureValue = nomenclatureValue;
+    $scope.alias = $stateParams.alias;
 
     $scope.save = function save() {
       return $scope.nomenclatureForm.$validate().then(function () {
@@ -22,14 +23,18 @@
           }, $scope.nomenclatureValue)
             .$promise.then(function () {
               return $state.go('root.nomenclatures.search.values',
-                { nomId: $stateParams.nomId }, { reload: true });
+                { nomId: $stateParams.nomId, alias: $scope.alias },
+                { reload: true });
             });
         }
       });
     };
 
     $scope.cancel = function cancel() {
-      return $state.go('root.nomenclatures.search.values', { nomId: $stateParams.nomId });
+      return $state.go('root.nomenclatures.search.values', {
+        nomId: $stateParams.nomId,
+        alias: $scope.alias
+      });
     };
 
     $scope.deleteNomenclatureValue = function () {
@@ -41,7 +46,8 @@
               id: $stateParams.id
             }).$promise.then(function () {
               return $state.go('root.nomenclatures.values',
-                { nomId: $stateParams.nomId }, { reload: true });
+                { nomId: $stateParams.nomId, alias: $scope.alias },
+                { reload: true });
             });
           }
         });

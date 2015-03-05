@@ -130,6 +130,7 @@
     <Compile Include="Models\Blob.cs" />
     <Compile Include="Models\Classification.cs" />
     <Compile Include="Models\ClassificationRelation.cs" />
+    <Compile Include="DataObjects\NomValueDO.cs" />
     <Compile Include="Models\DbContextExtensions.cs" />
     <Compile Include="Models\ClassificationPermission.cs" />
     <Compile Include="Models\RoleClassification.cs" />

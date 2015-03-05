@@ -14,14 +14,16 @@
     $scope.editNomenclatureValue = function (item) {
       return $state.go('root.nomenclatures.search.values.edit', {
         nomId: $stateParams.nomId,
-        id: item.nomValueId
+        id: item.nomValueId,
+        alias: $stateParams.alias
       });
     };
 
     $scope.newNomenclatureValue = function () {
       return $state.go('root.nomenclatures.search.values.edit', {
         nomId: $stateParams.nomId,
-        id: undefined
+        id: undefined,
+        alias: $stateParams.alias
       });
     };
   }

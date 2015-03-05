@@ -12,7 +12,8 @@
     $scope.nomenclatures = nomenclatures;
 
     $scope.viewNomenclatureValues = function (item) {
-      return $state.go('root.nomenclatures.search.values', { nomId: item.nomId });
+      return $state.go('root.nomenclatures.search.values', 
+        { nomId: item.nomId, alias: item.alias });
     };
   }
 

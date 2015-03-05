@@ -24,7 +24,7 @@
       .state(['root.users.new'                                 , '/new'                  , ['@root'                     , 'js/common/users/views/edit.html'                          , 'UsersEditCtrl'               ]])
       .state(['root.users.edit'                                , '/:userId'              , ['@root'                     , 'js/common/users/views/edit.html'                          , 'UsersEditCtrl'               ]])
       .state(['root.nomenclatures'                             , '/nomenclatures'                                                                                                                                     ])
-      .state(['root.nomenclatures.search'                      , '?category'             , ['@root'                     , 'js/common/nomenclatures/views/nomenclatures.html'         , 'NomenclaturesCtrl'           ]])
+      .state(['root.nomenclatures.search'                      , '?category&alias'       , ['@root'                     , 'js/common/nomenclatures/views/nomenclatures.html'         , 'NomenclaturesCtrl'           ]])
       .state(['root.nomenclatures.search.licences'             , '/licences'             , ['@root.nomenclatures.search', 'js/common/nomenclatures/views/categoryNoms.html'          , 'CategoryNomsCtrl'            ]])
       .state(['root.nomenclatures.search.ratings'              , '/ratings'              , ['@root.nomenclatures.search', 'js/common/nomenclatures/views/categoryNoms.html'          , 'CategoryNomsCtrl'            ]])
       .state(['root.nomenclatures.search.system'               , '/system'               , ['@root.nomenclatures.search', 'js/common/nomenclatures/views/categoryNoms.html'          , 'CategoryNomsCtrl'            ]])
