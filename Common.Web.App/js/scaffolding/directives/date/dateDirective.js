@@ -25,7 +25,8 @@
           autoclose: true,
           format: scDateConfig.datepickerFormat,
           language: 'bg',
-          weekStart: 1
+          weekStart: 1,
+          todayHighlight: true
         });
 
         attrs.$observe('readonly', function(value) {
