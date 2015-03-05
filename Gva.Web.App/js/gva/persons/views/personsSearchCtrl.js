@@ -10,7 +10,8 @@
     $scope.filters = {
       lin: null,
       uin: null,
-      caseType: null
+      caseType: null,
+      names: null
     };
 
     _.forOwn($stateParams, function (value, param) {
