@@ -7,15 +7,15 @@
     <sc-search-button action="clear"></sc-search-button>
   </sc-search>
 
-  <sc-datatable items="registrations" filterable="true" pageable="true" sortable="true" default-sort="actNumber">
+  <sc-datatable items="registrations" filterable="true" pageable="true" sortable="true" default-sort="actNumber" default-sorting-type="asc">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.aircrafts.view.regsFM.edit', params: { id: item.lotId, ind: item.partIndex }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-    <sc-column data="regMark" title="aircrafts.registrations.regMark">
+    <sc-column data="actNumber" title="aircrafts.registrations.actNumber">
     </sc-column>
     <sc-column data="certNumber" title="aircrafts.registrations.certNumber">
     </sc-column>
-    <sc-column data="actNumber" title="aircrafts.registrations.actNumber">
+    <sc-column data="regMark" title="aircrafts.registrations.regMark">
     </sc-column>
   </sc-datatable>
 </div>
