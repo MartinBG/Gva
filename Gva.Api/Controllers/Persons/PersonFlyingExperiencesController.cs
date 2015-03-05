@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.ModelsDO;
@@ -26,7 +27,10 @@ namespace Gva.Api.Controllers.Persons
         [Route("new")]
         public IHttpActionResult GetNewFlyingExperience(int lotId)
         {
-            PersonFlyingExperienceDO newFlyingExperience = new PersonFlyingExperienceDO();
+            PersonFlyingExperienceDO newFlyingExperience = new PersonFlyingExperienceDO()
+            {
+                DocumentDate = DateTime.Now
+            };
 
             return Ok(new CaseTypePartDO<PersonFlyingExperienceDO>(newFlyingExperience));
         }

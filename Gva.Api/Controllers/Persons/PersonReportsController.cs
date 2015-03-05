@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
@@ -49,7 +50,12 @@ namespace Gva.Api.Controllers.Persons
         [Route("new")]
         public IHttpActionResult GetNewReport(int lotId)
         {
-            return Ok(new CaseTypePartDO<PersonReportDO>(new PersonReportDO()));
+            var report = new PersonReportDO()
+            {
+                Date = DateTime.Now
+            };
+
+            return Ok(new CaseTypePartDO<PersonReportDO>(report));
         }
 
         public override IHttpActionResult GetParts(int lotId, int? caseTypeId = null)
