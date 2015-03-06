@@ -9,6 +9,7 @@ using Common.Data;
 using Common.Filters;
 using Common.Json;
 using Gva.Api.Models;
+using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Common;
 using Gva.Api.ModelsDO.Persons;
@@ -358,10 +359,28 @@ namespace Gva.Api.Controllers.Persons
         [Route("isUniqueDocNumber")]
         public IHttpActionResult IsUniqueDocNumber(string documentNumber, int? documentPersonNumber = null, int? partIndex = null)
         {
-            return Ok(new
+            bool isUnique = this.personRepository.IsUniqueDocNumber(documentNumber, documentPersonNumber, partIndex);
+
+            if (!isUnique)
             {
-                isUnique = this.personRepository.IsUniqueDocNumber(documentNumber, documentPersonNumber, partIndex)
-            });
+                var lastDocumentWithThisNumber = this.unitOfWork.DbContext.Set<GvaViewPersonDocument>()
+                    .Where(d => d.DocumentNumber == documentNumber)
+                    .OrderByDescending(d => d.DocumentPersonNumber)
+                    .FirstOrDefault();
+
+                return Ok(new
+                {
+                    isUnique = false,
+                    lastExistingGroupNumber = lastDocumentWithThisNumber.DocumentPersonNumber
+                });
+            }
+            else
+            {
+                return Ok(new
+                {
+                    isUnique = true
+                });
+            }
         }
 
         [Route("stampedDocuments")]

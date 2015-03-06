@@ -1536,6 +1536,7 @@
           date: 'Дата',
           reportNumber: 'No на отчет',
           documentPersonNumber: 'No в списъка (групов док.)',
+          groupDocNumber: 'Последен използван No в списъка',
           addCheck: 'Добави проверкa',
           includedChecks: ' Проверки',
           checksTable: {
@@ -1724,6 +1725,7 @@
           documentNumber: 'Док No',
           documentNumberCheck: 'Док No на проверка',
           documentPersonNumber: 'No в списъка (групов док.)',
+          groupDocNumber: 'Последен използван No в списъка',
           documentDateValidFrom: 'Издаден на',
           documentDateValidTo: 'Валидно до',
           personDocumentType: 'Тип документ',

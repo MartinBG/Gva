@@ -76,6 +76,10 @@
           })
         .$promise
         .then(function (result) {
+          if (!result.isUnique) {
+            $scope.lastGroupNumber = result.lastExistingGroupNumber;
+          }
+
           return result.isUnique;
         });
       } else {

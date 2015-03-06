@@ -11,10 +11,12 @@
   <div class="row">
     <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="{{documentNumberLabel}}" class="col-sm-3 col-md-2" sc-validate="{ unique: isUniqueDocNumber }" validations="{unique: 'errorTexts.notUniqueDocNumberAndPersonNumber'}"></sc-field>
     <sc-field type="int" ng-model="model.part.documentPersonNumber" l10n-text="persons.personCommonDocDirective.documentPersonNumber" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="int" ng-model="lastGroupNumber" l10n-text="persons.personCommonDocDirective.groupDocNumber" ng-if="lastGroupNumber" ng-readonly="true" class="col-sm-4 col-md-3"></sc-field>
+  </div>
+  <div class="row">
     <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.personCommonDocDirective.documentDateValidFrom" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="date" ng-model="model.part.documentDateValidTo" l10n-text="persons.personCommonDocDirective.documentDateValidTo" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
   <div class="row">
     <sc-field-group class="col-sm-6 col-md-4" text="persons.personCommonDocDirective.documentPublisher" validations="{required: 'default'}" field-name="documentPublisher">
       <sc-text ng-model="model.part.documentPublisher" name="documentPublisher" ng-required="categoryAlias !== 'check'" ng-readonly="form.$readonly"></sc-text>

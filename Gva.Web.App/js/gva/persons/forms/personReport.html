@@ -10,7 +10,7 @@
   <div class="row">
     <sc-field type="text" ng-model="model.part.documentNumber" ng-required="true" l10n-text="persons.personReportDirective.reportNumber" class="col-sm-3 col-md-2" sc-validate="{ unique: isUniqueDocNumber }" validations="{unique: 'errorTexts.notUniqueDocNumberAndPersonNumber'}"></sc-field>
     <sc-field type="text" ng-model="model.part.documentPersonNumber" l10n-text="persons.personReportDirective.documentPersonNumber" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="date" ng-model="model.part.date" ng-required="true" l10n-text="persons.personReportDirective.date" class="col-sm-3 col-md-2"></sc-field>
+        <sc-field type="int" ng-model="lastGroupNumber" l10n-text="persons.personReportDirective.groupDocNumber" ng-if="lastGroupNumber" ng-readonly="true" class="col-sm-4 col-md-3"></sc-field>
   </div>
 
   <h5 class="form-header" style="margin-top: 10px" l10n-text="persons.personReportDirective.includedChecks"></h5>
