@@ -13,7 +13,7 @@
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
-  <sc-datatable items="persons" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+  <sc-datatable items="persons" filterable="false" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.id }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
