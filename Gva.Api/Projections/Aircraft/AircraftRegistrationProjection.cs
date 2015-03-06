@@ -28,7 +28,7 @@ namespace Gva.Api.Projections.Aircraft
 
             reg.LotId = registration.Part.Lot.LotId;
             reg.PartIndex = registration.Part.Index;
-            reg.CertRegisterId = registration.Content.Register != null ? (int?)null : registration.Content.Register.NomValueId;
+            reg.CertRegisterId = registration.Content.Register.NomValueId;
             reg.CertNumber = registration.Content.CertNumber;
             reg.ActNumber = registration.Content.ActNumber;
             reg.RegMark = registration.Content.RegMark;

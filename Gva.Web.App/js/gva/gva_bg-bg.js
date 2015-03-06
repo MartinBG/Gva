@@ -696,7 +696,8 @@
           actNumber: 'Деловоден №',
           certNumber: 'Регистрационен №',
           search: 'Търси',
-          regMark: 'Регистрационен. знак'
+          regMark: 'Регистрационен. знак',
+          register: 'Регистър'
         },
         aircraftScannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',

@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity.ModelConfiguration;
+using Common.Api.Models;
 
 namespace Gva.Api.Models.Views.Aircraft
 {
@@ -8,7 +9,7 @@ namespace Gva.Api.Models.Views.Aircraft
 
         public int PartIndex { get; set; }
 
-        public int? CertRegisterId { get; set; }
+        public int CertRegisterId { get; set; }
 
         public int? CertNumber { get; set; }
 
@@ -17,6 +18,8 @@ namespace Gva.Api.Models.Views.Aircraft
         public string RegMark { get; set; }
 
         public virtual GvaViewAircraft Aircraft { get; set; }
+
+        public virtual NomValue Register { get; set; }
     }
 
     public class GvaViewAircraftRegistrationMap : EntityTypeConfiguration<GvaViewAircraftRegistration>
@@ -39,6 +42,10 @@ namespace Gva.Api.Models.Views.Aircraft
             this.HasRequired(t => t.Aircraft)
                 .WithMany()
                 .HasForeignKey(t => t.LotId);
+
+            this.HasRequired(t => t.Register)
+                .WithMany()
+                .HasForeignKey(t => t.CertRegisterId);
         }
     }
 }

@@ -75,12 +75,12 @@ namespace Gva.Api.Controllers
         }
 
         [Route("registrations")]
-        public IHttpActionResult GetAircraftsRegistrations(string regMark = null, int? certNumber = null, int? actNumber = null)
+        public IHttpActionResult GetAircraftsRegistrations(string regMark = null, int? registerId = null, int? certNumber = null, int? actNumber = null)
         {
             var aircrafts = this.aircraftRegistrationRepository
-                .GetAircraftsRegistrations(regMark: regMark, certNumber: certNumber, actNumber: actNumber);
-
-            return Ok(aircrafts.ToList());
+                .GetAircraftsRegistrations(regMark: regMark, registerId: registerId, certNumber: certNumber, actNumber: actNumber);
+            
+            return Ok(aircrafts.Select(a => new AircraftRegistrationDO(a)).ToList());
         }
 
         [Route("{lotId}")]

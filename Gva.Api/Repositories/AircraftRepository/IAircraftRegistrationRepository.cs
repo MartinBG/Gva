@@ -10,6 +10,6 @@ namespace Gva.Api.Repositories.AircraftRepository
 
         List<NomValue> GetAircraftRegistrationNoms(int lotId, string term = null);
 
-        List<GvaViewAircraftRegistration> GetAircraftsRegistrations(string regMark = null, int? certNumber = null, int? actNumber = null);
+        List<GvaViewAircraftRegistration> GetAircraftsRegistrations(string regMark = null, int? registerId = null, int? certNumber = null, int? actNumber = null);
     }
 }

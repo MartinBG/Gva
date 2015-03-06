@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using Common.Api.Models;
 using Common.Data;
 using Common.Linq;
@@ -29,9 +30,15 @@ namespace Gva.Api.Repositories.AircraftRepository
                 .Max(v => (int?)v.ActNumber);
         }
 
-        public List<GvaViewAircraftRegistration> GetAircraftsRegistrations(string regMark = null, int? certNumber = null, int? actNumber = null)
+        public List<GvaViewAircraftRegistration> GetAircraftsRegistrations(string regMark = null, int? registerId = null, int? certNumber = null, int? actNumber = null)
         {
-            var predicate = PredicateBuilder.True<GvaViewAircraftRegistration>();
+            var predicate = PredicateBuilder.True<GvaViewAircraftRegistration>();;
+
+            if (registerId.HasValue)
+            {
+                predicate = predicate.And(a => a.CertRegisterId == registerId.Value);
+            }
+
 
             if (!string.IsNullOrEmpty(regMark))
             {
@@ -49,6 +56,7 @@ namespace Gva.Api.Repositories.AircraftRepository
             }
 
             return this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
+                .Include(r => r.Register)
                 .Where(predicate)
                 .ToList();
         }

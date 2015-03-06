@@ -162,6 +162,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftReviewAmendmentFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMViewDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftRegistrationDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExamSystQualificationDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExamSystExamDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExaminationSystemDataDO.cs" />

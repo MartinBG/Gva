@@ -4,7 +4,7 @@ GO
 CREATE TABLE [dbo].[GvaViewAircraftRegistrations] (
     [LotId]                  INT           NOT NULL,
     [PartIndex]              INT           NOT NULL,
-    [CertRegisterId]         INT           NULL,
+    [CertRegisterId]         INT           NOT NULL,
     [CertNumber]             INT           NULL,
     [ActNumber]              INT           NULL,
     [RegMark]                NVARCHAR(50)  NULL,
