@@ -96,7 +96,7 @@ namespace Gva.Api.Controllers.Applications
             string organizationUin = null,
             int? stage = null,
             int offset = 0, 
-            int? limit = null
+            int limit = 10
             )
         {
             var applications = this.applicationRepository.GetApplications(
@@ -106,13 +106,13 @@ namespace Gva.Api.Controllers.Applications
                 personLin: personLin,
                 aircraftIcao: aircraftIcao,
                 organizationUin: organizationUin,
-                stage: stage,
-                offset: offset,
-                limit: limit)
-                .OrderByDescending(a => a.AppPartDocumentDate)
-                .Take(1000);
+                stage: stage);
 
-            return Ok(applications);
+            return Ok(new 
+            {
+                applications = applications.Skip(offset).Take(limit),
+                applicationsCount = applications.Count()
+            });
         }
 
         [Route("exams")]

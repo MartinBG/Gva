@@ -11,23 +11,24 @@
   <sc-search-button action="add"></sc-search-button>
 </sc-search>
 
-<sc-datatable items="applications" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="appPartDocumentDate"
+<sc-ajaxdatatable items="apps" items-count="applicationsCount" fectch-fn="getApplications" set-prop="applications" count-prop="applicationsCount"
+  filterable="false" dynamic-columns="true"
   row-class="{'expiredApplication' : isExpiredApplication(item), 'expiringDocument' : isExpiringApplication(item)}">
-  <sc-column sortable="false" class="buttons-cell" has-content="true">
+  <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="viewButton" btn-click="viewApplication(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-  </sc-column>
-  <sc-column data="lotSetName" title="applications.search.lotSetName">
-  </sc-column>
-  <sc-column data="description" title="applications.search.description">
-  </sc-column>
-  <sc-column  data="stageTermDate" title="applications.search.stageTermDate" type="date">
-  </sc-column>
-  <sc-column  data="stageName" title="applications.search.stage">
-  </sc-column>
-  <sc-column data="appPartDocumentDate" type="date" title="applications.search.documentDate">
-  </sc-column>
-  <sc-column data="appPartDocumentNumber" title="applications.search.documentNumber">
-  </sc-column>
-  <sc-column data="appPartApplicationTypeName" title="applications.search.applicationType" class="wrap">
-  </sc-column>
-</sc-datatable>
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="lotSetName" title="applications.search.lotSetName">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="description" title="applications.search.description">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn  data="stageTermDate" title="applications.search.stageTermDate" type="date">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn  data="stageName" title="applications.search.stage">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="appPartDocumentDate" type="date" title="applications.search.documentDate">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="appPartDocumentNumber" title="applications.search.documentNumber">
+  </sc-ajaxcolumn>
+  <sc-ajaxcolumn data="appPartApplicationTypeName" title="applications.search.applicationType" class="wrap">
+  </sc-ajaxcolumn>
+</sc-ajaxdatatable>

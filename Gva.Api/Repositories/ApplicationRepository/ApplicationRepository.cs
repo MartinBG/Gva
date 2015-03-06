@@ -55,30 +55,33 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int? limit = null
             )
         {
+            IEnumerable<ApplicationListDO> result = null;
             if (lotSetAlias == "person")
             {
-                return this.GetPersonApplications(fromDate, toDate, personLin, stage, offset, limit);
+                result = this.GetPersonApplications(fromDate, toDate, personLin, stage, offset, limit);
             }
             else if (lotSetAlias == "aircraft")
             {
-                return this.GetAircraftApplications(fromDate, toDate, aircraftIcao, stage, offset, limit);
+                result = this.GetAircraftApplications(fromDate, toDate, aircraftIcao, stage, offset, limit);
             }
             else if (lotSetAlias == "organization")
             {
-                return this.GetOrganizationApplications(fromDate, toDate, organizationUin, stage, offset, limit);
+                result = this.GetOrganizationApplications(fromDate, toDate, organizationUin, stage, offset, limit);
             }
             else if (lotSetAlias == "equipment")
             {
-                return this.GetEquipmentApplications(fromDate, toDate, stage, offset, limit);
+                result = this.GetEquipmentApplications(fromDate, toDate, stage, offset, limit);
             }
             else if (lotSetAlias == "airport")
             {
-                return this.GetAirportApplications(fromDate, toDate, stage, offset, limit);
+                result = this.GetAirportApplications(fromDate, toDate, stage, offset, limit);
             }
             else
             {
                 throw new NotSupportedException("Cannot get applications with not selected lot set alias!");
             }
+
+            return result.OrderByDescending(r => r.AppPartDocumentDate);
         }
 
         public IEnumerable<ApplicationExamListDO> GetPersonApplicationExams(

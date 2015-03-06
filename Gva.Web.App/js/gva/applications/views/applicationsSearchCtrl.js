@@ -6,10 +6,11 @@
     $scope,
     $state,
     $stateParams,
-    applications
+    Applications,
+    apps
     ) {
-    $scope.applications = applications;
-
+    $scope.apps = apps.applications;
+    $scope.applicationsCount = apps.applicationsCount;
     $scope.filters = {
       set: null,
       fromDate: null,
@@ -33,6 +34,19 @@
         organizationUin: $scope.filters.organizationUin,
         stage: $scope.filters.stage
       }, { reload: true });
+    };
+
+    
+    $scope.getApplications = function (page, pageSize) {
+      var params = {set: $stateParams.set};
+
+      _.assign(params, $scope.filters);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return Applications.get(params).$promise;
     };
 
     $scope.viewApplication = function (application) {
@@ -73,15 +87,16 @@
     '$scope',
     '$state',
     '$stateParams',
-    'applications'
+    'Applications',
+    'apps'
   ];
 
   ApplicationsSearchCtrl.$resolve = {
-    applications: [
+    apps: [
       '$stateParams',
       'Applications',
       function ResolveApps($stateParams, Applications) {
-        return Applications.query($stateParams).$promise;
+        return Applications.get($stateParams).$promise;
       }
     ]
   };
