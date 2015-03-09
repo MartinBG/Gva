@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
+using Common.Json;
 using Gva.Api.Models.Views.Aircraft;
 
 namespace Gva.Api.ModelsDO.Aircrafts
@@ -13,7 +14,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.CertRegisterId = registration.CertRegisterId;
             this.CertNumber = registration.CertNumber;
             this.ActNumber = registration.ActNumber;
-            this.RegisterName = registration.Register.Name;
+            this.RegisterCode = registration.Register.Code;
             this.RegMark = registration.RegMark;
         }
 
@@ -29,6 +30,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public string RegMark { get; set; }
 
-        public string RegisterName { get; set; }
+        public string RegisterCode { get; set; }
     }
 }

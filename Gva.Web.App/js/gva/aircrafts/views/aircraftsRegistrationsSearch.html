@@ -13,11 +13,10 @@
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.aircrafts.view.regsFM.edit', params: { id: item.lotId, ind: item.partIndex }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-    <sc-column data="registerName" title="aircrafts.registrations.register">
-    </sc-column>
     <sc-column data="actNumber" title="aircrafts.registrations.actNumber">
     </sc-column>
-    <sc-column data="certNumber" title="aircrafts.registrations.certNumber">
+    <sc-column data="certNumber" title="aircrafts.registrations.certNumber" has-content="true">
+      {{item.registerCode === '2' ? 'II-' + item.certNumber : item.certNumber}}
     </sc-column>
     <sc-column data="regMark" title="aircrafts.registrations.regMark">
     </sc-column>

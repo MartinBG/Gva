@@ -16,13 +16,6 @@
       registerId: null
     };
 
-    if (!$stateParams.registerId) {
-      $scope.filters.registerId = Nomenclatures.get({
-        alias: 'registers',
-        valueAlias: 'register1'
-      }).nomValueId;
-    } 
-
     _.forOwn($stateParams, function (value, param) {
       if (value !== null && value !== undefined) {
         $scope.filters[param] = value;
@@ -55,20 +48,7 @@
       'Nomenclatures',
       'Aircrafts',
       function ($stateParams, Nomenclatures, Aircrafts) {
-        if(!$stateParams.registerId) {
-          return Nomenclatures.get({
-            alias: 'registers',
-            valueAlias: 'register1'
-          })
-            .$promise
-            .then(function (nom) {
-              var params = _.assign($stateParams, {registerId: nom.nomValueId});
-              return Aircrafts.getRegistrations(params).$promise;
-            });
-        }
-        else {
-          return Aircrafts.getRegistrations($stateParams).$promise;
-        }
+        return Aircrafts.getRegistrations($stateParams).$promise;
       }
     ]
   };
