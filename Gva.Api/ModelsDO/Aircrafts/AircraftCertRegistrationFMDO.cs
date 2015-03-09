@@ -47,7 +47,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? LeasingEndDate { get; set; }
 
-        public NomValue LesorOrganization { get; set; }
+        public NomValue LessorOrganization { get; set; }
 
         public NomValue LessorPerson { get; set; }
 

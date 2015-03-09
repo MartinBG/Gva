@@ -388,7 +388,7 @@ namespace Gva.MigrationTool.Sets
                                 r.leasingDocNumber,
                                 r.leasingDocDate,
                                 lessorIsOrg = r.leasingLessor.Item1,
-                                lesorOrganization = r.leasingLessor.Item2,
+                                lessorOrganization = r.leasingLessor.Item2,
                                 lessorPerson = r.leasingLessor.Item3,
                                 r.leasingAgreement,
                                 r.leasingEndDate,
