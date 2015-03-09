@@ -1,7 +1,8 @@
 ﻿<ng-form name="form.newPersonForm" class="form-inline" class="form-inline" sc-validate="{}">
    <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
-      <strong l10n-text="common.newPersonModal.title"></strong>
+      <strong l10n-text="common.newPersonModal.newApplicant" ng-if="isApplicant"></strong>
+      <strong l10n-text="common.newPersonModal.newPerson" ng-if="!isApplicant"></strong>
       <div class="pull-right">
         <sc-button name="saveBtn" btn-click="save()" text="common.newPersonModal.save"
           class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
@@ -14,7 +15,7 @@
 
     <div class="well-sm panel-body">
 
-      <h5 class="form-header-first" l10n-text="common.newPersonModal.personDataForm"></h5>
+      <h5 class="form-header form-header-first" l10n-text="common.newPersonModal.personDataForm"></h5>
       <gva-person-data name="personDataForm" ng-model="person.personData" sc-form-params="{ isNew: true }"></gva-person-data>
 
     </div>

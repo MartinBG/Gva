@@ -5,11 +5,14 @@
   function NewPersonModalCtrl(
     $scope,
     $modalInstance,
+    scModalParams,
     Persons,
     person
   ) {
     $scope.form = {};
     $scope.person = person;
+    $scope.isApplicant = scModalParams.isApplicant;
+    $scope.isPerson = scModalParams.isPerson;
 
     $scope.save = function () {
       return $scope.form.newPersonForm.$validate().then(function () {
@@ -29,6 +32,7 @@
   NewPersonModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
+    'scModalParams',
     'Persons',
     'person'
   ];
