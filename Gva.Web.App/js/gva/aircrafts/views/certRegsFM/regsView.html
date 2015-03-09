@@ -54,32 +54,35 @@
     <div class="panel panel-default">
       <div class="panel-heading"><strong l10n-text="aircrafts.regView.debts"></strong></div>
       <div class="well-sm panel-body">
-         <sc-datatable items="debts" filterable="false" pageable="false" sortable="false" dynamic-columns="false" default-sort="part.regDate">
-           <sc-column sortable="false" class="buttons-cell" has-content="true">
-             <sc-button name="editBtn" btn-click="editDocumentDebt(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-           </sc-column>
-           <sc-column data="part.regDate" title="aircrafts.debtSearchFM.regDate" type="date">
-           </sc-column>
-           <sc-column data="part.aircraftDebtType.name" title="aircrafts.debtSearchFM.aircraftDebtType">
-           </sc-column>
-           <sc-column data="part.documentNumber" title="aircrafts.debtSearchFM.documentNumber">
-           </sc-column>
-           <sc-column data="part.documentDate" title="aircrafts.debtSearchFM.documentDate" type="date">
-           </sc-column>
-           <sc-column data="part.aircraftCreditor.name" title="aircrafts.debtSearchFM.aircraftCreditor">
-           </sc-column>
-           <sc-column data="part.inspector.name" title="aircrafts.debtSearchFM.inspector">
-           </sc-column>
-           <sc-column data="case.bookPageNumber" title="aircrafts.debtSearchFM.bookPageNumber">
-           </sc-column>
-           <sc-column data="case.pageCount" title="aircrafts.debtSearchFM.pageCount">
-           </sc-column>
-           <sc-column sortable="false" title="aircrafts.debtSearchFM.file">
-             <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
-               <span class="glyphicon glyphicon-file"></span>
-             </a>
-           </sc-column>
-         </sc-datatable>
+        <sc-datatable items="debts" filterable="false" pageable="false" sortable="false" dynamic-columns="false" default-sort="part.regDate">
+          <sc-column sortable="false" class="buttons-cell" has-content="true">
+            <sc-button name="editBtn" btn-click="editDocumentDebt(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+          </sc-column>
+          <sc-column data="part.regDate" title="aircrafts.debtSearchFM.regDate" type="date">
+          </sc-column>
+          <sc-column data="part.aircraftDebtType.name" title="aircrafts.debtSearchFM.aircraftDebtType">
+          </sc-column>
+          <sc-column data="part.documentNumber" title="aircrafts.debtSearchFM.documentNumber">
+          </sc-column>
+          <sc-column data="part.isActive" title="aircrafts.debtSearchFM.isActive" has-content="true">
+            {{item.part.isActive? 'Да' : 'Не'}}
+          </sc-column>
+          <sc-column data="part.documentDate" title="aircrafts.debtSearchFM.documentDate" type="date">
+          </sc-column>
+          <sc-column data="part.aircraftCreditor.name" title="aircrafts.debtSearchFM.aircraftCreditor">
+          </sc-column>
+          <sc-column data="part.inspector.name" title="aircrafts.debtSearchFM.inspector">
+          </sc-column>
+          <sc-column data="case.bookPageNumber" title="aircrafts.debtSearchFM.bookPageNumber">
+          </sc-column>
+          <sc-column data="case.pageCount" title="aircrafts.debtSearchFM.pageCount">
+          </sc-column>
+          <sc-column sortable="false" title="aircrafts.debtSearchFM.file">
+            <a target="_self" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
+              <span class="glyphicon glyphicon-file"></span>
+            </a>
+          </sc-column>
+        </sc-datatable>
       </div>
     </div>
   </ng-form>

@@ -7,6 +7,9 @@
   </sc-column>
   <sc-column data="part.aircraftDebtType.name" title="aircrafts.debtSearchFM.aircraftDebtType">
   </sc-column>
+  <sc-column data="part.isActive" title="aircrafts.debtSearchFM.isActive" has-content="true">
+    {{item.part.isActive? 'Да' : 'Не'}}
+  </sc-column>
   <sc-column data="part.documentNumber" title="aircrafts.debtSearchFM.documentNumber">
   </sc-column>
   <sc-column data="part.documentDate" title="aircrafts.debtSearchFM.documentDate" type="date">

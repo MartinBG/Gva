@@ -969,6 +969,7 @@
           aircraftDebtType: 'Тежест',
           documentNumber: 'Вх.док ГВА',
           documentDate: 'Дата на док',
+          isActive: 'Активна',
           aircraftCreditor: 'Кредитор',
           inspector: 'Инспектор',
           newDebt: 'Нова тежест',
@@ -1183,7 +1184,8 @@
           documentDate: 'Дата на док',
           aircraftCreditor: 'Кредитор',
           creditorDocument: 'Док. и дата писма на кредитор',
-          inspector: 'Инспектор'
+          inspector: 'Инспектор',
+          isActive: 'Активна'
         },
         debtCloseDirective: {
           title: 'Погасяване',
