@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
-using Common.Json;
 using Gva.Api.Models.Views.Aircraft;
 
 namespace Gva.Api.ModelsDO.Aircrafts
