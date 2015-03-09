@@ -10,19 +10,22 @@
     ) {
     $scope.regMarkPattern = gvaConstants.regMarkPattern;
 
-    $scope.newOwner = function () {
-      if ($scope.model.ownerIsOrg) {
+    var getNomenclatureData = function (alias, id) {
+      return Nomenclatures.get({
+        alias: alias,
+        id: id
+      }).$promise;
+    };
+
+    $scope['new'] = function (fieldName) {
+      if ($scope.model[fieldName + 'IsOrg']) {
         var modalNewOrganization = scModal.open('newOrganization');
 
         modalNewOrganization.result.then(function (organizationId) {
-          Nomenclatures.get({
-            alias: 'organizations',
-            id: organizationId
-          })
-          .$promise
-          .then(function (organization) {
-            $scope.model.ownerOrganization = organization;
-          });
+          getNomenclatureData('organizations', organizationId)
+            .then(function (organization) {
+              $scope.model[fieldName + 'Organization'] = organization;
+            });
         });
 
         return modalNewOrganization.opened;
@@ -30,20 +33,15 @@
         var modalNewOPerson = scModal.open('newPerson');
 
         modalNewOPerson.result.then(function (personId) {
-          Nomenclatures.get({
-            alias: 'persons',
-            id: personId
-          })
-          .$promise
-          .then(function (person) {
-            $scope.model.ownerPerson = person;
-          });
+          getNomenclatureData('persons', personId)
+            .then(function (person) {
+              $scope.model[fieldName + 'Person'] = person;
+            });
         });
 
         return modalNewOPerson.opened;
       }
     };
-   
   }
 
   AircraftCertRegFMCtrl.$inject = [

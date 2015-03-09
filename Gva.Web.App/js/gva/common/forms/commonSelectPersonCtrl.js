@@ -27,7 +27,8 @@
       var params = {
         uin: null,
         firstName: null,
-        lastName: null
+        lastName: null,
+        isApplicant: true
       };
 
       if ($scope.model.doc && $scope.model.doc.docCorrespondents.length > 0) {

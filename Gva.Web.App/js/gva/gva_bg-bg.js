@@ -25,7 +25,8 @@
           other: 'Други'
         },
         newPersonModal: {
-          title: 'Нов заявител',
+          newApplicant: 'Нов заявител',
+          newPerson: 'Ново физическо лице',
           save: 'Запис',
           cancel: 'Отказ',
           personDataForm: 'Лични данни'

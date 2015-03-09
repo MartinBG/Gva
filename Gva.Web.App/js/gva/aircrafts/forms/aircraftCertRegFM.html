@@ -41,11 +41,10 @@
         </div>
         <sc-nomenclature ng-if="model.ownerIsOrg" class="form-control input-sm" ng-model="model.ownerOrganization" name="ownerOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
         <sc-nomenclature ng-if="!model.ownerIsOrg" class="form-control input-sm" ng-model="model.ownerPerson" name="ownerPerson" alias="'persons'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
-        <sc-button type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="newOwner()" ng-disabled="form.$readonly">
-        </sc-button>
+        <sc-button type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="new('owner')" ng-if="!form.$readonly"></sc-button>
       </div>
     </div>
-    <div class="form-group col-md-4 col-sm-6">
+    <div class="col-sm-7 col-md-5">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.operator"></label>
       <div class="input-group">
         <div class="input-group-btn">
@@ -64,6 +63,7 @@
         </div>
         <sc-nomenclature ng-if="model.operIsOrg" class="form-control input-sm" ng-model="model.operOrganization" name="operOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
         <sc-nomenclature ng-if="!model.operIsOrg" class="form-control input-sm" ng-model="model.operPerson" name="operPerson" alias="'persons'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-button type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="new('oper')" ng-if="!form.$readonly"></sc-button>
       </div>
     </div>
   </div>
@@ -99,8 +99,9 @@
             </li>
           </ul>
         </div>
-        <sc-nomenclature ng-if="model.lessorIsOrg" class="form-control input-sm" ng-model="model.lesorOrganization" name="lesorOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-nomenclature ng-if="model.lessorIsOrg" class="form-control input-sm" ng-model="model.lessorOrganization" name="lessorOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
         <sc-nomenclature ng-if="!model.lessorIsOrg" class="form-control input-sm" ng-model="model.lessorPerson" name="lessorPerson" alias="'persons'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-button type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="new('lessor')" ng-if="!form.$readonly"></sc-button>
       </div>
     </div>
   </div>
