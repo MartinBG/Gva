@@ -3,10 +3,11 @@
     <sc-filter type="text" name="regMark" class="col-sm-3" removable="false" label="aircrafts.registrations.regMark"></sc-filter>
     <sc-filter type="text" name="certNumber" class="col-sm-3" removable="false" label="aircrafts.registrations.certNumber"></sc-filter>
     <sc-filter type="text" name="actNumber" class="col-sm-3" removable="false" label="aircrafts.registrations.actNumber"></sc-filter>
-    <sc-filter type="nomenclature" name="registerId" class="col-sm-3" removable="false" alias="registers" load="false" mode="id" label="aircrafts.registrations.register">
+    <sc-filter type="nomenclature" name="registerId" class="col-sm-3" removable="true" alias="registers" load="false" mode="id" label="aircrafts.registrations.register">
     </sc-filter>
     <sc-search-button action="search()" text="aircrafts.registrations.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
     <sc-search-button action="clear"></sc-search-button>
+    <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
   <sc-datatable items="registrations" filterable="true" pageable="true" sortable="true" default-sort="actNumber" default-sorting-type="asc">

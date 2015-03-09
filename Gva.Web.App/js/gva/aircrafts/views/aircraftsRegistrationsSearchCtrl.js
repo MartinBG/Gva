@@ -12,8 +12,7 @@
     $scope.filters = {
       certNumber: null,
       actNumber: null,
-      regMark: null,
-      registerId: null
+      regMark: null
     };
 
     _.forOwn($stateParams, function (value, param) {
