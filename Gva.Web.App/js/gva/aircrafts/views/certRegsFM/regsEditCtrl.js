@@ -6,6 +6,7 @@
     $scope,
     $state,
     $stateParams,
+    Aircrafts,
     AircraftCertRegistrationsFM,
     aircraftCertRegistration,
     scMessage
@@ -20,8 +21,14 @@
     };
 
     $scope.rereg = function () {
-      return $state.go('root.aircrafts.view.regsFM.newWizzard', {
-        oldInd: aircraftCertRegistration.partIndex
+      return Aircrafts.getNextActNumber({
+        registerId: aircraftCertRegistration.part.register.nomValueId
+      }).$promise.then(function (result) {
+        aircraftCertRegistration.part.actNumber = result.actNumber;
+        return $state.go('root.aircrafts.view.regsFM.new',
+          { oldInd: aircraftCertRegistration.partIndex },
+          {},
+          aircraftCertRegistration.part);
       });
     };
 
@@ -86,6 +93,7 @@
     '$scope',
     '$state',
     '$stateParams',
+    'Aircrafts',
     'AircraftCertRegistrationsFM',
     'aircraftCertRegistration',
     'scMessage'

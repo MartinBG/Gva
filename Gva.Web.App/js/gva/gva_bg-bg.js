@@ -658,7 +658,7 @@
       aircrafts: {
         tabs: {
           reg: 'Регистрация',
-          currentReg: 'Текуща регистрация',
+          currentReg: 'Последна регистрация',
           regs: 'Регистрации',
           airworthinesses: 'Летателни годности',
           smods: 'S-code',
@@ -991,7 +991,7 @@
           close: 'Погасяване'
         },
         regViewDirective: {
-          title: 'Текуща регистрация',
+          title: 'Последна регистрация',
           currentCert: 'Текущ запис',
           lastCert: 'Последен запис',
           firstCert: 'Първи запис',
@@ -3882,7 +3882,7 @@
         'root.aircrafts.view.regsFM': 'Регистрации',
         'root.aircrafts.view.regsFM.new': 'Нова регистрация',
         'root.aircrafts.view.regsFM.edit': 'Преглед на регистрация',
-        'root.aircrafts.view.currentReg': 'Текуща регистрация',
+        'root.aircrafts.view.currentReg': 'Последна регистрация',
         'root.aircrafts.view.smods': 'S-code',
         'root.aircrafts.view.smods.new': 'Нов S-code',
         'root.aircrafts.view.smods.edit': 'Преглед на S-code',

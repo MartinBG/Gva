@@ -8,7 +8,6 @@
     $stateParams,
     Aircrafts,
     oldReg,
-    actNumber,
     register,
     gvaConstants
   ) {
@@ -25,14 +24,26 @@
       regMark: $scope.$parent.aircraft.mark
     };
 
+    $scope.getNextActNumber = function () {
+      return Aircrafts.getNextActNumber({
+        registerId: $scope.model.register.nomValueId
+      }).$promise.then(function (result) {
+        if (!$scope.reregMode) {
+          $scope.model.certNumber = result.actNumber;
+        }
+        $scope.model.actNumber = result.actNumber;
+      });
+    };
+
+    var nextActNumber = $scope.getNextActNumber();
     $scope.oldInd = $stateParams.oldInd;
     $scope.reregMode = !!(oldReg && oldReg.part);
     if ($scope.reregMode) {
       $scope.model.certNumber = oldReg.part.certNumber;
     } else {
-      $scope.model.certNumber = actNumber;
+      $scope.model.certNumber = nextActNumber;
     }
-    $scope.model.actNumber = actNumber;
+    $scope.model.actNumber = nextActNumber;
 
     $scope.forward = function () {
       return $scope.newRegForm.$validate()
@@ -78,17 +89,6 @@
       }
     };
 
-    $scope.getNextActNumber = function () {
-      return Aircrafts.getNextActNumber({
-        registerId: $scope.model.register.nomValueId
-      }).$promise.then(function (result) {
-        if (!$scope.reregMode) {
-          $scope.model.certNumber = result.actNumber;
-        }
-        $scope.model.actNumber = result.actNumber;
-      });
-    };
-
     $scope.cancel = function () {
       return $state.go('root.aircrafts.view.regsFM.search');
     };
@@ -108,17 +108,6 @@
         }
       }
     ],
-    actNumber: [
-      'Aircrafts',
-      function (Aircrafts) {
-        return Aircrafts.getNextActNumber({
-          registerId: 9008224
-        }).$promise
-        .then(function (result) {
-          return result.actNumber;
-        });
-      }
-    ],
     register: [
       'Nomenclatures',
       function (Nomenclatures) {
@@ -136,7 +125,6 @@
     '$stateParams',
     'Aircrafts',
     'oldReg',
-    'actNumber',
     'register',
     'gvaConstants'
   ];
