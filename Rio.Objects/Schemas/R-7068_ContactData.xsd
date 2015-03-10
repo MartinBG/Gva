@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7068" 
+	xmlns="http://ereg.egov.bg/segment/R-7068"
+	xmlns:ca="http://ereg.egov.bg/segment/R-4286"
+	xmlns:caa="http://ereg.egov.bg/segment/R-4288"
+	xmlns:pnd="http://ereg.egov.bg/value/R-1012"
+	xmlns:fnd="http://ereg.egov.bg/value/R-1014"
+	xmlns:ea="http://ereg.egov.bg/value/R-1016"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4286" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4288" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1012" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1014" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1016" />
+
+	<xsd:complexType name="ContactData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за контакт</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CorrespondenceAddress" type="ca:CorrespondenceAddress" minOccurs="0" />	
+			<xsd:element name="CorrespondenceAddressAbroad" type="caa:CorrespondenceAddressAbroad" minOccurs="0" />
+			<xsd:element name="PhoneNumbersDesc" type="pnd:PhoneNumbersDesc" minOccurs="0" />
+			<xsd:element name="FaxNumbersDesc" type="fnd:FaxNumbersDesc" minOccurs="0" />
+			<xsd:element name="EmailAddress" type="ea:EmailAddress" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

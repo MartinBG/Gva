@@ -27,12 +27,9 @@
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="ElectronicServiceAuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
-			<xsd:element name="AuthorType" type="at:AuthorType" minOccurs="0" />
 			<xsd:element name="Citizenship" type="c:Citizenship" minOccurs="0" />
 			<xsd:element name="PersonBasicData" type="pbd:PersonBasicData" minOccurs="0" />
 			<xsd:element name="ForeignCitizenBasicData" type="fcbd:ForeignCitizenBasicData" minOccurs="0" />
-			<xsd:element name="EntityBasicData" type="ebd:EntityBasicData" minOccurs="0" />
-			<xsd:element name="ForeignEntityBasicData" type="febd:ForeignEntityBasicData" minOccurs="0" />
 			<xsd:element name="ContactInformation" type="ci:ContactInformation" minOccurs="0" />
 		</xsd:sequence>
 	</xsd:complexType>

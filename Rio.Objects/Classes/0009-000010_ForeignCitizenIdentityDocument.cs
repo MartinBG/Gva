@@ -34,6 +34,16 @@ namespace R_0009_000010
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public string DocumentType { get; set; }
 
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="CountryCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string CountryCode { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="CountryName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string CountryName { get; set; }
+
 		public ForeignCitizenIdentityDocument()
 		{
 		}

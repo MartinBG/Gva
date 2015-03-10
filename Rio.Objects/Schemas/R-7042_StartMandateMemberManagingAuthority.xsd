@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/R-7042" xmlns="http://ereg.egov.bg/value/R-7042" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="StartMandateMemberManagingAuthority">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Начало на мандат на член на управителен орган на ЮЛ</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:date">
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

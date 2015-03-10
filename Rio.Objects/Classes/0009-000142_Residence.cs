@@ -16,6 +16,15 @@ namespace R_0009_000142
 		public const string SchemaVersion = "http://ereg.egov.bg/segment/0009-000142";
 	}
 
+	[Serializable]
+	public enum ModificationTypeNomenclature
+	{
+		[XmlEnum(Name="Empty")] Empty,
+		[XmlEnum(Name="Create")] Create,
+		[XmlEnum(Name="Update")] Update,
+		[XmlEnum(Name="Delete")] Delete
+	}
+
 
 
 
@@ -23,6 +32,11 @@ namespace R_0009_000142
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
 	public partial class Residence
 	{
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlAttribute(AttributeName="modificationType")]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_7066.ModificationTypeNomenclature modificationType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="DistrictCode",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]

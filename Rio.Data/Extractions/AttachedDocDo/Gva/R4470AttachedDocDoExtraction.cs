@@ -14,7 +14,7 @@ namespace Rio.Data.Extractions.AttachedDocDo.Gva
     {
         protected override R_3994.AttachedDocumentDatasCollection GetR3994Collection1(R_4470.AircraftAirworthinessCertificateApplication rioObject)
         {
-            return rioObject.AttachedDocumentDatasCollection;
+            return null;
         }
 
         protected override List<R_0009_000139.AttachedDocument> GetAttachedDocuments(R_4470.AircraftAirworthinessCertificateApplication rioObject)

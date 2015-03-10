@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-4310" 
 	xmlns="http://ereg.egov.bg/segment/R-4310" 
+	xmlns:c="http://ereg.egov.bg/segment/0009-000133" 
 	xmlns:aon="http://ereg.egov.bg/value/R-4302"
 	xmlns:ahtcn="http://ereg.egov.bg/value/R-4304"
 	xmlns:ahtcd="http://ereg.egov.bg/value/R-4306"
@@ -11,6 +12,7 @@
 	elementFormDefault="qualified">
 	
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4302" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000133" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4304" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4306" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4308" />
@@ -23,6 +25,7 @@
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="AircraftOwnerName" type="aon:AircraftOwnerName" minOccurs="0" />
+			<xsd:element name="Nationality" type="c:Citizenship" minOccurs="0" />
 			<xsd:element name="AircraftHiringTransferContractNumber" type="ahtcn:AircraftHiringTransferContractNumber" minOccurs="0" />
 			<xsd:element name="AircraftHiringTransferContractDate" type="ahtcd:AircraftHiringTransferContractDate" minOccurs="0" />
 			<xsd:element name="AircraftHiringTransferContractConclusionPlace" type="ahtccp:AircraftHiringTransferContractConclusionPlace" minOccurs="0" />

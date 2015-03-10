@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7046" 
+	xmlns="http://ereg.egov.bg/segment/R-7046"
+	xmlns:pbd="http://ereg.egov.bg/segment/0009-000008"
+	xmlns:ebd="http://ereg.egov.bg/segment/0009-000013"
+	xmlns:smmma="http://ereg.egov.bg/value/R-7042"
+	xmlns:emmma="http://ereg.egov.bg/value/R-7044"
+
+	xmlns:mtn="http://ereg.egov.bg/nomenclature/R-7066"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000008" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000013" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7042" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7044" />
+
+	<xsd:import namespace="http://ereg.egov.bg/nomenclature/R-7066" />
+
+	<xsd:complexType name="MemberManagingAuthority">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Член на управителен орган на ЮЛНЦ</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="PersonBasicData" type="pbd:PersonBasicData" minOccurs="0" />
+        <xsd:element name="EntityBasicData" type="ebd:EntityBasicData" minOccurs="0" />
+      </xsd:choice>
+			
+			<xsd:element name="StartMandateMemberManagingAuthority" type="smmma:StartMandateMemberManagingAuthority" minOccurs="0" />
+			<xsd:element name="EndMandateMemberManagingAuthority" type="emmma:EndMandateMemberManagingAuthority" minOccurs="0" />
+		</xsd:sequence>
+
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="modificationType" type="mtn:ModificationTypeNomenclature"/>
+	</xsd:complexType>
+</xsd:schema>

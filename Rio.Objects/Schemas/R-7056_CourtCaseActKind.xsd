@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7056" 
+	xmlns="http://ereg.egov.bg/segment/R-7056" 
+	xmlns:ccakc="http://ereg.egov.bg/value/R-7052"
+	xmlns:ccakn="http://ereg.egov.bg/value/R-7054"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7052" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7054" />
+
+	<xsd:complexType name="CourtCaseActKind">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Вид съдебен акт</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CourtCaseActKindCode" type="ccakc:CourtCaseActKindCode" minOccurs="0" />
+			<xsd:element name="CourtCaseActKindName" type="ccakn:CourtCaseActKindName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

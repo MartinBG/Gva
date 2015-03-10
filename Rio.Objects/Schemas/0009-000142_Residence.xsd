@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000142" xmlns="http://ereg.egov.bg/segment/0009-000142" xmlns:dc="http://ereg.egov.bg/value/0008-000200" xmlns:dn="http://ereg.egov.bg/value/0008-000201" xmlns:mc="http://ereg.egov.bg/value/0008-000209" xmlns:mn="http://ereg.egov.bg/value/0008-000202" xmlns:sc="http://ereg.egov.bg/value/0008-000205" xmlns:sn="http://ereg.egov.bg/value/0008-000206" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/0009-000142" xmlns="http://ereg.egov.bg/segment/0009-000142" xmlns:dc="http://ereg.egov.bg/value/0008-000200" xmlns:dn="http://ereg.egov.bg/value/0008-000201" xmlns:mc="http://ereg.egov.bg/value/0008-000209" xmlns:mn="http://ereg.egov.bg/value/0008-000202" xmlns:sc="http://ereg.egov.bg/value/0008-000205" xmlns:sn="http://ereg.egov.bg/value/0008-000206"
+	
+	xmlns:mtn="http://ereg.egov.bg/nomenclature/R-7066" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
   <xsd:import namespace="http://ereg.egov.bg/value/0008-000200" />
   <xsd:import namespace="http://ereg.egov.bg/value/0008-000201" />
   <xsd:import namespace="http://ereg.egov.bg/value/0008-000209" />
   <xsd:import namespace="http://ereg.egov.bg/value/0008-000202" />
   <xsd:import namespace="http://ereg.egov.bg/value/0008-000205" />
   <xsd:import namespace="http://ereg.egov.bg/value/0008-000206" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/nomenclature/R-7066" />
   <xsd:complexType name="Residence">
     <xsd:annotation>
       <xsd:documentation xml:lang="bg">Седалище</xsd:documentation>
@@ -18,5 +22,7 @@
       <xsd:element name="SettlementCode" type="sc:SettlementCode" minOccurs="0" />
       <xsd:element name="SettlementName" type="sn:SettlementName" minOccurs="0" />
     </xsd:sequence>
+		
+		<xsd:attribute name="modificationType" type="mtn:ModificationTypeNomenclature"/>
   </xsd:complexType>
 </xsd:schema>

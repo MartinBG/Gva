@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/value/R-7030" xmlns="http://ereg.egov.bg/value/R-7030" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="BatchNumberLNPECourtRegister">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Партиден номер на ЮЛНЦ в съдебния регистър</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

@@ -16,6 +16,15 @@ namespace R_0009_000172
 		public const string SchemaVersion = "http://ereg.egov.bg/segment/0009-000172";
 	}
 
+	[Serializable]
+	public enum ModificationTypeNomenclature
+	{
+		[XmlEnum(Name="Empty")] Empty,
+		[XmlEnum(Name="Create")] Create,
+		[XmlEnum(Name="Update")] Update,
+		[XmlEnum(Name="Delete")] Delete
+	}
+
 
 
 
@@ -23,6 +32,11 @@ namespace R_0009_000172
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
 	public partial class EntityManagementAddress
 	{
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlAttribute(AttributeName="modificationType")]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_7066.ModificationTypeNomenclature modificationType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ResidentialComplex",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
@@ -58,6 +72,11 @@ namespace R_0009_000172
 		[XmlElement(ElementName="Apartment",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public string Apartment { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="AddressAdditionalDescription",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string AddressAdditionalDescription { get; set; }
 
 		public EntityManagementAddress()
 		{

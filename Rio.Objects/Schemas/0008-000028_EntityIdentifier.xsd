@@ -4,8 +4,6 @@
     <xsd:annotation>
       <xsd:documentation xml:lang="bg">ЕИК/БУЛСТАТ</xsd:documentation>
     </xsd:annotation>
-    <xsd:restriction base="xsd:string">
-      <xsd:pattern value="[0-9]{9}|[0-9]{13}|[0-9]{10}" />
-    </xsd:restriction>
+    <xsd:restriction base="xsd:string" />
   </xsd:simpleType>
 </xsd:schema>

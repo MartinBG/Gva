@@ -6,7 +6,6 @@
 	xmlns:amp="http://ereg.egov.bg/value/R-4328"
 	xmlns:amd="http://ereg.egov.bg/value/R-4330"
 	xmlns:at="http://ereg.egov.bg/segment/R-4158" 
-	xmlns:as="http://ereg.egov.bg/value/R-4332"
 	xmlns:asn="http://ereg.egov.bg/value/R-4334"
 	xmlns:au="http://ereg.egov.bg/value/R-4336"
 	xmlns:clr="http://ereg.egov.bg/segment/R-4324"
@@ -26,7 +25,6 @@
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4328" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4330" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4332" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4334" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4336" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4324" />
@@ -49,13 +47,11 @@
 			<xsd:element name="AircraftManufacturePlace" type="amp:AircraftManufacturePlace" minOccurs="0" />
 			<xsd:element name="AircraftManufactureDate" type="amd:AircraftManufactureDate" minOccurs="0" />
 			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
-			<xsd:element name="AircraftSeries" type="as:AircraftSeries" minOccurs="0" />
 			<xsd:element name="AircraftSerialNumber" type="asn:AircraftSerialNumber" minOccurs="0" />
 			<xsd:element name="AircraftUnused" type="au:AircraftUnused" minOccurs="0" />
 			<xsd:element name="CountryLastRegistration" type="clr:CountryLastRegistration" minOccurs="0" />
 			<xsd:element name="AircraftOperationType" type="aot:AircraftOperationType" minOccurs="0" />
 			<xsd:element name="AircraftMaximumTakeOffWeight" type="amtow:AircraftMaximumTakeOffWeight" minOccurs="0" />
-			<xsd:element name="CurrentAircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
 			<xsd:element name="DesiredAircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
 			<xsd:element name="AircraftStandardsCertified" type="asc:AircraftStandardsCertified" minOccurs="0" />
 			<xsd:element name="FlightCertificateNumber" type="fcn:FlightCertificateNumber" minOccurs="0" />

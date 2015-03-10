@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5146" 
+	xmlns="http://ereg.egov.bg/segment/R-5146" 
+	xmlns:cl="http://ereg.egov.bg/segment/R-5142"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5142"/>
+
+	<xsd:complexType name="CertificatedLicensesCollection">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Притежавани свидетелства в свидетелство за правоспособност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CertificatedLicense" type="cl:CertificatedLicense" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

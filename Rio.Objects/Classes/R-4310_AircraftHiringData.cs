@@ -30,6 +30,11 @@ namespace R_4310
 		public string AircraftOwnerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_0009_000133.Citizenship),ElementName="Nationality",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_0009_000133.Citizenship Nationality { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="AircraftHiringTransferContractNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public string AircraftHiringTransferContractNumber { get; set; }

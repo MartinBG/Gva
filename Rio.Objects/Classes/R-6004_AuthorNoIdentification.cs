@@ -34,57 +34,7 @@ namespace R_6004
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public R_0009_000007.ForeignCitizenNames ForeignCitizenNames { get; set; }
 
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(AuthorNoIdentificationEntity),ElementName="Entity",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AuthorNoIdentificationEntity Entity { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(AuthorNoIdentificationForeignEntity),ElementName="ForeignEntity",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AuthorNoIdentificationForeignEntity ForeignEntity { get; set; }
-
 		public AuthorNoIdentification()
-		{
-		}
-	}
-
-
-	[XmlType(TypeName="AuthorNoIdentificationEntity",Namespace=Declarations.SchemaVersion),Serializable]
-	public partial class AuthorNoIdentificationEntity
-	{
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="EntityName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string EntityName { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_0009_000142.Residence),ElementName="Residence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000142.Residence Residence { get; set; }
-
-		public AuthorNoIdentificationEntity()
-		{
-		}
-	}
-
-
-	[XmlType(TypeName="AuthorNoIdentificationForeignEntity",Namespace=Declarations.SchemaVersion),Serializable]
-	public partial class AuthorNoIdentificationForeignEntity
-	{
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="ForeignEntityName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string ForeignEntityName { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_0009_000144.ForeignEntityResidence),ElementName="ForeignEntityResidence",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_0009_000144.ForeignEntityResidence ForeignEntityResidence { get; set; }
-
-		public AuthorNoIdentificationForeignEntity()
 		{
 		}
 	}

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1166" xmlns="http://ereg.egov.bg/segment/R-1166"
+	xmlns:nins="http://ereg.egov.bg/value/R-1160" 
+	xmlns:stn="http://ereg.egov.bg/value/R-1162" 
+	xmlns:stc="http://ereg.egov.bg/value/R-1164" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1160" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1162" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1164" />
+    <xsd:complexType name="AppliedCalibrationSiSmEBasicData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Основнни данни за заявени за калибриране СИ/СМ/Е</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="NameIdNumberSiSmE" type="nins:NameIdNumberSiSmE" minOccurs="0" />
+      <xsd:element name="SiSmETypeName" type="stn:SiSmETypeName" minOccurs="0" />
+      <xsd:element name="SiSmETypeCode" type="stc:SiSmETypeCode" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

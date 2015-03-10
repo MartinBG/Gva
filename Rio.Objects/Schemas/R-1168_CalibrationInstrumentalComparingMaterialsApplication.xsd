@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1168"
+            xmlns="http://ereg.egov.bg/segment/R-1168"
+            xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+			xmlns:ansu="http://ereg.egov.bg/segment/0009-000054"
+			xmlns:si="http://ereg.egov.bg/value/0008-000080"
+            xmlns:id="http://ereg.egov.bg/segment/R-1148"
+            xmlns:pd="http://ereg.egov.bg/segment/R-1088"
+            xmlns:iaci="http://ereg.egov.bg/value/R-1150"
+            xmlns:iace="http://ereg.egov.bg/value/R-1152"
+            xmlns:iaccm="http://ereg.egov.bg/value/R-1154"
+            xmlns:cp="http://ereg.egov.bg/value/R-1156"
+            xmlns:cm="http://ereg.egov.bg/value/R-1158"
+            xmlns:acsbd="http://ereg.egov.bg/segment/R-1166"
+            xmlns:aie="http://ereg.egov.bg/value/R-1010"
+            xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+            xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000054"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/0008-000080"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1148"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1088"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1150"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1152"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1154"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1156"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1158"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-1166"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1010"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
+	<xsd:element name="CalibrationInstrumentalComparingMaterialsApplication" type="CalibrationInstrumentalComparingMaterialsApplication"/>
+    <xsd:complexType name="CalibrationInstrumentalComparingMaterialsApplication">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="bg">Заявление  за калибриране на средства за измерване (СИ)/сравнителни материали (СМ)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+			<xsd:element name="AdministrativeNomenclatureServiceURI" type="ansu:AdministrativeNomenclatureServiceURI" minOccurs="0" />
+			<xsd:element name="ServiceInstructions" type="si:ServiceInstructions" minOccurs="0" />
+            <xsd:element name="InvoiceData" type="id:InvoiceData" minOccurs="0"/>
+            <xsd:element name="PaymentData" type="pd:PaymentData" minOccurs="0"/>
+            <xsd:element name="IsAppliedCalibrationInstrumentals" type="iaci:IsAppliedCalibrationInstrumentals" minOccurs="0"/>
+            <xsd:element name="IsAppliedCalibrationEtalons" type="iace:IsAppliedCalibrationEtalons" minOccurs="0"/>
+            <xsd:element name="IsAppliedCalibrationComparingMaterials" type="iaccm:IsAppliedCalibrationComparingMaterials" minOccurs="0"/>
+            <xsd:element name="CalibrationPlace" type="cp:CalibrationPlace" minOccurs="0"/>
+            <xsd:element name="CalibrationMethod" type="cm:CalibrationMethod" minOccurs="0"/>
+            <xsd:element name="AppliedCalibrationSiSmEBasicDatas" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+						<xsd:element name="AppliedCalibrationSiSmEBasicData" type="acsbd:AppliedCalibrationSiSmEBasicData" />
+						<xsd:element name="AppliedCalibrationSiSmEBasicDataLineNumber" type="xsd:integer" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="AdditionInformationESA" type="aie:AdditionInformationESA" minOccurs="0"/>
+            <xsd:element name="AttachedDocuments" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

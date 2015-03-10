@@ -5,7 +5,7 @@
 	xmlns:esr="http://ereg.egov.bg/segment/0009-000015"
 	xmlns:aaoi="http://ereg.egov.bg/value/R-4298" 
 	xmlns:aobd="http://ereg.egov.bg/segment/R-4294"
-	xmlns:cpd="http://ereg.egov.bg/segment/R-4358"
+	xmlns:cpd="http://ereg.egov.bg/segment/R-1018"
 	xmlns:eprres="http://ereg.egov.bg/segment/R-4014"
 	xmlns:esaq="http://ereg.egov.bg/value/0008-000035"
 	xmlns:scad="http://ereg.egov.bg/segment/R-4376"
@@ -15,12 +15,12 @@
 	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	elementFormDefault="qualified">
-	
+
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000015" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4298" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4294" />
-	<xsd:import namespace="http://ereg.egov.bg/segment/R-4358" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-1018" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4014" />
 	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4376" />
@@ -28,7 +28,7 @@
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />
-	
+
 	<xsd:element name="AppointmentSmodeCodeApplication" type="AppointmentSmodeCodeApplication"/>
 	<xsd:complexType name="AppointmentSmodeCodeApplication">
 		<xsd:annotation>
@@ -36,23 +36,23 @@
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
-            <xsd:element name="ElectronicServiceRecipient" type="esr:ElectronicServiceRecipient" minOccurs="0" />
+			<xsd:element name="ElectronicServiceRecipient" type="esr:ElectronicServiceRecipient" minOccurs="0" />
 			<xsd:element name="ApplicantAviationalOperatorIndication" type="aaoi:ApplicantAviationalOperatorIndication" minOccurs="0" />	
 			<xsd:element name="AviationalOperatorBasicData" type="aobd:AviationalOperatorBasicData" minOccurs="0" />
 			<xsd:element name="ContactPersonData" type="cpd:ContactPersonData" minOccurs="0" />
 			<xsd:element name="EvidencePersonRepresentingRecipientElectronicService" type="eprres:EvidencePersonRepresentingRecipientElectronicService" minOccurs="0" />
-            <xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+			<xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
 			<xsd:element name="SmodeCodeAppointmentData" type="scad:SmodeCodeAppointmentData" minOccurs="0" />
 			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />	
 			<xsd:element name="AttachedDocumentDatasCollection" type="add:AttachedDocumentDatasCollection" minOccurs="0" />	
-            <xsd:element name="AttachedDocuments" minOccurs="0">
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 </xsd:schema>

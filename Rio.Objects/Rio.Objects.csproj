@@ -184,7 +184,7 @@
     <Compile Include="Classes\0008-000121_AISCorrespondenceAccessIdentifier.cs" />
     <Compile Include="Classes\0008-000122_ServiceTerm.cs" />
     <Compile Include="Classes\0008-000123_StreetGRAOCode.cs" />
-    <Compile Include="Classes\0008-000124_StreetТеxt.cs" />
+    <Compile Include="Classes\0008-000124_StreetText.cs" />
     <Compile Include="Classes\0008-000125_BuildingNumber.cs" />
     <Compile Include="Classes\0008-000126_Entrance.cs" />
     <Compile Include="Classes\0008-000127_Floor.cs" />
@@ -520,6 +520,108 @@
     <Compile Include="Classes\AopAttachedDocuments.cs" />
     <Compile Include="Classes\R-0454_StartDateTimePeriod.cs" />
     <Compile Include="Classes\R-0456_DeadlineTimePeriod.cs" />
+    <Compile Include="Classes\R-1002_PaymentTypeCode.cs" />
+    <Compile Include="Classes\R-1004_PaymentTypeName.cs" />
+    <Compile Include="Classes\R-1006_PaymentConditionCode.cs" />
+    <Compile Include="Classes\R-1007_DemandCertificateRegistrationPopulationRegister.cs" />
+    <Compile Include="Classes\R-1008_PaymentConditionName.cs" />
+    <Compile Include="Classes\R-1010_AdditionInformationESA.cs" />
+    <Compile Include="Classes\R-1012_PhoneNumbersDesc.cs" />
+    <Compile Include="Classes\R-1014_FaxNumbersDesc.cs" />
+    <Compile Include="Classes\R-1016_EmailAddress.cs" />
+    <Compile Include="Classes\R-1018_ContactPersonData.cs" />
+    <Compile Include="Classes\R-1024_MCSSupplierName.cs" />
+    <Compile Include="Classes\R-1026_MCSSupplierData.cs" />
+    <Compile Include="Classes\R-1028_MeasuringEquipmentSupplierAdditionalNote.cs" />
+    <Compile Include="Classes\R-1030_MeasuringEquipmentDesc.cs" />
+    <Compile Include="Classes\R-1032_MeasuringEquipmentID.cs" />
+    <Compile Include="Classes\R-1034_MeasuringEquipmentYear.cs" />
+    <Compile Include="Classes\R-1036_MeasuringEquipmentSampleData.cs" />
+    <Compile Include="Classes\R-1038_MERequestingReasonsCode.cs" />
+    <Compile Include="Classes\R-1040_MERequestingReasonsName.cs" />
+    <Compile Include="Classes\R-1042_MeasuringEquipmentPurpose.cs" />
+    <Compile Include="Classes\R-1044_MeasuringEquipmentApprovalApplication.cs" />
+    <Compile Include="Classes\R-1046_MEVerificationCode.cs" />
+    <Compile Include="Classes\R-1048_MEVerificationName.cs" />
+    <Compile Include="Classes\R-1050_MEInitialVerificationCode.cs" />
+    <Compile Include="Classes\R-1052_MEInitialVerificationName.cs" />
+    <Compile Include="Classes\R-1054_MESubsequentVerificationCode.cs" />
+    <Compile Include="Classes\R-1056_MESubsequentVerificationName.cs" />
+    <Compile Include="Classes\R-1058_TestSiteName.cs" />
+    <Compile Include="Classes\R-1060_TestSiteAddress.cs" />
+    <Compile Include="Classes\R-1062_TestSiteData.cs" />
+    <Compile Include="Classes\R-1064_MERequestedVerificationDate.cs" />
+    <Compile Include="Classes\R-1066_MEVerificationSiteTypeCode.cs" />
+    <Compile Include="Classes\R-1068_MEVerificationSiteTypeName.cs" />
+    <Compile Include="Classes\R-1070_MEVerificationSite.cs" />
+    <Compile Include="Classes\R-1072_IsApplicantProvidesCalibratingStandards.cs" />
+    <Compile Include="Classes\R-1074_RequestEssence.cs" />
+    <Compile Include="Classes\R-1076_RequestTemplateIA.cs" />
+    <Compile Include="Classes\R-1078_ElectrometerSpecificType.cs" />
+    <Compile Include="Classes\R-1080_BankName.cs" />
+    <Compile Include="Classes\R-1082_BankBranchName.cs" />
+    <Compile Include="Classes\R-1084_BIC.cs" />
+    <Compile Include="Classes\R-1086_IBAN.cs" />
+    <Compile Include="Classes\R-1088_PaymentData.cs" />
+    <Compile Include="Classes\R-1090_MEVerificationApplication.cs" />
+    <Compile Include="Classes\R-1092_InstrumentalTypeCode.cs" />
+    <Compile Include="Classes\R-1094_InstrumentalTypeName.cs" />
+    <Compile Include="Classes\R-1096_InstrumentalFabricNumber.cs" />
+    <Compile Include="Classes\R-1098_InstrumentalProductionYear.cs" />
+    <Compile Include="Classes\R-1100_InstrumentalRange.cs" />
+    <Compile Include="Classes\R-1102_InstrumentalIndication.cs" />
+    <Compile Include="Classes\R-1104_ReasonsRequestingMetrologyExpertise.cs" />
+    <Compile Include="Classes\R-1106_InstrumentalGeneralData.cs" />
+    <Compile Include="Classes\R-1108_ElectrometerPowerRange.cs" />
+    <Compile Include="Classes\R-1110_ElectrometerTensionRange.cs" />
+    <Compile Include="Classes\R-1112_ElectrometerIndication.cs" />
+    <Compile Include="Classes\R-1114_InstrumentalSubscribeNumber.cs" />
+    <Compile Include="Classes\R-1116_InstrumentalWhiteNumber.cs" />
+    <Compile Include="Classes\R-1118_SubscriberInstrumentalMetrologyExpertise.cs" />
+    <Compile Include="Classes\R-1120_SubscriberInstrumentalMetrologyExpertiseAddress.cs" />
+    <Compile Include="Classes\R-1122_ElectrometerSpecificData.cs" />
+    <Compile Include="Classes\R-1124_NominalPrimaryPower.cs" />
+    <Compile Include="Classes\R-1126_NominalSecondaryPower.cs" />
+    <Compile Include="Classes\R-1128_NominalForce.cs" />
+    <Compile Include="Classes\R-1130_TransformerSpecificData.cs" />
+    <Compile Include="Classes\R-1132_InstrumentalMetrologyExpertiseApplication.cs" />
+    <Compile Include="Classes\R-1134_TypeFiscalDeviceCode.cs" />
+    <Compile Include="Classes\R-1136_TypeFiscalDeviceName.cs" />
+    <Compile Include="Classes\R-1138_ModelFiscalDeviceName.cs" />
+    <Compile Include="Classes\R-1140_TypeCentralRegisteringDevice.cs" />
+    <Compile Include="Classes\R-1142_TypeInstrumentalCostName.cs" />
+    <Compile Include="Classes\R-1144_TypeExaminationFiscalDeviceApplication.cs" />
+    <Compile Include="Classes\R-1146_MaterialResponsiblePerson.cs" />
+    <Compile Include="Classes\R-1148_InvoiceData.cs" />
+    <Compile Include="Classes\R-1150_IsAppliedCalibrationInstrumentals.cs" />
+    <Compile Include="Classes\R-1152_IsAppliedCalibrationEtalons.cs" />
+    <Compile Include="Classes\R-1154_IsAppliedCalibrationComparingMaterials.cs" />
+    <Compile Include="Classes\R-1156_CalibrationPlace.cs" />
+    <Compile Include="Classes\R-1158_CalibrationMethod.cs" />
+    <Compile Include="Classes\R-1160_NameIdNumberSiSmE.cs" />
+    <Compile Include="Classes\R-1162_SiSmETypeName.cs" />
+    <Compile Include="Classes\R-1164_SiSmETypeCode.cs" />
+    <Compile Include="Classes\R-1166_AppliedCalibrationSiSmEBasicData.cs" />
+    <Compile Include="Classes\R-1168_CalibrationInstrumentalComparingMaterialsApplication.cs" />
+    <Compile Include="Classes\R-1170_PlayingFacilityName.cs" />
+    <Compile Include="Classes\R-1172_PlayingFacilityType.cs" />
+    <Compile Include="Classes\R-1174_PlayingFacilityProductionNumber.cs" />
+    <Compile Include="Classes\R-1176_PlayingFacilityProducer.cs" />
+    <Compile Include="Classes\R-1178_PlayingFacilityImporter.cs" />
+    <Compile Include="Classes\R-1180_GamblingOrganizer.cs" />
+    <Compile Include="Classes\R-1182_PlayingFacilityTypeApprovalApplication.cs" />
+    <Compile Include="Classes\R-1184_InformationRegisterApprovedTypesMEApplication.cs" />
+    <Compile Include="Classes\R-1186_DeviceTestedElectromagneticCompatibilityName.cs" />
+    <Compile Include="Classes\R-1188_DeviceTestedElectromagneticCompatibilityType.cs" />
+    <Compile Include="Classes\R-1190_DeviceBrand.cs" />
+    <Compile Include="Classes\R-1192_ElectromagneticCompatibilityTestingApplication.cs" />
+    <Compile Include="Classes\R-1194_ProcedureAssessmentConformityTypeCode.cs" />
+    <Compile Include="Classes\R-1196_ProcedureAssessmentConformityTypeName.cs" />
+    <Compile Include="Classes\R-1198_ProcedureAssessmentConformityData.cs" />
+    <Compile Include="Classes\R-1202_DoesApplicantWishAttendProcedureTestType.cs" />
+    <Compile Include="Classes\R-1204_ScalesTypeDescription.cs" />
+    <Compile Include="Classes\R-1206_QualitySystemDescription.cs" />
+    <Compile Include="Classes\R-1208_ConformityAssessmentNonAutomaticWeighingApplication.cs" />
     <Compile Include="Classes\R-2000_ElectronicDocumentAuthorQuality.cs" />
     <Compile Include="Classes\R-2130_HoursCount.cs" />
     <Compile Include="Classes\R-3002_RemovingIrregularitiesInstructionsHeader.cs" />
@@ -640,9 +742,6 @@
     <Compile Include="Classes\R-4204_AircraftMaintenanceLicenseDate.cs" />
     <Compile Include="Classes\R-4206_AircraftMaintenanceLicenseData.cs" />
     <Compile Include="Classes\R-4208_AircraftMaintenanceOrganizationApprovalNumber.cs" />
-    <Compile Include="Classes\R-4210_PhoneNumbersDesc.cs" />
-    <Compile Include="Classes\R-4212_FaxNumbersDesc.cs" />
-    <Compile Include="Classes\R-4214_EmailAddress.cs" />
     <Compile Include="Classes\R-4216_AircraftMaintenanceOrganizationData.cs" />
     <Compile Include="Classes\R-4218_AircraftMaintenanceCategoryLicenseCode.cs" />
     <Compile Include="Classes\R-4220_AircraftMaintenanceCategoryLicenseName.cs" />
@@ -714,7 +813,6 @@
     <Compile Include="Classes\R-4352_AircraftInspectionDesiredPeriod.cs" />
     <Compile Include="Classes\R-4354_AircraftInspectionPreferences.cs" />
     <Compile Include="Classes\R-4356_AircraftRegistrationCertificateApplication.cs" />
-    <Compile Include="Classes\R-4358_ContactPersonData.cs" />
     <Compile Include="Classes\R-4360_CategoryAircraftCode.cs" />
     <Compile Include="Classes\R-4362_CategoryAircraftName.cs" />
     <Compile Include="Classes\R-4364_CategoryAircraft.cs" />
@@ -1075,6 +1173,34 @@
     <Compile Include="Classes\R-5086_HiredOrganizationName.cs" />
     <Compile Include="Classes\R-5088_AircraftDataPartB.cs" />
     <Compile Include="Classes\R-5090_EngagedCommercialTransportationPassengersCargoApplication.cs" />
+    <Compile Include="Classes\R-5092_EntityTradeName.cs" />
+    <Compile Include="Classes\R-5094_ApprovalDescriptionManagementOrganizationMaintenanceApplication.cs" />
+    <Compile Include="Classes\R-5096_ApprovalTechnicalLogApplication.cs" />
+    <Compile Include="Classes\R-5098_NumberEditionModificationPTO.cs" />
+    <Compile Include="Classes\R-5100_DateEditionModificationPTO.cs" />
+    <Compile Include="Classes\R-5102_NumberDateDocumentDevelopedProgram.cs" />
+    <Compile Include="Classes\R-5104_ApprovalProgramPlanMaintenanceAircraftApplication.cs" />
+    <Compile Include="Classes\R-5106_NamesPersonApproval.cs" />
+    <Compile Include="Classes\R-5108_PositionPersonApproval.cs" />
+    <Compile Include="Classes\R-5110_QualificationPersonApproval.cs" />
+    <Compile Include="Classes\R-5112_ExperiencePersonApproval.cs" />
+    <Compile Include="Classes\R-5114_PersonApprovalData.cs" />
+    <Compile Include="Classes\R-5116_ApprovalManagementPersonnelApplication.cs" />
+    <Compile Include="Classes\R-5118_AircraftTypeSeriesGroup.cs" />
+    <Compile Include="Classes\R-5120_IsAirworthinessReviewAuthorized.cs" />
+    <Compile Include="Classes\R-5122_IsIssuancePermitFlyAllowed.cs" />
+    <Compile Include="Classes\R-5124_OrganizationOperatingControlQualitySystem.cs" />
+    <Compile Include="Classes\R-5126_ApprovalRange.cs" />
+    <Compile Include="Classes\R-5128_PlaceOUPPLG.cs" />
+    <Compile Include="Classes\R-5130_ContactBasicInformation.cs" />
+    <Compile Include="Classes\R-5132_ApprovalPartMSubpartGApplication.cs" />
+    <Compile Include="Classes\R-5134_ChangeCompetentAuthorityLicensePilotAccordanceLicenseApplication.cs" />
+    <Compile Include="Classes\R-5136_ExplanationApplying.cs" />
+    <Compile Include="Classes\R-5138_InstructorRightsType.cs" />
+    <Compile Include="Classes\R-5140_LicenseLimitation.cs" />
+    <Compile Include="Classes\R-5142_CertificatedLicense.cs" />
+    <Compile Include="Classes\R-5144_EstablishingAssessCompetenceApplication.cs" />
+    <Compile Include="Classes\R-5146_CertificatedLicensesCollection.cs" />
     <Compile Include="Classes\R-6002_RecipientNoIdentification.cs" />
     <Compile Include="Classes\R-6004_AuthorNoIdentification.cs" />
     <Compile Include="Classes\R-6006_HeaderNoIdentification.cs" />
@@ -1103,6 +1229,54 @@
     <Compile Include="Classes\R-6086_InformationPaymentCostsProvidingAccess.cs" />
     <Compile Include="Classes\R-6088_OtherBodiesOrganizationsPublicInformation.cs" />
     <Compile Include="Classes\R-6090_DecisionGrantAccessPublicInformation.cs" />
+    <Compile Include="Classes\R-7002_URIBatchLNPE.cs" />
+    <Compile Include="Classes\R-7004_TypeEntryRegisterCode.cs" />
+    <Compile Include="Classes\R-7006_TypeEntryRegisterName.cs" />
+    <Compile Include="Classes\R-7008_TypeEntryRegister.cs" />
+    <Compile Include="Classes\R-7010_OrganizationalFormLNPECode.cs" />
+    <Compile Include="Classes\R-7012_OrganizationalFormLNPEName.cs" />
+    <Compile Include="Classes\R-7014_OrganizationalFormLNPE.cs" />
+    <Compile Include="Classes\R-7016_ContactDataLNPE.cs" />
+    <Compile Include="Classes\R-7018_CourtCode.cs" />
+    <Compile Include="Classes\R-7020_CourtName.cs" />
+    <Compile Include="Classes\R-7022_Court.cs" />
+    <Compile Include="Classes\R-7024_CourtCaseNumber.cs" />
+    <Compile Include="Classes\R-7026_CourtCaseYear.cs" />
+    <Compile Include="Classes\R-7028_CourtCase.cs" />
+    <Compile Include="Classes\R-7030_BatchNumberLNPECourtRegister.cs" />
+    <Compile Include="Classes\R-7032_CourtRegistrationData.cs" />
+    <Compile Include="Classes\R-7034_EntitySubjectActivity.cs" />
+    <Compile Include="Classes\R-7036_EntityGoals.cs" />
+    <Compile Include="Classes\R-7038_EntityMeans.cs" />
+    <Compile Include="Classes\R-7040_ManagingAuthorityNameLNPE.cs" />
+    <Compile Include="Classes\R-7042_StartMandateMemberManagingAuthority.cs" />
+    <Compile Include="Classes\R-7044_EndMandateMemberManagingAuthority.cs" />
+    <Compile Include="Classes\R-7046_MemberManagingAuthority.cs" />
+    <Compile Include="Classes\R-7048_CourtCaseActNumber.cs" />
+    <Compile Include="Classes\R-7050_CourtCaseActDate.cs" />
+    <Compile Include="Classes\R-7052_CourtCaseActKindCode.cs" />
+    <Compile Include="Classes\R-7054_CourtCaseActKindName.cs" />
+    <Compile Include="Classes\R-7056_CourtCaseActKind.cs" />
+    <Compile Include="Classes\R-7058_FileName.cs" />
+    <Compile Include="Classes\R-7060_FileContentHyperlink.cs" />
+    <Compile Include="Classes\R-7062_CourtCaseAct.cs" />
+    <Compile Include="Classes\R-7064_FlagPaperCertificate.cs" />
+    <Compile Include="Classes\R-7066_ModificationTypeNomenclature.cs" />
+    <Compile Include="Classes\R-7068_ContactData.cs" />
+    <Compile Include="Classes\R-7070_InitialRegistrationChangesNonProfitEntityApplication.cs" />
+    <Compile Include="Classes\R-7072_Manager.cs" />
+    <Compile Include="Classes\R-7074_InitialRegistrationChangesNonProfitForeignEntityBranchApplication.cs" />
+    <Compile Include="Classes\R-7076_RegistrationCircumstancesBranchLegalEntityRegisteredBulgariaApplication.cs" />
+    <Compile Include="Classes\R-7078_AnnouncedActKindCode.cs" />
+    <Compile Include="Classes\R-7080_AnnouncedActKindName.cs" />
+    <Compile Include="Classes\R-7082_AnnouncedActKind.cs" />
+    <Compile Include="Classes\R-7084_AnnouncedActYear.cs" />
+    <Compile Include="Classes\R-7086_AnnouncedAct.cs" />
+    <Compile Include="Classes\R-7088_DeclarationInformationActivitiesPreviousYearApplication.cs" />
+    <Compile Include="Classes\R-7090_GoverningBodyEntityActDate.cs" />
+    <Compile Include="Classes\R-7092_GoverningBodyEntityAct.cs" />
+    <Compile Include="Classes\R-7094_CancellationRegistrationNonProfitEntityBranchApplication.cs" />
+    <Compile Include="Classes\R-7096_AddressAdditionalDescription.cs" />
     <Compile Include="Classes\xmlsig.cs" />
     <Compile Include="Enums\AccessFormPublicInformationNomenclature.cs" />
     <Compile Include="Enums\ActivityKindNomenclature.cs" />
@@ -1285,12 +1459,3729 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ClassGeneration.log</LastGenOutput>
     </None>
+    <None Include="Schemas\0007-000001_DocumentElectronicTransportTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000002_ElectronicDocumentDiscrepancyTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000003_ElectronicServiceProviderTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000004_AISAccessManagementTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000005_ClassificationSchemeSectionTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000006_AdministrativeNomenclatureDocumentTypeProcessingTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000007_AdministrativeNomenclatureDocumentTypeArchivalTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000008_AISTaskStatusNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000009_AISTaskExecutionAssessmentTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000010_AISCertificationCheckResultTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000011_DocumentProcessTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000012_DocumentOpinionTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000013_ServiceResultReceiptMethodNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000014_ServiceTermTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000015_ApplicationTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000016_IdentityDocumentTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000017_RelationshipNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000018_SpouseNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000019_CitizenshipStatusActNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000020_MunicipalityInformationAccessTypesNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0007-000021_LiabilityTypesNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000001_BatchNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000002_RegisterIndex.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000003_DocumentSequenceNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000004_DocumentReceiptOrSigningDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000005_DocumentElectronicTransportType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000006_ElectronicDocumentDiscrepancyType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000007_DocumentTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000008_PersonFirstName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000009_PersonMiddleName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000010_PersonLastName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000011_PersonPseudonim.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000012_EGN.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000013_LNCh.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000014_ForeignCitizenFirstNameCyrillic.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000015_ForeignCitizenLastNameCyrillic.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000016_ForeignCitizenOtherNameCyrillic.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000017_ForeignCitizenPseudonimCyrillic.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000018_ForeignCitizenFirstNameLatin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000019_ForeignCitizenLastNameLatin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000020_ForeignCitizenOtherNameLatin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000021_ForeignCitizenPseudonimLatin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000022_BirthDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000023_SettlementAbroadName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000024_CountryISO3166TwoLetterCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000025_CountryNameCyrillic.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000026_ForeignCitizenIdentityDocumentNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000027_ForeignCitizenIdentityDocumentType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000028_EntityIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000029_EntityName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000030_ForeignEntityName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000031_ForeignEntityRegister.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000032_ForeignEntityIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000033_ForeignEntityOtherData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000034_ElectronicServiceProviderType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000035_ElectronicServiceAuthorQuality.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000036_EmailAddress.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000037_AISCaseAccessIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000038_AISUserIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000039_AISURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000040_FileContent.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000041_FileType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000042_ShortTransferDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000043_ExpandedTransferDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000044_TermName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000045_ServiceStageResultID.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000046_ServiceStageResultName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000047_AdministrativeBodyName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000048_EKDAPositionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000049_AdministrativeDepartmentName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000050_AISUsername.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000051_AISAccessManagementType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000052_AdministrativeNomenclatureName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000053_ExecutionTerm.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000054_AISObjectCreationTime.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000055_ClassificationSchemeOrNomenclatureID.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000056_ClassificationSchemeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000057_ClassificationSchemeSectionType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000058_ClassificationSchemeSectionID.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000059_ClassificationSchemeSectionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000060_ClassificationSchemeSectionDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000061_AISObjectClassificationTime.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000062_AISObjectID.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000063_AISObjectType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000064_ServiceStageName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000065_ServiceStageDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000066_ServiceStageTerm.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000067_ServiceStageInstructions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000068_AdministrativeNomenclatureDocumentTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000069_AdministrativeNomenclatureDocumentTypeDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000070_DocumentInInternalDocumentRegisterURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000071_AISCaseName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000072_AISCaseDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000073_AdministrativeNomenclatureDocumentTypeProcessingType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000074_EmpoweredPersonDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000075_AdministrativeNomenclatureDocumentTypeArchivalType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000076_DocumentTypeTemplate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000077_SUNAUServiceURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000078_AdministrativeNomenclatureServiceName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000079_AdministrativeNomenclatureServiceDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000080_ServiceInstructions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000081_AISTaskName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000082_AISTaskID.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000083_AISTaskExpandedDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000084_AISTaskScheduledStartDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000085_AISTaskScheduledCompletionDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000086_AISTaskActualStartDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000087_AISTaskActualCompletionDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000088_InternalDocumentRegisterIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000089_DocumentRegisterName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000090_RegistrationInDocumentRegisterTime.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000091_DocumentID.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000092_DocumentName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000093_AISTaskStatus.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000094_AISTaskStatusCheckDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000095_AISTaskServiceStatusInclusionTime.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000096_AISCaseID.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000097_CaseSectionInclusionTime.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000098_CaseSectionSequenceNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000099_AISTaskExecutionAssessmentType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000100_AISTaskAssessmentDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000101_AISTaskExecutionAssessmentDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000102_DocumentLocationInStorage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000103_DocumentRegistrationInStorageTime.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000104_DocumentDeliveryOrAcceptanceInStorageTime.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000105_OfficerInDocumentStorage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000106_AISCaseDocumentAccessIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000107_CertificationAISOrApplicationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000108_AISCertificationCheckSequenceNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000109_AISCertificationCheckName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000110_AISCertificationCheckResultType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000111_AISCertificationCheckPreparationActions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000112_AISCertificationCheckActualOutcome.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000113_AISCertificationCheckDiscrepancyRecommendation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000114_AISCertificationCheckDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000115_DocumentProcessType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000116_DocumentContent.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000117_DocumentOpinionType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000118_DocumentOpinionCreationTime.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000119_DocumentOpinionContent.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000120_ElectronicDocumentXmlContent.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000121_AISCorrespondenceAccessIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000122_ServiceTerm.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000123_StreetGRAOCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000124_StreetText.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000125_BuildingNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000126_Entrance.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000127_Floor.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000128_PostCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000129_ElectronicServiceApplicantPhoneNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000130_ElectronicServiceApplicantFaxNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000131_SUNAUServiceName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000132_AttachedDocumentFileContent.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000133_AttachedDocumentDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000134_AttachedDocumentUniqueIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000135_AttachedDocumentFileName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000136_PostOfficeBox.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000137_PopulationRegisterCircumstanceDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000138_IndividualAdministrativeActRefusalHeader.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000139_IndividualAdministrativeActRefusalLegalGround.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000140_IndividualAdministrativeActRefusalFactualGround.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000141_IndividualAdministrativeActRefusalAppealTerm.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000142_IndividualAdministrativeActRefusalAppealAuthority.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000143_ServiceTermType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000144_ApplicationType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000145_IdentityNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000146_IdentitityIssueDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000147_IdentityIssuer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000148_InfantCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000149_CitizenshipRegisterIndex.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000150_CitizenshipRegisterSequenceActNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000151_CitizenshipRegisterActSubNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000152_BirthCertificateIssueDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000153_FamilyNameBeforeMarriage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000154_Relationship.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000155_RelationshipCerfiticatePersonSerialNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000156_MaritalStatusCerfiticatePersonSerialNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000157_PlaceOfDeath.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000158_DateOfDeath.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000159_TimeOfDeath.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000160_CauseOfDeathDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000161_InheritorUID.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000162_InheritorDataNote.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000163_Spouse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000164_CitizenshipStatusActType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000165_MarriageDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000166_BeeFamiliesCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000167_CultivatedBeeFamiliesCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000168_NewlyBoughtBeeFamiliesCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000169_SoldBeeFamiliesCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000170_WinteredBeeFamiliesCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000171_NewlyCreatedBeeFamiliesCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000172_ApiaryLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000173_PropertyIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000174_MunicipalityInformationAccessType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000175_InformationRecordingTechnicalParameters.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000176_MunicipalityInformationAccessLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000177_MunicipalityInformationProvidedAccessTerm.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000178_NeededMunicipalityInformationProvidedAccessLevel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000179_MunicipalityInformationAccessExpenses.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000180_OtherInformationHolders.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000181_MunicipalityInformationAccessExpensesPaymentInfo.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000182_CitizenshipStatusActComposeDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000183_CountryGRAOCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000184_CountryName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000185_DistrictGRAOCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000186_DistrictGRAOName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000187_MunicipalityGRAOCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000188_MunicipalityGRAOName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000189_SettlementGRAOCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000190_SettlementGRAOName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000191_AreaCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000192_AreaName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000193_Apartment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000194_AddressDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000195_GenderCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000196_GenderName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000197_ServiceResultReceiptMethod.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000198_SendApplicationWithReceiptAcknowledgedMessage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000199_ApplicationSigningTime.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000200_DistrictCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000201_DistrictName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000202_MunicipalityName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000203_MayoraltyCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000204_MayoraltyName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000205_SettlementCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000206_SettlementName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000207_SecondLevelRegionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000208_SecondLevelRegionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000209_MunicipalityCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000210_MaritalStatusCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000211_MaritalStatus.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000212_IdentityDocumentType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000213_PersonResidenceStatusCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000214_PersonResidenceStatus.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000215_EducationLevelCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000216_EducationLevel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000217_ResidencePurposeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000218_ResidencePurpose.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000219_ResidencePeriodCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000220_ResidencePeriod.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000221_MarriageCertificateIssueDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000222_ForeignCitizenFamilyNameBeforeMarriage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000223_CauseOfDeathCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000224_CauseOfDeath.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000225_NeededMunicipalityInformationDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000226_ResidentialComplex.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000227_StreetBoulevardSquare.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000228_StreetBoulevardSquareNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000229_ApartmentBuildingNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000230_TaxiTransportRegistrationCertificateNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000231_TaxiTransportRegistrationCertificateIssueDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000232_TaxisInTaxiTransportersRegisterCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000233_TaxisInTaxiTransportersApplicationCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000234_TaxisInTaxiTransportersCertificateCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000235_CarRegistrationNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000236_TaxiTransportationPermissionValidity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000237_EntityManagementEntrance.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000238_EntityManagementFloor.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000239_EntityManagementApartment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000240_LiabilityCertificateIssueDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000241_LiabilityType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000242_LiabilitySize.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000243_LiabilityLegalGround.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000244_LiabilityPrincipalSize.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000245_LiabilityInterestSize.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000246_TouristSiteCategoryCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000247_TouristSiteCategory.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000248_ShelterAndAccommodationTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000249_ShelterAndAccommodationType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000250_TouristSiteName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000251_TouristSitePhoneNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000252_TouristSiteRoomCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000253_TouristSiteTemporaryCertificateNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000254_TouristSiteTemporaryCertificateIssueDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000255_TouristSiteTemporaryCertificateValidity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000256_OpenProcedureGrantOrderDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000257_TouristSiteCategoryCertificateIssueDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000258_TouristSiteCategoryAllocationOrderDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000259_TouristSiteLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000260_DiningAndEntertainmentSiteTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000261_DiningAndEntertainmentSiteType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000262_TotalSeatsCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000307_PostCodeAbroad.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0008-000308_AddressDescriptionAbroad.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000001_DocumentURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000002_ElectronicServiceProviderBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000003_DocumentTypeURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000004_XMLDigitalSignature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000005_PersonNames.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000006_PersonIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000007_ForeignCitizenNames.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000008_PersonBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000009_ForeignCitizenPlaceOfBirth.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000010_ForeignCitizenIdentityDocument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000011_ForeignCitizenBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000012_ElectronicStatementAuthor.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000013_EntityBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000014_ForeignEntityBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000015_ElectronicServiceRecipient.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000016_ElectronicServiceApplicant.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000017_ReceiptNotAcknowledgedMessage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000018_AISUserNames.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000019_ReceiptAcknowledgedMessage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000020_TransferredDocument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000021_TransferContainer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000022_RegisterObjectURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000023_TermURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000024_RegisteredErrorInDocumentContent.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000025_RegisteredErrorsInDocumentContent.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000026_AISUserPositionInAdministration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000027_AISUserBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000028_AISUserOrAISURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000029_PositionInAdministration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000030_PositionInAdministrationOrAISUser.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000031_UnifiedDataURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000032_AISObjectCreationData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000033_AISCorrespondent.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000034_AdministrativeNomenclatureServiceStageResultElement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000035_ClassificationSchemeSection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000036_ClassificationScheme.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000037_AISObjectClassificationData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000038_ClassificationData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000039_AdministrativeNomenclatureServiceStageResults.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000040_ServiceStageURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000041_ServiceStageExecutor.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000042_AdministrativeNomenclatureDocumentTypeURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000043_AdministrativeNomenclatureDocumentTypeBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000044_RegisteredDocumentURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000045_CreatedDocumentFromServiceStage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000046_InitiatingDocumentURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000047_RegisteredDocumentOrDocumentType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000048_AdministrativeNomenclatureServiceStagesElement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000049_AdministrativeNomenclatureServiceStages.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000050_EmpoweredPerson.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000051_EditorOrVisualizerApplicationURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000052_AdministrativeNomenclatureDocumentTypeElement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000053_AdministrativeNomenclatureDocumentTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000054_AdministrativeNomenclatureServiceURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000055_ServiceResponsible.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000057_AdministrativeNomenclatureServicesElement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000058_AdministrativeNomenclatureServices.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000059_AISUser.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000060_ObjectAccessGrantData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000061_ClassificationSchemeAccessGrantData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000062_AISTaskExecutor.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000063_AISTaskResponsibleTeamMember.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000064_AISTaskInitialDocument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000065_AISTaskCreatedDocument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000066_AISTaskServiceStatusInclusionData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000067_ServiceStatus.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000068_AISTask.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000069_DocumentRegister.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000070_RegistrationInDocumentRegisterRegistrar.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000071_AISTaskStatusData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000072_AISDocumentRegisterDocumentData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000073_AISCaseURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000074_CaseSectionInclusionData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000075_AISCaseSection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000076_AISTaskAssessment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000077_AISTaskAssessmentProtocol.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000078_DocumentRegistrationInDocumentStorageData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000079_DocumentAcceptanceInDocumentStorageData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000080_AISCase.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000081_AISCertificationCheckResult.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000082_AISCaseOfficialSection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000083_AISCaseInternalSection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000084_AISCaseControlSection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000085_AISDocument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000086_DocumentDeliveryFromDocumentStorageData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000087_DocumentOpinionCreationData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000088_DocumentOpinion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000089_AISCaseDataInternetAccess.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000090_AISTransferData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000091_ElectronicAdministrativeServiceURI.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000092_ElectronicDocumentXml.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000093_AdministrativeServiceDeliveryLetter.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000094_PersonAddress.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000095_PlaceOfBirth.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000096_PlaceOfBirthAbroad.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000097_CurrentAddressCertificateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000098_CurrentAddressCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000099_IdentityDocumentBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000100_MaritalStatusData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000101_ChangePermanentAddressCertificateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000102_ChangePermanentAddressMessage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000103_PersonResidenceStatusData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000104_ResidencePeriodData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000105_ChangeCurrentAddressApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000106_ChangeCurrentAddressMessage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000107_CitizenshipStatusActNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000108_CitizenshipStatusActComposeLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000109_ForeignCitizenData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000110_ParentData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000111_BirthCerfiticateDublicateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000112_BirthCerfiticateDublicate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000113_SpouseData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000114_MarriageLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000115_MarriageCertificateDublicate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000116_CitizenNamesBeforeMarriage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000117_ForeignCitizenNamesBeforeMarriage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000118_RelativeData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000119_ForeignCitizeRelativeData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000120_RelationshipCerfiticateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000121_MinorData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000122_MaritalStatusCerfiticateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000123_MaritalStatusCerfiticate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000124_SecondDeathCertificateTranscriptApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000125_DeathLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000126_DeceasedPersonData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000127_FirstDeathCertificateTranscriptApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000128_DeathCertificateTranscript.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000129_LawfulSuccessionReason.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000130_InheritorData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000131_ForeignInheritorData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000132_InheritorsCerfiticateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000133_Citizenship.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000134_InheritorsCerfiticate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000135_CitizenshipRegistrationBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000136_CitizenshipStatusActAbsenceCertificateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000137_ElectronicServiceApplicantContactData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000138_CitizenshipStatusActAbsenceCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000139_AttachedDocument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000140_ApiaryAddress.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000141_ServiceApplicantReceiptData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000142_Residence.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000143_MunicipalityAdministrationLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000144_ForeignEntityResidence.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000145_MunicipalityInformationAccessRightSubject.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000146_PermanentAddressCertificateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000147_DocumentContainingMunicipalityInformationCopyApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000148_PermanentAddressCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000149_MunicipalityInformationAccessRefusal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000150_IndividualAdministrativeActRefusal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000151_MunicipalityInformationAbsenceNotification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000152_ElectronicAdministrativeServiceHeader.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000153_ElectronicAdministrativeServiceFooter.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000154_CorrespondenceConsiderationRefusal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000155_AdministrativeTerritorialUnitDataGRAO.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000156_GenderData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000157_AreaData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000158_CountryData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000159_ChangePermanentAddressCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000160_EducationLevelData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000161_ResidencePurposeData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000162_MinorChild.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000163_ChangeCurrentAddressCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000164_CitizenshipStatusActBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000165_MarriageCertificateDublicateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000166_RelationshipCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000167_CausesOfDeathData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000168_CitizenshipStatusActAbsenceCertificateSpecification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000169_BeeFamilyRegistrationApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000170_DocumentContainingMunicipalityInformationCopyGrantDecision.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000171_AdministrativeTerritorialUnitData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000172_EntityManagementAddress.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000173_TaxiTransportationPermissionApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000174_TaxiTransportationPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000175_LiablePerson.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000176_LiabilityCertificateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000177_LiabilityCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000178_TouristSiteCategoryData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000179_ShelterAndAccommodationTypeData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000180_TouristSiteAddress.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000181_ShelterAndAccommodation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000182_OpenProcedureGrantOrderNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000183_TouristSiteCategoryCertificateNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000184_TouristSiteCategoryAllocationOrderNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000185_ShelterAndAccommodationCategorizationApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000186_TemporaryCategorizingProcedureCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000187_ShelterAndAccommodationCategorizationCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000188_DiningAndEntertainmentSiteTypeData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000189_DiningAndEntertainmentSite.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000190_DiningAndEntertainmentCategorizationApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000191_DiningAndEntertainmentCategorizationCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\0009-000192_OfficerInDocumentStorage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\Abbcdnconfig.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\AopApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\AopAttachedDocumentData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\AopAttachedDocuments.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-0454_StartDateTimePeriod.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-0456_DeadlineTimePeriod.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1002_PaymentTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1004_PaymentTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1006_PaymentConditionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1007_DemandCertificateRegistrationPopulationRegister.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1008_PaymentConditionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1010_AdditionInformationESA.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1012_PhoneNumbersDesc.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1014_FaxNumbersDesc.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1016_EmailAddress.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1018_ContactPersonData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1024_MCSSupplierName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1026_MCSSupplierData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1028_MeasuringEquipmentSupplierAdditionalNote.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1030_MeasuringEquipmentDesc.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1032_MeasuringEquipmentID.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1034_MeasuringEquipmentYear.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1036_MeasuringEquipmentSampleData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1038_MERequestingReasonsCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1040_MERequestingReasonsName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1042_MeasuringEquipmentPurpose.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1044_MeasuringEquipmentApprovalApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1046_MEVerificationCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1048_MEVerificationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1050_MEInitialVerificationCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1052_MEInitialVerificationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1054_MESubsequentVerificationCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1056_MESubsequentVerificationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1058_TestSiteName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1060_TestSiteAddress.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1062_TestSiteData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1064_MERequestedVerificationDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1066_MEVerificationSiteTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1068_MEVerificationSiteTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1070_MEVerificationSite.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1072_IsApplicantProvidesCalibratingStandards.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1074_RequestEssence.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1076_RequestTemplateIA.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1078_ElectrometerSpecificType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1080_BankName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1082_BankBranchName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1084_BIC.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1086_IBAN.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1088_PaymentData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1090_MEVerificationApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1092_InstrumentalTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1094_InstrumentalTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1096_InstrumentalFabricNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1098_InstrumentalProductionYear.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1100_InstrumentalRange.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1102_InstrumentalIndication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1104_ReasonsRequestingMetrologyExpertise.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1106_InstrumentalGeneralData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1108_ElectrometerPowerRange.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1110_ElectrometerTensionRange.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1112_ElectrometerIndication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1114_InstrumentalSubscribeNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1116_InstrumentalWhiteNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1118_SubscriberInstrumentalMetrologyExpertise.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1120_SubscriberInstrumentalMetrologyExpertiseAddress.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1122_ElectrometerSpecificData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1124_NominalPrimaryPower.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1126_NominalSecondaryPower.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1128_NominalForce.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1130_TransformerSpecificData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1132_InstrumentalMetrologyExpertiseApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1134_TypeFiscalDeviceCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1136_TypeFiscalDeviceName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1138_ModelFiscalDeviceName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1140_TypeCentralRegisteringDevice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1142_TypeInstrumentalCostName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1144_TypeExaminationFiscalDeviceApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1146_MaterialResponsiblePerson.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1148_InvoiceData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1150_IsAppliedCalibrationInstrumentals.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1152_IsAppliedCalibrationEtalons.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1154_IsAppliedCalibrationComparingMaterials.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1156_CalibrationPlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1158_CalibrationMethod.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1160_NameIdNumberSiSmE.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1162_SiSmETypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1164_SiSmETypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1166_AppliedCalibrationSiSmEBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1168_CalibrationInstrumentalComparingMaterialsApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1170_PlayingFacilityName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1172_PlayingFacilityType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1174_PlayingFacilityProductionNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1176_PlayingFacilityProducer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1178_PlayingFacilityImporter.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1180_GamblingOrganizer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1182_PlayingFacilityTypeApprovalApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1184_InformationRegisterApprovedTypesMEApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1186_DeviceTestedElectromagneticCompatibilityName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1188_DeviceTestedElectromagneticCompatibilityType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1190_DeviceBrand.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1192_ElectromagneticCompatibilityTestingApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1194_ProcedureAssessmentConformityTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1196_ProcedureAssessmentConformityTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1198_ProcedureAssessmentConformityData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1202_DoesApplicantWishAttendProcedureTestType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1204_ScalesTypeDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1206_QualitySystemDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-1208_ConformityAssessmentNonAutomaticWeighingApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-2000_ElectronicDocumentAuthorQuality.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-2130_HoursCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3002_RemovingIrregularitiesInstructionsHeader.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3004_IrregularityType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3006_AdditionalInformationSpecifyingIrregularity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3008_DeadlineCorrectionIrregularities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3010_RemovingIrregularitiesInstructions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3312_ОwnerOfTouristSite.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3972_FinancialArrangementsText.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3974_PersonRepresentingTradingCompanyRoleCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3976_PersonRepresentingTradingCompanyRoleName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3978_SpaceName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3980_FlagSpaceFlightsBrnav.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3982_FlagSpaceFlightsRvsm.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3984_FlagSpaceFlightsOther.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3986_ManufacturerName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3988_ManufacturerContactData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3990_SubmissionsTermsCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3992_HoursFlyingExperienceSkillTest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3994_AttachedDocumentDatasCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3996_GroupLicenseDependingRequirementsFilingCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-3998_GroupLicenseDependingRequirementsFilingName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4000_GroupLicenseDependingRequirementsFiling.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4002_PersonFirstNameLatin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4004_PersonMiddleNameLatin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4006_PersonLastNameLatin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4008_PersonNamesLatin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4010_CAAPersonalIdentificationNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4012_FlightCrewPersonalData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4014_EvidencePersonRepresentingRecipientElectronicService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4016_ConsentReceivingElectronicStatements.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4018_AuthorityIssuedAttachedDocumentCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4020_AuthorityIssuedAttachedDocumentName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4022_AuthorityIssuedAttachedDocument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4024_AttachedDocumentTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4026_AttachedDocumentTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4028_AttachedDocumentType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4030_AttachedDocumentKindCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4032_AttachedDocumentKindName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4034_AttachedDocumentKind.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4036_AttachedDocumentNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4038_AttachedDocumentIssueDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4040_AttachedDocumentData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4042_ASCertificateTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4044_ASCertificateTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4046_ASCertificateTypeNameAlt.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4048_ASCertificateType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4050_AircraftClassQualificationClassCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4052_AircraftClassQualificationClassName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4054_AircraftClassQualificationClassAlt.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4056_AircraftClassQualificationClass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4058_AircraftTypeQualificationClassCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4060_AircraftTypeQualificationClassName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4062_AircraftTypeQualificationClassAlt.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4064_AircraftTypeQualificationClass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4066_AviationAdministrationCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4068_AviationAdministrationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4070_AviationAdministrationNameAlt.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4072_AviationAdministration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4074_ASCertificateNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4076_ASCertificateIssuedOn.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4078_ASCertificateValidity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4080_ASCertificateData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4082_AeromedicalFitnessClassCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4084_AeromedicalFitnessName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4086_AeromedicalFitnessClass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4088_AeromedicalCenterCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4090_AeromedicalCenterName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4092_AeromedicalCenter.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4094_MedicalExaminationLastDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4096_MedicalExaminationValidity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4098_AeromedicalFitnessCertificateData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4100_ASCourseCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4102_ASCourseName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4104_ASCourseExam.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4106_ATOCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4108_ATOName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4110_ATO.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4112_ASCoursePeriod.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4114_ASCourseData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4116_CrewInteractTrainingData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4118_RTTrainingData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4120_ASLLCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4122_ASLLName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4124_ASLLNameCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4126_ASLLData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4128_LECCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4130_LECName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4132_LEC.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4134_LLData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4136_FlightExpRoleCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4138_FlightExpRoleName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4140_FlightExpRole.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4142_FlightExpTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4144_FlightExpTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4146_FlightExpType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4148_AircraftClassCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4150_AircraftClassName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4152_AircraftClass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4154_AircraftTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4156_AircraftTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4158_AircraftType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4160_FlightExpByRole.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4162_FlightExpByType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4164_FlightSkillTestCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4166_FlightSkillTestName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4168_FlightSkillTest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4170_FlightSimulatorTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4172_FlightSimulatorTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4174_FlightSimulatorType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4176_FlightSkillTestExaminerCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4178_FlightSkillTestExaminerName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4180_FlightSkillTestExaminer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4182_FlightSkillTestDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4184_FlightSkillTestData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4186_InitialCertificationCommercialPilotCapacityInstrumentFlightApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4202_AircraftMaintenanceLicenseNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4204_AircraftMaintenanceLicenseDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4206_AircraftMaintenanceLicenseData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4208_AircraftMaintenanceOrganizationApprovalNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4216_AircraftMaintenanceOrganizationData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4218_AircraftMaintenanceCategoryLicenseCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4220_AircraftMaintenanceCategoryLicenseName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4222_AircraftMaintenanceCategoryLicenseNameAlt.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4224_AircraftMaintenanceCategoryLicense.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4226_AircraftMaintenanceCategoryLicenseCandidatesApplicant.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4228_DescriptionClaimedCreditRecognitionMaintenanceTrainingAircraft.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4230_DescriptionClaimedCreditExperienceTrainingMaintenanceAircraft.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4232_DescriptionClaimedCreditEquivalentExamsGraduationMaintenanceAircraft.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4234_CreditingPracticalExperienceGainedTrainingSection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4236_CreditEquivalentExamsGraduation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4238_RecognitionCreditsMaintenanceTrainingAircraft.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4240_InitialAuthorizationMaintenanceAircraftAMLApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4242_InitialIssueLicenseFlightDispatcherApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4244_LicenseFlightCrewCabinCrewFlightEngineersNavigatorsFlightConvoyApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4246_OVDQualificationClassCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4248_OVDQualificationClassName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4250_OVDQualificationClassNameEnglish.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4252_OVDQualificationClass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4254_OVDQualificationClassPermissionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4256_OVDQualificationClassPermissionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4258_OVDQualificationClassPermissionNameEnglish.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4260_OVDQualificationClassPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4262_CoordinationActivitiesInteractionAirTrafficManagementPermissionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4264_CoordinationActivitiesInteractionAirTrafficManagementPermissionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4266_CoordinationActivitiesInteractionAirTrafficManagementPermissionNameEnglish.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4268_CoordinationActivitiesInteractionAirTrafficManagementPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4270_OVDBodyLocationIndicatorCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4272_OVDBodyLocationIndicatorName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4274_OVDBodyLocationIndicator.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4276_SectorWorkplaceAviationGroundStaffCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4278_SectorWorkplaceAviationGroundStaffName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4280_SectorWorkplaceAviationGroundStaff.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4282_OVDQualificationClassData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4284_LicenseControllersAssistantFlightsATMCoordinatorsApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4286_CorrespondenceAddress.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4288_CorrespondenceAddressAbroad.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4290_AviationalOperatorCertificateNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4292_AviationalOperatorCertificateIssueDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4294_AviationalOperatorBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4296_RecognitionLicenseForeignNationals.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4298_ApplicantAviationalOperatorIndication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4300_ApplicantNotAircraftOwner.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4302_AircraftOwnerName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4304_AircraftHiringTransferContractNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4306_AircraftHiringTransferContractDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4308_AircraftHiringTransferContractConclusionPlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4310_AircraftHiringData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4312_AircraftOperationTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4314_AircraftOperationTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4316_AircraftOperationTypeNameEnglish.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4318_AircraftOperationType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4320_AircraftManufacturerName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4322_AircraftManufacturerCountry.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4324_CountryLastRegistration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4326_FlightCertificateCountryIssuer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4328_AircraftManufacturePlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4330_AircraftManufactureDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4332_AircraftSeries.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4334_AircraftSerialNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4336_AircraftUnused.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4338_AircraftMaximumTakeOffWeight.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4340_AircraftRegistrationMark.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4342_AircraftStandardsCertified.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4344_FlightCertificateNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4346_FlightCertificateCertificationTableNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4348_AircraftInspectionPlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4350_AircraftManufactureData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4352_AircraftInspectionDesiredPeriod.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4354_AircraftInspectionPreferences.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4356_AircraftRegistrationCertificateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4360_CategoryAircraftCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4362_CategoryAircraftName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4364_CategoryAircraft.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4366_Website.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4368_AircraftManufacturerData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4370_ModelAircraftAccordingTypeCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4372_ManufacturerTransponderName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4374_TransponderModel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4376_SmodeCodeAppointmentData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4378_AppointmentSmodeCodeApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4380_BasicDataAircraft.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4382_ReasonDeletionAircraftRegisterCivilAircraft.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4384_SubmissionTime.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4386_FlagIndicatingDocumentGiven.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4388_ProvidingDocument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4390_ProvidingDocumentName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4392_SubmissionTerms.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4394_AircraftOwnerData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4396_AircraftDeletionApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4398_SeatsCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4400_AircraftData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4402_EnginesCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4404_EngineManufacturePlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4406_EngineManufactureDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4408_EngineTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4410_EngineTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4412_EngineType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4416_EngineMaximumPowerThrust.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4418_EngineUsage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4420_EngineData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4422_AircraftEnginesData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4424_PropellersCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4426_PropellerManufacturePlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4428_PropellerManufactureDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4430_PropellerTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4432_PropellerTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4434_PropellerType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4438_PropellerUsage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4440_PropellerData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4442_AircraftPropellersData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4444_OperationTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4446_OperationTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4448_OperationType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4450_AviationalActivityTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4452_SpecializedTransportationTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4454_ProvidedOperationTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4456_DocumentAppliedFlag.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4458_FlagIdentification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4460_AttachedDocumentDataWithWhenApplied.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4462_AttachedDocumentDataGVAWithWhenApplied.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4464_AircraftInspectionRepresentatives.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4466_AttachedDocumentDatasWithWhenAppliedCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4468_AttachedDocumentDatasGVAWithWhenAppliedCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4470_AircraftAirworthinessCertificateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4472_MonitoredRadioequipmentType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4474_MonitoredRadioequipmentCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4476_MonitoredRadioequipmentManufacturer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4478_MonitoredRadioequipmentModel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4480_MonitoredRadioequipmentPower.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4482_MonitoredRadioequipmentEmissionClass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4484_MonitoredRadioequipmentFrequency.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4486_MonitoredRadioequipmentData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4488_MonitoredRadioequipmentDatasCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4490_AuthorizationUseRadioAircraftApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4492_AircraftModelManufacturerEquipment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4494_AircraftMaximumLandingMass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4496_AircraftNoiseComplianceData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4498_NoiseCertificationAdditionalModifications.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4500_StandardAircraftNoise.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4502_NoiseLevelAircraft.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4504_EnginesTTSN.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4512_NoiseData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4514_NoiseCertificateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4516_EngineTTSNHours.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4518_EngineTTSNLandingsCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4520_AirworthinessCertificateValidity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4522_AircraftAirworthinessReviewCertificationData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4524_AircraftMaintenanceProgram.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4526_AircraftModificationsEquipment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4528_ChangesModificationsResult.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4530_OptionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4532_OptionChoice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4534_Options.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4536_AirworthinessAdditionalInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4538_AircraftLastTechnicalMaintenanceDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4540_AircraftLastTechnicalMaintenancePlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4542_AircraftAirworthinessReviewDiscrepancies.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4544_ReviewAircraftAirworthinessApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4546_AircraftSerialNumberTTSN.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4548_AircraftsSerialNumbersTTSNCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4550_AircraftDescriptionExportCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4552_EngineDescriptionExportCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4554_PropellerDescriptionExportCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4556_ExpectedRightsTransferDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4558_ImportCountryAdditionalRequirements.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4560_ExportCertificateAdditionalInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4562_ExportCertificateAirworthinessExceptions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4564_ExportCertificateExceptions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4566_AirworthinessExportCertificateApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4568_CategoryELVSCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4570_CategoryELVSName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4572_CategoryELVS.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4574_AmateurAircraftProductionData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4576_RegistrationAmateurBuiltAircraftApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4578_AirworthinessAmateurBuiltAircraftApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4580_ApplicantType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4582_AirportAirfieldName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4584_ContactInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4586_AirportAirfieldData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4588_CertificateFitnessAirportApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4590_CertificateFitnessAirfieldApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4592_ActivityKindCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4594_ActivityKindName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4596_ActivityKind.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4598_AuthorizationAirportOperatorApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4600_ServiceCategoryCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4602_ServiceCategoryName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4604_ServiceCategory.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4606_LicenseOperatorApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4608_TypeOfObjectCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4610_TypeOfObjectName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4612_TypeOfObject.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4614_GroundHandlingEquipmentApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4616_AirServicesTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4618_AirServicesTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4620_AirServicesType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4622_AircraftServicesPerform.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4624_OperatingLicenseStartDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4626_CertificateValidity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4628_PartnerShareholderName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4630_SharesUnitsCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4632_SharesClass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4634_ReleasedSharesUnitsPercentage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4636_ShareholderOwner.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4638_ShareholdersOwnersCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4640_MotherCompanyFlag.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4642_HoldingCompanyFlag.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4644_TradingCompanyName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4646_TradingCompanyRegistrationDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4648_TradingCompanyInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4650_MotherCompanyInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4652_HoldingCompanyInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4654_PersonRepresentingOLVPCandidateNames.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4656_PersonRepresentingTradingCompanyRole.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4658_PersonRepresentingTradingCompanyData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4660_PersonsRepresentingTradingCompaniesDatasCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4662_PositionPersonManagementOLVPCandidate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4664_PersonManagementOLVPCandidateData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4666_PersonsManagementOLVPCandidatesDatasCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4668_FinancialArrangementsFlag.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4670_FinancialArrangementsInForceFlag.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4672_FinancialArrangementsDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4674_FinancialArrangement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4676_FinancialArrangementsCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4678_OtherIssuesCandidateControlled.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4680_AircraftPassengerSeatsCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4682_AirCarrierAircraftData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4684_AirCarriersAircraftDatasCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4686_AirCarrierOperationLicenseApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4688_AttachedDocumentDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4690_UnnumberedAttachedDocumentData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4692_UnnumberedAttachedDocumentDatasCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4694_EAURecipientAttachedDocumentData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4696_EAURecipientsAttachedDocumentDatasCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4698_AuthorType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4702_RepresentativeAuthorizedPerson.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4704_ServiceAreaName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4706_ServiceAreaSelectedFlag.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4708_ProvidingServiceKindCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4710_ProvidingServiceKindName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4712_ProvidingServiceKind.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4714_ProvidingServicePartCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4716_ProvidingServicePartName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4718_ProvidingServicePart.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4720_ProvidingServiceSubpartCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4722_ProvidingServiceSubpartName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4724_ProvidingServiceSubpart.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4726_ConditionsApplicantProposed.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4728_ScopeServiceConditions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4730_DerogationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4732_DerogationChosenFlag.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4734_Derogation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4736_DerogationWithSubcategories.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4738_AirNavigationServiceProviderApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4740_FacilityName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4742_FacilityKindCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4744_FacilityKindName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4746_FacilityKind.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4748_FacilityLocationCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4750_FacilityLocationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4752_FacilityLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4754_OperatingMode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4756_FacilityManufacturerName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4758_FacilityManufactureDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4760_FacilityPlaceAcceptanceDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4762_FacilityData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4764_FitnessAutomatedATMApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4766_NavigationalAidsApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4768_AviationSecurityCertificateNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4770_AviationSecurityCertificateDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4772_GroupTypeCheckingCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4774_GroupTypeCheckingName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4776_GroupTypeChecking.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4778_TypeCheckingCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4780_TypeCheckingName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4782_TypeChecking.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4784_PracticalExperienceStartDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4786_PracticalExperienceEndDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4788_OrganizationDepartment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4790_OrganizationPosition.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4792_JobDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4794_AviationSecurityExperience.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4796_AviationSecurityExperiences.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4798_TrainingModuleCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4800_TrainingModuleName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4802_TrainingModule.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4804_RecommendingNames.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4806_RecommendingPosition.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4808_RecommendationAviationSecurity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4810_IssuanceMaintenanceCertificateCompetencePerformingTasksApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4812_CourseCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4814_CourseName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4816_Course.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4818_AviationTrainingCenterCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4820_AviationTrainingCenterName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4822_AviationTrainingCenter.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4824_TeacherAviationTrainingCentersApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4826_TeachersInstructorsNames.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4828_TeachersInstructorsCertificateNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4830_TeacherInstructor.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4832_TeachersInstructors.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4834_VocationalAviationTrainingCenterApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4836_OrganizationCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4838_OrganizationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4840_Organization.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4842_ManagerNames.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4844_SafetyManagerNames.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4846_LeadershipContactNames.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4848_Leadership.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4850_ActivityStartDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4852_PremisesLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4854_PremisesRoomCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4856_PremisesRoomSize.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4858_Premises.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4860_UseAviationSimulatorApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4862_AviationTrainingCenterAnotherCountryApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4864_LicenseCabinCrewApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4866_FSTDOperatorName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4868_FSTDTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4870_FSTDTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4872_FSTDType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4874_FSTDLocation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4876_FSTDQualificationLevel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4878_FSTDIdCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4880_FSTDSerialNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4882_ManufacturingDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4884_FSTDVisualSystem.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4886_FSTDMotionSystem.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4888_FSTDDetails.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4890_PlannedScopeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4892_PlannedScopeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4894_PlannedScope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4896_FSTDRentForm.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4898_InspectionPlannedDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4900_AviationSimulatorApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4902_LeaseType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4904_AircraftDataFlightPermit.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4906_FlightPurpose.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4908_FlightSubaim.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4910_FlightSubaimDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4912_FlightDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4914_FlightDuration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4916_FlightDateDuration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4918_AircraftDescriptionPlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4920_AircraftCondition.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4922_ManagementApplicationNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4924_ApprovalDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4926_PermitFlyApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4928_QualificationClassCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4930_QualificationClassName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4932_QualificationClass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4934_QualificationSubclassCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4936_QualificationSubclassName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4938_QualificationSubclass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4940_QualificationSubclassDegree.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4942_QualificationClassDetails.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4944_PermissionType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4946_PermissionModel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4948_Permission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4950_RecognitionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4952_RecognitionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4954_Recognition.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4956_CandidateKnowledge.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4958_EngineeringTechnicalStaffPerformingMaintenanceFundsAirTrafficManagementApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4960_CertificationSubjectCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4962_CertificationSubjectName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4964_CertificationSubject.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4966_SpecializedPermissionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4968_SpecializedPermissionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4970_SpecializedPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4972_CertificationScopeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4974_CertificationScopeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4976_CertificationScope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4978_CertificationScopes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4980_CertificationScopeObject.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4982_GeneralAuthorizations.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4984_OperationAreaCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4986_OperationAreaName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4988_OperationArea.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4990_OperationAreaDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4992_PermissibleActivityCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4994_PermissibleActivityName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4996_PermissibleActivity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-4998_AerialWorkAircraftData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5000_AOCConductingAerialWorkApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5002_DesignatorIATAICAO.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5004_DirectionFunctionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5006_DirectionFunctionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5008_DirectionFunction.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5010_ManagerialPositionNames.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5012_StaffMember.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5014_StaffMembers.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5016_NameTechnicalOrganization.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5018_NumberTechnicalContract.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5020_DateTechnicalContract.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5022_TechnicalContract.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5024_TechnicalContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5026_AircraftModelCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5028_AircraftModelName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5030_AircraftModel.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5032_BaseAircraft.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5034_DataCommercialTransportAircraft.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5036_LeaseStartDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5038_LeaseEndDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5040_LeaseReleaseDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5042_LeaseDeletionDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5044_CommerialOperationDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5046_DryLeaseData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5048_ActivitySchedule.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5050_ActivityKindDetails.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5052_OperationRegionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5054_OperationRegionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5056_OperationRegion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5058_OperationRegionDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5060_SpecialRestrictionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5062_SpecialRestrictionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5064_SpecialRestriction.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5066_SpecialRestrictionDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5068_SpecialPermissionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5070_SpecialPermissionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5072_SpecialPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5074_RVRSpecialPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5076_DHSpecialPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5078_MinutesSpecialPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5080_NMSpecialPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5082_SpecialPermissionDetails.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5084_OrganizationKind.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5086_HiredOrganizationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5088_AircraftDataPartB.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5090_EngagedCommercialTransportationPassengersCargoApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5092_EntityTradeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5094_ApprovalDescriptionManagementOrganizationMaintenanceApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5096_ApprovalTechnicalLogApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5098_NumberEditionModificationPTO.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5100_DateEditionModificationPTO.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5102_NumberDateDocumentDevelopedProgram.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5104_ApprovalProgramPlanMaintenanceAircraftApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5106_NamesPersonApproval.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5108_PositionPersonApproval.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5110_QualificationPersonApproval.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5112_ExperiencePersonApproval.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5114_PersonApprovalData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5116_ApprovalManagementPersonnelApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5118_AircraftTypeSeriesGroup.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5120_IsAirworthinessReviewAuthorized.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5122_IsIssuancePermitFlyAllowed.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5124_OrganizationOperatingControlQualitySystem.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5126_ApprovalRange.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5128_PlaceOUPPLG.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5130_ContactBasicInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5132_ApprovalPartMSubpartGApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5134_ChangeCompetentAuthorityLicensePilotAccordanceLicenseApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5136_ExplanationApplying.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5138_InstructorRightsType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5140_LicenseLimitation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5142_CertificatedLicense.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5144_EstablishingAssessCompetenceApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5146_CertificatedLicensesCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6002_RecipientNoIdentification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6004_AuthorNoIdentification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6006_HeaderNoIdentification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6008_RequestedPublicInformationDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6010_AccessFormPublicInformationNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6012_AccessFormPublicInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6014_SpecificationPreferredFormAccessPublicInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6016_GrantPublicAccessInformationApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6018_ServiceInstructionsName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6050_AttachedDocumentDescriptionIdentifier.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6052_AttachedDocumentDescriptionIdentifiersCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6054_Proposal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6056_Signal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6058_StructuredDocumentFileCompetence.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6060_DocumentFileCompetence.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6062_FileTransferredJurisdiction.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6064_ContainerTransferFileCompetence.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6066_LegalBasisIssuanceAdministrativeAct.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6068_DegreeAccessRequestedPublicInformationNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6070_DegreeAccessRequestedPublicInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6076_DescriptionProvidedPublicInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6078_FormProvidingAccessPublicInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6080_PlacePublicInformationAccessGiven.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6082_PeriodAccessPublicInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6084_ReasonsNotGrandAccessPublicInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6086_InformationPaymentCostsProvidingAccess.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6088_OtherBodiesOrganizationsPublicInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-6090_DecisionGrantAccessPublicInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7002_URIBatchLNPE.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7004_TypeEntryRegisterCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7006_TypeEntryRegisterName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7008_TypeEntryRegister.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7010_OrganizationalFormLNPECode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7012_OrganizationalFormLNPEName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7014_OrganizationalFormLNPE.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7016_ContactDataLNPE.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7018_CourtCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7020_CourtName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7022_Court.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7024_CourtCaseNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7026_CourtCaseYear.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7028_CourtCase.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7030_BatchNumberLNPECourtRegister.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7032_CourtRegistrationData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7034_EntitySubjectActivity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7036_EntityGoals.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7038_EntityMeans.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7040_ManagingAuthorityNameLNPE.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7042_StartMandateMemberManagingAuthority.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7044_EndMandateMemberManagingAuthority.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7046_MemberManagingAuthority.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7048_CourtCaseActNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7050_CourtCaseActDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7052_CourtCaseActKindCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7054_CourtCaseActKindName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7056_CourtCaseActKind.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7058_FileName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7060_FileContentHyperlink.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7062_CourtCaseAct.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7064_FlagPaperCertificate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7066_ModificationTypeNomenclature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7068_ContactData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7070_InitialRegistrationChangesNonProfitEntityApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7072_Manager.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7074_InitialRegistrationChangesNonProfitForeignEntityBranchApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7076_RegistrationCircumstancesBranchLegalEntityRegisteredBulgariaApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7078_AnnouncedActKindCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7080_AnnouncedActKindName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7082_AnnouncedActKind.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7084_AnnouncedActYear.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7086_AnnouncedAct.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7088_DeclarationInformationActivitiesPreviousYearApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7090_GoverningBodyEntityActDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7092_GoverningBodyEntityAct.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7094_CancellationRegistrationNonProfitEntityBranchApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-7096_AddressAdditionalDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\xmlsig.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Schemas\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Enums\App_LocalResources\AccessFormPublicInformationNomenclature.en.resx" />

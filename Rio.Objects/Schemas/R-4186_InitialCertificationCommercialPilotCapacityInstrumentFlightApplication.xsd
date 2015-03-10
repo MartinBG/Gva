@@ -22,62 +22,62 @@
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             elementFormDefault="qualified">
 
-    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4048"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4056"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4064"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4012"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4014"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4048"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4056"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4064"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4012"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4014"/>
 	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
-    <xsd:import namespace="http://ereg.egov.bg/value/R-4016"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4098"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4080"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4114"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4118"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4134"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4160"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-4184"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/R-3994"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
-    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
-	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4098"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4080"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4114"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4118"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4134"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4160"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4184"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
 
 	<xsd:element name="InitialCertificationCommercialPilotCapacityInstrumentFlightApplication" type="InitialCertificationCommercialPilotCapacityInstrumentFlightApplication"/>
-    <xsd:complexType name="InitialCertificationCommercialPilotCapacityInstrumentFlightApplication">
-        <xsd:annotation>
-            <xsd:documentation xml:lang="bg">Заявление за първоначално издаване на свидетелство за правоспособност на професионален пилот и правоспособност за полет по прибори</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-            <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+	<xsd:complexType name="InitialCertificationCommercialPilotCapacityInstrumentFlightApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за първоначално издаване на свидетелство за правоспособност на професионален пилот и правоспособност за полет по прибори</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
 			<xsd:element name="ReasonForApplying" minOccurs="0">
-                <xsd:complexType>
-                    <xsd:sequence>
+				<xsd:complexType>
+					<xsd:sequence>
 						<xsd:element name="ASCertificateType" type="act:ASCertificateType" minOccurs="0"/>
 						<xsd:element name="AircraftClassQualificationClass" type="acqc:AircraftClassQualificationClass" minOccurs="0" maxOccurs="unbounded"/>
 						<xsd:element name="AircraftTypeQualificationClass" type="atqc:AircraftTypeQualificationClass" minOccurs="0" maxOccurs="unbounded"/>
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="FlightCrewPersonalData" type="fcpd:FlightCrewPersonalData" minOccurs="0"/>
-            <xsd:element name="EvidencePersonRepresentingRecipientElectronicService" type="eprres:EvidencePersonRepresentingRecipientElectronicService" minOccurs="0"/>
-            <xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
-            <xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0"/>
-            <xsd:element name="AeromedicalFitnessCertificateData" type="afcd:AeromedicalFitnessCertificateData" minOccurs="0"/>
-            <xsd:element name="ASCertificateData" type="acda:ASCertificateData" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="FlightCrewPersonalData" type="fcpd:FlightCrewPersonalData" minOccurs="0"/>
+			<xsd:element name="EvidencePersonRepresentingRecipientElectronicService" type="eprres:EvidencePersonRepresentingRecipientElectronicService" minOccurs="0"/>
+			<xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0"/>
+			<xsd:element name="AeromedicalFitnessCertificateData" type="afcd:AeromedicalFitnessCertificateData" minOccurs="0"/>
+			<xsd:element name="ASCertificateData" type="acda:ASCertificateData" minOccurs="0"/>
 			<xsd:element name="ASCourseData" type="acd:ASCourseData" minOccurs="0" maxOccurs="unbounded"/>
-            <xsd:element name="RTTrainingData" type="rtd:RTTrainingData" minOccurs="0"/>
-            <xsd:element name="LLData" type="ld:LLData" minOccurs="0"/>
-            <xsd:element name="FlightExpByRole" type="febr:FlightExpByRole" minOccurs="0" maxOccurs="unbounded"/>
-            <xsd:element name="FlightSkillTestData" type="fstd:FlightSkillTestData" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="RTTrainingData" type="rtd:RTTrainingData" minOccurs="0"/>
+			<xsd:element name="LLData" type="ld:LLData" minOccurs="0"/>
+			<xsd:element name="FlightExpByRole" type="febr:FlightExpByRole" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="FlightSkillTestData" type="fstd:FlightSkillTestData" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element name="AttachedDocumentDatasCollection" type="add:AttachedDocumentDatasCollection" minOccurs="0" />	
-            <xsd:element name="AttachedDocuments" minOccurs="0">
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
-            <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
-        </xsd:sequence>
-    </xsd:complexType>
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
 </xsd:schema>

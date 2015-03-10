@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1148" xmlns="http://ereg.egov.bg/segment/R-1148" 
+	xmlns:ebd="http://ereg.egov.bg/segment/0009-000013" 
+	xmlns:r="http://ereg.egov.bg/segment/0009-000142" 
+	xmlns:ema="http://ereg.egov.bg/segment/0009-000172" 
+	xmlns:mrp="http://ereg.egov.bg/value/R-1146" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000013" />
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000142" />
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000172" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1146" />
+    <xsd:complexType name="InvoiceData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за фактура</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="EntityBasicData" type="ebd:EntityBasicData" />
+      <xsd:element name="Residence" type="r:Residence" />
+      <xsd:element name="EntityManagementAddress" type="ema:EntityManagementAddress" />
+      <xsd:element name="MaterialResponsiblePerson" type="mrp:MaterialResponsiblePerson" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

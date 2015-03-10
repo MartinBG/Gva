@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1018" xmlns="http://ereg.egov.bg/segment/R-1018" 
+	xmlns:pn="http://ereg.egov.bg/segment/0009-000005" 
+	xmlns:fcn="http://ereg.egov.bg/segment/0009-000007" 
+	xmlns:pnd="http://ereg.egov.bg/value/R-1012" 
+	xmlns:fnd="http://ereg.egov.bg/value/R-1014" 
+	xmlns:ea="http://ereg.egov.bg/value/R-1016" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000005" />
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000007" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1012" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1014" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1016" />
+    <xsd:complexType name="ContactPersonData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Лице за контакт</xsd:documentation>
+    </xsd:annotation>
+    <xsd:choice>
+      <xsd:element name="PersonNames" type="pn:PersonNames" />
+      <xsd:element name="ForeignCitizenNames" type="fcn:ForeignCitizenNames" />
+      <xsd:element name="PhoneNumbersDesc" type="pnd:PhoneNumbersDesc" />
+      <xsd:element name="FaxNumbersDesc" type="fnd:FaxNumbersDesc" />
+      <xsd:element name="EmailAddress" type="ea:EmailAddress" />
+    </xsd:choice>
+  </xsd:complexType>
+</xsd:schema>

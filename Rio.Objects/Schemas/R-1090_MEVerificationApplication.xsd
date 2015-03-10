@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1090"
+            xmlns="http://ereg.egov.bg/segment/R-1090"
+            xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+			xmlns:ansu="http://ereg.egov.bg/segment/0009-000054"
+			xmlns:si="http://ereg.egov.bg/value/0008-000080"
+            xmlns:mvc="http://ereg.egov.bg/value/R-1046"
+            xmlns:mvn="http://ereg.egov.bg/value/R-1048"
+            xmlns:mivc="http://ereg.egov.bg/value/R-1050"
+            xmlns:mivn="http://ereg.egov.bg/value/R-1052"
+            xmlns:msvc="http://ereg.egov.bg/value/R-1054"
+            xmlns:msvn="http://ereg.egov.bg/value/R-1056"
+            xmlns:tsd="http://ereg.egov.bg/segment/R-1062"
+            xmlns:mrvd="http://ereg.egov.bg/value/R-1064"
+            xmlns:mvs="http://ereg.egov.bg/segment/R-1070"
+            xmlns:iapcs="http://ereg.egov.bg/value/R-1072"
+            xmlns:pd="http://ereg.egov.bg/segment/R-1088"
+            xmlns:aie="http://ereg.egov.bg/value/R-1010"
+            xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+            xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000054"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/0008-000080"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1046"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1048"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1050"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1052"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1054"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1056"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1062"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1064"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1070"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1072"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1088"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1010"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
+	<xsd:element name="MEVerificationApplication" type="MEVerificationApplication"/>
+    <xsd:complexType name="MEVerificationApplication">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="bg">Заявление за проверка на средства за измерване, които подлежат на метрологичен контрол</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+			<xsd:element name="AdministrativeNomenclatureServiceURI" type="ansu:AdministrativeNomenclatureServiceURI" minOccurs="0" />
+			<xsd:element name="ServiceInstructions" type="si:ServiceInstructions" minOccurs="0" />
+            <xsd:element name="MEVerificationCode" type="mvc:MEVerificationCode" minOccurs="0"/>
+            <xsd:element name="MEVerificationName" type="mvn:MEVerificationName" minOccurs="0"/>
+            <xsd:element name="MEInitialVerificationCode" type="mivc:MEInitialVerificationCode" minOccurs="0"/>
+            <xsd:element name="MEInitialVerificationName" type="mivn:MEInitialVerificationName" minOccurs="0"/>
+            <xsd:element name="MESubsequentVerificationCode" type="msvc:MESubsequentVerificationCode" minOccurs="0"/>
+            <xsd:element name="MESubsequentVerificationName" type="msvn:MESubsequentVerificationName" minOccurs="0"/>
+            <xsd:element name="TestSiteData" type="tsd:TestSiteData" minOccurs="0"/>
+            <xsd:element name="MERequestedVerificationDate" type="mrvd:MERequestedVerificationDate" minOccurs="0"/>
+            <xsd:element name="MEVerificationSite" type="mvs:MEVerificationSite" minOccurs="0"/>
+            <xsd:element name="IsApplicantProvidesCalibratingStandards" type="iapcs:IsApplicantProvidesCalibratingStandards" minOccurs="0"/>
+            <xsd:element name="PaymentData" type="pd:PaymentData" minOccurs="0"/>
+            <xsd:element name="AdditionInformationESA" type="aie:AdditionInformationESA" minOccurs="0"/>
+            <xsd:element name="AttachedDocuments" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

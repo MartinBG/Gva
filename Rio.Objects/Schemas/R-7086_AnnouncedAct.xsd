@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7086" 
+	xmlns="http://ereg.egov.bg/segment/R-7086" 
+	xmlns:aak="http://ereg.egov.bg/segment/R-7082"
+	xmlns:aay="http://ereg.egov.bg/value/R-7084"
+	xmlns:adui="http://ereg.egov.bg/value/0008-000134"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-7082" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7084" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000134" />
+
+	<xsd:complexType name="AnnouncedAct">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Обявен акт в ЦРЛЮНЦ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AnnouncedActKind" type="aak:AnnouncedActKind" minOccurs="0" />
+			<xsd:element name="AnnouncedActYear" type="aay:AnnouncedActYear" minOccurs="0" />
+			<xsd:element name="AttachedDocumentUniqueIdentifier" type="adui:AttachedDocumentUniqueIdentifier" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

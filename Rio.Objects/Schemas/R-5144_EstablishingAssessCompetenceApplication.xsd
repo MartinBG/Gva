@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5144"
+		xmlns="http://ereg.egov.bg/segment/R-5144"
+		xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+		xmlns:act="http://ereg.egov.bg/segment/R-4048"
+		xmlns:acqc="http://ereg.egov.bg/segment/R-4056"
+		xmlns:ac="http://ereg.egov.bg/segment/R-4152"
+		xmlns:at="http://ereg.egov.bg/segment/R-4158"
+		xmlns:fst="http://ereg.egov.bg/segment/R-4174"
+		xmlns:ea="http://ereg.egov.bg/value/R-5136"
+		xmlns:fcpd="http://ereg.egov.bg/segment/R-4012"
+		xmlns:clc="http://ereg.egov.bg/segment/R-5146"
+		xmlns:add="http://ereg.egov.bg/segment/R-3994"
+		xmlns:cres="http://ereg.egov.bg/value/R-4016"
+		xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+		xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4048"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4056"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4152"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4174"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5136"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4012"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5146"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
+
+	<xsd:element name="EstablishingAssessCompetenceApplication" type="EstablishingAssessCompetenceApplication"/>
+	<xsd:complexType name="EstablishingAssessCompetenceApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за определяне на старши проверяващ или инспектор за извършване на оценка на компетентност на проверяващ и за издаване, потвърждване, подновяване и/или разширяване на правата за проверяващ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+			<xsd:element name="ReasonForApplying" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ASCertificateType" type="act:ASCertificateType" minOccurs="0"/>
+						<xsd:element name="AircraftClassQualificationClass" type="acqc:AircraftClassQualificationClass" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="AircraftClass" type="ac:AircraftClass" minOccurs="0"/>
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0"/>
+			<xsd:element name="FlightSimulatorType" type="fst:FlightSimulatorType" minOccurs="0"/>
+			<xsd:element name="ExplanationApplying" type="ea:ExplanationApplying" minOccurs="0"/>
+			<xsd:element name="FlightCrewPersonalData" type="fcpd:FlightCrewPersonalData" minOccurs="0"/>
+			<xsd:element name="InstructorCertificatedLicenses" type="clc:CertificatedLicensesCollection" minOccurs="0"/>
+			<xsd:element name="ExaminerCertificatedLicenses" type="clc:CertificatedLicensesCollection" minOccurs="0"/>
+			<xsd:element name="AttachedDocumentDatasCollection" type="add:AttachedDocumentDatasCollection" minOccurs="0" />	
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0"/>
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

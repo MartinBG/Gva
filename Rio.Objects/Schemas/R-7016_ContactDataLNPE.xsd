@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7016" xmlns="http://ereg.egov.bg/segment/R-7016" 
+	xmlns:ea="http://ereg.egov.bg/value/R-1016" 
+	xmlns:pnd="http://ereg.egov.bg/value/R-1012" 
+	xmlns:fnd="http://ereg.egov.bg/value/R-1014" 
+	
+	xmlns:mtn="http://ereg.egov.bg/nomenclature/R-7066"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1016" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1012" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1014" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/nomenclature/R-7066" />
+
+	<xsd:complexType name="ContactDataLNPE">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за контакт с ЮЛНЦ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="EmailAddress" type="ea:EmailAddress" />
+			<xsd:element name="PhoneNumbersDesc" type="pnd:PhoneNumbersDesc" />
+			<xsd:element name="FaxNumbersDesc" type="fnd:FaxNumbersDesc" />
+		</xsd:sequence>
+		
+		<xsd:attribute name="modificationType" type="mtn:ModificationTypeNomenclature"/>
+	</xsd:complexType>
+</xsd:schema>

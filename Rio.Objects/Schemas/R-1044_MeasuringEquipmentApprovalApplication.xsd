@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1044"
+            xmlns="http://ereg.egov.bg/segment/R-1044"
+            xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+			xmlns:ansu="http://ereg.egov.bg/segment/0009-000054"
+			xmlns:si="http://ereg.egov.bg/value/0008-000080"
+            xmlns:msd="http://ereg.egov.bg/segment/R-1026"
+            xmlns:mesan="http://ereg.egov.bg/value/R-1028"
+            xmlns:mesda="http://ereg.egov.bg/segment/R-1036"
+            xmlns:mrrc="http://ereg.egov.bg/value/R-1038"
+            xmlns:mrrn="http://ereg.egov.bg/value/R-1040"
+            xmlns:mep="http://ereg.egov.bg/value/R-1042"
+            xmlns:aie="http://ereg.egov.bg/value/R-1010"
+            xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+            xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000054"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/0008-000080"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1026"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1028"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1036"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1038"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1040"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1042"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1010"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
+	<xsd:element name="MeasuringEquipmentApprovalApplication" type="MeasuringEquipmentApprovalApplication"/>
+    <xsd:complexType name="MeasuringEquipmentApprovalApplication">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="bg">Заявление за одобряване на типа на средство за измерване</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+			<xsd:element name="AdministrativeNomenclatureServiceURI" type="ansu:AdministrativeNomenclatureServiceURI" minOccurs="0" />
+			<xsd:element name="ServiceInstructions" type="si:ServiceInstructions" minOccurs="0" />
+            <xsd:element name="MCSSuppliers" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+						<xsd:element name="MCSSupplier" type="msd:MCSSupplierData" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="MeasuringEquipmentSupplierAdditionalNote" type="mesan:MeasuringEquipmentSupplierAdditionalNote" minOccurs="0"/>
+            <xsd:element name="MeasuringEquipmentSamples" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+						<xsd:element name="MeasuringEquipmentSample" type="mesda:MeasuringEquipmentSampleData" minOccurs="0" />
+						<xsd:element name="MeasuringEquipmentSampleLineNumber" type="xsd:integer" minOccurs="0" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="MERequestingReasonsCode" type="mrrc:MERequestingReasonsCode" minOccurs="0"/>
+            <xsd:element name="MERequestingReasonsName" type="mrrn:MERequestingReasonsName" minOccurs="0"/>
+            <xsd:element name="MeasuringEquipmentPurpose" type="mep:MeasuringEquipmentPurpose" minOccurs="0"/>
+            <xsd:element name="AdditionInformationESA" type="aie:AdditionInformationESA" minOccurs="0"/>
+            <xsd:element name="AttachedDocuments" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

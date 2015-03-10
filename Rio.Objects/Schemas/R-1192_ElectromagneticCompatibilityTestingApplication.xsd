@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1192"
+            xmlns="http://ereg.egov.bg/segment/R-1192"
+            xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+			xmlns:ansu="http://ereg.egov.bg/segment/0009-000054"
+			xmlns:si="http://ereg.egov.bg/value/0008-000080"
+			xmlns:msn="http://ereg.egov.bg/value/R-1024"
+            xmlns:dtecn="http://ereg.egov.bg/value/R-1186"
+            xmlns:dtect="http://ereg.egov.bg/value/R-1188"
+            xmlns:db="http://ereg.egov.bg/value/R-1190"
+            xmlns:ifn="http://ereg.egov.bg/value/R-1096"
+            xmlns:aie="http://ereg.egov.bg/value/R-1010"
+            xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+            xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000054"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/0008-000080"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1024"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1186"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1188"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1190"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1096"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1010"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
+	<xsd:element name="ElectromagneticCompatibilityTestingApplication" type="ElectromagneticCompatibilityTestingApplication"/>
+    <xsd:complexType name="ElectromagneticCompatibilityTestingApplication">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="bg">Заявление за изпитване на електромагнитна съвместимост</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+			<xsd:element name="AdministrativeNomenclatureServiceURI" type="ansu:AdministrativeNomenclatureServiceURI" minOccurs="0" />
+			<xsd:element name="ServiceInstructions" type="si:ServiceInstructions" minOccurs="0" />
+			<xsd:element name="MCSSupplierName" type="msn:MCSSupplierName" minOccurs="0" />
+            <xsd:element name="DeviceTestedElectromagneticCompatibility" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+						<xsd:element name="DeviceTestedElectromagneticCompatibilityName" type="dtecn:DeviceTestedElectromagneticCompatibilityName" />
+						<xsd:element name="DeviceTestedElectromagneticCompatibilityType" type="dtect:DeviceTestedElectromagneticCompatibilityType" />
+						<xsd:element name="DeviceBrand" type="db:DeviceBrand" />
+						<xsd:element name="InstrumentalFabricNumber" type="ifn:InstrumentalFabricNumber" />
+						<xsd:element name="MCSSupplierName" type="msn:MCSSupplierName" minOccurs="0" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="Appliance" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:sequence>
+						<xsd:element name="DeviceTestedElectromagneticCompatibilityType" type="dtect:DeviceTestedElectromagneticCompatibilityType" />
+						<xsd:element name="InstrumentalFabricNumber" type="ifn:InstrumentalFabricNumber" />
+						<xsd:element name="MCSSupplierName" type="msn:MCSSupplierName" minOccurs="0" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="AdditionInformationESA" type="aie:AdditionInformationESA" minOccurs="0"/>
+            <xsd:element name="AttachedDocuments" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

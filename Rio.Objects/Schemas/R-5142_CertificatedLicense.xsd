@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5142" 
+xmlns="http://ereg.egov.bg/segment/R-5142" 
+xmlns:irt="http://ereg.egov.bg/value/R-5138" 
+xmlns:ac="http://ereg.egov.bg/segment/R-4152" 
+xmlns:at="http://ereg.egov.bg/segment/R-4158" 
+xmlns:acv="http://ereg.egov.bg/value/R-4078" 
+xmlns:aa="http://ereg.egov.bg/segment/R-4072" 
+xmlns:ll="http://ereg.egov.bg/value/R-5140" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5138"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4152"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158"  />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4078"  />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4072" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5140"  />
+	
+	<xsd:complexType name="CertificatedLicense">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Притежавано свидетелство в свидетелство за правоспособност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="InstructorRightsType" type="irt:InstructorRightsType" minOccurs="0" />
+			<xsd:element name="AircraftClass" type="ac:AircraftClass" minOccurs="0" />
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+			<xsd:element name="ASCertificateValidity" type="acv:ASCertificateValidity" minOccurs="0" />
+			<xsd:element name="AviationAdministration" type="aa:AviationAdministration" minOccurs="0" />
+			<xsd:element name="LicenseLimitation" type="ll:LicenseLimitation" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
