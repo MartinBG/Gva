@@ -779,7 +779,7 @@
         },
         regFMSearch: {
           isActive: 'Активна',
-          isCurrent: 'Текуща',
+          isCurrent: 'Последна',
           certNumber: 'Рег. номер',
           actNumber: 'Дел. номер',
           certDate: 'Дата на регистрация',
