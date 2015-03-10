@@ -1133,6 +1133,7 @@
           bandwidth: 'Честотна лента'
         },
         regFMDirective: {
+          orderNumber: 'No на заповедта',
           certNumber: 'Рег. номер',
           actNumber: 'Дел. номер',
           certDate: 'Дата на регистрация',
