@@ -992,7 +992,8 @@
           close: 'Погасяване'
         },
         regViewDirective: {
-          title: 'Последна регистрация',
+          lastRegTitle: 'Последна регистрация',
+          regTitle: 'Регистрация',
           currentCert: 'Текущ запис',
           lastCert: 'Последен запис',
           firstCert: 'Първи запис',

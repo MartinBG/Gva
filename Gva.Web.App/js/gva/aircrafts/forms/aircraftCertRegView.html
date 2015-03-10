@@ -1,7 +1,8 @@
 <ng-form class="form-inline" sc-form-readonly>
   <div class="panel panel-default">
-    <div class="panel-heading"> <strong l10n-text="aircrafts.regViewDirective.title"></strong>
-
+    <div class="panel-heading"> 
+      <strong l10n-text="aircrafts.regViewDirective.regTitle" ng-if="!(model.isActive && model.isCurrent)"></strong>
+      <strong l10n-text="aircrafts.regViewDirective.lastRegTitle" ng-if="model.isActive && model.isCurrent"></strong>
       <div class="pull-right">
         <sc-button name="reregButton" btn-click="rereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.rereg" class="btn btn-xs btn-primary" icon="glyphicon-repeat" ng-show="model.isActive && model.isCurrent"></sc-button>
         <sc-button ng-show="model.isActive" name="deregButton" btn-click="dereg($parent.reg.partIndex)" text="aircrafts.regViewDirective.dereg" class="btn btn-xs btn-danger" icon="glyphicon-ban-circle"></sc-button>
