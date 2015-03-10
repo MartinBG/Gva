@@ -6,7 +6,7 @@ namespace Gva.Api.Repositories.AircraftRepository
 {
     public interface IAircraftRegistrationRepository
     {
-        int? GetLastActNumber(int registerId);
+        int? GetLastActNumber(int? registerId = null, string alias = null);
 
         List<NomValue> GetAircraftRegistrationNoms(int lotId, string term = null);
 

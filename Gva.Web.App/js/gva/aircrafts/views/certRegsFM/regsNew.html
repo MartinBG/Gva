@@ -2,7 +2,8 @@
 
   <div class="panel panel-default" style="margin-top: 10px">
     <div class="panel-heading">
-      <strong l10n-text="aircrafts.newReg.title"></strong>
+      <strong l10n-text="aircrafts.newReg.newReg" ng-if="!oldInd"></strong>
+      <strong l10n-text="aircrafts.newReg.rereg" ng-if="oldInd"></strong>
       <div class="pull-right">
         <sc-button name="saveBtn" btn-click="save()" text="aircrafts.newReg.save"
           class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">

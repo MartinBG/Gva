@@ -7,8 +7,8 @@
     $state,
     $stateParams,
     Aircrafts,
-    oldReg,
     register,
+    actNumber,
     gvaConstants
   ) {
     $scope.steps = {
@@ -16,34 +16,16 @@
       confirmRegMark: {},
       regMarkInUse: {}
     };
+
     $scope.regMarkPattern = gvaConstants.regMarkPattern;
     $scope.currentStep = $scope.steps.chooseRegMark;
 
     $scope.model = {
       register: register,
-      regMark: $scope.$parent.aircraft.mark
+      regMark: $scope.$parent.aircraft.mark,
+      actNumber: actNumber,
+      certNumber: actNumber
     };
-
-    $scope.getNextActNumber = function () {
-      return Aircrafts.getNextActNumber({
-        registerId: $scope.model.register.nomValueId
-      }).$promise.then(function (result) {
-        if (!$scope.reregMode) {
-          $scope.model.certNumber = result.actNumber;
-        }
-        $scope.model.actNumber = result.actNumber;
-      });
-    };
-
-    var nextActNumber = $scope.getNextActNumber();
-    $scope.oldInd = $stateParams.oldInd;
-    $scope.reregMode = !!(oldReg && oldReg.part);
-    if ($scope.reregMode) {
-      $scope.model.certNumber = oldReg.part.certNumber;
-    } else {
-      $scope.model.certNumber = nextActNumber;
-    }
-    $scope.model.actNumber = nextActNumber;
 
     $scope.forward = function () {
       return $scope.newRegForm.$validate()
@@ -67,8 +49,7 @@
               case $scope.steps.confirmRegMark:
                 return $state.go(
                   'root.aircrafts.view.regsFM.new',
-                  { oldInd: $stateParams.oldInd },
-                  {},
+                  {}, {},
                   $scope.model);
             }
           }
@@ -95,19 +76,6 @@
   }
 
   CertRegsFMNewWizzardCtrl.$resolve = {
-    oldReg: [
-      '$stateParams',
-      'AircraftCertRegistrationsFM',
-      function ($stateParams, AircraftCertRegistrationsFM) {
-        if ($stateParams.oldInd) {
-          return AircraftCertRegistrationsFM.get({ id: $stateParams.id, ind: $stateParams.oldInd })
-            .$promise;
-        }
-        else {
-          return null;
-        }
-      }
-    ],
     register: [
       'Nomenclatures',
       function (Nomenclatures) {
@@ -115,6 +83,16 @@
           alias: 'registers',
           valueAlias: 'register1'
         }).$promise;
+      }
+    ],
+    actNumber: [
+      'Aircrafts',
+      function (Aircrafts) {
+        return Aircrafts.getNextActNumber({
+          registerAlias: 'register1'
+        }).$promise.then(function (result) {
+          return result.actNumber;
+        });
       }
     ]
   };
@@ -124,8 +102,8 @@
     '$state',
     '$stateParams',
     'Aircrafts',
-    'oldReg',
     'register',
+    'actNumber',
     'gvaConstants'
   ];
 

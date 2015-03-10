@@ -23,22 +23,33 @@ namespace Gva.Api.Repositories.AircraftRepository
             this.lotRepository = lotRepository;
         }
 
-        public int? GetLastActNumber(int registerId)
+        public int? GetLastActNumber(int? registerId = null, string alias = null)
         {
+            var predicate = PredicateBuilder.True<GvaViewAircraftRegistration>();
+
+            if (registerId.HasValue)
+            {
+                predicate = predicate.And(r => r.CertRegisterId == registerId);
+            }
+
+            if (!string.IsNullOrEmpty(alias))
+            {
+                predicate = predicate.And(a => a.Register.Alias == alias);
+            }
+
             return this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
-                .Where(v => v.CertRegisterId == registerId)
+                .Where(predicate)
                 .Max(v => (int?)v.ActNumber);
         }
 
         public List<GvaViewAircraftRegistration> GetAircraftsRegistrations(string regMark = null, int? registerId = null, int? certNumber = null, int? actNumber = null)
         {
-            var predicate = PredicateBuilder.True<GvaViewAircraftRegistration>();;
+            var predicate = PredicateBuilder.True<GvaViewAircraftRegistration>();
 
             if (registerId.HasValue)
             {
                 predicate = predicate.And(a => a.CertRegisterId == registerId.Value);
             }
-
 
             if (!string.IsNullOrEmpty(regMark))
             {

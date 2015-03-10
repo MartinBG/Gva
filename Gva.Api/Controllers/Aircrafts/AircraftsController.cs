@@ -147,9 +147,9 @@ namespace Gva.Api.Controllers
         }
 
         [Route("getNextActNumber")]
-        public IHttpActionResult GetNextActNumber(int registerId)
+        public IHttpActionResult GetNextActNumber(int? registerId = null, string registerAlias = null)
         {
-            int? lastActNumber = this.aircraftRegistrationRepository.GetLastActNumber(registerId);
+            int? lastActNumber = this.aircraftRegistrationRepository.GetLastActNumber(registerId, registerAlias);
 
             return Ok(new
             {

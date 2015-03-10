@@ -10,6 +10,7 @@
     aircraftCertRegistration
   ) {
     $scope.reg = aircraftCertRegistration;
+    $scope.oldInd = $stateParams.oldInd;
 
     if ($state.payload) {
       $scope.reg.part.register = $state.payload.register;
