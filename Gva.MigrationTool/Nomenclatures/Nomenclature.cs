@@ -3217,6 +3217,17 @@ namespace Gva.MigrationTool.Nomenclatures
 
         private void migrateAircraftRegStatsesFm(INomRepository repo, SqlConnection conn)
         {
+            var aliases = new Dictionary<string, string>()
+            {
+                { "1", "firstReg"},
+                { "2", "lastActiveReg"},
+                { "6", "rereged"},
+                { "7", "expiredContract"},
+                { "8", "changedOwnership"},
+                { "9", "totaled"},
+                { "11", "removed"}
+            };
+
             Nom nom = repo.GetNom("aircraftRegStatsesFm");
             var results = conn.CreateStoreCommand(@"
                 SELECT [Code] code, [Registration Status] name
@@ -3228,17 +3239,27 @@ namespace Gva.MigrationTool.Nomenclatures
                         Code = r.Field<string>("code"),
                         Name = r.Field<string>("name"),
                         NameAlt = null,
-                        Alias = null,
+                        Alias = aliases.ContainsKey(r.Field<string>("code")) ? aliases[r.Field<string>("code")] : null,
                         IsActive = true,
                         ParentValueId = null,
                         TextContentString = null
                     })
                 .ToList();
 
+            results.Add(new NomValue
+            {
+                Name = "Заличен съгласно заповед",
+                Alias = "removedByOrder",
+                IsActive = true
+            });
+
             noms["aircraftRegStatsesFm"] = new Dictionary<string, NomValue>();
             foreach (var row in results)
             {
-                noms["aircraftRegStatsesFm"][row.OldId] = row;
+                if(row.OldId != null)
+                {
+                    noms["aircraftRegStatsesFm"][row.OldId] = row;
+                }
                 nom.NomValues.Add(row);
             }
         }

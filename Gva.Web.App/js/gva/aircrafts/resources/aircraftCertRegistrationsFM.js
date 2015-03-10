@@ -8,6 +8,10 @@
         method: 'GET',
         url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/new'
       },
+      'removeDereg': {
+        method: 'POST',
+        url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/removeDereg'
+      },
       'getView': {
         method: 'GET',
         url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/view',

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
@@ -24,30 +25,35 @@ namespace Gva.Api.Controllers.Aircrafts
         private string path;
         private ILotRepository lotRepository;
         private IFileRepository fileRepository;
+        private ICaseTypeRepository caseTypeRepository;
+        private INomRepository nomRepository;
+        private IAircraftRegistrationRepository aircraftRegistrationRepository;
         private IUnitOfWork unitOfWork;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
-        private ICaseTypeRepository caseTypeRepository;
-        private IAircraftRegistrationRepository aircraftRegistrationRepository;
+
 
         public AircraftCertRegistrationsFMController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
-            ILotEventDispatcher lotEventDispatcher,
             ICaseTypeRepository caseTypeRepository,
+            INomRepository nomRepository,
             IAircraftRegistrationRepository aircraftRegistrationRepository,
+            ILotEventDispatcher lotEventDispatcher,
+
             UserContext userContext)
             : base("aircraftCertRegistrationsFM", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.path = "aircraftCertRegistrationsFM";
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
+            this.caseTypeRepository = caseTypeRepository;
+            this.aircraftRegistrationRepository = aircraftRegistrationRepository;
+            this.nomRepository = nomRepository;
             this.unitOfWork = unitOfWork;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
-            this.caseTypeRepository = caseTypeRepository;
-            this.aircraftRegistrationRepository = aircraftRegistrationRepository;
         }
 
         [Route("new")]
@@ -63,6 +69,19 @@ namespace Gva.Api.Controllers.Aircrafts
                     Alias = caseType.Alias
                 }
             };
+            NomValue status = null;
+            var registrations = this.lotRepository.GetLotIndex(lotId).Index
+                    .GetParts<AircraftCertRegistrationFMDO>(this.path)
+                    .ToList();
+
+            if (registrations.Count > 0)
+            {
+                status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "lastActiveReg");
+            }
+            else
+            {
+                status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "firstReg");
+            }
 
             AircraftCertRegistrationFMDO newCertRegFM = new AircraftCertRegistrationFMDO()
             {
@@ -70,7 +89,8 @@ namespace Gva.Api.Controllers.Aircrafts
                 IsCurrent = true,
                 OwnerIsOrg = true,
                 OperIsOrg = true,
-                LessorIsOrg = true
+                LessorIsOrg = true,
+                Status = status
             };
 
             return Ok(new CaseTypePartDO<AircraftCertRegistrationFMDO>(newCertRegFM, caseDO));
@@ -114,6 +134,47 @@ namespace Gva.Api.Controllers.Aircrafts
                 }
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
+            }
+        }
+
+        [Route("{partIndex}/removeDereg")]
+        public IHttpActionResult RemoveDereg(int lotId, int partIndex, CaseTypePartDO<AircraftCertRegistrationFMDO> partVersionDO)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                var registrations = this.lotRepository.GetLotIndex(lotId).Index
+                   .GetParts<AircraftCertRegistrationFMDO>(this.path)
+                   .ToList();
+
+                partVersionDO.Part.IsActive = true;
+                partVersionDO.Part.Removal = null;
+
+                if (registrations.Count > 1)
+                {
+                    partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "lastActiveReg");
+                }
+                else
+                {
+                    partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "firstReg");
+                }
+
+                PartVersion<AircraftCertRegistrationFMDO> partVersion = lot.UpdatePart(
+                    string.Format("{0}/{1}", this.path, partIndex),
+                    partVersionDO.Part,
+                    this.userContext);
+
+                this.fileRepository.AddFileReference(partVersion.Part, partVersionDO.Case);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
 
                 this.unitOfWork.Save();
 
@@ -209,6 +270,11 @@ namespace Gva.Api.Controllers.Aircrafts
                     oldRegistration.Content.IsActive = false;
                     oldRegistration.Content.IsCurrent = false;
 
+                    if (oldRegistration.Content.Status.Alias == "firstReg" || oldRegistration.Content.Status.Alias == "lastActiveReg")
+                    {
+                        oldRegistration.Content.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "rereged");
+                    }
+
                     PartVersion<AircraftCertRegistrationFMDO> oldRegistrationPartVersion = lot.UpdatePart(
                         string.Format("{0}/{1}", this.path, oldRegistration.Part.Index),
                         oldRegistration.Content,
@@ -238,6 +304,52 @@ namespace Gva.Api.Controllers.Aircrafts
                 transaction.Commit();
 
                 return Ok(new CaseTypePartDO<AircraftCertRegistrationFMDO>(certRegistartionPartVersion));
+            }
+        }
+
+        public override IHttpActionResult PostPart(int lotId, int partIndex, CaseTypePartDO<AircraftCertRegistrationFMDO> partVersionDO)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var lot = this.lotRepository.GetLotIndex(lotId);
+                if (partVersionDO.Part.Removal != null)
+                {
+                    switch (partVersionDO.Part.Removal.Reason.Alias)
+                    {
+                        case "order":
+                            partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "removedByOrder");
+                            break;
+                        case "expiredContract":
+                            partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "expiredContract");
+                            break;
+                        case "changedOwnership":
+                            partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "changedOwnership");
+                            break;
+                        case "totaled":
+                            partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "totaled");
+                            break;
+                        default:
+                            partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "removed");
+                            break;
+                    }
+                }
+
+                PartVersion<AircraftCertRegistrationFMDO> partVersion = lot.UpdatePart(
+                    string.Format("{0}/{1}", this.path, partIndex),
+                    partVersionDO.Part,
+                    this.userContext);
+
+                this.fileRepository.AddFileReference(partVersion.Part, partVersionDO.Case);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return Ok();
             }
         }
     }

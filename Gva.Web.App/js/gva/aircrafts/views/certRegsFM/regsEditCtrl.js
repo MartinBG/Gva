@@ -38,10 +38,8 @@
     };
 
     $scope.removeDereg = function () {
-      $scope.reg.part.isActive = true;
-      $scope.reg.part.removal = undefined;
       return AircraftCertRegistrationsFM
-        .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.reg)
+        .removeDereg({ id: $stateParams.id, ind: $stateParams.ind }, $scope.reg)
         .$promise
         .then(function () {
           return $state.go($state.current, $stateParams, { reload: true });
