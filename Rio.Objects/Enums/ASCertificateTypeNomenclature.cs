@@ -13,6 +13,8 @@ namespace Rio.Objects.Enums
         public List<BaseNomenclature> TrafficControllersValues;
         public List<BaseNomenclature> ForeignersValues;
         public List<BaseNomenclature> CabinCrewValues;
+        public List<BaseNomenclature> ChangeCompetentValues;
+        public List<BaseNomenclature> InstructorValues;
 
         public static readonly BaseNomenclature AmateurAirlinePilotPPL = new BaseNomenclature("PPL(A)", "Любител пилот на самолет PPL(A)");
         public static readonly BaseNomenclature ProfessionalAirlinePilotCPL = new BaseNomenclature("CPL(A)", "Професионален пилот на самолет CPL(A)");
@@ -35,6 +37,11 @@ namespace Rio.Objects.Enums
 
         public static readonly BaseNomenclature CAL = new BaseNomenclature("CAL", "Стюардеса C/AL ");
         public static readonly BaseNomenclature FCL = new BaseNomenclature("FCL", "Борден съпроводител F/CL");
+
+        public static readonly BaseNomenclature Initial = new BaseNomenclature("initial", "Първоначално издаване");
+        public static readonly BaseNomenclature Confirm = new BaseNomenclature("confirm", "Потвърждаване");
+        public static readonly BaseNomenclature New = new BaseNomenclature("new", "Подновяване");
+        public static readonly BaseNomenclature Expand = new BaseNomenclature("expand", "Разширяване на правата");
 
         public ASCertificateTypeNomenclature()
         {
@@ -94,6 +101,20 @@ namespace Rio.Objects.Enums
             {
                 CAL,
                 FCL
+            };
+
+            this.ChangeCompetentValues = new List<BaseNomenclature>()
+            {
+                CAL,
+                FCL
+            };
+
+            this.InstructorValues = new List<BaseNomenclature>()
+            {
+                Initial,
+                Confirm,
+                New,
+                Expand 
             };
         }
     }

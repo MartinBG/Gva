@@ -123,10 +123,19 @@
   <data name="Hired" xml:space="preserve">
     <value>Наета по договор организация за ТО</value>
   </data>
+  <data name="MSubpartF" xml:space="preserve">
+    <value>организация по част М, подчаст F</value>
+  </data>
+  <data name="MSubpartG" xml:space="preserve">
+    <value>организация по част М, подчаст G</value>
+  </data>
   <data name="NonComplex" xml:space="preserve">
     <value>Non-Complex</value>
   </data>
   <data name="Own" xml:space="preserve">
     <value>Собствена организация за ТО</value>
+  </data>
+  <data name="Part145" xml:space="preserve">
+    <value>организация по част 145</value>
   </data>
 </root>

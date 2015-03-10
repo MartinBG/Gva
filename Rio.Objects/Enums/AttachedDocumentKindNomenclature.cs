@@ -38,6 +38,8 @@ namespace Rio.Objects.Enums
         [ScriptIgnore]
         public string FileExtensions { get; set; }
 
+        #region Gva
+
         public static readonly AttachedDocumentKindNomenclature IDCopy = new AttachedDocumentKindNomenclature { ResourceKey = "IDCopy", Code = "10" };
         public static readonly AttachedDocumentKindNomenclature MedicalCertificate = new AttachedDocumentKindNomenclature { ResourceKey = "MedicalCertificate", Code = "11" };
         public static readonly AttachedDocumentKindNomenclature DyplomCopy = new AttachedDocumentKindNomenclature { ResourceKey = "DyplomCopy", Code = "12" };
@@ -64,7 +66,7 @@ namespace Rio.Objects.Enums
         };
 
         public static readonly AttachedDocumentKindNomenclature PracticalExperience = new AttachedDocumentKindNomenclature { ResourceKey = "PracticalExperience", Code = "22" };
-        public static readonly AttachedDocumentKindNomenclature TheoreticalExamApprovedOrganization = new AttachedDocumentKindNomenclature { ResourceKey = "TheoreticalExamApprovedOrganization", Code = "23" };       
+        public static readonly AttachedDocumentKindNomenclature TheoreticalExamApprovedOrganization = new AttachedDocumentKindNomenclature { ResourceKey = "TheoreticalExamApprovedOrganization", Code = "23" };
 
         public static List<AttachedDocumentKindNomenclature> R4240Values = new List<AttachedDocumentKindNomenclature>
         {
@@ -141,13 +143,17 @@ namespace Rio.Objects.Enums
             Contract
         };
 
-        public static List<AttachedDocumentKindNomenclature> R4356Values = new List<AttachedDocumentKindNomenclature>
+        public static List<AttachedDocumentKindNomenclature> R4356AircraftHiringValues = new List<AttachedDocumentKindNomenclature>
         {
             Contract,
+            ApprovedOrder
+        };
+
+        public static List<AttachedDocumentKindNomenclature> R4356Values = new List<AttachedDocumentKindNomenclature>
+        {
             RemovedRegister,
             ExportCertificate,
-            FeePaid,
-            ApprovedOrder
+            FeePaid
         };
 
         public static readonly AttachedDocumentKindNomenclature WrittenAgreement = new AttachedDocumentKindNomenclature { ResourceKey = "WrittenAgreement", Code = "90" };
@@ -165,11 +171,11 @@ namespace Rio.Objects.Enums
         public static List<AttachedDocumentKindNomenclature> R4396Values = new List<AttachedDocumentKindNomenclature>
         {
             WrittenAgreement,
-            PermitRadios,
-            ContractTransfer,
             CertificateRegistration,
+            CertificateAirworthiness,
+            PermitRadios,
             CertificateCompliance,
-            CertificateAirworthiness
+            ContractTransfer
         };
 
 
@@ -177,20 +183,20 @@ namespace Rio.Objects.Enums
         public static readonly AttachedDocumentKindNomenclature CertificateFlyingWorthiness = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateFlyingWorthiness", Code = "101" };
         public static readonly AttachedDocumentKindNomenclature CertificateFlyingWorthinessAuthorizedBody = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateFlyingWorthinessAuthorizedBody", Code = "102" };
 
+        public static readonly AttachedDocumentKindNomenclature CertificateQuality = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateQuality", Code = "103" };
+        public static readonly AttachedDocumentKindNomenclature CertificateQualityApprovedManufacturer = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateQualityApprovedManufacturer", Code = "104" };
+
         public static List<AttachedDocumentKindNomenclature> R4470WithWhenAppliedValues = new List<AttachedDocumentKindNomenclature>
         {
-            CertificateExport,
+            CertificateQualityApprovedManufacturer,
             CertificateFlyingWorthiness,
             CertificateFlyingWorthinessAuthorizedBody
         };
 
-        public static readonly AttachedDocumentKindNomenclature CertificateQuality = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateQuality", Code = "103" };
-        public static readonly AttachedDocumentKindNomenclature CertificateQualityApprovedManufacturer = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateQualityApprovedManufacturer", Code = "104" };
-
         public static List<AttachedDocumentKindNomenclature> R4470GVAWithWhenAppliedValues = new List<AttachedDocumentKindNomenclature>
         {
-            CertificateQuality,
-            CertificateQualityApprovedManufacturer
+            CertificateFlyingWorthinessAuthorizedBody,
+            CertificateExport
         };
 
         public static readonly AttachedDocumentKindNomenclature ManufactureGuides = new AttachedDocumentKindNomenclature { ResourceKey = "ManufactureGuides", Code = "105" };
@@ -201,12 +207,17 @@ namespace Rio.Objects.Enums
         public static readonly AttachedDocumentKindNomenclature ProgramGroundTests = new AttachedDocumentKindNomenclature { ResourceKey = "ProgramGroundTests", Code = "1010" };
         public static readonly AttachedDocumentKindNomenclature ProgramFlyingTests = new AttachedDocumentKindNomenclature { ResourceKey = "ProgramFlyingTests", Code = "1011" };
 
+        public static readonly AttachedDocumentKindNomenclature FlightManualCopy = new AttachedDocumentKindNomenclature { ResourceKey = "FlightManualCopy", Code = "1018" };
+        public static readonly AttachedDocumentKindNomenclature TimeLimitComponents = new AttachedDocumentKindNomenclature { ResourceKey = "TimeLimitComponents", Code = "1019" };
+
         public static List<AttachedDocumentKindNomenclature> R4470SupportingDocumentationValues = new List<AttachedDocumentKindNomenclature>
         {
+            FlightManualCopy,
             ManufactureGuides,
             RegulationMaintenance,
             ListServiceBulletins,
             ListMaxRejections,
+            TimeLimitComponents,
             ProgramMaintenance,
             ProgramGroundTests,
             ProgramFlyingTests
@@ -222,8 +233,8 @@ namespace Rio.Objects.Enums
         public static List<AttachedDocumentKindNomenclature> R4470InspectionReportValues = new List<AttachedDocumentKindNomenclature>
         {
             GliderEngines,
-            ComparissionTable,
             ResourceAggregatesList,
+            ComparissionTable,
             CenterMassProtocol,
             ModificationsList,
             IncidentsReport
@@ -482,8 +493,8 @@ namespace Rio.Objects.Enums
         {
             RentContract,
             OtherOne
-        }; 
-        
+        };
+
         public static readonly AttachedDocumentKindNomenclature Facility = new AttachedDocumentKindNomenclature { ResourceKey = "Facility", Code = "254" };
         public static readonly AttachedDocumentKindNomenclature Guide = new AttachedDocumentKindNomenclature { ResourceKey = "Guide", Code = "255" };
         public static readonly AttachedDocumentKindNomenclature Technical = new AttachedDocumentKindNomenclature { ResourceKey = "Technical", Code = "256" };
@@ -542,7 +553,7 @@ namespace Rio.Objects.Enums
             Development,
             Evidencing
         };
-        
+
         public static readonly AttachedDocumentKindNomenclature Tax = new AttachedDocumentKindNomenclature { ResourceKey = "Tax", Code = "282" };
         public static readonly AttachedDocumentKindNomenclature ManualAviationalCenter = new AttachedDocumentKindNomenclature { ResourceKey = "ManualAviationalCenter", Code = "283" };
         public static readonly AttachedDocumentKindNomenclature ListMethodological = new AttachedDocumentKindNomenclature { ResourceKey = "ListMethodological", Code = "284" };
@@ -557,7 +568,7 @@ namespace Rio.Objects.Enums
             Evidence,
             DocumentAUC
         };
-        
+
         public static readonly AttachedDocumentKindNomenclature DeclarationManager = new AttachedDocumentKindNomenclature { ResourceKey = "DeclarationManager", Code = "292" };
         public static readonly AttachedDocumentKindNomenclature EvidenceManagers = new AttachedDocumentKindNomenclature { ResourceKey = "EvidenceManagers", Code = "293" };
         public static readonly AttachedDocumentKindNomenclature MME = new AttachedDocumentKindNomenclature { ResourceKey = "MME", Code = "294" };
@@ -724,9 +735,116 @@ namespace Rio.Objects.Enums
             OtherOne
         };
 
+        public static readonly AttachedDocumentKindNomenclature MaintainAirworthiness = new AttachedDocumentKindNomenclature { ResourceKey = "MaintainAirworthiness", Code = "371" };
+        public static readonly AttachedDocumentKindNomenclature ConformityRequirements = new AttachedDocumentKindNomenclature { ResourceKey = "ConformityRequirements", Code = "372" };
+        public static readonly AttachedDocumentKindNomenclature ContractUPPLG = new AttachedDocumentKindNomenclature { ResourceKey = "ContractUPPLG", Code = "373" };
+
+        public static List<AttachedDocumentKindNomenclature> R5094Values = new List<AttachedDocumentKindNomenclature>
+        {
+            MaintainAirworthiness,
+            ConformityRequirements,
+            ContractUPPLG,
+            OtherTwo
+        };
+
+        public static readonly AttachedDocumentKindNomenclature TechnicalLog = new AttachedDocumentKindNomenclature { ResourceKey = "TechnicalLog", Code = "381" };
+        public static readonly AttachedDocumentKindNomenclature DeclarationReleaseOperation = new AttachedDocumentKindNomenclature { ResourceKey = "DeclarationReleaseOperation", Code = "382" };
+
+        public static List<AttachedDocumentKindNomenclature> R5096Values = new List<AttachedDocumentKindNomenclature>
+        {
+            TechnicalLog,
+            DeclarationReleaseOperation,
+            OtherTwo
+        };
+
+        public static readonly AttachedDocumentKindNomenclature ProgramPlanMaintenence = new AttachedDocumentKindNomenclature { ResourceKey = "ProgramPlanMaintenence", Code = "391" };
+        public static readonly AttachedDocumentKindNomenclature DeclarationServicedAircraft = new AttachedDocumentKindNomenclature { ResourceKey = "DeclarationServicedAircraft", Code = "392" };
+        public static readonly AttachedDocumentKindNomenclature ReliabilityProgramIfApplicable = new AttachedDocumentKindNomenclature { ResourceKey = "ReliabilityProgramIfApplicable", Code = "393" };
+
+        public static List<AttachedDocumentKindNomenclature> R5104Values = new List<AttachedDocumentKindNomenclature>
+        {
+            ProgramPlanMaintenence,
+            DeclarationServicedAircraft,
+            ReliabilityProgramIfApplicable,
+            OtherTwo
+        };
+
+        public static List<AttachedDocumentKindNomenclature> R5116Values = new List<AttachedDocumentKindNomenclature>
+        {
+            OtherTwo
+        };
+
+        public static readonly AttachedDocumentKindNomenclature IdDocumentCopy = new AttachedDocumentKindNomenclature { ResourceKey = "IdDocumentCopy", Code = "421" };
+        public static readonly AttachedDocumentKindNomenclature FlyingLicenseCopyEachClass = new AttachedDocumentKindNomenclature { ResourceKey = "FlyingLicenseCopyEachClass", Code = "422" };
+        public static readonly AttachedDocumentKindNomenclature MedicalCertificatePartMedCopy = new AttachedDocumentKindNomenclature { ResourceKey = "MedicalCertificatePartMedCopy", Code = "423" };
+
+        public static List<AttachedDocumentKindNomenclature> R5134Values = new List<AttachedDocumentKindNomenclature>
+        {
+            IdDocumentCopy,
+            FlyingLicenseCopyEachClass,
+            MedicalCertificatePartMedCopy,
+            FeePaidNonState,
+            CopyLicenseHeld
+        };
+
+        public static readonly AttachedDocumentKindNomenclature DocumentStandardizationPassRate = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentStandardizationPassRate", Code = "431" };
+        public static readonly AttachedDocumentKindNomenclature OwnedInstructorCertificateCopy = new AttachedDocumentKindNomenclature { ResourceKey = "OwnedInstructorCertificateCopy", Code = "432" };
+        public static readonly AttachedDocumentKindNomenclature LicenseExaminerCopy = new AttachedDocumentKindNomenclature { ResourceKey = "LicenseExaminerCopy", Code = "433" };
+
+        public static List<AttachedDocumentKindNomenclature> R5144Values = new List<AttachedDocumentKindNomenclature>
+        {
+            DocumentStandardizationPassRate,
+            OwnedInstructorCertificateCopy,
+            CopyLicenseHeld,
+            LicenseExaminerCopy,
+            MedicalFitnessCopy
+        };
+
+        #endregion
+
+        #region Aop
+
         public static readonly AttachedDocumentKindNomenclature AopFed = new AttachedDocumentKindNomenclature { ResourceKey = "AopFed", Code = "0", FileExtensions = "*.fed" };
         public static readonly AttachedDocumentKindNomenclature AopMethodica = new AttachedDocumentKindNomenclature { ResourceKey = "AopMethodica", Code = "1", FileExtensions = "*.doc | *.docx" };
         public static readonly AttachedDocumentKindNomenclature AopLetter = new AttachedDocumentKindNomenclature { ResourceKey = "AopLetter", Code = "2" };
         public static readonly AttachedDocumentKindNomenclature OtherFed = new AttachedDocumentKindNomenclature { ResourceKey = "OtherFed", Code = "3", FileExtensions = "*.fed" };
+
+        #endregion
+
+        #region Ngo
+
+        public static readonly AttachedDocumentKindNomenclature DeclarationExistence = new AttachedDocumentKindNomenclature { ResourceKey = "DeclarationExistence", Code = "10" };
+        public static readonly AttachedDocumentKindNomenclature DeclarationOverdue = new AttachedDocumentKindNomenclature { ResourceKey = "DeclarationOverdue", Code = "11" };
+        public static readonly AttachedDocumentKindNomenclature RulesProcedures = new AttachedDocumentKindNomenclature { ResourceKey = "RulesProcedures", Code = "12" };
+        public static readonly AttachedDocumentKindNomenclature Proxy = new AttachedDocumentKindNomenclature { ResourceKey = "Proxy", Code = "13" };
+
+        public static List<string> R7070Values(bool hasHistory = false)
+        {
+            if (hasHistory)
+                return new List<string>
+                {
+                    RulesProcedures.Name,
+                    Proxy.Name
+                };
+            else
+                return new List<string>
+                {
+                    DeclarationExistence.Name,
+                    DeclarationOverdue.Name,
+                    RulesProcedures.Name,
+                    Proxy.Name
+                };
+        }
+
+        public static List<string> R7076Values()
+        {
+            return new List<string>
+            {
+                Proxy.Name
+            };
+        }
+
+        #endregion
+
     }
 }

@@ -117,16 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Entity" xml:space="preserve">
-    <value>Юридическо лице</value>
+  <data name="Change" xml:space="preserve">
+    <value>промяна</value>
   </data>
-  <data name="Physical" xml:space="preserve">
-    <value>Физическо лице</value>
-  </data>
-  <data name="PhysicalBulgarian" xml:space="preserve">
-    <value>Български гражданин или постоянно пребиваващ чужденец</value>
-  </data>
-  <data name="PhysicalForeign" xml:space="preserve">
-    <value>Чужд гражданин</value>
+  <data name="InitialApproval" xml:space="preserve">
+    <value>първоначално одобрение</value>
   </data>
 </root>

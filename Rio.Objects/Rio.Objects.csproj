@@ -1278,22 +1278,55 @@
     <Compile Include="Classes\R-7094_CancellationRegistrationNonProfitEntityBranchApplication.cs" />
     <Compile Include="Classes\R-7096_AddressAdditionalDescription.cs" />
     <Compile Include="Classes\xmlsig.cs" />
-    <Compile Include="Enums\AccessFormPublicInformationNomenclature.cs" />
-    <Compile Include="Enums\ActivityKindNomenclature.cs" />
-    <Compile Include="Enums\ActivityScheduleNomenclature.cs" />
-    <Compile Include="Enums\AeromedicalCenterNomenclature.cs" />
-    <Compile Include="Enums\AeromedicalFitnessClassNomenclature.cs" />
-    <Compile Include="Enums\AircraftClassNomenclature.cs" />
-    <Compile Include="Enums\AircraftClassQualificationClassNomenclature.cs" />
-    <Compile Include="Enums\AircraftMaintenanceCategoryLicenseNomenclature.cs" />
-    <Compile Include="Enums\AircraftModelNomenclature.cs" />
-    <Compile Include="Enums\AircraftOperationTypeNomenclature.cs" />
-    <Compile Include="Enums\AircraftServicesPerformNomenclature.cs" />
-    <Compile Include="Enums\AircraftTypeNomenclature.cs" />
-    <Compile Include="Enums\AircraftTypeQualificationClassNomenclature.cs" />
-    <Compile Include="Enums\AirServicesTypeNomenclature.cs" />
-    <Compile Include="Enums\ApplicantTypeNomenclature.cs" />
-    <Compile Include="Enums\ApplicationTypeNomenclature.cs" />
+    <Compile Include="Enums\AccessFormPublicInformationNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ActivityKindNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ActivityScheduleNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AeromedicalCenterNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AeromedicalFitnessClassNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AircraftClassNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AircraftClassQualificationClassNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AircraftMaintenanceCategoryLicenseNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AircraftModelNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AircraftOperationTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AircraftServicesPerformNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AircraftTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AircraftTypeQualificationClassNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AirServicesTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AnnouncedActKindNomenclature.cs" />
+    <Compile Include="Enums\ApplicantTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ApplicationTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Enums\App_LocalResources\AccessFormPublicInformationNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AccessFormPublicInformationNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\ActivityKindNomenclature.Designer.cs" />
@@ -1306,6 +1339,8 @@
     <Compile Include="Enums\App_LocalResources\AirServicesTypeNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\ApplicantTypeNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\ApplicantTypeNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\ApplicationTypeNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\ApplicationTypeNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AttachedDocumentKindNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AttachedDocumentKindNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AuthorTypeNomenclature.Designer.cs" />
@@ -1342,6 +1377,8 @@
     <Compile Include="Enums\App_LocalResources\OptionChoiceNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\OptionNameNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\OptionNameNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\OrganizationalFormNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\OrganizationalFormNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\OrganizationKindNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\OrganizationKindNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\PlannedScopeNomenclature.Designer.cs" />
@@ -1368,84 +1405,247 @@
     <Compile Include="Enums\App_LocalResources\SpecialRestrictionNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\SubmissionTimeNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\SubmissionTimeNomenclature.en.Designer.cs" />
-    <Compile Include="Enums\ASCertificateTypeNomenclature.cs" />
-    <Compile Include="Enums\ASCourseExamNomenclature.cs" />
-    <Compile Include="Enums\ASCourseNomenclature.cs" />
-    <Compile Include="Enums\ASLLDataNomenclature.cs" />
-    <Compile Include="Enums\ATONomenclature.cs" />
-    <Compile Include="Enums\AttachedDocumentKindNomenclature.cs" />
-    <Compile Include="Enums\AttachedDocumentTypeNomenclature.cs" />
-    <Compile Include="Enums\AuthorityIssuedAttachedDocumentNomenclature.cs" />
-    <Compile Include="Enums\AuthorTypeNomenclature.cs" />
-    <Compile Include="Enums\AviationAdministrationNomenclature.cs" />
-    <Compile Include="Enums\AviationTrainingCenterNomenclature.cs" />
-    <Compile Include="Enums\BaseNomenclature.cs" />
-    <Compile Include="Enums\CategoryAircraftNomenclature.cs" />
-    <Compile Include="Enums\CategoryELVSNomenclature.cs" />
-    <Compile Include="Enums\CertificationScopesNomenclature.cs" />
-    <Compile Include="Enums\CoordinationActivitiesInteractionAirTrafficManagementPermissionNomenclature.cs" />
-    <Compile Include="Enums\CourseNomenclature.cs" />
-    <Compile Include="Enums\DegreeAccessRequestedPublicInformationNomenclature.cs" />
-    <Compile Include="Enums\DerogationsNomenclature.cs" />
-    <Compile Include="Enums\DirectionFunctionNomenclature.cs" />
-    <Compile Include="Enums\DocumentElectronicTransportType.cs" />
-    <Compile Include="Enums\DummyNomenclature.cs" />
-    <Compile Include="Enums\ElectronicDocumentDiscrepancyTypeNomenclature.cs" />
-    <Compile Include="Enums\ElectronicServiceProviderTypeNomenclature.cs" />
-    <Compile Include="Enums\EngineTypeNomenclature.cs" />
-    <Compile Include="Enums\FacilityKindNomenclature.cs" />
-    <Compile Include="Enums\FacilityLocationNomenclature.cs" />
-    <Compile Include="Enums\FinancialArrangementsNomenclature.cs" />
-    <Compile Include="Enums\FlagIndicationNomenclature.cs" />
-    <Compile Include="Enums\FlightExpRoleNomenclature.cs" />
-    <Compile Include="Enums\FlightPurposeNomenclature.cs" />
-    <Compile Include="Enums\FlightSimulatorTypeNomenclature.cs" />
-    <Compile Include="Enums\FlightSkillTestExaminerNomenclature.cs" />
-    <Compile Include="Enums\FlightSkillTestNomenclature.cs" />
-    <Compile Include="Enums\FlightSubaimNomenclature.cs" />
-    <Compile Include="Enums\FSTDRentFormNomenclature.cs" />
-    <Compile Include="Enums\FSTDTypeNomenclature.cs" />
-    <Compile Include="Enums\GroupTypeCheckingNomenclature.cs" />
-    <Compile Include="Enums\IrregularityTypesNomenclature.cs" />
-    <Compile Include="Enums\LeaseTypeNomenclature.cs" />
-    <Compile Include="Enums\LECNomenclature.cs" />
-    <Compile Include="Enums\MonitoredRadioequipmentNomenclature.cs" />
-    <Compile Include="Enums\NewUsedNomenclature.cs" />
-    <Compile Include="Enums\OperationalProgramNomenclature.cs" />
-    <Compile Include="Enums\OperationAreaNomenclature.cs" />
-    <Compile Include="Enums\OperationRegionNomenclature.cs" />
-    <Compile Include="Enums\OptionChoiceNomenclature.cs" />
-    <Compile Include="Enums\OptionNameNomenclature.cs" />
-    <Compile Include="Enums\OrganizationKindNomenclature.cs" />
-    <Compile Include="Enums\OVDBodyLocationIndicatorNomenclature.cs" />
-    <Compile Include="Enums\OVDQualificationClassPermissionNomenclature.cs" />
-    <Compile Include="Enums\OVDQualificationClassWithoutPermissionNomenclature.cs" />
-    <Compile Include="Enums\OVDQualificationClassWithPermissionNomenclature.cs" />
-    <Compile Include="Enums\PermissibleActivityNomenclature.cs" />
-    <Compile Include="Enums\PermissionNomenclature.cs" />
-    <Compile Include="Enums\PersonRepresentingTradingCompanyRoleNomenclature.cs" />
-    <Compile Include="Enums\PlannedScopeNomenclature.cs" />
-    <Compile Include="Enums\PropellerTypeNomenclature.cs" />
-    <Compile Include="Enums\ProvidedOperationTypesNomenclature.cs" />
-    <Compile Include="Enums\ProvidingServiceKindNomenclature.cs" />
-    <Compile Include="Enums\ProvidingServicePartNomenclature.cs" />
-    <Compile Include="Enums\ProvidingServiceSubpartNomenclature.cs" />
-    <Compile Include="Enums\QualificationClassNomenclature.cs" />
-    <Compile Include="Enums\QualificationSubclassDegreeNomenclature.cs" />
-    <Compile Include="Enums\QualificationSubclassNomenclature.cs" />
-    <Compile Include="Enums\RecognitionNomenclature.cs" />
-    <Compile Include="Enums\ScopeServiceConditionsNomenclature.cs" />
-    <Compile Include="Enums\SectorWorkplaceAviationGroundStaffNomenclature.cs" />
-    <Compile Include="Enums\ServiceCategoryNomenclature.cs" />
-    <Compile Include="Enums\ServiceInstructionsNomenclature.cs" />
-    <Compile Include="Enums\ServiceResultReceiptMethodNomenclature.cs" />
-    <Compile Include="Enums\ServiceTermTypeNomenclature.cs" />
-    <Compile Include="Enums\SpecialPermissionNomenclature.cs" />
-    <Compile Include="Enums\SpecialRestrictionNomenclature.cs" />
-    <Compile Include="Enums\SubmissionTimeNomenclature.cs" />
-    <Compile Include="Enums\TrainingModuleNomenclature.cs" />
-    <Compile Include="Enums\TypeCheckingNomenclature.cs" />
-    <Compile Include="Enums\TypeOfObjectNomenclature.cs" />
+    <Compile Include="Enums\App_LocalResources\TypeEntryRegisterNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\TypeEntryRegisterNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\ASCertificateTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ASCourseExamNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ASCourseNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ASLLDataNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ATONomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AttachedDocumentKindNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AttachedDocumentTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AuthorityIssuedAttachedDocumentNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AuthorTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AviationAdministrationNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\AviationTrainingCenterNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\BaseNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\CategoryAircraftNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\CategoryELVSNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\CertificationScopesNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\CoordinationActivitiesInteractionAirTrafficManagementPermissionNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\CourseNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\CourtCaseActKindNomenclature.cs" />
+    <Compile Include="Enums\CourtNomenclature.cs" />
+    <Compile Include="Enums\DegreeAccessRequestedPublicInformationNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\DerogationsNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\DirectionFunctionNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\DocumentElectronicTransportType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\DummyNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ElectronicDocumentDiscrepancyTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ElectronicServiceProviderTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\EngineTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FacilityKindNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FacilityLocationNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FinancialArrangementsNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FlagIndicationNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FlightExpRoleNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FlightPurposeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FlightSimulatorTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FlightSkillTestExaminerNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FlightSkillTestNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FlightSubaimNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FSTDRentFormNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\FSTDTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\GroupTypeCheckingNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\IrregularityTypesNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\LeaseTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\LECNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\MonitoredRadioequipmentNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\NewUsedNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\OperationalProgramNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\OperationAreaNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\OperationRegionNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\OptionChoiceNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\OptionNameNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\OrganizationalFormNomenclature.cs" />
+    <Compile Include="Enums\OrganizationKindNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\OVDBodyLocationIndicatorNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\OVDQualificationClassPermissionNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\OVDQualificationClassWithoutPermissionNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\OVDQualificationClassWithPermissionNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\PermissibleActivityNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\PermissionNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\PersonRepresentingTradingCompanyRoleNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\PlannedScopeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\PropellerTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ProvidedOperationTypesNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ProvidingServiceKindNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ProvidingServicePartNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ProvidingServiceSubpartNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\QualificationClassNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\QualificationSubclassDegreeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\QualificationSubclassNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\RecognitionNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ScopeServiceConditionsNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\SectorWorkplaceAviationGroundStaffNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ServiceCategoryNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ServiceInstructionsNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ServiceResultReceiptMethodNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\ServiceTermTypeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\SpecialPermissionNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\SpecialRestrictionNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\SubmissionTimeNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\TrainingModuleNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\TypeApplicationNomenclature.cs" />
+    <Compile Include="Enums\TypeCheckingNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enums\TypeEntryRegisterNomenclature.cs" />
+    <Compile Include="Enums\TypeOfObjectNomenclature.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RioDocumentMetadata.cs" />
   </ItemGroup>
@@ -5196,6 +5396,8 @@
     <EmbeddedResource Include="Enums\App_LocalResources\AirServicesTypeNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\ApplicantTypeNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\ApplicantTypeNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\ApplicationTypeNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\ApplicationTypeNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\AttachedDocumentKindNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\AttachedDocumentKindNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\AuthorTypeNomenclature.en.resx" />
@@ -5232,6 +5434,8 @@
     <EmbeddedResource Include="Enums\App_LocalResources\OptionChoiceNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\OptionNameNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\OptionNameNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\OrganizationalFormNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\OrganizationalFormNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\OrganizationKindNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\OrganizationKindNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\PlannedScopeNomenclature.en.resx" />
@@ -5258,6 +5462,8 @@
     <EmbeddedResource Include="Enums\App_LocalResources\SpecialRestrictionNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\SubmissionTimeNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\SubmissionTimeNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\TypeEntryRegisterNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\TypeEntryRegisterNomenclature.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -235,7 +235,7 @@
     <value>Permit issued pursuant to Art. 82, para. 4 and 5 of the Law on Environmental Protection</value>
   </data>
   <data name="ApprovedOrder" xml:space="preserve">
-    <value>Approved an order for leasing</value>
+    <value>Approval for leasing</value>
   </data>
   <data name="ExportCertificate" xml:space="preserve">
     <value>Export Certificate of Airworthiness</value>
@@ -689,5 +689,65 @@
   </data>
   <data name="OtherFed" xml:space="preserve">
     <value>Other (.fed)</value>
+  </data>
+  <data name="DeclarationExistence" xml:space="preserve">
+    <value>Declaration of the existence of circumstances under Art. 38-41 NPLEA</value>
+  </data>
+  <data name="RulesProcedures" xml:space="preserve">
+    <value>Rules and procedures for the public benefit</value>
+  </data>
+  <data name="DeclarationOverdue" xml:space="preserve">
+    <value>Declaration of overdue taxes, duties and other public debts</value>
+  </data>
+  <data name="Proxy" xml:space="preserve">
+    <value>Proxy</value>
+  </data>
+  <data name="ConformityRequirements" xml:space="preserve">
+    <value>Declaration of conformity with the description requirements</value>
+  </data>
+  <data name="ContractUPPLG" xml:space="preserve">
+    <value>Contracts for tasks UPPLG</value>
+  </data>
+  <data name="DeclarationReleaseOperation" xml:space="preserve">
+    <value>Declaration for release into operation</value>
+  </data>
+  <data name="MaintainAirworthiness" xml:space="preserve">
+    <value>Description of the management organization to maintain a constant airworthiness</value>
+  </data>
+  <data name="TechnicalLog" xml:space="preserve">
+    <value>Technical log</value>
+  </data>
+  <data name="DeclarationServicedAircraft" xml:space="preserve">
+    <value>A declaration signed by the owner or AO CAMO the said aircraft will be serviced in accordance with the program and it will be periodically revised</value>
+  </data>
+  <data name="ProgramPlanMaintenence" xml:space="preserve">
+    <value>Program (plan) for maintenance</value>
+  </data>
+  <data name="ReliabilityProgramIfApplicable" xml:space="preserve">
+    <value>Reliability program, if applicable</value>
+  </data>
+  <data name="FlightManualCopy" xml:space="preserve">
+    <value>A copy of the Flight Manual</value>
+  </data>
+  <data name="TimeLimitComponents" xml:space="preserve">
+    <value>Time limit components</value>
+  </data>
+  <data name="FlyingLicenseCopyEachClass" xml:space="preserve">
+    <value>Flying license (copy of recent records for each class)</value>
+  </data>
+  <data name="IdDocumentCopy" xml:space="preserve">
+    <value>Identity document - a copy</value>
+  </data>
+  <data name="MedicalCertificatePartMedCopy" xml:space="preserve">
+    <value>Medical certificate part-med - copy</value>
+  </data>
+  <data name="DocumentStandardizationPassRate" xml:space="preserve">
+    <value>Document standardization pass rate examiner - copy</value>
+  </data>
+  <data name="LicenseExaminerCopy" xml:space="preserve">
+    <value>Of license examiner - a copy (if applicable)</value>
+  </data>
+  <data name="OwnedInstructorCertificateCopy" xml:space="preserve">
+    <value>Owned instructor certificate - copy (if applicable)</value>
   </data>
 </root>

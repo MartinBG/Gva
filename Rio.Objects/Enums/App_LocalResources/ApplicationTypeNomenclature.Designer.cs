@@ -22,14 +22,14 @@ namespace Rio.Objects.Enums.App_LocalResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AuthorTypeNomenclature {
+    public class ApplicationTypeNomenclature {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AuthorTypeNomenclature() {
+        internal ApplicationTypeNomenclature() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rio.Objects.Enums.App_LocalResources.AuthorTypeNomenclature", typeof(AuthorTypeNomenclature).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rio.Objects.Enums.App_LocalResources.ApplicationTypeNomenclature", typeof(ApplicationTypeNomenclature).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,20 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Юридическо лице.
+        ///   Looks up a localized string similar to промяна.
         /// </summary>
-        public static string Entity {
+        public static string Change {
             get {
-                return ResourceManager.GetString("Entity", resourceCulture);
+                return ResourceManager.GetString("Change", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Физическо лице.
+        ///   Looks up a localized string similar to първоначално одобрение.
         /// </summary>
-        public static string Physical {
+        public static string InitialApproval {
             get {
-                return ResourceManager.GetString("Physical", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Български гражданин или постоянно пребиваващ чужденец.
-        /// </summary>
-        public static string PhysicalBulgarian {
-            get {
-                return ResourceManager.GetString("PhysicalBulgarian", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Чужд гражданин.
-        /// </summary>
-        public static string PhysicalForeign {
-            get {
-                return ResourceManager.GetString("PhysicalForeign", resourceCulture);
+                return ResourceManager.GetString("InitialApproval", resourceCulture);
             }
         }
     }
