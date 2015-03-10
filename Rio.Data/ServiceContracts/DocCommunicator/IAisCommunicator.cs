@@ -357,6 +357,18 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
         [EnumMember]
         ASCertificateTypeCabinCrew = 50,
 
+        // Вид свидетелство
+        [EnumMember]
+        ASCertificateTypeChangeCompetent = 51,
+
+        // Квалификационен клас за Клас ВС при инструктор
+        [EnumMember]
+        AircraftClassQualificationClassInstructor = 52,
+
+        // Кандидатствам за - инструктори
+        [EnumMember]
+        ASCertificateTypeInstructor = 53,
+
         #endregion
 
         #region Mosv

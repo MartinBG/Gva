@@ -171,6 +171,15 @@ namespace Gva.DocCommunicator
                         }
                     } break;
 
+                case NomenclatureType.ASCertificateTypeChangeCompetent:
+                    {
+                        var nom = new Rio.Objects.Enums.ASCertificateTypeNomenclature();
+                        foreach (var item in nom.ChangeCompetentValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
 
                 case NomenclatureType.AviationAdministration:
                     {
@@ -321,7 +330,7 @@ namespace Gva.DocCommunicator
                 case NomenclatureType.AircraftOperationType:
                     {
                         var nom = new Rio.Objects.Enums.AircraftOperationTypeNomenclature();
-                        foreach (var item in nom.Values)
+                        foreach (var item in nom.Values.OrderBy(e => e.Text))
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
                         }
@@ -529,6 +538,24 @@ namespace Gva.DocCommunicator
                     {
                         var nom = new Rio.Objects.Enums.TrainingModuleNomenclature();
                         foreach (var item in nom.PeriodicalValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.AircraftClassQualificationClassInstructor:
+                    {
+                        var nom = new Rio.Objects.Enums.AircraftClassQualificationClassNomenclature();
+                        foreach (var item in nom.InstructorValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.ASCertificateTypeInstructor:
+                    {
+                        var nom = new Rio.Objects.Enums.ASCertificateTypeNomenclature();
+                        foreach (var item in nom.InstructorValues)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
                         }
