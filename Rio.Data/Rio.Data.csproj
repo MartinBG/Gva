@@ -156,14 +156,14 @@
     <Compile Include="Extractions\AttachedDocDo\Gva\R4958AttachedDocDoExtraction.cs" />
     <Compile Include="Extractions\AttachedDocDo\Gva\R5000AttachedDocDoExtraction.cs" />
     <Compile Include="Extractions\AttachedDocDo\Gva\R5090AttachedDocDoExtraction.cs" />
-    <Compile Include="ServiceContracts\DocCommunicator\IAISDocumentServiceViewer.cs" />
     <Compile Include="ServiceContracts\AppCommunicator\CaseFileInfo.cs" />
     <Compile Include="ServiceContracts\AppCommunicator\CaseStatus.cs" />
     <Compile Include="ServiceContracts\AppCommunicator\CaseStatusInfo.cs" />
     <Compile Include="ServiceContracts\AppCommunicator\DocumentInfo.cs" />
     <Compile Include="ServiceContracts\AppCommunicator\DocumentRegistrationStatus.cs" />
     <Compile Include="ServiceContracts\AppCommunicator\DocumentRequest.cs" />
-    <Compile Include="ServiceContracts\AppCommunicator\IDocumentService.cs" />
+    <Compile Include="ServiceContracts\AppCommunicator\IApplicationCommunicator.cs" />
+    <Compile Include="ServiceContracts\DocCommunicator\IAisCommunicator.cs" />
     <Compile Include="Utils\RioObjectUtils.cs" />
     <Compile Include="Utils\RioValidator\IRioValidator.cs" />
     <Compile Include="Utils\RioValidator\RioValidator.cs" />

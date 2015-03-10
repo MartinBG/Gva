@@ -2462,7 +2462,7 @@ namespace Docs.Api.Controllers
             ElectronicServiceProvider electronicServiceProvider =
                 this.unitOfWork.DbContext.Set<ElectronicServiceProvider>().FirstOrDefault(e => e.ElectronicServiceProviderId == electronicServiceProviderId);
 
-            using (var channelFactory = new ChannelFactory<IDocumentService>("AppCommunicatorEndpoint", new EndpointAddress(electronicServiceProvider.EndPointAddress)))
+            using (var channelFactory = new ChannelFactory<IApplicationCommunicator>("AppCommunicatorEndpoint", new EndpointAddress(electronicServiceProvider.EndPointAddress)))
             {
                 DocumentRequest documentRequest = new DocumentRequest()
                 {

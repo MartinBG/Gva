@@ -11,9 +11,9 @@ using R_0009_000001;
 
 namespace Rio.Data.ServiceContracts.AppCommunicator
 {
-    [ServiceContract(Name = "DocumentService", Namespace = "http://portal.ems.bg/2013/DocumentService/v1")]
+    [ServiceContract(Name = "ApplicationCommunicator", Namespace = "http://egov.bg/2014/ApplicationCommunicator/v2")]
     [XmlSerializerFormat]
-    public interface IDocumentService
+    public interface IApplicationCommunicator
     {
         [OperationContract]
         [FaultContract(typeof(ReceiverFault))]
@@ -54,7 +54,7 @@ namespace Rio.Data.ServiceContracts.AppCommunicator
         Stream GetDocumentContentWithCustomUri(string uri);
     }
 
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://portal.ems.bg/2013/Payments")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://egov.bg/2014/Payments/v1")]
     public class ElectronicPortalPaymentInfo
     {
         public Guid PaymentInfoID { get; set; }
@@ -96,7 +96,7 @@ namespace Rio.Data.ServiceContracts.AppCommunicator
         EBG
     }
 
-    [DataContract(Namespace = "http://portal.ems.bg/2013/DocumentService/v1")]
+    [DataContract(Namespace = "http://egov.bg/2014/ApplicationCommunicator/v2")]
     public class ReceiverFault
     {
         [DataMember]

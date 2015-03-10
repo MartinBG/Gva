@@ -37,7 +37,7 @@ using Rio.Data.ServiceContracts.AppCommunicator;
 
 namespace Mosv.AppCommunicator
 {
-    public class AppCommunicatorService : Rio.Data.ServiceContracts.AppCommunicator.IDocumentService
+    public class AppCommunicatorService : Rio.Data.ServiceContracts.AppCommunicator.IApplicationCommunicator
     {
         private IUnitOfWork unitOfWork;
         private IDocRepository docRepository;

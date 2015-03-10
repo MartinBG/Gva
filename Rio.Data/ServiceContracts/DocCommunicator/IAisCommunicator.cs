@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Rio.Data.ServiceContracts.DocCommunicator
 {
-    [ServiceContract(Name = "DocumentEVApplication", Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
-    public interface IAISDocumentServiceViewer
+    [ServiceContract(Name = "AisCommunicator", Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
+    public interface IAisCommunicator
     {
         /// <summary>
         /// Returns document data. 
@@ -62,7 +62,7 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
         IEnumerable<NomenclatureItem> SearchNomenclature(string ticketID, NomenclatureType type, NomenclatureLanguage language, int? startIndex, int? offset);
     }
 
-    [DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
+    [DataContract(Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
     public class ReceiverFault
     {
         [DataMember]
@@ -72,7 +72,7 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
         public string Message { get; set; }
     }
 
-    [DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
+    [DataContract(Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
     public class DocumentInfo
     {
         [DataMember]
@@ -89,15 +89,9 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
 
         [DataMember]
         public VisualizationMode VisualizationMode { get; set; }
-
-        //[DataMember]
-        //public AdministrationUnit AdministrationUnit { get; set; }
-
-        //[DataMember]
-        //public AdministrationService AdministrationService { get; set; }
     }
 
-    [DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
+    [DataContract(Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
     public enum VisualizationMode
     {
         [EnumMember]
@@ -119,93 +113,7 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
         DisplayWithSignature = 5,
     }
 
-    //[DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
-    //public enum AdministrationUnit
-    //{
-    //    [EnumMember]
-    //    Sofia = 1,
-    //    [EnumMember]
-    //    Blagoevgrad = 2,
-    //    [EnumMember]
-    //    Vratsa = 3,
-    //    [EnumMember]
-    //    Vidin = 4,
-    //    [EnumMember]
-    //    Plovdiv = 5,
-    //    [EnumMember]
-    //    Gabrovo = 6,
-    //    [EnumMember]
-    //    Lovetch = 7,
-    //    [EnumMember]
-    //    Pleven = 8,
-    //    [EnumMember]
-    //    Ruse = 9,
-    //    [EnumMember]
-    //    VelikoTarnovo = 10,
-    //    [EnumMember]
-    //    Shumen = 11,
-    //    [EnumMember]
-    //    Varna = 12,
-    //    [EnumMember]
-    //    Sliven = 13,
-    //    [EnumMember]
-    //    Burgas = 14,
-    //    [EnumMember]
-    //    StaraZagora = 15,
-    //    [EnumMember]
-    //    Haskovo = 16,
-    //}
-
-    //[DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
-    //public enum AdministrationService
-    //{
-    //    [EnumMember]
-    //    ApprovalTypeInstrumental = 1,
-    //    [EnumMember]
-    //    InitialVerification = 2,
-    //    [EnumMember]
-    //    SubsequentVerification = 3,
-    //    [EnumMember]
-    //    MetrologicalЕxaminations = 4,
-    //    [EnumMember]
-    //    ProvidingInformation = 5,
-    //    [EnumMember]
-    //    ApprovalPlayingGround = 6,
-    //    [EnumMember]
-    //    ApprovalType = 7,
-    //    [EnumMember]
-    //    ApprovalProgramModifications = 8,
-    //    [EnumMember]
-    //    Expertise = 9,
-    //    [EnumMember]
-    //    MatchingIntegrationSystem = 10,
-    //    [EnumMember]
-    //    ControlTesting = 11,
-    //    [EnumMember]
-    //    ApprovalTypeElectronic = 12,
-    //    [EnumMember]
-    //    ConformityAssessmentScales = 13,
-    //    [EnumMember]
-    //    ConformityAssessmentProducts = 14,
-    //    [EnumMember]
-    //    CalibrationEtalons = 15,
-    //    [EnumMember]
-    //    SpreadingCalibration = 16,
-    //    [EnumMember]
-    //    SertificationInstrumental = 17,
-    //    [EnumMember]
-    //    MeasurementMetrologic = 18,
-    //    [EnumMember]
-    //    TestingValidationSoftware = 19,
-    //    [EnumMember]
-    //    ReceiptNotAcknowledge = 21,
-    //    [EnumMember]
-    //    ReceiptAcknowledge = 22,
-    //    [EnumMember]
-    //    RemovingIrregularities = 23,
-    //}
-
-    [DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
+    [DataContract(Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
     public class Error
     {
         [DataMember]
@@ -223,7 +131,7 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
         }
     }
 
-    [DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
+    [DataContract(Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
     public class DocumentInfoCache
     {
         [DataMember]
@@ -242,7 +150,7 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
         public VisualizationMode VisualizationMode { get; set; }
     }
 
-    [DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
+    [DataContract(Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
     public enum NomenclatureType
     {
         #region Gva
@@ -466,6 +374,16 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
 
         #endregion
 
+        #region Ngo
+
+        [EnumMember]
+        Court = 300,
+
+        [EnumMember]
+        AnnouncedActKind = 301,
+
+        #endregion
+
         [EnumMember]
         Dummy = 999,
 
@@ -474,14 +392,14 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
     [DataContract(Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
     public enum NomenclatureLanguage
     {
-        [EnumMember]
+        [EnumMember] 
         Bulgarian = 0,
 
-        [EnumMember]
+        [EnumMember] 
         English = 1
     }
 
-    [DataContract(Namespace = "http://portal.ems.bg/2013/AISDocumentServiceViewer/v1")]
+    [DataContract(Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
     public class NomenclatureItem
     {
         [DataMember]

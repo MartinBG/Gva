@@ -15,7 +15,7 @@ using Rio.Data.ServiceContracts.DocCommunicator;
 
 namespace Gva.DocCommunicator
 {
-    public class DocCommunicatorService : Rio.Data.ServiceContracts.DocCommunicator.IAISDocumentServiceViewer, IDisposable
+    public class DocCommunicatorService : Rio.Data.ServiceContracts.DocCommunicator.IAisCommunicator, IDisposable
     {
         private IUnitOfWork unitOfWork;
         private IRioDocumentParser rioDocumentParser;

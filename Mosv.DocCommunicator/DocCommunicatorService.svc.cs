@@ -17,7 +17,7 @@ using System.ServiceModel;
 
 namespace Mosv.DocCommunicator
 {
-    public class DocCommunicatorService : Rio.Data.ServiceContracts.DocCommunicator.IAISDocumentServiceViewer, IDisposable
+    public class DocCommunicatorService : Rio.Data.ServiceContracts.DocCommunicator.IAisCommunicator, IDisposable
     {
         private IUnitOfWork unitOfWork;
         private IRioDocumentParser rioDocumentParser;
