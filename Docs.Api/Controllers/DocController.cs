@@ -23,6 +23,7 @@ using Rio.Data.Abbcdn;
 using System.ServiceModel;
 using Abbcdn;
 using Rio.Data.ServiceContracts.AppCommunicator;
+using Docs.Api.Repositories.EmailRepository;
 
 namespace Docs.Api.Controllers
 {
@@ -2509,6 +2510,8 @@ namespace Docs.Api.Controllers
                 return NotFound();
             }
 
+            Doc caseDoc = this.docRepository.Find(this.docRepository.GetCaseId(id));
+
             CorrespondentEmailDO email = new CorrespondentEmailDO();
             Correspondent correspondent = new Correspondent();
 
@@ -2532,8 +2535,13 @@ namespace Docs.Api.Controllers
 
             email.EmailBcc = "";
             email.EmailTypeId = emailType.EmailTypeId;
-            email.Subject = emailType.Subject;
-            email.Body = emailType.Body.Replace("@@Param1", ConfigurationManager.AppSettings["Docs.Api:PortalWebAddress"]);
+            email.Subject = emailType.Subject
+                .Replace("@@CaseNum", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]");
+            email.Body = emailType.Body
+                .Replace("@@CaseNum", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]")
+                .Replace("@@DocViewUrl", EmailRepository.DocViewUrl)
+                .Replace("@@CaseViewUrl", EmailRepository.CaseViewUrl)
+                .Replace("@@AccessCode", caseDoc.AccessCode);
 
             return Ok(new
             {

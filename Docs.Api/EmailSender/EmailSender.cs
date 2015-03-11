@@ -67,7 +67,7 @@ namespace Docs.Api.EmailSender
                 }
                 else
                 {
-                    mailMessage.From = new MailAddress(ConfigurationManager.AppSettings["NetworkCredentialName"]);
+                    mailMessage.From = new MailAddress(ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialName"]);
                 }
 
                 foreach (var item in email.EmailAddressees.Where(e => e.EmailAddresseeType.Alias == "To"))
@@ -91,10 +91,13 @@ namespace Docs.Api.EmailSender
 
                     foreach (var item in email.EmailAttachments)
                     {
-                        using (MemoryStream m1 = new MemoryStream())
+                        // do not dispose the memory stream because the attachment needs it, it's safe to do so
+                        MemoryStream m1 = new MemoryStream();
                         using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", item.ContentId))
                         {
                             blobStream.CopyTo(m1);
+
+                            m1.Position = 0;
 
                             Attachment attachment = new Attachment(m1, item.Name);
 

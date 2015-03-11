@@ -4,16 +4,42 @@ GO
 SET IDENTITY_INSERT [dbo].[EmailTypes] ON 
 
 INSERT [dbo].[EmailTypes] ([EmailTypeId], [Name], [Alias], [Subject], [Body]) 
-VALUES (1, N'CorrespondentEmail', N'CorrespondentEmail', N'Известяване на кореспондент', N'Уеб порталът е достъпен на адрес: @@Param1.')
+VALUES (1, N'CorrespondentEmail', N'CorrespondentEmail',
+    N'Нов електронен документ по преписка @@CaseNum към портала за електронни административни услуги на "Министерство на правосъдието"',
+
+    N'Има нов електронен документ по ваша преписка @@CaseNum към портала за електронни административни услуги на "Министерство на правосъдието", който ви изпращаме приложено.' + CHAR(13)+CHAR(10) +
+    N'Документа може да бъде разгледан чрез портала на адрес: @@DocViewUrl' + CHAR(13)+CHAR(10) +
+    N'Цялата преписка, включваща и приложения документ, също е достъпна за преглед през портала на адрес: @@CaseViewUrl' + CHAR(13)+CHAR(10) +
+    CHAR(13)+CHAR(10) +
+    N'Номер на преписка: @@CaseNum' + CHAR(13)+CHAR(10) +
+    N'Код за достъп: @@AccessCode')
 
 INSERT [dbo].[EmailTypes] ([EmailTypeId], [Name], [Alias], [Subject], [Body]) 
-VALUES (2, N'ReceiveConfirmationEmail', N'ReceiptAcknowledgedEmail', N'Потвърждаване за получаване на заявление към портала на "Държавна комисия по хазарта"', N'Вашето заявление, подадено през портала на "Държавна комисия по хазарта", е потвърдено.')
+VALUES (2, N'ReceiptAcknowledgedEmail', N'ReceiptAcknowledgedEmail',
+    N'Потвърждаване за получаване на заявление към портала за електронни административни услуги на "Министерство на правосъдието"',
+
+    N'Вашето заявление, подадено през портала за електронни административни услуги на "Министерство на правосъдието", е потвърдено.' + CHAR(13)+CHAR(10) +
+    N'Създадената преписка е достъпна за преглед през портала на адрес: @@CaseViewUrl' + CHAR(13)+CHAR(10) +
+    CHAR(13)+CHAR(10) +
+    N'Номер на преписка: @@CaseNum' + CHAR(13)+CHAR(10) +
+    N'Код за достъп: @@AccessCode')
 
 INSERT [dbo].[EmailTypes] ([EmailTypeId], [Name], [Alias], [Subject], [Body]) 
-VALUES (3, N'ReceiveConfirmationEmail', N'ReceiptNotAcknowledgedEmail', N'Потвърждаване за получаване на заявление към портала на "Държавна комисия по хазарта"', N'Вашето заявление, подадено през портала на "Държавна комисия по хазарта", е отхвърлено.')
+VALUES (3, N'ReceiptNotAcknowledgedEmail', N'ReceiptNotAcknowledgedEmail',
+    N'Потвърждаване за получаване на заявление към портала за електронни административни услуги на "Министерство на правосъдието"',
+
+    N'Вашето заявление, подадено през портала за електронни административни услуги на "Министерство на правосъдието", е отхвърлено.' + CHAR(13)+CHAR(10) +
+    N'Получаването не се потвърждава на следното основание: @@Discrepancies.')
 
 INSERT [dbo].[EmailTypes] ([EmailTypeId], [Name], [Alias], [Subject], [Body]) 
-VALUES (4, N'ElectronicServiceStageChanged', N'ElectronicServiceStageChanged', N'Смяна на етап на преписка @@Param1 към "Държавна комисия по хазарта"', N'Обработката на вашата преписка @@Param1 преминава в нов етап: @@Param2.')
+VALUES (4, N'ElectronicServiceStageChanged', N'ElectronicServiceStageChanged',
+    N'Смяна на етап на преписка @@CaseNum към портала за електронни административни услуги на "Министерство на правосъдието"',
+
+    N'Обработката на вашата преписка @@CaseNum преминава в нов етап: @@StageName.' + CHAR(13)+CHAR(10) +
+    N'Цялата преписка е достъпна за преглед през портала на адрес: @@CaseViewUrl' + CHAR(13)+CHAR(10) +
+    CHAR(13)+CHAR(10) +
+    N'Номер на преписка: @@CaseNum' + CHAR(13)+CHAR(10) +
+    N'Код за достъп: @@AccessCode')
 
 INSERT [dbo].[EmailTypes] ([EmailTypeId], [Name], [Alias], [Subject], [Body]) 
 VALUES (5, N'DocAssigned', N'DocAssigned', N'Към Вас е насочен документ от преписка @@Param1 - @@Param2 : @@Param3', N'Към Вас е насочен документ @@Param1 - @@Param2 : @@Param3 от преписка @@Param4 (Кореспондент: @@Param5) от @@Param6, достъпна на адрес: @@Param7')

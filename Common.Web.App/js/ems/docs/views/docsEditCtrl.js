@@ -39,11 +39,11 @@
     };
 
     $scope.eSign = function () {
-      throw 'not implemented';
+      // TODO SIGNING throw 'not implemented';
     };
 
     $scope.undoESign = function () {
-      throw 'not implemented';
+      // TODO SIGNING throw 'not implemented';
     };
 
     $scope.enterEditMode = function () {

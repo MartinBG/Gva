@@ -232,10 +232,11 @@ namespace Gva.Rio.IncomingDocProcessor
                     DocFile receiptDocFile = CreateReceiptDocFile(publicDocFileKind.DocFileKindId, receiptDoc, receiptFileKey, isDocAcknowledged);
                     this.unitOfWork.DbContext.Set<DocFile>().Add(receiptDocFile);
 
-                    if (applicationDataDo.SendConfirmationEmail)
-                    {
-                        AddReceiveConfirmationEmailRecord(isDocAcknowledged, systemUser, docCorrespondents);
-                    }
+                    // TODO
+                    //if (applicationDataDo.SendConfirmationEmail)
+                    //{
+                        AddReceiveConfirmationEmailRecord(isDocAcknowledged, systemUser, docCorrespondents, rootDoc ?? initialDoc, discrepancies);
+                    //}
 
                     this.unitOfWork.Save();
 
@@ -955,30 +956,43 @@ namespace Gva.Rio.IncomingDocProcessor
             return docFile;
         }
 
-        private void AddReceiveConfirmationEmailRecord(bool isDocAcknowledged, User systemUser, List<Correspondent> docCorrespondents)
+        private void AddReceiveConfirmationEmailRecord(bool isDocAcknowledged, User systemUser, List<Correspondent> docCorrespondents, Doc caseDoc, List<ElectronicDocumentDiscrepancyTypeNomenclature> discrepancies)
         {
             EmailStatus pendingStatus = this.emailRepository.GetEmailStatusByAlias("Pending");
 
             EmailAddresseeType to = this.emailRepository.GetEmailAddresseeTypeByAlias("To");
 
-            EmailType emailType = null;
-
+            Email email;
             if (isDocAcknowledged)
             {
-                emailType = this.emailRepository.GetEmailTypeByAlias("ReceiptAcknowledgedEmail");
+                EmailType emailType = this.emailRepository.GetEmailTypeByAlias("ReceiptAcknowledgedEmail");
+
+                email = this.emailRepository.CreateEmail(
+                    emailType.EmailTypeId,
+                    pendingStatus.EmailStatusId,
+                    emailType.Subject,
+                    emailType.Body
+                        .Replace("@@CaseNum", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]")
+                        .Replace("@@CaseViewUrl", EmailRepository.CaseViewUrl)
+                        .Replace("@@AccessCode", caseDoc.AccessCode));
             }
             else
             {
-                emailType = this.emailRepository.GetEmailTypeByAlias("ReceiptNotAcknowledgedEmail");
-            }
+                EmailType emailType = this.emailRepository.GetEmailTypeByAlias("ReceiptNotAcknowledgedEmail");
 
-            Email email = this.emailRepository.CreateEmail(emailType.EmailTypeId, pendingStatus.EmailStatusId, emailType.Subject, emailType.Body);
+                email = this.emailRepository.CreateEmail(
+                    emailType.EmailTypeId,
+                    pendingStatus.EmailStatusId,
+                    emailType.Subject,
+                    emailType.Body
+                        .Replace("@@Discrepancies", discrepancies.Select(d => d.Text).Aggregate((l,r) => l + ", " + r)));
+            }
 
             if (!string.IsNullOrEmpty(systemUser.Email) && Regex.IsMatch(systemUser.Email, Docs.Api.EmailSender.EmailSender.emailRegex))
             {
                 email.EmailAddressees.Add(new EmailAddressee()
                 {
-                    EmailAddresseeTypeId = to.EmailAddresseeTypeId,
+                    EmailAddresseeTypeId = to.EmailAddresseeTypeId, // TODO emailAddressType - from ????
                     Address = systemUser.Email
                 });
             }
@@ -992,7 +1006,7 @@ namespace Gva.Rio.IncomingDocProcessor
                         email.EmailAddressees.Add(new EmailAddressee()
                         {
                             EmailAddresseeTypeId = to.EmailAddresseeTypeId,
-                            Address = systemUser.Email
+                            Address = item.Email
                         });
                     }
                 }

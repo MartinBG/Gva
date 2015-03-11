@@ -19,11 +19,15 @@ using System.Data.Entity.Core;
 using Docs.Api.DataObjects;
 using System.Text.RegularExpressions;
 using System.Net.Http;
+using System.Configuration;
 
 namespace Docs.Api.Repositories.EmailRepository
 {
     public class EmailRepository : Repository<Email>, IEmailRepository
     {
+        public static readonly string CaseViewUrl = ConfigurationManager.AppSettings["Docs.Api:PortalWebAddress"] + "bg/Information/Information/CaseSearch";
+        public static readonly string DocViewUrl = ConfigurationManager.AppSettings["Docs.Api:PortalWebAddress"] + "bg/App/Upload/Upload";
+
         public EmailRepository(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
@@ -407,10 +411,12 @@ namespace Docs.Api.Repositories.EmailRepository
                 .FirstOrDefault(e => e.ElectronicServiceStageId == docElectronicServiceStage.ElectronicServiceStageId);
 
             email.Subject = emailType.Subject
-                .Replace("@@Param1", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]");
+                .Replace("@@CaseNum", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]");
             email.Body = emailType.Body
-                .Replace("@@Param1", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]")
-                .Replace("@@Param2", ess.Name);
+                .Replace("@@CaseNum", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]")
+                .Replace("@@StageName", ess.Name)
+                .Replace("@@CaseViewUrl", EmailRepository.CaseViewUrl)
+                .Replace("@@AccessCode", caseDoc.AccessCode);
 
             return email;
         }
@@ -468,6 +474,7 @@ namespace Docs.Api.Repositories.EmailRepository
             {
                 email.EmailAttachments.Add(new EmailAttachment()
                 {
+                    Name = item.File.Name,
                     ContentId = item.File.Key
                 });
             }
