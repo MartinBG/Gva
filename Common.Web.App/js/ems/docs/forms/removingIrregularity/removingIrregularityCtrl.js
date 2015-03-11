@@ -28,11 +28,12 @@
       $scope.irregularitiesCollection = [];
       if ($scope.model.jObject.irregularitiesCollection.length !== 0 &&
           $scope.model.jObject.irregularitiesCollection[0].irregularityType !== '') {
-        $scope.irregularitiesCollection = _.map($scope.model.jObject.irregularitiesCollection, function (item) {
-          return _.find(results.irregularityTypes, function (irregularityType) {
-            return irregularityType.name === item.irregularityType;
+        $scope.irregularitiesCollection = _.map($scope.model.jObject.irregularitiesCollection,
+          function (item) {
+            return _.find(results.irregularityTypes, function (irregularityType) {
+              return irregularityType.name === item.irregularityType;
+            });
           });
-        });
       }
 
       $scope.isLoaded = true;
