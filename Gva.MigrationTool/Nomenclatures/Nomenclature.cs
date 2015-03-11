@@ -3231,7 +3231,8 @@ namespace Gva.MigrationTool.Nomenclatures
             Nom nom = repo.GetNom("aircraftRegStatsesFm");
             var results = conn.CreateStoreCommand(@"
                 SELECT [Code] code, [Registration Status] name
-                FROM [GvaAircraft].[dbo].[RegStatus]")
+                FROM [GvaAircraft].[dbo].[RegStatus]
+                 WHERE code != '3' and code != '5' and code != '12'")
                 .Materialize(r =>
                     new NomValue
                     {
@@ -3248,19 +3249,22 @@ namespace Gva.MigrationTool.Nomenclatures
 
             results.Add(new NomValue
             {
+                OldId = "37",
                 Name = "Заличен съгласно заповед",
                 Alias = "removedByOrder",
+                Code = "37",
                 IsActive = true
             });
 
             noms["aircraftRegStatsesFm"] = new Dictionary<string, NomValue>();
             foreach (var row in results)
             {
-                if(row.OldId != null)
-                {
-                    noms["aircraftRegStatsesFm"][row.OldId] = row;
+                int parsedCodeToInt = int.Parse(row.Code);
+                noms["aircraftRegStatsesFm"][row.OldId] = row;
+                if (parsedCodeToInt < 12 || parsedCodeToInt == 21  || parsedCodeToInt == 37)
+                { 
+                    nom.NomValues.Add(row);
                 }
-                nom.NomValues.Add(row);
             }
         }
 

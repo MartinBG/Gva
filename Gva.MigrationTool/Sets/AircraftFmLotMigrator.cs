@@ -359,7 +359,9 @@ namespace Gva.MigrationTool.Sets
                             documentNumber = r.Field<string>("tDeDocCAA"),
                             documentDate = Utils.FmToDate(r.Field<string>("dDeDateCAA")),
                             inspector = getInspector(r.Field<string>("tDeUser"))
-                        }
+                        },
+                        parsedToIntStatusCode = int.Parse(r.Field<string>("nStatus")),
+                        splitStatus = noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")).Name.Split(new char[]{' '})
                     })
                 .OrderBy(r => r.nRegNum)
                 .Select(r => new JObject(
@@ -392,7 +394,7 @@ namespace Gva.MigrationTool.Sets
                                 lessorPerson = r.leasingLessor.Item3,
                                 r.leasingAgreement,
                                 r.leasingEndDate,
-                                r.status,
+                                status = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? noms["aircraftRegStatsesFm"].ByAlias("removedByOrder") : r.status,
                                 r.EASA25Number,
                                 r.EASA25Date,
                                 r.EASA15Date,
@@ -401,7 +403,17 @@ namespace Gva.MigrationTool.Sets
                                 r.noiseNumber,
                                 r.paragraph,
                                 r.paragraphAlt,
-                                r.removal,
+                                removal =
+                                new 
+                                {
+                                    date = r.removal.date,
+                                    orderNumber = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? r.splitStatus.Skip(3).Take(1).Single() : "",
+                                    reason = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? noms["aircraftRemovalReasonsFm"].ByAlias("order") : r.removal.reason,
+                                    text = r.removal.text,
+                                    documentNumber = r.removal.documentNumber,
+                                    documentDate = r.removal.documentDate,
+                                    inspector = r.removal.inspector
+                                },
                                 isActive = false,
                                 isCurrent = false
                             })),
@@ -419,7 +431,23 @@ namespace Gva.MigrationTool.Sets
             var lastReg = registrations.LastOrDefault();
             if (lastReg != null)
             {
-                lastReg["part"]["isActive"] = true;
+                int statusCode = int.Parse(lastReg.Get<string>("part.status.code"));
+                string statusAlias = lastReg.Get<string>("part.status.alias");
+
+                switch (statusAlias)
+                {
+                    case "expiredContract":
+                        lastReg["part"]["removal"]["reason"] = Utils.ToJObject(noms["aircraftRemovalReasonsFm"].ByAlias("expiredContract"));
+                        break;
+                    case "changedOwnership":
+                        lastReg["part"]["removal"]["reason"] = Utils.ToJObject(noms["aircraftRemovalReasonsFm"].ByAlias("changedOwnership"));
+                        break;
+                    case "totaled":
+                        lastReg["part"]["removal"]["reason"] = Utils.ToJObject(noms["aircraftRemovalReasonsFm"].ByAlias("totaled"));
+                        break;
+                }
+
+                lastReg["part"]["isActive"] =  statusCode < 4 ? true : false;
                 lastReg["part"]["isCurrent"] = true;
             }
 
