@@ -102,9 +102,14 @@ namespace Gva.DocCommunicator
             {
                 case NomenclatureType.IrregularityTypes:
                     {
-                        for (int i = 1; i <= 5; i++)
+                        var irregularityTypes =
+                            this.unitOfWork.DbContext.Set<IrregularityType>()
+                            .OrderBy(e => e.IrregularityTypeId)
+                            .ToList();
+
+                        foreach (var irregularityType in irregularityTypes)
                         {
-                            list.Add(new NomenclatureItem { Type = NomenclatureType.IrregularityTypes, Value = "Нередовност " + i, Text = "Нередовност " + i, Description = "Описание " + i });
+                            list.Add(new NomenclatureItem { Type = NomenclatureType.IrregularityTypes, Value = irregularityType.Alias, Text = irregularityType.Name, Description = irregularityType.Description });
                         }
                     } break;
 

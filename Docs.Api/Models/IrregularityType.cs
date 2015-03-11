@@ -6,8 +6,6 @@ namespace Docs.Api.Models
     {
         public int IrregularityTypeId { get; set; }
 
-        public int DocTypeId { get; set; }
-
         public string Name { get; set; }
 
         public string Alias { get; set; }
@@ -15,8 +13,6 @@ namespace Docs.Api.Models
         public string Description { get; set; }
 
         public byte[] Version { get; set; }
-
-        public virtual DocType DocType { get; set; }
     }
 
     public class IrregularityTypeMap : EntityTypeConfiguration<IrregularityType>
@@ -43,16 +39,10 @@ namespace Docs.Api.Models
             // Table & Column Mappings
             this.ToTable("IrregularityTypes");
             this.Property(t => t.IrregularityTypeId).HasColumnName("IrregularityTypeId");
-            this.Property(t => t.DocTypeId).HasColumnName("DocTypeId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.Description).HasColumnName("Description");
             this.Property(t => t.Version).HasColumnName("Version");
-
-            // Relationships
-            this.HasRequired(t => t.DocType)
-                .WithMany(t => t.IrregularityTypes)
-                .HasForeignKey(d => d.DocTypeId);
         }
     }
 }

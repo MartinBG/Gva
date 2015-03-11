@@ -19,7 +19,7 @@
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
-  <ActiveSheet>8</ActiveSheet>
+  <ActiveSheet>7</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -2544,48 +2544,41 @@
  <Worksheet ss:Name="IrregularityTypes">
   <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="8" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="155.25"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="182.25"/>
-   <Column ss:AutoFitWidth="0" ss:Width="292.5"/>
+   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="212.25"/>
+   <Column ss:StyleID="s64" ss:Width="471"/>
+   <Column ss:AutoFitWidth="0" ss:Width="162.75"/>
    <Row ss:AutoFitHeight="0" ss:StyleID="s93">
-    <Cell ss:StyleID="s65"><Data ss:Type="String">ElectronicServiceProvider</Data></Cell>
-    <Cell ss:StyleID="s65"><Data ss:Type="String">ElectronicServiceTypeApplication</Data></Cell>
+    <Cell><Data ss:Type="String">Alias</Data></Cell>
     <Cell><Data ss:Type="String">Name</Data></Cell>
+    <Cell><Data ss:Type="String">Description</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Неизползване или използване на грешен образец</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">InvalidApplication</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">Неизползване или използване на грешен образец</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Нарушена структура на данни в електронен документ</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">NotMatchingSignature</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">Нарушена структура на данни в електронен документ</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Невалиден електронен подпис</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">InvalidCertificate</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">Невалиден електронен подпис</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Липса на съответствие между заявено авторство в документа и автора на електронния подпис</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">MismatchingAuthorAndCertificateOwner</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">Липса на съответствие между заявено авторство в документа и автора на електронния подпис</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Липса на данни в подаден документ</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">MissingData</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">Липса на данни в подаден документ</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Липса на указан приложен документ в комплекта</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">MissingAttachedDocuments</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">Липса на указан приложен документ в комплекта</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">01</Data></Cell>
-    <Cell><Data ss:Type="String">Други проверки, предвидени в нормативен акт</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">OtherChecks</Data></Cell>
+    <Cell ss:StyleID="Default"><Data ss:Type="String">Други проверки, предвидени в нормативен акт</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -2595,10 +2588,12 @@
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
    <Unsynced/>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>7</ActiveRow>
+     <ActiveRow>24</ActiveRow>
+     <ActiveCol>1</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -3199,7 +3194,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <TopRowVisible>30</TopRowVisible>
    <Panes>
     <Pane>

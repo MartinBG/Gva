@@ -386,24 +386,17 @@ namespace Docs.SqlConfig
             }
         }
 
-        private void GetAllIrregularityTypes(List<string> allIrregularityTypes, Dictionary<string, string> row)
+        private void AddRow_IrregularityTypes(List<string> irregularityTypesTableRows, Dictionary<string, string> row, ref int identityValue)
         {
-            string electronicServiceProvider = row["ElectronicServiceProvider"].Trim();
-            string electronicServiceTypeApplication = row["ElectronicServiceTypeApplication"].Trim();
             string name = row["Name"].Trim();
+            string alias = row["Alias"].Trim();
+            string description = row.ContainsKey("Description") ? row["Description"].Trim() : string.Empty;
 
-            allIrregularityTypes.Add(name);
-        }
+            irregularityTypesTableRows.Add(
+                String.Format("INSERT INTO [IrregularityTypes]([IrregularityTypeId],[Name],[Alias],[Description])VALUES({0},N'{1}',N'{2}',N'{3}');",
+                identityValue, name, alias, description));
 
-        private void AddRow_IrregularityTypes(List<string> irregularityTypesTableRows, List<string> allIrregularityTypes, string docTypeId, ref int identityValue)
-        {
-            foreach (var irregularityName in allIrregularityTypes)
-            {
-                irregularityTypesTableRows.Add(String.Format("INSERT INTO [IrregularityTypes]([IrregularityTypeId],[DocTypeId],[Name],[Alias],[Description])VALUES({0},{1},N'{2}',{3},{4});",
-                    identityValue, docTypeId, irregularityName, "NULL", "NULL"));
-
-                identityValue++;
-            }
+            identityValue++;
         }
 
         private void AddRow_DocTypeUnitRoles(List<string> docTypeUnitRolesTableRows, Dictionary<string, string> row, ref int identityValue)
@@ -783,18 +776,12 @@ namespace Docs.SqlConfig
                 }
                 else if (sheetName == "IrregularityTypes")
                 {
-                    List<string> allIrregularityTypes = new List<string>();
+                    List<string> irregularityTypesTableRows = new List<string>();
+
+                    int identityValue = 1;
                     foreach (var row in rowsWithHeaders)
                     {
-                        GetAllIrregularityTypes(allIrregularityTypes, row);
-                    }
-
-
-                    List<string> irregularityTypesTableRows = new List<string>();
-                    int identityValue = 1;
-                    foreach (var item in DocTypeAndClassification2Dictionary)
-                    {
-                        AddRow_IrregularityTypes(irregularityTypesTableRows, allIrregularityTypes, item.Key, ref identityValue);
+                        AddRow_IrregularityTypes(irregularityTypesTableRows, row, ref identityValue);
                     }
 
                     AddTuple(result, Save("IrregularityTypes", irregularityTypesTableRows, null, true));
