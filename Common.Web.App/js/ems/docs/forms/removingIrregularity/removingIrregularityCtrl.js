@@ -11,13 +11,11 @@
     Docs.getRioEditableFile({
       id: $scope.model.docId
     }).$promise.then(function (result) {
-
       $scope.model.jObject = result.content;
 
-      if (!!$scope.model.jObject.DeadlineCorrectionIrregularities) {
+      if ($scope.model.jObject.deadlineCorrectionIrregularities) {
         $scope.deadlinePeriod = {
-          days:
-            moment.duration($scope.model.jObject.DeadlineCorrectionIrregularities).asDays()
+          days: moment.duration($scope.model.jObject.deadlineCorrectionIrregularities).asDays()
         };
       }
       else {
@@ -26,70 +24,64 @@
         };
       }
 
-      Nomenclatures.query({ alias: 'electronicServiceProvider' }).$promise
-        .then(function (result) {
-          var nomId = null;
+      Nomenclatures.query({ alias: 'electronicServiceProvider' }).$promise.then(function (result) {
+        var nomId = null;
 
-          if (!!$scope.model.jObject
-            .ElectronicServiceProviderBasicData.ElectronicServiceProviderType) {
-            nomId = _(result).filter({
-              code: $scope.model.jObject
-                .ElectronicServiceProviderBasicData.ElectronicServiceProviderType
+        if ($scope.model.jObject.electronicServiceProviderBasicData.electronicServiceProviderType) {
+          nomId = _(result).filter({
+            code: $scope.model.jObject.electronicServiceProviderBasicData.electronicServiceProviderType
+          }).first().nomValueId;
+        }
+
+        $scope.serviceProvider = {
+          obj: {},
+          id: nomId
+        };
+
+        Nomenclatures.query({ alias: 'irregularityType' }).$promise.then(function (noms) {
+          _($scope.model.jObject.irregularitiesCollection).forEach(function (item) {
+            item.irregularityTypeId = _(noms).filter({
+              name: item.irregularityType
             }).first().nomValueId;
-          }
-
-          $scope.serviceProvider = {
-            obj: {},
-            id: nomId
-          };
-
-          Nomenclatures.query({ alias: 'irregularityType' }).$promise
-          .then(function (noms) {
-            _($scope.model.jObject.IrregularitiesCollection).forEach(function (item) {
-              item.irregularityTypeId = _(noms).filter({
-                name: item.IrregularityType
-              }).first().nomValueId;
-            });
-
-            $scope.isLoaded = true;
           });
 
+          $scope.isLoaded = true;
         });
       });
+    });
 
     $scope.serviceProviderChange = function () {
-      $scope.model.jObject.ElectronicServiceProviderBasicData.ElectronicServiceProviderType =
+      $scope.model.jObject.electronicServiceProviderBasicData.electronicServiceProviderType =
         $scope.serviceProvider.obj.code;
-      $scope.model.jObject.ElectronicServiceProviderBasicData.EntityBasicData.Identifier =
+      $scope.model.jObject.electronicServiceProviderBasicData.entityBasicData.identifier =
         $scope.serviceProvider.obj.bulstat;
-      $scope.model.jObject.ElectronicServiceProviderBasicData.EntityBasicData.Name =
+      $scope.model.jObject.electronicServiceProviderBasicData.entityBasicData.name =
         $scope.serviceProvider.obj.name;
     };
 
     $scope.deadlinePeriodChange = function () {
-      if (!!$scope.deadlinePeriod.days) {
-        $scope.model.jObject.DeadlineCorrectionIrregularities =
+      if ($scope.deadlinePeriod.days) {
+        $scope.model.jObject.deadlineCorrectionIrregularities =
           'P' + $scope.deadlinePeriod.days + 'D';
       }
     };
 
     $scope.addIrregularity = function () {
-      $scope.model.jObject.IrregularitiesCollection.push({
-        IrregularityType: '',
-        AdditionalInformationSpecifyingIrregularity: ''
+      $scope.model.jObject.irregularitiesCollection.push({
+        irregularityType: '',
+        additionalInformationSpecifyingIrregularity: ''
       });
     };
 
     $scope.removeIrregularity = function (index) {
-      $scope.model.jObject.IrregularitiesCollection.splice(index, 1);
+      $scope.model.jObject.irregularitiesCollection.splice(index, 1);
     };
 
     $scope.irregularityChange = function (index) {
-      $scope.model.jObject.IrregularitiesCollection[index].IrregularityType =
-        $scope.model.jObject.IrregularitiesCollection[index].obj.name;
-      $scope.model.jObject.IrregularitiesCollection[index].
-        AdditionalInformationSpecifyingIrregularity = $scope.model.jObject
-        .IrregularitiesCollection[index].obj.description;
+      $scope.model.jObject.irregularitiesCollection[index].irregularityType =
+        $scope.model.jObject.irregularitiesCollection[index].obj.name;
+      $scope.model.jObject.irregularitiesCollection[index].additionalInformationSpecifyingIrregularity =
+        $scope.model.jObject.irregularitiesCollection[index].obj.description;
     }; 
   }
 

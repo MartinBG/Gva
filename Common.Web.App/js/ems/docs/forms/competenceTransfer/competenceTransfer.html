@@ -21,15 +21,15 @@
     <div class="row"> 
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="competenceTransfer.registerIndex"></label><br />
-        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.AISCaseURI.DocumentURI.RegisterIndex" ng-readonly="readonly"></sc-text>
+        <sc-text class="form-control" ng-model="model.jObject.fileTransferredJurisdiction.aisCaseURI.documentURI.registerIndex" ng-readonly="readonly"></sc-text>
       </div>
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="competenceTransfer.sequenceNumber"></label><br />
-        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.AISCaseURI.DocumentURI.SequenceNumber" ng-readonly="readonly"></sc-text>
+        <sc-text class="form-control" ng-model="model.jObject.fileTransferredJurisdiction.aisCaseURI.documentURI.sequenceNumber" ng-readonly="readonly"></sc-text>
       </div>
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="competenceTransfer.date"></label><br />
-        <sc-date ng-model="model.jObject.FileTransferredJurisdiction.AISCaseURI.DocumentURI.ReceiptOrSigningDate" ng-readonly="readonly"></sc-date>
+        <sc-date ng-model="model.jObject.fileTransferredJurisdiction.aisCaseURI.documentURI.receiptOrSigningDate" ng-readonly="readonly"></sc-date>
       </div>
     </div>
 
@@ -42,19 +42,19 @@
     <div class="row"> 
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="competenceTransfer.firstName"></label>
-        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Names.First" ng-readonly="readonly"></sc-text>
+        <sc-text class="form-control" ng-model="model.jObject.fileTransferredJurisdiction.electronicServiceRecipient.person.names.first" ng-readonly="readonly"></sc-text>
       </div>
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="competenceTransfer.secondName"></label>
-        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Names.Middle" ng-readonly="readonly"></sc-text>
+        <sc-text class="form-control" ng-model="model.jObject.fileTransferredJurisdiction.electronicServiceRecipient.person.names.middle" ng-readonly="readonly"></sc-text>
       </div>
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="competenceTransfer.lastName"></label>
-        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Names.Last" ng-readonly="readonly"></sc-text>
+        <sc-text class="form-control" ng-model="model.jObject.fileTransferredJurisdiction.electronicServiceRecipient.person.names.last" ng-readonly="readonly"></sc-text>
       </div>
       <div class="form-group col-sm-2">
         <label class="control-label" l10n-text="competenceTransfer.egn"></label>
-        <sc-text class="form-control" ng-model="model.jObject.FileTransferredJurisdiction.ElectronicServiceRecipient.Person.Identifier.EGN" ng-readonly="readonly"></sc-text>
+        <sc-text class="form-control" ng-model="model.jObject.fileTransferredJurisdiction.electronicServiceRecipient.person.identifier.egn" ng-readonly="readonly"></sc-text>
       </div>
     </div>
 
@@ -70,22 +70,22 @@
               </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="doc in model.jObject.FileTransferredJurisdiction.DocumentFileCompetenceCollection" ng-form sc-validate="{}">
+            <tr ng-repeat="doc in model.jObject.fileTransferredJurisdiction.documentFileCompetenceCollection" ng-form sc-validate="{}">
               <td>
-                  {{doc.StructuredDocumentFileCompetence.DocumentURI.RegisterIndex}}-{{doc.StructuredDocumentFileCompetence.DocumentURI.SequenceNumber}}-{{doc.StructuredDocumentFileCompetence.DocumentURI.ReceiptOrSigningDate}}
+                  {{doc.structuredDocumentFileCompetence.documentURI.registerIndex}}-{{doc.structuredDocumentFileCompetence.documentURI.sequenceNumber}}-{{doc.structuredDocumentFileCompetence.documentURI.receiptOrSigningDate}}
               </td>
               <td>
-                  {{doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.DocumentTypeName}}
+                  {{doc.structuredDocumentFileCompetence.electronicDocumentXml.documentTypeName}}
               </td>
               <td style="text-align: center; width: 1px;">
-                <a ng-show="!!doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.ElectronicDocumentXmlContent.Any && !!doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.DocumentTypeURI"
+                <a ng-show="doc.structuredDocumentFileCompetence.electronicDocumentXml.electronicDocumentXmlContent.any && doc.structuredDocumentFileCompetence.electronicDocumentXml.documentTypeURI"
                   ng-click="viewRioObject(
-                    doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.DocumentTypeURI.RegisterIndex,
-                    doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.DocumentTypeURI.BatchNumber,
-                    doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.ElectronicDocumentXmlContent.Any.AttachedDocumentUniqueIdentifier)">
+                    doc.structuredDocumentFileCompetence.electronicDocumentXml.documentTypeURI.registerIndex,
+                    doc.structuredDocumentFileCompetence.electronicDocumentXml.documentTypeURI.batchNumber,
+                    doc.structuredDocumentFileCompetence.electronicDocumentXml.electronicDocumentXmlContent.any.attachedDocumentUniqueIdentifier)">
                   <span>Преглед</span>
                 </a>
-                <a ng-show="!!doc.StructuredDocumentFileCompetence.ElectronicDocumentXml.ElectronicDocumentXmlContent.Any.AttachedDocumentUniqueIdentifier" ng-href="{{doc.downloadUri}}" target="_blank"><span>Свали</span></a>
+                <a ng-show="doc.structuredDocumentFileCompetence.electronicDocumentXml.electronicDocumentXmlContent.any.attachedDocumentUniqueIdentifier" ng-href="{{doc.downloadUri}}" target="_blank"><span>Свали</span></a>
               </td>
             </tr>
           </tbody>

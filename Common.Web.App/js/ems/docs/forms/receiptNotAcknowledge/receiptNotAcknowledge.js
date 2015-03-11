@@ -11,44 +11,40 @@
     Docs.getRioEditableFile({
       id: $scope.model.docId
     }).$promise.then(function (result) {
-
       $scope.model.jObject = result.content;
 
-      Nomenclatures.query({ alias: 'electronicServiceProvider' }).$promise
-        .then(function (result) {
-          var nomId = null;
+      Nomenclatures.query({ alias: 'electronicServiceProvider' }).$promise.then(function (result) {
+        var nomId = null;
 
-          if (!!$scope.model.jObject
-            .ElectronicServiceProvider.ElectronicServiceProviderType) {
-            nomId = _(result).filter({
-              code: $scope.model.jObject
-                .ElectronicServiceProvider.ElectronicServiceProviderType
-            }).first().nomValueId;
-          }
+        if ($scope.model.jObject.electronicServiceProvider.electronicServiceProviderType) {
+          nomId = _(result).filter({
+            code: $scope.model.jObject.electronicServiceProvider.electronicServiceProviderType
+          }).first().nomValueId;
+        }
 
-          $scope.serviceProvider = {
-            obj: {},
-            id: nomId
-          };
+        $scope.serviceProvider = {
+          obj: {},
+          id: nomId
+        };
 
-          $scope.discrepancies = [];
+        $scope.discrepancies = [];
 
-          _($scope.model.jObject.Discrepancies.DiscrepancyCollection).forEach(function (item) {
-            $scope.discrepancies.push({
-              text: item
-            });
+        _($scope.model.jObject.discrepancies.discrepancyCollection).forEach(function (item) {
+          $scope.discrepancies.push({
+            text: item
           });
-
-          $scope.isLoaded = true;
         });
+
+        $scope.isLoaded = true;
       });
+    });
 
     $scope.serviceProviderChange = function () {
-      $scope.model.jObject.ElectronicServiceProvider.ElectronicServiceProviderType =
+      $scope.model.jObject.electronicServiceProvider.electronicServiceProviderType =
         $scope.serviceProvider.obj.code;
-      $scope.model.jObject.ElectronicServiceProvider.EntityBasicData.Identifier =
+      $scope.model.jObject.electronicServiceProvider.entityBasicData.identifier =
         $scope.serviceProvider.obj.bulstat;
-      $scope.model.jObject.ElectronicServiceProvider.EntityBasicData.Name =
+      $scope.model.jObject.electronicServiceProvider.entityBasicData.name =
         $scope.serviceProvider.obj.name;
     };
 
@@ -56,19 +52,18 @@
       $scope.discrepancies.push({
         text: ''
       });
-      $scope.model.jObject.Discrepancies.DiscrepancyCollection.push('');
+      $scope.model.jObject.discrepancies.discrepancyCollection.push('');
     };
 
     $scope.removeDiscrepancy = function (index) {
       $scope.discrepancies.splice(index, 1); 
-      $scope.model.jObject.Discrepancies.DiscrepancyCollection.splice(index, 1);
+      $scope.model.jObject.discrepancies.discrepancyCollection.splice(index, 1);
     };
 
     $scope.editDiscrepancy = function (index) {
-      $scope.model.jObject.Discrepancies.DiscrepancyCollection[index] =
+      $scope.model.jObject.discrepancies.discrepancyCollection[index] =
         $scope.discrepancies[index].text;
     };
-
   }
 
   ReceiptNotAcknowledgeCtrl.$inject = [
