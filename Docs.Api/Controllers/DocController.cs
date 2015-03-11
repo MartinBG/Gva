@@ -1057,6 +1057,16 @@ namespace Docs.Api.Controllers
                     null,
                     this.userContext);
 
+                DocUnitRole from = this.unitOfWork.DbContext.Set<DocUnitRole>()
+                    .SingleOrDefault(e => e.Alias == "From");
+
+                newDoc.CreateDocUnit(unitUser.UnitId, from.DocUnitRoleId, this.userContext);
+
+                DocUnitRole madeBy = this.unitOfWork.DbContext.Set<DocUnitRole>()
+                    .SingleOrDefault(e => e.Alias == "MadeBy");
+
+                newDoc.CreateDocUnit(unitUser.UnitId, madeBy.DocUnitRoleId, this.userContext);
+
                 this.unitOfWork.Save();
 
                 this.docRepository.RegisterDoc(newDoc, unitUser, this.userContext);
