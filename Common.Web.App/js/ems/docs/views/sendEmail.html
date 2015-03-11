@@ -24,11 +24,11 @@
           </div>
         </div>
 
-         <div class="row">
+        <div class="row">
           <div class="form-group col-sm-12" sc-has-error="body">
             <label class="control-label" l10n-text="docs.edit.sendEmail.body"></label>
             <sc-validation-error field-name="body" validations="{required: 'default'}"></sc-validation-error>
-            <sc-textarea rows="3" ng-model="email.body" name="body" ng-required="true"></sc-textarea>
+            <div text-angular="text-angular" name="body" ng-model="email.body" ng-required="true" class="ta-root"></div>
           </div>
         </div>
 

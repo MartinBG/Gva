@@ -49,6 +49,9 @@ var config = {
       'bower_components/angular-ui-utils/modules/jq/jq.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/textAngular/dist/textAngular.min.js',
+      'bower_components/textAngular/dist/textAngular-rangy.min.js',
       'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
       'bower_components/bootstrap-datepicker/js/locales/*.bg.js',
       'bower_components/jquery-ui/ui/jquery.ui.widget.js',
@@ -104,6 +107,7 @@ var config = {
       'bower_components/bootstrap-datepicker/css/datepicker3.css',
       'bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css',
       'bower_components/blueimp-file-upload/css/jquery.fileupload.css',
+      'bower_components/textAngular/src/textAngular.css',
       'css/*.css'
     ], { base: '.' });
   },
