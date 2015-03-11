@@ -2491,7 +2491,8 @@ namespace Docs.Api.Controllers
             Doc doc = this.docRepository.Find(id,
                 e => e.DocCorrespondents.Select(dc => dc.Correspondent),
                 e => e.DocStatus,
-                e => e.DocFiles.Select(k => k.DocFileKind));
+                e => e.DocFiles.Select(k => k.DocFileKind),
+                e => e.DocFiles.Select(k => k.DocFileOriginType));
 
             if (doc == null)
             {

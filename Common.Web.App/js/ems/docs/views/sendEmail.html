@@ -40,7 +40,7 @@
                 <span ng-repeat="pf in email.publicFiles">
                   <i ng-click="removeFile(pf)" class="glyphicon glyphicon-remove-circle" style="cursor: pointer; color:#428bca; margin-left:5px;"></i>
                   <i style="color:#428bca;" class="fa fa-file"></i>
-                  <span>{{pf.name}} </span> (<a ng-href="{{ pf.docFileUrl }}" target="_blank"><span>{{ pf.file.name }}</span></a>) <br />
+                  <span>{{pf.name}} </span> (<a ng-show="!pf.isEditableFile" ng-href="{{pf.docFileUrl}}" target="_blank"><span>{{ pf.file.name }}</span></a><a ng-show="pf.isEditableFile" ng-click="viewEditableFile(pf)"><span>{{ pf.file.name }}</span></a>) <br />
                 </span>
               </div>
             </div>

@@ -43,6 +43,7 @@ namespace Docs.Api.DataObjects
                 if (d.DocFileOriginType != null)
                 {
                     this.IsElectronicApplication = d.DocFileOriginType.Alias == "EApplication";
+                    this.IsEditableFile = d.DocFileOriginType.Alias == "EditableFile";
                 }
             }
         }
@@ -64,6 +65,7 @@ namespace Docs.Api.DataObjects
         public string DocFileTypealias { get; set; }
 
         public bool? IsElectronicApplication { get; set; }
+        public bool? IsEditableFile { get; set; }
 
         //? implementation for xml files
         //public Nullable<int> TicketId { get; set; }
