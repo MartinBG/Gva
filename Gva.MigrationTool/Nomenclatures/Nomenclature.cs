@@ -3264,32 +3264,6 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        //private void migrateAircraftCategoriesFm(INomRepository repo, SqlConnection conn)
-        //{
-        //    Nom nom = repo.GetNom("aircraftCategoriesFM");
-        //    var results = conn.CreateStoreCommand(@"select * from CatAct")
-        //        .Materialize(r =>
-        //            new NomValue
-        //            {
-        //                OldId = r.Field<string>("Code"),
-        //                Code = r.Field<string>("Code"),
-        //                Name = r.Field<string>("Category BG"),
-        //                NameAlt = r.Field<string>("Category EN"),
-        //                Alias = null,
-        //                IsActive = true,
-        //                ParentValueId = null,
-        //                TextContent = null
-        //            })
-        //        .ToList();
-
-        //    noms["aircraftCategoriesFM"] = new Dictionary<string, NomValue>();
-        //    foreach (var row in results)
-        //    {
-        //        noms["aircraftCategoriesFM"][row.OldId] = row;
-        //        nom.NomValues.Add(row);
-        //    }
-        //}
-
         private void migrateCountriesFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("countriesFm");
@@ -3372,9 +3346,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "TEC", new Tuple<string,string>("Tech Cert"        , "Tech Cert"       )},
                 { "EXP", new Tuple<string,string>("EXP"              , "EXP"             )},
                 { "EA" , new Tuple<string,string>("EASA"             , "EASA"            )},
-                { "OBF", new Tuple<string,string>("Old BG Form"      , "Old BG Form"     )}//,
-                //{ "TC" , new Tuple<string,string>("\"Tech Cert\""    , "\"Tech Cert\""   )},
-                //{ "BF" , new Tuple<string,string>("\"BG Form\""      , "\"BG Form\""     )},
+                { "OBF", new Tuple<string,string>("Old BG Form"      , "Old BG Form"     )}
             };
 
             noms["CofATypesFm"] = new Dictionary<string, NomValue>();
