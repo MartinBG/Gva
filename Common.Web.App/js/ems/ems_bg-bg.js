@@ -38,6 +38,7 @@
           child: 'Подчинен',
           document: 'Документ',
           electronicDocument: 'Електронен документ',
+          removingIrregularities: 'Отстраняване на нередовности',
           resolution: 'Резолюция',
           resolutionParentOnly: 'Резолюция върху документ',
           remark: 'Забележка',

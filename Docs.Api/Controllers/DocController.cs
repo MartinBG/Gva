@@ -861,7 +861,7 @@ namespace Docs.Api.Controllers
         /// <param name="docEntryTypeAlias">Тип на документа</param>
         /// <returns></returns>
         [HttpPost]
-        public IHttpActionResult CreateChildDoc(int id, string docEntryTypeAlias = null, string docTypeAlias = null)
+        public IHttpActionResult CreateChildInternalDoc(int id, string docEntryTypeAlias = null, string docTypeAlias = null)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -979,6 +979,142 @@ namespace Docs.Api.Controllers
                     {
                         docId = newDoc.DocId
                     });
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateChildPubliclDoc(int id, NewPublicDocDO publicDoc)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>().FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+                ClassificationPermission managementPermission = this.classificationRepository.GetByAlias("Management");
+                ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
+                ClassificationPermission registerPermission = this.classificationRepository.GetByAlias("Register");
+
+                bool hasManagementPermission =
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, managementPermission.ClassificationPermissionId) &&
+                    this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
+
+                if (!hasManagementPermission)
+                {
+                    return Unauthorized();
+                }
+
+                DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>()
+                    .SingleOrDefault(e => e.Alias == "Document");
+                DocDirection outgoingDocDirection = this.unitOfWork.DbContext.Set<DocDirection>()
+                    .SingleOrDefault(e => e.Alias == "Outgoing");
+                DocFormatType electronicDocFormatType = this.unitOfWork.DbContext.Set<DocFormatType>()
+                    .SingleOrDefault(e => e.Alias == "Electronic");
+                DocStatus draftStatus = this.unitOfWork.DbContext.Set<DocStatus>()
+                    .SingleOrDefault(e => e.Alias == "Draft");
+                DocCasePartType publicDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
+                    .SingleOrDefault(e => e.Alias == "Public");
+                DocType docType = this.unitOfWork.DbContext.Set<DocType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == publicDoc.DocTypeAlias.ToLower());
+
+                Doc newDoc = this.docRepository.CreateDoc(
+                    outgoingDocDirection.DocDirectionId,
+                    documentEntryType.DocEntryTypeId,
+                    draftStatus.DocStatusId,
+                    docType.Name,
+                    publicDocCasePartType.DocCasePartTypeId,
+                    null,
+                    null,
+                    docType.DocTypeId,
+                    electronicDocFormatType.DocFormatTypeId,
+                    null,
+                    userContext);
+
+                DocRelation parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>()
+                    .FirstOrDefault(e => e.DocId == id);
+
+                List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
+                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
+                    .ToList();
+
+                DocUnitRole importedBy = this.unitOfWork.DbContext.Set<DocUnitRole>()
+                        .SingleOrDefault(e => e.Alias == "ImportedBy");
+
+                List<DocClassification> parentDocClassifications = this.unitOfWork.DbContext.Set<DocClassification>()
+                        .Where(e => e.DocId == parentDocRelation.DocId &&
+                            e.IsActive &&
+                            e.IsInherited)
+                        .ToList();
+
+                newDoc.CreateDocProperties(
+                    parentDocRelation,
+                    publicDocCasePartType.DocCasePartTypeId,
+                    null,
+                    parentDocClassifications,
+                    null,
+                    docTypeUnitRoles,
+                    importedBy,
+                    unitUser,
+                    publicDoc.Correspondents,
+                    null,
+                    this.userContext);
+
+                this.unitOfWork.Save();
+
+                this.docRepository.RegisterDoc(newDoc, unitUser, this.userContext);
+
+                byte[] eDocFileContent = CreateRioObject(docType.ElectronicServiceFileTypeUri, parentDocRelation.RootDocId, id, newDoc);
+
+                if (eDocFileContent != null)
+                {
+                    Guid eDocFileBlobKey = Guid.Empty;
+
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                    {
+                        connection.Open();
+                        using (var blobWriter = new BlobWriter(connection))
+                        using (var stream = blobWriter.OpenStream())
+                        {
+                            stream.Write(eDocFileContent, 0, eDocFileContent.Length);
+                            eDocFileBlobKey = blobWriter.GetBlobKey();
+                        }
+                    }
+
+                    DocFileKind publicDocFileKind = this.unitOfWork.DbContext.Set<DocFileKind>().SingleOrDefault(e => e.Alias == "PublicAttachedFile");
+                    DocFileOriginType editableDocFileOriginType = this.unitOfWork.DbContext.Set<DocFileOriginType>().SingleOrDefault(e => e.Alias == "EditableFile");
+                    DocFileType docFileType = this.unitOfWork.DbContext.Set<DocFileType>().SingleOrDefault(e => e.DocTypeUri == docType.ElectronicServiceFileTypeUri);
+
+                    newDoc.CreateDocFile(
+                        publicDocFileKind.DocFileKindId,
+                        docFileType.DocFileTypeId,
+                        editableDocFileOriginType.DocFileOriginTypeId,
+                        "Електронен документ",
+                        "E-Document.xml",
+                        String.Empty,
+                        eDocFileBlobKey,
+                        userContext);
+                }
+
+                this.unitOfWork.Save();
+
+                this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
+                this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
+
+                newDoc.SetReceiptOrder(this.docRepository.GetNextReceiptOrder(newDoc.DocId), this.userContext);
+
+                bool hasRegisterPermission =
+                    this.classificationRepository.HasPermission(unitUser.UnitId, newDoc.DocId, registerPermission.ClassificationPermissionId);
+                if (!hasRegisterPermission)
+                {
+                    return Unauthorized();
+                }
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                return Ok(new
+                {
+                    docId = newDoc.DocId
+                });
             }
         }
 
@@ -2514,7 +2650,7 @@ namespace Docs.Api.Controllers
             });
         }
 
-        private byte[] CreateRioObject(string docTypeUri, int? caseDocId, int? parentDocId)
+        private byte[] CreateRioObject(string docTypeUri, int? caseDocId, int? parentDocId, Doc doc = null)
         {
             byte[] content = null;
 
@@ -2590,9 +2726,9 @@ namespace Docs.Api.Controllers
                         parentDoc != null ? parentDoc.RegDate : null,
                         parentDoc != null ? parentDoc.RegIndex : null,
                         parentDoc != null ? parentDoc.RegNumber.HasValue ? parentDoc.RegNumber.ToString() : null : null,
-                        null,
-                        null,
-                        null,
+                        doc != null ? doc.RegDate : null,
+                        doc != null ? doc.RegIndex : null,
+                        doc != null ? doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null : null,
                         correspondentNamesUinEmail.Item1,
                         correspondentNamesUinEmail.Item2,
                         correspondentNamesUinEmail.Item3,

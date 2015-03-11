@@ -86,6 +86,7 @@
     <Compile Include="DataObjects\Correspondent\CorrespondentContactDO.cs" />
     <Compile Include="DataObjects\Correspondent\CorrespondentDO.cs" />
     <Compile Include="DataObjects\Doc\BlobDO.cs" />
+    <Compile Include="DataObjects\Doc\NewPublicDocDO.cs" />
     <Compile Include="DataObjects\Doc\NomDo.cs" />
     <Compile Include="DataObjects\Doc\PreDocDO.cs" />
     <Compile Include="DataObjects\Doc\DocClassificationDO.cs" />
