@@ -19,7 +19,7 @@
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
-  <ActiveSheet>9</ActiveSheet>
+  <ActiveSheet>8</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -911,7 +911,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="DocFileTypes">
-  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="42" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="41" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
    <Column ss:AutoFitWidth="0" ss:Width="129"/>
    <Column ss:AutoFitWidth="0" ss:Width="147"/>
@@ -1184,13 +1184,6 @@
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:StyleID="s63"><Data ss:Type="Number">238</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">Документ УРИ 0010-003010</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">R-3010</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">0010-003010</Data></Cell>
-    <Cell><Data ss:Type="Boolean">1</Data></Cell>
-   </Row>
-   <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s63"><Data ss:Type="Number">401</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Съобщение, че получаването не се потвърждава</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">ReceiptNotAcknowledgedMessage</Data></Cell>
@@ -1219,12 +1212,11 @@
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
    <Unsynced/>
-   <TopRowVisible>12</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>6</ActiveRow>
-     <ActiveCol>2</ActiveCol>
+     <ActiveRow>31</ActiveRow>
+     <ActiveCol>1</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -2492,7 +2484,7 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <LeftColumnVisible>8</LeftColumnVisible>
+   <LeftColumnVisible>3</LeftColumnVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
@@ -2553,8 +2545,8 @@
   <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="8" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
    <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="155.25"/>
-   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="203.25"/>
-   <Column ss:Width="178.5"/>
+   <Column ss:StyleID="s64" ss:AutoFitWidth="0" ss:Width="182.25"/>
+   <Column ss:AutoFitWidth="0" ss:Width="292.5"/>
    <Row ss:AutoFitHeight="0" ss:StyleID="s93">
     <Cell ss:StyleID="s65"><Data ss:Type="String">ElectronicServiceProvider</Data></Cell>
     <Cell ss:StyleID="s65"><Data ss:Type="String">ElectronicServiceTypeApplication</Data></Cell>
@@ -3207,7 +3199,8 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <TopRowVisible>21</TopRowVisible>
+   <Selected/>
+   <TopRowVisible>30</TopRowVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
@@ -4169,7 +4162,6 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
