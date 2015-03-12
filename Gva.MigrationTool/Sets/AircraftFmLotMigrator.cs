@@ -316,7 +316,7 @@ namespace Gva.MigrationTool.Sets
                     left outer join Acts a on a.n_Act_ID = s.nActID
                     left outer join Orgs owner on owner.nOrgID = s.nOwner
                     left outer join Orgs oper on oper.nOrgID = s.nOper
-                where {0}",
+                where {0} and s.nStatus != '0'",
                 new DbClause("s.nActID = {0}", aircraftId)
                 )
                 .Materialize(r =>
@@ -354,9 +354,8 @@ namespace Gva.MigrationTool.Sets
                         removal = new
                         {
                             date = Utils.FmToDate(r.Field<string>("dDeRegDate")),
-                            reason = noms["aircraftRemovalReasonsFm"].ByAlias("migration"),
                             text = (r.Field<string>("tDeDocOther") + "\n\n" + r.Field<string>("tRemarkDeReg")).Trim(),
-                            documentNumber = r.Field<string>("tDeDocCAA"),
+                            documentNumber = !string.IsNullOrEmpty(r.Field<string>("tDeDocCAA")) ? r.Field<string>("tDeDocCAA") : null,
                             documentDate = Utils.FmToDate(r.Field<string>("dDeDateCAA")),
                             inspector = getInspector(r.Field<string>("tDeUser"))
                         },
@@ -407,8 +406,8 @@ namespace Gva.MigrationTool.Sets
                                 new 
                                 {
                                     date = r.removal.date,
-                                    orderNumber = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? r.splitStatus.Skip(3).Take(1).Single() : "",
-                                    reason = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? noms["aircraftRemovalReasonsFm"].ByAlias("order") : r.removal.reason,
+                                    orderNumber = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? r.splitStatus.Skip(3).Take(1).Single() : null,
+                                    reason = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? noms["aircraftRemovalReasonsFm"].ByAlias("order") : null,
                                     text = r.removal.text,
                                     documentNumber = r.removal.documentNumber,
                                     documentDate = r.removal.documentDate,
