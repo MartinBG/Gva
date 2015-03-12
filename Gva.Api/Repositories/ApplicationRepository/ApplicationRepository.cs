@@ -43,7 +43,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             this.nomRepository = nomRepository;
         }
 
-        public IEnumerable<ApplicationListDO> GetApplications(
+        public ApplicationsDO GetApplications(
             string lotSetAlias = null,
             DateTime? fromDate = null,
             DateTime? toDate = null,
@@ -52,10 +52,9 @@ namespace Gva.Api.Repositories.ApplicationRepository
             string organizationUin = null,
             int? stage = null,
             int offset = 0,
-            int? limit = null
-            )
+            int? limit = null)
         {
-            IEnumerable<ApplicationListDO> result = null;
+            ApplicationsDO result = null;
             if (lotSetAlias == "person")
             {
                 result = this.GetPersonApplications(fromDate, toDate, personLin, stage, offset, limit);
@@ -81,7 +80,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 throw new NotSupportedException("Cannot get applications with not selected lot set alias!");
             }
 
-            return result.OrderByDescending(r => r.AppPartDocumentDate);
+            return result;
         }
 
         public IEnumerable<ApplicationExamListDO> GetPersonApplicationExams(
@@ -133,7 +132,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         }
 
-        public IEnumerable<ApplicationListDO> GetPersonApplications(
+        public ApplicationsDO GetPersonApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? personLin = null,
@@ -184,13 +183,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .AndEquals(e => e.GViewPerson.Lin, personLin)
                 .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
 
-            var applications = applicationsJoin
+            var query = applicationsJoin
                 .Where(predicate)
-                .OrderByDescending(p => p.GApplication.GvaApplicationId)
+                .OrderByDescending(p => p.GApplication.GvaApplicationId);
+
+            var applications = query
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
-            return applications
+            var result =  applications
                 .Select(e => 
                     new ApplicationListDO()
                     {
@@ -210,9 +211,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
                         StageTermDate = e.GvaAppStage != null ? e.GvaAppStage.StageTermDate : null
                     })
                     .ToList();
+
+            return new ApplicationsDO()
+            {
+                Applications = result.OrderByDescending(r => r.AppPartDocumentDate),
+                ApplicationsCount = query.Count()
+            };
         }
 
-        public IEnumerable<ApplicationListDO> GetAircraftApplications(
+        public ApplicationsDO GetAircraftApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string aircraftIcao = null,
@@ -267,13 +274,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .AndStringContains(e => e.GViewAircraft.ICAO, aircraftIcao)
                 .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
 
-            var applications = applicationsJoin
+            var query = applicationsJoin
                 .Where(predicate)
-                .OrderByDescending(p => p.GApplication.GvaApplicationId)
+                .OrderByDescending(p => p.GApplication.GvaApplicationId);
+
+            var applications = query
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
-            return applications
+            var result = applications
                 .Select(e => new ApplicationListDO()
                 {
                     ApplicationId = e.GApplication.GvaApplicationId,
@@ -293,9 +302,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     StageTermDate = e.GvaAppStage != null ? e.GvaAppStage.StageTermDate : null
                 })
                 .ToList();
+
+            return new ApplicationsDO()
+            {
+                Applications = result.OrderByDescending(r => r.AppPartDocumentDate),
+                ApplicationsCount = query.Count()
+            };
         }
 
-        public IEnumerable<ApplicationListDO> GetOrganizationApplications(
+        public ApplicationsDO GetOrganizationApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string organizationUin = null,
@@ -347,13 +362,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .AndStringContains(e => e.GViewOrganization.Uin, organizationUin)
                 .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
 
-            var applications = applicationsJoin
+            var query = applicationsJoin
                 .Where(predicate)
-                .OrderByDescending(p => p.GApplication.GvaApplicationId)
+                .OrderByDescending(p => p.GApplication.GvaApplicationId);
+
+            var applications = query
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
-            return applications
+            var result = applications
                 .Select(e => new ApplicationListDO()
                 {
                     ApplicationId = e.GApplication.GvaApplicationId,
@@ -372,9 +389,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     StageTermDate = e.GvaAppStage != null ? e.GvaAppStage.StageTermDate : null
                 })
                 .ToList();
+
+            return new ApplicationsDO()
+            {
+                Applications = result.OrderByDescending(r => r.AppPartDocumentDate),
+                ApplicationsCount = query.Count()
+            };
         }
 
-        public IEnumerable<ApplicationListDO> GetEquipmentApplications(
+        public ApplicationsDO GetEquipmentApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? stage = null,
@@ -425,13 +448,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
                 .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
 
-            var applications = applicationsJoin
+            var query = applicationsJoin
                 .Where(predicate)
-                .OrderByDescending(p => p.GApplication.GvaApplicationId)
+                .OrderByDescending(p => p.GApplication.GvaApplicationId);
+
+            var applications = query
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
-            return applications
+            var result = applications
                 .Select(e => new ApplicationListDO()
                 {
                     ApplicationId = e.GApplication.GvaApplicationId,
@@ -451,9 +476,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     StageTermDate = e.GvaAppStage != null ? e.GvaAppStage.StageTermDate : null
                 })
                 .ToList();
+
+            return new ApplicationsDO()
+            {
+                Applications = result.OrderByDescending(r => r.AppPartDocumentDate),
+                ApplicationsCount = query.Count()
+            };
         }
 
-        public IEnumerable<ApplicationListDO> GetAirportApplications(
+        public ApplicationsDO GetAirportApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? stage = null,
@@ -502,13 +533,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
                 .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
 
-            var applications = applicationsJoin
+            var query = applicationsJoin
                 .Where(predicate)
-                .OrderByDescending(p => p.GApplication.GvaApplicationId)
+                .OrderByDescending(p => p.GApplication.GvaApplicationId);
+
+            var applications = query
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
 
-            return applications
+            var result = applications
                 .Select(e => new ApplicationListDO()
                 {
                     ApplicationId = e.GApplication.GvaApplicationId,
@@ -527,6 +560,12 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     StageTermDate = e.GvaAppStage != null ? e.GvaAppStage.StageTermDate : null
                 })
                 .ToList();
+
+            return new ApplicationsDO()
+            {
+                Applications = result.OrderByDescending(r => r.AppPartDocumentDate),
+                ApplicationsCount = query.Count()
+            };
         }
         public IEnumerable<GvaApplication> GetLinkedToDocsApplications()
         {

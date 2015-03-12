@@ -12,7 +12,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
 {
     public interface IApplicationRepository : IRepository<GvaApplication>
     {
-        IEnumerable<ApplicationListDO> GetApplications(
+        ApplicationsDO GetApplications(
             string lotSetAlias = null,
             DateTime? fromDate = null,
             DateTime? toDate = null,
@@ -21,8 +21,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             string organizationUin = null,
             int? stage = null,
             int offset = 0,
-            int? limit = null
-            );
+            int? limit = null);
 
         GvaViewApplication GetApplicationById(int applicationId);
 
@@ -36,15 +35,15 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null);
 
-        IEnumerable<ApplicationListDO> GetPersonApplications(
+        ApplicationsDO GetPersonApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? personLin = null,
             int? stage = null,
             int offset = 0,
             int? limit = null);
-        
-        IEnumerable<ApplicationListDO> GetAircraftApplications(
+
+        ApplicationsDO GetAircraftApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string aircraftIcao = null,
@@ -52,7 +51,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null);
 
-        IEnumerable<ApplicationListDO> GetOrganizationApplications(
+        ApplicationsDO GetOrganizationApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string organizationUin = null,
@@ -60,14 +59,14 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int offset = 0,
             int? limit = null);
 
-        IEnumerable<ApplicationListDO> GetEquipmentApplications(
+        ApplicationsDO GetEquipmentApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? stage = null,
             int offset = 0,
             int? limit = null);
 
-        IEnumerable<ApplicationListDO> GetAirportApplications(
+        ApplicationsDO GetAirportApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? stage = null,

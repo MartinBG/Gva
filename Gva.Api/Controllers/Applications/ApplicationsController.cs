@@ -106,13 +106,11 @@ namespace Gva.Api.Controllers.Applications
                 personLin: personLin,
                 aircraftIcao: aircraftIcao,
                 organizationUin: organizationUin,
-                stage: stage);
+                stage: stage,
+                limit: limit,
+                offset: offset);
 
-            return Ok(new 
-            {
-                applications = applications.Skip(offset).Take(limit),
-                applicationsCount = applications.Count()
-            });
+            return Ok(applications);
         }
 
         [Route("exams")]

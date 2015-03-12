@@ -167,6 +167,7 @@
     <Compile Include="ModelsDO\Applications\AppExamSystExamDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExaminationSystemDataDO.cs" />
     <Compile Include="ModelsDO\Applications\ApplicationExamListDO.cs" />
+    <Compile Include="ModelsDO\Applications\ApplicationsDO.cs" />
     <Compile Include="ModelsDO\Applications\DocCaseDO.cs" />
     <Compile Include="ModelsDO\Applications\PartDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
