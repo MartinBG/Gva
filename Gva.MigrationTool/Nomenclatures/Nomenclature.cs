@@ -3232,7 +3232,7 @@ namespace Gva.MigrationTool.Nomenclatures
             var results = conn.CreateStoreCommand(@"
                 SELECT [Code] code, [Registration Status] name
                 FROM [GvaAircraft].[dbo].[RegStatus]
-                 WHERE code != '3' and code != '5' and code != '12'")
+                 WHERE code != '3' and code != '5' and code != '12' and code != '0'")
                 .Materialize(r =>
                     new NomValue
                     {
