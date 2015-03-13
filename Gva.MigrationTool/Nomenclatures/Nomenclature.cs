@@ -3247,25 +3247,28 @@ namespace Gva.MigrationTool.Nomenclatures
                     })
                 .ToList();
 
-            results.Add(new NomValue
-            {
-                OldId = "37",
-                Name = "Заличен съгласно заповед",
-                Alias = "removedByOrder",
-                Code = "37",
-                IsActive = true
-            });
+         
 
             noms["aircraftRegStatsesFm"] = new Dictionary<string, NomValue>();
             foreach (var row in results)
             {
-                int parsedCodeToInt = int.Parse(row.Code);
                 noms["aircraftRegStatsesFm"][row.OldId] = row;
-                if (parsedCodeToInt < 12 || parsedCodeToInt == 21  || parsedCodeToInt == 37)
-                { 
+                int parsedCodeToInt = int.Parse(row.Code);
+                if (parsedCodeToInt < 12 || parsedCodeToInt == 21)
+                {
                     nom.NomValues.Add(row);
                 }
             }
+            NomValue removedByOrder = new NomValue
+            {
+                OldId = null,
+                Name = "Заличен съгласно заповед",
+                Alias = "removedByOrder",
+                IsActive = true,
+                Code = "0"
+            };
+            nom.NomValues.Add(removedByOrder);
+            noms["aircraftRegStatsesFm"][Guid.NewGuid().ToString()] = removedByOrder;
         }
 
         private void migrateCountriesFm(INomRepository repo, SqlConnection conn)

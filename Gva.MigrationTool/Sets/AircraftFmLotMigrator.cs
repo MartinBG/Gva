@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
@@ -266,6 +267,7 @@ namespace Gva.MigrationTool.Sets
                 return Tuple.Create(true, (JObject)null, (JObject)null);
             };
 
+            Regex isOrderStatus = new Regex(@"Заличен съгласно заповед (\w+-\w+-\w+)\s*\/\s*(\d+.\d+.\d+)", RegexOptions.IgnoreCase);
             var registrations = this.sqlConn.CreateStoreCommand(
                 @"select s.regNumber,
                         s.nActID,
@@ -360,7 +362,7 @@ namespace Gva.MigrationTool.Sets
                             inspector = getInspector(r.Field<string>("tDeUser"))
                         },
                         parsedToIntStatusCode = int.Parse(r.Field<string>("nStatus")),
-                        splitStatus = noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")).Name.Split(new char[]{' '})
+                        matchedStatus = isOrderStatus.Match(noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")).Name)
                     })
                 .OrderBy(r => r.regNum)
                 .Select(r => new JObject(
@@ -406,7 +408,7 @@ namespace Gva.MigrationTool.Sets
                                 new 
                                 {
                                     date = r.removal.date,
-                                    orderNumber = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? r.splitStatus.Skip(3).Take(1).Single() : null,
+                                    orderNumber = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 && r.matchedStatus.Success ? r.matchedStatus.Groups[1].Value : null,
                                     reason = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? noms["aircraftRemovalReasonsFm"].ByAlias("order") : null,
                                     text = r.removal.text,
                                     documentNumber = r.removal.documentNumber,

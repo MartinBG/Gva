@@ -150,7 +150,7 @@ namespace Gva.MigrationTool.Sets
                         outputDate = Utils.FmToDate(r.Field<string>("d_Act_DateOutput")),
                         docRoom = r.Field<string>("t_Act_Place_of_Documents"),
                         cofAType = noms["CofATypesFm"].ByName(r.Field<string>("t_CofA_Type").Replace("\"", string.Empty)),
-                        airCategory = noms["EASATypesFm"].ByName(r.Field<string>("t_Act_EASA_Type")),
+                        airCategory = r.Field<string>("t_Act_EASA_Type") == "Motor-hangglider" ? noms["EASATypesFm"].ByName("Motor-hanglider") : noms["EASATypesFm"].ByName(r.Field<string>("t_Act_EASA_Type")),
                         euRegType = noms["EURegTypesFm"].ByName(r.Field<string>("t_Act_EU_RU")),
                         easaCategory = noms["EASACategoriesFm"].ByName(r.Field<string>("t_EASA_Category")),
                         tcds = r.Field<string>("t_EASA_TCDS")
