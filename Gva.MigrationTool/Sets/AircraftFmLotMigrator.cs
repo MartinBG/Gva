@@ -448,7 +448,7 @@ namespace Gva.MigrationTool.Sets
                         break;
                 }
 
-                lastReg["part"]["isActive"] =  statusCode < 4 ? true : false;
+                lastReg["part"]["isActive"] =  statusCode == 1 || statusCode == 2 ? true : false;
                 lastReg["part"]["isCurrent"] = true;
             }
 
