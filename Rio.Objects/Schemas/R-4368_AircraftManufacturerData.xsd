@@ -5,7 +5,7 @@
 	xmlns:cgc="http://ereg.egov.bg/value/0008-000183"
 	xmlns:cn="http://ereg.egov.bg/value/0008-000184"
 	xmlns:w="http://ereg.egov.bg/value/R-4366" 
-	xmlns:ea="http://ereg.egov.bg/value/R-4214" 
+	xmlns:ea="http://ereg.egov.bg/value/R-1016" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	elementFormDefault="qualified">
 
@@ -13,7 +13,7 @@
 	<xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
 	<xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
     <xsd:import namespace="http://ereg.egov.bg/value/R-4366" />
-    <xsd:import namespace="http://ereg.egov.bg/value/R-4214" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1016" />
 	
 	<xsd:complexType name="AircraftManufacturerData">
 		<xsd:annotation>

@@ -70,9 +70,9 @@ namespace R_4012
 		public FlightCrewPersonalDataCorrespondenceAddress CorrespondenceAddress { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(ContactData),ElementName="ContactData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(FlightCrewPersonalDataContactData),ElementName="ContactData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public ContactData ContactData { get; set; }
+		public FlightCrewPersonalDataContactData ContactData { get; set; }
 
 		public FlightCrewPersonalData()
 		{
@@ -325,8 +325,8 @@ namespace R_4012
 	}
 
 
-	[XmlType(TypeName="ContactData",Namespace=Declarations.SchemaVersion),Serializable]
-	public partial class ContactData
+	[XmlType(TypeName="FlightCrewPersonalDataContactData",Namespace=Declarations.SchemaVersion),Serializable]
+	public partial class FlightCrewPersonalDataContactData
 	{
 
 		[System.Web.Script.Serialization.ScriptIgnore]
@@ -344,7 +344,7 @@ namespace R_4012
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public string EmailAddress { get; set; }
 
-		public ContactData()
+		public FlightCrewPersonalDataContactData()
 		{
 		}
 	}

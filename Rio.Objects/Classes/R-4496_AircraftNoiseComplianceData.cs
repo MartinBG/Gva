@@ -41,9 +41,9 @@ namespace R_4496
 		public R_4364.CategoryAircraft CategoryAircraft { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4368.AircraftManufacturerData),ElementName="AircraftManufacturerData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(ElementName="AircraftManufacturerName",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4368.AircraftManufacturerData AircraftManufacturerData { get; set; }
+		public string AircraftManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4370.ModelAircraftAccordingTypeCertificate),ElementName="ModelAircraftAccordingTypeCertificate",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]

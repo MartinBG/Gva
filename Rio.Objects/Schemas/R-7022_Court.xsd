@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7022" 
+	xmlns="http://ereg.egov.bg/segment/R-7022" 
+	xmlns:cc="http://ereg.egov.bg/value/R-7018"
+	xmlns:cn="http://ereg.egov.bg/value/R-7020"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7018" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7020" />
+
+	<xsd:complexType name="Court">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Съд</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CourtCode" type="cc:CourtCode" minOccurs="0" />
+			<xsd:element name="CourtName" type="cn:CourtName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7082" 
+	xmlns="http://ereg.egov.bg/segment/R-7082" 
+	xmlns:aakc="http://ereg.egov.bg/value/R-7078"
+	xmlns:aakn="http://ereg.egov.bg/value/R-7080"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7078" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7080" />
+
+	<xsd:complexType name="AnnouncedActKind">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Вид обявен акт в ЦРЛЮНЦ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AnnouncedActKindCode" type="aakc:AnnouncedActKindCode" minOccurs="0" />
+			<xsd:element name="AnnouncedActKindName" type="aakn:AnnouncedActKindName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

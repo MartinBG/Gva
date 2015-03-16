@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1062" xmlns="http://ereg.egov.bg/segment/R-1062" 
+  xmlns:tsn="http://ereg.egov.bg/value/R-1058" 
+  xmlns:tsa="http://ereg.egov.bg/segment/R-1060" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  
+  <xsd:import namespace="http://ereg.egov.bg/value/R-1058" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/R-1060" />
+  <xsd:complexType name="TestSiteData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Изпитвателен обект</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="TestSiteName" type="tsn:TestSiteName" minOccurs="0" />
+      <xsd:element name="TestSiteAddress" type="tsa:TestSiteAddress" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

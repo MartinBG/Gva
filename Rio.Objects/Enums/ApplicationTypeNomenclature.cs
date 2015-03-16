@@ -7,6 +7,28 @@ namespace Rio.Objects.Enums
 {
     public class ApplicationTypeNomenclature
     {
+        public string Name
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(ResourceKey))
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    return App_LocalResources.ApplicationTypeNomenclature.ResourceManager.GetString(ResourceKey);
+                }
+            }
+        }
+
+        public string Code { get; set; }
+        public string ResourceKey { get; set; }
+
+        public static readonly ApplicationTypeNomenclature InitialApproval = new ApplicationTypeNomenclature { ResourceKey = "InitialApproval", Code = "initial" };
+        public static readonly ApplicationTypeNomenclature Change = new ApplicationTypeNomenclature { ResourceKey = "Change", Code = "change" };
+
+
         public string Text { get; set; }
         public string Uri { get; set; }
 

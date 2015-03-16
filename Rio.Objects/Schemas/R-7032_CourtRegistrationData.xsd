@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7032" xmlns="http://ereg.egov.bg/segment/R-7032" 
+	xmlns:cc="http://ereg.egov.bg/segment/R-7028" 
+	xmlns:bnlcr="http://ereg.egov.bg/value/R-7030" 
+	
+	xmlns:mtn="http://ereg.egov.bg/nomenclature/R-7066"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-7028" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7030" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/nomenclature/R-7066" />
+
+	<xsd:complexType name="CourtRegistrationData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за съдебна регистрация</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CourtCase" type="cc:CourtCase" />
+			<xsd:element name="BatchNumberLNPECourtRegister" type="bnlcr:BatchNumberLNPECourtRegister" />
+		</xsd:sequence>
+		
+		<xsd:attribute name="modificationType" type="mtn:ModificationTypeNomenclature"/>
+	</xsd:complexType>
+</xsd:schema>

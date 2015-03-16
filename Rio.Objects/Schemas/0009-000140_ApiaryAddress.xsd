@@ -21,7 +21,7 @@
       <xsd:element name="MunicipalityName" type="mn:MunicipalityName" minOccurs="0" />
       <xsd:element name="SettlementCode" type="sc:SettlementCode" minOccurs="0" />
       <xsd:element name="SettlementName" type="sn:SettlementName" minOccurs="0" />
-      <xsd:element name="StreetText" type="stt:StreetТеxt" minOccurs="0" />
+      <xsd:element name="StreetText" type="stt:StreetText" minOccurs="0" />
       <xsd:element name="BuildingNumber" type="bn:BuildingNumber" minOccurs="0" />
       <xsd:element name="ApiaryLocation" type="al:ApiaryLocation" minOccurs="0" />
       <xsd:element name="PropertyIdentifier" type="pi:PropertyIdentifier" minOccurs="0" />

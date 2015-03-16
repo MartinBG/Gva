@@ -123,4 +123,10 @@
   <data name="Physical" xml:space="preserve">
     <value>Физическо лице</value>
   </data>
+  <data name="PhysicalBulgarian" xml:space="preserve">
+    <value>Български гражданин или постоянно пребиваващ чужденец</value>
+  </data>
+  <data name="PhysicalForeign" xml:space="preserve">
+    <value>Чужд гражданин</value>
+  </data>
 </root>

@@ -66,21 +66,6 @@ namespace R_4566
 		public R_4394.AircraftOwnerData NewOwnerAircraftOwnerData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="NewOwnerApplicantAviationalOperatorIndication",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool NewOwnerApplicantAviationalOperatorIndication { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="AviationalOperatorCertificateNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string AviationalOperatorCertificateNumber { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="AviationalOperatorCertificateIssueDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? AviationalOperatorCertificateIssueDate { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4014.EvidencePersonRepresentingRecipientElectronicService),ElementName="EvidencePersonRepresentingRecipientElectronicService",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public R_4014.EvidencePersonRepresentingRecipientElectronicService EvidencePersonRepresentingRecipientElectronicService { get; set; }

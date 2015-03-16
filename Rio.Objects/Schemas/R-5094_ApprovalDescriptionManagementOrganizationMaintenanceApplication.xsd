@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5094" 
+	xmlns="http://ereg.egov.bg/segment/R-5094"
+	xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+	xmlns:at="http://ereg.egov.bg/value/R-4580"
+	xmlns:ebd="http://ereg.egov.bg/segment/0009-000013"
+	xmlns:febd="http://ereg.egov.bg/segment/0009-000014"
+	xmlns:etn="http://ereg.egov.bg/value/R-5092"
+	xmlns:ci="http://ereg.egov.bg/segment/R-4584"
+	xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
+	xmlns:rap="http://ereg.egov.bg/segment/R-4702"
+	xmlns:cres="http://ereg.egov.bg/value/R-4016"
+	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
+	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4580" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000013" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000014" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5092" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4584" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4702" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />	
+
+	<xsd:element name="ApprovalDescriptionManagementOrganizationMaintenanceApplication" type="ApprovalDescriptionManagementOrganizationMaintenanceApplication"/>
+	<xsd:complexType name="ApprovalDescriptionManagementOrganizationMaintenanceApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за одобряване на описание на организация за управление поддържането на постоянна летателна годност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
+			<xsd:element name="ApplicantType" type="at:ApplicantType" minOccurs="0" />
+			<xsd:element name="EntityBasicData" type="ebd:EntityBasicData" minOccurs="0" />
+			<xsd:element name="ForeignEntityBasicData" type="febd:ForeignEntityBasicData" minOccurs="0" />
+			<xsd:element name="EntityTradeName" type="etn:EntityTradeName" minOccurs="0" />
+			<xsd:element name="ContactInformation" type="ci:ContactInformation" minOccurs="0" />
+			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="RepresentativeAuthorizedPerson" type="rap:RepresentativeAuthorizedPerson" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -220,7 +220,7 @@
     <value>Разрешение, издадено съгласно чл. 82, ал. 4 и 5 от Закона за опазване на околната среда</value>
   </data>
   <data name="ApprovedOrder" xml:space="preserve">
-    <value>Одобрена заповед за лизинг</value>
+    <value>Одобрение за лизинг</value>
   </data>
   <data name="Contract" xml:space="preserve">
     <value>Копие от договор/друг акт</value>
@@ -689,5 +689,65 @@
   </data>
   <data name="OtherFed" xml:space="preserve">
     <value>Друг (.fed)</value>
+  </data>
+  <data name="Proxy" xml:space="preserve">
+    <value>Пълномощно</value>
+  </data>
+  <data name="DeclarationExistence" xml:space="preserve">
+    <value>Декларация за наличието на обстоятелствата по чл. 38-41 ЗЮЛНЦ</value>
+  </data>
+  <data name="RulesProcedures" xml:space="preserve">
+    <value>Правила и ред за извършване на общественополезна дейност</value>
+  </data>
+  <data name="DeclarationOverdue" xml:space="preserve">
+    <value>Декларация за наличието на просрочени данъци, такси, мита и други публични вземания</value>
+  </data>
+  <data name="ConformityRequirements" xml:space="preserve">
+    <value>Декларация за съответствие на описанието със изискванията</value>
+  </data>
+  <data name="ContractUPPLG" xml:space="preserve">
+    <value>Договори за изпълнение на задачи по УППЛГ</value>
+  </data>
+  <data name="DeclarationReleaseOperation" xml:space="preserve">
+    <value>Декларация за допускане в експлоатация</value>
+  </data>
+  <data name="MaintainAirworthiness" xml:space="preserve">
+    <value>Описание на организация за управление поддържането на постоянна летателна годност</value>
+  </data>
+  <data name="TechnicalLog" xml:space="preserve">
+    <value>Технически борден дневник</value>
+  </data>
+  <data name="DeclarationServicedAircraft" xml:space="preserve">
+    <value>Декларация, подписана от собственика, АО или ОУППЛГ, че упоменатите ВС ще се обслужват в съответствие с програмата и тя периодично ще се ревизира</value>
+  </data>
+  <data name="ProgramPlanMaintenence" xml:space="preserve">
+    <value>Програма (план) за техническо обслужване</value>
+  </data>
+  <data name="ReliabilityProgramIfApplicable" xml:space="preserve">
+    <value>Програма за надежност, ако е приложимо</value>
+  </data>
+  <data name="FlightManualCopy" xml:space="preserve">
+    <value>Копие от Ръководството за летателна експлоатация</value>
+  </data>
+  <data name="TimeLimitComponents" xml:space="preserve">
+    <value>Ресурсна инструкция</value>
+  </data>
+  <data name="FlyingLicenseCopyEachClass" xml:space="preserve">
+    <value>Летателна книжка (копие от последните записи за всеки квалификационен клас)</value>
+  </data>
+  <data name="IdDocumentCopy" xml:space="preserve">
+    <value>Документ за самоличност – копие</value>
+  </data>
+  <data name="MedicalCertificatePartMedCopy" xml:space="preserve">
+    <value>Свидетелство за медицинска годност part-med – копие</value>
+  </data>
+  <data name="DocumentStandardizationPassRate" xml:space="preserve">
+    <value>Документ за преминат стандартизационен курс за проверяващ – копие</value>
+  </data>
+  <data name="LicenseExaminerCopy" xml:space="preserve">
+    <value>Притежавано свидетелство за проверяващ – копие (ако е приложимо)</value>
+  </data>
+  <data name="OwnedInstructorCertificateCopy" xml:space="preserve">
+    <value>Притежавано свидетелство за инструктор – копие (ако е приложимо)</value>
   </data>
 </root>

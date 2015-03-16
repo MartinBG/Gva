@@ -11,7 +11,6 @@ namespace Docs.Api.Models
             this.DocTypeClassifications = new List<DocTypeClassification>();
             this.DocTypeUnitRoles = new List<DocTypeUnitRole>();
             this.ElectronicServiceStages = new List<ElectronicServiceStage>();
-            this.IrregularityTypes = new List<IrregularityType>();
         }
 
         public int DocTypeId { get; set; }
@@ -57,8 +56,6 @@ namespace Docs.Api.Models
         public virtual ICollection<DocTypeUnitRole> DocTypeUnitRoles { get; set; }
 
         public virtual ICollection<ElectronicServiceStage> ElectronicServiceStages { get; set; }
-
-        public virtual ICollection<IrregularityType> IrregularityTypes { get; set; }
     }
 
     public class DocTypeMap : EntityTypeConfiguration<DocType>

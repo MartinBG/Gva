@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1106" xmlns="http://ereg.egov.bg/segment/R-1106" 
+	xmlns:itc="http://ereg.egov.bg/value/R-1092" 
+	xmlns:itn="http://ereg.egov.bg/value/R-1094" 
+	xmlns:ifn="http://ereg.egov.bg/value/R-1096" 
+	xmlns:ipy="http://ereg.egov.bg/value/R-1098" 
+	xmlns:msn="http://ereg.egov.bg/value/R-1024" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1092" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1094" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1096" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1098" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1024" />
+    <xsd:complexType name="InstrumentalGeneralData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Общи данни за средство за измерване</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="InstrumentalTypeCode" type="itc:InstrumentalTypeCode" minOccurs="0" />
+      <xsd:element name="InstrumentalTypeName" type="itn:InstrumentalTypeName" minOccurs="0" />
+      <xsd:element name="InstrumentalFabricNumber" type="ifn:InstrumentalFabricNumber" minOccurs="0" />
+      <xsd:element name="InstrumentalProductionYear" type="ipy:InstrumentalProductionYear" minOccurs="0" />
+      <xsd:element name="MCSSupplierName" type="msn:MCSSupplierName" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

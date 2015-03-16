@@ -15,6 +15,10 @@
                 docTypeAlias: '@docTypeAlias'
               }
             },
+            'createPublicChild': {
+              method: 'POST',
+              url: 'api/docs/:id/createPublic'
+            },
             'register': {
               method: 'POST',
               url: 'api/docs/:id/register',

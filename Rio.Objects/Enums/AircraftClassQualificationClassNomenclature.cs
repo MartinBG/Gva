@@ -26,6 +26,21 @@ namespace Rio.Objects.Enums
         public static readonly BaseNomenclature UltralightAircrafts = new BaseNomenclature("ULA", "Свръхлеки самолети", "");
         public static readonly BaseNomenclature VeryLightAircrafts = new BaseNomenclature("VLA", "Много леки самолети", "");
 
+        public List<BaseNomenclature> InstructorValues;
+
+        public static readonly BaseNomenclature FE = new BaseNomenclature("FE", "FE");
+        public static readonly BaseNomenclature TRE = new BaseNomenclature("TRE", "TRE");
+        public static readonly BaseNomenclature CRE = new BaseNomenclature("CRE", "CRE");
+        public static readonly BaseNomenclature IRE = new BaseNomenclature("IRE", "IRE");
+        public static readonly BaseNomenclature SFE = new BaseNomenclature("SFE", "SFE");
+        public static readonly BaseNomenclature FIE = new BaseNomenclature("FIE", "FIE");
+        public static readonly BaseNomenclature A = new BaseNomenclature("A", "A");
+        public static readonly BaseNomenclature H = new BaseNomenclature("H", "H");
+        public static readonly BaseNomenclature PL = new BaseNomenclature("PL", "PL");
+        public static readonly BaseNomenclature As = new BaseNomenclature("As", "As");
+        public static readonly BaseNomenclature B = new BaseNomenclature("B", "B");
+        public static readonly BaseNomenclature S = new BaseNomenclature("S", "S");
+
         public AircraftClassQualificationClassNomenclature()
         {
             this.Values = new List<BaseNomenclature>()
@@ -49,6 +64,23 @@ namespace Rio.Objects.Enums
                 UltralightAircrafts,
                 VeryLightAircrafts
             };
+
+            this.InstructorValues = new List<BaseNomenclature>()
+            {
+                FE,
+                TRE,
+                CRE,
+                IRE,
+                SFE,
+                FIE,
+                A,
+                H,
+                PL,
+                As,
+                B,
+                S 
+            };
         }
+
     }
 }

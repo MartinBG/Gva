@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1144"
+            xmlns="http://ereg.egov.bg/segment/R-1144"
+            xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+			xmlns:ansu="http://ereg.egov.bg/segment/0009-000054"
+			xmlns:si="http://ereg.egov.bg/value/0008-000080"
+            xmlns:msd="http://ereg.egov.bg/segment/R-1026"
+            xmlns:tfdc="http://ereg.egov.bg/value/R-1134"
+            xmlns:tfdn="http://ereg.egov.bg/value/R-1136"
+            xmlns:mfdn="http://ereg.egov.bg/value/R-1138"
+            xmlns:tcrd="http://ereg.egov.bg/value/R-1140"
+            xmlns:ticn="http://ereg.egov.bg/value/R-1142"
+			xmlns:tsd="http://ereg.egov.bg/segment/R-1062"
+            xmlns:aie="http://ereg.egov.bg/value/R-1010"
+            xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+            xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000054"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/0008-000080"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1026"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1134"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1136"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1138"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1140"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1142"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1062"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1010"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
+	<xsd:element name="TypeExaminationFiscalDeviceApplication" type="TypeExaminationFiscalDeviceApplication"/>
+    <xsd:complexType name="TypeExaminationFiscalDeviceApplication">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="bg">Заявление за изпитване на тип фискално устройство съгласно изискванията на Наредба № 18  от 13.12.2006 г. на Министерство на финансите</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+			<xsd:element name="AdministrativeNomenclatureServiceURI" type="ansu:AdministrativeNomenclatureServiceURI" minOccurs="0" />
+			<xsd:element name="ServiceInstructions" type="si:ServiceInstructions" minOccurs="0" />
+            <xsd:element name="PersonManufacturer" type="msd:MCSSupplierData" minOccurs="0"/>
+            <xsd:element name="CompanyImporter" type="msd:MCSSupplierData" minOccurs="0"/>
+            <xsd:element name="TypeFiscalDeviceCode" type="tfdc:TypeFiscalDeviceCode" minOccurs="0"/>
+            <xsd:element name="TypeFiscalDeviceName" type="tfdn:TypeFiscalDeviceName" minOccurs="0"/>
+            <xsd:element name="ModelFiscalDeviceName" type="mfdn:ModelFiscalDeviceName" minOccurs="0"/>
+            <xsd:element name="TypeCentralRegisteringDevice" type="tcrd:TypeCentralRegisteringDevice" minOccurs="0"/>
+            <xsd:element name="TypeInstrumentalCostName" type="ticn:TypeInstrumentalCostName" minOccurs="0"/>
+			<xsd:element name="TestSiteData" type="tsd:TestSiteData" minOccurs="0"/>
+            <xsd:element name="AdditionInformationESA" type="aie:AdditionInformationESA" minOccurs="0"/>
+            <xsd:element name="AttachedDocuments" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

@@ -41,14 +41,9 @@ namespace R_4356
 		public R_0009_000015.ElectronicServiceRecipient ElectronicServiceRecipient { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="ApplicantAviationalOperatorIndication",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4584.ContactInformation),ElementName="ContactInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool ApplicantAviationalOperatorIndication { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4294.AviationalOperatorBasicData),ElementName="AviationalOperatorBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4294.AviationalOperatorBasicData AviationalOperatorBasicData { get; set; }
+		public R_4584.ContactInformation ContactInformation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4014.EvidencePersonRepresentingRecipientElectronicService),ElementName="EvidencePersonRepresentingRecipientElectronicService",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
@@ -69,6 +64,16 @@ namespace R_4356
 		[XmlElement(Type=typeof(R_4310.AircraftHiringData),ElementName="AircraftHiringData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public R_4310.AircraftHiringData AircraftHiringData { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="AircraftHiringDataAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_3994.AttachedDocumentDatasCollection AircraftHiringDataAttachedDocumentDatasCollection { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4294.AviationalOperatorBasicData),ElementName="AviationalOperatorBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_4294.AviationalOperatorBasicData AviationalOperatorBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4350.AircraftManufactureData),ElementName="AircraftManufactureData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]

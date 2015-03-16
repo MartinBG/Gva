@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1184"
+            xmlns="http://ereg.egov.bg/segment/R-1184"
+            xmlns:rti="http://ereg.egov.bg/segment/R-1076"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1076"/>
+
+	<xsd:element name="InformationRegisterApprovedTypesMEApplication" type="InformationRegisterApprovedTypesMEApplication"/>
+    <xsd:complexType name="InformationRegisterApprovedTypesMEApplication">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="bg">Заявление за предоставяне на справки от регистъра за одобрените за използване типове средства за измерване</xsd:documentation>
+        </xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="rti:RequestTemplateIA" />
+		</xsd:complexContent>
+    </xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1198"
+            xmlns="http://ereg.egov.bg/segment/R-1198"
+            xmlns:pactc="http://ereg.egov.bg/value/R-1194"
+            xmlns:pactn="http://ereg.egov.bg/value/R-1196"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1194"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1196"/>
+
+	<xsd:element name="ProcedureAssessmentConformityData" type="ProcedureAssessmentConformityData"/>
+    <xsd:complexType name="ProcedureAssessmentConformityData">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="bg">Данни за вид процедура за оценяване на съотвествието</xsd:documentation>
+        </xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ProcedureAssessmentConformities">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ProcedureAssessmentConformity" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Code" type="pactc:ProcedureAssessmentConformityTypeCode" minOccurs="0"/>
+									<xsd:element name="Name" type="pactn:ProcedureAssessmentConformityTypeName" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="versionDate" type="xsd:date" use="required" />
+    </xsd:complexType>
+
+</xsd:schema>

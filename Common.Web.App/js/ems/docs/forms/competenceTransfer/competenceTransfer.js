@@ -16,74 +16,69 @@
 
       $scope.model.jObject = result.content;
 
-      Nomenclatures.query({ alias: 'electronicServiceProvider' }).$promise
-        .then(function (result) {
-          var senderProviderNomId = null;
+      Nomenclatures.query({ alias: 'electronicServiceProvider' }).$promise.then(function (result) {
+        var senderProviderNomId = null;
 
-          if (!!$scope.model.jObject
-            .SenderProvider.ElectronicServiceProviderType) {
-            senderProviderNomId = _(result).filter({
-              code: $scope.model.jObject
-                .SenderProvider.ElectronicServiceProviderType
-            }).first().nomValueId;
+        if ($scope.model.jObject.senderProvider.electronicServiceProviderType) {
+          senderProviderNomId = _(result).filter({
+            code: $scope.model.jObject.senderProvider.electronicServiceProviderType
+          }).first().nomValueId;
+        }
+
+        $scope.senderServiceProvider = {
+          obj: {},
+          id: senderProviderNomId
+        };
+
+        var receiverProviderNomId = null;
+
+        if (!!$scope.model.jObject.receiverProvider.electronicServiceProviderType) {
+          receiverProviderNomId = _(result).filter({
+            code: $scope.model.jObject.receiverProvider.electronicServiceProviderType
+          }).first().nomValueId;
+        }
+
+        $scope.receiverServiceProvider = {
+          obj: {},
+          id: receiverProviderNomId
+        };
+
+        _($scope.model.jObject.fileTransferredJurisdiction.documentFileCompetenceCollection)
+          .forEach(function (doc) {
+            if (doc.structuredDocumentFileCompetence.electronicDocumentXml
+              .electronicDocumentXmlContent.any.attachedDocumentUniqueIdentifier) {
+            doc.downloadUri =
+              'api/abbcdnFile?fileKey=' +
+              doc.structuredDocumentFileCompetence.electronicDocumentXml
+              .electronicDocumentXmlContent.any.attachedDocumentUniqueIdentifier +
+              '&fileName=' +
+              doc.structuredDocumentFileCompetence.electronicDocumentXml
+              .electronicDocumentXmlContent.any.attachedDocumentFileName +
+              '&mimeType=' +
+              doc.structuredDocumentFileCompetence.electronicDocumentXml
+              .electronicDocumentXmlContent.any.attachedDocumentFileType;
           }
-
-          $scope.senderServiceProvider = {
-            obj: {},
-            id: senderProviderNomId
-          };
-
-          var receiverProviderNomId = null;
-
-          if (!!$scope.model.jObject
-            .ReceiverProvider.ElectronicServiceProviderType) {
-            receiverProviderNomId = _(result).filter({
-              code: $scope.model.jObject
-                .ReceiverProvider.ElectronicServiceProviderType
-            }).first().nomValueId;
-          }
-
-          $scope.receiverServiceProvider = {
-            obj: {},
-            id: receiverProviderNomId
-          };
-
-          _($scope.model.jObject.FileTransferredJurisdiction.DocumentFileCompetenceCollection)
-            .forEach(function (doc) {
-              if (!!doc.StructuredDocumentFileCompetence.ElectronicDocumentXml
-                .ElectronicDocumentXmlContent.Any.AttachedDocumentUniqueIdentifier) {
-              doc.downloadUri =
-                'api/abbcdnFile?fileKey=' +
-                doc.StructuredDocumentFileCompetence.ElectronicDocumentXml
-                .ElectronicDocumentXmlContent.Any.AttachedDocumentUniqueIdentifier +
-                '&fileName=' +
-                doc.StructuredDocumentFileCompetence.ElectronicDocumentXml
-                .ElectronicDocumentXmlContent.Any.AttachedDocumentFileName +
-                '&mimeType=' +
-                doc.StructuredDocumentFileCompetence.ElectronicDocumentXml
-                .ElectronicDocumentXmlContent.Any.AttachedDocumentFileType;
-            }
-          });
-
-          $scope.isLoaded = true;
         });
+
+        $scope.isLoaded = true;
       });
+    });
 
     $scope.senderServiceProviderChange = function () {
-      $scope.model.jObject.SenderProvider.ElectronicServiceProviderType =
+      $scope.model.jObject.senderProvider.electronicServiceProviderType =
         $scope.senderServiceProvider.obj.code;
-      $scope.model.jObject.SenderProvider.EntityBasicData.Identifier =
+      $scope.model.jObject.senderProvider.entityBasicData.identifier =
         $scope.senderServiceProvider.obj.bulstat;
-      $scope.model.jObject.SenderProvider.EntityBasicData.Name =
+      $scope.model.jObject.senderProvider.entityBasicData.name =
         $scope.senderServiceProvider.obj.name;
     };
 
     $scope.receiverServiceProviderChange = function () {
-      $scope.model.jObject.ReceiverProvider.ElectronicServiceProviderType =
+      $scope.model.jObject.receiverProvider.electronicServiceProviderType =
         $scope.receiverServiceProvider.obj.code;
-      $scope.model.jObject.ReceiverProvider.EntityBasicData.Identifier =
+      $scope.model.jObject.receiverProvider.entityBasicData.identifier =
         $scope.receiverServiceProvider.obj.bulstat;
-      $scope.model.jObject.ReceiverProvider.EntityBasicData.Name =
+      $scope.model.jObject.receiverProvider.entityBasicData.name =
         $scope.receiverServiceProvider.obj.name;
     };
 
@@ -93,9 +88,7 @@
           id: $scope.model.docId,
           docTypeUri: registerIndex + '-' + batchNumber,
           abbcdnKey: abbcdnKey
-        }, {})
-        .$promise
-        .then(function (data) {
+        }, {}).$promise.then(function (data) {
           $modal.open({
             templateUrl: 'js/ems/docs/views/portalModal.html',
             controller: 'PortalModalCtrl',

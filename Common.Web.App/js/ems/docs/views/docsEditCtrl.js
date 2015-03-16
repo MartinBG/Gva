@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function DocsEditCtrl(
@@ -39,11 +39,11 @@
     };
 
     $scope.eSign = function () {
-      throw 'not implemented';
+      // TODO SIGNING throw 'not implemented';
     };
 
     $scope.undoESign = function () {
-      throw 'not implemented';
+      // TODO SIGNING throw 'not implemented';
     };
 
     $scope.enterEditMode = function () {
@@ -87,6 +87,17 @@
           docEntryTypeAlias: docEntryTypeAlias,
           docTypeAlias: docTypeAlias
         }, {}).$promise.then(function (result) {
+          return $state.go('root.docs.edit.view', { id: result.docId });
+        });
+    };
+
+    $scope.attachRemovingIrregularities = function () {
+      return Docs.createPublicChild({
+          id: doc.docId
+      }, {
+        docTypeAlias: 'RemovingIrregularitiesInstructions',
+        correspondents: _.pluck(doc.docCorrespondents, 'nomValueId')
+      }).$promise.then(function (result) {
           return $state.go('root.docs.edit.view', { id: result.docId });
         });
     };
@@ -419,4 +430,4 @@
   };
 
   angular.module('ems').controller('DocsEditCtrl', DocsEditCtrl);
-}(angular));
+}(angular, _));

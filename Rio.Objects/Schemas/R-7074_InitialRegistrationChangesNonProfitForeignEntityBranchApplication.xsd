@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7074" 
+	xmlns="http://ereg.egov.bg/segment/R-7074"
+	xmlns:ssu="http://ereg.egov.bg/value/0008-000077" 
+	xmlns:dtu="http://ereg.egov.bg/segment/0009-000003" 
+	xmlns:dtn="http://ereg.egov.bg/value/0008-000007" 
+	xmlns:espbd="http://ereg.egov.bg/segment/0009-000002" 
+	xmlns:at="http://ereg.egov.bg/value/0008-000144" 
+	xmlns:ssn="http://ereg.egov.bg/value/0008-000131" 
+	xmlns:du="http://ereg.egov.bg/segment/0009-000001" 
+	xmlns:aate="http://ereg.egov.bg/value/0008-000198"
+	xmlns:ebd="http://ereg.egov.bg/segment/0009-000013"
+	xmlns:ubl="http://ereg.egov.bg/value/R-7002"
+	xmlns:ter="http://ereg.egov.bg/segment/R-7008"
+	xmlns:ofl="http://ereg.egov.bg/segment/R-7014"
+	xmlns:r="http://ereg.egov.bg/segment/0009-000142"
+	xmlns:ema="http://ereg.egov.bg/segment/0009-000172"
+	xmlns:cdl="http://ereg.egov.bg/segment/R-7016"
+	xmlns:crd="http://ereg.egov.bg/segment/R-7032"
+	xmlns:esac="http://ereg.egov.bg/value/R-7034"
+	xmlns:eg="http://ereg.egov.bg/value/R-7036"
+	xmlns:em="http://ereg.egov.bg/value/R-7038"
+	xmlns:m="http://ereg.egov.bg/segment/R-7072"
+	xmlns:cca="http://ereg.egov.bg/segment/R-7062"
+	xmlns:fpc="http://ereg.egov.bg/value/R-7064"
+	xmlns:esa="http://ereg.egov.bg/segment/0009-000012"	
+	xmlns:fcid="http://ereg.egov.bg/segment/0009-000010"	
+	xmlns:esaq="http://ereg.egov.bg/value/0008-000035"
+	xmlns:cd="http://ereg.egov.bg/segment/R-7068"
+	xmlns:cres="http://ereg.egov.bg/value/R-4016"
+	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
+	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	
+	
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000077" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000003" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000007" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000002" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000144" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000131" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/0009-000001" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000198" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000013" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7002" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-7008" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-7014" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000142" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000172" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-7016" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-7032" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7034" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7036" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7038" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-7072" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-7062" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7064" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000012" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000010" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-7068" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />	
+	
+	<xsd:element name="InitialRegistrationChangesNonProfitForeignEntityBranchApplication" type="InitialRegistrationChangesNonProfitForeignEntityBranchApplication"/>
+	<xsd:complexType name="InitialRegistrationChangesNonProfitForeignEntityBranchApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за първоначално вписване и вписване на промени за клон на чуждестранно юридическо лице с нестопанска цел</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+      <xsd:element name="SUNAUServiceURI" type="ssu:SUNAUServiceURI" minOccurs="0" />
+      <xsd:element name="DocumentTypeURI" type="dtu:DocumentTypeURI" minOccurs="0" />
+      <xsd:element name="DocumentTypeName" type="dtn:DocumentTypeName" minOccurs="0" />
+      <xsd:element name="ElectronicServiceProviderBasicData" type="espbd:ElectronicServiceProviderBasicData" minOccurs="0" />
+      <xsd:element name="ApplicationType" type="at:ApplicationType" minOccurs="0" />
+      <xsd:element name="SUNAUServiceName" type="ssn:SUNAUServiceName" minOccurs="0" />
+      <xsd:element name="DocumentURI" type="du:DocumentURI" minOccurs="0" />
+      <xsd:element name="SendApplicationWithReceiptAcknowledgedMessage" type="aate:SendApplicationWithReceiptAcknowledgedMessage" minOccurs="0" />
+			<xsd:element name="RecipientEntityBasicData" type="ebd:EntityBasicData" minOccurs="0" />
+			<xsd:element name="URIBatchLNPE" type="ubl:URIBatchLNPE" minOccurs="0" />
+			<xsd:element name="TypeEntryRegister" type="ter:TypeEntryRegister" minOccurs="0" />
+			<xsd:element name="CircumstancesEntityBasicData" type="ebd:EntityBasicData" minOccurs="0" />
+			<xsd:element name="OrganizationalFormLNPE" type="ofl:OrganizationalFormLNPE" minOccurs="0" />
+			<xsd:element name="Residence" type="r:Residence" minOccurs="0" />
+			<xsd:element name="EntityManagementAddress" type="ema:EntityManagementAddress" minOccurs="0" />
+			<xsd:element name="ContactDataLNPE" type="cdl:ContactDataLNPE" minOccurs="0" />
+			<xsd:element name="CourtRegistrationData" type="crd:CourtRegistrationData" minOccurs="0" />
+			<xsd:element name="EntitySubjectActivity" type="esac:EntitySubjectActivity" minOccurs="0" />
+			<xsd:element name="EntityGoals" type="eg:EntityGoals" minOccurs="0" />
+			<xsd:element name="EntityMeans" type="em:EntityMeans" minOccurs="0" />
+			<xsd:element name="Manager" type="m:Manager" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="CourtCaseAct" type="cca:CourtCaseAct" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="FlagPaperCertificate" type="fpc:FlagPaperCertificate" minOccurs="0" />
+			<xsd:element name="ElectronicStatementAuthor" type="esa:ElectronicStatementAuthor" minOccurs="0" />
+			<xsd:element name="ForeignCitizenIdentityDocument" type="fcid:ForeignCitizenIdentityDocument" minOccurs="0" />
+			<xsd:element name="ElectronicServiceAuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+			<xsd:element name="ContactData" type="cd:ContactData" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ReferenceAttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

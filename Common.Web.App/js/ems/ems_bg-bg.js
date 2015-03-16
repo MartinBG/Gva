@@ -38,6 +38,7 @@
           child: 'Подчинен',
           document: 'Документ',
           electronicDocument: 'Електронен документ',
+          removingIrregularities: 'Отстраняване на нередовности',
           resolution: 'Резолюция',
           resolutionParentOnly: 'Резолюция върху документ',
           remark: 'Забележка',
@@ -373,25 +374,9 @@
         }
       },
       removingIrregularity: {
-        serviceProviderName: 'От',
-        firstName: 'Име',
-        secondName: 'Презиме',
-        lastName: 'Фамилия',
-        applicant: 'До',
-        egn: 'ЕГН',
-        email: 'Електронна поща',
-        registerIndex: 'Рег. индекс',
-        sequenceNumber: 'Пореден номер',
-        date: 'Дата',
-        caseUri: '№ на преписка',
-        applicationUri: '№ на заявление',
-        irregularityDocUri: '№ на документ',
-        administrativeBodyName: 'Aдминистративен орган',
         instructionsHeader: 'Инструкции за остраняване на нередностите',
-        employ: 'Длъжностно лице',
-        deadlinePeriod: 'Срок за остраняване на нередностите',
-        irregularities: 'Списък с нередности за остраняване',
-        irregularityType: 'Тип нередност'
+        deadlinePeriod: 'Срок в дни',
+        irregularities: 'Списък с нередности за остраняване'
       },
       receiptAcknowledge: {
         serviceProviderName: 'От',

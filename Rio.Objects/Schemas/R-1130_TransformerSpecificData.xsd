@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1130" xmlns="http://ereg.egov.bg/segment/R-1130" 
+	xmlns:npp="http://ereg.egov.bg/value/R-1124" 
+	xmlns:nsp="http://ereg.egov.bg/value/R-1126" 
+	xmlns:nf="http://ereg.egov.bg/value/R-1128" 
+	xmlns:isn="http://ereg.egov.bg/value/R-1114" 
+	xmlns:sime="http://ereg.egov.bg/value/R-1118" 
+	xmlns:simea="http://ereg.egov.bg/value/R-1120" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1124" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1126" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1128" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1114" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1118" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1120" />
+    <xsd:complexType name="TransformerSpecificData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Специфични данни за трансформатор</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="NominalPrimaryPower" type="npp:NominalPrimaryPower" minOccurs="0" />
+      <xsd:element name="NominalSecondaryPower" type="nsp:NominalSecondaryPower" minOccurs="0" />
+      <xsd:element name="NominalForce" type="nf:NominalForce" minOccurs="0" />
+      <xsd:element name="InstrumentalSubscribeNumber" type="isn:InstrumentalSubscribeNumber" minOccurs="0" />
+      <xsd:element name="SubscriberInstrumentalMetrologyExpertise" type="sime:SubscriberInstrumentalMetrologyExpertise" minOccurs="0" />
+      <xsd:element name="SubscriberInstrumentalMetrologyExpertiseAddress" type="simea:SubscriberInstrumentalMetrologyExpertiseAddress" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

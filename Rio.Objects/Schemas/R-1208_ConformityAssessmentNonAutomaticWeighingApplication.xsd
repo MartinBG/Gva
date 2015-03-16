@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1208"
+            xmlns="http://ereg.egov.bg/segment/R-1208"
+            xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+			xmlns:ansu="http://ereg.egov.bg/segment/0009-000054"
+			xmlns:si="http://ereg.egov.bg/value/0008-000080"
+			xmlns:msd="http://ereg.egov.bg/segment/R-1026"
+			xmlns:pactc="http://ereg.egov.bg/value/R-1194"
+			xmlns:pactn="http://ereg.egov.bg/value/R-1196"
+			xmlns:dawaptt="http://ereg.egov.bg/value/R-1202"
+			xmlns:std="http://ereg.egov.bg/value/R-1204"
+			xmlns:qsd="http://ereg.egov.bg/value/R-1206"
+            xmlns:aie="http://ereg.egov.bg/value/R-1010"
+            xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+            xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000054"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/0008-000080"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/R-1026"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1194"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1196"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1202"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1204"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1206"/>
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1010"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+    <xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
+	<xsd:element name="ConformityAssessmentNonAutomaticWeighingApplication" type="ConformityAssessmentNonAutomaticWeighingApplication"/>
+    <xsd:complexType name="ConformityAssessmentNonAutomaticWeighingApplication">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="bg">Заявление за оценяване на  съответствието на везни с неавтоматично действие</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+			<xsd:element name="AdministrativeNomenclatureServiceURI" type="ansu:AdministrativeNomenclatureServiceURI" minOccurs="0" />
+			<xsd:element name="ServiceInstructions" type="si:ServiceInstructions" minOccurs="0" />
+			<xsd:element name="MCSSupplierData" type="msd:MCSSupplierData" minOccurs="0" />
+			<xsd:element name="ProcedureAssessmentConformityTypeCode" type="pactc:ProcedureAssessmentConformityTypeCode" minOccurs="0" />
+			<xsd:element name="ProcedureAssessmentConformityTypeName" type="pactn:ProcedureAssessmentConformityTypeName" minOccurs="0" />
+			<xsd:element name="DoesApplicantWishAttendProcedureTestType" type="dawaptt:DoesApplicantWishAttendProcedureTestType" minOccurs="0" />
+			<xsd:element name="ScalesTypeDescription" type="std:ScalesTypeDescription" minOccurs="0" />
+			<xsd:element name="QualitySystemDescription" type="qsd:QualitySystemDescription" minOccurs="0" />
+            <xsd:element name="AdditionInformationESA" type="aie:AdditionInformationESA" minOccurs="0"/>
+            <xsd:element name="AttachedDocuments" minOccurs="0">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

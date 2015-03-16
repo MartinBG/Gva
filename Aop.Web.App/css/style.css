@@ -506,3 +506,7 @@ table.treetable span.indenter a {
 .case-font-weight {
     font-weight: bold;
 }
+
+.ta-root .btn-toolbar {
+    margin-bottom: 5px;
+}

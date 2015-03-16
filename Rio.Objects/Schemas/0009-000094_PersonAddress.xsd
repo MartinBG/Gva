@@ -24,7 +24,7 @@
       <xsd:element name="SettlementGRAOCode" type="segc:SettlementGRAOCode" minOccurs="0" />
       <xsd:element name="SettlementGRAOName" type="segn:SettlementGRAOName" minOccurs="0" />
       <xsd:element name="StreetGRAOCode" type="stgc:StreetGRAOCode" minOccurs="0" />
-      <xsd:element name="StreetText" type="stt:StreetТеxt" minOccurs="0" />
+      <xsd:element name="StreetText" type="stt:StreetText" minOccurs="0" />
       <xsd:element name="BuildingNumber" type="bn:BuildingNumber" minOccurs="0" />
       <xsd:element name="Entrance" type="entr:Entrance" minOccurs="0" />
       <xsd:element name="Floor" type="flr:Floor" minOccurs="0" />

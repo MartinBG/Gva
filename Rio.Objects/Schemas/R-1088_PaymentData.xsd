@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1088" xmlns="http://ereg.egov.bg/segment/R-1088" 
+	xmlns:ptc="http://ereg.egov.bg/value/R-1002" 
+	xmlns:ptn="http://ereg.egov.bg/value/R-1004" 
+	xmlns:pcc="http://ereg.egov.bg/value/R-1006" 
+	xmlns:pcn="http://ereg.egov.bg/value/R-1008"
+	xmlns:bn="http://ereg.egov.bg/value/R-1080" 
+	xmlns:bbn="http://ereg.egov.bg/value/R-1082" 
+	xmlns:b="http://ereg.egov.bg/value/R-1084" 
+	xmlns:i="http://ereg.egov.bg/value/R-1086" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1002" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1004" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1006" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1008" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1080" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1082" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1084" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1086" />
+    <xsd:complexType name="PaymentData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за плащане</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="PaymentTypeCode" type="ptc:PaymentTypeCode" minOccurs="0" />
+      <xsd:element name="PaymentTypeName" type="ptn:PaymentTypeName" minOccurs="0" />
+      <xsd:element name="PaymentConditionCode" type="pcc:PaymentConditionCode" minOccurs="0" />
+      <xsd:element name="PaymentConditionName" type="pcn:PaymentConditionName" minOccurs="0" />
+      <xsd:element name="BankName" type="bn:BankName" minOccurs="0" />
+      <xsd:element name="BankBranchName" type="bbn:BankBranchName" minOccurs="0" />
+      <xsd:element name="BIC" type="b:BIC" minOccurs="0" />
+      <xsd:element name="IBAN" type="i:IBAN" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rio.Objects.Enums
 {
+    [Serializable]
     public class BaseNomenclature
     {
         public string Text { get; set; }

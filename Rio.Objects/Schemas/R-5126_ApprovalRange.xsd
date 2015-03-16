@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5126" xmlns="http://ereg.egov.bg/segment/R-5126" 
+	xmlns:atsg="http://ereg.egov.bg/value/R-5118" 
+	xmlns:iara="http://ereg.egov.bg/value/R-5120" 
+	xmlns:iipfa="http://ereg.egov.bg/value/R-5122" 
+	xmlns:oocqs="http://ereg.egov.bg/value/R-5124" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/value/R-5118" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-5120" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-5122" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-5124" />
+	
+    <xsd:complexType name="ApprovalRange">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Обхват на одобрение</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="AircraftTypeSeriesGroup" type="atsg:AircraftTypeSeriesGroup" minOccurs="0" />
+      <xsd:element name="IsAirworthinessReviewAuthorized" type="iara:IsAirworthinessReviewAuthorized" minOccurs="0" />
+      <xsd:element name="IsIssuancePermitFlyAllowed" type="iipfa:IsIssuancePermitFlyAllowed" minOccurs="0" />
+      <xsd:element name="OrganizationOperatingControlQualitySystem" type="oocqs:OrganizationOperatingControlQualitySystem" minOccurs="0" />
+    </xsd:sequence>                         
+  </xsd:complexType>
+</xsd:schema>

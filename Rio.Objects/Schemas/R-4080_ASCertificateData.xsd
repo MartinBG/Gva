@@ -13,7 +13,7 @@ elementFormDefault="qualified">
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4072" />
 	<xsd:complexType name="ASCertificateData">
 		<xsd:annotation>
-			<xsd:documentation xml:lang="bg">Данни за издадено свидетелство за правоспсобност на авиационен персонал</xsd:documentation>
+			<xsd:documentation xml:lang="bg">Данни за издадено свидетелство за правоспобност на авиационен персонал</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="ASCertificateNumber" type="acn:ASCertificateNumber" minOccurs="0" />

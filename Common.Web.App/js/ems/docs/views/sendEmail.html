@@ -24,11 +24,11 @@
           </div>
         </div>
 
-         <div class="row">
+        <div class="row">
           <div class="form-group col-sm-12" sc-has-error="body">
             <label class="control-label" l10n-text="docs.edit.sendEmail.body"></label>
             <sc-validation-error field-name="body" validations="{required: 'default'}"></sc-validation-error>
-            <sc-textarea rows="3" ng-model="email.body" name="body" ng-required="true"></sc-textarea>
+            <div text-angular="text-angular" name="body" ng-model="email.body" ng-required="true" class="ta-root"></div>
           </div>
         </div>
 
@@ -40,7 +40,7 @@
                 <span ng-repeat="pf in email.publicFiles">
                   <i ng-click="removeFile(pf)" class="glyphicon glyphicon-remove-circle" style="cursor: pointer; color:#428bca; margin-left:5px;"></i>
                   <i style="color:#428bca;" class="fa fa-file"></i>
-                  <span>{{pf.name}} </span> (<a ng-href="{{ pf.docFileUrl }}" target="_blank"><span>{{ pf.file.name }}</span></a>) <br />
+                  <span>{{pf.name}} </span> (<a ng-show="!pf.isEditableFile" ng-href="{{pf.docFileUrl}}" target="_blank"><span>{{ pf.file.name }}</span></a><a ng-show="pf.isEditableFile" ng-click="viewEditableFile(pf)"><span>{{ pf.file.name }}</span></a>) <br />
                 </span>
               </div>
             </div>

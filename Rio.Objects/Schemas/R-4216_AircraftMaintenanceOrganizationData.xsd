@@ -5,9 +5,9 @@
 	xmlns:en="http://ereg.egov.bg/value/0008-000029"
 	xmlns:r="http://ereg.egov.bg/segment/0009-000142"
 	xmlns:ema="http://ereg.egov.bg/segment/0009-000172"
-	xmlns:pnd="http://ereg.egov.bg/value/R-4210"
-	xmlns:fnd="http://ereg.egov.bg/value/R-4212"
-	xmlns:ea="http://ereg.egov.bg/value/R-4214"
+	xmlns:pnd="http://ereg.egov.bg/value/R-1012"
+	xmlns:fnd="http://ereg.egov.bg/value/R-1014"
+	xmlns:ea="http://ereg.egov.bg/value/R-1016"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	elementFormDefault="qualified">
 	
@@ -15,9 +15,9 @@
 	<xsd:import namespace="http://ereg.egov.bg/value/0008-000029" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000142" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000172" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4210" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4212" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4214" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1012" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1014" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1016" />
 		
 	<xsd:complexType name="AircraftMaintenanceOrganizationData">
 		<xsd:annotation>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1036" xmlns="http://ereg.egov.bg/segment/R-1036" 
+	xmlns:med="http://ereg.egov.bg/value/R-1030" 
+	xmlns:mei="http://ereg.egov.bg/value/R-1032" 
+	xmlns:mey="http://ereg.egov.bg/value/R-1034" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1030" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1032" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1034" />
+    <xsd:complexType name="MeasuringEquipmentSampleData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Данни за представен образец за измерване</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="MeasuringEquipmentDesc" type="med:MeasuringEquipmentDesc" minOccurs="0" />
+      <xsd:element name="MeasuringEquipmentID" type="mei:MeasuringEquipmentID" minOccurs="0" />
+      <xsd:element name="MeasuringEquipmentYear" type="mey:MeasuringEquipmentYear" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

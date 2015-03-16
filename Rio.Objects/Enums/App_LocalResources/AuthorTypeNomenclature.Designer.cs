@@ -77,5 +77,23 @@ namespace Rio.Objects.Enums.App_LocalResources {
                 return ResourceManager.GetString("Physical", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Български гражданин или постоянно пребиваващ чужденец.
+        /// </summary>
+        public static string PhysicalBulgarian {
+            get {
+                return ResourceManager.GetString("PhysicalBulgarian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Чужд гражданин.
+        /// </summary>
+        public static string PhysicalForeign {
+            get {
+                return ResourceManager.GetString("PhysicalForeign", resourceCulture);
+            }
+        }
     }
 }

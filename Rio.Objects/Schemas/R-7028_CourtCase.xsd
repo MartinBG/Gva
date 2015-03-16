@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7028" 
+	xmlns="http://ereg.egov.bg/segment/R-7028" 
+	xmlns:c="http://ereg.egov.bg/segment/R-7022"
+	xmlns:ccn="http://ereg.egov.bg/value/R-7024"
+	xmlns:ccy="http://ereg.egov.bg/value/R-7026"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-7022" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7024" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-7026" />
+
+	<xsd:complexType name="CourtCase">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Съдебно дело</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Court" type="c:Court" minOccurs="0" />
+			<xsd:element name="CourtCaseNumber" type="ccn:CourtCaseNumber" minOccurs="0" />
+			<xsd:element name="CourtCaseYear" type="ccy:CourtCaseYear" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

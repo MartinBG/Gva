@@ -640,3 +640,7 @@ table.treetable span.indenter a {
 .table {
     font-size: 11px;
 }
+
+.ta-root .btn-toolbar {
+    margin-bottom: 5px;
+}

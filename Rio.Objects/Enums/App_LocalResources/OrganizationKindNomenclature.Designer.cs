@@ -79,6 +79,24 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to организация по част М, подчаст F.
+        /// </summary>
+        public static string MSubpartF {
+            get {
+                return ResourceManager.GetString("MSubpartF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to организация по част М, подчаст G.
+        /// </summary>
+        public static string MSubpartG {
+            get {
+                return ResourceManager.GetString("MSubpartG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Non-Complex.
         /// </summary>
         public static string NonComplex {
@@ -93,6 +111,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string Own {
             get {
                 return ResourceManager.GetString("Own", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to организация по част 145.
+        /// </summary>
+        public static string Part145 {
+            get {
+                return ResourceManager.GetString("Part145", resourceCulture);
             }
         }
     }

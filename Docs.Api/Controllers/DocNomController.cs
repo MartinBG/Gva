@@ -948,12 +948,11 @@ namespace Docs.Api.Controllers
         }
 
         [Route("irregularityType")]
-        public IHttpActionResult GetIrregularityTypes(string term = null, int? docTypeId = null, int offset = 0, int? limit = null)
+        public IHttpActionResult GetIrregularityTypes(string term = null, int offset = 0, int? limit = null)
         {
             var predicate =
                 PredicateBuilder.True<IrregularityType>()
-                .AndStringContains(e => e.Name, term)
-                .AndEquals(e => e.DocTypeId, docTypeId);
+                .AndStringContains(e => e.Name, term);
 
             var results =
                 this.unitOfWork.DbContext.Set<IrregularityType>()

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-1122" xmlns="http://ereg.egov.bg/segment/R-1122" 
+	xmlns:est="http://ereg.egov.bg/value/R-1078" 
+	xmlns:epr="http://ereg.egov.bg/value/R-1108" 
+	xmlns:etr="http://ereg.egov.bg/value/R-1110" 
+	xmlns:ei="http://ereg.egov.bg/value/R-1112" 
+	xmlns:isn="http://ereg.egov.bg/value/R-1114" 
+	xmlns:iwn="http://ereg.egov.bg/value/R-1116" 
+	xmlns:sime="http://ereg.egov.bg/value/R-1118" 
+	xmlns:simea="http://ereg.egov.bg/value/R-1120" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1078" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1108" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1110" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1112" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1114" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1116" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1118" />
+    <xsd:import namespace="http://ereg.egov.bg/value/R-1120" />
+    <xsd:complexType name="ElectrometerSpecificData">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Специфични данни за електромер</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="ElectrometerSpecificType" type="est:ElectrometerSpecificType" minOccurs="0" />
+      <xsd:element name="ElectrometerPowerRange" type="epr:ElectrometerPowerRange" minOccurs="0" />
+      <xsd:element name="ElectrometerTensionRange" type="etr:ElectrometerTensionRange" minOccurs="0" />
+      <xsd:element name="ElectrometerIndication" type="ei:ElectrometerIndication" minOccurs="0" />
+      <xsd:element name="InstrumentalSubscribeNumber" type="isn:InstrumentalSubscribeNumber" minOccurs="0" />
+      <xsd:element name="InstrumentalWhiteNumber" type="iwn:InstrumentalWhiteNumber" minOccurs="0" />
+      <xsd:element name="SubscriberInstrumentalMetrologyExpertise" type="sime:SubscriberInstrumentalMetrologyExpertise" minOccurs="0" />
+      <xsd:element name="SubscriberInstrumentalMetrologyExpertiseAddress" type="simea:SubscriberInstrumentalMetrologyExpertiseAddress" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

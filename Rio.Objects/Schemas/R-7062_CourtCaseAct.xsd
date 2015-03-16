@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-7062"
+	xmlns="http://ereg.egov.bg/segment/R-7062"
+	xmlns:cc="http://ereg.egov.bg/segment/R-7028"
+	xmlns:ccan="http://ereg.egov.bg/value/R-7048"
+	xmlns:ccad="http://ereg.egov.bg/value/R-7050"
+	xmlns:ccak="http://ereg.egov.bg/segment/R-7056"
+	xmlns:dc="http://ereg.egov.bg/value/0008-000116"
+	xmlns:ft="http://ereg.egov.bg/value/0008-000041"
+	xmlns:fn="http://ereg.egov.bg/value/R-7058"
+	xmlns:fch="http://ereg.egov.bg/value/R-7060"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified">
+
+  <xsd:import namespace="http://ereg.egov.bg/segment/R-7028" />
+  <xsd:import namespace="http://ereg.egov.bg/value/R-7048" />
+  <xsd:import namespace="http://ereg.egov.bg/value/R-7050" />
+  <xsd:import namespace="http://ereg.egov.bg/segment/R-7056" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000116" />
+  <xsd:import namespace="http://ereg.egov.bg/value/0008-000041" />
+  <xsd:import namespace="http://ereg.egov.bg/value/R-7058" />
+  <xsd:import namespace="http://ereg.egov.bg/value/R-7060" />
+
+  <xsd:complexType name="CourtCaseAct">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Съдебен акт</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="CourtCase" type="cc:CourtCase" minOccurs="0" />
+      <xsd:element name="CourtCaseActNumber" type="ccan:CourtCaseActNumber" minOccurs="0" />
+      <xsd:element name="CourtCaseActDate" type="ccad:CourtCaseActDate" minOccurs="0" />
+      <xsd:element name="CourtCaseActKind" type="ccak:CourtCaseActKind" minOccurs="0" />
+      <xsd:element name="Document" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="DocumentContent" type="dc:DocumentContent" minOccurs="0" />
+            <xsd:element name="FileType" type="ft:FileType" minOccurs="0" />
+            <xsd:element name="FileName" type="fn:FileName" minOccurs="0" />
+          </xsd:sequence>
+
+          <xsd:attribute name="fileIdentifier" type="xsd:string"/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

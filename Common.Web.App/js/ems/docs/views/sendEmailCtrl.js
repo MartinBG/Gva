@@ -12,10 +12,35 @@
     $scope,
     $state,
     $stateParams,
+    $modal,
     Docs,
     email
   ) {
     $scope.email = email.email;
+
+    $scope.viewEditableFile = function viewEditableFile(docFileDO) {
+      return Docs
+        .createTicket({
+          id: docFileDO.docId,
+          docFileId: docFileDO.docFileId,
+          fileKey: docFileDO.file.key
+        }, {})
+        .$promise
+        .then(function (data) {
+          $modal.open({
+            templateUrl: 'js/ems/docs/views/portalModal.html',
+            controller: 'PortalModalCtrl',
+            backdrop: 'static',
+            keyboard: false,
+            windowClass: 'ems-portal-modal-window',
+            resolve: {
+              iframeSrc: function () {
+                return data.url;
+              }
+            }
+          });
+        });
+    };
 
     $scope.send = function () {
       return $scope.sendEmailForm.$validate().then(function () {
@@ -59,6 +84,7 @@
     '$scope',
     '$state',
     '$stateParams',
+    '$modal',
     'Docs',
     'email'
   ];

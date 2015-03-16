@@ -15,7 +15,7 @@ using Rio.Data.ServiceContracts.DocCommunicator;
 
 namespace Gva.DocCommunicator
 {
-    public class DocCommunicatorService : Rio.Data.ServiceContracts.DocCommunicator.IAISDocumentServiceViewer, IDisposable
+    public class DocCommunicatorService : Rio.Data.ServiceContracts.DocCommunicator.IAisCommunicator, IDisposable
     {
         private IUnitOfWork unitOfWork;
         private IRioDocumentParser rioDocumentParser;
@@ -102,9 +102,14 @@ namespace Gva.DocCommunicator
             {
                 case NomenclatureType.IrregularityTypes:
                     {
-                        for (int i = 1; i <= 5; i++)
+                        var irregularityTypes =
+                            this.unitOfWork.DbContext.Set<IrregularityType>()
+                            .OrderBy(e => e.IrregularityTypeId)
+                            .ToList();
+
+                        foreach (var irregularityType in irregularityTypes)
                         {
-                            list.Add(new NomenclatureItem { Type = NomenclatureType.IrregularityTypes, Value = "Нередовност " + i, Text = "Нередовност " + i, Description = "Описание " + i });
+                            list.Add(new NomenclatureItem { Type = NomenclatureType.IrregularityTypes, Value = irregularityType.Alias, Text = irregularityType.Name, Description = irregularityType.Description });
                         }
                     } break;
 
@@ -166,6 +171,15 @@ namespace Gva.DocCommunicator
                     {
                         var nom = new Rio.Objects.Enums.ASCertificateTypeNomenclature();
                         foreach (var item in nom.CabinCrewValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.ASCertificateTypeChangeCompetent:
+                    {
+                        var nom = new Rio.Objects.Enums.ASCertificateTypeNomenclature();
+                        foreach (var item in nom.ChangeCompetentValues)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
                         }
@@ -321,7 +335,7 @@ namespace Gva.DocCommunicator
                 case NomenclatureType.AircraftOperationType:
                     {
                         var nom = new Rio.Objects.Enums.AircraftOperationTypeNomenclature();
-                        foreach (var item in nom.Values)
+                        foreach (var item in nom.Values.OrderBy(e => e.Text))
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
                         }
@@ -529,6 +543,24 @@ namespace Gva.DocCommunicator
                     {
                         var nom = new Rio.Objects.Enums.TrainingModuleNomenclature();
                         foreach (var item in nom.PeriodicalValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.AircraftClassQualificationClassInstructor:
+                    {
+                        var nom = new Rio.Objects.Enums.AircraftClassQualificationClassNomenclature();
+                        foreach (var item in nom.InstructorValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.ASCertificateTypeInstructor:
+                    {
+                        var nom = new Rio.Objects.Enums.ASCertificateTypeNomenclature();
+                        foreach (var item in nom.InstructorValues)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
                         }

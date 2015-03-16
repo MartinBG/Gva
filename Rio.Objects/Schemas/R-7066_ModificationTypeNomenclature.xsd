@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/nomenclature/R-7066" xmlns="http://ereg.egov.bg/nomenclature/R-7066" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:simpleType name="ModificationTypeNomenclature">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="bg">Номенклатура на видовете модификации</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Empty" />
+      <xsd:enumeration value="Create" />
+      <xsd:enumeration value="Update" />
+      <xsd:enumeration value="Delete" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

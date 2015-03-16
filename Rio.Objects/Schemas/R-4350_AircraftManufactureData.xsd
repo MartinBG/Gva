@@ -6,7 +6,6 @@
 	xmlns:amp="http://ereg.egov.bg/value/R-4328"
 	xmlns:amd="http://ereg.egov.bg/value/R-4330"
 	xmlns:at="http://ereg.egov.bg/segment/R-4158" 
-	xmlns:as="http://ereg.egov.bg/value/R-4332"
 	xmlns:asn="http://ereg.egov.bg/value/R-4334"
 	xmlns:au="http://ereg.egov.bg/value/R-4336"
 	xmlns:clr="http://ereg.egov.bg/segment/R-4324"
@@ -15,7 +14,6 @@
 	xmlns:arm="http://ereg.egov.bg/value/R-4340"
 	xmlns:asc="http://ereg.egov.bg/value/R-4342"
 	xmlns:fcn="http://ereg.egov.bg/value/R-4344"
-	xmlns:fcctn="http://ereg.egov.bg/value/R-4346"
 	xmlns:fcci="http://ereg.egov.bg/segment/R-4326"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	elementFormDefault="qualified">
@@ -25,7 +23,6 @@
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4328" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4330" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4332" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4334" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4336" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4324" />
@@ -34,7 +31,6 @@
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4342" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4344" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4346" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4326" />
 
 	<xsd:complexType name="AircraftManufactureData">
@@ -47,7 +43,6 @@
 			<xsd:element name="AircraftManufacturePlace" type="amp:AircraftManufacturePlace" minOccurs="0" />
 			<xsd:element name="AircraftManufactureDate" type="amd:AircraftManufactureDate" minOccurs="0" />
 			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
-			<xsd:element name="AircraftSeries" type="as:AircraftSeries" minOccurs="0" />
 			<xsd:element name="AircraftSerialNumber" type="asn:AircraftSerialNumber" minOccurs="0" />
 			<xsd:element name="AircraftUnused" type="au:AircraftUnused" minOccurs="0" />
 			<xsd:element name="CountryLastRegistration" type="clr:CountryLastRegistration" minOccurs="0" />
@@ -57,7 +52,6 @@
 			<xsd:element name="DesiredAircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
 			<xsd:element name="AircraftStandardsCertified" type="asc:AircraftStandardsCertified" minOccurs="0" />
 			<xsd:element name="FlightCertificateNumber" type="fcn:FlightCertificateNumber" minOccurs="0" />
-			<xsd:element name="FlightCertificateCertificationTableNumber" type="fcctn:FlightCertificateCertificationTableNumber" minOccurs="0" />
 			<xsd:element name="FlightCertificateCountryIssuer" type="fcci:FlightCertificateCountryIssuer" minOccurs="0" />
 		</xsd:sequence>
 	</xsd:complexType>

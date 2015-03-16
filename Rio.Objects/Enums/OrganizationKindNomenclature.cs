@@ -35,6 +35,9 @@ namespace Rio.Objects.Enums
         public static readonly OrganizationKindNomenclature Own = new OrganizationKindNomenclature { ResourceKey = "Own", Code = "03" };
         public static readonly OrganizationKindNomenclature Hired = new OrganizationKindNomenclature { ResourceKey = "Hired", Code = "04" };
 
+        public static readonly OrganizationKindNomenclature MSubpartG = new OrganizationKindNomenclature { ResourceKey = "MSubpartG", Code = "05" };
+        public static readonly OrganizationKindNomenclature MSubpartF = new OrganizationKindNomenclature { ResourceKey = "MSubpartF", Code = "06" };
+        public static readonly OrganizationKindNomenclature Part145 = new OrganizationKindNomenclature { ResourceKey = "Part145", Code = "07" };
 
         public static List<OrganizationKindNomenclature> Values = new List<OrganizationKindNomenclature>()
         {
