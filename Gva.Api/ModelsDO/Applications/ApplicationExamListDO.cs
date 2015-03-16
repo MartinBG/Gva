@@ -5,6 +5,8 @@ namespace Gva.Api.ModelsDO.Applications
 {
     public class ApplicationExamListDO
     {
+        public int AppExamId { get; set; }
+
         public int AppPartId { get; set; }
 
         public int? LotId { get; set; }

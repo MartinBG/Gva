@@ -25,13 +25,8 @@
     };
 
     $scope.$watch('examsForExport', function() {
-        $scope.examsData = _.map($scope.examsForExport, function(exam) {
-          return {
-            lotId: exam.lotId,
-            appPartId: exam.appPartId,
-            certCampCode: exam.certCampCode,
-            examCode: exam.examCode
-          };
+        $scope.examsIds = _.map($scope.examsForExport, function(exam) {
+          return exam.appExamId;
         });
       });
   }

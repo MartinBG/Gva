@@ -1,6 +1,6 @@
 <div>
   <h5 class="form-header" l10n-text="persons.exportExamsData.exportData"></h5>
-  <sc-link-button name="exportBtn" ng-disabled="!examsData.length"ng-href="api/exportXml/examsData?examsData={{examsData}}" target="_blank" sc-access-token text="persons.exportExamsData.exportData" class="btn btn-primary btn-sm"></sc-link-button>
+  <sc-link-button name="exportBtn" ng-disabled="!examsIds.length"ng-href="api/exportXml/examsData?examsIds={{examsIds}}" target="_blank" sc-access-token text="persons.exportExamsData.exportData" class="btn btn-primary btn-sm"></sc-link-button>
   <sc-button btn-click="addExams()" class="btn btn-default btn-sm" icon="glyphicon-plus"></sc-button>
   <sc-datatable items="examsForExport" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
     <sc-column sortable="false" class="buttons-cell" has-content="true">

@@ -26,23 +26,27 @@ using Gva.Api.Models.Views;
 
 namespace Gva.Api.Controllers.Persons
 {
+    [RoutePrefix("api/exportXml")]
     public class PersonExportXmlController : ApiController
     {
+        private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
         private IApplicationRepository applicationRepository;
 
         public PersonExportXmlController(
+            IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             INomRepository nomRepository,
             IApplicationRepository applicationRepository)
         {
+            this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
             this.applicationRepository = applicationRepository;
         }
 
-        [Route("api/exportXml/personsData")]
+        [Route("personsData")]
         [HttpGet]
         public HttpResponseMessage ExportPersonsData([FromUri]string personIds)
         {
@@ -70,18 +74,21 @@ namespace Gva.Api.Controllers.Persons
             return result;
         }
 
-        [Route("api/exportXml/examsData")]
+        [Route("examsData")]
         [HttpGet]
-        public HttpResponseMessage ExportExamsData([FromUri]string examsData)
+        public HttpResponseMessage ExportExamsData([FromUri]string examsIds)
         {
             XElement rowset = new XElement("ROWSET");
             XDocument xmlDoc = new XDocument(
                  new XDeclaration("1.0", "utf-8", null),
                  rowset);
 
-            foreach (PersonAppExamDO exam in JsonConvert.DeserializeObject<List<PersonAppExamDO>>(examsData))
+            foreach (int examId in JsonConvert.DeserializeObject<List<int>>(examsIds))
             {
-                
+                GvaViewPersonApplicationExam exam = this.unitOfWork.DbContext.Set<GvaViewPersonApplicationExam>()
+                    .Where(a => a.AppExamId == examId)
+                    .Single();
+
                 XElement row = new XElement("ROW");
                 this.AppendExamData(row, exam);
                 rowset.Add(row);
@@ -100,7 +107,7 @@ namespace Gva.Api.Controllers.Persons
         }
 
 
-        private void AppendExamData(XElement row, PersonAppExamDO exam)
+        private void AppendExamData(XElement row, GvaViewPersonApplicationExam exam)
         {
             PersonDataDO person = this.lotRepository.GetLotIndex(exam.LotId).Index.GetPart<PersonDataDO>("personData").Content;
             GvaViewApplication application = this.applicationRepository.GetApplicationByPartId(exam.AppPartId);
@@ -119,6 +126,7 @@ namespace Gva.Api.Controllers.Persons
             var personAddress = this.lotRepository.GetLotIndex(id).Index.GetParts<PersonAddressDO>("personAddresses")
                     .Where(a => a.Content.Valid.Code == "Y")
                     .FirstOrDefault();
+
             row.Add(new XElement("NAME", person.FirstName));
             row.Add(new XElement("SURNAME", person.MiddleName));
             row.Add(new XElement("FAMILY", person.LastName));

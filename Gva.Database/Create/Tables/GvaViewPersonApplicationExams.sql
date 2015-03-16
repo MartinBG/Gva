@@ -9,6 +9,7 @@ CREATE TABLE [dbo].[GvaViewPersonApplicationExams] (
     [ExamCode]             NVARCHAR(50)  NOT NULL,
     [ExamName]             NVARCHAR(50)  NOT NULL,
     [ExamDate]             DATETIME2     NOT NULL,
+    [AppExamId]            INT  IDENTITY NOT NULL,
     CONSTRAINT [PK_GvaViewPersonApplicationExams]                 PRIMARY KEY ([LotId], [AppPartId], [ExamCode], [ExamDate]),
     CONSTRAINT [FK_GvaViewPersonApplicationExams_GvaViewApplications] FOREIGN KEY ([LotId], [AppPartId]) REFERENCES [dbo].[GvaViewApplications] ([LotId], [LotPartId]),
     CONSTRAINT [FK_GvaViewPersonApplicationExams_GvaViewPersons]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[GvaViewPersons] ([LotId])
@@ -23,4 +24,5 @@ exec spDescColumn N'GvaViewPersonApplicationExams', N'CertCampName'         , N'
 exec spDescColumn N'GvaViewPersonApplicationExams', N'ExamCode'             , N'Код на изпита.'
 exec spDescColumn N'GvaViewPersonApplicationExams', N'ExamName'             , N'Наименование на изпита.'
 exec spDescColumn N'GvaViewPersonApplicationExams', N'ExamDate'             , N'Дата на явяване на изпита.'
+exec spDescColumn N'GvaViewPersonApplicationExams', N'AppExamId'            , N'Идентификатор на изпита.'
 GO

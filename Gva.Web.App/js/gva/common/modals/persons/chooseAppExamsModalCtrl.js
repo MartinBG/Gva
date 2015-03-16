@@ -47,9 +47,7 @@
           .then(function (exams) {
           return _.filter(exams, function (exam) {
             return _.where(scModalParams.includedExams, {
-              testCode: exam.testCode,
-              certCampCode: exam.certCampCode,
-              applicationId: exam.applicationId
+              appExamId: exam.appExamId
             })
               .length === 0;
           });

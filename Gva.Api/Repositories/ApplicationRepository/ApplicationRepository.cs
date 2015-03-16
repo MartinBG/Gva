@@ -113,6 +113,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 })
                 .Select(ap => new ApplicationExamListDO()
                 {
+                    AppExamId = ap.Exam.AppExamId,
                     AppPartId = ap.Exam.AppPartId,
                     LotId = ap.Exam.LotId,
                     DocumentNumber = ap.Application.DocumentNumber,

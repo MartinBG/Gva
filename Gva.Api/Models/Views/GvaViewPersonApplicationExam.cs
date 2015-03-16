@@ -24,6 +24,8 @@ namespace Gva.Api.Models.Views
 
         public DateTime ExamDate { get; set; }
 
+        public int AppExamId { get; set; }
+
         public virtual GvaViewApplication Application { get; set; }
 
         public virtual GvaViewPerson Person { get; set; }
@@ -42,6 +44,9 @@ namespace Gva.Api.Models.Views
 
             this.Property(t => t.AppPartId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            this.Property(t => t.AppExamId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(t => t.CertCampCode)
                 .IsRequired()
@@ -68,6 +73,7 @@ namespace Gva.Api.Models.Views
             this.Property(t => t.ExamCode).HasColumnName("ExamCode");
             this.Property(t => t.ExamName).HasColumnName("ExamName");
             this.Property(t => t.ExamDate).HasColumnName("ExamDate");
+            this.Property(t => t.AppExamId).HasColumnName("AppExamId");
 
             // Relationships
             this.HasRequired(t => t.Application)
