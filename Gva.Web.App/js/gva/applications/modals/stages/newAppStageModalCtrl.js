@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, moment*/
+(function (angular, moment) {
   'use strict';
 
   function NewAppStageModalCtrl(
@@ -45,10 +45,11 @@
       'scModalParams',
       function (scModalParams) {
         return {
-          ordinal: scModalParams.ordinal
+          ordinal: scModalParams.ordinal,
+          date: moment()
         };
       }
     ]
   };
   angular.module('gva').controller('NewAppStageModalCtrl', NewAppStageModalCtrl);
-}(angular));
+}(angular, moment));
