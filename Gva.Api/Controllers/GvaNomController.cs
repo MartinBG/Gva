@@ -118,7 +118,7 @@ namespace Gva.Api.Controllers
 
             if (!string.IsNullOrEmpty(term))
             {
-                return Ok(exams.Where(a => a.name.Contains(term)));
+                return Ok(exams.Where(a => a.name.ToLower().Contains(term.ToLower())));
             }
 
             return Ok(exams);
@@ -137,7 +137,7 @@ namespace Gva.Api.Controllers
                 
             if (!string.IsNullOrEmpty(term))
             {
-                return Ok(campaigns.Where(a => a.name.Contains(term)));
+                return Ok(campaigns.Where(a => a.name.ToLower().Contains(term.ToLower())));
             }
 
             return Ok(campaigns);
@@ -156,7 +156,7 @@ namespace Gva.Api.Controllers
 
             if (!string.IsNullOrEmpty(term))
             {
-                return Ok(qualifications.Where(a => a.name.Contains(term)));
+                return Ok(qualifications.Where(a => a.name.ToLower().Contains(term.ToLower())));
             }
 
             return Ok(qualifications);
@@ -178,7 +178,7 @@ namespace Gva.Api.Controllers
 
             if (!string.IsNullOrEmpty(term))
             {
-                return Ok(audits.Where(a => a.name.Contains(term)));
+                return Ok(audits.Where(a => a.name.ToLower().Contains(term.ToLower())));
             }
 
             return Ok(audits);
@@ -259,7 +259,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetInspectors(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.personRepository.GetPersons(isInspector: true, names: term, exact: false, offset: offset, limit: limit)
+                this.personRepository.GetPersons(isInspector: true, offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
@@ -268,7 +268,7 @@ namespace Gva.Api.Controllers
 
             if (!string.IsNullOrEmpty(term))
             {
-                returnValue = returnValue.Where(v => v.name.ToLower().Contains(term));
+                returnValue = returnValue.Where(v => v.name.ToLower().Contains(term.ToLower()));
             }
 
             return Ok(returnValue);
@@ -278,7 +278,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetAwExaminers(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.personRepository.GetAwExaminers(names: term, offset: offset, limit: limit)
+                this.personRepository.GetAwExaminers(offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
@@ -287,7 +287,7 @@ namespace Gva.Api.Controllers
 
             if (!string.IsNullOrEmpty(term))
             {
-                returnValue = returnValue.Where(v => v.name.ToLower().Contains(term));
+                returnValue = returnValue.Where(v => v.name.ToLower().Contains(term.ToLower()));
             }
 
             return Ok(returnValue);
@@ -298,7 +298,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetStaffExaminers(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.personRepository.GetStaffExaminers(names: term, offset: offset, limit: limit)
+                this.personRepository.GetStaffExaminers(offset: offset, limit: limit)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
@@ -307,7 +307,7 @@ namespace Gva.Api.Controllers
 
             if (!string.IsNullOrEmpty(term))
             {
-                returnValue = returnValue.Where(v => v.name.ToLower().Contains(term));
+                returnValue = returnValue.Where(v => v.name.ToLower().Contains(term.ToLower()));
             }
 
             return Ok(returnValue);
@@ -828,12 +828,12 @@ namespace Gva.Api.Controllers
 
             if (!string.IsNullOrWhiteSpace(code))
             {
-                nomValues = nomValues.Where(nv => nv.Code.Contains(code));
+                nomValues = nomValues.Where(nv => nv.Code.ToLower().Contains(code.ToLower()));
             }
 
             if (!string.IsNullOrWhiteSpace(name))
             {
-                nomValues = nomValues.Where(nv => nv.Name.Contains(name));
+                nomValues = nomValues.Where(nv => nv.Name.ToLower().Contains(name.ToLower()));
             }
 
             if (lotId.HasValue)
