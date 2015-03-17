@@ -96,17 +96,17 @@
     };
 
     $scope.newAmendment = function () {
-      if (!$scope.currentReview.amendment1) {
-        $scope.currentReview.amendment1 = {
-          inspector: {}
+      if (!$scope.aw.part.form15Amendments || !$scope.aw.part.form15Amendments.amendment1) {
+        $scope.aw.part.form15Amendments = {
+          amendment1 : {
+            inspector: {}
+          }
         };
-      } else if (!$scope.currentReview.amendment2) {
-        $scope.currentReview.amendment2 = {
+      } else if (!$scope.aw.part.form15Amendments.amendment2) {
+        $scope.aw.part.form15Amendments.amendment2 = {
           inspector: {}
         };
       }
-
-      $scope.isEditReview = true;
     };
 
     $scope.editReview = function () {
@@ -137,9 +137,7 @@
     $scope.saveReview = function () {
       var actAlias = $scope.aw.part.airworthinessCertificateType.alias,
           form;
-      if (actAlias === 'f24' || actAlias === 'f25') {
-        form = $scope.airworthinessReviewF15Form;
-      } else if (actAlias === 'directive8' || actAlias === 'vla' || actAlias === 'unknown') {
+      if (actAlias === 'directive8' || actAlias === 'vla' || actAlias === 'unknown') {
         form = $scope.airworthinessReviewOtherForm;
       }
 

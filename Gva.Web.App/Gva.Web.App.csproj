@@ -57,6 +57,7 @@
     <Content Include="js\common\common_bg-bg.js" />
     <Content Include="js\common\root\views\root.html" />
     <Content Include="js\common\root\views\rootCtrl.js" />
+    <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessForm15.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessReviewOther.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessFM.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessView.html" />
@@ -83,8 +84,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftInspector.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftInspectorCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessForm15Amendment.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessReviewF15.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessForm15Main.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtClose.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtFMCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessFMCtrl.js" />

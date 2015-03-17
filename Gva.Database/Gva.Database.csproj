@@ -174,7 +174,6 @@
     <Content Include="Insert\gvaCaseTypes.sql" />
     <Content Include="Insert\migrationUser.sql" />
     <Content Include="Insert\Noms\Aircrafts\airworthinessCertificateTypes.sql" />
-    <Content Include="Insert\Noms\Aircrafts\airworthinessReviewTypes.sql" />
     <Content Include="Insert\gvaStages.sql" />
     <Content Include="Insert\Users\RoleClassifications.sql" />
     <Content Include="Insert\Users\Roles.sql" />

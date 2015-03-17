@@ -10,7 +10,7 @@
     initAW
   ) {
     $scope.aw = initAW.airworthinessFMPartVersion;
-    $scope.reviewForm15 = initAW.reviewForm15;
+    $scope.form15Amendments = initAW.form15Amendments;
     $scope.reviewOther = initAW.reviewOther;
     $scope.lotId = $stateParams.id;
 
@@ -28,9 +28,7 @@
 
               aw.part.reviews = [];
 
-              if (actAlias === 'f24' || actAlias === 'f25') {
-                aw.part.reviews.push($scope.reviewForm15);
-              } else if (
+              if (
                 actAlias === 'directive8' ||
                 actAlias === 'vla' ||
                 actAlias === 'unknown') {

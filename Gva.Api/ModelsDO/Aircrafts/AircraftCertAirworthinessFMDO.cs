@@ -23,6 +23,10 @@ namespace Gva.Api.ModelsDO.Aircrafts
         [Required(ErrorMessage = "IssueDate is required.")]
         public DateTime? IssueDate { get; set; }
 
+        public DateTime? ValidToDate { get; set; }
+
         public List<AircraftCertAirworthinessReviewFMDO> Reviews { get; set; }
+
+        public AircraftCertAirworthinessForm15DO Form15Amendments { get; set; }
     }
 }

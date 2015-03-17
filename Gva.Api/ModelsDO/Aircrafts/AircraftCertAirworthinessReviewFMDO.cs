@@ -6,8 +6,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftCertAirworthinessReviewFMDO
     {
-        public NomValue AirworthinessReviewType { get; set; }
-
         [Required(ErrorMessage = "IssueDate is required.")]
         public DateTime? IssueDate { get; set; }
 
@@ -18,9 +16,5 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         [Required(ErrorMessage = "Inspector is required.")]
         public AircraftInspectorDO Inspector { get; set; }
-
-        public AircraftReviewAmendmentFMDO Amendment1 { get; set; }
-
-        public AircraftReviewAmendmentFMDO Amendment2 { get; set; }
     }
 }

@@ -17,20 +17,22 @@
           if (lastReview.inspector && lastReview.inspector.inspector) {
             inspectorName = lastReview.inspector.inspector.name;
           }
-
-          if (lastReview.amendment2) {
-            validFrom = lastReview.amendment2.issueDate;
-            validTo = lastReview.amendment2.validToDate;
-          } else if (lastReview.amendment1) {
-            validFrom = lastReview.amendment1.issueDate;
-            validTo = lastReview.amendment1.validToDate;
-          } else {
-            validFrom = lastReview.issueDate;
-            validTo = lastReview.validToDate;
-          }
         }
       }
 
+      if (aw.part.form15Amendments) {
+        if (aw.part.form15Amendments.amendment2) {
+          validFrom = aw.part.form15Amendments.amendment2.issueDate;
+          validTo = aw.part.form15Amendments.amendment2.validToDate;
+        } else if (aw.part.form15Amendments.amendment1) {
+          validFrom = aw.part.form15Amendments.amendment1.issueDate;
+          validTo = aw.part.form15Amendments.amendment1.validToDate;
+        }
+      }
+      if(!validFrom && !validTo) {
+        validFrom = aw.part.issueDate;
+        validTo = aw.part.validToDate;
+      }
       return {
         partIndex: aw.partIndex,
         act: aw.part.airworthinessCertificateType.name,

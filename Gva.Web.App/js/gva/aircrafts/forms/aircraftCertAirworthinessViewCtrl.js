@@ -6,41 +6,58 @@
     $scope.aircraftId = scFormParams.lotId;
 
     $scope.validFromDate = function () {
-      if (!$scope.model || !$scope.model.reviews || !$scope.model.reviews.length) {
+      if (!$scope.model) {
         return null;
       }
-
-      var lastReview = $scope.model.reviews[$scope.model.reviews.length - 1];
-
-      return lastReview.amendment2 ? lastReview.amendment2.issueDate :
-             lastReview.amendment1 ? lastReview.amendment1.issueDate :
-             lastReview.issueDate;
+      else if ($scope.model.reviews && $scope.model.reviews.length) {
+        return $scope.model.reviews[$scope.model.reviews.length - 1].issueDate;
+      }
+      else if ($scope.model.form15Amendments && $scope.model.form15Amendments.amendment1) {
+        var amendments = $scope.model.form15Amendments;
+        return amendments.amendment2 ? amendments.amendment2.issueDate :
+             amendments.amendment1 ? amendments.amendment1.issueDate : null;
+      }
     };
 
     $scope.validToDate = function () {
-      if (!$scope.model || !$scope.model.reviews || !$scope.model.reviews.length) {
+      if (!$scope.model) {
         return null;
       }
-
-      var lastReview = $scope.model.reviews[$scope.model.reviews.length - 1];
-
-      return lastReview.amendment2 ? lastReview.amendment2.validToDate :
-             lastReview.amendment1 ? lastReview.amendment1.validToDate :
-             lastReview.validToDate;
+      else if ($scope.model.reviews && $scope.model.reviews.length) {
+        return $scope.model.reviews[$scope.model.reviews.length - 1].validToDate;
+      }
+      else if ($scope.model.form15Amendments && $scope.model.form15Amendments.amendment1) {
+        var amendments = $scope.model.form15Amendments;
+        return amendments.amendment2 ? amendments.amendment2.validToDate :
+             amendments.amendment1 ? amendments.amendment1.validToDate : null;
+      }
     };
 
     $scope.inspectorName = function () {
-      if (!$scope.model || !$scope.model.inspector || !$scope.model.inspector.inspectorType) {
+      var inspectorModel = null;
+      if (!$scope.model) {
         return null;
       }
-
-      switch ($scope.model.inspector.inspectorType.alias) {
-        case 'gvaInspector':
-          return $scope.model.inspector.gvaInspector && $scope.model.inspector.gvaInspector.name;
-        case 'examiner':
-          return $scope.model.inspector.examiner && $scope.model.inspector.examiner.name;
-        case 'other':
-          return $scope.model.inspector.other;
+      else if ($scope.model.reviews && $scope.model.reviews.length) {
+        var lastReview = $scope.model.reviews[$scope.model.reviews.length - 1];
+        inspectorModel = lastReview.inspector.inspector ||
+          lastReview.inspector.examiner ||
+          lastReview.inspector.other;
+      }
+      else if ($scope.model.form15Amendments && $scope.model.form15Amendments.amendment1) {
+        var amendments = $scope.model.form15Amendments;
+        if (amendments.amendment2 && amendments.amendment2.inspector) {
+          inspectorModel = amendments.amendment2.inspector.inspector ||
+            amendments.amendment2.inspector.examiner || 
+            amendments.amendment2.inspector.other;
+        } else if (amendments.amendment1.inspector) {
+          inspectorModel = amendments.amendment1.inspector.inspector ||
+            amendments.amendment1.inspector.examiner ||
+            amendments.amendment1.inspector.other;
+        }
+      }
+      if (inspectorModel) {
+        return inspectorModel.name || inspectorModel;
       }
     };
 

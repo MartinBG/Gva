@@ -124,7 +124,6 @@ GO
 :r $(rootPath)\"..\Insert\Noms\Aircrafts\_aircraftsMigrationNoms.sql"
 :r $(rootPath)\"..\Insert\Noms\Aircrafts\aircraftRemovalReasonsFm.sql"
 :r $(rootPath)\"..\Insert\Noms\Aircrafts\airworthinessCertificateTypes.sql"
-:r $(rootPath)\"..\Insert\Noms\Aircrafts\airworthinessReviewTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\Aircrafts\inspectorTypes.sql"
 :r $(rootPath)\"..\Insert\Noms\Aircrafts\registers.sql"
 

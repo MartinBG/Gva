@@ -69,11 +69,7 @@ namespace Gva.Api.Controllers.Aircrafts
 
             var airworthinessFMPartVersion = new CaseTypePartDO<AircraftCertAirworthinessFMDO>(newCertAirworthinessFM, caseDO);
 
-            var reviewForm15 = new AircraftCertAirworthinessForm15MainDO()
-            {
-                AirworthinessReviewType = nomRepository.GetNomValue("airworthinessReviewTypes", "15a"),
-                Inspector = new AircraftInspectorDO()
-            };
+            var form15Amendments = new AircraftCertAirworthinessForm15DO();
 
             var reviewOther = new AircraftCertAirworthinessReviewOtherDO()
             {
@@ -83,7 +79,7 @@ namespace Gva.Api.Controllers.Aircrafts
             return Ok(new
                 {
                     airworthinessFMPartVersion,
-                    reviewForm15,
+                    form15Amendments,
                     reviewOther
                 });
         }

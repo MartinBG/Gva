@@ -207,12 +207,8 @@
       templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessReviewOther.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaAirworthinessReviewF15',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessReviewF15.html'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaAirworthinessForm15Main',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessForm15Main.html'
+      name: 'gvaAirworthinessForm15',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessForm15.html'
     });
     scaffoldingProvider.form({
       name: 'gvaAirworthinessForm15Amendment',

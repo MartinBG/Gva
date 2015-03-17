@@ -152,6 +152,7 @@
     <Compile Include="Controllers\Persons\PersonLicenceEditionsController.cs" />
     <Compile Include="Controllers\Persons\PersonRatingEditionsController.cs" />
     <Compile Include="CommonUtils\DataExtensions.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessForm15DO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregExportFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregFMDO.cs" />
@@ -229,7 +230,6 @@
     <Compile Include="Controllers\Persons\PersonLicencesController.cs" />
     <Compile Include="Controllers\Persons\PersonMedicalsController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessForm15MainDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewOtherDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />

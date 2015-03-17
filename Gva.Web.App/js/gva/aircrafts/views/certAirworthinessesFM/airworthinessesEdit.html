@@ -4,6 +4,11 @@
       <strong l10n-text="aircrafts.editAirworthiness.titleAw"></strong>
 
       <div class="pull-right">
+        <sc-button 
+          ng-show="isEditAw && (aw.part.airworthinessCertificateType.alias === '15a' || aw.part.airworthinessCertificateType.alias === '15b')"
+          ng-disabled="aw.part.form15Amendments.amendment2 || disableNewAmmendment"
+          btn-click="newAmendment()" name="newAmendmentBtn" text="aircrafts.editAirworthiness.newAmendment" class="btn btn-primary btn-xs" icon="glyphicon-plus">
+        </sc-button>
         <sc-button ng-show="!isEditAw" 
           btn-click="editAw()" name="editBtn" text="aircrafts.editAirworthiness.editAw" class="btn btn-primary btn-xs" icon="glyphicon-edit" >
         </sc-button>
@@ -29,39 +34,21 @@
     </div>
   </div>
 
-  <div ng-show="reviews">
+  <div ng-if="reviews && reviews.length > 0">
     <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.reviews" style="border-bottom: none; margin-top: 20px;"></h5>
-
     <sc-datatable items="reviews" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
       <sc-column sortable="false" class="buttons-cell" has-content="true">
         <input type="radio" ng-checked="item === currentReview" ng-disabled="isEditReview" sc-click="selectReview(item)">
       </sc-column>
-      <sc-column title="aircrafts.editAirworthiness.airworthinessReviewType" has-content="true">
-        {{item.airworthinessReviewType.name}}
+      <sc-column data="issueDate" title="aircrafts.editAirworthiness.issueDate"type="date">
       </sc-column>
-      <sc-column title="aircrafts.editAirworthiness.issueDate" has-content="true">
+      <sc-column data="issueDate" title="aircrafts.editAirworthiness.from" type="date">
         {{item.issueDate | date:'mediumDate'}}
       </sc-column>
-      <sc-column title="aircrafts.editAirworthiness.from" has-content="true">
-        <div ng-switch="!!item.amendment1 + !!item.amendment2">
-          <span ng-switch-when="0">{{item.issueDate | date:'mediumDate'}}</span>
-          <span ng-switch-when="1">{{item.amendment1.issueDate | date:'mediumDate'}}</span>
-          <span ng-switch-when="2">{{item.amendment2.issueDate | date:'mediumDate'}}</span>
-        </div>
+      <sc-column data="validToDate" title="aircrafts.editAirworthiness.to" type="date">
+        {{item.validToDate | date:'mediumDate'}}
       </sc-column>
-      <sc-column title="aircrafts.editAirworthiness.to" has-content="true">
-        <div ng-switch="!!item.amendment1 + !!item.amendment2">
-          <span ng-switch-when="0">{{item.validToDate | date:'mediumDate'}}</span>
-          <span ng-switch-when="1">{{item.amendment1.validToDate | date:'mediumDate'}}</span>
-          <span ng-switch-when="2">{{item.amendment2.validToDate | date:'mediumDate'}}</span>
-        </div>
-      </sc-column>
-      <sc-column title="aircrafts.editAirworthiness.inspector" has-content="true">
-        <div ng-switch="!!item.amendment1 + !!item.amendment2">
-          <span ng-switch-when="0">{{item.inspector.inspector.name}}</span>
-          <span ng-switch-when="1">{{item.amendment1.inspector.inspector.name || item.amendment1.inspector.other}}</span>
-          <span ng-switch-when="2">{{item.amendment2.inspector.inspector.name || item.amendment2.inspector.other}}</span>
-        </div>
+      <sc-column data="item.inspector.inspector.name" title="aircrafts.editAirworthiness.inspector">
       </sc-column>
     </sc-datatable>
 
@@ -71,12 +58,6 @@
         <div class="pull-right">
           <sc-button ng-show="!isEditReview"
              btn-click="newReview()" name="newReviewBtn" text="aircrafts.editAirworthiness.newReview" class="btn btn-primary btn-xs" icon="glyphicon-plus">
-          </sc-button>
-          <sc-button 
-            ng-if="reviews && reviews.length && (aw.part.airworthinessCertificateType.alias === 'f24' || aw.part.airworthinessCertificateType.alias === 'f25')"
-            ng-show="!isEditReview"
-            ng-disabled="reviews[reviews.length - 1] !== currentReview || reviews[reviews.length - 1].amendment2 || disableNewAmmendment"
-            btn-click="newAmendment()" name="newAmendmentBtn" text="aircrafts.editAirworthiness.newAmendment" class="btn btn-primary btn-xs" icon="glyphicon-plus">
           </sc-button>
           <sc-button ng-if="reviews && reviews.length"
             ng-show="!isEditReview"
@@ -97,13 +78,20 @@
       </div>
 
       <div class="well-sm panel-body" ng-show="currentReview">
-        <gva-airworthiness-review-f15 ng-show="aw.part.airworthinessCertificateType.alias === 'f24' || aw.part.airworthinessCertificateType.alias === 'f25'"
-          name="airworthinessReviewF15Form" ng-model="currentReview" readonly="!isEditReview">
-        </gva-airworthiness-review-f15>
         <gva-airworthiness-review-other ng-show="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla' || aw.part.airworthinessCertificateType.alias === 'unknown'"
           name="airworthinessReviewOtherForm" ng-model="currentReview" readonly="!isEditReview">
         </gva-airworthiness-review-other>
       </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default" style="margin-top: 10px" ng-if="aw.part.form15Amendments && aw.part.form15Amendments.amendment1">
+    <div class="panel-heading">
+      <strong l10n-text="aircrafts.editAirworthiness.ammendments"></strong>
+    </div>
+    <div class="well-sm panel-body">
+      <gva-airworthiness-form15 name="airworthinessReviewF15Form" ng-model="aw.part.form15Amendments" ng-readonly="!isEditAw">
+      </gva-airworthiness-form15>
     </div>
   </div>
 </ng-form>

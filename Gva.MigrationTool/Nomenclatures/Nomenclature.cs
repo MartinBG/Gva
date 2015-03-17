@@ -174,11 +174,6 @@ namespace Gva.MigrationTool.Nomenclatures
 
             using (var dependencies = dependencyFactory())
             {
-                noms["airworthinessReviewTypes"] = dependencies.Value.Item2.GetNomValues("airworthinessReviewTypes").ToDictionary(n => Guid.NewGuid().ToString());
-            }
-
-            using (var dependencies = dependencyFactory())
-            {
                 noms["disparityLevels"] = dependencies.Value.Item2.GetNomValues("disparityLevels").ToDictionary(n => Guid.NewGuid().ToString());
             }
 

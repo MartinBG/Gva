@@ -6,15 +6,15 @@
     <sc-validation-error ng-if="inspectorType  === 'examiner'" field-name="examiner" validations="{required: null}"></sc-validation-error>
     <sc-validation-error ng-if="inspectorType  === 'other'" field-name="other" validations="{required: null}"></sc-validation-error>
     <div class="input-group" style="width:100%">
-      <select name="inspectorType" class="form-control input-sm" style="width: 110px" ng-model="inspectorType" ng-readonly="readonly" ng-required="true" ui-select2="{ placeholder: ' ', allowClear: true, minimumResultsForSearch: -1 }">
+      <select name="inspectorType" class="form-control input-sm" style="width: 110px" ng-model="inspectorType" ng-readonly="form.$readonly" ng-required="true" ui-select2="{ placeholder: ' ', allowClear: true, minimumResultsForSearch: -1 }">
         <option></option>
         <option ng-if="inspectorTypesHash['inspector']" value="inspector" l10n-text="aircrafts.inspectorDirective.inspector"></option>
         <option ng-if="inspectorTypesHash['examiner']" value="examiner" l10n-text="aircrafts.inspectorDirective.examiner"></option>
         <option ng-if="inspectorTypesHash['other']" value="other" l10n-text="aircrafts.inspectorDirective.other"></option>
       </select>
-      <sc-nomenclature ng-if="inspectorType  === 'inspector'" class="form-control input-sm" ng-model="model.inspector" name="inspector" alias="'inspectors'" params="{limit: null}" ng-required="true" ng-readonly="readonly"></sc-nomenclature>
-      <sc-nomenclature ng-if="inspectorType  === 'examiner'" class="form-control input-sm" ng-model="model.examiner" name="examiner" alias="'awExaminers'" ng-required="true" params="{limit: null}" ng-readonly="readonly"></sc-nomenclature>
-      <sc-text ng-if="inspectorType  === 'other'" class="form-control input-sm" ng-model="model.other" name="other" ng-required="true" ng-readonly="readonly"></sc-text>
+      <sc-nomenclature ng-if="inspectorType  === 'inspector'" class="form-control input-sm" ng-model="model.inspector" name="inspector" alias="'inspectors'" params="{limit: null}" ng-required="true" ng-readonly="form.$readonly"></sc-nomenclature>
+      <sc-nomenclature ng-if="inspectorType  === 'examiner'" class="form-control input-sm" ng-model="model.examiner" name="examiner" alias="'awExaminers'" ng-required="true" params="{limit: null}" ng-readonly="form.$readonly"></sc-nomenclature>
+      <sc-text ng-if="inspectorType  === 'other'" class="form-control input-sm" ng-model="model.other" name="other" ng-required="true" ng-readonly="form.$readonly"></sc-text>
     </div>
   </div>
 </ng-form>

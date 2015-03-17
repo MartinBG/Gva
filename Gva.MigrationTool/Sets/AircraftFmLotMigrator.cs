@@ -642,7 +642,8 @@ namespace Gva.MigrationTool.Sets
                 airworthinessCertificateType = certType,
                 registration = registration,
                 documentNumber = act.t_CofA_No,
-                issueDate = issueDate
+                issueDate = issueDate,
+                form15Amendments = new JObject()
             });
 
             if (actAlias == "special")
@@ -655,39 +656,46 @@ namespace Gva.MigrationTool.Sets
             else
             {
                 var reviews = new JArray();
-                aw.Add("reviews", reviews);
+
+                if (actAlias != "f24" && actAlias != "f25")
+                {
+                    aw.Add("reviews", reviews);
+                }
 
                 int l = issues.Count;
                 for (int i = 0; i < l; i++)
                 {
-                    var review = Utils.ToJObject( new {
-                        issueDate = issues[i].dFrom,
-                        validToDate = issues[i].dValid,
-                        inspector = new JObject()
-                    });
-
-                    reviews.Add(review);
-
-                    var inspector = getInspector(issues[i].t_CAA_Inspetor);
-                    if (inspector != null)
+                    if (actAlias != "f24" && actAlias != "f25")
                     {
-                        ((JObject)review["inspector"]).Add("inspector", inspector);
+                        var review = Utils.ToJObject(new
+                        {
+                            issueDate = issues[i].dFrom,
+                            validToDate = issues[i].dValid,
+                            inspector = new JObject()
+                        });
+
+                        reviews.Add(review);
+
+                        var inspector = getInspector(issues[i].t_CAA_Inspetor);
+                        if (inspector != null)
+                        {
+                            ((JObject)review["inspector"]).Add("inspector", inspector);
+                        }
                     }
 
                     if (actAlias == "f24" || actAlias == "f25")
                     {
-                        NomValue airworthinessReviewType = noms["airworthinessReviewTypes"].ByAlias("unknown");
                         Action<string> trySetType = (arcType) =>
                         {
                             if (arcType != null)
                             {
                                 if (arcType.Contains("15a"))
                                 {
-                                    airworthinessReviewType = noms["airworthinessReviewTypes"].ByAlias("15a");
+                                    aw["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15a"));
                                 }
                                 else if (arcType.Contains("15b"))
                                 {
-                                    airworthinessReviewType = noms["airworthinessReviewTypes"].ByAlias("15b");
+                                    aw["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15b"));
                                 }
                             }
                         };
@@ -697,29 +705,29 @@ namespace Gva.MigrationTool.Sets
                         if (i < l - 1 && issues[i].dIssue == issues[i + 1].dIssue &&
                             !(i < l - 3 && issues[i].dIssue == issues[i + 3].dIssue)) //if more than 3 consecutive treat as separate
                         {
-                            review.Add("amendment1", Utils.ToJObject( new {
+                            aw["form15Amendments"]["amendment1"] = Utils.ToJObject(new
+                            {
                                 issueDate = issues[i + 1].dFrom,
                                 validToDate = issues[i + 1].dValid,
                                 inspector = getExaminerOrOther(issues[i + 1].t_Reviewed_By)
-                            }));
+                            });
 
                             trySetType(issues[i + 1].t_ARC_Type);
                             i++;
 
                             if (i < l - 2 && issues[i].dIssue == issues[i + 2].dIssue)
                             {
-                                review.Add("amendment2",  Utils.ToJObject( new {
+                                aw["form15Amendments"]["amendment2"] = Utils.ToJObject(new
+                                {
                                     issueDate = issues[i + 2].dFrom,
                                     validToDate = issues[i + 2].dValid,
                                     inspector = getExaminerOrOther(issues[i + 2].t_Reviewed_By)
-                                }));
+                                });
 
                                 trySetType(issues[i + 2].t_ARC_Type);
                                 i++;
                             }
                         }
-
-                        review.Add("airworthinessReviewType", Utils.ToJObject(airworthinessReviewType));
                     }
                 }
             }

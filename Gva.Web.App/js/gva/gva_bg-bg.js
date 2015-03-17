@@ -887,7 +887,7 @@
         airworthinessFMSearch: {
           newAirworthiness: 'Нова годност',
           airworthinessCertificateType: 'Тип сертификат',
-          issueDate: 'От дата',
+          issueDate: 'Дата на издаване',
           validFromDate: 'Валидно от',
           validToDate: 'Валидно до',
           inspector: 'Заверил инспектор'
@@ -899,6 +899,7 @@
           cancel: 'Отказ'
         },
         editAirworthiness: {
+          ammendments: 'Заверки',
           titleAw: 'Преглед на летателна годност',
           editAw: 'Редакция',
           deleteAw: 'Изтрий',
@@ -906,7 +907,6 @@
           cancelAw: 'Отказ',
           reviews: 'Прегледи',
           status: 'Статус',
-          airworthinessReviewType: 'Тип',
           issueDate: 'Издадено на',
           from: 'Валидно от',
           to: 'Валидно до',
@@ -1082,6 +1082,7 @@
           registration: 'Регистрация',
           documentNumber: 'Документ №',
           issueDate: 'Дата на издаване',
+          validToDate: 'Валиден до',
           issueDateSpecial: 'Дата изд. на екс. огр.'
         },
         airworthinessReviewF15Directive: {
@@ -1091,12 +1092,6 @@
         airworthinessReviewOtherDirective: {
           issueDate: 'Дата на издаване',
           validToDate: 'Валиден до'
-        },
-        airworthinessForm15MainDirective: {
-          airworthinessReviewType: 'Тип',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Валиден до',
-          organization: 'Организация'
         },
         airworthinessForm15AmendmentDirective: {
           issueDate: 'Дата на издаване',
