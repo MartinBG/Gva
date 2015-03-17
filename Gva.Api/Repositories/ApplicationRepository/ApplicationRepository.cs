@@ -51,29 +51,30 @@ namespace Gva.Api.Repositories.ApplicationRepository
             string aircraftIcao = null,
             string organizationUin = null,
             int? stage = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null)
         {
             ApplicationsDO result = null;
             if (lotSetAlias == "person")
             {
-                result = this.GetPersonApplications(fromDate, toDate, personLin, stage, offset, limit);
+                result = this.GetPersonApplications(fromDate, toDate, personLin, stage, inspectorId, offset, limit);
             }
             else if (lotSetAlias == "aircraft")
             {
-                result = this.GetAircraftApplications(fromDate, toDate, aircraftIcao, stage, offset, limit);
+                result = this.GetAircraftApplications(fromDate, toDate, aircraftIcao, stage, inspectorId, offset, limit);
             }
             else if (lotSetAlias == "organization")
             {
-                result = this.GetOrganizationApplications(fromDate, toDate, organizationUin, stage, offset, limit);
+                result = this.GetOrganizationApplications(fromDate, toDate, organizationUin, stage, inspectorId, offset, limit);
             }
             else if (lotSetAlias == "equipment")
             {
-                result = this.GetEquipmentApplications(fromDate, toDate, stage, offset, limit);
+                result = this.GetEquipmentApplications(fromDate, toDate, stage, inspectorId, offset, limit);
             }
             else if (lotSetAlias == "airport")
             {
-                result = this.GetAirportApplications(fromDate, toDate, stage, offset, limit);
+                result = this.GetAirportApplications(fromDate, toDate, stage, inspectorId, offset, limit);
             }
             else
             {
@@ -83,13 +84,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             return result;
         }
 
-        public IEnumerable<ApplicationExamListDO> GetPersonApplicationExams(
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
-            int? personLin = null,
-            int? stage = null,
-            int offset = 0,
-            int? limit = null)
+        public IEnumerable<ApplicationExamListDO> GetPersonApplicationExams(int offset = 0, int? limit = null)
         {
             this.unitOfWork.DbContext.Set<GvaStage>().Load();
 
@@ -137,7 +132,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? personLin = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null)
         {
@@ -182,7 +178,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
                 .AndEquals(e => e.GViewPerson.Lin, personLin)
-                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
+                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stageId)
+                .AndEquals(e => e.GvaAppStage.InspectorLotId, inspectorId);
 
             var query = applicationsJoin
                 .Where(predicate)
@@ -224,7 +221,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string aircraftIcao = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null)
         {
@@ -273,7 +271,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
                 .AndStringContains(e => e.GViewAircraft.ICAO, aircraftIcao)
-                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
+                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stageId)
+                .AndEquals(e => e.GvaAppStage.InspectorLotId, inspectorId);
 
             var query = applicationsJoin
                 .Where(predicate)
@@ -315,7 +314,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string organizationUin = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null)
         {
@@ -361,7 +361,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
                 .AndStringContains(e => e.GViewOrganization.Uin, organizationUin)
-                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
+                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stageId)
+                .AndEquals(e => e.GvaAppStage.InspectorLotId, inspectorId);
 
             var query = applicationsJoin
                 .Where(predicate)
@@ -401,7 +402,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
         public ApplicationsDO GetEquipmentApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null)
         {
@@ -447,7 +449,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             predicate = predicate
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
-                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
+                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stageId)
+                .AndEquals(e => e.GvaAppStage.InspectorLotId, inspectorId);
 
             var query = applicationsJoin
                 .Where(predicate)
@@ -488,7 +491,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
         public ApplicationsDO GetAirportApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null)
         {
@@ -532,7 +536,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             predicate = predicate
                 .AndDateTimeGreaterThanOrEqual(e => e.GViewApplication.DocumentDate, fromDate)
                 .AndDateTimeLessThanOrEqual(e => e.GViewApplication.DocumentDate, toDate)
-                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stage);
+                .AndEquals(e => e.GvaAppStage.GvaStage.GvaStageId, stageId)
+                .AndEquals(e => e.GvaAppStage.InspectorLotId, inspectorId);
 
             var query = applicationsJoin
                 .Where(predicate)

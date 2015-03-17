@@ -2,9 +2,10 @@
   <sc-filter type="date" name="fromDate" class="col-sm-3" removable="false" label="applications.search.fromDate"></sc-filter>
   <sc-filter type="date" name="toDate" class="col-sm-3" removable="false" label="applications.search.toDate"></sc-filter>
   <sc-filter type="int" name="personLin" class="col-sm-2" removable="true" label="applications.search.lin"></sc-filter>
-  <sc-filter type="nomenclature" name="stage" class="col-sm-2" removable="true" label="applications.search.stage" alias="appStages" mode="id"></sc-filter>
+  <sc-filter type="nomenclature" name="stageId" class="col-sm-2" removable="true" label="applications.search.stage" alias="appStages" mode="id"></sc-filter>
   <sc-filter type="text" name="aircraftIcao" class="col-sm-2" removable="true" label="applications.search.aircraftICAO"></sc-filter>
   <sc-filter type="text" name="organizationUin" class="col-sm-2" removable="true" label="applications.search.organizationUIN"></sc-filter>
+  <sc-filter type="nomenclature" alias="inspectors" name="inspectorId" class="col-sm-2" removable="true" label="applications.search.inspector" mode="id"></sc-filter>
   <sc-search-button action="search()" name="searchBtn" class="btn btn-primary btn-sm" text="applications.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
   <sc-search-button action="newApp()" name="newAppBtn" text="applications.search.newApp" icon="glyphicon glyphicon-plus"></sc-search-button>
   <sc-search-button action="clear"></sc-search-button>

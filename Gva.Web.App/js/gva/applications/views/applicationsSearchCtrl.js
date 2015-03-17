@@ -32,7 +32,8 @@
         personLin: $scope.filters.personLin,
         aircraftIcao: $scope.filters.aircraftIcao,
         organizationUin: $scope.filters.organizationUin,
-        stage: $scope.filters.stage
+        stageId: $scope.filters.stageId,
+        inspectorId: $scope.filters.inspectorId
       }, { reload: true });
     };
 

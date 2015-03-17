@@ -19,7 +19,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int? personLin = null,
             string aircraftIcao = null,
             string organizationUin = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null);
 
@@ -27,19 +28,14 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         GvaViewApplication GetApplicationByPartId(int applicationPartId);
 
-        IEnumerable<ApplicationExamListDO> GetPersonApplicationExams(
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
-            int? personLin = null,
-            int? stage = null,
-            int offset = 0,
-            int? limit = null);
+        IEnumerable<ApplicationExamListDO> GetPersonApplicationExams(int offset = 0, int? limit = null);
 
         ApplicationsDO GetPersonApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? personLin = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null);
 
@@ -47,7 +43,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string aircraftIcao = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null);
 
@@ -55,21 +52,24 @@ namespace Gva.Api.Repositories.ApplicationRepository
             DateTime? fromDate = null,
             DateTime? toDate = null,
             string organizationUin = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null);
 
         ApplicationsDO GetEquipmentApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null);
 
         ApplicationsDO GetAirportApplications(
             DateTime? fromDate = null,
             DateTime? toDate = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0,
             int? limit = null);
 

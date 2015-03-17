@@ -94,7 +94,8 @@ namespace Gva.Api.Controllers.Applications
             int? personLin = null,
             string aircraftIcao = null,
             string organizationUin = null,
-            int? stage = null,
+            int? stageId = null,
+            int? inspectorId = null,
             int offset = 0, 
             int limit = 10
             )
@@ -106,7 +107,8 @@ namespace Gva.Api.Controllers.Applications
                 personLin: personLin,
                 aircraftIcao: aircraftIcao,
                 organizationUin: organizationUin,
-                stage: stage,
+                stageId: stageId,
+                inspectorId: inspectorId,
                 limit: limit,
                 offset: offset);
 
@@ -114,16 +116,9 @@ namespace Gva.Api.Controllers.Applications
         }
 
         [Route("exams")]
-        public IHttpActionResult GetApplicationExams(
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
-            int? personLin = null,
-            int? stage = null,
-            int offset = 0, 
-            int? limit = null
-            )
+        public IHttpActionResult GetApplicationExams(int offset = 0,  int? limit = null)
         {
-            var applications = this.applicationRepository.GetPersonApplicationExams()
+            var applications = this.applicationRepository.GetPersonApplicationExams(offset, limit)
                 .OrderByDescending(a => a.DocumentDate)
                 .Take(1000);
 

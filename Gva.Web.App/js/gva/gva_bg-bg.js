@@ -3034,7 +3034,8 @@
           stage: 'Статус',
           stageTermDate: 'Срок',
           aircraftICAO: 'ICAO',
-          organizationUIN: 'Булстат'
+          organizationUIN: 'Булстат',
+          inspector: 'Инспектор'
         },
         applicationDocument: {
           title: 'Сканиран (електронен) документ',
