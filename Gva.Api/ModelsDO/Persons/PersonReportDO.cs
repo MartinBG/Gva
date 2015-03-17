@@ -17,7 +17,5 @@ namespace Gva.Api.ModelsDO.Persons
         public DateTime? Date { get; set; }
 
         public string DocumentNumber { get; set; }
-
-        public string DocumentPersonNumber { get; set; }
     }
 }

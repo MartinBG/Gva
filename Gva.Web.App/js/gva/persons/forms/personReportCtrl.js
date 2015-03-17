@@ -32,24 +32,56 @@
       return modalInstance.opened;
     };
 
+    $scope.isValidDocNumber = function (documentNumber) {
+      if (!documentNumber) {
+        return true;
+      }
+      else {
+        return Persons
+          .isUniqueDocNumber({
+              documentNumber: documentNumber,
+              partIndex: $scope.model.partIndex
+            })
+          .$promise
+          .then(function (result) {
+            return result.isUnique;
+          });
+      }
+    };
+
     $scope.createCheck = function (person) {
-      var modalInstance = scModal.open('newCheck', {
-        lotId: person.id,
-        publisher: scFormParams.publisher
-      });
+      return Persons
+        .isUniqueDocNumber({
+            documentNumber: $scope.model.part.documentNumber
+          })
+        .$promise
+        .then(function (result) {
+          var lastGroupNumber = 0;
+          if (!result.isUnique) {
+            lastGroupNumber = result.lastExistingGroupNumber;
+          }
 
-      modalInstance.result.then(function (newCheck) {
-        var check = newCheck.part;
-        check.personLin = person.lin;
-        check.lotId = person.id;
-        check.partIndex = newCheck.partIndex;
-        check.ratingTypes = _.pluck(newCheck.part.ratingTypes, 'code').join(',');
-        $scope.includedChecks.push(check);
+          var modalInstance = scModal.open('newCheck', {
+            lotId: person.id,
+            publisher: scFormParams.publisher,
+            documentNumber: $scope.model.part.documentNumber,
+            lastGroupNumber: lastGroupNumber + 1
+          });
 
-        $scope.model.part.includedChecks.push(newCheck.partId);
-      });
+          modalInstance.result.then(function (newCheck) {
+            var check = newCheck.part;
+            check.person = {lin : person.lin};
+            check.lotId = person.id;
+            check.partIndex = newCheck.partIndex;
+            check.ratingTypes = _.pluck(newCheck.part.ratingTypes, 'code').join(',');
+            $scope.includedChecks.push(check);
 
-      return modalInstance.opened;
+            $scope.model.part.includedChecks.push(newCheck.partId);
+          });
+
+          return modalInstance.opened;
+        });
+
     };
 
     $scope.removeCheck = function (check) {

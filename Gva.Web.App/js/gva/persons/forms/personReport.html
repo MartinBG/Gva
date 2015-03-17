@@ -8,16 +8,14 @@
   </div>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.documentNumber" ng-required="true" l10n-text="persons.personReportDirective.reportNumber" class="col-sm-3 col-md-2" sc-validate="{ unique: isUniqueDocNumber }" validations="{unique: 'errorTexts.notUniqueDocNumberAndPersonNumber'}"></sc-field>
-    <sc-field type="text" ng-model="model.part.documentPersonNumber" l10n-text="persons.personReportDirective.documentPersonNumber" class="col-sm-3 col-md-2"></sc-field>
-        <sc-field type="int" ng-model="lastGroupNumber" l10n-text="persons.personReportDirective.groupDocNumber" ng-if="lastGroupNumber" ng-readonly="true" class="col-sm-4 col-md-3"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personReportDirective.documentNumber" class="col-sm-3 col-md-2" required sc-validate="{ invalidDocNumber: isValidDocNumber }" sc-validate-immediate="true" validations="{invalidDocNumber: 'persons.personReportDirective.existingDocNumber'}"></sc-field>
+    <sc-field type="date" ng-model="model.part.date" l10n-text="persons.personReportDirective.date" class="col-sm-3 col-md-2"></sc-field>
   </div>
 
   <h5 class="form-header" style="margin-top: 10px" l10n-text="persons.personReportDirective.includedChecks"></h5>
-
   <div class="row" ng-if="!form.$readonly">
     <div class="col-sm-2" style="margin:10px 0px">
-    <sc-button btn-click="addCheck()" text="persons.personReportDirective.addCheck" ng-disabled="form.$readonly" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button> 
+    <sc-button btn-click="addCheck()" text="persons.personReportDirective.addCheck" ng-disabled="form.$invalid" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button> 
     </div>
   </div>
 
@@ -51,7 +49,7 @@
         <td ng-if="model.part.includedChecks.length && !form.$readonly">
           <sc-button name="deleteCheckBtn" class="btn btn-xs btn-danger" ng-disabled="form.$readonly" btn-click="removeCheck(check)" icon="glyphicon-remove"></sc-button>
         </td>
-        <td>{{check.personLin}}</td>
+        <td>{{check.person.lin}}</td>
         <td>{{check.documentNumber}}</td>
         <td>{{check.documentType.name}}</td>
         <td>{{check.documentRole.name}}</td>

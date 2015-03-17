@@ -1535,10 +1535,9 @@
           isValid: 'Валиден'
         },
         personReportDirective: {
+          existingDocNumber: 'Вече съществува документ с този номер',
           date: 'Дата',
-          reportNumber: 'No на отчет',
-          documentPersonNumber: 'No в списъка (групов док.)',
-          groupDocNumber: 'Последен използван No в списъка',
+          documentNumber: 'No на отчет',
           addCheck: 'Добави проверкa',
           includedChecks: ' Проверки',
           checksTable: {

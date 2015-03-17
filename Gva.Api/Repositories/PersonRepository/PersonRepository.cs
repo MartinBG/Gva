@@ -394,7 +394,11 @@ namespace Gva.Api.Repositories.PersonRepository
 
             if (documentPersonNumber.HasValue)
             {
-                predicate = predicate.And(d => d.DocumentPersonNumber == documentPersonNumber);
+                predicate = predicate.And(d => d.DocumentPersonNumber.Value == documentPersonNumber.Value);
+            }
+            else
+            {
+                predicate = predicate.And(d => !d.DocumentPersonNumber.HasValue);
             }
 
             if (partIndex.HasValue)

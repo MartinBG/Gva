@@ -11,6 +11,9 @@
   ) {
     $scope.form = {};
     $scope.personDocumentCheck = personDocumentCheck;
+    $scope.personDocumentCheck.part.documentNumber = scModalParams.documentNumber;
+    $scope.personDocumentCheck.part.documentPersonNumber = scModalParams.lastGroupNumber;
+    
     $scope.lotId = scModalParams.lotId;
     $scope.appId = scModalParams.appId;
     $scope.caseTypeId = scModalParams.caseTypeId;
