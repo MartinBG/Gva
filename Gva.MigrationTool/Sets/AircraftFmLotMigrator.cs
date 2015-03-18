@@ -271,7 +271,7 @@ namespace Gva.MigrationTool.Sets
             var registrations = this.sqlConn.CreateStoreCommand(
                 @"select s.regNumber,
                         s.nActID,
-                        s.nRegNum as actRegNum,
+                        s.nRegNum,
                         s.dRegDate,
                         s.tRegMark,
                         s.tDocCAA,
@@ -300,7 +300,7 @@ namespace Gva.MigrationTool.Sets
                         s.tDeDocCAA,
                         s.dDeDateCAA,
                         s.tDeUser,
-                        a.n_RegNum as regNum,
+                        a.n_RegNum as actRegNum,
                         owner.tNameEN ownerNameEn,
                         oper.tNameEN operNameEn
                     from 
@@ -324,10 +324,10 @@ namespace Gva.MigrationTool.Sets
                 .Materialize(r =>
                     new
                     {
-                        __oldId = r.Field<string>("regNum"),
+                        __oldId = r.Field<string>("nRegNum"),
                         __migrTable = "Reg1, Reg2",
                         register = noms["registers"].ByCode(r.Field<int>("regNumber").ToString()),
-                        regNum = Utils.FmToNum(r.Field<string>("regNum")).Value,
+                        nRegNum = Utils.FmToNum(r.Field<string>("nRegNum")).Value,
                         actRegNum = Utils.FmToNum(r.Field<string>("actRegNum")).Value,
                         certDate = Utils.FmToDate(r.Field<string>("dRegDate")),
                         regMark = r.Field<string>("tRegMark"),
@@ -364,7 +364,7 @@ namespace Gva.MigrationTool.Sets
                         parsedToIntStatusCode = int.Parse(r.Field<string>("nStatus")),
                         matchedStatus = isOrderStatus.Match(noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")).Name)
                     })
-                .OrderBy(r => r.regNum)
+                .OrderBy(r => r.nRegNum)
                 .Select(r => new JObject(
                         new JProperty("part",
                            Utils.ToJObject(new
@@ -372,8 +372,8 @@ namespace Gva.MigrationTool.Sets
                                 r.__oldId,
                                 r.__migrTable,
                                 r.register,
-                                actNumber = r.actRegNum,
-                                certNumber = r.regNum,
+                                actNumber = r.nRegNum,
+                                certNumber = r.actRegNum >= r.nRegNum ? r.nRegNum : r.actRegNum,
                                 r.certDate,
                                 r.regMark,
                                 r.incomingDocNumber,
