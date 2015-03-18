@@ -456,19 +456,8 @@ namespace Docs.SqlConfig
             string classificationPermission = row["ClassificationPermission"].Trim();
             string unitCode = row["UnitCode"].Trim();
             string unitName = row["UnitName"].Trim();
-            string unitUser = row["UnitUser"].Trim();
 
             string classificationsId = CodeClassificationIdRelations.Where(r => r.Key == classificationCode).Select(r => r.Value.Item1).FirstOrDefault().ToString();
-
-            string actualUnitCode = null;
-            if (String.IsNullOrWhiteSpace(unitUser))
-            {
-                actualUnitCode = unitCode;
-            }
-            else
-            {
-                actualUnitCode = unitCode + "01";
-            }
 
             string unitId = CodeUnitIdRelations.Where(r => r.Key == unitCode).Select(r => r.Value.Item1).FirstOrDefault().ToString();
 
