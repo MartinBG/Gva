@@ -10,20 +10,20 @@
     nomenclatureValues
   ) {
     $scope.nomenclatureValues = nomenclatureValues;
+    $scope.nomAlias = $stateParams.alias;
 
     $scope.editNomenclatureValue = function (item) {
       return $state.go('root.nomenclatures.search.values.edit', {
         nomId: $stateParams.nomId,
         id: item.nomValueId,
-        alias: $stateParams.alias
+        alias: $scope.nomAlias
       });
     };
 
     $scope.newNomenclatureValue = function () {
       return $state.go('root.nomenclatures.search.values.edit', {
         nomId: $stateParams.nomId,
-        id: undefined,
-        alias: $stateParams.alias
+        alias: $scope.nomAlias
       });
     };
   }

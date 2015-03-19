@@ -1,13 +1,29 @@
 ﻿<sc-button btn-click="newNomenclatureValue()" text="common.nomenclatures.nomValues.search.newNomValue" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
 
-<sc-datatable items="nomenclatureValues" filterable="true" pageable="true" sortable="true">
+<sc-datatable items="nomenclatureValues" filterable="true" pageable="true" sortable="true" ng-if="nomAlias !== 'limitations66'">
   <sc-column sortable="false" class="buttons-cell-compact" has-content="true">
     <sc-button name="viewButton" btn-click="editNomenclatureValue(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column sortable="false" data="code" title="common.nomenclatures.nomValues.search.code">
+  <sc-column data="code" title="common.nomenclatures.nomValues.search.code">
   </sc-column>
-  <sc-column sortable="false" data="name" title="common.nomenclatures.nomValues.search.name">
+  <sc-column data="name" title="common.nomenclatures.nomValues.search.name">
   </sc-column>
-  <sc-column sortable="false" data="nameAlt" title="common.nomenclatures.nomValues.search.nameAlt">
+  <sc-column data="nameAlt" title="common.nomenclatures.nomValues.search.nameAlt">
+  </sc-column>
+</sc-datatable>
+
+<sc-datatable items="nomenclatureValues" filterable="true" pageable="true" sortable="true" ng-if="nomAlias === 'limitations66'">
+  <sc-column sortable="false" class="buttons-cell-compact" has-content="true">
+    <sc-button name="viewButton" btn-click="editNomenclatureValue(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+  </sc-column>
+  <sc-column data="code" title="common.nomenclatures.nomValues.search.code">
+  </sc-column>
+  <sc-column data="name" title="common.nomenclatures.nomValues.search.name">
+  </sc-column>
+  <sc-column data="textContent.type" title="common.nomenclatures.nomValues.search.typeLimitation66" has-content="true">
+    {{item.textContent.type === 'ATSML' ? 'ATSML - Ограничение' : ''}}
+    {{item.textContent.type === 'AMLAircrafts' ? 'AML - За тип ВС' : ''}}
+    {{item.textContent.type === 'FCL' ? 'FCL - Ограничение' : ''}}
+    {{item.textContent.type === 'AMLCommon' ? 'AML - Общо ограничение' : ''}}
   </sc-column>
 </sc-datatable>

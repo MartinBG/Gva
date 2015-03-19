@@ -1731,6 +1731,14 @@ namespace Gva.MigrationTool.Nomenclatures
 
         private void migrateLimitations66(INomRepository repo, OracleConnection conn)
         {
+            var limitationTypes = new Dictionary<string, string>()
+            {
+                {"M", "ATSML"},
+                {"N", "AMLAircrafts"},
+                {"F", "FCL"},
+                {"Y", "AMLCommon"}
+            };
+
             Nom nom = repo.GetNom("limitations66");
             var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_LIMITATIONS_66")
                 .Materialize(r =>
@@ -1746,7 +1754,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
-                                general = r.Field<string>("GENERAL"),
+                                type = limitationTypes[r.Field<string>("GENERAL")],
                                 point = 13
                             })
                     })
