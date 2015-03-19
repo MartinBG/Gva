@@ -113,7 +113,6 @@ namespace Gva.Api.WordTemplates
                 .Where(l => l.TextContent.Get<int>("point") == 13)
                 .Select(l => new { LIMIT_NAME = l.Name });
 
-
             List<int> authorizationGroupIds = nomRepository.GetNomValues("authorizationGroups")
                 .Where(nv => nv.Code == "FT" || nv.Code == "FC")
                 .Select(nv => nv.NomValueId)
@@ -125,45 +124,48 @@ namespace Gva.Api.WordTemplates
                 licenceType.Code.Replace("/", "."),
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
-
+            var licenceHolder = this.GetPersonData(personData, personAddress);
+            var countryNameBG = country != null ? country.Name : null;
+            var countryCode = country != null ? (country.TextContent != null ? country.TextContent.Get<string>("nationalityCodeCA") : null) : null;
+            var privileges = this.GetLicencePrivileges();
             var json = new
             {
                 root = new
                 {
                     L_LICENCE_NO = licenceNumber,
-                    L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
-                    COUNTRY_NAME_BG = country != null ? country.Name : null,
-                    COUNTRY_CODE = country != null ? (country.TextContent != null ? country.TextContent.Get<string>("nationalityCodeCA") : null) : null,
+                    L_LICENCE_NO2 = licenceNumber,
+                    L_LICENCE_HOLDER = licenceHolder,
+                    L_LICENCE_HOLDER2 = licenceHolder,
+                    COUNTRY_NAME_BG = countryNameBG,
+                    COUNTRY_CODE = countryCode,
+                    COUNTRY_NAME_BG2 = countryNameBG,
+                    COUNTRY_CODE2 = countryCode,
                     ISSUE_DATE = lastEdition.DocumentDateValidFrom.Value,
+                    ISSUE_DATE2 = lastEdition.DocumentDateValidFrom.Value,
                     OTHER_LICENCE = otherLicences,
-                    T_DOCUMENTS = new object[0],
-                    L_LICENCE_PRIV = this.GetLicencePrivileges(),
+                    OTHER_LICENCE2 = otherLicences,
+                    L_LICENCE_PRIV = privileges,
+                    L_LICENCE_PRIV2 = privileges,
                     RTO_NOTES = rtoRating != null ? rtoRating.Notes : null,
                     RTO_NOTES_EN = rtoRating != null ? rtoRating.NotesAlt : null,
-                    ENG_LEVEL = langLevel,
+                    RTO_NOTES2 = rtoRating != null ? rtoRating.Notes : null,
+                    RTO_NOTES_EN2 = rtoRating != null ? rtoRating.NotesAlt : null,
+                    ENG_LEVEL = Utils.FillBlankData(langLevel, 1),
+                    ENG_LEVEL2 = Utils.FillBlankData(langLevel, 1),
                     LIMITSp8 = limitationsP8,
                     LIMITSp13 = limitationsP13,
-                    T_RATING = ratings,
-                    INSTR_DATA = instructorData.Count > 0 ? new { INSTRUCTOR = instructorData } : null,
-                    INSTRUCTOR_NO_ENTRIES = instrNoEntries,
-                    EXAMINER_DATA = examinerData.Count > 0 ? new { EXAMINER = examinerData } : null,
-                    EXAMINER_NO_ENTRIES = examinerNoData,
-                    T_LICENCE_HOLDER = Utils.GetLicenceHolder(personData, personAddress),
-                    T_LICENCE_TYPE_NAME = licenceType.Name.ToLower(),
-                    T_LICENCE_NO = licenceNumber,
-                    T_ISSUE_DATE = lastEdition.DocumentDateValidFrom.Value,
-                    OTHER_LICENCE2 = otherLicences,
-                    T_MED_CERT = Utils.GetMedCerts(10, includedMedicals, personData),
-                    T_DOCUMENTS2 = this.GetDocuments2(licence, includedTrainings),
-                    L_RATING = ratings,
-                    INSTR_DATA1 = instructorData.Count > 0 ? new { INSTRUCTOR1 = instructorData } : null,
-                    INSTRUCTOR1_NO_ENTRIES = instrNoEntries,
-                    RTO_NOTES2 = rtoRating != null ? rtoRating.Notes : null,
-                    RTO_NOTES2_EN = rtoRating != null ? rtoRating.NotesAlt : null,
-                    ENG_LEVEL1 = langLevel,
+                    LIMITS2p8 = limitationsP8,
                     LIMITS2p13 = limitationsP13,
-                    EXAMINER_DATA1 = examinerData.Count > 0 ? new { EXAMINER1 = examinerData } : null,
-                    EXAMINER1_NO_ENTRIES = examinerNoData,
+                    T_RATING = ratings,
+                    T_RATING2 = ratings,
+                    INSTR_DATA = instructorData.Count > 0 ? new { INSTRUCTOR = instructorData } : null,
+                    INSTR_DATA1 = instructorData.Count > 0 ? new { INSTRUCTOR = instructorData } : null,
+                    INSTRUCTOR_NO_ENTRIES = instrNoEntries,
+                    INSTRUCTOR_NO_ENTRIES2 = instrNoEntries,
+                    EXAMINER_DATA = examinerData.Count > 0 ? new { EXAMINER = examinerData } : null,
+                    EXAMINER_DATA1 = examinerData.Count > 0 ? new { EXAMINER = examinerData } : null,
+                    EXAMINER_NO_ENTRIES = examinerNoData,
+                    EXAMINER_NO_ENTRIES2 = examinerNoData,
                     L_ABBREVIATION = this.GetAbbreviations()
                 }
             };
@@ -215,67 +217,6 @@ namespace Gva.Api.WordTemplates
                 LicenceDictionary.LicencePrivilege["medCert"],
                 LicenceDictionary.LicencePrivilege["photo"]
             };
-        }
-
-        private List<object> GetLimitations(
-            PersonLicenceEditionDO edition,
-            IEnumerable<PersonMedicalDO> includedMedicals,
-            IEnumerable<PersonTrainingDO> includedExams)
-        {
-            if (edition.Limitations == null)
-            {
-                return new List<object>();
-            }
-
-            var limitations = edition.Limitations.Select(l => new { LIMIT_NAME = l.Name });
-
-            limitations = limitations.Union(includedMedicals
-                .Where(m => m.Limitations.Count > 0)
-                .SelectMany(m => m.Limitations)
-                .Select(l => new { LIMIT_NAME = l.Name }));
-
-            limitations = limitations.Union(includedExams
-                .Select(e => new
-                {
-                    LIMIT_NAME = string.Format(
-                        "{0} {1} {2}",
-                        e.DocumentNumber,
-                        e.DocumentDateValidFrom.Value.ToString("dd.MM.yyyy"),
-                        e.DocumentDateValidTo.HasValue ? e.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null).Trim()
-                }));
-
-            return limitations.ToList<object>();
-        }
-
-        private List<object> GetDocuments2(PersonLicenceDO licence, IEnumerable<PersonTrainingDO> includedTrainings)
-        {
-            string[] documentRoleCodes;
-            bool hasRoles = LicenceDictionary.LicenceRole.TryGetValue(
-                licence.LicenceType.Code,
-                out documentRoleCodes);
-
-            if (!hasRoles)
-            {
-                return null;
-            }
-
-            return includedTrainings
-                .Where(t => documentRoleCodes.Contains(t.DocumentRole.Code))
-                .Select(t =>
-                    new
-                    {
-                        DOC = new
-                        {
-                            DOC_ROLE = t.DocumentRole.Name,
-                            SUB_DOC = new
-                            {
-                                DOC_TYPE = t.DocumentType.Name,
-                                DOC_NO = t.DocumentNumber,
-                                DATE = t.DocumentDateValidFrom,
-                                DOC_PUBLISHER = t.DocumentPublisher
-                            }
-                        }
-                    }).ToList<object>();
         }
 
         private List<object> GetAbbreviations()

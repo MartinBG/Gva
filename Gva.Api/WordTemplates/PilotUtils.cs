@@ -22,7 +22,8 @@ namespace Gva.Api.WordTemplates
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
                 if (rating.Content.Authorization == null ||
-                    (rating.Content.Authorization.Code != "RTO" && (rating.Content.Authorization.ParentValueId.HasValue ? !authorizationGroupIds.Contains(rating.Content.Authorization.ParentValueId.Value) : true)))
+                    (rating.Content.Authorization.Code != "RTO" &&
+                    (rating.Content.Authorization.ParentValueId.HasValue ? !authorizationGroupIds.Contains(rating.Content.Authorization.ParentValueId.Value) : true)))
                 {
                     ratings.Add(new
                     {
