@@ -3,13 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{49659990-B20A-4694-846A-E29680C10A5F}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gva.Database", "Gva.Database\Gva.Database.csproj", "{6B3A2E0F-ED05-49A0-939A-BF5FAE11B160}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docs.Database", "Docs.Database\Docs.Database.csproj", "{3414421C-5290-4D7A-A4D1-6AC0CB817A9A}"
@@ -119,6 +112,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FixMigration", "FixMigration", "{AC010C29-2180-4E6B-B421-D637613A12DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gva.FixFlyingExpMigrationTool", "FixMigration\Gva.FixFlyingExpMigrationTool\Gva.FixFlyingExpMigrationTool.csproj", "{64EF5DA9-EA8F-44A9-BDF2-BD8A4398ECA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docs.Web.App", "Docs.Web.App\Docs.Web.App.csproj", "{AF7D7E10-5576-41E4-B2AE-2C6E1832CAE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docs.Web.Host", "Docs.Web.Host\Docs.Web.Host.csproj", "{09006DC2-86BF-40F0-98C7-FCAD47071FAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -192,7 +188,6 @@ Global
 		{1050ED9C-5041-4AB6-9E77-99E940B479C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1050ED9C-5041-4AB6-9E77-99E940B479C8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB84AEAB-D581-4896-B63B-830705F0015C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CB84AEAB-D581-4896-B63B-830705F0015C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB84AEAB-D581-4896-B63B-830705F0015C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB84AEAB-D581-4896-B63B-830705F0015C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99F9F0DE-AF64-4EC7-8953-872F416CB28B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -280,6 +275,7 @@ Global
 		{64EF5DA9-EA8F-44A9-BDF2-BD8A4398ECA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64EF5DA9-EA8F-44A9-BDF2-BD8A4398ECA8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF7D7E10-5576-41E4-B2AE-2C6E1832CAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF7D7E10-5576-41E4-B2AE-2C6E1832CAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF7D7E10-5576-41E4-B2AE-2C6E1832CAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF7D7E10-5576-41E4-B2AE-2C6E1832CAE8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{09006DC2-86BF-40F0-98C7-FCAD47071FAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -342,5 +338,7 @@ Global
 		{64EF5DA9-EA8F-44A9-BDF2-BD8A4398ECA8} = {AC010C29-2180-4E6B-B421-D637613A12DB}
 		{A87F6BA2-AAEE-488E-8D6C-1B06B2719E34} = {EBE3F84E-A2C9-47A2-8A42-2B8A5B2F665A}
 		{DC44D769-7041-46D8-B481-73B1709F1546} = {5241DAEE-8063-4C1E-B356-C225A9D15BB8}
+		{AF7D7E10-5576-41E4-B2AE-2C6E1832CAE8} = {EBE3F84E-A2C9-47A2-8A42-2B8A5B2F665A}
+		{09006DC2-86BF-40F0-98C7-FCAD47071FAA} = {EBE3F84E-A2C9-47A2-8A42-2B8A5B2F665A}
 	EndGlobalSection
 EndGlobal
