@@ -8,20 +8,18 @@
     $scope.appId = scFormParams.appId;
     $scope.hideCaseType = scFormParams.hideCaseType;
 
-    $scope.isUniqueDocNumber = function () {
-      if($scope.model.part.documentNumber) {
-        return Persons
-          .isUniqueDocNumber({
-            documentNumber: $scope.model.part.documentNumber,
-            partIndex: $scope.model.partIndex
-          })
-        .$promise
-        .then(function (result) {
-          return result.isUnique;
-        });
-      } else {
-        return true;
-      }
+    $scope.isUniqueDocData = function () {
+      return Persons
+        .isUniqueDocData({
+          documentNumber: $scope.model.part.documentNumber,
+          partIndex: $scope.model.partIndex,
+          publisher: $scope.model.part.documentPublisher,
+          dateValidFrom: $scope.model.part.documentDateValidFrom
+        })
+      .$promise
+      .then(function (result) {
+        return result.isUnique;
+      });
     };
   }
 

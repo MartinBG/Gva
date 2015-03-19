@@ -13,6 +13,7 @@ using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
+using Gva.Api.ModelsDO.Common;
 
 namespace Gva.Api.Projections.Person
 {
@@ -26,19 +27,112 @@ namespace Gva.Api.Projections.Person
 
         public override IEnumerable<GvaViewPersonDocument> Execute(PartCollection parts)
         {
-            List<PartVersion<PersonDocumentDO>> documents = new List<PartVersion<PersonDocumentDO>>();
-            var documentIds = parts.GetAll<PersonDocumentDO>("personDocumentIds").Where(d => d.Content.DocumentNumber != null);
-            var checks = parts.GetAll<PersonDocumentDO>("personDocumentChecks").Where(d => d.Content.DocumentNumber != null);
-            var educations = parts.GetAll<PersonDocumentDO>("personDocumentEducations").Where(d => d.Content.DocumentNumber != null);
-            var trainings = parts.GetAll<PersonDocumentDO>("personDocumentTrainings").Where(d => d.Content.DocumentNumber != null);
-            var others = parts.GetAll<PersonDocumentDO>("personDocumentOthers").Where(d => d.Content.DocumentNumber != null);
-            var langCertificates = parts.GetAll<PersonDocumentDO>("personDocumentLangCertificates").Where(d => d.Content.DocumentNumber != null);
-            var statuses = parts.GetAll<PersonDocumentDO>("personStatuses").Where(d => d.Content.DocumentNumber != null);
-            var medicals = parts.GetAll<PersonDocumentDO>("personDocumentMedicals").Where(d => d.Content.DocumentNumber != null);
-            var applications = parts.GetAll<PersonDocumentDO>("personDocumentApplications").Where(d => d.Content.DocumentNumber != null);
-            var reports = parts.GetAll<PersonDocumentDO>("personReports").Where(r => r.Content.DocumentNumber != null);
+            var documentIds = parts.GetAll<PersonDocumentIdDO>("personDocumentIds")
+                .Select(d => new PersonDocumentDO()
+                {
+                    LotId = d.Part.LotId,
+                    PartIndex = d.Part.Index,
+                    DocumentTypeId = d.Content.DocumentType.NomValueId,
+                    DocumentDateValidFrom = d.Content.DocumentDateValidFrom,
+                    DocumentPublisher = d.Content.DocumentPublisher,
+                    DocumentNumber = d.Content.DocumentNumber
+                });
+            var checks = parts.GetAll<PersonCheckDO>("personDocumentChecks")
+                 .Select(d => new PersonDocumentDO()
+                 {
+                     LotId = d.Part.LotId,
+                     PartIndex = d.Part.Index,
+                     DocumentTypeId = d.Content.DocumentType.NomValueId,
+                     DocumentDateValidFrom = d.Content.DocumentDateValidFrom,
+                     DocumentPublisher = d.Content.DocumentPublisher,
+                     DocumentRoleId = d.Content.DocumentRole.NomValueId,
+                     DocumentNumber = d.Content.DocumentNumber,
+                     DocumentPersonNumber = d.Content.DocumentPersonNumber
+                 });
 
-            documents = documentIds
+            var educations = parts.GetAll<PersonEducationDO>("personDocumentEducations")
+                .Select(d => new PersonDocumentDO()
+                {
+                    LotId = d.Part.LotId,
+                    PartIndex = d.Part.Index,
+                    DocumentNumber = d.Content.DocumentNumber
+                });
+
+            var trainings = parts.GetAll<PersonTrainingDO>("personDocumentTrainings")
+                .Select(d => new PersonDocumentDO()
+                {
+                    LotId = d.Part.LotId,
+                    PartIndex = d.Part.Index,
+                    DocumentTypeId = d.Content.DocumentType.NomValueId,
+                    DocumentDateValidFrom = d.Content.DocumentDateValidFrom,
+                    DocumentPublisher = d.Content.DocumentPublisher,
+                    DocumentRoleId = d.Content.DocumentRole.NomValueId,
+                    DocumentNumber = d.Content.DocumentNumber,
+                    DocumentPersonNumber = d.Content.DocumentPersonNumber
+                });
+            var others = parts.GetAll<PersonDocumentOtherDO>("personDocumentOthers")
+                .Select(d => new PersonDocumentDO()
+                {
+                    LotId = d.Part.LotId,
+                    PartIndex = d.Part.Index,
+                    DocumentTypeId = d.Content.DocumentType.NomValueId,
+                    DocumentDateValidFrom = d.Content.DocumentDateValidFrom,
+                    DocumentPublisher = d.Content.DocumentPublisher,
+                    DocumentRoleId = d.Content.DocumentRole.NomValueId,
+                    DocumentNumber = d.Content.DocumentNumber,
+                    DocumentPersonNumber = d.Content.DocumentPersonNumber
+                });
+
+            var langCertificates = parts.GetAll<PersonLangCertDO>("personDocumentLangCertificates")
+                .Select(d => new PersonDocumentDO()
+                {
+                    LotId = d.Part.LotId,
+                    PartIndex = d.Part.Index,
+                    DocumentTypeId = d.Content.DocumentType.NomValueId,
+                    DocumentDateValidFrom = d.Content.DocumentDateValidFrom,
+                    DocumentPublisher = d.Content.DocumentPublisher,
+                    DocumentRoleId = d.Content.DocumentRole.NomValueId,
+                    DocumentNumber = d.Content.DocumentNumber,
+                    DocumentPersonNumber = d.Content.DocumentPersonNumber
+                });
+
+            var statuses = parts.GetAll<PersonStatusDO>("personStatuses")
+                .Select(d => new PersonDocumentDO()
+                {
+                    LotId = d.Part.LotId,
+                    PartIndex = d.Part.Index,
+                    DocumentDateValidFrom = d.Content.DocumentDateValidFrom,
+                    DocumentNumber = d.Content.DocumentNumber
+                });
+
+            var medicals = parts.GetAll<PersonMedicalDO>("personDocumentMedicals")
+                .Select(d => new PersonDocumentDO()
+                {
+                    LotId = d.Part.LotId,
+                    PartIndex = d.Part.Index,
+                    DocumentDateValidFrom = d.Content.DocumentDateValidFrom,
+                    DocumentPublisher = d.Content.DocumentPublisher.Name,
+                    DocumentNumber = d.Content.DocumentNumber
+                });
+            var applications = parts.GetAll<DocumentApplicationDO>("personDocumentApplications")
+                .Select(d => new PersonDocumentDO()
+                {
+                    LotId = d.Part.LotId,
+                    PartIndex = d.Part.Index,
+                    DocumentDateValidFrom = d.Content.DocumentDate,
+                    DocumentNumber = d.Content.DocumentNumber
+                });
+
+            var reports = parts.GetAll<PersonReportDO>("personReports")
+                 .Select(d => new PersonDocumentDO()
+                 {
+                     LotId = d.Part.LotId,
+                     PartIndex = d.Part.Index,
+                     DocumentDateValidFrom = d.Content.Date,
+                     DocumentNumber = d.Content.DocumentNumber
+                 });
+
+            return documentIds
                 .Union(checks)
                 .Union(educations)
                 .Union(trainings)
@@ -48,19 +142,21 @@ namespace Gva.Api.Projections.Person
                 .Union(medicals)
                 .Union(applications)
                 .Union(reports)
-                .ToList();
-
-            return documents.Select(r => this.Create(r));
+                .Select(r => this.Create(r));
         }
 
-        private GvaViewPersonDocument Create(PartVersion<PersonDocumentDO> personDocument)
+        private GvaViewPersonDocument Create(PersonDocumentDO personDocument)
         {
             GvaViewPersonDocument document = new GvaViewPersonDocument();
 
-            document.LotId = personDocument.Part.Lot.LotId;
-            document.PartIndex = personDocument.Part.Index;
-            document.DocumentNumber = personDocument.Content.DocumentNumber;
-            document.DocumentPersonNumber = personDocument.Content.DocumentPersonNumber;
+            document.LotId = personDocument.LotId;
+            document.PartIndex = personDocument.PartIndex;
+            document.DocumentNumber = personDocument.DocumentNumber;
+            document.DocumentPersonNumber = personDocument.DocumentPersonNumber;
+            document.DateValidFrom = personDocument.DocumentDateValidFrom.HasValue? personDocument.DocumentDateValidFrom.Value.Date : (DateTime?)null;
+            document.RoleId = personDocument.DocumentRoleId;
+            document.TypeId = personDocument.DocumentTypeId;
+            document.Publisher = personDocument.DocumentPublisher;
 
             return document;
         }

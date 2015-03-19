@@ -8,8 +8,11 @@
   </div>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personReportDirective.documentNumber" class="col-sm-3 col-md-2" required sc-validate="{ invalidDocNumber: isValidDocNumber }" sc-validate-immediate="true" validations="{invalidDocNumber: 'persons.personReportDirective.existingDocNumber'}"></sc-field>
-    <sc-field type="date" ng-model="model.part.date" l10n-text="persons.personReportDirective.date" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personReportDirective.documentNumber" class="col-sm-3 col-md-2"
+       required sc-validate="{ invalidDocData: isValidDocData }" sc-validate-immediate="true"
+       validations="{invalidDocData: 'errorTexts.notUniqueDocData', required: 'default'}"></sc-field>
+    <sc-field type="date" ng-model="model.part.date" l10n-text="persons.personReportDirective.date" 
+      sc-validate="{ unique: isUniqueDocData }"  sc-validate-immediate="true" validations="{unique: 'errorTexts.notUniqueDocData'}" class="col-sm-3 col-md-2"></sc-field>
   </div>
 
   <h5 class="form-header" style="margin-top: 10px" l10n-text="persons.personReportDirective.includedChecks"></h5>

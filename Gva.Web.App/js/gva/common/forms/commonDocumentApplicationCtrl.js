@@ -9,12 +9,13 @@
     $scope.set = scFormParams.set;
     $scope.hideCaseType = scFormParams.hideCaseType;
 
-    $scope.isUniqueDocNumber = function () {
+    $scope.isUniqueDocData = function () {
       if($scope.set === 'person') {
         return Persons
-          .isUniqueDocNumber({
+          .isUniqueDocData({
+            partIndex: $scope.model.partIndex,
             documentNumber: $scope.model.part.documentNumber,
-            partIndex: $scope.model.partIndex
+            dateValidFrom: $scope.model.part.documentDate
           })
           .$promise
           .then(function (result) {

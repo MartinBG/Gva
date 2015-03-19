@@ -7,8 +7,10 @@
     </div>
   </div>
    <div class="row">
-    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="common.docApplicationDirective.documentNumber" sc-validate="{ unique: isUniqueDocNumber }" validations="{unique: 'errorTexts.notUniqueDocNumber'}" class="col-sm-3"></sc-field>
-    <sc-field type="date" ng-model="model.part.documentDate" ng-required="true" l10n-text="common.docApplicationDirective.documentDate" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="common.docApplicationDirective.documentNumber" 
+      sc-validate="{ unique: isUniqueDocData }" validations="{unique: 'errorTexts.notUniqueDocData'}" class="col-sm-3"></sc-field>
+    <sc-field type="date" ng-model="model.part.documentDate" ng-required="true" l10n-text="common.docApplicationDirective.documentDate"
+       sc-validate="{ unique: isUniqueDocData }" validations="{unique: 'errorTexts.notUniqueDocData', required: 'default'}" class="col-sm-3 col-md-2"></sc-field>
   </div>
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.part.applicationType" ng-readonly="!isNew" alias="'applicationTypes'" params="{ lotId: lotId }" ng-required="true" l10n-text="common.docApplicationDirective.applicationType" class="col-sm-10"></sc-field>

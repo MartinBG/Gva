@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Gva.Api.Models.Views.Person
@@ -13,6 +14,14 @@ namespace Gva.Api.Models.Views.Person
 
         public int? DocumentPersonNumber { get; set; }
 
+        public int? TypeId { get; set; }
+
+        public int? RoleId { get; set; }
+
+        public string Publisher { get; set; }
+
+        public DateTime? DateValidFrom { get; set; }
+
         public virtual GvaViewPerson Person { get; set; }
     }
 
@@ -21,18 +30,20 @@ namespace Gva.Api.Models.Views.Person
         public GvaViewPersonDocumentMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.LotId, t.PartIndex, t.DocumentNumber });
+            this.HasKey(t => new { t.LotId, t.PartIndex });
 
             // Properties
             this.Property(t => t.LotId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
+            this.Property(t => t.PartIndex)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
             this.Property(t => t.DocumentNumber)
-                .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.DocumentPersonNumber)
-                .IsOptional();
+            this.Property(t => t.Publisher)
+                .HasMaxLength(150);
 
             // Table & Column Mappings
             this.ToTable("GvaViewPersonDocuments");
@@ -40,6 +51,10 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
             this.Property(t => t.DocumentPersonNumber).HasColumnName("DocumentPersonNumber");
+            this.Property(t => t.TypeId).HasColumnName("TypeId");
+            this.Property(t => t.RoleId).HasColumnName("RoleId");
+            this.Property(t => t.Publisher).HasColumnName("Publisher");
+            this.Property(t => t.DateValidFrom).HasColumnName("DateValidFrom");
 
             // Relationships
             this.HasRequired(t => t.Person)

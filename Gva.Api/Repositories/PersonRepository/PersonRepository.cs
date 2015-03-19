@@ -387,21 +387,26 @@ namespace Gva.Api.Repositories.PersonRepository
                 .PartIndex;
         }
 
-        public bool IsUniqueDocNumber(string documentNumber, int? documentPersonNumber, int? partIndex)
+        public bool IsUniqueDocData(
+            string documentNumber = null,
+            int? documentPersonNumber = null,
+            int? partIndex = null,
+            int? typeId = null,
+            int? roleId = null,
+            string publisher = null,
+            DateTime? dateValidFrom = null)
         {
+            DateTime? date = dateValidFrom.HasValue ? dateValidFrom.Value.Date : (DateTime?)null;
+
             var predicate = PredicateBuilder.True<GvaViewPersonDocument>()
-                .And(d => d.DocumentNumber == documentNumber);
+                .AndStringMatches(d => d.DocumentNumber, documentNumber, true)
+                .AndStringMatches(d => d.Publisher, publisher, true)
+                .AndEquals(d => d.DocumentPersonNumber.Value, documentPersonNumber)
+                .AndEquals(d => d.TypeId.Value, typeId)
+                .AndEquals(d => d.RoleId.Value, roleId)
+                .AndEquals(d => d.DateValidFrom.Value, date);
 
-            if (documentPersonNumber.HasValue)
-            {
-                predicate = predicate.And(d => d.DocumentPersonNumber.Value == documentPersonNumber.Value);
-            }
-            else
-            {
-                predicate = predicate.And(d => !d.DocumentPersonNumber.HasValue);
-            }
-
-            if (partIndex.HasValue)
+            if(partIndex.HasValue)
             {
                 predicate = predicate.And(d => d.PartIndex != partIndex);
             }

@@ -31,9 +31,9 @@
         url: 'api/persons/stampedDocuments',
         isArray: true
       },
-      isUniqueDocNumber: {
+      isUniqueDocData: {
         method: 'GET',
-        url: 'api/persons/:id/isUniqueDocNumber'
+        url: 'api/persons/:id/isUniqueDocData'
       },
       getChecksForReport: {
         method: 'GET',

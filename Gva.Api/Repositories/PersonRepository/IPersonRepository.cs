@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
@@ -68,7 +69,14 @@ namespace Gva.Api.Repositories.PersonRepository
 
         int GetLastRatingEditionIndex(int lotId, int ratingPartIndex);
 
-        bool IsUniqueDocNumber(string documentNumber, int? documentPersonNumber, int? partIndex);
+        bool IsUniqueDocData(
+            string documentNumber = null,
+            int? documentPersonNumber = null,
+            int? partIndex = null,
+            int? typeId = null,
+            int? roleId = null,
+            string publisher = null,
+            DateTime? dateValidFrom = null);
 
         bool IsUniqueLicenceNumber(string licenceTypeCode, int? licenceNumber);
 

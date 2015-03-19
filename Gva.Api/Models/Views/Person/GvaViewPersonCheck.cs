@@ -74,7 +74,7 @@ namespace Gva.Api.Models.Views.Person
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.Publisher)
-                .HasMaxLength(100);
+                .HasMaxLength(150);
 
             this.Property(t => t.DocumentNumber)
                 .HasMaxLength(50);

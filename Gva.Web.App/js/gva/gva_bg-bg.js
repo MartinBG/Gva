@@ -1535,7 +1535,6 @@
           isValid: 'Валиден'
         },
         personReportDirective: {
-          existingDocNumber: 'Вече съществува документ с този номер',
           date: 'Дата',
           documentNumber: 'No на отчет',
           addCheck: 'Добави проверкa',
@@ -3782,9 +3781,7 @@
         notUniqueBPN: 'Въведеният № на страница вече съществува в делото',
         invalidNotes: 'Бележки трябва да бъдат попълнени',
         invalidNotesAlt: 'Бележки лат. трябва да бъдат попълнени',
-        notUniqueDocNumberAndPersonNumber: 'Комбинацията от номер на документа ' +
-          'и номер в списъка трябва да е уникална',
-        notUniqueDocNumber: 'Номера на документа трябва да е уникален',
+        notUniqueDocData: 'Дублиран документ по основни данни',
         notValidRating: 'Вече съществува такава квалификация',
         notUniqueLicenceNumber: 'Съществува лиценз от същия вид със същия номер'
       },

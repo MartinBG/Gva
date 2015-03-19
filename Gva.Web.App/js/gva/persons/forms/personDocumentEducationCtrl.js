@@ -8,9 +8,9 @@
     $scope.hideCaseType = scFormParams.hideCaseType;
     $scope.appId = scFormParams.appId;
 
-    $scope.isUniqueDocNumber = function () {
+    $scope.isUniqueDocData = function () {
       return Persons
-        .isUniqueDocNumber({
+        .isUniqueDocData({
           documentNumber: $scope.model.part.documentNumber,
           partIndex: $scope.model.partIndex
         })

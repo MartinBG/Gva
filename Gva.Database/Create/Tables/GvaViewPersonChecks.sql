@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[GvaViewPersonChecks] (
     [LotId]                    INT           NOT NULL,
     [PartId]                   INT           NOT NULL,
     [PartIndex]                INT           NOT NULL,
-    [Publisher]                NVARCHAR(100) NULL,
+    [Publisher]                NVARCHAR(150) NULL,
     [DocumentNumber]           NVARCHAR(50)  NULL,
     [DocumentTypeId]           INT           NULL,
     [DocumentRoleId]           INT           NULL,

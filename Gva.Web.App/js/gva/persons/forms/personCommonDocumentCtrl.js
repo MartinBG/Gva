@@ -31,25 +31,24 @@
       return modalInstance.opened;
     };
 
-    $scope.isUniqueDocNumber = function () {
-      if($scope.model.part.documentNumber) {
-        return Persons
-          .isUniqueDocNumber({
-            documentNumber: $scope.model.part.documentNumber,
-            documentPersonNumber: $scope.model.part.documentPersonNumber,
-            partIndex: $scope.model.partIndex
-          })
-        .$promise
-        .then(function (result) {
-          if (!result.isUnique) {
-            $scope.lastGroupNumber = result.lastExistingGroupNumber;
-          }
+    $scope.isUniqueDocData = function () {
+      return Persons
+        .isUniqueDocData({
+          documentNumber: $scope.model.part.documentNumber,
+          documentPersonNumber: $scope.model.part.documentPersonNumber,
+          dateValidFrom: $scope.model.part.documentDateValidFrom,
+          roleId: $scope.model.part.documentRole? $scope.model.part.documentRole.nomValueId : null,
+          typeId: $scope.model.part.documentType? $scope.model.part.documentType.nomValueId : null,
+          publisher: $scope.model.part.documentPublisher
+        })
+      .$promise
+      .then(function (result) {
+        if (!result.isUnique) {
+          $scope.lastGroupNumber = result.lastExistingGroupNumber;
+        }
 
-          return result.isUnique;
-        });
-      } else {
-        return true;
-      }
+        return result.isUnique;
+      });
     };
 
   }

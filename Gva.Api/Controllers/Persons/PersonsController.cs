@@ -356,10 +356,24 @@ namespace Gva.Api.Controllers.Persons
         }
 
         [HttpGet]
-        [Route("isUniqueDocNumber")]
-        public IHttpActionResult IsUniqueDocNumber(string documentNumber, int? documentPersonNumber = null, int? partIndex = null)
+        [Route("isUniqueDocData")]
+        public IHttpActionResult IsUniqueDocData(
+            string documentNumber = null,
+            int? documentPersonNumber = null,
+            int? partIndex = null,
+            int? typeId = null, 
+            int? roleId = null,
+            string publisher = null, 
+            DateTime? dateValidFrom = null)
         {
-            bool isUnique = this.personRepository.IsUniqueDocNumber(documentNumber, documentPersonNumber, partIndex);
+            bool isUnique = this.personRepository.IsUniqueDocData(
+                documentNumber: documentNumber,
+                documentPersonNumber: documentPersonNumber,
+                partIndex: partIndex,
+                typeId: typeId,
+                roleId: roleId,
+                publisher: publisher,
+                dateValidFrom: dateValidFrom);
 
             if (!isUnique)
             {
@@ -371,7 +385,7 @@ namespace Gva.Api.Controllers.Persons
                 return Ok(new
                 {
                     isUnique = false,
-                    lastExistingGroupNumber = lastDocumentWithThisNumber.DocumentPersonNumber
+                    lastExistingGroupNumber = lastDocumentWithThisNumber != null? lastDocumentWithThisNumber.DocumentPersonNumber : null
                 });
             }
             else

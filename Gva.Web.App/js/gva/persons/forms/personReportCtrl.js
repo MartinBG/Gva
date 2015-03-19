@@ -32,27 +32,28 @@
       return modalInstance.opened;
     };
 
-    $scope.isValidDocNumber = function (documentNumber) {
-      if (!documentNumber) {
-        return true;
-      }
-      else {
+    $scope.isValidDocData = function () {
+      if($scope.model.part.documentNumber || $scope.model.part.date) {
         return Persons
-          .isUniqueDocNumber({
-              documentNumber: documentNumber,
-              partIndex: $scope.model.partIndex
+          .isUniqueDocData({
+              partIndex: $scope.model.partIndex,
+              documentNumber: $scope.model.part.documentNumber,
+              dateValidFrom: $scope.model.part.date
             })
           .$promise
           .then(function (result) {
             return result.isUnique;
           });
+      } else {
+        return true;
       }
     };
 
     $scope.createCheck = function (person) {
       return Persons
-        .isUniqueDocNumber({
-            documentNumber: $scope.model.part.documentNumber
+        .isUniqueDocData({
+            documentNumber: $scope.model.part.documentNumber,
+            dateValidFrom: $scope.model.part.date
           })
         .$promise
         .then(function (result) {
@@ -98,25 +99,21 @@
         });
     };
 
-    $scope.isUniqueDocNumber = function () {
-      if($scope.model.part.documentNumber) {
-        return Persons
-          .isUniqueDocNumber({
-            documentNumber: $scope.model.part.documentNumber,
-            documentPersonNumber: $scope.model.part.documentPersonNumber,
-            partIndex: $scope.model.partIndex
-          })
-        .$promise
-        .then(function (result) {
-          if (!result.isUnique) {
-            $scope.lastGroupNumber = result.lastExistingGroupNumber;
-          }
+    $scope.isUniqueDocData = function () {
+      return Persons
+        .isUniqueDocData({
+          documentNumber: $scope.model.part.documentNumber,
+          dateValidFrom: $scope.model.part.date,
+          partIndex: $scope.model.partIndex
+        })
+      .$promise
+      .then(function (result) {
+        if (!result.isUnique) {
+          $scope.lastGroupNumber = result.lastExistingGroupNumber;
+        }
 
-          return result.isUnique;
-        });
-      } else {
-        return true;
-      }
+        return result.isUnique;
+      });
     };
   }
 
