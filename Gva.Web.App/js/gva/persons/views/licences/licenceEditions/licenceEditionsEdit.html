@@ -1,6 +1,6 @@
 ﻿<h5 class="table-header" l10n-text="persons.editLicenceEditions.editions"></h5>
 <div style="padding-bottom:20px;">
-  <sc-datatable items="licenceEditions" filterable="false" pageable="false" sortable="true" dynamic-columns="false" has-info-text="false"
+  <sc-datatable items="licenceEditions" filterable="false" pageable="false" sortable="true" dynamic-columns="true" has-info-text="false"
     default-sort="part.documentDateValidFrom">
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="editEditionBtn" icon="fa-circle-o" icon-disabled="fa-check-circle-o"
@@ -29,14 +29,23 @@
     <sc-column title="persons.editLicenceEditions.limitations" has-content="true">
       {{item.part.limitations | pluck:'code' | join:', '}}
     </sc-column>
-    <sc-column data="part.notes" title="persons.editLicenceEditions.notes" has-content="true">
+    <sc-column data="part.notes" title="persons.editLicenceEditions.notes" has-content="true" visible="false">
       {{item.part.notes}}
     </sc-column>
-    <sc-column data="part.notesAlt" title="persons.editLicenceEditions.notesAlt" has-content="true">
+    <sc-column data="part.notesAlt" title="persons.editLicenceEditions.notesAlt" has-content="true" visible="false">
       {{item.part.notesAlt}}
+    </sc-column>
+    <sc-column data="part.inspector" title="persons.editLicenceEditions.inspector">
+    </sc-column>
+    <sc-column data="part.stampNumber" title="persons.editLicenceEditions.stampNumber">
     </sc-column>
     <sc-column data="part.licenceAction.code" title="persons.editLicenceEditions.licenceAction" has-content="true">
       {{item.part.licenceAction.code}}
+    </sc-column>
+    <sc-column data="cases[0].applications[0]" title="persons.editLicenceEditions.application" has-content="true">
+       <a ng-click="viewApplication(item.cases[0].applications[0].applicationId, lotId, item.cases[0].applications[0].partIndex)">
+        {{ !!item.cases[0].applications[0].oldDocumentNumber ? (item.cases[0].applications[0].application.applicationCode + ' ' + item.cases[0].applications[0].oldDocumentNumber + '/' + (item.cases[0].applications[0].documentDate | date: 'mediumDate')) : (item.cases[0].applications[0].applicationCode + ' ' + item.cases[0].applications[0].documentNumber) }}
+      </a>
     </sc-column>
     <sc-column data="case.bookPageNumber" title="persons.editLicenceEditions.bookPageNumber" has-content="true">
       {{item.case.bookPageNumber}}
