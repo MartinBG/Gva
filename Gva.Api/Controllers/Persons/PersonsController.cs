@@ -319,7 +319,18 @@ namespace Gva.Api.Controllers.Persons
         public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
         {
             var inventory = this.inventoryRepository.GetInventoryItemsForLot(lotId, caseTypeId);
-            return Ok(inventory);
+
+            var allItemsExceptLicences = inventory.Where(i => i.SetPartAlias != "personLicence");
+
+            var distinctLicences = inventory.Where(i => i.SetPartAlias == "personLicence")
+                .GroupBy(i => i.ParentPartIndex)
+                .Select(l => l.Last());
+
+            var result = allItemsExceptLicences.Union(distinctLicences)
+                .OrderBy(f => f.BookPageNumber)
+                .ToList();
+
+            return Ok(result);
         }
 
         [Route("{lotId}/applications/{appId}")]
