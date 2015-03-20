@@ -7,10 +7,13 @@ gva
 2. Install `gulp` globally with `npm install -g gulp`
 3. Install `bower` globally with `npm install -g bower`
 4. In the js app folder `cd .\Gva.Web.App`
-  * Install the required npm packages with `npm install`
-  * Install the required bower components with `bower install`
-  * Build the js app with `gulp`
-5. Open the solution `Gva.sln` and run the web project `Gva.Web.Host`
+  * Install the required npm packages with `npm install`. Will install configured packages from `\package.json` to `\node_modules`.
+  * Install the required bower components with `bower install`. Will install configured packages from `\Gva.Web.App\bower.json` to `Gva\Common.Web.App\bower_components`
+  * Build the js app with `gulp`. Will build and deploy it in \Gva.Web.Host\App
+5. Set Sql connection string in web.config to appropriate Sql authentication
+6. Deploy DB
+  * Run ~\Gva.Database\CreateAll.bat - to deploy DB schema and initial data
+7. Open the solution `Gva.sln` and run the web project `Gva.Web.Host`
 
 #### Test
 
