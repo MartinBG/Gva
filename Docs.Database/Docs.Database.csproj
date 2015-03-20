@@ -42,6 +42,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\Correspondents.sql" />
     <Content Include="Create\Diagram\DocRelations.sql" />
@@ -140,9 +141,76 @@
     <Content Include="Insert\Units\UnitClassifications.sql" />
     <Content Include="Insert\Units\UnitRelations.sql" />
     <Content Include="Insert\Units\UnitTypes.sql" />
+    <Content Include="TestData\ConfigFinalize.sql" />
+    <Content Include="TestData\Create.sql" />
+    <Content Include="TestData\ExcelConfig\ClassificationRelations.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\Classifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\DocFileTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\DocTypeClassifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\DocTypeGroups.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\DocTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\DocTypeUnitRoles.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\ElectronicServiceProviders.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\ElectronicServiceStageExecutors.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\ElectronicServiceStages.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\ExcelConfig.xml" />
+    <Content Include="TestData\ExcelConfig\IrregularityTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\RegisterIndexes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\UnitClassifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\UnitRelations.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\Units.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\Users.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\MosvCorrespondents.sql" />
+    <Content Include="TestData\Noms\mosv.sql" />
+    <Content Include="TestData\Noms\registers.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CreateAll.bat" />
+    <None Include="TestData\ExcelConfig\ExcelConfig.log" />
+    <None Include="TestData\ExcelConfig\ExcelConfig.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExcelConfig1.log</LastGenOutput>
+    </None>
+    <None Include="TestData\ExcelConfig\ExcelConfig1.log">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
