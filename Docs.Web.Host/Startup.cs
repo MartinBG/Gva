@@ -5,7 +5,7 @@ using Common.Owin;
 using Docs.Api;
 using Owin;
 
-namespace Ems.Web.Host
+namespace Docs.Web.Host
 {
     public class Startup
     {
