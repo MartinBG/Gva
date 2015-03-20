@@ -28,7 +28,9 @@
     <sc-column data="inspector" title="persons.licencesSearch.inspector">
     </sc-column>
     <sc-column title="persons.licencesSearch.application" class="wrap" has-content="true">
+      <a ng-click="viewApplication(item.application.applicationId, item.lotId, item.application.partIndex)">
       {{ !!item.application.oldDocumentNumber ? (item.application.applicationCode + ' ' + item.application.oldDocumentNumber + '/' + (item.application.documentDate | date: 'mediumDate')) : (item.application.applicationCode + ' ' + item.application.documentNumber) }}
+      </a>
     </sc-column>
     <sc-column data="notes" title="persons.licencesSearch.notes" visible="false" class="wrap">
     </sc-column>
