@@ -1,0 +1,79 @@
+<style>
+  .units-view .selected-unit {
+    background-color: rgba(48, 47, 200, 0.2);
+  }
+
+  .units-view .child-unit {
+    margin-left: 25px;
+  }
+</style>
+
+
+
+<script type="text/ng-template" id="unit_recursive_template.html">
+</script>
+
+<div class="unit-form-view">
+  model
+  controller: {{test}}
+  param: {{paramFromOutside}}
+
+
+  <!--<sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-plus" label="docs.edit.child"
+                      options="[
+                {
+                  text: 'docs.edit.document',
+                  action: attachDoc,
+                }, {
+                  text: 'docs.edit.electronicDocument',
+                  action: attachElectronicDoc,
+                }, {
+                  text: 'docs.edit.resolution',
+                  action: attachResolution,
+                }, {
+                  text: 'docs.edit.resolutionParentOnly',
+                  action: attachResolutionParentOnly,
+                }, {
+                  text: 'docs.edit.task',
+                  action: attachTask,
+                }, {
+                  text: 'docs.edit.taskParentOnly',
+                  action: attachTaskParentOnly,
+                },{
+                  text: 'docs.edit.remark',
+                  action: attachRemark,
+                }
+              ]">
+  </sc-dropdown-button>-->
+
+  <sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-plus" label="docs.edit.child"
+                      options="[
+                {
+                  text: 'asdf1'
+                }, {
+                  text: 'asdf2'
+                }, {
+                  text: 'asdf3'
+                }, {
+                  text: 'asdf4'
+                }, {
+                  text: 'asdf5'
+                }
+              ]">
+  </sc-dropdown-button>
+
+  <label>
+    <span l10n-text="common.units.name"></span>
+    <input type="text"
+           ng-model="filterValue" />
+  </label>
+
+  <span class="glyphicon glyphicon-plus-sign" ng-click="addNewClassification(null, 'Department')"></span>
+
+  <button ng-click="returnVal()">
+    <span l10n-text="common.units.edit.save"></span>
+  </button>
+  <button ng-click="cancel()">
+    <span l10n-text="common.units.edit.cancel"></span>
+  </button>
+</div>
