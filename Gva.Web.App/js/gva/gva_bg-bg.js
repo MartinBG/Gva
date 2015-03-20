@@ -2602,8 +2602,7 @@
         licenceEditionDocModal : {
           title: 'Редакция на документ към вписване',
           save: 'Запис',
-          cancel: 'Отказ',
-          back: 'Назад'
+          cancel: 'Отказ'
         },
         printLicenceModal: {
           title: 'Принтиране на лиценз',

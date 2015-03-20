@@ -11,7 +11,6 @@
 
     $scope.personId = scModalParams.personId;
     $scope.edition = scModalParams.edition;
-    $scope.canEdit = scModalParams.canEdit;
 
     $scope.save = function () {
       return PersonLicenceEditions.save({

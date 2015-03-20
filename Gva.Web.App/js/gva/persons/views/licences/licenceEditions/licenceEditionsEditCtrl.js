@@ -49,13 +49,8 @@
         personId: $stateParams.id,
         licenceInd: $stateParams.ind,
         editionInd:  editionPartIndex,
-        caseTypeId: $stateParams.caseTypeId,
-        canEdit: false
+        caseTypeId: $stateParams.caseTypeId
       };
-
-      if (editionPartIndex === $scope.lastEditionIndex) {
-        params.canEdit = true;
-      }
 
       var modalInstance = scModal.open('licenceEditionDoc', params);
 

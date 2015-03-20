@@ -3,18 +3,18 @@
     <div class="panel-heading">
       <strong l10n-text="persons.licenceEditionDocModal.title"></strong>
       <div class="pull-right">
-        <sc-button name="saveBtn" btn-click="save()" text="persons.licenceEditionDocModal.save" ng-if="canEdit"
+        <sc-button name="saveBtn" btn-click="save()" text="persons.licenceEditionDocModal.save"
           class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
         </sc-button>
-        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.licenceEditionDocModal.cancel"  ng-if="canEdit"
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.licenceEditionDocModal.cancel"
           class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
-        </sc-button>
-        <sc-button name="backBtn" btn-click="cancel()" text="persons.licenceEditionDocModal.back"  ng-if="!canEdit"
-          class="btn btn-primary btn-xs" icon="glyphicon-arrow-left">
         </sc-button>
       </div>
     </div>
 
-    <gva-common-scanned-document name="personScannedDocumentForm" readonly="!canEdit" ng-model="edition.cases" sc-form-params="{ setPart: 'person', lotId: personId, showNote: true}"></gva-common-scanned-document>
+    <gva-common-scanned-document name="personScannedDocumentForm" ng-model="edition.cases[0]" 
+      sc-form-params="{ setPart: 'person', lotId: personId, showNote: true, hideTitle: true}"></gva-common-scanned-document>
+    <gva-common-scanned-document name="personScannedDocumentForm" ng-model="edition.cases[1]"
+       sc-form-params="{ setPart: 'person', lotId: personId, showNote: true, hideApplications: true, hideCaseTypeData: true, hideTitle: true}"></gva-common-scanned-document>
   </div>
 </ng-form>
