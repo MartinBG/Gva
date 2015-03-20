@@ -899,7 +899,7 @@
           cancel: 'Отказ'
         },
         editAirworthiness: {
-          ammendments: 'Заверки',
+          amendments: 'Заверки',
           titleAw: 'Преглед на летателна годност',
           editAw: 'Редакция',
           deleteAw: 'Изтрий',

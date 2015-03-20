@@ -26,7 +26,7 @@
     resetAw();
     resetReviews();
 
-    $scope.disableNewAmmendment = false;
+    $scope.disableNewAmendment = false;
     $scope.$watch('aw.part.registration', function() {
       AircraftCertRegistrationsFM.get({
           id: $stateParams.id,
@@ -34,7 +34,7 @@
         })
       .$promise
       .then(function (reg) {
-        $scope.disableNewAmmendment = reg.part.status.code !== '1' && reg.part.status.code !== '2';
+        $scope.disableNewAmendment = reg.part.status.code !== '1' && reg.part.status.code !== '2';
       });
     });
 

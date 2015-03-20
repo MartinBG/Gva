@@ -6,7 +6,7 @@
       <div class="pull-right">
         <sc-button 
           ng-show="isEditAw && (aw.part.airworthinessCertificateType.alias === '15a' || aw.part.airworthinessCertificateType.alias === '15b')"
-          ng-disabled="aw.part.form15Amendments.amendment2 || disableNewAmmendment"
+          ng-disabled="aw.part.form15Amendments.amendment2 || disableNewAmendment"
           btn-click="newAmendment()" name="newAmendmentBtn" text="aircrafts.editAirworthiness.newAmendment" class="btn btn-primary btn-xs" icon="glyphicon-plus">
         </sc-button>
         <sc-button ng-show="!isEditAw" 
@@ -87,7 +87,7 @@
 
   <div class="panel panel-default" style="margin-top: 10px" ng-if="aw.part.form15Amendments && aw.part.form15Amendments.amendment1">
     <div class="panel-heading">
-      <strong l10n-text="aircrafts.editAirworthiness.ammendments"></strong>
+      <strong l10n-text="aircrafts.editAirworthiness.amendments"></strong>
     </div>
     <div class="well-sm panel-body">
       <gva-airworthiness-form15 name="airworthinessReviewF15Form" ng-model="aw.part.form15Amendments" ng-readonly="!isEditAw">
