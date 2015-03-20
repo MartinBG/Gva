@@ -1,5 +1,5 @@
 {
-  "name": "ems",
+  "name": "gva",
   "version": "1.0.0",
   "dependencies": {
     "angular": "1.2.16",
@@ -7,19 +7,20 @@
     "angular-l10n": "georgiyordanov/angular-l10n#93382bfecc13743486a27f7e8e55338485622fb1",
     "angular-resource": "1.2.16",
     "angular-ui-router": "0.2.10",
-    "angular-bootstrap": "0.10.0",
+    "angular-bootstrap": "pharant/bootstrap#45930923989f84debe673780ad4fbc21f5c12f06",
     "angular-ui-utils": "0.0.4",
     "json3": "3.2.4",
     "lodash": "2.1.0",
     "es5-shim": "2.1.0",
     "bootstrap": "3.0.3",
     "bootstrap-datepicker": "eternicode/bootstrap-datepicker#8bc254a136110369684dc05a48171682ff1f3a81",
-    "angular-ui-select2": "angelyordanov/ui-select2#a5e96d30acc6753be4ecdaabf3fa90efa9ca3de0",
+    "angular-ui-select2": "angelyordanov/ui-select2#16cba9eebc9847354756e11148cd128f7be52447",
     "angular-ui-sortable": "angular-ui/ui-sortable#65ff2f66501ad2ac14f8d61c4a6ff5a000134d0d",
-    "select2": "3.4.3",
+    "select2": "3.5.0",
     "jquery-modern": "jquery#2.0.3",
     "jquery-legacy": "belchev/jquery-angular-node-names#f3fd1c1b968720f5b0de2ec4ffb641136be9ddf6",
     "jquery-ui": "1.10.3",
+    "typeahead.js": "pharant/typeahead.js#463fbcd66706a384dd8c2d1e36d0d8d2125bc962",
     "blueimp-file-upload": "8.9.0",
     "select2-bootstrap-css": "fk/select2-bootstrap-css#48cd4b44bc94046cab20e0d345c978483684ab2e",
     "html5shiv": "3.7.0",
@@ -28,7 +29,9 @@
     "moment": "2.5.1",
     "angular-scrollto": "0.1.4",
     "autofill-event": "1.0.0",
-    "jquery-treetable": "pharant/jquery-treetable#7cf19369d9bebb6948987d312ff3742206f6e867"
+    "jquery-treetable": "pharant/jquery-treetable#7cf19369d9bebb6948987d312ff3742206f6e867",
+    "angular-sanitize": "1.3.5",
+    "textAngular": "1.3.7"
   },
   "devDependencies": {
     "angular-mocks": "1.2.16",
