@@ -1,31 +1,29 @@
-﻿//using Autofac;
-//using Common;
-//using Common.Api;
-//using Common.Owin;
-//using Docs.Api;
-//using Owin;
-//using Rio.Data;
+﻿using Autofac;
+using Common;
+using Common.Api;
+using Common.Owin;
+using Docs.Api;
+using Owin;
 
 namespace Ems.Web.Host
 {
     public class Startup
     {
-        //public void Configuration(IAppBuilder app)
-        //{
-        //    var container = CreateAutofacContainer();
+        public void Configuration(IAppBuilder app)
+        {
+            var container = CreateAutofacContainer();
 
-        //    App.Configure(app, container);
-        //}
+            App.Configure(app, container);
+        }
 
-        //public static IContainer CreateAutofacContainer()
-        //{
-        //    var builder = new ContainerBuilder();
-        //    builder.RegisterModule(new CommonModule());
-        //    builder.RegisterModule(new CommonApiModule());
-        //    builder.RegisterModule(new DocsApiModule());
-        //    builder.RegisterModule(new RioDataModule());
+        public static IContainer CreateAutofacContainer()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule(new CommonModule());
+            builder.RegisterModule(new CommonApiModule());
+            builder.RegisterModule(new DocsApiModule());
 
-        //    return builder.Build();
-        //}
+            return builder.Build();
+        }
     }
 }

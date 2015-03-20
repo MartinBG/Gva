@@ -1,0 +1,33 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ output extension=".log" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#
+	string batFile = Host.TemplateFile.Replace(".tt", ".bat");
+
+	Process p = new Process();
+	p.StartInfo.UseShellExecute = false;
+	p.StartInfo.CreateNoWindow = true;
+	p.StartInfo.RedirectStandardOutput = true;
+	p.StartInfo.RedirectStandardError = true;
+	p.StartInfo.FileName = batFile;
+	p.StartInfo.WorkingDirectory = Path.GetDirectoryName(Host.TemplateFile);
+	
+	p.Start();
+	
+	string stdOut = p.StandardOutput.ReadToEnd();
+	string stdErr = p.StandardError.ReadToEnd();
+	
+	p.WaitForExit();	
+
+	int exitCode = p.ExitCode;
+#>
+Run at <#= DateTime.Now #>
+============== STDOUT ==============
+<#= stdOut #>
+
+============== STDERR ==============
+<#= stdErr #>
+
+============== EXITCODE ==============
+<#= exitCode #>
