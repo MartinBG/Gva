@@ -175,6 +175,7 @@ namespace Gva.MigrationTool.Sets
                             addPartWithFiles("aircraftCertNoises/*", aircraftCertNoiseFM);
                         }
 
+                        Dictionary<int, Tuple<string, NomValue>> registrations = new Dictionary<int, Tuple<string, NomValue>>();
                         var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspector, getPersonByFmOrgName, getOrgByFmOrgName);
                         foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                         {
@@ -190,13 +191,18 @@ namespace Gva.MigrationTool.Sets
                                     (actNumber.HasValue ? string.Format("/дел.№ {0}", actNumber.ToString()) : string.Empty))
                             };
 
+                            string registerCode = aircraftCertRegistrationFM.Get<string>("part.register.code");
                             int certId = aircraftCertRegistrationFM.Get<int>("part.__oldId");
-
-                            var aircraftCertAirworthinessFM = this.getAircraftCertAirworthinessFM(aircraftFmId, certId, noms, registration, getInspector, getInspectorOrDefault);
-                            if (aircraftCertAirworthinessFM != null)
+                            if (!registrations.ContainsKey(certId))
                             {
-                                addPartWithFiles("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM);
+                                registrations.Add(certId, new Tuple<string, NomValue>(registerCode, registration));
                             }
+                        }
+
+                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessFM(aircraftFmId, registrations, noms, getInspector, getInspectorOrDefault);
+                        foreach (var aircraftCertAirworthinessFM in aircraftCertAirworthinessesFM)
+                        {
+                            addPartWithFiles("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM);
                         }
 
                         var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(aircraftFmId, noms, getInspector);
@@ -500,11 +506,10 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("applications", new JArray())))));
         }
 
-        private JObject getAircraftCertAirworthinessFM(
+        private List<JObject> getAircraftCertAirworthinessFM(
             string aircraftFmId,
-            int certId,
+            Dictionary<int, Tuple<string, NomValue>> registrations,
             Dictionary<string, Dictionary<string, NomValue>> noms,
-            NomValue registration,
             Func<string, JObject> getInspector,
             Func<string, JObject> getInspectorOrDefault)
         {
@@ -562,21 +567,21 @@ namespace Gva.MigrationTool.Sets
 
             var issues = this.sqlConn.CreateStoreCommand(
                 @"select * from 
-                    (select nRegNum, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspetor as t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA1 as r1
+                    (select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspetor as t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA1 as r1
                         union all
-                    select nRegNum, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA2 as r2) s
-                where {0}
-                order by NumberIssue",
-                new DbClause("nRegNum = {0}", certId)
+                    select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA2 as r2) s
+                where {0} and not(s.dIssue = '' and s.dFrom = '' and s.dValid = '') and s.nStatus <> 0
+                order by CAST(s.nRegNum as int), CAST(s.nRegNumActive as int) desc, s.NumberIssue",
+                new DbClause("s.nActId = {0}", aircraftFmId)
                 )
                 .Materialize(r =>
                     new
                     {
                         __oldId = r.Field<string>("nRegNum"),
                         __migrTable = "CofA1, CofA2",
-
+                        Reg_ID = r.Field<string>("Reg_ID"),
+                        certId = r.Field<string>("nRegNum"),
                         t_ARC_Type = r.Field<string>("t_ARC_Type"),
-
                         dDateEASA_25_Issue = Utils.FmToDate(r.Field<string>("dDateEASA_25_Issue")),
                         d_24_Issue = Utils.FmToDate(r.Field<string>("d_24_Issue")),
 
@@ -591,11 +596,10 @@ namespace Gva.MigrationTool.Sets
 
             if (issues.Count == 0)
             {
-                return null;
+                return new List<JObject>();
             }
 
             var lastIssue = issues.Last();
-
             string actAlias = null;
             if (actMap.ContainsKey(act.t_CofA_Type))
             {
@@ -611,6 +615,17 @@ namespace Gva.MigrationTool.Sets
                 else if (lastIssue.dDateEASA_25_Issue != null)
                 {
                     actAlias = "f25";
+                }
+                else if (lastIssue.dValid.HasValue && DateTime.Compare(lastIssue.dValid.Value, new DateTime(2008, 7, 18)) < 0)
+                {
+                    if (registrations.Any(r => r.Value.Item1 == "2"))
+                    {
+                        actAlias = "vla";
+                    }
+                    else
+                    {
+                        actAlias = "directive8";
+                    }
                 }
                 else
                 {
@@ -638,37 +653,36 @@ namespace Gva.MigrationTool.Sets
                     throw new Exception("Unexpected ACT alias");
             }
 
+
             certType = noms["airworthinessCertificateTypes"].ByAlias(actAlias);
 
+            int certId = int.Parse(lastIssue.certId);
+            List<JObject> airworthinesses = new List<JObject>();
             var aw = Utils.ToJObject(new
             {
                 airworthinessCertificateType = certType,
-                registration = registration,
+                registration = registrations.ContainsKey(certId) ? registrations[certId].Item2 : null,
                 documentNumber = act.t_CofA_No,
-                issueDate = issueDate,
-                form15Amendments = new JObject()
+                issueDate = issueDate
             });
+            airworthinesses.Add(aw);
 
             if (actAlias == "special")
             {
                 if (issues.Count > 1)
                 {
-                    Console.WriteLine("Special airworthiness should not have reviews CERTID = " + certId);
+                    Console.WriteLine("Special airworthiness should not have reviews aircraftFmId = " + aircraftFmId);
                 }
             }
             else
             {
-                var reviews = new JArray();
-
                 if (actAlias != "f24" && actAlias != "f25")
                 {
+                    var reviews = new JArray();
                     aw.Add("reviews", reviews);
-                }
 
-                int l = issues.Count;
-                for (int i = 0; i < l; i++)
-                {
-                    if (actAlias != "f24" && actAlias != "f25")
+                    int l = issues.Count;
+                    for (int i = 0; i < l; i++)
                     {
                         var review = Utils.ToJObject(new
                         {
@@ -685,58 +699,97 @@ namespace Gva.MigrationTool.Sets
                             ((JObject)review["inspector"]).Add("inspector", inspector);
                         }
                     }
-
-                    if (actAlias == "f24" || actAlias == "f25")
+                }
+                else
+                {
+                    var directive8Issues = issues.Where(i => i.t_ARC_Type == "").ToList();
+                    if (directive8Issues.Count() > 0)
                     {
-                        Action<string> trySetType = (arcType) =>
+                        var directive8form = Utils.ToJObject(new
                         {
-                            if (arcType != null)
-                            {
-                                if (arcType.Contains("15a"))
-                                {
-                                    aw["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15a"));
-                                }
-                                else if (arcType.Contains("15b"))
-                                {
-                                    aw["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15b"));
-                                }
-                            }
-                        };
+                            airworthinessCertificateType = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("directive8")),
+                            registration = aw["registration"],
+                            documentNumber = aw["documentNumber"],
+                            issueDate = directive8Issues.First().dIssue,
+                            form15Amendments = new JObject()
+                        });
 
-                        trySetType(issues[i].t_ARC_Type);
-
-                        if (i < l - 1 && issues[i].dIssue == issues[i + 1].dIssue &&
-                            !(i < l - 3 && issues[i].dIssue == issues[i + 3].dIssue)) //if more than 3 consecutive treat as separate
+                        var reviews = new JArray();
+                        directive8form.Add("reviews", reviews);
+                        int l = directive8Issues.Count;
+                        for (int i = 0; i < l; i++)
                         {
-                            aw["form15Amendments"]["amendment1"] = Utils.ToJObject(new
+                            var review = Utils.ToJObject(new
                             {
-                                issueDate = issues[i + 1].dFrom,
-                                validToDate = issues[i + 1].dValid,
-                                inspector = getExaminerOrOther(issues[i + 1].t_Reviewed_By)
+                                issueDate = directive8Issues[i].dFrom,
+                                validToDate = directive8Issues[i].dValid,
+                                inspector = new JObject()
                             });
 
-                            trySetType(issues[i + 1].t_ARC_Type);
-                            i++;
+                            reviews.Add(review);
 
-                            if (i < l - 2 && issues[i].dIssue == issues[i + 2].dIssue)
+                            var inspector = getInspector(directive8Issues[i].t_CAA_Inspetor);
+                            if (inspector != null)
                             {
-                                aw["form15Amendments"]["amendment2"] = Utils.ToJObject(new
-                                {
-                                    issueDate = issues[i + 2].dFrom,
-                                    validToDate = issues[i + 2].dValid,
-                                    inspector = getExaminerOrOther(issues[i + 2].t_Reviewed_By)
-                                });
-
-                                trySetType(issues[i + 2].t_ARC_Type);
-                                i++;
+                                ((JObject)review["inspector"]).Add("inspector", inspector);
                             }
                         }
+
+                        airworthinesses.Add(directive8form);
+                    }
+
+                    foreach (var issuesGroup in issues.Where(i => i.t_ARC_Type != "").GroupBy(i => i.dIssue))
+                    {
+                        var form = Utils.ToJObject(new
+                        {
+                            airworthinessCertificateType = new JObject(),
+                            registration = aw["registration"],
+                            documentNumber = aw["documentNumber"],
+                            issueDate = issuesGroup.First().dIssue,
+                            form15Amendments = new JObject()
+                        });
+
+                        if (issuesGroup.Any(i => i.t_ARC_Type.Contains("15a")))
+                        {
+                            form["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15a"));
+                        }
+                        else if (issuesGroup.Any(i => i.t_ARC_Type.Contains("15b")))
+                        {
+                            form["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15b"));
+                        }
+                        
+                        if (issuesGroup.Count() > 1)
+                        {
+                            var amendment1 = issuesGroup.Skip(1).Take(1).Single();
+                            form["form15Amendments"]["amendment1"] = Utils.ToJObject(new
+                            {
+                                issueDate = amendment1.dFrom,
+                                validToDate = amendment1.dValid,
+                                inspector = getExaminerOrOther(amendment1.t_Reviewed_By)
+                            });
+                        }
+
+                        if (issuesGroup.Count() > 2)
+                        {
+                            var amendment2 = issuesGroup.Skip(2).Take(1).Single();
+                            form["form15Amendments"]["amendment2"] = Utils.ToJObject(new
+                            {
+                                issueDate = amendment2.dFrom,
+                                validToDate = amendment2.dValid,
+                                inspector = getExaminerOrOther(amendment2.t_Reviewed_By)
+                            });
+                        }
+
+                        airworthinesses.Add(form);
                     }
                 }
             }
 
-            return new JObject(
-                    new JProperty("part", aw),
+            List<JObject> airworthinessResults = new List<JObject>();
+            foreach (var airworthiness in airworthinesses)
+            { 
+                var result = new JObject(
+                    new JProperty("part", airworthiness),
                     new JProperty("files",
                             new JArray(
                                 new JObject(
@@ -746,6 +799,11 @@ namespace Gva.MigrationTool.Sets
                                     new JProperty("bookPageNumber", null),
                                     new JProperty("pageCount", null),
                                     new JProperty("applications", new JArray())))));
+
+                airworthinessResults.Add(result);
+            }
+
+            return airworthinessResults;
         }
 
         private IList<JObject> getAircraftDocumentDebtsFM(string aircraftFmId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
