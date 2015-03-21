@@ -17,6 +17,8 @@
           if (lastReview.inspector && lastReview.inspector.inspector) {
             inspectorName = lastReview.inspector.inspector.name;
           }
+          validFrom = lastReview.issueDate;
+          validTo = lastReview.validToDate;
         }
       }
 
@@ -24,9 +26,13 @@
         if (aw.part.form15Amendments.amendment2) {
           validFrom = aw.part.form15Amendments.amendment2.issueDate;
           validTo = aw.part.form15Amendments.amendment2.validToDate;
+          inspectorName = aw.part.form15Amendments.amendment2.inspector.other ||
+            aw.part.form15Amendments.amendment2.inspector.examiner.name;
         } else if (aw.part.form15Amendments.amendment1) {
           validFrom = aw.part.form15Amendments.amendment1.issueDate;
           validTo = aw.part.form15Amendments.amendment1.validToDate;
+          inspectorName = aw.part.form15Amendments.amendment1.inspector.other ||
+            aw.part.form15Amendments.amendment1.inspector.examiner.name;
         }
       }
       if(!validFrom && !validTo) {
