@@ -702,40 +702,41 @@ namespace Gva.MigrationTool.Sets
                 }
                 else
                 {
-                    var directive8Issues = issues.Where(i => i.t_ARC_Type == "").ToList();
-                    if (directive8Issues.Count() > 0)
+                    var formIssues = issues.Where(i => i.t_ARC_Type == "").ToList();
+                    if (formIssues.Count() > 0)
                     {
-                        var directive8form = Utils.ToJObject(new
+                        string type = !formIssues.First().dValid.HasValue || DateTime.Compare(formIssues.First().dValid.Value, new DateTime(2008, 7, 18)) < 0 ? "directive8" : "unknown"; 
+                        var form = Utils.ToJObject(new
                         {
-                            airworthinessCertificateType = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("directive8")),
+                            airworthinessCertificateType = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias(type)),
                             registration = aw["registration"],
                             documentNumber = aw["documentNumber"],
-                            issueDate = directive8Issues.First().dIssue,
+                            issueDate = formIssues.First().dIssue,
                             form15Amendments = new JObject()
                         });
 
                         var reviews = new JArray();
-                        directive8form.Add("reviews", reviews);
-                        int l = directive8Issues.Count;
+                        form.Add("reviews", reviews);
+                        int l = formIssues.Count;
                         for (int i = 0; i < l; i++)
                         {
                             var review = Utils.ToJObject(new
                             {
-                                issueDate = directive8Issues[i].dFrom,
-                                validToDate = directive8Issues[i].dValid,
+                                issueDate = formIssues[i].dFrom,
+                                validToDate = formIssues[i].dValid,
                                 inspector = new JObject()
                             });
 
                             reviews.Add(review);
 
-                            var inspector = getInspector(directive8Issues[i].t_CAA_Inspetor);
+                            var inspector = getInspector(formIssues[i].t_CAA_Inspetor);
                             if (inspector != null)
                             {
                                 ((JObject)review["inspector"]).Add("inspector", inspector);
                             }
                         }
 
-                        airworthinesses.Add(directive8form);
+                        airworthinesses.Add(form);
                     }
 
                     foreach (var issuesGroup in issues.Where(i => i.t_ARC_Type != "").GroupBy(i => i.dIssue))
