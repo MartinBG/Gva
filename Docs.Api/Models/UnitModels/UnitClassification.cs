@@ -1,31 +1,34 @@
-﻿using Common.Api.Models;
-using System;
-using System.Collections.Generic;
+using Docs.Api.Models.ClassificationModels;
+using Docs.Api.Models.UnitModels;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Common.Api.Models
+namespace Docs.Api.Models.UnitModels
 {
-    public partial class RoleClassification
+    public partial class UnitClassification
     {
-        public int RoleClassificationId { get; set; }
-        public int RoleId { get; set; }
+        public int UnitClassificationId { get; set; }
+
+        public int UnitId { get; set; }
+
         public int ClassificationId { get; set; }
+
         public int ClassificationPermissionId { get; set; }
+
         public byte[] Version { get; set; }
+
         public virtual ClassificationPermission ClassificationPermission { get; set; }
+
         public virtual Classification Classification { get; set; }
-        public virtual Role Role { get; set; }
+
+        public virtual Unit Unit { get; set; }
     }
 
-    public class RoleClassificationMap : EntityTypeConfiguration<RoleClassification>
+    public class UnitClassificationMap : EntityTypeConfiguration<UnitClassification>
     {
-        public RoleClassificationMap()
+        public UnitClassificationMap()
         {
             // Primary Key
-            this.HasKey(t => t.RoleClassificationId);
+            this.HasKey(t => t.UnitClassificationId);
 
             // Properties
             this.Property(t => t.Version)
@@ -35,9 +38,9 @@ namespace Common.Api.Models
                 .IsRowVersion();
 
             // Table & Column Mappings
-            this.ToTable("RoleClassifications");
-            this.Property(t => t.RoleClassificationId).HasColumnName("RoleClassificationId");
-            this.Property(t => t.RoleId).HasColumnName("RoleId");
+            this.ToTable("UnitClassifications");
+            this.Property(t => t.UnitClassificationId).HasColumnName("UnitClassificationId");
+            this.Property(t => t.UnitId).HasColumnName("UnitId");
             this.Property(t => t.ClassificationId).HasColumnName("ClassificationId");
             this.Property(t => t.ClassificationPermissionId).HasColumnName("ClassificationPermissionId");
             this.Property(t => t.Version).HasColumnName("Version");
@@ -47,13 +50,11 @@ namespace Common.Api.Models
                 .WithMany()
                 .HasForeignKey(d => d.ClassificationPermissionId);
             this.HasRequired(t => t.Classification)
-                .WithMany()
+                .WithMany(t => t.UnitClassifications)
                 .HasForeignKey(d => d.ClassificationId);
-            this.HasRequired(t => t.Role)
-                .WithMany()
-                .HasForeignKey(d => d.RoleId)
-                .WillCascadeOnDelete();
-
+            this.HasRequired(t => t.Unit)
+                .WithMany(t => t.UnitClassifications)
+                .HasForeignKey(d => d.UnitId);
         }
     }
 }

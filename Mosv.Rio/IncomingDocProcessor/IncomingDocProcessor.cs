@@ -28,6 +28,7 @@ using Rio.Data.Abbcdn;
 using Rio.Objects;
 using System.Text.RegularExpressions;
 using Docs.Api.Repositories.EmailRepository;
+using Docs.Api.Models.UnitModels;
 
 namespace Mosv.Rio.IncomingDocProcessor
 {

@@ -20,6 +20,7 @@ using Docs.Api.DataObjects;
 using System.Text.RegularExpressions;
 using System.Net.Http;
 using System.Configuration;
+using Docs.Api.Models.UnitModels;
 
 namespace Docs.Api.Repositories.EmailRepository
 {

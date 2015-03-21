@@ -1,3 +1,4 @@
+using Docs.Api.Models.ClassificationModels;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models
@@ -18,7 +19,7 @@ namespace Docs.Api.Models
 
         public byte[] Version { get; set; }
 
-        public virtual Common.Api.Models.Classification Classification { get; set; }
+        public virtual Classification Classification { get; set; }
 
         public virtual DocDirection DocDirection { get; set; }
 

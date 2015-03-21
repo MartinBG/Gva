@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
+using Docs.Api.Models.ClassificationModels;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Common.Api.Models
+namespace Docs.Api.Models.UnitModels
 {
     public partial class UnitToken
     {

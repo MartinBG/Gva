@@ -1,11 +1,18 @@
+using Docs.Api.Models.UnitModels;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Common.Api.Models
+namespace Docs.Api.Models.ClassificationModels
 {
-    public partial class ClassificationPermission
+    public partial class Classification
     {
-        public int ClassificationPermissionId { get; set; }
+        public Classification()
+        {
+            this.ClassificationRelations = new List<ClassificationRelation>();
+            this.UnitClassifications = new List<UnitClassification>();
+        }
+
+        public int ClassificationId { get; set; }
 
         public string Name { get; set; }
 
@@ -14,14 +21,18 @@ namespace Common.Api.Models
         public bool IsActive { get; set; }
 
         public byte[] Version { get; set; }
+
+        public virtual ICollection<ClassificationRelation> ClassificationRelations { get; set; }
+
+        public virtual ICollection<UnitClassification> UnitClassifications { get; set; }
     }
 
-    public class ClassificationPermissionMap : EntityTypeConfiguration<ClassificationPermission>
+    public class ClassificationMap : EntityTypeConfiguration<Classification>
     {
-        public ClassificationPermissionMap()
+        public ClassificationMap()
         {
             // Primary Key
-            this.HasKey(t => t.ClassificationPermissionId);
+            this.HasKey(t => t.ClassificationId);
 
             // Properties
             this.Property(t => t.Name)
@@ -29,7 +40,6 @@ namespace Common.Api.Models
                 .HasMaxLength(200);
 
             this.Property(t => t.Alias)
-                .IsRequired()
                 .HasMaxLength(200);
 
             this.Property(t => t.Version)
@@ -39,8 +49,8 @@ namespace Common.Api.Models
                 .IsRowVersion();
 
             // Table & Column Mappings
-            this.ToTable("ClassificationPermissions");
-            this.Property(t => t.ClassificationPermissionId).HasColumnName("ClassificationPermissionId");
+            this.ToTable("Classifications");
+            this.Property(t => t.ClassificationId).HasColumnName("ClassificationId");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Alias).HasColumnName("Alias");
             this.Property(t => t.IsActive).HasColumnName("IsActive");

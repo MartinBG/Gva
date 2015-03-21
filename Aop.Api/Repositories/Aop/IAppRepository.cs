@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Docs.Api.Models;
 using Common.Api.Models;
+using Docs.Api.Models.UnitModels;
+using Docs.Api.Models.ClassificationModels;
 
 namespace Aop.Api.Repositories.Aop
 {

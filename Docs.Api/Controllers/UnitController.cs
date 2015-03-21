@@ -3,7 +3,7 @@ using System.Web.Http;
 using Common.Data;
 using Common.Linq;
 using Docs.Api.Models;
-using Common.Api.Models;
+using Docs.Api.Models.UnitModels;
 
 namespace Docs.Api.Controllers
 {

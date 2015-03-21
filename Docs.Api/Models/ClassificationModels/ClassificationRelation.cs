@@ -1,6 +1,6 @@
 using System.Data.Entity.ModelConfiguration;
 
-namespace Common.Api.Models
+namespace Docs.Api.Models.ClassificationModels
 {
     public partial class ClassificationRelation
     {

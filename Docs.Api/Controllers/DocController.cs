@@ -24,6 +24,8 @@ using System.ServiceModel;
 using Abbcdn;
 using Rio.Data.ServiceContracts.AppCommunicator;
 using Docs.Api.Repositories.EmailRepository;
+using Docs.Api.Models.UnitModels;
+using Docs.Api.Models.ClassificationModels;
 
 namespace Docs.Api.Controllers
 {
