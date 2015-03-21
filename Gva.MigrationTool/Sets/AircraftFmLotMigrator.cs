@@ -300,7 +300,10 @@ namespace Gva.MigrationTool.Sets
                         s.tDeDocCAA,
                         s.dDeDateCAA,
                         s.tDeUser,
-                        a.n_RegNum as actRegNum,
+                        (case
+	                        when a.t_CofR_No LIKE 'II - %' then substring(a.t_CofR_No, 6, 10000)
+	                        when a.t_CofR_No LIKE 'II-%' then substring(a.t_CofR_No, 4, 10000)
+	                        else a.t_CofR_No end) as actRegNum,
                         owner.tNameEN ownerNameEn,
                         oper.tNameEN operNameEn
                     from 
@@ -328,7 +331,7 @@ namespace Gva.MigrationTool.Sets
                         __migrTable = "Reg1, Reg2",
                         register = noms["registers"].ByCode(r.Field<int>("regNumber").ToString()),
                         nRegNum = Utils.FmToNum(r.Field<string>("nRegNum")).Value,
-                        actRegNum = Utils.FmToNum(r.Field<string>("actRegNum")).Value,
+                        actRegNum = Utils.FmToNum(r.Field<string>("actRegNum")),
                         certDate = Utils.FmToDate(r.Field<string>("dRegDate")),
                         regMark = r.Field<string>("tRegMark"),
                         incomingDocNumber = r.Field<string>("tDocCAA"),
@@ -373,7 +376,7 @@ namespace Gva.MigrationTool.Sets
                                 r.__migrTable,
                                 r.register,
                                 actNumber = r.nRegNum,
-                                certNumber = r.actRegNum >= r.nRegNum ? r.nRegNum : r.actRegNum,
+                                certNumber = (!r.actRegNum.HasValue || r.actRegNum.Value >= r.nRegNum) ? r.nRegNum : r.actRegNum,
                                 r.certDate,
                                 r.regMark,
                                 r.incomingDocNumber,
