@@ -11,7 +11,7 @@
     originalAw,
     scMessage
   ) {
-
+    $scope.form = {};
     function resetAw() {
       $scope.aw = _.cloneDeep(originalAw);
     }
@@ -28,14 +28,16 @@
 
     $scope.disableNewAmendment = false;
     $scope.$watch('aw.part.registration', function() {
-      AircraftCertRegistrationsFM.get({
+      if ($scope.aw.part.registration) {
+        AircraftCertRegistrationsFM.get({
           id: $stateParams.id,
           ind: $scope.aw.part.registration.nomValueId
         })
-      .$promise
-      .then(function (reg) {
-        $scope.disableNewAmendment = reg.part.status.code !== '1' && reg.part.status.code !== '2';
-      });
+        .$promise
+        .then(function (reg) {
+          $scope.disableNewAmendment = reg.part.status.code !== '1' && reg.part.status.code !== '2';
+        });
+      }
     });
 
     $scope.isEditAw = false;

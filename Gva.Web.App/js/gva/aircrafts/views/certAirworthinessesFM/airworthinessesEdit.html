@@ -51,37 +51,36 @@
       <sc-column data="item.inspector.inspector.name" title="aircrafts.editAirworthiness.inspector">
       </sc-column>
     </sc-datatable>
-
-    <div class="panel panel-default" style="margin-top: 10px">
-      <div class="panel-heading">
-        <strong l10n-text="aircrafts.editAirworthiness.titleReview"></strong>
-        <div class="pull-right">
-          <sc-button ng-show="!isEditReview"
-             btn-click="newReview()" name="newReviewBtn" text="aircrafts.editAirworthiness.newReview" class="btn btn-primary btn-xs" icon="glyphicon-plus">
-          </sc-button>
-          <sc-button ng-if="reviews && reviews.length"
-            ng-show="!isEditReview"
-            btn-click="editReview()" name="editBtn" text="aircrafts.editAirworthiness.editReview" class="btn btn-primary btn-xs" icon="glyphicon-edit">
-          </sc-button>
-          <sc-button ng-if="reviews && reviews.length"
-            ng-show="!isEditReview"
-            ng-disabled="reviews.length <= 1 || reviews[reviews.length - 1] !== currentReview"
-            btn-click="deleteReview(currentReview)" name="deleteBtn"  text="aircrafts.editAirworthiness.deleteReview" class="btn btn-danger btn-xs" icon="glyphicon-remove">
-          </sc-button>
-          <sc-button ng-show="isEditReview"
-            btn-click="saveReview()" name="saveBtn" text="aircrafts.editAirworthiness.saveReview" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
-          </sc-button>
-          <sc-button ng-show="isEditReview"
-            btn-click="cancelReview()" name="cancelBtn" text="aircrafts.editAirworthiness.cancelReview" class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
-          </sc-button>
-        </div>
+  </div>
+  <div class="panel panel-default" ng-show="reviews && reviews.length > 0">
+    <div class="panel-heading">
+      <strong l10n-text="aircrafts.editAirworthiness.titleReview"></strong>
+      <div class="pull-right">
+        <sc-button ng-show="!isEditReview"
+            btn-click="newReview()" name="newReviewBtn" text="aircrafts.editAirworthiness.newReview" class="btn btn-primary btn-xs" icon="glyphicon-plus">
+        </sc-button>
+        <sc-button ng-if="reviews && reviews.length"
+          ng-show="!isEditReview"
+          btn-click="editReview()" name="editBtn" text="aircrafts.editAirworthiness.editReview" class="btn btn-primary btn-xs" icon="glyphicon-edit">
+        </sc-button>
+        <sc-button ng-if="reviews && reviews.length"
+          ng-show="!isEditReview"
+          ng-disabled="reviews.length <= 1 || reviews[reviews.length - 1] !== currentReview"
+          btn-click="deleteReview(currentReview)" name="deleteBtn"  text="aircrafts.editAirworthiness.deleteReview" class="btn btn-danger btn-xs" icon="glyphicon-remove">
+        </sc-button>
+        <sc-button ng-show="isEditReview"
+          btn-click="saveReview()" name="saveBtn" text="aircrafts.editAirworthiness.saveReview" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button ng-show="isEditReview"
+          btn-click="cancelReview()" name="cancelBtn" text="aircrafts.editAirworthiness.cancelReview" class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
       </div>
+    </div>
 
-      <div class="well-sm panel-body" ng-show="currentReview">
-        <gva-airworthiness-review-other ng-show="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla' || aw.part.airworthinessCertificateType.alias === 'unknown'"
-          name="airworthinessReviewOtherForm" ng-model="currentReview" readonly="!isEditReview">
-        </gva-airworthiness-review-other>
-      </div>
+    <div class="well-sm panel-body" ng-show="currentReview">
+      <gva-airworthiness-review-other ng-show="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla' || aw.part.airworthinessCertificateType.alias === 'unknown'"
+        name="airworthinessReviewOtherForm" ng-model="currentReview" readonly="!isEditReview">
+      </gva-airworthiness-review-other>
     </div>
   </div>
 
