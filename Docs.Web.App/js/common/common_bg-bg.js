@@ -21,13 +21,7 @@
             news: 'Нови документи',
             corrsSearch: 'Кореспонденти',
             corrsNew: 'Нов кореспондент'
-          },
-          mosv: {
-            title: 'МОСВ',
-            admissions: 'ДОИ',
-            signals: 'Сигнали',
-            suggestions: 'Предложения'
-          },
+          },          
           reports: {
             search: 'Справки'
           },
@@ -60,6 +54,9 @@
             usernameInvalid: 'потребителското име трябва да е поне 5 символа' +
               ' и да съдържа само букви, числа, подчертавки (_) и точки (.)',
             usernameExists: 'потребителското име е заето',
+            email: 'Имейл',
+            appointmentDate: 'Дата на назначаване',
+            resignationdate: 'Дата на напускане',
             comment: 'Коментар:',
             entrance: 'Вход:',
             withPassAndUsername: ' с потребителско име / парола',

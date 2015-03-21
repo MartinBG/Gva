@@ -11,6 +11,8 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Docs.Api.Repositories.ClassificationRepository;
 using Docs.Api.Repositories.EmailRepository;
+using Docs.Api.Repositories.UnitRepository;
+using Docs.Api.BusinessLogic;
 
 namespace Docs.Api
 {
@@ -24,6 +26,9 @@ namespace Docs.Api
             moduleBuilder.RegisterType<DocRepository>().As<IDocRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ClassificationRepository>().As<IClassificationRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<EmailRepository>().As<IEmailRepository>().InstancePerLifetimeScope();
+
+            moduleBuilder.RegisterType<UnitRepository>().As<IUnitRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<UnitBusinessLogic>().As<IUnitBusinessLogic>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<CorrespondentController>().InstancePerLifetimeScope();

@@ -18,7 +18,7 @@
   .config(['scModalProvider', function (scModalProvider) {
       //jscs:disable disallowSpaceBeforeBinaryOperators, disallowSpacesInsideArrayBrackets, maximumLineLength
     scModalProvider
-      .modal('editUnitModal', 'js/common/units/editUnitModal.html', 'EditUnitModalCtrl', 'xsm');      
+      .modal('editUnitModal', 'js/ems/units/editUnitModal.html', 'EditUnitModalCtrl', 'xsm');      
   }])
 
   .config(['$stateProvider', function ($stateProvider) {
@@ -33,6 +33,6 @@
       .state(['root.nomenclatures.edit'                 , '/:id'                  , ['@root'                      , 'js/common/nomenclatures/views/nomenclaturesEdit.html'     , 'NomenclaturesEditCtrl'       ]])
       .state(['root.nomenclatures.search.values'        , '/:nomId/values'        , ['@root.nomenclatures.search' , 'js/common/nomenclatures/views/nomenclatureValues.html'    , 'NomenclatureValuesCtrl'      ]])
       .state(['root.nomenclatures.search.values.edit', '/:id', ['@root.nomenclatures.search', 'js/common/nomenclatures/views/nomenclatureValuesEdit.html', 'NomenclaturevaluesEditCtrl'                        ]])
-      .state(['root.units'                              , '/units'                , ['@root'                      , 'js/common/units/unitsView.html'                           , 'UnitsCtrl'                   ]]);
+      .state(['root.units'                              , '/units'                , ['@root'                      , 'js/ems/units/unitsView.html'                              , 'UnitsCtrl'                   ]]);
   }]);
 }(angular));

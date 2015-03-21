@@ -43,6 +43,10 @@
     <Content Include="index.html" />
     <Content Include="js\app.js" />
     <Content Include="js\app_bg-bg.js" />
+    <Content Include="js\common\common.js" />
+    <Content Include="js\common\common_bg-bg.js" />
+    <Content Include="js\common\root\views\root.html" />
+    <Content Include="js\common\root\views\rootCtrl.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

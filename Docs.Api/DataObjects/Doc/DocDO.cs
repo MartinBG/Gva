@@ -33,7 +33,7 @@ namespace Docs.Api.DataObjects
             this.DocElectronicServiceStages = new List<DocElectronicServiceStageDO>();
         }
 
-        public DocDO(Doc d, UnitUser unitUser = null)
+        public DocDO(Docs.Api.Models.Doc d, UnitUser unitUser = null)
             : this()
         {
             if (d != null)

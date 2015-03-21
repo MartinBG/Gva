@@ -218,7 +218,7 @@ namespace Common.Api.Controllers
             this.unitOfWork.Save();
 
             //
-            int unitId = user.UnitId.Value;
+            //int unitId = user.UnitId.Value;
 
             //var oldUnitClassifications = this.unitOfWork.DbContext.Set<UnitClassification>()
             //    .Where(e => e.UnitId == unitId)
@@ -244,7 +244,7 @@ namespace Common.Api.Controllers
 
             this.unitOfWork.Save();
 
-            this.userRepository.spSetUnitTokens(unitId);
+            //this.userRepository.spSetUnitTokens(unitId);
 
             return Ok();
         }

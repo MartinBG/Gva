@@ -77,11 +77,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\IUnitBusinessLogic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessLogic\UnitBusinessLogic.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\AbbcdnController.cs" />
-    <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\DocController.cs" />
     <Compile Include="Controllers\DocNomController.cs" />
     <Compile Include="Controllers\CorrespondentController.cs" />
+    <Compile Include="Controllers\UnitController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DataObjects\Correspondent\CorrespondentContactDO.cs" />
     <Compile Include="DataObjects\Correspondent\CorrespondentDO.cs" />
     <Compile Include="DataObjects\Doc\BlobDO.cs" />
@@ -115,6 +123,15 @@
     <Compile Include="Models\DocHasRead.cs" />
     <Compile Include="Models\DocCasePartMovement.cs" />
     <Compile Include="Models\DocToken.cs" />
+    <Compile Include="Models\DomainModels\Enums.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\DomainModels\UnitClassificationDomainModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\DomainModels\UnitDomainModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\ElectronicServiceProvider.cs" />
     <Compile Include="Models\Email.cs" />
     <Compile Include="Models\EmailAddressee.cs" />
@@ -170,14 +187,24 @@
     <Compile Include="Models\RegisterIndex.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ClassificationRepository\ClassificationRepository.cs" />
-    <Compile Include="Repositories\ClassificationRepository\IClassificationRepository.cs" />
+    <Compile Include="Repositories\ClassificationRepository\ClassificationRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Repositories\ClassificationRepository\IClassificationRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Repositories\EmailRepository\EmailRepository.cs" />
     <Compile Include="Repositories\EmailRepository\IEmailRepository.cs" />
     <Compile Include="Repositories\CorrespondentRepository\CorrespondentRepository.cs" />
     <Compile Include="Repositories\CorrespondentRepository\ICorrespondentRepository.cs" />
     <Compile Include="Repositories\DocRepository\DocRepository.cs" />
     <Compile Include="Repositories\DocRepository\IDocRepository.cs" />
+    <Compile Include="Repositories\UnitRepository\IUnitRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Repositories\UnitRepository\UnitRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
