@@ -746,6 +746,7 @@ namespace Gva.MigrationTool.Sets
                             registration = aw["registration"],
                             documentNumber = aw["documentNumber"],
                             issueDate = issuesGroup.First().dIssue,
+                            validToDate = issuesGroup.First().dValid,
                             form15Amendments = new JObject()
                         });
 
