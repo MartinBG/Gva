@@ -12,15 +12,12 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.Reviews = new List<AircraftCertAirworthinessReviewFMDO>();
         }
 
-        [Required(ErrorMessage = "AirworthinessCertificateType is required.")]
         public NomValue AirworthinessCertificateType { get; set; }
 
-        [Required(ErrorMessage = "Registration is required.")]
         public NomValue Registration { get; set; }
 
         public string DocumentNumber { get; set; }
 
-        [Required(ErrorMessage = "IssueDate is required.")]
         public DateTime? IssueDate { get; set; }
 
         public DateTime? ValidToDate { get; set; }
