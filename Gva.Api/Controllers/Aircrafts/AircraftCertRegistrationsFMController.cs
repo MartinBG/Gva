@@ -191,9 +191,10 @@ namespace Gva.Api.Controllers.Aircrafts
             IEnumerable<PartVersion<AircraftCertAirworthinessFMDO>> airworthinesses,
             int? regPartIndex)
         {
+            var airworthinessesWithReg = airworthinesses.Where(a => a.Content.Registration != null);
             var regs =
                 (from r in registrations
-                 join aw in airworthinesses on r.Part.Index equals aw.Content.Registration.NomValueId into gaws
+                 join aw in airworthinessesWithReg on r.Part.Index equals aw.Content.Registration.NomValueId into gaws
                  from aw in gaws.DefaultIfEmpty()
                  group aw by r into aws
                  orderby aws.Key.Content.ActNumber descending
