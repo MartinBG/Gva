@@ -1105,7 +1105,8 @@
           notes: 'Забележки',
           tcdsn: 'TCDSN',
           chapter: 'Chapter',
-          additionalModification: 'Допълнителна модификация'
+          additionalModification: 'Допълнителна модификация',
+          additionalModificationAlt: 'Допълнителна модификация (англ.)'
         },
         radioDirective: {
           certNumber: '№',
