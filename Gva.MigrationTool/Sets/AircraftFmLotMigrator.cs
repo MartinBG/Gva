@@ -653,7 +653,6 @@ namespace Gva.MigrationTool.Sets
                     throw new Exception("Unexpected ACT alias");
             }
 
-
             certType = noms["airworthinessCertificateTypes"].ByAlias(actAlias);
 
             int certId = int.Parse(lastIssue.certId);
@@ -702,7 +701,7 @@ namespace Gva.MigrationTool.Sets
                 }
                 else
                 {
-                    var formIssues = issues.Where(i => i.t_ARC_Type == "").ToList();
+                    var formIssues = issues.Where(i => i.t_ARC_Type == "" || i.t_ARC_Type.Contains("BG Form")).ToList();
                     if (formIssues.Count() > 0)
                     {
                         string type = !formIssues.First().dValid.HasValue || DateTime.Compare(formIssues.First().dValid.Value, new DateTime(2008, 7, 18)) < 0 ? "directive8" : "unknown"; 
@@ -739,47 +738,56 @@ namespace Gva.MigrationTool.Sets
                         airworthinesses.Add(form);
                     }
 
-                    foreach (var issuesGroup in issues.Where(i => i.t_ARC_Type != "").GroupBy(i => i.dIssue))
+                    Func<DateTime?, DateTime?, string, JObject> createNewForm15 = (dateOfIssue, validDate, arcType) =>
                     {
-                        var allDistinctIssues = issuesGroup
-                            .GroupBy(i => new { i.dValid, i.dIssue, i.dFrom })
-                            .Select(i => i.First())
-                            .OrderBy(i => i.dFrom);
-
                         var form = Utils.ToJObject(new
                         {
                             airworthinessCertificateType = new JObject(),
                             registration = aw["registration"],
                             documentNumber = aw["documentNumber"],
-                            issueDate = allDistinctIssues.First().dIssue,
-                            validToDate = allDistinctIssues.First().dValid,
+                            issueDate = dateOfIssue,
+                            validToDate = validDate,
                             reviews = new JArray()
                         });
 
-                        if (issuesGroup.Any(i => i.t_ARC_Type.Contains("15a")))
+                        if (arcType.Contains("15a"))
                         {
                             form["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15a"));
                         }
-                        else if (issuesGroup.Any(i => i.t_ARC_Type.Contains("15b")))
+                        else if (arcType.Contains("15b"))
                         {
                             form["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15b"));
                         }
 
-                        var reviews = new JArray();
-                        foreach (var issue in allDistinctIssues.Skip(1))
+                        return form;
+                    };
+
+                    JObject lastForm = null;
+                    foreach (var issue in issues.Where(i => i.t_ARC_Type.Contains("15")))
+                    {
+                        if (issue.t_ARC_Type.Contains("Заверка") || issue.t_ARC_Type.Contains("Reissue"))
                         {
-                            var review = Utils.ToJObject(new
+                            if (lastForm == null || !issue.t_ARC_Type.Contains(lastForm["airworthinessCertificateType"]["alias"].ToString()))
                             {
-                                issueDate = issue.dFrom,
-                                validToDate = issue.dValid,
-                                inspector = getExaminerOrOther(issue.t_Reviewed_By)
-                            });
-
-                            reviews.Add(review);
+                                lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type);
+                                airworthinesses.Add(lastForm);
+                            }
+                            else if (issue.t_ARC_Type.Contains(lastForm["airworthinessCertificateType"]["alias"].ToString()))
+                            {
+                                var review = Utils.ToJObject(new
+                                {
+                                    issueDate = issue.dFrom,
+                                    validToDate = issue.dValid,
+                                    inspector = getExaminerOrOther(issue.t_Reviewed_By)
+                                });
+                                (lastForm["reviews"] as JArray).Add(review);
+                            }
                         }
-                        form["reviews"] = reviews;
-
-                        airworthinesses.Add(form);
+                        else 
+                        {
+                            lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type);
+                            airworthinesses.Add(lastForm);
+                        }
                     }
                 }
             }
