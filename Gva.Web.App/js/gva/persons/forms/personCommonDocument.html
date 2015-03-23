@@ -24,7 +24,7 @@
   <div class="row">
     <sc-field-group class="col-sm-6 col-md-4" text="persons.personCommonDocDirective.documentPublisher" field-name="documentPublisher"
       validations="{unique: 'errorTexts.notUniqueDocData', required: 'default' }">
-      <sc-text ng-model="model.part.documentPublisher" name="documentPublisher" ng-required="categoryAlias !== 'check'" ng-readonly="true"></sc-text>
+      <sc-text ng-model="model.part.documentPublisher" name="documentPublisher" ng-required="categoryAlias !== 'check'" sc-validate="{ unique: isUniqueDocData }" ng-readonly="true"></sc-text>
       <sc-button class="btn btn-default" btn-click="choosePublisher()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
     </sc-field-group>
     <sc-field type="nomenclature" sc-validate="{ unique: isUniqueDocData }" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="persons.personCommonDocDirective.valid" class="col-sm-3 col-md-2"></sc-field>
