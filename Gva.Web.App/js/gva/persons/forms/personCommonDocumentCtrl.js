@@ -39,7 +39,8 @@
           dateValidFrom: $scope.model.part.documentDateValidFrom,
           roleId: $scope.model.part.documentRole? $scope.model.part.documentRole.nomValueId : null,
           typeId: $scope.model.part.documentType? $scope.model.part.documentType.nomValueId : null,
-          publisher: $scope.model.part.documentPublisher
+          publisher: $scope.model.part.documentPublisher,
+          partIndex: $scope.model.partIndex
         })
       .$promise
       .then(function (result) {
