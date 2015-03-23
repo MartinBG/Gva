@@ -20,7 +20,7 @@
   <div class="row">
     <div class="form-group col-md-2 col-sm-3">
       <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.isActive"></label>
-      <input type="checkbox" ng-model="model.isActive"/>
+      <input type="checkbox" ng-model="model.isActive" ng-disabled="form.$readonly"/>
     </div>
   </div>
 </ng-form>
