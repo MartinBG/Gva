@@ -9,7 +9,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
     {
         public AircraftCertAirworthinessFMDO()
         {
-            this.Reviews = new List<AircraftCertAirworthinessReviewFMDO>();
+            this.Reviews = new List<AircraftCertAirworthinessReviewDO>();
         }
 
         public NomValue AirworthinessCertificateType { get; set; }
@@ -22,8 +22,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? ValidToDate { get; set; }
 
-        public List<AircraftCertAirworthinessReviewFMDO> Reviews { get; set; }
-
-        public AircraftCertAirworthinessForm15DO Form15Amendments { get; set; }
+        public List<AircraftCertAirworthinessReviewDO> Reviews { get; set; }
     }
 }

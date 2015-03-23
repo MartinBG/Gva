@@ -152,8 +152,6 @@
     <Compile Include="Controllers\Persons\PersonLicenceEditionsController.cs" />
     <Compile Include="Controllers\Persons\PersonRatingEditionsController.cs" />
     <Compile Include="CommonUtils\DataExtensions.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessForm15DO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregExportFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRegistrationFMDO.cs" />
@@ -161,7 +159,6 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectionDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftReviewAmendmentFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMViewDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftRegistrationDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExamSystQualificationDO.cs" />
@@ -230,7 +227,7 @@
     <Compile Include="Controllers\Persons\PersonLicencesController.cs" />
     <Compile Include="Controllers\Persons\PersonMedicalsController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewOtherDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioDO.cs" />

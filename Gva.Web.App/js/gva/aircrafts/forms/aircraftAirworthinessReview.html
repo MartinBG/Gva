@@ -1,0 +1,12 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row">
+    <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessReviewDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.validToDate" ng-required="true" l10n-text="aircrafts.airworthinessReviewDirective.validToDate" class="col-md-2 col-sm-4"></sc-field>
+  </div>
+  <div class="row" ng-if="certType === '15a' || certType === '15b'">
+    <sc-field type="nomenclature" ng-model="model.organization" alias="'organizations'" l10n-text="aircrafts.airworthinessReviewDirective.organization" class="col-md-4 col-sm-8"></sc-field>
+  </div>
+  <div class="row">
+    <gva-aircraft-inspector name="inspector" ng-model="model.inspector" readonly="readonly" sc-form-params="{ inspectorTypes: inspectorTypes }"></gva-aircraft-inspector>
+  </div>
+</ng-form>

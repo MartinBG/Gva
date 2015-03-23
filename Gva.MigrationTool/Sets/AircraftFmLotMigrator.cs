@@ -741,14 +741,19 @@ namespace Gva.MigrationTool.Sets
 
                     foreach (var issuesGroup in issues.Where(i => i.t_ARC_Type != "").GroupBy(i => i.dIssue))
                     {
+                        var allDistinctIssues = issuesGroup
+                            .GroupBy(i => new { i.dValid, i.dIssue, i.dFrom })
+                            .Select(i => i.First())
+                            .OrderBy(i => i.dFrom);
+
                         var form = Utils.ToJObject(new
                         {
                             airworthinessCertificateType = new JObject(),
                             registration = aw["registration"],
                             documentNumber = aw["documentNumber"],
-                            issueDate = issuesGroup.First().dIssue,
-                            validToDate = issuesGroup.First().dValid,
-                            form15Amendments = new JObject()
+                            issueDate = allDistinctIssues.First().dIssue,
+                            validToDate = allDistinctIssues.First().dValid,
+                            reviews = new JArray()
                         });
 
                         if (issuesGroup.Any(i => i.t_ARC_Type.Contains("15a")))
@@ -759,28 +764,20 @@ namespace Gva.MigrationTool.Sets
                         {
                             form["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15b"));
                         }
-                        
-                        if (issuesGroup.Count() > 1)
-                        {
-                            var amendment1 = issuesGroup.Skip(1).Take(1).Single();
-                            form["form15Amendments"]["amendment1"] = Utils.ToJObject(new
-                            {
-                                issueDate = amendment1.dFrom,
-                                validToDate = amendment1.dValid,
-                                inspector = getExaminerOrOther(amendment1.t_Reviewed_By)
-                            });
-                        }
 
-                        if (issuesGroup.Count() > 2)
+                        var reviews = new JArray();
+                        foreach (var issue in allDistinctIssues.Skip(1))
                         {
-                            var amendment2 = issuesGroup.Skip(2).Take(1).Single();
-                            form["form15Amendments"]["amendment2"] = Utils.ToJObject(new
+                            var review = Utils.ToJObject(new
                             {
-                                issueDate = amendment2.dFrom,
-                                validToDate = amendment2.dValid,
-                                inspector = getExaminerOrOther(amendment2.t_Reviewed_By)
+                                issueDate = issue.dFrom,
+                                validToDate = issue.dValid,
+                                inspector = getExaminerOrOther(issue.t_Reviewed_By)
                             });
+
+                            reviews.Add(review);
                         }
+                        form["reviews"] = reviews;
 
                         airworthinesses.Add(form);
                     }

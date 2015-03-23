@@ -10,8 +10,7 @@
     initAW
   ) {
     $scope.aw = initAW.airworthinessFMPartVersion;
-    $scope.form15Amendments = initAW.form15Amendments;
-    $scope.reviewOther = initAW.reviewOther;
+    $scope.review = initAW.review;
     $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
@@ -32,7 +31,7 @@
                 actAlias === 'directive8' ||
                 actAlias === 'vla' ||
                 actAlias === 'unknown') {
-                aw.part.reviews.push($scope.reviewOther);
+                aw.part.reviews.push($scope.review);
               }
             }
 

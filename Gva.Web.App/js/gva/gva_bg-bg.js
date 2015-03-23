@@ -1085,15 +1085,7 @@
           validToDate: 'Валиден до',
           issueDateSpecial: 'Дата изд. на екс. огр.'
         },
-        airworthinessReviewF15Directive: {
-          amendment1: 'Първо продължаване на срока',
-          amendment2: 'Второ продължаване на срока'
-        },
-        airworthinessReviewOtherDirective: {
-          issueDate: 'Дата на издаване',
-          validToDate: 'Валиден до'
-        },
-        airworthinessForm15AmendmentDirective: {
+        airworthinessReviewDirective: {
           issueDate: 'Дата на издаване',
           validToDate: 'Валиден до',
           organization: 'Организация'

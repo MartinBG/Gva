@@ -11,9 +11,14 @@
     originalAw,
     scMessage
   ) {
-    $scope.form = {};
     function resetAw() {
       $scope.aw = _.cloneDeep(originalAw);
+      if ($scope.aw.part.airworthinessCertificateType.alias === '15a' ||
+        $scope.aw.part.airworthinessCertificateType.alias === '15b') {
+        $scope.newReviewBtnText = 'aircrafts.editAirworthiness.newAmendment';
+      } else {
+        $scope.newReviewBtnText = 'aircrafts.editAirworthiness.newReview';
+      }
     }
 
     function resetReviews() {
@@ -26,7 +31,7 @@
     resetAw();
     resetReviews();
 
-    $scope.disableNewAmendment = false;
+    $scope.isActiveReg = true;
     $scope.$watch('aw.part.registration', function() {
       if ($scope.aw.part.registration) {
         AircraftCertRegistrationsFM.get({
@@ -35,7 +40,7 @@
         })
         .$promise
         .then(function (reg) {
-          $scope.disableNewAmendment = reg.part.status.code !== '1' && reg.part.status.code !== '2';
+          $scope.isActiveReg = reg.part.status.code === '1' || reg.part.status.code === '2';
         });
       }
     });
@@ -97,19 +102,16 @@
       $scope.isEditReview = true;
     };
 
-    $scope.newAmendment = function () {
-      if (!$scope.aw.part.form15Amendments || !$scope.aw.part.form15Amendments.amendment1) {
-        $scope.aw.part.form15Amendments = {
-          amendment1 : {
-            inspector: {}
-          }
-        };
-      } else if (!$scope.aw.part.form15Amendments.amendment2) {
-        $scope.aw.part.form15Amendments.amendment2 = {
-          inspector: {}
-        };
+    $scope.disableNewReview = false;
+    $scope.$watch('reviews.length', function () {
+      if(($scope.aw.part.airworthinessCertificateType.alias === '15a' || 
+        $scope.aw.part.airworthinessCertificateType.alias === '15b') && 
+        $scope.reviews.length === 2) {
+        $scope.disableNewReview = true;
+      } else {
+        $scope.disableNewReview = false;
       }
-    };
+    });
 
     $scope.editReview = function () {
       $scope.isEditReview = true;
@@ -137,16 +139,10 @@
     };
 
     $scope.saveReview = function () {
-      var actAlias = $scope.aw.part.airworthinessCertificateType.alias,
-          form;
-      if (actAlias === 'directive8' || actAlias === 'vla' || actAlias === 'unknown') {
-        form = $scope.airworthinessReviewOtherForm;
-      }
-
-      return form.$validate()
+      return $scope.airworthinessReviewForm.$validate()
         .then(function () {
           var aw;
-          if (form.$valid) {
+          if ($scope.airworthinessReviewForm.$valid) {
             aw = _.cloneDeep(originalAw);
             aw.part.reviews = $scope.reviews;
 

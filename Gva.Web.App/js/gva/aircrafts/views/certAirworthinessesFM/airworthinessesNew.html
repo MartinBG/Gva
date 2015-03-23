@@ -22,8 +22,8 @@
 
       <div ng-if="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla' || aw.part.airworthinessCertificateType.alias === 'unknown'">
         <h5 class="form-header" l10n-text="aircrafts.newAirworthiness.titleReview" style="margin-top: 20px;"></h5>
-        <gva-airworthiness-review-other name="airworthinessReview" ng-model="reviewOther" readonly="readonly">
-        </gva-airworthiness-review-other>
+        <gva-airworthiness-review sc-form-params="{certType: aw.part.airworthinessCertificateType.alias}" name="airworthinessReview" ng-model="review" readonly="readonly">
+        </gva-airworthiness-review>
       </div>
     </div>
   </div>

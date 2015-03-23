@@ -203,8 +203,9 @@
       controller: 'AircraftCertAirworthinessFMCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaAirworthinessReviewOther',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessReviewOther.html'
+      name: 'gvaAirworthinessReview',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessReview.html',
+      controller: 'AircraftAirworthinessReviewCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAirworthinessForm15',
