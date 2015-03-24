@@ -27,7 +27,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public string CreditorDocument { get; set; }
 
-        public NomValue Inspector { get; set; }
+        public AircraftInspectorDO Inspector { get; set; }
 
         public bool IsActive { get; set; }
 

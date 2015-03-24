@@ -889,7 +889,7 @@
           issueDate: 'Дата на издаване',
           validFromDate: 'Валидно от',
           validToDate: 'Валидно до',
-          inspector: 'Заверил инспектор'
+          inspector: 'Заверил'
         },
         newAirworthiness: {
           titleAw: 'Нова летателна годност',
@@ -1037,7 +1037,7 @@
           issueDate: 'Издадено на',
           validToDate: 'Валидно до',
           validFromDate: 'Валидно от',
-          inspector: 'Заверил инспектор',
+          inspector: 'Заверил',
           'new': 'Нова ЛГ',
           status: 'Статус'
         },

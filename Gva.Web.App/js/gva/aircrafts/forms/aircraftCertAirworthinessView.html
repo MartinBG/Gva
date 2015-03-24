@@ -14,17 +14,17 @@
         <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessViewDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.validFromDate"></label>
-          <input disabled name="validFromDate" type="text" class="form-control input-sm" value="{{validFromDate() | date: 'dd.MM.yyyy'}}">
+          <input disabled name="validFromDate" type="text" class="form-control input-sm" value="{{validFromDate | date: 'dd.MM.yyyy'}}">
         </div>
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.validToDate"></label>
-          <input disabled name="validToDate" type="text" class="form-control input-sm" value="{{validToDate() | date: 'dd.MM.yyyy'}}">
+          <input disabled name="validToDate" type="text" class="form-control input-sm" value="{{validToDate| date: 'dd.MM.yyyy'}}">
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-2 col-sm-4">
           <label class="control-label" l10n-text="aircrafts.airworthinessViewDirective.inspector"></label>
-          <input disabled name="inspector" type="text" class="form-control input-sm" value="{{inspectorName()}}">
+          <input disabled name="inspector" type="text" class="form-control input-sm" value="{{inspectorModel.inspector.name || inspectorModel.examiner.name || inspectorModel.other}}">
         </div>
       </div>
     </div>

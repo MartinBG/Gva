@@ -9,33 +9,14 @@
     aws
   ) {
     $scope.aws = aws.map(function (aw) {
-      var lastReview, validFrom, validTo, inspectorName;
-      if (aw.part.reviews) {
+      var lastReview, validFrom, validTo, inspectorModel;
+      if (aw.part.reviews && aw.part.reviews.length) {
         lastReview = aw.part.reviews[aw.part.reviews.length - 1];
-
-        if (lastReview) {
-          if (lastReview.inspector && lastReview.inspector.inspector) {
-            inspectorName = lastReview.inspector.inspector.name;
-          }
-          validFrom = lastReview.issueDate;
-          validTo = lastReview.validToDate;
-        }
-      }
-
-      if (aw.part.form15Amendments) {
-        if (aw.part.form15Amendments.amendment2) {
-          validFrom = aw.part.form15Amendments.amendment2.issueDate;
-          validTo = aw.part.form15Amendments.amendment2.validToDate;
-          inspectorName = aw.part.form15Amendments.amendment2.inspector.other ||
-            aw.part.form15Amendments.amendment2.inspector.examiner.name;
-        } else if (aw.part.form15Amendments.amendment1) {
-          validFrom = aw.part.form15Amendments.amendment1.issueDate;
-          validTo = aw.part.form15Amendments.amendment1.validToDate;
-          inspectorName = aw.part.form15Amendments.amendment1.inspector.other ||
-            aw.part.form15Amendments.amendment1.inspector.examiner.name;
-        }
-      }
-      if(!validFrom && !validTo) {
+        inspectorModel = lastReview.inspector;
+        validFrom = lastReview.issueDate;
+        validTo = lastReview.validToDate;
+      } else {
+        inspectorModel =  aw.part.inspector;
         validFrom = aw.part.issueDate;
         validTo = aw.part.validToDate;
       }
@@ -45,7 +26,7 @@
         issueDate: aw.part.issueDate,
         validFrom: validFrom,
         validTo: validTo,
-        inspectorName: inspectorName
+        inspectorModel: inspectorModel
       };
     });
   }

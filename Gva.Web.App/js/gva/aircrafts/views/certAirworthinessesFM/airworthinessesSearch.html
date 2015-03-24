@@ -11,6 +11,7 @@
   </sc-column>
   <sc-column data="validTo" title="aircrafts.airworthinessFMSearch.validToDate" type="date">
   </sc-column>
-  <sc-column data="inspectorName" title="aircrafts.airworthinessFMSearch.inspector" type="date">
+  <sc-column data="inspectorModel" title="aircrafts.airworthinessFMSearch.inspector" type="date" has-content="true">
+    {{item.inspectorModel.inspector.name || item.inspectorModel.examiner.name || item.inspectorModel.other}}
   </sc-column>
 </sc-datatable>

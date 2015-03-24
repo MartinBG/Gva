@@ -22,6 +22,8 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? ValidToDate { get; set; }
 
+        public AircraftInspectorDO Inspector { get; set; }
+
         public List<AircraftCertAirworthinessReviewDO> Reviews { get; set; }
     }
 }

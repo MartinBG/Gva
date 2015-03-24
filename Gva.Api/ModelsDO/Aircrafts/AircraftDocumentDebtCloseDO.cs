@@ -6,7 +6,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftDocumentDebtCloseDO
     {
-        public NomValue Inspector { get; set; }
+        public AircraftInspectorDO Inspector { get; set; }
 
         public DateTime? Date { get; set; }
 

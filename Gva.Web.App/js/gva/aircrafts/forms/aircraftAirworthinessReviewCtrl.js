@@ -8,7 +8,7 @@
     if ($scope.certType === '15a' || $scope.certType === '15b') {
       $scope.inspectorTypes = ['examiner','other'];
     } else {
-      $scope.inspectorTypes = ['inspector'];
+      $scope.inspectorTypes = ['inspector', 'other'];
     }
   }
 

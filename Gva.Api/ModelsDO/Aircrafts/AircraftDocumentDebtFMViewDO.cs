@@ -16,6 +16,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public NomValue AircraftCreditor { get; set; }
 
-        public NomValue Inspector { get; set; }
+        public AircraftInspectorDO Inspector { get; set; }
     }
 }
