@@ -666,7 +666,6 @@
           noises: 'Удостоверения за шум',
           docs: 'Документи',
           debts: 'Тежести',
-          maintenances: 'Поддръжки',
           occurrences: 'Инциденти',
           inspections: 'Инспекции',
           owners: 'Свързани лица',
@@ -1325,35 +1324,6 @@
           area: 'Място на инцидента',
           occurrenceNotes: 'Бележки по инцидента',
           notes: 'Бележки'
-        },
-        newMaintenance: {
-          title: 'Нова поддръжка',
-          save: 'Запис',
-          cancel: 'Отказ'
-        },
-        editMaintenance: {
-          title: 'Преглед на поддръжка',
-          edit: 'Редакция',
-          save: 'Запис',
-          cancel: 'Отказ',
-          deleteMaintenance: 'Изтрий'
-        },
-        searchMaintenance: {
-          newMaintenance: 'Нова поддръжка',
-          lim145limitation: 'Дейност по част M/F, 145',
-          notes: 'Описание',
-          fromDate: 'Период: от дата',
-          toDate: 'Период: до дата',
-          organization: 'Организация',
-          person: 'Физическо лице'
-        },
-        maintenanceDirective: {
-          lim145limitation: 'Дейност по част M/F, 145',
-          notes: 'Описание',
-          fromDate: 'Период: от дата',
-          toDate: 'Период: до дата',
-          organization: 'Организация',
-          person: 'Физическо лице'
         },
         aircraftDocApplicationSearch: {
           newApplication: 'Ново заявление',
@@ -3901,9 +3871,6 @@
         'root.aircrafts.view.occurrences': 'Инциденти',
         'root.aircrafts.view.occurrences.new': 'Нов инцидент',
         'root.aircrafts.view.occurrences.edit': 'Преглед на инцидент',
-        'root.aircrafts.view.maintenances': 'Поддръжки',
-        'root.aircrafts.view.maintenances.new': 'Новa поддръжка',
-        'root.aircrafts.view.maintenances.edit': 'Преглед на поддръжка',
         'root.aircrafts.view.applications': 'Заявления',
         'root.aircrafts.view.inventory': 'Опис',
         'root.organizations': 'Организации',

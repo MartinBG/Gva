@@ -9,7 +9,6 @@ VALUES
     (@setId    , 'Данни за ВС'                 , 'aircraftData'           , N'^aircraftData$'                     , NULL        ),
     (@setId    , 'Право на собственост'        , 'aircraftOwner'          , N'^aircraftDocumentOwners/\d+$'       , NULL        ),
     (@setId    , 'Задължение'                  , 'aircraftDebtFM'         , N'^aircraftDocumentDebtsFM/\d+$'      , NULL        ),
-    (@setId    , 'Подръжка'                    , 'aircraftMaintenance'    , N'^maintenances/\d+$'                 , NULL        ),
     (@setId    , 'Инцидент'                    , 'aircraftOccurrence'     , N'^documentOccurrences/\d+$'          , NULL        ),
     (@setId    , 'Инспекция'                   , 'aircraftInspection'     , N'^inspections/\d+$'                  , NULL        ),
     (@setId    , 'Заявление'                   , 'aircraftApplication'    , N'^aircraftDocumentApplications/\d+$' , NULL        ),

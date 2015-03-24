@@ -18,7 +18,6 @@
       aircraftDocumentOthers = require('./aircraft-document-other.sample'),
       aircraftInspections = require('./aircraft-inspections.sample'),
       aircraftDocumentOccurrences = require('./aircraft-document-occurrences.sample'),
-      aircraftMaintenances = require('./aircraft-maintenance.sample'),
       aircraftDocumentOwners = require('./aircraft-document-owner.sample'),
       aircraftParts = require('./aircraft-parts.sample'),
       aircraftDocumentApplications = require('./aircraft-document-application.sample');
@@ -161,16 +160,6 @@
         {
           partIndex: 21,
           part: aircraftDocumentOccurrences.aircraft1Occurrence2
-        }
-      ],
-      aircraftMaintenances: [
-        {
-          partIndex: 22,
-          part: aircraftMaintenances.aircraftMaintenance1
-        },
-        {
-          partIndex: 23,
-          part: aircraftMaintenances.aircraftMaintenance2
         }
       ],
       aircraftDocumentOwners: [

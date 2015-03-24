@@ -150,12 +150,6 @@ namespace Gva.MigrationTool.Sets
                             }
                         }
 
-                        var aircraftMaintenances = this.getAircraftMaintenances(aircraftApexId, getPersonByApexId, getOrgByApexId, noms);
-                        foreach (var aircraftMaintenance in aircraftMaintenances)
-                        {
-                            addPartWithFiles("maintenances/*", aircraftMaintenance);
-                        }
-
                         var aircraftDocumentOccurrences = this.getAircraftDocumentOccurrences(aircraftApexId, nomApplications, noms, blobIdsToFileKeys);
                         foreach (var aircraftDocumentOccurrence in aircraftDocumentOccurrences)
                         {
@@ -211,43 +205,6 @@ namespace Gva.MigrationTool.Sets
                     throw;
                 }
             }
-        }
-
-        private IList<JObject> getAircraftMaintenances(
-            int aircraftId,
-            Func<int?, JObject> getPersonByApexId,
-            Func<int?, JObject> getOrgByApexId,
-            Dictionary<string, Dictionary<string, NomValue>> noms)
-        {
-            var parts = this.oracleConn.CreateStoreCommand(
-                @"SELECT * FROM CAA_DOC.AC_MAINTENANCE WHERE {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and ID_AIRCRAFT = {0}", aircraftId)
-                )
-                .Materialize(r => Utils.ToJObject(
-                    new
-                    {
-                        __oldId = r.Field<int>("ID"),
-                        __migrTable = "AC_MAINTENANCE",
-                        lim145limitation = noms["lim145limitations"].ByOldId(r.Field<long?>("ID_MF145_LIMIT").ToString()),
-                        notes = r.Field<string>("REMARKS"),
-                        fromDate = r.Field<DateTime?>("DATE_FROM"),
-                        toDate = r.Field<DateTime?>("DATE_TO"),
-                        organization = getOrgByApexId((int?)r.Field<decimal?>("ID_FIRM")),
-                        person = getPersonByApexId((int?)r.Field<decimal?>("ID_PERSON")),
-                    }))
-                .ToList();
-
-            return parts.Select(p => new JObject(
-                new JProperty("part", p),
-                new JProperty("files", new JArray(
-                    new JObject(
-                        new JProperty("isAdded", true),
-                        new JProperty("file", null),
-                        new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
-                        new JProperty("bookPageNumber", null),
-                        new JProperty("pageCount", null),
-                        new JProperty("applications", new JArray())))))).ToList();
         }
 
         private IList<JObject> getAircraftDocumentApplications(

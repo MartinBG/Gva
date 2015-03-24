@@ -255,10 +255,6 @@
       templateUrl: 'js/gva/aircrafts/forms/aircraftDocumentOccurrence.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaAircraftMaintenance',
-      templateUrl: 'js/gva/aircrafts/forms/aircrafttMaintenance.html'
-    });
-    scaffoldingProvider.form({
       name: 'gvaAircraftDocumentOwner',
       templateUrl: 'js/gva/aircrafts/forms/aircraftDocumentOwner.html'
     });
@@ -590,10 +586,6 @@
       .state(['root.aircrafts.view.occurrences.search'                  , ''                                                      , ['@root.aircrafts.view', 'js/gva/aircrafts/views/documentOccurrences/docOccurrencesSearch.html'   , 'DocOccurrencesSearchCtrl'        ]])
       .state(['root.aircrafts.view.occurrences.new'                     , '/new'                                                  , ['@root.aircrafts.view', 'js/gva/aircrafts/views/documentOccurrences/docOccurrencesNew.html'      , 'DocOccurrencesNewCtrl'           ]])
       .state(['root.aircrafts.view.occurrences.edit'                    , '/:ind'                                                 , ['@root.aircrafts.view', 'js/gva/aircrafts/views/documentOccurrences/docOccurrencesEdit.html'     , 'DocOccurrencesEditCtrl'          ]])
-      .state(['root.aircrafts.view.maintenances'                        , '/maintenances'                                                                                                                                                                                  ])
-      .state(['root.aircrafts.view.maintenances.search'                 , ''                                                      , ['@root.aircrafts.view', 'js/gva/aircrafts/views/aircraftMaintenances/maintenancesSearch.html'    , 'MaintenancesSearchCtrl'          ]])
-      .state(['root.aircrafts.view.maintenances.new'                    , '/new'                                                  , ['@root.aircrafts.view', 'js/gva/aircrafts/views/aircraftMaintenances/maintenancesNew.html'       , 'MaintenancesNewCtrl'             ]])
-      .state(['root.aircrafts.view.maintenances.edit'                   , '/:ind'                                                 , ['@root.aircrafts.view', 'js/gva/aircrafts/views/aircraftMaintenances/maintenancesEdit.html'      , 'MaintenancesEditCtrl'            ]])
       .state(['root.aircrafts.view.owners'                              , '/owners'                                                                                                                                                                                        ])
       .state(['root.aircrafts.view.owners.search'                       , ''                                                      , ['@root.aircrafts.view', 'js/gva/aircrafts/views/documentOwners/ownersSearch.html'                , 'DocumentOwnersSearchCtrl'        ]])
       .state(['root.aircrafts.view.owners.new'                          , '/new'                                                  , ['@root.aircrafts.view', 'js/gva/aircrafts/views/documentOwners/ownersNew.html'                   , 'DocumentOwnersNewCtrl'           ]])

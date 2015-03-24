@@ -79,7 +79,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentOccurrence.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentOther.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentOwner.html" />
-    <Content Include="js\gva\aircrafts\forms\aircrafttMaintenance.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftInspector.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftInspectorCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtClose.html" />
@@ -101,15 +100,8 @@
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentOwners.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftInspections.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftsInventory.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftMaintenances.js" />
     <Content Include="js\gva\aircrafts\views\aircraftData\aircraftDataEdit.html" />
     <Content Include="js\gva\aircrafts\views\aircraftData\aircraftDataEditCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesEdit.html" />
-    <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesEditCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesNew.html" />
-    <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesNewCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesSearch.html" />
-    <Content Include="js\gva\aircrafts\views\aircraftMaintenances\maintenancesSearchCtrl.js" />
     <Content Include="js\gva\aircrafts\views\aircraftsNew.html" />
     <Content Include="js\gva\aircrafts\views\aircraftsNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\aircraftsNewWizzard.html" />
@@ -826,7 +818,6 @@
     <Content Include="schema\aircrafts\aircraft-document-other.sample.js" />
     <Content Include="schema\aircrafts\aircraft-document-owner.sample.js" />
     <Content Include="schema\aircrafts\aircraft-inspections.sample.js" />
-    <Content Include="schema\aircrafts\aircraft-maintenance.sample.js" />
     <Content Include="schema\aircrafts\aircraft-parts.sample.js" />
     <Content Include="schema\airports\airport-cert-operational.sample.js" />
     <Content Include="schema\airports\airport-data.sample.js" />
@@ -996,7 +987,6 @@
     <Content Include="test\gva\aircrafts\mocks\aircraftDocumentOthersHttp.js" />
     <Content Include="test\gva\aircrafts\mocks\aircraftDocumentOwnersHttp.js" />
     <Content Include="test\gva\aircrafts\mocks\aircraftLots.js" />
-    <Content Include="test\gva\aircrafts\mocks\aircraftMaintenanceHttp.js" />
     <Content Include="test\gva\aircrafts\mocks\aircraftPartsHttp.js" />
     <Content Include="test\gva\aircrafts\mocks\aircraftsApexHttp.js" />
     <Content Include="test\gva\aircrafts\mocks\aircraftsDocumentOccurrencesHttp.js" />
