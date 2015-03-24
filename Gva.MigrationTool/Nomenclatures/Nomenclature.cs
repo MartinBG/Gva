@@ -3499,6 +3499,8 @@ namespace Gva.MigrationTool.Nomenclatures
                 {"EWD" , new Tuple<string,string>("ВЪЗЛОЖЕН и снети ЗАПОРИ"                , "Entrusted and waived distraints"            )},
                 {"CCON", new Tuple<string,string>("ДОГОВОР ЗА ЦЕСИЯ"                       , "Cession contract"                           )},
                 {"REM" , new Tuple<string,string>("ЗАБЕЛЕЖКА"                              , "Remark"                                     )},
+                {"PLE" , new Tuple<string,string>("ЗАЛОГ"                                  , "Pledge"                                     )},
+                {"PCAN", new Tuple<string,string>("ЗАЛОГ - ОТМЕНЕН"                        , "Pledge - cancelled"                         )},
                 {"PEST", new Tuple<string,string>("ЗАЛОГ  - УЧРЕДЕН"                       , "Pledge - established"                       )},
                 {"POBL", new Tuple<string,string>("ЗАЛОГ - ЗАЛИЧЕН"                        , "Pledge - obliterated"                       )},
                 {"PTRA", new Tuple<string,string>("ЗАЛОГ - ПРЕХВЪРЛЕН"                     , "Pledge - transferred"                       )},
@@ -3508,6 +3510,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 {"PSOB", new Tuple<string,string>("ЗАЛОЗИ - ЗАЛИЧЕНИ"                      , "Pledges - obliterated"                      )},
                 {"DIMP", new Tuple<string,string>("ЗАПОР - НАЛОЖЕН"                        , "Distraint - imposed"                        )},
                 {"DCAN", new Tuple<string,string>("ЗАПОР - ОТМЕНЕН"                        , "Distraint - cancelled"                      )},
+                {"DASS", new Tuple<string,string>("ЗАПОР - ВЪЗЛОЖЕН"                       , "Distraint - assigned"                       )},
                 {"DSCA", new Tuple<string,string>("ЗАПОРИ - ОТМЕНЕНИ"                      , "Distraints - cancelled"                     )},
                 {"DPOB", new Tuple<string,string>("Запори и залог - заличени"              , "Distraints and pledge - obliterated"        )},
                 {"MEST", new Tuple<string,string>("ИПОТЕКА  - УЧРЕДЕНА"                    , "Mortgage - established"                     )},
@@ -3539,13 +3542,13 @@ namespace Gva.MigrationTool.Nomenclatures
         private void migrateAircraftCreditorsFm(INomRepository repo, SqlConnection conn)
         {
             Nom nom = repo.GetNom("aircraftCreditorsFm");
-            var results = conn.CreateStoreCommand(@"select distinct Creditor from Morts")
+            var results = conn.CreateStoreCommand(@"select distinct t_Creditor_Name from Morts_new")
                 .Materialize(r =>
                     new NomValue
                     {
                         OldId = null,
                         Code = null,
-                        Name = r.Field<string>("Creditor"),
+                        Name = r.Field<string>("t_Creditor_Name"),
                         NameAlt = null,
                         Alias = null,
                         IsActive = true,

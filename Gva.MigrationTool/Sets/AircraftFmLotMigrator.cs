@@ -828,31 +828,47 @@ namespace Gva.MigrationTool.Sets
             return airworthinessResults;
         }
 
-        private IList<JObject> getAircraftDocumentDebtsFM(string aircraftFmId, Dictionary<string, Dictionary<string, NomValue>> noms, Func<string, JObject> getInspector)
+        private IList<JObject> getAircraftDocumentDebtsFM(
+            string aircraftFmId,
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            Func<string, JObject> getInspectorOrOther)
         {
             return this.sqlConn.CreateStoreCommand(
-                @"select * from Morts mo 
-                left outer join Morts_New mn on mn.n_Mort_ID_Old = mo.nRecNo
-                where {0} {1}",
-                new DbClause("1=1"),
-                new DbClause("and nActID = {0}", aircraftFmId)
+                @"SELECT n_Mort_ID,
+                    d_Open_Date,
+                    t_Type,
+                    t_Open_CAA_Doc,
+                    d_Open_CAA_Date,
+                    t_Creditor_Name,
+                    t_Creditor_Doc,
+                    t_Open_User,
+                    n_Status,
+                    t_Close_User,
+                    d_Close_Date,
+                    t_Close_CAA_Doc,
+                    d_Close_CAA_Date,
+                    t_Close_Creditor_Doc,
+                    d_Close_Creditor_Date,
+                    t_Close_Notes
+                    FROM Morts_New WHERE {0}",
+                new DbClause("n_Acts_ID = {0}", aircraftFmId)
                 )
                 .Materialize(r => new JObject(
                     new JProperty("part",
                         Utils.ToJObject(new
                         {
-                            __oldId = r.Field<string>("nRecNo"),
-                            __migrTable = "Morts",
-                            regDate = Utils.FmToDate(r.Field<string>("Date")),
-                            aircraftDebtType = noms["aircraftDebtTypesFm"].ByName(r.Field<string>("Action").Trim()),
-                            documentNumber = r.Field<string>("gt_DocCAA"),
-                            documentDate = Utils.FmToDate(r.Field<string>("gd_DocCAA")),
-                            aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("Creditor")),
-                            creditorDocument = r.Field<string>("Doc Creditor"),
-                            inspector = getInspector(r.Field<string>("tUser")),
+                            __oldId = r.Field<string>("n_Mort_ID"),
+                            __migrTable = "Morts_New",
+                            regDate = Utils.FmToDate(r.Field<string>("d_Open_Date")),
+                            aircraftDebtType = r.Field<string>("t_Type").Trim() == "ЗАЛОЗ - ЗАЛИЧЕН" ? noms["aircraftDebtTypesFm"].ByName("ЗАЛОГ - ЗАЛИЧЕН") : noms["aircraftDebtTypesFm"].ByName(r.Field<string>("t_Type").Trim()),
+                            documentNumber = r.Field<string>("t_Open_CAA_Doc"),
+                            documentDate = Utils.FmToDate(r.Field<string>("d_Open_CAA_Date")),
+                            aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("t_Creditor_Name")),
+                            creditorDocument = r.Field<string>("t_Creditor_Doc"),
+                            inspector = getInspectorOrOther(r.Field<string>("t_Open_User")),
                             isActive = r.Field<string>("n_Status") != "0",
                             close = new {
-                                inspector = getInspector(r.Field<string>("t_Close_User")),
+                                inspector = getInspectorOrOther(r.Field<string>("t_Close_User")),
                                 date = Utils.FmToDate(r.Field<string>("d_Close_Date")),
                                 caaDoc = r.Field<string>("t_Close_CAA_Doc"),
                                 caaDate = Utils.FmToDate(r.Field<string>("d_Close_CAA_Date")),
