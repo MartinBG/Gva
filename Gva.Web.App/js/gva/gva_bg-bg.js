@@ -900,7 +900,7 @@
         },
         editAirworthiness: {
           amendments: 'Заверки',
-          titleAw: 'Преглед на летателна годност',
+          titleAw: 'Преглед на удостоверние за летателна годност',
           editAw: 'Редакция',
           deleteAw: 'Изтрий',
           saveAw: 'Запис',
