@@ -87,7 +87,6 @@ a.profile_links{
 }
 .input-group-sm > .form-control, .input-group-sm > .input-group-addon, .input-group-sm > .input-group-btn > .btn, .input-sm{
 	height: auto;
-	min-height: 26px;
 	padding: 3px 6px;
 }
 .btn-sm{
@@ -129,7 +128,6 @@ div.labeless{
 	background-color: #DDDDDD;
 }
 .table > thead > tr > th{
-	padding-right: 16px;
 	border: none;
 	border-left: 1px solid #DDDDDD;
 	border-bottom: 1px solid #DDDDDD;
@@ -248,19 +246,29 @@ form.card input.form-control[disabled]{
 .input-group .select2-container.form-control{
 	padding: 0px;
 }
-.input-group .select2-container.form-control ul.select2-choices{
-
+.input-group .select2-container.form-control:first-child:not(:nth-last-child(2)) ul.select2-choices{
 	border-radius: 3px 0px 0px 3px;
 	-webkit-border-radius: 3px 0px 0px 3px;
 	-o-border-radius: 3px 0px 0px 3px;
 	-moz-border-radius: 3px 0px 0px 3px;
 }
-.input-group .select2-container.form-control a.select2-choice{
-
+.input-group .select2-container.form-control:first-child:not(:nth-last-child(2)) a.select2-choice{
 	border-radius: 3px 0px 0px 3px;
 	-webkit-border-radius: 3px 0px 0px 3px;
 	-o-border-radius: 3px 0px 0px 3px;
 	-moz-border-radius: 3px 0px 0px 3px;
+}
+.input-group .select2-container.form-control:nth-last-child(2):not(:first-child) ul.select2-choices{
+	border-radius: 0px 3px 3px 0px;
+	-webkit-border-radius: 0px 3px 3px 0px;
+	-o-border-radius: 0px 3px 3px 0px;
+	-moz-border-radius: 0px 3px 3px 0px;
+}
+.input-group .select2-container.form-control:nth-last-child(2):not(:first-child) a.select2-choice{
+	border-radius: 0px 3px 3px 0px;
+	-webkit-border-radius: 0px 3px 3px 0px;
+	-o-border-radius: 0px 3px 3px 0px;
+	-moz-border-radius: 0px 3px 3px 0px;
 }
 .input-group-btn{
 	height: 100%;
@@ -268,14 +276,14 @@ form.card input.form-control[disabled]{
 }
 .input-group-sm > .input-group-btn > .btn{
 	height: 100%;
-	padding-top: 0px;
-	padding-bottom: 0px;
 	box-sizing: content-box;
 	-o-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	-webkit-box-sizing: content-box;
-	min-height: 24px;
 }
 .input-group-sm > .input-group-btn > .btn[disabled]{
 	background-color: #EEEEEE;
+}
+.input-group-btn > .btn + .btn {
+  margin-left: -1px;
 }

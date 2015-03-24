@@ -278,6 +278,37 @@ form.card input.form-control[disabled]
   padding: 0;
 }
 
+#image-placeholder
+{
+  width:582px;
+  height: 802px;
+  border-style:solid;
+  border-width: 1px;
+  position: relative;
+}
+
+#image-placeholder > i
+{
+  display: block;
+  background-image: url('../img/initial-loader.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 32px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  margin: 5px;
+  padding: 0;
+}
+
+#image-placeholder > .has-error
+{
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+
 .padding-top10 {
   padding-top: 10px;
 }
@@ -288,7 +319,8 @@ form.card input.form-control[disabled]
 table.sc-data-table td.buttons-cell
 {
   white-space: nowrap;
-  padding: 2px;
+  padding: 4px;
+  width: 20px;
 }
 
 table.sc-data-table td.buttons-cell-compact
@@ -363,6 +395,11 @@ table.sc-data-table th.sorting span
 .table-responsive > .table > tfoot > tr > td {
   white-space: nowrap;
 }
+.table-responsive > .table > thead > tr > td.wrap,
+.table-responsive > .table > tbody > tr > td.wrap,
+.table-responsive > .table > tfoot > tr > td.wrap {
+  white-space: normal;
+}
 .table-responsive > .table-bordered {
   border: 0;
 }
@@ -386,7 +423,7 @@ table.sc-data-table th.sorting span
 .table-responsive > .table-bordered > tfoot > tr:last-child > th,
 .table-responsive > .table-bordered > tbody > tr:last-child > td,
 .table-responsive > .table-bordered > tfoot > tr:last-child > td {
-  border-bottom: 0;
+  border-bottom: 1px solid #dddddd;
 }
 
 /* remove bottom margin from .table-responsive*/
@@ -406,15 +443,26 @@ table.table thead th {
     background-color: #f5f5f5;
 }
 
-.validLicence {
-    background-color: #ffff99
+.expiringDocument {
+    background-color: #ffff99;
 }
 
-.invalidLicence {
-    background-color: #ffcc99
+.expiredApplication {
+    background-color: #FF9999;
 }
-.expiredLicence {
-    background-color: #C0C0C0
+
+.invalidDocument {
+    background-color: #ffcc99;
+}
+.expiredDocument {
+    background-color: #C0C0C0;
+}
+
+.declinedApplication {
+    background-color: #ffcc99;
+}
+.doneApplication {
+    background-color: #C0C0C0;
 }
 
 .ems-portal-modal-window .modal-dialog {
@@ -462,6 +510,10 @@ ul.checkbox-list li {
     margin-top: 0px;
 }
 
+.table-buttons {
+    margin-bottom: 3px;
+}
+
 /* treetable */
 table.treetable span.indenter {
   display: inline-block;
@@ -490,4 +542,105 @@ table.treetable span.indenter a {
 
 .case-font-weight {
     font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .xlg-modal > * {
+    width: 740px;
+  }
+  .xs-modal > * {
+    width: 400px;
+  }
+}
+
+@media (min-width: 992px) {
+  .xlg-modal > * {
+    width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .xlg-modal > * {
+    width: 1160px;
+  }
+}
+
+.xlg-modal .modal-content .panel, .xs-modal .modal-content .panel {
+    margin: 5px;
+}
+
+.modal-backdrop.in {
+    opacity: 0.8;
+}
+
+/*message modal*/
+.message-modal-body{
+    padding: 15px;
+}
+
+.message-modal-footer{
+    padding: 5px;
+    margin-top: 0px;
+}
+
+/*SUGGESTION DIRECTIVE*/
+.typeahead-textarea.input-group .form-control {
+  border-radius: 4px;
+}
+
+.typeahead-textarea.input-group .input-group-addon {
+  border: 0;
+  background-color: inherit;
+  vertical-align: top;
+}
+
+.twitter-typeahead{
+  width: 100%;
+}
+
+.tt-dropdown-menu {
+  text-align: left;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border-color: #66afe9;
+  border-style: solid;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  border-width: 0 1px 1px 1px;
+  border-radius: 0px 0px 4px 4px;
+}
+
+.tt-suggestion {
+  padding: 3px 10px;
+  line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+.glyphicon-spin {
+     -webkit-transform-origin: 50% 47%;
+     transform-origin:50% 47%;
+     -ms-transform-origin:50% 47%;
+     -webkit-animation: spin .5s infinite linear;
+     -moz-animation: spin .5s infinite linear;
+     -o-animation: spin .5s infinite linear;
+     animation: spin .5s infinite linear;
+}
+
+.table {
+    font-size: 11px;
+}
+
+.ta-root .btn-toolbar {
+    margin-bottom: 5px;
 }
