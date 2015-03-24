@@ -8,6 +8,13 @@ using System;
 using Docs.Api.BusinessLogic;
 using Docs.Api.Models.ClassificationModels;
 using Docs.Api.Models.DomainModels;
+using Common.Api.Models;
+using System.Net;
+using System.Net.Http;
+using Common.Utils;
+using System.Threading.Tasks;
+using Docs.Api.Repositories.UnitRepository;
+using Common.DomainValidation;
 
 namespace Docs.Api.Controllers
 {
@@ -15,11 +22,13 @@ namespace Docs.Api.Controllers
     {
         private IUnitOfWork unitOfWork;
         private IUnitBusinessLogic unitBusinessLogic;
+        private IUnitRepository unitRepository;
 
-        public UnitController(IUnitOfWork unitOfWork, IUnitBusinessLogic unitBusinessLogic)
+        public UnitController(IUnitOfWork unitOfWork, IUnitBusinessLogic unitBusinessLogic, IUnitRepository unitRepository)
         {
             this.unitOfWork = unitOfWork;
             this.unitBusinessLogic = unitBusinessLogic;
+            this.unitRepository = unitRepository;
         }
 
         [Route("api/nomenclatures/units")]
@@ -161,6 +170,14 @@ namespace Docs.Api.Controllers
         public IHttpActionResult SetUnitActiveStatus(int id, bool isActive)
         {
             unitBusinessLogic.SetUnitActiveStatus(id, isActive);
+            return Ok();
+        }
+
+        [Route("api/units/{id:int}/user/{userId:int}")]
+        [HttpPost]
+        public IHttpActionResult AssignUserToUnit(int id, int userId)
+        {
+            unitRepository.AssignUserToUnit(id, userId);
             return Ok();
         }
     }

@@ -111,8 +111,11 @@
     <Compile Include="DocsWebApiConfig.cs" />
     <Compile Include="EmailSender\EmailSender.cs" />
     <Compile Include="EmailSender\IEmailSender.cs" />
+    <Compile Include="Enums\DomainErrorCode.cs" />
     <Compile Include="Enums\VisualizationMode.cs" />
     <Compile Include="Enums\DocView.cs" />
+    <Compile Include="Infrastructure\DomainErrorResource.cs" />
+    <Compile Include="Infrastructure\DomainValidator.cs" />
     <Compile Include="Jobs\EmailsJob.cs" />
     <Compile Include="Models\AssignmentType.cs" />
     <Compile Include="Models\ClassificationModels\Classification.cs" />

@@ -104,6 +104,7 @@ namespace Common.Owin
 
             config.Filters.Add(new NLogTraceFilter());
             config.Filters.Add(new NLogExceptionFilter());
+            config.Filters.Add(new DomainErrorExceptionFilter());
 
             config.MapHttpAttributeRoutes(new CustomDirectRouteProvider());
 
