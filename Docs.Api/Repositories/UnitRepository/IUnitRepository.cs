@@ -18,5 +18,7 @@ namespace Docs.Api.Repositories.UnitRepository
         void DeleteUnit(int id);
 
         void SetUnitActiveStatus(int unitId, bool isActive);
+
+        void AssignUserToUnit(int unitId, int userId);
     }
 }

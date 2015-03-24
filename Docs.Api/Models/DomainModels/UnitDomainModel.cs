@@ -19,6 +19,8 @@ namespace Docs.Api.Models.DomainModels
         public int? ParentUnitId { get; set; }
         public int RootUnitId { get; set; }
         public string Name { get; set; }
+        // for the user related to this unit, which is of type Employee
+        public string UserName { get; set; }
         public string Type { get; set; }
         public bool IsActive { get; set; }
         public ICollection<UnitDomainModel> ChildUnits { get; set; }

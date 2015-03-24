@@ -1,4 +1,7 @@
-﻿using Common.Data;
+﻿using Common.Api.Models;
+using Common.Data;
+using Docs.Api.Enums;
+using Docs.Api.Infrastructure;
 using Docs.Api.Models.DomainModels;
 using Docs.Api.Models.UnitModels;
 using System;
@@ -25,6 +28,30 @@ namespace Docs.Api.Repositories.UnitRepository
                 .Include(e => e.UnitRelations)
                 .Include(e => e.UnitType)
                 .Where(e => e.IsActive == true)
+                .Select(e => new UnitDomainModel {
+                    UnitId = e.UnitId,
+                    Name = e.Name,
+                    Type = e.UnitType.Alias,
+                    IsActive = e.IsActive,
+                    RootUnitId = e.UnitRelations.FirstOrDefault().RootUnitId,
+                    ParentUnitId = e.UnitRelations.FirstOrDefault().ParentUnitId,
+                });
+
+            return domainEntities;
+        }
+
+        public IEnumerable<UnitDomainModel> GetListOfAllActiveUnitsWithAssignedUsers()
+        {
+            // join is used, because Unit should not have navigation property to User
+
+            var domainEntities = unitsInContext
+                .Include(e => e.UnitRelations)
+                .Include(e => e.UnitType)
+                //.Join(e=>)
+
+                .Where(e => e.IsActive == true)
+
+
                 .Select(e => new UnitDomainModel {
                     UnitId = e.UnitId,
                     Name = e.Name,
@@ -142,7 +169,7 @@ namespace Docs.Api.Repositories.UnitRepository
         }
 
         public void DeleteUnit(int id)
-        {            
+        {
             var entity = unitsInContext
                 .Include(e => e.UnitRelations)
                 .Include(e => e.UnitClassifications
@@ -169,6 +196,63 @@ namespace Docs.Api.Repositories.UnitRepository
 
 
             unitsInContext.Remove(entity);
+            unitOfWork.Save();
+        }
+
+        public void AssignUserToUnit(int unitId, int userId)
+        {
+            var validator = new DomainValidator();
+            validator.AddErrorMessage(DomainErrorCode.Entity_NotFound);
+            validator.AddErrorMessage(DomainErrorCode.Entity_NotFound, "Unit", 12);
+            validator.Validate();
+
+            var unit = unitsInContext.SingleOrDefault(e =>
+                e.UnitId == unitId
+                && (Docs.Api.Models.DomainModels.UnitType)e.UnitTypeId == Docs.Api.Models.DomainModels.UnitType.Employee
+                && e.IsActive);
+
+            if (unit == null)
+            {
+                validator.AddErrorMessage(DomainErrorCode.Unit_NotFound_ActivOfTypeEmployee);
+            }
+
+            var user = unitOfWork.DbContext.Set<User>().SingleOrDefault(e =>
+                    e.UserId == userId
+                    && e.IsActive);
+            if (user == null)
+            {
+                validator.AddErrorMessage(DomainErrorCode.Entity_NotFoundOrNotActive);
+            }
+
+            validator.Validate();
+
+            var unitUsersInContext = unitOfWork.DbContext.Set<UnitUser>();
+            var doesUnitAlreadyExistInRelation = unitUsersInContext.Any(e =>
+                e.UnitId == unitId                
+                && e.IsActive);
+            if (doesUnitAlreadyExistInRelation)
+            {
+                validator.AddErrorMessage(DomainErrorCode.Entity_AlreadyExistInRelation);
+            }
+
+            var doesUserAlreadyExistInRelation = unitUsersInContext.Any(e =>
+                e.UserId == userId
+                && e.IsActive);
+            if (doesUserAlreadyExistInRelation)
+            {
+                validator.AddErrorMessage(DomainErrorCode.Entity_AlreadyExistInRelation);
+            }
+
+            validator.Validate();
+
+            var unitUser = new UnitUser {
+                Unit = unit,
+                User = user
+            };
+
+            unitOfWork.DbContext.Set<UnitUser>()
+                .Add(unitUser);
+
             unitOfWork.Save();
         }
     }
