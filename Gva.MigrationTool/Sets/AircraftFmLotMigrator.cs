@@ -156,6 +156,33 @@ namespace Gva.MigrationTool.Sets
 
                         Func<string, JObject> getInspectorOrDefault = (tRegUser) => getInspectorImpl(tRegUser, false);
 
+                        Func<string, JObject> getInspectorOrOther = (tRegUser) =>
+                        {
+                            JObject inspector = null;
+                            string other = null;
+
+                            if (!string.IsNullOrEmpty(tRegUser))
+                            {
+                                JObject person = getInspectorOrDefault(tRegUser);
+                                if (person == null)
+                                {
+                                    other = tRegUser;
+                                }
+                                else
+                                {
+                                    inspector = person;
+                                }
+                            }
+
+                            return Utils.ToJObject(
+                                new
+                                {
+                                    inspector,
+                                    examiner = (JObject)null,
+                                    other
+                                });
+                        };
+
                         Func<string, JObject, PartVersion> addPartWithFiles = (path, content) =>
                         {
                             var pv = lot.CreatePart(path, content.Get<JObject>("part"), context);
@@ -199,13 +226,13 @@ namespace Gva.MigrationTool.Sets
                             }
                         }
 
-                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessFM(aircraftFmId, registrations, noms, getInspector, getInspectorOrDefault);
+                        var aircraftCertAirworthinessesFM = this.getAircraftCertAirworthinessFM(aircraftFmId, registrations, noms, getInspectorOrOther, getInspectorOrDefault);
                         foreach (var aircraftCertAirworthinessFM in aircraftCertAirworthinessesFM)
                         {
                             addPartWithFiles("aircraftCertAirworthinessesFM/*", aircraftCertAirworthinessFM);
                         }
 
-                        var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(aircraftFmId, noms, getInspector);
+                        var aircraftDocumentDebtsFM = this.getAircraftDocumentDebtsFM(aircraftFmId, noms, getInspectorOrOther);
                         foreach (var aircraftDocumentDebtFM in aircraftDocumentDebtsFM)
                         {
                             try
@@ -510,7 +537,7 @@ namespace Gva.MigrationTool.Sets
             string aircraftFmId,
             Dictionary<int, Tuple<string, NomValue>> registrations,
             Dictionary<string, Dictionary<string, NomValue>> noms,
-            Func<string, JObject> getInspector,
+            Func<string, JObject> getInspectorOrOther,
             Func<string, JObject> getInspectorOrDefault)
         {
             Dictionary<string, string> actMap = new Dictionary<string, string>
@@ -567,9 +594,9 @@ namespace Gva.MigrationTool.Sets
 
             var issues = this.sqlConn.CreateStoreCommand(
                 @"select * from 
-                    (select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspetor as t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA1 as r1
+                    (select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspetor as t_CAA_Inspector, t_ARC_RefNo from CofA1 as r1
                         union all
-                    select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_Reviewed_By, t_ARC_RefNo from CofA2 as r2) s
+                    select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_ARC_RefNo from CofA2 as r2) s
                 where {0} and not(s.dIssue = '' and s.dFrom = '' and s.dValid = '') and s.nStatus <> 0
                 order by CAST(s.nRegNum as int), CAST(s.nRegNumActive as int) desc, s.NumberIssue",
                 new DbClause("s.nActId = {0}", aircraftFmId)
@@ -589,8 +616,7 @@ namespace Gva.MigrationTool.Sets
                         dFrom = Utils.FmToDate(r.Field<string>("dFrom")),
                         dValid = Utils.FmToDate(r.Field<string>("dValid")),
 
-                        t_CAA_Inspetor = r.Field<string>("t_CAA_Inspector"),
-                        t_Reviewed_By = r.Field<string>("t_Reviewed_By")
+                        t_CAA_Inspector = r.Field<string>("t_CAA_Inspector")
                     })
                 .ToList();
 
@@ -687,16 +713,10 @@ namespace Gva.MigrationTool.Sets
                         {
                             issueDate = issues[i].dFrom,
                             validToDate = issues[i].dValid,
-                            inspector = new JObject()
+                            inspector = getInspectorOrOther(issues[i].t_CAA_Inspector)
                         });
 
                         reviews.Add(review);
-
-                        var inspector = getInspector(issues[i].t_CAA_Inspetor);
-                        if (inspector != null)
-                        {
-                            ((JObject)review["inspector"]).Add("inspector", inspector);
-                        }
                     }
                 }
                 else
@@ -711,7 +731,8 @@ namespace Gva.MigrationTool.Sets
                             registration = aw["registration"],
                             documentNumber = aw["documentNumber"],
                             issueDate = formIssues.First().dIssue,
-                            form15Amendments = new JObject()
+                            form15Amendments = new JObject(),
+                            inspector = getInspectorOrOther(formIssues.First().t_CAA_Inspector)
                         });
 
                         var reviews = new JArray();
@@ -723,31 +744,25 @@ namespace Gva.MigrationTool.Sets
                             {
                                 issueDate = formIssues[i].dFrom,
                                 validToDate = formIssues[i].dValid,
-                                inspector = new JObject()
+                                inspector = getInspectorOrOther(issues[i].t_CAA_Inspector)
                             });
 
                             reviews.Add(review);
-
-                            var inspector = getInspector(formIssues[i].t_CAA_Inspetor);
-                            if (inspector != null)
-                            {
-                                ((JObject)review["inspector"]).Add("inspector", inspector);
-                            }
                         }
 
                         airworthinesses.Add(form);
                     }
 
-                    Func<DateTime?, DateTime?, string, JObject> createNewForm15 = (dateOfIssue, validDate, arcType) =>
+                    Func<DateTime?, DateTime?, string, string, JObject> createNewForm15 = (dateOfIssue, validDate, arcType, inspector) =>
                     {
                         var form = Utils.ToJObject(new
                         {
                             airworthinessCertificateType = new JObject(),
                             registration = aw["registration"],
-                            documentNumber = aw["documentNumber"],
                             issueDate = dateOfIssue,
                             validToDate = validDate,
-                            reviews = new JArray()
+                            reviews = new JArray(),
+                            inspector = getExaminerOrOther(inspector)
                         });
 
                         if (arcType.Contains("15a"))
@@ -758,7 +773,7 @@ namespace Gva.MigrationTool.Sets
                         {
                             form["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15b"));
                         }
-
+                        
                         return form;
                     };
 
@@ -769,7 +784,7 @@ namespace Gva.MigrationTool.Sets
                         {
                             if (lastForm == null || !issue.t_ARC_Type.Contains(lastForm["airworthinessCertificateType"]["alias"].ToString()))
                             {
-                                lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type);
+                                lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type, issue.t_CAA_Inspector);
                                 airworthinesses.Add(lastForm);
                             }
                             else if (issue.t_ARC_Type.Contains(lastForm["airworthinessCertificateType"]["alias"].ToString()))
@@ -778,14 +793,14 @@ namespace Gva.MigrationTool.Sets
                                 {
                                     issueDate = issue.dFrom,
                                     validToDate = issue.dValid,
-                                    inspector = getExaminerOrOther(issue.t_Reviewed_By)
+                                    inspector = getExaminerOrOther(issue.t_CAA_Inspector)
                                 });
                                 (lastForm["reviews"] as JArray).Add(review);
                             }
                         }
                         else 
                         {
-                            lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type);
+                            lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type, issue.t_CAA_Inspector);
                             airworthinesses.Add(lastForm);
                         }
                     }
