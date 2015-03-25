@@ -164,6 +164,13 @@
     <Content Include="js\ems\docs\views\workflowRequestCtrl.js" />
     <Content Include="js\ems\ems.js" />
     <Content Include="js\ems\ems_bg-bg.js" />
+    <Content Include="js\ems\units\classificationPermissionsResource.js" />
+    <Content Include="js\ems\units\classificationsResource.js" />
+    <Content Include="js\ems\units\editUnitModal.html" />
+    <Content Include="js\ems\units\editUnitModalCtrl.js" />
+    <Content Include="js\ems\units\unitsCtrl.js" />
+    <Content Include="js\ems\units\unitsResource.js" />
+    <Content Include="js\ems\units\unitsView.html" />
     <Content Include="js\scaffolding\decorators\formDecorator.js" />
     <Content Include="js\scaffolding\decorators\ngModelDecorator.js" />
     <Content Include="js\scaffolding\directives\breadcrumb\breadcrumbDirective.html" />
@@ -176,6 +183,8 @@
     <Content Include="js\scaffolding\directives\ajaxdatatable\ajaxDatatableCtrl.js" />
     <Content Include="js\scaffolding\directives\ajaxdatatable\ajaxdatatableDirective.html" />
     <Content Include="js\scaffolding\directives\ajaxdatatable\ajaxDatatableDirective.js" />
+    <Content Include="js\scaffolding\directives\dropdownSimple\dropdownSimpleDirective.html" />
+    <Content Include="js\scaffolding\directives\dropdownSimple\dropdownSimpleDirective.js" />
     <Content Include="js\scaffolding\directives\suggestion\textareaSuggestionDirective.html" />
     <Content Include="js\scaffolding\directives\suggestion\suggestionDirectives.js" />
     <Content Include="js\scaffolding\directives\suggestion\textSuggestionDirective.html" />
