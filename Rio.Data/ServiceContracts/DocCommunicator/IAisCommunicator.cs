@@ -361,13 +361,33 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
         [EnumMember]
         ASCertificateTypeChangeCompetent = 51,
 
-        // Квалификационен клас за Клас ВС при инструктор
+        // Видове ВС за инструктор
         [EnumMember]
-        AircraftClassQualificationClassInstructor = 52,
+        AircraftTypeInstructor = 52,
 
         // Кандидатствам за - инструктори
         [EnumMember]
         ASCertificateTypeInstructor = 53,
+
+        // Вид права за инструктор
+        [EnumMember]
+        RightsTypeInstructor = 54,
+
+        // Вид права за проверяващ
+        [EnumMember]
+        RightsTypeExaminer = 55,
+
+        // Допълнителна квалификация
+        [EnumMember]
+        AdditionalQualification = 56,
+
+        // Ограничение
+        [EnumMember]
+        LicenseRestriction = 57,
+
+        // Издадено от: атестация
+        [EnumMember]
+        IssueAttestation = 58,
 
         #endregion
 
@@ -404,10 +424,10 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
     [DataContract(Namespace = "http://egov.bg/2014/AisCommunicator/v2")]
     public enum NomenclatureLanguage
     {
-        [EnumMember] 
+        [EnumMember]
         Bulgarian = 0,
 
-        [EnumMember] 
+        [EnumMember]
         English = 1
     }
 

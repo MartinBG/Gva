@@ -12,14 +12,14 @@ using R_0009_000153;
 
 namespace Rio.Data.Extractions.ApplicationDataDo.Gva
 {
-    public class R4576ApplicationDataDoExtraction : ServiceHeaderAndFooterApplicationDataDoExtraction<R_4576.RegistrationAmateurBuiltAircraftApplication>
+    public class R5250ApplicationDataDoExtraction : ServiceHeaderAndFooterApplicationDataDoExtraction<R_5250.ConfirmationRatingCrewApplication>
     {
-        protected override ElectronicAdministrativeServiceHeader GetElectronicAdministrativeServiceHeader(R_4576.RegistrationAmateurBuiltAircraftApplication rioObject)
+        protected override ElectronicAdministrativeServiceHeader GetElectronicAdministrativeServiceHeader(R_5250.ConfirmationRatingCrewApplication rioObject)
         {
             return rioObject.ElectronicAdministrativeServiceHeader;
         }
 
-        protected override ElectronicAdministrativeServiceFooter GetElectronicAdministrativeServiceFooter(R_4576.RegistrationAmateurBuiltAircraftApplication rioObject)
+        protected override ElectronicAdministrativeServiceFooter GetElectronicAdministrativeServiceFooter(R_5250.ConfirmationRatingCrewApplication rioObject)
         {
             return rioObject.ElectronicAdministrativeServiceFooter;
         }

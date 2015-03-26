@@ -548,7 +548,7 @@ namespace Gva.DocCommunicator
                         }
                     } break;
 
-                case NomenclatureType.AircraftClassQualificationClassInstructor:
+                case NomenclatureType.AircraftTypeInstructor:
                     {
                         var nom = new Rio.Objects.Enums.AircraftClassQualificationClassNomenclature();
                         foreach (var item in nom.InstructorValues)
@@ -561,6 +561,51 @@ namespace Gva.DocCommunicator
                     {
                         var nom = new Rio.Objects.Enums.ASCertificateTypeNomenclature();
                         foreach (var item in nom.InstructorValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.RightsTypeInstructor:
+                    {
+                        var nom = new Rio.Objects.Enums.DummyNomenclature();
+                        foreach (var item in nom.Values)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.RightsTypeExaminer:
+                    {
+                        var nom = new Rio.Objects.Enums.RightsTypeNomenclature();
+                        foreach (var item in nom.Values)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.AdditionalQualification:
+                    {
+                        var nom = new Rio.Objects.Enums.DummyNomenclature();
+                        foreach (var item in nom.Values)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.LicenseRestriction:
+                    {
+                        var nom = new Rio.Objects.Enums.DummyNomenclature();
+                        foreach (var item in nom.Values)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.IssueAttestation:
+                    {
+                        var nom = new Rio.Objects.Enums.DummyNomenclature();
+                        foreach (var item in nom.Values)
                         {
                             list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
                         }
