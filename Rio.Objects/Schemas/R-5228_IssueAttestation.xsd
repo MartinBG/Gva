@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5228" xmlns="http://ereg.egov.bg/segment/R-5228" 
+	xmlns:iac="http://ereg.egov.bg/value/R-5224" 
+	xmlns:ian="http://ereg.egov.bg/value/R-5226" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5224" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5226" />
+
+	<xsd:complexType name="IssueAttestation">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Издателство на атестация</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="IssueAttestationCode" type="iac:IssueAttestationCode" />
+			<xsd:element name="IssueAttestationName" type="ian:IssueAttestationName" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

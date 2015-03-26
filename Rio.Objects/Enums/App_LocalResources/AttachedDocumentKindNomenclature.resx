@@ -259,7 +259,7 @@
     <value>Сертификат за качество и съответсвие</value>
   </data>
   <data name="CertificateQualityApprovedManufacturer" xml:space="preserve">
-    <value>Сертификат за качество и съответствие, издаден от одобрен производител</value>
+    <value>Сертификат за качество и съответствие</value>
   </data>
   <data name="ComparissionTable" xml:space="preserve">
     <value>Сравнителна таблица на издадените експлоатационни бюлетини от производителя и директиви по летателна годност, издадени от съответните авиационни власти, с изпълнените на даденото ВС</value>
@@ -703,7 +703,7 @@
     <value>Декларация за наличието на просрочени данъци, такси, мита и други публични вземания</value>
   </data>
   <data name="ConformityRequirements" xml:space="preserve">
-    <value>Декларация за съответствие на описанието със изискванията</value>
+    <value>Декларация за съответствие на описанието със изискванията по образец, наличен в уебсайта на ГД ГВА</value>
   </data>
   <data name="ContractUPPLG" xml:space="preserve">
     <value>Договори за изпълнение на задачи по УППЛГ</value>
@@ -749,5 +749,254 @@
   </data>
   <data name="OwnedInstructorCertificateCopy" xml:space="preserve">
     <value>Притежавано свидетелство за инструктор – копие (ако е приложимо)</value>
+  </data>
+  <data name="SystemsDevicesEquipment" xml:space="preserve">
+    <value>Системи, устройства и оборудване на ВС</value>
+  </data>
+  <data name="CertificateQualityConformityApprovedManufacturer" xml:space="preserve">
+    <value>Сертификат за качество и съответствие, издаден от одобрен производител</value>
+  </data>
+  <data name="TechnicalLogInstructions" xml:space="preserve">
+    <value>Инструкция за попълване на борден дневник</value>
+  </data>
+  <data name="ArrestClearanceSelf" xml:space="preserve">
+    <value>Заповед за допуск  до самостоятелна работа</value>
+  </data>
+  <data name="AvailableLicensesLicenseAny" xml:space="preserve">
+    <value>Налични разрешителни към свидетелството за правоспособност, ако има такива</value>
+  </data>
+  <data name="CertificateCourseInstructorsWorkplaceOJTI" xml:space="preserve">
+    <value>Удостоверение за преминат курс за инструктори на работното място  (OJTI)</value>
+  </data>
+  <data name="CertificatePassingTheoreticalExamRating" xml:space="preserve">
+    <value>Удостоверение за издържан теоретичен изпит – за квалификационен клас</value>
+  </data>
+  <data name="CertificateProficiencyBulgarian" xml:space="preserve">
+    <value>Свидетелство за  владеене на български език</value>
+  </data>
+  <data name="CertificateProficiencyEnglish" xml:space="preserve">
+    <value>Свидетелство за  владеене на английски език</value>
+  </data>
+  <data name="CertificateTrainingAviationTrainingCenter" xml:space="preserve">
+    <value>Удостоверение за завършено обучение в авиационен учебен център</value>
+  </data>
+  <data name="DocumentProtocolTrainingRadiotelephoneCommunicationATSEng" xml:space="preserve">
+    <value>Документ/протокол от проведено обучение по радиотелефонна комуникация при  ОВД – еng</value>
+  </data>
+  <data name="DocumentRecordAttestingLevelProficiencyBulgarian" xml:space="preserve">
+    <value>Документ/протокол, удостоверяващ ниво на владеене на български език</value>
+  </data>
+  <data name="DocumentRecordAttestingLevelProficiencyEnglish" xml:space="preserve">
+    <value>Документ/протокол, удостоверяващ ниво на владеене на английски език</value>
+  </data>
+  <data name="DocumentStateChargeApplicableUponApplicationConfirmationRating" xml:space="preserve">
+    <value>Документ за внесена държавна такса(прилага се и при заявление за потвърждаване на квалификационен клас)</value>
+  </data>
+  <data name="DocumentWorkoutCrossedEducationOrganizationMaintainQualificationCompetency" xml:space="preserve">
+    <value>Документ за премината тренировка в организация за обучение за поддържане на квалификация/компетентност</value>
+  </data>
+  <data name="EvidenceActiveRecreation" xml:space="preserve">
+    <value>Доказателства за активна почивка</value>
+  </data>
+  <data name="IndividualProgramRestoreRating" xml:space="preserve">
+    <value>Индивидуална програма за възстановяване на квалификационния клас</value>
+  </data>
+  <data name="MedicalCertificateAppropriateClassCopy" xml:space="preserve">
+    <value>Свидетелство за медицинска годност от съответния клас (копие)</value>
+  </data>
+  <data name="MinutesCompleteInitialTraining" xml:space="preserve">
+    <value>Протокол от преминато първоначално обучение</value>
+  </data>
+  <data name="MinutesInitialTrainingTheoreticalProbationaryPhaseRatingTraining" xml:space="preserve">
+    <value>Протокол от първоначално обучение – теоретичен изпит- фаза “rating training”</value>
+  </data>
+  <data name="MinutesPassedPreTraining" xml:space="preserve">
+    <value>Протокол от преминато предварително обучение</value>
+  </data>
+  <data name="MinutesPassedTransientTraining" xml:space="preserve">
+    <value>Протокол от преминато преходно обучение</value>
+  </data>
+  <data name="MinutesPassingPracticalTest" xml:space="preserve">
+    <value>Протокол от издържан практически изпит</value>
+  </data>
+  <data name="MinutesPassingTheoreticalCourseExam" xml:space="preserve">
+    <value>Протокол от издържан теоретичен курс/изпит</value>
+  </data>
+  <data name="MinutesPracticalExamPhaseRating" xml:space="preserve">
+    <value>Протокол от практически изпит /фаза „rating” –ADI/TWR/</value>
+  </data>
+  <data name="MinutesPracticalProbationaryPhaseRating" xml:space="preserve">
+    <value>Протокол от практически изпит- фаза “rating”</value>
+  </data>
+  <data name="MinutesTheoreticalExamAfterTheoreticalTrainingInstrumentATSAirport" xml:space="preserve">
+    <value>Протокол от теоретичен изпит след теоретично обучение /приборно ОВД на летището(ADI)/</value>
+  </data>
+  <data name="MinutesTheoreticalExamInitialTheoreticalTrainingBasicTraining" xml:space="preserve">
+    <value>Протокол от теоретичен изпит след първоначално теоретично обучение /basic training/</value>
+  </data>
+  <data name="MinutesTransitionalTrainingPhaseTransitional" xml:space="preserve">
+    <value>Протокол от преходно обучение – фаза “transitional”</value>
+  </data>
+  <data name="MinutesVerifyingCompetenceWorkplace" xml:space="preserve">
+    <value>Протокол от проверка на компетентността на работното място</value>
+  </data>
+  <data name="OrderAdmissionPracticalPraining" xml:space="preserve">
+    <value>Заповед за допуск до практическо обучение</value>
+  </data>
+  <data name="ProfessionalQualificationCertificate" xml:space="preserve">
+    <value>Свидетелство за  професионална квалификация</value>
+  </data>
+  <data name="ProtocolCrossedWorkoutTrainingOrganizationProvideATSSpecialEmergency" xml:space="preserve">
+    <value>Протокол за премината тренировка в организация за обучение за осигуряване на ОВД при особени/аварийни ситуации</value>
+  </data>
+  <data name="ProtocolPassRefresherCourseTrainingOrganization" xml:space="preserve">
+    <value>Протокол за преминат опреснителен курс в организация за обучение</value>
+  </data>
+  <data name="ProtocolsVerificationCompetenceRealConditionsValidRatingsEndorsementsAppearLicense" xml:space="preserve">
+    <value>Протоколи за извършена проверка на компетентност в реални условия за валидните квалификационни класове и/или разрешения, вписани в свидетелството</value>
+  </data>
+  <data name="ReferenceIssuedCenterHoursWorked" xml:space="preserve">
+    <value>Справка, издадена от центъра за ОВД, за отработените часове на работно място, съгласно изискванията на схемата за компетентност в органа за ОВД</value>
+  </data>
+  <data name="ValidLicenseDuplexCopy" xml:space="preserve">
+    <value>Валидно свидетелство за правоспособност (двустранно копие)</value>
+  </data>
+  <data name="DocumentsPassedTrainingAcquisition" xml:space="preserve">
+    <value>Документи, отразяващи преминати обучения за придобиване на свидетелство за правоспособност (копие на всички)</value>
+  </data>
+  <data name="DocumentsPassedTrainingChecks" xml:space="preserve">
+    <value>Документи, отразяващи преминати обучения и проверки за поддържане на компетентност през последните 12 месеца (копия на всички)</value>
+  </data>
+  <data name="EvidenceCountryIssuingCertificate" xml:space="preserve">
+    <value>Доказателства от ДАНО в страната, издала свидетелството, че кандидатът е изпълнявал изискванията за поддържане на компетентност в съответния орган за ОВД и кога за последно е предоставял ОВД</value>
+  </data>
+  <data name="EvidenceRegulatoryConfirming" xml:space="preserve">
+    <value>Доказателства от регулативния орган на страната, издала свидетелството за потвърждаване на професионалната компетентност на кандидата</value>
+  </data>
+  <data name="EvidenceRegulatoryPurelySafety" xml:space="preserve">
+    <value>Доказателства от регулативния орган на страната, издала свидетелството за чисто досие по безопасност за времето на упражняване на притежаваните права по свидетелството</value>
+  </data>
+  <data name="MinutesPassedFlightSimulator" xml:space="preserve">
+    <value>Протокол от премината успешно тренировка с авиационен тренажор</value>
+  </data>
+  <data name="OwnedLicenseCopyAllPages" xml:space="preserve">
+    <value>Притежавано свидетелство за правоспособност (копие на всички страници)</value>
+  </data>
+  <data name="ProtocolPassRefresherCourse" xml:space="preserve">
+    <value>Протокол от преминат опреснителен  курс</value>
+  </data>
+  <data name="ProtocolSuccessfullyExamination" xml:space="preserve">
+    <value>Протокол за премината успешно практическа проверка</value>
+  </data>
+  <data name="TwoColorPhotographs" xml:space="preserve">
+    <value>Два броя цветни фотоснимки с формат 3 x 4 сm</value>
+  </data>
+  <data name="MinutesTrainingAUTSMaintainCompetence" xml:space="preserve">
+    <value>Протокол от тренировка в АУЦ за поддържане на компетентност</value>
+  </data>
+  <data name="MinutesTrainingProvideATSSpecialEmergency" xml:space="preserve">
+    <value>Протокол от обучение за осигуряване на ОВД при особени/аварийни ситуации</value>
+  </data>
+  <data name="CertificateCompletionBasicQualificationCourse" xml:space="preserve">
+    <value>Удостоверение за завършен основен (интегриран) и квалификационен (модулен) курс в авиационен учебен център</value>
+  </data>
+  <data name="CertificateEmployerExperience" xml:space="preserve">
+    <value>Удостоверение от работодателя за практически опит</value>
+  </data>
+  <data name="DocumentHeldPassInternshipANSP" xml:space="preserve">
+    <value>Документ за проведен/преминат стаж в ДАНО</value>
+  </data>
+  <data name="DocumentsCertifyingPreviousExperienceQualifications" xml:space="preserve">
+    <value>Документи, удостоверяващи предишен опит и квалификация</value>
+  </data>
+  <data name="MinutesExaminationGradeB" xml:space="preserve">
+    <value>Протокол от издържан изпит за степен B</value>
+  </data>
+  <data name="MinutesExaminationGradeC" xml:space="preserve">
+    <value>Протокол от издържан изпит за степен С</value>
+  </data>
+  <data name="OrderCompletedGeneralIntegratedGradeA" xml:space="preserve">
+    <value>Заповед/и за завършен основен (интегриран) курс за степен А</value>
+  </data>
+  <data name="OrderCompletedQualificationModularCourseGradeA" xml:space="preserve">
+    <value>Заповед/и за завършен квалификационен (модулен) курс за степен А</value>
+  </data>
+  <data name="ProtocolCompletedQualificationModularCourseGradeB" xml:space="preserve">
+    <value>Протокол за завършен квалификационен (модулен) курс за степен В</value>
+  </data>
+  <data name="ProtocolCompletedQualificationModularCourseGradeC" xml:space="preserve">
+    <value>Протокол за завършен квалификационен (модулен) курс за степен С</value>
+  </data>
+  <data name="ProtocolSuccessExaminationAdmissionIndependentWork" xml:space="preserve">
+    <value>Протокол за успешно издържан изпит за допускане до самостоятелна работа</value>
+  </data>
+  <data name="ProtocolSuccessfullyPassedTheoreticalLevelA" xml:space="preserve">
+    <value>Протокол за успешно издържан теоретичен изпит за степен А</value>
+  </data>
+  <data name="ValidLicenseDegreesDuplexCopy" xml:space="preserve">
+    <value>Валидно свидетелство за правоспособност със степени към него (двустранно копие)</value>
+  </data>
+  <data name="CertificateLanguageCompetenceCopy" xml:space="preserve">
+    <value>Свидетелство за езикова компетентност - копие</value>
+  </data>
+  <data name="CheckSkillsSkillTest" xml:space="preserve">
+    <value>Проверка на уменията (skill test) (регистрирана в деловодството на ГД ГВА отчетна форма на проверяващия)</value>
+  </data>
+  <data name="CourseIASCertificateATO" xml:space="preserve">
+    <value>Курс за МСС (свидетелство от АТО) (когато е приложимо)</value>
+  </data>
+  <data name="FlightTrainingAircraftTypeCertificateATO" xml:space="preserve">
+    <value>Летателно обучение за тип ВС (свидетелство и справка от АТО, включително ZFTT или BASE TRAINING, което е приложимо)</value>
+  </data>
+  <data name="FlightTrainingCertificateATO" xml:space="preserve">
+    <value>Летателно обучение (свидетелство и справка от АТО)</value>
+  </data>
+  <data name="FlyingLicenseCopyRecentRecords" xml:space="preserve">
+    <value>Летателна книжка (копие от последните записи за всеки квалификационен клас)</value>
+  </data>
+  <data name="FurtherTheoreticalTrainingAircraftTypeHPATestimonyATO" xml:space="preserve">
+    <value>Допълнително теоретично обучение за тип ВС (HPA) (свидетелство от АТО) (когато е приложимо)</value>
+  </data>
+  <data name="PassingTheoreticalExamCAAIRATPLCopy" xml:space="preserve">
+    <value>Издържан теоретичен изпит пред ГД ГВА за IR/ATPL- копие (свидетелство)</value>
+  </data>
+  <data name="PassingTtheoreticalExamATPLCopy" xml:space="preserve">
+    <value>Издържан теоретичен изпит пред ГД ГВА за ATPL- копие (свидетелство) (когато е приложимо)</value>
+  </data>
+  <data name="TheoreticalTrainingCertificateATO" xml:space="preserve">
+    <value>Теоретично обучение (свидетелство от АТО)</value>
+  </data>
+  <data name="DocumentsRecoverAtoIfApplicableCopy" xml:space="preserve">
+    <value>Документи за възстановяване от АТО (ако е приложимо) – копие</value>
+  </data>
+  <data name="EvidenceTrainingsCopies" xml:space="preserve">
+    <value>Доказателства за проведени обучения – копия</value>
+  </data>
+  <data name="FlyingLicenseOriginalCAA" xml:space="preserve">
+    <value>Летателна книжка – (оригинал се представя пред ГД ГВА)</value>
+  </data>
+  <data name="RefresherCourseAtoCriTriCopy" xml:space="preserve">
+    <value>Опреснителен курс в АТО (само за CRI/TRI) - копие</value>
+  </data>
+  <data name="ReportingExaminer" xml:space="preserve">
+    <value>Отчетна форма на проверяващия</value>
+  </data>
+  <data name="SkillTestCompetenceAssessmentCopy" xml:space="preserve">
+    <value>Летателна проверка /оценка на компетентността - копие</value>
+  </data>
+  <data name="TechnicalLogBookFsTechnicalLogAircraftCopy" xml:space="preserve">
+    <value>TECHNICAL LOG BOOK от FS или технически борден дневник на ВС – копие</value>
+  </data>
+  <data name="AssignmentsFlightsPracticalTrainingCheckingCopies" xml:space="preserve">
+    <value>Задания от полети за практическо обучение и проверка – копия</value>
+  </data>
+  <data name="AttestationApplicationCopy" xml:space="preserve">
+    <value>Атестация и приложение към атестация (ако е приложимо) - копие</value>
+  </data>
+  <data name="RealityCheck" xml:space="preserve">
+    <value>Практическа проверка</value>
+  </data>
+  <data name="TheoreticalTrainingCopies" xml:space="preserve">
+    <value>Теоретично обучение – копия</value>
   </data>
 </root>

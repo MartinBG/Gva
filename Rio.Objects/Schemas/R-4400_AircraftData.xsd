@@ -14,7 +14,6 @@
 	xmlns:arm="http://ereg.egov.bg/value/R-4340"
 	xmlns:asc="http://ereg.egov.bg/value/R-4342"
 	xmlns:fcn="http://ereg.egov.bg/value/R-4344"
-	xmlns:fcctn="http://ereg.egov.bg/value/R-4346"
 	xmlns:sc="http://ereg.egov.bg/value/R-4398"
 	xmlns:fcci="http://ereg.egov.bg/segment/R-4326"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
@@ -33,7 +32,6 @@
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4342" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4344" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4346" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4398" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4326" />
 
@@ -55,7 +53,6 @@
 			<xsd:element name="DesiredAircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
 			<xsd:element name="AircraftStandardsCertified" type="asc:AircraftStandardsCertified" minOccurs="0" />
 			<xsd:element name="FlightCertificateNumber" type="fcn:FlightCertificateNumber" minOccurs="0" />
-			<xsd:element name="FlightCertificateCertificationTableNumber" type="fcctn:FlightCertificateCertificationTableNumber" minOccurs="0" />
 			<xsd:element name="SeatsCount" type="sc:SeatsCount" minOccurs="0" />
 			<xsd:element name="FlightCertificateCountryIssuer" type="fcci:FlightCertificateCountryIssuer" minOccurs="0" />
 		</xsd:sequence>

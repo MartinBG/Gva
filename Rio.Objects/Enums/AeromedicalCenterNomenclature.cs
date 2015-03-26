@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,7 @@ namespace Rio.Objects.Enums
         public static readonly BaseNomenclature Caa = new BaseNomenclature("08", "CAA France", "");
         public static readonly BaseNomenclature Gr = new BaseNomenclature("09", "GR AME", "");
         public static readonly BaseNomenclature Uk = new BaseNomenclature("10", "UK AME", "");
-        public static readonly BaseNomenclature AmcZero = new BaseNomenclature("11", "¿Ã÷01", "");
+        public static readonly BaseNomenclature AmcZero = new BaseNomenclature("11", "AMC01", "");
         public static readonly BaseNomenclature TrAme = new BaseNomenclature("12", "TR-AME-008/2", "");
         public static readonly BaseNomenclature AmcLatvia = new BaseNomenclature("13", "AMC Latvia", "");
 

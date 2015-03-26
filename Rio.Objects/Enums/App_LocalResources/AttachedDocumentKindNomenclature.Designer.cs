@@ -196,6 +196,42 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Заповед за допуск  до самостоятелна работа.
+        /// </summary>
+        public static string ArrestClearanceSelf {
+            get {
+                return ResourceManager.GetString("ArrestClearanceSelf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Задания от полети за практическо обучение и проверка – копия.
+        /// </summary>
+        public static string AssignmentsFlightsPracticalTrainingCheckingCopies {
+            get {
+                return ResourceManager.GetString("AssignmentsFlightsPracticalTrainingCheckingCopies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Атестация и приложение към атестация (ако е приложимо) - копие.
+        /// </summary>
+        public static string AttestationApplicationCopy {
+            get {
+                return ResourceManager.GetString("AttestationApplicationCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Налични разрешителни към свидетелството за правоспособност, ако има такива.
+        /// </summary>
+        public static string AvailableLicensesLicenseAny {
+            get {
+                return ResourceManager.GetString("AvailableLicensesLicenseAny", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Баланс, заверен от регистриран одитор.
         /// </summary>
         public static string Balance {
@@ -268,11 +304,38 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Удостоверение за завършен основен (интегриран) и квалификационен (модулен) курс в авиационен учебен център.
+        /// </summary>
+        public static string CertificateCompletionBasicQualificationCourse {
+            get {
+                return ResourceManager.GetString("CertificateCompletionBasicQualificationCourse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Удостоверение за съответствие с нормите за авиационен шум.
         /// </summary>
         public static string CertificateCompliance {
             get {
                 return ResourceManager.GetString("CertificateCompliance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удостоверение за преминат курс за инструктори на работното място  (OJTI).
+        /// </summary>
+        public static string CertificateCourseInstructorsWorkplaceOJTI {
+            get {
+                return ResourceManager.GetString("CertificateCourseInstructorsWorkplaceOJTI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удостоверение от работодателя за практически опит.
+        /// </summary>
+        public static string CertificateEmployerExperience {
+            get {
+                return ResourceManager.GetString("CertificateEmployerExperience", resourceCulture);
             }
         }
         
@@ -304,11 +367,47 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Свидетелство за езикова компетентност - копие.
+        /// </summary>
+        public static string CertificateLanguageCompetenceCopy {
+            get {
+                return ResourceManager.GetString("CertificateLanguageCompetenceCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Удостоверение или декларация, че лицето не е било замесено във фалита на друго предприятие.
         /// </summary>
         public static string CertificateNotBankruptcy {
             get {
                 return ResourceManager.GetString("CertificateNotBankruptcy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удостоверение за издържан теоретичен изпит – за квалификационен клас.
+        /// </summary>
+        public static string CertificatePassingTheoreticalExamRating {
+            get {
+                return ResourceManager.GetString("CertificatePassingTheoreticalExamRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Свидетелство за  владеене на български език.
+        /// </summary>
+        public static string CertificateProficiencyBulgarian {
+            get {
+                return ResourceManager.GetString("CertificateProficiencyBulgarian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Свидетелство за  владеене на английски език.
+        /// </summary>
+        public static string CertificateProficiencyEnglish {
+            get {
+                return ResourceManager.GetString("CertificateProficiencyEnglish", resourceCulture);
             }
         }
         
@@ -322,11 +421,20 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сертификат за качество и съответствие, издаден от одобрен производител.
+        ///   Looks up a localized string similar to Сертификат за качество и съответствие.
         /// </summary>
         public static string CertificateQualityApprovedManufacturer {
             get {
                 return ResourceManager.GetString("CertificateQualityApprovedManufacturer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сертификат за качество и съответствие, издаден от одобрен производител.
+        /// </summary>
+        public static string CertificateQualityConformityApprovedManufacturer {
+            get {
+                return ResourceManager.GetString("CertificateQualityConformityApprovedManufacturer", resourceCulture);
             }
         }
         
@@ -354,6 +462,24 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string Certificates {
             get {
                 return ResourceManager.GetString("Certificates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удостоверение за завършено обучение в авиационен учебен център.
+        /// </summary>
+        public static string CertificateTrainingAviationTrainingCenter {
+            get {
+                return ResourceManager.GetString("CertificateTrainingAviationTrainingCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Проверка на уменията (skill test) (регистрирана в деловодството на ГД ГВА отчетна форма на проверяващия).
+        /// </summary>
+        public static string CheckSkillsSkillTest {
+            get {
+                return ResourceManager.GetString("CheckSkillsSkillTest", resourceCulture);
             }
         }
         
@@ -421,7 +547,7 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Декларация за съответствие на описанието със изискванията.
+        ///   Looks up a localized string similar to Декларация за съответствие на описанието със изискванията по образец, наличен в уебсайта на ГД ГВА.
         /// </summary>
         public static string ConformityRequirements {
             get {
@@ -525,6 +651,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string CopyOrder {
             get {
                 return ResourceManager.GetString("CopyOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Курс за МСС (свидетелство от АТО) (когато е приложимо).
+        /// </summary>
+        public static string CourseIASCertificateATO {
+            get {
+                return ResourceManager.GetString("CourseIASCertificateATO", resourceCulture);
             }
         }
         
@@ -682,11 +817,47 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Документ за проведен/преминат стаж в ДАНО.
+        /// </summary>
+        public static string DocumentHeldPassInternshipANSP {
+            get {
+                return ResourceManager.GetString("DocumentHeldPassInternshipANSP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Документ, удостоверяващ правото за ползване на обекта.
         /// </summary>
         public static string DocumentObjectRights {
             get {
                 return ResourceManager.GetString("DocumentObjectRights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Документ/протокол от проведено обучение по радиотелефонна комуникация при  ОВД – еng.
+        /// </summary>
+        public static string DocumentProtocolTrainingRadiotelephoneCommunicationATSEng {
+            get {
+                return ResourceManager.GetString("DocumentProtocolTrainingRadiotelephoneCommunicationATSEng", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Документ/протокол, удостоверяващ ниво на владеене на български език.
+        /// </summary>
+        public static string DocumentRecordAttestingLevelProficiencyBulgarian {
+            get {
+                return ResourceManager.GetString("DocumentRecordAttestingLevelProficiencyBulgarian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Документ/протокол, удостоверяващ ниво на владеене на английски език.
+        /// </summary>
+        public static string DocumentRecordAttestingLevelProficiencyEnglish {
+            get {
+                return ResourceManager.GetString("DocumentRecordAttestingLevelProficiencyEnglish", resourceCulture);
             }
         }
         
@@ -700,6 +871,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Документи, удостоверяващи предишен опит и квалификация.
+        /// </summary>
+        public static string DocumentsCertifyingPreviousExperienceQualifications {
+            get {
+                return ResourceManager.GetString("DocumentsCertifyingPreviousExperienceQualifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Копия на документи, удостоверяващи трудовия стаж и професионалната квалификация на ръководния технически персонал.
         /// </summary>
         public static string DocumentsCopies {
@@ -709,11 +889,56 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Документи, отразяващи преминати обучения за придобиване на свидетелство за правоспособност (копие на всички).
+        /// </summary>
+        public static string DocumentsPassedTrainingAcquisition {
+            get {
+                return ResourceManager.GetString("DocumentsPassedTrainingAcquisition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Документи, отразяващи преминати обучения и проверки за поддържане на компетентност през последните 12 месеца (копия на всички).
+        /// </summary>
+        public static string DocumentsPassedTrainingChecks {
+            get {
+                return ResourceManager.GetString("DocumentsPassedTrainingChecks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Документи за възстановяване от АТО (ако е приложимо) – копие.
+        /// </summary>
+        public static string DocumentsRecoverAtoIfApplicableCopy {
+            get {
+                return ResourceManager.GetString("DocumentsRecoverAtoIfApplicableCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Документ за преминат стандартизационен курс за проверяващ – копие.
         /// </summary>
         public static string DocumentStandardizationPassRate {
             get {
                 return ResourceManager.GetString("DocumentStandardizationPassRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Документ за внесена държавна такса(прилага се и при заявление за потвърждаване на квалификационен клас).
+        /// </summary>
+        public static string DocumentStateChargeApplicableUponApplicationConfirmationRating {
+            get {
+                return ResourceManager.GetString("DocumentStateChargeApplicableUponApplicationConfirmationRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Документ за премината тренировка в организация за обучение за поддържане на квалификация/компетентност.
+        /// </summary>
+        public static string DocumentWorkoutCrossedEducationOrganizationMaintainQualificationCompetency {
+            get {
+                return ResourceManager.GetString("DocumentWorkoutCrossedEducationOrganizationMaintainQualificationCompetency", resourceCulture);
             }
         }
         
@@ -763,11 +988,56 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Доказателства за активна почивка.
+        /// </summary>
+        public static string EvidenceActiveRecreation {
+            get {
+                return ResourceManager.GetString("EvidenceActiveRecreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Доказателства от ДАНО в страната, издала свидетелството, че кандидатът е изпълнявал изискванията за поддържане на компетентност в съответния орган за ОВД и кога за последно е предоставял ОВД.
+        /// </summary>
+        public static string EvidenceCountryIssuingCertificate {
+            get {
+                return ResourceManager.GetString("EvidenceCountryIssuingCertificate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Доказателства за квалификация и опит на отговорния ръководител/отговорните ръководители.
         /// </summary>
         public static string EvidenceManagers {
             get {
                 return ResourceManager.GetString("EvidenceManagers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Доказателства от регулативния орган на страната, издала свидетелството за потвърждаване на професионалната компетентност на кандидата.
+        /// </summary>
+        public static string EvidenceRegulatoryConfirming {
+            get {
+                return ResourceManager.GetString("EvidenceRegulatoryConfirming", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Доказателства от регулативния орган на страната, издала свидетелството за чисто досие по безопасност за времето на упражняване на притежаваните права по свидетелството.
+        /// </summary>
+        public static string EvidenceRegulatoryPurelySafety {
+            get {
+                return ResourceManager.GetString("EvidenceRegulatoryPurelySafety", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Доказателства за проведени обучения – копия.
+        /// </summary>
+        public static string EvidenceTrainingsCopies {
+            get {
+                return ResourceManager.GetString("EvidenceTrainingsCopies", resourceCulture);
             }
         }
         
@@ -844,11 +1114,47 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Летателно обучение за тип ВС (свидетелство и справка от АТО, включително ZFTT или BASE TRAINING, което е приложимо).
+        /// </summary>
+        public static string FlightTrainingAircraftTypeCertificateATO {
+            get {
+                return ResourceManager.GetString("FlightTrainingAircraftTypeCertificateATO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Летателно обучение (свидетелство и справка от АТО).
+        /// </summary>
+        public static string FlightTrainingCertificateATO {
+            get {
+                return ResourceManager.GetString("FlightTrainingCertificateATO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Летателна книжка (копие от последните записи за всеки квалификационен клас).
         /// </summary>
         public static string FlyingLicenseCopyEachClass {
             get {
                 return ResourceManager.GetString("FlyingLicenseCopyEachClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Летателна книжка (копие от последните записи за всеки квалификационен клас).
+        /// </summary>
+        public static string FlyingLicenseCopyRecentRecords {
+            get {
+                return ResourceManager.GetString("FlyingLicenseCopyRecentRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Летателна книжка – (оригинал се представя пред ГД ГВА).
+        /// </summary>
+        public static string FlyingLicenseOriginalCAA {
+            get {
+                return ResourceManager.GetString("FlyingLicenseOriginalCAA", resourceCulture);
             }
         }
         
@@ -894,6 +1200,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string ForecastThreeYears {
             get {
                 return ResourceManager.GetString("ForecastThreeYears", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Допълнително теоретично обучение за тип ВС (HPA) (свидетелство от АТО) (когато е приложимо).
+        /// </summary>
+        public static string FurtherTheoreticalTrainingAircraftTypeHPATestimonyATO {
+            get {
+                return ResourceManager.GetString("FurtherTheoreticalTrainingAircraftTypeHPATestimonyATO", resourceCulture);
             }
         }
         
@@ -975,6 +1290,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string IncidentsReport {
             get {
                 return ResourceManager.GetString("IncidentsReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Индивидуална програма за възстановяване на квалификационния клас.
+        /// </summary>
+        public static string IndividualProgramRestoreRating {
+            get {
+                return ResourceManager.GetString("IndividualProgramRestoreRating", resourceCulture);
             }
         }
         
@@ -1276,6 +1600,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Свидетелство за медицинска годност от съответния клас (копие).
+        /// </summary>
+        public static string MedicalCertificateAppropriateClassCopy {
+            get {
+                return ResourceManager.GetString("MedicalCertificateAppropriateClassCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Свидетелство за медицинска годност part-med – копие.
         /// </summary>
         public static string MedicalCertificatePartMedCopy {
@@ -1290,6 +1623,159 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string MedicalFitnessCopy {
             get {
                 return ResourceManager.GetString("MedicalFitnessCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от преминато първоначално обучение.
+        /// </summary>
+        public static string MinutesCompleteInitialTraining {
+            get {
+                return ResourceManager.GetString("MinutesCompleteInitialTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от издържан изпит за степен B.
+        /// </summary>
+        public static string MinutesExaminationGradeB {
+            get {
+                return ResourceManager.GetString("MinutesExaminationGradeB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от издържан изпит за степен С.
+        /// </summary>
+        public static string MinutesExaminationGradeC {
+            get {
+                return ResourceManager.GetString("MinutesExaminationGradeC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от първоначално обучение – теоретичен изпит- фаза “rating training”.
+        /// </summary>
+        public static string MinutesInitialTrainingTheoreticalProbationaryPhaseRatingTraining {
+            get {
+                return ResourceManager.GetString("MinutesInitialTrainingTheoreticalProbationaryPhaseRatingTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от премината успешно тренировка с авиационен тренажор.
+        /// </summary>
+        public static string MinutesPassedFlightSimulator {
+            get {
+                return ResourceManager.GetString("MinutesPassedFlightSimulator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от преминато предварително обучение.
+        /// </summary>
+        public static string MinutesPassedPreTraining {
+            get {
+                return ResourceManager.GetString("MinutesPassedPreTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от преминато преходно обучение.
+        /// </summary>
+        public static string MinutesPassedTransientTraining {
+            get {
+                return ResourceManager.GetString("MinutesPassedTransientTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от издържан практически изпит.
+        /// </summary>
+        public static string MinutesPassingPracticalTest {
+            get {
+                return ResourceManager.GetString("MinutesPassingPracticalTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от издържан теоретичен курс/изпит.
+        /// </summary>
+        public static string MinutesPassingTheoreticalCourseExam {
+            get {
+                return ResourceManager.GetString("MinutesPassingTheoreticalCourseExam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от практически изпит /фаза „rating” –ADI/TWR/.
+        /// </summary>
+        public static string MinutesPracticalExamPhaseRating {
+            get {
+                return ResourceManager.GetString("MinutesPracticalExamPhaseRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от практически изпит- фаза “rating”.
+        /// </summary>
+        public static string MinutesPracticalProbationaryPhaseRating {
+            get {
+                return ResourceManager.GetString("MinutesPracticalProbationaryPhaseRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от теоретичен изпит след теоретично обучение /приборно ОВД на летището(ADI)/.
+        /// </summary>
+        public static string MinutesTheoreticalExamAfterTheoreticalTrainingInstrumentATSAirport {
+            get {
+                return ResourceManager.GetString("MinutesTheoreticalExamAfterTheoreticalTrainingInstrumentATSAirport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от теоретичен изпит след първоначално теоретично обучение /basic training/.
+        /// </summary>
+        public static string MinutesTheoreticalExamInitialTheoreticalTrainingBasicTraining {
+            get {
+                return ResourceManager.GetString("MinutesTheoreticalExamInitialTheoreticalTrainingBasicTraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от тренировка в АУЦ за поддържане на компетентност.
+        /// </summary>
+        public static string MinutesTrainingAUTSMaintainCompetence {
+            get {
+                return ResourceManager.GetString("MinutesTrainingAUTSMaintainCompetence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от обучение за осигуряване на ОВД при особени/аварийни ситуации.
+        /// </summary>
+        public static string MinutesTrainingProvideATSSpecialEmergency {
+            get {
+                return ResourceManager.GetString("MinutesTrainingProvideATSSpecialEmergency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от преходно обучение – фаза “transitional”.
+        /// </summary>
+        public static string MinutesTransitionalTrainingPhaseTransitional {
+            get {
+                return ResourceManager.GetString("MinutesTransitionalTrainingPhaseTransitional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол от проверка на компетентността на работното място.
+        /// </summary>
+        public static string MinutesVerifyingCompetenceWorkplace {
+            get {
+                return ResourceManager.GetString("MinutesVerifyingCompetenceWorkplace", resourceCulture);
             }
         }
         
@@ -1375,6 +1861,33 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Заповед за допуск до практическо обучение.
+        /// </summary>
+        public static string OrderAdmissionPracticalPraining {
+            get {
+                return ResourceManager.GetString("OrderAdmissionPracticalPraining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заповед/и за завършен основен (интегриран) курс за степен А.
+        /// </summary>
+        public static string OrderCompletedGeneralIntegratedGradeA {
+            get {
+                return ResourceManager.GetString("OrderCompletedGeneralIntegratedGradeA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заповед/и за завършен квалификационен (модулен) курс за степен А.
+        /// </summary>
+        public static string OrderCompletedQualificationModularCourseGradeA {
+            get {
+                return ResourceManager.GetString("OrderCompletedQualificationModularCourseGradeA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Документ, съдържащ организационна структура с функционалните взаимодействия и пълномощията, задълженията и отговорностите на назначените длъжностни лица и по-специално на управленския персонал, който отговаря за функциите, свързани с безопасността, качеството, сигурността, финансите и човешките ресурси;.
         /// </summary>
         public static string OrganizationalStructure {
@@ -1429,11 +1942,38 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Притежавано свидетелство за правоспособност (копие на всички страници).
+        /// </summary>
+        public static string OwnedLicenseCopyAllPages {
+            get {
+                return ResourceManager.GetString("OwnedLicenseCopyAllPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Документи, удостоверяващи правото на собственост или правото да ползва терена и съоръженията на летателната площадка.
         /// </summary>
         public static string OwnershipTerrainUsage {
             get {
                 return ResourceManager.GetString("OwnershipTerrainUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Издържан теоретичен изпит пред ГД ГВА за IR/ATPL- копие (свидетелство).
+        /// </summary>
+        public static string PassingTheoreticalExamCAAIRATPLCopy {
+            get {
+                return ResourceManager.GetString("PassingTheoreticalExamCAAIRATPLCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Издържан теоретичен изпит пред ГД ГВА за ATPL- копие (свидетелство) (когато е приложимо).
+        /// </summary>
+        public static string PassingTtheoreticalExamATPLCopy {
+            get {
+                return ResourceManager.GetString("PassingTtheoreticalExamATPLCopy", resourceCulture);
             }
         }
         
@@ -1537,6 +2077,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Свидетелство за  професионална квалификация.
+        /// </summary>
+        public static string ProfessionalQualificationCertificate {
+            get {
+                return ResourceManager.GetString("ProfessionalQualificationCertificate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Програма за летателни изпитания.
         /// </summary>
         public static string ProgramFlyingTests {
@@ -1582,6 +2131,33 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Протокол за завършен квалификационен (модулен) курс за степен В.
+        /// </summary>
+        public static string ProtocolCompletedQualificationModularCourseGradeB {
+            get {
+                return ResourceManager.GetString("ProtocolCompletedQualificationModularCourseGradeB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол за завършен квалификационен (модулен) курс за степен С.
+        /// </summary>
+        public static string ProtocolCompletedQualificationModularCourseGradeC {
+            get {
+                return ResourceManager.GetString("ProtocolCompletedQualificationModularCourseGradeC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол за премината тренировка в организация за обучение за осигуряване на ОВД при особени/аварийни ситуации.
+        /// </summary>
+        public static string ProtocolCrossedWorkoutTrainingOrganizationProvideATSSpecialEmergency {
+            get {
+                return ResourceManager.GetString("ProtocolCrossedWorkoutTrainingOrganizationProvideATSSpecialEmergency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Протокол за успешно издържан изпит за допускане до самостоятелна  работа.
         /// </summary>
         public static string ProtocolExamSuccess {
@@ -1600,6 +2176,24 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Протокол от преминат опреснителен  курс.
+        /// </summary>
+        public static string ProtocolPassRefresherCourse {
+            get {
+                return ResourceManager.GetString("ProtocolPassRefresherCourse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол за преминат опреснителен курс в организация за обучение.
+        /// </summary>
+        public static string ProtocolPassRefresherCourseTrainingOrganization {
+            get {
+                return ResourceManager.GetString("ProtocolPassRefresherCourseTrainingOrganization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Протоколи и/или актове от извършени проверки и удостоверения и/или протоколи за преминато обучение.
         /// </summary>
         public static string Protocols {
@@ -1614,6 +2208,43 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string ProtocolsComplianceSSNO {
             get {
                 return ResourceManager.GetString("ProtocolsComplianceSSNO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол за успешно издържан изпит за допускане до самостоятелна работа.
+        /// </summary>
+        public static string ProtocolSuccessExaminationAdmissionIndependentWork {
+            get {
+                return ResourceManager.GetString("ProtocolSuccessExaminationAdmissionIndependentWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол за премината успешно практическа проверка.
+        /// </summary>
+        public static string ProtocolSuccessfullyExamination {
+            get {
+                return ResourceManager.GetString("ProtocolSuccessfullyExamination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протокол за успешно издържан теоретичен изпит за степен А.
+        /// </summary>
+        public static string ProtocolSuccessfullyPassedTheoreticalLevelA {
+            get {
+                return ResourceManager.GetString("ProtocolSuccessfullyPassedTheoreticalLevelA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Протоколи за извършена проверка на компетентност в реални условия за валидните квалификационни класове и/или разрешения, вписани в свидетелството.
+        /// </summary>
+        public static string ProtocolsVerificationCompetenceRealConditionsValidRatingsEndorsementsAppearLicense {
+            get {
+                return ResourceManager.GetString("ProtocolsVerificationCompetenceRealConditionsValidRatingsEndorsementsAppearLicens" +
+                        "e", resourceCulture);
             }
         }
         
@@ -1659,6 +2290,33 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string QualificationCertificate {
             get {
                 return ResourceManager.GetString("QualificationCertificate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Практическа проверка.
+        /// </summary>
+        public static string RealityCheck {
+            get {
+                return ResourceManager.GetString("RealityCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Справка, издадена от центъра за ОВД, за отработените часове на работно място, съгласно изискванията на схемата за компетентност в органа за ОВД.
+        /// </summary>
+        public static string ReferenceIssuedCenterHoursWorked {
+            get {
+                return ResourceManager.GetString("ReferenceIssuedCenterHoursWorked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Опреснителен курс в АТО (само за CRI/TRI) - копие.
+        /// </summary>
+        public static string RefresherCourseAtoCriTriCopy {
+            get {
+                return ResourceManager.GetString("RefresherCourseAtoCriTriCopy", resourceCulture);
             }
         }
         
@@ -1713,6 +2371,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string ReportIncome {
             get {
                 return ResourceManager.GetString("ReportIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отчетна форма на проверяващия.
+        /// </summary>
+        public static string ReportingExaminer {
+            get {
+                return ResourceManager.GetString("ReportingExaminer", resourceCulture);
             }
         }
         
@@ -1789,6 +2456,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Летателна проверка /оценка на компетентността - копие.
+        /// </summary>
+        public static string SkillTestCompetenceAssessmentCopy {
+            get {
+                return ResourceManager.GetString("SkillTestCompetenceAssessmentCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to СП издадено от друга държава.
         /// </summary>
         public static string SP {
@@ -1821,6 +2497,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string Subcontracts {
             get {
                 return ResourceManager.GetString("Subcontracts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Системи, устройства и оборудване на ВС.
+        /// </summary>
+        public static string SystemsDevicesEquipment {
+            get {
+                return ResourceManager.GetString("SystemsDevicesEquipment", resourceCulture);
             }
         }
         
@@ -1879,6 +2564,24 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TECHNICAL LOG BOOK от FS или технически борден дневник на ВС – копие.
+        /// </summary>
+        public static string TechnicalLogBookFsTechnicalLogAircraftCopy {
+            get {
+                return ResourceManager.GetString("TechnicalLogBookFsTechnicalLogAircraftCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Инструкция за попълване на борден дневник.
+        /// </summary>
+        public static string TechnicalLogInstructions {
+            get {
+                return ResourceManager.GetString("TechnicalLogInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Теоретично обучение за клас/тип ВС – копие.
         /// </summary>
         public static string TheoreticalClassType {
@@ -1915,6 +2618,24 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Теоретично обучение (свидетелство от АТО).
+        /// </summary>
+        public static string TheoreticalTrainingCertificateATO {
+            get {
+                return ResourceManager.GetString("TheoreticalTrainingCertificateATO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Теоретично обучение – копия.
+        /// </summary>
+        public static string TheoreticalTrainingCopies {
+            get {
+                return ResourceManager.GetString("TheoreticalTrainingCopies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ресурсна инструкция.
         /// </summary>
         public static string TimeLimitComponents {
@@ -1942,11 +2663,38 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Два броя цветни фотоснимки с формат 3 x 4 сm.
+        /// </summary>
+        public static string TwoColorPhotographs {
+            get {
+                return ResourceManager.GetString("TwoColorPhotographs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Валидно Удостоверение за ЛГ..
         /// </summary>
         public static string ValidCertificateAirworthiness {
             get {
                 return ResourceManager.GetString("ValidCertificateAirworthiness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Валидно свидетелство за правоспособност със степени към него (двустранно копие).
+        /// </summary>
+        public static string ValidLicenseDegreesDuplexCopy {
+            get {
+                return ResourceManager.GetString("ValidLicenseDegreesDuplexCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Валидно свидетелство за правоспособност (двустранно копие).
+        /// </summary>
+        public static string ValidLicenseDuplexCopy {
+            get {
+                return ResourceManager.GetString("ValidLicenseDuplexCopy", resourceCulture);
             }
         }
         

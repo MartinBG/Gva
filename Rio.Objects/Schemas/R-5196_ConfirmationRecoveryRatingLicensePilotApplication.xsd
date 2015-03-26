@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5196"
+		xmlns="http://ereg.egov.bg/segment/R-5196"
+		xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+		xmlns:acqc="http://ereg.egov.bg/segment/R-4056"
+		xmlns:atqc="http://ereg.egov.bg/segment/R-4064"
+		xmlns:fcpd="http://ereg.egov.bg/segment/R-4012"
+		xmlns:eprres="http://ereg.egov.bg/segment/R-4014"
+		xmlns:esaq="http://ereg.egov.bg/value/0008-000035"
+		xmlns:act="http://ereg.egov.bg/segment/R-4048"
+		xmlns:acd="http://ereg.egov.bg/segment/R-4080"
+		xmlns:msev="http://ereg.egov.bg/value/R-5180"
+		xmlns:iats="http://ereg.egov.bg/value/R-5154"
+		xmlns:actc="http://ereg.egov.bg/segment/R-5186"
+		xmlns:itc="http://ereg.egov.bg/segment/R-5190"
+		xmlns:rtc="http://ereg.egov.bg/segment/R-5194"
+		xmlns:add="http://ereg.egov.bg/segment/R-3994"
+		xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
+		xmlns:cres="http://ereg.egov.bg/value/R-4016"
+		xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+		xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4056"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4064"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4012"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4014"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4048"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4080"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5180"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5154"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5186"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5190"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5194"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
+
+	<xsd:element name="ConfirmationRecoveryRatingLicensePilotApplication" type="ConfirmationRecoveryRatingLicensePilotApplication"/>
+	<xsd:complexType name="ConfirmationRecoveryRatingLicensePilotApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за потвърждаване/възстановяване на квалификационен клас в свидетелство за правоспособност на пилот</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+			<xsd:element name="AircraftClassQualificationClass" type="acqc:AircraftClassQualificationClass" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="AircraftTypeQualificationClass" type="atqc:AircraftTypeQualificationClass" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="FlightCrewPersonalData" type="fcpd:FlightCrewPersonalData" minOccurs="0"/>
+			<xsd:element name="EvidencePersonRepresentingRecipientElectronicService" type="eprres:EvidencePersonRepresentingRecipientElectronicService" minOccurs="0"/>
+			<xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+			<xsd:element name="ASCertificateType" type="act:ASCertificateType" minOccurs="0"/>
+			<xsd:element name="ASCertificateData" type="acd:ASCertificateData" minOccurs="0"/>
+			<xsd:element name="MannerSpecifiedExpiredValidity" type="msev:MannerSpecifiedExpiredValidity" minOccurs="0"/>
+			<xsd:element name="IsIRTypeSelected" type="iats:IsApplicationTypeSelected" minOccurs="0"/>
+			<xsd:element name="IsOtherInstructorTypeSelected" type="iats:IsApplicationTypeSelected" minOccurs="0"/>
+			<xsd:element name="AircraftClassTypeChecks" type="actc:AircraftClassTypeChecks" minOccurs="0"/>
+			<xsd:element name="IRTypeChecks" type="itc:IRTypeChecks" minOccurs="0"/>
+			<xsd:element name="RightTypeChecks" type="rtc:RightTypeChecks" minOccurs="0"/>
+			<xsd:element name="AttachedDocumentDatasCollection" type="add:AttachedDocumentDatasCollection" minOccurs="0" />	
+			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0"/>
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

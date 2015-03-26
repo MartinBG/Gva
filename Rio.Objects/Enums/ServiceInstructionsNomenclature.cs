@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,31 +11,31 @@ namespace Rio.Objects.Enums
         {
             this.Values = new List<BaseNomenclature>()
             {
-                new BaseNomenclature("01", "МОСВ"),
-                new BaseNomenclature("02", "ИАОС"),
-                new BaseNomenclature("03", "БД Благоевград"),
-                new BaseNomenclature("04", "БД Варна"),
-                new BaseNomenclature("05", "БД Пловдив"),
-                new BaseNomenclature("06", "БД Плевен"),
-                new BaseNomenclature("07", "ДНП Пирин"),
-                new BaseNomenclature("08", "ДНП Рила"),
-                new BaseNomenclature("09", "ДНП Централен Балкан"),
-                new BaseNomenclature("10", "РИОСВ Благоевград"),
-                new BaseNomenclature("11", "РИОСВ Бургас"),
-                new BaseNomenclature("12", "РИОСВ Варна"),
-                new BaseNomenclature("13", "РИОСВ ВеликоТърново"),
-                new BaseNomenclature("14", "РИОСВ Враца"),
-                new BaseNomenclature("15", "РИОСВ Монтана"),
-                new BaseNomenclature("16", "РИОСВ Пазарджик"),
-                new BaseNomenclature("17", "РИОСВ Перник"),
-                new BaseNomenclature("18", "РИОСВ Плевен"),
-                new BaseNomenclature("19", "РИОСВ Пловдив"),
-                new BaseNomenclature("20", "РИОСВ Русе"),
-                new BaseNomenclature("21", "РИОСВ Смолян"),
-                new BaseNomenclature("22", "РИОСВ София"),
-                new BaseNomenclature("23", "РИОСВ Стара Загора"),
-                new BaseNomenclature("24", "РИОСВ Хасково"),
-                new BaseNomenclature("25", "РИОСВ Шумен")
+                new BaseNomenclature("01", "РњРћРЎР’"),
+                new BaseNomenclature("02", "РРђРћРЎ"),
+                new BaseNomenclature("03", "Р‘Р” Р‘Р»Р°РіРѕРµРІРіСЂР°Рґ"),
+                new BaseNomenclature("04", "Р‘Р” Р’Р°СЂРЅР°"),
+                new BaseNomenclature("05", "Р‘Р” РџР»РѕРІРґРёРІ"),
+                new BaseNomenclature("06", "Р‘Р” РџР»РµРІРµРЅ"),
+                new BaseNomenclature("07", "Р”РќРџ РџРёСЂРёРЅ"),
+                new BaseNomenclature("08", "Р”РќРџ Р РёР»Р°"),
+                new BaseNomenclature("09", "Р”РќРџ Р¦РµРЅС‚СЂР°Р»РµРЅ Р‘Р°Р»РєР°РЅ"),
+                new BaseNomenclature("10", "Р РРћРЎР’ Р‘Р»Р°РіРѕРµРІРіСЂР°Рґ"),
+                new BaseNomenclature("11", "Р РРћРЎР’ Р‘СѓСЂРіР°СЃ"),
+                new BaseNomenclature("12", "Р РРћРЎР’ Р’Р°СЂРЅР°"),
+                new BaseNomenclature("13", "Р РРћРЎР’ Р’РµР»РёРєРѕРўСЉСЂРЅРѕРІРѕ"),
+                new BaseNomenclature("14", "Р РРћРЎР’ Р’СЂР°С†Р°"),
+                new BaseNomenclature("15", "Р РРћРЎР’ РњРѕРЅС‚Р°РЅР°"),
+                new BaseNomenclature("16", "Р РРћРЎР’ РџР°Р·Р°СЂРґР¶РёРє"),
+                new BaseNomenclature("17", "Р РРћРЎР’ РџРµСЂРЅРёРє"),
+                new BaseNomenclature("18", "Р РРћРЎР’ РџР»РµРІРµРЅ"),
+                new BaseNomenclature("19", "Р РРћРЎР’ РџР»РѕРІРґРёРІ"),
+                new BaseNomenclature("20", "Р РРћРЎР’ Р СѓСЃРµ"),
+                new BaseNomenclature("21", "Р РРћРЎР’ РЎРјРѕР»СЏРЅ"),
+                new BaseNomenclature("22", "Р РРћРЎР’ РЎРѕС„РёСЏ"),
+                new BaseNomenclature("23", "Р РРћРЎР’ РЎС‚Р°СЂР° Р—Р°РіРѕСЂР°"),
+                new BaseNomenclature("24", "Р РРћРЎР’ РҐР°СЃРєРѕРІРѕ"),
+                new BaseNomenclature("25", "Р РРћРЎР’ РЁСѓРјРµРЅ")
             };
         }
     }

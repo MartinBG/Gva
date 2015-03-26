@@ -213,4 +213,7 @@
   <data name="StateTraineeCommanderWithInstructor" xml:space="preserve">
     <value>Обучаем пилот с инструктор</value>
   </data>
+  <data name="SoloUnderSupervisionInstructor" xml:space="preserve">
+    <value>Самостоятелни под наблюдение на инструктор</value>
+  </data>
 </root>

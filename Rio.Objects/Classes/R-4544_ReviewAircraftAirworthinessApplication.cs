@@ -41,24 +41,9 @@ namespace R_4544
 		public R_0009_000015.ElectronicServiceRecipient ElectronicServiceRecipient { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="ApplicantAviationalOperatorIndication",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4584.ContactInformation),ElementName="ContactInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool ApplicantAviationalOperatorIndication { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4294.AviationalOperatorBasicData),ElementName="AviationalOperatorBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4294.AviationalOperatorBasicData AviationalOperatorBasicData { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="ApplicantNotAircraftOwner",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool ApplicantNotAircraftOwner { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4394.AircraftOwnerData),ElementName="AircraftOwnerData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4394.AircraftOwnerData AircraftOwnerData { get; set; }
+		public R_4584.ContactInformation ContactInformation { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4014.EvidencePersonRepresentingRecipientElectronicService),ElementName="EvidencePersonRepresentingRecipientElectronicService",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
@@ -69,6 +54,21 @@ namespace R_4544
 		[XmlElement(ElementName="AuthorQuality",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public string AuthorQuality { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="ApplicantNotAircraftOwner",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public bool ApplicantNotAircraftOwner { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4310.AircraftHiringData),ElementName="AircraftHiringData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_4310.AircraftHiringData AircraftHiringData { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4294.AviationalOperatorBasicData),ElementName="AviationalOperatorBasicData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_4294.AviationalOperatorBasicData AviationalOperatorBasicData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4522.AircraftAirworthinessReviewCertificationData),ElementName="AircraftAirworthinessReviewCertificationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
@@ -96,16 +96,6 @@ namespace R_4544
 		public R_3994.AttachedDocumentDatasCollection InspectionReportAdditionalAttachedDocumentDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="AircraftLastTechnicalMaintenanceDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public DateTime? AircraftLastTechnicalMaintenanceDate { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="AircraftLastTechnicalMaintenancePlace",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string AircraftLastTechnicalMaintenancePlace { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4534.Options),ElementName="Options",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public R_4534.Options Options { get; set; }
@@ -126,9 +116,9 @@ namespace R_4544
 		public bool ConsentReceivingElectronicStatements { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="AttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4696.EAURecipientsAttachedDocumentDatasCollection),ElementName="EAURecipientsAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_3994.AttachedDocumentDatasCollection AttachedDocumentDatasCollection { get; set; }
+		public R_4696.EAURecipientsAttachedDocumentDatasCollection EAURecipientsAttachedDocumentDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ReviewAircraftAirworthinessApplicationAttachedDocuments),ElementName="AttachedDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]

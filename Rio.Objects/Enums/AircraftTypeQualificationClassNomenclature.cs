@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -88,7 +88,7 @@ namespace Rio.Objects.Enums
         public static readonly BaseNomenclature IR_H = new BaseNomenclature("IR (H)", "IR (H)", "");
         public static readonly BaseNomenclature IR_SEA = new BaseNomenclature("IR (SEA)", "IR (SEA)", "");
         public static readonly BaseNomenclature IR_SP_A = new BaseNomenclature("IR SP (A)", "IR SP (A)", "");
-        public static readonly BaseNomenclature IR_MEA = new BaseNomenclature("IR(MEA)", "Ïîëåòè ïî ïðèáîðè", "");
+        public static readonly BaseNomenclature IR_MEA = new BaseNomenclature("IR(MEA)", "ÐŸÐ¾Ð»ÐµÑ‚Ð¸ Ð¿Ð¾ Ð¿Ñ€Ð¸Ð±Ð¾Ñ€Ð¸", "");
         public static readonly BaseNomenclature IRE_A = new BaseNomenclature("IRE(A)", "IRE(A)", "");
         public static readonly BaseNomenclature IRI_A = new BaseNomenclature("IRI(A)", "IRI(A)", "");
         public static readonly BaseNomenclature IRI_MEA = new BaseNomenclature("IRI(MEA)", "IRI(MEA)", "");
@@ -125,7 +125,7 @@ namespace Rio.Objects.Enums
         public static readonly BaseNomenclature Yak40 = new BaseNomenclature("Yak 40", "Yak 40", "");
         public static readonly BaseNomenclature Z_37 = new BaseNomenclature("Z-37", "Z-37", "");
         public static readonly BaseNomenclature Zlin_143L = new BaseNomenclature("Zlin-143L", "Zlin-143L", "");
-        public static readonly BaseNomenclature Òu154 = new BaseNomenclature("Òu 154", "Tó 154", "");
+        public static readonly BaseNomenclature Tu154 = new BaseNomenclature("Ð¢u 154", "TÑƒ 154", "");
 
         public AircraftTypeQualificationClassNomenclature()
         {
@@ -249,7 +249,7 @@ namespace Rio.Objects.Enums
                 Yak40,
                 Z_37,
                 Zlin_143L,
-                Òu154,
+                Tu154,
             };
         }
     }

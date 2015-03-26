@@ -4,7 +4,7 @@
 	xmlns:arm="http://ereg.egov.bg/value/R-4340"
 	xmlns:acv="http://ereg.egov.bg/value/R-4520"
 	xmlns:amn="http://ereg.egov.bg/value/R-4320"
-	xmlns:maatc="http://ereg.egov.bg/segment/R-4370"
+	xmlns:at="http://ereg.egov.bg/segment/R-4158"
 	xmlns:asn="http://ereg.egov.bg/value/R-4334"
 	xmlns:et="http://ereg.egov.bg/segment/R-4504"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
@@ -13,7 +13,7 @@
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4520" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4320" />
-	<xsd:import namespace="http://ereg.egov.bg/segment/R-4370" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4334" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4504" />
 
@@ -25,7 +25,7 @@
 			<xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
 			<xsd:element name="AirworthinessCertificateValidity" type="acv:AirworthinessCertificateValidity" minOccurs="0" />
 			<xsd:element name="AircraftManufacturerName" type="amn:AircraftManufacturerName" minOccurs="0" />
-			<xsd:element name="ModelAircraftAccordingTypeCertificate" type="maatc:ModelAircraftAccordingTypeCertificate" minOccurs="0" />
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
 			<xsd:element name="AircraftSerialNumber" type="asn:AircraftSerialNumber" minOccurs="0" />
 			<xsd:element name="ExploitationStartEnginesTTSN" type="et:EnginesTTSN" minOccurs="0" />
 			<xsd:element name="LastRepairEnginesTTSN" type="et:EnginesTTSN" minOccurs="0" />

@@ -213,4 +213,7 @@
   <data name="StateTraineeCommanderWithInstructor" xml:space="preserve">
     <value>Dual instruction</value>
   </data>
+  <data name="SoloUnderSupervisionInstructor" xml:space="preserve">
+    <value>Solo under the supervision of instructor</value>
+  </data>
 </root>

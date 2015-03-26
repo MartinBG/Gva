@@ -271,7 +271,7 @@
     <value>Certificate of quality and compliance</value>
   </data>
   <data name="CertificateQualityApprovedManufacturer" xml:space="preserve">
-    <value>Certificate of quality and compliance issued by an approved manufacturer</value>
+    <value>Certificate of quality and compliance</value>
   </data>
   <data name="ComparissionTable" xml:space="preserve">
     <value>Comparative table of the exploitational bulletins issued by the manufacturer and airworthiness directives issued by the relevant aviation authorities with the completed of the given aircraft</value>
@@ -703,7 +703,7 @@
     <value>Proxy</value>
   </data>
   <data name="ConformityRequirements" xml:space="preserve">
-    <value>Declaration of conformity with the description requirements</value>
+    <value>Declaration of conformity with the description requirements form available on the website of the CAA</value>
   </data>
   <data name="ContractUPPLG" xml:space="preserve">
     <value>Contracts for tasks UPPLG</value>
@@ -749,5 +749,254 @@
   </data>
   <data name="OwnedInstructorCertificateCopy" xml:space="preserve">
     <value>Owned instructor certificate - copy (if applicable)</value>
+  </data>
+  <data name="SystemsDevicesEquipment" xml:space="preserve">
+    <value>Systems, devices and equipment of aircraft</value>
+  </data>
+  <data name="CertificateQualityConformityApprovedManufacturer" xml:space="preserve">
+    <value>Certificate of quality and conformity issued by an approved manufacturer</value>
+  </data>
+  <data name="TechnicalLogInstructions" xml:space="preserve">
+    <value>Instructions for completing the log</value>
+  </data>
+  <data name="ArrestClearanceSelf" xml:space="preserve">
+    <value>Arrest clearance for self</value>
+  </data>
+  <data name="AvailableLicensesLicenseAny" xml:space="preserve">
+    <value>Available licenses to the license, if any</value>
+  </data>
+  <data name="CertificateCourseInstructorsWorkplaceOJTI" xml:space="preserve">
+    <value>Certificate for a course for instructors in the workplace (OJTI)</value>
+  </data>
+  <data name="CertificatePassingTheoreticalExamRating" xml:space="preserve">
+    <value>Certificate of passing theoretical exam - rating</value>
+  </data>
+  <data name="CertificateProficiencyBulgarian" xml:space="preserve">
+    <value>Certificate of proficiency in Bulgarian language</value>
+  </data>
+  <data name="CertificateProficiencyEnglish" xml:space="preserve">
+    <value>Certificate of Proficiency in English</value>
+  </data>
+  <data name="CertificateTrainingAviationTrainingCenter" xml:space="preserve">
+    <value>Certificate of training in aviation training center</value>
+  </data>
+  <data name="DocumentProtocolTrainingRadiotelephoneCommunicationATSEng" xml:space="preserve">
+    <value>Document / protocol from a training radiotelephone communication ATS - eng</value>
+  </data>
+  <data name="DocumentRecordAttestingLevelProficiencyBulgarian" xml:space="preserve">
+    <value>Document / record attesting to the level of proficiency in Bulgarian language</value>
+  </data>
+  <data name="DocumentRecordAttestingLevelProficiencyEnglish" xml:space="preserve">
+    <value>Document / record attesting to the level of proficiency in English</value>
+  </data>
+  <data name="DocumentStateChargeApplicableUponApplicationConfirmationRating" xml:space="preserve">
+    <value>Document on the state of charge (applicable and upon application for confirmation of rating)</value>
+  </data>
+  <data name="DocumentWorkoutCrossedEducationOrganizationMaintainQualificationCompetency" xml:space="preserve">
+    <value>Document workout crossed education organization to maintain the qualification / competency</value>
+  </data>
+  <data name="EvidenceActiveRecreation" xml:space="preserve">
+    <value>Evidence for active recreation</value>
+  </data>
+  <data name="IndividualProgramRestoreRating" xml:space="preserve">
+    <value>Individual program to restore the rating</value>
+  </data>
+  <data name="MedicalCertificateAppropriateClassCopy" xml:space="preserve">
+    <value>Medical certificate of the appropriate class (copy)</value>
+  </data>
+  <data name="MinutesCompleteInitialTraining" xml:space="preserve">
+    <value>Minutes of the complete initial training</value>
+  </data>
+  <data name="MinutesInitialTrainingTheoreticalProbationaryPhaseRatingTraining" xml:space="preserve">
+    <value>Minutes of initial training -theoretical probationary phase "rating training"</value>
+  </data>
+  <data name="MinutesPassedPreTraining" xml:space="preserve">
+    <value>Minutes passed by pre-training</value>
+  </data>
+  <data name="MinutesPassedTransientTraining" xml:space="preserve">
+    <value>Minutes passed by transient training</value>
+  </data>
+  <data name="MinutesPassingPracticalTest" xml:space="preserve">
+    <value>Minutes of passing a practical test</value>
+  </data>
+  <data name="MinutesPassingTheoreticalCourseExam" xml:space="preserve">
+    <value>Minutes of passing theoretical course / exam</value>
+  </data>
+  <data name="MinutesPracticalExamPhaseRating" xml:space="preserve">
+    <value>Minutes of the practical exam / phase "rating" -ADI / TWR /</value>
+  </data>
+  <data name="MinutesPracticalProbationaryPhaseRating" xml:space="preserve">
+    <value>Minutes of practical probationary phase "rating"</value>
+  </data>
+  <data name="MinutesTheoreticalExamAfterTheoreticalTrainingInstrumentATSAirport" xml:space="preserve">
+    <value>Minutes of the theoretical exam after theoretical training / Instrument ATS airport (ADI) /</value>
+  </data>
+  <data name="MinutesTheoreticalExamInitialTheoreticalTrainingBasicTraining" xml:space="preserve">
+    <value>Minutes of the theoretical exam after initial theoretical training / basic training /</value>
+  </data>
+  <data name="MinutesTransitionalTrainingPhaseTransitional" xml:space="preserve">
+    <value>Minutes of transitional training - phase "transitional"</value>
+  </data>
+  <data name="MinutesVerifyingCompetenceWorkplace" xml:space="preserve">
+    <value>Minutes of verifying the competence of the workplace</value>
+  </data>
+  <data name="OrderAdmissionPracticalPraining" xml:space="preserve">
+    <value>Order for admission to practical training</value>
+  </data>
+  <data name="ProfessionalQualificationCertificate" xml:space="preserve">
+    <value>Professional Qualification Certificate</value>
+  </data>
+  <data name="ProtocolCrossedWorkoutTrainingOrganizationProvideATSSpecialEmergency" xml:space="preserve">
+    <value>Protocol crossed workout in training organization to provide ATS in special / emergency</value>
+  </data>
+  <data name="ProtocolPassRefresherCourseTrainingOrganization" xml:space="preserve">
+    <value>Protocol pass refresher course in training organization</value>
+  </data>
+  <data name="ProtocolsVerificationCompetenceRealConditionsValidRatingsEndorsementsAppearLicense" xml:space="preserve">
+    <value>Protocols for verification of competence in real conditions for valid ratings and / or endorsements appear on the license</value>
+  </data>
+  <data name="ReferenceIssuedCenterHoursWorked" xml:space="preserve">
+    <value>Reference issued by the center for ATS hours worked a job, according to the requirements of the competence scheme in an ATS</value>
+  </data>
+  <data name="ValidLicenseDuplexCopy" xml:space="preserve">
+    <value>Valid license (duplex copy)</value>
+  </data>
+  <data name="DocumentsPassedTrainingAcquisition" xml:space="preserve">
+    <value>Documents reflecting passed trainings for acquisition of a license (copy all)</value>
+  </data>
+  <data name="DocumentsPassedTrainingChecks" xml:space="preserve">
+    <value>Documents reflecting passed training and checks to maintain competence in the past 12 months (all copies)</value>
+  </data>
+  <data name="EvidenceCountryIssuingCertificate" xml:space="preserve">
+    <value>Evidence of ANSPs in the country issuing the certificate that the applicant has fulfilled the requirements for maintenance of competence in the relevant ATS unit and the last time has provided ATS</value>
+  </data>
+  <data name="EvidenceRegulatoryConfirming" xml:space="preserve">
+    <value>Evidence from the regulatory authority of the country issuing the certificate confirming the professional competence of the applicant</value>
+  </data>
+  <data name="EvidenceRegulatoryPurelySafety" xml:space="preserve">
+    <value>Evidence from the regulatory authority of the country issuing the certificate purely a safety time of exercise of the rights held by testimony</value>
+  </data>
+  <data name="MinutesPassedFlightSimulator" xml:space="preserve">
+    <value>Minutes passed by successfully training with Flight simulator</value>
+  </data>
+  <data name="OwnedLicenseCopyAllPages" xml:space="preserve">
+    <value>Owned license (copy of all pages)</value>
+  </data>
+  <data name="ProtocolPassRefresherCourse" xml:space="preserve">
+    <value>Protocol pass refresher course</value>
+  </data>
+  <data name="ProtocolSuccessfullyExamination" xml:space="preserve">
+    <value>Protocol successfully passed a practical examination</value>
+  </data>
+  <data name="TwoColorPhotographs" xml:space="preserve">
+    <value>Two color photographs with format 3 x 4 cm</value>
+  </data>
+  <data name="MinutesTrainingAUTSMaintainCompetence" xml:space="preserve">
+    <value>Minutes of training in AUTS to maintain competence</value>
+  </data>
+  <data name="MinutesTrainingProvideATSSpecialEmergency" xml:space="preserve">
+    <value>Minutes of training to provide ATS in special / emergency</value>
+  </data>
+  <data name="CertificateCompletionBasicQualificationCourse" xml:space="preserve">
+    <value>Certificate of completion of basic (integrated) and qualification (modular) course in aviation training center</value>
+  </data>
+  <data name="CertificateEmployerExperience" xml:space="preserve">
+    <value>Certificate from the employer for experience</value>
+  </data>
+  <data name="DocumentHeldPassInternshipANSP" xml:space="preserve">
+    <value>Document held / pass internship in ANSPs</value>
+  </data>
+  <data name="DocumentsCertifyingPreviousExperienceQualifications" xml:space="preserve">
+    <value>Documents certifying previous experience and qualifications</value>
+  </data>
+  <data name="MinutesExaminationGradeB" xml:space="preserve">
+    <value>Minutes of an examination for grade B</value>
+  </data>
+  <data name="MinutesExaminationGradeC" xml:space="preserve">
+    <value>Minutes of an examination for a degree</value>
+  </data>
+  <data name="OrderCompletedGeneralIntegratedGradeA" xml:space="preserve">
+    <value>Order / and completed general (integrated) A degree course</value>
+  </data>
+  <data name="OrderCompletedQualificationModularCourseGradeA" xml:space="preserve">
+    <value>Order / and completed qualification (modular) course for grade A</value>
+  </data>
+  <data name="ProtocolCompletedQualificationModularCourseGradeB" xml:space="preserve">
+    <value>Protocol completed qualification (modular) course for grade B</value>
+  </data>
+  <data name="ProtocolCompletedQualificationModularCourseGradeC" xml:space="preserve">
+    <value>Protocol completed qualification (modular) course for degree C</value>
+  </data>
+  <data name="ProtocolSuccessExaminationAdmissionIndependentWork" xml:space="preserve">
+    <value>Protocol for success in an examination for admission to independent work</value>
+  </data>
+  <data name="ProtocolSuccessfullyPassedTheoreticalLevelA" xml:space="preserve">
+    <value>Protocol successfully passed the theoretical level A</value>
+  </data>
+  <data name="ValidLicenseDegreesDuplexCopy" xml:space="preserve">
+    <value>Valid license with degrees to it (duplex copy)</value>
+  </data>
+  <data name="CertificateLanguageCompetenceCopy" xml:space="preserve">
+    <value>Certificate of Language Competence - a copy</value>
+  </data>
+  <data name="CheckSkillsSkillTest" xml:space="preserve">
+    <value>Check skills (skill test) (registered in the registry of the CAA reporting form verifier)</value>
+  </data>
+  <data name="CourseIASCertificateATO" xml:space="preserve">
+    <value>Course IAS (certificate of ATO) (if applicable)</value>
+  </data>
+  <data name="FlightTrainingAircraftTypeCertificateATO" xml:space="preserve">
+    <value>Flight training aircraft type (certificate and statement of ATO, including ZFTT or BASE TRAINING, as applicable)</value>
+  </data>
+  <data name="FlightTrainingCertificateATO" xml:space="preserve">
+    <value>Flight training (certificate and statement of ATO)</value>
+  </data>
+  <data name="FlyingLicenseCopyRecentRecords" xml:space="preserve">
+    <value>Flying license (copy of recent records for each rating)</value>
+  </data>
+  <data name="FurtherTheoreticalTrainingAircraftTypeHPATestimonyATO" xml:space="preserve">
+    <value>Further theoretical training for aircraft type (HPA) (testimony of ATO) (if applicable)</value>
+  </data>
+  <data name="PassingTheoreticalExamCAAIRATPLCopy" xml:space="preserve">
+    <value>Passing a theoretical exam before the CAA for IR / ATPL- copy (license)</value>
+  </data>
+  <data name="PassingTtheoreticalExamATPLCopy" xml:space="preserve">
+    <value>Passing a theoretical exam before the CAA for ATPL- copy (certificate) (if applicable)</value>
+  </data>
+  <data name="TheoreticalTrainingCertificateATO" xml:space="preserve">
+    <value>Theoretical training (certificate of ATO)</value>
+  </data>
+  <data name="DocumentsRecoverAtoIfApplicableCopy" xml:space="preserve">
+    <value>Documents to recover from ATO (if applicable) - copy</value>
+  </data>
+  <data name="EvidenceTrainingsCopies" xml:space="preserve">
+    <value>Evidence of trainings - copies</value>
+  </data>
+  <data name="FlyingLicenseOriginalCAA" xml:space="preserve">
+    <value>Flying license - (original shall be submitted to the CAA)</value>
+  </data>
+  <data name="RefresherCourseAtoCriTriCopy" xml:space="preserve">
+    <value>Refresher course in ATO (only for CRI / TRI) - copy</value>
+  </data>
+  <data name="ReportingExaminer" xml:space="preserve">
+    <value>Reporting form examiner</value>
+  </data>
+  <data name="SkillTestCompetenceAssessmentCopy" xml:space="preserve">
+    <value>Skill test / competence assessment - copy</value>
+  </data>
+  <data name="TechnicalLogBookFsTechnicalLogAircraftCopy" xml:space="preserve">
+    <value>TECHNICAL LOG BOOK by FS or technical log of the aircraft - a copy</value>
+  </data>
+  <data name="AssignmentsFlightsPracticalTrainingCheckingCopies" xml:space="preserve">
+    <value>Assignments of flights for practical training and checking - copies</value>
+  </data>
+  <data name="AttestationApplicationCopy" xml:space="preserve">
+    <value>Attestation and attestation to the application (if applicable) - copy</value>
+  </data>
+  <data name="RealityCheck" xml:space="preserve">
+    <value>Reality check</value>
+  </data>
+  <data name="TheoreticalTrainingCopies" xml:space="preserve">
+    <value>Theoretical training - copies</value>
   </data>
 </root>

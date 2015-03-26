@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,24 +7,24 @@ namespace Rio.Objects.Enums
 {
     public class ASCourseExamNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature ModuleOneMaths = new BaseNomenclature("01", "ÃŒƒ”À 1 Ã¿“≈Ã¿“» ¿", "");
-        public static readonly BaseNomenclature ModuleTwoPhysics = new BaseNomenclature("02", "ÃŒƒ”À 2 ‘»«» ¿", "");
-        public static readonly BaseNomenclature ModuleThreeElectricityFundamentals = new BaseNomenclature("03", "ÃŒƒ”À 3 Œ—ÕŒ¬» Õ¿ ≈À≈ “–»◊≈—“¬Œ“Œ", "");
-        public static readonly BaseNomenclature ElectronicsFundamentals = new BaseNomenclature("04", "Œ—ÕŒ¬» Õ¿ ≈À≈ “–ŒÕ» ¿“¿", "");
-        public static readonly BaseNomenclature DigitalEquipmentElectronicInstrumentSystems = new BaseNomenclature("05", "÷»‘–Œ¬¿ “≈’Õ» ¿, ≈À≈ “–ŒÕÕŒ-œ–»¡Œ–Õ» —»—“≈Ã»", "");
-        public static readonly BaseNomenclature MaterialsAccessories = new BaseNomenclature("06", "Ã¿“≈–»¿À» » œ–»Õ¿ƒÀ≈∆ÕŒ—“»", "");
-        public static readonly BaseNomenclature Maintenance = new BaseNomenclature("07", "“≈’Õ»◊≈— Œ Œ¡—À”∆¬¿Õ≈", "");
-        public static readonly BaseNomenclature AerodynamicsBasics = new BaseNomenclature("08", "Œ—ÕŒ¬» Õ¿ ¿≈–Œƒ»Õ¿Ã» ¿“¿", "");
-        public static readonly BaseNomenclature HumanFactor = new BaseNomenclature("09", "◊Œ¬≈ÿ » ‘¿ “Œ–", "");
-        public static readonly BaseNomenclature AviationLegislation = new BaseNomenclature("10", "¿¬»¿÷»ŒÕÕ¿ ÕŒ–Ã¿“»¬Õ¿ ”–≈ƒ¡¿", "");
-        public static readonly BaseNomenclature TurbineAeroplanesAerodynamicsStructuresSystems = new BaseNomenclature("11A", "¿≈–Œƒ»Õ¿Ã» ¿,  ŒÕ—“–” ÷»ﬂ » —»—“≈Ã» Õ¿ —¿ÃŒÀ≈“»“≈ — “”–¡»ÕÕ» ƒ¬»√¿“≈À»", "");
-        public static readonly BaseNomenclature PistonAeroplanesAerodynamicsStructuresSystems = new BaseNomenclature("11B", "¿≈–Œƒ»Õ¿Ã» ¿,  ŒÕ—“–” ÷»ﬂ » —»—“≈Ã» Õ¿ —¿ÃŒÀ≈“»“≈ — ¡”“¿ÀÕ» ƒ¬»√¿“≈À»", "");
-        public static readonly BaseNomenclature HelicoptersAerodynamicsStructuresSystems = new BaseNomenclature("12", "¿≈–Œƒ»Õ¿Ã» ¿,  ŒÕ—“–” ÷»ﬂ » —»—“≈Ã» Õ¿ ¬≈–“ŒÀ≈“»“≈", "");
-        public static readonly BaseNomenclature AircraftAerodynamicsStructuresSystems = new BaseNomenclature("13", "¿≈–Œƒ»Õ¿Ã» ¿,  ŒÕ—“–” ÷»» » —»—“≈Ã» Õ¿ ¬⁄«ƒ”’ŒœÀ¿¬¿“≈ÀÕ»“≈ —–≈ƒ—“¬¿", "");
-        public static readonly BaseNomenclature Propulsion = new BaseNomenclature("14", "—»ÀŒ¬» ”–≈ƒ¡»", "");
-        public static readonly BaseNomenclature TurbineEngines = new BaseNomenclature("15", "√¿«Œ“”–¡»ÕÕ» ƒ¬»√¿“≈À»", "");
-        public static readonly BaseNomenclature PistonEngines = new BaseNomenclature("16", "¡”“¿ÀÕ» ƒ¬»√¿“≈À»", "");
-        public static readonly BaseNomenclature Propellers = new BaseNomenclature("17", "¬»“À¿", "");
+        public static readonly BaseNomenclature ModuleOneMaths = new BaseNomenclature("01", "–ú–û–î–£–õ 1 –ú–ê–¢–ï–ú–ê–¢–ò–ö–ê", "");
+        public static readonly BaseNomenclature ModuleTwoPhysics = new BaseNomenclature("02", "–ú–û–î–£–õ 2 –§–ò–ó–ò–ö–ê", "");
+        public static readonly BaseNomenclature ModuleThreeElectricityFundamentals = new BaseNomenclature("03", "–ú–û–î–£–õ 3 –û–°–ù–û–í–ò –ù–ê –ï–õ–ï–ö–¢–†–ò–ß–ï–°–¢–í–û–¢–û", "");
+        public static readonly BaseNomenclature ElectronicsFundamentals = new BaseNomenclature("04", "–û–°–ù–û–í–ò –ù–ê –ï–õ–ï–ö–¢–†–û–ù–ò–ö–ê–¢–ê", "");
+        public static readonly BaseNomenclature DigitalEquipmentElectronicInstrumentSystems = new BaseNomenclature("05", "–¶–ò–§–†–û–í–ê –¢–ï–•–ù–ò–ö–ê, –ï–õ–ï–ö–¢–†–û–ù–ù–û-–ü–†–ò–ë–û–†–ù–ò –°–ò–°–¢–ï–ú–ò", "");
+        public static readonly BaseNomenclature MaterialsAccessories = new BaseNomenclature("06", "–ú–ê–¢–ï–†–ò–ê–õ–ò –ò –ü–†–ò–ù–ê–î–õ–ï–ñ–ù–û–°–¢–ò", "");
+        public static readonly BaseNomenclature Maintenance = new BaseNomenclature("07", "–¢–ï–•–ù–ò–ß–ï–°–ö–û –û–ë–°–õ–£–ñ–í–ê–ù–ï", "");
+        public static readonly BaseNomenclature AerodynamicsBasics = new BaseNomenclature("08", "–û–°–ù–û–í–ò –ù–ê –ê–ï–†–û–î–ò–ù–ê–ú–ò–ö–ê–¢–ê", "");
+        public static readonly BaseNomenclature HumanFactor = new BaseNomenclature("09", "–ß–û–í–ï–®–ö–ò –§–ê–ö–¢–û–†", "");
+        public static readonly BaseNomenclature AviationLegislation = new BaseNomenclature("10", "–ê–í–ò–ê–¶–ò–û–ù–ù–ê –ù–û–†–ú–ê–¢–ò–í–ù–ê –£–†–ï–î–ë–ê", "");
+        public static readonly BaseNomenclature TurbineAeroplanesAerodynamicsStructuresSystems = new BaseNomenclature("11A", "–ê–ï–†–û–î–ò–ù–ê–ú–ò–ö–ê, –ö–û–ù–°–¢–†–£–ö–¶–ò–Ø –ò –°–ò–°–¢–ï–ú–ò –ù–ê –°–ê–ú–û–õ–ï–¢–ò–¢–ï –° –¢–£–†–ë–ò–ù–ù–ò –î–í–ò–ì–ê–¢–ï–õ–ò", "");
+        public static readonly BaseNomenclature PistonAeroplanesAerodynamicsStructuresSystems = new BaseNomenclature("11B", "–ê–ï–†–û–î–ò–ù–ê–ú–ò–ö–ê, –ö–û–ù–°–¢–†–£–ö–¶–ò–Ø –ò –°–ò–°–¢–ï–ú–ò –ù–ê –°–ê–ú–û–õ–ï–¢–ò–¢–ï –° –ë–£–¢–ê–õ–ù–ò –î–í–ò–ì–ê–¢–ï–õ–ò", "");
+        public static readonly BaseNomenclature HelicoptersAerodynamicsStructuresSystems = new BaseNomenclature("12", "–ê–ï–†–û–î–ò–ù–ê–ú–ò–ö–ê, –ö–û–ù–°–¢–†–£–ö–¶–ò–Ø –ò –°–ò–°–¢–ï–ú–ò –ù–ê –í–ï–†–¢–û–õ–ï–¢–ò–¢–ï", "");
+        public static readonly BaseNomenclature AircraftAerodynamicsStructuresSystems = new BaseNomenclature("13", "–ê–ï–†–û–î–ò–ù–ê–ú–ò–ö–ê, –ö–û–ù–°–¢–†–£–ö–¶–ò–ò –ò –°–ò–°–¢–ï–ú–ò –ù–ê –í–™–ó–î–£–•–û–ü–õ–ê–í–ê–¢–ï–õ–ù–ò–¢–ï –°–†–ï–î–°–¢–í–ê", "");
+        public static readonly BaseNomenclature Propulsion = new BaseNomenclature("14", "–°–ò–õ–û–í–ò –£–†–ï–î–ë–ò", "");
+        public static readonly BaseNomenclature TurbineEngines = new BaseNomenclature("15", "–ì–ê–ó–û–¢–£–†–ë–ò–ù–ù–ò –î–í–ò–ì–ê–¢–ï–õ–ò", "");
+        public static readonly BaseNomenclature PistonEngines = new BaseNomenclature("16", "–ë–£–¢–ê–õ–ù–ò –î–í–ò–ì–ê–¢–ï–õ–ò", "");
+        public static readonly BaseNomenclature Propellers = new BaseNomenclature("17", "–í–ò–¢–õ–ê", "");
 
         public ASCourseExamNomenclature()
         {

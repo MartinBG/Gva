@@ -25,9 +25,14 @@ namespace R_5142
 	{
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="InstructorRightsType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_5152.RightsType),ElementName="RightsType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string InstructorRightsType { get; set; }
+		public R_5152.RightsType RightsType { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="SPNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string SPNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4152.AircraftClass),ElementName="AircraftClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]

@@ -141,6 +141,11 @@ namespace R_4470
 		public bool ConsentReceivingElectronicStatements { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="AttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_3994.AttachedDocumentDatasCollection AttachedDocumentDatasCollection { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4696.EAURecipientsAttachedDocumentDatasCollection),ElementName="EAURecipientsAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public R_4696.EAURecipientsAttachedDocumentDatasCollection EAURecipientsAttachedDocumentDatasCollection { get; set; }

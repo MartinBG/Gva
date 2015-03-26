@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5214" xmlns="http://ereg.egov.bg/segment/R-5214" 
+	xmlns:lr="http://ereg.egov.bg/segment/R-5212" 
+	xmlns:qc="http://ereg.egov.bg/segment/R-4932" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5212" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4932" />
+
+	<xsd:complexType name="RemovedLicenseRestriction">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Премахвано ограничение от СП</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="LicenseRestriction" type="lr:LicenseRestriction" />
+			<xsd:element name="QualificationClass" type="qc:QualificationClass" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

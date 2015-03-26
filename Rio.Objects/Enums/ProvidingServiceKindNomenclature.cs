@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +7,8 @@ namespace Rio.Objects.Enums
 {
     public class ProvidingServiceKindNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature Kind1 = new BaseNomenclature("01", "Âèä 1");
-        public static readonly BaseNomenclature Kind2 = new BaseNomenclature("02", "Âèä 2");
+        public static readonly BaseNomenclature Kind1 = new BaseNomenclature("01", "Ð’Ð¸Ð´ 1");
+        public static readonly BaseNomenclature Kind2 = new BaseNomenclature("02", "Ð’Ð¸Ð´ 2");
 
         public ProvidingServiceKindNomenclature()
         {

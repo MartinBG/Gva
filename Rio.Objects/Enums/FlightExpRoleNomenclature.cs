@@ -56,6 +56,8 @@ namespace Rio.Objects.Enums
         public static readonly FlightExpRoleNomenclature InstrumentTime = new FlightExpRoleNomenclature { ResourceKey = "InstrumentTime", Code = "31" };
         public static readonly FlightExpRoleNomenclature NightTime = new FlightExpRoleNomenclature { ResourceKey = "NightTime", Code = "32" };
 
+        public static readonly FlightExpRoleNomenclature SoloUnderSupervisionInstructor = new FlightExpRoleNomenclature { ResourceKey = "SoloUnderSupervisionInstructor", Code = "33" };
+
         public static readonly IEnumerable<FlightExpRoleNomenclature> Values =
             new List<FlightExpRoleNomenclature>
             {

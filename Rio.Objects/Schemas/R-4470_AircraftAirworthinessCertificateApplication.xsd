@@ -79,6 +79,7 @@
 			<xsd:element name="AircraftInspectionRepresentatives" type="air:AircraftInspectionRepresentatives" minOccurs="0" />
 			<xsd:element name="AircraftInspectionPreferences" type="aip:AircraftInspectionPreferences" minOccurs="0" />
 			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
+			<xsd:element name="AttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
 			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
 			<xsd:element name="AttachedDocuments" minOccurs="0">
 				<xsd:complexType>

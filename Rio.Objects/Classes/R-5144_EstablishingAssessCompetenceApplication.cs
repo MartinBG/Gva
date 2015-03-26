@@ -25,7 +25,13 @@ namespace R_5144
 
 	[Serializable]
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
-	public partial class AircraftClassQualificationClassCollection : System.Collections.Generic.List<R_4056.AircraftClassQualificationClass>
+	public partial class RightsTypeCollection : System.Collections.Generic.List<R_5152.RightsType>
+	{
+	}
+
+	[Serializable]
+	[EditorBrowsable(EditorBrowsableState.Advanced)]
+	public partial class AircraftTypeCollection : System.Collections.Generic.List<R_4158.AircraftType>
 	{
 	}
 
@@ -47,19 +53,9 @@ namespace R_5144
 		public EstablishingAssessCompetenceApplicationReasonForApplying ReasonForApplying { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4152.AircraftClass),ElementName="AircraftClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_5158.AircraftClassTypeFSTDsCollection),ElementName="AircraftClassTypeFSTDsCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4152.AircraftClass AircraftClass { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4158.AircraftType AircraftType { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4174.FlightSimulatorType),ElementName="FlightSimulatorType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4174.FlightSimulatorType FlightSimulatorType { get; set; }
+		public R_5158.AircraftClassTypeFSTDsCollection AircraftClassTypeFSTDsCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ExplanationApplying",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
@@ -112,14 +108,34 @@ namespace R_5144
 	{
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4048.ASCertificateType),ElementName="ASCertificateType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(ElementName="IsInitial",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4048.ASCertificateType ASCertificateType { get; set; }
+		public bool IsInitial { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4056.AircraftClassQualificationClass),ElementName="AircraftClassQualificationClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(ElementName="IsConfirmation",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public AircraftClassQualificationClassCollection AircraftClassQualificationClassCollection { get; set; }
+		public bool IsConfirmation { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="IsRenew",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public bool IsRenew { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="IsExtend",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public bool IsExtend { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_5152.RightsType),ElementName="RightsType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public RightsTypeCollection RightsTypeCollection { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public AircraftTypeCollection AircraftTypeCollection { get; set; }
 
 		public EstablishingAssessCompetenceApplicationReasonForApplying()
 		{

@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,24 +7,24 @@ namespace Rio.Objects.Enums
 {
     public class PermissibleActivityNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature AW1 = new BaseNomenclature("01", "Превоз на товари на външно окачване (AW-1)");
-        public static readonly BaseNomenclature AW2 = new BaseNomenclature("02", "Строително-монтажни работи (AW-2)");
-        public static readonly BaseNomenclature AW3 = new BaseNomenclature("03", "Патрулеране и наблюдение (AW-3)");
-        public static readonly BaseNomenclature AW4 = new BaseNomenclature("04", "Фотографиране (AW-4)");
-        public static readonly BaseNomenclature AW5 = new BaseNomenclature("05", "Геофизични изследвания и карти ране(А\\У-5)");
-        public static readonly BaseNomenclature AW6 = new BaseNomenclature("06", "Борба с пожари, вкл.горски (AW-6)");
-        public static readonly BaseNomenclature AW7 = new BaseNomenclature("07", "Авиохимически работи (AW-7)");
-        public static readonly BaseNomenclature AW8 = new BaseNomenclature("08", "Наблюдение и/или въздействие върху времето (AW-8)");
-        public static readonly BaseNomenclature AW9 = new BaseNomenclature("09", "Аварийно-спасителни работи (AW-9)");
-        public static readonly BaseNomenclature AW10 = new BaseNomenclature("10", "Превоз на човешки органи (AW-10)");
-        public static readonly BaseNomenclature AW11 = new BaseNomenclature("11", "Реклама (AW-11)");
-        public static readonly BaseNomenclature AW12 = new BaseNomenclature("12", "Контрол върху диви животни (AW-12)");
-        public static readonly BaseNomenclature AW13 = new BaseNomenclature("13", "Други, като се посочва вида на работата (AW-13)");
-        public static readonly BaseNomenclature AW14 = new BaseNomenclature("14", "Учебни полети (AW-14)");
-        public static readonly BaseNomenclature AW15 = new BaseNomenclature("15", "Спортни полети (AW-15)");
-        public static readonly BaseNomenclature AW16 = new BaseNomenclature("16", "Разглеждане на забележителности от въздуха (AW-I6)");
-        public static readonly BaseNomenclature AW17 = new BaseNomenclature("17", "Теглене на безмоторни ВС (AW-17)");
-        public static readonly BaseNomenclature AW18 = new BaseNomenclature("18", "Полети за скокове с парашут (AW-18)");
+        public static readonly BaseNomenclature AW1 = new BaseNomenclature("01", "РџСЂРµРІРѕР· РЅР° С‚РѕРІР°СЂРё РЅР° РІСЉРЅС€РЅРѕ РѕРєР°С‡РІР°РЅРµ (AW-1)");
+        public static readonly BaseNomenclature AW2 = new BaseNomenclature("02", "РЎС‚СЂРѕРёС‚РµР»РЅРѕ-РјРѕРЅС‚Р°Р¶РЅРё СЂР°Р±РѕС‚Рё (AW-2)");
+        public static readonly BaseNomenclature AW3 = new BaseNomenclature("03", "РџР°С‚СЂСѓР»РµСЂР°РЅРµ Рё РЅР°Р±Р»СЋРґРµРЅРёРµ (AW-3)");
+        public static readonly BaseNomenclature AW4 = new BaseNomenclature("04", "Р¤РѕС‚РѕРіСЂР°С„РёСЂР°РЅРµ (AW-4)");
+        public static readonly BaseNomenclature AW5 = new BaseNomenclature("05", "Р“РµРѕС„РёР·РёС‡РЅРё РёР·СЃР»РµРґРІР°РЅРёСЏ Рё РєР°СЂС‚Рё СЂР°РЅРµ(Рђ\\РЈ-5)");
+        public static readonly BaseNomenclature AW6 = new BaseNomenclature("06", "Р‘РѕСЂР±Р° СЃ РїРѕР¶Р°СЂРё, РІРєР».РіРѕСЂСЃРєРё (AW-6)");
+        public static readonly BaseNomenclature AW7 = new BaseNomenclature("07", "РђРІРёРѕС…РёРјРёС‡РµСЃРєРё СЂР°Р±РѕС‚Рё (AW-7)");
+        public static readonly BaseNomenclature AW8 = new BaseNomenclature("08", "РќР°Р±Р»СЋРґРµРЅРёРµ Рё/РёР»Рё РІСЉР·РґРµР№СЃС‚РІРёРµ РІСЉСЂС…Сѓ РІСЂРµРјРµС‚Рѕ (AW-8)");
+        public static readonly BaseNomenclature AW9 = new BaseNomenclature("09", "РђРІР°СЂРёР№РЅРѕ-СЃРїР°СЃРёС‚РµР»РЅРё СЂР°Р±РѕС‚Рё (AW-9)");
+        public static readonly BaseNomenclature AW10 = new BaseNomenclature("10", "РџСЂРµРІРѕР· РЅР° С‡РѕРІРµС€РєРё РѕСЂРіР°РЅРё (AW-10)");
+        public static readonly BaseNomenclature AW11 = new BaseNomenclature("11", "Р РµРєР»Р°РјР° (AW-11)");
+        public static readonly BaseNomenclature AW12 = new BaseNomenclature("12", "РљРѕРЅС‚СЂРѕР» РІСЉСЂС…Сѓ РґРёРІРё Р¶РёРІРѕС‚РЅРё (AW-12)");
+        public static readonly BaseNomenclature AW13 = new BaseNomenclature("13", "Р”СЂСѓРіРё, РєР°С‚Рѕ СЃРµ РїРѕСЃРѕС‡РІР° РІРёРґР° РЅР° СЂР°Р±РѕС‚Р°С‚Р° (AW-13)");
+        public static readonly BaseNomenclature AW14 = new BaseNomenclature("14", "РЈС‡РµР±РЅРё РїРѕР»РµС‚Рё (AW-14)");
+        public static readonly BaseNomenclature AW15 = new BaseNomenclature("15", "РЎРїРѕСЂС‚РЅРё РїРѕР»РµС‚Рё (AW-15)");
+        public static readonly BaseNomenclature AW16 = new BaseNomenclature("16", "Р Р°Р·РіР»РµР¶РґР°РЅРµ РЅР° Р·Р°Р±РµР»РµР¶РёС‚РµР»РЅРѕСЃС‚Рё РѕС‚ РІСЉР·РґСѓС…Р° (AW-I6)");
+        public static readonly BaseNomenclature AW17 = new BaseNomenclature("17", "РўРµРіР»РµРЅРµ РЅР° Р±РµР·РјРѕС‚РѕСЂРЅРё Р’РЎ (AW-17)");
+        public static readonly BaseNomenclature AW18 = new BaseNomenclature("18", "РџРѕР»РµС‚Рё Р·Р° СЃРєРѕРєРѕРІРµ СЃ РїР°СЂР°С€СѓС‚ (AW-18)");
 
         public PermissibleActivityNomenclature()
         {

@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,21 +7,23 @@ namespace Rio.Objects.Enums
 {
     public class AircraftOperationTypeNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature NoInput = new BaseNomenclature("0", "Няма въведени данни", "");
-        public static readonly BaseNomenclature Passengers = new BaseNomenclature("A1", "Транспортна категория - пътници", "");
-        public static readonly BaseNomenclature Cargo = new BaseNomenclature("A2", "Транспортна категория - карго", "");
-        public static readonly BaseNomenclature Emergency = new BaseNomenclature("A3", "Полети за спешна медицинска помощ", "");
-        public static readonly BaseNomenclature TransportMail = new BaseNomenclature("A4", "Превоз на поща", "");
-        public static readonly BaseNomenclature ExternalLoad = new BaseNomenclature("AW001", "Превоз на товари на външно окачване", "");
-        public static readonly BaseNomenclature Construction = new BaseNomenclature("AW002", "Строително-монтажни работи", "");
-        public static readonly BaseNomenclature Inspection = new BaseNomenclature("AW003", "Патрулиране и наблюдение", "");
-        public static readonly BaseNomenclature Photography = new BaseNomenclature("AW004", "Фотографиране", "");
-        public static readonly BaseNomenclature Surveying = new BaseNomenclature("AW005", "Геофизични изследвания и картиране", "");
-        public static readonly BaseNomenclature Fire = new BaseNomenclature("AW006", "Борба с пожари, вкл. горски", "");
-        public static readonly BaseNomenclature Spraying = new BaseNomenclature("AW007", "Авиохимически работи", "");
-        public static readonly BaseNomenclature Weather = new BaseNomenclature("AW008", "Наблюдение и/или въздействие на времето", "");
-        public static readonly BaseNomenclature Search = new BaseNomenclature("AW009", "Аварийно-спасителни работи", "");
-        public static readonly BaseNomenclature HumanOrgans = new BaseNomenclature("AW010", "Превоз на човешки органи", "");
+        public static readonly BaseNomenclature NoInput = new BaseNomenclature("0", "РќСЏРјР° РІСЉРІРµРґРµРЅРё РґР°РЅРЅРё", "");
+        public static readonly BaseNomenclature Passengers = new BaseNomenclature("A1", "РўСЂР°РЅСЃРїРѕСЂС‚РЅР° РєР°С‚РµРіРѕСЂРёСЏ - РїСЉС‚РЅРёС†Рё", "");
+        public static readonly BaseNomenclature Cargo = new BaseNomenclature("A2", "РўСЂР°РЅСЃРїРѕСЂС‚РЅР° РєР°С‚РµРіРѕСЂРёСЏ - РєР°СЂРіРѕ", "");
+        public static readonly BaseNomenclature Emergency = new BaseNomenclature("A3", "РџРѕР»РµС‚Рё Р·Р° СЃРїРµС€РЅР° РјРµРґРёС†РёРЅСЃРєР° РїРѕРјРѕС‰", "");
+        public static readonly BaseNomenclature TransportMail = new BaseNomenclature("A4", "РџСЂРµРІРѕР· РЅР° РїРѕС‰Р°", "");
+        public static readonly BaseNomenclature ExternalLoad = new BaseNomenclature("AW001", "РџСЂРµРІРѕР· РЅР° С‚РѕРІР°СЂРё РЅР° РІСЉРЅС€РЅРѕ РѕРєР°С‡РІР°РЅРµ", "");
+        public static readonly BaseNomenclature Construction = new BaseNomenclature("AW002", "РЎС‚СЂРѕРёС‚РµР»РЅРѕ-РјРѕРЅС‚Р°Р¶РЅРё СЂР°Р±РѕС‚Рё", "");
+        public static readonly BaseNomenclature Inspection = new BaseNomenclature("AW003", "РџР°С‚СЂСѓР»РёСЂР°РЅРµ Рё РЅР°Р±Р»СЋРґРµРЅРёРµ", "");
+        public static readonly BaseNomenclature Photography = new BaseNomenclature("AW004", "Р¤РѕС‚РѕРіСЂР°С„РёСЂР°РЅРµ", "");
+        public static readonly BaseNomenclature Surveying = new BaseNomenclature("AW005", "Р“РµРѕС„РёР·РёС‡РЅРё РёР·СЃР»РµРґРІР°РЅРёСЏ Рё РєР°СЂС‚РёСЂР°РЅРµ", "");
+        public static readonly BaseNomenclature Fire = new BaseNomenclature("AW006", "Р‘РѕСЂР±Р° СЃ РїРѕР¶Р°СЂРё, РІРєР». РіРѕСЂСЃРєРё", "");
+        public static readonly BaseNomenclature Spraying = new BaseNomenclature("AW007", "РђРІРёРѕС…РёРјРёС‡РµСЃРєРё СЂР°Р±РѕС‚Рё", "");
+        public static readonly BaseNomenclature Weather = new BaseNomenclature("AW008", "РќР°Р±Р»СЋРґРµРЅРёРµ Рё/РёР»Рё РІСЉР·РґРµР№СЃС‚РІРёРµ РЅР° РІСЂРµРјРµС‚Рѕ", "");
+        public static readonly BaseNomenclature Search = new BaseNomenclature("AW009", "РђРІР°СЂРёР№РЅРѕ-СЃРїР°СЃРёС‚РµР»РЅРё СЂР°Р±РѕС‚Рё", "");
+        public static readonly BaseNomenclature HumanOrgans = new BaseNomenclature("AW010", "РџСЂРµРІРѕР· РЅР° С‡РѕРІРµС€РєРё РѕСЂРіР°РЅРё", "");
+
+        public static readonly BaseNomenclature Private = new BaseNomenclature("Private", "Р§Р°СЃС‚РЅРѕ", "");
 
 
         public AircraftOperationTypeNomenclature()
@@ -42,7 +44,8 @@ namespace Rio.Objects.Enums
                 Spraying,
                 Weather,
                 Search,
-                HumanOrgans 
+                HumanOrgans,
+                Private 
             };
         }
     }

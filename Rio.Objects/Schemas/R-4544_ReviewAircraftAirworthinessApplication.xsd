@@ -3,21 +3,20 @@
 	xmlns="http://ereg.egov.bg/segment/R-4544"
 	xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
 	xmlns:esr="http://ereg.egov.bg/segment/0009-000015"
-	xmlns:aaoi="http://ereg.egov.bg/value/R-4298" 
+	xmlns:ci="http://ereg.egov.bg/segment/R-4584"
 	xmlns:aobd="http://ereg.egov.bg/segment/R-4294"
-	xmlns:anao="http://ereg.egov.bg/value/R-4300"
-	xmlns:aod="http://ereg.egov.bg/segment/R-4394"
 	xmlns:eprres="http://ereg.egov.bg/segment/R-4014"
 	xmlns:esaq="http://ereg.egov.bg/value/0008-000035"
+	xmlns:anao="http://ereg.egov.bg/value/R-4300"
+	xmlns:ahd="http://ereg.egov.bg/segment/R-4310"
 	xmlns:aarcd="http://ereg.egov.bg/segment/R-4522"
 	xmlns:aai="http://ereg.egov.bg/segment/R-4536"
 	xmlns:stc="http://ereg.egov.bg/segment/R-3990" 
 	xmlns:addc="http://ereg.egov.bg/segment/R-3994"
-	xmlns:altmd="http://ereg.egov.bg/value/R-4538"
-	xmlns:altmp="http://ereg.egov.bg/value/R-4540"
 	xmlns:o="http://ereg.egov.bg/segment/R-4534"
 	xmlns:aard="http://ereg.egov.bg/value/R-4542"
 	xmlns:aip="http://ereg.egov.bg/segment/R-4354"
+	xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
 	xmlns:cres="http://ereg.egov.bg/value/R-4016"
 	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
 	xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
@@ -26,22 +25,21 @@
 
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000015" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4298" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4584" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4294" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4300" />
-	<xsd:import namespace="http://ereg.egov.bg/segment/R-4394" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4014" />
 	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4300" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4310" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4522" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4536" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-3990" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4538" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4540" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4534" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4542" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4354" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153" />
 
@@ -53,24 +51,22 @@
 		<xsd:sequence>
 			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0" />
 			<xsd:element name="ElectronicServiceRecipient" type="esr:ElectronicServiceRecipient" minOccurs="0" />
-			<xsd:element name="ApplicantAviationalOperatorIndication" type="aaoi:ApplicantAviationalOperatorIndication" minOccurs="0" />	
-			<xsd:element name="AviationalOperatorBasicData" type="aobd:AviationalOperatorBasicData" minOccurs="0" />
-			<xsd:element name="ApplicantNotAircraftOwner" type="anao:ApplicantNotAircraftOwner" minOccurs="0" />
-			<xsd:element name="AircraftOwnerData" type="aod:AircraftOwnerData" minOccurs="0" />
+			<xsd:element name="ContactInformation" type="ci:ContactInformation" minOccurs="0" />
 			<xsd:element name="EvidencePersonRepresentingRecipientElectronicService" type="eprres:EvidencePersonRepresentingRecipientElectronicService" minOccurs="0" />
 			<xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
+			<xsd:element name="ApplicantNotAircraftOwner" type="anao:ApplicantNotAircraftOwner" minOccurs="0" />
+			<xsd:element name="AircraftHiringData" type="ahd:AircraftHiringData" minOccurs="0" />
+			<xsd:element name="AviationalOperatorBasicData" type="aobd:AviationalOperatorBasicData" minOccurs="0" />
 			<xsd:element name="AircraftAirworthinessReviewCertificationData" type="aarcd:AircraftAirworthinessReviewCertificationData" minOccurs="0" />
 			<xsd:element name="AirworthinessAdditionalInformation" type="aai:AirworthinessAdditionalInformation" minOccurs="0" />
 			<xsd:element name="SubmissionsTermsCollection" type="stc:SubmissionsTermsCollection" minOccurs="0" />
 			<xsd:element name="InspectionReportAttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
 			<xsd:element name="InspectionReportAdditionalAttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
-			<xsd:element name="AircraftLastTechnicalMaintenanceDate" type="altmd:AircraftLastTechnicalMaintenanceDate" minOccurs="0" />
-			<xsd:element name="AircraftLastTechnicalMaintenancePlace" type="altmp:AircraftLastTechnicalMaintenancePlace" minOccurs="0" />
 			<xsd:element name="Options" type="o:Options" minOccurs="0" />
 			<xsd:element name="AircraftAirworthinessReviewDiscrepancies" type="aard:AircraftAirworthinessReviewDiscrepancies" minOccurs="0" />
 			<xsd:element name="AircraftInspectionPreferences" type="aip:AircraftInspectionPreferences" minOccurs="0" />
 			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
-			<xsd:element name="AttachedDocumentDatasCollection" type="addc:AttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
 			<xsd:element name="AttachedDocuments" minOccurs="0">
 				<xsd:complexType>
 					<xsd:sequence>

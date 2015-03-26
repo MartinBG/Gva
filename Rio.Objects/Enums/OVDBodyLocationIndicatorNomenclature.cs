@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,27 +7,27 @@ namespace Rio.Objects.Enums
 {
     public class OVDBodyLocationIndicatorNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature Bourgas = new BaseNomenclature("01", "LBBG ¡”–√¿—", "");
-        public static readonly BaseNomenclature Bohot = new BaseNomenclature("02", "LBBO ¡Œ’Œ“-LM", "");
-        public static readonly BaseNomenclature DolnaBania = new BaseNomenclature("03", "LBDB ƒŒÀÕ¿ ¡¿Õﬂ", "");
-        public static readonly BaseNomenclature GornaOriahovica = new BaseNomenclature("04", "LBGO √Œ–Õ¿ Œ–’ﬂ’Œ¬»÷¿", "");
-        public static readonly BaseNomenclature Grivica = new BaseNomenclature("05", "LBGR √–»¬»÷¿", "");
-        public static readonly BaseNomenclature Ihtiman = new BaseNomenclature("06", "LBHT »’“»Ã¿Õ", "");
-        public static readonly BaseNomenclature Kainardja = new BaseNomenclature("07", "LBKJ  ¿…Õ¿–ƒ∆¿", "");
-        public static readonly BaseNomenclature Kalvacha = new BaseNomenclature("08", "LBKL  ⁄À¬¿◊¿", "");
-        public static readonly BaseNomenclature Lozen = new BaseNomenclature("09", "LBLN ÀŒ«≈Õ", "");
-        public static readonly BaseNomenclature Lesnovo = new BaseNomenclature("10", "LBLS À≈—ÕŒ¬Œ", "");
-        public static readonly BaseNomenclature Plovdiv = new BaseNomenclature("11", "LBPD œÀŒ¬ƒ»¬", "");
-        public static readonly BaseNomenclature Primorsko = new BaseNomenclature("12", "LBPR œ–»ÃŒ–— Œ", "");
-        public static readonly BaseNomenclature Erden = new BaseNomenclature("13", "LBRD ≈–ƒ≈Õ", "");
-        public static readonly BaseNomenclature Ruse = new BaseNomenclature("14", "LBRS –”—≈", "");
-        public static readonly BaseNomenclature Sofia = new BaseNomenclature("15", "LBSF —Œ‘»ﬂ", "");
-        public static readonly BaseNomenclature SofiaRPI = new BaseNomenclature("16", "LBSR —Œ‘»ﬂ –œ»", "");
-        public static readonly BaseNomenclature Striama = new BaseNomenclature("17", "LBST —“–ﬂÃ¿", "");
-        public static readonly BaseNomenclature StaraZagora = new BaseNomenclature("18", "LBSZ —“¿–¿ «¿√Œ–¿", "");
-        public static readonly BaseNomenclature Balchik = new BaseNomenclature("19", "LBWB ¡¿À◊» ", "");
-        public static readonly BaseNomenclature Varna = new BaseNomenclature("20", "LBWN ¬¿–Õ¿", "");
-        public static readonly BaseNomenclature Izgrev = new BaseNomenclature("21", "LBWV »«√–≈¬", "");
+        public static readonly BaseNomenclature Bourgas = new BaseNomenclature("01", "LBBG –ë–£–†–ì–ê–°", "");
+        public static readonly BaseNomenclature Bohot = new BaseNomenclature("02", "LBBO –ë–û–•–û–¢-LM", "");
+        public static readonly BaseNomenclature DolnaBania = new BaseNomenclature("03", "LBDB –î–û–õ–ù–ê –ë–ê–ù–Ø", "");
+        public static readonly BaseNomenclature GornaOriahovica = new BaseNomenclature("04", "LBGO –ì–û–†–ù–ê –û–†–•–Ø–•–û–í–ò–¶–ê", "");
+        public static readonly BaseNomenclature Grivica = new BaseNomenclature("05", "LBGR –ì–†–ò–í–ò–¶–ê", "");
+        public static readonly BaseNomenclature Ihtiman = new BaseNomenclature("06", "LBHT –ò–•–¢–ò–ú–ê–ù", "");
+        public static readonly BaseNomenclature Kainardja = new BaseNomenclature("07", "LBKJ –ö–ê–ô–ù–ê–†–î–ñ–ê", "");
+        public static readonly BaseNomenclature Kalvacha = new BaseNomenclature("08", "LBKL –ö–™–õ–í–ê–ß–ê", "");
+        public static readonly BaseNomenclature Lozen = new BaseNomenclature("09", "LBLN –õ–û–ó–ï–ù", "");
+        public static readonly BaseNomenclature Lesnovo = new BaseNomenclature("10", "LBLS –õ–ï–°–ù–û–í–û", "");
+        public static readonly BaseNomenclature Plovdiv = new BaseNomenclature("11", "LBPD –ü–õ–û–í–î–ò–í", "");
+        public static readonly BaseNomenclature Primorsko = new BaseNomenclature("12", "LBPR –ü–†–ò–ú–û–†–°–ö–û", "");
+        public static readonly BaseNomenclature Erden = new BaseNomenclature("13", "LBRD –ï–†–î–ï–ù", "");
+        public static readonly BaseNomenclature Ruse = new BaseNomenclature("14", "LBRS –†–£–°–ï", "");
+        public static readonly BaseNomenclature Sofia = new BaseNomenclature("15", "LBSF –°–û–§–ò–Ø", "");
+        public static readonly BaseNomenclature SofiaRPI = new BaseNomenclature("16", "LBSR –°–û–§–ò–Ø –†–ü–ò", "");
+        public static readonly BaseNomenclature Striama = new BaseNomenclature("17", "LBST –°–¢–†–Ø–ú–ê", "");
+        public static readonly BaseNomenclature StaraZagora = new BaseNomenclature("18", "LBSZ –°–¢–ê–†–ê –ó–ê–ì–û–†–ê", "");
+        public static readonly BaseNomenclature Balchik = new BaseNomenclature("19", "LBWB –ë–ê–õ–ß–ò–ö", "");
+        public static readonly BaseNomenclature Varna = new BaseNomenclature("20", "LBWN –í–ê–†–ù–ê", "");
+        public static readonly BaseNomenclature Izgrev = new BaseNomenclature("21", "LBWV –ò–ó–ì–†–ï–í", "");
 
         public OVDBodyLocationIndicatorNomenclature()
         {

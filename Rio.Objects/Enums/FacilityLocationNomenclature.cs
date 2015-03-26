@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +7,11 @@ namespace Rio.Objects.Enums
 {
     public class FacilityLocationNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature Sofia = new BaseNomenclature("01", "ĞÖ çà ÎÂÄ - Ñîôèÿ");
-        public static readonly BaseNomenclature Varna = new BaseNomenclature("02", "ËÖ çà ÎÂÄ - Âàğíà");
-        public static readonly BaseNomenclature Burgas = new BaseNomenclature("03", "ËÖ çà ÎÂÄ - Áóğãàñ");
-        public static readonly BaseNomenclature Plovdiv = new BaseNomenclature("04", "ËÖ çà ÎÂÄ - Ïëîâäèâ");
-        public static readonly BaseNomenclature GornaOriahovica = new BaseNomenclature("05", "ËÖ çà ÎÂÄ - Ãîğíà Îğÿõîâèöà");
+        public static readonly BaseNomenclature Sofia = new BaseNomenclature("01", "Ğ Ğ¦ Ğ·Ğ° ĞĞ’Ğ” - Ğ¡Ğ¾Ñ„Ğ¸Ñ");
+        public static readonly BaseNomenclature Varna = new BaseNomenclature("02", "Ğ›Ğ¦ Ğ·Ğ° ĞĞ’Ğ” - Ğ’Ğ°Ñ€Ğ½Ğ°");
+        public static readonly BaseNomenclature Burgas = new BaseNomenclature("03", "Ğ›Ğ¦ Ğ·Ğ° ĞĞ’Ğ” - Ğ‘ÑƒÑ€Ğ³Ğ°Ñ");
+        public static readonly BaseNomenclature Plovdiv = new BaseNomenclature("04", "Ğ›Ğ¦ Ğ·Ğ° ĞĞ’Ğ” - ĞŸĞ»Ğ¾Ğ²Ğ´Ğ¸Ğ²");
+        public static readonly BaseNomenclature GornaOriahovica = new BaseNomenclature("05", "Ğ›Ğ¦ Ğ·Ğ° ĞĞ’Ğ” - Ğ“Ğ¾Ñ€Ğ½Ğ° ĞÑ€ÑÑ…Ğ¾Ğ²Ğ¸Ñ†Ğ°");
 
 
         public FacilityLocationNomenclature()

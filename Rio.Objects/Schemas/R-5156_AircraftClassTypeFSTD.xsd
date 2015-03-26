@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5156" xmlns="http://ereg.egov.bg/segment/R-5156" 
+		xmlns:ac="http://ereg.egov.bg/segment/R-4152"
+		xmlns:at="http://ereg.egov.bg/segment/R-4158"
+		xmlns:fst="http://ereg.egov.bg/segment/R-4174"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4152"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4174"/>
+
+	<xsd:complexType name="AircraftClassTypeFSTD">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">ТИП/КЛАС ВС / FSTD използван за oценка на компетентността</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftClass" type="ac:AircraftClass" minOccurs="0"/>
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0"/>
+			<xsd:element name="FlightSimulatorType" type="fst:FlightSimulatorType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

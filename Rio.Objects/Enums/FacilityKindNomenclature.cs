@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,24 +10,24 @@ namespace Rio.Objects.Enums
         public List<BaseNomenclature> NavigationalAidsValues { get; set; }
         public List<BaseNomenclature> FitnessAutomatedATMValues { get; set; }
 
-        public static readonly BaseNomenclature Automated = new BaseNomenclature("01", "автоматизирани системи за комуникации \"земя-земя\" и \"въздух-земя\"");
-        public static readonly BaseNomenclature AirSpace = new BaseNomenclature("02", "системи за управление на въздушното пространство");
-        public static readonly BaseNomenclature Flow = new BaseNomenclature("03", "системи за управление на потока от въздушно движение");
+        public static readonly BaseNomenclature Automated = new BaseNomenclature("01", "Р°РІС‚РѕРјР°С‚РёР·РёСЂР°РЅРё СЃРёСЃС‚РµРјРё Р·Р° РєРѕРјСѓРЅРёРєР°С†РёРё \"Р·РµРјСЏ-Р·РµРјСЏ\" Рё \"РІСЉР·РґСѓС…-Р·РµРјСЏ\"");
+        public static readonly BaseNomenclature AirSpace = new BaseNomenclature("02", "СЃРёСЃС‚РµРјРё Р·Р° СѓРїСЂР°РІР»РµРЅРёРµ РЅР° РІСЉР·РґСѓС€РЅРѕС‚Рѕ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ");
+        public static readonly BaseNomenclature Flow = new BaseNomenclature("03", "СЃРёСЃС‚РµРјРё Р·Р° СѓРїСЂР°РІР»РµРЅРёРµ РЅР° РїРѕС‚РѕРєР° РѕС‚ РІСЉР·РґСѓС€РЅРѕ РґРІРёР¶РµРЅРёРµ");
 
-        public static readonly BaseNomenclature Laboratory = new BaseNomenclature("04", "Лаборатория за тест на навигационните съоръжения за въздушна навигация и кацане");
-        public static readonly BaseNomenclature ExactLanding = new BaseNomenclature("05", "Курсо-глисадна система за точен подход за кацане");
-        public static readonly BaseNomenclature FirstRadiolocator = new BaseNomenclature("06", "Първичен радиолокатор");
-        public static readonly BaseNomenclature SecondRadiolocator = new BaseNomenclature("07", "Вторичен радиолокатор");
-        public static readonly BaseNomenclature AutomatedSystem = new BaseNomenclature("08", "Автоматизирана система за изобразяване на многорадарна и планова информация");
-        public static readonly BaseNomenclature RadiolocatorFlyingField = new BaseNomenclature("09", "Радиолокатор за обзор на летателното поле");
-        public static readonly BaseNomenclature MeteorologicalRadiolocator = new BaseNomenclature("10", "Метеорологичен радиолокатор");
-        public static readonly BaseNomenclature AutomatedMonitoring = new BaseNomenclature("11", "Автоматизирана метеорологична наблюдателна система");
-        public static readonly BaseNomenclature OmnidirectionalBeacon = new BaseNomenclature("12", "Всенасочен радиофар");
-        public static readonly BaseNomenclature DriveStation = new BaseNomenclature("13", "Приводна радиостанция");
-        public static readonly BaseNomenclature DalnomericSystem = new BaseNomenclature("14", "Далномерна система");
-        public static readonly BaseNomenclature AutoFinder = new BaseNomenclature("15", "Автоматичен радиопеленгатор");
-        public static readonly BaseNomenclature LightingLandingSystem = new BaseNomenclature("16", "Светотехническа система за кацане");
-        public static readonly BaseNomenclature AeronavigationalSystem = new BaseNomenclature("17", "Система за аеронавигационно информационно обслужване");
+        public static readonly BaseNomenclature Laboratory = new BaseNomenclature("04", "Р›Р°Р±РѕСЂР°С‚РѕСЂРёСЏ Р·Р° С‚РµСЃС‚ РЅР° РЅР°РІРёРіР°С†РёРѕРЅРЅРёС‚Рµ СЃСЉРѕСЂСЉР¶РµРЅРёСЏ Р·Р° РІСЉР·РґСѓС€РЅР° РЅР°РІРёРіР°С†РёСЏ Рё РєР°С†Р°РЅРµ");
+        public static readonly BaseNomenclature ExactLanding = new BaseNomenclature("05", "РљСѓСЂСЃРѕ-РіР»РёСЃР°РґРЅР° СЃРёСЃС‚РµРјР° Р·Р° С‚РѕС‡РµРЅ РїРѕРґС…РѕРґ Р·Р° РєР°С†Р°РЅРµ");
+        public static readonly BaseNomenclature FirstRadiolocator = new BaseNomenclature("06", "РџСЉСЂРІРёС‡РµРЅ СЂР°РґРёРѕР»РѕРєР°С‚РѕСЂ");
+        public static readonly BaseNomenclature SecondRadiolocator = new BaseNomenclature("07", "Р’С‚РѕСЂРёС‡РµРЅ СЂР°РґРёРѕР»РѕРєР°С‚РѕСЂ");
+        public static readonly BaseNomenclature AutomatedSystem = new BaseNomenclature("08", "РђРІС‚РѕРјР°С‚РёР·РёСЂР°РЅР° СЃРёСЃС‚РµРјР° Р·Р° РёР·РѕР±СЂР°Р·СЏРІР°РЅРµ РЅР° РјРЅРѕРіРѕСЂР°РґР°СЂРЅР° Рё РїР»Р°РЅРѕРІР° РёРЅС„РѕСЂРјР°С†РёСЏ");
+        public static readonly BaseNomenclature RadiolocatorFlyingField = new BaseNomenclature("09", "Р Р°РґРёРѕР»РѕРєР°С‚РѕСЂ Р·Р° РѕР±Р·РѕСЂ РЅР° Р»РµС‚Р°С‚РµР»РЅРѕС‚Рѕ РїРѕР»Рµ");
+        public static readonly BaseNomenclature MeteorologicalRadiolocator = new BaseNomenclature("10", "РњРµС‚РµРѕСЂРѕР»РѕРіРёС‡РµРЅ СЂР°РґРёРѕР»РѕРєР°С‚РѕСЂ");
+        public static readonly BaseNomenclature AutomatedMonitoring = new BaseNomenclature("11", "РђРІС‚РѕРјР°С‚РёР·РёСЂР°РЅР° РјРµС‚РµРѕСЂРѕР»РѕРіРёС‡РЅР° РЅР°Р±Р»СЋРґР°С‚РµР»РЅР° СЃРёСЃС‚РµРјР°");
+        public static readonly BaseNomenclature OmnidirectionalBeacon = new BaseNomenclature("12", "Р’СЃРµРЅР°СЃРѕС‡РµРЅ СЂР°РґРёРѕС„Р°СЂ");
+        public static readonly BaseNomenclature DriveStation = new BaseNomenclature("13", "РџСЂРёРІРѕРґРЅР° СЂР°РґРёРѕСЃС‚Р°РЅС†РёСЏ");
+        public static readonly BaseNomenclature DalnomericSystem = new BaseNomenclature("14", "Р”Р°Р»РЅРѕРјРµСЂРЅР° СЃРёСЃС‚РµРјР°");
+        public static readonly BaseNomenclature AutoFinder = new BaseNomenclature("15", "РђРІС‚РѕРјР°С‚РёС‡РµРЅ СЂР°РґРёРѕРїРµР»РµРЅРіР°С‚РѕСЂ");
+        public static readonly BaseNomenclature LightingLandingSystem = new BaseNomenclature("16", "РЎРІРµС‚РѕС‚РµС…РЅРёС‡РµСЃРєР° СЃРёСЃС‚РµРјР° Р·Р° РєР°С†Р°РЅРµ");
+        public static readonly BaseNomenclature AeronavigationalSystem = new BaseNomenclature("17", "РЎРёСЃС‚РµРјР° Р·Р° Р°РµСЂРѕРЅР°РІРёРіР°С†РёРѕРЅРЅРѕ РёРЅС„РѕСЂРјР°С†РёРѕРЅРЅРѕ РѕР±СЃР»СѓР¶РІР°РЅРµ");
 
         public FacilityKindNomenclature()
         {

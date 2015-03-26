@@ -587,6 +587,326 @@ namespace Rio.Objects
                 },
                 "EngagedCommercialTransportationPassengersCargoApplication.xsl");
 
+        public static readonly RioDocumentMetadata ApprovalDescriptionManagementOrganizationMaintenanceApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5094",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005094" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005094" },
+                "Заявление за одобряване на описание на организация за управление поддържането на постоянна летателна годност",
+                "Application for approval of a description of the management organization to maintain a constant airworthiness",
+                typeof(R_5094.ApprovalDescriptionManagementOrganizationMaintenanceApplication),
+                "/app:ApprovalDescriptionManagementOrganizationMaintenanceApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5094"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ApprovalDescriptionManagementOrganizationMaintenanceApplication.xsl");
+
+        public static readonly RioDocumentMetadata ApprovalTechnicalLogApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5096",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005096" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005096" },
+                "Заявление за одобряване на технически борден дневник",
+                "Application for approval of the technical log",
+                typeof(R_5096.ApprovalTechnicalLogApplication),
+                "/app:ApprovalTechnicalLogApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5096"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ApprovalTechnicalLogApplication.xsl");
+
+        public static readonly RioDocumentMetadata ApprovalProgramPlanMaintenanceAircraftApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5104",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005104" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005104" },
+                "Заявление за одобряване програма (план) за техническо обслужване на ВС",
+                "Application for approval program (plan) for maintenance of aircraft",
+                typeof(R_5104.ApprovalProgramPlanMaintenanceAircraftApplication),
+                "/app:ApprovalProgramPlanMaintenanceAircraftApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5104"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ApprovalProgramPlanMaintenanceAircraftApplication.xsl");
+
+        public static readonly RioDocumentMetadata ApprovalManagementPersonnelApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5116",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005116" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005116" },
+                "Заявление за одобряване на ръководен персонал (EASA Form 4)",
+                "Application for approval of management personnel (EASA Form 4)",
+                typeof(R_5116.ApprovalManagementPersonnelApplication),
+                "/app:ApprovalManagementPersonnelApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5116"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ApprovalManagementPersonnelApplication.xsl");
+
+        public static readonly RioDocumentMetadata ApprovalPartMSubpartGApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5132",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005132" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005132" },
+                "Заявление за издаване и промяна на удостоверение за одобрение на организация за управление на постоянна летателна годност  (EASA Form 14)",
+                "Application for issuance and change of certificate for approval of organization for management of permanent airworthiness (EASA Form 14)",
+                typeof(R_5132.ApprovalPartMSubpartGApplication),
+                "/app:ApprovalPartMSubpartGApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5132"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ApprovalPartMSubpartGApplication.xsl");
+
+        public static readonly RioDocumentMetadata ChangeCompetentAuthorityLicensePilotAccordanceLicenseApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5134",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005134" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005134" },
+                "Заявление за промяна на компетентен орган на свидетелство за правоспособност на пилот в съответствие с PART-FCL издадено от друга държава членка",
+                "Application to change the competent authority of a license of pilot in accordance with PART-FCL license issued by another Member State",
+                typeof(R_5134.ChangeCompetentAuthorityLicensePilotAccordanceLicenseApplication),
+                "/app:ChangeCompetentAuthorityLicensePilotAccordanceLicenseApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5134"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ChangeCompetentAuthorityLicensePilotAccordanceLicenseApplication.xsl");
+
+        public static readonly RioDocumentMetadata EstablishingAssessCompetenceApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5144",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005144" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005144" },
+                "Заявление за определяне на старши проверяващ или инспектор за извършване на оценка на компетентност на проверяващ и за издаване, потвърждване, подновяване и/или разширяване на правата за проверяващ",
+                "An application for establishing a senior examiner or inspector to assess the competence of an examiner and for issuing, confirmations, renewal and / or extension of a verifier",
+                typeof(R_5144.EstablishingAssessCompetenceApplication),
+                "/app:EstablishingAssessCompetenceApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5144"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "EstablishingAssessCompetenceApplication.xsl");
+
+        public static readonly RioDocumentMetadata RegistrationRatingAuthorizationLicenseApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5160",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005160" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005160" },
+                "Заявление за вписване на квалификационен клас и/или разрешение към него  в свидетелство за правоспособност на ръководители на полети, ученик-ръководител полети, на асистент координатори на полети и на координатори по УВД",
+                "Application for registration of the rating and / or authorization to him in a license of air traffic controllers, student-manager flights assistant coordinators flights and coordinators ATM",
+                typeof(R_5160.RegistrationRatingAuthorizationLicenseApplication),
+                "/app:RegistrationRatingAuthorizationLicenseApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5160"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "RegistrationRatingAuthorizationLicenseApplication.xsl");
+
+        public static readonly RioDocumentMetadata ConfirmationRecoveryRatingLicenseApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5164",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005164" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005164" },
+                "Заявление за потвърждаване и/или възстановяване на квалификационен клас в  свидетелство за правоспособност на ръководители на полети, ученик-ръководител полети, на асистент координатори",
+                "Application for confirmation and / or recovery of rating in a license of air traffic controllers, student-manager flights assistant coordinators",
+                typeof(R_5164.ConfirmationRecoveryRatingLicenseApplication),
+                "/app:ConfirmationRecoveryRatingLicenseApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5164"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ConfirmationRecoveryRatingLicenseApplication.xsl");
+
+        public static readonly RioDocumentMetadata ReplacingLicenseFlightsCoordinatorsApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5166",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005166" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005166" },
+                "Заявление за замяна на  свидетелство за правоспособност на ръководители на полети, ученик-ръководител полети, на асистент координатори на полети и на координатори по УВД",
+                "Application for replacement of a license of air traffic controllers, student-manager flights assistant coordinators flights and coordinators ATM",
+                typeof(R_5166.ReplacingLicenseFlightsCoordinatorsApplication),
+                "/app:ReplacingLicenseFlightsCoordinatorsApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5166"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ReplacingLicenseFlightsCoordinatorsApplication.xsl");
+
+        public static readonly RioDocumentMetadata EntryRatingAuthorizationLicenseEngineeringTechnicalStaffEngagedMaintenanceFundsManagementApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5168",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005168" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005168" },
+                "Заявление за вписване квалификационен клас и/или разрешение към него  в свидетелство за правоспособност на инженеро-технически състав, извършващ техническо обслужване на средствата за управление на въздушното движение",
+                "Application for entry rating and / or authorization to him in license of engineering and technical staff engaged in maintenance funds for air traffic management",
+                typeof(R_5168.EntryRatingAuthorizationLicenseEngineeringTechnicalStaffEngagedMaintenanceFundsManagementApplication),
+                "/app:EntryRatingAuthorizationLicenseEngineeringTechnicalStaffEngagedMaintenanceFundsManagementApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5168"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "EntryRatingAuthorizationLicenseEngineeringTechnicalStaffEngagedMaintenanceFundsManagementApplication.xsl");
+
+        public static readonly RioDocumentMetadata ConfirmationRecoveryRatingLicenseEngineeringTechnicalStaffMaintenanceFundsManagementApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5170",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005170" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005170" },
+                "Заявление за потвърждаване и/или възстановяване на квалификационен клас в  свидетелство за правоспособност на инженеро-технически състав, извършващ техническо обслужване на средствата за управление на въздушното движение",
+                "Application for confirmation and / or recovery of rating in a license of engineering and technical staff engaged in maintenance funds for air traffic management",
+                typeof(R_5170.ConfirmationRecoveryRatingLicenseEngineeringTechnicalStaffMaintenanceFundsManagementApplication),
+                "/app:ConfirmationRecoveryRatingLicenseEngineeringTechnicalStaffMaintenanceFundsManagementApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5170"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ConfirmationRecoveryRatingLicenseEngineeringTechnicalStaffMaintenanceFundsManagementApplication.xsl");
+
+        public static readonly RioDocumentMetadata RegistrationRatingTypeClassAircraftIFRPilotLicensePilotPartFCLApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5178",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005178" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005178" },
+                "Заявление за вписване на квалификационен клас тип и клас ВС и/или полети по прибори в свидетелство за летателна правоспособност на пилот съгласно PART-FCL",
+                "Application for registration of rating type and class of aircraft and / or IFR in pilot license to pilot under PART-FCL",
+                typeof(R_5178.RegistrationRatingTypeClassAircraftIFRPilotLicensePilotPartFCLApplication),
+                "/app:RegistrationRatingTypeClassAircraftIFRPilotLicensePilotPartFCLApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5178"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "RegistrationRatingTypeClassAircraftIFRPilotLicensePilotPartFCLApplication.xsl");
+
+        public static readonly RioDocumentMetadata ConfirmationRecoveryRatingLicensePilotApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5196",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005196" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005196" },
+                "Заявление за потвърждаване/възстановяване на квалификационен клас в свидетелство за правоспособност на пилот",
+                "Application for confirmation / recovery rating to license pilot",
+                typeof(R_5196.ConfirmationRecoveryRatingLicensePilotApplication),
+                "/app:ConfirmationRecoveryRatingLicensePilotApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5196"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ConfirmationRecoveryRatingLicensePilotApplication.xsl");
+
+        public static readonly RioDocumentMetadata ReplacementRemovalRestrictionsLicenseManagementApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5218",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005218" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005218" },
+                "Заявление за замяна/подмяна/премахване на ограничения на  свидетелство за правоспособност на инженеро-технически състав, извършващ техническо обслужване на средствата за управление на въздушното движение",
+                "Application for replacement / replacement / removal of restrictions of a license of engineering and technical staff engaged in maintenance funds for air traffic management",
+                typeof(R_5218.ReplacementRemovalRestrictionsLicenseManagementApplication),
+                "/app:ReplacementRemovalRestrictionsLicenseManagementApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5218"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ReplacementRemovalRestrictionsLicenseManagementApplication.xsl");
+
+        public static readonly RioDocumentMetadata RegistrationTrainingAircraftTypePermissionStewardHostessApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5242",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005242" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005242" },
+                "Заявление за вписване/потвърждаване/възстановяване на квалификация тип ВС и/или разрешение на стюард/еса",
+                "Application for registration / confirmation / recovery training aircraft type and / or permission of the Steward / Hostess",
+                typeof(R_5242.RegistrationTrainingAircraftTypePermissionStewardHostessApplication),
+                "/app:RegistrationTrainingAircraftTypePermissionStewardHostessApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5242"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "RegistrationTrainingAircraftTypePermissionStewardHostessApplication.xsl");
+
+        public static readonly RioDocumentMetadata ConfirmationRecoveryTrainingAircraftTypePermissionStewardHostessApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5244",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005244" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005244" },
+                "Заявление за вписване/потвърждаване/възстановяване на квалификация тип ВС и/или разрешение на стюард/еса",
+                "Application for registration / confirmation / recovery training aircraft type and / or permission of the Steward / Hostess",
+                typeof(R_5244.ConfirmationRecoveryTrainingAircraftTypePermissionStewardHostessApplication),
+                "/app:ConfirmationRecoveryTrainingAircraftTypePermissionStewardHostessApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5244"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ConfirmationRecoveryTrainingAircraftTypePermissionStewardHostessApplication.xsl");
+
+        public static readonly RioDocumentMetadata ConfirmationConversionPursuantLicensePilotIssuedApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5246",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005246" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005246" },
+                "Заявление за потвърждаване или преобразуване съгласно PART-FCL на свидетелство за правоспособност на пилот, издадено съгласно приложение 1 на ИКАО",
+                "Application for confirmation or conversion pursuant PART-FCL license a pilot issued under ICAO Annex 1",
+                typeof(R_5246.ConfirmationConversionPursuantLicensePilotIssuedApplication),
+                "/app:ConfirmationConversionPursuantLicensePilotIssuedApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5246"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ConfirmationConversionPursuantLicensePilotIssuedApplication.xsl");
+
+        public static readonly RioDocumentMetadata RegistrationAircraftTypePermissionFlightCrewApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5248",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005248" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005248" },
+                "Заявление за вписване на квалификационен клас за тип ВС и/или разрешение на членове на летателния състав от екипажите на ВС, различни от пилоти ",
+                "Application for registration of aircraft type aircraft and / or permission of the flight crew members of the crew of the aircraft other than the pilots",
+                typeof(R_5248.RegistrationAircraftTypePermissionFlightCrewApplication),
+                "/app:RegistrationAircraftTypePermissionFlightCrewApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5248"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "RegistrationAircraftTypePermissionFlightCrewApplication.xsl");
+
+        public static readonly RioDocumentMetadata ConfirmationRatingCrewApplicationMetadata =
+            new RioDocumentMetadata(
+                "R5250",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005250" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005250" },
+                "Заявление за потвърждаване на квалификационен клас на членове на екипажа",
+                "Application for confirmation of the rating of the crew",
+                typeof(R_5250.ConfirmationRatingCrewApplication),
+                "/app:ConfirmationRatingCrewApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-5250"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ConfirmationRatingCrewApplication.xsl");
+
         #endregion
 
         #region Applications Mosv
@@ -677,6 +997,239 @@ namespace Rio.Objects
         //        },
         //        "FedDocument.xsl");
 
+        #endregion
+
+        #region Applications Ngo
+
+        public static readonly RioDocumentMetadata InitialRegistrationChangesNonProfitEntityApplicationMetadata =
+            new RioDocumentMetadata(
+                "R7070",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "007070" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "007070" },
+                "Заявление за първоначално вписване и вписване на промени за юридическо лице с нестопанска цел",
+                "Application for initial registration and registration changes for legal non-profit entity",
+                typeof(R_7070.InitialRegistrationChangesNonProfitEntityApplication),
+                "/app:InitialRegistrationChangesNonProfitEntityApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-7070"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "InitialRegistrationChangesNonProfitEntityApplication.xsl");
+
+        public static readonly RioDocumentMetadata InitialRegistrationChangesNonProfitForeignEntityBranchApplicationMetadata =
+            new RioDocumentMetadata(
+                "R7074",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "007074" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "007074" },
+                "Заявление за първоначално вписване и вписване на промени за клон на чуждестранно юридическо лице с нестопанска цел",
+                "Application for initial registration and registration of changes to a branch of a foreign legal non-profit entity",
+                typeof(R_7074.InitialRegistrationChangesNonProfitForeignEntityBranchApplication),
+                "/app:InitialRegistrationChangesNonProfitForeignEntityBranchApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-7074"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "InitialRegistrationChangesNonProfitForeignEntityBranchApplication.xsl");
+
+        public static readonly RioDocumentMetadata RegistrationCircumstancesBranchLegalEntityRegisteredBulgariaApplicationMetadata =
+            new RioDocumentMetadata(
+                "R7076",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "007076" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "007076" },
+                "Заявление за вписване на обстоятелства относно клон на юридическо лице, регистрирано в Република България",
+                "Application for registration of circumstances on a branch of a legal entity registered in the Republic of Bulgaria",
+                typeof(R_7076.RegistrationCircumstancesBranchLegalEntityRegisteredBulgariaApplication),
+                "/app:RegistrationCircumstancesBranchLegalEntityRegisteredBulgariaApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-7076"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "RegistrationCircumstancesBranchLegalEntityRegisteredBulgariaApplication.xsl");
+
+        public static readonly RioDocumentMetadata DeclarationInformationActivitiesPreviousYearApplicationMetadata =
+            new RioDocumentMetadata(
+                "R7088",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "007088" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "007088" },
+                "Заявление за обявяване на информация за дейността през предходната година в ЦРЮЛНЦ",
+                "Application for declaration of information about the activities in the previous year",
+                typeof(R_7088.DeclarationInformationActivitiesPreviousYearApplication),
+                "/app:DeclarationInformationActivitiesPreviousYearApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-7088"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "DeclarationInformationActivitiesPreviousYearApplication.xsl");
+
+        public static readonly RioDocumentMetadata CancellationRegistrationNonProfitEntityBranchApplicationMetadata =
+            new RioDocumentMetadata(
+                "R7094",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "007094" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "007094" },
+                "Заявление за заличаване на вписването в Централния регистър на юридическите лица с нестопанска цел на юридическо лице и клон на чуждестранно юридическо лице",
+                "Application for cancellation of the registration in the Central Register of non-profit legal entity and a branch of a foreign legal entity",
+                typeof(R_7094.CancellationRegistrationNonProfitEntityBranchApplication),
+                "/app:CancellationRegistrationNonProfitEntityBranchApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-7094"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "CancellationRegistrationNonProfitEntityBranchApplication.xsl");
+
+        #endregion
+
+        #region Applications Bim
+
+        public static readonly RioDocumentMetadata MeasuringEquipmentApprovalApplicationMetadata =
+            new RioDocumentMetadata(
+                "R1044",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "001044" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "001044" },
+                "Заявление за одобряване на типа на средство за измерване",
+                "Application for approval of a measuring instrument",
+                typeof(R_1044.MeasuringEquipmentApprovalApplication),
+                "/meaa:MeasuringEquipmentApprovalApplication/meaa:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"meaa", "http://ereg.egov.bg/segment/R-1044"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "MeasuringEquipmentApprovalApplication.xsl");
+
+        public static readonly RioDocumentMetadata MEVerificationApplicationMetadata =
+            new RioDocumentMetadata(
+                "R1090",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "001090" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "001090" },
+                "Заявление за проверка на средства за измерване, които подлежат на метрологичен контрол",
+                "Application for verification of measuring instruments subject to metrological control",
+                typeof(R_1090.MEVerificationApplication),
+                "/app:MEVerificationApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-1090"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "MEVerificationApplication.xsl");
+
+        public static readonly RioDocumentMetadata InstrumentalMetrologyExpertiseApplicationMetadata =
+            new RioDocumentMetadata(
+                "R1132",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "001132" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "001132" },
+                "Заявление за метрологична експертиза на средство за измерване",
+                "Application for metrological expertise of measuring equipment",
+                typeof(R_1132.InstrumentalMetrologyExpertiseApplication),
+                "/app:InstrumentalMetrologyExpertiseApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-1132"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "InstrumentalMetrologyExpertiseApplication.xsl");
+
+        public static readonly RioDocumentMetadata TypeExaminationFiscalDeviceApplicationMetadata =
+            new RioDocumentMetadata(
+                "R1144",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "001144" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "001144" },
+                "Заявление за изпитване на тип фискално устройство съгласно изискванията на Наредба № 18  от 13.12.2006 г. на Министерство на финансите",
+                "Application for type-examination fiscal device according to the requirements of Ordinance № 18 of 13.12.2006 of the Ministry of Finance",
+                typeof(R_1144.TypeExaminationFiscalDeviceApplication),
+                "/app:TypeExaminationFiscalDeviceApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-1144"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "TypeExaminationFiscalDeviceApplication.xsl");
+
+        public static readonly RioDocumentMetadata CalibrationInstrumentalComparingMaterialsApplicationMetadata =
+            new RioDocumentMetadata(
+                "R1168",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "001168" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "001168" },
+                "Заявление за калибриране на средства за измерване (СИ)/сравнителни материали (СМ)",
+                "Application for calibration of measuring instruments (JI) / Reference Materials (RM)",
+                typeof(R_1168.CalibrationInstrumentalComparingMaterialsApplication),
+                "/app:CalibrationInstrumentalComparingMaterialsApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-1168"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "CalibrationInstrumentalComparingMaterialsApplication.xsl");
+
+        public static readonly RioDocumentMetadata PlayingFacilityTypeApprovalApplicationMetadata =
+            new RioDocumentMetadata(
+                "R1182",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "001182" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "001182" },
+                "Заявление за одобряване на типа на игрално съоръжение",
+                "Application for approval of a gambling device",
+                typeof(R_1182.PlayingFacilityTypeApprovalApplication),
+                "/app:PlayingFacilityTypeApprovalApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-1182"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "PlayingFacilityTypeApprovalApplication.xsl");
+
+        public static readonly RioDocumentMetadata InformationRegisterApprovedTypesMEApplicationMetadata =
+            new RioDocumentMetadata(
+                "R1184",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "001184" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "001184" },
+                "Заявление за предоставяне на справки от регистъра за одобрените за използване типове средства за измерване",
+                "Application for information from the register of approved uses types of measuring equipment",
+                typeof(R_1184.InformationRegisterApprovedTypesMEApplication),
+                "/app:InformationRegisterApprovedTypesMEApplication/rtia:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-1184"},
+                    {"rtia","http://ereg.egov.bg/segment/R-1076"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "InformationRegisterApprovedTypesMEApplication.xsl");
+
+        public static readonly RioDocumentMetadata ElectromagneticCompatibilityTestingApplicationMetadata =
+            new RioDocumentMetadata(
+                "R1192",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "001192" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "001192" },
+                "Заявление за изпитване на електромагнитна съвместимост",
+                "Application for testing electromagnetic compatibility",
+                typeof(R_1192.ElectromagneticCompatibilityTestingApplication),
+                "/app:ElectromagneticCompatibilityTestingApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-1192"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ElectromagneticCompatibilityTestingApplication.xsl");
+
+        public static readonly RioDocumentMetadata ConformityAssessmentNonAutomaticWeighingApplicationMetadata =
+            new RioDocumentMetadata(
+                "R1208",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "001208" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "001208" },
+                "Заявление за оценяване на съответствието на везни с неавтоматично действие",
+                "Application for conformity assessment of non-automatic weighing",
+                typeof(R_1208.ConformityAssessmentNonAutomaticWeighingApplication),
+                "/app:ConformityAssessmentNonAutomaticWeighingApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"app", "http://ereg.egov.bg/segment/R-1208"},
+                    {"easf", "http://ereg.egov.bg/segment/0009-000153"},
+                },
+                "ConformityAssessmentNonAutomaticWeighingApplication.xsl");
+        
         #endregion
 
         #region Acknowledgements
@@ -836,6 +1389,26 @@ namespace Rio.Objects
             EngineeringTechnicalStaffPerformingMaintenanceFundsAirTrafficManagementApplicationMetadata,
             AOCConductingAerialWorkApplicationMetadata,
             EngagedCommercialTransportationPassengersCargoApplicationMetadata,
+            ApprovalDescriptionManagementOrganizationMaintenanceApplicationMetadata,
+            ApprovalTechnicalLogApplicationMetadata,
+            ApprovalProgramPlanMaintenanceAircraftApplicationMetadata,
+            ApprovalManagementPersonnelApplicationMetadata,
+            ApprovalPartMSubpartGApplicationMetadata,
+            ChangeCompetentAuthorityLicensePilotAccordanceLicenseApplicationMetadata,
+            EstablishingAssessCompetenceApplicationMetadata,
+            RegistrationRatingAuthorizationLicenseApplicationMetadata,
+            ConfirmationRecoveryRatingLicenseApplicationMetadata,
+            ReplacingLicenseFlightsCoordinatorsApplicationMetadata,
+            EntryRatingAuthorizationLicenseEngineeringTechnicalStaffEngagedMaintenanceFundsManagementApplicationMetadata,
+            ConfirmationRecoveryRatingLicenseEngineeringTechnicalStaffMaintenanceFundsManagementApplicationMetadata,
+            RegistrationRatingTypeClassAircraftIFRPilotLicensePilotPartFCLApplicationMetadata,
+            ConfirmationRecoveryRatingLicensePilotApplicationMetadata,
+            ReplacementRemovalRestrictionsLicenseManagementApplicationMetadata,
+            RegistrationTrainingAircraftTypePermissionStewardHostessApplicationMetadata,
+            ConfirmationRecoveryTrainingAircraftTypePermissionStewardHostessApplicationMetadata,
+            ConfirmationConversionPursuantLicensePilotIssuedApplicationMetadata,
+            RegistrationAircraftTypePermissionFlightCrewApplicationMetadata,
+            ConfirmationRatingCrewApplicationMetadata,
 
             #endregion
 
@@ -850,6 +1423,30 @@ namespace Rio.Objects
             #region Application Aop
 
             AopApplicationMetadata,
+
+            #endregion
+            
+            #region Application Ngo
+
+            InitialRegistrationChangesNonProfitEntityApplicationMetadata,
+            InitialRegistrationChangesNonProfitForeignEntityBranchApplicationMetadata,
+            RegistrationCircumstancesBranchLegalEntityRegisteredBulgariaApplicationMetadata,
+            DeclarationInformationActivitiesPreviousYearApplicationMetadata,
+            CancellationRegistrationNonProfitEntityBranchApplicationMetadata,
+
+            #endregion
+            
+            #region Application Bim
+
+            MeasuringEquipmentApprovalApplicationMetadata,
+            MEVerificationApplicationMetadata,
+            InstrumentalMetrologyExpertiseApplicationMetadata,
+            TypeExaminationFiscalDeviceApplicationMetadata,
+            CalibrationInstrumentalComparingMaterialsApplicationMetadata,
+            PlayingFacilityTypeApprovalApplicationMetadata,
+            InformationRegisterApprovedTypesMEApplicationMetadata,
+            ElectromagneticCompatibilityTestingApplicationMetadata,
+            ConformityAssessmentNonAutomaticWeighingApplicationMetadata,
 
             #endregion
 
@@ -916,25 +1513,6 @@ namespace Rio.Objects
 
         public string DocumentTypeName
         {
-            //get
-            //{
-            //    var currentCulture = String.Empty;
-            //    if (System.Threading.Thread.CurrentThread.CurrentUICulture != null)
-            //    {
-            //        currentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower().Substring(0, 2);
-            //    }
-
-            //    switch (currentCulture)
-            //    {
-            //        case "bg":
-            //            return _documentTypeName;
-            //        case "en":
-            //            return _documentTypeNameEnglish;
-            //        default:
-            //            return _documentTypeName;
-            //    }
-            //}
-
             get
             {
                 return _documentTypeName;

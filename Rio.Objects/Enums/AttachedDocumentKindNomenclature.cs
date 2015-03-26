@@ -182,15 +182,15 @@ namespace Rio.Objects.Enums
         public static readonly AttachedDocumentKindNomenclature CertificateExport = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateExport", Code = "100" };
         public static readonly AttachedDocumentKindNomenclature CertificateFlyingWorthiness = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateFlyingWorthiness", Code = "101" };
         public static readonly AttachedDocumentKindNomenclature CertificateFlyingWorthinessAuthorizedBody = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateFlyingWorthinessAuthorizedBody", Code = "102" };
-
         public static readonly AttachedDocumentKindNomenclature CertificateQuality = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateQuality", Code = "103" };
         public static readonly AttachedDocumentKindNomenclature CertificateQualityApprovedManufacturer = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateQualityApprovedManufacturer", Code = "104" };
+        public static readonly AttachedDocumentKindNomenclature CertificateQualityConformityApprovedManufacturer = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateQualityConformityApprovedManufacturer", Code = "105" };
 
         public static List<AttachedDocumentKindNomenclature> R4470WithWhenAppliedValues = new List<AttachedDocumentKindNomenclature>
         {
             CertificateQualityApprovedManufacturer,
             CertificateFlyingWorthiness,
-            CertificateFlyingWorthinessAuthorizedBody
+            CertificateQualityConformityApprovedManufacturer
         };
 
         public static List<AttachedDocumentKindNomenclature> R4470GVAWithWhenAppliedValues = new List<AttachedDocumentKindNomenclature>
@@ -238,6 +238,14 @@ namespace Rio.Objects.Enums
             CenterMassProtocol,
             ModificationsList,
             IncidentsReport
+        };
+
+        public static readonly AttachedDocumentKindNomenclature SystemsDevicesEquipment = new AttachedDocumentKindNomenclature { ResourceKey = "SystemsDevicesEquipment", Code = "1018" };
+
+        public static List<AttachedDocumentKindNomenclature> R4470Values = new List<AttachedDocumentKindNomenclature>
+        {
+            SystemsDevicesEquipment,
+            FeePaid
         };
 
 
@@ -749,11 +757,12 @@ namespace Rio.Objects.Enums
 
         public static readonly AttachedDocumentKindNomenclature TechnicalLog = new AttachedDocumentKindNomenclature { ResourceKey = "TechnicalLog", Code = "381" };
         public static readonly AttachedDocumentKindNomenclature DeclarationReleaseOperation = new AttachedDocumentKindNomenclature { ResourceKey = "DeclarationReleaseOperation", Code = "382" };
+        public static readonly AttachedDocumentKindNomenclature TechnicalLogInstructions = new AttachedDocumentKindNomenclature { ResourceKey = "TechnicalLogInstructions", Code = "383" };
 
         public static List<AttachedDocumentKindNomenclature> R5096Values = new List<AttachedDocumentKindNomenclature>
         {
             TechnicalLog,
-            DeclarationReleaseOperation,
+            TechnicalLogInstructions,
             OtherTwo
         };
 
@@ -764,8 +773,6 @@ namespace Rio.Objects.Enums
         public static List<AttachedDocumentKindNomenclature> R5104Values = new List<AttachedDocumentKindNomenclature>
         {
             ProgramPlanMaintenence,
-            DeclarationServicedAircraft,
-            ReliabilityProgramIfApplicable,
             OtherTwo
         };
 
@@ -798,6 +805,300 @@ namespace Rio.Objects.Enums
             CopyLicenseHeld,
             LicenseExaminerCopy,
             MedicalFitnessCopy
+        };
+
+        public static readonly AttachedDocumentKindNomenclature ValidLicenseDuplexCopy = new AttachedDocumentKindNomenclature { ResourceKey = "ValidLicenseDuplexCopy", Code = "451" };
+        public static readonly AttachedDocumentKindNomenclature MedicalCertificateAppropriateClassCopy = new AttachedDocumentKindNomenclature { ResourceKey = "MedicalCertificateAppropriateClassCopy", Code = "452" };
+        public static readonly AttachedDocumentKindNomenclature IndividualProgramRestoreRating = new AttachedDocumentKindNomenclature { ResourceKey = "IndividualProgramRestoreRating", Code = "453" };
+        public static readonly AttachedDocumentKindNomenclature DocumentWorkoutCrossedEducationOrganizationMaintainQualificationCompetency = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentWorkoutCrossedEducationOrganizationMaintainQualificationCompetency", Code = "454" };
+        public static readonly AttachedDocumentKindNomenclature ProtocolCrossedWorkoutTrainingOrganizationProvideATSSpecialEmergency = new AttachedDocumentKindNomenclature { ResourceKey = "ProtocolCrossedWorkoutTrainingOrganizationProvideATSSpecialEmergency", Code = "455" };
+        public static readonly AttachedDocumentKindNomenclature ProtocolPassRefresherCourseTrainingOrganization = new AttachedDocumentKindNomenclature { ResourceKey = "ProtocolPassRefresherCourseTrainingOrganization", Code = "456" };
+        public static readonly AttachedDocumentKindNomenclature ProtocolsVerificationCompetenceRealConditionsValidRatingsEndorsementsAppearLicense = new AttachedDocumentKindNomenclature { ResourceKey = "ProtocolsVerificationCompetenceRealConditionsValidRatingsEndorsementsAppearLicense", Code = "457" };
+        public static readonly AttachedDocumentKindNomenclature ReferenceIssuedCenterHoursWorked = new AttachedDocumentKindNomenclature { ResourceKey = "ReferenceIssuedCenterHoursWorked", Code = "458" };
+        public static readonly AttachedDocumentKindNomenclature CertificateTrainingAviationTrainingCenter = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateTrainingAviationTrainingCenter", Code = "459" };
+        public static readonly AttachedDocumentKindNomenclature CertificatePassingTheoreticalExamRating = new AttachedDocumentKindNomenclature { ResourceKey = "CertificatePassingTheoreticalExamRating", Code = "4510" };
+        public static readonly AttachedDocumentKindNomenclature AvailableLicensesLicenseAny = new AttachedDocumentKindNomenclature { ResourceKey = "AvailableLicensesLicenseAny", Code = "4511" };
+        public static readonly AttachedDocumentKindNomenclature MinutesPassingTheoreticalCourseExam = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesPassingTheoreticalCourseExam", Code = "4512" };
+        public static readonly AttachedDocumentKindNomenclature OrderAdmissionPracticalPraining = new AttachedDocumentKindNomenclature { ResourceKey = "OrderAdmissionPracticalPraining", Code = "4513" };
+        public static readonly AttachedDocumentKindNomenclature MinutesPassingPracticalTest = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesPassingPracticalTest", Code = "4514" };
+        public static readonly AttachedDocumentKindNomenclature ArrestClearanceSelf = new AttachedDocumentKindNomenclature { ResourceKey = "ArrestClearanceSelf", Code = "4515" };
+        public static readonly AttachedDocumentKindNomenclature DocumentProtocolTrainingRadiotelephoneCommunicationATSEng = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentProtocolTrainingRadiotelephoneCommunicationATSEng", Code = "4516" };
+        public static readonly AttachedDocumentKindNomenclature DocumentRecordAttestingLevelProficiencyEnglish = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentRecordAttestingLevelProficiencyEnglish", Code = "4517" };
+        public static readonly AttachedDocumentKindNomenclature MinutesCompleteInitialTraining = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesCompleteInitialTraining", Code = "4518" };
+        public static readonly AttachedDocumentKindNomenclature MinutesPassedTransientTraining = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesPassedTransientTraining", Code = "4519" };
+        public static readonly AttachedDocumentKindNomenclature MinutesPassedPreTraining = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesPassedPreTraining", Code = "4520" };
+        public static readonly AttachedDocumentKindNomenclature EvidenceActiveRecreation = new AttachedDocumentKindNomenclature { ResourceKey = "EvidenceActiveRecreation", Code = "4521" };
+        public static readonly AttachedDocumentKindNomenclature CertificateProficiencyEnglish = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateProficiencyEnglish", Code = "4522" };
+        public static readonly AttachedDocumentKindNomenclature CertificateProficiencyBulgarian = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateProficiencyBulgarian", Code = "4523" };
+        public static readonly AttachedDocumentKindNomenclature DocumentRecordAttestingLevelProficiencyBulgarian = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentRecordAttestingLevelProficiencyBulgarian", Code = "4524" };
+        public static readonly AttachedDocumentKindNomenclature MinutesInitialTrainingTheoreticalProbationaryPhaseRatingTraining = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesInitialTrainingTheoreticalProbationaryPhaseRatingTraining", Code = "4525" };
+        public static readonly AttachedDocumentKindNomenclature MinutesPracticalProbationaryPhaseRating = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesPracticalProbationaryPhaseRating", Code = "4526" };
+        public static readonly AttachedDocumentKindNomenclature MinutesTransitionalTrainingPhaseTransitional = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesTransitionalTrainingPhaseTransitional", Code = "4527" };
+        public static readonly AttachedDocumentKindNomenclature ProfessionalQualificationCertificate = new AttachedDocumentKindNomenclature { ResourceKey = "ProfessionalQualificationCertificate", Code = "4528" };
+        public static readonly AttachedDocumentKindNomenclature CertificateCourseInstructorsWorkplaceOJTI = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateCourseInstructorsWorkplaceOJTI", Code = "4529" };
+        public static readonly AttachedDocumentKindNomenclature MinutesVerifyingCompetenceWorkplace = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesVerifyingCompetenceWorkplace", Code = "4530" };
+        public static readonly AttachedDocumentKindNomenclature MinutesTheoreticalExamInitialTheoreticalTrainingBasicTraining = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesTheoreticalExamInitialTheoreticalTrainingBasicTraining", Code = "4531" };
+        public static readonly AttachedDocumentKindNomenclature MinutesTheoreticalExamAfterTheoreticalTrainingInstrumentATSAirport = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesTheoreticalExamAfterTheoreticalTrainingInstrumentATSAirport", Code = "4532" };
+        public static readonly AttachedDocumentKindNomenclature MinutesPracticalExamPhaseRating = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesPracticalExamPhaseRating", Code = "4533" };
+        public static readonly AttachedDocumentKindNomenclature DocumentStateChargeApplicableUponApplicationConfirmationRating = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentStateChargeApplicableUponApplicationConfirmationRating", Code = "4534" };
+
+        public static List<AttachedDocumentKindNomenclature> R5164Values = new List<AttachedDocumentKindNomenclature>
+        {
+            ValidLicenseDuplexCopy,
+            MedicalCertificateAppropriateClassCopy,
+            IndividualProgramRestoreRating,
+            DocumentWorkoutCrossedEducationOrganizationMaintainQualificationCompetency,
+            ProtocolCrossedWorkoutTrainingOrganizationProvideATSSpecialEmergency,
+            ProtocolPassRefresherCourseTrainingOrganization,
+            ProtocolsVerificationCompetenceRealConditionsValidRatingsEndorsementsAppearLicense,
+            ReferenceIssuedCenterHoursWorked,
+            CertificateTrainingAviationTrainingCenter,
+            CertificatePassingTheoreticalExamRating,
+            AvailableLicensesLicenseAny,
+            MinutesPassingTheoreticalCourseExam,
+            OrderAdmissionPracticalPraining,
+            MinutesPassingPracticalTest,
+            ArrestClearanceSelf,
+            DocumentProtocolTrainingRadiotelephoneCommunicationATSEng,
+            DocumentRecordAttestingLevelProficiencyEnglish,
+            MinutesCompleteInitialTraining,
+            MinutesPassedTransientTraining,
+            MinutesPassedPreTraining,
+            EvidenceActiveRecreation,
+            CertificateProficiencyEnglish,
+            CertificateProficiencyBulgarian,
+            DocumentRecordAttestingLevelProficiencyBulgarian,
+            MinutesInitialTrainingTheoreticalProbationaryPhaseRatingTraining,
+            MinutesPracticalProbationaryPhaseRating,
+            MinutesTransitionalTrainingPhaseTransitional,
+            ProfessionalQualificationCertificate,
+            CertificateCourseInstructorsWorkplaceOJTI,
+            MinutesVerifyingCompetenceWorkplace,
+            MinutesTheoreticalExamInitialTheoreticalTrainingBasicTraining,
+            MinutesTheoreticalExamAfterTheoreticalTrainingInstrumentATSAirport,
+            MinutesPracticalExamPhaseRating,
+            DocumentStateChargeApplicableUponApplicationConfirmationRating
+        };
+
+        public static readonly AttachedDocumentKindNomenclature OwnedLicenseCopyAllPages = new AttachedDocumentKindNomenclature { ResourceKey = "OwnedLicenseCopyAllPages", Code = "461" };
+        public static readonly AttachedDocumentKindNomenclature TwoColorPhotographs = new AttachedDocumentKindNomenclature { ResourceKey = "TwoColorPhotographs", Code = "462" };
+        public static readonly AttachedDocumentKindNomenclature ProtocolSuccessfullyExamination = new AttachedDocumentKindNomenclature { ResourceKey = "ProtocolSuccessfullyExamination", Code = "463" };
+        public static readonly AttachedDocumentKindNomenclature MinutesPassedFlightSimulator = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesPassedFlightSimulator", Code = "464" };
+        public static readonly AttachedDocumentKindNomenclature DocumentsPassedTrainingAcquisition = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentsPassedTrainingAcquisition", Code = "465" };
+        public static readonly AttachedDocumentKindNomenclature DocumentsPassedTrainingChecks = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentsPassedTrainingChecks", Code = "466" };
+        public static readonly AttachedDocumentKindNomenclature EvidenceRegulatoryConfirming = new AttachedDocumentKindNomenclature { ResourceKey = "EvidenceRegulatoryConfirming", Code = "467" };
+        public static readonly AttachedDocumentKindNomenclature EvidenceRegulatoryPurelySafety = new AttachedDocumentKindNomenclature { ResourceKey = "EvidenceRegulatoryPurelySafety", Code = "468" };
+        public static readonly AttachedDocumentKindNomenclature EvidenceCountryIssuingCertificate = new AttachedDocumentKindNomenclature { ResourceKey = "EvidenceCountryIssuingCertificate", Code = "469" };
+        public static readonly AttachedDocumentKindNomenclature ProtocolPassRefresherCourse = new AttachedDocumentKindNomenclature { ResourceKey = "ProtocolPassRefresherCourse", Code = "4610" };
+
+        public static List<AttachedDocumentKindNomenclature> R5166Values = new List<AttachedDocumentKindNomenclature>
+        {
+            OwnedLicenseCopyAllPages,
+            TwoColorPhotographs,
+            MedicalCertificateAppropriateClassCopy,
+            DyplomCopies,
+            ProtocolCrossedWorkoutTrainingOrganizationProvideATSSpecialEmergency,
+            ProtocolSuccessfullyExamination,
+            MinutesPassedFlightSimulator,
+            DocumentsPassedTrainingAcquisition,
+            DocumentsPassedTrainingChecks,
+            EvidenceRegulatoryConfirming,
+            EvidenceRegulatoryPurelySafety,
+            EvidenceCountryIssuingCertificate,
+            CertificateTrainingAviationTrainingCenter,
+            CertificatePassingTheoreticalExamRating,
+            AvailableLicensesLicenseAny,
+            MinutesPassingTheoreticalCourseExam,
+            OrderAdmissionPracticalPraining,
+            MinutesPassingPracticalTest,
+            ArrestClearanceSelf,
+            DocumentProtocolTrainingRadiotelephoneCommunicationATSEng,
+            DocumentRecordAttestingLevelProficiencyEnglish,
+            ProtocolPassRefresherCourse,
+            MinutesCompleteInitialTraining,
+            MinutesPassedTransientTraining,
+            MinutesPassedPreTraining,
+            EvidenceActiveRecreation,
+            CertificateProficiencyEnglish,
+            CertificateProficiencyBulgarian,
+            DocumentRecordAttestingLevelProficiencyBulgarian,
+            MinutesInitialTrainingTheoreticalProbationaryPhaseRatingTraining,
+            MinutesPracticalProbationaryPhaseRating,
+            MinutesTransitionalTrainingPhaseTransitional,
+            ProfessionalQualificationCertificate,
+            CertificateCourseInstructorsWorkplaceOJTI,
+            MinutesVerifyingCompetenceWorkplace,
+            MinutesTheoreticalExamInitialTheoreticalTrainingBasicTraining,
+            MinutesTheoreticalExamAfterTheoreticalTrainingInstrumentATSAirport,
+            FeePaid
+        };
+
+        public static readonly AttachedDocumentKindNomenclature MinutesTrainingProvideATSSpecialEmergency = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesTrainingProvideATSSpecialEmergency", Code = "441" };
+        public static readonly AttachedDocumentKindNomenclature MinutesTrainingAUTSMaintainCompetence = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesTrainingAUTSMaintainCompetence", Code = "442" };
+
+        public static List<AttachedDocumentKindNomenclature> R5160Values = new List<AttachedDocumentKindNomenclature>
+        {
+            ValidLicenseDuplexCopy,
+            MedicalCertificateAppropriateClassCopy,
+            IDCopy,
+            CertificateTrainingAviationTrainingCenter,
+            CertificatePassingTheoreticalExamRating,
+            AvailableLicensesLicenseAny,
+            MinutesPassingTheoreticalCourseExam,
+            OrderAdmissionPracticalPraining,
+            MinutesPassingPracticalTest,
+            ArrestClearanceSelf,
+            DocumentProtocolTrainingRadiotelephoneCommunicationATSEng,
+            DocumentRecordAttestingLevelProficiencyEnglish,
+            MinutesTrainingProvideATSSpecialEmergency,
+            ProtocolPassRefresherCourse,
+            MinutesCompleteInitialTraining,
+            MinutesPassedTransientTraining,
+            MinutesPassedPreTraining,
+            EvidenceActiveRecreation,
+            CertificateProficiencyEnglish,
+            CertificateProficiencyBulgarian,
+            DocumentRecordAttestingLevelProficiencyBulgarian,
+            MinutesInitialTrainingTheoreticalProbationaryPhaseRatingTraining,
+            MinutesPracticalProbationaryPhaseRating,
+            MinutesTransitionalTrainingPhaseTransitional,
+            ProfessionalQualificationCertificate,
+            MinutesTrainingAUTSMaintainCompetence,
+            CertificateCourseInstructorsWorkplaceOJTI,
+            MinutesVerifyingCompetenceWorkplace,
+            MinutesTheoreticalExamInitialTheoreticalTrainingBasicTraining,
+            MinutesTheoreticalExamAfterTheoreticalTrainingInstrumentATSAirport,
+            MinutesPracticalExamPhaseRating,
+            FeePaid
+        };
+
+        public static readonly AttachedDocumentKindNomenclature ValidLicenseDegreesDuplexCopy = new AttachedDocumentKindNomenclature { ResourceKey = "ValidLicenseDegreesDuplexCopy", Code = "471" };
+        public static readonly AttachedDocumentKindNomenclature CertificateCompletionBasicQualificationCourse = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateCompletionBasicQualificationCourse", Code = "472" };
+        public static readonly AttachedDocumentKindNomenclature ProtocolSuccessfullyPassedTheoreticalLevelA = new AttachedDocumentKindNomenclature { ResourceKey = "ProtocolSuccessfullyPassedTheoreticalLevelA", Code = "473" };
+        public static readonly AttachedDocumentKindNomenclature MinutesExaminationGradeB = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesExaminationGradeB", Code = "474" };
+        public static readonly AttachedDocumentKindNomenclature MinutesExaminationGradeC = new AttachedDocumentKindNomenclature { ResourceKey = "MinutesExaminationGradeC", Code = "474" };
+        public static readonly AttachedDocumentKindNomenclature ProtocolSuccessExaminationAdmissionIndependentWork = new AttachedDocumentKindNomenclature { ResourceKey = "ProtocolSuccessExaminationAdmissionIndependentWork", Code = "476" };
+        public static readonly AttachedDocumentKindNomenclature OrderCompletedGeneralIntegratedGradeA = new AttachedDocumentKindNomenclature { ResourceKey = "OrderCompletedGeneralIntegratedGradeA", Code = "477" };
+        public static readonly AttachedDocumentKindNomenclature OrderCompletedQualificationModularCourseGradeA = new AttachedDocumentKindNomenclature { ResourceKey = "OrderCompletedQualificationModularCourseGradeA", Code = "478" };
+        public static readonly AttachedDocumentKindNomenclature ProtocolCompletedQualificationModularCourseGradeB = new AttachedDocumentKindNomenclature { ResourceKey = "ProtocolCompletedQualificationModularCourseGradeB", Code = "479" };
+        public static readonly AttachedDocumentKindNomenclature ProtocolCompletedQualificationModularCourseGradeC = new AttachedDocumentKindNomenclature { ResourceKey = "ProtocolCompletedQualificationModularCourseGradeC", Code = "4710" };
+        public static readonly AttachedDocumentKindNomenclature CertificateEmployerExperience = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateEmployerExperience", Code = "4711" };
+        public static readonly AttachedDocumentKindNomenclature DocumentHeldPassInternshipANSP = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentHeldPassInternshipANSP", Code = "4712" };
+        public static readonly AttachedDocumentKindNomenclature DocumentsCertifyingPreviousExperienceQualifications = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentsCertifyingPreviousExperienceQualifications", Code = "4713" };
+
+        public static List<AttachedDocumentKindNomenclature> R5168Values = new List<AttachedDocumentKindNomenclature>
+        {
+            DyplomCopy,
+            ValidLicenseDegreesDuplexCopy,
+            MedicalCertificateAppropriateClassCopy,
+            IDCopy,
+            CertificateCompletionBasicQualificationCourse,
+            ProtocolSuccessfullyPassedTheoreticalLevelA,
+            MinutesExaminationGradeB,
+            MinutesExaminationGradeC,
+            ProtocolSuccessExaminationAdmissionIndependentWork,
+            ProtocolPassRefresherCourse,
+            OrderCompletedGeneralIntegratedGradeA,
+            OrderCompletedQualificationModularCourseGradeA,
+            ProtocolCompletedQualificationModularCourseGradeB,
+            ProtocolCompletedQualificationModularCourseGradeC,
+            CertificateEmployerExperience,
+            TechnicalCertifiedTraining,
+            DocumentHeldPassInternshipANSP,
+            DocumentsCertifyingPreviousExperienceQualifications,
+            FeePaid
+        };
+
+        public static readonly AttachedDocumentKindNomenclature TheoreticalTrainingCertificateATO = new AttachedDocumentKindNomenclature { ResourceKey = "TheoreticalTrainingCertificateATO", Code = "491" };
+        public static readonly AttachedDocumentKindNomenclature FlightTrainingCertificateATO = new AttachedDocumentKindNomenclature { ResourceKey = "FlightTrainingCertificateATO", Code = "492" };
+        public static readonly AttachedDocumentKindNomenclature FurtherTheoreticalTrainingAircraftTypeHPATestimonyATO = new AttachedDocumentKindNomenclature { ResourceKey = "FurtherTheoreticalTrainingAircraftTypeHPATestimonyATO", Code = "493" };
+        public static readonly AttachedDocumentKindNomenclature FlyingLicenseCopyRecentRecords = new AttachedDocumentKindNomenclature { ResourceKey = "FlyingLicenseCopyRecentRecords", Code = "494" };
+        public static readonly AttachedDocumentKindNomenclature CourseIASCertificateATO = new AttachedDocumentKindNomenclature { ResourceKey = "CourseIASCertificateATO", Code = "495" };
+        public static readonly AttachedDocumentKindNomenclature FlightTrainingAircraftTypeCertificateATO = new AttachedDocumentKindNomenclature { ResourceKey = "FlightTrainingAircraftTypeCertificateATO", Code = "496" };
+        public static readonly AttachedDocumentKindNomenclature PassingTheoreticalExamCAAIRATPLCopy = new AttachedDocumentKindNomenclature { ResourceKey = "PassingTheoreticalExamCAAIRATPLCopy", Code = "497" };
+        public static readonly AttachedDocumentKindNomenclature CertificateLanguageCompetenceCopy = new AttachedDocumentKindNomenclature { ResourceKey = "CertificateLanguageCompetenceCopy", Code = "498" };
+        public static readonly AttachedDocumentKindNomenclature PassingTtheoreticalExamATPLCopy = new AttachedDocumentKindNomenclature { ResourceKey = "PassingTtheoreticalExamATPLCopy", Code = "4910" };
+        public static readonly AttachedDocumentKindNomenclature CheckSkillsSkillTest = new AttachedDocumentKindNomenclature { ResourceKey = "CheckSkillsSkillTest", Code = "4911" };
+
+        public static List<AttachedDocumentKindNomenclature> R5178Values = new List<AttachedDocumentKindNomenclature>
+        {
+            TheoreticalTrainingCertificateATO,
+            FlightTrainingCertificateATO,
+            FurtherTheoreticalTrainingAircraftTypeHPATestimonyATO,
+            FlyingLicenseCopyRecentRecords,
+            CourseIASCertificateATO,
+            FlightTrainingAircraftTypeCertificateATO,
+            PassingTheoreticalExamCAAIRATPLCopy,
+            CertificateLanguageCompetenceCopy,
+            PassingTtheoreticalExamATPLCopy,
+            CheckSkillsSkillTest,
+            MedicalFitnessCopy,
+            CopyLicenseHeld,
+            FeePaidNonState
+        };
+
+
+        public static readonly AttachedDocumentKindNomenclature FlyingLicenseOriginalCAA = new AttachedDocumentKindNomenclature { ResourceKey = "FlyingLicenseOriginalCAA", Code = "501" };
+        public static readonly AttachedDocumentKindNomenclature RefresherCourseAtoCriTriCopy = new AttachedDocumentKindNomenclature { ResourceKey = "RefresherCourseAtoCriTriCopy", Code = "502" };
+        public static readonly AttachedDocumentKindNomenclature SkillTestCompetenceAssessmentCopy = new AttachedDocumentKindNomenclature { ResourceKey = "SkillTestCompetenceAssessmentCopy", Code = "503" };
+        public static readonly AttachedDocumentKindNomenclature EvidenceTrainingsCopies = new AttachedDocumentKindNomenclature { ResourceKey = "EvidenceTrainingsCopies", Code = "504" };
+        public static readonly AttachedDocumentKindNomenclature TechnicalLogBookFsTechnicalLogAircraftCopy = new AttachedDocumentKindNomenclature { ResourceKey = "TechnicalLogBookFsTechnicalLogAircraftCopy", Code = "505" };
+        public static readonly AttachedDocumentKindNomenclature ReportingExaminer = new AttachedDocumentKindNomenclature { ResourceKey = "ReportingExaminer", Code = "506" };
+        public static readonly AttachedDocumentKindNomenclature DocumentsRecoverAtoIfApplicableCopy = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentsRecoverAtoIfApplicableCopy", Code = "507" };
+
+        public static List<AttachedDocumentKindNomenclature> R5196Values = new List<AttachedDocumentKindNomenclature>
+        {
+            FlyingLicenseOriginalCAA,
+            RefresherCourseAtoCriTriCopy,
+            SkillTestCompetenceAssessmentCopy,
+            EvidenceTrainingsCopies,
+            TechnicalLogBookFsTechnicalLogAircraftCopy,
+            ReportingExaminer,
+            DocumentsRecoverAtoIfApplicableCopy,
+            FeePaidNonState,
+            MedicalFitnessCopy
+        };
+
+        public static List<AttachedDocumentKindNomenclature> R5218Values = new List<AttachedDocumentKindNomenclature>
+        {
+            ValidLicenseDegreesDuplexCopy,
+            TwoColorPhotographs,
+            MedicalCertificateAppropriateClassCopy,
+            DyplomCopies,
+            IDCopy,
+            ProtocolSuccessExaminationAdmissionIndependentWork,
+            TechnicalCertifiedTraining,
+            CertificateCompletionBasicQualificationCourse,
+            ProtocolSuccessfullyPassedTheoreticalLevelA,
+            MinutesExaminationGradeB,
+            MinutesExaminationGradeC,
+            ProtocolPassRefresherCourseTrainingOrganization,
+            OrderCompletedGeneralIntegratedGradeA,
+            OrderCompletedQualificationModularCourseGradeA,
+            ProtocolCompletedQualificationModularCourseGradeB,
+            ProtocolCompletedQualificationModularCourseGradeC,
+            CertificateEmployerExperience,
+            DocumentHeldPassInternshipANSP,
+            DocumentsCertifyingPreviousExperienceQualifications,
+            FeePaid
+        };
+
+        public static readonly AttachedDocumentKindNomenclature AttestationApplicationCopy = new AttachedDocumentKindNomenclature { ResourceKey = "AttestationApplicationCopy", Code = "521" };
+        public static readonly AttachedDocumentKindNomenclature TheoreticalTrainingCopies = new AttachedDocumentKindNomenclature { ResourceKey = "TheoreticalTrainingCopies", Code = "522" };
+        public static readonly AttachedDocumentKindNomenclature AssignmentsFlightsPracticalTrainingCheckingCopies = new AttachedDocumentKindNomenclature { ResourceKey = "AssignmentsFlightsPracticalTrainingCheckingCopies", Code = "523" };
+        public static readonly AttachedDocumentKindNomenclature RealityCheck = new AttachedDocumentKindNomenclature { ResourceKey = "RealityCheck", Code = "524" };
+
+        public static List<AttachedDocumentKindNomenclature> R5242Values = new List<AttachedDocumentKindNomenclature>
+        {
+            IdDocumentCopy,
+            AttestationApplicationCopy,
+            TheoreticalTrainingCopies,
+            AssignmentsFlightsPracticalTrainingCheckingCopies,
+            PracticalTrainingSingle,
+            FeePaidNonState,
+            RealityCheck,
+            MedicalFitnessCopy,
+            FlyingLicenseCopyEachClass
         };
 
         #endregion

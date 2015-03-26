@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +11,13 @@ namespace Rio.Objects.Enums
         {
             this.Values = new List<BaseNomenclature>()
             {
-                new BaseNomenclature("01","Òðàíñïîðò"),
-                new BaseNomenclature("02","Îêîëíà ñðåäà"),
-                new BaseNomenclature("03","Ðåãèîíàëíî ðàçâèòèå"),
-                new BaseNomenclature("04","Êîíêóðåíòîñïîñîáíîñò"),
-                new BaseNomenclature("05","Òåõíè÷åñêà ïîìîù"),
-                new BaseNomenclature("06","Ðàçâèòèå íà ÷îâåøêèòå ðåñóðñè"),
-                new BaseNomenclature("07","Àäìèíèñòðàòèâåí êàïàöèòåò")
+                new BaseNomenclature("01","Ð¢Ñ€Ð°Ð½ÑÐ¿Ð¾Ñ€Ñ‚"),
+                new BaseNomenclature("02","ÐžÐºÐ¾Ð»Ð½Ð° ÑÑ€ÐµÐ´Ð°"),
+                new BaseNomenclature("03","Ð ÐµÐ³Ð¸Ð¾Ð½Ð°Ð»Ð½Ð¾ Ñ€Ð°Ð·Ð²Ð¸Ñ‚Ð¸Ðµ"),
+                new BaseNomenclature("04","ÐšÐ¾Ð½ÐºÑƒÑ€ÐµÐ½Ñ‚Ð¾ÑÐ¿Ð¾ÑÐ¾Ð±Ð½Ð¾ÑÑ‚"),
+                new BaseNomenclature("05","Ð¢ÐµÑ…Ð½Ð¸Ñ‡ÐµÑÐºÐ° Ð¿Ð¾Ð¼Ð¾Ñ‰"),
+                new BaseNomenclature("06","Ð Ð°Ð·Ð²Ð¸Ñ‚Ð¸Ðµ Ð½Ð° Ñ‡Ð¾Ð²ÐµÑˆÐºÐ¸Ñ‚Ðµ Ñ€ÐµÑÑƒÑ€ÑÐ¸"),
+                new BaseNomenclature("07","ÐÐ´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ‚Ð¸Ð²ÐµÐ½ ÐºÐ°Ð¿Ð°Ñ†Ð¸Ñ‚ÐµÑ‚")
             }.OrderBy(e=>e.Text).ToList();
         }
     }

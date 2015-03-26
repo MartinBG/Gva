@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5188" xmlns="http://ereg.egov.bg/segment/R-5188" 
+		xmlns:iits="http://ereg.egov.bg/value/R-5182"
+		xmlns:acqc="http://ereg.egov.bg/segment/R-4056"
+		xmlns:fstd="http://ereg.egov.bg/value/R-4182"
+		xmlns:fste="http://ereg.egov.bg/segment/R-4180"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5182"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4056"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4182"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4180"/>
+
+	<xsd:complexType name="IRTypeCheck">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Вид IR и проверка към него</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="IsIRTypeSelected" type="iits:IsIRTypeSelected" minOccurs="0"/>
+			<xsd:element name="AircraftClassQualificationClass" type="acqc:AircraftClassQualificationClass" minOccurs="0"/>
+			<xsd:element name="FlightSkillTestDate" type="fstd:FlightSkillTestDate" minOccurs="0"/>
+			<xsd:element name="FlightSkillTestExaminer" type="fste:FlightSkillTestExaminer" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

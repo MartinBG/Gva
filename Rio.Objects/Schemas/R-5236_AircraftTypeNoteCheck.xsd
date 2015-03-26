@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5236" xmlns="http://ereg.egov.bg/segment/R-5236" 
+		xmlns:at="http://ereg.egov.bg/segment/R-4158"
+		xmlns:ncat="http://ereg.egov.bg/value/R-5234"
+		xmlns:fstd="http://ereg.egov.bg/value/R-4182"
+		xmlns:fste="http://ereg.egov.bg/segment/R-4180"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5234"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4182"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4180"/>
+
+	<xsd:complexType name="AircraftTypeNoteCheck">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Тип ВС, забележка и проверка</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0"/>
+			<xsd:element name="NotesCheckAircraftType" type="ncat:NotesCheckAircraftType" minOccurs="0"/>
+			<xsd:element name="FlightSkillTestDate" type="fstd:FlightSkillTestDate" minOccurs="0"/>
+			<xsd:element name="FlightSkillTestExaminer" type="fste:FlightSkillTestExaminer" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

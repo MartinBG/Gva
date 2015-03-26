@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,22 +7,22 @@ namespace Rio.Objects.Enums
 {
     public class TypeCheckingNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature Conv1 = new BaseNomenclature("01", "CONV1 Ръчен багаж и носени вещи от персонала", "", GroupTypeCheckingNomenclature.Conventional.Value);
-        public static readonly BaseNomenclature Conv2 = new BaseNomenclature("02", "CONV2 Регистриран багаж", "", GroupTypeCheckingNomenclature.Conventional.Value);
-        public static readonly BaseNomenclature Conv3 = new BaseNomenclature("03", "CONV3 Товари, поща и други стоки и материали", "", GroupTypeCheckingNomenclature.Conventional.Value);
-        public static readonly BaseNomenclature EDS = new BaseNomenclature("04", "EDS Проверка за сигурност на регистриран багаж чрез EDS", "", GroupTypeCheckingNomenclature.Conventional.Value);
+        public static readonly BaseNomenclature Conv1 = new BaseNomenclature("01", "CONV1 Р СЉС‡РµРЅ Р±Р°РіР°Р¶ Рё РЅРѕСЃРµРЅРё РІРµС‰Рё РѕС‚ РїРµСЂСЃРѕРЅР°Р»Р°", "", GroupTypeCheckingNomenclature.Conventional.Value);
+        public static readonly BaseNomenclature Conv2 = new BaseNomenclature("02", "CONV2 Р РµРіРёСЃС‚СЂРёСЂР°РЅ Р±Р°РіР°Р¶", "", GroupTypeCheckingNomenclature.Conventional.Value);
+        public static readonly BaseNomenclature Conv3 = new BaseNomenclature("03", "CONV3 РўРѕРІР°СЂРё, РїРѕС‰Р° Рё РґСЂСѓРіРё СЃС‚РѕРєРё Рё РјР°С‚РµСЂРёР°Р»Рё", "", GroupTypeCheckingNomenclature.Conventional.Value);
+        public static readonly BaseNomenclature EDS = new BaseNomenclature("04", "EDS РџСЂРѕРІРµСЂРєР° Р·Р° СЃРёРіСѓСЂРЅРѕСЃС‚ РЅР° СЂРµРіРёСЃС‚СЂРёСЂР°РЅ Р±Р°РіР°Р¶ С‡СЂРµР· EDS", "", GroupTypeCheckingNomenclature.Conventional.Value);
 
-        public static readonly BaseNomenclature HS1 = new BaseNomenclature("05", "HS1 Лица", "", GroupTypeCheckingNomenclature.Manual.Value);
-        public static readonly BaseNomenclature HS2 = new BaseNomenclature("06", "HS2 Ръчен багаж и носени вещи", "", GroupTypeCheckingNomenclature.Manual.Value);
-        public static readonly BaseNomenclature HS3 = new BaseNomenclature("07", "HS3 Регистриран багаж", "", GroupTypeCheckingNomenclature.Manual.Value);
+        public static readonly BaseNomenclature HS1 = new BaseNomenclature("05", "HS1 Р›РёС†Р°", "", GroupTypeCheckingNomenclature.Manual.Value);
+        public static readonly BaseNomenclature HS2 = new BaseNomenclature("06", "HS2 Р СЉС‡РµРЅ Р±Р°РіР°Р¶ Рё РЅРѕСЃРµРЅРё РІРµС‰Рё", "", GroupTypeCheckingNomenclature.Manual.Value);
+        public static readonly BaseNomenclature HS3 = new BaseNomenclature("07", "HS3 Р РµРіРёСЃС‚СЂРёСЂР°РЅ Р±Р°РіР°Р¶", "", GroupTypeCheckingNomenclature.Manual.Value);
 
-        public static readonly BaseNomenclature ETD1 = new BaseNomenclature("08", "ETD1 Ръчен и регистриран багаж", "", GroupTypeCheckingNomenclature.ETD.Value);
-        public static readonly BaseNomenclature ETD2 = new BaseNomenclature("09", "ETD2 Товари и поща", "", GroupTypeCheckingNomenclature.ETD.Value);
-        public static readonly BaseNomenclature VEH = new BaseNomenclature("10", "VEH Проверка на МПС", "", GroupTypeCheckingNomenclature.ETD.Value);
-        public static readonly BaseNomenclature SUB = new BaseNomenclature("11", "SUB Управление и контрол на служителите по сигурност", "", GroupTypeCheckingNomenclature.ETD.Value);
-        public static readonly BaseNomenclature AC = new BaseNomenclature("12", "AC Контрол на достъпа, наблюдение и патрулиране", "", GroupTypeCheckingNomenclature.ETD.Value);
+        public static readonly BaseNomenclature ETD1 = new BaseNomenclature("08", "ETD1 Р СЉС‡РµРЅ Рё СЂРµРіРёСЃС‚СЂРёСЂР°РЅ Р±Р°РіР°Р¶", "", GroupTypeCheckingNomenclature.ETD.Value);
+        public static readonly BaseNomenclature ETD2 = new BaseNomenclature("09", "ETD2 РўРѕРІР°СЂРё Рё РїРѕС‰Р°", "", GroupTypeCheckingNomenclature.ETD.Value);
+        public static readonly BaseNomenclature VEH = new BaseNomenclature("10", "VEH РџСЂРѕРІРµСЂРєР° РЅР° РњРџРЎ", "", GroupTypeCheckingNomenclature.ETD.Value);
+        public static readonly BaseNomenclature SUB = new BaseNomenclature("11", "SUB РЈРїСЂР°РІР»РµРЅРёРµ Рё РєРѕРЅС‚СЂРѕР» РЅР° СЃР»СѓР¶РёС‚РµР»РёС‚Рµ РїРѕ СЃРёРіСѓСЂРЅРѕСЃС‚", "", GroupTypeCheckingNomenclature.ETD.Value);
+        public static readonly BaseNomenclature AC = new BaseNomenclature("12", "AC РљРѕРЅС‚СЂРѕР» РЅР° РґРѕСЃС‚СЉРїР°, РЅР°Р±Р»СЋРґРµРЅРёРµ Рё РїР°С‚СЂСѓР»РёСЂР°РЅРµ", "", GroupTypeCheckingNomenclature.ETD.Value);
 
-        public static readonly BaseNomenclature INS = new BaseNomenclature("13", "INS Инструктор по авиационна сигурност", "", GroupTypeCheckingNomenclature.Instructors.Value);
+        public static readonly BaseNomenclature INS = new BaseNomenclature("13", "INS РРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ Р°РІРёР°С†РёРѕРЅРЅР° СЃРёРіСѓСЂРЅРѕСЃС‚", "", GroupTypeCheckingNomenclature.Instructors.Value);
 
         public TypeCheckingNomenclature()
         {

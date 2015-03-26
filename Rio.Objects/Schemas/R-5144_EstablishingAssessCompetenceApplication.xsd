@@ -2,11 +2,10 @@
 <xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5144"
 		xmlns="http://ereg.egov.bg/segment/R-5144"
 		xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
-		xmlns:act="http://ereg.egov.bg/segment/R-4048"
-		xmlns:acqc="http://ereg.egov.bg/segment/R-4056"
-		xmlns:ac="http://ereg.egov.bg/segment/R-4152"
+		xmlns:iats="http://ereg.egov.bg/value/R-5154"
+		xmlns:rt="http://ereg.egov.bg/segment/R-5152"
 		xmlns:at="http://ereg.egov.bg/segment/R-4158"
-		xmlns:fst="http://ereg.egov.bg/segment/R-4174"
+		xmlns:actfc="http://ereg.egov.bg/segment/R-5158"
 		xmlns:ea="http://ereg.egov.bg/value/R-5136"
 		xmlns:fcpd="http://ereg.egov.bg/segment/R-4012"
 		xmlns:clc="http://ereg.egov.bg/segment/R-5146"
@@ -18,11 +17,10 @@
 		elementFormDefault="qualified">
 
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
-	<xsd:import namespace="http://ereg.egov.bg/segment/R-4048"/>
-	<xsd:import namespace="http://ereg.egov.bg/segment/R-4056"/>
-	<xsd:import namespace="http://ereg.egov.bg/segment/R-4152"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5154"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5152"/>
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158"/>
-	<xsd:import namespace="http://ereg.egov.bg/segment/R-4174"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5158"/>
 	<xsd:import namespace="http://ereg.egov.bg/value/R-5136"/>
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4012"/>
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-5146"/>
@@ -42,14 +40,16 @@
 			<xsd:element name="ReasonForApplying" minOccurs="0">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="ASCertificateType" type="act:ASCertificateType" minOccurs="0"/>
-						<xsd:element name="AircraftClassQualificationClass" type="acqc:AircraftClassQualificationClass" minOccurs="0" maxOccurs="unbounded"/>
+						<xsd:element name="IsInitial" type="iats:IsApplicationTypeSelected" minOccurs="0"/>
+						<xsd:element name="IsConfirmation" type="iats:IsApplicationTypeSelected" minOccurs="0"/>
+						<xsd:element name="IsRenew" type="iats:IsApplicationTypeSelected" minOccurs="0"/>
+						<xsd:element name="IsExtend" type="iats:IsApplicationTypeSelected" minOccurs="0"/>
+						<xsd:element name="RightsType" type="rt:RightsType" minOccurs="0" maxOccurs="unbounded"/>
+						<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" maxOccurs="unbounded"/>
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="AircraftClass" type="ac:AircraftClass" minOccurs="0"/>
-			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0"/>
-			<xsd:element name="FlightSimulatorType" type="fst:FlightSimulatorType" minOccurs="0"/>
+			<xsd:element name="AircraftClassTypeFSTDsCollection" type="actfc:AircraftClassTypeFSTDsCollection" minOccurs="0"/>
 			<xsd:element name="ExplanationApplying" type="ea:ExplanationApplying" minOccurs="0"/>
 			<xsd:element name="FlightCrewPersonalData" type="fcpd:FlightCrewPersonalData" minOccurs="0"/>
 			<xsd:element name="InstructorCertificatedLicenses" type="clc:CertificatedLicensesCollection" minOccurs="0"/>

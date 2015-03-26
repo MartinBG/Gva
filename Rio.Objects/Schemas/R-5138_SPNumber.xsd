@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema targetNamespace="http://ereg.egov.bg/value/R-5138" xmlns="http://ereg.egov.bg/value/R-5138" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-  <xsd:simpleType name="InstructorRightsType">
+  <xsd:simpleType name="SPNumber">
     <xsd:annotation>
-      <xsd:documentation xml:lang="bg">Вид на права за инструктор</xsd:documentation>
+      <xsd:documentation xml:lang="bg">Номер на СП</xsd:documentation>
     </xsd:annotation>
     <xsd:restriction base="xsd:string">
       <xsd:minLength value="1" />

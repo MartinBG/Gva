@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ namespace Rio.Objects.Enums
 {
     public class AircraftClassQualificationClassNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature ClassAirplaneMultiplePistonEngines = new BaseNomenclature("ME-L", "Клас самолети с повече от един бутален двигател - кацащи и излитащи от земна повърхност", "");
+        public static readonly BaseNomenclature ClassAirplaneMultiplePistonEngines = new BaseNomenclature("ME-L", "РљР»Р°СЃ СЃР°РјРѕР»РµС‚Рё СЃ РїРѕРІРµС‡Рµ РѕС‚ РµРґРёРЅ Р±СѓС‚Р°Р»РµРЅ РґРІРёРіР°С‚РµР» - РєР°С†Р°С‰Рё Рё РёР·Р»РёС‚Р°С‰Рё РѕС‚ Р·РµРјРЅР° РїРѕРІСЉСЂС…РЅРѕСЃС‚", "");
         public static readonly BaseNomenclature MEPLand = new BaseNomenclature("MEP(land)", "MEP(land)", "");
         public static readonly BaseNomenclature MEPLandIR = new BaseNomenclature("MEP(land)/IR", "MEP(land)/IR", "");
         public static readonly BaseNomenclature MEPLandIRSP = new BaseNomenclature("MEP(land)/IR(SP)", "MEP(land)/IR(SP)", "");
@@ -23,23 +23,24 @@ namespace Rio.Objects.Enums
         public static readonly BaseNomenclature SnowAyrecSET = new BaseNomenclature("Snow/Ayrec SET", "Snow/Ayrec SET", "");
         public static readonly BaseNomenclature STAL = new BaseNomenclature("STA-L", "STA-L", "");
         public static readonly BaseNomenclature TMG = new BaseNomenclature("TMG", "TMG", "");
-        public static readonly BaseNomenclature UltralightAircrafts = new BaseNomenclature("ULA", "Свръхлеки самолети", "");
-        public static readonly BaseNomenclature VeryLightAircrafts = new BaseNomenclature("VLA", "Много леки самолети", "");
+        public static readonly BaseNomenclature UltralightAircrafts = new BaseNomenclature("ULA", "РЎРІСЂСЉС…Р»РµРєРё СЃР°РјРѕР»РµС‚Рё", "");
+        public static readonly BaseNomenclature VeryLightAircrafts = new BaseNomenclature("VLA", "РњРЅРѕРіРѕ Р»РµРєРё СЃР°РјРѕР»РµС‚Рё", "");
 
         public List<BaseNomenclature> InstructorValues;
 
-        public static readonly BaseNomenclature FE = new BaseNomenclature("FE", "FE");
-        public static readonly BaseNomenclature TRE = new BaseNomenclature("TRE", "TRE");
-        public static readonly BaseNomenclature CRE = new BaseNomenclature("CRE", "CRE");
-        public static readonly BaseNomenclature IRE = new BaseNomenclature("IRE", "IRE");
-        public static readonly BaseNomenclature SFE = new BaseNomenclature("SFE", "SFE");
-        public static readonly BaseNomenclature FIE = new BaseNomenclature("FIE", "FIE");
         public static readonly BaseNomenclature A = new BaseNomenclature("A", "A");
         public static readonly BaseNomenclature H = new BaseNomenclature("H", "H");
         public static readonly BaseNomenclature PL = new BaseNomenclature("PL", "PL");
         public static readonly BaseNomenclature As = new BaseNomenclature("As", "As");
         public static readonly BaseNomenclature B = new BaseNomenclature("B", "B");
         public static readonly BaseNomenclature S = new BaseNomenclature("S", "S");
+
+        public static List<BaseNomenclature> R5196Values = new List<BaseNomenclature>()
+        {
+            A,
+            H,
+            As
+        };
 
         public AircraftClassQualificationClassNomenclature()
         {
@@ -67,12 +68,6 @@ namespace Rio.Objects.Enums
 
             this.InstructorValues = new List<BaseNomenclature>()
             {
-                FE,
-                TRE,
-                CRE,
-                IRE,
-                SFE,
-                FIE,
                 A,
                 H,
                 PL,

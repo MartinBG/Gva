@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ namespace Rio.Objects.Enums
 {
     public class AviationAdministrationNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature BG = new BaseNomenclature("BG", "ГЛАВНА ДИРЕКЦИЯ ГРАЖДАНСКА ВЪЗДУХОПЛАВАТЕЛНА АДМИНИСТРАЦИЯ", "");
+        public static readonly BaseNomenclature BG = new BaseNomenclature("BG", "Р“Р›РђР’РќРђ Р”РР Р•РљР¦РРЇ Р“Р РђР–Р”РђРќРЎРљРђ Р’РЄР—Р”РЈРҐРћРџР›РђР’РђРўР•Р›РќРђ РђР”РњРРќРРЎРўР РђР¦РРЇ", "");
         public static readonly BaseNomenclature A = new BaseNomenclature("A", "Austria", "");
         public static readonly BaseNomenclature B = new BaseNomenclature("B", "Belgium", "");
         public static readonly BaseNomenclature CY = new BaseNomenclature("CY", "Cyprus", "");
@@ -50,13 +50,13 @@ namespace Rio.Objects.Enums
         public static readonly BaseNomenclature CADCan = new BaseNomenclature("CAD", "Civil Aviation Department", "");
         public static readonly BaseNomenclature CA = new BaseNomenclature("CA", "Canada", "");
         public static readonly BaseNomenclature DGCA = new BaseNomenclature("DGCA", "DGCA", "");
-        public static readonly BaseNomenclature RU = new BaseNomenclature("RU", "Федерална агенция за въздушен траспорт", "");
-        public static readonly BaseNomenclature CAAC = new BaseNomenclature("CAAC", "Гражданска въздухоплавателна администрация Китай", "");
+        public static readonly BaseNomenclature RU = new BaseNomenclature("RU", "Р¤РµРґРµСЂР°Р»РЅР° Р°РіРµРЅС†РёСЏ Р·Р° РІСЉР·РґСѓС€РµРЅ С‚СЂР°СЃРїРѕСЂС‚", "");
+        public static readonly BaseNomenclature CAAC = new BaseNomenclature("CAAC", "Р“СЂР°Р¶РґР°РЅСЃРєР° РІСЉР·РґСѓС…РѕРїР»Р°РІР°С‚РµР»РЅР° Р°РґРјРёРЅРёСЃС‚СЂР°С†РёСЏ РљРёС‚Р°Р№", "");
         public static readonly BaseNomenclature MNE = new BaseNomenclature("MNE", "Civil Aviation Agency-Montenegro", "");
         public static readonly BaseNomenclature NCAA = new BaseNomenclature("NCAA", "NCAA of Brazil", "");
         public static readonly BaseNomenclature CAA = new BaseNomenclature("CAA", "Eritrea's Civil Aviation Authority", "");
         public static readonly BaseNomenclature DCA = new BaseNomenclature("DCA", "Department of Civil Aviation, Myanmar", "");
-        public static readonly BaseNomenclature CAAV = new BaseNomenclature("CAAV", "Глажданска въздухоплавателна администрация Виетнам", "");
+        public static readonly BaseNomenclature CAAV = new BaseNomenclature("CAAV", "Р“Р»Р°Р¶РґР°РЅСЃРєР° РІСЉР·РґСѓС…РѕРїР»Р°РІР°С‚РµР»РЅР° Р°РґРјРёРЅРёСЃС‚СЂР°С†РёСЏ Р’РёРµС‚РЅР°Рј", "");
         public static readonly BaseNomenclature LCAA = new BaseNomenclature("LCAA", "Lithuania Civil Aviation Administration", "");
 
         public AviationAdministrationNomenclature()

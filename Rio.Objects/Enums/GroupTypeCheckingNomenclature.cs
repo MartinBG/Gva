@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +7,10 @@ namespace Rio.Objects.Enums
 {
     public class GroupTypeCheckingNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature Conventional = new BaseNomenclature("01", "Проверка с конвенционален рентген");
-        public static readonly BaseNomenclature Manual = new BaseNomenclature("02", "Ръчна проверка");
-        public static readonly BaseNomenclature ETD = new BaseNomenclature("03", "Проверка за сигурност чрез ETD");
-        public static readonly BaseNomenclature Instructors = new BaseNomenclature("04", "Инструктори");
+        public static readonly BaseNomenclature Conventional = new BaseNomenclature("01", "РџСЂРѕРІРµСЂРєР° СЃ РєРѕРЅРІРµРЅС†РёРѕРЅР°Р»РµРЅ СЂРµРЅС‚РіРµРЅ");
+        public static readonly BaseNomenclature Manual = new BaseNomenclature("02", "Р СЉС‡РЅР° РїСЂРѕРІРµСЂРєР°");
+        public static readonly BaseNomenclature ETD = new BaseNomenclature("03", "РџСЂРѕРІРµСЂРєР° Р·Р° СЃРёРіСѓСЂРЅРѕСЃС‚ С‡СЂРµР· ETD");
+        public static readonly BaseNomenclature Instructors = new BaseNomenclature("04", "РРЅСЃС‚СЂСѓРєС‚РѕСЂРё");
 
         public GroupTypeCheckingNomenclature()
         {

@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,16 +7,16 @@ namespace Rio.Objects.Enums
 {
     public class CategoryAircraftNomenclature : BaseNomenclature
     {
-        public static readonly BaseNomenclature LargeAero = new BaseNomenclature("A1", "Самолет с тегло 5,700 кг или повече", "");
-        public static readonly BaseNomenclature SmallAero = new BaseNomenclature("A2", "Самолет с тегло до 5,700 кг", "");
-        public static readonly BaseNomenclature LargeRotor = new BaseNomenclature("A3", "Хеликоптер с тегло 3,750 кг или повече", "");
-        public static readonly BaseNomenclature SmallRotor = new BaseNomenclature("A4", "Хеликоптер с тегло до 3,750 кг", "");
-        public static readonly BaseNomenclature LightAero = new BaseNomenclature("VA", "Свръх лек самолет", "");
-        public static readonly BaseNomenclature LightRotor = new BaseNomenclature("VH", "Свръх лек хеликоптер", "");
-        public static readonly BaseNomenclature Motor = new BaseNomenclature("VM", "Мотоделтапланер", "");
-        public static readonly BaseNomenclature Glider = new BaseNomenclature("VN", "Безмоторен планер", "");
-        public static readonly BaseNomenclature Balloon = new BaseNomenclature("FB", "Свободен балон", "");
-        public static readonly BaseNomenclature Experiment = new BaseNomenclature("EX", "Експериментален", "");
+        public static readonly BaseNomenclature LargeAero = new BaseNomenclature("A1", "РЎР°РјРѕР»РµС‚ СЃ С‚РµРіР»Рѕ 5,700 РєРі РёР»Рё РїРѕРІРµС‡Рµ", "");
+        public static readonly BaseNomenclature SmallAero = new BaseNomenclature("A2", "РЎР°РјРѕР»РµС‚ СЃ С‚РµРіР»Рѕ РґРѕ 5,700 РєРі", "");
+        public static readonly BaseNomenclature LargeRotor = new BaseNomenclature("A3", "РҐРµР»РёРєРѕРїС‚РµСЂ СЃ С‚РµРіР»Рѕ 3,750 РєРі РёР»Рё РїРѕРІРµС‡Рµ", "");
+        public static readonly BaseNomenclature SmallRotor = new BaseNomenclature("A4", "РҐРµР»РёРєРѕРїС‚РµСЂ СЃ С‚РµРіР»Рѕ РґРѕ 3,750 РєРі", "");
+        public static readonly BaseNomenclature LightAero = new BaseNomenclature("VA", "РЎРІСЂСЉС… Р»РµРє СЃР°РјРѕР»РµС‚", "");
+        public static readonly BaseNomenclature LightRotor = new BaseNomenclature("VH", "РЎРІСЂСЉС… Р»РµРє С…РµР»РёРєРѕРїС‚РµСЂ", "");
+        public static readonly BaseNomenclature Motor = new BaseNomenclature("VM", "РњРѕС‚РѕРґРµР»С‚Р°РїР»Р°РЅРµСЂ", "");
+        public static readonly BaseNomenclature Glider = new BaseNomenclature("VN", "Р‘РµР·РјРѕС‚РѕСЂРµРЅ РїР»Р°РЅРµСЂ", "");
+        public static readonly BaseNomenclature Balloon = new BaseNomenclature("FB", "РЎРІРѕР±РѕРґРµРЅ Р±Р°Р»РѕРЅ", "");
+        public static readonly BaseNomenclature Experiment = new BaseNomenclature("EX", "Р•РєСЃРїРµСЂРёРјРµРЅС‚Р°Р»РµРЅ", "");
 
         public CategoryAircraftNomenclature()
         {

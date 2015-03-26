@@ -90,11 +90,6 @@ namespace R_4400
 		public string FlightCertificateNumber { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="FlightCertificateCertificationTableNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string FlightCertificateCertificationTableNumber { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="SeatsCount",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="integer",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public string SeatsCount { get; set; }

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5250"
+		xmlns="http://ereg.egov.bg/segment/R-5250"
+		xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
+		xmlns:fcpd="http://ereg.egov.bg/segment/R-4012"
+		xmlns:ada="http://ereg.egov.bg/segment/R-5230"
+		xmlns:tcr="http://ereg.egov.bg/value/R-5162"
+		xmlns:iats="http://ereg.egov.bg/value/R-5232"
+		xmlns:atnc="http://ereg.egov.bg/segment/R-5238"
+		xmlns:pkrr="http://ereg.egov.bg/value/R-5240"
+		xmlns:add="http://ereg.egov.bg/segment/R-3994"
+		xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
+		xmlns:cres="http://ereg.egov.bg/value/R-4016"
+		xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
+		xmlns:easf="http://ereg.egov.bg/segment/0009-000153"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4012"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5230"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5162"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5232"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5238"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5240"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4016"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000153"/>
+
+
+	<xsd:element name="ConfirmationRatingCrewApplication" type="ConfirmationRatingCrewApplication"/>
+	<xsd:complexType name="ConfirmationRatingCrewApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Заявление за потвърждаване на квалификационен клас на членове на екипажа</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
+			<xsd:element name="FlightCrewPersonalData" type="fcpd:FlightCrewPersonalData" minOccurs="0"/>
+			<xsd:element name="AttestationData" type="ada:AttestationData" minOccurs="0"/>
+			<xsd:element name="TypeConfirmedRecovery" type="tcr:TypeConfirmedRecovery" minOccurs="0"/>
+			<xsd:element name="IsAircraftTypeSelected" type="iats:IsAircraftTypeSelected" minOccurs="0"/>
+			<xsd:element name="AircraftTypeNoteChecks" type="atnc:AircraftTypeNoteChecks" minOccurs="0"/>
+			<xsd:element name="PersonKindRecordRating" type="pkrr:PersonKindRecordRating" minOccurs="0"/>
+			<xsd:element name="PersonKindAircraftTypeNoteChecks" type="atnc:AircraftTypeNoteChecks" minOccurs="0"/>
+			<xsd:element name="AttachedDocumentDatasCollection" type="add:AttachedDocumentDatasCollection" minOccurs="0" />	
+			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
+			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0"/>
+			<xsd:element name="AttachedDocuments" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AttachedDocument" type="ad:AttachedDocument"  maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ElectronicAdministrativeServiceFooter" type="easf:ElectronicAdministrativeServiceFooter" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

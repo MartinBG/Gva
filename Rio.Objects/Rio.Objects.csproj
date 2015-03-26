@@ -1196,11 +1196,63 @@
     <Compile Include="Classes\R-5132_ApprovalPartMSubpartGApplication.cs" />
     <Compile Include="Classes\R-5134_ChangeCompetentAuthorityLicensePilotAccordanceLicenseApplication.cs" />
     <Compile Include="Classes\R-5136_ExplanationApplying.cs" />
-    <Compile Include="Classes\R-5138_InstructorRightsType.cs" />
+    <Compile Include="Classes\R-5138_SPNumber.cs" />
     <Compile Include="Classes\R-5140_LicenseLimitation.cs" />
     <Compile Include="Classes\R-5142_CertificatedLicense.cs" />
     <Compile Include="Classes\R-5144_EstablishingAssessCompetenceApplication.cs" />
     <Compile Include="Classes\R-5146_CertificatedLicensesCollection.cs" />
+    <Compile Include="Classes\R-5148_RightsTypeCode.cs" />
+    <Compile Include="Classes\R-5150_RightsTypeName.cs" />
+    <Compile Include="Classes\R-5152_RightsType.cs" />
+    <Compile Include="Classes\R-5154_IsApplicationTypeSelected.cs" />
+    <Compile Include="Classes\R-5156_AircraftClassTypeFSTD.cs" />
+    <Compile Include="Classes\R-5158_AircraftClassTypeFSTDsCollection.cs" />
+    <Compile Include="Classes\R-5160_RegistrationRatingAuthorizationLicenseApplication.cs" />
+    <Compile Include="Classes\R-5162_TypeConfirmedRecovery.cs" />
+    <Compile Include="Classes\R-5164_ConfirmationRecoveryRatingLicenseApplication.cs" />
+    <Compile Include="Classes\R-5166_ReplacingLicenseFlightsCoordinatorsApplication.cs" />
+    <Compile Include="Classes\R-5168_EntryRatingAuthorizationLicenseEngineeringTechnicalStaffEngagedMaintenanceFundsManagementApplication.cs" />
+    <Compile Include="Classes\R-5170_ConfirmationRecoveryRatingLicenseEngineeringTechnicalStaffMaintenanceFundsManagementApplication.cs" />
+    <Compile Include="Classes\R-5172_AdditionalQualificationCode.cs" />
+    <Compile Include="Classes\R-5174_AdditionalQualificationName.cs" />
+    <Compile Include="Classes\R-5176_AdditionalQualification.cs" />
+    <Compile Include="Classes\R-5178_RegistrationRatingTypeClassAircraftIFRPilotLicensePilotPartFCLApplication.cs" />
+    <Compile Include="Classes\R-5180_MannerSpecifiedExpiredValidity.cs" />
+    <Compile Include="Classes\R-5182_IsIRTypeSelected.cs" />
+    <Compile Include="Classes\R-5184_AircraftClassTypeCheck.cs" />
+    <Compile Include="Classes\R-5186_AircraftClassTypeChecks.cs" />
+    <Compile Include="Classes\R-5188_IRTypeCheck.cs" />
+    <Compile Include="Classes\R-5190_IRTypeChecks.cs" />
+    <Compile Include="Classes\R-5192_RightTypeCheck.cs" />
+    <Compile Include="Classes\R-5194_RightTypeChecks.cs" />
+    <Compile Include="Classes\R-5196_ConfirmationRecoveryRatingLicensePilotApplication.cs" />
+    <Compile Include="Classes\R-5198_LicenseDegree.cs" />
+    <Compile Include="Classes\R-5200_LicenseChangeTypeCode.cs" />
+    <Compile Include="Classes\R-5202_LicenseChangeTypeName.cs" />
+    <Compile Include="Classes\R-5204_LicenseChangeType.cs" />
+    <Compile Include="Classes\R-5206_ChangeLicenseRestrictionsDescription.cs" />
+    <Compile Include="Classes\R-5208_LicenseRestrictionCode.cs" />
+    <Compile Include="Classes\R-5210_LicenseRestrictionName.cs" />
+    <Compile Include="Classes\R-5212_LicenseRestriction.cs" />
+    <Compile Include="Classes\R-5214_RemovedLicenseRestriction.cs" />
+    <Compile Include="Classes\R-5216_RemovedLicensesRestrictions.cs" />
+    <Compile Include="Classes\R-5218_ReplacementRemovalRestrictionsLicenseManagementApplication.cs" />
+    <Compile Include="Classes\R-5220_AttestationNumber.cs" />
+    <Compile Include="Classes\R-5222_AttestationIssueDate.cs" />
+    <Compile Include="Classes\R-5224_IssueAttestationCode.cs" />
+    <Compile Include="Classes\R-5226_IssueAttestationName.cs" />
+    <Compile Include="Classes\R-5228_IssueAttestation.cs" />
+    <Compile Include="Classes\R-5230_AttestationData.cs" />
+    <Compile Include="Classes\R-5232_IsAircraftTypeSelected.cs" />
+    <Compile Include="Classes\R-5234_NotesCheckAircraftType.cs" />
+    <Compile Include="Classes\R-5236_AircraftTypeNoteCheck.cs" />
+    <Compile Include="Classes\R-5238_AircraftTypeNoteChecks.cs" />
+    <Compile Include="Classes\R-5240_PersonKindRecordRating.cs" />
+    <Compile Include="Classes\R-5242_RegistrationTrainingAircraftTypePermissionStewardHostessApplication.cs" />
+    <Compile Include="Classes\R-5244_ConfirmationRecoveryTrainingAircraftTypePermissionStewardHostessApplication.cs" />
+    <Compile Include="Classes\R-5246_ConfirmationConversionPursuantLicensePilotIssuedApplication.cs" />
+    <Compile Include="Classes\R-5248_RegistrationAircraftTypePermissionFlightCrewApplication.cs" />
+    <Compile Include="Classes\R-5250_ConfirmationRatingCrewApplication.cs" />
     <Compile Include="Classes\R-6002_RecipientNoIdentification.cs" />
     <Compile Include="Classes\R-6004_AuthorNoIdentification.cs" />
     <Compile Include="Classes\R-6006_HeaderNoIdentification.cs" />
@@ -1365,6 +1417,10 @@
     <Compile Include="Enums\App_LocalResources\FSTDRentFormNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\LeaseTypeNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\LeaseTypeNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\LicenseChangeTypeNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\LicenseChangeTypeNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\MannerSpecifiedExpiredValidityNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\MannerSpecifiedExpiredValidityNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\MonitoredRadioequipmentNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\MonitoredRadioequipmentNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\NewUsedNomenclature.Designer.cs" />
@@ -1381,6 +1437,8 @@
     <Compile Include="Enums\App_LocalResources\OrganizationalFormNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\OrganizationKindNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\OrganizationKindNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\PersonKindRecordRatingNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\PersonKindRecordRatingNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\PlannedScopeNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\PlannedScopeNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\ProvidedOperationTypesNomenclature.Designer.cs" />
@@ -1532,6 +1590,8 @@
     <Compile Include="Enums\LECNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\LicenseChangeTypeNomenclature.cs" />
+    <Compile Include="Enums\MannerSpecifiedExpiredValidityNomenclature.cs" />
     <Compile Include="Enums\MonitoredRadioequipmentNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1575,6 +1635,7 @@
     <Compile Include="Enums\PermissionNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\PersonKindRecordRatingNomenclature.cs" />
     <Compile Include="Enums\PersonRepresentingTradingCompanyRoleNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1608,6 +1669,7 @@
     <Compile Include="Enums\RecognitionNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\RightsTypeNomenclature.cs" />
     <Compile Include="Enums\ScopeServiceConditionsNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1646,6 +1708,7 @@
     <Compile Include="Enums\TypeOfObjectNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\ValidationRecoveryNomenclature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RioDocumentMetadata.cs" />
   </ItemGroup>
@@ -5133,7 +5196,7 @@
     <None Include="Schemas\R-5136_ExplanationApplying.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Schemas\R-5138_InstructorRightsType.xsd">
+    <None Include="Schemas\R-5138_SPNumber.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\R-5140_LicenseLimitation.xsd">
@@ -5146,6 +5209,162 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\R-5146_CertificatedLicensesCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5148_RightsTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5150_RightsTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5152_RightsType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5154_IsApplicationTypeSelected.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5156_AircraftClassTypeFSTD.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5158_AircraftClassTypeFSTDsCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5160_RegistrationRatingAuthorizationLicenseApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5162_TypeConfirmedRecovery.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5164_ConfirmationRecoveryRatingLicenseApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5166_ReplacingLicenseFlightsCoordinatorsApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5168_EntryRatingAuthorizationLicenseEngineeringTechnicalStaffEngagedMaintenanceFundsManagementApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5170_ConfirmationRecoveryRatingLicenseEngineeringTechnicalStaffMaintenanceFundsManagementApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5172_AdditionalQualificationCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5174_AdditionalQualificationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5176_AdditionalQualification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5178_RegistrationRatingTypeClassAircraftIFRPilotLicensePilotPartFCLApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5180_MannerSpecifiedExpiredValidity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5182_IsIRTypeSelected.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5184_AircraftClassTypeCheck.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5186_AircraftClassTypeChecks.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5188_IRTypeCheck.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5190_IRTypeChecks.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5192_RightTypeCheck.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5194_RightTypeChecks.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5196_ConfirmationRecoveryRatingLicensePilotApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5198_LicenseDegree.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5200_LicenseChangeTypeCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5202_LicenseChangeTypeName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5204_LicenseChangeType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5206_ChangeLicenseRestrictionsDescription.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5208_LicenseRestrictionCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5210_LicenseRestrictionName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5212_LicenseRestriction.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5214_RemovedLicenseRestriction.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5216_RemovedLicensesRestrictions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5218_ReplacementRemovalRestrictionsLicenseManagementApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5220_AttestationNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5222_AttestationIssueDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5224_IssueAttestationCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5226_IssueAttestationName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5228_IssueAttestation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5230_AttestationData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5232_IsAircraftTypeSelected.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5234_NotesCheckAircraftType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5236_AircraftTypeNoteCheck.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5238_AircraftTypeNoteChecks.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5240_PersonKindRecordRating.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5242_RegistrationTrainingAircraftTypePermissionStewardHostessApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5244_ConfirmationRecoveryTrainingAircraftTypePermissionStewardHostessApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5246_ConfirmationConversionPursuantLicensePilotIssuedApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5248_RegistrationAircraftTypePermissionFlightCrewApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5250_ConfirmationRatingCrewApplication.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Schemas\R-6002_RecipientNoIdentification.xsd">
@@ -5422,6 +5641,10 @@
     <EmbeddedResource Include="Enums\App_LocalResources\FSTDRentFormNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\LeaseTypeNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\LeaseTypeNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\LicenseChangeTypeNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\LicenseChangeTypeNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\MannerSpecifiedExpiredValidityNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\MannerSpecifiedExpiredValidityNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\MonitoredRadioequipmentNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\MonitoredRadioequipmentNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\NewUsedNomenclature.en.resx" />
@@ -5438,6 +5661,8 @@
     <EmbeddedResource Include="Enums\App_LocalResources\OrganizationalFormNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\OrganizationKindNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\OrganizationKindNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\PersonKindRecordRatingNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\PersonKindRecordRatingNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\PlannedScopeNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\PlannedScopeNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\ProvidedOperationTypesNomenclature.en.resx" />

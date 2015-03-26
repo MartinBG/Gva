@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5194" xmlns="http://ereg.egov.bg/segment/R-5194" 
+		xmlns:rtc="http://ereg.egov.bg/segment/R-5192"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5192"/>
+
+	<xsd:complexType name="RightTypeChecks">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Видове права и проверки към тях</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="RightTypeCheck" type="rtc:RightTypeCheck" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
