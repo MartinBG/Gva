@@ -27,6 +27,7 @@ using Gva.Api.ModelsDO.Applications;
 using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.DataObjects;
 using Regs.Api.LotEvents;
+using Gva.Api.Repositories.IntegrationRepository;
 
 namespace Gva.Api.Controllers.Integration
 {
@@ -40,7 +41,7 @@ namespace Gva.Api.Controllers.Integration
         private IApplicationRepository applicationRepository;
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
-        private ICorrespondentRepository correspondentRepository;
+        private IIntegrationRepository integrationRepository;
         private IRioDocumentParser rioDocumentParser;
         private IRioObjectExtractor rioObjectExtractor;
         private UserContext userContext;
@@ -60,7 +61,7 @@ namespace Gva.Api.Controllers.Integration
             IPersonRepository personRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
-            ICorrespondentRepository correspondentRepository,
+            IIntegrationRepository integrationRepository,
             INomRepository nomRepository,
             IRioDocumentParser rioDocumentParser,
             IRioObjectExtractor rioObjectExtractor,
@@ -72,8 +73,8 @@ namespace Gva.Api.Controllers.Integration
             this.lotRepository = lotRepository;
             this.personRepository = personRepository;
             this.applicationRepository = applicationRepository;
+            this.integrationRepository = integrationRepository;
             this.caseTypeRepository = caseTypeRepository;
-            this.correspondentRepository = correspondentRepository;
             this.nomRepository = nomRepository;
             this.rioDocumentParser = rioDocumentParser;
             this.rioObjectExtractor = rioObjectExtractor;
@@ -198,7 +199,6 @@ namespace Gva.Api.Controllers.Integration
 
                         }
 
-
                     }
                 }
             }
@@ -218,39 +218,20 @@ namespace Gva.Api.Controllers.Integration
                     d => d.DocFiles.Select(df => df.DocFileOriginType));
 
                 var lot = this.lotRepository.GetLotIndex(newAppDO.LotId);
-                PersonDataDO personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
 
-                
-                string personNames = string.Format("{0} {1} {2}", personData.FirstName, personData.MiddleName, personData.LastName);
-                List<Correspondent> correspondents = this.correspondentRepository.GetCorrespondents(personNames, personData.Email, 10, 0);
-                List<int> correspondentIds = correspondents.Select(c => c.CorrespondentId).ToList() ?? new List<int>();
-                if (correspondentIds.Count() == 0)
+                PersonDataDO personData = null;
+                List<string> lotCaseTypes = null;
+                List<int> correspondentIds = null;
+
+                if (lot.Set.Alias == "Person")
                 {
-                    CorrespondentDO correspondent = this.correspondentRepository.GetNewCorrespondent();
-                    if (lot.Set.Alias == "Person")
-                    {
-                        if (personData.Country.Code == "BG")
-                        {
-                            correspondent.BgCitizenFirstName = personData.FirstName;
-                            correspondent.BgCitizenLastName = personData.LastName;
-                            correspondent.BgCitizenUIN = personData.Uin;
-
-                        }
-                        else
-                        {
-                            correspondent.ForeignerFirstName = personData.FirstName;
-                            correspondent.ForeignerLastName = personData.LastName;
-                        }
-
-                        correspondent.Email = personData.Email;
-                    }
-                    CorrespondentDO corr = this.correspondentRepository.CreateCorrespondent(correspondent, this.userContext);
-                    correspondentIds.Add(corr.CorrespondentId.Value);
+                    personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+                    lotCaseTypes = personData.CaseTypes.Select(c => c.Alias).ToList();
+                    correspondentIds = this.integrationRepository.GetCorrespondentIdsPerPersonLot(personData, lot, this.userContext);
                 }
 
                 int? caseTypeId = null;
-                List<string> personCaseTypes = personData.CaseTypes.Select(c => c.Alias).ToList();
-                var caseType = newAppDO.CaseTypes.Where(a => personCaseTypes.Any(c => c == a.Alias)).FirstOrDefault();
+                var caseType = newAppDO.CaseTypes.Where(a => lotCaseTypes.Any(c => c == a.Alias)).FirstOrDefault();
                 if(caseType != null)
                 {
                     caseTypeId = caseType.GvaCaseTypeId;
@@ -258,21 +239,10 @@ namespace Gva.Api.Controllers.Integration
                 else
                 {
                     var firstAppCaseTypes = newAppDO.CaseTypes.First();
-                    NomValue caseTypeNom = new NomValue()
+                    if (lot.Set.Alias == "Person")
                     {
-                        NomValueId = firstAppCaseTypes.GvaCaseTypeId,
-                        Name = firstAppCaseTypes.Name,
-                        Alias = firstAppCaseTypes.Alias
-                    };
-
-                    //update person data part
-                    personData.CaseTypes.Add(caseTypeNom);
-                    this.caseTypeRepository.AddCaseTypes(lot, personData.CaseTypes.Select(ct => ct.NomValueId));
-                    var personDataPart = lot.UpdatePart("personData", personData, this.userContext);
-                    lot.Commit(this.userContext, this.lotEventDispatcher);
-                    this.unitOfWork.Save();
-                    this.lotRepository.ExecSpSetLotPartTokens(personDataPart.PartId);
-
+                        this.integrationRepository.UpdatePersonDataCaseTypes(firstAppCaseTypes, personData, lot, this.userContext);
+                    }
                     caseTypeId = firstAppCaseTypes.GvaCaseTypeId;
                  }
 
@@ -292,6 +262,5 @@ namespace Gva.Api.Controllers.Integration
                 return newAppMainData;
             }
         }
-
     }
 }

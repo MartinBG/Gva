@@ -440,6 +440,8 @@
     <Compile Include="Repositories\AirportRepository\IAirportRepository.cs" />
     <Compile Include="Repositories\ExaminationSystemRepository\IExaminationSystemRepository.cs" />
     <Compile Include="Repositories\ExaminationSystemRepository\ExaminationSystemRepository.cs" />
+    <Compile Include="Repositories\IntegrationRepository\IntegrationRepository.cs" />
+    <Compile Include="Repositories\IntegrationRepository\IIntegrationRepository.cs" />
     <Compile Include="Repositories\PrintRepository\IPrintRepository.cs" />
     <Compile Include="Repositories\PrintRepository\PrintRepository.cs" />
     <Compile Include="Repositories\PublisherRepository\IPublisherRepository.cs" />

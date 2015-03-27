@@ -28,6 +28,7 @@ using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.EquipmentRepository;
 using Gva.Api.Repositories.ExaminationSystemRepository;
 using Gva.Api.Repositories.FileRepository;
+using Gva.Api.Repositories.IntegrationRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
@@ -132,6 +133,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PublisherRepository>().As<IPublisherRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<StageRepository>().As<IStageRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ApplicationStageRepository>().As<IApplicationStageRepository>().InstancePerLifetimeScope();
+
+            moduleBuilder.RegisterType<IntegrationRepository>().As<IIntegrationRepository>().InstancePerLifetimeScope();
 
             moduleBuilder.RegisterType<IntegrationController>().InstancePerLifetimeScope();
 
