@@ -21,8 +21,6 @@
       names: null
     };
 
-    $scope.newLot = {};
-
     _.forOwn($stateParams, function (value, param) {
       if (value !== null && value !== undefined) {
         $scope.filters[param] = value;
@@ -47,6 +45,7 @@
 
     $scope.wrapper = {};
     $scope.form = {};
+    $scope.newLot = {};
 
     $scope.currentTab = 'chooseApp';
     $scope.selectOptions = {
@@ -70,7 +69,7 @@
         $scope.wrapper.selectedApp = null;
         $scope.wrapper.appType = null;
       }
-      return $scope.queryPersons();
+      return $scope.searchPersons();
     });
 
     $scope.cancel = function () {
@@ -84,19 +83,15 @@
 
           $scope.currentTab = 'chooseLot';
           if($scope.set === 'person') {
-            return queryPersons(0, scDatatableConfig.defaultPageSize).then(function (res) {
-              $scope.currentTab = 'chooseLot';
-              $scope.ngos = res;
-            });
+            $scope.filters.uin = $scope.wrapper.selectedApp.personData.uin;
+            $scope.filters.lin = $scope.wrapper.selectedApp.personData.lin;
+            $scope.filters.names = $scope.wrapper.selectedApp.personData.firstName + ' ' + 
+              $scope.wrapper.selectedApp.personData.lastName;
+
+            return $scope.searchPersons();
           }
 
         }
-      });
-    };
-
-    $scope.queryPersons = function (offset, limit) {
-      return queryPersons(offset, limit).then(function (res) {
-        $scope.items = res;
       });
     };
 
@@ -125,12 +120,9 @@
         }).$promise
         .then(function (newPerson) {
           $scope.newLot = newPerson;
+          $scope.newLot.personData = $scope.wrapper.selectedApp.personData;
         });
       }
-
-      $scope.wrapper.newLot = {
-        name: $scope.wrapper.selectedApp.name
-      };
     };
 
     $scope.chooseLot = function (lot) {
@@ -141,13 +133,6 @@
         caseTypes: $scope.wrapper.selectedApp.caseTypes
       }).$promise.then(function (res) {
         $modalInstance.close(res);
-        return $state.go('root.applications.edit.data',
-          {
-            id: res.gvaApplicationId,
-            set: res.set,
-            lotId: res.lotId,
-            ind: res.partIndex
-          });
       });
     };
 

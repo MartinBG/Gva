@@ -147,22 +147,40 @@ namespace Gva.Api.Controllers.Integration
                                             intDocRelation.PersonData = this.lotRepository.GetLotIndex(person.LotId).Index.GetPart<PersonDataDO>("personData").Content;
                                             break;
                                         }
-                                        else
+                                        else if (canParse)
                                         {
-                                            personData.Lin = canParse ? lin : (int?)null;
+                                            personData.Lin = lin;
+                                            personData.LinType = this.nomRepository.GetNomValues("linTypes").Where(l => l.Code == "none").Single();
                                         }
+                                    }
+                                    string countryName = concreteApp.FlightCrewPersonalData.Citizenship.CountryName;
+                                    string countryCode = concreteApp.FlightCrewPersonalData.Citizenship.CountryGRAOCode;
+                                    if (!string.IsNullOrEmpty(countryName))
+                                    {
+                                        personData.Country = this.nomRepository.GetNomValues("countries").Where(c => c.Name == countryName).FirstOrDefault();
+                                    }
+
+                                    if (countryCode == "BG")
+                                    {
+                                        personData.Country = this.nomRepository.GetNomValue("countries", "BG");
+                                        personData.FirstName = concreteApp.FlightCrewPersonalData.BulgarianCitizen.PersonNames.First;
+                                        personData.MiddleName = concreteApp.FlightCrewPersonalData.BulgarianCitizen.PersonNames.Middle;
+                                        personData.LastName = concreteApp.FlightCrewPersonalData.BulgarianCitizen.PersonNames.Last;
+                                        personData.DateOfBirth = concreteApp.FlightCrewPersonalData.BulgarianCitizen.BirthDate;
+                                    }
+                                    else
+                                    {
+                                        personData.FirstName = concreteApp.FlightCrewPersonalData.ForeignCitizen.ForeignCitizenNames.FirstCyrillic;
+                                        personData.LastName = concreteApp.FlightCrewPersonalData.ForeignCitizen.ForeignCitizenNames.LastCyrillic;
+                                        personData.DateOfBirth = concreteApp.FlightCrewPersonalData.ForeignCitizen.BirthDate;
                                     }
 
                                     personData.FirstNameAlt = concreteApp.FlightCrewPersonalData.PersonNamesLatin.PersonFirstNameLatin;
                                     personData.MiddleNameAlt = concreteApp.FlightCrewPersonalData.PersonNamesLatin.PersonMiddleNameLatin;
                                     personData.LastNameAlt = concreteApp.FlightCrewPersonalData.PersonNamesLatin.PersonLastNameLatin;
 
-                                    string countryName = concreteApp.FlightCrewPersonalData.Citizenship.CountryName;
-                                    if (!string.IsNullOrEmpty(countryName))
-                                    {
-                                        personData.Country = this.nomRepository.GetNomValues("countries").Where(c => c.Name == countryName).FirstOrDefault();
-                                    }
-
+                                    personData.Email = concreteApp.FlightCrewPersonalData.ContactData.EmailAddress;
+                                    
                                     personData.CaseTypes = caseTypes
                                         .Select(ct => new NomValue()
                                         {

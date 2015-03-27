@@ -54,12 +54,12 @@
     $scope.linkApplication = function () {
       var modalInstance = scModal.open('linkApplication', { docId: $scope.docId });
 
-      modalInstance.result.then(function (set) {
+      modalInstance.result.then(function (res) {
         return $state.go('root.applications.edit.data', {
-          id: set.appId,
-          set: set.alias,
-          lotId: set.lotId,
-          ind: set.partIndex
+          id: res.gvaApplicationId,
+          set: res.set,
+          lotId: res.lotId,
+          ind: res.partIndex
         });
       });
 
