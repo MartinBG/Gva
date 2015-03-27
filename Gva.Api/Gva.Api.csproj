@@ -134,6 +134,7 @@
     <Compile Include="Controllers\Equipments\EquipmentsController.cs" />
     <Compile Include="Controllers\GvaPublisherController.cs" />
     <Compile Include="Controllers\GvaNomController.cs" />
+    <Compile Include="Controllers\Integration\IntegrationController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationApprovalsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationsController.cs" />
     <Compile Include="Controllers\Organizations\OrganizationCertAirCarriersController.cs" />
@@ -174,6 +175,8 @@
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystCertPathDO.cs" />
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystExamineeDO.cs" />
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystExamDO.cs" />
+    <Compile Include="ModelsDO\Integration\IntegrationDocRelationDO.cs" />
+    <Compile Include="ModelsDO\Integration\IntegrationNewAppDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonNewExamSystStateDO.cs" />
@@ -502,9 +505,20 @@
       <Project>{398e3599-55c9-4740-9b97-759d1b6a7ed4}</Project>
       <Name>Regs.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Rio.Data\Rio.Data.csproj">
+      <Project>{ce03cc29-d823-4e37-8c22-608fbed01848}</Project>
+      <Name>Rio.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rio.Objects\Rio.Objects.csproj">
+      <Project>{41c9ed19-5e9c-4e89-8a4b-d73506d9fb6f}</Project>
+      <Name>Rio.Objects</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UseOffice\UseOffice.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\msbuild\BuildCommon.targets" Condition=" '$(Configuration)' == 'Release' " />

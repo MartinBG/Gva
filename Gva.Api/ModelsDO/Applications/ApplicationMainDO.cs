@@ -10,5 +10,7 @@ namespace Gva.Api.ModelsDO.Applications
         public int GvaApplicationId { get; set; }
 
         public int PartIndex { get; set; }
+
+        public string Set { get; set; }
     }
 }

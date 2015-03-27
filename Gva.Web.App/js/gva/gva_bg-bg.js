@@ -24,6 +24,19 @@
           caa: 'Въздушна администрация',
           other: 'Други'
         },
+        linkAppModal: {
+          title: 'Свързване със заявление',
+          chooseApp: 'Избор на заявление',
+          chooseAppBtn: 'Напред',
+          app: 'Заявление',
+          chooseLot: 'Избор на партида',
+          back: 'Назад',
+          chooseBtn: 'Избор',
+          newLot: 'Нова партида',
+          saveSet: 'Запис',
+          cancel: 'Отказ',
+          saveLot: 'Запиши'
+        },
         newPersonModal: {
           newApplicant: 'Нов заявител',
           newPerson: 'Ново физическо лице',
@@ -2734,7 +2747,8 @@
             linkPart: 'Свържи със страница',
             newFile: 'Нов файл и страница',
             newDocFile: 'Нов файл',
-            viewPart: 'Преглед'
+            viewPart: 'Преглед',
+            linkApplication: 'Свържи заявление'
           },
           stages: {
             docStages: 'Деловодни етапи',

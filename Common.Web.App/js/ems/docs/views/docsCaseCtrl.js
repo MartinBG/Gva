@@ -5,6 +5,7 @@
   function DocsCaseCtrl(
     $scope,
     $state,
+    scModal,
     application,
     doc
   ) {
@@ -49,11 +50,27 @@
     $scope.viewApplication = function (applicationId) {
       return $state.go('root.applications.edit.case', { id: applicationId });
     };
+
+    $scope.linkApplication = function () {
+      var modalInstance = scModal.open('linkApplication', { docId: $scope.docId });
+
+      modalInstance.result.then(function (set) {
+        return $state.go('root.applications.edit.data', {
+          id: set.appId,
+          set: set.alias,
+          lotId: set.lotId,
+          ind: set.partIndex
+        });
+      });
+
+      return modalInstance.opened;
+    };
   }
 
   DocsCaseCtrl.$inject = [
     '$scope',
     '$state',
+    'scModal',
     'application',
     'doc'
   ];

@@ -1,0 +1,90 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="common.linkAppModal.title"></strong>
+    <div class="pull-right">
+      <sc-button ng-if="currentTab === 'chooseApp'" name="chooseAppBtn" btn-click="chooseApp()" text="common.linkAppModal.chooseAppBtn" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
+      <sc-button ng-if="currentTab === 'chooseLot'" name="backToAppBtn" btn-click="backToApp()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+      <sc-button ng-if="currentTab === 'newLot'" name="backToChooseLotBtn" btn-click="backToChooseLot()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+      <sc-button ng-if="currentTab === 'newLot'" name="saveLotBtn" btn-click="saveLot()" text="common.linkAppModal.saveLot" class="btn btn-xs btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+      <sc-button name="canceltn" btn-click="cancel()" text="common.linkAppModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+
+    <ul class="nav nav-tabs">
+      <li ng-class="{active: currentTab === 'chooseApp', disabled: currentTab !== 'chooseApp' }">
+        <a><span l10n-text="common.linkAppModal.chooseApp"></span></a>
+      </li>
+      <li ng-class="{active: currentTab === 'chooseLot', disabled: currentTab !== 'chooseLot' }">
+        <a><span l10n-text="common.linkAppModal.chooseLot"></span></a>
+      </li>
+      <li class="active" ng-if="currentTab === 'newLot'">
+        <a><span l10n-text="common.linkAppModal.newLot"></span></a>
+      </li>
+    </ul>
+
+    <div ng-if="currentTab === 'chooseApp'">
+      <ng-form class="form-inline" name="form.chooseAppForm"  sc-validate="{}">
+        <div class="row">
+          <div class="form-group col-md-10"  sc-has-error="app">
+            <label class="control-label" l10n-text="common.linkAppModal.app"></label>
+            <sc-validation-error field-name="app" validations="{required: 'default'}"></sc-validation-error>
+            <sc-select name="app" sc-select="selectOptions" ng-model="wrapper.selectedAppKey" ng-required="true"></sc-select>
+          </div>
+        </div>
+      </ng-form>
+    </div>
+
+    <div ng-if="currentTab === 'chooseLot'">
+      <div ng-if="set === 'person'">
+        <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="searchPersons()">
+          <sc-filter type="int" name="lin" class="col-sm-3" removable="false" label="persons.search.lin"></sc-filter>
+          <sc-filter type="text" name="uin" class="col-sm-3" removable="false" label="persons.search.uin"></sc-filter>
+          <sc-filter type="text" name="names" class="col-sm-3" removable="false" label="persons.search.names"></sc-filter>
+          <sc-filter type="nomenclature" name="caseType" class="col-sm-2" removable="false" alias="personCaseTypes" mode="id" label="persons.search.caseType"></sc-filter>
+          <sc-filter type="text" name="licences" class="col-sm-3" removable="true" label="persons.search.licences"></sc-filter>
+          <sc-filter type="text" name="ratings" class="col-sm-3" removable="true" label="persons.search.ratings"></sc-filter>
+          <sc-filter type="text" name="organization" class="col-sm-3" removable="true" label="persons.search.organization"></sc-filter>
+          <sc-search-button action="searchPersons()" text="persons.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
+          <sc-search-button action="newLot()" text="persons.search.new" icon="glyphicon-plus"></sc-search-button>
+          <sc-search-button action="clear"></sc-search-button>
+          <sc-search-button action="add"></sc-search-button>
+        </sc-search>
+
+        <sc-datatable items="items" filterable="false" pageable="true" sortable="true" dynamic-columns="true">
+          <sc-column sortable="false" class="buttons-cell" has-content="true">
+            <sc-button name="viewButton"  btn-click="chooseLot(item)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
+              <a name="viewBtn" sc-sref="{state: 'root.persons.view.licences.search', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
+                <span class="glyphicon glyphicon-eye-open"></span>
+              </a>
+            </sc-button>
+          </sc-column>
+          <sc-column data="lin" title="persons.search.lin">
+          </sc-column>
+          <sc-column data="names" title="persons.search.names">
+          </sc-column>
+          <sc-column data="uin" title="persons.search.uin">
+          </sc-column>
+          <sc-column data="age" title="persons.search.age">
+          </sc-column>
+          <sc-column data="licences" title="persons.search.licences" class="wrap">
+          </sc-column>
+          <sc-column data="ratings" title="persons.search.ratings" class="wrap">
+          </sc-column>
+          <sc-column data="organization" title="persons.search.organization">
+          </sc-column>
+        </sc-datatable>
+      </div>
+    </div>
+
+    <div ng-if="currentTab === 'newLot'">
+      <ng-form class="form-inline" name="form.newLotForm" sc-validate="{}">
+        <div ng-if="set === 'person'">
+          <h5 class="form-header form-header-first" l10n-text="common.newPersonModal.personDataForm"></h5>
+          <gva-person-data name="form.newLotForm" ng-model="newLot.personData" sc-form-params="{ isNew: true }"></gva-person-data>
+        </div>
+      </ng-form>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ using Gva.Api.Controllers.Aircrafts;
 using Gva.Api.Controllers.Airports;
 using Gva.Api.Controllers.Applications;
 using Gva.Api.Controllers.Equipments;
+using Gva.Api.Controllers.Integration;
 using Gva.Api.Controllers.Organizations;
 using Gva.Api.Controllers.Persons;
 using Gva.Api.Models;
@@ -131,6 +132,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PublisherRepository>().As<IPublisherRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<StageRepository>().As<IStageRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ApplicationStageRepository>().As<IApplicationStageRepository>().InstancePerLifetimeScope();
+
+            moduleBuilder.RegisterType<IntegrationController>().InstancePerLifetimeScope();
 
             //Person controllers
             moduleBuilder.RegisterType<PersonsController>().InstancePerLifetimeScope();

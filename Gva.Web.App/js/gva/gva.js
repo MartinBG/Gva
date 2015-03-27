@@ -385,7 +385,8 @@
      .modal('newPerson'       , 'js/gva/common/modals/persons/newPersonModal.html'           , 'NewPersonModalCtrl'       )
      .modal('chooseInspectors', 'js/gva/common/modals/inspectors/chooseInspectorsModal.html' , 'ChooseInspectorsModalCtrl')
      .modal('editDisparity'   , 'js/gva/common/modals/disparities/editDisparityModal.html'   , 'EditDisparityModalCtrl'   )
-     .modal('viewApplication' , 'js/gva/common/modals/applications/viewApplicationModal.html', 'ViewApplicationModalCtrl' );
+     .modal('viewApplication' , 'js/gva/common/modals/applications/viewApplicationModal.html', 'ViewApplicationModalCtrl' )
+     .modal('linkApplication' , 'js/gva/common/modals/integration/linkAppModal.html'         , 'LinkAppModalCtrl'         );
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?set'                                                                                                                                                                                                        ])

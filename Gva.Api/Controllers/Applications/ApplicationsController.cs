@@ -238,13 +238,19 @@ namespace Gva.Api.Controllers.Applications
         [Route("create")]
         public IHttpActionResult PostNewApplication(ApplicationNewDO applicationNewDO)
         {
-            var newAppMainData = this.applicationRepository.CreateNewApplication(applicationNewDO);
-            return Ok(new
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                LotId = newAppMainData.LotId,
-                GvaApplicationId = newAppMainData.GvaApplicationId,
-                PartIndex = newAppMainData.PartIndex
-            });
+                ApplicationMainDO newAppMainData = this.applicationRepository.CreateNewApplication(applicationNewDO);
+
+                transaction.Commit();
+
+                return Ok(new
+                {
+                    LotId = newAppMainData.LotId,
+                    GvaApplicationId = newAppMainData.GvaApplicationId,
+                    PartIndex = newAppMainData.PartIndex
+                });
+            }
         }
 
         [Route(@"appPart/{lotId}/{partIndex}")]
