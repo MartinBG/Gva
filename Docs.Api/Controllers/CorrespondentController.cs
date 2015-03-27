@@ -59,22 +59,19 @@ namespace Docs.Api.Controllers
             limit = 1000;
             offset = 0;
 
-            int totalCount = 0;
-
             var returnValue =
                 this.correspondentRepository.GetCorrespondents(
                     displayName,
                     correspondentEmail,
                     limit,
-                    offset,
-                    out totalCount)
+                    offset)
                 .Select(e => new CorrespondentDO(e))
                 .ToList();
 
             return Ok(new
             {
                 correspondents = returnValue,
-                correspondentCount = totalCount
+                correspondentCount = returnValue.Count()
             });
         }
 
@@ -112,36 +109,7 @@ namespace Docs.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetNewCorrespondent()
         {
-            CorrespondentGroup correspondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>()
-                    .SingleOrDefault(e => e.Alias.ToLower() == "Applicants".ToLower());
-
-            CorrespondentType correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
-                    .SingleOrDefault(e => e.Alias.ToLower() == "LegalEntity".ToLower());
-
-            District district = this.unitOfWork.DbContext.Set<District>()
-                    .SingleOrDefault(e => e.Code2 == "22");
-
-            Municipality municipality = this.unitOfWork.DbContext.Set<Municipality>()
-                    .SingleOrDefault(e => e.Code2 == "2246");
-
-            Settlement settlement = this.unitOfWork.DbContext.Set<Settlement>()
-                    .SingleOrDefault(e => e.Code == "68134");
-
-            CorrespondentDO returnValue = new CorrespondentDO
-            {
-                CorrespondentGroupId = correspondentGroup != null ? correspondentGroup.CorrespondentGroupId : (int?)null,
-                CorrespondentTypeId = correspondentType != null ? correspondentType.CorrespondentTypeId : (int?)null,
-                CorrespondentTypeAlias = correspondentType != null ? correspondentType.Alias : string.Empty,
-                CorrespondentTypeName = correspondentType != null ? correspondentType.Name : string.Empty,
-                ContactDistrictId = district != null ? district.DistrictId : (int?)null,
-                ContactMunicipalityId = municipality != null ? municipality.MunicipalityId : (int?)null,
-                ContactSettlementId = settlement != null ? settlement.SettlementId : (int?)null,
-                IsActive = true
-            };
-
-            returnValue.SetupFlags();
-
-            return Ok(returnValue);
+            return Ok(this.correspondentRepository.GetNewCorrespondent());
         }
 
         /// <summary>
@@ -152,88 +120,13 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateCorrespondent(CorrespondentDO corr)
         {
-            Correspondent newCorr;
-
-            CorrespondentType correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
-                .SingleOrDefault(e => e.CorrespondentTypeId == corr.CorrespondentTypeId);
-
-            switch (correspondentType.Alias)
-            {
-                case "BulgarianCitizen":
-                    newCorr = this.correspondentRepository.CreateBgCitizen(
-                        corr.CorrespondentGroupId.Value,
-                        corr.CorrespondentTypeId.Value,
-                        true,
-                        corr.BgCitizenFirstName,
-                        corr.BgCitizenLastName,
-                        corr.BgCitizenUIN,
-                        this.userContext);
-                    break;
-                case "Foreigner":
-                    newCorr = this.correspondentRepository.CreateForeigner(
-                        corr.CorrespondentGroupId.Value,
-                        corr.CorrespondentTypeId.Value,
-                        true,
-                        corr.ForeignerFirstName,
-                        corr.ForeignerLastName,
-                        corr.ForeignerCountryId,
-                        corr.ForeignerSettlement,
-                        corr.ForeignerBirthDate,
-                        this.userContext);
-                    break;
-                case "LegalEntity":
-                    newCorr = this.correspondentRepository.CreateLegalEntity(
-                       corr.CorrespondentGroupId.Value,
-                       corr.CorrespondentTypeId.Value,
-                       true,
-                       corr.LegalEntityName,
-                       corr.LegalEntityBulstat,
-                       this.userContext);
-                    break;
-                case "ForeignLegalEntity":
-                    newCorr = this.correspondentRepository.CreateFLegalEntity(
-                        corr.CorrespondentGroupId.Value,
-                        corr.CorrespondentTypeId.Value,
-                        true,
-                        corr.FLegalEntityName,
-                        corr.FLegalEntityCountryId,
-                        corr.FLegalEntityRegisterName,
-                        corr.FLegalEntityRegisterNumber,
-                        corr.FLegalEntityOtherData,
-                        this.userContext);
-                    break;
-                default:
-                    newCorr = new Correspondent();
-                    break;
-            };
-
-            newCorr.RegisterIndexId = corr.RegisterIndexId;
-            newCorr.Email = corr.Email;
-            newCorr.ContactDistrictId = corr.ContactDistrictId;
-            newCorr.ContactMunicipalityId = corr.ContactMunicipalityId;
-            newCorr.ContactSettlementId = corr.ContactSettlementId;
-            newCorr.ContactPostCode = corr.ContactPostCode;
-            newCorr.ContactAddress = corr.ContactAddress;
-            newCorr.ContactPostOfficeBox = corr.ContactPostOfficeBox;
-            newCorr.ContactPhone = corr.ContactPhone;
-            newCorr.ContactFax = corr.ContactFax;
-            newCorr.Alias = corr.Alias;
-            newCorr.IsActive = corr.IsActive;
-
-            foreach (var cc in corr.CorrespondentContacts.Where(e => !e.IsDeleted))
-            {
-                newCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
-            }
-
-            this.unitOfWork.Save();
-
-            CorrespondentDO returnValue = new CorrespondentDO(newCorr);
+            var result = this.correspondentRepository.CreateCorrespondent(corr);
 
             return Ok(new
                 {
                     err = "",
-                    correspondentId = returnValue.CorrespondentId,
-                    obj = returnValue
+                    correspondentId = result.CorrespondentId,
+                    obj = result
                 });
         }
 

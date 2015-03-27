@@ -1680,5 +1680,32 @@ namespace Docs.Api.Repositories.DocRepository
 
             return returnValue;
         }
+
+        public List<DocRelation> GetCaseRelationsByDocIdWithIncludes(int id, bool includeCasePartMovements, bool includeDocFiles = false)
+        {
+            int caseId = this.GetCaseId(id);
+
+            var docRelationsSet = this.unitOfWork.DbContext.Set<DocRelation>()
+                .Include(e => e.Doc.DocCasePartType)
+                .Include(e => e.Doc.DocDirection)
+                .Include(e => e.Doc.DocType)
+                .Include(e => e.Doc.DocStatus);
+
+            if (includeCasePartMovements)
+            {
+                docRelationsSet = docRelationsSet.Include(e => e.Doc.DocCasePartMovements.Select(dc => dc.User));
+            }
+
+            if (includeDocFiles)
+            {
+                docRelationsSet = docRelationsSet.Include(e => e.Doc.DocFiles.Select(df => df.DocFileOriginType));
+            }
+
+            return
+                docRelationsSet
+                .Where(dr => dr.RootDocId == caseId)
+                .ToList();
+        }
+
     }
 }

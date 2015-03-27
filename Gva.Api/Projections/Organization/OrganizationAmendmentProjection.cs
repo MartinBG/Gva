@@ -15,16 +15,9 @@ namespace Gva.Api.Projections.Organization
 {
     public class OrganizationAmendmentProjection : Projection<GvaViewOrganizationAmendment>
     {
-        private IFileRepository fileRepository;
-        private IApplicationRepository applicationRepository;
-        public OrganizationAmendmentProjection(
-            IUnitOfWork unitOfWork,
-            IFileRepository fileRepository,
-            IApplicationRepository applicationRepository)
+        public OrganizationAmendmentProjection(IUnitOfWork unitOfWork)
             : base(unitOfWork, "Organization")
         {
-            this.applicationRepository = applicationRepository;
-            this.fileRepository = fileRepository;
         }
 
         public override IEnumerable<GvaViewOrganizationAmendment> Execute(PartCollection parts)

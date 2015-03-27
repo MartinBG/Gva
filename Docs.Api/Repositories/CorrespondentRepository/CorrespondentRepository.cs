@@ -8,23 +8,140 @@ using Common.Data;
 using Docs.Api.Models;
 using Common.Api.UserContext;
 using Common.Api.Repositories;
+using Docs.Api.DataObjects;
+using Common.Api.Models;
 
 namespace Docs.Api.Repositories.CorrespondentRepository
 {
     //? rewrite with predicate
     public class CorrespondentRepository : Repository<Correspondent>, ICorrespondentRepository
     {
-        public CorrespondentRepository(IUnitOfWork unitOfWork)
+        private UserContext userContext;
+        public CorrespondentRepository(IUnitOfWork unitOfWork, UserContext userContext)
             : base(unitOfWork)
         {
+            this.userContext = userContext;
+        }
+
+        public CorrespondentDO GetNewCorrespondent()
+        { 
+            CorrespondentGroup correspondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Applicants".ToLower());
+
+            CorrespondentType correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "LegalEntity".ToLower());
+
+            District district = this.unitOfWork.DbContext.Set<District>()
+                    .SingleOrDefault(e => e.Code2 == "22");
+
+            Municipality municipality = this.unitOfWork.DbContext.Set<Municipality>()
+                    .SingleOrDefault(e => e.Code2 == "2246");
+
+            Settlement settlement = this.unitOfWork.DbContext.Set<Settlement>()
+                    .SingleOrDefault(e => e.Code == "68134");
+
+            CorrespondentDO returnValue = new CorrespondentDO
+            {
+                CorrespondentGroupId = correspondentGroup != null ? correspondentGroup.CorrespondentGroupId : (int?)null,
+                CorrespondentTypeId = correspondentType != null ? correspondentType.CorrespondentTypeId : (int?)null,
+                CorrespondentTypeAlias = correspondentType != null ? correspondentType.Alias : string.Empty,
+                CorrespondentTypeName = correspondentType != null ? correspondentType.Name : string.Empty,
+                ContactDistrictId = district != null ? district.DistrictId : (int?)null,
+                ContactMunicipalityId = municipality != null ? municipality.MunicipalityId : (int?)null,
+                ContactSettlementId = settlement != null ? settlement.SettlementId : (int?)null,
+                IsActive = true
+            };
+
+            returnValue.SetupFlags();
+
+            return returnValue;
+        }
+
+        public CorrespondentDO CreateCorrespondent(CorrespondentDO corr)
+        {
+            Correspondent newCorr;
+
+            CorrespondentType correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                .SingleOrDefault(e => e.CorrespondentTypeId == corr.CorrespondentTypeId);
+
+            switch (correspondentType.Alias)
+            {
+                case "BulgarianCitizen":
+                    newCorr = this.CreateBgCitizen(
+                        corr.CorrespondentGroupId.Value,
+                        corr.CorrespondentTypeId.Value,
+                        true,
+                        corr.BgCitizenFirstName,
+                        corr.BgCitizenLastName,
+                        corr.BgCitizenUIN,
+                        this.userContext);
+                    break;
+                case "Foreigner":
+                    newCorr = this.CreateForeigner(
+                        corr.CorrespondentGroupId.Value,
+                        corr.CorrespondentTypeId.Value,
+                        true,
+                        corr.ForeignerFirstName,
+                        corr.ForeignerLastName,
+                        corr.ForeignerCountryId,
+                        corr.ForeignerSettlement,
+                        corr.ForeignerBirthDate,
+                        this.userContext);
+                    break;
+                case "LegalEntity":
+                    newCorr = this.CreateLegalEntity(
+                       corr.CorrespondentGroupId.Value,
+                       corr.CorrespondentTypeId.Value,
+                       true,
+                       corr.LegalEntityName,
+                       corr.LegalEntityBulstat,
+                       this.userContext);
+                    break;
+                case "ForeignLegalEntity":
+                    newCorr = this.CreateFLegalEntity(
+                        corr.CorrespondentGroupId.Value,
+                        corr.CorrespondentTypeId.Value,
+                        true,
+                        corr.FLegalEntityName,
+                        corr.FLegalEntityCountryId,
+                        corr.FLegalEntityRegisterName,
+                        corr.FLegalEntityRegisterNumber,
+                        corr.FLegalEntityOtherData,
+                        this.userContext);
+                    break;
+                default:
+                    newCorr = new Correspondent();
+                    break;
+            };
+
+            newCorr.RegisterIndexId = corr.RegisterIndexId;
+            newCorr.Email = corr.Email;
+            newCorr.ContactDistrictId = corr.ContactDistrictId;
+            newCorr.ContactMunicipalityId = corr.ContactMunicipalityId;
+            newCorr.ContactSettlementId = corr.ContactSettlementId;
+            newCorr.ContactPostCode = corr.ContactPostCode;
+            newCorr.ContactAddress = corr.ContactAddress;
+            newCorr.ContactPostOfficeBox = corr.ContactPostOfficeBox;
+            newCorr.ContactPhone = corr.ContactPhone;
+            newCorr.ContactFax = corr.ContactFax;
+            newCorr.Alias = corr.Alias;
+            newCorr.IsActive = corr.IsActive;
+
+            foreach (var cc in corr.CorrespondentContacts.Where(e => !e.IsDeleted))
+            {
+                newCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
+            }
+
+            this.unitOfWork.Save();
+
+            return new CorrespondentDO(newCorr);
         }
 
         public List<Correspondent> GetCorrespondents(
             string displayName,
             string correspondentEmail,
             int limit,
-            int offset,
-            out int totalCount)
+            int offset)
         {
             var query =
                this.unitOfWork.DbContext.Set<Correspondent>()
@@ -41,8 +158,6 @@ namespace Docs.Api.Repositories.CorrespondentRepository
             {
                 query = query.Where(e => e.Email.Contains(correspondentEmail));
             }
-
-            totalCount = query.Count();
 
             return query
                 .OrderByDescending(e => e.CorrespondentId)

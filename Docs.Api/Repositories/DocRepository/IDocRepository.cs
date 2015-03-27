@@ -376,5 +376,7 @@ namespace Docs.Api.Repositories.DocRepository
         Tuple<string, string> GetPositionAndNameById(int unitId);
 
         List<Doc> FindPublicLeafsByDocId(int docId);
+
+        List<DocRelation> GetCaseRelationsByDocIdWithIncludes(int id, bool includeCasePartMovements, bool includeDocFiles = false);
     }
 }

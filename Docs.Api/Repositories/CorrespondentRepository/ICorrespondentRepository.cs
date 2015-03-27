@@ -6,17 +6,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Docs.Api.DataObjects;
 
 namespace Docs.Api.Repositories.CorrespondentRepository
 {
     public interface ICorrespondentRepository : IRepository<Correspondent>
     {
+        CorrespondentDO GetNewCorrespondent();
+
+        CorrespondentDO CreateCorrespondent(CorrespondentDO corr);
+
         List<Correspondent> GetCorrespondents(
-            string correspondentUin,
+            string displayName,
             string correspondentEmail,
             int limit,
-            int offset,
-            out int totalCount);
+            int offset);
 
         Correspondent GetCorrespondent(int id);
 

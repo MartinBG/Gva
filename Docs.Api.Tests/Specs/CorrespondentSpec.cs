@@ -134,8 +134,7 @@ namespace Docs.Api.Tests.Specs
 
             "can be found and edited".Assert(() =>
             {
-                int totalCount;
-                var correspondents = correspondentRepository1.GetCorrespondents(null, null, 10, 0, out totalCount);
+                var correspondents = correspondentRepository1.GetCorrespondents(null, null, 10, 0);
                 Assert.NotEmpty(correspondents);
 
                 var corr1 = correspondentRepository1.GetCorrespondent(crCorrespondentId);

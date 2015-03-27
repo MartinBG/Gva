@@ -8,7 +8,6 @@ using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Json;
 using Docs.Api.DataObjects;
 using Docs.Api.Enums;
 using Docs.Api.Models;
@@ -239,173 +238,13 @@ namespace Gva.Api.Controllers.Applications
         [Route("create")]
         public IHttpActionResult PostNewApplication(ApplicationNewDO applicationNewDO)
         {
-            using (var transaction = this.unitOfWork.BeginTransaction())
+            var newAppMainData = this.applicationRepository.CreateNewApplication(applicationNewDO);
+            return Ok(new
             {
-                var gvaCorrespondents = this.applicationRepository.GetGvaCorrespondentsByLotId(applicationNewDO.LotId);
-
-                foreach (var corrId in applicationNewDO.Correspondents)
-                {
-                    if (!gvaCorrespondents.Any(e => e.CorrespondentId == corrId))
-                    {
-                        GvaCorrespondent gvaCorrespondent = new GvaCorrespondent();
-                        gvaCorrespondent.CorrespondentId = corrId;
-                        gvaCorrespondent.LotId = applicationNewDO.LotId;
-                        gvaCorrespondent.IsActive = true;
-
-                        this.applicationRepository.AddGvaCorrespondent(gvaCorrespondent);
-                    }
-                }
-
-                DocDirection direction = this.unitOfWork.DbContext.Set<DocDirection>()
-                    .SingleOrDefault(d => d.Alias == "Incomming");
-                DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>()
-                    .SingleOrDefault(e => e.Alias == "Document");
-                DocStatus ProcessedStatus = this.unitOfWork.DbContext.Set<DocStatus>()
-                    .SingleOrDefault(s => s.Alias == "Processed");
-                DocCasePartType casePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
-                    .SingleOrDefault(pt => pt.Alias == "Public");
-                DocSourceType manualSource = this.unitOfWork.DbContext.Set<DocSourceType>().
-                    SingleOrDefault(st => st.Alias == "Manual");
-                DocFormatType formatType = this.unitOfWork.DbContext.Set<DocFormatType>()
-                    .SingleOrDefault(ft => ft.Alias == "Paper");
-
-                NomValue applicationType = this.nomRepository.GetNomValue("applicationTypes", applicationNewDO.ApplicationType.NomValueId);
-
-                Doc newDoc = docRepository.CreateDoc(
-                    direction.DocDirectionId,
-                    documentEntryType.DocEntryTypeId,
-                    ProcessedStatus.DocStatusId,
-                    applicationType.Name,
-                    casePartType.DocCasePartTypeId,
-                    manualSource.DocSourceTypeId,
-                    null,
-                    applicationType.TextContent.Get<int>("documentTypeId"),
-                    formatType.DocFormatTypeId,
-                    null,
-                    this.userContext);
-
-                DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
-                    .SingleOrDefault(e => e.Alias.ToLower() == "public");
-
-                List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
-                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-                    .ToList();
-
-                ElectronicServiceStage electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
-                    .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
-
-                List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
-                    .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
-                    .ToList();
-
-                DocUnitRole importedBy = this.unitOfWork.DbContext.Set<DocUnitRole>()
-                    .SingleOrDefault(e => e.Alias == "ImportedBy");
-
-                UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>()
-                    .FirstOrDefault(e => e.UserId == this.userContext.UserId);
-
-                newDoc.CreateDocProperties(
-                        null,
-                        internalDocCasePartType.DocCasePartTypeId,
-                        docTypeClassifications,
-                        null,
-                        electronicServiceStage,
-                        docTypeUnitRoles,
-                        importedBy,
-                        unitUser,
-                        applicationNewDO.Correspondents,
-                        null,
-                        this.userContext);
-
-                this.docRepository.GenerateAccessCode(newDoc, this.userContext);
-
-                this.unitOfWork.Save();
-
-                this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
-                this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
-
-                this.docRepository.RegisterDoc(newDoc, unitUser, this.userContext);
-
-                var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
-
-                var application = new DocumentApplicationDO
-                {
-                    DocumentDate = newDoc.RegDate.Value,
-                    ApplicationType = applicationNewDO.ApplicationType,
-                    DocumentNumber = newDoc.DocRelations.First().Doc.RegUri
-                };
-
-                PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, this.userContext);
-
-                lot.Commit(this.userContext, lotEventDispatcher);
-
-                GvaApplication newGvaApplication = new GvaApplication()
-                {
-                    LotId = applicationNewDO.LotId,
-                    Doc = newDoc,
-                    GvaAppLotPart = partVersion.Part
-                };
-
-
-                applicationRepository.AddGvaApplication(newGvaApplication);
-
-                GvaLotFile lotFile = new GvaLotFile()
-                {
-                    LotPart = partVersion.Part,
-                    DocFile = null,
-                    GvaCaseTypeId = applicationNewDO.CaseTypeId,
-                    PageIndex = null,
-                    PageIndexInt = null,
-                    PageNumber = null,
-                    Note = null
-                };
-
-                GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
-                {
-                    GvaApplication = newGvaApplication,
-                    GvaLotFile = lotFile,
-                    DocFile = null
-                };
-
-                this.applicationRepository.AddGvaLotFile(lotFile);
-                this.applicationRepository.AddGvaAppLotFile(gvaAppLotFile);
-
-                this.unitOfWork.Save();
-
-                int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
-                    .Where(s => s.Alias.Equals("new"))
-                    .Single().GvaStageId;
-
-                dynamic stageTermDate = null;
-                int? duration = this.nomRepository.GetNomValue("applicationTypes", application.ApplicationType.NomValueId).TextContent.Get<int?>("duration");
-                if (duration.HasValue)
-                {
-                    stageTermDate = DateTime.Now.AddDays(duration.Value);
-                }
-
-                GvaApplicationStage applicationStage = new GvaApplicationStage()
-                {
-                    GvaStageId = stageId,
-                    StartingDate = DateTime.Now,
-                    Ordinal = 0,
-                    GvaApplicationId = newGvaApplication.GvaApplicationId,
-                    StageTermDate = stageTermDate
-                };
-
-                this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
-                this.unitOfWork.Save();
-
-                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
-
-                transaction.Commit();
-
-                return Ok(new
-                {
-                    LotId = lot.LotId,
-                    GvaApplicationId = newGvaApplication.GvaApplicationId,
-                    PartIndex = partVersion.Part.Index
-                });
-            }
+                LotId = newAppMainData.LotId,
+                GvaApplicationId = newAppMainData.GvaApplicationId,
+                PartIndex = newAppMainData.PartIndex
+            });
         }
 
         [Route(@"appPart/{lotId}/{partIndex}")]

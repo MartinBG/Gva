@@ -22,6 +22,10 @@ using Gva.Api.Repositories.FileRepository;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 using Gva.Api.Models.Enums;
+using Docs.Api.Models;
+using Docs.Api.Repositories.DocRepository;
+using Regs.Api.LotEvents;
+using Common.Api.UserContext;
 
 namespace Gva.Api.Repositories.ApplicationRepository
 {
@@ -30,17 +34,26 @@ namespace Gva.Api.Repositories.ApplicationRepository
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
         private IFileRepository fileRepository;
+        private IDocRepository docRepository;
+        private ILotEventDispatcher lotEventDispatcher;
+        private UserContext userContext;
 
         public ApplicationRepository(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
-            INomRepository nomRepository)
+            INomRepository nomRepository,
+            IDocRepository docRepository,
+            ILotEventDispatcher lotEventDispatcher,
+            UserContext userContext)
             : base(unitOfWork)
         {
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
             this.nomRepository = nomRepository;
+            this.docRepository = docRepository;
+            this.userContext = userContext;
+            this.lotEventDispatcher = lotEventDispatcher;
         }
 
         public ApplicationsDO GetApplications(
@@ -809,6 +822,193 @@ namespace Gva.Api.Repositories.ApplicationRepository
             }
 
             return qualifications;
+        }
+
+        private Doc CreateNewDoc(List<int> correspondents, NomValue applicationType)
+        {
+            DocDirection direction = this.unitOfWork.DbContext.Set<DocDirection>()
+                        .SingleOrDefault(d => d.Alias == "Incomming");
+            DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>()
+                .SingleOrDefault(e => e.Alias == "Document");
+            DocStatus ProcessedStatus = this.unitOfWork.DbContext.Set<DocStatus>()
+                .SingleOrDefault(s => s.Alias == "Processed");
+            DocCasePartType casePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
+                .SingleOrDefault(pt => pt.Alias == "Public");
+            DocSourceType manualSource = this.unitOfWork.DbContext.Set<DocSourceType>().
+                SingleOrDefault(st => st.Alias == "Manual");
+            DocFormatType formatType = this.unitOfWork.DbContext.Set<DocFormatType>()
+                .SingleOrDefault(ft => ft.Alias == "Paper");
+
+            int documentTypeId = this.nomRepository.GetNomValue("applicationTypes", applicationType.NomValueId)
+                .TextContent.Get<int>("documentTypeId");
+
+            Doc newDoc = this.docRepository.CreateDoc(
+            direction.DocDirectionId,
+            documentEntryType.DocEntryTypeId,
+            ProcessedStatus.DocStatusId,
+            applicationType.Name,
+            casePartType.DocCasePartTypeId,
+            manualSource.DocSourceTypeId,
+            null,
+            documentTypeId,
+            formatType.DocFormatTypeId,
+            null,
+            this.userContext);
+
+            DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
+                .SingleOrDefault(e => e.Alias.ToLower() == "public");
+
+            List<DocTypeClassification> docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
+                .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
+                .ToList();
+
+            ElectronicServiceStage electronicServiceStage = this.unitOfWork.DbContext.Set<ElectronicServiceStage>()
+                .SingleOrDefault(e => e.DocTypeId == newDoc.DocTypeId && e.IsFirstByDefault);
+
+            List<DocTypeUnitRole> docTypeUnitRoles = this.unitOfWork.DbContext.Set<DocTypeUnitRole>()
+                .Where(e => e.DocDirectionId == newDoc.DocDirectionId && e.DocTypeId == newDoc.DocTypeId)
+                .ToList();
+
+            DocUnitRole importedBy = this.unitOfWork.DbContext.Set<DocUnitRole>()
+                .SingleOrDefault(e => e.Alias == "ImportedBy");
+
+            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>()
+                .FirstOrDefault(e => e.UserId == this.userContext.UserId);
+
+            newDoc.CreateDocProperties(
+                    null,
+                    internalDocCasePartType.DocCasePartTypeId,
+                    docTypeClassifications,
+                    null,
+                    electronicServiceStage,
+                    docTypeUnitRoles,
+                    importedBy,
+                    unitUser,
+                    correspondents,
+                    null,
+                    this.userContext);
+
+            this.docRepository.GenerateAccessCode(newDoc, this.userContext);
+
+            this.unitOfWork.Save();
+
+            this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
+            this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
+
+            this.docRepository.RegisterDoc(newDoc, unitUser, this.userContext);
+
+            return newDoc;
+        }
+
+        public ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, string docRegUri = null)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var gvaCorrespondents = this.GetGvaCorrespondentsByLotId(applicationNewDO.LotId);
+
+                foreach (var corrId in applicationNewDO.Correspondents)
+                {
+                    if (!gvaCorrespondents.Any(e => e.CorrespondentId == corrId))
+                    {
+                        GvaCorrespondent gvaCorrespondent = new GvaCorrespondent();
+                        gvaCorrespondent.CorrespondentId = corrId;
+                        gvaCorrespondent.LotId = applicationNewDO.LotId;
+                        gvaCorrespondent.IsActive = true;
+
+                        this.AddGvaCorrespondent(gvaCorrespondent);
+                    }
+                }
+
+                NomValue applicationType = this.nomRepository.GetNomValue("applicationTypes", applicationNewDO.ApplicationType.NomValueId);
+                Doc doc = null;
+                if(!string.IsNullOrEmpty(docRegUri))
+                {
+                    doc = this.docRepository.GetDocByRegUri(docRegUri);
+                }
+                else
+                {
+                    doc = this.CreateNewDoc(applicationNewDO.Correspondents, applicationNewDO.ApplicationType);
+                }
+
+                var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
+
+                var application = new DocumentApplicationDO
+                {
+                    DocumentDate = doc.RegDate.Value,
+                    ApplicationType = applicationNewDO.ApplicationType,
+                    DocumentNumber = doc.DocRelations.First().Doc.RegUri
+                };
+
+                PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, this.userContext);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
+                
+                GvaApplication newGvaApplication = new GvaApplication()
+                {
+                    LotId = applicationNewDO.LotId,
+                    Doc = doc,
+                    GvaAppLotPart = partVersion.Part
+                };
+
+                this.AddGvaApplication(newGvaApplication);
+
+                GvaLotFile lotFile = new GvaLotFile()
+                {
+                    LotPart = partVersion.Part,
+                    DocFile = null,
+                    GvaCaseTypeId = applicationNewDO.CaseTypeId,
+                    PageIndex = null,
+                    PageIndexInt = null,
+                    PageNumber = null,
+                    Note = null
+                };
+
+                GvaAppLotFile gvaAppLotFile = new GvaAppLotFile()
+                {
+                    GvaApplication = newGvaApplication,
+                    GvaLotFile = lotFile,
+                    DocFile = null
+                };
+
+                this.AddGvaLotFile(lotFile);
+                this.AddGvaAppLotFile(gvaAppLotFile);
+
+                this.unitOfWork.Save();
+
+                int stageId = this.unitOfWork.DbContext.Set<GvaStage>()
+                    .Where(s => s.Alias.Equals("new"))
+                    .Single().GvaStageId;
+
+                dynamic stageTermDate = null;
+                int? duration = this.nomRepository.GetNomValue("applicationTypes", application.ApplicationType.NomValueId).TextContent.Get<int?>("duration");
+                if (duration.HasValue)
+                {
+                    stageTermDate = DateTime.Now.AddDays(duration.Value);
+                }
+
+                GvaApplicationStage applicationStage = new GvaApplicationStage()
+                {
+                    GvaStageId = stageId,
+                    StartingDate = DateTime.Now,
+                    Ordinal = 0,
+                    GvaApplicationId = newGvaApplication.GvaApplicationId,
+                    StageTermDate = stageTermDate
+                };
+
+                this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
+
+                transaction.Commit();
+
+                return new ApplicationMainDO()
+                {
+                    LotId = lot.LotId,
+                    GvaApplicationId = newGvaApplication.GvaApplicationId,
+                    PartIndex = partVersion.Part.Index
+                };
+            }
         }
     }
 }
