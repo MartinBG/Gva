@@ -46,7 +46,7 @@
     <Content Include=".gitignore" />
     <Content Include="css\style.css" />
     <Content Include="css\uxp.css" />
-    <Content Include="gulpfile.js" />
+    <None Include="gulpfile.js" />
     <Content Include="img\initial-loader.gif" />
     <Content Include="img\loading-icon-white.gif" />
     <Content Include="img\loading-icon.gif" />
