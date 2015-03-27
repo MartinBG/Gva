@@ -226,7 +226,7 @@ namespace Gva.Api.Controllers.Integration
 
                         correspondent.Email = personData.Email;
                     }
-                    CorrespondentDO corr = this.correspondentRepository.CreateCorrespondent(correspondent);
+                    CorrespondentDO corr = this.correspondentRepository.CreateCorrespondent(correspondent, this.userContext);
                     correspondentIds.Add(corr.CorrespondentId.Value);
                 }
 
@@ -267,7 +267,7 @@ namespace Gva.Api.Controllers.Integration
                     CaseTypeId = caseTypeId.Value
                 };
 
-                ApplicationMainDO newAppMainData = this.applicationRepository.CreateNewApplication(applicationNewDO, doc.RegUri);
+                ApplicationMainDO newAppMainData = this.applicationRepository.CreateNewApplication(applicationNewDO, this.userContext, doc.RegUri);
 
                 transaction.Commit();
 

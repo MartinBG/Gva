@@ -120,7 +120,7 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateCorrespondent(CorrespondentDO corr)
         {
-            var result = this.correspondentRepository.CreateCorrespondent(corr);
+            var result = this.correspondentRepository.CreateCorrespondent(corr, this.userContext);
 
             return Ok(new
                 {

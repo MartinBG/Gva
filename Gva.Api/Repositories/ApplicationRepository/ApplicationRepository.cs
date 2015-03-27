@@ -36,7 +36,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
         private IFileRepository fileRepository;
         private IDocRepository docRepository;
         private ILotEventDispatcher lotEventDispatcher;
-        private UserContext userContext;
 
         public ApplicationRepository(
             IUnitOfWork unitOfWork,
@@ -44,15 +43,13 @@ namespace Gva.Api.Repositories.ApplicationRepository
             IFileRepository fileRepository,
             INomRepository nomRepository,
             IDocRepository docRepository,
-            ILotEventDispatcher lotEventDispatcher,
-            UserContext userContext)
+            ILotEventDispatcher lotEventDispatcher)
             : base(unitOfWork)
         {
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
             this.nomRepository = nomRepository;
             this.docRepository = docRepository;
-            this.userContext = userContext;
             this.lotEventDispatcher = lotEventDispatcher;
         }
 
@@ -824,7 +821,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             return qualifications;
         }
 
-        private Doc CreateNewDoc(List<int> correspondents, NomValue applicationType)
+        private Doc CreateNewDoc(List<int> correspondents, NomValue applicationType, UserContext userContext)
         {
             DocDirection direction = this.unitOfWork.DbContext.Set<DocDirection>()
                         .SingleOrDefault(d => d.Alias == "Incomming");
@@ -853,7 +850,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             documentTypeId,
             formatType.DocFormatTypeId,
             null,
-            this.userContext);
+            userContext);
 
             DocCasePartType internalDocCasePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
                 .SingleOrDefault(e => e.Alias.ToLower() == "public");
@@ -873,7 +870,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 .SingleOrDefault(e => e.Alias == "ImportedBy");
 
             UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>()
-                .FirstOrDefault(e => e.UserId == this.userContext.UserId);
+                .FirstOrDefault(e => e.UserId == userContext.UserId);
 
             newDoc.CreateDocProperties(
                     null,
@@ -886,21 +883,21 @@ namespace Gva.Api.Repositories.ApplicationRepository
                     unitUser,
                     correspondents,
                     null,
-                    this.userContext);
+                    userContext);
 
-            this.docRepository.GenerateAccessCode(newDoc, this.userContext);
+            this.docRepository.GenerateAccessCode(newDoc, userContext);
 
             this.unitOfWork.Save();
 
             this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
             this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
 
-            this.docRepository.RegisterDoc(newDoc, unitUser, this.userContext);
+            this.docRepository.RegisterDoc(newDoc, unitUser, userContext);
 
             return newDoc;
         }
 
-        public ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, string docRegUri = null)
+        public ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, UserContext userContext, string docRegUri = null)
         {
             var gvaCorrespondents = this.GetGvaCorrespondentsByLotId(applicationNewDO.LotId);
 
@@ -925,7 +922,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             }
             else
             {
-                doc = this.CreateNewDoc(applicationNewDO.Correspondents, applicationNewDO.ApplicationType);
+                doc = this.CreateNewDoc(applicationNewDO.Correspondents, applicationNewDO.ApplicationType, userContext);
             }
 
             var lot = this.lotRepository.GetLotIndex(applicationNewDO.LotId);
@@ -937,9 +934,9 @@ namespace Gva.Api.Repositories.ApplicationRepository
                 DocumentNumber = !string.IsNullOrEmpty(docRegUri) ? docRegUri : doc.DocRelations.First().Doc.RegUri
             };
 
-            PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, this.userContext);
+            PartVersion<DocumentApplicationDO> partVersion = lot.CreatePart(applicationNewDO.SetPartPath + "/*", application, userContext);
 
-            lot.Commit(this.userContext, lotEventDispatcher);
+            lot.Commit(userContext, lotEventDispatcher);
 
             GvaApplication newGvaApplication = new GvaApplication()
             {

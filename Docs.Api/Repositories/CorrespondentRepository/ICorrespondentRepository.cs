@@ -14,7 +14,7 @@ namespace Docs.Api.Repositories.CorrespondentRepository
     {
         CorrespondentDO GetNewCorrespondent();
 
-        CorrespondentDO CreateCorrespondent(CorrespondentDO corr);
+        CorrespondentDO CreateCorrespondent(CorrespondentDO corr, UserContext userContext);
 
         List<Correspondent> GetCorrespondents(
             string displayName,

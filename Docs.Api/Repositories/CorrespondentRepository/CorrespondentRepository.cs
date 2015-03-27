@@ -16,11 +16,9 @@ namespace Docs.Api.Repositories.CorrespondentRepository
     //? rewrite with predicate
     public class CorrespondentRepository : Repository<Correspondent>, ICorrespondentRepository
     {
-        private UserContext userContext;
-        public CorrespondentRepository(IUnitOfWork unitOfWork, UserContext userContext)
+        public CorrespondentRepository(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
-            this.userContext = userContext;
         }
 
         public CorrespondentDO GetNewCorrespondent()
@@ -57,7 +55,7 @@ namespace Docs.Api.Repositories.CorrespondentRepository
             return returnValue;
         }
 
-        public CorrespondentDO CreateCorrespondent(CorrespondentDO corr)
+        public CorrespondentDO CreateCorrespondent(CorrespondentDO corr, UserContext userContext)
         {
             Correspondent newCorr;
 
@@ -74,7 +72,7 @@ namespace Docs.Api.Repositories.CorrespondentRepository
                         corr.BgCitizenFirstName,
                         corr.BgCitizenLastName,
                         corr.BgCitizenUIN,
-                        this.userContext);
+                        userContext);
                     break;
                 case "Foreigner":
                     newCorr = this.CreateForeigner(
@@ -86,7 +84,7 @@ namespace Docs.Api.Repositories.CorrespondentRepository
                         corr.ForeignerCountryId,
                         corr.ForeignerSettlement,
                         corr.ForeignerBirthDate,
-                        this.userContext);
+                        userContext);
                     break;
                 case "LegalEntity":
                     newCorr = this.CreateLegalEntity(
@@ -95,7 +93,7 @@ namespace Docs.Api.Repositories.CorrespondentRepository
                        true,
                        corr.LegalEntityName,
                        corr.LegalEntityBulstat,
-                       this.userContext);
+                       userContext);
                     break;
                 case "ForeignLegalEntity":
                     newCorr = this.CreateFLegalEntity(
@@ -107,7 +105,7 @@ namespace Docs.Api.Repositories.CorrespondentRepository
                         corr.FLegalEntityRegisterName,
                         corr.FLegalEntityRegisterNumber,
                         corr.FLegalEntityOtherData,
-                        this.userContext);
+                        userContext);
                     break;
                 default:
                     newCorr = new Correspondent();
@@ -129,7 +127,7 @@ namespace Docs.Api.Repositories.CorrespondentRepository
 
             foreach (var cc in corr.CorrespondentContacts.Where(e => !e.IsDeleted))
             {
-                newCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, this.userContext);
+                newCorr.CreateCorrespondentContact(cc.Name, cc.UIN, cc.Note, cc.IsActive, userContext);
             }
 
             this.unitOfWork.Save();

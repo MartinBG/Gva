@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Api.Repositories;
+using Common.Api.UserContext;
 using Gva.Api.Models;
 using Gva.Api.Models.Views;
 using Gva.Api.ModelsDO;
@@ -109,6 +110,6 @@ namespace Gva.Api.Repositories.ApplicationRepository
 
         List<AppExamSystQualificationDO> GetApplicationQualifications(string path, int lotId);
 
-        ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, string docRegUri = null);
+        ApplicationMainDO CreateNewApplication(ApplicationNewDO applicationNewDO, UserContext userContext, string docRegUri = null);
     }
 }

@@ -240,7 +240,7 @@ namespace Gva.Api.Controllers.Applications
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                ApplicationMainDO newAppMainData = this.applicationRepository.CreateNewApplication(applicationNewDO);
+                ApplicationMainDO newAppMainData = this.applicationRepository.CreateNewApplication(applicationNewDO, this.userContext);
 
                 transaction.Commit();
 
