@@ -167,6 +167,9 @@ INSERT INTO [DocTypeClassifications]([DocTypeClassificationId],[DocTypeId],[DocD
 INSERT INTO [DocTypeClassifications]([DocTypeClassificationId],[DocTypeId],[DocDirectionId],[ClassificationId],[IsActive])VALUES(163,67,1,1,1);
 INSERT INTO [DocTypeClassifications]([DocTypeClassificationId],[DocTypeId],[DocDirectionId],[ClassificationId],[IsActive])VALUES(164,67,1,2,1);
 INSERT INTO [DocTypeClassifications]([DocTypeClassificationId],[DocTypeId],[DocDirectionId],[ClassificationId],[IsActive])VALUES(165,67,1,3,1);
+INSERT INTO [DocTypeClassifications]([DocTypeClassificationId],[DocTypeId],[DocDirectionId],[ClassificationId],[IsActive])VALUES(166,68,1,1,1);
+INSERT INTO [DocTypeClassifications]([DocTypeClassificationId],[DocTypeId],[DocDirectionId],[ClassificationId],[IsActive])VALUES(167,68,1,2,1);
+INSERT INTO [DocTypeClassifications]([DocTypeClassificationId],[DocTypeId],[DocDirectionId],[ClassificationId],[IsActive])VALUES(168,68,1,3,1);
 SET IDENTITY_INSERT [DocTypeClassifications] OFF
 GO
 

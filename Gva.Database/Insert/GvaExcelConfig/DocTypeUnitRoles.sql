@@ -58,6 +58,7 @@ INSERT INTO [DocTypeUnitRoles]([DocTypeUnitRoleId],[DocTypeId],[DocDirectionId],
 INSERT INTO [DocTypeUnitRoles]([DocTypeUnitRoleId],[DocTypeId],[DocDirectionId],[DocUnitRoleId],[UnitId],[IsActive])VALUES(54,65,1,2,3, 1);
 INSERT INTO [DocTypeUnitRoles]([DocTypeUnitRoleId],[DocTypeId],[DocDirectionId],[DocUnitRoleId],[UnitId],[IsActive])VALUES(55,66,1,2,3, 1);
 INSERT INTO [DocTypeUnitRoles]([DocTypeUnitRoleId],[DocTypeId],[DocDirectionId],[DocUnitRoleId],[UnitId],[IsActive])VALUES(56,67,1,2,3, 1);
+INSERT INTO [DocTypeUnitRoles]([DocTypeUnitRoleId],[DocTypeId],[DocDirectionId],[DocUnitRoleId],[UnitId],[IsActive])VALUES(57,68,1,2,3, 1);
 SET IDENTITY_INSERT [DocTypeUnitRoles] OFF
 GO
 
