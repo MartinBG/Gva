@@ -725,19 +725,19 @@ namespace Gva.Api.Controllers
 
                 if (makeEngine.Value)
                 {
-                    isMatch &= ap.TextContent.Get<bool>("makeEngine");
+                    isMatch &= ap.TextContent != null && ap.TextContent.Get<bool>("makeEngine") ? true : false;
                 }
                 else if (makeRadio.Value)
                 {
-                    isMatch &= ap.TextContent.Get<bool>("makeRadio");
+                    isMatch &= ap.TextContent != null && ap.TextContent.Get<bool>("makeRadio") ? true : false;
                 }
                 else if (makePropeller.Value)
                 {
-                    isMatch &= ap.TextContent.Get<bool>("makePropeller");
+                    isMatch &= ap.TextContent != null && ap.TextContent.Get<bool>("makePropeller") ? true : false;
                 }
                 else if (makeAircraft.Value)
                 {
-                    isMatch &= ap.TextContent.Get<bool>("makeAircraft");
+                    isMatch &= ap.TextContent != null && ap.TextContent.Get<bool>("makeAircraft") ? true : false;
                 }
 
                 return isMatch;
