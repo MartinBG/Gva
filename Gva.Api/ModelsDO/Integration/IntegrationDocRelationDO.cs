@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Api.Models;
+using Docs.Api.DataObjects;
 using Docs.Api.Models;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO.Aircrafts;
@@ -49,7 +50,8 @@ namespace Gva.Api.ModelsDO.Integration
 
         public PersonDataDO PersonData { get; set; }
 
-        public AircraftDO AircraftData { get; set; }
+        public AircraftDataDO AircraftData { get; set; }
 
+        public CorrespondentDO CorrespondentData { get; set; }
     }
 }

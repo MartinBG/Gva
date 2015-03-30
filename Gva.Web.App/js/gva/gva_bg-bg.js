@@ -33,9 +33,9 @@
           back: 'Назад',
           chooseBtn: 'Избор',
           newLot: 'Нова партида',
-          saveSet: 'Запис',
           cancel: 'Отказ',
-          saveLot: 'Запиши'
+          saveLot: 'Запис',
+          personDataForm: 'Лични данни'
         },
         newPersonModal: {
           newApplicant: 'Нов заявител',

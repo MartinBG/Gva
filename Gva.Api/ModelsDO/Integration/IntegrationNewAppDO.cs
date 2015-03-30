@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Api.Models;
+using Docs.Api.DataObjects;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO.Persons;
 
@@ -18,5 +19,7 @@ namespace Gva.Api.ModelsDO.Integration
         public NomValue ApplicationType { get; set; }
 
         public List<GvaCaseType> CaseTypes { get; set; }
+
+        public CorrespondentDO CorrespondentData { get; set; }
     }
 }

@@ -28,6 +28,7 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.DataObjects;
 using Regs.Api.LotEvents;
 using Gva.Api.Repositories.IntegrationRepository;
+using Gva.Api.ModelsDO.Aircrafts;
 
 namespace Gva.Api.Controllers.Integration
 {
@@ -42,6 +43,7 @@ namespace Gva.Api.Controllers.Integration
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
         private IIntegrationRepository integrationRepository;
+        private ICorrespondentRepository correspondentRepository;
         private IRioDocumentParser rioDocumentParser;
         private IRioObjectExtractor rioObjectExtractor;
         private UserContext userContext;
@@ -49,10 +51,13 @@ namespace Gva.Api.Controllers.Integration
 
         private Dictionary<string, string> AppTypeCodeByAlias =
             new Dictionary<string, string>(){
-                    {"R-4284", "АП-5D" }
+                    {"R-4284", "АП-5D"},
+                    {"R-4356", "ВС-05"}
             };
 
         private const string LicenseControllerAndCoordinatorAppType = "R-4284";
+        private const string CertRegAircraftAppType = "R-4356";
+        
 
         public IntegrationController(
             IDocRepository docRepository,
@@ -63,6 +68,7 @@ namespace Gva.Api.Controllers.Integration
             ICaseTypeRepository caseTypeRepository,
             IIntegrationRepository integrationRepository,
             INomRepository nomRepository,
+            ICorrespondentRepository correspondentRepository,
             IRioDocumentParser rioDocumentParser,
             IRioObjectExtractor rioObjectExtractor,
             UserContext userContext,
@@ -76,6 +82,7 @@ namespace Gva.Api.Controllers.Integration
             this.integrationRepository = integrationRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
+            this.correspondentRepository = correspondentRepository;
             this.rioDocumentParser = rioDocumentParser;
             this.rioObjectExtractor = rioObjectExtractor;
             this.userContext = userContext;
@@ -194,6 +201,14 @@ namespace Gva.Api.Controllers.Integration
                                     intDocRelation.PersonData = personData;
                                     break;
                                 }
+                            case CertRegAircraftAppType:
+                                {
+                                    var aircraftData = new AircraftDataDO();
+                                    var concreteApp = (R_4356.AircraftRegistrationCertificateApplication)rioApplication;
+                                    intDocRelation.AircraftData = aircraftData;
+                                    intDocRelation.CorrespondentData = this.correspondentRepository.ConvertElServiceRecipientToCorrespondent(concreteApp.ElectronicServiceRecipient);
+                                    break;
+                                }
                             default:
                                 break;
 
@@ -222,12 +237,19 @@ namespace Gva.Api.Controllers.Integration
                 PersonDataDO personData = null;
                 List<string> lotCaseTypes = null;
                 List<int> correspondentIds = null;
+                AircraftDataDO aircraftData = null;
 
                 if (lot.Set.Alias == "Person")
                 {
                     personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
                     lotCaseTypes = personData.CaseTypes.Select(c => c.Alias).ToList();
-                    correspondentIds = this.integrationRepository.GetCorrespondentIdsPerPersonLot(personData, lot, this.userContext);
+                    correspondentIds = this.integrationRepository.GetCorrespondentIdsPerPersonLot(personData, this.userContext);
+                }
+                else if (lot.Set.Alias == "Aircraft")
+                {
+                    aircraftData = lot.Index.GetPart<AircraftDataDO>("aircraftData").Content;
+                    lotCaseTypes = new List<string>() { "aircraft" };
+                    correspondentIds = this.integrationRepository.GetCorrespondentIdFromCorrespondent(newAppDO.CorrespondentData, this.userContext);
                 }
 
                 int? caseTypeId = null;

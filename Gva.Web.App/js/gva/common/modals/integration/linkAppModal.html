@@ -76,13 +76,57 @@
           </sc-column>
         </sc-datatable>
       </div>
+      <div ng-if="set === 'aircraft'">
+        <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="searchAircraft()">
+          <sc-filter type="text" name="mark" class="col-sm-3" removable="false" label="aircrafts.search.mark"></sc-filter>
+          <sc-filter type="text" name="manSN" class="col-sm-3" removable="false" label="aircrafts.search.manSN"></sc-filter>
+          <sc-filter type="text" name="modelAlt" class="col-sm-3" removable="false" label="aircrafts.search.modelAlt"></sc-filter>
+          <sc-filter type="text" name="airCategory" class="col-sm-3" removable="true" label="aircrafts.search.airCategory"></sc-filter>
+          <sc-filter type="text" name="aircraftProducer" class="col-sm-3" removable="true" label="aircrafts.search.aircraftProducer"></sc-filter>
+          <sc-search-button action="searchAircraft()" text="aircrafts.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
+          <sc-search-button action="newLot()" text="aircrafts.search.new" icon="glyphicon-plane"></sc-search-button>
+          <sc-search-button action="clear"></sc-search-button>
+          <sc-search-button action="add"></sc-search-button>
+        </sc-search>
+
+        <sc-datatable items="items" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+          <sc-column sortable="false" class="buttons-cell" has-content="true">
+            <sc-button name="viewButton"  btn-click="chooseLot(item)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
+            </sc-button>
+            <a name="viewBtn" sc-sref="{state: 'root.aircrafts.view', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
+              <span class="glyphicon glyphicon-eye-open"></span>
+            </a>
+          </sc-column>
+          <sc-column data="mark" title="aircrafts.search.mark">
+          </sc-column>
+          <sc-column data="manSN" title="aircrafts.search.manSN">
+          </sc-column>
+          <sc-column data="modelAlt" title="aircrafts.search.modelAlt" class="wrap">
+          </sc-column>
+          <sc-column data="aircraftProducer" title="aircrafts.search.aircraftProducer" class="wrap">
+          </sc-column>
+          <sc-column data="airCategory" title="aircrafts.search.airCategory" class="wrap">
+          </sc-column>
+          <sc-column data="outputDate" title="aircrafts.search.outputDate" type="date">
+          </sc-column>
+          <sc-column data="icao" title="aircrafts.search.icao">
+          </sc-column>
+          <sc-column data="engineAlt" title="aircrafts.search.engineAlt" class="wrap">
+          </sc-column>
+          <sc-column data="propellerAlt" title="aircrafts.search.propellerAlt" class="wrap">
+          </sc-column>
+        </sc-datatable>
+      </div>
     </div>
 
     <div ng-if="currentTab === 'newLot'">
       <ng-form class="form-inline" name="form.newLotForm" sc-validate="{}">
         <div ng-if="set === 'person'">
-          <h5 class="form-header form-header-first" l10n-text="common.newPersonModal.personDataForm"></h5>
+          <h5 class="form-header form-header-first" l10n-text="common.linkAppModal.personDataForm"></h5>
           <gva-person-data name="form.newLotForm" ng-model="newLot.personData" sc-form-params="{ isNew: true }"></gva-person-data>
+        </div>
+        <div ng-if="set === 'aircraft'">
+          <gva-aircraft-data name="form.newLotForm" ng-model="newLot.aircraftData" sc-form-params="{ isNew: true }"></gva-aircraft-data>
         </div>
       </ng-form>
     </div>

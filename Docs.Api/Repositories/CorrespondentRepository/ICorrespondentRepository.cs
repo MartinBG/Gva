@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docs.Api.DataObjects;
+using R_0009_000015;
 
 namespace Docs.Api.Repositories.CorrespondentRepository
 {
@@ -15,6 +16,8 @@ namespace Docs.Api.Repositories.CorrespondentRepository
         CorrespondentDO GetNewCorrespondent();
 
         CorrespondentDO CreateCorrespondent(CorrespondentDO corr, UserContext userContext);
+
+        CorrespondentDO ConvertElServiceRecipientToCorrespondent(ElectronicServiceRecipient applicant);
 
         List<Correspondent> GetCorrespondents(
             string displayName,

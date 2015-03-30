@@ -10,16 +10,15 @@
     scModalParams,
     Integration,
     Persons,
+    Aircrafts,
     caseApplications,
     scDatatableConfig
   ) {
 
-    $scope.filters = {
-      lin: null,
-      uin: null,
-      caseType: null,
-      names: null
-    };
+    $scope.filters = {};
+    $scope.wrapper = {};
+    $scope.form = {};
+    $scope.newLot = {};
 
     _.forOwn($stateParams, function (value, param) {
       if (value !== null && value !== undefined) {
@@ -43,9 +42,19 @@
       return Persons.query(params).$promise;
     };
 
-    $scope.wrapper = {};
-    $scope.form = {};
-    $scope.newLot = {};
+    var queryAircrafts = function (offset, limit) {
+      var params = {
+        manSN: $scope.filters.manSN,
+        modelAlt: $scope.filters.modelAlt,
+        mark: $scope.filters.mark,
+        airCategory: $scope.filters.airCategory,
+        aircraftProducer: $scope.filters.aircraftProducer,
+        offset: offset,
+        limit: limit
+      };
+
+      return Aircrafts.query(params).$promise;
+    };
 
     $scope.currentTab = 'chooseApp';
     $scope.selectOptions = {
@@ -67,9 +76,24 @@
         $scope.set = $scope.wrapper.selectedApp.set;
       } else {
         $scope.wrapper.selectedApp = null;
-        $scope.wrapper.appType = null;
       }
-      return $scope.searchPersons();
+
+      if ($scope.set === 'person') {
+        $scope.filters = {
+          lin: null,
+          uin: null,
+          caseType: null,
+          names: null
+        };
+        return $scope.searchPersons();
+      } else if ($scope.set === 'aircraft') {
+        $scope.filters = {
+          manSN: null,
+          modelAlt: null,
+          mark: null
+        };
+        return $scope.searchAircrafts();
+      }
     });
 
     $scope.cancel = function () {
@@ -82,13 +106,15 @@
           $scope.set = $scope.wrapper.selectedApp.set.toLowerCase();
 
           $scope.currentTab = 'chooseLot';
-          if($scope.set === 'person') {
+          if ($scope.set === 'person') {
             $scope.filters.uin = $scope.wrapper.selectedApp.personData.uin;
             $scope.filters.lin = $scope.wrapper.selectedApp.personData.lin;
             $scope.filters.names = $scope.wrapper.selectedApp.personData.firstName + ' ' + 
               $scope.wrapper.selectedApp.personData.lastName;
 
             return $scope.searchPersons();
+          } else if ($scope.set === 'aircraft') {
+            return $scope.searchAircrafts();
           }
 
         }
@@ -96,8 +122,14 @@
     };
 
     $scope.searchPersons = function () {
-      return queryPersons(0, scDatatableConfig.defaultPageSize).then(function (res) {
-        $scope.items = res;
+      return queryPersons(0, scDatatableConfig.defaultPageSize).then(function (persons) {
+        $scope.items = persons;
+      });
+    };
+
+    $scope.searchAircrafts = function () {
+      return queryAircrafts(0, scDatatableConfig.defaultPageSize).then(function (aircrafts) {
+        $scope.items = aircrafts;
       });
     };
 
@@ -111,7 +143,7 @@
 
     $scope.newLot = function () {
       $scope.currentTab = 'newLot';
-      if($scope.set === 'person') {
+      if ($scope.set === 'person') {
         Persons.newPerson({
           firstName: $scope.wrapper.selectedApp.personData.firstName,
           lastName: $scope.wrapper.selectedApp.personData.lastName,
@@ -122,6 +154,13 @@
           $scope.newLot = newPerson;
           $scope.newLot.personData = $scope.wrapper.selectedApp.personData;
         });
+      } else if ($scope.set === 'aircraft') {
+        Aircrafts.newAircraft()
+        .$promise
+        .then(function (newAircraft) {
+          $scope.newLot = newAircraft;
+          $scope.newLot.aircraftData = $scope.wrapper.selectedApp.aircraftData;
+        });
       }
     };
 
@@ -130,7 +169,8 @@
         docId: $scope.wrapper.selectedApp.docId,
         lotId: lot.id,
         applicationType: $scope.wrapper.selectedApp.applicationType,
-        caseTypes: $scope.wrapper.selectedApp.caseTypes
+        caseTypes: $scope.wrapper.selectedApp.caseTypes,
+        correspondentData: $scope.wrapper.selectedApp.correspondentData
       }).$promise.then(function (res) {
         $modalInstance.close(res);
       });
@@ -139,12 +179,15 @@
     $scope.saveLot = function () {
       return $scope.form.newLotForm.$validate().then(function () {
         if ($scope.form.newLotForm.$valid) {
-          if($scope.set === 'person') {
-             return Persons.save($scope.newLot).$promise
-               .then(function (result) {
-                return $scope.chooseLot(result);
-              });
+          var promise;
+          if ($scope.set === 'person') {
+             promise = Persons.save($scope.newLot).$promise;
+          } else if ($scope.set === 'aircraft') {
+            promise = Aircrafts.save($scope.newLot).$promise;
           }
+          return promise.then(function (result) {
+            return $scope.chooseLot(result);
+          });
         }
       });
     };
@@ -158,6 +201,7 @@
     'scModalParams',
     'Integration',
     'Persons',
+    'Aircrafts',
     'caseApplications',
     'scDatatableConfig'
   ];
