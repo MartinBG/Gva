@@ -155,6 +155,8 @@
           $scope.newLot.personData = $scope.wrapper.selectedApp.personData;
         });
       } else if ($scope.set === 'aircraft') {
+        $scope.showWizzard = true;
+        $scope.aircraftWizzardModel = {};
         Aircrafts.newAircraft()
         .$promise
         .then(function (newAircraft) {
@@ -176,12 +178,35 @@
       });
     };
 
+    $scope.setAircraftWizzardData = function () {
+      return $scope.form.newLotForm.$validate().then(function () {
+        if ($scope.form.newLotForm.$valid) {
+          $scope.showWizzard = false;
+          if ($scope.aircraftWizzardModel.aircraftModel) {
+            $scope.newLot.aircraftData.aircraftProducer =
+              $scope.aircraftWizzardModel.aircraftModel.textContent.aircraftProducer;
+            $scope.newLot.aircraftData.airCategory =
+              $scope.aircraftWizzardModel.aircraftModel.textContent.airCategory;
+            $scope.newLot.aircraftData.model =
+              $scope.aircraftWizzardModel.aircraftModel.name;
+            $scope.newLot.aircraftData.modelAlt = 
+              $scope.aircraftWizzardModel.aircraftModel.nameAlt;
+          } else {
+            $scope.newLot.aircraftData.aircraftProducer =
+              $scope.aircraftWizzardModel.aircraftProducer;
+            $scope.newLot.aircraftData.airCategory =
+              $scope.aircraftWizzardModel.airCategory;
+          }
+        }
+      });
+    };
+
     $scope.saveLot = function () {
       return $scope.form.newLotForm.$validate().then(function () {
         if ($scope.form.newLotForm.$valid) {
           var promise;
           if ($scope.set === 'person') {
-             promise = Persons.save($scope.newLot).$promise;
+            promise = Persons.save($scope.newLot).$promise;
           } else if ($scope.set === 'aircraft') {
             promise = Aircrafts.save($scope.newLot).$promise;
           }

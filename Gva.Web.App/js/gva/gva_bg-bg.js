@@ -35,7 +35,8 @@
           newLot: 'Нова партида',
           cancel: 'Отказ',
           saveLot: 'Запис',
-          personDataForm: 'Лични данни'
+          personDataForm: 'Лични данни',
+          setAircraftWizzardData: 'Продължи'
         },
         newPersonModal: {
           newApplicant: 'Нов заявител',

@@ -5,7 +5,8 @@
       <sc-button ng-if="currentTab === 'chooseApp'" name="chooseAppBtn" btn-click="chooseApp()" text="common.linkAppModal.chooseAppBtn" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
       <sc-button ng-if="currentTab === 'chooseLot'" name="backToAppBtn" btn-click="backToApp()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
       <sc-button ng-if="currentTab === 'newLot'" name="backToChooseLotBtn" btn-click="backToChooseLot()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
-      <sc-button ng-if="currentTab === 'newLot'" name="saveLotBtn" btn-click="saveLot()" text="common.linkAppModal.saveLot" class="btn btn-xs btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+      <sc-button ng-if="currentTab === 'newLot' && !showWizzard" name="saveLotBtn" btn-click="saveLot()" text="common.linkAppModal.saveLot" class="btn btn-xs btn-primary" icon="glyphicon-floppy-disk"></sc-button>
+      <sc-button ng-if="currentTab === 'newLot' && showWizzard" name="showWizzardBtn" btn-click="setAircraftWizzardData()" text="common.linkAppModal.setAircraftWizzardData" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right"></sc-button>
       <sc-button name="canceltn" btn-click="cancel()" text="common.linkAppModal.cancel" class="btn btn-xs btn-default" icon="glyphicon-ban-circle"></sc-button>
     </div>
   </div>
@@ -123,10 +124,13 @@
       <ng-form class="form-inline" name="form.newLotForm" sc-validate="{}">
         <div ng-if="set === 'person'">
           <h5 class="form-header form-header-first" l10n-text="common.linkAppModal.personDataForm"></h5>
-          <gva-person-data name="form.newLotForm" ng-model="newLot.personData" sc-form-params="{ isNew: true }"></gva-person-data>
+          <gva-person-data name="form.newLotForm.personData" ng-model="newLot.personData" sc-form-params="{ isNew: true }"></gva-person-data>
         </div>
-        <div ng-if="set === 'aircraft'">
-          <gva-aircraft-data name="form.newLotForm" ng-model="newLot.aircraftData" sc-form-params="{ isNew: true }"></gva-aircraft-data>
+        <div ng-if="set === 'aircraft' && showWizzard">
+          <gva-aircraft-new-wizzard name="form.newLotForm.wizzardModel" ng-model="aircraftWizzardModel"></gva-aircraft-new-wizzard> 
+        </div>
+        <div ng-if="set === 'aircraft' && !showWizzard">
+          <gva-aircraft-data name="form.newLotForm.aircraftData" ng-model="newLot.aircraftData"></gva-aircraft-data>
         </div>
       </ng-form>
     </div>
