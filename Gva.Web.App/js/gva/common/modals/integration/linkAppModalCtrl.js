@@ -79,19 +79,8 @@
       }
 
       if ($scope.set === 'person') {
-        $scope.filters = {
-          lin: null,
-          uin: null,
-          caseType: null,
-          names: null
-        };
         return $scope.searchPersons();
       } else if ($scope.set === 'aircraft') {
-        $scope.filters = {
-          manSN: null,
-          modelAlt: null,
-          mark: null
-        };
         return $scope.searchAircrafts();
       }
     });
@@ -107,13 +96,21 @@
 
           $scope.currentTab = 'chooseLot';
           if ($scope.set === 'person') {
-            $scope.filters.uin = $scope.wrapper.selectedApp.personData.uin;
-            $scope.filters.lin = $scope.wrapper.selectedApp.personData.lin;
-            $scope.filters.names = $scope.wrapper.selectedApp.personData.firstName + ' ' + 
-              $scope.wrapper.selectedApp.personData.lastName;
+            $scope.filters = {
+              lin: $scope.wrapper.selectedApp.personData.lin,
+              uin: $scope.wrapper.selectedApp.personData.uin,
+              caseType: null,
+              names: $scope.wrapper.selectedApp.personData.firstName + ' ' + 
+                $scope.wrapper.selectedApp.personData.lastName
+            };
 
             return $scope.searchPersons();
           } else if ($scope.set === 'aircraft') {
+            $scope.filters = {
+              manSN: null,
+              modelAlt: null,
+              mark: null
+            };
             return $scope.searchAircrafts();
           }
 
