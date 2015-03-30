@@ -1,0 +1,16 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row">
+    <sc-field type="nomenclature" ng-model="model.aircraftProducer" l10n-text="aircrafts.newWizzardDirective.aircraftProducer"
+      ng-required="!model.aircraftModel" alias="'aircraftProducers'" params="{ makeAircraft: 'true'}"  validations="{required: 'default'}"
+      class="col-md-4 col-sm-8"></sc-field>
+
+    <sc-field type="nomenclature" ng-model="model.airCategory" l10n-text="aircrafts.newWizzardDirective.airCategory"
+      ng-required="!model.aircraftModel" alias="'easaTypesFm'"  validations="{required: 'default'}"
+      class="col-md-4 col-sm-8"></sc-field>
+
+    <sc-field type="nomenclature" ng-model="model.aircraftModel" l10n-text="aircrafts.newWizzardDirective.aircraftModel"
+      ng-required="!model.aircraftProducer && !model.airCategory" alias="'aircraftModels'" params="{ makeAircraft: 'true'}" 
+      validations="{required: 'default'}" params="{ airCategory: model.airCategory.name, aircraftProducer: model.aircraftProducer.name }" 
+      class="col-md-4 col-sm-8"></sc-field>
+  </div>
+</ng-form>

@@ -755,6 +755,11 @@
           noiseData: 'Удостоверение за шум',
           aircraftType: 'Type of Aircraft'
         },
+        newWizzardDirective: {
+          aircraftProducer: 'Производител',
+          airCategory: 'AIR категория',
+          aircraftModel: 'Модел ВС'
+        },
         newAircraft: {
           title: 'Ново ВС',
           save: 'Запис',
@@ -765,10 +770,7 @@
           save: 'Запис',
           forward: 'Напред',
           back: 'Назад',
-          cancel: 'Отказ',
-          aircraftProducer: 'Производител',
-          airCategory: 'AIR категория',
-          aircraftModel: 'Модел ВС'
+          cancel: 'Отказ'
         },
         editAircraft: {
           title: 'Преглед на данни за ВС',

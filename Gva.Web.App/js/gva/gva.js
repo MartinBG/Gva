@@ -170,6 +170,11 @@
       templateUrl: 'js/gva/persons/forms/personExam.html',
       controller: 'PersonExamCtrl'
     });
+      scaffoldingProvider.form({
+      name: 'gvaAircraftNewWizzard',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftNewWizzard.html',
+      controller: 'AircraftNewWizzardCtrl'
+    });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertRegisterView',
       templateUrl: 'js/gva/aircrafts/forms/aircraftCertRegView.html',
