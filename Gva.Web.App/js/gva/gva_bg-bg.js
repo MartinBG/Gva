@@ -3762,7 +3762,8 @@
         invalidNotesAlt: 'Бележки лат. трябва да бъдат попълнени',
         notUniqueDocData: 'Дублиран документ по основни данни',
         notValidRating: 'Вече съществува такава квалификация',
-        notUniqueLicenceNumber: 'Съществува лиценз от същия вид със същия номер'
+        notUniqueLicenceNumber: 'Съществува лиценз от същия вид със същия номер',
+        notUniqueMSN: 'Серийния номер не е уникален'
       },
       defaultErrorTexts: {
         required: 'Задължително поле',

@@ -4,14 +4,17 @@
 
   function AircraftDataCtrl($scope, Aircrafts, scFormParams) {
     $scope.isUniqueMSN = function () {
-      return Aircrafts.checkMSN({
-        msn: $scope.model.manSN,
-        aircraftId: scFormParams.lotId
-      })
+      if ($scope.model.manSN) {
+        return Aircrafts.checkMSN({
+          msn: $scope.model.manSN,
+          aircraftId: scFormParams.lotId
+        })
         .$promise
         .then(function (data) {
           return data.isValid;
         });
+      }
+
     };
   }
 
