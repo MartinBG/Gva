@@ -55,10 +55,10 @@
         <sc-datatable items="items" filterable="false" pageable="true" sortable="true" dynamic-columns="true">
           <sc-column sortable="false" class="buttons-cell" has-content="true">
             <sc-button name="viewButton"  btn-click="chooseLot(item)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
-              <a name="viewBtn" sc-sref="{state: 'root.persons.view.licences.search', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
-                <span class="glyphicon glyphicon-eye-open"></span>
-              </a>
             </sc-button>
+            <a name="viewBtn" sc-sref="{state: 'root.persons.view.licences.search', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
+              <span class="glyphicon glyphicon-eye-open"></span>
+            </a>
           </sc-column>
           <sc-column data="lin" title="persons.search.lin">
           </sc-column>
