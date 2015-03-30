@@ -106,10 +106,12 @@
 
             return $scope.searchPersons();
           } else if ($scope.set === 'aircraft') {
+            var producer = $scope.wrapper.selectedApp.aircraftData.aircraftProducer;
             $scope.filters = {
               manSN: null,
               modelAlt: null,
-              mark: null
+              mark: null,
+              aircraftProducer: producer ? producer.name : ''
             };
             return $scope.searchAircrafts();
           }

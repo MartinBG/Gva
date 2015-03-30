@@ -205,6 +205,9 @@ namespace Gva.Api.Controllers.Integration
                                 {
                                     var aircraftData = new AircraftDataDO();
                                     var concreteApp = (R_4356.AircraftRegistrationCertificateApplication)rioApplication;
+                                    string producerName = concreteApp.AircraftManufactureData.ManufacturerContactData.ManufacturerName;
+                                    aircraftData.AircraftProducer = this.nomRepository.GetNomValues("aircraftProducers", producerName).FirstOrDefault();
+                                
                                     intDocRelation.AircraftData = aircraftData;
                                     intDocRelation.CorrespondentData = this.correspondentRepository.ConvertElServiceRecipientToCorrespondent(concreteApp.ElectronicServiceRecipient);
                                     break;
