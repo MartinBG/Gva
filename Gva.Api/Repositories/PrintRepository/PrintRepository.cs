@@ -18,24 +18,6 @@ namespace Gva.Api.Repositories.PrintRepository
         private const int DEFAULT_BUFFER_SIZE = 81920;
         private static readonly byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
 
-        private IUnitOfWork unitOfWork;
-        private UserContext userContext;
-        private ILotRepository lotRepository;
-        private ILotEventDispatcher lotEventDispatcher;
-
-        public PrintRepository(
-            IUnitOfWork unitOfWork,
-            UserContext userContext,
-            ILotRepository lotRepository,
-            IFileRepository fileRepository,
-            ILotEventDispatcher lotEventDispatcher)
-        {
-            this.unitOfWork = unitOfWork;
-            this.lotRepository = lotRepository;
-            this.userContext = userContext;
-            this.lotEventDispatcher = lotEventDispatcher;
-        }
-
         public Guid SaveStreamToBlob(Stream stream, string connectionString)
         {
             Guid licenceEditionDocBlobKey;
