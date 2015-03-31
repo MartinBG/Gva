@@ -73,19 +73,26 @@ namespace Gva.Api.Repositories.IntegrationRepository
 
         public List<int> GetCorrespondentIdsPerPersonLot(PersonDataDO personData, UserContext userContext)
         {
-            string personNames = string.Format("{0} {1} {2}", personData.FirstName, personData.MiddleName, personData.LastName);
+            string personNames = string.Format("{0} {1}", personData.FirstName, personData.LastName);
             List<Correspondent> correspondents = this.correspondentRepository.GetCorrespondents(personNames, personData.Email, 10, 0);
 
             List<int> correspondentIds = correspondents.Select(c => c.CorrespondentId).ToList() ?? new List<int>();
             if (correspondentIds.Count() == 0)
             {
                 CorrespondentDO correspondent = this.correspondentRepository.GetNewCorrespondent();
+
+                var correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "BulgarianCitizen".ToLower());
+
+                correspondent.CorrespondentTypeAlias = correspondentType.Alias;
+                correspondent.CorrespondentTypeId = correspondentType.CorrespondentTypeId;
+                correspondent.CorrespondentTypeName = correspondentType.Name;
+
                 if (personData.Country.Code == "BG")
                 {
                     correspondent.BgCitizenFirstName = personData.FirstName;
                     correspondent.BgCitizenLastName = personData.LastName;
                     correspondent.BgCitizenUIN = personData.Uin;
-
                 }
                 else
                 {

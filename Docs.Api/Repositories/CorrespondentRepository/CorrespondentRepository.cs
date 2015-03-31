@@ -66,6 +66,7 @@ namespace Docs.Api.Repositories.CorrespondentRepository
                 CorrespondentGroupId = correspondentGroup.CorrespondentGroupId,
                 IsActive = true
             };
+
             CorrespondentType correspondentType = null;
 
             if (applicant.Entity != null)
