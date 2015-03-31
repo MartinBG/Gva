@@ -1171,7 +1171,6 @@
           removalText: 'Основание за отписване - описание',
           removalDocumentNumber: 'Номер на документ за отписване',
           removalDocumentDate: 'Дата',
-          removalInspector: 'Инспектор, отписал ВС',
           removalCountry: 'Държава',
           removalNotes: 'Забележки/Изключения',
           removalNotesAlt: 'Забележки/Изключения (англ.)',
@@ -1315,7 +1314,7 @@
           country: 'Държава',
           area: 'Място на инцидента',
           occurrenceNotes: 'Бележки по инцидента',
-          notes: 'Бележки',
+          description: 'Описание',
           bookPageNumber: '№ стр. в<br>делов. книга',
           pageCount: 'Брой стр.',
           file: 'Файл'
@@ -1339,7 +1338,7 @@
           country: 'Държава',
           area: 'Място на инцидента',
           occurrenceNotes: 'Бележки по инцидента',
-          notes: 'Бележки'
+          description: 'Описание'
         },
         aircraftDocApplicationSearch: {
           newApplication: 'Ново заявление',

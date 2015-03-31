@@ -334,7 +334,7 @@ namespace Gva.MigrationTool.Sets
                         country = noms["countries"].ByOldId(r.Field<decimal?>("ID_COUNTRY").ToString()),
                         area = r.Field<string>("AREA"),
                         occurrenceNotes = r.Field<string>("TEXT"),
-                        notes = r.Field<string>("NOTES")
+                        description = r.Field<string>("REMARKS")
                     }))
                 .ToList();
 
@@ -386,7 +386,7 @@ namespace Gva.MigrationTool.Sets
                                     "country",
                                     "area",
                                     "occurrenceNotes",
-                                    "notes",
+                                    "description"
                                 })),
                         new JProperty("files",
                             new JArray(

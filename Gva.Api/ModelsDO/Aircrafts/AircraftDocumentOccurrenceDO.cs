@@ -22,7 +22,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
         [Required(ErrorMessage = "Area is required.")]
         public string Area { get; set; }
 
-        public string Notes { get; set; }
+        public string Description { get; set; }
 
         public string OccurrenceNotes { get; set; }
 
