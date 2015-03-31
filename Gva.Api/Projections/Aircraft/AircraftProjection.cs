@@ -24,14 +24,14 @@ namespace Gva.Api.Projections.Aircraft
                 return new GvaViewAircraft[] { };
             }
 
-            var activeRegistration = parts.GetAll<AircraftCertRegistrationFMDO>("aircraftCertRegistrationsFM")
-                .Where(pv => pv.Content.IsActive.HasValue && pv.Content.IsActive.Value)
-                .SingleOrDefault();
+            var lastRegistration = parts.GetAll<AircraftCertRegistrationFMDO>("aircraftCertRegistrationsFM")
+                .OrderByDescending(r => r.CreateDate)
+                .FirstOrDefault();
 
-            return new[] { this.Create(aircraftData, activeRegistration) };
+            return new[] { this.Create(aircraftData, lastRegistration) };
         }
 
-        private GvaViewAircraft Create(PartVersion<AircraftDataDO> aircraftData, PartVersion<AircraftCertRegistrationFMDO> activeRegistration)
+        private GvaViewAircraft Create(PartVersion<AircraftDataDO> aircraftData, PartVersion<AircraftCertRegistrationFMDO> lastRegistration)
         {
             GvaViewAircraft aircraft = new GvaViewAircraft();
 
@@ -51,12 +51,12 @@ namespace Gva.Api.Projections.Aircraft
             aircraft.PropellerAlt = aircraftData.Content.PropellerAlt;
             aircraft.ModifOrWingColorAlt = aircraftData.Content.ModifOrWingColorAlt;
 
-            // currentRegistration
-            if (activeRegistration != null)
+            // lastRegistration
+            if (lastRegistration != null)
             {
-                aircraft.Mark = activeRegistration.Content.RegMark;
-                aircraft.ActNumber = activeRegistration.Content.ActNumber;
-                aircraft.CertNumber = activeRegistration.Content.CertNumber;
+                aircraft.Mark = lastRegistration.Content.RegMark;
+                aircraft.ActNumber = lastRegistration.Content.ActNumber;
+                aircraft.CertNumber = lastRegistration.Content.CertNumber;
             }
 
             return aircraft;
