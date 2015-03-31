@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Linq;
 using System.Web.Http;
+using Common.Api.UserContext;
 using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.Repositories.ExaminationSystemRepository;
@@ -15,15 +16,18 @@ namespace Gva.Api.Controllers
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
         private IExaminationSystemRepository examinationSystemRepository;
+        private UserContext userContext;
 
         public ExaminationSystemController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IExaminationSystemRepository examinationSystemRepository)
+            IExaminationSystemRepository examinationSystemRepository,
+            UserContext userContext)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.examinationSystemRepository = examinationSystemRepository;
+            this.userContext = userContext;
         }
 
         [Route("updateStates")]
@@ -34,7 +38,7 @@ namespace Gva.Api.Controllers
             {
                 this.unitOfWork.DbContext.Configuration.AutoDetectChangesEnabled = false;
 
-                this.examinationSystemRepository.ReloadStates();
+                this.examinationSystemRepository.ReloadStates(this.userContext);
 
                 transaction.Commit();
 

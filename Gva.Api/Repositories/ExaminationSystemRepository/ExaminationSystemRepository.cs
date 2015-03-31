@@ -32,7 +32,6 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
         private IFileRepository fileRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotEventDispatcher lotEventDispatcher;
-        private UserContext userContext;
 
         public ExaminationSystemRepository(
             IUnitOfWork unitOfWork,
@@ -40,8 +39,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
             IPersonRepository personRepository,
             IFileRepository fileRepository,
             ICaseTypeRepository caseTypeRepository,
-            ILotEventDispatcher lotEventDispatcher,
-            UserContext userContext)
+            ILotEventDispatcher lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -49,7 +47,6 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
             this.fileRepository = fileRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotEventDispatcher = lotEventDispatcher;
-            this.userContext = userContext;
         }
 
         public List<GvaExSystCertCampaignDO> GetCertCampaigns(string code = null) {
@@ -285,7 +282,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
             }
         }
 
-        public void ReloadStates()
+        public void ReloadStates(UserContext userContext)
         {
             var allPersonsWithQualificationsToReload =
                 this.unitOfWork.DbContext.Set<GvaExSystExaminee>()
@@ -312,7 +309,7 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
             foreach (var person in allPersonsWithQualificationsToReload)
             {
-                this.ReloadStatePerPerson(person.Key, person.ToList(), allQualifications, cases);
+                this.ReloadStatePerPerson(person.Key, person.ToList(), allQualifications, cases, userContext);
             }
         }
 
@@ -320,7 +317,8 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
             int lotId,
             List<GvaExSystExaminee> allPersonExams,
             Dictionary<string, GvaExSystQualification> allQualifications,
-            List<CaseDO> cases)
+            List<CaseDO> cases,
+            UserContext userContext)
         {
             Lot lot = this.lotRepository.GetLotIndex(lotId);
             PartVersion<PersonExamSystDataDO> examSystDataPartVersion = lot.Index.GetPart<PersonExamSystDataDO>("personExamSystData");
@@ -475,16 +473,16 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
             {
                 if (examSystDataPartVersion == null)
                 {
-                    examSystDataPartVersion = lot.CreatePart("personExamSystData", new PersonExamSystDataDO() { States = newStates}, this.userContext);
+                    examSystDataPartVersion = lot.CreatePart("personExamSystData", new PersonExamSystDataDO() { States = newStates}, userContext);
                     this.fileRepository.AddFileReferences(examSystDataPartVersion.Part, cases);
                 }
                 else
                 {
                     examSystDataPartVersion.Content.States.AddRange(newStates);
-                    lot.UpdatePart("personExamSystData", examSystDataPartVersion.Content, this.userContext);
+                    lot.UpdatePart("personExamSystData", examSystDataPartVersion.Content, userContext);
                 }
 
-                lot.Commit(this.userContext, lotEventDispatcher);
+                lot.Commit(userContext, lotEventDispatcher);
 
                 this.unitOfWork.Save();
 

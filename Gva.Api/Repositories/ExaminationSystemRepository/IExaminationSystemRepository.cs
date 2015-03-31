@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using Common.Api.UserContext;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
@@ -23,6 +24,6 @@ namespace Gva.Api.Repositories.ExaminationSystemRepository
 
         List<GvaExSystQualification> GetQualifications(string qualificationCode = null);
 
-        void ReloadStates();
+        void ReloadStates(UserContext userContext);
     }
 }
