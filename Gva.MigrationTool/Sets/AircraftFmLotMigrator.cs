@@ -519,18 +519,28 @@ namespace Gva.MigrationTool.Sets
                     })
                 .Single();
 
+            bool isAnyPropNotEmpty = certNoise.GetType().GetProperties()
+                .Where(p => p.Name != "__migrTable" && p.Name != "__oldId")
+                .Any(p => !string.IsNullOrEmpty((p.GetValue(certNoise) as string)));
+
+            if(!isAnyPropNotEmpty)
+            {
+                return null;
+            }
+            else
+            {
                 return new JObject(
-                    new JProperty("part",
-                        Utils.ToJObject(certNoise)),
-                        new JProperty("files",
-                            new JArray(
-                                new JObject(
-                                    new JProperty("isAdded", true),
-                                    new JProperty("file", null),
-                                    new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
-                                    new JProperty("bookPageNumber", null),
-                                    new JProperty("pageCount", null),
-                                    new JProperty("applications", new JArray())))));
+                    new JProperty("part", Utils.ToJObject(certNoise)),
+                    new JProperty("files",
+                        new JArray(
+                            new JObject(
+                                new JProperty("isAdded", true),
+                                new JProperty("file", null),
+                                new JProperty("caseType", Utils.ToJObject(noms["aircraftCaseTypes"].ByAlias("aircraft"))),
+                                new JProperty("bookPageNumber", null),
+                                new JProperty("pageCount", null),
+                                new JProperty("applications", new JArray())))));
+            }
         }
 
         private List<JObject> getAircraftCertAirworthinessFM(
