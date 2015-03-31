@@ -28,12 +28,7 @@
       return null;
     }
 
-    function refreshData() {
-      UnitsResource.query({ includeInactive: $scope.includeInactive })
-        .$promise.then(function (unitsModel) {
-          $scope.model = unitsModel;
-        });
-    }
+    
 
     $scope.canUnitBeDeleted = function (unit) {
       return unit.childUnits.length === 0;
@@ -106,10 +101,10 @@
       }
     });
 
-    $scope.addNewUnit = function (parentId, type) {
+    $scope.addNewUnit = function (parentId, unitType) {
       var modalInstance = scModal.open('editUnitModal', {
         parentId: parentId,
-        type: type
+        unitType: unitType
       });
 
       modalInstance.result.then(function (returnedResult) {
@@ -118,6 +113,17 @@
         }
       });
     };
+
+    $scope.addUserToUnit = function () {
+
+    };
+
+    function refreshData() {
+      UnitsResource.query({ includeInactive: $scope.includeInactive })
+        .$promise.then(function (unitsModel) {
+          $scope.model = unitsModel;
+        });
+    }
 
     function setCollapsedState(unit, state) {
       unit.isCollapsed = state;

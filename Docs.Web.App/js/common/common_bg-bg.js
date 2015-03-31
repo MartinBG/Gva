@@ -21,7 +21,7 @@
             news: 'Нови документи',
             corrsSearch: 'Кореспонденти',
             corrsNew: 'Нов кореспондент'
-          },          
+          },
           reports: {
             search: 'Справки'
           },
@@ -36,7 +36,7 @@
             title: 'Помощ',
             userManual: 'Ръководство на потребителя'
           }
-        },       
+        },
         users: {
           search: {
             username: 'Потребителско име',
@@ -85,15 +85,21 @@
           cancel: 'Отказ'
         },
         units: {
+          title: 'Организационна единица',
           filter: 'Филтър',
           refresh: 'Презареди',
           includeInactive: 'Включи неактивните',
           edit: {
-            name: 'Име',
-            save: 'Запази',
-            cancel: 'Откажи'
+            classification: 'Класификация',
+            classificationPermissions: 'Права'
           }
         }
+      },
+      commonLabels: {
+        save: 'Запази',
+        cancel: 'Откажи',
+        type: 'Тип',
+        name: 'Име',
       },
       states: {
         'root.users': 'Потребители',

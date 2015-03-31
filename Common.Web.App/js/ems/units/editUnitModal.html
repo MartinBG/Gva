@@ -1,79 +1,96 @@
-<style>
-  .units-view .selected-unit {
-    background-color: rgba(48, 47, 200, 0.2);
-  }
+<ng-form name="form.unit" sc-validate="{}">
+  <!--<style>
+  </style>-->
 
-  .units-view .child-unit {
-    margin-left: 25px;
-  }
-</style>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="common.units.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn"
+                   btn-click="save()"
+                   text="commonLabels.save"
+                   class="btn btn-primary btn-xs"
+                   icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn"
+                   btn-click="cancel()"
+                   text="commonLabels.cancel"
+                   class="btn btn-default btn-xs"
+                   icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+
+      <div class="row">
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="commonLabels.name"></label>
+          <sc-validation-error field-name="unitName" validations="{required: 'default'}"></sc-validation-error>
+          <sc-text name="unitName" ng-model="model.name"></sc-text>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="commonLabels.type"></label>
+          <!--<sc-validation-error field-name="unitName" validations="{required: 'default'}"></sc-validation-error>-->
+          <sc-dropdown-simple 
+                              class="form-control input-sm"
+                              items-source="unitTypes"
+                              selected-item="selectedItem"
+                              selected-value="model.type"
+                              item-value-field="value"
+                              item-text-field="name"></sc-dropdown-simple>
+
+        </div>
+      </div>
 
 
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <th l10n-text="common.units.edit.classification"></th>
+            <th l10n-text="common.units.classificationPermissions"></th>
+            <!--<th l10n-text="docs.edit.view.docFile.attachedFile" style="width: 300px;"></th>
+            <th style="width: 70px;"></th>-->
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="classification in model.classifications" ng-form sc-validate="{}">
+            <td style="width: 200px;" sc-has-error="name">
+              <!--<sc-text name="name" required></sc-text>-->
+            </td>
+            <td style="width: 200px;" sc-has-error="docFileKind">
+              <!--<sc-nomenclature name="docFileKind" ng-model="df.docFileKindId" nom-obj="df.docFileKind" mode="id" alias="'docFileKind'" ng-disabled="!df.isInEdit" required></sc-nomenclature>-->
+            </td>
+            <!--<td sc-has-error="docFile">
+      <sc-files name="docFile" ng-model="df.file" ng-readonly="readonly" required></sc-files>
+    </td>-->
+            <td style="text-align: right; width: 1px;">
+              <!--<span ng-show="df.isInEdit">
+        <sc-button btn-click="saveDocFile(df, form)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-saved" ng-disabled="readonly"></sc-button>
+        <sc-button btn-click="cancelDocFile(df)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-remove" ng-disabled="readonly"></sc-button>
+      </span>
+      <span ng-show="!df.isInEdit">
+        <sc-button btn-click="editDocFile(df)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-disabled="readonly"></sc-button>
+        <sc-button btn-click="removeDocFile(df)" class="btn btn-xs btn-default" icon="glyphicon-remove" ng-disabled="readonly"></sc-button>
+      </span>-->
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5" style="text-align: right; width: 1px;">
+              <sc-button btn-click="addClassification()" 
+                         class="btn btn-xs btn-primary" 
+                         icon="glyphicon-plus" 
+                         ng-disabled="readonly"></sc-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-<script type="text/ng-template" id="unit_recursive_template.html">
-</script>
+      <pre>{{model}}</pre>
+    </div>
 
-<div class="unit-form-view">
-  model
-  controller: {{test}}
-  param: {{paramFromOutside}}
-
-
-  <!--<sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-plus" label="docs.edit.child"
-                      options="[
-                {
-                  text: 'docs.edit.document',
-                  action: attachDoc,
-                }, {
-                  text: 'docs.edit.electronicDocument',
-                  action: attachElectronicDoc,
-                }, {
-                  text: 'docs.edit.resolution',
-                  action: attachResolution,
-                }, {
-                  text: 'docs.edit.resolutionParentOnly',
-                  action: attachResolutionParentOnly,
-                }, {
-                  text: 'docs.edit.task',
-                  action: attachTask,
-                }, {
-                  text: 'docs.edit.taskParentOnly',
-                  action: attachTaskParentOnly,
-                },{
-                  text: 'docs.edit.remark',
-                  action: attachRemark,
-                }
-              ]">
-  </sc-dropdown-button>-->
-
-  <sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-plus" label="docs.edit.child"
-                      options="[
-                {
-                  text: 'asdf1'
-                }, {
-                  text: 'asdf2'
-                }, {
-                  text: 'asdf3'
-                }, {
-                  text: 'asdf4'
-                }, {
-                  text: 'asdf5'
-                }
-              ]">
-  </sc-dropdown-button>
-
-  <label>
-    <span l10n-text="common.units.name"></span>
-    <input type="text"
-           ng-model="filterValue" />
-  </label>
-
-  <span class="glyphicon glyphicon-plus-sign" ng-click="addNewClassification(null, 'Department')"></span>
-
-  <button ng-click="returnVal()">
-    <span l10n-text="common.units.edit.save"></span>
-  </button>
-  <button ng-click="cancel()">
-    <span l10n-text="common.units.edit.cancel"></span>
-  </button>
-</div>
+  </div>
+</ng-form>

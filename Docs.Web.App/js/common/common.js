@@ -18,7 +18,7 @@
   .config(['scModalProvider', function (scModalProvider) {
       //jscs:disable disallowSpaceBeforeBinaryOperators, disallowSpacesInsideArrayBrackets, maximumLineLength
     scModalProvider
-      .modal('editUnitModal', 'js/ems/units/editUnitModal.html', 'EditUnitModalCtrl', 'xsm');      
+    .modal('editUnitModal', 'js/ems/units/editUnitModal.html', 'EditUnitModalCtrl');
   }])
 
   .config(['$stateProvider', function ($stateProvider) {
