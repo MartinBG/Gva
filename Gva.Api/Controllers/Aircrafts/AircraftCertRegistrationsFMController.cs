@@ -186,7 +186,11 @@ namespace Gva.Api.Controllers.Aircrafts
             IEnumerable<PartVersion<AircraftCertAirworthinessFMDO>> airworthinesses,
             int? regPartIndex)
         {
-            var airworthinessesWithReg = airworthinesses.Where(a => a.Content.Registration != null);
+            var airworthinessesWithReg = airworthinesses.Where(
+                a => a.Content.Registration != null &&
+                     a.Content.AirworthinessCertificateType.Alias != "f25" &&
+                     a.Content.AirworthinessCertificateType.Alias != "f24");
+
             var regs =
                 (from r in registrations
                  join aw in airworthinessesWithReg on r.Part.Index equals aw.Content.Registration.NomValueId into gaws

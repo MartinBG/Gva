@@ -588,7 +588,8 @@ namespace Gva.MigrationTool.Sets
                     new
                     {
                         t_CofA_Type = r.Field<string>("t_CofA_Type"),
-                        t_CofA_No = r.Field<string>("t_CofA_No")
+                        t_CofA_No = r.Field<string>("t_CofA_No"),
+                        d_CofA_Date = Utils.FmToDate(r.Field<string>("d_CofA_Date")),
                     })
                 .Single();
 
@@ -598,7 +599,12 @@ namespace Gva.MigrationTool.Sets
                         union all
                     select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_ARC_RefNo from CofA2 as r2) s
                 where {0} and not(s.dIssue = '' and s.dFrom = '' and s.dValid = '') and s.nStatus <> 0
-                order by CAST(s.nRegNum as int), CAST(s.nRegNumActive as int) desc, s.NumberIssue",
+                order by CAST(s.nRegNum as int), CAST(s.nRegNumActive as int) desc,
+                         CAST(case
+	                        when s.REG_ID LIKE 'II - %' then substring(s.REG_ID, 6, 10000)
+	                        when s.REG_ID LIKE 'II-%' then substring(s.REG_ID, 4, 10000)
+	                        else s.REG_ID end as int),
+                        s.NumberIssue",
                 new DbClause("s.nActId = {0}", aircraftFmId)
                 )
                 .Materialize(r =>
@@ -664,16 +670,16 @@ namespace Gva.MigrationTool.Sets
             switch (actAlias)
             {
                 case "f24":
-                    issueDate = lastIssue.d_24_Issue ?? lastIssue.dIssue ?? lastIssue.dFrom;
+                    issueDate = act.d_CofA_Date ?? lastIssue.d_24_Issue ?? lastIssue.dIssue ?? lastIssue.dFrom;
                     break;
                 case "f25":
-                    issueDate = lastIssue.dDateEASA_25_Issue ?? lastIssue.dIssue ?? lastIssue.dFrom;
+                    issueDate = act.d_CofA_Date ?? lastIssue.dDateEASA_25_Issue ?? lastIssue.dIssue ?? lastIssue.dFrom;
                     break;
                 case "directive8":
                 case "special":
                 case "vla":
                 case "unknown":
-                    issueDate = lastIssue.dIssue ?? lastIssue.dFrom;
+                    issueDate = act.d_CofA_Date ?? lastIssue.dIssue ?? lastIssue.dFrom;
                     break;
                 default:
                     throw new Exception("Unexpected ACT alias");
