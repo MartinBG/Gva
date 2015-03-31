@@ -66,7 +66,7 @@ namespace Gva.Api.Controllers.Organizations
 
         [Route("")]
         public IHttpActionResult GetOrganizations(
-            string name = null,
+            string organizationName = null,
             int? caseTypeId = null,
             string cao = null,
             string uin = null,
@@ -74,7 +74,7 @@ namespace Gva.Api.Controllers.Organizations
             DateTime? dateCaoValidTo = null,
             bool exact = false)
         {
-            var organizations = this.organizationRepository.GetOrganizations(name, caseTypeId, cao, uin, dateValidTo, dateCaoValidTo, exact);
+            var organizations = this.organizationRepository.GetOrganizations(organizationName, caseTypeId, cao, uin, dateValidTo, dateCaoValidTo, exact);
             return Ok(organizations.Select(o => new OrganizationViewDO(o)));
         }
 

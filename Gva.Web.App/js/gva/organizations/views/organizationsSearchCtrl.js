@@ -10,7 +10,7 @@
   ) {
 
     $scope.filters = {
-      name: null,
+      organizationName: null,
       caseTypeId: null
     };
 
@@ -23,7 +23,7 @@
     $scope.organizations = organizations;
 
     $scope.search = function () {
-      $state.go('root.organizations.search', {
+      return $state.go('root.organizations.search', {
         cao: $scope.filters.cao,
         uin: $scope.filters.uin,
         dateValidTo: $scope.filters.dateValidTo,

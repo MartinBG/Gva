@@ -29,10 +29,22 @@ namespace Gva.Api.Repositories.OrganizationRepository
             int offset = 0,
             int? limit = null)
         {
-            var predicate = PredicateBuilder.True<GvaViewOrganization>()
-                .AndStringMatches(o => o.Cao, cao, exact)
-                .AndStringMatches(o => o.Uin, uin, exact)
-                .AndStringMatches(o => o.Name, name, exact);
+            var predicate = PredicateBuilder.True<GvaViewOrganization>();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                predicate = predicate.And(o => o.Name.Contains(name));
+            }
+
+            if (!string.IsNullOrEmpty(cao))
+            {
+                predicate = predicate.AndStringMatches(o => o.Cao, cao, exact);
+            }
+
+            if (!string.IsNullOrEmpty(uin))
+            {
+                predicate = predicate.AndStringMatches(o => o.Uin, uin, exact);
+            }
 
             if (dateValidTo.HasValue)
             {
