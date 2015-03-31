@@ -26,6 +26,7 @@ using Docs.Api.Models;
 using Docs.Api.Repositories.DocRepository;
 using Regs.Api.LotEvents;
 using Common.Api.UserContext;
+using Docs.Api.Models.UnitModels;
 
 namespace Gva.Api.Repositories.ApplicationRepository
 {
