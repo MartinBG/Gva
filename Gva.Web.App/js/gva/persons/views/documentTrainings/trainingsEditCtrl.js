@@ -46,7 +46,7 @@
         if (result === 'OK') {
           return PersonDocumentTrainings.remove({
             id: $stateParams.id,
-            ind: personDocumentTraining.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.persons.view.documentTrainings.search');
           });

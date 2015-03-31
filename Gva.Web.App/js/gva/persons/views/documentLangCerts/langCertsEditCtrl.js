@@ -53,7 +53,7 @@
         if (result === 'OK') {
           return PersonDocumentLangCerts.remove({
             id: $stateParams.id,
-            ind: personDocumentLangCert.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.persons.view.documentLangCerts.search');
           });

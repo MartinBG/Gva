@@ -64,7 +64,7 @@
         if (result === 'OK') {
           return OrganizationInspections.remove({
             id: $stateParams.id,
-            ind: organizationInspection.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.organizations.view.inspections.search');
           });

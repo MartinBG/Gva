@@ -43,7 +43,7 @@
       return scMessage('common.messages.confirmDelete')
       .then(function (result) {
         if (result === 'OK') {
-          return CertAirOperators.remove({ id: $stateParams.id, ind: certificate.partIndex })
+          return CertAirOperators.remove({ id: $stateParams.id, ind: $stateParams.ind })
             .$promise.then(function () {
               return $state.go('root.organizations.view.certAirOperators.search');
             });

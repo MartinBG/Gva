@@ -45,7 +45,7 @@
         if (result === 'OK') {
           return AircraftDocumentOwners.remove({
             id: $stateParams.id,
-            ind: aircraftDocumentOwner.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.aircrafts.view.owners.search');
           });

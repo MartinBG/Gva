@@ -45,7 +45,7 @@
         if (result === 'OK') {
           return AirportCertOperationals.remove({
             id: $stateParams.id,
-            ind: airportCertOper.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.airports.view.opers.search');
           });

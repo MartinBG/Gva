@@ -42,7 +42,7 @@
       return scMessage('common.messages.confirmDelete')
       .then(function (result) {
         if (result === 'OK') {
-          return AircraftCertSmods.remove({ id: $stateParams.id, ind: aircraftCertSmod.partIndex })
+          return AircraftCertSmods.remove({ id: $stateParams.id, ind: $stateParams.ind })
           .$promise.then(function () {
             return $state.go('root.aircrafts.view.smods.search');
           });

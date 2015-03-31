@@ -45,7 +45,7 @@
         if (result === 'OK') {
           return AircraftInspections.remove({
             id: $stateParams.id,
-            ind: aircraftInspection.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.aircrafts.view.inspections.search');
           });

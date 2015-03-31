@@ -45,7 +45,7 @@
         if (result === 'OK') {
           return AirportInspections.remove({
             id: $stateParams.id,
-            ind: airportInspection.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.airports.view.inspections.search');
           });

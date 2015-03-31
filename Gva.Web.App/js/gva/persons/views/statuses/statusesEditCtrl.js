@@ -43,7 +43,7 @@
       .then(function (result) {
         if (result === 'OK') {
           return PersonStatuses
-            .remove({ id: $stateParams.id, ind: status.partIndex }).$promise
+            .remove({ id: $stateParams.id, ind: $stateParams.ind }).$promise
             .then(function () {
               return $state.go('root.persons.view.statuses.search');
             });

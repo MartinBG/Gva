@@ -44,7 +44,7 @@
       .then(function (result) {
         if (result === 'OK') {
           return AircraftCertNoises
-          .remove({ id: $stateParams.id, ind: aircraftCertNoise.partIndex })
+          .remove({ id: $stateParams.id, ind: $stateParams.ind })
           .$promise.then(function () {
             return $state.go('root.aircrafts.view.noises.search');
           });

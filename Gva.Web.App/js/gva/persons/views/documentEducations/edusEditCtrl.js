@@ -49,7 +49,7 @@
         if (result === 'OK') {
           return PersonDocumentEducations.remove({
             id: $stateParams.id,
-            ind: edu.partIndex
+            ind: $stateParams.ind
           })
           .$promise.then(function () {
             return $state.go('root.persons.view.documentEducations.search');

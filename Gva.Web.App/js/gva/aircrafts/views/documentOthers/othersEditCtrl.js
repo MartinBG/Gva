@@ -45,7 +45,7 @@
         if (result === 'OK') {
           return AircraftDocumentOthers.remove({
             id: $stateParams.id,
-            ind: aircraftDocumentOther.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.aircrafts.view.others.search');
           });

@@ -47,7 +47,7 @@
       .then(function (result) {
         if (result === 'OK') {
           return OrganizationRecommendations
-            .remove({ id: $stateParams.id, ind: organizationRecommendation.partIndex })
+            .remove({ id: $stateParams.id, ind: $stateParams.ind })
             .$promise.then(function () {
               return $state.go('root.organizations.view.recommendations.search');
             });

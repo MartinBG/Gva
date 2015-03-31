@@ -42,7 +42,7 @@
       return scMessage('common.messages.confirmDelete')
       .then(function (result) {
         if (result === 'OK') {
-          return PersonAddresses.remove({ id: $stateParams.id, ind: address.partIndex })
+          return PersonAddresses.remove({ id: $stateParams.id, ind: $stateParams.ind })
           .$promise.then(function () {
             return $state.go('root.persons.view.addresses.search');
           });

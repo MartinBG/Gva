@@ -48,7 +48,7 @@
       .then(function (result) {
         if (result === 'OK') {
           return PersonDocumentEmployments
-            .remove({ id: $stateParams.id, ind: employment.partIndex })
+            .remove({ id: $stateParams.id, ind: $stateParams.ind })
             .$promise.then(function () {
               return $state.go('root.persons.view.employments.search', {}, {reload: true});
             });

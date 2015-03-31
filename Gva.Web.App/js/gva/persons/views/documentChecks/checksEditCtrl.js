@@ -48,7 +48,7 @@
         if (result === 'OK') {
           return PersonDocumentChecks.remove({
             id: $stateParams.id,
-            ind: personDocumentCheck.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.persons.view.checks.search');
           });

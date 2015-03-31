@@ -44,7 +44,7 @@
       .then(function (result) {
         if (result === 'OK') {
           return AircraftCertRadios
-          .remove({ id: $stateParams.id, ind: aircraftCertRadio.partIndex })
+          .remove({ id: $stateParams.id, ind: $stateParams.ind })
           .$promise.then(function () {
             return $state.go('root.aircrafts.view.radios.search');
           });

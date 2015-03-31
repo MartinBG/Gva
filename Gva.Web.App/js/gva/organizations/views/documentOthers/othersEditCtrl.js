@@ -47,7 +47,7 @@
         if (result === 'OK') {
           return OrganizationDocumentOthers.remove({
             id: $stateParams.id,
-            ind: organizationDocumentOther.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.organizations.view.documentOthers.search');
           });

@@ -45,7 +45,7 @@
         if (result === 'OK') {
           return EquipmentDocumentOwners.remove({
             id: $stateParams.id,
-            ind: equipmentDocumentOwner.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.equipments.view.owners.search');
           });

@@ -48,7 +48,7 @@
       .then(function (result) {
         if (result === 'OK') {
           return OrganizationStaffManagements
-            .remove({ id: $stateParams.id, ind: organizationStaffManagement.partIndex })
+            .remove({ id: $stateParams.id, ind: $stateParams.ind })
             .$promise.then(function () {
               return $state.go('root.organizations.view.staffManagement.search');
             });

@@ -47,7 +47,7 @@
         if (result === 'OK') {
           return OrganizationAwExaminers.remove({
               id: $stateParams.id,
-              ind: organizationAwExaminer.partIndex
+              ind: $stateParams.ind
             }).$promise.then(function () {
               return $state.go('root.organizations.view.awExaminers.search');
             });

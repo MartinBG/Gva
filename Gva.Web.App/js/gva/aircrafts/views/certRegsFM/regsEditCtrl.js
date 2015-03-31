@@ -66,7 +66,7 @@
         if (result === 'OK') {
           return AircraftCertRegistrationsFM.remove({
             id: $stateParams.id,
-            ind: aircraftCertRegistration.partIndex
+            ind: $stateParams.ind
           })
           .$promise.then(function () {
             return $state.go('root.aircrafts.view.regsFM.search', {}, {reload: true});

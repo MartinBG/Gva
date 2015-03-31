@@ -49,7 +49,7 @@
         if (result === 'OK') {
           return AircraftDocumentDebtsFM.remove({
             id: $stateParams.id,
-            ind: aircraftDocumentDebt.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.aircrafts.view.debtsFM.search');
           });

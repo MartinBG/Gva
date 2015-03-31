@@ -43,7 +43,7 @@
       .then(function (result) {
         if (result === 'OK') {
           return AircraftDocumentOccurrences
-          .remove({ id: $stateParams.id, ind: aircraftDocumentOccurrence.partIndex })
+          .remove({ id: $stateParams.id, ind: $stateParams.ind })
           .$promise.then(function () {
             return $state.go('root.aircrafts.view.occurrences.search');
           });

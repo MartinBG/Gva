@@ -45,7 +45,7 @@
         if (result === 'OK') {
           return EquipmentInspections.remove({
             id: $stateParams.id,
-            ind: equipmentInspection.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.equipments.view.inspections.search');
           });

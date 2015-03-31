@@ -45,7 +45,7 @@
         if (result === 'OK') {
           return EquipmentCertOperationals.remove({
             id: $stateParams.id,
-            ind: equipmentCertOper.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.equipments.view.opers.search');
           });

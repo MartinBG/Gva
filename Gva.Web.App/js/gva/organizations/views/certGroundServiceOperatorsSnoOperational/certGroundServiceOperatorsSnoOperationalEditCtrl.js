@@ -46,7 +46,7 @@
       .then(function (result) {
         if (result === 'OK') {
           return OrganizationCertGroundServiceOperatorsSnoOperationals
-            .remove({ id: $stateParams.id, ind: certificate.partIndex })
+            .remove({ id: $stateParams.id, ind: $stateParams.ind })
             .$promise.then(function () {
               return $state
                 .go('root.organizations.view.groundServiceOperatorsSnoOperational.search');

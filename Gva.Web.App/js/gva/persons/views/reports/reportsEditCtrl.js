@@ -45,7 +45,7 @@
       return scMessage('common.messages.confirmDelete')
       .then(function (result) {
         if (result === 'OK') {
-          return PersonReports.remove({ id: $scope.lotId, ind: report.partIndex })
+          return PersonReports.remove({ id: $scope.lotId, ind: $stateParams.ind })
           .$promise.then(function () {
             return $state.go('root.persons.view.reports.search');
           });

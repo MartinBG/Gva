@@ -45,7 +45,7 @@
         if (result === 'OK') {
           return PersonFlyingExperiences.remove({
             id: $stateParams.id,
-            ind: personFlyingExperience.partIndex
+            ind: $stateParams.ind
           }).$promise.then(function () {
             return $state.go('root.persons.view.flyingExperiences.search');
           });

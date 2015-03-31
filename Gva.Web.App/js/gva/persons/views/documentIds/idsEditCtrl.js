@@ -44,7 +44,7 @@
       return scMessage('common.messages.confirmDelete')
       .then(function (result) {
         if (result === 'OK') {
-          return PersonDocumentIds.remove({ id: $stateParams.id, ind: docId.partIndex })
+          return PersonDocumentIds.remove({ id: $stateParams.id, ind: $stateParams.ind })
               .$promise.then(function () {
             return $state.go('root.persons.view.documentIds.search');
           });
