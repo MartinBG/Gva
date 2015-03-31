@@ -200,7 +200,7 @@ namespace Gva.Api.Controllers.Integration
                                     aircraftData.AircraftProducer = this.nomRepository.GetNomValues("aircraftProducers", producerName).FirstOrDefault();
                                 
                                     intDocRelation.AircraftData = aircraftData;
-                                    intDocRelation.CorrespondentData = this.correspondentRepository.ConvertElServiceRecipientToCorrespondent(concreteApp.ElectronicServiceRecipient);
+                                    intDocRelation.CorrespondentData = this.integrationRepository.ConvertElServiceRecipientToCorrespondent(concreteApp.ElectronicServiceRecipient);
                                     break;
                                 }
                             case EasaForm14OrganizationAppType:

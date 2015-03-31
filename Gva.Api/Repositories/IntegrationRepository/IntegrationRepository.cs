@@ -13,6 +13,7 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.DataObjects;
 using Docs.Api.Models;
 using Gva.Api.ModelsDO.Organizations;
+using R_0009_000015;
 
 namespace Gva.Api.Repositories.IntegrationRepository
 {
@@ -138,6 +139,57 @@ namespace Gva.Api.Repositories.IntegrationRepository
             }
 
             return correspondentIds;
+        }
+
+        public CorrespondentDO ConvertElServiceRecipientToCorrespondent(ElectronicServiceRecipient applicant)
+        {
+            CorrespondentGroup correspondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Applicants".ToLower());
+
+            CorrespondentDO newCorrespondent = new CorrespondentDO()
+            {
+                CorrespondentGroupId = correspondentGroup.CorrespondentGroupId,
+                IsActive = true
+            };
+
+            CorrespondentType correspondentType = null;
+
+            if (applicant.Entity != null)
+            {
+                newCorrespondent.LegalEntityName = applicant.Entity.Name;
+                newCorrespondent.LegalEntityBulstat = applicant.Entity.Identifier;
+                correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "LegalEntity".ToLower());
+            }
+            else if (applicant.ForeignEntity != null)
+            {
+                newCorrespondent.FLegalEntityName = applicant.ForeignEntity.ForeignEntityName;
+                correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "ForeignLegalEntity".ToLower());
+            }
+            else if (applicant.ForeignPerson != null)
+            {
+                newCorrespondent.ForeignerFirstName = applicant.ForeignPerson.Names.FirstCyrillic;
+                newCorrespondent.ForeignerLastName = applicant.ForeignPerson.Names.LastCyrillic;
+                correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Foreigner".ToLower());
+            }
+            else
+            {
+                newCorrespondent.BgCitizenFirstName = applicant.Person.Names.First;
+                newCorrespondent.BgCitizenLastName = applicant.Person.Names.Last;
+                newCorrespondent.BgCitizenUIN = applicant.Person.Identifier.EGN;
+                correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "BulgarianCitizen".ToLower());
+            }
+
+            newCorrespondent.CorrespondentTypeId = correspondentType != null ? correspondentType.CorrespondentTypeId : (int?)null;
+            newCorrespondent.CorrespondentTypeAlias = correspondentType != null ? correspondentType.Alias : string.Empty;
+            newCorrespondent.CorrespondentTypeName = correspondentType != null ? correspondentType.Name : string.Empty;
+
+            newCorrespondent.SetupFlags();
+
+            return newCorrespondent;
         }
     }
 }

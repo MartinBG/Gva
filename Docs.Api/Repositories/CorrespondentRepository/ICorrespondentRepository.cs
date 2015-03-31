@@ -1,13 +1,9 @@
-﻿using Common.Api.Repositories;
-using Common.Api.UserContext;
-using Docs.Api.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Common.Api.Repositories;
+using Common.Api.UserContext;
 using Docs.Api.DataObjects;
-using R_0009_000015;
+using Docs.Api.Models;
 
 namespace Docs.Api.Repositories.CorrespondentRepository
 {
@@ -16,8 +12,6 @@ namespace Docs.Api.Repositories.CorrespondentRepository
         CorrespondentDO GetNewCorrespondent();
 
         CorrespondentDO CreateCorrespondent(CorrespondentDO corr, UserContext userContext);
-
-        CorrespondentDO ConvertElServiceRecipientToCorrespondent(ElectronicServiceRecipient applicant);
 
         CorrespondentDO GetCorrespondentFromOrganization(string orgName, string orgUin);
 
