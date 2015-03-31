@@ -1,27 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Common.Data;
-using Gva.Api.Models;
-using System;
 using Common.Linq;
-using System.Data.Entity;
+using Gva.Api.Models;
 using Gva.Api.Models.Views.Organization;
-using Common.Extensions;
-using Newtonsoft.Json.Linq;
-using Gva.Api.ModelsDO.Organizations;
-using Gva.Api.Repositories.FileRepository;
 
 namespace Gva.Api.Repositories.OrganizationRepository
 {
     public class OrganizationRepository : IOrganizationRepository
     {
         private IUnitOfWork unitOfWork;
-        private IFileRepository fileRepository;
 
-        public OrganizationRepository(IUnitOfWork unitOfWork, IFileRepository fileRepository)
+        public OrganizationRepository(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
-            this.fileRepository = fileRepository;
         }
 
         public IEnumerable<GvaViewOrganization> GetOrganizations(

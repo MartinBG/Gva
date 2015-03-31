@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
 using Common.Api.Models;
 using Common.Data;
-using Common.Linq;
-using Gva.Api.Models.Views.Aircraft;
-using Gva.Api.ModelsDO.Aircrafts;
 using Regs.Api.Repositories.LotRepositories;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Models;
@@ -16,7 +12,6 @@ using Regs.Api.LotEvents;
 using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.DataObjects;
 using Docs.Api.Models;
-using R_0009_000015;
 using Gva.Api.ModelsDO.Organizations;
 
 namespace Gva.Api.Repositories.IntegrationRepository

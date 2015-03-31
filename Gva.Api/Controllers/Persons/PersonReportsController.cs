@@ -23,7 +23,6 @@ namespace Gva.Api.Controllers.Persons
     [Authorize]
     public class PersonReportsController : GvaCaseTypePartController<PersonReportDO>
     {
-        private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
         private IFileRepository fileRepository;
         private IPersonRepository personRepository;
@@ -34,13 +33,11 @@ namespace Gva.Api.Controllers.Persons
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             INomRepository nomRepository,
-            ICaseTypeRepository caseTypeRepository,
             IPersonRepository personRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("personReports", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
-            this.caseTypeRepository = caseTypeRepository;
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
             this.personRepository = personRepository;

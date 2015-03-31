@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Data;
-using Common.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Gva.Api.Controllers

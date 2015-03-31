@@ -4,32 +4,27 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Blob;
 using Common.Data;
-using Common.Utils;
 using Common.Json;
-using Docs.Api.Models;
+using Common.Utils;
+using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Gva.Api.Models;
-using Gva.Api.ModelsDO.Integration;
-using Gva.Api.Repositories.ApplicationRepository;
-using Regs.Api.Models;
-using Regs.Api.Repositories.LotRepositories;
-using Rio.Data.RioObjectExtractor;
-using Rio.Data.Utils.RioDocumentParser;
-using Gva.Api.Repositories.CaseTypeRepository;
-using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.PersonRepository;
-using Common.Api.Models;
-using Gva.Api.ModelsDO.Applications;
-using Docs.Api.Repositories.CorrespondentRepository;
-using Docs.Api.DataObjects;
-using Regs.Api.LotEvents;
-using Gva.Api.Repositories.IntegrationRepository;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.ModelsDO.Applications;
+using Gva.Api.ModelsDO.Integration;
 using Gva.Api.ModelsDO.Organizations;
+using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.ApplicationRepository;
+using Gva.Api.Repositories.CaseTypeRepository;
+using Gva.Api.Repositories.IntegrationRepository;
+using Gva.Api.Repositories.PersonRepository;
+using Regs.Api.Repositories.LotRepositories;
+using Rio.Data.Utils.RioDocumentParser;
 
 namespace Gva.Api.Controllers.Integration
 {
@@ -46,9 +41,7 @@ namespace Gva.Api.Controllers.Integration
         private IIntegrationRepository integrationRepository;
         private ICorrespondentRepository correspondentRepository;
         private IRioDocumentParser rioDocumentParser;
-        private IRioObjectExtractor rioObjectExtractor;
         private UserContext userContext;
-        private ILotEventDispatcher lotEventDispatcher;
 
         private Dictionary<string, string> AppTypeCodeByAlias =
             new Dictionary<string, string>(){
@@ -72,9 +65,7 @@ namespace Gva.Api.Controllers.Integration
             INomRepository nomRepository,
             ICorrespondentRepository correspondentRepository,
             IRioDocumentParser rioDocumentParser,
-            IRioObjectExtractor rioObjectExtractor,
-            UserContext userContext,
-            ILotEventDispatcher lotEventDispatcher)
+            UserContext userContext)
         {
             this.docRepository = docRepository;
             this.unitOfWork = unitOfWork;
@@ -86,9 +77,7 @@ namespace Gva.Api.Controllers.Integration
             this.nomRepository = nomRepository;
             this.correspondentRepository = correspondentRepository;
             this.rioDocumentParser = rioDocumentParser;
-            this.rioObjectExtractor = rioObjectExtractor;
             this.userContext = userContext;
-            this.lotEventDispatcher = lotEventDispatcher;
         }
 
         [Route("caseApplications")]

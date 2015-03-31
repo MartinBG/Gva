@@ -5,7 +5,6 @@ using Common.Data;
 using Gva.Api.Models.Enums;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.ExaminationSystemRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -19,7 +18,6 @@ namespace Gva.Api.Controllers.Persons
         private ILotRepository lotRepository;
         private IFileRepository fileRepository;
         private IUnitOfWork unitOfWork;
-        private IExaminationSystemRepository examinationSystemRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
 
@@ -27,7 +25,6 @@ namespace Gva.Api.Controllers.Persons
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
-            IExaminationSystemRepository examinationSystemRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("personExamSystData", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
@@ -35,7 +32,6 @@ namespace Gva.Api.Controllers.Persons
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
             this.unitOfWork = unitOfWork;
-            this.examinationSystemRepository = examinationSystemRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
         }

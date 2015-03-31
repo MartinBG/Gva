@@ -7,7 +7,6 @@ using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
-using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.ModelsDO.Organizations;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.AircraftRepository;
@@ -15,11 +14,11 @@ using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.EquipmentRepository;
+using Gva.Api.Repositories.ExaminationSystemRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.StageRepository;
 using Regs.Api.Repositories.LotRepositories;
-using Gva.Api.Repositories.ExaminationSystemRepository;
 
 namespace Gva.Api.Controllers
 {

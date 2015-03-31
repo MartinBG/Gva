@@ -2,20 +2,13 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Data;
 using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
-using Gva.Api.Models.Views;
 using Gva.Api.Models.Views.Person;
-using Gva.Api.ModelsDO.ExaminationSystem;
-using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.FileRepository;
-using Regs.Api.Models;
-using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -23,19 +16,13 @@ namespace Gva.Api.Repositories.PersonRepository
     {
         private IUnitOfWork unitOfWork;
         private INomRepository nomRepository;
-        private ILotRepository lotRepository;
-        private IFileRepository fileRepository;
 
         public PersonRepository(
             IUnitOfWork unitOfWork,
-            INomRepository nomRepository,
-            ILotRepository lotRepository,
-            IFileRepository fileRepository)
+            INomRepository nomRepository)
         {
             this.unitOfWork = unitOfWork;
             this.nomRepository = nomRepository;
-            this.lotRepository = lotRepository;
-            this.fileRepository = fileRepository;
         }
 
         public IEnumerable<GvaViewPerson> GetPersons(

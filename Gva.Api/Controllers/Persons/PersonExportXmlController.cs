@@ -1,19 +1,18 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Xml.Linq;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Data;
-using Gva.Api.ModelsDO.Persons;
-using Regs.Api.Repositories.LotRepositories;
-using System.Net.Http.Headers;
-using System.Net.Http;
-using System.Net;
-using System.Xml.Linq;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Models.Views;
-
+using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.ApplicationRepository;
+using Newtonsoft.Json;
+using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers.Persons
 {

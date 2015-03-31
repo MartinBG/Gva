@@ -46,7 +46,7 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             AircraftCertAirworthinessFMDO newCertAirworthinessFM = new AircraftCertAirworthinessFMDO()
             {
-                AirworthinessCertificateType = nomRepository.GetNomValue("airworthinessCertificateTypes", "f25")
+                AirworthinessCertificateType = this.nomRepository.GetNomValue("airworthinessCertificateTypes", "f25")
             };
 
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();

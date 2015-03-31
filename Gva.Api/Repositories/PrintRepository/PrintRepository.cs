@@ -2,12 +2,7 @@
 using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
-using Common.Api.UserContext;
 using Common.Blob;
-using Common.Data;
-using Gva.Api.Repositories.FileRepository;
-using Regs.Api.LotEvents;
-using Regs.Api.Repositories.LotRepositories;
 using SautinSoft;
 
 namespace Gva.Api.Repositories.PrintRepository

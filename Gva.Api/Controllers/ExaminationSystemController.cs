@@ -1,9 +1,7 @@
 ﻿using System.Configuration;
-using System.Linq;
 using System.Web.Http;
 using Common.Api.UserContext;
 using Common.Data;
-using Gva.Api.Models;
 using Gva.Api.Repositories.ExaminationSystemRepository;
 using Oracle.ManagedDataAccess.Client;
 using Regs.Api.Repositories.LotRepositories;

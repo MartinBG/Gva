@@ -5,11 +5,9 @@ using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Filters;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
-using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
@@ -27,7 +25,6 @@ namespace Gva.Api.Controllers.Aircrafts
         private IFileRepository fileRepository;
         private ICaseTypeRepository caseTypeRepository;
         private INomRepository nomRepository;
-        private IAircraftRegistrationRepository aircraftRegistrationRepository;
         private IUnitOfWork unitOfWork;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
@@ -39,7 +36,6 @@ namespace Gva.Api.Controllers.Aircrafts
             IFileRepository fileRepository,
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository,
-            IAircraftRegistrationRepository aircraftRegistrationRepository,
             ILotEventDispatcher lotEventDispatcher,
 
             UserContext userContext)
@@ -49,7 +45,6 @@ namespace Gva.Api.Controllers.Aircrafts
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
             this.caseTypeRepository = caseTypeRepository;
-            this.aircraftRegistrationRepository = aircraftRegistrationRepository;
             this.nomRepository = nomRepository;
             this.unitOfWork = unitOfWork;
             this.lotEventDispatcher = lotEventDispatcher;

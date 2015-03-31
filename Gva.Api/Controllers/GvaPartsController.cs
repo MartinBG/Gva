@@ -3,7 +3,6 @@ using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
 using Gva.Api.ModelsDO;
-using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
