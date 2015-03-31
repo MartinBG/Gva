@@ -118,6 +118,44 @@
           </sc-column>
         </sc-datatable>
       </div>
+      <div ng-if="set === 'organization'">
+        <sc-search selected-filters="filters" btn-classes="col-sm-7 col-md-5 col-lg-4" default-action="searchOrganizations()">
+          <sc-filter type="text" name="organizationName" class="col-sm-2" removable="false" label="organizations.search.name"></sc-filter>
+          <sc-filter type="nomenclature" name="caseTypeId" class="col-sm-2" removable="false" alias="organizationCaseTypes" mode="id" label="organizations.search.caseType"></sc-filter>
+          <sc-filter type="text" name="cao" class="col-sm-2" removable="true" label="organizations.search.cao"></sc-filter>
+          <sc-filter type="text" name="uin" class="col-sm-2" removable="true" label="organizations.search.uin"></sc-filter>
+          <sc-filter type="date" name="dateValidTo" class="col-sm-2" removable="true" label="organizations.search.dateValidTo"></sc-filter>
+          <sc-filter type="date" name="dateCaoValidTo" class="col-sm-2" removable="true" label="organizations.search.dateCaoValidTo"></sc-filter>
+          <sc-search-button action="searchOrganizations()" text="organizations.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
+          <sc-search-button action="newLot()" text="organizations.search.newOrganization" icon="glyphicon-plus"></sc-search-button>
+          <sc-search-button action="clear"></sc-search-button>
+           <sc-search-button action="add"></sc-search-button>
+        </sc-search>
+
+        <sc-datatable items="items" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+          <sc-column sortable="false" class="buttons-cell" has-content="true">
+            <sc-button name="viewButton"  btn-click="chooseLot(item)"  class="btn btn-xs btn-primary" target="_blank" text="common.linkAppModal.chooseBtn">
+            </sc-button>
+            <a name="viewBtn" sc-sref="{state: 'root.organizations.view', params: { id: item.id }}" target="_blank" class="btn btn-xs btn-default">
+              <span class="glyphicon glyphicon-eye-open"></span>
+            </a>
+          </sc-column>
+            <sc-column data="name" title="organizations.search.name">
+          </sc-column>
+          <sc-column data="cao" title="organizations.search.cao">
+          </sc-column>
+          <sc-column data="uin" title="organizations.search.uin">
+          </sc-column>
+          <sc-column data="valid" title="organizations.search.valid" type="boolean">
+          </sc-column>
+          <sc-column data="organizationType" title="organizations.search.organizationType">
+          </sc-column>
+          <sc-column data="dateValidTo" title="organizations.search.dateValidTo" type="date">
+          </sc-column>
+          <sc-column data="dateCaoValidTo" title="organizations.search.dateCaoValidTo" type="date">
+          </sc-column>
+        </sc-datatable>
+      </div>
     </div>
 
     <div ng-if="currentTab === 'newLot'">
@@ -131,6 +169,9 @@
         </div>
         <div ng-if="set === 'aircraft' && !showWizzard">
           <gva-aircraft-data name="form.newLotForm.aircraftData" ng-model="newLot.aircraftData"></gva-aircraft-data>
+        </div>
+        <div ng-if="set === 'organization'">
+          <gva-organization-data name="form.newLotForm.organizationDataForm" ng-model="newLot"></gva-organization-data>
         </div>
       </ng-form>
     </div>

@@ -29,6 +29,7 @@ using Docs.Api.DataObjects;
 using Regs.Api.LotEvents;
 using Gva.Api.Repositories.IntegrationRepository;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.ModelsDO.Organizations;
 
 namespace Gva.Api.Controllers.Integration
 {
@@ -52,12 +53,13 @@ namespace Gva.Api.Controllers.Integration
         private Dictionary<string, string> AppTypeCodeByAlias =
             new Dictionary<string, string>(){
                     {"R-4284", "АП-5D"},
-                    {"R-4356", "ВС-05"}
+                    {"R-4356", "ВС-05"},
+                    {"R-5132", "АО-04"}
             };
 
         private const string LicenseControllerAndCoordinatorAppType = "R-4284";
         private const string CertRegAircraftAppType = "R-4356";
-        
+        private const string EasaForm14OrganizationAppType = "R-5132";
 
         public IntegrationController(
             IDocRepository docRepository,
@@ -212,6 +214,23 @@ namespace Gva.Api.Controllers.Integration
                                     intDocRelation.CorrespondentData = this.correspondentRepository.ConvertElServiceRecipientToCorrespondent(concreteApp.ElectronicServiceRecipient);
                                     break;
                                 }
+                            case EasaForm14OrganizationAppType:
+                                {
+                                    var organizationData = new OrganizationDataDO();
+                                    var concreteApp = (R_5132.ApprovalPartMSubpartGApplication)rioApplication;
+                                    organizationData.Name = concreteApp.EntityTradeName ?? concreteApp.EntityBasicData.Name;
+                                    string foreignName = null;
+                                    if (concreteApp.ForeignEntityBasicData != null)
+                                    { 
+                                        foreignName = concreteApp.ForeignEntityBasicData.ForeignEntityName;
+                                    }
+                                    organizationData.NameAlt = foreignName ?? organizationData.Name;
+                                    organizationData.Uin = concreteApp.EntityBasicData.Identifier;
+
+                                    intDocRelation.OrganizationData = organizationData;
+                                    intDocRelation.CorrespondentData = this.correspondentRepository.GetCorrespondentFromOrganization(organizationData.Name, organizationData.Uin);
+                                    break;
+                                }
                             default:
                                 break;
 
@@ -241,6 +260,7 @@ namespace Gva.Api.Controllers.Integration
                 List<string> lotCaseTypes = null;
                 List<int> correspondentIds = null;
                 AircraftDataDO aircraftData = null;
+                OrganizationDataDO organizationData = null;
 
                 if (lot.Set.Alias == "Person")
                 {
@@ -252,7 +272,13 @@ namespace Gva.Api.Controllers.Integration
                 {
                     aircraftData = lot.Index.GetPart<AircraftDataDO>("aircraftData").Content;
                     lotCaseTypes = new List<string>() { "aircraft" };
-                    correspondentIds = this.integrationRepository.GetCorrespondentIdFromCorrespondent(newAppDO.CorrespondentData, this.userContext);
+                    correspondentIds = this.integrationRepository.CreateCorrespondent(newAppDO.CorrespondentData, this.userContext);
+                }
+                else if (lot.Set.Alias == "Organization")
+                {
+                    organizationData = lot.Index.GetPart<OrganizationDataDO>("organizationData").Content;
+                    lotCaseTypes = organizationData.CaseTypes.Select(c => c.Alias).ToList();
+                    correspondentIds = this.integrationRepository.CreateCorrespondent(newAppDO.CorrespondentData, this.userContext);
                 }
 
                 int? caseTypeId = null;
@@ -264,9 +290,9 @@ namespace Gva.Api.Controllers.Integration
                 else
                 {
                     var firstAppCaseTypes = newAppDO.CaseTypes.First();
-                    if (lot.Set.Alias == "Person")
+                    if (lot.Set.Alias == "Person" || lot.Set.Alias == "Organization")
                     {
-                        this.integrationRepository.UpdatePersonDataCaseTypes(firstAppCaseTypes, personData, lot, this.userContext);
+                        this.integrationRepository.UpdateLotCaseTypes(lot.Set.Alias, firstAppCaseTypes, lot, this.userContext);
                     }
                     caseTypeId = firstAppCaseTypes.GvaCaseTypeId;
                  }

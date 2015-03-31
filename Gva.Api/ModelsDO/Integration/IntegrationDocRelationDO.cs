@@ -8,6 +8,7 @@ using Docs.Api.DataObjects;
 using Docs.Api.Models;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.ModelsDO.Organizations;
 using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.ModelsDO.Integration
@@ -51,6 +52,8 @@ namespace Gva.Api.ModelsDO.Integration
         public PersonDataDO PersonData { get; set; }
 
         public AircraftDataDO AircraftData { get; set; }
+
+        public OrganizationDataDO OrganizationData { get; set; }
 
         public CorrespondentDO CorrespondentData { get; set; }
     }

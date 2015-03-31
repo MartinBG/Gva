@@ -19,6 +19,8 @@ namespace Docs.Api.Repositories.CorrespondentRepository
 
         CorrespondentDO ConvertElServiceRecipientToCorrespondent(ElectronicServiceRecipient applicant);
 
+        CorrespondentDO GetCorrespondentFromOrganization(string orgName, string orgUin);
+
         List<Correspondent> GetCorrespondents(
             string displayName,
             string correspondentEmail,

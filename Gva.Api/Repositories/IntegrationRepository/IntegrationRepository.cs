@@ -17,6 +17,7 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.DataObjects;
 using Docs.Api.Models;
 using R_0009_000015;
+using Gva.Api.ModelsDO.Organizations;
 
 namespace Gva.Api.Repositories.IntegrationRepository
 {
@@ -42,7 +43,7 @@ namespace Gva.Api.Repositories.IntegrationRepository
             this.correspondentRepository = correspondentRepository;
         }
 
-        public void UpdatePersonDataCaseTypes(GvaCaseType caseType, PersonDataDO personData, Lot lot, UserContext userContext)
+        public void UpdateLotCaseTypes(string set, GvaCaseType caseType, Lot lot, UserContext userContext)
         {
             NomValue caseTypeNom = new NomValue()
             {
@@ -51,17 +52,28 @@ namespace Gva.Api.Repositories.IntegrationRepository
                 Alias = caseType.Alias
             };
 
-            personData.CaseTypes.Add(caseTypeNom);
-
-            this.caseTypeRepository.AddCaseTypes(lot, personData.CaseTypes.Select(ct => ct.NomValueId));
-
-            var personDataPart = lot.UpdatePart("personData", personData, userContext);
+            Part updatedPart = null;
+            int? partId = null;
+            if (set == "Person")
+            {
+                PersonDataDO personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+                personData.CaseTypes.Add(caseTypeNom);
+                this.caseTypeRepository.AddCaseTypes(lot, personData.CaseTypes.Select(ct => ct.NomValueId));
+                updatedPart = lot.UpdatePart("personData", personData, userContext).Part;
+            }
+            else if (set == "Organization")
+            {
+                OrganizationDataDO organizationData = lot.Index.GetPart<OrganizationDataDO>("organizationData").Content;
+                organizationData.CaseTypes.Add(caseTypeNom);
+                this.caseTypeRepository.AddCaseTypes(lot, organizationData.CaseTypes.Select(ct => ct.NomValueId));
+                updatedPart = lot.UpdatePart("organizationData", organizationData, userContext).Part;
+            }
 
             lot.Commit(userContext, this.lotEventDispatcher);
 
             this.unitOfWork.Save();
 
-            this.lotRepository.ExecSpSetLotPartTokens(personDataPart.PartId);
+            this.lotRepository.ExecSpSetLotPartTokens(updatedPart.PartId);
         }
 
         public List<int> GetCorrespondentIdsPerPersonLot(PersonDataDO personData, UserContext userContext)
@@ -94,7 +106,7 @@ namespace Gva.Api.Repositories.IntegrationRepository
             return correspondentIds;
         }
 
-        public List<int> GetCorrespondentIdFromCorrespondent(CorrespondentDO correspondent, UserContext userContext)
+        public List<int> CreateCorrespondent(CorrespondentDO correspondent, UserContext userContext)
         {
             string displayName = "";
             if (correspondent.CorrespondentTypeAlias == "ForeignLegalEntity")
