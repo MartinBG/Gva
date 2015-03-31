@@ -200,9 +200,6 @@
           });
       } else if ($scope.set === 'organization') {
         $scope.newLot = $scope.wrapper.selectedApp.organizationData;
-        $scope.newLot.name = $scope.wrapper.selectedApp.organizationData.name;
-        $scope.newLot.nameAlt = $scope.wrapper.selectedApp.organizationData.nameAlt;
-        $scope.newLot.uin = $scope.wrapper.selectedApp.organizationData.uin;
       }
     };
 

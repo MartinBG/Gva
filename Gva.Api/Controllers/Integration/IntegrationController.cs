@@ -215,6 +215,7 @@ namespace Gva.Api.Controllers.Integration
                                     }
                                     organizationData.NameAlt = foreignName ?? organizationData.Name;
                                     organizationData.Uin = concreteApp.EntityBasicData.Identifier;
+                                    organizationData.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
                                     intDocRelation.OrganizationData = organizationData;
                                     intDocRelation.CorrespondentData = this.correspondentRepository.GetCorrespondentFromOrganization(organizationData.Name, organizationData.Uin);
