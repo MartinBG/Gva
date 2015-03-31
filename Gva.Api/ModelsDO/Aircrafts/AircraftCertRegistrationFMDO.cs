@@ -25,6 +25,8 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public string IncomingDocNumber { get; set; }
 
+        public AircraftInspectorDO Inspector { get; set; }
+
         public DateTime? IncomingDocDate { get; set; }
 
         public string IncomingDocDesc { get; set; }

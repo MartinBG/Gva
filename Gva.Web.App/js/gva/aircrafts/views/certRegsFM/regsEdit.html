@@ -25,10 +25,10 @@
 
     <div class="well-sm panel-body">
       <gva-aircraft-cert-reg-fm name="aircraftCertRegForm" ng-model="reg.part"></gva-aircraft-cert-reg-fm>
-
-      <h5 class="form-header" l10n-text="aircrafts.deregReg.deregData" ng-if="reg.part.removal && reg.part.removal.reason"></h5>
-
-      <gva-aircraft-cert-reg-dereg-fm name="aircraftCertRegDeregForm" ng-if="reg.part.removal && reg.part.removal.reason" ng-model="reg.part.removal" ng-if="!reg.part.isActive"></gva-aircraft-cert-reg-dereg-fm>
+      <div ng-if="reg.part.removal && reg.part.removal.reason">
+        <h5 class="form-header" l10n-text="aircrafts.deregReg.deregData"></h5>
+        <gva-aircraft-cert-reg-dereg-fm name="aircraftCertRegDeregForm" ng-model="reg.part.removal"></gva-aircraft-cert-reg-dereg-fm>
+      </div>
     </div>
   </div>
 </ng-form>

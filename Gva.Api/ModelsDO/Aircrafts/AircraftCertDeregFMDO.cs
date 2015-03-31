@@ -8,7 +8,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
     {
         public DateTime? Date { get; set; }
 
-        [Required(ErrorMessage = "Reason is required.")]
         public NomValue Reason { get; set; }
 
         public string Text { get; set; }
@@ -19,7 +18,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? DocumentDate { get; set; }
 
-        public NomValue Inspector { get; set; }
+        public AircraftInspectorDO Inspector { get; set; }
 
         public NomValue Country { get; set; }
 

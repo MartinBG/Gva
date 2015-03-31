@@ -152,8 +152,6 @@ namespace Gva.MigrationTool.Sets
                             return getPersonByApexId(personId);
                         };
 
-                        Func<string, JObject> getInspector = (tRegUser) => getInspectorImpl(tRegUser, true);
-
                         Func<string, JObject> getInspectorOrDefault = (tRegUser) => getInspectorImpl(tRegUser, false);
 
                         Func<string, JObject> getInspectorOrOther = (tRegUser) =>
@@ -203,7 +201,7 @@ namespace Gva.MigrationTool.Sets
                         }
 
                         Dictionary<int, Tuple<string, NomValue>> registrations = new Dictionary<int, Tuple<string, NomValue>>();
-                        var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspector, getPersonByFmOrgName, getOrgByFmOrgName);
+                        var aircraftCertRegistrationsFM = this.getAircraftCertRegistrationsFM(aircraftFmId, noms, getInspectorOrOther, getPersonByFmOrgName, getOrgByFmOrgName);
                         foreach (var aircraftCertRegistrationFM in aircraftCertRegistrationsFM)
                         {
                             var pv = addPartWithFiles("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM);
@@ -273,7 +271,7 @@ namespace Gva.MigrationTool.Sets
         private IList<JObject> getAircraftCertRegistrationsFM(
             string aircraftId,
             Dictionary<string, Dictionary<string, NomValue>> noms,
-            Func<string, JObject> getInspector,
+            Func<string, JObject> getInspectorOrOther,
             Func<string, JObject> getPersonByFmOrgName,
             Func<string, JObject> getOrgByFmOrgName)
         {
@@ -370,7 +368,7 @@ namespace Gva.MigrationTool.Sets
                         incomingDocNumber = r.Field<string>("tDocCAA"),
                         incomingDocDate = Utils.FmToDate(r.Field<string>("dDateCAA")),
                         incomingDocDesc = r.Field<string>("tDocOther"),
-                        inspector = getInspector(r.Field<string>("tRegUser")),
+                        inspector = getInspectorOrOther(r.Field<string>("tRegUser")),
                         owner = getOrgOrPerson(r.Field<string>("ownerNameEn")),
                         oper = getOrgOrPerson(r.Field<string>("operNameEn")),
                         catAW = noms["aircraftCatAWsFm"].ByCodeOrDefault(r.Field<string>("tCatCode")),//use OrDefault to skip 0 and BLANK codes (empty)
@@ -395,7 +393,7 @@ namespace Gva.MigrationTool.Sets
                             text = (r.Field<string>("tDeDocOther") + "\n\n" + r.Field<string>("tRemarkDeReg")).Trim(),
                             documentNumber = !string.IsNullOrEmpty(r.Field<string>("tDeDocCAA")) ? r.Field<string>("tDeDocCAA") : null,
                             documentDate = Utils.FmToDate(r.Field<string>("dDeDateCAA")),
-                            inspector = getInspector(r.Field<string>("tDeUser"))
+                            inspector = getInspectorOrOther(r.Field<string>("tDeUser"))
                         },
                         parsedToIntStatusCode = int.Parse(r.Field<string>("nStatus")),
                         matchedStatus = isOrderStatus.Match(noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")).Name)

@@ -312,7 +312,7 @@ namespace Gva.Api.Controllers.Aircrafts
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                if (partVersionDO.Part.Removal != null)
+                if (partVersionDO.Part.Removal != null && partVersionDO.Part.Removal.Reason != null)
                 {
                     switch (partVersionDO.Part.Removal.Reason.Alias)
                     {
