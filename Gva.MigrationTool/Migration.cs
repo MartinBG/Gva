@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Infrastructure;
@@ -105,6 +106,7 @@ namespace Gva.MigrationTool
 
             builder.RegisterType<Organization>().InstancePerLifetimeScope();
             builder.RegisterType<OrganizationLotCreator>().InstancePerLifetimeScope();
+            builder.RegisterType<OrganizationFmLotCreator>().InstancePerLifetimeScope();
             builder.RegisterType<OrganizationLotMigrator>().InstancePerLifetimeScope();
 
             builder.RegisterType<Aircraft>().InstancePerLifetimeScope();
@@ -226,56 +228,58 @@ namespace Gva.MigrationTool
                 //create organization lots
                 var orgs = organization.createOrganizationsLots(noms);
                 orgIdtoLotId = orgs.Item1;
-                orgNameEnToLotId = orgs.Item2;
-                orgUinToLotId = orgs.Item3;
-                orgLotIdToOrgNom = orgs.Item4;
+              
 
                 Func<int?, JObject> getOrgByApexId = (apexId) =>
                 {
-                    if (apexId == null)
+                    if (!apexId.HasValue)
                     {
                         return null;
                     }
 
-                    int? id = orgIdtoLotId.ByKeyOrDefault(apexId);
-
-                    if (id == null)
+                    int id = -1;
+                    if (!orgIdtoLotId.TryGetValue(apexId.Value, out id))
                     {
                         Console.WriteLine("CANNOT FIND ORGANIZATION WITH APEX ID {0}", apexId);
                         return null; //TODO throw
                     }
 
-                    return orgLotIdToOrgNom[id.Value];
+                    return orgLotIdToOrgNom[id];
                 };
 
                 FmOrgMatcher fmOrgMatcher = new FmOrgMatcher();
-                var matches = fmOrgMatcher.Parse(
+                var result = fmOrgMatcher.Parse(
                     @"..\..\..\Gva.OrgMatchingTool\bin\Debug\Organizations.xls",
                     personEgnToLotId,
-                    orgNameEnToLotId,
-                    orgUinToLotId);
+                    orgs.Item2,
+                    orgs.Item3);
 
-                Dictionary<string, int> fmOrgNameEnToPersonLotId = matches.Item1;
-                Dictionary<string, int> fmOrgNameEnToOrgLotId = matches.Item2;
+                ConcurrentDictionary<string, int> orgNameToLotId = new ConcurrentDictionary<string, int>(result.Item1);
+                ConcurrentQueue<int> notCreatedFmOrgIds = new ConcurrentQueue<int>(result.Item2);
+
+                var res = organization.createOrganizationsFmLots(noms, notCreatedFmOrgIds, orgNameToLotId, orgs.Item3, orgs.Item4);
+                orgNameEnToLotId = res.Item1;
+                orgUinToLotId = res.Item2;
+                orgLotIdToOrgNom = res.Item3;
 
                 Func<string, JObject> getPersonByFmOrgName = (fmOrgName) =>
                 {
-                    if (!fmOrgNameEnToPersonLotId.ContainsKey(fmOrgName))
+                    if (!orgNameToLotId.ContainsKey(fmOrgName))
                     {
                         return null;
                     }
 
-                    return personLotIdToPersonNom[fmOrgNameEnToPersonLotId[fmOrgName]];
+                    return personLotIdToPersonNom[orgNameToLotId[fmOrgName]];
                 };
 
                 Func<string, JObject> getOrgByFmOrgName = (fmOrgName) =>
                 {
-                    if (!fmOrgNameEnToOrgLotId.ContainsKey(fmOrgName))
+                    if (!orgNameToLotId.ContainsKey(fmOrgName))
                     {
                         return null;
                     }
 
-                    return orgLotIdToOrgNom[fmOrgNameEnToOrgLotId[fmOrgName]];
+                    return orgLotIdToOrgNom[orgNameToLotId[fmOrgName]];
                 };
 
                 //migrate aircrafts

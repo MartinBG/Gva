@@ -17,18 +17,22 @@ namespace Gva.MigrationTool.Sets
     {
         private OracleConnection oracleConn;
         private Func<Owned<OrganizationLotCreator>> organizationLotCreatorFactory;
+        private Func<Owned<OrganizationFmLotCreator>> OrganizationFmLotCreatorFactory;
         private Func<Owned<OrganizationLotMigrator>> organizationLotMigratorFactory;
+        
 
         public Organization(OracleConnection oracleConn,
             Func<Owned<OrganizationLotCreator>> organizationLotCreatorFactory,
+            Func<Owned<OrganizationFmLotCreator>> OrganizationFmLotCreatorFactory,
             Func<Owned<OrganizationLotMigrator>> organizationLotMigratorFactory)
         {
             this.oracleConn = oracleConn;
             this.organizationLotCreatorFactory = organizationLotCreatorFactory;
+            this.OrganizationFmLotCreatorFactory = OrganizationFmLotCreatorFactory;
             this.organizationLotMigratorFactory = organizationLotMigratorFactory;
         }
 
-        public Tuple<Dictionary<int, int>, Dictionary<string, int>, Dictionary<string, int>, Dictionary<int, JObject>> createOrganizationsLots(Dictionary<string, Dictionary<string, NomValue>> noms)
+        public Tuple<Dictionary<int, int>, ConcurrentDictionary<string, int>, ConcurrentDictionary<string, int>, ConcurrentDictionary<int, JObject>> createOrganizationsLots(Dictionary<string, Dictionary<string, NomValue>> noms)
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
@@ -59,6 +63,39 @@ namespace Gva.MigrationTool.Sets
 
             return Tuple.Create(
                 orgIdToLotId.ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
+                orgNamesEnToLotId,
+                orgUinToLotId,
+                orgLotIdToOrgNom);
+        }
+
+        public Tuple<Dictionary<string, int>, Dictionary<string, int>, Dictionary<int, JObject>> createOrganizationsFmLots(
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            ConcurrentQueue<int> notCreatedFmOrgIds,
+            ConcurrentDictionary<string, int> orgNamesEnToLotId,
+            ConcurrentDictionary<string, int> orgUinToLotId,
+            ConcurrentDictionary<int, JObject> orgLotIdToOrgNom)
+        {
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationToken ct = cts.Token;
+
+            Utils.RunParallel("ParallelMigrations", ct,
+                () => this.OrganizationFmLotCreatorFactory().Value,
+                (organizationFmLotCreator) =>
+                {
+                    using (organizationFmLotCreator)
+                    {
+                        organizationFmLotCreator.StartCreating(noms, notCreatedFmOrgIds, orgNamesEnToLotId, orgUinToLotId, orgLotIdToOrgNom, cts, ct);
+                    }
+                })
+                .Wait();
+
+            timer.Stop();
+            Console.WriteLine("Organization fm lot creation time - {0}", timer.Elapsed.TotalMinutes);
+
+            return Tuple.Create(
                 orgNamesEnToLotId.ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
                 orgUinToLotId.ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
                 orgLotIdToOrgNom.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
