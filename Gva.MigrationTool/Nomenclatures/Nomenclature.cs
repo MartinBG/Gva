@@ -400,7 +400,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
             using (var dependencies = dependencyFactory())
             {
-                migrateOrganizationTypes(dependencies.Value.Item2, oracleConn);
+                migrateOrganizationTypes(dependencies.Value.Item2, oracleConn, sqlConn);
                 dependencies.Value.Item1.Save();
             }
 
@@ -1965,10 +1965,10 @@ namespace Gva.MigrationTool.Nomenclatures
             }
         }
 
-        private void migrateOrganizationTypes(INomRepository repo, OracleConnection conn)
+        private void migrateOrganizationTypes(INomRepository repo, OracleConnection oracleConection, SqlConnection sqlConnection)
         {
             Nom nom = repo.GetNom("organizationTypes");
-            var results = conn.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_FIRM_TYPE")
+            var orgApexTypes = oracleConection.CreateStoreCommand(@"SELECT * FROM CAA_DOC.NM_FIRM_TYPE")
                 .Materialize(r =>
                     new NomValue
                     {
@@ -1984,9 +1984,32 @@ namespace Gva.MigrationTool.Nomenclatures
                 .ToList();
 
             noms["organizationTypes"] = new Dictionary<string, NomValue>();
-            foreach (var row in results)
+            foreach (var row in orgApexTypes)
             {
                 noms["organizationTypes"][row.OldId] = row;
+                nom.NomValues.Add(row);
+            }
+
+            List<string> addedCodes = orgApexTypes.Select(a => a.Code).ToList();
+
+            var orgFmTypes = sqlConnection.CreateStoreCommand(@"select * from OrgGrp")
+                .Materialize(r =>
+                    new NomValue
+                    {
+                        OldId = null,
+                        Code = r.Field<string>("Code"),
+                        Name = r.Field<string>("Group Organization"),
+                        NameAlt = r.Field<string>("Group Organization"),
+                        Alias = null,
+                        IsActive = true,
+                        ParentValueId = null,
+                        TextContentString = null
+                    })
+                .ToList();
+
+            foreach (var row in orgFmTypes.Where(t => !addedCodes.Contains(t.Code)))
+            {
+                noms["organizationTypes"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
             }
         }
@@ -2013,6 +2036,29 @@ namespace Gva.MigrationTool.Nomenclatures
             foreach (var row in results)
             {
                 noms["organizationKinds"][row.OldId] = row;
+                nom.NomValues.Add(row);
+            }
+
+            var organizationFmTypes = new List<Tuple<string, string>>()
+            {
+                { new Tuple<string,string>("АД"  , "AD")},
+                { new Tuple<string,string>("ООД" , "OOD")}
+            };
+
+            foreach (var type in organizationFmTypes)
+            {
+                NomValue row = new NomValue()
+                {
+                    OldId = null,
+                    Code = type.Item2,
+                    Name = type.Item1,
+                    NameAlt = type.Item1,
+                    Alias = null,
+                    IsActive = true,
+                    ParentValueId = null,
+                    TextContentString = null
+                };
+                noms["organizationKinds"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
             }
         }
