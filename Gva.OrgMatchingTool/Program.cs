@@ -44,7 +44,8 @@ namespace Gva.OrgMatchingTool
                 new
                 {
                     EIK = r.Field<string>("t_EIK_EGN"),
-                    Name = r.Field<string>("tNameEN")
+                    Name = r.Field<string>("tNameEN"),
+                    Id = r.Field<int>("nOrgID")
                 })
             .Where(o => !string.IsNullOrWhiteSpace(o.Name))
             //skip duplicates
@@ -54,7 +55,8 @@ namespace Gva.OrgMatchingTool
                 {
                     EIK = g.Select(r => r.EIK).Where(eik => !string.IsNullOrWhiteSpace(eik)).Distinct().SingleOrDefault(),
                     TrimmedName = TrimName(g.Key),
-                    Name = g.Key
+                    Name = g.Key,
+                    Id = g.Select(r => r.Id).First()
                 })
             .OrderBy(o => o.Name)
             .ToList();
@@ -65,7 +67,8 @@ namespace Gva.OrgMatchingTool
             {
                 Name = r.Field<string>("NAME_TRANS"),
                 TrimmedName = TrimName(r.Field<string>("NAME_TRANS")),
-                EIK = r.Field<string>("BULSTAT")
+                EIK = r.Field<string>("BULSTAT"),
+                Id = r.Field<int>("ID")
             })
             .ToList();
 
@@ -76,7 +79,8 @@ namespace Gva.OrgMatchingTool
                 Name = r.Field<string>("NAME_TRANS") + " " + r.Field<string>("SURNAME_TRANS") + " " + r.Field<string>("FAMILY_TRANS"),
                 NameBg = r.Field<string>("NAME") + " " + r.Field<string>("SURNAME") + " " + r.Field<string>("FAMILY"),
                 TrimmedName = TrimName(r.Field<string>("NAME_TRANS") + r.Field<string>("SURNAME_TRANS") + r.Field<string>("FAMILY_TRANS")),
-                EIK = r.Field<string>("EGN")
+                EIK = r.Field<string>("EGN"),
+                Id = r.Field<int>("ID")
             })
             .ToList();
 
@@ -85,6 +89,7 @@ namespace Gva.OrgMatchingTool
                 join p in ApexPersons on fmO.EIK equals p.EIK
                 select new OrgMatch
                 {
+                    ApexPersonId = p.Id,
                     FmOrgName = fmO.Name,
                     EIK = fmO.EIK,
                     ApexPersonNameEn = p.Name,
@@ -99,6 +104,7 @@ namespace Gva.OrgMatchingTool
                 join aO in ApexOrgs on fmO.EIK equals aO.EIK
                 select new OrgMatch
                 {
+                    ApexOrgId = aO.Id,
                     FmOrgName = fmO.Name,
                     EIK = fmO.EIK,
                     ApexOrgNameEn = aO.Name,
@@ -112,6 +118,7 @@ namespace Gva.OrgMatchingTool
                 join p in ApexPersons on fmO.Name equals p.Name
                 select new OrgMatch
                 {
+                    ApexPersonId = fmO.Id,
                     FmOrgName = fmO.Name,
                     EIK = fmO.EIK,
                     ApexPersonNameEn = p.Name,
@@ -126,6 +133,7 @@ namespace Gva.OrgMatchingTool
                 join aO in ApexOrgs on fmO.Name equals aO.Name
                 select new OrgMatch
                 {
+                    FmOrgId = fmO.Id,
                     FmOrgName = fmO.Name,
                     EIK = fmO.EIK,
                     ApexOrgNameEn = aO.Name,
@@ -139,6 +147,7 @@ namespace Gva.OrgMatchingTool
                 join p in ApexPersons on fmO.TrimmedName equals p.TrimmedName
                 select new OrgMatch
                 {
+                    ApexPersonId = fmO.Id,
                     FmOrgName = fmO.Name,
                     EIK = fmO.EIK,
                     ApexPersonNameEn = p.Name,
@@ -153,6 +162,8 @@ namespace Gva.OrgMatchingTool
                 join aO in ApexOrgs on fmO.TrimmedName equals aO.TrimmedName
                 select new OrgMatch
                 {
+                    FmOrgId = fmO.Id,
+                    ApexOrgId = aO.Id,
                     FmOrgName = fmO.Name,
                     EIK = fmO.EIK,
                     ApexOrgNameEn = aO.Name,
@@ -178,8 +189,11 @@ namespace Gva.OrgMatchingTool
             row.Cells.Add("Match Type");
             row.Cells.Add("EIK");
             row.Cells.Add("Organization FM");
+            row.Cells.Add("Organization FM Id");
             row.Cells.Add("Organization Apex");
+            row.Cells.Add("Organization Apex Id");
             row.Cells.Add("Person Apex");
+            row.Cells.Add("Person Apex Id");
 
             foreach (var m in matches)
             {
@@ -187,17 +201,27 @@ namespace Gva.OrgMatchingTool
                 nextRow.Cells.Add(m.MatchType);
                 nextRow.Cells.Add(m.EIK);
                 nextRow.Cells.Add(m.FmOrgName);
+                nextRow.Cells.Add(m.FmOrgId.HasValue? m.FmOrgId.Value.ToString() : "");
                 nextRow.Cells.Add(m.ApexOrgNameEn);
-                nextRow.Cells.Add(m.ApexPersonNameEn + "(" + m.ApexPersonNameBg + ")");
+                nextRow.Cells.Add(m.ApexOrgId.HasValue ? m.ApexOrgId.Value.ToString() : "");
+                if (!string.IsNullOrEmpty(m.ApexPersonNameEn) || !string.IsNullOrEmpty(m.ApexPersonNameBg))
+                {
+                    nextRow.Cells.Add(m.ApexPersonNameEn + "(" + m.ApexPersonNameBg + ")");
+                }
+                else
+                {
+                    nextRow.Cells.Add("");
+                }
+                nextRow.Cells.Add(m.ApexPersonId.HasValue ? m.ApexPersonId.Value.ToString() : "");
             }
 
             foreach (var org in fmOrgs)
             {
                 WorksheetRow nextRow = sheet.Table.Rows.Add();
                 nextRow.Cells.Add("No Match");
-                nextRow.Cells.Add("0");
                 nextRow.Cells.Add(org.EIK);
                 nextRow.Cells.Add(org.Name);
+                nextRow.Cells.Add(org.Id.ToString());
             }
             #endregion
 

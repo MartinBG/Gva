@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace Gva.MigrationTool
 {
     public class FmOrgMatcher
     {
-        public Tuple<Dictionary<string, int>, Dictionary<string, int>> Parse(
+        public Tuple<Dictionary<string, int>, List<int>> Parse(
             string orgsMatchFilePath,
             Dictionary<string, int> personEgnToLotId,
-            Dictionary<string, int> orgNameEnToLotId,
-            Dictionary<string, int> orgUinToLotId)
+            ConcurrentDictionary<string, int> orgNameEnToLotId,
+            ConcurrentDictionary<string, int> orgUinToLotId)
         {
             Workbook book = new Workbook();
 
@@ -37,12 +38,13 @@ namespace Gva.MigrationTool
             }
 
             int fmOrgNameIndex = headerToIndex["Organization FM"];
+            int fmOrgIdIndex = headerToIndex["Organization FM Id"];
             int eikEgnIndex = headerToIndex["EIK"];
             int apexOrgNameIndex = headerToIndex["Organization Apex"];
             int matchTypeIndex = headerToIndex["Match Type"];
 
-            Dictionary<string, int> fmOrgNameEnToPersonLotId = new Dictionary<string, int>(StringComparer.InvariantCultureIgnoreCase);
-            Dictionary<string, int> fmOrgNameEnToOrgLotId = new Dictionary<string, int>(StringComparer.InvariantCultureIgnoreCase);
+            Dictionary<string, int> fmNameEnToLotId = new Dictionary<string, int>(StringComparer.InvariantCultureIgnoreCase);
+            List<int> notCreatedFmOrgIds = new List<int>();
             for (int i = 1; i < sheet.Table.Rows.Count; i++)
             {
                 Func<int, string> getText = (ci) => sheet.Table.Rows[i].Cells[ci].Data.Text;
@@ -57,14 +59,14 @@ namespace Gva.MigrationTool
 
                         if (personEgnToLotId.ContainsKey(egn))
                         {
-                            fmOrgNameEnToPersonLotId.Add(fmOrgNameEn, personEgnToLotId[egn]);
+                            fmNameEnToLotId.Add(fmOrgNameEn, personEgnToLotId[egn]);
                         }
                         break;
                     case "EIK":
                         string eik = getText(eikEgnIndex);
                         if (orgUinToLotId.ContainsKey(eik))
                         {
-                            fmOrgNameEnToOrgLotId.Add(fmOrgNameEn, orgUinToLotId[eik]);
+                            fmNameEnToLotId.Add(fmOrgNameEn, orgUinToLotId[eik]);
                         }
                         break;
                     case "Org Name":
@@ -73,15 +75,18 @@ namespace Gva.MigrationTool
                         string apexOrgName = getText(apexOrgNameIndex);
                         if (orgNameEnToLotId.ContainsKey(apexOrgName))
                         {
-                            fmOrgNameEnToOrgLotId.Add(fmOrgNameEn, orgNameEnToLotId[apexOrgName]);
+                            fmNameEnToLotId.Add(fmOrgNameEn, orgNameEnToLotId[apexOrgName]);
                         }
+                        break;
+                    case "No Match":
+                        notCreatedFmOrgIds.Add(int.Parse(getText(fmOrgIdIndex)));
                         break;
                     default:
                         break;
                 }
             }
 
-            return Tuple.Create(fmOrgNameEnToPersonLotId, fmOrgNameEnToOrgLotId);
+            return Tuple.Create(fmNameEnToLotId, notCreatedFmOrgIds);
         }
     }
 }
