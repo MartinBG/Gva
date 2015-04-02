@@ -14,6 +14,9 @@ using Docs.Api.DataObjects;
 using Docs.Api.Models;
 using Gva.Api.ModelsDO.Organizations;
 using R_0009_000015;
+using R_4012;
+using Gva.Api.Repositories.PersonRepository;
+using Common.Api.Repositories.NomRepository;
 
 namespace Gva.Api.Repositories.IntegrationRepository
 {
@@ -22,21 +25,27 @@ namespace Gva.Api.Repositories.IntegrationRepository
         private IUnitOfWork unitOfWork;
         private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
-        private ILotEventDispatcher lotEventDispatcher;
         private ICorrespondentRepository correspondentRepository;
+        private IPersonRepository personRepository;
+        private INomRepository nomRepository;
+        private ILotEventDispatcher lotEventDispatcher;
 
         public IntegrationRepository(
             IUnitOfWork unitOfWork,
             ICaseTypeRepository caseTypeRepository,
             ILotRepository lotRepository,
-            ILotEventDispatcher lotEventDispatcher,
-            ICorrespondentRepository correspondentRepository)
+            ICorrespondentRepository correspondentRepository,
+            IPersonRepository personRepository,
+            INomRepository nomRepository,
+            ILotEventDispatcher lotEventDispatcher)
         {
             this.unitOfWork = unitOfWork;
             this.caseTypeRepository = caseTypeRepository;
             this.lotRepository = lotRepository;
-            this.lotEventDispatcher = lotEventDispatcher;
             this.correspondentRepository = correspondentRepository;
+            this.personRepository = personRepository;
+            this.nomRepository = nomRepository;
+            this.lotEventDispatcher = lotEventDispatcher;
         }
 
         public void UpdateLotCaseTypes(string set, GvaCaseType caseType, Lot lot, UserContext userContext)
@@ -190,6 +199,66 @@ namespace Gva.Api.Repositories.IntegrationRepository
             newCorrespondent.SetupFlags();
 
             return newCorrespondent;
+        }
+
+        public PersonDataDO ConvertAppWithFlightCrewDataToPersonData(FlightCrewPersonalData FlightCrewlData, GvaCaseType caseType)
+        {
+            PersonDataDO personData = new PersonDataDO();
+
+            if (!string.IsNullOrEmpty(FlightCrewlData.CAAPersonalIdentificationNumber))
+            {
+                int lin = 0;
+                bool canParse = int.TryParse(FlightCrewlData.CAAPersonalIdentificationNumber, out lin);
+                var person = canParse ? this.personRepository.GetPersons(lin: lin).FirstOrDefault() : null;
+                if (person != null)
+                {
+                    return this.lotRepository.GetLotIndex(person.LotId).Index.GetPart<PersonDataDO>("personData").Content;
+                }
+                else if (canParse)
+                {
+                    personData.Lin = lin;
+                    personData.LinType = this.nomRepository.GetNomValues("linTypes").Where(l => l.Code == "none").Single();
+                }
+            }
+
+            string countryName = FlightCrewlData.Citizenship.CountryName;
+            string countryCode = FlightCrewlData.Citizenship.CountryGRAOCode;
+            if (!string.IsNullOrEmpty(countryName))
+            {
+                personData.Country = this.nomRepository.GetNomValues("countries").Where(c => c.Name == countryName).FirstOrDefault();
+            }
+
+            if (countryCode == "BG")
+            {
+                personData.Country = this.nomRepository.GetNomValue("countries", "BG");
+                personData.FirstName = FlightCrewlData.BulgarianCitizen.PersonNames.First;
+                personData.MiddleName = FlightCrewlData.BulgarianCitizen.PersonNames.Middle;
+                personData.LastName = FlightCrewlData.BulgarianCitizen.PersonNames.Last;
+                personData.DateOfBirth = FlightCrewlData.BulgarianCitizen.BirthDate;
+            }
+            else
+            {
+                personData.FirstName = FlightCrewlData.ForeignCitizen.ForeignCitizenNames.FirstCyrillic;
+                personData.LastName = FlightCrewlData.ForeignCitizen.ForeignCitizenNames.LastCyrillic;
+                personData.DateOfBirth = FlightCrewlData.ForeignCitizen.BirthDate;
+            }
+
+            personData.FirstNameAlt = FlightCrewlData.PersonNamesLatin.PersonFirstNameLatin;
+            personData.MiddleNameAlt = FlightCrewlData.PersonNamesLatin.PersonMiddleNameLatin;
+            personData.LastNameAlt = FlightCrewlData.PersonNamesLatin.PersonLastNameLatin;
+
+            personData.Email = FlightCrewlData.ContactData.EmailAddress;
+
+            personData.CaseTypes = new List<NomValue>() {
+                                        new NomValue()
+                                        {
+                                            NomValueId = caseType.GvaCaseTypeId,
+                                            Name = caseType.Name,
+                                            Alias = caseType.Alias
+                                        }
+                                    };
+
+            return personData;
         }
     }
 }

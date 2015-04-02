@@ -4,6 +4,7 @@ using Docs.Api.DataObjects;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO.Persons;
 using R_0009_000015;
+using R_4012;
 using Regs.Api.Models;
 
 namespace Gva.Api.Repositories.IntegrationRepository
@@ -17,5 +18,7 @@ namespace Gva.Api.Repositories.IntegrationRepository
         List<int> CreateCorrespondent(CorrespondentDO correspondent, UserContext userContext);
 
         CorrespondentDO ConvertElServiceRecipientToCorrespondent(ElectronicServiceRecipient applicant);
+
+        PersonDataDO ConvertAppWithFlightCrewDataToPersonData(FlightCrewPersonalData FlightCrewlData, GvaCaseType caseType);
     }
 }

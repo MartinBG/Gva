@@ -2,8 +2,10 @@
   <div class="panel-heading">
     <strong l10n-text="common.linkAppModal.title"></strong>
     <div class="pull-right">
-      <sc-button ng-if="currentTab === 'chooseApp'" name="chooseAppBtn" btn-click="chooseApp()" text="common.linkAppModal.chooseAppBtn" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
-      <sc-button ng-if="currentTab === 'chooseLot'" name="backToAppBtn" btn-click="backToApp()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+      <sc-button ng-if="currentTab === 'choosePortalApp'" name="choosePortalAppBtn" btn-click="choosePortalApp()" text="common.linkAppModal.chooseAppBtn" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
+      <sc-button ng-if="currentTab === 'chooseGvaApp'" name="chooseGvaAppBtn" btn-click="chooseGvaApp()" text="common.linkAppModal.chooseAppBtn" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
+      <sc-button ng-if="currentTab === 'chooseGvaApp'" name="backToAppBtn" btn-click="backToPortalApp()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+      <sc-button ng-if="currentTab === 'chooseLot'" name="backToAppBtn" btn-click="backToGvaApp()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
       <sc-button ng-if="currentTab === 'newLot'" name="backToChooseLotBtn" btn-click="backToChooseLot()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
       <sc-button ng-if="currentTab === 'newLot' && !showWizzard" name="saveLotBtn" btn-click="saveLot()" text="common.linkAppModal.saveLot" class="btn btn-xs btn-primary" icon="glyphicon-floppy-disk"></sc-button>
       <sc-button ng-if="currentTab === 'newLot' && showWizzard" name="showWizzardBtn" btn-click="setAircraftWizzardData()" text="common.linkAppModal.setAircraftWizzardData" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right"></sc-button>
@@ -12,10 +14,12 @@
   </div>
 
   <div class="well-sm panel-body">
-
     <ul class="nav nav-tabs">
-      <li ng-class="{active: currentTab === 'chooseApp', disabled: currentTab !== 'chooseApp' }">
-        <a><span l10n-text="common.linkAppModal.chooseApp"></span></a>
+      <li ng-class="{active: currentTab === 'choosePortalApp', disabled: currentTab !== 'choosePortalApp' }">
+        <a><span l10n-text="common.linkAppModal.choosePortalApp"></span></a>
+      </li>
+      <li ng-class="{active: currentTab === 'chooseGvaApp', disabled: currentTab !== 'chooseGvaApp' }">
+        <a><span l10n-text="common.linkAppModal.chooseGvaApp"></span></a>
       </li>
       <li ng-class="{active: currentTab === 'chooseLot', disabled: currentTab !== 'chooseLot' }">
         <a><span l10n-text="common.linkAppModal.chooseLot"></span></a>
@@ -25,14 +29,23 @@
       </li>
     </ul>
 
-    <div ng-if="currentTab === 'chooseApp'">
-      <ng-form class="form-inline" name="form.chooseAppForm"  sc-validate="{}">
+    <div ng-if="currentTab === 'choosePortalApp'">
+      <ng-form class="form-inline" name="form.choosePortalAppForm" sc-validate="{}">
         <div class="row">
           <div class="form-group col-md-10"  sc-has-error="app">
             <label class="control-label" l10n-text="common.linkAppModal.app"></label>
             <sc-validation-error field-name="app" validations="{required: 'default'}"></sc-validation-error>
             <sc-select name="app" sc-select="selectOptions" ng-model="wrapper.selectedAppKey" ng-required="true"></sc-select>
           </div>
+        </div>
+      </ng-form>
+    </div>
+
+    <div ng-if="currentTab === 'chooseGvaApp'">
+      <ng-form class="form-inline" name="form.chooseGvaAppForm" sc-validate="{}">
+        <div class="row">
+          <sc-field type="nomenclature" ng-model="wrapper.selectedApp.gvaApplicationType" ng-required="true" alias="'applicationTypes'"
+             params="{ caseTypeAlias: wrapper.selectedAppKey.caseType.alias }" l10n-text="common.linkAppModal.applicationType" class="col-md-12 col-sm-12"></sc-field>
         </div>
       </ng-form>
     </div>

@@ -26,7 +26,8 @@
         },
         linkAppModal: {
           title: 'Свързване със заявление',
-          chooseApp: 'Избор на заявление',
+          choosePortalApp: 'Избор на заявление от портала',
+          chooseGvaApp: 'Избор на тип заявление в ГВА',
           chooseAppBtn: 'Напред',
           app: 'Заявление',
           chooseLot: 'Избор на партида',
@@ -36,7 +37,8 @@
           cancel: 'Отказ',
           saveLot: 'Запис',
           personDataForm: 'Лични данни',
-          setAircraftWizzardData: 'Продължи'
+          setAircraftWizzardData: 'Продължи',
+          applicationType: 'Тип заявление'
         },
         newPersonModal: {
           newApplicant: 'Нов заявител',

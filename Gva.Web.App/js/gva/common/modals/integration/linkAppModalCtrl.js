@@ -15,7 +15,6 @@
     caseApplications,
     scDatatableConfig
   ) {
-
     $scope.filters = {};
     $scope.wrapper = {};
     $scope.form = {};
@@ -72,7 +71,8 @@
       return Organizations.query(params).$promise;
     };
 
-    $scope.currentTab = 'chooseApp';
+    $scope.currentTab = 'choosePortalApp';
+
     $scope.selectOptions = {
       allowClear: true,
       placeholder: ' ',
@@ -93,33 +93,36 @@
       } else {
         $scope.wrapper.selectedApp = null;
       }
-
-      if ($scope.set === 'person') {
-        return $scope.searchPersons();
-      } else if ($scope.set === 'aircraft') {
-        return $scope.searchAircrafts();
-      } else if ($scope.set === 'organization') {
-        return $scope.searchOrganizations();
-      }
     });
 
     $scope.cancel = function () {
       return $modalInstance.dismiss('cancel');
     };
+    $scope.choosePortalApp = function () {
+      return $scope.form.choosePortalAppForm.$validate().then(function () {
+        if ($scope.form.choosePortalAppForm.$valid) {
+          $scope.currentTab = 'chooseGvaApp';
+        }
+      });
+    };
 
-    $scope.chooseApp = function () {
-      return $scope.form.chooseAppForm.$validate().then(function () {
-        if ($scope.form.chooseAppForm.$valid) {
+    $scope.chooseGvaApp = function () {
+      return $scope.form.chooseGvaAppForm.$validate().then(function () {
+        if ($scope.form.chooseGvaAppForm.$valid) {
           $scope.set = $scope.wrapper.selectedApp.set.toLowerCase();
 
           $scope.currentTab = 'chooseLot';
+
           if ($scope.set === 'person') {
+            var firstName = $scope.wrapper.selectedApp.personData.firstName ?
+              $scope.wrapper.selectedApp.personData.firstName : '';
+            var lastName = $scope.wrapper.selectedApp.personData.lastName ?
+              $scope.wrapper.selectedApp.personData.lastName : '';
             $scope.filters = {
               lin: $scope.wrapper.selectedApp.personData.lin,
               uin: $scope.wrapper.selectedApp.personData.uin,
-              names: $scope.wrapper.selectedApp.personData.firstName + ' ' + 
-                $scope.wrapper.selectedApp.personData.lastName,
-              caseType: null
+              names: firstName + ' ' + lastName,
+              caseType: $scope.wrapper.selectedApp.caseType.gvaCaseTypeId
             };
 
             return $scope.searchPersons();
@@ -129,15 +132,18 @@
               manSN: null,
               mark: null,
               modelAlt:null,
-              aircraftProducer: producer ? producer.name : ''
+              aircraftProducer: producer && producer.name ? producer.name  : ''
             };
 
             return $scope.searchAircrafts();
           } else if ($scope.set === 'organization') {
+            var name = $scope.wrapper.selectedApp.organizationData.name?
+              $scope.wrapper.selectedApp.organizationData.name : '';
+
             $scope.filters = {
               caseTypeId: null,
               uin: $scope.wrapper.selectedApp.organizationData.uin,
-              organizationName: $scope.wrapper.selectedApp.organizationData.name
+              organizationName: name
             };
 
             return $scope.searchOrganizations();
@@ -168,8 +174,12 @@
         });
     };
 
-    $scope.backToApp = function () {
-      $scope.currentTab = 'chooseApp';
+    $scope.backToGvaApp = function () {
+      $scope.currentTab = 'chooseGvaApp';
+    };
+
+    $scope.backToPortalApp = function () {
+      $scope.currentTab = 'choosePortalApp';
     };
 
     $scope.backToChooseLot = function () {
@@ -207,8 +217,8 @@
       return Integration.createApplication({}, {
         docId: $scope.wrapper.selectedApp.docId,
         lotId: lot.id,
-        applicationType: $scope.wrapper.selectedApp.applicationType,
-        caseTypes: $scope.wrapper.selectedApp.caseTypes,
+        applicationType: $scope.wrapper.selectedApp.gvaApplicationType,
+        caseType: $scope.wrapper.selectedApp.caseType,
         correspondentData: $scope.wrapper.selectedApp.correspondentData
       }).$promise.then(function (res) {
         $modalInstance.close(res);

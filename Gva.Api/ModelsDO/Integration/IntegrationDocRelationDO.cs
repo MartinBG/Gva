@@ -19,11 +19,11 @@ namespace Gva.Api.ModelsDO.Integration
         {
         }
 
-        public IntegrationDocRelationDO(DocRelation d)
+        public IntegrationDocRelationDO(DocRelation d, GvaCaseType caseType)
         {
             this.DocRelationId = d.DocRelationId;
             this.DocId = d.DocId;
-
+           
             if (d.Doc != null)
             {
                 this.DocRegUri = d.Doc.RegUri;
@@ -31,6 +31,9 @@ namespace Gva.Api.ModelsDO.Integration
                 this.DocDocTypeId = d.Doc.DocType != null ? d.Doc.DocType.DocTypeId : (int?)null;
                 this.DocDocTypeName = d.Doc.DocType != null ? d.Doc.DocType.Name : string.Empty;
             }
+
+            this.CaseType = caseType;
+            this.Set = caseType.LotSet.Alias;
         }
 
         public int DocRelationId { get; set; }
@@ -43,9 +46,7 @@ namespace Gva.Api.ModelsDO.Integration
 
         public string DocDocTypeName { get; set; }
 
-        public NomValue ApplicationType { get; set; }
-
-        public List<GvaCaseType> CaseTypes { get; set; }
+        public GvaCaseType CaseType { get; set; }
 
         public String Set { get; set; }
 

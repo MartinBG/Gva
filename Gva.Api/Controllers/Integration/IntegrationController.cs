@@ -43,16 +43,47 @@ namespace Gva.Api.Controllers.Integration
         private IRioDocumentParser rioDocumentParser;
         private UserContext userContext;
 
-        private Dictionary<string, string> AppTypeCodeByAlias =
-            new Dictionary<string, string>(){
-                    {"R-4284", "АП-5D"},
-                    {"R-4356", "ВС-05"},
-                    {"R-5132", "АО-04"}
+        private Dictionary<string, List<string>> CaseTypeAliasByPortalAppCode =
+            new Dictionary<string, List<string>>(){
+                    {"flightCrew", new List<string>() {
+                        "R-4186", "R-4244", "R-4864", "R-4900", "R-5144",
+                        "R-4296", "R-5178", "R-5196", "R-5248", "R-5250",
+                        "R-5242", "R-5134", "R-5244", "R-5246"
+                    }},
+                    {"ovd", new List<string>() {
+                        "R-4242", "R-4284", "R-5160", "R-5164", "R-5166"
+                    }},
+                    {"to_vs", new List<string>() {
+                        "R-4240"
+                    }},
+                    {"to_suvd", new List<string>() {
+                         "R-4958", "R-5168", "R-5170", "R-5218"
+                    }},
+                    {"aircraft", new List<string>() {
+                        "R-4356", "R-4378", "R-4396", "R-4470", "R-4490", "R-4514", "R-4544", "R-4566", "R-4578", "R-5104"
+                    }},
+                    {"airCarrier", new List<string>() {
+                        "R-4686"
+                    }},
+                    {"educationOrg", new List<string>() {
+                        "R-4824", "R-4834", "R-4860", "R-4862"
+                    }},
+                    {"airNavSvcProvider", new List<string>() {
+                        "R-4738"
+                    }},
+                    {"equipment", new List<string>() { // case types in equipments are not separated
+                        "R-4764", "R-4766", "R-4614" 
+                    }},
+                    {"airport", new List<string>() {
+                        "R-4588", "R-4590"
+                    }},
+                    {"airportOperator", new List<string>() {
+                        "R-4598", "R-4606"
+                    }},
+                    {"approvedOrg", new List<string>() {
+                        "R-4926", "R-5094", "R-5096", "R-5116", "R-5132"
+                    }}
             };
-
-        private const string LicenseControllerAndCoordinatorAppType = "R-4284";
-        private const string CertRegAircraftAppType = "R-4356";
-        private const string EasaForm14OrganizationAppType = "R-5132";
 
         public IntegrationController(
             IDocRepository docRepository,
@@ -91,8 +122,18 @@ namespace Gva.Api.Controllers.Integration
             List<IntegrationDocRelationDO> result = new List<IntegrationDocRelationDO>();
             foreach (var docRelation in docRelations)
             {
-                var intDocRelation = new IntegrationDocRelationDO(docRelation);
-                result.Add(intDocRelation);
+                var caseTypeAlias = CaseTypeAliasByPortalAppCode
+                    .Where(c => c.Value.Contains(docRelation.Doc.DocType.Alias))
+                    .SingleOrDefault();
+
+                IntegrationDocRelationDO intDocRelation = null;
+                GvaCaseType caseType = null;
+                if (caseTypeAlias.Key != null)
+                {
+                    caseType = this.caseTypeRepository.GetCaseType(caseTypeAlias.Key);
+                    intDocRelation = new IntegrationDocRelationDO(docRelation, caseType);
+                    result.Add(intDocRelation);
+                }
 
                 var appDocFiles =
                     docRelation.Doc.DocFiles
@@ -116,120 +157,158 @@ namespace Gva.Api.Controllers.Integration
 
                     string xmlContent = Utf8Utils.GetString(content);
                     object rioApplication = this.rioDocumentParser.XmlDeserializeApplication(xmlContent);
-                    if (AppTypeCodeByAlias.ContainsKey(docRelation.Doc.DocType.Alias))
+
+                    switch (docRelation.Doc.DocType.Alias)
                     {
-                        string applicationTypeCode = AppTypeCodeByAlias[docRelation.Doc.DocType.Alias];
-                        var application = this.nomRepository.GetNomValues("applicationTypes")
-                            .Where(v => v.Code == applicationTypeCode)
-                            .SingleOrDefault();
-
-                        intDocRelation.ApplicationType = application;
-                        var caseTypeNames = application.TextContent.GetItems<string>("caseTypes");
-                        List<GvaCaseType> caseTypes = caseTypeNames.Select(c => this.caseTypeRepository.GetCaseType(c)).ToList();
-                        intDocRelation.CaseTypes = caseTypes;
-                        intDocRelation.Set = caseTypes.First().LotSet.Alias;
-
-                        switch (docRelation.Doc.DocType.Alias)
-                        {
-                            case LicenseControllerAndCoordinatorAppType:
-                                {
-                                    var personData = new PersonDataDO();
-                                    var concreteApp = (R_4284.LicenseControllersAssistantFlightsATMCoordinatorsApplication)rioApplication;
-
-                                    if (!string.IsNullOrEmpty(concreteApp.FlightCrewPersonalData.CAAPersonalIdentificationNumber))
-                                    {
-                                        int lin = 0;
-                                        bool canParse = int.TryParse(concreteApp.FlightCrewPersonalData.CAAPersonalIdentificationNumber, out lin);
-                                        var person = canParse ? this.personRepository.GetPersons(lin: lin).FirstOrDefault() : null;
-                                        if (person != null)
-                                        {
-                                            intDocRelation.PersonData = this.lotRepository.GetLotIndex(person.LotId).Index.GetPart<PersonDataDO>("personData").Content;
-                                            break;
-                                        }
-                                        else if (canParse)
-                                        {
-                                            personData.Lin = lin;
-                                            personData.LinType = this.nomRepository.GetNomValues("linTypes").Where(l => l.Code == "none").Single();
-                                        }
-                                    }
-                                    string countryName = concreteApp.FlightCrewPersonalData.Citizenship.CountryName;
-                                    string countryCode = concreteApp.FlightCrewPersonalData.Citizenship.CountryGRAOCode;
-                                    if (!string.IsNullOrEmpty(countryName))
-                                    {
-                                        personData.Country = this.nomRepository.GetNomValues("countries").Where(c => c.Name == countryName).FirstOrDefault();
-                                    }
-
-                                    if (countryCode == "BG")
-                                    {
-                                        personData.Country = this.nomRepository.GetNomValue("countries", "BG");
-                                        personData.FirstName = concreteApp.FlightCrewPersonalData.BulgarianCitizen.PersonNames.First;
-                                        personData.MiddleName = concreteApp.FlightCrewPersonalData.BulgarianCitizen.PersonNames.Middle;
-                                        personData.LastName = concreteApp.FlightCrewPersonalData.BulgarianCitizen.PersonNames.Last;
-                                        personData.DateOfBirth = concreteApp.FlightCrewPersonalData.BulgarianCitizen.BirthDate;
-                                    }
-                                    else
-                                    {
-                                        personData.FirstName = concreteApp.FlightCrewPersonalData.ForeignCitizen.ForeignCitizenNames.FirstCyrillic;
-                                        personData.LastName = concreteApp.FlightCrewPersonalData.ForeignCitizen.ForeignCitizenNames.LastCyrillic;
-                                        personData.DateOfBirth = concreteApp.FlightCrewPersonalData.ForeignCitizen.BirthDate;
-                                    }
-
-                                    personData.FirstNameAlt = concreteApp.FlightCrewPersonalData.PersonNamesLatin.PersonFirstNameLatin;
-                                    personData.MiddleNameAlt = concreteApp.FlightCrewPersonalData.PersonNamesLatin.PersonMiddleNameLatin;
-                                    personData.LastNameAlt = concreteApp.FlightCrewPersonalData.PersonNamesLatin.PersonLastNameLatin;
-
-                                    personData.Email = concreteApp.FlightCrewPersonalData.ContactData.EmailAddress;
-                                    
-                                    personData.CaseTypes = caseTypes
-                                        .Select(ct => new NomValue()
-                                        {
-                                            NomValueId = ct.GvaCaseTypeId,
-                                            Name = ct.Name,
-                                            Alias = ct.Alias
-                                        })
-                                        .ToList();
-
-                                    intDocRelation.PersonData = personData;
-                                    break;
-                                }
-                            case CertRegAircraftAppType:
-                                {
-                                    var aircraftData = new AircraftDataDO();
-                                    var concreteApp = (R_4356.AircraftRegistrationCertificateApplication)rioApplication;
-                                    string producerName = concreteApp.AircraftManufactureData.ManufacturerContactData.ManufacturerName;
-                                    aircraftData.AircraftProducer = this.nomRepository.GetNomValues("aircraftProducers", producerName).FirstOrDefault();
-                                
-                                    intDocRelation.AircraftData = aircraftData;
-                                    intDocRelation.CorrespondentData = this.integrationRepository.ConvertElServiceRecipientToCorrespondent(concreteApp.ElectronicServiceRecipient);
-                                    break;
-                                }
-                            case EasaForm14OrganizationAppType:
-                                {
-                                    var organizationData = new OrganizationDataDO();
-                                    var concreteApp = (R_5132.ApprovalPartMSubpartGApplication)rioApplication;
-                                    organizationData.Name = concreteApp.EntityTradeName ?? concreteApp.EntityBasicData.Name;
-                                    string foreignName = null;
-                                    if (concreteApp.ForeignEntityBasicData != null)
-                                    { 
-                                        foreignName = concreteApp.ForeignEntityBasicData.ForeignEntityName;
-                                    }
-                                    organizationData.NameAlt = foreignName ?? organizationData.Name;
-                                    organizationData.Uin = concreteApp.EntityBasicData.Identifier;
-                                    organizationData.Valid = this.nomRepository.GetNomValue("boolean", "yes");
-
-                                    intDocRelation.OrganizationData = organizationData;
-                                    intDocRelation.CorrespondentData = this.correspondentRepository.GetCorrespondentFromOrganization(organizationData.Name, organizationData.Uin);
-                                    break;
-                                }
-                            default:
+                        case "R-4186":
+                            {
+                                var concreteApp = (R_4186.InitialCertificationCommercialPilotCapacityInstrumentFlightApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
                                 break;
+                            }
+                        case "R-4244":
+                            {
+                                var concreteApp = (R_4244.LicenseFlightCrewCabinCrewFlightEngineersNavigatorsFlightConvoyApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-4284":
+                            {
+                                var concreteApp = (R_4284.LicenseControllersAssistantFlightsATMCoordinatorsApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-4864":
+                            {
+                                var concreteApp = (R_4864.LicenseCabinCrewApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5144":
+                            {
+                                var concreteApp = (R_5144.EstablishingAssessCompetenceApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-4296":
+                            {
+                                var concreteApp = (R_4296.RecognitionLicenseForeignNationals)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5178":
+                            {
+                                var concreteApp = (R_5178.RegistrationRatingTypeClassAircraftIFRPilotLicensePilotPartFCLApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5196":
+                            {
+                                var concreteApp = (R_5196.ConfirmationRecoveryRatingLicensePilotApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5248":
+                            {
+                                var concreteApp = (R_5248.RegistrationAircraftTypePermissionFlightCrewApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5250":
+                            {
+                                var concreteApp = (R_5250.ConfirmationRatingCrewApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5242":
+                            {
+                                var concreteApp = (R_5242.RegistrationTrainingAircraftTypePermissionStewardHostessApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5134":
+                            {
+                                var concreteApp = (R_5134.ChangeCompetentAuthorityLicensePilotAccordanceLicenseApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5244":
+                            {
+                                var concreteApp = (R_5244.ConfirmationRecoveryTrainingAircraftTypePermissionStewardHostessApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5246":
+                            {
+                                var concreteApp = (R_5246.ConfirmationConversionPursuantLicensePilotIssuedApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-4242":
+                            {
+                                var concreteApp = (R_4242.InitialIssueLicenseFlightDispatcherApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5160":
+                            {
+                                var concreteApp = (R_5160.RegistrationRatingAuthorizationLicenseApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5164":
+                            {
+                                var concreteApp = (R_5164.ConfirmationRecoveryRatingLicenseApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-5166":
+                            {
+                                var concreteApp = (R_5166.ReplacingLicenseFlightsCoordinatorsApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-4240":
+                            {
+                                var concreteApp = (R_4240.InitialAuthorizationMaintenanceAircraftAMLApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-4356":
+                            {
+                                var aircraftData = new AircraftDataDO();
+                                var concreteApp = (R_4356.AircraftRegistrationCertificateApplication)rioApplication;
+                                string producerName = concreteApp.AircraftManufactureData.ManufacturerContactData.ManufacturerName;
+                                aircraftData.AircraftProducer = this.nomRepository.GetNomValues("aircraftProducers", producerName).FirstOrDefault();
+                                
+                                intDocRelation.AircraftData = aircraftData;
+                                intDocRelation.CorrespondentData = this.integrationRepository.ConvertElServiceRecipientToCorrespondent(concreteApp.ElectronicServiceRecipient);
+                                break;
+                            }
+                        case "R-5132":
+                            {
+                                var organizationData = new OrganizationDataDO();
+                                var concreteApp = (R_5132.ApprovalPartMSubpartGApplication)rioApplication;
+                                organizationData.Name = concreteApp.EntityTradeName ?? concreteApp.EntityBasicData.Name;
+                                string foreignName = null;
+                                if (concreteApp.ForeignEntityBasicData != null)
+                                { 
+                                    foreignName = concreteApp.ForeignEntityBasicData.ForeignEntityName;
+                                }
+                                organizationData.NameAlt = foreignName ?? organizationData.Name;
+                                organizationData.Uin = concreteApp.EntityBasicData.Identifier;
+                                organizationData.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
-                        }
+                                intDocRelation.OrganizationData = organizationData;
+                                intDocRelation.CorrespondentData = this.correspondentRepository.GetCorrespondentFromOrganization(organizationData.Name, organizationData.Uin);
+                                break;
+                            }
+                        default:
+                            break;
 
                     }
                 }
             }
-
             return result;
         }
 
@@ -271,21 +350,13 @@ namespace Gva.Api.Controllers.Integration
                     correspondentIds = this.integrationRepository.CreateCorrespondent(newAppDO.CorrespondentData, this.userContext);
                 }
 
-                int? caseTypeId = null;
-                var caseType = newAppDO.CaseTypes.Where(a => lotCaseTypes.Any(c => c == a.Alias)).FirstOrDefault();
-                if(caseType != null)
+                if(!lotCaseTypes.Any(c => c == newAppDO.CaseType.Alias))
                 {
-                    caseTypeId = caseType.GvaCaseTypeId;
-                }
-                else
-                {
-                    var firstAppCaseTypes = newAppDO.CaseTypes.First();
                     if (lot.Set.Alias == "Person" || lot.Set.Alias == "Organization")
                     {
-                        this.integrationRepository.UpdateLotCaseTypes(lot.Set.Alias, firstAppCaseTypes, lot, this.userContext);
+                        this.integrationRepository.UpdateLotCaseTypes(lot.Set.Alias, newAppDO.CaseType, lot, this.userContext);
                     }
-                    caseTypeId = firstAppCaseTypes.GvaCaseTypeId;
-                 }
+                }
 
                 ApplicationNewDO applicationNewDO = new ApplicationNewDO()
                 {
@@ -293,7 +364,7 @@ namespace Gva.Api.Controllers.Integration
                     SetPartPath =  lot.Set.Alias.ToLower()+"DocumentApplications",
                     Correspondents = correspondentIds,
                     ApplicationType = newAppDO.ApplicationType,
-                    CaseTypeId = caseTypeId.Value
+                    CaseTypeId = newAppDO.CaseType.GvaCaseTypeId
                 };
 
                 ApplicationMainDO newAppMainData = this.applicationRepository.CreateNewApplication(applicationNewDO, this.userContext, doc.RegUri);
