@@ -38,7 +38,8 @@
             search: 'Въздухоплавателни средства',
             registrations: 'Регистрации',
             appsSearch: 'Заявления',
-            appsNew: 'Ново заявление'
+            appsNew: 'Ново заявление',
+            invalidActNumbers: 'Невалидни дел. номера'
           },
           airports: {
             title: 'ЛЛП',

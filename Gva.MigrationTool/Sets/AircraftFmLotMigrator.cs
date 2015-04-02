@@ -13,6 +13,7 @@ using Common.Data;
 using Common.Json;
 using Common.Tests;
 using Gva.Api.CommonUtils;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
@@ -39,6 +40,67 @@ namespace Gva.MigrationTool.Sets
         {
             this.dependencyFactory = dependencyFactory;
             this.sqlConn = sqlConn;
+        }
+
+        public void MigrateEmptyActNumbers(
+            //input constants
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            //cancellation
+            CancellationTokenSource cts,
+            CancellationToken ct)
+        {
+            try
+            {
+                this.sqlConn.Open();
+            }
+            catch (Exception)
+            {
+                cts.Cancel();
+                throw;
+            }
+            try
+            {
+                ct.ThrowIfCancellationRequested();
+
+                using (var dependencies = dependencyFactory())
+                {
+                    var unitOfWork = dependencies.Value.Item1;
+                    var invalidActNumberEntries = this.sqlConn.CreateStoreCommand(
+                        @"select a.regNumber,
+                            (case
+                                when a.tRegId LIKE 'II - %' then substring(a.tRegId, 6, 10000)
+                                when a.tRegId LIKE 'II-%' then substring(a.tRegId, 4, 10000)
+                                else a.tRegId end) as actNumber
+                            from
+                            (select 1 as regNumber, tRegId from Reg1 where nActID = 0
+                            union all
+                            select 2 as regNumber, tRegId from Reg2 where nActID = 0) a")
+                        .Materialize(r =>
+                            new
+                            {
+                                actNumber = r.Field<int>("actNumber"),
+                                registerId = noms["registers"].ByCode(r.Field<string>("regNumber")).NomValueId
+                            })
+                            .OrderBy(a => a.actNumber)
+                             .Select(a => new GvaInvalidActNumber()
+                             {
+                                 ActNumber = a.actNumber,
+                                 RegisterId = a.registerId
+                             })
+                            .ToList();
+
+                    unitOfWork.DbContext.Set<GvaInvalidActNumber>().AddRange(invalidActNumberEntries);
+
+                    unitOfWork.Save();
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error in migration of invalid act number");
+
+                cts.Cancel();
+                throw;
+            }
         }
 
         public void StartMigrating(

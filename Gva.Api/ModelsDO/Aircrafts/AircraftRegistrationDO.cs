@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
+using Gva.Api.Models;
 using Gva.Api.Models.Views.Aircraft;
 
 namespace Gva.Api.ModelsDO.Aircrafts
@@ -16,6 +17,13 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.RegisterCode = registration.Register.Code;
             this.RegMark = registration.RegMark;
         }
+
+        public AircraftRegistrationDO(GvaInvalidActNumber actNumberEntry)
+        {
+            this.ActNumber = actNumberEntry.ActNumber;
+            this.RegisterCode = actNumberEntry.Register.Code;
+        }
+
 
         public int LotId { get; set; }
 

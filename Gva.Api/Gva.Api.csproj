@@ -161,6 +161,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMViewDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftRegistrationDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\ActNumberDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExamSystQualificationDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExamSystExamDO.cs" />
     <Compile Include="ModelsDO\Applications\AppExaminationSystemDataDO.cs" />
@@ -304,6 +305,7 @@
     <Compile Include="ModelsDO\Common\TimeDO.cs" />
     <Compile Include="Models\Enums\QualificationStateMethod.cs" />
     <Compile Include="Models\Enums\QualificationState.cs" />
+    <Compile Include="Models\GvaInvalidActNumber.cs" />
     <Compile Include="Models\Views\GvaViewPersonApplicationExam.cs" />
     <Compile Include="Models\Views\GvaViewPersonQualification.cs" />
     <Compile Include="Models\GvaExSystCertPath.cs" />

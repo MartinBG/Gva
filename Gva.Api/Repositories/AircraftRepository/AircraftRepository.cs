@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using Common.Data;
 using Common.Linq;
+using Gva.Api.Models;
 using Gva.Api.Models.Views.Aircraft;
 
 namespace Gva.Api.Repositories.AircraftRepository
@@ -56,6 +57,37 @@ namespace Gva.Api.Repositories.AircraftRepository
                 .SingleOrDefault(p => p.LotId == aircraftId);
         }
 
+        public IEnumerable<GvaInvalidActNumber> GetInvalidActNumbers()
+        {
+            return this.unitOfWork.DbContext.Set<GvaInvalidActNumber>()
+                .Include(n => n.Register);
+        }
+
+        public bool DevalidateActNumber(int actNumber, string reason)
+        {
+            var registration = this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
+                .Where(r => r.ActNumber == actNumber)
+                .FirstOrDefault();
+
+            if (registration == null)
+            {
+                return false;
+            }
+            else
+            {
+                this.unitOfWork.DbContext.Set<GvaInvalidActNumber>()
+                    .Add(new GvaInvalidActNumber()
+                    {
+                        RegisterId = registration.CertRegisterId,
+                        Reason = reason,
+                        ActNumber = actNumber
+                    });
+
+                this.unitOfWork.Save();
+
+                return true;
+            }
+        }
         public IEnumerable<GvaViewAircraft> GetAircraftModels(
             string airCategory,
             string aircraftProducer,

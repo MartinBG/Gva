@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Gva.Api.Models;
 using Gva.Api.Models.Views.Aircraft;
 
 namespace Gva.Api.Repositories.AircraftRepository
@@ -23,6 +24,10 @@ namespace Gva.Api.Repositories.AircraftRepository
             string aircraftProducer,
             int offset = 0,
             int? limit = null);
+
+        IEnumerable<GvaInvalidActNumber> GetInvalidActNumbers();
+
+        bool DevalidateActNumber(int actNumber, string reason);
 
         GvaViewAircraft GetAircraftModel(int aircraftId);
 

@@ -1,0 +1,21 @@
+﻿<div>
+  <div class="row">
+    <div class="col-sm-12 col-md-9">
+      <sc-field type="int" ng-model="actNumber" ng-required="true" l10n-text="aircrafts.invalidActNumbersSearch.actNumber" class="col-md-2 col-sm-4"></sc-field>
+      <sc-field type="text" ng-model="reason" ng-required="true" l10n-text="aircrafts.invalidActNumbersSearch.reason" class="col-md-4 col-sm-4"></sc-field>
+      <div style="margin-top: 22px;" class="col-sm-3 col-md-3">
+        <sc-button name="addBtn" btn-click="devalidateActNumber()" ng-disabled="disableBtn" text="aircrafts.invalidActNumbersSearch.devalidateActNumber" class="btn btn-primary btn-xs"></sc-button>
+      </div>
+      <sc-info class="danger" icon="glyphicon glyphicon-remove" text="aircrafts.invalidActNumbersSearch.notExistingActNumber" ng-if="!devalidated"></sc-info>
+    </div>
+  </div>
+
+  <sc-datatable items="invalidActNumbers" filterable="true" pageable="true" sortable="true" default-sort="actNumber" default-sorting-type="desc">
+    <sc-column data="actNumber" title="aircrafts.invalidActNumbersSearch.actNumber">
+    </sc-column>
+    <sc-column data="register.name" title="aircrafts.invalidActNumbersSearch.register">
+    </sc-column>
+    <sc-column data="reason" title="aircrafts.invalidActNumbersSearch.reason">
+    </sc-column>
+  </sc-datatable>
+</div>

@@ -53,7 +53,7 @@ GO
 :r $(rootPath)\"Tables\GvaExSystCertPaths.sql"
 :r $(rootPath)\"Tables\GvaExSystCertCampaigns.sql"
 :r $(rootPath)\"Tables\GvaExSystExaminees.sql"
-
+:r $(rootPath)\"Tables\GvaInvalidActNumbers.sql"
 
 ---------------------------------------------------------------
 -- Views

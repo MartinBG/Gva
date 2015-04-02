@@ -182,6 +182,8 @@
     <Content Include="js\gva\aircrafts\views\inspections\aircraftsInspectionsNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\inspections\aircraftsInspectionsSearch.html" />
     <Content Include="js\gva\aircrafts\views\inspections\aircraftsInspectionsSearchCtrl.js" />
+    <Content Include="js\gva\aircrafts\views\invalidActNumbersSearch.html" />
+    <Content Include="js\gva\aircrafts\views\invalidActNumbersSearchCtrl.js" />
     <Content Include="js\gva\aircrafts\views\inventory\inventorySearch.html" />
     <Content Include="js\gva\aircrafts\views\inventory\inventorySearchCtrl.js" />
     <Content Include="js\gva\airports\forms\airportCertOperational.html" />

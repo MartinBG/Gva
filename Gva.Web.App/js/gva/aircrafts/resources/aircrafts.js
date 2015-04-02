@@ -24,6 +24,15 @@
         method: 'GET',
         url: 'api/aircrafts/registrations',
         isArray: true
+      },
+      getInvalidActNumbers: {
+        method: 'GET',
+        url: 'api/aircrafts/invalidActNumbers',
+        isArray: true
+      },
+      devalidateActNumber: {
+        method: 'POST',
+        url: 'api/aircrafts/devalidateActNumber'
       }
     });
   }]);

@@ -792,6 +792,13 @@
           certNumber: 'Регистрационен номер',
           mark: 'Регистрационен знак'
         },
+        invalidActNumbersSearch: {
+          actNumber: 'Дел. номер',
+          register: 'Регистър',
+          reason: 'Причина',
+          devalidateActNumber: 'Девалидирай дел. номер',
+          notExistingActNumber: 'Не съществува такъв дел. номер'
+        },
         regFMSearch: {
           isActive: 'Активна',
           isCurrent: 'Последна',
@@ -3853,6 +3860,7 @@
         'root.persons.view.examinationSystem': 'Изпитна система',
         'root.aircrafts': 'ВС',
         'root.aircrafts.registrations': 'Регистрации на Въздухоплавателни средства',
+        'root.aircrafts.invalidActNumbers': 'Невалидни деловодни номера',
         'root.aircrafts.new': 'Ново ВС',
         'root.aircrafts.view': 'Данни за ВС',
         'root.aircrafts.view.edit': 'Преглед',
