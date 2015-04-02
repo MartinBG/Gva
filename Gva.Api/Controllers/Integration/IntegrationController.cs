@@ -46,7 +46,7 @@ namespace Gva.Api.Controllers.Integration
         private Dictionary<string, List<string>> CaseTypeAliasByPortalAppCode =
             new Dictionary<string, List<string>>(){
                     {"flightCrew", new List<string>() {
-                        "R-4186", "R-4244", "R-4864", "R-4900", "R-5144",
+                        "R-4186", "R-4244", "R-4864", "R-5144",
                         "R-4296", "R-5178", "R-5196", "R-5248", "R-5250",
                         "R-5242", "R-5134", "R-5244", "R-5246"
                     }},
@@ -272,6 +272,51 @@ namespace Gva.Api.Controllers.Integration
                             {
                                 var concreteApp = (R_4240.InitialAuthorizationMaintenanceAircraftAMLApplication)rioApplication;
                                 intDocRelation.PersonData = this.integrationRepository.ConvertAppWithFlightCrewDataToPersonData(concreteApp.FlightCrewPersonalData, caseType);
+                                break;
+                            }
+                        case "R-4958":
+                            {
+                                var concreteApp = (R_4958.EngineeringTechnicalStaffPerformingMaintenanceFundsAirTrafficManagementApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithPersonAndForeignCitizenBasicDataToPersonData(
+                                    concreteApp.CAAPersonalIdentificationNumber,
+                                    concreteApp.ContactInformation.EmailAddress,
+                                    concreteApp.PersonBasicData,
+                                    concreteApp.ForeignCitizenBasicData,
+                                    caseType);
+                                break;
+                            }
+                        case "R-5218":
+                            {
+                                var concreteApp = (R_5218.ReplacementRemovalRestrictionsLicenseManagementApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithPersonAndForeignCitizenBasicDataToPersonData(
+                                    concreteApp.CAAPersonalIdentificationNumber,
+                                    concreteApp.ContactInformation.EmailAddress,
+                                    concreteApp.PersonBasicData,
+                                    concreteApp.ForeignCitizenBasicData,
+                                    caseType);
+                                break;
+                            }
+                        case "R-5170":
+                            {
+                                var concreteApp = (R_5170.ConfirmationRecoveryRatingLicenseEngineeringTechnicalStaffMaintenanceFundsManagementApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithPersonAndForeignCitizenBasicDataToPersonData(
+                                    concreteApp.CAAPersonalIdentificationNumber,
+                                    concreteApp.ContactInformation.EmailAddress,
+                                    concreteApp.PersonBasicData,
+                                    concreteApp.ForeignCitizenBasicData,
+                                    caseType);
+                                break;
+                            }
+                            
+                        case "R-5168":
+                            {
+                                var concreteApp = (R_5168.EntryRatingAuthorizationLicenseEngineeringTechnicalStaffEngagedMaintenanceFundsManagementApplication)rioApplication;
+                                intDocRelation.PersonData = this.integrationRepository.ConvertAppWithPersonAndForeignCitizenBasicDataToPersonData(
+                                    concreteApp.CAAPersonalIdentificationNumber,
+                                    concreteApp.ContactInformation.EmailAddress,
+                                    concreteApp.PersonBasicData,
+                                    concreteApp.ForeignCitizenBasicData,
+                                    caseType);
                                 break;
                             }
                         case "R-4356":

@@ -17,6 +17,8 @@ using R_0009_000015;
 using R_4012;
 using Gva.Api.Repositories.PersonRepository;
 using Common.Api.Repositories.NomRepository;
+using R_0009_000008;
+using R_0009_000011;
 
 namespace Gva.Api.Repositories.IntegrationRepository
 {
@@ -248,6 +250,68 @@ namespace Gva.Api.Repositories.IntegrationRepository
             personData.LastNameAlt = FlightCrewlData.PersonNamesLatin.PersonLastNameLatin;
 
             personData.Email = FlightCrewlData.ContactData.EmailAddress;
+
+            personData.CaseTypes = new List<NomValue>() {
+                                        new NomValue()
+                                        {
+                                            NomValueId = caseType.GvaCaseTypeId,
+                                            Name = caseType.Name,
+                                            Alias = caseType.Alias
+                                        }
+                                    };
+
+            return personData;
+        }
+
+        public PersonDataDO ConvertAppWithPersonAndForeignCitizenBasicDataToPersonData(
+            string caaPersonIdentificator,
+            string email,
+            PersonBasicData personBasicData,
+            ForeignCitizenBasicData foreignCitizenBasicData,
+            GvaCaseType caseType)
+        {
+            PersonDataDO personData = new PersonDataDO();
+
+            if (!string.IsNullOrEmpty(caaPersonIdentificator))
+            {
+                int lin = 0;
+                bool canParse = int.TryParse(caaPersonIdentificator, out lin);
+                var person = canParse ? this.personRepository.GetPersons(lin: lin).FirstOrDefault() : null;
+                if (person != null)
+                {
+                    return this.lotRepository.GetLotIndex(person.LotId).Index.GetPart<PersonDataDO>("personData").Content;
+                }
+                else if (canParse)
+                {
+                    personData.Lin = lin;
+                    personData.LinType = this.nomRepository.GetNomValues("linTypes").Where(l => l.Code == "none").Single();
+                }
+            }
+            if (personBasicData != null)
+            {
+                personData.Country = this.nomRepository.GetNomValue("countries", "BG");
+                personData.FirstName = personBasicData.Names.First;
+                personData.MiddleName = personBasicData.Names.Middle;
+                personData.LastName = personBasicData.Names.Last;
+                personData.FirstNameAlt = personBasicData.Names.First;
+                personData.MiddleNameAlt = personBasicData.Names.Middle;
+                personData.LastNameAlt = personBasicData.Names.Last;
+                personData.Uin = personBasicData.Identifier.EGN;
+            }
+            else if (foreignCitizenBasicData != null)
+            {
+                personData.FirstName = foreignCitizenBasicData.Names.FirstCyrillic;
+                personData.LastName = foreignCitizenBasicData.Names.LastCyrillic;
+                personData.DateOfBirth = foreignCitizenBasicData.BirthDate;
+                personData.FirstNameAlt = foreignCitizenBasicData.Names.FirstLatin;
+                personData.LastNameAlt = foreignCitizenBasicData.Names.LastLatin;
+                if (!string.IsNullOrEmpty(foreignCitizenBasicData.IdentityDocument.CountryCode))
+                {
+                    personData.Country = this.nomRepository.GetNomValues("countries").Where(c => c.Code == foreignCitizenBasicData.IdentityDocument.CountryCode).FirstOrDefault();
+                }
+            }
+
+            personData.Email = email;
 
             personData.CaseTypes = new List<NomValue>() {
                                         new NomValue()
