@@ -61,7 +61,12 @@
       function ($q, Nomenclatures) {
         return Nomenclatures.query({
           alias: 'personCaseTypes'
-        }).$promise;
+        }).$promise
+        .then(function (caseTypes) {
+          return _.filter(caseTypes, function (caseType) {
+            return caseType.alias !== 'staffExaminer' && caseType.alias !== 'inspector';
+          });
+        });
       }
     ],
     personInfo: [
