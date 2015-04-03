@@ -217,7 +217,7 @@
       $scope.currentTab = 'chooseLot';
     };
 
-    $scope.newLot = function () {
+    $scope.createLot = function () {
       $scope.currentTab = 'newLot';
       if ($scope.set === 'person') {
         Persons.newPerson({
