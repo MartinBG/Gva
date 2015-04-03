@@ -38,7 +38,11 @@
           saveLot: 'Запис',
           personDataForm: 'Лични данни',
           setAircraftWizzardData: 'Продължи',
-          applicationType: 'Тип заявление'
+          select: 'Избери',
+          name: 'Наименование',
+          code: 'Код',
+          search: 'Търси',
+          caseType: 'Тип дело'
         },
         newPersonModal: {
           newApplicant: 'Нов заявител',

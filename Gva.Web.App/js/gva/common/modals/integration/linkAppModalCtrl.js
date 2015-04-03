@@ -8,6 +8,7 @@
     $stateParams,
     $modalInstance,
     scModalParams,
+    Nomenclatures,
     Integration,
     Persons,
     Aircrafts,
@@ -89,6 +90,12 @@
         $scope.wrapper.selectedApp = _.find(caseApplications, {
           docId: $scope.wrapper.selectedAppKey.id
         });
+
+        $scope.selectedCaseType = { 
+          id: $scope.wrapper.selectedApp.caseType.gvaCaseTypeId,
+          text: $scope.wrapper.selectedApp.caseType.name
+        };
+
         $scope.set = $scope.wrapper.selectedApp.set;
       } else {
         $scope.wrapper.selectedApp = null;
@@ -101,56 +108,80 @@
     $scope.choosePortalApp = function () {
       return $scope.form.choosePortalAppForm.$validate().then(function () {
         if ($scope.form.choosePortalAppForm.$valid) {
-          $scope.currentTab = 'chooseGvaApp';
+          Nomenclatures.query({
+            alias: 'applicationTypes',
+            caseTypeAlias: $scope.wrapper.selectedApp.caseType.alias
+          }).$promise
+          .then(function (appTypes) {
+            $scope.appTypes = appTypes;
+            $scope.currentTab = 'chooseGvaApp';
+            
+            $scope.searchParams = {
+              code: null,
+              alias: 'applicationTypes',
+              caseType: $scope.selectedCaseType,
+              name: null
+            };
+          });
+
         }
       });
     };
 
-    $scope.chooseGvaApp = function () {
-      return $scope.form.chooseGvaAppForm.$validate().then(function () {
-        if ($scope.form.chooseGvaAppForm.$valid) {
-          $scope.set = $scope.wrapper.selectedApp.set.toLowerCase();
+    $scope.chooseAppType = function (appType) {
+      $scope.wrapper.selectedApp.gvaApplicationType = appType;
+      $scope.set = $scope.wrapper.selectedApp.set.toLowerCase();
 
-          $scope.currentTab = 'chooseLot';
+      $scope.currentTab = 'chooseLot';
 
-          if ($scope.set === 'person') {
-            var firstName = $scope.wrapper.selectedApp.personData.firstName ?
-              $scope.wrapper.selectedApp.personData.firstName : '';
-            var lastName = $scope.wrapper.selectedApp.personData.lastName ?
-              $scope.wrapper.selectedApp.personData.lastName : '';
-            $scope.filters = {
-              lin: $scope.wrapper.selectedApp.personData.lin,
-              uin: $scope.wrapper.selectedApp.personData.uin,
-              names: firstName + ' ' + lastName,
-              caseType: $scope.wrapper.selectedApp.caseType.gvaCaseTypeId
-            };
+      if ($scope.set === 'person') {
+        var firstName = $scope.wrapper.selectedApp.personData.firstName ?
+          $scope.wrapper.selectedApp.personData.firstName : '';
+        var lastName = $scope.wrapper.selectedApp.personData.lastName ?
+          $scope.wrapper.selectedApp.personData.lastName : '';
+        $scope.filters = {
+          lin: $scope.wrapper.selectedApp.personData.lin,
+          uin: $scope.wrapper.selectedApp.personData.uin,
+          names: firstName + ' ' + lastName,
+          caseType: $scope.wrapper.selectedApp.caseType.gvaCaseTypeId
+        };
 
-            return $scope.searchPersons();
-          } else if ($scope.set === 'aircraft') {
-            var producer = $scope.wrapper.selectedApp.aircraftData.aircraftProducer;
-            $scope.filters = {
-              manSN: null,
-              mark: null,
-              modelAlt:null,
-              aircraftProducer: producer && producer.name ? producer.name  : ''
-            };
+        return $scope.searchPersons();
+      } else if ($scope.set === 'aircraft') {
+        var producer = $scope.wrapper.selectedApp.aircraftData.aircraftProducer;
+        $scope.filters = {
+          manSN: null,
+          mark: null,
+          modelAlt:null,
+          aircraftProducer: producer && producer.name ? producer.name  : ''
+        };
 
-            return $scope.searchAircrafts();
-          } else if ($scope.set === 'organization') {
-            var name = $scope.wrapper.selectedApp.organizationData.name?
-              $scope.wrapper.selectedApp.organizationData.name : '';
+        return $scope.searchAircrafts();
+      } else if ($scope.set === 'organization') {
+        var name = $scope.wrapper.selectedApp.organizationData.name?
+          $scope.wrapper.selectedApp.organizationData.name : '';
 
-            $scope.filters = {
-              caseTypeId: null,
-              uin: $scope.wrapper.selectedApp.organizationData.uin,
-              organizationName: name
-            };
+        $scope.filters = {
+          caseTypeId: null,
+          uin: $scope.wrapper.selectedApp.organizationData.uin,
+          organizationName: name
+        };
 
-            return $scope.searchOrganizations();
-          }
+        return $scope.searchOrganizations();
+      }
+    };
 
-        }
-      });
+    $scope.searchAppTypes = function () {
+     var params = {
+       code: $scope.searchParams.code,
+        alias: 'applicationTypes',
+        caseTypeAlias: $scope.wrapper.selectedApp.caseType.alias,
+        name: $scope.searchParams.name
+      };
+      return Nomenclatures.query(params)
+        .$promise.then(function (appTypes) {
+          $scope.appTypes = appTypes;
+        });
     };
 
     $scope.searchPersons = function () {
@@ -274,6 +305,7 @@
     '$stateParams',
     '$modalInstance',
     'scModalParams',
+    'Nomenclatures',
     'Integration',
     'Persons',
     'Aircrafts',
