@@ -3362,7 +3362,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     {
                         OldId = r.Field<string>("nMakerID"),
                         Code = null,
-                        Name = r.Field<string>("tNameBG"),
+                        Name = r.Field<string>("tNameEN"),
                         NameAlt = r.Field<string>("tNameEN"),
                         Alias = null,
                         IsActive = true,
