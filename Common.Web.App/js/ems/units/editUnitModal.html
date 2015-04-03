@@ -59,7 +59,14 @@
         <tbody>
           <tr ng-repeat="classification in model.classifications" ng-form sc-validate="{}">
             <td style="width: 200px;" sc-has-error="name">
+              <!---->
               <!--<sc-text name="name" required></sc-text>-->
+              <sc-dropdown-simple class="form-control input-sm"
+                                  items-source="formData.classifications"
+                                  selected-item="selectedItem2"
+                                  selected-value="model.type2"
+                                  item-value-field="id"
+                                  item-text-field="name"></sc-dropdown-simple>
             </td>
             <td style="width: 200px;" sc-has-error="docFileKind">
               <!--<sc-nomenclature name="docFileKind" ng-model="df.docFileKindId" nom-obj="df.docFileKind" mode="id" alias="'docFileKind'" ng-disabled="!df.isInEdit" required></sc-nomenclature>-->
@@ -68,6 +75,10 @@
       <sc-files name="docFile" ng-model="df.file" ng-readonly="readonly" required></sc-files>
     </td>-->
             <td style="text-align: right; width: 1px;">
+              <sc-button class="btn btn-xs btn-default"
+                         icon="glyphicon-remove"
+                         ng-disabled="readonly"
+                         btn-click="removeClassification(classification)"></sc-button>
               <!--<span ng-show="df.isInEdit">
         <sc-button btn-click="saveDocFile(df, form)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-saved" ng-disabled="readonly"></sc-button>
         <sc-button btn-click="cancelDocFile(df)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-remove" ng-disabled="readonly"></sc-button>

@@ -1,5 +1,5 @@
 ﻿/*global angular*/
-(function (angular) {
+(function (angular, _) {
   'use strict';
 
   function EditUnitModalCtrl($scope, $modalInstance, scModalParams,
@@ -25,19 +25,30 @@
       classifications: []
     };
 
-    $scope.classifications = [];
+    $scope.formData = {
+      classifications: [],
+      classificationPermissions: []
+    };
+
+    //$scope.classifications = [];
 
     ClassificationsResource.query().$promise.then(function (classifications) {
-      $scope.classifications = classifications;
+      //$scope.classifications = classifications;
+      $scope.formData.classifications = classifications;
     });
 
     ClassificationPermissionsResource.query().$promise.then(function (classificationPermissions) {
-      $scope.classificationPermissions = classificationPermissions;
+      //$scope.classificationPermissions = classificationPermissions;
+      $scope.formData.classificationPermissions = classificationPermissions;
     });
 
 
     $scope.addClassification = function () {
       $scope.model.classifications.push({});
+    };
+
+    $scope.removeClassification = function (classification) {
+
     };
 
     $scope.returnVal = function () {
@@ -52,4 +63,4 @@
   EditUnitModalCtrl.$inject = ['$scope', '$modalInstance', 'scModalParams', 'ClassificationsResource', 'ClassificationPermissionsResource'];
 
   angular.module('common').controller('EditUnitModalCtrl', EditUnitModalCtrl);
-}(angular));
+}(angular, _));
