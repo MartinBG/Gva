@@ -132,7 +132,13 @@
                   action: reverseStatus,
                   params: { alias: 'Prepared' },
                   visible: doc.flags.isVisiblePreparedStatusReverseCmd
-                }, {
+                }, 
+                {
+                  text: 'docs.edit.reverseDocFromPortal',
+                  action: reverseStatus,
+                  params: { alias: 'FromPortal' },
+                  visible: doc.flags.isVisibleFromPortalStatusReverseCmd
+                },{
                   text: 'docs.edit.reverseDocFinished',
                   action: reverseStatus,
                   params: { alias: 'Processed' },

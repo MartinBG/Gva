@@ -414,15 +414,10 @@ namespace Docs.Api.Repositories.DocRepository
             switch (targetDocStatusAlias)
             {
                 case "Draft":
-                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Draft");
-                    doc.DocStatusId = newDocStatus.DocStatusId;
-                    break;
                 case "Prepared":
-                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Prepared");
-                    doc.DocStatusId = newDocStatus.DocStatusId;
-                    break;
                 case "Processed":
-                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Processed");
+                case "FromPortal":
+                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == targetDocStatusAlias);
                     doc.DocStatusId = newDocStatus.DocStatusId;
                     break;
                 default:
