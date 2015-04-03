@@ -60,7 +60,6 @@ namespace Gva.Api.Repositories.IntegrationRepository
             };
 
             Part updatedPart = null;
-            int? partId = null;
             if (set == "Person")
             {
                 PersonDataDO personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
@@ -210,13 +209,7 @@ namespace Gva.Api.Repositories.IntegrationRepository
             if (!string.IsNullOrEmpty(FlightCrewlData.CAAPersonalIdentificationNumber))
             {
                 int lin = 0;
-                bool canParse = int.TryParse(FlightCrewlData.CAAPersonalIdentificationNumber, out lin);
-                var person = canParse ? this.personRepository.GetPersons(lin: lin).FirstOrDefault() : null;
-                if (person != null)
-                {
-                    return this.lotRepository.GetLotIndex(person.LotId).Index.GetPart<PersonDataDO>("personData").Content;
-                }
-                else if (canParse)
+                if (int.TryParse(FlightCrewlData.CAAPersonalIdentificationNumber, out lin))
                 {
                     personData.Lin = lin;
                     personData.LinType = this.nomRepository.GetNomValues("linTypes").Where(l => l.Code == "none").Single();
@@ -274,19 +267,14 @@ namespace Gva.Api.Repositories.IntegrationRepository
 
             if (!string.IsNullOrEmpty(caaPersonIdentificator))
             {
-                int lin = 0;
-                bool canParse = int.TryParse(caaPersonIdentificator, out lin);
-                var person = canParse ? this.personRepository.GetPersons(lin: lin).FirstOrDefault() : null;
-                if (person != null)
-                {
-                    return this.lotRepository.GetLotIndex(person.LotId).Index.GetPart<PersonDataDO>("personData").Content;
-                }
-                else if (canParse)
+                int lin = -1;
+                if (int.TryParse(caaPersonIdentificator, out lin))
                 {
                     personData.Lin = lin;
                     personData.LinType = this.nomRepository.GetNomValues("linTypes").Where(l => l.Code == "none").Single();
                 }
             }
+
             if (personBasicData != null)
             {
                 personData.Country = this.nomRepository.GetNomValue("countries", "BG");
