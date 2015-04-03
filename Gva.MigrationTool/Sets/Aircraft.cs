@@ -117,6 +117,8 @@ namespace Gva.MigrationTool.Sets
                 })
                 .Wait();
 
+            this.aircraftFmLotMigratorFactory().Value.MigrateEmptyActNumbers(noms, cts, ct);
+
             // use the keys in aircraftFmIdtoLotId because some aircrafts have duplicate MSNs and may have been skipped
             ConcurrentQueue<string> aircraftFmIds = new ConcurrentQueue<string>(aircraftFmIdtoLotId.Keys);
 
