@@ -4,7 +4,7 @@
 
   function InspDataCtrl($scope, Nomenclatures) {
     if (!$scope.model) {
-      Nomenclatures.get({ alias: 'caa', valueAlias: 'BG' }).$promise.then(function (caa) {
+      Nomenclatures.get({ alias: 'caa', valueAlias: 'BGR' }).$promise.then(function (caa) {
         $scope.model = {
           caa: caa
         };
