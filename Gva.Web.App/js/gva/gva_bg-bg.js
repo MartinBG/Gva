@@ -798,7 +798,7 @@
           actNumber: 'Дел. номер',
           register: 'Регистър',
           reason: 'Причина',
-          devalidateActNumber: 'Девалидирай дел. номер',
+          devalidateActNumber: 'Добави към невалидните дел. номера',
           notExistingActNumber: 'Не съществува такъв дел. номер'
         },
         regFMSearch: {
