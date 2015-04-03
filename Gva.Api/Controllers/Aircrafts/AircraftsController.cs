@@ -74,6 +74,7 @@ namespace Gva.Api.Controllers
             return Ok(aircrafts.Select(a => new AircraftViewDO(a)));
         }
 
+        [Route("registrations")]
         public IHttpActionResult GetAircraftsRegistrations(string regMark = null, int? registerId = null, int? certNumber = null, int? actNumber = null)
         {
             var aircrafts = this.aircraftRegistrationRepository
@@ -85,7 +86,7 @@ namespace Gva.Api.Controllers
                 Select(a => new AircraftRegistrationDO(a))
                 .ToList();
 
-            return Ok(aircrafts.Union(invalidActNumbers).ToList());
+            return Ok(aircrafts.Union(invalidActNumbers).OrderBy(i => i.ActNumber).ToList());
         }
 
         [Route("invalidActNumbers")]

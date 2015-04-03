@@ -17,7 +17,7 @@
     <sc-column data="actNumber" title="aircrafts.registrations.actNumber">
     </sc-column>
     <sc-column data="certNumber" title="aircrafts.registrations.certNumber" has-content="true">
-      {{item.registerCode === '2' ? 'II-' + item.certNumber : item.certNumber}}
+      {{item.certNumber ? (item.registerCode === '2' ? 'II-' + item.certNumber : item.certNumber) : ''}}
     </sc-column>
     <sc-column data="regMark" title="aircrafts.registrations.regMark">
     </sc-column>
