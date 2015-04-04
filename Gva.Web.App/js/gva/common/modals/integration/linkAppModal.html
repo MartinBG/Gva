@@ -187,7 +187,6 @@
     <div ng-if="currentTab === 'newLot'">
       <ng-form class="form-inline" name="form.newLotForm" sc-validate="{}">
         <div ng-if="set === 'person'">
-          <h5 class="form-header form-header-first" l10n-text="common.linkAppModal.personDataForm"></h5>
           <gva-person-data name="form.newLotForm.personData" ng-model="newLot.personData" sc-form-params="{ isNew: true }"></gva-person-data>
         </div>
         <div ng-if="set === 'aircraft' && showWizzard">
