@@ -6,51 +6,24 @@
     $scope,
     $state,
     $stateParams,
-    application,
-    DocStatuses
+    application
     ) {
     $scope.application = application;
 
     _.map(application.appDocCase, function (adc) {
       switch (adc.docDocStatusAlias) {
       case 'Draft':
-        adc.nextStatusText = 'Отбелязване като изготвен';
-        break;
       case 'Prepared':
-        adc.nextStatusText = 'Отбелязване като обработен';
-        break;
       case 'Processed':
-        adc.nextStatusText = 'Отбелязване като приключен';
+        adc.hasNextStatus = true;
         break;
       default:
-        adc.nextStatusText = null;
+        adc.hasNextStatus = false;
         break;
       }
 
       return adc;
     });
-
-    $scope.cancelStatus = function (docId, docVersion) {
-      return DocStatuses.cancel({
-        id: docId,
-        docVersion: docVersion
-      }, {}).$promise.then(function () {
-        return $state.transitionTo(
-          'root.applications.search',
-          { set: $scope.application.lotSetAlias.toLowerCase() });
-      });
-    };
-
-    $scope.nextStatus = function (docId, docVersion) {
-      return DocStatuses.next({
-        docId: docId,
-        docVersion: docVersion
-      })
-        .$promise
-        .then(function () {
-          return $state.transitionTo($state.current, $stateParams, { reload: true });
-        });
-    };
 
     $scope.linkNew = function (docId, docFileId) {
       return $state.go('root.applications.edit.case.newFile', {
@@ -200,8 +173,7 @@
     '$scope',
     '$state',
     '$stateParams',
-    'application',
-    'DocStatuses'
+    'application'
   ];
 
   angular.module('gva').controller('ApplicationsEditCaseCtrl', ApplicationsEditCaseCtrl);

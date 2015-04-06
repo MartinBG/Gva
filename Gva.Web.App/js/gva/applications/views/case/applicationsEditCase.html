@@ -21,13 +21,7 @@
         </td>
         <td></td>
         <td style="text-align: right;">
-          <div ng-if="adc.docDocStatusAlias !== 'Canceled'">
-            <a ng-click="cancelStatus(adc.docId, adc.docVersion)" l10n-text="applications.edit.case.cancelApplication"></a>
-            <br />
-          </div>
           <a ng-click="childDoc(adc.docId)" l10n-text="applications.edit.case.childDoc"></a>
-          <br />
-          <a ng-click="nextStatus(adc.docId, adc.docVersion)" ng-hide="!adc.nextStatusText">{{adc.nextStatusText}}</a>
         </td>
       </tr>
       <tr ng-repeat="item in adc.applicationLotFiles">
@@ -45,7 +39,7 @@
         <td></td>
       </tr>
       <tr ng-repeat-end>
-        <td colspan="4" style="text-align: right;" ng-hide="!adc.nextStatusText">
+        <td colspan="4" style="text-align: right;" ng-hide="!adc.hasNextStatus">
           <a ng-click="newDocFile(adc.docId)" l10n-text="applications.edit.case.newDocFile"></a>
         </td>
       </tr>

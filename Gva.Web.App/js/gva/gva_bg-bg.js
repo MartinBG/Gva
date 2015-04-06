@@ -2759,7 +2759,6 @@
           viewEquipment: 'Преглед',
           unlinkedLotParts: 'Документи извън преписката',
           'case': {
-            cancelApplication: 'Заличи заявлението',
             regNumber: 'Тип/№/Дата',
             description: 'Тип',
             act: 'Дело',
