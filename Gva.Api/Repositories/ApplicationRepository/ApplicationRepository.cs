@@ -827,8 +827,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
                         .SingleOrDefault(d => d.Alias == "Incomming");
             DocEntryType documentEntryType = this.unitOfWork.DbContext.Set<DocEntryType>()
                 .SingleOrDefault(e => e.Alias == "Document");
-            DocStatus ProcessedStatus = this.unitOfWork.DbContext.Set<DocStatus>()
-                .SingleOrDefault(s => s.Alias == "Processed");
+            DocStatus DraftStatus = this.unitOfWork.DbContext.Set<DocStatus>()
+                .SingleOrDefault(s => s.Alias == "Draft");
             DocCasePartType casePartType = this.unitOfWork.DbContext.Set<DocCasePartType>()
                 .SingleOrDefault(pt => pt.Alias == "Public");
             DocSourceType manualSource = this.unitOfWork.DbContext.Set<DocSourceType>().
@@ -842,7 +842,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             Doc newDoc = this.docRepository.CreateDoc(
             direction.DocDirectionId,
             documentEntryType.DocEntryTypeId,
-            ProcessedStatus.DocStatusId,
+            DraftStatus.DocStatusId,
             applicationType.Name,
             casePartType.DocCasePartTypeId,
             manualSource.DocSourceTypeId,
