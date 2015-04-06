@@ -719,6 +719,14 @@
           regMark: 'Регистрационен. знак',
           register: 'Регистър'
         },
+        printAirworthinessModal: {
+          title: 'Принтиране на документ за летателна годност',
+          stampNumber: 'Печатен док. номер',
+          cancel: 'Отказ',
+          save: 'Запис',
+          print: 'Преглед за печат',
+          generateNew: 'Прегенерирай'
+        },
         aircraftScannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',

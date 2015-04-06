@@ -42,6 +42,7 @@ GO
 :r $(rootPath)\"Tables\GvaViewAircrafts.sql"
 :r $(rootPath)\"Tables\GvaViewAircraftRegistrations.sql"
 :r $(rootPath)\"Tables\GvaViewAircraftRegMarks.sql"
+:r $(rootPath)\"Tables\GvaViewAircraftCertAirworthinesses.sql"
 :r $(rootPath)\"Tables\GvaWordTemplates.sql"
 :r $(rootPath)\"Tables\ASExamQuestions.sql"
 :r $(rootPath)\"Tables\ASExamVariants.sql"

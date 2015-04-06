@@ -35,18 +35,7 @@
       });
     };
 
-    $scope.licenceNumberFormatMask = function(item) {
-      var licenceNumberMask = item.licenceNumber.toString(),
-          licenceNumberLength = licenceNumberMask.length;
-
-      if (licenceNumberLength < 5) {
-        var i, difference = 5 - licenceNumberLength;
-        for (i = 0; i < difference; i++) {
-          licenceNumberMask = '0' + licenceNumberMask;
-        }
-      }
-
-      $scope.print = function (doc) {
+    $scope.print = function (doc) {
       var params = {
         lotId: doc.lotId,
         index: doc.partIndex,
@@ -64,6 +53,17 @@
 
       return modalInstance.opened;
     };
+
+    $scope.licenceNumberFormatMask = function(item) {
+      var licenceNumberMask = item.licenceNumber.toString(),
+          licenceNumberLength = licenceNumberMask.length;
+
+      if (licenceNumberLength < 5) {
+        var i, difference = 5 - licenceNumberLength;
+        for (i = 0; i < difference; i++) {
+          licenceNumberMask = '0' + licenceNumberMask;
+        }
+      }
 
       return item.publisherCode + ' ' +
              item.licenceTypeCode + ' ' +

@@ -1,0 +1,49 @@
+﻿using Regs.Api.Repositories.LotRepositories;
+using Regs.Api.Models;
+using Gva.Api.ModelsDO.Aircrafts;
+
+namespace Gva.Api.WordTemplates
+{
+    public class Form25 : IDataGenerator
+    {
+        private ILotRepository lotRepository;
+
+        public Form25(ILotRepository lotRepository)
+        {
+            this.lotRepository = lotRepository;
+        }
+
+        public string[] TemplateNames
+        {
+            get
+            {
+                return new string[] { "f25" };
+            }
+        }
+
+        public object GetData(int lotId, string path)
+        {
+            Lot lot = this.lotRepository.GetLotIndex(lotId);
+            AircraftDataDO aircraftData = lot.Index.GetPart<AircraftDataDO>("aircraftData").Content;
+            AircraftCertAirworthinessFMDO airworthinessData = lot.Index.GetPart<AircraftCertAirworthinessFMDO>(path).Content;
+            string regPath = string.Format("aircraftCertRegistrationsFM/{0}", airworthinessData.Registration.NomValueId);
+            AircraftCertRegistrationFMDO registration = lot.Index.GetPart<AircraftCertRegistrationFMDO>(regPath).Content;
+            
+            var json = new
+            {
+                root = new
+                {
+                    REG_MARK = registration != null ? registration.RegMark : null,
+                    ISSUE_DATE = airworthinessData.IssueDate,
+                    PRODUCER = aircraftData.AircraftProducer.NameAlt,
+                    PRODUCER_DESIGNATION = aircraftData.ModelAlt,
+                    AIR_CATEGORY = aircraftData.AirCategory.Name,
+                    DOCUMENT_NUMBER = airworthinessData.DocumentNumber,
+                    MSN = aircraftData.ManSN
+                }
+            };
+
+            return json;
+        }
+    }
+}

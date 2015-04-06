@@ -16,6 +16,8 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public NomValue Registration { get; set; }
 
+        public string StampNumber { get; set; }
+
         public string DocumentNumber { get; set; }
 
         public DateTime? IssueDate { get; set; }
@@ -25,5 +27,9 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public AircraftInspectorDO Inspector { get; set; }
 
         public List<AircraftCertAirworthinessReviewDO> Reviews { get; set; }
+
+        public Guid? PrintedDocumentBlobKey { get; set; }
+
+        public int? PrintedFileId { get; set; }
     }
 }

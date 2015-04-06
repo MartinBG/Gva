@@ -306,6 +306,7 @@
     <Compile Include="Models\Enums\QualificationStateMethod.cs" />
     <Compile Include="Models\Enums\QualificationState.cs" />
     <Compile Include="Models\GvaInvalidActNumber.cs" />
+    <Compile Include="Models\Views\Aircraft\GvaViewAircraftCertAirworthiness.cs" />
     <Compile Include="Models\Views\GvaViewPersonApplicationExam.cs" />
     <Compile Include="Models\Views\GvaViewPersonQualification.cs" />
     <Compile Include="Models\GvaExSystCertPath.cs" />
@@ -334,6 +335,7 @@
     <Compile Include="Projections\Aircraft\AircraftProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegistrationProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegMarkProjection.cs" />
+    <Compile Include="Projections\Aircraft\AircraftCertAirworthinessProjection.cs" />
     <Compile Include="Projections\Application\ApplicationOrganizationProjection.cs" />
     <Compile Include="Projections\Application\ApplicationAircraftProjection.cs" />
     <Compile Include="Projections\Application\ApplicationPersonProjection.cs" />
@@ -472,6 +474,7 @@
     <Compile Include="WordTemplates\AML.cs" />
     <Compile Include="WordTemplates\AML_III.cs" />
     <Compile Include="WordTemplates\AMLUtils.cs" />
+    <Compile Include="WordTemplates\Form25.cs" />
     <Compile Include="WordTemplates\PilotUtils.cs" />
     <Compile Include="WordTemplates\StudentControllerLicence.cs" />
     <Compile Include="WordTemplates\Pilot.cs" />

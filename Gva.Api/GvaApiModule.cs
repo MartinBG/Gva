@@ -57,7 +57,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegistrationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegMarkProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-
+            moduleBuilder.RegisterType<AircraftCertAirworthinessProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            
             //AirportView
             moduleBuilder.RegisterType<AirportProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
@@ -225,6 +226,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AuditsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ExaminationSystemController>().InstancePerLifetimeScope();
 
+            //generators for persons
             moduleBuilder.RegisterType<Pilot142year2013>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<CoordinatorSimi>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<StudentFilghtLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
@@ -240,6 +242,9 @@ namespace Gva.Api
             moduleBuilder.RegisterType<CoordinatorLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AML>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AML_III>().As<IDataGenerator>().InstancePerLifetimeScope();
+
+            //generators for aircrafts
+            moduleBuilder.RegisterType<Form25>().As<IDataGenerator>().InstancePerLifetimeScope();
         }
     }
 }

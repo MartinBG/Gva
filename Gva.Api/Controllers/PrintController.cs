@@ -14,6 +14,7 @@ using Common.Json;
 using Common.Owin;
 using Common.WordTemplates;
 using Gva.Api.Models;
+using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.PrintRepository;
 using Gva.Api.WordTemplates;
@@ -110,6 +111,45 @@ namespace Gva.Api.Controllers
             return result;
         }
 
+        [Route("api/printAirworthiness")]
+        public HttpResponseMessage GetAirworthinessDoc(int lotId, int partIndex, bool generateNew = false)
+        {
+            string airworthinessPath = string.Format("aircraftCertAirworthinessesFM/{0}", partIndex);
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            var airworthinessPart = lot.Index.GetPart<AircraftCertAirworthinessFMDO>(airworthinessPath);
+            string templateName = airworthinessPart.Content.AirworthinessCertificateType.Alias;
+
+            Guid awDocBlobKey;
+            if (airworthinessPart.Content.PrintedDocumentBlobKey.HasValue && !generateNew)
+            {
+                awDocBlobKey = airworthinessPart.Content.PrintedDocumentBlobKey.Value;
+            }
+            else
+            {
+                using (var wordDocStream = this.GenerateWordDocument(lotId, airworthinessPath, templateName))
+                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
+                {
+                    awDocBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
+                    this.UpdateAirworthiness(awDocBlobKey, airworthinessPart, lot, templateName);
+                }
+            }
+
+            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline",
+                awDocBlobKey,
+                templateName);
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.Redirect);
+            result.Headers.Location = new Uri(url, UriKind.Relative);
+            result.Headers.CacheControl = new CacheControlHeaderValue()
+            {
+                NoCache = true,
+                NoStore = true,
+                MustRevalidate = true
+            };
+
+            return result;
+        }
+
         public Stream GenerateWordDocument(int lotId, string path, string templateName)
         {
             var dataGenerator = this.dataGenerators.First(dg => dg.TemplateNames.Contains(templateName));
@@ -162,5 +202,34 @@ namespace Gva.Api.Controllers
             }
         }
 
+        public void UpdateAirworthiness(Guid awDocBlobKey, PartVersion<AircraftCertAirworthinessFMDO> awPartVersion, Lot lot, string templateName)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                awPartVersion.Content.PrintedDocumentBlobKey = awDocBlobKey;
+
+                GvaFile printedAwCertFile = new GvaFile()
+                {
+                    Filename = templateName,
+                    FileContentId = awDocBlobKey,
+                    MimeType = "application/pdf"
+                };
+
+                this.unitOfWork.DbContext.Set<GvaFile>().Add(printedAwCertFile);
+
+                this.unitOfWork.Save();
+
+                awPartVersion.Content.PrintedFileId = printedAwCertFile.GvaFileId;
+
+                lot.UpdatePart<AircraftCertAirworthinessFMDO>(string.Format("aircraftCertAirworthinessesFM/{0}", awPartVersion.Part.Index), awPartVersion.Content, this.userContext);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
+                this.lotRepository.ExecSpSetLotPartTokens(awPartVersion.PartId);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+            }
+        }
     }
 }

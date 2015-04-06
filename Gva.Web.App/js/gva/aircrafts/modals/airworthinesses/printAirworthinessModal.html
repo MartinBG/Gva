@@ -1,0 +1,21 @@
+﻿<ng-form class="form-inline" name="form.printAirworthinessForm" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="aircrafts.printAirworthinessModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" ng-if="!model.stampNumberReadonly" btn-click="save()" text="aircrafts.printAirworthinessModal.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="aircrafts.printAirworthinessModal.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <div class="row">
+        <sc-field type="text" ng-model="model.stampNumber" ng-readonly="model.stampNumberReadonly" ng-required="true" l10n-text="aircrafts.printAirworthinessModal.stampNumber" class="col-sm-5"></sc-field>
+        <div class="labeless">
+          <sc-link-button name="printBtn" ng-href="api/printAirworthiness?lotId={{model.lotId}}&partIndex={{model.partIndex}}" target="_blank" sc-access-token text="aircrafts.printAirworthinessModal.print" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
+          <sc-link-button name="printBtn" ng-href="api/printAirworthiness?lotId={{model.lotId}}&partIndex={{model.partIndex}}&generateNew=true" target="_blank" sc-access-token text="aircrafts.printAirworthinessModal.generateNew" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-form>

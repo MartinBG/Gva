@@ -600,7 +600,12 @@
       .state(['root.aircrafts.view.applications'                        , '/applications'                                                                                                                                                                                  ])
       .state(['root.aircrafts.view.applications.search'                 , ''                                                      , ['@root.aircrafts.view', 'js/gva/aircrafts/views/documentApplications/docApplicationsSearch.html' , 'AircraftApplicationsSearchCtrl'  ]])
       .state(['root.aircrafts.view.inventory'                           , '/inventory'                                            , ['@root.aircrafts.view', 'js/gva/aircrafts/views/inventory/inventorySearch.html'                  , 'AircraftInventorySearchCtrl'     ]]);
-  }]).config(['$stateProvider', function ($stateProvider) {
+  }])
+    .config(['scModalProvider', function (scModalProvider) {
+    scModalProvider
+    .modal('printAirworthiness'     , 'js/gva/aircrafts/modals/airworthinesses/printAirworthinessModal.html' , 'PrintAirworthinessModalCtrl'     , 'xs-2');
+  }])
+    .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.organizations'                                                               , '/organizations?organizationName&cao&valid&organizationType&dateValidTo&dateCaoValidTo&caseTypeId'])
       .state(['root.organizations.search'                                                        , ''                                           , ['@root'                   , 'js/gva/organizations/views/organizationsSearch.html'                                                                    , 'OrganizationsSearchCtrl'                           ]])
