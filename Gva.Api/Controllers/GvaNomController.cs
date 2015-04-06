@@ -497,10 +497,19 @@ namespace Gva.Api.Controllers
             return Ok(returnValue);
         }
 
+        [Route("caseTypes")]
         [Route("{set:regex(^(?:person|organization)$)}CaseTypes")]
-        public IHttpActionResult GetCaseTypes(string set, string term = null)
+        public IHttpActionResult GetCaseTypes(string set = null, string term = null)
         {
-            IEnumerable<GvaCaseType> caseTypes = this.caseTypeRepository.GetCaseTypesForSet(set);
+            IEnumerable<GvaCaseType> caseTypes = null;
+            if (!string.IsNullOrEmpty(set))
+            {
+                caseTypes = this.caseTypeRepository.GetCaseTypesForSet(set);
+            }
+            else
+            {
+                caseTypes = this.caseTypeRepository.GetAllCaseTypes();
+            }
 
             if (!string.IsNullOrWhiteSpace(term))
             {

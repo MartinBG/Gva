@@ -52,7 +52,22 @@ namespace Gva.Api.Repositories.CaseTypeRepository
                 .Include(c => c.LotSet)
                 .SingleOrDefault(ct => ct.Alias == caseTypeAlias);
         }
-        public IEnumerable<GvaCaseType> GetCaseTypesForSet(string setAlias, bool activeOnly = true)
+
+        public IEnumerable<GvaCaseType> GetAllCaseTypes(bool activeOnly = true)
+        {
+            var predicate = PredicateBuilder.True<GvaCaseType>();
+
+            if (activeOnly)
+            {
+                predicate = predicate.And(ct => ct.IsActive);
+            }
+
+            return this.unitOfWork.DbContext.Set<GvaCaseType>()
+                .Where(predicate)
+                .ToList();
+        }
+
+        public IEnumerable<GvaCaseType> GetCaseTypesForSet(string setAlias = null, bool activeOnly = true)
         {
             var predicate = PredicateBuilder.True<GvaCaseType>()
                 .And(ct => ct.LotSet.Alias == setAlias);

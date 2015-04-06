@@ -42,13 +42,22 @@
         </div>
       </div>
 
-       <div class="row" ng-if="alias == 'limitations66'">
+       <div class="row" ng-if="alias === 'limitations66'">
         <div class="form-group col-sm-4">
           <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.limitations66Point"></label>
           <select ui-select2 ng-model="nomenclatureValue.textContent.point" class="input-sm form-control">
               <option value=""></option>
               <option value="8">8</option>
               <option value="13">13</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" ng-if="alias === 'applicationTypes'">
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseTypes"></label>
+          <select ui-select2 multiple ng-model="nomenclatureValue.textContent.caseTypes" class="input-sm form-control">
+            <option  ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
           </select>
         </div>
       </div>

@@ -12,6 +12,8 @@ namespace Gva.Api.Repositories.CaseTypeRepository
 
         GvaCaseType GetCaseType(string caseTypeAlias);
 
+        IEnumerable<GvaCaseType> GetAllCaseTypes(bool activeOnly = true);
+
         IEnumerable<GvaCaseType> GetCaseTypesForSet(string setAlias, bool activeOnly = true);
 
         IEnumerable<GvaCaseType> GetCaseTypesForLot(int lotId);

@@ -180,7 +180,8 @@
               alias: 'Псевдоним',
               order: 'Пореден номер',
               isActive: 'Активен',
-              limitations66Point: 'Точка на забележките'
+              limitations66Point: 'Точка на забележките',
+              caseTypes: 'Типове дела'
             }
           }
         },
