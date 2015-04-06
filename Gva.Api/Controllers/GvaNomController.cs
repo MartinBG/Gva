@@ -258,7 +258,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetInspectors(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.personRepository.GetPersons(isInspector: true, offset: offset, limit: limit)
+                this.personRepository.GetPersons(isInspector: true)
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
@@ -269,6 +269,8 @@ namespace Gva.Api.Controllers
             {
                 returnValue = returnValue.Where(v => v.name.ToLower().Contains(term.ToLower()));
             }
+
+            returnValue = returnValue.WithOffsetAndLimit(offset, limit);
 
             return Ok(returnValue);
         }
@@ -277,7 +279,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetAwExaminers(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.personRepository.GetAwExaminers(offset: offset, limit: limit)
+                this.personRepository.GetAwExaminers()
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
@@ -288,6 +290,8 @@ namespace Gva.Api.Controllers
             {
                 returnValue = returnValue.Where(v => v.name.ToLower().Contains(term.ToLower()));
             }
+
+            returnValue = returnValue.WithOffsetAndLimit(offset, limit);
 
             return Ok(returnValue);
         }
@@ -297,7 +301,7 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetStaffExaminers(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.personRepository.GetStaffExaminers(offset: offset, limit: limit)
+                this.personRepository.GetStaffExaminers()
                 .Select(e => new
                 {
                     nomValueId = e.LotId,
@@ -308,6 +312,8 @@ namespace Gva.Api.Controllers
             {
                 returnValue = returnValue.Where(v => v.name.ToLower().Contains(term.ToLower()));
             }
+
+            returnValue = returnValue.WithOffsetAndLimit(offset, limit);
 
             return Ok(returnValue);
         }
