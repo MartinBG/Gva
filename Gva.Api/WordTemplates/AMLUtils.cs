@@ -147,11 +147,11 @@ namespace Gva.Api.WordTemplates
         {
             IList<object> limitations = new List<object>();
 
-            if (lastLicenceEdition.AmlLimitations.At_a_Ids == null && lastLicenceEdition.AmlLimitations.At_b1_Ids == null &&
-                lastLicenceEdition.AmlLimitations.Ap_a_Ids == null && lastLicenceEdition.AmlLimitations.Ap_b1_Ids == null &&
-                lastLicenceEdition.AmlLimitations.Ht_a_Ids == null && lastLicenceEdition.AmlLimitations.Ht_b1_Ids == null &&
-                lastLicenceEdition.AmlLimitations.Hp_a_Ids == null && lastLicenceEdition.AmlLimitations.Hp_b1_Ids == null &&
-                lastLicenceEdition.AmlLimitations.Avionics_Ids == null)
+            if (NullOrEmpty(lastLicenceEdition.AmlLimitations.At_a_Ids) && NullOrEmpty(lastLicenceEdition.AmlLimitations.At_b1_Ids) &&
+                NullOrEmpty(lastLicenceEdition.AmlLimitations.Ap_a_Ids) && NullOrEmpty(lastLicenceEdition.AmlLimitations.Ap_b1_Ids) &&
+                NullOrEmpty(lastLicenceEdition.AmlLimitations.Ht_a_Ids) && NullOrEmpty(lastLicenceEdition.AmlLimitations.Ht_b1_Ids) &&
+                NullOrEmpty(lastLicenceEdition.AmlLimitations.Hp_a_Ids) && NullOrEmpty(lastLicenceEdition.AmlLimitations.Hp_b1_Ids) &&
+                NullOrEmpty(lastLicenceEdition.AmlLimitations.Avionics_Ids))
             {
                 return new object[0];
             }
@@ -247,6 +247,11 @@ namespace Gva.Api.WordTemplates
             });
 
             return limitations.ToArray<object>();
+        }
+
+        private static bool NullOrEmpty<T>(ICollection<T> c)
+        {
+            return c == null || c.Count == 0;
         }
     }
 }
