@@ -1,16 +1,17 @@
-﻿<ng-form class="form-inline" name="form.printLicenceForm" sc-validate="{}">
+﻿<ng-form class="form-inline" name="form.printLicenceForm" sc-validate="{}" sc-form-readonly="!editMode">
   <div class="panel panel-default">
     <div class="panel-heading">
       <strong l10n-text="persons.printLicenceModal.title"></strong>
       <div class="pull-right">
-        <sc-button name="saveBtn" ng-if="!model.stampNumberReadonly" btn-click="save()" text="persons.printLicenceModal.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="persons.printLicenceModal.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode"></sc-button>
+        <sc-button name="editBtn" btn-click="edit()" text="persons.printLicenceModal.edit" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="!editMode"></sc-button>
         <sc-button name="cancelBtn" btn-click="cancel()" text="persons.printLicenceModal.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
       </div>
     </div>
 
     <div class="well-sm panel-body">
       <div class="row">
-        <sc-field type="text" ng-model="model.stampNumber" ng-readonly="model.stampNumberReadonly" ng-required="true" l10n-text="persons.printLicenceModal.stampNumber" class="col-sm-5"></sc-field>
+        <sc-field type="text" ng-model="model.stampNumber" ng-required="true" l10n-text="persons.printLicenceModal.stampNumber" class="col-sm-5"></sc-field>
         <div class="labeless">
           <sc-link-button name="printBtn" ng-href="api/print?lotId={{model.lotId}}&licenceInd={{model.index}}&editionInd={{model.editionIndex}}" target="_blank" sc-access-token text="persons.printLicenceModal.print" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
           <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/print?lotId={{model.lotId}}&licenceInd={{model.index}}&editionInd={{model.editionIndex}}&generateNew=true" target="_blank" sc-access-token text="persons.printLicenceModal.generateNew" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>

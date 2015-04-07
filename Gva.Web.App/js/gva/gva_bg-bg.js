@@ -2609,7 +2609,8 @@
           cancel: 'Отказ',
           save: 'Запис',
           print: 'Преглед за печат',
-          generateNew: 'Прегенерирай'
+          generateNew: 'Прегенерирай',
+          edit: 'Редакция'
         },
         changeCaseTypeModal: {
           title: 'Промяна на типа дело',

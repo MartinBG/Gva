@@ -10,10 +10,11 @@
     licenceEdition
   ) {
     $scope.form = {};
+    $scope.editMode = null;
+
     $scope.isLastEdition = scModalParams.isLastEdition;
     $scope.model = {
       stampNumber: licenceEdition.part.stampNumber,
-      stampNumberReadonly: !!licenceEdition.part.stampNumber,
       lotId: scModalParams.lotId,
       index: scModalParams.index,
       editionIndex: scModalParams.editionIndex
@@ -33,6 +34,10 @@
           });
         }
       });
+    };
+
+    $scope.edit = function () {
+      $scope.editMode = 'edit';
     };
 
     $scope.cancel = function () {
