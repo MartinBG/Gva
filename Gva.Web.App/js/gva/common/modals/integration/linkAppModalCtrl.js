@@ -20,6 +20,12 @@
     $scope.wrapper = {};
     $scope.form = {};
     $scope.newLot = {};
+    $scope.model = {};
+
+    $scope.isFromPortal = scModalParams.isFromPortal;
+    $scope.currentTab = $scope.isFromPortal? 'choosePortalApp' : 'chooseCaseType';
+    $scope.docId = scModalParams.docId;
+    $scope.docRegUri = scModalParams.docRegUri;
 
     _.forOwn($stateParams, function (value, param) {
       if (value !== null && value !== undefined) {
@@ -72,8 +78,6 @@
       return Organizations.query(params).$promise;
     };
 
-    $scope.currentTab = 'choosePortalApp';
-
     $scope.selectOptions = {
       allowClear: true,
       placeholder: ' ',
@@ -96,7 +100,7 @@
           text: $scope.wrapper.selectedApp.caseType.name
         };
 
-        $scope.set = $scope.wrapper.selectedApp.set;
+        $scope.set = $scope.wrapper.selectedApp.set.toLowerCase();
       } else {
         $scope.wrapper.selectedApp = null;
       }
@@ -105,6 +109,32 @@
     $scope.cancel = function () {
       return $modalInstance.dismiss('cancel');
     };
+
+    $scope.chooseCaseType = function () {
+      return $scope.form.chooseCaseTypeForm.$validate().then(function () {
+        if ($scope.form.chooseCaseTypeForm.$valid) {
+          Integration.getEmptyIntegrationDocRelation({
+            caseTypeId: $scope.model.caseType.nomValueId,
+            docId: $scope.docId,
+            docRegUri: $scope.docRegUri
+          }).$promise
+          .then(function (result) {
+            $scope.wrapper.selectedApp = result;
+            $scope.set = result.set.toLowerCase();
+
+            $scope.searchParams = {
+              code: null,
+              alias: 'applicationTypes',
+              caseType: { id: result.caseType.gvaCaseTypeId, text: result.caseType.name }
+            };
+
+            $scope.currentTab = 'chooseGvaApp';
+            return $scope.searchAppTypes();
+          });
+        }
+      });
+    };
+
     $scope.choosePortalApp = function () {
       return $scope.form.choosePortalAppForm.$validate().then(function () {
         if ($scope.form.choosePortalAppForm.$valid) {
@@ -122,6 +152,8 @@
               caseType: $scope.selectedCaseType,
               name: null
             };
+
+            return $scope.searchAppTypes();
           });
 
         }
@@ -130,7 +162,6 @@
 
     $scope.chooseAppType = function (appType) {
       $scope.wrapper.selectedApp.gvaApplicationType = appType;
-      $scope.set = $scope.wrapper.selectedApp.set.toLowerCase();
 
       $scope.currentTab = 'chooseLot';
 
@@ -211,6 +242,10 @@
 
     $scope.backToPortalApp = function () {
       $scope.currentTab = 'choosePortalApp';
+    };
+
+    $scope.backToCaseType = function () {
+      $scope.currentTab = 'chooseCaseType';
     };
 
     $scope.backToChooseLot = function () {

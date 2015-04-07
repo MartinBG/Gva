@@ -16,6 +16,10 @@
       createApplication: {
         method: 'POST',
         url: 'api/integration/createApplication'
+      },
+      getEmptyIntegrationDocRelation: {
+        method: 'GET',
+        url: 'api/integration/emptyIntegrationDocRelation'
       }
     });
   }]);

@@ -2,8 +2,10 @@
   <div class="panel-heading">
     <strong l10n-text="common.linkAppModal.title"></strong>
     <div class="pull-right">
-      <sc-button ng-if="currentTab === 'choosePortalApp'" name="choosePortalAppBtn" btn-click="choosePortalApp()" text="common.linkAppModal.chooseAppBtn" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
-      <sc-button ng-if="currentTab === 'chooseGvaApp'" name="backToAppBtn" btn-click="backToPortalApp()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+      <sc-button ng-if="currentTab === 'choosePortalApp'" name="choosePortalAppBtn" btn-click="choosePortalApp()" text="common.linkAppModal.forward" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
+      <sc-button ng-if="currentTab === 'chooseCaseType'" name="chooseCaseTypeBtn" btn-click="chooseCaseType()" text="common.linkAppModal.forward" class="btn btn-xs btn-primary" icon="glyphicon-arrow-right" icon-position="right"></sc-button>
+      <sc-button ng-if="currentTab === 'chooseGvaApp' && isFromPortal" name="backToAppBtn" btn-click="backToPortalApp()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
+      <sc-button ng-if="currentTab === 'chooseGvaApp' && !isFromPortal" name="backToAppBtn" btn-click="backToCaseType()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
       <sc-button ng-if="currentTab === 'chooseLot'" name="backToAppBtn" btn-click="backToGvaApp()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
       <sc-button ng-if="currentTab === 'newLot'" name="backToChooseLotBtn" btn-click="backToChooseLot()" text="common.linkAppModal.back" class="btn btn-xs btn-primary" icon="glyphicon-arrow-left"></sc-button>
       <sc-button ng-if="currentTab === 'newLot' && !showWizzard" name="saveLotBtn" btn-click="saveLot()" text="common.linkAppModal.saveLot" class="btn btn-xs btn-primary" icon="glyphicon-floppy-disk"></sc-button>
@@ -14,8 +16,11 @@
 
   <div class="well-sm panel-body">
     <ul class="nav nav-tabs">
-      <li ng-class="{active: currentTab === 'choosePortalApp', disabled: currentTab !== 'choosePortalApp' }">
+      <li ng-class="{active: currentTab === 'choosePortalApp', disabled: currentTab !== 'choosePortalApp' }" ng-if="isFromPortal">
         <a><span l10n-text="common.linkAppModal.choosePortalApp"></span></a>
+      </li>
+      <li ng-class="{active: currentTab === 'chooseCaseType', disabled: currentTab !== 'chooseCaseType' }" ng-if="!isFromPortal">
+        <a><span l10n-text="common.linkAppModal.chooseCaseType"></span></a>
       </li>
       <li ng-class="{active: currentTab === 'chooseGvaApp', disabled: currentTab !== 'chooseGvaApp' }">
         <a><span l10n-text="common.linkAppModal.chooseGvaApp"></span></a>
@@ -40,6 +45,14 @@
       </ng-form>
     </div>
 
+    <div ng-if="currentTab === 'chooseCaseType'">
+      <ng-form class="form-inline" name="form.chooseCaseTypeForm" sc-validate="{}">
+        <div class="row">
+          <sc-field type="nomenclature" ng-model="model.caseType" alias="'caseTypes'" l10n-text="common.linkAppModal.caseType" name="caseType" ng-required="true" class="col-sm-6 col-md-6"></sc-field>
+        </div>
+      </ng-form>
+    </div>
+    
     <div ng-if="currentTab === 'chooseGvaApp'">
       <sc-search selected-filters="searchParams" btn-classes="col-sm-4 col-md-3" default-action="searchAppTypes()">
       <sc-filter type="select" name="caseType" class="col-md-3 col-sm-4" removable="false" label="common.linkAppModal.caseType"

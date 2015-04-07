@@ -4,13 +4,12 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web.Http;
-using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Blob;
 using Common.Data;
-using Common.Json;
 using Common.Utils;
+using System.Data.Entity;
 using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Gva.Api.Models;
@@ -355,6 +354,25 @@ namespace Gva.Api.Controllers.Integration
                 }
             }
             return result;
+        }
+
+        [Route("emptyIntegrationDocRelation")]
+        public IntegrationDocRelationDO GetEmptyIntegrationDocRelation(int caseTypeId, string docRegUri, int docId)
+        {
+            var caseType = this.unitOfWork.DbContext.Set<GvaCaseType>()
+                .Include(i => i.LotSet)
+                .Where(c => c.GvaCaseTypeId == caseTypeId).FirstOrDefault();
+
+            return new IntegrationDocRelationDO()
+            {
+                DocId = docId,
+                DocRegUri = docRegUri,
+                Set = caseType.LotSet.Alias,
+                CaseType = caseType,
+                PersonData = new PersonDataDO(),
+                AircraftData = new AircraftDataDO(),
+                OrganizationData = new OrganizationDataDO()
+            };
         }
 
         [HttpPost]

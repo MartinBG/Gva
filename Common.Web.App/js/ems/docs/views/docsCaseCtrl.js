@@ -52,7 +52,11 @@
     };
 
     $scope.linkApplication = function () {
-      var modalInstance = scModal.open('linkApplication', { docId: $scope.docId });
+      var modalInstance = scModal.open('linkApplication', { 
+        docId: $scope.docId,
+        isFromPortal: doc.docStatusAlias === 'FromPortal',
+        docRegUri: doc.regUri
+      });
 
       modalInstance.result.then(function (res) {
         return $state.go('root.applications.edit.data', {
