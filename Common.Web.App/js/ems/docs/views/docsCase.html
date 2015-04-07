@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<div class="row" ng-if="!appId">
+<div class="row" ng-if="!appId && doc.docRelations[0].docId === docId">
   <div class="col-sm-12">
     <sc-button name="editBtn" btn-click="linkApplication()" text="docs.edit.case.linkApplication" class="btn btn-sm btn-primary"></sc-button>
   </div>
