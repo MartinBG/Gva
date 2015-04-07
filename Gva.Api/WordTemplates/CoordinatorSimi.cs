@@ -100,7 +100,7 @@ namespace Gva.Api.WordTemplates
                 lLangLevel = engLevels.Select(l => new
                 {
                     LEVEL = l.LangLevel.Name,
-                    VALID_DATE = l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToShortDateString() : "unlimited"
+                    VALID_DATE = l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited"
                 })
                 .ToList<object>();
 
@@ -108,7 +108,7 @@ namespace Gva.Api.WordTemplates
                 {
                     LEVEL = l.LangLevel.Name,
                     ISSUE_DATE = l.DocumentDateValidFrom,
-                    VALID_DATE = l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToShortDateString() : "unlimited"
+                    VALID_DATE = l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited"
                 })
                 .ToList<object>();
             }
@@ -249,7 +249,7 @@ namespace Gva.Api.WordTemplates
                         ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
                         AUTH = rating.Content.Authorization.Code,
                         SECTOR = rating.Content.Sector,
-                        VALID_DATE = edition.Content.DocumentDateValidTo.HasValue ? edition.Content.DocumentDateValidTo.Value.ToShortDateString() : "unlimited"
+                        VALID_DATE = edition.Content.DocumentDateValidTo.HasValue ? edition.Content.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited"
                     });
                 }
             };

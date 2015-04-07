@@ -103,7 +103,7 @@ namespace Gva.Api.Controllers.Persons
             GvaViewApplication application = this.applicationRepository.GetApplicationByPartId(exam.AppPartId);
 
             row.Add(new XElement("DOC_NO", application.DocumentNumber));
-            row.Add(new XElement("DOC_DATE", application.DocumentDate.HasValue? application.DocumentDate.Value.ToShortDateString() : null));
+            row.Add(new XElement("DOC_DATE", application.DocumentDate.HasValue ? application.DocumentDate.Value.ToString("dd/MM/yyyy") : null));
             row.Add(new XElement("EGN", person.Uin));
             row.Add(new XElement("LIN", person.Lin));
             row.Add(new XElement("CERT_CAMP_CODE", exam.CertCampCode));
@@ -140,7 +140,7 @@ namespace Gva.Api.Controllers.Persons
             row.Add(new XElement("BIRTH_EKNM_TOWN", person.PlaceOfBirth.Name));
             row.Add(new XElement("CITIZEN_COUNTRY_ID", person.Country.Code));
             row.Add(new XElement("CITIZEN_COUNTRY_NAME", person.Country.Name));
-            row.Add(new XElement("DATE_OF_BIRTH", person.DateOfBirth.Value.ToShortDateString()));
+            row.Add(new XElement("DATE_OF_BIRTH", person.DateOfBirth.Value.ToString("dd/MM/yyyy")));
             row.Add(new XElement("SEX_ID", person.Sex.Code));
 
             NomValue BG = this.nomRepository.GetNomValue("countries", "BG");

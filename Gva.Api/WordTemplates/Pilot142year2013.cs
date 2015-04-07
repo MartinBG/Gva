@@ -98,10 +98,10 @@ namespace Gva.Api.WordTemplates
             {
                 LEVEL = c.LangLevel.Name,
                 VALID_DATE = c.LangLevel.Name.Contains("6") ? "for life" :
-                    (c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToShortDateString() : "unlimited")
+                    (c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited")
             })
             .ToList<object>();
-
+            
             var allIncludedLimitations66Codes = lastEdition.Limitations.Select(s => s.Code);
             var allIncludedLimitations66 = this.nomRepository.GetNomValues("limitations66")
                 .Where(l => allIncludedLimitations66Codes.Contains(l.Code));
