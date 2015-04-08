@@ -38,11 +38,9 @@
     <sc-column data="part.inspector" title="persons.editLicenceEditions.inspector" has-content="true">
       {{item.part.inspector}}
     </sc-column>
-    <sc-column data="part.stampNumber" title="persons.editLicenceEditions.stampNumber" has-content="true">
-      {{item.part.stampNumber}}
+    <sc-column data="part.stampNumber" title="persons.editLicenceEditions.stampNumber">
     </sc-column>
-    <sc-column data="part.licenceAction.code" title="persons.editLicenceEditions.licenceAction" has-content="true">
-      {{item.part.licenceAction.code}}
+    <sc-column data="part.licenceAction.code" title="persons.editLicenceEditions.licenceAction">
     </sc-column>
     <sc-column data="cases[0].applications[0]" title="persons.editLicenceEditions.application" has-content="true">
        <a ng-click="viewApplication(item.cases[0].applications[0].applicationId, lotId, item.cases[0].applications[0].partIndex)">

@@ -36,8 +36,10 @@
 
       var modalInstance = scModal.open('printLicence', params);
 
-      modalInstance.result.then(function (savedLicence) {
-        licence = savedLicence;
+      modalInstance.result.then(function () {
+        return $state.go('root.persons.view.licences.view.editions.edit.ratings',
+          $stateParams,
+          { reload: true });
       });
 
       return modalInstance.opened;
