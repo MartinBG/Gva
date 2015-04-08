@@ -14,7 +14,7 @@
             titleSingle: 'Прикачен файл',
             attachSingle: 'Избери файл',
             attachMultiple: 'Избери файлове',
-            accept: 'Запис',
+            accept: 'Прикачи',
             cancel: 'Отказ',
             noFilesAttached: 'Няма прикачени файлове',
             noFileAttached: 'Няма прикачен файл'
