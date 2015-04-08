@@ -136,7 +136,7 @@ namespace Gva.Api.WordTemplates
                     LIC_NO3 = licenceNumber,
                     LIC_NO4 = licenceNumber,
                     LIC_NO41 = licenceNumber,
-                    AIRCRAFTS = AMLUtils.GetAircrafts(includedRatings, ratingEditions, lot),
+                    AIRCRAFTS = AMLUtils.GetAircrafts(includedRatings, ratingEditions, lot, this.nomRepository),
                     LIC_NO5 = licenceNumber,
                     NA2 = limitations.Count() == 0 && acLimitations.Count() == 0 ? "No limitations" : "",
                     LIMITATIONS = (limitations.Count() > 0 || acLimitations.Count() > 0) ? limitations : new object(),

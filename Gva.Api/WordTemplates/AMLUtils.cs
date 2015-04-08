@@ -38,7 +38,7 @@ namespace Gva.Api.WordTemplates
 
                     categories.Add(new
                     {
-                        TYPE = rating.Content.AircraftTypeGroup.Name,
+                        TYPE = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name,
                         CAT = rating.Content.AircraftTypeCategory.Code,
                         DATE_FROM = firstRatingEdition.Content.DocumentDateValidFrom,
                         DATE_TO = edition.Content.DocumentDateValidTo,
@@ -68,7 +68,7 @@ namespace Gva.Api.WordTemplates
                 {
                     acLimitations.Add(new
                     {
-                        AIRCRAFT = rating.Content.AircraftTypeGroup.Name,
+                        AIRCRAFT = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name,
                         CAT = rating.Content.AircraftTypeCategory.Code,
                         LIM = string.Join(",", edition.Content.Limitations.Select(l => l.Name))
                     });
@@ -81,7 +81,8 @@ namespace Gva.Api.WordTemplates
         internal static object[] GetAircrafts(
             IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
             IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions,
-            Lot lot)
+            Lot lot,
+            INomRepository nomRepository)
         {
             List<object> aircrafts = new List<object>();
             foreach (var edition in ratingEditions)
@@ -96,9 +97,9 @@ namespace Gva.Api.WordTemplates
 
                     aircrafts.Add(new
                     {
-                        AC_TYPE = rating.Content.AircraftTypeGroup.Name,
+                        AC_TYPE = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name,
                         CATEGORY = rating.Content.AircraftTypeCategory == null ? null : rating.Content.AircraftTypeCategory.Code,
-                        DATE = rating.Content.AircraftTypeGroup.Name == "No type" ? null : firstRatingEdition.Content.DocumentDateValidFrom
+                        DATE = firstRatingEdition.Content.DocumentDateValidFrom
                     });
                 }
             }
@@ -130,7 +131,7 @@ namespace Gva.Api.WordTemplates
 
                     categories.Add(new
                     {
-                        TYPE = rating.Content.AircraftTypeGroup.Name,
+                        TYPE = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name,
                         CAT = rating.Content.AircraftTypeCategory.Code,
                         DATE = firstRatingEdition.Content.DocumentDateValidFrom,
                         LIMIT = (edition.Content.Limitations != null && edition.Content.Limitations.Count > 0) ?
