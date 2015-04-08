@@ -722,7 +722,7 @@
         },
         printAirworthinessModal: {
           title: 'Принтиране на документ за летателна годност',
-          stampNumber: 'Печатен док. номер',
+          stampNumber: 'Хартиен №',
           cancel: 'Отказ',
           save: 'Запис',
           print: 'Преглед за печат',
@@ -1992,7 +1992,7 @@
           documentDateValidTo: 'Валиден до',
           licenceAction: 'Основание',
           ready: 'Готов',
-          stampNumber: 'Номер на печат',
+          stampNumber: 'Хартиен №',
           application: 'Заявление',
           received: 'Получен',
           finished: 'Приключено заявление'
@@ -2606,7 +2606,7 @@
         },
         printLicenceModal: {
           title: 'Принтиране на лиценз',
-          stampNumber: 'Печатен док. номер',
+          stampNumber: 'Хартиен №',
           cancel: 'Отказ',
           save: 'Запис',
           print: 'Преглед за печат',
@@ -2672,7 +2672,7 @@
           documentDateValidTo: 'Валиден до',
           inspector: 'Инспектор',
           application: 'Заявление',
-          stampNumber: '№ на печат',
+          stampNumber: 'Хартиен №',
           notes: 'Бележки',
           notesAlt: 'Бележки лат.',
           reason: 'Основание',
@@ -3317,7 +3317,7 @@
           code: 'Идентификационен код',
           valid: 'Валиден',
           person: 'Физическо лице',
-          stampNumber: '№ на печат'
+          stampNumber: 'Хартиен №'
         },
         newAwExaminer: {
           title: 'Нов проверяващ',
@@ -3695,7 +3695,7 @@
           person: 'Физическо лице',
           content: {
             title: 'Допълнителни данни',
-            stampNumber: '№ на печат',
+            stampNumber: 'Хартиен №',
             organization: 'Организация',
             permitedAW: 'Разрешена проверка на ЛГ',
             permitedCheck: 'Разрешена проверка на лица'
