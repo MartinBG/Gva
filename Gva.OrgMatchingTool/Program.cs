@@ -6,14 +6,15 @@ using CarlosAg.ExcelXmlWriter;
 using Gva.Api.CommonUtils;
 using Gva.OrgMatchingTool.Model;
 using Oracle.ManagedDataAccess.Client;
+using System.Configuration;
 
 namespace Gva.OrgMatchingTool
 {
 
     class Program
     {
-        private const string oracleConnStr = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.0.19)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=VENI.CAA)));User Id=system;Password=DBSYSTEMVENI;";
-        private const string sqlConnStr = "Data Source=.\\;Initial Catalog=GvaAircraft;Integrated Security=True;MultipleActiveResultSets=True";
+        private static string oracleConnStr = ConfigurationManager.ConnectionStrings["Apex"].ConnectionString;
+        private static string sqlConnStr = ConfigurationManager.ConnectionStrings["GvaAircraft"].ConnectionString;
 
 
         public static string TrimName(string text)
