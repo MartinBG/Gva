@@ -279,6 +279,11 @@ namespace Gva.MigrationTool
                         return null;
                     }
 
+                    if (!orgLotIdToOrgNom.ContainsKey(orgNameToLotId[fmOrgName]))
+                    {
+                        return null;
+                    }
+
                     return orgLotIdToOrgNom[orgNameToLotId[fmOrgName]];
                 };
 
