@@ -85,7 +85,7 @@ namespace Gva.Api.Repositories.IntegrationRepository
         public List<int> GetCorrespondentIdsPerPersonLot(PersonDataDO personData, UserContext userContext)
         {
             string personNames = string.Format("{0} {1}", personData.FirstName, personData.LastName);
-            List<Correspondent> correspondents = this.correspondentRepository.GetCorrespondents(personNames, personData.Email, 10, 0);
+            List<Correspondent> correspondents = this.correspondentRepository.GetCorrespondents(personNames, null, 10, 0);
 
             List<int> correspondentIds = correspondents.Select(c => c.CorrespondentId).ToList() ?? new List<int>();
             if (correspondentIds.Count() == 0)
