@@ -27,7 +27,10 @@ namespace Docs.Api.Repositories.UnitRepository
             var domainEntities = unitsInContext
                 .Include(e => e.UnitRelations)
                 .Include(e => e.UnitType)
+                .Include(e => e.UnitUsers
+                    .Select(uu => uu.User))
                 .Where(e => e.IsActive == true)
+                .OrderBy(e => e.UnitTypeId)
                 .Select(e => new UnitDomainModel {
                     UnitId = e.UnitId,
                     Name = e.Name,
@@ -35,30 +38,14 @@ namespace Docs.Api.Repositories.UnitRepository
                     IsActive = e.IsActive,
                     RootUnitId = e.UnitRelations.FirstOrDefault().RootUnitId,
                     ParentUnitId = e.UnitRelations.FirstOrDefault().ParentUnitId,
-                });
-
-            return domainEntities;
-        }
-
-        public IEnumerable<UnitDomainModel> GetListOfAllActiveUnitsWithAssignedUsers()
-        {
-            // join is used, because Unit should not have navigation property to User
-
-            var domainEntities = unitsInContext
-                .Include(e => e.UnitRelations)
-                .Include(e => e.UnitType)
-                //.Join(e=>)
-
-                .Where(e => e.IsActive == true)
-
-
-                .Select(e => new UnitDomainModel {
-                    UnitId = e.UnitId,
-                    Name = e.Name,
-                    Type = e.UnitType.Alias,
-                    IsActive = e.IsActive,
-                    RootUnitId = e.UnitRelations.FirstOrDefault().RootUnitId,
-                    ParentUnitId = e.UnitRelations.FirstOrDefault().ParentUnitId,
+                    User = e.UnitUsers.Where(r => r.IsActive)
+                        .Select(r => new UserForUnitAttachmentDomainModel {
+                            UserId = r.User.UserId,
+                            UserName = r.User.Username,
+                            FullName = r.User.Fullname,
+                            IsActive = r.User.IsActive
+                        })
+                        .FirstOrDefault()
                 });
 
             return domainEntities;
@@ -67,16 +54,27 @@ namespace Docs.Api.Repositories.UnitRepository
         public IEnumerable<UnitDomainModel> GetListOfAllUnits()
         {
             var domainEntities = unitsInContext
-                .Include(e => e.UnitRelations)
-                .Include(e => e.UnitType)
-                .Select(e => new UnitDomainModel {
-                    UnitId = e.UnitId,
-                    Name = e.Name,
-                    Type = e.UnitType.Alias,
-                    IsActive = e.IsActive,
-                    RootUnitId = e.UnitRelations.FirstOrDefault().RootUnitId,
-                    ParentUnitId = e.UnitRelations.FirstOrDefault().ParentUnitId,
-                });
+               .Include(e => e.UnitRelations)
+               .Include(e => e.UnitType)
+               .Include(e => e.UnitUsers
+                   .Select(uu => uu.User))
+               .OrderBy(e => e.UnitTypeId)
+               .Select(e => new UnitDomainModel {
+                   UnitId = e.UnitId,
+                   Name = e.Name,
+                   Type = e.UnitType.Alias,
+                   IsActive = e.IsActive,
+                   RootUnitId = e.UnitRelations.FirstOrDefault().RootUnitId,
+                   ParentUnitId = e.UnitRelations.FirstOrDefault().ParentUnitId,
+                   User = e.UnitUsers.Where(r => r.IsActive)
+                       .Select(r => new UserForUnitAttachmentDomainModel {
+                           UserId = r.User.UserId,
+                           UserName = r.User.Username,
+                           FullName = r.User.Fullname,
+                           IsActive = r.User.IsActive
+                       })
+                       .FirstOrDefault()
+               });
 
             return domainEntities;
         }
@@ -228,7 +226,7 @@ namespace Docs.Api.Repositories.UnitRepository
 
             var unitUsersInContext = unitOfWork.DbContext.Set<UnitUser>();
             var doesUnitAlreadyExistInRelation = unitUsersInContext.Any(e =>
-                e.UnitId == unitId                
+                e.UnitId == unitId
                 && e.IsActive);
             if (doesUnitAlreadyExistInRelation)
             {

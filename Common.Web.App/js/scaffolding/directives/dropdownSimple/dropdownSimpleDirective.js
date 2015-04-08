@@ -21,8 +21,8 @@
       replace: true,
       templateUrl: 'js/scaffolding/directives/dropdownSimple/dropdownSimpleDirective.html',
       scope: {
-        selectedItem: "=",
-        selectedValue: "=",
+        selectedItem: '=',
+        selectedValue: '=',
         itemsSource: '&',
         itemTextField: '@',
         itemValueField: '@'

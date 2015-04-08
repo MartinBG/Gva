@@ -166,9 +166,13 @@
     <Content Include="js\ems\ems_bg-bg.js" />
     <Content Include="js\ems\units\classificationPermissionsResource.js" />
     <Content Include="js\ems\units\classificationsResource.js" />
+    <Content Include="js\ems\units\selectUserModalCtrl.js" />
+    <Content Include="js\ems\units\selectUserModal.html" />
+    <Content Include="js\ems\units\unitClassificationsEdit.html" />
     <Content Include="js\ems\units\editUnitModal.html" />
     <Content Include="js\ems\units\editUnitModalCtrl.js" />
     <Content Include="js\ems\units\unitsCtrl.js" />
+    <Content Include="js\ems\units\unitUsersResource.js" />
     <Content Include="js\ems\units\unitsResource.js" />
     <Content Include="js\ems\units\unitsView.html" />
     <Content Include="js\scaffolding\decorators\formDecorator.js" />

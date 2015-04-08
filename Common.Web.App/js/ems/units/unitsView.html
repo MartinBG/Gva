@@ -83,10 +83,9 @@
       <span class="glyphicon glyphicon-remove delete-icon"
             ng-show="unit.isSelected && canUnitBeDeleted(unit)"
             ng-click="deleteUnit(unit); $event.stopPropagation();"></span>
-
-      <span ng-show="unit.isSelected">
-        <span class="glyphicon glyphicon-plus-sign" ng-click="addNewUnit(unit.unitId, 'Department'); $event.stopPropagation();"></span>
-      </span>
+      <span class="glyphicon glyphicon-plus-sign"
+            ng-show="unit.isSelected"
+            ng-click="addNewUnit(unit.unitId, 'Department'); $event.stopPropagation();"></span>
     </div>
 
     <div class="child-unit"
@@ -121,6 +120,11 @@
       <span class="glyphicon glyphicon-remove delete-icon"
             ng-show="unit.isSelected && canUnitBeDeleted(unit)"
             ng-click="deleteUnit(unit); $event.stopPropagation();"></span>
+      <!--this wan't work in case of inactive-->
+      <span class="glyphicon glyphicon-plus-sign"
+            ng-show="unit.isSelected && unit.childUnits.length === 0"
+            ng-click="addNewUnit(unit.unitId, 'Position'); $event.stopPropagation();"></span>
+
     </span>
 
     <span ng-if="unit.childUnits">
@@ -136,7 +140,21 @@
             ng-click="setUnitActiveStatus(unit.childUnits[0], true); $event.stopPropagation();"></span>
       <span class="glyphicon glyphicon-remove delete-icon"
             ng-show="unit.isSelected && canUnitBeDeleted(unit.childUnits[0])"
-            ng-click="deleteUnit(unit.childUnits[0]); $event.stopPropagation();"></span>
+            ng-click="deleteUnit(unit.childUnits[0]); $event.stopPropagation();"></span>      
+      <!--User section-->
+      <span ng-show="unit.childUnits[0].isActive">
+        <span class="glyphicon glyphicon-minus"></span>
+        {{unit.childUnits[0].user.userName}}
+        <span class="glyphicon glyphicon-forward"
+              tooltip="Прикачи потребител"
+              ng-show="unit.isSelected && !unit.childUnits[0].user"
+              ng-click="attachUserToUnit(unit.childUnits[0].unitId); $event.stopPropagation();"></span>
+        <span class="glyphicon glyphicon-remove-circle"
+              tooltip="Премахване на връзката с потребител"
+              ng-show="unit.isSelected && unit.childUnits[0].user"
+              ng-click="detachUserFromUnit(unit.childUnits[0].unitId, unit.childUnits[0].user.userId); $event.stopPropagation();"></span>
+      </span>
+
     </span>
   </div>
 
@@ -181,6 +199,8 @@ ualisation, without custom functionlaity overhead.
           ng-click="refresh()">
     <span l10n-text="common.units.refresh"></span>
   </button>
+
+  <span class="glyphicon glyphicon-refresh glyphicon-spin" ng-show="isLoading"></span>
 
   <div>
     <span class="glyphicon glyphicon-chevron-down"

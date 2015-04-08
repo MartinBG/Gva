@@ -92,6 +92,11 @@
           edit: {
             classification: 'Класификация',
             classificationPermissions: 'Права'
+          },
+          users: {
+            title: 'Избери потребител',
+            userName: 'Потребителско име',
+            fullName: 'Име'
           }
         }
       },
@@ -99,7 +104,7 @@
         save: 'Запази',
         cancel: 'Откажи',
         type: 'Тип',
-        name: 'Име',
+        name: 'Име'
       },
       states: {
         'root.users': 'Потребители',

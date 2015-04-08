@@ -5,7 +5,7 @@
   angular.module('common')
 
   .factory('ClassificationPermissionsResource', ['$resource', function ($resource) {
-    return $resource('api/units/classificationPermissions');
+    return $resource('api/units/classificationPermissions');    
   }]);
 
 }(angular));

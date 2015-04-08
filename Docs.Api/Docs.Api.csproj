@@ -135,6 +135,7 @@
     <Compile Include="Models\DomainModels\UnitDomainModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\DomainModels\UserForUnitAttachmentDomainModel.cs" />
     <Compile Include="Models\ElectronicServiceProvider.cs" />
     <Compile Include="Models\Email.cs" />
     <Compile Include="Models\EmailAddressee.cs" />
@@ -205,9 +206,11 @@
     <Compile Include="Repositories\UnitRepository\IUnitRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repositories\UnitRepository\IUnitUserRepository.cs" />
     <Compile Include="Repositories\UnitRepository\UnitRepository.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Repositories\UnitRepository\UnitUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

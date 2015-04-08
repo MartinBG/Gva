@@ -29,6 +29,7 @@ namespace Docs.Api
 
             moduleBuilder.RegisterType<UnitRepository>().As<IUnitRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<UnitBusinessLogic>().As<IUnitBusinessLogic>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<UnitUserRepository>().As<IUnitUserRepository>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<CorrespondentController>().InstancePerLifetimeScope();

@@ -23,12 +23,17 @@ namespace Docs.Api.Controllers
         private IUnitOfWork unitOfWork;
         private IUnitBusinessLogic unitBusinessLogic;
         private IUnitRepository unitRepository;
+        private IUnitUserRepository unitUserRepository;
 
-        public UnitController(IUnitOfWork unitOfWork, IUnitBusinessLogic unitBusinessLogic, IUnitRepository unitRepository)
+        public UnitController(IUnitOfWork unitOfWork,
+            IUnitBusinessLogic unitBusinessLogic,
+            IUnitRepository unitRepository,
+            IUnitUserRepository unitUserRepository)
         {
             this.unitOfWork = unitOfWork;
             this.unitBusinessLogic = unitBusinessLogic;
             this.unitRepository = unitRepository;
+            this.unitUserRepository = unitUserRepository;
         }
 
         [Route("api/nomenclatures/units")]
@@ -173,12 +178,27 @@ namespace Docs.Api.Controllers
             return Ok();
         }
 
-        [Route("api/units/{id:int}/user/{userId:int}")]
+        [Route("api/units/{id:int}/users/{userId:int}")]
         [HttpPost]
-        public IHttpActionResult AssignUserToUnit(int id, int userId)
+        public IHttpActionResult AttachUnitToUser(int id, int userId)
         {
-            unitRepository.AssignUserToUnit(id, userId);
+            unitUserRepository.AttachUnitToUser(id, userId);
             return Ok();
+        }
+
+        [Route("api/units/{id:int}/users/{userId:int}")]
+        [HttpDelete]
+        public IHttpActionResult DeactivateUniUserRelation(int id, int userId)
+        {
+            unitUserRepository.DeactivateUniUserRelation(id, userId);
+            return Ok();
+        }
+
+        [Route("api/units/users")]
+        [HttpGet]
+        public IHttpActionResult GetUsersNotAttachedToUnit()
+        {
+            return Ok(unitUserRepository.GetUsersNotAttachedToUnit());
         }
     }
 }

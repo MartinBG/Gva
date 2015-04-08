@@ -2,8 +2,16 @@
 (function (angular) {
   'use strict';
 
-  function UnitsCtrl($scope, $state, $stateParams, unitsModel, scModal, UnitsResource) {
+  function UnitsCtrl($scope, $state, $stateParams,
+    unitsModel,
+    scModal,
+    scMessage,
+    UnitsResource,
+    UnitUsersResource,
+    $timeout) {
+
     $scope.model = unitsModel;
+    $scope.isLoading = false;
     $scope.filterValue = '';
     $scope.includeInactive = false;
     $scope.selectedUnit = null;
@@ -12,47 +20,15 @@
       refreshData();
     };
 
-    // This function is currently not used.
-    function getHierarchyItemById(hierarchyItem, id) {
-      if (hierarchyItem.unitId === id) {
-        return hierarchyItem;
-      }
-
-      for (var i = 0; i < hierarchyItem.childUnits.length; i++) {
-        var result = getHierarchyItemById(hierarchyItem.childUnits[i], id);
-        if (result !== null) {
-          return result;
-        }
-      }
-
-      return null;
-    }
-
-    
-
     $scope.canUnitBeDeleted = function (unit) {
       return unit.childUnits.length === 0;
     };
-
-
 
     $scope.deleteUnit = function (unit) {
       UnitsResource.delete({ id: unitId })
         .$promise.then(function () {
           refreshData();
         });
-      // test code 
-      //var item = getHierarchyItemById($scope.model[0], unit.parentUnitId);
-      //if (item) {
-      //  var index = null;
-      //  // get index of childunit in array so we can remove it
-      //  for (var i = 0; i < item.childUnits.length; i++) {
-      //    if (item.childUnits[i].unitId = unit.unitId) {            
-      //      item.childUnits.splice(i, 1);
-      //      break;
-      //    }
-      //  }
-      //}
     };
 
     $scope.setCollapsedStateOfAll = function (state) {
@@ -66,10 +42,14 @@
     };
 
     $scope.setUnitActiveStatus = function (unit, isActive) {
-
+      $scope.isLoading = true;
       UnitsResource.setActiveStatus({ id: unit.unitId, isActive: isActive }, null)
          .$promise.then(function () {
+           $scope.isLoading = false;
            unit.isActive = isActive;
+         }, function () {
+           // error
+           $scope.isLoading = false;           
          });
     };
 
@@ -109,19 +89,46 @@
 
       modalInstance.result.then(function (returnedResult) {
         if (returnedResult) {
+          modalInstance.close();
           refreshData();
         }
       });
     };
 
-    $scope.addUserToUnit = function () {
+    $scope.attachUserToUnit = function (unitId) {
+      var modalInstance = scModal.open('selectUserModal', {
+        unitId: unitId
+      });
 
+      modalInstance.result.then(function (returnedResult) {
+        if (returnedResult) {
+          $timeout(function () {
+            refreshData();
+          }, 500);
+        }
+      });
+    };
+
+    $scope.detachUserFromUnit = function (unitId, userId) {
+      scMessage('Моля, потвърдете премахването на връзката с потребител.')
+        .then(function (result) {
+          if (result === 'OK') {
+            // need this because popup window is rendered after resource loading finishes
+            $timeout(function () {
+              UnitUsersResource.remove({ id: unitId, userId: userId }, function () {
+                refreshData();
+              });
+            }, 500);
+          }
+        });
     };
 
     function refreshData() {
+      $scope.isLoading = true;
       UnitsResource.query({ includeInactive: $scope.includeInactive })
         .$promise.then(function (unitsModel) {
           $scope.model = unitsModel;
+          $scope.isLoading = false;
         });
     }
 
@@ -163,7 +170,7 @@
     }
   }
 
-  UnitsCtrl.$inject = ['$scope', '$state', '$stateParams', 'unitsModel', 'scModal', 'UnitsResource'];
+  UnitsCtrl.$inject = ['$scope', '$state', '$stateParams', 'unitsModel', 'scModal', 'scMessage', 'UnitsResource', 'UnitUsersResource', '$timeout'];
 
   UnitsCtrl.$resolve = {
     unitsModel: ['$stateParams', 'UnitsResource',
