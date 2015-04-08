@@ -23,7 +23,7 @@
     $scope.model = {};
 
     $scope.isFromPortal = scModalParams.isFromPortal;
-    $scope.currentTab = $scope.isFromPortal? 'choosePortalApp' : 'chooseCaseType';
+    $scope.currentTab = $scope.isFromPortal ? 'choosePortalApp' : 'chooseCaseType';
     $scope.docId = scModalParams.docId;
     $scope.docRegUri = scModalParams.docRegUri;
 
