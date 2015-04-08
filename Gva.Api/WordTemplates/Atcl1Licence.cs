@@ -117,7 +117,7 @@ namespace Gva.Api.WordTemplates
                     SURNAME_TRANS = personData.MiddleNameAlt.ToUpper(),
                     DATE_OF_BIRTH = personData.DateOfBirth,
                     COUNTRY = country != null ? country.Name : null,
-                    CITY = placeOfBirth.Name,
+                    CITY = placeOfBirth != null ? placeOfBirth.Name : null,
                     COUNTRY_EN = country != null ? country.NameAlt : null,
                     CITY_EN = placeOfBirth != null ? placeOfBirth.NameAlt : null,
                     ADDRESS = address,
@@ -157,6 +157,8 @@ namespace Gva.Api.WordTemplates
                     T_ENDORSEMENT = Utils.FillBlankData(this.GetEndorsements2(includedRatings, ratingEditions, true), 9),
                     L_ENDORSEMENT1 = Utils.FillBlankData(new List<object>(), 9)
                 }
+
+
             };
 
             return json;
