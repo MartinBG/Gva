@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models.Views.Person;
-using Newtonsoft.Json.Linq;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
-using Common.Api.Models;
-using Common.Api.Repositories.NomRepository;
 using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.FileRepository;
-using Gva.Api.Models;
-using Gva.Api.ModelsDO;
-using Gva.Api.ModelsDO.Common;
 
 namespace Gva.Api.Projections.Person
 {
@@ -37,6 +29,7 @@ namespace Gva.Api.Projections.Person
                     DocumentPublisher = d.Content.DocumentPublisher,
                     DocumentNumber = d.Content.DocumentNumber
                 });
+
             var checks = parts.GetAll<PersonCheckDO>("personDocumentChecks")
                  .Select(d => new PersonDocumentDO()
                  {
@@ -70,6 +63,7 @@ namespace Gva.Api.Projections.Person
                     DocumentNumber = d.Content.DocumentNumber,
                     DocumentPersonNumber = d.Content.DocumentPersonNumber
                 });
+
             var others = parts.GetAll<PersonDocumentOtherDO>("personDocumentOthers")
                 .Select(d => new PersonDocumentDO()
                 {
@@ -114,14 +108,6 @@ namespace Gva.Api.Projections.Person
                     DocumentPublisher = d.Content.DocumentPublisher.Name,
                     DocumentNumber = d.Content.DocumentNumber
                 });
-            var applications = parts.GetAll<DocumentApplicationDO>("personDocumentApplications")
-                .Select(d => new PersonDocumentDO()
-                {
-                    LotId = d.Part.LotId,
-                    PartIndex = d.Part.Index,
-                    DocumentDateValidFrom = d.Content.DocumentDate,
-                    DocumentNumber = d.Content.DocumentNumber
-                });
 
             var reports = parts.GetAll<PersonReportDO>("personReports")
                  .Select(d => new PersonDocumentDO()
@@ -140,7 +126,6 @@ namespace Gva.Api.Projections.Person
                 .Union(langCertificates)
                 .Union(statuses)
                 .Union(medicals)
-                .Union(applications)
                 .Union(reports)
                 .Select(r => this.Create(r));
         }
