@@ -53,14 +53,24 @@
         </div>
       </div>
 
-      <div class="row" ng-if="alias === 'applicationTypes'">
-        <div class="form-group col-sm-4">
-          <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseTypes"></label>
-          <select ui-select2 multiple ng-model="nomenclatureValue.textContent.caseTypes" class="input-sm form-control" ng-required="true">
-            <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
-          </select>
+      <div ng-if="alias === 'applicationTypes'">
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseTypes"></label>
+            <select ui-select2 multiple ng-model="nomenclatureValue.textContent.caseTypes" class="input-sm form-control" ng-required="true">
+              <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
+            </select>
+          </div>
+          <sc-field ng-hide="true" type="int" ng-init="nomenclatureValue.textContent.documentTypeId = 12" ng-model="nomenclatureValue.textContent.documentTypeId" class="col-sm-4"></sc-field>
+        </div>
+        <div class="row">
+          <sc-field type="int" ng-model="nomenclatureValue.textContent.duration" ng-init="nomenclatureValue.textContent.duration = nomenclatureValue.textContent.duration || 30" ng-required="true" l10n-text="common.nomenclatures.nomValues.edit.duration" class="col-sm-4"></sc-field>
+        </div>
+        <div class="row">
+          <sc-field type="nomenclature" alias="'licenceTypes'" ng-init="nomenclatureValue.textContent.licenceTypeIds = nomenclatureValue.textContent.licenceTypeIds || null" mode="id" multiple ng-model="nomenclatureValue.textContent.licenceTypeIds" l10n-text="common.nomenclatures.nomValues.edit.licenceTypeIds" class="col-sm-8"></sc-field>
         </div>
       </div>
+
       <div ng-if="alias === 'documentTypes'">
         <div class="row">
           <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.isPersonsOnly = nomenclatureValue.textContent.isPersonsOnly || false">
@@ -83,6 +93,7 @@
           </div>
         </div>
       </div>
+
       <div ng-if="alias === 'documentRoles'">
         <div class="row">
           <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.isPersonsOnly = nomenclatureValue.textContent.isPersonsOnly || false">

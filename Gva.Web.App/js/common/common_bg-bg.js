@@ -185,8 +185,10 @@
               caseType: 'Тип дело',
               isPersonsOnly: 'Само за лица',
               isIdDocument: 'За самоличност',
-              categoryAlias: 'Категория документи'
-            }
+              categoryAlias: 'Категория документи',
+              duration: 'Срок на валидност в дни',
+              licenceTypeIds: 'Типове лицензи (за изпити)'
+            } 
           }
         },
         changePasswordModal: {
