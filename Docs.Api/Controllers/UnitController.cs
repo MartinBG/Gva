@@ -65,35 +65,6 @@ namespace Docs.Api.Controllers
             return Ok(unitBusinessLogic.GetAllUnitsHierarchy(includeInactive));
         }
 
-        [Route("api/units/classificationPermissions")]
-        [HttpGet]
-        public IHttpActionResult GetClassificationPermissions(bool includeInactive = false)
-        {
-            var result = unitOfWork.DbContext.Set<ClassificationPermission>()
-                .Select(e => new
-                {
-                    Id = e.ClassificationPermissionId,
-                    Name = e.Name,
-                    Alias = e.Alias
-                }).ToList();
-
-            return Ok(result);
-        }
-
-        [Route("api/units/classifications")]
-        [HttpGet]
-        public IHttpActionResult GetClassifications(bool includeInactive = false)
-        {
-            var result = unitOfWork.DbContext.Set<Classification>()
-                .Select(e => new
-                {
-                    Id = e.ClassificationId,
-                    Name = e.Name,
-                }).ToList();
-
-            return Ok(result);
-        }
-
         [Route("api/units/{unitId:int}")]
         [HttpGet]
         public IHttpActionResult GetUnitById(int unitId)
@@ -105,14 +76,15 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateUnit(UnitDomainModel model)
         {
-            return Ok(unitBusinessLogic.CreateUnit(model));
+            //return Ok(unitBusinessLogic.CreateUnit(model));
+            return Ok();
         }
 
         [Route("api/units/{unitId:int}")]
         [HttpPost]
         public IHttpActionResult UpdateUnit(int unitId, UnitDomainModel model)
         {
-            unitBusinessLogic.UpdateUnit(model);
+            //unitBusinessLogic.UpdateUnit(model);
             return Ok();
         }
 

@@ -52,6 +52,22 @@
     left: auto;
     font-size: 8px;
   }
+
+  .ab-icon-button {
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: black;
+  }
+
+    .ab-icon-button > span {
+      cursor: pointer;
+    }
+
+    .ab-icon-button:hover {
+      text-decoration: none;
+      color: black;
+    }
 </style>
 
 <script type="text/ng-template" id="unit_recursive_template.html">
@@ -73,6 +89,10 @@
       <span ng-class="{'inactive-unit': !unit.isActive}">
         {{unit.name}}
       </span>
+
+      <span class="glyphicon glyphicon-pencil"
+            ng-show="unit.isSelected && unit.isActive"
+            ng-click="editUnit(unit.unitId); $event.stopPropagation();"></span>
 
       <span class="glyphicon glyphicon-off deactivate-icon"
             ng-show="unit.isSelected && unit.isActive"
@@ -111,6 +131,10 @@
       <span class="glyphicon glyphicon-plus-sign"
             ng-show="unit.childUnits.length === 0"
             ng-click="addNewUnit(unit.unitId, 'Employee'); $event.stopPropagation();"></span>
+      <span class="glyphicon glyphicon-pencil"
+            ng-show="unit.isActive"
+            ng-click="editUnit(unit.unitId); $event.stopPropagation();"></span>
+
       <span class="glyphicon glyphicon-off deactivate-icon"
             ng-show="unit.isActive"
             ng-click=" setUnitActiveStatus(unit, false); $event.stopPropagation();"></span>
@@ -132,6 +156,11 @@
       <span ng-class="{'inactive-unit': !unit.childUnits[0].isActive}">
         {{unit.childUnits[0].name}}
       </span>
+
+      <!--<span class="glyphicon glyphicon-pencil"
+            ng-show="unit.isActive"
+            ng-click="editUnit(unit.unitId); $event.stopPropagation();"></span>-->
+
       <span class="glyphicon glyphicon-off deactivate-icon"
             ng-show="unit.isSelected && unit.childUnits[0].isActive"
             ng-click="setUnitActiveStatus(unit.childUnits[0], false); $event.stopPropagation();"></span>
@@ -140,7 +169,7 @@
             ng-click="setUnitActiveStatus(unit.childUnits[0], true); $event.stopPropagation();"></span>
       <span class="glyphicon glyphicon-remove delete-icon"
             ng-show="unit.isSelected && canUnitBeDeleted(unit.childUnits[0])"
-            ng-click="deleteUnit(unit.childUnits[0]); $event.stopPropagation();"></span>      
+            ng-click="deleteUnit(unit.childUnits[0]); $event.stopPropagation();"></span>
       <!--User section-->
       <span ng-show="unit.childUnits[0].isActive">
         <span class="glyphicon glyphicon-minus"></span>
@@ -182,25 +211,19 @@ ualisation, without custom functionlaity overhead.
 
   <button class="btn btn-sm btn-default"
           type="button">
-
-
-    <span cl
     <span class="glyphicon glyphicon-remove clear-icon"
           ng-click="clearFilter()"></span>
   </button>
 
+  <sc-button name="refreshButton"
+             btn-click="refresh()"
+             class="btn btn-default btn-xs"
+             text="common.units.refresh"
+             icon="glyphicon-repeat"></sc-button>
   <label>
     <span l10n-text="common.units.includeInactive"></span>
     <input type="checkbox" ng-model="includeInactive">
   </label>
-
-  <button class="btn btn-sm btn-default"
-          type="button"
-          ng-click="refresh()">
-    <span l10n-text="common.units.refresh"></span>
-  </button>
-
-  <span class="glyphicon glyphicon-refresh glyphicon-spin" ng-show="isLoading"></span>
 
   <div>
     <span class="glyphicon glyphicon-chevron-down"

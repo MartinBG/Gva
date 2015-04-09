@@ -95,9 +95,13 @@ namespace Docs.Api.Repositories.UnitRepository
                     ParentUnitId = e.UnitRelations.FirstOrDefault().ParentUnitId,
                     Classifications = e.UnitClassifications
                         .Select(c => new UnitClassificationDomainModel {
-                            UnitClassificationId = c.UnitClassificationId,
+                            //UnitClassificationId = c.UnitClassificationId,
+                            //ClassificationName = c.ClassificationPermission.Name,
+                            //ClassificationPermission = c.ClassificationPermission.Name
+                            ClassificationId = c.ClassificationId,
+                            ClassificationPermissionId = c.ClassificationPermissionId,
                             ClassificationName = c.ClassificationPermission.Name,
-                            ClassificationPermission = c.ClassificationPermission.Name
+                            ClassificationPermissionName = c.ClassificationPermission.Name
                         }).ToList()
                 })
                 .SingleOrDefault(e => e.UnitId == unitId);

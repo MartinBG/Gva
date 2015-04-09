@@ -11,15 +11,19 @@
     $timeout) {
 
     $scope.model = unitsModel;
-    $scope.isLoading = false;
     $scope.filterValue = '';
     $scope.includeInactive = false;
     $scope.selectedUnit = null;
-
+    
     $scope.refresh = function () {
-      refreshData();
+      //refreshData();
+      return UnitsResource
+        .query({ includeInactive: $scope.includeInactive })
+       .$promise.then(function (unitsModel) {
+         $scope.model = unitsModel;
+       });
     };
-
+    
     $scope.canUnitBeDeleted = function (unit) {
       return unit.childUnits.length === 0;
     };
@@ -29,6 +33,12 @@
         .$promise.then(function () {
           refreshData();
         });
+    };
+
+    $scope.editUnit = function (unitId) {
+      var modalInstance = scModal.open('editUnitModal', {
+        unitId: unitId
+      });
     };
 
     $scope.setCollapsedStateOfAll = function (state) {
@@ -49,7 +59,7 @@
            unit.isActive = isActive;
          }, function () {
            // error
-           $scope.isLoading = false;           
+           $scope.isLoading = false;
          });
     };
 
@@ -124,11 +134,9 @@
     };
 
     function refreshData() {
-      $scope.isLoading = true;
       UnitsResource.query({ includeInactive: $scope.includeInactive })
         .$promise.then(function (unitsModel) {
           $scope.model = unitsModel;
-          $scope.isLoading = false;
         });
     }
 

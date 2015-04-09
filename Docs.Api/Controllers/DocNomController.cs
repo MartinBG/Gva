@@ -312,6 +312,31 @@ namespace Docs.Api.Controllers
             return Ok(results);
         }
 
+        [Route("classificationPermission")]
+        public IHttpActionResult GetClassificationPermissions(string term = null, int offset = 0, int? limit = null)
+        {
+            var predicate =
+                PredicateBuilder.True<ClassificationPermission>()
+                .AndStringContains(e => e.Name, term)
+                .And(e => e.IsActive);
+
+            var results =
+                this.unitOfWork.DbContext.Set<ClassificationPermission>()
+                .Where(predicate)
+                .OrderBy(e => e.ClassificationPermissionId)
+                .WithOffsetAndLimit(offset, limit)
+                .Select(e => new
+                {
+                    nomValueId = e.ClassificationPermissionId,
+                    name = e.Name,
+                    alias = e.Alias,
+                    isActive = e.IsActive
+                })
+                .ToList();
+
+            return Ok(results);
+        }
+
         [Route("docTypeGroup/{id:int}")]
         public IHttpActionResult GetDocTypeGroup(int id)
         {

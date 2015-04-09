@@ -164,8 +164,6 @@
     <Content Include="js\ems\docs\views\workflowRequestCtrl.js" />
     <Content Include="js\ems\ems.js" />
     <Content Include="js\ems\ems_bg-bg.js" />
-    <Content Include="js\ems\units\classificationPermissionsResource.js" />
-    <Content Include="js\ems\units\classificationsResource.js" />
     <Content Include="js\ems\units\selectUserModalCtrl.js" />
     <Content Include="js\ems\units\selectUserModal.html" />
     <Content Include="js\ems\units\unitClassificationsEdit.html" />

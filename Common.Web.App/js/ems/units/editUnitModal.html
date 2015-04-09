@@ -1,6 +1,4 @@
-<ng-form name="form.unit" sc-validate="{}">
-  <!--<style>
-  </style>-->
+<ng-form name="form.unitForm" sc-validate="{}">
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -25,82 +23,85 @@
 
       <div class="row">
 
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-4" sc-has-error="unitName">
           <label class="control-label" l10n-text="commonLabels.name"></label>
-          <sc-validation-error field-name="unitName" validations="{required: 'default'}"></sc-validation-error>
-          <sc-text name="unitName" ng-model="model.name"></sc-text>
+          <sc-validation-error field-name="unitName"
+                               validations="{required: 'default'}"></sc-validation-error>
+          <sc-text name="unitName"
+                   ng-model="model.name"                   
+                   required></sc-text>
         </div>
 
         <div class="form-group col-sm-4">
           <label class="control-label" l10n-text="commonLabels.type"></label>
-          <!--<sc-validation-error field-name="unitName" validations="{required: 'default'}"></sc-validation-error>-->
-          <sc-dropdown-simple 
-                              class="form-control input-sm"
+          <sc-dropdown-simple class="form-control input-sm"
                               items-source="unitTypes"
                               selected-item="selectedItem"
                               selected-value="model.type"
                               item-value-field="value"
                               item-text-field="name"></sc-dropdown-simple>
-
         </div>
       </div>
 
+      <div style="max-height: 350px; overflow: auto;" sc-has-error="tst">
+        <sc-validation-error field-name="tst"
+                             validations="{testValidate: 'Greshka be'}"></sc-validation-error>
+        <table class="table table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th style="width: 200px;" l10n-text="common.units.edit.classification"></th>
+              <th style="width: 200px;" l10n-text="common.units.edit.classificationPermissions"></th>
+              <th style="width: 20px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="permission in model.permissions"
+                ng-form
+                sc-form-name="{ local: 'form', parent: 's' + $index }"
+                sc-validate="{testValidate: validatePermissionsNotRepeated}"
+                name="tst">
 
-      <table class="table table-bordered table-condensed">
-        <thead>
-          <tr>
-            <th l10n-text="common.units.edit.classification"></th>
-            <th l10n-text="common.units.classificationPermissions"></th>
-            <!--<th l10n-text="docs.edit.view.docFile.attachedFile" style="width: 300px;"></th>
-            <th style="width: 70px;"></th>-->
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="classification in model.classifications" ng-form sc-validate="{}">
-            <td style="width: 200px;" sc-has-error="name">
-              <!---->
-              <!--<sc-text name="name" required></sc-text>-->
-              <sc-dropdown-simple class="form-control input-sm"
-                                  items-source="formData.classifications"
-                                  selected-item="selectedItem2"
-                                  selected-value="model.type2"
-                                  item-value-field="id"
-                                  item-text-field="name"></sc-dropdown-simple>
-            </td>
-            <td style="width: 200px;" sc-has-error="docFileKind">
-              <!--<sc-nomenclature name="docFileKind" ng-model="df.docFileKindId" nom-obj="df.docFileKind" mode="id" alias="'docFileKind'" ng-disabled="!df.isInEdit" required></sc-nomenclature>-->
-            </td>
-            <!--<td sc-has-error="docFile">
-      <sc-files name="docFile" ng-model="df.file" ng-readonly="readonly" required></sc-files>
-    </td>-->
-            <td style="text-align: right; width: 1px;">
-              <sc-button class="btn btn-xs btn-default"
-                         icon="glyphicon-remove"
-                         ng-disabled="readonly"
-                         btn-click="removeClassification(classification)"></sc-button>
-              <!--<span ng-show="df.isInEdit">
-        <sc-button btn-click="saveDocFile(df, form)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-saved" ng-disabled="readonly"></sc-button>
-        <sc-button btn-click="cancelDocFile(df)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-remove" ng-disabled="readonly"></sc-button>
-      </span>
-      <span ng-show="!df.isInEdit">
-        <sc-button btn-click="editDocFile(df)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-disabled="readonly"></sc-button>
-        <sc-button btn-click="removeDocFile(df)" class="btn btn-xs btn-default" icon="glyphicon-remove" ng-disabled="readonly"></sc-button>
-      </span>-->
-            </td>
-          </tr>
-          <tr>
-            <td colspan="5" style="text-align: right; width: 1px;">
-              <sc-button btn-click="addClassification()" 
-                         class="btn btn-xs btn-primary" 
-                         icon="glyphicon-plus" 
-                         ng-disabled="readonly"></sc-button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <td style="width: 200px;" sc-has-error="classificationField">
+                <sc-nomenclature name="classificationField"
+                                 ng-model="permission.classificationId"
+                                 nom-obj="permission.classification"
+                                 mode="id"
+                                 alias="'classification'"
+                                 ng-required="true"></sc-nomenclature>
+              </td>
 
-      <pre>{{model}}</pre>
+              <td style="width: 200px;" sc-has-error="permissionField">
+                <sc-nomenclature name="permissionField"
+                                 ng-model="permission.classificationPermissionId"
+                                 nom-obj="permission.classificationPermission"
+                                 mode="id"
+                                 alias="'classificationPermission'"
+                                 ng-required="true"></sc-nomenclature>
+              </td>
+
+              <td class="text-center" style="width: 20px;">
+                <sc-button class="btn btn-xs btn-primary"
+                           icon="glyphicon-remove"
+                           ng-disabled="readonly"
+                           btn-click="removeClassification(permission)"></sc-button>
+              </td>
+
+            </tr>
+
+            <tr>
+              <td colspan="3" style="text-align: right; width: 1px;">
+                <sc-button btn-click="addClassification()"
+                           class="btn btn-xs btn-primary"
+                           icon="glyphicon-plus"
+                           ng-disabled="readonly"></sc-button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!--<pre>{{model}}</pre>-->
     </div>
 
   </div>
