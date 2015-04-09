@@ -38,7 +38,7 @@
           <td><span>{{training.part.documentDateValidTo | date:'mediumDate'}}</span>
           </td>
           <td>{{training.part.documentPublisher}}</td>
-          <td>{{training.part.ratingTypes | pluck:'code' | join:', '}}</td>
+          <td>{{training.part.ratingTypes && training.part.ratingTypes.length > 0 ? (training.part.ratingTypes | pluck:'code' | join:', ') : (training.part.locationIndicator ? training.part.locationIndicator.code : '')  + ' ' + (training.part.sector ? training.part.sector : '')}}</td>
           <td>{{training.part.documentType.name}}</td>
           <td>{{training.part.documentRole.name}}</td>
         </tr>

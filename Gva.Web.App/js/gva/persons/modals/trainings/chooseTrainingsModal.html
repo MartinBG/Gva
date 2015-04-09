@@ -21,7 +21,7 @@
       <sc-column data="part.documentPublisher"title="persons.chooseTrainingsModal.publisher">
       </sc-column>
       <sc-column title="persons.chooseTrainingsModal.ratingType" has-content="true">
-        {{item.part.ratingTypes | pluck:'code' | join:', '}}
+        {{item.part.ratingTypes && item.part.ratingTypes.length > 0 ? (item.part.ratingTypes | pluck:'code' | join:', ') : (item.part.locationIndicator ? item.part.locationIndicator.code : '')  + ' ' + (item.part.sector ? item.part.sector : '')}}
       </sc-column>
       <sc-column data="part.documentType.name" title="persons.chooseTrainingsModal.docType">
       </sc-column>

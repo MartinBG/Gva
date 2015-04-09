@@ -27,6 +27,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.DocDateValidFrom = edition.DocDateValidFrom;
             this.DocDateValidTo = edition.DocDateValidTo;
             this.LocationIndicator = rating.LocationIndicator;
+            this.Sector = rating.Sector;
         }
 
         public int LotId { get; set; }
@@ -52,6 +53,8 @@ namespace Gva.Api.ModelsDO.Persons
         public string RatingSubClasses { get; set; }
 
         public string Limitations { get; set; }
+
+        public string Sector { get; set; }
 
         public DateTime DocDateValidFrom { get; set; }
 

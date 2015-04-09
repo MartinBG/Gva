@@ -44,8 +44,7 @@
           </td>
           <td><span>{{check.part.documentDateValidTo | date:'mediumDate'}}</span>
           </td>
-          <td>{{check.part.documentPublisher}}</td>
-          <td>{{(check.part.ratingTypes | pluck:'code' | join:', ') || check.part.sector}}</td>
+          <td>{{check.ratingTypes && check.ratingTypes.length > 0 ? (check.ratingTypes | pluck:'code' | join:', ') : (check.locationIndicator ? check.locationIndicator.code : '')  + ' ' + (check.sector ? check.sector : '')}}</td>
           <td>{{check.part.ratingClass.code}}</td>
           <td>{{check.part.authorization.code}}</td>
           <td>{{check.part.licenceType.code}}</td>
