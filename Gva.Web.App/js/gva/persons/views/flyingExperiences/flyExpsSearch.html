@@ -14,7 +14,7 @@
   <sc-column title="persons.flyingExperienceSearch.ratingType" class="wrap" has-content="true">
     {{item.part.ratingTypes | pluck:'code' | join:', ' || item.part.sector}}
   </sc-column>
-  <sc-column data="part.ratingClass.name" title="persons.flyingExperienceSearch.ratingClass" class="wrap">
+  <sc-column data="part.ratingClass.code" title="persons.flyingExperienceSearch.ratingClass" class="wrap">
   </sc-column>
   <sc-column data="part.authorization.code" title="persons.flyingExperienceSearch.authorization" class="wrap">
   </sc-column>

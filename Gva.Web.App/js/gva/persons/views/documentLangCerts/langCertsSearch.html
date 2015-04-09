@@ -17,7 +17,7 @@
   <sc-column title="persons.documentLangCertSearch.ratingType" has-content="true">
     {{item.part.ratingTypes | pluck:'code' | join:', ' || item.part.sector}}
   </sc-column>
-  <sc-column data="part.ratingClass.name" title="persons.documentLangCertSearch.ratingClass">
+  <sc-column data="part.ratingClass.code" title="persons.documentLangCertSearch.ratingClass">
   </sc-column>
   <sc-column data="part.authorization.code" title="persons.documentLangCertSearch.authorization" class="wrap">
   </sc-column>

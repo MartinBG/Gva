@@ -27,7 +27,7 @@
       <sc-column title="persons.chooseChecksModal.ratingType" has-content="true">
         {{item.part.ratingTypes | pluck:'code' | join:', ' || item.part.sector}}
       </sc-column>
-      <sc-column data="part.ratingClass.name" title="persons.chooseChecksModal.ratingClass">
+      <sc-column data="part.ratingClass.code" title="persons.chooseChecksModal.ratingClass">
       </sc-column>
       <sc-column data="part.authorization.code" title="persons.chooseChecksModal.authorization">
       </sc-column>
