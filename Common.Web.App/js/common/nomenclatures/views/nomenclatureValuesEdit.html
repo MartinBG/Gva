@@ -16,7 +16,7 @@
 
     <div class="well-sm panel-body">
       <div class="row">
-        <sc-field type="nomenclature" alias="'nomList'" mode="id" ng-model="nomenclatureValue.nomId" l10n-text="common.nomenclatures.nomValues.edit.nomType" class="col-sm-4" ng-readonly="true"></sc-field>
+        <sc-field type="nomenclature" alias="'nomList'" mode="id" ng-model="nomType" l10n-text="common.nomenclatures.nomValues.edit.nomType" class="col-sm-4" ng-readonly="true"></sc-field>
       </div>
 
       <div class="row">
@@ -43,12 +43,12 @@
       </div>
 
        <div class="row" ng-if="alias === 'limitations66'">
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.point = nomenclatureValue.textContent.point || '8'">
           <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.limitations66Point"></label>
           <select ui-select2 ng-model="nomenclatureValue.textContent.point" class="input-sm form-control">
-              <option value=""></option>
-              <option value="8">8</option>
-              <option value="13">13</option>
+            <option value=""></option>
+            <option value="8">8</option>
+            <option value="13">13</option>
           </select>
         </div>
       </div>
@@ -56,12 +56,61 @@
       <div class="row" ng-if="alias === 'applicationTypes'">
         <div class="form-group col-sm-4">
           <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseTypes"></label>
-          <select ui-select2 multiple ng-model="nomenclatureValue.textContent.caseTypes" class="input-sm form-control">
-            <option  ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
+          <select ui-select2 multiple ng-model="nomenclatureValue.textContent.caseTypes" class="input-sm form-control" ng-required="true">
+            <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
           </select>
         </div>
       </div>
-  </div> 
+      <div ng-if="alias === 'documentTypes'">
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.isPersonsOnly = nomenclatureValue.textContent.isPersonsOnly || false">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.isPersonsOnly"></label>
+            <input type="checkbox" ng-model="nomenclatureValue.textContent.isPersonsOnly"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.isIdDocument = nomenclatureValue.textContent.isIdDocument || false">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.isIdDocument"></label>
+            <input type="checkbox" ng-model="nomenclatureValue.textContent.isIdDocument"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.caseTypeAlias = nomenclatureValue.textContent.caseTypeAlias || null">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseType"></label>
+            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control">
+              <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div ng-if="alias === 'documentRoles'">
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.isPersonsOnly = nomenclatureValue.textContent.isPersonsOnly || false">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.isPersonsOnly"></label>
+            <input type="checkbox" ng-model="nomenclatureValue.textContent.isPersonsOnly"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.categoryAlias = nomenclatureValue.textContent.categoryAlias || null">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.categoryAlias"></label>
+            <select ui-select2 ng-model="nomenclatureValue.textContent.categoryAlias" class="input-sm form-control">
+              <option value=""></option>
+              <option value="check">Проверка</option>
+              <option value="training">Обучение</option>
+              <option value="other">Други</option>
+              <option value="docId">За самоличност</option>
+              <option value="flying">Летателен/Практически опит</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.caseTypeAlias = nomenclatureValue.textContent.caseTypeAlias || null">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseType"></label>
+            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control">
+              <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
   </div>
 </ng-form>
-

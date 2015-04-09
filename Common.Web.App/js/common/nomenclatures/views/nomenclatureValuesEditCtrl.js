@@ -9,12 +9,14 @@
     $stateParams,
     NomenclatureValuesRsrc,
     nomenclatureValue,
+    nomType,
     caseTypeOptions,
     scMessage
   ) {
     $scope.nomenclatureValue = nomenclatureValue;
     $scope.alias = $stateParams.alias;
     $scope.caseTypeOptions = caseTypeOptions;
+    $scope.nomType = nomType;
 
     $scope.save = function save() {
       return $scope.nomenclatureForm.$validate().then(function () {
@@ -63,6 +65,7 @@
     '$stateParams',
     'NomenclatureValuesRsrc',
     'nomenclatureValue',
+    'nomType',
     'caseTypeOptions',
     'scMessage'
   ];
@@ -88,13 +91,25 @@
       '$stateParams',
       'Nomenclatures',
       function ($stateParams, Nomenclatures) {
-        if ($stateParams.alias === 'applicationTypes') {
+        if ($stateParams.alias === 'applicationTypes' ||
+          $stateParams.alias === 'documentTypes' ||
+          $stateParams.alias === 'documentRoles') {
           return Nomenclatures.query({
             alias: 'caseTypes'
           }).$promise;
         } else {
           return null;
         }
+      }
+    ],
+    nomType: [
+      '$stateParams',
+      'Nomenclatures',
+      function ($stateParams, Nomenclatures) {
+        return Nomenclatures.get({
+          alias: 'nomList',
+          id: $stateParams.nomId
+        }).$promise;
       }
     ]
   };

@@ -590,7 +590,6 @@ namespace Gva.Api.Controllers
             string categoryAlias = null,
             string valueAlias = null,
             [FromUri] string[] caseTypeAliases = null,
-            [FromUri] string[] categoryCodes = null,
             [FromUri] string[] withoutCertsAliases = null,
             int offset = 0,
             int? limit = null)
@@ -623,11 +622,6 @@ namespace Gva.Api.Controllers
                             {
                                 isMatch &= nv.Alias != certAlias;
                             }
-                        }
-
-                        if (isMatch && categoryCodes != null && categoryCodes.Length > 0)
-                        {
-                            isMatch &= categoryCodes.Contains(nv.TextContent.Get<string>("categoryCode"));
                         }
 
                         if (isMatch && caseTypeAliases != null && caseTypeAliases.Length > 0)

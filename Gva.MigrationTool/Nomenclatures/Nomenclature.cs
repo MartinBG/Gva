@@ -1073,7 +1073,6 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
-                                direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
                                 caseTypeAlias =
                                     noms["staffTypes"]
                                     .ByCodeOrDefault(
@@ -1160,7 +1159,6 @@ namespace Gva.MigrationTool.Nomenclatures
                         TextContentString = JsonConvert.SerializeObject(
                             new
                             {
-                                direction = noms["directions"].ByOldId(r.Field<string>("ID_DIRECTION")).NomValueId(),
                                 caseTypeAlias =
                                     noms["staffTypes"]
                                     .ByCodeOrDefault(
@@ -1169,7 +1167,6 @@ namespace Gva.MigrationTool.Nomenclatures
                                         .Code())
                                     .Alias(),
                                 isPersonsOnly = r.Field<string>("PERSON_ONLY") == "Y" ? true : false,
-                                categoryCode = r.Field<string>("CATEGORY_CODE"),
                                 categoryAlias = getCategoryAliases(r.Field<string>("CATEGORY_CODE"), r.Field<string>("CODE"))
                             })
                     })

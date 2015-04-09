@@ -181,7 +181,11 @@
               order: 'Пореден номер',
               isActive: 'Активен',
               limitations66Point: 'Точка на забележките',
-              caseTypes: 'Типове дела'
+              caseTypes: 'Типове дела',
+              caseType: 'Тип дело',
+              isPersonsOnly: 'Само за лица',
+              isIdDocument: 'За самоличност',
+              categoryAlias: 'Категория документи'
             }
           }
         },
