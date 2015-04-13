@@ -15,6 +15,7 @@ using Common.Utils;
 using System.Threading.Tasks;
 using Docs.Api.Repositories.UnitRepository;
 using Common.DomainValidation;
+using System.Threading;
 
 namespace Docs.Api.Controllers
 {
@@ -76,8 +77,7 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult CreateUnit(UnitDomainModel model)
         {
-            //return Ok(unitBusinessLogic.CreateUnit(model));
-            return Ok();
+            return Ok(unitBusinessLogic.CreateUnit(model));
         }
 
         [Route("api/units/{unitId:int}")]

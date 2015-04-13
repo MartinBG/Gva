@@ -1,7 +1,8 @@
-<div class="btn-group" style="padding: 0px;">
+<div class="btn-group" style="padding: 0;">
   <button type="button"
           class="btn btn-default btn-sm dropdown-toggle"
           data-toggle="dropdown"
+          ng-disabled="isDisabled()"
           style="width: 100%; position: relative;">
     {{selectedItem[itemTextField]}}
     <span style="position: absolute; right: 5px;">

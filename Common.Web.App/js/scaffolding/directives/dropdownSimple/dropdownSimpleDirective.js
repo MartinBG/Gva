@@ -3,6 +3,7 @@
     items-source="dropdownModel"
     selected-item="selectedItem" 
     selected-value="selectedValue"
+    is-disabled="isEditMode"
     item-text-field="name"
     item-value-field="value">
   </sc-dropdown-simple>>
@@ -24,10 +25,11 @@
         selectedItem: '=',
         selectedValue: '=',
         itemsSource: '&',
+        isDisabled: '&',
         itemTextField: '@',
         itemValueField: '@'
       },
-      link: function (scope, element, attrs) {
+      link: function (scope) {
         scope.selectItem = function (item) {
           scope.selectedItem = item;
           scope.selectedValue = item[scope.itemValueField];

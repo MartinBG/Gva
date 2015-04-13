@@ -14,7 +14,7 @@
     $scope.filterValue = '';
     $scope.includeInactive = false;
     $scope.selectedUnit = null;
-    
+
     $scope.refresh = function () {
       //refreshData();
       return UnitsResource
@@ -23,22 +23,16 @@
          $scope.model = unitsModel;
        });
     };
-    
+
     $scope.canUnitBeDeleted = function (unit) {
       return unit.childUnits.length === 0;
     };
 
     $scope.deleteUnit = function (unit) {
-      UnitsResource.delete({ id: unitId })
+      UnitsResource.delete({ id: unit.unitId })
         .$promise.then(function () {
           refreshData();
         });
-    };
-
-    $scope.editUnit = function (unitId) {
-      var modalInstance = scModal.open('editUnitModal', {
-        unitId: unitId
-      });
     };
 
     $scope.setCollapsedStateOfAll = function (state) {
@@ -93,15 +87,37 @@
 
     $scope.addNewUnit = function (parentId, unitType) {
       var modalInstance = scModal.open('editUnitModal', {
+        isEditMode: false,
         parentId: parentId,
         unitType: unitType
       });
 
       modalInstance.result.then(function (returnedResult) {
         if (returnedResult) {
-          modalInstance.close();
+          //modalInstance.close();
           refreshData();
         }
+      });
+    };
+
+    $scope.editUnit = function (unitId) {
+      UnitsResource.get({}, { unitId: unitId })
+      .$promise.then(function (unit) {
+
+        var modalInstance = scModal.open('editUnitModal', {
+          isEditMode: true,
+          unit: unit
+          //unitId: unitId
+          //parentId: parentId,
+          //unitType: unitType
+        });
+
+        modalInstance.result.then(function (returnedResult) {
+          if (returnedResult) {
+            //modalInstance.close();
+            refreshData();
+          }
+        });
       });
     };
 
@@ -154,7 +170,8 @@
       var isChildVisible = false;
 
       for (var i = 0; i < collection.length; i++) {
-        // We need to check if ANY of the returned result is true, so we don't hide this (parent) node.
+        // We need to check if ANY of the returned result is true, 
+        // so we don't hide this (parent) node.
         var recursiveResult = filterHierarchy(filterValue, collection[i]);
         isChildVisible = isChildVisible || recursiveResult;
       }
@@ -178,7 +195,9 @@
     }
   }
 
-  UnitsCtrl.$inject = ['$scope', '$state', '$stateParams', 'unitsModel', 'scModal', 'scMessage', 'UnitsResource', 'UnitUsersResource', '$timeout'];
+  UnitsCtrl.$inject = ['$scope', '$state', '$stateParams',
+    'unitsModel', 'scModal', 'scMessage',
+    'UnitsResource', 'UnitUsersResource', '$timeout'];
 
   UnitsCtrl.$resolve = {
     unitsModel: ['$stateParams', 'UnitsResource',

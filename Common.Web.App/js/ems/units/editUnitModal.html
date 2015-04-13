@@ -6,6 +6,7 @@
       <div class="pull-right">
         <sc-button name="saveBtn"
                    btn-click="save()"
+                   ng-disabled="isEditMode"
                    text="commonLabels.save"
                    class="btn btn-primary btn-xs"
                    icon="glyphicon-floppy-disk">
@@ -36,6 +37,7 @@
           <label class="control-label" l10n-text="commonLabels.type"></label>
           <sc-dropdown-simple class="form-control input-sm"
                               items-source="unitTypes"
+                              is-disabled="isEditMode"
                               selected-item="selectedItem"
                               selected-value="model.type"
                               item-value-field="value"

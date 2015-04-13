@@ -93,7 +93,6 @@
       <span class="glyphicon glyphicon-pencil"
             ng-show="unit.isSelected && unit.isActive"
             ng-click="editUnit(unit.unitId); $event.stopPropagation();"></span>
-
       <span class="glyphicon glyphicon-off deactivate-icon"
             ng-show="unit.isSelected && unit.isActive"
             ng-click="setUnitActiveStatus(unit, false); $event.stopPropagation();"></span>
@@ -157,9 +156,9 @@
         {{unit.childUnits[0].name}}
       </span>
 
-      <!--<span class="glyphicon glyphicon-pencil"
-            ng-show="unit.isActive"
-            ng-click="editUnit(unit.unitId); $event.stopPropagation();"></span>-->
+      <span class="glyphicon glyphicon-pencil"
+            ng-show="unit.isSelected && unit.childUnits[0].isActive"
+            ng-click="editUnit(unit.childUnits[0].unitId); $event.stopPropagation();"></span>
 
       <span class="glyphicon glyphicon-off deactivate-icon"
             ng-show="unit.isSelected && unit.childUnits[0].isActive"

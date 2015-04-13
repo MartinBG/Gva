@@ -95,12 +95,9 @@ namespace Docs.Api.Repositories.UnitRepository
                     ParentUnitId = e.UnitRelations.FirstOrDefault().ParentUnitId,
                     Classifications = e.UnitClassifications
                         .Select(c => new UnitClassificationDomainModel {
-                            //UnitClassificationId = c.UnitClassificationId,
-                            //ClassificationName = c.ClassificationPermission.Name,
-                            //ClassificationPermission = c.ClassificationPermission.Name
                             ClassificationId = c.ClassificationId,
                             ClassificationPermissionId = c.ClassificationPermissionId,
-                            ClassificationName = c.ClassificationPermission.Name,
+                            ClassificationName = c.Classification.Name,
                             ClassificationPermissionName = c.ClassificationPermission.Name
                         }).ToList()
                 })
@@ -131,7 +128,8 @@ namespace Docs.Api.Repositories.UnitRepository
 
         public UnitDomainModel CreateUnit(UnitDomainModel model)
         {
-            var unit = new Unit {
+            var unit = new Unit
+            {
                 Name = model.Name,
                 IsActive = true,
                 UnitTypeId = (int)Enum.Parse(typeof(Models.DomainModels.UnitType), model.Type),
@@ -140,8 +138,18 @@ namespace Docs.Api.Repositories.UnitRepository
                         ParentUnitId = model.ParentUnitId,
                         RootUnitId = model.ParentUnitId.HasValue ? model.ParentUnitId.Value : model.UnitId
                     }
-                }
+                },
+                UnitClassifications = new List<UnitClassification>()
             };
+
+            foreach (var item in model.Classifications)
+            {
+                unit.UnitClassifications.Add(new UnitClassification
+                {
+                    ClassificationId = item.ClassificationId,
+                    ClassificationPermissionId = item.ClassificationPermissionId
+                });
+            }
 
             unitsInContext.Add(unit);
             unitOfWork.Save();
