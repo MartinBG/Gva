@@ -37,7 +37,8 @@
       });
 
       $scope.model = {
-        name: scModalParams.unit.name
+        name: scModalParams.unit.name,
+        classifications: scModalParams.unit.classifications        
       };
 
     } else {
@@ -48,20 +49,20 @@
         name: '',
         parentUnitId: scModalParams.parentId,
         type: $scope.selectedItem.value,
-        permissions: []
+        classifications: []
       };
     }
 
     $scope.addClassification = function () {
-      $scope.model.permissions.push({});
+      $scope.model.classifications.push({});
     };
 
     $scope.removeClassification = function (permission) {
-      _.pull($scope.model.permissions, permission);
+      _.pull($scope.model.classifications, permission);
     };
 
     $scope.validatePermissionsNotRepeated = function () {
-      var array = $scope.model.permissions;
+      var array = $scope.model.classifications;
 
       for (var i = 0; i < array.length; i++) {
         var item = array[i];
@@ -81,8 +82,6 @@
 
     $scope.save = function () {
       return $scope.form.unitForm.$validate().then(function () {
-
-        $scope.model.classifications = $scope.model.permissions;
 
         if ($scope.form.unitForm.$valid) {
           return UnitsResource.save($scope.model)

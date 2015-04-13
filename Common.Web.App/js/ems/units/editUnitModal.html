@@ -6,7 +6,6 @@
       <div class="pull-right">
         <sc-button name="saveBtn"
                    btn-click="save()"
-                   ng-disabled="isEditMode"
                    text="commonLabels.save"
                    class="btn btn-primary btn-xs"
                    icon="glyphicon-floppy-disk">
@@ -57,7 +56,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="permission in model.permissions"
+            <tr ng-repeat="permission in model.classifications"
                 ng-form
                 sc-form-name="{ local: 'form', parent: 's' + $index }"
                 sc-validate="{testValidate: validatePermissionsNotRepeated}"

@@ -312,6 +312,22 @@ namespace Docs.Api.Controllers
             return Ok(results);
         }
 
+        [Route("classificationPermission/{id:int}")]
+        public IHttpActionResult GetClassificationPermission(int id)
+        {
+            var result = this.unitOfWork.DbContext.Set<ClassificationPermission>()
+                .Where(e => e.ClassificationPermissionId == id)
+                .SingleOrDefault();
+
+            return Ok(new
+            {
+                nomValueId = result.ClassificationPermissionId,
+                name = result.Name,
+                alias = result.Alias,
+                isActive = result.IsActive
+            });
+        }
+
         [Route("classificationPermission")]
         public IHttpActionResult GetClassificationPermissions(string term = null, int offset = 0, int? limit = null)
         {
