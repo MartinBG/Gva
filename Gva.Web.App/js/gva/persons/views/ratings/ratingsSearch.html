@@ -6,7 +6,7 @@
       <sc-button name="viewBtn" btn-sref="{state: 'root.persons.view.ratings.edit.editions.edit', params: {ind: item.ratingPartIndex, index: item.editionPartIndex}}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
     <sc-column title="persons.ratingSearch.ratingTypeOrRatingLevel" has-content="true">
-       {{item.personRatingLevel.code || item.ratingTypes && item.ratingTypes.length > 0 ? (item.ratingTypes | pluck:'code' | join:', ') : (item.aircraftTypeGroup.code || (item.locationIndicator ? item.locationIndicator.code : '') + ' ' + (item.sector? item.sector : ''))}}
+       {{item.personRatingLevel.code || item.ratingTypes || (item.aircraftTypeGroup.code || (item.locationIndicator ? item.locationIndicator.code : '') + ' ' + (item.sector? item.sector : ''))}}
     </sc-column>
     <sc-column data="(ratingClass.code || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : '')" title="persons.ratingSearch.classOrCategory" class="wrap">
     </sc-column>
