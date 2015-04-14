@@ -15,6 +15,8 @@
     $scope.personFlyingExperience = personFlyingExperience;
     $scope.editMode = null;
     $scope.caseTypeId = $stateParams.caseTypeId;
+    $scope.lotId = $stateParams.id;
+    $scope.partIndex = $stateParams.ind;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -30,7 +32,7 @@
         .then(function () {
           if ($scope.personFlyingExperienceForm.$valid) {
             return PersonFlyingExperiences
-              .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.personFlyingExperience)
+              .save({ id: $scope.lotId, ind: $stateParams.ind }, $scope.personFlyingExperience)
               .$promise
               .then(function () {
                 return $state.go('root.persons.view.flyingExperiences.search');

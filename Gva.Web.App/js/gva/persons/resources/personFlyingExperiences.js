@@ -7,6 +7,10 @@
       newFlyingExperience: {
         method: 'GET',
         url: 'api/persons/:id/personFlyingExperiences/new'
+      },
+      sumAllFlightHours: {
+        method: 'GET',
+        url: 'api/persons/:id/personFlyingExperiences/sumAllFlightHours'
       }
     });
   }]);

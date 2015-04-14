@@ -81,9 +81,16 @@
     </div>
     <hr>
     <div class="row">
-      <sc-field type="time" ng-model="model.part.totalDoc" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.totalDoc" class="col-sm-3 col-md-2"></sc-field>
-      <sc-field type="time" ng-model="model.part.totalLastMonths" l10n-text="persons.personFlyingExperienceDirective.totalLastMonths" class="col-sm-3 col-md-2"></sc-field>
-      <sc-field type="time" ng-model="model.part.total" l10n-text="persons.personFlyingExperienceDirective.total" class="col-sm-3 col-md-2"></sc-field>
+      <sc-field type="time" ng-model="model.part.totalDoc" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.totalDoc" class="col-sm-4 col-md-3"></sc-field>
+    </div>
+    <div class="row" ng-if="model.case.caseType.alias !== 'ovd'">
+      <sc-field type="time" ng-model="model.part.totalLastMonths" l10n-text="persons.personFlyingExperienceDirective.totalLastMonths" class="col-sm-4 col-md-3"></sc-field>
+    </div>
+    <div class="row">
+      <sc-field-group class="col-sm-5 col-md-4" text="persons.personFlyingExperienceDirective.total">
+        <sc-time ng-model="model.part.total" ng-readonly="form.$readonly"></sc-time>
+        <sc-button btn-click="sum()" class="btn btn-default" ng-disabled="form.$readonly" l10n-text="persons.personFlyingExperienceDirective.sum"></sc-button>
+      </sc-field-group>
     </div>
   </div>
 </ng-form>

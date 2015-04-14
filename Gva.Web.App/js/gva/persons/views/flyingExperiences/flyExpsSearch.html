@@ -24,21 +24,25 @@
   </sc-column>
   <sc-column data="part.experienceMeasure.name" title="persons.flyingExperienceSearch.experienceMeasure">
   </sc-column>
-  <sc-column title="persons.flyingExperienceSearch.dayIFR" has-content="true">
+  <sc-column data="totalDocHours" title="persons.flyingExperienceSearch.totalDoc">
+  </sc-column>
+  <sc-column data="totalHours" title="persons.flyingExperienceSearch.total">
+  </sc-column>
+  <sc-column title="persons.flyingExperienceSearch.dayIFR" has-content="true" visible="false">
     <span ng-show="item.part.dayIFR.hours">{{item.part.dayIFR.hours + ':' + item.part.dayIFR.minutes}}</span>
   </sc-column>
-  <sc-column title="persons.flyingExperienceSearch.dayVFR" has-content="true">
+  <sc-column title="persons.flyingExperienceSearch.dayVFR" has-content="true" visible="false">
     <span ng-show="item.part.dayVFR.hours">{{item.part.dayVFR.hours + ':' + item.part.dayVFR.minutes}}</span>
   </sc-column>
-  <sc-column data="part.dayLandings" title="persons.flyingExperienceSearch.dayLandings">
+  <sc-column data="part.dayLandings" title="persons.flyingExperienceSearch.dayLandings" visible="false">
   </sc-column>
-  <sc-column title="persons.flyingExperienceSearch.nightIFR" has-content="true">
+  <sc-column title="persons.flyingExperienceSearch.nightIFR" has-content="true" visible="false">
     <span ng-show="item.part.nightIFR.hours">{{item.part.nightIFR.hours + ':' + item.part.nightIFR.minutes}}</span>
   </sc-column>
-  <sc-column title="persons.flyingExperienceSearch.nightVFR" has-content="true">
+  <sc-column title="persons.flyingExperienceSearch.nightVFR" has-content="true" visible="false">
     <span ng-show="item.part.nightVFR.hours">{{item.part.nightVFR.hours + ':' + item.part.nightVFR.minutes}}</span>
   </sc-column>
-  <sc-column data="part.nightLandings" title="persons.flyingExperienceSearch.nightLandings">
+  <sc-column data="part.nightLandings" title="persons.flyingExperienceSearch.nightLandings" visible="false">
   </sc-column>
   <sc-column data="part.organization.name" title="persons.flyingExperienceSearch.organization">
   </sc-column>
