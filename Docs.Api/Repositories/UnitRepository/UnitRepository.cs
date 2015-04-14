@@ -4,6 +4,7 @@ using Docs.Api.Enums;
 using Docs.Api.Infrastructure;
 using Docs.Api.Models.DomainModels;
 using Docs.Api.Models.UnitModels;
+using Docs.Api.Repositories.DocRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,10 +16,12 @@ namespace Docs.Api.Repositories.UnitRepository
     {
         private IUnitOfWork unitOfWork;
         private DbSet<Unit> unitsInContext;
+        private IDocRepository docRepository;
 
-        public UnitRepository(IUnitOfWork unitOfWork)
+        public UnitRepository(IUnitOfWork unitOfWork, IDocRepository docRepository)
         {
             this.unitOfWork = unitOfWork;
+            this.docRepository = docRepository;
             unitsInContext = unitOfWork.DbContext.Set<Unit>();
         }
 
@@ -114,6 +117,28 @@ namespace Docs.Api.Repositories.UnitRepository
         public void SetUnitActiveStatus(int id, bool isActive)
         {
             var entity = unitsInContext
+                .Include(e => e.UnitUsers)
+                .SingleOrDefault(e => e.UnitId == id);
+
+
+            if (entity == null)
+            {
+                throw new Exception(string.Format("Unit with ID = {0} does not exist.", id));
+            }
+
+            var activeUnitUser = entity.UnitUsers
+                .SingleOrDefault(e => e.IsActive);
+            if (activeUnitUser != null)
+            {
+                activeUnitUser.IsActive = false;
+            }
+
+            unitOfWork.Save();
+        }
+
+        public void Activate(int id)
+        {
+            var entity = unitsInContext
                 .SingleOrDefault(e => e.UnitId == id);
 
             if (entity == null)
@@ -121,15 +146,37 @@ namespace Docs.Api.Repositories.UnitRepository
                 throw new Exception(string.Format("Unit with ID = {0} does not exist.", id));
             }
 
-            entity.IsActive = isActive;
+            entity.IsActive = true;
+
+            unitOfWork.Save();
+        }
+
+        public void Deactivate(int id)
+        {
+            var entity = unitsInContext
+                .Include(e => e.UnitUsers)
+                .SingleOrDefault(e => e.UnitId == id);
+
+            if (entity == null)
+            {
+                throw new Exception(string.Format("Unit with ID = {0} does not exist.", id));
+            }
+
+            entity.IsActive = false;
+
+            var activeUnitUser = entity.UnitUsers
+                .SingleOrDefault(e => e.IsActive);
+            if (activeUnitUser != null)
+            {
+                activeUnitUser.IsActive = false;
+            }
 
             unitOfWork.Save();
         }
 
         public UnitDomainModel CreateUnit(UnitDomainModel model)
         {
-            var unit = new Unit
-            {
+            var unit = new Unit {
                 Name = model.Name,
                 IsActive = true,
                 UnitTypeId = (int)Enum.Parse(typeof(Models.DomainModels.UnitType), model.Type),
@@ -144,15 +191,21 @@ namespace Docs.Api.Repositories.UnitRepository
 
             foreach (var item in model.Classifications)
             {
-                unit.UnitClassifications.Add(new UnitClassification
-                {
+                unit.UnitClassifications.Add(new UnitClassification {
                     ClassificationId = item.ClassificationId,
                     ClassificationPermissionId = item.ClassificationPermissionId
                 });
             }
 
-            unitsInContext.Add(unit);
-            unitOfWork.Save();
+            using (var transaction = unitOfWork.BeginTransaction())
+            {
+                unitsInContext.Add(unit);
+                unitOfWork.Save();
+
+                docRepository.spSetUnitTokens(unit.UnitId);
+
+                transaction.Commit();
+            }
 
             return new UnitDomainModel {
                 UnitId = unit.UnitId,
@@ -166,7 +219,10 @@ namespace Docs.Api.Repositories.UnitRepository
 
         public void UpdateUnit(UnitDomainModel model)
         {
-            var unit = unitsInContext.SingleOrDefault(e => e.UnitId == model.UnitId);
+            var unit = unitsInContext
+                .Include(e => e.UnitClassifications)
+                .SingleOrDefault(e =>
+                e.UnitId == model.UnitId);
             if (unit == null)
             {
                 throw new Exception(string.Format("Unit with ID = {0} does not exist.", model.UnitId));
@@ -174,6 +230,20 @@ namespace Docs.Api.Repositories.UnitRepository
 
             //only Name and classifications can be updated from here
             unit.Name = model.Name;
+
+            var unitClassificationContext = unitOfWork.DbContext.Set<UnitClassification>();
+            //var classifications = unitClassificationContext.Where(e => e.UnitId == model.UnitId);
+
+            foreach (var item in unit.UnitClassifications)
+            {
+                //var it = model.Classifications.SingleOrDefault(e =>
+                //    e.ClassificationId == item.ClassificationId
+                //    && e.ClassificationPermissionId == item.ClassificationPermissionId);
+                //if(it!=null)
+                //{
+
+                //}
+            }            
 
             unitOfWork.Save();
         }
@@ -191,22 +261,29 @@ namespace Docs.Api.Repositories.UnitRepository
                 throw new Exception(string.Format("Unit with ID = {0} does not exist.", id));
             }
 
+
+
             var unitClassificationContext = unitOfWork.DbContext.Set<UnitClassification>();
             var unitClassifications = unitClassificationContext.Where(e => e.UnitId == id)
                 .ToList();
             unitClassificationContext.RemoveRange(unitClassifications);
 
-            var unitRelationContext = unitOfWork.DbContext.Set<UnitRelation>();
-            unitRelationContext.Remove(entity.UnitRelations.First());
+            using (var transaction = unitOfWork.BeginTransaction())
+            {
+                var unitRelationContext = unitOfWork.DbContext.Set<UnitRelation>();
+                unitRelationContext.Remove(entity.UnitRelations.First());
 
-            var unitTokensContext = unitOfWork.DbContext.Set<UnitToken>();
-            var unitTokens = unitTokensContext.Where(e => e.UnitId == id)
-                .ToList();
-            unitTokensContext.RemoveRange(unitTokensContext);
+                var unitTokensContext = unitOfWork.DbContext.Set<UnitToken>();
+                var unitTokens = unitTokensContext.Where(e => e.UnitId == id)
+                    .ToList();
+                unitTokensContext.RemoveRange(unitTokensContext);
+                unitOfWork.Save();
 
+                unitsInContext.Remove(entity);
+                unitOfWork.Save();
 
-            unitsInContext.Remove(entity);
-            unitOfWork.Save();
+                transaction.Commit();
+            }
         }
 
         public void AssignUserToUnit(int unitId, int userId)

@@ -85,6 +85,8 @@ namespace Docs.Api.BusinessLogic
                         throw new Exception(string.Format("Unit with ID = {0} can't be activated because its parent is not active.", unitId));
                     }
                 }
+
+                unitRepository.Activate(unitId);
             }
             else
             {
@@ -95,9 +97,9 @@ namespace Docs.Api.BusinessLogic
                 {
                     throw new Exception(string.Format("Unit with ID = {0} can't be deactivated because its has active child units.", unitId));
                 }
-            }
 
-            unitRepository.SetUnitActiveStatus(unitId, isActive);
+                unitRepository.Deactivate(unitId);
+            }
         }
 
         private UnitDomainModel GetSubHierarchyForUnit(int id)

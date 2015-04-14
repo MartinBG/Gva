@@ -16,12 +16,7 @@
     $scope.selectedUnit = null;
 
     $scope.refresh = function () {
-      //refreshData();
-      return UnitsResource
-        .query({ includeInactive: $scope.includeInactive })
-       .$promise.then(function (unitsModel) {
-         $scope.model = unitsModel;
-       });
+      return refreshData();
     };
 
     $scope.canUnitBeDeleted = function (unit) {
@@ -29,9 +24,9 @@
     };
 
     $scope.deleteUnit = function (unit) {
-      UnitsResource.delete({ id: unit.unitId })
+      return UnitsResource.delete({ id: unit.unitId })
         .$promise.then(function () {
-          refreshData();
+          return refreshData();
         });
     };
 
@@ -46,14 +41,12 @@
     };
 
     $scope.setUnitActiveStatus = function (unit, isActive) {
-      $scope.isLoading = true;
-      UnitsResource.setActiveStatus({ id: unit.unitId, isActive: isActive }, null)
+      return UnitsResource.setActiveStatus({ id: unit.unitId, isActive: isActive }, null)
          .$promise.then(function () {
-           $scope.isLoading = false;
-           unit.isActive = isActive;
+           //unit.isActive = isActive;
+           return refreshData();
          }, function () {
            // error
-           $scope.isLoading = false;
          });
     };
 
@@ -92,30 +85,26 @@
         unitType: unitType
       });
 
-      modalInstance.result.then(function (returnedResult) {
+      return modalInstance.result.then(function (returnedResult) {
         if (returnedResult) {
           //modalInstance.close();
-          refreshData();
+          return refreshData();
         }
       });
     };
 
     $scope.editUnit = function (unitId) {
-      UnitsResource.get({}, { unitId: unitId })
-      .$promise.then(function (unit) {
+      return UnitsResource.get({}, { unitId: unitId })
+        .$promise.then(function (unit) {
 
         var modalInstance = scModal.open('editUnitModal', {
           isEditMode: true,
           unit: unit
-          //unitId: unitId
-          //parentId: parentId,
-          //unitType: unitType
         });
 
-        modalInstance.result.then(function (returnedResult) {
-          if (returnedResult) {
-            //modalInstance.close();
-            refreshData();
+        return modalInstance.result.then(function (returnedResult) {
+          if (returnedResult) {            
+            return refreshData();
           }
         });
       });
@@ -126,31 +115,26 @@
         unitId: unitId
       });
 
-      modalInstance.result.then(function (returnedResult) {
+      return modalInstance.result.then(function (returnedResult) {
         if (returnedResult) {
-          $timeout(function () {
-            refreshData();
-          }, 500);
+          return refreshData();
         }
       });
     };
 
     $scope.detachUserFromUnit = function (unitId, userId) {
-      scMessage('Моля, потвърдете премахването на връзката с потребител.')
+      return scMessage('Моля, потвърдете премахването на връзката с потребител.')
         .then(function (result) {
           if (result === 'OK') {
-            // need this because popup window is rendered after resource loading finishes
-            $timeout(function () {
-              UnitUsersResource.remove({ id: unitId, userId: userId }, function () {
-                refreshData();
-              });
-            }, 500);
+            return UnitUsersResource.remove({ id: unitId, userId: userId }).$promise.then(function () {
+              return refreshData();
+            });
           }
         });
     };
 
     function refreshData() {
-      UnitsResource.query({ includeInactive: $scope.includeInactive })
+      return UnitsResource.query({ includeInactive: $scope.includeInactive })
         .$promise.then(function (unitsModel) {
           $scope.model = unitsModel;
         });

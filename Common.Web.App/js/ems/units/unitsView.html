@@ -54,8 +54,8 @@
   }
 
   .ab-icon-button {
-    border: 0;
-    padding: 0;
+    /*border: 0;
+    padding: 0;*/
     cursor: pointer;
     color: black;
   }
@@ -89,22 +89,36 @@
       <span ng-class="{'inactive-unit': !unit.isActive}">
         {{unit.name}}
       </span>
-
-      <span class="glyphicon glyphicon-pencil"
-            ng-show="unit.isSelected && unit.isActive"
-            ng-click="editUnit(unit.unitId); $event.stopPropagation();"></span>
-      <span class="glyphicon glyphicon-off deactivate-icon"
-            ng-show="unit.isSelected && unit.isActive"
-            ng-click="setUnitActiveStatus(unit, false); $event.stopPropagation();"></span>
-      <span class="glyphicon glyphicon-off activate-icon"
-            ng-show="unit.isSelected && !unit.isActive"
-            ng-click="setUnitActiveStatus(unit, true); $event.stopPropagation();"></span>
-      <span class="glyphicon glyphicon-remove delete-icon"
-            ng-show="unit.isSelected && canUnitBeDeleted(unit)"
-            ng-click="deleteUnit(unit); $event.stopPropagation();"></span>
-      <span class="glyphicon glyphicon-plus-sign"
-            ng-show="unit.isSelected"
-            ng-click="addNewUnit(unit.unitId, 'Department'); $event.stopPropagation();"></span>
+      <!--Edit Organization-->
+      <sc-button class="ab-icon-button"
+                 ng-show="unit.isSelected && unit.isActive"
+                 btn-click="editUnit(unit.unitId)"
+                 icon="glyphicon-pencil"
+                 sc-stop-propagation></sc-button>      
+      <!-- Deactivate Organization-->
+      <sc-button class="ab-icon-button deactivate-icon"
+                 ng-show="unit.isSelected && unit.isActive"
+                 btn-click="setUnitActiveStatus(unit, false)"
+                 icon="glyphicon-off"
+                 sc-stop-propagation></sc-button>      
+      <!--Activate organization-->
+      <sc-button class="ab-icon-button activate-icon"
+                 ng-show="unit.isSelected && !unit.isActive"
+                 btn-click="setUnitActiveStatus(unit, true)"
+                 icon="glyphicon-off"
+                 sc-stop-propagation></sc-button>      
+      <!--Delete organization-->
+      <sc-button class="ab-icon-button delete-icon"
+                 ng-show="unit.isSelected && canUnitBeDeleted(unit)"
+                 btn-click="deleteUnit(unit)"
+                 icon="glyphicon-remove"
+                 sc-stop-propagation></sc-button>      
+      <!--Add new child unit-->
+      <sc-button class="ab-icon-button"
+                 ng-show="unit.isSelected"
+                 btn-click="addNewUnit(unit.unitId, 'Department')"
+                 icon="glyphicon-plus-sign"
+                 sc-stop-propagation></sc-button>      
     </div>
 
     <div class="child-unit"
@@ -127,27 +141,36 @@
       {{unit.name}}
     </span>
     <span ng-show="unit.isSelected">
-      <span class="glyphicon glyphicon-plus-sign"
-            ng-show="unit.childUnits.length === 0"
-            ng-click="addNewUnit(unit.unitId, 'Employee'); $event.stopPropagation();"></span>
-      <span class="glyphicon glyphicon-pencil"
-            ng-show="unit.isActive"
-            ng-click="editUnit(unit.unitId); $event.stopPropagation();"></span>
-
-      <span class="glyphicon glyphicon-off deactivate-icon"
-            ng-show="unit.isActive"
-            ng-click=" setUnitActiveStatus(unit, false); $event.stopPropagation();"></span>
-      <span class="glyphicon glyphicon-off activate-icon"
-            ng-show="!unit.isActive"
-            ng-click="setUnitActiveStatus(unit, true); $event.stopPropagation();"></span>
-      <span class="glyphicon glyphicon-remove delete-icon"
-            ng-show="unit.isSelected && canUnitBeDeleted(unit)"
-            ng-click="deleteUnit(unit); $event.stopPropagation();"></span>
-      <!--this wan't work in case of inactive-->
-      <span class="glyphicon glyphicon-plus-sign"
-            ng-show="unit.isSelected && unit.childUnits.length === 0"
-            ng-click="addNewUnit(unit.unitId, 'Position'); $event.stopPropagation();"></span>
-
+      <!--edit postision-->
+      <sc-button class="ab-icon-button"
+                 ng-show="unit.isActive"
+                 btn-click="editUnit(unit.unitId)"
+                 icon="glyphicon-pencil"
+                 sc-stop-propagation></sc-button>
+      <!--deactivate position-->
+      <sc-button class="ab-icon-button deactivate-icon"
+                 ng-show="unit.isActive"
+                 btn-click="setUnitActiveStatus(unit, false)"
+                 icon="glyphicon-off"
+                 sc-stop-propagation></sc-button>
+      <!--activate position-->
+      <sc-button class="ab-icon-button activate-icon"
+                 ng-show="!unit.isActive"
+                 btn-click="setUnitActiveStatus(unit, true)"
+                 icon="glyphicon-off"
+                 sc-stop-propagation></sc-button>
+      <!--Delete position-->
+      <sc-button class="ab-icon-button delete-icon"
+                 ng-show="unit.isSelected && canUnitBeDeleted(unit)"
+                 btn-click="deleteUnit(unit)"
+                 icon="glyphicon-remove"
+                 sc-stop-propagation></sc-button>
+      <!--add new child unit-->
+      <sc-button class="ab-icon-button"
+                 ng-show="unit.childUnits.length === 0"
+                 btn-click="addNewUnit(unit.unitId, 'Employee')"
+                 icon="glyphicon-plus-sign"
+                 sc-stop-propagation></sc-button>
     </span>
 
     <span ng-if="unit.childUnits">
@@ -156,31 +179,49 @@
         {{unit.childUnits[0].name}}
       </span>
 
-      <span class="glyphicon glyphicon-pencil"
-            ng-show="unit.isSelected && unit.childUnits[0].isActive"
-            ng-click="editUnit(unit.childUnits[0].unitId); $event.stopPropagation();"></span>
+      <!--Edit employee-->      
+      <sc-button class="ab-icon-button"
+                 ng-show="unit.isSelected && unit.childUnits[0].isActive"
+                 btn-click="editUnit(unit.childUnits[0].unitId)"
+                 icon="glyphicon-pencil"
+                 sc-stop-propagation></sc-button>
 
-      <span class="glyphicon glyphicon-off deactivate-icon"
-            ng-show="unit.isSelected && unit.childUnits[0].isActive"
-            ng-click="setUnitActiveStatus(unit.childUnits[0], false); $event.stopPropagation();"></span>
-      <span class="glyphicon glyphicon-off activate-icon"
-            ng-show="unit.isSelected && !unit.childUnits[0].isActive"
-            ng-click="setUnitActiveStatus(unit.childUnits[0], true); $event.stopPropagation();"></span>
-      <span class="glyphicon glyphicon-remove delete-icon"
-            ng-show="unit.isSelected && canUnitBeDeleted(unit.childUnits[0])"
-            ng-click="deleteUnit(unit.childUnits[0]); $event.stopPropagation();"></span>
+      <!--Deactivation of employee-->
+      <sc-button class="ab-icon-button deactivate-icon"
+                 ng-show="unit.isSelected && unit.childUnits[0].isActive"
+                 btn-click="setUnitActiveStatus(unit.childUnits[0], false)"
+                 icon="glyphicon-off"
+                 sc-stop-propagation></sc-button>
+      <!--Activation of employee-->
+      <sc-button class="ab-icon-button activate-icon"
+                 ng-show="unit.isSelected && !unit.childUnits[0].isActive"
+                 btn-click="setUnitActiveStatus(unit.childUnits[0], true)"
+                 icon="glyphicon-off"
+                 sc-stop-propagation></sc-button>
+      <!--Delete unit-->
+      <sc-button ng-show="unit.isSelected && canUnitBeDeleted(unit.childUnits[0])"
+                 btn-click="deleteUnit(unit.childUnits[0])"
+                 sc-stop-propagation
+                 class="ab-icon-button"
+                 icon="glyphicon-remove"></sc-button>
+
+      <!--Attach user to unit-->
+      <sc-button ng-show="unit.isSelected && !unit.childUnits[0].user"
+                 btn-click="attachUserToUnit(unit.childUnits[0].unitId)"
+                 sc-stop-propagation
+                 class="ab-icon-button"
+                 icon="glyphicon-forward"></sc-button>
+
       <!--User section-->
-      <span ng-show="unit.childUnits[0].isActive">
+      <span ng-show="unit.childUnits[0].isActive && unit.childUnits[0].user">
         <span class="glyphicon glyphicon-minus"></span>
         {{unit.childUnits[0].user.userName}}
-        <span class="glyphicon glyphicon-forward"
-              tooltip="Прикачи потребител"
-              ng-show="unit.isSelected && !unit.childUnits[0].user"
-              ng-click="attachUserToUnit(unit.childUnits[0].unitId); $event.stopPropagation();"></span>
-        <span class="glyphicon glyphicon-remove-circle"
-              tooltip="Премахване на връзката с потребител"
-              ng-show="unit.isSelected && unit.childUnits[0].user"
-              ng-click="detachUserFromUnit(unit.childUnits[0].unitId, unit.childUnits[0].user.userId); $event.stopPropagation();"></span>
+        <!--Deactivate UniUser relation-->
+        <sc-button ng-show="unit.isSelected && unit.childUnits[0].user"
+                   btn-click="detachUserFromUnit(unit.childUnits[0].unitId, unit.childUnits[0].user.userId)"
+                   sc-stop-propagation
+                   class="ab-icon-button"
+                   icon="glyphicon-remove-circle"></sc-button>
       </span>
 
     </span>
@@ -234,6 +275,10 @@ ualisation, without custom functionlaity overhead.
   </div>
 
   <div ng-repeat="unit in model" ng-include="'unit_recursive_template.html'"></div>
-  <span class="glyphicon glyphicon-plus-sign" ng-click="addNewUnit(null, 'Department'); $event.stopPropagation();"></span>
-
+  <!--<span class="glyphicon glyphicon-plus-sign" ng-click="addNewUnit(null, 'Department'); $event.stopPropagation();"></span>-->
+  <!--add root unit-->
+  <sc-button class="ab-icon-button"             
+             btn-click="addNewUnit(unit.unitId, 'Department')"
+             icon="glyphicon-plus-sign"
+             sc-stop-propagation></sc-button>
 </div>

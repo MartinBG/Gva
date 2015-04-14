@@ -16,8 +16,10 @@ namespace Docs.Api.Repositories.UnitRepository
         void UpdateUnit(UnitDomainModel model);
 
         void DeleteUnit(int id);
+        
+        void Activate(int id);
 
-        void SetUnitActiveStatus(int unitId, bool isActive);
+        void Deactivate(int id);
 
         void AssignUserToUnit(int unitId, int userId);
     }

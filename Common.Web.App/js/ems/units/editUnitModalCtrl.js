@@ -36,11 +36,7 @@
         return item.value === scModalParams.unit.type;
       });
 
-      $scope.model = {
-        name: scModalParams.unit.name,
-        classifications: scModalParams.unit.classifications        
-      };
-
+      $scope.model = scModalParams.unit;
     } else {
 
       $scope.selectedItem = $scope.unitTypes[0];
@@ -84,10 +80,17 @@
       return $scope.form.unitForm.$validate().then(function () {
 
         if ($scope.form.unitForm.$valid) {
-          return UnitsResource.save($scope.model)
-            .$promise.then(function () {
+          if ($scope.isEditMode) {
+            return $scope.model.$save().then(function () {
               return $modalInstance.close(true);
             });
+          }
+          else {
+            return UnitsResource.save($scope.model)
+              .$promise.then(function () {
+                return $modalInstance.close(true);
+              });
+          }
         }
       });
     };

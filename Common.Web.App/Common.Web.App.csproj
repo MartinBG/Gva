@@ -187,6 +187,7 @@
     <Content Include="js\scaffolding\directives\ajaxdatatable\ajaxDatatableDirective.js" />
     <Content Include="js\scaffolding\directives\dropdownSimple\dropdownSimpleDirective.html" />
     <Content Include="js\scaffolding\directives\dropdownSimple\dropdownSimpleDirective.js" />
+    <Content Include="js\scaffolding\directives\stopPropagation\stopPropagationDirective.js" />
     <Content Include="js\scaffolding\directives\suggestion\textareaSuggestionDirective.html" />
     <Content Include="js\scaffolding\directives\suggestion\suggestionDirectives.js" />
     <Content Include="js\scaffolding\directives\suggestion\textSuggestionDirective.html" />

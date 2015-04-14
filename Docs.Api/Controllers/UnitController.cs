@@ -84,7 +84,7 @@ namespace Docs.Api.Controllers
         [HttpPost]
         public IHttpActionResult UpdateUnit(int unitId, UnitDomainModel model)
         {
-            //unitBusinessLogic.UpdateUnit(model);
+            unitRepository.UpdateUnit(model);
             return Ok();
         }
 
@@ -92,8 +92,6 @@ namespace Docs.Api.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteUnit(int unitId)
         {
-            // These validation should be in UnitBusiness logic. Currently UnitBL is in another project, that's why it's here.
-
             var unitRelation = unitOfWork.DbContext.Set<UnitRelation>()
                 .Where(e => e.ParentUnitId == unitId)
                 .FirstOrDefault();
