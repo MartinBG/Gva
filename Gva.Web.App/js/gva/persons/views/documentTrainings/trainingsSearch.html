@@ -15,9 +15,9 @@
   <sc-column title="persons.documentTrainingSearch.ratingType" has-content="true">
     {{item.part.ratingTypes && item.part.ratingTypes.length > 0 ? (item.part.ratingTypes | pluck:'code' | join:', ') : (item.part.locationIndicator ? item.part.locationIndicator.code : '')  + ' ' + (item.part.sector ? item.part.sector : '')}}
   </sc-column>
-  <sc-column data="part.ratingClass.code" title="persons.documentTrainingSearch.ratingClass" visible="false">
+  <sc-column data="part.ratingClass.code" title="persons.documentTrainingSearch.ratingClass">
   </sc-column>
-  <sc-column data="part.authorization.code" title="persons.documentTrainingSearch.authorization" class="wrap" visible="false">
+  <sc-column data="part.authorization.code" title="persons.documentTrainingSearch.authorization" class="wrap">
   </sc-column>
   <sc-column data="part.licenceType.code" title="persons.documentTrainingSearch.licenceType">
   </sc-column>
