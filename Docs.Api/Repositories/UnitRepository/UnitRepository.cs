@@ -228,24 +228,32 @@ namespace Docs.Api.Repositories.UnitRepository
                 throw new Exception(string.Format("Unit with ID = {0} does not exist.", model.UnitId));
             }
 
-            //only Name and classifications can be updated from here
+            //only Name and classifications can be updated
             unit.Name = model.Name;
 
+            var original = unit.UnitClassifications;
+            var modified = model.Classifications.Select(e =>
+                new UnitClassification {
+                    UnitId = model.UnitId,
+                    ClassificationId = e.ClassificationId,
+                    ClassificationPermissionId = e.ClassificationPermissionId
+                }
+            );
+
+            var removed = original.Where(e => !modified.Contains(e)).ToList();
+            var added = modified.Where(e => !original.Contains(e)).ToList();
+
             var unitClassificationContext = unitOfWork.DbContext.Set<UnitClassification>();
-            //var classifications = unitClassificationContext.Where(e => e.UnitId == model.UnitId);
 
-            foreach (var item in unit.UnitClassifications)
+            unitClassificationContext.RemoveRange(removed);
+            unitClassificationContext.AddRange(added);
+
+            using (var transaction = unitOfWork.BeginTransaction())
             {
-                //var it = model.Classifications.SingleOrDefault(e =>
-                //    e.ClassificationId == item.ClassificationId
-                //    && e.ClassificationPermissionId == item.ClassificationPermissionId);
-                //if(it!=null)
-                //{
-
-                //}
-            }            
-
-            unitOfWork.Save();
+                unitOfWork.Save();
+                docRepository.spSetUnitTokens(unit.UnitId);
+                transaction.Commit();
+            }
         }
 
         public void DeleteUnit(int id)

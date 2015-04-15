@@ -1,10 +1,11 @@
 using Docs.Api.Models.ClassificationModels;
 using Docs.Api.Models.UnitModels;
+using System;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Docs.Api.Models.UnitModels
 {
-    public partial class UnitClassification
+    public partial class UnitClassification : IEquatable<UnitClassification>
     {
         public int UnitClassificationId { get; set; }
 
@@ -21,6 +22,13 @@ namespace Docs.Api.Models.UnitModels
         public virtual Classification Classification { get; set; }
 
         public virtual Unit Unit { get; set; }
+
+        public bool Equals(UnitClassification other)
+        {
+            if (other == null) return false;
+            return (ClassificationId.Equals(other.ClassificationId)
+                && ClassificationPermissionId.Equals(other.ClassificationPermissionId));
+        }
     }
 
     public class UnitClassificationMap : EntityTypeConfiguration<UnitClassification>
