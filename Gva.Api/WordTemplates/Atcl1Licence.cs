@@ -124,7 +124,7 @@ namespace Gva.Api.WordTemplates
                     ADDRESS_EN = string.Format(
                         "{0}, {1}",
                         personAddress.AddressAlt,
-                        personAddress.Settlement != null ? personAddress.Settlement.Name : null),
+                        personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null),
                     NATIONALITY = nationality != null ? nationality.Name : null,
                     NATIONALITY_EN = nationality != null ? nationality.TextContent.Get<string>("nationalityCodeCA") : null,
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),
