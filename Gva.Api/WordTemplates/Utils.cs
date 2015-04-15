@@ -159,7 +159,8 @@ namespace Gva.Api.WordTemplates
             {
                 LEVEL = c.LangLevel.Name,
                 ISSUE_DATE = c.DocumentDateValidFrom,
-                VALID_DATE = c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited"
+                VALID_DATE = c.LangLevel.Code.Contains("6") ? "unlimited" : (c.DocumentDateValidTo.HasValue? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : null)
+
             })
             .ToList<object>();
         }
@@ -239,9 +240,9 @@ namespace Gva.Api.WordTemplates
             };
 
             return (from endorsment in endorsments
-                 group endorsment by ((dynamic)endorsment).NAME into newGroup
-                 let d = newGroup.OrderBy(g => ((dynamic)g).DATE).FirstOrDefault()
-                 select d)
+                    group endorsment by ((dynamic)endorsment).NAME into newGroup
+                    let d = newGroup.OrderBy(g => ((dynamic)g).DATE).FirstOrDefault()
+                    select d)
                  .ToList<object>();
         }
     }

@@ -82,12 +82,12 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonMedicalDO>("personDocumentMedicals/" + i).Content);
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
-            var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
-                "BGR {0} - {1} - {2}",
-                licenceType.Code,
+                "BGR - {0} - {1} - {2} {3} ATCO licence",
+                licenceType.Code == "ATCL" ? "ATCO" : "SATCO",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
-                personData.Lin);
+                personData.Lin,
+                licenceType.Code == "SATCL" ? "Student" : "");
             var placeOfBirth = personData.PlaceOfBirth;
             NomValue country = null;
             NomValue nationality = null;
@@ -104,7 +104,8 @@ namespace Gva.Api.WordTemplates
             var documents = this.GetDocuments(licenceType.Code, includedTrainings, includedLangCerts);
             var langLevel = Utils.FillBlankData(Utils.GetLangCerts(includedLangCerts), 1);
             var langCertsInLEndorsments = this.GetLangCertsForEndosement(includedLangCerts);
-            var lEndorsements = Utils.FillBlankData(this.GetEndorsements2(includedRatings, ratingEditions, false).Union(langCertsInLEndorsments).ToList(), 9);
+            var lEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, false);
+            var endorsementsAndOtherEndorsements = this.GetEndorsements(includedRatings, ratingEditions);
 
             var json = new
             {
@@ -112,10 +113,8 @@ namespace Gva.Api.WordTemplates
                 {
                     L_NAME = licenceType.Name.ToUpper(),
                     L_NAME_TRANS = licenceType.NameAlt == null ? string.Empty : licenceType.NameAlt.ToUpper(),
-                    L_LICENCE_TYPE_CA_CODE = licenceCaCode,
                     L_NAME1 = licenceType.Name.ToUpper(),
                     L_NAME1_TRANS = licenceType.NameAlt == null ? string.Empty : licenceType.NameAlt.ToUpper(),
-                    L_LICENCE_TYPE_CA_CODE2 = licenceCaCode,
                     L_LICENCE_NO = licenceNumber,
                     FAMILY_BG = personData.LastName.ToUpper(),
                     FAMILY_TRANS = personData.LastNameAlt.ToUpper(),
@@ -137,7 +136,7 @@ namespace Gva.Api.WordTemplates
                     NATIONALITY_EN = nationality != null ? nationality.TextContent.Get<string>("nationalityCodeCA") : null,
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),
                     L_RATINGS = this.GetRatings(includedRatings, ratingEditions),
-                    ENDORSEMENT = Utils.FillBlankData(Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository), 3),
+                    ENDORSEMENT = Utils.FillBlankData(endorsementsAndOtherEndorsements.Item1, 3),
                     L_LANG_LEVEL = langLevel,
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
@@ -160,10 +159,9 @@ namespace Gva.Api.WordTemplates
                     T_LANG_LEVEL_NO = number++,
                     T_LANG_LEVEL = langLevel,
                     T_MED_CERT = Utils.GetMedCerts(this.number++, includedMedicals, personData),
-                    T_ACTIVE_NO = number++,
-                    L_ENDORSEMENT = lEndorsements,
-                    T_ENDORSEMENT = Utils.FillBlankData(this.GetEndorsements2(includedRatings, ratingEditions, true), 9),
-                    L_ENDORSEMENT1 = Utils.FillBlankData(new List<object>(), 9)
+                    L_ENDORSEMENT1 = Utils.FillBlankData(lEndorsements, 16),
+                    L_ENDORSEMENT = Utils.FillBlankData(endorsementsAndOtherEndorsements.Item2, 4),
+                    T_ENDORSEMENT = Utils.FillBlankData(this.GetEndorsements2(includedRatings, ratingEditions, true), 9)
                 }
 
 
@@ -179,7 +177,7 @@ namespace Gva.Api.WordTemplates
                 .Select(c => new
                 {
                     AUTH = c.LangLevel.Name.ToUpper(),
-                    VALID_DATE = c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited"
+                    VALID_DATE = !c.LangLevel.Code.Contains("6") && c.DocumentDateValidTo.HasValue ? c.DocumentDateValidTo.Value.ToString("dd.MM.yyyy") : "unlimited"
 
                 }).ToList<object>();
         }
@@ -190,6 +188,69 @@ namespace Gva.Api.WordTemplates
             {
                 LicenceDictionary.LicencePrivilege["ATCLratings"]
             };
+        }
+
+        private Tuple<List<object>, List<object>> GetEndorsements(
+            IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
+            IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
+        {
+            List<object> endorsments = new List<object>();
+            List<object> otherEndorsments = new List<object>();
+            List<string> otherEndorsementCodes = new List<string>() { "OJTI", "STDI", "Assessor" };
+
+            foreach (var edition in ratingEditions)
+            {
+                var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                if (rating.Content.Authorization != null)
+                {
+                    if (otherEndorsementCodes.Any(oe => rating.Content.Authorization.Code.Contains(oe)))
+                    {
+                        string name = otherEndorsementCodes
+                            .Where(oe => rating.Content.Authorization.Code.Contains(oe))
+                            .First();
+
+                        var lastRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
+                            .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                            .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                            .OrderByDescending(epv => epv.Content.Index)
+                            .First();
+
+                        otherEndorsments.Add(new
+                        {
+                            NAME = name,
+                            VALID_DATE = lastRatingEdition.Content.DocumentDateValidTo
+                        });
+                    }
+                    else
+                    {
+                        var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
+                            .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                            .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
+                            .OrderByDescending(epv => epv.Content.Index)
+                            .Last();
+
+                        endorsments.Add(new
+                        {
+                            NAME = rating.Content.Authorization.Code,
+                            DATE = firstRatingEdition.Content.DocumentDateValidFrom
+                        });
+                    }
+                }
+            };
+
+            List<object> otherEndorsmentsResult = (from endorsment in otherEndorsments
+                    group endorsment by ((dynamic)endorsment).NAME into newGroup
+                    let d = newGroup.OrderBy(g => ((dynamic)g).VALID_DATE).FirstOrDefault()
+                    select d)
+                 .ToList();
+
+            List<object> endorsmentsResult = (from endorsment in endorsments
+                    group endorsment by ((dynamic)endorsment).NAME into newGroup
+                    let d = newGroup.OrderBy(g => ((dynamic)g).DATE).FirstOrDefault()
+                    select d)
+                 .ToList();
+
+            return new Tuple<List<object>, List<object>>(endorsmentsResult, otherEndorsmentsResult);
         }
 
         private List<object> GetRatings(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions)
@@ -220,21 +281,29 @@ namespace Gva.Api.WordTemplates
         private List<object> GetEndorsements2(IEnumerable<PartVersion<PersonRatingDO>> includedRatings, IEnumerable<PartVersion<PersonRatingEditionDO>> editions, bool withIssueDate)
         {
             int caseTypeId = this.caseTypeRepository.GetCaseType("ovd").GvaCaseTypeId;
+            List<string> otherEndorsementCodes = new List<string>() { "OJTI", "STDI", "Assessor" };
 
             List<object> ratingEditions = new List<object>();
             foreach (var edition in editions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
+                var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
+                string sector = !string.IsNullOrEmpty(rating.Content.Sector) ? rating.Content.Sector.ToUpper() : null;
+
+                if (otherEndorsementCodes.Any(oe => authorization.Contains(oe)))
+                {
+                    continue;
+                }
+
                 var firstRatingEdition = this.lotRepository.GetLotIndex(rating.Part.LotId)
                     .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
                     .Where(epv => epv.Content.RatingPartIndex == rating.Part.Index)
                     .OrderByDescending(epv => epv.Content.Index)
                     .Last();
-
                 var ratingTypes = rating.Content.RatingTypes.Count() == 0 ? string.Empty : string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code));
                 var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
-                var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
-                string sector = !string.IsNullOrEmpty(rating.Content.Sector) ? rating.Content.Sector.ToUpper() : null;
+
+
                 object result = null;
                 if (withIssueDate)
                 {

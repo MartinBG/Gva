@@ -68,8 +68,8 @@ namespace Gva.Api.WordTemplates
                 new
                 {
                     NO = 100,
-                    NAME_BG = "Притежателят на това свидетелство за правоспособност ATCL е упълномощен да изпълнява функции в органите за ОВД за следните квалификационни класове, за които притежава валидно(и) разрешение(я), както следва:",
-                    NAME_TRANS = "The holder is entitled to exercise the functions of the following rating(s) at the air traffic service unit(s) for which current endorsement(s) is/are held as follows:"
+                    NAME_BG = "Притежателят има право да упражнява правата по следните квалификационни класове и разрешения към квалификационен клас, когато те са валидни",
+                    NAME_TRANS = "The holder is entitled to exercise the priviliges of the following rating(s) and rating endorsement(s), when validated:"
                 }
             },
             {

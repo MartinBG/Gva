@@ -1542,7 +1542,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "262", "flight" },
                 { "281", "atcl1" },
                 { "289", "convoy" },
-                { "301", "student_controller" },
+                { "301", "atcl1" },
                 { "302", "AML_national" },
                 { "321", "coordinator_simi" },
                 { "323", "rvd_licence" },

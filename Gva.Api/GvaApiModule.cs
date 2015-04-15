@@ -246,7 +246,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ForeignLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<FlightLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<Atcl1Licence>().As<IDataGenerator>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<StudentControllerLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<CAL03year2013>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<RVD_Licence>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<Pilot>().As<IDataGenerator>().InstancePerLifetimeScope();
