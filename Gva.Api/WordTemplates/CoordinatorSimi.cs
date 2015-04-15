@@ -91,20 +91,20 @@ namespace Gva.Api.WordTemplates
                 accessOrderPractEducation = Utils.GetTrainingsByCode(includedTrainings, accessOrderPractEducationRole.Code, documentRoleCodes);
             }
 
-            IEnumerable<PersonLangCertDO> engLevels = includedLangCerts.Where(t => t.DocumentRole.Alias == "engCert" && t.LangLevel != null);
+            IEnumerable<PersonLangCertDO> langLevels = includedLangCerts.Where(t => t.LangLevel != null);
 
             List<object> lLangLevel = new List<object>();
             List<object> tLangLevel = new List<object>();
-            if (engLevels.Count() > 0)
+            if (langLevels.Count() > 0)
             {
-                lLangLevel = engLevels.Select(l => new
+                lLangLevel = langLevels.Select(l => new
                 {
                     LEVEL = l.LangLevel.Name,
                     VALID_DATE = l.DocumentDateValidTo.HasValue ? l.DocumentDateValidTo.Value.ToString("dd/MM/yyyy") : "unlimited"
                 })
                 .ToList<object>();
 
-                tLangLevel = engLevels.Select(l => new
+                tLangLevel = langLevels.Select(l => new
                 {
                     LEVEL = l.LangLevel.Name,
                     ISSUE_DATE = l.DocumentDateValidFrom,
@@ -115,7 +115,7 @@ namespace Gva.Api.WordTemplates
 
             var endorsements = Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository);
             var tEndorsements = this.GetTEndorsements(includedRatings, ratingEditions);
-            var lEndorsements = this.GetLEndorsements(includedRatings, ratingEditions, engLevels);
+            var lEndorsements = this.GetLEndorsements(includedRatings, ratingEditions, langLevels);
 
             var licenceNumber = string.Format(
                 "BGR. {0} - {1} - {2}",
@@ -236,7 +236,7 @@ namespace Gva.Api.WordTemplates
         private List<object> GetLEndorsements(
             IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
             IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions,
-            IEnumerable<PersonLangCertDO> engLevels)
+            IEnumerable<PersonLangCertDO> langLevels)
         {
             List<object> endorsements = new List<object>();
             foreach (var edition in ratingEditions)
@@ -255,7 +255,7 @@ namespace Gva.Api.WordTemplates
             };
 
             endorsements = endorsements
-                .Union(engLevels.Select(l => new
+                .Union(langLevels.Select(l => new
                 {
                     AUTH = l.LangLevel.Name.ToUpper(),
                     VALID_DATE = l.DocumentDateValidTo
