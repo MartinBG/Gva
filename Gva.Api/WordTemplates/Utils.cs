@@ -218,7 +218,7 @@ namespace Gva.Api.WordTemplates
             IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions,
             ILotRepository lotRepository)
         {
-            List<object> endosments = new List<object>();
+            List<object> endorsments = new List<object>();
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
@@ -230,7 +230,7 @@ namespace Gva.Api.WordTemplates
                         .OrderByDescending(epv => epv.Content.Index)
                         .Last();
 
-                    endosments.Add(new
+                    endorsments.Add(new
                     {
                         NAME = rating.Content.Authorization.Code,
                         DATE = firstRatingEdition.Content.DocumentDateValidFrom
@@ -238,7 +238,11 @@ namespace Gva.Api.WordTemplates
                 }
             };
 
-            return endosments;
+            return (from endorsment in endorsments
+                 group endorsment by ((dynamic)endorsment).NAME into newGroup
+                 let d = newGroup.OrderByDescending(g => ((dynamic)g).DATE).FirstOrDefault()
+                 select new { newGroup.Key, d })
+                 .ToList<object>();
         }
     }
 }
