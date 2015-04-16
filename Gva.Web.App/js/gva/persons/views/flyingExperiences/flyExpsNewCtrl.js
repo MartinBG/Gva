@@ -11,13 +11,14 @@
   ) {
     $scope.personFlyingExperience = personFlyingExperience;
     $scope.caseTypeId = $stateParams.caseTypeId;
+    $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newFlyingExperienceForm.$validate()
         .then(function () {
           if ($scope.newFlyingExperienceForm.$valid) {
             return PersonFlyingExperiences
-              .save({ id: $stateParams.id }, $scope.personFlyingExperience)
+              .save({ id: $scope.lotId }, $scope.personFlyingExperience)
               .$promise
               .then(function () {
                 return $state.go('root.persons.view.flyingExperiences.search');

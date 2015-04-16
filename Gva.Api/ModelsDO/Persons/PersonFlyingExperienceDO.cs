@@ -55,10 +55,10 @@ namespace Gva.Api.ModelsDO.Persons
         public int? NightLandings { get; set; }
 
         [Required(ErrorMessage = "TotalDoc is required.")]
-        public int? TotalDoc { get; set; }
+        public long? TotalDoc { get; set; }
 
         public int? TotalLastMonths { get; set; }
 
-        public int? Total { get; set; }
+        public long? Total { get; set; }
     }
 }

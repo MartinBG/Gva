@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function FlyingExperiencesSearchCtrl(
@@ -8,7 +8,22 @@
     $stateParams,
     flyingExperiences
   ) {
-    $scope.flyingExperiences = flyingExperiences;
+    $scope.flyingExperiences = _.map(flyingExperiences, function (flyingExperience) {
+      var minutes;
+      if (flyingExperience.part.totalDoc) {
+        minutes = flyingExperience.part.totalDoc / 60000;
+        flyingExperience.totalDocHours = Math.floor(minutes / 60);
+      } else {
+        flyingExperience.totalDocHours = 0;
+      }
+      if (flyingExperience.part.total) {
+        minutes = flyingExperience.part.total / 60000;
+        flyingExperience.totalHours = Math.floor(minutes / 60);
+      } else {
+        flyingExperience.totalHours = 0;
+      }
+      return flyingExperience;
+    });
   }
 
   FlyingExperiencesSearchCtrl.$inject = [
@@ -29,4 +44,4 @@
   };
 
   angular.module('gva').controller('FlyingExperiencesSearchCtrl', FlyingExperiencesSearchCtrl);
-}(angular));
+}(angular, _));
