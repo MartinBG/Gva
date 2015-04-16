@@ -13,8 +13,6 @@ namespace Docs.Api.Repositories.CorrespondentRepository
 
         CorrespondentDO CreateCorrespondent(CorrespondentDO corr, UserContext userContext);
 
-        CorrespondentDO GetCorrespondentFromOrganization(string orgName, string orgUin);
-
         List<Correspondent> GetCorrespondents(
             string displayName,
             string correspondentEmail,

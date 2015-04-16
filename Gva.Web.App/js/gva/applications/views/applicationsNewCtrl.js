@@ -64,48 +64,15 @@
     };
 
     $scope.newCorr = function () {
-      var partData = {}, isPersonSelect, isOrgSelect;
-      partData.$promise = $q.when(false);
+      var modalInstance = scModal.open('newCorr', { lotId: $scope.application.lot.id });
 
-      if ($scope.application.lot && $scope.application.lot.id) {
-        if ($scope.set === 'person') {
-          isPersonSelect = true;
-          partData = PersonsInfo.get({ id: $scope.application.lot.id });
-        }
-        else if ($scope.set === 'organization') {
-          isOrgSelect = true;
-          partData = OrganizationsData.get({ id: $scope.application.lot.id });
-        }
-      }
-
-      return partData.$promise.then(function (d) {
-        var params = {};
-
-        if (isPersonSelect) {
-          params.person = {
-            firstName: d.personData.firstName,
-            lastName: d.personData.lastName,
-            uin: d.personData.uin,
-            email: d.personData.email
-          };
-        }
-        else if (isOrgSelect) {
-          params.org = {
-            name: d.name,
-            uin: d.uin
-          };
-        }
-
-        var modalInstance = scModal.open('newCorr', params);
-
-        modalInstance.result.then(function (nomItem) {
-          var newCorr = $scope.application.docCorrespondents.slice();
-          newCorr.push(nomItem.nomValueId);
-          $scope.application.docCorrespondents = newCorr;
-        });
-
-        return modalInstance.opened;
+      modalInstance.result.then(function (nomItem) {
+        var newCorr = $scope.application.docCorrespondents.slice();
+        newCorr.push(nomItem.nomValueId);
+        $scope.application.docCorrespondents = newCorr;
       });
+
+      return modalInstance.opened;
     };
 
     $scope.selectCorr = function selectCorr() {

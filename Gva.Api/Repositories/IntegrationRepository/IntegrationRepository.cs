@@ -2,6 +2,8 @@
 using System.Linq;
 using Common.Api.Models;
 using Common.Data;
+using Common.Json;
+using System.Data.Entity;
 using Regs.Api.Repositories.LotRepositories;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Models;
@@ -19,6 +21,7 @@ using Gva.Api.Repositories.PersonRepository;
 using Common.Api.Repositories.NomRepository;
 using R_0009_000008;
 using R_0009_000011;
+using Gva.Api.Models.Views.Person;
 
 namespace Gva.Api.Repositories.IntegrationRepository
 {
@@ -82,44 +85,111 @@ namespace Gva.Api.Repositories.IntegrationRepository
             this.lotRepository.ExecSpSetLotPartTokens(updatedPart.PartId);
         }
 
-        public List<int> GetCorrespondentIdsPerPersonLot(PersonDataDO personData, UserContext userContext)
+        public CorrespondentDO ConvertOrganizationDataToCorrespondent(OrganizationDataDO organizationData)
         {
-            string personNames = string.Format("{0} {1}", personData.FirstName, personData.LastName);
-            List<Correspondent> correspondents = this.correspondentRepository.GetCorrespondents(personNames, null, 10, 0);
+            CorrespondentGroup correspondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Applicants".ToLower());
 
-            List<int> correspondentIds = correspondents.Select(c => c.CorrespondentId).ToList() ?? new List<int>();
-            if (correspondentIds.Count() == 0)
+            var correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                .SingleOrDefault(e => e.Alias.ToLower() == "LegalEntity".ToLower());
+
+            return new CorrespondentDO()
             {
-                CorrespondentDO correspondent = this.correspondentRepository.GetNewCorrespondent();
-
-                var correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
-                    .SingleOrDefault(e => e.Alias.ToLower() == "BulgarianCitizen".ToLower());
-
-                correspondent.CorrespondentTypeAlias = correspondentType.Alias;
-                correspondent.CorrespondentTypeId = correspondentType.CorrespondentTypeId;
-                correspondent.CorrespondentTypeName = correspondentType.Name;
-
-                if (personData.Country.Code == "BG")
-                {
-                    correspondent.BgCitizenFirstName = personData.FirstName;
-                    correspondent.BgCitizenLastName = personData.LastName;
-                    correspondent.BgCitizenUIN = personData.Uin;
-                }
-                else
-                {
-                    correspondent.ForeignerFirstName = personData.FirstName;
-                    correspondent.ForeignerLastName = personData.LastName;
-                }
-
-                correspondent.Email = personData.Email;
-                CorrespondentDO corr = this.correspondentRepository.CreateCorrespondent(correspondent, userContext);
-                correspondentIds.Add(corr.CorrespondentId.Value);
-            }
-
-            return correspondentIds;
+                CorrespondentGroupId = correspondentGroup.CorrespondentGroupId,
+                IsActive = true,
+                CorrespondentTypeId = correspondentType.CorrespondentTypeId,
+                CorrespondentTypeName = correspondentType.Name,
+                CorrespondentTypeAlias = correspondentType.Alias,
+                LegalEntityName = organizationData.Name,
+                LegalEntityBulstat = organizationData.Uin
+            };
         }
 
-        public List<int> CreateCorrespondent(CorrespondentDO correspondent, UserContext userContext)
+        public CorrespondentDO ConvertPersonDataToCorrespondent(PersonDataDO personData)
+        {
+            CorrespondentDO correspondent = this.correspondentRepository.GetNewCorrespondent();
+            CorrespondentType correspondentType = null;
+
+            if (personData.Country.Code == "BG")
+            {
+                correspondent.BgCitizenFirstName = personData.FirstName;
+                correspondent.BgCitizenLastName = personData.LastName;
+                correspondent.BgCitizenUIN = personData.Uin;
+                correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "BulgarianCitizen".ToLower());
+            }
+            else
+            {
+                correspondent.ForeignerFirstName = personData.FirstName;
+                correspondent.ForeignerLastName = personData.LastName;
+                correspondent.ForeignerBirthDate = personData.DateOfBirth;
+
+                correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
+                    .SingleOrDefault(e => e.Alias.ToLower() == "Foreigner".ToLower());
+                
+                Country country = this.unitOfWork.DbContext.Set<Country>()
+                    .Where(s => s.Code == personData.Country.Code)
+                    .FirstOrDefault();
+
+                correspondent.ForeignerCountryId = country != null ? country.CountryId : (int?)null;
+            }
+
+            correspondent.CorrespondentTypeAlias = correspondentType.Alias;
+            correspondent.CorrespondentTypeId = correspondentType.CorrespondentTypeId;
+            correspondent.CorrespondentTypeName = correspondentType.Name;
+
+            correspondent.ContactPhone = personData.Phone1;
+            correspondent.Email = personData.Email;
+            correspondent.ContactFax = personData.Fax;
+
+            GvaViewPerson person = this.personRepository.GetPersons(
+                lin: personData.Lin,
+                uin: personData.Uin,
+                names: string.Format("{0} {1}", personData.FirstName, personData.LastName))
+                .FirstOrDefault();
+
+            if (person != null)
+            {
+                int lotId = person.LotId;
+                var addressPart = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonAddressDO>("personAddresses")
+                    .OrderByDescending(a => a.CreateDate)
+                    .Where(a => a.Content.Valid.Code == "Y")
+                    .FirstOrDefault();
+                if (addressPart != null)
+                {
+                    correspondent.ContactAddress = addressPart.Content.Address;
+                    correspondent.ContactPostCode = addressPart.Content.PostalCode;
+
+                    Dictionary<string, string> settlementTypes = new Dictionary<string, string>(){
+                    {"T", "гр."},
+                    {"V", "с."},
+                    {"М", "ман."},
+                };
+
+                    NomValue settlement = this.nomRepository.GetNomValue("cities", addressPart.Content.Settlement.NomValueId);
+                    string type = settlement.TextContent.Get<string>("type");
+                    var settlementType = settlementTypes.ContainsKey(type) ? settlementTypes[type] : "";
+
+                    Settlement settlementResult = this.unitOfWork.DbContext.Set<Settlement>()
+                        .Where(s => s.SettlementName == addressPart.Content.Settlement.Name && s.TypeName == settlementType)
+                        .FirstOrDefault();
+
+                    correspondent.ContactSettlementId = settlementResult != null ? settlementResult.SettlementId : (int?)null;
+                }
+            }
+
+            return correspondent;
+        }
+
+        public int CreateCorrespondentPerPersonLot(PersonDataDO personData, int lotId, UserContext userContext)
+        {
+            var correspondent = this.ConvertPersonDataToCorrespondent(personData);
+            CorrespondentDO corr = this.correspondentRepository.CreateCorrespondent(correspondent, userContext);
+
+            return corr.CorrespondentId.Value;
+        }
+
+        public int CreateCorrespondent(CorrespondentDO correspondent, UserContext userContext)
         {
             string displayName = "";
             if (correspondent.CorrespondentTypeAlias == "ForeignLegalEntity")
@@ -139,16 +209,9 @@ namespace Gva.Api.Repositories.IntegrationRepository
                 displayName = string.Format("{0} {1}", correspondent.BgCitizenFirstName, correspondent.BgCitizenLastName);
             }
 
-            List<Correspondent> correspondents = this.correspondentRepository.GetCorrespondents(displayName, null, 10, 0);
+            CorrespondentDO newCorrespondent = this.correspondentRepository.CreateCorrespondent(correspondent, userContext);
 
-            List<int> correspondentIds = correspondents.Select(c => c.CorrespondentId).ToList() ?? new List<int>();
-            if (correspondentIds.Count() == 0)
-            {
-                CorrespondentDO newCorrespondent = this.correspondentRepository.CreateCorrespondent(correspondent, userContext);
-                correspondentIds.Add(newCorrespondent.CorrespondentId.Value);
-            }
-
-            return correspondentIds;
+            return newCorrespondent.CorrespondentId.Value;
         }
 
         public CorrespondentDO ConvertElServiceRecipientToCorrespondent(ElectronicServiceRecipient applicant)

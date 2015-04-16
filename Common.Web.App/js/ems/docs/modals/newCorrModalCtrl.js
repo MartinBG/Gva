@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
   function NewCorrModalCtrl(
@@ -39,39 +39,18 @@
   ];
 
   NewCorrModalCtrl.$resolve = {
-    corr: [
-      '$q',
-      'Nomenclatures',
-      'Corrs',
-      'scModalParams',
-      function ($q, Nomenclatures, Corrs, scModalParams) {
-        return $q.all({
-          corrTypes: Nomenclatures.query({ alias: 'correspondentType' }).$promise,
-          corr: Corrs.getNew().$promise
-        }).then(function (res) {
-          if (scModalParams.person) {
-            res.corr.correspondentTypeId = _(res.corrTypes).filter({
-              alias: 'BulgarianCitizen'
-            }).first().nomValueId;
-            res.corr.correspondentType = _(res.corrTypes).filter({
-              alias: 'BulgarianCitizen'
-            }).first();
-
-            res.corr.bgCitizenFirstName = scModalParams.person.firstName;
-            res.corr.bgCitizenLastName = scModalParams.person.lastName;
-            res.corr.bgCitizenUIN = scModalParams.person.uin;
-            res.corr.email = scModalParams.person.email;
-          }
-          else if (scModalParams.org) {
-            res.corr.legalEntityName = scModalParams.org.name;
-            res.corr.legalEntityBulstat = scModalParams.org.uin;
-          }
-
-          return res.corr;
-        });
+    corr: ['Integration','scModalParams',
+      function (Integration, scModalParams) {
+        return Integration.convertLotToCorrespondent({
+          lotId: scModalParams.lotId
+        })
+          .$promise
+          .then(function (corr) {
+            return corr;
+          });
       }
     ]
   };
 
   angular.module('ems').controller('NewCorrModalCtrl', NewCorrModalCtrl);
-}(angular, _));
+}(angular));

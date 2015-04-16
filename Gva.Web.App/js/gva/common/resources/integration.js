@@ -20,6 +20,10 @@
       getEmptyIntegrationDocRelation: {
         method: 'GET',
         url: 'api/integration/emptyIntegrationDocRelation'
+      },
+      convertLotToCorrespondent: {
+        method: 'GET',
+        url: 'api/integration/convertLotToCorrespondent'
       }
     });
   }]);

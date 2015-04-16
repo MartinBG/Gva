@@ -2,6 +2,7 @@
 using Common.Api.UserContext;
 using Docs.Api.DataObjects;
 using Gva.Api.Models;
+using Gva.Api.ModelsDO.Organizations;
 using Gva.Api.ModelsDO.Persons;
 using R_0009_000008;
 using R_0009_000011;
@@ -15,9 +16,9 @@ namespace Gva.Api.Repositories.IntegrationRepository
     {
         void UpdateLotCaseTypes(string set, GvaCaseType caseType, Lot lot, UserContext userContext);
 
-        List<int> GetCorrespondentIdsPerPersonLot(PersonDataDO personData, UserContext userContext);
+        int CreateCorrespondentPerPersonLot(PersonDataDO personData, int lotId, UserContext userContext);
 
-        List<int> CreateCorrespondent(CorrespondentDO correspondent, UserContext userContext);
+        int CreateCorrespondent(CorrespondentDO correspondent, UserContext userContext);
 
         CorrespondentDO ConvertElServiceRecipientToCorrespondent(ElectronicServiceRecipient applicant);
 
@@ -29,5 +30,9 @@ namespace Gva.Api.Repositories.IntegrationRepository
             PersonBasicData personBasicData, 
             ForeignCitizenBasicData foreignCitizenBasicData, 
             GvaCaseType caseType);
+
+        CorrespondentDO ConvertPersonDataToCorrespondent(PersonDataDO personData);
+
+        CorrespondentDO ConvertOrganizationDataToCorrespondent(OrganizationDataDO organizationData);
     }
 }

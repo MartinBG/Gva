@@ -7,6 +7,7 @@ using System.Web.Http;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Blob;
+using Common.Linq;
 using Common.Data;
 using Common.Utils;
 using System.Data.Entity;
@@ -24,6 +25,7 @@ using Gva.Api.Repositories.IntegrationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Regs.Api.Repositories.LotRepositories;
 using Rio.Data.Utils.RioDocumentParser;
+using Docs.Api.DataObjects;
 
 namespace Gva.Api.Controllers.Integration
 {
@@ -344,7 +346,7 @@ namespace Gva.Api.Controllers.Integration
                                 organizationData.Valid = this.nomRepository.GetNomValue("boolean", "yes");
 
                                 intDocRelation.OrganizationData = organizationData;
-                                intDocRelation.CorrespondentData = this.correspondentRepository.GetCorrespondentFromOrganization(organizationData.Name, organizationData.Uin);
+                                intDocRelation.CorrespondentData = this.integrationRepository.ConvertOrganizationDataToCorrespondent(organizationData);
                                 break;
                             }
                         default:
@@ -375,6 +377,30 @@ namespace Gva.Api.Controllers.Integration
             };
         }
 
+        [HttpGet]
+        [Route("convertLotToCorrespondent")]
+        public CorrespondentDO ConvertLotDataToCorrespondent(int lotId)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            CorrespondentDO corr = null;
+            if (lot.Set.Alias == "Person")
+            {
+               PersonDataDO personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+               corr = this.integrationRepository.ConvertPersonDataToCorrespondent(personData);
+            }
+            else if (lot.Set.Alias == "Organization")
+            {
+                OrganizationDataDO organizationData = lot.Index.GetPart<OrganizationDataDO>("organizationData").Content;
+                corr = this.integrationRepository.ConvertOrganizationDataToCorrespondent(organizationData);
+            }
+            else
+            {
+                corr = this.correspondentRepository.GetNewCorrespondent();
+            }
+
+            return corr;
+        }
+
         [HttpPost]
         [Route("createApplication")]
         public ApplicationMainDO CreateApplication(IntegrationNewAppDO newAppDO)
@@ -394,23 +420,31 @@ namespace Gva.Api.Controllers.Integration
                 AircraftDataDO aircraftData = null;
                 OrganizationDataDO organizationData = null;
 
+                List<GvaCorrespondent> correspondents = this.unitOfWork.DbContext.Set<GvaCorrespondent>()
+                        .Include(e => e.Correspondent)
+                        .Where(p => p.LotId == newAppDO.LotId)
+                        .ToList();
+
                 if (lot.Set.Alias == "Person")
                 {
                     personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
                     lotCaseTypes = personData.CaseTypes.Select(c => c.Alias).ToList();
-                    correspondentIds = this.integrationRepository.GetCorrespondentIdsPerPersonLot(personData, this.userContext);
+                    List<int> corrIds = correspondents.Select(c => c.CorrespondentId).ToList();
+                    correspondentIds = corrIds.Count() > 0 ? corrIds : new List<int>() { this.integrationRepository.CreateCorrespondentPerPersonLot(personData, lot.LotId, this.userContext) };
                 }
                 else if (lot.Set.Alias == "Aircraft")
                 {
                     aircraftData = lot.Index.GetPart<AircraftDataDO>("aircraftData").Content;
                     lotCaseTypes = new List<string>() { "aircraft" };
-                    correspondentIds = this.integrationRepository.CreateCorrespondent(newAppDO.CorrespondentData, this.userContext);
+                    List<int> corrIds = correspondents.Select(c => c.CorrespondentId).ToList();
+                    correspondentIds = corrIds.Count() > 0 ? corrIds : new List<int>(){ this.integrationRepository.CreateCorrespondent(newAppDO.CorrespondentData, this.userContext) };
                 }
                 else if (lot.Set.Alias == "Organization")
                 {
                     organizationData = lot.Index.GetPart<OrganizationDataDO>("organizationData").Content;
                     lotCaseTypes = organizationData.CaseTypes.Select(c => c.Alias).ToList();
-                    correspondentIds = this.integrationRepository.CreateCorrespondent(newAppDO.CorrespondentData, this.userContext);
+                    List<int> corrIds = correspondents.Select(c => c.CorrespondentId).ToList();
+                    correspondentIds = corrIds.Count() > 0 ? corrIds : new List<int>() { this.integrationRepository.CreateCorrespondent(newAppDO.CorrespondentData, this.userContext) };
                 }
 
                 if(!lotCaseTypes.Any(c => c == newAppDO.CaseType.Alias))

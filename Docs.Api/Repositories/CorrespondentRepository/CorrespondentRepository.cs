@@ -53,26 +53,6 @@ namespace Docs.Api.Repositories.CorrespondentRepository
             return returnValue;
         }
 
-        public CorrespondentDO GetCorrespondentFromOrganization(string orgName, string orgUin)
-        {
-            CorrespondentGroup correspondentGroup = this.unitOfWork.DbContext.Set<CorrespondentGroup>()
-                    .SingleOrDefault(e => e.Alias.ToLower() == "Applicants".ToLower());
-
-            var correspondentType = this.unitOfWork.DbContext.Set<CorrespondentType>()
-                .SingleOrDefault(e => e.Alias.ToLower() == "LegalEntity".ToLower());
-
-            return new CorrespondentDO()
-            {
-                CorrespondentGroupId = correspondentGroup.CorrespondentGroupId,
-                IsActive = true,
-                CorrespondentTypeId = correspondentType.CorrespondentTypeId,
-                CorrespondentTypeName = correspondentType.Name,
-                CorrespondentTypeAlias = correspondentType.Alias,
-                LegalEntityName = orgName,
-                LegalEntityBulstat = orgUin
-            };
-        }
-
         public CorrespondentDO CreateCorrespondent(CorrespondentDO corr, UserContext userContext)
         {
             Correspondent newCorr;
