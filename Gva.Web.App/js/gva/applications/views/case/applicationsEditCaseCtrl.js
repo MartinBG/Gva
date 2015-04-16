@@ -176,5 +176,15 @@
     'application'
   ];
 
+  ApplicationsEditCaseCtrl.$resolve = {
+    application: [
+      '$stateParams',
+      'Applications',
+      function ResolveApplication($stateParams, Applications) {
+        return Applications.get({ id: $stateParams.id }).$promise;
+      }
+    ]
+  };
+
   angular.module('gva').controller('ApplicationsEditCaseCtrl', ApplicationsEditCaseCtrl);
 }(angular, _));
