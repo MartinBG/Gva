@@ -35,7 +35,7 @@
     $scope.addMedical = function () {
       var modalInstance = scModal.open('newMedical', {
         person: $scope.person,
-        caseTypeId: $stateParams.caseTypeId,
+        caseTypeId: $scope.currentLicenceEdition.cases[0].caseType.nomValueId,
         appId: $stateParams.appId
       });
 

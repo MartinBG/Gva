@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
 using Common.Linq;
+using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Regs.Api.LotEvents;
@@ -28,6 +31,7 @@ namespace Gva.Api.Controllers.Persons
         private ILotEventDispatcher lotEventDispatcher;
         private INomRepository nomRepository;
         private UserContext userContext;
+        private ICaseTypeRepository caseTypeRepository;
 
         public PersonRatingsController(
             IUnitOfWork unitOfWork,
@@ -36,6 +40,7 @@ namespace Gva.Api.Controllers.Persons
             IPersonRepository personRepository,
             ILotEventDispatcher lotEventDispatcher,
             INomRepository nomRepository,
+            ICaseTypeRepository caseTypeRepository,
             UserContext userContext)
             : base("ratings", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
@@ -45,18 +50,34 @@ namespace Gva.Api.Controllers.Persons
             this.personRepository = personRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.nomRepository = nomRepository;
+            this.caseTypeRepository = caseTypeRepository;
             this.userContext = userContext;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewRating(int lotId)
+        public IHttpActionResult GetNewRating(int lotId, int? caseTypeId = null)
         {
             PersonRatingDO rating = new PersonRatingDO()
             {
                 Caa = this.nomRepository.GetNomValue("caa", "BGR")
             };
 
-            return Ok(new CaseTypePartDO<PersonRatingDO>(rating));
+            CaseDO caseDO = null;
+            if (caseTypeId.HasValue)
+            {
+                GvaCaseType caseType = this.caseTypeRepository.GetCaseType(caseTypeId.Value);
+                caseDO = new CaseDO()
+                {
+                    CaseType = new NomValue()
+                    {
+                        NomValueId = caseType.GvaCaseTypeId,
+                        Name = caseType.Name,
+                        Alias = caseType.Alias
+                    }
+                };
+            }
+
+            return Ok(new CaseTypePartDO<PersonRatingDO>(rating, caseDO));
         }
 
         [NonAction]

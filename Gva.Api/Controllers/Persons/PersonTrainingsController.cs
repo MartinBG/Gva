@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -20,6 +23,7 @@ namespace Gva.Api.Controllers.Persons
         private INomRepository nomRepository;
         private IFileRepository fileRepository;
         private ILotRepository lotRepository;
+        private ICaseTypeRepository caseTypeRepository;
         private string path = "personDocumentTrainings";
 
         public PersonTrainingsController(
@@ -27,6 +31,7 @@ namespace Gva.Api.Controllers.Persons
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             INomRepository nomRepository,
+            ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("personDocumentTrainings", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
@@ -34,10 +39,11 @@ namespace Gva.Api.Controllers.Persons
             this.nomRepository = nomRepository;
             this.fileRepository = fileRepository;
             this.lotRepository = lotRepository;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewTraining(int lotId)
+        public IHttpActionResult GetNewTraining(int lotId, int? caseTypeId = null)
         {
             PersonTrainingDO newTraining = new PersonTrainingDO()
             {
@@ -45,7 +51,22 @@ namespace Gva.Api.Controllers.Persons
                 Valid = this.nomRepository.GetNomValue("boolean", "yes")
             };
 
-            return Ok(new CaseTypePartDO<PersonTrainingDO>(newTraining));
+            CaseDO caseDO = null;
+            if (caseTypeId.HasValue)
+            {
+                GvaCaseType caseType = this.caseTypeRepository.GetCaseType(caseTypeId.Value);
+                caseDO = new CaseDO()
+                {
+                    CaseType = new NomValue()
+                    {
+                        NomValueId = caseType.GvaCaseTypeId,
+                        Name = caseType.Name,
+                        Alias = caseType.Alias
+                    }
+                };
+            }
+
+            return Ok(new CaseTypePartDO<PersonTrainingDO>(newTraining, caseDO));
         }
 
         [Route("exams")]

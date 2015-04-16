@@ -25,7 +25,8 @@
     $scope.addRating = function () {
       var modalInstance = scModal.open('newRating', {
         lotId: $stateParams.id,
-        appId: $stateParams.appId
+        appId: $stateParams.appId,
+        caseTypeId: $scope.currentLicenceEdition.cases[0].caseType.nomValueId
       });
 
       modalInstance.result.then(function (newRating) {

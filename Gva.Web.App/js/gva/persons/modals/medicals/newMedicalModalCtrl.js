@@ -49,7 +49,8 @@
       'scModalParams',
       function (PersonDocumentMedicals, scModalParams) {
         return PersonDocumentMedicals.newMedical({
-          id: scModalParams.person.id
+          id: scModalParams.person.id,
+          caseTypeId: scModalParams.caseTypeId
         }).$promise;
       }
     ]

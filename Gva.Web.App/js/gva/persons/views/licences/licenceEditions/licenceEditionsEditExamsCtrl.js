@@ -22,8 +22,8 @@
     $scope.addExam = function () {
       var modalInstance = scModal.open('newExam', {
         lotId: $stateParams.id,
-        caseTypeId: $stateParams.caseTypeId,
-        appId: $stateParams.appId
+        appId: $stateParams.appId,
+        caseTypeId: $scope.currentLicenceEdition.cases[0].caseType.nomValueId
       });
 
       modalInstance.result.then(function (newExam) {

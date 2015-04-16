@@ -58,7 +58,8 @@
       'scModalParams',
       function (PersonDocumentTrainings, scModalParams) {
         return PersonDocumentTrainings.newTraining({
-              id: scModalParams.lotId
+              id: scModalParams.lotId,
+              caseTypeId: scModalParams.caseTypeId
             }).$promise;
       }
     ]

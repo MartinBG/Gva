@@ -63,7 +63,8 @@
       'scModalParams',
       function (PersonRatings, scModalParams) {
         return PersonRatings.newRating({
-          id: scModalParams.lotId
+          id: scModalParams.lotId,
+          caseTypeId: scModalParams.caseTypeId
         }).$promise;
       }
     ]

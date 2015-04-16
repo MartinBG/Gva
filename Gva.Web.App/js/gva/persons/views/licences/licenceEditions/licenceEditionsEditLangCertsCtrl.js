@@ -28,9 +28,9 @@
 
       var modalInstance = scModal.open('newLangCert', {
         lotId: $stateParams.id,
-        caseTypeId: $stateParams.caseTypeId,
         appId: $stateParams.appId,
-        withoutCertsAliases: withoutCertsAliases
+        withoutCertsAliases: withoutCertsAliases,
+        caseTypeId: $scope.currentLicenceEdition.cases[0].caseType.nomValueId
       });
 
       modalInstance.result.then(function (newLangCert) {

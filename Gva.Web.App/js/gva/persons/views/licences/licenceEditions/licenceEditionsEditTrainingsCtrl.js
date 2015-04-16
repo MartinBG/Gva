@@ -24,7 +24,7 @@
     $scope.addTraining = function () {
       var modalInstance = scModal.open('newTraining', {
         lotId: $stateParams.id,
-        caseTypeId: $stateParams.caseTypeId,
+        caseTypeId: $scope.currentLicenceEdition.cases[0].caseType.nomValueId,
         appId: $stateParams.appId
       });
 

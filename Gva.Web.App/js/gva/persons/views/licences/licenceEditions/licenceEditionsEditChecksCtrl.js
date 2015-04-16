@@ -24,7 +24,7 @@
     $scope.addCheck = function () {
       var modalInstance = scModal.open('newCheck', {
         lotId: $stateParams.id,
-        caseTypeId: $stateParams.caseTypeId,
+        caseTypeId: $scope.currentLicenceEdition.cases[0].caseType.nomValueId,
         appId: $stateParams.appId
       });
 

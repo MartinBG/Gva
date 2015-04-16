@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
+using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Repositories.LotRepositories;
@@ -21,22 +24,25 @@ namespace Gva.Api.Controllers.Persons
     {
         private INomRepository nomRepository;
         private IUnitOfWork unitOfWork;
+        private ICaseTypeRepository caseTypeRepository;
 
         public PersonChecksController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             INomRepository nomRepository,
+            ICaseTypeRepository caseTypeRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("personDocumentChecks", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
             this.nomRepository = nomRepository;
             this.unitOfWork = unitOfWork;
+            this.caseTypeRepository = caseTypeRepository;
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewCheck(int lotId)
+        public IHttpActionResult GetNewCheck(int lotId, int? caseTypeId = null)
         {
             PersonCheckDO newCheck = new PersonCheckDO()
             {
@@ -45,7 +51,22 @@ namespace Gva.Api.Controllers.Persons
                 Reports = new List<RelatedReportDO>()
             };
 
-            return Ok(new CaseTypePartDO<PersonCheckDO>(newCheck));
+            CaseDO caseDO = null;
+            if (caseTypeId.HasValue)
+            {
+                GvaCaseType caseType = this.caseTypeRepository.GetCaseType(caseTypeId.Value);
+                caseDO = new CaseDO()
+                {
+                    CaseType = new NomValue()
+                    {
+                        NomValueId = caseType.GvaCaseTypeId,
+                        Name = caseType.Name,
+                        Alias = caseType.Alias
+                    }
+                };
+            }
+
+            return Ok(new CaseTypePartDO<PersonCheckDO>(newCheck, caseDO));
         }
 
         [Route("{partIndex}/report")]

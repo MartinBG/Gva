@@ -52,7 +52,8 @@
       'scModalParams',
       function (PersonDocumentChecks, scModalParams) {
         return PersonDocumentChecks.newCheck({
-          id: scModalParams.lotId
+          id: scModalParams.lotId,
+          caseTypeId: scModalParams.caseTypeId
         }).$promise;
       }
     ]
