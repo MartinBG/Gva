@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Data;
 using Gva.Api.Models.Views.Person;
+using Gva.Api.ModelsDO.Persons;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
-using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.Projections.Person
 {
@@ -42,14 +42,6 @@ namespace Gva.Api.Projections.Person
                      DocumentNumber = d.Content.DocumentNumber,
                      DocumentPersonNumber = d.Content.DocumentPersonNumber
                  });
-
-            var educations = parts.GetAll<PersonEducationDO>("personDocumentEducations")
-                .Select(d => new PersonDocumentDO()
-                {
-                    LotId = d.Part.LotId,
-                    PartIndex = d.Part.Index,
-                    DocumentNumber = d.Content.DocumentNumber
-                });
 
             var trainings = parts.GetAll<PersonTrainingDO>("personDocumentTrainings")
                 .Select(d => new PersonDocumentDO()
@@ -120,7 +112,6 @@ namespace Gva.Api.Projections.Person
 
             return documentIds
                 .Union(checks)
-                .Union(educations)
                 .Union(trainings)
                 .Union(others)
                 .Union(langCertificates)

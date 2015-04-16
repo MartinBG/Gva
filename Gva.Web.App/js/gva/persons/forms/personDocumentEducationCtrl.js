@@ -2,26 +2,14 @@
 (function (angular) {
   'use strict';
 
-  function PersonDocumentEducationCtrl($scope, scFormParams, Persons) {
+  function PersonDocumentEducationCtrl($scope, scFormParams) {
     $scope.isNew = scFormParams.isNew;
     $scope.caseTypeId = scFormParams.caseTypeId;
     $scope.hideCaseType = scFormParams.hideCaseType;
     $scope.appId = scFormParams.appId;
-
-    $scope.isUniqueDocData = function () {
-      return Persons
-        .isUniqueDocData({
-          documentNumber: $scope.model.part.documentNumber,
-          partIndex: $scope.model.partIndex
-        })
-      .$promise
-      .then(function (result) {
-        return result.isUnique;
-      });
-    };
   }
 
-  PersonDocumentEducationCtrl.$inject = ['$scope', 'scFormParams', 'Persons'];
+  PersonDocumentEducationCtrl.$inject = ['$scope', 'scFormParams'];
 
   angular.module('gva').controller('PersonDocumentEducationCtrl', PersonDocumentEducationCtrl);
 }(angular));
