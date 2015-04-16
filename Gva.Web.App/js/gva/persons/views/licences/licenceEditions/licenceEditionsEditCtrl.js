@@ -57,7 +57,9 @@
       var modalInstance = scModal.open('licenceEditionDoc', params);
 
       modalInstance.result.then(function () {
-        $state.reload();
+        return $state.go('root.persons.view.licences.view.editions.edit.ratings',
+          $stateParams,
+          { reload: true });
       });
 
       return modalInstance.opened;
