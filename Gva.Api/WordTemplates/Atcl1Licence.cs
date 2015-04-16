@@ -221,13 +221,14 @@ namespace Gva.Api.WordTemplates
                 var ratingTypes = rating.Content.RatingTypes.Count() == 0 ? string.Empty : string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code));
                 var ratingClass = rating.Content.RatingClass == null ? null : rating.Content.RatingClass.Code;
                 var authorization = rating.Content.Authorization == null ? null : rating.Content.Authorization.Code;
+                string sector = !string.IsNullOrEmpty(rating.Content.Sector) ? rating.Content.Sector.ToUpper() : null;
                 object result = null;
                 if (withIssueDate)
                 {
                     result = new
                     {
                         ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
-                        SECTOR = rating.Content.Sector,
+                        SECTOR = sector,
                         AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingTypes) ?
                             authorization :
                             string.Format(
@@ -244,7 +245,7 @@ namespace Gva.Api.WordTemplates
                     result = new
                     {
                         ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
-                        SECTOR = rating.Content.Sector,
+                        SECTOR = sector,
                         AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingTypes) ?
                             authorization :
                             string.Format(
