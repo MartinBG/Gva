@@ -62,7 +62,10 @@
       'PersonDocumentLangCerts',
       'scModalParams',
       function (PersonDocumentLangCerts, scModalParams) {
-        return PersonDocumentLangCerts.query({ id: scModalParams.lotId }).$promise;
+        return PersonDocumentLangCerts.query({
+          id: scModalParams.lotId,
+          caseTypeId: scModalParams.caseTypeId
+        }).$promise;
       }
     ]
   };

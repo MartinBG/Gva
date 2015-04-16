@@ -44,7 +44,10 @@
       'PersonDocumentChecks',
       'scModalParams',
       function (PersonDocumentChecks, scModalParams) {
-        return PersonDocumentChecks.query({ id: scModalParams.lotId }).$promise;
+        return PersonDocumentChecks.query({
+          id: scModalParams.lotId,
+          caseTypeId: scModalParams.caseTypeId
+        }).$promise;
       }
     ]
   };

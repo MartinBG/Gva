@@ -56,7 +56,8 @@
     $scope.addExistingRating = function () {
       var modalInstance = scModal.open('chooseRatings', {
         includedRatings: $scope.currentLicenceEdition.part.includedRatings,
-        lotId: $stateParams.id
+        lotId: $stateParams.id,
+        caseTypeId: $scope.currentLicenceEdition.cases[0].caseType.nomValueId
       });
 
       modalInstance.result.then(function (selectedRatings) {

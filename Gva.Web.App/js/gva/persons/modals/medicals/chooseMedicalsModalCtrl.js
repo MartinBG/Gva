@@ -45,7 +45,10 @@
       'PersonDocumentMedicals',
       'scModalParams',
       function (PersonDocumentMedicals, scModalParams) {
-        return PersonDocumentMedicals.query({ id: scModalParams.lotId }).$promise;
+        return PersonDocumentMedicals.query({ 
+          id: scModalParams.lotId,
+          caseTypeId: scModalParams.caseTypeId 
+        }).$promise;
       }
     ]
   };

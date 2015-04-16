@@ -52,7 +52,8 @@
       var modalInstance = scModal.open('chooseMedicals', {
         includedMedicals: $scope.currentLicenceEdition.part.includedMedicals,
         person: $scope.person,
-        lotId: $stateParams.id
+        lotId: $stateParams.id,
+        caseTypeId: $scope.currentLicenceEdition.cases[0].caseType.nomValueId
       });
 
       modalInstance.result.then(function (selectedMedicals) {

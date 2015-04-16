@@ -40,7 +40,8 @@
     $scope.addExistingTraining = function () {
       var modalInstance = scModal.open('chooseTrainings', {
         includedTrainings: $scope.currentLicenceEdition.part.includedTrainings,
-        lotId: $stateParams.id
+        lotId: $stateParams.id,
+        caseTypeId: $scope.currentLicenceEdition.cases[0].caseType.nomValueId
       });
 
       modalInstance.result.then(function (selectedTrainings) {

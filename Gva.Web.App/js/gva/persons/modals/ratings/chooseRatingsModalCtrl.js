@@ -32,7 +32,8 @@
     $scope.showAllRatings = function (event) {
       PersonRatings.getRatingsByValidity({ 
         id: scModalParams.lotId,
-        valid: !$(event.target).is(':checked')
+        valid: !$(event.target).is(':checked'),
+        caseTypeId: scModalParams.caseTypeId
       }).$promise.then(function (allRatings) {
         $scope.ratings =  $scope.filterRatings(allRatings);
       });
@@ -61,7 +62,10 @@
       'PersonRatings',
       'scModalParams',
       function (PersonRatings, scModalParams) {
-        return PersonRatings.getRatingsByValidity({ id: scModalParams.lotId }).$promise;
+        return PersonRatings.getRatingsByValidity({
+          id: scModalParams.lotId,
+          caseTypeId: scModalParams.caseTypeId
+        }).$promise;
       }
     ]
   };

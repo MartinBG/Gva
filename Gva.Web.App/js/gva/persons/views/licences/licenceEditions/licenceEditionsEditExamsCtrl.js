@@ -38,7 +38,8 @@
     $scope.addExistingExam = function () {
       var modalInstance = scModal.open('chooseExams', {
         includedExams: $scope.currentLicenceEdition.part.includedExams,
-        lotId: $stateParams.id
+        lotId: $stateParams.id,
+        caseTypeId: $scope.currentLicenceEdition.cases[0].caseType.nomValueId
       });
 
       modalInstance.result.then(function (selectedExams) {
