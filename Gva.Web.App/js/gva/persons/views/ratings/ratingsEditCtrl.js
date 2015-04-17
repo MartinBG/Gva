@@ -13,6 +13,7 @@
     $scope.rating = rating;
     $scope.lotId = $stateParams.id;
     $scope.caseTypeId = $stateParams.caseTypeId;
+    $scope.ratingPartIndex = $stateParams.ind;
 
     $scope.edit = function () {
       $scope.editRatingMode = 'edit';
@@ -27,8 +28,8 @@
         if ($scope.editRatingForm.$valid) {
           return PersonRatings
             .save({
-              id: $stateParams.id,
-              ind: $stateParams.ind,
+              id: $scope.lotId,
+              ind: $scope.ratingPartIndex,
               index: $stateParams.index
             }, $scope.rating, $scope.caseTypeId)
             .$promise
