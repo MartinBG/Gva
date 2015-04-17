@@ -240,7 +240,7 @@ namespace Gva.Api.WordTemplates
 
             return (from endorsment in endorsments
                  group endorsment by ((dynamic)endorsment).NAME into newGroup
-                 let d = newGroup.OrderByDescending(g => ((dynamic)g).DATE).FirstOrDefault()
+                 let d = newGroup.OrderBy(g => ((dynamic)g).DATE).FirstOrDefault()
                  select d)
                  .ToList<object>();
         }
