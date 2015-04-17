@@ -20,7 +20,7 @@
   </div>
   <div class="row">
     <sc-field type="float" ng-model="model.part.taxAmount" l10n-text="common.docApplicationDirective.taxAmount" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.currency" alias="'currencies'" l10n-text="common.docApplicationDirective.currency" class="col-sm-3 col-md-2"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.currency" alias="'currencies'" format-options="{{code}}" l10n-text="common.docApplicationDirective.currency" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="text" ng-model="model.part.taxNumber" l10n-text="common.docApplicationDirective.taxNumber" class="col-sm-2"></sc-field>
   </div>
   <div class="row">
