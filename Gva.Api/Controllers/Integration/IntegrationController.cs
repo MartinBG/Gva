@@ -444,6 +444,10 @@ namespace Gva.Api.Controllers.Integration
                     organizationData = lot.Index.GetPart<OrganizationDataDO>("organizationData").Content;
                     lotCaseTypes = organizationData.CaseTypes.Select(c => c.Alias).ToList();
                     List<int> corrIds = correspondents.Select(c => c.CorrespondentId).ToList();
+                    if (newAppDO.CorrespondentData == null)
+                    {
+                        newAppDO.CorrespondentData = this.integrationRepository.ConvertOrganizationDataToCorrespondent(organizationData);
+                    }
                     correspondentIds = corrIds.Count() > 0 ? corrIds : new List<int>() { this.integrationRepository.CreateCorrespondent(newAppDO.CorrespondentData, this.userContext) };
                 }
 
