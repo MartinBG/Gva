@@ -24,7 +24,7 @@ namespace Gva.Api.Models.Views.Person
 
         public DateTime DocDateValidFrom { get; set; }
 
-        public DateTime DocDateValidTo { get; set; }
+        public DateTime? DocDateValidTo { get; set; }
 
         public string Notes { get; set; }
 
@@ -50,6 +50,9 @@ namespace Gva.Api.Models.Views.Person
 
             this.Property(t => t.PartIndex)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            this.Property(t => t.DocDateValidTo)
+                .IsOptional();
 
             // Table & Column Mappings
             this.ToTable("GvaViewPersonRatingEditions");

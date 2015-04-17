@@ -58,6 +58,6 @@ namespace Gva.Api.ModelsDO.Persons
 
         public DateTime DocDateValidFrom { get; set; }
 
-        public DateTime DocDateValidTo { get; set; }
+        public DateTime? DocDateValidTo { get; set; }
     }
 }

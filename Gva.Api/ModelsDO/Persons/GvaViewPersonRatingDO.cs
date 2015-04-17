@@ -64,7 +64,7 @@ namespace Gva.Api.ModelsDO.Persons
 
         public DateTime LastDocDateValidFrom { get; set; }
 
-        public DateTime LastDocDateValidTo { get; set; }
+        public DateTime? LastDocDateValidTo { get; set; }
 
         public DateTime FirstDocDateValidFrom { get; set; }
 

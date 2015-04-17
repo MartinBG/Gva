@@ -127,8 +127,8 @@ namespace Gva.Api.Controllers.Persons
             { 
                 var editions = rating.Editions;
                 if (valid == true)
-                { 
-                    editions = editions.Where(e => DateTime.Compare(e.DocDateValidTo, DateTime.Now) >= 0).ToList();
+                {
+                    editions = editions.Where(e => !e.DocDateValidTo.HasValue || DateTime.Compare(e.DocDateValidTo.Value, DateTime.Now) >= 0).ToList();
                 }
                 if (editions.Count > 0)
                 {
