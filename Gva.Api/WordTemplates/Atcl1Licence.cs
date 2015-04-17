@@ -129,7 +129,7 @@ namespace Gva.Api.WordTemplates
                     NATIONALITY_EN = nationality != null ? nationality.TextContent.Get<string>("nationalityCodeCA") : null,
                     L_LICENCE_PRIV = this.GetLicencePrivileges(),
                     L_RATINGS = this.GetRatings(includedRatings, ratingEditions),
-                    ENDORSEMENT = Utils.FillBlankData(Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository), 2),
+                    ENDORSEMENT = Utils.FillBlankData(Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository), 3),
                     L_LANG_LEVEL = langLevel,
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
