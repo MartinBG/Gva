@@ -19,6 +19,10 @@
       <gva-person-flying-experience name="personFlyingExperienceForm" ng-model="personFlyingExperience" 
         sc-form-params="{ isNew: false, caseTypeId: caseTypeId, lotId: lotId, partIndex: partIndex}">
       </gva-person-flying-experience>
+
+      <gva-common-scanned-document name="personScannedDocumentForm" ng-model="personFlyingExperience.case"
+        sc-form-params="{ setPart: 'person', lotId: lotId}">
+      </gva-common-scanned-document>
     </div>
   </div>
 </ng-form>
