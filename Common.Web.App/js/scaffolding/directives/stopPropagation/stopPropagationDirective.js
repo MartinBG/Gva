@@ -1,6 +1,6 @@
 ﻿// Usage: <button ng-click="someHandler() sc-stop-propagation="click"> </button>
 // Usage: <button ng-click="someHandler() sc-stop-propagation="dblclick"> </button>
-// Usage: <button ng-click="someHandler() sc-stop-propagation> </button> default will stop click event
+// Usage: <button ng-click="someHandler() sc-stop-propagation> </button> default use click event
 
 /*global angular, $*/
 (function (angular, $) {

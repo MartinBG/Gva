@@ -9,11 +9,11 @@ var tasks = require('../gulp/tasks');
 var config = {
   version: '1.0.0',
   msbuild: {
-    projFile: '../Ems.Web.Host/Ems.Web.Host.csproj',
-    iisAppName: 'Ems',
+    projFile: '../Docs.Web.Host/Docs.Web.Host.csproj',
+    iisAppName: 'Docs',
     packageLocation: '../build/ems/ems%s.zip' //location is relative to the csproj file
   },
-  outputDir: '../Ems.Web.Host/App/',
+  outputDir: '../Docs.Web.Host/App/',
   jsDir: 'js/',
   cssDir: 'css/',
   templatesDir: 'templates/',
@@ -46,8 +46,11 @@ var config = {
       'bower_components/angular-ui-select2/src/select2.js',
       'bower_components/angular-ui-sortable/src/sortable.js',
       'bower_components/angular-ui-utils/modules/jq/jq.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/angular-bootstrap/dist/ui-bootstrap-tpls-0.10.0.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/textAngular/dist/textAngular.min.js',
+      'bower_components/textAngular/dist/textAngular-rangy.min.js',
       'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
       'bower_components/bootstrap-datepicker/js/locales/*.bg.js',
       'bower_components/jquery-ui/ui/jquery.ui.widget.js',
@@ -56,6 +59,7 @@ var config = {
       'bower_components/jquery-ui/ui/jquery.ui.sortable.js',
       'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',
       'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
+      'bower_components/typeahead.js/dist/typeahead.jquery.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/moment/moment.js',
       'bower_components/angular-scrollto/angular-scrollto.js',
@@ -78,7 +82,7 @@ var config = {
       'bower_components/angular-ui-select2/src/select2.js',
       'bower_components/angular-ui-sortable/src/sortable.js',
       'bower_components/angular-ui-utils/modules/jq/jq.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/angular-bootstrap/dist/ui-bootstrap-tpls-0.10.0.js',
       'bower_components/bootstrap/js/collapse.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
@@ -103,6 +107,7 @@ var config = {
       'bower_components/bootstrap-datepicker/css/datepicker3.css',
       'bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css',
       'bower_components/blueimp-file-upload/css/jquery.fileupload.css',
+      'bower_components/textAngular/src/textAngular.css',
       'css/*.css'
     ], { base: '.' });
   },

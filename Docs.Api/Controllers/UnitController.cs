@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Docs.Api.Repositories.UnitRepository;
 using Common.DomainValidation;
 using System.Threading;
+using Docs.Api.Enums;
 
 namespace Docs.Api.Controllers
 {
@@ -136,7 +137,10 @@ namespace Docs.Api.Controllers
         {
             if (objectWithRelation != null)
             {
-                throw new Exception("Unit can't be deleted, because other object has relation to it.");
+                //throw new Exception("Unit can't be deleted, because other object has relation to it.");
+                var validator = new DomainValidator();
+                validator.AddErrorMessage(DomainErrorCode.Unit_CannotBeDeleted_ExistingRelation);
+                validator.Validate();
             }
         }
 

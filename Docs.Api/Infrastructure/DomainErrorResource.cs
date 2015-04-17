@@ -1,9 +1,6 @@
 ﻿using Docs.Api.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Docs.Api.Infrastructure
 {
@@ -23,7 +20,7 @@ namespace Docs.Api.Infrastructure
             if (!dictionary.TryGetValue(domainErrorCode, out text))
             {
                 // fallback if resource is not entered
-                text = DomainErrorCode.Unit_UnitTypeIsNotUser.ToString();
+                text = domainErrorCode.ToString();
             }
 
             return text;

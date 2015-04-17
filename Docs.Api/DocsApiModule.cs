@@ -30,6 +30,7 @@ namespace Docs.Api
             moduleBuilder.RegisterType<UnitRepository>().As<IUnitRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<UnitBusinessLogic>().As<IUnitBusinessLogic>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<UnitUserRepository>().As<IUnitUserRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<Docs.Api.Infrastructure.DomainValidator>().As<Common.DomainValidation.IDomainValidator>().InstancePerLifetimeScope();
 
             //controllers
             moduleBuilder.RegisterType<CorrespondentController>().InstancePerLifetimeScope();

@@ -89,6 +89,18 @@
           filter: 'Филтър',
           refresh: 'Презареди',
           includeInactive: 'Включи неактивните',
+          editUnitTooltip: 'Промяна на организационна единица',
+          activateUnitTooltip: 'Активиране на организационна единица',
+          deactivateUnitTooltip: 'Деактивиране на организационна единица',
+          deleteUnitTooltip: 'Премахване на организационна единица',
+          addChildUnitTooltip: 'Добавяне на организационна единица',
+          attachUnitToUserTooltip: 'Прикачане на организационна единица към потребител',
+          detachUnitFromUserTooltip: 'Премахване на връзката между организационна единица'
+            + ' и потребител',
+          errors: {
+            Unit_CannotBeDeleted_ExistingRelation: 'Oрганизационна единица не може да бъде изтрита, поради връзки с други обекти',
+            Entity_CannotBeDeactivated: 'Oрганизационна единица не може да бъде деактивирана',
+          },
           edit: {
             classification: 'Класификация',
             classificationPermissions: 'Права'

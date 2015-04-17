@@ -12,7 +12,7 @@
     $scope.model = UnitUsersResource.query();
 
     $scope.selectUser = function (userId) {
-      UnitUsersResource.save({ id: unitId, userId: userId })
+      return UnitUsersResource.save({ id: unitId, userId: userId })
         .$promise.then(function () {
           return $modalInstance.close(true);
         });

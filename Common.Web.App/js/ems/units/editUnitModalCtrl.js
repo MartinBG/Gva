@@ -67,8 +67,8 @@
             continue;
           }
           var innerItem = array[j];
-          if (item.classificationId === innerItem.classificationId
-            && item.classificationPermissionId === innerItem.classificationPermissionId) {
+          if (item.classificationId === innerItem.classificationId &&
+            item.classificationPermissionId === innerItem.classificationPermissionId) {
             return false;
           }
         }

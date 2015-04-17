@@ -1,5 +1,6 @@
 ﻿using Common.Api.Models;
 using Common.Data;
+using Common.DomainValidation;
 using Docs.Api.Enums;
 using Docs.Api.Infrastructure;
 using Docs.Api.Models.DomainModels;
@@ -17,11 +18,13 @@ namespace Docs.Api.Repositories.UnitRepository
         private IUnitOfWork unitOfWork;
         private DbSet<Unit> unitsInContext;
         private IDocRepository docRepository;
+        private IDomainValidator validator;
 
-        public UnitRepository(IUnitOfWork unitOfWork, IDocRepository docRepository)
+        public UnitRepository(IUnitOfWork unitOfWork, IDocRepository docRepository, IDomainValidator validator)
         {
             this.unitOfWork = unitOfWork;
             this.docRepository = docRepository;
+            this.validator = validator;
             unitsInContext = unitOfWork.DbContext.Set<Unit>();
         }
 
@@ -296,11 +299,6 @@ namespace Docs.Api.Repositories.UnitRepository
 
         public void AssignUserToUnit(int unitId, int userId)
         {
-            var validator = new DomainValidator();
-            validator.AddErrorMessage(DomainErrorCode.Entity_NotFound);
-            validator.AddErrorMessage(DomainErrorCode.Entity_NotFound, "Unit", 12);
-            validator.Validate();
-
             var unit = unitsInContext.SingleOrDefault(e =>
                 e.UnitId == unitId
                 && (Docs.Api.Models.DomainModels.UnitType)e.UnitTypeId == Docs.Api.Models.DomainModels.UnitType.Employee

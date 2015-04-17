@@ -1,4 +1,6 @@
-﻿using Docs.Api.Models.DomainModels;
+﻿using Common.DomainValidation;
+using Docs.Api.Enums;
+using Docs.Api.Models.DomainModels;
 using Docs.Api.Repositories.UnitRepository;
 using System;
 using System.Collections.Generic;
@@ -9,10 +11,12 @@ namespace Docs.Api.BusinessLogic
     public class UnitBusinessLogic : IUnitBusinessLogic
     {
         IUnitRepository unitRepository;
+        IDomainValidator validator;
 
-        public UnitBusinessLogic(IUnitRepository unitRepository)
+        public UnitBusinessLogic(IUnitRepository unitRepository, IDomainValidator validator)
         {
             this.unitRepository = unitRepository;
+            this.validator = validator;
         }
 
         public IEnumerable<UnitDomainModel> GetAllUnitsHierarchy(bool includeInactive)
@@ -74,28 +78,28 @@ namespace Docs.Api.BusinessLogic
         public void SetUnitActiveStatus(int unitId, bool isActive)
         {
             if (isActive)
-            {
-                // Validate if parent unit is active.                
+            {                
                 var currentUnit = unitRepository.GetUnitById(unitId);
                 if (currentUnit.ParentUnitId.HasValue)
                 {
                     var parentUnit = unitRepository.GetUnitById(currentUnit.ParentUnitId.Value);
                     if (!parentUnit.IsActive)
                     {
-                        throw new Exception(string.Format("Unit with ID = {0} can't be activated because its parent is not active.", unitId));
+                        validator.AddErrorMessage(DomainErrorCode.Entity_CannotBeDeactivated);
+                        validator.Validate();
                     }
                 }
 
                 unitRepository.Activate(unitId);
             }
             else
-            {
-                // Validate if all child units in hierarchy are not active.
+            {                
                 var currentUnitHierarchy = GetSubHierarchyForUnit(unitId);
-                var result = AreAllChildsInactive(currentUnitHierarchy);
-                if (!result)
+
+                if (!AreAllChildsInactive(currentUnitHierarchy))
                 {
-                    throw new Exception(string.Format("Unit with ID = {0} can't be deactivated because its has active child units.", unitId));
+                    validator.AddErrorMessage(DomainErrorCode.Entity_CannotBeDeactivated);
+                    validator.Validate();
                 }
 
                 unitRepository.Deactivate(unitId);
@@ -106,14 +110,6 @@ namespace Docs.Api.BusinessLogic
         {
             var unitsHierarchy = unitRepository.GetListOfAllUnits()
                 .ToDictionary(e => e.UnitId);
-
-            foreach (var item in unitsHierarchy)
-            {
-                if (item.Value.ParentUnitId.HasValue)
-                {
-                    unitsHierarchy[item.Value.ParentUnitId.Value].AddChild(item.Value);
-                }
-            }
 
             return unitsHierarchy[id];
         }

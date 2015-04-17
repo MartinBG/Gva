@@ -94,31 +94,36 @@
                  ng-show="unit.isSelected && unit.isActive"
                  btn-click="editUnit(unit.unitId)"
                  icon="glyphicon-pencil"
-                 sc-stop-propagation></sc-button>      
+                 l10n-title="common.units.editUnitTooltip"
+                 sc-stop-propagation></sc-button>
       <!-- Deactivate Organization-->
       <sc-button class="ab-icon-button deactivate-icon"
                  ng-show="unit.isSelected && unit.isActive"
                  btn-click="setUnitActiveStatus(unit, false)"
                  icon="glyphicon-off"
-                 sc-stop-propagation></sc-button>      
+                 l10n-title="common.units.deactivateUnitTooltip"
+                 sc-stop-propagation></sc-button>
       <!--Activate organization-->
       <sc-button class="ab-icon-button activate-icon"
                  ng-show="unit.isSelected && !unit.isActive"
                  btn-click="setUnitActiveStatus(unit, true)"
                  icon="glyphicon-off"
-                 sc-stop-propagation></sc-button>      
+                 l10n-title="common.units.activateUnitTooltip"
+                 sc-stop-propagation></sc-button>
       <!--Delete organization-->
       <sc-button class="ab-icon-button delete-icon"
                  ng-show="unit.isSelected && canUnitBeDeleted(unit)"
                  btn-click="deleteUnit(unit)"
                  icon="glyphicon-remove"
-                 sc-stop-propagation></sc-button>      
+                 l10n-title="common.units.deleteUnitTooltip"
+                 sc-stop-propagation></sc-button>
       <!--Add new child unit-->
       <sc-button class="ab-icon-button"
                  ng-show="unit.isSelected"
                  btn-click="addNewUnit(unit.unitId, 'Department')"
                  icon="glyphicon-plus-sign"
-                 sc-stop-propagation></sc-button>      
+                 l10n-title="common.units.addChildUnitTooltip"
+                 sc-stop-propagation></sc-button>
     </div>
 
     <div class="child-unit"
@@ -179,7 +184,7 @@
         {{unit.childUnits[0].name}}
       </span>
 
-      <!--Edit employee-->      
+      <!--Edit employee-->
       <sc-button class="ab-icon-button"
                  ng-show="unit.isSelected && unit.childUnits[0].isActive"
                  btn-click="editUnit(unit.childUnits[0].unitId)"
@@ -203,6 +208,7 @@
                  btn-click="deleteUnit(unit.childUnits[0])"
                  sc-stop-propagation
                  class="ab-icon-button"
+                 l10n-title="common.units.deleteUnitTooltip"
                  icon="glyphicon-remove"></sc-button>
 
       <!--Attach user to unit-->
@@ -210,6 +216,7 @@
                  btn-click="attachUserToUnit(unit.childUnits[0].unitId)"
                  sc-stop-propagation
                  class="ab-icon-button"
+                 l10n-title="common.units.attachUnitToUserTooltip"
                  icon="glyphicon-forward"></sc-button>
 
       <!--User section-->
@@ -221,6 +228,7 @@
                    btn-click="detachUserFromUnit(unit.childUnits[0].unitId, unit.childUnits[0].user.userId)"
                    sc-stop-propagation
                    class="ab-icon-button"
+                   l10n-title="common.units.detachUnitFromUserTooltip"
                    icon="glyphicon-remove-circle"></sc-button>
       </span>
 
@@ -242,6 +250,12 @@ ualisation, without custom functionlaity overhead.
 </script>-->
 
 <div class="units-view">
+
+  <div>
+    <alert ng-repeat="error in errorMessages"
+           type="'danger'"
+           close="closeAlert($index)">{{error.message}}</alert>
+  </div>
 
   <label>
     <span l10n-text="common.units.filter"></span>
@@ -277,7 +291,7 @@ ualisation, without custom functionlaity overhead.
   <div ng-repeat="unit in model" ng-include="'unit_recursive_template.html'"></div>
   <!--<span class="glyphicon glyphicon-plus-sign" ng-click="addNewUnit(null, 'Department'); $event.stopPropagation();"></span>-->
   <!--add root unit-->
-  <sc-button class="ab-icon-button"             
+  <sc-button class="ab-icon-button"
              btn-click="addNewUnit(unit.unitId, 'Department')"
              icon="glyphicon-plus-sign"
              sc-stop-propagation></sc-button>

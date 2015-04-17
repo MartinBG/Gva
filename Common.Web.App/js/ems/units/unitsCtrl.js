@@ -7,13 +7,14 @@
     scModal,
     scMessage,
     UnitsResource,
-    UnitUsersResource,
-    $timeout) {
-
+    UnitUsersResource, 
+    l10n) {
+    
     $scope.model = unitsModel;
     $scope.filterValue = '';
     $scope.includeInactive = false;
     $scope.selectedUnit = null;
+    $scope.errorMessages = [];
 
     $scope.refresh = function () {
       return refreshData();
@@ -24,10 +25,21 @@
     };
 
     $scope.deleteUnit = function (unit) {
-      return UnitsResource.delete({ id: unit.unitId })
-        .$promise.then(function () {
-          return refreshData();
+      return scMessage('Моля, потвърдете изтриването на организационна единица.')
+        .then(function (result) {          
+          if (result === 'OK') {
+            return UnitsResource.delete({ id: unit.unitId })
+              .$promise.then(function () {
+                return refreshData();
+              }, function (response) {
+                showResourceError(response);
+              });
+          }
         });
+    };
+
+    $scope.closeAlert = function (index) {
+      $scope.errorMessages.splice(index, 1);
     };
 
     $scope.setCollapsedStateOfAll = function (state) {
@@ -42,11 +54,10 @@
 
     $scope.setUnitActiveStatus = function (unit, isActive) {
       return UnitsResource.setActiveStatus({ id: unit.unitId, isActive: isActive }, null)
-         .$promise.then(function () {
-           //unit.isActive = isActive;
+         .$promise.then(function () {           
            return refreshData();
-         }, function () {
-           // error
+         }, function (response) {
+           showResourceError(response);
          });
     };
 
@@ -97,17 +108,17 @@
       return UnitsResource.get({}, { unitId: unitId })
         .$promise.then(function (unit) {
 
-        var modalInstance = scModal.open('editUnitModal', {
-          isEditMode: true,
-          unit: unit
-        });
+          var modalInstance = scModal.open('editUnitModal', {
+            isEditMode: true,
+            unit: unit
+          });
 
-        return modalInstance.result.then(function (returnedResult) {
-          if (returnedResult) {            
-            return refreshData();
-          }
+          return modalInstance.result.then(function (returnedResult) {
+            if (returnedResult) {
+              return refreshData();
+            }
+          });
         });
-      });
     };
 
     $scope.attachUserToUnit = function (unitId) {
@@ -126,12 +137,23 @@
       return scMessage('Моля, потвърдете премахването на връзката с потребител.')
         .then(function (result) {
           if (result === 'OK') {
-            return UnitUsersResource.remove({ id: unitId, userId: userId }).$promise.then(function () {
+            return UnitUsersResource.remove({ id: unitId, userId: userId }).$promise
+              .then(function () {
               return refreshData();
             });
           }
         });
     };
+
+    function showResourceError(response) {
+      if (response.status === 422) {
+        for (var i = 0; i < response.data.messages.length; i++) {
+          $scope.errorMessages.push({
+            message: l10n.get('common.units.errors.' + response.data.messages[i].domainErrorCode)
+          });
+        }
+      }
+    }
 
     function refreshData() {
       return UnitsResource.query({ includeInactive: $scope.includeInactive })
@@ -181,7 +203,7 @@
 
   UnitsCtrl.$inject = ['$scope', '$state', '$stateParams',
     'unitsModel', 'scModal', 'scMessage',
-    'UnitsResource', 'UnitUsersResource', '$timeout'];
+    'UnitsResource', 'UnitUsersResource', 'l10n'];
 
   UnitsCtrl.$resolve = {
     unitsModel: ['$stateParams', 'UnitsResource',
