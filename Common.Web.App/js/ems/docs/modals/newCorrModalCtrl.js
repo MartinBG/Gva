@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function NewCorrModalCtrl(
@@ -39,18 +39,32 @@
   ];
 
   NewCorrModalCtrl.$resolve = {
-    corr: ['Integration','scModalParams',
-      function (Integration, scModalParams) {
-        return Integration.convertLotToCorrespondent({
-          lotId: scModalParams.lotId
-        })
-          .$promise
-          .then(function (corr) {
-            return corr;
+    corr: ['$q', 'Nomenclatures', 'Corrs', 'Integration','scModalParams',
+      function ($q, Nomenclatures, Corrs, Integration, scModalParams) {
+        if (scModalParams.lotId) {
+          return Integration.convertLotToCorrespondent({
+            lotId: scModalParams.lotId
+          }).$promise
+            .then(function (corr) {
+              return corr;
+            });
+        } else {
+          return $q.all({
+            corrTypes: Nomenclatures.query({ alias: 'correspondentType' }).$promise,
+            corr: Corrs.getNew().$promise
+          }).then(function (res) {
+            var corrType = _(res.corrTypes).filter({
+                alias: 'BulgarianCitizen'
+              }).first();
+              res.corr.correspondentTypeId = corrType.nomValueId;
+              res.corr.correspondentType = corrType;
+             
+            return res.corr;
           });
+        }
       }
     ]
   };
 
   angular.module('ems').controller('NewCorrModalCtrl', NewCorrModalCtrl);
-}(angular));
+}(angular, _));
