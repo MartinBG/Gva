@@ -8,7 +8,7 @@
     <sc-column title="persons.ratingSearch.ratingTypeOrRatingLevel" has-content="true">
        {{item.personRatingLevel.code || item.ratingTypes || (item.aircraftTypeGroup.code || (item.locationIndicator ? item.locationIndicator.code : '') + ' ' + (item.sector? item.sector : ''))}}
     </sc-column>
-    <sc-column data="(ratingClass.code || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : '')" title="persons.ratingSearch.classOrCategory" class="wrap">
+    <sc-column data="(ratingClass.code || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : '') || aircraftTypeCategory.code" title="persons.ratingSearch.classOrCategory" class="wrap">
     </sc-column>
     <sc-column data="((authorization && authorization.code) || '') + ' ' + (limitations ? limitations : '')" title="persons.ratingSearch.authorizationAndLimitations" class="wrap">
     </sc-column>

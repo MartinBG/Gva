@@ -344,6 +344,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.RatingLevel)
                 .Include(e => e.RatingClass)
                 .Include(e => e.AircraftTypeGroup)
+                .Include(e => e.AircraftTypeCategory)
                 .Include(e => e.Authorization)
                 .Include(e => e.LocationIndicator)
                 .Include(e => e.Editions)
