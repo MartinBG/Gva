@@ -36,7 +36,7 @@ namespace Gva.Api.Controllers.Persons
         {
             PersonMedicalDO newMedical = new PersonMedicalDO()
             {
-                DocumentNumberPrefix = "MED BG",
+                DocumentNumberPrefix = "BGR",
                 DocumentDateValidFrom = DateTime.Now
             };
 
