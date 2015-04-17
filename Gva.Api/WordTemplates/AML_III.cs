@@ -132,7 +132,6 @@ namespace Gva.Api.WordTemplates
                     CATEGORIES = this.GetCategories(includedRatings, validCodes),
                     IS_DATE = lastEdition.DocumentDateValidFrom,
                     NA = categoryNP.Length == 0 ? "NOT APPLICABLE" : " ",
-                    IS_DATE2 = lastEdition.DocumentDateValidFrom,
                     LIC_NO3 = licenceNumber,
                     LIC_NO4 = licenceNumber,
                     LIC_NO41 = licenceNumber,
