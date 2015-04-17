@@ -11,6 +11,11 @@
       newLangLevel: {
         method: 'GET',
         url: 'api/persons/:id/personDocumentLangCertificates/newLangLevel'
+      },
+      getLangCertsByValidity: {
+        method: 'GET',
+        url: 'api/persons/:id/personDocumentLangCertificates/byValidity',
+        isArray: true
       }
     });
   }]);

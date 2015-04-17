@@ -5,14 +5,19 @@
   function ChooseLangCertsModalCtrl(
     $scope,
     $modalInstance,
+    PersonDocumentLangCerts,
     scModalParams,
     langCerts
   ) {
     $scope.selectedLangCerts = [];
 
-    $scope.langCerts = _.filter(langCerts, function (langCert) {
-      return !_.contains(scModalParams.includedLangCerts, langCert.partIndex);
-    });
+    $scope.filterLangCerts = function (langCerts) {
+      return _.filter(langCerts, function (langCert) {
+        return !_.contains(scModalParams.includedLangCerts, langCert.partIndex);
+      });
+    };
+
+    $scope.langCerts = $scope.filterLangCerts(langCerts);
 
     $scope.addLangCerts = function () {
       var includedLangCerts = _.filter(langCerts, function (langCert) {
@@ -35,6 +40,16 @@
       }
     };
 
+    $scope.showAllLangCerts = function (event) {
+      PersonDocumentLangCerts.getLangCertsByValidity({ 
+        id: scModalParams.lotId,
+        valid: !$(event.target).is(':checked'),
+        caseTypeId: scModalParams.caseTypeId
+      }).$promise.then(function (allLangCerts) {
+        $scope.langCerts =  $scope.filterLangCerts(allLangCerts);
+      });
+    };
+
     $scope.cancel = function () {
       return $modalInstance.dismiss('cancel');
     };
@@ -53,6 +68,7 @@
   ChooseLangCertsModalCtrl.$inject = [
     '$scope',
     '$modalInstance',
+    'PersonDocumentLangCerts',
     'scModalParams',
     'langCerts'
   ];
@@ -62,7 +78,7 @@
       'PersonDocumentLangCerts',
       'scModalParams',
       function (PersonDocumentLangCerts, scModalParams) {
-        return PersonDocumentLangCerts.query({
+        return PersonDocumentLangCerts.getLangCertsByValidity({
           id: scModalParams.lotId,
           caseTypeId: scModalParams.caseTypeId
         }).$promise;

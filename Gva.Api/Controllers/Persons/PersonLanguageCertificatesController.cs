@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
@@ -21,6 +22,7 @@ namespace Gva.Api.Controllers.Persons
     {
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
+        private ILotRepository lotRepository;
 
         public PersonLanguageCertificatesController(
             IUnitOfWork unitOfWork,
@@ -34,6 +36,7 @@ namespace Gva.Api.Controllers.Persons
         {
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
+            this.lotRepository = lotRepository;
         }
 
         [Route("new")]
@@ -73,6 +76,23 @@ namespace Gva.Api.Controllers.Persons
             };
 
             return Ok(langLevel);
+        }
+
+        [Route("byValidity")]
+        public IHttpActionResult GetLangCertsByValidity(int lotId, int? caseTypeId = null, bool? valid = true)
+        {
+            var langCerts = this.lotRepository.GetLotIndex(lotId).Index.GetParts<PersonLangCertDO>("personDocumentLangCertificates").ToList();
+            if (valid == true)
+            {
+                langCerts = langCerts
+                    .Where(e => !e.Content.DocumentDateValidTo.HasValue || DateTime.Compare(e.Content.DocumentDateValidTo.Value, DateTime.Now) >= 0)
+                    .ToList();
+            }
+
+            List<CaseTypePartDO<PersonLangCertDO>> langCertDOs = new List<CaseTypePartDO<PersonLangCertDO>>();
+            langCerts.ForEach(l => langCertDOs.Add(new CaseTypePartDO<PersonLangCertDO>(l)));
+
+            return Ok(langCertDOs);
         }
     }
 }

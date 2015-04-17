@@ -10,6 +10,11 @@
     l10n-text="persons.chooseLangCertsModal.errorMessage">
   </div>
   <div class="well-sm panel-body">
+    <div class="form-group">
+      <label class="control-label" l10n-text="persons.chooseLangCertsModal.showAll" class="col-sm-3 col-md-2"></label>
+      <input type="checkbox" sc-click="showAllLangCerts($event)"/>
+    </div>
+
     <sc-datatable items="langCerts" filterable="true" pageable="true" sortable="true" default-sort="part.documentDateValidFrom">
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
         <input type="checkbox" ng-checked="selectedLangCerts | contains:item" sc-click="selectLangCert($event, item)">
