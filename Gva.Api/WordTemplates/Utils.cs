@@ -233,7 +233,7 @@ namespace Gva.Api.WordTemplates
                     endorsments.Add(new
                     {
                         NAME = rating.Content.Authorization.Code,
-                        DATE = firstRatingEdition.Content.DocumentDateValidFrom
+                        DATE = firstRatingEdition.Content.DocumentDateValidFrom.Value
                     });
                 }
             };
@@ -241,7 +241,7 @@ namespace Gva.Api.WordTemplates
             return (from endorsment in endorsments
                  group endorsment by ((dynamic)endorsment).NAME into newGroup
                  let d = newGroup.OrderByDescending(g => ((dynamic)g).DATE).FirstOrDefault()
-                 select new { newGroup.Key, d })
+                 select d)
                  .ToList<object>();
         }
     }
