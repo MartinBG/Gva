@@ -194,10 +194,15 @@ namespace Gva.Api.WordTemplates
                     r.Content.RatingTypes.Count() == 0 ? string.Empty : string.Join(", ", r.Content.RatingTypes.Select(rt => rt.Code))).Trim())
                 .Select(g =>
                 {
+                    var rating = g.Select(r => r.Part).First();
+                    var firstRatingEdition = lotRepository.GetLotIndex(rating.LotId)
+                        .Index.GetParts<PersonRatingEditionDO>("ratingEditions")
+                        .Where(e => e.Content.RatingPartIndex == rating.Index).OrderByDescending(e => e.Content.Index).Last();
+
                     return new
                     {
                         NAME = g.Key,
-                        DATE = g.Min(r => ratingEditions.Where(e => e.Content.RatingPartIndex == r.Part.Index).OrderBy(e => e.Content.Index).Last().Content.DocumentDateValidFrom)
+                        DATE = firstRatingEdition.Content.DocumentDateValidFrom
                     };
                 }).ToList<object>();
 
