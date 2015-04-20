@@ -100,6 +100,7 @@
           errors: {
             Unit_CannotBeDeleted_ExistingRelation: 'Oрганизационна единица не може да бъде изтрита, поради връзки с други обекти',
             Entity_CannotBeDeactivated: 'Oрганизационна единица не може да бъде деактивирана',
+            Entity_CannotBeActivated: 'Oрганизационна единица не може да бъде активирана',
           },
           edit: {
             classification: 'Класификация',

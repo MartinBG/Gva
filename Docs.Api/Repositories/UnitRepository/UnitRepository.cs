@@ -186,7 +186,7 @@ namespace Docs.Api.Repositories.UnitRepository
                 UnitRelations = new List<UnitRelation> {
                     new UnitRelation {
                         ParentUnitId = model.ParentUnitId,
-                        RootUnitId = model.ParentUnitId.HasValue ? model.ParentUnitId.Value : model.UnitId
+                        RootUnitId = model.ParentUnitId.HasValue ? model.RootUnitId : model.UnitId
                     }
                 },
                 UnitClassifications = new List<UnitClassification>()

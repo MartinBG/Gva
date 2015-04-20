@@ -13,6 +13,7 @@ namespace Docs.Api.Enums
         Entity_NotFoundOrNotActive,
         Entity_AlreadyExistInRelation,
         Entity_CannotBeDeactivated,
+        Entity_CannotBeActivated,
         Unit_NotFound,
         Unit_NotFoundOrNotActive,
         Unit_UnitTypeIsNotUser,

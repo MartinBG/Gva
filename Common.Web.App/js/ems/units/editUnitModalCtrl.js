@@ -12,10 +12,17 @@
     $scope.form = {};
 
     if (scModalParams.unitType === 'Department') {
-      $scope.unitTypes = [
-        { value: 'Department', name: 'Организация' },
-        { value: 'Position', name: 'Длъжност' }
-      ];
+      if (scModalParams.parentId) {
+        $scope.unitTypes = [
+          { value: 'Department', name: 'Организация' },
+          { value: 'Position', name: 'Длъжност' }
+        ];
+      } else {
+        $scope.unitTypes = [
+          { value: 'Department', name: 'Организация' },          
+        ];
+      }
+
     } else if (scModalParams.unitType === 'Employee') {
       $scope.unitTypes = [
         { value: 'Employee', name: 'Служител' }
