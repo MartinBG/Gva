@@ -50,8 +50,12 @@
     <Content Include="js\common\filters\lodashFilters.js" />
     <Content Include="js\common\login\loginModal.html" />
     <Content Include="js\common\login\loginModalCtrl.js" />
+    <Content Include="js\common\nomenclatures\docTypeController.js" />
+    <Content Include="js\common\nomenclatures\docTypeGroupView.html" />
+    <Content Include="js\common\nomenclatures\docTypeView.html" />
     <Content Include="js\common\nomenclatures\resources\NomenclatureValuesRsrc.js" />
     <Content Include="js\common\nomenclatures\resources\NomenclaturesRsrc.js" />
+    <Content Include="js\common\nomenclatures\docTypeGroupController.js" />
     <Content Include="js\common\nomenclatures\views\categoryNoms.html" />
     <Content Include="js\common\nomenclatures\views\categoryNomsCtrl.js" />
     <Content Include="js\common\nomenclatures\views\nomenclatureValuesEdit.html" />

@@ -394,6 +394,21 @@ namespace Docs.Api.Controllers
             return Ok(results);
         }
 
+        [Route("docTypeGroup")]
+        [HttpPost]
+        public IHttpActionResult PostDocTypeGroup(DocTypeGroup model)
+        {
+            // Electronic Services can't be edited from the UI.
+            model.IsElectronicService = false;
+
+            unitOfWork.DbContext.Set<DocTypeGroup>()
+                .Add(model);
+
+            unitOfWork.Save();
+
+            return Ok();
+        }
+
         [Route("docType/{id:int}")]
         public IHttpActionResult GetDocType(int id)
         {
@@ -434,6 +449,21 @@ namespace Docs.Api.Controllers
                 .ToList();
 
             return Ok(results);
+        }
+
+        [Route("docType")]
+        [HttpPost]
+        public IHttpActionResult PostDocType(DocType model)
+        {
+            // Electronic Services can't be edited from the UI.
+            model.IsElectronicService = false;
+
+            unitOfWork.DbContext.Set<DocType>()
+                .Add(model);
+
+            unitOfWork.Save();
+
+            return Ok();
         }
 
         [Route("docStatus/{id:int}")]

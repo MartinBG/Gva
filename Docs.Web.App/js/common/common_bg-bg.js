@@ -123,7 +123,9 @@
         'root.users': 'Потребители',
         'root.users.new': 'Нов потребител',
         'root.users.edit': 'Редакция',
-        'root.units': 'Организационна структура'
+        'root.units': 'Организационна структура',
+        'root.nomenclatures.docTypes': 'Видове документи',
+        'root.nomenclatures.docTypeGroups': 'Групи видове документи',
       }
     });
   }]);
