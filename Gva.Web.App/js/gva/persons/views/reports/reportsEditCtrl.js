@@ -35,7 +35,10 @@
               .save({ id: $scope.lotId, ind: $stateParams.ind }, $scope.report)
               .$promise
               .then(function () {
-                return $state.go('root.persons.view.reports.search');
+                return $state.transitionTo(
+                  'root.persons.view.reports.edit',
+                  $stateParams,
+                  {reload: true});
               });
           }
         });

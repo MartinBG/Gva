@@ -26,7 +26,7 @@
       var modalInstance = scModal.open('choosePerson', {showPersonTitle: true});
 
       modalInstance.result.then(function (selectedPerson) {
-         $scope.createCheck(selectedPerson);
+          $scope.createCheck(selectedPerson);
       });
 
       return modalInstance.opened;

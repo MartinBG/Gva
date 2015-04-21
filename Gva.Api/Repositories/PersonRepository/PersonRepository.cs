@@ -375,7 +375,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 .PartIndex;
         }
 
-        public bool IsUniqueDocData(
+        public GvaViewPersonDocument IsUniqueDocData(
             string documentNumber = null,
             int? documentPersonNumber = null,
             int? partIndex = null,
@@ -387,19 +387,22 @@ namespace Gva.Api.Repositories.PersonRepository
             DateTime? date = dateValidFrom.HasValue ? dateValidFrom.Value.Date : (DateTime?)null;
 
             var predicate = PredicateBuilder.True<GvaViewPersonDocument>()
-                .AndStringMatches(d => d.DocumentNumber, documentNumber, true)
-                .AndStringMatches(d => d.Publisher, publisher, true)
-                .AndEquals(d => d.DocumentPersonNumber.Value, documentPersonNumber)
-                .AndEquals(d => d.TypeId.Value, typeId)
-                .AndEquals(d => d.RoleId.Value, roleId)
-                .AndEquals(d => d.DateValidFrom.Value, date);
+                .And(d => (d.DocumentNumber == null && documentNumber == null) || (d.DocumentNumber == documentNumber))
+                .And(d => (d.Publisher == null && publisher == null) || (d.Publisher == publisher))
+                .And(d => (!d.DocumentPersonNumber.HasValue && !documentPersonNumber.HasValue) || (d.DocumentPersonNumber.Value == documentPersonNumber.Value))
+                .And(d => (!d.TypeId.HasValue && !typeId.HasValue) || (d.TypeId.Value == typeId.Value))
+                .And(d => (!d.RoleId.HasValue && !roleId.HasValue) || (d.RoleId.Value == roleId.Value))
+                .And(d => (!d.DateValidFrom.HasValue && !date.HasValue) || (d.DateValidFrom.Value == date));
 
             if(partIndex.HasValue)
             {
                 predicate = predicate.And(d => d.PartIndex != partIndex);
             }
 
-            return !this.unitOfWork.DbContext.Set<GvaViewPersonDocument>().Where(predicate).Any();
+            return this.unitOfWork.DbContext.Set<GvaViewPersonDocument>()
+                .Where(predicate)
+                .OrderByDescending(r => r.DocumentPersonNumber)
+                .SingleOrDefault();
         }
 
         public bool IsUniqueLicenceNumber(string licenceTypeCode, int? licenceNumber)

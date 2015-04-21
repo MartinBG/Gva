@@ -13,7 +13,7 @@
       sc-validate="{ unique: isUniqueDocData }" validations="{unique: 'errorTexts.notUniqueDocData'}"></sc-field>
     <sc-field type="int" ng-model="model.part.documentPersonNumber" l10n-text="persons.personCommonDocDirective.documentPersonNumber"
        sc-validate="{ unique: isUniqueDocData }" validations="{unique: 'errorTexts.notUniqueDocData'}" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="int" ng-model="lastGroupNumber" l10n-text="persons.personCommonDocDirective.groupDocNumber" ng-if="lastGroupNumber" ng-readonly="true" class="col-sm-4 col-md-3"></sc-field>
+    <sc-field type="int" ng-model="lastGroupNumber" l10n-text="persons.personCommonDocDirective.groupDocNumber" ng-if="lastGroupNumber || lastGroupNumber === 0" ng-readonly="true" class="col-sm-4 col-md-3"></sc-field>
   </div>
   <div class="row">
     <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true"

@@ -377,7 +377,7 @@ namespace Gva.Api.Controllers.Persons
             string publisher = null, 
             DateTime? dateValidFrom = null)
         {
-            bool isUnique = this.personRepository.IsUniqueDocData(
+            GvaViewPersonDocument existingDoc = this.personRepository.IsUniqueDocData(
                 documentNumber: documentNumber,
                 documentPersonNumber: documentPersonNumber,
                 partIndex: partIndex,
@@ -386,17 +386,12 @@ namespace Gva.Api.Controllers.Persons
                 publisher: publisher,
                 dateValidFrom: dateValidFrom);
 
-            if (!isUnique)
+            if (existingDoc != null)
             {
-                var lastDocumentWithThisNumber = this.unitOfWork.DbContext.Set<GvaViewPersonDocument>()
-                    .Where(d => d.DocumentNumber == documentNumber)
-                    .OrderByDescending(d => d.DocumentPersonNumber)
-                    .FirstOrDefault();
-
                 return Ok(new
                 {
                     isUnique = false,
-                    lastExistingGroupNumber = lastDocumentWithThisNumber != null? lastDocumentWithThisNumber.DocumentPersonNumber : null
+                    lastExistingGroupNumber = existingDoc.DocumentPersonNumber != null? existingDoc.DocumentPersonNumber : 0
                 });
             }
             else

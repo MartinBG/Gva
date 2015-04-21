@@ -9,63 +9,63 @@
   </div>
   <div class="row">
     <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personReportDirective.documentNumber" class="col-sm-3 col-md-2"
-       required sc-validate="{ invalidDocData: isValidDocData }" sc-validate-immediate="true"
+       required sc-validate="{ invalidDocData: isValidDocData }"
        validations="{invalidDocData: 'errorTexts.notUniqueDocData', required: 'default'}"></sc-field>
     <sc-field type="date" ng-model="model.part.date" l10n-text="persons.personReportDirective.date" 
-      sc-validate="{ unique: isUniqueDocData }"  sc-validate-immediate="true" validations="{unique: 'errorTexts.notUniqueDocData'}" class="col-sm-3 col-md-2"></sc-field>
+      sc-validate="{ unique: isUniqueDocData }" validations="{unique: 'errorTexts.notUniqueDocData'}" class="col-sm-3 col-md-2"></sc-field>
   </div>
-
-  <h5 class="form-header" style="margin-top: 10px" l10n-text="persons.personReportDirective.includedChecks"></h5>
-  <div class="row" ng-if="!form.$readonly">
-    <div class="col-sm-2" style="margin:10px 0px">
-    <sc-button btn-click="addCheck()" text="persons.personReportDirective.addCheck" ng-disabled="form.$invalid" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button> 
+  <div ng-if="model.partIndex">
+    <h5 class="form-header" style="margin-top: 10px" l10n-text="persons.personReportDirective.includedChecks"></h5>
+    <div class="row" ng-if="!form.$readonly">
+      <div class="col-sm-2" style="margin:10px 0px">
+      <sc-button btn-click="addCheck()" text="persons.personReportDirective.addCheck" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button> 
+      </div>
     </div>
-  </div>
 
-  <table class="table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th style="width: 1px" ng-if="model.part.includedChecks.length"></th>
-        <th style="width: 1px" ng-if="model.part.includedChecks.length && !form.$readonly"></th>
-        <th l10n-text="persons.personReportDirective.checksTable.personLin"></th>
-        <th l10n-text="persons.personReportDirective.checksTable.documentNumber"></th>
-        <th l10n-text="persons.personReportDirective.checksTable.personCheckDocumentType"></th>
-        <th l10n-text="persons.personReportDirective.checksTable.personCheckDocumentRole"></th>
-        <th l10n-text="persons.personReportDirective.checksTable.documentDateValidFrom"></th>
-        <th l10n-text="persons.personReportDirective.checksTable.documentDateValidTo"></th>
-        <th l10n-html="persons.personReportDirective.checksTable.ratingType"></th>
-        <th l10n-text="persons.personReportDirective.checksTable.ratingClass"></th>
-        <th l10n-html="persons.personReportDirective.checksTable.authorization"></th>
-        <th l10n-html="persons.personReportDirective.checksTable.licenceType"></th>
-        <th l10n-text="persons.personReportDirective.checksTable.valid"></th>
-        <th l10n-text="persons.personReportDirective.checksTable.ratingValue"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="sort-disabled" ng-if="!model.part.includedChecks.length">
-        <td colspan="13" class="text-center" l10n-text="persons.personReportDirective.checksTable.noChecks"></td>
-      </tr>
-      <tr ng-repeat="check in includedChecks">
-        <td ng-if="model.part.includedChecks.length">
-          <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.checks.edit', params: {id: check.lotId, ind: check.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-        </td>
-        <td ng-if="model.part.includedChecks.length && !form.$readonly">
-          <sc-button name="deleteCheckBtn" class="btn btn-xs btn-danger" ng-disabled="form.$readonly" btn-click="removeCheck(check)" icon="glyphicon-remove"></sc-button>
-        </td>
-        <td>{{check.person.lin}}</td>
-        <td>{{check.documentNumber}}</td>
-        <td>{{check.documentType.name}}</td>
-        <td>{{check.documentRole.name}}</td>
-        <td>{{check.documentDateValidFrom | date:'mediumDate'}}</td>
-        <td>{{check.documentDateValidTo | date:'mediumDate'}}</td>
-        <td>{{check.ratingTypes && check.ratingTypes.length > 0 ? (check.ratingTypes | pluck:'code' | join:', ') :(check.sector ? check.sector : '')}}</td>
-        <td>{{check.ratingClass.code}}</td>
-        <td>{{check.authorization.code}}</td>
-        <td>{{check.licenceType.code}}</td>
-        <td>{{check.valid.name}}</td>
-        <td>{{check.personCheckRatingValue ? check.personCheckRatingValue.name + '/' + check.personCheckRatingValue.nameAlt : ''}}</td>
-      </tr>
-    </tbody>
-  </table>
-
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th style="width: 1px" ng-if="model.part.includedChecks.length"></th>
+          <th style="width: 1px" ng-if="model.part.includedChecks.length && !form.$readonly"></th>
+          <th l10n-text="persons.personReportDirective.checksTable.personLin"></th>
+          <th l10n-text="persons.personReportDirective.checksTable.documentNumber"></th>
+          <th l10n-text="persons.personReportDirective.checksTable.personCheckDocumentType"></th>
+          <th l10n-text="persons.personReportDirective.checksTable.personCheckDocumentRole"></th>
+          <th l10n-text="persons.personReportDirective.checksTable.documentDateValidFrom"></th>
+          <th l10n-text="persons.personReportDirective.checksTable.documentDateValidTo"></th>
+          <th l10n-html="persons.personReportDirective.checksTable.ratingType"></th>
+          <th l10n-text="persons.personReportDirective.checksTable.ratingClass"></th>
+          <th l10n-html="persons.personReportDirective.checksTable.authorization"></th>
+          <th l10n-html="persons.personReportDirective.checksTable.licenceType"></th>
+          <th l10n-text="persons.personReportDirective.checksTable.valid"></th>
+          <th l10n-text="persons.personReportDirective.checksTable.ratingValue"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="sort-disabled" ng-if="!model.part.includedChecks.length">
+          <td colspan="13" class="text-center" l10n-text="persons.personReportDirective.checksTable.noChecks"></td>
+        </tr>
+        <tr ng-repeat="check in includedChecks">
+          <td ng-if="model.part.includedChecks.length">
+            <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.checks.edit', params: {id: check.lotId, ind: check.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+          </td>
+          <td ng-if="model.part.includedChecks.length && !form.$readonly">
+            <sc-button name="deleteCheckBtn" class="btn btn-xs btn-danger" ng-disabled="form.$readonly" btn-click="removeCheck(check)" icon="glyphicon-remove"></sc-button>
+          </td>
+          <td>{{check.person.lin}}</td>
+          <td>{{check.documentNumber}}</td>
+          <td>{{check.documentType.name}}</td>
+          <td>{{check.documentRole.name}}</td>
+          <td>{{check.documentDateValidFrom | date:'mediumDate'}}</td>
+          <td>{{check.documentDateValidTo | date:'mediumDate'}}</td>
+          <td>{{check.ratingTypes && check.ratingTypes.length > 0 ? (check.ratingTypes | pluck:'code' | join:', ') :(check.sector ? check.sector : '')}}</td>
+          <td>{{check.ratingClass.code}}</td>
+          <td>{{check.authorization.code}}</td>
+          <td>{{check.licenceType.code}}</td>
+          <td>{{check.valid.name}}</td>
+          <td>{{check.personCheckRatingValue ? check.personCheckRatingValue.name + '/' + check.personCheckRatingValue.nameAlt : ''}}</td>
+        </tr>
+      </tbody>
+    </table>
+  <div>
 </ng-form>
