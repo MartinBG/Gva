@@ -454,7 +454,6 @@
         'root.docs.edit.stages.edit': 'Редакция на етап',
         'root.docs.edit.stages.end': 'Приключване на етап',
         'root.docs.edit.case': 'Преписка',
-        'root.docs.edit.case.linkApp': 'Свържи със заявление',
         'root.docs.edit.case.casePart': 'Смяна на част на преписка',
         'root.docs.edit.case.docType': 'Техническа редакция на документ',
         'root.docs.edit.case.caseFinish': 'Приключване на преписка',
