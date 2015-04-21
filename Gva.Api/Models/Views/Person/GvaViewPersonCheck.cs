@@ -37,7 +37,7 @@ namespace Gva.Api.Models.Views.Person
 
         public DateTime DocumentDateValidFrom { get; set; }
 
-        public DateTime DocumentDateValidTo { get; set; }
+        public DateTime? DocumentDateValidTo { get; set; }
 
         public string Publisher { get; set; }
 
