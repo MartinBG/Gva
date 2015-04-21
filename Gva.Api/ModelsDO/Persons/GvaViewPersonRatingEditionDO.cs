@@ -21,6 +21,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.PersonRatingLevel = rating.RatingLevel;
             this.RatingClass = rating.RatingClass;
             this.AircraftTypeGroup = rating.AircraftTypeGroup;
+            this.AircraftTypeCategory = rating.AircraftTypeCategory;
             this.Authorization = rating.Authorization;
             this.RatingSubClasses = edition.RatingSubClasses;
             this.Limitations = edition.Limitations;
@@ -47,6 +48,8 @@ namespace Gva.Api.ModelsDO.Persons
         public NomValue RatingClass { get; set; }
 
         public NomValue AircraftTypeGroup { get; set; }
+
+        public NomValue AircraftTypeCategory { get; set; }
 
         public NomValue Authorization { get; set; }
 

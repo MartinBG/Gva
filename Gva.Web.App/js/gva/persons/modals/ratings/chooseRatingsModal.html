@@ -19,7 +19,7 @@
       </sc-column>
       <sc-column data="personRatingLevel.name || ratingTypes || aircraftTypeGroup.code || (locationIndicator ? locationIndicator.code + (sector ? ' ' + sector : '') : '')" title="persons.chooseRatingsModal.ratingTypeOrRatingLevel">
       </sc-column>
-      <sc-column data="aircraftTypeGroup.name || ((ratingClass.code || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : ''))  || aircraftTypeCategory.code" title="persons.chooseRatingsModal.classOrCategory">
+      <sc-column data="((ratingClass.code || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : ''))  || aircraftTypeCategory.code" title="persons.chooseRatingsModal.classOrCategory">
       </sc-column>
       <sc-column data="((authorization && authorization.code) || '') + ' ' + (limitations || '')" title="persons.chooseRatingsModal.authorizationAndLimitations">
       </sc-column>

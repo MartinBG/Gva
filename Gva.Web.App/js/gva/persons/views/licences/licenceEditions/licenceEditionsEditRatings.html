@@ -30,8 +30,8 @@
           <td ng-if="currentLicenceEdition.part.includedRatings.length && !changeOrderMode && isLast">
             <sc-button name="deleteRatingBtn" class="btn btn-xs btn-danger" btn-click="removeRating(rating)" icon="glyphicon-remove"></sc-button>
           </td>
-          <td>{{rating.personRatingLevel.code || rating.ratingTypes || (rating.locationIndicator ? rating.locationIndicator.code : '') + (rating.sector? ' ' + rating.sector : '')}}</td>
-          <td>{{rating.aircraftTypeGroup.name || ((rating.ratingClass.code || '') + ( rating.ratingSubClasses ? ' (' + rating.ratingSubClasses + ')' : '')) || aircraftTypeCategory.code}}</td>
+          <td>{{rating.personRatingLevel.name || rating.ratingTypes || rating.aircraftTypeGroup.code || (rating.locationIndicator ? rating.locationIndicator.code + (rating.sector ? ' ' + rating.sector : '') : '')}}</td>
+          <td>{{(rating.ratingClass.code || '') + ( rating.ratingSubClasses ? ' (' + rating.ratingSubClasses + ')' : '') || rating.aircraftTypeCategory.code}}</td>
           <td>{{((rating.authorization && rating.authorization.code) || '') + ' ' + (rating.limitations ? rating.limitations : '')}}</td>
           <td><span>{{rating.docDateValidFrom | date:'mediumDate'}}</span>
           </td>
