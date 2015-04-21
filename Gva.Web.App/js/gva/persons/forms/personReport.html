@@ -58,7 +58,7 @@
           <td>{{check.documentRole.name}}</td>
           <td>{{check.documentDateValidFrom | date:'mediumDate'}}</td>
           <td>{{check.documentDateValidTo | date:'mediumDate'}}</td>
-          <td>{{check.ratingTypes && check.ratingTypes.length > 0 ? (check.ratingTypes | pluck:'code' | join:', ') :(check.sector ? check.sector : '')}}</td>
+          <td>{{check.ratingTypes || (check.locationIndicator ? check.locationIndicator.code : '')  + ' ' + (check.sector ? check.sector : '')}}</td>
           <td>{{check.ratingClass.code}}</td>
           <td>{{check.authorization.code}}</td>
           <td>{{check.licenceType.code}}</td>
