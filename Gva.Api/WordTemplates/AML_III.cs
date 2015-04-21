@@ -157,7 +157,10 @@ namespace Gva.Api.WordTemplates
             foreach (var group66 in aircraftGroups66)
             {
                 IEnumerable<int> categoriesIds = includedRatings
-                    .Where(rating => rating.Content.AircraftTypeCategory != null && rating.Content.AircraftTypeCategory.ParentValueId == group66.NomValueId)
+                    .Where(rating => rating.Content.AircraftTypeCategory != null &&
+                        (rating.Content.AircraftTypeCategory.ParentValueId == group66.NomValueId 
+                        || (rating.Content.AircraftTypeCategory.Code =="C 1" && group66.Code == "9")
+                        || (rating.Content.AircraftTypeCategory.Code == "C 2" && group66.Code == "10")))
                     .Select(rating => rating.Content.AircraftTypeCategory.NomValueId);
 
                 IEnumerable<NomValue> categories = categoriesIds.Select(categoryId => this.nomRepository.GetNomValue("aircraftClases66", categoryId));
@@ -180,8 +183,7 @@ namespace Gva.Api.WordTemplates
                     "n/a" : aliases.Contains("B 2") ?
                     aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 2")).First().Code : "X",
                     CAT43 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("C")).Any() ?
-                    "n/a" : aliases.Contains("C") ?
-                    aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("C")).First().Code : "X",
+                    "n/a" : aliases.Contains("C") ? "C" : "X",
                     CAT5 = !aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 3")).Any() ?
                     "n/a" : aliases.Contains("B 3") ?
                     aircraftClases66.Where(e => e.ParentValueId == group66.NomValueId && e.Code.Contains("B 3")).First().Code : "X",
