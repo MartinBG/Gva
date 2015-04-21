@@ -13,7 +13,7 @@
     <sc-field type="text" ng-model="model.uin" ng-change="setAgeSex()" sc-validate="{ validValue: uinValid, unique: isUniqueUin }" l10n-text="persons.personDataDirective.uin" validations="{validValue: 'errorTexts.uin', unique: 'errorTexts.notUniqueUin'}" class="col-sm-3 col-md-2"></sc-field>
     <sc-field type="nomenclature" ng-model="model.sex" alias="'gender'" ng-required="true" l10n-text="persons.personDataDirective.sex" class="col-sm-3 col-md-2"></sc-field>
     <sc-field-group class="col-sm-4 col-md-3" text="persons.personDataDirective.lin" validations="{required: 'default'}" field-name="lin">
-      <button type="button" class="btn btn-sm btn-default dropdown-toggle" ng-disabled="!isNew" data-toggle="dropdown" style="width: 110px">
+      <button type="button" class="btn btn-sm btn-default dropdown-toggle" ng-disabled="form.$readonly || (!isNew && (model.linType.code !== 'noLin' && model.linType.code !== 'none'))" data-toggle="dropdown" style="width: 110px">
         {{model.linType.name || 'Избери'}}
         <span class="caret"></span>
       </button>
@@ -22,7 +22,7 @@
           <a ng-click="setLin(type)">{{type.name}}</a>
         </li>
       </ul>
-      <sc-int name="lin" ng-model="model.lin" ng-disabled="model.linType.code === 'noLin' || !isNew" ng-required="model.linType.code !== 'noLin' && isNew"></sc-int>
+      <sc-int name="lin" ng-model="model.lin" ng-disabled="form.$readonly || (!isNew && model.linType.code !== 'none')" ng-required="model.linType.code !== 'noLin' && isNew"></sc-int>
     </sc-field-group>
   </div>
   <div class="row">
