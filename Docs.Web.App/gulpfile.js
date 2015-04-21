@@ -64,7 +64,8 @@ var config = {
       'bower_components/moment/moment.js',
       'bower_components/angular-scrollto/angular-scrollto.js',
       'bower_components/autofill-event/src/autofill-event.js',
-      'bower_components/jquery-treetable/javascripts/src/jquery.treetable.js'
+      'bower_components/jquery-treetable/javascripts/src/jquery.treetable.js',
+      'bower_components/angular-xeditable/dist/js/xeditable.js'
     ], { base: '.' });
   },
   lib_ie8: function () {
@@ -108,6 +109,7 @@ var config = {
       'bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css',
       'bower_components/blueimp-file-upload/css/jquery.fileupload.css',
       'bower_components/textAngular/src/textAngular.css',
+      'bower_components/angular-xeditable/dist/css/xeditable.css',
       'css/*.css'
     ], { base: '.' });
   },

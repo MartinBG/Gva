@@ -30,7 +30,8 @@
             users: 'Потребители',
             units: 'Организационна структура',
             noms: 'Номенклатури',
-            nomenclatures: 'Общи номенклатури'
+            nomenclatures: 'Общи номенклатури',
+            docNomenclatures: 'Номенклатури деловодна'
           },
           help: {
             title: 'Помощ',
@@ -95,8 +96,7 @@
           deleteUnitTooltip: 'Премахване на организационна единица',
           addChildUnitTooltip: 'Добавяне на организационна единица',
           attachUnitToUserTooltip: 'Прикачане на организационна единица към потребител',
-          detachUnitFromUserTooltip: 'Премахване на връзката между организационна единица'
-            + ' и потребител',
+          detachUnitFromUserTooltip: 'Премахване на връзката между организационна единица и потребител',
           errors: {
             Unit_CannotBeDeleted_ExistingRelation: 'Oрганизационна единица не може да бъде изтрита, поради връзки с други обекти',
             Entity_CannotBeDeactivated: 'Oрганизационна единица не може да бъде деактивирана',
@@ -111,6 +111,10 @@
             userName: 'Потребителско име',
             fullName: 'Име'
           }
+        },
+        docNomenclatures: {
+          docType: 'Видове документи',
+          docTypeGroup: 'Групи видове документи'
         }
       },
       commonLabels: {
@@ -124,8 +128,9 @@
         'root.users.new': 'Нов потребител',
         'root.users.edit': 'Редакция',
         'root.units': 'Организационна структура',
-        'root.nomenclatures.docTypes': 'Видове документи',
-        'root.nomenclatures.docTypeGroups': 'Групи видове документи',
+        'root.docNomenclatures': 'Номенклатури деловодна',
+        'root.docNomenclatures.docTypes': 'Видове документи',
+        'root.docNomenclatures.docTypeGroups': 'Групи видове документи',
       }
     });
   }]);

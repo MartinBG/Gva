@@ -12,7 +12,8 @@
     'common.templates',
     // @endif
     'l10n',
-    'l10n-tools'
+    'l10n-tools',
+    'xeditable'
   ])
 
   .config(['scModalProvider', function (scModalProvider) {
@@ -29,15 +30,14 @@
       .state(['root.users.search'                       , ''                      , ['@root'                      , 'js/common/users/views/search.html'                        , 'UsersSearchCtrl'             ]])
       .state(['root.users.new'                          , '/new'                  , ['@root'                      , 'js/common/users/views/edit.html'                          , 'UsersEditCtrl'               ]])
       .state(['root.users.edit'                         , '/:userId'              , ['@root'                      , 'js/common/users/views/edit.html'                          , 'UsersEditCtrl'               ]])
-      .state(['root.nomenclatures'                      , '/nomenclatures'                                                                                                                                      ])
-      .state(['root.nomenclatures.search'               , ''                      , ['@root'                      , 'js/common/nomenclatures/views/nomenclatures.html'         , 'NomenclaturesCtrl'           ]])
-
-      .state(['root.nomenclatures.docTypes'              , '/docTypes'              , ['@root', 'js/common/nomenclatures/docTypeView.html', 'DocTypeController']])
-      .state(['root.nomenclatures.docTypeGroups'         , '/docTypeGroups'         , ['@root', 'js/common/nomenclatures/docTypeGroupView.html', 'DocTypeGroupController']])
-
-      .state(['root.nomenclatures.edit'                 , '/:id'                  , ['@root'                      , 'js/common/nomenclatures/views/nomenclaturesEdit.html'     , 'NomenclaturesEditCtrl'       ]])
-      .state(['root.nomenclatures.search.values'        , '/:nomId/values'        , ['@root.nomenclatures.search' , 'js/common/nomenclatures/views/nomenclatureValues.html'    , 'NomenclatureValuesCtrl'      ]])
-      .state(['root.nomenclatures.search.values.edit', '/:id', ['@root.nomenclatures.search', 'js/common/nomenclatures/views/nomenclatureValuesEdit.html', 'NomenclaturevaluesEditCtrl'                        ]])
-      .state(['root.units'                              , '/units'                , ['@root'                      , 'js/ems/units/unitsView.html'                              , 'UnitsCtrl'                   ]]);
+      //.state(['root.nomenclatures'                      , '/nomenclatures'                                                                                                                                      ])
+      //.state(['root.nomenclatures.search'               , ''                      , ['@root'                      , 'js/common/nomenclatures/views/nomenclatures.html'         , 'NomenclaturesCtrl'           ]])
+      //.state(['root.nomenclatures.edit'                 , '/:id'                  , ['@root'                      , 'js/common/nomenclatures/views/nomenclaturesEdit.html'     , 'NomenclaturesEditCtrl'       ]])
+      //.state(['root.nomenclatures.search.values'        , '/:nomId/values'        , ['@root.nomenclatures.search' , 'js/common/nomenclatures/views/nomenclatureValues.html'    , 'NomenclatureValuesCtrl'      ]])
+      //.state(['root.nomenclatures.search.values.edit', '/:id', ['@root.nomenclatures.search', 'js/common/nomenclatures/views/nomenclatureValuesEdit.html', 'NomenclaturevaluesEditCtrl'                        ]])
+      .state(['root.units'                              , '/units'                , ['@root'                      , 'js/ems/units/unitsView.html'                              , 'UnitsCtrl'                   ]])
+      .state(['root.docNomenclatures', '/docNomenclatures?category', ['@root', 'js/common/nomenclatures/docNomenclaturesView.html']])
+      .state(['root.docNomenclatures.docTypes'          , '/docTypes', ['@root.docNomenclatures', 'js/common/nomenclatures/docTypeView.html', 'DocNomenclatureGenericController']])
+      .state(['root.docNomenclatures.docTypeGroups'     , '/docTypeGroups', ['@root.docNomenclatures', 'js/common/nomenclatures/docTypeGroupView.html', 'DocNomenclatureGenericController']]);
   }]);
 }(angular));
