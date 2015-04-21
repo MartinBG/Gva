@@ -7,7 +7,7 @@
       <div ng-if="!hideFiles">
         <div ng-if="!hideCaseTypeData">
           <sc-field type="text" ng-model="file.caseType.name" l10n-text="common.scannedDocumentDirective.caseType" ng-disabled class="col-sm-2"></sc-field>
-          <sc-field type="text" ng-model="file.bookPageNumber" sc-validate="{ unique: isUniqueBPN(file) }" validations="{unique: 'errorTexts.notUniqueBPN'}" l10n-text="common.scannedDocumentDirective.bookPageNumber" class="col-sm-2 col-md-1"></sc-field>
+          <sc-field type="text" ng-model="file.bookPageNumber" l10n-text="common.scannedDocumentDirective.bookPageNumber" class="col-sm-2 col-md-1"></sc-field>
           <sc-field type="int" ng-model="file.pageCount" min="0" l10n-text="common.scannedDocumentDirective.pageCount" validations="{min: 'default'}" class="col-sm-2 col-md-1"></sc-field>
         </div>
         <div class="form-group col-sm-3">

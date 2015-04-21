@@ -5,7 +5,6 @@
   function CommonScannedDocCtrl(
     $scope,
     Nomenclatures,
-    GvaParts,
     scFormParams
   ) {
     var isMultipleMode = _.isArray($scope.model);
@@ -32,29 +31,11 @@
         return !file.isDeleted;
       };
     };
-
-    $scope.isUniqueBPN = function (file) {
-      return function () {
-        if (!file.bookPageNumber) {
-          return true;
-        }
-
-        return GvaParts.isUniqueBPN({
-          lotId: scFormParams.lotId,
-          caseTypeId: file.caseType.nomValueId,
-          bookPageNumber: file.bookPageNumber,
-          fileId: file.lotFileId
-        }).$promise.then(function (data) {
-          return data.isUnique;
-        });
-      };
-    };
   }
 
   CommonScannedDocCtrl.$inject = [
     '$scope',
     'Nomenclatures',
-    'GvaParts',
     'scFormParams'
   ];
 

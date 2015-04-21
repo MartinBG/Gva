@@ -7,7 +7,7 @@
 
   <div class="row">
     <sc-field type="text" name="appDocName" ng-model="model.caseType.name" l10n-text="applications.applicationDocument.caseType" class="col-sm-2" ng-readonly="true"></sc-field>
-    <sc-field type="text" ng-model="model.bookPageNumber" sc-validate="{ unique: isUniqueBPN() }" validations="{unique: 'errorTexts.notUniqueBPN'}" l10n-text="applications.applicationDocument.pageIndex" class="col-sm-2"></sc-field>
+    <sc-field type="text" ng-model="model.bookPageNumber" l10n-text="applications.applicationDocument.pageIndex" class="col-sm-2"></sc-field>
     <sc-field type="int" ng-model="model.pageCount" min="0" l10n-text="applications.applicationDocument.pageNumber" validations="{min: 'default'}" class="col-sm-2"></sc-field>
     <div class="form-group col-sm-6" sc-has-error="appDocFile">
       <label class="control-label" l10n-text="applications.applicationDocument.attachment"></label>

@@ -59,16 +59,6 @@ namespace Gva.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("isUniqueBPN")]
-        public IHttpActionResult IsUniqueBPN(int lotId, int caseTypeId, string bookPageNumber, int? fileId = null)
-        {
-            return Ok(new
-            {
-                isUnique = this.fileRepository.IsUniqueBPN(lotId, caseTypeId, bookPageNumber, fileId)
-            });
-        }
-
         [Route("getNewCase")]
         public IHttpActionResult GetNewCase(int lotId, int caseTypeId, int? appId = null)
         {
