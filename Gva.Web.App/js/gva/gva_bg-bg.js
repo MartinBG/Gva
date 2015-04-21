@@ -2072,6 +2072,7 @@
           type: 'Вид',
           settlement: 'Населено място',
           address: 'Адрес',
+          addressAlt: 'Адрес (латиница)',
           postalCode: 'П.К.',
           phone: 'Телефон',
           valid: 'Актуален'
