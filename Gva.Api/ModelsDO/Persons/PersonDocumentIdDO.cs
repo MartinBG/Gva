@@ -18,7 +18,6 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "DocumentDateValidFrom is required.")]
         public DateTime? DocumentDateValidFrom { get; set; }
 
-        [Required(ErrorMessage = "DocumentDateValidTo is required.")]
         public DateTime? DocumentDateValidTo { get; set; }
 
         [Required(ErrorMessage = "DocumentPublisher is required.")]
