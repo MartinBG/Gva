@@ -384,9 +384,8 @@ namespace Docs.Api.Controllers
                 .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
-                    nomValueId = e.DocTypeGroupId,
+                    id = e.DocTypeGroupId,
                     name = e.Name,
-                    alias = e.Name, //todo is doctypegroup going to have alias?
                     isActive = e.IsActive
                 })
                 .ToList();
@@ -403,6 +402,22 @@ namespace Docs.Api.Controllers
 
             unitOfWork.DbContext.Set<DocTypeGroup>()
                 .Add(model);
+
+            unitOfWork.Save();
+
+            return Ok();
+        }
+
+        [Route("docTypeGroup/{id:int}")]
+        [HttpPost]
+        public IHttpActionResult PostDocTypeGroup(int id, DocTypeGroup model)
+        {
+            var context = unitOfWork.DbContext.Set<DocTypeGroup>();
+            var entitiy = context.SingleOrDefault(e=>
+                e.DocTypeGroupId == id);
+
+            entitiy.Name = model.Name;
+            entitiy.IsActive = model.IsActive;
 
             unitOfWork.Save();
 

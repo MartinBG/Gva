@@ -37,7 +37,7 @@
       //.state(['root.nomenclatures.search.values.edit', '/:id', ['@root.nomenclatures.search', 'js/common/nomenclatures/views/nomenclatureValuesEdit.html', 'NomenclaturevaluesEditCtrl'                        ]])
       .state(['root.units'                              , '/units'                , ['@root'                      , 'js/ems/units/unitsView.html'                              , 'UnitsCtrl'                   ]])
       .state(['root.docNomenclatures', '/docNomenclatures?category', ['@root', 'js/common/nomenclatures/docNomenclaturesView.html']])
-      .state(['root.docNomenclatures.docTypes'          , '/docTypes', ['@root.docNomenclatures', 'js/common/nomenclatures/docTypeView.html', 'DocNomenclatureGenericController']])
+      .state(['root.docNomenclatures.docTypes'          , '/docTypes', ['@root.docNomenclatures', 'js/common/nomenclatures/docTypeView.html', 'DocTypeController']])
       .state(['root.docNomenclatures.docTypeGroups'     , '/docTypeGroups', ['@root.docNomenclatures', 'js/common/nomenclatures/docTypeGroupView.html', 'DocNomenclatureGenericController']]);
   }]);
 }(angular));

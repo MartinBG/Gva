@@ -87,6 +87,8 @@
     <Compile Include="Controllers\DocController.cs" />
     <Compile Include="Controllers\DocNomController.cs" />
     <Compile Include="Controllers\CorrespondentController.cs" />
+    <Compile Include="Controllers\NomenclaturesManagementController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\UnitController.cs">
       <SubType>Code</SubType>
     </Compile>

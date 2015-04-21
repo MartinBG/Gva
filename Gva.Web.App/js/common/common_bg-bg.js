@@ -251,14 +251,20 @@
         },
         docNomenclatures: {
           docType: 'Видове документи',
-          docTypeGroup: 'Групи видове документи'
+          docTypeGroup: 'Групи видове документи',
+          removeIrregularityDeadline: 'Време за отстраняване на нередности',
+          executionDeadline: 'Време за изпълнение',
+          register: 'Регистър'
         }
       },
       commonLabels: {
         save: 'Запази',
         cancel: 'Откажи',
         type: 'Тип',
-        name: 'Име'
+        name: 'Име',
+        active: 'Активен',
+        edit: 'Редактирай',
+        add: 'Добави'
       },
       states: {
         'root.users': 'Потребители',

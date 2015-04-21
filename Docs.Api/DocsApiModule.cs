@@ -38,6 +38,8 @@ namespace Docs.Api
             moduleBuilder.RegisterType<AbbcdnController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<DocNomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<UnitController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<RegisterController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<NomenclaturesManagementController>().InstancePerLifetimeScope();
 
             string enableEmailsJobConf = ConfigurationManager.AppSettings["Docs.Api:EnableEmailsJob"];
 

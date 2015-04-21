@@ -1,3 +1,98 @@
-<div class="nomenclatures-view">
+<table class="table table-bordered table-hover table-condensed">
 
-</div>
+  <tr style="font-weight: bold">
+    <td style="width:35%" l10n-text="commonLabels.name"></td>
+    <td style="width:35%" l10n-text="common.docNomenclatures.docTypeGroup">grupa</td>
+    <td style="width:20%" l10n-text="common.docNomenclatures.register"></td>
+    <td style="width:20%" l10n-text="common.docNomenclatures.executionDeadline"></td>
+    <td style="width:20%" l10n-text="common.docNomenclatures.removeIrregularityDeadline"></td>
+    <td style="width:20%" l10n-text="commonLabels.active"></td>
+    <td style="width:10%" l10n-text="commonLabels.edit"></td>
+  </tr>
+
+  <tr ng-repeat="nomenclature in model">
+
+    <td>
+      <span editable-text="nomenclature.name"
+            e-name="name"
+            e-form="rowform"
+            e-required>
+        {{ nomenclature.name || 'empty' }}
+      </span>
+    </td>
+
+    <td>
+      <span editable-select="nomenclature.docTypeGroupId"
+            e-ng-options="group.id as group.name for group in docTypeGroups"
+            e-name="docTypeGroupId"
+            e-required
+            e-form="rowform">
+        {{displayDocTypeGroupName(nomenclature.docTypeGroupId)}}
+      </span>
+    </td>
+
+    <td>
+      <span editable-select="nomenclature.primaryRegisterIndexId"
+            e-name="primaryRegisterIndexId"
+            e-form="rowform"
+            e-ng-options="s.id as s.name for s in registers">
+        {{displayRegisterName(nomenclature.primaryRegisterIndexId)}}
+      </span>
+    </td>
+
+    <td>
+      <span editable-number="nomenclature.executionDeadline"
+            e-name="executionDeadline"
+            e-form="rowform">
+        {{nomenclature.executionDeadline}}
+      </span>
+    </td>
+
+    <td>
+      <span editable-number="nomenclature.removeIrregularitiesDeadline"
+            e-name="removeIrregularitiesDeadline"
+            e-form="rowform">
+        {{nomenclature.removeIrregularitiesDeadline}}
+      </span>
+    </td>
+
+    <td>
+      <span editable-checkbox="nomenclature.isActive"
+            class="glyphicon"
+            ng-class="nomenclature.isActive ? 'glyphicon-ok-sign' : 'glyphicon-remove-circle'"
+            e-name="isActive"
+            e-form="rowform">
+      </span>
+    </td>
+
+    <td style="white-space: nowrap">
+      <form editable-form
+            name="rowform"
+            onbeforesave="save($data, nomenclature)"
+            ng-show="rowform.$visible"
+            class="form-buttons form-inline"
+            shown="!nomenclature.id"
+            oncancel="cancel(nomenclature)">
+        <button type="submit"
+                ng-disabled="rowform.$waiting"
+                class="btn btn-xs btn-primary">
+          <span class="glyphicon glyphicon-floppy-disk"></span>
+        </button>
+        <sc-button btn-click="rowform.$cancel()"
+                   class="btn btn-xs btn-primary"
+                   icon="glyphicon-ban-circle"></sc-button>
+      </form>
+
+      <div class="buttons" ng-show="!rowform.$visible">
+        <sc-button btn-click="rowform.$show()"
+                   class="btn btn-xs btn-primary"
+                   icon="glyphicon-pencil"></sc-button>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<sc-button btn-click="add()"
+           class="btn btn-xs btn-primary"
+           icon="glyphicon-plus"
+           ng-disabled="readonly"></sc-button>

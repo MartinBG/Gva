@@ -71,11 +71,9 @@ namespace Docs.Api.Models
                 .HasMaxLength(500);
 
             this.Property(t => t.ApplicationName)
-                .IsRequired()
                 .HasMaxLength(500);
 
             this.Property(t => t.Alias)
-                .IsRequired()
                 .HasMaxLength(200);
 
             this.Property(t => t.ElectronicServiceFileTypeUri)

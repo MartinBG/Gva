@@ -40,10 +40,10 @@
       .state(['root.nomenclatures.search.org147'               , '/org147'               , ['@root.nomenclatures.search', 'js/common/nomenclatures/views/categoryNoms.html'          , 'CategoryNomsCtrl'            ]])
       .state(['root.nomenclatures.search.orgReport'            , '/orgreport'            , ['@root.nomenclatures.search', 'js/common/nomenclatures/views/categoryNoms.html'          , 'CategoryNomsCtrl'            ]])
       .state(['root.nomenclatures.search.values'               , '/:nomId/values'        , ['@root.nomenclatures.search', 'js/common/nomenclatures/views/nomenclatureValues.html'    , 'NomenclatureValuesCtrl'      ]])
-      .state(['root.nomenclatures.search.values.edit'          , '/:id', ['@root.nomenclatures.search', 'js/common/nomenclatures/views/nomenclatureValuesEdit.html'                  , 'NomenclaturevaluesEditCtrl'  ]])
-      .state(['root.docNomenclatures'                          , '/docNomenclatures?category', ['@root', 'js/common/nomenclatures/docNomenclaturesView.html'                                                         ]])
-      .state(['root.docNomenclatures.docTypes'                 ,  '/docTypes'            , ['@root.docNomenclatures'   , 'js/common/nomenclatures/docTypeView.html'                 , 'DocNomenclatureGenericController']])
-      .state(['root.docNomenclatures.docTypeGroups'            , '/docTypeGroups'        , ['@root.docNomenclatures'   , 'js/common/nomenclatures/docTypeGroupView.html'            , 'DocNomenclatureGenericController']])
-      .state(['root.units'                                     , '/units'                , ['@root'                    , 'js/ems/units/unitsView.html'                              , 'UnitsCtrl'                   ]]);
+      .state(['root.nomenclatures.search.values.edit'          , '/:id', ['@root.nomenclatures.search', 'js/common/nomenclatures/views/nomenclatureValuesEdit.html'                  , 'NomenclaturevaluesEditCtrl'  ]])      
+      .state(['root.units'                                     , '/units'                , ['@root'                        , 'js/ems/units/unitsView.html'                              , 'UnitsCtrl'                   ]])
+      .state(['root.docNomenclatures'                          , '/docNomenclatures?category', ['@root'                    , 'js/common/nomenclatures/docNomenclaturesView.html']])
+      .state(['root.docNomenclatures.docTypes'                 , '/docTypes'                 , ['@root.docNomenclatures'   , 'js/common/nomenclatures/docTypeView.html', 'DocTypeController']])
+      .state(['root.docNomenclatures.docTypeGroups'            , '/docTypeGroups'            , ['@root.docNomenclatures'   , 'js/common/nomenclatures/docTypeGroupView.html', 'DocNomenclatureGenericController']]);
   }]);
 }(angular));

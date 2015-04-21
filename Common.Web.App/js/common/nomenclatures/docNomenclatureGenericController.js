@@ -2,33 +2,27 @@
 (function (angular, _) {
   'use strict';
 
-  function DocNomenclatureGenericController($scope, $state, $stateParams, nomenclaturesModel, l10n) {
-    $scope.model = nomenclaturesModel;
-    var name = $stateParams.category;
+  function DocNomenclatureGenericController($scope, $state,
+    $stateParams, nomenclaturesModel, l10n, $resource) {
 
-    $scope.save = function (data, id) {
-      //$scope.user not updated yet
-      //angular.extend(data, { id: id });
-      //return $http.post('/saveUser', data);
-      //return true;
+    $scope.model = nomenclaturesModel;
+
+    $scope.save = function (data, nomenclature) {
+
+      data.id = nomenclature.id;
+      $resource('api/nomenclaturesManagement/' + $stateParams.category + '/:id', { id: '@id' })
+        .save(data)
+        .$promise.then(function () {
+          return $state.reload();
+        });
     };
 
-
-    //$scope.cancel = function (id) {
-    //  if (!id) {
-    //    var lastIndex = $scope.users.length - 1;
-    //    $scope.users.splice(lastIndex, 1);
-    //  }
-    //};
-
     $scope.add = function () {
-      $scope.inserted = {
+      $scope.model.push({
         id: null,
-        name: '',        
+        name: '',
         isActive: true
-      };
-
-      $scope.users.push($scope.inserted);
+      });
     };
 
     $scope.cancel = function (nomenclature) {
@@ -38,14 +32,17 @@
     };
   }
 
-  DocNomenclatureGenericController.$inject = ['$scope', '$state', '$stateParams', 'nomenclaturesModel', 'l10n'];
+  DocNomenclatureGenericController.$inject = ['$scope', '$state', '$stateParams', 'nomenclaturesModel', 'l10n', '$resource'];
 
   DocNomenclatureGenericController.$resolve = {
     nomenclaturesModel: ['$stateParams', '$resource',
       function ($stateParams, $resource) {
 
-        return $resource('api/nomenclatures/' + $stateParams.category)
-          .query().$promise;
+        return $resource('api/nomenclaturesManagement/' + $stateParams.category)
+          .query().$promise.then(function (result) {
+
+            return result;
+          });
       }
     ]
   };
