@@ -190,7 +190,9 @@
               licenceTypeIds: 'Типове лицензи (за изпити)',
               ratingClassGroup: 'Група клас ВС',
               ratingClass: 'Клас ВС',
-              authorizationGroup: 'Група Разрешение'
+              authorizationGroup: 'Група Разрешение',
+              aircraftType: 'Тип ВС',
+              country: 'Държава'
             } 
           }
         },

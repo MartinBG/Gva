@@ -141,5 +141,17 @@
           <sc-field type="nomenclature" alias="'authorizationGroups'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.authorizationGroup" class="col-sm-4"></sc-field>
         </div>
       </div>
+
+      <div ng-if="alias === 'aircraftTypeGroups'">
+        <div class="row">
+          <sc-field type="nomenclature" alias="'aircraftTypes'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.aircraftType" class="col-sm-4"></sc-field>
+        </div>
+      </div>
+
+      <div ng-if="alias === 'caa'">
+        <div class="row">
+          <sc-field type="nomenclature" alias="'countries'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.country" class="col-sm-4"></sc-field>
+        </div>
+      </div>
   </div>
 </ng-form>
