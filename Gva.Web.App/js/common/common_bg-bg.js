@@ -187,7 +187,10 @@
               isIdDocument: 'За самоличност',
               categoryAlias: 'Категория документи',
               duration: 'Срок на валидност в дни',
-              licenceTypeIds: 'Типове лицензи (за изпити)'
+              licenceTypeIds: 'Типове лицензи (за изпити)',
+              ratingClassGroup: 'Група клас ВС',
+              ratingClass: 'Клас ВС',
+              authorizationGroup: 'Група Разрешение'
             } 
           }
         },

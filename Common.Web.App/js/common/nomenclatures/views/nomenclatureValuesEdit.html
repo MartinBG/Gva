@@ -123,5 +123,23 @@
           </div>
         </div>
       </div>
+
+      <div ng-if="alias === 'ratingClasses'">
+        <div class="row">
+          <sc-field type="nomenclature" alias="'ratingClassGroups'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.ratingClassGroup" class="col-sm-4"></sc-field>
+        </div>
+      </div>
+
+      <div ng-if="alias === 'ratingSubClasses'">
+        <div class="row">
+          <sc-field type="nomenclature" alias="'ratingClasses'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.ratingClass" class="col-sm-4"></sc-field>
+        </div>
+      </div>
+
+      <div ng-if="alias === 'authorizations'">
+        <div class="row">
+          <sc-field type="nomenclature" alias="'authorizationGroups'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.authorizationGroup" class="col-sm-4"></sc-field>
+        </div>
+      </div>
   </div>
 </ng-form>

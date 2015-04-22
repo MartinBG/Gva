@@ -775,13 +775,21 @@ namespace Gva.Api.Controllers
         }
 
         [Route("ratingClasses")]
-        public IHttpActionResult GetRatingClasses(string caseTypeAlias, string term = null)
+        public IHttpActionResult GetRatingClasses(string caseTypeAlias = null, string term = null)
         {
-            var nomValues = this.nomRepository.GetNomValues(
-                alias: "ratingClasses",
-                parentAlias: "ratingClassGroups",
-                parentProp: "caseTypeAlias",
-                parentPropValue: caseTypeAlias);
+            IEnumerable<NomValue> nomValues = null;
+            if (!string.IsNullOrEmpty(caseTypeAlias))
+            {
+                nomValues = this.nomRepository.GetNomValues(
+                    alias: "ratingClasses",
+                    parentAlias: "ratingClassGroups",
+                    parentProp: "caseTypeAlias",
+                    parentPropValue: caseTypeAlias);
+            }
+            else
+            {
+                nomValues = this.nomRepository.GetNomValues(alias: "ratingClasses");
+            }
 
             nomValues = nomValues.Select(n => new NomValue
             {
