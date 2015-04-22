@@ -46,27 +46,31 @@ namespace Gva.Api.WordTemplates
         internal static List<object> GetRatingsDataByCode(
             IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
             IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions,
-            NomValue authorizationGroup)
+            NomValue authorizationGroup,
+            INomRepository nomRepository)
         {
             List<object> ratings = new List<object>();
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization != null &&
-                    rating.Content.Authorization.ParentValueId != null && 
-                    authorizationGroup.NomValueId == rating.Content.Authorization.ParentValueId.Value &&
-                    rating.Content.Authorization.Code != "RTO")
+                if (rating.Content.Authorization != null)
                 {
-                    ratings.Add(new
+                    NomValue authorization = nomRepository.GetNomValue(rating.Content.Authorization.NomValueId);
+                    if (authorization.ParentValueId != null &&
+                        authorizationGroup.NomValueId == authorization.ParentValueId.Value &&
+                        authorization.Code != "RTO")
                     {
-                        TYPE = string.Format(
-                            "{0} {1} {2}",
-                            rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Name,
-                            rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "",
-                            rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Code).Trim(),
-                        AUTH_NOTES = string.Format("{0}", edition.Content.NotesAlt).Trim(),
-                        VALID_DATE = edition.Content.DocumentDateValidTo
-                    });
+                        ratings.Add(new
+                        {
+                            TYPE = string.Format(
+                                "{0} {1} {2}",
+                                rating.Content.RatingClass == null ? string.Empty : rating.Content.RatingClass.Name,
+                                rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "",
+                                authorization == null ? string.Empty : authorization.Code).Trim(),
+                            AUTH_NOTES = string.Format("{0}", edition.Content.NotesAlt).Trim(),
+                            VALID_DATE = edition.Content.DocumentDateValidTo
+                        });
+                    }
                 }
             }
 

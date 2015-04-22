@@ -71,8 +71,8 @@ namespace Gva.Api.WordTemplates
 
             NomValue FTgroup = this.nomRepository.GetNomValues("authorizationGroups").First(nv => nv.Code == "FT");
             NomValue FCgroup = this.nomRepository.GetNomValues("authorizationGroups").First(nv => nv.Code == "FC");
-            List<object> instructorData = PilotUtils.GetRatingsDataByCode(includedRatings, ratingEditions, FTgroup);
-            List<object> examinerData = PilotUtils.GetRatingsDataByCode(includedRatings, ratingEditions, FCgroup);
+            List<object> instructorData = PilotUtils.GetRatingsDataByCode(includedRatings, ratingEditions, FTgroup, this.nomRepository);
+            List<object> examinerData = PilotUtils.GetRatingsDataByCode(includedRatings, ratingEditions, FCgroup, this.nomRepository);
 
             object instrNoEntries = instructorData.Count == 0 ?
                 new

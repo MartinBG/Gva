@@ -811,7 +811,8 @@ namespace Gva.Api.Controllers
             {
                 NomValueId = n.NomValueId,
                 Name = n.Code == n.Name ? n.Name : string.Format("{0} {1}", n.Code, n.Name),
-                Code = n.Code
+                Code = n.Code,
+                ParentValueId = n.ParentValueId
             });
 
             if (!string.IsNullOrEmpty(term))
