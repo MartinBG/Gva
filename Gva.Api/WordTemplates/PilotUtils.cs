@@ -15,15 +15,18 @@ namespace Gva.Api.WordTemplates
         internal static List<object> GetRatings(
             IEnumerable<PartVersion<PersonRatingDO>> includedRatings,
             IEnumerable<PartVersion<PersonRatingEditionDO>> ratingEditions,
-            List<int> authorizationGroupIds)
+            List<int> authorizationGroupIds,
+            INomRepository nomRepository)
         {
             List<object> ratings = new List<object>();
             foreach (var edition in ratingEditions)
             {
                 var rating = includedRatings.Where(r => r.Part.Index == edition.Content.RatingPartIndex).Single();
-                if (rating.Content.Authorization == null ||
-                    (rating.Content.Authorization.Code != "RTO" &&
-                    (rating.Content.Authorization.ParentValueId.HasValue ? !authorizationGroupIds.Contains(rating.Content.Authorization.ParentValueId.Value) : true)))
+
+                NomValue authorization = rating.Content.Authorization != null ? nomRepository.GetNomValue(rating.Content.Authorization.NomValueId) : null;
+                if (authorization == null ||
+                    (authorization.Code != "RTO" &&
+                    (authorization.ParentValueId.HasValue ? !authorizationGroupIds.Contains(authorization.ParentValueId.Value) : true)))
                 {
                     ratings.Add(new
                     {
@@ -33,7 +36,7 @@ namespace Gva.Api.WordTemplates
                             rating.Content.RatingTypes.Count() > 0 ? string.Join(", ", rating.Content.RatingTypes.Select(rt => rt.Code)) : "").Trim(),
                         AUTH_NOTES = string.Format(
                             "{0} {1}",
-                            rating.Content.Authorization == null ? string.Empty : rating.Content.Authorization.Code,
+                            authorization == null ? string.Empty : authorization.Code,
                             edition.Content.NotesAlt).Trim(),
                         VALID_DATE = edition.Content.DocumentDateValidTo
                     });

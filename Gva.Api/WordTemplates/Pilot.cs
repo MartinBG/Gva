@@ -87,7 +87,7 @@ namespace Gva.Api.WordTemplates
                 .Select(nv => nv.NomValueId)
                 .ToList();
 
-            var ratings = Utils.FillBlankData(PilotUtils.GetRatings(includedRatings, ratingEditions, authorizationGroupIds), 19);
+            var ratings = Utils.FillBlankData(PilotUtils.GetRatings(includedRatings, ratingEditions, authorizationGroupIds, this.nomRepository), 19);
             var country = Utils.GetCountry(personAddress, this.nomRepository);
             var licenceNumber = string.Format(
                 " BGR {0} - {1} - {2}",

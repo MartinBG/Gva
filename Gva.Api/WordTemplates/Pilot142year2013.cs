@@ -117,7 +117,7 @@ namespace Gva.Api.WordTemplates
                 .Where(nv => nv.Code == "FT" || nv.Code == "FC")
                 .Select(nv => nv.NomValueId)
                 .ToList();
-            var ratings = PilotUtils.GetRatings(includedRatings, ratingEditions, authorizationGroupIds);
+            var ratings = PilotUtils.GetRatings(includedRatings, ratingEditions, authorizationGroupIds, this.nomRepository);
             var country = Utils.GetCountry(personAddress, this.nomRepository);
             var licenceNumber = string.Format(
                 "BGR. {0} - {1} - {2}",
