@@ -153,5 +153,17 @@
           <sc-field type="nomenclature" alias="'countries'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.country" class="col-sm-4"></sc-field>
         </div>
       </div>
+
+      <div ng-if="alias === 'auditPartSections'">
+        <div class="row">
+          <sc-field type="nomenclature" alias="'auditParts'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.auditPart" class="col-sm-4"></sc-field>
+        </div>
+      </div>
+
+      <div ng-if="alias === 'auditPartSectionDetails'">
+        <div class="row">
+          <sc-field type="nomenclature" alias="'auditPartSections'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.auditPartSection" class="col-sm-5"></sc-field>
+        </div>
+      </div>
   </div>
 </ng-form>

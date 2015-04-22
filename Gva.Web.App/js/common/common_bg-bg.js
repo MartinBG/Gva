@@ -192,7 +192,9 @@
               ratingClass: 'Клас ВС',
               authorizationGroup: 'Група Разрешение',
               aircraftType: 'Тип ВС',
-              country: 'Държава'
+              country: 'Държава',
+              auditPart: 'Раздел',
+              auditPartSection: 'Раздел (част) в част 3 на доклад в подкрепа на'
             } 
           }
         },
