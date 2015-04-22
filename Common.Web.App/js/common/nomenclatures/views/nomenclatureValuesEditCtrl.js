@@ -49,7 +49,7 @@
               nomId: $stateParams.nomId,
               id: $stateParams.id
             }).$promise.then(function () {
-              return $state.go('root.nomenclatures.values',
+              return $state.go('root.nomenclatures.search.values',
                 { nomId: $stateParams.nomId, alias: $scope.alias },
                 { reload: true });
             });
