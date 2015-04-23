@@ -66,7 +66,7 @@
       }
 
       return item.publisherCode + ' ' +
-             item.licenceTypeCode + ' ' +
+             item.licenceTypeCaCode + ' ' +
              licenceNumberMask;
     };
   }
