@@ -8,6 +8,8 @@ namespace Gva.Api.Models
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public byte[] Template { get; set; }
     }
 
@@ -22,10 +24,14 @@ namespace Gva.Api.Models
             this.Property(t => t.Name)
                 .HasMaxLength(200);
 
+            this.Property(t => t.Description)
+                .HasMaxLength(200);
+
             // Table & Column Mappings
             this.ToTable("GvaWordTemplates");
             this.Property(t => t.GvaWordTemplateId).HasColumnName("GvaWordTemplateId");
             this.Property(t => t.Name).HasColumnName("Name");
+            this.Property(t => t.Description).HasColumnName("Description");
             this.Property(t => t.Template).HasColumnName("Template");
         }
     }
