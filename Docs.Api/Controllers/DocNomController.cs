@@ -384,7 +384,7 @@ namespace Docs.Api.Controllers
                 .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {
-                    id = e.DocTypeGroupId,
+                    nomValueId = e.DocTypeGroupId,
                     name = e.Name,
                     isActive = e.IsActive
                 })
