@@ -165,10 +165,13 @@
           <sc-field type="nomenclature" alias="'auditPartSections'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.auditPartSection" class="col-sm-5"></sc-field>
         </div>
       </div>
-
+      
        <div ng-if="alias === 'licenceTypes'">
         <div class="row">
           <sc-field type="text" ng-model="nomenclatureValue.textContent.codeCA" ng-required="true" l10n-text="common.nomenclatures.nomValues.edit.codeCA" class="col-sm-4"></sc-field>
+        </div>
+         <div class="row">
+          <sc-field type="nomenclature" alias="'staffTypes'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.staffType" class="col-sm-4"></sc-field>
         </div>
         <div class="row">
           <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.caseTypeAlias = nomenclatureValue.textContent.caseTypeAlias || null">
