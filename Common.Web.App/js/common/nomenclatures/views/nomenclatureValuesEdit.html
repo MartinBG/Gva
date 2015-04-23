@@ -165,5 +165,41 @@
           <sc-field type="nomenclature" alias="'auditPartSections'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.auditPartSection" class="col-sm-5"></sc-field>
         </div>
       </div>
+
+       <div ng-if="alias === 'licenceTypes'">
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.isFCL = nomenclatureValue.textContent.isFCL || false">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.isFCL"></label>
+            <input type="checkbox" ng-model="nomenclatureValue.textContent.isFCL"/>
+          </div>
+        </div>
+        <div class="row">
+          <sc-field type="text" ng-model="nomenclatureValue.textContent.codeCA" ng-required="true" l10n-text="common.nomenclatures.nomValues.edit.codeCA" class="col-sm-4"></sc-field>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.caseTypeAlias = nomenclatureValue.textContent.caseTypeAlias || null">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseType"></label>
+            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control" ng-required="true">
+              <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.templateName"></label>
+            <select ui-select2 ng-model="nomenclatureValue.textContent.templateName" class="input-sm form-control" ng-required="true">
+              <option ng-repeat="template in templateOptions" value="{{template.code}}">{{template.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.qualification"></label>
+            <select ui-select2 ng-model="nomenclatureValue.textContent.qlfCode" class="input-sm form-control">
+              <option ng-repeat="qualification in qualificationOptions" value="{{qualification.code}}">{{qualification.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
   </div>
 </ng-form>

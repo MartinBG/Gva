@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Http;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
+using Common.Data;
 using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
@@ -26,6 +27,7 @@ namespace Gva.Api.Controllers
     [Authorize]
     public class GvaNomController : ApiController
     {
+        private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
         private IPersonRepository personRepository;
@@ -40,6 +42,7 @@ namespace Gva.Api.Controllers
         private IAircraftRegistrationRepository aircraftRegistrationRepository;
 
         public GvaNomController(
+            IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
             IPersonRepository personRepository,
@@ -53,6 +56,7 @@ namespace Gva.Api.Controllers
             IExaminationSystemRepository examinationSystemRepository,
             IAircraftRegistrationRepository aircraftRegistrationRepository)
         {
+            this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
             this.personRepository = personRepository;
@@ -140,6 +144,26 @@ namespace Gva.Api.Controllers
             }
 
             return Ok(campaigns);
+        }
+        
+
+        [Route("templates")]
+        public IHttpActionResult GetTemplates(string term = null)
+        {
+            var templates = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
+                .Select(c => new
+                {
+                    nomValueId = c.GvaWordTemplateId,
+                    code = c.Name,
+                    name = c.Description
+                });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                return Ok(templates.Where(r => r.name.ToLower().Contains(term.ToLower())));
+            }
+
+            return Ok(templates);
         }
 
         [Route("appExSystQualifications")]

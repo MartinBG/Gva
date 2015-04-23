@@ -11,12 +11,16 @@
     nomenclatureValue,
     nomType,
     caseTypeOptions,
+    templateOptions,
+    qualificationOptions,
     scMessage
   ) {
     $scope.nomenclatureValue = nomenclatureValue;
     $scope.alias = $stateParams.alias;
     $scope.caseTypeOptions = caseTypeOptions;
     $scope.nomType = nomType;
+    $scope.templateOptions = templateOptions;
+    $scope.qualificationOptions = qualificationOptions;
 
     $scope.save = function save() {
       return $scope.nomenclatureForm.$validate().then(function () {
@@ -67,6 +71,8 @@
     'nomenclatureValue',
     'nomType',
     'caseTypeOptions',
+    'templateOptions',
+    'qualificationOptions',
     'scMessage'
   ];
 
@@ -93,7 +99,8 @@
       function ($stateParams, Nomenclatures) {
         if ($stateParams.alias === 'applicationTypes' ||
           $stateParams.alias === 'documentTypes' ||
-          $stateParams.alias === 'documentRoles') {
+          $stateParams.alias === 'documentRoles' ||
+          $stateParams.alias === 'licenceTypes') {
           return Nomenclatures.query({
             alias: 'caseTypes'
           }).$promise;
@@ -110,6 +117,32 @@
           alias: 'nomList',
           id: $stateParams.nomId
         }).$promise;
+      }
+    ],
+    templateOptions: [
+      '$stateParams',
+      'Nomenclatures',
+      function ($stateParams, Nomenclatures) {
+        if ($stateParams.alias === 'licenceTypes') {
+          return Nomenclatures.query({
+            alias: 'templates'
+          }).$promise;
+        } else {
+          return null;
+        }
+      }
+    ],
+    qualificationOptions: [
+      '$stateParams',
+      'Nomenclatures',
+      function ($stateParams, Nomenclatures) {
+        if ($stateParams.alias === 'licenceTypes') {
+          return Nomenclatures.query({
+            alias: 'appExSystQualifications'
+          }).$promise;
+        } else {
+          return null;
+        }
       }
     ]
   };
