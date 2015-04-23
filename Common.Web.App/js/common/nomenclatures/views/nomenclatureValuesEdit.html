@@ -168,12 +168,6 @@
 
        <div ng-if="alias === 'licenceTypes'">
         <div class="row">
-          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.isFCL = nomenclatureValue.textContent.isFCL || false">
-            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.isFCL"></label>
-            <input type="checkbox" ng-model="nomenclatureValue.textContent.isFCL"/>
-          </div>
-        </div>
-        <div class="row">
           <sc-field type="text" ng-model="nomenclatureValue.textContent.codeCA" ng-required="true" l10n-text="common.nomenclatures.nomValues.edit.codeCA" class="col-sm-4"></sc-field>
         </div>
         <div class="row">
