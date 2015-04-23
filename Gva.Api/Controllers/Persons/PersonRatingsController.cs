@@ -177,49 +177,24 @@ namespace Gva.Api.Controllers.Persons
         [Route("isValid")]
         public IHttpActionResult IsValidRating(int lotId, PersonRatingDO rating, int? ratingPartIndex = null)
         {
-            var ratings = this.unitOfWork.DbContext.Set<GvaViewPersonRating>()
-                .Where(r => r.LotId == lotId)
-                .ToList();
+            var predicate = PredicateBuilder.True<GvaViewPersonRating>()
+                .And(r => r.LotId == lotId)
+                .AndEquals(r => rating.Sector, rating.Sector)
+                .AndEquals(r => r.RatingClassId, rating.RatingClass != null ? rating.RatingClass.NomValueId : (int?)null)
+                .AndEquals(r => r.AuthorizationId, rating.Authorization != null ? rating.Authorization.NomValueId : (int?)null)
+                .AndEquals(r => r.AircraftTypeGroupId, rating.AircraftTypeGroup != null ? rating.AircraftTypeGroup.NomValueId : (int?)null)
+                .AndEquals(r => r.AircraftTypeCategoryId, rating.AircraftTypeCategory != null ? rating.AircraftTypeCategory.NomValueId : (int?)null)
+                .AndEquals(r => r.CaaId, rating.Caa != null ? rating.Caa.NomValueId : (int?)null);
 
-            if (!string.IsNullOrEmpty(rating.Sector))
-            {
-                ratings = ratings.Where(r => string.Equals(r.Sector, rating.Sector)).ToList();
-            }
-            if (rating.RatingClass != null)
-            {
-                ratings = ratings.Where(r => r.RatingClassId == rating.RatingClass.NomValueId).ToList();
-            }
-
-            if (rating.RatingTypes.Count() > 0)
-            {
-                string types = string.Join(", ", rating.RatingTypes.Select(r => r.Code));
-                ratings = ratings.Where(r => r.RatingTypes == types).ToList();
-            }
-
-            if (rating.Authorization != null)
-            {
-                ratings = ratings.Where(r => r.AuthorizationId == rating.Authorization.NomValueId).ToList();
-            }
-
-            if (rating.AircraftTypeGroup != null)
-            {
-                ratings = ratings.Where(r => r.AircraftTypeGroupId == rating.AircraftTypeGroup.NomValueId).ToList();
-            }
-
-            if (rating.AircraftTypeCategory != null)
-            {
-                ratings = ratings.Where(r => r.AircraftTypeCategoryId == rating.AircraftTypeCategory.NomValueId).ToList();
-            }
-
-            if (rating.Caa != null)
-            {
-                ratings = ratings.Where(r => r.CaaId == rating.Caa.NomValueId).ToList();
-            }
+            string types = string.Join(", ", rating.RatingTypes.OrderBy(r => r.NomValueId).Select(r => r.Code));
+            predicate = predicate.AndEquals(r => r.RatingTypes, types);
 
             if (ratingPartIndex.HasValue)
             {
-                ratings = ratings.Where(r => r.PartIndex != ratingPartIndex).ToList();
+                predicate = predicate.And(r => r.PartIndex != ratingPartIndex);
             }
+
+            var ratings = this.unitOfWork.DbContext.Set<GvaViewPersonRating>().Where(predicate);
 
             return Ok(new {
                 isValid = !ratings.Any()
