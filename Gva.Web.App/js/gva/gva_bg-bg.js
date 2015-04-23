@@ -2355,8 +2355,6 @@
           sector: 'Сектор/работно място',
           experienceRole: 'Роля',
           experienceMeasure: 'Мерна единица',
-          bookPageNumber: '№ стр. в дело',
-          pageCount: 'Брой стр.',
           documentDate: 'Дата',
           dayIFR: 'Дневен IFR',
           nightIFR: 'Нощен IFR',
