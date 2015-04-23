@@ -50,7 +50,6 @@ namespace Gva.Api.Projections.Person
             licence.LicenceTypeId = personLicence.Content.LicenceType.NomValueId;
             licence.LicenceNumber = personLicence.Content.LicenceNumber;
             licence.Valid = personLicence.Content.Valid != null && personLicence.Content.Valid.Code == "Y";
-            licence.LicenceTypeCode = licenceType.TextContent.Get<string>("licenceCode");
             licence.LicenceTypeCaCode = licenceType.TextContent.Get<string>("codeCA");
             licence.PublisherCode = personLicence.Content.Publisher.Code;
             licence.ForeignLicenceNumber = personLicence.Content.ForeignLicenceNumber;

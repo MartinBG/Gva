@@ -58,7 +58,7 @@ namespace Gva.Api.Projections.Inventory.Persons
             invItem.Name = personLicence.Part.SetPart.Name;
             invItem.TypeId = licenceType.NomValueId;
             invItem.Number = personLicence.Content.LicenceNumber.HasValue ?
-                string.Format("{0} {1} - {2}", personLicence.Content.Publisher.Code, licenceType.TextContent.Get<string>("licenceCode"), personLicence.Content.LicenceNumber) :
+                string.Format("{0} {1} - {2}", personLicence.Content.Publisher.Code, licenceType.TextContent.Get<string>("codeCA"), personLicence.Content.LicenceNumber) :
                 null;
             invItem.Date = edition.Content.DocumentDateValidFrom.Value;
             invItem.Publisher = personLicence.Content.Publisher.Code;

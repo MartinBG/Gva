@@ -8,7 +8,6 @@ CREATE TABLE [dbo].[GvaViewPersonLicences] (
     [LicenceTypeId]         INT           NOT NULL,
     [LicenceNumber]         INT           NULL,
     [Valid]                 BIT           NULL,
-    [LicenceTypeCode]       NVARCHAR(50)  NOT NULL,
     [LicenceTypeCaCode]     NVARCHAR(50)  NOT NULL,
     [PublisherCode]         NVARCHAR(50)  NOT NULL,
     [ForeignLicenceNumber]  NVARCHAR(50)  NULL,

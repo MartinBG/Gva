@@ -60,8 +60,7 @@ namespace Gva.Api.WordTemplates
             var country = Utils.GetCountry(personAddress, this.nomRepository);
             string licenceCode = licence.LicenceType.Code;
             var licenceNumber = string.Format(
-                "BG.66.{1} - {2}",
-                licenceType.TextContent.Get<string>("licenceCode").Replace("(", "").Replace(")", ""),
+                "BG.66.{0} - {1}",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var personNameBG = string.Format("{0} {1} {2}",

@@ -75,7 +75,7 @@ namespace Gva.Api.WordTemplates
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
             var licenceNumber = string.Format(
                 "BGR. {0} - {1} - {2}",
-                licenceType.TextContent.Get<string>("licenceCode"),
+                licenceType.TextContent.Get<string>("codeCA"),
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
 
@@ -118,7 +118,7 @@ namespace Gva.Api.WordTemplates
                     L_LICENCE_TYPE_CA_CODE2 = licenceCaCode,
                     L_LICENCE_NO = licenceNumber,
                     L_LICENCE_HOLDER = this.GetPersonData(personData, personAddress),
-                    L_LICENCE_PRIV = this.GetLicencePrivileges(licenceType.TextContent.Get<string>("licenceCode")),
+                    L_LICENCE_PRIV = this.GetLicencePrivileges(licenceType.TextContent.Get<string>("codeCA")),
                     L_FIRST_ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     L_ISSUE_DATE = lastEdition.DocumentDateValidFrom,
                     ENDORSEMENT = Utils.FillBlankData(Utils.GetEndorsements(includedRatings, ratingEditions, this.lotRepository), 3),

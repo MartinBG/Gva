@@ -38,8 +38,6 @@ namespace Gva.Api.Models.Views.Person
 
         public bool IsLastEdition { get; set; }
 
-        public string LicenceTypeCode { get; set; }
-
         public string LicenceTypeCaCode { get; set; }
 
         public string PublisherCode { get; set; }
@@ -117,7 +115,6 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.EditionPartIndex).HasColumnName("PartIndex");
             this.Property(t => t.IsLastEdition).HasColumnName("IsLastEdition");
             this.Property(t => t.Valid).HasColumnName("Valid");
-            this.Property(t => t.LicenceTypeCode).HasColumnName("LicenceTypeCode");
             this.Property(t => t.LicenceTypeCaCode).HasColumnName("LicenceTypeCaCode");
             this.Property(t => t.PublisherCode).HasColumnName("PublisherCode");
             this.Property(t => t.ForeignLicenceNumber).HasColumnName("ForeignLicenceNumber");

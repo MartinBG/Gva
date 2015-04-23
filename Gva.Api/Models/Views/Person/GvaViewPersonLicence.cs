@@ -21,8 +21,6 @@ namespace Gva.Api.Models.Views.Person
 
         public bool Valid { get; set; }
 
-        public string LicenceTypeCode { get; set; }
-
         public string LicenceTypeCaCode { get; set; }
 
         public string PublisherCode { get; set; }
@@ -57,9 +55,6 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.PartId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.LicenceTypeCode)
-                .HasMaxLength(50);
-
             this.Property(t => t.LicenceTypeCaCode)
                 .HasMaxLength(50);
 
@@ -74,7 +69,6 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LicenceTypeId).HasColumnName("LicenceTypeId");
             this.Property(t => t.LicenceNumber).HasColumnName("LicenceNumber");
             this.Property(t => t.Valid).HasColumnName("Valid");
-            this.Property(t => t.LicenceTypeCode).HasColumnName("LicenceTypeCode");
             this.Property(t => t.LicenceTypeCaCode).HasColumnName("LicenceTypeCaCode");
             this.Property(t => t.PublisherCode).HasColumnName("PublisherCode");
             this.Property(t => t.ForeignLicenceNumber).HasColumnName("ForeignLicenceNumber");
