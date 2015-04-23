@@ -55,9 +55,10 @@
 
       <div ng-if="alias === 'applicationTypes'">
         <div class="row">
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-4"  sc-has-error="caseTypes">
             <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseTypes"></label>
-            <select ui-select2 multiple ng-model="nomenclatureValue.textContent.caseTypes" class="input-sm form-control" ng-required="true">
+            <sc-validation-error field-name="caseTypes" validations="{required: 'default'}"></sc-validation-error>
+            <select ui-select2 multiple ng-model="nomenclatureValue.textContent.caseTypes" class="input-sm form-control" name="caseTypes" ng-required="true">
               <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
             </select>
           </div>
@@ -85,9 +86,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.caseTypeAlias = nomenclatureValue.textContent.caseTypeAlias || null">
+          <div class="form-group col-sm-4" sc-has-error="caseType">
             <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseType"></label>
-            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control">
+            <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control"  name="caseType" ng-required="true">
               <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
             </select>
           </div>
@@ -102,7 +104,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.categoryAlias = nomenclatureValue.textContent.categoryAlias || null">
+          <div class="form-group col-sm-4">
             <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.categoryAlias"></label>
             <select ui-select2 ng-model="nomenclatureValue.textContent.categoryAlias" class="input-sm form-control">
               <option value=""></option>
@@ -115,9 +117,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.caseTypeAlias = nomenclatureValue.textContent.caseTypeAlias || null">
+          <div class="form-group col-sm-4" sc-has-error="caseType">
             <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseType"></label>
-            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control">
+            <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control" name="caseType" ng-required="true">
               <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
             </select>
           </div>
@@ -166,25 +169,27 @@
         </div>
       </div>
       
-       <div ng-if="alias === 'licenceTypes'">
+      <div ng-if="alias === 'licenceTypes'">
         <div class="row">
           <sc-field type="text" ng-model="nomenclatureValue.textContent.codeCA" ng-required="true" l10n-text="common.nomenclatures.nomValues.edit.codeCA" class="col-sm-4"></sc-field>
         </div>
-         <div class="row">
+          <div class="row">
           <sc-field type="nomenclature" alias="'staffTypes'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.staffType" class="col-sm-4"></sc-field>
         </div>
         <div class="row">
-          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.caseTypeAlias = nomenclatureValue.textContent.caseTypeAlias || null">
+          <div class="form-group col-sm-4"  sc-has-error="caseType">
             <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.caseType"></label>
-            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control" ng-required="true">
+            <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+            <select ui-select2 ng-model="nomenclatureValue.textContent.caseTypeAlias" class="input-sm form-control"  name="caseType" ng-required="true">
               <option ng-repeat="caseType in caseTypeOptions" value="{{caseType.alias}}">{{caseType.name}}</option>
             </select>
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-4" sc-has-error="templateName">
             <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.templateName"></label>
-            <select ui-select2 ng-model="nomenclatureValue.textContent.templateName" class="input-sm form-control" ng-required="true">
+            <sc-validation-error field-name="templateName" validations="{required: 'default'}"></sc-validation-error>
+            <select ui-select2 ng-model="nomenclatureValue.textContent.templateName" name="templateName" class="input-sm form-control" ng-required="true">
               <option ng-repeat="template in templateOptions" value="{{template.code}}">{{template.name}}</option>
             </select>
           </div>
