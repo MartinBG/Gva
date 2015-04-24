@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="row" ng-if="model.cases[0].caseType.alias === 'flightCrew'">
-      <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'limitations66'" multiple="multiple" params="{type: isFcl ? 'FCL' : 'AMLCommon' }" l10n-text="persons.licenceEditionDirective.limitations" class="col-sm-5"></sc-field>
+      <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'limitations66'" multiple="multiple" params="{type: 'FCL'}" l10n-text="persons.licenceEditionDirective.limitations" class="col-sm-5"></sc-field>
     </div>
     <div class="row">
       <sc-field type="textarea" ng-model="model.part.notes" sc-validate="{ invalidNotes: notesShouldBeFilled}" l10n-text="persons.licenceEditionDirective.notes" validations="{invalidNotes: 'errorTexts.invalidNotes'}" rows="3" class="col-md-3"></sc-field>

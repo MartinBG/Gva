@@ -3,7 +3,7 @@
     <sc-field type="nomenclature" ng-model="model.part.ratingSubClasses" format-options="{{code}} {{name}}" alias="'ratingSubClasses'" multiple="multiple" l10n-text="persons.ratingEditionDirective.subclasses" class="col-sm-5"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'to_suvd' || model.case.caseType.alias === 'to_vs'">
-    <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'limitations66'" multiple="multiple" l10n-text="persons.ratingEditionDirective.limitations" class="col-sm-5"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.part.limitations" alias="'limitations66'" multiple="multiple" params="{type: model.case.caseType.alias === 'to_suvd' ? 'ATSML' : 'AMLAircrafts'}" l10n-text="persons.ratingEditionDirective.limitations" class="col-sm-5"></sc-field>
   </div>
   <div class="row">
     <sc-field type="date" ng-model="model.part.documentDateValidFrom" ng-required="true" l10n-text="persons.ratingEditionDirective.documentDateValidFrom" class="col-sm-2"></sc-field>
