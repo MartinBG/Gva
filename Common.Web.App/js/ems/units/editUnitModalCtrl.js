@@ -19,7 +19,7 @@
         ];
       } else {
         $scope.unitTypes = [
-          { value: 'Department', name: 'Организация' },          
+          { value: 'Department', name: 'Организация' }
         ];
       }
 

@@ -233,11 +233,13 @@
           deleteUnitTooltip: 'Премахване на организационна единица',
           addChildUnitTooltip: 'Добавяне на организационна единица',
           attachUnitToUserTooltip: 'Прикачане на организационна единица към потребител',
-          detachUnitFromUserTooltip: 'Премахване на връзката между организационна единица и потребител',
+          detachUnitFromUserTooltip:
+            'Премахване на връзката между организационна единица и потребител',
           errors: {
-            Unit_CannotBeDeleted_ExistingRelation: 'Oрганизационна единица не може да бъде изтрита, поради връзки с други обекти',
-            Entity_CannotBeDeactivated: 'Oрганизационна единица не може да бъде деактивирана',
-            Entity_CannotBeActivated: 'Oрганизационна единица не може да бъде активирана',
+            Unit_CannotBeDeleted_ExistingRelation:
+              'Oрганизационната единица не може да бъде изтрита, поради връзки с други обекти',
+            Entity_CannotBeDeactivated: 'Oрганизационната единица не може да бъде деактивирана',
+            Entity_CannotBeActivated: 'Oрганизационната единица не може да бъде активирана'
           },
           edit: {
             classification: 'Класификация',

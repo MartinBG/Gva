@@ -3,7 +3,7 @@
   'use strict';
 
   function DocTypeController($scope, $state,
-    $stateParams, nomenclaturesModel, l10n, $resource, $filter) {
+    $stateParams, nomenclaturesModel, l10n, $resource) {
 
     nomenclaturesModel.registers.splice(0, 0, { id: null, name: 'не е зададена стойност' });
 
@@ -44,7 +44,7 @@
       return _.find(nomenclaturesModel.docTypeGroups, function (item) {
         return item.id === id;
       }).name;
-    }
+    };
 
     $scope.displayRegisterName = function (id) {
       if (!id) {
@@ -54,10 +54,11 @@
       return _.find(nomenclaturesModel.registers, function (item) {
         return item.id === id;
       }).name;
-    }
+    };
   }
 
-  DocTypeController.$inject = ['$scope', '$state', '$stateParams', 'nomenclaturesModel', 'l10n', '$resource', '$filter'];
+  DocTypeController.$inject = ['$scope',
+    '$state', '$stateParams', 'nomenclaturesModel', 'l10n', '$resource'];
 
   DocTypeController.$resolve = {
     nomenclaturesModel: ['$q', '$stateParams', '$resource',
@@ -65,8 +66,9 @@
 
         return $q.all({
           docTypes: $resource('api/nomenclaturesManagement/docTypes').query().$promise,
-          docTypeGroups: $resource('api/nomenclaturesManagement/docTypeGroups').query().$promise,
-          registers: $resource('api/register').query().$promise,
+          docTypeGroups: $resource('api/nomenclaturesManagement/docTypeGroups').query()
+            .$promise,
+          registers: $resource('api/register').query().$promise
         })
         .then(function (result) {
 
@@ -74,7 +76,7 @@
             docTypes: result.docTypes,
             docTypeGroups: result.docTypeGroups,
             registers: result.registers
-          }
+          };
         });
       }
     ]

@@ -32,7 +32,8 @@
     };
   }
 
-  DocNomenclatureGenericController.$inject = ['$scope', '$state', '$stateParams', 'nomenclaturesModel', 'l10n', '$resource'];
+  DocNomenclatureGenericController.$inject = ['$scope',
+    '$state', '$stateParams', 'nomenclaturesModel', 'l10n', '$resource'];
 
   DocNomenclatureGenericController.$resolve = {
     nomenclaturesModel: ['$stateParams', '$resource',
@@ -47,5 +48,6 @@
     ]
   };
 
-  angular.module('common').controller('DocNomenclatureGenericController', DocNomenclatureGenericController);
+  angular.module('common').controller('DocNomenclatureGenericController',
+    DocNomenclatureGenericController);
 }(angular, _));

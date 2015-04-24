@@ -28,7 +28,7 @@
       return scMessage('Моля, потвърдете изтриването на организационна единица.')
         .then(function (result) {          
           if (result === 'OK') {
-            return UnitsResource.delete({ id: unit.unitId })
+            return UnitsResource.remove({ id: unit.unitId })
               .$promise.then(function () {
                 return refreshData();
               }, function (response) {
