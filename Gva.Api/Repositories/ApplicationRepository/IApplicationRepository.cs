@@ -22,6 +22,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             string organizationUin = null,
             int? stageId = null,
             int? inspectorId = null,
+            int? applicationTypeId = null,
             int offset = 0,
             int? limit = null);
 
@@ -37,6 +38,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             int? personLin = null,
             int? stageId = null,
             int? inspectorId = null,
+            int? applicationTypeId = null,
             int offset = 0,
             int? limit = null);
 
@@ -46,6 +48,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             string aircraftIcao = null,
             int? stageId = null,
             int? inspectorId = null,
+            int? applicationTypeId = null,
             int offset = 0,
             int? limit = null);
 
@@ -55,6 +58,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             string organizationUin = null,
             int? stageId = null,
             int? inspectorId = null,
+            int? applicationTypeId = null,
             int offset = 0,
             int? limit = null);
 
@@ -63,6 +67,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             DateTime? toDate = null,
             int? stageId = null,
             int? inspectorId = null,
+            int? applicationTypeId = null,
             int offset = 0,
             int? limit = null);
 
@@ -71,6 +76,7 @@ namespace Gva.Api.Repositories.ApplicationRepository
             DateTime? toDate = null,
             int? stageId = null,
             int? inspectorId = null,
+            int? applicationTypeId = null,
             int offset = 0,
             int? limit = null);
 

@@ -33,7 +33,8 @@
         aircraftIcao: $scope.filters.aircraftIcao,
         organizationUin: $scope.filters.organizationUin,
         stageId: $scope.filters.stageId,
-        inspectorId: $scope.filters.inspectorId
+        inspectorId: $scope.filters.inspectorId,
+        applicationTypeId: $scope.filters.applicationTypeId
       }, { reload: true });
     };
 

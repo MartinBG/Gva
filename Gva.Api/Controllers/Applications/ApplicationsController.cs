@@ -95,6 +95,7 @@ namespace Gva.Api.Controllers.Applications
             string organizationUin = null,
             int? stageId = null,
             int? inspectorId = null,
+            int? applicationTypeId = null,
             int offset = 0, 
             int limit = 10
             )
@@ -108,6 +109,7 @@ namespace Gva.Api.Controllers.Applications
                 organizationUin: organizationUin,
                 stageId: stageId,
                 inspectorId: inspectorId,
+                applicationTypeId : applicationTypeId,
                 limit: limit,
                 offset: offset);
 
