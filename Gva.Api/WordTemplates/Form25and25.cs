@@ -4,11 +4,11 @@ using Gva.Api.ModelsDO.Aircrafts;
 
 namespace Gva.Api.WordTemplates
 {
-    public class Form25 : IDataGenerator
+    public class Form25and25 : IDataGenerator
     {
         private ILotRepository lotRepository;
 
-        public Form25(ILotRepository lotRepository)
+        public Form25and25(ILotRepository lotRepository)
         {
             this.lotRepository = lotRepository;
         }
@@ -17,7 +17,7 @@ namespace Gva.Api.WordTemplates
         {
             get
             {
-                return new string[] { "f25" };
+                return new string[] { "f25", "f24" };
             }
         }
 

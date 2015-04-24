@@ -244,7 +244,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AML_III>().As<IDataGenerator>().InstancePerLifetimeScope();
 
             //generators for aircrafts
-            moduleBuilder.RegisterType<Form25>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<Form25and25>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<Form15a>().As<IDataGenerator>().InstancePerLifetimeScope();
         }
     }
