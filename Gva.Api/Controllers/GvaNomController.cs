@@ -689,12 +689,12 @@ namespace Gva.Api.Controllers
         }
 
         [Route("limitations66")]
-        public IHttpActionResult GetLimitations66(string term = null, string general = null)
+        public IHttpActionResult GetLimitations66(string term = null, string type = null)
         {
             IEnumerable<NomValue> nomValues = this.nomRepository.GetNomValues("limitations66", term);
-            if (!string.IsNullOrEmpty(general))
+            if (!string.IsNullOrEmpty(type))
             {
-                nomValues = nomValues.Where(l => l.TextContent.Get<string>("general") == general);
+                nomValues = nomValues.Where(l => l.TextContent.Get<string>("type") == type);
             }
 
             return Ok(nomValues);
