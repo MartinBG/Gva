@@ -51,6 +51,18 @@
             <option value="13">13</option>
           </select>
         </div>
+        <div class="row">
+          <div class="form-group col-sm-4" sc-has-error="limType">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.limType"></label>
+            <sc-validation-error field-name="caseType" validations="{required: 'default'}"></sc-validation-error>
+            <select ui-select2 name="limType" ng-required="true" ng-model="nomenclatureValue.textContent.type" class="input-sm form-control">
+              <option value="ATSML">ATSML - Ограничение</option>
+              <option value="FCL">FCL - Ограничение</option>
+              <option value="AMLCommon">AML - Общо ограничение</option>
+              <option value="AMLAircrafts">AML - Ограничение за тип ВС</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <div ng-if="alias === 'applicationTypes'">

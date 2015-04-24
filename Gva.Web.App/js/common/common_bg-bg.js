@@ -181,6 +181,7 @@
               order: 'Пореден номер',
               isActive: 'Активен',
               limitations66Point: 'Точка на забележките',
+              limType: 'Тип ограничение',
               caseTypes: 'Типове дела',
               caseType: 'Тип дело',
               isPersonsOnly: 'Само за лица',
