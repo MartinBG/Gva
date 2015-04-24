@@ -42,7 +42,7 @@
         </div>
       </div>
 
-       <div class="row" ng-if="alias === 'limitations66'">
+      <div class="row" ng-if="alias === 'limitations66'">
         <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.point = nomenclatureValue.textContent.point || '8'">
           <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.limitations66Point"></label>
           <select ui-select2 ng-model="nomenclatureValue.textContent.point" class="input-sm form-control">
@@ -200,6 +200,36 @@
             <select ui-select2 ng-model="nomenclatureValue.textContent.qlfCode" class="input-sm form-control">
               <option ng-repeat="qualification in qualificationOptions" value="{{qualification.code}}">{{qualification.name}}</option>
             </select>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="alias === 'aircraftProducers'">
+        <div class="row">
+          <sc-field type="nomenclature" alias="'countries'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.country" class="col-sm-4"></sc-field>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.makeEngine = nomenclatureValue.textContent.makeEngine || false">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.makeEngine"></label>
+            <input type="checkbox" ng-model="nomenclatureValue.textContent.makeEngine"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.makePropeller = nomenclatureValue.textContent.makePropeller || false">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.makePropeller"></label>
+            <input type="checkbox" ng-model="nomenclatureValue.textContent.makePropeller"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.makeRadio = nomenclatureValue.textContent.makeRadio || false">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.makeRadio"></label>
+            <input type="checkbox" ng-model="nomenclatureValue.textContent.makeRadio"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.makeAircraft = nomenclatureValue.textContent.makeAircraft || false">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.makeAircraft"></label>
+            <input type="checkbox" ng-model="nomenclatureValue.textContent.makeAircraft"/>
           </div>
         </div>
       </div>
