@@ -474,6 +474,7 @@
     <Compile Include="WordTemplates\AML.cs" />
     <Compile Include="WordTemplates\AML_III.cs" />
     <Compile Include="WordTemplates\AMLUtils.cs" />
+    <Compile Include="WordTemplates\Form15a.cs" />
     <Compile Include="WordTemplates\Form25.cs" />
     <Compile Include="WordTemplates\PilotUtils.cs" />
     <Compile Include="WordTemplates\StudentControllerLicence.cs" />
