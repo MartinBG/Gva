@@ -124,7 +124,16 @@ namespace Common.Owin
                 RequestPath = new PathString(""),
                 FileSystem = new PhysicalFileSystem("./App"),
                 ContentTypeProvider = new ContentTypeProvider(),
-                ServeUnknownFileTypes = false
+                ServeUnknownFileTypes = false,
+                OnPrepareResponse = c =>
+                {
+                    if (c.OwinContext.Request.Path.Value == "/index.html")
+                    {
+                        c.OwinContext.Response.Headers.Add("Cache-Control", new[] { "no-cache", "no-store", "must-revalidate" });
+                        c.OwinContext.Response.Headers.Add("Pragma", new[] { "no-cache" });
+                        c.OwinContext.Response.Headers.Add("Expires", new[] { "0" });
+                    }
+                }
             });
         }
 
