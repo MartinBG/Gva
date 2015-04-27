@@ -158,12 +158,14 @@ namespace Gva.Rio.IncomingDocProcessor
 
                     AddDocUnit(initialDoc, systemUnitUser.Unit, systemUser);
 
-                    AddDocClassification(initialDoc, systemUser);
+                    var parentDocClassifications = AddDocClassification(initialDoc, systemUser);
 
                     this.unitOfWork.Save();
 
                     this.docRepository.ExecSpSetDocTokens(docId: initialDoc.DocId);
                     this.docRepository.ExecSpSetDocUnitTokens(docId: initialDoc.DocId);
+
+                    initialDoc.SetReceiptOrder(this.docRepository.GetNextReceiptOrder(initialDoc.DocId), systemUserContext);
 
                     Guid fileKey = WriteToBlob(Utf8Utils.GetBytes(incomingDocFile.DocFileContent));
 
@@ -222,10 +224,17 @@ namespace Gva.Rio.IncomingDocProcessor
 
                     AddDocClassification(receiptDoc, systemUser);
 
+                    foreach (var item in parentDocClassifications.Where(i => i.IsInherited))
+                    {
+                        receiptDoc.CreateDocClassification(item.ClassificationId, item.IsInherited, systemUserContext);
+                    }
+
                     this.unitOfWork.Save();
 
                     this.docRepository.ExecSpSetDocTokens(docId: receiptDoc.DocId);
                     this.docRepository.ExecSpSetDocUnitTokens(docId: receiptDoc.DocId);
+
+                    receiptDoc.SetReceiptOrder(this.docRepository.GetNextReceiptOrder(receiptDoc.DocId), systemUserContext);
 
                     Guid receiptFileKey = CreateReceiptDocFileContent(initialDoc, receiptDoc, rootDoc, discrepancies, applicationDataDo);
 
@@ -766,11 +775,13 @@ namespace Gva.Rio.IncomingDocProcessor
             }
         }
 
-        private void AddDocClassification(Doc doc, User systemUser)
+        private List<DocClassification> AddDocClassification(Doc doc, User systemUser)
         {
             var docTypeClassifications = this.unitOfWork.DbContext.Set<DocTypeClassification>()
                 .Where(e => e.DocTypeId == doc.DocTypeId.Value && e.DocDirectionId == doc.DocDirectionId)
                 .ToList();
+
+            List<DocClassification> docClassifications = new List<DocClassification>();
 
             foreach (var docTypeClassification in docTypeClassifications)
             {
@@ -782,8 +793,12 @@ namespace Gva.Rio.IncomingDocProcessor
                 docClassification.IsInherited = docTypeClassification.IsInherited;
                 docClassification.IsActive = true;
 
+                docClassifications.Add(docClassification);
+
                 this.unitOfWork.DbContext.Set<DocClassification>().Add(docClassification);
             }
+
+            return docClassifications;
         }
 
         private DocFile CreateInitialDocFile(Doc doc, Guid fileKey, int docFileTypeId, int docFileKindId, DateTime? applicationSigningTime)
