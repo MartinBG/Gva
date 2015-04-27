@@ -35,7 +35,6 @@ namespace Gva.Api.WordTemplates
                 root = new
                 {
                     REG_MARK = registration != null ? registration.RegMark : null,
-                    ISSUE_DATE = airworthinessData.IssueDate,
                     PRODUCER = aircraftData.AircraftProducer.Name,
                     PRODUCER_DESIGNATION = aircraftData.Model,
                     PRODUCER_ALT = aircraftData.AircraftProducer.NameAlt,
@@ -44,7 +43,9 @@ namespace Gva.Api.WordTemplates
                     CATEGORY_ALT = string.Join(", ", registration.CatAW.Select(c => c.NameAlt).ToArray()),
                     NUMBER = airworthinessData.DocumentNumber,
                     MAX_MASS = aircraftData.MaxMassT,
-                    MSN = aircraftData.ManSN
+                    MSN = aircraftData.ManSN,
+                    ISSUE_DATE = airworthinessData.IssueDate,
+                    ISSUE_DATE2 = airworthinessData.IssueDate
                 }
             };
 

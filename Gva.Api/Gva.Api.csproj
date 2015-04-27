@@ -474,6 +474,7 @@
     <Compile Include="WordTemplates\AML.cs" />
     <Compile Include="WordTemplates\AML_III.cs" />
     <Compile Include="WordTemplates\AMLUtils.cs" />
+    <Compile Include="WordTemplates\Directive8.cs" />
     <Compile Include="WordTemplates\TechCert.cs" />
     <Compile Include="WordTemplates\SpecialCert.cs" />
     <Compile Include="WordTemplates\Form15a.cs" />
