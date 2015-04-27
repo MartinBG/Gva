@@ -248,6 +248,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<Form15a>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<SpecialCert>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<TechCert>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<Directive8>().As<IDataGenerator>().InstancePerLifetimeScope();
         }
     }
 }
