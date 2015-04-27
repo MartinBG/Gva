@@ -57,10 +57,23 @@ namespace Gva.Api.Repositories.AircraftRepository
                 .SingleOrDefault(p => p.LotId == aircraftId);
         }
 
-        public IEnumerable<GvaInvalidActNumber> GetInvalidActNumbers()
+        public IEnumerable<GvaInvalidActNumber> GetInvalidActNumbers(int? actNumber = null, int? registerId = null)
         {
+            var predicate = PredicateBuilder.True<GvaInvalidActNumber>();
+
+            if (registerId.HasValue)
+            {
+                predicate = predicate.And(a => a.RegisterId == registerId.Value);
+            }
+
+            if (actNumber.HasValue)
+            {
+                predicate = predicate.And(a => a.ActNumber == actNumber.Value);
+            }
+
             return this.unitOfWork.DbContext.Set<GvaInvalidActNumber>()
-                .Include(n => n.Register);
+                .Include(n => n.Register)
+                .Where(predicate);
         }
 
         public bool DevalidateActNumber(int actNumber, string reason)

@@ -25,7 +25,7 @@ namespace Gva.Api.Repositories.AircraftRepository
             int offset = 0,
             int? limit = null);
 
-        IEnumerable<GvaInvalidActNumber> GetInvalidActNumbers();
+        IEnumerable<GvaInvalidActNumber> GetInvalidActNumbers(int? actNumber = null, int? registerId = null);
 
         bool DevalidateActNumber(int actNumber, string reason);
 

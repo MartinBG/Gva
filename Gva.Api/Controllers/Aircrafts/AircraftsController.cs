@@ -21,6 +21,7 @@ using Regs.Api.Repositories.LotRepositories;
 using Common.Filters;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Models.Views.Aircraft;
+using Common.Linq;
 
 namespace Gva.Api.Controllers
 {
@@ -77,16 +78,12 @@ namespace Gva.Api.Controllers
         [Route("registrations")]
         public IHttpActionResult GetAircraftsRegistrations(string regMark = null, int? registerId = null, int? certNumber = null, int? actNumber = null)
         {
-            var aircrafts = this.aircraftRegistrationRepository
+            var registrations = this.aircraftRegistrationRepository
                 .GetAircraftsRegistrations(regMark: regMark, registerId: registerId, certNumber: certNumber, actNumber: actNumber)
                 .Select(a => new AircraftRegistrationDO(a))
                 .ToList();
 
-            var invalidActNumbers = this.aircraftRepository.GetInvalidActNumbers().
-                Select(a => new AircraftRegistrationDO(a))
-                .ToList();
-
-            return Ok(aircrafts.Union(invalidActNumbers).OrderBy(i => i.ActNumber).ToList());
+            return Ok(registrations);
         }
 
         [Route("invalidActNumbers")]

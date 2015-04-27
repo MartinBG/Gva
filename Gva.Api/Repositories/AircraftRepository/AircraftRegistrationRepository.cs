@@ -14,13 +14,16 @@ namespace Gva.Api.Repositories.AircraftRepository
     {
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
+        private IAircraftRepository aircraftRepository;
 
         public AircraftRegistrationRepository(
             IUnitOfWork unitOfWork,
-            ILotRepository lotRepository)
+            ILotRepository lotRepository,
+            IAircraftRepository aircraftRepository)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
+            this.aircraftRepository = aircraftRepository;
         }
 
         public int? GetLastActNumber(int? registerId = null, string alias = null)
@@ -66,10 +69,24 @@ namespace Gva.Api.Repositories.AircraftRepository
                 predicate = predicate.And(a => a.ActNumber == actNumber.Value);
             }
 
-            return this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
+            List<GvaViewAircraftRegistration> invalidActNumbers = new List<GvaViewAircraftRegistration>();
+            if (string.IsNullOrEmpty(regMark) && !certNumber.HasValue)
+            {
+                invalidActNumbers = this.aircraftRepository.GetInvalidActNumbers(actNumber, registerId)
+                    .Select(a => new GvaViewAircraftRegistration()
+                    {
+                        ActNumber = a.ActNumber,
+                        Register = a.Register
+                    })
+                    .ToList();
+            }
+
+            var registrations = this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
                 .Include(r => r.Register)
                 .Where(predicate)
                 .ToList();
+
+            return registrations.Union(invalidActNumbers).OrderBy(i => i.ActNumber).ToList();
         }
 
         public List<NomValue> GetAircraftRegistrationNoms(int lotId, string term = null)

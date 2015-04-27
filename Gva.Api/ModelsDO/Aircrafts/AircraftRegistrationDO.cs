@@ -18,13 +18,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.RegMark = registration.RegMark;
         }
 
-        public AircraftRegistrationDO(GvaInvalidActNumber actNumberEntry)
-        {
-            this.ActNumber = actNumberEntry.ActNumber;
-            this.RegisterCode = actNumberEntry.Register.Code;
-        }
-
-
         public int LotId { get; set; }
 
         public int PartIndex { get; set; }
