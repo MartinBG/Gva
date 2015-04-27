@@ -1,12 +1,14 @@
 ﻿<div>
   <div class="row">
-    <div class="col-sm-12 col-md-9">
+    <div class="col-sm-12 col-md-12">
       <sc-field type="int" ng-model="actNumber" ng-required="true" l10n-text="aircrafts.invalidActNumbersSearch.actNumber" class="col-md-2 col-sm-4"></sc-field>
       <sc-field type="text" ng-model="reason" ng-required="true" l10n-text="aircrafts.invalidActNumbersSearch.reason" class="col-md-4 col-sm-4"></sc-field>
       <div style="margin-top: 22px;" class="col-sm-3 col-md-3">
         <sc-button name="addBtn" btn-click="devalidateActNumber()" ng-disabled="disableBtn" text="aircrafts.invalidActNumbersSearch.devalidateActNumber" class="btn btn-primary btn-xs"></sc-button>
       </div>
-      <sc-info class="danger" icon="glyphicon glyphicon-remove" text="aircrafts.invalidActNumbersSearch.notExistingActNumber" ng-if="!devalidated"></sc-info>
+      <div class="col-sm-3">
+        <sc-info class="danger" icon="glyphicon glyphicon-remove" text="aircrafts.invalidActNumbersSearch.notExistingActNumber" ng-if="!devalidated"></sc-info>
+      </div>
     </div>
   </div>
 
