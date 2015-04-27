@@ -68,7 +68,6 @@
           registrationRequest: 'За регистрация',
           reverseDocPrepared: 'Връщане в статус чернова',
           reverseDocProcessed: 'Връщане в статус изготвен',
-          reverseDocFromPortal: 'Връщане в статус От портал',
           reverseDocFinished: 'Връщане в статус обработен',
           reverseDocCanceled: 'Връщане в статус обработен',
           stagesName: 'Етапи',
