@@ -118,7 +118,7 @@ namespace Gva.Api.Controllers.Aircrafts
 
                 var registrations = this.lotRepository.GetLotIndex(lotId).Index
                     .GetParts<AircraftCertRegistrationFMDO>(this.path)
-                    .OrderByDescending(r => r.CreateDate)
+                    .OrderByDescending(r => r.Content.ActNumber)
                     .ToList();
 
                 if (registrations.Count > 0)
