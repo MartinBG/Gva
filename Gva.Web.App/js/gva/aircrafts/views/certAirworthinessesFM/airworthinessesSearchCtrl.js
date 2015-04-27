@@ -23,7 +23,7 @@
       }
       return {
         partIndex: aw.partIndex,
-        act: aw.part.airworthinessCertificateType.name,
+        airworthinessCertificateType: aw.part.airworthinessCertificateType,
         issueDate: aw.part.issueDate,
         validFrom: validFrom,
         validTo: validTo,
