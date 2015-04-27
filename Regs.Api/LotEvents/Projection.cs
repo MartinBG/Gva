@@ -14,7 +14,7 @@ using Regs.Api.Models;
 
 namespace Regs.Api.LotEvents
 {
-    public abstract class Projection<TView> : ILotEventHandler where TView : class
+    public abstract class Projection<TView> : ILotEventHandler, IProjection where TView : class, IProjectionView
     {
         private static ConcurrentDictionary<Type, EntitySet> entitySets = new ConcurrentDictionary<Type,EntitySet>();
 
@@ -67,6 +67,58 @@ namespace Regs.Api.LotEvents
 
             var newViews = this
                 .Execute(commit.Parts)
+                .Select(view => unitOfWork.DbContext.Entry(view))
+                .ToDictionary(viewEntry => CreateEntityKey(viewEntry));
+
+            // update updated views
+            var updatedOldViews = oldViews.Where(oldView => newViews.ContainsKey(oldView.Key));
+            foreach (var oldView in updatedOldViews)
+            {
+                if (oldView.Value.State == EntityState.Detached)
+                {
+                    oldView.Value.State = EntityState.Unchanged;
+                }
+
+                oldView.Value.CurrentValues.SetValues(newViews[oldView.Key].Entity);
+            }
+
+            // remove deleted views
+            var deletedOldViews = oldViews.Where(oldView => !newViews.ContainsKey(oldView.Key));
+            foreach (var oldView in deletedOldViews)
+            {
+                oldView.Value.State = EntityState.Deleted;
+            }
+
+            // add new views
+            var addedNewViews = newViews.Where(newView => !oldViews.ContainsKey(newView.Key));
+            foreach (var newView in addedNewViews)
+            {
+                newView.Value.State = EntityState.Added;
+            }
+
+            context.Configuration.AutoDetectChangesEnabled = originalAutoDetectChanges;
+            context.ChangeTracker.DetectChanges();
+        }
+
+        public void RebuildLot(Lot lot)
+        {
+            if (!string.IsNullOrEmpty(this.setAlias) && lot.Set.Alias != this.setAlias)
+            {
+                return;
+            }
+
+            var context = this.unitOfWork.DbContext;
+            bool originalAutoDetectChanges = context.Configuration.AutoDetectChangesEnabled;
+            context.Configuration.AutoDetectChangesEnabled = false;
+
+            var oldViews =
+                context.Set<TView>().Where(view => view.LotId == lot.LotId)
+                .AsEnumerable()
+                .Select(view => unitOfWork.DbContext.Entry(view))
+                .ToDictionary(viewEntry => CreateEntityKey(viewEntry));
+
+            var newViews = this
+                .Execute(lot.Index.Parts)
                 .Select(view => unitOfWork.DbContext.Entry(view))
                 .ToDictionary(viewEntry => CreateEntityKey(viewEntry));
 

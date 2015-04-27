@@ -14,8 +14,7 @@ namespace Regs.Api.LotEvents
 
         public void Dispatch(ILotEvent e)
         {
-            //TODO think of a better way to execute the principal event handlers first
-            foreach (var handler in this.handlers.OrderByDescending(h => h is CommitEventHandler && ((CommitEventHandler)h).IsPrincipal))
+            foreach (var handler in this.handlers)
             {
                 handler.Handle(e);
             }

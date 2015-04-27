@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
 using Regs.Api.Models;
+using Regs.Api.LotEvents;
 
 namespace Gva.Api.Models.Views.Person
 {
-    public partial class GvaViewPersonReport
+    public partial class GvaViewPersonReport : IProjectionView
     {
         public int LotId { get; set; }
 

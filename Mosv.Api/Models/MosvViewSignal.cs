@@ -3,10 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Docs.Api.Models;
 using Regs.Api.Models;
+using Regs.Api.LotEvents;
 
 namespace Mosv.Api.Models
 {
-    public partial class MosvViewSignal
+    public partial class MosvViewSignal : IProjectionView
     {
         public int LotId { get; set; }
 

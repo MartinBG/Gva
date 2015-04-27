@@ -76,7 +76,7 @@ namespace Gva.Api.Controllers.Persons
                       join rc in this.unitOfWork.DbContext.Set<GvaViewPersonReportCheck>() on
                         new { LotId = r.LotId, PartIndex = r.PartIndex }
                         equals
-                        new { LotId = rc.ReportLotId, PartIndex = rc.ReportPartIndex }
+                        new { LotId = rc.LotId, PartIndex = rc.PartIndex }
                           where rc.CheckPartIndex == partIndex && rc.CheckLotId == lotId
                              select new {
                                 PartIndex = r.PartIndex,

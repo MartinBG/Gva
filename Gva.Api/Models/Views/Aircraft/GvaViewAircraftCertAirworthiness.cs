@@ -1,9 +1,10 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
+using Regs.Api.LotEvents;
 
 namespace Gva.Api.Models.Views.Aircraft
 {
-    public partial class GvaViewAircraftCertAirworthiness
+    public partial class GvaViewAircraftCertAirworthiness : IProjectionView
     {
         public int LotId { get; set; }
 

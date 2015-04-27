@@ -67,8 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LotEvents\CommitEventHandler`1.cs" />
-    <Compile Include="LotEvents\CommitEventHandler.cs" />
+    <Compile Include="LotEvents\IProjection.cs" />
+    <Compile Include="LotEvents\IProjectionView.cs" />
     <Compile Include="LotEvents\Projection.cs" />
     <Compile Include="LotEvents\ILotEvent.cs" />
     <Compile Include="LotEvents\ILotEventDispatcher.cs" />

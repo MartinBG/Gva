@@ -5,10 +5,11 @@ using System;
 using Docs.Api.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using Gva.Api.Models.Views.Person;
+using Regs.Api.LotEvents;
 
 namespace Gva.Api.Models.Views
 {
-    public partial class GvaViewPersonApplicationExam
+    public partial class GvaViewPersonApplicationExam : IProjectionView
     {
         public int LotId { get; set; }
 

@@ -119,6 +119,7 @@
     <Compile Include="Controllers\Airports\AirportsController.cs" />
     <Compile Include="Controllers\Applications\AplicationsCaseController.cs" />
     <Compile Include="Controllers\Applications\ApplicationStagesController.cs" />
+    <Compile Include="Controllers\ProjectionsController.cs" />
     <Compile Include="Controllers\ExaminationSystemController.cs" />
     <Compile Include="Controllers\GvaCaseTypesPartController.cs" />
     <Compile Include="Controllers\GvaCaseTypePartController.cs" />

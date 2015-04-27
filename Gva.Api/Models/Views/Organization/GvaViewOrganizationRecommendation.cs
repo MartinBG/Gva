@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using Gva.Api.Models.Views.Person;
+using Regs.Api.LotEvents;
 
 namespace Gva.Api.Models.Views.Organization
 {
-    public partial class GvaViewOrganizationRecommendation
+    public partial class GvaViewOrganizationRecommendation : IProjectionView
     {
         public int LotId { get; set; }
 

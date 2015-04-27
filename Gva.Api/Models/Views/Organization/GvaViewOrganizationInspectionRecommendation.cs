@@ -1,8 +1,9 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using Regs.Api.LotEvents;
+using System.Data.Entity.ModelConfiguration;
 
 namespace Gva.Api.Models.Views.Organization
 {
-    public partial class GvaViewOrganizationInspectionRecommendation
+    public partial class GvaViewOrganizationInspectionRecommendation : IProjectionView
     {
         public int LotId { get; set; }
 

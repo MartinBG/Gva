@@ -225,6 +225,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ExamsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AuditsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ExaminationSystemController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<ProjectionsController>().InstancePerLifetimeScope();
 
             //generators for persons
             moduleBuilder.RegisterType<Pilot142year2013>().As<IDataGenerator>().InstancePerLifetimeScope();

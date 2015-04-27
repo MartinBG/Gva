@@ -35,8 +35,8 @@ namespace Gva.Api.Projections.Person
                         {
                             CheckLotId = check.LotId,
                             CheckPartIndex = check.PartIndex,
-                            ReportLotId = report.Part.Lot.LotId,
-                            ReportPartIndex = report.Part.Index
+                            LotId = report.Part.Lot.LotId,
+                            PartIndex = report.Part.Index
                         });
                 }
             }

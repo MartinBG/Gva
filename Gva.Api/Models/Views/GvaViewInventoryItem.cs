@@ -2,10 +2,11 @@
 using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
 using Regs.Api.Models;
+using Regs.Api.LotEvents;
 
 namespace Gva.Api.Models.Views
 {
-    public partial class GvaViewInventoryItem
+    public partial class GvaViewInventoryItem : IProjectionView
     {
         public int LotId { get; set; }
 

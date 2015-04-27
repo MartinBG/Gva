@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Regs.Api.LotEvents;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Gva.Api.Models.Views.Organization
 {
-    public partial class GvaViewOrganizationInspection
+    public partial class GvaViewOrganizationInspection : IProjectionView
     {
         public int LotId { get; set; }
 
