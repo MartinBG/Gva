@@ -4,6 +4,9 @@
       <strong l10n-text="aircrafts.editAirworthiness.titleAw"></strong>
 
       <div class="pull-right">
+        <a ng-click="print()" ng-if="aw.part.airworthinessCertificateType.alias !== '15b' && aw.part.airworthinessCertificateType.alias !== 'unknown'">
+          <span class="glyphicon glyphicon-print"></span>
+        </a>
         <sc-button ng-if="reviews && reviews.length == 0" ng-show="!isEditReview && (aw.part.airworthinessCertificateType.alias === '15a' || aw.part.airworthinessCertificateType.alias === '15b')"
             btn-click="newReview()" name="newReviewBtn" text="{{newReviewBtnText}}" ng-disabled="disableNewReview || !isActiveReg" class="btn btn-primary btn-xs" icon="glyphicon-plus">
         </sc-button>

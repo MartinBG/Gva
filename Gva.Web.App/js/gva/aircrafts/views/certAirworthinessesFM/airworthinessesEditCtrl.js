@@ -9,6 +9,7 @@
     AircraftCertAirworthinessesFM,
     AircraftCertRegistrationsFM,
     originalAw,
+    scModal,
     scMessage
   ) {
     function resetAw() {
@@ -157,6 +158,21 @@
           }
         });
     };
+
+    $scope.print = function () {
+      var params = {
+        lotId: $stateParams.id,
+        partIndex: $stateParams.ind
+      };
+
+      var modalInstance = scModal.open('printAirworthiness', params);
+
+      modalInstance.result.then(function (savedAirworthiness) {
+        $scope.aw.part.stampNumber = savedAirworthiness.part.stampNumber;
+      });
+
+      return modalInstance.opened;
+    };
   }
 
   CertAirworthinessesFMEditCtrl.$inject = [
@@ -166,6 +182,7 @@
     'AircraftCertAirworthinessesFM',
     'AircraftCertRegistrationsFM',
     'aircraftCertAirworthiness',
+    'scModal',
     'scMessage'
   ];
 
