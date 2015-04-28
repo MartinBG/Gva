@@ -180,6 +180,7 @@
     <Compile Include="ModelsDO\Integration\IntegrationNewAppDO.cs" />
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
+    <Compile Include="ModelsDO\Persons\CheckOfForeignerDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonNewExamSystStateDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamSystStateDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamSystExamDO.cs" />
