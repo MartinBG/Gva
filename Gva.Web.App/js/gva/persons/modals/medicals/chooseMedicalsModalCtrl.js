@@ -45,10 +45,16 @@
       'PersonDocumentMedicals',
       'scModalParams',
       function (PersonDocumentMedicals, scModalParams) {
-        return PersonDocumentMedicals.query({ 
-          id: scModalParams.lotId,
-          caseTypeId: scModalParams.caseTypeId 
-        }).$promise;
+        return PersonDocumentMedicals.query({
+          id: scModalParams.lotId
+        })
+          .$promise
+          .then(function (medicals){
+            return _.filter(medicals, function (medical) {
+              return medical['case'].caseType.nomValueId === scModalParams.caseTypeId ||
+                medical['case'].caseType.alias === 'person';
+            });
+          });
       }
     ]
   };

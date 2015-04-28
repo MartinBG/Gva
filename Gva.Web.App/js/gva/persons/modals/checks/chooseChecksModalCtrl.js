@@ -45,9 +45,15 @@
       'scModalParams',
       function (PersonDocumentChecks, scModalParams) {
         return PersonDocumentChecks.query({
-          id: scModalParams.lotId,
-          caseTypeId: scModalParams.caseTypeId
-        }).$promise;
+          id: scModalParams.lotId
+        })
+          .$promise
+          .then(function (checks){
+            return _.filter(checks, function (check) {
+              return check['case'].caseType.nomValueId === scModalParams.caseTypeId ||
+                check['case'].caseType.alias === 'person';
+            });
+          });
       }
     ]
   };

@@ -23,6 +23,7 @@ namespace Gva.Api.Controllers.Persons
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
+        private IFileRepository fileRepository;
 
         public PersonLanguageCertificatesController(
             IUnitOfWork unitOfWork,
@@ -37,6 +38,7 @@ namespace Gva.Api.Controllers.Persons
             this.nomRepository = nomRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.lotRepository = lotRepository;
+            this.fileRepository = fileRepository;
         }
 
         [Route("new")]
@@ -90,8 +92,14 @@ namespace Gva.Api.Controllers.Persons
             }
 
             List<CaseTypePartDO<PersonLangCertDO>> langCertDOs = new List<CaseTypePartDO<PersonLangCertDO>>();
-            langCerts.ForEach(l => langCertDOs.Add(new CaseTypePartDO<PersonLangCertDO>(l)));
-
+            foreach (var partVersion in langCerts)
+            {
+                var lotFile = this.fileRepository.GetFileReference(partVersion.PartId, caseTypeId);
+                if (!caseTypeId.HasValue || lotFile != null)
+                {
+                    langCertDOs.Add(new CaseTypePartDO<PersonLangCertDO>(partVersion, lotFile));
+                }
+            }
             return Ok(langCertDOs);
         }
     }

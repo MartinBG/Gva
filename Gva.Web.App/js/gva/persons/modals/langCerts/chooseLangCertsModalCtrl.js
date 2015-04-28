@@ -79,9 +79,15 @@
       'scModalParams',
       function (PersonDocumentLangCerts, scModalParams) {
         return PersonDocumentLangCerts.getLangCertsByValidity({
-          id: scModalParams.lotId,
-          caseTypeId: scModalParams.caseTypeId
-        }).$promise;
+          id: scModalParams.lotId
+        })
+        .$promise
+        .then(function (langCerts){
+          return _.filter(langCerts, function (langCert) {
+            return langCert['case'].caseType.nomValueId === scModalParams.caseTypeId ||
+              langCert['case'].caseType.alias === 'person';
+          });
+        });
       }
     ]
   };
