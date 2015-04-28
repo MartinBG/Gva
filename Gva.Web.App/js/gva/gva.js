@@ -529,6 +529,7 @@
     .modal('newTraining'           , 'js/gva/persons/modals/trainings/newTrainingModal.html'          , 'NewTrainingModalCtrl'              )
     .modal('chooseChecks'          , 'js/gva/persons/modals/checks/chooseChecksModal.html'            , 'ChooseChecksModalCtrl'             )
     .modal('newCheck'              , 'js/gva/persons/modals/checks/newCheckModal.html'                , 'NewCheckModalCtrl'                 )
+    .modal('checkOfForeigner'      , 'js/gva/persons/modals/checks/checkOfForeignerModal.html'        , 'CheckOfForeignerModalCtrl'         )
     .modal('chooseRatings'         , 'js/gva/persons/modals/ratings/chooseRatingsModal.html'          , 'ChooseRatingsModalCtrl'            )
     .modal('newRating'             , 'js/gva/persons/modals/ratings/newRatingModal.html'              , 'NewRatingModalCtrl'                )
     .modal('chooseMedicals'        , 'js/gva/persons/modals/medicals/chooseMedicalsModal.html'        , 'ChooseMedicalsModalCtrl'           )

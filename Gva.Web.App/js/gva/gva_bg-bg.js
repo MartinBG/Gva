@@ -1512,9 +1512,11 @@
           isValid: 'Валиден'
         },
         personReportDirective: {
+          checksOfForeigners: 'Проверки на проверени чужденци',
           date: 'Дата',
           documentNumber: 'No на отчет',
           addCheck: 'Добави проверкa',
+          addCheckOfForeigner: 'Добави проверкa на чужденец',
           includedChecks: ' Проверки',
           checksTable: {
             personLin: 'ЛИН',
@@ -1529,7 +1531,8 @@
             ratingType: 'Тип ВС <br>(раб. място)',
             valid: 'Валидност',
             ratingValue: 'Оценка',
-            noChecks: 'Няма налични проверки'
+            noChecks: 'Няма налични проверки',
+            names: 'Имена'
           },
           caseType: 'Тип дело'
         },
@@ -2517,6 +2520,17 @@
           title: 'Нова проверка',
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        newCheckOfForeignerModal: {
+          title: 'Нова проверка на чужденец',
+          save: 'Запис',
+          cancel: 'Отказ',
+          ratingTypes: 'Тип ВС',
+          ratingClass: 'Клас',
+          names: 'Имена',
+          documentDate: 'Дата',
+          documentType: 'Тип документ',
+          documentNumber: '№ на документа'
         },
         newQlfStateModal: {
           save: 'Запис',

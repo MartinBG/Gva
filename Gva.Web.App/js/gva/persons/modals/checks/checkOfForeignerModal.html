@@ -1,0 +1,28 @@
+﻿<ng-form name="form.newDocumentCheckForm" class="form-inline" sc-validate="{}">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="persons.newCheckModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="add()" text="persons.newCheckOfForeignerModal.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk"></sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="persons.newCheckOfForeignerModal.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle"></sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <div class="row">
+        <sc-field type="text" ng-model="model.names" l10n-text="persons.newCheckOfForeignerModal.names" ng-required="true" class="col-sm-6 col-md-3"></sc-field>
+      </div>
+      <div class="row">
+        <sc-field type="text" ng-model="model.documentType" l10n-text="persons.newCheckOfForeignerModal.documentType" ng-required="true" class="col-sm-3 col-md-2"></sc-field>
+      </div>
+      <div class="row">
+        <sc-field type="text" ng-model="model.documentNumber" l10n-text="persons.newCheckOfForeignerModal.documentNumber" ng-required="true" class="col-sm-3 col-md-2"></sc-field>
+        <sc-field type="date" ng-model="model.documentDate" ng-required="true"l10n-text="persons.newCheckOfForeignerModal.documentDate" class="col-sm-3 col-md-2" ng-required="true"></sc-field>
+      </div>
+      <div class="row">
+        <sc-field type="text" ng-model="model.ratingTypes" l10n-text="persons.newCheckOfForeignerModal.ratingTypes" ng-disabled="model.ratingClass"  class="col-sm-6 col-md-4"></sc-field>
+        <sc-field type="text" ng-model="model.ratingClass" l10n-text="persons.newCheckOfForeignerModal.ratingClass" ng-disabled="model.ratingTypes" class="col-sm-6 col-md-4"></sc-field>
+      </div>
+    </div>
+  </div>
+</ng-form>

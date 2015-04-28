@@ -7,7 +7,6 @@
     reports
   ) {
     $scope.reports = reports;
-
   }
 
   ReportsSearchCtrl.$inject = [

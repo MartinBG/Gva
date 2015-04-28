@@ -4,7 +4,7 @@
 
   function PersonReportCtrl($scope, Persons, scModal, scMessage, scFormParams) {
     $scope.hideCaseType = scFormParams.hideCaseType;
-    $scope.isNew = scFormParams.isNew; 
+    $scope.isNew = scFormParams.isNew;
     $scope.includedChecks = [];
     if ($scope.model.part) {
       $scope.model.part.includedChecks = $scope.model.part.includedChecks || [];
@@ -99,6 +99,27 @@
         });
     };
 
+    $scope.removeCheckOfForeigner = function (check) {
+      return scMessage('common.messages.confirmDelete')
+        .then(function (result) {
+          if (result === 'OK') {
+            _.remove($scope.model.part.includedChecksOfForeigners,
+              function(includedCheck) {
+                return includedCheck === check;
+              });
+          }
+        });
+    };
+
+    $scope.editCheckOfForeigner = function (check) {
+      var modalInstance = scModal.open('checkOfForeigner', {check: _.cloneDeep(check)});
+      var index =_.findIndex($scope.model.part.includedChecksOfForeigners, check);
+      modalInstance.result.then(function (check) {
+        $scope.model.part.includedChecksOfForeigners[index] = check;
+      });
+      return modalInstance.opened;
+    };
+
     $scope.isUniqueDocData = function () {
       return Persons
         .isUniqueDocData({
@@ -115,7 +136,21 @@
         return result.isUnique;
       });
     };
+
+    $scope.addCheckOfForeigner = function () {
+      var modalInstance = scModal.open('checkOfForeigner');
+
+        modalInstance.result.then(function (newCheck) {
+          if (!$scope.model.part.includedChecksOfForeigners) {
+            $scope.model.part.includedChecksOfForeigners = [];
+          }
+          $scope.model.part.includedChecksOfForeigners.push(newCheck);
+        });
+
+      return modalInstance.opened;
+    };
   }
+
 
   PersonReportCtrl.$inject = [
     '$scope',
