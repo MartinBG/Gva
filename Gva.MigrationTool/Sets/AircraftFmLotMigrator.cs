@@ -392,7 +392,6 @@ namespace Gva.MigrationTool.Sets
                         s.tRemarkDeReg,
                         s.tDeDocCAA,
                         s.dDeDateCAA,
-                        s.tDeUser,
                         (case
 	                        when a.t_CofR_No LIKE 'II - %' then substring(a.t_CofR_No, 6, 10000)
 	                        when a.t_CofR_No LIKE 'II-%' then substring(a.t_CofR_No, 4, 10000)
@@ -403,13 +402,13 @@ namespace Gva.MigrationTool.Sets
                     (select 1 as regNumber, nActID, nRegNum, dRegDate, tRegMark, tDocCAA, dDateCAA, tDocOther, tRegUser, nOwner,
                             nOper, tCatCode, nLimitID, tR83_Zapoved, dR83_Data, tLessor, tLessorAgreement, dLeaseDate,
                             nStatus, tEASA_25, dEASA_25, dEASA_15, dCofR_New, dNoise_New, tNoise_New, tAnnexII_Bg, tAnnexII_En,
-                            dDeRegDate, tDeDocOther, tRemarkDeReg, tDeDocCAA, dDeDateCAA, tDeUser
+                            dDeRegDate, tDeDocOther, tRemarkDeReg, tDeDocCAA, dDeDateCAA
                     from Reg1 as r1
                         union all
                     select 2 as regNumber, nActID, nRegNum, dRegDate, tRegMark, tDocCAA, dDateCAA, tDocOther, tRegUser, nOwner,
                             nOper, tCatCode, nLimitID, tR83_Zapoved, null as dR83_Data, tLessor, tLessorAgreement, dLeaseDate,
                             nStatus, null as tEASA_25, null as dEASA_25, null as dEASA_15, dCofR_New, dNoise_New, null as tNoise_New, tAnnexII_Bg, tAnnexII_En,
-                            dDeRegDate, tDeDocOther, null as tRemarkDeReg, tDeDocCAA, dDeDateCAA, tDeUser
+                            dDeRegDate, tDeDocOther, null as tRemarkDeReg, tDeDocCAA, dDeDateCAA
                     from Reg2 as r2) s
                     left outer join Acts a on a.n_Act_ID = s.nActID
                     left outer join Orgs owner on owner.nOrgID = s.nOwner
@@ -454,8 +453,7 @@ namespace Gva.MigrationTool.Sets
                             date = Utils.FmToDate(r.Field<string>("dDeRegDate")),
                             text = (r.Field<string>("tDeDocOther") + "\n\n" + r.Field<string>("tRemarkDeReg")).Trim(),
                             documentNumber = !string.IsNullOrEmpty(r.Field<string>("tDeDocCAA")) ? r.Field<string>("tDeDocCAA") : null,
-                            documentDate = Utils.FmToDate(r.Field<string>("dDeDateCAA")),
-                            inspector = getInspectorOrOther(r.Field<string>("tDeUser"))
+                            documentDate = Utils.FmToDate(r.Field<string>("dDeDateCAA"))
                         },
                         parsedToIntStatusCode = int.Parse(r.Field<string>("nStatus")),
                         matchedStatus = isOrderStatus.Match(noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")).Name)
@@ -508,8 +506,7 @@ namespace Gva.MigrationTool.Sets
                                     reason = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? noms["aircraftRemovalReasonsFm"].ByAlias("order") : null,
                                     text = r.removal.text,
                                     documentNumber = r.removal.documentNumber,
-                                    documentDate = r.removal.documentDate,
-                                    inspector = r.removal.inspector
+                                    documentDate = r.removal.documentDate
                                 },
                                 isActive = false,
                                 isCurrent = false

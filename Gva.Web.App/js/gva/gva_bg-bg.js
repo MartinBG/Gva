@@ -827,7 +827,6 @@
           inspector: 'Заверил',
           owner: 'Собственик',
           operator: 'Оператор',
-          removalInspector: 'Инспектор, отписал ВС',
           newReg: 'Нова регистрация'
         },
         newReg: {

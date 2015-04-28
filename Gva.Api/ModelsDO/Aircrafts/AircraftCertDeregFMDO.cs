@@ -18,8 +18,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? DocumentDate { get; set; }
 
-        public AircraftInspectorDO Inspector { get; set; }
-
         public NomValue Country { get; set; }
 
         public string Notes { get; set; }
