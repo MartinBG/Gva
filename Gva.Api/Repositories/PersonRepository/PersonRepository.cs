@@ -55,7 +55,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 var namesToSearch = names.Split(new [] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var name in namesToSearch)
                 {
-                    predicate = predicate.And(p => p.Names.Contains(name));
+                    predicate = predicate.And(p => p.Names.Contains(name) || p.NamesAlt.Contains(name));
                 }
             }
 

@@ -20,6 +20,8 @@ namespace Gva.Api.Models.Views.Person
 
         public string Names { get; set; }
 
+        public string NamesAlt { get; set; }
+
         public DateTime BirtDate { get; set; }
 
         public int? OrganizationId { get; set; }
@@ -93,6 +95,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.LinTypeId).HasColumnName("LinTypeId");
             this.Property(t => t.Uin).HasColumnName("Uin");
             this.Property(t => t.Names).HasColumnName("Names");
+            this.Property(t => t.NamesAlt).HasColumnName("NamesAlt");
             this.Property(t => t.Licences).HasColumnName("LicenceCodes");
             this.Property(t => t.Ratings).HasColumnName("RatingCodes");
             this.Property(t => t.BirtDate).HasColumnName("BirtDate");

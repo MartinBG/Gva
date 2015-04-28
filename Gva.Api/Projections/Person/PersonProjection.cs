@@ -54,6 +54,11 @@ namespace Gva.Api.Projections.Person
                 personData.Content.FirstName,
                 personData.Content.MiddleName,
                 personData.Content.LastName);
+            person.NamesAlt = string.Format(
+               "{0} {1} {2}",
+               personData.Content.FirstNameAlt,
+               personData.Content.MiddleNameAlt,
+               personData.Content.LastNameAlt);
             person.BirtDate = personData.Content.DateOfBirth.Value;
 
             if (personEmployment != null)
