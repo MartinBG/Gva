@@ -333,8 +333,8 @@ namespace Gva.MigrationTool.Sets
                         aircraftOccurrenceClass = noms["aircraftOccurrenceClasses"].ByCode(r.Field<string>("CLASS")),
                         country = noms["countries"].ByOldId(r.Field<decimal?>("ID_COUNTRY").ToString()),
                         area = r.Field<string>("AREA"),
-                        occurrenceNotes = r.Field<string>("TEXT"),
-                        description = r.Field<string>("REMARKS")
+                        occurrenceNotes = r.Field<string>("REMARKS"),
+                        description = r.Field<string>("TEXT")
                     }))
                 .ToList();
 
