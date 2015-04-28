@@ -1178,6 +1178,25 @@ namespace Docs.Api.Models
                 throw new InvalidOperationException(string.Format("Doc with id {0} has not loaded its docRelations.", this.DocId));
             }
         }
+
+        public string GetDocStatusName()
+        {
+            switch (this.DocStatus.Alias)
+            {
+                case "Finished":
+                case "Canceled":
+                    return this.DocStatus.Name;
+                case "Draft":
+                    return (this.DocSourceType != null && this.DocSourceType.Alias == "Internet") ? "От портал" : "Чернова";
+                case "Processed":
+                    return
+                        (this.DocEntryType.Alias == "Resolution" || this.DocEntryType.Alias == "Task") ? "Възложен" :
+                        this.DocDirection.Alias == "Outgoing" ? "Изготвен" :
+                        "Обработен";
+                default:
+                    throw new ApplicationException("Unexpected doc status.");
+            }
+        }
     }
 
     public class DocMap : EntityTypeConfiguration<Doc>

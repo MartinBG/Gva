@@ -54,7 +54,7 @@
     $scope.linkApplication = function () {
       var modalInstance = scModal.open('linkApplication', { 
         docId: $scope.docId,
-        isFromPortal: doc.docStatusAlias === 'FromPortal',
+        isFromPortal: doc.isElectronic,
         docRegUri: doc.regUri
       });
 

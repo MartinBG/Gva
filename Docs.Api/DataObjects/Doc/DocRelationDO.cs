@@ -36,7 +36,7 @@ namespace Docs.Api.DataObjects
 
                     this.DocDocTypeName = d.Doc.DocType != null ? d.Doc.DocType.Name : string.Empty;
                     this.DocDocTypeId = d.Doc.DocType != null ? d.Doc.DocType.DocTypeId : (int?)null;
-                    this.DocDocStatusName = d.Doc.DocStatus != null ? d.Doc.DocStatus.Name : string.Empty;
+                    this.DocDocStatusName = d.Doc.DocStatus != null ? d.Doc.GetDocStatusName() : string.Empty;
                     this.DocDocCasePartTypeId = d.Doc.DocCasePartTypeId;
                     this.DocDocCasePartTypeName = d.Doc.DocCasePartType != null ? d.Doc.DocCasePartType.Name : string.Empty;
                     this.DocDocCasePartTypeAlias = d.Doc.DocCasePartType != null ? d.Doc.DocCasePartType.Alias : string.Empty;

@@ -173,8 +173,9 @@ namespace Docs.Api.Repositories.EmailRepository
             DocUnitRole docUnitRoleFrom = docUnitRoles.SingleOrDefault(e => e.Alias == "From");
             DocUnitRole docUnitRoleImportedBy = docUnitRoles.SingleOrDefault(e => e.Alias == "ImportedBy");
             DocUnitRole docUnitRoleTo = docUnitRoles.SingleOrDefault(e => e.Alias == "To");
+            DocUnitRole docUnitRoleCCopy = docUnitRoles.SingleOrDefault(e => e.Alias == "CCopy");
 
-            List<DocUnit> receivingDocUnits = doc.DocUnits.Where(du => du.DocUnitRoleId == docUnitRoleTo.DocUnitRoleId).ToList();
+            List<DocUnit> receivingDocUnits = doc.DocUnits.Where(du => du.DocUnitRoleId == docUnitRoleTo.DocUnitRoleId || du.DocUnitRoleId == docUnitRoleCCopy.DocUnitRoleId).ToList();
 
             DocUnit docUnitFrom = doc.DocUnits.FirstOrDefault(e => e.DocUnitRoleId == docUnitRoleFrom.DocUnitRoleId);
 

@@ -196,7 +196,8 @@ namespace Gva.Api.Controllers.Applications
                     e => e.Doc.DocDirection,
                     e => e.Doc.DocType,
                     e => e.Doc.DocStatus,
-                    e => e.Doc.DocEntryType);
+                    e => e.Doc.DocEntryType,
+                    e => e.Doc.DocSourceType);
 
                 List<GvaAppLotFile> appFilesInCase = new List<GvaAppLotFile>();
 

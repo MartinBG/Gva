@@ -420,7 +420,6 @@ namespace Docs.Api.Controllers
             var results =
                 this.unitOfWork.DbContext.Set<DocStatus>()
                 .Where(predicate)
-                .OrderBy(e => e.Name)
                 .WithOffsetAndLimit(offset, limit)
                 .Select(e => new
                 {

@@ -27,7 +27,7 @@ namespace Docs.Api.DataObjects
 
                 if (d.DocStatus != null)
                 {
-                    this.DocStatusName = d.DocStatus.Name;
+                    this.DocStatusName = d.GetDocStatusName();
                 }
 
                 if (d.DocType != null)
