@@ -665,9 +665,9 @@ namespace Gva.MigrationTool.Sets
 
             var issues = this.sqlConn.CreateStoreCommand(
                 @"select * from 
-                    (select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspetor as t_CAA_Inspector, t_ARC_RefNo from CofA1 as r1
+                    (select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_Reviewed_by, t_ARC_RefNo from CofA1 as r1
                         union all
-                    select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_CAA_Inspector, t_ARC_RefNo from CofA2 as r2) s
+                    select nActId, nRegNum, nRegNumActive, nStatus, Reg_ID, NumberIssue, t_ARC_Type, dDateEASA_25_Issue, d_24_Issue, dIssue, dFrom, dValid, t_Reviewed_by, t_ARC_RefNo from CofA2 as r2) s
                 where {0} and not(s.dIssue = '' and s.dFrom = '' and s.dValid = '') and s.nStatus <> 0
                 order by CAST(s.nRegNum as int), CAST(s.nRegNumActive as int) desc,
                          CAST(case
@@ -692,7 +692,7 @@ namespace Gva.MigrationTool.Sets
                         dFrom = Utils.FmToDate(r.Field<string>("dFrom")),
                         dValid = Utils.FmToDate(r.Field<string>("dValid")),
 
-                        t_CAA_Inspector = r.Field<string>("t_CAA_Inspector")
+                        t_Reviewed_by = r.Field<string>("t_Reviewed_by")
                     })
                 .ToList();
 
@@ -789,7 +789,7 @@ namespace Gva.MigrationTool.Sets
                         {
                             issueDate = issues[i].dFrom,
                             validToDate = issues[i].dValid,
-                            inspector = getInspectorOrOther(issues[i].t_CAA_Inspector)
+                            inspector = getInspectorOrOther(issues[i].t_Reviewed_by)
                         });
 
                         reviews.Add(review);
@@ -808,7 +808,7 @@ namespace Gva.MigrationTool.Sets
                             documentNumber = aw["documentNumber"],
                             issueDate = formIssues.First().dIssue,
                             form15Amendments = new JObject(),
-                            inspector = getInspectorOrOther(formIssues.First().t_CAA_Inspector)
+                            inspector = getInspectorOrOther(formIssues.First().t_Reviewed_by)
                         });
 
                         var reviews = new JArray();
@@ -820,7 +820,7 @@ namespace Gva.MigrationTool.Sets
                             {
                                 issueDate = formIssues[i].dFrom,
                                 validToDate = formIssues[i].dValid,
-                                inspector = getInspectorOrOther(issues[i].t_CAA_Inspector)
+                                inspector = getInspectorOrOther(issues[i].t_Reviewed_by)
                             });
 
                             reviews.Add(review);
@@ -860,7 +860,7 @@ namespace Gva.MigrationTool.Sets
                         {
                             if (lastForm == null || !issue.t_ARC_Type.Contains(lastForm["airworthinessCertificateType"]["alias"].ToString()))
                             {
-                                lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type, issue.t_CAA_Inspector);
+                                lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type, issue.t_Reviewed_by);
                                 airworthinesses.Add(lastForm);
                             }
                             else if (issue.t_ARC_Type.Contains(lastForm["airworthinessCertificateType"]["alias"].ToString()))
@@ -869,14 +869,14 @@ namespace Gva.MigrationTool.Sets
                                 {
                                     issueDate = issue.dFrom,
                                     validToDate = issue.dValid,
-                                    inspector = getExaminerOrOther(issue.t_CAA_Inspector)
+                                    inspector = getExaminerOrOther(issue.t_Reviewed_by)
                                 });
                                 (lastForm["reviews"] as JArray).Add(review);
                             }
                         }
                         else 
                         {
-                            lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type, issue.t_CAA_Inspector);
+                            lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type, issue.t_Reviewed_by);
                             airworthinesses.Add(lastForm);
                         }
                     }
