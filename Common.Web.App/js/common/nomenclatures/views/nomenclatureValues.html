@@ -10,6 +10,9 @@
   </sc-column>
   <sc-column data="nameAlt" title="common.nomenclatures.nomValues.search.nameAlt">
   </sc-column>
+  <sc-column data="isActive" title="common.nomenclatures.nomValues.search.isActive" has-content="true">
+    {{item.isActive ? 'Да' : 'Не'}}
+  </sc-column>
 </sc-datatable>
 
 <sc-datatable items="nomenclatureValues" filterable="true" pageable="true" sortable="true" ng-if="nomAlias === 'limitations66'">
