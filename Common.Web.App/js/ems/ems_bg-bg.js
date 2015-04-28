@@ -69,7 +69,6 @@
           reverseDocPrepared: 'Връщане в статус чернова',
           reverseDocProcessed: 'Връщане в статус изготвен',
           reverseDocFinished: 'Връщане в статус обработен',
-          reverseDocCanceled: 'Връщане в статус обработен',
           stagesName: 'Етапи',
           endElectronicStage: 'Приключване',
           nextElectronicStage: 'Следващ',

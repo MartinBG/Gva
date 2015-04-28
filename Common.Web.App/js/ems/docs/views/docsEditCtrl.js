@@ -281,7 +281,6 @@
           doc.flags.isVisibleEditCmd = doc.docStatusAlias === 'Draft' && doc.canEdit;
 
           if (doc.isResolution || doc.isTask || doc.isRemark) {
-            doc.flags.isVisibleDraftStatusCmd = false;
             doc.flags.isVisiblePreparedStatusCmd = false;
             doc.flags.isVisibleProcessedStatusCmd = false;
             doc.flags.isVisibleFinishedStatusCmd =
@@ -294,15 +293,11 @@
               doc.canReverse;
             doc.flags.isVisiblePreparedStatusReverseCmd = false;
             doc.flags.isVisibleProcessedStatusReverseCmd = false;
-            doc.flags.isVisibleFinishedStatusReverseCmd = false;
-            doc.flags.isVisibleCanceledStatusReverseCmd = false;
           } else {
             if (doc.isDocIncoming) {
-              doc.flags.isVisibleDraftStatusCmd = false;
               doc.flags.isVisiblePreparedStatusCmd = false;
               doc.flags.isVisibleProcessedStatusCmd =
-                doc.docStatusAlias === 'Draft' &&
-                (doc.canEdit || doc.canManagement);
+                doc.docStatusAlias === 'Draft' && (doc.canEdit || doc.canManagement);
               doc.flags.isVisibleFinishedStatusCmd =
                 doc.docStatusAlias === 'Processed' && doc.canFinish;
               doc.flags.isVisibleCanceledStatusCmd =
@@ -314,10 +309,7 @@
               doc.flags.isVisibleProcessedStatusReverseCmd =
                 (doc.docStatusAlias === 'Finished' || doc.docStatusAlias === 'Canceled') &&
                 doc.canReverse;
-              doc.flags.isVisibleFinishedStatusReverseCmd = false;
-              doc.flags.isVisibleCanceledStatusReverseCmd = false;
             } else {
-              doc.flags.isVisibleDraftStatusCmd = false;
               doc.flags.isVisiblePreparedStatusCmd =
                 doc.docStatusAlias === 'Draft' && doc.canEdit;
               doc.flags.isVisibleProcessedStatusCmd =
@@ -335,8 +327,6 @@
               doc.flags.isVisibleProcessedStatusReverseCmd =
                 (doc.docStatusAlias === 'Finished' || doc.docStatusAlias === 'Canceled') &&
                 doc.canReverse;
-              doc.flags.isVisibleFinishedStatusReverseCmd = false;
-              doc.flags.isVisibleCanceledStatusReverseCmd = false;
             }
           }
 
@@ -419,9 +409,7 @@
             doc.flags.isVisibleDiscussRequestCmd || doc.flags.isVisibleApprovalRequestCmd ||
             doc.flags.isVisibleRegistrationRequestCmd;
           doc.flags.isVisbleDivider5 = doc.flags.isVisibleDraftStatusReverseCmd ||
-            doc.flags.isVisiblePreparedStatusReverseCmd ||
-            doc.flags.isVisibleFinishedStatusReverseCmd ||
-            doc.flags.isVisibleCanceledStatusReverseCmd;
+            doc.flags.isVisiblePreparedStatusReverseCmd;
 
           return doc;
         });
