@@ -115,7 +115,7 @@ namespace Gva.Api.WordTemplates
                     NAME = personNameBG,
                     BIRTH1 = string.Format("{0:dd.mm.yyyy} {1}",
                        personData.DateOfBirth,
-                       personData.PlaceOfBirth != null ?  personData.PlaceOfBirth.Name : null),
+                       personData.PlaceOfBirth != null ? personData.PlaceOfBirth.Name : null),
                     ADDR = personAddress.Address,
                     NATIONALITY1 = country != null ? country.Name : null,
                     LICNO = licenceNumber,
@@ -138,7 +138,14 @@ namespace Gva.Api.WordTemplates
                     AIRCRAFTS = AMLUtils.GetAircrafts(includedRatings, ratingEditions, lot, this.nomRepository),
                     LIC_NO5 = licenceNumber,
                     NA2 = limitations.Count() == 0 && acLimitations.Count() == 0 ? "No limitations" : "",
-                    LIMITATIONS = (limitations.Count() > 0 || acLimitations.Count() > 0) ? limitations : new object(),
+                    LIMITATIONS = (limitations.Count() > 0 || acLimitations.Count() > 0) ? limitations :
+                        new object[]
+                        {
+                            new
+                            {
+                                NAME = "No limitations"
+                            }
+                        },
                     AC_LIMITATIONS = acLimitations.Count() > 0 ? acLimitations : new object(),
                     VALID_DATE = lastEdition.DocumentDateValidTo,
                     LIC_NO6 = licenceNumber
