@@ -20,8 +20,12 @@
             return PersonReports
               .save({ id: $stateParams.id }, $scope.report)
               .$promise
-              .then(function () {
-                return $state.go('root.persons.view.reports.search');
+              .then(function (result) {
+                return $state.transitionTo(
+                  'root.persons.view.reports.edit', { 
+                    id: $stateParams.id, 
+                    ind: result.partIndex
+                  },{reload: true});
               });
           }
         });

@@ -8,7 +8,7 @@
   </div>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personReportDirective.documentNumber" class="col-sm-3 col-md-2"
+    <sc-field type="text" ng-model="model.part.documentNumber" l10n-text="persons.personReportDirective.documentNumber" ng-required="true" class="col-sm-3 col-md-2"
        required sc-validate="{ invalidDocData: isValidDocData }"
        validations="{invalidDocData: 'errorTexts.notUniqueDocData', required: 'default'}"></sc-field>
     <sc-field type="date" ng-model="model.part.date" l10n-text="persons.personReportDirective.date" 
