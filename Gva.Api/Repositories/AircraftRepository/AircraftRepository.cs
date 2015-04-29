@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Common.Api.Models;
 using Common.Data;
 using Common.Linq;
 using Gva.Api.Models;
@@ -17,44 +19,84 @@ namespace Gva.Api.Repositories.AircraftRepository
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<GvaViewAircraft> GetAircrafts(
-            string mark,
-            string manSN,
-            string modelAlt,
-            string icao,
-            string airCategory,
-            string aircraftProducer,
-            bool exact,
+        public IEnumerable<Tuple<GvaViewAircraft, GvaViewAircraftRegistration>> GetAircrafts(
+            string mark = null,
+            string manSN = null,
+            string modelAlt = null,
+            string icao = null,
+            string airCategory = null,
+            string aircraftProducer = null,
+            bool exact = false,
             int offset = 0,
             int? limit = null)
         {
-            var gvaAircrafts =
-                this.unitOfWork.DbContext.Set<GvaViewAircraft>()
-                .Include(a => a.AirCategory)
-                .Include(a => a.AircraftProducer);
+            var gvaAircraftsWithRegData =
+                (from a in this.unitOfWork.DbContext.Set<GvaViewAircraft>()
+                            .Include(a => a.AirCategory)
+                            .Include(a => a.AircraftProducer)
+                 join r in this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
+                            .Include(v => v.Register)
+                         on a.ActNumber equals r.ActNumber into ra
+                 from ra1 in ra.DefaultIfEmpty()
+                 select new
+                 {
+                     Aircraft = a,
+                     Registration = ra1
+                 });
 
-            var predicate = PredicateBuilder.True<GvaViewAircraft>();
+            var registers = gvaAircraftsWithRegData
+                .Where(r => r.Registration != null)
+                .Select(r => r.Registration.CertRegisterId)
+                .ToList();
+
+            this.unitOfWork.DbContext.Set<NomValue>().Where(r => registers.Contains(r.NomValueId)).Load();
+
+            var predicate = PredicateBuilder.True(new
+            {
+                Aircraft = new GvaViewAircraft(),
+                Registration = new GvaViewAircraftRegistration()
+            });
 
             predicate = predicate
-                .AndStringMatches(p => p.ManSN, manSN, exact)
-                .AndStringMatches(p => p.ModelAlt, modelAlt, exact)
-                .AndStringMatches(p => p.Mark, mark, exact)
-                .AndStringMatches(p => p.ICAO, icao, exact)
-                .AndStringMatches(p => p.AirCategory.Name, airCategory, exact)
-                .AndStringMatches(p => p.AircraftProducer.Name, aircraftProducer, exact);
+                .AndStringMatches(p => p.Aircraft.ManSN, manSN, exact)
+                .AndStringMatches(p => p.Aircraft.ModelAlt, modelAlt, exact)
+                .AndStringMatches(p => p.Registration.RegMark, mark, exact)
+                .AndStringMatches(p => p.Aircraft.ICAO, icao, exact)
+                .AndStringMatches(p => p.Aircraft.AirCategory.Name, airCategory, exact)
+                .AndStringMatches(p => p.Aircraft.AircraftProducer.Name, aircraftProducer, exact);
 
-            return gvaAircrafts
+            var result = gvaAircraftsWithRegData
                 .Where(predicate)
-                .OrderBy(p => p.Mark)
+                .OrderBy(p => p.Registration.RegMark)
                 .WithOffsetAndLimit(offset, limit)
                 .ToList();
+
+            return result.Select(f => new Tuple<GvaViewAircraft, GvaViewAircraftRegistration>(f.Aircraft, f.Registration));
         }
-        public GvaViewAircraft GetAircraft(int aircraftId)
+
+        public Tuple<GvaViewAircraft, GvaViewAircraftRegistration> GetAircraft(int aircraftId)
         {
-            return this.unitOfWork.DbContext.Set<GvaViewAircraft>()
-                .Include(a => a.AirCategory)
-                .Include(a => a.AircraftProducer)
-                .SingleOrDefault(p => p.LotId == aircraftId);
+            var result = (from a in this.unitOfWork.DbContext.Set<GvaViewAircraft>()
+                                .Include(a => a.AirCategory)
+                                .Include(a => a.AircraftProducer)
+                                .Where(p => p.LotId == aircraftId)
+                    join r in this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
+                                .Include(v => v.Register)
+                             on a.ActNumber equals r.ActNumber into ra
+                    from ra1 in ra.DefaultIfEmpty()
+                    select new
+                    {
+                        Aircraft = a,
+                        Registration = ra1
+                    })
+                    .SingleOrDefault();
+
+            if (result.Registration != null)
+            {
+                this.unitOfWork.DbContext.Set<NomValue>().Where(r => result.Registration.CertRegisterId == r.NomValueId).Load();
+            }
+
+            return new Tuple<GvaViewAircraft, GvaViewAircraftRegistration>(result.Aircraft, result.Registration);
         }
 
         public IEnumerable<GvaInvalidActNumber> GetInvalidActNumbers(int? actNumber = null, int? registerId = null)
@@ -100,39 +142,6 @@ namespace Gva.Api.Repositories.AircraftRepository
 
                 return true;
             }
-        }
-        public IEnumerable<GvaViewAircraft> GetAircraftModels(
-            string airCategory,
-            string aircraftProducer,
-            int offset = 0,
-            int? limit = null)
-        {
-            var gvaAircrafts =
-                this.unitOfWork.DbContext.Set<GvaViewAircraft>()
-                .Include(a => a.AirCategory)
-                .Include(a => a.AircraftProducer);
-
-            var predicate = PredicateBuilder.True<GvaViewAircraft>();
-
-            predicate = predicate
-                .AndStringMatches(p => p.AirCategory.Name, airCategory, true)
-                .AndStringMatches(p => p.AircraftProducer.Name, aircraftProducer, true);
-
-            return gvaAircrafts
-                .Where(predicate)
-                .GroupBy(a => a.Model)
-                .Select(g => g.FirstOrDefault())
-                .OrderBy(p => p.Model)
-                .WithOffsetAndLimit(offset, limit)
-                .ToList();
-        }
-
-        public GvaViewAircraft GetAircraftModel(int aircraftId)
-        {
-            return this.unitOfWork.DbContext.Set<GvaViewAircraft>()
-                .Include(a => a.AirCategory)
-                .Include(a => a.AircraftProducer)
-                .SingleOrDefault(p => p.LotId == aircraftId);
         }
 
         public bool IsUniqueMSN(string msn, int? aircraftId = null)

@@ -16,8 +16,6 @@ CREATE TABLE [dbo].[GvaViewAircrafts] (
     [EngineAlt]           NVARCHAR(50)  NULL,
     [PropellerAlt]        NVARCHAR(50)  NULL,
     [ModifOrWingColorAlt] NVARCHAR(50)  NULL,
-    [Mark]                NVARCHAR(50)  NULL,
-    [CertNumber]          INT           NULL,
     [ActNumber]           INT           NULL,
     CONSTRAINT [PK_GvaViewAircrafts]             PRIMARY KEY ([LotId]),
     CONSTRAINT [FK_GvaViewAircrafts_Lots]        FOREIGN KEY ([LotId])              REFERENCES [dbo].[Lots] ([LotId]),
@@ -41,7 +39,5 @@ exec spDescColumn N'GvaViewAircrafts', N'ModifOrWingColor'    , N'Модифик
 exec spDescColumn N'GvaViewAircrafts', N'EngineAlt'           , N'Двигател (английски).'
 exec spDescColumn N'GvaViewAircrafts', N'PropellerAlt'        , N'Витло (английски).'
 exec spDescColumn N'GvaViewAircrafts', N'ModifOrWingColorAlt' , N'Модификация (английски).'
-exec spDescColumn N'GvaViewAircrafts', N'Mark'                , N'Регистрационен знак.'
-exec spDescColumn N'GvaViewAircrafts', N'CertNumber'          , N'Регистрационен номер.'
 exec spDescColumn N'GvaViewAircrafts', N'ActNumber'           , N'Деловоден номер.'
 GO

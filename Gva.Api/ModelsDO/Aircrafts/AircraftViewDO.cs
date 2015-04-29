@@ -9,7 +9,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
         {
         }
 
-        public AircraftViewDO(GvaViewAircraft aircraftData)
+        public AircraftViewDO(GvaViewAircraft aircraftData, GvaViewAircraftRegistration registration)
         {
             this.Id = aircraftData.LotId;
             this.ManSN = aircraftData.ManSN;
@@ -25,9 +25,14 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.EngineAlt = aircraftData.EngineAlt;
             this.PropellerAlt = aircraftData.PropellerAlt;
             this.ModifOrWingColorAlt = aircraftData.ModifOrWingColorAlt;
-            this.Mark = aircraftData.Mark;
             this.ActNumber = aircraftData.ActNumber;
-            this.CertNumber = aircraftData.CertNumber;
+
+            if (registration != null)
+            {
+                this.Mark = registration.RegMark;
+                this.CertNumber = registration.CertNumber;
+                this.RegisterCode = registration.Register.Code;
+            }
         }
 
         public int Id { get; set; }
@@ -63,5 +68,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public int? ActNumber { get; set; }
 
         public int? CertNumber { get; set; }
+
+        public string RegisterCode { get; set; }
     }
 }

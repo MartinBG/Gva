@@ -375,14 +375,14 @@ namespace Gva.Api.Controllers
             var ac = this.aircraftRepository.GetAircraft(id);
             return Ok(new
             {
-                nomValueId = ac.LotId,
-                name = ac.Model,
-                nameAlt = ac.ModelAlt,
+                nomValueId = ac.Item1.LotId,
+                name = ac.Item1.Model,
+                nameAlt = ac.Item1.ModelAlt,
                 textContent =
                     new
                     {
-                        airCategory = ac.AirCategory,
-                        aircraftProducer = ac.AircraftProducer
+                        airCategory = ac.Item1.AirCategory,
+                        aircraftProducer = ac.Item1.AircraftProducer
                     }
             });
         }
@@ -394,9 +394,9 @@ namespace Gva.Api.Controllers
                 this.aircraftRepository.GetAircrafts(mark: null, manSN: null, modelAlt: term, icao: null, airCategory: null, aircraftProducer: null, exact: false, offset: offset, limit: limit)
                 .Select(e => new
                 {
-                    nomValueId = e.LotId,
-                    name = string.Format("{0} ({1})", e.Mark, e.Model),
-                    nameAlt = string.Format("{0} ({1})", e.Mark, e.ModelAlt)
+                    nomValueId = e.Item1.LotId,
+                    name = string.Format("{0} ({1})", e.Item2.RegMark, e.Item1.Model),
+                    nameAlt = string.Format("{0} ({1})", e.Item2.RegMark, e.Item1.ModelAlt)
                 });
 
             return Ok(returnValue);
@@ -405,12 +405,12 @@ namespace Gva.Api.Controllers
         [Route("aircraftModels/{id:int}")]
         public IHttpActionResult GetAircraftModel(int id)
         {
-            var ac = this.aircraftRepository.GetAircraftModel(id);
+            var ac = this.aircraftRepository.GetAircraft(id);
             return Ok(new
             {
-                nomValueId = ac.LotId,
-                name = string.Format("{0} ({1})", ac.Mark, ac.Model),
-                nameAlt = string.Format("{0} ({1})", ac.Mark, ac.ModelAlt)
+                nomValueId = ac.Item1.LotId,
+                name = string.Format("{0} ({1})", ac.Item2.RegMark, ac.Item1.Model),
+                nameAlt = string.Format("{0} ({1})", ac.Item2.RegMark, ac.Item1.ModelAlt)
             });
         }
 
@@ -423,23 +423,27 @@ namespace Gva.Api.Controllers
             string aircraftProducer = "")
         {
             var returnValue =
-                this.aircraftRepository.GetAircraftModels(
+                this.aircraftRepository.GetAircrafts(
                     airCategory: airCategory,
                     aircraftProducer: aircraftProducer,
+                    exact: true,
                     offset: offset,
                     limit: limit)
+                    .GroupBy(a => a.Item1.Model)
+                    .Select(g => g.FirstOrDefault())
                 .Select(e => new
                 {
-                    nomValueId = e.LotId,
-                    name = e.Model,
-                    nameAlt = e.ModelAlt,
+                    nomValueId = e.Item1.LotId,
+                    name = e.Item1.Model,
+                    nameAlt = e.Item1.ModelAlt,
                     textContent =
                         new
                         {
-                            airCategory = e.AirCategory,
-                            aircraftProducer = e.AircraftProducer
+                            airCategory = e.Item1.AirCategory,
+                            aircraftProducer = e.Item1.AircraftProducer
                         }
-                });
+                })
+                ;
 
             return Ok(returnValue);
         }

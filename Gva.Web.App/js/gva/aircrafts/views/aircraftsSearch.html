@@ -17,6 +17,12 @@
     </sc-column>
     <sc-column data="mark" title="aircrafts.search.mark">
     </sc-column>
+    <sc-column data="actNumber" title="aircrafts.search.actNumber" has-content="true">
+      {{item.actNumber ? (item.registerCode === '2' ? 'II-' + item.actNumber : item.actNumber) : ''}}
+    </sc-column>
+    <sc-column data="certNumber" title="aircrafts.search.certNumber" has-content="true">
+      {{item.certNumber ? (item.registerCode === '2' ? 'II-' + item.certNumber : item.certNumber) : ''}}
+    </sc-column>
     <sc-column data="manSN" title="aircrafts.search.manSN">
     </sc-column>
     <sc-column data="modelAlt" title="aircrafts.search.modelAlt" class="wrap">
@@ -25,13 +31,13 @@
     </sc-column>
     <sc-column data="airCategory" title="aircrafts.search.airCategory" class="wrap">
     </sc-column>
-    <sc-column data="outputDate" title="aircrafts.search.outputDate" type="date">
+    <sc-column data="outputDate" title="aircrafts.search.outputDate" type="date" visible="false">
     </sc-column>
     <sc-column data="icao" title="aircrafts.search.icao">
     </sc-column>
-    <sc-column data="engineAlt" title="aircrafts.search.engineAlt" class="wrap">
+    <sc-column data="engineAlt" title="aircrafts.search.engineAlt" class="wrap" visible="false">
     </sc-column>
-    <sc-column data="propellerAlt" title="aircrafts.search.propellerAlt" class="wrap">
+    <sc-column data="propellerAlt" title="aircrafts.search.propellerAlt" class="wrap" visible="false">
     </sc-column>
   </sc-datatable>
 </div>

@@ -711,7 +711,9 @@
           ModifOrWingColorAlt: 'Модификация/Цвят на крило',
           'new': 'Ново ВС',
           search: 'Търси',
-          mark: 'Рег. знак'
+          mark: 'Рег. знак',
+          actNumber: 'Дел. №',
+          certNumber: 'Рег. №'
         },
         registrations: {
           actNumber: 'Деловоден №',

@@ -14,7 +14,8 @@
     <sc-column sortable="false" class="buttons-cell" has-content="true">
       <sc-button ng-if="item.lotId" name="viewButton" btn-sref="{state: 'root.aircrafts.view.regsFM.edit', params: { id: item.lotId, ind: item.partIndex }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-column>
-    <sc-column data="actNumber" title="aircrafts.registrations.actNumber">
+    <sc-column data="actNumber" title="aircrafts.registrations.actNumber" has-content="true">
+      {{item.actNumber ? (item.registerCode === '2' ? 'II-' + item.actNumber : item.actNumber) : ''}}
     </sc-column>
     <sc-column data="certNumber" title="aircrafts.registrations.certNumber" has-content="true">
       {{item.certNumber ? (item.registerCode === '2' ? 'II-' + item.certNumber : item.certNumber) : ''}}

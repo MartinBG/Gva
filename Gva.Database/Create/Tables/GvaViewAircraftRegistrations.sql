@@ -9,7 +9,8 @@ CREATE TABLE [dbo].[GvaViewAircraftRegistrations] (
     [ActNumber]              INT           NULL,
     [RegMark]                NVARCHAR(50)  NULL,
     CONSTRAINT [PK_GvaAircraftRegistrations]                   PRIMARY KEY ([LotId], [PartIndex]),
-    CONSTRAINT [FK_GvaAircraftRegistrations_GvaViewAircrafts]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[GvaViewAircrafts] ([LotId])
+    CONSTRAINT [FK_GvaAircraftRegistrations_GvaViewAircrafts]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[GvaViewAircrafts] ([LotId]),
+    CONSTRAINT [FK_GvaAircraftRegistrationss_NomValues]        FOREIGN KEY ([CertRegisterId])  REFERENCES [dbo].[NomValues] ([NomValueId])
 )
 GO
 

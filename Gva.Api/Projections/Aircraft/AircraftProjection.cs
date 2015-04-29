@@ -54,9 +54,7 @@ namespace Gva.Api.Projections.Aircraft
             // lastRegistration
             if (lastRegistration != null)
             {
-                aircraft.Mark = lastRegistration.Content.RegMark;
                 aircraft.ActNumber = lastRegistration.Content.ActNumber;
-                aircraft.CertNumber = lastRegistration.Content.CertNumber;
             }
 
             return aircraft;

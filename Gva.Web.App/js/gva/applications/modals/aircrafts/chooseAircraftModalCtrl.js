@@ -17,9 +17,11 @@
     };
 
     $scope.search = function () {
-      return Aircrafts.query($scope.filters).$promise.then(function (aircrafts) {
-        $scope.aircrafts = aircrafts;
-      });
+      return Aircrafts.query($scope.filters)
+        .$promise
+        .then(function (aircrafts) {
+          $scope.aircrafts = aircrafts;
+        });
     };
 
     $scope.selectAircraft = function (aircraft) {

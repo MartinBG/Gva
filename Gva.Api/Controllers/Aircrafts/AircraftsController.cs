@@ -72,7 +72,7 @@ namespace Gva.Api.Controllers
         {
             var aircrafts = this.aircraftRepository.GetAircrafts(mark: mark, manSN: manSN, modelAlt: modelAlt, icao: icao, airCategory: airCategory, aircraftProducer: aircraftProducer, exact: exact);
 
-            return Ok(aircrafts.Select(a => new AircraftViewDO(a)));
+            return Ok(aircrafts.Select(a => new AircraftViewDO(a.Item1, a.Item2)));
         }
 
         [Route("registrations")]
@@ -107,7 +107,7 @@ namespace Gva.Api.Controllers
         {
             var aircraft = this.aircraftRepository.GetAircraft(lotId);
 
-            return Ok(new AircraftViewDO(aircraft));
+            return Ok(new AircraftViewDO(aircraft.Item1, aircraft.Item2));
         }
 
         [Route("")]
