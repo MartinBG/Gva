@@ -16,12 +16,20 @@ namespace Gva.Api.Repositories.InventoryRepository
     {
         private IUnitOfWork unitOfWork;
 
-        public InventoryRepository(IUnitOfWork unitOfWork)
+        public InventoryRepository(
+            IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<InventoryItemDO> GetInventoryItemsForLot(int lotId, int? caseTypeId)
+        public IEnumerable<InventoryItemDO> GetInventoryItems(
+            int? lotId = null,
+            int? caseTypeId = null,
+            string setAlias = null,
+            string documentPart = null,
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? typeId = null)
         {
             var query =
                 from i in this.unitOfWork.DbContext.Set<GvaViewInventoryItem>().Include(i => i.Type)
@@ -35,13 +43,14 @@ namespace Gva.Api.Repositories.InventoryRepository
                 from ga in gai.DefaultIfEmpty()
                 select new
                 {
+                    i.Lot.Set,
                     i.LotId,
                     GvaCaseTypeId = (int?)f.GvaCaseTypeId,
                     GvaCaseTypeName = f.GvaCaseType.Name,
                     SetPartAlias = i.SetPartAlias,
                     PartIndex = i.Part.Index,
                     ParentPartIndex = (int?)i.ParentPart.Index,
-                    ApplicationId = (int?) ga.GvaApplicationId,
+                    ApplicationId = (int?)ga.GvaApplicationId,
                     DocStatus = ga.DocId.HasValue ? ga.Doc.DocStatus : null,
                     Name = i.Name,
                     Type = i.Type,
@@ -63,12 +72,36 @@ namespace Gva.Api.Repositories.InventoryRepository
 
             var predicate =
                 PredicateBuilder.True(query)
-                .And(i => i.LotId == lotId)
                 .And(i => i.DocStatus == null || i.DocStatus.Alias != "Canceled");
 
-            if (caseTypeId != null)
+            if (lotId.HasValue)
             {
-                predicate = predicate.And(i => i.GvaCaseTypeId == caseTypeId.Value);
+                predicate = predicate.And(i => i.LotId == lotId.Value);
+            }
+
+            if (!string.IsNullOrEmpty(setAlias))
+            {
+                predicate = predicate.And(i => i.Set.Alias == setAlias);
+            }
+
+            if (typeId.HasValue)
+            {
+                predicate = predicate.And(i => i.Type.NomValueId == typeId.Value);
+            }
+
+            if (!string.IsNullOrEmpty(documentPart))
+            {
+                predicate = predicate.And(i => i.Name.ToLower().Contains(documentPart.ToLower()));
+            }
+
+            if (fromDate.HasValue)
+            {
+                predicate = predicate.AndDateTimeGreaterThanOrEqual(e => e.FromDate, fromDate);
+            }
+
+            if (toDate.HasValue)
+            {
+                predicate = predicate.AndDateTimeLessThanOrEqual(e => e.ToDate, toDate);
             }
 
             return query.Where(predicate)

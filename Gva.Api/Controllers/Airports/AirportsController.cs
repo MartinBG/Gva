@@ -130,7 +130,7 @@ namespace Gva.Api.Controllers.Airports
         [Route("{lotId}/inventory")]
         public IHttpActionResult GetInventory(int lotId, [FromUri] string[] documentTypes = null, int? caseTypeId = null)
         {
-            var inventory = this.inventoryRepository.GetInventoryItemsForLot(lotId, caseTypeId);
+            var inventory = this.inventoryRepository.GetInventoryItems(lotId: lotId, caseTypeId: caseTypeId);
 
             if (documentTypes.Length > 0)
             {

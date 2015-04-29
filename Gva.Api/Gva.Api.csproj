@@ -119,6 +119,7 @@
     <Compile Include="Controllers\Airports\AirportsController.cs" />
     <Compile Include="Controllers\Applications\AplicationsCaseController.cs" />
     <Compile Include="Controllers\Applications\ApplicationStagesController.cs" />
+    <Compile Include="Controllers\Persons\PersonReferencesController.cs" />
     <Compile Include="Controllers\ProjectionsController.cs" />
     <Compile Include="Controllers\ExaminationSystemController.cs" />
     <Compile Include="Controllers\GvaCaseTypesPartController.cs" />
@@ -305,6 +306,7 @@
     <Compile Include="ModelsDO\Persons\PersonStatusDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonTrainingDO.cs" />
     <Compile Include="ModelsDO\Common\TimeDO.cs" />
+    <Compile Include="ModelsDO\Persons\Reports\PersonReferenceDocumentDO.cs" />
     <Compile Include="Models\Enums\QualificationStateMethod.cs" />
     <Compile Include="Models\Enums\QualificationState.cs" />
     <Compile Include="Models\GvaInvalidActNumber.cs" />

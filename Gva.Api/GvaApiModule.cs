@@ -161,6 +161,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonReportsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonExamSystemController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonExportXmlController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonReferencesController>().InstancePerLifetimeScope();
 
             //Equipment controllers
             moduleBuilder.RegisterType<EquipmentsController>().InstancePerLifetimeScope();

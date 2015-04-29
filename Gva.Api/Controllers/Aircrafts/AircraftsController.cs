@@ -137,7 +137,7 @@ namespace Gva.Api.Controllers
         [Route("{lotId}/inventory")]
         public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
         {
-            var inventory = this.inventoryRepository.GetInventoryItemsForLot(lotId, caseTypeId);
+            var inventory = this.inventoryRepository.GetInventoryItems(lotId, caseTypeId);
             return Ok(inventory);
         }
 

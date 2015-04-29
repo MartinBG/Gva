@@ -1424,6 +1424,23 @@
           search: 'Търси',
           caseType: 'Тип дело'
         },
+        references: {
+          tabs: {
+            documents: 'Документи'
+          }
+        },
+        referenceDocuments: {
+          name: 'Документ',
+          type: 'Вид',
+          docNumber: '№ на документа',
+          date: 'Дата',
+          publisher: 'Издател',
+          valid: 'Валиден',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          file: 'Файл',
+          search: 'Търси'
+        },
         qlfStateDirective: {
           title: 'Създаване на състояние относно придибиване на квалификация',
           save: 'Запис',
@@ -4005,7 +4022,9 @@
         'root.examinationSystem.exams': 'Тестове',
         'root.examinationSystem.certCampaigns': 'Сертификационни кампании',
         'root.examinationSystem.certPaths': 'Сертификационни пътища',
-        'root.examinationSystem.examinees': 'Изпити'
+        'root.examinationSystem.examinees': 'Изпити',
+        'root.personsReferences': 'Справки в Персонал',
+        'root.personsReferences.documents': 'Документи'
       }
     });
   }]);

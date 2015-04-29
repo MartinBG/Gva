@@ -318,7 +318,7 @@ namespace Gva.Api.Controllers.Persons
         [Route("{lotId}/inventory")]
         public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
         {
-            var inventory = this.inventoryRepository.GetInventoryItemsForLot(lotId, caseTypeId);
+            var inventory = this.inventoryRepository.GetInventoryItems(lotId: lotId, caseTypeId: caseTypeId);
 
             var allItemsExceptLicences = inventory.Where(i => i.SetPartAlias != "personLicence");
 
