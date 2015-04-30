@@ -900,16 +900,18 @@ namespace Docs.Api.Repositories.DocRepository
                 predicate = predicate.And(e => !e.DocHasReads.Any(d => d.UnitId == unitUser.UnitId && d.HasRead));
             }
 
-            predicate = predicate.And(e => e.vwDocUsers.Any(v => v.ClassificationPermissionId == readPermission.ClassificationPermissionId && v.UnitId == unitUser.UnitId));
+            IQueryable<Doc> query =
+                from d in this.unitOfWork.DbContext.Set<Doc>()
+                join v in this.unitOfWork.DbContext.Set<vwDocUser>() on d.DocId equals v.DocId
+                where v.ClassificationPermissionId == readPermission.ClassificationPermissionId && v.UnitId == unitUser.UnitId
+                select d;
 
-            var query = this.unitOfWork.DbContext.Set<Doc>()
-                .Where(predicate)
-                .OrderByDescending(e => e.RegDate)
-                .Take(10000);
+            query = query.Where(predicate);
 
             totalCount = query.Count();
 
             return query
+                 .OrderByDescending(e => e.RegDate)
                  .Skip(offset)
                  .Take(limit)
                  .Include(e => e.DocType)
