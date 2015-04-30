@@ -319,7 +319,7 @@
     <Content Include="js\gva\persons\modals\checks\checkOfForeignerModalCtrl.js" />
     <Content Include="js\gva\persons\modals\qualificationStates\newQlfStateModal.html" />
     <Content Include="js\gva\persons\modals\qualificationStates\newQlfStateModalCtrl.js" />
-    <Content Include="js\gva\persons\resources\personReferences.js" />
+    <Content Include="js\gva\persons\resources\personsReports.js" />
     <Content Include="js\gva\persons\resources\personExamSystData.js" />
     <Content Include="js\gva\persons\views\export\exportExamsData.html" />
     <Content Include="js\gva\persons\views\export\exportExamsDataCtrl.js" />
@@ -605,8 +605,8 @@
     <Content Include="js\gva\persons\views\examinationSystem\qualificationsCtrl.js" />
     <Content Include="js\gva\persons\views\examinationSystem\examinationSystem.html" />
     <Content Include="js\gva\persons\views\examinationSystem\examinationSystemCtrl.js" />
-    <Content Include="js\gva\persons\views\references\personReferenceLicences.html" />
-    <Content Include="js\gva\persons\views\references\personReferenceLicencesCtrl.js" />
+    <Content Include="js\gva\persons\views\personsReports\personReportLicences.html" />
+    <Content Include="js\gva\persons\views\personsReports\personReportLicencesCtrl.js" />
     <Content Include="js\gva\persons\views\reports\reportsEdit.html" />
     <Content Include="js\gva\persons\views\reports\reportsEditCtrl.js" />
     <Content Include="js\gva\persons\views\reports\reportsNew.html" />
@@ -637,9 +637,9 @@
     <Content Include="js\gva\persons\views\ratings\ratingEditions\ratingEditionsEditCtrl.js" />
     <Content Include="js\gva\persons\views\ratings\ratingEditions\ratingEditionsNew.html" />
     <Content Include="js\gva\persons\views\ratings\ratingEditions\ratingEditionsNewCtrl.js" />
-    <Content Include="js\gva\persons\views\references\personReferenceDocuments.html" />
-    <Content Include="js\gva\persons\views\references\personReferenceDocumentsCtrl.js" />
-    <Content Include="js\gva\persons\views\references\personReferenceView.html" />
+    <Content Include="js\gva\persons\views\personsReports\personReportDocuments.html" />
+    <Content Include="js\gva\persons\views\personsReports\personReportDocumentsCtrl.js" />
+    <Content Include="js\gva\persons\views\personsReports\personReportView.html" />
     <Content Include="js\gva\persons\views\stampedDocuments\stampedDocumentsCtrl.js" />
     <Content Include="js\gva\persons\views\stampedDocuments\stampedDocuments.html" />
     <Content Include="js\gva\persons\forms\personDocumentMedicalCtrl.js" />

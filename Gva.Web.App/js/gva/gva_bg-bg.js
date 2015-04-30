@@ -1424,13 +1424,13 @@
           search: 'Търси',
           caseType: 'Тип дело'
         },
-        references: {
+        reports: {
           tabs: {
             documents: 'Документи',
             licences: 'Лицензи'
           }
         },
-        referenceDocuments: {
+        reportDocuments: {
           name: 'Документ',
           type: 'Вид',
           docNumber: '№ на документа',
@@ -1442,7 +1442,7 @@
           file: 'Файл',
           search: 'Търси'
         },
-        referenceLicences: {
+        reportLicences: {
           names: 'Име',
           lin: 'ЛИН',
           uin: 'ЕГН',
@@ -4037,9 +4037,9 @@
         'root.examinationSystem.certCampaigns': 'Сертификационни кампании',
         'root.examinationSystem.certPaths': 'Сертификационни пътища',
         'root.examinationSystem.examinees': 'Изпити',
-        'root.personsReferences': 'Справки в Персонал',
-        'root.personsReferences.documents': 'Документи',
-        'root.personsReferences.licences': 'Лицензи'
+        'root.personsReports': 'Справки в Персонал',
+        'root.personsReports.documents': 'Документи',
+        'root.personsReports.licences': 'Лицензи'
       }
     });
   }]);

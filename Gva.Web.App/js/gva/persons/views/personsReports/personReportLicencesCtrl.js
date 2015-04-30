@@ -1,7 +1,7 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function PersonReferenceLicencesCtrl(
+  function PersonReportLicencesCtrl(
     $scope,
     $state,
     $stateParams,
@@ -24,7 +24,7 @@
     $scope.licences = licences;
 
     $scope.search = function () {
-      return $state.go('root.personsReferences.licences', {
+      return $state.go('root.personsReports.licences', {
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         licenceTypeId: $scope.filters.licenceTypeId,
@@ -34,22 +34,22 @@
     };
   }
 
-  PersonReferenceLicencesCtrl.$inject = [
+  PersonReportLicencesCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
     'licences'
   ];
 
-  PersonReferenceLicencesCtrl.$resolve = {
+  PersonReportLicencesCtrl.$resolve = {
     licences: [
       '$stateParams',
-      'PersonReferences',
-      function ($stateParams, PersonReferences) {
-        return PersonReferences.getLicences($stateParams).$promise;
+      'PersonsReports',
+      function ($stateParams, PersonsReports) {
+        return PersonsReports.getLicences($stateParams).$promise;
       }
     ]
   };
 
-  angular.module('gva').controller('PersonReferenceLicencesCtrl', PersonReferenceLicencesCtrl);
+  angular.module('gva').controller('PersonReportLicencesCtrl', PersonReportLicencesCtrl);
 }(angular, _));

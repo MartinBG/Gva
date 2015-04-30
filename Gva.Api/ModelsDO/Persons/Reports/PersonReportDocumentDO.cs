@@ -7,9 +7,9 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons.Reports
 {
-    public class PersonReferenceDocumentDO
+    public class PersonReportDocumentDO
     {
-        public PersonReferenceDocumentDO(InventoryItemDO item)
+        public PersonReportDocumentDO(InventoryItemDO item)
         {
             this.Name = item.Name;
             this.Type = item.Type;

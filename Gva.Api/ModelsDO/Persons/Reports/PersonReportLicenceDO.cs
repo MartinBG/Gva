@@ -7,7 +7,7 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Persons.Reports
 {
-    public class PersonReferenceLicenceDO
+    public class PersonReportLicenceDO
     {
         public int? Lin { get; set; }
 

@@ -11,15 +11,15 @@ using Gva.Api.ModelsDO.Persons.Reports;
 using Gva.Api.Repositories.InventoryRepository;
 using Newtonsoft.Json.Linq;
 
-namespace Gva.Api.Controllers.Persons
+namespace Gva.Api.Controllers.Reports
 {
-    [RoutePrefix("api/persons/references")]
+    [RoutePrefix("api/reports/persons")]
     [Authorize]
-    public class PersonReferencesController : ApiController
+    public class ReportsPersonsController : ApiController
     {
         private IInventoryRepository inventoryRepository;
 
-        public PersonReferencesController(
+        public ReportsPersonsController(
             IInventoryRepository inventoryRepository)
         {
             this.inventoryRepository = inventoryRepository;
@@ -30,7 +30,7 @@ namespace Gva.Api.Controllers.Persons
         {
             var documents = this.inventoryRepository.GetInventoryItems(setAlias: "Person", documentPart: documentPart, fromDate: fromDate, toDate: toDate, typeId: typeId);
 
-            return Ok(documents.Select(i => new PersonReferenceDocumentDO(i)).ToList());
+            return Ok(documents.Select(i => new PersonReportDocumentDO(i)).ToList());
         }
 
         [Route(@"licenceCerts")]
@@ -70,7 +70,7 @@ namespace Gva.Api.Controllers.Persons
                         new DbClause("and lt.NomValueId = {0}", licenceTypeId),
                         new DbClause("and la.NomValueId = {0}", licenceActionId))
                     .Materialize(r =>
-                            new PersonReferenceLicenceDO()
+                            new PersonReportLicenceDO()
                             {
                                 Lin = r.Field<int?>("lin"),
                                 Uin = r.Field<string>("uin"),

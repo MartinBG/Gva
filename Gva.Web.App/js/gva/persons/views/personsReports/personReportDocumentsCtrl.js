@@ -1,7 +1,7 @@
 ﻿/*global angular, _*/
 (function (angular, _) {
   'use strict';
-  function PersonReferenceDocumentsCtrl(
+  function PersonReportDocumentsCtrl(
     $scope,
     $state,
     $stateParams,
@@ -23,7 +23,7 @@
     $scope.documents = documents;
 
     $scope.search = function () {
-      return $state.go('root.personsReferences.documents', {
+      return $state.go('root.personsReports.documents', {
         documentPart: $scope.filters.documentPart,
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
@@ -32,22 +32,22 @@
     };
   }
 
-  PersonReferenceDocumentsCtrl.$inject = [
+  PersonReportDocumentsCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
     'documents'
   ];
 
-  PersonReferenceDocumentsCtrl.$resolve = {
+  PersonReportDocumentsCtrl.$resolve = {
     documents: [
       '$stateParams',
-      'PersonReferences',
-      function ($stateParams, PersonReferences) {
-        return PersonReferences.getDocuments($stateParams).$promise;
+      'PersonsReports',
+      function ($stateParams, PersonsReports) {
+        return PersonsReports.getDocuments($stateParams).$promise;
       }
     ]
   };
 
-  angular.module('gva').controller('PersonReferenceDocumentsCtrl', PersonReferenceDocumentsCtrl);
+  angular.module('gva').controller('PersonReportDocumentsCtrl', PersonReportDocumentsCtrl);
 }(angular, _));

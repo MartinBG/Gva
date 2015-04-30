@@ -8,6 +8,7 @@ using Gva.Api.Controllers.Equipments;
 using Gva.Api.Controllers.Integration;
 using Gva.Api.Controllers.Organizations;
 using Gva.Api.Controllers.Persons;
+using Gva.Api.Controllers.Reports;
 using Gva.Api.Models;
 using Gva.Api.Projections.Aircraft;
 using Gva.Api.Projections.Airport;
@@ -161,7 +162,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PersonReportsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonExamSystemController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonExportXmlController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonReferencesController>().InstancePerLifetimeScope();
 
             //Equipment controllers
             moduleBuilder.RegisterType<EquipmentsController>().InstancePerLifetimeScope();
@@ -216,6 +216,9 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AplicationsCaseController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ApplicationStagesController>().InstancePerLifetimeScope();
+
+            //Reports controllers
+            moduleBuilder.RegisterType<ReportsPersonsController>().InstancePerLifetimeScope();
 
             // controllers
             moduleBuilder.RegisterType<GvaNomController>().InstancePerLifetimeScope();

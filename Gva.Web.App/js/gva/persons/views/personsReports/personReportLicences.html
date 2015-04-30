@@ -1,0 +1,35 @@
+﻿<div>
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="search()">
+    <sc-filter type="int" name="lin" class="col-md-1 col-sm-2" removable="false" label="persons.reportLicences.lin"></sc-filter>
+    <sc-filter type="nomenclature" name="licenceTypeId" class="col-sm-3" removable="false" alias="licenceTypes" mode="id" label="persons.reportLicences.licenceTypeName"></sc-filter>
+    <sc-filter type="nomenclature" name="licenceActionId" class="col-sm-3" removable="true" alias="licenceActions" mode="id" label="persons.reportLicences.licenceAction"></sc-filter>
+    <sc-filter type="date" name="fromDate" class="col-sm-2" removable="false" label="persons.reportLicences.fromDate"></sc-filter>
+    <sc-filter type="date" name="toDate" class="col-sm-2" removable="false" label="persons.reportLicences.toDate"></sc-filter>
+    <sc-search-button action="search()" text="persons.reportLicences.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
+    <sc-search-button action="clear"></sc-search-button>
+    <sc-search-button action="add"></sc-search-button>
+  </sc-search>
+
+  <sc-datatable items="licences" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+    <sc-column data="lin" title="persons.reportLicences.lin">
+    </sc-column>
+    <sc-column data="uin" title="persons.reportLicences.uin">
+    </sc-column>
+    <sc-column data="licenceTypeName" title="persons.reportLicences.licenceTypeName">
+    </sc-column>
+    <sc-column data="licenceCode" title="persons.reportLicences.licenceCode">
+    </sc-column>
+    <sc-column data="names" title="persons.reportLicences.names">
+    </sc-column>
+    <sc-column data="dateValidFrom" title="persons.reportLicences.fromDate" type="date">
+    </sc-column>
+    <sc-column data="dateValidTo" title="persons.reportLicences.toDate" type="date">
+    </sc-column>
+    <sc-column data="firstIssueDate" title="persons.reportLicences.firstIssueDate" type="date">
+    </sc-column>
+    <sc-column data="licenceAction" title="persons.reportLicences.licenceAction">
+    </sc-column>
+    <sc-column data="stampNumber" title="persons.reportLicences.stampNumber">
+    </sc-column>
+  </sc-datatable>
+</div>
