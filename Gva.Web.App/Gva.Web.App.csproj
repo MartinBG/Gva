@@ -605,6 +605,8 @@
     <Content Include="js\gva\persons\views\examinationSystem\qualificationsCtrl.js" />
     <Content Include="js\gva\persons\views\examinationSystem\examinationSystem.html" />
     <Content Include="js\gva\persons\views\examinationSystem\examinationSystemCtrl.js" />
+    <Content Include="js\gva\persons\views\personsReports\personReportRatings.html" />
+    <Content Include="js\gva\persons\views\personsReports\personReportRatingsCtrl.js" />
     <Content Include="js\gva\persons\views\personsReports\personReportLicences.html" />
     <Content Include="js\gva\persons\views\personsReports\personReportLicencesCtrl.js" />
     <Content Include="js\gva\persons\views\reports\reportsEdit.html" />

@@ -13,6 +13,11 @@
         method: 'GET',
         url: 'api/reports/persons/licenceCerts',
         isArray: true
+      },
+      getRatings: {
+        method: 'GET',
+        url: 'api/reports/persons/ratings',
+        isArray: true
       }
     });
   }]);

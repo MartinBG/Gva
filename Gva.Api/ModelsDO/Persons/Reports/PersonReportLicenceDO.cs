@@ -9,6 +9,8 @@ namespace Gva.Api.ModelsDO.Persons.Reports
 {
     public class PersonReportLicenceDO
     {
+        public int LotId { get; set; }
+
         public int? Lin { get; set; }
 
         public string Uin { get; set; }

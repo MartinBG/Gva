@@ -306,6 +306,7 @@
     <Compile Include="ModelsDO\Persons\PersonStatusDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonTrainingDO.cs" />
     <Compile Include="ModelsDO\Common\TimeDO.cs" />
+    <Compile Include="ModelsDO\Persons\Reports\PersonReportRatingDO.cs" />
     <Compile Include="ModelsDO\Persons\Reports\PersonReportLicenceDO.cs" />
     <Compile Include="ModelsDO\Persons\Reports\PersonReportDocumentDO.cs" />
     <Compile Include="Models\Enums\QualificationStateMethod.cs" />

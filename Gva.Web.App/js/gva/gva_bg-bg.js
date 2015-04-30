@@ -1427,7 +1427,8 @@
         reports: {
           tabs: {
             documents: 'Документи',
-            licences: 'Лицензи'
+            licences: 'Лицензи',
+            ratings: 'Квалификационни класове'
           }
         },
         reportDocuments: {
@@ -1448,12 +1449,27 @@
           uin: 'ЕГН',
           fromDate: 'От дата',
           toDate: 'До дата',
-          search: 'Търси',
           licenceTypeName: 'Тип лиценз',
           firstIssueDate: 'Дата на първо издаване',
           licenceAction: 'Основание',
           stampNumber: '№  на печат',
-          licenceCode: '№'
+          licenceCode: '№',
+          search: 'Търси'
+        },
+        reportRatings: {
+          lin: 'ЛИН',
+          ratingTypeOrRatingLevel: 'Тип ВС, Степен <br>(раб. място)',
+          ratingClass: 'Клас',
+          authorization: 'Разрешение',
+          aircraftTypeCategory: 'Категория',
+          classOrCategory: 'Клас,<br>Подклас<br>(категория)',
+          authorizationAndLimitations: 'Разрешение<br>(ограничения)',
+          firstIssueDate: 'Първоначално издаване',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          dateValidFrom: 'Издаден',
+          dateValidTo: 'Валиден до',
+          search: 'Търси'
         },
         qlfStateDirective: {
           title: 'Създаване на състояние относно придибиване на квалификация',

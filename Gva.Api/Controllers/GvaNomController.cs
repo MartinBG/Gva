@@ -840,13 +840,21 @@ namespace Gva.Api.Controllers
         }
 
         [Route("authorizations")]
-        public IHttpActionResult GetAuthorizations(string caseTypeAlias, string term = null)
+        public IHttpActionResult GetAuthorizations(string caseTypeAlias = null, string term = null, int offset = 0, int? limit = null)
         {
-            var nomValues = this.nomRepository.GetNomValues(
-                alias: "authorizations",
-                parentAlias: "authorizationGroups",
-                parentProp: "caseTypeAlias",
-                parentPropValue: caseTypeAlias);
+            IEnumerable<NomValue> nomValues = null;
+            if (!string.IsNullOrEmpty(caseTypeAlias))
+            {
+                nomValues = this.nomRepository.GetNomValues(
+                    alias: "authorizations",
+                    parentAlias: "authorizationGroups",
+                    parentProp: "caseTypeAlias",
+                    parentPropValue: caseTypeAlias);
+            }
+            else
+            {
+                nomValues = this.nomRepository.GetNomValues(alias: "authorizations");
+            }
 
             nomValues = nomValues.Select(n => new NomValue
             {
@@ -861,7 +869,7 @@ namespace Gva.Api.Controllers
                 nomValues = nomValues.Where(n => n.Name.ToLower().Contains(term.ToLower()));
             }
 
-            return Ok(nomValues.OrderBy(n => n.Name));
+            return Ok(nomValues.OrderBy(n => n.Name).Skip(offset).Take(limit ?? 10).ToList());
         }
 
         [Route("applicationTypes")]

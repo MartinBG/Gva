@@ -46,6 +46,7 @@ namespace Gva.Api.Controllers.Reports
                 var licences =
                     conn.CreateStoreCommand(@"
                          SELECT
+                             p.LotId,
                              p.Lin,
                              p.Uin AS uin,
                              p.Names,
@@ -65,13 +66,14 @@ namespace Gva.Api.Controllers.Reports
                          WHERE 1=1 {0} {1} {2} {3} {4}
                          ORDER BY le.DateValidFrom desc",
                         new DbClause("and le.DateValidFrom >= {0}", fromDate),
-                        new DbClause("and le.DateValidTo >= {0}", toDate),
+                        new DbClause("and le.DateValidTo <= {0}", toDate),
                         new DbClause("and p.Lin = {0}", lin),
                         new DbClause("and lt.NomValueId = {0}", licenceTypeId),
                         new DbClause("and la.NomValueId = {0}", licenceActionId))
                     .Materialize(r =>
                             new PersonReportLicenceDO()
                             {
+                                LotId = r.Field<int>("lotId"),
                                 Lin = r.Field<int?>("lin"),
                                 Uin = r.Field<string>("uin"),
                                 Names = r.Field<string>("names"),
@@ -86,6 +88,93 @@ namespace Gva.Api.Controllers.Reports
                     .ToList();
 
                 return Ok(licences);
+            }
+        }
+
+        [Route(@"ratings")]
+        public IHttpActionResult GetRatingss(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? ratingClassId = null,
+            int? authorizationId = null,
+            int? aircraftTypeCategoryId = null,
+            int? lin = null)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+            {
+                var ratings =
+                    conn.CreateStoreCommand(@"
+                         SELECT 
+                            p.Lin,
+                            r.LotId,
+                            lastEdition.RatingPartIndex,
+                            re2.DocDateValidFrom AS firstIssueDate,
+                            re.RatingSubClasses,
+                            re.Limitations,
+                            re.DocDateValidFrom,
+                            re.DocDateValidTo,
+                            r.RatingTypes,
+                            r.Sector,
+                            rc.Code as RatingClass,
+                            a.Code as AuthorizationCode,
+                            ct.Code as AircraftTypeCategory,
+                            atg.Code as AircraftTypeGroup,
+                            li.Code as LocationIndicator,
+                            rl.Code as RatingLevel
+                        FROM  GvaViewPersonRatings r
+                        INNER JOIN GvaViewPersons p ON r.LotId = p.LotId
+                        INNER JOIN (select 
+                            r.LotId,
+                            max(re.PartIndex) as edition_part_index,
+                            re.RatingPartIndex
+                            FROM  GvaViewPersonRatings r
+                            INNER JOIn GvaViewPersonRatingEditions re on r.LotId = re.LotId and r.PartIndex = re.RatingPartIndex
+                            group by re.RatingPartIndex, r.LotId) lastEdition on lastEdition.LotId = r.LotId and lastEdition.RatingPartIndex = r.PartIndex
+                        INNER JOIN GvaViewPersonRatingEditions re on lastEdition.LotId = re.LotId and re.PartIndex = lastEdition.edition_part_index
+                        INNER JOIN (select 
+                            r.LotId,
+                            min(re.PartIndex) AS edition_part_index,
+                            re.RatingPartIndex
+                            FROM  GvaViewPersonRatings r
+                            INNER JOIn GvaViewPersonRatingEditions re on r.LotId = re.LotId and r.PartIndex = re.RatingPartIndex
+                            group by re.RatingPartIndex, r.LotId) firstEdition on firstEdition.LotId = lastEdition.LotId and firstEdition.RatingPartIndex = lastEdition.RatingPartIndex
+                        INNER JOIN GvaViewPersonRatingEditions re2 on firstEdition.LotId = re2.LotId and re2.PartIndex = firstEdition.edition_part_index
+                        LEFT JOIN NomValues rc ON rc.NomValueId = r.RatingClassId
+                        LEFT JOIN NomValues a ON a.NomValueId = r.AuthorizationId
+                        LEFT JOIN NomValues ct ON ct.NomValueId = r.AircraftTypeCategoryId
+                        LEFT JOIN NomValues atg ON atg.NomValueId = r.AircraftTypeGroupId
+                        LEFT JOIN NomValues li ON li.NomValueId = r.LocationIndicatorId
+                        LEFT JOIN NomValues rl ON rl.NomValueId = r.RatingLevelId
+                         WHERE 1=1 {0} {1} {2} {3} {4}
+                         ORDER BY re.DocDateValidFrom desc",
+                        new DbClause("and re.DocDateValidFrom >= {0}", fromDate),
+                        new DbClause("and re.DocDateValidTo <= {0}", toDate),
+                        new DbClause("and p.Lin = {0}", lin),
+                        new DbClause("and r.RatingClassId = {0}", ratingClassId),
+                        new DbClause("and r.AuthorizationId = {0}", authorizationId),
+                        new DbClause("and r.AircraftTypeGroupId = {0}", aircraftTypeCategoryId))
+                    .Materialize(r =>
+                            new PersonReportRatingDO()
+                            {
+                                Lin = r.Field<int?>("lin"),
+                                LotId = r.Field<int>("lotId"),
+                                RatingSubClasses = r.Field<string>("RatingSubClasses"),
+                                Limitations = r.Field<string>("Limitations"),
+                                FirstIssueDate = r.Field<DateTime?>("FirstIssueDate"),
+                                DateValidFrom = r.Field<DateTime?>("DocDateValidFrom"),
+                                DateValidTo = r.Field<DateTime?>("DocDateValidTo"),
+                                RatingTypes = r.Field<string>("RatingTypes"),
+                                Sector = r.Field<string>("Sector"),
+                                RatingClass = r.Field<string>("RatingClass"),
+                                AuthorizationCode = r.Field<string>("AuthorizationCode"),
+                                AircraftTypeCategory = r.Field<string>("AircraftTypeCategory"),
+                                AircraftTypeGroup = r.Field<string>("AircraftTypeGroup"),
+                                LocationIndicator = r.Field<string>("LocationIndicator"),
+                                RatingLevel = r.Field<string>("RatingLevel")
+                            })
+                    .ToList();
+
+                return Ok(ratings);
             }
         }
     }
