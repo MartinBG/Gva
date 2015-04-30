@@ -37,62 +37,38 @@ namespace Gva.Api.Controllers.Persons
         public IHttpActionResult GetLicences(
             DateTime? fromDate = null,
             DateTime? toDate = null,
-            string lin = null,
+            int? lin = null,
             int? licenceTypeId = null,
             int? licenceActionId = null)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
-                string whereClause = "";
-                if (fromDate.HasValue || toDate.HasValue || !string.IsNullOrEmpty(lin) || licenceTypeId.HasValue)
-                { 
-                    List<string>conditions = new List<string>();
-                    if(fromDate.HasValue)
-                    {
-                        conditions.Add(string.Format("CONVERT(nvarchar(30), le.DateValidFrom, 104) >= '{0}'", fromDate.Value.ToString("dd.MM.yyyy")));
-                    }
-                    if (toDate.HasValue)
-                    {
-                        conditions.Add(string.Format("CONVERT(nvarchar(30), le.DateValidTo, 104) <= '{0}'", toDate.Value.ToString("dd.MM.yyyy")));
-                    }
-                    if (!string.IsNullOrEmpty(lin))
-                    {
-                        conditions.Add(string.Format("lin = {0}", lin));
-                    }
-                    if (licenceTypeId.HasValue)
-                    {
-                        conditions.Add(string.Format("lt.NomValueId = {0}", licenceTypeId.Value));
-                    }
-                    if (licenceActionId.HasValue)
-                    {
-                        conditions.Add(string.Format("la.NomValueId = {0}", licenceActionId.Value));
-                    }
-
-                    whereClause = "WHERE " + string.Join(" and ", conditions.ToArray());
-                }
-
                 var licences =
                     conn.CreateStoreCommand(@"
                          SELECT
                              p.Lin,
-                             COALESCE(p.Uin, '') AS uin,
+                             p.Uin AS uin,
                              p.Names,
                              lt.Name AS LicenceTypeName,
                              l.PublisherCode + ' ' + l.LicenceTypeCaCode + ' ' + RIGHT('00000'+CAST(l.LicenceNumber AS NVARCHAR(5)),5) AS LicenceCode,
-                             CONVERT(nvarchar(30), le.DateValidFrom, 104) as DateValidFrom,
-                             COALESCE(CONVERT(nvarchar(30), le.DateValidTo, 104), '') AS DateValidTo,
-                             CONVERT(nvarchar(30), le.FirstDocDateValidFrom, 104) AS FirstIssueDate, 
+                             le.DateValidFrom,
+                             le.DateValidTo,
+                             le.FirstDocDateValidFrom AS FirstIssueDate, 
                              la.Name AS LicenceAction,
-                             COALESCE(le.StampNumber, '') AS StampNumber
+                             le.StampNumber
                          FROM 
                          GvaViewPersonLicenceEditions le
                          INNER JOIN GvaViewPersonLicences l ON le.LotId = l.LotId and le.LicencePartIndex = l.PartIndex
                          INNER JOIN GvaViewPersons p ON l.LotId = p.LotId
                          INNER JOIN NomValues lt ON lt.NomValueId = l.LicenceTypeId
                          INNER JOIN NomValues la ON la.NomValueId = le.LicenceActionId
-                         {0}
+                         WHERE 1=1 {0} {1} {2} {3} {4}
                          ORDER BY le.DateValidFrom desc",
-                        new DbClause(whereClause))
+                        new DbClause("and le.DateValidFrom >= {0}", fromDate),
+                        new DbClause("and le.DateValidTo >= {0}", toDate),
+                        new DbClause("and p.Lin = {0}", lin),
+                        new DbClause("and lt.NomValueId = {0}", licenceTypeId),
+                        new DbClause("and la.NomValueId = {0}", licenceActionId))
                     .Materialize(r =>
                             new PersonReferenceLicenceDO()
                             {
@@ -101,9 +77,9 @@ namespace Gva.Api.Controllers.Persons
                                 Names = r.Field<string>("names"),
                                 LicenceTypeName = r.Field<string>("licenceTypeName"),
                                 LicenceCode = r.Field<string>("licenceCode"),
-                                DateValidFrom = !string.IsNullOrEmpty(r.Field<string>("dateValidFrom")) ? DateTime.Parse(r.Field<string>("dateValidFrom")) : (DateTime?)null,
-                                DateValidTo = !string.IsNullOrEmpty(r.Field<string>("dateValidTo")) ? DateTime.Parse(r.Field<string>("dateValidTo")) : (DateTime?)null,
-                                FirstIssueDate = !string.IsNullOrEmpty(r.Field<string>("firstIssueDate")) ? DateTime.Parse(r.Field<string>("firstIssueDate")) : (DateTime?)null,
+                                DateValidFrom = r.Field<DateTime?>("dateValidFrom"),
+                                DateValidTo = r.Field<DateTime?>("dateValidTo"),
+                                FirstIssueDate = r.Field<DateTime?>("firstIssueDate"),
                                 LicenceAction = r.Field<string>("licenceAction"),
                                 StampNumber = r.Field<string>("stampNumber")
                             })
