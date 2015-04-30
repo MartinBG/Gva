@@ -113,7 +113,7 @@ namespace Gva.Api.WordTemplates
                     },
                     LIC_NO2 = licenceNumber,
                     NAME = personNameBG,
-                    BIRTH1 = string.Format("{0:dd.mm.yyyy} {1}",
+                    BIRTH1 = string.Format("{0:dd.MM.yyyy} {1}",
                        personData.DateOfBirth,
                        personData.PlaceOfBirth != null ? personData.PlaceOfBirth.Name : null),
                     ADDR = personAddress.Address,

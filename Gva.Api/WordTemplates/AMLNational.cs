@@ -102,7 +102,7 @@ namespace Gva.Api.WordTemplates
                     CATEGORIES = this.GetCategories(includedRatings, validCodes),
                     LIC_NO3 = licenceNumber,
                     NAME = personName,
-                    DATE_OF_BIRTH1 = string.Format("{0:dd.mm.yyyy} {1}",
+                    DATE_OF_BIRTH1 = string.Format("{0:dd.MM.yyyy} {1}",
                         personData.DateOfBirth,
                         personData.PlaceOfBirth != null ? personData.PlaceOfBirth.Name : null),
                     ADDR = personAddress.Address,
