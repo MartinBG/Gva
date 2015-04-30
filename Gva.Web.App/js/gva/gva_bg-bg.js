@@ -1426,7 +1426,8 @@
         },
         references: {
           tabs: {
-            documents: 'Документи'
+            documents: 'Документи',
+            licences: 'Лицензи'
           }
         },
         referenceDocuments: {
@@ -1440,6 +1441,19 @@
           toDate: 'До дата',
           file: 'Файл',
           search: 'Търси'
+        },
+        referenceLicences: {
+          names: 'Име',
+          lin: 'ЛИН',
+          uin: 'ЕГН',
+          fromDate: 'От дата',
+          toDate: 'До дата',
+          search: 'Търси',
+          licenceTypeName: 'Тип лиценз',
+          firstIssueDate: 'Дата на първо издаване',
+          licenceAction: 'Основание',
+          stampNumber: '№  на печат',
+          licenceCode: '№'
         },
         qlfStateDirective: {
           title: 'Създаване на състояние относно придибиване на квалификация',
@@ -4024,7 +4038,8 @@
         'root.examinationSystem.certPaths': 'Сертификационни пътища',
         'root.examinationSystem.examinees': 'Изпити',
         'root.personsReferences': 'Справки в Персонал',
-        'root.personsReferences.documents': 'Документи'
+        'root.personsReferences.documents': 'Документи',
+        'root.personsReferences.licences': 'Лицензи'
       }
     });
   }]);

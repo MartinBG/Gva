@@ -3,10 +3,15 @@
   'use strict';
 
   angular.module('gva').factory('PersonReferences', ['$resource', function ($resource) {
-    return $resource('api/persons/personReferences', {}, {
+    return $resource('api/persons/references', {}, {
       getDocuments: {
         method: 'GET',
-        url: 'api/persons/personReferences/documents',
+        url: 'api/persons/references/documents',
+        isArray: true
+      },
+      getLicences: {
+        method: 'GET',
+        url: 'api/persons/references/licenceCerts',
         isArray: true
       }
     });
