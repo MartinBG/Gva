@@ -68,5 +68,28 @@ namespace Gva.Api.Controllers.Reports
                 return this.GetExcelFile(workbook, "licences");
             }
         }
+
+        [HttpGet]
+        [Route("ratings")]
+        public HttpResponseMessage ExportExcelRatingsReport(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? lin = null,
+            int? ratingClassId = null,
+            int? authorizationId = null)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+            {
+                var workbook = this.personsReportRepository.GetRatingsWorkbook(
+                    conn: conn,
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    ratingClassId: ratingClassId,
+                    authorizationId: authorizationId,
+                    lin: lin);
+
+                return this.GetExcelFile(workbook, "ratings");
+            }
+        }
     }
 }

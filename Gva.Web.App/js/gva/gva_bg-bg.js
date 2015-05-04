@@ -1471,7 +1471,8 @@
           toDate: 'До дата',
           dateValidFrom: 'Издаден',
           dateValidTo: 'Валиден до',
-          search: 'Търси'
+          search: 'Търси',
+          'export': 'Експорт'
         },
         qlfStateDirective: {
           title: 'Създаване на състояние относно придибиване на квалификация',

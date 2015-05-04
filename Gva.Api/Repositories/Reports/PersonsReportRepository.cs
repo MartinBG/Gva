@@ -313,5 +313,68 @@ namespace Gva.Api.Repositories.AircraftRepository
 
             return workbook;
         }
+
+        public XLWorkbook GetRatingsWorkbook(
+            SqlConnection conn,
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? ratingClassId = null,
+            int? authorizationId = null,
+            int? aircraftTypeCategoryId = null,
+            int? lin = null)
+        {
+            List<PersonReportRatingDO> ratings = this.GetRatings(
+                        conn: conn,
+                        fromDate: fromDate,
+                        toDate: toDate,
+                        ratingClassId: ratingClassId,
+                        authorizationId: authorizationId,
+                        lin: lin);
+
+            var workbook = new XLWorkbook();
+            var ws = workbook.Worksheets.Add("Ratings");
+
+            //headers
+            int rowIndex = 1;
+
+            var firstRowStyle = ws.Row(1).Style;
+            firstRowStyle.Font.Bold = true;
+            firstRowStyle.Font.FontColor = XLColor.DarkSlateGray;
+            firstRowStyle.Fill.BackgroundColor = XLColor.Lavender;
+
+            ws.Cell(rowIndex, "A").Value = "Лин";
+            ws.Cell(rowIndex, "B").Value = "Издаден";
+            ws.Cell(rowIndex, "C").Value = "Валиден до";
+            ws.Cell(rowIndex, "D").Value = "Първоначално издаване";
+            ws.Cell(rowIndex, "E").Value = "Тип ВС";
+            ws.Cell(rowIndex, "F").Value = "Степен(раб. място)";
+            ws.Cell(rowIndex, "G").Value = "Клас";
+            ws.Cell(rowIndex, "H").Value = "Подклас";
+            ws.Cell(rowIndex, "I").Value = "Категория";
+            ws.Cell(rowIndex, "J").Value = "Разрешение";
+            ws.Cell(rowIndex, "K").Value = "Ограничения";
+
+            rowIndex++;
+            foreach (var rating in ratings)
+            {
+                ws.Cell(rowIndex, "A").Value = rating.Lin;
+                ws.Cell(rowIndex, "B").Value = rating.DateValidFrom.HasValue ? rating.DateValidFrom.Value.ToString("dd.MM.yyyy") : null;
+                ws.Cell(rowIndex, "C").Value = rating.DateValidTo.HasValue ? rating.DateValidTo.Value.ToString("dd.MM.yyyy") : null;
+                ws.Cell(rowIndex, "D").Value = rating.FirstIssueDate.HasValue ? rating.FirstIssueDate.Value.ToString("dd.MM.yyyy") : null;
+                ws.Cell(rowIndex, "E").Value = rating.AircraftTypeCategory;
+                ws.Cell(rowIndex, "F").Value = string.Format("{0} {1}",rating.LocationIndicator, rating.Sector);
+                ws.Cell(rowIndex, "G").Value = rating.RatingClass;
+                ws.Cell(rowIndex, "H").Value = rating.RatingSubClasses;
+                ws.Cell(rowIndex, "I").Value = rating.AircraftTypeCategory;
+                ws.Cell(rowIndex, "J").Value = rating.AuthorizationCode;
+                ws.Cell(rowIndex, "J").Value = rating.Limitations;
+
+                rowIndex++;
+            }
+            ws.Columns().AdjustToContents();
+
+            return workbook;
+        }
+
     }
 }

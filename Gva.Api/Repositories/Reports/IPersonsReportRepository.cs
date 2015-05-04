@@ -44,11 +44,20 @@ namespace Gva.Api.Repositories.AircraftRepository
            int? lin = null);
 
         XLWorkbook GetLicencesWorkbook(
-                    SqlConnection conn,
-                    DateTime? fromDate = null,
-                    DateTime? toDate = null,
-                    int? licenceActionId = null,
-                    int? licenceTypeId = null,
-                    int? lin = null);
+            SqlConnection conn,
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? licenceActionId = null,
+            int? licenceTypeId = null,
+            int? lin = null);
+
+        XLWorkbook GetRatingsWorkbook(
+            SqlConnection conn,
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? ratingClassId = null,
+            int? authorizationId = null,
+            int? aircraftTypeCategoryId = null,
+            int? lin = null);
     }
 }
