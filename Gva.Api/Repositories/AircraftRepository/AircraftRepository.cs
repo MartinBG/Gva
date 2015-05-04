@@ -82,6 +82,7 @@ namespace Gva.Api.Repositories.AircraftRepository
                                 .Where(p => p.LotId == aircraftId)
                     join r in this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
                                 .Include(v => v.Register)
+                                .Where(r => r.LotId == aircraftId)
                              on a.ActNumber equals r.ActNumber into ra
                     from ra1 in ra.DefaultIfEmpty()
                     select new

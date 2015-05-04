@@ -1,13 +1,19 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field-group class="col-md-2 col-sm-4" text="aircrafts.regFMDirective.certNumber">
-      <span ng-if="model.register && model.register.textContent.regPrefix">
-        {{model.register && model.register.textContent.regPrefix}}
-      </span>
-      <sc-int ng-model="model.certNumber" name="certNumber" ng-readonly="true"></sc-int>
+    <sc-field type="int" ng-model="model.certNumber" ng-if="model.register.code !== '2'" name="certNumber" ng-readonly="true" l10n-text="aircrafts.regFMDirective.certNumber" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field-group ng-if="model.register.code === '2'" class="col-md-2 col-sm-4" text="aircrafts.regFMDirective.certNumber">
+      <span >II - </span>
+      <sc-field type="int" ng-model="model.certNumber" name="certNumber" ng-readonly="true"></sc-field>
     </sc-field-group>
+
     <sc-field type="nomenclature" ng-model="model.register" alias="'registers'" l10n-text="aircrafts.regFMDirective.register" class="col-sm-2 col-sm-4"></sc-field>
-    <sc-field type="int" ng-model="model.actNumber" l10n-text="aircrafts.regFMDirective.actNumber" class="col-md-2 col-sm-4"></sc-field>
+
+    <sc-field type="int" ng-if="model.register.code !== '2'" ng-model="model.actNumber" class="col-md-2 col-sm-4" l10n-text="aircrafts.regFMDirective.actNumber"></sc-field>
+    <sc-field-group ng-if="model.register.code === '2'" class="col-md-2 col-sm-4" text="aircrafts.regFMDirective.actNumber">
+      <span >II - </span>
+      <sc-field type="int" ng-model="model.actNumber" name="actNumber" readonly="form.$readonly"></sc-field>
+    </sc-field-group>
+
     <sc-field type="text" ng-model="model.regMark" l10n-text="aircrafts.regFMDirective.regMark" class="col-md-3 col-sm-4" ng-pattern="regMarkPattern"></sc-field>
     <sc-field type="date" ng-model="model.certDate" l10n-text="aircrafts.regFMDirective.certDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
@@ -17,7 +23,7 @@
     <sc-field type="text" ng-model="model.incomingDocDesc" l10n-text="aircrafts.regFMDirective.incomingDocDesc" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <gva-aircraft-inspector name="inspector" ng-model="model.inspector" readonly="readonly" sc-form-params="{ inspectorTypes: ['inspector','other'] }"></gva-aircraft-inspector>
+    <gva-aircraft-inspector name="inspector" ng-model="model.inspector" readonly="form.$readonly" sc-form-params="{ inspectorTypes: ['inspector','other'] }"></gva-aircraft-inspector>
   </div>
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.status" ng-required="true" alias="'aircraftRegStatsesFm'" l10n-text="aircrafts.regFMDirective.status" class="col-md-6 col-sm-8"></sc-field>
