@@ -10,13 +10,11 @@
       },
       getLicences: {
         method: 'GET',
-        url: 'api/reports/persons/licenceCerts',
-        isArray: true
+        url: 'api/reports/persons/licenceCerts'
       },
       getRatings: {
         method: 'GET',
-        url: 'api/reports/persons/ratings',
-        isArray: true
+        url: 'api/reports/persons/ratings'
       }
     });
   }]);

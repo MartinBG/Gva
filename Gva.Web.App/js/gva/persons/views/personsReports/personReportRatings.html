@@ -11,24 +11,24 @@
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
-  <sc-datatable items="ratings" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
-    <sc-column sortable="false" class="buttons-cell" has-content="true">
+  <sc-ajaxdatatable items="docs" items-count="ratingsCount" fectch-fn="getRatings" set-prop="ratings" count-prop="ratingsCount" dynamic-columns="false" filterable="false">
+    <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.lotId }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-    </sc-column>
-    <sc-column data="lin" title="persons.reportRatings.lin">
-    </sc-column>
-    <sc-column data="dateValidFrom" title="persons.reportRatings.dateValidFrom" type="date">
-    </sc-column>
-    <sc-column data="dateValidTo" title="persons.reportRatings.dateValidTo" type="date">
-    </sc-column>
-    <sc-column data="firstIssueDate" title="persons.reportRatings.firstIssueDate" type="date">
-    </sc-column>
-    <sc-column  title="persons.ratingSearch.ratingTypeOrRatingLevel" has-content="true">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="lin" title="persons.reportRatings.lin">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="dateValidFrom" title="persons.reportRatings.dateValidFrom" type="date">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="dateValidTo" title="persons.reportRatings.dateValidTo" type="date">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="firstIssueDate" title="persons.reportRatings.firstIssueDate" type="date">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn  title="persons.ratingSearch.ratingTypeOrRatingLevel" has-content="true">
       {{item.personRatingLevel || item.ratingTypes || (item.aircraftTypeGroup || (item.locationIndicator ? item.locationIndicator : '') + ' ' + (item.sector? item.sector : ''))}}
-    </sc-column>
-    <sc-column data="((ratingClass ? ratingClass : '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : '')) || (aircraftTypeCategory ? aircraftTypeCategory : '') " title="persons.reportRatings.classOrCategory" class="wrap">
-    </sc-column>
-    <sc-column data="(authorizationCode ? authorizationCode : '') + ' ' +  (limitations ? limitations : '')" title="persons.reportRatings.authorizationAndLimitations" class="wrap">
-    </sc-column>
-  </sc-datatable>
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="((ratingClass ? ratingClass : '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : '')) || (aircraftTypeCategory ? aircraftTypeCategory : '') " title="persons.reportRatings.classOrCategory" class="wrap">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="(authorizationCode ? authorizationCode : '') + ' ' +  (limitations ? limitations : '')" title="persons.reportRatings.authorizationAndLimitations" class="wrap">
+    </sc-ajaxcolumn>
+  </sc-ajaxdatatable>
 </div>

@@ -49,7 +49,9 @@ namespace Gva.Api.Controllers.Reports
             DateTime? toDate = null,
             int? lin = null,
             int? licenceTypeId = null,
-            int? licenceActionId = null)
+            int? licenceActionId = null,
+            int offset = 0,
+            int limit = 10)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
@@ -97,7 +99,11 @@ namespace Gva.Api.Controllers.Reports
                             })
                     .ToList();
 
-                return Ok(licences);
+                return Ok(new
+                {
+                    licencesCount = licences.Count(),
+                    licences = licences.Skip(offset).Take(limit).ToList()
+                });
             }
         }
 
@@ -108,7 +114,9 @@ namespace Gva.Api.Controllers.Reports
             int? ratingClassId = null,
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
-            int? lin = null)
+            int? lin = null,
+            int offset = 0,
+            int limit = 10)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
@@ -184,7 +192,11 @@ namespace Gva.Api.Controllers.Reports
                             })
                     .ToList();
 
-                return Ok(ratings);
+                return Ok(new
+                {
+                    ratingsCount = ratings.Count(),
+                    ratings = ratings.Skip(offset).Take(limit).ToList()
+                });
             }
         }
     }

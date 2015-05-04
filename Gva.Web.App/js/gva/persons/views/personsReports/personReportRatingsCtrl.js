@@ -5,7 +5,8 @@
     $scope,
     $state,
     $stateParams,
-    ratings
+    PersonsReports,
+    docs
   ) {
     $scope.filters = {
       fromDate: null,
@@ -20,7 +21,20 @@
       }
     });
 
-    $scope.ratings = ratings;
+    $scope.docs = docs.ratings;
+    $scope.ratingsCount = docs.ratingsCount;
+
+    $scope.getRatings = function (page, pageSize) {
+      var params = {set: $stateParams.set};
+
+      _.assign(params, $scope.filters);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return PersonsReports.getRatings(params).$promise;
+    };
 
     $scope.search = function () {
       return $state.go('root.personsReports.ratings', {
@@ -38,11 +52,12 @@
     '$scope',
     '$state',
     '$stateParams',
-    'ratings'
+    'PersonsReports',
+    'docs'
   ];
 
   PersonReportRatingsCtrl.$resolve = {
-    ratings: [
+    docs: [
       '$stateParams',
       'PersonsReports',
       function ($stateParams, PersonsReports) {

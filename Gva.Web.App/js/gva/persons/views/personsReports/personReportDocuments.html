@@ -9,7 +9,7 @@
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
-  <sc-ajaxdatatable items="docs" items-count="documentsCount" fectch-fn="getDocuments" set-prop="documents" count-prop="documentsCount">
+  <sc-ajaxdatatable items="docs" items-count="documentsCount" fectch-fn="getDocuments" set-prop="documents" count-prop="documentsCount" dynamic-columns="false" filterable="false">
     <sc-ajaxcolumn data="name" title="persons.reportDocuments.name">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="type" title="persons.reportDocuments.type" class="wrap">

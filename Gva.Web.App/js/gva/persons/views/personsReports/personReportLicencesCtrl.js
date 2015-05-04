@@ -5,13 +5,13 @@
     $scope,
     $state,
     $stateParams,
-    licences
+    PersonsReports,
+    docs
   ) {
     $scope.filters = {
       fromDate: null,
       toDate: null,
       licenceTypeId: null,
-      licenceActionId: null,
       lin: null
     };
 
@@ -21,7 +21,20 @@
       }
     });
 
-    $scope.licences = licences;
+    $scope.docs = docs.licences;
+    $scope.documentsCount = docs.licencesCount;
+
+    $scope.getLicences = function (page, pageSize) {
+      var params = {set: $stateParams.set};
+
+      _.assign(params, $scope.filters);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return PersonsReports.getLicences(params).$promise;
+    };
 
     $scope.search = function () {
       return $state.go('root.personsReports.licences', {
@@ -38,11 +51,12 @@
     '$scope',
     '$state',
     '$stateParams',
-    'licences'
+    'PersonsReports',
+    'docs'
   ];
 
   PersonReportLicencesCtrl.$resolve = {
-    licences: [
+    docs: [
       '$stateParams',
       'PersonsReports',
       function ($stateParams, PersonsReports) {
