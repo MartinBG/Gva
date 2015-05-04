@@ -122,6 +122,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ExaminationSystemRepository>().As<IExaminationSystemRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PrintRepository>().As<IPrintRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonsReportRepository>().As<IPersonsReportRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRepository>().As<IAircraftRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationRepository>().As<IOrganizationRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<EquipmentRepository>().As<IEquipmentRepository>().InstancePerLifetimeScope();
@@ -218,7 +219,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationStagesController>().InstancePerLifetimeScope();
 
             //Reports controllers
-            moduleBuilder.RegisterType<ReportsPersonsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonsReportsController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonsReportsExportExcelController>().InstancePerLifetimeScope();
 
             // controllers
             moduleBuilder.RegisterType<GvaNomController>().InstancePerLifetimeScope();

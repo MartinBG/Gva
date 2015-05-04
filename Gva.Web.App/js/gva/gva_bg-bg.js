@@ -1441,7 +1441,8 @@
           valid: 'Валиден',
           fromDate: 'От дата',
           toDate: 'До дата',
-          search: 'Търси'
+          search: 'Търси',
+          'export': 'Експорт'
         },
         reportLicences: {
           names: 'Име',

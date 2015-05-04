@@ -14,6 +14,7 @@
     <sc-search-button action="clear"></sc-search-button>
   </sc-search>
 
+  <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/documents?lin={{filters.lin}}&documentRole={{filters.documentRole ? filters.documentRole.text: null}}&typeId={{filters.typeId}}&fromDate=fromDate&toDate=toDate" target="_blank" sc-access-token text="persons.reportDocuments.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
   <sc-ajaxdatatable items="docs" items-count="documentsCount" fectch-fn="getDocuments" set-prop="documents" count-prop="documentsCount" dynamic-columns="false" filterable="false">
     <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.lotId }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>

@@ -38,6 +38,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>..\packages\ClosedXML.0.76.0\lib\net40-client\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
@@ -119,6 +126,8 @@
     <Compile Include="Controllers\Airports\AirportsController.cs" />
     <Compile Include="Controllers\Applications\AplicationsCaseController.cs" />
     <Compile Include="Controllers\Applications\ApplicationStagesController.cs" />
+    <Compile Include="Controllers\ExcelController.cs" />
+    <Compile Include="Controllers\Reports\ReportsExportExcelController.cs" />
     <Compile Include="Controllers\Reports\ReportsPersonsController.cs" />
     <Compile Include="Controllers\ProjectionsController.cs" />
     <Compile Include="Controllers\ExaminationSystemController.cs" />
@@ -469,6 +478,8 @@
     <Compile Include="Repositories\PersonRepository\IPersonRepository.cs" />
     <Compile Include="Repositories\PersonRepository\PersonRepository.cs" />
     <Compile Include="ModelsDO\PublisherType.cs" />
+    <Compile Include="Repositories\Reports\PersonsReportRepository.cs" />
+    <Compile Include="Repositories\Reports\IPersonsReportRepository.cs" />
     <Compile Include="Repositories\StageRepository\IStageRepository.cs" />
     <Compile Include="Repositories\StageRepository\StageRepository.cs" />
     <Compile Include="WordTemplates\AMLNational.cs" />
