@@ -1432,6 +1432,7 @@
           }
         },
         reportDocuments: {
+          lin: 'ЛИН',
           name: 'Документ (роля)',
           type: 'Вид',
           docNumber: '№ на документа',
@@ -1440,7 +1441,6 @@
           valid: 'Валиден',
           fromDate: 'От дата',
           toDate: 'До дата',
-          file: 'Файл',
           search: 'Търси'
         },
         reportLicences: {

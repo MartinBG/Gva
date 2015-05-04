@@ -1,15 +1,25 @@
 ﻿<div>
-    <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="search()">
-    <sc-filter type="text" name="documentPart" class="col-md-3 col-sm-4" removable="false" label="persons.reportDocuments.name"></sc-filter>
+  <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="search()">
+    <sc-filter type="int" name="lin" class="col-md-1 col-sm-2" removable="false" label="persons.reportDocuments.lin"></sc-filter>
+    <sc-filter type="select" name="documentRole" class="col-md-3 col-sm-4" removable="false" label="persons.reportDocuments.name"
+        options="{ 
+           data: documentRoleOptions,
+           allowClear: true,
+           placeholder: ' '
+         }"></sc-filter>
     <sc-filter type="nomenclature" name="typeId" class="col-sm-3" removable="false" alias="documentTypes" mode="id" label="persons.reportDocuments.type"></sc-filter>
     <sc-filter type="date" name="fromDate" class="col-sm-2" removable="false" label="persons.reportDocuments.fromDate"></sc-filter>
     <sc-filter type="date" name="toDate" class="col-sm-2" removable="false" label="persons.reportDocuments.toDate"></sc-filter>
     <sc-search-button action="search()" text="persons.reportDocuments.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
     <sc-search-button action="clear"></sc-search-button>
-    <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
   <sc-ajaxdatatable items="docs" items-count="documentsCount" fectch-fn="getDocuments" set-prop="documents" count-prop="documentsCount" dynamic-columns="false" filterable="false">
+    <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
+      <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.lotId }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="lin" title="persons.reportDocuments.lin">
+    </sc-ajaxcolumn>
     <sc-ajaxcolumn data="name" title="persons.reportDocuments.name">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="type" title="persons.reportDocuments.type" class="wrap">
@@ -23,11 +33,6 @@
     <sc-ajaxcolumn data="fromDate" title="persons.reportDocuments.fromDate" type="date">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="toDate" title="persons.reportDocuments.toDate" type="date">
-    </sc-ajaxcolumn>
-    <sc-ajaxcolumn title="persons.reportDocuments.file" has-content="true">
-      <a target="_self" ng-href="api/file?fileKey={{item.file.key}}&fileName={{item.file.name}}" sc-access-token ng-show="item.file" title="{{item.file.name}}">
-        <span class="glyphicon glyphicon-file"></span>
-      </a>
     </sc-ajaxcolumn>
   </sc-ajaxdatatable>
 </div>

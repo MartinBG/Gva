@@ -9,17 +9,9 @@ namespace Gva.Api.ModelsDO.Persons.Reports
 {
     public class PersonReportDocumentDO
     {
-        public PersonReportDocumentDO(InventoryItemDO item)
-        {
-            this.Name = item.Name;
-            this.Type = item.Type;
-            this.Number = item.Number;
-            this.FromDate = item.FromDate;
-            this.ToDate = item.ToDate;
-            this.Publisher = item.Publisher;
-            this.Valid = item.Valid;
-            this.File = item.File;
-        }
+        public int LotId { get; set; }
+
+        public int? Lin { get; set; }
 
         public string Name { get; set; }
 
@@ -34,7 +26,5 @@ namespace Gva.Api.ModelsDO.Persons.Reports
         public string Publisher { get; set; }
 
         public bool? Valid { get; set; }
-
-        public FileDataDO File { get; set; }
     }
 }

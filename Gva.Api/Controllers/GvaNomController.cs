@@ -19,6 +19,7 @@ using Gva.Api.Repositories.ExaminationSystemRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.StageRepository;
+using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
 namespace Gva.Api.Controllers
@@ -106,6 +107,26 @@ namespace Gva.Api.Controllers
             {
                 return Ok(applications);
             }
+        }
+
+        [Route("{set:regex(^(?:person|organization)$)}SetParts")]
+        public IHttpActionResult GetLotSetParts(string set = null, string term = null)
+        {
+            var partTypes = this.unitOfWork.DbContext.Set<SetPart>()
+                .Where(s => s.Set.Alias.ToLower() == set)
+                .Select(i => new
+                {
+                    nomValueId = i.SetPartId,
+                    name = i.Name,
+                    alias = i.Alias
+                });
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                return Ok(partTypes.Where(a => a.name.ToLower().Contains(term.ToLower())));
+            }
+
+            return Ok(partTypes);
         }
 
         [Route("appExamSystExams")]

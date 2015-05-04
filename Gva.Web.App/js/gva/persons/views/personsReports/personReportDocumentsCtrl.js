@@ -6,13 +6,17 @@
     $state,
     $stateParams,
     PersonsReports,
+    documentRoleOptions,
     docs
   ) {
+
+    $scope.documentRoleOptions = documentRoleOptions;
     $scope.filters = {
-      documentPart: null,
+      documentRole: null,
       fromDate: null,
       toDate: null,
-      typeId: null
+      typeId: null,
+      lin: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -38,10 +42,12 @@
 
     $scope.search = function () {
       return $state.go('root.personsReports.documents', {
-        documentPart: $scope.filters.documentPart,
+        documentRole: $scope.filters.documentRole ?
+          $scope.filters.documentRole.text : null,
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
-        typeId: $scope.filters.typeId
+        typeId: $scope.filters.typeId,
+        lin: $scope.filters.lin
       });
     };
   }
@@ -51,6 +57,7 @@
     '$state',
     '$stateParams',
     'PersonsReports',
+    'documentRoleOptions',
     'docs'
   ];
 
@@ -60,6 +67,34 @@
       'PersonsReports',
       function ($stateParams, PersonsReports) {
         return PersonsReports.getDocuments($stateParams).$promise;
+      }
+    ],
+    documentRoleOptions: [
+      '$q',
+      'Nomenclatures',
+      function ($q, Nomenclatures) {
+        return $q.all({
+          roles: Nomenclatures.query({alias: 'documentRoles'}).$promise,
+          parts: Nomenclatures.query({alias: 'personSetParts'}).$promise
+        })
+        .then(function (result) {
+          var neccessarySetParts = [
+            'personDocumentId',
+            'personEducation',
+            'personDocumentId',
+            'personMedical',
+            'personApplication',
+            'personLicence'
+          ];
+
+          var parts = _.filter(result.parts, function (part) {
+            return _.contains(neccessarySetParts, part.alias);
+          });
+
+          return _.map(_.union(result.roles, parts), function (option) {
+            return { id: option.name, text: option.name };
+          });
+        });
       }
     ]
   };
