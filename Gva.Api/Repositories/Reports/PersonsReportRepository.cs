@@ -248,8 +248,68 @@ namespace Gva.Api.Repositories.AircraftRepository
             }
 
             ws.Columns().AdjustToContents();
-            ws.Column(3).Width = 45;
-            ws.Column(5).Width = 45;
+            ws.Column("C").Width = 45;
+            ws.Column("E").Width = 45;
+
+            return workbook;
+        }
+
+        public XLWorkbook GetLicencesWorkbook(
+                    SqlConnection conn,
+                    DateTime? fromDate = null,
+                    DateTime? toDate = null,
+                    int? licenceActionId = null,
+                    int? licenceTypeId = null,
+                    int? lin = null)
+        {
+            List<PersonReportLicenceDO> licences = this.GetLicences(
+                    conn: conn,
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    licenceActionId: licenceActionId,
+                    licenceTypeId: licenceTypeId,
+                    lin: lin);
+
+            var workbook = new XLWorkbook();
+            var ws = workbook.Worksheets.Add("Licences");
+
+            //headers
+            int rowIndex = 1;
+
+            var firstRowStyle = ws.Row(1).Style;
+            firstRowStyle.Font.Bold = true;
+            firstRowStyle.Font.FontColor = XLColor.DarkSlateGray;
+            firstRowStyle.Fill.BackgroundColor = XLColor.Lavender;
+
+            ws.Cell(rowIndex, "A").Value = "Лин";
+            ws.Cell(rowIndex, "B").Value = "ЕГН";
+            ws.Cell(rowIndex, "C").Value = "Име";
+            ws.Cell(rowIndex, "D").Value = "№";
+            ws.Cell(rowIndex, "E").Value = "Тип лиценз";
+            ws.Cell(rowIndex, "F").Value = "Дата на първо";
+            ws.Cell(rowIndex, "G").Value = "От дата";
+            ws.Cell(rowIndex, "H").Value = "До дата";
+            ws.Cell(rowIndex, "I").Value = "Основание";
+            ws.Cell(rowIndex, "J").Value = "№ на печат";
+
+            rowIndex++;
+            foreach (var licence in licences)
+            {
+                ws.Cell(rowIndex, "A").Value = licence.Lin;
+                ws.Cell(rowIndex, "B").Value = licence.Uin;
+                ws.Cell(rowIndex, "C").Value = licence.Names;
+                ws.Cell(rowIndex, "D").Value = licence.LicenceCode;
+                ws.Cell(rowIndex, "E").Value = licence.LicenceTypeName;
+                ws.Cell(rowIndex, "F").Value = licence.FirstIssueDate.HasValue ? licence.FirstIssueDate.Value.ToString("dd.MM.yyyy") : null;
+                ws.Cell(rowIndex, "G").Value = licence.DateValidFrom.HasValue ? licence.DateValidFrom.Value.ToString("dd.MM.yyyy") : null;
+                ws.Cell(rowIndex, "H").Value = licence.DateValidTo.HasValue ? licence.DateValidTo.Value.ToString("dd.MM.yyyy") : null;
+                ws.Cell(rowIndex, "I").Value = licence.LicenceAction;
+                ws.Cell(rowIndex, "J").Value = licence.StampNumber;
+
+                rowIndex++;
+            }
+            ws.Columns().AdjustToContents();
+            ws.Column("I").Width = 45;
 
             return workbook;
         }

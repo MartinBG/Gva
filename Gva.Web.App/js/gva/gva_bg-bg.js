@@ -1455,7 +1455,8 @@
           licenceAction: 'Основание',
           stampNumber: '№  на печат',
           licenceCode: '№',
-          search: 'Търси'
+          search: 'Търси',
+          'export': 'Експорт'
         },
         reportRatings: {
           lin: 'ЛИН',

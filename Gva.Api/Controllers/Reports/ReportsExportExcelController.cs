@@ -25,7 +25,7 @@ namespace Gva.Api.Controllers.Reports
 
         [HttpGet]
         [Route("documents")]
-        public HttpResponseMessage GetDocumentsReportExcelExport(
+        public HttpResponseMessage ExportExcelDocumentsReport(
             string documentRole = null,
             DateTime? fromDate = null,
             DateTime? toDate = null,
@@ -43,6 +43,29 @@ namespace Gva.Api.Controllers.Reports
                     lin: lin);
 
                 return this.GetExcelFile(workbook, "documents");
+            }
+        }
+
+        [HttpGet]
+        [Route("licences")]
+        public HttpResponseMessage ExportExcelLicencesReport(
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? lin = null,
+            int? licenceTypeId = null,
+            int? licenceActionId = null)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+            {
+                var workbook = this.personsReportRepository.GetLicencesWorkbook(
+                    conn: conn,
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    licenceActionId: licenceActionId,
+                    licenceTypeId: licenceTypeId,
+                    lin: lin);
+
+                return this.GetExcelFile(workbook, "licences");
             }
         }
     }
