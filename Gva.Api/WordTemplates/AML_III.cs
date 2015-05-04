@@ -78,6 +78,11 @@ namespace Gva.Api.WordTemplates
             var acLimitations = AMLUtils.GetACLimitations(includedRatings, ratingEditions, validAliases, validCodes, this.nomRepository);
 
             var limitations = lastEdition.AmlLimitations != null ? AMLUtils.GetLimitations(lastEdition) : new object[0];
+            bool isForeigner = false;
+            if (country != null)
+            {
+                isForeigner = country.Code != "BG";
+            }
 
             var json = new
             {
@@ -87,13 +92,15 @@ namespace Gva.Api.WordTemplates
                     PERSON_NAME = new
                     {
                         NAME_EN = personNameAlt,
-                        NAME = personNameBG
+                        NAME = !isForeigner ? personNameBG : null,
+                        BG_LABEL_NAME = !isForeigner ? "Име на притежателя:" : null
                     },
                     BIRTH = new
                     {
                         DATE = personData.DateOfBirth,
                         PLACE_EN = personData.PlaceOfBirth != null ? personData.PlaceOfBirth.NameAlt : null,
-                        PLACE = personData.PlaceOfBirth != null ? personData.PlaceOfBirth.Name : null,
+                        PLACE = !isForeigner && personData.PlaceOfBirth != null ? personData.PlaceOfBirth.Name : null,
+                        BG_LABEL_PLACE = !isForeigner ? "Дата и място на раждане:" : null
                     },
                     ADDRESS = new
                     {
@@ -101,10 +108,11 @@ namespace Gva.Api.WordTemplates
                             "{0}, {1}",
                             personAddress.Settlement != null ? personAddress.Settlement.NameAlt : null,
                             personAddress.AddressAlt),
-                        ADDR = string.Format(
+                        ADDR = !isForeigner ? string.Format(
                             "{0}, {1}",
                             personAddress.Settlement != null ? personAddress.Settlement.Name : null,
-                            personAddress.Address),
+                            personAddress.Address) : null,
+                        BG_LABEL_ADDR = !isForeigner ? "Адрес на притежателя:" : null
                     },
                     NATIONALITY = new
                     {
