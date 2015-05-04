@@ -1432,7 +1432,7 @@
           }
         },
         reportDocuments: {
-          name: 'Документ',
+          name: 'Документ (роля)',
           type: 'Вид',
           docNumber: '№ на документа',
           date: 'Дата',

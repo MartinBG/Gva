@@ -6,8 +6,7 @@
     return $resource('api/reports/persons', {}, {
       getDocuments: {
         method: 'GET',
-        url: 'api/reports/persons/documents',
-        isArray: true
+        url: 'api/reports/persons/documents'
       },
       getLicences: {
         method: 'GET',

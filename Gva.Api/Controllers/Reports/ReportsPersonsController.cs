@@ -26,11 +26,21 @@ namespace Gva.Api.Controllers.Reports
         }
 
         [Route(@"documents")]
-        public IHttpActionResult GetDocuments(string documentPart = null, DateTime? fromDate = null, DateTime? toDate = null, int? typeId = null)
+        public IHttpActionResult GetDocuments(
+            string documentPart = null,
+            DateTime? fromDate = null,
+            DateTime? toDate = null,
+            int? typeId = null,
+            int offset = 0, 
+            int limit = 10)
         {
             var documents = this.inventoryRepository.GetInventoryItems(setAlias: "Person", documentPart: documentPart, fromDate: fromDate, toDate: toDate, typeId: typeId);
 
-            return Ok(documents.Select(i => new PersonReportDocumentDO(i)).ToList());
+            return Ok(new 
+            {
+                documentsCount = documents.Count(),
+                documents = documents.Skip(offset).Take(limit).Select(i => new PersonReportDocumentDO(i)).ToList()
+            });
         }
 
         [Route(@"licenceCerts")]
@@ -92,7 +102,7 @@ namespace Gva.Api.Controllers.Reports
         }
 
         [Route(@"ratings")]
-        public IHttpActionResult GetRatingss(
+        public IHttpActionResult GetRatings(
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? ratingClassId = null,
