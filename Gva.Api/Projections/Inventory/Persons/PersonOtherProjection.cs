@@ -33,7 +33,6 @@ namespace Gva.Api.Projections.Inventory.Persons
             invItem.LotId = personOther.Part.Lot.LotId;
             invItem.PartId = personOther.Part.PartId;
             invItem.SetPartAlias = personOther.Part.SetPart.Alias;
-
             invItem.Name = personOther.Content.DocumentRole.Name;
             invItem.TypeId = personOther.Content.DocumentType.NomValueId;
             invItem.Number = personOther.Content.DocumentNumber;

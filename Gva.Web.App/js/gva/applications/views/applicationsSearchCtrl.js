@@ -38,7 +38,6 @@
       }, { reload: true });
     };
 
-    
     $scope.getApplications = function (page, pageSize) {
       var params = {set: $stateParams.set};
 
