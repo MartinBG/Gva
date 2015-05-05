@@ -37,7 +37,7 @@ namespace Gva.Api.Projections.Inventory.Aircrafts
             invItem.TypeId = aircraftDebt.Content.AircraftDebtType.NomValueId;
             invItem.Number = aircraftDebt.Content.DocumentNumber;
             invItem.Date = aircraftDebt.Content.DocumentDate;
-            invItem.Publisher = aircraftDebt.Content.AircraftCreditor == null ? null : aircraftDebt.Content.AircraftCreditor.Name;
+            invItem.Publisher = aircraftDebt.Content.AircraftApplicant == null ? null : aircraftDebt.Content.AircraftApplicant.Name;
             invItem.Valid = null;
             invItem.FromDate = null;
             invItem.ToDate = null;

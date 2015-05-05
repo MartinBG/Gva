@@ -9,10 +9,20 @@
     <sc-field type="date" ng-model="model.documentDate" l10n-text="aircrafts.debtDirectiveFM.documentDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.aircraftCreditor" alias="'aircraftCreditorsFm'" ng-required="false" l10n-text="aircrafts.debtDirectiveFM.aircraftCreditor" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" ng-model="model.theirNumber" l10n-text="aircrafts.debtDirectiveFM.theirNumber" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.theirDate" l10n-text="aircrafts.debtDirectiveFM.theirDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="textarea" rows="4" ng-model="model.creditorDocument" l10n-text="aircrafts.debtDirectiveFM.creditorDocument" class="col-md-8 col-sm-12"></sc-field>
+    <div class="col-sm-7 col-md-5">
+      <label class="control-label" l10n-text="aircrafts.debtDirectiveFM.aircraftApplicant"></label>
+      <div class="input-group">
+        <sc-nomenclature class="form-control input-sm" ng-model="model.aircraftApplicant" alias="'aircraftCreditorsFm'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-button type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="newApplicant()" ng-if="!form.$readonly"></sc-button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <sc-field type="textarea" rows="4" ng-model="model.notes" l10n-text="aircrafts.debtDirectiveFM.notes" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
     <gva-aircraft-inspector  name="inspector" ng-model="model.inspector" readonly="readonly" sc-form-params="{ inspectorTypes: ['inspector','other'] }"></gva-aircraft-inspector>

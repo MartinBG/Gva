@@ -14,9 +14,9 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? CaaDate { get; set; }
 
-        public string CreditorDoc { get; set; }
+        public string TheirNumber { get; set; }
 
-        public DateTime? CreditorDate { get; set; }
+        public DateTime? TheirDate { get; set; }
 
         public string Notes { get; set; }
     }

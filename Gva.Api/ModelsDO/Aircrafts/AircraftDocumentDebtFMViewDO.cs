@@ -14,7 +14,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? DocumentDate { get; set; }
 
-        public NomValue AircraftCreditor { get; set; }
+        public NomValue AircraftApplicant { get; set; }
 
         public AircraftInspectorDO Inspector { get; set; }
     }

@@ -986,11 +986,10 @@
           documentNumber: 'Вх.док ГВА',
           documentDate: 'Дата на док',
           isActive: 'Активна',
-          aircraftCreditor: 'Кредитор',
-          inspector: 'Инспектор',
+          aircraftApplicant: 'Заявител',
+          inspector: 'Заверил',
           newDebt: 'Нова тежест',
-          bookPageNumber: '№ стр. в<br>делов. книга',
-          pageCount: 'Брой стр.',
+          notes: 'Забележка',
           file: 'Файл'
         },
         newDebtFM: {
@@ -1187,9 +1186,11 @@
           aircraftDebtType: 'Тежест',
           documentNumber: 'Вх.док ГВА',
           documentDate: 'Дата на док',
-          aircraftCreditor: 'Кредитор',
-          creditorDocument: 'Док. и дата писма на кредитор',
-          inspector: 'Инспектор',
+          aircraftApplicant: 'Заявител',
+          notes: 'Забележка',
+          theirDate: 'Тяхна дата',
+          theirNumber: 'Техен №',
+          inspector: 'Заверил',
           isActive: 'Активна'
         },
         debtCloseDirective: {
@@ -1197,10 +1198,10 @@
           date: 'Дата на погасяване',
           caaDoc: 'Наш документ №',
           caaDate: 'Наша дата',
-          creditorDoc: 'Техен документ №',
-          creditorDate: 'Тяхна дата',
-          inspector: 'Инспектор',
-          notes: 'Бележки'
+          theirDate: 'Тяхна дата',
+          theirNumber: 'Техен №',
+          inspector: 'Заверил',
+          notes: 'Забележка'
         },
         aircraftOtherDirective: {
           title: 'Друг документ',

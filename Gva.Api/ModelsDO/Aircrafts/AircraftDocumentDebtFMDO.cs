@@ -23,9 +23,13 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? DocumentDate { get; set; }
 
-        public NomValue AircraftCreditor { get; set; }
+        public NomValue AircraftApplicant { get; set; }
 
-        public string CreditorDocument { get; set; }
+        public string TheirNumber { get; set; }
+
+        public DateTime? TheirDate { get; set; }
+
+        public string Notes { get; set; }
 
         public AircraftInspectorDO Inspector { get; set; }
 
