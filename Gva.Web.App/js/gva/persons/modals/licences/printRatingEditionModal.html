@@ -1,0 +1,15 @@
+﻿<ng-form class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="persons.printRatingEditionModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="closeBtn" btn-click="close()" text="persons.printRatingEditionModal.close" class="btn btn-default btn-xs"></sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <sc-link-button name="printBtn" ng-href="api/printRatingEdition?lotId={{model.lotId}}&licenceIndex={{model.licenceIndex}}&licenceEditionIndex={{model.licenceEditionIndex}}&ratingIndex={{model.ratingIndex}}&ratingEditionIndex={{model.ratingEditionIndex}}" target="_blank" sc-access-token text="persons.printRatingEditionModal.print" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
+      <sc-link-button name="printBtn2" ng-href="api/printRatingEdition?lotId={{model.lotId}}&licenceIndex={{model.licenceIndex}}&licenceEditionIndex={{model.licenceEditionIndex}}&ratingIndex={{model.ratingIndex}}&ratingEditionIndex={{model.ratingEditionIndex}}&generateNew=true" target="_blank" sc-access-token text="persons.printRatingEditionModal.generateNew" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
+    </div>
+  </div>
+</ng-form>

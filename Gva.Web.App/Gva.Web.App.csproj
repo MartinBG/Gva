@@ -317,6 +317,8 @@
     <Content Include="js\gva\persons\forms\qualificationfState.html" />
     <Content Include="js\gva\persons\modals\checks\checkOfForeignerModal.html" />
     <Content Include="js\gva\persons\modals\checks\checkOfForeignerModalCtrl.js" />
+    <Content Include="js\gva\persons\modals\licences\printRatingEditionModal.html" />
+    <Content Include="js\gva\persons\modals\licences\printRatingEditionModalCtrl.js" />
     <Content Include="js\gva\persons\modals\qualificationStates\newQlfStateModal.html" />
     <Content Include="js\gva\persons\modals\qualificationStates\newQlfStateModalCtrl.js" />
     <Content Include="js\gva\persons\resources\personsReports.js" />

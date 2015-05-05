@@ -68,7 +68,7 @@
         }"
         sc-data-edit-mode="editMode"
         sc-data-is-fcl="licence.part.isFcl"
-        sc-data-licence-type="licence.part.licenceType">
+        sc-data-licence-type="licence.part.licenceType.code">
       </gva-licence-edition>
     </div>
 </ng-form>
@@ -77,7 +77,8 @@
   'persons.licenceView.tabs.ratings': {
     state: 'root.persons.view.licences.view.editions.edit.ratings',
     stateParams: {
-      appId: appId
+      appId: appId,
+      licenceTypeCode: licence.part.licenceType.code
     }
   },
   'persons.licenceView.tabs.exams': {

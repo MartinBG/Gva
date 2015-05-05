@@ -18,6 +18,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.IncludedChecks = new List<int>();
             this.IncludedMedicals = new List<int>();
             this.IncludedLicences = new List<int>();
+            this.PrintedRatingEditions = new List<PrintedRatingEditionDO>();
         }
 
         public int? LicencePartIndex { get; set; }
@@ -57,6 +58,8 @@ namespace Gva.Api.ModelsDO.Persons
         public List<int> IncludedMedicals { get; set; }
 
         public List<int> IncludedLicences { get; set; }
+
+        public List<PrintedRatingEditionDO> PrintedRatingEditions { get; set; }
 
         public Guid? PrintedDocumentBlobKey { get; set; }
 

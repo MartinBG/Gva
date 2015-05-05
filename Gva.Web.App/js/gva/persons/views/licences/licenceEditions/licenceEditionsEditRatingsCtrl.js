@@ -14,7 +14,7 @@
     scMessage,
     scModal
   ) {
-
+    $scope.licenceTypeCode = $stateParams.licenceTypeCode;
     $scope.currentLicenceEdition = currentLicenceEdition;
     $scope.isLast = _.last(licenceEditions).partIndex === currentLicenceEdition.partIndex;
     $scope.currentLicenceEdition.part.includedRatings =
@@ -127,6 +127,20 @@
           caseTypeId: $scope.caseTypeId
         }, $scope.currentLicenceEdition)
         .$promise;
+    };
+
+    $scope.print = function (rating) {
+      var params = {
+        lotId: $stateParams.id,
+        licenceIndex: $stateParams.ind,
+        licenceEditionIndex: $stateParams.index,
+        ratingIndex: rating.ratingPartIndex,
+        ratingEditionIndex: rating.editionPartIndex
+      };
+
+      var modalInstance = scModal.open('printRatingEdition', params);
+
+      return modalInstance.opened;
     };
   }
 

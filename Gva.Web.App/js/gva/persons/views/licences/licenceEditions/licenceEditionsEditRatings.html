@@ -12,6 +12,7 @@
         <tr>
           <th class="col-md-1 col-sm-2" ng-if="currentLicenceEdition.part.includedRatings.length && changeOrderMode"></th>
           <th width="1px" ng-if="currentLicenceEdition.part.includedRatings.length && !changeOrderMode && isLast"></th>
+          <th width="1px" ng-if="currentLicenceEdition.part.includedRatings.length && !changeOrderMode && licenceTypeCode === 'AML'"></th>
           <th l10n-text="persons.licenceEditionsEditRatingsView.ratingsTable.ratingType"></th>
           <th l10n-text="persons.licenceEditionsEditRatingsView.ratingsTable.ratingClass"></th>
           <th l10n-html="persons.licenceEditionsEditRatingsView.ratingsTable.authorization"></th>
@@ -29,6 +30,11 @@
           </td>
           <td ng-if="currentLicenceEdition.part.includedRatings.length && !changeOrderMode && isLast">
             <sc-button name="deleteRatingBtn" class="btn btn-xs btn-danger" btn-click="removeRating(rating)" icon="glyphicon-remove"></sc-button>
+          </td>
+          <td ng-if="currentLicenceEdition.part.includedRatings.length && !changeOrderMode && licenceTypeCode === 'AML'">
+            <a ng-click="print(rating)">
+              <span class="glyphicon glyphicon-print"></span>
+            </a>
           </td>
           <td>{{rating.personRatingLevel.name || rating.ratingTypes || rating.aircraftTypeGroup.code || (rating.locationIndicator ? rating.locationIndicator.code + (rating.sector ? ' ' + rating.sector : '') : '')}}</td>
           <td>{{(rating.ratingClass.code || '') + ( rating.ratingSubClasses ? ' (' + rating.ratingSubClasses + ')' : '') || rating.aircraftTypeCategory.code}}</td>

@@ -30,6 +30,7 @@ namespace Gva.Api.Controllers
     public class PrintController : ApiController
     {
         private IEnumerable<IDataGenerator> dataGenerators;
+        private IAMLNationalRatingDataGenerator AMLNationalRatingDataGenerator;
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
         private IUnitOfWork unitOfWork;
@@ -39,6 +40,7 @@ namespace Gva.Api.Controllers
 
         public PrintController(
             IEnumerable<IDataGenerator> dataGenerators,
+            IAMLNationalRatingDataGenerator AMLNationalRatingDataGenerator,
             ILotRepository lotRepository,
             INomRepository nomRepository,
             IPrintRepository printRepository,
@@ -47,12 +49,54 @@ namespace Gva.Api.Controllers
             UserContext userContext)
         {
             this.dataGenerators = dataGenerators;
+            this.AMLNationalRatingDataGenerator = AMLNationalRatingDataGenerator;
             this.lotRepository = lotRepository;
             this.nomRepository = nomRepository;
             this.printRepository = printRepository;
             this.unitOfWork = unitOfWork;
             this.userContext = userContext;
             this.lotEventDispatcher = lotEventDispatcher;
+        }
+
+        [Route("api/printRatingEdition")]
+        public HttpResponseMessage GetRatingEdition(int lotId, int licenceIndex, int licenceEditionIndex, int ratingIndex, int ratingEditionIndex, bool generateNew = false)
+        {
+            string path = string.Format("{0}/{1}", "licences", licenceIndex);
+            var lot = lotRepository.GetLotIndex(lotId);
+            string templateName = "AML_national_rating";
+
+            PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionIndex));
+            Guid ratingEditionBlobKey;
+            var printedRatingEdition = licenceEditionPartVersion.Content.PrintedRatingEditions.Where(e => e.RatingPartIndex == ratingIndex && e.RatingEditionPartIndex == ratingEditionIndex).SingleOrDefault();
+            if(printedRatingEdition != null && !generateNew)
+            {
+                ratingEditionBlobKey = printedRatingEdition.PrintedEditionBlobKey;
+            }
+            else
+            {
+
+                using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName, ratingIndex, ratingEditionIndex))
+                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
+                {
+                    ratingEditionBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
+                    this.UpdateLicenceEditionPrintedRatings(ratingEditionBlobKey, licenceEditionPartVersion, lot, templateName, ratingIndex, ratingEditionIndex);
+                }
+            }
+
+            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline",
+                ratingEditionBlobKey,
+                templateName);
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.Redirect);
+            result.Headers.Location = new Uri(url, UriKind.Relative);
+            result.Headers.CacheControl = new CacheControlHeaderValue()
+            {
+                NoCache = true,
+                NoStore = true,
+                MustRevalidate = true
+            };
+
+            return result;
         }
 
         [Route("api/print")]
@@ -76,8 +120,7 @@ namespace Gva.Api.Controllers
 
             PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", editionPartIndex));
 
-            int licenceTypeId = lot.Index.GetPart<PersonLicenceDO>(path)
-                .Content.LicenceType.NomValueId;
+            int licenceTypeId = lot.Index.GetPart<PersonLicenceDO>(path).Content.LicenceType.NomValueId;
             string templateName = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId).TextContent.Get<string>("templateName");
 
             Guid licenceEditionDocBlobKey;
@@ -87,7 +130,7 @@ namespace Gva.Api.Controllers
             }
             else
             {
-                using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName))
+                using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName, null, null))
                 using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
                 {
                     licenceEditionDocBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
@@ -126,7 +169,7 @@ namespace Gva.Api.Controllers
             }
             else
             {
-                using (var wordDocStream = this.GenerateWordDocument(lotId, airworthinessPath, templateName))
+                using (var wordDocStream = this.GenerateWordDocument(lotId, airworthinessPath, templateName, null, null))
                 using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
                 {
                     awDocBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
@@ -150,10 +193,18 @@ namespace Gva.Api.Controllers
             return result;
         }
 
-        public Stream GenerateWordDocument(int lotId, string path, string templateName)
+        public Stream GenerateWordDocument(int lotId, string path, string templateName, int? ratingPartIndex, int? editionPartIndex)
         {
-            var dataGenerator = this.dataGenerators.First(dg => dg.TemplateNames.Contains(templateName));
-            object data = dataGenerator.GetData(lotId, path);
+            var dataGenerator = this.dataGenerators.FirstOrDefault(dg => dg.TemplateNames.Contains(templateName));
+            object data = null;
+            if (dataGenerator == null && ratingPartIndex.HasValue && editionPartIndex.HasValue)
+            {
+                data = this.AMLNationalRatingDataGenerator.GetData(lotId, path, ratingPartIndex.Value, editionPartIndex.Value);
+            }
+            else
+            { 
+                data = dataGenerator.GetData(lotId, path);
+            }
 
             JsonSerializer jsonSerializer = JsonSerializer.Create(App.JsonSerializerSettings);
             jsonSerializer.ContractResolver = new DefaultContractResolver();
@@ -191,6 +242,59 @@ namespace Gva.Api.Controllers
 
                 licenceEditionPartVersion.Content.PrintedFileId = printedLicenceFile.GvaFileId;
 
+                lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
+                this.lotRepository.ExecSpSetLotPartTokens(licenceEditionPartVersion.PartId);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+            }
+        }
+        public void UpdateLicenceEditionPrintedRatings(
+            Guid ratingEditionBlobKey,
+            PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion, 
+            Lot lot,
+            string templateName,
+            int ratingPartIndex,
+            int ratingEditionPartIndex)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                PrintedRatingEditionDO existingEntry = licenceEditionPartVersion.Content.PrintedRatingEditions.Where(re => re.RatingEditionPartIndex == ratingEditionPartIndex && re.RatingPartIndex == ratingPartIndex).SingleOrDefault();
+
+                GvaFile printedRatingEditionFile = new GvaFile()
+                {
+                    Filename = templateName,
+                    FileContentId = ratingEditionBlobKey,
+                    MimeType = "application/pdf"
+                };
+
+                this.unitOfWork.DbContext.Set<GvaFile>().Add(printedRatingEditionFile);
+
+                this.unitOfWork.Save();
+                if (existingEntry != null)
+                {
+                    existingEntry.FileId = printedRatingEditionFile.GvaFileId;
+                    existingEntry.PrintedEditionBlobKey = ratingEditionBlobKey;
+                }
+                else
+                {
+                    PrintedRatingEditionDO newEntry = new PrintedRatingEditionDO()
+                    {
+                        PrintedEditionBlobKey = ratingEditionBlobKey,
+                        RatingPartIndex = ratingPartIndex,
+                        RatingEditionPartIndex = ratingEditionPartIndex,
+                        FileId = printedRatingEditionFile.GvaFileId
+                    };
+
+                    if(licenceEditionPartVersion.Content.PrintedRatingEditions == null)
+                    {
+                            licenceEditionPartVersion.Content.PrintedRatingEditions = new List<PrintedRatingEditionDO>();
+                    }
+                    licenceEditionPartVersion.Content.PrintedRatingEditions.Add(newEntry);
+                }
                 lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
 
                 lot.Commit(this.userContext, lotEventDispatcher);

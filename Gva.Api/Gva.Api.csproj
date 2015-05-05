@@ -192,6 +192,7 @@
     <Compile Include="ModelsDO\Organizations\GvaViewOrganizationApprovalDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovalNewDO.cs" />
     <Compile Include="ModelsDO\Persons\CheckOfForeignerDO.cs" />
+    <Compile Include="ModelsDO\Persons\PrintedRatingEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonNewExamSystStateDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamSystStateDO.cs" />
     <Compile Include="ModelsDO\Persons\PersonExamSystExamDO.cs" />
@@ -337,6 +338,7 @@
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspection.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationInspectionRecommendation.cs" />
     <Compile Include="Models\Views\Organization\GvaViewOrganizationRecommendation.cs" />
+    <Compile Include="Models\Views\Person\GvaViewPrintedRatingEdition.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonReportCheck.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonReport.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonCheck.cs" />
@@ -443,6 +445,7 @@
     <Compile Include="Models\Views\Person\GvaViewPerson.cs" />
     <Compile Include="Models\GvaWordTemplate.cs" />
     <Compile Include="Projections\Person\PersonRatingProjection.cs" />
+    <Compile Include="Projections\Person\PersonPrintedRatingEditionProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GvaApiModule.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegistrationRepository.cs" />
@@ -491,6 +494,8 @@
     <Compile Include="WordTemplates\AML.cs" />
     <Compile Include="WordTemplates\AML_III.cs" />
     <Compile Include="WordTemplates\AMLUtils.cs" />
+    <Compile Include="WordTemplates\AMLNationalRating.cs" />
+    <Compile Include="WordTemplates\IAMLNationalRatingDataGenerator.cs" />
     <Compile Include="WordTemplates\Directive8.cs" />
     <Compile Include="WordTemplates\TechCert.cs" />
     <Compile Include="WordTemplates\SpecialCert.cs" />

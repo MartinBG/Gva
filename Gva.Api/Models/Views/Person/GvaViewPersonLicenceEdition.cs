@@ -4,6 +4,7 @@ using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
 using Regs.Api.Models;
 using Regs.Api.LotEvents;
+using System.Collections.Generic;
 
 namespace Gva.Api.Models.Views.Person
 {
@@ -44,6 +45,8 @@ namespace Gva.Api.Models.Views.Person
         public virtual NomValue LicenceAction { get; set; }
 
         public virtual GvaViewPersonLicence Licence { get; set; }
+
+        public virtual ICollection<GvaViewPrintedRatingEdition> PrintedRatingEditions { get; set; }
 
     }
 

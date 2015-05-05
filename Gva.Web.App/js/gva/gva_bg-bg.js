@@ -2656,6 +2656,12 @@
           generateNew: 'Прегенерирай',
           edit: 'Редакция'
         },
+        printRatingEditionModal: {
+          title: 'Принтиране на квалификационен клас',
+          close: 'Затвори',
+          print: 'Преглед за печат',
+          generateNew: 'Прегенерирай'
+        },
         changeCaseTypeModal: {
           title: 'Промяна на типа дело',
           cancel: 'Отказ',
