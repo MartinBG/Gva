@@ -100,20 +100,20 @@ namespace Gva.Api.WordTemplates
 
             otherLicences = otherLicences.Concat(includedLicences.Select(l =>
             {
-                var lastEdition = lot.Index.GetParts<PersonLicenceEditionDO>("licenceEditions")
+                var firstEdition = lot.Index.GetParts<PersonLicenceEditionDO>("licenceEditions")
                     .Where(e => e.Content.LicencePartIndex == l.Part.Index)
                     .OrderBy(e => e.Content.Index)
-                    .Last()
+                    .First()
                     .Content;
 
                 return new
                 {
                     LIC_NO = nomRepository.GetNomValue("licenceTypes", l.Content.LicenceType.NomValueId).TextContent.Get<string>("codeCA"),
-                    ISSUE_DATE = lastEdition.DocumentDateValidFrom,
+                    ISSUE_DATE = firstEdition.DocumentDateValidFrom,
                     C_CODE = publisherCaaCode
                 };
             }))
-                .ToList();
+            .ToList();
 
             return otherLicences;
         }

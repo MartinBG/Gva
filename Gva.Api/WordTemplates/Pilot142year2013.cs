@@ -45,11 +45,11 @@ namespace Gva.Api.WordTemplates
 
             var licencePart = lot.Index.GetPart<PersonLicenceDO>(path);
             var licence = licencePart.Content;
-            var lastEdition = lot.Index.GetParts<PersonLicenceEditionDO>("licenceEditions")
+            var editions = lot.Index.GetParts<PersonLicenceEditionDO>("licenceEditions")
                 .Where(e => e.Content.LicencePartIndex == licencePart.Part.Index)
-                .OrderBy(e => e.Content.Index)
-                .Last()
-                .Content;
+                .OrderBy(e => e.Content.Index);
+            var lastEdition = editions.Last().Content;
+            var firstEdition = editions.First().Content;
 
             var includedTrainings = lastEdition.IncludedTrainings
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
@@ -92,7 +92,7 @@ namespace Gva.Api.WordTemplates
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceCaCode = licenceType.TextContent.Get<string>("codeCA");
-            var otherLicences = PilotUtils.GetOtherLicences(publisherCaaCode, licenceCaCode, lot, lastEdition, includedLicences, this.nomRepository);
+            var otherLicences = PilotUtils.GetOtherLicences(publisherCaaCode, licenceCaCode, lot, firstEdition, includedLicences, this.nomRepository);
             var rtoRating = PilotUtils.GetRtoRating(includedRatings, ratingEditions);
             var langLevel = includedLangCerts.Where(c => c.LangLevel != null).Select(c => new
             {
