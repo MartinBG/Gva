@@ -249,7 +249,7 @@ namespace Gva.Api.Controllers
         }
 
         [Route("persons")]
-        public IHttpActionResult GetPersons(string term = null)
+        public IHttpActionResult GetPersons(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
                 this.personRepository.GetPersons()
