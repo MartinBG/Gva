@@ -933,7 +933,8 @@ namespace Gva.MigrationTool.Sets
                             __oldId = r.Field<string>("n_Mort_ID"),
                             __migrTable = "Morts_New",
                             regDate = Utils.FmToDate(r.Field<string>("d_Open_Date")),
-                            aircraftDebtType = r.Field<string>("t_Type").Trim() == "ЗАЛОЗ - ЗАЛИЧЕН" ? noms["aircraftDebtTypesFm"].ByName("ЗАЛОГ - ЗАЛИЧЕН") : noms["aircraftDebtTypesFm"].ByName(r.Field<string>("t_Type").Trim()),
+                            aircraftDebtType = r.Field<string>("t_Type").Contains("ЗАЛО") ? noms["aircraftDebtTypesFm"].ByName("ЗАЛОГ") :
+                                (r.Field<string>("t_Type").Contains("ЗАПОР") ? noms["aircraftDebtTypesFm"].ByName("ЗАПОР") : null),
                             documentNumber = r.Field<string>("t_Open_CAA_Doc"),
                             documentDate = Utils.FmToDate(r.Field<string>("d_Open_CAA_Date")),
                             aircraftCreditor = noms["aircraftCreditorsFm"].ByName(r.Field<string>("t_Creditor_Name")),
