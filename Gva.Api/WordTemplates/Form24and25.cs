@@ -34,7 +34,6 @@ namespace Gva.Api.WordTemplates
                 root = new
                 {
                     REG_MARK = registration != null ? registration.RegMark : null,
-                    ISSUE_DATE = airworthinessData.IssueDate,
                     PRODUCER = aircraftData.AircraftProducer.NameAlt,
                     PRODUCER_DESIGNATION = aircraftData.ModelAlt,
                     AIR_CATEGORY = aircraftData.AirCategory.Name,

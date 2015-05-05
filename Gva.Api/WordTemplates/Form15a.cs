@@ -29,10 +29,6 @@ namespace Gva.Api.WordTemplates
             AircraftCertAirworthinessFMDO airworthinessData = lot.Index.GetPart<AircraftCertAirworthinessFMDO>(path).Content;
             string regPath = string.Format("aircraftCertRegistrationsFM/{0}", airworthinessData.Registration.NomValueId);
             AircraftCertRegistrationFMDO registration = lot.Index.GetPart<AircraftCertRegistrationFMDO>(regPath).Content;
-            var firstReview = airworthinessData.Reviews.FirstOrDefault();
-            var secondReview = airworthinessData.Reviews.Count() > 1 ? airworthinessData.Reviews.Skip(1).First() : null;
-            var firstReviewOrganization = firstReview != null ? firstReview.Organization : null;
-            var secondReviewOrganization = secondReview != null ? secondReview.Organization : null;
             var json = new
             {
                 root = new
@@ -45,14 +41,6 @@ namespace Gva.Api.WordTemplates
                     AIR_CATEGORY = aircraftData.AirCategory.Name,
                     REF_NUMBER = airworthinessData.DocumentNumber,
                     MSN = aircraftData.ManSN,
-                    VALID_FROM = airworthinessData.IssueDate,
-                    VALID_TO = airworthinessData.ValidToDate,
-                    FIRST_REVIEW_VALID_FROM = firstReview != null ? firstReview.IssueDate : null,
-                    FIRST_REVIEW_VALID_TO = firstReview != null ? firstReview.ValidToDate : null,
-                    FIRST_REVIEW_ORGANIZATION = firstReviewOrganization != null ? string.Format("{0} / {1}", firstReviewOrganization.Name, firstReviewOrganization.NameAlt) : null,
-                    SECOND_REVIEW_VALID_FROM = secondReview != null ? secondReview.IssueDate : null,
-                    SECOND_REVIEW_VALID_TO = secondReview != null ? secondReview.ValidToDate : null,
-                    SECOND_REVIEW_ORGANIZATION = secondReviewOrganization != null ? string.Format("{0} / {1}", secondReviewOrganization.Name, secondReviewOrganization.NameAlt) : null,
                 }
             };
 

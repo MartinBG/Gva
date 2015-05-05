@@ -2,6 +2,7 @@
 using Regs.Api.Models;
 using Gva.Api.ModelsDO.Aircrafts;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Gva.Api.WordTemplates
 {
@@ -26,17 +27,11 @@ namespace Gva.Api.WordTemplates
         {
             Lot lot = this.lotRepository.GetLotIndex(lotId);
             AircraftCertAirworthinessFMDO airworthinessData = lot.Index.GetPart<AircraftCertAirworthinessFMDO>(path).Content;
-            var reviews = airworthinessData.Reviews.Select(r => new
-            {
-                DATE_FROM = r.IssueDate,
-                DATE_TO = r.ValidToDate
-            }).ToList<object>();
-
             var json = new
             {
                 root = new
                 {
-                    REVIEWS = Utils.FillBlankData(reviews, 12),
+                    REVIEWS = Utils.FillBlankData(new List<object>(), 12),
                     NUMBER = airworthinessData.DocumentNumber
                 }
             };

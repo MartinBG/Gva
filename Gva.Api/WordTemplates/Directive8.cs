@@ -2,6 +2,7 @@
 using Regs.Api.Models;
 using Gva.Api.ModelsDO.Aircrafts;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Gva.Api.WordTemplates
 {
@@ -29,13 +30,6 @@ namespace Gva.Api.WordTemplates
             AircraftCertAirworthinessFMDO airworthinessData = lot.Index.GetPart<AircraftCertAirworthinessFMDO>(path).Content;
             string regPath = string.Format("aircraftCertRegistrationsFM/{0}", airworthinessData.Registration.NomValueId);
             AircraftCertRegistrationFMDO registration = lot.Index.GetPart<AircraftCertRegistrationFMDO>(regPath).Content;
-            var reviews = airworthinessData.Reviews.Select(r => new
-            {
-                DATE_FROM = r.IssueDate,
-                DATE_TO = r.ValidToDate
-            }).ToList<object>();
-
-            var reviewsResult = Utils.FillBlankData(reviews, 17);
 
             var json = new
             {
@@ -43,7 +37,6 @@ namespace Gva.Api.WordTemplates
                 {
                     NUMBER = airworthinessData.DocumentNumber,
                     REG_MARK = registration != null ? registration.RegMark : null,
-                    ISSUE_DATE = airworthinessData.IssueDate,
                     PRODUCER = aircraftData.AircraftProducer.Name,
                     PRODUCER_DESIGNATION = aircraftData.Model,
                     PRODUCER_ALT = aircraftData.AircraftProducer.NameAlt,
@@ -53,8 +46,8 @@ namespace Gva.Api.WordTemplates
                     NUMBER2 = airworthinessData.DocumentNumber,
                     MAX_MASS = aircraftData.MaxMassT,
                     MSN = aircraftData.ManSN,
-                    REVIEWS_PAGE1 = reviews.Take(2),
-                    REVIEWS_PAGE2 = reviews.Skip(2).Take(15)
+                    REVIEWS_PAGE1 = Utils.FillBlankData(new List<object>(), 2),
+                    REVIEWS_PAGE2 = Utils.FillBlankData(new List<object>(), 15)
                 }
             };
 

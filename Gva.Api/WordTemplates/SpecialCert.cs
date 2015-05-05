@@ -43,9 +43,7 @@ namespace Gva.Api.WordTemplates
                     CATEGORY_ALT = string.Join(", ", registration.CatAW.Select(c => c.NameAlt).ToArray()),
                     NUMBER = airworthinessData.DocumentNumber,
                     MAX_MASS = aircraftData.MaxMassT,
-                    MSN = aircraftData.ManSN,
-                    ISSUE_DATE = airworthinessData.IssueDate,
-                    ISSUE_DATE2 = airworthinessData.IssueDate
+                    MSN = aircraftData.ManSN
                 }
             };
 
