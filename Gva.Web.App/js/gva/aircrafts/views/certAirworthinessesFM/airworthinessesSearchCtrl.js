@@ -9,27 +9,7 @@
     scModal,
     aws
   ) {
-    $scope.aws = aws.map(function (aw) {
-      var lastReview, validFrom, validTo, inspectorModel;
-      if (aw.part.reviews && aw.part.reviews.length) {
-        lastReview = aw.part.reviews[aw.part.reviews.length - 1];
-        inspectorModel = lastReview.inspector;
-        validFrom = lastReview.issueDate;
-        validTo = lastReview.validToDate;
-      } else {
-        inspectorModel =  aw.part.inspector;
-        validFrom = aw.part.issueDate;
-        validTo = aw.part.validToDate;
-      }
-      return {
-        partIndex: aw.partIndex,
-        airworthinessCertificateType: aw.part.airworthinessCertificateType,
-        issueDate: aw.part.issueDate,
-        validFrom: validFrom,
-        validTo: validTo,
-        inspectorModel: inspectorModel
-      };
-    });
+    $scope.aws = aws;
 
     $scope.print = function (doc) {
       var params = {

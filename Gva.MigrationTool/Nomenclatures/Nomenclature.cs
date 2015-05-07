@@ -3536,30 +3536,8 @@ namespace Gva.MigrationTool.Nomenclatures
 
             var nomInfo = new Dictionary<string, Tuple<string, string>>()
             {
-                {"ANN" , new Tuple<string,string>("АНЕКС"                                  , "Annex"                                      )},
-                {"ENT" , new Tuple<string,string>("ВЪЗЛОЖЕН"                               , "Entrusted"                                  )},
-                {"EWD" , new Tuple<string,string>("ВЪЗЛОЖЕН и снети ЗАПОРИ"                , "Entrusted and waived distraints"            )},
-                {"CCON", new Tuple<string,string>("ДОГОВОР ЗА ЦЕСИЯ"                       , "Cession contract"                           )},
-                {"REM" , new Tuple<string,string>("ЗАБЕЛЕЖКА"                              , "Remark"                                     )},
-                {"PLE" , new Tuple<string,string>("ЗАЛОГ"                                  , "Pledge"                                     )},
-                {"PCAN", new Tuple<string,string>("ЗАЛОГ - ОТМЕНЕН"                        , "Pledge - cancelled"                         )},
-                {"PEST", new Tuple<string,string>("ЗАЛОГ  - УЧРЕДЕН"                       , "Pledge - established"                       )},
-                {"POBL", new Tuple<string,string>("ЗАЛОГ - ЗАЛИЧЕН"                        , "Pledge - obliterated"                       )},
-                {"PTRA", new Tuple<string,string>("ЗАЛОГ - ПРЕХВЪРЛЕН"                     , "Pledge - transferred"                       )},
-                {"PLEE", new Tuple<string,string>("ЗАЛОГ - УЧРЕДЕН"                        , "Pledge - established"                       )},
-                {"PES" , new Tuple<string,string>("ЗАЛОГ - УЧРЕДЕН - ВТОРИ"                , "Pledge - established - second"              )},
-                {"PMO" , new Tuple<string,string>("ЗАЛОГ и ИПОТЕКА - ЗАЛИЧЕНИ"             , "Pledge and mortgage - obliterated"          )},
-                {"PSOB", new Tuple<string,string>("ЗАЛОЗИ - ЗАЛИЧЕНИ"                      , "Pledges - obliterated"                      )},
-                {"DIMP", new Tuple<string,string>("ЗАПОР - НАЛОЖЕН"                        , "Distraint - imposed"                        )},
-                {"DCAN", new Tuple<string,string>("ЗАПОР - ОТМЕНЕН"                        , "Distraint - cancelled"                      )},
-                {"DASS", new Tuple<string,string>("ЗАПОР - ВЪЗЛОЖЕН"                       , "Distraint - assigned"                       )},
-                {"DSCA", new Tuple<string,string>("ЗАПОРИ - ОТМЕНЕНИ"                      , "Distraints - cancelled"                     )},
-                {"DPOB", new Tuple<string,string>("Запори и залог - заличени"              , "Distraints and pledge - obliterated"        )},
-                {"MEST", new Tuple<string,string>("ИПОТЕКА  - УЧРЕДЕНА"                    , "Mortgage - established"                     )},
-                {"MLAP", new Tuple<string,string>("ИПОТЕКА - ПОГАСЕНА"                     , "Mortgage - lapsed"                          )},
-                {"MOES", new Tuple<string,string>("ИПОТЕКА - УЧРЕДЕНА"                     , "Mortgage - established"                     )},
-                {"LET" , new Tuple<string,string>("Писмо"                                  , "Letter"                                     )},
-                {"DCOL", new Tuple<string,string>("Постановление за обезпечение"           , "Decree collateral"                          )}
+                {"PLE" , new Tuple<string,string>("ЗАЛОГ" , "Pledge"    )},
+                {"DASS", new Tuple<string,string>("ЗАПОР" , "Distraint" )}
             };
 
             noms["aircraftDebtTypesFm"] = new Dictionary<string, NomValue>();

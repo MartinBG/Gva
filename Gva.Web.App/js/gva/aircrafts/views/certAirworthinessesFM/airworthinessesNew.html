@@ -13,18 +13,22 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw"
-        sc-form-params="{ lotId: lotId }">
-      </gva-aircraft-cert-airworthiness-fm>
-      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aw.case"
+      <ng-form class="form-inline" sc-validate="{}" sc-form-readonly  name="aircraftCertAirworthinessForm">
+        <div class="row">
+          <sc-field type="nomenclature" ng-model="airworthiness.part.airworthinessCertificateType" ng-required="true" params="{ lotId: lotId }" alias="'airworthinessCertificateTypes'" l10n-text="aircrafts.newAirworthiness.airworthinessCertificateType" class="col-md-6 col-sm-8"></sc-field>
+        </div>
+
+        <gva-aircraft-cert-airworthiness ng-if="airworthiness.part.airworthinessCertificateType.alias !== '15b' && airworthiness.part.airworthinessCertificateType.alias !== '15a' && airworthiness.part.airworthinessCertificateType.alias !== '15bReissue' && airworthiness.part.airworthinessCertificateType.alias !== '15bReissue'"
+           ng-model="airworthiness" sc-form-params="{ lotId: lotId }" name="aircraftCertAirworthinessForm.form1">
+        </gva-aircraft-cert-airworthiness>
+
+        <gva-aircraft-cert-airworthiness-form-15 ng-if="airworthiness.part.airworthinessCertificateType.alias === '15b' || airworthiness.part.airworthinessCertificateType.alias === '15a' || airworthiness.part.airworthinessCertificateType.alias === '15bReissue' || airworthiness.part.airworthinessCertificateType.alias === '15bReissue'" 
+          name="aircraftCertAirworthinessForm" ng-model="airworthiness" sc-form-params="{ lotId: lotId }" name="aircraftCertAirworthinessForm.form2">
+        </gva-aircraft-cert-airworthiness-form-15>
+      </ng-form>
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="airworthiness.case"
         sc-form-params="{ setPart: 'aircraft', lotId: lotId, hideFiles: true }">
       </gva-common-scanned-document>
-
-      <div ng-if="aw.part.airworthinessCertificateType.alias === 'directive8' || aw.part.airworthinessCertificateType.alias === 'vla' || aw.part.airworthinessCertificateType.alias === 'unknown'">
-        <h5 class="form-header" l10n-text="aircrafts.newAirworthiness.titleReview" style="margin-top: 20px;"></h5>
-        <gva-airworthiness-review sc-form-params="{certType: aw.part.airworthinessCertificateType.alias}" name="airworthinessReview" ng-model="review" readonly="readonly">
-        </gva-airworthiness-review>
-      </div>
     </div>
   </div>
 </ng-form>

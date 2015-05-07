@@ -1,22 +1,21 @@
-﻿<sc-button name="createBtn" btn-sref="{ state: 'root.aircrafts.view.airworthinessesFM.new' }" text="aircrafts.airworthinessFMSearch.newAirworthiness" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="aws" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="issueDate" default-sorting-type="desc">
+﻿<sc-button name="createBtn" btn-sref="{ state: 'root.aircrafts.view.airworthinessesFM.new' }" text="aircrafts.airworthinessSearch.newAirworthiness" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
+<sc-datatable items="aws" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.issueDate" default-sorting-type="desc">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.aircrafts.view.airworthinessesFM.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column sortable="false" class="buttons-cell" has-content="true">
-  <a ng-click="print(item)" ng-if="item.airworthinessCertificateType.alias !== '15b' && item.airworthinessCertificateType.alias !== 'unknown'">
-    <span class="glyphicon glyphicon-print"></span>
-  </a>
+    <a ng-click="print(item)" ng-if="item.part.airworthinessCertificateType.alias !== '15b' && item.part.airworthinessCertificateType.alias !== 'unknown' && item.part.airworthinessCertificateType.alias !== '15bReissue'">
+      <span class="glyphicon glyphicon-print"></span>
+    </a>
   </sc-column>
-  <sc-column data="airworthinessCertificateType.name" title="aircrafts.airworthinessFMSearch.airworthinessCertificateType" class="wrap">
+  <sc-column data="part.airworthinessCertificateType.name" title="aircrafts.airworthinessSearch.airworthinessCertificateType" class="wrap">
   </sc-column>
-  <sc-column data="issueDate" title="aircrafts.airworthinessFMSearch.issueDate" type="date">
+  <sc-column data="part.issueDate" title="aircrafts.airworthinessSearch.issueDate" type="date">
   </sc-column>
-  <sc-column data="validFrom" title="aircrafts.airworthinessFMSearch.validFromDate" type="date">
+  <sc-column data="part.validFromDate" title="aircrafts.airworthinessSearch.validFromDate" type="date">
   </sc-column>
-  <sc-column data="validTo" title="aircrafts.airworthinessFMSearch.validToDate" type="date">
+  <sc-column data="part.validToDate" title="aircrafts.airworthinessSearch.validToDate" type="date">
   </sc-column>
-  <sc-column data="inspectorModel" title="aircrafts.airworthinessFMSearch.inspector" type="date" has-content="true">
-    {{item.inspectorModel.inspector.name || item.inspectorModel.examiner.name || item.inspectorModel.other}}
+  <sc-column data="part.inspector.inspector.name || part.inspector.part.examiner.name || part.inspector.other" title="aircrafts.airworthinessSearch.inspector">
   </sc-column>
 </sc-datatable>

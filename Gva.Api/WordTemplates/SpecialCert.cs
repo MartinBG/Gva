@@ -26,7 +26,7 @@ namespace Gva.Api.WordTemplates
         {
             Lot lot = this.lotRepository.GetLotIndex(lotId);
             AircraftDataDO aircraftData = lot.Index.GetPart<AircraftDataDO>("aircraftData").Content;
-            AircraftCertAirworthinessFMDO airworthinessData = lot.Index.GetPart<AircraftCertAirworthinessFMDO>(path).Content;
+            AircraftCertAirworthinessDO airworthinessData = lot.Index.GetPart<AircraftCertAirworthinessDO>(path).Content;
             string regPath = string.Format("aircraftCertRegistrationsFM/{0}", airworthinessData.Registration.NomValueId);
             AircraftCertRegistrationFMDO registration = lot.Index.GetPart<AircraftCertRegistrationFMDO>(regPath).Content;
             

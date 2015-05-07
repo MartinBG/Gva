@@ -203,22 +203,14 @@
       controller: 'AircraftCertSmodCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaAircraftCertAirworthinessFm',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessFM.html',
-      controller: 'AircraftCertAirworthinessFMCtrl'
+      name: 'gvaAircraftCertAirworthiness',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthiness.html',
+      controller: 'AircraftCertAirworthinessCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaAirworthinessReview',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessReview.html',
-      controller: 'AircraftAirworthinessReviewCtrl'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaAirworthinessForm15',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessForm15.html'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaAirworthinessForm15Amendment',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftAirworthinessForm15Amendment.html'
+      name: 'gvaAircraftCertAirworthinessForm15',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessForm15.html',
+      controller: 'AircraftCertAirworthinessForm15Ctrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertNoise',

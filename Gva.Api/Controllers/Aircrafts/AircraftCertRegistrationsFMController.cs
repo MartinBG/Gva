@@ -97,7 +97,7 @@ namespace Gva.Api.Controllers.Aircrafts
         {
             var index = this.lotRepository.GetLotIndex(lotId).Index;
             var registrations = index.GetParts<AircraftCertRegistrationFMDO>(this.path);
-            var airworthinesses = index.GetParts<AircraftCertAirworthinessFMDO>("aircraftCertAirworthinessesFM");
+            var airworthinesses = index.GetParts<AircraftCertAirworthinessDO>("aircraftCertAirworthinessesFM");
 
             if (registrations.Length > 0)
             {
@@ -183,7 +183,7 @@ namespace Gva.Api.Controllers.Aircrafts
 
         private RegistrationViewDO CreateRegistrationView(
             IEnumerable<PartVersion<AircraftCertRegistrationFMDO>> registrations,
-            IEnumerable<PartVersion<AircraftCertAirworthinessFMDO>> airworthinesses,
+            IEnumerable<PartVersion<AircraftCertAirworthinessDO>> airworthinesses,
             int? regPartIndex)
         {
             var airworthinessesWithReg = airworthinesses.Where(
@@ -213,7 +213,7 @@ namespace Gva.Api.Controllers.Aircrafts
                 {
                     Position = default(int),
                     Reg = default(PartVersion<AircraftCertRegistrationFMDO>),
-                    Aws = Enumerable.Empty<PartVersion<AircraftCertAirworthinessFMDO>>()
+                    Aws = Enumerable.Empty<PartVersion<AircraftCertAirworthinessDO>>()
                 };
 
             if (regPartIndex.HasValue)

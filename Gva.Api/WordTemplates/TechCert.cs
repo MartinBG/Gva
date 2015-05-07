@@ -19,14 +19,14 @@ namespace Gva.Api.WordTemplates
         {
             get
             {
-                return new string[] { "vla" };
+                return new string[] { "vla", "vlaReissue" };
             }
         }
 
         public object GetData(int lotId, string path)
         {
             Lot lot = this.lotRepository.GetLotIndex(lotId);
-            AircraftCertAirworthinessFMDO airworthinessData = lot.Index.GetPart<AircraftCertAirworthinessFMDO>(path).Content;
+            AircraftCertAirworthinessDO airworthinessData = lot.Index.GetPart<AircraftCertAirworthinessDO>(path).Content;
             var json = new
             {
                 root = new

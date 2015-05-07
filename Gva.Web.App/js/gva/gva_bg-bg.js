@@ -899,7 +899,7 @@
           cancel: 'Отказ',
           deleteSmod: 'Изтрий'
         },
-        airworthinessFMSearch: {
+        airworthinessSearch: {
           newAirworthiness: 'Нова годност',
           airworthinessCertificateType: 'Тип сертификат',
           issueDate: 'Дата на издаване',
@@ -908,31 +908,22 @@
           inspector: 'Заверил'
         },
         newAirworthiness: {
+          airworthinessCertificateType: 'Тип',
           titleAw: 'Нова летателна годност',
-          titleReview: 'Преглед',
           save: 'Запис',
           cancel: 'Отказ'
         },
         editAirworthiness: {
-          amendments: 'Заверки',
           titleAw: 'Преглед на удостоверение за летателна годност',
           editAw: 'Редакция',
           deleteAw: 'Изтрий',
           saveAw: 'Запис',
           cancelAw: 'Отказ',
-          reviews: 'Прегледи',
           status: 'Статус',
           issueDate: 'Издадено на',
           from: 'Валидно от',
           to: 'Валидно до',
-          inspector: 'Инспектор',
-          titleReview: 'Преглед',
-          newReview: 'Нов преглед',
-          newAmendment: 'Нова заверка',
-          editReview: 'Редакция',
-          deleteReview: 'Изтрий',
-          saveReview: 'Запис',
-          cancelReview: 'Отказ'
+          inspector: 'Инспектор'
         },
         noiseSearch: {
           tcdsn: 'TCDSN',
@@ -1091,16 +1082,20 @@
           caaToAddress: 'ГВА писмо адрес',
           getScode: 'Генерирай S-код'
         },
-        airworthinessFMDirective: {
+        airworthinessDirective: {
           airworthinessCertificateType: 'Тип',
           registration: 'Регистрация',
           documentNumber: 'Документ №',
           issueDate: 'Дата на издаване',
+          validFromDate: 'Валиден от',
           validToDate: 'Валиден до',
           issueDateSpecial: 'Дата изд. на екс. огр.'
         },
-        airworthinessReviewDirective: {
+        airworthinessForm15Directive: {
+          airworthinessCertificateType: 'Тип',
+          registration: 'Регистрация',
           issueDate: 'Дата на издаване',
+          validFromDate: 'Валиден от',
           validToDate: 'Валиден до',
           organization: 'Организация'
         },

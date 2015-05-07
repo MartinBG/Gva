@@ -1,5 +1,5 @@
-﻿/*global angular, _*/
-(function (angular, _) {
+﻿/*global angular*/
+(function (angular) {
   'use strict';
 
   function CertAirworthinessesFMNewCtrl(
@@ -7,36 +7,17 @@
     $state,
     $stateParams,
     AircraftCertAirworthinessesFM,
-    initAW
+    airworthiness
   ) {
-    $scope.aw = initAW.airworthinessFMPartVersion;
-    $scope.review = initAW.review;
+    $scope.airworthiness = airworthiness;
     $scope.lotId = $stateParams.id;
 
     $scope.save = function () {
       return $scope.newCertAirworthinessForm.$validate()
         .then(function () {
-          var aw = $scope.aw,
-              actAlias;
-
           if ($scope.newCertAirworthinessForm.$valid) {
-            actAlias = aw.part.airworthinessCertificateType.alias;
-            if (actAlias !== 'special') {
-              //clone the scope object to keep it clean in case something fails
-              aw = _.cloneDeep($scope.aw);
-
-              aw.part.reviews = [];
-
-              if (
-                actAlias === 'directive8' ||
-                actAlias === 'vla' ||
-                actAlias === 'unknown') {
-                aw.part.reviews.push($scope.review);
-              }
-            }
-
             return AircraftCertAirworthinessesFM
-              .save({ id: $stateParams.id }, aw)
+              .save({ id: $stateParams.id }, $scope.airworthiness)
               .$promise
               .then(function () {
                 return $state.go('root.aircrafts.view.airworthinessesFM.search');
@@ -55,11 +36,11 @@
     '$state',
     '$stateParams',
     'AircraftCertAirworthinessesFM',
-    'initAW'
+    'airworthiness'
   ];
 
   CertAirworthinessesFMNewCtrl.$resolve = {
-    initAW: [
+    airworthiness: [
       '$stateParams',
       'AircraftCertAirworthinessesFM',
       function ($stateParams, AircraftCertAirworthinessesFM) {
@@ -72,4 +53,4 @@
   };
 
   angular.module('gva').controller('CertAirworthinessesFMNewCtrl', CertAirworthinessesFMNewCtrl);
-}(angular, _));
+}(angular));

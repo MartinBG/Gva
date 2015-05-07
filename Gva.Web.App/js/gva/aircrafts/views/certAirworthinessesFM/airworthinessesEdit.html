@@ -4,12 +4,9 @@
       <strong l10n-text="aircrafts.editAirworthiness.titleAw"></strong>
 
       <div class="pull-right">
-        <a ng-click="print()" ng-if="aw.part.airworthinessCertificateType.alias !== '15b' && aw.part.airworthinessCertificateType.alias !== 'unknown'">
+        <a ng-click="print()" ng-if="certTypeAlias !== '15b' && certTypeAlias !== 'unknown' && certTypeAlias !== '15bReissue'">
           <span class="glyphicon glyphicon-print"></span>
         </a>
-        <sc-button ng-if="reviews && reviews.length == 0" ng-show="!isEditReview && (aw.part.airworthinessCertificateType.alias === '15a' || aw.part.airworthinessCertificateType.alias === '15b')"
-            btn-click="newReview()" name="newReviewBtn" text="{{newReviewBtnText}}" ng-disabled="disableNewReview || !isActiveReg" class="btn btn-primary btn-xs" icon="glyphicon-plus">
-        </sc-button>
         <sc-button ng-show="!isEditAw" 
           btn-click="editAw()" name="editBtn" text="aircrafts.editAirworthiness.editAw" class="btn btn-primary btn-xs" icon="glyphicon-edit" >
         </sc-button>
@@ -26,65 +23,18 @@
     </div>
 
     <div class="well-sm panel-body">
-      <gva-aircraft-cert-airworthiness-fm name="aircraftCertAirworthinessForm" ng-model="aw"
+      <gva-aircraft-cert-airworthiness ng-if="certTypeAlias !== '15b' && certTypeAlias !== '15a' && certTypeAliass !== '15bReissue' && certTypeAlias !== '15bReissue'" name="aircraftCertAirworthinessForm" ng-model="airworthiness"
         sc-form-params="{ lotId: lotId }">
-      </gva-aircraft-cert-airworthiness-fm>
-      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="aw.case"
+      </gva-aircraft-cert-airworthiness>
+
+      <gva-aircraft-cert-airworthiness-form-15 ng-if="certTypeAlias === '15b' || certTypeAlias === '15a' || certTypeAlias === '15bReissue' || certTypeAlias === '15bReissue'" name="aircraftCertAirworthinessForm" ng-model="airworthiness"
+        sc-form-params="{ lotId: lotId }">
+      </gva-aircraft-cert-airworthiness-form-15>
+
+
+      <gva-common-scanned-document name="aircraftScannedDocumentForm" ng-model="airworthiness.case"
         sc-form-params="{ setPart: 'aircraft', lotId: lotId, hideFiles: true }">
       </gva-common-scanned-document>
-    </div>
-  </div>
-
-  <div ng-if="reviews && reviews.length > 0" style="margin-bottom: 20px">
-    <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.reviews"  ng-if="aw.part.airworthinessCertificateType.alias !== '15a' && aw.part.airworthinessCertificateType.alias !== '15b'" style="border-bottom: none; margin-top: 20px;"></h5>
-    <h5 class="form-header" l10n-text="aircrafts.editAirworthiness.amendments" ng-if="aw.part.airworthinessCertificateType.alias === '15a' || aw.part.airworthinessCertificateType.alias === '15b'" style="border-bottom: none; margin-top: 20px;"></h5>
-    <sc-datatable items="reviews" filterable="false" pageable="false" sortable="false" dynamic-columns="false" has-info-text="false">
-      <sc-column sortable="false" class="buttons-cell" has-content="true">
-        <input type="radio" ng-checked="item === currentReview" ng-disabled="isEditReview" sc-click="selectReview(item)">
-      </sc-column>
-      <sc-column data="issueDate" title="aircrafts.editAirworthiness.issueDate"type="date">
-      </sc-column>
-      <sc-column data="issueDate" title="aircrafts.editAirworthiness.from" type="date">
-        {{item.issueDate | date:'mediumDate'}}
-      </sc-column>
-      <sc-column data="validToDate" title="aircrafts.editAirworthiness.to" type="date">
-        {{item.validToDate | date:'mediumDate'}}
-      </sc-column>
-      <sc-column data="" title="aircrafts.editAirworthiness.inspector" has-content="true">
-        {{item.inspector.inspector.name || item.inspector.examiner.name || item.inspector.other}}
-      </sc-column>
-    </sc-datatable>
-  </div>
-  <div class="panel panel-default" ng-show="aw.part.airworthinessCertificateType.alias !== 'special' && reviews && reviews.length > 0">
-    <div class="panel-heading">
-      <strong l10n-text="aircrafts.editAirworthiness.titleReview" ng-if="aw.part.airworthinessCertificateType.alias !== '15a' && aw.part.airworthinessCertificateType.alias !== '15b'"></strong>
-      <strong l10n-text="aircrafts.editAirworthiness.amendments" ng-if="aw.part.airworthinessCertificateType.alias === '15a' || aw.part.airworthinessCertificateType.alias === '15b'"></strong>
-      <div class="pull-right">
-        <sc-button ng-show="!isEditReview || aw.part.airworthinessCertificateType.alias === '15a' || aw.part.airworthinessCertificateType.alias === '15b'"
-            btn-click="newReview()" name="newReviewBtn" text="{{newReviewBtnText}}" ng-disabled="disableNewReview || !isActiveReg" class="btn btn-primary btn-xs" icon="glyphicon-plus">
-        </sc-button>
-        <sc-button ng-if="reviews && reviews.length"
-          ng-show="!isEditReview"
-          btn-click="editReview()" name="editBtn" text="aircrafts.editAirworthiness.editReview" class="btn btn-primary btn-xs" icon="glyphicon-edit">
-        </sc-button>
-        <sc-button ng-if="reviews && reviews.length"
-          ng-show="!isEditReview"
-          ng-disabled="reviews.length <= 1 || reviews[reviews.length - 1] !== currentReview"
-          btn-click="deleteReview(currentReview)" name="deleteBtn"  text="aircrafts.editAirworthiness.deleteReview" class="btn btn-danger btn-xs" icon="glyphicon-remove">
-        </sc-button>
-        <sc-button ng-show="isEditReview"
-          btn-click="saveReview()" name="saveBtn" text="aircrafts.editAirworthiness.saveReview" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
-        </sc-button>
-        <sc-button ng-show="isEditReview"
-          btn-click="cancelReview()" name="cancelBtn" text="aircrafts.editAirworthiness.cancelReview" class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
-        </sc-button>
-      </div>
-    </div>
-
-    <div class="well-sm panel-body" ng-show="currentReview">
-      <gva-airworthiness-review sc-form-params="{certType: aw.part.airworthinessCertificateType.alias}"
-        name="airworthinessReviewForm" ng-model="currentReview" readonly="!isEditReview">
-      </gva-airworthiness-review>
     </div>
   </div>
 </ng-form>

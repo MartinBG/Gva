@@ -141,7 +141,7 @@ namespace Gva.Api.Controllers
         {
             string airworthinessPath = string.Format("aircraftCertAirworthinessesFM/{0}", partIndex);
             var lot = this.lotRepository.GetLotIndex(lotId);
-            var airworthinessPart = lot.Index.GetPart<AircraftCertAirworthinessFMDO>(airworthinessPath);
+            var airworthinessPart = lot.Index.GetPart<AircraftCertAirworthinessDO>(airworthinessPath);
             string templateName = airworthinessPart.Content.AirworthinessCertificateType.Alias;
 
             Guid awDocBlobKey;
@@ -317,7 +317,7 @@ namespace Gva.Api.Controllers
             }
         }
 
-        public void UpdateAirworthiness(Guid awDocBlobKey, PartVersion<AircraftCertAirworthinessFMDO> awPartVersion, Lot lot, string templateName)
+        public void UpdateAirworthiness(Guid awDocBlobKey, PartVersion<AircraftCertAirworthinessDO> awPartVersion, Lot lot, string templateName)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
@@ -325,7 +325,7 @@ namespace Gva.Api.Controllers
                 int printedAwCertFileId = this.printRepository.SaveNewFile(templateName, awDocBlobKey);
                 awPartVersion.Content.PrintedFileId = printedAwCertFileId;
 
-                lot.UpdatePart<AircraftCertAirworthinessFMDO>(string.Format("aircraftCertAirworthinessesFM/{0}", awPartVersion.Part.Index), awPartVersion.Content, this.userContext);
+                lot.UpdatePart<AircraftCertAirworthinessDO>(string.Format("aircraftCertAirworthinessesFM/{0}", awPartVersion.Part.Index), awPartVersion.Content, this.userContext);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
                 this.lotRepository.ExecSpSetLotPartTokens(awPartVersion.PartId);

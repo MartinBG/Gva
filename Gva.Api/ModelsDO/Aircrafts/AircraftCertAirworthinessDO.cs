@@ -5,13 +5,8 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Aircrafts
 {
-    public class AircraftCertAirworthinessFMDO
+    public class AircraftCertAirworthinessDO
     {
-        public AircraftCertAirworthinessFMDO()
-        {
-            this.Reviews = new List<AircraftCertAirworthinessReviewDO>();
-        }
-
         public NomValue AirworthinessCertificateType { get; set; }
 
         public NomValue Registration { get; set; }
@@ -22,11 +17,13 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public DateTime? IssueDate { get; set; }
 
+        public DateTime? ValidFromDate { get; set; }
+
         public DateTime? ValidToDate { get; set; }
 
-        public AircraftInspectorDO Inspector { get; set; }
+        public NomValue Organization { get; set; }
 
-        public List<AircraftCertAirworthinessReviewDO> Reviews { get; set; }
+        public AircraftInspectorDO Inspector { get; set; }
 
         public Guid? PrintedDocumentBlobKey { get; set; }
 

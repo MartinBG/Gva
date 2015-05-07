@@ -57,8 +57,7 @@
     <Content Include="js\common\common_bg-bg.js" />
     <Content Include="js\common\root\views\root.html" />
     <Content Include="js\common\root\views\rootCtrl.js" />
-    <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessReview.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessFM.html" />
+    <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthiness.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessViewCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoise.html" />
@@ -83,10 +82,11 @@
     <Content Include="js\gva\aircrafts\forms\aircraftInspectorCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtClose.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtFMCtrl.js" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessFMCtrl.js" />
-    <Content Include="js\gva\aircrafts\forms\aircraftAirworthinessReviewCtrl.js" />
+    <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftNewWizzard.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftNewWizzardCtrl.js" />
+    <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessForm15.html" />
+    <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessForm15Ctrl.js" />
     <Content Include="js\gva\aircrafts\modals\airworthinesses\printAirworthinessModal.html" />
     <Content Include="js\gva\aircrafts\modals\airworthinesses\printAirworthinessModalCtrl.js" />
     <Content Include="js\gva\aircrafts\resources\aircrafts.js" />

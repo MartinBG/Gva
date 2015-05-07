@@ -1,0 +1,21 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row">
+    <sc-field type="nomenclature" ng-if="model.partIndex" ng-readonly="model.partIndex" ng-model="model.part.airworthinessCertificateType" ng-required="true" params="{ lotId: lotId}" alias="'airworthinessCertificateTypes'" l10n-text="aircrafts.airworthinessForm15Directive.airworthinessCertificateType" class="col-md-6 col-sm-8"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="nomenclature" ng-model="model.part.registration" alias="'aircraftsRegistrations'" ng-required="true" params="{ lotId: lotId }" l10n-text="aircrafts.airworthinessForm15Directive.registration" class="col-md-6 col-sm-8"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="date" ng-model="model.part.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessForm15Directive.issueDate" class="col-md-2 col-sm-4"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="date" ng-model="model.part.validFromDate" ng-required="true" l10n-text="aircrafts.airworthinessForm15Directive.validFromDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.part.validToDate" l10n-text="aircrafts.airworthinessForm15Directive.validToDate" class="col-md-2 col-sm-4"></sc-field>
+  </div>
+  <div class="row" ng-if="model.part.airworthinessCertificateType.alias === '15aReissue' || model.part.airworthinessCertificateType.alias === '15bReissue'">
+    <sc-field type="nomenclature" ng-model="model.part.organization" alias="'organizations'" l10n-text="aircrafts.airworthinessForm15Directive.organization" class="col-md-4 col-sm-8"></sc-field>
+  </div>
+  <div class="row">
+    <gva-aircraft-inspector name="inspector" ng-model="model.part.inspector" readonly="readonly" sc-form-params="{ inspectorTypes: ['examiner','other'] }"></gva-aircraft-inspector>
+  </div>
+</ng-form>

@@ -620,6 +620,24 @@ namespace Gva.MigrationTool.Sets
                 { "Tech Cert"       , "vla" }
             };
 
+            Dictionary<string, string> issuesActMap = new Dictionary<string, string>
+            {
+                {"ARC", "unknown"},
+                {"Permit to Flight", "unknown"},
+                {"Experimental", "special"},
+                {"Special - Experimental", "special"},
+                {"Form 15a", "15a"},
+                {"Form 15a from EU Member", "15a"},
+                {"Form 15a Reissue", "15aReissue"},
+                {"Form 15a Заверка", "15aReissue"},
+                {"Form 15b", "15b"},
+                {"Form 15b Заверка", "15bReissue"},
+                {"Old BG Form", "directive8"},
+                {"Old BG Form - Заверка", "directive8Reissue"},
+                {"Tech Cert", "vla"},
+                {"Tech Cert - Заверка", "vlaReissue"}
+            };
+
             Func<string, JObject> getExaminerOrOther = (reviewedBy) =>
             {
                 JObject examiner = null;
@@ -752,131 +770,81 @@ namespace Gva.MigrationTool.Sets
                     throw new Exception("Unexpected ACT alias");
             }
 
-            certType = noms["airworthinessCertificateTypes"].ByAlias(actAlias);
-
-            int certId = int.Parse(lastIssue.certId);
             List<JObject> airworthinesses = new List<JObject>();
-            var aw = Utils.ToJObject(new
-            {
-                airworthinessCertificateType = certType,
-                registration = registrations.ContainsKey(certId) ? registrations[certId].Item2 : null,
-                documentNumber = act.t_CofA_No,
-                issueDate = issueDate
-            });
-            airworthinesses.Add(aw);
 
-            if (actAlias == "special")
+            certType = noms["airworthinessCertificateTypes"].ByAlias(actAlias);
+            int certId = int.Parse(lastIssue.certId);
+            JObject registration = registrations.ContainsKey(certId) ? Utils.ToJObject(registrations[certId].Item2) : null;
+
+            if (actAlias != "f24" && actAlias != "f25")
             {
-                if (issues.Count > 1)
+                foreach (var issue in issues)
                 {
-                    Console.WriteLine("Special airworthiness should not have reviews aircraftFmId = " + aircraftFmId);
+                    string type = issuesActMap.ContainsKey(issue.t_ARC_Type) ? issuesActMap[issue.t_ARC_Type] : "unknown";
+                    JObject airworthinessCertType = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias(type));
+
+                    airworthinesses.Add(
+                        Utils.ToJObject(new
+                        {
+                            airworthinessCertificateType =  airworthinessCertType,
+                            registration = registration,
+                            documentNumber = act.t_CofA_No,
+                            issueDate = issue.dIssue,
+                            validFromDate = issue.dFrom,
+                            validToDate = issue.dValid,
+                            inspector = getInspectorOrOther(issue.t_Reviewed_by)
+                        }));
                 }
             }
             else
             {
-                if (actAlias != "f24" && actAlias != "f25")
+                var aw = Utils.ToJObject(new
                 {
-                    var reviews = new JArray();
-                    aw.Add("reviews", reviews);
+                    airworthinessCertificateType = certType,
+                    registration = registration,
+                    documentNumber = act.t_CofA_No,
+                    issueDate = issueDate
+                });
 
-                    int l = issues.Count;
-                    for (int i = 0; i < l; i++)
-                    {
-                        var review = Utils.ToJObject(new
-                        {
-                            issueDate = issues[i].dFrom,
-                            validToDate = issues[i].dValid,
-                            inspector = getInspectorOrOther(issues[i].t_Reviewed_by)
-                        });
+                airworthinesses.Add(aw);
 
-                        reviews.Add(review);
-                    }
-                }
-                else
+                var formIssues = issues.Where(i => i.t_ARC_Type == "" || i.t_ARC_Type.Contains("BG Form")).ToList();
+                if (formIssues.Count() > 0)
                 {
-                    var formIssues = issues.Where(i => i.t_ARC_Type == "" || i.t_ARC_Type.Contains("BG Form")).ToList();
-                    if (formIssues.Count() > 0)
+                    var reserveType = !formIssues.First().dValid.HasValue || DateTime.Compare(formIssues.First().dValid.Value, new DateTime(2008, 7, 18)) < 0 ? "directive8" : "unknown";
+                    foreach (var issue in formIssues)
                     {
-                        string type = !formIssues.First().dValid.HasValue || DateTime.Compare(formIssues.First().dValid.Value, new DateTime(2008, 7, 18)) < 0 ? "directive8" : "unknown"; 
-                        var form = Utils.ToJObject(new
+                        string type = issuesActMap.ContainsKey(issue.t_ARC_Type) ? issuesActMap[issue.t_ARC_Type] : reserveType;
+
+                        airworthinesses.Add(Utils.ToJObject(new
                         {
                             airworthinessCertificateType = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias(type)),
-                            registration = aw["registration"],
-                            documentNumber = aw["documentNumber"],
-                            issueDate = formIssues.First().dIssue,
-                            form15Amendments = new JObject(),
-                            inspector = getInspectorOrOther(formIssues.First().t_Reviewed_by)
-                        });
-
-                        var reviews = new JArray();
-                        form.Add("reviews", reviews);
-                        int l = formIssues.Count;
-                        for (int i = 0; i < l; i++)
-                        {
-                            var review = Utils.ToJObject(new
-                            {
-                                issueDate = formIssues[i].dFrom,
-                                validToDate = formIssues[i].dValid,
-                                inspector = getInspectorOrOther(issues[i].t_Reviewed_by)
-                            });
-
-                            reviews.Add(review);
-                        }
-
-                        airworthinesses.Add(form);
+                            registration = registration,
+                            documentNumber = act.t_CofA_No,
+                            issueDate = issue.dIssue,
+                            validFromDate = issue.dFrom,
+                            validToDate = issue.dValid,
+                            inspector = getExaminerOrOther(issue.t_Reviewed_by)
+                        }));
                     }
+                }
 
-                    Func<DateTime?, DateTime?, string, string, JObject> createNewForm15 = (dateOfIssue, validDate, arcType, inspector) =>
-                    {
-                        var form = Utils.ToJObject(new
-                        {
-                            airworthinessCertificateType = new JObject(),
-                            registration = aw["registration"],
-                            issueDate = dateOfIssue,
-                            validToDate = validDate,
-                            reviews = new JArray(),
-                            inspector = getExaminerOrOther(inspector)
-                        });
+                foreach (var issue in issues.Where(i => !i.t_ARC_Type.Contains("BG Form") && i.t_ARC_Type != ""))
+                {
+                    string type = issuesActMap.ContainsKey(issue.t_ARC_Type) ? issuesActMap[issue.t_ARC_Type] : "unknown";
+                    JObject airworthinessCertType = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias(type));
 
-                        if (arcType.Contains("15a"))
+                    airworthinesses.Add(
+                        Utils.ToJObject(new
                         {
-                            form["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15a"));
-                        }
-                        else if (arcType.Contains("15b"))
-                        {
-                            form["airworthinessCertificateType"] = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias("15b"));
-                        }
-                        
-                        return form;
-                    };
-
-                    JObject lastForm = null;
-                    foreach (var issue in issues.Where(i => i.t_ARC_Type.Contains("15")))
-                    {
-                        if (issue.t_ARC_Type.Contains("Заверка") || issue.t_ARC_Type.Contains("Reissue"))
-                        {
-                            if (lastForm == null || !issue.t_ARC_Type.Contains(lastForm["airworthinessCertificateType"]["alias"].ToString()))
-                            {
-                                lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type, issue.t_Reviewed_by);
-                                airworthinesses.Add(lastForm);
-                            }
-                            else if (issue.t_ARC_Type.Contains(lastForm["airworthinessCertificateType"]["alias"].ToString()))
-                            {
-                                var review = Utils.ToJObject(new
-                                {
-                                    issueDate = issue.dFrom,
-                                    validToDate = issue.dValid,
-                                    inspector = getExaminerOrOther(issue.t_Reviewed_by)
-                                });
-                                (lastForm["reviews"] as JArray).Add(review);
-                            }
-                        }
-                        else 
-                        {
-                            lastForm = createNewForm15(issue.dIssue, issue.dValid, issue.t_ARC_Type, issue.t_Reviewed_by);
-                            airworthinesses.Add(lastForm);
-                        }
-                    }
+                            airworthinessCertificateType = airworthinessCertType,
+                            registration = registration,
+                            documentNumber = act.t_CofA_No,
+                            issueDate = issue.dIssue,
+                            validFromDate = issue.dFrom,
+                            validToDate = issue.dValid,
+                            inspector = getExaminerOrOther(issue.t_Reviewed_by)
+                        }));
                 }
             }
 

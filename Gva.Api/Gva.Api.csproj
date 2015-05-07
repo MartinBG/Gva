@@ -106,7 +106,7 @@
   <ItemGroup>
     <Compile Include="CommonUtils\DbClause.cs" />
     <Compile Include="CommonUtils\Materializer.cs" />
-    <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesFMController.cs" />
+    <Compile Include="Controllers\Aircrafts\AircraftCertAirworthinessesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftCertRegistrationsFMController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentApplicationsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftDocumentDebtsFMController.cs" />
@@ -244,8 +244,7 @@
     <Compile Include="Controllers\Persons\PersonLicencesController.cs" />
     <Compile Include="Controllers\Persons\PersonMedicalsController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessReviewDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessFMDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertAirworthinessDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertNoiseDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertSmodDO.cs" />

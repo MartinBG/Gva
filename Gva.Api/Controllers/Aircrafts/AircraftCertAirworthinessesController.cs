@@ -17,14 +17,14 @@ namespace Gva.Api.Controllers.Aircrafts
 {
     [RoutePrefix("api/aircrafts/{lotId}/aircraftCertAirworthinessesFM")]
     [Authorize]
-    public class AircraftCertAirworthinessesFMController : GvaCaseTypePartController<AircraftCertAirworthinessFMDO>
+    public class AircraftCertAirworthinessesController : GvaCaseTypePartController<AircraftCertAirworthinessDO>
     {
         private INomRepository nomRepository;
         private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
 
-        public AircraftCertAirworthinessesFMController(
+        public AircraftCertAirworthinessesController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IApplicationRepository applicationRepository,
@@ -44,7 +44,7 @@ namespace Gva.Api.Controllers.Aircrafts
         [Route("new")]
         public IHttpActionResult GetNewCertAirworthinessFM(int lotId, int? appId = null)
         {
-            AircraftCertAirworthinessFMDO newCertAirworthinessFM = new AircraftCertAirworthinessFMDO()
+            AircraftCertAirworthinessDO newCertAirworthinessFM = new AircraftCertAirworthinessDO()
             {
                 AirworthinessCertificateType = this.nomRepository.GetNomValue("airworthinessCertificateTypes", "f25")
             };
@@ -67,18 +67,7 @@ namespace Gva.Api.Controllers.Aircrafts
                 caseDO.Applications.Add(this.applicationRepository.GetInitApplication(appId));
             }
 
-            var airworthinessFMPartVersion = new CaseTypePartDO<AircraftCertAirworthinessFMDO>(newCertAirworthinessFM, caseDO);
-
-            var review = new AircraftCertAirworthinessReviewDO()
-            {
-                Inspector = new AircraftInspectorDO()
-            };
-
-            return Ok(new
-                {
-                    airworthinessFMPartVersion,
-                    review
-                });
+            return Ok(new CaseTypePartDO<AircraftCertAirworthinessDO>(newCertAirworthinessFM, caseDO));
         }
     }
 }
