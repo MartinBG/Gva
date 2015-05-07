@@ -15,6 +15,7 @@ using Common.Owin;
 using Common.WordTemplates;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.ModelsDO.Common;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.PrintRepository;
 using Gva.Api.WordTemplates;
@@ -74,7 +75,6 @@ namespace Gva.Api.Controllers
             }
             else
             {
-
                 using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName, ratingIndex, ratingEditionIndex))
                 using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
                 {
@@ -87,16 +87,7 @@ namespace Gva.Api.Controllers
                 ratingEditionBlobKey,
                 templateName);
 
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.Redirect);
-            result.Headers.Location = new Uri(url, UriKind.Relative);
-            result.Headers.CacheControl = new CacheControlHeaderValue()
-            {
-                NoCache = true,
-                NoStore = true,
-                MustRevalidate = true
-            };
-
-            return result;
+            return this.printRepository.ReturnResponseMessage(url);
         }
 
         [Route("api/print")]
@@ -142,16 +133,7 @@ namespace Gva.Api.Controllers
                 licenceEditionDocBlobKey, 
                 templateName);
 
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.Redirect);
-            result.Headers.Location = new Uri(url, UriKind.Relative);
-            result.Headers.CacheControl = new CacheControlHeaderValue()
-            {
-                NoCache = true,
-                NoStore = true,
-                MustRevalidate = true
-            };
-
-            return result;
+            return this.printRepository.ReturnResponseMessage(url);
         }
 
         [Route("api/printAirworthiness")]
@@ -181,16 +163,7 @@ namespace Gva.Api.Controllers
                 awDocBlobKey,
                 templateName);
 
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.Redirect);
-            result.Headers.Location = new Uri(url, UriKind.Relative);
-            result.Headers.CacheControl = new CacheControlHeaderValue()
-            {
-                NoCache = true,
-                NoStore = true,
-                MustRevalidate = true
-            };
-
-            return result;
+            return this.printRepository.ReturnResponseMessage(url);
         }
 
         public Stream GenerateWordDocument(int lotId, string path, string templateName, int? ratingPartIndex, int? editionPartIndex)
@@ -228,19 +201,7 @@ namespace Gva.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 licenceEditionPartVersion.Content.PrintedDocumentBlobKey = licenceEditionDocBlobKey;
-
-                GvaFile printedLicenceFile = new GvaFile()
-                {
-                    Filename = templateName,
-                    FileContentId = licenceEditionDocBlobKey,
-                    MimeType = "application/pdf"
-                };
-
-                this.unitOfWork.DbContext.Set<GvaFile>().Add(printedLicenceFile);
-
-                this.unitOfWork.Save();
-
-                licenceEditionPartVersion.Content.PrintedFileId = printedLicenceFile.GvaFileId;
+                licenceEditionPartVersion.Content.PrintedFileId = this.printRepository.SaveNewFile(templateName, licenceEditionDocBlobKey);
 
                 lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
 
@@ -252,6 +213,61 @@ namespace Gva.Api.Controllers
                 transaction.Commit();
             }
         }
+
+        [Route("api/printApplication")]
+        public HttpResponseMessage GetApplicationNote(int lotId, int partIndex)
+        {
+            Lot lot = this.lotRepository.GetLotIndex(lotId);
+            string path = string.Format("personDocumentApplications/{0}", partIndex);
+            PartVersion<DocumentApplicationDO> applicationPart = lot.Index.GetPart<DocumentApplicationDO>(path);
+            string templateName = "application_note";
+            Guid applicationDocBlobKey;
+            if (applicationPart.Content.PrintedFileId.HasValue)
+            {
+                applicationDocBlobKey = this.unitOfWork.DbContext.Set<GvaFile>()
+                    .Where(f => f.GvaFileId == applicationPart.Content.PrintedFileId.Value)
+                    .Single()
+                    .FileContentId;
+            }
+            else
+            {
+                using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName, null, null))
+                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
+                {
+                    applicationDocBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
+                    this.UpdateApplicationPart(applicationDocBlobKey, applicationPart, lot, templateName);
+                }
+            }
+
+            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline",
+                applicationDocBlobKey,
+                templateName);
+
+            return this.printRepository.ReturnResponseMessage(url);
+        }
+
+        public void UpdateApplicationPart(
+            Guid applicationDocBlobKey,
+            PartVersion<DocumentApplicationDO> applicationPartVersion,
+            Lot lot,
+            string templateName) 
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                applicationPartVersion.Content.PrintedFileId = this.printRepository.SaveNewFile(templateName, applicationDocBlobKey);
+                string path = string.Format("personDocumentApplications/{0}", applicationPartVersion.Part.Index);
+                lot.UpdatePart(path, applicationPartVersion.Content, this.userContext);
+
+                lot.Commit(this.userContext, lotEventDispatcher);
+
+                this.unitOfWork.Save();
+
+                this.lotRepository.ExecSpSetLotPartTokens(applicationPartVersion.PartId);
+
+                transaction.Commit();
+            }
+        }
+
         public void UpdateLicenceEditionPrintedRatings(
             Guid ratingEditionBlobKey,
             PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion, 
@@ -262,21 +278,15 @@ namespace Gva.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                PrintedRatingEditionDO existingEntry = licenceEditionPartVersion.Content.PrintedRatingEditions.Where(re => re.RatingEditionPartIndex == ratingEditionPartIndex && re.RatingPartIndex == ratingPartIndex).SingleOrDefault();
+                int printedRatingEditionFileId = this.printRepository.SaveNewFile(templateName, ratingEditionBlobKey);
 
-                GvaFile printedRatingEditionFile = new GvaFile()
-                {
-                    Filename = templateName,
-                    FileContentId = ratingEditionBlobKey,
-                    MimeType = "application/pdf"
-                };
+                PrintedRatingEditionDO existingEntry = licenceEditionPartVersion.Content.PrintedRatingEditions
+                    .Where(re => re.RatingEditionPartIndex == ratingEditionPartIndex && re.RatingPartIndex == ratingPartIndex)
+                    .SingleOrDefault();
 
-                this.unitOfWork.DbContext.Set<GvaFile>().Add(printedRatingEditionFile);
-
-                this.unitOfWork.Save();
                 if (existingEntry != null)
                 {
-                    existingEntry.FileId = printedRatingEditionFile.GvaFileId;
+                    existingEntry.FileId = printedRatingEditionFileId;
                     existingEntry.PrintedEditionBlobKey = ratingEditionBlobKey;
                 }
                 else
@@ -286,7 +296,7 @@ namespace Gva.Api.Controllers
                         PrintedEditionBlobKey = ratingEditionBlobKey,
                         RatingPartIndex = ratingPartIndex,
                         RatingEditionPartIndex = ratingEditionPartIndex,
-                        FileId = printedRatingEditionFile.GvaFileId
+                        FileId = printedRatingEditionFileId
                     };
 
                     if(licenceEditionPartVersion.Content.PrintedRatingEditions == null)
@@ -295,6 +305,7 @@ namespace Gva.Api.Controllers
                     }
                     licenceEditionPartVersion.Content.PrintedRatingEditions.Add(newEntry);
                 }
+
                 lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
 
                 lot.Commit(this.userContext, lotEventDispatcher);
@@ -311,19 +322,8 @@ namespace Gva.Api.Controllers
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 awPartVersion.Content.PrintedDocumentBlobKey = awDocBlobKey;
-
-                GvaFile printedAwCertFile = new GvaFile()
-                {
-                    Filename = templateName,
-                    FileContentId = awDocBlobKey,
-                    MimeType = "application/pdf"
-                };
-
-                this.unitOfWork.DbContext.Set<GvaFile>().Add(printedAwCertFile);
-
-                this.unitOfWork.Save();
-
-                awPartVersion.Content.PrintedFileId = printedAwCertFile.GvaFileId;
+                int printedAwCertFileId = this.printRepository.SaveNewFile(templateName, awDocBlobKey);
+                awPartVersion.Content.PrintedFileId = printedAwCertFileId;
 
                 lot.UpdatePart<AircraftCertAirworthinessFMDO>(string.Format("aircraftCertAirworthinessesFM/{0}", awPartVersion.Part.Index), awPartVersion.Content, this.userContext);
 

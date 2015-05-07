@@ -250,7 +250,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<CoordinatorLicence>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AML>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AML_III>().As<IDataGenerator>().InstancePerLifetimeScope();
-
+            moduleBuilder.RegisterType<ApplicationNote>().As<IDataGenerator>().InstancePerLifetimeScope();
+            
             moduleBuilder.RegisterType<AMLNationalRating>().As<IAMLNationalRatingDataGenerator>().InstancePerLifetimeScope();
 
             //generators for aircrafts

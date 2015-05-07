@@ -22,6 +22,8 @@ namespace Gva.Api.Models.Views
 
         public int ApplicationTypeId { get; set; }
 
+        public int? PrintedFileId { get; set; }
+
         public virtual NomValue ApplicationType { get; set; }
 
         public virtual Lot Lot { get; set; }
@@ -56,6 +58,7 @@ namespace Gva.Api.Models.Views
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
             this.Property(t => t.OldDocumentNumber).HasColumnName("OldDocumentNumber");
             this.Property(t => t.ApplicationTypeId).HasColumnName("ApplicationTypeId");
+            this.Property(t => t.PrintedFileId).HasColumnName("PrintedFileId");
 
             // Relationships
             this.HasRequired(t => t.Lot)

@@ -274,7 +274,6 @@ namespace Gva.Api.Controllers.Applications
             return Ok(this.applicationRepository.GetApplicationQualifications(path, lotId));
         }
 
-
         [Route(@"appPart/{lotId}/{partIndex}")]
         public IHttpActionResult PostApplicationPart(int lotId, int partIndex, CaseTypePartDO<DocumentApplicationDO> application)
         {

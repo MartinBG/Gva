@@ -31,6 +31,8 @@ namespace Gva.Api.ModelsDO.Common
 
         public NomValue Stage { get; set; }
 
+        public int? PrintedFileId { get; set; }
+
         public AppExaminationSystemDataDO ExaminationSystemData { get; set; }
     }
 }
