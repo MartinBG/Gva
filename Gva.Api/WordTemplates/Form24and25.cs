@@ -36,7 +36,7 @@ namespace Gva.Api.WordTemplates
                     REG_MARK = registration != null ? registration.RegMark : null,
                     PRODUCER = aircraftData.AircraftProducer.NameAlt,
                     PRODUCER_DESIGNATION = aircraftData.ModelAlt,
-                    AIR_CATEGORY = aircraftData.AirCategory.Name,
+                    AIR_CATEGORY = aircraftData.AirCategory != null ? aircraftData.AirCategory.Name : null,
                     DOCUMENT_NUMBER = airworthinessData.DocumentNumber,
                     MSN = aircraftData.ManSN
                 }

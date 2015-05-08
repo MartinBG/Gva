@@ -35,9 +35,9 @@ namespace Gva.Api.WordTemplates
                 root = new
                 {
                     REG_MARK = registration != null ? registration.RegMark : null,
-                    PRODUCER = aircraftData.AircraftProducer.Name,
+                    PRODUCER = aircraftData.AircraftProducer != null ? aircraftData.AircraftProducer.Name : null,
                     PRODUCER_DESIGNATION = aircraftData.Model,
-                    PRODUCER_ALT = aircraftData.AircraftProducer.NameAlt,
+                    PRODUCER_ALT = aircraftData.AircraftProducer != null ? aircraftData.AircraftProducer.NameAlt : null,
                     PRODUCER_DESIGNATION_ALT = aircraftData.ModelAlt,
                     CATEGORY = string.Join(", ", registration.CatAW.Select(c => c.Name).ToArray()),
                     CATEGORY_ALT = string.Join(", ", registration.CatAW.Select(c => c.NameAlt).ToArray()),

@@ -34,11 +34,11 @@ namespace Gva.Api.WordTemplates
                 root = new
                 {
                     REG_MARK = registration != null ? registration.RegMark : null,
-                    PRODUCER_ALT = aircraftData.AircraftProducer.NameAlt,
+                    PRODUCER_ALT = aircraftData.AircraftProducer != null ? aircraftData.AircraftProducer.NameAlt: null,
                     PRODUCER_DESIGNATION_ALT = aircraftData.ModelAlt,
-                    PRODUCER = aircraftData.AircraftProducer.Name,
+                    PRODUCER = aircraftData.AircraftProducer != null ? aircraftData.AircraftProducer.Name : null,
                     PRODUCER_DESIGNATION = aircraftData.Model,
-                    AIR_CATEGORY = aircraftData.AirCategory.Name,
+                    AIR_CATEGORY = aircraftData.AirCategory != null ? aircraftData.AirCategory.Name : null,
                     REF_NUMBER = airworthinessData.DocumentNumber,
                     MSN = aircraftData.ManSN,
                 }
