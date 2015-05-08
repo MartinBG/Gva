@@ -51,6 +51,7 @@
     <Content Include="Create\Tables\ASExamVariants.sql" />
     <Content Include="Create\Tables\ASExamQuestions.sql" />
     <Content Include="Create\Tables\ASExamVariantQuestions.sql" />
+    <Content Include="Create\Tables\GvaViewPrintedAircraftCertNoises.sql" />
     <Content Include="Create\Tables\GvaViewPrintedRatingEditions.sql" />
     <Content Include="Create\Tables\GvaViewAircraftCertAirworthinesses.sql" />
     <Content Include="Create\Tables\GvaInvalidActNumbers.sql" />

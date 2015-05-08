@@ -203,6 +203,38 @@ namespace Gva.Api.Controllers
             return this.printRepository.ReturnResponseMessage(url);
         }
 
+        [Route("api/printNoiseCert")]
+        public HttpResponseMessage GetNoiseCert(int lotId, int partIndex, bool generateNew = false)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            string noisePath = string.Format("aircraftCertNoises/{0}", partIndex);
+            var noisePart = lot.Index.GetPart<AircraftCertNoiseDO>(noisePath);
+            string templateName = "noise_cert";
+
+            Guid noiseCertBlobKey;
+            if (noisePart.Content.PrintedFileId.HasValue && !generateNew)
+            {
+                noiseCertBlobKey = this.unitOfWork.DbContext.Set<GvaFile>()
+                    .Where(f => f.GvaFileId == noisePart.Content.PrintedFileId.Value)
+                    .Single()
+                    .FileContentId;
+            }
+            else
+            {
+                using (var wordDocStream = this.GenerateWordDocument(lotId, noisePath, templateName, null, null))
+                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
+                {
+                    noiseCertBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
+                    this.UpdatePart<AircraftCertNoiseDO>(noiseCertBlobKey, noisePart, lot, templateName, noisePath, "PrintedFileId", noisePart.Content);
+                }
+            }
+            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline",
+                noiseCertBlobKey,
+                templateName);
+
+            return this.printRepository.ReturnResponseMessage(url);
+        }
+
         [Route("api/printApplication")]
         public HttpResponseMessage GetApplicationNote(int lotId, int partIndex)
         {

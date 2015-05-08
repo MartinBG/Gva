@@ -92,6 +92,8 @@
     <Content Include="js\gva\aircrafts\modals\airworthinesses\printAirworthinessModalCtrl.js" />
     <Content Include="js\gva\aircrafts\modals\dereg\printExportCertModal.html" />
     <Content Include="js\gva\aircrafts\modals\dereg\printExportCertModalCtrl.js" />
+    <Content Include="js\gva\aircrafts\modals\noises\printNoiseCertModal.html" />
+    <Content Include="js\gva\aircrafts\modals\noises\printNoiseCertModalCtrl.js" />
     <Content Include="js\gva\aircrafts\resources\aircrafts.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftApplications.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertAirworthinessesFM.js" />

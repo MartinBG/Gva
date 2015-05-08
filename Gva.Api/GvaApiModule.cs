@@ -59,6 +59,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftRegistrationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegMarkProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftCertAirworthinessProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<AircraftPrintedCertNoiseProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             
             //AirportView
             moduleBuilder.RegisterType<AirportProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
@@ -261,6 +262,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<TechCert>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<Directive8>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ExportCert>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<NoiseCert>().As<IDataGenerator>().InstancePerLifetimeScope();
         }
     }
 }

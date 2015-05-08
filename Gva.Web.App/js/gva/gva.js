@@ -603,7 +603,8 @@
     .config(['scModalProvider', function (scModalProvider) {
     scModalProvider
     .modal('printAirworthiness'     , 'js/gva/aircrafts/modals/airworthinesses/printAirworthinessModal.html' , 'PrintAirworthinessModalCtrl' , 'xs-2')
-    .modal('printExportCert'        , 'js/gva/aircrafts/modals/dereg/printExportCertModal.html'              , 'PrintExportCertModalCtrl'    , 'xs-2');
+    .modal('printExportCert'        , 'js/gva/aircrafts/modals/dereg/printExportCertModal.html'              , 'PrintExportCertModalCtrl'    , 'xs-2')
+    .modal('printNoiseCert'         , 'js/gva/aircrafts/modals/noises/printNoiseCertModal.html'              , 'PrintNoiseCertModalCtrl'     , 'xs-2');
   }])
     .config(['$stateProvider', function ($stateProvider) {
     $stateProvider

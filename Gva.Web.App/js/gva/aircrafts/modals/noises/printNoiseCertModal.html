@@ -1,0 +1,15 @@
+﻿<ng-form class="form-inline">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="aircrafts.printNoiseCertModal.title"></strong>
+      <div class="pull-right">
+        <sc-button name="closeBtn" btn-click="close()" text="aircrafts.printNoiseCertModal.close" class="btn btn-default btn-xs"></sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <sc-link-button name="printBtn" ng-href="api/printNoiseCert?lotId={{model.lotId}}&partIndex={{model.partIndex}}" target="_blank" sc-access-token text="aircrafts.printNoiseCertModal.print" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
+      <sc-link-button name="printBtn2" ng-href="api/printNoiseCert?lotId={{model.lotId}}&partIndex={{model.partIndex}}&generateNew=true" target="_blank" sc-access-token text="aircrafts.printNoiseCertModal.generateNew" class="btn btn-primary btn-sm" icon="glyphicon-print"></sc-link-button>
+    </div>
+  </div>
+</ng-form>
