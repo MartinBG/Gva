@@ -87,6 +87,7 @@
     <Content Include="js\gva\aircrafts\forms\aircraftNewWizzardCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessForm15.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessForm15Ctrl.js" />
+    <Content Include="js\gva\aircrafts\forms\aircraftCertRegDeregFMCtrl.js" />
     <Content Include="js\gva\aircrafts\modals\airworthinesses\printAirworthinessModal.html" />
     <Content Include="js\gva\aircrafts\modals\airworthinesses\printAirworthinessModalCtrl.js" />
     <Content Include="js\gva\aircrafts\resources\aircrafts.js" />

@@ -10,6 +10,8 @@
     aircraftCertRegistration
   ) {
     $scope.reg = aircraftCertRegistration;
+    $scope.lotId = $stateParams.id;
+    $scope.partIndex = $stateParams.ind;
 
     $scope.save = function () {
       return $scope.deregCertRegForm.$validate()

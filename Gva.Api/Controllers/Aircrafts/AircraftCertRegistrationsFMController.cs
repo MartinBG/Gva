@@ -109,6 +109,24 @@ namespace Gva.Api.Controllers.Aircrafts
             }
         }
 
+        [Route("initExportData")]
+        public IHttpActionResult GetExportInitData(int lotId)
+        {
+            var noisesParts = this.lotRepository.GetLotIndex(lotId).Index.GetParts<AircraftCertNoiseDO>("aircraftCertNoises");
+            var lastNoise = noisesParts.OrderByDescending(n => n.Content.IssueDate).SingleOrDefault();
+            string TCDSN = "";
+            if (lastNoise != null)
+            {
+                TCDSN = lastNoise.Content.Tcdsn;
+            }
+
+            return Ok(new {
+                text = string.Format("Настоящото удостоверява, че въздухоплавателното средство (ВС), посочено по-долу и описано в Спецификацията(ите) на Европейската Агенция по Авиационна Безопасност (ЕААБ) под номер {0}, е инспектирано и се счита за летателно годно в съответствие с данните в типовия сертификат, утвърден или признат от ЕААБ, и е в съответствие със специфичните изисквания на приемащата страна, заведени в Главна Дирекция “Гражданска въздухоплавателна администрация” на Република България, с изключение на посочените по-долу забележки.\r\n Забележка: Това удостоверение не свидетелства за съответствие с каквито и да е споразумения или договори между доставчика и купувача, нито дава права за опериране с това ВС.", TCDSN),
+                textAlt = string.Format("This certificate certifies that the aircraft identified below and particularly described in Specification(s) of the European Aviation Safety Agency (EASA), Numbered {0} has been examined and is considered airworthy in accordance with a comprehensive and detailed type certification basis established or recognised by EASA, and is in compliance with those special requirements of the importing state filed with Directorate General “Civil Aviation Administration” of Republic of Bulgaria, except as noted below. \r\n Note: This certificate does not attest compliance with any agreements or contracts between the vendor and purchaser, nor does it constitute authority to operate an aircraft.", TCDSN)
+            });
+        }
+        
+
         public override IHttpActionResult DeletePart(int lotId, int partIndex)
         {
             using (var transaction = this.unitOfWork.BeginTransaction())

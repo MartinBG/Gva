@@ -12,6 +12,10 @@
         method: 'POST',
         url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/removeDereg'
       },
+      'initExportData': {
+        method: 'GET',
+        url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/initExportData'
+      },
       'getView': {
         method: 'GET',
         url: 'api/aircrafts/:id/aircraftCertRegistrationsFM/:ind/view',

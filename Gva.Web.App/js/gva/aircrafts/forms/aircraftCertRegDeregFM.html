@@ -15,24 +15,36 @@
     <sc-field type="nomenclature" ng-model="model.country" alias="'countries'" l10n-text="aircrafts.regFMDirective.removalCountry" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.notes" l10n-text="aircrafts.regFMDirective.removalNotes" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" ng-model="model.notes" l10n-text="aircrafts.regFMDirective.notes" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.notesAlt" l10n-text="aircrafts.regFMDirective.removalNotesAlt" class="col-md-8 col-sm-12"></sc-field>
+    <sc-field type="text" ng-model="model.notesAlt" l10n-text="aircrafts.regFMDirective.notesAlt" class="col-md-8 col-sm-12"></sc-field>
   </div>
   <h5 class="form-header" l10n-text="aircrafts.regFMDirective.export" style="margin-top:10px;"></h5>
 
-  <button class="btn btn-xs btn-default pull-right" ng-click="model.export = {}" style="position:relative; top:-25px" ng-disabled="readonly"> <span class="glyphicon glyphicon-plus"></span>
+  <button class="btn btn-xs btn-default pull-right" ng-if="!model.export" ng-click="getExportData()" style="position:relative; top:-25px" ng-disabled="readonly"> <span class="glyphicon glyphicon-plus"></span>
   </button>
-  <div ng-show="model.export">
+  <sc-link-button ng-if="model.export" name="printBtn" ng-href="api/printExportCert?lotId={{lotId}}&partIndex={{partIndex}}" target="_blank" sc-access-token class="btn btn-sm pull-right" icon="glyphicon-print"></sc-link-button>
+  <div ng-if="model.export">
     <div class="row">
-      <sc-field type="text" ng-model="model.export.text" l10n-text="aircrafts.regFMDirective.text" class="col-md-8 col-sm-12"></sc-field>
+      <sc-field type="textarea" rows="3" cols="50" ng-model="model.export.text" l10n-text="aircrafts.regFMDirective.text" class="col-md-10 col-sm-12"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="text" ng-model="model.export.textAlt" l10n-text="aircrafts.regFMDirective.textAlt" class="col-md-8 col-sm-12"></sc-field>
+      <sc-field type="textarea" rows="3" cols="50" ng-model="model.export.textAlt" l10n-text="aircrafts.regFMDirective.textAlt" class="col-md-10 col-sm-12"></sc-field>
     </div>
     <div class="row">
-      <sc-field type="nomenclature" ng-model="model.export.aircraftNewOld" alias="'boolean'" l10n-text="aircrafts.regFMDirective.aircraftNewOld" class="col-md-4 col-sm-8"></sc-field>
+      <sc-field type="text" ng-model="model.export.notes" l10n-text="aircrafts.regFMDirective.notes" class="col-md-8 col-sm-12"></sc-field>
+    </div>
+    <div class="row">
+      <sc-field type="text" ng-model="model.export.notesAlt" l10n-text="aircrafts.regFMDirective.notesAlt" class="col-md-8 col-sm-12"></sc-field>
+    </div>
+    <div class="form-group col-sm-2 row">
+      <label class="control-label" l10n-text="aircrafts.regFMDirective.aircraftIsNew"></label>
+      <input type="checkbox" ng-model="model.export.aircraftNewOld" ng-true-value="true" ng-checked="model.export.aircraftNewOld === true" ng-false-value="" ng-disabled="form.$readonly" />
+    </div>
+    <div class="form-group col-sm-2 row">
+      <label class="control-label" l10n-text="aircrafts.regFMDirective.aircraftIsUsed"></label>
+      <input type="checkbox" ng-model="model.export.aircraftNewOld" ng-true-value="false" ng-checked="model.export.aircraftNewOld === false" ng-false-value="" ng-disabled="form.$readonly" />
     </div>
   </div>
 </ng-form>

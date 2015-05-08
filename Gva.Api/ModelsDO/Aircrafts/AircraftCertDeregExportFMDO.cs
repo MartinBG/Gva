@@ -8,6 +8,10 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public string TextAlt { get; set; }
 
-        public NomValue AircraftNewOld { get; set; }
+        public string Notes { get; set; }
+
+        public string NotesAlt { get; set; }
+
+        public bool? AircraftNewOld { get; set; }
     }
 }

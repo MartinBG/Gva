@@ -1166,14 +1166,15 @@
           removalDocumentNumber: 'Номер на документ за отписване',
           removalDocumentDate: 'Дата',
           removalCountry: 'Държава',
-          removalNotes: 'Забележки/Изключения',
-          removalNotesAlt: 'Забележки/Изключения (англ.)',
-          person: 'ФЛ',
-          organization: 'ЮЛ',
+          notes: 'Забележки/Изключения',
+          notesAlt: 'Забележки/Изключения (англ.)',
           text: 'Текст',
           textAlt: 'Текст (англ.)',
-          aircraftNewOld: 'ВС е ново',
-          'export': 'Експортно удостоверение за ЛГ'
+          person: 'ФЛ',
+          organization: 'ЮЛ',
+          'export': 'Експортно удостоверение за ЛГ',
+          aircraftIsNew: 'Ново ВС',
+          aircraftIsUsed: 'Използвано ВС'
         },
         debtDirectiveFM: {
           regDate: 'Дата',

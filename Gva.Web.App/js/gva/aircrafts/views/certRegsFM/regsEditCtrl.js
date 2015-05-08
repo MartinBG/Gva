@@ -15,6 +15,8 @@
 
     $scope.reg = aircraftCertRegistration;
     $scope.editMode = null;
+    $scope.lotId = $stateParams.id;
+    $scope.partIndex = $stateParams.ind;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
