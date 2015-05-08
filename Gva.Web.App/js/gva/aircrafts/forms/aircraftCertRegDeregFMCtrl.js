@@ -5,6 +5,7 @@
   function AircraftCertRegDeregFMCtrl(
     $scope, 
     scFormParams,
+    scModal,
     AircraftCertRegistrationsFM
     ) {
     $scope.partIndex = scFormParams.partIndex;
@@ -19,11 +20,23 @@
           $scope.model['export'] = data;
         });
     };
+
+    $scope.print = function () {
+      var params = {
+        lotId: $scope.lotId,
+        partIndex: $scope.partIndex
+      };
+
+      var modalInstance = scModal.open('printExportCert', params);
+
+      return modalInstance.opened;
+    };
   }
 
   AircraftCertRegDeregFMCtrl.$inject = [
     '$scope',
     'scFormParams',
+    'scModal',
     'AircraftCertRegistrationsFM'
   ];
 

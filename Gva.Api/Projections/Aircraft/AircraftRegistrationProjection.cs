@@ -32,6 +32,7 @@ namespace Gva.Api.Projections.Aircraft
             reg.CertNumber = registration.Content.CertNumber;
             reg.ActNumber = registration.Content.ActNumber;
             reg.RegMark = registration.Content.RegMark;
+            reg.PrintedExportCertFileId = registration.Content.Removal != null && registration.Content.Removal.Export != null ? registration.Content.Removal.Export.PrintedExportCertFileId : (int?)null;
 
             return reg;
         }

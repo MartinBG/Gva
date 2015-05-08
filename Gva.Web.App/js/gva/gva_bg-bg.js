@@ -730,6 +730,12 @@
           print: 'Преглед за печат',
           generateNew: 'Прегенерирай'
         },
+        printExportCertModal: {
+          title: 'Принтиране на експортно удостоверение',
+          close: 'Затвори',
+          print: 'Преглед за печат',
+          generateNew: 'Прегенерирай'
+        },
         aircraftScannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',

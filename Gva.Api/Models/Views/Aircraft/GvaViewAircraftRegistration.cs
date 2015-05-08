@@ -16,6 +16,8 @@ namespace Gva.Api.Models.Views.Aircraft
 
         public int? ActNumber { get; set; }
 
+        public int? PrintedExportCertFileId { get; set; }
+
         public string RegMark { get; set; }
 
         public virtual GvaViewAircraft Aircraft { get; set; }
@@ -38,6 +40,7 @@ namespace Gva.Api.Models.Views.Aircraft
             this.Property(t => t.CertNumber).HasColumnName("CertNumber");
             this.Property(t => t.ActNumber).HasColumnName("ActNumber");
             this.Property(t => t.RegMark).HasColumnName("RegMark");
+            this.Property(t => t.PrintedExportCertFileId).HasColumnName("PrintedExportCertFileId");
 
             // Relationships
             this.HasRequired(t => t.Aircraft)

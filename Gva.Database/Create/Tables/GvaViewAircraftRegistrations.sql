@@ -2,15 +2,17 @@
 GO 
 
 CREATE TABLE [dbo].[GvaViewAircraftRegistrations] (
-    [LotId]                  INT           NOT NULL,
-    [PartIndex]              INT           NOT NULL,
-    [CertRegisterId]         INT           NOT NULL,
-    [CertNumber]             INT           NULL,
-    [ActNumber]              INT           NULL,
-    [RegMark]                NVARCHAR(50)  NULL,
+    [LotId]                   INT           NOT NULL,
+    [PartIndex]               INT           NOT NULL,
+    [CertRegisterId]          INT           NOT NULL,
+    [CertNumber]              INT           NULL,
+    [ActNumber]               INT           NULL,
+    [RegMark]                 NVARCHAR(50)  NULL,
+    [PrintedExportCertFileId] INT           NULL,
     CONSTRAINT [PK_GvaAircraftRegistrations]                   PRIMARY KEY ([LotId], [PartIndex]),
     CONSTRAINT [FK_GvaAircraftRegistrations_GvaViewAircrafts]  FOREIGN KEY ([LotId]) REFERENCES [dbo].[GvaViewAircrafts] ([LotId]),
-    CONSTRAINT [FK_GvaAircraftRegistrationss_NomValues]        FOREIGN KEY ([CertRegisterId])  REFERENCES [dbo].[NomValues] ([NomValueId])
+    CONSTRAINT [FK_GvaAircraftRegistrations_NomValues]         FOREIGN KEY ([CertRegisterId])  REFERENCES [dbo].[NomValues] ([NomValueId]),
+    CONSTRAINT [FK_GvaAircraftRegistrations_GvaFiles]          FOREIGN KEY ([PrintedExportCertFileId]) REFERENCES [dbo].[GvaFiles] ([GvaFileId])
 )
 GO
 
