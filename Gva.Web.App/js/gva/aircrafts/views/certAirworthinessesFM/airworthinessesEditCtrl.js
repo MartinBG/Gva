@@ -7,7 +7,6 @@
     $state,
     $stateParams,
     AircraftCertAirworthinessesFM,
-    AircraftCertRegistrationsFM,
     originalAirworthiness,
     scModal,
     scMessage
@@ -17,20 +16,6 @@
     $scope.isEditAw = false;
     $scope.lotId = $stateParams.id;
     $scope.certTypeAlias = $scope.airworthiness.part.airworthinessCertificateType.alias;
-
-    $scope.isActiveReg = true;
-    $scope.$watch('airworthiness.part.registration', function() {
-      if ($scope.airworthiness.part.registration) {
-        AircraftCertRegistrationsFM.get({
-          id: $stateParams.id,
-          ind: $scope.airworthiness.part.registration.nomValueId
-        })
-        .$promise
-        .then(function (reg) {
-          $scope.isActiveReg = reg.part.status.code === '1' || reg.part.status.code === '2';
-        });
-      }
-    });
 
     $scope.editAw = function () {
      $scope.isEditAw = true;
@@ -89,7 +74,6 @@
     '$state',
     '$stateParams',
     'AircraftCertAirworthinessesFM',
-    'AircraftCertRegistrationsFM',
     'aircraftCertAirworthiness',
     'scModal',
     'scMessage'
