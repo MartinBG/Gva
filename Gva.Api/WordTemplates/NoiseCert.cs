@@ -53,14 +53,14 @@ namespace Gva.Api.WordTemplates
                     MAX_TAKE_OFF_MASS = aircraftData.MaxMassT, 
                     MAX_LANDING_MASS = aircraftData.MaxMassL, 
                     NOISE_STANDART = noiseData.Chapter,
-                    LATERAL_NOISE_LEVEL = noiseData.Lateral.HasValue ? string.Format("{0}  dB", noiseData.Lateral.ToString()) : "N/A",
-                    APPROACH_NOISE_LEVEL = noiseData.Approach.HasValue ? string.Format("{0}  dB", noiseData.Approach.ToString()) : "N/A",
-                    OVERFLIGHT_NOISE_LEVEL = noiseData.Overflight.HasValue ? string.Format("{0}  dB", noiseData.Overflight.ToString()) : "N/A",
-                    FLYOVER_NOISE_LEVEL = noiseData.Flyover.HasValue ? string.Format("{0}  dB", noiseData.Flyover.ToString()) : "N/A",
-                    TAKE_OFF_NOISE_LEVEL = noiseData.Takeoff.HasValue ? string.Format("{0}  dB", noiseData.Takeoff.ToString()) : "N/A", 
+                    LATERAL_NOISE_LEVEL = noiseData.Lateral.HasValue ? string.Format("{0} dB", noiseData.Lateral.ToString()) : "N/A",
+                    APPROACH_NOISE_LEVEL = noiseData.Approach.HasValue ? string.Format("{0} dB", noiseData.Approach.ToString()) : "N/A",
+                    OVERFLIGHT_NOISE_LEVEL = noiseData.Overflight.HasValue ? string.Format("{0} dB", noiseData.Overflight.ToString()) : "N/A",
+                    FLYOVER_NOISE_LEVEL = noiseData.Flyover.HasValue ? string.Format("{0} dB", noiseData.Flyover.ToString()) : "N/A",
+                    TAKE_OFF_NOISE_LEVEL = noiseData.Takeoff.HasValue ? string.Format("{0} dB", noiseData.Takeoff.ToString()) : "N/A", 
                     ADDITIONAL_MODIFICATIONS = noiseData.AdditionalModifications,
                     ADDITIONAL_MODIFICATIONS_ALT = noiseData.AdditionalModificationsAlt,
-                    NOTES = noiseData.Tcdsn
+                    NOTES = noiseData.Remarks
                 }
             };
 
