@@ -84,7 +84,7 @@ namespace Gva.Api.Controllers.Aircrafts
                 IsCurrent = true,
                 OwnerIsOrg = true,
                 OperIsOrg = true,
-                LessorIsOrg = true,
+                LessorType = "organization",
                 Status = status
             };
 

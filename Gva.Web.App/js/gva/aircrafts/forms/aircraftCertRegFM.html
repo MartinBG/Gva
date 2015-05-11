@@ -93,24 +93,17 @@
   <div class="row">
     <div class="form-group col-md-4 col-sm-6">
       <label class="control-label" l10n-text="aircrafts.regFMDirective.leasingLessor"></label>
-      <div class="input-group">
-        <div class="input-group-btn">
-          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 40px" ng-disabled="form.$readonly">
-            {{model.lessorIsOrg? 'ЮЛ' : 'ФЛ'}}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a ng-click="model.lessorIsOrg = true" l10n-text="aircrafts.regFMDirective.organization"></a>
-            </li>
-            <li>
-              <a ng-click="model.lessorIsOrg = false" l10n-text="aircrafts.regFMDirective.person"></a>
-            </li>
-          </ul>
-        </div>
-        <sc-nomenclature ng-if="model.lessorIsOrg" class="form-control input-sm" ng-model="model.lessorOrganization" name="lessorOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
-        <sc-nomenclature ng-if="!model.lessorIsOrg" class="form-control input-sm" ng-model="model.lessorPerson" name="lessorPerson" alias="'persons'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
-        <sc-button type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="new('lessor')" ng-if="!form.$readonly"></sc-button>
+      <div class="input-group-btn">
+        <select name="lessorType" class="form-control input-sm" style="width: 110px" ng-model="model.lessorType" ng-readonly="form.$readonly" ng-required="true" ui-select2="{ placeholder: ' ', allowClear: true, minimumResultsForSearch: -1 }">
+          <option></option>
+          <option value="organization" l10n-text="aircrafts.regFMDirective.organization"></option>
+          <option value="person" l10n-text="aircrafts.regFMDirective.person"></option>
+          <option value="other" l10n-text="aircrafts.regFMDirective.other"></option>
+        </select>
+        <sc-nomenclature ng-if="model.lessorType === 'organization'" class="form-control input-sm" ng-model="model.lessorOrganization" name="lessorOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-nomenclature ng-if="model.lessorType === 'person'" class="form-control input-sm" ng-model="model.lessorPerson" name="lessorPerson" alias="'persons'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-text ng-if="model.lessorType  === 'other'" class="form-control input-sm" ng-model="model.lessorOther" name="other" ng-required="true" ng-readonly="form.$readonly"></sc-text>
+        <sc-button ng-if="model.lessorType === 'organization' || model.lessorType === 'person'" type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="new('lessor')" ng-if="!form.$readonly"></sc-button>
       </div>
     </div>
   </div>

@@ -376,6 +376,9 @@ namespace Gva.MigrationTool.Sets
                         s.tR83_Zapoved,
                         s.dR83_Data,
                         s.tLessor,
+                        lessor.tNameEN as lessorByNameBG,
+                        lessorAddressBG.tNameEN as lessorByAddrAndNameBG,
+                        lessorAddressEN.tNameEN as lessorByAddrAndNameEN,
                         s.tLessorAgreement,
                         s.dLeaseDate,
                         s.nStatus,
@@ -393,9 +396,9 @@ namespace Gva.MigrationTool.Sets
                         s.tDeDocCAA,
                         s.dDeDateCAA,
                         (case
-	                        when a.t_CofR_No LIKE 'II - %' then substring(a.t_CofR_No, 6, 10000)
-	                        when a.t_CofR_No LIKE 'II-%' then substring(a.t_CofR_No, 4, 10000)
-	                        else a.t_CofR_No end) as actRegNum,
+                           when a.t_CofR_No LIKE 'II - %' then substring(a.t_CofR_No, 6, 10000)
+                           when a.t_CofR_No LIKE 'II-%' then substring(a.t_CofR_No, 4, 10000)
+                           else a.t_CofR_No end) as actRegNum,
                         owner.tNameEN ownerNameEn,
                         oper.tNameEN operNameEn
                     from 
@@ -413,6 +416,9 @@ namespace Gva.MigrationTool.Sets
                     left outer join Acts a on a.n_Act_ID = s.nActID
                     left outer join Orgs owner on owner.nOrgID = s.nOwner
                     left outer join Orgs oper on oper.nOrgID = s.nOper
+                    left outer join Orgs lessor on lessor.tNameBG = tLessor
+                    left outer join Orgs lessorAddressBG on s.tLessor like lessorAddressBG.tNameBG + char(10) + lessorAddressBG.tAdrStreetBG + '%'
+                    left outer join Orgs lessorAddressEN on s.tLessor like lessorAddressEN.tNameEN + char(10) + lessorAddressEN.tAdrStreetEN + '%'
                 where {0} and s.nStatus != '0'",
                 new DbClause("s.nActID = {0}", aircraftId)
                 )
@@ -436,7 +442,11 @@ namespace Gva.MigrationTool.Sets
                         aircraftLimitation = noms["aircraftLimitationsFm"].ByCode(r.Field<string>("nLimitID")),
                         leasingDocNumber = r.Field<string>("tR83_Zapoved"),
                         leasingDocDate = Utils.FmToDate(r.Field<string>("dR83_Data")),
-                        leasingLessor = getOrgOrPerson(r.Field<string>("tLessor")),//TODO
+                        leasingLessor = getOrgOrPerson(r.Field<string>("tLessor")) ??
+                                        getOrgOrPerson(r.Field<string>("lessorByNameBG")) ??
+                                        getOrgOrPerson(r.Field<string>("lessorByAddrAndNameBG")) ??
+                                        getOrgOrPerson(r.Field<string>("lessorByAddrAndNameEN")),//TODO
+                        lessorName = r.Field<string>("tLessor"),
                         leasingAgreement = r.Field<string>("tLessorAgreement"),
                         leasingEndDate = Utils.FmToDate(r.Field<string>("dLeaseDate")),
                         status = noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")),
@@ -484,9 +494,10 @@ namespace Gva.MigrationTool.Sets
                                 r.aircraftLimitation,
                                 r.leasingDocNumber,
                                 r.leasingDocDate,
-                                lessorIsOrg = r.leasingLessor.Item1,
+                                lessorType = r.leasingLessor.Item2 != null ? "organization" : (r.leasingLessor.Item3 != null ? "person" : "other"),
                                 lessorOrganization = r.leasingLessor.Item2,
                                 lessorPerson = r.leasingLessor.Item3,
+                                lessorOther = r.leasingLessor.Item2 == null && r.leasingLessor.Item3 == null ? r.lessorName : null,
                                 r.leasingAgreement,
                                 r.leasingEndDate,
                                 status = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? noms["aircraftRegStatsesFm"].ByAlias("removedByOrder") : r.status,

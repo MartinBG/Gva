@@ -18,7 +18,9 @@
     };
 
     $scope['new'] = function (fieldName) {
-      if ($scope.model[fieldName + 'IsOrg']) {
+      var isOrg = fieldName !== 'lessor' ? 
+        $scope.model[fieldName + 'IsOrg'] : $scope.model.lessorType === 'organization';
+      if (isOrg) {
         var modalNewOrganization = scModal.open('newOrganization');
 
         modalNewOrganization.result.then(function (organizationId) {

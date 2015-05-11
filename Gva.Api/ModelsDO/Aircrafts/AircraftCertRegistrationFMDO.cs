@@ -53,6 +53,8 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public NomValue LessorPerson { get; set; }
 
+        public string LessorOther { get; set; }
+
         public NomValue Status { get; set; }
 
         public string LeasingAgreement { get; set; }
@@ -67,6 +69,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public bool? OperIsOrg { get; set; }
 
-        public bool? LessorIsOrg { get; set; }
+        public string LessorType { get; set; }
     }
 }
