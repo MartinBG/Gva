@@ -263,6 +263,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<Directive8>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ExportCert>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<NoiseCert>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<RegistrationCert>().As<IDataGenerator>().InstancePerLifetimeScope();
         }
     }
 }

@@ -9,7 +9,8 @@
     Aircrafts,
     AircraftCertRegistrationsFM,
     aircraftCertRegistration,
-    scMessage
+    scMessage,
+    scModal
   ) {
     var originalRegistration = _.cloneDeep(aircraftCertRegistration);
 
@@ -87,6 +88,17 @@
         ind: $stateParams.ind
       }, {reload: true});
     };
+
+    $scope.print = function () {
+      var params = {
+        lotId: $stateParams.id,
+        partIndex: $stateParams.ind
+      };
+
+      var modalInstance = scModal.open('printRegCert', params);
+
+      return modalInstance.opened;
+    };
   }
 
   CertRegsFMEditCtrl.$inject = [
@@ -96,7 +108,8 @@
     'Aircrafts',
     'AircraftCertRegistrationsFM',
     'aircraftCertRegistration',
-    'scMessage'
+    'scMessage',
+    'scModal'
   ];
 
   CertRegsFMEditCtrl.$resolve = {

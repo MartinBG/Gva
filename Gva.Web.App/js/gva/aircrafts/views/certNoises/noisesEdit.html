@@ -4,7 +4,7 @@
       <strong l10n-text="aircrafts.editNoise.title"></strong>
 
       <div class="pull-right">
-        <a ng-click="print()">
+        <a ng-click="print()" ng-show="!editMode">
           <span class="glyphicon glyphicon-print"></span>
         </a>
         <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editNoise.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">

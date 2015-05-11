@@ -1,0 +1,113 @@
+﻿using System;
+using System.Linq;
+using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.ModelsDO.Organizations;
+using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Repositories.OrganizationRepository;
+using Gva.Api.Repositories.PersonRepository;
+using Regs.Api.Models;
+using Regs.Api.Repositories.LotRepositories;
+
+namespace Gva.Api.WordTemplates
+{
+    public class RegistrationCert : IDataGenerator
+    {
+        private ILotRepository lotRepository;
+        private IPersonRepository personRepository;
+        private IOrganizationRepository organizationRepository;
+
+        public RegistrationCert(
+            ILotRepository lotRepository,
+            IPersonRepository personRepository,
+            IOrganizationRepository organizationRepository)
+        {
+            this.lotRepository = lotRepository;
+            this.personRepository = personRepository;
+            this.organizationRepository = organizationRepository;
+        }
+
+        public string[] TemplateNames
+        {
+            get
+            {
+                return new string[] { "reg_cert" };
+            }
+        }
+
+        public object GetData(int lotId, string path)
+        {
+            Lot lot = this.lotRepository.GetLotIndex(lotId);
+            AircraftDataDO aircraftData = lot.Index.GetPart<AircraftDataDO>("aircraftData").Content;
+            AircraftCertRegistrationFMDO registration = lot.Index.GetPart<AircraftCertRegistrationFMDO>(path).Content;
+
+            Tuple<string, string, string, string> ownerData = null;
+            Tuple<string, string, string, string> operatorData = null;
+
+            if(registration.OwnerOrganization != null)
+            {
+                ownerData = this.GetOrganizationNamesAndAddress(registration.OwnerOrganization.NomValueId);
+            }
+            else if(registration.OwnerPerson != null)
+            {
+               ownerData = this.GetPersonNamesAndAddress(registration.OwnerPerson.NomValueId);
+            }
+           
+            if(registration.OperOrganization != null)
+            {
+                operatorData = this.GetOrganizationNamesAndAddress(registration.OperOrganization.NomValueId);
+            }
+            else if(registration.OperPerson != null)
+            {
+                operatorData = this.GetPersonNamesAndAddress(registration.OperPerson.NomValueId);
+            }
+                
+            var json = new
+            {
+                root = new
+                {
+                    DOCUMENT_NUMBER = registration.CertNumber, 
+                    PRODUCER_ALT = aircraftData.AircraftProducer != null ? aircraftData.AircraftProducer.NameAlt: null,
+                    PRODUCER_DESIGNATION_ALT = aircraftData.ModelAlt, 
+                    REG_MARK = registration != null ? registration.RegMark : null,
+                    MSN = aircraftData.ManSN,
+                    OWNER_ADDRESS = ownerData != null ? ownerData.Item3 : null,
+                    OWNER_ADDRESS_ALT = ownerData != null ? ownerData.Item4 : null,
+                    OWNER_NAME = ownerData != null ? ownerData.Item1 : null,
+                    OWNER_NAME_ALT = ownerData != null ? ownerData.Item2 : null,
+                    OPERATOR_NAME = operatorData != null ? operatorData.Item1 : null,
+                    OPERATOR_NAME_ALT = operatorData != null ? operatorData.Item2 : null,
+                    OPERATOR_ADDRESS = operatorData != null ? operatorData.Item3 : null,
+                    OPERATOR_ADDRESS_ALT = operatorData != null ? operatorData.Item4 : null
+                }
+            };
+
+            return json;
+        }
+
+        private Tuple<string, string, string, string> GetPersonNamesAndAddress(int personId)
+        {
+            var person = this.personRepository.GetPerson(personId);
+            var personAddress = this.lotRepository.GetLotIndex(personId).Index
+                .GetParts<PersonAddressDO>("personAddresses")
+                    .Where(a => a.Content.Valid.Code == "Y")
+                    .FirstOrDefault();
+            string address = personAddress != null ? personAddress.Content.Address : null;
+            string addressAlt = personAddress != null ? personAddress.Content.AddressAlt : null;
+
+            return new Tuple<string, string, string, string>(person.Names, person.NamesAlt, address, addressAlt);
+        }
+
+        private Tuple<string, string, string, string> GetOrganizationNamesAndAddress(int organizationId)
+        {
+            var organization = this.organizationRepository.GetOrganization(organizationId);
+            var organizationAddress = this.lotRepository.GetLotIndex(organizationId).Index
+                .GetParts<OrganizationAddressDO>("organizationAddresses")
+                    .Where(a => a.Content.Valid.Code == "Y")
+                    .FirstOrDefault();
+            string address = organizationAddress != null ? organizationAddress.Content.Address : null;
+            string addressAlt = organizationAddress != null ? organizationAddress.Content.AddressAlt : null;
+
+            return new Tuple<string, string, string, string>(organization.Name, organization.NameAlt, address, addressAlt);
+        }
+    }
+}

@@ -742,6 +742,12 @@
           print: 'Преглед за печат',
           generateNew: 'Прегенерирай'
         },
+        printRegCertModal: {
+          title: 'Принтиране на удостоверение за шум',
+          close: 'Затвори',
+          print: 'Преглед за печат',
+          generateNew: 'Прегенерирай'
+        },
         aircraftScannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',

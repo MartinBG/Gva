@@ -235,6 +235,38 @@ namespace Gva.Api.Controllers
             return this.printRepository.ReturnResponseMessage(url);
         }
 
+        [Route("api/printRegCert")]
+        public HttpResponseMessage GetRegCert(int lotId, int partIndex, bool generateNew = false)
+        {
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            string regPath = string.Format("aircraftCertRegistrationsFM/{0}", partIndex);
+            var regPart = lot.Index.GetPart<AircraftCertRegistrationFMDO>(regPath);
+            string templateName = "reg_cert";
+
+            Guid regCertBlobKey;
+            if (regPart.Content.PrintedRegCertFileId.HasValue && !generateNew)
+            {
+                regCertBlobKey = this.unitOfWork.DbContext.Set<GvaFile>()
+                    .Where(f => f.GvaFileId == regPart.Content.PrintedRegCertFileId.Value)
+                    .Single()
+                    .FileContentId;
+            }
+            else
+            {
+                using (var wordDocStream = this.GenerateWordDocument(lotId, regPath, templateName, null, null))
+                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
+                {
+                    regCertBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
+                    this.UpdatePart<AircraftCertRegistrationFMDO>(regCertBlobKey, regPart, lot, templateName, regPath, "PrintedRegCertFileId", regPart.Content);
+                }
+            }
+            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline",
+                regCertBlobKey,
+                templateName);
+
+            return this.printRepository.ReturnResponseMessage(url);
+        }
+
         [Route("api/printApplication")]
         public HttpResponseMessage GetApplicationNote(int lotId, int partIndex)
         {
