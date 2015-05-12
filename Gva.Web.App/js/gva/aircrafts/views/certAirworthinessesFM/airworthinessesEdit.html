@@ -24,11 +24,11 @@
 
     <div class="well-sm panel-body">
       <ng-form class="form-inline" sc-validate="{}" sc-form-readonly="!isEditAw"" name="aircraftCertAirworthinessForm">
-        <gva-aircraft-cert-airworthiness ng-if="certTypeAlias !== '15b' && certTypeAlias !== '15a' && certTypeAliass !== '15bReissue' && certTypeAlias !== '15bReissue'" name="aircraftCertAirworthinessForm" ng-model="airworthiness"
+        <gva-aircraft-cert-airworthiness ng-if="certTypeAlias !== '15b' && certTypeAlias !== '15a' && certTypeAlias !== '15aReissue' && certTypeAlias !== '15bReissue'" name="aircraftCertAirworthinessForm" ng-model="airworthiness"
           sc-form-params="{ lotId: lotId }">
         </gva-aircraft-cert-airworthiness>
 
-        <gva-aircraft-cert-airworthiness-form-15 ng-if="certTypeAlias === '15b' || certTypeAlias === '15a' || certTypeAlias === '15bReissue' || certTypeAlias === '15bReissue'" name="aircraftCertAirworthinessForm" ng-model="airworthiness"
+        <gva-aircraft-cert-airworthiness-form-15 ng-if="certTypeAlias === '15b' || certTypeAlias === '15a' || certTypeAlias === '15aReissue' || certTypeAlias === '15bReissue'" name="aircraftCertAirworthinessForm" ng-model="airworthiness"
           sc-form-params="{ lotId: lotId }">
         </gva-aircraft-cert-airworthiness-form-15>
       </ng-form>
