@@ -4,15 +4,13 @@ using Common.Api.Models;
 
 namespace Gva.Api.ModelsDO.Aircrafts
 {
-    public class AircraftRadiosDO
+    public class AircraftCertRadioEntryDO
     {
-        public NomValue AircraftRadioType { get; set; }
+        public NomValue Equipment { get; set; }
 
         public string Count { get; set; }
 
-        public string Producer { get; set; }
-
-        public string Model { get; set; }
+        public string OtherType { get; set; }
 
         public string Power { get; set; }
 

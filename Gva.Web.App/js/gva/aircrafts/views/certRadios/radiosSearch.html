@@ -3,20 +3,16 @@
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.aircrafts.view.radios.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.valid.name" title="aircrafts.radioSearch.valid">
-  </sc-column>
-  <sc-column data="part.certNumber" title="aircrafts.radioSearch.certNumber">
+  <sc-column data="part.aslNumber" title="aircrafts.radioSearch.aslNumber">
   </sc-column>
   <sc-column data="part.issueDate" title="aircrafts.radioSearch.issueDate" type="date">
   </sc-column>
-  <sc-column data="part.validToDate" title="aircrafts.radioSearch.validToDate" type="date">
+  <sc-column data="part.regMark" title="aircrafts.radioSearch.regMark">
   </sc-column>
-  <sc-column data="part.radios.aircraftRadioType.name" title="aircrafts.radioSearch.aircraftRadioType">
+  <sc-column data="part.actType" title="aircrafts.radioSearch.actType">
   </sc-column>
-  <sc-column data="part.radios.count" title="aircrafts.radioSearch.count">
+  <sc-column data="part.ownerOper.name" title="aircrafts.radioSearch.ownerOper">
   </sc-column>
-  <sc-column data="part.radios.producer" title="aircrafts.radioSearch.producer" class="wrap">
-  </sc-column>
-  <sc-column data="part.radios.model" title="aircrafts.radioSearch.model" class="wrap">
+  <sc-column data="part.inspector.inspector.name || part.inspector.other" title="aircrafts.radioSearch.inspector" class="wrap">
   </sc-column>
 </sc-datatable>

@@ -3089,14 +3089,14 @@ namespace Gva.MigrationTool.Nomenclatures
 
             var nomInfo = new Dictionary<string, Tuple<string, string>>()
             {
-                { "TRM" , new Tuple<string,string>("Transmitters"    , "Transmitters"    )},
-                { "ELT" , new Tuple<string,string>("E L T"           , "E L T"           )},
-                { "TRS" , new Tuple<string,string>("Transponders"    , "Transponders"    )},
-                { "WR"  , new Tuple<string,string>("Weather radar"   , "Weather radar"   )},
-                { "TCAS", new Tuple<string,string>("TCAS"            , "TCAS"            )},
-                { "DME" , new Tuple<string,string>("DME"             , "DME"             )},
-                { "RA"  , new Tuple<string,string>("Radio Altimeter" , "Radio Altimeter" )}
-
+                { "TRM" , new Tuple<string,string>("Предаватели"         , "Transmitters"    )},
+                { "ELT" , new Tuple<string,string>("Аварийни предаватели", "E L T"           )},
+                { "TRS" , new Tuple<string,string>("Транспондер"         , "Transponders"    )},
+                { "WR"  , new Tuple<string,string>("Метео радар"         , "Weather radar"   )},
+                { "TCAS", new Tuple<string,string>("ТКАС"                , "TCAS"            )},
+                { "DME" , new Tuple<string,string>("ДМЕ"                 , "DME"             )},
+                { "RA"  , new Tuple<string,string>("Висотомер"           , "Radio Altimeter" )},
+                { "Otr" , new Tuple<string,string>("Друг"                , "Other"           )}
             };
 
             noms["aircraftRadiotypes"] = new Dictionary<string, NomValue>();

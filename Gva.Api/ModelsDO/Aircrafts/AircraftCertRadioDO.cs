@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
 
@@ -6,18 +7,25 @@ namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftCertRadioDO
     {
-        [Required(ErrorMessage = "CertNumber is required.")]
-        public string CertNumber { get; set; }
+        public AircraftCertRadioDO()
+        {
+            this.Entries = new List<AircraftCertRadioEntryDO>();
+        }
 
-        [Required(ErrorMessage = "IssueDate is required.")]
+        public string AslNumber { get; set; }
+
         public DateTime IssueDate { get; set; }
 
-        [Required(ErrorMessage = "ValidToDate is required.")]
-        public DateTime? ValidToDate { get; set; }
+        public string RegMark { get; set; }
 
-        [Required(ErrorMessage = "Valid is required.")]
-        public NomValue Valid { get; set; }
+        public string ActType { get; set; }
 
-        public AircraftRadiosDO Radios { get; set; }
+        public NomValue OwnerOper { get; set; }
+
+        public AircraftInspectorDO Inspector { get; set; }
+
+        public bool? OwnerOperIsOrg { get; set; }
+
+        public List<AircraftCertRadioEntryDO> Entries { get; set; }
     }
 }

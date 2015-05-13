@@ -198,6 +198,15 @@
       templateUrl: 'js/gva/aircrafts/forms/aircraftCertRadioView.html'
     });
     scaffoldingProvider.form({
+      name: 'gvaAircraftRadioEntry',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftCertRadioEntry.html'
+    });
+    scaffoldingProvider.form({
+      name: 'gvaAircraftCertRadio',
+      templateUrl: 'js/gva/aircrafts/forms/aircraftCertRadio.html',
+      controller: 'AircraftCertRadioCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'gvaAircraftCertSmod',
       templateUrl: 'js/gva/aircrafts/forms/aircraftCertSmod.html',
       controller: 'AircraftCertSmodCtrl'
@@ -215,10 +224,6 @@
     scaffoldingProvider.form({
       name: 'gvaAircraftCertNoise',
       templateUrl: 'js/gva/aircrafts/forms/aircraftCertNoise.html'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaAircraftCertRadio',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertRadio.html'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertRegFm',
@@ -606,7 +611,8 @@
     .modal('printAirworthiness'     , 'js/gva/aircrafts/modals/airworthinesses/printAirworthinessModal.html' , 'PrintAirworthinessModalCtrl' , 'xs-2')
     .modal('printExportCert'        , 'js/gva/aircrafts/modals/dereg/printExportCertModal.html'              , 'PrintExportCertModalCtrl'    , 'xs-2')
     .modal('printNoiseCert'         , 'js/gva/aircrafts/modals/noises/printNoiseCertModal.html'              , 'PrintNoiseCertModalCtrl'     , 'xs-2')
-    .modal('printRegCert'           , 'js/gva/aircrafts/modals/registrations/printRegCertModal.html'         , 'PrintRegCertModalCtrl'       , 'xs-2');
+    .modal('printRegCert'           , 'js/gva/aircrafts/modals/registrations/printRegCertModal.html'         , 'PrintRegCertModalCtrl'       , 'xs-2')
+    .modal('manageRadioEntry'       , 'js/gva/aircrafts/modals/radios/manageRadioEntryModal.html'            , 'ManageRadioEntryModalCtrl'   , 'sm-5');
   }])
     .config(['$stateProvider', function ($stateProvider) {
     $stateProvider

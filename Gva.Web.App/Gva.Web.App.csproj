@@ -88,12 +88,17 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessForm15.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessForm15Ctrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegDeregFMCtrl.js" />
+    <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtCloseCtrl.js" />
+    <Content Include="js\gva\aircrafts\forms\aircraftCertRadioCtrl.js" />
+    <Content Include="js\gva\aircrafts\forms\aircraftCertRadioEntry.html" />
     <Content Include="js\gva\aircrafts\modals\airworthinesses\printAirworthinessModal.html" />
     <Content Include="js\gva\aircrafts\modals\airworthinesses\printAirworthinessModalCtrl.js" />
     <Content Include="js\gva\aircrafts\modals\dereg\printExportCertModal.html" />
     <Content Include="js\gva\aircrafts\modals\dereg\printExportCertModalCtrl.js" />
     <Content Include="js\gva\aircrafts\modals\noises\printNoiseCertModal.html" />
     <Content Include="js\gva\aircrafts\modals\noises\printNoiseCertModalCtrl.js" />
+    <Content Include="js\gva\aircrafts\modals\radios\manageRadioEntryModal.html" />
+    <Content Include="js\gva\aircrafts\modals\radios\manageRadioEntryModalCtrl.js" />
     <Content Include="js\gva\aircrafts\modals\registrations\printRegCertModal.html" />
     <Content Include="js\gva\aircrafts\modals\registrations\printRegCertModalCtrl.js" />
     <Content Include="js\gva\aircrafts\resources\aircrafts.js" />

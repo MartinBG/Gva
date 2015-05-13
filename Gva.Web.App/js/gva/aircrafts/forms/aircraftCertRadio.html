@@ -1,21 +1,88 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.certNumber" ng-required="true" l10n-text="aircrafts.radioDirective.certNumber" class="col-md-2 col-sm-6"></sc-field>
-    <sc-field type="date" ng-model="model.part.issueDate" ng-required="true" l10n-text="aircrafts.radioDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="date" ng-model="model.part.validToDate" ng-required="true" l10n-text="aircrafts.radioDirective.validToDate" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="aircrafts.radioDirective.valid" class="col-sm-2"></sc-field>
+    <sc-field type="text" ng-model="model.aslNumber" ng-required="true" l10n-text="aircrafts.radioDirective.ASLNumber" class="col-md-2 col-sm-6"></sc-field>
+    <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.radioDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.regMark" ng-required="true" l10n-text="aircrafts.radioDirective.regMark" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.actType" ng-required="true" l10n-text="aircrafts.radioDirective.actType" class="col-sm-2"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.radios.aircraftRadioType" alias="'aircraftRadioTypes'" l10n-text="aircrafts.radioDirective.aircraftRadioType" class="col-mid-4 col-sm-6"></sc-field>
-    <sc-field type="text" ng-model="model.part.radios.count" l10n-text="aircrafts.radioDirective.count" class="col-md-2 col-sm-4"></sc-field>
+    <div class="col-sm-7 col-md-5">
+      <label class="control-label" l10n-text="aircrafts.radioDirective.ownerOper"></label>
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 40px" ng-disabled="form.$readonly">
+            <span l10n-text="aircrafts.radioDirective.organization" ng-if="model.ownerOperIsOrg"></span>
+            <span l10n-text="aircrafts.radioDirective.person" ng-if="!model.ownerOperIsOrg"></span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a ng-click="model.ownerOperIsOrg = true" l10n-text="aircrafts.radioDirective.organization"></a>
+            </li>
+            <li>
+              <a ng-click="model.ownerOperIsOrg = false" l10n-text="aircrafts.radioDirective.person"></a>
+            </li>
+          </ul>
+        </div>
+        <sc-nomenclature ng-if="model.ownerOperIsOrg" class="form-control input-sm" ng-model="model.ownerOper" name="ownerOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-nomenclature ng-if="!model.ownerOperIsOrg" class="form-control input-sm" ng-model="model.ownerOper" name="ownerPerson" alias="'persons'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-button type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="newOwnerOper()" ng-if="!form.$readonly"></sc-button>
+      </div>
+    </div>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.radios.producer" l10n-text="aircrafts.radioDirective.producer" class="col-md-3 col-sm-5"></sc-field>
-    <sc-field type="text" ng-model="model.part.radios.model" l10n-text="aircrafts.radioDirective.model" class="col-md-3 col-sm-5"></sc-field>
+    <div class="col-sm-12 col-md-6" ng-class="{ 'has-error': form.$validated && !form.$readonly && (form['inspectorType'].$invalid || form['inspector'].$invalid || form['other'].$invalid) }">
+      <label class="control-label" l10n-text="aircrafts.radioDirective.checkedBy"></label>
+      <sc-validation-error field-name="inspectorType" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error ng-if="inspectorType  === 'inspector'" field-name="inspector" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error ng-if="inspectorType  === 'other'" field-name="other" validations="{required: null}"></sc-validation-error>
+      <div class="input-group" style="width:100%">
+        <select name="inspectorType" class="form-control input-sm" style="width: 110px" ng-model="inspectorType" ng-readonly="form.$readonly" ng-required="true" ui-select2="{ placeholder: ' ', allowClear: true, minimumResultsForSearch: -1 }">
+          <option></option>
+          <option value="inspector" l10n-text="aircrafts.radioDirective.inspector"></option>
+          <option value="other" l10n-text="aircrafts.radioDirective.other"></option>
+        </select>
+        <sc-nomenclature ng-if="inspectorType  === 'inspector'" class="form-control input-sm" ng-model="model.inspector.inspector" name="inspector" alias="'inspectors'" ng-required="true" params="{limit: null}" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-text ng-if="inspectorType  === 'other'" class="form-control input-sm" ng-model="model.inspector.other" name="other" ng-required="true" ng-readonly="form.$readonly"></sc-text>
+      </div>
+    </div>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.radios.power" l10n-text="aircrafts.radioDirective.power" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="text" ng-model="model.part.radios.class" l10n-text="aircrafts.radioDirective.class" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="text" ng-model="model.part.radios.bandwidth" l10n-text="aircrafts.radioDirective.bandwidth" class="col-md-2 col-sm-4"></sc-field>
+    <div class="form-group col-sm-12">
+      <div class="table-buttons" ng-if="!form.$readonly">
+        <sc-button btn-click="addNewEntry()" text="aircrafts.radioDirective.addNewEntry" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button>
+      </div>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th width="1px" ng-if="!form.$readonly && model.entries.length"></th>
+            <th width="1px" ng-if="!form.$readonly && model.entries.length"></th>
+            <th l10n-text="aircrafts.radioDirective.equipment"></th>
+            <th l10n-text="aircrafts.radioDirective.count"></th>
+            <th l10n-text="aircrafts.radioDirective.power"></th>
+            <th l10n-text="aircrafts.radioDirective.classOfEmission"></th>
+            <th l10n-text="aircrafts.radioDirective.bandwidth"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sort-disabled" ng-if="!model.entries.length">
+            <td colspan="6" class="text-center" l10n-text="aircrafts.radioDirective.noEntries"></td>
+          </tr>
+          <tr ng-repeat="entry in model.entries">
+            <td ng-if="!form.$readonly && model.entries.length">
+              <sc-button name="changeBtn" class="btn btn-xs btn-primary" btn-click="editEntry(entry)" icon="glyphicon-pencil"></sc-button>
+            </td>
+            <td ng-if="!form.$readonly && model.entries.length">
+              <sc-button name="deleteBtn" class="btn btn-xs btn-danger" btn-click="removeEntry(entry)" icon="glyphicon-remove"></sc-button>
+            </td>
+            <td>{{entry.equipment.code}}</td>
+            <td>{{entry.count}}</td>
+            <td>{{entry.power}}</td>
+            <td>{{entry.class}}</td>
+            <td>{{entry.bandwidth}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </ng-form>

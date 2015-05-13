@@ -748,6 +748,11 @@
           print: 'Преглед за печат',
           generateNew: 'Прегенерирай'
         },
+        manageRadioEntryModal: {
+          title: 'Ново оборудване',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
         aircraftScannedDocumentDirective: {
           title: 'Електронен (сканиран) документ',
           fileName: 'Име на файл',
@@ -967,15 +972,13 @@
           deleteNoise: 'Изтрий'
         },
         radioSearch: {
-          valid: 'Валидно',
-          certNumber: '№',
+          newRadio: 'Ново разрешително',
           issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          aircraftRadioType: 'Тип на радиооборудването',
-          count: 'Брой',
-          producer: 'Производител',
-          model: 'Модел',
-          newRadio: 'Ново разрешително'
+          inspector: 'Заверил',
+          aslNumber: 'ASL №',
+          regMark: 'Регистрационен знак',
+          actType: 'Тип (модел)',
+          ownerOper: 'Собственик/Оператор'
         },
         newRadio: {
           title: 'Ново разрешително за използване на радиостанция',
@@ -1136,17 +1139,32 @@
           additionalModificationAlt: 'Допълнителна модификация (англ.)'
         },
         radioDirective: {
-          certNumber: '№',
+          ASLNumber: 'ASL №',
           issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          valid: 'Валидно',
-          aircraftRadioType: 'Тип на радиооборудването',
+          regMark: 'Регистрационен знак',
+          actType: 'Тип (модел)',
+          ownerOper: 'Собственик/Оператор',
+          equipment: 'Апаратура',
           count: 'Брой',
-          producer: 'Производител',
-          model: 'Модел',
           power: 'Мощност',
-          'class': 'Клас на излъчване',
-          bandwidth: 'Честотна лента'
+          classOfEmission: 'Клас на излъчване',
+          bandwidth: 'Честотни ленти или честоти',
+          addNewEntry: 'Добави апаратура',
+          otherType: 'Вид',
+          noEntries: 'Няма данни',
+          organization: 'ЮЛ',
+          person: 'ФЛ',
+          checkedBy: 'Заверил',
+          inspector: 'Инспектор ГВА',
+          other: 'Друг'
+        },
+        radioEntryDirective: {
+          equipment: 'Апаратура',
+          count: 'Брой',
+          power: 'Мощност',
+          classOfEmission: 'Клас на излъчване',
+          bandwidth: 'Честотни ленти или честоти',
+          otherType: 'Вид'
         },
         regFMDirective: {
           orderNumber: 'No на заповедта',

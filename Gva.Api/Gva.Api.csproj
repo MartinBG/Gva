@@ -169,7 +169,7 @@
     <Compile Include="ModelsDO\Aircrafts\AircraftDataDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftInspectionDO.cs" />
-    <Compile Include="ModelsDO\Aircrafts\AircraftRadiosDO.cs" />
+    <Compile Include="ModelsDO\Aircrafts\AircraftCertRadioEntryDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftDocumentDebtFMViewDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftRegistrationDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\ActNumberDO.cs" />
