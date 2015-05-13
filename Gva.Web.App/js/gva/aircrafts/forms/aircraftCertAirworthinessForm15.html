@@ -1,21 +1,32 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="nomenclature" ng-if="model.partIndex" ng-readonly="model.partIndex" ng-model="model.part.airworthinessCertificateType" ng-required="true" params="{ lotId: lotId}" alias="'airworthinessCertificateTypes'" l10n-text="aircrafts.airworthinessForm15Directive.airworthinessCertificateType" class="col-md-6 col-sm-8"></sc-field>
+    <sc-field type="nomenclature" ng-model="model.registration" alias="'aircraftsRegistrations'" ng-required="true" params="{ lotId: lotId }" l10n-text="aircrafts.airworthinessForm15Directive.registration" class="col-md-6 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="nomenclature" ng-model="model.part.registration" alias="'aircraftsRegistrations'" ng-required="true" params="{ lotId: lotId }" l10n-text="aircrafts.airworthinessForm15Directive.registration" class="col-md-6 col-sm-8"></sc-field>
+    <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessForm15Directive.issueDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="date" ng-model="model.part.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessForm15Directive.issueDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.validFromDate" ng-required="true" l10n-text="aircrafts.airworthinessForm15Directive.validFromDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="date" ng-model="model.validToDate" l10n-text="aircrafts.airworthinessForm15Directive.validToDate" class="col-md-2 col-sm-4"></sc-field>
+  </div>
+  <div class="row" ng-if="model.airworthinessCertificateType.alias === '15aReissue' || model.airworthinessCertificateType.alias === '15bReissue'">
+    <sc-field type="nomenclature" ng-model="model.organization" alias="'organizations'" l10n-text="aircrafts.airworthinessForm15Directive.organization" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="date" ng-model="model.part.validFromDate" ng-required="true" l10n-text="aircrafts.airworthinessForm15Directive.validFromDate" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="date" ng-model="model.part.validToDate" l10n-text="aircrafts.airworthinessForm15Directive.validToDate" class="col-md-2 col-sm-4"></sc-field>
-  </div>
-  <div class="row" ng-if="model.part.airworthinessCertificateType.alias === '15aReissue' || model.part.airworthinessCertificateType.alias === '15bReissue'">
-    <sc-field type="nomenclature" ng-model="model.part.organization" alias="'organizations'" l10n-text="aircrafts.airworthinessForm15Directive.organization" class="col-md-4 col-sm-8"></sc-field>
-  </div>
-  <div class="row">
-    <gva-aircraft-inspector name="inspector" ng-model="model.part.inspector" readonly="readonly" sc-form-params="{ inspectorTypes: ['examiner','other'] }"></gva-aircraft-inspector>
+    <div class="col-sm-12 col-md-6" ng-class="{ 'has-error': form.$validated && !form.$readonly && (form['inspectorType'].$invalid || form['examiner'].$invalid || form['other'].$invalid) }">
+      <label class="control-label" l10n-text="aircrafts.inspectorDirective.checkedBy"></label>
+      <sc-validation-error field-name="inspectorType" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error ng-if="inspectorType  === 'examiner'" field-name="examiner" validations="{required: null}"></sc-validation-error>
+      <sc-validation-error ng-if="inspectorType  === 'other'" field-name="other" validations="{required: null}"></sc-validation-error>
+      <div class="input-group" style="width:100%">
+        <select name="inspectorType" class="form-control input-sm" style="width: 110px" ng-model="inspectorType" ng-readonly="form.$readonly" ng-required="true" ui-select2="{ placeholder: ' ', allowClear: true, minimumResultsForSearch: -1 }">
+          <option></option>
+          <option value="examiner" l10n-text="aircrafts.inspectorDirective.examiner"></option>
+          <option value="other" l10n-text="aircrafts.inspectorDirective.other"></option>
+        </select>
+        <sc-nomenclature ng-if="inspectorType  === 'examiner'" class="form-control input-sm" ng-model="model.inspector.examiner" name="examiner" alias="'awExaminers'" ng-required="true" params="{limit: null}" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-text ng-if="inspectorType  === 'other'" class="form-control input-sm" ng-model="model.inspector.other" name="other" ng-required="true" ng-readonly="form.$readonly"></sc-text>
+      </div>
+    </div>
   </div>
 </ng-form>

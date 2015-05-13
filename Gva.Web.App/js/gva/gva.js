@@ -242,7 +242,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftDocumentDebtClose',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftDocumentDebtClose.html'
+      templateUrl: 'js/gva/aircrafts/forms/aircraftDocumentDebtClose.html',
+      controller: 'AircraftDocumentDebtCloseCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftDocumentOther',

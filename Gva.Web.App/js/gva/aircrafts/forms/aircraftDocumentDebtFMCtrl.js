@@ -20,6 +20,18 @@
 
       return modalNewOrganization.opened;
     };
+
+    $scope.$watch('model.inspector', function (inspectorModel) {
+      if (!inspectorModel) {
+        return;
+      }
+
+      if (inspectorModel.inspector) {
+        $scope.inspectorType = 'inspector';
+      } else if (inspectorModel.other) {
+        $scope.inspectorType = 'other';
+      }
+    });
   }
 
   AircraftDocumentDebtFMCtrl.$inject = ['$scope', 'Nomenclatures', 'scModal', 'scFormParams'];

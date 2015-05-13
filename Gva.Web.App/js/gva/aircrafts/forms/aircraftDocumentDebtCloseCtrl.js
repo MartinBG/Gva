@@ -2,8 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function AircraftCertAirworthinessCtrl($scope, scFormParams) {
-    $scope.lotId = scFormParams.lotId;
+  function AircraftDocumentDebtCloseCtrl($scope) {
     $scope.$watch('model.inspector', function (inspectorModel) {
       if (!inspectorModel) {
         return;
@@ -17,8 +16,7 @@
     });
   }
 
-  AircraftCertAirworthinessCtrl.$inject = ['$scope', 'scFormParams'];
+  AircraftDocumentDebtCloseCtrl.$inject = ['$scope'];
 
-  angular.module('gva').controller('AircraftCertAirworthinessCtrl',
-    AircraftCertAirworthinessCtrl);
+  angular.module('gva').controller('AircraftDocumentDebtCloseCtrl', AircraftDocumentDebtCloseCtrl);
 }(angular));
