@@ -228,17 +228,6 @@ form.card input.form-control[disabled]{
 .m_top_10{
 	margin-top: 10px;
 }
-.accordion-inner {
-	padding: 5px 10px 10px 10px !important;
-}
-.accordion-group {
-	margin-top: 5px !important;
-	margin-bottom: 0px !important;
-	border-color: #DDDDDD !important;
-}
-.accordion {
-	margin-bottom: 0px !important;
-}
 .select2-container.input-sm .select2-choices .select2-search-field input,
 .input-group-sm .select2-container .select2-choices .select2-search-field input {
 	height: 26px;

@@ -211,43 +211,6 @@ form.card input.form-control[disabled]
   cursor: pointer;
 }
 
-/*TODO Remove accordion classes*/
-/*.accordion
-{
-  margin-bottom: 16px;
-}
-
-.accordion-group
-{
-  margin-bottom: 2px;
-  border: 1px solid #e5e5e5;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-}
-
-.accordion-heading
-{
-  border-bottom: 0;
-}
-
-.accordion-heading .accordion-toggle
-{
-  display: block;
-  padding: 8px 15px;
-}
-
-.accordion-toggle
-{
-  cursor: pointer;
-}
-
-.accordion-inner
-{
-  padding: 9px 15px;
-  border-top: 1px solid #e5e5e5;
-}*/
-
 /* Initial loader */
 #initial-loader
 {
@@ -433,10 +396,6 @@ table.sc-data-table th.sorting span
 
 #menu-navigation a, #app-case a{
   cursor: pointer;
-}
-
-.accordion-toggle a {
-    cursor: pointer;
 }
 
 table.table thead th {
