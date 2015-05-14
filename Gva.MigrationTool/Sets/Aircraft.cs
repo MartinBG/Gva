@@ -7,8 +7,9 @@ using System.Linq;
 using System.Threading;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
-using Newtonsoft.Json.Linq;
 using Gva.Api.CommonUtils;
+using Gva.Api.ModelsDO.Aircrafts;
+using Newtonsoft.Json.Linq;
 using Oracle.ManagedDataAccess.Client;
 
 namespace Gva.MigrationTool.Sets
@@ -21,6 +22,7 @@ namespace Gva.MigrationTool.Sets
         private Func<Owned<AircraftFmLotCreator>> aircraftFmLotCreatorFactory;
         private Func<Owned<AircraftApexLotMigrator>> aircraftApexLotMigratorFactory;
         private Func<Owned<AircraftFmLotMigrator>> aircraftFmLotMigratorFactory;
+        private Func<Owned<AircraftRadioCertsMigrator>> aircraftRadioCertsMigratorFactory;
 
         public Aircraft(
             OracleConnection oracleConn,
@@ -28,7 +30,8 @@ namespace Gva.MigrationTool.Sets
             Func<Owned<AircraftApexLotCreator>> aircraftApexLotCreatorFactory,
             Func<Owned<AircraftFmLotCreator>> aircraftFmLotCreatorFactory,
             Func<Owned<AircraftApexLotMigrator>> aircraftApexLotMigratorFactory,
-            Func<Owned<AircraftFmLotMigrator>> aircraftFmLotMigratorFactory)
+            Func<Owned<AircraftFmLotMigrator>> aircraftFmLotMigratorFactory,
+            Func<Owned<AircraftRadioCertsMigrator>> aircraftRadioCertsMigratorFactory)
         {
             this.oracleConn = oracleConn;
             this.sqlConn = sqlConn;
@@ -36,6 +39,7 @@ namespace Gva.MigrationTool.Sets
             this.aircraftFmLotCreatorFactory = aircraftFmLotCreatorFactory;
             this.aircraftApexLotMigratorFactory = aircraftApexLotMigratorFactory;
             this.aircraftFmLotMigratorFactory = aircraftFmLotMigratorFactory;
+            this.aircraftRadioCertsMigratorFactory = aircraftRadioCertsMigratorFactory;
         }
 
         public Tuple<Dictionary<int, int>, Dictionary<string, int>, Dictionary<int, JObject>> createAircraftsLots(Dictionary<string, Dictionary<string, NomValue>> noms)
@@ -87,7 +91,7 @@ namespace Gva.MigrationTool.Sets
                     aircraftLotIdToAircraftNom.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
         }
 
-        public void migrateAircrafts(
+        public ConcurrentDictionary<string, int> migrateAircrafts(
             Dictionary<string, Dictionary<string, NomValue>> noms,
             Dictionary<int, int> personIdToLotId,
             Dictionary<int, int> aircraftApexIdtoLotId,
@@ -121,6 +125,7 @@ namespace Gva.MigrationTool.Sets
 
             // use the keys in aircraftFmIdtoLotId because some aircrafts have duplicate MSNs and may have been skipped
             ConcurrentQueue<string> aircraftFmIds = new ConcurrentQueue<string>(aircraftFmIdtoLotId.Keys);
+            ConcurrentDictionary<string, int> regMarkToLotId  = new ConcurrentDictionary<string, int>();
 
             Utils.RunParallel("ParallelMigrations", ct,
                 () => this.aircraftFmLotMigratorFactory().Value,
@@ -128,13 +133,15 @@ namespace Gva.MigrationTool.Sets
                 {
                     using (aircraftFmLotMigrator)
                     {
-                        aircraftFmLotMigrator.StartMigrating(noms, aircraftFmIdtoLotId, getPersonByApexId, getPersonByFmOrgName, getOrgByFmOrgName, aircraftFmIds, cts, ct);
+                        aircraftFmLotMigrator.StartMigrating(noms, aircraftFmIdtoLotId, getPersonByApexId, getPersonByFmOrgName, getOrgByFmOrgName, aircraftFmIds, regMarkToLotId, cts, ct);
                     }
                 })
                 .Wait();
 
             timer.Stop();
             Console.WriteLine("Aircraft migration time - {0}", timer.Elapsed.TotalMinutes);
+
+            return regMarkToLotId;
         }
 
         private IList<string> getAircraftFmIds()
@@ -168,6 +175,33 @@ namespace Gva.MigrationTool.Sets
             }
 
             return ids.ToList();
+        }
+
+        public void migrateAircraftRadioCerts(Dictionary<string, Dictionary<string, NomValue>> noms, Dictionary<int, List<AircraftCertRadioDO>> radios)
+        {
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            CancellationTokenSource cts = new CancellationTokenSource();
+            CancellationToken ct = cts.Token;
+
+            ConcurrentDictionary<int, List<AircraftCertRadioDO>> radiosByAircraftLotId =
+                new ConcurrentDictionary<int, List<AircraftCertRadioDO>>(radios);
+            ConcurrentQueue<int> radiosByLotId = new ConcurrentQueue<int>(radios.Keys);
+
+            Utils.RunParallel("ParallelMigrations", ct,
+                () => this.aircraftRadioCertsMigratorFactory().Value,
+                (aircraftRadioCertsMigrator) =>
+                {
+                    using (aircraftRadioCertsMigrator)
+                    {
+                        aircraftRadioCertsMigrator.StartMigrating(noms, radiosByAircraftLotId, radiosByLotId, cts, ct);
+                    }
+                })
+                .Wait();
+
+            timer.Stop();
+            Console.WriteLine("Aircraft radio certs migration time - {0}", timer.Elapsed.TotalMinutes);
         }
     }
 }

@@ -112,6 +112,8 @@ namespace Gva.MigrationTool.Sets
             Func<string, JObject> getOrgByFmOrgName,
             //intput
             ConcurrentQueue<string> aircraftFmIds,
+            //output
+            ConcurrentDictionary<string, int> regMarkToLotId,
             //cancellation
             CancellationTokenSource cts,
             CancellationToken ct)
@@ -157,14 +159,15 @@ namespace Gva.MigrationTool.Sets
                 {"Н.Василев"        , 5463},
                 {"Н.Джамбов"        , 2286},
                 {"Н.Начев"          , 1150},
-                {"Н.Тотева"         , -1},//TODO
+                {"Н.Тотева"         , 7737},
                 {"П.МЛАДЕНОВ"       , -1},//TODO
                 {"П.Юнашкова"       , 2349},
                 {"С.Живков"         , 2396},
                 {"С.Пенчев"         , 803},
                 {"С.Тодоров"        , 5465},
                 {"Т.Вълков"         , 5467},
-                {"Ю.Иванчев"        , -1}
+                {"Ю.Иванчев"        , -1},
+                {"В.Димитров"       , -1}
             };
 
             string aircraftFmId;
@@ -269,14 +272,19 @@ namespace Gva.MigrationTool.Sets
                             var pv = addPartWithFiles("aircraftCertRegistrationsFM/*", aircraftCertRegistrationFM);
                             int? certNumber = aircraftCertRegistrationFM.Get<int?>("part.certNumber");
                             int? actNumber = aircraftCertRegistrationFM.Get<int?>("part.actNumber");
+                            string regMark = aircraftCertRegistrationFM.Get<string>("part.regMark");
                             var registration = new NomValue()
                             {
                                 NomValueId = pv.Part.Index,
                                 Name = string.Format(
-                                    aircraftCertRegistrationFM.Get<string>("part.regMark") +
+                                    regMark +
                                     (certNumber.HasValue ? string.Format("/рег.№ {0}", certNumber.ToString()) : string.Empty) +
                                     (actNumber.HasValue ? string.Format("/дел.№ {0}", actNumber.ToString()) : string.Empty))
                             };
+                            if (!string.IsNullOrEmpty(regMark) && !regMarkToLotId.ContainsKey(regMark))
+                            {
+                                regMarkToLotId.TryAdd(regMark, lot.LotId);
+                            }
 
                             string registerCode = aircraftCertRegistrationFM.Get<string>("part.register.code");
                             int certId = aircraftCertRegistrationFM.Get<int>("part.__oldId");

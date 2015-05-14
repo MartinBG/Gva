@@ -49,6 +49,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Excel">
+      <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -81,12 +84,14 @@
     <Compile Include="Blobs\BlobDownloader.cs" />
     <Compile Include="Blobs\BlobUploader.cs" />
     <Compile Include="Blobs\RateLimiter.cs" />
+    <Compile Include="Sets\AircraftRadios\AicraftRadios.cs" />
     <Compile Include="Sets\Common\CommonUtils.cs" />
     <Compile Include="FmOrgMatcher.cs" />
     <Compile Include="Sets\AircraftApexLotCreator.cs" />
     <Compile Include="Sets\AircraftApexLotMigrator.cs" />
     <Compile Include="Sets\AircraftFmLotCreator.cs" />
     <Compile Include="Sets\AircraftFmLotMigrator.cs" />
+    <Compile Include="Sets\AircraftRadioCertsMigrator.cs" />
     <Compile Include="Sets\OrganizationFmLotCreator.cs" />
     <Compile Include="Sets\ExaminationSystemDataMigrator.cs" />
     <Compile Include="Sets\PersonLicenceDocMigrator.cs" />
@@ -106,6 +111,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Sets\AircraftRadios\Radio_Certificates.xls" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Api\Common.Api.csproj">

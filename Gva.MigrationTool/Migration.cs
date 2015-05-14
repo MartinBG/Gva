@@ -12,6 +12,8 @@ using Common.Api.UserContext;
 using Common.Data;
 using Docs.Api;
 using Gva.Api;
+using Gva.Api.ModelsDO.Aircrafts;
+using Gva.MigrationTool.AircarftRadios;
 using Gva.MigrationTool.Blobs;
 using Gva.MigrationTool.Nomenclatures;
 using Gva.MigrationTool.Sets;
@@ -114,6 +116,7 @@ namespace Gva.MigrationTool
             builder.RegisterType<AircraftApexLotMigrator>().InstancePerLifetimeScope();
             builder.RegisterType<AircraftFmLotCreator>().InstancePerLifetimeScope();
             builder.RegisterType<AircraftFmLotMigrator>().InstancePerLifetimeScope();
+            builder.RegisterType<AircraftRadioCertsMigrator>().InstancePerLifetimeScope();
 
             return builder.Build();
         }
@@ -288,7 +291,7 @@ namespace Gva.MigrationTool
                 };
 
                 //migrate aircrafts
-                aircraft.migrateAircrafts(
+                ConcurrentDictionary<string, int> regMarkToLotId = aircraft.migrateAircrafts(
                     noms,
                     personIdToLotId,
                     aircraftApexIdtoLotId,
@@ -298,6 +301,16 @@ namespace Gva.MigrationTool
                     getPersonByFmOrgName,
                     getOrgByFmOrgName,
                     blobIdsToFileKeys);
+
+                AircraftRadios radios = new AircraftRadios();
+                var resultRadios = radios.Get(
+                    @"..\..\..\Gva.MigrationTool\Sets\AircraftRadios\Radio_Certificates.xls",
+                    noms,
+                    regMarkToLotId,
+                    getOrgByFmOrgName);
+
+                //migrate aircraft radio certificates
+                aircraft.migrateAircraftRadioCerts(noms, resultRadios);
 
                 //migrate persons
                 person.migratePersons(noms, personIdToLotId, getAircraftByApexId, getPersonByApexId, getOrgByApexId, blobIdsToFileKeys);
