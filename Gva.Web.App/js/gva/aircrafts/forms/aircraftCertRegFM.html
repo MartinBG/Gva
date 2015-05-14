@@ -8,10 +8,10 @@
 
     <sc-field type="nomenclature" ng-model="model.register" alias="'registers'" l10n-text="aircrafts.regFMDirective.register" class="col-sm-2 col-sm-4"></sc-field>
 
-    <sc-field type="int" ng-if="model.register.code !== '2'" ng-model="model.actNumber" class="col-md-2 col-sm-4" l10n-text="aircrafts.regFMDirective.actNumber"></sc-field>
+    <sc-field type="int" ng-if="model.register.code !== '2'" ng-readonly="true" ng-model="model.actNumber" class="col-md-2 col-sm-4" l10n-text="aircrafts.regFMDirective.actNumber"></sc-field>
     <sc-field-group ng-if="model.register.code === '2'" class="col-md-2 col-sm-4" text="aircrafts.regFMDirective.actNumber">
       <span >II - </span>
-      <sc-field type="int" ng-model="model.actNumber" name="actNumber" readonly="form.$readonly"></sc-field>
+      <sc-field type="int" ng-model="model.actNumber" name="actNumber" ng-readonly="true"></sc-field>
     </sc-field-group>
 
     <sc-field type="text" ng-model="model.regMark" l10n-text="aircrafts.regFMDirective.regMark" class="col-md-3 col-sm-4" ng-pattern="regMarkPattern"></sc-field>
