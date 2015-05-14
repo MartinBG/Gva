@@ -25,7 +25,7 @@ namespace Gva.Api.Projections.Aircraft
             }
 
             var lastRegistration = parts.GetAll<AircraftCertRegistrationFMDO>("aircraftCertRegistrationsFM")
-                .OrderByDescending(r => r.CreateDate)
+                .OrderByDescending(r => r.Content.CertDate)
                 .FirstOrDefault();
 
             return new[] { this.Create(aircraftData, lastRegistration) };
