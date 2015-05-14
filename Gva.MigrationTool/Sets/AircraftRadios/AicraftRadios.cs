@@ -56,7 +56,7 @@ namespace Gva.MigrationTool.AircarftRadios
                     } : null,
                     Inspector = new AircraftInspectorDO() 
                     {
-                        Other = (string)excelReader[5]
+                        Other = string.Format("{0} / {1}", (string)excelReader[5], (string)excelReader[6])
                     }
                 };
 

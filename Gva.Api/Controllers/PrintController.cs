@@ -170,6 +170,28 @@ namespace Gva.Api.Controllers
             return this.printRepository.ReturnResponseMessage(url);
         }
 
+        [Route("api/printRadioCert")]
+        public HttpResponseMessage GetRadioCert(int lotId, int partIndex)
+        {
+            string radioCertPath = string.Format("aircraftCertRadios/{0}", partIndex);
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            var radioCertPart = lot.Index.GetPart<AircraftCertRadioDO>(radioCertPath);
+            string templateName = "radio_cert";
+
+            var wordDocStream = this.GenerateWordDocument(lotId, radioCertPath, templateName, null, null);
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new StreamContent(wordDocStream);
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/msword");
+            result.Content.Headers.ContentDisposition =
+                new ContentDispositionHeaderValue("inline")
+                {
+                    FileName = string.Format("{0}.docx", templateName)
+                };
+
+            return result;
+        }
+
         [Route("api/printExportCert")]
         public HttpResponseMessage GetExportCert(int lotId, int partIndex, bool generateNew = false)
         {
@@ -378,11 +400,11 @@ namespace Gva.Api.Controllers
             return memoryStream;
         }
 
-        public void UpdatePart<T>(Guid exportCertBlobKey, PartVersion<T> registrationPart, Lot lot, string templateName, string path, string filePropertyName, Object modelContainingFile) where T: class
+        public void UpdatePart<T>(Guid blobKey, PartVersion<T> registrationPart, Lot lot, string templateName, string path, string filePropertyName, Object modelContainingFile) where T: class
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                int printedFileId = this.printRepository.SaveNewFile(templateName, exportCertBlobKey);
+                int printedFileId = this.printRepository.SaveNewFile(templateName, blobKey);
 
                 PropertyInfo propertyInfo = modelContainingFile.GetType().GetProperty(filePropertyName);
                 propertyInfo.SetValue(modelContainingFile, printedFileId);

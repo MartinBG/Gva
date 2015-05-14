@@ -4,7 +4,7 @@
       <strong l10n-text="aircrafts.editAirworthiness.titleAw"></strong>
 
       <div class="pull-right">
-        <a ng-click="print()" ng-if="certTypeAlias !== '15b' && certTypeAlias !== 'unknown' && certTypeAlias !== '15bReissue'">
+        <a ng-click="print()" ng-if="certTypeAlias !== '15b' && certTypeAlias !== 'unknown' && certTypeAlias !== '15bReissue' && !isEditAw">
           <span class="glyphicon glyphicon-print"></span>
         </a>
         <sc-button ng-show="!isEditAw" 
