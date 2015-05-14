@@ -3085,7 +3085,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
         private void migrateAircraftRadiotypes(INomRepository repo, OracleConnection conn)
         {
-            Nom nom = repo.GetNom("aircraftRadiotypes");
+            Nom nom = repo.GetNom("aircraftRadioTypes");
 
             var nomInfo = new Dictionary<string, Tuple<string, string>>()
             {
@@ -3099,7 +3099,7 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "Otr" , new Tuple<string,string>("Друг"                , "Other"           )}
             };
 
-            noms["aircraftRadiotypes"] = new Dictionary<string, NomValue>();
+            noms["aircraftRadioTypes"] = new Dictionary<string, NomValue>();
             foreach (var ni in nomInfo)
             {
                 NomValue row = new NomValue()
@@ -3113,7 +3113,7 @@ namespace Gva.MigrationTool.Nomenclatures
                     ParentValueId = null,
                     TextContentString = null
                 };
-                noms["aircraftRadiotypes"][Guid.NewGuid().ToString()] = row;
+                noms["aircraftRadioTypes"][Guid.NewGuid().ToString()] = row;
                 nom.NomValues.Add(row);
             }
         }

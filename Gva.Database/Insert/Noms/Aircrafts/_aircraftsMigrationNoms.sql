@@ -18,7 +18,7 @@ VALUES
     (N'Типове опериране на ВС'               , N'aircraftOperTypes'           ,N'aircraft'),
     (N'Типове типов сертификат за ВС'        , N'aircraftTypeCertificateTypes',N'aircraft'),
     (N'Причини за отписване на ВС'           , N'aircraftRemovalReasons'      ,N'aircraft'),
-    (N'Типове радиооборудване на ВС'         , N'aircraftRadiotypes'          ,N'aircraft'),
+    (N'Типове радиооборудване на ВС'         , N'aircraftRadioTypes'          ,N'aircraft'),
     (N'Производители на ВС(Fm)'              , N'aircraftProducersFm'         ,N'aircraft'),
     (N'Ограничения при регистрация на ВС(Fm)', N'aircraftLimitationsFm'       ,N'aircraft'),
     (N'Състяние на регистрация на ВС(Fm)'    , N'aircraftRegStatsesFm'        ,N'aircraft'),
