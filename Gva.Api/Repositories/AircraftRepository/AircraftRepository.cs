@@ -36,7 +36,7 @@ namespace Gva.Api.Repositories.AircraftRepository
                             .Include(a => a.AircraftProducer)
                  join r in this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
                             .Include(v => v.Register)
-                         on a.ActNumber equals r.ActNumber into ra
+                         on new { a.ActNumber, a.LotId } equals new { r.ActNumber, r.LotId } into ra
                  from ra1 in ra.DefaultIfEmpty()
                  select new
                  {
@@ -79,11 +79,10 @@ namespace Gva.Api.Repositories.AircraftRepository
             var result = (from a in this.unitOfWork.DbContext.Set<GvaViewAircraft>()
                                 .Include(a => a.AirCategory)
                                 .Include(a => a.AircraftProducer)
-                                .Where(p => p.LotId == aircraftId)
                     join r in this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
                                 .Include(v => v.Register)
-                                .Where(r => r.LotId == aircraftId)
-                             on a.ActNumber equals r.ActNumber into ra
+                             on new { a.ActNumber, a.LotId } equals new { r.ActNumber, r.LotId } into ra
+                             where a.LotId == aircraftId
                     from ra1 in ra.DefaultIfEmpty()
                     select new
                     {
