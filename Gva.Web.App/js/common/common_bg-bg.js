@@ -36,8 +36,8 @@
           },
           aircrafts: {
             title: 'ВС',
-            search: 'Въздухоплавателни средства',
-            registrations: 'Регистрации',
+            search: 'Списък ВС',
+            registrations: 'Регистър ВС',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
             invalidActNumbers: 'Невалидни дел. номера'
