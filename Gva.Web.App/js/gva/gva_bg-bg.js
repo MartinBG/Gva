@@ -1139,6 +1139,7 @@
           additionalModificationAlt: 'Допълнителна модификация (англ.)'
         },
         radioDirective: {
+          model: 'Model',
           ASLNumber: 'ASL №',
           issueDate: 'Дата на издаване',
           regMark: 'Регистрационен знак',
@@ -1159,6 +1160,7 @@
           other: 'Друг'
         },
         radioEntryDirective: {
+          model: 'Модел',
           equipment: 'Апаратура',
           count: 'Брой',
           power: 'Мощност',

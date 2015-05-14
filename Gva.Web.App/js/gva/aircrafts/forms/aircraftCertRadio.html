@@ -58,6 +58,7 @@
             <th width="1px" ng-if="!form.$readonly && model.entries.length"></th>
             <th width="1px" ng-if="!form.$readonly && model.entries.length"></th>
             <th l10n-text="aircrafts.radioDirective.equipment"></th>
+            <th l10n-text="aircrafts.radioDirective.model"></th>
             <th l10n-text="aircrafts.radioDirective.count"></th>
             <th l10n-text="aircrafts.radioDirective.power"></th>
             <th l10n-text="aircrafts.radioDirective.classOfEmission"></th>
@@ -76,6 +77,7 @@
               <sc-button name="deleteBtn" class="btn btn-xs btn-danger" btn-click="removeEntry(entry)" icon="glyphicon-remove"></sc-button>
             </td>
             <td>{{entry.equipment.code}}</td>
+            <td>{{entry.model}}</td>
             <td>{{entry.count}}</td>
             <td>{{entry.power}}</td>
             <td>{{entry.class}}</td>

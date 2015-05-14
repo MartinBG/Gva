@@ -12,9 +12,9 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.Entries = new List<AircraftCertRadioEntryDO>();
         }
 
-        public string AslNumber { get; set; }
+        public int AslNumber { get; set; }
 
-        public DateTime IssueDate { get; set; }
+        public DateTime? IssueDate { get; set; }
 
         public string RegMark { get; set; }
 
