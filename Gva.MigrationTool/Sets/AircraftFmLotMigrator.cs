@@ -476,7 +476,7 @@ namespace Gva.MigrationTool.Sets
                         parsedToIntStatusCode = int.Parse(r.Field<string>("nStatus")),
                         matchedStatus = isOrderStatus.Match(noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")).Name)
                     })
-                .OrderBy(r => r.nRegNum)
+                .OrderBy(r => r.certDate)
                 .Select(r => new JObject(
                         new JProperty("part",
                            Utils.ToJObject(new
