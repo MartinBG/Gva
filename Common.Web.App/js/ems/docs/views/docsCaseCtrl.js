@@ -44,7 +44,7 @@
     buildHierarchy(parentDoc);
 
     $scope.viewDoc = function (docId) {
-      return $state.go('root.docs.edit.view', { id: docId });
+      return $state.go('root.docs.edit.case', { id: docId });
     };
 
     $scope.viewApplication = function (applicationId) {

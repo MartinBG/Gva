@@ -248,7 +248,7 @@
     };
 
     $scope.goToDoc = function (message) {
-      return $state.go('root.docs.edit.view', { id: message.docId });
+      return $state.go('root.docs.edit.case', { id: message.docId });
     };
   }
 
