@@ -926,6 +926,15 @@ namespace Docs.Api.Controllers
                     null,
                     userContext);
 
+                switch (docEntryTypeAlias.ToLower())
+                {
+                    case "resolution":
+                    case "task":
+                        DocUnitRole from = this.unitOfWork.DbContext.Set<DocUnitRole>().SingleOrDefault(e => e.Alias == "From");
+                        newDoc.CreateDocUnit(unitUser.UnitId, from.DocUnitRoleId, this.userContext);
+                        break;
+                };
+
                 DocRelation parentDocRelation = this.unitOfWork.DbContext.Set<DocRelation>()
                     .FirstOrDefault(e => e.DocId == id);
 
