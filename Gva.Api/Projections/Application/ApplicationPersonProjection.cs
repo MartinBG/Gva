@@ -32,7 +32,6 @@ namespace Gva.Api.Projections.Application
             application.DocumentNumber = personApplication.Content.DocumentNumber;
             application.OldDocumentNumber = personApplication.Content.OldDocumentNumber;
             application.ApplicationTypeId = personApplication.Content.ApplicationType.NomValueId;
-            application.PrintedFileId = personApplication.Content.PrintedFileId;
 
             return application;
         }

@@ -102,9 +102,9 @@
           <option value="person" l10n-text="aircrafts.regFMDirective.person"></option>
           <option value="other" l10n-text="aircrafts.regFMDirective.other"></option>
         </select>
-        <sc-nomenclature ng-if="model.lessorType === 'organization'" class="form-control input-sm" ng-model="model.lessorOrganization" name="lessorOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
-        <sc-nomenclature ng-if="model.lessorType === 'person'" class="form-control input-sm" ng-model="model.lessorPerson" name="lessorPerson" alias="'persons'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
-        <sc-text ng-if="model.lessorType  === 'other'" class="form-control input-sm" ng-model="model.lessorOther" name="other" ng-required="true" ng-readonly="form.$readonly"></sc-text>
+        <sc-nomenclature ng-if="model.lessorType === 'organization'" class="form-control input-sm" ng-model="model.lessorOrganization" name="lessorOrganization" alias="'organizations'" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-nomenclature ng-if="model.lessorType === 'person'" class="form-control input-sm" ng-model="model.lessorPerson" name="lessorPerson" alias="'persons'" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-text ng-if="model.lessorType  === 'other'" class="form-control input-sm" ng-model="model.lessorOther" name="other" ng-readonly="form.$readonly"></sc-text>
         <sc-button ng-if="model.lessorType === 'organization' || model.lessorType === 'person'" type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="new('lessor')" ng-if="!form.$readonly"></sc-button>
       </div>
     </div>

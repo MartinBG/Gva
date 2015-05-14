@@ -13,7 +13,5 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public string NotesAlt { get; set; }
 
         public bool? AircraftNewOld { get; set; }
-
-        public int? PrintedExportCertFileId { get; set; }
     }
 }

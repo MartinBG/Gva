@@ -24,9 +24,7 @@
 
   <button class="btn btn-xs btn-default pull-right" ng-if="!model.export" ng-click="getExportData()" style="position:relative; top:-25px" ng-disabled="form.$readonly"> <span class="glyphicon glyphicon-plus"></span>
   </button>
-  <a ng-click="print()" ng-if="model.export" class="btn btn-xs pull-right">
-    <span class="glyphicon glyphicon-print"></span>
-  </a>
+  <sc-link-button name="printBtn" ng-if="model.export && form.$readonly" ng-href="api/printExportCert?lotId={{lotId}}&partIndex={{partIndex}}" target="_blank" sc-access-token class="btn btn-sm pull-right" icon="glyphicon-print"></sc-link-button>
   <div ng-if="model.export">
     <div class="row">
       <sc-field type="textarea" rows="3" cols="50" ng-model="model.export.text" l10n-text="aircrafts.regFMDirective.text" class="col-md-10 col-sm-12"></sc-field>

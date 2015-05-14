@@ -27,7 +27,5 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public string AdditionalModificationsAlt { get; set; }
 
         public string Remarks { get; set; }
-
-        public int? PrintedFileId { get; set; }
     }
 }

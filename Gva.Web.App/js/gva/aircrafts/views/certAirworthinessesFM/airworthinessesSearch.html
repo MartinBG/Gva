@@ -4,9 +4,8 @@
     <sc-button name="editBtn" btn-sref="{ state: 'root.aircrafts.view.airworthinessesFM.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column sortable="false" class="buttons-cell" has-content="true">
-    <a ng-click="print(item)" ng-if="item.part.airworthinessCertificateType.alias !== '15b' && item.part.airworthinessCertificateType.alias !== 'unknown' && item.part.airworthinessCertificateType.alias !== '15bReissue'">
-      <span class="glyphicon glyphicon-print"></span>
-    </a>
+    <sc-link-button name="printBtn" ng-href="api/printAirworthiness?lotId={{lotId}}&partIndex={{item.partIndex}}" target="_blank" sc-access-token class="btn btn-sm" icon="glyphicon-print"
+       ng-if="item.part.airworthinessCertificateType.alias !== '15b' && item.part.airworthinessCertificateType.alias !== 'unknown' && item.part.airworthinessCertificateType.alias !== '15bReissue'"></sc-link-button>
   </sc-column>
   <sc-column data="part.airworthinessCertificateType.name" title="aircrafts.airworthinessSearch.airworthinessCertificateType" class="wrap">
   </sc-column>

@@ -24,9 +24,5 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public NomValue Organization { get; set; }
 
         public AircraftInspectorDO Inspector { get; set; }
-
-        public Guid? PrintedDocumentBlobKey { get; set; }
-
-        public int? PrintedFileId { get; set; }
     }
 }

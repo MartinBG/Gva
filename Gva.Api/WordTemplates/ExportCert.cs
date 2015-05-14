@@ -37,7 +37,7 @@ namespace Gva.Api.WordTemplates
                     TEXT = registration.Removal.Export.Text,
                     TEXT_ALT = registration.Removal.Export.TextAlt,
                     ENGINE_MODEL = aircraftData.EngineAlt ?? aircraftData.Engine,
-                    PRODUCER = aircraftData.AircraftProducer.NameAlt,
+                    PRODUCER = aircraftData.AircraftProducer != null ? aircraftData.AircraftProducer.NameAlt : null,
                     AIRCRAFT = aircraftData.ModelAlt ?? aircraftData.Model,
                     PROPELLER_MODEL = aircraftData.PropellerAlt ?? aircraftData.Propeller,
                     tick1 = registration.Removal.Export.AircraftNewOld == true,

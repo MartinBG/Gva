@@ -37,7 +37,7 @@ namespace Gva.Api.WordTemplates
             var registration = this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
                                 .Where(r => r.LotId == lotId)
                                 .OrderByDescending(r => r.ActNumber)
-                                .SingleOrDefault();
+                                .FirstOrDefault();
 
             var json = new
             {

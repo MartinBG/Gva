@@ -20,5 +20,9 @@ namespace Gva.Api.Repositories.PrintRepository
         HttpResponseMessage ReturnResponseMessage(string url);
 
         int SaveNewFile(string name, Guid blobKey);
+
+        Stream GenerateWordDocument(int lotId, string path, string templateName, int? ratingPartIndex, int? editionPartIndex);
+
+        HttpResponseMessage GeneratePdfWithoutSave(int lotId, string path, string templateName);
     }
 }

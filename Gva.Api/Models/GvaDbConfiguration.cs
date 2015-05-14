@@ -1,7 +1,6 @@
 ﻿using System.Data.Entity;
 using Common.Data;
 using Gva.Api.Models.Views;
-using Gva.Api.Models.Views.Aircarft;
 using Gva.Api.Models.Views.Aircraft;
 using Gva.Api.Models.Views.Airport;
 using Gva.Api.Models.Views.Equipment;
@@ -50,8 +49,6 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaViewAirportMap());
             modelBuilder.Configurations.Add(new GvaViewAircraftRegistrationMap());
             modelBuilder.Configurations.Add(new GvaViewAircraftRegMarkMap());
-            modelBuilder.Configurations.Add(new GvaViewAircraftCertAirworthinessMap());
-            modelBuilder.Configurations.Add(new GvaViewAircraftPrintedCertNoiseMap());
             modelBuilder.Configurations.Add(new GvaInvalidActNumberMap());
             modelBuilder.Configurations.Add(new GvaViewEquipmentMap());
             modelBuilder.Configurations.Add(new GvaWordTemplateMap());

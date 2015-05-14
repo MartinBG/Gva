@@ -4,9 +4,7 @@
       <strong l10n-text="aircrafts.editAirworthiness.titleAw"></strong>
 
       <div class="pull-right">
-        <a ng-click="print()" ng-if="certTypeAlias !== '15b' && certTypeAlias !== 'unknown' && certTypeAlias !== '15bReissue' && !isEditAw">
-          <span class="glyphicon glyphicon-print"></span>
-        </a>
+        <sc-link-button name="printBtn" ng-href="api/printAirworthiness?lotId={{lotId}}&partIndex={{partIndex}}" target="_blank" sc-access-token class="btn btn-sm" icon="glyphicon-print"></sc-link-button>
         <sc-button ng-show="!isEditAw" 
           btn-click="editAw()" name="editBtn" text="aircrafts.editAirworthiness.editAw" class="btn btn-primary btn-xs" icon="glyphicon-edit" >
         </sc-button>

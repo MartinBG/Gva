@@ -13,8 +13,6 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.Limitations = new List<NomValue>();
         }
 
-        public int? PrintedRegCertFileId { get; set; }
-
         public int? CertNumber { get; set; }
 
         public NomValue Register { get; set; }

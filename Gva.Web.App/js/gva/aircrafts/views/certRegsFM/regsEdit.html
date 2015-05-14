@@ -6,9 +6,7 @@
       <strong ng-if="reg.part.removal && reg.part.removal.reason" l10n-text="aircrafts.editReg.dereged"></strong>
 
       <div class="pull-right" ng-show="reg.part.isCurrent">
-        <a ng-click="print()" ng-show="!editMode">
-          <span class="glyphicon glyphicon-print"></span>
-        </a>
+        <sc-link-button name="printBtn" ng-href="api/printRegCert?lotId={{lotId}}&partIndex={{partIndex}}" target="_blank" sc-access-token class="btn btn-sm" icon="glyphicon-print" ng-if="!editMode"></sc-link-button>
         <sc-button name="editBtn" btn-click="rereg()" text="aircrafts.editReg.rereg" class="btn btn-primary btn-xs" icon="glyphicon-repeat" ng-show="!editMode && reg.part.isActive">
         </sc-button>
         <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editReg.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">

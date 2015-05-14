@@ -92,7 +92,7 @@ namespace Gva.Api.Controllers
             }
             else
             {
-                using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName, null, null))
+                using (var wordDocStream = this.printRepository.GenerateWordDocument(lotId, path, templateName, null, null))
                 using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
                 {
                     licenceEditionDocBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
@@ -124,7 +124,7 @@ namespace Gva.Api.Controllers
             }
             else
             {
-                using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName, ratingIndex, ratingEditionIndex))
+                using (var wordDocStream = this.printRepository.GenerateWordDocument(lotId, path, templateName, ratingIndex, ratingEditionIndex))
                 using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
                 {
                     ratingEditionBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
@@ -146,179 +146,37 @@ namespace Gva.Api.Controllers
             var lot = this.lotRepository.GetLotIndex(lotId);
             var airworthinessPart = lot.Index.GetPart<AircraftCertAirworthinessDO>(airworthinessPath);
             string templateName = airworthinessPart.Content.AirworthinessCertificateType.Alias;
-
-            Guid awDocBlobKey;
-            if (airworthinessPart.Content.PrintedDocumentBlobKey.HasValue && !generateNew)
-            {
-                awDocBlobKey = airworthinessPart.Content.PrintedDocumentBlobKey.Value;
-            }
-            else
-            {
-                using (var wordDocStream = this.GenerateWordDocument(lotId, airworthinessPath, templateName, null, null))
-                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
-                {
-                    awDocBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
-                    airworthinessPart.Content.PrintedDocumentBlobKey = awDocBlobKey;
-                    this.UpdatePart<AircraftCertAirworthinessDO>(awDocBlobKey, airworthinessPart, lot, templateName, airworthinessPath, "PrintedFileId", airworthinessPart.Content);
-                }
-            }
-
-            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline",
-                awDocBlobKey,
-                templateName);
-
-            return this.printRepository.ReturnResponseMessage(url);
+            return this.printRepository.GeneratePdfWithoutSave(lotId, airworthinessPath, templateName);
         }
 
         [Route("api/printRadioCert")]
         public HttpResponseMessage GetRadioCert(int lotId, int partIndex)
         {
-            string radioCertPath = string.Format("aircraftCertRadios/{0}", partIndex);
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            var radioCertPart = lot.Index.GetPart<AircraftCertRadioDO>(radioCertPath);
-            string templateName = "radio_cert";
-
-            var wordDocStream = this.GenerateWordDocument(lotId, radioCertPath, templateName, null, null);
-
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new StreamContent(wordDocStream);
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/msword");
-            result.Content.Headers.ContentDisposition =
-                new ContentDispositionHeaderValue("inline")
-                {
-                    FileName = string.Format("{0}.docx", templateName)
-                };
-
-            return result;
+            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertRadios/{0}", partIndex), "radio_cert");
         }
 
         [Route("api/printExportCert")]
-        public HttpResponseMessage GetExportCert(int lotId, int partIndex, bool generateNew = false)
+        public HttpResponseMessage GetExportCert(int lotId, int partIndex)
         {
-            string registrationPath = string.Format("aircraftCertRegistrationsFM/{0}", partIndex);
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            var registrationPart = lot.Index.GetPart<AircraftCertRegistrationFMDO>(registrationPath);
-            string templateName = "export_cert";
-
-            Guid exportCertBlobKey;
-            if (registrationPart.Content.Removal.Export.PrintedExportCertFileId.HasValue)
-            {
-                exportCertBlobKey = this.unitOfWork.DbContext.Set<GvaFile>()
-                    .Where(f => f.GvaFileId == registrationPart.Content.Removal.Export.PrintedExportCertFileId.Value)
-                    .Single()
-                    .FileContentId;
-            }
-            else
-            {
-                using (var wordDocStream = this.GenerateWordDocument(lotId, registrationPath, templateName, null, null))
-                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
-                {
-
-                    exportCertBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
-                    this.UpdatePart<AircraftCertRegistrationFMDO>(exportCertBlobKey, registrationPart, lot, templateName, registrationPath, "PrintedExportCertFileId", registrationPart.Content.Removal.Export);
-                }
-            }
-            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline",
-                exportCertBlobKey,
-                templateName);
-
-            return this.printRepository.ReturnResponseMessage(url);
+            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertRegistrationsFM/{0}", partIndex), "export_cert");
         }
 
         [Route("api/printNoiseCert")]
         public HttpResponseMessage GetNoiseCert(int lotId, int partIndex, bool generateNew = false)
         {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            string noisePath = string.Format("aircraftCertNoises/{0}", partIndex);
-            var noisePart = lot.Index.GetPart<AircraftCertNoiseDO>(noisePath);
-            string templateName = "noise_cert";
-
-            Guid noiseCertBlobKey;
-            if (noisePart.Content.PrintedFileId.HasValue && !generateNew)
-            {
-                noiseCertBlobKey = this.unitOfWork.DbContext.Set<GvaFile>()
-                    .Where(f => f.GvaFileId == noisePart.Content.PrintedFileId.Value)
-                    .Single()
-                    .FileContentId;
-            }
-            else
-            {
-                using (var wordDocStream = this.GenerateWordDocument(lotId, noisePath, templateName, null, null))
-                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
-                {
-                    noiseCertBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
-                    this.UpdatePart<AircraftCertNoiseDO>(noiseCertBlobKey, noisePart, lot, templateName, noisePath, "PrintedFileId", noisePart.Content);
-                }
-            }
-            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline",
-                noiseCertBlobKey,
-                templateName);
-
-            return this.printRepository.ReturnResponseMessage(url);
+            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertNoises/{0}", partIndex), "noise_cert");
         }
 
         [Route("api/printRegCert")]
         public HttpResponseMessage GetRegCert(int lotId, int partIndex, bool generateNew = false)
         {
-            var lot = this.lotRepository.GetLotIndex(lotId);
-            string regPath = string.Format("aircraftCertRegistrationsFM/{0}", partIndex);
-            var regPart = lot.Index.GetPart<AircraftCertRegistrationFMDO>(regPath);
-            string templateName = "reg_cert";
-
-            Guid regCertBlobKey;
-            if (regPart.Content.PrintedRegCertFileId.HasValue && !generateNew)
-            {
-                regCertBlobKey = this.unitOfWork.DbContext.Set<GvaFile>()
-                    .Where(f => f.GvaFileId == regPart.Content.PrintedRegCertFileId.Value)
-                    .Single()
-                    .FileContentId;
-            }
-            else
-            {
-                using (var wordDocStream = this.GenerateWordDocument(lotId, regPath, templateName, null, null))
-                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
-                {
-                    regCertBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
-                    this.UpdatePart<AircraftCertRegistrationFMDO>(regCertBlobKey, regPart, lot, templateName, regPath, "PrintedRegCertFileId", regPart.Content);
-                }
-            }
-            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline",
-                regCertBlobKey,
-                templateName);
-
-            return this.printRepository.ReturnResponseMessage(url);
+            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertRegistrationsFM/{0}", partIndex), "reg_cert");
         }
 
         [Route("api/printApplication")]
         public HttpResponseMessage GetApplicationNote(int lotId, int partIndex)
         {
-            Lot lot = this.lotRepository.GetLotIndex(lotId);
-            string path = string.Format("personDocumentApplications/{0}", partIndex);
-            PartVersion<DocumentApplicationDO> applicationPart = lot.Index.GetPart<DocumentApplicationDO>(path);
-            string templateName = "application_note";
-            Guid applicationDocBlobKey;
-            if (applicationPart.Content.PrintedFileId.HasValue)
-            {
-                applicationDocBlobKey = this.unitOfWork.DbContext.Set<GvaFile>()
-                    .Where(f => f.GvaFileId == applicationPart.Content.PrintedFileId.Value)
-                    .Single()
-                    .FileContentId;
-            }
-            else
-            {
-                using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName, null, null))
-                using (var pdfDocStream = this.printRepository.ConvertWordStreamToPdfStream(wordDocStream))
-                {
-                    applicationDocBlobKey = this.printRepository.SaveStreamToBlob(pdfDocStream, ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString);
-                    this.UpdatePart<DocumentApplicationDO>(applicationDocBlobKey, applicationPart, lot, templateName, path, "PrintedFileId", applicationPart.Content);
-                }
-            }
-
-            string url = string.Format("file?fileKey={0}&fileName={1}&mimeType=application%2Fpdf&dispositionType=inline",
-                applicationDocBlobKey,
-                templateName);
-
-            return this.printRepository.ReturnResponseMessage(url);
+            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("personDocumentApplications/{0}", partIndex), "application_note");
         }
 
         public void UpdateLicenceEditionPrintedRatings(
@@ -368,36 +226,6 @@ namespace Gva.Api.Controllers
 
                 transaction.Commit();
             }
-        }
-
-        public Stream GenerateWordDocument(int lotId, string path, string templateName, int? ratingPartIndex, int? editionPartIndex)
-        {
-            var dataGenerator = this.dataGenerators.FirstOrDefault(dg => dg.TemplateNames.Contains(templateName));
-            object data = null;
-            if (dataGenerator == null && ratingPartIndex.HasValue && editionPartIndex.HasValue)
-            {
-                data = this.AMLNationalRatingDataGenerator.GetData(lotId, path, ratingPartIndex.Value, editionPartIndex.Value);
-            }
-            else
-            {
-                data = dataGenerator.GetData(lotId, path);
-            }
-
-            JsonSerializer jsonSerializer = JsonSerializer.Create(App.JsonSerializerSettings);
-            jsonSerializer.ContractResolver = new DefaultContractResolver();
-
-            JObject json = JObject.FromObject(data, jsonSerializer);
-
-            var wordTemplate = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
-                .SingleOrDefault(t => t.Name == templateName);
-
-            var memoryStream = new MemoryStream();
-            memoryStream.Write(wordTemplate.Template, 0, wordTemplate.Template.Length);
-
-            new WordTemplateTransformer(memoryStream).Transform(json);
-            memoryStream.Position = 0;
-
-            return memoryStream;
         }
 
         public void UpdatePart<T>(Guid blobKey, PartVersion<T> registrationPart, Lot lot, string templateName, string path, string filePropertyName, Object modelContainingFile) where T: class

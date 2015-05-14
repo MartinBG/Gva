@@ -4,9 +4,7 @@
       <strong l10n-text="aircrafts.editNoise.title"></strong>
 
       <div class="pull-right">
-        <a ng-click="print()" ng-show="!editMode">
-          <span class="glyphicon glyphicon-print"></span>
-        </a>
+        <sc-link-button name="printBtn" ng-if="!editMode" ng-href="api/printNoiseCert?lotId={{lotId}}&partIndex={{partIndex}}" target="_blank" sc-access-token class="btn btn-sm" icon="glyphicon-print"></sc-link-button>
         <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editNoise.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteNoise()" text="aircrafts.editNoise.deleteNoise" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">

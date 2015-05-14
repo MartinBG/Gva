@@ -722,32 +722,6 @@
           regMark: 'Регистрационен. знак',
           register: 'Регистър'
         },
-        printAirworthinessModal: {
-          title: 'Принтиране на документ за летателна годност',
-          stampNumber: 'Хартиен №',
-          cancel: 'Отказ',
-          save: 'Запис',
-          print: 'Преглед за печат',
-          generateNew: 'Прегенерирай'
-        },
-        printExportCertModal: {
-          title: 'Принтиране на експортно удостоверение',
-          close: 'Затвори',
-          print: 'Преглед за печат',
-          generateNew: 'Прегенерирай'
-        },
-        printNoiseCertModal: {
-          title: 'Принтиране на удостоверение за шум',
-          close: 'Затвори',
-          print: 'Преглед за печат',
-          generateNew: 'Прегенерирай'
-        },
-        printRegCertModal: {
-          title: 'Принтиране на удостоверение за шум',
-          close: 'Затвори',
-          print: 'Преглед за печат',
-          generateNew: 'Прегенерирай'
-        },
         manageRadioEntryModal: {
           title: 'Ново оборудване',
           save: 'Запис',

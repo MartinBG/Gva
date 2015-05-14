@@ -8,13 +8,13 @@
     $stateParams,
     AircraftCertAirworthinessesFM,
     originalAirworthiness,
-    scModal,
     scMessage
   ) {
     var originalAw = _.cloneDeep(originalAirworthiness);
     $scope.airworthiness = originalAw;
     $scope.isEditAw = false;
     $scope.lotId = $stateParams.id;
+    $scope.partIndex = $stateParams.ind;
     $scope.certTypeAlias = $scope.airworthiness.part.airworthinessCertificateType.alias;
 
     $scope.editAw = function () {
@@ -52,21 +52,6 @@
         }
       });
     };
-
-    $scope.print = function () {
-      var params = {
-        lotId: $stateParams.id,
-        partIndex: $stateParams.ind
-      };
-
-      var modalInstance = scModal.open('printAirworthiness', params);
-
-      modalInstance.result.then(function (savedAirworthiness) {
-        $scope.airworthiness.part.stampNumber = savedAirworthiness.part.stampNumber;
-      });
-
-      return modalInstance.opened;
-    };
   }
 
   CertAirworthinessesFMEditCtrl.$inject = [
@@ -75,7 +60,6 @@
     '$stateParams',
     'AircraftCertAirworthinessesFM',
     'aircraftCertAirworthiness',
-    'scModal',
     'scMessage'
   ];
 

@@ -8,12 +8,12 @@
     $stateParams,
     AircraftCertNoises,
     aircraftCertNoise,
-    scMessage,
-    scModal
+    scMessage
   ) {
     var originalNoise = _.cloneDeep(aircraftCertNoise);
 
     $scope.lotId = $stateParams.id;
+    $scope.partIndex = $stateParams.ind;
     $scope.noise = aircraftCertNoise;
     $scope.editMode = null;
 
@@ -52,17 +52,6 @@
         }
       });
     };
-
-    $scope.print = function () {
-      var params = {
-        lotId: $stateParams.id,
-        partIndex: $stateParams.ind
-      };
-
-      var modalInstance = scModal.open('printNoiseCert', params);
-
-      return modalInstance.opened;
-    };
   }
 
   CertNoisesEditCtrl.$inject = [
@@ -71,8 +60,7 @@
     '$stateParams',
     'AircraftCertNoises',
     'aircraftCertNoise',
-    'scMessage',
-    'scModal'
+    'scMessage'
   ];
 
   CertNoisesEditCtrl.$resolve = {

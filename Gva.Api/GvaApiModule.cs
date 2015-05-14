@@ -58,8 +58,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegistrationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRegMarkProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftCertAirworthinessProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftPrintedCertNoiseProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             
             //AirportView
             moduleBuilder.RegisterType<AirportProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
