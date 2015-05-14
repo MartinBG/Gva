@@ -17,9 +17,10 @@
       <sc-column  sortable="false" class="buttons-cell" has-content="true">
         <input type="checkbox" ng-checked="selectedRatings | contains:item" sc-click="selectRating($event, item)"/>
       </sc-column>
-      <sc-column data="personRatingLevel.name || ratingTypes || aircraftTypeGroup.code || (locationIndicator ? locationIndicator.code + (sector ? ' ' + sector : '') : '')" title="persons.chooseRatingsModal.ratingTypeOrRatingLevel">
+      <sc-column title="persons.chooseRatingsModal.ratingTypeOrRatingLevel" has-content="true">
+       {{item.personRatingLevel.code || item.ratingTypes || (item.aircraftTypeGroup.code || (item.locationIndicator ? item.locationIndicator.code : '') + ' ' + (item.sector? item.sector : ''))}}
       </sc-column>
-      <sc-column data="((ratingClass.code || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : ''))  || aircraftTypeCategory.code" title="persons.chooseRatingsModal.classOrCategory">
+      <sc-column data="(ratingClass.code || '') + ( ratingSubClasses ? ' (' + ratingSubClasses + ')' : '') || aircraftTypeCategory.code" title="persons.chooseRatingsModal.classOrCategory" class="wrap">
       </sc-column>
       <sc-column data="((authorization && authorization.code) || '') + ' ' + (limitations || '')" title="persons.chooseRatingsModal.authorizationAndLimitations">
       </sc-column>
