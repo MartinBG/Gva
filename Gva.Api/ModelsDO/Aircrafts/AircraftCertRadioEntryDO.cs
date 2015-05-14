@@ -8,7 +8,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
     {
         public NomValue Equipment { get; set; }
 
-        public int? Count { get; set; }
+        public string Count { get; set; }
 
         public string Model { get; set; }
 
