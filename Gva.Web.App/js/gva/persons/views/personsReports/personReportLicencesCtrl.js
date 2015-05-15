@@ -42,7 +42,8 @@
         toDate: $scope.filters.toDate,
         licenceTypeId: $scope.filters.licenceTypeId,
         licenceActionId: $scope.filters.licenceActionId,
-        lin: $scope.filters.lin
+        lin: $scope.filters.lin,
+        limitationId: $scope.filters.limitationId
       });
     };
   }

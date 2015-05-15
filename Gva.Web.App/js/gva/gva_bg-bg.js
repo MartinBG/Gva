@@ -1444,7 +1444,7 @@
         reportDocuments: {
           lin: 'ЛИН',
           name: 'Документ (роля)',
-          type: 'Вид',
+          type: 'Тип документ',
           docNumber: '№ на документа',
           date: 'Дата',
           publisher: 'Издател',
@@ -1466,7 +1466,8 @@
           stampNumber: '№  на печат',
           licenceCode: '№',
           search: 'Търси',
-          'export': 'Експорт'
+          'export': 'Експорт',
+          limitations: 'Ограничения'
         },
         reportRatings: {
           lin: 'ЛИН',
@@ -1482,7 +1483,8 @@
           dateValidFrom: 'Издаден',
           dateValidTo: 'Валиден до',
           search: 'Търси',
-          'export': 'Експорт'
+          'export': 'Експорт',
+          limitations: 'Ограничения'
         },
         qlfStateDirective: {
           title: 'Създаване на състояние относно придибиване на квалификация',

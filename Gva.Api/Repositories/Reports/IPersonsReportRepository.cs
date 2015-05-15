@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Web.Http;
 using ClosedXML.Excel;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Aircraft;
@@ -24,7 +25,8 @@ namespace Gva.Api.Repositories.AircraftRepository
             DateTime? toDate = null,
             int? lin = null,
             int? licenceTypeId = null,
-            int? licenceActionId = null);
+            int? licenceActionId = null,
+            int? limitationId = null);
 
         List<PersonReportRatingDO> GetRatings(
             SqlConnection conn,
@@ -33,7 +35,8 @@ namespace Gva.Api.Repositories.AircraftRepository
             int? ratingClassId = null,
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
-            int? lin = null);
+            int? lin = null,
+            int? limitationId = null);
 
         XLWorkbook GetDocumentsWorkbook(
            SqlConnection conn,
@@ -49,7 +52,8 @@ namespace Gva.Api.Repositories.AircraftRepository
             DateTime? toDate = null,
             int? licenceActionId = null,
             int? licenceTypeId = null,
-            int? lin = null);
+            int? lin = null,
+            int? limitationId = null);
 
         XLWorkbook GetRatingsWorkbook(
             SqlConnection conn,
@@ -58,6 +62,7 @@ namespace Gva.Api.Repositories.AircraftRepository
             int? ratingClassId = null,
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
-            int? lin = null);
+            int? lin = null,
+            int? limitationId = null);
     }
 }

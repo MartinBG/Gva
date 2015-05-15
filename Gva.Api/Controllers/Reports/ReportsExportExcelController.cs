@@ -53,7 +53,8 @@ namespace Gva.Api.Controllers.Reports
             DateTime? toDate = null,
             int? lin = null,
             int? licenceTypeId = null,
-            int? licenceActionId = null)
+            int? licenceActionId = null,
+            int? limitationId = null)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
@@ -63,7 +64,8 @@ namespace Gva.Api.Controllers.Reports
                     toDate: toDate,
                     licenceActionId: licenceActionId,
                     licenceTypeId: licenceTypeId,
-                    lin: lin);
+                    lin: lin,
+                    limitationId: limitationId);
 
                 return this.GetExcelFile(workbook, "licences");
             }
@@ -76,7 +78,8 @@ namespace Gva.Api.Controllers.Reports
             DateTime? toDate = null,
             int? lin = null,
             int? ratingClassId = null,
-            int? authorizationId = null)
+            int? authorizationId = null,
+            int? limitationId = null)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
@@ -86,7 +89,8 @@ namespace Gva.Api.Controllers.Reports
                     toDate: toDate,
                     ratingClassId: ratingClassId,
                     authorizationId: authorizationId,
-                    lin: lin);
+                    lin: lin,
+                    limitationId: limitationId);
 
                 return this.GetExcelFile(workbook, "ratings");
             }

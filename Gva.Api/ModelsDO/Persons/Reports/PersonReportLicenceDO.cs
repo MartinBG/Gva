@@ -30,5 +30,7 @@ namespace Gva.Api.ModelsDO.Persons.Reports
         public string LicenceAction { get; set; }
 
         public string StampNumber { get; set; }
+
+        public string Limitations { get; set; }
     }
 }

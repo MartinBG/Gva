@@ -53,6 +53,7 @@ namespace Gva.Api.Controllers.Reports
             int? lin = null,
             int? licenceTypeId = null,
             int? licenceActionId = null,
+            int? limitationId = null,
             int offset = 0,
             int limit = 10)
         {
@@ -64,6 +65,7 @@ namespace Gva.Api.Controllers.Reports
                     toDate: toDate,
                     licenceActionId: licenceActionId,
                     licenceTypeId: licenceTypeId,
+                    limitationId: limitationId,
                     lin: lin);
 
                 return Ok(new
@@ -82,6 +84,7 @@ namespace Gva.Api.Controllers.Reports
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
             int? lin = null,
+            int? limitationId = null,
             int offset = 0,
             int limit = 10)
         {
@@ -94,7 +97,8 @@ namespace Gva.Api.Controllers.Reports
                     ratingClassId: ratingClassId,
                     authorizationId: authorizationId,
                     aircraftTypeCategoryId: aircraftTypeCategoryId,
-                    lin: lin);
+                    lin: lin,
+                    limitationId: limitationId);
 
                 return Ok(new
                 {

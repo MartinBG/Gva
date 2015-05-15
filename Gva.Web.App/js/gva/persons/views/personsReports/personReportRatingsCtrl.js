@@ -43,7 +43,8 @@
         ratingClassId: $scope.filters.ratingClassId,
         authorizationId: $scope.filters.authorizationId,
         aircraftTypeCategoryId: $scope.filters.aircraftTypeCategoryId,
-        lin: $scope.filters.lin
+        lin: $scope.filters.lin,
+        limitationId: $scope.filters.limitationId
       });
     };
   }

@@ -6,12 +6,13 @@
     <sc-filter type="nomenclature" name="ratingClassId" class="col-sm-3" removable="false" alias="ratingClasses" mode="id" label="persons.reportRatings.ratingClass"></sc-filter>
     <sc-filter type="nomenclature" name="authorizationId" class="col-sm-3" removable="true" alias="authorizations" mode="id" label="persons.reportRatings.authorization"></sc-filter>
     <sc-filter type="nomenclature" name="aircraftTypeCategoryId" class="col-sm-3" removable="true" alias="aircraftCategories" mode="id" label="persons.reportRatings.aircraftTypeCategory"></sc-filter>
+    <sc-filter type="nomenclature" name="limitationId" class="col-sm-3" removable="true" mode="id" alias="limitations66" label="persons.reportRatings.limitations"></sc-filter>
     <sc-search-button action="search()" text="persons.reportRatings.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
     <sc-search-button action="clear"></sc-search-button>
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
-
-  <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/ratings?lin={{filters.lin}}&ratingClassId={{filters.ratingClassId}}&aircraftTypeCategoryId={{aircraftTypeCategoryId}}&authorizationId={{filters.authorizationId}}&fromDate=fromDate&toDate=toDate" target="_blank" sc-access-token text="persons.reportRatings.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
+  
+  <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/ratings?limitationId={{filters.limitationId}}&lin={{filters.lin}}&ratingClassId={{filters.ratingClassId}}&aircraftTypeCategoryId={{aircraftTypeCategoryId}}&authorizationId={{filters.authorizationId}}&fromDate=fromDate&toDate=toDate" target="_blank" sc-access-token text="persons.reportRatings.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
   <sc-ajaxdatatable items="docs" items-count="ratingsCount" fectch-fn="getRatings" set-prop="ratings" count-prop="ratingsCount" dynamic-columns="false" filterable="false">
     <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.lotId }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>

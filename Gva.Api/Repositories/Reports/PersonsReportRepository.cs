@@ -4,8 +4,11 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web.Http;
 using ClosedXML.Excel;
 using Common.Api.Models;
+using Common.Api.Repositories.NomRepository;
 using Common.Data;
 using Common.Linq;
 using Gva.Api.CommonUtils;
@@ -17,6 +20,13 @@ namespace Gva.Api.Repositories.AircraftRepository
 {
     public class PersonsReportRepository : IPersonsReportRepository
     {
+        private INomRepository nomRepository;
+
+        public PersonsReportRepository(INomRepository nomRepository)
+        {
+            this.nomRepository = nomRepository;
+        }
+
         public List<PersonReportDocumentDO> GetDocuments(
             SqlConnection conn,
             string documentRole = null,
@@ -70,9 +80,10 @@ namespace Gva.Api.Repositories.AircraftRepository
             DateTime? toDate = null,
             int? lin = null,
             int? licenceTypeId = null,
-            int? licenceActionId = null)
+            int? licenceActionId = null,
+            int? limitationId = null)
         {
-            return conn.CreateStoreCommand(
+            var result = conn.CreateStoreCommand(
                         @"SELECT
                              p.LotId,
                              p.Lin,
@@ -84,7 +95,8 @@ namespace Gva.Api.Repositories.AircraftRepository
                              le.DateValidTo,
                              le.FirstDocDateValidFrom AS FirstIssueDate, 
                              la.Name AS LicenceAction,
-                             le.StampNumber
+                             le.StampNumber,
+                             le.Limitations
                          FROM 
                          GvaViewPersonLicenceEditions le
                          INNER JOIN GvaViewPersonLicences l ON le.LotId = l.LotId and le.LicencePartIndex = l.PartIndex
@@ -111,9 +123,20 @@ namespace Gva.Api.Repositories.AircraftRepository
                                 DateValidTo = r.Field<DateTime?>("dateValidTo"),
                                 FirstIssueDate = r.Field<DateTime?>("firstIssueDate"),
                                 LicenceAction = r.Field<string>("licenceAction"),
-                                StampNumber = r.Field<string>("stampNumber")
+                                StampNumber = r.Field<string>("stampNumber"),
+                                Limitations = r.Field<string>("limitations")
                             })
                     .ToList();
+
+            if (limitationId.HasValue)
+            {
+                string limName = this.nomRepository.GetNomValue(limitationId.Value).Name;
+                result = result
+                    .Where(r => !string.IsNullOrEmpty(r.Limitations) && Regex.Split(r.Limitations, ", ").Any(l => l == limName))
+                    .ToList();
+            }
+
+            return result;
         }
 
         public List<PersonReportRatingDO> GetRatings(
@@ -123,9 +146,10 @@ namespace Gva.Api.Repositories.AircraftRepository
             int? ratingClassId = null,
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
-            int? lin = null)
+            int? lin = null,
+            int? limitationId = null)
         {
-            return conn.CreateStoreCommand(@"
+            var result = conn.CreateStoreCommand(@"
                          SELECT 
                             p.Lin,
                             r.LotId,
@@ -195,6 +219,16 @@ namespace Gva.Api.Repositories.AircraftRepository
                                 RatingLevel = r.Field<string>("RatingLevel")
                             })
                     .ToList();
+
+            if (limitationId.HasValue)
+            {
+                string limName = this.nomRepository.GetNomValue(limitationId.Value).Name;
+                result = result
+                    .Where(r => !string.IsNullOrEmpty(r.Limitations) && Regex.Split(r.Limitations, ", ").Any(l => l == limName))
+                    .ToList();
+            }
+
+            return result;
         }
 
         public XLWorkbook GetDocumentsWorkbook(
@@ -226,7 +260,7 @@ namespace Gva.Api.Repositories.AircraftRepository
 
             ws.Cell(rowIndex, "A").Value = "Лин";
             ws.Cell(rowIndex, "B").Value = "Документ (роля)";
-            ws.Cell(rowIndex, "C").Value = "Вид";
+            ws.Cell(rowIndex, "C").Value = "Тип документ";
             ws.Cell(rowIndex, "D").Value = "№ на документа";
             ws.Cell(rowIndex, "E").Value = "Издател";
             ws.Cell(rowIndex, "F").Value = "Валиден";
@@ -260,7 +294,8 @@ namespace Gva.Api.Repositories.AircraftRepository
                     DateTime? toDate = null,
                     int? licenceActionId = null,
                     int? licenceTypeId = null,
-                    int? lin = null)
+                    int? lin = null,
+                    int? limitationId = null)
         {
             List<PersonReportLicenceDO> licences = this.GetLicences(
                     conn: conn,
@@ -268,7 +303,8 @@ namespace Gva.Api.Repositories.AircraftRepository
                     toDate: toDate,
                     licenceActionId: licenceActionId,
                     licenceTypeId: licenceTypeId,
-                    lin: lin);
+                    lin: lin,
+                    limitationId: limitationId);
 
             var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("Licences");
@@ -291,7 +327,7 @@ namespace Gva.Api.Repositories.AircraftRepository
             ws.Cell(rowIndex, "H").Value = "До дата";
             ws.Cell(rowIndex, "I").Value = "Основание";
             ws.Cell(rowIndex, "J").Value = "№ на печат";
-
+            ws.Cell(rowIndex, "K").Value = "Ограничения";
             rowIndex++;
             foreach (var licence in licences)
             {
@@ -305,7 +341,7 @@ namespace Gva.Api.Repositories.AircraftRepository
                 ws.Cell(rowIndex, "H").Value = licence.DateValidTo.HasValue ? licence.DateValidTo.Value.ToString("dd.MM.yyyy") : null;
                 ws.Cell(rowIndex, "I").Value = licence.LicenceAction;
                 ws.Cell(rowIndex, "J").Value = licence.StampNumber;
-
+                ws.Cell(rowIndex, "K").Value = licence.Limitations;
                 rowIndex++;
             }
             ws.Columns().AdjustToContents();
@@ -321,7 +357,8 @@ namespace Gva.Api.Repositories.AircraftRepository
             int? ratingClassId = null,
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
-            int? lin = null)
+            int? lin = null,
+            int? limitationId = null)
         {
             List<PersonReportRatingDO> ratings = this.GetRatings(
                         conn: conn,
@@ -329,7 +366,8 @@ namespace Gva.Api.Repositories.AircraftRepository
                         toDate: toDate,
                         ratingClassId: ratingClassId,
                         authorizationId: authorizationId,
-                        lin: lin);
+                        lin: lin,
+                        limitationId: limitationId);
 
             var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("Ratings");
@@ -367,7 +405,7 @@ namespace Gva.Api.Repositories.AircraftRepository
                 ws.Cell(rowIndex, "H").Value = rating.RatingSubClasses;
                 ws.Cell(rowIndex, "I").Value = rating.AircraftTypeCategory;
                 ws.Cell(rowIndex, "J").Value = rating.AuthorizationCode;
-                ws.Cell(rowIndex, "J").Value = rating.Limitations;
+                ws.Cell(rowIndex, "K").Value = rating.Limitations;
 
                 rowIndex++;
             }
