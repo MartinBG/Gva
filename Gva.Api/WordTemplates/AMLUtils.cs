@@ -107,15 +107,12 @@ namespace Gva.Api.WordTemplates
                         .OrderByDescending(epv => epv.Content.Index)
                         .Last();
 
-                    string category = null;
-                    if (rating.Content.AircraftTypeCategory != null)
-                    {
-                        category = rating.Content.AircraftTypeCategory.Code.Contains("C") ? "C" : rating.Content.AircraftTypeCategory.Code;
-                    }
+                    string category = rating.Content.AircraftTypeCategory.Code.Contains("C") ? "C" : rating.Content.AircraftTypeCategory.Code;
+
 
                     aircrafts.Add(new
                     {
-                        AC_TYPE = nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name,
+                        AC_TYPE = rating.Content.AircraftTypeGroup != null ? nomRepository.GetNomValue("aircraftTypeGroups", rating.Content.AircraftTypeGroup.NomValueId).Name : null,
                         CATEGORY = category,
                         DATE = firstRatingEdition.Content.DocumentDateValidFrom
                     });
