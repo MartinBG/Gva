@@ -9,6 +9,7 @@ CREATE TABLE [dbo].[GvaViewPersonDocuments] (
     [TypeId]                INT           NULL,
     [RoleId]                INT           NULL,
     [Publisher]             NVARCHAR(150) NULL,
+    [Limitations]           NVARCHAR(150) NULL,
     [DateValidFrom]         DATETIME2     NULL,
     CONSTRAINT [PK_GvaViewPersonDocuments]                PRIMARY KEY ([LotId], [PartIndex]),
     CONSTRAINT [FK_GvaViewPersonDocuments_GvaViewPersons] FOREIGN KEY ([LotId])  REFERENCES [dbo].[GvaViewPersons] ([LotId]),
@@ -23,5 +24,6 @@ exec spDescColumn N'GvaViewPersonDocuments', N'DocumentPersonNumber' , N'No в �
 exec spDescColumn N'GvaViewPersonDocuments', N'TypeId'               , N'Тип на документа.'
 exec spDescColumn N'GvaViewPersonDocuments', N'RoleId'               , N'Роля на документа.'
 exec spDescColumn N'GvaViewPersonDocuments', N'Publisher'            , N'Издател на документа.'
+exec spDescColumn N'GvaViewPersonDocuments', N'Limitations'          , N'Ограничения (за медицинските).'
 exec spDescColumn N'GvaViewPersonDocuments', N'DateValidFrom'        , N'Дата на издаване на документа.'
 GO

@@ -1452,7 +1452,8 @@
           fromDate: 'От дата',
           toDate: 'До дата',
           search: 'Търси',
-          'export': 'Експорт'
+          'export': 'Експорт',
+          limitations: 'Ограничения'
         },
         reportLicences: {
           names: 'Име',

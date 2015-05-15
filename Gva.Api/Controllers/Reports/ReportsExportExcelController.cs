@@ -31,7 +31,8 @@ namespace Gva.Api.Controllers.Reports
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? typeId = null,
-            int? lin = null)
+            int? lin = null,
+            int? limitationId = null)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
@@ -41,7 +42,8 @@ namespace Gva.Api.Controllers.Reports
                     fromDate: fromDate,
                     toDate: toDate,
                     typeId: typeId,
-                    lin: lin);
+                    lin: lin,
+                    limitationId: limitationId);
 
                 return this.GetExcelFile(workbook, "documents");
             }

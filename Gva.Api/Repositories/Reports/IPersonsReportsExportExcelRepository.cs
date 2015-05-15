@@ -17,7 +17,8 @@ namespace Gva.Api.Repositories.Reports
            DateTime? fromDate = null,
            DateTime? toDate = null,
            int? typeId = null,
-           int? lin = null);
+           int? lin = null,
+           int? limitationId = null);
 
         XLWorkbook GetLicencesWorkbook(
             SqlConnection conn,

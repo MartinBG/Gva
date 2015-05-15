@@ -25,6 +25,8 @@ namespace Gva.Api.ModelsDO.Persons.Reports
 
         public string Publisher { get; set; }
 
+        public string Limitations { get; set; }
+
         public bool? Valid { get; set; }
     }
 }

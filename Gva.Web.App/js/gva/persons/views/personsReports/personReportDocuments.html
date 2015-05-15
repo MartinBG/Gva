@@ -10,11 +10,13 @@
     <sc-filter type="nomenclature" name="typeId" class="col-sm-3" removable="false" alias="documentTypes" mode="id" label="persons.reportDocuments.type"></sc-filter>
     <sc-filter type="date" name="fromDate" class="col-sm-2" removable="false" label="persons.reportDocuments.fromDate"></sc-filter>
     <sc-filter type="date" name="toDate" class="col-sm-2" removable="false" label="persons.reportDocuments.toDate"></sc-filter>
+    <sc-filter type="nomenclature" name="limitationId" class="col-sm-3" removable="true" mode="id" alias="medLimitation" label="persons.reportDocuments.limitations"></sc-filter>
     <sc-search-button action="search()" text="persons.reportDocuments.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
     <sc-search-button action="clear"></sc-search-button>
+    <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
-  <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/documents?lin={{filters.lin}}&documentRole={{filters.documentRole ? filters.documentRole.text: null}}&typeId={{filters.typeId}}&fromDate=fromDate&toDate=toDate" target="_blank" sc-access-token text="persons.reportDocuments.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
+  <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/documents?limitationId={{filters.limitationId}}&lin={{filters.lin}}&documentRole={{filters.documentRole ? filters.documentRole.text: null}}&typeId={{filters.typeId}}&fromDate=fromDate&toDate=toDate" target="_blank" sc-access-token text="persons.reportDocuments.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
   <sc-ajaxdatatable items="docs" items-count="documentsCount" fectch-fn="getDocuments" set-prop="documents" count-prop="documentsCount" dynamic-columns="false" filterable="false">
     <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.lotId }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
@@ -28,6 +30,8 @@
     <sc-ajaxcolumn data="number" title="persons.reportDocuments.docNumber">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="publisher" title="persons.reportDocuments.publisher" class="wrap">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="limitations" title="persons.reportDocuments.limitations" class="wrap">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="valid" title="persons.reportDocuments.valid" type="boolean">
     </sc-ajaxcolumn>

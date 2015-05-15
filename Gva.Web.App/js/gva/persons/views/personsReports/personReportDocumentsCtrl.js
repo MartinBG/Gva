@@ -47,7 +47,8 @@
         fromDate: $scope.filters.fromDate,
         toDate: $scope.filters.toDate,
         typeId: $scope.filters.typeId,
-        lin: $scope.filters.lin
+        lin: $scope.filters.lin,
+        limitationId: $scope.filters.limitationId
       });
     };
   }

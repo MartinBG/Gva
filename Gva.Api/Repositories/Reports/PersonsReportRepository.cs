@@ -24,9 +24,10 @@ namespace Gva.Api.Repositories.Reports
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? typeId = null,
-            int? lin = null)
+            int? lin = null,
+            int? limitationId = null)
         {
-            return conn.CreateStoreCommand(
+            var result = conn.CreateStoreCommand(
                     @"SELECT
                         p.LotId,
                         p.Lin,
@@ -37,11 +38,14 @@ namespace Gva.Api.Repositories.Reports
                         ii.Date,
                         ii.ToDate,
                         ii.Publisher,
-                        ii.Valid
+                        ii.Valid,
+                        d.Limitations
                     FROM 
                     GvaViewInventoryItems ii
                     INNER JOIN GvaViewPersons p ON ii.LotId = p.LotId
                     LEFT JOIN NomValues nv ON nv.NomValueId = ii.TypeId
+                    LEFT JOIN LotParts lp on lp.LotPartId = ii.LotPartId
+                    LEFT JOIN GvaViewPersonDocuments d on d.LotId = lp.LotId and lp.[Index] = d.PartIndex
                     WHERE 1=1 {0} {1} {2} {3} {4}
                     ORDER BY ii.FromDate DESC",
                     new DbClause("and ii.FromDate >= {0}", fromDate),
@@ -60,9 +64,20 @@ namespace Gva.Api.Repositories.Reports
                             FromDate = r.Field<DateTime?>("FromDate") ?? r.Field<DateTime?>("Date"),
                             ToDate = r.Field<DateTime?>("ToDate"),
                             Valid = r.Field<bool?>("Valid"),
-                            Publisher = r.Field<string>("Publisher")
+                            Publisher = r.Field<string>("Publisher"),
+                            Limitations = r.Field<string>("Limitations")
                         })
                 .ToList();
+
+            if (limitationId.HasValue)
+            {
+                string limName = this.nomRepository.GetNomValue(limitationId.Value).Name;
+                result = result
+                    .Where(r => !string.IsNullOrEmpty(r.Limitations) && Regex.Split(r.Limitations, ", ").Any(l => l == limName))
+                    .ToList();
+            }
+
+            return result;
         }
 
         public List<PersonReportLicenceDO> GetLicences(

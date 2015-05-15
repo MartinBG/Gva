@@ -21,7 +21,8 @@ namespace Gva.Api.Repositories.Reports
             DateTime? fromDate = null,
             DateTime? toDate = null,
             int? typeId = null,
-            int? lin = null)
+            int? lin = null,
+            int? limitationId = null)
         {
             List<PersonReportDocumentDO> documents = this.personReportRepository.GetDocuments(
                 conn: conn,
@@ -29,7 +30,8 @@ namespace Gva.Api.Repositories.Reports
                 documentRole: documentRole,
                 fromDate: fromDate,
                 toDate: toDate,
-                typeId: typeId);
+                typeId: typeId,
+                limitationId: limitationId);
 
             var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("Documents");

@@ -21,6 +21,8 @@ namespace Gva.Api.Models.Views.Person
 
         public string Publisher { get; set; }
 
+        public string Limitations { get; set; }
+
         public DateTime? DateValidFrom { get; set; }
 
         public virtual GvaViewPerson Person { get; set; }
@@ -46,6 +48,9 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.Publisher)
                 .HasMaxLength(150);
 
+            this.Property(t => t.Limitations)
+                .HasMaxLength(150);
+
             // Table & Column Mappings
             this.ToTable("GvaViewPersonDocuments");
             this.Property(t => t.LotId).HasColumnName("LotId");
@@ -55,6 +60,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.TypeId).HasColumnName("TypeId");
             this.Property(t => t.RoleId).HasColumnName("RoleId");
             this.Property(t => t.Publisher).HasColumnName("Publisher");
+            this.Property(t => t.Limitations).HasColumnName("Limitations");
             this.Property(t => t.DateValidFrom).HasColumnName("DateValidFrom");
 
             // Relationships

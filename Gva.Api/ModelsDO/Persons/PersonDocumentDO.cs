@@ -18,6 +18,8 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string DocumentPublisher { get; set; }
 
+        public string Limitations { get; set; }
+
         public DateTime? DocumentDateValidFrom { get; set; }
     }
 }

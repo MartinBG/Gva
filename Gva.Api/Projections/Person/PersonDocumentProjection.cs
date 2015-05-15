@@ -98,7 +98,8 @@ namespace Gva.Api.Projections.Person
                     PartIndex = d.Part.Index,
                     DocumentDateValidFrom = d.Content.DocumentDateValidFrom,
                     DocumentPublisher = d.Content.DocumentPublisher.Name,
-                    DocumentNumber = d.Content.DocumentNumber
+                    DocumentNumber = d.Content.DocumentNumber,
+                    Limitations = d.Content.Limitations.Count() > 0 ? string.Join(", ", d.Content.Limitations.Select(l => l.Name)) : null
                 });
 
             var reports = parts.GetAll<PersonReportDO>("personReports")
@@ -133,6 +134,7 @@ namespace Gva.Api.Projections.Person
             document.RoleId = personDocument.DocumentRoleId;
             document.TypeId = personDocument.DocumentTypeId;
             document.Publisher = personDocument.DocumentPublisher;
+            document.Limitations = personDocument.Limitations;
 
             return document;
         }

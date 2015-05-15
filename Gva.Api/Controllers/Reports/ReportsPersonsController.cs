@@ -26,6 +26,7 @@ namespace Gva.Api.Controllers.Reports
             DateTime? toDate = null,
             int? typeId = null,
             int? lin = null,
+            int? limitationId = null,
             int offset = 0, 
             int limit = 10)
         {
@@ -37,7 +38,8 @@ namespace Gva.Api.Controllers.Reports
                     fromDate: fromDate,
                     toDate: toDate,
                     typeId: typeId,
-                    lin: lin);
+                    lin: lin,
+                    limitationId: limitationId);
 
                 return Ok(new
                 {
