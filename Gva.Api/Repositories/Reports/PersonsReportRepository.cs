@@ -213,9 +213,9 @@ namespace Gva.Api.Repositories.Reports
 
             if (limitationId.HasValue)
             {
-                string limName = this.nomRepository.GetNomValue(limitationId.Value).Name;
+                string limCode = this.nomRepository.GetNomValue(limitationId.Value).Code;
                 result = result
-                    .Where(r => !string.IsNullOrEmpty(r.Limitations) && Regex.Split(r.Limitations, ", ").Any(l => l == limName))
+                    .Where(r => !string.IsNullOrEmpty(r.Limitations) && Regex.Split(r.Limitations, ", ").Any(l => l == limCode))
                     .ToList();
             }
 
