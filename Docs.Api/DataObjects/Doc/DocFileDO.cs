@@ -1,9 +1,11 @@
-﻿using Docs.Api.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Extensions;
+using Docs.Api.Models;
 
 namespace Docs.Api.DataObjects
 {
@@ -27,8 +29,13 @@ namespace Docs.Api.DataObjects
 
                 this.File.Key = d.DocFileContentId;
                 this.File.Name = d.DocFileName;
+                this.File.MimeType = MimeTypeHelper.GetFileMimeTypeByExtenstion(Path.GetExtension(d.DocFileName));
                 this.File.RelativePath = ""; //?
-                this.DocFileUrl = string.Format("api/file?fileKey={0}&fileName={1}", d.DocFileContentId, d.DocFileName);
+                this.DocFileUrl = string.Format(
+                    "api/file?fileKey={0}&fileName={1}&mimeType={2}",
+                    d.DocFileContentId,
+                    d.DocFileName,
+                    this.File.MimeType);
 
                 if (d.DocFileKind != null)
                 {

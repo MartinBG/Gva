@@ -42,7 +42,8 @@
           scFilesConfig.fileUrl + '?' +
           $.param({
             'fileKey': file.key,
-            'fileName': file.name
+            'fileName': file.name,
+            'mimeType': file.mimeType
           });
         $scope.uploadedFilesText = file.name;
       } else {

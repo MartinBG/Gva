@@ -1,6 +1,9 @@
 ﻿<div class="modal-header">
   <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
-  <h3 class="modal-title" l10n-text="portalModal.eApplication.title" ></h3>
+  <h3 class="modal-title">
+    <span l10n-text="portalModal.eApplication.title"></span>
+    <a class="glyphicon glyphicon-fullscreen" ng-href="{{iframeSrc}}" ng-click="cancel()" target="_blank"></a>
+  </h3>
 </div>
 <div class="modal-body">
   <iframe id="portalFrame" ng-src="{{iframeSrc}}" style="width: 1020px; height: 492px; margin: 0px auto;"></iframe>

@@ -35,7 +35,7 @@ namespace Common.Api.Controllers
             result.Content.Headers.ContentType =
                 new MediaTypeHeaderValue(string.IsNullOrEmpty(mimeType) ? "application/octet-stream" : mimeType);
             result.Content.Headers.ContentDisposition =
-                new ContentDispositionHeaderValue(string.IsNullOrEmpty(dispositionType) ? "attachment" : dispositionType)
+                new ContentDispositionHeaderValue(string.IsNullOrEmpty(dispositionType) ? "inline" : dispositionType)
                 {
                     FileName = fileName
                 };

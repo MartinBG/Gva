@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Common.Extensions;
 using Docs.Api.Models;
 using Gva.Api.Models;
 
@@ -14,13 +16,16 @@ namespace Gva.Api.ModelsDO
         {
             this.Name = docFile.DocFileName;
             this.Key = docFile.DocFileContentId;
+            this.MimeType =
+                MimeTypeHelper.GetFileMimeTypeByExtenstion(Path.GetExtension(docFile.DocFileName));
         }
 
         public FileDataDO(GvaFile gvaFile)
         {
             this.Name = gvaFile.Filename;
-            this.MimeType = gvaFile.MimeType;
             this.Key = gvaFile.FileContentId;
+            this.MimeType = gvaFile.MimeType ??
+                MimeTypeHelper.GetFileMimeTypeByExtenstion(Path.GetExtension(gvaFile.Filename));
         }
 
         public Guid Key { get; set; }

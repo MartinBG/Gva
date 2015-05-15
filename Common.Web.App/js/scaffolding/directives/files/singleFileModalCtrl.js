@@ -22,7 +22,8 @@
       $scope.file = {
         url: scFilesConfig.fileUrl + '?' + $.param({
           'fileKey': file.key,
-          'fileName': file.name
+          'fileName': file.name,
+          'mimeType': file.mimeType
         }),
         name: file.name
       };

@@ -15,6 +15,7 @@ namespace Docs.Api.DataObjects
 
         public Guid Key { get; set; }
         public string Name { get; set; }
+        public string MimeType { get; set; }
         public string RelativePath { get; set; }
     }
 }
