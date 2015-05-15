@@ -478,8 +478,10 @@
     <Compile Include="Repositories\PersonRepository\IPersonRepository.cs" />
     <Compile Include="Repositories\PersonRepository\PersonRepository.cs" />
     <Compile Include="ModelsDO\PublisherType.cs" />
+    <Compile Include="Repositories\Reports\IPersonsReportsExportExcelRepository.cs" />
     <Compile Include="Repositories\Reports\PersonsReportRepository.cs" />
     <Compile Include="Repositories\Reports\IPersonsReportRepository.cs" />
+    <Compile Include="Repositories\Reports\PersonsReportsExportExcelRepository.cs" />
     <Compile Include="Repositories\StageRepository\IStageRepository.cs" />
     <Compile Include="Repositories\StageRepository\StageRepository.cs" />
     <Compile Include="WordTemplates\AMLNational.cs" />

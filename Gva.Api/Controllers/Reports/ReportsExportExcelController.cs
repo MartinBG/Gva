@@ -8,6 +8,7 @@ using Gva.Api.CommonUtils;
 using Gva.Api.ModelsDO.Persons.Reports;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.InventoryRepository;
+using Gva.Api.Repositories.Reports;
 
 namespace Gva.Api.Controllers.Reports
 {
@@ -16,11 +17,11 @@ namespace Gva.Api.Controllers.Reports
     [RoutePrefix("api/reports/persons/excelExport")]
     public class PersonsReportsExportExcelController : ExcelController
     {
-        private IPersonsReportRepository personsReportRepository;
+        private IPersonsReportsExportExcelRepository personsReportsExportExcelRepository;
 
-        public PersonsReportsExportExcelController(IPersonsReportRepository personsReportRepository)
+        public PersonsReportsExportExcelController(IPersonsReportsExportExcelRepository personsReportsExportExcelRepository)
         {
-            this.personsReportRepository = personsReportRepository;
+            this.personsReportsExportExcelRepository = personsReportsExportExcelRepository;
         }
 
         [HttpGet]
@@ -34,7 +35,7 @@ namespace Gva.Api.Controllers.Reports
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
-                var workbook = this.personsReportRepository.GetDocumentsWorkbook(
+                var workbook = this.personsReportsExportExcelRepository.GetDocumentsWorkbook(
                     conn: conn,
                     documentRole: documentRole,
                     fromDate: fromDate,
@@ -58,7 +59,7 @@ namespace Gva.Api.Controllers.Reports
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
-                var workbook = this.personsReportRepository.GetLicencesWorkbook(
+                var workbook = this.personsReportsExportExcelRepository.GetLicencesWorkbook(
                     conn: conn,
                     fromDate: fromDate,
                     toDate: toDate,
@@ -83,7 +84,7 @@ namespace Gva.Api.Controllers.Reports
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
-                var workbook = this.personsReportRepository.GetRatingsWorkbook(
+                var workbook = this.personsReportsExportExcelRepository.GetRatingsWorkbook(
                     conn: conn,
                     fromDate: fromDate,
                     toDate: toDate,

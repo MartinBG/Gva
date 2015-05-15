@@ -9,26 +9,26 @@ using Gva.Api.ModelsDO.Persons.Reports;
 
 namespace Gva.Api.Repositories.Reports
 {
-    public interface IPersonsReportRepository
+    public interface IPersonsReportsExportExcelRepository
     {
-        List<PersonReportDocumentDO> GetDocuments(
-            SqlConnection conn,
-            string documentRole = null,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
-            int? typeId = null,
-            int? lin = null);
+        XLWorkbook GetDocumentsWorkbook(
+           SqlConnection conn,
+           string documentRole = null,
+           DateTime? fromDate = null,
+           DateTime? toDate = null,
+           int? typeId = null,
+           int? lin = null);
 
-        List<PersonReportLicenceDO> GetLicences(
+        XLWorkbook GetLicencesWorkbook(
             SqlConnection conn,
             DateTime? fromDate = null,
             DateTime? toDate = null,
-            int? lin = null,
-            int? licenceTypeId = null,
             int? licenceActionId = null,
+            int? licenceTypeId = null,
+            int? lin = null,
             int? limitationId = null);
 
-        List<PersonReportRatingDO> GetRatings(
+        XLWorkbook GetRatingsWorkbook(
             SqlConnection conn,
             DateTime? fromDate = null,
             DateTime? toDate = null,

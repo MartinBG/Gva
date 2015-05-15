@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Http;
 using Gva.Api.Repositories.AircraftRepository;
+using Gva.Api.Repositories.Reports;
 
 namespace Gva.Api.Controllers.Reports
 {
