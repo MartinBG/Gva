@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5332" xmlns="http://ereg.egov.bg/segment/R-5332" 
+
+	xmlns:acqc="http://ereg.egov.bg/segment/R-4056" 
+	xmlns:fte="http://ereg.egov.bg/value/R-5330" 
+	xmlns:fstd="http://ereg.egov.bg/value/R-4182" 
+	xmlns:whw="http://ereg.egov.bg/value/R-5324" 
+	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4056" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5330" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4182" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5324" />
+
+	<xsd:complexType name="CheckCompetenceRating">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Условия на упражняване на правата от работодател</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftClassQualificationClass" type="acqc:AircraftClassQualificationClass" minOccurs="0" />
+			<xsd:element name="FirstFlightTestEvaluation" type="fte:FlightTestEvaluation" minOccurs="0" />
+			<xsd:element name="FirstFlightSkillTestDate" type="fstd:FlightSkillTestDate" minOccurs="0" />
+			<xsd:element name="SecondFlightTestEvaluation" type="fte:FlightTestEvaluation" minOccurs="0" />
+			<xsd:element name="SecondFlightSkillTestDate" type="fstd:FlightSkillTestDate" minOccurs="0" />
+			<xsd:element name="ThirdFlightTestEvaluation" type="fte:FlightTestEvaluation" minOccurs="0" />
+			<xsd:element name="ThirdFlightSkillTestDate" type="fstd:FlightSkillTestDate" minOccurs="0" />
+			<xsd:element name="WorkHoursWorker" type="whw:WorkHoursWorker" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

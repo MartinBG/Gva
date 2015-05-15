@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5262" xmlns="http://ereg.egov.bg/segment/R-5262" 
+	xmlns:ac="http://ereg.egov.bg/segment/R-4152" 
+	xmlns:at="http://ereg.egov.bg/segment/R-4158" 
+	xmlns:ird="http://ereg.egov.bg/value/R-5252" 
+	xmlns:lpcd="http://ereg.egov.bg/value/R-5254" 
+	xmlns:prqc="http://ereg.egov.bg/segment/R-5260" 
+	xmlns:ncat="http://ereg.egov.bg/value/R-5234" 
+	xmlns:hfest="http://ereg.egov.bg/value/R-3992" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4152" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5252" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5254" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5260" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5234" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3992" />
+
+	<xsd:complexType name="QualificationClassRecordedOwnershipLicense">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Квалификационен клас, вписан в притежаваното свидетелство за правоспособност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftClass" type="ac:AircraftClass" minOccurs="0" />
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+			<xsd:element name="InitialRegistrationDate" type="ird:InitialRegistrationDate" minOccurs="0" />
+			<xsd:element name="LastProficiencyCheckDate" type="lpcd:LastProficiencyCheckDate" minOccurs="0" />
+			<xsd:element name="PermissionsRestrictionsQualificationClass" type="prqc:PermissionsRestrictionsQualificationClass" minOccurs="0" />
+			<xsd:element name="NotesCheckAircraftType" type="ncat:NotesCheckAircraftType" minOccurs="0" />
+			<xsd:element name="HoursFlyingExperienceSkillTest" type="hfest:HoursFlyingExperienceSkillTest" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

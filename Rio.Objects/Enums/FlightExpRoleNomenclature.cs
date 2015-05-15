@@ -57,7 +57,7 @@ namespace Rio.Objects.Enums
         public static readonly FlightExpRoleNomenclature NightTime = new FlightExpRoleNomenclature { ResourceKey = "NightTime", Code = "32" };
 
         public static readonly FlightExpRoleNomenclature SoloUnderSupervisionInstructor = new FlightExpRoleNomenclature { ResourceKey = "SoloUnderSupervisionInstructor", Code = "33" };
-
+        
         public static readonly IEnumerable<FlightExpRoleNomenclature> Values =
             new List<FlightExpRoleNomenclature>
             {
@@ -99,5 +99,46 @@ namespace Rio.Objects.Enums
                 InstrumentTime,
                 NightTime
             };
+
+
+        public static readonly FlightExpRoleNomenclature StudentAndInstructor = new FlightExpRoleNomenclature { ResourceKey = "StudentAndInstructor", Code = "34" };
+        public static readonly FlightExpRoleNomenclature Simulator = new FlightExpRoleNomenclature { ResourceKey = "Simulator", Code = "35" };
+        public static readonly FlightExpRoleNomenclature WatchWithInstructor = new FlightExpRoleNomenclature { ResourceKey = "WatchWithInstructor", Code = "36" };
+        public static readonly FlightExpRoleNomenclature Solo = new FlightExpRoleNomenclature { ResourceKey = "Solo", Code = "37" };
+
+        public static readonly IEnumerable<FlightExpRoleNomenclature> R5248Values =
+            new List<FlightExpRoleNomenclature>
+            {
+                StudentAndInstructor,
+                Simulator,
+                WatchWithInstructor,
+                Solo
+            };
+
+        public static readonly IEnumerable<FlightExpRoleNomenclature> R5246Values =
+            new List<FlightExpRoleNomenclature>
+            {
+                Commander,
+                CrossCountryCoPilot,
+                InstrumentTime
+            };
+
+        public static readonly FlightExpRoleNomenclature RouteWithInstructor = new FlightExpRoleNomenclature { ResourceKey = "RouteWithInstructor", Code = "38" };
+        public static readonly FlightExpRoleNomenclature RouteAsKBC = new FlightExpRoleNomenclature { ResourceKey = "RouteAsKBC", Code = "39" };
+        public static readonly FlightExpRoleNomenclature NightWithInstructor = new FlightExpRoleNomenclature { ResourceKey = "NightWithInstructor", Code = "40" };
+        public static readonly FlightExpRoleNomenclature NightAsKBC = new FlightExpRoleNomenclature { ResourceKey = "NightAsKBC", Code = "41" };
+        public static readonly FlightExpRoleNomenclature AsInstructor = new FlightExpRoleNomenclature { ResourceKey = "AsInstructor", Code = "42" };
+
+        public static readonly IEnumerable<FlightExpRoleNomenclature> R5250Values =
+            new List<FlightExpRoleNomenclature>
+            {
+                RouteWithInstructor,
+                RouteAsKBC,
+                NightWithInstructor,
+                NightAsKBC,
+                AsInstructor
+            };
+
     }
+
 }

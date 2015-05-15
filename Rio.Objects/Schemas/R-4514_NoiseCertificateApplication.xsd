@@ -11,6 +11,7 @@
 	xmlns:esaq="http://ereg.egov.bg/value/0008-000035"
 	xmlns:ancd="http://ereg.egov.bg/segment/R-4496" 
 	xmlns:nd="http://ereg.egov.bg/segment/R-4512"
+	xmlns:ap="http://ereg.egov.bg/value/R-5316"
 	xmlns:cres="http://ereg.egov.bg/value/R-4016"
 	xmlns:add="http://ereg.egov.bg/segment/R-3994"
 	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
@@ -28,6 +29,7 @@
 	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4496" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4512" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5316" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
@@ -49,6 +51,7 @@
 			<xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
 			<xsd:element name="AircraftNoiseComplianceData" type="ancd:AircraftNoiseComplianceData" minOccurs="0" />
 			<xsd:element name="NoiseData" type="nd:NoiseData" minOccurs="0" />
+			<xsd:element name="ApplicantPosition" type="ap:ApplicantPosition" minOccurs="0" />
 			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
 			<xsd:element name="AttachedDocumentDatasCollection" type="add:AttachedDocumentDatasCollection" minOccurs="0" />
 			<xsd:element name="AttachedDocuments" minOccurs="0">

@@ -41,39 +41,59 @@ namespace R_5250
 		public R_4012.FlightCrewPersonalData FlightCrewPersonalData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_5230.AttestationData),ElementName="AttestationData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4048.ASCertificateType),ElementName="ASCertificateType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_5230.AttestationData AttestationData { get; set; }
+		public R_4048.ASCertificateType ASCertificateType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="TypeConfirmedRecovery",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4080.ASCertificateData),ElementName="ASCertificateData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string TypeConfirmedRecovery { get; set; }
+		public R_4080.ASCertificateData ASCertificateData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="IsAircraftTypeSelected",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_5264.QualificationClassesRecordedOwnershipLicenses),ElementName="QualificationClassesRecordedOwnershipLicenses",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool IsAircraftTypeSelected { get; set; }
+		public R_5264.QualificationClassesRecordedOwnershipLicenses QualificationClassesRecordedOwnershipLicenses { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_5238.AircraftTypeNoteChecks),ElementName="AircraftTypeNoteChecks",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_5238.AircraftTypeNoteChecks AircraftTypeNoteChecks { get; set; }
+		public R_4158.AircraftType AircraftType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="PersonKindRecordRating",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_5260.PermissionsRestrictionsQualificationClass),ElementName="PermissionsRestrictionsQualificationClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string PersonKindRecordRating { get; set; }
+		public R_5260.PermissionsRestrictionsQualificationClass PermissionsRestrictionsQualificationClass { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_5238.AircraftTypeNoteChecks),ElementName="PersonKindAircraftTypeNoteChecks",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(ElementName="OtherMeansDescriptionTraining",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_5238.AircraftTypeNoteChecks PersonKindAircraftTypeNoteChecks { get; set; }
+		public string OtherMeansDescriptionTraining { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="AttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4098.AeromedicalFitnessCertificateData),ElementName="AeromedicalFitnessCertificateData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_3994.AttachedDocumentDatasCollection AttachedDocumentDatasCollection { get; set; }
+		public R_4098.AeromedicalFitnessCertificateData AeromedicalFitnessCertificateData { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="FlightSkillTestDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public DateTime? FlightSkillTestDate { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4180.FlightSkillTestExaminer),ElementName="FlightSkillTestExaminer",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_4180.FlightSkillTestExaminer FlightSkillTestExaminer { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="ProtocolNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string ProtocolNumber { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_5294.FlightExperience),ElementName="FlightExperience",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_5294.FlightExperience FlightExperience { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4696.EAURecipientsAttachedDocumentDatasCollection),ElementName="EAURecipientsAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5294" xmlns="http://ereg.egov.bg/segment/R-5294" 
+
+	xmlns:ln="http://ereg.egov.bg/value/R-5282" 
+	xmlns:act="http://ereg.egov.bg/segment/R-5288" 
+	xmlns:ehfc="http://ereg.egov.bg/segment/R-5292" 
+	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5282" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5288" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5292" />
+
+	<xsd:complexType name="FlightExperience">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Летателен опит</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="LicenseNumber" type="ln:LicenseNumber" minOccurs="0" />
+			<xsd:element name="AircraftClassType" type="act:AircraftClassType" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="ExperienceHoursFlightsCount" type="ehfc:ExperienceHoursFlightsCount" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

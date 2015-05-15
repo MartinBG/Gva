@@ -15,6 +15,7 @@ namespace Rio.Objects.Enums
         public List<BaseNomenclature> CabinCrewValues;
         public List<BaseNomenclature> ChangeCompetentValues;
         public List<BaseNomenclature> InstructorValues;
+        public List<BaseNomenclature> R5246Values;
 
         public static readonly BaseNomenclature AmateurAirlinePilotPPL = new BaseNomenclature("PPL(A)", "Любител пилот на самолет PPL(A)");
         public static readonly BaseNomenclature ProfessionalAirlinePilotCPL = new BaseNomenclature("CPL(A)", "Професионален пилот на самолет CPL(A)");
@@ -46,6 +47,8 @@ namespace Rio.Objects.Enums
         public static readonly BaseNomenclature IRA = new BaseNomenclature("IR(A)", "IR(A)");
         public static readonly BaseNomenclature IRH = new BaseNomenclature("IR(H)", "IR(H)");
         public static readonly BaseNomenclature IRAs = new BaseNomenclature("IR(As)", "IR(As)");
+
+        public static readonly BaseNomenclature Transformation = new BaseNomenclature("05", "Преобразуване");
 
         public static List<BaseNomenclature> R5178Values = new List<BaseNomenclature>()
         {
@@ -127,6 +130,12 @@ namespace Rio.Objects.Enums
                 Confirm,
                 New,
                 Expand 
+            };
+
+            this.R5246Values = new List<BaseNomenclature>()
+            {
+                Confirm,
+                Transformation
             };
         }
     }

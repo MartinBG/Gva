@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5286" xmlns="http://ereg.egov.bg/segment/R-5286" 
+
+	xmlns:at="http://ereg.egov.bg/segment/R-4158" 
+	xmlns:tbd="http://ereg.egov.bg/segment/R-5274" 
+	xmlns:fst="http://ereg.egov.bg/segment/R-4174" 
+	xmlns:omdt="http://ereg.egov.bg/value/R-5276" 
+	xmlns:on="http://ereg.egov.bg/value/R-5278" 
+	xmlns:od="http://ereg.egov.bg/value/R-5280" 
+	xmlns:irp="http://ereg.egov.bg/segment/R-5270" 
+	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5274" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4174" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5276" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5278" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5280" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5270" />
+
+	<xsd:complexType name="EntryQualificationClassPermission">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Вписване на квалификационен клас и/или разрешение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+			<xsd:element name="AircraftTrainingBasicData" type="tbd:TrainingBasicData" minOccurs="0" />
+			<xsd:element name="FlightSimulatorType" type="fst:FlightSimulatorType" minOccurs="0" />
+			<xsd:element name="FlightSimulatorTrainingBasicData" type="tbd:TrainingBasicData" minOccurs="0" />
+			<xsd:element name="OtherMeansDescriptionTraining" type="omdt:OtherMeansDescriptionTraining" minOccurs="0" />
+			<xsd:element name="OtherTrainingBasicData" type="tbd:TrainingBasicData" minOccurs="0" />
+			<xsd:element name="OrderNumber" type="on:OrderNumber" minOccurs="0" />
+			<xsd:element name="OrderDate" type="od:OrderDate" minOccurs="0" />
+			<xsd:element name="TrainingIndividualRecoveryProgram" type="irp:IndividualRecoveryProgram" minOccurs="0" />
+			<xsd:element name="FinishedTrainingBasicData" type="tbd:TrainingBasicData" minOccurs="0" />
+			<xsd:element name="FinishedIndividualRecoveryProgram" type="irp:IndividualRecoveryProgram" minOccurs="0" />
+			<xsd:element name="OtherTrainingDescription" type="omdt:OtherMeansDescriptionTraining" minOccurs="0" />
+			<xsd:element name="OtherMeansTrainingBasicData" type="tbd:TrainingBasicData" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

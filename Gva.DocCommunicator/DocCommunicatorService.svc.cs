@@ -611,6 +611,33 @@ namespace Gva.DocCommunicator
                         }
                     } break;
 
+                case NomenclatureType.IndividualRecoveryProgram:
+                    {
+                        var nom = new Rio.Objects.Enums.DummyNomenclature();
+                        foreach (var item in nom.Values)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.TrainingAsCourseExam:
+                    {
+                        var nom = new Rio.Objects.Enums.ASCourseExamNomenclature();
+                        foreach (var item in nom.TrainingValues)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
+                case NomenclatureType.ConfirmTransofrmationASCertificateType:
+                    {
+                        var nom = new Rio.Objects.Enums.ASCertificateTypeNomenclature();
+                        foreach (var item in nom.R5246Values)
+                        {
+                            list.Add(new NomenclatureItem { Value = item.Value, Text = item.Text });
+                        }
+                    } break;
+
 
                 default:
                     {

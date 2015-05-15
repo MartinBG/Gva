@@ -12,8 +12,8 @@
 			<xsd:documentation xml:lang="bg">Издателство на атестация</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="IssueAttestationCode" type="iac:IssueAttestationCode" />
-			<xsd:element name="IssueAttestationName" type="ian:IssueAttestationName" />
+			<xsd:element name="IssueAttestationCode" type="iac:IssueAttestationCode" minOccurs="0" />
+			<xsd:element name="IssueAttestationName" type="ian:IssueAttestationName" minOccurs="0" />
 		</xsd:sequence>
 	</xsd:complexType>
 </xsd:schema>

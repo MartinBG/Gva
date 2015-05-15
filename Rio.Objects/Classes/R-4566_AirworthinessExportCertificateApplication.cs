@@ -66,6 +66,11 @@ namespace R_4566
 		public R_4394.AircraftOwnerData NewOwnerAircraftOwnerData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4584.ContactInformation),ElementName="NewOwnerContactInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_4584.ContactInformation NewOwnerContactInformation { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4014.EvidencePersonRepresentingRecipientElectronicService),ElementName="EvidencePersonRepresentingRecipientElectronicService",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public R_4014.EvidencePersonRepresentingRecipientElectronicService EvidencePersonRepresentingRecipientElectronicService { get; set; }

@@ -61,6 +61,11 @@ namespace R_4490
 		public R_4394.AircraftOwnerData AircraftOwnerData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4584.ContactInformation),ElementName="ContactInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_4584.ContactInformation ContactInformation { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4014.EvidencePersonRepresentingRecipientElectronicService),ElementName="EvidencePersonRepresentingRecipientElectronicService",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public R_4014.EvidencePersonRepresentingRecipientElectronicService EvidencePersonRepresentingRecipientElectronicService { get; set; }

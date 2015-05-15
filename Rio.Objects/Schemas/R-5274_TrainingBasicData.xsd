@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5274" xmlns="http://ereg.egov.bg/segment/R-5274" 
+	xmlns:sdtp="http://ereg.egov.bg/value/R-0454" 
+	xmlns:dtp="http://ereg.egov.bg/value/R-0456" 
+	xmlns:hfest="http://ereg.egov.bg/value/R-3992" 
+	xmlns:fc="http://ereg.egov.bg/value/R-5272" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-0454" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-0456" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3992" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5272" />
+
+	<xsd:complexType name="TrainingBasicData">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Основна информация за обучение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="StartDateTimePeriod" type="sdtp:StartDateTimePeriod" minOccurs="0" />
+			<xsd:element name="DeadlineTimePeriod" type="dtp:DeadlineTimePeriod" minOccurs="0" />
+			<xsd:element name="HoursFlyingExperienceSkillTest" type="hfest:HoursFlyingExperienceSkillTest" minOccurs="0" />
+			<xsd:element name="FlightsCount" type="fc:FlightsCount" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

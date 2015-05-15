@@ -61,6 +61,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Като инструктор.
+        /// </summary>
+        public static string AsInstructor {
+            get {
+                return ResourceManager.GetString("AsInstructor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Като борден инженер.
         /// </summary>
         public static string BordEngineer {
@@ -232,6 +241,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to През нощта като КВС.
+        /// </summary>
+        public static string NightAsKBC {
+            get {
+                return ResourceManager.GetString("NightAsKBC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Втори пилот.
         /// </summary>
         public static string NightFlyingCoPilot {
@@ -277,6 +295,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to През нощта с инструктор.
+        /// </summary>
+        public static string NightWithInstructor {
+            get {
+                return ResourceManager.GetString("NightWithInstructor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Други часове кредитирани (ако е приложимо).
         /// </summary>
         public static string OtherCreditedHours {
@@ -286,11 +313,47 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to По маршрут като КВС.
+        /// </summary>
+        public static string RouteAsKBC {
+            get {
+                return ResourceManager.GetString("RouteAsKBC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to По маршрут с инструктор.
+        /// </summary>
+        public static string RouteWithInstructor {
+            get {
+                return ResourceManager.GetString("RouteWithInstructor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Втори пилот.
         /// </summary>
         public static string SecondPilot {
             get {
                 return ResourceManager.GetString("SecondPilot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to На тренажор.
+        /// </summary>
+        public static string Simulator {
+            get {
+                return ResourceManager.GetString("Simulator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Самостоятелни.
+        /// </summary>
+        public static string Solo {
+            get {
+                return ResourceManager.GetString("Solo", resourceCulture);
             }
         }
         
@@ -340,6 +403,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Обучаем (с инструктор).
+        /// </summary>
+        public static string StudentAndInstructor {
+            get {
+                return ResourceManager.GetString("StudentAndInstructor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Обучаем  командир на полет (SPIC-само интегриран).
         /// </summary>
         public static string TraineeCommander {
@@ -354,6 +426,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string TraineeCommanderWithInstructor {
             get {
                 return ResourceManager.GetString("TraineeCommanderWithInstructor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Под наблюдение с инструктор.
+        /// </summary>
+        public static string WatchWithInstructor {
+            get {
+                return ResourceManager.GetString("WatchWithInstructor", resourceCulture);
             }
         }
     }

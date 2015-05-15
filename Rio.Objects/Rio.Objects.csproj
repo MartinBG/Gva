@@ -1253,6 +1253,59 @@
     <Compile Include="Classes\R-5246_ConfirmationConversionPursuantLicensePilotIssuedApplication.cs" />
     <Compile Include="Classes\R-5248_RegistrationAircraftTypePermissionFlightCrewApplication.cs" />
     <Compile Include="Classes\R-5250_ConfirmationRatingCrewApplication.cs" />
+    <Compile Include="Classes\R-5252_InitialRegistrationDate.cs" />
+    <Compile Include="Classes\R-5254_LastProficiencyCheckDate.cs" />
+    <Compile Include="Classes\R-5256_PermissionsRestrictionsQualificationClassCode.cs" />
+    <Compile Include="Classes\R-5258_PermissionsRestrictionsQualificationClassName.cs" />
+    <Compile Include="Classes\R-5260_PermissionsRestrictionsQualificationClass.cs" />
+    <Compile Include="Classes\R-5262_QualificationClassRecordedOwnershipLicense.cs" />
+    <Compile Include="Classes\R-5264_QualificationClassesRecordedOwnershipLicenses.cs" />
+    <Compile Include="Classes\R-5266_IndividualRecoveryProgramCode.cs" />
+    <Compile Include="Classes\R-5268_IndividualRecoveryProgramName.cs" />
+    <Compile Include="Classes\R-5270_IndividualRecoveryProgram.cs" />
+    <Compile Include="Classes\R-5272_FlightsCount.cs" />
+    <Compile Include="Classes\R-5274_TrainingBasicData.cs" />
+    <Compile Include="Classes\R-5276_OtherMeansDescriptionTraining.cs" />
+    <Compile Include="Classes\R-5278_OrderNumber.cs" />
+    <Compile Include="Classes\R-5280_OrderDate.cs" />
+    <Compile Include="Classes\R-5282_LicenseNumber.cs" />
+    <Compile Include="Classes\R-5284_QualificationClassPermission.cs" />
+    <Compile Include="Classes\R-5286_EntryQualificationClassPermission.cs" />
+    <Compile Include="Classes\R-5288_AircraftClassType.cs" />
+    <Compile Include="Classes\R-5290_HoursFlightsCount.cs" />
+    <Compile Include="Classes\R-5292_ExperienceHoursFlightsCount.cs" />
+    <Compile Include="Classes\R-5294_FlightExperience.cs" />
+    <Compile Include="Classes\R-5296_ProtocolNumber.cs" />
+    <Compile Include="Classes\R-5298_IsForeignLicenseAimSelected.cs" />
+    <Compile Include="Classes\R-5300_ForeignLicenseAimName.cs" />
+    <Compile Include="Classes\R-5302_ForeignLicenseAimPeriod.cs" />
+    <Compile Include="Classes\R-5304_ForeignLicenseAim.cs" />
+    <Compile Include="Classes\R-5306_IsFlyingExperienceOperationsOtherThanCommercialAirTransport.cs" />
+    <Compile Include="Classes\R-5308_IsFlyingExperienceCommercialAirTransport.cs" />
+    <Compile Include="Classes\R-5310_ExperienceHoursCountChoosePlace.cs" />
+    <Compile Include="Classes\R-5312_FlightExperienceChoosePlace.cs" />
+    <Compile Include="Classes\R-5314_DescriptionTasksSpecifiedDuration.cs" />
+    <Compile Include="Classes\R-5316_ApplicantPosition.cs" />
+    <Compile Include="Classes\R-5318_BodySectorWorker.cs" />
+    <Compile Include="Classes\R-5320_PositionWorker.cs" />
+    <Compile Include="Classes\R-5322_ActiveRestWorker.cs" />
+    <Compile Include="Classes\R-5324_WorkHoursWorker.cs" />
+    <Compile Include="Classes\R-5326_OtherConditionsWorker.cs" />
+    <Compile Include="Classes\R-5328_EmployerRightsConditions.cs" />
+    <Compile Include="Classes\R-5330_FlightTestEvaluation.cs" />
+    <Compile Include="Classes\R-5332_CheckCompetenceRating.cs" />
+    <Compile Include="Classes\R-5334_ASCertificateChange.cs" />
+    <Compile Include="Classes\R-5336_FlightPurposeAdditionalInformation.cs" />
+    <Compile Include="Classes\R-5338_StatusConditionsApprovedFlight.cs" />
+    <Compile Include="Classes\R-5340_CandidateReferNumber.cs" />
+    <Compile Include="Classes\R-5342_ApplyForm18BKind.cs" />
+    <Compile Include="Classes\R-5344_NotApplyForm18BReason.cs" />
+    <Compile Include="Classes\R-5346_ConnectApplicationCurrentProjectEASA.cs" />
+    <Compile Include="Classes\R-5348_ProjectNumberEASA.cs" />
+    <Compile Include="Classes\R-5350_AircraftKind.cs" />
+    <Compile Include="Classes\R-5352_StatedDuration.cs" />
+    <Compile Include="Classes\R-5354_DescriptionNonComplianceRequirements.cs" />
+    <Compile Include="Classes\R-5356_DataEASAForm37AnotherApplication.cs" />
     <Compile Include="Classes\R-6002_RecipientNoIdentification.cs" />
     <Compile Include="Classes\R-6004_AuthorNoIdentification.cs" />
     <Compile Include="Classes\R-6006_HeaderNoIdentification.cs" />
@@ -1351,6 +1404,7 @@
     <Compile Include="Enums\AircraftClassQualificationClassNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\AircraftKindNomenclature.cs" />
     <Compile Include="Enums\AircraftMaintenanceCategoryLicenseNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1379,12 +1433,15 @@
     <Compile Include="Enums\ApplicationTypeNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\ApplyForm18BKindNomenclature.cs" />
     <Compile Include="Enums\App_LocalResources\AccessFormPublicInformationNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AccessFormPublicInformationNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\ActivityKindNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\ActivityKindNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\ActivityScheduleNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\ActivityScheduleNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\AircraftKindNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\AircraftKindNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AircraftServicesPerformNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AircraftServicesPerformNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AirServicesTypeNomenclature.Designer.cs" />
@@ -1393,12 +1450,18 @@
     <Compile Include="Enums\App_LocalResources\ApplicantTypeNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\ApplicationTypeNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\ApplicationTypeNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\ApplyForm18BKindNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\ApplyForm18BKindNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AttachedDocumentKindNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AttachedDocumentKindNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AuthorTypeNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\AuthorTypeNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\CertificationScopesNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\CertificationScopesNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\ConditionsApprovedNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\ConditionsApprovedNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\ConnectApplicationCurrentProjectEASANomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\ConnectApplicationCurrentProjectEASANomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\DerogationsNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\DerogationsNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\FinancialArrangementsNomenclature.Designer.cs" />
@@ -1413,6 +1476,8 @@
     <Compile Include="Enums\App_LocalResources\FlightSkillTestNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\FlightSubaimNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\FlightSubaimNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\ForeignLicenseAimNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\ForeignLicenseAimNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\FSTDRentFormNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\FSTDRentFormNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\LeaseTypeNomenclature.Designer.cs" />
@@ -1461,10 +1526,14 @@
     <Compile Include="Enums\App_LocalResources\SpecialPermissionNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\SpecialRestrictionNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\SpecialRestrictionNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\StatedDurationNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\StatedDurationNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\SubmissionTimeNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\SubmissionTimeNomenclature.en.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\TypeEntryRegisterNomenclature.Designer.cs" />
     <Compile Include="Enums\App_LocalResources\TypeEntryRegisterNomenclature.en.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\TypeInstrumentalMetrologyExpertiseApplicationNomenclature.Designer.cs" />
+    <Compile Include="Enums\App_LocalResources\TypeInstrumentalMetrologyExpertiseApplicationNomenclature.en.Designer.cs" />
     <Compile Include="Enums\ASCertificateTypeNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1510,6 +1579,8 @@
     <Compile Include="Enums\CertificationScopesNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\ConditionsApprovedNomenclature.cs" />
+    <Compile Include="Enums\ConnectApplicationCurrentProjectEASANomenclature.cs" />
     <Compile Include="Enums\CoordinationActivitiesInteractionAirTrafficManagementPermissionNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1533,6 +1604,7 @@
     <Compile Include="Enums\DummyNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\ElectrometerTypeNomenclature.cs" />
     <Compile Include="Enums\ElectronicDocumentDiscrepancyTypeNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1572,6 +1644,7 @@
     <Compile Include="Enums\FlightSubaimNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\ForeignLicenseAimNomenclature.cs" />
     <Compile Include="Enums\FSTDRentFormNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1592,6 +1665,11 @@
     </Compile>
     <Compile Include="Enums\LicenseChangeTypeNomenclature.cs" />
     <Compile Include="Enums\MannerSpecifiedExpiredValidityNomenclature.cs" />
+    <Compile Include="Enums\MEInitialVerificationNomenclature.cs" />
+    <Compile Include="Enums\MERequestingReasonsNomenclature.cs" />
+    <Compile Include="Enums\MESubsequentVerificationNomenclature.cs" />
+    <Compile Include="Enums\MEVerificationNomenclature.cs" />
+    <Compile Include="Enums\MEVerificationSiteTypeNomenclature.cs" />
     <Compile Include="Enums\MonitoredRadioequipmentNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1629,6 +1707,8 @@
     <Compile Include="Enums\OVDQualificationClassWithPermissionNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\PaymentConditionNomenclature.cs" />
+    <Compile Include="Enums\PaymentTypeNomenclature.cs" />
     <Compile Include="Enums\PermissibleActivityNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1642,6 +1722,7 @@
     <Compile Include="Enums\PlannedScopeNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\ProcedureAssessmentConformityTypeNomenclature.cs" />
     <Compile Include="Enums\PropellerTypeNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1694,6 +1775,7 @@
     <Compile Include="Enums\SpecialRestrictionNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\StatedDurationNomenclature.cs" />
     <Compile Include="Enums\SubmissionTimeNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1705,6 +1787,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Enums\TypeEntryRegisterNomenclature.cs" />
+    <Compile Include="Enums\TypeFiscalDeviceNomenclature.cs" />
+    <Compile Include="Enums\TypeInstrumentalMetrologyExpertiseApplication.cs" />
     <Compile Include="Enums\TypeOfObjectNomenclature.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -5367,6 +5451,165 @@
     <None Include="Schemas\R-5250_ConfirmationRatingCrewApplication.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Schemas\R-5252_InitialRegistrationDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5254_LastProficiencyCheckDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5256_PermissionsRestrictionsQualificationClassCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5258_PermissionsRestrictionsQualificationClassName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5260_PermissionsRestrictionsQualificationClass.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5262_QualificationClassRecordedOwnershipLicense.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5264_QualificationClassesRecordedOwnershipLicenses.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5266_IndividualRecoveryProgramCode.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5268_IndividualRecoveryProgramName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5270_IndividualRecoveryProgram.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5272_FlightsCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5274_TrainingBasicData.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5276_OtherMeansDescriptionTraining.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5278_OrderNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5280_OrderDate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5282_LicenseNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5284_QualificationClassPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5286_EntryQualificationClassPermission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5288_AircraftClassType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5290_HoursFlightsCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5292_ExperienceHoursFlightsCount.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5294_FlightExperience.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5296_ProtocolNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5298_IsForeignLicenseAimSelected.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5300_ForeignLicenseAimName.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5302_ForeignLicenseAimPeriod.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5304_ForeignLicenseAim.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5306_IsFlyingExperienceOperationsOtherThanCommercialAirTransport.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5308_IsFlyingExperienceCommercialAirTransport.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5310_ExperienceHoursCountChoosePlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5312_FlightExperienceChoosePlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5314_DescriptionTasksSpecifiedDuration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5316_ApplicantPosition.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5318_BodySectorWorker.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5320_PositionWorker.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5322_ActiveRestWorker.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5324_WorkHoursWorker.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5326_OtherConditionsWorker.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5328_EmployerRightsConditions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5330_FlightTestEvaluation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5332_CheckCompetenceRating.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5334_ASCertificateChange.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5336_FlightPurposeAdditionalInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5338_StatusConditionsApprovedFlight.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5340_CandidateReferNumber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5342_ApplyForm18BKind.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5344_NotApplyForm18BReason.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5346_ConnectApplicationCurrentProjectEASA.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5348_ProjectNumberEASA.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5350_AircraftKind.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5352_StatedDuration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5354_DescriptionNonComplianceRequirements.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Schemas\R-5356_DataEASAForm37AnotherApplication.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Schemas\R-6002_RecipientNoIdentification.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -5609,6 +5852,8 @@
     <EmbeddedResource Include="Enums\App_LocalResources\ActivityKindNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\ActivityScheduleNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\ActivityScheduleNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\AircraftKindNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\AircraftKindNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\AircraftServicesPerformNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\AircraftServicesPerformNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\AirServicesTypeNomenclature.en.resx" />
@@ -5617,12 +5862,18 @@
     <EmbeddedResource Include="Enums\App_LocalResources\ApplicantTypeNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\ApplicationTypeNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\ApplicationTypeNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\ApplyForm18BKindNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\ApplyForm18BKindNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\AttachedDocumentKindNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\AttachedDocumentKindNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\AuthorTypeNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\AuthorTypeNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\CertificationScopesNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\CertificationScopesNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\ConditionsApprovedNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\ConditionsApprovedNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\ConnectApplicationCurrentProjectEASANomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\ConnectApplicationCurrentProjectEASANomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\DerogationsNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\DerogationsNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\FinancialArrangementsNomenclature.en.resx" />
@@ -5637,6 +5888,8 @@
     <EmbeddedResource Include="Enums\App_LocalResources\FlightSkillTestNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\FlightSubaimNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\FlightSubaimNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\ForeignLicenseAimNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\ForeignLicenseAimNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\FSTDRentFormNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\FSTDRentFormNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\LeaseTypeNomenclature.en.resx" />
@@ -5685,10 +5938,14 @@
     <EmbeddedResource Include="Enums\App_LocalResources\SpecialPermissionNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\SpecialRestrictionNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\SpecialRestrictionNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\StatedDurationNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\StatedDurationNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\SubmissionTimeNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\SubmissionTimeNomenclature.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\TypeEntryRegisterNomenclature.en.resx" />
     <EmbeddedResource Include="Enums\App_LocalResources\TypeEntryRegisterNomenclature.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\TypeInstrumentalMetrologyExpertiseApplicationNomenclature.en.resx" />
+    <EmbeddedResource Include="Enums\App_LocalResources\TypeInstrumentalMetrologyExpertiseApplicationNomenclature.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

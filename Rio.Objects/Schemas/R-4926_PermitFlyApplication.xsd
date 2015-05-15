@@ -10,16 +10,19 @@
 	xmlns:arm="http://ereg.egov.bg/value/R-4340"
 	xmlns:anao="http://ereg.egov.bg/value/R-4300"
 	xmlns:ahd="http://ereg.egov.bg/segment/R-4310" 
-	xmlns:lt="http://ereg.egov.bg/value/R-4902"
 	xmlns:adfp="http://ereg.egov.bg/segment/R-4904" 
 	xmlns:fp="http://ereg.egov.bg/value/R-4906"
 	xmlns:fs="http://ereg.egov.bg/value/R-4908"
 	xmlns:fsd="http://ereg.egov.bg/value/R-4910"
+	xmlns:fpai="http://ereg.egov.bg/value/R-5336"
 	xmlns:fdd="http://ereg.egov.bg/segment/R-4916" 
 	xmlns:adp="http://ereg.egov.bg/value/R-4918"
 	xmlns:ac="http://ereg.egov.bg/value/R-4920"
+	xmlns:scaf="http://ereg.egov.bg/value/R-5338"
+	xmlns:adata="http://ereg.egov.bg/segment/R-4040"
 	xmlns:man="http://ereg.egov.bg/value/R-4922"
 	xmlns:ada="http://ereg.egov.bg/value/R-4924"
+	xmlns:defaa="http://ereg.egov.bg/segment/R-5356"
 	xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
 	xmlns:cres="http://ereg.egov.bg/value/R-4016"
 	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"	
@@ -36,16 +39,19 @@
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4300" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4310" />
-	<xsd:import namespace="http://ereg.egov.bg/value/R-4902" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4904" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4906" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4908" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4910" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5336" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4916" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4918" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4920" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5338" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4040" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4922" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4924" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5356" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4016" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
@@ -66,16 +72,23 @@
 			<xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
 			<xsd:element name="ApplicantNotAircraftOwner" type="anao:ApplicantNotAircraftOwner" minOccurs="0" />
 			<xsd:element name="AircraftHiringData" type="ahd:AircraftHiringData" minOccurs="0" />
-			<xsd:element name="LeaseType" type="lt:LeaseType" minOccurs="0" />
 			<xsd:element name="AircraftDataFlightPermit" type="adfp:AircraftDataFlightPermit" minOccurs="0" />
 			<xsd:element name="FlightPurpose" type="fp:FlightPurpose" minOccurs="0" />
 			<xsd:element name="FlightSubaim" type="fs:FlightSubaim" minOccurs="0" />
 			<xsd:element name="FlightSubaimDescription" type="fsd:FlightSubaimDescription" minOccurs="0" />
+			<xsd:element name="FlightPurposeAdditionalInformation" type="fpai:FlightPurposeAdditionalInformation" minOccurs="0" />
 			<xsd:element name="FlightDateDuration" type="fdd:FlightDateDuration" minOccurs="0" maxOccurs="unbounded" />
 			<xsd:element name="AircraftDescriptionPlace" type="adp:AircraftDescriptionPlace" minOccurs="0" />
 			<xsd:element name="AircraftCondition" type="ac:AircraftCondition" minOccurs="0" />
+			<xsd:element name="StatusConditionsApprovedFlight" type="scaf:StatusConditionsApprovedFlight" minOccurs="0" />
+			
+			<xsd:element name="AttachedDocumentData" type="adata:AttachedDocumentData" minOccurs="0" />
+			
 			<xsd:element name="ManagementApplicationNumber" type="man:ManagementApplicationNumber" minOccurs="0" />
 			<xsd:element name="ApprovalDate" type="ada:ApprovalDate" minOccurs="0" />
+			
+			<xsd:element name="DataEASAForm37AnotherApplication" type="defaa:DataEASAForm37AnotherApplication" minOccurs="0" />
+			
 			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
 			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0" />
 			<xsd:element name="AttachedDocuments" minOccurs="0">

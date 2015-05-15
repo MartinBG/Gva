@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5264" xmlns="http://ereg.egov.bg/segment/R-5264" 
+	xmlns:qcrol="http://ereg.egov.bg/segment/R-5262" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5262" />
+
+	<xsd:complexType name="QualificationClassesRecordedOwnershipLicenses">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Квалификационни класове, вписани в притежаваното свидетелство за правоспособност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="QualificationClassRecordedOwnershipLicense" type="qcrol:QualificationClassRecordedOwnershipLicense" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

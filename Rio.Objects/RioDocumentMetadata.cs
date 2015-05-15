@@ -528,8 +528,8 @@ namespace Rio.Objects
                 "R4926",
                 new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "004926" },
                 new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "004926" },
-                "Заявление за издаване на разрешение за полет по част 21 (EASA Form20)",
-                "Application for a permit to fly under Part 21 (EASA Form20)",
+                "EASA Form 21 - Заявление за издаване на разрешение за полет (EASA Form20)",
+                "EASA Form 21 - Application for a permit to fly (EASA Form20)",
                 typeof(R_4926.PermitFlyApplication),
                 "/app:PermitFlyApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
                 new Dictionary<string, string>
@@ -656,8 +656,8 @@ namespace Rio.Objects
                 "R5132",
                 new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "005132" },
                 new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "005132" },
-                "Заявление за издаване и промяна на удостоверение за одобрение на организация за управление на постоянна летателна годност  (EASA Form 14)",
-                "Application for issuance and change of certificate for approval of organization for management of permanent airworthiness (EASA Form 14)",
+                "EASA Form 2 - Заявление за издаване и промяна на удостоверение за одобрение на организация за управление на постоянна летателна годност (EASA Form 14)",
+                "EASA Form 2 - Application for issuance and change of certificate for approval of organization for management of permanent airworthiness (EASA Form 14)",
                 typeof(R_5132.ApprovalPartMSubpartGApplication),
                 "/app:ApprovalPartMSubpartGApplication/app:ElectronicAdministrativeServiceFooter/easf:XMLDigitalSignature",
                 new Dictionary<string, string>
@@ -1229,7 +1229,7 @@ namespace Rio.Objects
                     {"easf", "http://ereg.egov.bg/segment/0009-000153"},
                 },
                 "ConformityAssessmentNonAutomaticWeighingApplication.xsl");
-        
+
         #endregion
 
         #region Acknowledgements
@@ -1282,6 +1282,36 @@ namespace Rio.Objects
                     {"rii", "http://ereg.egov.bg/segment/R-3010"},
                 },
                 "RemovingIrregularitiesInstructions");
+
+        public static readonly RioDocumentMetadata IndividualAdministrativeActRefusalMetadata =
+            new RioDocumentMetadata(
+                "R1229",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "000150" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "000009" },
+                "Отказ за издаване на индивидуален административен акт",
+                "Refusal to issue an administrative act",
+                typeof(R_0009_000150.IndividualAdministrativeActRefusal),
+                "/ref:IndividualAdministrativeActRefusal/rii:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"ref", "http://ereg.egov.bg/segment/0009-000150"},
+                },
+                "IndividualAdministrativeActRefusal");
+
+        public static readonly RioDocumentMetadata CorrespondenceConsiderationRefusalMetadata =
+            new RioDocumentMetadata(
+                "R1245",
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0009", BatchNumber = "000154" },
+                new R_0009_000003.DocumentTypeURI { RegisterIndex = "0010", BatchNumber = "000010" },
+                "Отказ за разглеждане на искането по същество",
+                "Refusal to consider the request on the merits",
+                typeof(R_0009_000154.CorrespondenceConsiderationRefusal),
+                "/ref:CorrespondenceConsiderationRefusal/rii:XMLDigitalSignature",
+                new Dictionary<string, string>
+                {
+                    {"ref", "http://ereg.egov.bg/segment/0009-000154"},
+                },
+                "CorrespondenceConsiderationRefusal");
 
 
         #endregion
@@ -1348,6 +1378,8 @@ namespace Rio.Objects
             ReceiptNotAcknowledgedMessageMetadata,
             ReceiptAcknowledgedMessageMetadata,
             RemovingIrregularitiesInstructionsMetadata,
+            IndividualAdministrativeActRefusalMetadata,
+            CorrespondenceConsiderationRefusalMetadata,
 
             #endregion
 
@@ -1515,7 +1547,7 @@ namespace Rio.Objects
         {
             get
             {
-                return _documentTypeName;
+                        return _documentTypeName;
             }
         }
 

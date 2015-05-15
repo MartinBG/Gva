@@ -19,7 +19,7 @@ namespace R_5246
 
 	[Serializable]
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
-	public partial class CoordinationActivitiesInteractionAirTrafficManagementPermissionCollection : System.Collections.Generic.List<R_4268.CoordinationActivitiesInteractionAirTrafficManagementPermission>
+	public partial class ForeignLicenseAimCollection : System.Collections.Generic.List<R_5304.ForeignLicenseAim>
 	{
 	}
 
@@ -31,13 +31,7 @@ namespace R_5246
 
 	[Serializable]
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
-	public partial class OVDQualificationClassDataCollection : System.Collections.Generic.List<R_4282.OVDQualificationClassData>
-	{
-	}
-
-	[Serializable]
-	[EditorBrowsable(EditorBrowsableState.Advanced)]
-	public partial class OVDQualificationClassCollection : System.Collections.Generic.List<R_4252.OVDQualificationClass>
+	public partial class AircraftClassQualificationClassCollection : System.Collections.Generic.List<R_4056.AircraftClassQualificationClass>
 	{
 	}
 
@@ -54,9 +48,9 @@ namespace R_5246
 		public R_0009_000152.ElectronicAdministrativeServiceHeader ElectronicAdministrativeServiceHeader { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4048.ASCertificateType),ElementName="ASCertificateType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(ConfirmationConversionPursuantLicensePilotIssuedApplicationReasonForApplying),ElementName="ReasonForApplying",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4048.ASCertificateType ASCertificateType { get; set; }
+		public ConfirmationConversionPursuantLicensePilotIssuedApplicationReasonForApplying ReasonForApplying { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4012.FlightCrewPersonalData),ElementName="FlightCrewPersonalData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
@@ -69,29 +63,29 @@ namespace R_5246
 		public R_4014.EvidencePersonRepresentingRecipientElectronicService EvidencePersonRepresentingRecipientElectronicService { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="AuthorQuality",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_5304.ForeignLicenseAim),ElementName="ForeignLicenseAim",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string AuthorQuality { get; set; }
+		public ForeignLicenseAimCollection ForeignLicenseAimCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="ConsentReceivingElectronicStatements",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4048.ASCertificateType),ElementName="ASCertificateType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public bool ConsentReceivingElectronicStatements { get; set; }
+		public R_4048.ASCertificateType ASCertificateType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4252.OVDQualificationClass),ElementName="OVDQualificationClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4080.ASCertificateData),ElementName="ASCertificateData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public OVDQualificationClassCollection OVDQualificationClassCollection { get; set; }
+		public R_4080.ASCertificateData ASCertificateData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4282.OVDQualificationClassData),ElementName="OVDQualificationClassData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4098.AeromedicalFitnessCertificateData),ElementName="AeromedicalFitnessCertificateData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public OVDQualificationClassDataCollection OVDQualificationClassDataCollection { get; set; }
+		public R_4098.AeromedicalFitnessCertificateData AeromedicalFitnessCertificateData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4268.CoordinationActivitiesInteractionAirTrafficManagementPermission),ElementName="CoordinationActivitiesInteractionAirTrafficManagementPermission",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_5312.FlightExperienceChoosePlace),ElementName="FlightExperienceChoosePlace",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CoordinationActivitiesInteractionAirTrafficManagementPermissionCollection CoordinationActivitiesInteractionAirTrafficManagementPermissionCollection { get; set; }
+		public R_5312.FlightExperienceChoosePlace FlightExperienceChoosePlace { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="AttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
@@ -104,6 +98,11 @@ namespace R_5246
 		public R_4696.EAURecipientsAttachedDocumentDatasCollection EAURecipientsAttachedDocumentDatasCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="ConsentReceivingElectronicStatements",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public bool ConsentReceivingElectronicStatements { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(ConfirmationConversionPursuantLicensePilotIssuedApplicationAttachedDocuments),ElementName="AttachedDocuments",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public ConfirmationConversionPursuantLicensePilotIssuedApplicationAttachedDocuments AttachedDocuments { get; set; }
@@ -114,6 +113,31 @@ namespace R_5246
 		public R_0009_000153.ElectronicAdministrativeServiceFooter ElectronicAdministrativeServiceFooter { get; set; }
 
 		public ConfirmationConversionPursuantLicensePilotIssuedApplication()
+		{
+		}
+	}
+
+
+	[XmlType(TypeName="ConfirmationConversionPursuantLicensePilotIssuedApplicationReasonForApplying",Namespace=Declarations.SchemaVersion),Serializable]
+	public partial class ConfirmationConversionPursuantLicensePilotIssuedApplicationReasonForApplying
+	{
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4048.ASCertificateType),ElementName="ASCertificateType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_4048.ASCertificateType ASCertificateType { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4056.AircraftClassQualificationClass),ElementName="AircraftClassQualificationClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public AircraftClassQualificationClassCollection AircraftClassQualificationClassCollection { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="DescriptionTasksSpecifiedDuration",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string DescriptionTasksSpecifiedDuration { get; set; }
+
+		public ConfirmationConversionPursuantLicensePilotIssuedApplicationReasonForApplying()
 		{
 		}
 	}

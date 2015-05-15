@@ -19,25 +19,13 @@ namespace R_5166
 
 	[Serializable]
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
-	public partial class CoordinationActivitiesInteractionAirTrafficManagementPermissionCollection : System.Collections.Generic.List<R_4268.CoordinationActivitiesInteractionAirTrafficManagementPermission>
+	public partial class CheckCompetenceRatingCollection : System.Collections.Generic.List<R_5332.CheckCompetenceRating>
 	{
 	}
 
 	[Serializable]
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
 	public partial class AttachedDocumentCollection : System.Collections.Generic.List<R_0009_000139.AttachedDocument>
-	{
-	}
-
-	[Serializable]
-	[EditorBrowsable(EditorBrowsableState.Advanced)]
-	public partial class OVDQualificationClassDataCollection : System.Collections.Generic.List<R_4282.OVDQualificationClassData>
-	{
-	}
-
-	[Serializable]
-	[EditorBrowsable(EditorBrowsableState.Advanced)]
-	public partial class OVDQualificationClassCollection : System.Collections.Generic.List<R_4252.OVDQualificationClass>
 	{
 	}
 
@@ -74,24 +62,39 @@ namespace R_5166
 		public string AuthorQuality { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4048.ASCertificateType),ElementName="CertificateASCertificateType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_4048.ASCertificateType CertificateASCertificateType { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4080.ASCertificateData),ElementName="ASCertificateData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_4080.ASCertificateData ASCertificateData { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="ASCertificateChange",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string ASCertificateChange { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_5264.QualificationClassesRecordedOwnershipLicenses),ElementName="QualificationClassesRecordedOwnershipLicenses",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_5264.QualificationClassesRecordedOwnershipLicenses QualificationClassesRecordedOwnershipLicenses { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_5328.EmployerRightsConditions),ElementName="EmployerRightsConditions",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_5328.EmployerRightsConditions EmployerRightsConditions { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_5332.CheckCompetenceRating),ElementName="CheckCompetenceRating",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public CheckCompetenceRatingCollection CheckCompetenceRatingCollection { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ConsentReceivingElectronicStatements",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public bool ConsentReceivingElectronicStatements { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4252.OVDQualificationClass),ElementName="OVDQualificationClass",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public OVDQualificationClassCollection OVDQualificationClassCollection { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4282.OVDQualificationClassData),ElementName="OVDQualificationClassData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public OVDQualificationClassDataCollection OVDQualificationClassDataCollection { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4268.CoordinationActivitiesInteractionAirTrafficManagementPermission),ElementName="CoordinationActivitiesInteractionAirTrafficManagementPermission",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public CoordinationActivitiesInteractionAirTrafficManagementPermissionCollection CoordinationActivitiesInteractionAirTrafficManagementPermissionCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="AttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]

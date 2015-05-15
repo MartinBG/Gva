@@ -999,4 +999,10 @@
   <data name="TheoreticalTrainingCopies" xml:space="preserve">
     <value>Теоретично обучение – копия</value>
   </data>
+  <data name="DocumentResidenceEstablishmentContractCopy" xml:space="preserve">
+    <value>Документ за пребиваване или установяване или договор - копие</value>
+  </data>
+  <data name="FlyingBookCopy" xml:space="preserve">
+    <value>Летателна книжка - копие</value>
+  </data>
 </root>

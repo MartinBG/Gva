@@ -35,9 +35,9 @@ namespace R_4550
 		public string ManufacturerName { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(Type=typeof(R_4370.ModelAircraftAccordingTypeCertificate),ElementName="ModelAircraftAccordingTypeCertificate",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[XmlElement(Type=typeof(R_4158.AircraftType),ElementName="AircraftType",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public R_4370.ModelAircraftAccordingTypeCertificate ModelAircraftAccordingTypeCertificate { get; set; }
+		public R_4158.AircraftType AircraftType { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4546.AircraftSerialNumberTTSN),ElementName="AircraftSerialNumberTTSN",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]

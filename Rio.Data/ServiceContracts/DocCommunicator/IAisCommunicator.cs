@@ -389,6 +389,23 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
         [EnumMember]
         IssueAttestation = 58,
 
+        // Разрешения или ограничения към квалификационния клас
+        [EnumMember]
+        PermissionsRestrictionsQualificationClass = 59,
+
+        // Индивидуална програма за възстановяване, изготвена от ОЛО/FTO
+        [EnumMember]
+        IndividualRecoveryProgram = 60,
+
+        // Заедно с обучение за
+        [EnumMember]
+        TrainingAsCourseExam = 61,
+
+        // Кандидатствам за (Потвърждаване / Преобразуване)
+        [EnumMember]
+        ConfirmTransofrmationASCertificateType = 62,
+
+
         #endregion
 
         #region Mosv
@@ -413,6 +430,51 @@ namespace Rio.Data.ServiceContracts.DocCommunicator
 
         [EnumMember]
         AnnouncedActKind = 301,
+
+        #endregion
+
+        #region Bim
+
+        // Основание за заявяване
+        [EnumMember]
+        MERequestingReasons = 400,
+
+        // Номенклатура за скрито поле
+        [EnumMember]
+        MEVerification = 401,
+
+        // Избира се тази или долната номенклатура в зависмост от стойността на скритото поле
+        // Вид на проверката 1 
+        [EnumMember]
+        MEInitialVerification = 402,
+
+        // Вид на проверката 2
+        [EnumMember]
+        MESubsequentVerification = 403,
+
+        // Място за проверка
+        [EnumMember]
+        MEVerificationSiteType = 404,
+
+        // Начин на плащане
+        [EnumMember]
+        PaymentType = 405,
+
+        // Условия на плащане
+        [EnumMember]
+        PaymentCondition = 406,
+
+        // Вид електромер
+        [EnumMember]
+        ElectrometerType = 407,
+
+        // Тип фискално устройство/система
+        [EnumMember]
+        TypeFiscalDevice = 408,
+
+        // Процедура за оценяване на съответствието
+        [EnumMember]
+        ProcedureAssessmentConformityType = 409,
 
         #endregion
 

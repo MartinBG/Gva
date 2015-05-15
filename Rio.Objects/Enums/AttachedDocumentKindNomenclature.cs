@@ -1101,6 +1101,19 @@ namespace Rio.Objects.Enums
             FlyingLicenseCopyEachClass
         };
 
+        public static readonly AttachedDocumentKindNomenclature DocumentResidenceEstablishmentContractCopy = new AttachedDocumentKindNomenclature { ResourceKey = "DocumentResidenceEstablishmentContractCopy", Code = "531" };
+        public static readonly AttachedDocumentKindNomenclature FlyingBookCopy = new AttachedDocumentKindNomenclature { ResourceKey = "FlyingBookCopy", Code = "532" };
+
+        public static List<AttachedDocumentKindNomenclature> R5246Values = new List<AttachedDocumentKindNomenclature>
+        {
+            IDCopy,
+            DocumentResidenceEstablishmentContractCopy,
+            CopyLicenseHeld,
+            MedicalFitnessCopy,
+            FlyingBookCopy,
+            FeePaidNonState
+        };
+
         #endregion
 
         #region Aop

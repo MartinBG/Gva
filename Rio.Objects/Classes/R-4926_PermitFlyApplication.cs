@@ -82,11 +82,6 @@ namespace R_4926
 		public R_4310.AircraftHiringData AircraftHiringData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
-		[XmlElement(ElementName="LeaseType",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
-		[EditorBrowsable(EditorBrowsableState.Advanced)]
-		public string LeaseType { get; set; }
-
-		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4904.AircraftDataFlightPermit),ElementName="AircraftDataFlightPermit",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public R_4904.AircraftDataFlightPermit AircraftDataFlightPermit { get; set; }
@@ -107,6 +102,11 @@ namespace R_4926
 		public string FlightSubaimDescription { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="FlightPurposeAdditionalInformation",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string FlightPurposeAdditionalInformation { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4916.FlightDateDuration),ElementName="FlightDateDuration",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public FlightDateDurationCollection FlightDateDurationCollection { get; set; }
@@ -122,6 +122,16 @@ namespace R_4926
 		public string AircraftCondition { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="StatusConditionsApprovedFlight",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string StatusConditionsApprovedFlight { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_4040.AttachedDocumentData),ElementName="AttachedDocumentData",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_4040.AttachedDocumentData AttachedDocumentData { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ManagementApplicationNumber",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public string ManagementApplicationNumber { get; set; }
@@ -130,6 +140,11 @@ namespace R_4926
 		[XmlElement(ElementName="ApprovalDate",Form=XmlSchemaForm.Qualified,DataType="date",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public DateTime? ApprovalDate { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_5356.DataEASAForm37AnotherApplication),ElementName="DataEASAForm37AnotherApplication",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_5356.DataEASAForm37AnotherApplication DataEASAForm37AnotherApplication { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_4696.EAURecipientsAttachedDocumentDatasCollection),ElementName="EAURecipientsAttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]

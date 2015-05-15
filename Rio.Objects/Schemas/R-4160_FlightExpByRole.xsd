@@ -16,13 +16,13 @@ elementFormDefault="qualified">
 		<xsd:sequence>
 			<xsd:element name="FlightExpRole" type="fer:FlightExpRole" minOccurs="0" />
 			<xsd:element name="HoursForType" minOccurs="0" maxOccurs="unbounded">
-                <xsd:complexType>
-                    <xsd:sequence>
+				<xsd:complexType>
+					<xsd:sequence>
 						<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
 						<xsd:element name="FlightExpHoursByRole" type="hfest:HoursFlyingExperienceSkillTest" minOccurs="0" />
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
 			<xsd:element name="FlightExpHoursByRoleTotal" type="hfest:HoursFlyingExperienceSkillTest" minOccurs="0" />
 		</xsd:sequence>
 	</xsd:complexType>

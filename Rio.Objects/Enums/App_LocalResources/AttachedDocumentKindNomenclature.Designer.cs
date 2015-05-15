@@ -862,6 +862,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Документ за пребиваване или установяване или договор - копие.
+        /// </summary>
+        public static string DocumentResidenceEstablishmentContractCopy {
+            get {
+                return ResourceManager.GetString("DocumentResidenceEstablishmentContractCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Документи за издаване на одобрение на Организация за поддържане на постоянна летателна годност по част М на Регламент № 2042/2003 относно поддържане на летателната годност на въздухоплавателните средства и авиационните продукти, части и устройства и за одобряване на организациите и персонала, изпълняващ тези задачи, или ръководство за контрол на техническото обслужване съгласно приложение № 8 от Наредба № 24 - за ВС, които отговарят на критериите на Приложение II към Регламент (ЕО) № 216/2008 на Европейския [rest of string was truncated]&quot;;.
         /// </summary>
         public static string DocumentsApproval {
@@ -1128,6 +1137,15 @@ namespace Rio.Objects.Enums.App_LocalResources {
         public static string FlightTrainingCertificateATO {
             get {
                 return ResourceManager.GetString("FlightTrainingCertificateATO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Летателна книжка - копие.
+        /// </summary>
+        public static string FlyingBookCopy {
+            get {
+                return ResourceManager.GetString("FlyingBookCopy", resourceCulture);
             }
         }
         

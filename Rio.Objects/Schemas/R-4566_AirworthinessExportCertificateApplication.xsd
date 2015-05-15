@@ -7,6 +7,7 @@
 	xmlns:aobd="http://ereg.egov.bg/segment/R-4294"
 	xmlns:anao="http://ereg.egov.bg/value/R-4300"
 	xmlns:aod="http://ereg.egov.bg/segment/R-4394"
+	xmlns:ci="http://ereg.egov.bg/segment/R-4584"
 	xmlns:eprres="http://ereg.egov.bg/segment/R-4014"
 	xmlns:esaq="http://ereg.egov.bg/value/0008-000035"
 	xmlns:adec="http://ereg.egov.bg/segment/R-4550"
@@ -29,6 +30,7 @@
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4294" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4300" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4394" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4584" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4014" />
 	<xsd:import namespace="http://ereg.egov.bg/value/0008-000035" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4550" />
@@ -56,6 +58,7 @@
 			<xsd:element name="ApplicantNotAircraftOwner" type="anao:ApplicantNotAircraftOwner" minOccurs="0" />
 			<xsd:element name="AircraftOwnerData" type="aod:AircraftOwnerData" minOccurs="0" />
 			<xsd:element name="NewOwnerAircraftOwnerData" type="aod:AircraftOwnerData" minOccurs="0" />
+			<xsd:element name="NewOwnerContactInformation" type="ci:ContactInformation" minOccurs="0" />
 			<xsd:element name="EvidencePersonRepresentingRecipientElectronicService" type="eprres:EvidencePersonRepresentingRecipientElectronicService" minOccurs="0" />
 			<xsd:element name="AuthorQuality" type="esaq:ElectronicServiceAuthorQuality" minOccurs="0" />
 			<xsd:element name="AircraftDescriptionExportCertificate" type="adec:AircraftDescriptionExportCertificate" minOccurs="0" />

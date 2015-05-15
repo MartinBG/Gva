@@ -25,6 +25,12 @@ namespace R_5164
 
 	[Serializable]
 	[EditorBrowsable(EditorBrowsableState.Advanced)]
+	public partial class CheckCompetenceRatingCollection : System.Collections.Generic.List<R_5332.CheckCompetenceRating>
+	{
+	}
+
+	[Serializable]
+	[EditorBrowsable(EditorBrowsableState.Advanced)]
 	public partial class AttachedDocumentCollection : System.Collections.Generic.List<R_0009_000139.AttachedDocument>
 	{
 	}
@@ -102,6 +108,16 @@ namespace R_5164
 		[XmlElement(Type=typeof(R_4268.CoordinationActivitiesInteractionAirTrafficManagementPermission),ElementName="CoordinationActivitiesInteractionAirTrafficManagementPermission",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public CoordinationActivitiesInteractionAirTrafficManagementPermissionCollection CoordinationActivitiesInteractionAirTrafficManagementPermissionCollection { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_5328.EmployerRightsConditions),ElementName="EmployerRightsConditions",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public R_5328.EmployerRightsConditions EmployerRightsConditions { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(Type=typeof(R_5332.CheckCompetenceRating),ElementName="CheckCompetenceRating",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public CheckCompetenceRatingCollection CheckCompetenceRatingCollection { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(Type=typeof(R_3994.AttachedDocumentDatasCollection),ElementName="AttachedDocumentDatasCollection",IsNullable=false,Form=XmlSchemaForm.Qualified,Namespace=Declarations.SchemaVersion)]

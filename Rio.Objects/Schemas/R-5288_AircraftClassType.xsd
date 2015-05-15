@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5288" xmlns="http://ereg.egov.bg/segment/R-5288" 
+
+	xmlns:ac="http://ereg.egov.bg/segment/R-4152" 
+	xmlns:at="http://ereg.egov.bg/segment/R-4158"  
+	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4152" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+
+	<xsd:complexType name="AircraftClassType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Клас и тип ВС</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="AircraftClass" type="ac:AircraftClass" minOccurs="0" />
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

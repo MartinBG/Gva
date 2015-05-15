@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5292" xmlns="http://ereg.egov.bg/segment/R-5292" 
+
+	xmlns:fetn="http://ereg.egov.bg/value/R-4144" 
+	xmlns:hfc="http://ereg.egov.bg/segment/R-5290" 
+	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4144" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5290" />
+
+	<xsd:complexType name="ExperienceHoursFlightsCount">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Часове и брой полети за летателен опит</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FlightExpTypeName" type="fetn:FlightExpTypeName" minOccurs="0" />
+			<xsd:element name="HoursFlightsCount" type="hfc:HoursFlightsCount" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

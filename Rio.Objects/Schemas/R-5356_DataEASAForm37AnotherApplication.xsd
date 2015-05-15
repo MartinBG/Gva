@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5356" xmlns="http://ereg.egov.bg/segment/R-5356" 
+
+	xmlns:crn="http://ereg.egov.bg/value/R-5340" 
+	xmlns:en="http://ereg.egov.bg/value/0008-000029" 
+	xmlns:ad="http://ereg.egov.bg/value/0008-000194" 
+	
+	xmlns:pnd="http://ereg.egov.bg/value/R-1012"
+	xmlns:fnd="http://ereg.egov.bg/value/R-1014"
+	xmlns:ea="http://ereg.egov.bg/value/R-1016"
+	
+	xmlns:afbk="http://ereg.egov.bg/value/R-5342"
+	xmlns:adata="http://ereg.egov.bg/segment/R-4040"
+	xmlns:nafbr="http://ereg.egov.bg/value/R-5344"
+	
+	xmlns:adfp="http://ereg.egov.bg/segment/R-4904"
+	
+	xmlns:cgc="http://ereg.egov.bg/value/0008-000183" 
+	xmlns:cn="http://ereg.egov.bg/value/0008-000184"
+	xmlns:arm="http://ereg.egov.bg/value/R-4340"
+	
+	xmlns:cacpe="http://ereg.egov.bg/value/R-5346"
+	xmlns:pne="http://ereg.egov.bg/value/R-5348"
+	xmlns:ak="http://ereg.egov.bg/value/R-5350"
+	xmlns:sd="http://ereg.egov.bg/value/R-5352"
+	
+	xmlns:fdd="http://ereg.egov.bg/segment/R-4916" 
+	
+	xmlns:fp="http://ereg.egov.bg/value/R-4906"
+	xmlns:fs="http://ereg.egov.bg/value/R-4908"
+	xmlns:fsd="http://ereg.egov.bg/value/R-4910"
+	xmlns:fpai="http://ereg.egov.bg/value/R-5336"
+	
+	xmlns:dncr="http://ereg.egov.bg/value/R-5354"
+	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5340" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000029" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000194" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1012" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1014" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-1016" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5342" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4040" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5344" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4904" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000183" />
+	<xsd:import namespace="http://ereg.egov.bg/value/0008-000184" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5346" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5348" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5350" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5352" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4916" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4906" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4908" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4910" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5336" />
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5354" />
+
+	<xsd:complexType name="DataEASAForm37AnotherApplication">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Данни за EASA Form 37 в друго заявление</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CandidateReferNumber" type="crn:CandidateReferNumber" minOccurs="0" />
+			<xsd:element name="CandidateName" type="en:EntityName" minOccurs="0" />
+			<xsd:element name="AddressDescription" type="ad:AddressDescription" minOccurs="0" />
+			<xsd:element name="ContactPerson" type="en:EntityName" minOccurs="0" />
+			
+			<xsd:element name="PhoneNumbersDesc" type="pnd:PhoneNumbersDesc" minOccurs="0" />
+			<xsd:element name="FaxNumbersDesc" type="fnd:FaxNumbersDesc" minOccurs="0" />
+			<xsd:element name="EmailAddress" type="ea:EmailAddress" minOccurs="0" />
+			
+			<xsd:element name="ApplyForm18BKind" type="afbk:ApplyForm18BKind" minOccurs="0" />
+			<xsd:element name="AttachedDocumentData" type="adata:AttachedDocumentData" minOccurs="0" />
+			<xsd:element name="NotApplyForm18BReason" type="nafbr:NotApplyForm18BReason" minOccurs="0" />
+			
+			<xsd:element name="AircraftDataFlightPermit" type="adfp:AircraftDataFlightPermit" minOccurs="0" />
+			
+			<xsd:element name="CountryGRAOCode" type="cgc:CountryGRAOCode" minOccurs="0" />
+			<xsd:element name="CountryName" type="cn:CountryName" minOccurs="0" />
+			<xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
+			
+			<xsd:element name="ConnectApplicationCurrentProjectEASA" type="cacpe:ConnectApplicationCurrentProjectEASA" minOccurs="0" />
+			<xsd:element name="ProjectNumberEASA" type="pne:ProjectNumberEASA" minOccurs="0" />
+			<xsd:element name="AircraftKind" type="ak:AircraftKind" minOccurs="0" />
+			<xsd:element name="StatedDuration" type="sd:StatedDuration" minOccurs="0" />
+			
+			<xsd:element name="FlightDateDuration" type="fdd:FlightDateDuration" minOccurs="0" maxOccurs="unbounded" />
+			
+			<xsd:element name="FlightPurpose" type="fp:FlightPurpose" minOccurs="0" />
+			<xsd:element name="FlightSubaim" type="fs:FlightSubaim" minOccurs="0" />
+			<xsd:element name="FlightSubaimDescription" type="fsd:FlightSubaimDescription" minOccurs="0" />
+			<xsd:element name="FlightPurposeAdditionalInformation" type="fpai:FlightPurposeAdditionalInformation" minOccurs="0" />
+			
+			<xsd:element name="DescriptionNonComplianceRequirements" type="dncr:DescriptionNonComplianceRequirements" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

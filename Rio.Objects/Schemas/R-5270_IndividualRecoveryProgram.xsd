@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5270" xmlns="http://ereg.egov.bg/segment/R-5270" 
+	xmlns:irpc="http://ereg.egov.bg/value/R-5266" 
+	xmlns:irpn="http://ereg.egov.bg/value/R-5268" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5266" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5268" />
+
+	<xsd:complexType name="IndividualRecoveryProgram">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Индивидуална програма за възстановяване</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="IndividualRecoveryProgramCode" type="irpc:IndividualRecoveryProgramCode" minOccurs="0" />
+			<xsd:element name="IndividualRecoveryProgramName" type="irpn:IndividualRecoveryProgramName" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

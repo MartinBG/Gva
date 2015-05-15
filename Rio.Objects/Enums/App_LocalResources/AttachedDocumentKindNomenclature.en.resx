@@ -999,4 +999,10 @@
   <data name="TheoreticalTrainingCopies" xml:space="preserve">
     <value>Theoretical training - copies</value>
   </data>
+  <data name="DocumentResidenceEstablishmentContractCopy" xml:space="preserve">
+    <value>Document residence or establishment or contract - copy</value>
+  </data>
+  <data name="FlyingBookCopy" xml:space="preserve">
+    <value>Flying book - copy</value>
+  </data>
 </root>

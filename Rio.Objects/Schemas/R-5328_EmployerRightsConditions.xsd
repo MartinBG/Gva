@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5328" xmlns="http://ereg.egov.bg/segment/R-5328" 
+
+	xmlns:bsw="http://ereg.egov.bg/value/R-5318" 
+	xmlns:pw="http://ereg.egov.bg/value/R-5320" 
+	xmlns:arw="http://ereg.egov.bg/value/R-5322" 
+	xmlns:whw="http://ereg.egov.bg/value/R-5324" 
+	xmlns:ocw="http://ereg.egov.bg/value/R-5326" 
+	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5318" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5320" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5322" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5324" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5326" />
+
+	<xsd:complexType name="EmployerRightsConditions">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Условия на упражняване на правата от работодател</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="BodySectorWorker" type="bsw:BodySectorWorker" minOccurs="0" />
+			<xsd:element name="PositionWorker" type="pw:PositionWorker" minOccurs="0" />
+			<xsd:element name="ActiveRestWorker" type="arw:ActiveRestWorker" minOccurs="0" />
+			<xsd:element name="WorkHoursWorker" type="whw:WorkHoursWorker" minOccurs="0" />
+			<xsd:element name="OtherConditionsWorker" type="ocw:OtherConditionsWorker" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

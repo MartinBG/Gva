@@ -216,4 +216,31 @@
   <data name="SoloUnderSupervisionInstructor" xml:space="preserve">
     <value>Самостоятелни под наблюдение на инструктор</value>
   </data>
+  <data name="Simulator" xml:space="preserve">
+    <value>На тренажор</value>
+  </data>
+  <data name="Solo" xml:space="preserve">
+    <value>Самостоятелни</value>
+  </data>
+  <data name="StudentAndInstructor" xml:space="preserve">
+    <value>Обучаем (с инструктор)</value>
+  </data>
+  <data name="WatchWithInstructor" xml:space="preserve">
+    <value>Под наблюдение с инструктор</value>
+  </data>
+  <data name="AsInstructor" xml:space="preserve">
+    <value>Като инструктор</value>
+  </data>
+  <data name="NightAsKBC" xml:space="preserve">
+    <value>През нощта като КВС</value>
+  </data>
+  <data name="NightWithInstructor" xml:space="preserve">
+    <value>През нощта с инструктор</value>
+  </data>
+  <data name="RouteAsKBC" xml:space="preserve">
+    <value>По маршрут като КВС</value>
+  </data>
+  <data name="RouteWithInstructor" xml:space="preserve">
+    <value>По маршрут с инструктор</value>
+  </data>
 </root>

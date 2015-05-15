@@ -216,4 +216,31 @@
   <data name="SoloUnderSupervisionInstructor" xml:space="preserve">
     <value>Solo under the supervision of instructor</value>
   </data>
+  <data name="Simulator" xml:space="preserve">
+    <value>Simulator</value>
+  </data>
+  <data name="Solo" xml:space="preserve">
+    <value>Solo</value>
+  </data>
+  <data name="StudentAndInstructor" xml:space="preserve">
+    <value>Student (and instructor)</value>
+  </data>
+  <data name="WatchWithInstructor" xml:space="preserve">
+    <value>Watch with instructor</value>
+  </data>
+  <data name="AsInstructor" xml:space="preserve">
+    <value>As instructor</value>
+  </data>
+  <data name="NightAsKBC" xml:space="preserve">
+    <value>Night as KBC</value>
+  </data>
+  <data name="NightWithInstructor" xml:space="preserve">
+    <value>Night with instructor</value>
+  </data>
+  <data name="RouteAsKBC" xml:space="preserve">
+    <value>Route as KBC</value>
+  </data>
+  <data name="RouteWithInstructor" xml:space="preserve">
+    <value>Route with instructor</value>
+  </data>
 </root>

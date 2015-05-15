@@ -3,11 +3,24 @@
 		xmlns="http://ereg.egov.bg/segment/R-5250"
 		xmlns:eash="http://ereg.egov.bg/segment/0009-000152"
 		xmlns:fcpd="http://ereg.egov.bg/segment/R-4012"
-		xmlns:ada="http://ereg.egov.bg/segment/R-5230"
-		xmlns:tcr="http://ereg.egov.bg/value/R-5162"
-		xmlns:iats="http://ereg.egov.bg/value/R-5232"
-		xmlns:atnc="http://ereg.egov.bg/segment/R-5238"
-		xmlns:pkrr="http://ereg.egov.bg/value/R-5240"
+		
+		xmlns:act="http://ereg.egov.bg/segment/R-4048"
+		xmlns:acd="http://ereg.egov.bg/segment/R-4080"
+		
+		xmlns:qcrol="http://ereg.egov.bg/segment/R-5264"
+		
+		xmlns:at="http://ereg.egov.bg/segment/R-4158"
+		xmlns:prqc="http://ereg.egov.bg/segment/R-5260"
+		xmlns:omdt="http://ereg.egov.bg/value/R-5276"
+		
+		xmlns:afcd="http://ereg.egov.bg/segment/R-4098"
+		
+		xmlns:fstd="http://ereg.egov.bg/value/R-4182"
+		xmlns:fste="http://ereg.egov.bg/segment/R-4180"
+		xmlns:pn="http://ereg.egov.bg/value/R-5296"
+		
+		xmlns:fe="http://ereg.egov.bg/segment/R-5294"
+		
 		xmlns:add="http://ereg.egov.bg/segment/R-3994"
 		xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
 		xmlns:cres="http://ereg.egov.bg/value/R-4016"
@@ -18,11 +31,24 @@
 
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000152"/>
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4012"/>
-	<xsd:import namespace="http://ereg.egov.bg/segment/R-5230"/>
-	<xsd:import namespace="http://ereg.egov.bg/value/R-5162"/>
-	<xsd:import namespace="http://ereg.egov.bg/value/R-5232"/>
-	<xsd:import namespace="http://ereg.egov.bg/segment/R-5238"/>
-	<xsd:import namespace="http://ereg.egov.bg/value/R-5240"/>
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4048"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4080"/>
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5264"/>
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5260"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5276"/>
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4098"/>
+	
+	<xsd:import namespace="http://ereg.egov.bg/value/R-4182"/>
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4180"/>
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5296"/>
+	
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5294"/>
+	
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994"/>
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4016"/>
@@ -38,13 +64,24 @@
 		<xsd:sequence>
 			<xsd:element name="ElectronicAdministrativeServiceHeader" type="eash:ElectronicAdministrativeServiceHeader" minOccurs="0"/>
 			<xsd:element name="FlightCrewPersonalData" type="fcpd:FlightCrewPersonalData" minOccurs="0"/>
-			<xsd:element name="AttestationData" type="ada:AttestationData" minOccurs="0"/>
-			<xsd:element name="TypeConfirmedRecovery" type="tcr:TypeConfirmedRecovery" minOccurs="0"/>
-			<xsd:element name="IsAircraftTypeSelected" type="iats:IsAircraftTypeSelected" minOccurs="0"/>
-			<xsd:element name="AircraftTypeNoteChecks" type="atnc:AircraftTypeNoteChecks" minOccurs="0"/>
-			<xsd:element name="PersonKindRecordRating" type="pkrr:PersonKindRecordRating" minOccurs="0"/>
-			<xsd:element name="PersonKindAircraftTypeNoteChecks" type="atnc:AircraftTypeNoteChecks" minOccurs="0"/>
-			<xsd:element name="AttachedDocumentDatasCollection" type="add:AttachedDocumentDatasCollection" minOccurs="0" />	
+			
+			<xsd:element name="ASCertificateType" type="act:ASCertificateType" minOccurs="0"/>
+			<xsd:element name="ASCertificateData" type="acd:ASCertificateData" minOccurs="0"/>
+			
+			<xsd:element name="QualificationClassesRecordedOwnershipLicenses" type="qcrol:QualificationClassesRecordedOwnershipLicenses" minOccurs="0"/>
+			
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0"/>
+			<xsd:element name="PermissionsRestrictionsQualificationClass" type="prqc:PermissionsRestrictionsQualificationClass" minOccurs="0"/>
+			<xsd:element name="OtherMeansDescriptionTraining" type="omdt:OtherMeansDescriptionTraining" minOccurs="0"/>
+			
+			<xsd:element name="AeromedicalFitnessCertificateData" type="afcd:AeromedicalFitnessCertificateData" minOccurs="0"/>
+			
+			<xsd:element name="FlightSkillTestDate" type="fstd:FlightSkillTestDate" minOccurs="0"/>
+			<xsd:element name="FlightSkillTestExaminer" type="fste:FlightSkillTestExaminer" minOccurs="0"/>
+			<xsd:element name="ProtocolNumber" type="pn:ProtocolNumber" minOccurs="0"/>
+			
+			<xsd:element name="FlightExperience" type="fe:FlightExperience" minOccurs="0"/>
+			
 			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
 			<xsd:element name="ConsentReceivingElectronicStatements" type="cres:ConsentReceivingElectronicStatements" minOccurs="0"/>
 			<xsd:element name="AttachedDocuments" minOccurs="0">

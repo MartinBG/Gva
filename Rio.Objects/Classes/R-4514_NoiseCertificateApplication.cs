@@ -81,6 +81,11 @@ namespace R_4514
 		public R_4512.NoiseData NoiseData { get; set; }
 
 		[System.Web.Script.Serialization.ScriptIgnore]
+		[XmlElement(ElementName="ApplicantPosition",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="string",Namespace=Declarations.SchemaVersion)]
+		[EditorBrowsable(EditorBrowsableState.Advanced)]
+		public string ApplicantPosition { get; set; }
+
+		[System.Web.Script.Serialization.ScriptIgnore]
 		[XmlElement(ElementName="ConsentReceivingElectronicStatements",IsNullable=false,Form=XmlSchemaForm.Qualified,DataType="boolean",Namespace=Declarations.SchemaVersion)]
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		public bool ConsentReceivingElectronicStatements { get; set; }

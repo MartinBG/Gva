@@ -3,14 +3,14 @@
 	xmlns="http://ereg.egov.bg/segment/R-4550"
 	xmlns:arm="http://ereg.egov.bg/value/R-4340"
 	xmlns:mn="http://ereg.egov.bg/value/R-3986"
-	xmlns:maatc="http://ereg.egov.bg/segment/R-4370"
+	xmlns:at="http://ereg.egov.bg/segment/R-4158"
 	xmlns:asnt="http://ereg.egov.bg/segment/R-4546"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	elementFormDefault="qualified">
 
 	<xsd:import namespace="http://ereg.egov.bg/value/R-4340" />
 	<xsd:import namespace="http://ereg.egov.bg/value/R-3986" />
-	<xsd:import namespace="http://ereg.egov.bg/segment/R-4370" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4546" />
 
 	<xsd:complexType name="AircraftDescriptionExportCertificate">
@@ -20,7 +20,7 @@
 		<xsd:sequence>
 			<xsd:element name="AircraftRegistrationMark" type="arm:AircraftRegistrationMark" minOccurs="0" />
 			<xsd:element name="ManufacturerName" type="mn:ManufacturerName" minOccurs="0" />			
-			<xsd:element name="ModelAircraftAccordingTypeCertificate" type="maatc:ModelAircraftAccordingTypeCertificate" minOccurs="0" />
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
 			<xsd:element name="AircraftSerialNumberTTSN" type="asnt:AircraftSerialNumberTTSN" minOccurs="0" />
 		</xsd:sequence>
 	</xsd:complexType>

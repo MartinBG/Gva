@@ -7,6 +7,8 @@ namespace Rio.Objects.Enums
 {
     public class ASCourseExamNomenclature : BaseNomenclature
     {
+        public List<BaseNomenclature> TrainingValues { get; set; }
+
         public static readonly BaseNomenclature ModuleOneMaths = new BaseNomenclature("01", "МОДУЛ 1 МАТЕМАТИКА", "");
         public static readonly BaseNomenclature ModuleTwoPhysics = new BaseNomenclature("02", "МОДУЛ 2 ФИЗИКА", "");
         public static readonly BaseNomenclature ModuleThreeElectricityFundamentals = new BaseNomenclature("03", "МОДУЛ 3 ОСНОВИ НА ЕЛЕКТРИЧЕСТВОТО", "");
@@ -25,6 +27,12 @@ namespace Rio.Objects.Enums
         public static readonly BaseNomenclature TurbineEngines = new BaseNomenclature("15", "ГАЗОТУРБИННИ ДВИГАТЕЛИ", "");
         public static readonly BaseNomenclature PistonEngines = new BaseNomenclature("16", "БУТАЛНИ ДВИГАТЕЛИ", "");
         public static readonly BaseNomenclature Propellers = new BaseNomenclature("17", "ВИТЛА", "");
+
+        public static readonly BaseNomenclature Fel = new BaseNomenclature("F/EL", "F/EL");
+        public static readonly BaseNomenclature Fnl = new BaseNomenclature("F/NL", "F/NL");
+        public static readonly BaseNomenclature Frol = new BaseNomenclature("F/ROL", "F/ROL");
+        public static readonly BaseNomenclature Fol = new BaseNomenclature("F/OL", "F/OL");
+        public static readonly BaseNomenclature Fcl = new BaseNomenclature("F/CL", "F/CL");
 
         public ASCourseExamNomenclature()
         {
@@ -49,6 +57,15 @@ namespace Rio.Objects.Enums
                 PistonEngines,
                 Propellers
             }.OrderBy(e => e.Text).ToList();
+
+            this.TrainingValues = new List<BaseNomenclature>()
+            {
+                Fel,
+                Fnl,
+                Frol,
+                Fol,
+                Fcl 
+            };
         }
     }
 }

@@ -11,6 +11,8 @@
 	xmlns:oqc="http://ereg.egov.bg/segment/R-4252"
 	xmlns:oqcd="http://ereg.egov.bg/segment/R-4282"
 	xmlns:caiatmp="http://ereg.egov.bg/segment/R-4268"
+	xmlns:erc="http://ereg.egov.bg/segment/R-5328"
+	xmlns:ccr="http://ereg.egov.bg/segment/R-5332"
 	xmlns:add="http://ereg.egov.bg/segment/R-3994"
 	xmlns:eraddc="http://ereg.egov.bg/segment/R-4696"
 	xmlns:ad="http://ereg.egov.bg/segment/0009-000139"
@@ -28,6 +30,8 @@
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4252" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4282" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4268" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5328" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5332" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-3994" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/R-4696" />
 	<xsd:import namespace="http://ereg.egov.bg/segment/0009-000139" />
@@ -50,6 +54,8 @@
 			<xsd:element name="OVDQualificationClassData" type="oqcd:OVDQualificationClassData" minOccurs="0" maxOccurs="unbounded" />
 			<xsd:element name="PermissionTypeConfirmedRecovery" type="tcr:TypeConfirmedRecovery" minOccurs="0" />	
 			<xsd:element name="CoordinationActivitiesInteractionAirTrafficManagementPermission" type="caiatmp:CoordinationActivitiesInteractionAirTrafficManagementPermission" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="EmployerRightsConditions" type="erc:EmployerRightsConditions" minOccurs="0" />
+			<xsd:element name="CheckCompetenceRating" type="ccr:CheckCompetenceRating" minOccurs="0" maxOccurs="unbounded" />
 			<xsd:element name="AttachedDocumentDatasCollection" type="add:AttachedDocumentDatasCollection" minOccurs="0" />	
 			<xsd:element name="EAURecipientsAttachedDocumentDatasCollection" type="eraddc:EAURecipientsAttachedDocumentDatasCollection" minOccurs="0" />
 			<xsd:element name="AttachedDocuments" minOccurs="0">

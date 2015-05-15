@@ -42,6 +42,31 @@ namespace Rio.Objects.Enums
             As
         };
 
+        public static readonly BaseNomenclature PPLA = new BaseNomenclature("PPL(A)", "PPL(A)");
+        public static readonly BaseNomenclature PPLH = new BaseNomenclature("PPL(H)", "PPL(H)");
+        public static readonly BaseNomenclature SPL = new BaseNomenclature("SPL", "SPL");
+        public static readonly BaseNomenclature BPL = new BaseNomenclature("BPL", "BPL");
+        public static readonly BaseNomenclature CPLA = new BaseNomenclature("CPL(A)", "CPL(A)");
+        public static readonly BaseNomenclature CPLH = new BaseNomenclature("CPL(H)", "CPL(H)");
+        public static readonly BaseNomenclature ATPLA = new BaseNomenclature("ATPL(A)", "ATPL(A)");
+        public static readonly BaseNomenclature ATPLH = new BaseNomenclature("ATPL(H)", "ATPL(H)");
+        public static readonly BaseNomenclature WithIR = new BaseNomenclature("WithIR", "С IR");
+        public static readonly BaseNomenclature WihtoutIR = new BaseNomenclature("WihtoutIR", "Без IR");
+
+        public static List<BaseNomenclature> R5246Values = new List<BaseNomenclature>()
+        {
+            PPLA,
+            PPLH,
+            SPL,
+            BPL,
+            CPLA,
+            CPLH,
+            ATPLA,
+            ATPLH,
+            WithIR,
+            WihtoutIR
+        };
+
         public AircraftClassQualificationClassNomenclature()
         {
             this.Values = new List<BaseNomenclature>()

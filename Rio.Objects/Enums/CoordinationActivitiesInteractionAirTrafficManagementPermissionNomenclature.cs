@@ -12,7 +12,6 @@ namespace Rio.Objects.Enums
         public static readonly BaseNomenclature ATFM = new BaseNomenclature("03", "ATFM", "");
         public static readonly BaseNomenclature FDA = new BaseNomenclature("04", "FDA", "");
         public static readonly BaseNomenclature FIS = new BaseNomenclature("05", "FIS", "");
-        public static readonly BaseNomenclature SIMI = new BaseNomenclature("06", "SIMI", "");
         public static readonly BaseNomenclature SAR = new BaseNomenclature("07", "SAR", "");
         public static readonly BaseNomenclature AFIS = new BaseNomenclature("08", "AFIS", "");
 
@@ -25,7 +24,6 @@ namespace Rio.Objects.Enums
                 ATFM,
                 FDA,
                 FIS,
-                SIMI,
                 SAR,
                 AFIS,
             };

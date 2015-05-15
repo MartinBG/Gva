@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5304" xmlns="http://ereg.egov.bg/segment/R-5304" 
+
+	xmlns:iflas="http://ereg.egov.bg/value/R-5298" 
+	xmlns:flan="http://ereg.egov.bg/value/R-5300" 
+	xmlns:flap="http://ereg.egov.bg/value/R-5302" 
+	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5298" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5300" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5302" />
+
+	<xsd:complexType name="ForeignLicenseAim">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Цел за признаване на чуждо свидетелство за правоспособност</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="IsForeignLicenseAimSelected" type="iflas:IsForeignLicenseAimSelected" minOccurs="0" />
+			<xsd:element name="ForeignLicenseAimName" type="flan:ForeignLicenseAimName" minOccurs="0" />
+			<xsd:element name="ForeignLicenseAimPeriod" type="flap:ForeignLicenseAimPeriod" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

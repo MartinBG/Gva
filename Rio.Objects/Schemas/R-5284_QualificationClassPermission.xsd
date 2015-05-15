@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://ereg.egov.bg/segment/R-5284" xmlns="http://ereg.egov.bg/segment/R-5284" 
+
+	xmlns:tcr="http://ereg.egov.bg/value/R-5162" 
+	xmlns:ac="http://ereg.egov.bg/segment/R-4152" 
+	xmlns:at="http://ereg.egov.bg/segment/R-4158" 
+	xmlns:prqc="http://ereg.egov.bg/segment/R-5260" 
+	xmlns:irr="http://ereg.egov.bg/segment/R-5270" 
+	xmlns:hfest="http://ereg.egov.bg/value/R-3992"
+	xmlns:ase="http://ereg.egov.bg/segment/R-4104"  
+	
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:import namespace="http://ereg.egov.bg/value/R-5162" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4152" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4158" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5260" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-5270" />
+	<xsd:import namespace="http://ereg.egov.bg/value/R-3992" />
+	<xsd:import namespace="http://ereg.egov.bg/segment/R-4104" />
+
+	<xsd:complexType name="QualificationClassPermission">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="bg">Квалификационен клас и/или разрешение</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="TypeConfirmedRecovery" type="tcr:TypeConfirmedRecovery" minOccurs="0" />
+			<xsd:element name="AircraftClass" type="ac:AircraftClass" minOccurs="0" />
+			<xsd:element name="AircraftType" type="at:AircraftType" minOccurs="0" />
+			<xsd:element name="PermissionsRestrictionsQualificationClass" type="prqc:PermissionsRestrictionsQualificationClass" minOccurs="0" />
+			<xsd:element name="IndividualRecoveryProgram" type="irr:IndividualRecoveryProgram" minOccurs="0" />
+			<xsd:element name="HoursFlyingExperienceSkillTest" type="hfest:HoursFlyingExperienceSkillTest" minOccurs="0" />
+			<xsd:element name="ASCourseExam" type="ase:ASCourseExam" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
