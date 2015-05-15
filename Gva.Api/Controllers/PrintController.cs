@@ -152,7 +152,19 @@ namespace Gva.Api.Controllers
         [Route("api/printRadioCert")]
         public HttpResponseMessage GetRadioCert(int lotId, int partIndex)
         {
-            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertRadios/{0}", partIndex), "radio_cert");
+            string templateName = "radio_cert";
+            var wordDocStream = this.printRepository.GenerateWordDocument(lotId, string.Format("aircraftCertRadios/{0}", partIndex), templateName, null, null);
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new StreamContent(wordDocStream);
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/msword");
+            result.Content.Headers.ContentDisposition =
+                new ContentDispositionHeaderValue("inline")
+                {
+                    FileName = string.Format("{0}.docx", templateName)
+                };
+
+            return result;
         }
 
         [Route("api/printExportCert")]

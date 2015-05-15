@@ -53,7 +53,7 @@ namespace Gva.Api.WordTemplates
                 {
                     NUMBER = radioCertData.AslNumber,
                     REG_MARK = radioCertData.RegMark,
-                    AIRCRAFT_TYPE = aircraftData.AircraftType != null? aircraftData.AircraftType.Code : null,
+                    AIRCRAFT_TYPE = radioCertData.ActType,
                     OWNER = radioCertData.OwnerOper != null ? radioCertData.OwnerOper.Name : null,
                     QTY1 = transmitters.Select(t => new { DATA = t.Count }),
                     MODEL1 = transmitters.Select(t => new { DATA = t.Model }),
