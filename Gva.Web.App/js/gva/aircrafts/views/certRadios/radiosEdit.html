@@ -4,7 +4,7 @@
       <strong l10n-text="aircrafts.editRadio.title"></strong>
 
       <div class="pull-right">
-        <sc-link-button name="printBtn" ng-href="api/printRadioCert?lotId={{lotId}}&partIndex={{partIndex}}" target="_blank" sc-access-token class="btn btn-sm" icon="glyphicon-print"></sc-link-button>
+        <sc-link-button name="printBtn" ng-if="!editMode" ng-href="api/printRadioCert?lotId={{lotId}}&partIndex={{partIndex}}" target="_blank" sc-access-token class="btn btn-sm" icon="glyphicon-print"></sc-link-button>
         <sc-button name="editBtn" btn-click="edit()" text="aircrafts.editRadio.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
         </sc-button>
         <sc-button name="deleteBtn" btn-click="deleteRadio()" text="aircrafts.editRadio.deleteRadio" class="btn btn-danger btn-xs" icon="glyphicon-remove" ng-show="!editMode">
