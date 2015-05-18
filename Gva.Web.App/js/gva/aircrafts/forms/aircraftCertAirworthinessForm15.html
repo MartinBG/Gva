@@ -2,7 +2,7 @@
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.registration" alias="'aircraftsRegistrations'" ng-required="true" params="{ lotId: lotId }" l10n-text="aircrafts.airworthinessForm15Directive.registration" class="col-md-6 col-sm-8"></sc-field>
   </div>
-  <div class="row">
+  <div class="row" ng-if="model.airworthinessCertificateType.alias !== '15aReissue' && model.airworthinessCertificateType.alias !== '15bReissue'">
     <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessForm15Directive.issueDate" class="col-md-2 col-sm-4"></sc-field>
   </div>
   <div class="row">

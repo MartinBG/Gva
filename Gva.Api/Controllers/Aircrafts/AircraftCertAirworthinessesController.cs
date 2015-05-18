@@ -7,6 +7,7 @@ using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
@@ -23,6 +24,7 @@ namespace Gva.Api.Controllers.Aircrafts
         private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
+        private IAircraftRegistrationRepository aircraftRegistrationRepository;
 
         public AircraftCertAirworthinessesController(
             IUnitOfWork unitOfWork,
@@ -32,6 +34,7 @@ namespace Gva.Api.Controllers.Aircrafts
             IFileRepository fileRepository,
             ILotEventDispatcher lotEventDispatcher,
             INomRepository nomRepository,
+            IAircraftRegistrationRepository aircraftRegistrationRepository,
             UserContext userContext)
             : base("aircraftCertAirworthinessesFM", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
@@ -39,14 +42,17 @@ namespace Gva.Api.Controllers.Aircrafts
             this.lotRepository = lotRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.applicationRepository = applicationRepository;
+            this.aircraftRegistrationRepository = aircraftRegistrationRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewCertAirworthinessFM(int lotId, int? appId = null)
         {
+            var lastReg = this.aircraftRegistrationRepository.GetAircraftRegistrationNoms(lotId).FirstOrDefault();
             AircraftCertAirworthinessDO newCertAirworthinessFM = new AircraftCertAirworthinessDO()
             {
-                AirworthinessCertificateType = this.nomRepository.GetNomValue("airworthinessCertificateTypes", "f25")
+                AirworthinessCertificateType = this.nomRepository.GetNomValue("airworthinessCertificateTypes", "f25"),
+                Registration = lastReg
             };
 
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();

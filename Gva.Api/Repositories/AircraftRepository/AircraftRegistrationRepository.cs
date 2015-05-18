@@ -93,6 +93,7 @@ namespace Gva.Api.Repositories.AircraftRepository
         {
             var registrations = this.lotRepository.GetLotIndex(lotId).Index
                 .GetParts<AircraftCertRegistrationFMDO>("aircraftCertRegistrationsFM")
+                .OrderByDescending(r => r.Content.CertDate)
                 .Select(i => new NomValue()
                 {
                     NomValueId = i.Part.Index,

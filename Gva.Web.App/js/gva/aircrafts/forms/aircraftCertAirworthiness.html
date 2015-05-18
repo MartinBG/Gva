@@ -4,12 +4,12 @@
   </div>
   <div class="row">
     <sc-field type="text" ng-model="model.documentNumber" l10n-text="aircrafts.airworthinessDirective.documentNumber" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field ng-if="model.airworthinessCertificateType.alias !== 'special'"
+    <sc-field ng-if="model.airworthinessCertificateType.alias !== 'special' && model.airworthinessCertificateType.alias !== 'directive8Reissue' && model.airworthinessCertificateType.alias !== 'vlaReissue'"
       type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
     <sc-field ng-if="model.airworthinessCertificateType.alias === 'special'"
       type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessDirective.issueDateSpecial" class="col-md-3 col-sm-4"></sc-field>
   </div>
-  <div ng-if="model.airworthinessCertificateType.alias === 'vla' || model.airworthinessCertificateType.alias === 'unknown' || model.airworthinessCertificateType.alias === 'vlaReissue' || model.part.airworthinessCertificateType.alias === 'directive8Reissue' || model.part.airworthinessCertificateType.alias === 'directive8'">
+  <div ng-if="model.airworthinessCertificateType.alias === 'vla' || model.airworthinessCertificateType.alias === 'unknown' || model.airworthinessCertificateType.alias === 'vlaReissue' || model.airworthinessCertificateType.alias === 'directive8Reissue' || model.airworthinessCertificateType.alias === 'directive8'">
     <div class="row">
       <sc-field type="date" ng-model="model.validFromDate" l10n-text="aircrafts.airworthinessDirective.validFromDate" class="col-md-2 col-sm-4"></sc-field>
       <sc-field type="date" ng-model="model.validToDate" l10n-text="aircrafts.airworthinessDirective.validToDate" class="col-md-2 col-sm-4"></sc-field>
