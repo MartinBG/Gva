@@ -1147,7 +1147,6 @@
           certNumber: 'Рег. номер',
           actNumber: 'Дел. номер',
           certDate: 'Дата на регистрация',
-          register: 'Регистър',
           regMark: 'Регистрационен знак',
           incomingDocNumber: 'Вх. номер ГВА',
           incomingDocDate: 'Дата',

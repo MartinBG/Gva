@@ -50,15 +50,18 @@
       <div class="form-group col-md-4">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="aircrafts.viewAircraft.certNumber"></span>
+          <span class="input-group-addon" ng-if="aircraft.registerCode === '2'">II - </span>
           <input disabled name="certNumber" type="text" class="form-control" value="{{aircraft.certNumber}}" />
         </div>
       </div>
       <div class="form-group col-md-3">
         <div class="input-group input-group-sm">
           <span class="input-group-addon" l10n-text="aircrafts.viewAircraft.actNumber"></span>
+          <span class="input-group-addon" ng-if="aircraft.registerCode === '2'">II - </span>
           <input disabled name="actNumber" type="text" class="form-control" value="{{aircraft.actNumber}}" />
         </div>
       </div>
+
     </div>
     <div class="row">
       <div class="form-group col-md-offset-10 col-md-2">
