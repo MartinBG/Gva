@@ -3932,7 +3932,7 @@
         'root.persons.view.reports.new': 'Нов отчет',
         'root.persons.view.reports.edit': 'Преглед на отчет',
         'root.persons.view.examinationSystem': 'Изпитна система',
-        'root.aircrafts': 'Списък ВС',
+        'root.aircrafts': 'ВС',
         'root.aircrafts.registrations': 'Регистрации на Въздухоплавателни средства',
         'root.aircrafts.invalidActNumbers': 'Невалидни деловодни номера',
         'root.aircrafts.new': 'Ново ВС',
