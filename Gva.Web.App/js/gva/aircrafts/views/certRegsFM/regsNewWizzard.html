@@ -6,7 +6,7 @@
         <sc-button btn-click="cancel()" text="aircrafts.newRegWizzard.cancel"
           class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
         </sc-button>
-        <sc-button btn-click="back()" text="aircrafts.newRegWizzard.back" ng-if="currentStep !== steps.chooseRegMark"
+        <sc-button btn-click="back()" text="aircrafts.newRegWizzard.back" ng-if="currentStep !== steps.chooseRegister"
           class="btn btn-default btn-xs" icon="glyphicon-chevron-left">
         </sc-button>
         <button name="forwardButton" sc-click="forward()" class="btn btn-primary btn-xs" type="button" ng-if="currentStep !== steps.regMarkInUse">
@@ -22,7 +22,7 @@
           <div class="form-group col-sm-2 col-sm-4" sc-has-error="register">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.register"></label>
             <sc-validation-error field-name="register" validations="{required: 'default'}"></sc-validation-error>
-            <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-required="true" ng-readonly="true"></sc-nomenclature>
+            <sc-nomenclature ng-model="model.register" name="register" alias="'registers'" ng-required="true"></sc-nomenclature>
           </div>
           <sc-field type="int" ng-model="model.certNumber" ng-if="model.register.code !== '2'" name="certNumber" ng-readonly="true" l10n-text="aircrafts.newRegWizzard.certNumber" class="col-md-2 col-sm-4"></sc-field>
           <sc-field-group ng-if="model.register.code === '2'" class="col-md-2 col-sm-4" text="aircrafts.newRegWizzard.certNumber">
@@ -37,7 +37,7 @@
           <div class="form-group col-md-3 col-sm-4" sc-has-error="regMark">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.regMark"></label>
             <sc-validation-error field-name="regMark" validations="{required: 'default', pattern: 'default'}"></sc-validation-error>
-            <sc-text ng-model="model.regMark" name="regMark" ng-required="true" ng-readonly="currentStep !== steps.chooseRegMark" ng-pattern="regMarkPattern"></sc-text>
+            <sc-text ng-model="model.regMark" name="regMark" ng-required="true" ng-readonly="!isNew || currentStep === steps.confirmRegMark" ng-pattern="regMarkPattern"></sc-text>
           </div>
 
           <sc-info class="success" icon="glyphicon glyphicon-ok" text="aircrafts.newRegWizzard.confirmRegMark" ng-if="currentStep === steps.confirmRegMark"></sc-info>
