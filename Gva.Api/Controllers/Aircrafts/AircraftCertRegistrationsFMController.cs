@@ -64,20 +64,7 @@ namespace Gva.Api.Controllers.Aircrafts
                     Alias = caseType.Alias
                 }
             };
-            NomValue status = null;
-            var registrations = this.lotRepository.GetLotIndex(lotId).Index
-                    .GetParts<AircraftCertRegistrationFMDO>(this.path)
-                    .ToList();
-
-            if (registrations.Count > 0)
-            {
-                status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "lastActiveReg");
-            }
-            else
-            {
-                status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "firstReg");
-            }
-
+            NomValue status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "lastActiveReg");
             AircraftCertRegistrationFMDO newCertRegFM = new AircraftCertRegistrationFMDO()
             {
                 IsActive = true,
@@ -164,22 +151,11 @@ namespace Gva.Api.Controllers.Aircrafts
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
                 var lot = this.lotRepository.GetLotIndex(lotId);
-                var registrations = this.lotRepository.GetLotIndex(lotId).Index
-                   .GetParts<AircraftCertRegistrationFMDO>(this.path)
-                   .ToList();
 
                 partVersionDO.Part.IsActive = true;
                 partVersionDO.Part.Removal = null;
-
-                if (registrations.Count > 1)
-                {
-                    partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "lastActiveReg");
-                }
-                else
-                {
-                    partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "firstReg");
-                }
-
+                partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "lastActiveReg");
+               
                 PartVersion<AircraftCertRegistrationFMDO> partVersion = lot.UpdatePart(
                     string.Format("{0}/{1}", this.path, partIndex),
                     partVersionDO.Part,
@@ -332,24 +308,7 @@ namespace Gva.Api.Controllers.Aircrafts
                 var lot = this.lotRepository.GetLotIndex(lotId);
                 if (partVersionDO.Part.Removal != null && partVersionDO.Part.Removal.Reason != null)
                 {
-                    switch (partVersionDO.Part.Removal.Reason.Alias)
-                    {
-                        case "order":
-                            partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "removedByOrder");
-                            break;
-                        case "expiredContract":
-                            partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "expiredContract");
-                            break;
-                        case "changedOwnership":
-                            partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "changedOwnership");
-                            break;
-                        case "totaled":
-                            partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "totaled");
-                            break;
-                        default:
-                            partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "removed");
-                            break;
-                    }
+                    partVersionDO.Part.Status = this.nomRepository.GetNomValue("aircraftRegStatsesFm", "removed");
                 }
 
                 PartVersion<AircraftCertRegistrationFMDO> partVersion = lot.UpdatePart(

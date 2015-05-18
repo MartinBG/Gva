@@ -508,7 +508,8 @@ namespace Gva.MigrationTool.Sets
                                 lessorOther = r.leasingLessor.Item2 == null && r.leasingLessor.Item3 == null ? r.lessorName : null,
                                 r.leasingAgreement,
                                 r.leasingEndDate,
-                                status = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? noms["aircraftRegStatsesFm"].ByAlias("removedByOrder") : r.status,
+                                status = (r.parsedToIntStatusCode >= 6 && r.parsedToIntStatusCode != 21 && r.parsedToIntStatusCode != 10) ? noms["aircraftRegStatsesFm"].ByAlias("removed") :
+                                ((r.parsedToIntStatusCode >= 1 && r.parsedToIntStatusCode < 4) ? noms["aircraftRegStatsesFm"].ByAlias("lastActiveReg") : r.status),
                                 r.EASA25Number,
                                 r.EASA25Date,
                                 r.EASA15Date,

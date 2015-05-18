@@ -44,7 +44,7 @@
         <div class="form-group col-md-4 col-sm-5">
           <label class="control-label" l10n-text="aircrafts.regViewDirective.status"></label>
           <input disabled name="status" type="text" class="form-control input-sm" 
-            value="{{model.status.alias === 'removedByOrder' ? (model.status.name + ' ' + model.removal.orderNumber + (model.removal.documentDate ? (' / ' + (model.removal.documentDate | date: 'dd.MM.yyyy')) : '')) : model.status.name}}">
+            value="{{model.status.alias === 'removed' && model.removal.orderNumber? (model.status.name + ' ' + model.removal.orderNumber + (model.removal.documentDate ? (' / ' + (model.removal.documentDate | date: 'dd.MM.yyyy')) : '')) : model.status.name}}">
         </div>
       </div>
       <div class="row">

@@ -3273,6 +3273,10 @@ namespace Gva.MigrationTool.Nomenclatures
                 { "11", "removed"}
             };
 
+            var activeNomCodes = new List<string>(){
+                "2", "6", "11"
+            };
+
             Nom nom = repo.GetNom("aircraftRegStatsesFm");
             var results = conn.CreateStoreCommand(@"
                 SELECT [Code] code, [Registration Status] name
@@ -3286,7 +3290,7 @@ namespace Gva.MigrationTool.Nomenclatures
                         Name = r.Field<string>("name"),
                         NameAlt = null,
                         Alias = aliases.ContainsKey(r.Field<string>("code")) ? aliases[r.Field<string>("code")] : null,
-                        IsActive = true,
+                        IsActive = activeNomCodes.Contains(r.Field<string>("code")) ? true : false,
                         ParentValueId = null,
                         TextContentString = null
                     })
@@ -3304,16 +3308,6 @@ namespace Gva.MigrationTool.Nomenclatures
                     nom.NomValues.Add(row);
                 }
             }
-            NomValue removedByOrder = new NomValue
-            {
-                OldId = null,
-                Name = "Заличен съгласно заповед",
-                Alias = "removedByOrder",
-                IsActive = true,
-                Code = "0"
-            };
-            nom.NomValues.Add(removedByOrder);
-            noms["aircraftRegStatsesFm"][Guid.NewGuid().ToString()] = removedByOrder;
         }
 
         private void migrateCountriesFm(INomRepository repo, SqlConnection conn)
