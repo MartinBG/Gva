@@ -274,6 +274,23 @@
       function resolveDoc($stateParams, Docs) {
         return Docs.get({ id: $stateParams.id }).$promise.then(function (doc) {
           doc.openAccordion = false;
+
+          doc.resolutionUnitsInCharge =
+            _(doc.docRelations)
+            .where(function (dr) {
+              return dr.parentDocId === doc.docId &&
+                (dr.docDocStatusAlias === 'Processed' || dr.docDocStatusAlias === 'Finished') &&
+                (dr.docEntryTypeAlias === 'Resolution' || dr.docEntryTypeAlias === 'Taks') &&
+                dr.docUnitsInCharge &&
+                dr.docUnitsInCharge.length;
+            })
+            .map(function (dr) {
+              return _(dr.docUnitsInCharge)
+                .pluck('name')
+                .reduce(function (a, b) { return a + '; ' + b; });
+            })
+            .value();
+
           doc.flags = {};
 
           doc.flags.getDocStatusName = function (docStatusAlias) {

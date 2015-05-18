@@ -327,6 +327,30 @@ namespace Docs.Api.Controllers
 
             foreach (var item in returnValue)
             {
+                List<DocRelation> resolutionDocRelations =
+                    this.unitOfWork.DbContext.Set<DocRelation>()
+                    .Include(e => e.Doc.DocDirection)
+                    .Include(e => e.Doc.DocCasePartType)
+                    .Include(e => e.Doc.DocType)
+                    .Include(e => e.Doc.DocEntryType)
+                    .Where(e => e.ParentDocId == item.DocId &&
+                        (e.Doc.DocStatus.Alias == "Processed" || e.Doc.DocStatus.Alias == "Finished") &&
+                        (e.Doc.DocEntryType.Alias == "Resolution" || e.Doc.DocEntryType.Alias == "Task"))
+                    .ToList();
+
+                if (resolutionDocRelations.Any())
+                {
+                    var resolutionDocIds = resolutionDocRelations.Select(r => r.DocId).ToArray();
+
+                    this.unitOfWork.DbContext.Set<DocUnit>()
+                         .Include(e => e.Unit.UnitRelations.Select(er => er.ParentUnit))
+                         .Include(e => e.DocUnitRole)
+                         .Where(e => resolutionDocIds.Contains(e.DocId))
+                         .ToList();
+
+                    item.ResolutionDocRelations.AddRange(resolutionDocRelations.Select(r => new DocRelationDO(r)));
+                }
+
                 if (docView == DocView.ForControl || docView == DocView.ForManagement)
                 {
                     int? rootId = this.unitOfWork.DbContext.Set<DocRelation>()
@@ -1178,6 +1202,8 @@ namespace Docs.Api.Controllers
 
             #region Load
 
+            int caseId = this.docRepository.GetCaseId(id);
+
             this.unitOfWork.DbContext.Set<DocHasRead>()
             .Where(e => e.DocId == id)
             .ToList();
@@ -1192,7 +1218,7 @@ namespace Docs.Api.Controllers
             this.unitOfWork.DbContext.Set<DocUnit>()
              .Include(e => e.Unit.UnitRelations.Select(er => er.ParentUnit))
              .Include(e => e.DocUnitRole)
-             .Where(e => e.DocId == id)
+             .Where(e => e.Doc.DocRelations.Any(dr => dr.RootDocId == caseId))
              .ToList();
 
             this.unitOfWork.DbContext.Set<DocCorrespondent>()

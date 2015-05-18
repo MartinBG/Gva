@@ -13,6 +13,7 @@ namespace Docs.Api.DataObjects
         public DocListItemDO()
         {
             this.DocCorrespondents = new List<DocCorrespondentDO>();
+            this.ResolutionDocRelations = new List<DocRelationDO>();
         }
 
         public DocListItemDO(Doc d, UnitUser unitUser = null)
@@ -92,6 +93,8 @@ namespace Docs.Api.DataObjects
         public bool IsSelected { get; set; }
         public bool IsRead { get; set; }
         public bool IsElectronic { get; set; }
+
+        public List<DocRelationDO> ResolutionDocRelations { get; set; }
 
         #region ForManagement/ForControl
 

@@ -45,4 +45,14 @@
       </div>
     </div>
 
+    <div class="row" ng-show="model.resolutionUnitsInCharge.length">
+      <div class="col-md-12">
+          <div ng-repeat="ru in model.resolutionUnitsInCharge">
+            <i class="glyphicon glyphicon-share-alt"></i>
+            <strong>Резюлирано към:</strong>
+            <span>{{ru}}</span>
+          </div>
+      </div>
+    </div>
+
 </ng-form>
