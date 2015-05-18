@@ -72,9 +72,9 @@ namespace Gva.MigrationTool.Sets
                                 when a.tRegId LIKE 'II-%' then substring(a.tRegId, 4, 10000)
                                 else a.tRegId end) as actNumber
                             from
-                            (select 1 as regNumber, tRegId from Reg1 where nActID = 0
+                            (select 1 as regNumber, tRegId from Reg1 where nStatus = '0'
                             union all
-                            select 2 as regNumber, tRegId from Reg2 where nActID = 0) a")
+                            select 2 as regNumber, tRegId from Reg2 where nStatus = '0') a")
                         .Materialize(r =>
                             new
                             {
