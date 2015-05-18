@@ -67,7 +67,7 @@ namespace Docs.Api.EmailSender
                 }
                 else
                 {
-                    mailMessage.From = new MailAddress(ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialName"]);
+                    mailMessage.From = new MailAddress(ConfigurationManager.AppSettings["Docs.Api:DefaultEmailAccount"]);
                 }
 
                 foreach (var item in email.EmailAddressees.Where(e => e.EmailAddresseeType.Alias == "To"))
@@ -108,9 +108,6 @@ namespace Docs.Api.EmailSender
 
                 try
                 {
-                    //? what is this
-                    //ServicePointManager.ServerCertificateValidationCallback = delegate(object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
-
                     this.SmtpClient.Send(mailMessage);
                     email.EmailStatusId = deliveredStatus.EmailStatusId;
                     email.SentDate = DateTime.Now;
