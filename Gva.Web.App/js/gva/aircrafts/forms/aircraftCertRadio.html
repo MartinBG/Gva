@@ -76,7 +76,7 @@
             <td ng-if="!form.$readonly && model.entries.length">
               <sc-button name="deleteBtn" class="btn btn-xs btn-danger" btn-click="removeEntry(entry)" icon="glyphicon-remove"></sc-button>
             </td>
-            <td>{{entry.equipment.code}}</td>
+            <td>{{entry.equipment.code !== 'Otr' ? entry.equipment.code : entry.otherType}}</td>
             <td>{{entry.model}}</td>
             <td>{{entry.count}}</td>
             <td>{{entry.power}}</td>

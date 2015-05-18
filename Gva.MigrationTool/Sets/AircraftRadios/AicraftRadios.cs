@@ -42,6 +42,8 @@ namespace Gva.MigrationTool.AircarftRadios
                 double? date = excelReader[1] != null? (double)excelReader[1] : (double?)null;
                 string orgNameEn = (string)excelReader[4];
                 JObject org = !string.IsNullOrEmpty(orgNameEn) ? getOrgByFmOrgName(orgNameEn) : null;
+                string inspectorNameBg = (string)excelReader[5];
+                string inspectorNameEn = (string)excelReader[6];
                 AircraftCertRadioDO radio = new AircraftCertRadioDO()
                 {
                     RegMark = regMark,
@@ -56,7 +58,7 @@ namespace Gva.MigrationTool.AircarftRadios
                     } : null,
                     Inspector = new AircraftInspectorDO() 
                     {
-                        Other = string.Format("{0} / {1}", (string)excelReader[5], (string)excelReader[6])
+                        Other = !string.IsNullOrEmpty(inspectorNameEn) ? string.Format("{0} / {1}", inspectorNameBg, inspectorNameEn) : inspectorNameBg
                     }
                 };
 

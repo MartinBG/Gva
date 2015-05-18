@@ -143,35 +143,22 @@ namespace Gva.Api.WordTemplates
                   FREQ = radioAltimeters.Select(t => new { DATA = t.Bandwidth })
               });
 
-            if (others.Count() > 0)
+            int index = 6;
+            foreach (var other in others)
             {
-                var other1 = others.First();
                 equipments.Add(
-                 new
-                 {
-                     NAME = string.Format("7.6 {0}", other1.OtherType),
-                     QTY = new { DATA = other1.Count },
-                     MODEL = new { DATA = other1.Model },
-                     POWER = new { DATA = other1.Power },
-                     CLASS = new { DATA = other1.Class },
-                     FREQ = new { DATA = other1.Bandwidth }
-                 });
+                new
+                {
+                    NAME = string.Format("7.{0} {1}", index, other.OtherType),
+                    QTY = new { DATA = other.Count },
+                    MODEL = new { DATA = other.Model },
+                    POWER = new { DATA = other.Power },
+                    CLASS = new { DATA = other.Class },
+                    FREQ = new { DATA = other.Bandwidth }
+                });
+                index++;
             }
 
-            if (others.Count() > 1)
-            {
-                var other2 = others.Skip(1).Take(1).Single();
-                equipments.Add(
-                 new
-                 {
-                     NAME = string.Format("7.7 {0}", other2.OtherType),
-                     QTY = new { DATA = other2.Count },
-                     MODEL = new { DATA = other2.Model },
-                     POWER = new { DATA = other2.Power },
-                     CLASS = new { DATA = other2.Class },
-                     FREQ = new { DATA = other2.Bandwidth }
-                 });
-            }
             return equipments;
         }
     }

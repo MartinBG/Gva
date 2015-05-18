@@ -1112,10 +1112,10 @@
           additionalModificationAlt: 'Допълнителна модификация (англ.)'
         },
         radioDirective: {
-          model: 'Model',
+          model: 'Модел',
           ASLNumber: 'ASL №',
           issueDate: 'Дата на издаване',
-          regMark: 'Регистрационен знак',
+          regMark: 'Рег. знак',
           actType: 'Тип (модел)',
           ownerOper: 'Собственик/Оператор',
           equipment: 'Апаратура',
