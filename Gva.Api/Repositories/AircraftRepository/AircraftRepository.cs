@@ -30,6 +30,15 @@ namespace Gva.Api.Repositories.AircraftRepository
             int offset = 0,
             int? limit = null)
         {
+            List<int> lotIdsOfAircarftWithDefiniteRegMark = new List<int>();
+            if (!string.IsNullOrEmpty(mark))
+            {
+                lotIdsOfAircarftWithDefiniteRegMark = this.unitOfWork.DbContext.Set<GvaViewAircraftRegMark>()
+                    .Where(r => r.RegMark.ToLower().Contains(mark.ToLower()))
+                    .Select(a => a.LotId)
+                    .ToList();
+            }
+
             var gvaAircraftsWithRegData =
                 (from a in this.unitOfWork.DbContext.Set<GvaViewAircraft>()
                             .Include(a => a.AirCategory)
@@ -60,10 +69,14 @@ namespace Gva.Api.Repositories.AircraftRepository
             predicate = predicate
                 .AndStringMatches(p => p.Aircraft.ManSN, manSN, exact)
                 .AndStringMatches(p => p.Aircraft.ModelAlt, modelAlt, exact)
-                .AndStringMatches(p => p.Registration.RegMark, mark, exact)
                 .AndStringMatches(p => p.Aircraft.ICAO, icao, exact)
                 .AndStringMatches(p => p.Aircraft.AirCategory.Name, airCategory, exact)
                 .AndStringMatches(p => p.Aircraft.AircraftProducer.Name, aircraftProducer, exact);
+
+            if (lotIdsOfAircarftWithDefiniteRegMark.Count() > 0)
+            {
+                predicate = predicate.And(a => lotIdsOfAircarftWithDefiniteRegMark.Contains(a.Aircraft.LotId));
+            }
 
             var result = gvaAircraftsWithRegData
                 .Where(predicate)
