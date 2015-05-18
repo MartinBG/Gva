@@ -1089,7 +1089,6 @@
         airworthinessForm15Directive: {
           airworthinessCertificateType: 'Тип',
           registration: 'Регистрация',
-          issueDate: 'Дата на издаване',
           validFromDate: 'Валиден от',
           validToDate: 'Валиден до',
           organization: 'Организация'
