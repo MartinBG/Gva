@@ -111,7 +111,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Sets\AircraftRadios\Radio_Certificates.xls" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Api\Common.Api.csproj">
