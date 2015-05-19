@@ -1227,7 +1227,6 @@ namespace Gva.MigrationTool.Sets
                             __migrTable = "FLYING_EXPERIENCE",
 
                             documentDate = r.Field<DateTime?>("DOCUMENT_DATE"),
-                            period = new { month = r.Field<string>("PERIOD_MONTH"), year = r.Field<string>("PERIOD_YEAR") },
                             organization = getOrgByApexId(r.Field<int?>("FIRM_ID")),
                             aircraft = getAircraftByApexId(r.Field<int?>("AC_ID")),
                             ratingTypes = noms["ratingTypes"].ByOldId(r.Field<decimal?>("RATING_TYPE_ID").ToString()) != null ? 

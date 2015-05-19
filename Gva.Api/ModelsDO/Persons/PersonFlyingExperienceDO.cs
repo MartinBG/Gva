@@ -16,8 +16,6 @@ namespace Gva.Api.ModelsDO.Persons
         [Required(ErrorMessage = "DocumentDate is required.")]
         public DateTime? DocumentDate { get; set; }
 
-        public PeriodDO Period { get; set; }
-
         public string Notes { get; set; }
 
         public NomValue Organization { get; set; }

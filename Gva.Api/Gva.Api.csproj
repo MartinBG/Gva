@@ -275,7 +275,6 @@
     <Compile Include="ModelsDO\Equipments\EquipmentInspectionDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentOwnerDO.cs" />
     <Compile Include="ModelsDO\Equipments\EquipmentDocumentOtherDO.cs" />
-    <Compile Include="ModelsDO\Common\PeriodDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationAddressDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationApprovedAircraftsDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationCertAirCarrierDO.cs" />

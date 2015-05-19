@@ -1673,8 +1673,6 @@
         personFlyingExperienceDirective: {
           caseType: 'Тип дело',
           documentDate: 'Дата на документа',
-          month: 'За месец',
-          year: 'Година',
           sender: 'Подател',
           organization: 'Организация',
           aircraft: 'Рег.знак на ВС',
@@ -2384,10 +2382,7 @@
         },
         flyingExperienceSearch: {
           staffType: 'Тип персонал',
-          month: 'Месец',
-          year: 'Година',
           organization: 'Организация',
-          aircraft: 'ВС',
           ratingType: 'Тип ВС<br>(раб. място)',
           ratingClass: 'Клас',
           licenceType: 'Вид право-<br>способност',

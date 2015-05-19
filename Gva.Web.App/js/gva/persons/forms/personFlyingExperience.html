@@ -9,8 +9,6 @@
   <hr>
   <div class="row" ng-if="model.case.caseType.alias">
     <sc-field type="date" ng-model="model.part.documentDate" ng-required="true" l10n-text="persons.personFlyingExperienceDirective.documentDate" class="col-sm-3 col-md-2"></sc-field>
-    <sc-field type="text" ng-model="model.part.period.month" l10n-text="persons.personFlyingExperienceDirective.month" class="col-sm-2 col-md-2"></sc-field>
-    <sc-field type="text" ng-model="model.part.period.year" l10n-text="persons.personFlyingExperienceDirective.year" class="col-sm-2 col-md-2"></sc-field>
     <sc-field type="text" ng-model="model.part.notes" l10n-text="persons.personFlyingExperienceDirective.sender" class="col-sm-4"></sc-field>
   </div>
   <div class="row" ng-if="model.case.caseType.alias === 'flightCrew'">

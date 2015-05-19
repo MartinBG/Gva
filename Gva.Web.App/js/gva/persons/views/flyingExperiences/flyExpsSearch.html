@@ -5,12 +5,6 @@
   </sc-column>
   <sc-column data="part.documentDate" title="persons.flyingExperienceSearch.documentDate" type="date">
   </sc-column>
-  <sc-column data="part.period.year" title="persons.flyingExperienceSearch.year">
-  </sc-column>
-  <sc-column data="part.period.month" title="persons.flyingExperienceSearch.month">
-  </sc-column>
-  <sc-column data="part.aircraft.name" title="persons.flyingExperienceSearch.aircraft">
-  </sc-column>
   <sc-column data="part.ratingTypes && part.ratingTypes.length > 0 ? (part.ratingTypes | pluck:'code' | join:', ') : (part.locationIndicator ? part.locationIndicator.code : '')  + ' ' + (part.sector ? part.sector : '')" title="persons.flyingExperienceSearch.ratingType" class="wrap">
   </sc-column>
   <sc-column data="part.ratingClass.code" title="persons.flyingExperienceSearch.ratingClass" class="wrap">
