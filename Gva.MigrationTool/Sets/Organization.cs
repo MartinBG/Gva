@@ -92,8 +92,15 @@ namespace Gva.MigrationTool.Sets
                 })
                 .Wait();
 
-            timer.Stop();
             Console.WriteLine("Organization fm lot creation time - {0}", timer.Elapsed.TotalMinutes);
+            timer.Stop();
+
+            Stopwatch timer2 = new Stopwatch();
+            timer2.Start();
+            List<JObject> notCreatedLessors = this.OrganizationFmLotCreatorFactory().Value.getNotCreatedLessorsNames(orgNamesEnToLotId);
+            this.OrganizationFmLotCreatorFactory().Value.StartCreatingMissingLessors(noms, notCreatedLessors, orgNamesEnToLotId, orgLotIdToOrgNom, cts, ct);
+            Console.WriteLine("Organization lessors fm lot creation time - {0}", timer2.Elapsed.TotalMinutes);
+            timer2.Stop();
 
             return Tuple.Create(
                 orgNamesEnToLotId.ToDictionary(kvp => kvp.Key, kvp => kvp.Value),

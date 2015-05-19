@@ -131,6 +131,120 @@ namespace Gva.MigrationTool.Sets
             }
         }
 
+        public void StartCreatingMissingLessors(
+            //input constants
+            Dictionary<string, Dictionary<string, NomValue>> noms,
+            List<JObject> notCreatedLessors,
+            //output
+            ConcurrentDictionary<string, int> orgNamesEnToLotId,
+            ConcurrentDictionary<int, JObject> orgLotIdToOrgNom,
+            //cancellation
+            CancellationTokenSource cts,
+            CancellationToken ct)
+        {
+            try
+            {
+                this.sqlConn.Open();
+            }
+            catch (Exception)
+            {
+                cts.Cancel();
+                throw;
+            }
+
+            foreach (JObject lessor in notCreatedLessors)
+            {
+                ct.ThrowIfCancellationRequested();
+
+                try
+                {
+                    using (var dependencies = this.dependencyFactory())
+                    {
+                        var unitOfWork = dependencies.Value.Item1;
+                        var lotRepository = dependencies.Value.Item2;
+                        var caseTypeRepository = dependencies.Value.Item3;
+                        var lotEventDispatcher = dependencies.Value.Item4;
+                        var context = dependencies.Value.Item5;
+
+                        List<NomValue> orgCaseTypes = new List<NomValue>() { 
+                            noms["organizationCaseTypes"].ByAlias("others") 
+                        };
+
+                        string lessorName = lessor.Get<string>("lessorName");
+                        string lessorByNameBG = lessor.Get<string>("lessorByNameBG");
+                        string lessorByAddrAndNameBG = lessor.Get<string>("lessorByAddrAndNameBG");
+                        string lessorByAddrAndNameEN = lessor.Get<string>("lessorByAddrAndNameEN");
+
+                        string orgName;
+                        if(!string.IsNullOrEmpty(lessorByAddrAndNameEN))
+                        {
+                            orgName = lessorByAddrAndNameEN;
+                        }
+                        else if(!string.IsNullOrEmpty(lessorByAddrAndNameBG))
+                        {
+                            orgName = lessorByAddrAndNameBG;
+                        }
+                        else if(!string.IsNullOrEmpty(lessorByNameBG))
+                        {
+                            orgName = lessorByNameBG;
+                        }
+                        else
+                        {
+                            orgName = lessorName;
+                        }
+
+                        if (orgNamesEnToLotId.ContainsKey(orgName))
+                        {
+                            continue;
+                        }
+
+                        var lot = lotRepository.CreateLot("Organization");
+
+                        var organizationData = new
+                        {
+                            caseTypes = orgCaseTypes,
+                            name = orgName,
+                            nameAlt = orgName,
+                            organizationKind = noms["organizationKinds"].ByCode("0"),
+                            organizationType = noms["organizationTypes"].ByCode("N/A"),
+                            Valid = noms["boolean"].ByCode("Y")
+                        };
+
+                        lot.CreatePart("organizationData", organizationData, context);
+                        lot.Commit(context, lotEventDispatcher);
+                        unitOfWork.Save();
+                        Console.WriteLine("Created organizationData part for organization lessor with name {0}", orgName);
+
+                        int lotId = lot.LotId;
+
+                        bool orgLotIdAdded = orgLotIdToOrgNom.TryAdd(lotId, Utils.ToJObject(
+                            new
+                            {
+                                nomValueId = lotId,
+                                name = orgName,
+                                nameAlt = orgName
+                            }));
+
+                        if (!orgLotIdAdded)
+                        {
+                            throw new Exception(string.Format("lotId {0} already present in orgLotIdToOrgNom dictionary", lotId));
+                        }
+
+                        if (!orgNamesEnToLotId.ContainsKey(orgName))
+                        {
+                            orgNamesEnToLotId.TryAdd(orgName, lotId);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error in creation of organization with name {0}", lessor.Get<string>("lessorName"));
+                    cts.Cancel();
+                    throw;
+                }
+            }
+        }
+
         private JObject getOrganizationData(int organizationId, Dictionary<string, Dictionary<string, NomValue>> noms, List<NomValue> caseTypes)
         {
             return this.sqlConn.CreateStoreCommand(
@@ -158,6 +272,61 @@ namespace Gva.MigrationTool.Sets
                         docRoom = r.Field<string>("tRoom"),
                     }))
                 .Single();
+        }
+
+        public List<JObject> getNotCreatedLessorsNames(ConcurrentDictionary<string, int> orgNamesEnToLotId)
+        {
+            List<JObject> result = new List<JObject>();
+
+            var lessors = this.sqlConn.CreateStoreCommand(
+                @"select distinct s.tLessor,
+                       lessor.tNameEN as lessorByNameBG,
+                       lessorAddressBG.tNameEN as lessorByAddrAndNameBG,
+                       lessorAddressEN.tNameEN as lessorByAddrAndNameEN
+                    from 
+                    (select tLessor from Reg1 as r1
+                    union all
+                    select tLessor from Reg2 as r2) s
+                    left outer join Orgs lessor on lessor.tNameBG = s.tLessor
+                    left outer join Orgs lessorAddressBG on s.tLessor like lessorAddressBG.tNameBG + char(10) + lessorAddressBG.tAdrStreetBG + '%'
+                    left outer join Orgs lessorAddressEN on s.tLessor like lessorAddressEN.tNameEN + char(10) + lessorAddressEN.tAdrStreetEN + '%'
+                    where s.tLessor is not null and s.tLessor != ''"
+                )
+                .Materialize(r => Utils.ToJObject(
+                    new
+                    {
+                        lessorName = r.Field<string>("tLessor").Replace("\n", " "),
+                        lessorByNameBG = r.Field<string>("lessorByNameBG"),
+                        lessorByAddrAndNameBG = r.Field<string>("lessorByAddrAndNameBG"),
+                        lessorByAddrAndNameEN = r.Field<string>("lessorByAddrAndNameEN"),
+                    }))
+                    .ToList();
+
+            foreach(var lessor in lessors)
+            {
+                if (orgNamesEnToLotId.ContainsKey(lessor.Get<string>("lessorName")))
+                {
+                    continue;
+                }
+                else if(!string.IsNullOrEmpty(lessor.Get<string>("lessorByNameBG")) && orgNamesEnToLotId.ContainsKey(lessor.Get<string>("lessorByNameBG")))
+                {
+                    continue;
+                }
+                else if(!string.IsNullOrEmpty(lessor.Get<string>("lessorByAddrAndNameEN")) && orgNamesEnToLotId.ContainsKey(lessor.Get<string>("lessorByAddrAndNameEN")))
+                {
+                    continue;
+                }
+                else if (!string.IsNullOrEmpty(lessor.Get<string>("lessorByNameBG")) && orgNamesEnToLotId.ContainsKey(lessor.Get<string>("lessorByNameBG")))
+                {
+                    continue;
+                }
+                else
+                {
+                    result.Add(lessor);
+                }
+            }
+
+            return result;
         }
 
         public void Dispose()

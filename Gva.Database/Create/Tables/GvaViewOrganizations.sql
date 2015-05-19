@@ -3,8 +3,8 @@ GO
 
 CREATE TABLE [dbo].[GvaViewOrganizations] (
     [LotId]                INT           NOT NULL,
-    [Name]                 NVARCHAR(100) NOT NULL,
-    [NameAlt]              NVARCHAR(100) NOT NULL,
+    [Name]                 NVARCHAR(150) NOT NULL,
+    [NameAlt]              NVARCHAR(150) NOT NULL,
     [Cao]                  NVARCHAR(50)  NULL,
     [Valid]                BIT           NOT NULL,
     [OrganizationTypeId]   INT           NOT NULL,

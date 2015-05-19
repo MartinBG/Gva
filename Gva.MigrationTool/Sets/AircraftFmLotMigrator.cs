@@ -424,7 +424,7 @@ namespace Gva.MigrationTool.Sets
                     left outer join Acts a on a.n_Act_ID = s.nActID
                     left outer join Orgs owner on owner.nOrgID = s.nOwner
                     left outer join Orgs oper on oper.nOrgID = s.nOper
-                    left outer join Orgs lessor on lessor.tNameBG = tLessor
+                    left outer join Orgs lessor on lessor.tNameBG = s.tLessor
                     left outer join Orgs lessorAddressBG on s.tLessor like lessorAddressBG.tNameBG + char(10) + lessorAddressBG.tAdrStreetBG + '%'
                     left outer join Orgs lessorAddressEN on s.tLessor like lessorAddressEN.tNameEN + char(10) + lessorAddressEN.tAdrStreetEN + '%'
                 where {0} and s.nStatus != '0'",
@@ -450,11 +450,10 @@ namespace Gva.MigrationTool.Sets
                         aircraftLimitation = noms["aircraftLimitationsFm"].ByCode(r.Field<string>("nLimitID")),
                         leasingDocNumber = r.Field<string>("tR83_Zapoved"),
                         leasingDocDate = Utils.FmToDate(r.Field<string>("dR83_Data")),
-                        leasingLessor = getOrgOrPerson(r.Field<string>("tLessor")) ??
-                                        getOrgOrPerson(r.Field<string>("lessorByNameBG")) ??
-                                        getOrgOrPerson(r.Field<string>("lessorByAddrAndNameBG")) ??
-                                        getOrgOrPerson(r.Field<string>("lessorByAddrAndNameEN")),//TODO
-                        lessorName = r.Field<string>("tLessor"),
+                        tLessor = getOrgOrPerson(r.Field<string>("tLessor").Replace("\n", " ")),
+                        lessorByNameBG = getOrgOrPerson(r.Field<string>("lessorByNameBG")),
+                        lessorByAddrAndNameBG = getOrgOrPerson(r.Field<string>("lessorByAddrAndNameBG")),
+                        lessorByAddrAndNameEN = getOrgOrPerson(r.Field<string>("lessorByAddrAndNameEN")),
                         leasingAgreement = r.Field<string>("tLessorAgreement"),
                         leasingEndDate = Utils.FmToDate(r.Field<string>("dLeaseDate")),
                         status = noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")),
@@ -502,10 +501,10 @@ namespace Gva.MigrationTool.Sets
                                 r.aircraftLimitation,
                                 r.leasingDocNumber,
                                 r.leasingDocDate,
-                                lessorType = r.leasingLessor.Item2 != null ? "organization" : (r.leasingLessor.Item3 != null ? "person" : "other"),
-                                lessorOrganization = r.leasingLessor.Item2,
-                                lessorPerson = r.leasingLessor.Item3,
-                                lessorOther = r.leasingLessor.Item2 == null && r.leasingLessor.Item3 == null ? r.lessorName : null,
+                                lessorType = (r.lessorByAddrAndNameEN.Item2 != null || r.lessorByAddrAndNameBG.Item2 != null || r.lessorByNameBG.Item2 != null || r.tLessor.Item2 != null) ? "organization" :
+                                    (r.lessorByAddrAndNameEN.Item3 != null || r.lessorByAddrAndNameBG.Item3 != null || r.lessorByNameBG.Item3 != null || r.tLessor.Item3 != null ? "person" : null),
+                                lessorOrganization = r.lessorByAddrAndNameEN.Item2 ?? r.lessorByAddrAndNameBG.Item2 ?? r.lessorByNameBG.Item2 ?? r.tLessor.Item2,
+                                lessorPerson = r.lessorByAddrAndNameEN.Item3 ?? r.lessorByAddrAndNameBG.Item3 ?? r.lessorByNameBG.Item3 ?? r.tLessor.Item3,
                                 r.leasingAgreement,
                                 r.leasingEndDate,
                                 status = (r.parsedToIntStatusCode >= 6 && r.parsedToIntStatusCode != 21 && r.parsedToIntStatusCode != 10) ? noms["aircraftRegStatsesFm"].ByAlias("removed") :

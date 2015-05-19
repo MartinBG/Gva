@@ -54,11 +54,11 @@ namespace Gva.Api.Models.Views.Organization
 
             this.Property(t => t.Name)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(150);
 
             this.Property(t => t.NameAlt)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(150);
 
             this.Property(t => t.Cao)
                 .HasMaxLength(50);
