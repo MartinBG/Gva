@@ -44,11 +44,15 @@
       return $state.go('root.personsReports.documents', {
         documentRole: $scope.filters.documentRole ?
           $scope.filters.documentRole.text : null,
-        fromDate: $scope.filters.fromDate,
-        toDate: $scope.filters.toDate,
+        fromDatePeriodFrom: $scope.filters.fromDatePeriodFrom,
+        fromDatePeriodTo: $scope.filters.fromDatePeriodTo,
+        toDatePeriodFrom: $scope.filters.toDatePeriodFrom,
+        toDatePeriodTo: $scope.filters.toDatePeriodTo,
         typeId: $scope.filters.typeId,
         lin: $scope.filters.lin,
-        limitationId: $scope.filters.limitationId
+        limitationId: $scope.filters.limitationId,
+        docNumber: $scope.filters.docNumber,
+        publisher: $scope.filters.publisher
       });
     };
   }

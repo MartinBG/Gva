@@ -28,22 +28,30 @@ namespace Gva.Api.Controllers.Reports
         [Route("documents")]
         public HttpResponseMessage ExportExcelDocumentsReport(
             string documentRole = null,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? typeId = null,
             int? lin = null,
-            int? limitationId = null)
+            int? limitationId = null,
+            string docNumber = null,
+            string publisher = null)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
                 var workbook = this.personsReportsExportExcelRepository.GetDocumentsWorkbook(
                     conn: conn,
                     documentRole: documentRole,
-                    fromDate: fromDate,
-                    toDate: toDate,
+                    fromDatePeriodFrom: fromDatePeriodFrom,
+                    fromDatePeriodTo: fromDatePeriodTo,
+                    toDatePeriodFrom: toDatePeriodFrom,
+                    toDatePeriodTo: toDatePeriodTo,
                     typeId: typeId,
                     lin: lin,
-                    limitationId: limitationId);
+                    limitationId: limitationId,
+                    docNumber: docNumber,
+                    publisher: publisher);
 
                 return this.GetExcelFile(workbook, "documents");
             }
@@ -52,8 +60,10 @@ namespace Gva.Api.Controllers.Reports
         [HttpGet]
         [Route("licences")]
         public HttpResponseMessage ExportExcelLicencesReport(
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? lin = null,
             int? licenceTypeId = null,
             int? licenceActionId = null,
@@ -63,8 +73,10 @@ namespace Gva.Api.Controllers.Reports
             {
                 var workbook = this.personsReportsExportExcelRepository.GetLicencesWorkbook(
                     conn: conn,
-                    fromDate: fromDate,
-                    toDate: toDate,
+                    fromDatePeriodFrom: fromDatePeriodFrom,
+                    fromDatePeriodTo: fromDatePeriodTo,
+                    toDatePeriodFrom: toDatePeriodFrom,
+                    toDatePeriodTo: toDatePeriodTo,
                     licenceActionId: licenceActionId,
                     licenceTypeId: licenceTypeId,
                     lin: lin,
@@ -77,8 +89,10 @@ namespace Gva.Api.Controllers.Reports
         [HttpGet]
         [Route("ratings")]
         public HttpResponseMessage ExportExcelRatingsReport(
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? lin = null,
             int? ratingClassId = null,
             int? authorizationId = null,
@@ -88,8 +102,10 @@ namespace Gva.Api.Controllers.Reports
             {
                 var workbook = this.personsReportsExportExcelRepository.GetRatingsWorkbook(
                     conn: conn,
-                    fromDate: fromDate,
-                    toDate: toDate,
+                    fromDatePeriodFrom: fromDatePeriodFrom,
+                    fromDatePeriodTo: fromDatePeriodTo,
+                    toDatePeriodFrom: toDatePeriodFrom,
+                    toDatePeriodTo: toDatePeriodTo,
                     ratingClassId: ratingClassId,
                     authorizationId: authorizationId,
                     lin: lin,

@@ -38,8 +38,10 @@
 
     $scope.search = function () {
       return $state.go('root.personsReports.licences', {
-        fromDate: $scope.filters.fromDate,
-        toDate: $scope.filters.toDate,
+        fromDatePeriodFrom: $scope.filters.fromDatePeriodFrom,
+        fromDatePeriodTo: $scope.filters.fromDatePeriodTo,
+        toDatePeriodFrom: $scope.filters.toDatePeriodFrom,
+        toDatePeriodTo: $scope.filters.toDatePeriodTo,
         licenceTypeId: $scope.filters.licenceTypeId,
         licenceActionId: $scope.filters.licenceActionId,
         lin: $scope.filters.lin,

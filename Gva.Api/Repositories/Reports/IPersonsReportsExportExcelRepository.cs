@@ -14,16 +14,22 @@ namespace Gva.Api.Repositories.Reports
         XLWorkbook GetDocumentsWorkbook(
            SqlConnection conn,
            string documentRole = null,
-           DateTime? fromDate = null,
-           DateTime? toDate = null,
+           DateTime? fromDatePeriodFrom = null,
+           DateTime? fromDatePeriodTo = null,
+           DateTime? toDatePeriodFrom = null,
+           DateTime? toDatePeriodTo = null,
            int? typeId = null,
            int? lin = null,
-           int? limitationId = null);
+           int? limitationId = null,
+           string docNumber = null,
+           string publisher = null);
 
         XLWorkbook GetLicencesWorkbook(
             SqlConnection conn,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? licenceActionId = null,
             int? licenceTypeId = null,
             int? lin = null,
@@ -31,8 +37,10 @@ namespace Gva.Api.Repositories.Reports
 
         XLWorkbook GetRatingsWorkbook(
             SqlConnection conn,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? ratingClassId = null,
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,

@@ -38,8 +38,10 @@
 
     $scope.search = function () {
       return $state.go('root.personsReports.ratings', {
-        fromDate: $scope.filters.fromDate,
-        toDate: $scope.filters.toDate,
+        fromDatePeriodFrom: $scope.filters.fromDatePeriodFrom,
+        fromDatePeriodTo: $scope.filters.fromDatePeriodTo,
+        toDatePeriodFrom: $scope.filters.toDatePeriodFrom,
+        toDatePeriodTo: $scope.filters.toDatePeriodTo,
         ratingClassId: $scope.filters.ratingClassId,
         authorizationId: $scope.filters.authorizationId,
         aircraftTypeCategoryId: $scope.filters.aircraftTypeCategoryId,

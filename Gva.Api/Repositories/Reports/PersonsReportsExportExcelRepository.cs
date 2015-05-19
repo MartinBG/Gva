@@ -18,20 +18,28 @@ namespace Gva.Api.Repositories.Reports
         public XLWorkbook GetDocumentsWorkbook(
             SqlConnection conn,
             string documentRole = null,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? typeId = null,
             int? lin = null,
-            int? limitationId = null)
+            int? limitationId = null,
+            string docNumber = null,
+            string publisher = null)
         {
             List<PersonReportDocumentDO> documents = this.personReportRepository.GetDocuments(
                 conn: conn,
                 lin: lin,
                 documentRole: documentRole,
-                fromDate: fromDate,
-                toDate: toDate,
+                fromDatePeriodFrom: fromDatePeriodFrom,
+                fromDatePeriodTo: fromDatePeriodTo,
+                toDatePeriodFrom: toDatePeriodFrom,
+                toDatePeriodTo: toDatePeriodTo,
                 typeId: typeId,
-                limitationId: limitationId);
+                limitationId: limitationId,
+                docNumber: docNumber,
+                publisher: publisher);
 
             var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("Documents");
@@ -76,8 +84,10 @@ namespace Gva.Api.Repositories.Reports
 
         public XLWorkbook GetLicencesWorkbook(
                     SqlConnection conn,
-                    DateTime? fromDate = null,
-                    DateTime? toDate = null,
+                    DateTime? fromDatePeriodFrom = null,
+                    DateTime? fromDatePeriodTo = null,
+                    DateTime? toDatePeriodFrom = null,
+                    DateTime? toDatePeriodTo = null,
                     int? licenceActionId = null,
                     int? licenceTypeId = null,
                     int? lin = null,
@@ -85,8 +95,10 @@ namespace Gva.Api.Repositories.Reports
         {
             List<PersonReportLicenceDO> licences = this.personReportRepository.GetLicences(
                     conn: conn,
-                    fromDate: fromDate,
-                    toDate: toDate,
+                    fromDatePeriodFrom: fromDatePeriodFrom,
+                    fromDatePeriodTo: fromDatePeriodTo,
+                    toDatePeriodFrom: toDatePeriodFrom,
+                    toDatePeriodTo: toDatePeriodTo,
                     licenceActionId: licenceActionId,
                     licenceTypeId: licenceTypeId,
                     lin: lin,
@@ -138,8 +150,10 @@ namespace Gva.Api.Repositories.Reports
 
         public XLWorkbook GetRatingsWorkbook(
             SqlConnection conn,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? ratingClassId = null,
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
@@ -148,8 +162,10 @@ namespace Gva.Api.Repositories.Reports
         {
             List<PersonReportRatingDO> ratings = this.personReportRepository.GetRatings(
                         conn: conn,
-                        fromDate: fromDate,
-                        toDate: toDate,
+                        fromDatePeriodFrom: fromDatePeriodFrom,
+                        fromDatePeriodTo: fromDatePeriodTo,
+                        toDatePeriodFrom: toDatePeriodFrom,
+                        toDatePeriodTo: toDatePeriodTo,
                         ratingClassId: ratingClassId,
                         authorizationId: authorizationId,
                         lin: lin,

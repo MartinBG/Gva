@@ -1,9 +1,10 @@
 ﻿<div>
   <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="search()">
     <sc-filter type="int" name="lin" class="col-md-1 col-sm-2" removable="false" label="persons.reportRatings.lin"></sc-filter>
-    <sc-filter type="date" name="fromDate" class="col-sm-2" removable="false" label="persons.reportRatings.fromDate"></sc-filter>
-    <sc-filter type="date" name="toDate" class="col-sm-2" removable="false" label="persons.reportRatings.toDate"></sc-filter>
-    <sc-filter type="nomenclature" name="ratingClassId" class="col-sm-3" removable="false" alias="ratingClasses" mode="id" label="persons.reportRatings.ratingClass"></sc-filter>
+    <sc-filter type="date" name="fromDatePeriodFrom" class="col-sm-2" removable="false" label="persons.reportDocuments.fromDatePeriodFrom"></sc-filter>
+    <sc-filter type="date" name="fromDatePeriodTo" class="col-sm-2" removable="false" label="persons.reportDocuments.fromDatePeriodTo"></sc-filter>
+    <sc-filter type="date" name="toDatePeriodFrom" class="col-sm-2" removable="false" label="persons.reportDocuments.toDatePeriodFrom"></sc-filter>
+    <sc-filter type="date" name="toDatePeriodTo" class="col-sm-2" removable="false" label="persons.reportDocuments.toDatePeriodTo"></sc-filter>    <sc-filter type="nomenclature" name="ratingClassId" class="col-sm-3" removable="false" alias="ratingClasses" mode="id" label="persons.reportRatings.ratingClass"></sc-filter>
     <sc-filter type="nomenclature" name="authorizationId" class="col-sm-3" removable="true" alias="authorizations" mode="id" label="persons.reportRatings.authorization"></sc-filter>
     <sc-filter type="nomenclature" name="aircraftTypeCategoryId" class="col-sm-3" removable="true" alias="aircraftCategories" mode="id" label="persons.reportRatings.aircraftTypeCategory"></sc-filter>
     <sc-filter type="nomenclature" name="limitationId" class="col-sm-3" removable="true" mode="id" alias="limitations66" label="persons.reportRatings.limitations"></sc-filter>
@@ -12,16 +13,16 @@
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
   
-  <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/ratings?limitationId={{filters.limitationId}}&lin={{filters.lin}}&ratingClassId={{filters.ratingClassId}}&aircraftTypeCategoryId={{aircraftTypeCategoryId}}&authorizationId={{filters.authorizationId}}&fromDate=fromDate&toDate=toDate" target="_blank" sc-access-token text="persons.reportRatings.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
+  <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/ratings?limitationId={{filters.limitationId}}&lin={{filters.lin}}&ratingClassId={{filters.ratingClassId}}&aircraftTypeCategoryId={{aircraftTypeCategoryId}}&authorizationId={{filters.authorizationId}}&fromDatePeriodFrom={{filters.fromDatePeriodFrom}}&fromDatePeriodTo={{filters.fromDatePeriodTo}}&toDatePeriodFrom={{filters.toDatePeriodFrom}}&toDatePeriodTo={{filters.toDatePeriodTo}}" target="_blank" sc-access-token text="persons.reportRatings.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
   <sc-ajaxdatatable items="docs" items-count="ratingsCount" fectch-fn="getRatings" set-prop="ratings" count-prop="ratingsCount" dynamic-columns="false" filterable="false">
     <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.lotId }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="lin" title="persons.reportRatings.lin">
     </sc-ajaxcolumn>
-    <sc-ajaxcolumn data="dateValidFrom" title="persons.reportRatings.dateValidFrom" type="date">
+    <sc-ajaxcolumn data="dateValidFrom" title="persons.reportRatings.fromDate" type="date">
     </sc-ajaxcolumn>
-    <sc-ajaxcolumn data="dateValidTo" title="persons.reportRatings.dateValidTo" type="date">
+    <sc-ajaxcolumn data="dateValidTo" title="persons.reportRatings.toDate" type="date">
     </sc-ajaxcolumn>
     <sc-ajaxcolumn data="firstIssueDate" title="persons.reportRatings.firstIssueDate" type="date">
     </sc-ajaxcolumn>

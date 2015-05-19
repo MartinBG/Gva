@@ -21,11 +21,15 @@ namespace Gva.Api.Repositories.Reports
         public List<PersonReportDocumentDO> GetDocuments(
             SqlConnection conn,
             string documentRole = null,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? typeId = null,
             int? lin = null,
-            int? limitationId = null)
+            int? limitationId = null,
+            string docNumber = null,
+            string publisher = null)
         {
             var result = conn.CreateStoreCommand(
                     @"SELECT
@@ -46,13 +50,17 @@ namespace Gva.Api.Repositories.Reports
                     LEFT JOIN NomValues nv ON nv.NomValueId = ii.TypeId
                     LEFT JOIN LotParts lp on lp.LotPartId = ii.LotPartId
                     LEFT JOIN GvaViewPersonDocuments d on d.LotId = lp.LotId and lp.[Index] = d.PartIndex
-                    WHERE 1=1 {0} {1} {2} {3} {4}
+                    WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8}
                     ORDER BY ii.FromDate DESC",
-                    new DbClause("and ii.FromDate >= {0}", fromDate),
-                    new DbClause("and ii.ToDate <= {0}", toDate),
+                    new DbClause("and ii.FromDate >= {0}", fromDatePeriodFrom),
+                    new DbClause("and ii.FromDate <= {0}", fromDatePeriodTo),
+                    new DbClause("and ii.ToDate >= {0}", toDatePeriodFrom),
+                    new DbClause("and ii.ToDate <= {0}", toDatePeriodTo),
                     new DbClause("and p.Lin = {0}", lin),
                     new DbClause("and nv.NomValueId = {0}", typeId),
-                    new DbClause("and ii.Name = {0}", documentRole))
+                    new DbClause("and ii.Name = {0}", documentRole),
+                    new DbClause("and ii.Number like '%' + {0} + '%'", docNumber),
+                    new DbClause("and ii.Publisher like '%' + {0} + '%'", publisher))
                 .Materialize(r =>
                         new PersonReportDocumentDO()
                         {
@@ -82,8 +90,10 @@ namespace Gva.Api.Repositories.Reports
 
         public List<PersonReportLicenceDO> GetLicences(
             SqlConnection conn,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? lin = null,
             int? licenceTypeId = null,
             int? licenceActionId = null,
@@ -109,10 +119,12 @@ namespace Gva.Api.Repositories.Reports
                          INNER JOIN GvaViewPersons p ON l.LotId = p.LotId
                          INNER JOIN NomValues lt ON lt.NomValueId = l.LicenceTypeId
                          INNER JOIN NomValues la ON la.NomValueId = le.LicenceActionId
-                         WHERE 1=1 {0} {1} {2} {3} {4}
+                         WHERE 1=1 {0} {1} {2} {3} {4} {5} {6}
                          ORDER BY le.DateValidFrom DESC",
-                        new DbClause("and le.DateValidFrom >= {0}", fromDate),
-                        new DbClause("and le.DateValidTo <= {0}", toDate),
+                        new DbClause("and le.DateValidFrom >= {0}", fromDatePeriodFrom),
+                        new DbClause("and le.DateValidFrom <= {0}", fromDatePeriodTo),
+                        new DbClause("and le.DateValidTo >= {0}", toDatePeriodFrom),
+                        new DbClause("and le.DateValidTo <= {0}", toDatePeriodTo),
                         new DbClause("and p.Lin = {0}", lin),
                         new DbClause("and lt.NomValueId = {0}", licenceTypeId),
                         new DbClause("and la.NomValueId = {0}", licenceActionId))
@@ -147,8 +159,10 @@ namespace Gva.Api.Repositories.Reports
 
         public List<PersonReportRatingDO> GetRatings(
             SqlConnection conn,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? ratingClassId = null,
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
@@ -197,10 +211,12 @@ namespace Gva.Api.Repositories.Reports
                         LEFT JOIN NomValues atg ON atg.NomValueId = r.AircraftTypeGroupId
                         LEFT JOIN NomValues li ON li.NomValueId = r.LocationIndicatorId
                         LEFT JOIN NomValues rl ON rl.NomValueId = r.RatingLevelId
-                        WHERE 1=1 {0} {1} {2} {3} {4}
+                        WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7}
                         ORDER BY re.DocDateValidFrom DESC",
-                        new DbClause("and re.DocDateValidFrom >= {0}", fromDate),
-                        new DbClause("and re.DocDateValidTo <= {0}", toDate),
+                        new DbClause("and re.DocDateValidFrom >= {0}", fromDatePeriodFrom),
+                        new DbClause("and re.DocDateValidFrom <= {0}", fromDatePeriodTo),
+                        new DbClause("and re.DocDateValidTo >= {0}", toDatePeriodFrom),
+                        new DbClause("and re.DocDateValidTo <= {0}", toDatePeriodTo),
                         new DbClause("and p.Lin = {0}", lin),
                         new DbClause("and r.RatingClassId = {0}", ratingClassId),
                         new DbClause("and r.AuthorizationId = {0}", authorizationId),

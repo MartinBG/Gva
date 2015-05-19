@@ -22,11 +22,15 @@ namespace Gva.Api.Controllers.Reports
         [Route(@"documents")]
         public IHttpActionResult GetDocuments(
             string documentRole = null,
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? typeId = null,
             int? lin = null,
             int? limitationId = null,
+            string docNumber = null,
+            string publisher = null,
             int offset = 0, 
             int limit = 10)
         {
@@ -35,11 +39,15 @@ namespace Gva.Api.Controllers.Reports
                 var result = this.personsReportRepository.GetDocuments(
                     conn: conn,
                     documentRole: documentRole,
-                    fromDate: fromDate,
-                    toDate: toDate,
+                    fromDatePeriodFrom: fromDatePeriodFrom,
+                    fromDatePeriodTo: fromDatePeriodTo,
+                    toDatePeriodFrom: toDatePeriodFrom,
+                    toDatePeriodTo: toDatePeriodTo,
                     typeId: typeId,
                     lin: lin,
-                    limitationId: limitationId);
+                    limitationId: limitationId,
+                    docNumber: docNumber,
+                    publisher: publisher);
 
                 return Ok(new
                 {
@@ -51,8 +59,10 @@ namespace Gva.Api.Controllers.Reports
 
         [Route(@"licenceCerts")]
         public IHttpActionResult GetLicences(
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? lin = null,
             int? licenceTypeId = null,
             int? licenceActionId = null,
@@ -64,8 +74,10 @@ namespace Gva.Api.Controllers.Reports
             {
                 var licences = this.personsReportRepository.GetLicences(
                     conn: conn,
-                    fromDate: fromDate,
-                    toDate: toDate,
+                    fromDatePeriodFrom: fromDatePeriodFrom,
+                    fromDatePeriodTo: fromDatePeriodTo,
+                    toDatePeriodFrom: toDatePeriodFrom,
+                    toDatePeriodTo: toDatePeriodTo,
                     licenceActionId: licenceActionId,
                     licenceTypeId: licenceTypeId,
                     limitationId: limitationId,
@@ -81,8 +93,10 @@ namespace Gva.Api.Controllers.Reports
 
         [Route(@"ratings")]
         public IHttpActionResult GetRatings(
-            DateTime? fromDate = null,
-            DateTime? toDate = null,
+            DateTime? fromDatePeriodFrom = null,
+            DateTime? fromDatePeriodTo = null,
+            DateTime? toDatePeriodFrom = null,
+            DateTime? toDatePeriodTo = null,
             int? ratingClassId = null,
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
@@ -95,8 +109,10 @@ namespace Gva.Api.Controllers.Reports
             {
                 var ratings = this.personsReportRepository.GetRatings(
                     conn: conn,
-                    fromDate: fromDate,
-                    toDate: toDate,
+                    fromDatePeriodFrom: fromDatePeriodFrom,
+                    fromDatePeriodTo: fromDatePeriodTo,
+                    toDatePeriodFrom: toDatePeriodFrom,
+                    toDatePeriodTo: toDatePeriodTo,
                     ratingClassId: ratingClassId,
                     authorizationId: authorizationId,
                     aircraftTypeCategoryId: aircraftTypeCategoryId,

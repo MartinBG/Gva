@@ -3,15 +3,17 @@
     <sc-filter type="int" name="lin" class="col-md-1 col-sm-2" removable="false" label="persons.reportLicences.lin"></sc-filter>
     <sc-filter type="nomenclature" name="licenceTypeId" class="col-sm-3" removable="false" alias="licenceTypes" mode="id" label="persons.reportLicences.licenceTypeName"></sc-filter>
     <sc-filter type="nomenclature" name="licenceActionId" class="col-sm-3" removable="true" alias="licenceActions" mode="id" label="persons.reportLicences.licenceAction"></sc-filter>
-    <sc-filter type="date" name="fromDate" class="col-sm-2" removable="false" label="persons.reportLicences.fromDate"></sc-filter>
-    <sc-filter type="date" name="toDate" class="col-sm-2" removable="false" label="persons.reportLicences.toDate"></sc-filter>
+    <sc-filter type="date" name="fromDatePeriodFrom" class="col-sm-2" removable="false" label="persons.reportDocuments.fromDatePeriodFrom"></sc-filter>
+    <sc-filter type="date" name="fromDatePeriodTo" class="col-sm-2" removable="false" label="persons.reportDocuments.fromDatePeriodTo"></sc-filter>
+    <sc-filter type="date" name="toDatePeriodFrom" class="col-sm-2" removable="false" label="persons.reportDocuments.toDatePeriodFrom"></sc-filter>
+    <sc-filter type="date" name="toDatePeriodTo" class="col-sm-2" removable="false" label="persons.reportDocuments.toDatePeriodTo"></sc-filter>
     <sc-filter type="nomenclature" name="limitationId" class="col-sm-3" removable="true" mode="id" alias="limitations66" label="persons.reportLicences.limitations"></sc-filter>
     <sc-search-button action="search()" text="persons.reportLicences.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
     <sc-search-button action="clear"></sc-search-button>
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
-   <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/licences?limitationId={{filters.limitationId}}&lin={{filters.lin}}&licenceTypeId={{filters.licenceTypeId}}&licenceActionId={{filters.licenceActionId}}&fromDate=fromDate&toDate=toDate" target="_blank" sc-access-token text="persons.reportLicences.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
+   <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/licences?limitationId={{filters.limitationId}}&lin={{filters.lin}}&licenceTypeId={{filters.licenceTypeId}}&licenceActionId={{filters.licenceActionId}}&fromDatePeriodFrom={{filters.fromDatePeriodFrom}}&fromDatePeriodTo={{filters.fromDatePeriodTo}}&toDatePeriodFrom={{filters.toDatePeriodFrom}}&toDatePeriodTo={{filters.toDatePeriodTo}}" target="_blank" sc-access-token text="persons.reportLicences.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
   <sc-ajaxdatatable items="docs" items-count="licencesCount" fectch-fn="getLicences" set-prop="licences" count-prop="licencesCount" dynamic-columns="false" filterable="false">
     <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.lotId }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
