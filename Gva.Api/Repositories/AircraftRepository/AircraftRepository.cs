@@ -170,5 +170,27 @@ namespace Gva.Api.Repositories.AircraftRepository
                     .Where(p => p.ManSN == msn).Any();
             }
         }
+
+        public int? GetLastNumberPerForm(int formPrefix)
+        {
+            int? result = (int?)null;
+            GvaViewAircraftCert lastEntry = this.unitOfWork.DbContext.Set<GvaViewAircraftCert>()
+                .Where(c => c.FormNumberPrefix == formPrefix)
+                .OrderByDescending(c => c.ParsedNumberWithoutPrefix)
+                .FirstOrDefault();
+
+            if(lastEntry != null)
+            {
+                result = lastEntry.ParsedNumberWithoutPrefix;
+            }
+
+            return result;
+        }
+
+        public bool IsUniqueFormNumber(string formNumber, int lotId, int? partIndex = null)
+        {
+            return !this.unitOfWork.DbContext.Set<GvaViewAircraftCert>()
+                .Where(c => c.DocumentNumber == formNumber && (partIndex.HasValue ? partIndex.Value != c.PartIndex : true)).Any();
+        }
     }
 }

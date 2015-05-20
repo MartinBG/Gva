@@ -223,7 +223,8 @@
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertNoise',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertNoise.html'
+      templateUrl: 'js/gva/aircrafts/forms/aircraftCertNoise.html',
+      controller: 'AircraftCertNoiseCtrl'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftCertRegFm',

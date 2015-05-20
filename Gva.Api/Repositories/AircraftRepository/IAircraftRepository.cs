@@ -25,5 +25,9 @@ namespace Gva.Api.Repositories.AircraftRepository
         bool DevalidateActNumber(int actNumber, string reason);
 
         bool IsUniqueMSN(string msn, int? aircraftId = null);
+
+        int? GetLastNumberPerForm(int formPrefix);
+
+        bool IsUniqueFormNumber(string number, int lotId, int? partIndex = null);
     }
 }

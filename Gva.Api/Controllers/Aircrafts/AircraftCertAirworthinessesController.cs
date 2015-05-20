@@ -25,6 +25,7 @@ namespace Gva.Api.Controllers.Aircrafts
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
         private IAircraftRegistrationRepository aircraftRegistrationRepository;
+        private IAircraftRepository aircraftRepository;
 
         public AircraftCertAirworthinessesController(
             IUnitOfWork unitOfWork,
@@ -35,6 +36,7 @@ namespace Gva.Api.Controllers.Aircrafts
             ILotEventDispatcher lotEventDispatcher,
             INomRepository nomRepository,
             IAircraftRegistrationRepository aircraftRegistrationRepository,
+            IAircraftRepository aircraftRepository,
             UserContext userContext)
             : base("aircraftCertAirworthinessesFM", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
         {
@@ -43,16 +45,19 @@ namespace Gva.Api.Controllers.Aircrafts
             this.caseTypeRepository = caseTypeRepository;
             this.applicationRepository = applicationRepository;
             this.aircraftRegistrationRepository = aircraftRegistrationRepository;
+            this.aircraftRepository = aircraftRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewCertAirworthinessFM(int lotId, int? appId = null)
         {
             var lastReg = this.aircraftRegistrationRepository.GetAircraftRegistrationNoms(lotId).FirstOrDefault();
+            int? lastNumberPerForm25 = this.aircraftRepository.GetLastNumberPerForm(25);
             AircraftCertAirworthinessDO newCertAirworthinessFM = new AircraftCertAirworthinessDO()
             {
                 AirworthinessCertificateType = this.nomRepository.GetNomValue("airworthinessCertificateTypes", "f25"),
-                Registration = lastReg
+                Registration = lastReg,
+                DocumentNumber = string.Format("25-{0:0000}", (lastNumberPerForm25.HasValue ? lastNumberPerForm25 + 1 : 0))
             };
 
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();

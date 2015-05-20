@@ -33,6 +33,14 @@
       devalidateActNumber: {
         method: 'POST',
         url: 'api/aircrafts/devalidateActNumber'
+      },
+      getNextFormNumber: {
+        method: 'GET',
+        url: 'api/aircrafts/nextFormNumber'
+      },
+      isUniqueFormNumber: {
+        method: 'GET',
+        url: 'api/aircrafts/uniqueFormNumber'
       }
     });
   }]);

@@ -7,6 +7,7 @@ using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
@@ -22,6 +23,7 @@ namespace Gva.Api.Controllers.Aircrafts
         private ICaseTypeRepository caseTypeRepository;
         private IApplicationRepository applicationRepository;
         private ILotRepository lotRepository;
+        private IAircraftRepository aircraftRepository;
 
         public AircraftNoisesController(
             IUnitOfWork unitOfWork,
@@ -29,6 +31,7 @@ namespace Gva.Api.Controllers.Aircrafts
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
+            IAircraftRepository aircraftRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("aircraftCertNoises", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext) 
@@ -36,14 +39,18 @@ namespace Gva.Api.Controllers.Aircrafts
             this.caseTypeRepository = caseTypeRepository;
             this.applicationRepository = applicationRepository;
             this.lotRepository = lotRepository;
+            this.aircraftRepository = aircraftRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewCertNoise(int lotId, int? appId = null)
         {
+            int? lastNumberPerForm45 = this.aircraftRepository.GetLastNumberPerForm(45);
+
             AircraftCertNoiseDO newCertNoise = new AircraftCertNoiseDO()
             {
-                IssueDate = DateTime.Now
+                IssueDate = DateTime.Now,
+                IssueNumber = string.Format("45-{0:0000}", (lastNumberPerForm45.HasValue ? lastNumberPerForm45 + 1 : 0))
             };
 
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();

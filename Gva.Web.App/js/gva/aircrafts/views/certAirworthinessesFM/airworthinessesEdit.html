@@ -26,7 +26,7 @@
           <sc-field type="nomenclature" ng-readonly="true" ng-model="airworthiness.part.airworthinessCertificateType" ng-required="true" params="{ lotId: lotId }" alias="'airworthinessCertificateTypes'" l10n-text="aircrafts.airworthinessDirective.airworthinessCertificateType" class="col-md-6 col-sm-8"></sc-field>
         </div>
         <gva-aircraft-cert-airworthiness name="aircraftCertAirworthinessSubform1" ng-if="certTypeAlias !== '15b' && certTypeAlias !== '15a' && certTypeAlias !== '15aReissue' && certTypeAlias !== '15bReissue'" ng-model="airworthiness.part"
-          sc-form-params="{ lotId: lotId }">
+          sc-form-params="{ lotId: lotId, partIndex: partIndex }">
         </gva-aircraft-cert-airworthiness>
 
         <gva-aircraft-cert-airworthiness-form-15 name="aircraftCertAirworthinessSubform2" ng-if="certTypeAlias === '15b' || certTypeAlias === '15a' || certTypeAlias === '15aReissue' || certTypeAlias === '15bReissue'" ng-model="airworthiness.part"

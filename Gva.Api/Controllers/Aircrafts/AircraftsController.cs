@@ -86,6 +86,24 @@ namespace Gva.Api.Controllers
             return Ok(registrations);
         }
 
+        [Route("nextFormNumber")]
+        public IHttpActionResult GetNextFormNumber(int formPrefix)
+        {
+            int? lastNumberPerForm = this.aircraftRepository.GetLastNumberPerForm(formPrefix);
+            string result = string.Format("{0}-{1:0000}", formPrefix, (lastNumberPerForm.HasValue ? lastNumberPerForm + 1 : 0));
+
+            return Ok(new { number = result });
+        }
+
+        [HttpGet]
+        [Route("uniqueFormNumber")]
+        public IHttpActionResult IsUniqueFormNumber(string formNumber, int lotId, int? partIndex = null)
+        {
+            bool isUnique = this.aircraftRepository.IsUniqueFormNumber(formNumber, lotId, partIndex);
+
+            return Ok(new { isUnique = isUnique });
+        }
+
         [Route("invalidActNumbers")]
         public IHttpActionResult GetInvalidActNumbers()
         {

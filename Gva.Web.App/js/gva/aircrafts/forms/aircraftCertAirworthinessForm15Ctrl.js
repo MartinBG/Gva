@@ -4,6 +4,7 @@
 
   function AircraftCertAirworthinessForm15Ctrl($scope, scFormParams) {
     $scope.lotId = scFormParams.lotId;
+
     $scope.$watch('model.inspector', function (inspectorModel) {
       if (!inspectorModel) {
         return;

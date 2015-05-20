@@ -3,7 +3,8 @@
     <sc-field type="nomenclature" ng-model="model.registration" alias="'aircraftsRegistrations'" ng-required="true" params="{ lotId: lotId }" l10n-text="aircrafts.airworthinessDirective.registration" class="col-md-6 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.documentNumber" l10n-text="aircrafts.airworthinessDirective.documentNumber" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.documentNumber" l10n-text="aircrafts.airworthinessDirective.documentNumber" class="col-md-2 col-sm-4"
+      sc-validate="{ unique: isUniqueFormNumber }" validations="{ unique: 'defaultErrorTexts.unique', required: 'default'}"></sc-field>
     <sc-field ng-if="model.airworthinessCertificateType.alias !== 'special' && model.airworthinessCertificateType.alias !== 'directive8Reissue' && model.airworthinessCertificateType.alias !== 'vlaReissue'"
       type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.airworthinessDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
     <sc-field ng-if="model.airworthinessCertificateType.alias === 'special'"
