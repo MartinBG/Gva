@@ -4,6 +4,20 @@ GO
 ---------------------------------------------------------------
 --Tables
 ---------------------------------------------------------------
+
+-- Classifications
+:r $(rootPath)"\Tables\Classifications\Classifications.sql"
+:r $(rootPath)"\Tables\Classifications\ClassificationRelations.sql"
+:r $(rootPath)"\Tables\Classifications\ClassificationPermissions.sql"
+
+-- Units
+:r $(rootPath)"\Tables\Units\UnitTypes.sql"
+:r $(rootPath)"\Tables\Units\Units.sql"
+:r $(rootPath)"\Tables\Units\UnitRelations.sql"
+:r $(rootPath)"\Tables\Units\UnitClassifications.sql"
+:r $(rootPath)"\Tables\Units\UnitUsers.sql"
+:r $(rootPath)"\Tables\Units\UnitTokens.sql"
+
 --Registers
 :r $(rootPath)"\Tables\Registers\RegisterIndexes.sql"
 
@@ -90,16 +104,23 @@ GO
 ---------------------------------------------------------------
 :r $(rootPath)"\Functions\fnCheckForRegisteredChildDocs.sql"
 :r $(rootPath)"\Functions\fnGetSubordinateDocs.sql"
+:r $(rootPath)\"Functions\fnGetParentClassifications.sql"
+:r $(rootPath)\"Functions\fnGetParentUnits.sql"
+:r $(rootPath)\"Functions\fnGetSubordinateClassifications.sql"
+:r $(rootPath)\"Functions\fnGetSubordinateUnits.sql"
 
 ---------------------------------------------------------------
 -- Procedures
 ---------------------------------------------------------------
+:r $(rootPath)\"Procedures\spGetUnitClassifications.sql"
+:r $(rootPath)\"Procedures\spSetDeactiveUnit.sql"
 :r $(rootPath)"\Procedures\spGetDocRegisterId.sql"
 :r $(rootPath)"\Procedures\spGetDocRegisterIdByRegisterIndexId.sql"
 :r $(rootPath)"\Procedures\spGetDocRegisterNextNumber.sql"
 :r $(rootPath)"\Procedures\spDeleteNotRegisteredDoc.sql"
 
 --Tokens
+:r $(rootPath)"\Procedures\Tokens\spSetUnitTokens.sql"
 :r $(rootPath)"\Procedures\Tokens\spSetDocTokens.sql"
 :r $(rootPath)"\Procedures\Tokens\spSetDocUnitTokens.sql"
 
@@ -126,6 +147,9 @@ GO
 
 --units
 :r $(rootPath)\"..\Insert\Units\UnitTypes.sql"
+
+--classifications
+:r $(rootPath)\"..\Insert\Classifications\ClassificationPermissions.sql"
 
 --docs
 :r $(rootPath)\"..\Insert\Docs\DocCasePartTypes.sql"
