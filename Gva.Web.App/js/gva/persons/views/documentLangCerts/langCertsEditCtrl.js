@@ -8,7 +8,6 @@
     $stateParams,
     PersonDocumentLangCerts,
     personDocumentLangCert,
-    scModal,
     scMessage
   ) {
     var originalLangCert = _.cloneDeep(personDocumentLangCert);
