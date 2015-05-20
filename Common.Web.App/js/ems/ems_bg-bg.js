@@ -427,7 +427,7 @@
       },
       portalModal: {
         eApplication: {
-          title: 'Електронно заявление',
+          title: 'Електронен документ',
           cancel: 'Отказ'
         }
       },      
