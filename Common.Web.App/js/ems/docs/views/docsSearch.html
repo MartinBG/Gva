@@ -97,7 +97,12 @@
         </sc-ajaxcolumn>
         <sc-ajaxcolumn data="regUri" title="docs.search.regUri">
         </sc-ajaxcolumn>
-        <sc-ajaxcolumn data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+        <sc-ajaxcolumn data="docTypeName + ': ' + docSubject" title="docs.search.docSubject" has-content="true" class="wrap">
+          {{ item.docTypeName }}: {{ item.docSubject }}
+          <div ng-repeat="r in item.resolutionDocRelations">
+            <i class="glyphicon glyphicon-share-alt"></i>
+            <span ng-repeat="du in r.docUnitsInCharge">{{du.name}}{{!$last ? '; ' : ''}}</span>
+          </div>
         </sc-ajaxcolumn>
         <sc-ajaxcolumn data="docDirectionName" title="docs.search.docDirectionName">
         </sc-ajaxcolumn>
@@ -117,7 +122,7 @@
           <span><div ng-if="!!item.caseDocRelation.docRegUri">{{ item.caseDocRelation.docRegUri }}<br/></div>
             {{item.caseDocRelation.docDocDirectionName}} | {{item.caseDocRelation.docDocCasePartTypeName}}</span>
         </sc-ajaxcolumn>
-        <sc-ajaxcolumn has-content="true">
+        <sc-ajaxcolumn has-content="true" class="wrap">
            <span>{{ item.caseDocRelation.docDocTypeName }} : {{ item.caseDocRelation.docSubject}}</span>
         </sc-ajaxcolumn>
         <sc-ajaxcolumn data="correspondentNames" title="docs.search.correspondentName">
@@ -126,7 +131,12 @@
         </sc-ajaxcolumn>
         <sc-ajaxcolumn data="regUri" title="docs.search.regUri">
         </sc-ajaxcolumn>
-        <sc-ajaxcolumn data="docTypeName + ': ' + docSubject" title="docs.search.docSubject">
+        <sc-ajaxcolumn data="docTypeName + ': ' + docSubject" title="docs.search.docSubject" has-content="true" class="wrap">
+          {{ item.docTypeName }}: {{ item.docSubject }}
+          <div ng-repeat="r in item.resolutionDocRelations">
+            <i class="glyphicon glyphicon-share-alt"></i>
+            <span ng-repeat="du in r.docUnitsInCharge">{{du.name}}{{!$last ? '; ' : ''}}</span>
+          </div>
         </sc-ajaxcolumn>
         <sc-ajaxcolumn data="docDirectionName" title="docs.search.docDirectionName">
         </sc-ajaxcolumn>

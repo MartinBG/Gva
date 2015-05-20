@@ -236,10 +236,6 @@ namespace Docs.Api.Repositories.DocRepository
 
             switch (targetDocStatusAlias)
             {
-                case "Prepared":
-                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Prepared");
-                    doc.DocStatusId = newDocStatus.DocStatusId;
-                    break;
                 case "Processed":
                     newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Processed");
                     doc.DocStatusId = newDocStatus.DocStatusId;
@@ -259,7 +255,9 @@ namespace Docs.Api.Repositories.DocRepository
                             e => e.Doc.DocCasePartType,
                             e => e.Doc.DocDirection,
                             e => e.Doc.DocType,
-                            e => e.Doc.DocStatus)
+                            e => e.Doc.DocStatus,
+                            e => e.Doc.DocSourceType,
+                            e => e.Doc.DocEntryType)
                             .Where(e => e.RootDocId == caseDocId
                                 && e.Doc.DocId != id
                                 && e.Doc.DocCasePartTypeId != dcptControl.DocCasePartTypeId
@@ -327,11 +325,6 @@ namespace Docs.Api.Repositories.DocRepository
             switch (doc.DocStatus.Alias)
             {
                 case "Draft":
-                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Prepared");
-                    doc.DocStatusId = newDocStatus.DocStatusId;
-                    targetDocStatusAlias = "Prepared";
-                    break;
-                case "Prepared":
                     newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Processed");
                     doc.DocStatusId = newDocStatus.DocStatusId;
                     targetDocStatusAlias = "Processed";
@@ -352,7 +345,9 @@ namespace Docs.Api.Repositories.DocRepository
                             e => e.Doc.DocCasePartType,
                             e => e.Doc.DocDirection,
                             e => e.Doc.DocType,
-                            e => e.Doc.DocStatus)
+                            e => e.Doc.DocStatus,
+                            e => e.Doc.DocSourceType,
+                            e => e.Doc.DocEntryType)
                             .Where(e => e.RootDocId == caseDocId
                                 && e.Doc.DocId != id
                                 && e.Doc.DocCasePartTypeId != dcptControl.DocCasePartTypeId
@@ -414,10 +409,11 @@ namespace Docs.Api.Repositories.DocRepository
             switch (targetDocStatusAlias)
             {
                 case "Draft":
-                case "Prepared":
+                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Draft");
+                    doc.DocStatusId = newDocStatus.DocStatusId;
+                    break;
                 case "Processed":
-                case "FromPortal":
-                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == targetDocStatusAlias);
+                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Processed");
                     doc.DocStatusId = newDocStatus.DocStatusId;
                     break;
                 default:
@@ -451,12 +447,8 @@ namespace Docs.Api.Repositories.DocRepository
 
             switch (doc.DocStatus.Alias)
             {
-                case "Prepared":
-                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Draft");
-                    doc.DocStatusId = newDocStatus.DocStatusId;
-                    break;
                 case "Processed":
-                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Prepared");
+                    newDocStatus = docStatuses.SingleOrDefault(e => e.Alias == "Draft");
                     doc.DocStatusId = newDocStatus.DocStatusId;
                     break;
                 case "Finished":
@@ -915,6 +907,7 @@ namespace Docs.Api.Repositories.DocRepository
                  .Skip(offset)
                  .Take(limit)
                  .Include(e => e.DocType)
+                 .Include(e => e.DocEntryType)
                  .Include(e => e.DocDirection)
                  .Include(e => e.DocStatus)
                  .Include(e => e.DocUnits)

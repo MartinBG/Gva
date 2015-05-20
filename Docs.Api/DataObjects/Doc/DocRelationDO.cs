@@ -11,6 +11,7 @@ namespace Docs.Api.DataObjects
     {
         public DocRelationDO()
         {
+            this.DocUnitsInCharge = new List<NomDo>();
         }
 
         public DocRelationDO(DocRelation d)
@@ -36,10 +37,26 @@ namespace Docs.Api.DataObjects
 
                     this.DocDocTypeName = d.Doc.DocType != null ? d.Doc.DocType.Name : string.Empty;
                     this.DocDocTypeId = d.Doc.DocType != null ? d.Doc.DocType.DocTypeId : (int?)null;
-                    this.DocDocStatusName = d.Doc.DocStatus != null ? d.Doc.DocStatus.Name : string.Empty;
+                    this.DocDocStatusAlias = d.Doc.DocStatus != null ? d.Doc.DocStatus.Alias : string.Empty;
+                    this.DocDocStatusName = d.Doc.DocStatus != null ? d.Doc.GetDocStatusName() : string.Empty;
                     this.DocDocCasePartTypeId = d.Doc.DocCasePartTypeId;
                     this.DocDocCasePartTypeName = d.Doc.DocCasePartType != null ? d.Doc.DocCasePartType.Name : string.Empty;
                     this.DocDocCasePartTypeAlias = d.Doc.DocCasePartType != null ? d.Doc.DocCasePartType.Alias : string.Empty;
+
+                    this.DocEntryTypeAlias = d.Doc.DocEntryType != null ? d.Doc.DocEntryType.Alias : string.Empty;
+
+                    if (d.Doc.DocUnits != null)
+                    {
+                        foreach (var du in d.Doc.DocUnits)
+                        {
+                            switch (du.DocUnitRole.Alias)
+                            {
+                                case "InCharge":
+                                    this.DocUnitsInCharge.Add(new NomDo(du));
+                                    break;
+                            };
+                        }
+                    }
                 }
             }
         }
@@ -61,7 +78,10 @@ namespace Docs.Api.DataObjects
         public string DocDocTypeName { get; set; }
         public int? DocDocTypeId { get; set; }
         public string DocDocStatusName { get; set; }
+        public string DocDocStatusAlias { get; set; }
         public byte[] DocVersion { get; set; }
         public int? DocReceiptOrder { get; set; }
+        public string DocEntryTypeAlias { get; set; }
+        public List<NomDo> DocUnitsInCharge { get; set; }
     }
 }

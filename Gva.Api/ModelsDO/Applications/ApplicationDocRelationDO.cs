@@ -28,7 +28,7 @@ namespace Gva.Api.ModelsDO.Applications
                     this.DocSubject = d.Doc.DocSubject;
                     this.DocDocDirectionName = d.Doc.DocDirection != null ? d.Doc.DocDirection.Name : string.Empty;
                     this.DocDocTypeName = d.Doc.DocType != null ? d.Doc.DocType.Name : string.Empty;
-                    this.DocDocStatusName = d.Doc.DocStatus != null ? d.Doc.DocStatus.Name : string.Empty;
+                    this.DocDocStatusName = d.Doc.DocStatus != null ? d.Doc.GetDocStatusName() : string.Empty;
                     this.DocDocStatusAlias = d.Doc.DocStatus.Alias;
                     this.DocVersion = d.Doc.Version;
                 }

@@ -8,12 +8,14 @@
     $filter,
     $state,
     $stateParams,
+    l10n,
     Docs,
     DocStages,
     DocStatuses,
     doc
   ) {
     $scope.$state = $state;
+    $scope.l10n = l10n;
     $scope.doc = doc;
 
     $scope.inEditMode = false;
@@ -258,6 +260,7 @@
     '$filter',
     '$state',
     '$stateParams',
+    'l10n',
     'Docs',
     'DocStages',
     'DocStatuses',
@@ -271,7 +274,36 @@
       function resolveDoc($stateParams, Docs) {
         return Docs.get({ id: $stateParams.id }).$promise.then(function (doc) {
           doc.openAccordion = false;
+
+          doc.resolutionUnitsInCharge =
+            _(doc.docRelations)
+            .where(function (dr) {
+              return dr.parentDocId === doc.docId &&
+                (dr.docDocStatusAlias === 'Processed' || dr.docDocStatusAlias === 'Finished') &&
+                (dr.docEntryTypeAlias === 'Resolution' || dr.docEntryTypeAlias === 'Taks') &&
+                dr.docUnitsInCharge &&
+                dr.docUnitsInCharge.length;
+            })
+            .map(function (dr) {
+              return _(dr.docUnitsInCharge)
+                .pluck('name')
+                .reduce(function (a, b) { return a + '; ' + b; });
+            })
+            .value();
+
           doc.flags = {};
+
+          doc.flags.getDocStatusName = function (docStatusAlias) {
+            switch (docStatusAlias) {
+              case 'Draft':
+                return doc.isElectronic ? 'от портал' : 'чернова';
+              case 'Processed':
+                return (doc.isResolution || doc.isTask) ? 'възложен' :
+                  doc.isDocOutgoing ? 'изготвен' : 'обработен';
+              default:
+                throw new Error('Unexpected doc status.');
+            }
+          };
 
           doc.flags.isVisibleCreateChildDoc = true;
           doc.flags.isVisibleCreateChildResolution = doc.canManagement;
@@ -280,121 +312,63 @@
 
           doc.flags.isVisibleEditCmd = doc.docStatusAlias === 'Draft' && doc.canEdit;
 
-          if (doc.isResolution || doc.isTask || doc.isRemark) {
-            doc.flags.isVisibleDraftStatusCmd = false;
-            doc.flags.isVisiblePreparedStatusCmd = false;
-            doc.flags.isVisibleProcessedStatusCmd = false;
-            doc.flags.isVisibleFinishedStatusCmd =
-              doc.docStatusAlias === 'Draft' && doc.canFinish;
-            doc.flags.isVisibleCanceledStatusCmd =
-              doc.docStatusAlias === 'Draft' && doc.canFinish;
+          doc.flags.isVisibleProcessedStatusCmd =
+            doc.docStatusAlias === 'Draft' && (doc.canEdit || doc.canManagement);
+          doc.flags.isVisibleFinishedStatusCmd =
+            doc.docStatusAlias === 'Processed' && doc.canFinish;
+          doc.flags.isVisibleCanceledStatusCmd =
+            doc.docStatusAlias === 'Processed' && doc.canFinish;
 
-            doc.flags.isVisibleDraftStatusReverseCmd =
-              (doc.docStatusAlias === 'Finished' || doc.docStatusAlias === 'Canceled') &&
-              doc.canReverse;
-            doc.flags.isVisiblePreparedStatusReverseCmd = false;
-            doc.flags.isVisibleProcessedStatusReverseCmd = false;
-            doc.flags.isVisibleFinishedStatusReverseCmd = false;
-            doc.flags.isVisibleCanceledStatusReverseCmd = false;
-          } else {
-            if (doc.isDocIncoming) {
-              doc.flags.isVisibleDraftStatusCmd = false;
-              doc.flags.isVisiblePreparedStatusCmd = false;
-              doc.flags.isVisibleProcessedStatusCmd =
-                (doc.docStatusAlias === 'Draft' || doc.docStatusAlias === 'FromPortal') &&
-                (doc.canEdit || doc.canManagement);
-              doc.flags.isVisibleFinishedStatusCmd =
-                doc.docStatusAlias === 'Processed' && doc.canFinish;
-              doc.flags.isVisibleCanceledStatusCmd =
-                doc.docStatusAlias === 'Processed' && doc.canFinish;
+          doc.flags.isVisibleDraftStatusReverseCmd =
+            doc.docStatusAlias === 'Processed' && doc.canReverse;
+          doc.flags.isVisibleProcessedStatusReverseCmd =
+            (doc.docStatusAlias === 'Finished' || doc.docStatusAlias === 'Canceled') &&
+            doc.canReverse;
 
-              doc.flags.isVisibleDraftStatusReverseCmd =
-                !doc.docTypeIsElectronicService &&
-                doc.docStatusAlias === 'Processed' && doc.canReverse;
-              doc.flags.isVisiblePreparedStatusReverseCmd = false;
-              doc.flags.isVisibleFromPortalStatusReverseCmd = 
-                doc.docTypeIsElectronicService &&
-                doc.docStatusAlias === 'Processed' &&
-                doc.canReverse;
-              doc.flags.isVisibleProcessedStatusReverseCmd =
-                !doc.docTypeIsElectronicService &&
-                (doc.docStatusAlias === 'Finished' || doc.docStatusAlias === 'Canceled') &&
-                doc.canReverse;
-              doc.flags.isVisibleFinishedStatusReverseCmd = false;
-              doc.flags.isVisibleCanceledStatusReverseCmd = false;
-            } else {
-              doc.flags.isVisibleDraftStatusCmd = false;
-              doc.flags.isVisiblePreparedStatusCmd =
-                doc.docStatusAlias === 'Draft' && doc.canEdit;
-              doc.flags.isVisibleProcessedStatusCmd =
-                (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') &&
-                (doc.canEdit || doc.canManagement);
-              doc.flags.isVisibleFinishedStatusCmd =
-                doc.docStatusAlias === 'Processed' && doc.canFinish;
-              doc.flags.isVisibleCanceledStatusCmd =
-                doc.docStatusAlias === 'Processed' && doc.canFinish;
-
-              doc.flags.isVisibleDraftStatusReverseCmd =
-                (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') &&
-                doc.canReverse;
-              doc.flags.isVisiblePreparedStatusReverseCmd =
-                doc.docStatusAlias === 'Processed' && doc.canReverse;
-              doc.flags.isVisibleProcessedStatusReverseCmd =
-                (doc.docStatusAlias === 'Finished' || doc.docStatusAlias === 'Canceled') &&
-                doc.canReverse;
-              doc.flags.isVisibleFinishedStatusReverseCmd = false;
-              doc.flags.isVisibleCanceledStatusReverseCmd = false;
-            }
-          }
-
-          doc.flags.isVisibleRegisterCmd = !doc.isRegistered && doc.canRegister &&
+          doc.flags.isVisibleRegisterCmd =
+            doc.docStatusAlias !== 'Finished' && doc.docStatusAlias !== 'Canceled' &&
+            !doc.isRegistered && doc.canRegister &&
             !doc.isResolution && !doc.isTask && !doc.isRemark;
-
           doc.flags.isVisibleEsignCmd =
-            (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') &&
-            doc.canESign &&
+            doc.docStatusAlias === 'Processed' && doc.canESign &&
             !doc.isResolution && !doc.isTask && !doc.isRemark &&
             !doc.isDocIncoming;
           doc.flags.isVisibleUndoEsignCmd =
-            (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') && 
-            doc.canESign &&
+            doc.docStatusAlias === 'Processed' && doc.canESign &&
             !doc.isResolution && !doc.isTask && !doc.isRemark &&
             !doc.isDocIncoming;
 
           doc.flags.isVisibleSignRequestCmd =
-            (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') &&
+            doc.docStatusAlias === 'Processed' &&
             (doc.canEdit || doc.canManagement) &&
             !doc.isResolution && !doc.isTask && !doc.isRemark &&
             !doc.isDocIncoming;
           doc.flags.isVisibleDiscussRequestCmd =
-            (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') &&
+            doc.docStatusAlias === 'Processed' &&
             (doc.canEdit || doc.canManagement) &&
             !doc.isResolution && !doc.isTask && !doc.isRemark &&
             !doc.isDocIncoming;
           doc.flags.isVisibleApprovalRequestCmd =
-            (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') &&
+            doc.docStatusAlias === 'Processed' &&
             (doc.canEdit || doc.canManagement) &&
             !doc.isResolution && !doc.isTask && !doc.isRemark &&
             !doc.isDocIncoming;
           doc.flags.isVisibleRegistrationRequestCmd =
-            (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') &&
+            doc.docStatusAlias === 'Processed' &&
             (doc.canEdit || doc.canManagement) &&
             !doc.isResolution && !doc.isTask && !doc.isRemark &&
             !doc.isDocIncoming;
 
           doc.flags.isVisibleSignCmd =
-            (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') && 
-            doc.canDocWorkflowSign &&
+            doc.docStatusAlias === 'Processed' && doc.canDocWorkflowSign &&
             !doc.isResolution && !doc.isTask && !doc.isRemark &&
             !doc.isDocIncoming;
           doc.flags.isVisibleDiscussCmd =
-            (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') && 
-            doc.canDocWorkflowDiscuss &&
+            doc.docStatusAlias === 'Processed' && doc.canDocWorkflowDiscuss &&
             !doc.isResolution && !doc.isTask && !doc.isRemark &&
             !doc.isDocIncoming;
           doc.flags.isVisibleApprovalCmd =
-            (doc.docStatusAlias === 'Prepared' || doc.docStatusAlias === 'FromPortal') &&
-            doc.canDocWorkflowDiscuss &&
+            doc.docStatusAlias === 'Processed' && doc.canDocWorkflowDiscuss &&
             !doc.isResolution && !doc.isTask && !doc.isRemark &&
             !doc.isDocIncoming;
           doc.flags.canSubstituteWorkflow = doc.canSubstituteManagement;
@@ -423,8 +397,7 @@
           doc.flags.isVisibleDocMoveCmd = doc.canDocMovement;
           doc.flags.isVisibleDocMoveToNewCmd = !doc.isCase && doc.canDocMovement;
 
-          doc.flags.isVisbleDivider1 = doc.flags.isVisibleRegisterCmd ||
-            doc.flags.isVisibleFromPortalStatusReverseCmd;
+          doc.flags.isVisbleDivider1 = doc.flags.isVisibleRegisterCmd;
           doc.flags.isVisbleDivider2 = doc.flags.isVisibleEsignCmd ||
             doc.flags.isVisibleUndoEsignCmd;
           doc.flags.isVisbleDivider3 = doc.flags.isVisibleSignCmd ||
@@ -432,10 +405,7 @@
           doc.flags.isVisbleDivider4 = doc.flags.isVisibleSignRequestCmd ||
             doc.flags.isVisibleDiscussRequestCmd || doc.flags.isVisibleApprovalRequestCmd ||
             doc.flags.isVisibleRegistrationRequestCmd;
-          doc.flags.isVisbleDivider5 = doc.flags.isVisibleDraftStatusReverseCmd ||
-            doc.flags.isVisiblePreparedStatusReverseCmd ||
-            doc.flags.isVisibleFinishedStatusReverseCmd ||
-            doc.flags.isVisibleCanceledStatusReverseCmd;
+          doc.flags.isVisbleDivider5 = doc.flags.isVisibleDraftStatusReverseCmd;
 
           return doc;
         });

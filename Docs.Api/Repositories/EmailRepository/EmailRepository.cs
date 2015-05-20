@@ -129,7 +129,7 @@ namespace Docs.Api.Repositories.EmailRepository
                         .Replace("@@Param3", caseDoc.DocSubject)
                         .Replace("@@Param4", sb.Length > 0 ? sb.ToString() : "[невъведен]")
                         .Replace("@@Param5", docUnitFrom != null ? docUnitFrom.Unit.Name : "[невъведен]")
-                        .Replace("@@Param6", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/view"), doc.DocId));
+                        .Replace("@@Param6", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/case"), doc.DocId));
                 }
                 else
                 {
@@ -159,7 +159,7 @@ namespace Docs.Api.Repositories.EmailRepository
                         .Replace("@@Param4", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]")
                         .Replace("@@Param5", sb.Length > 0 ? sb.ToString() : "[невъведен]")
                         .Replace("@@Param6", docUnitFrom != null ? docUnitFrom.Unit.Name : "[невъведен]")
-                        .Replace("@@Param7", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/view"), doc.DocId));
+                        .Replace("@@Param7", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/case"), doc.DocId));
                 }
             }
 
@@ -173,8 +173,9 @@ namespace Docs.Api.Repositories.EmailRepository
             DocUnitRole docUnitRoleFrom = docUnitRoles.SingleOrDefault(e => e.Alias == "From");
             DocUnitRole docUnitRoleImportedBy = docUnitRoles.SingleOrDefault(e => e.Alias == "ImportedBy");
             DocUnitRole docUnitRoleTo = docUnitRoles.SingleOrDefault(e => e.Alias == "To");
+            DocUnitRole docUnitRoleCCopy = docUnitRoles.SingleOrDefault(e => e.Alias == "CCopy");
 
-            List<DocUnit> receivingDocUnits = doc.DocUnits.Where(du => du.DocUnitRoleId == docUnitRoleTo.DocUnitRoleId).ToList();
+            List<DocUnit> receivingDocUnits = doc.DocUnits.Where(du => du.DocUnitRoleId == docUnitRoleTo.DocUnitRoleId || du.DocUnitRoleId == docUnitRoleCCopy.DocUnitRoleId).ToList();
 
             DocUnit docUnitFrom = doc.DocUnits.FirstOrDefault(e => e.DocUnitRoleId == docUnitRoleFrom.DocUnitRoleId);
 
@@ -242,7 +243,7 @@ namespace Docs.Api.Repositories.EmailRepository
                     .Replace("@@Param3", caseDoc.DocSubject)
                     .Replace("@@Param4", sb.Length > 0 ? sb.ToString() : "[невъведен]")
                     .Replace("@@Param5", docUnitFrom != null ? docUnitFrom.Unit.Name : "[невъведен]")
-                    .Replace("@@Param6", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/view"), doc.DocId));
+                    .Replace("@@Param6", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/case"), doc.DocId));
             }
             else
             {
@@ -267,7 +268,7 @@ namespace Docs.Api.Repositories.EmailRepository
                     .Replace("@@Param4", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]")
                     .Replace("@@Param5", sb.Length > 0 ? sb.ToString() : "[невъведен]")
                     .Replace("@@Param6", docUnitFrom != null ? docUnitFrom.Unit.Name : "[невъведен]")
-                    .Replace("@@Param7", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/view"), doc.DocId));
+                    .Replace("@@Param7", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/case"), doc.DocId));
             }
 
             return email;
@@ -330,7 +331,7 @@ namespace Docs.Api.Repositories.EmailRepository
                     .Replace("@@Param3", doc.DocSubject)
                     .Replace("@@Param4", sender != null ? sender.Name : "[невъведен]")
                     .Replace("@@Param5", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]")
-                    .Replace("@@Param6", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/view"), doc.DocId));
+                    .Replace("@@Param6", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/case"), doc.DocId));
             }
             else
             {
@@ -376,7 +377,7 @@ namespace Docs.Api.Repositories.EmailRepository
                     .Replace("@@Param2", doc.DocType.Name)
                     .Replace("@@Param3", doc.DocSubject)
                     .Replace("@@Param4", !string.IsNullOrEmpty(caseDoc.RegUri) ? caseDoc.RegUri : "[Няма номер на преписка]")
-                    .Replace("@@Param5", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/view"), doc.DocId));
+                    .Replace("@@Param5", String.Format(request.RequestUri.OriginalString.Replace(request.RequestUri.PathAndQuery, "/#/docs/{0}/case"), doc.DocId));
             }
 
             return email;

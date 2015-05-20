@@ -59,10 +59,11 @@ namespace Docs.Api.Jobs
 
                 if (pendingEmails.Any())
                 {
-                    string smtpNetworkCredentialHost = ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialHost"];
-                    string smtpNetworkCredentialPort = ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialPort"];
+                    string smtpNetworkCredentialHost = ConfigurationManager.AppSettings["Docs.Api:SmtpClientHost"];
+                    string smtpNetworkCredentialPort = ConfigurationManager.AppSettings["Docs.Api:SmtpClientPort"];
                     string smtpNetworkCredentialName = ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialName"];
                     string smtpNetworkCredentialPassword = ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialPassword"];
+                    string smtpNetworkCredentialDomain = ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialDomain"];
                     string smtpNetworkCredentialEnableSsl = ConfigurationManager.AppSettings["Docs.Api:SmtpNetworkCredentialEnableSsl"];
 
                     SmtpClient smtpClient = new SmtpClient();
@@ -75,11 +76,11 @@ namespace Docs.Api.Jobs
                     }
                     if (!String.IsNullOrEmpty(smtpNetworkCredentialName) && !String.IsNullOrEmpty(smtpNetworkCredentialPassword))
                     {
-                        smtpClient.Credentials = new NetworkCredential(smtpNetworkCredentialName, smtpNetworkCredentialPassword);
+                        smtpClient.Credentials = new NetworkCredential(smtpNetworkCredentialName, smtpNetworkCredentialPassword, smtpNetworkCredentialDomain);
                     }
                     if (!String.IsNullOrEmpty(smtpNetworkCredentialEnableSsl))
                     {
-                        smtpClient.EnableSsl = true;
+                        smtpClient.EnableSsl = Convert.ToBoolean(smtpNetworkCredentialEnableSsl);
                     }
 
                     foreach (int administrativeEmailId in pendingEmails)

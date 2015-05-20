@@ -327,6 +327,30 @@ namespace Docs.Api.Controllers
 
             foreach (var item in returnValue)
             {
+                List<DocRelation> resolutionDocRelations =
+                    this.unitOfWork.DbContext.Set<DocRelation>()
+                    .Include(e => e.Doc.DocDirection)
+                    .Include(e => e.Doc.DocCasePartType)
+                    .Include(e => e.Doc.DocType)
+                    .Include(e => e.Doc.DocEntryType)
+                    .Where(e => e.ParentDocId == item.DocId &&
+                        (e.Doc.DocStatus.Alias == "Processed" || e.Doc.DocStatus.Alias == "Finished") &&
+                        (e.Doc.DocEntryType.Alias == "Resolution" || e.Doc.DocEntryType.Alias == "Task"))
+                    .ToList();
+
+                if (resolutionDocRelations.Any())
+                {
+                    var resolutionDocIds = resolutionDocRelations.Select(r => r.DocId).ToArray();
+
+                    this.unitOfWork.DbContext.Set<DocUnit>()
+                         .Include(e => e.Unit.UnitRelations.Select(er => er.ParentUnit))
+                         .Include(e => e.DocUnitRole)
+                         .Where(e => resolutionDocIds.Contains(e.DocId))
+                         .ToList();
+
+                    item.ResolutionDocRelations.AddRange(resolutionDocRelations.Select(r => new DocRelationDO(r)));
+                }
+
                 if (docView == DocView.ForControl || docView == DocView.ForManagement)
                 {
                     int? rootId = this.unitOfWork.DbContext.Set<DocRelation>()
@@ -1178,6 +1202,8 @@ namespace Docs.Api.Controllers
 
             #region Load
 
+            int caseId = this.docRepository.GetCaseId(id);
+
             this.unitOfWork.DbContext.Set<DocHasRead>()
             .Where(e => e.DocId == id)
             .ToList();
@@ -1192,7 +1218,7 @@ namespace Docs.Api.Controllers
             this.unitOfWork.DbContext.Set<DocUnit>()
              .Include(e => e.Unit.UnitRelations.Select(er => er.ParentUnit))
              .Include(e => e.DocUnitRole)
-             .Where(e => e.DocId == id)
+             .Where(e => e.Doc.DocRelations.Any(dr => dr.RootDocId == caseId))
              .ToList();
 
             this.unitOfWork.DbContext.Set<DocCorrespondent>()
@@ -1320,7 +1346,9 @@ namespace Docs.Api.Controllers
                     e => e.Doc.DocCasePartMovements.Select(dc => dc.User),
                     e => e.Doc.DocDirection,
                     e => e.Doc.DocType,
-                    e => e.Doc.DocStatus)
+                    e => e.Doc.DocStatus,
+                    e => e.Doc.DocSourceType,
+                    e => e.Doc.DocEntryType)
                    .Select(e => new DocRelationDO(e))
                 );
 
@@ -1922,11 +1950,6 @@ namespace Docs.Api.Controllers
 
                 switch (targetDocStatusAlias)
                 {
-                    case "Prepared":
-                        ClassificationPermission tmp0 = this.classificationRepository.GetByAlias("Edit");
-
-                        hasStagePermission = this.classificationRepository.HasPermission(unitUser.UnitId, id, tmp0.ClassificationPermissionId);
-                        break;
                     case "Processed":
                         ClassificationPermission tmp1 = this.classificationRepository.GetByAlias("Edit");
                         ClassificationPermission tmp2 = this.classificationRepository.GetByAlias("Management");
@@ -1949,18 +1972,15 @@ namespace Docs.Api.Controllers
                     return BadRequest("Not enough permissions!");
                 }
 
-                if (doc.DocEntryType.Alias == "Resolution" || doc.DocEntryType.Alias == "Task")
+                if (targetDocStatusAlias == "Processed")
                 {
-                    if (targetDocStatusAlias == "Finished")
+                    if (doc.DocEntryType.Alias == "Resolution" || doc.DocEntryType.Alias == "Task")
                     {
                         Email email = this.emailRepository.CreateResolutionEmail(doc, Request);
 
                         this.unitOfWork.DbContext.Set<Email>().Add(email);
                     }
-                }
-                else if (doc.DocEntryType.Alias == "Document" || doc.DocEntryType.Alias == "Remark")
-                {
-                    if (targetDocStatusAlias == "Processed")
+                    else if (doc.DocEntryType.Alias == "Document" || doc.DocEntryType.Alias == "Remark")
                     {
                         Email email = this.emailRepository.CreateDocumentEmail(doc, Request);
 
@@ -2094,7 +2114,7 @@ namespace Docs.Api.Controllers
 
                 ClassificationPermission readPermission = this.classificationRepository.GetByAlias("Read");
 
-                DocStatus preparedStatus = this.classificationRepository.GetDocStatusByAlias("Prepared");
+                DocStatus processedStatus = this.classificationRepository.GetDocStatusByAlias("Processed");
 
                 bool isRequest = false;
                 string[] requests = { "signrequest", "discussrequest", "approvalrequest", "registrationrequest" };
@@ -2107,7 +2127,7 @@ namespace Docs.Api.Controllers
                     ClassificationPermission managementPermission = this.classificationRepository.GetByAlias("Management");
                     ClassificationPermission editPermission = this.classificationRepository.GetByAlias("Edit");
 
-                    bool hasPermission = (doc.DocStatusId == preparedStatus.DocStatusId) &&
+                    bool hasPermission = (doc.DocStatusId == processedStatus.DocStatusId) &&
                         (this.classificationRepository.HasPermission(unitUser.UnitId, id, managementPermission.ClassificationPermissionId) ||
                             this.classificationRepository.HasPermission(unitUser.UnitId, id, editPermission.ClassificationPermissionId)) &&
                         this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
@@ -2123,7 +2143,7 @@ namespace Docs.Api.Controllers
 
                     ClassificationPermission docWorkflowSignPermission = this.classificationRepository.GetByAlias("DocWorkflowSign");
 
-                    bool hasPermission = (doc.DocStatusId == preparedStatus.DocStatusId) &&
+                    bool hasPermission = (doc.DocStatusId == processedStatus.DocStatusId) &&
                         this.classificationRepository.HasPermission(unitUser.UnitId, id, docWorkflowSignPermission.ClassificationPermissionId) &&
                         this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
 
@@ -2138,7 +2158,7 @@ namespace Docs.Api.Controllers
 
                     ClassificationPermission docWorkflowDiscussPermission = this.classificationRepository.GetByAlias("DocWorkflowDiscuss");
 
-                    bool hasPermission = (doc.DocStatusId == preparedStatus.DocStatusId) &&
+                    bool hasPermission = (doc.DocStatusId == processedStatus.DocStatusId) &&
                         this.classificationRepository.HasPermission(unitUser.UnitId, id, docWorkflowDiscussPermission.ClassificationPermissionId) &&
                         this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
 
@@ -2158,7 +2178,7 @@ namespace Docs.Api.Controllers
                 {
                     ClassificationPermission substituteManagementPermission = this.classificationRepository.GetByAlias("SubstituteManagement");
 
-                    bool hasPermission = (doc.DocStatusId == preparedStatus.DocStatusId) &&
+                    bool hasPermission = (doc.DocStatusId == processedStatus.DocStatusId) &&
                         this.classificationRepository.HasPermission(unitUser.UnitId, id, substituteManagementPermission.ClassificationPermissionId) &&
                         this.classificationRepository.HasPermission(unitUser.UnitId, id, readPermission.ClassificationPermissionId);
 

@@ -12,14 +12,13 @@
 
     _.map(application.appDocCase, function (adc) {
       switch (adc.docDocStatusAlias) {
-      case 'Draft':
-      case 'Prepared':
-      case 'Processed':
-        adc.hasNextStatus = true;
-        break;
-      default:
-        adc.hasNextStatus = false;
-        break;
+        case 'Draft':
+        case 'Processed':
+          adc.hasNextStatus = true;
+          break;
+        default:
+          adc.hasNextStatus = false;
+          break;
       }
 
       return adc;

@@ -91,7 +91,7 @@ namespace Docs.Api.DataObjects
                 if (d.DocStatus != null)
                 {
                     this.DocStatusAlias = d.DocStatus.Alias;
-                    this.DocStatusName = d.DocStatus.Name;
+                    this.DocStatusName = d.GetDocStatusName();
                 }
 
                 if (d.DocCasePartType != null)

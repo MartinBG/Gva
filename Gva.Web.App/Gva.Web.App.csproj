@@ -342,8 +342,6 @@
     <Content Include="js\gva\applications\views\applicationsSearch.html" />
     <Content Include="js\gva\applications\views\applicationsSearchCtrl.js" />
     <Content Include="js\gva\applications\views\applicationsEditPartCtrl.js" />
-    <Content Include="js\gva\applications\views\docsLinkApp.html" />
-    <Content Include="js\gva\applications\views\docsLinkAppCtrl.js" />
     <Content Include="js\gva\common\directives\application\applicationAlertInfoDirective.js" />
     <Content Include="js\gva\common\directives\application\applicationAlertInfoDirective.html" />
     <Content Include="js\gva\common\directives\caseType\caseTypeDirective.js" />

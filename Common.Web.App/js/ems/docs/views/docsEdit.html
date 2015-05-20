@@ -48,12 +48,7 @@
           <sc-dropdown-button ng-show="!inEditMode" icon="glyphicon glyphicon-tag" label="docs.edit.management"
               options="[
                 {
-                  text: 'docs.edit.docPrepared',
-                  action: nextStatus,
-                  params: { alias: 'Prepared' },
-                  visible: doc.flags.isVisiblePreparedStatusCmd
-                }, {
-                  text: 'docs.edit.docProcessed',
+                  text: l10n.get('docs.edit.docProcessed') + doc.flags.getDocStatusName('Processed'),
                   action: nextStatus,
                   params: { alias: 'Processed' },
                   visible: doc.flags.isVisibleProcessedStatusCmd
@@ -123,23 +118,12 @@
                   btnClass: 'divider',
                   visible: doc.flags.isVisbleDivider5
                 }, {
-                  text: 'docs.edit.reverseDocPrepared',
+                  text: l10n.get('docs.edit.reverseDoc') + doc.flags.getDocStatusName('Draft'),
                   action: reverseStatus,
                   params: { alias: 'Draft' },
                   visible: doc.flags.isVisibleDraftStatusReverseCmd
                 }, {
-                  text: 'docs.edit.reverseDocProcessed',
-                  action: reverseStatus,
-                  params: { alias: 'Prepared' },
-                  visible: doc.flags.isVisiblePreparedStatusReverseCmd
-                }, 
-                {
-                  text: 'docs.edit.reverseDocFromPortal',
-                  action: reverseStatus,
-                  params: { alias: 'FromPortal' },
-                  visible: doc.flags.isVisibleFromPortalStatusReverseCmd
-                },{
-                  text: 'docs.edit.reverseDocFinished',
+                  text: l10n.get('docs.edit.reverseDoc') + doc.flags.getDocStatusName('Processed'),
                   action: reverseStatus,
                   params: { alias: 'Processed' },
                   visible: doc.flags.isVisibleProcessedStatusReverseCmd
