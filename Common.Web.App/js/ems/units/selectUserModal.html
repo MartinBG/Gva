@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+  <nav class="panel-heading">
+    <div class="collapse navbar-collapse" style="padding: 0;">
+      <strong l10n-text="common.units.users.title"></strong>
+      <div class="pull-right">
+        <sc-button name="cancelBtn"
+                   btn-click="cancel()"
+                   text="commonLabels.cancel"
+                   class="btn btn-default btn-xs"
+                   icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="well-sm panel-body" style="max-height: 350px; overflow: auto;">
+
+    <table class="table table-bordered table-condensed">
+      <thead>
+        <tr>
+          <th l10n-text="common.units.users.userName"
+              style="width: 200px"></th>
+          <th l10n-text="common.units.users.fullName"
+              style="width: 200px"></th>
+          <th style="width: 20px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in model">
+          <td>
+            {{user.userName}}
+          </td>
+          <td>
+            {{user.fullName}}
+          </td>
+          <td class="text-center ">
+            <sc-button class="btn btn-xs btn-primary"
+                       icon="glyphicon-link"
+                       btn-click="selectUser(user.userId)"></sc-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

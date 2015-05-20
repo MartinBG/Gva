@@ -1,15 +1,6 @@
-﻿using Common.Api.UserContext;
-using Docs.Api.Enums;
-using Docs.Api.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Docs.Api.Models;
 using Common.Api.Repositories;
-using System.Linq.Expressions;
-using Common.Api.Models;
+using Docs.Api.Models.ClassificationModels;
 
 namespace Docs.Api.Repositories.ClassificationRepository
 {

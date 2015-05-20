@@ -20,6 +20,8 @@ using Docs.Api.DataObjects;
 using System.Text;
 using Mosv.Api.ModelsDO.Signal;
 using Mosv.Api.ModelsDO.Suggestion;
+using Docs.Api.Models.UnitModels;
+using Docs.Api.Models.ClassificationModels;
 
 namespace Mosv.Api.Controllers
 {

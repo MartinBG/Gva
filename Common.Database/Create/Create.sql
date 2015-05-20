@@ -35,20 +35,6 @@ GO
 :r $(rootPath)\"Tables\Noms\Noms.sql"
 :r $(rootPath)\"Tables\Noms\NomValues.sql"
 
-
--- Classifications
-:r $(rootPath)"\Tables\Classifications\Classifications.sql"
-:r $(rootPath)"\Tables\Classifications\ClassificationRelations.sql"
-:r $(rootPath)"\Tables\Classifications\ClassificationPermissions.sql"
-
--- Units
-:r $(rootPath)"\Tables\Units\UnitTypes.sql"
-:r $(rootPath)"\Tables\Units\Units.sql"
-:r $(rootPath)"\Tables\Units\UnitRelations.sql"
-:r $(rootPath)"\Tables\Units\UnitClassifications.sql"
-:r $(rootPath)"\Tables\Units\UnitUsers.sql"
-:r $(rootPath)"\Tables\Units\UnitTokens.sql"
-
 ---------------------------------------------------------------
 -- Diagram
 ---------------------------------------------------------------
@@ -61,18 +47,11 @@ GO
 
 :r $(rootPath)\"Functions\ufnParseJSON.sql"
 :r $(rootPath)\"Functions\ufnGetNomValuesByTextContentProperty.sql"
-:r $(rootPath)\"Functions\fnGetParentClassifications.sql"
-:r $(rootPath)\"Functions\fnGetParentUnits.sql"
-:r $(rootPath)\"Functions\fnGetSubordinateClassifications.sql"
-:r $(rootPath)\"Functions\fnGetSubordinateUnits.sql"
 
 ---------------------------------------------------------------
 --Procedures
 ---------------------------------------------------------------
 
-:r $(rootPath)\"Procedures\spGetUnitClassifications.sql"
-:r $(rootPath)\"Procedures\spSetDeactiveUnit.sql"
-:r $(rootPath)\"Procedures\spSetUnitTokens.sql"
 
 ---------------------------------------------------------------
 -- Insert
@@ -85,5 +64,3 @@ GO
 :r $(rootPath)\"..\Insert\Addresses\countries.sql"
 :r $(rootPath)\"..\Insert\TestBlobs.sql"
 :r $(rootPath)\"..\Insert\TestUsers.sql"
-
-:r $(rootPath)\"..\Insert\Classifications\ClassificationPermissions.sql"

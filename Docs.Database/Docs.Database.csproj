@@ -42,21 +42,33 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CreateAll.sql" />
     <Content Include="Create\Create.sql" />
     <Content Include="Create\Diagram\Correspondents.sql" />
     <Content Include="Create\Diagram\DocRelations.sql" />
     <Content Include="Create\Diagram\Docs.sql" />
     <Content Include="Create\Diagram\Main.sql" />
+    <Content Include="Create\Diagram\Units.sql" />
     <Content Include="Create\Diagram\Users.sql" />
+    <Content Include="Create\Functions\fnGetParentClassifications.sql" />
+    <Content Include="Create\Functions\fnGetParentUnits.sql" />
+    <Content Include="Create\Functions\fnGetSubordinateClassifications.sql" />
     <Content Include="Create\Functions\fnGetSubordinateDocs.sql" />
     <Content Include="Create\Functions\fnCheckForRegisteredChildDocs.sql" />
     <Content Include="Create\Functions\fnGetCorrespondentDisplayName.sql" />
+    <Content Include="Create\Functions\fnGetSubordinateUnits.sql" />
     <Content Include="Create\Procedures\spGetDocRegisterIdByRegisterIndexId.sql" />
     <Content Include="Create\Procedures\spDeleteNotRegisteredDoc.sql" />
     <Content Include="Create\Procedures\spGetDocRegisterId.sql" />
     <Content Include="Create\Procedures\spGetDocRegisterNextNumber.sql" />
+    <Content Include="Create\Procedures\spGetUnitClassifications.sql" />
+    <Content Include="Create\Procedures\spSetDeactiveUnit.sql" />
+    <Content Include="Create\Procedures\Tokens\spSetUnitTokens.sql" />
     <Content Include="Create\Procedures\Tokens\spSetDocTokens.sql" />
     <Content Include="Create\Procedures\Tokens\spSetDocUnitTokens.sql" />
+    <Content Include="Create\Tables\Classifications\ClassificationPermissions.sql" />
+    <Content Include="Create\Tables\Classifications\ClassificationRelations.sql" />
+    <Content Include="Create\Tables\Classifications\Classifications.sql" />
     <Content Include="Create\Tables\Emails\Emails.sql" />
     <Content Include="Create\Tables\Emails\EmailStatuses.sql" />
     <Content Include="Create\Tables\Emails\EmailTypes.sql" />
@@ -108,7 +120,14 @@
     <Content Include="Create\Tables\Others\IrregularityTypes.sql" />
     <Content Include="Create\Tables\Registers\RegisterIndexes.sql" />
     <Content Include="Create\Tables\Tokens\DocTokens.sql" />
+    <Content Include="Create\Tables\Units\UnitClassifications.sql" />
+    <Content Include="Create\Tables\Units\UnitRelations.sql" />
+    <Content Include="Create\Tables\Units\Units.sql" />
+    <Content Include="Create\Tables\Units\UnitTokens.sql" />
+    <Content Include="Create\Tables\Units\UnitTypes.sql" />
+    <Content Include="Create\Tables\Units\UnitUsers.sql" />
     <Content Include="Create\Views\vwDocUsers.sql" />
+    <Content Include="Insert\Classifications\ClassificationPermissions.sql" />
     <Content Include="Insert\Emails\EmailAddresseeTypes.sql" />
     <Content Include="Insert\Emails\EmailStatuses.sql" />
     <Content Include="Insert\Emails\EmailTypes.sql" />
@@ -140,9 +159,76 @@
     <Content Include="Insert\Units\UnitClassifications.sql" />
     <Content Include="Insert\Units\UnitRelations.sql" />
     <Content Include="Insert\Units\UnitTypes.sql" />
+    <Content Include="TestData\ConfigFinalize.sql" />
+    <Content Include="TestData\Create.sql" />
+    <Content Include="TestData\ExcelConfig\ClassificationRelations.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\Classifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\DocFileTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\DocTypeClassifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\DocTypeGroups.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\DocTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\DocTypeUnitRoles.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\ElectronicServiceProviders.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\ElectronicServiceStageExecutors.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\ElectronicServiceStages.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\ExcelConfig.xml" />
+    <Content Include="TestData\ExcelConfig\IrregularityTypes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\RegisterIndexes.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\UnitClassifications.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\UnitRelations.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\Units.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\ExcelConfig\Users.sql">
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </Content>
+    <Content Include="TestData\MosvCorrespondents.sql" />
+    <Content Include="TestData\Noms\mosv.sql" />
+    <Content Include="TestData\Noms\registers.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CreateAll.bat" />
+    <None Include="TestData\ExcelConfig\ExcelConfig.log" />
+    <None Include="TestData\ExcelConfig\ExcelConfig.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExcelConfig1.log</LastGenOutput>
+    </None>
+    <None Include="TestData\ExcelConfig\ExcelConfig1.log">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExcelConfig.tt</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

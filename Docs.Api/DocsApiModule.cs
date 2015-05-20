@@ -11,6 +11,8 @@ using Docs.Api.Repositories.CorrespondentRepository;
 using Docs.Api.Repositories.DocRepository;
 using Docs.Api.Repositories.ClassificationRepository;
 using Docs.Api.Repositories.EmailRepository;
+using Docs.Api.Repositories.UnitRepository;
+using Docs.Api.BusinessLogic;
 
 namespace Docs.Api
 {
@@ -25,12 +27,19 @@ namespace Docs.Api
             moduleBuilder.RegisterType<ClassificationRepository>().As<IClassificationRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<EmailRepository>().As<IEmailRepository>().InstancePerLifetimeScope();
 
+            moduleBuilder.RegisterType<UnitRepository>().As<IUnitRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<UnitBusinessLogic>().As<IUnitBusinessLogic>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<UnitUserRepository>().As<IUnitUserRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<Docs.Api.Infrastructure.DomainValidator>().As<Common.DomainValidation.IDomainValidator>().InstancePerLifetimeScope();
+
             //controllers
             moduleBuilder.RegisterType<CorrespondentController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<DocController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AbbcdnController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<DocNomController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<UnitController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<RegisterController>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<NomenclaturesManagementController>().InstancePerLifetimeScope();
 
             string enableEmailsJobConf = ConfigurationManager.AppSettings["Docs.Api:EnableEmailsJob"];
 

@@ -1,0 +1,61 @@
+﻿<ng-form class="form-inline" sc-validate="{}">
+  <table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+          <th l10n-text="common.units.edit.classification"></th>
+          <th l10n-text="common.units.edit.classificationPermissions"></th>
+          <th style="width: 70px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+      <!--<tr ng-repeat="df in model.docFiles | filter: { isDeleted: false }" ng-form sc-form-name="{ local: 'form', parent: 's' + $index }" sc-validate="{}">
+        <td style="width: 300px;" sc-has-error="name">
+          <sc-text name="name" ng-model="df.name" ng-readonly="!df.isInEdit" required></sc-text>
+        </td>
+        <td style="width: 150px;" sc-has-error="docFileKind">
+            <sc-nomenclature name="docFileKind" ng-model="df.docFileKindId" nom-obj="df.docFileKind" mode="id" alias="'docFileKind'" ng-disabled="!df.isInEdit" required></sc-nomenclature>
+        </td>
+        <td sc-has-error="docFile">
+          <sc-files name="docFile" ng-model="df.file" ng-readonly="readonly" required></sc-files>
+        </td>
+        <td style="text-align: right; width: 1px;">
+          <span ng-show="df.isInEdit">
+            <sc-button btn-click="saveDocFile(df, form)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-saved" ng-disabled="readonly"></sc-button>
+            <sc-button btn-click="cancelDocFile(df)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-remove" ng-disabled="readonly"></sc-button>
+          </span>
+          <span ng-show="!df.isInEdit">
+            <sc-button btn-click="editDocFile(df)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-disabled="readonly"></sc-button>
+            <sc-button btn-click="removeDocFile(df)" class="btn btn-xs btn-default" icon="glyphicon-remove" ng-disabled="readonly"></sc-button>
+          </span>
+        </td>
+      </tr>-->
+      <tr ng-form sc-validate="{}">
+        <td style="width: 300px;" sc-has-error="name">
+          <sc-text name="name" ng-model="df.name" ng-readonly="!df.isInEdit" required></sc-text>
+        </td>
+        <td style="width: 150px;" sc-has-error="docFileKind">
+          <sc-nomenclature name="docFileKind" ng-model="df.docFileKindId" nom-obj="df.docFileKind" mode="id" alias="'docFileKind'" ng-disabled="!df.isInEdit" required></sc-nomenclature>
+        </td>
+        <td sc-has-error="docFile">
+          <sc-files name="docFile" ng-model="df.file" ng-readonly="readonly" required></sc-files>
+        </td>
+        <td style="text-align: right; width: 1px;">
+          <span ng-show="df.isInEdit">
+            <sc-button btn-click="saveDocFile(df, form)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-saved" ng-disabled="readonly"></sc-button>
+            <sc-button btn-click="cancelDocFile(df)" class="btn btn-xs btn-primary" icon="glyphicon-floppy-remove" ng-disabled="readonly"></sc-button>
+          </span>
+          <span ng-show="!df.isInEdit">
+            <sc-button btn-click="editDocFile(df)" class="btn btn-xs btn-primary" icon="glyphicon-pencil" ng-disabled="readonly"></sc-button>
+            <sc-button btn-click="removeDocFile(df)" class="btn btn-xs btn-default" icon="glyphicon-remove" ng-disabled="readonly"></sc-button>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5" style="text-align: right; width: 1px;">
+          <sc-button  class="btn btn-xs btn-primary" icon="glyphicon-plus" ng-disabled="readonly"></sc-button>
+          <!--btn-click="addDocFile(model.docId)"-->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-form>

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Деловодна система</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="version" content="<%= fullVersion %>">
+  <!-- inject:styles.css:css -->
+  <!-- endinject -->
+</head>
+<body id="ng-app" ng-app="app">
+
+  <noscript>
+    <h2 style="text-align: center;">Страницата не може да бъде показана, ако сте спрели изпълнението на JavaScript</h2>
+  </noscript>
+
+  <div id="root" ui-view>
+    <div id="initial-loader">
+      <h4>Моля изчакайте...</h4>
+      <i></i>
+    </div>
+  </div>
+
+  <!--[if lt IE 9]>
+  <script type="text/javascript">
+    window.IE_ANGULAR_NODE_NAMES = "sc-breadcrumb|sc-button|sc-datatable|sc-column|sc-date|sc-files|sc-navigation|sc-navigation-item|sc-nomenclature|sc-float|sc-int|sc-promise-state|" +
+    "sc-search|sc-search-button|sc-filter|sc-select|sc-tabs|sc-text|sc-textarea|sc-validation-error|ng-form|accordion|accordion-group|accordion-heading|";
+  </script>
+  <!-- inject:lib.ie8.js:js -->
+  <!-- endinject -->
+  <![endif]-->
+
+  <!--[if gte IE 9]>-->
+  <!-- inject:lib.js:js -->
+  <!-- endinject -->
+  <!--<![endif]-->
+  <!-- inject:app.js:js -->
+  <!-- endinject -->
+  <!-- inject:templates.js:js -->
+  <!-- endinject -->
+</body>
+</html>

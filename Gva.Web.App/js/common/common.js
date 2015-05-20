@@ -11,11 +11,14 @@
     'common.templates',
     // @endif
     'l10n',
-    'l10n-tools'
+    'l10n-tools',
+    'xeditable'
   ]).config(['scModalProvider', function (scModalProvider) {
       //jscs:disable disallowSpaceBeforeBinaryOperators, disallowSpacesInsideArrayBrackets, maximumLineLength
     scModalProvider
-     .modal('changePassword', 'js/common/users/modals/changePasswordModal.html', 'ChangePasswordModalCtrl', 'xsm');
+     .modal('changePassword', 'js/common/users/modals/changePasswordModal.html', 'ChangePasswordModalCtrl', 'xsm')
+    .modal('editUnitModal', 'js/ems/units/editUnitModal.html', 'EditUnitModalCtrl')
+    .modal('selectUserModal', 'js/ems/units/selectUserModal.html', 'SelectUserModalCtrl');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root'                                           , null                    , ['@'                         , 'js/common/root/views/root.html'                           , 'RootCtrl'                    ]])
@@ -37,6 +40,10 @@
       .state(['root.nomenclatures.search.org147'               , '/org147'               , ['@root.nomenclatures.search', 'js/common/nomenclatures/views/categoryNoms.html'          , 'CategoryNomsCtrl'            ]])
       .state(['root.nomenclatures.search.orgReport'            , '/orgreport'            , ['@root.nomenclatures.search', 'js/common/nomenclatures/views/categoryNoms.html'          , 'CategoryNomsCtrl'            ]])
       .state(['root.nomenclatures.search.values'               , '/:nomId/values'        , ['@root.nomenclatures.search', 'js/common/nomenclatures/views/nomenclatureValues.html'    , 'NomenclatureValuesCtrl'      ]])
-      .state(['root.nomenclatures.search.values.edit'          , '/:id'                  , ['@root.nomenclatures.search', 'js/common/nomenclatures/views/nomenclatureValuesEdit.html', 'NomenclaturevaluesEditCtrl'  ]]);
+      .state(['root.nomenclatures.search.values.edit'          , '/:id', ['@root.nomenclatures.search', 'js/common/nomenclatures/views/nomenclatureValuesEdit.html'                  , 'NomenclaturevaluesEditCtrl'  ]])      
+      .state(['root.units'                                     , '/units'                , ['@root'                        , 'js/ems/units/unitsView.html'                              , 'UnitsCtrl'                   ]])
+      .state(['root.docNomenclatures'                          , '/docNomenclatures?category', ['@root'                    , 'js/common/nomenclatures/docNomenclaturesView.html']])
+      .state(['root.docNomenclatures.docTypes'                 , '/docTypes'                 , ['@root.docNomenclatures'   , 'js/common/nomenclatures/docTypeView.html', 'DocTypeController']])
+      .state(['root.docNomenclatures.docTypeGroups'            , '/docTypeGroups'            , ['@root.docNomenclatures'   , 'js/common/nomenclatures/docTypeGroupView.html', 'DocNomenclatureGenericController']]);
   }]);
 }(angular));

@@ -12,7 +12,6 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -144,6 +143,9 @@
     <Compile Include="Data\IDbContextInitializer.cs" />
     <Compile Include="Data\IDbConfiguration.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="DomainValidation\DomainErrorException.cs" />
+    <Compile Include="DomainValidation\DomainValidator.cs" />
+    <Compile Include="DomainValidation\IDomainValidator.cs" />
     <Compile Include="Filters\ValidateAttribute .cs" />
     <Compile Include="Jobs\IJob.cs" />
     <Compile Include="Jobs\JobHost.cs" />
@@ -172,6 +174,9 @@
     <Compile Include="Linq\ExpressionParameterRebinder.cs" />
     <Compile Include="Linq\PredicateBuilder.cs" />
     <Compile Include="Linq\ExpressionExtensions.cs" />
+    <Compile Include="Utils\DomainErrorExceptionFilter.cs" />
+    <Compile Include="DomainValidation\DomainErrorMessage.cs" />
+    <Compile Include="DomainValidation\ResponseMessage.cs" />
     <Compile Include="Utils\XmlSerializerUtils.cs" />
     <Compile Include="Utils\Utf8Utils.cs" />
     <Compile Include="Utils\NLogExceptionFilter.cs" />
@@ -187,7 +192,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\msbuild\BuildCommon.targets" Condition=" '$(Configuration)' == 'Release' " />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

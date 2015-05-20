@@ -80,14 +80,14 @@ namespace Common.Api.Controllers
                 .Include(e => e.Roles)
                 .SingleOrDefault(e => e.UserId == id);
 
-            UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>()
-                .SingleOrDefault(e => e.UserId == id);
+            //UnitUser unitUser = this.unitOfWork.DbContext.Set<UnitUser>()
+            //    .SingleOrDefault(e => e.UserId == id);
 
             UserDO returnValue = new UserDO(user);
-            if (unitUser != null)
-            {
-                returnValue.UnitId = unitUser.UnitId;
-            }
+            //if (unitUser != null)
+            //{
+            //    returnValue.UnitId = unitUser.UnitId;
+            //}
 
             return Ok(returnValue);
         }
@@ -98,13 +98,13 @@ namespace Common.Api.Controllers
                 .Include(e => e.Roles)
                 .SingleOrDefault(e => e.UserId == id);
 
-            UnitUser oldUnitUser = this.unitOfWork.DbContext.Set<UnitUser>()
-                .SingleOrDefault(e => e.UserId == id);
+            //UnitUser oldUnitUser = this.unitOfWork.DbContext.Set<UnitUser>()
+            //    .SingleOrDefault(e => e.UserId == id);
 
-            if (oldUser == null)
-            {
-                return NotFound();
-            }
+            //if (oldUser == null)
+            //{
+            //    return NotFound();
+            //}
 
             oldUser.Fullname = user.Fullname;
             oldUser.CertificateThumbprint = user.CertificateThumbprint.Replace(" ", null).ToUpperInvariant();
@@ -115,20 +115,20 @@ namespace Common.Api.Controllers
             oldUser.Version = user.Version;
             oldUser.Email = user.Email;
 
-            if (oldUnitUser != null)
-            {
-                oldUnitUser.UnitId = user.UnitId.Value;
-            }
-            else
-            {
-                UnitUser unitUser = new UnitUser();
+            //if (oldUnitUser != null)
+            //{
+            //    oldUnitUser.UnitId = user.UnitId.Value;
+            //}
+            //else
+            //{
+            //    UnitUser unitUser = new UnitUser();
 
-                unitUser.UserId = oldUser.UserId;
-                unitUser.UnitId = user.UnitId.Value;
-                unitUser.IsActive = true;
+            //    unitUser.UserId = oldUser.UserId;
+            //    unitUser.UnitId = user.UnitId.Value;
+            //    unitUser.IsActive = true;
 
-                this.unitOfWork.DbContext.Set<UnitUser>().Add(unitUser);
-            }
+            //    this.unitOfWork.DbContext.Set<UnitUser>().Add(unitUser);
+            //}
 
             if (!String.IsNullOrEmpty(user.Password))
             {
@@ -155,27 +155,27 @@ namespace Common.Api.Controllers
             //
             int unitId = user.UnitId.Value;
 
-            var oldUnitClassifications = this.unitOfWork.DbContext.Set<UnitClassification>()
-                .Where(e => e.UnitId == unitId)
-                .ToList();
+            //var oldUnitClassifications = this.unitOfWork.DbContext.Set<UnitClassification>()
+            //    .Where(e => e.UnitId == unitId)
+            //    .ToList();
 
-            this.unitOfWork.DbContext.Set<UnitClassification>().RemoveRange(oldUnitClassifications);
+            //this.unitOfWork.DbContext.Set<UnitClassification>().RemoveRange(oldUnitClassifications);
 
-            List<int> roleIds = user.Roles.Select(e => e.RoleId).ToList();
+            //List<int> roleIds = user.Roles.Select(e => e.RoleId).ToList();
 
-            var roleClassifications = this.unitOfWork.DbContext.Set<RoleClassification>()
-                .Where(e => roleIds.Contains(e.RoleId))
-                .ToList();
+            //var roleClassifications = this.unitOfWork.DbContext.Set<RoleClassification>()
+            //    .Where(e => roleIds.Contains(e.RoleId))
+            //    .ToList();
 
-            foreach (var item in roleClassifications)
-            {
-                UnitClassification uc = new UnitClassification();
-                uc.UnitId = unitId;
-                uc.ClassificationId = item.ClassificationId;
-                uc.ClassificationPermissionId = item.ClassificationPermissionId;
+            //foreach (var item in roleClassifications)
+            //{
+            //    UnitClassification uc = new UnitClassification();
+            //    uc.UnitId = unitId;
+            //    uc.ClassificationId = item.ClassificationId;
+            //    uc.ClassificationPermissionId = item.ClassificationPermissionId;
 
-                this.unitOfWork.DbContext.Set<UnitClassification>().Add(uc);
-            }
+            //    this.unitOfWork.DbContext.Set<UnitClassification>().Add(uc);
+            //}
 
             this.unitOfWork.Save();
 
@@ -199,11 +199,11 @@ namespace Common.Api.Controllers
             newUser.Version = user.Version;
             newUser.Email = user.Email;
 
-            UnitUser unitUser = new UnitUser();
+            //UnitUser unitUser = new UnitUser();
 
-            unitUser.User = newUser;
-            unitUser.UnitId = user.UnitId.Value;
-            unitUser.IsActive = true;
+            //unitUser.User = newUser;
+            //unitUser.UnitId = user.UnitId.Value;
+            //unitUser.IsActive = true;
 
             newUser.SetPassword(user.Password);
 
@@ -213,54 +213,54 @@ namespace Common.Api.Controllers
             }
 
             this.unitOfWork.DbContext.Set<User>().Add(newUser);
-            this.unitOfWork.DbContext.Set<UnitUser>().Add(unitUser);
+            //this.unitOfWork.DbContext.Set<UnitUser>().Add(unitUser);
 
             this.unitOfWork.Save();
 
             //
-            int unitId = user.UnitId.Value;
+            //int unitId = user.UnitId.Value;
 
-            var oldUnitClassifications = this.unitOfWork.DbContext.Set<UnitClassification>()
-                .Where(e => e.UnitId == unitId)
-                .ToList();
+            //var oldUnitClassifications = this.unitOfWork.DbContext.Set<UnitClassification>()
+            //    .Where(e => e.UnitId == unitId)
+            //    .ToList();
 
-            this.unitOfWork.DbContext.Set<UnitClassification>().RemoveRange(oldUnitClassifications);
+            //this.unitOfWork.DbContext.Set<UnitClassification>().RemoveRange(oldUnitClassifications);
 
             List<int> roleIds = user.Roles.Select(e => e.RoleId).ToList();
 
-            var roleClassifications = this.unitOfWork.DbContext.Set<RoleClassification>()
-                .Where(e => roleIds.Contains(e.RoleId))
-                .ToList();
+            //var roleClassifications = this.unitOfWork.DbContext.Set<RoleClassification>()
+            //    .Where(e => roleIds.Contains(e.RoleId))
+            //    .ToList();
 
-            foreach (var item in roleClassifications)
-            {
-                UnitClassification uc = new UnitClassification();
-                uc.UnitId = unitId;
-                uc.ClassificationId = item.ClassificationId;
-                uc.ClassificationPermissionId = item.ClassificationPermissionId;
+            //foreach (var item in roleClassifications)
+            //{
+            //    UnitClassification uc = new UnitClassification();
+            //    uc.UnitId = unitId;
+            //    uc.ClassificationId = item.ClassificationId;
+            //    uc.ClassificationPermissionId = item.ClassificationPermissionId;
 
-                this.unitOfWork.DbContext.Set<UnitClassification>().Add(uc);
-            }
+            //    this.unitOfWork.DbContext.Set<UnitClassification>().Add(uc);
+            //}
 
             this.unitOfWork.Save();
 
-            this.userRepository.spSetUnitTokens(unitId);
+            //this.userRepository.spSetUnitTokens(unitId);
 
             return Ok();
         }
 
-        [HttpGet]
-        public IHttpActionResult CheckDuplicateUnit(int unitId, int? userId = null)
-        {
-            bool result = userId.HasValue ?
-                this.unitOfWork.DbContext.Set<UnitUser>().Any(e => e.UnitId == unitId && e.UserId != userId.Value) :
-                this.unitOfWork.DbContext.Set<UnitUser>().Any(e => e.UnitId == unitId);
+        //[HttpGet]
+        //public IHttpActionResult CheckDuplicateUnit(int unitId, int? userId = null)
+        //{
+        //    bool result = userId.HasValue ?
+        //        this.unitOfWork.DbContext.Set<UnitUser>().Any(e => e.UnitId == unitId && e.UserId != userId.Value) :
+        //        this.unitOfWork.DbContext.Set<UnitUser>().Any(e => e.UnitId == unitId);
 
-            return Ok(new
-            {
-                result = result
-            });
-        }
+        //    return Ok(new
+        //    {
+        //        result = result
+        //    });
+        //}
 
         public IHttpActionResult GetRoles()
         {

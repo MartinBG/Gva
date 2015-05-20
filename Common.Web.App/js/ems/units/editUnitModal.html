@@ -1,0 +1,109 @@
+<ng-form name="form.unitForm" sc-validate="{}">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong l10n-text="common.units.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn"
+                   btn-click="save()"
+                   text="commonLabels.save"
+                   class="btn btn-primary btn-xs"
+                   icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn"
+                   btn-click="cancel()"
+                   text="commonLabels.cancel"
+                   class="btn btn-default btn-xs"
+                   icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+
+      <div class="row">
+
+        <div class="form-group col-sm-4" sc-has-error="unitName">
+          <label class="control-label" l10n-text="commonLabels.name"></label>
+          <sc-validation-error field-name="unitName"
+                               validations="{required: 'default'}"></sc-validation-error>
+          <sc-text name="unitName"
+                   ng-model="model.name"                   
+                   required></sc-text>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label class="control-label" l10n-text="commonLabels.type"></label>
+          <sc-dropdown-simple class="form-control input-sm"
+                              items-source="unitTypes"
+                              is-disabled="isEditMode"
+                              selected-item="selectedItem"
+                              selected-value="model.type"
+                              item-value-field="value"
+                              item-text-field="name"></sc-dropdown-simple>
+        </div>
+      </div>
+
+      <div style="max-height: 350px; overflow: auto;" sc-has-error="tst">
+        <sc-validation-error field-name="tst"
+                             validations="{testValidate: 'Greshka be'}"></sc-validation-error>
+        <table class="table table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th style="width: 200px;" l10n-text="common.units.edit.classification"></th>
+              <th style="width: 200px;" l10n-text="common.units.edit.classificationPermissions"></th>
+              <th style="width: 20px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="permission in model.classifications"
+                ng-form
+                sc-form-name="{ local: 'form', parent: 's' + $index }"
+                sc-validate="{testValidate: validatePermissionsNotRepeated}"
+                name="tst">
+
+              <td style="width: 200px;" sc-has-error="classificationField">
+                <sc-nomenclature name="classificationField"
+                                 ng-model="permission.classificationId"
+                                 nom-obj="permission.classification"
+                                 mode="id"
+                                 alias="'classification'"
+                                 ng-required="true"></sc-nomenclature>
+              </td>
+
+              <td style="width: 200px;" sc-has-error="permissionField">
+                <sc-nomenclature name="permissionField"
+                                 ng-model="permission.classificationPermissionId"
+                                 nom-obj="permission.classificationPermission"
+                                 mode="id"
+                                 alias="'classificationPermission'"
+                                 ng-required="true"></sc-nomenclature>
+              </td>
+
+              <td class="text-center" style="width: 20px;">
+                <sc-button class="btn btn-xs btn-primary"
+                           icon="glyphicon-remove"
+                           ng-disabled="readonly"
+                           btn-click="removeClassification(permission)"></sc-button>
+              </td>
+
+            </tr>
+
+            <tr>
+              <td colspan="3" style="text-align: right; width: 1px;">
+                <sc-button btn-click="addClassification()"
+                           class="btn btn-xs btn-primary"
+                           icon="glyphicon-plus"
+                           ng-disabled="readonly"></sc-button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!--<pre>{{model}}</pre>-->
+    </div>
+
+  </div>
+</ng-form>

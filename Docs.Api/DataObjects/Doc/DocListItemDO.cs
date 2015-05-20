@@ -1,5 +1,5 @@
-﻿using Common.Api.Models;
-using Docs.Api.Models;
+﻿using Docs.Api.Models;
+using Docs.Api.Models.UnitModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace Docs.Api.DataObjects
             this.ResolutionDocRelations = new List<DocRelationDO>();
         }
 
-        public DocListItemDO(Doc d, UnitUser unitUser = null)
+        public DocListItemDO(Docs.Api.Models.Doc d, UnitUser unitUser = null)
             : this()
         {
             if (d != null)

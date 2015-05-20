@@ -1,9 +1,9 @@
---•Select the database for which you want to generate document. 
---•Select Result to File (Ctrl+Shift+F) from Query - Results To menu. 
---•Execute (F5) the script.
---•In the Save Result dialogue box, type a file name (db.md) in the File Name text box and select All Files (*.*) in Save As Type dropdown. 
---•install pandoc from http://johnmacfarlane.net/pandoc/installing.html#windows
---•run >pandoc -s -S db.md -o db.docx
+п»ї--вЂўSelect the database for which you want to generate document. 
+--вЂўSelect Result to File (Ctrl+Shift+F) from Query - Results To menu. 
+--вЂўExecute (F5) the script.
+--вЂўIn the Save Result dialogue box, type a file name (db.md) in the File Name text box and select All Files (*.*) in Save As Type dropdown. 
+--вЂўinstall pandoc from http://johnmacfarlane.net/pandoc/installing.html#windows
+--вЂўrun >pandoc -s -S db.md -o db.docx
 
 --//SQL Database documentation script
 --//Author: Nitin Patel, Email: nitinpatel31@gmail.com
@@ -66,10 +66,10 @@ set @i = 1
 
 --
 
-print '# Спецификация на таблиците  '
+print '# РЎРїРµС†РёС„РёРєР°С†РёСЏ РЅР° С‚Р°Р±Р»РёС†РёС‚Рµ  '
 print '    '
 /*
-print '## Списък с таблици '
+print '## РЎРїРёСЃСЉРє СЃ С‚Р°Р±Р»РёС†Рё '
 print '  '
 print '+-----+--------+------+  ' 
 print '| Sr  | Object | Type |  ' 
@@ -90,12 +90,12 @@ set @i = 1
 While(@i <= @maxi)
 begin
 	--table header
-	select @Output =  '## ' + case when Type = 'Table' then 'Таблица' else 'Обект' end + ' `' + name + '` ',  @description = [description]
+	select @Output =  '## ' + case when Type = 'Table' then 'РўР°Р±Р»РёС†Р°' else 'РћР±РµРєС‚' end + ' `' + name + '` ',  @description = [description]
 			from #Tables where id = @i
 	
 	print @Output
 	print '    '
-	print '**Описание**'
+	print '**РћРїРёСЃР°РЅРёРµ**'
 	print '    '
 	print isnull(@description, '') + '  '
 	print '    ' 	
@@ -150,9 +150,9 @@ begin
 	Set @maxj =   @@rowcount
 	set @j = 1
 
-	print '**Колони**'
+	print '**РљРѕР»РѕРЅРё**'
 	print '    '
-	print '| **&nbsp;№&nbsp;** | **Наименование** | **Тип на данните** | **Null** | **Описание** |  ' 
+	print '| **&nbsp;в„–&nbsp;** | **РќР°РёРјРµРЅРѕРІР°РЅРёРµ** | **РўРёРї РЅР° РґР°РЅРЅРёС‚Рµ** | **Null** | **РћРїРёСЃР°РЅРёРµ** |  ' 
 	print '|------:|:-------------|:---------------|:----:|------------------------------------------|  ' 	
 	
 	While(@j <= @maxj)
@@ -201,9 +201,9 @@ begin
 	if (@maxj >0)
 	begin
 
-		print '**Референтни връзки**  '
+		print '**Р РµС„РµСЂРµРЅС‚РЅРё РІСЂСЉР·РєРё**  '
 		print '    '
-		print '| **&nbsp;№&nbsp;** | **Наименование** | **Колони** | **Реферира към** |  ' 
+		print '| **&nbsp;в„–&nbsp;** | **РќР°РёРјРµРЅРѕРІР°РЅРёРµ** | **РљРѕР»РѕРЅРё** | **Р РµС„РµСЂРёСЂР° РєСЉРј** |  ' 
 		print '|--:|:-------------|:-------|:-------------|  ' 
 
 		While(@j <= @maxj)
@@ -254,10 +254,10 @@ begin
 	if (@maxj >0)
 	begin
 
-		print '**Конструкции за стойности по подразбиране**  '
+		print '**РљРѕРЅСЃС‚СЂСѓРєС†РёРё Р·Р° СЃС‚РѕР№РЅРѕСЃС‚Рё РїРѕ РїРѕРґСЂР°Р·Р±РёСЂР°РЅРµ**  '
 		print '    '
 
-		print '| **&nbsp;№&nbsp;** | **Наименование** | **Колони** | **Стойност** |  ' 
+		print '| **&nbsp;в„–&nbsp;** | **РќР°РёРјРµРЅРѕРІР°РЅРёРµ** | **РљРѕР»РѕРЅРё** | **РЎС‚РѕР№РЅРѕСЃС‚** |  ' 
 		print '|--:|:-------------|:-------|:---------|  ' 
 
 		While(@j <= @maxj)
@@ -319,10 +319,10 @@ begin
 	if (@maxj >0)
 	begin
 
-		print '**Конструкции за проверка**  '
+		print '**РљРѕРЅСЃС‚СЂСѓРєС†РёРё Р·Р° РїСЂРѕРІРµСЂРєР°**  '
 		print '    '
 		
-		print '| **&nbsp;№&nbsp;** | **Наименование** | **Колони** | **Дефиниция** |  ' 
+		print '| **&nbsp;в„–&nbsp;** | **РќР°РёРјРµРЅРѕРІР°РЅРёРµ** | **РљРѕР»РѕРЅРё** | **Р”РµС„РёРЅРёС†РёСЏ** |  ' 
 		print '|--:|:-------------|:-------|:----------|  ' 
 
 		While(@j <= @maxj)
@@ -365,10 +365,10 @@ begin
 	if (@maxj >0)
 	begin
 
-		print '**Тригери**  '
+		print '**РўСЂРёРіРµСЂРё**  '
 		print '    '
 
-		print '| **&nbsp;№&nbsp;** | **Наименование** | **Описание** |  ' 
+		print '| **&nbsp;в„–&nbsp;** | **РќР°РёРјРµРЅРѕРІР°РЅРёРµ** | **РћРїРёСЃР°РЅРёРµ** |  ' 
 		print '|--:|:-------------|:---------|  ' 
 
 		While(@j <= @maxj)
@@ -415,10 +415,10 @@ begin
 	if (@maxj >0)
 	begin
 
-		print '**Индекси**  '
+		print '**РРЅРґРµРєСЃРё**  '
 		print '    '
 
-		print '| **&nbsp;№&nbsp;** | **Наименование** | **Тип** | **Колони** |  ' 
+		print '| **&nbsp;в„–&nbsp;** | **РќР°РёРјРµРЅРѕРІР°РЅРёРµ** | **РўРёРї** | **РљРѕР»РѕРЅРё** |  ' 
 		print '|--:|:-------------|:----|:-------|  ' 
 
 		set @Output = ''

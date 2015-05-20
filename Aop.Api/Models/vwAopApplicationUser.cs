@@ -1,4 +1,4 @@
-using Common.Api.Models;
+using Docs.Api.Models.ClassificationModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

@@ -87,7 +87,9 @@
           admin: {
             title: 'Админ',
             users: 'Потребители',
-            nomenclatures: 'Номенклатури'
+            nomenclatures: 'Номенклатури',
+            units: 'Организационна структура',
+            docNomenclatures: 'Номенклатури деловодна'
           },
           help: {
             title: 'Помощ',
@@ -219,7 +221,52 @@
           wrongPassword: 'Грешна парола',
           save: 'Запис',
           cancel: 'Отказ'
+        },
+        units: {
+          title: 'Организационна единица',
+          filter: 'Филтър',
+          refresh: 'Презареди',
+          includeInactive: 'Включи неактивните',
+          editUnitTooltip: 'Промяна на организационна единица',
+          activateUnitTooltip: 'Активиране на организационна единица',
+          deactivateUnitTooltip: 'Деактивиране на организационна единица',
+          deleteUnitTooltip: 'Премахване на организационна единица',
+          addChildUnitTooltip: 'Добавяне на организационна единица',
+          attachUnitToUserTooltip: 'Прикачане на организационна единица към потребител',
+          detachUnitFromUserTooltip:
+            'Премахване на връзката между организационна единица и потребител',
+          errors: {
+            Unit_CannotBeDeleted_ExistingRelation:
+              'Oрганизационната единица не може да бъде изтрита, поради връзки с други обекти',
+            Entity_CannotBeDeactivated: 'Oрганизационната единица не може да бъде деактивирана',
+            Entity_CannotBeActivated: 'Oрганизационната единица не може да бъде активирана'
+          },
+          edit: {
+            classification: 'Класификация',
+            classificationPermissions: 'Права'
+          },
+          users: {
+            title: 'Избери потребител',
+            userName: 'Потребителско име',
+            fullName: 'Име'
+          }
+        },
+        docNomenclatures: {
+          docType: 'Видове документи',
+          docTypeGroup: 'Групи видове документи',
+          removeIrregularityDeadline: 'Време за отстраняване на нередности',
+          executionDeadline: 'Време за изпълнение',
+          register: 'Регистър'
         }
+      },
+      commonLabels: {
+        save: 'Запази',
+        cancel: 'Откажи',
+        type: 'Тип',
+        name: 'Име',
+        active: 'Активен',
+        edit: 'Редактирай',
+        add: 'Добави'
       },
       states: {
         'root.users': 'Потребители',
@@ -239,8 +286,12 @@
         'root.nomenclatures.search.equipments': 'Номенклатури за Съоръжения	',
         'root.nomenclatures.search.orgCommon': 'Общи номенклатури за организации',
         'root.nomenclatures.search.org145mf': '145/MF',
-        'root.nomenclatures.search.org147': '147', 
-        'root.nomenclatures.search.orgReport': 'Доклади'
+        'root.nomenclatures.search.org147': '147',
+        'root.nomenclatures.search.orgReport': 'Доклади',
+        'root.units': 'Организационна структура',
+        'root.docNomenclatures': 'Номенклатури деловодна',
+        'root.docNomenclatures.docTypes': 'Видове документи',
+        'root.docNomenclatures.docTypeGroups': 'Групи видове документи'
       }
     });
   }]);

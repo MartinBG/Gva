@@ -6,6 +6,7 @@ using Common.Blob;
 using Common.Utils;
 using Common.WordTemplates;
 using Docs.Api.Models;
+using Docs.Api.Models.UnitModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;

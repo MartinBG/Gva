@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
+using Docs.Api.Models.UnitModels;
 
 namespace Docs.Api.Models
 {
@@ -22,7 +23,7 @@ namespace Docs.Api.Models
 
         public virtual Doc Doc { get; set; }
 
-        public virtual Common.Api.Models.Unit Unit { get; set; }
+        public virtual Unit Unit { get; set; }
 
         public virtual Common.Api.Models.User User { get; set; }
     }

@@ -31,6 +31,8 @@ using Gva.Api.Repositories.PersonRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
+using Docs.Api.Models.ClassificationModels;
+using Docs.Api.Models.UnitModels;
 
 namespace Gva.Api.Controllers.Applications
 {

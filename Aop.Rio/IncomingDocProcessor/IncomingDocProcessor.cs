@@ -26,6 +26,7 @@ using Rio.Data.DataObjects;
 using Rio.Objects.Enums;
 using Rio.Objects;
 using System.Text.RegularExpressions;
+using Docs.Api.Models.UnitModels;
 
 namespace Aop.Rio.IncomingDocProcessor
 {

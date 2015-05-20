@@ -1,5 +1,7 @@
 ﻿using System.Data.Entity;
 using Common.Data;
+using Docs.Api.Models.UnitModels;
+using Docs.Api.Models.ClassificationModels;
 
 namespace Docs.Api.Models
 {
@@ -62,6 +64,18 @@ namespace Docs.Api.Models
             modelBuilder.Configurations.Add(new RegisterIndexMap());
             modelBuilder.Configurations.Add(new TicketMap());
             modelBuilder.Configurations.Add(new vwDocUserMap());
+
+            modelBuilder.Configurations.Add(new UnitClassificationMap());
+            modelBuilder.Configurations.Add(new UnitRelationMap());
+            modelBuilder.Configurations.Add(new UnitMap());
+            modelBuilder.Configurations.Add(new UnitTokenMap());
+            modelBuilder.Configurations.Add(new UnitTypeMap());
+            modelBuilder.Configurations.Add(new UnitUserMap());
+
+            modelBuilder.Configurations.Add(new ClassificationMap());
+            modelBuilder.Configurations.Add(new ClassificationRelationMap());
+            modelBuilder.Configurations.Add(new ClassificationPermissionMap());           
+            modelBuilder.Configurations.Add(new RoleClassificationMap());
         }
     }
 }

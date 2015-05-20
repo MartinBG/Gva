@@ -1,3 +1,4 @@
+using Docs.Api.Models.UnitModels;
 using System;
 using System.Data.Entity.ModelConfiguration;
 
@@ -29,11 +30,11 @@ namespace Docs.Api.Models
 
         public virtual DocWorkflowAction DocWorkflowAction { get; set; }
 
-        public virtual Common.Api.Models.Unit ToUnit { get; set; }
+        public virtual Unit ToUnit { get; set; }
 
-        public virtual Common.Api.Models.Unit PrincipalUnit { get; set; }
+        public virtual Unit PrincipalUnit { get; set; }
 
-        public virtual Common.Api.Models.UnitUser UnitUser { get; set; }
+        public virtual UnitUser UnitUser { get; set; }
     }
 
     public class DocWorkflowMap : EntityTypeConfiguration<DocWorkflow>

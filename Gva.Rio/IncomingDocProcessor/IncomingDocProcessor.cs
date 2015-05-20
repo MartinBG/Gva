@@ -31,6 +31,7 @@ using System.Reflection;
 using Rio.Data.Abbcdn;
 using System.Text.RegularExpressions;
 using Docs.Api.Repositories.EmailRepository;
+using Docs.Api.Models.UnitModels;
 
 namespace Gva.Rio.IncomingDocProcessor
 {

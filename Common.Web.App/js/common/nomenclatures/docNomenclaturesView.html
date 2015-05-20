@@ -1,0 +1,19 @@
+<sc-tabs tab-list="{
+    'common.docNomenclatures.docType' : {
+      state: 'root.docNomenclatures.docTypes',
+      stateParams: {
+        category: 'docTypes'
+      }
+    },
+    'common.docNomenclatures.docTypeGroup' : {
+      state: 'root.docNomenclatures.docTypeGroups',
+      stateParams: {
+        category: 'docTypeGroups'
+      }
+    },
+  }"></sc-tabs>
+
+<div class="tab-content">
+  <div ui-view></div>
+  <div class="clear"></div>
+</div>

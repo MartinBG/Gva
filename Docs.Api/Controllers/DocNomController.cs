@@ -2,6 +2,8 @@
 using Common.Extensions;
 using Common.Linq;
 using Docs.Api.Models;
+using Docs.Api.Models.ClassificationModels;
+using Docs.Api.Models.UnitModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -310,6 +312,47 @@ namespace Docs.Api.Controllers
             return Ok(results);
         }
 
+        [Route("classificationPermission/{id:int}")]
+        public IHttpActionResult GetClassificationPermission(int id)
+        {
+            var result = this.unitOfWork.DbContext.Set<ClassificationPermission>()
+                .Where(e => e.ClassificationPermissionId == id)
+                .SingleOrDefault();
+
+            return Ok(new
+            {
+                nomValueId = result.ClassificationPermissionId,
+                name = result.Name,
+                alias = result.Alias,
+                isActive = result.IsActive
+            });
+        }
+
+        [Route("classificationPermission")]
+        public IHttpActionResult GetClassificationPermissions(string term = null, int offset = 0, int? limit = null)
+        {
+            var predicate =
+                PredicateBuilder.True<ClassificationPermission>()
+                .AndStringContains(e => e.Name, term)
+                .And(e => e.IsActive);
+
+            var results =
+                this.unitOfWork.DbContext.Set<ClassificationPermission>()
+                .Where(predicate)
+                .OrderBy(e => e.ClassificationPermissionId)
+                .WithOffsetAndLimit(offset, limit)
+                .Select(e => new
+                {
+                    nomValueId = e.ClassificationPermissionId,
+                    name = e.Name,
+                    alias = e.Alias,
+                    isActive = e.IsActive
+                })
+                .ToList();
+
+            return Ok(results);
+        }
+
         [Route("docTypeGroup/{id:int}")]
         public IHttpActionResult GetDocTypeGroup(int id)
         {
@@ -343,12 +386,42 @@ namespace Docs.Api.Controllers
                 {
                     nomValueId = e.DocTypeGroupId,
                     name = e.Name,
-                    alias = e.Name, //todo is doctypegroup going to have alias?
                     isActive = e.IsActive
                 })
                 .ToList();
 
             return Ok(results);
+        }
+
+        [Route("docTypeGroup")]
+        [HttpPost]
+        public IHttpActionResult PostDocTypeGroup(DocTypeGroup model)
+        {
+            // Electronic Services can't be edited from the UI.
+            model.IsElectronicService = false;
+
+            unitOfWork.DbContext.Set<DocTypeGroup>()
+                .Add(model);
+
+            unitOfWork.Save();
+
+            return Ok();
+        }
+
+        [Route("docTypeGroup/{id:int}")]
+        [HttpPost]
+        public IHttpActionResult PostDocTypeGroup(int id, DocTypeGroup model)
+        {
+            var context = unitOfWork.DbContext.Set<DocTypeGroup>();
+            var entitiy = context.SingleOrDefault(e=>
+                e.DocTypeGroupId == id);
+
+            entitiy.Name = model.Name;
+            entitiy.IsActive = model.IsActive;
+
+            unitOfWork.Save();
+
+            return Ok();
         }
 
         [Route("docType/{id:int}")]
@@ -391,6 +464,21 @@ namespace Docs.Api.Controllers
                 .ToList();
 
             return Ok(results);
+        }
+
+        [Route("docType")]
+        [HttpPost]
+        public IHttpActionResult PostDocType(DocType model)
+        {
+            // Electronic Services can't be edited from the UI.
+            model.IsElectronicService = false;
+
+            unitOfWork.DbContext.Set<DocType>()
+                .Add(model);
+
+            unitOfWork.Save();
+
+            return Ok();
         }
 
         [Route("docStatus/{id:int}")]

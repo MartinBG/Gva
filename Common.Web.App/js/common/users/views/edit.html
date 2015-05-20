@@ -4,8 +4,8 @@
       <label class="control-label col-sm-3" l10n-text="common.users.edit.username"></label>
       <div class="col-sm-4">
         <sc-text name="username"
-          required ng-pattern="/^[а-яА-Яa-zA-Z0-9_\.]{5,}$/"
-          ng-model="user.username" ng-disabled="isEdit">
+                 required ng-pattern="/^[а-яА-Яa-zA-Z0-9_\.]{5,}$/"
+                 ng-model="user.username" ng-disabled="isEdit">
         </sc-text>
         <span id="usernameInvalid" class="help-block" ng-show="saveClicked && userForm.username.$invalid" l10n-text="common.users.edit.usernameInvalid"></span>
         <span id="usernameExists" class="help-block" ng-show="userExists" l10n-text="common.users.edit.usernameExists"></span>
@@ -43,7 +43,9 @@
         <sc-textarea rows="3" class="form-control" ng-model="user.notes"></sc-textarea>
       </div>
     </div>
-    <!--<div class="form-group">
+
+    <!--Select different ways of authentication: userName&Password, certificate
+      <div class="form-group">
       <label class="control-label col-sm-3" l10n-text="common.users.edit.entrance"></label>
       <div class="col-sm-4">
         <div class="checkbox">
@@ -56,8 +58,9 @@
         </div>
       </div>
     </div>-->
+
     <div class="form-group" ng-class="{'has-error': saveClicked && userForm.password.$invalid}"
-      ng-show="setPassword">
+         ng-show="setPassword">
       <label class="control-label col-sm-3" l10n-text="common.users.edit.password"></label>
       <div class="col-sm-4">
         <input type="password" name="password" class="input-sm form-control" ng-required="setPassword && !isEdit" ng-minlength="8" ng-model="password" />
@@ -65,7 +68,7 @@
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': saveClicked && (password !== confirmPassword)}"
-      ng-show="setPassword">
+         ng-show="setPassword">
       <label class="control-label col-sm-3" l10n-text="common.users.edit.repeatPass"></label>
       <div class="col-sm-4">
         <input type="password" name="confirmPassword" class="input-sm form-control" ng-model="confirmPassword">
@@ -73,7 +76,7 @@
       </div>
     </div>
     <div class="form-group" ng-class="{'has-error': saveClicked && userForm.certificate.$invalid}"
-      ng-show="setCertificate">
+         ng-show="setCertificate">
       <label class="control-label col-sm-3" l10n-text="common.users.edit.certificate"></label>
       <div class="col-sm-4">
         <sc-text name="certificate" ng-required="setCertificate" ng-model="certificate"></sc-text>
@@ -81,6 +84,7 @@
       </div>
     </div>
 
+    <!--Select Unit functionality is moved elsewhere, because User is decoupled from Unit
     <div class="form-group" ng-class="{'has-error': saveClicked && (unitExists || userForm.unitId.$invalid)}">
       <label class="control-label col-sm-3" l10n-text="common.users.edit.unit"></label>
       <div class="col-sm-4">
@@ -88,7 +92,7 @@
         <span id="unitIdInvalid" class="help-block" ng-show="saveClicked && userForm.unitId.$invalid" l10n-text="common.users.edit.inputUnit"></span>
         <span id="unitExists" class="help-block" ng-show="unitExists" l10n-text="common.users.edit.unitExists"></span>
       </div>
-    </div>
+    </div>-->
 
     <div class="form-group">
       <label class="control-label col-sm-3" l10n-text="common.users.edit.roles"></label>

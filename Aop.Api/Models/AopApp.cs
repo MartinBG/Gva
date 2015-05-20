@@ -1,6 +1,7 @@
 using Aop.Api.Models;
 using Common.Api.Models;
 using Docs.Api.Models;
+using Docs.Api.Models.UnitModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
@@ -66,7 +67,7 @@ namespace Aop.Api.Models
         public virtual Doc NDDoc { get; set; }
         public virtual Doc NDChecklist { get; set; }
         public virtual Doc NDReport { get; set; }
-        public virtual Common.Api.Models.Unit CreateUnit { get; set; }
+        public virtual Unit CreateUnit { get; set; }
 
         public virtual ICollection<vwAopApplicationUser> vwAopApplicationUsers { get; set; }
 
