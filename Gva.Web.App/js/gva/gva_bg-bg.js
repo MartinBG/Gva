@@ -2473,7 +2473,7 @@
         editRatingEdition: {
           editionForm: 'Редакция на вписване',
           editions: 'Вписвания',
-          ratingTypeOrRatingLevel: 'Тип ВС/Степен',
+          ratingTypeOrRatingLevel: 'Тип ВС/Степен <br>(раб.място)',
           classOrCategory: 'Клас/Подклас (Категория)',
           authorizationAndLimitations: 'Разрешение <br>(ограничения)',
           firstEditionValidFrom: 'Първоначално издаване',
