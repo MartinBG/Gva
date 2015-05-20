@@ -47,7 +47,7 @@
 
     <div class="row" ng-show="model.resolutionUnitsInCharge.length">
       <div class="col-md-12">
-          <div ng-repeat="ru in model.resolutionUnitsInCharge">
+          <div ng-repeat="ru in model.resolutionUnitsInCharge track by $index">
             <i class="glyphicon glyphicon-share-alt"></i>
             <strong>Резюлирано към:</strong>
             <span>{{ru}}</span>
