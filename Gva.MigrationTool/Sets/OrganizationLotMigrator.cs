@@ -124,8 +124,7 @@ namespace Gva.MigrationTool.Sets
 
                             applications.Add(
                                 organizationDocumentApplication.Get<int>("part.__oldId"),
-                                    Tuple.Create(
-                                        application, applicationNom));
+                                    Tuple.Create(application, applicationNom));
                         }
 
                         unitOfWork.Save();

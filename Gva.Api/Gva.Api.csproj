@@ -504,6 +504,7 @@
     <Compile Include="WordTemplates\InstructorCert.cs" />
     <Compile Include="WordTemplates\ExaminerCert.cs" />
     <Compile Include="WordTemplates\DeregCert.cs" />
+    <Compile Include="WordTemplates\SAtcl1Licence.cs" />
     <Compile Include="WordTemplates\RadioCert.cs" />
     <Compile Include="WordTemplates\RegistrationCert.cs" />
     <Compile Include="WordTemplates\NoiseCert.cs" />

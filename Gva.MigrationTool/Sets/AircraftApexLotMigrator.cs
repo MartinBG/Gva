@@ -127,8 +127,7 @@ namespace Gva.MigrationTool.Sets
 
                             applications.Add(
                                 aircraftDocumentApplication.Get<int>("part.__oldId"),
-                                    Tuple.Create(
-                                        application, applicationNom));
+                                    Tuple.Create(application, applicationNom));
                         }
 
                         unitOfWork.Save();

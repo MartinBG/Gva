@@ -12,7 +12,7 @@ using Common.Api.Models;
 
 namespace Gva.Api.WordTemplates
 {
-    public class Atcl1Licence : IDataGenerator
+    public class SAtcl1Licence : IDataGenerator
     {
         private ILotRepository lotRepository;
         private INomRepository nomRepository;
@@ -20,7 +20,7 @@ namespace Gva.Api.WordTemplates
         private ICaseTypeRepository caseTypeRepository;
         private int number;
 
-        public Atcl1Licence(
+        public SAtcl1Licence(
             ILotRepository lotRepository,
             INomRepository nomRepository,
             IFileRepository fileRepository,
@@ -37,7 +37,7 @@ namespace Gva.Api.WordTemplates
         {
             get
             {
-                return "atcl";
+                return "studentController";
             }
         }
 
@@ -45,7 +45,7 @@ namespace Gva.Api.WordTemplates
         {
             get
             {
-                return "Atcl за ръководител полети";
+                return "SAtcl за ученик ръководител полети";
             }
         }
 
@@ -83,7 +83,7 @@ namespace Gva.Api.WordTemplates
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.LicenceType.NomValueId);
             var licenceNumber = string.Format(
-                "BGR - ATCO - {0} - {1} ATCO licence",
+                "BGR - SATCO - {0} - {1} Student ATCO licence",
                 Utils.PadLicenceNumber(licence.LicenceNumber),
                 personData.Lin);
             var placeOfBirth = personData.PlaceOfBirth;
@@ -103,7 +103,7 @@ namespace Gva.Api.WordTemplates
             var langLevel = Utils.FillBlankData(Utils.GetLangCerts(includedLangCerts), 1);
             var langCertsInLEndorsments = this.GetLangCertsForEndosement(includedLangCerts);
             var lEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, false);
-            var tEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, true);
+             var tEndorsements = this.GetEndorsements2(includedRatings, ratingEditions, true);
             var endorsementsAndOtherEndorsements = this.GetEndorsements(includedRatings, ratingEditions);
 
             var json = new
@@ -162,6 +162,8 @@ namespace Gva.Api.WordTemplates
                     L_ENDORSEMENT = Utils.FillBlankData(endorsementsAndOtherEndorsements.Item2, 4),
                     T_ENDORSEMENT = Utils.FillBlankData(tEndorsements, 9)
                 }
+
+
             };
 
             return json;
@@ -323,16 +325,13 @@ namespace Gva.Api.WordTemplates
                 {
                     result = new
                     {
-                        ICAO = rating.Content.LocationIndicator == null ? null : rating.Content.LocationIndicator.Code,
-                        SECTOR = sector,
                         AUTH = string.IsNullOrEmpty(ratingClass) && string.IsNullOrEmpty(ratingTypes) ?
                             authorization :
                             string.Format(
                                 "{0} {1} {2}",
                                 ratingTypes,
                                 ratingClass,
-                                string.IsNullOrEmpty(authorization) ? string.Empty : " - " + authorization).Trim(),
-                        VALID_DATE = edition.Content.DocumentDateValidTo
+                                string.IsNullOrEmpty(authorization) ? string.Empty : " - " + authorization).Trim()
                     };
                 }
 
