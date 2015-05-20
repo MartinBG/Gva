@@ -1,5 +1,5 @@
 <sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.flyingExperiences.new' }" text="persons.flyingExperienceSearch.newFlyingExperience" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="flyingExperiences" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.ratingTypes && part.ratingTypes.length > 0 ? (part.ratingTypes | pluck:'code' | join:', ') : (part.locationIndicator ? part.locationIndicator.code : '')  + ' ' + (part.sector ? part.sector : '')">
+<sc-datatable items="flyingExperiences" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDate">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.persons.view.flyingExperiences.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
@@ -37,7 +37,7 @@
   </sc-column>
   <sc-column data="part.nightLandings" title="persons.flyingExperienceSearch.nightLandings" visible="false">
   </sc-column>
-  <sc-column data="part.organization.name" title="persons.flyingExperienceSearch.organization">
+  <sc-column data="part.organization.name" title="persons.flyingExperienceSearch.organization" visible="false">
   </sc-column>
   <sc-column sortable="false" title="persons.flyingExperienceSearch.file" has-content="true">
     <a target="_blank" ng-href="api/file?fileKey={{item.case.file.key}}&fileName={{item.case.file.name}}&mimeType={{item.case.file.mimeType}}" sc-access-token ng-show="item.case.file" title="{{item.case.file.name}}">
