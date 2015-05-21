@@ -32,7 +32,12 @@
             stampedDocuments: 'Лицензи за получаване',
             examinationSystem: 'Изпитна система',
             'export': 'Експорт XML',
-            reports: 'Справки'
+            reports: { 
+              title: 'Справки',
+              documents: 'Документи',
+              ratings: 'Квал.класове',
+              licences: 'Лицензи'
+            }
           },
           aircrafts: {
             title: 'ВС',

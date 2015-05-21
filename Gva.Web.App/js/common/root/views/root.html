@@ -15,7 +15,11 @@
     <sc-navigation-item state="root.stampedDocuments" text="common.navigation.persons.stampedDocuments"></sc-navigation-item>
     <sc-navigation-item state="root.examinationSystem" text="common.navigation.persons.examinationSystem"></sc-navigation-item>
     <sc-navigation-item state="root.export" text="common.navigation.persons.export"></sc-navigation-item>
-    <sc-navigation-item state="root.personsReports.documents" text="common.navigation.persons.reports"></sc-navigation-item>
+    <sc-navigation-item  text="common.navigation.persons.reports.title" is-submenu="true">
+      <sc-navigation-item state="root.personsReports.documents" text="common.navigation.persons.reports.documents"></sc-navigation-item>
+      <sc-navigation-item state="root.personsReports.ratings" text="common.navigation.persons.reports.ratings"></sc-navigation-item>
+      <sc-navigation-item state="root.personsReports.licences" text="common.navigation.persons.reports.licences"></sc-navigation-item>
+    </sc-navigation-item>
   </sc-navigation-item>
   <sc-navigation-item text="common.navigation.aircrafts.title" icon="glyphicon glyphicon-plane" parent="true">
     <sc-navigation-item state="root.aircrafts.registrations" text="common.navigation.aircrafts.registrations"></sc-navigation-item>

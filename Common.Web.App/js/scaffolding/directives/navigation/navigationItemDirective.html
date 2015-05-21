@@ -1,4 +1,4 @@
-<li ng-class="{'active': item.active }">
+<li ng-class="{'active': item.active, 'dropdown-submenu': item.isSubmenu }">
   <a ng-if="item.url" ng-href="{{ item.url }}" target="{{ item.newTab && '_blank' || '_self' }}">
     <span ng-if="item.icon" ng-class="item.icon"></span>
     <span>{{ item.text }}</span>
@@ -13,6 +13,11 @@
     <span ng-show="item.icon" ng-class="item.icon"></span>
     <span>{{ item.text }}</span>
     <b class="caret"></b>
+  </a>
+
+  <a ng-if="!item.state && item.isSubmenu">
+    <span ng-show="item.icon" ng-class="item.icon"></span>
+    <span>{{ item.text }}</span>
   </a>
 
   <ul class="dropdown-menu" ng-transclude></ul>

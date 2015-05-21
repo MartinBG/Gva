@@ -19,7 +19,8 @@
         parent: '@',
         url: '@',
         newTab: '@',
-        params: '&'
+        params: '&',
+        isSubmenu: '@'
       },
       templateUrl: 'js/scaffolding/directives/navigation/navigationItemDirective.html',
       controller: ['$scope', function NavigationItemCtrl($scope) {
@@ -30,7 +31,8 @@
           icon: $scope.icon,
           text: l10n.get($scope.text),
           url: $scope.url,
-          newTab: $scope.newTab
+          newTab: $scope.newTab,
+          isSubmenu: $scope.isSubmenu
         };
       }]
     };
