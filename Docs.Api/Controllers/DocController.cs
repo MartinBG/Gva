@@ -365,6 +365,7 @@ namespace Docs.Api.Controllers
                             .Include(e => e.Doc.DocDirection)
                             .Include(e => e.Doc.DocCasePartType)
                             .Include(e => e.Doc.DocType)
+                            .Include(e => e.Doc.DocEntryType)
                             .FirstOrDefault(e => e.DocId == rootId.Value);
 
                         item.CaseDocRelation = new DocRelationDO(rootDocRelation);
