@@ -18,10 +18,12 @@ namespace Gva.Api.WordTemplates
 
         public DeregCert(
             ILotRepository lotRepository,
-            IPersonRepository personRepository)
+            IPersonRepository personRepository,
+            IOrganizationRepository organizationRepository)
         {
             this.lotRepository = lotRepository;
             this.personRepository = personRepository;
+            this.organizationRepository = organizationRepository;
         }
 
         public string[] TemplateNames
@@ -58,7 +60,7 @@ namespace Gva.Api.WordTemplates
             {
                 operatorData = this.GetPersonNamesAndAddress(registration.OperPerson.NomValueId);
             }
-                
+
             var json = new
             {
                 root = new
