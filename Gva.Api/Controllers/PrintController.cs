@@ -185,6 +185,12 @@ namespace Gva.Api.Controllers
             return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertRegistrationsFM/{0}", partIndex), "reg_cert");
         }
 
+        [Route("api/printDeregCert")]
+        public HttpResponseMessage GetDeregCert(int lotId, int partIndex, bool generateNew = false)
+        {
+            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertRegistrationsFM/{0}", partIndex), "dereg_cert");
+        }
+
         [Route("api/printApplication")]
         public HttpResponseMessage GetApplicationNote(int lotId, int partIndex)
         {

@@ -28,6 +28,7 @@
       <gva-aircraft-cert-reg-fm name="aircraftCertRegForm" ng-model="reg.part"></gva-aircraft-cert-reg-fm>
       <div ng-if="reg.part.removal && reg.part.removal.reason">
         <h5 class="form-header" l10n-text="aircrafts.deregReg.deregData"></h5>
+        <sc-link-button name="printBtn" ng-href="api/printDeregCert?lotId={{lotId}}&partIndex={{partIndex}}" target="_blank" sc-access-token class="btn btn-sm pull-right" icon="glyphicon-print" ng-if="!editMode"></sc-link-button>
         <gva-aircraft-cert-reg-dereg-fm name="aircraftCertRegDeregForm" ng-model="reg.part.removal" sc-form-params="{ lotId: lotId, partIndex: partIndex }"></gva-aircraft-cert-reg-dereg-fm>
       </div>
     </div>

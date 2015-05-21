@@ -266,6 +266,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<NoiseCert>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<RegistrationCert>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<RadioCert>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<DeregCert>().As<IDataGenerator>().InstancePerLifetimeScope();
         }
     }
 }
