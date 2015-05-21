@@ -4079,7 +4079,8 @@
         'root.examinationSystem.examinees': 'Изпити',
         'root.personsReports': 'Справки в Персонал',
         'root.personsReports.documents': 'Документи',
-        'root.personsReports.licences': 'Лицензи'
+        'root.personsReports.licences': 'Лицензи',
+        'root.personsReports.ratings': 'Квалификационни класове'
       }
     });
   }]);
