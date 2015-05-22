@@ -1142,7 +1142,6 @@
           otherType: 'Вид'
         },
         regFMDirective: {
-          orderNumber: 'No на заповедта',
           certNumber: 'Рег. номер',
           actNumber: 'Дел. номер',
           certDate: 'Дата на регистрация',
@@ -1174,7 +1173,6 @@
           removalReason: 'Основание за отписване',
           removalText: 'Основание за отписване - описание',
           removalDocumentNumber: 'Номер на документ за отписване',
-          removalDocumentDate: 'Дата',
           removalCountry: 'Държава',
           notes: 'Забележки/Изключения',
           notesAlt: 'Забележки/Изключения (англ.)',

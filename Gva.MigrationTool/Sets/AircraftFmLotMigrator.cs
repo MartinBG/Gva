@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
@@ -368,7 +367,6 @@ namespace Gva.MigrationTool.Sets
                 return Tuple.Create(true, (JObject)null, (JObject)null);
             };
 
-            Regex isOrderStatus = new Regex(@"Заличен съгласно заповед (\w+-\w+-\w+)\s*\/\s*(\d+.\d+.\d+)", RegexOptions.IgnoreCase);
             var registrations = this.sqlConn.CreateStoreCommand(
                 @"select s.regNumber,
                         s.nActID,
@@ -472,8 +470,7 @@ namespace Gva.MigrationTool.Sets
                             documentNumber = !string.IsNullOrEmpty(r.Field<string>("tDeDocCAA")) ? r.Field<string>("tDeDocCAA") : null,
                             documentDate = Utils.FmToDate(r.Field<string>("dDeDateCAA"))
                         },
-                        parsedToIntStatusCode = int.Parse(r.Field<string>("nStatus")),
-                        matchedStatus = isOrderStatus.Match(noms["aircraftRegStatsesFm"].ByCode(r.Field<string>("nStatus")).Name)
+                        parsedToIntStatusCode = int.Parse(r.Field<string>("nStatus"))
                     })
                 .OrderBy(r => r.certDate)
                 .Select(r => new JObject(
@@ -521,11 +518,9 @@ namespace Gva.MigrationTool.Sets
                                 new 
                                 {
                                     date = r.removal.date,
-                                    orderNumber = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 && r.matchedStatus.Success ? r.matchedStatus.Groups[1].Value : null,
                                     reason = r.parsedToIntStatusCode > 11 && r.parsedToIntStatusCode != 21 ? noms["aircraftRemovalReasonsFm"].ByAlias("order") : null,
                                     text = r.removal.text,
-                                    documentNumber = r.removal.documentNumber,
-                                    documentDate = r.removal.documentDate
+                                    documentNumber = string.Format("{0}{1}", r.removal.documentNumber, (r.removal.documentDate.HasValue ? " / " + string.Format("{0:dd.MM.yyyy}", r.removal.documentDate.Value) : ""))
                                 },
                                 isActive = false,
                                 isCurrent = false

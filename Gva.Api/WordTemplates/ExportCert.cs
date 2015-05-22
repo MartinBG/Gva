@@ -33,7 +33,7 @@ namespace Gva.Api.WordTemplates
                 root = new
                 {
                     MSN = aircraftData.ManSN,
-                    NUMBER = registration.Removal.DocumentNumber ?? registration.Removal.OrderNumber,
+                    NUMBER = registration.Removal.DocumentNumber,
                     TEXT = registration.Removal.Export.Text,
                     TEXT_ALT = registration.Removal.Export.TextAlt,
                     ENGINE_MODEL = aircraftData.EngineAlt ?? aircraftData.Engine,

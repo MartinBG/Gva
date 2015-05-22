@@ -12,11 +12,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
 
         public string Text { get; set; }
 
-        public string OrderNumber { get; set; }
-
         public string DocumentNumber { get; set; }
-
-        public DateTime? DocumentDate { get; set; }
 
         public NomValue Country { get; set; }
 

@@ -4,9 +4,7 @@
     <sc-field type="nomenclature" ng-model="model.reason" alias="'aircraftRemovalReasonsFm'" ng-required="true" l10n-text="aircrafts.regFMDirective.removalReason" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.orderNumber" ng-if="model.reason.alias === 'order'" l10n-text="aircrafts.regFMDirective.orderNumber" ng-required="true" class="col-md-4 col-sm-8"></sc-field>
-    <sc-field type="text" ng-model="model.documentNumber" ng-if="model.reason.alias !== 'order'" l10n-text="aircrafts.regFMDirective.removalDocumentNumber" class="col-md-4 col-sm-8"></sc-field>
-    <sc-field type="date" ng-model="model.documentDate" l10n-text="aircrafts.regFMDirective.removalDocumentDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.documentNumber" l10n-text="aircrafts.regFMDirective.removalDocumentNumber" class="col-md-4 col-sm-8"></sc-field>
   </div>
   <div class="row">
     <sc-field type="textarea" rows="2" ng-model="model.text" l10n-text="aircrafts.regFMDirective.removalText" class="col-md-10 col-sm-12"></sc-field>
