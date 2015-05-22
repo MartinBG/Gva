@@ -2142,8 +2142,7 @@
           documentNumber: '№ на документа',
           documentDateValidFrom: 'Начална дата',
           documentDateValidTo: 'Крайна дата',
-          notes: 'Бележки',
-          isActive: 'Валидно'
+          notes: 'Бележки'
         },
         newDocumentId: {
           title: 'Нов документ за самоличност',
