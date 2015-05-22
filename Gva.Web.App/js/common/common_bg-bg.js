@@ -212,7 +212,9 @@
               makeRadio: 'Радио',
               makeAircraft: 'ВС',
               makePropeller: 'Витла',
-              makeEngine: 'Двигатели'
+              makeEngine: 'Двигатели',
+              graduations: 'Степени на образование',
+              isPilotTraining: 'Обучение за пилот'
             }
           }
         },

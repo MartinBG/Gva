@@ -84,6 +84,19 @@
         </div>
       </div>
 
+      <div ng-if="alias === 'schools'">
+        <div class="row">
+          <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.isPilotTraining = nomenclatureValue.textContent.isPilotTraining || false">
+            <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.isPilotTraining"></label>
+            <input type="checkbox" ng-model="nomenclatureValue.textContent.isPilotTraining"/>
+          </div>
+        </div>
+        <div class="row">
+          <sc-field type="nomenclature" ng-required="true" alias="'graduations'" mode="id" multiple ng-model="nomenclatureValue.textContent.graduationIds" l10n-text="common.nomenclatures.nomValues.edit.graduations" class="col-sm-8"
+            ng-init="nomenclatureValue.textContent.graduationIds = nomenclatureValue.textContent.graduationIds || null"></sc-field>
+        </div>
+      </div>
+
       <div ng-if="alias === 'documentTypes'">
         <div class="row">
           <div class="form-group col-sm-4" ng-init="nomenclatureValue.textContent.isPersonsOnly = nomenclatureValue.textContent.isPersonsOnly || false">
