@@ -1,28 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Reflection;
 using System.Web.Http;
 using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Json;
-using Common.Owin;
-using Common.WordTemplates;
-using Gva.Api.Models;
 using Gva.Api.ModelsDO.Aircrafts;
-using Gva.Api.ModelsDO.Common;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.PrintRepository;
 using Gva.Api.WordTemplates;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
@@ -39,6 +29,16 @@ namespace Gva.Api.Controllers
         private UserContext userContext;
         private ILotEventDispatcher lotEventDispatcher;
         private IPrintRepository printRepository;
+        private Dictionary<string, Tuple<string, string, bool>> requestToPrintParameters =
+            new Dictionary<string, Tuple<string, string, bool>>()
+            {
+                {"printRadioCert", new Tuple<string, string, bool>( "aircraftCertRadios", "radio_cert",false)},
+                {"printRegCert", new Tuple<string, string, bool>("aircraftCertRegistrationsFM", "reg_cert", false)},
+                {"printNoiseCert", new Tuple<string, string, bool>("aircraftCertNoises", "noise_cert", false)},
+                {"printDeregCert", new Tuple<string, string, bool>("aircraftCertRegistrationsFM", "dereg_cert", false)},
+                {"printExportCert", new Tuple<string, string, bool>("aircraftCertRegistrationsFM","export_cert", false)},
+                {"printApplication", new Tuple<string, string, bool>("personDocumentApplications","application_note", true)},
+            };
 
         public PrintController(
             IEnumerable<IDataGenerator> dataGenerators,
@@ -140,61 +140,20 @@ namespace Gva.Api.Controllers
         }
 
         [Route("api/printAirworthiness")]
-        public HttpResponseMessage GetAirworthinessDoc(int lotId, int partIndex, bool generateNew = false)
+        public HttpResponseMessage GetAirworthinessDoc(int lotId, int partIndex)
         {
             string airworthinessPath = string.Format("aircraftCertAirworthinessesFM/{0}", partIndex);
             var lot = this.lotRepository.GetLotIndex(lotId);
             var airworthinessPart = lot.Index.GetPart<AircraftCertAirworthinessDO>(airworthinessPath);
             string templateName = airworthinessPart.Content.AirworthinessCertificateType.Alias;
-            return this.printRepository.GeneratePdfWithoutSave(lotId, airworthinessPath, templateName);
+            return this.printRepository.GenerateDocumentWithoutSave(lotId, airworthinessPath, templateName, false);
         }
 
-        [Route("api/printRadioCert")]
-        public HttpResponseMessage GetRadioCert(int lotId, int partIndex)
+        [Route("api/{request:regex(^(printRadioCert|printExportCert|printNoiseCert|printRegCert|printDeregCert|printApplication)$)}")]
+        public HttpResponseMessage GetDocument(int lotId, int partIndex, string request)
         {
-            string templateName = "radio_cert";
-            var wordDocStream = this.printRepository.GenerateWordDocument(lotId, string.Format("aircraftCertRadios/{0}", partIndex), templateName, null, null);
-
-            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new StreamContent(wordDocStream);
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/msword");
-            result.Content.Headers.ContentDisposition =
-                new ContentDispositionHeaderValue("inline")
-                {
-                    FileName = string.Format("{0}.docx", templateName)
-                };
-
-            return result;
-        }
-
-        [Route("api/printExportCert")]
-        public HttpResponseMessage GetExportCert(int lotId, int partIndex)
-        {
-            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertRegistrationsFM/{0}", partIndex), "export_cert");
-        }
-
-        [Route("api/printNoiseCert")]
-        public HttpResponseMessage GetNoiseCert(int lotId, int partIndex, bool generateNew = false)
-        {
-            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertNoises/{0}", partIndex), "noise_cert");
-        }
-
-        [Route("api/printRegCert")]
-        public HttpResponseMessage GetRegCert(int lotId, int partIndex, bool generateNew = false)
-        {
-            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertRegistrationsFM/{0}", partIndex), "reg_cert");
-        }
-
-        [Route("api/printDeregCert")]
-        public HttpResponseMessage GetDeregCert(int lotId, int partIndex, bool generateNew = false)
-        {
-            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("aircraftCertRegistrationsFM/{0}", partIndex), "dereg_cert");
-        }
-
-        [Route("api/printApplication")]
-        public HttpResponseMessage GetApplicationNote(int lotId, int partIndex)
-        {
-            return this.printRepository.GeneratePdfWithoutSave(lotId, string.Format("personDocumentApplications/{0}", partIndex), "application_note");
+            var result = this.requestToPrintParameters[request];
+            return this.printRepository.GenerateDocumentWithoutSave(lotId, string.Format("{0}/{1}", result.Item1, partIndex), result.Item2, result.Item3); 
         }
 
         public void UpdateLicenceEditionPrintedRatings(

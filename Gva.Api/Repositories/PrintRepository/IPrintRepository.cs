@@ -23,6 +23,6 @@ namespace Gva.Api.Repositories.PrintRepository
 
         Stream GenerateWordDocument(int lotId, string path, string templateName, int? ratingPartIndex, int? editionPartIndex);
 
-        HttpResponseMessage GeneratePdfWithoutSave(int lotId, string path, string templateName);
+        HttpResponseMessage GenerateDocumentWithoutSave(int lotId, string path, string templateName, bool convertToPdf);
     }
 }

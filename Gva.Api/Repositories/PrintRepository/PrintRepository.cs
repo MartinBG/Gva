@@ -137,21 +137,28 @@ namespace Gva.Api.Repositories.PrintRepository
             return result;
         }
 
-        public HttpResponseMessage GeneratePdfWithoutSave(int lotId, string path, string templateName)
+        public HttpResponseMessage GenerateDocumentWithoutSave(int lotId, string path, string templateName, bool convertToPdf)
         {
-            Stream pdfDocStream;
-            using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName, null, null))
+            Stream stream;
+            if (convertToPdf)
             {
-                pdfDocStream = this.ConvertWordStreamToPdfStream(wordDocStream);
+                using (var wordDocStream = this.GenerateWordDocument(lotId, path, templateName, null, null))
+                {
+                    stream = this.ConvertWordStreamToPdfStream(wordDocStream);
+                }
+            }
+            else
+            {
+                stream = this.GenerateWordDocument(lotId, path, templateName, null, null);
             }
 
             HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new StreamContent(pdfDocStream);
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+            result.Content = new StreamContent(stream);
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue(string.Format("application/{0}", convertToPdf ? "pdf" : "msword"));
             result.Content.Headers.ContentDisposition =
                 new ContentDispositionHeaderValue("inline")
                 {
-                    FileName = string.Format("{0}.pdf", templateName)
+                    FileName = string.Format("{0}.{1}", templateName, convertToPdf ? "pdf" : "docx")
                 };
 
             return result;
