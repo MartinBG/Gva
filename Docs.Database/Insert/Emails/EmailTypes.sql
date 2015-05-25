@@ -51,16 +51,16 @@ VALUES (4, N'ElectronicServiceStageChanged', N'ElectronicServiceStageChanged',
         N'Моля, не изпращайте отговор.')
 
 INSERT [dbo].[EmailTypes] ([EmailTypeId], [Name], [Alias], [Subject], [Body]) 
-VALUES (5, N'DocAssigned', N'DocAssigned', N'Към Вас е насочен документ от преписка @@Param1 - @@Param2 : @@Param3', N'Към Вас е насочен документ @@Param1 - @@Param2 : @@Param3 от преписка @@Param4 (Кореспондент: @@Param5) от @@Param6, достъпна на адрес: @@Param7')
+VALUES (5, N'DocAssigned', N'DocAssigned', N'Fw: Преписка @@Param1 - @@Param2 : @@Param3', N'Към Вас е насочен документ @@Param1 - @@Param2 : @@Param3 от преписка @@Param4 (Кореспондент: @@Param5) от @@Param6, достъпна на адрес: @@Param7')
 
 INSERT [dbo].[EmailTypes] ([EmailTypeId], [Name], [Alias], [Subject], [Body]) 
-VALUES (6, N'DocAssigned2', N'DocAssigned2', N'Към Вас е насочена преписка @@Param1 - @@Param2 : @@Param3', N'Към Вас е насочена преписка @@Param1 - @@Param2 : @@Param3 (Кореспондент: @@Param4) от @@Param5, достъпна на адрес: @@Param6')
+VALUES (6, N'DocAssigned2', N'DocAssigned2', N'Fw: Преписка @@Param1 - @@Param2 : @@Param3', N'Към Вас е насочена преписка @@Param1 - @@Param2 : @@Param3 (Кореспондент: @@Param4) от @@Param5, достъпна на адрес: @@Param6')
 
 INSERT [dbo].[EmailTypes] ([EmailTypeId], [Name], [Alias], [Subject], [Body]) 
-VALUES (7, N'ResolutionOrTaskAssigned', N'ResolutionOrTaskAssigned', N'Наложена резолюция/задача към преписка @@Param1 - @@Param2 : @@Param3', N'Имате разпределена резолюция/задача към документ @@Param1 - @@Param2 : @@Param3 от преписка @@Param4 (Кореспондент: @@Param5) от @@Param6, достъпна на адрес: @@Param7')
+VALUES (7, N'ResolutionOrTaskAssigned', N'ResolutionOrTaskAssigned', N'Fw: Преписка @@Param1 - @@Param2 : @@Param3', N'Имате разпределена резолюция/задача към документ @@Param1 - @@Param2 : @@Param3 от преписка @@Param4 (Кореспондент: @@Param5) от @@Param6, достъпна на адрес: @@Param7')
 
 INSERT [dbo].[EmailTypes] ([EmailTypeId], [Name], [Alias], [Subject], [Body]) 
-VALUES (8, N'ResolutionOrTaskAssigned2', N'ResolutionOrTaskAssigned2', N'Наложена резолюция/задача към преписка @@Param1 - @@Param2 : @@Param3', N'Имате разпределена резолюция/задача към преписка @@Param1 - @@Param2 : @@Param3 (Кореспондент: @@Param4) от @@Param5, достъпна на адрес: @@Param6')
+VALUES (8, N'ResolutionOrTaskAssigned2', N'ResolutionOrTaskAssigned2', N'Fw: Преписка @@Param1 - @@Param2 : @@Param3', N'Имате разпределена резолюция/задача към преписка @@Param1 - @@Param2 : @@Param3 (Кореспондент: @@Param4) от @@Param5, достъпна на адрес: @@Param6')
 
 INSERT [dbo].[EmailTypes] ([EmailTypeId], [Name], [Alias], [Subject], [Body]) 
 VALUES (9, N'WorkflowActionRequest', N'WorkflowActionRequest', N'Искане за съгласуване по документ @@Param1 - @@Param2 : @@Param3', N'Към Вас е изпратено искане за съгласуване от @@Param4 по документ @@Param1 - @@Param2 : @@Param3, към преписка @@Param5, достъпен на адрес: @@Param6')
