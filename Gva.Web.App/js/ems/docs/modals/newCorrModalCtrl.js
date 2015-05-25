@@ -39,21 +39,29 @@
   ];
 
   NewCorrModalCtrl.$resolve = {
-    corr: ['$q', 'Nomenclatures', 'Corrs',
-      function ($q, Nomenclatures, Corrs) {
-
-        return $q.all({
-          corrTypes: Nomenclatures.query({ alias: 'correspondentType' }).$promise,
-          corr: Corrs.getNew().$promise
-        }).then(function (res) {
-          var corrType = _(res.corrTypes).filter({
-            alias: 'BulgarianCitizen'
-          }).first();
-          res.corr.correspondentTypeId = corrType.nomValueId;
-          res.corr.correspondentType = corrType;
-
-          return res.corr;
-        });
+    corr: ['$q', 'Nomenclatures', 'Corrs', 'Integration','scModalParams',
+      function ($q, Nomenclatures, Corrs, Integration, scModalParams) {
+        if (scModalParams.lotId) {
+          return Integration.convertLotToCorrespondent({
+            lotId: scModalParams.lotId
+          }).$promise
+            .then(function (corr) {
+              return corr;
+            });
+        } else {
+          return $q.all({
+            corrTypes: Nomenclatures.query({ alias: 'correspondentType' }).$promise,
+            corr: Corrs.getNew().$promise
+          }).then(function (res) {
+            var corrType = _(res.corrTypes).filter({
+                alias: 'BulgarianCitizen'
+              }).first();
+              res.corr.correspondentTypeId = corrType.nomValueId;
+              res.corr.correspondentType = corrType;
+             
+            return res.corr;
+          });
+        }
       }
     ]
   };

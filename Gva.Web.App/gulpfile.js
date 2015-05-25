@@ -28,6 +28,8 @@ var config = {
   },
   app: function () {
     return utils.uniqueQueue(
+      // Some files from Ems module are overrided in Gva application.
+      gulp.src('../Common.Web.App/js/ems/ems.js', { base: '../Common.Web.App/' }),
       gulp.src('js/**/*.js', { base: '.' }),
       gulp.src('../Common.Web.App/js/**/*.js', { base: '../Common.Web.App/' })
     );

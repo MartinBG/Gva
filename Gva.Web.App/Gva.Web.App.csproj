@@ -57,6 +57,9 @@
     <Content Include="js\common\common_bg-bg.js" />
     <Content Include="js\common\root\views\root.html" />
     <Content Include="js\common\root\views\rootCtrl.js" />
+    <Content Include="js\ems\docs\modals\newCorrModalCtrl.js" />
+    <Content Include="js\ems\docs\views\docsCase.html" />
+    <Content Include="js\ems\docs\views\docsCaseCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthiness.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessViewCtrl.js" />

@@ -6,9 +6,11 @@
     $scope,
     $state,
     scModal,
+    application,
     doc
   ) {
     $scope.doc = doc;
+    $scope.appId = application.id;
     $scope.docId = doc.docId;
     $scope.isCase = doc.isCase;
 
@@ -44,12 +46,36 @@
     $scope.viewDoc = function (docId) {
       return $state.go('root.docs.edit.case', { id: docId });
     };
+
+    $scope.viewApplication = function (applicationId) {
+      return $state.go('root.applications.edit.case', { id: applicationId });
+    };
+
+    $scope.linkApplication = function () {
+      var modalInstance = scModal.open('linkApplication', { 
+        docId: $scope.docId,
+        isFromPortal: doc.isElectronic,
+        docRegUri: doc.regUri
+      });
+
+      modalInstance.result.then(function (res) {
+        return $state.go('root.applications.edit.data', {
+          id: res.gvaApplicationId,
+          set: res.set,
+          lotId: res.lotId,
+          ind: res.partIndex
+        });
+      });
+
+      return modalInstance.opened;
+    };
   }
 
   DocsCaseCtrl.$inject = [
     '$scope',
     '$state',
     'scModal',
+    'application',
     'doc'
   ];
 
@@ -57,8 +83,14 @@
     doc: [
       'doc',
       function (doc) {
-
         return doc;
+      }
+    ],
+    application: [
+      '$stateParams',
+      'Applications',
+      function resolveApplication($stateParams, Applications) {
+        return Applications.getApplicationByDocId({ docId: $stateParams.id }).$promise;
       }
     ]
   };
