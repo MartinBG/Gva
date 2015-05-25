@@ -89,23 +89,29 @@ namespace Gva.Api.Repositories.AircraftRepository
 
         public Tuple<GvaViewAircraft, GvaViewAircraftRegistration> GetAircraft(int aircraftId)
         {
-            var result = (from a in this.unitOfWork.DbContext.Set<GvaViewAircraft>()
+            var results = (from a in this.unitOfWork.DbContext.Set<GvaViewAircraft>()
                                 .Include(a => a.AirCategory)
                                 .Include(a => a.AircraftProducer)
-                    join r in this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
-                                .Include(v => v.Register)
-                             on new { a.ActNumber, a.LotId } equals new { r.ActNumber, r.LotId } into ra
-                             where a.LotId == aircraftId
-                    from ra1 in ra.DefaultIfEmpty()
-                    select new
-                    {
-                        Aircraft = a,
-                        Registration = ra1
-                    })
-                    .SingleOrDefault();
+                          join r in this.unitOfWork.DbContext.Set<GvaViewAircraftRegistration>()
+                                      .Include(v => v.Register)
+                                   on new { a.ActNumber, a.LotId } equals new { r.ActNumber, r.LotId } into ra
+                          where a.LotId == aircraftId
+                          from ra1 in ra.DefaultIfEmpty()
+                          select new
+                          {
+                              Aircraft = a,
+                              Registration = ra1
+                          });
 
-            if (result.Registration != null)
+            var result = new
             {
+                Aircraft = new GvaViewAircraft(),
+                Registration = new GvaViewAircraftRegistration()
+            };
+
+            if (results.Count() >= 1)
+            {
+                result = results.OrderByDescending(r => r.Registration.PartIndex).First();
                 this.unitOfWork.DbContext.Set<NomValue>().Where(r => result.Registration.CertRegisterId == r.NomValueId).Load();
             }
 
