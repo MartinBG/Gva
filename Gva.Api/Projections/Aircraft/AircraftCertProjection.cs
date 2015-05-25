@@ -41,12 +41,13 @@ namespace Gva.Api.Projections.Aircraft
             if(match.Success)
             {
                 formNumberPrefix = int.Parse(match.Groups[1].Value);
-                docNumber = match.Groups[3].Value.TrimStart('0');
+                string trimmedNumber = match.Groups[3].Value.TrimStart('0');
+                docNumber =  !string.IsNullOrEmpty(trimmedNumber) ? trimmedNumber : "0";
             }
 
-            string number = !string.IsNullOrEmpty(docNumber) ? docNumber : airworthiness.Content.DocumentNumber;
+            string number = !string.IsNullOrEmpty(docNumber) ? docNumber : null;
             int parsedDocNumber;
-            bool isParsingSuccessful = int.TryParse(number, out parsedDocNumber);
+            bool isParsingSuccessful = int.TryParse(docNumber, out parsedDocNumber);
 
             GvaViewAircraftCert cert = new GvaViewAircraftCert();
             cert.LotId = airworthiness.Part.Lot.LotId;
@@ -60,18 +61,17 @@ namespace Gva.Api.Projections.Aircraft
 
         private GvaViewAircraftCert Create(PartVersion<AircraftCertNoiseDO> noise)
         {
-            int? formNumberPrefix = (int?)null;
             string docNumber = null;
             Regex contains45 = new Regex(@"^(45)(-)(\d+)");
             Match match = contains45.Match(noise.Content.IssueNumber);
 
              if(match.Success)
             {
-                formNumberPrefix = 45;
-                docNumber = match.Groups[3].Value.TrimStart('0');
+                string trimmedNumber = match.Groups[3].Value.TrimStart('0');
+                docNumber = !string.IsNullOrEmpty(trimmedNumber) ? trimmedNumber : "0";
             }
 
-            string number = !string.IsNullOrEmpty(docNumber) ? docNumber : noise.Content.IssueNumber;
+            string number = !string.IsNullOrEmpty(docNumber) ? docNumber : null;
             int parsedDocNumber;
             bool isParsingSuccessful = int.TryParse(number, out parsedDocNumber);
 
@@ -80,7 +80,7 @@ namespace Gva.Api.Projections.Aircraft
             cert.PartIndex = noise.Part.Index;
             cert.DocumentNumber = noise.Content.IssueNumber;
             cert.ParsedNumberWithoutPrefix = isParsingSuccessful ? parsedDocNumber : (int?)null;
-            cert.FormNumberPrefix = formNumberPrefix;
+            cert.FormNumberPrefix = 45;
 
             return cert;
         }

@@ -21,19 +21,21 @@
       }
     });
 
-    $scope.$watch('model.airworthinessCertificateType', function (type) {
-      if (type.alias === 'f25' || type.alias === 'f24') {
-        Aircrafts.getNextFormNumber({
-          formPrefix: type.alias === 'f25' ? 25 :  24
-        })
-        .$promise
-        .then(function(result) {
-          $scope.model.documentNumber = result.number;
-        });
-      } else {
-        $scope.model.documentNumber = null;
-      }
-    });
+    if(!$scope.partIndex) {
+      $scope.$watch('model.airworthinessCertificateType', function (type) {
+        if (type.alias === 'f25' || type.alias === 'f24') {
+          Aircrafts.getNextFormNumber({
+            formPrefix: type.alias === 'f25' ? 25 :  24
+          })
+          .$promise
+          .then(function(result) {
+            $scope.model.documentNumber = result.number;
+          });
+        } else {
+          $scope.model.documentNumber = null;
+        }
+      });
+    }
 
     $scope.isUniqueFormNumber = function () {
        if ($scope.model.documentNumber) {
