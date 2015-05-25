@@ -132,6 +132,7 @@ GO
 :r $(rootPath)"\Diagram\DocRelations.sql"
 :r $(rootPath)"\Diagram\Correspondents.sql"
 :r $(rootPath)"\Diagram\Users.sql"
+:r $(rootPath)"\Diagram\Units.sql"
 
 ---------------------------------------------------------------
 -- Views
