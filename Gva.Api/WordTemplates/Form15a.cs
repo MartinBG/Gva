@@ -18,7 +18,7 @@ namespace Gva.Api.WordTemplates
         {
             get
             {
-                return new string[] { "15a", "15aReissue" };
+                return new string[] { "15a" };
             }
         }
 

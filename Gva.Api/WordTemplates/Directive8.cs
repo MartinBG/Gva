@@ -19,7 +19,7 @@ namespace Gva.Api.WordTemplates
         {
             get
             {
-                return new string[] { "directive8", "directive8Reissue"};
+                return new string[] { "directive8"};
             }
         }
 

@@ -39,6 +39,13 @@ namespace Gva.Api.Controllers
                 {"printExportCert", new Tuple<string, string, bool>("aircraftCertRegistrationsFM","export_cert", false)},
                 {"printApplication", new Tuple<string, string, bool>("personDocumentApplications","application_note", true)},
             };
+        private Dictionary<string,string> airworthinessTypeAliasToTemplateName =
+            new Dictionary<string,string>()
+            {
+                {"15aReissue", "15a"},
+                {"directive8Reissue", "directive8"},
+                {"vlaReissue", "vla"}
+            };
 
         public PrintController(
             IEnumerable<IDataGenerator> dataGenerators,
@@ -142,10 +149,21 @@ namespace Gva.Api.Controllers
         [Route("api/printAirworthiness")]
         public HttpResponseMessage GetAirworthinessDoc(int lotId, int partIndex)
         {
+
             string airworthinessPath = string.Format("aircraftCertAirworthinessesFM/{0}", partIndex);
             var lot = this.lotRepository.GetLotIndex(lotId);
             var airworthinessPart = lot.Index.GetPart<AircraftCertAirworthinessDO>(airworthinessPath);
-            string templateName = airworthinessPart.Content.AirworthinessCertificateType.Alias;
+            string templateName = null;
+            string certTypeAlias = airworthinessPart.Content.AirworthinessCertificateType.Alias;
+            if (airworthinessTypeAliasToTemplateName.ContainsKey(certTypeAlias))
+            {
+                templateName = airworthinessTypeAliasToTemplateName[certTypeAlias];
+            }
+            else
+            {
+                templateName = certTypeAlias;
+            }
+
             return this.printRepository.GenerateDocumentWithoutSave(lotId, airworthinessPath, templateName, false);
         }
 
