@@ -6,10 +6,12 @@
     $scope,
     $state,
     $stateParams,
+    Persons,
     scModal,
     docs
   ) {
     $scope.docs = docs;
+    $scope.documentsCount = docs.documentsCount;
 
     $scope.filters = {
       lin: null,
@@ -82,12 +84,25 @@
              item.licenceTypeCaCode + '- ' +
              licenceNumberMask;
     };
+
+    $scope.getDocuments = function (page, pageSize) {
+      var params = {};
+
+      _.assign(params, $scope.filters);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return Persons.getPrintableDocs(params).$promise;
+    };
   }
 
   PrintableDocsSearchCtrl.$inject = [
     '$scope',
     '$state',
     '$stateParams',
+    'Persons',
     'scModal',
     'docs'
   ];

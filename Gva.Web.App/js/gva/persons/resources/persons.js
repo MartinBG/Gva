@@ -18,8 +18,7 @@
       },
       getPrintableDocs: {
         method: 'GET',
-        url: 'api/persons/printableDocs',
-        isArray: true
+        url: 'api/persons/printableDocs'
       },
       getStampedDocuments: {
         method: 'GET',

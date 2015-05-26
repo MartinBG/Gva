@@ -10,32 +10,33 @@
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
-  <sc-datatable items="docs" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="dateValidFrom">
-    <sc-column sortable="false" class="buttons-cell" has-content="true">
+  <sc-ajaxdatatable items="docs" items-count="documentsCount" fetch-fn="getDocuments" set-prop="documents" count-prop="documentsCount"
+    filterable="false" dynamic-columns="true" default-sort="dateValidFrom">
+    <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.licences.view.editions.edit.ratings', params: {id: item.lotId, ind: item.partIndex, index: item.editionPartIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-    </sc-column>
-    <sc-column sortable="false" class="buttons-cell" has-content="true">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <a ng-click="print(item)">
         <span class="glyphicon glyphicon-print"></span>
       </a>
-    </sc-column>
-    <sc-column title="persons.printableDocsSearch.licenceNumber" has-content="true">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.printableDocsSearch.licenceNumber" has-content="true">
       {{licenceNumberFormatMask(item)}}
-    </sc-column>
-    <sc-column title="persons.printableDocsSearch.lin"  data="person.lin">
-    </sc-column>
-    <sc-column title="persons.printableDocsSearch.uin" data="person.uin">
-    </sc-column>
-    <sc-column title="persons.printableDocsSearch.names" data="person.names">
-    </sc-column>
-    <sc-column title="persons.printableDocsSearch.dateValidFrom" data="dateValidFrom" type="date">
-    </sc-column>
-    <sc-column title="persons.printableDocsSearch.dateValidTo" data="dateValidTo" type="date">
-    </sc-column>
-    <sc-column title="persons.printableDocsSearch.application" has-content="true">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.printableDocsSearch.lin"  data="person.lin">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.printableDocsSearch.uin" data="person.uin">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.printableDocsSearch.names" data="person.names">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.printableDocsSearch.dateValidFrom" data="dateValidFrom" type="date">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.printableDocsSearch.dateValidTo" data="dateValidTo" type="date">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.printableDocsSearch.application" has-content="true">
       <a ng-click="viewApplication(item.application.applicationId, item.lotId, item.application.partIndex)">
         {{ !!item.application.oldDocumentNumber ? (item.application.applicationCode + ' ' + item.application.oldDocumentNumber + '/' + (item.application.documentDate | date: 'mediumDate')) : (item.application.applicationCode + ' ' + item.application.documentNumber) }}
       </a>
-    </sc-column>
-  </sc-datatable>
+    </sc-ajaxcolumn>
+  </sc-ajaxdatatable>
 </div>

@@ -308,11 +308,17 @@ namespace Gva.Api.Controllers.Persons
             int? licenceAction = null,
             int? lin = null,
             string uin = null,
-            string names = null)
+            string names = null,
+            int offset = 0,
+            int limit = 10)
         {
-            var docs = this.personRepository.GetPrintableDocs(licenceType, licenceAction, lin, uin, names);
+            var result = this.personRepository.GetPrintableDocs(licenceType, licenceAction, lin, uin, names, offset, limit);
 
-            return Ok(docs.Select(d => new GvaViewPersonLicenceEditionDO(d)));
+            return Ok(new
+            {
+                Documents = result.Item2,
+                DocumentsCount = result.Item1
+            });
         }
 
         [Route("{lotId}/inventory")]
