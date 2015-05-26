@@ -7,10 +7,12 @@
     $state,
     $stateParams,
     Persons,
-    documents,
+    docs,
     scModal
     ) {
-    $scope.documents = documents;
+    $scope.docs = docs;
+    $scope.documentsCount = docs.documentsCount;
+
     $scope.filters = {
       licenceNumber: null,
       lin: null,
@@ -25,7 +27,8 @@
     });
 
     $scope.save = function () {
-      var documentsForStamp = _.map($scope.documents, function (document) {
+      var documentsForStamp = [];
+        _.each($scope.docs.documents, function(document) {
         var stageAliases = [];
         if(document.licenceReady) {
           stageAliases.push('licenceReady');
@@ -37,11 +40,11 @@
           stageAliases.push('returned');
         }
 
-        if (stageAliases !== []) {
-          return {
+        if (stageAliases.length > 0) {
+          documentsForStamp.push({
             applicationId: document.application.applicationId,
             stageAliases: stageAliases
-          };
+          });
         }
       });
 
@@ -69,11 +72,12 @@
     };
 
     $scope.selectCheck = function (event, item, action) {
+      var index = _.findIndex($scope.docs.documents, item);
       if ($(event.target).is(':checked')) {
-        item[action] = true;
+        $scope.docs.documents[index][action] = true;
       }
       else {
-        item[action] = false;
+        $scope.docs.documents[index][action] = false;
       }
     };
 
@@ -98,6 +102,17 @@
       return modalInstance.opened;
     };
 
+    $scope.getDocuments = function (page, pageSize) {
+      var params = {};
+
+      _.assign(params, $scope.filters);
+      _.assign(params, {
+        offset: (page - 1) * pageSize,
+        limit: pageSize
+      });
+
+      return Persons.getStampedDocuments(params).$promise;
+    };
   }
 
   StampedDocumentsCtrl.$inject = [
@@ -105,12 +120,12 @@
     '$state',
     '$stateParams',
     'Persons',
-    'documents',
+    'docs',
     'scModal'
   ];
 
   StampedDocumentsCtrl.$resolve = {
-    documents: [
+    docs: [
       '$stateParams',
       'Persons',
       function ($stateParams, Persons) {

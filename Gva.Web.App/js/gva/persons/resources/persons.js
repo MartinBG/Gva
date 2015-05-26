@@ -22,8 +22,7 @@
       },
       getStampedDocuments: {
         method: 'GET',
-        url: 'api/persons/stampedDocuments',
-        isArray: true
+        url: 'api/persons/stampedDocuments'
       },
       saveStampedDocuments: {
         method: 'POST',

@@ -415,11 +415,17 @@ namespace Gva.Api.Controllers.Persons
             string names = null,
             string stampNumber = null,
             int? lin = null,
-            int? licenceNumber = null)
+            int? licenceNumber = null,
+            int offset = 0,
+            int limit = 10)
         {
-            var docs = this.personRepository.GetStampedDocuments(uin, names, stampNumber, lin, licenceNumber);
+            var result = this.personRepository.GetStampedDocuments(uin, names, stampNumber, lin, licenceNumber, offset, limit);
 
-            return Ok(docs.Select(d => new GvaViewPersonLicenceEditionDO(d)));
+            return Ok(new
+            {
+                Documents = result.Item2,
+                DocumentsCount = result.Item1
+            });
         }
 
         [HttpPost]

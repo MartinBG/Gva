@@ -11,42 +11,43 @@
   </sc-search>
 
   <sc-button name="saveBtn" btn-click="save()" text="persons.stampedDocumentsView.save" class="btn btn-xs btn-primary"></sc-button>
-  <sc-datatable items="documents" filterable="false" dynamic-columns="false">
-    <sc-column sortable="false" class="buttons-cell" has-content="true">
+  <sc-ajaxdatatable items="docs" items-count="documentsCount" fetch-fn="getDocuments" set-prop="documents" count-prop="documentsCount"
+     filterable="false" dynamic-columns="false">
+    <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewBtn" btn-sref="{ state: 'root.persons.view.licences.view.editions.edit.ratings', params: {id: item.lotId, ind: item.partIndex, index: item.editionPartIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
-    </sc-column>
-    <sc-column data="licenceNumber" title="persons.stampedDocumentsView.licenceNumber">
-    </sc-column>
-    <sc-column data="person.lin" title="persons.stampedDocumentsView.lin" has-content="true">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="licenceNumber" title="persons.stampedDocumentsView.licenceNumber">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="person.lin" title="persons.stampedDocumentsView.lin" has-content="true">
       {{item.person.lin}}
-    </sc-column>
-    <sc-column data="person.uin" title="persons.stampedDocumentsView.uin" has-content="true">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="person.uin" title="persons.stampedDocumentsView.uin" has-content="true">
       {{item.person.uin}}
-    </sc-column>
-    <sc-column data="person.names" title="persons.stampedDocumentsView.names" has-content="true" class="wrap">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="person.names" title="persons.stampedDocumentsView.names" has-content="true" class="wrap">
       {{item.person.names}}
-    </sc-column>
-    <sc-column data="dateValidFrom" title="persons.stampedDocumentsView.documentDateValidFrom" type="date">
-    </sc-column>
-    <sc-column data="dateValidTo" title="persons.stampedDocumentsView.documentDateValidTo" type="date">
-    </sc-column>
-    <sc-column data="stampNumber" title="persons.stampedDocumentsView.stampNumber">
-    </sc-column>
-    <sc-column title="persons.stampedDocumentsView.application" has-content="true">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="dateValidFrom" title="persons.stampedDocumentsView.documentDateValidFrom" type="date">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="dateValidTo" title="persons.stampedDocumentsView.documentDateValidTo" type="date">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="stampNumber" title="persons.stampedDocumentsView.stampNumber">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.stampedDocumentsView.application" has-content="true">
       <a ng-click="viewApplication(item.application.applicationId, item.lotId, item.application.partIndex)">
         {{ !!item.application.oldDocumentNumber ? (item.application.applicationCode + ' ' + item.application.oldDocumentNumber + '/' + (item.application.documentDate | date: 'mediumDate')) : (item.application.applicationCode + ' ' + item.application.documentNumber) }}
       </a>
-    </sc-column>
-    <sc-column data="licenceAction.code" title="persons.stampedDocumentsView.licenceAction">
-   </sc-column>
-    <sc-column title="persons.stampedDocumentsView.ready" sortable="false" class="buttons-cell" has-content="true">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn data="licenceAction.code" title="persons.stampedDocumentsView.licenceAction">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.stampedDocumentsView.ready" sortable="false" class="buttons-cell" has-content="true">
       <input type="checkbox" ng-checked="item.isReady" ng-disabled="item.isReady" sc-click="selectCheck($event, item, 'licenceReady')">
-    </sc-column>
-    <sc-column title="persons.stampedDocumentsView.received" sortable="false" class="buttons-cell" has-content="true">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.stampedDocumentsView.received" sortable="false" class="buttons-cell" has-content="true">
       <input type="checkbox" ng-checked="item.isReceived" ng-disabled="item.isReceived || !item.isReady" sc-click="selectCheck($event, item, 'returned')">
-    </sc-column>
-    <sc-column title="persons.stampedDocumentsView.finished" sortable="false" class="buttons-cell" has-content="true">
+    </sc-ajaxcolumn>
+    <sc-ajaxcolumn title="persons.stampedDocumentsView.finished" sortable="false" class="buttons-cell" has-content="true">
       <input type="checkbox" sc-click="selectCheck($event, item, 'done')">
-    </sc-column>
-  </sc-datatable>
+    </sc-ajaxcolumn>
+  </sc-ajaxdatatable>
 </ng-form>
