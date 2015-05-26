@@ -25,7 +25,7 @@
       }
     });
 
-    $scope.docs = docs.documents;
+    $scope.docs = docs;
     $scope.documentsCount = docs.documentsCount;
 
     $scope.getDocuments = function (page, pageSize) {

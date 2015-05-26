@@ -13,8 +13,8 @@
     <sc-search-button action="add"></sc-search-button>
   </sc-search>
 
-   <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/licences?limit={{licencesCount}}&offset=0&limitationId={{filters.limitationId}}&lin={{filters.lin}}&licenceTypeId={{filters.licenceTypeId}}&licenceActionId={{filters.licenceActionId}}&fromDatePeriodFrom={{filters.fromDatePeriodFrom}}&fromDatePeriodTo={{filters.fromDatePeriodTo}}&toDatePeriodFrom={{filters.toDatePeriodFrom}}&toDatePeriodTo={{filters.toDatePeriodTo}}" target="_blank" sc-access-token text="persons.reportLicences.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
-  <sc-ajaxdatatable items="docs" items-count="licencesCount" fectch-fn="getLicences" set-prop="licences" count-prop="licencesCount" dynamic-columns="false" filterable="false">
+  <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/licences?limit={{licencesCount}}&offset=0&limitationId={{filters.limitationId}}&lin={{filters.lin}}&licenceTypeId={{filters.licenceTypeId}}&licenceActionId={{filters.licenceActionId}}&fromDatePeriodFrom={{filters.fromDatePeriodFrom}}&fromDatePeriodTo={{filters.fromDatePeriodTo}}&toDatePeriodFrom={{filters.toDatePeriodFrom}}&toDatePeriodTo={{filters.toDatePeriodTo}}" target="_blank" sc-access-token text="persons.reportLicences.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
+  <sc-ajaxdatatable items="docs" items-count="licencesCount" fetch-fn="getLicences" set-prop="licences" count-prop="licencesCount" dynamic-columns="false" filterable="false">
     <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.lotId }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-ajaxcolumn>

@@ -10,7 +10,7 @@
     Docs,
     docs
   ) {
-    $scope.docs = docs.documents;
+    $scope.docs = docs;
     $scope.docCount = docs.documentCount;
     $scope.msg = $sce.trustAsHtml(docs.msg);
 

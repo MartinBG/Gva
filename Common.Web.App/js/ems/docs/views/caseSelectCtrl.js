@@ -9,7 +9,7 @@
     Docs,
     docs,
     parentDoc) {
-    $scope.docs = docs.documents;
+    $scope.docs = docs;
     $scope.docCount = docs.documentCount;
 
     $scope.filters = {

@@ -21,8 +21,8 @@
       }
     });
 
-    $scope.docs = docs.licences;
-    $scope.documentsCount = docs.licencesCount;
+    $scope.docs = docs;
+    $scope.licencesCount = docs.licencesCount;
 
     $scope.getLicences = function (page, pageSize) {
       var params = {set: $stateParams.set};

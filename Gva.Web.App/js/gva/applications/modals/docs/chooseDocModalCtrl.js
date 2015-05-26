@@ -9,7 +9,7 @@
     scModalParams,
     docs
   ) {
-    $scope.docs = docs.documents;
+    $scope.docs = docs;
     $scope.docCount = docs.documentCount;
 
     $scope.filters = {

@@ -9,7 +9,7 @@
     Applications,
     apps
     ) {
-    $scope.apps = apps.applications;
+    $scope.apps = apps;
     $scope.applicationsCount = apps.applicationsCount;
     $scope.filters = {
       set: null,

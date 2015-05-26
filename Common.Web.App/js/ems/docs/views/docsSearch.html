@@ -89,7 +89,7 @@
     </div>
 
     <div ng-show="!(filters.filter === 'manage' || filters.filter === 'control')">
-      <sc-ajaxdatatable items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+      <sc-ajaxdatatable items="docs" items-count="docCount" fetch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
         <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
           <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
         </sc-ajaxcolumn>
@@ -114,7 +114,7 @@
     </div>
 
     <div ng-show="filters.filter === 'manage' || filters.filter === 'control'">
-      <sc-ajaxdatatable items="docs" items-count="docCount" fectch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+      <sc-ajaxdatatable items="docs" items-count="docCount" fetch-fn="getDocs" set-prop="documents" count-prop="documentCount" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
         <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
           <sc-button name="viewButton" btn-click="viewDoc(item)" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
         </sc-ajaxcolumn>

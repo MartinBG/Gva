@@ -40,7 +40,7 @@ Usage <sc-ajaxdatatable items="data"
             setProp = $attrs.setProp || 'set',
             countProp = $attrs.countProp || 'count';
 
-        $scope.fetcher = $scope.$parent[$attrs.fectchFn];
+        $scope.fetcher = $scope.$parent[$attrs.fetchFn];
         $scope.setProp = setProp;
         $scope.countProp = countProp;
         $scope.filterable = $scope.filterable() === undefined ? true : $scope.filterable();
@@ -199,7 +199,7 @@ Usage <sc-ajaxdatatable items="data"
         }
 
         if (items) {
-          $scope.setItems(1, items, itemsCount || items.length);
+          $scope.setItems(1, items[$scope.setProp], itemsCount || items.length);
           $scope.render();
           items = undefined;
         } else {
@@ -220,12 +220,12 @@ Usage <sc-ajaxdatatable items="data"
           $scope.setFilter(filter);
         });
 
-        $scope.$parent.$watchCollection($attrs.items, function (internalSet) {
+        $scope.$parent.$watchCollection($attrs.items[$scope.setProp], function (internalSet) {
           if (!initializing) {
             var items = _.cloneDeep(internalSet),
               itemsCount = $scope.$parent[$attrs.itemsCount] || 0;
 
-            $scope.setItems(1, items, itemsCount || items.length);
+            $scope.setItems(1, items[$scope.setProp], itemsCount || items.length);
             $scope.render();
           }
         });

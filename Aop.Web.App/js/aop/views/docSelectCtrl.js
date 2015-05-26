@@ -9,7 +9,7 @@
     Aops,
     docs,
     selectDoc) {
-    $scope.docs = docs.documents;
+    $scope.docs = docs;
     $scope.docCount = docs.documentCount;
 
     $scope.filters = {

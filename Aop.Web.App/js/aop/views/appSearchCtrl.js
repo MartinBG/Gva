@@ -9,7 +9,7 @@
     Aops,
     apps
   ) {
-    $scope.apps = apps.applications;
+    $scope.apps = apps;
     $scope.appCount = apps.applicationCount;
 
     //$scope.filters = {

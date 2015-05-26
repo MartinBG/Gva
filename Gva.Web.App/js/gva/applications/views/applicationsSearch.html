@@ -13,7 +13,7 @@
   <sc-search-button action="add"></sc-search-button>
 </sc-search>
 
-<sc-ajaxdatatable items="apps" items-count="applicationsCount" fectch-fn="getApplications" set-prop="applications" count-prop="applicationsCount"
+<sc-ajaxdatatable items="apps" items-count="applicationsCount" fetch-fn="getApplications" set-prop="applications" count-prop="applicationsCount"
   filterable="false" dynamic-columns="true"
   row-class="{'expiredApplication' : isExpiredApplication(item), 'expiringDocument' : isExpiringApplication(item)}">
   <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">

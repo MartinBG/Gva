@@ -21,7 +21,7 @@
       }
     });
 
-    $scope.docs = docs.ratings;
+    $scope.docs = docs;
     $scope.ratingsCount = docs.ratingsCount;
 
     $scope.getRatings = function (page, pageSize) {
