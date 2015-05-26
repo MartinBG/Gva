@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Common.Data;
@@ -33,56 +34,49 @@ namespace Gva.Api.Projections.Aircraft
 
         private GvaViewAircraftCert Create(PartVersion<AircraftCertAirworthinessDO> airworthiness)
         {
-            int? formNumberPrefix = (int?)null;
-            string docNumber = null;
-            Regex contains25or24 = new Regex(@"^(2[4|5])(-)(\d+)");
-            Match match = contains25or24.Match(airworthiness.Content.DocumentNumber);
-
-            if(match.Success)
-            {
-                formNumberPrefix = int.Parse(match.Groups[1].Value);
-                string trimmedNumber = match.Groups[3].Value.TrimStart('0');
-                docNumber =  !string.IsNullOrEmpty(trimmedNumber) ? trimmedNumber : "0";
-            }
-
-            string number = !string.IsNullOrEmpty(docNumber) ? docNumber : null;
-            int parsedDocNumber;
-            bool isParsingSuccessful = int.TryParse(docNumber, out parsedDocNumber);
+            var matchResult = MatchPrefixAndNumber(@"^(2[4|5])(-)(\d+)", airworthiness.Content.DocumentNumber);
 
             GvaViewAircraftCert cert = new GvaViewAircraftCert();
             cert.LotId = airworthiness.Part.Lot.LotId;
             cert.PartIndex = airworthiness.Part.Index;
             cert.DocumentNumber = airworthiness.Content.DocumentNumber;
-            cert.ParsedNumberWithoutPrefix = isParsingSuccessful ? parsedDocNumber : (int?)null;
-            cert.FormNumberPrefix = formNumberPrefix;
+            cert.ParsedNumberWithoutPrefix = matchResult.Item3 ? matchResult.Item2 : (int?)null; ;
+            cert.FormNumberPrefix = matchResult.Item1.HasValue ? matchResult.Item1.Value : (int?)null;
 
             return cert;
         }
 
         private GvaViewAircraftCert Create(PartVersion<AircraftCertNoiseDO> noise)
         {
-            string docNumber = null;
-            Regex contains45 = new Regex(@"^(45)(-)(\d+)");
-            Match match = contains45.Match(noise.Content.IssueNumber);
-
-             if(match.Success)
-            {
-                string trimmedNumber = match.Groups[3].Value.TrimStart('0');
-                docNumber = !string.IsNullOrEmpty(trimmedNumber) ? trimmedNumber : "0";
-            }
-
-            string number = !string.IsNullOrEmpty(docNumber) ? docNumber : null;
-            int parsedDocNumber;
-            bool isParsingSuccessful = int.TryParse(number, out parsedDocNumber);
+            var matchResult = MatchPrefixAndNumber(@"^(45)(-)(\d+)", noise.Content.IssueNumber);
 
             GvaViewAircraftCert cert = new GvaViewAircraftCert();
             cert.LotId = noise.Part.Lot.LotId;
             cert.PartIndex = noise.Part.Index;
             cert.DocumentNumber = noise.Content.IssueNumber;
-            cert.ParsedNumberWithoutPrefix = isParsingSuccessful ? parsedDocNumber : (int?)null;
-            cert.FormNumberPrefix = 45;
+            cert.ParsedNumberWithoutPrefix = matchResult.Item3 ? matchResult.Item2 : (int?)null;
+            cert.FormNumberPrefix = matchResult.Item1.HasValue ? matchResult.Item1.Value : (int?)null;
 
             return cert;
+        }
+
+        private Tuple<int?, int, bool> MatchPrefixAndNumber(string matchExpr, string number)
+        {
+            int? formNumberPrefix = (int?)null;
+            string docNumber = null;
+            Regex regExp = new Regex(matchExpr);
+            Match match = regExp.Match(number);
+
+            if (match.Success)
+            {
+                formNumberPrefix = int.Parse(match.Groups[1].Value);
+                docNumber = match.Groups[3].Value;
+            }
+
+            int parsedDocNumber = 0;
+            bool isParsingSuccessful = !string.IsNullOrEmpty(docNumber) ? int.TryParse(docNumber, out parsedDocNumber) : false;
+
+            return new Tuple<int?, int, bool>(formNumberPrefix, parsedDocNumber, isParsingSuccessful);
         }
     }
 }
