@@ -66,7 +66,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoise.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoiseView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRadio.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertRadioView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegDeregFM.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegFM.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegFMCtrl.js" />

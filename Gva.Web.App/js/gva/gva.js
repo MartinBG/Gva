@@ -194,10 +194,6 @@
       templateUrl: 'js/gva/aircrafts/forms/aircraftCertNoiseView.html'
     });
     scaffoldingProvider.form({
-      name: 'gvaAircraftCertRadioView',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertRadioView.html'
-    });
-    scaffoldingProvider.form({
       name: 'gvaAircraftRadioEntry',
       templateUrl: 'js/gva/aircrafts/forms/aircraftCertRadioEntry.html'
     });
