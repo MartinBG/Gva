@@ -33,10 +33,12 @@
           multiple = tAttrs.multiple,
           modeHtml = mode ? ' mode="' + mode + '"' : '',
           nomObjHtml = nomObj ? ' nom-obj="' + nomObj + '"' : '',
+          formatOptions = tAttrs.formatOptions ?
+            ' format-options="' + tAttrs.formatOptions + '"' : '',
           multipleHtml = multiple ? ' multiple="' + multiple + '"' : '';
 
         dirHtml = '<sc-nomenclature ng-model="model" alias="\'' + alias +
-          '\'" load="' + load + '" ' + modeHtml + nomObjHtml + multipleHtml + '>' +
+          '\'" load="' + load + '" ' + modeHtml + nomObjHtml + multipleHtml + formatOptions + '>' +
           '</sc-nomenclature>';
 
         tElement.append(dirHtml);
