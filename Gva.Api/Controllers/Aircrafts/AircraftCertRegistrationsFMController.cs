@@ -100,7 +100,7 @@ namespace Gva.Api.Controllers.Aircrafts
         public IHttpActionResult GetExportInitData(int lotId)
         {
             var noisesParts = this.lotRepository.GetLotIndex(lotId).Index.GetParts<AircraftCertNoiseDO>("aircraftCertNoises");
-            var lastNoise = noisesParts.OrderByDescending(n => n.Content.IssueDate).SingleOrDefault();
+            var lastNoise = noisesParts.OrderByDescending(n => n.Content.IssueDate).FirstOrDefault();
             string TCDSN = "";
             if (lastNoise != null)
             {
