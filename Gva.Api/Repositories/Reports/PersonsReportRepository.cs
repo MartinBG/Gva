@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Common.Api.Repositories.NomRepository;
 using Gva.Api.CommonUtils;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO.Persons.Reports;
 
 namespace Gva.Api.Repositories.Reports
@@ -18,7 +18,7 @@ namespace Gva.Api.Repositories.Reports
             this.nomRepository = nomRepository;
         }
 
-        public List<PersonReportDocumentDO> GetDocuments(
+        public Tuple<int, List<PersonReportDocumentDO>> GetDocuments(
             SqlConnection conn,
             string documentRole = null,
             DateTime? fromDatePeriodFrom = null,
@@ -29,10 +29,15 @@ namespace Gva.Api.Repositories.Reports
             int? lin = null,
             int? limitationId = null,
             string docNumber = null,
-            string publisher = null)
+            string publisher = null,
+            int offset = 0,
+            int limit = 0)
         {
-            var result = conn.CreateStoreCommand(
+            string limName = limitationId.HasValue ? this.nomRepository.GetNomValue(limitationId.Value).Name : null;
+
+            var queryResult = conn.CreateStoreCommand(
                     @"SELECT
+                        COUNT(*) OVER() as allResultsCount,
                         p.LotId,
                         p.Lin,
                         ii.Name,
@@ -50,8 +55,9 @@ namespace Gva.Api.Repositories.Reports
                     LEFT JOIN NomValues nv ON nv.NomValueId = ii.TypeId
                     LEFT JOIN LotParts lp on lp.LotPartId = ii.LotPartId
                     LEFT JOIN GvaViewPersonDocuments d on d.LotId = lp.LotId and lp.[Index] = d.PartIndex
-                    WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8}
-                    ORDER BY ii.FromDate DESC",
+                    WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8} {9}
+                    ORDER BY ii.FromDate DESC
+                    OFFSET {10} ROWS FETCH NEXT {11} ROWS ONLY",
                     new DbClause("and ii.FromDate >= {0}", fromDatePeriodFrom),
                     new DbClause("and ii.FromDate <= {0}", fromDatePeriodTo),
                     new DbClause("and ii.ToDate >= {0}", toDatePeriodFrom),
@@ -60,35 +66,34 @@ namespace Gva.Api.Repositories.Reports
                     new DbClause("and nv.NomValueId = {0}", typeId),
                     new DbClause("and ii.Name = {0}", documentRole),
                     new DbClause("and ii.Number like '%' + {0} + '%'", docNumber),
-                    new DbClause("and ii.Publisher like '%' + {0} + '%'", publisher))
+                    new DbClause("and ii.Publisher like '%' + {0} + '%'", publisher),
+                    new DbClause("and (d.Limitations like {0} + '$$%' or d.Limitations like '%$$' + {0} or d.Limitations like '%$$' + {0} + '$$' or d.Limitations like {0})", limName),
+                    new DbClause("{0}", offset),
+                    new DbClause("{0}", limit));
+
+            var results = queryResult
                 .Materialize(r =>
-                        new PersonReportDocumentDO()
-                        {
-                            LotId = r.Field<int>("LotId"),
-                            Lin = r.Field<int?>("Lin"),
-                            Name = r.Field<string>("Name"),
-                            Type = r.Field<string>("Type"),
-                            Number = r.Field<string>("Number"),
-                            FromDate = r.Field<DateTime?>("FromDate") ?? r.Field<DateTime?>("Date"),
-                            ToDate = r.Field<DateTime?>("ToDate"),
-                            Valid = r.Field<bool?>("Valid"),
-                            Publisher = r.Field<string>("Publisher"),
-                            Limitations = r.Field<string>("Limitations")
-                        })
-                .ToList();
-
-            if (limitationId.HasValue)
-            {
-                string limName = this.nomRepository.GetNomValue(limitationId.Value).Name;
-                result = result
-                    .Where(r => !string.IsNullOrEmpty(r.Limitations) && Regex.Split(r.Limitations, ", ").Any(l => l == limName))
+                    new PersonReportDocumentDO()
+                    {
+                        LotId = r.Field<int>("LotId"),
+                        Lin = r.Field<int?>("Lin"),
+                        Name = r.Field<string>("Name"),
+                        Type = r.Field<string>("Type"),
+                        Number = r.Field<string>("Number"),
+                        FromDate = r.Field<DateTime?>("FromDate") ?? r.Field<DateTime?>("Date"),
+                        ToDate = r.Field<DateTime?>("ToDate"),
+                        Valid = r.Field<bool?>("Valid"),
+                        Publisher = r.Field<string>("Publisher"),
+                        Limitations = !string.IsNullOrEmpty(r.Field<string>("Limitations")) ? r.Field<string>("Limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null
+                    })
                     .ToList();
-            }
 
-            return result;
+            int count = queryResult.Materialize(r => r.Field<int>("allResultsCount")).FirstOrDefault();
+
+            return new Tuple<int, List<PersonReportDocumentDO>>(count, results);
         }
 
-        public List<PersonReportLicenceDO> GetLicences(
+        public Tuple<int, List<PersonReportLicenceDO>> GetLicences(
             SqlConnection conn,
             DateTime? fromDatePeriodFrom = null,
             DateTime? fromDatePeriodTo = null,
@@ -97,16 +102,21 @@ namespace Gva.Api.Repositories.Reports
             int? lin = null,
             int? licenceTypeId = null,
             int? licenceActionId = null,
-            int? limitationId = null)
+            int? limitationId = null,
+            int offset = 0,
+            int limit = 0)
         {
-            var result = conn.CreateStoreCommand(
+            string limName = limitationId.HasValue ? this.nomRepository.GetNomValue(limitationId.Value).Name : null;
+
+            var queryResult = conn.CreateStoreCommand(
                         @"SELECT
+                             COUNT(*) OVER() as allResultsCount,
                              p.LotId,
                              p.Lin,
                              p.Uin AS uin,
                              p.Names,
                              lt.Name AS LicenceTypeName,
-                             l.PublisherCode + ' ' + l.LicenceTypeCaCode + ' ' + RIGHT('00000'+CAST(l.LicenceNumber AS NVARCHAR(5)),5) AS LicenceCode,
+                             l.PublisherCode + ' ' + l.LicenceTypeCaCode + ' ' + RIGHT('00000' + CAST(l.LicenceNumber AS NVARCHAR(5)),5) AS LicenceCode,
                              le.DateValidFrom,
                              le.DateValidTo,
                              le.FirstDocDateValidFrom AS FirstIssueDate, 
@@ -119,18 +129,25 @@ namespace Gva.Api.Repositories.Reports
                          INNER JOIN GvaViewPersons p ON l.LotId = p.LotId
                          INNER JOIN NomValues lt ON lt.NomValueId = l.LicenceTypeId
                          INNER JOIN NomValues la ON la.NomValueId = le.LicenceActionId
-                         WHERE 1=1 {0} {1} {2} {3} {4} {5} {6}
-                         ORDER BY le.DateValidFrom DESC",
+                         WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7}
+                         ORDER BY le.DateValidFrom DESC 
+                         OFFSET {8} ROWS FETCH NEXT {9} ROWS ONLY",
                         new DbClause("and le.DateValidFrom >= {0}", fromDatePeriodFrom),
                         new DbClause("and le.DateValidFrom <= {0}", fromDatePeriodTo),
                         new DbClause("and le.DateValidTo >= {0}", toDatePeriodFrom),
                         new DbClause("and le.DateValidTo <= {0}", toDatePeriodTo),
                         new DbClause("and p.Lin = {0}", lin),
                         new DbClause("and lt.NomValueId = {0}", licenceTypeId),
-                        new DbClause("and la.NomValueId = {0}", licenceActionId))
-                    .Materialize(r =>
+                        new DbClause("and la.NomValueId = {0}", licenceActionId),
+                        new DbClause("and (le.Limitations like {0} + '$$%' or le.Limitations like '%$$' + {0} or le.Limitations like '%$$' + {0} + '$$' or le.Limitations like {0})", limName),
+                        new DbClause("{0}", offset),
+                        new DbClause("{0}", limit));
+
+            var results = queryResult
+                .Materialize(r =>
                             new PersonReportLicenceDO()
                             {
+                                
                                 LotId = r.Field<int>("lotId"),
                                 Lin = r.Field<int?>("lin"),
                                 Uin = r.Field<string>("uin"),
@@ -142,22 +159,16 @@ namespace Gva.Api.Repositories.Reports
                                 FirstIssueDate = r.Field<DateTime?>("firstIssueDate"),
                                 LicenceAction = r.Field<string>("licenceAction"),
                                 StampNumber = r.Field<string>("stampNumber"),
-                                Limitations = r.Field<string>("limitations")
+                                Limitations = !string.IsNullOrEmpty(r.Field<string>("limitations")) ? r.Field<string>("limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null
                             })
                     .ToList();
 
-            if (limitationId.HasValue)
-            {
-                string limName = this.nomRepository.GetNomValue(limitationId.Value).Name;
-                result = result
-                    .Where(r => !string.IsNullOrEmpty(r.Limitations) && Regex.Split(r.Limitations, ", ").Any(l => l == limName))
-                    .ToList();
-            }
+            int count = queryResult.Materialize(r => r.Field<int>("allResultsCount")).FirstOrDefault();
 
-            return result;
+            return new Tuple<int, List<PersonReportLicenceDO>>(count, results);
         }
 
-        public List<PersonReportRatingDO> GetRatings(
+        public Tuple<int, List<PersonReportRatingDO>> GetRatings(
             SqlConnection conn,
             DateTime? fromDatePeriodFrom = null,
             DateTime? fromDatePeriodTo = null,
@@ -167,10 +178,15 @@ namespace Gva.Api.Repositories.Reports
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
             int? lin = null,
-            int? limitationId = null)
+            int? limitationId = null,
+            int offset = 0,
+            int limit = 0)
         {
-            var result = conn.CreateStoreCommand(@"
+            string limCode = limitationId.HasValue? this.nomRepository.GetNomValue(limitationId.Value).Code : null;
+
+            var queryResult = conn.CreateStoreCommand(@"
                          SELECT 
+                            COUNT(*) OVER() as allResultsCount,
                             p.Lin,
                             r.LotId,
                             lastEdition.RatingPartIndex,
@@ -211,8 +227,9 @@ namespace Gva.Api.Repositories.Reports
                         LEFT JOIN NomValues atg ON atg.NomValueId = r.AircraftTypeGroupId
                         LEFT JOIN NomValues li ON li.NomValueId = r.LocationIndicatorId
                         LEFT JOIN NomValues rl ON rl.NomValueId = r.RatingLevelId
-                        WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7}
-                        ORDER BY re.DocDateValidFrom DESC",
+                        WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8}
+                        ORDER BY re.DocDateValidFrom DESC
+                        OFFSET {9} ROWS FETCH NEXT {10} ROWS ONLY",
                         new DbClause("and re.DocDateValidFrom >= {0}", fromDatePeriodFrom),
                         new DbClause("and re.DocDateValidFrom <= {0}", fromDatePeriodTo),
                         new DbClause("and re.DocDateValidTo >= {0}", toDatePeriodFrom),
@@ -220,37 +237,36 @@ namespace Gva.Api.Repositories.Reports
                         new DbClause("and p.Lin = {0}", lin),
                         new DbClause("and r.RatingClassId = {0}", ratingClassId),
                         new DbClause("and r.AuthorizationId = {0}", authorizationId),
-                        new DbClause("and r.AircraftTypeGroupId = {0}", aircraftTypeCategoryId))
-                    .Materialize(r =>
-                            new PersonReportRatingDO()
-                            {
-                                Lin = r.Field<int?>("lin"),
-                                LotId = r.Field<int>("lotId"),
-                                RatingSubClasses = r.Field<string>("RatingSubClasses"),
-                                Limitations = r.Field<string>("Limitations"),
-                                FirstIssueDate = r.Field<DateTime?>("FirstIssueDate"),
-                                DateValidFrom = r.Field<DateTime?>("DocDateValidFrom"),
-                                DateValidTo = r.Field<DateTime?>("DocDateValidTo"),
-                                RatingTypes = r.Field<string>("RatingTypes"),
-                                Sector = r.Field<string>("Sector"),
-                                RatingClass = r.Field<string>("RatingClass"),
-                                AuthorizationCode = r.Field<string>("AuthorizationCode"),
-                                AircraftTypeCategory = r.Field<string>("AircraftTypeCategory"),
-                                AircraftTypeGroup = r.Field<string>("AircraftTypeGroup"),
-                                LocationIndicator = r.Field<string>("LocationIndicator"),
-                                RatingLevel = r.Field<string>("RatingLevel")
-                            })
+                        new DbClause("and r.AircraftTypeGroupId = {0}", aircraftTypeCategoryId),
+                        new DbClause("and (re.Limitations like {0} + '$$%' re.Limitations like '%$$' + {0} or re.Limitations like '%$$' + {0} + '$$' or re.Limitations like {0})", limCode),
+                        new DbClause("{0}", offset),
+                        new DbClause("{0}", limit));
+
+            var results = queryResult
+                .Materialize(r =>
+                    new PersonReportRatingDO()
+                    {
+                        Lin = r.Field<int?>("lin"),
+                        LotId = r.Field<int>("lotId"),
+                        RatingSubClasses = r.Field<string>("RatingSubClasses"),
+                        Limitations = !string.IsNullOrEmpty(r.Field<string>("Limitations")) ? r.Field<string>("Limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null,
+                        FirstIssueDate = r.Field<DateTime?>("FirstIssueDate"),
+                        DateValidFrom = r.Field<DateTime?>("DocDateValidFrom"),
+                        DateValidTo = r.Field<DateTime?>("DocDateValidTo"),
+                        RatingTypes = r.Field<string>("RatingTypes"),
+                        Sector = r.Field<string>("Sector"),
+                        RatingClass = r.Field<string>("RatingClass"),
+                        AuthorizationCode = r.Field<string>("AuthorizationCode"),
+                        AircraftTypeCategory = r.Field<string>("AircraftTypeCategory"),
+                        AircraftTypeGroup = r.Field<string>("AircraftTypeGroup"),
+                        LocationIndicator = r.Field<string>("LocationIndicator"),
+                        RatingLevel = r.Field<string>("RatingLevel")
+                    })
                     .ToList();
 
-            if (limitationId.HasValue)
-            {
-                string limCode = this.nomRepository.GetNomValue(limitationId.Value).Code;
-                result = result
-                    .Where(r => !string.IsNullOrEmpty(r.Limitations) && Regex.Split(r.Limitations, ", ").Any(l => l == limCode))
-                    .ToList();
-            }
+            int count = queryResult.Materialize(r => r.Field<int>("allResultsCount")).FirstOrDefault();
 
-            return result;
+             return new Tuple<int, List<PersonReportRatingDO>>(count, results);
         }
     }
 }

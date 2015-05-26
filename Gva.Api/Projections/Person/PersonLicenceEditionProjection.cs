@@ -5,6 +5,7 @@ using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Data;
 using Common.Json;
+using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
@@ -68,7 +69,7 @@ namespace Gva.Api.Projections.Person
             }
             if (edition.Content.Limitations.Count > 0)
             {
-                licenceEdition.Limitations = string.Join(", ", edition.Content.Limitations.Select(l => l.Name));
+                licenceEdition.Limitations = string.Join(GvaConstants.ConcatenatingExp, edition.Content.Limitations.Select(l => l.Name));
             }
 
             return licenceEdition;

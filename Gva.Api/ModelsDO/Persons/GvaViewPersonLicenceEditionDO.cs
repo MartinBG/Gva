@@ -63,7 +63,7 @@ namespace Gva.Api.ModelsDO.Persons
                 this.Case = new CaseDO(edition.LotFile);
             }
 
-            this.Limitations = edition.Limitations;
+            this.Limitations = !string.IsNullOrEmpty(edition.Limitations) ? edition.Limitations.Replace(GvaConstants.ConcatenatingExp, ", ") : null;
         }
 
         public int LotId { get; set; }

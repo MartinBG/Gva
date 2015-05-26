@@ -40,24 +40,27 @@ namespace Gva.Api.Repositories.PersonRepository
             int offset = 0,
             int? limit = null);
 
-        IEnumerable<GvaLicenceEdition> GetPrintableDocs(
+        Tuple<int, IEnumerable<GvaViewPersonLicenceEditionDO>> GetPrintableDocs(
             int? licenceType = null,
             int? licenceAction = null,
             int? lin = null,
             string uin = null,
             string names = null,
-            bool exact = false);
+            int offset = 0,
+            int? limit = null);
 
         int? GetNextLin(int linTypeId);
 
         bool IsUniqueUin(string uin, int? personId = null);
 
-        List<GvaLicenceEdition> GetStampedDocuments(
+        Tuple<int, IEnumerable<GvaViewPersonLicenceEditionDO>> GetStampedDocuments(
             string uin,
             string names,
             string stampNumber,
             int? lin = null,
-            int? licenceNumber = null);
+            int? licenceNumber = null,
+            int offset = 0,
+            int? limit = null);
 
         IEnumerable<GvaLicenceEdition> GetLicences(int lotId, int? caseTypeId);
 

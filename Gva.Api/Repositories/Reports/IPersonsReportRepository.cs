@@ -11,7 +11,7 @@ namespace Gva.Api.Repositories.Reports
 {
     public interface IPersonsReportRepository
     {
-        List<PersonReportDocumentDO> GetDocuments(
+        Tuple<int, List<PersonReportDocumentDO>> GetDocuments(
             SqlConnection conn,
             string documentRole = null,
             DateTime? fromDatePeriodFrom = null,
@@ -22,9 +22,11 @@ namespace Gva.Api.Repositories.Reports
             int? lin = null,
             int? limitationId = null,
             string docNumber = null,
-            string publisher = null);
+            string publisher = null,
+            int offset = 0,
+            int limit = 10);
 
-        List<PersonReportLicenceDO> GetLicences(
+        Tuple<int, List<PersonReportLicenceDO>> GetLicences(
             SqlConnection conn,
             DateTime? fromDatePeriodFrom = null,
             DateTime? fromDatePeriodTo = null,
@@ -33,9 +35,11 @@ namespace Gva.Api.Repositories.Reports
             int? lin = null,
             int? licenceTypeId = null,
             int? licenceActionId = null,
-            int? limitationId = null);
+            int? limitationId = null,
+            int offset = 0,
+            int limit = 10);
 
-        List<PersonReportRatingDO> GetRatings(
+        Tuple<int, List<PersonReportRatingDO>> GetRatings(
             SqlConnection conn,
             DateTime? fromDatePeriodFrom = null,
             DateTime? fromDatePeriodTo = null,
@@ -45,6 +49,8 @@ namespace Gva.Api.Repositories.Reports
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
             int? lin = null,
-            int? limitationId = null);
+            int? limitationId = null,
+            int offset = 0,
+            int limit = 10);
     }
 }

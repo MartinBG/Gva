@@ -11,5 +11,6 @@ namespace Gva.Api.Models
        public static readonly int IsReadyApplication = 6;
        public static readonly int IsReceivedApplication = 7;
        public static readonly int IsDoneApplication = 8;
+       public static readonly string ConcatenatingExp = "$$";
     }
 }

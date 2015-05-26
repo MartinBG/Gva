@@ -24,7 +24,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.AircraftTypeCategory = rating.AircraftTypeCategory;
             this.Authorization = rating.Authorization;
             this.RatingSubClasses = edition.RatingSubClasses;
-            this.Limitations = edition.Limitations;
+            this.Limitations = !string.IsNullOrEmpty(edition.Limitations) ? edition.Limitations.Replace(GvaConstants.ConcatenatingExp, ", ") : null;
             this.DocDateValidFrom = edition.DocDateValidFrom;
             this.DocDateValidTo = edition.DocDateValidTo;
             this.LocationIndicator = rating.LocationIndicator;

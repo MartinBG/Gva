@@ -38,7 +38,7 @@ namespace Gva.Api.Projections.Person
             edition.PartIndex = licenceEdition.Part.Index;
             edition.RatingPartIndex = licenceEdition.Content.RatingPartIndex.Value;
             edition.RatingSubClasses = licenceEdition.Content.RatingSubClasses.Count > 0 ? string.Join(", ", licenceEdition.Content.RatingSubClasses.Select(t => t.Code)) : null;
-            edition.Limitations = licenceEdition.Content.Limitations.Count > 0 ? string.Join(", ", licenceEdition.Content.Limitations.Select(t => t.Code)) : null;
+            edition.Limitations = licenceEdition.Content.Limitations.Count > 0 ? string.Join(GvaConstants.ConcatenatingExp, licenceEdition.Content.Limitations.Select(t => t.Code)) : null;
 
             if (licenceEdition.Content.DocumentDateValidTo.HasValue)
             {

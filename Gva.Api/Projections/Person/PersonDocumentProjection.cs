@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Data;
+using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
 using Gva.Api.ModelsDO.Persons;
 using Regs.Api.LotEvents;
@@ -99,7 +100,7 @@ namespace Gva.Api.Projections.Person
                     DocumentDateValidFrom = d.Content.DocumentDateValidFrom,
                     DocumentPublisher = d.Content.DocumentPublisher.Name,
                     DocumentNumber = d.Content.DocumentNumber,
-                    Limitations = d.Content.Limitations.Count() > 0 ? string.Join(", ", d.Content.Limitations.Select(l => l.Name)) : null
+                    Limitations = d.Content.Limitations.Count() > 0 ? string.Join(GvaConstants.ConcatenatingExp, d.Content.Limitations.Select(l => l.Name)) : null
                 });
 
             var reports = parts.GetAll<PersonReportDO>("personReports")

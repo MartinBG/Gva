@@ -47,12 +47,14 @@ namespace Gva.Api.Controllers.Reports
                     lin: lin,
                     limitationId: limitationId,
                     docNumber: docNumber,
-                    publisher: publisher);
+                    publisher: publisher,
+                    offset: offset,
+                    limit: limit);
 
                 return Ok(new
                 {
-                    documentsCount = result.Count(),
-                    documents = result.Skip(offset).Take(limit).ToList()
+                    documentsCount = result.Item1,
+                    documents = result.Item2
                 });
             }
         }
@@ -72,7 +74,7 @@ namespace Gva.Api.Controllers.Reports
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
-                var licences = this.personsReportRepository.GetLicences(
+                var result = this.personsReportRepository.GetLicences(
                     conn: conn,
                     fromDatePeriodFrom: fromDatePeriodFrom,
                     fromDatePeriodTo: fromDatePeriodTo,
@@ -81,12 +83,14 @@ namespace Gva.Api.Controllers.Reports
                     licenceActionId: licenceActionId,
                     licenceTypeId: licenceTypeId,
                     limitationId: limitationId,
-                    lin: lin);
+                    lin: lin,
+                    offset: offset,
+                    limit: limit);
 
                 return Ok(new
                 {
-                    licencesCount = licences.Count(),
-                    licences = licences.Skip(offset).Take(limit).ToList()
+                    licencesCount = result.Item1,
+                    licences = result.Item2
                 });
             }
         }
@@ -107,7 +111,7 @@ namespace Gva.Api.Controllers.Reports
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
-                var ratings = this.personsReportRepository.GetRatings(
+                var result = this.personsReportRepository.GetRatings(
                     conn: conn,
                     fromDatePeriodFrom: fromDatePeriodFrom,
                     fromDatePeriodTo: fromDatePeriodTo,
@@ -117,12 +121,14 @@ namespace Gva.Api.Controllers.Reports
                     authorizationId: authorizationId,
                     aircraftTypeCategoryId: aircraftTypeCategoryId,
                     lin: lin,
-                    limitationId: limitationId);
+                    limitationId: limitationId,
+                    offset: offset,
+                    limit: limit);
 
                 return Ok(new
                 {
-                    ratingsCount = ratings.Count(),
-                    ratings = ratings.Skip(offset).Take(limit).ToList()
+                    ratingsCount = result.Item1,
+                    ratings = result.Item2
                 });
             }
         }

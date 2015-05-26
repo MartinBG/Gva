@@ -26,9 +26,11 @@ namespace Gva.Api.Repositories.Reports
             int? lin = null,
             int? limitationId = null,
             string docNumber = null,
-            string publisher = null)
+            string publisher = null,
+            int offset = 0,
+            int limit = 10)
         {
-            List<PersonReportDocumentDO> documents = this.personReportRepository.GetDocuments(
+            Tuple<int, List<PersonReportDocumentDO>> documentResult = this.personReportRepository.GetDocuments(
                 conn: conn,
                 lin: lin,
                 documentRole: documentRole,
@@ -39,7 +41,9 @@ namespace Gva.Api.Repositories.Reports
                 typeId: typeId,
                 limitationId: limitationId,
                 docNumber: docNumber,
-                publisher: publisher);
+                publisher: publisher,
+                offset: offset,
+                limit: limit);
 
             var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("Documents");
@@ -60,9 +64,10 @@ namespace Gva.Api.Repositories.Reports
             ws.Cell(rowIndex, "F").Value = "Валиден";
             ws.Cell(rowIndex, "G").Value = "От дата";
             ws.Cell(rowIndex, "H").Value = "До дата";
+            ws.Cell(rowIndex, "J").Value = "Ограничения";
 
             rowIndex++;
-            foreach (var document in documents)
+            foreach (var document in documentResult.Item2)
             {
                 ws.Cell(rowIndex, "A").Value = document.Lin;
                 ws.Cell(rowIndex, "B").Value = document.Name;
@@ -72,6 +77,7 @@ namespace Gva.Api.Repositories.Reports
                 ws.Cell(rowIndex, "F").Value = document.Valid.HasValue ? (document.Valid.Value ? "Да" : "Не") : null;
                 ws.Cell(rowIndex, "G").Value = document.FromDate.HasValue ? document.FromDate.Value.ToString("dd.MM.yyyy") : null;
                 ws.Cell(rowIndex, "H").Value = document.ToDate.HasValue ? document.ToDate.Value.ToString("dd.MM.yyyy") : null;
+                ws.Cell(rowIndex, "J").Value = document.Limitations;
                 rowIndex++;
             }
 
@@ -91,9 +97,11 @@ namespace Gva.Api.Repositories.Reports
                     int? licenceActionId = null,
                     int? licenceTypeId = null,
                     int? lin = null,
-                    int? limitationId = null)
+                    int? limitationId = null,
+                    int offset = 0,
+                    int limit = 10)
         {
-            List<PersonReportLicenceDO> licences = this.personReportRepository.GetLicences(
+            Tuple<int, List<PersonReportLicenceDO>> licences = this.personReportRepository.GetLicences(
                     conn: conn,
                     fromDatePeriodFrom: fromDatePeriodFrom,
                     fromDatePeriodTo: fromDatePeriodTo,
@@ -102,7 +110,9 @@ namespace Gva.Api.Repositories.Reports
                     licenceActionId: licenceActionId,
                     licenceTypeId: licenceTypeId,
                     lin: lin,
-                    limitationId: limitationId);
+                    limitationId: limitationId,
+                    offset: offset,
+                    limit: limit);
 
             var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("Licences");
@@ -127,7 +137,7 @@ namespace Gva.Api.Repositories.Reports
             ws.Cell(rowIndex, "J").Value = "№ на печат";
             ws.Cell(rowIndex, "K").Value = "Ограничения";
             rowIndex++;
-            foreach (var licence in licences)
+            foreach (var licence in licences.Item2)
             {
                 ws.Cell(rowIndex, "A").Value = licence.Lin;
                 ws.Cell(rowIndex, "B").Value = licence.Uin;
@@ -158,9 +168,11 @@ namespace Gva.Api.Repositories.Reports
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
             int? lin = null,
-            int? limitationId = null)
+            int? limitationId = null,
+            int offset = 0,
+            int limit = 10)
         {
-            List<PersonReportRatingDO> ratings = this.personReportRepository.GetRatings(
+            Tuple<int, List<PersonReportRatingDO>> ratings = this.personReportRepository.GetRatings(
                         conn: conn,
                         fromDatePeriodFrom: fromDatePeriodFrom,
                         fromDatePeriodTo: fromDatePeriodTo,
@@ -169,7 +181,9 @@ namespace Gva.Api.Repositories.Reports
                         ratingClassId: ratingClassId,
                         authorizationId: authorizationId,
                         lin: lin,
-                        limitationId: limitationId);
+                        limitationId: limitationId,
+                        limit: limit,
+                        offset: offset);
 
             var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("Ratings");
@@ -195,7 +209,7 @@ namespace Gva.Api.Repositories.Reports
             ws.Cell(rowIndex, "K").Value = "Ограничения";
 
             rowIndex++;
-            foreach (var rating in ratings)
+            foreach (var rating in ratings.Item2)
             {
                 ws.Cell(rowIndex, "A").Value = rating.Lin;
                 ws.Cell(rowIndex, "B").Value = rating.DateValidFrom.HasValue ? rating.DateValidFrom.Value.ToString("dd.MM.yyyy") : null;

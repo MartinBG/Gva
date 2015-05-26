@@ -22,7 +22,9 @@ namespace Gva.Api.Repositories.Reports
            int? lin = null,
            int? limitationId = null,
            string docNumber = null,
-           string publisher = null);
+           string publisher = null,
+           int offset = 0,
+           int limit = 10);
 
         XLWorkbook GetLicencesWorkbook(
             SqlConnection conn,
@@ -33,7 +35,9 @@ namespace Gva.Api.Repositories.Reports
             int? licenceActionId = null,
             int? licenceTypeId = null,
             int? lin = null,
-            int? limitationId = null);
+            int? limitationId = null,
+            int offset = 0,
+            int limit = 10);
 
         XLWorkbook GetRatingsWorkbook(
             SqlConnection conn,
@@ -45,6 +49,8 @@ namespace Gva.Api.Repositories.Reports
             int? authorizationId = null,
             int? aircraftTypeCategoryId = null,
             int? lin = null,
-            int? limitationId = null);
+            int? limitationId = null,
+            int offset = 0,
+            int limit = 10);
     }
 }

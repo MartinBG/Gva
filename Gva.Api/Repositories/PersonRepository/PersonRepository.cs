@@ -9,6 +9,7 @@ using Common.Json;
 using Common.Linq;
 using Gva.Api.Models;
 using Gva.Api.Models.Views.Person;
+using Gva.Api.ModelsDO.Persons;
 
 namespace Gva.Api.Repositories.PersonRepository
 {
@@ -162,13 +163,14 @@ namespace Gva.Api.Repositories.PersonRepository
                 .ToList();
         }
 
-        public IEnumerable<GvaLicenceEdition> GetPrintableDocs(
+        public Tuple<int, IEnumerable<GvaViewPersonLicenceEditionDO>> GetPrintableDocs(
             int? licenceType = null,
             int? licenceAction = null,
             int? lin = null,
             string uin = null,
             string names = null,
-            bool exact = false)
+            int offset = 0,
+            int? limit = null)
         {
             var predicate = PredicateBuilder.True<GvaLicenceEdition>();
 
@@ -176,8 +178,8 @@ namespace Gva.Api.Repositories.PersonRepository
                 .And(e => e.StampNumber == null)
                 .And(e => e.IsLastEdition == true)
                 .AndEquals(e => e.Person.Lin, lin)
-                .AndStringMatches(e => e.Person.Uin, uin, exact)
-                .AndStringMatches(e => e.Person.Names, names, exact);
+                .AndStringMatches(e => e.Person.Uin, uin, false)
+                .AndStringMatches(e => e.Person.Names, names, false);
 
             if (licenceType.HasValue)
             {
@@ -189,7 +191,7 @@ namespace Gva.Api.Repositories.PersonRepository
                 predicate = predicate.AndEquals(e => e.LicenceActionId, licenceAction);
             }
 
-            return this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
+            var query = this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceAction)
                 .Include(e => e.Person)
                 .Include(e => e.Person.LinType)
@@ -197,8 +199,13 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.Application.ApplicationType)
                 .Include(e => e.Application.Part)
                 .Where(predicate)
-                .OrderByDescending(i => i.DateValidFrom)
+                .OrderByDescending(i => i.DateValidFrom);
+
+            var result = query
+                .WithOffsetAndLimit(offset, limit)
                 .ToList();
+
+            return new Tuple<int, IEnumerable<GvaViewPersonLicenceEditionDO>>(query.Count(), result.Select(d => new GvaViewPersonLicenceEditionDO(d)));
         }
 
         public int? GetNextLin(int linTypeId)
@@ -239,12 +246,14 @@ namespace Gva.Api.Repositories.PersonRepository
             }
         }
 
-        public List<GvaLicenceEdition> GetStampedDocuments(
+        public Tuple<int, IEnumerable<GvaViewPersonLicenceEditionDO>> GetStampedDocuments(
             string uin,
             string names,
             string stampNumber,
             int? lin = null,
-            int? licenceNumber = null)
+            int? licenceNumber = null,
+            int offset = 0,
+            int? limit = null)
         {
             var predicate = PredicateBuilder.True<GvaLicenceEdition>()
                 .And(e => e.StampNumber != null && e.GvaStageId.HasValue)
@@ -276,7 +285,8 @@ namespace Gva.Api.Repositories.PersonRepository
                 predicate = predicate.And(e => e.StampNumber.Contains(stampNumber));
             }
 
-            return this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
+
+            var query = this.unitOfWork.DbContext.Set<GvaLicenceEdition>()
                 .Include(e => e.LicenceAction)
                 .Include(e => e.Person)
                 .Include(e => e.Person.LinType)
@@ -284,8 +294,13 @@ namespace Gva.Api.Repositories.PersonRepository
                 .Include(e => e.Application.ApplicationType)
                 .Include(e => e.Application.Part)
                 .Where(predicate)
-                .OrderByDescending(i => i.DateValidFrom)
+                .OrderByDescending(i => i.DateValidFrom);
+
+            var result = query
+                .WithOffsetAndLimit(offset, limit)
                 .ToList();
+
+            return new Tuple<int, IEnumerable<GvaViewPersonLicenceEditionDO>>(query.Count(), result.Select(d => new GvaViewPersonLicenceEditionDO(d)));
         }
 
         public IEnumerable<GvaLicenceEdition> GetLicences(int lotId, int? caseTypeId)
