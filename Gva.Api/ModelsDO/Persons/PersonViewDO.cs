@@ -15,6 +15,7 @@ namespace Gva.Api.ModelsDO.Persons
             this.LinType = personData.LinType.Code;
             this.Uin = personData.Uin;
             this.Names = personData.Names;
+            this.NamesAlt = personData.NamesAlt;
             this.Age = this.GetAge(personData.BirtDate.Date);
             this.Organization = personData.Organization == null ? null : personData.Organization.Name;
             this.Employment = personData.Employment == null ? null : personData.Employment.Name;
@@ -33,6 +34,8 @@ namespace Gva.Api.ModelsDO.Persons
         public string Uin { get; set; }
 
         public string Names { get; set; }
+
+        public string NamesAlt { get; set; }
 
         public int Age { get; set; }
 

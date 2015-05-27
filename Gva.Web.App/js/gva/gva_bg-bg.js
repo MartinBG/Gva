@@ -1417,6 +1417,7 @@
         },
         search: {
           names: 'Име',
+          namesAlt: 'Име (алт.)',
           lin: 'ЛИН',
           uin: 'ЕГН',
           licences: 'Лицензи',
