@@ -43,6 +43,7 @@ Usage <sc-ajaxdatatable items="data"
         $scope.fetcher = $scope.$parent[$attrs.fetchFn];
         $scope.setProp = setProp;
         $scope.countProp = countProp;
+        $scope.pageSize = $attrs.pageSize || 10;
         $scope.filterable = $scope.filterable() === undefined ? true : $scope.filterable();
         $scope.scrollable = $scope.scrollable() === undefined ? true : $scope.scrollable();
         //$scope.pageable = $scope.pageable() === undefined ? true : $scope.pageable();
