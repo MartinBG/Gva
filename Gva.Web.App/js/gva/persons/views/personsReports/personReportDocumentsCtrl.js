@@ -9,6 +9,7 @@
     documentRoleOptions,
     docs
   ) {
+    var itemsPerPage = $stateParams.limit;
 
     $scope.documentRoleOptions = documentRoleOptions;
     $scope.filters = {
@@ -16,7 +17,10 @@
       fromDate: null,
       toDate: null,
       typeId: null,
-      lin: null
+      lin: null,
+      itemsPerPage: itemsPerPage ? 
+        {id: $stateParams.limit, text: $stateParams.limit} :
+        {id: 10, text: '10'}
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -28,8 +32,9 @@
     $scope.docs = docs;
     $scope.documentsCount = docs.documentsCount;
 
-    $scope.getDocuments = function (page, pageSize) {
+    $scope.getDocuments = function (page) {
       var params = {set: $stateParams.set};
+      var pageSize = $scope.filters.itemsPerPage.id;
 
       _.assign(params, $scope.filters);
       _.assign(params, {
@@ -52,7 +57,9 @@
         lin: $scope.filters.lin,
         limitationId: $scope.filters.limitationId,
         docNumber: $scope.filters.docNumber,
-        publisher: $scope.filters.publisher
+        publisher: $scope.filters.publisher,
+        limit: $scope.filters.itemsPerPage ?
+          $scope.filters.itemsPerPage.id : 10
       });
     };
   }

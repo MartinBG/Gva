@@ -8,11 +8,16 @@
     PersonsReports,
     docs
   ) {
+    var itemsPerPage = $stateParams.limit;
+
     $scope.filters = {
       fromDate: null,
       toDate: null,
       ratingClassId: null,
-      lin: null
+      lin: null,
+      itemsPerPage: itemsPerPage ? 
+        {id: $stateParams.limit, text: $stateParams.limit} :
+        {id: 10, text: '10'}
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -24,8 +29,9 @@
     $scope.docs = docs;
     $scope.ratingsCount = docs.ratingsCount;
 
-    $scope.getRatings = function (page, pageSize) {
+    $scope.getRatings = function (page) {
       var params = {set: $stateParams.set};
+      var pageSize = $scope.filters.itemsPerPage.id;
 
       _.assign(params, $scope.filters);
       _.assign(params, {
@@ -46,7 +52,9 @@
         authorizationId: $scope.filters.authorizationId,
         aircraftTypeCategoryId: $scope.filters.aircraftTypeCategoryId,
         lin: $scope.filters.lin,
-        limitationId: $scope.filters.limitationId
+        limitationId: $scope.filters.limitationId,
+        limit: $scope.filters.itemsPerPage ?
+          $scope.filters.itemsPerPage.id : 10
       });
     };
   }

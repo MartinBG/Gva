@@ -1452,7 +1452,8 @@
           toDate: 'Дата на валидност',
           search: 'Търси',
           'export': 'Експорт',
-          limitations: 'Ограничения'
+          limitations: 'Ограничения',
+          itemsPerPage: 'Бр. на стр.'
         },
         reportLicences: {
           names: 'Име',
@@ -1471,7 +1472,8 @@
           licenceCode: '№',
           search: 'Търси',
           'export': 'Експорт',
-          limitations: 'Ограничения'
+          limitations: 'Ограничения',
+          itemsPerPage: 'Бр. на стр.'
         },
         reportRatings: {
           lin: 'ЛИН',
@@ -1490,7 +1492,8 @@
           toDate: 'Дата на валидност',
           search: 'Търси',
           'export': 'Експорт',
-          limitations: 'Ограничения'
+          limitations: 'Ограничения',
+          itemsPerPage: 'Бр. на стр.'
         },
         qlfStateDirective: {
           title: 'Създаване на състояние относно придибиване на квалификация',
