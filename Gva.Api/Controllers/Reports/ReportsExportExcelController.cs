@@ -36,7 +36,9 @@ namespace Gva.Api.Controllers.Reports
             int? lin = null,
             int? limitationId = null,
             string docNumber = null,
-            string publisher = null)
+            string publisher = null,
+            int offset = 0,
+            int limit = 10)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
@@ -51,7 +53,9 @@ namespace Gva.Api.Controllers.Reports
                     lin: lin,
                     limitationId: limitationId,
                     docNumber: docNumber,
-                    publisher: publisher);
+                    publisher: publisher,
+                    limit: limit,
+                    offset: offset);
 
                 return this.GetExcelFile(workbook, "documents");
             }
@@ -67,7 +71,9 @@ namespace Gva.Api.Controllers.Reports
             int? lin = null,
             int? licenceTypeId = null,
             int? licenceActionId = null,
-            int? limitationId = null)
+            int? limitationId = null,
+            int offset = 0,
+            int limit = 10)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
@@ -80,7 +86,9 @@ namespace Gva.Api.Controllers.Reports
                     licenceActionId: licenceActionId,
                     licenceTypeId: licenceTypeId,
                     lin: lin,
-                    limitationId: limitationId);
+                    limitationId: limitationId,
+                    limit: limit,
+                    offset: offset);
 
                 return this.GetExcelFile(workbook, "licences");
             }
@@ -96,7 +104,9 @@ namespace Gva.Api.Controllers.Reports
             int? lin = null,
             int? ratingClassId = null,
             int? authorizationId = null,
-            int? limitationId = null)
+            int? limitationId = null,
+            int offset = 0,
+            int limit = 10)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
             {
@@ -109,7 +119,9 @@ namespace Gva.Api.Controllers.Reports
                     ratingClassId: ratingClassId,
                     authorizationId: authorizationId,
                     lin: lin,
-                    limitationId: limitationId);
+                    limitationId: limitationId,
+                    limit: limit,
+                    offset: offset);
 
                 return this.GetExcelFile(workbook, "ratings");
             }
