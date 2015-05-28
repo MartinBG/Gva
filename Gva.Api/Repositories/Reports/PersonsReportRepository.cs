@@ -31,7 +31,7 @@ namespace Gva.Api.Repositories.Reports
             string docNumber = null,
             string publisher = null,
             int offset = 0,
-            int limit = 0)
+            int limit = 10)
         {
             string limName = limitationId.HasValue ? this.nomRepository.GetNomValue(limitationId.Value).Name : null;
 
@@ -69,26 +69,27 @@ namespace Gva.Api.Repositories.Reports
                     new DbClause("and ii.Publisher like '%' + {0} + '%'", publisher),
                     new DbClause("and (d.Limitations like {0} + '$$%' or d.Limitations like '%$$' + {0} or d.Limitations like '%$$' + {0} + '$$' or d.Limitations like {0})", limName),
                     new DbClause("{0}", offset),
-                    new DbClause("{0}", limit));
+                    new DbClause("{0}", limit))
+                    .Materialize(r => new Tuple<int, PersonReportDocumentDO>
+                        ( 
+                        r.Field<int>("allResultsCount"),
+                        new PersonReportDocumentDO()
+                        {
+                            LotId = r.Field<int>("LotId"),
+                            Lin = r.Field<int?>("Lin"),
+                            Name = r.Field<string>("Name"),
+                            Type = r.Field<string>("Type"),
+                            Number = r.Field<string>("Number"),
+                            FromDate = r.Field<DateTime?>("FromDate") ?? r.Field<DateTime?>("Date"),
+                            ToDate = r.Field<DateTime?>("ToDate"),
+                            Valid = r.Field<bool?>("Valid"),
+                            Publisher = r.Field<string>("Publisher"),
+                            Limitations = !string.IsNullOrEmpty(r.Field<string>("Limitations")) ? r.Field<string>("Limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null
+                        }))
+                        .ToList();
 
-            var results = queryResult
-                .Materialize(r =>
-                    new PersonReportDocumentDO()
-                    {
-                        LotId = r.Field<int>("LotId"),
-                        Lin = r.Field<int?>("Lin"),
-                        Name = r.Field<string>("Name"),
-                        Type = r.Field<string>("Type"),
-                        Number = r.Field<string>("Number"),
-                        FromDate = r.Field<DateTime?>("FromDate") ?? r.Field<DateTime?>("Date"),
-                        ToDate = r.Field<DateTime?>("ToDate"),
-                        Valid = r.Field<bool?>("Valid"),
-                        Publisher = r.Field<string>("Publisher"),
-                        Limitations = !string.IsNullOrEmpty(r.Field<string>("Limitations")) ? r.Field<string>("Limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null
-                    })
-                    .ToList();
-
-            int count = queryResult.Materialize(r => r.Field<int>("allResultsCount")).FirstOrDefault();
+            var results = queryResult.Select(q => q.Item2).ToList();
+            int count = queryResult.Select(q => q.Item1).FirstOrDefault();
 
             return new Tuple<int, List<PersonReportDocumentDO>>(count, results);
         }
@@ -104,7 +105,7 @@ namespace Gva.Api.Repositories.Reports
             int? licenceActionId = null,
             int? limitationId = null,
             int offset = 0,
-            int limit = 0)
+            int limit = 10)
         {
             string limName = limitationId.HasValue ? this.nomRepository.GetNomValue(limitationId.Value).Name : null;
 
@@ -141,29 +142,29 @@ namespace Gva.Api.Repositories.Reports
                         new DbClause("and la.NomValueId = {0}", licenceActionId),
                         new DbClause("and (le.Limitations like {0} + '$$%' or le.Limitations like '%$$' + {0} or le.Limitations like '%$$' + {0} + '$$' or le.Limitations like {0})", limName),
                         new DbClause("{0}", offset),
-                        new DbClause("{0}", limit));
+                        new DbClause("{0}", limit))
+                         .Materialize(r => new Tuple<int, PersonReportLicenceDO>
+                             (
+                             r.Field<int>("allResultsCount"),
+                             new PersonReportLicenceDO()
+                                {
+                                    LotId = r.Field<int>("lotId"),
+                                    Lin = r.Field<int?>("lin"),
+                                    Uin = r.Field<string>("uin"),
+                                    Names = r.Field<string>("names"),
+                                    LicenceTypeName = r.Field<string>("licenceTypeName"),
+                                    LicenceCode = r.Field<string>("licenceCode"),
+                                    DateValidFrom = r.Field<DateTime?>("dateValidFrom"),
+                                    DateValidTo = r.Field<DateTime?>("dateValidTo"),
+                                    FirstIssueDate = r.Field<DateTime?>("firstIssueDate"),
+                                    LicenceAction = r.Field<string>("licenceAction"),
+                                    StampNumber = r.Field<string>("stampNumber"),
+                                    Limitations = !string.IsNullOrEmpty(r.Field<string>("limitations")) ? r.Field<string>("limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null
+                            }))
+                            .ToList();
 
-            var results = queryResult
-                .Materialize(r =>
-                            new PersonReportLicenceDO()
-                            {
-                                
-                                LotId = r.Field<int>("lotId"),
-                                Lin = r.Field<int?>("lin"),
-                                Uin = r.Field<string>("uin"),
-                                Names = r.Field<string>("names"),
-                                LicenceTypeName = r.Field<string>("licenceTypeName"),
-                                LicenceCode = r.Field<string>("licenceCode"),
-                                DateValidFrom = r.Field<DateTime?>("dateValidFrom"),
-                                DateValidTo = r.Field<DateTime?>("dateValidTo"),
-                                FirstIssueDate = r.Field<DateTime?>("firstIssueDate"),
-                                LicenceAction = r.Field<string>("licenceAction"),
-                                StampNumber = r.Field<string>("stampNumber"),
-                                Limitations = !string.IsNullOrEmpty(r.Field<string>("limitations")) ? r.Field<string>("limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null
-                            })
-                    .ToList();
-
-            int count = queryResult.Materialize(r => r.Field<int>("allResultsCount")).FirstOrDefault();
+            var results = queryResult.Select(q => q.Item2).ToList();
+            int count = queryResult.Select(q => q.Item1).FirstOrDefault();
 
             return new Tuple<int, List<PersonReportLicenceDO>>(count, results);
         }
@@ -180,7 +181,7 @@ namespace Gva.Api.Repositories.Reports
             int? lin = null,
             int? limitationId = null,
             int offset = 0,
-            int limit = 0)
+            int limit = 10)
         {
             string limCode = limitationId.HasValue? this.nomRepository.GetNomValue(limitationId.Value).Code : null;
 
@@ -240,33 +241,34 @@ namespace Gva.Api.Repositories.Reports
                         new DbClause("and r.AircraftTypeGroupId = {0}", aircraftTypeCategoryId),
                         new DbClause("and (re.Limitations like {0} + '$$%' re.Limitations like '%$$' + {0} or re.Limitations like '%$$' + {0} + '$$' or re.Limitations like {0})", limCode),
                         new DbClause("{0}", offset),
-                        new DbClause("{0}", limit));
+                        new DbClause("{0}", limit))
+                        .Materialize(r => new Tuple<int, PersonReportRatingDO>
+                             (
+                             r.Field<int>("allResultsCount"),
+                             new PersonReportRatingDO()
+                             {
+                                 Lin = r.Field<int?>("lin"),
+                                 LotId = r.Field<int>("lotId"),
+                                 RatingSubClasses = r.Field<string>("RatingSubClasses"),
+                                 Limitations = !string.IsNullOrEmpty(r.Field<string>("Limitations")) ? r.Field<string>("Limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null,
+                                 FirstIssueDate = r.Field<DateTime?>("FirstIssueDate"),
+                                 DateValidFrom = r.Field<DateTime?>("DocDateValidFrom"),
+                                 DateValidTo = r.Field<DateTime?>("DocDateValidTo"),
+                                 RatingTypes = r.Field<string>("RatingTypes"),
+                                 Sector = r.Field<string>("Sector"),
+                                 RatingClass = r.Field<string>("RatingClass"),
+                                 AuthorizationCode = r.Field<string>("AuthorizationCode"),
+                                 AircraftTypeCategory = r.Field<string>("AircraftTypeCategory"),
+                                 AircraftTypeGroup = r.Field<string>("AircraftTypeGroup"),
+                                 LocationIndicator = r.Field<string>("LocationIndicator"),
+                                 RatingLevel = r.Field<string>("RatingLevel")
+                             }))
+                             .ToList();
 
-            var results = queryResult
-                .Materialize(r =>
-                    new PersonReportRatingDO()
-                    {
-                        Lin = r.Field<int?>("lin"),
-                        LotId = r.Field<int>("lotId"),
-                        RatingSubClasses = r.Field<string>("RatingSubClasses"),
-                        Limitations = !string.IsNullOrEmpty(r.Field<string>("Limitations")) ? r.Field<string>("Limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null,
-                        FirstIssueDate = r.Field<DateTime?>("FirstIssueDate"),
-                        DateValidFrom = r.Field<DateTime?>("DocDateValidFrom"),
-                        DateValidTo = r.Field<DateTime?>("DocDateValidTo"),
-                        RatingTypes = r.Field<string>("RatingTypes"),
-                        Sector = r.Field<string>("Sector"),
-                        RatingClass = r.Field<string>("RatingClass"),
-                        AuthorizationCode = r.Field<string>("AuthorizationCode"),
-                        AircraftTypeCategory = r.Field<string>("AircraftTypeCategory"),
-                        AircraftTypeGroup = r.Field<string>("AircraftTypeGroup"),
-                        LocationIndicator = r.Field<string>("LocationIndicator"),
-                        RatingLevel = r.Field<string>("RatingLevel")
-                    })
-                    .ToList();
-
-            int count = queryResult.Materialize(r => r.Field<int>("allResultsCount")).FirstOrDefault();
-
-             return new Tuple<int, List<PersonReportRatingDO>>(count, results);
+            var results = queryResult.Select(q => q.Item2).ToList();
+            int count = queryResult.Select(q => q.Item1).FirstOrDefault();
+            
+            return new Tuple<int, List<PersonReportRatingDO>>(count, results);
         }
     }
 }
