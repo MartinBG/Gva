@@ -84,6 +84,16 @@
       controller: 'RemovingIrregularityCtrl'
     });
     scaffoldingProvider.form({
+      name: 'emsIndividualActRefusal',
+      templateUrl: 'js/ems/docs/forms/individualActRefusal/individualActRefusal.html',
+      controller: 'IndividualActRefusalCtrl'
+    });
+    scaffoldingProvider.form({
+      name: 'emsConsiderationRefusal',
+      templateUrl: 'js/ems/docs/forms/considerationRefusal/considerationRefusal.html',
+      controller: 'ConsiderationRefusalCtrl'
+    });
+    scaffoldingProvider.form({
       name: 'emsReceiptNotAcknowledge',
       templateUrl: 'js/ems/docs/forms/receiptNotAcknowledge/receiptNotAcknowledge.html',
       controller: 'ReceiptNotAcknowledgeCtrl'

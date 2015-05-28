@@ -104,6 +104,28 @@
         });
     };
 
+    $scope.attachIndividualActRefusal = function () {
+      return Docs.createPublicChild({
+        id: doc.docId
+      }, {
+        docTypeAlias: 'IndividualAdministrativeActRefusal',
+        correspondents: _.pluck(doc.docCorrespondents, 'nomValueId')
+      }).$promise.then(function (result) {
+        return $state.go('root.docs.edit.view', { id: result.docId });
+      });
+    };
+
+    $scope.attachConsiderationRefusal = function () {
+      return Docs.createPublicChild({
+        id: doc.docId
+      }, {
+        docTypeAlias: 'CorrespondenceConsiderationRefusal',
+        correspondents: _.pluck(doc.docCorrespondents, 'nomValueId')
+      }).$promise.then(function (result) {
+        return $state.go('root.docs.edit.view', { id: result.docId });
+      });
+    };
+
     $scope.attachResolution = function () {
       return $scope.attachDocInternal('Resolution', 'Resolution');
     };

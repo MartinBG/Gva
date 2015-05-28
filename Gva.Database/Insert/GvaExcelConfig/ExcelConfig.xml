@@ -19,7 +19,7 @@
   <WindowTopX>0</WindowTopX>
   <WindowTopY>0</WindowTopY>
   <TabRatio>651</TabRatio>
-  <ActiveSheet>2</ActiveSheet>
+  <ActiveSheet>5</ActiveSheet>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -916,12 +916,11 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
-   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>15</ActiveRow>
-     <ActiveCol>9</ActiveCol>
+     <ActiveRow>27</ActiveRow>
+     <ActiveCol>2</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -1008,11 +1007,11 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="DocFileTypes">
-  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="59" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="61" x:FullColumns="1"
    x:FullRows="1" ss:DefaultRowHeight="15">
    <Column ss:AutoFitWidth="0" ss:Width="129"/>
-   <Column ss:AutoFitWidth="0" ss:Width="147"/>
-   <Column ss:AutoFitWidth="0" ss:Width="154.5"/>
+   <Column ss:Width="288.75"/>
+   <Column ss:Width="186"/>
    <Column ss:AutoFitWidth="0" ss:Width="183.75"/>
    <Column ss:Width="87"/>
    <Row ss:AutoFitHeight="0">
@@ -1428,6 +1427,20 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">0010-003010</Data></Cell>
     <Cell><Data ss:Type="Boolean">1</Data></Cell>
    </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">404</Data></Cell>
+    <Cell><Data ss:Type="String">Отказ за издаване на индивидуален административен акт</Data></Cell>
+    <Cell><Data ss:Type="String">IndividualAdministrativeActRefusal</Data></Cell>
+    <Cell><Data ss:Type="String">0010-000009</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">405</Data></Cell>
+    <Cell><Data ss:Type="String">Отказ за разглеждане на искането по същество</Data></Cell>
+    <Cell><Data ss:Type="String">CorrespondenceConsiderationRefusal</Data></Cell>
+    <Cell><Data ss:Type="String">0010-000010</Data></Cell>
+    <Cell><Data ss:Type="Boolean">1</Data></Cell>
+   </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
    <PageSetup>
@@ -1440,8 +1453,8 @@
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>30</ActiveRow>
-     <ActiveCol>7</ActiveCol>
+     <ActiveRow>41</ActiveRow>
+     <ActiveCol>6</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -1449,7 +1462,7 @@
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="DocTypes">
-  <Table ss:ExpandedColumnCount="16" ss:ExpandedRowCount="71" x:FullColumns="1"
+  <Table ss:ExpandedColumnCount="16" ss:ExpandedRowCount="73" x:FullColumns="1"
    x:FullRows="1" ss:StyleID="s97" ss:DefaultRowHeight="15">
    <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="98.25"/>
    <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="81.75"/>
@@ -1458,7 +1471,7 @@
    <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="120"/>
    <Column ss:StyleID="s97" ss:Width="75.75" ss:Span="1"/>
    <Column ss:Index="8" ss:StyleID="s97" ss:Width="77.25" ss:Span="1"/>
-   <Column ss:Index="10" ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="140.25"/>
+   <Column ss:Index="10" ss:StyleID="s97" ss:Width="186"/>
    <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="180"/>
    <Column ss:StyleID="s97" ss:Width="164.25"/>
    <Column ss:StyleID="s97" ss:AutoFitWidth="0" ss:Width="814.5"/>
@@ -1658,6 +1671,42 @@
     <Cell ss:StyleID="s99"><Data ss:Type="String">0010-003010</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s99"><Data ss:Type="String">Указания за отстраняване на нередовности</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
+    <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">IndividualAdministrativeActRefusal</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0010-000009</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Отказ за издаване на индивидуален административен акт</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s98">
+    <Cell><Data ss:Type="String">Отговори на услуги</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">CorrespondenceConsiderationRefusal</Data></Cell>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">0010-000010</Data></Cell>
+    <Cell ss:StyleID="Default"/>
+    <Cell ss:StyleID="s99"><Data ss:Type="String">Отказ за разглеждане на искането по същество</Data></Cell>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="Default"/>
     <Cell ss:StyleID="s99"><Data ss:Type="String">1</Data></Cell>
@@ -2752,11 +2801,12 @@
     <HorizontalResolution>600</HorizontalResolution>
     <VerticalResolution>600</VerticalResolution>
    </Print>
+   <Selected/>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>25</ActiveRow>
-     <ActiveCol>3</ActiveCol>
+     <ActiveRow>15</ActiveRow>
+     <ActiveCol>2</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>

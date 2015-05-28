@@ -1,0 +1,14 @@
+﻿<ng-form class="form-inline" name="considerationRefusalForm" sc-validate="{}" sc-form-readonly="" ng-show="isLoaded">
+  <div class="row">
+    <sc-field type="int" ng-model="deadlinePeriod.days" ng-change="deadlinePeriodChange()" ng-required="true" l10n-text="considerationRefusal.appealTerm" class="col-md-2"></sc-field>
+    <sc-field type="text" ng-model="model.jObject.individualAdministrativeActRefusalAppealAuthority" ng-required="true" l10n-text="considerationRefusal.appealAuthority" class="col-md-6"></sc-field>
+  </div>
+
+  <div class="row">
+    <sc-field type="textarea" ng-model="model.jObject.individualAdministrativeActRefusalLegalGround" rows="3" ng-required="true" l10n-text="considerationRefusal.legalGround" class="col-sm-12 col-md-8"></sc-field>
+  </div>
+
+  <div class="row">
+    <sc-field type="textarea" ng-model="model.jObject.individualAdministrativeActRefusalFactualGround" rows="3" ng-required="true" l10n-text="considerationRefusal.factualGround" class="col-sm-12 col-md-8"></sc-field>
+  </div>
+</ng-form>

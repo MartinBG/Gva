@@ -306,6 +306,172 @@ namespace Rio.Data.Utils
             }
         }
 
+        public static byte[] CreateR000150IndividualAdministrativeActRefusal(
+            string administrativeBodyName = null,
+            DateTime? caseUriDate = null,
+            string caseUriRegisterIndex = null,
+            string caseUriSequenceNumber = null,
+            DateTime? refusalDocUriDate = null,
+            string refusalDocUriRegisterIndex = null,
+            string refusalDocUriSequenceNumber = null,
+            string applicantFirstName = null,
+            string applicantSecondName = null,
+            string applicantLastName = null,
+            string applicantEgn = null,
+            string applicantEmail = null,
+            string electronicServiceProviderId = null,
+            string electronicServiceProviderName = null,
+            string electronicServiceProviderBulstat = null,
+            string employFirstName = null,
+            string employSecondName = null,
+            string employLastName = null)
+        {
+            try
+            {
+                R_0009_000150.IndividualAdministrativeActRefusal rioObj = new R_0009_000150.IndividualAdministrativeActRefusal();
+
+                rioObj.DocumentTypeURI = new R_0009_000003.DocumentTypeURI();
+                rioObj.DocumentTypeURI.RegisterIndex = RioDocumentMetadata.IndividualAdministrativeActRefusalMetadata.DocumentTypeURI.RegisterIndex;
+                rioObj.DocumentTypeURI.BatchNumber = RioDocumentMetadata.IndividualAdministrativeActRefusalMetadata.DocumentTypeURI.BatchNumber;
+                rioObj.DocumentTypeName = RioDocumentMetadata.IndividualAdministrativeActRefusalMetadata.DocumentTypeName;
+
+                rioObj.DocumentURI = new R_0009_000001.DocumentURI();
+                rioObj.DocumentURI.ReceiptOrSigningDate = refusalDocUriDate;
+                rioObj.DocumentURI.RegisterIndex = refusalDocUriRegisterIndex;
+                rioObj.DocumentURI.SequenceNumber = refusalDocUriSequenceNumber;
+
+                rioObj.DocumentReceiptOrSigningDate = refusalDocUriDate;
+
+                rioObj.ElectronicServiceProviderBasicData = new R_0009_000002.ElectronicServiceProviderBasicData();
+                rioObj.ElectronicServiceProviderBasicData.ElectronicServiceProviderType = electronicServiceProviderId;
+                rioObj.ElectronicServiceProviderBasicData.EntityBasicData = new R_0009_000013.EntityBasicData();
+                rioObj.ElectronicServiceProviderBasicData.EntityBasicData.Identifier = electronicServiceProviderBulstat;
+                rioObj.ElectronicServiceProviderBasicData.EntityBasicData.Name = electronicServiceProviderName;
+
+                rioObj.ElectronicServiceApplicant = new R_0009_000016.ElectronicServiceApplicant();
+                rioObj.ElectronicServiceApplicant.EmailAddress = applicantEmail;
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection = new R_0009_000016.RecipientGroupCollection();
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection.Add(new R_0009_000016.RecipientGroup());
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection = new R_0009_000016.ElectronicServiceRecipientCollection();
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection.Add(new R_0009_000015.ElectronicServiceRecipient());
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person = new R_0009_000008.PersonBasicData();
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names = new R_0009_000005.PersonNames();
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names.First = applicantFirstName;
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names.Middle = applicantSecondName;
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names.Last = applicantLastName;
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Identifier = new R_0009_000006.PersonIdentifier();
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Identifier.EGN = applicantEgn;
+
+                rioObj.AISCaseURI = new R_0009_000073.AISCaseURI();
+                rioObj.AISCaseURI.DocumentURI = new R_0009_000001.DocumentURI();
+                rioObj.AISCaseURI.DocumentURI.ReceiptOrSigningDate = caseUriDate;
+                rioObj.AISCaseURI.DocumentURI.RegisterIndex = caseUriRegisterIndex;
+                rioObj.AISCaseURI.DocumentURI.SequenceNumber = caseUriSequenceNumber;
+
+                rioObj.AdministrativeBodyName = administrativeBodyName;
+
+                var officialNames = new R_0009_000005.PersonNames();
+                officialNames.First = employFirstName;
+                officialNames.Middle = employSecondName;
+                officialNames.Last = employLastName;
+
+                rioObj.OfficialCollection = new R_0009_000150.IndividualAdministrativeActRefusalOfficialCollection();
+                rioObj.OfficialCollection.Add(new R_0009_000150.IndividualAdministrativeActRefusalOfficial()
+                {
+                    PersonNames = officialNames
+                });
+
+                return XmlSerializerUtils.XmlSerializeObjectToBytes(rioObj);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static byte[] CreateR000154CorrespondenceConsiderationRefusal(
+            string administrativeBodyName = null,
+            DateTime? caseUriDate = null,
+            string caseUriRegisterIndex = null,
+            string caseUriSequenceNumber = null,
+            DateTime? refusalDocUriDate = null,
+            string refusalDocUriRegisterIndex = null,
+            string refusalDocUriSequenceNumber = null,
+            string applicantFirstName = null,
+            string applicantSecondName = null,
+            string applicantLastName = null,
+            string applicantEgn = null,
+            string applicantEmail = null,
+            string electronicServiceProviderId = null,
+            string electronicServiceProviderName = null,
+            string electronicServiceProviderBulstat = null,
+            string employFirstName = null,
+            string employSecondName = null,
+            string employLastName = null)
+        {
+            try
+            {
+                R_0009_000154.CorrespondenceConsiderationRefusal rioObj = new R_0009_000154.CorrespondenceConsiderationRefusal();
+
+                rioObj.DocumentTypeURI = new R_0009_000003.DocumentTypeURI();
+                rioObj.DocumentTypeURI.RegisterIndex = RioDocumentMetadata.CorrespondenceConsiderationRefusalMetadata.DocumentTypeURI.RegisterIndex;
+                rioObj.DocumentTypeURI.BatchNumber = RioDocumentMetadata.CorrespondenceConsiderationRefusalMetadata.DocumentTypeURI.BatchNumber;
+                rioObj.DocumentTypeName = RioDocumentMetadata.CorrespondenceConsiderationRefusalMetadata.DocumentTypeName;
+
+                rioObj.DocumentURI = new R_0009_000001.DocumentURI();
+                rioObj.DocumentURI.ReceiptOrSigningDate = refusalDocUriDate;
+                rioObj.DocumentURI.RegisterIndex = refusalDocUriRegisterIndex;
+                rioObj.DocumentURI.SequenceNumber = refusalDocUriSequenceNumber;
+
+                rioObj.DocumentReceiptOrSigningDate = refusalDocUriDate;
+
+                rioObj.ElectronicServiceProviderBasicData = new R_0009_000002.ElectronicServiceProviderBasicData();
+                rioObj.ElectronicServiceProviderBasicData.ElectronicServiceProviderType = electronicServiceProviderId;
+                rioObj.ElectronicServiceProviderBasicData.EntityBasicData = new R_0009_000013.EntityBasicData();
+                rioObj.ElectronicServiceProviderBasicData.EntityBasicData.Identifier = electronicServiceProviderBulstat;
+                rioObj.ElectronicServiceProviderBasicData.EntityBasicData.Name = electronicServiceProviderName;
+
+                rioObj.ElectronicServiceApplicant = new R_0009_000016.ElectronicServiceApplicant();
+                rioObj.ElectronicServiceApplicant.EmailAddress = applicantEmail;
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection = new R_0009_000016.RecipientGroupCollection();
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection.Add(new R_0009_000016.RecipientGroup());
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection = new R_0009_000016.ElectronicServiceRecipientCollection();
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection.Add(new R_0009_000015.ElectronicServiceRecipient());
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person = new R_0009_000008.PersonBasicData();
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names = new R_0009_000005.PersonNames();
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names.First = applicantFirstName;
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names.Middle = applicantSecondName;
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Names.Last = applicantLastName;
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Identifier = new R_0009_000006.PersonIdentifier();
+                rioObj.ElectronicServiceApplicant.RecipientGroupCollection[0].RecipientCollection[0].Person.Identifier.EGN = applicantEgn;
+
+                rioObj.AISCaseURI = new R_0009_000073.AISCaseURI();
+                rioObj.AISCaseURI.DocumentURI = new R_0009_000001.DocumentURI();
+                rioObj.AISCaseURI.DocumentURI.ReceiptOrSigningDate = caseUriDate;
+                rioObj.AISCaseURI.DocumentURI.RegisterIndex = caseUriRegisterIndex;
+                rioObj.AISCaseURI.DocumentURI.SequenceNumber = caseUriSequenceNumber;
+
+                rioObj.AdministrativeBodyName = administrativeBodyName;
+
+                var officialNames = new R_0009_000005.PersonNames();
+                officialNames.First = employFirstName;
+                officialNames.Middle = employSecondName;
+                officialNames.Last = employLastName;
+
+                rioObj.OfficialCollection = new R_0009_000154.CorrespondenceConsiderationRefusalOfficialCollection();
+                rioObj.OfficialCollection.Add(new R_0009_000154.CorrespondenceConsiderationRefusalOfficial()
+                {
+                    PersonNames = officialNames
+                });
+
+                return XmlSerializerUtils.XmlSerializeObjectToBytes(rioObj);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static byte[] CreateR0101ReceiptAcknowledgedMessage(
             string registeredByIdentifier = null,
             string registeredByFirstName = null,

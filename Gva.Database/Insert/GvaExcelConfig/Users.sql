@@ -58,76 +58,88 @@ Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, Certif
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
                             select SCOPE_IDENTITY(), 32, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
+                        values (N'ikoev', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Ивайло Коев', N'', N'', 1, N'ikoev@caa.bg', 1)
+                        Insert into UnitUsers(UserId, UnitId, IsActive) 
+                            select SCOPE_IDENTITY(), 34, 1
+Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
+                        values (N'nnachev', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Николай Начев', N'', N'', 1, N'nnachev@caa.bg', 1)
+                        Insert into UnitUsers(UserId, UnitId, IsActive) 
+                            select SCOPE_IDENTITY(), 36, 1
+Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
+                        values (N'sjivkov', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Сашо Живков', N'', N'', 1, N'sjivkov@caa.bg', 1)
+                        Insert into UnitUsers(UserId, UnitId, IsActive) 
+                            select SCOPE_IDENTITY(), 38, 1
+Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
                         values (N'pkunchev', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Петко Кунчев', N'', N'', 1, N'pkunchev@caa.bg', 1)
-                        Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 35, 1
-Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
-                        values (N'ivivanov', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Иван Х. Иванов', N'', N'', 1, N'ivivanov@caa.bg', 1)
-                        Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 37, 1
-Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
-                        values (N'vvenkov', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Валери Венков', N'', N'', 1, N'vvenkov@caa.bg', 1)
-                        Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 39, 1
-Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
-                        values (N'ghristov', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Георги Христов', N'', N'', 1, N'ghristov@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
                             select SCOPE_IDENTITY(), 41, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
-                        values (N'LManasiev', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Людмил Манасиев', N'', N'', 1, N'LManasiev@caa.bg', 1)
+                        values (N'ivivanov', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Иван Х. Иванов', N'', N'', 1, N'ivivanov@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 44, 1
+                            select SCOPE_IDENTITY(), 43, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
-                        values (N'IBambov', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Иван Бамбов', N'', N'', 1, N'IBambov@caa.bg', 1)
+                        values (N'vvenkov', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Валери Венков', N'', N'', 1, N'vvenkov@caa.bg', 1)
+                        Insert into UnitUsers(UserId, UnitId, IsActive) 
+                            select SCOPE_IDENTITY(), 45, 1
+Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
+                        values (N'ghristov', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Георги Христов', N'', N'', 1, N'ghristov@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
                             select SCOPE_IDENTITY(), 47, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
-                        values (N'mihail', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Михаил Божерянов', N'', N'', 1, N'mihail@caa.bg', 1)
+                        values (N'LManasiev', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Людмил Манасиев', N'', N'', 1, N'LManasiev@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 49, 1
+                            select SCOPE_IDENTITY(), 50, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
-                        values (N'jivko', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Живко Богданов', N'', N'', 1, N'jivko@caa.bg', 1)
-                        Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 51, 1
-Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
-                        values (N'hristo', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Христо Алексиев', N'', N'', 1, N'hristo@caa.bg', 1)
+                        values (N'IBambov', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Иван Бамбов', N'', N'', 1, N'IBambov@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
                             select SCOPE_IDENTITY(), 53, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
+                        values (N'mihail', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Михаил Божерянов', N'', N'', 1, N'mihail@caa.bg', 1)
+                        Insert into UnitUsers(UserId, UnitId, IsActive) 
+                            select SCOPE_IDENTITY(), 55, 1
+Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
+                        values (N'jivko', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Живко Богданов', N'', N'', 1, N'jivko@caa.bg', 1)
+                        Insert into UnitUsers(UserId, UnitId, IsActive) 
+                            select SCOPE_IDENTITY(), 57, 1
+Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
+                        values (N'hristo', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Христо Алексиев', N'', N'', 1, N'hristo@caa.bg', 1)
+                        Insert into UnitUsers(UserId, UnitId, IsActive) 
+                            select SCOPE_IDENTITY(), 59, 1
+Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
                         values (N'VValkov', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Валентин Вълков', N'', N'', 1, N'VValkov@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 56, 1
+                            select SCOPE_IDENTITY(), 62, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
                         values (N'nadka', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Надка Кръстева', N'', N'', 1, N'nadka@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 58, 1
+                            select SCOPE_IDENTITY(), 64, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
                         values (N'slavko', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Славко Вараджаков', N'', N'', 1, N'slavko@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 60, 1
+                            select SCOPE_IDENTITY(), 66, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
                         values (N'SLeshev', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Станимир Лешев', N'', N'', 1, N'SLeshev@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 63, 1
+                            select SCOPE_IDENTITY(), 69, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
                         values (N'albena', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Албена Попова', N'', N'', 1, N'albena@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 65, 1
+                            select SCOPE_IDENTITY(), 71, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
                         values (N'DTarlev', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Димитър Тарлев', N'', N'', 1, N'DTarlev@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 68, 1
+                            select SCOPE_IDENTITY(), 74, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
                         values (N'GDochev', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Ганчо Дочев', N'', N'', 1, N'GDochev@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 71, 1
+                            select SCOPE_IDENTITY(), 77, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
                         values (N'nikolinka', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Николинка Угринова', N'', N'', 1, N'nikolinka@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 73, 1
+                            select SCOPE_IDENTITY(), 79, 1
 Insert into Users (UserName, PasswordHash, PasswordSalt, FullName, Notes, CertificateThumbPrint, HasPassword, Email, IsActive) 
                         values (N'systemusergva', N'AF1qZXhljakwqt8BKrMYAipAGgs5313e43qW+mr2RrIl1D1vLlbRlLYssxYcHFlbgQ==', N'+FoFiIwx7qMV3ROW7PxWgw==', N'Системен служител ГВА', N'', N'', 1, N'systemusergva@caa.bg', 1)
                         Insert into UnitUsers(UserId, UnitId, IsActive) 
-                            select SCOPE_IDENTITY(), 80, 1
+                            select SCOPE_IDENTITY(), 86, 1
 GO
 

@@ -39,6 +39,10 @@
           document: 'Документ',
           electronicDocument: 'Електронен документ',
           removingIrregularities: 'Отстраняване на нередовности',
+          individualAdministrativeActRefusal:
+            'Отказ за издаване на индивидуален административен акт',
+          correspondenceConsiderationRefusal:
+            'Отказ за разглеждане на искането по същество',
           resolution: 'Резолюция',
           resolutionParentOnly: 'Резолюция върху документ',
           remark: 'Забележка',
@@ -373,6 +377,18 @@
         instructionsHeader: 'Инструкции за остраняване на нередностите',
         deadlinePeriod: 'Срок в дни',
         irregularities: 'Списък с нередности за остраняване'
+      },
+      individualActRefusal: {
+        appealTerm: 'Срок за обжалване',
+        appealAuthority: 'Пред',
+        legalGround: 'Правно основание',
+        factualGround: 'Мотиви'
+      },
+      considerationRefusal: {
+        appealTerm: 'Срок за обжалване',
+        appealAuthority: 'Пред',
+        legalGround: 'Правно основание',
+        factualGround: 'Мотиви'
       },
       receiptAcknowledge: {
         serviceProviderName: 'От',

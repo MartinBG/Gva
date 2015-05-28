@@ -18,6 +18,14 @@
                   action: attachRemovingIrregularities,
                   visible: doc.flags.isVisibleCreateChildDoc
                 }, {
+                  text: 'docs.edit.individualAdministrativeActRefusal',
+                  action: attachIndividualActRefusal,
+                  visible: doc.flags.isVisibleCreateChildDoc
+                }, {
+                  text: 'docs.edit.correspondenceConsiderationRefusal',
+                  action: attachConsiderationRefusal,
+                  visible: doc.flags.isVisibleCreateChildDoc
+                }, {
                   text: 'docs.edit.resolution',
                   action: attachResolution,
                   visible: doc.flags.isVisibleCreateChildResolution

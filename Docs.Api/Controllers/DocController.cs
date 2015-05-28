@@ -2816,6 +2816,66 @@ namespace Docs.Api.Controllers
                         activeServiceProvider.Name,
                         activeServiceProvider.Bulstat);
                 }
+                //Common
+                else if (docTypeUri == RioDocumentMetadata.IndividualAdministrativeActRefusalMetadata.DocumentTypeURIValue)
+                {
+                    var activeServiceProvider = GetActiveElectronicServiceProvider();
+                    var correspondentNamesUinEmail = GetCorrespondentNamesUinAndEmail(parentDocId);
+                    var registeredBy = String.Format("Служител {0}", activeServiceProvider.Name);
+                    Doc caseDoc = null;
+                    if (caseDocId.HasValue)
+                    {
+                        caseDoc = this.unitOfWork.DbContext.Set<Doc>().SingleOrDefault(e => e.DocId == caseDocId.Value);
+                    }
+
+                    content = RioObjectUtils.CreateR000150IndividualAdministrativeActRefusal(
+                        activeServiceProvider.Name,
+                        caseDoc != null ? caseDoc.RegDate : null,
+                        caseDoc != null ? caseDoc.RegIndex : null,
+                        caseDoc != null ? caseDoc.RegNumber.HasValue ? caseDoc.RegNumber.ToString() : null : null,
+                        doc != null ? doc.RegDate : null,
+                        doc != null ? doc.RegIndex : null,
+                        doc != null ? doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null : null,
+                        correspondentNamesUinEmail.Item1,
+                        correspondentNamesUinEmail.Item2,
+                        correspondentNamesUinEmail.Item3,
+                        correspondentNamesUinEmail.Item4,
+                        correspondentNamesUinEmail.Item5,
+                        activeServiceProvider.Code,
+                        activeServiceProvider.Name,
+                        activeServiceProvider.Bulstat,
+                        registeredBy);
+                }
+                //Common
+                else if (docTypeUri == RioDocumentMetadata.CorrespondenceConsiderationRefusalMetadata.DocumentTypeURIValue)
+                {
+                    var activeServiceProvider = GetActiveElectronicServiceProvider();
+                    var correspondentNamesUinEmail = GetCorrespondentNamesUinAndEmail(parentDocId);
+                    var registeredBy = String.Format("Служител {0}", activeServiceProvider.Name);
+                    Doc caseDoc = null;
+                    if (caseDocId.HasValue)
+                    {
+                        caseDoc = this.unitOfWork.DbContext.Set<Doc>().SingleOrDefault(e => e.DocId == caseDocId.Value);
+                    }
+
+                    content = RioObjectUtils.CreateR000154CorrespondenceConsiderationRefusal(
+                        activeServiceProvider.Name,
+                        caseDoc != null ? caseDoc.RegDate : null,
+                        caseDoc != null ? caseDoc.RegIndex : null,
+                        caseDoc != null ? caseDoc.RegNumber.HasValue ? caseDoc.RegNumber.ToString() : null : null,
+                        doc != null ? doc.RegDate : null,
+                        doc != null ? doc.RegIndex : null,
+                        doc != null ? doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null : null,
+                        correspondentNamesUinEmail.Item1,
+                        correspondentNamesUinEmail.Item2,
+                        correspondentNamesUinEmail.Item3,
+                        correspondentNamesUinEmail.Item4,
+                        correspondentNamesUinEmail.Item5,
+                        activeServiceProvider.Code,
+                        activeServiceProvider.Name,
+                        activeServiceProvider.Bulstat,
+                        registeredBy);
+                }
                 //Mosv
                 else if (docTypeUri == RioDocumentMetadata.DecisionGrantAccessPublicInformationMetadata.DocumentTypeURIValue)
                 {

@@ -119,6 +119,10 @@
       <a l10n-text="docs.edit.view.editableFile" ng-click="editableFileIsOpen = !editableFileIsOpen" style="cursor:pointer;"></a>
     </h5>
     <div ng-if="editableFileIsOpen">
+      <ems-individual-act-refusal name="individualActRefusal" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === '0010-000009'"></ems-individual-act-refusal>
+
+      <ems-consideration-refusal name="considerationRefusal" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === '0010-000010'"></ems-consideration-refusal>
+
       <ems-removing-irregularity name="docFileRemovingIrregularity" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === '0010-003010'"></ems-removing-irregularity>
 
       <ems-receipt-not-acknowledge name="docFileReceiptNotAcknowledge" ng-model="model" readonly="readonly" ng-if="model.jObjectForm === '0010-000001'"></ems-receipt-not-acknowledge>

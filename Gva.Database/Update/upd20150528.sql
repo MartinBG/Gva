@@ -1,0 +1,7 @@
+﻿-- add new doc file types
+INSERT INTO [DocFileTypes]([Name], [Alias], [DocTypeUri], [HasEmbeddedUri], [MimeType], [Extention], [IsEditable], [IsActive]) VALUES(N'Отказ за издаване на индивидуален административен акт',N'IndividualAdministrativeActRefusal',N'0010-000009',1,'application/xml','.xml',1,1);
+INSERT INTO [DocFileTypes]([Name], [Alias], [DocTypeUri], [HasEmbeddedUri], [MimeType], [Extention], [IsEditable], [IsActive]) VALUES(N'Отказ за разглеждане на искането по същество',N'CorrespondenceConsiderationRefusal',N'0010-000010',1,'application/xml','.xml',1,1);
+
+-- add new doc types
+INSERT INTO [DocTypes]([DocTypeGroupId],[PrimaryRegisterIndexId],[SecondaryRegisterIndexId],[Name],[Alias],[IsElectronicService],[ElectronicServiceFileTypeUri],[ElectronicServiceTypeApplication],[ElectronicServiceProvider],[ExecutionDeadline],[RemoveIrregularitiesDeadline],[IsActive])VALUES(300,NULL,NULL,N'Потвърждаване за получаване',N'ReceiptAcknowledgedMessage',1,N'0010-000002',N'',N'',NULL,NULL,1);
+INSERT INTO [DocTypes]([DocTypeGroupId],[PrimaryRegisterIndexId],[SecondaryRegisterIndexId],[Name],[Alias],[IsElectronicService],[ElectronicServiceFileTypeUri],[ElectronicServiceTypeApplication],[ElectronicServiceProvider],[ExecutionDeadline],[RemoveIrregularitiesDeadline],[IsActive])VALUES(300,NULL,NULL,N'Указания за отстраняване на нередовности',N'RemovingIrregularitiesInstructions',1,N'0010-003010',N'',N'',NULL,NULL,1);
