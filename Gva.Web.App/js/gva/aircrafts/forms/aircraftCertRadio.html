@@ -3,33 +3,6 @@
     <sc-field type="text" ng-model="model.aslNumber" ng-required="true" l10n-text="aircrafts.radioDirective.ASLNumber" class="col-md-2 col-sm-6"
       sc-validate="{ unique: isUniqueFormNumber }" validations="{ unique: 'defaultErrorTexts.unique', required: 'default'}"></sc-field>
     <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.radioDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="text" ng-model="model.regMark" ng-required="true" l10n-text="aircrafts.radioDirective.regMark" class="col-md-2 col-sm-4"></sc-field>
-    <sc-field type="text" ng-model="model.actType" ng-required="true" l10n-text="aircrafts.radioDirective.actType" class="col-sm-2"></sc-field>
-  </div>
-  <div class="row">
-    <div class="col-sm-7 col-md-5">
-      <label class="control-label" l10n-text="aircrafts.radioDirective.ownerOper"></label>
-      <div class="input-group">
-        <div class="input-group-btn">
-          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 40px" ng-disabled="form.$readonly">
-            <span l10n-text="aircrafts.radioDirective.organization" ng-if="model.ownerOperIsOrg"></span>
-            <span l10n-text="aircrafts.radioDirective.person" ng-if="!model.ownerOperIsOrg"></span>
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a ng-click="model.ownerOperIsOrg = true" l10n-text="aircrafts.radioDirective.organization"></a>
-            </li>
-            <li>
-              <a ng-click="model.ownerOperIsOrg = false" l10n-text="aircrafts.radioDirective.person"></a>
-            </li>
-          </ul>
-        </div>
-        <sc-nomenclature ng-if="model.ownerOperIsOrg" class="form-control input-sm" ng-model="model.ownerOper" name="ownerOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
-        <sc-nomenclature ng-if="!model.ownerOperIsOrg" class="form-control input-sm" ng-model="model.ownerOper" name="ownerPerson" alias="'persons'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
-        <sc-button type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="newOwnerOper()" ng-if="!form.$readonly"></sc-button>
-      </div>
-    </div>
   </div>
   <div class="row">
     <div class="col-sm-12 col-md-6" ng-class="{ 'has-error': form.$validated && !form.$readonly && (form['inspectorType'].$invalid || form['inspector'].$invalid || form['other'].$invalid) }">

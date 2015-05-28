@@ -54,7 +54,6 @@ namespace Gva.Api.Controllers.Aircrafts
             AircraftCertRadioDO newCertRadio = new AircraftCertRadioDO()
             {
                 IssueDate = DateTime.Now,
-                OwnerOperIsOrg = true,
                 AslNumber = lastNumberPerRadioForm.HasValue ? lastNumberPerRadioForm.Value + 1 : 0
             };
 

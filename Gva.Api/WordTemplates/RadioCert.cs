@@ -6,19 +6,29 @@ using System.Collections.Generic;
 using Common.Data;
 using Gva.Api.Models.Views.Aircraft;
 using System;
+using Gva.Api.ModelsDO.Persons;
+using Gva.Api.Models.Views.Person;
+using Gva.Api.Repositories.PersonRepository;
+using Gva.Api.Repositories.OrganizationRepository;
 
 namespace Gva.Api.WordTemplates
 {
     public class RadioCert : IDataGenerator
     {
         private ILotRepository lotRepository;
+        private IPersonRepository personRepository;
+        private IOrganizationRepository organizationRepository;
         private IUnitOfWork unitOfWork;
 
         public RadioCert(
             ILotRepository lotRepository,
+            IPersonRepository personRepository,
+            IOrganizationRepository organizationRepository,
             IUnitOfWork unitOfWork)
         {
             this.lotRepository = lotRepository;
+            this.personRepository = personRepository;
+            this.organizationRepository = organizationRepository;
             this.unitOfWork = unitOfWork;
         }
 
@@ -43,6 +53,23 @@ namespace Gva.Api.WordTemplates
                     string.Format("{0} / {1}", radioCertData.Inspector.Inspector.Name, radioCertData.Inspector.Inspector.NameAlt) :
                     radioCertData.Inspector.Other;
             }
+
+            var lastRegistration = lot.Index.GetParts<AircraftCertRegistrationFMDO>("aircraftCertRegistrationsFM")
+                .OrderByDescending(r => r.Content.CertDate)
+                .FirstOrDefault();
+
+            string ownerName = null;
+            if (lastRegistration != null && lastRegistration.Content.OwnerOrganization != null)
+            {
+                var organization = this.organizationRepository.GetOrganization(lastRegistration.Content.OwnerOrganization.NomValueId);
+                ownerName = organization.NameAlt ?? organization.Name;
+            }
+            else if (lastRegistration != null && lastRegistration.Content.OwnerPerson != null)
+            {
+                var person = this.personRepository.GetPerson(lastRegistration.Content.OwnerPerson.NomValueId);
+                ownerName = person.NamesAlt ?? person.Names;
+            }
+
             var transmitters = radioCertData.Entries.Where(e => e.Equipment.Code == "TRM");
             var ELTs = radioCertData.Entries.Where(e => e.Equipment.Code == "ELT");
             var equipment = this.GetEquipment(radioCertData.Entries);
@@ -51,10 +78,10 @@ namespace Gva.Api.WordTemplates
             {
                 root = new
                 {
-                    NUMBER = radioCertData.AslNumber,
-                    REG_MARK = radioCertData.RegMark,
-                    AIRCRAFT_TYPE = radioCertData.ActType,
-                    OWNER = radioCertData.OwnerOper != null ? radioCertData.OwnerOper.Name : null,
+                    NUMBER = string.Format("№ BG (RS) – {0}", radioCertData.AslNumber),
+                    REG_MARK = lastRegistration != null ? lastRegistration.Content.RegMark : null,
+                    AIRCRAFT_TYPE = aircraftData.ModelAlt ?? aircraftData.Model,
+                    OWNER = ownerName,
                     QTY1 = transmitters.Select(t => new { DATA = t.Count }),
                     MODEL1 = transmitters.Select(t => new { DATA = t.Model }),
                     FREQ1 = transmitters.Select(t => new { DATA = t.Bandwidth }),
@@ -86,7 +113,7 @@ namespace Gva.Api.WordTemplates
             equipments.Add(
             new
             {
-                NAME = "7.1 Транспондер",
+                NAME = "6.1 Транспондер",
                 NAME_ALT = "Transponders",
                 QTY = transponders.Select(t => new { DATA = t.Count }),
                 MODEL = transponders.Select(t => new { DATA = t.Model }),
@@ -98,7 +125,7 @@ namespace Gva.Api.WordTemplates
             equipments.Add(
             new
             {
-                NAME = "7.2 Метео радар",
+                NAME = "6.2 Метео радар",
                 NAME_ALT = "Weather Radar",
                 QTY = weatherRadars.Select(t => new { DATA = t.Count }),
                 MODEL = weatherRadars.Select(t => new { DATA = t.Model }),
@@ -110,7 +137,7 @@ namespace Gva.Api.WordTemplates
             equipments.Add(
             new
             {
-                NAME = "7.3 ТКАС",
+                NAME = "6.3 ТКАС",
                 NAME_ALT = "TCAS",
                 QTY = TCASs.Select(t => new { DATA = t.Count }),
                 MODEL = TCASs.Select(t => new { DATA = t.Model }),
@@ -122,7 +149,7 @@ namespace Gva.Api.WordTemplates
             equipments.Add(
             new
             {
-                NAME = "7.4 ДМЕ",
+                NAME = "6.4 ДМЕ",
                 NAME_ALT = "DME",
                 QTY = DMEs.Select(t => new { DATA = t.Count }),
                 MODEL = DMEs.Select(t => new { DATA = t.Model }),
@@ -134,7 +161,7 @@ namespace Gva.Api.WordTemplates
             equipments.Add(
               new
               {
-                  NAME = "7.5 Висотомер",
+                  NAME = "6.5 Висотомер",
                   NAME_ALT = "Radio Altimeter",
                   QTY = radioAltimeters.Select(t => new { DATA = t.Count }),
                   MODEL = radioAltimeters.Select(t => new { DATA = t.Model }),
@@ -149,7 +176,7 @@ namespace Gva.Api.WordTemplates
                 equipments.Add(
                 new
                 {
-                    NAME = string.Format("7.{0} {1}", index, other.OtherType),
+                    NAME = string.Format("6.{0} {1}", index, other.OtherType),
                     QTY = new { DATA = other.Count },
                     MODEL = new { DATA = other.Model },
                     POWER = new { DATA = other.Power },

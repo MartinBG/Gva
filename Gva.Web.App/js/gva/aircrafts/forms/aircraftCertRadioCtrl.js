@@ -25,39 +25,6 @@
       }
     });
 
-    var getNomenclatureData = function (alias, id) {
-      return Nomenclatures.get({
-        alias: alias,
-        id: id
-      }).$promise;
-    };
-
-    $scope.newOwnerOper = function () {
-      if ($scope.model.ownerOperIsOrg) {
-        var modalNewOrganization = scModal.open('newOrganization');
-
-        modalNewOrganization.result.then(function (organizationId) {
-          getNomenclatureData('organizations', organizationId)
-            .then(function (organization) {
-              $scope.model.ownerOper = organization;
-            });
-        });
-
-        return modalNewOrganization.opened;
-      } else {
-        var modalNewOPerson = scModal.open('newPerson');
-
-        modalNewOPerson.result.then(function (personId) {
-          getNomenclatureData('persons', personId)
-            .then(function (person) {
-              $scope.model.ownerOper = person;
-            });
-        });
-
-        return modalNewOPerson.opened;
-      }
-    };
-
     $scope.addNewEntry = function () {
       var modalInstance = scModal.open('manageRadioEntry');
 

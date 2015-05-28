@@ -949,10 +949,7 @@
           newRadio: 'Ново разрешително',
           issueDate: 'Дата на издаване',
           inspector: 'Заверил',
-          aslNumber: 'ASL №',
-          regMark: 'Регистрационен знак',
-          actType: 'Тип (модел)',
-          ownerOper: 'Собственик/Оператор'
+          aslNumber: 'ASL №'
         },
         newRadio: {
           title: 'Ново разрешително за използване на радиостанция',
@@ -1116,8 +1113,6 @@
           ASLNumber: 'ASL №',
           issueDate: 'Дата на издаване',
           regMark: 'Рег. знак',
-          actType: 'Тип (модел)',
-          ownerOper: 'Собственик/Оператор',
           equipment: 'Апаратура',
           count: 'Брой',
           power: 'Мощност',

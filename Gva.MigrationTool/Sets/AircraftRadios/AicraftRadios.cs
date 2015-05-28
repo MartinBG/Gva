@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using Common.Api.Models;
-using Common.Json;
 using Excel;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.MigrationTool.Nomenclatures;
@@ -34,28 +33,18 @@ namespace Gva.MigrationTool.AircarftRadios
                 string aslNumber =  (string)excelReader[0];
                 string regMark = (string)excelReader[2];
 
-                if(string.IsNullOrEmpty(aslNumber) || aslNumber == "ASL_No" || !regMarkToLotId.ContainsKey(regMark))
+                if (string.IsNullOrEmpty(aslNumber) || aslNumber == "ASL_No" || !regMarkToLotId.ContainsKey(regMark))
                 {
                     continue;
                 }
 
                 double? date = excelReader[1] != null? (double)excelReader[1] : (double?)null;
-                string orgNameEn = (string)excelReader[4];
-                JObject org = !string.IsNullOrEmpty(orgNameEn) ? getOrgByFmOrgName(orgNameEn) : null;
                 string inspectorNameBg = (string)excelReader[5];
                 string inspectorNameEn = (string)excelReader[6];
                 AircraftCertRadioDO radio = new AircraftCertRadioDO()
                 {
-                    RegMark = regMark,
                     IssueDate = date != null ? DateTime.FromOADate((double)date) : (DateTime?)null,
                     AslNumber = int.Parse(aslNumber),
-                    ActType = (string)excelReader[3],
-                    OwnerOper = org != null ? new NomValue()
-                    {
-                        Name = org.Get<string>("Name"),
-                        NomValueId = org.Get<int>("NomValueId"),
-                        Code = org.Get<string>("Code")
-                    } : null,
                     Inspector = new AircraftInspectorDO() 
                     {
                         Other = !string.IsNullOrEmpty(inspectorNameEn) ? string.Format("{0} / {1}", inspectorNameBg, inspectorNameEn) : inspectorNameBg
