@@ -181,6 +181,7 @@
     <Content Include="Insert\Users\RoleClassifications.sql" />
     <Content Include="Insert\Users\Roles.sql" />
     <Content Include="Insert\Users\UserRoles.sql" />
+    <Content Include="Update\upd20150528_2.sql" />
     <Content Include="Update\upd20150528.sql" />
   </ItemGroup>
   <ItemGroup />
