@@ -190,6 +190,8 @@ namespace Common.Extensions
 
         public static string GetFileMimeTypeByExtenstion(string extension)
         {
+            extension = extension.ToLowerInvariant();
+
             if (!mimeTypes.ContainsKey(extension))
                 return string.Empty;
 

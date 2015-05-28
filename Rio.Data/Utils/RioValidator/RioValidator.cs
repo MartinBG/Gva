@@ -110,7 +110,7 @@ namespace Rio.Data.Utils.RioValidator
             {
                 foreach (var fileName in fileNames)
                 {
-                    string extension = GetFileExtension(fileName);
+                    string extension = GetFileExtension(fileName).ToLowerInvariant();
                     if (!string.IsNullOrEmpty(extension))
                     {
                         if (!supportedFileFormats.Contains(extension))
