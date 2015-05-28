@@ -59,7 +59,15 @@ namespace Common.Api.Controllers
                     var blobProvider = await Request.Content.ReadAsMultipartAsync(multipartProvider, cancellationToken);
                     var firstBlobKey = blobProvider.BlobData.First().BlobKey;
 
-                    return Request.CreateResponse(HttpStatusCode.OK, new { fileKey = firstBlobKey });
+                    if (Request.Headers.Accept.Any(a => a.MediaType == "application/json"))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, new { fileKey = firstBlobKey });
+                    }
+                    else
+                    {
+                        // fix for ie9 not supporting json
+                        return Request.CreateResponse(HttpStatusCode.OK, new { fileKey = firstBlobKey }, "text/html");
+                    }
                 }
             }
         }

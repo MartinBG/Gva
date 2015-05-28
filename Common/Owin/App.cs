@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Configuration;
@@ -99,6 +100,9 @@ namespace Common.Owin
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
             config.Formatters.JsonFormatter.SerializerSettings = JsonSerializerSettings;
+            // fix for ie9 not supporting json
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+
 
             JsonConvert.DefaultSettings = () => JsonSerializerSettings;
 
