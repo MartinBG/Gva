@@ -45,7 +45,7 @@ namespace Gva.Api.Controllers.Aircrafts
         [Route("new")]
         public IHttpActionResult GetNewCertNoise(int lotId, int? appId = null)
         {
-            int? lastNumberPerForm45 = this.aircraftRepository.GetLastNumberPerForm(45);
+            int? lastNumberPerForm45 = this.aircraftRepository.GetLastNumberPerForm(formPrefix: 45);
 
             AircraftCertNoiseDO newCertNoise = new AircraftCertNoiseDO()
             {

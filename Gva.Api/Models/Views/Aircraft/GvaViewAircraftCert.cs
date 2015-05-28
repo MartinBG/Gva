@@ -12,6 +12,8 @@ namespace Gva.Api.Models.Views.Aircraft
 
         public string DocumentNumber { get; set; }
 
+        public string FormName { get; set; }
+
         public int? FormNumberPrefix { get; set; }
 
         public int? ParsedNumberWithoutPrefix { get; set; }
@@ -37,14 +39,16 @@ namespace Gva.Api.Models.Views.Aircraft
                 .IsRequired()
                 .HasMaxLength(20);
 
-            this.Property(t => t.FormNumberPrefix)
-                .IsOptional();
+            this.Property(t => t.FormName)
+                .IsRequired()
+                .HasMaxLength(20);
 
             // Table & Column Mappings
             this.ToTable("GvaViewAircraftCerts");
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
             this.Property(t => t.DocumentNumber).HasColumnName("DocumentNumber");
+            this.Property(t => t.FormName).HasColumnName("FormName");
             this.Property(t => t.FormNumberPrefix).HasColumnName("FormNumberPrefix");
             this.Property(t => t.ParsedNumberWithoutPrefix).HasColumnName("ParsedNumberWithoutPrefix");
 

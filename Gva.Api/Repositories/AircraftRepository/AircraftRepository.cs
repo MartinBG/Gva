@@ -177,11 +177,11 @@ namespace Gva.Api.Repositories.AircraftRepository
             }
         }
 
-        public int? GetLastNumberPerForm(int formPrefix)
+        public int? GetLastNumberPerForm(int? formPrefix, string formName = null)
         {
             int? result = (int?)null;
             GvaViewAircraftCert lastEntry = this.unitOfWork.DbContext.Set<GvaViewAircraftCert>()
-                .Where(c => c.FormNumberPrefix == formPrefix)
+                .Where(c => formPrefix.HasValue ? c.FormNumberPrefix == formPrefix : c.FormName == formName)
                 .OrderByDescending(c => c.ParsedNumberWithoutPrefix)
                 .FirstOrDefault();
 
@@ -193,10 +193,12 @@ namespace Gva.Api.Repositories.AircraftRepository
             return result;
         }
 
-        public bool IsUniqueFormNumber(string formNumber, int lotId, int? partIndex = null)
+        public bool IsUniqueFormNumber(string formName, string formNumber, int lotId, int? partIndex = null)
         {
             return !this.unitOfWork.DbContext.Set<GvaViewAircraftCert>()
-                .Where(c => c.DocumentNumber == formNumber && (partIndex.HasValue ? partIndex.Value != c.PartIndex : true)).Any();
+                .Where(c => c.FormName == formName && 
+                    c.DocumentNumber == formNumber &&
+                    (partIndex.HasValue ? partIndex.Value != c.PartIndex : true)).Any();
         }
     }
 }

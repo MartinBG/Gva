@@ -52,7 +52,7 @@ namespace Gva.Api.Controllers.Aircrafts
         public IHttpActionResult GetNewCertAirworthinessFM(int lotId, int? appId = null)
         {
             var lastReg = this.aircraftRegistrationRepository.GetAircraftRegistrationNoms(lotId).FirstOrDefault();
-            int? lastNumberPerForm25 = this.aircraftRepository.GetLastNumberPerForm(25);
+            int? lastNumberPerForm25 = this.aircraftRepository.GetLastNumberPerForm(formPrefix: 25);
             AircraftCertAirworthinessDO newCertAirworthinessFM = new AircraftCertAirworthinessDO()
             {
                 AirworthinessCertificateType = this.nomRepository.GetNomValue("airworthinessCertificateTypes", "f25"),

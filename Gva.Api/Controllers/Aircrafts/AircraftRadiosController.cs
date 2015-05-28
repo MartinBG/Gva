@@ -8,6 +8,7 @@ using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
@@ -24,6 +25,7 @@ namespace Gva.Api.Controllers.Aircrafts
         private ICaseTypeRepository caseTypeRepository;
         private ILotRepository lotRepository;
         private IApplicationRepository applicationRepository;
+        private IAircraftRepository aircraftRepository;
 
         public AircraftRadiosController(
             IUnitOfWork unitOfWork,
@@ -32,6 +34,7 @@ namespace Gva.Api.Controllers.Aircrafts
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository,
             IApplicationRepository applicationRepository,
+            IAircraftRepository aircraftRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
             : base("aircraftCertRadios", unitOfWork, lotRepository, fileRepository, lotEventDispatcher, userContext)
@@ -40,15 +43,19 @@ namespace Gva.Api.Controllers.Aircrafts
             this.caseTypeRepository = caseTypeRepository;
             this.lotRepository = lotRepository;
             this.applicationRepository = applicationRepository;
+            this.aircraftRepository = aircraftRepository;
         }
 
         [Route("new")]
         public IHttpActionResult GetNewCertRadio(int lotId, int? appId = null)
         {
+            int? lastNumberPerRadioForm = this.aircraftRepository.GetLastNumberPerForm(formName: "radio");
+
             AircraftCertRadioDO newCertRadio = new AircraftCertRadioDO()
             {
                 IssueDate = DateTime.Now,
-                OwnerOperIsOrg = true
+                OwnerOperIsOrg = true,
+                AslNumber = lastNumberPerRadioForm.HasValue ? lastNumberPerRadioForm.Value + 1 : 0
             };
 
             GvaCaseType caseType = this.caseTypeRepository.GetCaseTypesForSet("aircraft").Single();

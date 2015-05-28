@@ -26,8 +26,8 @@ namespace Gva.Api.Repositories.AircraftRepository
 
         bool IsUniqueMSN(string msn, int? aircraftId = null);
 
-        int? GetLastNumberPerForm(int formPrefix);
+        int? GetLastNumberPerForm(int? formPrefix = null, string formName = null);
 
-        bool IsUniqueFormNumber(string number, int lotId, int? partIndex = null);
+        bool IsUniqueFormNumber(string formName, string number, int lotId, int? partIndex = null);
     }
 }

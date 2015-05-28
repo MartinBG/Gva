@@ -12,7 +12,8 @@
         return Aircrafts.isUniqueFormNumber({
           formNumber: $scope.model.part.issueNumber,
           lotId: scFormParams.lotId,
-          partIndex: scFormParams.partIndex
+          partIndex: scFormParams.partIndex,
+          formName: 'noise'
         })
         .$promise
         .then(function (result) {

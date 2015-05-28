@@ -5,9 +5,14 @@
   function AircraftCertRadioCtrl(
     $scope,
     Nomenclatures,
+    Aircrafts,
     scModal,
-    scMessage
+    scMessage,
+    scFormParams
     ) {
+    $scope.lotId = scFormParams.lotId;
+    $scope.partIndex = scFormParams.partIndex;
+
     $scope.$watch('model.inspector', function (inspectorModel) {
       if (!inspectorModel) {
         return;
@@ -83,13 +88,32 @@
       });
       return modalInstance.opened;
     };
+
+    $scope.isUniqueFormNumber = function () {
+       if ($scope.model.aslNumber) {
+        return Aircrafts.isUniqueFormNumber({
+          formName: 'radio',
+          formNumber: $scope.model.aslNumber,
+          lotId: $scope.lotId,
+          partIndex: $scope.partIndex
+        })
+        .$promise
+        .then(function (result) {
+          return result.isUnique;
+        });
+      } else {
+        return true;
+       }
+    };
   }
 
   AircraftCertRadioCtrl.$inject = [
     '$scope',
     'Nomenclatures',
+    'Aircrafts',
     'scModal',
-    'scMessage'
+    'scMessage',
+    'scFormParams'
   ];
 
   angular.module('gva').controller('AircraftCertRadioCtrl', AircraftCertRadioCtrl);

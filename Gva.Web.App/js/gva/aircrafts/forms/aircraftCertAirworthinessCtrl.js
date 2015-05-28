@@ -25,6 +25,7 @@
       $scope.$watch('model.airworthinessCertificateType', function (type) {
         if (type.alias === 'f25' || type.alias === 'f24') {
           Aircrafts.getNextFormNumber({
+            formName: 'airworthiness',
             formPrefix: type.alias === 'f25' ? 25 :  24
           })
           .$promise
@@ -40,6 +41,7 @@
     $scope.isUniqueFormNumber = function () {
        if ($scope.model.documentNumber) {
         return Aircrafts.isUniqueFormNumber({
+          formName: 'airworthiness',
           formNumber: $scope.model.documentNumber,
           lotId: $scope.lotId,
           partIndex: $scope.partIndex

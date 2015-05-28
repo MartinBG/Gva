@@ -87,19 +87,20 @@ namespace Gva.Api.Controllers
         }
 
         [Route("nextFormNumber")]
-        public IHttpActionResult GetNextFormNumber(int formPrefix)
+        public IHttpActionResult GetNextFormNumber(int? formPrefix = null, string formName = null)
         {
-            int? lastNumberPerForm = this.aircraftRepository.GetLastNumberPerForm(formPrefix);
-            string result = string.Format("{0}-{1:0000}", formPrefix, (lastNumberPerForm.HasValue ? lastNumberPerForm + 1 : 0));
+            int? lastNumberPerForm = this.aircraftRepository.GetLastNumberPerForm(formPrefix, formName);
+            string numberPrefix = formPrefix.HasValue ? string.Format("{0}-", formPrefix) : "";
+            string result = string.Format("{0}{1:0000}", numberPrefix, (lastNumberPerForm.HasValue ? lastNumberPerForm + 1 : 0));
 
             return Ok(new { number = result });
         }
 
         [HttpGet]
         [Route("uniqueFormNumber")]
-        public IHttpActionResult IsUniqueFormNumber(string formNumber, int lotId, int? partIndex = null)
+        public IHttpActionResult IsUniqueFormNumber(string formName, string formNumber, int lotId, int? partIndex = null)
         {
-            bool isUnique = this.aircraftRepository.IsUniqueFormNumber(formNumber, lotId, partIndex);
+            bool isUnique = this.aircraftRepository.IsUniqueFormNumber(formName, formNumber, lotId, partIndex);
 
             return Ok(new { isUnique = isUnique });
         }

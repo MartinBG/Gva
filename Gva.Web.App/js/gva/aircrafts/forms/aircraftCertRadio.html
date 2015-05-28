@@ -1,6 +1,7 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="text" ng-model="model.aslNumber" ng-required="true" l10n-text="aircrafts.radioDirective.ASLNumber" class="col-md-2 col-sm-6"></sc-field>
+    <sc-field type="text" ng-model="model.aslNumber" ng-required="true" l10n-text="aircrafts.radioDirective.ASLNumber" class="col-md-2 col-sm-6"
+      sc-validate="{ unique: isUniqueFormNumber }" validations="{ unique: 'defaultErrorTexts.unique', required: 'default'}"></sc-field>
     <sc-field type="date" ng-model="model.issueDate" ng-required="true" l10n-text="aircrafts.radioDirective.issueDate" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="text" ng-model="model.regMark" ng-required="true" l10n-text="aircrafts.radioDirective.regMark" class="col-md-2 col-sm-4"></sc-field>
     <sc-field type="text" ng-model="model.actType" ng-required="true" l10n-text="aircrafts.radioDirective.actType" class="col-sm-2"></sc-field>

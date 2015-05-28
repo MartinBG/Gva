@@ -34,7 +34,7 @@
             .save({ id: $stateParams.id, ind: $stateParams.ind }, $scope.radio)
             .$promise
             .then(function () {
-              return $state.go('root.aircrafts.view.radios.search');
+              $scope.editMode = null;
             });
         }
       });

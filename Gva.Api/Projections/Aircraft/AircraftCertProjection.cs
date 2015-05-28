@@ -28,8 +28,10 @@ namespace Gva.Api.Projections.Aircraft
 
             var airworthinessesResult = airworthinesses.Select(airworthiness => this.Create(airworthiness)) ?? new List<GvaViewAircraftCert>();
             var noisesResult = noises.Select(noise => this.Create(noise)) ?? new List<GvaViewAircraftCert>();
+            var radiosResult = parts.GetAll<AircraftCertRadioDO>("aircraftCertRadios")
+                .Select(radio => this.Create(radio)) ?? new List<GvaViewAircraftCert>();
 
-            return airworthinessesResult.Union(noisesResult);
+            return airworthinessesResult.Union(noisesResult).Union(radiosResult);
         }
 
         private GvaViewAircraftCert Create(PartVersion<AircraftCertAirworthinessDO> airworthiness)
@@ -40,8 +42,9 @@ namespace Gva.Api.Projections.Aircraft
             cert.LotId = airworthiness.Part.Lot.LotId;
             cert.PartIndex = airworthiness.Part.Index;
             cert.DocumentNumber = airworthiness.Content.DocumentNumber;
-            cert.ParsedNumberWithoutPrefix = matchResult.Item3 ? matchResult.Item2 : (int?)null; ;
+            cert.ParsedNumberWithoutPrefix = matchResult.Item3 ? matchResult.Item2 : (int?)null;
             cert.FormNumberPrefix = matchResult.Item1.HasValue ? matchResult.Item1.Value : (int?)null;
+            cert.FormName = "airworthiness";
 
             return cert;
         }
@@ -56,6 +59,19 @@ namespace Gva.Api.Projections.Aircraft
             cert.DocumentNumber = noise.Content.IssueNumber;
             cert.ParsedNumberWithoutPrefix = matchResult.Item3 ? matchResult.Item2 : (int?)null;
             cert.FormNumberPrefix = matchResult.Item1.HasValue ? matchResult.Item1.Value : (int?)null;
+            cert.FormName = "noise";
+
+            return cert;
+        }
+
+        private GvaViewAircraftCert Create(PartVersion<AircraftCertRadioDO> radio)
+        {
+            GvaViewAircraftCert cert = new GvaViewAircraftCert();
+            cert.LotId = radio.Part.Lot.LotId;
+            cert.PartIndex = radio.Part.Index;
+            cert.DocumentNumber = radio.Content.AslNumber.ToString();
+            cert.ParsedNumberWithoutPrefix = radio.Content.AslNumber;
+            cert.FormName = "radio";
 
             return cert;
         }
