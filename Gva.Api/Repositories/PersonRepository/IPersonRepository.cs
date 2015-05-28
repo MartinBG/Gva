@@ -83,8 +83,6 @@ namespace Gva.Api.Repositories.PersonRepository
 
         bool IsUniqueLicenceNumber(string licenceTypeCode, int? licenceNumber);
 
-        bool IsFclLicence(int licenceTypeId);
-
         List<GvaViewPersonCheck> GetChecksForReport(List<int> checks);
     }
 }

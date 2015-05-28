@@ -166,16 +166,5 @@ namespace Gva.Api.Controllers.Persons
                     isUnique = this.personRepository.IsUniqueLicenceNumber(licenceTypeCode, licenceNumber)
                 });
         }
-
-        [HttpGet]
-        [Route("isFclLicence")]
-        public IHttpActionResult IsFclLicence(int licenceTypeId)
-        {
-            return Ok(
-                new
-                {
-                    isFcl = this.personRepository.IsFclLicence(licenceTypeId)
-                });
-        }
     }
 }

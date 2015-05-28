@@ -16,6 +16,9 @@
     $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.appId = $stateParams.appId;
     $scope.licence = licence;
+    var licenceTypeCode = $scope.licence.part.licenceType.code;
+    $scope.isFcl = licenceTypeCode.indexOf('FCL') >= 0 ||
+        licenceTypeCode === 'BG CCA';
 
     $scope.save = function () {
       return $scope.newLicenceEditionForm.$validate().then(function () {

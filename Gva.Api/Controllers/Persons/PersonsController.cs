@@ -475,17 +475,6 @@ namespace Gva.Api.Controllers.Persons
         }
 
         [HttpGet]
-        [Route("isFclLicence")]
-        public IHttpActionResult IsFclLicence(int licenceTypeId)
-        {
-            return Ok(
-                new
-                {
-                    isFcl = this.personRepository.IsFclLicence(licenceTypeId)
-                });
-        }
-
-        [HttpGet]
         [Route("getChecksForReport")]
         public IHttpActionResult GetChecksForReport([FromUri] List<int> checks = null)
         {

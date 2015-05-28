@@ -429,13 +429,6 @@ namespace Gva.Api.Repositories.PersonRepository
             return !licences.Any();
         }
 
-        public bool IsFclLicence(int licenceTypeId)
-        {
-            NomValue licenceType = this.nomRepository.GetNomValue("licenceTypes", licenceTypeId);
-
-            return licenceType.Code.Contains("FCL") || licenceType.Code == "BG CCA";
-        }
-
         public List<GvaViewPersonCheck> GetChecksForReport(List<int> checks)
         {
             if (checks.Count() > 0)

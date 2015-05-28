@@ -16,6 +16,13 @@
     $scope.lotId = $stateParams.id;
     $scope.caseTypeId = $stateParams.caseTypeId;
     $scope.appId = $stateParams.appId;
+    $scope.$watch('newLicence.part.licenceType', function () {
+      if ($scope.newLicence.part.licenceType) {
+        var licenceTypeCode = $scope.newLicence.part.licenceType.code;
+        $scope.isFcl = licenceTypeCode.indexOf('FCL') >= 0 || 
+          licenceTypeCode === 'BG CCA';
+      }
+    });
 
     $scope.$watch('newLicence.case.caseType', function () {
       if ($scope.newLicence['case'] && $scope.newLicence['case'].caseType) {
