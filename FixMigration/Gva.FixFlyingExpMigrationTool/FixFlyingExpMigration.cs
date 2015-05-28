@@ -11,7 +11,6 @@ using Common.Data;
 using Docs.Api;
 using Gva.Api;
 using Gva.FixFlyingExpMigrationTool.Sets;
-using Gva.FixFlyingExpMigrationTool.Sets;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Oracle.ManagedDataAccess.Client;
