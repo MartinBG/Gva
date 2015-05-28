@@ -412,15 +412,22 @@ namespace Gva.Api.Controllers
         public IHttpActionResult GetAircrafts(string term = null, int offset = 0, int? limit = null)
         {
             var returnValue =
-                this.aircraftRepository.GetAircrafts(mark: null, manSN: null, modelAlt: term, icao: null, airCategory: null, aircraftProducer: null, exact: false, offset: offset, limit: limit)
+                this.aircraftRepository.GetAircrafts(mark: null, manSN: null, modelAlt: null, icao: null, airCategory: null, aircraftProducer: null, exact: false)
+                .Where(e => e.Item2 != null )
                 .Select(e => new
                 {
                     nomValueId = e.Item1.LotId,
                     name = string.Format("{0} ({1})", e.Item2.RegMark, e.Item1.Model),
                     nameAlt = string.Format("{0} ({1})", e.Item2.RegMark, e.Item1.ModelAlt)
-                });
+                })
+                .ToList();
 
-            return Ok(returnValue);
+            if (!string.IsNullOrEmpty(term))
+            {
+                returnValue = returnValue.Where(r => r.name.ToLower().Contains(term.ToLower())).ToList();
+            }
+
+            return Ok(returnValue.WithOffsetAndLimit(offset, limit));
         }
 
         [Route("aircraftModels/{id:int}")]
