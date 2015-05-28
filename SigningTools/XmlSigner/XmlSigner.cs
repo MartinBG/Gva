@@ -123,6 +123,7 @@ namespace SigningTools.XmlSigner
             xmlSigner.UpdateReferencesDigest();
             xmlSigner.GenerateSignature();
             xmlSigner.Signature.SignaturePrefix = String.Empty;
+            xmlSigner.Signature.ID = Guid.NewGuid().ToString();
 
             return xmlSigner;
         }
