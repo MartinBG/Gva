@@ -49,7 +49,8 @@ namespace Gva.Api.WordTemplates
                     REG_MARK = registration != null ? registration.RegMark : null,
                     MSN = aircraftData.ManSN, 
                     ENGINE = aircraftData.EngineAlt, 
-                    PROPELLER = aircraftData.PropellerAlt, 
+                    PROPELLER = string.IsNullOrEmpty(aircraftData.PropellerAlt) && string.IsNullOrEmpty(aircraftData.Propeller) ? 
+                        "Not applicable" : (aircraftData.PropellerAlt ?? aircraftData.Propeller), 
                     MAX_TAKE_OFF_MASS = aircraftData.MaxMassT, 
                     MAX_LANDING_MASS = aircraftData.MaxMassL, 
                     NOISE_STANDART = noiseData.Chapter,
@@ -58,7 +59,8 @@ namespace Gva.Api.WordTemplates
                     OVERFLIGHT_NOISE_LEVEL = noiseData.Overflight.HasValue ? string.Format("{0} dB", noiseData.Overflight.ToString()) : "N/A",
                     FLYOVER_NOISE_LEVEL = noiseData.Flyover.HasValue ? string.Format("{0} dB", noiseData.Flyover.ToString()) : "N/A",
                     TAKE_OFF_NOISE_LEVEL = noiseData.Takeoff.HasValue ? string.Format("{0} dB", noiseData.Takeoff.ToString()) : "N/A", 
-                    ADDITIONAL_MODIFICATIONS = noiseData.AdditionalModifications,
+                    ADDITIONAL_MODIFICATIONS = string.IsNullOrEmpty(noiseData.AdditionalModificationsAlt) && string.IsNullOrEmpty(noiseData.AdditionalModifications) ? 
+                        "None" : noiseData.AdditionalModifications,
                     ADDITIONAL_MODIFICATIONS_ALT = noiseData.AdditionalModificationsAlt,
                     NOTES = noiseData.Remarks
                 }
