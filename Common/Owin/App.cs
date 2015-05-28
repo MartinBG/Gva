@@ -10,6 +10,7 @@ using Autofac;
 using Autofac.Integration.Owin;
 using Autofac.Integration.WebApi;
 using Autofac.Integration.WebApi.Owin;
+using Common.Filters;
 using Common.Http;
 using Common.Jobs;
 using Common.Utils;
@@ -109,6 +110,7 @@ namespace Common.Owin
             config.Filters.Add(new NLogTraceFilter());
             config.Filters.Add(new NLogExceptionFilter());
             config.Filters.Add(new DomainErrorExceptionFilter());
+            config.Filters.Add(new NoCacheActionFilter());
 
             config.MapHttpAttributeRoutes(new CustomDirectRouteProvider());
 

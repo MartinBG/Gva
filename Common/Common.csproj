@@ -146,6 +146,8 @@
     <Compile Include="DomainValidation\DomainErrorException.cs" />
     <Compile Include="DomainValidation\DomainValidator.cs" />
     <Compile Include="DomainValidation\IDomainValidator.cs" />
+    <Compile Include="Extensions\HttpExtensions.cs" />
+    <Compile Include="Filters\NoCacheActionFilter.cs" />
     <Compile Include="Filters\ValidateAttribute .cs" />
     <Compile Include="Jobs\IJob.cs" />
     <Compile Include="Jobs\JobHost.cs" />
