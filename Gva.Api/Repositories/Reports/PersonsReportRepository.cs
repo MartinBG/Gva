@@ -67,7 +67,7 @@ namespace Gva.Api.Repositories.Reports
                     new DbClause("and ii.Name = {0}", documentRole),
                     new DbClause("and ii.Number like '%' + {0} + '%'", docNumber),
                     new DbClause("and ii.Publisher like '%' + {0} + '%'", publisher),
-                    new DbClause("and (d.Limitations like {0} + '$$%' or d.Limitations like '%$$' + {0} or d.Limitations like '%$$' + {0} + '$$' or d.Limitations like {0})", limName),
+                    new DbClause("and (d.Limitations like {0} + '$$%' or d.Limitations like '%$$' + {0} or d.Limitations like '%$$' + {0} + '$$%' or d.Limitations like {0})", limName),
                     new DbClause("{0}", offset),
                     new DbClause("{0}", limit))
                     .Materialize(r => new Tuple<int, PersonReportDocumentDO>
@@ -140,7 +140,7 @@ namespace Gva.Api.Repositories.Reports
                         new DbClause("and p.Lin = {0}", lin),
                         new DbClause("and lt.NomValueId = {0}", licenceTypeId),
                         new DbClause("and la.NomValueId = {0}", licenceActionId),
-                        new DbClause("and (le.Limitations like {0} + '$$%' or le.Limitations like '%$$' + {0} or le.Limitations like '%$$' + {0} + '$$' or le.Limitations like {0})", limName),
+                        new DbClause("and (le.Limitations like {0} + '$$%' or le.Limitations like '%$$' + {0} or le.Limitations like '%$$%' + {0} + '$$' or le.Limitations like {0})", limName),
                         new DbClause("{0}", offset),
                         new DbClause("{0}", limit))
                          .Materialize(r => new Tuple<int, PersonReportLicenceDO>
@@ -239,7 +239,7 @@ namespace Gva.Api.Repositories.Reports
                         new DbClause("and r.RatingClassId = {0}", ratingClassId),
                         new DbClause("and r.AuthorizationId = {0}", authorizationId),
                         new DbClause("and r.AircraftTypeGroupId = {0}", aircraftTypeCategoryId),
-                        new DbClause("and (re.Limitations like {0} + '$$%' re.Limitations like '%$$' + {0} or re.Limitations like '%$$' + {0} + '$$' or re.Limitations like {0})", limCode),
+                        new DbClause("and (re.Limitations like {0} + '$$%' re.Limitations like '%$$' + {0} or re.Limitations like '%$$' + {0} + '$$%' or re.Limitations like {0})", limCode),
                         new DbClause("{0}", offset),
                         new DbClause("{0}", limit))
                         .Materialize(r => new Tuple<int, PersonReportRatingDO>
