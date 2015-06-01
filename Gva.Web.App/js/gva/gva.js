@@ -181,17 +181,9 @@
       controller: 'AircraftCertRegViewCtrl'
     });
     scaffoldingProvider.form({
-      name: 'gvaAircraftCertSmodView',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertSmodView.html'
-    });
-    scaffoldingProvider.form({
       name: 'gvaAircraftCertAirworthinessView',
       templateUrl: 'js/gva/aircrafts/forms/aircraftCertAirworthinessView.html',
       controller: 'AircraftCertAirworthinessViewCtrl'
-    });
-    scaffoldingProvider.form({
-      name: 'gvaAircraftCertNoiseView',
-      templateUrl: 'js/gva/aircrafts/forms/aircraftCertNoiseView.html'
     });
     scaffoldingProvider.form({
       name: 'gvaAircraftRadioEntry',
@@ -377,6 +369,11 @@
       templateUrl: 'js/gva/aircrafts/forms/aircraftInspector.html',
       controller: 'AircraftInspectorCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaSmodeCodeData',
+      templateUrl: 'js/gva/sModeCodes/forms/sModeCodeData.html',
+      controller: 'SModeCodeDataCtrl'
+    });
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
      .modal('choosePublisher'     , 'js/gva/common/modals/publishers/choosePublisherModal.html'       , 'ChoosePublisherModalCtrl'            )
@@ -549,6 +546,12 @@
     .modal('newQualificationState' , 'js/gva/persons/modals/qualificationStates/newQlfStateModal.html', 'NewQlfStateModalCtrl'       , 'xs-2');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
+      .state(['root.sModeCodes'          , '/sModeCodes?codeHex&typeId'                                                                                    ])
+      .state(['root.sModeCodes.search'   , ''                       , ['@root', 'js/gva/sModeCodes/views/sModeCodesSearch.html'  , 'SModeCodesSearchCtrl' ]])
+      .state(['root.sModeCodes.new'      , '/new'                   , ['@root', 'js/gva/sModeCodes/views/sModeCodesNew.html'     , 'SModeCodesNewCtrl'    ]])
+      .state(['root.sModeCodes.edit'     , '/:id/data'              , ['@root', 'js/gva/sModeCodes/views/sModeCodesEdit.html'    , 'SModeCodesEditCtrl'   ]]);
+  }]).config(['$stateProvider', function ($stateProvider) {
+    $stateProvider
       .state(['root.aircrafts'                                          , '/aircrafts?mark&manSN&modelAlt&airCategory&aircraftProducer'                                                                                                                                    ])
       .state(['root.aircrafts.search'                                   , ''                                                      , ['@root'               , 'js/gva/aircrafts/views/aircraftsSearch.html'                            , 'AircraftsSearchCtrl'             ]])
       .state(['root.aircrafts.registrations'                            , '/registrations?registerId&certNumber&actNumber&regMark', ['@root'               , 'js/gva/aircrafts/views/aircraftsRegistrationsSearch.html'               , 'AircraftsRegistrationsSearchCtrl']])
@@ -566,8 +569,6 @@
       .state(['root.aircrafts.view.regsFM.dereg'                        , '/dereg/:ind'                                           , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certRegsFM/regsDereg.html'                       , 'CertRegsFMDeregCtrl'             ]])
       .state(['root.aircrafts.view.smods'                               , '/smods'                                                                                                                                                                                         ])
       .state(['root.aircrafts.view.smods.search'                        , ''                                                      , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certSmods/smodsSearch.html'                      , 'CertSmodsSearchCtrl'             ]])
-      .state(['root.aircrafts.view.smods.new'                           , '/new'                                                  , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certSmods/smodsNew.html'                         , 'CertSmodsNewCtrl'                ]])
-      .state(['root.aircrafts.view.smods.edit'                          , '/:ind'                                                 , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certSmods/smodsEdit.html'                        , 'CertSmodsEditCtrl'               ]])
       .state(['root.aircrafts.view.airworthinessesFM'                   , '/airworthinessesFM'                                                                                                                                                                             ])
       .state(['root.aircrafts.view.airworthinessesFM.search'            , ''                                                      , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certAirworthinessesFM/airworthinessesSearch.html', 'CertAirworthinessesFMSearchCtrl' ]])
       .state(['root.aircrafts.view.airworthinessesFM.new'               , '/new'                                                  , ['@root.aircrafts.view', 'js/gva/aircrafts/views/certAirworthinessesFM/airworthinessesNew.html'   , 'CertAirworthinessesFMNewCtrl'    ]])
@@ -606,7 +607,7 @@
   }])
     .config(['scModalProvider', function (scModalProvider) {
     scModalProvider
-    .modal('manageRadioEntry'       , 'js/gva/aircrafts/modals/radios/manageRadioEntryModal.html'            , 'ManageRadioEntryModalCtrl'   , 'sm-5');
+    .modal('manageRadioEntry'     , 'js/gva/aircrafts/modals/radios/manageRadioEntryModal.html'          , 'ManageRadioEntryModalCtrl'   , 'sm-5');
   }])
     .config(['$stateProvider', function ($stateProvider) {
     $stateProvider

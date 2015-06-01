@@ -9,6 +9,7 @@ using Gva.Api.Controllers.Integration;
 using Gva.Api.Controllers.Organizations;
 using Gva.Api.Controllers.Persons;
 using Gva.Api.Controllers.Reports;
+using Gva.Api.Controllers.SModeCodes;
 using Gva.Api.Models;
 using Gva.Api.Projections.Aircraft;
 using Gva.Api.Projections.Airport;
@@ -20,6 +21,7 @@ using Gva.Api.Projections.Inventory.Equipments;
 using Gva.Api.Projections.Inventory.Organizations;
 using Gva.Api.Projections.Organization;
 using Gva.Api.Projections.Person;
+using Gva.Api.Projections.SModeCode;
 using Gva.Api.Repositories.AircraftRepository;
 using Gva.Api.Repositories.AirportRepository;
 using Gva.Api.Repositories.ApplicationRepository;
@@ -36,6 +38,7 @@ using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.PrintRepository;
 using Gva.Api.Repositories.PublisherRepository;
 using Gva.Api.Repositories.Reports;
+using Gva.Api.Repositories.SModeCodeRepository;
 using Gva.Api.Repositories.StageRepository;
 using Gva.Api.WordTemplates;
 using Regs.Api.LotEvents;
@@ -109,6 +112,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<OrganizationApprovalProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationAmendmentProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
+            moduleBuilder.RegisterType<SModeCodeProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
+
             //Repositories
             moduleBuilder.RegisterType<ExaminationSystemRepository>().As<IExaminationSystemRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PrintRepository>().As<IPrintRepository>().InstancePerLifetimeScope();
@@ -129,6 +134,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<PublisherRepository>().As<IPublisherRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<StageRepository>().As<IStageRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ApplicationStageRepository>().As<IApplicationStageRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<SModeCodeRepository>().As<ISModeCodeRepository>().InstancePerLifetimeScope();
 
             moduleBuilder.RegisterType<IntegrationRepository>().As<IIntegrationRepository>().InstancePerLifetimeScope();
 
@@ -197,7 +203,6 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRadiosController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftNoisesController>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<AircraftSmodsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDocumentOthersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDocumentOwnersController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftDocumentOccurrencesController>().InstancePerLifetimeScope();
@@ -207,6 +212,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<AircraftCertRegistrationsFMController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftInspectionsController>().InstancePerLifetimeScope();
 
+            //SModeCode controller
+            moduleBuilder.RegisterType<SModeCodesController>().InstancePerLifetimeScope();
 
             // Application controllers
             moduleBuilder.RegisterType<ApplicationsController>().InstancePerLifetimeScope();

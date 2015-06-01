@@ -27,6 +27,8 @@ INSERT INTO [ClassificationRelations]([ClassificationRelationId],[Classification
 INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(23,23,17,2);
 INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(24,24,17,2);
 INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(25,25,17,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(26,26,2,2);
+INSERT INTO [ClassificationRelations]([ClassificationRelationId],[ClassificationId],[ParentClassificationId],[RootClassificationId])VALUES(27,27,26,2);
 SET IDENTITY_INSERT [ClassificationRelations] OFF
 GO
 

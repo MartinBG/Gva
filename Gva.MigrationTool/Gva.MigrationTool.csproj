@@ -86,6 +86,8 @@
     <Compile Include="Blobs\BlobUploader.cs" />
     <Compile Include="Blobs\RateLimiter.cs" />
     <Compile Include="Sets\AircraftRadios\AicraftRadios.cs" />
+    <Compile Include="Sets\SModeCode.cs" />
+    <Compile Include="Sets\SModeCodeLotCreator.cs" />
     <Compile Include="Sets\Common\CommonUtils.cs" />
     <Compile Include="FmOrgMatcher.cs" />
     <Compile Include="Sets\AircraftApexLotCreator.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="Sets\AircraftFmLotCreator.cs" />
     <Compile Include="Sets\AircraftFmLotMigrator.cs" />
     <Compile Include="Sets\AircraftRadioCertsMigrator.cs" />
+    <Compile Include="Sets\AircraftSModeCodesMigrator.cs" />
     <Compile Include="Sets\OrganizationFmLotCreator.cs" />
     <Compile Include="Sets\ExaminationSystemDataMigrator.cs" />
     <Compile Include="Sets\PersonLicenceDocMigrator.cs" />
@@ -138,7 +141,9 @@
       <Name>Regs.Api</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Sets\AircraftSModeCodes\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

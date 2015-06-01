@@ -51,6 +51,7 @@
     <Content Include="Create\Tables\ASExamVariants.sql" />
     <Content Include="Create\Tables\ASExamQuestions.sql" />
     <Content Include="Create\Tables\ASExamVariantQuestions.sql" />
+    <Content Include="Create\Tables\GvaViewSModeCodes.sql" />
     <Content Include="Create\Tables\GvaViewAircraftCerts.sql" />
     <Content Include="Create\Tables\GvaViewPrintedRatingEditions.sql" />
     <Content Include="Create\Tables\GvaInvalidActNumbers.sql" />
@@ -149,6 +150,7 @@
     <Content Include="Insert\gvaWordTemplates.sql" />
     <Content Include="Insert\Lots\aircraft.sql" />
     <Content Include="Insert\Lots\airport.sql" />
+    <Content Include="Insert\Lots\sModeCode.sql" />
     <Content Include="Insert\Lots\equipment.sql" />
     <Content Include="Insert\Lots\organization.sql" />
     <Content Include="Insert\Lots\person.sql" />
@@ -178,6 +180,7 @@
     <Content Include="Insert\migrationUser.sql" />
     <Content Include="Insert\Noms\Aircrafts\airworthinessCertificateTypes.sql" />
     <Content Include="Insert\gvaStages.sql" />
+    <Content Include="Insert\Noms\SModeCodes\sModeCodeTypes.sql" />
     <Content Include="Insert\Users\RoleClassifications.sql" />
     <Content Include="Insert\Users\Roles.sql" />
     <Content Include="Insert\Users\UserRoles.sql" />

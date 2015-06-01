@@ -115,7 +115,6 @@
     <Compile Include="Controllers\Aircrafts\AircraftInspectionsController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftNoisesController.cs" />
     <Compile Include="Controllers\Aircrafts\AircraftRadiosController.cs" />
-    <Compile Include="Controllers\Aircrafts\AircraftSmodsController.cs" />
     <Compile Include="Controllers\Airports\AirportApplicationsController.cs" />
     <Compile Include="Controllers\Airports\AirportCertOperationalsController.cs" />
     <Compile Include="Controllers\Airports\AirportDocumentOthersController.cs" />
@@ -162,6 +161,7 @@
     <Compile Include="Controllers\Persons\PersonLicenceEditionsController.cs" />
     <Compile Include="Controllers\Persons\PersonRatingEditionsController.cs" />
     <Compile Include="CommonUtils\DataExtensions.cs" />
+    <Compile Include="Controllers\SModeCodes\SModeCodesController.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregExportFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertDeregFMDO.cs" />
     <Compile Include="ModelsDO\Aircrafts\AircraftCertRegistrationFMDO.cs" />
@@ -316,6 +316,8 @@
     <Compile Include="ModelsDO\Persons\Reports\PersonReportRatingDO.cs" />
     <Compile Include="ModelsDO\Persons\Reports\PersonReportLicenceDO.cs" />
     <Compile Include="ModelsDO\Persons\Reports\PersonReportDocumentDO.cs" />
+    <Compile Include="ModelsDO\SModeCodes\SModeCodeDO.cs" />
+    <Compile Include="ModelsDO\SModeCodes\SModeCodeViewDO.cs" />
     <Compile Include="Models\Enums\QualificationStateMethod.cs" />
     <Compile Include="Models\Enums\QualificationState.cs" />
     <Compile Include="Models\GvaInvalidActNumber.cs" />
@@ -346,6 +348,7 @@
     <Compile Include="Models\Views\Person\GvaLicenceEdition.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonLicenceEdition.cs" />
     <Compile Include="Models\Views\Person\GvaViewPersonRating.cs" />
+    <Compile Include="Models\Views\SModeCode\GvaViewSModeCode.cs" />
     <Compile Include="Projections\Aircraft\AircraftProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegistrationProjection.cs" />
     <Compile Include="Projections\Aircraft\AircraftRegMarkProjection.cs" />
@@ -433,6 +436,7 @@
     <Compile Include="Models\GvaWordTemplate.cs" />
     <Compile Include="Projections\Person\PersonRatingProjection.cs" />
     <Compile Include="Projections\Person\PersonPrintedRatingEditionProjection.cs" />
+    <Compile Include="Projections\SModeCode\SModeCodeProjection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GvaApiModule.cs" />
     <Compile Include="Repositories\AircraftRepository\AircraftRegistrationRepository.cs" />
@@ -474,6 +478,8 @@
     <Compile Include="Repositories\Reports\PersonsReportRepository.cs" />
     <Compile Include="Repositories\Reports\IPersonsReportRepository.cs" />
     <Compile Include="Repositories\Reports\PersonsReportsExportExcelRepository.cs" />
+    <Compile Include="Repositories\SModeCodeRepository\SModeCodeRepository.cs" />
+    <Compile Include="Repositories\SModeCodeRepository\ISModeCodeRepository.cs" />
     <Compile Include="Repositories\StageRepository\IStageRepository.cs" />
     <Compile Include="Repositories\StageRepository\StageRepository.cs" />
     <Compile Include="WordTemplates\AMLNational.cs" />

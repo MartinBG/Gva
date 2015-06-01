@@ -4,26 +4,24 @@
 
   function CertSmodsSearchCtrl(
     $scope,
-    $state,
-    $stateParams,
-    smods
+    sModeCodes
   ) {
-    $scope.smods = smods;
+    $scope.sModeCodes = sModeCodes;
   }
 
   CertSmodsSearchCtrl.$inject = [
     '$scope',
-    '$state',
-    '$stateParams',
-    'smods'
+    'sModeCodes'
   ];
 
   CertSmodsSearchCtrl.$resolve = {
-    smods: [
+    sModeCodes: [
       '$stateParams',
-      'AircraftCertSmods',
-      function ($stateParams, AircraftCertSmods) {
-        return AircraftCertSmods.query($stateParams).$promise;
+      'SModeCodes',
+      function ($stateParams, SModeCodes) {
+        return SModeCodes
+          .getSModeCodesPerAircraft({aircraftId: $stateParams.id})
+          .$promise;
       }
     ]
   };

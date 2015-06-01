@@ -1,22 +1,35 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.ltrInNumber" ng-required="true" l10n-text="aircrafts.smodDirective.ltrInNumber" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="date" ng-model="model.part.ltrInDate" ng-required="true" l10n-text="aircrafts.smodDirective.ltrInDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.theirNumber" ng-required="true" l10n-text="aircrafts.smodDirective.theirNumber" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="date" ng-model="model.theirDate" ng-required="true" l10n-text="aircrafts.smodDirective.theirDate" class="col-md-2 col-sm-3"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.ltrCaaNumber" ng-required="true" l10n-text="aircrafts.smodDirective.ltrCaaNumber" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="date" ng-model="model.part.ltrCaaDate" ng-required="true" l10n-text="aircrafts.smodDirective.ltrCaaDate" class="col-md-2 col-sm-4"></sc-field>
+    <sc-field type="text" ng-model="model.caaNumber" ng-required="true" l10n-text="aircrafts.smodDirective.caaNumber" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="date" ng-model="model.caaDate" ng-required="true" l10n-text="aircrafts.smodDirective.caaDate" class="col-md-2 col-sm-3"></sc-field>
   </div>
   <div class="row">
-    <sc-field type="text" ng-model="model.part.caaTo" l10n-text="aircrafts.smodDirective.caaTo" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="text" ng-model="model.part.caaJob" l10n-text="aircrafts.smodDirective.caaJob" class="col-md-4 col-sm-6"></sc-field>
-    <sc-field type="text" ng-model="model.part.caaToAddress" l10n-text="aircrafts.smodDirective.caaToAddress" class="col-md-4 col-sm-6"></sc-field>
-  </div>
-  <div class="row">
-    <sc-field-group class="col-sm-6 col-md-4" text="aircrafts.smodDirective.scode" validations="{required: 'default'}" field-name="scode">
-      <sc-text ng-model="model.part.scode" name="scode" required disabled ng-readonly="form.$readonly"></sc-text>
-      <button class="btn btn-default" type="button" ng-click="generateScode()" l10n-text="aircrafts.smodDirective.getScode" ng-disabled="form.$readonly"></button>
-    </sc-field-group>
-    <sc-field type="nomenclature" ng-model="model.part.valid" alias="'boolean'" ng-required="true" l10n-text="aircrafts.smodDirective.valid" class="col-sm-2"></sc-field>
+    <div class="col-sm-7 col-md-5">
+      <label class="control-label" l10n-text="aircrafts.smodDirective.applicant"></label>
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 40px" ng-disabled="form.$readonly">
+            <span ng-if="model.applicantIsOrg" l10n-text="aircrafts.smodDirective.organization"></span>
+            <span ng-if="!model.applicantIsOrg" l10n-text="aircrafts.smodDirective.person"></span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a ng-click="model.applicantIsOrg = true" l10n-text="aircrafts.smodDirective.organization"></a>
+            </li>
+            <li>
+              <a ng-click="model.applicantIsOrg = false" l10n-text="aircrafts.smodDirective.person"></a>
+            </li>
+          </ul>
+        </div>
+        <sc-nomenclature ng-if="model.applicantIsOrg" class="form-control input-sm" ng-model="model.applicantOrganization" name="applicantOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-nomenclature ng-if="!model.applicantIsOrg" class="form-control input-sm" ng-model="model.applicantPerson" name="applicantPerson" alias="'persons'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-button type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="newApplicant()" ng-if="!form.$readonly"></sc-button>
+      </div>
+    </div>
   </div>
 </ng-form>
