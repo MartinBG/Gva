@@ -35,6 +35,10 @@
     $scope.getDocuments = function (page) {
       var params = {set: $stateParams.set};
       var pageSize = $scope.filters.itemsPerPage.id;
+      var documentRole = $scope.filters.documentRole ?
+          $scope.filters.documentRole.text : null;
+
+      $scope.filters.documentRole = documentRole;
 
       _.assign(params, $scope.filters);
       _.assign(params, {
