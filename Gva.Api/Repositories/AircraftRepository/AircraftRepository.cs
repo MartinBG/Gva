@@ -103,19 +103,26 @@ namespace Gva.Api.Repositories.AircraftRepository
                               Registration = ra1
                           });
 
-            var result = new
+            GvaViewAircraft aircraftData = null;
+            GvaViewAircraftRegistration regData = null;
+            if (results.Count() > 1)
             {
-                Aircraft = new GvaViewAircraft(),
-                Registration = new GvaViewAircraftRegistration()
-            };
-
-            if (results.Count() >= 1)
+                var result = results.OrderByDescending(r => r.Registration.PartIndex).FirstOrDefault();
+                regData = result.Registration ?? null;
+                aircraftData = result.Aircraft;
+            }
+            else
             {
-                result = results.OrderByDescending(r => r.Registration.PartIndex).First();
-                this.unitOfWork.DbContext.Set<NomValue>().Where(r => result.Registration.CertRegisterId == r.NomValueId).Load();
+                var result = results.FirstOrDefault();
+                aircraftData = result.Aircraft;
+                regData = result.Registration;
+            }
+            if(regData != null)
+            {
+                this.unitOfWork.DbContext.Set<NomValue>().Where(r => regData.CertRegisterId == r.NomValueId).Load();
             }
 
-            return new Tuple<GvaViewAircraft, GvaViewAircraftRegistration>(result.Aircraft, result.Registration);
+            return new Tuple<GvaViewAircraft, GvaViewAircraftRegistration>(aircraftData, regData);
         }
 
         public IEnumerable<GvaInvalidActNumber> GetInvalidActNumbers(int? actNumber = null, int? registerId = null)
