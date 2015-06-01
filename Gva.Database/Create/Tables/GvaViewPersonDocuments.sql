@@ -11,10 +11,12 @@ CREATE TABLE [dbo].[GvaViewPersonDocuments] (
     [Publisher]             NVARCHAR(150) NULL,
     [Limitations]           NVARCHAR(150) NULL,
     [DateValidFrom]         DATETIME2     NULL,
+    [MedClassId]            INT           NULL,
     CONSTRAINT [PK_GvaViewPersonDocuments]                PRIMARY KEY ([LotId], [PartIndex]),
     CONSTRAINT [FK_GvaViewPersonDocuments_GvaViewPersons] FOREIGN KEY ([LotId])  REFERENCES [dbo].[GvaViewPersons] ([LotId]),
     CONSTRAINT [FK_GvaViewPersonDocuments_NomValues]      FOREIGN KEY ([TypeId]) REFERENCES [dbo].[NomValues] ([NomValueId]),
-    CONSTRAINT [FK_GvaViewPersonDocuments_NomValues2]     FOREIGN KEY ([RoleId]) REFERENCES [dbo].[NomValues] ([NomValueId])
+    CONSTRAINT [FK_GvaViewPersonDocuments_NomValues2]     FOREIGN KEY ([RoleId]) REFERENCES [dbo].[NomValues] ([NomValueId]),
+    CONSTRAINT [FK_GvaViewPersonDocuments_NomValues3]     FOREIGN KEY ([MedClassId]) REFERENCES [dbo].[NomValues] ([NomValueId])
 )
 GO
 exec spDescTable  N'GvaViewPersonDocuments', N'Документи на Физически лица.'
@@ -26,4 +28,5 @@ exec spDescColumn N'GvaViewPersonDocuments', N'RoleId'               , N'Рол�
 exec spDescColumn N'GvaViewPersonDocuments', N'Publisher'            , N'Издател на документа.'
 exec spDescColumn N'GvaViewPersonDocuments', N'Limitations'          , N'Ограничения (за медицинските).'
 exec spDescColumn N'GvaViewPersonDocuments', N'DateValidFrom'        , N'Дата на издаване на документа.'
+exec spDescColumn N'GvaViewPersonDocuments', N'MedClassId'           , N'Клас на медицинско'
 GO

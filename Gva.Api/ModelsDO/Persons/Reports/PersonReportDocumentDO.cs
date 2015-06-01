@@ -27,6 +27,8 @@ namespace Gva.Api.ModelsDO.Persons.Reports
 
         public string Limitations { get; set; }
 
+        public string MedClass { get; set; }
+
         public bool? Valid { get; set; }
     }
 }

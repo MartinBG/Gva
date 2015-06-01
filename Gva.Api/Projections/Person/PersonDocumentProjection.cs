@@ -100,7 +100,8 @@ namespace Gva.Api.Projections.Person
                     DocumentDateValidFrom = d.Content.DocumentDateValidFrom,
                     DocumentPublisher = d.Content.DocumentPublisher.Name,
                     DocumentNumber = d.Content.DocumentNumber,
-                    Limitations = d.Content.Limitations.Count() > 0 ? string.Join(GvaConstants.ConcatenatingExp, d.Content.Limitations.Select(l => l.Name)) : null
+                    Limitations = d.Content.Limitations.Count() > 0 ? string.Join(GvaConstants.ConcatenatingExp, d.Content.Limitations.Select(l => l.Name)) : null,
+                    MedClassId = d.Content.MedClass != null ? d.Content.MedClass.NomValueId : (int?)null
                 });
 
             var reports = parts.GetAll<PersonReportDO>("personReports")
@@ -136,6 +137,7 @@ namespace Gva.Api.Projections.Person
             document.TypeId = personDocument.DocumentTypeId;
             document.Publisher = personDocument.DocumentPublisher;
             document.Limitations = personDocument.Limitations;
+            document.MedClassId = personDocument.MedClassId;
 
             return document;
         }

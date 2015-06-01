@@ -59,6 +59,7 @@
         toDatePeriodTo: $scope.filters.toDatePeriodTo,
         typeId: $scope.filters.typeId,
         lin: $scope.filters.lin,
+        medClassId: $scope.filters.medClassId,
         limitationId: $scope.filters.limitationId,
         docNumber: $scope.filters.docNumber,
         publisher: $scope.filters.publisher,

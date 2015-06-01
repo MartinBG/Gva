@@ -23,6 +23,8 @@ namespace Gva.Api.Models.Views.Person
 
         public string Limitations { get; set; }
 
+        public int? MedClassId { get; set; }
+
         public DateTime? DateValidFrom { get; set; }
 
         public virtual GvaViewPerson Person { get; set; }
@@ -62,6 +64,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.Publisher).HasColumnName("Publisher");
             this.Property(t => t.Limitations).HasColumnName("Limitations");
             this.Property(t => t.DateValidFrom).HasColumnName("DateValidFrom");
+            this.Property(t => t.MedClassId).HasColumnName("MedClassId");
 
             // Relationships
             this.HasRequired(t => t.Person)

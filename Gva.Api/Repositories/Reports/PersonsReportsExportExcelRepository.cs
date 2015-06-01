@@ -27,6 +27,7 @@ namespace Gva.Api.Repositories.Reports
             int? limitationId = null,
             string docNumber = null,
             string publisher = null,
+            int? medClassId = null,
             int offset = 0,
             int limit = 10)
         {
@@ -42,6 +43,7 @@ namespace Gva.Api.Repositories.Reports
                 limitationId: limitationId,
                 docNumber: docNumber,
                 publisher: publisher,
+                medClassId: medClassId,
                 offset: offset,
                 limit: limit);
 
@@ -64,7 +66,8 @@ namespace Gva.Api.Repositories.Reports
             ws.Cell(rowIndex, "F").Value = "Валиден";
             ws.Cell(rowIndex, "G").Value = "От дата";
             ws.Cell(rowIndex, "H").Value = "До дата";
-            ws.Cell(rowIndex, "J").Value = "Ограничения";
+            ws.Cell(rowIndex, "I").Value = "Ограничения";
+            ws.Cell(rowIndex, "J").Value = "Клас (на медицинко)";
 
             rowIndex++;
             foreach (var document in documentResult.Item2)
@@ -77,7 +80,8 @@ namespace Gva.Api.Repositories.Reports
                 ws.Cell(rowIndex, "F").Value = document.Valid.HasValue ? (document.Valid.Value ? "Да" : "Не") : null;
                 ws.Cell(rowIndex, "G").Value = document.FromDate.HasValue ? document.FromDate.Value.ToString("dd.MM.yyyy") : null;
                 ws.Cell(rowIndex, "H").Value = document.ToDate.HasValue ? document.ToDate.Value.ToString("dd.MM.yyyy") : null;
-                ws.Cell(rowIndex, "J").Value = document.Limitations;
+                ws.Cell(rowIndex, "I").Value = document.Limitations;
+                ws.Cell(rowIndex, "J").Value = document.MedClass;
                 rowIndex++;
             }
 

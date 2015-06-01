@@ -20,6 +20,8 @@ namespace Gva.Api.ModelsDO.Persons
 
         public string Limitations { get; set; }
 
+        public int? MedClassId { get; set; }
+
         public DateTime? DocumentDateValidFrom { get; set; }
     }
 }

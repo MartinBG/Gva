@@ -30,6 +30,7 @@ namespace Gva.Api.Repositories.Reports
             int? limitationId = null,
             string docNumber = null,
             string publisher = null,
+            int? medClassId = null,
             int offset = 0,
             int limit = 10)
         {
@@ -41,33 +42,36 @@ namespace Gva.Api.Repositories.Reports
                         p.LotId,
                         p.Lin,
                         ii.Name,
-                        nv.Name as Type,
+                        nv1.Name as Type,
                         ii.Number,
                         ii.FromDate,
                         ii.Date,
                         ii.ToDate,
                         ii.Publisher,
                         ii.Valid,
-                        d.Limitations
+                        d.Limitations,
+                        nv2.Name as MedClass
                     FROM 
                     GvaViewInventoryItems ii
                     INNER JOIN GvaViewPersons p ON ii.LotId = p.LotId
-                    LEFT JOIN NomValues nv ON nv.NomValueId = ii.TypeId
+                    LEFT JOIN NomValues nv1 ON nv1.NomValueId = ii.TypeId
                     LEFT JOIN LotParts lp on lp.LotPartId = ii.LotPartId
                     LEFT JOIN GvaViewPersonDocuments d on d.LotId = lp.LotId and lp.[Index] = d.PartIndex
-                    WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8} {9}
+                    LEFT JOIN NomValues nv2 ON nv2.NomValueId = d.MedClassId
+                    WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10}
                     ORDER BY ii.FromDate DESC
-                    OFFSET {10} ROWS FETCH NEXT {11} ROWS ONLY",
+                    OFFSET {11} ROWS FETCH NEXT {12} ROWS ONLY",
                     new DbClause("and ii.FromDate >= {0}", fromDatePeriodFrom),
                     new DbClause("and ii.FromDate <= {0}", fromDatePeriodTo),
                     new DbClause("and ii.ToDate >= {0}", toDatePeriodFrom),
                     new DbClause("and ii.ToDate <= {0}", toDatePeriodTo),
                     new DbClause("and p.Lin = {0}", lin),
-                    new DbClause("and nv.NomValueId = {0}", typeId),
+                    new DbClause("and nv1.NomValueId = {0}", typeId),
                     new DbClause("and ii.Name = {0}", documentRole),
                     new DbClause("and ii.Number like '%' + {0} + '%'", docNumber),
                     new DbClause("and ii.Publisher like '%' + {0} + '%'", publisher),
                     new DbClause("and (d.Limitations like {0} + '$$%' or d.Limitations like '%$$' + {0} or d.Limitations like '%$$' + {0} + '$$%' or d.Limitations like {0})", limName),
+                    new DbClause("and nv2.NomValueId = {0}", medClassId),
                     new DbClause("{0}", offset),
                     new DbClause("{0}", limit))
                     .Materialize(r => new Tuple<int, PersonReportDocumentDO>
@@ -84,7 +88,8 @@ namespace Gva.Api.Repositories.Reports
                             ToDate = r.Field<DateTime?>("ToDate"),
                             Valid = r.Field<bool?>("Valid"),
                             Publisher = r.Field<string>("Publisher"),
-                            Limitations = !string.IsNullOrEmpty(r.Field<string>("Limitations")) ? r.Field<string>("Limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null
+                            Limitations = !string.IsNullOrEmpty(r.Field<string>("Limitations")) ? r.Field<string>("Limitations").Replace(GvaConstants.ConcatenatingExp, ", ") : null,
+                            MedClass = r.Field<string>("MedClass")
                         }))
                         .ToList();
 

@@ -1449,7 +1449,8 @@
           search: 'Търси',
           'export': 'Експорт',
           limitations: 'Ограничения',
-          itemsPerPage: 'Бр. на стр.'
+          itemsPerPage: 'Бр. на стр.',
+          medClass: 'Клас (на медицинско)'
         },
         reportLicences: {
           names: 'Име',

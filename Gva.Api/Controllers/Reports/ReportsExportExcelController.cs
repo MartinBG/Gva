@@ -37,6 +37,7 @@ namespace Gva.Api.Controllers.Reports
             int? limitationId = null,
             string docNumber = null,
             string publisher = null,
+            int? medClassId = null,
             int offset = 0,
             int limit = 10)
         {
@@ -54,6 +55,7 @@ namespace Gva.Api.Controllers.Reports
                     limitationId: limitationId,
                     docNumber: docNumber,
                     publisher: publisher,
+                    medClassId: medClassId,
                     limit: limit,
                     offset: offset);
 
