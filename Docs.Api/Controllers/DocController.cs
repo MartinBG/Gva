@@ -1106,8 +1106,6 @@ namespace Docs.Api.Controllers
 
                 this.unitOfWork.Save();
 
-                this.docRepository.RegisterDoc(newDoc, unitUser, this.userContext);
-
                 byte[] eDocFileContent = CreateRioObject(docType.ElectronicServiceFileTypeUri, parentDocRelation.RootDocId, id, newDoc);
 
                 if (eDocFileContent != null)
@@ -1789,12 +1787,47 @@ namespace Docs.Api.Controllers
             Doc doc = this.docRepository.Find(id,
                 e => e.DocRelations);
 
+            this.unitOfWork.DbContext.Set<DocFile>()
+             .Include(e => e.DocFileOriginType)
+             .Include(e => e.DocFileType)
+             .Include(e => e.DocFileKind)
+             .Where(e => e.DocId == id)
+             .ToList();
+
             string result = this.docRepository.RegisterDoc(
                 doc,
                 unitUser,
                 this.userContext,
                 true,
                 Helper.StringToVersion(docVersion));
+
+            DocFile editable = doc.DocFiles.FirstOrDefault(e => e.DocFileOriginTypeId.HasValue && e.DocFileOriginType.Alias == "EditableFile");
+
+            if (editable != null && editable.DocFileType.DocTypeUri != "Checklist")
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbContext"].ConnectionString))
+                {
+                    connection.Open();
+
+                    byte[] content;
+
+                    using (MemoryStream m1 = new MemoryStream())
+                    using (var blobStream = new BlobReadStream(connection, "dbo", "Blobs", "Content", "Key", editable.DocFileContentId))
+                    {
+                        blobStream.CopyTo(m1);
+                        content = m1.ToArray();
+                    }
+
+                    content = AddRegistrationInfoToRioObject(content, editable.DocFileType.DocTypeUri, doc);
+
+                    using (var blobWriter = new BlobWriter(connection))
+                    using (var stream = blobWriter.OpenStream())
+                    {
+                        stream.Write(content, 0, content.Length);
+                        editable.DocFileContentId = blobWriter.GetBlobKey();
+                    }
+                }
+            }
 
             this.unitOfWork.Save();
 
@@ -2777,9 +2810,6 @@ namespace Docs.Api.Controllers
                         parentDoc != null ? parentDoc.RegDate : null,
                         parentDoc != null ? parentDoc.RegIndex : null,
                         parentDoc != null ? parentDoc.RegNumber.HasValue ? parentDoc.RegNumber.ToString() : null : null,
-                        doc != null ? doc.RegDate : null,
-                        doc != null ? doc.RegIndex : null,
-                        doc != null ? doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null : null,
                         correspondentNamesUinEmail.Item1,
                         correspondentNamesUinEmail.Item2,
                         correspondentNamesUinEmail.Item3,
@@ -2833,9 +2863,6 @@ namespace Docs.Api.Controllers
                         caseDoc != null ? caseDoc.RegDate : null,
                         caseDoc != null ? caseDoc.RegIndex : null,
                         caseDoc != null ? caseDoc.RegNumber.HasValue ? caseDoc.RegNumber.ToString() : null : null,
-                        doc != null ? doc.RegDate : null,
-                        doc != null ? doc.RegIndex : null,
-                        doc != null ? doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null : null,
                         correspondentNamesUinEmail.Item1,
                         correspondentNamesUinEmail.Item2,
                         correspondentNamesUinEmail.Item3,
@@ -2863,9 +2890,6 @@ namespace Docs.Api.Controllers
                         caseDoc != null ? caseDoc.RegDate : null,
                         caseDoc != null ? caseDoc.RegIndex : null,
                         caseDoc != null ? caseDoc.RegNumber.HasValue ? caseDoc.RegNumber.ToString() : null : null,
-                        doc != null ? doc.RegDate : null,
-                        doc != null ? doc.RegIndex : null,
-                        doc != null ? doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null : null,
                         correspondentNamesUinEmail.Item1,
                         correspondentNamesUinEmail.Item2,
                         correspondentNamesUinEmail.Item3,
@@ -2887,6 +2911,41 @@ namespace Docs.Api.Controllers
             catch
             {
                 return null;
+            }
+        }
+
+        private byte[] AddRegistrationInfoToRioObject(byte[] rioContent, string docTypeUri, Doc doc)
+        {
+            //Common
+            if (docTypeUri == RioDocumentMetadata.RemovingIrregularitiesInstructionsMetadata.DocumentTypeURIValue)
+            {
+                return RioObjectUtils.AddRegistrationInfoR3010RemovingIrregularitiesInstructions(
+                    rioContent,
+                    doc != null ? doc.RegDate : null,
+                    doc != null ? doc.RegIndex : null,
+                    doc != null ? doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null : null);
+            }
+            //Common
+            else if (docTypeUri == RioDocumentMetadata.IndividualAdministrativeActRefusalMetadata.DocumentTypeURIValue)
+            {
+                return RioObjectUtils.AddRegistrationInfoR000150IndividualAdministrativeActRefusal(
+                    rioContent,
+                    doc != null ? doc.RegDate : null,
+                    doc != null ? doc.RegIndex : null,
+                    doc != null ? doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null : null);
+            }
+            //Common
+            else if (docTypeUri == RioDocumentMetadata.CorrespondenceConsiderationRefusalMetadata.DocumentTypeURIValue)
+            {
+                return RioObjectUtils.AddRegistrationInfoR000154CorrespondenceConsiderationRefusal(
+                    rioContent,
+                    doc != null ? doc.RegDate : null,
+                    doc != null ? doc.RegIndex : null,
+                    doc != null ? doc.RegNumber.HasValue ? doc.RegNumber.ToString() : null : null);
+            }
+            else
+            {
+                throw new ApplicationException("Not supported docTypeUri.");
             }
         }
 

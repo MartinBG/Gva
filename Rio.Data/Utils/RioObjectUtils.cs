@@ -202,9 +202,6 @@ namespace Rio.Data.Utils
             DateTime? applicationUriDate = null,
             string applicationUriRegisterIndex = null,
             string applicationUriSequenceNumber = null,
-            DateTime? irregularityDocUriDate = null,
-            string irregularityDocUriRegisterIndex = null,
-            string irregularityDocUriSequenceNumber = null,
             string applicantFirstName = null,
             string applicantSecondName = null,
             string applicantLastName = null,
@@ -269,13 +266,6 @@ namespace Rio.Data.Utils
                 rioObj.ElectronicServiceProviderBasicData.EntityBasicData.Identifier = electronicServiceProviderBulstat;
                 rioObj.ElectronicServiceProviderBasicData.EntityBasicData.Name = electronicServiceProviderName;
 
-                rioObj.IrregularityDocumentReceiptOrSigningDate = irregularityDocUriDate;
-
-                rioObj.IrregularityDocumentURI = new R_0009_000001.DocumentURI();
-                rioObj.IrregularityDocumentURI.ReceiptOrSigningDate = irregularityDocUriDate;
-                rioObj.IrregularityDocumentURI.RegisterIndex = irregularityDocUriRegisterIndex;
-                rioObj.IrregularityDocumentURI.SequenceNumber = irregularityDocUriSequenceNumber;
-
                 rioObj.Official = new R_3010.RemovingIrregularitiesInstructionsOfficial();
 
                 rioObj.Official.PersonNames = new R_0009_000005.PersonNames();
@@ -311,9 +301,6 @@ namespace Rio.Data.Utils
             DateTime? caseUriDate = null,
             string caseUriRegisterIndex = null,
             string caseUriSequenceNumber = null,
-            DateTime? refusalDocUriDate = null,
-            string refusalDocUriRegisterIndex = null,
-            string refusalDocUriSequenceNumber = null,
             string applicantFirstName = null,
             string applicantSecondName = null,
             string applicantLastName = null,
@@ -334,13 +321,6 @@ namespace Rio.Data.Utils
                 rioObj.DocumentTypeURI.RegisterIndex = RioDocumentMetadata.IndividualAdministrativeActRefusalMetadata.DocumentTypeURI.RegisterIndex;
                 rioObj.DocumentTypeURI.BatchNumber = RioDocumentMetadata.IndividualAdministrativeActRefusalMetadata.DocumentTypeURI.BatchNumber;
                 rioObj.DocumentTypeName = RioDocumentMetadata.IndividualAdministrativeActRefusalMetadata.DocumentTypeName;
-
-                rioObj.DocumentURI = new R_0009_000001.DocumentURI();
-                rioObj.DocumentURI.ReceiptOrSigningDate = refusalDocUriDate;
-                rioObj.DocumentURI.RegisterIndex = refusalDocUriRegisterIndex;
-                rioObj.DocumentURI.SequenceNumber = refusalDocUriSequenceNumber;
-
-                rioObj.DocumentReceiptOrSigningDate = refusalDocUriDate;
 
                 rioObj.ElectronicServiceProviderBasicData = new R_0009_000002.ElectronicServiceProviderBasicData();
                 rioObj.ElectronicServiceProviderBasicData.ElectronicServiceProviderType = electronicServiceProviderId;
@@ -394,9 +374,6 @@ namespace Rio.Data.Utils
             DateTime? caseUriDate = null,
             string caseUriRegisterIndex = null,
             string caseUriSequenceNumber = null,
-            DateTime? refusalDocUriDate = null,
-            string refusalDocUriRegisterIndex = null,
-            string refusalDocUriSequenceNumber = null,
             string applicantFirstName = null,
             string applicantSecondName = null,
             string applicantLastName = null,
@@ -417,13 +394,6 @@ namespace Rio.Data.Utils
                 rioObj.DocumentTypeURI.RegisterIndex = RioDocumentMetadata.CorrespondenceConsiderationRefusalMetadata.DocumentTypeURI.RegisterIndex;
                 rioObj.DocumentTypeURI.BatchNumber = RioDocumentMetadata.CorrespondenceConsiderationRefusalMetadata.DocumentTypeURI.BatchNumber;
                 rioObj.DocumentTypeName = RioDocumentMetadata.CorrespondenceConsiderationRefusalMetadata.DocumentTypeName;
-
-                rioObj.DocumentURI = new R_0009_000001.DocumentURI();
-                rioObj.DocumentURI.ReceiptOrSigningDate = refusalDocUriDate;
-                rioObj.DocumentURI.RegisterIndex = refusalDocUriRegisterIndex;
-                rioObj.DocumentURI.SequenceNumber = refusalDocUriSequenceNumber;
-
-                rioObj.DocumentReceiptOrSigningDate = refusalDocUriDate;
 
                 rioObj.ElectronicServiceProviderBasicData = new R_0009_000002.ElectronicServiceProviderBasicData();
                 rioObj.ElectronicServiceProviderBasicData.ElectronicServiceProviderType = electronicServiceProviderId;
@@ -463,6 +433,81 @@ namespace Rio.Data.Utils
                 {
                     PersonNames = officialNames
                 });
+
+                return XmlSerializerUtils.XmlSerializeObjectToBytes(rioObj);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static byte[] AddRegistrationInfoR3010RemovingIrregularitiesInstructions(
+            byte[] rioContent,
+            DateTime? irregularityDocUriDate = null,
+            string irregularityDocUriRegisterIndex = null,
+            string irregularityDocUriSequenceNumber = null)
+        {
+            try
+            {
+                R_3010.RemovingIrregularitiesInstructions rioObj = XmlSerializerUtils.XmlDeserializeFromBytes<R_3010.RemovingIrregularitiesInstructions>(rioContent);
+
+                rioObj.IrregularityDocumentURI = new R_0009_000001.DocumentURI();
+                rioObj.IrregularityDocumentURI.ReceiptOrSigningDate = irregularityDocUriDate;
+                rioObj.IrregularityDocumentURI.RegisterIndex = irregularityDocUriRegisterIndex;
+                rioObj.IrregularityDocumentURI.SequenceNumber = irregularityDocUriSequenceNumber;
+
+                rioObj.IrregularityDocumentReceiptOrSigningDate = irregularityDocUriDate;
+
+                return XmlSerializerUtils.XmlSerializeObjectToBytes(rioObj);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static byte[] AddRegistrationInfoR000150IndividualAdministrativeActRefusal(
+            byte[] rioContent,
+            DateTime? refusalDocUriDate = null,
+            string refusalDocUriRegisterIndex = null,
+            string refusalDocUriSequenceNumber = null)
+        {
+            try
+            {
+                R_0009_000150.IndividualAdministrativeActRefusal rioObj = XmlSerializerUtils.XmlDeserializeFromBytes<R_0009_000150.IndividualAdministrativeActRefusal>(rioContent);
+
+                rioObj.DocumentURI = new R_0009_000001.DocumentURI();
+                rioObj.DocumentURI.ReceiptOrSigningDate = refusalDocUriDate;
+                rioObj.DocumentURI.RegisterIndex = refusalDocUriRegisterIndex;
+                rioObj.DocumentURI.SequenceNumber = refusalDocUriSequenceNumber;
+
+                rioObj.DocumentReceiptOrSigningDate = refusalDocUriDate;
+
+                return XmlSerializerUtils.XmlSerializeObjectToBytes(rioObj);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static byte[] AddRegistrationInfoR000154CorrespondenceConsiderationRefusal(
+            byte[] rioContent,
+            DateTime? refusalDocUriDate = null,
+            string refusalDocUriRegisterIndex = null,
+            string refusalDocUriSequenceNumber = null)
+        {
+            try
+            {
+                R_0009_000154.CorrespondenceConsiderationRefusal rioObj = XmlSerializerUtils.XmlDeserializeFromBytes<R_0009_000154.CorrespondenceConsiderationRefusal>(rioContent);
+
+                rioObj.DocumentURI = new R_0009_000001.DocumentURI();
+                rioObj.DocumentURI.ReceiptOrSigningDate = refusalDocUriDate;
+                rioObj.DocumentURI.RegisterIndex = refusalDocUriRegisterIndex;
+                rioObj.DocumentURI.SequenceNumber = refusalDocUriSequenceNumber;
+
+                rioObj.DocumentReceiptOrSigningDate = refusalDocUriDate;
 
                 return XmlSerializerUtils.XmlSerializeObjectToBytes(rioObj);
             }
