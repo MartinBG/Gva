@@ -904,6 +904,8 @@ namespace Gva.Api.Repositories.ApplicationRepository
             this.docRepository.ExecSpSetDocTokens(docId: newDoc.DocId);
             this.docRepository.ExecSpSetDocUnitTokens(docId: newDoc.DocId);
 
+            newDoc.SetReceiptOrder(this.docRepository.GetNextReceiptOrder(newDoc.DocId), userContext);
+
             this.docRepository.RegisterDoc(newDoc, unitUser, userContext);
 
             return newDoc;
