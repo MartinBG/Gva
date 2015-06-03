@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
+using Autofac.Extras.Attributed;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
 using Common.Api.UserContext;
@@ -26,7 +27,7 @@ namespace Gva.MigrationTool.Sets
         private SqlConnection sqlConn;
 
         public AircraftFmLotCreator(
-            SqlConnection sqlConn,
+            [WithKey("gvaAircraft")]SqlConnection sqlConn,
             Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;

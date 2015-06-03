@@ -39,6 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac.Extras.Attributed">
+      <HintPath>..\packages\Autofac.Extras.Attributed.3.3.0\lib\net40\Autofac.Extras.Attributed.dll</HintPath>
+    </Reference>
     <Reference Include="CarlosAg.ExcelXmlWriter">
       <HintPath>..\packages\CarlosAgExcelXmlWriterLibrary.1.0.0\lib\net40\CarlosAg.ExcelXmlWriter.dll</HintPath>
     </Reference>
@@ -95,7 +98,6 @@
     <Compile Include="Sets\AircraftFmLotCreator.cs" />
     <Compile Include="Sets\AircraftFmLotMigrator.cs" />
     <Compile Include="Sets\AircraftRadioCertsMigrator.cs" />
-    <Compile Include="Sets\AircraftSModeCodesMigrator.cs" />
     <Compile Include="Sets\OrganizationFmLotCreator.cs" />
     <Compile Include="Sets\ExaminationSystemDataMigrator.cs" />
     <Compile Include="Sets\PersonLicenceDocMigrator.cs" />
@@ -141,9 +143,7 @@
       <Name>Regs.Api</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sets\AircraftSModeCodes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -23,6 +23,7 @@ using Newtonsoft.Json.Serialization;
 using Oracle.ManagedDataAccess.Client;
 using Regs.Api;
 using Regs.Api.Repositories.LotRepositories;
+using Autofac.Extras.Attributed;
 
 namespace Gva.MigrationTool
 {
@@ -96,9 +97,10 @@ namespace Gva.MigrationTool
             ContainerBuilder builder = CreateGvaContainerBuilder();
 
             builder.Register(c => new OracleConnection(ConfigurationManager.ConnectionStrings["Apex"].ConnectionString)).InstancePerLifetimeScope();
-            builder.Register(c => new SqlConnection(ConfigurationManager.ConnectionStrings["GvaAircraft"].ConnectionString)).InstancePerLifetimeScope();
+            builder.Register(c => new SqlConnection(ConfigurationManager.ConnectionStrings["GvaAircraft"].ConnectionString)).Keyed<SqlConnection>("gvaAircraft").InstancePerLifetimeScope();
+            builder.Register(c => new SqlConnection(ConfigurationManager.ConnectionStrings["SCodes"].ConnectionString)).Keyed<SqlConnection>("sCodes").InstancePerLifetimeScope();
 
-            builder.RegisterType<Nomenclature>().InstancePerLifetimeScope();
+            builder.RegisterType<Nomenclature>().InstancePerLifetimeScope().WithAttributeFilter();
 
             builder.RegisterType<Person>().InstancePerLifetimeScope();
             builder.RegisterType<PersonLotCreator>().InstancePerLifetimeScope();
@@ -108,15 +110,18 @@ namespace Gva.MigrationTool
 
             builder.RegisterType<Organization>().InstancePerLifetimeScope();
             builder.RegisterType<OrganizationLotCreator>().InstancePerLifetimeScope();
-            builder.RegisterType<OrganizationFmLotCreator>().InstancePerLifetimeScope();
+            builder.RegisterType<OrganizationFmLotCreator>().InstancePerLifetimeScope().WithAttributeFilter();
             builder.RegisterType<OrganizationLotMigrator>().InstancePerLifetimeScope();
 
-            builder.RegisterType<Aircraft>().InstancePerLifetimeScope();
+            builder.RegisterType<Aircraft>().InstancePerLifetimeScope().WithAttributeFilter();
             builder.RegisterType<AircraftApexLotCreator>().InstancePerLifetimeScope();
             builder.RegisterType<AircraftApexLotMigrator>().InstancePerLifetimeScope();
-            builder.RegisterType<AircraftFmLotCreator>().InstancePerLifetimeScope();
-            builder.RegisterType<AircraftFmLotMigrator>().InstancePerLifetimeScope();
+            builder.RegisterType<AircraftFmLotCreator>().InstancePerLifetimeScope().WithAttributeFilter();
+            builder.RegisterType<AircraftFmLotMigrator>().InstancePerLifetimeScope().WithAttributeFilter();
             builder.RegisterType<AircraftRadioCertsMigrator>().InstancePerLifetimeScope();
+
+            builder.RegisterType<SModeCode>().InstancePerLifetimeScope().WithAttributeFilter();
+            builder.RegisterType<SModeCodeLotCreator>().InstancePerLifetimeScope().WithAttributeFilter();
 
             return builder.Build();
         }
@@ -152,18 +157,21 @@ namespace Gva.MigrationTool
             using (var scope = setContainer.BeginLifetimeScope())
             {
                 OracleConnection oracleConn = scope.Resolve<OracleConnection>();
-                SqlConnection sqlConn = scope.Resolve<SqlConnection>();
+                SqlConnection sqlConnGvaAircraft = scope.ResolveKeyed<SqlConnection>("gvaAircraft");
+                SqlConnection sqlConnSCodes = scope.ResolveKeyed<SqlConnection>("sCodes");
 
                 Stopwatch timer = new Stopwatch();
                 timer.Start();
 
                 oracleConn.Open();
-                sqlConn.Open();
+                sqlConnGvaAircraft.Open();
+                sqlConnSCodes.Open();
 
                 var nomenclature = scope.Resolve<Nomenclature>();
                 var aircraft = scope.Resolve<Aircraft>();
                 var person = scope.Resolve<Person>();
                 var organization = scope.Resolve<Organization>();
+                var sModeCode = scope.Resolve<SModeCode>();
 
                 var noms = nomenclature.migrateNomenclatures();
 
@@ -179,6 +187,7 @@ namespace Gva.MigrationTool
                 Dictionary<string, int> orgNameEnToLotId = new Dictionary<string, int>();
                 Dictionary<string, int> orgUinToLotId = new Dictionary<string, int>();
                 Dictionary<int, JObject> orgLotIdToOrgNom = new Dictionary<int, JObject>();
+                Dictionary<int, int> orgOperatorIdToLotId = new Dictionary<int, int>();
 
                 //create aircraft lots
                 var aircrafts = aircraft.createAircraftsLots(noms);
@@ -264,6 +273,7 @@ namespace Gva.MigrationTool
                 orgNameEnToLotId = res.Item1;
                 orgUinToLotId = res.Item2;
                 orgLotIdToOrgNom = res.Item3;
+                orgOperatorIdToLotId = res.Item4;
 
                 Func<string, JObject> getPersonByFmOrgName = (fmOrgName) =>
                 {
@@ -290,6 +300,21 @@ namespace Gva.MigrationTool
                     return orgLotIdToOrgNom[orgNameToLotId[fmOrgName]];
                 };
 
+                Func<int, JObject> getOrgBySModeCodeOperId = (operId) =>
+                {
+                    if (!orgOperatorIdToLotId.ContainsKey(operId))
+                    {
+                        return null;
+                    }
+
+                    if (!orgLotIdToOrgNom.ContainsKey(orgOperatorIdToLotId[operId]))
+                    {
+                        return null;
+                    }
+
+                    return orgLotIdToOrgNom[orgOperatorIdToLotId[operId]];
+                };
+                
                 //migrate aircrafts
                 ConcurrentDictionary<string, int> regMarkToLotId = aircraft.migrateAircrafts(
                     noms,
@@ -311,6 +336,9 @@ namespace Gva.MigrationTool
 
                 //migrate aircraft radio certificates
                 aircraft.migrateAircraftRadioCerts(noms, resultRadios);
+
+                //create s-mode codes
+                sModeCode.createSModeCodesLots(noms, regMarkToLotId, getOrgBySModeCodeOperId);
 
                 //migrate persons
                 person.migratePersons(noms, personIdToLotId, getAircraftByApexId, getPersonByApexId, getOrgByApexId, blobIdsToFileKeys);

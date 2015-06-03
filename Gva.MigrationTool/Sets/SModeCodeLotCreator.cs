@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
+using Autofac.Extras.Attributed;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
 using Common.Api.UserContext;
 using Common.Data;
-using Common.Json;
 using Common.Tests;
 using Gva.Api.CommonUtils;
 using Gva.Api.Repositories.CaseTypeRepository;
@@ -26,7 +26,7 @@ namespace Gva.MigrationTool.Sets
         private SqlConnection sqlConn;
 
         public SModeCodeLotCreator(
-            SqlConnection sqlConn,
+            [WithKey("sCodes")]SqlConnection sqlConn,
             Func<Owned<DisposableTuple<IUnitOfWork, ILotRepository, ICaseTypeRepository, ILotEventDispatcher, UserContext>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
@@ -97,14 +97,14 @@ namespace Gva.MigrationTool.Sets
             Func<int, JObject> getOrgBySModeCodeOperId)
         {
             return this.sqlConn.CreateStoreCommand(
-                @"select * from sModeCodes where 1=1 {0}",
+                @"select * from Data where 1=1 {0}",
                 new DbClause("and Ident = {0}", sModeCodeId)
                 )
                 .Materialize(r => Utils.ToJObject(
                     new
                     {
                         __oldId = r.Field<string>("Ident"),
-                        __migrTable = "sModeCodes",
+                        __migrTable = "Data",
                         type = noms["sModeCodeTypes"].ByCode(r.Field<string>("Oper_ID") == "1" ? "M" : "A"),
                         valid = noms["boolean"].ByCode(r.Field<string>("Status") == "1" ? "Y" : "N"),
                         codeHex = r.Field<string>("S_Mode_Hex"),

@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Autofac.Extras.Attributed;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
 using Gva.Api.CommonUtils;
@@ -26,7 +27,7 @@ namespace Gva.MigrationTool.Sets
 
         public Aircraft(
             OracleConnection oracleConn,
-            SqlConnection sqlConn,
+            [WithKey("gvaAircraft")]SqlConnection sqlConn,
             Func<Owned<AircraftApexLotCreator>> aircraftApexLotCreatorFactory,
             Func<Owned<AircraftFmLotCreator>> aircraftFmLotCreatorFactory,
             Func<Owned<AircraftApexLotMigrator>> aircraftApexLotMigratorFactory,

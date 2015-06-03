@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using Autofac.Extras.Attributed;
 using Autofac.Features.OwnedInstances;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
@@ -91,7 +92,7 @@ namespace Gva.MigrationTool.Nomenclatures
 
         public Nomenclature(
             OracleConnection oracleConn,
-            SqlConnection sqlConn,
+            [WithKey("gvaAircraft")]SqlConnection sqlConn,
             Func<Owned<DisposableTuple<IUnitOfWork, INomRepository, ICaseTypeRepository>>> dependencyFactory)
         {
             this.dependencyFactory = dependencyFactory;
@@ -180,6 +181,11 @@ namespace Gva.MigrationTool.Nomenclatures
             using (var dependencies = dependencyFactory())
             {
                 noms["aircraftRemovalReasonsFm"] = dependencies.Value.Item2.GetNomValues("aircraftRemovalReasonsFm").ToDictionary(n => Guid.NewGuid().ToString());
+            }
+
+            using (var dependencies = dependencyFactory())
+            {
+                noms["sModeCodeTypes"] = dependencies.Value.Item2.GetNomValues("sModeCodeTypes").ToDictionary(n => Guid.NewGuid().ToString());
             }
 
             using (var dependencies = dependencyFactory())
