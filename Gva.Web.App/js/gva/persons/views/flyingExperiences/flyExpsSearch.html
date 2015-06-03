@@ -1,11 +1,11 @@
 <sc-button name="createBtn" btn-sref="{ state: 'root.persons.view.flyingExperiences.new' }" text="persons.flyingExperienceSearch.newFlyingExperience" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="flyingExperiences" filterable="true" pageable="true" sortable="true" dynamic-columns="true" default-sort="part.documentDate">
+<sc-datatable items="flyingExperiences" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
     <sc-button name="editBtn" btn-sref="{ state: 'root.persons.view.flyingExperiences.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
   <sc-column data="part.documentDate" title="persons.flyingExperienceSearch.documentDate" type="date">
   </sc-column>
-  <sc-column data="part.ratingTypes && part.ratingTypes.length > 0 ? (part.ratingTypes | pluck:'code' | join:', ') : (part.locationIndicator ? part.locationIndicator.code : '')  + ' ' + (part.sector ? part.sector : '')" title="persons.flyingExperienceSearch.ratingType" class="wrap">
+  <sc-column data="ratingTypesAndLocation" title="persons.flyingExperienceSearch.ratingType" class="wrap">
   </sc-column>
   <sc-column data="part.ratingClass.code" title="persons.flyingExperienceSearch.ratingClass" class="wrap">
   </sc-column>

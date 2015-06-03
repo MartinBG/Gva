@@ -8,7 +8,7 @@
     $stateParams,
     flyingExperiences
   ) {
-    $scope.flyingExperiences = _.map(flyingExperiences, function (flyingExperience) {
+    var groupedFlyingExp = _.groupBy(_.map(flyingExperiences, function (flyingExperience) {
       var minutes;
       if (flyingExperience.part.totalDoc) {
         minutes = flyingExperience.part.totalDoc / 60000;
@@ -22,8 +22,20 @@
       } else {
         flyingExperience.totalHours = 0;
       }
+
+      var location = (flyingExperience.part.locationIndicator ?
+        flyingExperience.part.locationIndicator.code : '') + ' ' +
+        (flyingExperience.part.sector ? flyingExperience.part.sector : '');
+      var ratingTypes = _.pluck(flyingExperience.part.ratingTypes, 'code').join(', ');
+
+      flyingExperience.ratingTypesAndLocation = 
+        flyingExperience.part.ratingTypes && flyingExperience.part.ratingTypes.length > 0 ?
+        ratingTypes : location;
       return flyingExperience;
-    });
+    }), 'ratingTypesAndLocation');
+    $scope.flyingExperiences = [].concat.apply([], _.map(groupedFlyingExp, function (value, key) {
+      return _.sortBy(groupedFlyingExp[key], 'part.documentDate').reverse();
+    }));
   }
 
   FlyingExperiencesSearchCtrl.$inject = [
