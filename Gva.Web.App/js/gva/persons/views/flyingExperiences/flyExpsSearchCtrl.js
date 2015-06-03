@@ -32,7 +32,15 @@
         flyingExperience.part.ratingTypes && flyingExperience.part.ratingTypes.length > 0 ?
         ratingTypes : location;
       return flyingExperience;
-    }), 'ratingTypesAndLocation');
+    }), function (flyExp) {
+      var classCode = flyExp.part.ratingClass ? flyExp.part.ratingClass.code : '';
+      var authorizationCode = flyExp.part.authorization ? flyExp.part.authorization.code : '';
+      var licenceCode = flyExp.part.licenceType ? flyExp.part.licenceType.code : '';
+      return flyExp.ratingTypesAndLocation + ' ' +
+        classCode + ' ' +
+        authorizationCode + ' ' +
+        licenceCode;
+    });
     $scope.flyingExperiences = [].concat.apply([], _.map(groupedFlyingExp, function (value, key) {
       return _.sortBy(groupedFlyingExp[key], 'part.documentDate').reverse();
     }));
