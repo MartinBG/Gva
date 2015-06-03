@@ -1244,6 +1244,10 @@ namespace Docs.Api.Controllers
              .Where(e => e.DocId == id)
              .ToList();
 
+            this.unitOfWork.DbContext.Set<DocIncomingDoc>()
+             .Where(e => e.DocId == id)
+             .ToList();
+
             #endregion
 
             var returnValue = new DocDO(doc, unitUser);
@@ -2732,6 +2736,125 @@ namespace Docs.Api.Controllers
             {
                 content = jObject
             });
+        }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteDoc(int id)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                var doc = this.docRepository.Find(id, d => d.DocStatus);
+
+                if (doc == null)
+                {
+                    return NotFound();
+                }
+
+                if (doc.DocStatus.Alias != "Draft")
+                {
+                    return BadRequest("Cannot delete doc not in draft status.");
+                }
+
+                if (doc.IsRegistered)
+                {
+                    return BadRequest("Cannot delete registered doc.");
+                }
+
+                bool hasWorkflows =
+                    this.unitOfWork.DbContext.Set<DocWorkflow>()
+                    .Where(e => e.DocId == id)
+                    .Any();
+
+                if (hasWorkflows)
+                {
+                    return BadRequest("Cannot delete doc with workflows.");
+                }
+
+                bool hasIncomingDocs =
+                    this.unitOfWork.DbContext.Set<DocIncomingDoc>()
+                    .Where(e => e.DocId == id)
+                    .Any();
+
+                if (hasIncomingDocs)
+                {
+                    return BadRequest("Cannot delete doc with incomingDocs.");
+                }
+
+                bool hasChildDocs =
+                    this.unitOfWork.DbContext.Set<DocRelation>()
+                    .Where(e => e.ParentDocId == id)
+                    .Any();
+
+                if (hasChildDocs)
+                {
+                    return BadRequest("Cannot delete doc with child docs.");
+                }
+
+                int caseId = this.docRepository.GetCaseId(id);
+
+                this.unitOfWork.DbContext.Set<DocRelation>().RemoveRange(
+                    this.unitOfWork.DbContext.Set<DocRelation>()
+                        .Where(e => e.DocId == id));
+
+                this.unitOfWork.DbContext.Set<DocClassification>().RemoveRange(
+                    this.unitOfWork.DbContext.Set<DocClassification>()
+                        .Where(e => e.DocId == id));
+
+                this.unitOfWork.DbContext.Set<DocCasePartMovement>().RemoveRange(
+                    this.unitOfWork.DbContext.Set<DocCasePartMovement>()
+                        .Where(e => e.DocId == id));
+
+                this.unitOfWork.DbContext.Set<DocElectronicServiceStage>().RemoveRange(
+                    this.unitOfWork.DbContext.Set<DocElectronicServiceStage>()
+                        .Where(e => e.DocId == id));
+
+                this.unitOfWork.DbContext.Set<DocUnit>().RemoveRange(
+                    this.unitOfWork.DbContext.Set<DocUnit>()
+                        .Where(e => e.DocId == id));
+
+                this.unitOfWork.DbContext.Set<DocCorrespondent>().RemoveRange(
+                    this.unitOfWork.DbContext.Set<DocCorrespondent>()
+                        .Where(e => e.DocId == id));
+
+                this.unitOfWork.DbContext.Set<DocCorrespondentContact>().RemoveRange(
+                    this.unitOfWork.DbContext.Set<DocCorrespondentContact>()
+                        .Where(e => e.DocId == id));
+
+                this.unitOfWork.DbContext.Set<DocFile>().RemoveRange(
+                    this.unitOfWork.DbContext.Set<DocFile>()
+                        .Where(e => e.DocId == id));
+
+                this.unitOfWork.DbContext.Set<DocHasRead>().RemoveRange(
+                    this.unitOfWork.DbContext.Set<DocHasRead>()
+                        .Where(e => e.DocId == id));
+
+                this.unitOfWork.DbContext.Set<DocToken>().RemoveRange(
+                    this.unitOfWork.DbContext.Set<DocToken>()
+                        .Where(e => e.DocId == id));
+
+                this.unitOfWork.Save();
+
+                this.docRepository.ExecSpSetDocUnitTokens(id);
+
+                this.unitOfWork.DbContext.Set<Doc>().Remove(doc);
+
+                this.unitOfWork.Save();
+
+                transaction.Commit();
+
+                if (id == caseId)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return Ok(
+                        new
+                        {
+                            caseId
+                        });
+                }
+            }
         }
 
         private byte[] CreateRioObject(string docTypeUri, int? caseDocId, int? parentDocId, Doc doc = null)

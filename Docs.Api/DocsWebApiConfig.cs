@@ -53,6 +53,7 @@ namespace Docs.Api
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/sendCompetenceTransferDoc"      , "Doc", "SendCompetenceTransferDoc");
             this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}"                                , "Doc", "GetDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}"                                , "Doc", "UpdateDoc");
+            this.MapRoute(config, HttpMethod.Delete, "api/docs/{id}"                                , "Doc", "DeleteDoc");
             this.MapRoute(config, HttpMethod.Post  , "api/docs/{id}/createTicket"                   , "Doc", "CreateDocFileTicket");
             this.MapRoute(config, HttpMethod.Get   , "api/docs/{id}/getRioEditableFile"             , "Doc", "GetRioObjectEditableFile");
             this.MapRoute(config, HttpMethod.Get   , "api/docs"                                     , "Doc", "GetDocs");

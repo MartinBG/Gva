@@ -194,6 +194,11 @@
             <span l10n-text="docs.edit.docSend"></span>
           </button>
 
+          <button ng-show="!inEditMode && doc.flags.isVisibleDeleteDoc" ng-click="deleteDoc()" type="button" class="btn btn-sm btn-danger">
+            <i class="glyphicon glyphicon-trash"></i>
+            <span l10n-text="docs.edit.docDelete"></span>
+          </button>
+
           <button ng-show="!doc.isRead" ng-click="markAsRead()" type="button" class="pull-right btn btn-sm btn-default">
             <i class="glyphicon glyphicon-eye-open"></i>
             <span l10n-text="docs.edit.markRead"></span>

@@ -121,6 +121,10 @@
             'getRioEditableFile': {
               method: 'GET',
               url: 'api/docs/:id/getRioEditableFile'
+            },
+            'deleteDoc': {
+              method: 'DELETE',
+              url: 'api/docs/:id'
             }
           });
       }]);

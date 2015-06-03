@@ -65,6 +65,7 @@ namespace Docs.Api.DataObjects
                 this.IsCase = d.IsCase;
                 this.IsRegistered = d.IsRegistered;
                 this.IsSigned = d.IsSigned;
+                this.HasIncommingDocs = d.DocIncomingDocs != null && d.DocIncomingDocs.Any();
                 this.IsActive = d.IsActive;
                 this.Version = d.Version;
 
@@ -145,6 +146,9 @@ namespace Docs.Api.DataObjects
 
         public bool IsSelected { get; set; }
         public bool IsElectronic { get; set; }
+
+        public bool HasIncommingDocs { get; set; }
+        public bool HasChildDocs { get; set; }
 
         public bool IsActive { get; set; }
         public byte[] Version { get; set; }
@@ -290,6 +294,8 @@ namespace Docs.Api.DataObjects
             {
                 this.IsRemark = true;
             }
+
+            this.HasChildDocs = this.DocRelations.Where(dr => dr.ParentDocId == this.DocId).Any();
         }
     }
 }

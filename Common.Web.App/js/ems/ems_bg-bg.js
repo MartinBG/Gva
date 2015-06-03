@@ -61,6 +61,7 @@
           docRegister: 'Регистриране',
           docSignatures: 'Подписване с електронен подпис',
           docSend: 'Изпращане',
+          docDelete: 'Изтриване',
           undoDocSignatures: 'Премахване на ел. подписи',
           sign: 'Подписване',
           discuss: 'Съгласуване',

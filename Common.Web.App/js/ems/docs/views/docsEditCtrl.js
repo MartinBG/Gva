@@ -9,6 +9,7 @@
     $state,
     $stateParams,
     l10n,
+    scMessage,
     Docs,
     DocStages,
     DocStatuses,
@@ -265,6 +266,21 @@
       return $state.go('root.docs.edit.case.sendEmail');
     };
 
+    $scope.deleteDoc = function () {
+      return scMessage('common.messages.confirmDelete')
+      .then(function (result) {
+        if (result === 'OK') {
+          return Docs.deleteDoc({ id: doc.docId }).$promise.then(function (data) {
+            if (data.caseId) {
+              return $state.go('root.docs.edit.case', { id: data.caseId });
+            } else {
+              return $state.go('root.docs.search');
+            }
+          });
+        }
+      });
+    };
+
     $scope.createNewCase = function () {
       return Docs.createNewCase({ id: doc.docId }, {}).$promise.then(function () {
         return $state.go('root.docs.edit.case', { id: doc.docId }, { reload: true });
@@ -283,6 +299,7 @@
     '$state',
     '$stateParams',
     'l10n',
+    'scMessage',
     'Docs',
     'DocStages',
     'DocStatuses',
@@ -409,6 +426,13 @@
             doc.canSendMail &&
             (doc.isDocOutgoing || doc.isDocInternalOutgoing) &&
             (doc.docStatusAlias === 'Processed' || doc.docStatusAlias === 'Finished');
+
+          doc.flags.isVisibleDeleteDoc =
+            doc.canEdit &&
+            !doc.isRegistered &&
+            doc.docStatusAlias === 'Draft' &&
+            doc.docWorkflows.length === 0 &&
+            !doc.hasChildDocs;
 
           doc.flags.isVisibleEditCasePartCmd =
             !doc.isCase &&
