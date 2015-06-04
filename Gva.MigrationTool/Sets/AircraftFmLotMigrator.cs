@@ -794,7 +794,7 @@ namespace Gva.MigrationTool.Sets
             {
                 foreach (var issue in issues)
                 {
-                    string type = issuesActMap.ContainsKey(issue.t_ARC_Type) ? issuesActMap[issue.t_ARC_Type] : "unknown";
+                    string type = issuesActMap.ContainsKey(issue.t_ARC_Type) ? issuesActMap[issue.t_ARC_Type] : actAlias;
                     JObject airworthinessCertType = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias(type));
 
                     airworthinesses.Add(
@@ -822,7 +822,7 @@ namespace Gva.MigrationTool.Sets
 
                 airworthinesses.Add(aw);
 
-                var formIssues = issues.Where(i => i.t_ARC_Type == "" || i.t_ARC_Type.Contains("BG Form")).ToList();
+                var formIssues = issues.Where(i => string.IsNullOrEmpty(i.t_ARC_Type) || i.t_ARC_Type.Contains("BG Form")).ToList();
                 if (formIssues.Count() > 0)
                 {
                     var reserveType = !formIssues.First().dValid.HasValue || DateTime.Compare(formIssues.First().dValid.Value, new DateTime(2008, 7, 18)) < 0 ? "directive8" : "unknown";
@@ -843,7 +843,7 @@ namespace Gva.MigrationTool.Sets
                     }
                 }
 
-                foreach (var issue in issues.Where(i => !i.t_ARC_Type.Contains("BG Form") && i.t_ARC_Type != ""))
+                foreach (var issue in issues.Where(i => !i.t_ARC_Type.Contains("BG Form") && !string.IsNullOrEmpty(i.t_ARC_Type)))
                 {
                     string type = issuesActMap.ContainsKey(issue.t_ARC_Type) ? issuesActMap[issue.t_ARC_Type] : "unknown";
                     JObject airworthinessCertType = Utils.ToJObject(noms["airworthinessCertificateTypes"].ByAlias(type));
