@@ -6,7 +6,8 @@ CREATE TABLE [dbo].[GvaWordTemplates] (
     [Name]              NVARCHAR (200) NOT NULL,
     [Template]          VARBINARY(MAX) NOT NULL,
     [Description]       NVARCHAR (200) NOT NULL,
-    CONSTRAINT [PK_GvaWordTemplates]         PRIMARY KEY ([GvaWordTemplateId]),
+    [DataGeneratorCode] NVARCHAR (50)  NOT NULL,
+    CONSTRAINT [PK_GvaWordTemplates]         PRIMARY KEY ([GvaWordTemplateId])
 )
 GO
 
