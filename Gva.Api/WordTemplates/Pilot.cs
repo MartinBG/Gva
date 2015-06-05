@@ -27,11 +27,19 @@ namespace Gva.Api.WordTemplates
             this.number = 6;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "pilot" };
+                return "pilot";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Лиценз за пилот - стар";
             }
         }
 

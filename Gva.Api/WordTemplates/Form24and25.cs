@@ -13,11 +13,19 @@ namespace Gva.Api.WordTemplates
             this.lotRepository = lotRepository;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "f25", "f24" };
+                return "24and25";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Удостоверение за ЛГ от тип Форма 24 или 25";
             }
         }
 

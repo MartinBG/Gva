@@ -21,11 +21,19 @@ namespace Gva.Api.WordTemplates
             this.unitOfWork = unitOfWork;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "noise_cert" };
+                return "noiseCert";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Удостоверение за шум";
             }
         }
 

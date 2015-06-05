@@ -21,6 +21,22 @@ namespace Gva.Api.WordTemplates
             this.nomRepository = nomRepository;
         }
 
+        public string GeneratorCode
+        {
+            get
+            {
+                return "AMLNationalRating";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "AML Национален Клас";
+            }
+        }
+
         public object GetData(int lotId, string path, int ratingPartIndex, int editionPartIndex)
         {
             var lot = this.lotRepository.GetLotIndex(lotId);

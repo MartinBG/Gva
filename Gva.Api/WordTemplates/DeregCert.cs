@@ -26,11 +26,19 @@ namespace Gva.Api.WordTemplates
             this.organizationRepository = organizationRepository;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "dereg_cert" };
+                return "deregCert";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Удостоверение за дерегистрация";
             }
         }
 

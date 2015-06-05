@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Common.Api.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Gva.Api.WordTemplates
 {
@@ -6,6 +7,8 @@ namespace Gva.Api.WordTemplates
     {
         object GetData(int lotId, string path);
 
-        string[] TemplateNames { get; }
+        string GeneratorCode { get; }
+
+        string GeneratorName { get; }
     }
 }

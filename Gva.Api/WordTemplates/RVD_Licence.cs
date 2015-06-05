@@ -32,11 +32,19 @@ namespace Gva.Api.WordTemplates
             this.caseTypeRepository = caseTypeRepository;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "rvd_licence" };
+                return "rvdLicence";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Лиценз за РВД";
             }
         }
 

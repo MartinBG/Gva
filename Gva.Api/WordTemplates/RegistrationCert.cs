@@ -26,11 +26,19 @@ namespace Gva.Api.WordTemplates
             this.organizationRepository = organizationRepository;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "reg_cert" };
+                return "regCert";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Удостоверение за регистрация";
             }
         }
 

@@ -22,11 +22,19 @@ namespace Gva.Api.WordTemplates
             this.nomRepository = nomRepository;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "AML_III" };
+                return "part66";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Part 66";
             }
         }
 

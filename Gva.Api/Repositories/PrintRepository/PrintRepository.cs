@@ -166,14 +166,15 @@ namespace Gva.Api.Repositories.PrintRepository
 
         public Stream GenerateWordDocument(int lotId, string path, string templateName, int? ratingPartIndex, int? editionPartIndex)
         {
-            var dataGenerator = this.dataGenerators.FirstOrDefault(dg => dg.TemplateNames.Contains(templateName));
+            var wordTemplate = this.unitOfWork.DbContext.Set<GvaWordTemplate>().SingleOrDefault(t => t.Name == templateName);
             object data = null;
-            if (dataGenerator == null && ratingPartIndex.HasValue && editionPartIndex.HasValue)
+            if (ratingPartIndex.HasValue && editionPartIndex.HasValue)
             {
                 data = this.AMLNationalRatingDataGenerator.GetData(lotId, path, ratingPartIndex.Value, editionPartIndex.Value);
             }
             else
             {
+                var dataGenerator = this.dataGenerators.FirstOrDefault(dg => dg.GeneratorCode == wordTemplate.DataGeneratorCode);
                 data = dataGenerator.GetData(lotId, path);
             }
 
@@ -182,8 +183,7 @@ namespace Gva.Api.Repositories.PrintRepository
 
             JObject json = JObject.FromObject(data, jsonSerializer);
 
-            var wordTemplate = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
-                .SingleOrDefault(t => t.Name == templateName);
+            
 
             var memoryStream = new MemoryStream();
             memoryStream.Write(wordTemplate.Template, 0, wordTemplate.Template.Length);

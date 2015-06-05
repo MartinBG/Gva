@@ -30,11 +30,19 @@ namespace Gva.Api.WordTemplates
             this.caseTypeRepository = caseTypeRepository;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "coordinator" };
+                return "coordinator";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Лиценз за координатор по УВД (CATML)";
             }
         }
 

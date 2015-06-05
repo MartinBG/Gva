@@ -33,11 +33,19 @@ namespace Gva.Api.WordTemplates
             this.number = 5;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "student_controller" };
+                return "studentController";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Лиценз за ученик ръководител полети";
             }
         }
 

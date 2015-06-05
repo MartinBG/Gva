@@ -164,11 +164,19 @@ namespace Gva.Api.WordTemplates
             number = 6;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "convoy", "flight_licence", "flight" };
+                return "flightLicence";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Лиценз за летателна правоспособност";
             }
         }
 

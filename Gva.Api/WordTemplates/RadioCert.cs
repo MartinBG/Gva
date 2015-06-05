@@ -32,11 +32,19 @@ namespace Gva.Api.WordTemplates
             this.unitOfWork = unitOfWork;
         }
 
-        public string[] TemplateNames
+        public string GeneratorCode
         {
             get
             {
-                return new string[] { "radio_cert" };
+                return "radioCert";
+            }
+        }
+
+        public string GeneratorName
+        {
+            get
+            {
+                return "Разрешително за радиостанция";
             }
         }
 
