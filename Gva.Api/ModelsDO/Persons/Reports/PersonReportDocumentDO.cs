@@ -13,7 +13,7 @@ namespace Gva.Api.ModelsDO.Persons.Reports
 
         public int? Lin { get; set; }
 
-        public string Name { get; set; }
+        public string Role { get; set; }
 
         public string Type { get; set; }
 

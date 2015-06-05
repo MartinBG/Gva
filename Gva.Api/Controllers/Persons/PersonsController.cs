@@ -17,7 +17,7 @@ using Gva.Api.Repositories.ApplicationRepository;
 using Gva.Api.Repositories.ApplicationStageRepository;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
-using Gva.Api.Repositories.InventoryRepository;
+using Gva.Api.Repositories.PersonDocumentRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
@@ -31,38 +31,38 @@ namespace Gva.Api.Controllers.Persons
     {
         private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
-        private IInventoryRepository inventoryRepository;
         private IPersonRepository personRepository;
         private IApplicationRepository applicationRepository;
         private IApplicationStageRepository applicationStageRepository;
         private ICaseTypeRepository caseTypeRepository;
         private INomRepository nomRepository;
         private IFileRepository fileRepository;
+        private IPersonDocumentRepository personDocumentRepository;
         private ILotEventDispatcher lotEventDispatcher;
         private UserContext userContext;
 
         public PersonsController(
             IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
-            IInventoryRepository inventoryRepository,
             IPersonRepository personRepository,
             IApplicationRepository applicationRepository,
             IApplicationStageRepository applicationStageRepository,
             ICaseTypeRepository caseTypeRepository,
             INomRepository nomRepository,
             IFileRepository fileRepository,
+            IPersonDocumentRepository personDocumentRepository,
             ILotEventDispatcher lotEventDispatcher,
             UserContext userContext)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
-            this.inventoryRepository = inventoryRepository;
             this.personRepository = personRepository;
             this.applicationRepository = applicationRepository;
             this.applicationStageRepository = applicationStageRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
             this.fileRepository = fileRepository;
+            this.personDocumentRepository = personDocumentRepository;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
         }
@@ -324,7 +324,7 @@ namespace Gva.Api.Controllers.Persons
         [Route("{lotId}/inventory")]
         public IHttpActionResult GetInventory(int lotId, int? caseTypeId = null)
         {
-            var inventory = this.inventoryRepository.GetInventoryItems(lotId: lotId, caseTypeId: caseTypeId);
+            var inventory = this.personDocumentRepository.GetInventoryItems(lotId: lotId, caseTypeId: caseTypeId);
 
             var allItemsExceptLicences = inventory.Where(i => i.SetPartAlias != "personLicence");
 

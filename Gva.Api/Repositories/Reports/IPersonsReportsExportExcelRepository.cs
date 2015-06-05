@@ -13,7 +13,7 @@ namespace Gva.Api.Repositories.Reports
     {
         XLWorkbook GetDocumentsWorkbook(
            SqlConnection conn,
-           string documentRole = null,
+           int? roleId = null,
            DateTime? fromDatePeriodFrom = null,
            DateTime? fromDatePeriodTo = null,
            DateTime? toDatePeriodFrom = null,

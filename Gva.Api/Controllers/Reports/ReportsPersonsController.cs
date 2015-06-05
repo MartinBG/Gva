@@ -21,7 +21,7 @@ namespace Gva.Api.Controllers.Reports
 
         [Route(@"documents")]
         public IHttpActionResult GetDocuments(
-            string documentRole = null,
+            int? roleId = null,
             DateTime? fromDatePeriodFrom = null,
             DateTime? fromDatePeriodTo = null,
             DateTime? toDatePeriodFrom = null,
@@ -39,7 +39,7 @@ namespace Gva.Api.Controllers.Reports
             {
                 var result = this.personsReportRepository.GetDocuments(
                     conn: conn,
-                    documentRole: documentRole,
+                    roleId: roleId,
                     fromDatePeriodFrom: fromDatePeriodFrom,
                     fromDatePeriodTo: fromDatePeriodTo,
                     toDatePeriodFrom: toDatePeriodFrom,

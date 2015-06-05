@@ -17,7 +17,7 @@ namespace Gva.Api.Repositories.Reports
 
         public XLWorkbook GetDocumentsWorkbook(
             SqlConnection conn,
-            string documentRole = null,
+            int? roleId = null,
             DateTime? fromDatePeriodFrom = null,
             DateTime? fromDatePeriodTo = null,
             DateTime? toDatePeriodFrom = null,
@@ -34,7 +34,7 @@ namespace Gva.Api.Repositories.Reports
             Tuple<int, List<PersonReportDocumentDO>> documentResult = this.personReportRepository.GetDocuments(
                 conn: conn,
                 lin: lin,
-                documentRole: documentRole,
+                roleId: roleId,
                 fromDatePeriodFrom: fromDatePeriodFrom,
                 fromDatePeriodTo: fromDatePeriodTo,
                 toDatePeriodFrom: toDatePeriodFrom,
@@ -73,7 +73,7 @@ namespace Gva.Api.Repositories.Reports
             foreach (var document in documentResult.Item2)
             {
                 ws.Cell(rowIndex, "A").Value = document.Lin;
-                ws.Cell(rowIndex, "B").Value = document.Name;
+                ws.Cell(rowIndex, "B").Value = document.Role;
                 ws.Cell(rowIndex, "C").Value = document.Type;
                 ws.Cell(rowIndex, "D").Value = document.Number;
                 ws.Cell(rowIndex, "E").Value = document.Publisher;

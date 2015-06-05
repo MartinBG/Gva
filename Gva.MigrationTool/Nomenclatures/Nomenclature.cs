@@ -1189,6 +1189,38 @@ namespace Gva.MigrationTool.Nomenclatures
                         categoryAlias = "check"
                     })
             });
+            
+            var systemTypes = new List<Tuple<string, string, string>>()
+            {
+                { new Tuple<string,string, string>("Образование"             , "education"  , "personEducation")},
+                { new Tuple<string,string, string>("Месторабота"             , "employment" , "personEmployment")},
+                { new Tuple<string,string, string>("Документ за самоличност" , "documentId" , "personDocumentId")},
+                { new Tuple<string,string, string>("Лиценз"                  , "licence"    , "personLicence")},
+                { new Tuple<string,string, string>("Медицинско свидетелство" , "medical"    , "personMedical")},
+                { new Tuple<string,string, string>("Заявление"               , "application", "personApplication")},
+                { new Tuple<string,string, string>("Отчет"                   , "report"     , "personReport")},
+                { new Tuple<string,string, string>("Състояние"               , "status"     , "personStatus")}
+            };
+
+            foreach (var type in systemTypes)
+            {
+                results.Add(new NomValue()
+                {
+                    OldId = null,
+                    Code = null,
+                    Name = type.Item1,
+                    NameAlt = type.Item2,
+                    Alias = type.Item3,
+                    IsActive = true,
+                    ParentValueId = null,
+                    TextContentString = JsonConvert.SerializeObject(
+                    new
+                    {
+                        isPersonsOnly = true,
+                        categoryAlias = "system"
+                    })
+                });
+            }
 
             noms["documentRoles"] = new Dictionary<string, NomValue>();
             foreach (var row in results)

@@ -401,20 +401,24 @@ namespace Gva.Api.Repositories.PersonRepository
         {
             DateTime? date = dateValidFrom.HasValue ? dateValidFrom.Value.Date : (DateTime?)null;
 
+            var withoutPartAliases = new string[]{ "personEmployment", "personEducation", "personLicence", "personApplication" };
+
             var predicate = PredicateBuilder.True<GvaViewPersonDocument>()
+                .And(d => !withoutPartAliases.Contains(d.SetPartAlias))
                 .And(d => (d.DocumentNumber == null && documentNumber == null) || (d.DocumentNumber == documentNumber))
                 .And(d => (d.Publisher == null && publisher == null) || (d.Publisher == publisher))
                 .And(d => (!d.DocumentPersonNumber.HasValue && !documentPersonNumber.HasValue) || (d.DocumentPersonNumber.Value == documentPersonNumber.Value))
                 .And(d => (!d.TypeId.HasValue && !typeId.HasValue) || (d.TypeId.Value == typeId.Value))
                 .And(d => (!d.RoleId.HasValue && !roleId.HasValue) || (d.RoleId.Value == roleId.Value))
-                .And(d => (!d.DateValidFrom.HasValue && !date.HasValue) || (d.DateValidFrom.Value == date));
+                .And(d => (!d.FromDate.HasValue && !date.HasValue) || (d.FromDate.Value == date));
 
             if(partIndex.HasValue)
             {
-                predicate = predicate.And(d => d.PartIndex != partIndex);
+                predicate = predicate.And(d => d.Part.Index != partIndex);
             }
 
             return this.unitOfWork.DbContext.Set<GvaViewPersonDocument>()
+                .Include(d => d.Part.Index)
                 .Where(predicate)
                 .OrderByDescending(r => r.DocumentPersonNumber)
                 .SingleOrDefault();

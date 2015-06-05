@@ -13,7 +13,7 @@ namespace Gva.Api.Repositories.Reports
     {
         Tuple<int, List<PersonReportDocumentDO>> GetDocuments(
             SqlConnection conn,
-            string documentRole = null,
+            int? roleId = null,
             DateTime? fromDatePeriodFrom = null,
             DateTime? fromDatePeriodTo = null,
             DateTime? toDatePeriodFrom = null,

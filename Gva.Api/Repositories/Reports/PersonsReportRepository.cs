@@ -20,7 +20,7 @@ namespace Gva.Api.Repositories.Reports
 
         public Tuple<int, List<PersonReportDocumentDO>> GetDocuments(
             SqlConnection conn,
-            string documentRole = null,
+            int? roleId = null,
             DateTime? fromDatePeriodFrom = null,
             DateTime? fromDatePeriodTo = null,
             DateTime? toDatePeriodFrom = null,
@@ -37,41 +37,39 @@ namespace Gva.Api.Repositories.Reports
             string limName = limitationId.HasValue ? this.nomRepository.GetNomValue(limitationId.Value).Name : null;
 
             var queryResult = conn.CreateStoreCommand(
-                    @"SELECT
-                        COUNT(*) OVER() as allResultsCount,
+                    @"SELECT COUNT(*) OVER() as allResultsCount,
                         p.LotId,
                         p.Lin,
-                        ii.Name,
+                        nv2.Name as Role,
                         nv1.Name as Type,
-                        ii.Number,
-                        ii.FromDate,
-                        ii.Date,
-                        ii.ToDate,
-                        ii.Publisher,
-                        ii.Valid,
+                        d.DocumentNumber,
+                        d.FromDate,
+                        d.Date,
+                        d.ToDate,
+                        d.Publisher,
+                        d.Valid,
                         d.Limitations,
-                        nv2.Name as MedClass
-                    FROM 
-                    GvaViewInventoryItems ii
-                    INNER JOIN GvaViewPersons p ON ii.LotId = p.LotId
-                    LEFT JOIN NomValues nv1 ON nv1.NomValueId = ii.TypeId
-                    LEFT JOIN LotParts lp on lp.LotPartId = ii.LotPartId
-                    LEFT JOIN GvaViewPersonDocuments d on d.LotId = lp.LotId and lp.[Index] = d.PartIndex
-                    LEFT JOIN NomValues nv2 ON nv2.NomValueId = d.MedClassId
+                        nv3.Name as MedClass
+                        FROM GvaViewPersonDocuments d
+                        INNER JOIN GvaViewPersons p ON d.LotId = p.LotId
+                        LEFT JOIN LotParts lp on lp.LotPartId = d.LotPartId
+                        LEFT JOIN NomValues nv1 ON nv1.NomValueId = d.TypeId
+                        LEFT JOIN NomValues nv2 ON nv2.NomValueId = d.RoleId
+                        LEFT JOIN NomValues nv3 ON nv3.NomValueId = d.MedClassId
                     WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10}
-                    ORDER BY ii.FromDate DESC
+                    ORDER BY d.FromDate DESC
                     OFFSET {11} ROWS FETCH NEXT {12} ROWS ONLY",
-                    new DbClause("and ii.FromDate >= {0}", fromDatePeriodFrom),
-                    new DbClause("and ii.FromDate <= {0}", fromDatePeriodTo),
-                    new DbClause("and ii.ToDate >= {0}", toDatePeriodFrom),
-                    new DbClause("and ii.ToDate <= {0}", toDatePeriodTo),
+                    new DbClause("and d.FromDate >= {0}", fromDatePeriodFrom),
+                    new DbClause("and d.FromDate <= {0}", fromDatePeriodTo),
+                    new DbClause("and d.ToDate >= {0}", toDatePeriodFrom),
+                    new DbClause("and d.ToDate <= {0}", toDatePeriodTo),
                     new DbClause("and p.Lin = {0}", lin),
                     new DbClause("and nv1.NomValueId = {0}", typeId),
-                    new DbClause("and ii.Name = {0}", documentRole),
-                    new DbClause("and ii.Number like '%' + {0} + '%'", docNumber),
-                    new DbClause("and ii.Publisher like '%' + {0} + '%'", publisher),
+                    new DbClause("and nv2.NomValueId = {0}", roleId),
+                    new DbClause("and d.DocumentNumber like '%' + {0} + '%'", docNumber),
+                    new DbClause("and d.Publisher like '%' + {0} + '%'", publisher),
                     new DbClause("and (d.Limitations like {0} + '$$%' or d.Limitations like '%$$' + {0} or d.Limitations like '%$$' + {0} + '$$%' or d.Limitations like {0})", limName),
-                    new DbClause("and nv2.NomValueId = {0}", medClassId),
+                    new DbClause("and nv3.NomValueId = {0}", medClassId),
                     new DbClause("{0}", offset),
                     new DbClause("{0}", limit))
                     .Materialize(r => new Tuple<int, PersonReportDocumentDO>
@@ -81,9 +79,9 @@ namespace Gva.Api.Repositories.Reports
                         {
                             LotId = r.Field<int>("LotId"),
                             Lin = r.Field<int?>("Lin"),
-                            Name = r.Field<string>("Name"),
+                            Role = r.Field<string>("Role"),
                             Type = r.Field<string>("Type"),
-                            Number = r.Field<string>("Number"),
+                            Number = r.Field<string>("DocumentNumber"),
                             FromDate = r.Field<DateTime?>("FromDate") ?? r.Field<DateTime?>("Date"),
                             ToDate = r.Field<DateTime?>("ToDate"),
                             Valid = r.Field<bool?>("Valid"),

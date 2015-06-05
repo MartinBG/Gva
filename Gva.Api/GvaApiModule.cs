@@ -18,7 +18,6 @@ using Gva.Api.Projections.Inventory.Aircrafts;
 using Gva.Api.Projections.Inventory.Airports;
 using Gva.Api.Projections.Inventory.Equipments;
 using Gva.Api.Projections.Inventory.Organizations;
-using Gva.Api.Projections.Inventory.Persons;
 using Gva.Api.Projections.Organization;
 using Gva.Api.Projections.Person;
 using Gva.Api.Repositories.AircraftRepository;
@@ -32,6 +31,7 @@ using Gva.Api.Repositories.FileRepository;
 using Gva.Api.Repositories.IntegrationRepository;
 using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.OrganizationRepository;
+using Gva.Api.Repositories.PersonDocumentRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.PrintRepository;
 using Gva.Api.Repositories.PublisherRepository;
@@ -109,21 +109,11 @@ namespace Gva.Api
             moduleBuilder.RegisterType<OrganizationApprovalProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<OrganizationAmendmentProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
 
-            moduleBuilder.RegisterType<PersonApplicationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonInventoryCheckProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonDocumentIdProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonEducationProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonEmploymentProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonLanguageCertificateProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonMedicalProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonOtherProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonTrainingProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-            moduleBuilder.RegisterType<PersonLicenceInventoryProjection>().As<ILotEventHandler>().InstancePerLifetimeScope();
-
             //Repositories
             moduleBuilder.RegisterType<ExaminationSystemRepository>().As<IExaminationSystemRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PrintRepository>().As<IPrintRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonRepository>().As<IPersonRepository>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<PersonDocumentRepository>().As<IPersonDocumentRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonsReportRepository>().As<IPersonsReportRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonsReportsExportExcelRepository>().As<IPersonsReportsExportExcelRepository>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<AircraftRepository>().As<IAircraftRepository>().InstancePerLifetimeScope();

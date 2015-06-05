@@ -6,14 +6,12 @@
     $state,
     $stateParams,
     PersonsReports,
-    documentRoleOptions,
     docs
   ) {
     var itemsPerPage = $stateParams.limit;
 
-    $scope.documentRoleOptions = documentRoleOptions;
     $scope.filters = {
-      documentRole: null,
+      roleId: null,
       fromDate: null,
       toDate: null,
       typeId: null,
@@ -35,10 +33,6 @@
     $scope.getDocuments = function (page) {
       var params = {set: $stateParams.set};
       var pageSize = $scope.filters.itemsPerPage.id;
-      var documentRole = $scope.filters.documentRole ?
-          $scope.filters.documentRole.text : null;
-
-      $scope.filters.documentRole = documentRole;
 
       _.assign(params, $scope.filters);
       _.assign(params, {
@@ -51,8 +45,7 @@
 
     $scope.search = function () {
       return $state.go('root.personsReports.documents', {
-        documentRole: $scope.filters.documentRole ?
-          $scope.filters.documentRole.text : null,
+        roleId: $scope.filters.roleId,
         fromDatePeriodFrom: $scope.filters.fromDatePeriodFrom,
         fromDatePeriodTo: $scope.filters.fromDatePeriodTo,
         toDatePeriodFrom: $scope.filters.toDatePeriodFrom,
@@ -74,7 +67,6 @@
     '$state',
     '$stateParams',
     'PersonsReports',
-    'documentRoleOptions',
     'docs'
   ];
 
@@ -84,34 +76,6 @@
       'PersonsReports',
       function ($stateParams, PersonsReports) {
         return PersonsReports.getDocuments($stateParams).$promise;
-      }
-    ],
-    documentRoleOptions: [
-      '$q',
-      'Nomenclatures',
-      function ($q, Nomenclatures) {
-        return $q.all({
-          roles: Nomenclatures.query({alias: 'documentRoles'}).$promise,
-          parts: Nomenclatures.query({alias: 'personSetParts'}).$promise
-        })
-        .then(function (result) {
-          var neccessarySetParts = [
-            'personDocumentId',
-            'personEducation',
-            'personDocumentId',
-            'personMedical',
-            'personApplication',
-            'personLicence'
-          ];
-
-          var parts = _.filter(result.parts, function (part) {
-            return _.contains(neccessarySetParts, part.alias);
-          });
-
-          return _.map(_.union(result.roles, parts), function (option) {
-            return { id: option.name, text: option.name };
-          });
-        });
       }
     ]
   };

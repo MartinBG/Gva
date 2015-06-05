@@ -131,13 +131,14 @@
         <div class="row">
           <div class="form-group col-sm-4">
             <label class="control-label" l10n-text="common.nomenclatures.nomValues.edit.categoryAlias"></label>
-            <select ui-select2 ng-model="nomenclatureValue.textContent.categoryAlias" class="input-sm form-control">
+            <select ui-select2 ng-model="nomenclatureValue.textContent.categoryAlias" class="input-sm form-control" ng-readonly="nomenclatureValue.textContent.categoryAlias === 'system'">
               <option value=""></option>
               <option value="check">Проверка</option>
               <option value="training">Обучение</option>
               <option value="other">Други</option>
               <option value="docId">За самоличност</option>
               <option value="flying">Летателен/Практически опит</option>
+              <option value="system">Системни</option>
             </select>
           </div>
         </div>

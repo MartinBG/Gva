@@ -7,7 +7,6 @@ using System.Web.Http;
 using Gva.Api.CommonUtils;
 using Gva.Api.ModelsDO.Persons.Reports;
 using Gva.Api.Repositories.AircraftRepository;
-using Gva.Api.Repositories.InventoryRepository;
 using Gva.Api.Repositories.Reports;
 
 namespace Gva.Api.Controllers.Reports
@@ -27,7 +26,7 @@ namespace Gva.Api.Controllers.Reports
         [HttpGet]
         [Route("documents")]
         public HttpResponseMessage ExportExcelDocumentsReport(
-            string documentRole = null,
+            int? roleId = null,
             DateTime? fromDatePeriodFrom = null,
             DateTime? fromDatePeriodTo = null,
             DateTime? toDatePeriodFrom = null,
@@ -45,7 +44,7 @@ namespace Gva.Api.Controllers.Reports
             {
                 var workbook = this.personsReportsExportExcelRepository.GetDocumentsWorkbook(
                     conn: conn,
-                    documentRole: documentRole,
+                    roleId: roleId,
                     fromDatePeriodFrom: fromDatePeriodFrom,
                     fromDatePeriodTo: fromDatePeriodTo,
                     toDatePeriodFrom: toDatePeriodFrom,

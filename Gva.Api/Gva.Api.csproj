@@ -370,17 +370,7 @@
     <Compile Include="Projections\Person\PersonReportCheckProjection.cs" />
     <Compile Include="Projections\Person\PersonReportProjection.cs" />
     <Compile Include="Projections\Person\PersonCheckProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonLanguageCertificateProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonInventoryCheckProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonDocumentIdProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonEducationProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonEmploymentProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonLicenceInventoryProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonMedicalProjection.cs" />
     <Compile Include="Projections\Inventory\Organizations\OrganizationApplicationProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonOtherProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonApplicationProjection.cs" />
-    <Compile Include="Projections\Inventory\Persons\PersonTrainingProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationAmendmentProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationInspectionProjection.cs" />
     <Compile Include="Projections\Organization\OrganizationInspectionRecommendationProjection.cs" />
@@ -460,6 +450,8 @@
     <Compile Include="Repositories\ExaminationSystemRepository\ExaminationSystemRepository.cs" />
     <Compile Include="Repositories\IntegrationRepository\IntegrationRepository.cs" />
     <Compile Include="Repositories\IntegrationRepository\IIntegrationRepository.cs" />
+    <Compile Include="Repositories\PersonDocumentRepository\IPersonDocumentRepository.cs" />
+    <Compile Include="Repositories\PersonDocumentRepository\PersonDocumentRepository.cs" />
     <Compile Include="Repositories\PrintRepository\IPrintRepository.cs" />
     <Compile Include="Repositories\PrintRepository\PrintRepository.cs" />
     <Compile Include="Repositories\PublisherRepository\IPublisherRepository.cs" />
