@@ -8,7 +8,9 @@ namespace Common.Filters
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            if (actionExecutedContext.Request.Method == HttpMethod.Get)
+            if (actionExecutedContext.Request.Method == HttpMethod.Get &&
+                actionExecutedContext.Exception == null &&
+                actionExecutedContext.Response != null)
             {
                 actionExecutedContext.Response.AddNoCacheHeaders();
             }
