@@ -418,7 +418,6 @@ namespace Gva.Api.Repositories.PersonRepository
             }
 
             return this.unitOfWork.DbContext.Set<GvaViewPersonDocument>()
-                .Include(d => d.Part.Index)
                 .Where(predicate)
                 .OrderByDescending(r => r.DocumentPersonNumber)
                 .SingleOrDefault();
