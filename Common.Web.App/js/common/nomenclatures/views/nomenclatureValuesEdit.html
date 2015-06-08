@@ -199,7 +199,7 @@
         <div class="row">
           <sc-field type="text" ng-model="nomenclatureValue.textContent.codeCA" ng-required="true" l10n-text="common.nomenclatures.nomValues.edit.codeCA" class="col-sm-4"></sc-field>
         </div>
-          <div class="row">
+        <div class="row">
           <sc-field type="nomenclature" alias="'staffTypes'" ng-required="true" ng-model="nomenclatureValue.parentValueId" mode="id" l10n-text="common.nomenclatures.nomValues.edit.staffType" class="col-sm-4"></sc-field>
         </div>
         <div class="row">
@@ -219,6 +219,13 @@
               <option ng-repeat="template in templateOptions" value="{{template.code}}">{{template.name}}</option>
             </select>
           </div>
+        </div>
+        <div class="row">
+          <sc-field-group class="col-sm-6 col-md-4" text="common.nomenclatures.nomValues.edit.dataGenerator" field-name="dataGenerator"
+            validations="{required: 'default' }">
+            <sc-text ng-model="dataGenerator.name" name="dataGenerator" ng-required="true" ng-readonly="true"></sc-text>
+            <sc-button class="btn btn-default" btn-click="chooseDataGenerator()" icon="glyphicon-pencil" ng-disabled="!nomenclatureValue.textContent.templateName"></sc-button>
+          </sc-field-group>
         </div>
         <div class="row">
           <div class="form-group col-sm-4">

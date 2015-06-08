@@ -1,5 +1,5 @@
-﻿/*global angular*/
-(function (angular) {
+﻿/*global angular, _*/
+(function (angular, _) {
   'use strict';
 
   function NomenclaturevaluesEditCtrl(
@@ -9,11 +9,13 @@
     $stateParams,
     NomenclatureValuesRsrc,
     nomenclatureValue,
+    Nomenclatures,
     nomType,
     caseTypeOptions,
     templateOptions,
     qualificationOptions,
-    scMessage
+    scMessage,
+    scModal
   ) {
     $scope.nomenclatureValue = nomenclatureValue;
     $scope.alias = $stateParams.alias;
@@ -38,6 +40,23 @@
       });
     };
 
+    $scope.chooseDataGenerator = function () {
+      var params = {
+        template: _.where($scope.templateOptions, {
+            code: $scope.nomenclatureValue.textContent.templateName
+          })[0],
+        dataGenerator: $scope.dataGenerator.code
+      };
+
+      var modalInstance = scModal.open('chooseDataGenerator', params);
+
+      modalInstance.result.then(function (dataGenerator) {
+        $scope.dataGenerator = dataGenerator;
+      });
+
+      return modalInstance.opened;
+    };
+
     $scope.cancel = function cancel() {
       return $state.go('root.nomenclatures.search.values', {
         nomId: $stateParams.nomId,
@@ -60,6 +79,22 @@
           }
         });
     };
+
+    if ($stateParams.alias === 'licenceTypes') {
+      $scope.$watch('nomenclatureValue.textContent.templateName', function () {
+        if ($scope.nomenclatureValue.textContent &&
+          $scope.nomenclatureValue.textContent.templateName) {
+          Nomenclatures.get({
+            alias: 'dataGenerators',
+            templateName: $scope.nomenclatureValue.textContent.templateName
+         })
+          .$promise
+          .then(function (nom) {
+            $scope.dataGenerator = nom;
+          });
+        }
+      });
+    }
   }
 
   NomenclaturevaluesEditCtrl.$inject = [
@@ -69,11 +104,13 @@
     '$stateParams',
     'NomenclatureValuesRsrc',
     'nomenclatureValue',
+    'Nomenclatures',
     'nomType',
     'caseTypeOptions',
     'templateOptions',
     'qualificationOptions',
-    'scMessage'
+    'scMessage',
+    'scModal'
   ];
 
   NomenclaturevaluesEditCtrl.$resolve = {
@@ -148,4 +185,4 @@
   };
 
   angular.module('common').controller('NomenclaturevaluesEditCtrl', NomenclaturevaluesEditCtrl);
-}(angular));
+}(angular, _));

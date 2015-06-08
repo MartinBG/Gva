@@ -134,6 +134,8 @@ namespace Gva.Api
 
             moduleBuilder.RegisterType<IntegrationController>().InstancePerLifetimeScope();
 
+            moduleBuilder.RegisterType<WordTemplatesController>().InstancePerLifetimeScope();
+
             //Person controllers
             moduleBuilder.RegisterType<PersonsController>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<PersonAddressesController>().InstancePerLifetimeScope();

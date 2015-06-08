@@ -379,15 +379,16 @@
     });
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
-     .modal('choosePublisher' , 'js/gva/common/modals/publishers/choosePublisherModal.html'  , 'ChoosePublisherModalCtrl' )
-     .modal('choosePerson'    , 'js/gva/common/modals/persons/choosePersonModal.html'        , 'ChoosePersonModalCtrl'    )
-     .modal('choosePersons'   , 'js/gva/common/modals/persons/choosePersonsModal.html'       , 'ChoosePersonsModalCtrl'   )
-     .modal('chooseAppExams'  , 'js/gva/common/modals/persons/chooseAppExamsModal.html'      , 'ChooseAppExamsModalCtrl'  )
-     .modal('newPerson'       , 'js/gva/common/modals/persons/newPersonModal.html'           , 'NewPersonModalCtrl'       )
-     .modal('chooseInspectors', 'js/gva/common/modals/inspectors/chooseInspectorsModal.html' , 'ChooseInspectorsModalCtrl')
-     .modal('editDisparity'   , 'js/gva/common/modals/disparities/editDisparityModal.html'   , 'EditDisparityModalCtrl'   )
-     .modal('viewApplication' , 'js/gva/common/modals/applications/viewApplicationModal.html', 'ViewApplicationModalCtrl' )
-     .modal('linkApplication' , 'js/gva/common/modals/integration/linkAppModal.html'         , 'LinkAppModalCtrl'         );
+     .modal('choosePublisher'     , 'js/gva/common/modals/publishers/choosePublisherModal.html'       , 'ChoosePublisherModalCtrl'            )
+     .modal('choosePerson'        , 'js/gva/common/modals/persons/choosePersonModal.html'             , 'ChoosePersonModalCtrl'               )
+     .modal('choosePersons'       , 'js/gva/common/modals/persons/choosePersonsModal.html'            , 'ChoosePersonsModalCtrl'              )
+     .modal('chooseAppExams'      , 'js/gva/common/modals/persons/chooseAppExamsModal.html'           , 'ChooseAppExamsModalCtrl'             )
+     .modal('newPerson'           , 'js/gva/common/modals/persons/newPersonModal.html'                , 'NewPersonModalCtrl'                  )
+     .modal('chooseInspectors'    , 'js/gva/common/modals/inspectors/chooseInspectorsModal.html'      , 'ChooseInspectorsModalCtrl'           )
+     .modal('editDisparity'       , 'js/gva/common/modals/disparities/editDisparityModal.html'        , 'EditDisparityModalCtrl'              )
+     .modal('viewApplication'     , 'js/gva/common/modals/applications/viewApplicationModal.html'     , 'ViewApplicationModalCtrl'            )
+     .modal('linkApplication'     , 'js/gva/common/modals/integration/linkAppModal.html'              , 'LinkAppModalCtrl'                    )
+     .modal('chooseDataGenerator' , 'js/gva/common/modals/wordTemplates/chooseDataGeneratorModal.html', 'ChooseDataGeneratorModalCtrl', 'xs-2');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.applications'                                  , '/applications?set'                                                                                                                                                                                                        ])

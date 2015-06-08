@@ -125,6 +125,7 @@
     <Compile Include="Controllers\Airports\AirportsController.cs" />
     <Compile Include="Controllers\Applications\AplicationsCaseController.cs" />
     <Compile Include="Controllers\Applications\ApplicationStagesController.cs" />
+    <Compile Include="Controllers\WordTemplatesController.cs" />
     <Compile Include="Controllers\ExcelController.cs" />
     <Compile Include="Controllers\Reports\ReportsExportExcelController.cs" />
     <Compile Include="Controllers\Reports\ReportsPersonsController.cs" />

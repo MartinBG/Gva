@@ -204,6 +204,7 @@
               aircraftType: 'Тип ВС',
               qualification: 'Квалификация (за изпити)',
               templateName: 'Темплейт',
+              dataGenerator: 'Генератор на данни',
               codeCA: 'Код на типа на лиценза видим при печат',
               country: 'Държава',
               auditPart: 'Раздел',

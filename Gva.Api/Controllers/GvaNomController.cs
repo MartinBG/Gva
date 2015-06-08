@@ -19,6 +19,7 @@ using Gva.Api.Repositories.ExaminationSystemRepository;
 using Gva.Api.Repositories.OrganizationRepository;
 using Gva.Api.Repositories.PersonRepository;
 using Gva.Api.Repositories.StageRepository;
+using Gva.Api.WordTemplates;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
 
@@ -41,6 +42,7 @@ namespace Gva.Api.Controllers
         private IStageRepository stageRepository;
         private IExaminationSystemRepository examinationSystemRepository;
         private IAircraftRegistrationRepository aircraftRegistrationRepository;
+        private IEnumerable<IDataGenerator> dataGenerators;
 
         public GvaNomController(
             IUnitOfWork unitOfWork,
@@ -55,7 +57,8 @@ namespace Gva.Api.Controllers
             INomRepository nomRepository,
             IStageRepository stageRepository,
             IExaminationSystemRepository examinationSystemRepository,
-            IAircraftRegistrationRepository aircraftRegistrationRepository)
+            IAircraftRegistrationRepository aircraftRegistrationRepository,
+            IEnumerable<IDataGenerator> dataGenerators)
         {
             this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
@@ -70,6 +73,44 @@ namespace Gva.Api.Controllers
             this.stageRepository = stageRepository;
             this.examinationSystemRepository = examinationSystemRepository;
             this.aircraftRegistrationRepository = aircraftRegistrationRepository;
+            this.dataGenerators = dataGenerators;
+        }
+
+        [Route("dataGenerators")]
+        public IHttpActionResult GetDataDenerators(string term = null)
+        {
+            var dataGenerators = this.dataGenerators.Select(d => new
+                {
+                    Code = d.GeneratorCode,
+                    Name = d.GeneratorName,
+                    NomValueId = d.GeneratorCode
+                })
+                .ToList();
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                dataGenerators = dataGenerators
+                    .Where(d => d.Name.ToLower().Contains(term.ToLower()))
+                    .ToList();
+            }
+
+            return Ok(dataGenerators);
+        }
+
+        [Route("dataGenerators")]
+        public IHttpActionResult GetDataDenerator(string templateName)
+        {
+            GvaWordTemplate template = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
+                    .Where(t => t.Name == templateName)
+                    .Single();
+
+            return Ok(this.dataGenerators.Where(dg => dg.GeneratorCode == template.DataGeneratorCode)
+                .Select(d => new
+                {
+                    Code = d.GeneratorCode,
+                    Name = d.GeneratorName,
+                    NomValueId = d.GeneratorCode
+                }).Single());
         }
 
         [Route("{lotId}/applications")]
