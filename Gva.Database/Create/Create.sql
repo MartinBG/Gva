@@ -56,6 +56,7 @@ GO
 :r $(rootPath)\"Tables\GvaExSystCertCampaigns.sql"
 :r $(rootPath)\"Tables\GvaExSystExaminees.sql"
 :r $(rootPath)\"Tables\GvaInvalidActNumbers.sql"
+:r $(rootPath)\"Tables\GvaViewSModeCodes.sql"
 
 ---------------------------------------------------------------
 -- Views
@@ -109,6 +110,7 @@ GO
 :r $(rootPath)\"..\Insert\Lots\aircraft.sql"
 :r $(rootPath)\"..\Insert\Lots\airport.sql"
 :r $(rootPath)\"..\Insert\Lots\equipment.sql"
+:r $(rootPath)\"..\Insert\Lots\sModeCode.sql"
 
 ---------------------------------------------------------------
 -- SystemData
@@ -168,6 +170,12 @@ GO
 :r $(rootPath)\"..\Insert\Noms\Persons\ratingNotes.sql"
 :r $(rootPath)\"..\Insert\Noms\Persons\asExamQuestionTypes.sql"
 :r $(rootPath)\"..\Insert\asExams.sql"
+
+---------------------------------------------------------------
+-- SModeCodes Noms
+---------------------------------------------------------------
+
+:r $(rootPath)\"..\Insert\Noms\SModeCodes\sModeCodeTypes.sql"
 
 ---------------------------------------------------------------
 --Insert ADDITIONAL

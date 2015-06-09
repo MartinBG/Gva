@@ -683,6 +683,36 @@
           notIndexed: 'Документи извън описа'
         }
       },
+      sModeCodes: {
+        search: {
+          'new': 'Нов Код',
+          search: 'Търси',
+          codeHex: 'Код в шестнайсетична бр.с-ма',
+          type: 'Вид код',
+          note: 'Бележки',
+          codeDecimal: 'Код в десетична бр.с-ма',
+          codeBinary: 'Код в двоична бр.с-ма'
+        },
+        newSModeCode: {
+          title: 'Нов S-Mode Code',
+          save: 'Запис',
+          cancel: 'Отказ'
+        },
+        editSModeCode: {
+          title: 'Редакция на S-Mode Code',
+          save: 'Запис',
+          cancel: 'Отказ',
+          edit: 'Редакция'
+        },
+        sModeCodeDataDirective: {
+          codeHex: 'Код в шестнайсетична бр.с-ма',
+          codeType: 'Вид код',
+          note: 'Бележки',
+          connectToAircraft: 'Избери ВС',
+          viewAircraft: 'Покажи ВС',
+          valid: 'Валиден'
+        }
+      },
       aircrafts: {
         tabs: {
           reg: 'Регистрация',
@@ -883,25 +913,25 @@
           newReg: 'Нова регистрация'
         },
         smodSearch: {
-          valid: 'Валиден',
-          scode: 'S-mode code',
-          ltrInNumber: 'Тяхно писмо №',
-          ltrInDate: 'Тяхна дата',
-          ltrCaaNumber: 'ГВА писмо №',
-          ltrCaaDate: 'ГВА дата',
-          newSmod: 'Нов S-code'
-        },
-        newSmod: {
-          title: 'Нов mode S код',
-          save: 'Запис',
-          cancel: 'Отказ'
+          theirNumber: 'Тяхно писмо №',
+          theirDate: 'Тяхна дата',
+          caaNumber: 'ГВА писмо №',
+          caaDate: 'ГВА дата',
+          codeHex: 'Код в шестнайсетична бр.с-ма',
+          codeDecimal: 'Код в десетична бр.с-ма',
+          codeBinary: 'Код в двоична бр.с-ма'
         },
         editSmod: {
           title: 'Преглед на mode S код',
           edit: 'Редакция',
           save: 'Запис',
           cancel: 'Отказ',
-          deleteSmod: 'Изтрий'
+          search: 'Търси',
+          codeHex: 'Код в шестнайсетична бр.с-ма',
+          note: 'Бележки',
+          codeDecimal: 'Код в десетична бр.с-ма',
+          codeBinary: 'Код в двоична бр.с-ма',
+          sModeCode: 'S-mode код'
         },
         airworthinessSearch: {
           newAirworthiness: 'Нова годност',
@@ -1024,15 +1054,6 @@
           leasingAgreement: 'Договор за лизинг и анекси към него',
           leasingEndDate: 'Срок'
         },
-        smodViewDirective: {
-          title: 'S-code',
-          valid: 'Валиден',
-          scode: 'S-mode code',
-          ltrInNumber: 'Тяхно писмо №',
-          ltrInDate: 'Тяхна дата',
-          ltrCaaNumber: 'ГВА писмо №',
-          ltrCaaDate: 'ГВА дата'
-        },
         airworthinessViewDirective: {
           title: 'Летателна годност',
           titleNoAw: '(от предходна регистрация)',
@@ -1046,40 +1067,15 @@
           'new': 'Нова ЛГ',
           status: 'Статус'
         },
-        noiseViewDirective: {
-          title: 'Удостоверение за шум',
-          issueNumber: '№',
-          issueDate: 'Дата на издаване',
-          flyover: 'Прелитане',
-          approach: 'Приближаване',
-          lateral: 'Странично',
-          overflight: 'Полет над',
-          takeoff: 'Излитане',
-          tcdsn: 'TCDSN',
-          chapter: 'Chapter'
-        },
-        radioViewDirective: {
-          title: 'Разрешително за използване на радиостанция',
-          valid: 'Валидно',
-          certNumber: '№',
-          issueDate: 'Дата на издаване',
-          validToDate: 'Срок на валидност',
-          aircraftRadioType: 'Тип на радиооборудването',
-          count: 'Брой',
-          producer: 'Производител',
-          model: 'Модел'
-        },
         smodDirective: {
-          valid: 'Валиден',
-          scode: 'S-mode code',
-          ltrInNumber: 'Тяхно писмо №',
-          ltrInDate: 'Тяхна дата',
-          ltrCaaNumber: 'ГВА писмо №',
-          ltrCaaDate: 'ГВА дата',
-          caaTo: 'ГВА писмо до',
-          caaJob: 'ГВА писмо длъжност',
-          caaToAddress: 'ГВА писмо адрес',
-          getScode: 'Генерирай S-код'
+          theirNumber: 'Тяхно писмо №',
+          theirDate: 'Тяхна дата',
+          caaNumber: 'ГВА писмо №',
+          caaDate: 'ГВА дата',
+          applicant: 'Заявител',
+          getScode: 'Генерирай S-код',
+          person: 'ФЛ',
+          organization: 'ЮЛ'
         },
         airworthinessDirective: {
           airworthinessCertificateType: 'Тип',
@@ -2987,7 +2983,7 @@
           cancel: 'Отказ',
           manSN: 'Сериен номер',
           model: 'Модел',
-          icao: 'ICAO код',
+          mark: 'Рег. знак',
           search: 'Търси',
           select: 'Избери',
           outputDate: 'Дата на производство',
@@ -3951,8 +3947,6 @@
         'root.aircrafts.view.regsFM.edit': 'Преглед на регистрация',
         'root.aircrafts.view.currentReg': 'Последна регистрация',
         'root.aircrafts.view.smods': 'S-code',
-        'root.aircrafts.view.smods.new': 'Нов S-code',
-        'root.aircrafts.view.smods.edit': 'Преглед на S-code',
         'root.aircrafts.view.airworthinessesFM': 'Летателни годности',
         'root.aircrafts.view.airworthinessesFM.new': 'Нова годност',
         'root.aircrafts.view.airworthinessesFM.edit': 'Преглед на годност',
@@ -4084,7 +4078,10 @@
         'root.personsReports': 'Справки в Персонал',
         'root.personsReports.documents': 'Документи',
         'root.personsReports.licences': 'Лицензи',
-        'root.personsReports.ratings': 'Квалификационни класове'
+        'root.personsReports.ratings': 'Квалификационни класове',
+        'root.sModeCodes': 'S-mode кодове',
+        'root.sModeCodes.new': 'Нов S-mode код',
+        'root.sModeCodes.edit': 'Редакция на S-mode код'
       }
     });
   }]);

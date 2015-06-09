@@ -27,6 +27,8 @@ INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUE
 INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(23,N'САО',N'airOperator',1);
 INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(24,N'СИАНО',N'airNavSvcProvider',1);
 INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(25,N'НСВНК и АСУВД',N'groundSvcOperator',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(26,N'S mode кодове',N'',1);
+INSERT INTO [Classifications]([ClassificationId],[Name],[Alias],[IsActive])VALUES(27,N'S mode кодове',N'sModeCode',1);
 SET IDENTITY_INSERT [Classifications] OFF
 GO
 

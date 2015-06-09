@@ -1,18 +1,19 @@
-﻿<sc-button name="createBtn" btn-sref="{ state: 'root.aircrafts.view.smods.new' }" text="aircrafts.smodSearch.newSmod" class="btn btn-sm btn-primary pull-left" icon="glyphicon-floppy-disk"></sc-button>
-<sc-datatable items="smods" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
+﻿<sc-datatable items="sModeCodes" filterable="true" pageable="true" sortable="true" dynamic-columns="true">
   <sc-column sortable="false" class="buttons-cell" has-content="true">
-    <sc-button name="editBtn" btn-sref="{ state: 'root.aircrafts.view.smods.edit', params: {ind: item.partIndex} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+    <sc-button name="editBtn" btn-sref="{ state: 'root.sModeCodes.edit', params: {id: item.sModeCodeLotId} }" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
   </sc-column>
-  <sc-column data="part.valid.name" title="aircrafts.smodSearch.valid">
+  <sc-column data="codeHex" title="aircrafts.smodSearch.codeHex">
   </sc-column>
-  <sc-column data="part.scode" title="aircrafts.smodSearch.scode">
+  <sc-column data="theirNumber" title="aircrafts.smodSearch.theirNumber">
   </sc-column>
-  <sc-column data="part.ltrInNumber" title="aircrafts.smodSearch.ltrInNumber">
+  <sc-column data="theirDate" title="aircrafts.smodSearch.theirDate" type="date">
   </sc-column>
-  <sc-column data="part.ltrInDate" title="aircrafts.smodSearch.ltrInDate" type="date">
+  <sc-column data="caaNumber" title="aircrafts.smodSearch.caaNumber">
   </sc-column>
-  <sc-column data="part.ltrCaaNumber" title="aircrafts.smodSearch.ltrCaaNumber">
+  <sc-column data="caaDate" title="aircrafts.smodSearch.caaDate" type="date">
   </sc-column>
-  <sc-column data="part.ltrCaaDate" title="aircrafts.smodSearch.ltrCaaDate" type="date">
+  <sc-column data="codeDecimal" title="aircrafts.smodSearch.codeDecimal">
+  </sc-column>
+  <sc-column data="codeBinary" title="aircrafts.smodSearch.codeHex">
   </sc-column>
 </sc-datatable>

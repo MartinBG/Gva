@@ -39,6 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac.Extras.Attributed">
+      <HintPath>..\packages\Autofac.Extras.Attributed.3.3.0\lib\net40\Autofac.Extras.Attributed.dll</HintPath>
+    </Reference>
     <Reference Include="CarlosAg.ExcelXmlWriter">
       <HintPath>..\packages\CarlosAgExcelXmlWriterLibrary.1.0.0\lib\net40\CarlosAg.ExcelXmlWriter.dll</HintPath>
     </Reference>
@@ -86,6 +89,8 @@
     <Compile Include="Blobs\BlobUploader.cs" />
     <Compile Include="Blobs\RateLimiter.cs" />
     <Compile Include="Sets\AircraftRadios\AicraftRadios.cs" />
+    <Compile Include="Sets\SModeCode.cs" />
+    <Compile Include="Sets\SModeCodeLotCreator.cs" />
     <Compile Include="Sets\Common\CommonUtils.cs" />
     <Compile Include="FmOrgMatcher.cs" />
     <Compile Include="Sets\AircraftApexLotCreator.cs" />

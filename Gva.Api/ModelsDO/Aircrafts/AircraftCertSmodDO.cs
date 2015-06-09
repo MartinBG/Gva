@@ -1,33 +1,38 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using Common.Api.Models;
+using Gva.Api.Models.Views.SModeCode;
 
 namespace Gva.Api.ModelsDO.Aircrafts
 {
     public class AircraftCertSmodDO
     {
-        [Required(ErrorMessage = "LtrInNumber is required.")]
-        public string LtrInNumber { get; set; }
+        public AircraftCertSmodDO(GvaViewSModeCode code)
+        {
+            int codeHexToDecimal = Convert.ToInt32(code.CodeHex, 16);
+            this.TheirDate = code.TheirDate;
+            this.TheirNumber = code.TheirNumber;
+            this.CaaDate = code.CaaDate;
+            this.CaaNumber = code.CaaNumber;
+            this.SModeCodeLotId = code.LotId;
+            this.CodeHex = code.CodeHex;
+            this.CodeDecimal = codeHexToDecimal;
+            this.CodeBinary = Convert.ToString(codeHexToDecimal, 2);
+        }
 
-        [Required(ErrorMessage = "LtrInDate is required.")]
-        public DateTime? LtrInDate { get; set; }
+        public int SModeCodeLotId { get; set; } 
 
-        [Required(ErrorMessage = "LtrCaaNumber is required.")]
-        public string LtrCaaNumber { get; set; }
+        public string TheirNumber { get; set; }
 
-        [Required(ErrorMessage = "ErrorMessage is required.")]
-        public DateTime? LtrCaaDate { get; set; }
+        public DateTime? TheirDate { get; set; }
 
-        public string CaaTo { get; set; }
+        public string CaaNumber { get; set; }
 
-        public string CaaJob { get; set; }
+        public DateTime? CaaDate { get; set; }
 
-        public string CaaToAddress { get; set; }
+        public string CodeHex { get; set; }
 
-        [Required(ErrorMessage = "Scode is required.")]
-        public string Scode { get; set; }
+        public int CodeDecimal { get; set; }
 
-        [Required(ErrorMessage = "Valid is required.")]
-        public NomValue Valid { get; set; }
+        public string CodeBinary { get; set; }
     }
 }

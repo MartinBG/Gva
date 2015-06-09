@@ -45,7 +45,8 @@
             registrations: 'Регистър ВС',
             appsSearch: 'Заявления',
             appsNew: 'Ново заявление',
-            invalidActNumbers: 'Невалидни дел. номера'
+            invalidActNumbers: 'Невалидни дел. номера',
+            sModeCodes: 'S-Mode Кодове'
           },
           airports: {
             title: 'ЛЛП',

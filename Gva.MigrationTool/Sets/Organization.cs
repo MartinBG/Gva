@@ -68,7 +68,7 @@ namespace Gva.MigrationTool.Sets
                 orgLotIdToOrgNom);
         }
 
-        public Tuple<Dictionary<string, int>, Dictionary<string, int>, Dictionary<int, JObject>> createOrganizationsFmLots(
+        public Tuple<Dictionary<string, int>, Dictionary<string, int>, Dictionary<int, JObject>, Dictionary<int, int>> createOrganizationsFmLots(
             Dictionary<string, Dictionary<string, NomValue>> noms,
             ConcurrentQueue<int> notCreatedFmOrgIds,
             ConcurrentDictionary<string, int> orgNamesEnToLotId,
@@ -102,10 +102,22 @@ namespace Gva.MigrationTool.Sets
             Console.WriteLine("Organization lessors fm lot creation time - {0}", timer2.Elapsed.TotalMinutes);
             timer2.Stop();
 
+            Stopwatch timer3 = new Stopwatch();
+            timer3.Start();
+            ConcurrentDictionary<int, int> orgOperatorIdToLotId = new ConcurrentDictionary<int, int>();
+
+            List<JObject> sModeCodeOperators = this.OrganizationFmLotCreatorFactory().Value.getSModeCodeOperators(orgNamesEnToLotId, noms);
+
+            this.OrganizationFmLotCreatorFactory().Value.StartCreatingSModeCodeOperators(noms, sModeCodeOperators, orgOperatorIdToLotId, orgNamesEnToLotId, orgLotIdToOrgNom, cts, ct);
+
+            Console.WriteLine("Organization sModeCodes Operators fm lot creation time - {0}", timer3.Elapsed.TotalMinutes);
+            timer3.Stop();
+
             return Tuple.Create(
                 orgNamesEnToLotId.ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
                 orgUinToLotId.ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
-                orgLotIdToOrgNom.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
+                orgLotIdToOrgNom.ToDictionary(kvp => kvp.Key, kvp => kvp.Value),
+                orgOperatorIdToLotId.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
         }
 
         public void migrateOrganizations(

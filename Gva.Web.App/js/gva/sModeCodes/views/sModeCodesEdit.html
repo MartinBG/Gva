@@ -1,0 +1,18 @@
+﻿<ng-form name="newPersonForm" sc-validate="{}" sc-form-readonly="!editMode">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="sModeCodes.editSModeCode.title"></strong>
+      <div class="pull-right">
+        <sc-button name="editBtn" btn-click="edit()" text="sModeCodes.editSModeCode.edit" class="btn btn-primary btn-xs" icon="glyphicon-edit" ng-show="!editMode">
+        </sc-button>
+        <sc-button name="saveBtn" btn-click="save()" text="sModeCodes.editSModeCode.save" class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk" ng-show="editMode">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="sModeCodes.editSModeCode.cancel" class="btn btn-default btn-xs" icon="glyphicon-ban-circle" ng-show="editMode">
+        </sc-button>
+      </div>
+    </div>
+    <div class="well-sm panel-body">
+      <gva-smode-code-data name="editSModeCodeForm" ng-model="sModeCode"></gva-smode-code-data>
+    </div>
+  </div>
+</ng-form>

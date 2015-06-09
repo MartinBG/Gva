@@ -64,7 +64,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertAirworthinessViewCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertNoise.html" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertNoiseView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRadio.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegDeregFM.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegFM.html" />
@@ -73,7 +72,6 @@
     <Content Include="js\gva\aircrafts\forms\aircraftCertRegViewCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertSmod.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftCertSmodCtrl.js" />
-    <Content Include="js\gva\aircrafts\forms\aircraftCertSmodView.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftData.html" />
     <Content Include="js\gva\aircrafts\forms\aircraftDataCtrl.js" />
     <Content Include="js\gva\aircrafts\forms\aircraftDocumentDebtFM.html" />
@@ -151,10 +149,6 @@
     <Content Include="js\gva\aircrafts\views\certRegsFM\regsSearchCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certRegsFM\regsView.html" />
     <Content Include="js\gva\aircrafts\views\certRegsFM\regsViewCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certSmods\smodsEdit.html" />
-    <Content Include="js\gva\aircrafts\views\certSmods\smodsEditCtrl.js" />
-    <Content Include="js\gva\aircrafts\views\certSmods\smodsNew.html" />
-    <Content Include="js\gva\aircrafts\views\certSmods\smodsNewCtrl.js" />
     <Content Include="js\gva\aircrafts\views\certSmods\smodsSearch.html" />
     <Content Include="js\gva\aircrafts\views\certSmods\smodsSearchCtrl.js" />
     <Content Include="js\gva\aircrafts\views\aircraftsRegistrationsSearch.html" />
@@ -829,6 +823,15 @@
     <Content Include="js\gva\persons\views\statuses\statusesNewCtrl.js" />
     <Content Include="js\gva\persons\views\statuses\statusesSearch.html" />
     <Content Include="js\gva\persons\views\statuses\statusesSearchCtrl.js" />
+    <Content Include="js\gva\sModeCodes\forms\sModeCodeData.html" />
+    <Content Include="js\gva\sModeCodes\forms\sModeCodeDataCtrl.js" />
+    <Content Include="js\gva\sModeCodes\resources\sModeCodes.js" />
+    <Content Include="js\gva\sModeCodes\views\sModeCodesEdit.html" />
+    <Content Include="js\gva\sModeCodes\views\sModeCodesEditCtrl.js" />
+    <Content Include="js\gva\sModeCodes\views\sModeCodesNew.html" />
+    <Content Include="js\gva\sModeCodes\views\sModeCodesNewCtrl.js" />
+    <Content Include="js\gva\sModeCodes\views\sModeCodesSearch.html" />
+    <Content Include="js\gva\sModeCodes\views\sModeCodesSearchCtrl.js" />
     <Content Include="schema\aircrafts\aircraft-cert-airworthinesses.sample.js" />
     <Content Include="schema\aircrafts\aircraft-cert-airworthinessesfm.sample.js" />
     <Content Include="schema\aircrafts\aircraft-cert-marks.sample.js" />

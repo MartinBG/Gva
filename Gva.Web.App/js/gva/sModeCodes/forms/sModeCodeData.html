@@ -1,0 +1,22 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row">
+    <sc-field type="nomenclature" ng-model="model.type" alias="'sModeCodeTypes'" ng-required="true" ng-readonly="!isNew" l10n-text="sModeCodes.sModeCodeDataDirective.codeType" class="col-sm-4 col-md-3"></sc-field>
+    <div class="col-sm-2" style="margin:20px 0px" ng-if="model.type.alias === 'aircraft'">
+      <sc-button ng-if="!model.aircraftId && !form.$readonly" btn-click="connectToAircraftSModeCode()" text="sModeCodes.sModeCodeDataDirective.connectToAircraft" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button> 
+      <sc-button ng-if="model.aircraftId" btn-click="viewAircraft()" text="sModeCodes.sModeCodeDataDirective.viewAircraft" class="btn btn-xs" icon="glyphicon-plane"></sc-button>
+    </div>
+  </div>
+  <div class="row">
+    <sc-field type="text" ng-model="model.codeHex" ng-required="true"  ng-readonly="true" l10n-text="sModeCodes.sModeCodeDataDirective.codeHex" class="col-sm-6 col-md-3"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="text" ng-model="model.note" l10n-text="sModeCodes.sModeCodeDataDirective.note" class="col-sm-6 col-md-3"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="sModeCodes.sModeCodeDataDirective.valid" class="col-sm-2"></sc-field>
+  </div>
+
+  <div ng-if="model.type.alias === 'aircraft' && model.aircraftId">
+    <gva-aircraft-cert-smod name="aircraftCertSmodForm" ng-model="model"></gva-aircraft-cert-smod>
+  </div>
+</ng-form>

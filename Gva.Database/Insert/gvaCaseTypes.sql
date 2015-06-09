@@ -23,5 +23,6 @@ VALUES
     (17             , N'ДАО'            , N'airNavSvcProvider',           0,          1,(select LotSetId from LotSets where Alias = N'Organization'), (select ClassificationId from Classifications where Alias = N'airNavSvcProvider')),
     (18             , N'ВС'             , N'aircraft'         ,           1,          1,(select LotSetId from LotSets where Alias = N'Aircraft'    ), (select ClassificationId from Classifications where Alias = N'aircraft'         )),
     (19             , N'Летище'         , N'airport'          ,           1,          1,(select LotSetId from LotSets where Alias = N'Airport'     ), (select ClassificationId from Classifications where Alias = N'airport'          )),
-    (20             , N'Съоръжение'     , N'equipment'        ,           1,          1,(select LotSetId from LotSets where Alias = N'Equipment'   ), (select ClassificationId from Classifications where Alias = N'equipment'        ))
+    (20             , N'Съоръжение'     , N'equipment'        ,           1,          1,(select LotSetId from LotSets where Alias = N'Equipment'   ), (select ClassificationId from Classifications where Alias = N'equipment'        )),
+    (21             , N'S Mode Код'     , N'sModeCode'        ,           1,          1,(select LotSetId from LotSets where Alias = N'SModeCode'   ), (select ClassificationId from Classifications where Alias = N'sModeCode'        ))
 GO

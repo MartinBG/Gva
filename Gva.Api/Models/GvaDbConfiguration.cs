@@ -6,6 +6,7 @@ using Gva.Api.Models.Views.Airport;
 using Gva.Api.Models.Views.Equipment;
 using Gva.Api.Models.Views.Organization;
 using Gva.Api.Models.Views.Person;
+using Gva.Api.Models.Views.SModeCode;
 
 namespace Gva.Api.Models
 {
@@ -61,6 +62,7 @@ namespace Gva.Api.Models
             modelBuilder.Configurations.Add(new GvaExSystExamineeMap());
             modelBuilder.Configurations.Add(new GvaExSystQualificationMap());
             modelBuilder.Configurations.Add(new GvaExSystExamMap());
+            modelBuilder.Configurations.Add(new GvaViewSModeCodeMap());
         }
     }
 }
