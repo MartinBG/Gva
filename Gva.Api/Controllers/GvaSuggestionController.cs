@@ -15,7 +15,7 @@ namespace Gva.Api.Controllers
 
         public GvaSuggestionController(
             IInventoryRepository inventoryRepository,
-            INomRepository nomRepositor,
+            INomRepository nomRepository,
             IPersonDocumentRepository personDocumentRepository)
         {
             this.inventoryRepository = inventoryRepository;
