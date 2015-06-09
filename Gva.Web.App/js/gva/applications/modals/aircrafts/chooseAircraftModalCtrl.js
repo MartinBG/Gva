@@ -13,7 +13,7 @@
     $scope.filters = {
       manSN: null,
       model: null,
-      icao: null
+      mark: null
     };
 
     $scope.search = function () {

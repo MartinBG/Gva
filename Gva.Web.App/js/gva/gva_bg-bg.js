@@ -2983,7 +2983,7 @@
           cancel: 'Отказ',
           manSN: 'Сериен номер',
           model: 'Модел',
-          icao: 'ICAO код',
+          mark: 'Рег. знак',
           search: 'Търси',
           select: 'Избери',
           outputDate: 'Дата на производство',
