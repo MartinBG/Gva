@@ -8,17 +8,13 @@
     PersonsReports,
     docs
   ) {
-    var itemsPerPage = $stateParams.limit;
-
     $scope.filters = {
       roleId: null,
       fromDate: null,
       toDate: null,
       typeId: null,
       lin: null,
-      itemsPerPage: itemsPerPage ? 
-        {id: $stateParams.limit, text: $stateParams.limit} :
-        {id: 10, text: '10'}
+      limit: 10
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -32,8 +28,7 @@
 
     $scope.getDocuments = function (page) {
       var params = {set: $stateParams.set};
-      var pageSize = $scope.filters.itemsPerPage.id;
-
+      var pageSize = $scope.filters.limit || 10;
       _.assign(params, $scope.filters);
       _.assign(params, {
         offset: (page - 1) * pageSize,
@@ -56,8 +51,7 @@
         limitationId: $scope.filters.limitationId,
         docNumber: $scope.filters.docNumber,
         publisher: $scope.filters.publisher,
-        limit: $scope.filters.itemsPerPage ?
-          $scope.filters.itemsPerPage.id : 10
+        limit: $scope.filters.limit || 10
       });
     };
   }

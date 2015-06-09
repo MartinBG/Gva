@@ -8,8 +8,7 @@
     <sc-filter type="date" name="toDatePeriodFrom" class="col-sm-2" removable="false" label="persons.reportDocuments.toDatePeriodFrom"></sc-filter>
     <sc-filter type="date" name="toDatePeriodTo" class="col-sm-2" removable="false" label="persons.reportDocuments.toDatePeriodTo"></sc-filter>
     <sc-filter type="nomenclature" name="limitationId" class="col-sm-3" removable="true" mode="id" alias="limitations66" label="persons.reportLicences.limitations"></sc-filter>
-    <sc-filter type="select" name="itemsPerPage" class="col-md-1 col-sm-2" removable="false" label="persons.reportLicences.itemsPerPage"
-          options="{ data: [{id: 10, text: '10'},{id: 50, text: '50'},{id: 100, text: '100'},{id: 200, text: '200'},{id: 300, text: '300'}], allowClear: false, placeholder: ' ' }"></sc-filter>
+    <sc-filter type="int" name="limit" class="col-sm-2" removable="false" label="persons.reportLicences.itemsPerPage"></sc-filter>
     <sc-search-button action="search()" text="persons.reportLicences.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
     <sc-search-button action="clear"></sc-search-button>
     <sc-search-button action="add"></sc-search-button>
@@ -17,7 +16,7 @@
   </sc-search>
 
   <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/licences?limit={{licencesCount}}&offset=0&limitationId={{filters.limitationId}}&lin={{filters.lin}}&licenceTypeId={{filters.licenceTypeId}}&licenceActionId={{filters.licenceActionId}}&fromDatePeriodFrom={{filters.fromDatePeriodFrom}}&fromDatePeriodTo={{filters.fromDatePeriodTo}}&toDatePeriodFrom={{filters.toDatePeriodFrom}}&toDatePeriodTo={{filters.toDatePeriodTo}}" target="_blank" sc-access-token text="persons.reportLicences.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
-  <sc-ajaxdatatable items="docs" items-count="licencesCount" page-size="{{filters.itemsPerPage.id}}" fetch-fn="getLicences" set-prop="licences" count-prop="licencesCount" dynamic-columns="false" filterable="false">
+  <sc-ajaxdatatable items="docs" items-count="licencesCount" page-size="{{filters.limit}}" fetch-fn="getLicences" set-prop="licences" count-prop="licencesCount" dynamic-columns="false" filterable="false">
     <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.lotId }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
     </sc-ajaxcolumn>
