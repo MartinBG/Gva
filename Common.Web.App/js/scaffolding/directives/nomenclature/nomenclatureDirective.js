@@ -11,6 +11,7 @@
     $parse,
     $exceptionHandler,
     $interpolate,
+    $window,
     Nomenclatures,
     scNomenclatureConfig
   ) {
@@ -118,6 +119,11 @@
 
           resultPromise
             .then(function (result) {
+              // check to see if the element was detached while we were waiting for the response
+              if (element.closest($window.document.documentElement).length === 0) {
+                return;
+              }
+
               if (nomObjFunc && nomObjFunc.assign) {
                 nomObjFunc.assign(scope.$parent, result);
               }
@@ -184,6 +190,7 @@
     '$parse',
     '$exceptionHandler',
     '$interpolate',
+    '$window',
     'Nomenclatures',
     'scNomenclatureConfig'
   ];
