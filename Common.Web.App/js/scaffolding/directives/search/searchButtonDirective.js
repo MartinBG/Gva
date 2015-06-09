@@ -11,6 +11,8 @@
 
       if (tAttrs.action === 'add') {
         tElement.children('button, sc-button').remove();
+      } else if (tAttrs.action === 'saveFilters') {
+        tElement.children('button, sc-button').remove();
       } else {
         tElement.children('div.btn-group').remove();
       }
@@ -48,6 +50,8 @@
           });
           return scSearch.defaultAction($scope.$parent);
         };
+      } else if ($scope.action === 'saveFilters') {
+        $scope.saveFiltersSet = scSearch.saveFiltersSet;
       } else {
         $scope.text = l10n.get(attrs.text);
 

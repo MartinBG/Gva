@@ -3,4 +3,12 @@
     <div class="btns-block labeless pull-right {{btnClasses}}">
     </div>
   </div>
+  <div style="margin-top:10px">
+    <span ng-repeat="set in savedFiltersSets">
+      <span sc-click="removeFiltersSet(set)"><i class="fa fa-times"></i></span>
+      <a sc-click="setFiltersData(set.data)">
+        {{ set.name }}
+      </a>
+    </span>
+  </div>
 </form>
