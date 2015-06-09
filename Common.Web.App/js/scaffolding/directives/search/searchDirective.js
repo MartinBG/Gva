@@ -5,7 +5,7 @@
   'use strict';
 
   function SearchDirective($timeout, $parse) {
-    function SearchController ($scope) {
+    function SearchController ($scope, $state, $window, scMessage) {
       var filters = {},
           //an object used as the special value of the watch expression
           //when the watched property does not exist on the object
@@ -17,6 +17,39 @@
 
       this.registerFilter = function (name, filterScope) {
         filters[name] = filterScope;
+      };
+
+      if ($window.localStorage.getItem($state.current.name)) {
+        $scope.savedFiltersSets = JSON.parse($window.localStorage.getItem($state.current.name));
+      } else {
+        $scope.savedFiltersSets = [];
+      }
+
+      this.saveFiltersSet = function (name) {
+        $scope.savedFiltersSets.push({
+          name: name,
+          data: $scope.selectedFilters
+        });
+        $window.localStorage.setItem(
+          $state.current.name,
+          JSON.stringify($scope.savedFiltersSets));
+      };
+
+      $scope.setFiltersData = function (data) {
+        _.assign($scope.selectedFilters, data);
+        $scope.defaultAction($scope.$parent);
+      };
+
+      $scope.removeFiltersSet = function (set) {
+        return scMessage('scaffolding.scSearch.confirmDelete')
+          .then(function (result) {
+            if (result === 'OK') {
+              $scope.savedFiltersSets = _.without($scope.savedFiltersSets, set);
+              $window.localStorage.setItem(
+                $state.current.name,
+                JSON.stringify($scope.savedFiltersSets));
+            }
+          });
       };
 
       this.initialize = function () {
@@ -106,7 +139,7 @@
         btnClasses: '@',
         defaultAction: '&'
       },
-      controller: ['$scope', SearchController],
+      controller: ['$scope', '$state', '$window', 'scMessage', SearchController],
       compile: SearchCompile
     };
   }

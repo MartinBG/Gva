@@ -43,7 +43,11 @@
           cancelButton: 'Отказ'
         },
         scSearchButton: {
-          clear: 'Изчисти'
+          clear: 'Изчисти',
+          filtersSetName: 'Име на групата филтри'
+        },
+        scSearch: {
+          confirmDelete: 'Сигурни ли сте, че искате да изтриете данните?'
         }
       }
     });
