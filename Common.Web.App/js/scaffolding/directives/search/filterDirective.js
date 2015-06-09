@@ -4,7 +4,7 @@
 (function (angular) {
   'use strict';
 
-  function FilterDirective(l10n) {
+  function FilterDirective(l10n, $parse) {
     function FilterCompile(tElement, tAttrs) {
       var type = tAttrs.type,
           options = tAttrs.options,
@@ -35,10 +35,12 @@
           nomObjHtml = nomObj ? ' nom-obj="' + nomObj + '"' : '',
           formatOptions = tAttrs.formatOptions ?
             ' format-options="' + tAttrs.formatOptions + '"' : '',
+          params = tAttrs.params ? ' params="' + tAttrs.params + '"' : '',
           multipleHtml = multiple ? ' multiple="' + multiple + '"' : '';
 
         dirHtml = '<sc-nomenclature ng-model="model" alias="\'' + alias +
-          '\'" load="' + load + '" ' + modeHtml + nomObjHtml + multipleHtml + formatOptions + '>' +
+          '\'" load="' + load + '" ' + modeHtml + nomObjHtml + multipleHtml +
+          formatOptions + params + '>' +
           '</sc-nomenclature>';
 
         tElement.append(dirHtml);
@@ -55,6 +57,8 @@
       var name = attrs.name,
           label = attrs.label,
           selectedFilters = scSearch.selectedFilters;
+
+      $scope.removable = $parse(attrs.removable)($scope);
 
       $scope.model = null;
       $scope.label = l10n.get(label);
@@ -74,15 +78,13 @@
       restrict: 'E',
       require: '^scSearch',
       replace: true,
-      scope: {
-        removable: '&'
-      },
+      scope: true,
       templateUrl: 'js/scaffolding/directives/search/filterDirective.html',
       compile: FilterCompile
     };
   }
 
-  FilterDirective.$inject = ['l10n'];
+  FilterDirective.$inject = ['l10n', '$parse'];
 
   angular.module('scaffolding').directive('scFilter', FilterDirective);
 }(angular));
