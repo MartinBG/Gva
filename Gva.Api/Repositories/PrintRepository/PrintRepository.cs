@@ -183,8 +183,6 @@ namespace Gva.Api.Repositories.PrintRepository
 
             JObject json = JObject.FromObject(data, jsonSerializer);
 
-            
-
             var memoryStream = new MemoryStream();
             memoryStream.Write(wordTemplate.Template, 0, wordTemplate.Template.Length);
 

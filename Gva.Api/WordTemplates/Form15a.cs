@@ -18,7 +18,7 @@ namespace Gva.Api.WordTemplates
         {
             get
             {
-                return "15a";
+                return "15а";
             }
         }
 
