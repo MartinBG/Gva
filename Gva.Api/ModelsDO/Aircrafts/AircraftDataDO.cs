@@ -49,7 +49,5 @@ namespace Gva.Api.ModelsDO.Aircrafts
         public int? MaxMassT { get; set; }
 
         public int? MaxMassL { get; set; }
-
-        public NomValue AircraftType { get; set; }
     }
 }

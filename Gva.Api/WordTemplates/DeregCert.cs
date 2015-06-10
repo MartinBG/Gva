@@ -75,7 +75,6 @@ namespace Gva.Api.WordTemplates
                 {
                     DOCUMENT_NUMBER = registration.CertNumber, 
                     PRODUCER_ALT = aircraftData.AircraftProducer != null ? aircraftData.AircraftProducer.NameAlt : null,
-                    AIRCRAFT_TYPE = aircraftData.AircraftType != null ? aircraftData.AircraftType.NameAlt : null,
                     REG_MARK = registration != null ? registration.RegMark : null,
                     MSN = aircraftData.ManSN,
                     OWNER_ADDRESS = ownerData != null ? ownerData.Item3 : null,

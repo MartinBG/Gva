@@ -804,8 +804,7 @@
           lateral: 'Странично',
           overflight: 'Полет над',
           takeoff: 'Излитане',
-          noiseData: 'Удостоверение за шум',
-          aircraftType: 'Type of Aircraft'
+          noiseData: 'Удостоверение за шум'
         },
         newWizzardDirective: {
           aircraftProducer: 'Производител',
