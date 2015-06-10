@@ -48,9 +48,8 @@
 
   ChooseDataGeneratorModalCtrl.$resolve = {
     dataGenerators: [
-      'scModalParams',
       'Nomenclatures',
-      function (scModalParams, Nomenclatures) {
+      function (Nomenclatures) {
         return Nomenclatures.query({
           alias: 'dataGenerators'
         }).$promise;
