@@ -5,9 +5,32 @@
     $scope,
     $state,
     $stateParams,
+    l10n,
     PersonsReports,
     docs
   ) {
+    $scope.columnsOptions = [{
+        id: 'lin', text: l10n.get('persons.reportRatings.lin')
+      }, {
+        id: 'fromDate', text: l10n.get('persons.reportRatings.fromDate')
+      }, {
+        id: 'toDate', text: l10n.get('persons.reportRatings.toDate')
+      }, {
+        id: 'firstIssueDate', text: l10n.get('persons.reportRatings.firstIssueDate')
+      }, {
+        id: 'personRatingLevel', text: l10n.get('persons.reportRatings.personRatingLevel')
+      }, {
+        id: 'ratingTypes', text: l10n.get('persons.reportRatings.ratingTypes')
+      }, {
+        id: 'locationIndicator', text: l10n.get('persons.reportRatings.locationIndicator')
+      }, {
+        id: 'sector', text: l10n.get('persons.reportRatings.sector')
+      }, {
+        id: 'authorizationCode', text: l10n.get('persons.reportRatings.authorizationCode')
+      }, {
+        id: 'limitations', text: l10n.get('persons.reportRatings.limitations')
+      }];
+   
     $scope.filters = {
       fromDate: null,
       toDate: null,
@@ -48,7 +71,8 @@
         aircraftTypeCategoryId: $scope.filters.aircraftTypeCategoryId,
         lin: $scope.filters.lin,
         limitationId: $scope.filters.limitationId,
-        limit: $scope.filters.limit || 10
+        limit: $scope.filters.limit || 10,
+        sortBy: $scope.filters.sortBy ? $scope.filters.sortBy.id : null
       });
     };
   }
@@ -57,6 +81,7 @@
     '$scope',
     '$state',
     '$stateParams',
+    'l10n',
     'PersonsReports',
     'docs'
   ];

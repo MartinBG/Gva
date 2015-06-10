@@ -37,6 +37,7 @@ namespace Gva.Api.Controllers.Reports
             string docNumber = null,
             string publisher = null,
             int? medClassId = null,
+            string sortBy = null,
             int offset = 0,
             int limit = 10)
         {
@@ -55,6 +56,7 @@ namespace Gva.Api.Controllers.Reports
                     docNumber: docNumber,
                     publisher: publisher,
                     medClassId: medClassId,
+                    sortBy: sortBy,
                     limit: limit,
                     offset: offset);
 
@@ -73,6 +75,7 @@ namespace Gva.Api.Controllers.Reports
             int? licenceTypeId = null,
             int? licenceActionId = null,
             int? limitationId = null,
+            string sortBy = null,
             int offset = 0,
             int limit = 10)
         {
@@ -88,6 +91,7 @@ namespace Gva.Api.Controllers.Reports
                     licenceTypeId: licenceTypeId,
                     lin: lin,
                     limitationId: limitationId,
+                    sortBy: sortBy,
                     limit: limit,
                     offset: offset);
 
@@ -106,6 +110,7 @@ namespace Gva.Api.Controllers.Reports
             int? ratingClassId = null,
             int? authorizationId = null,
             int? limitationId = null,
+            string sortBy = null,
             int offset = 0,
             int limit = 10)
         {
@@ -121,6 +126,7 @@ namespace Gva.Api.Controllers.Reports
                     authorizationId: authorizationId,
                     lin: lin,
                     limitationId: limitationId,
+                    sortBy: sortBy,
                     limit: limit,
                     offset: offset);
 

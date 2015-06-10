@@ -28,6 +28,7 @@ namespace Gva.Api.Repositories.Reports
             string docNumber = null,
             string publisher = null,
             int? medClassId = null,
+            string sortBy = null,
             int offset = 0,
             int limit = 10)
         {
@@ -44,6 +45,7 @@ namespace Gva.Api.Repositories.Reports
                 docNumber: docNumber,
                 publisher: publisher,
                 medClassId: medClassId,
+                sortBy: sortBy,
                 offset: offset,
                 limit: limit);
 
@@ -102,6 +104,7 @@ namespace Gva.Api.Repositories.Reports
                     int? licenceTypeId = null,
                     int? lin = null,
                     int? limitationId = null,
+                    string sortBy = null,
                     int offset = 0,
                     int limit = 10)
         {
@@ -115,6 +118,7 @@ namespace Gva.Api.Repositories.Reports
                     licenceTypeId: licenceTypeId,
                     lin: lin,
                     limitationId: limitationId,
+                    sortBy: sortBy,
                     offset: offset,
                     limit: limit);
 
@@ -173,6 +177,7 @@ namespace Gva.Api.Repositories.Reports
             int? aircraftTypeCategoryId = null,
             int? lin = null,
             int? limitationId = null,
+            string sortBy = null,
             int offset = 0,
             int limit = 10)
         {
@@ -186,6 +191,7 @@ namespace Gva.Api.Repositories.Reports
                         authorizationId: authorizationId,
                         lin: lin,
                         limitationId: limitationId,
+                        sortBy: sortBy,
                         limit: limit,
                         offset: offset);
 

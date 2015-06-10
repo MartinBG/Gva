@@ -1453,7 +1453,8 @@
           'export': 'Експорт',
           limitations: 'Ограничения',
           itemsPerPage: 'Бр. на стр.',
-          medClass: 'Клас (на медицинско)'
+          medClass: 'Клас (на медицинско)',
+          sortBy: 'Сортирай по'
         },
         reportLicences: {
           names: 'Име',
@@ -1473,7 +1474,8 @@
           search: 'Търси',
           'export': 'Експорт',
           limitations: 'Ограничения',
-          itemsPerPage: 'Бр. на стр.'
+          itemsPerPage: 'Бр. на стр.',
+          sortBy: 'Сортирай по'
         },
         reportRatings: {
           lin: 'ЛИН',
@@ -1493,7 +1495,13 @@
           search: 'Търси',
           'export': 'Експорт',
           limitations: 'Ограничения',
-          itemsPerPage: 'Бр. на стр.'
+          itemsPerPage: 'Бр. на стр.',
+          sortBy: 'Сортирай по',
+          personRatingLevel: 'Степен',
+          ratingTypes: 'Тип ВС',
+          locationIndicator: 'Индикатор на местопол.',
+          authorizationCode: 'Разрешение',
+          sector: 'Сектор'
         },
         qlfStateDirective: {
           title: 'Създаване на състояние относно придибиване на квалификация',

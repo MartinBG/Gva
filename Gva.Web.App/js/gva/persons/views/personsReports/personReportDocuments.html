@@ -12,13 +12,19 @@
     <sc-filter type="text" name="publisher" class="col-sm-2" removable="true" label="persons.reportDocuments.publisher"></sc-filter>
     <sc-filter type="nomenclature" name="medClassId" class="col-sm-3" removable="true" alias="medClasses" mode="id" label="persons.reportDocuments.medClass"></sc-filter>
     <sc-filter type="int" name="limit" class="col-sm-2" removable="false" label="persons.reportDocuments.itemsPerPage"></sc-filter>
+    <sc-filter type="select" name="sortBy" class="col-md-3 col-sm-4" removable="true" label="persons.reportDocuments.sortBy"
+       options="{
+        allowClear: true,
+        placeholder: ' ',
+        data: columnsOptions
+      }"></sc-filter>
     <sc-search-button action="search()" text="persons.reportDocuments.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
     <sc-search-button action="clear"></sc-search-button>
     <sc-search-button action="add"></sc-search-button>
     <sc-search-button action="saveFilters"></sc-search-button>
   </sc-search>
 
-  <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/documents?limit={{documentsCount}}&offset=0&medClassId={{filters.medClassId}}&limitationId={{filters.limitationId}}&lin={{filters.lin}}&roleId={{filters.roleId}}&typeId={{filters.typeId}}&fromDatePeriodFrom={{filters.fromDatePeriodFrom}}&fromDatePeriodTo={{filters.fromDatePeriodTo}}&toDatePeriodFrom={{filters.toDatePeriodFrom}}&toDatePeriodTo={{filters.toDatePeriodTo}}" target="_blank" sc-access-token text="persons.reportDocuments.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
+  <sc-link-button name="exportBtn" ng-href="api/reports/persons/excelExport/documents?sortBy={{filters.sortBy.id}}&limit={{documentsCount}}&offset=0&medClassId={{filters.medClassId}}&limitationId={{filters.limitationId}}&lin={{filters.lin}}&roleId={{filters.roleId}}&typeId={{filters.typeId}}&fromDatePeriodFrom={{filters.fromDatePeriodFrom}}&fromDatePeriodTo={{filters.fromDatePeriodTo}}&toDatePeriodFrom={{filters.toDatePeriodFrom}}&toDatePeriodTo={{filters.toDatePeriodTo}}" target="_blank" sc-access-token text="persons.reportDocuments.export" class="btn btn-primary btn-sm" icon="glyphicon-save"></sc-link-button>
   <sc-ajaxdatatable items="docs" items-count="documentsCount" fetch-fn="getDocuments" page-size="{{filters.limit}}" set-prop="documents" count-prop="documentsCount" dynamic-columns="false" filterable="false">
     <sc-ajaxcolumn sortable="false" class="buttons-cell" has-content="true">
       <sc-button name="viewButton" btn-sref="{state: 'root.persons.view.licences.search', params: { id: item.lotId }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>

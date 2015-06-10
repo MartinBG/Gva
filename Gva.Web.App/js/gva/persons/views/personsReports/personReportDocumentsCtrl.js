@@ -5,16 +5,40 @@
     $scope,
     $state,
     $stateParams,
+    l10n,
     PersonsReports,
     docs
   ) {
+    $scope.columnsOptions = [{
+        id: 'lin', text: l10n.get('persons.reportDocuments.lin')
+      }, {
+        id: 'role', text: l10n.get('persons.reportDocuments.role')
+      }, {
+        id: 'type', text: l10n.get('persons.reportDocuments.type')
+      }, {
+        id: 'number', text: l10n.get('persons.reportDocuments.docNumber')
+      }, {
+        id: 'publisher', text: l10n.get('persons.reportDocuments.publisher')
+      }, {
+        id: 'limitations', text: l10n.get('persons.reportDocuments.limitations')
+      }, {
+        id: 'valid', text: l10n.get('persons.reportDocuments.valid')
+      }, {
+        id: 'fromDate', text: l10n.get('persons.reportDocuments.fromDate')
+      }, {
+        id: 'toDate', text: l10n.get('persons.reportDocuments.toDate')
+      }, {
+        id: 'medClass', text: l10n.get('persons.reportDocuments.medClass')
+      }];
+
     $scope.filters = {
       roleId: null,
       fromDate: null,
       toDate: null,
       typeId: null,
       lin: null,
-      limit: 10
+      limit: 10,
+      sortBy: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -22,6 +46,7 @@
         $scope.filters[param] = value;
       }
     });
+
 
     $scope.docs = docs;
     $scope.documentsCount = docs.documentsCount;
@@ -51,7 +76,8 @@
         limitationId: $scope.filters.limitationId,
         docNumber: $scope.filters.docNumber,
         publisher: $scope.filters.publisher,
-        limit: $scope.filters.limit || 10
+        limit: $scope.filters.limit || 10,
+        sortBy: $scope.filters.sortBy ? $scope.filters.sortBy.id : null
       });
     };
   }
@@ -60,6 +86,7 @@
     '$scope',
     '$state',
     '$stateParams',
+    'l10n',
     'PersonsReports',
     'docs'
   ];

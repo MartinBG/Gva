@@ -31,10 +31,25 @@ namespace Gva.Api.Repositories.Reports
             string docNumber = null,
             string publisher = null,
             int? medClassId = null,
+            string sortBy = null,
             int offset = 0,
             int limit = 10)
         {
             string limName = limitationId.HasValue ? this.nomRepository.GetNomValue(limitationId.Value).Name : null;
+            Dictionary<string, string> sortByToTableColumn = new Dictionary<string, string>()
+            {
+                {"lin", "p.Lin"},
+                {"role", "nv2.Name"},
+                {"type", "nv1.Name"},
+                {"valid", "d.Valid"},
+                {"publisher", "d.Publisher"},
+                {"number", "d.DocumentNumber"},
+                {"medClass", "nv3.Name"},
+                {"fromDate", "d.FromDate"},
+                {"toDate", "d.ToDate"},
+                {"limitations", "d.Limitations"},
+            };
+            string orderBy = !string.IsNullOrEmpty(sortBy) && sortByToTableColumn.ContainsKey(sortBy) ? sortByToTableColumn[sortBy] : "d.FromDate";
 
             var queryResult = conn.CreateStoreCommand(
                     @"SELECT COUNT(*) OVER() as allResultsCount,
@@ -57,7 +72,7 @@ namespace Gva.Api.Repositories.Reports
                         LEFT JOIN NomValues nv2 ON nv2.NomValueId = d.RoleId
                         LEFT JOIN NomValues nv3 ON nv3.NomValueId = d.MedClassId
                     WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10}
-                    ORDER BY d.FromDate DESC
+                    ORDER BY " + orderBy + @" DESC
                     OFFSET {11} ROWS FETCH NEXT {12} ROWS ONLY",
                     new DbClause("and d.FromDate >= {0}", fromDatePeriodFrom),
                     new DbClause("and d.FromDate <= {0}", fromDatePeriodTo),
@@ -107,10 +122,26 @@ namespace Gva.Api.Repositories.Reports
             int? licenceTypeId = null,
             int? licenceActionId = null,
             int? limitationId = null,
+            string sortBy = null,
             int offset = 0,
             int limit = 10)
         {
             string limName = limitationId.HasValue ? this.nomRepository.GetNomValue(limitationId.Value).Name : null;
+            Dictionary<string, string> sortByToTableColumn = new Dictionary<string, string>()
+            {
+                {"lin", "p.Lin"},
+                {"uin", "p.Uin"},
+                {"licenceTypeName", "lt.Name"},
+                {"licenceCode", "l.PublisherCode + ' ' + l.LicenceTypeCaCode + ' ' + RIGHT('00000' + CAST(l.LicenceNumber AS NVARCHAR(5)),5)"},
+                {"names", "p.Names"},
+                {"fromDate", "le.DateValidFrom"},
+                {"toDate", "le.DateValidTo"},
+                {"firstIssueDate", "le.FirstDocDateValidFrom"},
+                {"licenceAction", "d.ToDate"},
+                {"limitations", "le.Limitations"},
+                {"stampNumber", "le.StampNumber"}
+            };
+            string orderBy = !string.IsNullOrEmpty(sortBy) && sortByToTableColumn.ContainsKey(sortBy) ? sortByToTableColumn[sortBy] : "le.DateValidFrom";
 
             var queryResult = conn.CreateStoreCommand(
                         @"SELECT
@@ -134,7 +165,7 @@ namespace Gva.Api.Repositories.Reports
                          INNER JOIN NomValues lt ON lt.NomValueId = l.LicenceTypeId
                          INNER JOIN NomValues la ON la.NomValueId = le.LicenceActionId
                          WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7}
-                         ORDER BY le.DateValidFrom DESC 
+                         ORDER BY " + orderBy + @" DESC 
                          OFFSET {8} ROWS FETCH NEXT {9} ROWS ONLY",
                         new DbClause("and le.DateValidFrom >= {0}", fromDatePeriodFrom),
                         new DbClause("and le.DateValidFrom <= {0}", fromDatePeriodTo),
@@ -183,10 +214,26 @@ namespace Gva.Api.Repositories.Reports
             int? aircraftTypeCategoryId = null,
             int? lin = null,
             int? limitationId = null,
+            string sortBy = null,
             int offset = 0,
             int limit = 10)
         {
             string limCode = limitationId.HasValue? this.nomRepository.GetNomValue(limitationId.Value).Code : null;
+            Dictionary<string, string> sortByToTableColumn = new Dictionary<string, string>()
+            {
+                {"lin", "p.Lin"},
+                {"fromDate", "re.DocDateValidFrom"},
+                {"toDate", "re.DocDateValidTo"},
+                {"firstIssueDate", "re2.DocDateValidFrom"},
+                {"personRatingLevel", "rl.Code"},
+                {"ratingTypes", "r.RatingTypes"},
+                {"locationIndicator", "li.Code"},
+                {"sector", "r.Sector"},
+                {"limitations", "re.Limitations"},
+                {"authorizationCode", "a.Code"},
+            };
+
+            string orderBy = !string.IsNullOrEmpty(sortBy) && sortByToTableColumn.ContainsKey(sortBy) ? sortByToTableColumn[sortBy] : "re.DocDateValidFrom";
 
             var queryResult = conn.CreateStoreCommand(@"
                          SELECT 
@@ -232,7 +279,7 @@ namespace Gva.Api.Repositories.Reports
                         LEFT JOIN NomValues li ON li.NomValueId = r.LocationIndicatorId
                         LEFT JOIN NomValues rl ON rl.NomValueId = r.RatingLevelId
                         WHERE 1=1 {0} {1} {2} {3} {4} {5} {6} {7} {8}
-                        ORDER BY re.DocDateValidFrom DESC
+                        ORDER BY " + orderBy + @" DESC
                         OFFSET {9} ROWS FETCH NEXT {10} ROWS ONLY",
                         new DbClause("and re.DocDateValidFrom >= {0}", fromDatePeriodFrom),
                         new DbClause("and re.DocDateValidFrom <= {0}", fromDatePeriodTo),

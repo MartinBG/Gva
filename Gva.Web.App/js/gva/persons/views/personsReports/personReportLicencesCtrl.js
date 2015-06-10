@@ -5,9 +5,34 @@
     $scope,
     $state,
     $stateParams,
+    l10n,
     PersonsReports,
     docs
   ) {
+    $scope.columnsOptions = [{
+        id: 'lin', text: l10n.get('persons.reportLicences.lin')
+      }, {
+        id: 'uin', text: l10n.get('persons.reportLicences.uin')
+      }, {
+        id: 'licenceTypeName', text: l10n.get('persons.reportLicences.licenceTypeName')
+      }, {
+        id: 'licenceCode', text: l10n.get('persons.reportLicences.licenceCode')
+      }, {
+        id: 'names', text: l10n.get('persons.reportLicences.names')
+      }, {
+        id: 'fromDate', text: l10n.get('persons.reportLicences.fromDate')
+      }, {
+        id: 'toDate', text: l10n.get('persons.reportLicences.toDate')
+      }, {
+        id: 'firstIssueDate', text: l10n.get('persons.reportLicences.firstIssueDate')
+      }, {
+        id: 'licenceAction', text: l10n.get('persons.reportLicences.licenceAction')
+      }, {
+        id: 'limitations', text: l10n.get('persons.reportLicences.limitations')
+      }, {
+        id: 'stampNumber', text: l10n.get('persons.reportLicences.stampNumber')
+      }];
+
     $scope.filters = {
       fromDate: null,
       toDate: null,
@@ -47,7 +72,8 @@
         licenceActionId: $scope.filters.licenceActionId,
         lin: $scope.filters.lin,
         limitationId: $scope.filters.limitationId,
-        limit: $scope.filters.limit || 10
+        limit: $scope.filters.limit || 10,
+        sortBy: $scope.filters.sortBy ? $scope.filters.sortBy.id : null
       });
     };
   }
@@ -56,6 +82,7 @@
     '$scope',
     '$state',
     '$stateParams',
+    'l10n',
     'PersonsReports',
     'docs'
   ];
