@@ -56,7 +56,7 @@ namespace Gva.MigrationTool.Sets
 
         private IList<string> getSModeCodesIds()
         {
-            var ids = this.sqlConn.CreateStoreCommand("select Ident from Data where Ident not in ('1', '10', '123', '81')")
+            var ids = this.sqlConn.CreateStoreCommand("select Ident from Data where Ident not in ('10', '124', '81')")
                 .Materialize(r => r.Field<string>("Ident"));
 
             if (Migration.IsPartialMigration)
