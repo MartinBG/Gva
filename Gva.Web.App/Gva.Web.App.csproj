@@ -100,7 +100,6 @@
     <Content Include="js\gva\aircrafts\resources\aircraftCertNoises.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRadios.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftCertRegistrationsFM.js" />
-    <Content Include="js\gva\aircrafts\resources\aircraftCertSmods.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftsData.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentApplications.js" />
     <Content Include="js\gva\aircrafts\resources\aircraftDocumentDebtsFM.js" />
