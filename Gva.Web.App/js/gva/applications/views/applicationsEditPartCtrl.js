@@ -7,7 +7,8 @@
     $state,
     $stateParams,
     Applications,
-    application) {
+    application,
+    setAlias) {
     var originalApplication = _.cloneDeep(application);
 
     $scope.application = application;
@@ -15,6 +16,7 @@
     $scope.lotId = $stateParams.lotId;
     $scope.set = $stateParams.set;
     $scope.appId = $stateParams.id;
+    $scope.setAlias = setAlias;
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -45,7 +47,8 @@
     '$state',
     '$stateParams',
     'Applications',
-    'application'
+    'application',
+    'setAlias'
   ];
 
   AppEditPartCtrl.$resolve = {
@@ -58,6 +61,18 @@
           ind: $stateParams.ind,
           id: $stateParams.id
         }).$promise;
+      }
+    ],
+    setAlias: [
+      '$stateParams',
+      'Applications',
+      function ($stateParams, Applications) {
+        return Applications.getAppSetAlias({
+          id: $stateParams.id
+        }).$promise
+        .then(function (result) {
+          return result.setAlias;
+        });
       }
     ]
   };

@@ -58,6 +58,10 @@
               method: 'GET',
               url: 'api/apps/exams',
               isArray: true
+            },
+            getAppSetAlias: {
+              method: 'GET',
+              url: 'api/apps/:id/setAlias'
             }
           });
       }]);
