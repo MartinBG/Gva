@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Data.Entity;
 using Common.Api.Repositories.NomRepository;
+using Common.Data;
 using Common.Json;
+using System.Linq;
+using Gva.Api.Models;
 using Gva.Api.ModelsDO.Common;
 using Gva.Api.ModelsDO.Persons;
 using Gva.Api.Repositories.FileRepository;
@@ -10,15 +14,18 @@ namespace Gva.Api.WordTemplates
 {
     public class ApplicationNote : IDataGenerator
     {
+        private IUnitOfWork unitOfWork;
         private ILotRepository lotRepository;
         private IFileRepository fileRepository;
         private INomRepository nomRepository;
 
         public ApplicationNote(
+            IUnitOfWork unitOfWork,
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             INomRepository nomRepository)
         {
+            this.unitOfWork = unitOfWork;
             this.lotRepository = lotRepository;
             this.fileRepository = fileRepository;
             this.nomRepository = nomRepository;
@@ -51,6 +58,12 @@ namespace Gva.Api.WordTemplates
             var termDate = application.Content.DocumentDate.HasValue? application.Content.DocumentDate.Value.AddDays(documentDuration) : DateTime.Now.AddDays(documentDuration);
             string caseType = this.fileRepository.GetFileReference(application.PartId, null).GvaCaseType.Name;
 
+            var gvaApp = this.unitOfWork.DbContext.Set<GvaApplication>()
+                    .Include(a => a.GvaAppLotPart)
+                    .Include(a => a.Doc)
+                    .Where(a => a.GvaAppLotPartId == application.PartId && (a.DocId.HasValue ? a.Doc.DocStatus.Alias != "Canceled" : true))
+                    .First();
+            
             var json = new
             {
                 root = new
@@ -59,7 +72,8 @@ namespace Gva.Api.WordTemplates
                     CASE_TYPE = caseType,
                     APPLICATION_NUMBER = documentNumber,
                     APPLICATION_NAME = application.Content.ApplicationType.Name,
-                    APPLICANT = applicant
+                    APPLICANT = applicant,
+                    ACCESS_CODE = gvaApp.Doc != null ? gvaApp.Doc.AccessCode : null
                 }
             };
 
