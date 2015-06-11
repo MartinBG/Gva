@@ -19,10 +19,21 @@ namespace Gva.Api.ModelsDO.Persons
             this.LicenceActionId = edition.LicenceActionId;
             if (edition.GvaStageId.HasValue)
             {
-                this.IsReady = edition.GvaStageId >= GvaConstants.IsReadyApplication;
-                this.IsReceived = edition.GvaStageId >= GvaConstants.IsReceivedApplication;
+                this.IsReady = edition.GvaStageId >= GvaConstants.IsReadyLicence;
+                this.IsReceived = edition.GvaStageId >= GvaConstants.IsReceivedLicence;
             }
-            
+
+            if (edition.OfficiallyReissuedStageId.HasValue)
+            {
+                this.IsOfficiallyReissued = true;
+                this.IsReady = edition.OfficiallyReissuedStageId >= GvaConstants.IsReadyLicence;
+                this.IsReceived = edition.OfficiallyReissuedStageId >= GvaConstants.IsReceivedLicence;
+            }
+            else
+            {
+                this.IsOfficiallyReissued = false;
+            }
+
             this.LicenceAction = edition.LicenceAction;
             this.LicenceNumber = edition.LicenceNumber;
 
@@ -125,5 +136,7 @@ namespace Gva.Api.ModelsDO.Persons
         public int? PageCount { get; set; }
 
         public CaseDO Case { get; set; }
+
+        public bool IsOfficiallyReissued { get; set; }
     }
 }

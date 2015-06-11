@@ -416,10 +416,11 @@ namespace Gva.Api.Controllers.Persons
             string stampNumber = null,
             int? lin = null,
             int? licenceNumber = null,
+            int? isOfficiallyReissuedId = null, 
             int offset = 0,
             int limit = 10)
         {
-            var result = this.personRepository.GetStampedDocuments(uin, names, stampNumber, lin, licenceNumber, offset, limit);
+            var result = this.personRepository.GetStampedDocuments(uin, names, stampNumber, lin, licenceNumber, isOfficiallyReissuedId, offset, limit);
 
             return Ok(new
             {
@@ -430,46 +431,67 @@ namespace Gva.Api.Controllers.Persons
 
         [HttpPost]
         [Route("stampedDocuments")]
-        public IHttpActionResult PostStampedDocuments(List<AplicationStageDO> stampedDocuments)
+        public IHttpActionResult PostStampedDocuments(List<LicenceStageDO> stampedDocuments)
         {
-            foreach (AplicationStageDO document in stampedDocuments)
+            using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                var applicationStages = this.applicationStageRepository.GetApplicationStages(document.ApplicationId);
-                int lastStageOrdinal = applicationStages.Last().Ordinal;
-
-                var application = this.applicationRepository.GetApplicationById(document.ApplicationId);
-                int? documentDuration = application.ApplicationType.TextContent.Get<int?>("duration");
-
-                List<string> newStagesAliases = this.unitOfWork.DbContext.Set<GvaStage>()
-                        .Where(s => document.StageAliases.Contains(s.Alias))
-                        .OrderBy(s => s.GvaStageId)
-                        .Select(s => s.Alias)
-                        .ToList();
-
-                foreach (string stageAlias in newStagesAliases)
+                foreach (LicenceStageDO document in stampedDocuments)
                 {
-                    var stage = this.unitOfWork.DbContext.Set<GvaStage>()
-                        .Where(s => s.Alias.Equals(stageAlias))
-                        .Single();
-
-                    lastStageOrdinal++;
-                    var stageTermDate = this.applicationStageRepository.GetApplicationTermDate(document.ApplicationId, stage.GvaStageId);
-
-                    GvaApplicationStage applicationStage = new GvaApplicationStage()
+                    if (document.ApplicationId.HasValue)
                     {
-                        GvaStageId = stage.GvaStageId,
-                        StartingDate = DateTime.Now,
-                        Ordinal = lastStageOrdinal,
-                        GvaApplicationId = document.ApplicationId,
-                        StageTermDate = stageTermDate
-                    };
+                        var applicationStages = this.applicationStageRepository.GetApplicationStages(document.ApplicationId.Value);
+                        int lastStageOrdinal = applicationStages.Last().Ordinal;
 
-                    this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
+                        var application = this.applicationRepository.GetApplicationById(document.ApplicationId.Value);
+                        int? documentDuration = application.ApplicationType.TextContent.Get<int?>("duration");
+
+                        List<string> newStagesAliases = this.unitOfWork.DbContext.Set<GvaStage>()
+                                .Where(s => document.StageAliases.Contains(s.Alias))
+                                .OrderBy(s => s.GvaStageId)
+                                .Select(s => s.Alias)
+                                .ToList();
+
+                        foreach (string stageAlias in newStagesAliases)
+                        {
+                            var stage = this.unitOfWork.DbContext.Set<GvaStage>()
+                                .Where(s => s.Alias.Equals(stageAlias))
+                                .Single();
+
+                            lastStageOrdinal++;
+                            var stageTermDate = this.applicationStageRepository.GetApplicationTermDate(document.ApplicationId.Value, stage.GvaStageId);
+
+                            GvaApplicationStage applicationStage = new GvaApplicationStage()
+                            {
+                                GvaStageId = stage.GvaStageId,
+                                StartingDate = DateTime.Now,
+                                Ordinal = lastStageOrdinal,
+                                GvaApplicationId = document.ApplicationId.Value,
+                                StageTermDate = stageTermDate
+                            };
+
+                            this.unitOfWork.DbContext.Set<GvaApplicationStage>().Add(applicationStage);
+                        }
+                    }
+                    else
+                    {
+                        var lot = lotRepository.GetLotIndex(document.LotId.Value);
+                        PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion = lot.Index.GetPart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", document.EditionPartIndex.Value));
+
+                        licenceEditionPartVersion.Content.ОfficiallyReissuedStageId = this.unitOfWork.DbContext.Set<GvaStage>()
+                            .Where(s => document.StageAliases.Contains(s.Alias))
+                            .Max(s => s.GvaStageId);
+
+                        lot.UpdatePart<PersonLicenceEditionDO>(string.Format("licenceEditions/{0}", licenceEditionPartVersion.Part.Index), licenceEditionPartVersion.Content, this.userContext);
+
+                        lot.Commit(this.userContext, lotEventDispatcher);
+                        this.lotRepository.ExecSpSetLotPartTokens(licenceEditionPartVersion.PartId);
+                    }
                 }
 
-            }
+                this.unitOfWork.Save();
 
-            this.unitOfWork.Save();
+                transaction.Commit();
+            }
 
             return Ok();
         }

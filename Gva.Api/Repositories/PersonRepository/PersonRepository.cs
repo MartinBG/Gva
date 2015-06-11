@@ -252,12 +252,19 @@ namespace Gva.Api.Repositories.PersonRepository
             string stampNumber,
             int? lin = null,
             int? licenceNumber = null,
+            int? isOfficiallyReissuedId = null, 
             int offset = 0,
             int? limit = null)
         {
             var predicate = PredicateBuilder.True<GvaLicenceEdition>()
-                .And(e => e.StampNumber != null && e.GvaStageId.HasValue)
-                .And(e => e.GvaStageId < GvaConstants.IsDoneApplication);
+                .And(e => e.StampNumber != null && (e.GvaStageId.HasValue || e.OfficiallyReissuedStageId.HasValue))
+                .And(e => (e.GvaStageId.HasValue ? e.GvaStageId < GvaConstants.IsDoneApplication : e.OfficiallyReissuedStageId < GvaConstants.IsReceivedLicence));
+
+            if (isOfficiallyReissuedId.HasValue)
+            {
+                bool searchForOfficiallyReissued = this.nomRepository.GetNomValue(isOfficiallyReissuedId.Value).Code == "Y";
+                predicate = predicate.And(e => searchForOfficiallyReissued ? e.OfficiallyReissuedStageId.HasValue : !e.OfficiallyReissuedStageId.HasValue);
+            }
 
             if (lin.HasValue) 
             {

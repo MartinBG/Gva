@@ -62,6 +62,8 @@ namespace Gva.Api.Models.Views.Person
 
         public int? GvaStageId { get; set; }
 
+        public int? OfficiallyReissuedStageId { get; set; }
+
         public virtual GvaViewPerson Person { get; set; }
 
         public virtual Part LicencePart { get; set; }
@@ -127,6 +129,7 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.GvaApplicationId).HasColumnName("GvaApplicationId");
             this.Property(t => t.ApplicationPartId).HasColumnName("ApplicationPartId");
             this.Property(t => t.GvaStageId).HasColumnName("GvaStageId");
+            this.Property(t => t.OfficiallyReissuedStageId).HasColumnName("OfficiallyReissuedStageId");
 
             // Relationships
             this.HasRequired(t => t.Person)

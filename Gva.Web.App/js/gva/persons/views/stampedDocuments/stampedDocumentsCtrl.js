@@ -41,10 +41,18 @@
         }
 
         if (stageAliases.length > 0) {
-          documentsForStamp.push({
-            applicationId: document.application.applicationId,
-            stageAliases: stageAliases
-          });
+          if (!document.isOfficiallyReissued) {
+            documentsForStamp.push({
+              applicationId: document.application.applicationId,
+              stageAliases: stageAliases
+            });
+          } else {
+            documentsForStamp.push({
+              lotId: document.lotId,
+              editionPartIndex: document.editionPartIndex,
+              stageAliases: stageAliases
+            });
+          }
         }
       });
 
@@ -67,7 +75,8 @@
         lin: $scope.filters.lin,
         uin: $scope.filters.uin,
         names: $scope.filters.names,
-        stampNumber: $scope.filters.stampNumber
+        stampNumber: $scope.filters.stampNumber,
+        isOfficiallyReissuedId: $scope.filters.isOfficiallyReissuedId
       });
     };
 

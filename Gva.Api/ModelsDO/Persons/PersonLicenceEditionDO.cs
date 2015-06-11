@@ -64,5 +64,9 @@ namespace Gva.Api.ModelsDO.Persons
         public Guid? PrintedDocumentBlobKey { get; set; }
 
         public int? PrintedFileId { get; set; }
+
+        public bool? IsOfficiallyReissued { get; set; }
+
+        public int? ОfficiallyReissuedStageId { get; set; }
     }
 }

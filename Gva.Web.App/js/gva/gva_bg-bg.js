@@ -2081,7 +2081,8 @@
           stampNumber: 'Хартиен №',
           application: 'Заявление',
           received: 'Получен',
-          finished: 'Приключено заявление'
+          finished: 'Приключено заявление',
+          officiallyReissued: 'Служебно преиздаден'
         },
         exportView: {
           tabs: {
@@ -2695,7 +2696,8 @@
         licenceEditionDocModal : {
           title: 'Редакция на документ към вписване',
           save: 'Запис',
-          cancel: 'Отказ'
+          cancel: 'Отказ',
+          isOfficiallyReissued: 'Служебно преиздаден'
         },
         printLicenceModal: {
           title: 'Принтиране на лиценз',

@@ -288,7 +288,7 @@
     <Compile Include="ModelsDO\Organizations\OrganizationInspectionDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationAwExaminerDO.cs" />
     <Compile Include="ModelsDO\Organizations\OrganizationStaffManagementDO.cs" />
-    <Compile Include="ModelsDO\Common\ApplicationStageDO.cs" />
+    <Compile Include="ModelsDO\Common\LicenceStageDO.cs" />
     <Compile Include="ModelsDO\Persons\GvaViewPersonLicenceEditionDO.cs" />
     <Compile Include="ModelsDO\Persons\GvaViewPersonRatingDO.cs" />
     <Compile Include="ModelsDO\Persons\InspectorDataDO.cs" />

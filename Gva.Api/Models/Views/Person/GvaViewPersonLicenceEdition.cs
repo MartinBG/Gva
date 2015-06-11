@@ -40,6 +40,8 @@ namespace Gva.Api.Models.Views.Person
 
         public int? PrintedFileId { get; set; }
 
+        public int? OfficiallyReissuedStageId { get; set; }
+
         public virtual Part Part { get; set; }
 
         public virtual NomValue LicenceAction { get; set; }
@@ -83,7 +85,8 @@ namespace Gva.Api.Models.Views.Person
             this.Property(t => t.Inspector).HasColumnName("Inspector");
             this.Property(t => t.Limitations).HasColumnName("Limitations");
             this.Property(t => t.PrintedFileId).HasColumnName("PrintedFileId");
-            
+            this.Property(t => t.OfficiallyReissuedStageId).HasColumnName("OfficiallyReissuedStageId");
+
             // Relationships
             this.HasRequired(t => t.Part)
                 .WithMany()

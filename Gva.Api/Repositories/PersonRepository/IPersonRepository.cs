@@ -59,6 +59,7 @@ namespace Gva.Api.Repositories.PersonRepository
             string stampNumber,
             int? lin = null,
             int? licenceNumber = null,
+            int? isOfficiallyReissuedId = null,
             int offset = 0,
             int? limit = null);
 

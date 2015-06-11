@@ -16,5 +16,10 @@
       sc-form-params="{ setPart: 'person', lotId: personId, showNote: true, hideTitle: true}"></gva-common-scanned-document>
     <gva-common-scanned-document name="personScannedDocumentForm" ng-model="edition.cases[1]"
        sc-form-params="{ setPart: 'person', lotId: personId, showNote: true, hideApplications: true, hideCaseTypeData: true, hideTitle: true}"></gva-common-scanned-document>
+
+    <div class="form-group" style="margin-top:10px">
+      <label class="control-label" l10n-text="persons.licenceEditionDocModal.isOfficiallyReissued"></label>
+      <input type="checkbox" ng-model="edition.part.isOfficiallyReissued" ng-disabled="form.$readonly" />
+    </div>
   </div>
 </ng-form>

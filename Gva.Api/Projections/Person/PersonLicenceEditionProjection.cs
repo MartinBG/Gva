@@ -63,6 +63,11 @@ namespace Gva.Api.Projections.Person
             licenceEdition.IsLastEdition = isLastEdition;
             licenceEdition.PrintedFileId = edition.Content.PrintedFileId;
 
+            if(edition.Content.IsOfficiallyReissued == true)
+            {
+                licenceEdition.OfficiallyReissuedStageId = edition.Content.ОfficiallyReissuedStageId ?? GvaConstants.OfficiallyReissuedLicenceFirstStage;
+            }
+
             if (edition.Content.Inspector != null)
             {
                 licenceEdition.Inspector = edition.Content.Inspector.Name;
