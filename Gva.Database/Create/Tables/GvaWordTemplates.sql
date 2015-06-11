@@ -11,6 +11,11 @@ CREATE TABLE [dbo].[GvaWordTemplates] (
 )
 GO
 
+CREATE UNIQUE NONCLUSTERED INDEX [UQ_GvaWordTemplates_Name]
+ON [dbo].[GvaWordTemplates](Name)
+GO
+
+
 exec spDescTable  N'GvaWordTemplates', N'Шаблони за принтиране на документи.'
 exec spDescColumn N'GvaWordTemplates', N'GvaWordTemplateId', N'Уникален системно генериран идентификатор.'
 exec spDescColumn N'GvaWordTemplates', N'Name'             , N'Име на шаблона.'

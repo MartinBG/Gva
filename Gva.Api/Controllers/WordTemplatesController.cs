@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
-using System.Reflection;
+using System.Net.Http.Headers;
 using System.Web.Http;
-using Common.Api.Repositories.NomRepository;
-using Common.Api.UserContext;
 using Common.Data;
-using Common.Json;
 using Gva.Api.Models;
-using Gva.Api.ModelsDO.Aircrafts;
-using Gva.Api.ModelsDO.Persons;
-using Gva.Api.Repositories.PrintRepository;
-using Gva.Api.WordTemplates;
-using Regs.Api.LotEvents;
-using Regs.Api.Models;
-using Regs.Api.Repositories.LotRepositories;
+using Gva.Api.ModelsDO;
+using Gva.Api.Repositories.WordTemplateRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -24,15 +15,29 @@ namespace Gva.Api.Controllers
     [Authorize]
     public class WordTemplatesController : ApiController
     {
+        private IWordTemplateRepository wordTemplateRepository;
         private IUnitOfWork unitOfWork;
-        private IEnumerable<IDataGenerator> dataGenerators;
 
         public WordTemplatesController(
-            IUnitOfWork unitOfWork,
-            IEnumerable<IDataGenerator> dataGenerators)
+            IWordTemplateRepository wordTemplateRepository,
+            IUnitOfWork unitOfWork)
         {
+            this.wordTemplateRepository = wordTemplateRepository;
             this.unitOfWork = unitOfWork;
-            this.dataGenerators = dataGenerators;
+        }
+
+        [Route("new")]
+        [HttpGet]
+        public IHttpActionResult GetNewTemplate()
+        {
+            return Ok(new WordTemplateDO());
+        }
+
+        [Route("")]
+        [HttpGet]
+        public IHttpActionResult GetTemplates()
+        {
+            return Ok(this.wordTemplateRepository.GetTemplates());
         }
 
         [Route("{templateId}")]
@@ -41,24 +46,102 @@ namespace Gva.Api.Controllers
         {
             using (var transaction = this.unitOfWork.BeginTransaction())
             {
-                GvaWordTemplate template = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
+                var result = this.wordTemplateRepository.ChangeDataGeneratorPerTemplate(templateId, dataGenerator);
+
+                transaction.Commit();
+
+                return Ok(result);
+            }
+        }
+
+        [Route("{templateId}")]
+        [HttpGet]
+        public IHttpActionResult GetTemplate(int templateId)
+        {
+            return Ok(this.wordTemplateRepository.GetTemplate(templateId));
+        }
+
+        [Route("{templateId}")]
+        [HttpPost]
+        public IHttpActionResult PostTemplate(int templateId, WordTemplateDO template)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                 this.wordTemplateRepository.ChangeTemplateData(templateId, template);
+
+                transaction.Commit();
+
+                return Ok();
+            }
+        }
+
+        [Route("createNew")]
+        [HttpPost]
+        public IHttpActionResult PostNewTemplate(WordTemplateDO template)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                this.wordTemplateRepository.CreateNewTemplate(template);
+
+                transaction.Commit();
+
+                return Ok();
+            }
+        }
+
+        [Route("{templateId}")]
+        public IHttpActionResult DeleteTemplate(int templateId)
+        {
+            using (var transaction = this.unitOfWork.BeginTransaction())
+            {
+                GvaWordTemplate templateToDelete = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
                     .Where(t => t.GvaWordTemplateId == templateId)
                     .Single();
 
-                template.DataGeneratorCode = dataGenerator;
+                this.unitOfWork.DbContext.Set<GvaWordTemplate>().Remove(templateToDelete);
 
                 this.unitOfWork.Save();
 
                 transaction.Commit();
 
-                var generator = this.dataGenerators.Where(d => d.GeneratorCode == dataGenerator).First();
-
-                return Ok(new 
-                { 
-                    Name = generator.GeneratorName,
-                    Code = generator.GeneratorCode
-                });
+                return Ok();
             }
+        }
+
+        [Route("download")]
+        [HttpGet]
+        public HttpResponseMessage DownloadWordTemplate(int templateId)
+        {
+            GvaWordTemplate wordTemplate = this.unitOfWork.DbContext.Set<GvaWordTemplate>()
+                    .Where(t => t.GvaWordTemplateId == templateId)
+                    .Single();
+
+            var memoryStream = new MemoryStream();
+            memoryStream.Write(wordTemplate.Template, 0, wordTemplate.Template.Length);
+            memoryStream.Position = 0;
+
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new StreamContent(memoryStream);
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/msword");
+            result.Content.Headers.ContentDisposition =
+                new ContentDispositionHeaderValue("inline")
+                {
+                    FileName = string.Format("{0}.docx", wordTemplate.Name)
+                };
+
+            return result;
+        }
+
+        [Route("isUniqueTemplateName")]
+        [HttpGet]
+        public IHttpActionResult IsUniqueTemplateName(string templateName)
+        {
+            return Ok(new
+            {
+                isUnique = !this.unitOfWork.DbContext.Set<GvaWordTemplate>()
+                    .Where(t => t.Name == templateName)
+                    .Any()
+            });
         }
     }
 }

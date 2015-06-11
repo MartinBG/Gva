@@ -374,6 +374,11 @@
       templateUrl: 'js/gva/sModeCodes/forms/sModeCodeData.html',
       controller: 'SModeCodeDataCtrl'
     });
+    scaffoldingProvider.form({
+      name: 'gvaTemplateData',
+      templateUrl: 'js/gva/templates/forms/templateData.html',
+      controller: 'TemplateDataCtrl'
+    });
   }]).config(['scModalProvider', function (scModalProvider) {
     scModalProvider
      .modal('choosePublisher'     , 'js/gva/common/modals/publishers/choosePublisherModal.html'       , 'ChoosePublisherModalCtrl'            )
@@ -386,9 +391,17 @@
      .modal('viewApplication'     , 'js/gva/common/modals/applications/viewApplicationModal.html'     , 'ViewApplicationModalCtrl'            )
      .modal('linkApplication'     , 'js/gva/common/modals/integration/linkAppModal.html'              , 'LinkAppModalCtrl'                    )
      .modal('chooseDataGenerator' , 'js/gva/common/modals/wordTemplates/chooseDataGeneratorModal.html', 'ChooseDataGeneratorModalCtrl', 'xs-2');
-  }]).config(['$stateProvider', function ($stateProvider) {
+  }])
+    .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state(['root.applications'                                  , '/applications?set'                                                                                                                                                                                                        ])
+      .state(['root.templates'                                  , '/templates'                                                                                                          ])
+      .state(['root.templates.search'                           , ''                 , ['@root'  , 'js/gva/templates/views/templatesSearch.html'        , 'TemplatesSearchCtrl'        ]])
+      .state(['root.templates.new'                              , '/new'             , ['@root'  , 'js/gva/templates/views/templatesNew.html'           , 'TemplatesNewCtrl'           ]])
+      .state(['root.templates.edit'                             , '/:id'             , ['@root'  , 'js/gva/templates/views/templatesEdit.html'          , 'TemplatesEditCtrl'          ]]);
+  }])
+    .config(['$stateProvider', function ($stateProvider) {
+    $stateProvider
+      .state(['root.applications'                                  , '/applications?set'                                                                                                                                                                                                             ])
       .state(['root.applications.search'                           , '?fromDate&toDate&personLin&aircraftIcao&organizationUin&stageId&inspectorId&applicationTypeId', ['@root'                  , 'js/gva/applications/views/applicationsSearch.html'             , 'ApplicationsSearchCtrl'        ]])
       .state(['root.applications.new'                              , '/new?lotId'                                                                                   , ['@root'                  , 'js/gva/applications/views/applicationsNew.html'                , 'ApplicationsNewCtrl'           ]])
       .state(['root.applications.edit'                             , '/:id'                                                                                         , ['@root'                  , 'js/gva/applications/views/applicationsEdit.html'               , 'ApplicationsEditCtrl'          ]])

@@ -1,0 +1,19 @@
+﻿<ng-form name="newTemplatesForm" sc-validate="{}">
+  <div class="panel panel-default" style="margin-top: 10px">
+    <div class="panel-heading">
+      <strong l10n-text="templates.templatesNew.title"></strong>
+      <div class="pull-right">
+        <sc-button name="saveBtn" btn-click="save()" text="templates.templatesNew.save"
+          class="btn btn-primary btn-xs" icon="glyphicon-floppy-disk">
+        </sc-button>
+        <sc-button name="cancelBtn" btn-click="cancel()" text="templates.templatesNew.cancel"
+          class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
+        </sc-button>
+      </div>
+    </div>
+
+    <div class="well-sm panel-body">
+      <gva-template-data name="templateDataForm" ng-model="template" sc-form-params="{dataGenerators: dataGenerators, isNew: true}"></gva-template-data>
+    </div>
+  </div>
+</ng-form>

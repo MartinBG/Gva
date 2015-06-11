@@ -182,6 +182,8 @@
     <Compile Include="ModelsDO\Applications\PartDO.cs" />
     <Compile Include="ModelsDO\CaseTypePartDO.cs" />
     <Compile Include="ModelsDO\CaseTypesPartDO.cs" />
+    <Compile Include="ModelsDO\DataGeneratorDO.cs" />
+    <Compile Include="ModelsDO\WordTemplateDO.cs" />
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystCertCampaignDO.cs" />
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystCertPathDO.cs" />
     <Compile Include="ModelsDO\ExaminationSystem\GvaExSystExamineeDO.cs" />
@@ -482,6 +484,8 @@
     <Compile Include="Repositories\SModeCodeRepository\ISModeCodeRepository.cs" />
     <Compile Include="Repositories\StageRepository\IStageRepository.cs" />
     <Compile Include="Repositories\StageRepository\StageRepository.cs" />
+    <Compile Include="Repositories\WordTemplateRepository\IWordTemplateRepository.cs" />
+    <Compile Include="Repositories\WordTemplateRepository\WordTemplateRepository.cs" />
     <Compile Include="WordTemplates\AMLNational.cs" />
     <Compile Include="WordTemplates\ApplicationNote.cs" />
     <Compile Include="WordTemplates\CabinCrewLicence.cs" />

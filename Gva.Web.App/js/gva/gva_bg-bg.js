@@ -154,6 +154,34 @@
           controlCard: 'Контролна карта'
         }
       },
+      templates: {
+        templatesSearch: {
+          'new': 'Нов темплейт',
+          dataGenerator: 'Генератор на данни',
+          name: 'Наименование (лат.)',
+          description: 'Описание'
+        },
+        templatesEdit: {
+          title: 'Преглед на данни за темплейт',
+          edit: 'Редакция',
+          save: 'Запис',
+          cancel: 'Отказ',
+          'delete': 'Изтрий'
+        },
+        templateDataDirective: {
+          dataGenerator: 'Генератор на данни',
+          name: 'Наименование (лат.)',
+          description: 'Описание',
+          download: 'Свали темплейт',
+          upload: 'Прикачи нов файл за темплейт',
+          newTemplateFile: 'Нов файл'
+        },
+        templatesNew: {
+          title: 'Нов темплейт',
+          save: 'Запис',
+          cancel: 'Отказ'
+        }
+      },
       airports: {
         tabs: {
           docs: 'Документи',
@@ -3857,7 +3885,10 @@
         notUniqueDocData: 'Дублиран документ по основни данни',
         notValidRating: 'Вече съществува такава квалификация',
         notUniqueLicenceNumber: 'Съществува лиценз от същия вид със същия номер',
-        notUniqueMSN: 'Серийния номер не е уникален'
+        notUniqueMSN: 'Серийния номер не е уникален',
+        invalidTemplateName: 
+          'Наименованието може да съдържа само букви на латиница, цифри и символите \'_\', \'-\'',
+        notUniqueTemplateName: 'Наименованието не е уникално'
       },
       defaultErrorTexts: {
         required: 'Задължително поле',
@@ -4088,7 +4119,10 @@
         'root.personsReports.ratings': 'Квалификационни класове',
         'root.sModeCodes': 'S-mode кодове',
         'root.sModeCodes.new': 'Нов S-mode код',
-        'root.sModeCodes.edit': 'Редакция на S-mode код'
+        'root.sModeCodes.edit': 'Редакция на S-mode код',
+        'root.templates': 'Темплейти',
+        'root.templates.new': 'Нов Темплейт',
+        'root.templates.edit': 'Редакция на Темплейт'
       }
     });
   }]);

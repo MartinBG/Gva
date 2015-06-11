@@ -1,0 +1,29 @@
+﻿<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  
+  <div class="row">
+    <sc-field type="text" ng-model="model.name" ng-readonly="!isNew"  l10n-text="templates.templateDataDirective.name" 
+      sc-validate="{ validValue: isValidName, unique: isUniqueName }" 
+      validations="{ validValue: 'errorTexts.invalidTemplateName', unique: 'errorTexts.notUniqueTemplateName'}"
+      class="col-sm-4" ng-required="true"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="text" ng-model="model.description" l10n-text="templates.templateDataDirective.description" class="col-sm-4" ng-required="true"></sc-field>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-4" sc-has-error="dataGenerator">
+      <label class="control-label" l10n-text="templates.templateDataDirective.dataGenerator"></label>
+      <sc-validation-error field-name="dataGenerator" validations="{required: 'default'}"></sc-validation-error>
+      <select ui-select2 ng-readonly="form.$readonly" ng-model="model.dataGenerator.code" name="dataGenerator" class="input-sm form-control" ng-required="true">
+        <option ng-repeat="generator in dataGenerators" value="{{generator.code}}">{{generator.name}}</option>
+      </select>
+    </div>
+  </div>
+  <sc-link-button name="downloadBtn" ng-if="!isNew" ng-href="api/wordTemplates/download?templateId={{model.templateId}}" target="_blank" sc-access-token class="btn btn-sm" icon="glyphicon-download" text="templates.templateDataDirective.download"></sc-link-button>
+  <h5 class="form-header" l10n-text="templates.templateDataDirective.upload" style="margin-top:5px;" ng-show="!isNew && !form.$readonly"></h5>
+  <div class="row" ng-if="!form.$readonly">
+    <div class="form-group col-sm-4 col-md-3">
+      <label class="control-label" l10n-text="templates.templateDataDirective.newTemplateFile"></label>
+      <sc-files ng-model="model.templateFile" ng-readonly="form.$readonly" name="templateFile" ng-required="isNew"></sc-files>
+    </div>
+  </div>
+</ng-form>

@@ -40,6 +40,7 @@ using Gva.Api.Repositories.PublisherRepository;
 using Gva.Api.Repositories.Reports;
 using Gva.Api.Repositories.SModeCodeRepository;
 using Gva.Api.Repositories.StageRepository;
+using Gva.Api.Repositories.WordTemplateRepository;
 using Gva.Api.WordTemplates;
 using Regs.Api.LotEvents;
 
@@ -137,6 +138,8 @@ namespace Gva.Api
             moduleBuilder.RegisterType<SModeCodeRepository>().As<ISModeCodeRepository>().InstancePerLifetimeScope();
 
             moduleBuilder.RegisterType<IntegrationRepository>().As<IIntegrationRepository>().InstancePerLifetimeScope();
+
+            moduleBuilder.RegisterType<WordTemplateRepository>().As<IWordTemplateRepository>().InstancePerLifetimeScope();
 
             moduleBuilder.RegisterType<IntegrationController>().InstancePerLifetimeScope();
 

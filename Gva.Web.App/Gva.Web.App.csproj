@@ -832,6 +832,14 @@
     <Content Include="js\gva\sModeCodes\views\sModeCodesNewCtrl.js" />
     <Content Include="js\gva\sModeCodes\views\sModeCodesSearch.html" />
     <Content Include="js\gva\sModeCodes\views\sModeCodesSearchCtrl.js" />
+    <Content Include="js\gva\templates\forms\templateData.html" />
+    <Content Include="js\gva\templates\forms\templateDataCtrl.js" />
+    <Content Include="js\gva\templates\views\templatesEdit.html" />
+    <Content Include="js\gva\templates\views\templatesEditCtrl.js" />
+    <Content Include="js\gva\templates\views\templatesNew.html" />
+    <Content Include="js\gva\templates\views\templatesNewCtrl.js" />
+    <Content Include="js\gva\templates\views\templatesSearch.html" />
+    <Content Include="js\gva\templates\views\templatesSearchCtrl.js" />
     <Content Include="schema\aircrafts\aircraft-cert-airworthinesses.sample.js" />
     <Content Include="schema\aircrafts\aircraft-cert-airworthinessesfm.sample.js" />
     <Content Include="schema\aircrafts\aircraft-cert-marks.sample.js" />

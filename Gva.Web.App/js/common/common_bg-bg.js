@@ -95,7 +95,8 @@
             users: 'Потребители',
             nomenclatures: 'Номенклатури',
             units: 'Организационна структура',
-            docNomenclatures: 'Номенклатури деловодна'
+            docNomenclatures: 'Номенклатури деловодна',
+            templates: 'Темплейти'
           },
           help: {
             title: 'Помощ',
