@@ -495,9 +495,7 @@ namespace Gva.Api.Controllers
                 this.aircraftRepository.GetAircrafts(
                     airCategory: airCategory,
                     aircraftProducer: aircraftProducer,
-                    exact: true,
-                    offset: offset,
-                    limit: limit)
+                    exact: true)
                     .GroupBy(a => a.Item1.Model)
                     .Select(g => g.FirstOrDefault())
                 .Select(e => new
@@ -511,10 +509,9 @@ namespace Gva.Api.Controllers
                             airCategory = e.Item1.AirCategory,
                             aircraftProducer = e.Item1.AircraftProducer
                         }
-                })
-                ;
+                });
 
-            return Ok(returnValue);
+            return Ok(returnValue.WithOffsetAndLimit(offset, limit));
         }
 
         [Route("airports/{id:int}")]

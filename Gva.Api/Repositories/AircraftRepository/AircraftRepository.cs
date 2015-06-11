@@ -50,28 +50,27 @@ namespace Gva.Api.Repositories.AircraftRepository
                  select new
                  {
                      Aircraft = a,
-                     Registration = ra1
+                     Registration = ra1,
+                     AirCategory = a.AirCategory,
+                     AircraftProducer = a.AircraftProducer,
+                     Register = ra1.Register
                  });
-
-            var registers = gvaAircraftsWithRegData
-                .Where(r => r.Registration != null)
-                .Select(r => r.Registration.CertRegisterId)
-                .ToList();
-
-            this.unitOfWork.DbContext.Set<NomValue>().Where(r => registers.Contains(r.NomValueId)).Load();
 
             var predicate = PredicateBuilder.True(new
             {
                 Aircraft = new GvaViewAircraft(),
-                Registration = new GvaViewAircraftRegistration()
+                Registration = new GvaViewAircraftRegistration(),
+                AirCategory = new NomValue(),
+                AircraftProducer = new NomValue(),
+                Register = new NomValue()
             });
 
             predicate = predicate
                 .AndStringMatches(p => p.Aircraft.ManSN, manSN, exact)
                 .AndStringMatches(p => p.Aircraft.ModelAlt, modelAlt, exact)
                 .AndStringMatches(p => p.Aircraft.ICAO, icao, exact)
-                .AndStringMatches(p => p.Aircraft.AirCategory.Name, airCategory, exact)
-                .AndStringMatches(p => p.Aircraft.AircraftProducer.Name, aircraftProducer, exact);
+                .AndStringMatches(p => p.AirCategory.Name, airCategory, exact)
+                .AndStringMatches(p => p.AircraftProducer.Name, aircraftProducer, exact);
 
             if (lotIdsOfAircarftWithDefiniteRegMark.Count() > 0)
             {
