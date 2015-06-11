@@ -18,7 +18,7 @@ namespace Gva.Api.ModelsDO.Aircrafts
             this.OutputDate = aircraftData.OutputDate;
             this.ICAO = aircraftData.ICAO;
             this.AirCategory = aircraftData.AirCategory != null ? aircraftData.AirCategory.Name : null;
-            this.AircraftProducer = aircraftData.AircraftProducer != null ?aircraftData.AircraftProducer.Name : null;
+            this.AircraftProducer = aircraftData.AircraftProducer != null ? aircraftData.AircraftProducer.Name : null;
             this.Engine = aircraftData.Engine;
             this.Propeller = aircraftData.Propeller;
             this.ModifOrWingColor = aircraftData.ModifOrWingColor;

@@ -99,8 +99,11 @@ namespace Gva.Api.Repositories.AircraftRepository
                           from ra1 in ra.DefaultIfEmpty()
                           select new
                           {
+                              AirCategory = a.AirCategory,
+                              AircraftProducer = a.AircraftProducer,
                               Aircraft = a,
-                              Registration = ra1
+                              Registration = ra1,
+                              Register = ra1.Register
                           });
 
             GvaViewAircraft aircraftData = null;
@@ -116,10 +119,6 @@ namespace Gva.Api.Repositories.AircraftRepository
                 var result = results.FirstOrDefault();
                 aircraftData = result.Aircraft;
                 regData = result.Registration;
-            }
-            if(regData != null)
-            {
-                this.unitOfWork.DbContext.Set<NomValue>().Where(r => regData.CertRegisterId == r.NomValueId).Load();
             }
 
             return new Tuple<GvaViewAircraft, GvaViewAircraftRegistration>(aircraftData, regData);
