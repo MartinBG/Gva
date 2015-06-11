@@ -13,13 +13,13 @@
   ) {
     $scope.isNew = !$scope.$parent.aircraft.mark;
     $scope.steps = {
-      chooseRegister: {},
+      chooseRegisterAndRegMark: {},
       confirmRegMark: {},
       regMarkInUse: {}
     };
 
     $scope.regMarkPattern = gvaConstants.regMarkPattern;
-    $scope.currentStep = $scope.steps.chooseRegister;
+    $scope.currentStep = $scope.steps.chooseRegisterAndRegMark;
 
     $scope.model = {
       register: register,
@@ -35,14 +35,7 @@
             $scope.newRegForm.$validated = false;
 
             switch ($scope.currentStep) {
-              case $scope.steps.chooseRegister:
-                if (!$scope.isNew) {
-                  return $state.go(
-                    'root.aircrafts.view.regsFM.new',
-                    {}, {},
-                    $scope.model);
-                }
-
+              case $scope.steps.chooseRegisterAndRegMark:
                 return Aircrafts.checkRegMark({
                   lotId: $stateParams.id,
                   regMark: $scope.model.regMark
@@ -64,28 +57,30 @@
         });
     };
 
-    if($scope.currentStep === $scope.steps.chooseRegister) {
+    if($scope.currentStep === $scope.steps.chooseRegisterAndRegMark) {
       $scope.$watch('model.register', function () {
-        var registerAlias = $scope.model.register.code === '2' ? 'register2' : 'register1';
-        return Aircrafts.getNextActNumber({
-          registerAlias: registerAlias
-        }).$promise.then(function (result) {
-          $scope.model.actNumber = result.actNumber;
-          $scope.model.certNumber = result.actNumber;
-        });
+        if ($scope.model.register) {
+          var registerAlias = $scope.model.register.code === '2' ? 'register2' : 'register1';
+          return Aircrafts.getNextActNumber({
+            registerAlias: registerAlias
+          }).$promise.then(function (result) {
+            $scope.model.actNumber = result.actNumber;
+            $scope.model.certNumber = result.actNumber;
+          });
+        }
       });
     }
 
     $scope.back = function () {
       switch ($scope.currentStep) {
-      case $scope.steps.chooseRegister:
+      case $scope.steps.chooseRegisterAndRegMark:
         $scope.currentStep = $scope.steps.chooseRegNumber;
         break;
       case $scope.steps.confirmRegMark:
-        $scope.currentStep = $scope.steps.chooseRegister;
+        $scope.currentStep = $scope.steps.chooseRegisterAndRegMark;
         break;
       case $scope.steps.regMarkInUse:
-        $scope.currentStep = $scope.steps.chooseRegister;
+        $scope.currentStep = $scope.steps.chooseRegisterAndRegMark;
         break;
       }
     };

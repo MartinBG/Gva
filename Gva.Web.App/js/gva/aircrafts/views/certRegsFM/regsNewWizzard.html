@@ -6,7 +6,7 @@
         <sc-button btn-click="cancel()" text="aircrafts.newRegWizzard.cancel"
           class="btn btn-default btn-xs" icon="glyphicon-ban-circle">
         </sc-button>
-        <sc-button btn-click="back()" text="aircrafts.newRegWizzard.back" ng-if="currentStep !== steps.chooseRegister"
+        <sc-button btn-click="back()" text="aircrafts.newRegWizzard.back" ng-if="currentStep !== steps.chooseRegisterAndRegMark"
           class="btn btn-default btn-xs" icon="glyphicon-chevron-left">
         </sc-button>
         <button name="forwardButton" sc-click="forward()" class="btn btn-primary btn-xs" type="button" ng-if="currentStep !== steps.regMarkInUse">
@@ -37,7 +37,7 @@
           <div class="form-group col-md-3 col-sm-4" sc-has-error="regMark">
             <label class="control-label" l10n-text="aircrafts.newRegWizzard.regMark"></label>
             <sc-validation-error field-name="regMark" validations="{required: 'default', pattern: 'default'}"></sc-validation-error>
-            <sc-text ng-model="model.regMark" name="regMark" ng-required="true" ng-readonly="!isNew || currentStep === steps.confirmRegMark" ng-pattern="regMarkPattern"></sc-text>
+            <sc-text ng-model="model.regMark" name="regMark" ng-required="true" ng-readonly="currentStep !== steps.chooseRegisterAndRegMark" ng-pattern="regMarkPattern"></sc-text>
           </div>
 
           <sc-info class="success" icon="glyphicon glyphicon-ok" text="aircrafts.newRegWizzard.confirmRegMark" ng-if="currentStep === steps.confirmRegMark"></sc-info>
