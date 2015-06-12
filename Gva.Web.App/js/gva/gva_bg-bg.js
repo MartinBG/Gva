@@ -2730,7 +2730,8 @@
           save: 'Запис',
           print: 'Преглед за печат',
           generateNew: 'Прегенерирай',
-          edit: 'Редакция'
+          edit: 'Редакция',
+          printExaminerCert: 'Принтиране на сертификат за проверяващ'
         },
         printRatingEditionModal: {
           title: 'Принтиране на квалификационен клас',

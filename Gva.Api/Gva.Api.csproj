@@ -498,6 +498,7 @@
     <Compile Include="WordTemplates\AML_III.cs" />
     <Compile Include="WordTemplates\AMLUtils.cs" />
     <Compile Include="WordTemplates\AMLNationalRating.cs" />
+    <Compile Include="WordTemplates\ExaminerCert.cs" />
     <Compile Include="WordTemplates\DeregCert.cs" />
     <Compile Include="WordTemplates\RadioCert.cs" />
     <Compile Include="WordTemplates\RegistrationCert.cs" />

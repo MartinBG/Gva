@@ -37,7 +37,9 @@ namespace Gva.Api.Controllers
                 {"printNoiseCert", new Tuple<string, string, bool>("aircraftCertNoises", "noise_cert", false)},
                 {"printDeregCert", new Tuple<string, string, bool>("aircraftCertRegistrationsFM", "dereg_cert", false)},
                 {"printExportCert", new Tuple<string, string, bool>("aircraftCertRegistrationsFM","export_cert", false)},
-                {"printApplication", new Tuple<string, string, bool>("personDocumentApplications","application_note", true)},
+                {"printApplication", new Tuple<string, string, bool>("personDocumentApplications", "application_note", true)},
+                {"printExaminerCert", new Tuple<string, string, bool>("licences", "examiner_cert", false)},
+                {"printInstructorCert", new Tuple<string, string, bool>("licences", "instructor_cert", false)}
             };
         private Dictionary<string,string> airworthinessTypeAliasToTemplateName =
             new Dictionary<string,string>()
@@ -149,7 +151,6 @@ namespace Gva.Api.Controllers
         [Route("api/printAirworthiness")]
         public HttpResponseMessage GetAirworthinessDoc(int lotId, int partIndex)
         {
-
             string airworthinessPath = string.Format("aircraftCertAirworthinessesFM/{0}", partIndex);
             var lot = this.lotRepository.GetLotIndex(lotId);
             var airworthinessPart = lot.Index.GetPart<AircraftCertAirworthinessDO>(airworthinessPath);
@@ -167,7 +168,7 @@ namespace Gva.Api.Controllers
             return this.printRepository.GenerateDocumentWithoutSave(lotId, airworthinessPath, templateName, false);
         }
 
-        [Route("api/{request:regex(^(printRadioCert|printExportCert|printNoiseCert|printRegCert|printDeregCert|printApplication)$)}")]
+        [Route("api/{request:regex(^(printRadioCert|printExportCert|printNoiseCert|printRegCert|printDeregCert|printApplication|printExaminerCert)$)}")]
         public HttpResponseMessage GetDocument(int lotId, int partIndex, string request)
         {
             var result = this.requestToPrintParameters[request];
