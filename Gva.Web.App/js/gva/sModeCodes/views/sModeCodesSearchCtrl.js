@@ -9,7 +9,9 @@
     sModeCodes) {
     $scope.filters = {
       codeHex: null,
-      typeId: null
+      typeId: null,
+      regMark: null,
+      identifier: null
     };
 
     _.forOwn($stateParams, function (value, param) {
@@ -23,7 +25,10 @@
     $scope.search = function () {
       return $state.go('root.sModeCodes.search', {
         codeHex: $scope.filters.codeHex,
-        typeId: $scope.filters.typeId
+        typeId: $scope.filters.typeId,
+        regMark: $scope.filters.regMark,
+        identifier: $scope.filters.identifier,
+        isConnectedToRegistrationId: $scope.filters.isConnectedToRegistrationId
       });
     };
 

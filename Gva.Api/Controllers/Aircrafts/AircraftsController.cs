@@ -22,6 +22,7 @@ using Common.Filters;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.Models.Views.Aircraft;
 using Common.Linq;
+using Gva.Api.Repositories.SModeCodeRepository;
 
 namespace Gva.Api.Controllers
 {
@@ -35,6 +36,7 @@ namespace Gva.Api.Controllers
         private IAircraftRepository aircraftRepository;
         private IAircraftRegistrationRepository aircraftRegistrationRepository;
         private IAircraftRegMarkRepository aircraftRegMarkRepository;
+        private ISModeCodeRepository sModeCodeRepository;
         private IFileRepository fileRepository;
         private IApplicationRepository applicationRepository;
         private ICaseTypeRepository caseTypeRepository;
@@ -48,6 +50,7 @@ namespace Gva.Api.Controllers
             IAircraftRepository aircraftRepository,
             IAircraftRegistrationRepository aircraftRegistrationRepository,
             IAircraftRegMarkRepository aircraftRegMarkRepository,
+            ISModeCodeRepository sModeCodeRepository,
             IFileRepository fileRepository,
             IApplicationRepository applicationRepository,
             ICaseTypeRepository caseTypeRepository,
@@ -60,6 +63,7 @@ namespace Gva.Api.Controllers
             this.aircraftRepository = aircraftRepository;
             this.aircraftRegistrationRepository = aircraftRegistrationRepository;
             this.aircraftRegMarkRepository = aircraftRegMarkRepository;
+            this.sModeCodeRepository = sModeCodeRepository;
             this.fileRepository = fileRepository;
             this.applicationRepository = applicationRepository;
             this.caseTypeRepository = caseTypeRepository;
@@ -177,10 +181,23 @@ namespace Gva.Api.Controllers
         public IHttpActionResult CheckRegMark(int lotId, string regMark = null)
         {
             bool isValid = this.aircraftRegMarkRepository.RegMarkIsValid(lotId, regMark);
-
+            int? sModeCodeLotId = null;
+            string sModeCodeHex = null;
+            if (isValid)
+            {
+                var sModeCode = this.sModeCodeRepository.GetSModeCodes(regMark: regMark).SingleOrDefault();
+                if (sModeCode != null)
+                {
+                    sModeCodeLotId = sModeCode.LotId;
+                    sModeCodeHex = sModeCode.CodeHex;
+                }
+            }
+            
             return Ok(new
             {
-                IsValid = isValid
+                IsValid = isValid,
+                sModeCodeLotId = sModeCodeLotId,
+                sModeCodeHex = sModeCodeHex
             });
         }
 

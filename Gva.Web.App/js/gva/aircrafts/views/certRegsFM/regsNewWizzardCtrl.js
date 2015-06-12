@@ -42,6 +42,8 @@
                 }).$promise.then(function (result) {
                   if (result.isValid) {
                     $scope.currentStep = $scope.steps.confirmRegMark;
+                    $scope.sModeCodeLotId = result.sModeCodeLotId;
+                    $scope.sModeCodeHex = result.sModeCodeHex;
                   }
                   else {
                     $scope.currentStep = $scope.steps.regMarkInUse;

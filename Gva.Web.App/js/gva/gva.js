@@ -559,10 +559,13 @@
     .modal('newQualificationState' , 'js/gva/persons/modals/qualificationStates/newQlfStateModal.html', 'NewQlfStateModalCtrl'       , 'xs-2');
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
-      .state(['root.sModeCodes'          , '/sModeCodes?codeHex&typeId'                                                                                    ])
+      .state(['root.sModeCodes'          , '/sModeCodes?regMark&identifier&codeHex&typeId&isConnectedToRegistrationId'                                    ])
       .state(['root.sModeCodes.search'   , ''                       , ['@root', 'js/gva/sModeCodes/views/sModeCodesSearch.html'  , 'SModeCodesSearchCtrl' ]])
       .state(['root.sModeCodes.new'      , '/new'                   , ['@root', 'js/gva/sModeCodes/views/sModeCodesNew.html'     , 'SModeCodesNewCtrl'    ]])
       .state(['root.sModeCodes.edit'     , '/:id/data'              , ['@root', 'js/gva/sModeCodes/views/sModeCodesEdit.html'    , 'SModeCodesEditCtrl'   ]]);
+  }]).config(['scModalProvider', function (scModalProvider) {
+    scModalProvider
+    .modal('chooseAircraftModel'         , 'js/gva/sModeCodes/modals/chooseAircraftModelModal.html'     , 'ChooseAircraftModelModalCtrl'           );
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state(['root.aircrafts'                                          , '/aircrafts?mark&manSN&modelAlt&airCategory&aircraftProducer'                                                                                                                                    ])

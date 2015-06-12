@@ -75,6 +75,7 @@ namespace Gva.MigrationTool.Sets
 
                         var sModeCodeData = this.getSModeCodeData(sModeCodeId, noms, regMarkToLotId, getOrgBySModeCodeOperId);
                         lot.CreatePart("sModeCodeData", sModeCodeData, context);
+
                         lot.Commit(context, lotEventDispatcher);
 
                         unitOfWork.Save();
@@ -115,7 +116,10 @@ namespace Gva.MigrationTool.Sets
                         caaDate = Utils.FmToDate(r.Field<string>("CAA_S_Date")),
                         applicantIsOrg = true,
                         applicantOrganization = getOrgBySModeCodeOperId(Utils.FmToNum(r.Field<string>("Oper_ID")).Value),
-                        note = !regMarkToLotId.ContainsKey(r.Field<string>("Act_Reg_Mark")) ? r.Field<string>("Act_Reg_Mark") : null
+                        identifier = r.Field<string>("Oper_ID") == "1" ? r.Field<string>("Act_Reg_Mark") : null,
+                        regMark = r.Field<string>("Oper_ID") == "1" ? null : r.Field<string>("Act_Reg_Mark"),
+                        msn = r.Field<string>("Act_MSN"),
+                        model = r.Field<string>("Act_Model")
                     }))
                 .Single();
         }

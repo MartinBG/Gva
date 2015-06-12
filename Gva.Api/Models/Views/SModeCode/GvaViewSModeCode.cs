@@ -20,9 +20,9 @@ namespace Gva.Api.Models.Views.SModeCode
 
         public string CodeHex { get; set; }
 
-        public string Note { get; set; }
-
         public int? AircraftId { get; set; }
+
+        public int? RegistrationPartIndex { get; set; }
 
         public string Applicant { get; set; }
 
@@ -33,6 +33,12 @@ namespace Gva.Api.Models.Views.SModeCode
         public string CaaNumber { get; set; }
 
         public DateTime? CaaDate { get; set; }
+
+        public string Description { get; set; }
+
+        public string Identifier { get; set; }
+
+        public string RegMark { get; set; }
 
         public virtual GvaViewAircraft Aircraft { get; set; }
 
@@ -69,13 +75,16 @@ namespace Gva.Api.Models.Views.SModeCode
             this.Property(t => t.LotId).HasColumnName("LotId");
             this.Property(t => t.TypeId).HasColumnName("TypeId");
             this.Property(t => t.CodeHex).HasColumnName("CodeHex");
-            this.Property(t => t.Note).HasColumnName("Note");
+            this.Property(t => t.Description).HasColumnName("Description");
             this.Property(t => t.AircraftId).HasColumnName("AircraftId");
+            this.Property(t => t.RegistrationPartIndex).HasColumnName("RegistrationPartIndex");
             this.Property(t => t.Applicant).HasColumnName("Applicant");
             this.Property(t => t.TheirNumber).HasColumnName("TheirNumber");
             this.Property(t => t.TheirDate).HasColumnName("TheirDate");
             this.Property(t => t.CaaNumber).HasColumnName("CaaNumber");
             this.Property(t => t.CaaDate).HasColumnName("CaaDate");
+            this.Property(t => t.Identifier).HasColumnName("Identifier");
+            this.Property(t => t.RegMark).HasColumnName("RegMark");
 
             // Relationships
             this.HasRequired(t => t.Lot)

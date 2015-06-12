@@ -1,5 +1,15 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
+    <sc-field type="text" ng-model="model.regMark" ng-required="true" l10n-text="aircrafts.smodDirective.regMark" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="text" ng-model="model.msn" ng-required="true" l10n-text="aircrafts.smodDirective.msn" class="col-md-2 col-sm-3"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field-group class="col-sm-6 col-md-4" text="aircrafts.smodDirective.model" field-name="model" validations="{ required: 'default' }">
+      <sc-text ng-model="model.model" name="model" ng-required="true" ng-readonly="form.$readonly"></sc-text>
+      <sc-button class="btn btn-default" btn-click="chooseModel()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
+    </sc-field-group>
+  </div>
+  <div class="row">
     <sc-field type="text" ng-model="model.theirNumber" ng-required="true" l10n-text="aircrafts.smodDirective.theirNumber" class="col-md-2 col-sm-3"></sc-field>
     <sc-field type="date" ng-model="model.theirDate" ng-required="true" l10n-text="aircrafts.smodDirective.theirDate" class="col-md-2 col-sm-3"></sc-field>
   </div>

@@ -30,6 +30,7 @@ namespace Gva.Api.Projections.Aircraft
             reg.PartIndex = registration.Part.Index;
             reg.CertRegisterId = registration.Content.Register.NomValueId;
             reg.CertNumber = registration.Content.CertNumber;
+            reg.CertDate = registration.Content.CertDate;
             reg.ActNumber = registration.Content.ActNumber;
             reg.RegMark = registration.Content.RegMark;
 

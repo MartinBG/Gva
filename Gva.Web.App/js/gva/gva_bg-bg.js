@@ -717,9 +717,12 @@
           search: 'Търси',
           codeHex: 'Код в шестнайсетична бр.с-ма',
           type: 'Вид код',
-          note: 'Бележки',
+          description: 'Описание',
           codeDecimal: 'Код в десетична бр.с-ма',
-          codeBinary: 'Код в двоична бр.с-ма'
+          codeBinary: 'Код в двоична бр.с-ма',
+          regMark: 'Рег. знак',
+          identifier: 'Идентификатор',
+          isConnectedToRegistration: 'Свързан с регистрация'
         },
         newSModeCode: {
           title: 'Нов S-Mode Code',
@@ -733,12 +736,28 @@
           edit: 'Редакция'
         },
         sModeCodeDataDirective: {
-          codeHex: 'Код в шестнайсетична бр.с-ма',
+          codeIn: 'Код в:',
+          hexadecimal: 'Шестнайсетична бр.с-ма',
+          decimal: 'Десетична бр.с-ма',
+          binary: 'Двоична бр.с-ма',
+          octal: 'Осмична бр.с-ма',
           codeType: 'Вид код',
-          note: 'Бележки',
-          connectToAircraft: 'Избери ВС',
           viewAircraft: 'Покажи ВС',
-          valid: 'Валиден'
+          description: 'Описание',
+          identifier: 'Идентификатор',
+          aircraftRegistration: 'Регистрация на ВС, с която е свързан кода',
+          actNumber: 'Деловоден №',
+          certNumber: 'Регистрационен №',
+          certDate: 'Дата на регистрация',
+          isActive: 'Активна',
+          isCurrent: 'Последна'
+        },
+        chooseAircraftModelModal: {
+          cancel: 'Отказ',
+          select: 'Избери',
+          name: 'Наименование',
+          nameAlt: 'Наименование (алт.)',
+          title: 'Избор на модел ВС'
         }
       },
       aircrafts: {
@@ -909,7 +928,9 @@
           skipNumber: 'Пропусни',
           regMark: 'Регистрационен знак',
           confirmRegMark: 'Желаният рег. знак е свободен.',
-          regMarkInUse: 'Желаният рег. знак е запазен.'
+          regMarkInUse: 'Желаният рег. знак е запазен.',
+          regMarkIsConnectedToSModeCode: 
+            'Желаният рег. знак ще бъде свързан със s код (шестнайсетична бр. с-ма):'
         },
         editReg: {
           title: 'Преглед на регистрация',
@@ -1102,7 +1123,10 @@
           applicant: 'Заявител',
           getScode: 'Генерирай S-код',
           person: 'ФЛ',
-          organization: 'ЮЛ'
+          organization: 'ЮЛ',
+          regMark: 'Рег. знак',
+          msn: 'Сериен  №',
+          model: 'Модел'
         },
         airworthinessDirective: {
           airworthinessCertificateType: 'Тип',

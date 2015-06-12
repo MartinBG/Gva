@@ -43,6 +43,12 @@
           <sc-info class="success" icon="glyphicon glyphicon-ok" text="aircrafts.newRegWizzard.confirmRegMark" ng-if="currentStep === steps.confirmRegMark"></sc-info>
           <sc-info class="danger" icon="glyphicon glyphicon-remove" text="aircrafts.newRegWizzard.regMarkInUse" ng-if="currentStep === steps.regMarkInUse"></sc-info>
         </div>
+        <div ng-if="sModeCodeHex">
+          <sc-info class="warning" icon="glyphicon glyphicon-warning-sign" text="aircrafts.newRegWizzard.regMarkIsConnectedToSModeCode"></sc-info>
+          <a name="viewBtn" style="margin-top:10px" sc-sref="{state: 'root.sModeCodes.edit', params: { id: sModeCodeLotId }}" target="_blank" class="btn btn-xs btn-default">
+            <span class="glyphicon glyphicon-eye-open"></span> {{sModeCodeHex}}
+          </a>
+        </div>
       </div>
     </div>
   </div>

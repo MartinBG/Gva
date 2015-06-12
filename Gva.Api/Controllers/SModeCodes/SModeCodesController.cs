@@ -4,6 +4,7 @@ using Common.Api.Repositories.NomRepository;
 using Common.Api.UserContext;
 using Common.Data;
 using Common.Filters;
+using Gva.Api.Models.Views.Aircraft;
 using Gva.Api.Models.Views.SModeCode;
 using Gva.Api.ModelsDO.Aircrafts;
 using Gva.Api.ModelsDO.SModeCodes;
@@ -46,22 +47,25 @@ namespace Gva.Api.Controllers.SModeCodes
         }
 
         [Route("new")]
-        public IHttpActionResult GetNewSModeCode(int? type = null)
+        public IHttpActionResult GetNewSModeCode()
         {
-            SModeCodeDO newCode = new SModeCodeDO() 
-            { 
-                Valid = this.nomRepository.GetNomValue("boolean", "yes")
-            };
-
-            return Ok(newCode);
+            return Ok(new SModeCodeDO());
         }
 
         [Route("")]
         public IHttpActionResult GetSModeCodes(
             int? typeId = null,
-            string codeHex = null)
+            string codeHex = null,
+            string regMark = null,
+            string identifier = null,
+            int? isConnectedToRegistrationId = null)
         {
-            var sModeCodes = this.sModeCodeRepository.GetSModeCodes(typeId: typeId, codeHex: codeHex);
+            var sModeCodes = this.sModeCodeRepository.GetSModeCodes(
+                typeId: typeId,
+                codeHex: codeHex,
+                regMark: regMark,
+                identifier: identifier,
+                isConnectedToRegistrationId: isConnectedToRegistrationId);
 
             return Ok(sModeCodes.Select(c => new SModeCodeViewDO(c)));
         }
@@ -113,8 +117,6 @@ namespace Gva.Api.Controllers.SModeCodes
 
                 lot.Commit(this.userContext, this.lotEventDispatcher);
 
-                this.unitOfWork.Save();
-
                 this.lotRepository.ExecSpSetLotPartTokens(partVersion.PartId);
 
                 transaction.Commit();
@@ -138,6 +140,29 @@ namespace Gva.Api.Controllers.SModeCodes
                 .Where(c => c.AircraftId == aircraftId).ToList();
 
             return Ok(results.Select(c => new AircraftCertSmodDO(c)));
+        }
+
+        [HttpGet]
+        [Route("{lotId}/connectedRegistration")]
+        public IHttpActionResult GetConnectedRegistrationToSModeCode(int lotId)
+        {
+            var sModeCodeData = this.unitOfWork.DbContext.Set<GvaViewSModeCode>()
+                .Single(c => c.LotId == lotId);
+
+            ConnectedRegistrationViewDO result = null;
+            if (sModeCodeData.AircraftId.HasValue && sModeCodeData.RegistrationPartIndex.HasValue)
+            { 
+                var registrationLot = this.lotRepository.GetLotIndex(sModeCodeData.AircraftId.Value);
+                string regPath = string.Format("aircraftCertRegistrationsFM/{0}", sModeCodeData.RegistrationPartIndex);
+                PartVersion<AircraftCertRegistrationFMDO> registration = registrationLot.Index.GetPart<AircraftCertRegistrationFMDO>(regPath);
+
+                if (registration != null)
+                {
+                    result = new ConnectedRegistrationViewDO(registration);
+                }
+            }
+
+            return Ok(new { registration = result });
         }
     }
 }

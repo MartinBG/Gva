@@ -7,8 +7,6 @@ namespace Gva.Api.ModelsDO.SModeCodes
 {
     public class SModeCodeDO
     {
-        public string Note { get; set; }
-
         public NomValue Type { get; set; }
 
         public string CodeHex { get; set; }
@@ -29,6 +27,14 @@ namespace Gva.Api.ModelsDO.SModeCodes
 
         public NomValue ApplicantOrganization { get; set; }
 
-        public NomValue Valid { get; set; }
+        public string Description { get; set; }
+
+        public string Identifier { get; set; }
+
+        public string Msn { get; set; }
+
+        public string RegMark { get; set; }
+
+        public string Model { get; set; }
     }
 }

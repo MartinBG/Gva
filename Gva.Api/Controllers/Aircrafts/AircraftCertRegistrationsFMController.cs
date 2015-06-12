@@ -8,8 +8,10 @@ using Common.Data;
 using Gva.Api.Models;
 using Gva.Api.ModelsDO;
 using Gva.Api.ModelsDO.Aircrafts;
+using Gva.Api.ModelsDO.SModeCodes;
 using Gva.Api.Repositories.CaseTypeRepository;
 using Gva.Api.Repositories.FileRepository;
+using Gva.Api.Repositories.SModeCodeRepository;
 using Regs.Api.LotEvents;
 using Regs.Api.Models;
 using Regs.Api.Repositories.LotRepositories;
@@ -27,6 +29,7 @@ namespace Gva.Api.Controllers.Aircrafts
         private INomRepository nomRepository;
         private IUnitOfWork unitOfWork;
         private ILotEventDispatcher lotEventDispatcher;
+        private ISModeCodeRepository sModeCodeRepository;
         private UserContext userContext;
 
 
@@ -35,6 +38,7 @@ namespace Gva.Api.Controllers.Aircrafts
             ILotRepository lotRepository,
             IFileRepository fileRepository,
             ICaseTypeRepository caseTypeRepository,
+            ISModeCodeRepository sModeCodeRepository,
             INomRepository nomRepository,
             ILotEventDispatcher lotEventDispatcher,
 
@@ -46,6 +50,7 @@ namespace Gva.Api.Controllers.Aircrafts
             this.fileRepository = fileRepository;
             this.caseTypeRepository = caseTypeRepository;
             this.nomRepository = nomRepository;
+            this.sModeCodeRepository = sModeCodeRepository;
             this.unitOfWork = unitOfWork;
             this.lotEventDispatcher = lotEventDispatcher;
             this.userContext = userContext;
@@ -282,19 +287,31 @@ namespace Gva.Api.Controllers.Aircrafts
                     //crete new registration
                     certRegistartionPartVersion = lot.CreatePart<AircraftCertRegistrationFMDO>(this.path + "/*", partVersionDO.Part, this.userContext);
                     this.fileRepository.AddFileReference(certRegistartionPartVersion.Part, partVersionDO.Case);
-
-                    lot.Commit(this.userContext, lotEventDispatcher);
-                    this.unitOfWork.Save();
                 }
                 else
                 {
                     certRegistartionPartVersion = lot.CreatePart<AircraftCertRegistrationFMDO>(this.path + "/*", partVersionDO.Part, this.userContext);
                     this.fileRepository.AddFileReference(certRegistartionPartVersion.Part, partVersionDO.Case);
-                    lot.Commit(this.userContext, lotEventDispatcher);
+                }
+                
+                lot.Commit(this.userContext, lotEventDispatcher);
+                this.unitOfWork.Save();
+                this.lotRepository.ExecSpSetLotPartTokens(certRegistartionPartVersion.PartId);
+
+                var sModeCode = this.sModeCodeRepository.GetSModeCodes(regMark: certRegistartionPartVersion.Content.RegMark).SingleOrDefault();
+                if (sModeCode != null)
+                {
+                    var sModeCodeLot = this.lotRepository.GetLotIndex(sModeCode.LotId);
+
+                    var sModeCodePartVersion = sModeCodeLot.Index.GetPart<SModeCodeDO>("sModeCodeData");
+                    sModeCodePartVersion.Content.AircraftId = lot.LotId;
+                    var updatedSModeCodePartVersion = sModeCodeLot.UpdatePart("sModeCodeData", sModeCodePartVersion.Content, this.userContext);
+
+                    sModeCodeLot.Commit(this.userContext, lotEventDispatcher);
                     this.unitOfWork.Save();
+                    this.lotRepository.ExecSpSetLotPartTokens(updatedSModeCodePartVersion.PartId);
                 }
 
-                this.lotRepository.ExecSpSetLotPartTokens(certRegistartionPartVersion.PartId);
                 transaction.Commit();
 
                 return Ok(new CaseTypePartDO<AircraftCertRegistrationFMDO>(certRegistartionPartVersion));

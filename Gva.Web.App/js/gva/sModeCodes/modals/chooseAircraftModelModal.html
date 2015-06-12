@@ -1,0 +1,20 @@
+﻿<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong l10n-text="sModeCodes.chooseAircraftModelModal.title"></strong>
+    <div class="pull-right">
+      <sc-button class="btn btn-default btn-xs" btn-click="cancel()" text="sModeCodes.chooseAircraftModelModal.cancel" icon="glyphicon-ban-circle"></sc-button>
+    </div>
+  </div>
+
+  <div class="well-sm panel-body">
+    <sc-datatable items="models" filterable="true" pageable="true" sortable="true" dynamic-columns="false" default-sort="name">
+      <sc-column sortable="false" class="buttons-cell" width="1px" has-content="true">
+        <sc-button name="selectBtn" class="btn btn-xs btn-primary" btn-click="selectModel(item)" l10n-text="sModeCodes.chooseAircraftModelModal.select"></sc-button>
+      </sc-column>
+      <sc-column data="name" sortable="true" title="sModeCodes.chooseAircraftModelModal.name">
+      </sc-column>
+      <sc-column data="nameAlt" sortable="true" title="sModeCodes.chooseAircraftModelModal.nameAlt">
+      </sc-column>
+    </sc-datatable>
+  </div>
+</div>

@@ -1,22 +1,58 @@
 <ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
   <div class="row">
     <sc-field type="nomenclature" ng-model="model.type" alias="'sModeCodeTypes'" ng-required="true" ng-readonly="!isNew" l10n-text="sModeCodes.sModeCodeDataDirective.codeType" class="col-sm-4 col-md-3"></sc-field>
-    <div class="col-sm-2" style="margin:20px 0px" ng-if="model.type.alias === 'aircraft'">
-      <sc-button ng-if="!model.aircraftId && !form.$readonly" btn-click="connectToAircraftSModeCode()" text="sModeCodes.sModeCodeDataDirective.connectToAircraft" class="btn btn-xs btn-primary" icon="glyphicon-plus"></sc-button> 
-      <sc-button ng-if="model.aircraftId" btn-click="viewAircraft()" text="sModeCodes.sModeCodeDataDirective.viewAircraft" class="btn btn-xs" icon="glyphicon-plane"></sc-button>
-    </div>
-  </div>
-  <div class="row">
-    <sc-field type="text" ng-model="model.codeHex" ng-required="true"  ng-readonly="true" l10n-text="sModeCodes.sModeCodeDataDirective.codeHex" class="col-sm-6 col-md-3"></sc-field>
-  </div>
-  <div class="row">
-    <sc-field type="text" ng-model="model.note" l10n-text="sModeCodes.sModeCodeDataDirective.note" class="col-sm-6 col-md-3"></sc-field>
-  </div>
-  <div class="row">
-    <sc-field type="nomenclature" ng-model="model.valid" alias="'boolean'" ng-required="true" l10n-text="sModeCodes.sModeCodeDataDirective.valid" class="col-sm-2"></sc-field>
+    <sc-button btn-click="viewAircraft()" class="btn btn-xs btn-primary" icon="glyphicon-plane" style="margin-top:20px" ng-if="model.aircraftId"></sc-button>
   </div>
 
-  <div ng-if="model.type.alias === 'aircraft' && model.aircraftId">
-    <gva-aircraft-cert-smod name="aircraftCertSmodForm" ng-model="model"></gva-aircraft-cert-smod>
+  <div ng-if="model.type">
+    <h5 class="form-header" l10n-text="sModeCodes.sModeCodeDataDirective.codeIn" style="margin-top:10px"></h5>
+    <div class="row">
+      <sc-field type="text" ng-model="model.codeHex" ng-required="true"  ng-readonly="true" l10n-text="sModeCodes.sModeCodeDataDirective.hexadecimal" class="col-sm-6 col-md-3"></sc-field>
+    </div>
+    <div class="row">
+      <sc-field type="text" ng-model="decimal" ng-required="true" ng-readonly="true" l10n-text="sModeCodes.sModeCodeDataDirective.decimal" class="col-sm-6 col-md-3"></sc-field>
+    </div>
+    <div class="row">
+      <sc-field type="text" ng-model="octal" ng-required="true" ng-readonly="true" l10n-text="sModeCodes.sModeCodeDataDirective.octal" class="col-sm-6 col-md-3"></sc-field>
+    </div>
+    <div class="row">
+      <sc-field type="text" ng-model="binary" ng-required="true" ng-readonly="true" l10n-text="sModeCodes.sModeCodeDataDirective.binary" class="col-sm-6 col-md-3"></sc-field>
+    </div>
+
+    <hr />
+
+    <div ng-if="model.type.alias !== 'aircraft'">
+      <div class="row">
+        <sc-field type="text" ng-model="model.identifier" ng-required="true" l10n-text="sModeCodes.sModeCodeDataDirective.identifier" class="col-sm-6 col-md-3"></sc-field>
+      </div>
+      <div class="row">
+        <sc-field type="textarea" ng-model="model.description" l10n-text="sModeCodes.sModeCodeDataDirective.description" class="col-sm-6 col-md-3"></sc-field>
+      </div>
+    </div>
+
+    <div ng-if="model.type.alias === 'aircraft'">
+      <gva-aircraft-cert-smod name="aircraftCertSmodForm" ng-model="model"></gva-aircraft-cert-smod>
+    </div>
+  </div>
+  <div ng-if="model.aircraftId">
+    <h5 class="form-header" l10n-text="sModeCodes.sModeCodeDataDirective.aircraftRegistration" style="margin-top:20px"></h5>
+    
+    <sc-datatable items="aircraftRegistration" filterable="false" pageable="false" sortable="false" has-info-text="false" dynamic-columns="false">
+      <sc-column sortable="false" class="buttons-cell" has-content="true">
+      <sc-button ng-if="item.lotId" name="viewButton" btn-sref="{state: 'root.aircrafts.view.regsFM.edit', params: { id: item.lotId, ind: item.partIndex }}" class="btn btn-xs btn-primary" icon="glyphicon-pencil"></sc-button>
+      </sc-column>
+      <sc-column data="isActive" title="sModeCodes.sModeCodeDataDirective.isActive" type="boolean">
+      </sc-column>
+      <sc-column data="isCurrent" title="sModeCodes.sModeCodeDataDirective.isCurrent" type="boolean">
+      </sc-column>
+      <sc-column data="certDate" title="sModeCodes.sModeCodeDataDirective.certDate" type="date">
+      </sc-column>
+      <sc-column data="actNumber" title="sModeCodes.sModeCodeDataDirective.actNumber" has-content="true">
+        {{item.actNumber ? (item.registerCode === '2' ? 'II-' + item.actNumber : item.actNumber) : ''}}
+      </sc-column>
+      <sc-column data="certNumber" title="sModeCodes.sModeCodeDataDirective.certNumber" has-content="true">
+        {{item.certNumber ? (item.registerCode === '2' ? 'II-' + item.certNumber : item.certNumber) : ''}}
+      </sc-column>
+    </sc-datatable>
   </div>
 </ng-form>

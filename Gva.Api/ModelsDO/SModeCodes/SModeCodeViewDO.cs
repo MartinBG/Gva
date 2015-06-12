@@ -18,12 +18,18 @@ namespace Gva.Api.ModelsDO.SModeCodes
             this.CodeDecimal = codeHexToDecimal;
             this.CodeBinary = Convert.ToString(codeHexToDecimal, 2);
             this.Type = code.Type;
-            this.Note = code.Note;
+            this.Description = code.Description;
+            this.Identifier = code.Identifier;
+            this.RegMark = code.RegMark;
         }
 
         public int LotId { get; set; }
 
-        public string Note { get; set; }
+        public string Description { get; set; }
+
+        public string Identifier { get; set; }
+
+        public string RegMark { get; set; }
 
         public NomValue Type { get; set; }
 

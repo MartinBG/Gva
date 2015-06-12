@@ -35,6 +35,16 @@
         return modalNewOPerson.opened;
       }
     };
+
+    $scope.chooseModel = function () {
+      var modalInstance = scModal.open('chooseAircraftModel');
+
+      modalInstance.result.then(function (modelName) {
+        $scope.model.model = modelName;
+      });
+
+      return modalInstance.opened;
+    };
   }
 
   AircraftCertSmodCtrl.$inject = ['$scope', 'Nomenclatures', 'scModal'];

@@ -8,9 +8,7 @@
     $stateParams,
     regs
   ) {
-    $scope.regs = regs.sort(function(a, b) {
-      return b.part.actNumber - a.part.actNumber;
-    });
+    $scope.regs = regs;
 
     $scope.showNewButton = _.filter(regs, function (reg) {
       return reg.part.isActive;

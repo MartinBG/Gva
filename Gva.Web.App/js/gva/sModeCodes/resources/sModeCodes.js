@@ -16,6 +16,10 @@
         method: 'GET',
         url: 'api/sModeCodes/perAircraft',
         isArray: true
+      },
+      getConnectedRegistration: {
+        method: 'GET',
+        url: 'api/sModeCodes/:id/connectedRegistration'
       }
     });
   }]);

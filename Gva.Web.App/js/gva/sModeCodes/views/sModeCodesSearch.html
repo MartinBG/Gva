@@ -1,7 +1,10 @@
 ﻿<div>
   <sc-search selected-filters="filters" btn-classes="col-sm-5 col-md-4 col-lg-3" default-action="search()">
     <sc-filter type="text" name="codeHex" class="col-sm-3" removable="false" label="sModeCodes.search.codeHex"></sc-filter>
+    <sc-filter type="text" name="regMark" class="col-sm-2" removable="false" label="sModeCodes.search.regMark"></sc-filter>
+    <sc-filter type="text" name="identifier" class="col-sm-2" removable="false" label="sModeCodes.search.identifier"></sc-filter>
     <sc-filter type="nomenclature" name="typeId" class="col-sm-2" removable="false" alias="sModeCodeTypes" mode="id" label="sModeCodes.search.type"></sc-filter>
+    <sc-filter type="nomenclature" name="isConnectedToRegistrationId" class="col-sm-2" removable="true" alias="boolean" mode="id" label="sModeCodes.search.isConnectedToRegistration"></sc-filter>
     <sc-search-button action="search()" text="sModeCodes.search.search" icon="glyphicon-search" class="btn btn-sm btn-primary"></sc-search-button>
     <sc-search-button action="newSModeCode()" text="sModeCodes.search.new" icon="glyphicon-plus"></sc-search-button>
     <sc-search-button action="clear"></sc-search-button>
@@ -16,15 +19,15 @@
     </sc-column>
     <sc-column data="type.name" title="sModeCodes.search.type">
     </sc-column>
-    <sc-column data="note" title="sModeCodes.search.note">
-    </sc-column>
     <sc-column data="codeDecimal" title="sModeCodes.search.codeDecimal">
     </sc-column>
     <sc-column data="codeBinary" title="sModeCodes.search.codeBinary">
     </sc-column>
-    <sc-column data="manSN" title="sModeCodes.search.manSN" visible="false">
+    <sc-column data="regMark" title="sModeCodes.search.regMark">
     </sc-column>
-    <sc-column data="actNumber" title="sModeCodes.search.actNumber" visible="false">
+    <sc-column data="identifier" title="sModeCodes.search.identifier">
+    </sc-column>
+    <sc-column data="Description" title="sModeCodes.search.description" visible="false">
     </sc-column>
   </sc-datatable>
 </div>

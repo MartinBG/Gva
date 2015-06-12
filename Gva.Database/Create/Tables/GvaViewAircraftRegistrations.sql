@@ -6,6 +6,7 @@ CREATE TABLE [dbo].[GvaViewAircraftRegistrations] (
     [PartIndex]               INT           NOT NULL,
     [CertRegisterId]          INT           NOT NULL,
     [CertNumber]              INT           NULL,
+    [CertDate]                DATETIME2     NULL,
     [ActNumber]               INT           NULL,
     [RegMark]                 NVARCHAR(50)  NULL,
     CONSTRAINT [PK_GvaAircraftRegistrations]                   PRIMARY KEY ([LotId], [PartIndex]),
@@ -19,6 +20,7 @@ exec spDescColumn N'GvaViewAircraftRegistrations', N'LotId'                   , 
 exec spDescColumn N'GvaViewAircraftRegistrations', N'PartIndex'               , N'Идентификатор на регистрация на ВС.'
 exec spDescColumn N'GvaViewAircraftRegistrations', N'CertRegisterId'          , N'Регистър.'
 exec spDescColumn N'GvaViewAircraftRegistrations', N'CertNumber'              , N'Рег. номер.'
+exec spDescColumn N'GvaViewAircraftRegistrations', N'CertDate'                , N'Дата на регистрация.'
 exec spDescColumn N'GvaViewAircraftRegistrations', N'ActNumber'               , N'Дел. номер.'
 exec spDescColumn N'GvaViewAircraftRegistrations', N'RegMark'                 , N'Рег. знак.'
 GO

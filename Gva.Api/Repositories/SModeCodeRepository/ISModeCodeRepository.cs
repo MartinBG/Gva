@@ -13,6 +13,9 @@ namespace Gva.Api.Repositories.SModeCodeRepository
         IEnumerable<GvaViewSModeCode> GetSModeCodes(
             int? typeId = null,
             string codeHex = null,
+            string regMark = null,
+            string identifier = null,
+            int? isConnectedToRegistrationId = null,
             int offset = 0,
             int? limit = null);
 

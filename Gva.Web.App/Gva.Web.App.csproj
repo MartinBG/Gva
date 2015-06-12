@@ -824,6 +824,8 @@
     <Content Include="js\gva\persons\views\statuses\statusesSearchCtrl.js" />
     <Content Include="js\gva\sModeCodes\forms\sModeCodeData.html" />
     <Content Include="js\gva\sModeCodes\forms\sModeCodeDataCtrl.js" />
+    <Content Include="js\gva\sModeCodes\modals\chooseAircraftModelModal.html" />
+    <Content Include="js\gva\sModeCodes\modals\chooseAircraftModelModalCtrl.js" />
     <Content Include="js\gva\sModeCodes\resources\sModeCodes.js" />
     <Content Include="js\gva\sModeCodes\views\sModeCodesEdit.html" />
     <Content Include="js\gva\sModeCodes\views\sModeCodesEditCtrl.js" />

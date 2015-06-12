@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System;
+using System.Data.Entity.ModelConfiguration;
 using Common.Api.Models;
 using Regs.Api.LotEvents;
 
@@ -13,6 +14,8 @@ namespace Gva.Api.Models.Views.Aircraft
         public int CertRegisterId { get; set; }
 
         public int? CertNumber { get; set; }
+
+        public DateTime? CertDate { get; set; }
 
         public int? ActNumber { get; set; }
 
@@ -36,6 +39,7 @@ namespace Gva.Api.Models.Views.Aircraft
             this.Property(t => t.PartIndex).HasColumnName("PartIndex");
             this.Property(t => t.CertRegisterId).HasColumnName("CertRegisterId");
             this.Property(t => t.CertNumber).HasColumnName("CertNumber");
+            this.Property(t => t.CertDate).HasColumnName("CertDate");
             this.Property(t => t.ActNumber).HasColumnName("ActNumber");
             this.Property(t => t.RegMark).HasColumnName("RegMark");
 

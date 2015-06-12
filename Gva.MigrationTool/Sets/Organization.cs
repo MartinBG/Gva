@@ -159,7 +159,7 @@ namespace Gva.MigrationTool.Sets
             if (Migration.IsPartialMigration)
             {
                 ids = ids
-                    .Where(id => new int[] { 203, 206, 317, 367, 447, 467, 561, 563, 565, 567, 568, 742, 807, 833, 1432 }.Contains(id));
+                    .Where(id => new int[] {  }.Contains(id));
             }
 
             return ids.ToList();

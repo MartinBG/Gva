@@ -7,9 +7,11 @@
     $state,
     $stateParams,
     SModeCodes,
-    sModeCode) {
+    sModeCode,
+    aircraftRegistration) {
     var originalSModeCode = _.cloneDeep(sModeCode);
     $scope.sModeCode = sModeCode;
+    $scope.aircraftRegistration = [aircraftRegistration];
     $scope.editMode = null;
 
     $scope.save = function () {
@@ -40,7 +42,8 @@
     '$state', 
     '$stateParams',
     'SModeCodes',
-    'sModeCode'
+    'sModeCode',
+    'aircraftRegistration'
   ];
 
   SModeCodesEditCtrl.$resolve = {
@@ -49,6 +52,17 @@
       '$stateParams',
       function (SModeCodes, $stateParams) {
         return SModeCodes.get({id: $stateParams.id}).$promise;
+      }
+    ],
+    aircraftRegistration: [
+      '$stateParams',
+      'SModeCodes',
+      function ($stateParams, SModeCodes) {
+        return SModeCodes.getConnectedRegistration({id: $stateParams.id})
+          .$promise
+          .then(function (result) {
+            return result.registration;
+          });
       }
     ]
   };
