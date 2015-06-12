@@ -75,8 +75,6 @@ namespace Gva.Api.WordTemplates
             var includedExams = lastEdition.IncludedExams
                 .Select(i => lot.Index.GetPart<PersonTrainingDO>("personDocumentTrainings/" + i).Content);
 
-            var inspectorId = lastEdition.Inspector == null ? (int?)null : lastEdition.Inspector.NomValueId;
-
             NomValue FTgroup = this.nomRepository.GetNomValues("authorizationGroups").First(nv => nv.Code == "FT");
             NomValue FCgroup = this.nomRepository.GetNomValues("authorizationGroups").First(nv => nv.Code == "FC");
             List<object> instructorData = PilotUtils.GetRatingsDataByCode(includedRatings, ratingEditions, FTgroup, this.nomRepository);
