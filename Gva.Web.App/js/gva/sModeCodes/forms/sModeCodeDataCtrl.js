@@ -47,7 +47,7 @@
     }
 
     $scope.viewAircraft = function () {
-      return $state.go('root.aircrafts.view.edit', {
+      return $state.go('root.aircrafts.view.smods.search', {
         id: $scope.model.aircraftId
       });
     };
