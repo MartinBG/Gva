@@ -168,7 +168,7 @@ namespace Gva.Api.Controllers
             return this.printRepository.GenerateDocumentWithoutSave(lotId, airworthinessPath, templateName, false);
         }
 
-        [Route("api/{request:regex(^(printRadioCert|printExportCert|printNoiseCert|printRegCert|printDeregCert|printApplication|printExaminerCert)$)}")]
+        [Route("api/{request:regex(^(printRadioCert|printExportCert|printNoiseCert|printRegCert|printDeregCert|printApplication|printExaminerCert|printInstructorCert)$)}")]
         public HttpResponseMessage GetDocument(int lotId, int partIndex, string request)
         {
             var result = this.requestToPrintParameters[request];

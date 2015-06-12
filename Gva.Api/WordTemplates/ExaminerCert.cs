@@ -58,9 +58,9 @@ namespace Gva.Api.WordTemplates
             
             string code = ratingsPerExaminerAndAuthCodes.Item2.FirstOrDefault(i => matchAuthCodeToCertificatePrivilegeCode.ContainsKey(i));
 
-            string number = string.Format(
-                "BG/{0}/", !string.IsNullOrEmpty(code) ? matchAuthCodeToCertificatePrivilegeCode[code] : null);
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
+            string number = string.Format(
+                "BG/{0}/{1}", !string.IsNullOrEmpty(code) ? matchAuthCodeToCertificatePrivilegeCode[code] : null, personData.Lin);
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Content.LicenceType.NomValueId);
             
@@ -164,20 +164,26 @@ namespace Gva.Api.WordTemplates
         private Dictionary<string, List<object>> certificatePrivileges = new Dictionary<string, List<object>>()
         {
             {
-                "CRE",
+               "CRE",
                 new List<object>()
                 {
                     new
                     {
-                        REFERENCE = "FCL.905.CRI (a)(1)",
-                        PRIVILEGES = "издаване, потвърждаване на валидността и подновяване на квалификация за клас или тип за еднопилотни несложни самолети с ниски летателни характеристики за еднопилотна експлоатация",
-                        PRIVILEGES_ALT = "the issue, revalidation or renewal of a class or type rating for non-complex non-high performance single-pilot aeroplanes in single-pilot operations"
+                        REFERENCE = "FCL.1005.CRE (a)(1)",
+                        PRIVILEGES = "проверки на уменията за вписване на квалификации за клас и тип",
+                        PRIVILEGES_ALT = "skill tests for the issue of class and type ratings"
                     },
                     new
                     {
-                        REFERENCE = "FCL.905.CRI (a)(2)",
-                        PRIVILEGES = "квалификация за теглене или фигурен пилотаж за категория самолети",
-                        PRIVILEGES_ALT = "a towing or aerobatic rating for the aeroplane category"
+                        REFERENCE = "FCL.1005.CRE (b)(1)",
+                        PRIVILEGES = "проверки на професионалната подготовка за потвърждаване на валидността или подновяване на квалификация за клас и тип",
+                        PRIVILEGES_ALT = "proficiency checks for revalidation or renewal of class and type ratings"
+                    },
+                    new
+                    {
+                        REFERENCE = "FCL.1005.CRE (b)(2)",
+                        PRIVILEGES = "проверки на професионалната подготовка за потвърждаване на валидността и подновяване на квалификация за полети по прибори",
+                        PRIVILEGES_ALT = "proficiency checks for revalidation and renewal of IRs"
                     }
                 }
             },
