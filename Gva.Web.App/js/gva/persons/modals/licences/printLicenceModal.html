@@ -1,5 +1,5 @@
 ﻿<ng-form class="form-inline" name="form.printLicenceForm" sc-validate="{}" sc-form-readonly="!editMode">
-  <div class="panel panel-default">
+  <div class="panel panel-default" style="margin-bottom: 0px">
     <div class="panel-heading">
       <strong l10n-text="persons.printLicenceModal.title"></strong>
       <div class="pull-right">
@@ -19,15 +19,15 @@
       </div>
       <hr />
       <div class="row" style="margin-left :0px" class="labeless">
-        <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/printExaminerCert?lotId={{model.lotId}}&partIndex={{model.index}}" target="_blank" sc-access-token text="persons.printLicenceModal.printExaminerCert" class="btn btn-default btn-sm" icon="glyphicon-print"></sc-link-button>
+        <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/printExaminerCert?lotId={{model.lotId}}&partIndex={{model.index}}" target="_blank" sc-access-token text="persons.printLicenceModal.printExaminerCert" class="btn btn-default btn-sm col-sm-8" icon="glyphicon-print"></sc-link-button>
       </div>
       <div class="row" style="margin-left :0px" class="labeless">
-        <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/printInstructorCert?lotId={{model.lotId}}&partIndex={{model.index}}" target="_blank" sc-access-token text="persons.printLicenceModal.printInstructorCert" class="btn btn-default btn-sm" icon="glyphicon-print"></sc-link-button>
+        <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/printInstructorCert?lotId={{model.lotId}}&partIndex={{model.index}}" target="_blank" sc-access-token text="persons.printLicenceModal.printInstructorCert" class="btn btn-default btn-sm col-sm-8" icon="glyphicon-print"></sc-link-button>
       </div>
       <div ng-if="model.isFclOrPart66">
         <hr />
         <div class="row" style="margin-left :0px" class="labeless">
-          <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/printLicenceAuthForm?lotId={{model.lotId}}&licenceInd={{model.index}}" target="_blank" sc-access-token text="persons.printLicenceModal.printLicenceAuthForm" class="btn btn-default btn-sm" icon="glyphicon-print"></sc-link-button>
+          <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/printLicenceAuthForm?lotId={{model.lotId}}&licenceInd={{model.index}}" target="_blank" sc-access-token text="persons.printLicenceModal.printLicenceAuthForm" class="btn btn-default btn-sm col-sm-8" icon="glyphicon-print"></sc-link-button>
         </div>
       </div>
     </div>
