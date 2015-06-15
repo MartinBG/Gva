@@ -498,6 +498,7 @@
     <Compile Include="WordTemplates\AML_III.cs" />
     <Compile Include="WordTemplates\AMLUtils.cs" />
     <Compile Include="WordTemplates\AMLNationalRating.cs" />
+    <Compile Include="WordTemplates\FCLAuthForm.cs" />
     <Compile Include="WordTemplates\Part66AuthForm.cs" />
     <Compile Include="WordTemplates\InstructorExaminerUtils.cs" />
     <Compile Include="WordTemplates\InstructorCert.cs" />
