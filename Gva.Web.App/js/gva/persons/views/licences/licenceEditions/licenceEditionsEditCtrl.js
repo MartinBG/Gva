@@ -24,7 +24,7 @@
 
     $scope.licenceTypeCode = $scope.licence.part.licenceType.code;
     $scope.isFcl = $scope.licenceTypeCode.indexOf('FCL') >= 0 ||
-      $scope.licenceTypeCode === 'BG CAA';
+      $scope.licenceTypeCode === 'BG CCA';
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
