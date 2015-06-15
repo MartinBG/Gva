@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Json;
@@ -55,12 +56,22 @@ namespace Gva.Api.WordTemplates
                 .Select(i => lot.Index.GetPart<PersonRatingDO>("ratings/" + i.Value));
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
             var ratingsPerExaminerAndAuthCodes = this.GetRatingsPerExaminerAndAuthCodes(includedRatings, ratingEditions);
-            
-            string code = ratingsPerExaminerAndAuthCodes.Item2.FirstOrDefault(i => matchAuthCodeToCertificatePrivilegeCode.ContainsKey(i));
+         
+            string code = null;
+            foreach(string authCode in ratingsPerExaminerAndAuthCodes.Item2)
+            {
+                var authorizationCode = authCodeRegexExpToCertificatePrivilegeCode
+                    .Where(a => Regex.Matches(authCode, a.Item1).Count > 0)
+                    .FirstOrDefault();
+                if (authorizationCode != null)
+                {
+                    code = authorizationCode.Item2;
+                    break;
+                }
+            }
 
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
-            string number = string.Format(
-                "BG/{0}/{1}", !string.IsNullOrEmpty(code) ? matchAuthCodeToCertificatePrivilegeCode[code] : null, personData.Lin);
+            string number = string.Format("BG/{0}/{1}", code, personData.Lin);
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Content.LicenceType.NomValueId);
             
@@ -102,9 +113,13 @@ namespace Gva.Api.WordTemplates
             List<object> result = new List<object>();
             foreach(string code in authCodes)
             {
-                if (matchAuthCodeToCertificatePrivilegeCode.ContainsKey(code))
+                var authorizationCode = authCodeRegexExpToCertificatePrivilegeCode
+                    .Where(a => Regex.Matches(code, a.Item1).Count > 0)
+                    .FirstOrDefault();
+
+                if (authorizationCode != null)
                 {
-                    result = result.Union(certificatePrivileges[matchAuthCodeToCertificatePrivilegeCode[code]]).ToList();
+                    result = result.Union(certificatePrivileges[authorizationCode.Item2]).ToList();
                 }
             }
 
@@ -146,19 +161,14 @@ namespace Gva.Api.WordTemplates
             return new Tuple<List<object>, List<string>>(ratings, authCodes);
         }
 
-        private Dictionary<string, string> matchAuthCodeToCertificatePrivilegeCode = new Dictionary<string, string>()
+        private List<Tuple<string, string>> authCodeRegexExpToCertificatePrivilegeCode = new List<Tuple<string, string>>()
         {
-            {"CRE(A)", "CRE"},
-            {"FE(H)", "FE"},
-            {"FE(A)", "FE"},
-            {"FIE(A)", "FIE"},
-            {"FIE(H)", "FIE"},
-            {"IRE(A)", "IRE"},
-            {"IRE(MEA)", "IRE"},
-            {"SFE(A)", "SFE"},
-            {"TRE(E)", "TRE"},
-            {"TRE(H)", "TRE"},
-            {"TRE(A)", "TRE"}
+            new Tuple<string, string>("(^CRE" + Regex.Escape("(") +")", "CRE"),
+            new Tuple<string, string>("(^FE" + Regex.Escape("(") +")", "FE"),
+            new Tuple<string, string>("(^FIE" + Regex.Escape("(") +")", "FIE"),
+            new Tuple<string, string>("(^IRE" + Regex.Escape("(") +")", "IRE"),
+            new Tuple<string, string>("(^SFE" + Regex.Escape("(") +")", "SFE"),
+            new Tuple<string, string>("(^TRE" + Regex.Escape("(") +")", "TRE")
         };
 
         private Dictionary<string, List<object>> certificatePrivileges = new Dictionary<string, List<object>>()

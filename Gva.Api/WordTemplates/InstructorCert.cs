@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Common.Api.Models;
 using Common.Api.Repositories.NomRepository;
 using Common.Json;
@@ -56,11 +57,22 @@ namespace Gva.Api.WordTemplates
             var ratingEditions = lastEdition.IncludedRatings.Select(i => lot.Index.GetPart<PersonRatingEditionDO>("ratingEditions/" + i.Index));
             var ratingsPerInstructorAndAuthCodes = this.GetRatingsPerInstructorAndAuthCodes(includedRatings, ratingEditions);
 
-            string code = ratingsPerInstructorAndAuthCodes.Item2.FirstOrDefault(i => matchAuthCodeToCertificatePrivilegeCode.ContainsKey(i));
+            string code = null;
+            foreach (string authCode in ratingsPerInstructorAndAuthCodes.Item2)
+            {
+                var authorizationCode = authCodeRegexExpToCertificatePrivilegeCode
+                    .Where(a => Regex.Matches(authCode, a.Item1).Count > 0)
+                    .FirstOrDefault();
+                if (authorizationCode != null)
+                {
+                    code = authorizationCode.Item2;
+                    break;
+                }
+            }
 
             var personData = lot.Index.GetPart<PersonDataDO>("personData").Content;
             string number = string.Format(
-                "BG/{0}/{1}", !string.IsNullOrEmpty(code) ? matchAuthCodeToCertificatePrivilegeCode[code] : null, personData.Lin);
+                "BG/{0}/{1}", code, personData.Lin);
 
             var licenceType = this.nomRepository.GetNomValue("licenceTypes", licence.Content.LicenceType.NomValueId);
             
@@ -98,13 +110,17 @@ namespace Gva.Api.WordTemplates
         }
 
         private List<object> GetPrivileges(List<string> authCodes)
-        { 
+        {
             List<object> result = new List<object>();
-            foreach(string code in authCodes)
+            foreach (string code in authCodes)
             {
-                if (matchAuthCodeToCertificatePrivilegeCode.ContainsKey(code))
+                var authorizationCode = authCodeRegexExpToCertificatePrivilegeCode
+                    .Where(a => Regex.Matches(code, a.Item1).Count > 0)
+                    .FirstOrDefault();
+
+                if (authorizationCode != null)
                 {
-                    result = result.Union(certificatePrivileges[matchAuthCodeToCertificatePrivilegeCode[code]]).ToList();
+                    result = result.Union(certificatePrivileges[authorizationCode.Item2]).ToList();
                 }
             }
 
@@ -146,23 +162,18 @@ namespace Gva.Api.WordTemplates
             return new Tuple<List<object>, List<string>>(ratings, authCodes);
         }
 
-        private Dictionary<string, string> matchAuthCodeToCertificatePrivilegeCode = new Dictionary<string, string>()
+        private List<Tuple<string, string>> authCodeRegexExpToCertificatePrivilegeCode = new List<Tuple<string, string>>()
         {
-            {"CRI(SEA)", "CRI"},
-            {"CRI SP(A)", "CRI"},
-            {"CRI(MEA)", "CRI"},
-            {"CRI(A)", "CRI"},
-            {"CRI SP (A)", "CRI"},
-            {"FI(SA)", "FI"},
-            {"FI(H)", "FI"},
-            {"FI(A)", "FI"},
-            {"FI(G)", "FI"},
-            {"IRI(A)", "IRI"},
-            {"SFI(A)", "SFI"},
-            {"STI(A)", "STI"},
-            {"TRI(E)", "TRI"},
-            {"TRI(H)", "TRI"},
-            {"TRI(A)", "TRI"}
+            new Tuple<string, string>("(^CRI" + Regex.Escape("(") +")", "CRI"),
+            new Tuple<string, string>("(^CRI\\s\\w+)", "CRI"),
+            new Tuple<string, string>("(^FI" + Regex.Escape("(") +")", "FI"),
+            new Tuple<string, string>("(^IRI" + Regex.Escape("(") +")", "IRI"),
+            new Tuple<string, string>("(^SFI" + Regex.Escape("(") +")", "SFI"),
+            new Tuple<string, string>("(^STI" + Regex.Escape("(") +")", "STI"),
+            new Tuple<string, string>("(^TRI" + Regex.Escape("(") +")", "TRI"),
+            new Tuple<string, string>("(^MCCIA" + Regex.Escape("(") +")", "MCCIA"),
+            new Tuple<string, string>("(^MI" + Regex.Escape("(") +")", "MI"),
+            new Tuple<string, string>("(^FTI" + Regex.Escape("(") +")", "FTI")
         };
 
         private Dictionary<string, List<object>> certificatePrivileges = new Dictionary<string, List<object>>()
