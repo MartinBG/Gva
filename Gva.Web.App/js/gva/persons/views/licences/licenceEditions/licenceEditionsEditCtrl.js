@@ -24,7 +24,7 @@
 
     $scope.licenceTypeCode = $scope.licence.part.licenceType.code;
     $scope.isFcl = $scope.licenceTypeCode.indexOf('FCL') >= 0 ||
-      $scope.licenceTypeCode === 'BG CCA';
+      $scope.licenceTypeCode === 'BG CAA';
 
     $scope.edit = function () {
       $scope.editMode = 'edit';
@@ -35,7 +35,8 @@
         lotId: $stateParams.id,
         index: $scope.licence.partIndex,
         editionIndex: edition.partIndex,
-        isLastEdition: $scope.lastEditionIndex === edition.partIndex
+        isLastEdition: $scope.lastEditionIndex === edition.partIndex,
+        isFclOrPart66: $scope.isFcl || $scope.licenceTypeCode.indexOf('Part-66') >= 0
       };
 
       var modalInstance = scModal.open('printLicence', params);

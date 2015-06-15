@@ -256,6 +256,7 @@ namespace Gva.Api
             moduleBuilder.RegisterType<ApplicationNote>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<ExaminerCert>().As<IDataGenerator>().InstancePerLifetimeScope();
             moduleBuilder.RegisterType<InstructorCert>().As<IDataGenerator>().InstancePerLifetimeScope();
+            moduleBuilder.RegisterType<Part66AuthForm>().As<IDataGenerator>().InstancePerLifetimeScope();
 
             moduleBuilder.RegisterType<AMLNationalRating>().As<IAMLNationalRatingDataGenerator>().InstancePerLifetimeScope();
 

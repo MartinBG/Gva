@@ -175,6 +175,23 @@ namespace Gva.Api.Controllers
             return this.printRepository.GenerateDocumentWithoutSave(lotId, string.Format("{0}/{1}", result.Item1, partIndex), result.Item2, result.Item3); 
         }
 
+        [Route("api/printLicenceAuthForm")]
+        public HttpResponseMessage GetDocument(int lotId, int licenceInd)
+        {
+            string path = string.Format("{0}/{1}", "licences", licenceInd);
+            var lot = this.lotRepository.GetLotIndex(lotId);
+            string licenceTypeCode = lot.Index.GetPart<PersonLicenceDO>(path).Content.LicenceType.Code;
+            if (licenceTypeCode.Contains("FCL") || licenceTypeCode == "BG CAA" || licenceTypeCode.Contains("Part-66"))
+            {
+                string templateName = licenceTypeCode.Contains("Part-66") ? "part66_auth_form" : "fcl_auth_form";
+                return this.printRepository.GenerateDocumentWithoutSave(lotId, path, templateName, false);
+            }
+            else
+            {
+                return new HttpResponseMessage();
+            }
+        }
+
         public void UpdateLicenceEditionPrintedRatings(
             Guid ratingEditionBlobKey,
             PartVersion<PersonLicenceEditionDO> licenceEditionPartVersion, 

@@ -24,6 +24,12 @@
       <div class="row" style="margin-left :0px" class="labeless">
         <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/printInstructorCert?lotId={{model.lotId}}&partIndex={{model.index}}" target="_blank" sc-access-token text="persons.printLicenceModal.printInstructorCert" class="btn btn-default btn-sm" icon="glyphicon-print"></sc-link-button>
       </div>
+      <div ng-if="model.isFclOrPart66">
+        <hr />
+        <div class="row" style="margin-left :0px" class="labeless">
+          <sc-link-button ng-disabled="!isLastEdition" name="printBtn" ng-href="api/printLicenceAuthForm?lotId={{model.lotId}}&licenceInd={{model.index}}" target="_blank" sc-access-token text="persons.printLicenceModal.printLicenceAuthForm" class="btn btn-default btn-sm" icon="glyphicon-print"></sc-link-button>
+        </div>
+      </div>
     </div>
   </div>
 </ng-form>

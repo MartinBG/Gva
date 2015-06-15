@@ -40,7 +40,10 @@
         lotId: doc.lotId,
         index: doc.partIndex,
         editionIndex: doc.editionPartIndex,
-        isLastEdition: true
+        isLastEdition: true,
+        isFclOrPart66: doc.licenceType.code.indexOf('FCL') >= 0 || 
+          doc.licenceType.code === 'BG CCA' ||
+          doc.licenceType.code.indexOf('Part-66') >= 0
       };
 
       var modalInstance = scModal.open('printLicence', params);

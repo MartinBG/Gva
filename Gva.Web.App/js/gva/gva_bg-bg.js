@@ -2732,7 +2732,8 @@
           generateNew: 'Прегенерирай',
           edit: 'Редакция',
           printExaminerCert: 'Принтиране на сертификат за проверяващ',
-          printInstructorCert: 'Принтиране на сертификат за инструктор'
+          printInstructorCert: 'Принтиране на сертификат за инструктор',
+          printLicenceAuthForm: 'Принтиране на форма за потвърждаване'
         },
         printRatingEditionModal: {
           title: 'Принтиране на квалификационен клас',
