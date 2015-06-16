@@ -752,6 +752,19 @@
           isActive: 'Активна',
           isCurrent: 'Последна'
         },
+        aircraftSModeCodeDataDirective: {
+          theirNumber: 'Тяхно писмо №',
+          theirDate: 'Тяхна дата',
+          caaNumber: 'ГВА писмо №',
+          caaDate: 'ГВА дата',
+          applicant: 'Заявител',
+          getScode: 'Генерирай S-код',
+          person: 'ФЛ',
+          organization: 'ЮЛ',
+          regMark: 'Рег. знак',
+          msn: 'Сериен  №',
+          model: 'Модел'
+        },
         chooseAircraftModelModal: {
           cancel: 'Отказ',
           select: 'Избери',
@@ -1114,19 +1127,6 @@
           inspector: 'Заверил',
           'new': 'Нова ЛГ',
           status: 'Статус'
-        },
-        smodDirective: {
-          theirNumber: 'Тяхно писмо №',
-          theirDate: 'Тяхна дата',
-          caaNumber: 'ГВА писмо №',
-          caaDate: 'ГВА дата',
-          applicant: 'Заявител',
-          getScode: 'Генерирай S-код',
-          person: 'ФЛ',
-          organization: 'ЮЛ',
-          regMark: 'Рег. знак',
-          msn: 'Сериен  №',
-          model: 'Модел'
         },
         airworthinessDirective: {
           airworthinessCertificateType: 'Тип',
@@ -3917,7 +3917,8 @@
         notUniqueMSN: 'Серийния номер не е уникален',
         invalidTemplateName: 
           'Наименованието може да съдържа само букви на латиница, цифри и символите \'_\', \'-\'',
-        notUniqueTemplateName: 'Наименованието не е уникално'
+        notUniqueTemplateName: 'Наименованието не е уникално',
+        invalidRegMark: 'Невалиден формат на рег. знак'
       },
       defaultErrorTexts: {
         required: 'Задължително поле',

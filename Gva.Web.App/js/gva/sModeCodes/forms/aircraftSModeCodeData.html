@@ -1,0 +1,45 @@
+<ng-form class="form-inline" sc-validate="{}" sc-form-readonly>
+  <div class="row">
+    <sc-field type="text" ng-model="model.regMark" ng-required="true" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.regMark" class="col-md-2 col-sm-3" sc-validate="{isValidRegMark : isValidRegMark}" validations="{ isValidRegMark: 'errorTexts.invalidRegMark',  required: 'default' }"></sc-field>
+    <sc-field type="text" ng-model="model.msn" ng-required="true" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.msn" class="col-md-2 col-sm-3"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field-group class="col-sm-6 col-md-4" text="sModeCodes.aircraftSModeCodeDataDirective.model" field-name="model" validations="{ required: 'default' }">
+      <sc-text ng-model="model.model" name="model" ng-required="true" ng-readonly="form.$readonly"></sc-text>
+      <sc-button class="btn btn-default" btn-click="chooseModel()" icon="glyphicon-search" ng-disabled="form.$readonly"></sc-button>
+    </sc-field-group>
+  </div>
+  <div class="row">
+    <sc-field type="text" ng-model="model.theirNumber" ng-required="true" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.theirNumber" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="date" ng-model="model.theirDate" ng-required="true" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.theirDate" class="col-md-2 col-sm-3"></sc-field>
+  </div>
+  <div class="row">
+    <sc-field type="text" ng-model="model.caaNumber" ng-required="true" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.caaNumber" class="col-md-2 col-sm-3"></sc-field>
+    <sc-field type="date" ng-model="model.caaDate" ng-required="true" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.caaDate" class="col-md-2 col-sm-3"></sc-field>
+  </div>
+  <div class="row">
+    <div class="col-sm-7 col-md-5">
+      <label class="control-label" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.applicant"></label>
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" style="text-align: left; width: 40px" ng-disabled="form.$readonly">
+            <span ng-if="model.applicantIsOrg" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.organization"></span>
+            <span ng-if="!model.applicantIsOrg" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.person"></span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a ng-click="model.applicantIsOrg = true" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.organization"></a>
+            </li>
+            <li>
+              <a ng-click="model.applicantIsOrg = false" l10n-text="sModeCodes.aircraftSModeCodeDataDirective.person"></a>
+            </li>
+          </ul>
+        </div>
+        <sc-nomenclature ng-if="model.applicantIsOrg" class="form-control input-sm" ng-model="model.applicantOrganization" name="applicantOrganization" alias="'organizations'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-nomenclature ng-if="!model.applicantIsOrg" class="form-control input-sm" ng-model="model.applicantPerson" name="applicantPerson" alias="'persons'" ng-required="false" ng-readonly="form.$readonly"></sc-nomenclature>
+        <sc-button type="button" class="btn btn-sm btn-default glyphicon-plus" btn-click="newApplicant()" ng-if="!form.$readonly"></sc-button>
+      </div>
+    </div>
+  </div>
+</ng-form>

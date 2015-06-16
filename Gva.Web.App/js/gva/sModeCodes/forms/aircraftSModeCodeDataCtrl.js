@@ -2,7 +2,7 @@
 (function (angular) {
   'use strict';
 
-  function AircraftCertSmodCtrl($scope, Nomenclatures, scModal) {
+  function AircraftSModeCodeDataCtrl($scope, Nomenclatures, scModal) {
     var getNomenclatureData = function (alias, id) {
       return Nomenclatures.get({
         alias: alias,
@@ -45,9 +45,17 @@
 
       return modalInstance.opened;
     };
+
+    $scope.isValidRegMark = function () {
+      if (!/^LZ-[A-Z]{3}$/.test($scope.model.regMark)) {
+        return false;
+      }
+
+      return true;
+    };
   }
 
-  AircraftCertSmodCtrl.$inject = ['$scope', 'Nomenclatures', 'scModal'];
+  AircraftSModeCodeDataCtrl.$inject = ['$scope', 'Nomenclatures', 'scModal'];
 
-  angular.module('gva').controller('AircraftCertSmodCtrl', AircraftCertSmodCtrl);
+  angular.module('gva').controller('AircraftSModeCodeDataCtrl', AircraftSModeCodeDataCtrl);
 }(angular));
