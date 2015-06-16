@@ -74,7 +74,7 @@ namespace Gva.MigrationTool
             return o;
         }
 
-        public static int? TimeToMilliseconds(int? hours, int? minutes)
+        public static long? TimeToMilliseconds(int? hours, int? minutes)
         {
             if (!hours.HasValue && !minutes.HasValue)
             {
@@ -83,7 +83,7 @@ namespace Gva.MigrationTool
             hours = hours.HasValue ? hours.Value : 0;
             minutes = minutes.HasValue ? minutes.Value : 0;
 
-            return ((hours * 60) + minutes) * 60000;
+            return long.Parse(((hours * 60) + minutes).ToString()) * 60000;
         }
 
         public static bool FmCheckValue(string val)
